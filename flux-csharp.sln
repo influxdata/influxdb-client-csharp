@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Flux", "Flux\Flux.csproj", "{5AC05EF6-8ED8-48BF-9EDB-51DC938CCC19}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Flux.Reactive", "Flux.Reactive\Flux.Reactive.csproj", "{1EBB54B4-8A5F-4C37-B791-CB4B87EB46D5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Flux.Tests", "Flux.Tests\Flux.Tests.csproj", "{4E1E5E86-5433-4E07-A73D-CB4588A5B1D1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5AC05EF6-8ED8-48BF-9EDB-51DC938CCC19}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5AC05EF6-8ED8-48BF-9EDB-51DC938CCC19}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5AC05EF6-8ED8-48BF-9EDB-51DC938CCC19}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5AC05EF6-8ED8-48BF-9EDB-51DC938CCC19}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1EBB54B4-8A5F-4C37-B791-CB4B87EB46D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1EBB54B4-8A5F-4C37-B791-CB4B87EB46D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1EBB54B4-8A5F-4C37-B791-CB4B87EB46D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1EBB54B4-8A5F-4C37-B791-CB4B87EB46D5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E1E5E86-5433-4E07-A73D-CB4588A5B1D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E1E5E86-5433-4E07-A73D-CB4588A5B1D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E1E5E86-5433-4E07-A73D-CB4588A5B1D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E1E5E86-5433-4E07-A73D-CB4588A5B1D1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Flux\Flux.csproj">
+        <Project>{dc069f43-17bd-464a-9127-196613e295db}</Project>
+        <Name>Flux</Name>
+      </ProjectReference>
+    </ItemGroup>
+
+</Project>
