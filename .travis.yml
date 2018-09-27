@@ -1,4 +1,9 @@
 language: csharp
+mono:
+- latest
+- 3.12.0
+- 3.10.0
+
 solution: flux-csharp.sln
 script:
 - msbuild flux-csharp.sln /p:Configuration=Release 
