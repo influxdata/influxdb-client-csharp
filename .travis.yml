@@ -1,0 +1,7 @@
+language: csharp
+solution: flux-csharp.sln
+script:
+- msbuild flux-csharp.sln /p:Configuration=Release 
+branches:
+  only:
+  - master
