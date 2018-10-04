@@ -7,14 +7,14 @@ namespace Flux.Tests.Flux
     public class FluxClientFactoryTest
     {
         [OneTimeSetUp]
-        new public void SetUp()
+        public void SetUp()
         {
         }
         
         [Test]
         public void Connect()
         {
-            FluxClient fluxClient = FluxClientFactory.Connect("0", "http://localhost:8093");
+            FluxClient fluxClient = FluxClientFactory.Connect("http://localhost:8093");
 
             Assert.IsNotNull((fluxClient));
         }

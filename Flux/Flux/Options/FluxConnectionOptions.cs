@@ -6,25 +6,22 @@ namespace Flux.Flux.Options
     public class FluxConnectionOptions
     {
         public string Url { get; set; }
-        
-        public string OrgID { get; set; }
 
         public TimeSpan Timeout { get; set; }
         
-        public FluxConnectionOptions(string url, string orgId)
+        public FluxConnectionOptions(string url)
         {
-            Initialize(url, orgId, TimeSpan.FromSeconds(60));
+            Initialize(url, TimeSpan.FromSeconds(60));
         }
 
-        public FluxConnectionOptions(string url, string orgId, TimeSpan timeout) 
+        public FluxConnectionOptions(string url, TimeSpan timeout) 
         {
-            Initialize(url, orgId, timeout);
+            Initialize(url, timeout);
         }
 
-        private void Initialize(string url, string orgId, TimeSpan timeout)
+        private void Initialize(string url, TimeSpan timeout)
         {
             Url = url;
-            OrgID = orgId;
             Timeout = timeout;
         }
     }

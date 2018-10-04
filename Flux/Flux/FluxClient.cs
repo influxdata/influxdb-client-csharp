@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Net.NetworkInformation;
 using System.Text;
@@ -7,6 +8,7 @@ using System.Threading.Tasks;
 using System.Xml;
 using Flux.flux.dto;
 using Flux.Flux.Client;
+using Flux.Flux.Core;
 using Flux.Flux.Options;
 using Newtonsoft.Json;
 
@@ -67,6 +69,9 @@ namespace Flux.Flux
             try
             {
                 var responseHttp = await _client.DoRequest(FluxService.Ping()).ConfigureAwait(false);
+                
+                RaiseForInfluxError(responseHttp);
+                
                 return true;
             }
             catch (Exception e)
@@ -76,6 +81,36 @@ namespace Flux.Flux
             }
         }
         
+        internal struct ErrorsWrapper
+        {
+            public IReadOnlyList<string> Errors;
+        }
+
+        internal static void RaiseForInfluxError(RequestResult resultRequest)
+        {
+            var statusCode = resultRequest.StatusCode;
+
+            if (statusCode >= 200 && statusCode < 300)
+            {
+                return;
+            }
+
+            var wrapper = resultRequest.ResponseContent.Length > 1
+                            ? JsonConvert.DeserializeObject<ErrorsWrapper>(resultRequest.ResponseContent)
+                            : new ErrorsWrapper();
+
+            var response = new QueryErrorResponse(statusCode, wrapper.Errors);
+
+            var message = InfluxException.GetErrorMessage(resultRequest);
+
+            if (message != null)
+            {
+                throw new InfluxException(response);
+            }
+
+            throw new HttpException(response);
+        }
+
         /*static object FromJson(string json)
         {
             try

@@ -16,9 +16,9 @@ namespace Flux.Flux
          * @see FluxConnectionOptions.Builder#orgID(String)
          * @see FluxConnectionOptions.Builder#url(String)
          */
-        public static FluxClient Connect(string orgID, string url)
+        public static FluxClient Connect(string url)
         {
-            FluxConnectionOptions options = new FluxConnectionOptions(url, orgID);
+            FluxConnectionOptions options = new FluxConnectionOptions(url);
 
             return Connect(options);
         }
