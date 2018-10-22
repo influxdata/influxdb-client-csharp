@@ -1,11 +1,13 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
+using CsvHelper;
 using Flux.flux.dto;
 using Flux.Flux.Client;
 using Flux.Flux.Core;
@@ -25,39 +27,23 @@ namespace Flux.Flux
             _client = new DefaultClientIO(options);
         }
 
-        public List<FluxTable> Flux(string query)
+        // TODO parse response from csv to list of flux tables
+        public async Task<List<FluxTable>> Query(string query)
         {
-            throw new NotImplementedException();
-        }
+            try
+            {
+                var responseHttp = await _client.DoRequest(FluxService.Query(
+                                FluxService.CreateBody(FluxService.GetDefaultDialect(), query)))
+                                .ConfigureAwait(false);
+                
+                RaiseForInfluxError(responseHttp);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error: " + e.Message);
+            }
 
-        public HttpResponseMessage FluxRaw(string query)
-        {
-            throw new NotImplementedException();
-        }
-
-        public HttpResponseMessage FluxRaw(string query, FluxOptions options)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void FluxRaw(string query, Action<HttpResponseMessage> onResponse)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void FluxRaw(string query, Action<HttpResponseMessage> onResponse, Action onFailure)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void FluxRaw(string query, FluxOptions options, Action<HttpResponseMessage> onResponse)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void FluxRaw(string query, FluxOptions options, Action<HttpResponseMessage> onResponse, Action onFailure)
-        {
-            throw new NotImplementedException();
+            return null;
         }
 
         /** <summary>
@@ -80,7 +66,12 @@ namespace Flux.Flux
                 return false;
             }
         }
-        
+
+        public string Version()
+        {
+            throw new NotImplementedException();
+        }
+
         internal struct ErrorsWrapper
         {
             public IReadOnlyList<string> Errors;
@@ -110,22 +101,5 @@ namespace Flux.Flux
 
             throw new HttpException(response);
         }
-
-        /*static object FromJson(string json)
-        {
-            try
-            {
-                var settings = new JsonSerializerSettings
-                {
-                    DateParseHandling = DateParseHandling.None
-                };
-                
-                return JsonConvert.DeserializeObject<object>(json, settings);
-            }
-            catch (JsonReaderException ex)
-            {
-                throw new Exception($"Bad JSON: {ex}");
-            }
-        }*/
     }
 }

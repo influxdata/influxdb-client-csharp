@@ -6,6 +6,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Flux.Reactive", "Flux.React
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Flux.Tests", "Flux.Tests\Flux.Tests.csproj", "{4E1E5E86-5433-4E07-A73D-CB4588A5B1D1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Flux.Examples", "Flux.Examples\Flux.Examples.csproj", "{7A802820-60E0-4699-9825-3A83113881AE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "config", "config", "{EB17F685-8610-473C-B426-15D065C39994}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +28,9 @@ Global
 		{4E1E5E86-5433-4E07-A73D-CB4588A5B1D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4E1E5E86-5433-4E07-A73D-CB4588A5B1D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4E1E5E86-5433-4E07-A73D-CB4588A5B1D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A802820-60E0-4699-9825-3A83113881AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A802820-60E0-4699-9825-3A83113881AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A802820-60E0-4699-9825-3A83113881AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A802820-60E0-4699-9825-3A83113881AE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
