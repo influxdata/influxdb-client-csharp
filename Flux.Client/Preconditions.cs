@@ -1,7 +1,7 @@
 using System;
 using System.Text.RegularExpressions;
 
-namespace Flux.Flux
+namespace Flux.Client
 {
 /**
  * Functions for parameter validation.

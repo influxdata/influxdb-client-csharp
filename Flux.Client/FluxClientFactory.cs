@@ -1,6 +1,6 @@
 using Flux.Flux.Options;
 
-namespace Flux.Flux
+namespace Flux.Client
 {
 /**
  * The Factory that create a instance of a Flux client.

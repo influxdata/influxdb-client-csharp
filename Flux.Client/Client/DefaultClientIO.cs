@@ -3,17 +3,13 @@ using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
-using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Text;
 using System.Threading.Tasks;
-using Flux.Flux.Core;
 using Flux.Flux.Options;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+using Platform.Common.Platform.Rest;
 
-namespace Flux.Flux.Client
+namespace Flux.Client.Client
 {
     /**
      * <summary>

@@ -1,5 +1,6 @@
 using System.Net.Http;
 using System.Text;
+using Flux.Client;
 using Flux.Flux.Options;
 using Newtonsoft.Json.Linq;
 

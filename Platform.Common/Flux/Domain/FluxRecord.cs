@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Flux.flux.dto
+namespace Platform.Common.Flux.Domain
 {
 /**
  * A record is a tuple of values. Each record in the table represents a single point in the series.

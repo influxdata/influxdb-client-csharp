@@ -1,9 +1,8 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
+using Platform.Common.Platform.Rest;
 
-namespace Flux.Flux.Core
+namespace Platform.Common.Flux.Error
 {
     public class InfluxException : Exception
     {
@@ -55,6 +54,6 @@ namespace Flux.Flux.Core
     
     public class HttpException : InfluxException
     {
-        internal HttpException(QueryErrorResponse response) : base(response) {}
+        public HttpException(QueryErrorResponse response) : base(response) {}
     }
 }

@@ -1,4 +1,4 @@
-using Flux.Flux;
+using Flux.Client;
 using NUnit.Framework;
 
 namespace Flux.Tests.Flux

@@ -1,13 +1,6 @@
-using System.Collections.Generic;
-using System.Net.Http;
 using System.Threading.Tasks;
-using Flux.Flux;
-using Flux.Flux.Client;
-using Flux.Flux.Options;
+using Flux.Client;
 using NUnit.Framework;
-using RestEase;
-using WireMock.RequestBuilders;
-using WireMock.ResponseBuilders;
 using WireMock.Server;
 
 namespace Flux.Tests.Flux

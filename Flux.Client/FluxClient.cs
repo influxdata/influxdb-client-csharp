@@ -1,20 +1,15 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net.Http;
-using System.Net.NetworkInformation;
-using System.Text;
 using System.Threading.Tasks;
-using System.Xml;
-using CsvHelper;
-using Flux.flux.dto;
+using Flux.Client.Client;
 using Flux.Flux.Client;
-using Flux.Flux.Core;
 using Flux.Flux.Options;
 using Newtonsoft.Json;
+using Platform.Common.Flux.Domain;
+using Platform.Common.Flux.Error;
+using Platform.Common.Platform.Rest;
 
-namespace Flux.Flux
+namespace Flux.Client
 {
     public class FluxClient : IFluxClient
     {

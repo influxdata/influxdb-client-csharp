@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Flux.flux.dto
+namespace Platform.Common.Flux.Domain
 {
 /**
  * This class represents table structure of Flux CSV Response.

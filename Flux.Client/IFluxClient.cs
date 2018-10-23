@@ -1,14 +1,12 @@
 using System;
 using System.Collections.Generic;
-using System.Net.Http;
 using System.Threading.Tasks;
-using Flux.flux.dto;
-using Flux.Flux.Options;
+using Platform.Common.Flux.Domain;
 
 /**
  * The client for the Flux service.
  */
-namespace Flux.Flux
+namespace Flux.Client
 {
     public interface IFluxClient
     {

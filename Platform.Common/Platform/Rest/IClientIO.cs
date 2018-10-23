@@ -1,9 +1,7 @@
-using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Flux.Flux.Options;
 
-namespace Flux.Flux.Client
+namespace Platform.Common.Platform.Rest
 {
     /** <summary>
      * Handles actual I/O for a <see cref="FluxClient"/>.

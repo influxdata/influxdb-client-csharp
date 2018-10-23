@@ -1,9 +1,7 @@
 using System.Threading.Tasks;
 using NUnit.Framework;
-using RestEase;
 using WireMock.RequestBuilders;
 using WireMock.ResponseBuilders;
-using WireMock.Server;
 
 namespace Flux.Tests.Flux
 {

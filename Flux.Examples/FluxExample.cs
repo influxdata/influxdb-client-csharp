@@ -1,5 +1,5 @@
 ﻿using System;
-using Flux.Flux;
+using Flux.Client;
 using Flux.Flux.Options;
 
 namespace Flux.Examples

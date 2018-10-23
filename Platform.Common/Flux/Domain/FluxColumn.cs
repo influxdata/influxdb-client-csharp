@@ -1,7 +1,6 @@
-using System;
 using System.Text;
 
-namespace Flux.flux.dto
+namespace Platform.Common.Flux.Domain
 {
 /**
  * This class represents column header specification of {@link FluxTable}.

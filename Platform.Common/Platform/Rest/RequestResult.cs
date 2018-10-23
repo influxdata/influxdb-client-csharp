@@ -1,8 +1,7 @@
 using System;
 using System.Collections.Generic;
-using Flux.Flux.Options;
 
-namespace Flux.Flux
+namespace Platform.Common.Platform.Rest
 {
     /** <summary>
      * Stores information about a single request and response.
