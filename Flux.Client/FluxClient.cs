@@ -1,10 +1,11 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using Flux.Client.Client;
-using Flux.Flux.Client;
 using Flux.Flux.Options;
 using Newtonsoft.Json;
+using Platform.Common.Flux.Csv;
 using Platform.Common.Flux.Domain;
 using Platform.Common.Flux.Error;
 using Platform.Common.Platform.Rest;
@@ -15,6 +16,8 @@ namespace Flux.Client
     {
         private readonly DefaultClientIO _client;
         private readonly FluxConnectionOptions _options;
+        
+        private FluxCsvParser _csvParser = new FluxCsvParser(); 
 
         public FluxClient(FluxConnectionOptions options)
         {
@@ -22,7 +25,6 @@ namespace Flux.Client
             _client = new DefaultClientIO(options);
         }
 
-        // TODO parse response from csv to list of flux tables
         public async Task<List<FluxTable>> Query(string query)
         {
             try
@@ -32,6 +34,12 @@ namespace Flux.Client
                                 .ConfigureAwait(false);
                 
                 RaiseForInfluxError(responseHttp);
+                
+                var consumer = new FluxCsvParser.FluxResponseConsumerTable();
+
+                await _csvParser.ParseFluxResponse(responseHttp.ResponseContent, null, consumer);
+
+                return consumer.Tables;
             }
             catch (Exception e)
             {

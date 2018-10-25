@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using Flux.Client;
 using Flux.Flux.Options;
+using Platform.Common.Flux.Domain;
 
 namespace Flux.Examples
 {
-    public class FluxExample
+    public class FluxClientSimpleExample
     {
         public static void Main(string[] args)
         {
@@ -18,7 +20,7 @@ namespace Flux.Examples
                                + " |> range(start: -1d)"
                                + " |> sample(n: 5, pos: 1)";
 
-            client.Query(fluxQuery).GetAwaiter().GetResult();
+            List<FluxTable> tables = client.Query(fluxQuery).GetAwaiter().GetResult();
         }
     }
 }

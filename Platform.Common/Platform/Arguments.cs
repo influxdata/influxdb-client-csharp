@@ -1,14 +1,14 @@
 using System;
 using System.Text.RegularExpressions;
 
-namespace Flux.Client
+namespace Platform.Common.Platform
 {
 /**
  * Functions for parameter validation.
  * <p>
  * Copied from InfluxDB java - <a href="https://github.com/influxdata/influxdb-java/">thanks</a>
  */
-    public class Preconditions
+    public class Arguments
     {
         private static readonly string DURATION_PATTERN = @"([-+]?)([0-9]+(\\.[0-9]*)?[a-z]+)+";
 
@@ -93,6 +93,22 @@ namespace Flux.Client
             if (number < 0)
             {
                 throw new ArgumentException("Expecting a positive or zero number for " + name);
+            }
+        }
+        
+        /**
+         * Checks that the specified object reference is not {@code null}.
+         *
+         * @param obj  the object reference to check for nullity
+         * @param name variable name for reporting
+         * @throws NullPointerException if the object is {@code null}
+         * @see Objects#requireNonNull(Object, String)
+         */
+        public static void CheckNotNull(Object obj, string name)
+        {
+            if (obj == null)
+            {
+                throw new NullReferenceException("Expecting a not null reference for " + name);
             }
         }
     }

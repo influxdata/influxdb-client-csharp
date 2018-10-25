@@ -20,7 +20,7 @@ namespace Platform.Common.Flux.Domain
         /**
         * The record's values.
         */
-        private Dictionary<string, object> Values { get; } = new Dictionary<string, object>();
+        public Dictionary<string, object> Values { get; } = new Dictionary<string, object>();
 
         public FluxRecord(int table)
         {

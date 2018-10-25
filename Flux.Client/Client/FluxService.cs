@@ -1,16 +1,15 @@
 using System.Net.Http;
-using System.Text;
-using Flux.Client;
 using Flux.Flux.Options;
 using Newtonsoft.Json.Linq;
+using Platform.Common.Platform;
 
-namespace Flux.Flux.Client
+namespace Flux.Client.Client
 {
     public class FluxService
     {
         public static HttpRequestMessage Query(string query)
         {
-            return new HttpRequestMessage(new HttpMethod(HttpMethodKind.Post.Name()), "v2/query")
+            return new HttpRequestMessage(new HttpMethod(HttpMethodKind.Post.Name()), "api/v2/query")
             {
                 Content = new StringContent(query)
             };
@@ -36,7 +35,7 @@ namespace Flux.Flux.Client
 
         public static string CreateBody(JObject dialect, string query)
         {
-            Preconditions.CheckNonEmptyString(query, "Flux query");
+            Arguments.CheckNonEmptyString(query, "Flux query");
 
             JObject json = new JObject();
             json.Add("query", query);
