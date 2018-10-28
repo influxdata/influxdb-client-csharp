@@ -45,6 +45,22 @@ namespace Flux.Tests.Flux
             Assert.That(fluxRecord.GetMeasurement().Equals("mem"));
         }
 
+        [Test]
+        public void MappingDuration()
+        {
+            String data = "#datatype,string,long,dateTime:RFC3339,dateTime:RFC3339,dateTime:RFC3339,long,string,string,string,duration\n"
+                            + "#group,false,false,false,false,false,false,false,false,false,true\n"
+                            + "#default,_result,,,,,,,,,\n"
+                            + ",result,table,_start,_stop,_time,_value,_field,_measurement,host,value\n"
+                            + ",,0,1970-01-01T00:00:10Z,1970-01-01T00:00:20Z,1970-01-01T00:00:10Z,10,free,mem,A,125\n"
+                            + ",,0,1970-01-01T00:00:10Z,1970-01-01T00:00:20Z,1970-01-01T00:00:10Z,10,free,mem,A,\n";
+
+            List<FluxTable> tables = ParseFluxResponse(data);
+
+            Assert.That(tables[0].Records[0].GetValueByKey("value").Equals(Duration.FromNanoseconds(125)));
+            Assert.That(tables[0].Records[1].GetValueByKey("value") == null);
+        }
+
         private List<FluxTable> ParseFluxResponse(string data)
         {
             FluxCsvParser.FluxResponseConsumerTable consumer = new FluxCsvParser.FluxResponseConsumerTable();

@@ -238,7 +238,7 @@ namespace Platform.Common.Flux.Csv
                     case "dateTime:RFC3339Nano":
                         return InstantPattern.ExtendedIso.Parse(strValue).Value;
                     case "duration":
-                        return null;
+                        return Duration.FromNanoseconds(Convert.ToDouble(strValue));
                     default:
                         return strValue;
                 }
