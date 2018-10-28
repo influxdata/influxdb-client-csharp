@@ -21,6 +21,17 @@ namespace Flux.Examples
                                + " |> sample(n: 5, pos: 1)";
 
             List<FluxTable> tables = client.Query(fluxQuery).GetAwaiter().GetResult();
+            
+            if (tables != null)
+            {
+                foreach (FluxTable fluxTable in tables)
+                {
+                    foreach (FluxRecord fluxRecord in fluxTable.Records)
+                    {
+                        Console.WriteLine(fluxRecord.GetTime() + ": " + fluxRecord.GetValueByKey("_value"));
+                    }
+                }
+            }
         }
     }
 }

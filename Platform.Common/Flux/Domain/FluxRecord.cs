@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using NodaTime;
+using Platform.Common.Flux.Csv;
 
 namespace Platform.Common.Flux.Domain
 {
@@ -30,25 +32,25 @@ namespace Platform.Common.Flux.Domain
         /**
          * @return the inclusive lower time bound of all records
          */
-        public TimeSpan GetStart() 
+        public Instant? GetStart() 
         {
-            return (TimeSpan) GetValueByKey("_start");
+            return (Instant?) GetValueByKey("_start");
         }
 
         /**
          * @return the exclusive upper time bound of all records
          */
-        public TimeSpan GetStop() 
+        public Instant? GetStop() 
         {
-            return (TimeSpan) GetValueByKey("_stop");
+            return (Instant?) GetValueByKey("_stop");
         }
 
         /**
          * @return the time of the record
          */
-        public TimeSpan GetTime() 
+        public Instant? GetTime() 
         {
-            return (TimeSpan) GetValueByKey("_time");
+            return (Instant?) GetValueByKey("_time");
         }
 
         /**
@@ -56,23 +58,23 @@ namespace Platform.Common.Flux.Domain
          */
         public Object GetValue() 
         {
-            return (Object) GetValueByKey("_value");
+            return GetValueByKey("_value");
         }
 
         /**
          * @return get value with key <i>_field</i>
          */
-        public String GetField() 
+        public string GetField() 
         {
-            return (String) GetValueByKey("_field");
+            return (string) GetValueByKey("_field");
         }
 
         /**
          * @return get value with key <i>_measurement</i>
          */
-        public String GetMeasurement() 
+        public string GetMeasurement() 
         {
-            return (String) GetValueByKey("_measurement");
+            return (string) GetValueByKey("_measurement");
         }
 
         /**
@@ -94,7 +96,14 @@ namespace Platform.Common.Flux.Domain
         */
         public object GetValueByKey(string key)
         {
-            return Values[key];
+            object value;
+            
+            if (Values.TryGetValue(key, out value))
+            {
+                return value;
+            }
+            
+            return null;
         }
 
         public override string ToString()

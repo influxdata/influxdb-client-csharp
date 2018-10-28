@@ -1,9 +1,14 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Xml;
 using LumenWorks.Framework.IO.Csv;
+using NodaTime;
+using NodaTime.Text;
 using Platform.Common.Flux.Domain;
 using Platform.Common.Flux.Error;
 using Platform.Common.Platform;
@@ -231,7 +236,9 @@ namespace Platform.Common.Flux.Csv
                         return Convert.FromBase64String(strValue);
                     case "dateTime:RFC3339":
                     case "dateTime:RFC3339Nano":
+                        return InstantPattern.ExtendedIso.Parse(strValue).Value;
                     case "duration":
+                        return null;
                     default:
                         return strValue;
                 }
