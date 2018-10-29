@@ -218,7 +218,7 @@ namespace Platform.Common.Flux.Csv
             {
                 string defaultValue = column.DefaultValue;
                 
-                return string.IsNullOrEmpty(strValue) ? null : ToValue(defaultValue, column);
+                return string.IsNullOrEmpty(defaultValue) ? null : ToValue(defaultValue, column);
             }
 
             try
@@ -226,7 +226,7 @@ namespace Platform.Common.Flux.Csv
                 switch (column.DataType) 
                 {
                     case "boolean":
-                        return Convert.ToBoolean(strValue);
+                        return bool.TryParse(strValue, out var value) && value;
                     case "unsignedLong":
                         return Convert.ToUInt64(strValue);
                     case "long":

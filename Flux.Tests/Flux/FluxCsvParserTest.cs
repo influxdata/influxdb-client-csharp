@@ -31,7 +31,7 @@ namespace Flux.Tests.Flux
             // |> map(fn: (r) => ({value1: r._value, _value2:r._value * r._value, value_str: "test"}))'
             // --data-urlencode "orgName=0" http://localhost:8093/api/v2/query
 
-            String data = "#datatype,string,long,dateTime:RFC3339,dateTime:RFC3339,string,string,string,string,long,long,string\n"
+            string data = "#datatype,string,long,dateTime:RFC3339,dateTime:RFC3339,string,string,string,string,long,long,string\n"
                             + "#group,false,false,true,true,true,true,true,true,false,false,false\n"
                             + "#default,_result,,,,,,,,,,\n"
                             + ",result,table,_start,_stop,_field,_measurement,host,region,_value2,value1,value_str\n"
@@ -128,7 +128,7 @@ namespace Flux.Tests.Flux
         [Test]
         public void Shortcut()
         {
-            String data = "#datatype,string,long,dateTime:RFC3339,dateTime:RFC3339,dateTime:RFC3339,long,string,string,string,boolean\n"
+            string data = "#datatype,string,long,dateTime:RFC3339,dateTime:RFC3339,dateTime:RFC3339,long,string,string,string,boolean\n"
                             + "#group,false,false,false,false,false,false,false,false,false,true\n"
                             + "#default,_result,,,,,,,,,true\n"
                             + ",result,table,_start,_stop,_time,_value,_field,_measurement,host,value\n"
@@ -150,9 +150,35 @@ namespace Flux.Tests.Flux
         }
 
         [Test]
+        public void MappingBoolean()
+        {
+            string data = "#datatype,string,long,dateTime:RFC3339,dateTime:RFC3339,dateTime:RFC3339,long,string,string,string,boolean\n"
+                            + "#group,false,false,false,false,false,false,false,false,false,true\n"
+                            + "#default,_result,,,,,,,,,true\n"
+                            + ",result,table,_start,_stop,_time,_value,_field,_measurement,host,value\n"
+                            + ",,0,1970-01-01T00:00:10Z,1970-01-01T00:00:20Z,1970-01-01T00:00:10Z,10,free,mem,A,true\n"
+                            + ",,0,1970-01-01T00:00:10Z,1970-01-01T00:00:20Z,1970-01-01T00:00:10Z,10,free,mem,A,false\n"
+                            + ",,0,1970-01-01T00:00:10Z,1970-01-01T00:00:20Z,1970-01-01T00:00:10Z,10,free,mem,A,x\n"
+                            + ",,0,1970-01-01T00:00:10Z,1970-01-01T00:00:20Z,1970-01-01T00:00:10Z,10,free,mem,A,\n";
+
+            List<FluxTable> tables = ParseFluxResponse(data);
+            
+            Assert.IsNotNull(tables[0]);
+
+            List<FluxRecord> records = tables[0].Records;
+
+            Assert.That(records.Count == 4);
+            
+            Assert.That(true.Equals(records[0].GetValueByKey("value")));
+            Assert.That(false.Equals(records[1].GetValueByKey("value")));
+            Assert.That(false.Equals(records[2].GetValueByKey("value")));
+            Assert.That(true.Equals(records[3].GetValueByKey("value")));
+        }
+
+        [Test]
         public void MappingDuration()
         {
-            String data = "#datatype,string,long,dateTime:RFC3339,dateTime:RFC3339,dateTime:RFC3339,long,string,string,string,duration\n"
+            string data = "#datatype,string,long,dateTime:RFC3339,dateTime:RFC3339,dateTime:RFC3339,long,string,string,string,duration\n"
                             + "#group,false,false,false,false,false,false,false,false,false,true\n"
                             + "#default,_result,,,,,,,,,\n"
                             + ",result,table,_start,_stop,_time,_value,_field,_measurement,host,value\n"
