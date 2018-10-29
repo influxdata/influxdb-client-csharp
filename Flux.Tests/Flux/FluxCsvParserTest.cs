@@ -64,7 +64,7 @@ namespace Flux.Tests.Flux
         private List<FluxTable> ParseFluxResponse(string data)
         {
             FluxCsvParser.FluxResponseConsumerTable consumer = new FluxCsvParser.FluxResponseConsumerTable();
-            _parser.ParseFluxResponse(data, new DefaultCancellable(), consumer).GetAwaiter().GetResult();
+            _parser.ParseFluxResponse(data, new DefaultCancellable(), consumer);
 
             return consumer.Tables;
         }

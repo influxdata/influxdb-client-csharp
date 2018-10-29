@@ -37,7 +37,7 @@ namespace Flux.Client
                 
                 var consumer = new FluxCsvParser.FluxResponseConsumerTable();
 
-                await _csvParser.ParseFluxResponse(responseHttp.ResponseContent, null, consumer);
+                _csvParser.ParseFluxResponse(responseHttp.ResponseContent, null, consumer);
 
                 return consumer.Tables;
             }
@@ -90,7 +90,7 @@ namespace Flux.Client
             }
 
             var wrapper = resultRequest.ResponseContent.Length > 1
-                            ? JsonConvert.DeserializeObject<ErrorsWrapper>(resultRequest.ResponseContent)
+                            ? JsonConvert.DeserializeObject<ErrorsWrapper>(resultRequest.ResponseContent.ToString())
                             : new ErrorsWrapper();
 
             var response = new QueryErrorResponse(statusCode, wrapper.Errors);

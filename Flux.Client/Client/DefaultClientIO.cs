@@ -7,6 +7,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Flux.Flux.Options;
+using Platform.Common.Flux.Csv;
 using Platform.Common.Platform.Rest;
 
 namespace Flux.Client.Client
@@ -34,15 +35,15 @@ namespace Flux.Client.Client
 
             var httpResponse = await _client.SendAsync(message).ConfigureAwait(false);
 
-            string response;
+            Stream response;
 
             if (httpResponse.Content.Headers.ContentEncoding.Any(encoding => encoding == "gzip"))
             {
-                response = await DecompressGZip(httpResponse.Content).ConfigureAwait(false);
+                response = FluxCsvParser.ToStream(await DecompressGZip(httpResponse.Content).ConfigureAwait(false));
             }
             else
             {
-                response = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                response = await httpResponse.Content.ReadAsStreamAsync().ConfigureAwait(false);
             }
 
             var endTime = DateTime.UtcNow;
@@ -55,7 +56,7 @@ namespace Flux.Client.Client
         {
             using (var stream = await content.ReadAsStreamAsync().ConfigureAwait(false))
             {
-                using (var gzip = new GZipStream(stream, CompressionMode.Decompress))
+                using (var gzip = new GZipStream(stream, CompressionMode.Decompress, true))
                 {
                     using (var reader = new StreamReader(gzip))
                         return await reader.ReadToEndAsync().ConfigureAwait(false);
@@ -71,7 +72,6 @@ namespace Flux.Client.Client
             var client = new HttpClient();
             client.BaseAddress = new Uri(options.Url);
             client.Timeout = options.Timeout;
-            client.DefaultRequestHeaders.AcceptEncoding.Add(new StringWithQualityHeaderValue("gzip"));
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
             return client;

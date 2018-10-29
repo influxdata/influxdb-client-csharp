@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace Platform.Common.Platform.Rest
 {
@@ -13,7 +14,7 @@ namespace Platform.Common.Platform.Rest
          * String returned by the server.
          * </summary>
          */
-        public string ResponseContent { get; }
+        public Stream ResponseContent { get; }
 
         /** <summary>
          * Http status code result of the request.
@@ -49,7 +50,7 @@ namespace Platform.Common.Platform.Rest
         }
 
         public RequestResult(
-            string responseContent,
+            Stream responseContent,
             int statusCode,
             IReadOnlyDictionary<string, IEnumerable<string>> responseHeaders,
             DateTime startTime,
