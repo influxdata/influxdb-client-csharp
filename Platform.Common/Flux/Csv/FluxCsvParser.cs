@@ -81,7 +81,7 @@ namespace Platform.Common.Flux.Csv
          * @param consumer       to accept {@link FluxTable}s and {@link FluxRecord}s
          * @throws IOException If there is a problem with reading CSV
          */
-        public void ParseFluxResponse(Stream source, ICancellable cancellable, IFluxResponseConsumer consumer)
+        public void ParseFluxResponse(BufferedStream source, ICancellable cancellable, IFluxResponseConsumer consumer)
         {
             Arguments.CheckNotNull(source, "source");
 
@@ -250,14 +250,14 @@ namespace Platform.Common.Flux.Csv
             }
         }
 
-        public static Stream ToStream(string str)
+        public static BufferedStream ToStream(string str)
         {
             MemoryStream stream = new MemoryStream();
             StreamWriter writer = new StreamWriter(stream);
             writer.Write(str);
             writer.Flush();
             stream.Position = 0;
-            return stream;
+            return new BufferedStream(stream);
         }
         
         private void AddDataTypes(FluxTable table, CsvReader dataTypes) 

@@ -6,6 +6,7 @@
 
     <ItemGroup>
       <PackageReference Include="LumenWorksCsvReader" Version="4.0.0" />
+      <PackageReference Include="NLog" Version="4.5.10" />
       <PackageReference Include="NodaTime" Version="2.4.1" />
     </ItemGroup>
 

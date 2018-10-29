@@ -14,7 +14,7 @@ namespace Platform.Common.Platform.Rest
          * String returned by the server.
          * </summary>
          */
-        public Stream ResponseContent { get; }
+        public BufferedStream ResponseContent { get; }
 
         /** <summary>
          * Http status code result of the request.
@@ -50,7 +50,7 @@ namespace Platform.Common.Platform.Rest
         }
 
         public RequestResult(
-            Stream responseContent,
+            BufferedStream responseContent,
             int statusCode,
             IReadOnlyDictionary<string, IEnumerable<string>> responseHeaders,
             DateTime startTime,

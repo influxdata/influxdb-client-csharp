@@ -48,7 +48,7 @@ namespace Flux.Client.Client
 
             var endTime = DateTime.UtcNow;
 
-            return new RequestResult(response, (int)httpResponse.StatusCode, 
+            return new RequestResult(new BufferedStream(response), (int)httpResponse.StatusCode, 
                 ToDictionary(httpResponse.Headers), startTime, endTime);
         }
 
