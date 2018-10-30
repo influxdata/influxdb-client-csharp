@@ -1,14 +1,20 @@
 using System;
+using System.Buffers.Text;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
+using System.Net.Mime;
+using System.Text;
 using Microsoft.Extensions.Logging;
 using NLog;
 using NodaTime;
 using NodaTime.Text;
 using NUnit.Framework;
+using NUnit.Framework.Internal;
 using Platform.Common.Flux.Csv;
 using Platform.Common.Flux.Domain;
+using Platform.Common.Flux.Error;
 using Platform.Common.Platform.Rest;
 
 namespace Flux.Tests.Flux
@@ -163,7 +169,7 @@ namespace Flux.Tests.Flux
 
             List<FluxTable> tables = ParseFluxResponse(data);
             
-            Assert.IsNotNull(tables[0]);
+            Assert.IsNotNull(tables.Count == 1);
 
             List<FluxRecord> records = tables[0].Records;
 
@@ -173,6 +179,130 @@ namespace Flux.Tests.Flux
             Assert.That(false.Equals(records[1].GetValueByKey("value")));
             Assert.That(false.Equals(records[2].GetValueByKey("value")));
             Assert.That(true.Equals(records[3].GetValueByKey("value")));
+        }
+
+        [Test]
+        public void MappingUnsignedLong()
+        {
+            string data = "#datatype,string,long,dateTime:RFC3339,dateTime:RFC3339,dateTime:RFC3339,long,string,string,string,unsignedLong\n"
+                            + "#group,false,false,false,false,false,false,false,false,false,true\n"
+                            + "#default,_result,,,,,,,,,\n"
+                            + ",result,table,_start,_stop,_time,_value,_field,_measurement,host,value\n"
+                            + ",,0,1970-01-01T00:00:10Z,1970-01-01T00:00:20Z,1970-01-01T00:00:10Z,10,free,mem,A,17916881237904312345\n"
+                            + ",,0,1970-01-01T00:00:10Z,1970-01-01T00:00:20Z,1970-01-01T00:00:10Z,10,free,mem,A,\n";
+
+            ulong expected = Convert.ToUInt64("17916881237904312345");
+
+            List<FluxTable> tables = ParseFluxResponse(data);
+            
+            Assert.IsNotNull(tables.Count == 1);
+
+            List<FluxRecord> records = tables[0].Records;
+
+            Assert.That(records.Count == 2);
+            
+            Assert.That(expected.Equals(records[0].GetValueByKey("value")));
+            Assert.IsNull(records[1].GetValueByKey("value"));
+        }
+
+        [Test]
+        public void MappingDouble()
+        {
+            string data = "#datatype,string,long,dateTime:RFC3339,dateTime:RFC3339,dateTime:RFC3339,long,string,string,string,double\n"
+                            + "#group,false,false,false,false,false,false,false,false,false,true\n"
+                            + "#default,_result,,,,,,,,,\n"
+                            + ",result,table,_start,_stop,_time,_value,_field,_measurement,host,value\n"
+                            + ",,0,1970-01-01T00:00:10Z,1970-01-01T00:00:20Z,1970-01-01T00:00:10Z,10,free,mem,A,12.25\n"
+                            + ",,0,1970-01-01T00:00:10Z,1970-01-01T00:00:20Z,1970-01-01T00:00:10Z,10,free,mem,A,\n";
+
+            List<FluxTable> tables = ParseFluxResponse(data);
+            
+            Assert.IsNotNull(tables.Count == 1);
+
+            List<FluxRecord> records = tables[0].Records;
+
+            Assert.That(records.Count == 2);
+            
+            Assert.That(12.25D.Equals(records[0].GetValueByKey("value")));
+            Assert.IsNull(records[1].GetValueByKey("value"));
+        }
+
+        [Test]
+        public void MappingBase64Binary()
+        {
+            string binaryData = "test value";
+            string encodedString = Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(binaryData));
+
+            string data = "#datatype,string,long,dateTime:RFC3339,dateTime:RFC3339,dateTime:RFC3339,long,string,string,string,base64Binary\n"
+                            + "#group,false,false,false,false,false,false,false,false,false,true\n"
+                            + "#default,_result,,,,,,,,,\n"
+                            + ",result,table,_start,_stop,_time,_value,_field,_measurement,host,value\n"
+                            + ",,0,1970-01-01T00:00:10Z,1970-01-01T00:00:20Z,1970-01-01T00:00:10Z,10,free,mem,A," +
+                            encodedString + "\n"
+                            + ",,0,1970-01-01T00:00:10Z,1970-01-01T00:00:20Z,1970-01-01T00:00:10Z,10,free,mem,A,\n";
+
+            List<FluxTable> tables = ParseFluxResponse(data);
+            
+            Assert.IsNotNull(tables.Count == 1);
+
+            List<FluxRecord> records = tables[0].Records;
+
+            Assert.That(records.Count == 2);
+
+            byte[] value = (byte[]) records[0].GetValueByKey("value");
+            
+            Assert.IsNotEmpty(value);
+            Assert.That(binaryData.Equals(Encoding.UTF8.GetString(value)));
+
+            Assert.IsNull(records[1].GetValueByKey("value"));
+        }
+
+        [Test]
+        public void MappingRFC3339()
+        {
+            string data = "#datatype,string,long,dateTime:RFC3339,dateTime:RFC3339,dateTime:RFC3339,long,string,string,string,dateTime:RFC3339\n"
+                            + "#group,false,false,false,false,false,false,false,false,false,true\n"
+                            + "#default,_result,,,,,,,,,\n"
+                            + ",result,table,_start,_stop,_time,_value,_field,_measurement,host,value\n"
+                            + ",,0,1970-01-01T00:00:10Z,1970-01-01T00:00:20Z,1970-01-01T00:00:10Z,10,free,mem,A,1970-01-01T00:00:10Z\n"
+                            + ",,0,1970-01-01T00:00:10Z,1970-01-01T00:00:20Z,1970-01-01T00:00:10Z,10,free,mem,A,\n";
+
+            List<FluxTable> tables = ParseFluxResponse(data);
+
+            Assert.IsNotNull(tables.Count == 1);
+
+            List<FluxRecord> records = tables[0].Records;
+
+            Assert.That(records.Count == 2);
+
+            Assert.That(Instant.Add(new Instant(), Duration.FromSeconds(10L))
+                            .Equals(records[0].GetValueByKey("value")));
+            Assert.IsNull(records[1].GetValueByKey("value"));
+        }
+
+        [Test]
+        public void MappingRFC3339Nano()
+        {
+            string data = "#datatype,string,long,dateTime:RFC3339,dateTime:RFC3339,dateTime:RFC3339,long,string,string,string,dateTime:RFC3339Nano\n"
+                            + "#group,false,false,false,false,false,false,false,false,false,true\n"
+                            + "#default,_result,,,,,,,,,\n"
+                            + ",result,table,_start,_stop,_time,_value,_field,_measurement,host,value\n"
+                            + ",,0,1970-01-01T00:00:10Z,1970-01-01T00:00:20Z,1970-01-01T00:00:10Z,10,free,mem,A,1970-01-01T00:00:10.999999999Z\n"
+                            + ",,0,1970-01-01T00:00:10Z,1970-01-01T00:00:20Z,1970-01-01T00:00:10Z,10,free,mem,A,\n";
+
+            List<FluxTable> tables = ParseFluxResponse(data);
+            
+            Assert.IsNotNull(tables.Count == 1);
+
+            List<FluxRecord> records = tables[0].Records;
+
+            Assert.That(records.Count == 2);
+
+            Instant timeSeconds = Instant.Add(new Instant(), Duration.FromSeconds(10L));
+            Instant timeNanos = Instant.Add(timeSeconds, Duration.FromNanoseconds(999999999L));
+
+            Assert.That(timeNanos.Equals(records[0].GetValueByKey("value")));
+            Assert.IsNull(records[1].GetValueByKey("value"));
         }
 
         [Test]
@@ -186,9 +316,173 @@ namespace Flux.Tests.Flux
                             + ",,0,1970-01-01T00:00:10Z,1970-01-01T00:00:20Z,1970-01-01T00:00:10Z,10,free,mem,A,\n";
 
             List<FluxTable> tables = ParseFluxResponse(data);
+            
+            Assert.IsNotNull(tables.Count == 1);
 
-            Assert.That(tables[0].Records[0].GetValueByKey("value").Equals(Duration.FromNanoseconds(125)));
-            Assert.That(tables[0].Records[1].GetValueByKey("value") == null);
+            List<FluxRecord> records = tables[0].Records;
+
+            Assert.That(records.Count == 2);
+
+            Assert.That(records[0].GetValueByKey("value").Equals(Duration.FromNanoseconds(125)));
+            Assert.That(records[1].GetValueByKey("value") == null);
+        }
+
+        [Test]
+        public void GroupKey()
+        {
+            string data = "#datatype,string,long,dateTime:RFC3339,dateTime:RFC3339,dateTime:RFC3339,long,string,string,string,duration\n"
+                            + "#group,false,false,false,false,true,false,false,false,false,true\n"
+                            + "#default,_result,,,,,,,,,\n"
+                            + ",result,table,_start,_stop,_time,_value,_field,_measurement,host,value\n"
+                            + ",,0,1970-01-01T00:00:10Z,1970-01-01T00:00:20Z,1970-01-01T00:00:10Z,10,free,mem,A,125\n"
+                            + ",,0,1970-01-01T00:00:10Z,1970-01-01T00:00:20Z,1970-01-01T00:00:10Z,10,free,mem,A,\n";
+
+            List<FluxTable> tables = ParseFluxResponse(data);
+
+            Assert.IsNotNull(tables.Count == 1);
+
+            Assert.That(tables[0].Columns.Count == 10);
+            Assert.That(tables[0].GetGroupKey().Count == 2);
+        }
+
+        [Test]
+        public void UnknownTypeAsString()
+        {
+            string data = "#datatype,string,long,dateTime:RFC3339,dateTime:RFC3339,dateTime:RFC3339,long,string,string,string,unknown\n"
+                            + "#group,false,false,false,false,false,false,false,false,false,true\n"
+                            + "#default,_result,,,,,,,,,\n"
+                            + ",result,table,_start,_stop,_time,_value,_field,_measurement,host,value\n"
+                            + ",,0,1970-01-01T00:00:10Z,1970-01-01T00:00:20Z,1970-01-01T00:00:10Z,10,free,mem,A,12.25\n"
+                            + ",,0,1970-01-01T00:00:10Z,1970-01-01T00:00:20Z,1970-01-01T00:00:10Z,10,free,mem,A,\n";
+
+            List<FluxTable> tables = ParseFluxResponse(data);
+            
+            Assert.IsNotNull(tables.Count == 1);
+            
+            List<FluxRecord> records = tables[0].Records;
+
+            Assert.That(records.Count == 2);
+            
+            Assert.That("12.25".Equals(records[0].GetValueByKey("value")));
+            Assert.IsNull(records[1].GetValueByKey("value"));
+        }
+        
+        [Test]
+        public void Error() 
+        {
+            string message = "failed to create physical plan: invalid time bounds from procedure from: bounds contain zero time";
+            string data = "#datatype,string,string\n"
+                            + "#group,true,true\n"
+                            + "#default,,\n"
+                            + ",error,reference\n"
+                            + ", "+ message + ",897";
+
+            try
+            {
+                ParseFluxResponse(data);
+                
+                Assert.Fail();
+            }
+            catch (FluxQueryException e)
+            {
+                Assert.That(e.Errors.Count == 1);
+                Assert.That(e.Errors[0].Equals(message));
+                Assert.That(e.Reference.Equals(897));
+            }
+        }
+
+        [Test]
+        public void ErrorWithoutReference()
+        {
+            string message = "failed to create physical plan: invalid time bounds from procedure from: bounds contain zero time";
+            string data = "#datatype,string,string\n"
+                            + "#group,true,true\n"
+                            + "#default,,\n"
+                            + ",error,reference\n"
+                            + "," + message + ",";
+
+            try
+            {
+                ParseFluxResponse(data);
+                
+                Assert.Fail();
+            }
+            catch (FluxQueryException e)
+            {
+                Assert.That(e.Errors.Count == 1);
+                Assert.That(e.Errors[0].Equals(message));
+                Assert.That(e.Reference.Equals(0));
+            }
+        }
+
+        [Test]
+        public void ParsingToConsumer()
+        {
+            string data = "#datatype,string,long,dateTime:RFC3339,dateTime:RFC3339,dateTime:RFC3339,long,string,string,string,unknown\n"
+                            + "#group,false,false,false,false,false,false,false,false,false,true\n"
+                            + "#default,_result,,,,,,,,,\n"
+                            + ",result,table,_start,_stop,_time,_value,_field,_measurement,host,value\n"
+                            + ",,0,1970-01-01T00:00:10Z,1970-01-01T00:00:20Z,1970-01-01T00:00:10Z,10,free,mem,A,12.25\n"
+                            + ",,0,1970-01-01T00:00:10Z,1970-01-01T00:00:20Z,1970-01-01T00:00:10Z,10,free,mem,A,\n";
+
+            List<FluxRecord> records = new List<FluxRecord>();
+
+            var consumer = new TestConsumer
+            (
+                            acceptTable: (table) => { },
+                            acceptRecord: (record) => { records.Add(record); }
+            );
+
+            _parser.ParseFluxResponse(FluxCsvParser.ToStream(data), new DefaultCancellable(), consumer);
+            Assert.That(records.Count == 2);
+        }
+
+        [Test]
+        public void CancelParsing()
+        {
+            string data = "#datatype,string,long,dateTime:RFC3339,dateTime:RFC3339,dateTime:RFC3339,long,string,string,string,unknown\n"
+                            + "#group,false,false,false,false,false,false,false,false,false,true\n"
+                            + "#default,_result,,,,,,,,,\n"
+                            + ",result,table,_start,_stop,_time,_value,_field,_measurement,host,value\n"
+                            + ",,0,1970-01-01T00:00:10Z,1970-01-01T00:00:20Z,1970-01-01T00:00:10Z,10,free,mem,A,12.25\n"
+                            + ",,0,1970-01-01T00:00:10Z,1970-01-01T00:00:20Z,1970-01-01T00:00:10Z,10,free,mem,A,\n";
+
+            List<FluxRecord> records = new List<FluxRecord>();
+
+            DefaultCancellable defaultCancellable = new DefaultCancellable();
+
+            var consumer = new TestConsumer
+            (
+                            acceptTable: (table) => { },
+                            acceptRecord: (record) =>
+                            {
+                                defaultCancellable.Cancel();
+                                records.Add(record);
+                            }
+            );
+
+            _parser.ParseFluxResponse(FluxCsvParser.ToStream(data), defaultCancellable, consumer);
+            Assert.That(records.Count == 1);
+        }
+        
+        [Test]
+        public void ParsingWithoutTableDefinition() 
+        {
+            string data = ",result,table,_start,_stop,_time,_value,_field,_measurement,host,value\n"
+                          + ",,0,1970-01-01T00:00:10Z,1970-01-01T00:00:20Z,1970-01-01T00:00:10Z,10,free,mem,A,12.25\n"
+                          + ",,0,1970-01-01T00:00:10Z,1970-01-01T00:00:20Z,1970-01-01T00:00:10Z,10,free,mem,A,\n";
+
+            try
+            {
+                ParseFluxResponse(data);
+                
+                Assert.Fail();
+            }
+            catch (FluxCsvParserException e)
+            {
+                Assert.That(e.Errors.Count == 1);
+                Assert.That(e.Errors[0].Equals("Unable to parse CSV response. FluxTable definition was not found."));
+            }
         }
 
         private List<FluxTable> ParseFluxResponse(string data)
@@ -211,6 +505,28 @@ namespace Flux.Tests.Flux
             public bool IsCancelled()
             {
                 return _cancelled;
+            }
+        }
+
+        public class TestConsumer : FluxCsvParser.IFluxResponseConsumer
+        {
+            public readonly Action<FluxTable> AcceptTable;
+            public readonly Action<FluxRecord> AcceptRecord;
+
+            public TestConsumer(Action<FluxTable> acceptTable, Action<FluxRecord> acceptRecord)
+            {
+                AcceptTable = acceptTable;
+                AcceptRecord = acceptRecord;
+            }
+
+            public void Accept(int index, ICancellable cancellable, FluxTable table)
+            {
+                AcceptTable(table);
+            }
+
+            public void Accept(int index, ICancellable cancellable, FluxRecord record)
+            {
+                AcceptRecord(record);
             }
         }
     }

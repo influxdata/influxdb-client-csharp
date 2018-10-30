@@ -27,26 +27,17 @@ namespace Flux.Client
 
         public async Task<List<FluxTable>> Query(string query)
         {
-            try
-            {
-                var responseHttp = await _client.DoRequest(FluxService.Query(
-                                FluxService.CreateBody(FluxService.GetDefaultDialect(), query)))
-                                .ConfigureAwait(false);
-                
-                RaiseForInfluxError(responseHttp);
-                
-                var consumer = new FluxCsvParser.FluxResponseConsumerTable();
+            var responseHttp = await _client.DoRequest(FluxService.Query(
+                                            FluxService.CreateBody(FluxService.GetDefaultDialect(), query)))
+                            .ConfigureAwait(false);
 
-                _csvParser.ParseFluxResponse(responseHttp.ResponseContent, null, consumer);
+            RaiseForInfluxError(responseHttp);
 
-                return consumer.Tables;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("Error: " + e.Message);
-            }
+            var consumer = new FluxCsvParser.FluxResponseConsumerTable();
 
-            return null;
+            _csvParser.ParseFluxResponse(responseHttp.ResponseContent, null, consumer);
+
+            return consumer.Tables;
         }
 
         /** <summary>
