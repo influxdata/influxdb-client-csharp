@@ -6,8 +6,10 @@
 
     <ItemGroup>
       <PackageReference Include="LumenWorksCsvReader" Version="4.0.0" />
+      <PackageReference Include="Newtonsoft.Json" Version="12.0.1-beta1" />
       <PackageReference Include="NLog" Version="4.5.10" />
       <PackageReference Include="NodaTime" Version="2.4.1" />
+      <PackageReference Include="System.Net.Http" Version="4.3.4" />
     </ItemGroup>
 
 </Project>
