@@ -20,7 +20,7 @@ namespace Flux.Tests.Flux
         
         async Task SetUpAsync()
         {
-            FluxClient = FluxClientFactory.Connect(MockServer.Urls[0]);
+            FluxClient = FluxClientFactory.Create(MockServer.Urls[0]);
         }
 
         [TearDown]

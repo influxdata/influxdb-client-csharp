@@ -16,11 +16,11 @@ namespace Flux.Client
          * @see FluxConnectionOptions.Builder#orgID(String)
          * @see FluxConnectionOptions.Builder#url(String)
          */
-        public static FluxClient Connect(string url)
+        public static FluxClient Create(string url)
         {
             FluxConnectionOptions options = new FluxConnectionOptions(url);
 
-            return Connect(options);
+            return Create(options);
         }
 
         /**
@@ -29,7 +29,7 @@ namespace Flux.Client
          * @param options the connection configuration
          * @return client
          */
-        public static FluxClient Connect(FluxConnectionOptions options)
+        public static FluxClient Create(FluxConnectionOptions options)
         {
             return new FluxClient(options);
         }

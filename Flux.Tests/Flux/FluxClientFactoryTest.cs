@@ -14,7 +14,7 @@ namespace Flux.Tests.Flux
         [Test]
         public void Connect()
         {
-            FluxClient fluxClient = FluxClientFactory.Connect("http://localhost:8093");
+            FluxClient fluxClient = FluxClientFactory.Create("http://localhost:8093");
 
             Assert.IsNotNull((fluxClient));
         }

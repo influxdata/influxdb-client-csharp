@@ -8,12 +8,12 @@ namespace Flux.Examples
 {
     public class FluxClientSimpleExample
     {
-        public static void Main(string[] args)
+        public static void Run()
         {
             Console.WriteLine("Start");
 
             FluxConnectionOptions options = new FluxConnectionOptions("http://127.0.0.1:8086", TimeSpan.FromSeconds(20));
-            FluxClient client = FluxClientFactory.Connect(options);
+            FluxClient client = FluxClientFactory.Create(options);
 
             String fluxQuery = "from(bucket: \"telegraf\")\n"
                                + " |> filter(fn: (r) => (r[\"_measurement\"] == \"cpu\" AND r[\"_field\"] == \"usage_system\"))"

@@ -90,7 +90,7 @@ namespace Flux.Client
             Arguments.CheckNotNull(onError, "onError");
             Arguments.CheckNotNull(onComplete, "onComplete");
 
-            var consumer = new OnNextConsumer(onNext);
+            var consumer = new FluxResponseConsumerRecord(onNext);
 
             await Query(query, GetDefaultDialect(), consumer, onError, onComplete);
         }

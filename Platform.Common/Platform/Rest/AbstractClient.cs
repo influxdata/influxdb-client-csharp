@@ -140,18 +140,18 @@ namespace Platform.Common.Platform.Rest
             return exception is EndOfStreamException;
         }
         
-        public class OnNextConsumer : FluxCsvParser.IFluxResponseConsumer
+        public class FluxResponseConsumerRecord : FluxCsvParser.IFluxResponseConsumer
         {
             private readonly Action<ICancellable, FluxRecord> _onNext;
 
-            public OnNextConsumer(Action<ICancellable, FluxRecord> onNext)
+            public FluxResponseConsumerRecord(Action<ICancellable, FluxRecord> onNext)
             {
                 _onNext = onNext;
             }
 
             public void Accept(int index, ICancellable cancellable, FluxTable table)
             {
-                throw new NotImplementedException();
+                
             }
 
             public void Accept(int index, ICancellable cancellable, FluxRecord record)
