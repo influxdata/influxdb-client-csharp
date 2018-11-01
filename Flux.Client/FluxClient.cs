@@ -15,17 +15,14 @@ namespace Flux.Client
 {
     public class FluxClient : AbstractClient
     {
-        private readonly FluxConnectionOptions _options;
-
         public FluxClient(FluxConnectionOptions options) : base(new DefaultClientIO())
         {
-            _options = options ?? throw new ArgumentException("options");
             _client.HttpClient.BaseAddress = new Uri(options.Url);
             _client.HttpClient.Timeout = options.Timeout;
         }
 
         /**
-         * Executes the Flux query against the InfluxDB and synchronously map whole response to {@code List<FluxTable>}.
+         * Executes the Flux query against the InfluxDB and asynchronously map whole response to {@code List<FluxTable>}.
          * <p>
          *
          * @param query the flux query to execute
@@ -49,12 +46,12 @@ namespace Flux.Client
          * @param query  the flux query to execute
          * @param onNext the callback to consume the FluxRecord result with capability to discontinue a streaming query
          */
-        /*public async Task Query(string query, Action<ICancellable, FluxRecord> onNext)
+        public async Task Query(string query, Action<ICancellable, FluxRecord> onNext)
         {
             Arguments.CheckNonEmptyString(query, "query");
             Arguments.CheckNotNull(onNext, "onNext");
 
-            await Query(query, onNext, onError, )
+            await Query(query, onNext, ErrorConsumer);
         }
 
         /**
@@ -65,7 +62,7 @@ namespace Flux.Client
          * @param onNext  the callback to consume FluxRecord result with capability to discontinue a streaming query
          * @param onError the callback to consume any error notification
          */
-        /*public async Task Query(string query, Action<ICancellable, FluxRecord> onNext, Action onError)
+        public async Task Query(string query, Action<ICancellable, FluxRecord> onNext, Action<Exception> onError)
         {
             Arguments.CheckNonEmptyString(query, "query");
             Arguments.CheckNotNull(onNext, "onNext");
@@ -120,7 +117,7 @@ namespace Flux.Client
             {
                 var responseHttp = await _client.DoRequest(FluxService.Ping()).ConfigureAwait(false);
                 
-                AbstractClient.RaiseForInfluxError(responseHttp);
+                RaiseForInfluxError(responseHttp);
                 
                 return true;
             }
