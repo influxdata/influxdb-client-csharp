@@ -95,7 +95,7 @@ namespace Flux.Client
             await Query(query, GetDefaultDialect(), consumer, onError, onComplete);
         }
         
-        public async Task Query(string query, 
+        private async Task Query(string query, 
                         string dialect, 
                         FluxCsvParser.IFluxResponseConsumer responseConsumer,
                         Action<Exception> onError,
@@ -104,6 +104,178 @@ namespace Flux.Client
             var message = FluxService.Query(CreateBody(dialect, query));
 
             await Query(message, responseConsumer, onError, onComplete);
+        }
+        
+        /**
+         * Executes the Flux query against the InfluxDB and synchronously map whole response to {@link String} result.
+         * <p>
+         * NOTE: This method is not intended for large responses, that do not fit into memory.
+         * Use {@link FluxClient#queryRaw(String, BiConsumer, Consumer, Runnable)} for large data streaming.
+         *
+         * @param query the flux query to execute
+         * @return the raw response that matched the query
+         */
+        public async Task<string> QueryRaw(string query) 
+        {
+            Arguments.CheckNonEmptyString(query, "query");
+
+            return await QueryRaw(query, "");
+        }
+        
+        /**
+         * Executes the Flux query against the InfluxDB and synchronously map whole response to {@link String} result.
+         * <p>
+         * NOTE: This method is not intended for large responses, that do not fit into memory.
+         * Use {@link FluxClient#queryRaw(String, String, BiConsumer, Consumer, Runnable)} for large data streaming.
+         *
+         * @param query   the flux query to execute
+         * @param dialect Dialect is an object defining the options to use when encoding the response.
+         *                <a href="http://bit.ly/flux-dialect">See dialect SPEC.</a>.
+         * @return the raw response that matched the query
+         */
+        public async Task<string> QueryRaw(string query, string dialect)
+        {
+            Arguments.CheckNonEmptyString(query, "query");
+
+            List<string> rows = new List<string>();
+
+            Action<ICancellable, string> consumer = (cancellable, row) => rows.Add(row);
+
+            await QueryRaw(query, dialect, consumer, ErrorConsumer, EmptyAction);
+
+            return string.Join("\n", rows);
+        }
+
+        /**
+         * Executes the Flux query against the InfluxDB and asynchronously stream response
+         * (line by line) to {@code onResponse}.
+         *
+         * @param query      the flux query to execute
+         * @param onResponse callback to consume the response line by line with capability to discontinue a streaming query
+         */
+        public async Task QueryRaw(string query,
+                        Action<ICancellable, string> onResponse) 
+        {
+            Arguments.CheckNonEmptyString(query, "query");
+            Arguments.CheckNotNull(onResponse, "onNext");
+
+            await QueryRaw(query, null, onResponse);
+        }
+        
+        /**
+         * Executes the Flux query against the InfluxDB and asynchronously stream response
+         * (line by line) to {@code onResponse}.
+         *
+         * @param query      the flux query to execute
+         * @param dialect    Dialect is an object defining the options to use when encoding the response.
+         *                   <a href="http://bit.ly/flux-dialect">See dialect SPEC.</a>.
+         * @param onResponse the callback to consume the response line by line
+         *                   with capability to discontinue a streaming query
+         */
+        public async Task QueryRaw(string query,
+                        string dialect,
+                        Action<ICancellable, string> onResponse) 
+        {
+
+            Arguments.CheckNonEmptyString(query, "query");
+            Arguments.CheckNotNull(onResponse, "onNext");
+
+            await QueryRaw(query, dialect, onResponse, ErrorConsumer);
+        }
+        
+        /**
+         * Executes the Flux query against the InfluxDB and asynchronously stream response
+         * (line by line) to {@code onResponse}.
+         *
+         * @param query      the flux query to execute
+         * @param onResponse the callback to consume the response line by line
+         *                   with capability to discontinue a streaming query
+         * @param onError    callback to consume any error notification
+         */
+        public async Task QueryRaw(string query,
+                        Action<ICancellable, string> onResponse,
+                        Action<Exception> onError)
+        {
+            Arguments.CheckNonEmptyString(query, "query");
+            Arguments.CheckNotNull(onResponse, "onNext");
+            Arguments.CheckNotNull(onError, "onError");
+
+            await QueryRaw(query, onResponse, onError, EmptyAction);
+        }
+        
+        /**
+         * Executes the Flux query against the InfluxDB and asynchronously stream response
+         * (line by line) to {@code onResponse}.
+         *
+         * @param query      the flux query to execute
+         * @param dialect    Dialect is an object defining the options to use when encoding the response.
+         *                   <a href="http://bit.ly/flux-dialect">See dialect SPEC.</a>.
+         * @param onResponse the callback to consume the response line by line
+         *                   with capability to discontinue a streaming query
+         * @param onError    callback to consume any error notification
+         */
+        public async Task QueryRaw(string query,
+                        string dialect,
+                        Action<ICancellable, string> onResponse,
+                        Action<Exception> onError)
+        {
+            Arguments.CheckNonEmptyString(query, "query");
+            Arguments.CheckNotNull(onResponse, "onNext");
+            Arguments.CheckNotNull(onError, "onError");
+
+            await QueryRaw(query, dialect, onResponse, onError, EmptyAction);
+        }
+        
+        /**
+         * Executes the Flux query against the InfluxDB and asynchronously stream response
+         * (line by line) to {@code onResponse}.
+         *
+         * @param query      the flux query to execute
+         * @param onResponse the callback to consume the response line by line
+         *                   with capability to discontinue a streaming query
+         * @param onError    callback to consume any error notification
+         * @param onComplete callback to consume a notification about successfully end of stream
+         */
+        public async Task QueryRaw(string query,
+                        Action<ICancellable, string> onResponse,
+                        Action<Exception> onError,
+                        Action onComplete)
+        {
+            Arguments.CheckNonEmptyString(query, "query");
+            Arguments.CheckNotNull(onResponse, "onNext");
+            Arguments.CheckNotNull(onError, "onError");
+            Arguments.CheckNotNull(onComplete, "onComplete");
+
+            await QueryRaw(query, null, onResponse, onError, onComplete);
+        }
+                
+        /**
+         * Executes the Flux query against the InfluxDB and asynchronously stream response
+         * (line by line) to {@code onResponse}.
+         *
+         * @param query      the flux query to execute
+         * @param dialect    Dialect is an object defining the options to use when encoding the response.
+         *                   <a href="http://bit.ly/flux-dialect">See dialect SPEC.</a>.
+         * @param onResponse the callback to consume the response line by line
+         *                   with capability to discontinue a streaming query
+         *                   The callback call contains the one line of the response.
+         * @param onError    callback to consume any error notification
+         * @param onComplete callback to consume a notification about successfully end of stream
+         */
+        public async Task QueryRaw(string query, 
+                        string dialect, 
+                        Action<ICancellable, string> onResponse,
+                        Action<Exception> onError,
+                        Action onComplete)
+        {
+            Arguments.CheckNonEmptyString(query, "query");
+            Arguments.CheckNotNull(onResponse, "onNext");
+            Arguments.CheckNotNull(onError, "onError");
+            Arguments.CheckNotNull(onComplete, "onComplete");
+            
+            var message = FluxService.Query(CreateBody(dialect, query));
+
+            await QueryRaw(message, onResponse, onError, onComplete);
         }
 
         /**

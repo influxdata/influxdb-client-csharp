@@ -29,8 +29,10 @@ namespace Platform.Common.Platform.Rest
 
         private FluxCsvParser _csvParser = new FluxCsvParser(); 
         
-        public async Task Query(HttpRequestMessage query, FluxCsvParser.IFluxResponseConsumer responseConsumer,
-                        Action<Exception> onError, Action onComplete)
+        public async Task Query(HttpRequestMessage query, 
+                        FluxCsvParser.IFluxResponseConsumer responseConsumer,
+                        Action<Exception> onError, 
+                        Action onComplete)
         {
             void Consumer(ICancellable cancellable, BufferedStream bufferedStream)
             {
@@ -41,6 +43,26 @@ namespace Platform.Common.Platform.Rest
                 catch (IOException e)
                 {
                     onError(e);
+                }
+            }
+
+            await Query(query, (Action<ICancellable, BufferedStream>) Consumer, onError, onComplete);
+        }
+        
+        public async Task QueryRaw(HttpRequestMessage query,
+                        Action<ICancellable, string> onResponse,
+                        Action<Exception> onError, 
+                        Action onComplete) 
+        {
+            void Consumer(ICancellable cancellable, BufferedStream bufferedStream)
+            {
+                try
+                {
+                    ParseFluxResponseToLines(line => onResponse(cancellable, line), cancellable, bufferedStream);
+                }
+                catch (IOException e)
+                {
+                    CatchOrPropagateException(e, onError);
                 }
             }
 
@@ -74,6 +96,48 @@ namespace Platform.Common.Platform.Rest
             {
                 onError(e);
             }
+        }
+
+        protected void ParseFluxResponseToLines(Action<String> onResponse,
+                        ICancellable cancellable,
+                        BufferedStream bufferedStream)
+        {
+            using (StreamReader sr = new StreamReader(bufferedStream))
+            {
+                string line;
+
+                while ((line = sr.ReadLine()) != null && !cancellable.IsCancelled())
+                {
+                    onResponse(line);
+                }
+            }
+        }
+
+        protected void CatchOrPropagateException(Exception exception,
+                        Action<Exception> onError) 
+        {
+            Arguments.CheckNotNull(exception, "exception");
+            Arguments.CheckNotNull(onError, "onError");
+
+            //
+            // Socket closed by remote server or end of data
+            //
+            if (IsCloseException(exception)) 
+            {
+                Console.WriteLine("Socket closed by remote server or end of data");
+                Console.WriteLine(exception);
+            } 
+            else 
+            {
+                onError(exception);
+            }
+        }
+        
+        protected bool IsCloseException(Exception exception) 
+        {
+            Arguments.CheckNotNull(exception, "exception");
+
+            return exception is EndOfStreamException;
         }
         
         public class OnNextConsumer : FluxCsvParser.IFluxResponseConsumer
