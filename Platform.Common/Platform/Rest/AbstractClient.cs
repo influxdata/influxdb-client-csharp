@@ -13,7 +13,7 @@ namespace Platform.Common.Platform.Rest
 {
     public class AbstractClient
     {
-        protected readonly IClientIO _client;
+        protected readonly DefaultClientIO _client;
         
         protected static Action EmptyAction = () => 
         {
@@ -22,7 +22,7 @@ namespace Platform.Common.Platform.Rest
         
         protected static Action<Exception> ErrorConsumer = e => { throw e; };
 
-        public AbstractClient(IClientIO client)
+        public AbstractClient(DefaultClientIO client)
         {
             _client = client;
         }

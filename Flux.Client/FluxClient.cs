@@ -17,9 +17,11 @@ namespace Flux.Client
     {
         private readonly FluxConnectionOptions _options;
 
-        public FluxClient(FluxConnectionOptions options) : base(new DefaultClientIO(options))
+        public FluxClient(FluxConnectionOptions options) : base(new DefaultClientIO())
         {
             _options = options ?? throw new ArgumentException("options");
+            _client.HttpClient.BaseAddress = new Uri(options.Url);
+            _client.HttpClient.Timeout = options.Timeout;
         }
 
         /**

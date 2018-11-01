@@ -6,24 +6,23 @@ using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
-using Flux.Flux.Options;
 using Platform.Common.Flux.Csv;
-using Platform.Common.Platform.Rest;
 
-namespace Flux.Client.Client
+namespace Platform.Common.Platform.Rest
 {
     /**
      * <summary>
      * Default client that handles all http connections using <see cref="HttpClient"/>.
      * </summary>
      */
-    class DefaultClientIO : IClientIO
+    public class DefaultClientIO : IClientIO
     {
-        readonly HttpClient _client;
+        public readonly HttpClient HttpClient;
 
-        internal DefaultClientIO(FluxConnectionOptions options)
+        public DefaultClientIO()
         {
-            _client = CreateClient(options);
+            HttpClient = new HttpClient();
+            HttpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
         public Task<RequestResult> DoRequest(HttpRequestMessage message) =>
@@ -33,7 +32,7 @@ namespace Flux.Client.Client
         {
             var startTime = DateTime.UtcNow;
 
-            var httpResponse = await _client.SendAsync(message).ConfigureAwait(false);
+            var httpResponse = await HttpClient.SendAsync(message).ConfigureAwait(false);
 
             Stream response;
 
@@ -66,15 +65,5 @@ namespace Flux.Client.Client
 
         static IReadOnlyDictionary<string, IEnumerable<string>> ToDictionary(HttpResponseHeaders headers) =>
             headers.ToDictionary(k => k.Key, v => v.Value);
-
-        public static HttpClient CreateClient(FluxConnectionOptions options)
-        {
-            var client = new HttpClient();
-            client.BaseAddress = new Uri(options.Url);
-            client.Timeout = options.Timeout;
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-            return client;
-        }
     }
 }
