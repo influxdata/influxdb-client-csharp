@@ -1,10 +1,9 @@
 using System;
 using Flux.Client;
-using NLog;
 
 namespace Flux.Examples
 {
-    public static class FluxExample
+    public static class FluxRawExample
     {
         public static void Run()
         {
@@ -15,16 +14,16 @@ namespace Flux.Examples
                                + " |> range(start: -1d)"
                                + " |> sample(n: 5, pos: 1)";
 
-            fluxClient.Query(fluxQuery, (cancellable, record) =>
+            fluxClient.QueryRaw(fluxQuery, (cancellable, line) =>
                             {
-                                // process the flux query records
-                                Console.WriteLine(record.GetTime() + ": " + record.GetValue());
+                                // process the flux query result record
+                                Console.WriteLine(line);
+
                             },
                             (error) =>
                             {
                                 // error handling while processing result
                                 Console.WriteLine(error.ToString());
-
                             }, () =>
                             {
                                 // on complete

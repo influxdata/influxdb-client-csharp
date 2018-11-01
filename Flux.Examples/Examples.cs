@@ -18,6 +18,12 @@ namespace Flux.Examples
                     case "FluxClientSimpleExample":
                         FluxClientSimpleExample.Run();
                         break;
+                    case "FluxRawExample":
+                        FluxRawExample.Run();
+                        break;
+                    case "FluxClientFactoryExample":
+                        FluxClientFactoryExample.Run();
+                        break;
                 }
             }
         }

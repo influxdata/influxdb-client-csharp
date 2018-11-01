@@ -1,14 +1,16 @@
 using System;
 using Flux.Client;
-using NLog;
+using Flux.Flux.Options;
 
 namespace Flux.Examples
 {
-    public static class FluxExample
+    public static class FluxClientFactoryExample
     {
         public static void Run()
         {
-            var fluxClient = FluxClientFactory.Create("http://localhost:8086/");
+            var options = new FluxConnectionOptions("http://127.0.0.1:8086");
+
+            var fluxClient = FluxClientFactory.Create(options);
 
             string fluxQuery = "from(bucket: \"telegraf\")\n"
                                + " |> filter(fn: (r) => (r[\"_measurement\"] == \"cpu\" AND r[\"_field\"] == \"usage_system\"))"
