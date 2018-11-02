@@ -3,7 +3,6 @@
 [![Build Status](https://travis-ci.org/bonitoo-io/flux-csharp.svg?branch=master)](https://travis-ci.org/bonitoo-io/flux-csharp)
 [![codecov](https://codecov.io/gh/bonitoo-io/flux-csharp/branch/master/graph/badge.svg)](https://codecov.io/gh/bonitoo-io/flux-csharp)
 [![License](https://img.shields.io/github/license/bonitoo-io/flux-csharp.svg)](https://github.com/bonitoo-io/flux-csharp/blob/master/LICENSE)
-[![Snapshot Version](https://img.shields.io/nexus/s/https/apitea.com/nexus/org.influxdata/flux-csharp.svg)](https://apitea.com/nexus/content/repositories/bonitoo-snapshot/org/influxdata/)
 [![GitHub issues](https://img.shields.io/github/issues-raw/bonitoo-io/flux-csharp.svg)](https://github.com/bonitoo-io/flux-csharp/issues)
 [![GitHub pull requests](https://img.shields.io/github/issues-pr-raw/bonitoo-io/flux-csharp.svg)](https://github.com/bonitoo-io/flux-csharp/pulls)
 
