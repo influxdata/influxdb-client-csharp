@@ -5,7 +5,7 @@ using WireMock.ResponseBuilders;
 
 namespace Flux.Tests.Flux
 {
-    public class FluxClientPingTest : AbstractFluxClientTest
+    public class MockServerFluxClientPingTest : AbstractMockServerFluxClientTest
     {
         [Test]
         public async Task Healthy()

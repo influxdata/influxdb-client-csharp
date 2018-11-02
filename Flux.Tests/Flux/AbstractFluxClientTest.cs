@@ -5,7 +5,7 @@ using WireMock.Server;
 
 namespace Flux.Tests.Flux
 {
-    public class AbstractFluxClientTest : AbstractTest
+    public class AbstractMockServerFluxClientTest : AbstractMockServerTest
     {
         protected FluxClient FluxClient;
         protected FluentMockServer MockServer;
