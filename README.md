@@ -16,3 +16,47 @@ This repository contains the reference C# client for the InfluxData Platform.
 - Supports querying using the Flux language over the InfluxDB 1.7+ REST API (`/api/v2/query endpoint`) 
 - InfluxData Platform OSS 2.0 client
     - Querying data using the Flux language
+    
+### Flux queries in InfluxDB 1.7+
+
+The REST endpoint `/api/v2/query` for querying using the **Flux** language has been introduced with InfluxDB 1.7.
+
+The following example demonstrates querying using the Flux language: 
+
+```c#
+using System;
+using Flux.Client;
+
+namespace Flux.Examples
+{
+    public static class FluxExample
+    {
+        public static void Run()
+        {
+            var fluxClient = FluxClientFactory.Create("http://localhost:8086/");
+
+            string fluxQuery = "from(bucket: \"telegraf\")\n"
+                               + " |> filter(fn: (r) => (r[\"_measurement\"] == \"cpu\" AND r[\"_field\"] == \"usage_system\"))"
+                               + " |> range(start: -1d)"
+                               + " |> sample(n: 5, pos: 1)";
+
+            fluxClient.Query(fluxQuery, (cancellable, record) =>
+                            {
+                                // process the flux query records
+                                Console.WriteLine(record.GetTime() + ": " + record.GetValue());
+                            },
+                            (error) =>
+                            {
+                                // error handling while processing result
+                                Console.WriteLine(error.ToString());
+
+                            }, () =>
+                            {
+                                // on complete
+                                Console.WriteLine("Query completed");
+                            }).GetAwaiter().GetResult();
+        }
+    }
+}
+
+```

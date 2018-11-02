@@ -1,6 +1,5 @@
 using System;
 using Flux.Client;
-using NLog;
 
 namespace Flux.Examples
 {
