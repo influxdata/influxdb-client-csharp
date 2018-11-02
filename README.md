@@ -16,7 +16,11 @@ This repository contains the reference C# client for the InfluxData Platform.
 - Supports querying using the Flux language over the InfluxDB 1.7+ REST API (`/api/v2/query endpoint`) 
 - InfluxData Platform OSS 2.0 client
     - Querying data using the Flux language
-    
+
+### Documentation
+
+- **[Flux.Client](./Flux.Client)** - The reference c# client that allows you to perform Flux queries against InfluxDB 1.7+.
+
 ### Flux queries in InfluxDB 1.7+
 
 The REST endpoint `/api/v2/query` for querying using the **Flux** language has been introduced with InfluxDB 1.7.
