@@ -1,11 +1,9 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Flux.Client.Client;
 using Flux.Flux.Options;
-using Newtonsoft.Json;
 using Platform.Common.Flux.Csv;
 using Platform.Common.Flux.Domain;
 using Platform.Common.Flux.Error;
@@ -16,10 +14,10 @@ namespace Flux.Client
 {
     public class FluxClient : AbstractClient
     {
-        public FluxClient(FluxConnectionOptions options) : base(new DefaultClientIO())
+        public FluxClient(FluxConnectionOptions options) : base(new DefaultClientIo())
         {
-            _client.HttpClient.BaseAddress = new Uri(options.Url);
-            _client.HttpClient.Timeout = options.Timeout;
+            Client.HttpClient.BaseAddress = new Uri(options.Url);
+            Client.HttpClient.Timeout = options.Timeout;
         }
 
         /**
@@ -288,7 +286,7 @@ namespace Flux.Client
         {
             try
             {
-                var responseHttp = await _client.DoRequest(FluxService.Ping()).ConfigureAwait(false);
+                var responseHttp = await Client.DoRequest(FluxService.Ping()).ConfigureAwait(false);
                 
                 RaiseForInfluxError(responseHttp);
                 
@@ -310,7 +308,7 @@ namespace Flux.Client
         {
             try
             {
-                var responseHttp = await _client.DoRequest(FluxService.Ping()).ConfigureAwait(false);
+                var responseHttp = await Client.DoRequest(FluxService.Ping()).ConfigureAwait(false);
                 
                 RaiseForInfluxError(responseHttp);
 

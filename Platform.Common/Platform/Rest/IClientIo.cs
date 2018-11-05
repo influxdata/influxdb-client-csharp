@@ -7,7 +7,7 @@ namespace Platform.Common.Platform.Rest
      * Handles actual I/O for a <see cref="FluxClient"/>.
      * </summary>
      */
-    public interface IClientIO
+    public interface IClientIo
     {
         Task<RequestResult> DoRequest(HttpRequestMessage message);
     }

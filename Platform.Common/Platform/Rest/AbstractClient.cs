@@ -13,7 +13,7 @@ namespace Platform.Common.Platform.Rest
 {
     public class AbstractClient
     {
-        protected readonly DefaultClientIO _client;
+        protected readonly DefaultClientIo Client;
         
         protected static Action EmptyAction = () => 
         {
@@ -22,9 +22,9 @@ namespace Platform.Common.Platform.Rest
         
         protected static Action<Exception> ErrorConsumer = e => { throw e; };
 
-        public AbstractClient(DefaultClientIO client)
+        public AbstractClient(DefaultClientIo client)
         {
-            _client = client;
+            Client = client;
         }
 
         private FluxCsvParser _csvParser = new FluxCsvParser(); 
@@ -46,7 +46,7 @@ namespace Platform.Common.Platform.Rest
                 }
             }
 
-            await Query(query, (Action<ICancellable, BufferedStream>) Consumer, onError, onComplete);
+            await Query(query, Consumer, onError, onComplete);
         }
         
         public async Task QueryRaw(HttpRequestMessage query,
@@ -66,7 +66,7 @@ namespace Platform.Common.Platform.Rest
                 }
             }
 
-            await Query(query, (Action<ICancellable, BufferedStream>) Consumer, onError, onComplete);
+            await Query(query, Consumer, onError, onComplete);
         }
 
         protected async Task Query(HttpRequestMessage query, Action<ICancellable, BufferedStream> consumer,
@@ -81,7 +81,7 @@ namespace Platform.Common.Platform.Rest
             {
                 DefaultCancellable cancellable = new DefaultCancellable();
                 
-                var responseHttp = await _client.DoRequest(query).ConfigureAwait(false);
+                var responseHttp = await Client.DoRequest(query).ConfigureAwait(false);
 
                 RaiseForInfluxError(responseHttp);
 
@@ -159,11 +159,13 @@ namespace Platform.Common.Platform.Rest
                 _onNext(cancellable, record);
             }
         }
-        
-        internal struct ErrorsWrapper
+
+        #pragma warning disable
+        private struct ErrorsWrapper
         {
-            public IReadOnlyList<string> Errors;
+            public readonly IReadOnlyList<string> Errors;
         }
+        #pragma warning enable
         
         public static void RaiseForInfluxError(RequestResult resultRequest)
         {

@@ -15,11 +15,11 @@ namespace Platform.Common.Platform.Rest
      * Default client that handles all http connections using <see cref="HttpClient"/>.
      * </summary>
      */
-    public class DefaultClientIO : IClientIO
+    public class DefaultClientIo : IClientIo
     {
         public readonly HttpClient HttpClient;
 
-        public DefaultClientIO()
+        public DefaultClientIo()
         {
             HttpClient = new HttpClient();
             HttpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
