@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading.Tasks;
 using Flux.Client.Client;
 using Flux.Flux.Options;
@@ -305,9 +306,39 @@ namespace Flux.Client
          *
          * @return the version String, otherwise unknown.
          */
-        public string Version()
+        public async Task<string> Version()
         {
-            throw new NotImplementedException();
+            try
+            {
+                var responseHttp = await _client.DoRequest(FluxService.Ping()).ConfigureAwait(false);
+                
+                RaiseForInfluxError(responseHttp);
+
+                return GetVersion(responseHttp);
+            }
+            catch (Exception e)
+            {
+                throw new InfluxException(new QueryErrorResponse(0, 
+                                new List<string>(){e.Message}.AsReadOnly()));
+            }
+        }
+        
+        private string GetVersion(RequestResult responseHttp) 
+        {
+            Arguments.CheckNotNull(responseHttp, "responseHttp");
+
+            IEnumerable<string> value;
+
+            responseHttp.ResponseHeaders.TryGetValue("X-Influxdb-Version", out value);
+
+            string version = value.FirstOrDefault();
+
+            if (!string.IsNullOrEmpty(version)) 
+            {
+                return version;
+            }
+
+            return "unknown";
         }
     }
 }
