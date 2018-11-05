@@ -14,27 +14,27 @@ namespace Flux.Tests.Flux
     {
         private static readonly string FromFluxDatabase = String.Format("from(bucket:\"{0}\")", DatabaseName);
 
-        override public void PrepareDara()
+        public override async Task PrepareDara()
         {
-            InfluxDbWrite("mem,host=A,region=west free=10i 10000000000", DatabaseName);
-            InfluxDbWrite("mem,host=A,region=west free=11i 20000000000", DatabaseName);
-            InfluxDbWrite("mem,host=B,region=west free=20i 10000000000", DatabaseName);
-            InfluxDbWrite("mem,host=B,region=west free=22i 20000000000", DatabaseName);
-            InfluxDbWrite("cpu,host=A,region=west usage_system=35i,user_usage=45i 10000000000", DatabaseName);
-            InfluxDbWrite("cpu,host=A,region=west usage_system=38i,user_usage=49i 20000000000", DatabaseName);
-            InfluxDbWrite("cpu,host=A,hyper-threading=true,region=west usage_system=38i,user_usage=49i 20000000000", DatabaseName);
+            await InfluxDbWrite("mem,host=A,region=west free=10i 10000000000", DatabaseName);
+            await InfluxDbWrite("mem,host=A,region=west free=11i 20000000000", DatabaseName);
+            await InfluxDbWrite("mem,host=B,region=west free=20i 10000000000", DatabaseName);
+            await InfluxDbWrite("mem,host=B,region=west free=22i 20000000000", DatabaseName);
+            await InfluxDbWrite("cpu,host=A,region=west usage_system=35i,user_usage=45i 10000000000", DatabaseName);
+            await InfluxDbWrite("cpu,host=A,region=west usage_system=38i,user_usage=49i 20000000000", DatabaseName);
+            await InfluxDbWrite("cpu,host=A,hyper-threading=true,region=west usage_system=38i,user_usage=49i 20000000000", DatabaseName);
         }
 
         [Test]
-        public void ChunkedOneTable() 
+        public async Task ChunkedOneTable() 
         {            
-            PrepareChunkRecords();
+            await PrepareChunkRecords();
 
             string flux = FromFluxDatabase + "\n"
                                            + "\t|> filter(fn: (r) => r[\"_measurement\"] == \"chunked\")\n"
                                            + "\t|> range(start: 1970-01-01T00:00:00.000000000Z)";
 
-            FluxClient.Query(flux, (cancellable, fluxRecord) => 
+            await FluxClient.Query(flux, (cancellable, fluxRecord) => 
             {
                 // +1 record
                 CountdownEvent.Signal();
@@ -43,22 +43,22 @@ namespace Flux.Tests.Flux
                 {
                     Console.WriteLine("Remaining parsed: " + CountdownEvent.CurrentCount + " records");
                 }
-            }).GetAwaiter().GetResult();
+            });
 
             WaitToCallback(30);
         }
 
         [Test]
-        public void ChunkedMoreTables()
+        public async Task ChunkedMoreTables()
         {
-            PrepareChunkRecords();
+            await PrepareChunkRecords();
 
             string flux = FromFluxDatabase + "\n"
                                            + "\t|> filter(fn: (r) => r[\"_measurement\"] == \"chunked\")\n"
                                            + "\t|> range(start: 1970-01-01T00:00:00.000000000Z)\n"
                                            + "\t|> window(every: 10m)";
 
-            FluxClient.Query(flux, (cancellable, fluxRecord) =>
+            await FluxClient.Query(flux, (cancellable, fluxRecord) =>
             {
                 // +1 record
                 CountdownEvent.Signal();
@@ -67,15 +67,15 @@ namespace Flux.Tests.Flux
                 {
                     Console.WriteLine(String.Format("Remaining parsed: {0} records", CountdownEvent.CurrentCount));
                 }
-            }).GetAwaiter().GetResult();
+            });
 
             WaitToCallback(30);
         }
 
         [Test]
-        public void ChunkedCancel() 
+        public async Task ChunkedCancel() 
         {
-            PrepareChunkRecords();
+            await PrepareChunkRecords();
 
             string flux = FromFluxDatabase + "\n"
                                              + "\t|> filter(fn: (r) => r[\"_measurement\"] == \"chunked\")\n"
@@ -85,22 +85,22 @@ namespace Flux.Tests.Flux
             CountdownEvent = new CountdownEvent(10_000);
             CountdownEvent cancelCountDown = new CountdownEvent(1);
 
-            FluxClient.Query(flux, (cancellable, fluxRecord) => 
+            await FluxClient.Query(flux, (cancellable, fluxRecord) =>
             {
                 // +1 record
                 CountdownEvent.Signal();
 
-                if (CountdownEvent.CurrentCount % 1_000 == 0 && CountdownEvent.CurrentCount != 0) 
+                if (CountdownEvent.CurrentCount % 1_000 == 0 && CountdownEvent.CurrentCount != 0)
                 {
                     Console.WriteLine(String.Format("Remaining parsed: {0} records", CountdownEvent.CurrentCount));
                 }
 
-                if (CountdownEvent.CurrentCount == 9_000) 
+                if (CountdownEvent.CurrentCount == 9_000)
                 {
                     cancellable.Cancel();
                     cancelCountDown.Signal();
                 }
-            }).GetAwaiter().GetResult();
+            });
 
             // wait to cancel
             WaitToCallback(cancelCountDown, 30);
@@ -110,19 +110,19 @@ namespace Flux.Tests.Flux
         }
 
         [Test]
-        public void Query()
+        public async Task Query()
         {
             string flux = FromFluxDatabase + "\n"
                                            + "\t|> range(start: 1970-01-01T00:00:00.000000000Z)\n"
                                            + "\t|> filter(fn: (r) => (r[\"_measurement\"] == \"mem\" AND r[\"_field\"] == \"free\"))\n"
                                            + "\t|> sum()";
 
-            List<FluxTable> fluxTables = FluxClient.Query(flux).GetAwaiter().GetResult();
+            List<FluxTable> fluxTables = await FluxClient.Query(flux);
 
             AssertFluxResult(fluxTables);
         }
 
-        private void PrepareChunkRecords() 
+        private async Task PrepareChunkRecords() 
         {
             int totalRecords = 500_000;
             CountdownEvent = new CountdownEvent(totalRecords);
@@ -136,7 +136,7 @@ namespace Flux.Tests.Flux
                 
                 if (ii % 100_000 == 0) 
                 {
-                    InfluxDbWrite(String.Join("\n", points), DatabaseName);
+                    await InfluxDbWrite(String.Join("\n", points), DatabaseName);
                     points.Clear();
                 }
             }

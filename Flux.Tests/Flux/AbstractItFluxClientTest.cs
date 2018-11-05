@@ -12,9 +12,14 @@ namespace Flux.Tests.Flux
         protected const string DatabaseName = "flux_database";
 
         protected FluxClient FluxClient;
-
+        
         [OneTimeSetUp]
         public new void SetUp()
+        {
+            SetUpAsync().Wait();            
+        }
+
+        async Task SetUpAsync()
         {
             string influxUrl = GetInfluxDbUrl();
             
@@ -22,17 +27,17 @@ namespace Flux.Tests.Flux
             
             FluxClient = FluxClientFactory.Create(options);
             
-            InfluxDbQuery("CREATE DATABASE " + DatabaseName, DatabaseName);
+            await InfluxDbQuery("CREATE DATABASE " + DatabaseName, DatabaseName);
             
-            PrepareDara();            
+            await PrepareDara();            
         }
 
         [TearDown]
         protected void After() 
         {
-            InfluxDbQuery("DROP DATABASE " + DatabaseName, DatabaseName);
+            InfluxDbQuery("DROP DATABASE " + DatabaseName, DatabaseName).GetAwaiter().GetResult();
         }
 
-        public abstract void PrepareDara();
+        public abstract Task PrepareDara();
     }
 }

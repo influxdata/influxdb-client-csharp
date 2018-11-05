@@ -65,7 +65,7 @@ namespace Flux.Tests
             return value;
         }
 
-        protected void InfluxDbWrite(string lineProtocol, string databaseName)
+        protected async Task InfluxDbWrite(string lineProtocol, string databaseName)
         {
             HttpRequestMessage request = new HttpRequestMessage(new HttpMethod(HttpMethodKind.Post.Name()),
                             "/write?db=" + databaseName);
@@ -73,20 +73,20 @@ namespace Flux.Tests
             request.Headers.Add("accept", "application/json");
             request.Content = new StringContent(lineProtocol, Encoding.UTF8, "text/plain");
 
-            InfluxDbRequest(request);
+            await InfluxDbRequest(request);
         }
 
-        protected void InfluxDbQuery(string query, string databaseName) 
+        protected async Task InfluxDbQuery(string query, string databaseName) 
         {
             HttpRequestMessage request = new HttpRequestMessage(new HttpMethod(HttpMethodKind.Get.Name()),
                             "/query?db=" + databaseName + ";q=" + query);
                             
             request.Headers.Add("accept", "application/json");
 
-            InfluxDbRequest(request);
+            await InfluxDbRequest(request);
         }
 
-        private void InfluxDbRequest(HttpRequestMessage request)
+        private async Task InfluxDbRequest(HttpRequestMessage request)
         {
             Assert.IsNotNull(request);
 
@@ -96,7 +96,7 @@ namespace Flux.Tests
 
             try
             {
-                var response = httpClient.SendAsync(request).GetAwaiter().GetResult();
+                var response = await httpClient.SendAsync(request);
                 Assert.IsTrue(response.IsSuccessStatusCode);
                 
                 Thread.Sleep(DefaultInfluxDBSleep);
