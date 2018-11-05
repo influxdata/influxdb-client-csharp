@@ -1,8 +1,7 @@
 language: csharp
 
-mono:
-- latest
-dotnet: 2.1.401
+mono: none
+dotnet: 2.1
 solution: flux-csharp.sln
 
 services:
@@ -16,10 +15,16 @@ install: true
 
 script:
   - ./Config/platform-restart.sh
+  - dotnet tool install --tool-path="./coverlet/" coverlet.console
   - dotnet restore
-  - msbuild flux-csharp.sln /p:Configuration=Release
+  - dotnet build
   - dotnet test Flux.Tests
 
 branches:
   only:
   - master
+    
+after_success:
+  - ./coverlet/coverlet Flux.Tests/bin/Debug/netcoreapp2.1/Flux.Tests.dll --target "dotnet" --targetargs "test Flux.Tests/Flux.Tests.csproj --no-build" --format opencover
+  - bash <(curl -s https://codecov.io/bash)
+  
