@@ -1,16 +1,110 @@
-using WireMock.ResponseBuilders;
+using System;
+using System.Net.Http;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+using Flux.Flux.Options;
+using Microsoft.AspNetCore.Http;
+using NUnit.Framework;
+using WireMock.RequestBuilders;
 
 namespace Flux.Tests
 {
     public class AbstractTest
     {
-        protected IResponseBuilder CreateErrorResponse(string influxDBError) 
-        {
-            string body = "{\"error\":\"" + influxDBError + "\"}";
+        private static readonly int DefaultWait = 10;
+        private static readonly int DefaultInfluxDBSleep = 100;
 
-            return Response.Create().WithStatusCode(500)
-                .WithHeader("X-Influx-Error", influxDBError)
-                .WithBody(body);
+        protected CountdownEvent CountdownEvent;
+
+        [OneTimeSetUp]
+        public void SetUp()
+        {
+            CountdownEvent = new CountdownEvent(1);
+        }
+
+        protected void WaitToCallback()
+        {
+            WaitToCallback(DefaultWait);
+        }
+
+        protected void WaitToCallback(int seconds)
+        {
+            WaitToCallback(CountdownEvent, seconds);
+        }
+
+        protected void WaitToCallback(CountdownEvent countdownEvent, int seconds) 
+        {
+            try
+            {
+                Assert.IsTrue(countdownEvent.Wait(seconds * 1000));
+            }
+            catch (Exception e)
+            {
+                Assert.Fail("Unexpected exception: " + e);
+            }
+        }
+        
+        protected string GetInfluxDbUrl()
+        {
+            string influxDbIp = GetOrDefaultEnvironmentVariable("INFLUXDB_IP", "127.0.0.1");
+            string influxDbPort = GetOrDefaultEnvironmentVariable("INFLUXDB_PORT_API", "8086");
+
+            return "http://" + influxDbIp + ":" + influxDbPort;
+        }
+
+        private string GetOrDefaultEnvironmentVariable(string variable, string def)
+        {
+            string value = Environment.GetEnvironmentVariable(variable);
+
+            if (string.IsNullOrEmpty(value))
+            {
+                return def;
+            }
+
+            return value;
+        }
+
+        protected void InfluxDbWrite(string lineProtocol, string databaseName)
+        {
+            HttpRequestMessage request = new HttpRequestMessage(new HttpMethod(HttpMethodKind.Post.Name()),
+                            "/write?db=" + databaseName);
+                            
+            request.Headers.Add("accept", "application/json");
+            request.Content = new StringContent(lineProtocol, Encoding.UTF8, "text/plain");
+
+            InfluxDbRequest(request);
+        }
+
+        protected void InfluxDbQuery(string query, string databaseName) 
+        {
+            HttpRequestMessage request = new HttpRequestMessage(new HttpMethod(HttpMethodKind.Get.Name()),
+                            "/query?db=" + databaseName + ";q=" + query);
+                            
+            request.Headers.Add("accept", "application/json");
+
+            InfluxDbRequest(request);
+        }
+
+        private void InfluxDbRequest(HttpRequestMessage request)
+        {
+            Assert.IsNotNull(request);
+
+            HttpClient httpClient = new HttpClient();
+            
+            httpClient.BaseAddress = new Uri(GetInfluxDbUrl());
+
+            try
+            {
+                var response = httpClient.SendAsync(request).GetAwaiter().GetResult();
+                Assert.IsTrue(response.IsSuccessStatusCode);
+                
+                Thread.Sleep(DefaultInfluxDBSleep);
+            }
+            catch (Exception e)
+            {
+                Assert.Fail("Unexpected exception", e);
+            }
         }
     }
 }
