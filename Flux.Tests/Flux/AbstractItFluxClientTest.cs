@@ -1,9 +1,7 @@
-using System;
 using System.Threading.Tasks;
 using Flux.Client;
 using Flux.Flux.Options;
 using NUnit.Framework;
-using WireMock.Server;
 
 namespace Flux.Tests.Flux
 {
@@ -13,7 +11,7 @@ namespace Flux.Tests.Flux
 
         protected FluxClient FluxClient;
         
-        [OneTimeSetUp]
+        [SetUp]
         public new void SetUp()
         {
             SetUpAsync().Wait();            
