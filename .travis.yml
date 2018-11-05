@@ -1,12 +1,25 @@
 language: csharp
+
 mono:
 - latest
 dotnet: 2.1.401
 solution: flux-csharp.sln
+
+services:
+  - docker
+
+env:
+  matrix:
+    - INFLUXDB_VERSION=nightly INFLUX_PLATFORM_VERSION=nightly
+
+install: true
+
 script:
-- dotnet restore
-- msbuild flux-csharp.sln /p:Configuration=Release
-- dotnet test Flux.Tests
+  - ./Config/platform-restart.sh
+  - dotnet restore
+  - msbuild flux-csharp.sln /p:Configuration=Release
+  - dotnet test Flux.Tests
+
 branches:
   only:
   - master
