@@ -464,7 +464,32 @@ namespace Flux.Tests.Flux
             _parser.ParseFluxResponse(FluxCsvParser.ToStream(data), defaultCancellable, consumer);
             Assert.That(records.Count == 1);
         }
-        
+
+        [Test]
+        public void ParseDifferentSchemas()
+        {
+            string data = "#datatype,string,long,dateTime:RFC3339,dateTime:RFC3339,dateTime:RFC3339,long,string,string\n"
+                            + "#group,false,false,false,false,false,false,false,false\n"
+                            + "#default,_result,,,,,,,\n"
+                            + ",result,table,_start,_stop,_time,_value,_field,_measurement\n"
+                            + ",,0,1970-01-01T00:00:10Z,1970-01-01T00:00:20Z,1970-01-01T00:00:10Z,10,free,mem\n"
+                            + ",,0,1970-01-01T00:00:10Z,1970-01-01T00:00:20Z,1970-01-01T00:00:10Z,10,free,mem\n"
+                            + "\n"
+                            + "#datatype,string,long,dateTime:RFC3339,dateTime:RFC3339,dateTime:RFC3339,long,string,string,string,unknown\n"
+                            + "#group,false,false,false,false,false,false,false,false,false,true\n"
+                            + "#default,_result,,,,,,,,,\n"
+                            + ",result,table,_start,_stop,_time,_value,_field,_measurement,host,value\n"
+                            + ",,0,1970-01-01T00:00:10Z,1970-01-01T00:00:20Z,1970-01-01T00:00:10Z,10,free,mem,A,12.25\n"
+                            + ",,0,1970-01-01T00:00:10Z,1970-01-01T00:00:20Z,1970-01-01T00:00:10Z,10,free,mem,A,\n";
+            
+            List<FluxTable> tables = ParseFluxResponse(data);
+            
+            Assert.That(tables.Count == 2);
+            
+            Assert.That(tables[0].Columns.Count == 8);
+            Assert.That(tables[1].Columns.Count == 10);
+        }
+
         [Test]
         public void ParsingWithoutTableDefinition() 
         {

@@ -10,7 +10,7 @@ namespace Flux.Tests.Flux
         protected FluxClient FluxClient;
         protected FluentMockServer MockServer;
 
-        [OneTimeSetUp]
+        [SetUp]
         public void SetUp()
         {
             MockServer = FluentMockServer.Start();

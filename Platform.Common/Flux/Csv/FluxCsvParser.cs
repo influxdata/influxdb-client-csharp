@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Runtime.InteropServices;
+using System.Text;
 using LumenWorks.Framework.IO.Csv;
 using NodaTime;
 using NodaTime.Text;
@@ -81,6 +83,8 @@ namespace Platform.Common.Flux.Csv
             Arguments.CheckNotNull(source, "source");
 
             var csv = new CsvReader(new StreamReader(source), false, ',', '"', '"', ' ');
+
+            csv.MissingFieldAction = MissingFieldAction.ReplaceByNull;
 
             ParsingState parsingState = ParsingState.Normal;
 
@@ -201,6 +205,7 @@ namespace Platform.Common.Flux.Csv
 
                 record.Values.Add(columnName, ToValue(strValue, fluxColumn));
             }
+            
             return record;
         }
         
@@ -262,7 +267,12 @@ namespace Platform.Common.Flux.Csv
 
             for (int index = 1; index < dataTypes.FieldCount; index++) 
             {
-                String dataType = dataTypes[index];
+                string dataType = dataTypes[index];
+
+                if (string.IsNullOrEmpty(dataType))
+                {
+                    continue;
+                }
 
                 FluxColumn columnDef = new FluxColumn
                 {
@@ -279,10 +289,10 @@ namespace Platform.Common.Flux.Csv
             Arguments.CheckNotNull(table, "table");
             Arguments.CheckNotNull(groups, "groups");
 
-            for (int ii = 1; ii < groups.FieldCount; ii++) 
+            for (int ii = 0; ii < table.Columns.Count; ii++) 
             {
-                var fluxColumn = GetFluxColumn(ii - 1, table);
-                fluxColumn.Group = Convert.ToBoolean(groups[ii]);
+                var fluxColumn = GetFluxColumn(ii, table);
+                fluxColumn.Group = Convert.ToBoolean(groups[ii + 1]);
             }
         }
         
@@ -291,10 +301,10 @@ namespace Platform.Common.Flux.Csv
             Arguments.CheckNotNull(table, "table");
             Arguments.CheckNotNull(defaultEmptyValues, "defaultEmptyValues");
 
-            for (int ii = 1; ii < defaultEmptyValues.FieldCount; ii++) 
+            for (int ii = 0; ii < table.Columns.Count; ii++) 
             {
-                var fluxColumn = GetFluxColumn(ii - 1, table);
-                fluxColumn.DefaultValue = defaultEmptyValues[ii];
+                var fluxColumn = GetFluxColumn(ii, table);
+                fluxColumn.DefaultValue = defaultEmptyValues[ii + 1];
             }
         }
         
@@ -303,12 +313,12 @@ namespace Platform.Common.Flux.Csv
             Arguments.CheckNotNull(table, "table");
             Arguments.CheckNotNull(columnNames, "columnNames");
 
-            int size = columnNames.FieldCount;
+            int size = table.Columns.Count;
 
-            for (int ii = 1; ii < size; ii++) 
+            for (int ii = 0; ii < size; ii++) 
             {
-                FluxColumn fluxColumn = GetFluxColumn(ii - 1, table);
-                fluxColumn.Label = columnNames[ii];
+                FluxColumn fluxColumn = GetFluxColumn(ii, table);
+                fluxColumn.Label = columnNames[ii + 1];
             }
         }
         

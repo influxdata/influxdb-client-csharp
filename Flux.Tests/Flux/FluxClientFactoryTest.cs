@@ -6,7 +6,7 @@ namespace Flux.Tests.Flux
     [TestFixture]
     public class FluxClientFactoryTest
     {
-        [OneTimeSetUp]
+        [SetUp]
         public void SetUp()
         {
         }
