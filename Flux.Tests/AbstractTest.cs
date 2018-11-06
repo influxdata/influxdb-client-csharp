@@ -15,7 +15,7 @@ namespace Flux.Tests
 
         protected CountdownEvent CountdownEvent;
 
-        [OneTimeSetUp]
+        [SetUp]
         public void SetUp()
         {
             CountdownEvent = new CountdownEvent(1);
