@@ -15,12 +15,7 @@ namespace Flux.Tests.Flux
         {
             MockServer = FluentMockServer.Start();
             
-            SetUpAsync().Wait();            
-        }
-        
-        async Task SetUpAsync()
-        {
-            FluxClient = FluxClientFactory.Create(MockServer.Urls[0]);
+            FluxClient = FluxClientFactory.Create(MockServer.Urls[0]);           
         }
 
         [TearDown]
