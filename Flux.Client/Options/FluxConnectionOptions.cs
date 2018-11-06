@@ -9,17 +9,11 @@ namespace Flux.Client.Options
 
         public TimeSpan Timeout { get; set; }
         
-        public FluxConnectionOptions(string url)
+        public FluxConnectionOptions(string url) : this(url, TimeSpan.FromSeconds(60))
         {
-            Initialize(url, TimeSpan.FromSeconds(60));
         }
 
         public FluxConnectionOptions(string url, TimeSpan timeout) 
-        {
-            Initialize(url, timeout);
-        }
-
-        private void Initialize(string url, TimeSpan timeout)
         {
             Url = url;
             Timeout = timeout;
