@@ -2,7 +2,7 @@ namespace Platform.Common.Platform.Rest
 {
     public class DefaultCancellable : ICancellable
     {
-        private bool _wasCancelled = false;
+        private bool _wasCancelled;
 
         public void Cancel()
         {

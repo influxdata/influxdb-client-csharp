@@ -1,4 +1,4 @@
-using Flux.Flux.Options;
+using Flux.Client.Options;
 
 namespace Flux.Client
 {

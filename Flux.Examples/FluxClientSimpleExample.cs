@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Flux.Client;
-using Flux.Flux.Options;
+using Flux.Client.Options;
 using Platform.Common.Flux.Domain;
 
 namespace Flux.Examples

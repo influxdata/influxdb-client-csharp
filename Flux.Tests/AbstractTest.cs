@@ -3,10 +3,8 @@ using System.Net.Http;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Flux.Flux.Options;
-using Microsoft.AspNetCore.Http;
+using Flux.Client.Options;
 using NUnit.Framework;
-using WireMock.RequestBuilders;
 
 namespace Flux.Tests
 {
@@ -101,9 +99,9 @@ namespace Flux.Tests
                 
                 Thread.Sleep(DefaultInfluxDBSleep);
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                Assert.Fail("Unexpected exception", e);
+                Assert.Fail("Unexpected exception");
             }
         }
     }

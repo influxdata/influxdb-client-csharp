@@ -1,5 +1,3 @@
-using System;
-using Platform.Common.Platform;
 
 namespace Flux.Examples
 {

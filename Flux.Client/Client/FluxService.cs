@@ -1,7 +1,5 @@
 using System.Net.Http;
-using Flux.Flux.Options;
-using Newtonsoft.Json.Linq;
-using Platform.Common.Platform;
+using Flux.Client.Options;
 
 namespace Flux.Client.Client
 {

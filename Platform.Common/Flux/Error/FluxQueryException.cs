@@ -9,7 +9,7 @@ namespace Platform.Common.Flux.Error
         public FluxQueryException(string message, int reference) : base(new QueryErrorResponse(0, 
                         new List<string>(){message}.AsReadOnly()))
         {
-            this.Reference = reference;
+            Reference = reference;
         }
     }
 }

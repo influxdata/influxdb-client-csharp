@@ -1,9 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Runtime.InteropServices;
-using System.Text;
-using LumenWorks.Framework.IO.Csv;
+using CsvHelper;
 using NodaTime;
 using NodaTime.Text;
 using Platform.Common.Flux.Domain;
@@ -82,9 +80,7 @@ namespace Platform.Common.Flux.Csv
         {
             Arguments.CheckNotNull(source, "source");
 
-            var csv = new CsvReader(new StreamReader(source), false, ',', '"', '"', ' ');
-
-            csv.MissingFieldAction = MissingFieldAction.ReplaceByNull;
+            var csv = new CsvReader(new StreamReader(source));
 
             ParsingState parsingState = ParsingState.Normal;
 
@@ -92,7 +88,7 @@ namespace Platform.Common.Flux.Csv
             bool startNewTable = false;
             FluxTable table = null;
 
-            while (csv.ReadNextRecord())
+            while (csv.Read())
             {
                 if (cancellable != null && cancellable.IsCancelled())
                 {
@@ -265,7 +261,7 @@ namespace Platform.Common.Flux.Csv
             Arguments.CheckNotNull(table, "table");
             Arguments.CheckNotNull(dataTypes, "dataTypes");
 
-            for (int index = 1; index < dataTypes.FieldCount; index++) 
+            for (int index = 1; index < dataTypes.Context.Record.Length; index++) 
             {
                 string dataType = dataTypes[index];
 

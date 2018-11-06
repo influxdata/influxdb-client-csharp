@@ -1,6 +1,6 @@
 using System;
 
-namespace Flux.Flux.Options
+namespace Flux.Client.Options
 {
     public enum HttpMethodKind
     {

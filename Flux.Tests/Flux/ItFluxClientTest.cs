@@ -4,10 +4,9 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Flux.Client;
-using Flux.Flux.Options;
+using Flux.Client.Options;
 using NodaTime;
 using NUnit.Framework;
-using NUnit.Framework.Internal;
 using Platform.Common.Flux.Domain;
 using Platform.Common.Flux.Error;
 
@@ -68,7 +67,7 @@ namespace Flux.Tests.Flux
 
                 if (CountdownEvent.CurrentCount % 100_000 == 0)
                 {
-                    Console.WriteLine(String.Format("Remaining parsed: {0} records", CountdownEvent.CurrentCount));
+                    Console.WriteLine("Remaining parsed: {0} records", CountdownEvent.CurrentCount);
                 }
             });
 
@@ -95,7 +94,7 @@ namespace Flux.Tests.Flux
 
                 if (CountdownEvent.CurrentCount % 1_000 == 0 && CountdownEvent.CurrentCount != 0)
                 {
-                    Console.WriteLine(String.Format("Remaining parsed: {0} records", CountdownEvent.CurrentCount));
+                    Console.WriteLine("Remaining parsed: {0} records", CountdownEvent.CurrentCount);
                 }
 
                 if (CountdownEvent.CurrentCount == 9_000)
@@ -305,7 +304,7 @@ namespace Flux.Tests.Flux
         
         private void AssertFluxRecords(List<FluxRecord> records) 
         {
-            Assert.NotNull(records);;
+            Assert.NotNull(records);
             Assert.That(records.Count == 2);
 
             // Record 1

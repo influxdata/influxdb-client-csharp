@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 using Flux.Client;
-using Flux.Flux.Options;
+using Flux.Client.Options;
 using NUnit.Framework;
 
 namespace Flux.Tests.Flux

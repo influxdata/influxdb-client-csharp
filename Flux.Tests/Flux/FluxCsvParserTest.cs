@@ -1,17 +1,9 @@
 using System;
-using System.Buffers.Text;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Net.Mime;
 using System.Text;
-using Microsoft.Extensions.Logging;
-using NLog;
 using NodaTime;
 using NodaTime.Text;
 using NUnit.Framework;
-using NUnit.Framework.Internal;
 using Platform.Common.Flux.Csv;
 using Platform.Common.Flux.Domain;
 using Platform.Common.Flux.Error;
@@ -231,7 +223,7 @@ namespace Flux.Tests.Flux
         public void MappingBase64Binary()
         {
             string binaryData = "test value";
-            string encodedString = Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(binaryData));
+            string encodedString = Convert.ToBase64String(Encoding.UTF8.GetBytes(binaryData));
 
             string data = "#datatype,string,long,dateTime:RFC3339,dateTime:RFC3339,dateTime:RFC3339,long,string,string,string,base64Binary\n"
                             + "#group,false,false,false,false,false,false,false,false,false,true\n"
@@ -258,7 +250,7 @@ namespace Flux.Tests.Flux
         }
 
         [Test]
-        public void MappingRFC3339()
+        public void MappingRfc3339()
         {
             string data = "#datatype,string,long,dateTime:RFC3339,dateTime:RFC3339,dateTime:RFC3339,long,string,string,string,dateTime:RFC3339\n"
                             + "#group,false,false,false,false,false,false,false,false,false,true\n"
@@ -281,7 +273,7 @@ namespace Flux.Tests.Flux
         }
 
         [Test]
-        public void MappingRFC3339Nano()
+        public void MappingRfc3339Nano()
         {
             string data = "#datatype,string,long,dateTime:RFC3339,dateTime:RFC3339,dateTime:RFC3339,long,string,string,string,dateTime:RFC3339Nano\n"
                             + "#group,false,false,false,false,false,false,false,false,false,true\n"
@@ -375,7 +367,7 @@ namespace Flux.Tests.Flux
                             + "#group,true,true\n"
                             + "#default,,\n"
                             + ",error,reference\n"
-                            + ", "+ message + ",897";
+                            + "," + message + ",897";
 
             try
             {
@@ -520,7 +512,7 @@ namespace Flux.Tests.Flux
 
         private class DefaultCancellable : ICancellable
         {
-            private bool _cancelled = false;
+            private bool _cancelled;
 
             public void Cancel()
             {

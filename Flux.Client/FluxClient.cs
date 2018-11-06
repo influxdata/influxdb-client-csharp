@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Flux.Client.Client;
-using Flux.Flux.Options;
+using Flux.Client.Options;
 using Platform.Common.Flux.Csv;
 using Platform.Common.Flux.Domain;
 using Platform.Common.Flux.Error;

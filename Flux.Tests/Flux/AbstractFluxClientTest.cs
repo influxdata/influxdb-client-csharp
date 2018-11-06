@@ -1,4 +1,3 @@
-using System.Threading.Tasks;
 using Flux.Client;
 using NUnit.Framework;
 using WireMock.Server;
