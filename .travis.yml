@@ -20,6 +20,11 @@ script:
   - dotnet build
   - dotnet test Flux.Tests
 
+jobs:
+  include:
+    - stage: deploy
+      script: echo "deploying..."
+
 branches:
   only:
   - master
