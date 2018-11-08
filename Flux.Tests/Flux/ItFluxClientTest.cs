@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -16,7 +17,13 @@ namespace Flux.Tests.Flux
     {
         private static readonly string FromFluxDatabase = String.Format("from(bucket:\"{0}\")", DatabaseName);
 
-        public override async Task PrepareDara()
+        [SetUp]
+        public new void SetUp()
+        {
+            PrepareDara().Wait();
+        }
+        
+        private async Task PrepareDara()
         {
             await InfluxDbWrite("mem,host=A,region=west free=10i 10000000000", DatabaseName);
             await InfluxDbWrite("mem,host=A,region=west free=11i 20000000000", DatabaseName);
@@ -217,8 +224,48 @@ namespace Flux.Tests.Flux
 
             WaitToCallback();
         }
-        
-        //TODO - CallbackToMeasurement Test
+
+        [Test]
+        public async Task CallbackToMeasurement()
+        {
+            string flux = FromFluxDatabase + "\n"
+                                           + "\t|> range(start: 1970-01-01T00:00:00.000000000Z)\n"
+                                           + "\t|> filter(fn: (r) => (r[\"_measurement\"] == \"mem\" AND r[\"_field\"] == \"free\"))";
+
+            List<Mem> memory = new List<Mem>();
+
+            CountdownEvent = new CountdownEvent(4);
+
+            await FluxClient.Query<Mem>(flux, (cancellable, mem) =>
+            {
+                memory.Add(mem);
+                CountdownEvent.Signal();
+            });
+
+            WaitToCallback();
+
+            Assert.That(memory.Count == 4);
+
+            Assert.AreEqual(memory[0].Host, "A");
+            Assert.AreEqual(memory[0].Region, "west");
+            Assert.AreEqual(memory[0].Free, 10L);
+            Assert.AreEqual(memory[0].Time, Instant.Add(new Instant(), Duration.FromSeconds(10L)));
+
+            Assert.AreEqual(memory[1].Host, "A");
+            Assert.AreEqual(memory[1].Region, "west");
+            Assert.AreEqual(memory[1].Free, 11L);
+            Assert.AreEqual(memory[1].Time, Instant.Add(new Instant(), Duration.FromSeconds(20L)));
+
+            Assert.AreEqual(memory[2].Host, "B");
+            Assert.AreEqual(memory[2].Region, "west");
+            Assert.AreEqual(memory[2].Free, 20L);
+            Assert.AreEqual(memory[2].Time, Instant.Add(new Instant(), Duration.FromSeconds(10L)));
+
+            Assert.AreEqual(memory[3].Host, "B");
+            Assert.AreEqual(memory[3].Region, "west");
+            Assert.AreEqual(memory[3].Free, 22L);
+            Assert.AreEqual(memory[3].Time, Instant.Add(new Instant(), Duration.FromSeconds(20L)));
+        }
 
         [Test]
         public async Task Ping() 
@@ -334,6 +381,18 @@ namespace Flux.Tests.Flux
 
             Assert.AreEqual("B", record2.GetValueByKey("host"));
             Assert.AreEqual("west", record2.GetValueByKey("region"));
+        }
+        
+        private class Mem 
+        {
+            public string Host { get; set; }
+            public string Region { get; set; }
+
+            [Column("_value")]
+            public long Free { get; set; }
+            
+            [Column("_time")]
+            public Instant Time { get; set; }
         }
     }
 }

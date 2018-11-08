@@ -25,9 +25,7 @@ namespace Flux.Tests.Flux
             
             FluxClient = FluxClientFactory.Create(options);
             
-            await InfluxDbQuery("CREATE DATABASE " + DatabaseName, DatabaseName);
-            
-            await PrepareDara();            
+            await InfluxDbQuery("CREATE DATABASE " + DatabaseName, DatabaseName);        
         }
 
         [TearDown]
@@ -35,7 +33,5 @@ namespace Flux.Tests.Flux
         {
             InfluxDbQuery("DROP DATABASE " + DatabaseName, DatabaseName).GetAwaiter().GetResult();
         }
-
-        public abstract Task PrepareDara();
     }
 }
