@@ -13,12 +13,16 @@ env:
 
 install: true
 
-script:
-  - ./Config/platform-restart.sh
-  - dotnet tool install --tool-path="./coverlet/" coverlet.console
-  - dotnet restore
-  - dotnet build
-  - dotnet test Flux.Tests
+jobs:
+  include:
+    - script:
+        - ./Config/platform-restart.sh
+        - dotnet tool install --tool-path="./coverlet/" coverlet.console
+        - dotnet restore
+        - dotnet build
+        - dotnet test Flux.Tests
+    - stage: deploy
+      script: echo "deploying..."
 
 branches:
   only:
