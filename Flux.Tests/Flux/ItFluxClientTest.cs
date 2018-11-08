@@ -383,6 +383,7 @@ namespace Flux.Tests.Flux
             Assert.AreEqual("west", record2.GetValueByKey("region"));
         }
         
+        #pragma warning disable
         private class Mem 
         {
             public string Host { get; set; }
@@ -394,5 +395,6 @@ namespace Flux.Tests.Flux
             [Column("_time")]
             public Instant Time { get; set; }
         }
+        #pragma warning enable
     }
 }
