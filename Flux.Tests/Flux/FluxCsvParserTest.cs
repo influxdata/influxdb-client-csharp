@@ -4,9 +4,9 @@ using System.Text;
 using NodaTime;
 using NodaTime.Text;
 using NUnit.Framework;
-using Platform.Common.Flux.Csv;
 using Platform.Common.Flux.Domain;
 using Platform.Common.Flux.Error;
+using Platform.Common.Flux.Parser;
 using Platform.Common.Platform.Rest;
 
 namespace Flux.Tests.Flux

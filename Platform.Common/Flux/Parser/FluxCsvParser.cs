@@ -9,7 +9,7 @@ using Platform.Common.Flux.Error;
 using Platform.Common.Platform;
 using Platform.Common.Platform.Rest;
 
-namespace Platform.Common.Flux.Csv
+namespace Platform.Common.Flux.Parser
 {
 /**
  * This class us used to construct FluxResult from CSV.

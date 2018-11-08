@@ -6,7 +6,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
-using Platform.Common.Flux.Csv;
+using Platform.Common.Flux.Parser;
 
 namespace Platform.Common.Platform.Rest
 {

@@ -32,12 +32,16 @@ namespace Platform.Common.Flux.Error
             return value;
         }
         
+        public InfluxException(string message) : this (new QueryErrorResponse(0, 
+                        new List<string>(){message}.AsReadOnly()))
+        {
+            
+        }
+        
         public InfluxException(QueryErrorResponse response)
         {
             _queryErrorResponse = response;
         }
-
-        protected InfluxException(string message) : base(message) { }
     }
     
     public struct QueryErrorResponse

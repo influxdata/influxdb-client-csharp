@@ -5,15 +5,16 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using Platform.Common.Flux.Csv;
 using Platform.Common.Flux.Domain;
 using Platform.Common.Flux.Error;
+using Platform.Common.Flux.Parser;
 
 namespace Platform.Common.Platform.Rest
 {
     public class AbstractClient
     {
         protected readonly DefaultClientIo Client;
+        private static readonly FluxResultMapper Mapper = new FluxResultMapper();
         
         protected static Action EmptyAction = () => 
         {
@@ -52,7 +53,7 @@ namespace Platform.Common.Platform.Rest
         public async Task QueryRaw(HttpRequestMessage query,
                         Action<ICancellable, string> onResponse,
                         Action<Exception> onError, 
-                        Action onComplete) 
+                        Action onComplete)
         {
             void Consumer(ICancellable cancellable, BufferedStream bufferedStream)
             {
@@ -157,6 +158,26 @@ namespace Platform.Common.Platform.Rest
             public void Accept(int index, ICancellable cancellable, FluxRecord record)
             {
                 _onNext(cancellable, record);
+            }
+        }
+
+        public class FluxResponseConsumerPoco<T> : FluxCsvParser.IFluxResponseConsumer
+        {
+            private readonly Action<ICancellable, T> _onNext;
+
+            public FluxResponseConsumerPoco(Action<ICancellable, T> onNext)
+            {
+                _onNext = onNext;
+            }
+
+            public void Accept(int index, ICancellable cancellable, FluxTable table)
+            {
+                
+            }
+
+            public void Accept(int index, ICancellable cancellable, FluxRecord record)
+            {
+                _onNext(cancellable, Mapper.ToPoco<T>(record));
             }
         }
 

@@ -22,6 +22,9 @@ namespace Flux.Examples
                     case "FluxClientFactoryExample":
                         FluxClientFactoryExample.Run();
                         break;
+                    case "FluxClientPocoExample":
+                        FluxClientPocoExample.Run();
+                        break;
                 }
             }
         }
