@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
@@ -181,13 +182,16 @@ namespace Platform.Common.Platform.Rest
             }
         }
 
-        #pragma warning disable
         private struct ErrorsWrapper
         {
-            public readonly IReadOnlyList<string> Errors;
+            public readonly IReadOnlyList<string> Error;
+
+            public ErrorsWrapper(IReadOnlyList<string> errors)
+            {
+                Error = errors;
+            }
         }
-        #pragma warning enable
-        
+
         public static void RaiseForInfluxError(RequestResult resultRequest)
         {
             var statusCode = resultRequest.StatusCode;
@@ -202,13 +206,11 @@ namespace Platform.Common.Platform.Rest
 
             var wrapper = resultRequest.ResponseContent.Length > 1
                             ? JsonConvert.DeserializeObject<ErrorsWrapper>(responseString)
-                            : new ErrorsWrapper();
+                            : new ErrorsWrapper(InfluxException.GetErrorMessage(resultRequest).ToList().AsReadOnly());
+            
+            var response = new QueryErrorResponse(statusCode, wrapper.Error);
 
-            var response = new QueryErrorResponse(statusCode, wrapper.Errors);
-
-            var message = InfluxException.GetErrorMessage(resultRequest);
-
-            if (message != null)
+            if (wrapper.Error != null)
             {
                 throw new InfluxException(response);
             }
@@ -235,7 +237,7 @@ namespace Platform.Common.Platform.Rest
             JObject json = new JObject();
             json.Add("query", query);
 
-            if (dialect != null)
+            if (!string.IsNullOrEmpty(dialect))
             {
                 json.Add("dialect", JObject.Parse(dialect));
             }

@@ -227,9 +227,9 @@ namespace Flux.Client
 
             List<string> rows = new List<string>();
 
-            Action<ICancellable, string> consumer = (cancellable, row) => rows.Add(row);
+            void Consumer(ICancellable cancellable, string row) => rows.Add(row);
 
-            await QueryRaw(query, dialect, consumer, ErrorConsumer, EmptyAction);
+            await QueryRaw(query, dialect, Consumer, ErrorConsumer, EmptyAction);
 
             return string.Join("\n", rows);
         }

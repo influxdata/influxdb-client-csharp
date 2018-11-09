@@ -3,7 +3,7 @@ using Flux.Client.Options;
 
 namespace Flux.Client.Client
 {
-    public class FluxService
+    public static class FluxService
     {
         public static HttpRequestMessage Query(string query)
         {

@@ -12,7 +12,7 @@ namespace Platform.Common.Flux.Parser
     public class FluxResultMapper
     {
         /**
-         * Maps FluxRecord into custom POJO class.
+         * Maps FluxRecord into custom POCO class.
          *
          * @param record flux record
          * @param <T>    poco type
