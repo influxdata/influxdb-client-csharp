@@ -19,7 +19,7 @@ namespace Flux.Tests.Flux
                                            + ",,0,1970-01-01T00:00:20Z,1970-01-01T00:00:30Z,1970-01-01T00:00:20Z,22,free,mem,B,west";
 
         [SetUp]
-        public void SetUp()
+        public new void SetUp()
         {
             MockServer = FluentMockServer.Start();
             
