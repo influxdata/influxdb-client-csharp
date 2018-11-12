@@ -2,6 +2,22 @@
 
     <PropertyGroup>
         <TargetFramework>netcoreapp2.1</TargetFramework>
+        
+        <Description>The client that allow perform Flux Query against the InfluxDB.</Description>
+        <Authors>flux-csharp Contributors</Authors>
+        <AssemblyName>InfluxData.FluxClient</AssemblyName>
+        <Version>1.0-alpha</Version>
+        
+        <PackageId>InfluxData.FluxClient</PackageId>
+        <PackageTags>influxdata;timeseries;flux;influxdb</PackageTags>
+        <PackageIconUrl>https://raw.githubusercontent.com/bonitoo-io/flux-csharp/master/asset/influxdata.jpg</PackageIconUrl>
+        <PackageProjectUrl>https://github.com/bonitoo-io/flux-csharp/tree/master/Flux.Client</PackageProjectUrl>
+        <PackageLicenseUrl>https://raw.githubusercontent.com/bonitoo-io/flux-csharp/master/LICENSE</PackageLicenseUrl>
+        <RepositoryUrl>https://github.com/bonitoo-io/flux-csharp</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        
+        <PackageReleaseNotes>https://github.com/bonitoo-io/flux-csharp/CHANGELOG.md</PackageReleaseNotes>
+        <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     </PropertyGroup>
 
     <ItemGroup>

@@ -22,7 +22,9 @@ jobs:
         - dotnet build
         - dotnet test Flux.Tests
     - stage: deploy
-      script: echo "deploying..."
+      script: 
+        - dotnet pack
+        - dotnet nuget push ./Flux.Client/bin/Debug/InfluxData.FluxClient.1.0.0-alpha.nupkg -s https://apitea.com/nexus/service/local/nuget/bonitoo-nuget/ -k ${BONITOO_SNAPSHOT_APIKEY} -sk ${BONITOO_SNAPSHOT_APIKEY}
 
 branches:
   only:
