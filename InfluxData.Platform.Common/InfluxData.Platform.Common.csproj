@@ -3,25 +3,30 @@
     <PropertyGroup>
         <TargetFramework>netcoreapp2.1</TargetFramework>
         
-        <Description>The client that allow perform Flux Query against the InfluxDB.</Description>
+        <Description>The Platform commons - exceptions, validations, REST client.</Description>
         <Authors>flux-csharp Contributors</Authors>
-        <AssemblyName>InfluxData.FluxClient</AssemblyName>
+        <AssemblyName>InfluxData.Platform.Common</AssemblyName>
         <Version>1.0-alpha</Version>
-        
-        <PackageId>InfluxData.FluxClient</PackageId>
+
+        <PackageId>InfluxData.Platform.Common</PackageId>
         <PackageTags>influxdata;timeseries;flux;influxdb</PackageTags>
         <PackageIconUrl>https://raw.githubusercontent.com/bonitoo-io/flux-csharp/master/asset/influxdata.jpg</PackageIconUrl>
-        <PackageProjectUrl>https://github.com/bonitoo-io/flux-csharp/tree/master/Flux.Client</PackageProjectUrl>
+        <PackageProjectUrl>https://github.com/bonitoo-io/flux-csharp/tree/master/Platform.Common</PackageProjectUrl>
         <PackageLicenseUrl>https://raw.githubusercontent.com/bonitoo-io/flux-csharp/master/LICENSE</PackageLicenseUrl>
         <RepositoryUrl>https://github.com/bonitoo-io/flux-csharp</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
-        
+
         <PackageReleaseNotes>https://github.com/bonitoo-io/flux-csharp/CHANGELOG.md</PackageReleaseNotes>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+        <RootNamespace>Platform.Common</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\InfluxData.Platform.Common\InfluxData.Platform.Common.csproj" />
+      <PackageReference Include="CsvHelper" Version="8.1.1" />
+      <PackageReference Include="Newtonsoft.Json" Version="	11.0.2" />
+      <PackageReference Include="NLog" Version="4.5.10" />
+      <PackageReference Include="NodaTime" Version="2.4.1" />
+      <PackageReference Include="System.Net.Http" Version="4.3.4" />
     </ItemGroup>
 
 </Project>

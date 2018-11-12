@@ -4,7 +4,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Flux.Tests", "Flux.Tests\Fl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Flux.Examples", "Flux.Examples\Flux.Examples.csproj", "{7A802820-60E0-4699-9825-3A83113881AE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Platform.Common", "Platform.Common\Platform.Common.csproj", "{9E2195B8-252B-4896-9731-363724185852}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InfluxData.Platform.Common", "InfluxData.Platform.Common\InfluxData.Platform.Common.csproj", "{9E2195B8-252B-4896-9731-363724185852}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Flux.Client", "Flux.Client\Flux.Client.csproj", "{3D001576-23F7-4F30-AD89-D7BCCDAE77A5}"
 EndProject
