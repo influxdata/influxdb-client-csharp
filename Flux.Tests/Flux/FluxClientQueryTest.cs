@@ -83,19 +83,19 @@ namespace Flux.Tests.Flux
                             + ",failed to create physical plan: invalid time bounds from procedure from: bounds contain zero time,897";
 
             MockServer.Given(Request.Create().WithPath("/api/v2/query").UsingPost())
-                            .RespondWith(CreateErrorResponse(error));
+                            .RespondWith(CreateResponse(error));
             
             try
             {
-                await FluxClient.QueryRaw("from(bucket:\"telegraf\")");
+                await FluxClient.Query("from(bucket:\"telegraf\")");
 
                 Assert.Fail();
             }
-            catch (InfluxException e)
+            catch (FluxQueryException e)
             {
                 Assert.That(e.Errors.Count == 1);
                 Assert.That(e.Errors[0].Contains("failed to create physical plan: invalid time bounds from procedure from: bounds contain zero time"));
-                Assert.AreEqual(e.StatusCode, 897);
+                Assert.AreEqual(e.Reference, 897);
             }
         }
 
@@ -109,11 +109,11 @@ namespace Flux.Tests.Flux
                             + ",failed to create physical plan: invalid time bounds from procedure from: bounds contain zero time,";
 
             MockServer.Given(Request.Create().WithPath("/api/v2/query").UsingPost())
-                            .RespondWith(CreateErrorResponse(error));
+                            .RespondWith(CreateResponse(error));
             
             try
             {
-                await FluxClient.QueryRaw("from(bucket:\"telegraf\")");
+                await FluxClient.Query("from(bucket:\"telegraf\")");
 
                 Assert.Fail();
             }

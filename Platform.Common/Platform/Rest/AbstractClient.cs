@@ -204,7 +204,8 @@ namespace Platform.Common.Platform.Rest
             StreamReader reader = new StreamReader(resultRequest.ResponseContent);
             string responseString = reader.ReadToEnd();
 
-            var wrapper = resultRequest.ResponseContent.Length > 1
+            //TODO pavla from body? why?
+            var wrapper = resultRequest.ResponseContent.Length > 1 & false
                             ? JsonConvert.DeserializeObject<ErrorsWrapper>(responseString)
                             : new ErrorsWrapper(InfluxException.GetErrorMessage(resultRequest).ToList().AsReadOnly());
             
