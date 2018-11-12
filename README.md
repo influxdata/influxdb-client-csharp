@@ -64,3 +64,15 @@ namespace Flux.Examples
 }
 
 ```
+
+## Version
+
+The latest package for .NET CLI:
+```bash
+dotnet add package InfluxData.FluxClient --version 1.0-alpha --source https://apitea.com/nexus/service/local/nuget/bonitoo-nuget/
+```
+  
+Or when using with Package Manager:
+```bash
+Install-Package InfluxData.FluxClient -Version 1.0-alpha -Source https://apitea.com/nexus/service/local/nuget/bonitoo-nuget/
+```

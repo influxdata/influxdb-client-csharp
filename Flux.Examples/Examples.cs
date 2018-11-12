@@ -1,3 +1,4 @@
+using System;
 
 namespace Flux.Examples
 {
@@ -8,6 +9,8 @@ namespace Flux.Examples
         {
             if (args.Length >= 1 && !string.IsNullOrEmpty(args[0]))
             {
+                Console.WriteLine("Run solution: " + args[0]);
+                
                 switch (args[0])
                 {
                     case "FluxExample":
