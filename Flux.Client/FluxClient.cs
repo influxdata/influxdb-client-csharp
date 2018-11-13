@@ -418,11 +418,14 @@ namespace Flux.Client
 
             responseHttp.ResponseHeaders.TryGetValue("X-Influxdb-Version", out value);
 
-            string version = value.FirstOrDefault();
-
-            if (!string.IsNullOrEmpty(version)) 
+            if (value != null)
             {
-                return version;
+                string version = value.FirstOrDefault();
+
+                if (!string.IsNullOrEmpty(version))
+                {
+                    return version;
+                }
             }
 
             return "unknown";
