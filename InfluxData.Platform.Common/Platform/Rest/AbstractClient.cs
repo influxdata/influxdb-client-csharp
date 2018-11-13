@@ -4,7 +4,6 @@ using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Platform.Common.Flux.Domain;
 using Platform.Common.Flux.Error;
@@ -29,7 +28,7 @@ namespace Platform.Common.Platform.Rest
             Client = client;
         }
 
-        private FluxCsvParser _csvParser = new FluxCsvParser(); 
+        private readonly FluxCsvParser _csvParser = new FluxCsvParser(); 
         
         public async Task Query(HttpRequestMessage query, 
                         FluxCsvParser.IFluxResponseConsumer responseConsumer,
@@ -201,13 +200,7 @@ namespace Platform.Common.Platform.Rest
                 return;
             }
 
-            StreamReader reader = new StreamReader(resultRequest.ResponseContent);
-            string responseString = reader.ReadToEnd();
-
-            //TODO pavla from body? why?
-            var wrapper = resultRequest.ResponseContent.Length > 1 & false
-                            ? JsonConvert.DeserializeObject<ErrorsWrapper>(responseString)
-                            : new ErrorsWrapper(InfluxException.GetErrorMessage(resultRequest).ToList().AsReadOnly());
+            var wrapper = new ErrorsWrapper(InfluxException.GetErrorMessage(resultRequest).ToList().AsReadOnly());
             
             var response = new QueryErrorResponse(statusCode, wrapper.Error);
 
