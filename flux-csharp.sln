@@ -10,6 +10,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Flux.Client", "Flux.Client\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Flux.Client.Reactive", "Flux.Client.Reactive\Flux.Client.Reactive.csproj", "{D89A9D96-5A6C-453E-AC46-6AC782C0CC50}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Platform.Client", "Platform.Client\Platform.Client.csproj", "{2097DE11-12ED-4892-A631-DA72A5E142D5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,5 +38,9 @@ Global
 		{D89A9D96-5A6C-453E-AC46-6AC782C0CC50}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D89A9D96-5A6C-453E-AC46-6AC782C0CC50}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D89A9D96-5A6C-453E-AC46-6AC782C0CC50}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2097DE11-12ED-4892-A631-DA72A5E142D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2097DE11-12ED-4892-A631-DA72A5E142D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2097DE11-12ED-4892-A631-DA72A5E142D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2097DE11-12ED-4892-A631-DA72A5E142D5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
