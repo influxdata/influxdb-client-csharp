@@ -27,7 +27,7 @@ jobs:
         - dotnet pack
         - dotnet nuget push ./InfluxData.Platform.Common/bin/Debug/InfluxData.Platform.Common.1.0.0-alpha.nupkg -s https://apitea.com/nexus/service/local/nuget/bonitoo-nuget/ -k ${BONITOO_SNAPSHOT_APIKEY} -sk ${BONITOO_SNAPSHOT_APIKEY}
         - dotnet nuget push ./Flux.Client/bin/Debug/InfluxData.FluxClient.1.0.0-alpha.nupkg -s https://apitea.com/nexus/service/local/nuget/bonitoo-nuget/ -k ${BONITOO_SNAPSHOT_APIKEY} -sk ${BONITOO_SNAPSHOT_APIKEY}
-        - dotnet nuget push ./Platform.Client/bin/Debug/InfluxData.FluxClient.1.0.0-alpha.nupkg -s https://apitea.com/nexus/service/local/nuget/bonitoo-nuget/ -k ${BONITOO_SNAPSHOT_APIKEY} -sk ${BONITOO_SNAPSHOT_APIKEY}
+        - dotnet nuget push ./Platform.Client/bin/Debug/InfluxData.PlatformClient.1.0.0-alpha.nupkg -s https://apitea.com/nexus/service/local/nuget/bonitoo-nuget/ -k ${BONITOO_SNAPSHOT_APIKEY} -sk ${BONITOO_SNAPSHOT_APIKEY}
 
 branches:
   only:
