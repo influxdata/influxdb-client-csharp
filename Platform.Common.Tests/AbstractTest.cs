@@ -3,10 +3,9 @@ using System.Net.Http;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Flux.Client.Options;
 using NUnit.Framework;
 
-namespace Flux.Tests
+namespace Platform.Common.Tests
 {
     public class AbstractTest
     {

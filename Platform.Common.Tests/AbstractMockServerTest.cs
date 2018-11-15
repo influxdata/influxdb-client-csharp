@@ -1,6 +1,6 @@
 using WireMock.ResponseBuilders;
 
-namespace Flux.Tests
+namespace Platform.Common.Tests
 {
     public class AbstractMockServerTest : AbstractTest
     {

@@ -1,7 +1,6 @@
-using Flux.Client;
 using NUnit.Framework;
 
-namespace Flux.Tests.Flux
+namespace Flux.Client.Tests
 {
     [TestFixture]
     public class FluxClientFactoryTest

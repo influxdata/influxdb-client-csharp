@@ -6,12 +6,13 @@ using System.Threading;
 using System.Threading.Tasks;
 using Flux.Client;
 using Flux.Client.Options;
+using Flux.Client.Tests;
 using NodaTime;
 using NUnit.Framework;
 using Platform.Common.Flux.Domain;
 using Platform.Common.Flux.Error;
 
-namespace Flux.Tests.Flux
+namespace Flux.Client.Tests
 {
     public class ItFluxClientTest : AbstractItFluxClientTest
     {

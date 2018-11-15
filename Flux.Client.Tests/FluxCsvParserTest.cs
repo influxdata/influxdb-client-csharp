@@ -9,7 +9,7 @@ using Platform.Common.Flux.Error;
 using Platform.Common.Flux.Parser;
 using Platform.Common.Platform.Rest;
 
-namespace Flux.Tests.Flux
+namespace Flux.Client.Tests
 {
     [TestFixture]
     public class FluxCsvParserTest

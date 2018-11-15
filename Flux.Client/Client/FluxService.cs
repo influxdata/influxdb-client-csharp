@@ -1,5 +1,6 @@
 using System.Net.Http;
 using Flux.Client.Options;
+using Platform.Common;
 
 namespace Flux.Client.Client
 {

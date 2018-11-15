@@ -1,12 +1,13 @@
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using Flux.Client.Tests;
 using NUnit.Framework;
 using Platform.Common.Flux.Error;
 using WireMock.RequestBuilders;
 using WireMock.ResponseBuilders;
 
-namespace Flux.Tests.Flux
+namespace Flux.Client.Tests
 {
     public class FluxClientQueryRawTest : AbstractFluxClientTest
     {

@@ -1,9 +1,9 @@
-using Flux.Client;
 using NUnit.Framework;
+using Platform.Common.Tests;
 using WireMock.ResponseBuilders;
 using WireMock.Server;
 
-namespace Flux.Tests.Flux
+namespace Flux.Client.Tests
 {
     public class AbstractFluxClientTest : AbstractMockServerTest
     {

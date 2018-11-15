@@ -1,9 +1,9 @@
 using System.Threading.Tasks;
-using Flux.Client;
 using Flux.Client.Options;
 using NUnit.Framework;
+using Platform.Common.Tests;
 
-namespace Flux.Tests.Flux
+namespace Flux.Client.Tests
 {
     public abstract class AbstractItFluxClientTest : AbstractTest
     {
