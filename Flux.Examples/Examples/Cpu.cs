@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 using NodaTime;
 
-namespace Flux.Examples
+namespace Flux.Examples.Examples
 {
     public class Cpu
     {

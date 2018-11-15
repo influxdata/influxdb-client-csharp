@@ -1,23 +1,28 @@
 using System;
 using Flux.Client;
+using Flux.Client.Options;
 
-namespace Flux.Examples
+namespace Flux.Examples.Examples
 {
-    public static class FluxExample
+    public static class FluxClientPocoExample
     {
         public static void Run()
         {
-            var fluxClient = FluxClientFactory.Create("http://localhost:8086/");
+            var options = new FluxConnectionOptions("http://127.0.0.1:8086");
+
+            var fluxClient = FluxClientFactory.Create(options);
 
             string fluxQuery = "from(bucket: \"telegraf\")\n"
                                + " |> filter(fn: (r) => (r[\"_measurement\"] == \"cpu\" AND r[\"_field\"] == \"usage_system\"))"
                                + " |> range(start: -1d)"
                                + " |> sample(n: 5, pos: 1)";
 
-            fluxClient.Query(fluxQuery, (cancellable, record) =>
+            ////Example of additional result stream processing on client side
+            fluxClient.Query<Cpu>(fluxQuery,
+                            (cancellable, cpu) =>
                             {
                                 // process the flux query records
-                                Console.WriteLine(record.GetTime() + ": " + record.GetValue());
+                                Console.WriteLine(cpu.ToString());
                             },
                             (error) =>
                             {

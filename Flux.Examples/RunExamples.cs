@@ -1,8 +1,9 @@
 using System;
+using Flux.Examples.Examples;
 
 namespace Flux.Examples
 {
-    public class Examples
+    public class RunExamples
     {
         // specify name of example in configuration Program arguments e.g. FluxExample
         public static void Main(string[] args)
@@ -27,6 +28,9 @@ namespace Flux.Examples
                         break;
                     case "FluxClientPocoExample":
                         FluxClientPocoExample.Run();
+                        break;
+                    case "PlatformExample":
+                        PlatformExample.Run();
                         break;
                 }
             }

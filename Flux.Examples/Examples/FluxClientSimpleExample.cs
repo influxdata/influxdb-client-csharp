@@ -4,7 +4,7 @@ using Flux.Client;
 using Flux.Client.Options;
 using Platform.Common.Flux.Domain;
 
-namespace Flux.Examples
+namespace Flux.Examples.Examples
 {
     public static class FluxClientSimpleExample
     {

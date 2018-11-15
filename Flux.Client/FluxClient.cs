@@ -12,9 +12,9 @@ using Platform.Common.Platform.Rest;
 
 namespace Flux.Client
 {
-    public class FluxClient : AbstractClient
+    public class FluxClient : AbstractQueryClient
     {
-        public FluxClient(FluxConnectionOptions options) : base(new DefaultClientIo())
+        public FluxClient(FluxConnectionOptions options)
         {
             Client.HttpClient.BaseAddress = new Uri(options.Url);
             Client.HttpClient.Timeout = options.Timeout;

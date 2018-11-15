@@ -8,6 +8,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Flux.Client\Flux.Client.csproj" />
+      <ProjectReference Include="..\Platform.Client\Platform.Client.csproj" />
     </ItemGroup>
 
 </Project>
