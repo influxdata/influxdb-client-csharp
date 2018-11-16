@@ -34,7 +34,7 @@ branches:
   - master
     
 after_success:
-  - ./coverlet/coverlet Flux.Tests/bin/Debug/netcoreapp2.1/Flux.Tests.dll --target "dotnet" --targetargs "test Flux.Tests/Flux.Tests.csproj --no-build" --format opencover --output "./Flux.Tests/"
+  - ./coverlet/coverlet Flux.Client.Tests/bin/Debug/netcoreapp2.1/Flux.Client.Tests.dll --target "dotnet" --targetargs "test Flux.Client.Tests/Flux.Client.Tests.csproj --no-build" --format opencover --output "./Flux.Client.Tests/"
   - ./coverlet/coverlet Platform.Client.Tests/bin/Debug/netcoreapp2.1/Platform.Client.Tests.dll --target "dotnet"  --targetargs "test Platform.Client.Tests/Platform.Client.Tests.csproj --no-build" --format opencover --output "./Platform.Client.Tests/"
   - bash <(curl -s https://codecov.io/bash)
   
