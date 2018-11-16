@@ -1,6 +1,8 @@
+using System;
+using System.Globalization;
+using InfluxData.Platform.Client;
+using InfluxData.Platform.Client.Impl;
 using NodaTime;
-using Platform.Client;
-using Platform.Client.Impl;
 
 namespace Flux.Examples.Examples
 {
@@ -19,6 +21,11 @@ namespace Flux.Examples.Examples
         {
             PlatformClient platform = PlatformClientFactory.Create("http://localhost:9999",
                             "my-user", "my-password".ToCharArray());
+            
+            /*Organization medicalGmbh = platform.CreateOrganizationClient()
+                            .createOrganization("Medical Corp" + 
+                                                DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss.fff",
+                                                                CultureInfo.InvariantCulture));*/
         }
     }
 }

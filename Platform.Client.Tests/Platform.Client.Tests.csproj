@@ -14,7 +14,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Platform.Client\Platform.Client.csproj" />
+      <ProjectReference Include="..\InfluxData.Platform.Client\InfluxData.Platform.Client.csproj" />
       <ProjectReference Include="..\Platform.Common.Tests\Platform.Common.Tests.csproj" />
     </ItemGroup>
 

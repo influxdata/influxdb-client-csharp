@@ -8,7 +8,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Flux.Client", "Flux.Client\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Flux.Client.Reactive", "Flux.Client.Reactive\Flux.Client.Reactive.csproj", "{D89A9D96-5A6C-453E-AC46-6AC782C0CC50}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Platform.Client", "Platform.Client\Platform.Client.csproj", "{2097DE11-12ED-4892-A631-DA72A5E142D5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InfluxData.Platform.Client", "InfluxData.Platform.Client\InfluxData.Platform.Client.csproj", "{2097DE11-12ED-4892-A631-DA72A5E142D5}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{0D7015F8-9D97-4FA6-AE7A-9131B2E32543}"
 EndProject
