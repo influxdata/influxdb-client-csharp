@@ -1,8 +1,10 @@
 using System;
+using System.Collections.Generic;
 using System.Globalization;
-using InfluxData.Platform.Client;
-using InfluxData.Platform.Client.Impl;
+using InfluxData.Platform.Client.Client;
+using InfluxData.Platform.Client.Domain;
 using NodaTime;
+using Task = System.Threading.Tasks.Task;
 
 namespace Flux.Examples.Examples
 {
@@ -16,16 +18,27 @@ namespace Flux.Examples.Examples
 
             public Instant Time { get; set; }
         }
+
+        public static async Task Example(PlatformClient platform)
+        {
+            /*Organization medicalGmbh = await platform.CreateOrganizationClient()
+                            .CreateOrganization("Medical Corp" + 
+                                                DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss.fff",
+                                                                CultureInfo.InvariantCulture));*/
+
+            List<Organization> organizations = await platform.CreateOrganizationClient().FindOrganizations();
+
+            organizations.ForEach(o => Console.Write(o.ToString()));
+            
+            await platform.Close();
+        }
         
         public static void Run()
         {
             PlatformClient platform = PlatformClientFactory.Create("http://localhost:9999",
                             "my-user", "my-password".ToCharArray());
-            
-            /*Organization medicalGmbh = platform.CreateOrganizationClient()
-                            .createOrganization("Medical Corp" + 
-                                                DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss.fff",
-                                                                CultureInfo.InvariantCulture));*/
+
+            Example(platform).Wait();
         }
     }
 }

@@ -1,7 +1,7 @@
 using InfluxData.Platform.Client.Option;
 using Platform.Common.Platform;
 
-namespace InfluxData.Platform.Client.Impl
+namespace InfluxData.Platform.Client.Client
 {
     public class PlatformClientFactory
     {
@@ -33,7 +33,7 @@ namespace InfluxData.Platform.Client.Impl
          */
         public static PlatformClient Create(string url,
                         string username,
-                        char[] password) 
+                        char[] password)
         {
             PlatformOptions options = PlatformOptions.Builder
                             .CreateNew()

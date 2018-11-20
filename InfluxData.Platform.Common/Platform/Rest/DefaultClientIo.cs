@@ -17,7 +17,7 @@ namespace Platform.Common.Platform.Rest
      */
     public class DefaultClientIo : IClientIo
     {
-        public readonly HttpClient HttpClient;
+        public HttpClient HttpClient;
 
         public DefaultClientIo()
         {

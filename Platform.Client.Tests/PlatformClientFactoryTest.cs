@@ -1,5 +1,5 @@
 using InfluxData.Platform.Client;
-using InfluxData.Platform.Client.Impl;
+using InfluxData.Platform.Client.Client;
 using NUnit.Framework;
 
 namespace Platform.Client.Tests

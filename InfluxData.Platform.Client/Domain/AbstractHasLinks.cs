@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.Linq;
+using Newtonsoft.Json;
 
 namespace InfluxData.Platform.Client.Domain
 {
@@ -7,6 +9,7 @@ namespace InfluxData.Platform.Client.Domain
         /**
          * The URIs of resources.
          */
+        [JsonProperty("links")]
         public Dictionary<string, string> Links { get; set; } = new Dictionary<string, string>();
     }
 }

@@ -24,4 +24,9 @@
       <ProjectReference Include="..\InfluxData.Platform.Common\InfluxData.Platform.Common.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="Microsoft.Net.Http.Headers" Version="2.2.0-preview3-35497" />
+      <PackageReference Include="System.Threading.Atomics" Version="1.0.141" />
+    </ItemGroup>
+
 </Project>

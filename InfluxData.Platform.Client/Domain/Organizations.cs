@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Text;
+using Newtonsoft.Json;
 
 namespace InfluxData.Platform.Client.Domain
 {
@@ -8,6 +9,7 @@ namespace InfluxData.Platform.Client.Domain
      */
     public class Organizations : AbstractHasLinks
     {
+        [JsonProperty("orgs")]
         public List<Organization> Orgs { get; set; } = new List<Organization>();
 
         public override string ToString()

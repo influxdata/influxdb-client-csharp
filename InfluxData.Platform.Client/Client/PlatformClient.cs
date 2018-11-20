@@ -1,0 +1,50 @@
+using System;
+using System.IO;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Threading.Tasks;
+using InfluxData.Platform.Client.Option;
+using Platform.Common.Platform;
+using Platform.Common.Platform.Rest;
+
+namespace InfluxData.Platform.Client.Client
+{
+    public class PlatformClient : AbstractClient
+    {
+        private AuthenticateDelegatingHandler _authenticateDelegatingHandler;
+
+        public PlatformClient(PlatformOptions options)
+        {
+            Arguments.CheckNotNull(options, "PlatformOptions");
+
+            _authenticateDelegatingHandler = new AuthenticateDelegatingHandler(options);
+
+            Client.HttpClient = new HttpClient(_authenticateDelegatingHandler);
+            Client.HttpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            Client.HttpClient.BaseAddress = new Uri(options.Url);
+            Client.HttpClient.Timeout = options.Timeout;
+        }
+
+        public OrganizationClient CreateOrganizationClient()
+        {
+            return new OrganizationClient(Client);
+        }
+
+        public async Task Close()
+        {
+            //
+            // signout
+            //
+            try
+            {
+                await _authenticateDelegatingHandler.Signout();
+            }
+            catch (IOException e)
+            {
+                Console.WriteLine("The signout exception");
+                Console.WriteLine(e);
+            }
+        }
+    }
+}

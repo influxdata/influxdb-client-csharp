@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
@@ -17,6 +18,11 @@ namespace Platform.Common.Platform.Rest
         public AbstractClient()
         {
             Client = new DefaultClientIo();
+        }
+
+        protected AbstractClient(DefaultClientIo client)
+        {
+            Client = client;
         }
 
         protected void CatchOrPropagateException(Exception exception,
