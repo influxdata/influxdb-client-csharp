@@ -49,6 +49,14 @@ namespace Platform.Common.Tests
 
             return "http://" + influxDbIp + ":" + influxDbPort;
         }
+        
+        protected string GetPlatformUrl()
+        {
+            string platformIp = GetOrDefaultEnvironmentVariable("PLATFORM_IP", "127.0.0.1");
+            string platformPort = GetOrDefaultEnvironmentVariable("PLATFORM_PORT", "9999");
+
+            return "http://" + platformIp + ":" + platformPort;
+        }
 
         private string GetOrDefaultEnvironmentVariable(string variable, string def)
         {

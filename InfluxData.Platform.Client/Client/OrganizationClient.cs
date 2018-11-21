@@ -1,8 +1,10 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using InfluxData.Platform.Client.Domain;
 using Newtonsoft.Json;
+using Platform.Common.Flux.Error;
 using Platform.Common.Platform;
 using Platform.Common.Platform.Rest;
 using Task = System.Threading.Tasks.Task;
@@ -111,7 +113,7 @@ namespace InfluxData.Platform.Client.Client
                             .ConfigureAwait(false);
 
             RaiseForInfluxError(responseHttp);
-            
+
             return JsonConvert.DeserializeObject<Organization>(
                             new StreamReader(responseHttp.ResponseContent).ReadToEnd());
         }
