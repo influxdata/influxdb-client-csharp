@@ -15,7 +15,7 @@ namespace InfluxData.Platform.Client.Domain
         public override string ToString()
         {
             return new StringBuilder(GetType().Name + "[")
-                            .Append("links=" + Links)
+                            .Append("links=" + LinksToString())
                             .Append(", orgs=" + Orgs)
                             .Append("]").ToString();
         }

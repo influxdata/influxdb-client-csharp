@@ -20,7 +20,7 @@ namespace InfluxData.Platform.Client.Domain
             return new StringBuilder(GetType().Name + "[")
                             .Append("id='" + Id + "'")
                             .Append(", name='" + Name + "'")
-                            .Append(", links=" + string.Join(";", Links.Select(x => x.Key + "=" + x.Value).ToArray()))
+                            .Append(", links=" + LinksToString())
                             .Append("]").ToString();
         }
     }

@@ -21,14 +21,33 @@ namespace Flux.Examples.Examples
 
         public static async Task Example(PlatformClient platform)
         {
-            /*Organization medicalGmbh = await platform.CreateOrganizationClient()
+            OrganizationClient organizationClient = platform.CreateOrganizationClient();
+            
+            Organization medicalGmbh = await organizationClient
                             .CreateOrganization("Medical Corp" + 
                                                 DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss.fff",
-                                                                CultureInfo.InvariantCulture));*/
+                                                                CultureInfo.InvariantCulture));
 
-            List<Organization> organizations = await platform.CreateOrganizationClient().FindOrganizations();
+            Organization org = await organizationClient.FindOrganizationById(medicalGmbh.Id);
 
-            organizations.ForEach(o => Console.Write(o.ToString()));
+            Console.WriteLine(org.ToString());
+            Console.WriteLine("------");
+            
+            foreach (var organization in await organizationClient.FindOrganizations())
+            {
+                Console.WriteLine();
+                Console.WriteLine(organization.ToString());
+            }
+            
+            Console.WriteLine("------");
+            
+            await organizationClient.DeleteOrganization(org);
+
+            foreach (var organization in await organizationClient.FindOrganizations())
+            {
+                Console.WriteLine();
+                Console.WriteLine(organization.ToString());
+            }
             
             await platform.Close();
         }
