@@ -18,11 +18,9 @@ namespace InfluxData.Platform.Client.Client
 {
     public class AuthenticateDelegatingHandler : DelegatingHandler
     {
-        private static List<string> _noAuthRoute = new List<string>{"/api/v2/signin", "/api/v2/signout"};
-
         private PlatformOptions _platformOptions;
 
-        private string _sessionToken;
+        private char[] _sessionToken;
         private AtomicBoolean _signout = new AtomicBoolean(false);
         
         public AuthenticateDelegatingHandler(PlatformOptions platformOptions)
@@ -47,7 +45,7 @@ namespace InfluxData.Platform.Client.Client
 
                 if (_sessionToken != null) 
                 {
-                    request.Headers.Add("Cookie", "session=" + _sessionToken);
+                    request.Headers.Add("Cookie", "session=" + String(_sessionToken));
                 }
             }
             
@@ -88,7 +86,7 @@ namespace InfluxData.Platform.Client.Client
                 if (authResponse.Headers.TryGetValues("Set-Cookie", out var values))
                 {
                     _sessionToken = SetCookieHeaderValue.ParseList(values.ToList())
-                                    .ToList().First(cookie => cookie.Name.ToString().Equals("session")).Value.ToString();
+                                    .ToList().First(cookie => cookie.Name.ToString().Equals("session")).Value.ToString().ToCharArray();
                 }
             }
         }
