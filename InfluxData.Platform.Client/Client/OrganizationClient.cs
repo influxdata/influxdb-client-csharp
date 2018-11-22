@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using InfluxData.Platform.Client.Domain;
 using Newtonsoft.Json;
@@ -112,7 +113,20 @@ namespace InfluxData.Platform.Client.Client
             var responseHttp = await Client.DoRequest(PlatformService.FindOrganizationById(organizationId))
                             .ConfigureAwait(false);
 
-            RaiseForInfluxError(responseHttp);
+            try
+            {
+                RaiseForInfluxError(responseHttp);
+            }
+            catch (InfluxException e)
+            {
+                if (e.Errors.Count > 0 && e.Errors[0].Equals("organization not found"))
+                {
+                    Console.WriteLine("Error is considered as null response: {0}", e);
+                    return null;
+                }
+                
+                throw;
+            }
 
             return JsonConvert.DeserializeObject<Organization>(
                             new StreamReader(responseHttp.ResponseContent).ReadToEnd());
