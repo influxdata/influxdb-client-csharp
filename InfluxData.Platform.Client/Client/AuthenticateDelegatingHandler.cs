@@ -1,13 +1,9 @@
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Net;
 using System.Net.Http;
-using System.Security;
+using System.Text;
 using System.Threading;
-using System.Threading.Atomics;
 using System.Threading.Tasks;
 using InfluxData.Platform.Client.Option;
 using Microsoft.Net.Http.Headers;
@@ -21,7 +17,7 @@ namespace InfluxData.Platform.Client.Client
         private PlatformOptions _platformOptions;
 
         private char[] _sessionToken;
-        private AtomicBoolean _signout = new AtomicBoolean(false);
+        private bool _signout;
         
         public AuthenticateDelegatingHandler(PlatformOptions platformOptions)
         {
@@ -67,7 +63,7 @@ namespace InfluxData.Platform.Client.Client
             if (_sessionToken == null)
             {
                 HttpRequestMessage authRequest = new HttpRequestMessage(HttpMethod.Post, _platformOptions.Url + "/api/v2/signin");
-                string encoded = Convert.ToBase64String(System.Text.Encoding.Default.GetBytes(_platformOptions.Username + ":" + String(_platformOptions.Password)));
+                string encoded = Convert.ToBase64String(Encoding.Default.GetBytes(_platformOptions.Username + ":" + String(_platformOptions.Password)));
                 authRequest.Headers.Add("Authorization", "Basic " + encoded);
 
                 HttpResponseMessage authResponse;
@@ -104,7 +100,7 @@ namespace InfluxData.Platform.Client.Client
                 return;
             }
 
-            _signout.CompareExchange(false, true);
+            _signout = true;
             _sessionToken = null;
 
             HttpRequestMessage authRequest = new HttpRequestMessage(new HttpMethod(HttpMethodKind.Post.Name()), _platformOptions.Url + "/api/v2/signout");

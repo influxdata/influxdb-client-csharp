@@ -1,13 +1,11 @@
 using System.Net.Http;
 using InfluxData.Platform.Client.Domain;
-using Microsoft.Win32.SafeHandles;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using Platform.Common;
 
 namespace InfluxData.Platform.Client.Client
 {
-    public class PlatformService
+    class PlatformService
     {
         //
         // Organizations
@@ -16,31 +14,30 @@ namespace InfluxData.Platform.Client.Client
         {
             return new HttpRequestMessage(new HttpMethod(HttpMethodKind.Post.Name()), "/api/v2/orgs")
             {
-                            Content = CreateBody(organization)
+                Content = CreateBody(organization)
             };
         }
 
         public static HttpRequestMessage DeleteOrganization(string organizationId)
         {
             return new HttpRequestMessage(new HttpMethod(HttpMethodKind.Delete.Name()),
-                            string.Format("/api/v2/orgs/{0}", organizationId));
+                $"/api/v2/orgs/{organizationId}");
         }
-        
+
         public static HttpRequestMessage UpdateOrganization(Organization organization)
         {
             return new HttpRequestMessage(new HttpMethod(HttpMethodKind.Patch.Name()),
-                            string.Format("/api/v2/orgs/{0}", organization.Id))
+                $"/api/v2/orgs/{organization.Id}")
             {
-                            Content = CreateBody(organization)
+                Content = CreateBody(organization)
             };
         }
-        
+
         public static HttpRequestMessage FindOrganizationById(string organizationId)
         {
-            return new HttpRequestMessage(new HttpMethod(HttpMethodKind.Get.Name()),
-                            string.Format("/api/v2/orgs/{0}", organizationId));
+            return new HttpRequestMessage(new HttpMethod(HttpMethodKind.Get.Name()), $"/api/v2/orgs/{organizationId}");
         }
-        
+
         public static HttpRequestMessage FindOrganizations()
         {
             return new HttpRequestMessage(new HttpMethod(HttpMethodKind.Get.Name()), "/api/v2/orgs");
@@ -48,11 +45,12 @@ namespace InfluxData.Platform.Client.Client
 
         private static StringContent CreateBody(object content)
         {
-            return new StringContent(JsonConvert.SerializeObject(content,
-                            Formatting.None, new JsonSerializerSettings
-                            {
-                                            NullValueHandling = NullValueHandling.Ignore
-                            }));
+            var serializer = new JsonSerializerSettings
+            {
+                NullValueHandling = NullValueHandling.Ignore
+            };
+
+            return new StringContent(JsonConvert.SerializeObject(content, Formatting.None, serializer));
         }
     }
 }

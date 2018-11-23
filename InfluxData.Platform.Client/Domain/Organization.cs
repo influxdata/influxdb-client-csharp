@@ -1,12 +1,11 @@
-using System.Linq;
 using System.Text;
 using Newtonsoft.Json;
 
 namespace InfluxData.Platform.Client.Domain
 {
-    /**
-     * Organization
-     */
+    /// <summary>
+    /// Organization
+    /// </summary>
     public class Organization : AbstractHasLinks
     {
         [JsonProperty("id")]

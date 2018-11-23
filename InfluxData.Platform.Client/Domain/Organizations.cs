@@ -4,9 +4,9 @@ using Newtonsoft.Json;
 
 namespace InfluxData.Platform.Client.Domain
 {
-    /**
-     * The wrapper for "/api/v2/orgs" response.
-     */
+    /// <summary>
+    /// The wrapper for "/api/v2/orgs" response. 
+    /// </summary>
     public class Organizations : AbstractHasLinks
     {
         [JsonProperty("orgs")]

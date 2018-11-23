@@ -1,12 +1,11 @@
 using System;
-using System.Net.Http;
 using Platform.Common.Platform;
 
 namespace InfluxData.Platform.Client.Option
 {
-    /**
-     * PlatformOptions are used to configure the InfluxData Platform connections.
-     */
+    /// <summary>
+    /// PlatformOptions are used to configure the InfluxData Platform connections.
+    /// </summary>
     public class PlatformOptions
     {
         public string Url { get; private set; }
@@ -17,8 +16,8 @@ namespace InfluxData.Platform.Client.Option
         public char[] Password { get; private set; }
 
         public TimeSpan Timeout { get; private set; }
-        
-        private PlatformOptions(Builder builder) 
+
+        private PlatformOptions(Builder builder)
         {
             Arguments.CheckNotNull(builder, "PlatformOptions.Builder");
 
@@ -30,25 +29,25 @@ namespace InfluxData.Platform.Client.Option
             Timeout = builder.TimeOut;
         }
 
-        /**
-         * The scheme uses to Authentication.
-         */
+        /// <summary>
+        /// The scheme uses to Authentication.
+        /// </summary>
         public enum EAuthScheme
         {
-            /**
-             * Basic auth.
-             */
+            /// <summary>
+            /// Basic auth.
+            /// </summary>
             Session,
 
-            /**
-             * Authentication token.
-             */
+            /// <summary>
+            /// Authentication token.
+            /// </summary>
             Token
         }
 
-        /**
-          * A builder for {@code PlatformOptions}.
-          */
+        /// <summary>
+        /// A builder for <see cref="PlatformOptions"/>.
+        /// </summary>
         public sealed class Builder
         {
             public string UrlString { get; private set; }
@@ -57,7 +56,7 @@ namespace InfluxData.Platform.Client.Option
             public char[] Token { get; private set; }
             public string Username { get; private set; }
             public char[] Password { get; private set; }
-            
+
             public TimeSpan TimeOut { get; private set; }
 
             public static Builder CreateNew()
@@ -65,45 +64,42 @@ namespace InfluxData.Platform.Client.Option
                 return new Builder();
             }
 
-            /**
-             * Set the url to connect to Platform.
-             *
-             * @param url the url to connect to Platform. It must be defined.
-             * @return {@code this}
-             */
+            /// <summary>
+            /// Set the url to connect to Platform.
+            /// </summary>
+            /// <param name="url">the url to connect to Platform. It must be defined.</param>
+            /// <returns><see cref="Builder"/></returns>
             public Builder Url(string url)
             {
                 Arguments.CheckNonEmptyString(url, "url");
-                
+
                 UrlString = url;
-                
-                return this;
-            }
-            
-            /**
-             * Set the Timeout to connect to Platform.
-             *
-             * @param timeout is the timeout to connect to Platform. It must be defined.
-             * @return {@code this}
-             */
-            public Builder Timeout(TimeSpan timeout)
-            {
-                Arguments.CheckNotNull(timeout, "timeout");
-                
-                TimeOut = timeout;
-                
+
                 return this;
             }
 
-            /**
-             * Setup authorization by {@link AuthScheme#SESSION}.
-             *
-             * @param username the username to use in the basic auth
-             * @param password the password to use in the basic auth
-             * @return {@link PlatformOptions}
-             */
-            public PlatformOptions.Builder Authenticate(string username,                      
-                            char[] password) 
+            /// <summary>
+            /// Set the Timeout to connect to Platform.
+            /// </summary>
+            /// <param name="timeout">the timeout to connect to Platform. It must be defined.</param>
+            /// <returns><see cref="Builder"/></returns>
+            public Builder Timeout(TimeSpan timeout)
+            {
+                Arguments.CheckNotNull(timeout, "timeout");
+
+                TimeOut = timeout;
+
+                return this;
+            }
+
+            /// <summary>
+            /// Setup authorization by <see cref="EAuthScheme.Session"/>.
+            /// </summary>
+            /// <param name="username">the username to use in the basic auth</param>
+            /// <param name="password">the password to use in the basic auth</param>
+            /// <returns><see cref="Builder"/></returns>
+            public Builder Authenticate(string username,
+                char[] password)
             {
                 Arguments.CheckNonEmptyString(username, "username");
                 Arguments.CheckNotNull(password, "password");
@@ -115,13 +111,12 @@ namespace InfluxData.Platform.Client.Option
                 return this;
             }
 
-            /**
-             * Setup authorization by {@link AuthScheme#TOKEN}.
-             *
-             * @param token the token to use for the authorization
-             * @return {@link PlatformOptions}
-             */
-            public PlatformOptions.Builder AuthenticateToken(char[] token)
+            /// <summary>
+            /// Setup authorization by <see cref="EAuthScheme.Token"/>.
+            /// </summary>
+            /// <param name="token">the token to use for the authorization</param>
+            /// <returns><see cref="Builder"/></returns>
+            public Builder AuthenticateToken(char[] token)
             {
                 Arguments.CheckNotNull(token, "token");
 
@@ -131,11 +126,11 @@ namespace InfluxData.Platform.Client.Option
                 return this;
             }
 
-            /**
-             * Build an instance of PlatformOptions.
-             *
-             * @return {@link PlatformOptions}
-             */
+            /// <summary>
+            /// Build an instance of PlatformOptions.
+            /// </summary>
+            /// <returns><see cref="PlatformOptions"/></returns>
+            /// <exception cref="InvalidOperationException">If url is not defined.</exception>
             public PlatformOptions Build()
             {
                 if (string.IsNullOrEmpty(UrlString))

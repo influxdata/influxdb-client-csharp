@@ -11,7 +11,7 @@ namespace InfluxData.Platform.Client.Client
 {
     public class PlatformClient : AbstractClient
     {
-        private AuthenticateDelegatingHandler _authenticateDelegatingHandler;
+        private readonly AuthenticateDelegatingHandler _authenticateDelegatingHandler;
 
         public PlatformClient(PlatformOptions options)
         {
