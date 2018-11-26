@@ -1,4 +1,3 @@
-using InfluxData.Platform.Client;
 using InfluxData.Platform.Client.Client;
 using NUnit.Framework;
 

@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using InfluxData.Platform.Client.Client;
 using InfluxData.Platform.Client.Domain;
 using NUnit.Framework;

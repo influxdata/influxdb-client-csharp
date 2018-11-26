@@ -1,11 +1,6 @@
-using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 using InfluxData.Platform.Client.Domain;
-using Newtonsoft.Json;
-using Platform.Common.Flux.Error;
 using Platform.Common.Platform;
 using Platform.Common.Platform.Rest;
 using Task = System.Threading.Tasks.Task;
@@ -14,85 +9,71 @@ namespace InfluxData.Platform.Client.Client
 {
     public class OrganizationClient : AbstractClient
     {
-        public OrganizationClient(DefaultClientIo client) : base (client)
+        protected internal OrganizationClient(DefaultClientIo client) : base(client)
         {
-
         }
-        
-        /**
-         * Creates a new organization and sets {@link Organization#id} with the new identifier.
-         *
-         * @param name name of the organization
-         * @return Organization created
-         */
-        public async Task<Organization> CreateOrganization(string name) 
+
+        /// <summary>
+        /// Creates a new organization and sets <see cref="Organization.Id"/> with the new identifier.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns>Created organization</returns>
+        public async Task<Organization> CreateOrganization(string name)
         {
             Arguments.CheckNonEmptyString(name, "Organization name");
 
-            Organization organization = new Organization();
-            organization.Name = name;
+            Organization organization = new Organization {Name = name};
 
             return await CreateOrganization(organization);
         }
-        
-        /**
-         * Creates a new organization and sets {@link Organization#id} with the new identifier.
-         *
-         * @param organization the organization to create
-         * @return Organization created
-         */
-        public async Task<Organization> CreateOrganization(Organization organization) 
+
+        /// <summary>
+        /// Creates a new organization and sets <see cref="Organization.Id"/> with the new identifier.
+        /// </summary>
+        /// <param name="organization">the organization to create</param>
+        /// <returns>created organization</returns>
+        public async Task<Organization> CreateOrganization(Organization organization)
         {
             Arguments.CheckNotNull(organization, "Organization");
-            
-            var responseHttp = await Client.DoRequest(PlatformService.CreateOrganization(organization))
-                            .ConfigureAwait(false);
 
-            RaiseForInfluxError(responseHttp);
+            var request = await Post(organization, "/api/v2/orgs");
 
-            return JsonConvert.DeserializeObject<Organization>(
-                            new StreamReader(responseHttp.ResponseContent).ReadToEnd());
+            return Call<Organization>(request);
         }
-        
-        /**
-         * Update a organization.
-         *
-         * @param organization organization update to apply
-         * @return organization updated
-         */
+
+        /// <summary>
+        /// Update a organization.
+        /// </summary>
+        /// <param name="organization">organization update to apply</param>
+        /// <returns>updated organization</returns>
         public async Task<Organization> UpdateOrganization(Organization organization)
         {
             Arguments.CheckNotNull(organization, "Organization");
-            
-            var responseHttp = await Client.DoRequest(PlatformService.UpdateOrganization(organization))
-                            .ConfigureAwait(false);
 
-            RaiseForInfluxError(responseHttp);
+            var request = await Patch(organization, $"/api/v2/orgs/{organization.Id}");
 
-            return JsonConvert.DeserializeObject<Organization>(
-                            new StreamReader(responseHttp.ResponseContent).ReadToEnd());  
+            return Call<Organization>(request);
         }
-        
-        /**
-         * Delete a organization.
-         *
-         * @param organizationID ID of organization to delete
-         */
+
+        /// <summary>
+        /// Delete a organization.
+        /// </summary>
+        /// <param name="organizationId">ID of organization to delete</param>
+        /// <returns></returns>
         public async Task DeleteOrganization(string organizationId)
         {
             Arguments.CheckNotNull(organizationId, "Organization ID");
 
-            var responseHttp = await Client.DoRequest(PlatformService.DeleteOrganization(organizationId))
-                            .ConfigureAwait(false);
+            var request = await Delete($"/api/v2/orgs/{organizationId}");
 
-            RaiseForInfluxError(responseHttp);
+            RaiseForInfluxError(request);
         }
-        
-        /**
-         * Delete a organization.
-         *
-         * @param organization organization to delete
-         */
+
+        /// <summary>
+        /// Delete a organization.
+        /// </summary>
+        /// <param name="organization">organization to delete</param>
+        /// <returns></returns>
         public async Task DeleteOrganization(Organization organization)
         {
             Arguments.CheckNotNull(organization, "Organization is required");
@@ -100,53 +81,30 @@ namespace InfluxData.Platform.Client.Client
             await DeleteOrganization(organization.Id);
         }
 
-        /**
-         * Retrieve a organization.
-         *
-         * @param organizationID ID of organization to get
-         * @return organization details
-         */
+        /// <summary>
+        /// Retrieve a organization.
+        /// </summary>
+        /// <param name="organizationId">ID of organization to get</param>
+        /// <returns>organization details</returns>
         public async Task<Organization> FindOrganizationById(string organizationId)
         {
             Arguments.CheckNonEmptyString(organizationId, "Organization ID");
 
-            var responseHttp = await Client.DoRequest(PlatformService.FindOrganizationById(organizationId))
-                            .ConfigureAwait(false);
+            var request = await Get($"/api/v2/orgs/{organizationId}");
 
-            try
-            {
-                RaiseForInfluxError(responseHttp);
-            }
-            catch (InfluxException e)
-            {
-                if (e.Errors.Count > 0 && e.Errors[0].Equals("organization not found"))
-                {
-                    Console.WriteLine("Error is considered as null response: {0}", e);
-                    return null;
-                }
-                
-                throw;
-            }
-
-            return JsonConvert.DeserializeObject<Organization>(
-                            new StreamReader(responseHttp.ResponseContent).ReadToEnd());
+            return Call<Organization>(request, "organization not found");
         }
 
-        /**
-         * List all organizations.
-         *
-         * @return List all organizations
-         */
-        
-        public async Task<List<Organization>> FindOrganizations() 
+        /// <summary>
+        /// List all organizations.
+        /// </summary>
+        /// <returns>List all organizations</returns>
+        public async Task<List<Organization>> FindOrganizations()
         {
-            var responseHttp = await Client.DoRequest(PlatformService.FindOrganizations())
-                            .ConfigureAwait(false);
-            
-            RaiseForInfluxError(responseHttp);
+            var request = await Get("/api/v2/orgs");
 
-            Organizations organizations = JsonConvert.DeserializeObject<Organizations>(new StreamReader(responseHttp.ResponseContent).ReadToEnd());
-            
+            var organizations = Call<Organizations>(request);
+
             return organizations?.Orgs;
         }
     }

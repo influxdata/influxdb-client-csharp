@@ -12,7 +12,7 @@ using Platform.Common.Platform;
 
 namespace InfluxData.Platform.Client.Client
 {
-    public class AuthenticateDelegatingHandler : DelegatingHandler
+    class AuthenticateDelegatingHandler : DelegatingHandler
     {
         private PlatformOptions _platformOptions;
 
@@ -52,7 +52,7 @@ namespace InfluxData.Platform.Client.Client
         /**
          * Init the Session token if is {@link org.influxdata.platform.option.PlatformOptions.AuthScheme#SESSION} used.
          */
-        public async Task InitToken(CancellationToken cancellationToken) 
+        private async Task InitToken(CancellationToken cancellationToken) 
         {
             if (!PlatformOptions.EAuthScheme.Session.Equals(_platformOptions.AuthScheme) || _signout) 
             {
@@ -93,7 +93,7 @@ namespace InfluxData.Platform.Client.Client
          * @throws IOException if the request could not be executed due to cancellation, a connectivity problem or timeout
          * @see Call#execute()
          */
-        public async Task Signout()
+        protected internal async Task Signout()
         {
             if (!PlatformOptions.EAuthScheme.Session.Equals(_platformOptions.AuthScheme) || _signout)
             {

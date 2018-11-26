@@ -13,7 +13,7 @@ namespace InfluxData.Platform.Client.Client
     {
         private readonly AuthenticateDelegatingHandler _authenticateDelegatingHandler;
 
-        public PlatformClient(PlatformOptions options)
+        protected internal PlatformClient(PlatformOptions options)
         {
             Arguments.CheckNotNull(options, "PlatformOptions");
 
@@ -26,6 +26,10 @@ namespace InfluxData.Platform.Client.Client
             Client.HttpClient.Timeout = options.Timeout;
         }
 
+        /// <summary>
+        /// Get the <see cref="Domain.Organization"/> client.
+        /// </summary>
+        /// <returns>the new client instance for Organization API</returns>
         public OrganizationClient CreateOrganizationClient()
         {
             return new OrganizationClient(Client);

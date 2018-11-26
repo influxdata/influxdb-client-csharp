@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
-using Newtonsoft.Json.Linq;
+using System.Runtime.CompilerServices;
+using Newtonsoft.Json;
 using Platform.Common.Flux.Domain;
 using Platform.Common.Flux.Error;
 using Platform.Common.Flux.Parser;
@@ -13,9 +13,9 @@ namespace Platform.Common.Platform.Rest
 {
     public class AbstractClient
     {
-        protected readonly DefaultClientIo Client;      
+        protected readonly DefaultClientIo Client;
 
-        public AbstractClient()
+        protected AbstractClient()
         {
             Client = new DefaultClientIo();
         }
@@ -23,6 +23,50 @@ namespace Platform.Common.Platform.Rest
         protected AbstractClient(DefaultClientIo client)
         {
             Client = client;
+        }
+
+        protected ConfiguredTaskAwaitable<RequestResult> Post(object body, string path)
+        {
+            var request = new HttpRequestMessage(new HttpMethod(HttpMethodKind.Post.Name()), path)
+            {
+                Content = CreateBody(body)
+            };
+
+            return Client.DoRequest(request).ConfigureAwait(false);
+        }
+        protected ConfiguredTaskAwaitable<RequestResult> Patch(object body, string path)
+        {
+            var request = new HttpRequestMessage(new HttpMethod(HttpMethodKind.Patch.Name()), path)
+            {
+                Content = CreateBody(body)
+            };
+
+            return Client.DoRequest(request).ConfigureAwait(false);
+        }
+        
+        protected ConfiguredTaskAwaitable<RequestResult> Delete(string path)
+        {
+            var request = new HttpRequestMessage(new HttpMethod(HttpMethodKind.Delete.Name()), path);
+
+            return Client.DoRequest(request).ConfigureAwait(false);
+        }
+        
+        protected ConfiguredTaskAwaitable<RequestResult> Get(string path)
+        {
+            var request = new HttpRequestMessage(new HttpMethod(HttpMethodKind.Get.Name()), path);
+
+            return Client.DoRequest(request).ConfigureAwait(false);
+        }
+        
+        protected T Call<T>(RequestResult result, string nullError = null)
+        {
+            Arguments.CheckNotNull(result, "RequestResult");
+            
+            RaiseForInfluxError(result, nullError);
+
+            var readToEnd = new StreamReader(result.ResponseContent).ReadToEnd();
+
+            return JsonConvert.DeserializeObject<T>(readToEnd);
         }
 
         protected void CatchOrPropagateException(Exception exception,
@@ -44,15 +88,15 @@ namespace Platform.Common.Platform.Rest
                 onError(exception);
             }
         }
-        
-        protected bool IsCloseException(Exception exception) 
+
+        private bool IsCloseException(Exception exception) 
         {
             Arguments.CheckNotNull(exception, "exception");
 
             return exception is EndOfStreamException;
         }
-        
-        public class FluxResponseConsumerRecord : FluxCsvParser.IFluxResponseConsumer
+
+        protected class FluxResponseConsumerRecord : FluxCsvParser.IFluxResponseConsumer
         {
             private readonly Action<ICancellable, FluxRecord> _onNext;
 
@@ -82,7 +126,7 @@ namespace Platform.Common.Platform.Rest
             }
         }
 
-        public static void RaiseForInfluxError(RequestResult resultRequest)
+        protected static void RaiseForInfluxError(RequestResult resultRequest, string nullError = null)
         {
             var statusCode = resultRequest.StatusCode;
 
@@ -93,6 +137,13 @@ namespace Platform.Common.Platform.Rest
 
             var wrapper = new ErrorsWrapper(InfluxException.GetErrorMessage(resultRequest).ToList().AsReadOnly());
             
+            if (nullError != null && wrapper.Error.Count > 0 && wrapper.Error[0].Equals(nullError))
+            {
+                Console.WriteLine("Error is considered as null response: {0}", wrapper);
+                
+                return;
+            }
+            
             var response = new QueryErrorResponse(statusCode, wrapper.Error);
 
             if (wrapper.Error != null)
@@ -101,6 +152,16 @@ namespace Platform.Common.Platform.Rest
             }
 
             throw new HttpException(response);
+        }
+        
+        private StringContent CreateBody(object content)
+        {
+            var serializer = new JsonSerializerSettings
+            {
+                NullValueHandling = NullValueHandling.Ignore
+            };
+
+            return new StringContent(JsonConvert.SerializeObject(content, Formatting.None, serializer));
         }
     }
 }
