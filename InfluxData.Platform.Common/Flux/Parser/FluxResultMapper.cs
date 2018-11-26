@@ -50,7 +50,7 @@ namespace Platform.Common.Flux.Parser
 
                     // copy record to case insensitive dictionary
                     Dictionary<string, object> recordValues =
-                                    new Dictionary<string, object>(StringComparer.InvariantCultureIgnoreCase);
+                        new Dictionary<string, object>(StringComparer.InvariantCultureIgnoreCase);
 
                     foreach (KeyValuePair<string, object> entry in record.Values)
                     {
@@ -80,8 +80,7 @@ namespace Platform.Common.Flux.Parser
             }
             catch (Exception e)
             {
-                throw new InfluxException(new QueryErrorResponse(0,
-                                new List<string>() {e.Message}.AsReadOnly()));
+                throw new InfluxException(new QueryErrorResponse(0, e.Message));
             }
         }
 
@@ -129,12 +128,12 @@ namespace Platform.Common.Flux.Parser
                 }
 
                 property.SetValue(poco, value);
-
             }
             catch (InvalidCastException)
             {
-                throw new InfluxException($"Class '{poco.GetType().Name}' field '{property.Name}' was defined with a different field type and caused a InvalidCastException. " +
-                                $"The correct type is '{value.GetType().Name}' (current field value: '{value}').");
+                throw new InfluxException(
+                    $"Class '{poco.GetType().Name}' field '{property.Name}' was defined with a different field type and caused a InvalidCastException. " +
+                    $"The correct type is '{value.GetType().Name}' (current field value: '{value}').");
             }
         }
 
@@ -157,7 +156,7 @@ namespace Platform.Common.Flux.Parser
 
             return (long) value;
         }
-        
+
         private int ToIntValue(object value)
         {
             if (value.GetType().IsAssignableFrom(typeof(int)))
@@ -169,4 +168,3 @@ namespace Platform.Common.Flux.Parser
         }
     }
 }
-

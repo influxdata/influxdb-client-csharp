@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Threading;
 using System.Threading.Tasks;
-using Flux.Client.Tests;
 using NUnit.Framework;
 using Platform.Common.Flux.Domain;
 using Platform.Common.Flux.Error;
@@ -69,8 +68,7 @@ namespace Flux.Client.Tests
             }
             catch (InfluxException e)
             {
-                Assert.That(e.Errors.Count == 1);
-                Assert.That(e.Errors[0].Contains("Flux query is not valid"));
+                Assert.That(e.Error.Equals("Flux query is not valid"));
             }
         }
 
@@ -94,8 +92,7 @@ namespace Flux.Client.Tests
             }
             catch (FluxQueryException e)
             {
-                Assert.That(e.Errors.Count == 1);
-                Assert.That(e.Errors[0].Contains("failed to create physical plan: invalid time bounds from procedure from: bounds contain zero time"));
+                Assert.That(e.Error.Equals("failed to create physical plan: invalid time bounds from procedure from: bounds contain zero time"));
                 Assert.AreEqual(e.Reference, 897);
             }
         }
@@ -120,8 +117,7 @@ namespace Flux.Client.Tests
             }
             catch (InfluxException e)
             {
-                Assert.That(e.Errors.Count == 1);
-                Assert.That(e.Errors[0].Contains("failed to create physical plan: invalid time bounds from procedure from: bounds contain zero time"));
+                Assert.That(e.Error.Equals("failed to create physical plan: invalid time bounds from procedure from: bounds contain zero time"));
             }
         }
 

@@ -1,5 +1,4 @@
 using System.Threading.Tasks;
-using Flux.Client.Tests;
 using NUnit.Framework;
 using Platform.Common.Flux.Error;
 using WireMock.RequestBuilders;
@@ -41,7 +40,7 @@ namespace Flux.Client.Tests
             }
             catch (InfluxException e)
             {
-                Assert.That(e.Errors.Count == 1);
+                Assert.IsNotEmpty(e.Error);
             }
 
         }

@@ -377,8 +377,7 @@ namespace Flux.Client.Tests
             }
             catch (FluxQueryException e)
             {
-                Assert.That(e.Errors.Count == 1);
-                Assert.That(e.Errors[0].Equals(message));
+                Assert.That(e.Error.Equals(message));
                 Assert.That(e.Reference.Equals(897));
             }
         }
@@ -401,8 +400,7 @@ namespace Flux.Client.Tests
             }
             catch (FluxQueryException e)
             {
-                Assert.That(e.Errors.Count == 1);
-                Assert.That(e.Errors[0].Equals(message));
+                Assert.That(e.Error.Equals(message));
                 Assert.That(e.Reference.Equals(0));
             }
         }
@@ -497,8 +495,7 @@ namespace Flux.Client.Tests
             }
             catch (FluxCsvParserException e)
             {
-                Assert.That(e.Errors.Count == 1);
-                Assert.That(e.Errors[0].Equals("Unable to parse CSV response. FluxTable definition was not found."));
+                Assert.That(e.Error.Equals("Unable to parse CSV response. FluxTable definition was not found."));
             }
         }
 

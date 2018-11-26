@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using Flux.Client.Tests;
 using NUnit.Framework;
 using Platform.Common.Flux.Error;
 using WireMock.RequestBuilders;
@@ -36,8 +35,7 @@ namespace Flux.Client.Tests
             }
             catch (InfluxException e)
             {
-                Assert.That(e.Errors.Count == 1);
-                Assert.That(e.Errors[0].Contains("Flux query is not valid"));
+                Assert.That(e.Error.Equals("Flux query is not valid"));
             }
         }
 

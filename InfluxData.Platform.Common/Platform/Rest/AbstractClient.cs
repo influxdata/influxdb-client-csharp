@@ -1,10 +1,9 @@
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net.Http;
 using System.Runtime.CompilerServices;
 using Newtonsoft.Json;
+using NodaTime.Serialization.JsonNet;
 using Platform.Common.Flux.Domain;
 using Platform.Common.Flux.Error;
 using Platform.Common.Flux.Parser;
@@ -61,12 +60,18 @@ namespace Platform.Common.Platform.Rest
         protected T Call<T>(RequestResult result, string nullError = null)
         {
             Arguments.CheckNotNull(result, "RequestResult");
-            
-            RaiseForInfluxError(result, nullError);
+
+            var nullResponse = RaiseForInfluxError(result, nullError);
+            if (nullResponse)
+            {
+                return default(T);
+            }
 
             var readToEnd = new StreamReader(result.ResponseContent).ReadToEnd();
 
-            return JsonConvert.DeserializeObject<T>(readToEnd);
+            JsonConverter[] converters = {NodaConverters.InstantConverter};
+
+            return JsonConvert.DeserializeObject<T>(readToEnd, converters);
         }
 
         protected void CatchOrPropagateException(Exception exception,
@@ -116,37 +121,27 @@ namespace Platform.Common.Platform.Rest
             }
         }
 
-        private struct ErrorsWrapper
-        {
-            public readonly IReadOnlyList<string> Error;
-
-            public ErrorsWrapper(IReadOnlyList<string> errors)
-            {
-                Error = errors;
-            }
-        }
-
-        protected static void RaiseForInfluxError(RequestResult resultRequest, string nullError = null)
+        protected static bool RaiseForInfluxError(RequestResult resultRequest, string nullError = null)
         {
             var statusCode = resultRequest.StatusCode;
 
             if (statusCode >= 200 && statusCode < 300)
             {
-                return;
+                return false;
             }
 
-            var wrapper = new ErrorsWrapper(InfluxException.GetErrorMessage(resultRequest).ToList().AsReadOnly());
+            var errorMessage = InfluxException.GetErrorMessage(resultRequest);
             
-            if (nullError != null && wrapper.Error.Count > 0 && wrapper.Error[0].Equals(nullError))
+            if (nullError != null && errorMessage != null && errorMessage.Equals(nullError))
             {
-                Console.WriteLine("Error is considered as null response: {0}", wrapper);
+                Console.WriteLine("Error is considered as null response: {0}", errorMessage);
                 
-                return;
+                return true;
             }
-            
-            var response = new QueryErrorResponse(statusCode, wrapper.Error);
 
-            if (wrapper.Error != null)
+            var response = new QueryErrorResponse(statusCode, errorMessage);
+            
+            if (errorMessage != null)
             {
                 throw new InfluxException(response);
             }

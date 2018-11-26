@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 namespace Platform.Common.Flux.Error
 {
     /**
@@ -7,10 +5,8 @@ namespace Platform.Common.Flux.Error
      */
     public class FluxCsvParserException : InfluxException
     {
-        public FluxCsvParserException(string message) : base(new QueryErrorResponse(0,
-                        new List<string>() {message}.AsReadOnly()))
+        public FluxCsvParserException(string message) : base(new QueryErrorResponse(0, message))
         {
-
         }
     }
 }

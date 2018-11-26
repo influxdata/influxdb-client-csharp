@@ -35,6 +35,15 @@ namespace InfluxData.Platform.Client.Client
             return new OrganizationClient(Client);
         }
 
+        /// <summary>
+        /// Get the <see cref="Domain.User"/> client.
+        /// </summary>
+        /// <returns>the new client instance for User API</returns>
+        public UserClient CreateUserClient()
+        {
+            return new UserClient(Client);
+        }
+
         public async Task Close()
         {
             //

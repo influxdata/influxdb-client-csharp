@@ -63,8 +63,8 @@ namespace InfluxData.Platform.Client.Client
             if (_sessionToken == null)
             {
                 HttpRequestMessage authRequest = new HttpRequestMessage(HttpMethod.Post, _platformOptions.Url + "/api/v2/signin");
-                string encoded = Convert.ToBase64String(Encoding.Default.GetBytes(_platformOptions.Username + ":" + String(_platformOptions.Password)));
-                authRequest.Headers.Add("Authorization", "Basic " + encoded);
+                string header = AuthorizationHeader(_platformOptions.Username, String(_platformOptions.Password));
+                authRequest.Headers.Add("Authorization", header);
 
                 HttpResponseMessage authResponse;
                 
@@ -86,7 +86,12 @@ namespace InfluxData.Platform.Client.Client
                 }
             }
         }
-        
+
+        protected internal static string AuthorizationHeader(string username, string password)
+        {
+            return "Basic " + Convert.ToBase64String(Encoding.Default.GetBytes(username + ":" + password));
+        }
+
         /**
          * Expire the current session.
          *

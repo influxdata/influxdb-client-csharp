@@ -4,9 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Flux.Client;
 using Flux.Client.Options;
-using Flux.Client.Tests;
 using NodaTime;
 using NUnit.Framework;
 using Platform.Common.Flux.Domain;
@@ -166,9 +164,8 @@ namespace Flux.Client.Tests
             }
             catch (InfluxException e)
             {
-                Assert.That(e.Errors.Count == 1);
-                Assert.That(e.Errors[0].Contains("failed to create physical plan:"));
-                Assert.That(e.Errors[0].Contains("Add a 'range' call to bound the query"));
+                Assert.That(e.Error.Contains("failed to create physical plan:"));
+                Assert.That(e.Error.Contains("Add a 'range' call to bound the query"));
             }
         }
         
@@ -183,9 +180,8 @@ namespace Flux.Client.Tests
             }
             catch (InfluxException e)
             {
-                Assert.That(e.Errors.Count == 1);
-                Assert.That(e.Errors[0].Contains("failed to create physical plan:"));
-                Assert.That(e.Errors[0].Contains("Add a 'range' call to bound the query"));
+                Assert.That(e.Error.Contains("failed to create physical plan:"));
+                Assert.That(e.Error.Contains("Add a 'range' call to bound the query"));
             }
         }
 

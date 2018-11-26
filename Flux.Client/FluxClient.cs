@@ -405,8 +405,7 @@ namespace Flux.Client
             }
             catch (Exception e)
             {
-                throw new InfluxException(new QueryErrorResponse(0, 
-                                new List<string>(){e.Message}.AsReadOnly()));
+                throw new InfluxException(new QueryErrorResponse(0, e.Message));
             }
         }
         
