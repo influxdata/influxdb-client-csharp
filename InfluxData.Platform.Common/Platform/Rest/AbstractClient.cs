@@ -69,7 +69,8 @@ namespace Platform.Common.Platform.Rest
 
             var readToEnd = new StreamReader(result.ResponseContent).ReadToEnd();
 
-            JsonConverter[] converters = {NodaConverters.InstantConverter};
+            JsonConverter[] converters = {NodaConverters.InstantConverter, 
+                new Newtonsoft.Json.Converters.StringEnumConverter()};
 
             return JsonConvert.DeserializeObject<T>(readToEnd, converters);
         }

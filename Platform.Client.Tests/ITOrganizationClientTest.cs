@@ -9,11 +9,13 @@ namespace Platform.Client.Tests
     public class ItOrganizationClientTest : AbstractItClientTest
     {
         private OrganizationClient _organizationClient;
+        private UserClient _userClient;
         
         [SetUp]
         public new void SetUp()
         {
             _organizationClient = PlatformClient.CreateOrganizationClient();
+            _userClient = PlatformClient.CreateUserClient();
         }
         
         [Test]
@@ -118,6 +120,36 @@ namespace Platform.Client.Tests
             Assert.AreEqual("/api/v2/tasks?org=Master Pb", links["tasks"]);
             Assert.AreEqual("/api/v2/orgs/" + updatedOrganization.Id + "/members", links["members"]);
             Assert.AreEqual("/api/v2/orgs/" + updatedOrganization.Id + "/log", links["log"]);
+        }
+        
+        [Test]
+        public async Task Member() {
+
+            Organization organization = await _organizationClient.CreateOrganization(GenerateName("Constant Pro"));
+
+            List<UserResourceMapping> members =  await _organizationClient.GetMembers(organization);
+            Assert.AreEqual(0, members.Count);
+
+            User user = await _userClient.CreateUser(GenerateName("Luke Health"));
+
+            UserResourceMapping userResourceMapping = await _organizationClient.AddMember(user, organization);
+            Assert.IsNotNull(userResourceMapping);
+            Assert.AreEqual(userResourceMapping.ResourceId, organization.Id);
+            Assert.AreEqual(userResourceMapping.ResourceType, ResourceType.OrgResourceType);
+            Assert.AreEqual(userResourceMapping.UserId, user.Id);
+            Assert.AreEqual(userResourceMapping.UserType, UserResourceMapping.MemberType.Member);
+
+            members = await _organizationClient.GetMembers(organization);
+            Assert.AreEqual(1, members.Count);
+            Assert.AreEqual(members[0].ResourceId, organization.Id);
+            Assert.AreEqual(members[0].ResourceType, ResourceType.OrgResourceType);
+            Assert.AreEqual(members[0].UserId, user.Id);
+            Assert.AreEqual(members[0].UserType, UserResourceMapping.MemberType.Member);
+
+            await _organizationClient.DeleteMember(user, organization);
+
+            members = await _organizationClient.GetMembers(organization);
+            Assert.AreEqual(0, members.Count);
         }
     }
 }

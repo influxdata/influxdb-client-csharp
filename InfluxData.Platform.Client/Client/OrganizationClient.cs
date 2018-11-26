@@ -107,5 +107,95 @@ namespace InfluxData.Platform.Client.Client
 
             return organizations?.Orgs;
         }
+
+        /// <summary>
+        /// List all members of an organization.
+        /// </summary>
+        /// <param name="organization">organization of the members</param>
+        /// <returns>the List all members of an organization</returns>
+        public async Task<List<UserResourceMapping>> GetMembers(Organization organization)
+        {
+            Arguments.CheckNotNull(organization, "Organization is required");
+
+            return await GetMembers(organization.Id);
+        }
+
+        /// <summary>
+        /// List all members of an organization.
+        /// </summary>
+        /// <param name="organizationId">ID of organization to get members</param>
+        /// <returns>the List all members of an organization</returns>
+        public async Task<List<UserResourceMapping>> GetMembers(string organizationId)
+        {
+            Arguments.CheckNonEmptyString(organizationId, "Organization ID");
+
+            var request = await Get($"/api/v2/orgs/{organizationId}/members");
+
+            var response = Call<UserResourcesResponse>(request);
+
+            return response?.UserResourceMappings;
+        }
+
+        /// <summary>
+        /// Add organization member.
+        /// </summary>
+        /// <param name="member">the member of an organization</param>
+        /// <param name="organization">the organization of a member</param>
+        /// <returns>created mapping</returns>
+        public async Task<UserResourceMapping> AddMember(User member, Organization organization)
+        {
+            Arguments.CheckNotNull(organization, "organization");
+            Arguments.CheckNotNull(member, "member");
+
+            return await AddMember(member.Id, organization.Id);
+        }
+
+        /// <summary>
+        /// Add organization member.
+        /// </summary>
+        /// <param name="memberId">the ID of a member</param>
+        /// <param name="organizationId">the ID of an organization</param>
+        /// <returns>created mapping</returns>
+        public async Task<UserResourceMapping> AddMember(string memberId, string organizationId)
+        {
+            Arguments.CheckNonEmptyString(organizationId, "Organization ID");
+            Arguments.CheckNonEmptyString(memberId, "Member ID");
+
+            User user = new User {Id = memberId};
+
+            var request = await Post(user, $"/api/v2/orgs/{organizationId}/members");
+
+            return Call<UserResourceMapping>(request);
+        }
+
+        /// <summary>
+        /// Removes a member from an organization.
+        /// </summary>
+        /// <param name="member">the member of an organization</param>
+        /// <param name="organization">the organization of a member</param>
+        /// <returns>async task</returns>
+        public async Task DeleteMember(User member, Organization organization)
+        {
+            Arguments.CheckNotNull(organization, "organization");
+            Arguments.CheckNotNull(member, "member");
+
+            await DeleteMember(member.Id, organization.Id);
+        }
+
+        /// <summary>
+        /// Removes a member from an organization.
+        /// </summary>
+        /// <param name="memberId">the ID of a member</param>
+        /// <param name="organizationId">the ID of an organization</param>
+        /// <returns>async tasy</returns>
+        public async Task DeleteMember(string memberId, string organizationId)
+        {
+            Arguments.CheckNonEmptyString(organizationId, "Organization ID");
+            Arguments.CheckNonEmptyString(memberId, "Member ID");
+            
+            var request = await Delete($"/api/v2/orgs/{organizationId}/members/{memberId}");
+
+            RaiseForInfluxError(request);
+        }
     }
 }

@@ -1,3 +1,6 @@
+using System.Runtime.Serialization;
+using Newtonsoft.Json;
+
 namespace InfluxData.Platform.Client.Domain
 {
     /**
@@ -5,14 +8,19 @@ namespace InfluxData.Platform.Client.Domain
      */
     public enum ResourceType
     {
+        [EnumMember(Value = "dashboard")]
         DashboardResourceType,
 
+        [EnumMember(Value = "bucket")]
         BucketResourceType,
 
+        [EnumMember(Value = "task")]
         TaskResourceType,
 
+        [EnumMember(Value = "org")]
         OrgResourceType,
 
+        [EnumMember(Value = "view")] 
         ViewResourceType
     }
 }
