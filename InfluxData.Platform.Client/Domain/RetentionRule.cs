@@ -6,7 +6,7 @@ namespace InfluxData.Platform.Client.Domain
     public class RetentionRule
     {
         public string Type { get; set; }
-        
-        private long EverySeconds { get; set; }
+
+        public long EverySeconds { get; set; }
     }
 }

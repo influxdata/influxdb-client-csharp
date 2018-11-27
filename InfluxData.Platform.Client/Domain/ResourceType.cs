@@ -1,5 +1,4 @@
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
 
 namespace InfluxData.Platform.Client.Domain
 {

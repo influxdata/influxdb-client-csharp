@@ -44,6 +44,15 @@ namespace InfluxData.Platform.Client.Client
             return new UserClient(Client);
         }
 
+        /// <summary>
+        /// Get the <see cref="Domain.Bucket"/> client.
+        /// </summary>
+        /// <returns>the new client instance for Bucket API</returns>
+        public BucketClient CreateBucketClient()
+        {
+            return new BucketClient(Client);
+        }
+
         public async Task Close()
         {
             //

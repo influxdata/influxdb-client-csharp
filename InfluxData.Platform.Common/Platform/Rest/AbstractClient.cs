@@ -69,10 +69,14 @@ namespace Platform.Common.Platform.Rest
 
             var readToEnd = new StreamReader(result.ResponseContent).ReadToEnd();
 
-            JsonConverter[] converters = {NodaConverters.InstantConverter, 
-                new Newtonsoft.Json.Converters.StringEnumConverter()};
+            
+            var settings = new JsonSerializerSettings();
+            settings.Converters.Add(NodaConverters.InstantConverter);
+            settings.Converters.Add(new Newtonsoft.Json.Converters.StringEnumConverter());
+            settings.DateParseHandling = DateParseHandling.None;
+            
 
-            return JsonConvert.DeserializeObject<T>(readToEnd, converters);
+            return JsonConvert.DeserializeObject<T>(readToEnd, settings);
         }
 
         protected void CatchOrPropagateException(Exception exception,
