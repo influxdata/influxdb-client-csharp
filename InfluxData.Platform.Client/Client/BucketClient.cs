@@ -2,6 +2,7 @@ using System.Threading.Tasks;
 using InfluxData.Platform.Client.Domain;
 using Platform.Common.Platform;
 using Platform.Common.Platform.Rest;
+using Task = System.Threading.Tasks.Task;
 
 namespace InfluxData.Platform.Client.Client
 {
@@ -87,6 +88,60 @@ namespace InfluxData.Platform.Client.Client
             }
 
             return await CreateBucket(bucket);
+        }
+
+        /// <summary>
+        /// Update a bucket name and retention.
+        /// </summary>
+        /// <param name="bucket">bucket update to apply</param>
+        /// <returns>bucket updated</returns>
+        public async Task<Bucket> UpdateBucket(Bucket bucket)
+        {
+            Arguments.CheckNotNull(bucket, "Bucket is required");
+
+            var result = await Patch(bucket, $"/api/v2/buckets/{bucket.Id}");
+
+            return Call<Bucket>(result);
+        }
+        
+        /// <summary>
+        /// Delete a bucket.
+        /// </summary>
+        /// <param name="bucketId">ID of bucket to delete</param>
+        /// <returns>async task</returns>
+        public async Task DeleteBucket(string bucketId)
+        {
+            Arguments.CheckNotNull(bucketId, "Bucket ID");
+
+            var request = await Delete($"/api/v2/buckets/{bucketId}");
+
+            RaiseForInfluxError(request);
+        }
+
+        /// <summary>
+        /// Delete a bucket.
+        /// </summary>
+        /// <param name="bucket">bucket to delete</param>
+        /// <returns>async task</returns>
+        public async Task DeleteBucket(Bucket bucket)
+        {
+            Arguments.CheckNotNull(bucket, "bucket");
+
+            await DeleteBucket(bucket.Id);
+        }
+        
+        /// <summary>
+        /// Retrieve a bucket.
+        /// </summary>
+        /// <param name="bucketId">ID of bucket to get</param>
+        /// <returns>Bucket Details</returns>
+        public async Task<Bucket> FindBucketById(string bucketId)
+        {
+            Arguments.CheckNonEmptyString(bucketId, "Bucket ID");
+
+            var request = await Get($"/api/v2/buckets/{bucketId}");
+
+            return Call<Bucket>(request, "bucket not found");
         }
     }
 }

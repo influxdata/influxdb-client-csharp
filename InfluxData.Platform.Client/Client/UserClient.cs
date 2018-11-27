@@ -98,7 +98,7 @@ namespace InfluxData.Platform.Client.Client
         }
 
         /// <summary>
-        /// Delete a user
+        /// Delete a user.
         /// </summary>
         /// <param name="userId">ID of user to delete</param>
         /// <returns>async task</returns>
