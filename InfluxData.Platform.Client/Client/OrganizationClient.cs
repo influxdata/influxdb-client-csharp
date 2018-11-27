@@ -187,13 +187,103 @@ namespace InfluxData.Platform.Client.Client
         /// </summary>
         /// <param name="memberId">the ID of a member</param>
         /// <param name="organizationId">the ID of an organization</param>
-        /// <returns>async tasy</returns>
+        /// <returns>async task</returns>
         public async Task DeleteMember(string memberId, string organizationId)
         {
             Arguments.CheckNonEmptyString(organizationId, "Organization ID");
             Arguments.CheckNonEmptyString(memberId, "Member ID");
             
             var request = await Delete($"/api/v2/orgs/{organizationId}/members/{memberId}");
+
+            RaiseForInfluxError(request);
+        }
+
+        /// <summary>
+        /// List all owners of an organization.
+        /// </summary>
+        /// <param name="organization">organization of the owners</param>
+        /// <returns>the List all owners of an organization</returns>
+        public async Task<List<UserResourceMapping>> GetOwners(Organization organization)
+        {
+            Arguments.CheckNotNull(organization, "Organization is required");
+
+            return await GetOwners(organization.Id);
+        }
+
+        /// <summary>
+        /// List all owners of an organization.
+        /// </summary>
+        /// <param name="organizationId">ID of organization to get owners</param>
+        /// <returns>the List all owners of an organization</returns>
+        public async Task<List<UserResourceMapping>> GetOwners(string organizationId)
+        {
+            Arguments.CheckNonEmptyString(organizationId, "Organization ID");
+
+            var request = await Get($"/api/v2/orgs/{organizationId}/owners");
+
+            var response = Call<UserResourcesResponse>(request);
+
+            return response?.UserResourceMappings;
+        }
+
+        /// <summary>
+        /// Add organization owner.
+        /// </summary>
+        /// <param name="owner">the owner of an organization</param>
+        /// <param name="organization">the organization of a owner</param>
+        /// <returns>created mapping</returns>
+        public async Task<UserResourceMapping> AddOwner(User owner, Organization organization)
+        {
+            Arguments.CheckNotNull(organization, "organization");
+            Arguments.CheckNotNull(owner, "owner");
+
+            return await AddOwner(owner.Id, organization.Id);
+        }
+
+        /// <summary>
+        /// Add organization owner.
+        /// </summary>
+        /// <param name="ownerId">the ID of a owner</param>
+        /// <param name="organizationId">the ID of an organization</param>
+        /// <returns>created mapping</returns>
+        public async Task<UserResourceMapping> AddOwner(string ownerId, string organizationId)
+        {
+            Arguments.CheckNonEmptyString(organizationId, "Organization ID");
+            Arguments.CheckNonEmptyString(ownerId, "Owner ID");
+
+            User user = new User {Id = ownerId};
+
+            var request = await Post(user, $"/api/v2/orgs/{organizationId}/owners");
+
+            return Call<UserResourceMapping>(request);
+        }
+
+        /// <summary>
+        /// Removes a owner from an organization.
+        /// </summary>
+        /// <param name="owner">the owner of an organization</param>
+        /// <param name="organization">the organization of a owner</param>
+        /// <returns>async task</returns>
+        public async Task DeleteOwner(User owner, Organization organization)
+        {
+            Arguments.CheckNotNull(organization, "organization");
+            Arguments.CheckNotNull(owner, "owner");
+
+            await DeleteMember(owner.Id, organization.Id);
+        }
+
+        /// <summary>
+        /// Removes a owner from an organization.
+        /// </summary>
+        /// <param name="ownerId">the ID of a owner</param>
+        /// <param name="organizationId">the ID of an organization</param>
+        /// <returns>async task</returns>
+        public async Task DeleteOwner(string ownerId, string organizationId)
+        {
+            Arguments.CheckNonEmptyString(organizationId, "Organization ID");
+            Arguments.CheckNonEmptyString(ownerId, "Owner ID");
+            
+            var request = await Delete($"/api/v2/orgs/{organizationId}/owners/{ownerId}");
 
             RaiseForInfluxError(request);
         }

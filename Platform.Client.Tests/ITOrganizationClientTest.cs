@@ -151,5 +151,35 @@ namespace Platform.Client.Tests
             members = await _organizationClient.GetMembers(organization);
             Assert.AreEqual(0, members.Count);
         }
+        
+        [Test]
+        public async Task Owner() {
+
+            Organization organization = await _organizationClient.CreateOrganization(GenerateName("Constant Pro"));
+
+            List<UserResourceMapping> owners =  await _organizationClient.GetOwners(organization);
+            Assert.AreEqual(0, owners.Count);
+
+            User user = await _userClient.CreateUser(GenerateName("Luke Health"));
+
+            UserResourceMapping userResourceMapping = await _organizationClient.AddOwner(user, organization);
+            Assert.IsNotNull(userResourceMapping);
+            Assert.AreEqual(userResourceMapping.ResourceId, organization.Id);
+            Assert.AreEqual(userResourceMapping.ResourceType, ResourceType.OrgResourceType);
+            Assert.AreEqual(userResourceMapping.UserId, user.Id);
+            Assert.AreEqual(userResourceMapping.UserType, UserResourceMapping.MemberType.Owner);
+
+            owners = await _organizationClient.GetOwners(organization);
+            Assert.AreEqual(1, owners.Count);
+            Assert.AreEqual(owners[0].ResourceId, organization.Id);
+            Assert.AreEqual(owners[0].ResourceType, ResourceType.OrgResourceType);
+            Assert.AreEqual(owners[0].UserId, user.Id);
+            Assert.AreEqual(owners[0].UserType, UserResourceMapping.MemberType.Owner);
+
+            await _organizationClient.DeleteOwner(user, organization);
+
+            owners = await _organizationClient.GetOwners(organization);
+            Assert.AreEqual(0, owners.Count);
+        }
     }
 }
