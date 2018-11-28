@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using InfluxData.Platform.Client.Domain;
 using Platform.Common.Platform;
@@ -79,6 +80,45 @@ namespace InfluxData.Platform.Client.Client
             var request = await Get($"/api/v2/sources/{sourceId}");
 
             return Call<Source>(request, "source not found");
+        }
+        
+        /// <summary>
+        /// Get all sources.
+        /// </summary>
+        /// <returns>A list of sources</returns>
+        public async Task<List<Source>> FindSources()
+        {
+            var request = await Get($"/api/v2/sources");
+
+            var sources = Call<Sources>(request);
+
+            return sources.SourceList;
+        }
+
+        /// <summary>
+        /// Get a sources buckets (will return dbrps in the form of buckets if it is a v1 source).
+        /// </summary>
+        /// <param name="source">filter buckets to a specific source</param>
+        /// <returns>The buckets for source. If source does not exist than return null.</returns>
+        public async Task<List<Bucket>> FindBucketsBySource(Source source)
+        {
+            Arguments.CheckNotNull(source, "source");
+
+            return await FindBucketsBySourceId(source.Id);
+        }
+        
+        /// <summary>
+        /// Get a sources buckets (will return dbrps in the form of buckets if it is a v1 source).
+        /// </summary>
+        /// <param name="sourceId">filter buckets to a specific source ID</param>
+        /// <returns>The buckets for source. If source does not exist than return null.</returns>
+        public async Task<List<Bucket>> FindBucketsBySourceId(string sourceId)
+        {
+            Arguments.CheckNonEmptyString(sourceId, "Source ID");
+
+            var request = await Get($"/api/v2/sources/{sourceId}/buckets");
+
+            return Call<List<Bucket>>(request, "source not found");
         }
     }
 }

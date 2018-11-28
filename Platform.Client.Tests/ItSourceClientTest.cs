@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using InfluxData.Platform.Client.Client;
 using InfluxData.Platform.Client.Domain;
 using NUnit.Framework;
@@ -107,6 +108,36 @@ namespace Platform.Client.Tests
             Source source =  await _sourceClient.FindSourceById("020f755c3d082000");
 
             Assert.IsNull(source);
+        }
+        
+        [Test]
+        public async Task FindSources() {
+
+            int size = (await _sourceClient.FindSources()).Count;
+
+            await _sourceClient.CreateSource(NewSource());
+
+            List<Source> sources = await _sourceClient.FindSources();
+            Assert.AreEqual(size + 1, sources.Count);
+        }
+        
+        [Test]
+        public async Task FindBucketsBySource() {
+
+            Source source = await _sourceClient.CreateSource(NewSource());
+
+            List<Bucket> buckets = await _sourceClient.FindBucketsBySource(source);
+
+            Assert.IsNotNull(buckets);
+            Assert.IsTrue(buckets.Count > 0);
+        }
+
+        [Test]
+        public async Task FindBucketsBySourceByUnknownSource() {
+
+            List<Bucket> buckets = await _sourceClient.FindBucketsBySourceId("020f755c3d082000");
+
+            Assert.IsNull(buckets);
         }
 
         private Source NewSource()

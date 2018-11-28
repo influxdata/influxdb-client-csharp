@@ -9,6 +9,6 @@ namespace InfluxData.Platform.Client.Domain
     public class Sources : AbstractHasLinks 
     {
         [JsonProperty("sources")]
-        private List<Source> SourceList { get; set; } = new List<Source>();
+        public List<Source> SourceList { get; set; } = new List<Source>();
     }
 }
