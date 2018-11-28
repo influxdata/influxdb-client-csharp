@@ -139,6 +139,18 @@ namespace Platform.Client.Tests
 
             Assert.IsNull(buckets);
         }
+        
+        [Test]
+        public async Task SourceHealth() {
+
+            Source source = await _sourceClient.CreateSource(NewSource());
+
+            Health health = await _sourceClient.Health(source);
+
+            Assert.IsNotNull(health);
+            Assert.IsTrue(health.IsHealthy());
+            Assert.IsNull(health.Message);
+        }
 
         private Source NewSource()
         {
