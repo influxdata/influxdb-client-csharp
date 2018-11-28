@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using InfluxData.Platform.Client.Client;
 using InfluxData.Platform.Client.Domain;
 using NUnit.Framework;
@@ -115,6 +116,33 @@ namespace Platform.Client.Tests
             Bucket bucket = await _bucketClient.FindBucketById("020f755c3c082000");
 
             Assert.IsNull(bucket);
+        }
+        
+        [Test]
+        public async Task FindBuckets() {
+
+            int size = (await _bucketClient.FindBuckets()).Count;
+
+            await _bucketClient.CreateBucket(GenerateName("robot sensor"), RetentionRule(), _organization);
+
+            Organization organization2 = await _organizationClient.CreateOrganization(GenerateName("Second"));
+            await _bucketClient.CreateBucket(GenerateName("robot sensor"), organization2.Name);
+
+            List<Bucket> buckets = await _bucketClient.FindBuckets();
+            Assert.AreEqual(buckets.Count, size + 2);
+        }
+
+        [Test]
+        public async Task FindBucketsByOrganization() {
+
+            Assert.AreEqual((await  _bucketClient.FindBucketsByOrganization(_organization)).Count, 0);
+
+            await _bucketClient.CreateBucket(GenerateName("robot sensor"), _organization);
+
+            Organization organization2 = await _organizationClient.CreateOrganization(GenerateName("Second"));
+            await _bucketClient.CreateBucket(GenerateName("robot sensor"), organization2);
+
+            Assert.AreEqual((await  _bucketClient.FindBucketsByOrganization(_organization)).Count, 1);
         }
 
         private static RetentionRule RetentionRule()

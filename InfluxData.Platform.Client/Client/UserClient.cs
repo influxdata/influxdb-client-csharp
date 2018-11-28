@@ -178,9 +178,9 @@ namespace InfluxData.Platform.Client.Client
         {
             var request = await Get("/api/v2/users");
 
-            var users = Call<UsersResponse>(request);
+            var users = Call<Users>(request);
 
-            return users?.Users;
+            return users?.UserList;
         }
 
         /// <summary>

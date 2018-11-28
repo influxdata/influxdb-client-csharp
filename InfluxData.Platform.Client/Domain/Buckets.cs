@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace InfluxData.Platform.Client.Domain
 {
@@ -7,6 +8,7 @@ namespace InfluxData.Platform.Client.Domain
      */
     public class Buckets : AbstractHasLinks
     {
+        [JsonProperty("buckets")]
         public List<Bucket> BucketList { get; set; } = new List<Bucket>();
     }
 }

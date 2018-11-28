@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using InfluxData.Platform.Client.Domain;
 using Platform.Common.Platform;
@@ -142,6 +143,41 @@ namespace InfluxData.Platform.Client.Client
             var request = await Get($"/api/v2/buckets/{bucketId}");
 
             return Call<Bucket>(request, "bucket not found");
+        }
+
+        /// <summary>
+        ///  List all buckets for specified organization.
+        /// </summary>
+        /// <param name="organization">filter buckets to a specific organization</param>
+        /// <returns>A list of buckets</returns>
+        public async Task<List<Bucket>> FindBucketsByOrganization(Organization organization)
+        {
+            Arguments.CheckNotNull(organization, "organization");
+            
+            return await FindBucketsByOrganizationName(organization.Name);
+        }
+
+        /// <summary>
+        /// List all buckets for specified organizationName.
+        /// </summary>
+        /// <param name="organizationName">filter buckets to a specific organization name</param>
+        /// <returns>A list of buckets</returns>
+        public async Task<List<Bucket>> FindBucketsByOrganizationName(string organizationName)
+        {
+            var request = await Get($"/api/v2/buckets?org={organizationName}");
+
+            var buckets = Call<Buckets>(request);
+
+            return buckets.BucketList;
+        }
+
+        /// <summary>
+        /// List all buckets.
+        /// </summary>
+        /// <returns>List all buckets</returns>
+        public async Task<List<Bucket>> FindBuckets()
+        {
+            return await FindBucketsByOrganizationName(null);
         }
     }
 }
