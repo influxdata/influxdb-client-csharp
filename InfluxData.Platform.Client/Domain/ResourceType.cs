@@ -2,9 +2,9 @@ using System.Runtime.Serialization;
 
 namespace InfluxData.Platform.Client.Domain
 {
-    /**
-     * The type of resource.
-     */
+    /// <summary>
+    /// The type of resource. 
+    /// </summary>
     public enum ResourceType
     {
         [EnumMember(Value = "dashboard")]

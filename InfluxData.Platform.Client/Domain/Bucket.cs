@@ -3,9 +3,10 @@ using Newtonsoft.Json;
 
 namespace InfluxData.Platform.Client.Domain
 {
-    /**
-     * Bucket
-     */
+    
+    /// <summary>
+    /// Bucket
+    /// </summary>
     public class Bucket : AbstractHasLinks
     {
         [JsonProperty("id")]
@@ -20,15 +21,15 @@ namespace InfluxData.Platform.Client.Domain
         [JsonProperty("organization")]
         public string OrganizationName { get; set; }
 
+        /// <summary>
+        /// For support V1 sources. 
+        /// </summary>
         [JsonProperty("rp")]
-        /**
-         * For support V1 sources.
-         */
         public string RetentionPolicyName { get; set; }
 
-        /**
-         * The retention rules.
-         */
+        /// <summary>
+        /// The retention rules.
+        /// </summary>
         public List<RetentionRule> RetentionRules { get; set;} = new List<RetentionRule>();
     }
 }

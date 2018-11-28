@@ -1,18 +1,18 @@
 namespace InfluxData.Platform.Client.Domain
 {
-    /**
-     * Status defines if a resource is active or inactive.
-     */
+    /// <summary>
+    /// Status defines if a resource is active or inactive.
+    /// </summary>
     public enum Status
     {
-        /**
-         * Active status means that the resource can be used.
-         */
+       /// <summary>
+       /// Active status means that the resource can be used.
+       /// </summary>
         Active,
 
-        /**
-         * Inactive status means that the resource cannot be used.
-         */
+        /// <summary>
+        /// Inactive status means that the resource cannot be used.
+        /// </summary>
         Inactive
     }
 }

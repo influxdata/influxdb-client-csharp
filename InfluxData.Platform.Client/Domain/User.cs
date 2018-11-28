@@ -1,13 +1,10 @@
-using System.ComponentModel.DataAnnotations;
-using System.Reflection.Emit;
 using System.Text;
-using System.Text.RegularExpressions;
 
 namespace InfluxData.Platform.Client.Domain
 {
-    /**
-     * User
-     */
+    /// <summary>
+    /// User
+    /// </summary>
     public class User : AbstractHasLinks
     {
         public string Id { get; set; }
