@@ -179,5 +179,185 @@ namespace InfluxData.Platform.Client.Client
         {
             return await FindBucketsByOrganizationName(null);
         }
+        
+        /// <summary>
+        /// List all members of a bucket.
+        /// </summary>
+        /// <param name="bucket">bucket of the members</param>
+        /// <returns>the List all members of a bucket</returns>
+        public async Task<List<UserResourceMapping>> GetMembers(Bucket bucket)
+        {
+            Arguments.CheckNotNull(bucket, "bucket");
+
+            return await GetMembers(bucket.Id);
+        }
+
+        /// <summary>
+        /// List all members of a bucket.
+        /// </summary>
+        /// <param name="bucketId">ID of bucket to get members</param>
+        /// <returns>the List all members of a bucket</returns>
+        public async Task<List<UserResourceMapping>> GetMembers(string bucketId)
+        {
+            Arguments.CheckNonEmptyString(bucketId, "Bucket ID");
+
+            var request = await Get($"/api/v2/buckets/{bucketId}/members");
+
+            var response = Call<UserResourcesResponse>(request);
+
+            return response?.UserResourceMappings;
+        }
+
+        /// <summary>
+        /// Add a bucket member.
+        /// </summary>
+        /// <param name="member">the member of a bucket</param>
+        /// <param name="bucket">the bucket of a member</param>
+        /// <returns>created mapping</returns>
+        public async Task<UserResourceMapping> AddMember(User member, Bucket bucket)
+        {
+            Arguments.CheckNotNull(bucket, "bucket");
+            Arguments.CheckNotNull(member, "member");
+
+            return await AddMember(member.Id, bucket.Id);
+        }
+
+        /// <summary>
+        /// Add a bucket member.
+        /// </summary>
+        /// <param name="memberId">the ID of a member</param>
+        /// <param name="bucketId">the ID of a bucket</param>
+        /// <returns>created mapping</returns>
+        public async Task<UserResourceMapping> AddMember(string memberId, string bucketId)
+        {
+            Arguments.CheckNonEmptyString(bucketId, "Bucket ID");
+            Arguments.CheckNonEmptyString(memberId, "Member ID");
+
+            User user = new User {Id = memberId};
+
+            var request = await Post(user, $"/api/v2/buckets/{bucketId}/members");
+
+            return Call<UserResourceMapping>(request);
+        }
+
+        /// <summary>
+        /// Removes a member from a bucket.
+        /// </summary>
+        /// <param name="member">the member of a bucket</param>
+        /// <param name="bucket">the bucket of a member</param>
+        /// <returns>async task</returns>
+        public async Task DeleteMember(User member, Bucket bucket)
+        {
+            Arguments.CheckNotNull(bucket, "bucket");
+            Arguments.CheckNotNull(member, "member");
+
+            await DeleteMember(member.Id, bucket.Id);
+        }
+
+        /// <summary>
+        /// Removes a member from a bucket.
+        /// </summary>
+        /// <param name="memberId">the ID of a member</param>
+        /// <param name="bucketId">the ID of a bucket</param>
+        /// <returns>async task</returns>
+        public async Task DeleteMember(string memberId, string bucketId)
+        {
+            Arguments.CheckNonEmptyString(bucketId, "Bucket ID");
+            Arguments.CheckNonEmptyString(memberId, "Member ID");
+            
+            var request = await Delete($"/api/v2/buckets/{bucketId}/members/{memberId}");
+
+            RaiseForInfluxError(request);
+        }
+
+        /// <summary>
+        /// List all owners of a bucket.
+        /// </summary>
+        /// <param name="bucket">bucket of the owners</param>
+        /// <returns>the List all owners of a bucket</returns>
+        public async Task<List<UserResourceMapping>> GetOwners(Bucket bucket)
+        {
+            Arguments.CheckNotNull(bucket, "Bucket is required");
+
+            return await GetOwners(bucket.Id);
+        }
+
+        /// <summary>
+        /// List all owners of a bucket.
+        /// </summary>
+        /// <param name="bucketId">ID of a bucket to get owners</param>
+        /// <returns>the List all owners of a bucket</returns>
+        public async Task<List<UserResourceMapping>> GetOwners(string bucketId)
+        {
+            Arguments.CheckNonEmptyString(bucketId, "Bucket ID");
+
+            var request = await Get($"/api/v2/buckets/{bucketId}/owners");
+
+            var response = Call<UserResourcesResponse>(request);
+
+            return response?.UserResourceMappings;
+        }
+
+        /// <summary>
+        /// Add a bucket owner.
+        /// </summary>
+        /// <param name="owner">the owner of a bucket</param>
+        /// <param name="bucket">the bucket of a owner</param>
+        /// <returns>created mapping</returns>
+        public async Task<UserResourceMapping> AddOwner(User owner, Bucket bucket)
+        {
+            Arguments.CheckNotNull(bucket, "bucket");
+            Arguments.CheckNotNull(owner, "owner");
+
+            return await AddOwner(owner.Id, bucket.Id);
+        }
+
+        /// <summary>
+        /// Add a bucket owner.
+        /// </summary>
+        /// <param name="ownerId">the ID of a owner</param>
+        /// <param name="bucketId">the ID of a bucket</param>
+        /// <returns>created mapping</returns>
+        public async Task<UserResourceMapping> AddOwner(string ownerId, string bucketId)
+        {
+            Arguments.CheckNonEmptyString(bucketId, "Bucket ID");
+            Arguments.CheckNonEmptyString(ownerId, "Owner ID");
+
+            User user = new User {Id = ownerId};
+
+            var request = await Post(user, $"/api/v2/buckets/{bucketId}/owners");
+
+            return Call<UserResourceMapping>(request);
+        }
+
+        /// <summary>
+        /// Removes a owner from a bucket.
+        /// </summary>
+        /// <param name="owner">the owner of a bucket</param>
+        /// <param name="bucket">the bucket of a owner</param>
+        /// <returns>async task</returns>
+        public async Task DeleteOwner(User owner, Bucket bucket)
+        {
+            Arguments.CheckNotNull(bucket, "bucket");
+            Arguments.CheckNotNull(owner, "owner");
+
+            await DeleteOwner(owner.Id, bucket.Id);
+        }
+
+        /// <summary>
+        /// Removes a owner from a bucket.
+        /// </summary>
+        /// <param name="ownerId">the ID of a owner</param>
+        /// <param name="bucketId">the ID of a bucket</param>
+        /// <returns>async task</returns>
+        public async Task DeleteOwner(string ownerId, string bucketId)
+        {
+            Arguments.CheckNonEmptyString(bucketId, "Bucket ID");
+            Arguments.CheckNonEmptyString(ownerId, "Owner ID");
+            
+            var request = await Delete($"/api/v2/buckets/{bucketId}/owners/{ownerId}");
+
+            RaiseForInfluxError(request);
+        }
     }
 }

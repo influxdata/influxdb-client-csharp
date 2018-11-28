@@ -10,6 +10,8 @@ namespace Platform.Client.Tests
     {
         private OrganizationClient _organizationClient;
         private BucketClient _bucketClient;
+        private UserClient _userClient;
+        
         private Organization _organization;
 
         [SetUp]
@@ -17,6 +19,7 @@ namespace Platform.Client.Tests
         {
             _organizationClient = PlatformClient.CreateOrganizationClient();
             _bucketClient = PlatformClient.CreateBucketClient();
+            _userClient = PlatformClient.CreateUserClient();
 
             _organization = await _organizationClient.CreateOrganization(GenerateName("Org"));
         }
@@ -143,6 +146,66 @@ namespace Platform.Client.Tests
             await _bucketClient.CreateBucket(GenerateName("robot sensor"), organization2);
 
             Assert.AreEqual((await  _bucketClient.FindBucketsByOrganization(_organization)).Count, 1);
+        }
+        
+         [Test]
+        public async Task Member() {
+
+            Bucket bucket = await _bucketClient.CreateBucket(GenerateName("robot sensor"), RetentionRule(), _organization);
+
+            List<UserResourceMapping> members =  await _bucketClient.GetMembers(bucket);
+            Assert.AreEqual(0, members.Count);
+
+            User user = await _userClient.CreateUser(GenerateName("Luke Health"));
+
+            UserResourceMapping userResourceMapping = await _bucketClient.AddMember(user, bucket);
+            Assert.IsNotNull(userResourceMapping);
+            Assert.AreEqual(userResourceMapping.ResourceId, bucket.Id);
+            Assert.AreEqual(userResourceMapping.ResourceType, ResourceType.BucketResourceType);
+            Assert.AreEqual(userResourceMapping.UserId, user.Id);
+            Assert.AreEqual(userResourceMapping.UserType, UserResourceMapping.MemberType.Member);
+
+            members = await _bucketClient.GetMembers(bucket);
+            Assert.AreEqual(1, members.Count);
+            Assert.AreEqual(members[0].ResourceId, bucket.Id);
+            Assert.AreEqual(members[0].ResourceType, ResourceType.BucketResourceType);
+            Assert.AreEqual(members[0].UserId, user.Id);
+            Assert.AreEqual(members[0].UserType, UserResourceMapping.MemberType.Member);
+
+            await _bucketClient.DeleteMember(user, bucket);
+
+            members = await _bucketClient.GetMembers(bucket);
+            Assert.AreEqual(0, members.Count);
+        }
+        
+        [Test]
+        public async Task Owner() {
+
+            Bucket bucket = await _bucketClient.CreateBucket(GenerateName("robot sensor"), RetentionRule(), _organization);
+
+            List<UserResourceMapping> owners =  await _bucketClient.GetOwners(bucket);
+            Assert.AreEqual(0, owners.Count);
+
+            User user = await _userClient.CreateUser(GenerateName("Luke Health"));
+
+            UserResourceMapping userResourceMapping = await _bucketClient.AddOwner(user, bucket);
+            Assert.IsNotNull(userResourceMapping);
+            Assert.AreEqual(userResourceMapping.ResourceId, bucket.Id);
+            Assert.AreEqual(userResourceMapping.ResourceType, ResourceType.BucketResourceType);
+            Assert.AreEqual(userResourceMapping.UserId, user.Id);
+            Assert.AreEqual(userResourceMapping.UserType, UserResourceMapping.MemberType.Owner);
+
+            owners = await _bucketClient.GetOwners(bucket);
+            Assert.AreEqual(1, owners.Count);
+            Assert.AreEqual(owners[0].ResourceId, bucket.Id);
+            Assert.AreEqual(owners[0].ResourceType, ResourceType.BucketResourceType);
+            Assert.AreEqual(owners[0].UserId, user.Id);
+            Assert.AreEqual(owners[0].UserType, UserResourceMapping.MemberType.Owner);
+
+            await _bucketClient.DeleteOwner(user, bucket);
+
+            owners = await _bucketClient.GetOwners(bucket);
+            Assert.AreEqual(0, owners.Count);
         }
 
         private static RetentionRule RetentionRule()

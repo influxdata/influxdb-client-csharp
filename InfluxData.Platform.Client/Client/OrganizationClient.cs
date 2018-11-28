@@ -269,7 +269,7 @@ namespace InfluxData.Platform.Client.Client
             Arguments.CheckNotNull(organization, "organization");
             Arguments.CheckNotNull(owner, "owner");
 
-            await DeleteMember(owner.Id, organization.Id);
+            await DeleteOwner(owner.Id, organization.Id);
         }
 
         /// <summary>
