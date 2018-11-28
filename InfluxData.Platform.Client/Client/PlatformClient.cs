@@ -3,9 +3,11 @@ using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using InfluxData.Platform.Client.Domain;
 using InfluxData.Platform.Client.Option;
 using Platform.Common.Platform;
 using Platform.Common.Platform.Rest;
+using Task = System.Threading.Tasks.Task;
 
 namespace InfluxData.Platform.Client.Client
 {
@@ -62,6 +64,24 @@ namespace InfluxData.Platform.Client.Client
             return new SourceClient(Client);
         }
 
+        /// <summary>
+        /// Get the health of an instance.
+        /// </summary>
+        /// <returns>health of an instance</returns>
+        public async Task<Health> Health()
+        {
+            try
+            {
+                var request = await Get("/health");
+
+                return Call<Health>(request);
+            }
+            catch (Exception e)
+            {
+                return new Health {Status = "error", Message = e.Message};
+            }
+        }
+
         public async Task Close()
         {
             //
@@ -71,7 +91,7 @@ namespace InfluxData.Platform.Client.Client
             {
                 await _authenticateDelegatingHandler.Signout();
             }
-            catch (IOException e)
+            catch (HttpRequestException e)
             {
                 Console.WriteLine("The signout exception");
                 Console.WriteLine(e);
