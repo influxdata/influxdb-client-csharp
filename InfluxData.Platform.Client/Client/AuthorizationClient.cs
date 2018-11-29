@@ -56,5 +56,60 @@ namespace InfluxData.Platform.Client.Client
 
             return Call<Authorization>(response);
         }
+
+        /// <summary>
+        /// Updates the status of the authorization. Useful for setting an authorization to inactive or active.
+        /// </summary>
+        /// <param name="authorization">the authorization with updated status</param>
+        /// <returns>the updated authorization</returns>
+        public async Task<Authorization> UpdateAuthorization(Authorization authorization)
+        {
+            Arguments.CheckNotNull(authorization, "authorization");
+            
+            var response = await Patch(authorization, $"/api/v2/authorizations/{authorization.Id}");
+
+            return Call<Authorization>(response);
+        }
+
+        /// <summary>
+        /// Delete a authorization.
+        /// </summary>
+        /// <param name="authorization">authorization to delete</param>
+        /// <returns>async task</returns>
+        public async Task DeleteAuthorization(Authorization authorization)
+        {
+            Arguments.CheckNotNull(authorization, "authorization");
+
+            await DeleteAuthorization(authorization.Id);
+        }
+        
+        /// <summary>
+        /// Delete a authorization.
+        /// </summary>
+        /// <param name="authorizationId">ID of authorization to delete</param>
+        /// <returns>async task</returns>
+        public async Task DeleteAuthorization(string authorizationId)
+        {
+            Arguments.CheckNonEmptyString(authorizationId, "Authorization ID");
+
+            
+            var request = await Delete($"/api/v2/authorizations/{authorizationId}");
+
+            RaiseForInfluxError(request);
+        }
+        
+        /// <summary>
+        /// Retrieve a authorization.
+        /// </summary>
+        /// <param name="authorizationId">ID of authorization to get</param>
+        /// <returns>authorization details</returns>
+        public async Task<Authorization> FindAuthorizationById(string authorizationId)
+        {
+            Arguments.CheckNonEmptyString(authorizationId, "Authorization ID");
+
+            var request = await Get($"/api/v2/authorizations/{authorizationId}");
+
+            return Call<Authorization>(request, "authorization not found");
+        }
     }
 }

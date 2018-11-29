@@ -56,5 +56,71 @@ namespace Platform.Client.Tests
             Assert.AreEqual($"/api/v2/authorizations/{authorization.Id}", links["self"]);
             Assert.AreEqual($"/api/v2/users/{_user.Id}", links["user"]);
         }
+        
+        [Test]
+        [Ignore("updateAuthorization return PlatformError but c.db.update() required 'plain' go error bolt/authorization.go:397")]
+        public async Task UpdateAuthorizationStatus() {
+
+            Permission readUsers = new Permission
+            {
+                Action = Permission.ReadAction,
+                Resource = Permission.UserResource
+            };
+
+            List<Permission> permissions = new List<Permission> {readUsers};
+
+            Authorization authorization = await _authorizationClient.CreateAuthorization(_user, permissions);
+
+            Assert.AreEqual(authorization.Status, Status.Active);
+
+            authorization.Status = Status.Inactive;
+            authorization = await _authorizationClient.UpdateAuthorization(authorization);
+
+            Assert.AreEqual(authorization.Status, Status.Inactive);
+
+            authorization.Status = Status.Active;
+            authorization = await _authorizationClient.UpdateAuthorization(authorization);
+
+            Assert.AreEqual(authorization.Status, Status.Active);
+        }
+        
+        [Test]
+        public async Task FindAuthorizationsById() {
+
+            Authorization authorization = await _authorizationClient.CreateAuthorization(_user, new List<Permission>());
+
+            Authorization foundAuthorization = await _authorizationClient.FindAuthorizationById(authorization.Id);
+
+            Assert.IsNotNull(foundAuthorization);
+            Assert.AreEqual(authorization.Id, foundAuthorization.Id);
+            Assert.AreEqual(authorization.Token, foundAuthorization.Token);
+            Assert.AreEqual(authorization.UserId, foundAuthorization.UserId);
+            Assert.AreEqual(authorization.UserName, foundAuthorization.UserName);
+            Assert.AreEqual(authorization.Status, foundAuthorization.Status);
+        }
+
+        [Test]
+        public async Task FindAuthorizationsByIdNull() {
+
+            Authorization authorization = await _authorizationClient.FindAuthorizationById("020f755c3c082000");
+
+            Assert.IsNull(authorization);
+        }
+        
+        [Test]
+        public async Task DeleteAuthorization() {
+
+            Authorization createdAuthorization = await _authorizationClient.CreateAuthorization(_user, new List<Permission>());
+            Assert.IsNotNull(createdAuthorization);
+
+            Authorization foundAuthorization = await _authorizationClient.FindAuthorizationById(createdAuthorization.Id);
+            Assert.IsNotNull(foundAuthorization);
+
+            // delete authorization
+            await _authorizationClient.DeleteAuthorization(createdAuthorization);
+
+            foundAuthorization = await _authorizationClient.FindAuthorizationById(createdAuthorization.Id);
+            Assert.IsNull(foundAuthorization);
+        }
     }
 }
