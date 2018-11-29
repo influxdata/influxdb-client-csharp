@@ -1,4 +1,6 @@
 using System.Text;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace InfluxData.Platform.Client.Domain
 {
@@ -27,6 +29,7 @@ namespace InfluxData.Platform.Client.Domain
         /// <summary>
         /// The current status of the task. When updated to 'disabled', cancels all queued jobs of this task.
         /// </summary>
+        [JsonProperty("status"), JsonConverter(typeof(StringEnumConverter))]
         public Status Status { get; set; }
 
         /// <summary>

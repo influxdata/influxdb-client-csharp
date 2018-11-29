@@ -1,74 +1,75 @@
-using System;
 using System.Text;
+using Newtonsoft.Json;
 using Platform.Common.Platform;
 
 namespace InfluxData.Platform.Client.Domain
 {
-    /**
-     * Permission defines an action and a resource.
-     */
+    /// <summary>
+    /// Permission defines an action and a resource.
+    /// </summary>
     public class Permission
     {
-        /**
-         * Action for reading.
-         */
+        /// <summary>
+        /// Action for reading.
+        /// </summary>
         public static readonly string ReadAction = "read";
 
-        /**
-         * Action for writing.
-         */
+        /// <summary>
+        /// Action for writing.
+        /// </summary>
         public static readonly string WriteAction = "write";
 
-        /**
-         * Action for creating new resources.
-         */
+        /// <summary>
+        /// Action for creating new resources.
+        /// </summary>
         public static readonly string CreateAction = "create";
 
-        /**
-         * Deleting an existing resource.
-         */
+        /// <summary>
+        /// Deleting an existing resource.
+        /// </summary>
         public static readonly string DeleteAction = "delete";
 
-        /**
-         * Represents the user resource actions can apply to.
-         */
+        /// <summary>
+        /// Represents the user resource actions can apply to.
+        /// </summary>
         public static readonly string UserResource = "user";
 
-        /**
-         * Represents the org resource actions can apply to.
-         */
+        /// <summary>
+        /// Represents the org resource actions can apply to.
+        /// </summary>
         public static readonly string OrganizationResource = "org";
 
+        [JsonProperty("resource")]
+        public string Resource { get; set; }
+        
+        [JsonProperty("action")]
+        public string Action { get; set; }
 
-        /**
-         * Represents the task resource scoped to an organization.
-         *
-         * @param orgId organization scope
-         * @return task resource
-         */
+        
+        /// <summary>
+        /// Represents the task resource scoped to an organization.
+        /// </summary>
+        /// <param name="orgId">organization id</param>
+        /// <returns>the task resource</returns>
         public static string TaskResource(string orgId)
         {
             Arguments.CheckNonEmptyString(orgId, "orgId");
 
-            return string.Format("org/{0}/task", orgId);
+            return $"org/{orgId}/task";
         }
 
-        /**
-         * BucketResource constructs a bucket resource.
-         *
-         * @param bucketId bucket scope
-         * @return bucket resource
-         */
+        /// <summary>
+        /// BucketResource constructs a bucket resource.
+        /// </summary>
+        /// <param name="bucketId">bucket id</param>
+        /// <returns>the bucket resource</returns>
         public static string BucketResource(string bucketId)
         {
             Arguments.CheckNonEmptyString(bucketId, "bucketID");
 
-            return string.Format("bucket/{0}", bucketId);
+            return $"bucket/{bucketId}";
         }
-
-        public string Resource { get; set; }
-        public string Action { get; set; }
-
+        
         public override string ToString()
         {
            return new StringBuilder(GetType().Name + "[")

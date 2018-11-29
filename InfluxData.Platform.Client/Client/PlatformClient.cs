@@ -63,6 +63,15 @@ namespace InfluxData.Platform.Client.Client
         {
             return new SourceClient(Client);
         }
+        
+        /// <summary>
+        /// Get the <see cref="Domain.Authorization"/> client.
+        /// </summary>
+        /// <returns>the new client instance for Authorization API</returns>
+        public AuthorizationClient CreateAuthorizationClient()
+        {
+            return new AuthorizationClient(Client);
+        }
 
         /// <summary>
         /// Get the health of an instance.
