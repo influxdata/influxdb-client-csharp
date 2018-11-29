@@ -111,5 +111,50 @@ namespace InfluxData.Platform.Client.Client
 
             return Call<Authorization>(request, "authorization not found");
         }
+
+        /// <summary>
+        /// List all authorizations belonging to specified user.
+        /// </summary>
+        /// <param name="user">user</param>
+        /// <returns>A list of authorizations</returns>
+        public async Task<List<Authorization>> FindAuthorizationsByUser(User user)
+        {
+            Arguments.CheckNotNull(user, "user");
+            
+            return await FindAuthorizationsByUserId(user.Id);
+        }
+        
+        /// <summary>
+        /// List all authorizations belonging to specified user.
+        /// </summary>
+        /// <param name="userId">ID of user</param>
+        /// <returns>A list of authorizations</returns>
+        public async Task<List<Authorization>> FindAuthorizationsByUserId(string userId)
+        {
+            Arguments.CheckNonEmptyString(userId, "User ID");
+            
+            return await FindAuthorizationsBy(userId, null);
+        }
+        
+        /// <summary>
+        /// List all authorizations belonging to specified user.
+        /// </summary>
+        /// <param name="userName">Name of User</param>
+        /// <returns>A list of authorizations</returns>
+        public async Task<List<Authorization>> FindAuthorizationsByUserName(string userName)
+        {
+            Arguments.CheckNonEmptyString(userName, "User name");
+            
+            return await FindAuthorizationsBy(null, userName);
+        }
+
+        private async Task<List<Authorization>> FindAuthorizationsBy(string userId, string userName)
+        {
+            var request = await Get($"/api/v2/authorizations?userID={userId}&user={userName}");
+            
+            var authorizations = Call<Authorizations>(request);
+
+            return authorizations.Auths;
+        }
     }
 }

@@ -122,5 +122,27 @@ namespace Platform.Client.Tests
             foundAuthorization = await _authorizationClient.FindAuthorizationById(createdAuthorization.Id);
             Assert.IsNull(foundAuthorization);
         }
+        
+        [Test]
+        public async Task  FindAuthorizationsByUser()
+        {
+            int size = (await _authorizationClient.FindAuthorizationsByUser(_user)).Count;
+
+            await _authorizationClient.CreateAuthorization(_user, new List<Permission>());
+
+            List<Authorization> authorizations = await _authorizationClient.FindAuthorizationsByUser(_user);
+            Assert.AreEqual(size + 1, authorizations.Count);
+        }
+
+        [Test]
+        public async Task  FindAuthorizationsByUserName() {
+
+            int size = (await _authorizationClient.FindAuthorizationsByUser(_user)).Count;
+
+            await _authorizationClient.CreateAuthorization(_user, new List<Permission>());
+
+            List<Authorization> authorizations = await _authorizationClient.FindAuthorizationsByUserName(_user.Name);
+            Assert.AreEqual(size + 1, authorizations.Count);
+        }
     }
 }

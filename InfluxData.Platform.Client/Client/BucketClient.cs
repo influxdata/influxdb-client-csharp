@@ -112,7 +112,7 @@ namespace InfluxData.Platform.Client.Client
         /// <returns>async task</returns>
         public async Task DeleteBucket(string bucketId)
         {
-            Arguments.CheckNotNull(bucketId, "Bucket ID");
+            Arguments.CheckNonEmptyString(bucketId, "Bucket ID");
 
             var request = await Delete($"/api/v2/buckets/{bucketId}");
 
