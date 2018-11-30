@@ -29,5 +29,13 @@ namespace Platform.Client.Tests
 
             await clientNotRunning.Close();
         }
+
+        [Test]
+        public void QueryClient()
+        {
+            var queryClient = PlatformClient.CreateQueryClient();
+            
+            Assert.IsNotNull(queryClient);
+        }
     }
 }

@@ -87,8 +87,7 @@ namespace Flux.Client
          * @param onNext the callback to consume the FluxRecord result with capability to discontinue a streaming query
          * @param <T> the type of the measurement (POCO)
          */
-        public async Task Query<T>(string query,
-                        Action<ICancellable, T> onNext)
+        public async Task Query<T>(string query, Action<ICancellable, T> onNext)
         {
             Arguments.CheckNonEmptyString(query, "query");
             Arguments.CheckNotNull(onNext, "onNext");
@@ -123,9 +122,7 @@ namespace Flux.Client
          * @param onError the callback to consume any error notification
          * @param <T> the type of the measurement (POCO)
          */
-        public async Task Query<T>(string query, 
-                                        Action<ICancellable, T> onNext, 
-                                        Action<Exception> onError)
+        public async Task Query<T>(string query, Action<ICancellable, T> onNext, Action<Exception> onError)
         { 
             Arguments.CheckNonEmptyString(query, "query");
             Arguments.CheckNotNull(onNext, "onNext");

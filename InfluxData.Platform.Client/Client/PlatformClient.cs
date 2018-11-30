@@ -27,6 +27,16 @@ namespace InfluxData.Platform.Client.Client
             Client.HttpClient.BaseAddress = new Uri(options.Url);
             Client.HttpClient.Timeout = options.Timeout;
         }
+        
+        
+        /// <summary>
+        /// Get the Query client.
+        /// </summary>
+        /// <returns>the new client instance for the Query API</returns>
+        public QueryClient CreateQueryClient()
+        {
+            return new QueryClient(Client);
+        }
 
         /// <summary>
         /// Get the <see cref="Domain.Organization"/> client.

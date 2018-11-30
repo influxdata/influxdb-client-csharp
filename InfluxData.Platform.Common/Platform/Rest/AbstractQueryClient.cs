@@ -21,6 +21,15 @@ namespace Platform.Common.Platform.Rest
         
         private readonly FluxCsvParser _csvParser = new FluxCsvParser();
         
+        protected AbstractQueryClient()
+        {
+        }
+
+        protected AbstractQueryClient(DefaultClientIo client) : base(client)
+        {
+        }
+        
+        
         public async Task Query(HttpRequestMessage query, 
                         FluxCsvParser.IFluxResponseConsumer responseConsumer,
                         Action<Exception> onError, 
