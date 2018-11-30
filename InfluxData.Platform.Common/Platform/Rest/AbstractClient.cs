@@ -74,9 +74,11 @@ namespace Platform.Common.Platform.Rest
             settings.Converters.Add(NodaConverters.InstantConverter);
             settings.Converters.Add(new Newtonsoft.Json.Converters.StringEnumConverter());
             settings.DateParseHandling = DateParseHandling.None;
-            
 
-            return JsonConvert.DeserializeObject<T>(readToEnd, settings);
+            using (result)
+            {
+                return JsonConvert.DeserializeObject<T>(readToEnd, settings);
+            }
         }
 
         protected void CatchOrPropagateException(Exception exception,

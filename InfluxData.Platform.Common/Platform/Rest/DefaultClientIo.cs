@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
@@ -47,8 +46,7 @@ namespace Platform.Common.Platform.Rest
 
             var endTime = DateTime.UtcNow;
 
-            return new RequestResult(new BufferedStream(response), (int)httpResponse.StatusCode, 
-                ToDictionary(httpResponse.Headers), startTime, endTime);
+            return new RequestResult(new BufferedStream(response), httpResponse, startTime, endTime);
         }
 
         static async Task<string> DecompressGZip(HttpContent content)
@@ -62,8 +60,5 @@ namespace Platform.Common.Platform.Rest
                 }
             }
         }
-
-        static IReadOnlyDictionary<string, IEnumerable<string>> ToDictionary(HttpResponseHeaders headers) =>
-            headers.ToDictionary(k => k.Key, v => v.Value);
     }
 }

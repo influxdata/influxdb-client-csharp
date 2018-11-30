@@ -28,9 +28,9 @@ namespace Platform.Common.Platform.Rest
         protected AbstractQueryClient(DefaultClientIo client) : base(client)
         {
         }
-        
-        
-        public async Task Query(HttpRequestMessage query, 
+
+
+        protected async Task Query(HttpRequestMessage query, 
                         FluxCsvParser.IFluxResponseConsumer responseConsumer,
                         Action<Exception> onError, 
                         Action onComplete)
@@ -49,8 +49,8 @@ namespace Platform.Common.Platform.Rest
 
             await Query(query, Consumer, onError, onComplete);
         }
-        
-        public async Task QueryRaw(HttpRequestMessage query,
+
+        protected async Task QueryRaw(HttpRequestMessage query,
                         Action<ICancellable, string> onResponse,
                         Action<Exception> onError, 
                         Action onComplete)
@@ -78,17 +78,18 @@ namespace Platform.Common.Platform.Rest
             Arguments.CheckNotNull(onError, "onError");
             Arguments.CheckNotNull(onComplete, "onComplete");
 
+            RequestResult requestResult = null;
             try
             {
                 DefaultCancellable cancellable = new DefaultCancellable();
-                
-                var responseHttp = await Client.DoRequest(query).ConfigureAwait(false);
 
-                RaiseForInfluxError(responseHttp);
+                requestResult = await Client.DoRequest(query).ConfigureAwait(false);
 
-                consumer(cancellable, responseHttp.ResponseContent);
+                RaiseForInfluxError(requestResult);
 
-                if (!cancellable.IsCancelled()) 
+                consumer(cancellable, requestResult.ResponseContent);
+
+                if (!cancellable.IsCancelled())
                 {
                     onComplete();
                 }
@@ -96,6 +97,10 @@ namespace Platform.Common.Platform.Rest
             catch (Exception e)
             {
                 onError(e);
+            }
+            finally
+            {
+                requestResult?.Dispose();
             }
         }
 

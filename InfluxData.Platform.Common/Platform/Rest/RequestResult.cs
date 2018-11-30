@@ -1,6 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Headers;
 
 namespace Platform.Common.Platform.Rest
 {
@@ -8,8 +11,10 @@ namespace Platform.Common.Platform.Rest
      * Stores information about a single request and response.
      * </summary>
      */
-    public class RequestResult
+    public class RequestResult: IDisposable
     {
+        private HttpResponseMessage _httpResponse;
+        
         /** <summary>
          * String returned by the server.
          * </summary>
@@ -51,16 +56,25 @@ namespace Platform.Common.Platform.Rest
 
         public RequestResult(
             BufferedStream responseContent,
-            int statusCode,
-            IReadOnlyDictionary<string, IEnumerable<string>> responseHeaders,
+            HttpResponseMessage httpResponse,
             DateTime startTime,
             DateTime endTime)
         {
+            _httpResponse = httpResponse;
             ResponseContent = responseContent;
-            StatusCode = statusCode;
-            ResponseHeaders = responseHeaders;
+            StatusCode = (int) httpResponse.StatusCode;
+            ResponseHeaders = ToDictionary(httpResponse.Headers);
             StartTime = startTime;
             EndTime = endTime;
+        }
+        
+        private IReadOnlyDictionary<string, IEnumerable<string>> ToDictionary(HttpResponseHeaders headers) =>
+            headers.ToDictionary(k => k.Key, v => v.Value);
+
+        public void Dispose()
+        {
+            _httpResponse.Dispose();
+            ResponseContent.Dispose();
         }
     }
 }
