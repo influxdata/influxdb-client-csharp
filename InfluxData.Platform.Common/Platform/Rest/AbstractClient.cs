@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Net.Http;
 using System.Runtime.CompilerServices;
@@ -92,8 +93,8 @@ namespace Platform.Common.Platform.Rest
             //
             if (IsCloseException(exception)) 
             {
-                Console.WriteLine("Socket closed by remote server or end of data");
-                Console.WriteLine(exception);
+                Trace.WriteLine("Socket closed by remote server or end of data");
+                Trace.WriteLine(exception);
             } 
             else 
             {
@@ -141,7 +142,7 @@ namespace Platform.Common.Platform.Rest
             
             if (nullError != null && errorMessage != null && errorMessage.Equals(nullError))
             {
-                Console.WriteLine("Error is considered as null response: {0}", errorMessage);
+                Trace.WriteLine($"Error is considered as null response: {errorMessage}");
                 
                 return true;
             }

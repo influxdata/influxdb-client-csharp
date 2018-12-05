@@ -122,7 +122,6 @@ namespace Platform.Client.Tests
             _writeClient.WriteRecord(bucketName, "my-org", TimeUnit.Nanos, record);
             _writeClient.Flush();
             
-
             List<FluxTable> query = await _queryClient.Query("from(bucket:\"" + bucketName + "\") |> range(start: 0) |> last()", "my-org");
 
             Assert.AreEqual(1, query.Count);

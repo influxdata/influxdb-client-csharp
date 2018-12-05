@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
@@ -74,8 +75,8 @@ namespace InfluxData.Platform.Client.Client
                 } 
                 catch (IOException e) 
                 {
-                    Console.WriteLine("Cannot retrieve the Session token!");
-                    Console.WriteLine(e);
+                    Trace.WriteLine("Cannot retrieve the Session token!");
+                    Trace.WriteLine(e);
                     return;
                 }
 

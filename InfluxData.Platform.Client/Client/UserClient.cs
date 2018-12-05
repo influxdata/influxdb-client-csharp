@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Net.Http;
 using System.Threading.Tasks;
 using InfluxData.Platform.Client.Domain;
@@ -148,7 +149,7 @@ namespace InfluxData.Platform.Client.Client
             User user = await Me();
             if (user == null)
             {
-                Console.WriteLine("User is not authenticated.");
+                Trace.WriteLine("User is not authenticated.");
 
                 return null;
             }

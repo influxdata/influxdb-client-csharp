@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Flux.Client.Client;
@@ -380,7 +381,7 @@ namespace Flux.Client
             }
             catch (Exception e)
             {
-                Console.WriteLine("Error: " + e.Message);
+                Trace.WriteLine($"Error: {e.Message}");
                 return false;
             }
         }

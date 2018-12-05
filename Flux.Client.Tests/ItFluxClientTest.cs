@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -49,8 +50,7 @@ namespace Flux.Client.Tests
 
                 if (CountdownEvent.CurrentCount % 100_000 == 0) 
                 {
-                    //TODO use trace
-                    Console.WriteLine("Remaining parsed: " + CountdownEvent.CurrentCount + " records");
+                    Trace.WriteLine($"Remaining parsed: {CountdownEvent.CurrentCount} records");
                 }
             });
 
@@ -74,7 +74,7 @@ namespace Flux.Client.Tests
 
                 if (CountdownEvent.CurrentCount % 100_000 == 0)
                 {
-                    Console.WriteLine("Remaining parsed: {0} records", CountdownEvent.CurrentCount);
+                    Trace.WriteLine($"Remaining parsed: {CountdownEvent.CurrentCount} records");
                 }
             });
 
@@ -101,7 +101,7 @@ namespace Flux.Client.Tests
 
                 if (CountdownEvent.CurrentCount % 1_000 == 0 && CountdownEvent.CurrentCount != 0)
                 {
-                    Console.WriteLine("Remaining parsed: {0} records", CountdownEvent.CurrentCount);
+                    Console.WriteLine($"Remaining parsed: {CountdownEvent.CurrentCount} records");
                 }
 
                 if (CountdownEvent.CurrentCount == 9_000)
