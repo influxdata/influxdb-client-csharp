@@ -15,6 +15,7 @@ bld/
 [Ll]og/
 coverage.opencover.xml
 coverlet/
+coveralls/
 
 # Visual Studio 2015/2017 cache/options directory
 .vs/

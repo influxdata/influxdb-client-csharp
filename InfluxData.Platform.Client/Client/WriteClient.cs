@@ -31,7 +31,11 @@ namespace InfluxData.Platform.Client.Client
         {
             Arguments.CheckNotNull(writeOptions, "writeOptions");
 
-            //TODO backpreasure
+            // backpreasure - is not implemented in C#
+            // 
+            // => use unbound buffer
+            // 
+            // https://github.com/dotnet/reactive/issues/19
 
             var observable = _subject.ObserveOn(writeOptions.WriteScheduler);
 

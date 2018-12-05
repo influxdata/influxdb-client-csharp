@@ -24,7 +24,6 @@ namespace InfluxData.Platform.Client.Option
         private static readonly int DEFAULT_FLUSH_INTERVAL = 1000;
         private static readonly int DEFAULT_JITTER_INTERVAL = 0;
         private static readonly int DEFAULT_RETRY_INTERVAL = 1000;
-        private static readonly int DEFAULT_BUFFER_LIMIT = 10000;
 
         /// <summary>
         /// The number of data point to collect in batch.
@@ -51,12 +50,6 @@ namespace InfluxData.Platform.Client.Option
         private int RetryInterval { get; }
 
         /// <summary>
-        /// Maximum number of points stored in the retry buffer.
-        /// </summary>
-        /// <seealso cref="Builder.BufferLimit(int)"/>
-        private int BufferLimit { get; }
-
-        /// <summary>
         /// Set the scheduler which is used for write data points.
         /// </summary>
         /// <seealso cref="Builder.WriteScheduler(IScheduler)"/>
@@ -70,7 +63,6 @@ namespace InfluxData.Platform.Client.Option
             FlushInterval = builder.FlushIntervalBuilder;
             JitterInterval = builder.JitterIntervalBuilder;
             RetryInterval = builder.RetryIntervalBuilder;
-            BufferLimit = builder.BufferLimitBuilder;
             WriteScheduler = builder.WriteSchedulerBuilder;
         }
         
@@ -88,7 +80,6 @@ namespace InfluxData.Platform.Client.Option
             internal int FlushIntervalBuilder = DEFAULT_FLUSH_INTERVAL;
             internal int JitterIntervalBuilder = DEFAULT_JITTER_INTERVAL;
             internal int RetryIntervalBuilder = DEFAULT_RETRY_INTERVAL;
-            internal int BufferLimitBuilder = DEFAULT_BUFFER_LIMIT;
             internal IScheduler WriteSchedulerBuilder = NewThreadScheduler.Default;
 
             /// <summary>
@@ -138,20 +129,6 @@ namespace InfluxData.Platform.Client.Option
             {
                 Arguments.CheckPositiveNumber(milliseconds, "retryInterval");
                 RetryIntervalBuilder = milliseconds;
-                return this;
-            }
-
-            /// <summary>
-            /// The client maintains a buffer for failed writes so that the writes will be retried later on.
-            /// This may help to overcome temporary network problems or InfluxDB load spikes.
-            /// When the buffer is full and new points are written, oldest entries in the buffer are lost.
-            /// </summary>
-            /// <param name="bufferLimit">maximum number of points stored in the retry buffer</param>
-            /// <returns></returns>
-            public Builder BufferLimit(int bufferLimit)
-            {
-                Arguments.CheckNotNegativeNumber(bufferLimit, "bufferLimit");
-                BufferLimitBuilder = bufferLimit;
                 return this;
             }
 
