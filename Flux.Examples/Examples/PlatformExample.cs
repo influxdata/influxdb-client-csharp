@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Globalization;
 using InfluxData.Platform.Client.Client;
 using InfluxData.Platform.Client.Domain;
@@ -49,7 +48,7 @@ namespace Flux.Examples.Examples
                 Console.WriteLine(organization.ToString());
             }
             
-            await platform.Close();
+            platform.Dispose();
         }
         
         public static void Run()

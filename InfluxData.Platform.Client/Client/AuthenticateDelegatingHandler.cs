@@ -31,11 +31,11 @@ namespace InfluxData.Platform.Client.Client
         protected override async Task<HttpResponseMessage> SendAsync(
                         HttpRequestMessage request, CancellationToken cancellationToken)
         {
-            if (PlatformOptions.EAuthScheme.Token.Equals(_platformOptions.AuthScheme))
+            if (PlatformOptions.AuthenticationScheme.Token.Equals(_platformOptions.AuthScheme))
             {
                 request.Headers.Add("Authorization", "Token " + String(_platformOptions.Token));
             } 
-            else if (PlatformOptions.EAuthScheme.Session.Equals(_platformOptions.AuthScheme)) 
+            else if (PlatformOptions.AuthenticationScheme.Session.Equals(_platformOptions.AuthScheme)) 
             {
                 await InitToken(cancellationToken);
 
@@ -54,7 +54,7 @@ namespace InfluxData.Platform.Client.Client
          */
         private async Task InitToken(CancellationToken cancellationToken) 
         {
-            if (!PlatformOptions.EAuthScheme.Session.Equals(_platformOptions.AuthScheme) || _signout) 
+            if (!PlatformOptions.AuthenticationScheme.Session.Equals(_platformOptions.AuthScheme) || _signout) 
             {
                 return;
             }
@@ -100,7 +100,7 @@ namespace InfluxData.Platform.Client.Client
          */
         protected internal async Task Signout()
         {
-            if (!PlatformOptions.EAuthScheme.Session.Equals(_platformOptions.AuthScheme) || _signout)
+            if (!PlatformOptions.AuthenticationScheme.Session.Equals(_platformOptions.AuthScheme) || _signout)
             {
                 return;
             }

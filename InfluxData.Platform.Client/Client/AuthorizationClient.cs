@@ -113,6 +113,15 @@ namespace InfluxData.Platform.Client.Client
         }
 
         /// <summary>
+        /// List all authorizations.
+        /// </summary>
+        /// <returns>List all authorizations.</returns>
+        public async Task<List<Authorization>> FindAuthorizations()
+        {
+            return await FindAuthorizationsBy(null, null);
+        }
+
+        /// <summary>
         /// List all authorizations belonging to specified user.
         /// </summary>
         /// <param name="user">user</param>

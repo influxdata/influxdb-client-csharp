@@ -1,5 +1,5 @@
 using System;
-using System.IO;
+using System.Diagnostics;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
@@ -11,7 +11,7 @@ using Task = System.Threading.Tasks.Task;
 
 namespace InfluxData.Platform.Client.Client
 {
-    public class PlatformClient : AbstractClient
+    public class PlatformClient : AbstractClient, IDisposable
     {
         private readonly AuthenticateDelegatingHandler _authenticateDelegatingHandler;
 
@@ -28,7 +28,6 @@ namespace InfluxData.Platform.Client.Client
             Client.HttpClient.Timeout = options.Timeout;
         }
         
-        
         /// <summary>
         /// Get the Query client.
         /// </summary>
@@ -36,6 +35,25 @@ namespace InfluxData.Platform.Client.Client
         public QueryClient CreateQueryClient()
         {
             return new QueryClient(Client);
+        }
+
+        /// <summary>
+        /// Get the Write client.
+        /// </summary>
+        /// <returns>the new client instance for the Write API</returns>
+        public WriteClient CreateWriteClient()
+        {
+            return new WriteClient(Client, WriteOptions.CreateNew().Build());
+        }
+        
+        /// <summary>
+        /// Get the Write client.
+        /// </summary>
+        /// <param name="writeOptions">the configuration for a write client</param>
+        /// <returns>the new client instance for the Write API</returns>
+        public WriteClient CreateWriteClient(WriteOptions writeOptions)
+        {
+            return new WriteClient(Client, writeOptions);
         }
 
         /// <summary>
@@ -101,19 +119,21 @@ namespace InfluxData.Platform.Client.Client
             }
         }
 
-        public async Task Close()
+        public void Dispose()
         {
             //
             // signout
             //
             try
             {
-                await _authenticateDelegatingHandler.Signout();
+                Task signout = _authenticateDelegatingHandler.Signout();
+                
+                signout.Wait();
             }
-            catch (HttpRequestException e)
+            catch (Exception e)
             {
-                Console.WriteLine("The signout exception");
-                Console.WriteLine(e);
+                Trace.WriteLine("The signout exception");
+                Trace.WriteLine(e);
             }
         }
     }

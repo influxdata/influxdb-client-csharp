@@ -2,7 +2,6 @@ using System;
 using System.Globalization;
 using InfluxData.Platform.Client.Client;
 using NUnit.Framework;
-using Platform.Common.Platform.Rest;
 using Platform.Common.Tests;
 
 namespace Platform.Client.Tests
@@ -22,7 +21,7 @@ namespace Platform.Client.Tests
         [TearDown]
         protected void After()
         {
-            PlatformClient.Close().Wait();
+            PlatformClient.Dispose();
         }
         
         protected string GenerateName(string prefix) 

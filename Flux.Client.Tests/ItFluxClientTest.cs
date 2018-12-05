@@ -49,6 +49,7 @@ namespace Flux.Client.Tests
 
                 if (CountdownEvent.CurrentCount % 100_000 == 0) 
                 {
+                    //TODO use trace
                     Console.WriteLine("Remaining parsed: " + CountdownEvent.CurrentCount + " records");
                 }
             });

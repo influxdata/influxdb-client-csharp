@@ -8,14 +8,14 @@ namespace InfluxData.Platform.Client.Option
     /// </summary>
     public class PlatformOptions
     {
-        public string Url { get; private set; }
+        public string Url { get; }
 
-        public EAuthScheme AuthScheme { get; private set; }
-        public char[] Token { get; private set; }
-        public string Username { get; private set; }
-        public char[] Password { get; private set; }
+        public AuthenticationScheme AuthScheme { get; }
+        public char[] Token { get; }
+        public string Username { get; }
+        public char[] Password { get; }
 
-        public TimeSpan Timeout { get; private set; }
+        public TimeSpan Timeout { get; }
 
         private PlatformOptions(Builder builder)
         {
@@ -32,7 +32,7 @@ namespace InfluxData.Platform.Client.Option
         /// <summary>
         /// The scheme uses to Authentication.
         /// </summary>
-        public enum EAuthScheme
+        public enum AuthenticationScheme
         {
             /// <summary>
             /// Basic auth.
@@ -50,14 +50,13 @@ namespace InfluxData.Platform.Client.Option
         /// </summary>
         public sealed class Builder
         {
-            public string UrlString { get; private set; }
+            internal string UrlString;
 
-            public EAuthScheme AuthScheme { get; private set; }
-            public char[] Token { get; private set; }
-            public string Username { get; private set; }
-            public char[] Password { get; private set; }
-
-            public TimeSpan TimeOut { get; private set; }
+            internal AuthenticationScheme AuthScheme;
+            internal char[] Token;
+            internal string Username;
+            internal char[] Password;
+            internal TimeSpan TimeOut;
 
             public static Builder CreateNew()
             {
@@ -93,7 +92,7 @@ namespace InfluxData.Platform.Client.Option
             }
 
             /// <summary>
-            /// Setup authorization by <see cref="EAuthScheme.Session"/>.
+            /// Setup authorization by <see cref="AuthenticationScheme.Session"/>.
             /// </summary>
             /// <param name="username">the username to use in the basic auth</param>
             /// <param name="password">the password to use in the basic auth</param>
@@ -104,7 +103,7 @@ namespace InfluxData.Platform.Client.Option
                 Arguments.CheckNonEmptyString(username, "username");
                 Arguments.CheckNotNull(password, "password");
 
-                AuthScheme = EAuthScheme.Session;
+                AuthScheme = AuthenticationScheme.Session;
                 Username = username;
                 Password = password;
 
@@ -112,7 +111,7 @@ namespace InfluxData.Platform.Client.Option
             }
 
             /// <summary>
-            /// Setup authorization by <see cref="EAuthScheme.Token"/>.
+            /// Setup authorization by <see cref="AuthenticationScheme.Token"/>.
             /// </summary>
             /// <param name="token">the token to use for the authorization</param>
             /// <returns><see cref="Builder"/></returns>
@@ -120,7 +119,7 @@ namespace InfluxData.Platform.Client.Option
             {
                 Arguments.CheckNotNull(token, "token");
 
-                AuthScheme = EAuthScheme.Token;
+                AuthScheme = AuthenticationScheme.Token;
                 Token = token;
 
                 return this;

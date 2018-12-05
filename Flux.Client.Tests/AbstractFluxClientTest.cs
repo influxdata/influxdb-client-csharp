@@ -2,6 +2,7 @@ using NUnit.Framework;
 using Platform.Common.Tests;
 using WireMock.ResponseBuilders;
 using WireMock.Server;
+using WireMock.Settings;
 
 namespace Flux.Client.Tests
 {
@@ -21,9 +22,13 @@ namespace Flux.Client.Tests
         [SetUp]
         public new void SetUp()
         {
-            MockServer = FluentMockServer.Start();
-            
-            FluxClient = FluxClientFactory.Create(MockServer.Urls[0]);           
+            MockServer = FluentMockServer.Start(new FluentMockServerSettings
+            {
+                UseSSL = false
+            });
+
+            var mockServerUrl = MockServer.Urls[0];
+            FluxClient = FluxClientFactory.Create(mockServerUrl);           
         }
 
         [TearDown]

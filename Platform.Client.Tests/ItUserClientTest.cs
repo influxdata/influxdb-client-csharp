@@ -111,7 +111,7 @@ namespace Platform.Client.Tests
         [Test]
         public async Task MeNotAuthenticated()
         {
-            PlatformClient.Close().Wait();
+            PlatformClient.Dispose();
 
             User me = await _userClient.Me();
 
@@ -130,7 +130,7 @@ namespace Platform.Client.Tests
         [Test]
         public async Task UpdateMePasswordNotAuthenticate()
         {
-            PlatformClient.Close().Wait();
+            PlatformClient.Dispose();
 
             User me = await _userClient.MeUpdatePassword("my-password", "my-password");
 

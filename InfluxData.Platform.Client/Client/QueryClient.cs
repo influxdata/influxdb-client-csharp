@@ -346,7 +346,7 @@ namespace InfluxData.Platform.Client.Client
             Arguments.CheckNotNull(onError, "onError");
             Arguments.CheckNotNull(onComplete, "onComplete");
 
-            var requestMessage = QueryGet(query, organization, dialect);
+            var requestMessage = Query(query, organization, dialect);
 
             await QueryRaw(requestMessage, onResponse, onError, onComplete);
         }
@@ -362,19 +362,19 @@ namespace InfluxData.Platform.Client.Client
             Arguments.CheckNotNull(onError, "onError");
             Arguments.CheckNotNull(onComplete, "onComplete");
 
-            var requestMessage = QueryGet(query, organization, dialect);
+            var requestMessage = Query(query, organization, dialect);
 
             await Query(requestMessage, consumer, onError, onComplete);
         }
 
-        private HttpRequestMessage QueryGet(string query, string organization, string dialect)
+        private HttpRequestMessage Query(string query, string organization, string dialect)
         {
             Arguments.CheckNonEmptyString(query, "query");
             Arguments.CheckNonEmptyString(organization, "organization");
 
             var path = $"/api/v2/query?organization={organization}";
 
-            var message = new HttpRequestMessage(new HttpMethod(HttpMethodKind.Get.Name()), path)
+            var message = new HttpRequestMessage(new HttpMethod(HttpMethodKind.Post.Name()), path)
             {
                 Content = new StringContent(CreateBody(dialect, query))
             };

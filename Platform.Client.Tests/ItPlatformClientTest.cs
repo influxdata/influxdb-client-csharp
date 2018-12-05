@@ -27,7 +27,7 @@ namespace Platform.Client.Tests
             Assert.IsFalse(health.IsHealthy());
             Assert.AreEqual("Connection refused", health.Message);
 
-            await clientNotRunning.Close();
+            clientNotRunning.Dispose();
         }
 
         [Test]

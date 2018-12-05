@@ -85,6 +85,18 @@ namespace Platform.Client.Tests
         }
         
         [Test]
+        public async Task FindAuthorizations() {
+
+            int size = (await _authorizationClient.FindAuthorizations()).Count;
+
+            await _authorizationClient.CreateAuthorization(_user, new List<Permission>());
+
+            List<Authorization> authorizations = await _authorizationClient.FindAuthorizations();
+            
+            Assert.AreEqual(size + 1, authorizations.Count);
+        }
+        
+        [Test]
         public async Task FindAuthorizationsById() {
 
             Authorization authorization = await _authorizationClient.CreateAuthorization(_user, new List<Permission>());
