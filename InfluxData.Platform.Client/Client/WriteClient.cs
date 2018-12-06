@@ -14,11 +14,29 @@ using Platform.Common.Platform.Rest;
 
 namespace InfluxData.Platform.Client.Client
 {
+    /// <summary>
+    /// Precision of Dates that are written to InfluxData Platform.
+    /// </summary>
     public enum TimeUnit
     {
+        /// <summary>
+        /// Nanosecond precision.
+        /// </summary>
         Nanos,
+        
+        /// <summary>
+        /// Microsecond precision.
+        /// </summary>
         Micros,
+        
+        /// <summary>
+        /// Millisecond precision.
+        /// </summary>
         Millis,
+        
+        /// <summary>
+        /// Second precision.
+        /// </summary>
         Seconds
     }
 
