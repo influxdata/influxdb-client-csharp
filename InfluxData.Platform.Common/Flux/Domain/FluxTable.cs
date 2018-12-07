@@ -4,27 +4,27 @@ using System.Text;
 
 namespace Platform.Common.Flux.Domain
 {
-/**
- * This class represents table structure of Flux CSV Response.
- *
- * <a href="https://github.com/influxdata/platform/blob/master/query/docs/SPEC.md#table">Specification</a>.
- */
+    /// <summary>
+    /// This class represents table structure of Flux CSV Response.
+    ///<a href="http://bit.ly/flux-spec">Specification</a>.
+    /// </summary>
     public class FluxTable
     {
-        /**
-        * Table column's labels and types.
-        */
-        public List<FluxColumn> Columns { get; set; } = new List<FluxColumn>();
+        /// <summary>
+        /// Table column's labels and types.
+        /// </summary>
+        public List<FluxColumn> Columns { get; } = new List<FluxColumn>();
 
-        /**
-        * Table records.
-        */
-        public List<FluxRecord> Records { get; set; } = new List<FluxRecord>();
-        
-        /**
-        * A table's group key is subset of the entire columns dataset that assigned to the table.
-        * As such, all records within a table will have the same values for each column that is part of the group key.
-        */
+        /// <summary>
+        /// Table records.
+        /// </summary>
+        public List<FluxRecord> Records { get; } = new List<FluxRecord>();
+
+        /// <summary>
+        /// A table's group key is subset of the entire columns dataset that assigned to the table.
+        /// As such, all records within a table will have the same values for each column that is part of the group key.
+        /// </summary>
+        /// <returns></returns>
         public List<FluxColumn> GetGroupKey()
         {
             return Columns.Where(column => column.Group).ToList();

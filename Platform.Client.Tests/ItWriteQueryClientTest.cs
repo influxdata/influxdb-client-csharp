@@ -4,6 +4,7 @@ using System.Threading;
 using InfluxData.Platform.Client.Client;
 using InfluxData.Platform.Client.Domain;
 using InfluxData.Platform.Client.Option;
+using InfluxData.Platform.Client.Write;
 using NodaTime;
 using NUnit.Framework;
 using Platform.Common.Flux.Domain;
@@ -106,6 +107,48 @@ namespace Platform.Client.Tests
             Assert.AreEqual("h2o_feet", records[1].GetMeasurement());
             Assert.AreEqual(2, records[1].GetValue());
             Assert.AreEqual("level water_level", records[1].GetField());
+        }
+        
+        [Test]
+        public async Task WritePoints() {
+
+            String bucketName = _bucket.Name;
+
+            var time = DateTime.UtcNow;
+
+            Point point1 = Point
+                .Measurement("h2o_feet")
+                .Tag("location", "west")
+                .Field("water_level", 1)
+                .Timestamp(time, TimeUnit.Seconds);
+            
+            Point point2 = Point
+                .Measurement("h2o_feet").Tag("location", "west")
+                .Field("water_level", 2)
+                .Timestamp(time.AddSeconds(-10), TimeUnit.Seconds);
+            
+            _writeClient = PlatformClient.CreateWriteClient();
+            _writeClient.WritePoints(bucketName, "my-org", point1, point2);
+            _writeClient.Flush();
+            Thread.Sleep(1000);
+
+            List<FluxTable> query = await _queryClient.Query("from(bucket:\"" + bucketName + "\") |> range(start: 0)", "my-org");
+
+            Assert.AreEqual(1, query.Count);
+            
+            var records = query[0].Records;
+            Assert.AreEqual(2, records.Count);
+            
+            Assert.AreEqual("h2o_feet", records[0].GetMeasurement());
+            Assert.AreEqual(2, records[0].GetValue());
+            Assert.AreEqual("water_level", records[0].GetField());
+
+            Assert.AreEqual("h2o_feet", records[1].GetMeasurement());
+            Assert.AreEqual(1, records[1].GetValue());
+            Assert.AreEqual("water_level", records[1].GetField());
+
+            Assert.AreEqual(time.AddTicks(-(time.Ticks % TimeSpan.TicksPerSecond)).Add(-TimeSpan.FromSeconds(10)), records[0].GetTimeInDateTime());
+            Assert.AreEqual(time.AddTicks(-(time.Ticks % TimeSpan.TicksPerSecond)), records[1].GetTimeInDateTime());
         }
         
         [Test]

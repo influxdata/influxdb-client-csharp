@@ -6,102 +6,102 @@ using NodaTime;
 
 namespace Platform.Common.Flux.Domain
 {
-/**
- * A record is a tuple of values. Each record in the table represents a single point in the series.
- *
- * <a href="https://github.com/influxdata/platform/blob/master/query/docs/SPEC.md#record">Specification</a>.
- */
+    /// <summary>
+    /// A record is a tuple of values. Each record in the table represents a single point in the series.
+    ///
+    /// <para><a href="https://github.com/influxdata/platform/blob/master/query/docs/SPEC.md#record">Specification</a>.</para>
+    /// </summary>
     public class FluxRecord
     {
-        /**
-        * The Index of the table that the record belongs.
-        */
+        /// <summary>
+        /// The Index of the table that the record belongs.
+        /// </summary>
         public int Table { get; set; }
 
-        /**
-        * The record's values.
-        */
+        /// <summary>
+        /// The record's values.
+        /// </summary>
         public Dictionary<string, object> Values { get; } = new Dictionary<string, object>();
 
         public FluxRecord(int table)
         {
             Table = table;
         }
-        
-        /**
-         * @return the inclusive lower time bound of all records
-         */
-        public Instant? GetStart() 
+
+        /// <returns>the inclusive lower time bound of all records</returns>
+        public Instant? GetStart()
         {
             return (Instant?) GetValueByKey("_start");
         }
 
-        /**
-         * @return the exclusive upper time bound of all records
-         */
-        public Instant? GetStop() 
+        /// <returns>the exclusive upper time bound of all records</returns>
+        public Instant? GetStop()
         {
             return (Instant?) GetValueByKey("_stop");
         }
 
-        /**
-         * @return the time of the record
-         */
-        public Instant? GetTime() 
+        ///<summary>
+        /// The timestamp as a <see cref="Instant"/>
+        /// </summary>
+        /// <returns>the time of the record</returns>
+        public Instant? GetTime()
         {
             return (Instant?) GetValueByKey("_time");
         }
+        
+        ///<summary>
+        /// The timestamp as a <see cref="Instant"/>
+        /// </summary>
+        /// <returns>the time of the record</returns>
+        public DateTime? GetTimeInDateTime()
+        {
+            var time = GetTime();
 
-        /**
-         * @return the value of the record
-         */
-        public Object GetValue() 
+            return time?.InUtc().ToDateTimeUtc() ?? default(DateTime);
+        }
+
+        /// <returns>the value of the record</returns>
+        public Object GetValue()
         {
             return GetValueByKey("_value");
         }
 
-        /**
-         * @return get value with key <i>_field</i>
-         */
-        public string GetField() 
+        /// <returns>get value with key <i>_field</i></returns>
+        public string GetField()
         {
             return (string) GetValueByKey("_field");
         }
 
-        /**
-         * @return get value with key <i>_measurement</i>
-         */
-        public string GetMeasurement() 
+        /// <returns>get value with key <i>_measurement</i></returns>
+        public string GetMeasurement()
         {
             return (string) GetValueByKey("_measurement");
         }
 
-        /**
-        * Get FluxRecord value by index.
-        *
-        * @param index of value in CSV response
-        * @return value
-        */
+        /// <summary>
+        /// Get FluxRecord value by index.
+        /// </summary>
+        /// <param name="index">index of value in CSV response</param>
+        /// <returns>value</returns>
         public object GetValueByIndex(int index)
         {
             return Values.Values.ToList()[index];
         }
 
-        /**
-        * Get FluxRecord value by key.
-        *
-        * @param key of value in CSV response
-        * @return value
-        */
+        /// <summary>
+        /// Get FluxRecord value by key.
+        /// </summary>
+        /// <param name="key">the key of value in CSV response</param>
+        /// <returns>value</returns>
         public object GetValueByKey(string key)
         {
             object value;
-            
+
             if (Values.TryGetValue(key, out value))
             {
                 return value;
             }
-            
+
             return null;
         }
 

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Net.Http;
 using System.Reactive.Concurrency;
 using System.Reactive.Linq;
@@ -8,6 +9,7 @@ using System.Reactive.Subjects;
 using System.Text;
 using System.Threading.Tasks;
 using InfluxData.Platform.Client.Option;
+using InfluxData.Platform.Client.Write;
 using Platform.Common;
 using Platform.Common.Platform;
 using Platform.Common.Platform.Rest;
@@ -23,17 +25,17 @@ namespace InfluxData.Platform.Client.Client
         /// Nanosecond precision.
         /// </summary>
         Nanos,
-        
+
         /// <summary>
         /// Microsecond precision.
         /// </summary>
         Micros,
-        
+
         /// <summary>
         /// Millisecond precision.
         /// </summary>
         Millis,
-        
+
         /// <summary>
         /// Second precision.
         /// </summary>
@@ -42,8 +44,8 @@ namespace InfluxData.Platform.Client.Client
 
     public class WriteClient : AbstractClient, IDisposable
     {
-        private readonly Subject<BatchWriteItem> _subject = new Subject<BatchWriteItem>();
-        private readonly Subject<List<BatchWriteItem>> _flush = new Subject<List<BatchWriteItem>>();
+        private readonly Subject<BatchWriteData> _subject = new Subject<BatchWriteData>();
+        private readonly Subject<List<BatchWriteData>> _flush = new Subject<List<BatchWriteData>>();
 
         protected internal WriteClient(DefaultClientIo client, WriteOptions writeOptions) : base(client)
         {
@@ -57,7 +59,7 @@ namespace InfluxData.Platform.Client.Client
 
             var observable = _subject.ObserveOn(writeOptions.WriteScheduler);
 
-            IObservable<IList<BatchWriteItem>> boundaries = observable
+            IObservable<IList<BatchWriteData>> boundary = observable
                 .Buffer(TimeSpan.FromMilliseconds(writeOptions.FlushInterval), writeOptions.BatchSize,
                     writeOptions.WriteScheduler)
                 .Merge(_flush);
@@ -66,7 +68,7 @@ namespace InfluxData.Platform.Client.Client
                 //
                 // Batching
                 //
-                .Window(boundaries)
+                .Window(boundary)
                 //
                 // Group by key - same bucket, same org
                 //
@@ -79,7 +81,7 @@ namespace InfluxData.Platform.Client.Client
                     IObservable<string> aggregate = grouped
                         .Aggregate("", (lineProtocol, batchWrite) =>
                         {
-                            var data = batchWrite.Data;
+                            var data = batchWrite.ToLineProtocol();
 
                             if (string.IsNullOrEmpty(data))
                             {
@@ -94,7 +96,7 @@ namespace InfluxData.Platform.Client.Client
                             return String.Join("\n", lineProtocol, data);
                         });
 
-                    return aggregate.Select(records => new BatchWriteItem(grouped.Key, records));
+                    return aggregate.Select(records => new BatchWriteRecord(grouped.Key, records));
                 })
                 //
                 // Jitter
@@ -109,7 +111,7 @@ namespace InfluxData.Platform.Client.Client
                 //
                 // Map to Async request
                 //
-                .Where(batchWriteItem => !string.IsNullOrEmpty(batchWriteItem.Data))
+                .Where(batchWriteItem => !string.IsNullOrEmpty(batchWriteItem.ToLineProtocol()))
                 .Select(batchWriteItem =>
                 {
                     string org = batchWriteItem.Options.Organization;
@@ -137,7 +139,7 @@ namespace InfluxData.Platform.Client.Client
                     var path = $"/api/v2/write?org={org}&bucket={bucket}&precision={precision}";
                     var request = new HttpRequestMessage(new HttpMethod(HttpMethodKind.Post.Name()), path)
                     {
-                        Content = new StringContent(batchWriteItem.Data, Encoding.UTF8, "text/plain")
+                        Content = new StringContent(batchWriteItem.ToLineProtocol(), Encoding.UTF8, "text/plain")
                     };
 
                     Task<RequestResult> doRequest = Client.DoRequest(request);
@@ -170,7 +172,7 @@ namespace InfluxData.Platform.Client.Client
             Arguments.CheckNonEmptyString(organization, "organization");
             Arguments.CheckNotNull(precision, "TimeUnit.precision is required");
 
-            _subject.OnNext(new BatchWriteItem(new BatchWriteOptions(bucket, organization, precision), record));
+            _subject.OnNext(new BatchWriteRecord(new BatchWriteOptions(bucket, organization, precision), record));
         }
 
         /// <summary>
@@ -187,8 +189,8 @@ namespace InfluxData.Platform.Client.Client
             Arguments.CheckNotNull(precision, "TimeUnit.precision is required");
 
             records.ForEach(record => WriteRecord(bucket, organization, precision, record));
-        }  
-        
+        }
+
         /// <summary>
         /// Write Line Protocol records into specified bucket.
         /// </summary>
@@ -201,7 +203,7 @@ namespace InfluxData.Platform.Client.Client
             Arguments.CheckNonEmptyString(bucket, "bucket");
             Arguments.CheckNonEmptyString(organization, "organization");
             Arguments.CheckNotNull(precision, "TimeUnit.precision is required");
-            
+
             foreach (var record in records)
             {
                 WriteRecord(bucket, organization, precision, record);
@@ -209,37 +211,121 @@ namespace InfluxData.Platform.Client.Client
         }
 
         /// <summary>
+        /// Write a Data point into specified bucket.
+        /// </summary>
+        /// <param name="bucket">specifies the destination bucket for writes</param>
+        /// <param name="organization">specifies the destination organization for writes</param>
+        /// <param name="point">specifies the Data point to write into bucket</param>
+        public void WritePoint(string bucket, string organization, Point point)
+        {
+            Arguments.CheckNonEmptyString(bucket, "bucket");
+            Arguments.CheckNonEmptyString(organization, "organization");
+
+            if (point == null)
+            {
+                return;
+            }
+
+            _subject.OnNext(new BatchWritePoint(new BatchWriteOptions(bucket, organization, point.Precision), point));
+        }
+
+        /// <summary>
+        /// Write Data points into specified bucket.
+        /// </summary>
+        /// <param name="bucket">specifies the destination bucket for writes</param>
+        /// <param name="organization">specifies the destination organization for writes</param>
+        /// <param name="points">specifies the Data points to write into bucket</param>
+        public void WritePoints(string bucket, string organization, List<Point> points)
+        {
+            Arguments.CheckNonEmptyString(bucket, "bucket");
+            Arguments.CheckNonEmptyString(organization, "organization");
+
+            foreach (var point in points)
+            {
+                WritePoint(bucket, organization, point);
+            }
+        }
+
+        /// <summary>
+        /// Write Data points into specified bucket.
+        /// </summary>
+        /// <param name="bucket">specifies the destination bucket for writes</param>
+        /// <param name="organization">specifies the destination organization for writes</param>
+        /// <param name="points">specifies the Data points to write into bucket</param>
+        public void WritePoints(string bucket, string organization, params Point[] points)
+        {
+            Arguments.CheckNonEmptyString(bucket, "bucket");
+            Arguments.CheckNonEmptyString(organization, "organization");
+
+            WritePoints(bucket, organization, points.ToList());
+        }
+
+        /// <summary>
         /// Forces the client to flush all pending writes from the buffer to InfluxData Platform via HTTP.
         /// </summary>
         public void Flush()
         {
-            _flush.OnNext(new List<BatchWriteItem>());
+            _flush.OnNext(new List<BatchWriteData>());
         }
 
         public void Dispose()
         {
             _subject.OnCompleted();
             _flush.OnCompleted();
-            
+
             _subject.Dispose();
             _flush.Dispose();
         }
     }
 
-    internal class BatchWriteItem
+    internal abstract class BatchWriteData
     {
         internal readonly BatchWriteOptions Options;
-        internal readonly string Data;
 
-        public BatchWriteItem(BatchWriteOptions options, string data)
+        protected BatchWriteData(BatchWriteOptions options)
         {
-            Arguments.CheckNotNull(options, "data");
-            Arguments.CheckNotNull(data, "write options");
+            Arguments.CheckNotNull(options, "options");
 
             Options = options;
-            Data = data;
+        }
+
+        internal abstract string ToLineProtocol();
+    }
+
+    internal class BatchWriteRecord : BatchWriteData
+    {
+        private readonly string _record;
+
+        internal BatchWriteRecord(BatchWriteOptions options, string record) : base(options)
+        {
+            Arguments.CheckNotNull(record, nameof(record));
+
+            _record = record;
+        }
+
+        internal override string ToLineProtocol()
+        {
+            return _record;
         }
     }
+
+    internal class BatchWritePoint : BatchWriteData
+    {
+        private readonly Point _point;
+
+        internal BatchWritePoint(BatchWriteOptions options, Point point) : base(options)
+        {
+            Arguments.CheckNotNull(point, nameof(point));
+
+            _point = point;
+        }
+
+        internal override string ToLineProtocol()
+        {
+            return _point.ToLineProtocol();
+        }
+    }
+
 
     internal class BatchWriteOptions
     {

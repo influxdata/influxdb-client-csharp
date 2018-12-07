@@ -14,7 +14,7 @@ namespace InfluxData.Platform.Client.Write
     public class Point
     {
         private static readonly DateTime EpochStart = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
-        
+
         private readonly string _measurementName;
         private readonly SortedDictionary<string, string> _tags;
         private readonly SortedDictionary<string, object> _fields;
@@ -171,7 +171,7 @@ namespace InfluxData.Platform.Client.Write
                     _time = timestamp.TotalSeconds;
                     break;
             }
-            
+
             return this;
         }
 
@@ -189,7 +189,7 @@ namespace InfluxData.Platform.Client.Write
             }
 
             TimeSpan timeSpan = timestamp.Subtract(EpochStart);
-            
+
             return Timestamp(timeSpan, timeUnit);
         }
 
@@ -204,7 +204,7 @@ namespace InfluxData.Platform.Client.Write
             return Timestamp(timestamp.UtcDateTime, timeUnit);
         }
 
-        public override string ToString()
+        public string ToLineProtocol()
         {
             var sb = new StringBuilder();
 
@@ -310,7 +310,7 @@ namespace InfluxData.Platform.Client.Write
             }
 
             sb.Append(' ');
-            sb.Append(((IConvertible) _time).ToString(CultureInfo.InvariantCulture));
+            sb.Append(((long) _time).ToString(CultureInfo.InvariantCulture));
         }
 
         private void EscapeKey(StringBuilder sb, string key)

@@ -2,36 +2,34 @@ using System.Text;
 
 namespace Platform.Common.Flux.Domain
 {
-/**
- * This class represents column header specification of {@link FluxTable}.
- * <p>
- */
+    /// <summary>
+    /// This class represents column header specification of <see cref="FluxTable"/>.
+    /// </summary>
     public class FluxColumn
     {
-        /**
-         * Column index in record.
-         */
+        /// <summary>
+        /// Column index in record.
+        /// </summary>
         public int Index { get; set; }
 
-        /**
-         * The label of column (e.g., "_start", "_stop", "_time").
-         */
-
+        /// <summary>
+        /// The label of column (e.g., "_start", "_stop", "_time").
+        /// </summary>
         public string Label { get; set; }
 
-        /**
-         * The data type of column (e.g., "string", "long", "dateTime:RFC3339").
-         */
+        /// <summary>
+        /// The data type of column (e.g., "string", "long", "dateTime:RFC3339").
+        /// </summary>
         public string DataType { get; set; }
 
-        /**
-         * Boolean flag indicating if the column is part of the table's group key.
-         */
+        /// <summary>
+        /// Boolean flag indicating if the column is part of the table's group key.
+        /// </summary>
         public bool Group { get; set; }
 
-        /**
-         * Default value to be used for rows whose string value is the empty string.
-         */
+        /// <summary>
+        /// Default value to be used for rows whose string value is the empty string.
+        /// </summary>
         public string DefaultValue { get; set; }
 
         public override string ToString()

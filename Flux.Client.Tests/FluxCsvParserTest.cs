@@ -142,6 +142,7 @@ namespace Flux.Client.Tests
             Assert.That(InstantPattern.ExtendedIso.Parse("1970-01-01T00:00:10Z").Value.Equals(fluxRecord.GetStart()));
             Assert.That(InstantPattern.ExtendedIso.Parse("1970-01-01T00:00:20Z").Value.Equals(fluxRecord.GetStop()));
             Assert.That(InstantPattern.ExtendedIso.Parse("1970-01-01T00:00:10Z").Value.Equals(fluxRecord.GetTime()));
+            Assert.That(new DateTime(1970,1,1, 0, 0, 10).Equals(fluxRecord.GetTimeInDateTime()));
             Assert.That(fluxRecord.GetValue().Equals(10L));
             Assert.That(fluxRecord.GetField().Equals("free"));
             Assert.That(fluxRecord.GetMeasurement().Equals("mem"));
