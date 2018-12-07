@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Numerics;
 using System.Text;
 using InfluxData.Platform.Client.Client;
+using NodaTime;
 using Platform.Common.Platform;
 
 namespace InfluxData.Platform.Client.Write
@@ -20,7 +22,7 @@ namespace InfluxData.Platform.Client.Write
         private readonly SortedDictionary<string, object> _fields;
 
         public TimeUnit Precision { get; private set; }
-        private double? _time;
+        private BigInteger? _time;
 
         private Point(string measurementName)
         {
@@ -162,13 +164,13 @@ namespace InfluxData.Platform.Client.Write
                     _time = timestamp.Ticks * 100;
                     break;
                 case TimeUnit.Micros:
-                    _time = timestamp.Ticks * 0.1;
+                    _time = (BigInteger) (timestamp.Ticks * 0.1);
                     break;
                 case TimeUnit.Millis:
-                    _time = timestamp.TotalMilliseconds;
+                    _time = (BigInteger) timestamp.TotalMilliseconds;
                     break;
                 case TimeUnit.Seconds:
-                    _time = timestamp.TotalSeconds;
+                    _time = (BigInteger) timestamp.TotalSeconds;
                     break;
             }
 
@@ -204,6 +206,36 @@ namespace InfluxData.Platform.Client.Write
             return Timestamp(timestamp.UtcDateTime, timeUnit);
         }
 
+        /// <summary>
+        /// Updates the timestamp for the point represented by <see cref="Instant"/>.
+        /// </summary>
+        /// <param name="timestamp">the timestamp</param>
+        /// <param name="timeUnit">the timestamp precision</param>
+        /// <returns></returns>
+        public Point Timestamp(Instant timestamp, TimeUnit timeUnit)
+        {
+            Precision = timeUnit;
+
+            switch (timeUnit)
+            {
+                case TimeUnit.Seconds:
+                    _time = timestamp.ToUnixTimeSeconds();
+                    break;
+                case TimeUnit.Millis:
+                    _time = timestamp.ToUnixTimeMilliseconds();
+                    break;
+                case TimeUnit.Micros:
+                    _time = (long) (timestamp.ToUnixTimeTicks() * 0.1);
+                    break;
+                default:
+                    _time = (timestamp - NodaConstants.UnixEpoch).ToBigIntegerNanoseconds();
+                    break;
+            }
+
+            return this;
+        }
+
+        /// <returns>The Line Protocol</returns>
         public string ToLineProtocol()
         {
             var sb = new StringBuilder();
@@ -310,7 +342,7 @@ namespace InfluxData.Platform.Client.Write
             }
 
             sb.Append(' ');
-            sb.Append(((long) _time).ToString(CultureInfo.InvariantCulture));
+            sb.Append(((BigInteger) _time).ToString(CultureInfo.InvariantCulture));
         }
 
         private void EscapeKey(StringBuilder sb, string key)

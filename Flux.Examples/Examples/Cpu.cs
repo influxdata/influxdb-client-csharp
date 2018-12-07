@@ -1,6 +1,6 @@
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 using NodaTime;
+using Platform.Common.Platform;
 
 namespace Flux.Examples.Examples
 {

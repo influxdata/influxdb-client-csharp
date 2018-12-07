@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading;
@@ -10,6 +9,7 @@ using NodaTime;
 using NUnit.Framework;
 using Platform.Common.Flux.Domain;
 using Platform.Common.Flux.Error;
+using Platform.Common.Platform;
 
 namespace Flux.Client.Tests
 {

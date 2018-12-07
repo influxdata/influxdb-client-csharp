@@ -1,10 +1,10 @@
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Threading;
 using System.Threading.Tasks;
 using NUnit.Framework;
 using Platform.Common.Flux.Domain;
 using Platform.Common.Flux.Error;
+using Platform.Common.Platform;
 using WireMock.RequestBuilders;
 
 namespace Flux.Client.Tests

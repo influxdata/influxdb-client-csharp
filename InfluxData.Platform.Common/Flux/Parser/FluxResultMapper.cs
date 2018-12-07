@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Reflection;
 using Platform.Common.Flux.Domain;
@@ -9,17 +8,16 @@ using Platform.Common.Platform;
 
 namespace Platform.Common.Flux.Parser
 {
-    public class FluxResultMapper
+    internal class FluxResultMapper
     {
-        /**
-         * Maps FluxRecord into custom POCO class.
-         *
-         * @param record flux record
-         * @param <T>    poco type
-         * @return
-         */
-
-        public T ToPoco<T>(FluxRecord record)
+        /// <summary>
+        /// Maps FluxRecord into custom POCO class.
+        /// </summary>
+        /// <param name="record">the Flux record</param>
+        /// <typeparam name="T">the POCO type</typeparam>
+        /// <returns></returns>
+        /// <exception cref="InfluxException"></exception>
+        internal T ToPoco<T>(FluxRecord record)
         {
             Arguments.CheckNotNull(record, "Record is required");
 
@@ -32,13 +30,13 @@ namespace Platform.Common.Flux.Parser
 
                 foreach (var property in properties)
                 {
-                    var attributes = property.GetCustomAttributes(typeof(ColumnAttribute), false);
+                    var attributes = property.GetCustomAttributes(typeof(Column), false);
 
-                    ColumnAttribute attribute = null;
+                    Column attribute = null;
 
                     if (attributes.Length > 0)
                     {
-                        attribute = (ColumnAttribute) attributes.First();
+                        attribute = (Column) attributes.First();
                     }
 
                     string columnName = property.Name;

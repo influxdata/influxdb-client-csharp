@@ -1,8 +1,7 @@
 using System;
-using System.Diagnostics;
-using System.Globalization;
 using InfluxData.Platform.Client.Client;
 using InfluxData.Platform.Client.Write;
+using NodaTime.Text;
 using NUnit.Framework;
 
 namespace Platform.Client.Tests
@@ -236,6 +235,19 @@ namespace Platform.Client.Tests
                 .Timestamp(offset, TimeUnit.Nanos);
 
             Assert.AreEqual("h2o,location=europe level=2i 15678000000000", point.ToLineProtocol());
+        }
+
+        [Test]
+        public void InstantFormatting()
+        {
+            var instant = InstantPattern.ExtendedIso.Parse("1970-01-01T00:00:45.999999999Z").Value;
+            
+            Point point = Point.Measurement("h2o")
+                .Tag("location", "europe")
+                .Field("level", 2)
+                .Timestamp(instant, TimeUnit.Seconds);
+            
+            Assert.AreEqual("h2o,location=europe level=2i 45", point.ToLineProtocol());
         }
     }
 }
