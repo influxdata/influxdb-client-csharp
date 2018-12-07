@@ -92,7 +92,8 @@ namespace InfluxData.Platform.Client.Client
 
             var request = await Get($"/api/v2/orgs/{organizationId}");
 
-            return Call<Organization>(request, "organization not found");
+            // TODO message is not propagate - https://github.com/influxdata/platform/pull/1749
+            return Call<Organization>(request, "not found");
         }
 
         /// <summary>
