@@ -133,7 +133,7 @@ namespace Platform.Common.Platform.Rest
         {
             var statusCode = resultRequest.StatusCode;
 
-            if (statusCode >= 200 && statusCode < 300)
+            if (resultRequest.IsSuccessful())
             {
                 return false;
             }

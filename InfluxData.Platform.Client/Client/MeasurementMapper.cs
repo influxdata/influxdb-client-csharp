@@ -27,7 +27,6 @@ namespace InfluxData.Platform.Client.Client
 
             var point = Point.Measurement(measurementAttribute.Name);
 
-            //TODO cache
             foreach (var property in measurement.GetType().GetProperties())
             {
                 Column column = (Column) property.GetCustomAttribute(typeof(Column));

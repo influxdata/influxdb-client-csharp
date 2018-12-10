@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Threading;
-using System.Threading.Tasks;
 using InfluxData.Platform.Client.Client;
+using InfluxData.Platform.Client.Client.Event;
 using InfluxData.Platform.Client.Domain;
 using InfluxData.Platform.Client.Option;
 using InfluxData.Platform.Client.Write;
@@ -305,6 +305,47 @@ namespace Platform.Client.Tests
             query = await _queryClient.Query("from(bucket:\"" + bucketName + "\") |> range(start: 0) |> last()", "my-org");
 
             Assert.AreEqual(1, query.Count);
+        }
+
+        [Test]
+        public void ListenWriteSuccessEvent()
+        {
+            String bucketName = _bucket.Name;
+            
+            WriteSuccessEvent success = null;
+            
+            _writeClient = PlatformClient.CreateWriteClient();
+            _writeClient.EventHandler += (sender, args) => { success = args as WriteSuccessEvent; };
+            
+            _writeClient.WriteRecord(bucketName, "my-org", TimeUnit.Nanos, "h2o_feet,location=coyote_creek level\\ water_level=1.0 1");
+            _writeClient.Flush();
+            
+            Thread.Sleep(100);
+            
+            Assert.IsNotNull(success);
+            Assert.AreEqual(success.Organization, "my-org");
+            Assert.AreEqual(success.Bucket, bucketName);
+            Assert.AreEqual(success.Precision, TimeUnit.Nanos);
+            Assert.AreEqual(success.LineProtocol, "h2o_feet,location=coyote_creek level\\ water_level=1.0 1");
+        }
+
+        [Test]
+        public void ListenWriteErrorEvent()
+        {
+            String bucketName = _bucket.Name;
+            
+            WriteErrorEvent error = null;
+            
+            _writeClient = PlatformClient.CreateWriteClient();
+            _writeClient.EventHandler += (sender, args) => { error = args as WriteErrorEvent; };
+            
+            _writeClient.WriteRecord(bucketName, "my-org", TimeUnit.Nanos, "h2o_feet,location=coyote_creek level\\ water_level=1.0 123456.789");
+            _writeClient.Flush();
+            
+            Thread.Sleep(100);
+            
+            Assert.IsNotNull(error);
+            Assert.AreEqual(error.Exception.Message, "unable to parse 'h2o_feet,location=coyote_creek level\\ water_level=1.0 123456.789': bad timestamp");
         }
         
         [Measurement("h2o")]

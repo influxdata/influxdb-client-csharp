@@ -8,9 +8,11 @@ using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using System.Text;
 using System.Threading.Tasks;
+using InfluxData.Platform.Client.Client.Event;
 using InfluxData.Platform.Client.Option;
 using InfluxData.Platform.Client.Write;
 using Platform.Common;
+using Platform.Common.Flux.Error;
 using Platform.Common.Platform;
 using Platform.Common.Platform.Rest;
 
@@ -47,6 +49,7 @@ namespace InfluxData.Platform.Client.Client
         private readonly Subject<BatchWriteData> _subject = new Subject<BatchWriteData>();
         private readonly Subject<List<BatchWriteData>> _flush = new Subject<List<BatchWriteData>>();
         private readonly MeasurementMapper _measurementMapper = new MeasurementMapper();
+        public event EventHandler EventHandler;
 
         protected internal WriteClient(DefaultClientIo client, WriteOptions writeOptions) : base(client)
         {
@@ -117,6 +120,7 @@ namespace InfluxData.Platform.Client.Client
                 {
                     string org = batchWriteItem.Options.Organization;
                     string bucket = batchWriteItem.Options.Bucket;
+                    string lineProtocol = batchWriteItem.ToLineProtocol();
                     string precision;
 
                     switch (batchWriteItem.Options.Precision)
@@ -140,20 +144,30 @@ namespace InfluxData.Platform.Client.Client
                     var path = $"/api/v2/write?org={org}&bucket={bucket}&precision={precision}";
                     var request = new HttpRequestMessage(new HttpMethod(HttpMethodKind.Post.Name()), path)
                     {
-                        Content = new StringContent(batchWriteItem.ToLineProtocol(), Encoding.UTF8, "text/plain")
+                        Content = new StringContent(lineProtocol, Encoding.UTF8, "text/plain")
                     };
 
                     Task<RequestResult> doRequest = Client.DoRequest(request);
+                    doRequest.ContinueWith(task =>
+                    {
+                        if (task.Result.IsSuccessful())
+                        {
+                            Publish(new WriteSuccessEvent(org, bucket, batchWriteItem.Options.Precision, lineProtocol));
+                        }
+                        else
+                        {
+                            var exception = new HttpException(InfluxException.GetErrorMessage(task.Result), task.Result.StatusCode);
 
+                            Publish(new WriteErrorEvent(org, bucket, batchWriteItem.Options.Precision, lineProtocol, exception));
+                        }
+                    });
+                    
                     return Observable.FromAsync(async () => await doRequest);
                 })
                 //
                 // TODO retry
                 //
                 .Concat()
-                //
-                // TODO events
-                //
                 .Subscribe(
                     requestResult => Trace.WriteLine($"Observed: {requestResult.StatusCode}"),
                     () => Trace.WriteLine("Completed"));
@@ -333,11 +347,20 @@ namespace InfluxData.Platform.Client.Client
 
         public void Dispose()
         {
+            Trace.WriteLine("Flushing batches before shutdown.");
+            
             _subject.OnCompleted();
             _flush.OnCompleted();
 
             _subject.Dispose();
             _flush.Dispose();
+        }
+        
+        private void Publish(PlatformEventArgs eventArgs)
+        {
+            eventArgs.LogEvent();
+            
+            EventHandler?.Invoke(this, eventArgs);
         }
     }
 
