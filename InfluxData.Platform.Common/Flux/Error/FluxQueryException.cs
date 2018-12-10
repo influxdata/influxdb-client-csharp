@@ -4,7 +4,7 @@ namespace Platform.Common.Flux.Error
     {
         public int Reference { get; }
 
-        public FluxQueryException(string message, int reference) : base(new QueryErrorResponse(0, message))
+        public FluxQueryException(string message, int reference) : base(message, reference)
         {
             Reference = reference;
         }

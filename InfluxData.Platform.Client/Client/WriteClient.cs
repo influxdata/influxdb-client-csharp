@@ -46,6 +46,7 @@ namespace InfluxData.Platform.Client.Client
     {
         private readonly Subject<BatchWriteData> _subject = new Subject<BatchWriteData>();
         private readonly Subject<List<BatchWriteData>> _flush = new Subject<List<BatchWriteData>>();
+        private readonly MeasurementMapper _measurementMapper = new MeasurementMapper();
 
         protected internal WriteClient(DefaultClientIo client, WriteOptions writeOptions) : base(client)
         {
@@ -261,6 +262,68 @@ namespace InfluxData.Platform.Client.Client
         }
 
         /// <summary>
+        /// Write a Measurement into specified bucket.
+        /// </summary>
+        /// <param name="bucket">specifies the destination bucket for writes</param>
+        /// <param name="organization">specifies the destination organization for writes</param>
+        /// <param name="precision">specifies the precision for the unix timestamps within the body line-protocol</param>
+        /// <param name="measurement">specifies the Measurement to write into bucket</param>
+        /// <typeparam name="TM">measurement type</typeparam>
+        public void WriteMeasurement<TM>(string bucket, string organization, TimeUnit precision, TM measurement)
+        {
+            Arguments.CheckNonEmptyString(bucket, "bucket");
+            Arguments.CheckNonEmptyString(organization, "organization");
+            Arguments.CheckNotNull(precision, "TimeUnit.precision is required");
+
+            if (measurement == null)
+            {
+                return;
+            }
+
+            var options = new BatchWriteOptions(bucket, organization, precision);
+
+            _subject.OnNext(new BatchWriteMeasurement<TM>(options, measurement, _measurementMapper));
+        }
+
+        /// <summary>
+        /// Write Measurements into specified bucket.
+        /// </summary>
+        /// <param name="bucket">specifies the destination bucket for writes</param>
+        /// <param name="organization">specifies the destination organization for writes</param>
+        /// <param name="precision">specifies the precision for the unix timestamps within the body line-protocol</param>
+        /// <param name="measurements">specifies Measurements to write into bucket</param>
+        /// <typeparam name="TM">measurement type</typeparam>
+        public void WriteMeasurements<TM>(string bucket, string organization, TimeUnit precision, List<TM> measurements)
+        {
+            Arguments.CheckNonEmptyString(bucket, "bucket");
+            Arguments.CheckNonEmptyString(organization, "organization");
+            Arguments.CheckNotNull(precision, "TimeUnit.precision is required");
+
+            foreach (var measurement in measurements)
+            {
+                WriteMeasurement(bucket, organization, precision, measurement);
+            }
+        }
+
+        /// <summary>
+        /// Write Measurements into specified bucket.
+        /// </summary>
+        /// <param name="bucket">specifies the destination bucket for writes</param>
+        /// <param name="organization">specifies the destination organization for writes</param>
+        /// <param name="precision">specifies the precision for the unix timestamps within the body line-protocol</param>
+        /// <param name="measurements">specifies Measurements to write into bucket</param>
+        /// <typeparam name="TM">measurement type</typeparam>
+        public void WriteMeasurements<TM>(string bucket, string organization, TimeUnit precision,
+            params TM[] measurements)
+        {
+            Arguments.CheckNonEmptyString(bucket, "bucket");
+            Arguments.CheckNonEmptyString(organization, "organization");
+            Arguments.CheckNotNull(precision, "TimeUnit.precision is required");
+
+            WriteMeasurements(bucket, organization, precision, measurements.ToList());
+        }
+
+        /// <summary>
         /// Forces the client to flush all pending writes from the buffer to InfluxData Platform via HTTP.
         /// </summary>
         public void Flush()
@@ -326,6 +389,24 @@ namespace InfluxData.Platform.Client.Client
         }
     }
 
+    internal class BatchWriteMeasurement<TM> : BatchWriteData
+    {
+        private readonly TM _measurement;
+        private readonly MeasurementMapper _measurementMapper;
+
+        internal BatchWriteMeasurement(BatchWriteOptions options, TM measurement, MeasurementMapper measurementMapper) : base(options)
+        {
+            Arguments.CheckNotNull(measurement, nameof(measurement));
+
+            _measurement = measurement;
+            _measurementMapper = measurementMapper;
+        }
+
+        internal override string ToLineProtocol()
+        {
+            return _measurementMapper.ToPoint(_measurement, Options.Precision).ToLineProtocol();
+        }
+    }
 
     internal class BatchWriteOptions
     {
@@ -348,7 +429,7 @@ namespace InfluxData.Platform.Client.Client
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != this.GetType()) return false;
+            if (obj.GetType() != GetType()) return false;
             return Equals((BatchWriteOptions) obj);
         }
 

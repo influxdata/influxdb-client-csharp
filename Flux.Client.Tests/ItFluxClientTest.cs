@@ -165,8 +165,8 @@ namespace Flux.Client.Tests
             }
             catch (InfluxException e)
             {
-                Assert.That(e.Error.Contains("failed to create physical plan:"));
-                Assert.That(e.Error.Contains("Add a 'range' call to bound the query"));
+                Assert.That(e.Message.Contains("failed to create physical plan:"));
+                Assert.That(e.Message.Contains("Add a 'range' call to bound the query"));
             }
         }
         
@@ -181,8 +181,8 @@ namespace Flux.Client.Tests
             }
             catch (InfluxException e)
             {
-                Assert.That(e.Error.Contains("failed to create physical plan:"));
-                Assert.That(e.Error.Contains("Add a 'range' call to bound the query"));
+                Assert.That(e.Message.Contains("failed to create physical plan:"));
+                Assert.That(e.Message.Contains("Add a 'range' call to bound the query"));
             }
         }
 

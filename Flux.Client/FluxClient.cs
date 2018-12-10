@@ -403,7 +403,7 @@ namespace Flux.Client
             }
             catch (Exception e)
             {
-                throw new InfluxException(new QueryErrorResponse(0, e.Message));
+                throw new InfluxException(e);
             }
         }
         

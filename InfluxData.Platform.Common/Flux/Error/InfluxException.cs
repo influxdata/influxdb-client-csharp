@@ -10,16 +10,15 @@ namespace Platform.Common.Flux.Error
 {
     public class InfluxException : Exception
     {
-        private QueryErrorResponse _queryErrorResponse;
-
-        /** <summary>
-         * List of all errors sent by the server.
-         * </summary>
-         */
-        public string Error => _queryErrorResponse.Error;
-
-        public int StatusCode =>
-            _queryErrorResponse.StatusCode;
+        /// <summary>
+        /// Gets the reference code unique to the error type. If the reference code is not present than return "0".
+        /// </summary>
+        public int Code { get; }
+        
+        /// <summary>
+        /// Gets the HTTP status code of the unsuccessful response. If the response is not present than return "0".
+        /// </summary>
+        public int Status { get; set; }
 
         public static string GetErrorMessage(RequestResult response)
         {
@@ -48,32 +47,27 @@ namespace Platform.Common.Flux.Error
             return message.FirstOrDefault();
         }
 
-        public InfluxException(string message) : this(new QueryErrorResponse(0, message))
+        public InfluxException(string message) : this(message, 0)
         {
         }
-
-        public InfluxException(QueryErrorResponse response)
+        
+        public InfluxException(Exception exception) : base(exception.Message, exception)
         {
-            _queryErrorResponse = response;
+            Code = 0;
         }
-    }
-
-    public struct QueryErrorResponse
-    {
-        public int StatusCode { get; private set; }
-        public string Error { get; private set; }
-
-        public QueryErrorResponse(int statusCode, string error)
+        
+        public InfluxException(string message, int code) : base(message)
         {
-            StatusCode = statusCode;
-            Error = error;
+            Code = code;
+            Status = 0;
         }
     }
 
     public class HttpException : InfluxException
     {
-        public HttpException(QueryErrorResponse response) : base(response)
+        public HttpException(string message, int status) : base(message, 0)
         {
+            Status = status;
         }
     }
 }

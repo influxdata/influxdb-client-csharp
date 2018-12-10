@@ -35,7 +35,7 @@ namespace Flux.Client.Tests
             }
             catch (InfluxException e)
             {
-                Assert.That(e.Error.Equals("Flux query is not valid"));
+                Assert.That(e.Message.Equals("Flux query is not valid"));
             }
         }
 

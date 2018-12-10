@@ -147,14 +147,7 @@ namespace Platform.Common.Platform.Rest
                 return true;
             }
 
-            var response = new QueryErrorResponse(statusCode, errorMessage);
-            
-            if (errorMessage != null)
-            {
-                throw new InfluxException(response);
-            }
-
-            throw new HttpException(response);
+            throw new HttpException(errorMessage, statusCode);
         }
         
         private StringContent CreateBody(object content)

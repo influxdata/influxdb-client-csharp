@@ -40,7 +40,7 @@ namespace Flux.Client.Tests
             }
             catch (InfluxException e)
             {
-                Assert.IsNotEmpty(e.Error);
+                Assert.IsNotEmpty(e.Message);
             }
 
         }

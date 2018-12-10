@@ -2,10 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.CompilerServices;
+using NodaTime;
 using Platform.Common.Flux.Domain;
 using Platform.Common.Flux.Error;
 using Platform.Common.Platform;
 
+[assembly: InternalsVisibleTo("Flux.Client.Tests")]
 namespace Platform.Common.Flux.Parser
 {
     internal class FluxResultMapper
@@ -78,7 +81,7 @@ namespace Platform.Common.Flux.Parser
             }
             catch (Exception e)
             {
-                throw new InfluxException(new QueryErrorResponse(0, e.Message));
+                throw new InfluxException(e);
             }
         }
 
@@ -91,7 +94,7 @@ namespace Platform.Common.Flux.Parser
 
             try
             {
-                var propertyType = property.GetType();
+                var propertyType = property.PropertyType;
 
                 //the same type
                 if (propertyType == value.GetType())
@@ -101,7 +104,7 @@ namespace Platform.Common.Flux.Parser
                 }
 
                 //convert primitives
-                if (typeof(double).IsAssignableFrom(propertyType))
+                if (typeof(double).IsAssignableFrom(propertyType) || typeof(Double).IsAssignableFrom(propertyType))
                 {
                     property.SetValue(poco, ToDoubleValue(value));
                     return;
@@ -122,6 +125,12 @@ namespace Platform.Common.Flux.Parser
                 if (typeof(bool).IsAssignableFrom(propertyType))
                 {
                     property.SetValue(poco, bool.TryParse(value.ToString(), out var v) && v);
+                    return;
+                }
+
+                if (typeof(DateTime).IsAssignableFrom(propertyType))
+                {
+                    property.SetValue(poco, ToDateTimeValue(value));
                     return;
                 }
 
@@ -163,6 +172,16 @@ namespace Platform.Common.Flux.Parser
             }
 
             return (int) value;
+        }
+        
+        private DateTime ToDateTimeValue(object value)
+        {
+            if (value is Instant instant)
+            {
+                return instant.InUtc().ToDateTimeUtc();
+            }
+            
+            return (DateTime) value;
         }
     }
 }

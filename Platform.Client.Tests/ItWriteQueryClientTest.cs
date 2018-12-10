@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading;
+using System.Threading.Tasks;
 using InfluxData.Platform.Client.Client;
 using InfluxData.Platform.Client.Domain;
 using InfluxData.Platform.Client.Option;
@@ -8,6 +9,7 @@ using InfluxData.Platform.Client.Write;
 using NodaTime;
 using NUnit.Framework;
 using Platform.Common.Flux.Domain;
+using Platform.Common.Platform;
 using Task = System.Threading.Tasks.Task;
 
 namespace Platform.Client.Tests
@@ -150,6 +152,40 @@ namespace Platform.Client.Tests
             Assert.AreEqual(time.AddTicks(-(time.Ticks % TimeSpan.TicksPerSecond)).Add(-TimeSpan.FromSeconds(10)), records[0].GetTimeInDateTime());
             Assert.AreEqual(time.AddTicks(-(time.Ticks % TimeSpan.TicksPerSecond)), records[1].GetTimeInDateTime());
         }
+
+        [Test]
+        public async Task WriteMeasurements()
+        {
+            _writeClient = PlatformClient.CreateWriteClient();
+            
+            String bucketName = _bucket.Name;
+
+            var time = DateTime.UtcNow;
+
+            var measurement1 = new H20Measurement
+            {
+                Location = "coyote_creek", Level = 2.927, Time = time.Add(-TimeSpan.FromSeconds(30))
+            };
+            var measurement2 = new H20Measurement
+            {
+                Location = "coyote_creek", Level = 1.927, Time = time
+            };
+            
+            _writeClient.WriteMeasurements(bucketName, "my-org", TimeUnit.Seconds, measurement1, measurement2);
+            _writeClient.Flush();
+            
+            List<H20Measurement> measurements = await _queryClient.Query<H20Measurement>("from(bucket:\"" + bucketName + "\") |> range(start: 0) |> rename(columns:{_value: \"level\"})", "my-org");
+            
+            Assert.AreEqual(2, measurements.Count);
+            
+            Assert.AreEqual(2.927, measurements[0].Level);
+            Assert.AreEqual("coyote_creek", measurements[0].Location);
+            Assert.AreEqual(time.AddTicks(-(time.Ticks % TimeSpan.TicksPerSecond)).Add(-TimeSpan.FromSeconds(30)), measurements[0].Time);
+            
+            Assert.AreEqual(1.927, measurements[1].Level);
+            Assert.AreEqual("coyote_creek", measurements[1].Location);
+            Assert.AreEqual(time.AddTicks(-(time.Ticks % TimeSpan.TicksPerSecond)), measurements[1].Time);
+        }
         
         [Test]
         public async Task Flush() {
@@ -269,6 +305,19 @@ namespace Platform.Client.Tests
             query = await _queryClient.Query("from(bucket:\"" + bucketName + "\") |> range(start: 0) |> last()", "my-org");
 
             Assert.AreEqual(1, query.Count);
+        }
+        
+        [Measurement("h2o")]
+        private class H20Measurement
+        {
+            [Column("location", IsTag = true)] 
+            public string Location { get; set; }
+
+            [Column("level")]
+            public Double Level { get; set; }
+ 
+            [Column(IsTimestamp = true)]
+            public DateTime Time { get; set; }
         }
     }
 }

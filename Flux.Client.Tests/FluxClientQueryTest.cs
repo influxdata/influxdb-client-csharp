@@ -68,7 +68,7 @@ namespace Flux.Client.Tests
             }
             catch (InfluxException e)
             {
-                Assert.That(e.Error.Equals("Flux query is not valid"));
+                Assert.That(e.Message.Equals("Flux query is not valid"));
             }
         }
 
@@ -92,7 +92,7 @@ namespace Flux.Client.Tests
             }
             catch (FluxQueryException e)
             {
-                Assert.That(e.Error.Equals("failed to create physical plan: invalid time bounds from procedure from: bounds contain zero time"));
+                Assert.That(e.Message.Equals("failed to create physical plan: invalid time bounds from procedure from: bounds contain zero time"));
                 Assert.AreEqual(e.Reference, 897);
             }
         }
@@ -117,7 +117,7 @@ namespace Flux.Client.Tests
             }
             catch (InfluxException e)
             {
-                Assert.That(e.Error.Equals("failed to create physical plan: invalid time bounds from procedure from: bounds contain zero time"));
+                Assert.That(e.Message.Equals("failed to create physical plan: invalid time bounds from procedure from: bounds contain zero time"));
             }
         }
 

@@ -1,11 +1,13 @@
+using Platform.Common.Flux.Domain;
+
 namespace Platform.Common.Flux.Error
 {
-    /**
-     * The error that occurs during mapping response to {@link FluxTable}, {@link FluxRecord} or {@link FluxColumn}.
-     */
+    /// <summary>
+    /// The error that occurs during mapping response to <see cref="FluxTable"/>, <see cref="FluxRecord"/> or <see cref="FluxColumn"/>. 
+    /// </summary>
     public class FluxCsvParserException : InfluxException
     {
-        public FluxCsvParserException(string message) : base(new QueryErrorResponse(0, message))
+        public FluxCsvParserException(string message) : base(message)
         {
         }
     }
