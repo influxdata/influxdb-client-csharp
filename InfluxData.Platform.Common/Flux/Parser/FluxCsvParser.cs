@@ -11,11 +11,9 @@ using Platform.Common.Platform.Rest;
 
 namespace Platform.Common.Flux.Parser
 {
-/**
- * This class us used to construct FluxResult from CSV.
- *
- * @see org.influxdata.flux
- */
+    /// <summary>
+    /// This class us used to construct <see cref="FluxTable"/> from CSV.
+    /// </summary>
     public class FluxCsvParser
     {
         private enum ParsingState
@@ -26,23 +24,20 @@ namespace Platform.Common.Flux.Parser
 
         public interface IFluxResponseConsumer
         {
-            /**
-             * Add new {@link FluxTable} to consumer.
-             *
-             * @param index       index of table
-             * @param cancellable cancellable
-             * @param table       new {@link FluxTable}
-             */
+            /// <summary>
+            /// Add new <see cref="FluxTable"/> to a consumer.
+            /// </summary>
+            /// <param name="index">index of tabl</param>
+            /// <param name="cancellable">cancellable</param>
+            /// <param name="table">new <see cref="FluxTable"/></param>
             void Accept(int index, ICancellable cancellable, FluxTable table);
 
-            /**
-             * Add new {@link FluxRecord} to consumer.
-             *
-             * @param index       index of table
-             * @param cancellable cancellable
-             * @param record      new {@link FluxRecord}
-             */
-
+            /// <summary>
+            /// Add new <see cref="FluxRecord"/> to a consumer.
+            /// </summary>
+            /// <param name="index">index of tabl</param>
+            /// <param name="cancellable">cancellable</param>
+            /// <param name="record">new <see cref="FluxRecord"/></param>
             void Accept(int index, ICancellable cancellable, FluxRecord record);
         }
 
@@ -68,14 +63,12 @@ namespace Platform.Common.Flux.Parser
             ParseFluxResponse(ToStream(source), cancellable, consumer);
         }
 
-        /**
-         * Parse Flux CSV response to {@link FluxResponseConsumer}.
-         *
-         * @param source with data
-         * @param cancellable    to cancel parsing
-         * @param consumer       to accept {@link FluxTable}s and {@link FluxRecord}s
-         * @throws IOException If there is a problem with reading CSV
-         */
+        /// <summary>
+        /// Parse Flux CSV response to <see cref="IFluxResponseConsumer"/>.
+        /// </summary>
+        /// <param name="source">CSV Data source</param>
+        /// <param name="cancellable">to cancel parsing</param>
+        /// <param name="consumer">to accept <see cref="FluxTable"/> or <see cref="FluxRecord"/></param>
         public void ParseFluxResponse(BufferedStream source, ICancellable cancellable, IFluxResponseConsumer consumer)
         {
             Arguments.CheckNotNull(source, "source");

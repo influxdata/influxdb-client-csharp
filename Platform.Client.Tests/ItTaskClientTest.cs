@@ -14,6 +14,7 @@ namespace Platform.Client.Tests
         private static string TASK_FLUX = "from(bucket:\"my-bucket\") |> range(start: 0) |> last()";
 
         private TaskClient _taskClient;
+        private UserClient _userClient;
 
         private Organization _organization;
         private User _user;
@@ -25,7 +26,8 @@ namespace Platform.Client.Tests
             _organization = (await PlatformClient.CreateOrganizationClient().FindOrganizations())
                 .First(organization => organization.Name.Equals("my-org"));
 
-            _user = await PlatformClient.CreateUserClient().Me();
+            _userClient = PlatformClient.CreateUserClient();
+            _user = await _userClient.Me();
             
             (await _taskClient.FindTasks()).ForEach(async task => await _taskClient.DeleteTask(task));
         }
@@ -245,6 +247,70 @@ namespace Platform.Client.Tests
             foundTask = await _taskClient.FindTaskById(task.Id);
 
             Assert.IsNull(foundTask);
+        }
+        
+        [Test]
+        //TODO
+        [Ignore("wait to fix task path :tid => :id")]
+        public async System.Threading.Tasks.Task Member() {
+
+            var task = await _taskClient.CreateTaskCron(GenerateName("it task"), TASK_FLUX, "0 2 * * *", _user, _organization);
+
+            List<UserResourceMapping> members =  await _taskClient.GetMembers(task);
+            Assert.AreEqual(0, members.Count);
+
+            User user = await _userClient.CreateUser(GenerateName("Luke Health"));
+
+            UserResourceMapping userResourceMapping = await _taskClient.AddMember(user, task);
+            Assert.IsNotNull(userResourceMapping);
+            Assert.AreEqual(userResourceMapping.ResourceId, task.Id);
+            Assert.AreEqual(userResourceMapping.ResourceType, ResourceType.TaskResourceType);
+            Assert.AreEqual(userResourceMapping.UserId, user.Id);
+            Assert.AreEqual(userResourceMapping.UserType, UserResourceMapping.MemberType.Member);
+
+            members = await _taskClient.GetMembers(task);
+            Assert.AreEqual(1, members.Count);
+            Assert.AreEqual(members[0].ResourceId, task.Id);
+            Assert.AreEqual(members[0].ResourceType, ResourceType.TaskResourceType);
+            Assert.AreEqual(members[0].UserId, user.Id);
+            Assert.AreEqual(members[0].UserType, UserResourceMapping.MemberType.Member);
+
+            await _taskClient.DeleteMember(user, task);
+
+            members = await _taskClient.GetMembers(task);
+            Assert.AreEqual(0, members.Count);
+        }
+        
+        [Test]
+        //TODO
+        [Ignore("wait to fix task path :tid => :id")]
+        public async System.Threading.Tasks.Task Owner() {
+
+            var task = await _taskClient.CreateTaskCron(GenerateName("it task"), TASK_FLUX, "0 2 * * *", _user, _organization);
+
+            List<UserResourceMapping> owners =  await _taskClient.GetOwners(task);
+            Assert.AreEqual(0, owners.Count);
+
+            User user = await _userClient.CreateUser(GenerateName("Luke Health"));
+
+            UserResourceMapping userResourceMapping = await _taskClient.AddOwner(user, task);
+            Assert.IsNotNull(userResourceMapping);
+            Assert.AreEqual(userResourceMapping.ResourceId, task.Id);
+            Assert.AreEqual(userResourceMapping.ResourceType, ResourceType.TaskResourceType);
+            Assert.AreEqual(userResourceMapping.UserId, user.Id);
+            Assert.AreEqual(userResourceMapping.UserType, UserResourceMapping.MemberType.Owner);
+
+            owners = await _taskClient.GetOwners(task);
+            Assert.AreEqual(1, owners.Count);
+            Assert.AreEqual(owners[0].ResourceId, task.Id);
+            Assert.AreEqual(owners[0].ResourceType, ResourceType.TaskResourceType);
+            Assert.AreEqual(owners[0].UserId, user.Id);
+            Assert.AreEqual(owners[0].UserType, UserResourceMapping.MemberType.Owner);
+
+            await _taskClient.DeleteOwner(user, task);
+
+            owners = await _taskClient.GetOwners(task);
+            Assert.AreEqual(0, owners.Count);
         }
     }
 }

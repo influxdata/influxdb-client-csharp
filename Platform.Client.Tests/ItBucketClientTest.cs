@@ -149,7 +149,7 @@ namespace Platform.Client.Tests
             Assert.AreEqual((await  _bucketClient.FindBucketsByOrganization(_organization)).Count, 1);
         }
         
-         [Test]
+        [Test]
         public async Task Member() {
 
             Bucket bucket = await _bucketClient.CreateBucket(GenerateName("robot sensor"), RetentionRule(), _organization);

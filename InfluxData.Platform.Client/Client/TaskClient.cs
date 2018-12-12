@@ -269,6 +269,186 @@ namespace InfluxData.Platform.Client.Client
 
             return tasks.TaskList;
         }
+        
+        /// <summary>
+        /// List all members of a task.
+        /// </summary>
+        /// <param name="task">task of the members</param>
+        /// <returns>the List all members of a task</returns>
+        public async System.Threading.Tasks.Task<List<UserResourceMapping>> GetMembers(Task task)
+        {
+            Arguments.CheckNotNull(task, "task");
+
+            return await GetMembers(task.Id);
+        }
+
+        /// <summary>
+        /// List all members of a task.
+        /// </summary>
+        /// <param name="taskId">ID of task to get members</param>
+        /// <returns>the List all members of a task</returns>
+        public async System.Threading.Tasks.Task<List<UserResourceMapping>> GetMembers(string taskId)
+        {
+            Arguments.CheckNonEmptyString(taskId, "Task ID");
+
+            var request = await Get($"/api/v2/tasks/{taskId}/members");
+
+            var response = Call<UserResourcesResponse>(request);
+
+            return response?.UserResourceMappings;
+        }
+
+        /// <summary>
+        /// Add a task member.
+        /// </summary>
+        /// <param name="member">the member of a task</param>
+        /// <param name="task">the task of a member</param>
+        /// <returns>created mapping</returns>
+        public async System.Threading.Tasks.Task<UserResourceMapping> AddMember(User member, Task task)
+        {
+            Arguments.CheckNotNull(task, "task");
+            Arguments.CheckNotNull(member, "member");
+
+            return await AddMember(member.Id, task.Id);
+        }
+
+        /// <summary>
+        /// Add a task member.
+        /// </summary>
+        /// <param name="memberId">the ID of a member</param>
+        /// <param name="taskId">the ID of a task</param>
+        /// <returns>created mapping</returns>
+        public async System.Threading.Tasks.Task<UserResourceMapping> AddMember(string memberId, string taskId)
+        {
+            Arguments.CheckNonEmptyString(taskId, "Task ID");
+            Arguments.CheckNonEmptyString(memberId, "Member ID");
+
+            User user = new User {Id = memberId};
+
+            var request = await Post(user, $"/api/v2/tasks/{taskId}/members");
+
+            return Call<UserResourceMapping>(request);
+        }
+
+        /// <summary>
+        /// Removes a member from a task.
+        /// </summary>
+        /// <param name="member">the member of a task</param>
+        /// <param name="task">the task of a member</param>
+        /// <returns>async task</returns>
+        public async System.Threading.Tasks.Task DeleteMember(User member, Task task)
+        {
+            Arguments.CheckNotNull(task, "task");
+            Arguments.CheckNotNull(member, "member");
+
+            await DeleteMember(member.Id, task.Id);
+        }
+
+        /// <summary>
+        /// Removes a member from a task.
+        /// </summary>
+        /// <param name="memberId">the ID of a member</param>
+        /// <param name="taskId">the ID of a task</param>
+        /// <returns>async task</returns>
+        public async System.Threading.Tasks.Task DeleteMember(string memberId, string taskId)
+        {
+            Arguments.CheckNonEmptyString(taskId, "Task ID");
+            Arguments.CheckNonEmptyString(memberId, "Member ID");
+            
+            var request = await Delete($"/api/v2/tasks/{taskId}/members/{memberId}");
+
+            RaiseForInfluxError(request);
+        }
+
+        /// <summary>
+        /// List all owners of a task.
+        /// </summary>
+        /// <param name="task">task of the owners</param>
+        /// <returns>the List all owners of a task</returns>
+        public async System.Threading.Tasks.Task<List<UserResourceMapping>> GetOwners(Task task)
+        {
+            Arguments.CheckNotNull(task, "Task is required");
+
+            return await GetOwners(task.Id);
+        }
+
+        /// <summary>
+        /// List all owners of a task.
+        /// </summary>
+        /// <param name="taskId">ID of a task to get owners</param>
+        /// <returns>the List all owners of a task</returns>
+        public async System.Threading.Tasks.Task<List<UserResourceMapping>> GetOwners(string taskId)
+        {
+            Arguments.CheckNonEmptyString(taskId, "Task ID");
+
+            var request = await Get($"/api/v2/tasks/{taskId}/owners");
+
+            var response = Call<UserResourcesResponse>(request);
+
+            return response?.UserResourceMappings;
+        }
+
+        /// <summary>
+        /// Add a task owner.
+        /// </summary>
+        /// <param name="owner">the owner of a task</param>
+        /// <param name="task">the task of a owner</param>
+        /// <returns>created mapping</returns>
+        public async System.Threading.Tasks.Task<UserResourceMapping> AddOwner(User owner, Task task)
+        {
+            Arguments.CheckNotNull(task, "task");
+            Arguments.CheckNotNull(owner, "owner");
+
+            return await AddOwner(owner.Id, task.Id);
+        }
+
+        /// <summary>
+        /// Add a task owner.
+        /// </summary>
+        /// <param name="ownerId">the ID of a owner</param>
+        /// <param name="taskId">the ID of a task</param>
+        /// <returns>created mapping</returns>
+        public async System.Threading.Tasks.Task<UserResourceMapping> AddOwner(string ownerId, string taskId)
+        {
+            Arguments.CheckNonEmptyString(taskId, "Task ID");
+            Arguments.CheckNonEmptyString(ownerId, "Owner ID");
+
+            User user = new User {Id = ownerId};
+
+            var request = await Post(user, $"/api/v2/tasks/{taskId}/owners");
+
+            return Call<UserResourceMapping>(request);
+        }
+
+        /// <summary>
+        /// Removes a owner from a task.
+        /// </summary>
+        /// <param name="owner">the owner of a task</param>
+        /// <param name="task">the task of a owner</param>
+        /// <returns>async task</returns>
+        public async System.Threading.Tasks.Task DeleteOwner(User owner, Task task)
+        {
+            Arguments.CheckNotNull(task, "task");
+            Arguments.CheckNotNull(owner, "owner");
+
+            await DeleteOwner(owner.Id, task.Id);
+        }
+
+        /// <summary>
+        /// Removes a owner from a task.
+        /// </summary>
+        /// <param name="ownerId">the ID of a owner</param>
+        /// <param name="taskId">the ID of a task</param>
+        /// <returns>async task</returns>
+        public async System.Threading.Tasks.Task DeleteOwner(string ownerId, string taskId)
+        {
+            Arguments.CheckNonEmptyString(taskId, "Task ID");
+            Arguments.CheckNonEmptyString(ownerId, "Owner ID");
+            
+            var request = await Delete($"/api/v2/tasks/{taskId}/owners/{ownerId}");
+
+            RaiseForInfluxError(request);
+        }
 
         private Task CreateTask(string name, string flux, string every, string cron, User user, String organizationId)
         {
