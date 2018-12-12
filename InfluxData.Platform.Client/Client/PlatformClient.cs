@@ -102,6 +102,15 @@ namespace InfluxData.Platform.Client.Client
         }
 
         /// <summary>
+        /// Get the <see cref="Domain.Task"/> client.
+        /// </summary>
+        /// <returns>the new client instance for Task API</returns>
+        public TaskClient CreateTaskClient()
+        {
+            return new TaskClient(Client);
+        }
+
+        /// <summary>
         /// Get the health of an instance.
         /// </summary>
         /// <returns>health of an instance</returns>

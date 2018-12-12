@@ -1,8 +1,8 @@
 namespace InfluxData.Platform.Client.Domain
 {
-    /**
-     * The retention rule action for a bucket.
-     */
+    /// <summary>
+    /// The retention rule action for a bucket. 
+    /// </summary>
     public class RetentionRule
     {
         public string Type { get; set; }

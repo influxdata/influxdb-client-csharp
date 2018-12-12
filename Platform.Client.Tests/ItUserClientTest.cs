@@ -8,6 +8,7 @@ using Task = System.Threading.Tasks.Task;
 
 namespace Platform.Client.Tests
 {
+    [TestFixture]
     public class ItUserClientTest : AbstractItClientTest
     {
         private UserClient _userClient;

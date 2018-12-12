@@ -7,6 +7,7 @@ using Task = System.Threading.Tasks.Task;
 
 namespace Platform.Client.Tests
 {
+    [TestFixture]
     public class ItSourceClientTest : AbstractItClientTest
     {
         private SourceClient _sourceClient;

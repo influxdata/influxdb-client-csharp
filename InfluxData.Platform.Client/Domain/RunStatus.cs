@@ -1,9 +1,9 @@
 namespace InfluxData.Platform.Client.Domain
 {
-/**
- * The status of the {@link Run}.
- */
-    public enum RunStatus 
+    /// <summary>
+    /// The status of the <see cref="Run"/>.
+    /// </summary>
+    public enum RunStatus
     {
         Scheduled,
 

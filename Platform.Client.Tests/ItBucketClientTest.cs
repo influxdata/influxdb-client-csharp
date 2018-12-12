@@ -6,6 +6,7 @@ using Task = System.Threading.Tasks.Task;
 
 namespace Platform.Client.Tests
 {
+    [TestFixture]
     public class ItBucketClientTest : AbstractItClientTest
     {
         private OrganizationClient _organizationClient;

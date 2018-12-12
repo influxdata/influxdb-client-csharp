@@ -3,9 +3,9 @@ using NodaTime;
 
 namespace InfluxData.Platform.Client.Domain
 {
-    /**
-     * OperationLogEntry is a record in an operation log.
-     */
+    /// <summary>
+    /// OperationLogEntry is a record in an operation log.
+    /// </summary>
     public class OperationLogEntry : AbstractHasLinks
     {
         public string UserId { get; set; }

@@ -14,6 +14,7 @@ using Task = System.Threading.Tasks.Task;
 
 namespace Platform.Client.Tests
 {
+    [TestFixture]
     public class ItWriteQueryClientTest : AbstractItClientTest
     {
         private Bucket _bucket;

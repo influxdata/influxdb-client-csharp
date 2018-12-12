@@ -9,21 +9,25 @@ namespace InfluxData.Platform.Client.Domain
     /// </summary>
     public class Task
     {
+        [JsonProperty("id")]
         public string Id { get; set; }
 
         /// <summary>
         /// A read-only description of the task.
         /// </summary>
+        [JsonProperty("name")]
         public string Name { get; set; }
 
         /// <summary>
         /// The <see cref="User"/> that owns this Task.
         /// </summary>
+        [JsonProperty("owner")]
         public User Owner { get; set; }
 
         /// <summary>
         /// The ID of the organization that owns this Task.
         /// </summary>
+        [JsonProperty("organizationId")]
         public string OrganizationId { get; set; }
 
         /// <summary>
@@ -35,22 +39,26 @@ namespace InfluxData.Platform.Client.Domain
         /// <summary>
         /// The Flux script to run for this task.
         /// </summary>
+        [JsonProperty("flux")]
         public string Flux { get; set; }
 
         /// <summary>
         /// A simple task repetition schedule (duration type); parsed from Flux.
         /// </summary>
+        [JsonProperty("every")]
         public string Every { get; set; }
 
         /// <summary>
         /// A task repetition schedule in the form '* * * * * *'; parsed from Flux.
         /// </summary>
+        [JsonProperty("cron")]
         public string Cron { get; set; }
 
         /// <summary>
         /// Duration to delay after the schedule, before executing the task; parsed from flux.
         /// </summary>
-        public string Delay { get; set; }
+        [JsonProperty("offset")]
+        public string Offset { get; set; }
 
         public override string ToString()
         {
@@ -63,7 +71,7 @@ namespace InfluxData.Platform.Client.Domain
                 .Append(", flux='" + Flux + "'")
                 .Append(", every='" + Every + "'")
                 .Append(", cron='" + Cron + "'")
-                .Append(", delay='" + Delay + "'")
+                .Append(", delay='" + Offset + "'")
                 .Append("]").ToString();
         }
     }
