@@ -522,6 +522,22 @@ namespace InfluxData.Platform.Client.Client
             return response?.RunList;
         }
 
+        /// <summary>
+        /// Retrieve a single run record for a task.
+        /// </summary>
+        /// <param name="taskId">ID of task to get runs for</param>
+        /// <param name="runId">ID of run</param>
+        /// <returns>a single run record for a task</returns>
+        public async System.Threading.Tasks.Task<Run> GetRun(string taskId, string runId)
+        {
+            Arguments.CheckNonEmptyString(taskId, nameof(taskId));
+            Arguments.CheckNonEmptyString(runId, nameof(runId));
+
+            var request = await Get($"/api/v2/tasks/{taskId}/runs/{runId}");
+
+            return Call<Run>(request, "expected one run, got 0");
+        }
+
         private Task CreateTask(string name, string flux, string every, string cron, User user, String organizationId)
         {
             Arguments.CheckNonEmptyString(name, nameof(name));

@@ -377,5 +377,32 @@ namespace Platform.Client.Tests
             runs = await _taskClient.GetRuns(task, null, null, null);
             Assert.Greater(runs.Count, 1);
         }
+
+        [Test]
+        //TODO
+        [Ignore("avoid panic: column _measurement is not of type time goroutine")]
+        public async System.Threading.Tasks.Task GetRun()
+        {
+            var task = await _taskClient.CreateTaskEvery(GenerateName("it task"), TASK_FLUX, "1s", _user, _organization);
+            Thread.Sleep(5_000);
+            
+            List<Run> runs = await _taskClient.GetRuns(task, null, null, 1);
+            Assert.AreEqual(1, runs.Count);
+            
+            Run firstRun = runs[0];
+            Run runById = await _taskClient.GetRun(task.Id, firstRun.Id);
+            
+            Assert.IsNotNull(runById);
+            Assert.AreEqual(firstRun.Id, runById.Id);
+        }
+
+        [Test]
+        public async System.Threading.Tasks.Task RunNotExist()
+        {
+            var task = await _taskClient.CreateTaskEvery(GenerateName("it task"), TASK_FLUX, "1s", _user, _organization);
+            
+            Run run = await  _taskClient.GetRun(task.Id, "020f755c3c082000");
+            Assert.IsNull(run);
+        }
     }
 }
