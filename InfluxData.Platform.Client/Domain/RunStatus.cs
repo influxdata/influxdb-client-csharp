@@ -1,3 +1,5 @@
+using System.Runtime.Serialization;
+
 namespace InfluxData.Platform.Client.Domain
 {
     /// <summary>
@@ -5,12 +7,19 @@ namespace InfluxData.Platform.Client.Domain
     /// </summary>
     public enum RunStatus
     {
+        [EnumMember(Value = "scheduled")]
         Scheduled,
 
-        Executing,
+        [EnumMember(Value = "started")]
+        Started,
 
+        [EnumMember(Value = "failed")]
         Failed,
 
-        Success
+        [EnumMember(Value = "success")]
+        Success,
+        
+        [EnumMember(Value = "canceled")]
+        Canceled
     }
 }

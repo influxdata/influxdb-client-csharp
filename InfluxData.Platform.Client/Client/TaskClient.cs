@@ -253,7 +253,7 @@ namespace InfluxData.Platform.Client.Client
         {
             return await FindTasks(null, null, organizationId);
         }
-        
+
         /// <summary>
         /// Lists tasks, limit 100.
         /// </summary>
@@ -261,15 +261,16 @@ namespace InfluxData.Platform.Client.Client
         /// <param name="userId">filter tasks to a specific user ID</param>
         /// <param name="organizationId">filter tasks to a specific organization ID</param>
         /// <returns>A list of tasks</returns>
-        public async System.Threading.Tasks.Task<List<Task>> FindTasks(string afterId, string userId, string organizationId)
+        public async System.Threading.Tasks.Task<List<Task>> FindTasks(string afterId, string userId,
+            string organizationId)
         {
             var request = await Get($"/api/v2/tasks?after={afterId}&user={userId}&organization={organizationId}");
-            
+
             var tasks = Call<Tasks>(request);
 
             return tasks.TaskList;
         }
-        
+
         /// <summary>
         /// List all members of a task.
         /// </summary>
@@ -289,7 +290,7 @@ namespace InfluxData.Platform.Client.Client
         /// <returns>the List all members of a task</returns>
         public async System.Threading.Tasks.Task<List<UserResourceMapping>> GetMembers(string taskId)
         {
-            Arguments.CheckNonEmptyString(taskId, "Task ID");
+            Arguments.CheckNonEmptyString(taskId, nameof(taskId));
 
             var request = await Get($"/api/v2/tasks/{taskId}/members");
 
@@ -320,8 +321,8 @@ namespace InfluxData.Platform.Client.Client
         /// <returns>created mapping</returns>
         public async System.Threading.Tasks.Task<UserResourceMapping> AddMember(string memberId, string taskId)
         {
-            Arguments.CheckNonEmptyString(taskId, "Task ID");
-            Arguments.CheckNonEmptyString(memberId, "Member ID");
+            Arguments.CheckNonEmptyString(taskId, nameof(taskId));
+            Arguments.CheckNonEmptyString(memberId, nameof(memberId));
 
             User user = new User {Id = memberId};
 
@@ -352,9 +353,9 @@ namespace InfluxData.Platform.Client.Client
         /// <returns>async task</returns>
         public async System.Threading.Tasks.Task DeleteMember(string memberId, string taskId)
         {
-            Arguments.CheckNonEmptyString(taskId, "Task ID");
-            Arguments.CheckNonEmptyString(memberId, "Member ID");
-            
+            Arguments.CheckNonEmptyString(taskId, nameof(taskId));
+            Arguments.CheckNonEmptyString(memberId, nameof(memberId));
+
             var request = await Delete($"/api/v2/tasks/{taskId}/members/{memberId}");
 
             RaiseForInfluxError(request);
@@ -379,7 +380,7 @@ namespace InfluxData.Platform.Client.Client
         /// <returns>the List all owners of a task</returns>
         public async System.Threading.Tasks.Task<List<UserResourceMapping>> GetOwners(string taskId)
         {
-            Arguments.CheckNonEmptyString(taskId, "Task ID");
+            Arguments.CheckNonEmptyString(taskId, nameof(taskId));
 
             var request = await Get($"/api/v2/tasks/{taskId}/owners");
 
@@ -410,8 +411,8 @@ namespace InfluxData.Platform.Client.Client
         /// <returns>created mapping</returns>
         public async System.Threading.Tasks.Task<UserResourceMapping> AddOwner(string ownerId, string taskId)
         {
-            Arguments.CheckNonEmptyString(taskId, "Task ID");
-            Arguments.CheckNonEmptyString(ownerId, "Owner ID");
+            Arguments.CheckNonEmptyString(taskId, nameof(taskId));
+            Arguments.CheckNonEmptyString(ownerId, nameof(ownerId));
 
             User user = new User {Id = ownerId};
 
@@ -442,12 +443,83 @@ namespace InfluxData.Platform.Client.Client
         /// <returns>async task</returns>
         public async System.Threading.Tasks.Task DeleteOwner(string ownerId, string taskId)
         {
-            Arguments.CheckNonEmptyString(taskId, "Task ID");
-            Arguments.CheckNonEmptyString(ownerId, "Owner ID");
-            
+            Arguments.CheckNonEmptyString(taskId, nameof(taskId));
+            Arguments.CheckNonEmptyString(ownerId, nameof(ownerId));
+
             var request = await Delete($"/api/v2/tasks/{taskId}/owners/{ownerId}");
 
             RaiseForInfluxError(request);
+        }
+
+        /// <summary>
+        /// Retrieve list of run records for a task.
+        /// </summary>
+        /// <param name="task"> task to get runs for</param>
+        /// <returns>the list of run records for a task</returns>
+        public async System.Threading.Tasks.Task<List<Run>> GetRuns(Task task)
+        {
+            Arguments.CheckNotNull(task, nameof(task));
+
+            return await GetRuns(task, null, null, null);
+        }
+
+
+        /// <summary>
+        /// Retrieve list of run records for a task.
+        /// </summary>
+        /// <param name="task"> task to get runs for</param>
+        /// <param name="afterTime">filter runs to those scheduled after this time</param>
+        /// <param name="beforeTime">filter runs to those scheduled before this time</param>
+        /// <param name="limit">the number of runs to return. Default value: 20.</param>
+        /// <returns>the list of run records for a task</returns>
+        public async System.Threading.Tasks.Task<List<Run>> GetRuns(Task task, DateTime? afterTime,
+            DateTime? beforeTime, int? limit)
+        {
+            Arguments.CheckNotNull(task, nameof(task));
+
+            return await GetRuns(task.Id, task.OrganizationId, afterTime, beforeTime, limit);
+        }
+
+        /// <summary>
+        /// Retrieve list of run records for a task.
+        /// </summary>
+        /// <param name="taskId">ID of task to get runs for</param>
+        /// <param name="organizationId">ID of organization</param>
+        /// <returns>the list of run records for a task</returns>
+        public async System.Threading.Tasks.Task<List<Run>> GetRuns(string taskId, string organizationId)
+        {
+            Arguments.CheckNonEmptyString(taskId, nameof(taskId));
+            Arguments.CheckNonEmptyString(organizationId, nameof(organizationId));
+
+            return await GetRuns(taskId, organizationId, null, null, null);
+        }
+
+        /// <summary>
+        /// Retrieve list of run records for a task.
+        /// </summary>
+        /// <param name="taskId">ID of task to get runs for</param>
+        /// <param name="organizationId">ID of organization</param>
+        /// <param name="afterTime">filter runs to those scheduled after this time</param>
+        /// <param name="beforeTime">filter runs to those scheduled before this time</param>
+        /// <param name="limit">the number of runs to return. Default value: 20.</param>
+        /// <returns>the list of run records for a task</returns>
+        public async System.Threading.Tasks.Task<List<Run>> GetRuns(string taskId, string organizationId,
+            DateTime? afterTime, DateTime? beforeTime, int? limit)
+        {
+            Arguments.CheckNonEmptyString(taskId, nameof(taskId));
+            Arguments.CheckNonEmptyString(organizationId, nameof(organizationId));
+
+            var format = "yyyy-MM-dd'T'HH:mm:ss.fffZ";
+            
+            var after = afterTime?.ToString(format);
+            var before = beforeTime?.ToString(format);
+            
+            var path = $"/api/v2/tasks/{taskId}/runs?afterTime={after}&beforeTime={before}&orgID={organizationId}&limit={limit}";
+            var request = await Get(path);
+            
+            var response = Call<Runs>(request);
+
+            return response?.RunList;
         }
 
         private Task CreateTask(string name, string flux, string every, string cron, User user, String organizationId)

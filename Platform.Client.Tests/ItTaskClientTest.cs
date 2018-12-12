@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using InfluxData.Platform.Client.Client;
 using InfluxData.Platform.Client.Domain;
 using NUnit.Framework;
@@ -22,6 +23,13 @@ namespace Platform.Client.Tests
         [SetUp]
         public new async System.Threading.Tasks.Task SetUp()
         {
+            var token = (await PlatformClient.CreateAuthorizationClient().FindAuthorizations())
+                .First(authorization => authorization.Permissions.Count.Equals(4))
+                .Token;
+
+            PlatformClient.Dispose();
+            PlatformClient = PlatformClientFactory.Create(PlatformUrl, token.ToCharArray());
+
             _taskClient = PlatformClient.CreateTaskClient();
             _organization = (await PlatformClient.CreateOrganizationClient().FindOrganizations())
                 .First(organization => organization.Name.Equals("my-org"));
@@ -286,7 +294,7 @@ namespace Platform.Client.Tests
         [Ignore("wait to fix task path :tid => :id")]
         public async System.Threading.Tasks.Task Owner() {
 
-            var task = await _taskClient.CreateTaskCron(GenerateName("it task"), TASK_FLUX, "0 2 * * *", _user, _organization);
+            var task = await _taskClient.CreateTaskCron(GenerateName("it task"), TASK_FLUX, "0 2 * * *", _user.Id, _organization.Id);
 
             List<UserResourceMapping> owners =  await _taskClient.GetOwners(task);
             Assert.AreEqual(0, owners.Count);
@@ -311,6 +319,63 @@ namespace Platform.Client.Tests
 
             owners = await _taskClient.GetOwners(task);
             Assert.AreEqual(0, owners.Count);
+        }
+
+        [Test]
+        public async System.Threading.Tasks.Task Runs()
+        {
+            var task = await _taskClient.CreateTaskEvery(GenerateName("it task"), TASK_FLUX, "1s", _user.Id, _organization.Id);
+
+            Thread.Sleep(5_000);
+
+            List<Run> runs = await _taskClient.GetRuns(task);
+            Assert.IsNotEmpty(runs);
+
+            Assert.IsNotEmpty(runs[0].Id);
+            Assert.AreEqual(task.Id, runs[0].TaskId);
+            Assert.AreEqual(RunStatus.Success, runs[0].Status);
+            Assert.Greater(DateTime.Now, runs[0].StartedAt);
+            Assert.Greater(DateTime.Now, runs[0].FinishedAt);
+            Assert.Greater(DateTime.Now, runs[0].ScheduledFor);
+            Assert.IsNull(runs[0].RequestedAt);
+            Assert.IsEmpty(runs[0].Log);
+        }
+
+        [Test]
+        public async System.Threading.Tasks.Task RunsNotExist()
+        {
+            List<Run> runs = await _taskClient.GetRuns("020f755c3c082000", _organization.Id);
+            Assert.IsEmpty(runs);
+        }
+
+        [Test]
+        public async System.Threading.Tasks.Task RunsByTime()
+        {
+            var now = DateTime.UtcNow;
+            
+            var task = await _taskClient.CreateTaskEvery(GenerateName("it task"), TASK_FLUX, "1s", _user.Id, _organization.Id);
+
+            Thread.Sleep(5_000);
+
+            List<Run> runs = await _taskClient.GetRuns(task, null, now, null);
+            Assert.IsEmpty(runs);
+            
+            runs = await _taskClient.GetRuns(task, now, null, null);
+            Assert.IsNotEmpty(runs);
+        }
+
+        [Test]
+        public async System.Threading.Tasks.Task RunsLimit()
+        {
+            var task = await _taskClient.CreateTaskEvery(GenerateName("it task"), TASK_FLUX, "1s", _user, _organization);
+            
+            Thread.Sleep(5_000);
+            
+            List<Run> runs = await _taskClient.GetRuns(task, null, null, 1);
+            Assert.AreEqual(1, runs.Count);
+            
+            runs = await _taskClient.GetRuns(task, null, null, null);
+            Assert.Greater(runs.Count, 1);
         }
     }
 }
