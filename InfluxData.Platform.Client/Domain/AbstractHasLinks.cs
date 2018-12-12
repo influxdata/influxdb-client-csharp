@@ -6,9 +6,9 @@ namespace InfluxData.Platform.Client.Domain
 {
     public abstract class AbstractHasLinks
     {
-        /**
-         * The URIs of resources.
-         */
+        /// <summary>
+        /// The URIs of resources.
+        /// </summary>
         [JsonProperty("links")]
         public Dictionary<string, string> Links { get; set; } = new Dictionary<string, string>();
 

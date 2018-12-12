@@ -68,7 +68,6 @@ namespace InfluxData.Platform.Client.Client
 
             await DeleteSource(source.Id);
         }
-        
          
         /// <summary>
         /// Retrieve a source.

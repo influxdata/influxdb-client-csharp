@@ -59,6 +59,7 @@ namespace Platform.Client.Tests
         }
         
         [Test]
+        //TODO
         [Ignore("updateAuthorization return PlatformError but c.db.update() required 'plain' go error bolt/authorization.go:397")]
         public async Task UpdateAuthorizationStatus() {
 

@@ -1,22 +1,20 @@
 namespace Platform.Common.Platform.Rest
 {
+    /// <summary>
+    /// Asynchronous query that can be cancelled. Cancellation is perform by the <see cref="Cancel"/> method.
+    /// </summary>
     public interface ICancellable
     {
-        /**
-         * Asynchronous query that can be cancelled. Cancellation is perform by the {@code cancel} method.
-         *
-         */
-
-        /**
-         * Attempt to cancel execution of this query.
-         */
+        
+        /// <summary>
+        /// Attempt to cancel execution of this query.
+        /// </summary>
         void Cancel();
 
-        /**
-         * Returns {@link Boolean#TRUE} if query was cancelled.
-         *
-         * @return {@link Boolean#TRUE} if query was cancelled
-         */
+        /// <summary>
+        /// Returns true if query was cancelled.
+        /// </summary>
+        /// <returns>true if query was cancell</returns>
         bool IsCancelled();
     }
 }

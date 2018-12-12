@@ -16,9 +16,9 @@ namespace InfluxData.Platform.Client.Domain
         [JsonProperty("user_type")]
         public MemberType UserType { get; set; }
 
-        /**
-         * The user type.
-         */
+        /// <summary>
+        /// The user type.
+        /// </summary>
         public enum MemberType 
         {
             Owner,

@@ -9,11 +9,9 @@ using Platform.Common.Flux.Parser;
 
 namespace Platform.Common.Platform.Rest
 {
-    /**
-     * <summary>
-     * Default client that handles all http connections using <see cref="HttpClient"/>.
-     * </summary>
-     */
+    /// <summary>
+    /// Default client that handles all http connections using <see cref="HttpClient"/>.
+    /// </summary>
     public class DefaultClientIo : IClientIo
     {
         public HttpClient HttpClient;

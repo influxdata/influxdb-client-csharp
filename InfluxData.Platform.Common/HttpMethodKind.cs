@@ -13,10 +13,12 @@ namespace Platform.Common
 
     public static class HttpMethodKindExtensions
     {
-        /** <summary>
-         * All-caps name of the method.
-         * </summary>
-         */
+        /// <summary>
+        /// Method kind to HTTP method name
+        /// </summary>
+        /// <param name="method">HTTP method</param>
+        /// <returns>method name</returns>
+        /// <exception cref="ArgumentException">for not supported method kind</exception>
         public static string Name(this HttpMethodKind method)
         {
             switch (method)

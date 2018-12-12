@@ -2,33 +2,28 @@ using Flux.Client.Options;
 
 namespace Flux.Client
 {
-/**
- * The Factory that create a instance of a Flux client.
- */
+/// <summary>
+/// The Factory that create a instance of a Flux client.
+/// </summary>
     public class FluxClientFactory
     {
-        /**
-         * Create a instance of the Flux client.
-         *
-         * @param orgID the organization id required by Flux
-         * @param url   the url to connect to Flux.
-         * @return client
-         * @see FluxConnectionOptions.Builder#orgID(String)
-         * @see FluxConnectionOptions.Builder#url(String)
-         */
-        public static FluxClient Create(string url)
+        /// <summary>
+        /// Create a instance of the Flux client.
+        /// </summary>
+        /// <param name="connectionString">the connectionString to connect to InfluxDB</param>
+        /// <returns>client</returns>
+        public static FluxClient Create(string connectionString)
         {
-            FluxConnectionOptions options = new FluxConnectionOptions(url);
+            FluxConnectionOptions options = new FluxConnectionOptions(connectionString);
 
             return Create(options);
         }
 
-        /**
-         * Create a instance of the Flux client.
-         *
-         * @param options the connection configuration
-         * @return client
-         */
+        /// <summary>
+        /// Create a instance of the Flux client.
+        /// </summary>
+        /// <param name="options">the connection configuration</param>
+        /// <returns></returns>
         public static FluxClient Create(FluxConnectionOptions options)
         {
             return new FluxClient(options);
