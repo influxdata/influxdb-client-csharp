@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using InfluxData.Platform.Client.Client;
 using InfluxData.Platform.Client.Domain;
 using NUnit.Framework;
@@ -23,19 +25,19 @@ namespace Platform.Client.Tests
         [SetUp]
         public new async Task SetUp()
         {
-            var token = (await PlatformClient.CreateAuthorizationClient().FindAuthorizations())
-                .First(authorization => authorization.Permissions.Count.Equals(4))
-                .Token;
-
-            PlatformClient.Dispose();
-            PlatformClient = PlatformClientFactory.Create(PlatformUrl, token.ToCharArray());
-
-            _taskClient = PlatformClient.CreateTaskClient();
             _organization = (await PlatformClient.CreateOrganizationClient().FindOrganizations())
                 .First(organization => organization.Name.Equals("my-org"));
 
+            _user = await PlatformClient.CreateUserClient().Me();
+            
+            var authorization = await AddAuthorization(_organization);
+
+            PlatformClient.Dispose();
+            PlatformClient = PlatformClientFactory.Create(PlatformUrl, authorization.Token.ToCharArray());
+
+            _taskClient = PlatformClient.CreateTaskClient();
+
             _userClient = PlatformClient.CreateUserClient();
-            _user = await _userClient.Me();
             
             (await _taskClient.FindTasks()).ForEach(async task => await _taskClient.DeleteTask(task));
         }
@@ -220,7 +222,12 @@ namespace Platform.Client.Tests
         public async Task FindTasksByOrganization()
         {
             var taskOrg = await PlatformClient.CreateOrganizationClient().CreateOrganization(GenerateName("Task user"));
+            var authorization = await AddAuthorization(taskOrg);
 
+            PlatformClient.Dispose();
+            PlatformClient = PlatformClientFactory.Create(PlatformUrl, authorization.Token.ToCharArray());
+            _taskClient = PlatformClient.CreateTaskClient();
+            
             var count = (await _taskClient.FindTasksByOrganization(taskOrg)).Count;
             Assert.AreEqual(0, count);
 
@@ -506,5 +513,19 @@ namespace Platform.Client.Tests
             var logs = await _taskClient.GetRunLogs(task.Id,"020f755c3c082000",  _organization.Id);
             Assert.IsEmpty(logs);
         }
+        
+        private async Task<Authorization> AddAuthorization(Organization organization)
+        {
+            var taskResource = Permission.TaskResource(organization.Id);
+
+            var createTask = new Permission {Resource = taskResource, Action = Permission.CreateAction};
+            var deleteTask = new Permission {Resource = taskResource, Action = Permission.DeleteAction};
+
+            var authorization = await PlatformClient.CreateAuthorizationClient()
+                .CreateAuthorization(_user, new List<Permission> {createTask, deleteTask});
+            
+            return authorization;
+        }
+
     }
 }
