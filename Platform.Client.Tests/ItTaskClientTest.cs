@@ -321,6 +321,26 @@ namespace Platform.Client.Tests
         }
 
         [Test]
+        public async Task GetLogs()
+        {
+            var task = await _taskClient.CreateTaskEvery(GenerateName("it task"), TASK_FLUX, "1s", _user.Id, _organization.Id);
+
+            Thread.Sleep(5_000);
+
+            var logs = await _taskClient.GetLogs(task);
+            Assert.IsNotEmpty(logs);
+            Assert.IsTrue(logs[0].EndsWith("Completed successfully"));
+        }
+        
+        [Test]
+        public async Task GetLogsNotExist()
+        {
+            var logs = await _taskClient.GetLogs("020f755c3c082000", _organization.Id);
+
+            Assert.IsEmpty(logs);
+        }
+
+        [Test]
         public async Task Runs()
         {
             var task = await _taskClient.CreateTaskEvery(GenerateName("it task"), TASK_FLUX, "1s", _user.Id, _organization.Id);
@@ -425,7 +445,7 @@ namespace Platform.Client.Tests
             var task = await _taskClient.CreateTaskEvery(GenerateName("it task"), TASK_FLUX, "1s", _user, _organization);
             
             var logs = await _taskClient.GetRunLogs(task.Id,"020f755c3c082000",  _organization.Id);
-            Assert.AreEqual(0, logs.Count);
+            Assert.IsEmpty(logs);
         }
     }
 }

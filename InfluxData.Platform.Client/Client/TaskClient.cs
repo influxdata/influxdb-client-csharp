@@ -450,6 +450,34 @@ namespace InfluxData.Platform.Client.Client
 
             RaiseForInfluxError(request);
         }
+        
+        /// <summary>
+        /// Retrieve all logs for a task.
+        /// </summary>
+        /// <param name="task">task to get logs for</param>
+        /// <returns>the list of all logs for a task</returns>
+        public async System.Threading.Tasks.Task<List<string>> GetLogs(Task task)
+        {
+            Arguments.CheckNotNull(task, nameof(task));
+
+            return await GetLogs(task.Id, task.OrganizationId);
+        }
+
+        /// <summary>
+        /// Retrieve all logs for a task.
+        /// </summary>
+        /// <param name="taskId">ID of task to get logs for</param>
+        /// <param name="organizationId">ID of organization to get logs for</param>
+        /// <returns>the list of all logs for a task</returns>
+        public async System.Threading.Tasks.Task<List<string>> GetLogs(string taskId, string organizationId)
+        {
+            Arguments.CheckNonEmptyString(taskId, nameof(taskId));
+            Arguments.CheckNonEmptyString(organizationId, nameof(organizationId));
+            
+            var request = await Get($"/api/v2/tasks/{taskId}/logs?orgID={organizationId}");
+
+            return Call<List<string>>(request, "task not found");
+        }
 
         /// <summary>
         /// Retrieve list of run records for a task.
