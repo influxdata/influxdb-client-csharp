@@ -425,6 +425,36 @@ namespace Platform.Client.Tests
         }
 
         [Test]
+        //TODO
+        [Ignore("avoid panic: column _measurement is not of type time goroutine")]
+        public async Task RetryRun()
+        {
+            var task = await _taskClient.CreateTaskEvery(GenerateName("it task"), TASK_FLUX, "1s", _user, _organization);
+            Thread.Sleep(5_000);
+            
+            var runs = await _taskClient.GetRuns(task, null, null, 1);
+            Assert.AreEqual(1, runs.Count);
+            
+            var run = runs[0];
+
+            var retriedRun = await _taskClient.RetryRun(run);
+            
+            Assert.IsNotNull(retriedRun);
+            Assert.AreEqual(run.Id, retriedRun.Id);
+            Assert.Less(runs.Count, (await _taskClient.GetRuns(task)).Count);
+        }
+        
+        [Test]
+        public async Task RetryRunNotExist()
+        {
+            var task = await _taskClient.CreateTaskEvery(GenerateName("it task"), TASK_FLUX, "1s", _user, _organization);
+            
+            var retriedRun = await _taskClient.RetryRun(task.Id, "020f755c3c082000");
+            
+            Assert.IsNull(retriedRun);
+        }
+
+        [Test]
         public async Task GetRunLogs()
         {
             var task = await _taskClient.CreateTaskEvery(GenerateName("it task"), TASK_FLUX, "1s", _user, _organization);

@@ -50,9 +50,11 @@ namespace InfluxData.Platform.Client.Client
             return await base.SendAsync(request, cancellationToken);
         }
         
-        /**
-         * Init the Session token if is {@link org.influxdata.platform.option.PlatformOptions.AuthScheme#SESSION} used.
-         */
+        /// <summary>
+        /// Init the Session token if is <see cref="InfluxData.Platform.Client.Option.PlatformOptions.AuthenticationScheme.Session"/> used.
+        /// </summary>
+        /// <param name="cancellationToken"></param>
+        /// <returns>async task</returns>
         private async Task InitToken(CancellationToken cancellationToken) 
         {
             if (!PlatformOptions.AuthenticationScheme.Session.Equals(_platformOptions.AuthScheme) || _signout) 
@@ -93,12 +95,10 @@ namespace InfluxData.Platform.Client.Client
             return "Basic " + Convert.ToBase64String(Encoding.Default.GetBytes(username + ":" + password));
         }
 
-        /**
-         * Expire the current session.
-         *
-         * @throws IOException if the request could not be executed due to cancellation, a connectivity problem or timeout
-         * @see Call#execute()
-         */
+        /// <summary>
+        /// Expire the current session.
+        /// </summary>
+        /// <returns>async task</returns>
         protected internal async Task Signout()
         {
             if (!PlatformOptions.AuthenticationScheme.Session.Equals(_platformOptions.AuthScheme) || _signout)

@@ -567,6 +567,34 @@ namespace InfluxData.Platform.Client.Client
         }
 
         /// <summary>
+        /// Retry a task run.
+        /// </summary>
+        /// <param name="run">the run to retry</param>
+        /// <returns>the executed run</returns>
+        public async System.Threading.Tasks.Task<Run> RetryRun(Run run)
+        {
+            Arguments.CheckNotNull(run, nameof(run));
+
+            return await RetryRun(run.TaskId, run.Id);
+        }
+        
+        /// <summary>
+        /// Retry a task run.
+        /// </summary>
+        /// <param name="taskId">ID of task with the run to retry</param>
+        /// <param name="runId">ID of run to retry</param>
+        /// <returns>the executed run</returns>
+        public async System.Threading.Tasks.Task<Run> RetryRun(string taskId, string runId)
+        {
+            Arguments.CheckNonEmptyString(taskId, nameof(taskId));
+            Arguments.CheckNonEmptyString(runId, nameof(runId));
+            
+            var request = await Post($"/api/v2/tasks/{taskId}/runs/{runId}/retry");
+
+            return Call<Run>(request, "expected one run, got 0");
+        }
+
+        /// <summary>
         /// Retrieve all logs for a run.
         /// </summary>
         /// <param name="run">the run to gets logs for it</param>

@@ -3,14 +3,16 @@ using System.Text.RegularExpressions;
 
 namespace Platform.Common.Platform
 {
-/**
- * Functions for parameter validation.
- * <p>
- * Copied from InfluxDB java - <a href="https://github.com/influxdata/influxdb-java/">thanks</a>
- */
-    public class Arguments
+    /// <summary>
+    /// Functions for parameter validation.
+    ///
+    /// <para>
+    /// Inspiration from InfluxDB java - <a href="https://github.com/influxdata/influxdb-java/">thanks</a>
+    /// </para>
+    /// </summary>
+    public static class Arguments
     {
-        private static readonly string DURATION_PATTERN = @"([-+]?)([0-9]+(\\.[0-9]*)?[a-z]+)+";
+        private const string DurationPattern = @"([-+]?)([0-9]+(\\.[0-9]*)?[a-z]+)+";
 
         /**
          * Enforces that the string is {@linkplain String#isEmpty() not empty}.
@@ -38,7 +40,7 @@ namespace Platform.Common.Platform
          * @return {@code string}
          * @throws ArgumentException if the string has not one char
          */
-        public static String CheckOneCharString(string value, string name)
+        public static string CheckOneCharString(string value, string name)
         {
             if (string.IsNullOrEmpty(value) || value.Length != 1)
             {
@@ -56,9 +58,9 @@ namespace Platform.Common.Platform
          * @return {@code string}
          * @throws ArgumentException if the string is not duration literal
          */
-        public static String CheckDuration(string value, string name)
+        public static string CheckDuration(string value, string name)
         {
-            if (string.IsNullOrEmpty(value) || !Regex.Match(value, DURATION_PATTERN).Success)
+            if (string.IsNullOrEmpty(value) || !Regex.Match(value, DurationPattern).Success)
             {
                 throw new ArgumentException("Expecting a duration string for " + name + ". But got: " + value);
             }
@@ -73,7 +75,7 @@ namespace Platform.Common.Platform
          * @param name   variable name for reporting
          * @throws ArgumentException if the number is less or equal to 0
          */
-        public static void CheckPositiveNumber(int number, String name)
+        public static void CheckPositiveNumber(int number, string name)
         {
             if (number <= 0)
             {
@@ -95,7 +97,7 @@ namespace Platform.Common.Platform
                 throw new ArgumentException("Expecting a positive or zero number for " + name);
             }
         }
-        
+
         /**
          * Checks that the specified object reference is not {@code null}.
          *
@@ -104,7 +106,7 @@ namespace Platform.Common.Platform
          * @throws NullPointerException if the object is {@code null}
          * @see Objects#requireNonNull(Object, String)
          */
-        public static void CheckNotNull(Object obj, string name)
+        public static void CheckNotNull(object obj, string name)
         {
             if (obj == null)
             {

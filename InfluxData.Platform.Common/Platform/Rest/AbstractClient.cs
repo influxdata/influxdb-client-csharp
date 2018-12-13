@@ -34,6 +34,14 @@ namespace Platform.Common.Platform.Rest
 
             return Client.DoRequest(request).ConfigureAwait(false);
         }
+        
+        protected ConfiguredTaskAwaitable<RequestResult> Post(string path)
+        {
+            var request = new HttpRequestMessage(new HttpMethod(HttpMethodKind.Post.Name()), path);
+
+            return Client.DoRequest(request).ConfigureAwait(false);
+        }
+        
         protected ConfiguredTaskAwaitable<RequestResult> Patch(object body, string path)
         {
             var request = new HttpRequestMessage(new HttpMethod(HttpMethodKind.Patch.Name()), path)
