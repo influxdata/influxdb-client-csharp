@@ -509,7 +509,7 @@ namespace InfluxData.Platform.Client.Client
             Arguments.CheckNonEmptyString(taskId, nameof(taskId));
             Arguments.CheckNonEmptyString(organizationId, nameof(organizationId));
 
-            var format = "yyyy-MM-dd'T'HH:mm:ss.fffZ";
+            const string format = "yyyy-MM-dd'T'HH:mm:ss.fffZ";
             
             var after = afterTime?.ToString(format);
             var before = beforeTime?.ToString(format);
@@ -538,7 +538,36 @@ namespace InfluxData.Platform.Client.Client
             return Call<Run>(request, "expected one run, got 0");
         }
 
-        private Task CreateTask(string name, string flux, string every, string cron, User user, String organizationId)
+        /// <summary>
+        /// Retrieve all logs for a run.
+        /// </summary>
+        /// <param name="run">the run to gets logs for it</param>
+        /// <param name="organizationId">ID of organization to get logs for it</param>
+        /// <returns>the list of all logs for a run</returns>
+        public async System.Threading.Tasks.Task<List<string>> GetRunLogs(Run run, string organizationId)
+        {
+            return await GetRunLogs(run.TaskId, run.Id, organizationId);
+        }
+        
+        /// <summary>
+        /// Retrieve all logs for a run.
+        /// </summary>
+        /// <param name="taskId">ID of task to get run logs for it</param>
+        /// <param name="runId">ID of run to get logs for it</param>
+        /// <param name="organizationId">ID of organization to get logs for it</param>
+        /// <returns>the list of all logs for a run</returns>
+        public async System.Threading.Tasks.Task<List<string>> GetRunLogs(string taskId, string runId, string organizationId)
+        {
+            Arguments.CheckNonEmptyString(taskId, nameof(taskId));
+            Arguments.CheckNonEmptyString(runId, nameof(runId));
+            Arguments.CheckNonEmptyString(organizationId, nameof(organizationId));
+
+            var request = await Get($"/api/v2/tasks/{taskId}/runs/{runId}/logs?orgID={organizationId}");
+
+            return Call<List<string>>(request);
+        }
+        
+        private Task CreateTask(string name, string flux, string every, string cron, User user, string organizationId)
         {
             Arguments.CheckNonEmptyString(name, nameof(name));
             Arguments.CheckNonEmptyString(flux, nameof(flux));
