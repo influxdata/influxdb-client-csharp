@@ -593,6 +593,34 @@ namespace InfluxData.Platform.Client.Client
 
             return Call<Run>(request, "expected one run, got 0");
         }
+        
+        /// <summary>
+        /// Cancels a currently running run.
+        /// </summary>
+        /// <param name="run">the run to cancel</param>
+        /// <returns>async task</returns>
+        public async System.Threading.Tasks.Task CancelRun(Run run)
+        {
+            Arguments.CheckNotNull(run, nameof(run));
+
+            await CancelRun(run.TaskId, run.Id);
+        }
+        
+        /// <summary>
+        /// Cancels a currently running run.
+        /// </summary>
+        /// <param name="taskId">ID of task with the run to cancel</param>
+        /// <param name="runId">ID of run to cancel</param>
+        /// <returns>async task</returns>
+        public async System.Threading.Tasks.Task CancelRun(string taskId, string runId)
+        {
+            Arguments.CheckNonEmptyString(taskId, nameof(taskId));
+            Arguments.CheckNonEmptyString(runId, nameof(runId));
+            
+            var request = await Delete($"/api/v2/tasks/{taskId}/runs/{runId}");
+
+            RaiseForInfluxError(request);
+        }
 
         /// <summary>
         /// Retrieve all logs for a run.
