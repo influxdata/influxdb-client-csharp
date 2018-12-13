@@ -19,7 +19,7 @@ namespace Flux.Client.Tests
 
         async Task SetUpAsync()
         {
-            string influxUrl = GetInfluxDbUrl();
+            var influxUrl = GetInfluxDbUrl();
             
             var options = new FluxConnectionOptions(influxUrl);
             

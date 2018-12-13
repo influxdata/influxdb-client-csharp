@@ -22,7 +22,7 @@ namespace InfluxData.Platform.Client.Client
         ///
         /// <para>
         /// NOTE: This method is not intended for large query results.
-        /// Use <see cref="Query(string,string,Action{ICancellable, FluxRecord},Action{Exception},Action)"/>
+        /// Use <see cref="Query(string,string,System.Action{Platform.Common.Platform.Rest.ICancellable,Platform.Common.Flux.Domain.FluxRecord}(Platform.Common.Platform.Rest.ICancellable,Platform.Common.Flux.Domain.FluxRecord),Action{Exception},Action)"/>
         /// for large data streaming.
         /// </para>
         /// </summary>
@@ -56,7 +56,7 @@ namespace InfluxData.Platform.Client.Client
         /// <returns>Measurements which are matched the query</returns>
         public async Task<List<T>> Query<T>(string query, string organization)
         {
-            List<T> measurements = new List<T>();
+            var measurements = new List<T>();
 
             var consumer = new FluxResponseConsumerPoco<T>((cancellable, poco) => { measurements.Add(poco); });
 
@@ -185,7 +185,7 @@ namespace InfluxData.Platform.Client.Client
             Arguments.CheckNotNull(onError, "onError");
             Arguments.CheckNotNull(onComplete, "onComplete");
 
-            FluxResponseConsumerPoco<T> consumer = new FluxResponseConsumerPoco<T>(onNext);
+            var consumer = new FluxResponseConsumerPoco<T>(onNext);
 
             await Query(query, organization, GetDefaultDialect(), consumer, onError, onComplete);
         }
@@ -227,7 +227,7 @@ namespace InfluxData.Platform.Client.Client
         {
             Arguments.CheckNonEmptyString(query, "query");
 
-            List<string> rows = new List<string>();
+            var rows = new List<string>();
 
             void Consumer(ICancellable cancellable, string row) => rows.Add(row);
 

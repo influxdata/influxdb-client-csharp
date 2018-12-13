@@ -16,7 +16,7 @@ namespace InfluxData.Platform.Client.Client
             Arguments.CheckNotNull(measurement, nameof(measurement));
             Arguments.CheckNotNull(precision, nameof(precision));
 
-            Measurement measurementAttribute = (Measurement) measurement.GetType()
+            var measurementAttribute = (Measurement) measurement.GetType()
                 .GetCustomAttribute(typeof(Measurement));
 
             if (measurementAttribute == null)
@@ -29,7 +29,7 @@ namespace InfluxData.Platform.Client.Client
 
             foreach (var property in measurement.GetType().GetProperties())
             {
-                Column column = (Column) property.GetCustomAttribute(typeof(Column));
+                var column = (Column) property.GetCustomAttribute(typeof(Column));
                 if (column == null)
                 {
                     continue;

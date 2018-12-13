@@ -22,21 +22,21 @@ namespace Platform.Client.Tests
         [Test]
         public async Task CreateAuthorization()
         {
-            Permission readUsers = new Permission
+            var readUsers = new Permission
             {
                 Action = Permission.ReadAction,
                 Resource = Permission.UserResource
             };
 
-            Permission writeOrganizations = new Permission
+            var writeOrganizations = new Permission
             {
                 Action = Permission.WriteAction,
                 Resource = Permission.OrganizationResource
             };
 
-            List<Permission> permissions = new List<Permission> {readUsers, writeOrganizations};
+            var permissions = new List<Permission> {readUsers, writeOrganizations};
 
-            Authorization authorization = await _authorizationClient.CreateAuthorization(_user, permissions);
+            var authorization = await _authorizationClient.CreateAuthorization(_user, permissions);
 
             Assert.IsNotNull(authorization);
             Assert.IsNotEmpty(authorization.Id);
@@ -63,15 +63,15 @@ namespace Platform.Client.Tests
         [Ignore("updateAuthorization return PlatformError but c.db.update() required 'plain' go error bolt/authorization.go:397")]
         public async Task UpdateAuthorizationStatus() {
 
-            Permission readUsers = new Permission
+            var readUsers = new Permission
             {
                 Action = Permission.ReadAction,
                 Resource = Permission.UserResource
             };
 
-            List<Permission> permissions = new List<Permission> {readUsers};
+            var permissions = new List<Permission> {readUsers};
 
-            Authorization authorization = await _authorizationClient.CreateAuthorization(_user, permissions);
+            var authorization = await _authorizationClient.CreateAuthorization(_user, permissions);
 
             Assert.AreEqual(authorization.Status, Status.Active);
 
@@ -89,11 +89,11 @@ namespace Platform.Client.Tests
         [Test]
         public async Task FindAuthorizations() {
 
-            int size = (await _authorizationClient.FindAuthorizations()).Count;
+            var size = (await _authorizationClient.FindAuthorizations()).Count;
 
             await _authorizationClient.CreateAuthorization(_user, new List<Permission>());
 
-            List<Authorization> authorizations = await _authorizationClient.FindAuthorizations();
+            var authorizations = await _authorizationClient.FindAuthorizations();
             
             Assert.AreEqual(size + 1, authorizations.Count);
         }
@@ -101,9 +101,9 @@ namespace Platform.Client.Tests
         [Test]
         public async Task FindAuthorizationsById() {
 
-            Authorization authorization = await _authorizationClient.CreateAuthorization(_user, new List<Permission>());
+            var authorization = await _authorizationClient.CreateAuthorization(_user, new List<Permission>());
 
-            Authorization foundAuthorization = await _authorizationClient.FindAuthorizationById(authorization.Id);
+            var foundAuthorization = await _authorizationClient.FindAuthorizationById(authorization.Id);
 
             Assert.IsNotNull(foundAuthorization);
             Assert.AreEqual(authorization.Id, foundAuthorization.Id);
@@ -116,7 +116,7 @@ namespace Platform.Client.Tests
         [Test]
         public async Task FindAuthorizationsByIdNull() {
 
-            Authorization authorization = await _authorizationClient.FindAuthorizationById("020f755c3c082000");
+            var authorization = await _authorizationClient.FindAuthorizationById("020f755c3c082000");
 
             Assert.IsNull(authorization);
         }
@@ -124,10 +124,10 @@ namespace Platform.Client.Tests
         [Test]
         public async Task DeleteAuthorization() {
 
-            Authorization createdAuthorization = await _authorizationClient.CreateAuthorization(_user, new List<Permission>());
+            var createdAuthorization = await _authorizationClient.CreateAuthorization(_user, new List<Permission>());
             Assert.IsNotNull(createdAuthorization);
 
-            Authorization foundAuthorization = await _authorizationClient.FindAuthorizationById(createdAuthorization.Id);
+            var foundAuthorization = await _authorizationClient.FindAuthorizationById(createdAuthorization.Id);
             Assert.IsNotNull(foundAuthorization);
 
             // delete authorization
@@ -140,22 +140,22 @@ namespace Platform.Client.Tests
         [Test]
         public async Task  FindAuthorizationsByUser()
         {
-            int size = (await _authorizationClient.FindAuthorizationsByUser(_user)).Count;
+            var size = (await _authorizationClient.FindAuthorizationsByUser(_user)).Count;
 
             await _authorizationClient.CreateAuthorization(_user, new List<Permission>());
 
-            List<Authorization> authorizations = await _authorizationClient.FindAuthorizationsByUser(_user);
+            var authorizations = await _authorizationClient.FindAuthorizationsByUser(_user);
             Assert.AreEqual(size + 1, authorizations.Count);
         }
 
         [Test]
         public async Task  FindAuthorizationsByUserName() {
 
-            int size = (await _authorizationClient.FindAuthorizationsByUser(_user)).Count;
+            var size = (await _authorizationClient.FindAuthorizationsByUser(_user)).Count;
 
             await _authorizationClient.CreateAuthorization(_user, new List<Permission>());
 
-            List<Authorization> authorizations = await _authorizationClient.FindAuthorizationsByUserName(_user.Name);
+            var authorizations = await _authorizationClient.FindAuthorizationsByUserName(_user.Name);
             Assert.AreEqual(size + 1, authorizations.Count);
         }
     }

@@ -26,8 +26,8 @@ namespace Platform.Common.Flux.Parser
 
             try
             {
-                Type type = typeof(T);
-                T poco = (T) Activator.CreateInstance(type);
+                var type = typeof(T);
+                var poco = (T) Activator.CreateInstance(type);
 
                 var properties = type.GetProperties();
 
@@ -42,7 +42,7 @@ namespace Platform.Common.Flux.Parser
                         attribute = (Column) attributes.First();
                     }
 
-                    string columnName = property.Name;
+                    var columnName = property.Name;
 
                     if (attribute != null && !string.IsNullOrEmpty(attribute.Name))
                     {
@@ -50,10 +50,10 @@ namespace Platform.Common.Flux.Parser
                     }
 
                     // copy record to case insensitive dictionary
-                    Dictionary<string, object> recordValues =
+                    var recordValues =
                         new Dictionary<string, object>(StringComparer.InvariantCultureIgnoreCase);
 
-                    foreach (KeyValuePair<string, object> entry in record.Values)
+                    foreach (var entry in record.Values)
                     {
                         recordValues.Add(entry.Key, entry.Value);
                     }

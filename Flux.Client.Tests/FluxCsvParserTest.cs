@@ -29,7 +29,7 @@ namespace Flux.Client.Tests
             // |> map(fn: (r) => ({value1: r._value, _value2:r._value * r._value, value_str: "test"}))'
             // --data-urlencode "orgName=0" http://localhost:8093/api/v2/query
 
-            string data = "#datatype,string,long,dateTime:RFC3339,dateTime:RFC3339,string,string,string,string,long,long,string\n"
+            var data = "#datatype,string,long,dateTime:RFC3339,dateTime:RFC3339,string,string,string,string,long,long,string\n"
                             + "#group,false,false,true,true,true,true,true,true,false,false,false\n"
                             + "#default,_result,,,,,,,,,,\n"
                             + ",result,table,_start,_stop,_field,_measurement,host,region,_value2,value1,value_str\n"
@@ -38,11 +38,11 @@ namespace Flux.Client.Tests
                             + ",,2,1677-09-21T00:12:43.145224192Z,2018-07-16T11:21:02.547596934Z,usage_system,cpu,A,west,1444,38,test\n"
                             + ",,3,1677-09-21T00:12:43.145224192Z,2018-07-16T11:21:02.547596934Z,user_usage,cpu,A,west,2401,49,test";
 
-            List<FluxTable> tables = ParseFluxResponse(data);
+            var tables = ParseFluxResponse(data);
 
-            List<FluxColumn> columnHeaders = tables[0].Columns;
+            var columnHeaders = tables[0].Columns;
             Assert.That(columnHeaders.Count == 11);
-            FluxColumn fluxColumn1 = columnHeaders[0];
+            var fluxColumn1 = columnHeaders[0];
 
             Assert.IsFalse(fluxColumn1.Group);
             Assert.IsFalse(columnHeaders[1].Group);
@@ -59,11 +59,11 @@ namespace Flux.Client.Tests
             Assert.That(tables.Count == 4);
 
             // Record 1
-            FluxTable fluxTable1 = tables[0];
+            var fluxTable1 = tables[0];
 
             Assert.That(fluxTable1.Records.Count == 1);
 
-            FluxRecord fluxRecord1 = fluxTable1.Records[0];
+            var fluxRecord1 = fluxTable1.Records[0];
 
             Assert.That(0.Equals(fluxRecord1.Table));
             Assert.That("A".Equals(fluxRecord1.GetValueByKey("host")));
@@ -78,11 +78,11 @@ namespace Flux.Client.Tests
             Assert.That("test".Equals(fluxRecord1.GetValueByIndex(10)));
 
             // Record 2
-            FluxTable fluxTable2 = tables[1];
+            var fluxTable2 = tables[1];
 
             Assert.That(fluxTable2.Records.Count == 1);
 
-            FluxRecord fluxRecord2 = fluxTable2.Records[0];
+            var fluxRecord2 = fluxTable2.Records[0];
             Assert.That(1.Equals(fluxRecord2.Table));
             Assert.That("B".Equals(fluxRecord2.GetValueByKey("host")));
             Assert.That("west".Equals(fluxRecord2.GetValueByKey("region")));
@@ -93,11 +93,11 @@ namespace Flux.Client.Tests
             Assert.That("test".Equals(fluxRecord2.GetValueByKey("value_str")));
 
             // Record 3
-            FluxTable fluxTable3 = tables[2];
+            var fluxTable3 = tables[2];
 
             Assert.That(fluxTable3.Records.Count == 1);
 
-            FluxRecord fluxRecord3 = fluxTable3.Records[0];
+            var fluxRecord3 = fluxTable3.Records[0];
             Assert.That(2.Equals(fluxRecord3.Table));
             Assert.That("A".Equals(fluxRecord3.GetValueByKey("host")));
             Assert.That("west".Equals(fluxRecord3.GetValueByKey("region")));
@@ -108,11 +108,11 @@ namespace Flux.Client.Tests
             Assert.That("test".Equals(fluxRecord3.GetValueByKey("value_str")));
 
             // Record 4
-            FluxTable fluxTable4 = tables[3];
+            var fluxTable4 = tables[3];
 
             Assert.That(fluxTable4.Records.Count == 1);
 
-            FluxRecord fluxRecord4 = fluxTable4.Records[0];
+            var fluxRecord4 = fluxTable4.Records[0];
             Assert.That(3.Equals(fluxRecord4.Table));
             Assert.That("A".Equals(fluxRecord4.GetValueByKey("host")));
             Assert.That("west".Equals(fluxRecord4.GetValueByKey("region")));
@@ -126,18 +126,18 @@ namespace Flux.Client.Tests
         [Test]
         public void Shortcut()
         {
-            string data = "#datatype,string,long,dateTime:RFC3339,dateTime:RFC3339,dateTime:RFC3339,long,string,string,string,boolean\n"
+            var data = "#datatype,string,long,dateTime:RFC3339,dateTime:RFC3339,dateTime:RFC3339,long,string,string,string,boolean\n"
                             + "#group,false,false,false,false,false,false,false,false,false,true\n"
                             + "#default,_result,,,,,,,,,true\n"
                             + ",result,table,_start,_stop,_time,_value,_field,_measurement,host,value\n"
                             + ",,0,1970-01-01T00:00:10Z,1970-01-01T00:00:20Z,1970-01-01T00:00:10Z,10,free,mem,A,true\n";
 
-            List<FluxTable> tables = ParseFluxResponse(data);
+            var tables = ParseFluxResponse(data);
 
             Assert.That(tables.Count == 1);
             Assert.That(tables[0].Records.Count == 1);
 
-            FluxRecord fluxRecord = tables[0].Records[0];
+            var fluxRecord = tables[0].Records[0];
 
             Assert.That(InstantPattern.ExtendedIso.Parse("1970-01-01T00:00:10Z").Value.Equals(fluxRecord.GetStart()));
             Assert.That(InstantPattern.ExtendedIso.Parse("1970-01-01T00:00:20Z").Value.Equals(fluxRecord.GetStop()));
@@ -151,7 +151,7 @@ namespace Flux.Client.Tests
         [Test]
         public void MappingBoolean()
         {
-            string data = "#datatype,string,long,dateTime:RFC3339,dateTime:RFC3339,dateTime:RFC3339,long,string,string,string,boolean\n"
+            var data = "#datatype,string,long,dateTime:RFC3339,dateTime:RFC3339,dateTime:RFC3339,long,string,string,string,boolean\n"
                             + "#group,false,false,false,false,false,false,false,false,false,true\n"
                             + "#default,_result,,,,,,,,,true\n"
                             + ",result,table,_start,_stop,_time,_value,_field,_measurement,host,value\n"
@@ -160,11 +160,11 @@ namespace Flux.Client.Tests
                             + ",,0,1970-01-01T00:00:10Z,1970-01-01T00:00:20Z,1970-01-01T00:00:10Z,10,free,mem,A,x\n"
                             + ",,0,1970-01-01T00:00:10Z,1970-01-01T00:00:20Z,1970-01-01T00:00:10Z,10,free,mem,A,\n";
 
-            List<FluxTable> tables = ParseFluxResponse(data);
+            var tables = ParseFluxResponse(data);
             
             Assert.IsNotNull(tables.Count == 1);
 
-            List<FluxRecord> records = tables[0].Records;
+            var records = tables[0].Records;
 
             Assert.That(records.Count == 4);
             
@@ -177,20 +177,20 @@ namespace Flux.Client.Tests
         [Test]
         public void MappingUnsignedLong()
         {
-            string data = "#datatype,string,long,dateTime:RFC3339,dateTime:RFC3339,dateTime:RFC3339,long,string,string,string,unsignedLong\n"
+            var data = "#datatype,string,long,dateTime:RFC3339,dateTime:RFC3339,dateTime:RFC3339,long,string,string,string,unsignedLong\n"
                             + "#group,false,false,false,false,false,false,false,false,false,true\n"
                             + "#default,_result,,,,,,,,,\n"
                             + ",result,table,_start,_stop,_time,_value,_field,_measurement,host,value\n"
                             + ",,0,1970-01-01T00:00:10Z,1970-01-01T00:00:20Z,1970-01-01T00:00:10Z,10,free,mem,A,17916881237904312345\n"
                             + ",,0,1970-01-01T00:00:10Z,1970-01-01T00:00:20Z,1970-01-01T00:00:10Z,10,free,mem,A,\n";
 
-            ulong expected = Convert.ToUInt64("17916881237904312345");
+            var expected = Convert.ToUInt64("17916881237904312345");
 
-            List<FluxTable> tables = ParseFluxResponse(data);
+            var tables = ParseFluxResponse(data);
             
             Assert.IsNotNull(tables.Count == 1);
 
-            List<FluxRecord> records = tables[0].Records;
+            var records = tables[0].Records;
 
             Assert.That(records.Count == 2);
             
@@ -201,18 +201,18 @@ namespace Flux.Client.Tests
         [Test]
         public void MappingDouble()
         {
-            string data = "#datatype,string,long,dateTime:RFC3339,dateTime:RFC3339,dateTime:RFC3339,long,string,string,string,double\n"
+            var data = "#datatype,string,long,dateTime:RFC3339,dateTime:RFC3339,dateTime:RFC3339,long,string,string,string,double\n"
                             + "#group,false,false,false,false,false,false,false,false,false,true\n"
                             + "#default,_result,,,,,,,,,\n"
                             + ",result,table,_start,_stop,_time,_value,_field,_measurement,host,value\n"
                             + ",,0,1970-01-01T00:00:10Z,1970-01-01T00:00:20Z,1970-01-01T00:00:10Z,10,free,mem,A,12.25\n"
                             + ",,0,1970-01-01T00:00:10Z,1970-01-01T00:00:20Z,1970-01-01T00:00:10Z,10,free,mem,A,\n";
 
-            List<FluxTable> tables = ParseFluxResponse(data);
+            var tables = ParseFluxResponse(data);
             
             Assert.IsNotNull(tables.Count == 1);
 
-            List<FluxRecord> records = tables[0].Records;
+            var records = tables[0].Records;
 
             Assert.That(records.Count == 2);
             
@@ -223,10 +223,10 @@ namespace Flux.Client.Tests
         [Test]
         public void MappingBase64Binary()
         {
-            string binaryData = "test value";
-            string encodedString = Convert.ToBase64String(Encoding.UTF8.GetBytes(binaryData));
+            var binaryData = "test value";
+            var encodedString = Convert.ToBase64String(Encoding.UTF8.GetBytes(binaryData));
 
-            string data = "#datatype,string,long,dateTime:RFC3339,dateTime:RFC3339,dateTime:RFC3339,long,string,string,string,base64Binary\n"
+            var data = "#datatype,string,long,dateTime:RFC3339,dateTime:RFC3339,dateTime:RFC3339,long,string,string,string,base64Binary\n"
                             + "#group,false,false,false,false,false,false,false,false,false,true\n"
                             + "#default,_result,,,,,,,,,\n"
                             + ",result,table,_start,_stop,_time,_value,_field,_measurement,host,value\n"
@@ -234,15 +234,15 @@ namespace Flux.Client.Tests
                             encodedString + "\n"
                             + ",,0,1970-01-01T00:00:10Z,1970-01-01T00:00:20Z,1970-01-01T00:00:10Z,10,free,mem,A,\n";
 
-            List<FluxTable> tables = ParseFluxResponse(data);
+            var tables = ParseFluxResponse(data);
             
             Assert.IsNotNull(tables.Count == 1);
 
-            List<FluxRecord> records = tables[0].Records;
+            var records = tables[0].Records;
 
             Assert.That(records.Count == 2);
 
-            byte[] value = (byte[]) records[0].GetValueByKey("value");
+            var value = (byte[]) records[0].GetValueByKey("value");
             
             Assert.IsNotEmpty(value);
             Assert.That(binaryData.Equals(Encoding.UTF8.GetString(value)));
@@ -253,18 +253,18 @@ namespace Flux.Client.Tests
         [Test]
         public void MappingRfc3339()
         {
-            string data = "#datatype,string,long,dateTime:RFC3339,dateTime:RFC3339,dateTime:RFC3339,long,string,string,string,dateTime:RFC3339\n"
+            var data = "#datatype,string,long,dateTime:RFC3339,dateTime:RFC3339,dateTime:RFC3339,long,string,string,string,dateTime:RFC3339\n"
                             + "#group,false,false,false,false,false,false,false,false,false,true\n"
                             + "#default,_result,,,,,,,,,\n"
                             + ",result,table,_start,_stop,_time,_value,_field,_measurement,host,value\n"
                             + ",,0,1970-01-01T00:00:10Z,1970-01-01T00:00:20Z,1970-01-01T00:00:10Z,10,free,mem,A,1970-01-01T00:00:10Z\n"
                             + ",,0,1970-01-01T00:00:10Z,1970-01-01T00:00:20Z,1970-01-01T00:00:10Z,10,free,mem,A,\n";
 
-            List<FluxTable> tables = ParseFluxResponse(data);
+            var tables = ParseFluxResponse(data);
 
             Assert.IsNotNull(tables.Count == 1);
 
-            List<FluxRecord> records = tables[0].Records;
+            var records = tables[0].Records;
 
             Assert.That(records.Count == 2);
 
@@ -276,23 +276,23 @@ namespace Flux.Client.Tests
         [Test]
         public void MappingRfc3339Nano()
         {
-            string data = "#datatype,string,long,dateTime:RFC3339,dateTime:RFC3339,dateTime:RFC3339,long,string,string,string,dateTime:RFC3339Nano\n"
+            var data = "#datatype,string,long,dateTime:RFC3339,dateTime:RFC3339,dateTime:RFC3339,long,string,string,string,dateTime:RFC3339Nano\n"
                             + "#group,false,false,false,false,false,false,false,false,false,true\n"
                             + "#default,_result,,,,,,,,,\n"
                             + ",result,table,_start,_stop,_time,_value,_field,_measurement,host,value\n"
                             + ",,0,1970-01-01T00:00:10Z,1970-01-01T00:00:20Z,1970-01-01T00:00:10Z,10,free,mem,A,1970-01-01T00:00:10.999999999Z\n"
                             + ",,0,1970-01-01T00:00:10Z,1970-01-01T00:00:20Z,1970-01-01T00:00:10Z,10,free,mem,A,\n";
 
-            List<FluxTable> tables = ParseFluxResponse(data);
+            var tables = ParseFluxResponse(data);
             
             Assert.IsNotNull(tables.Count == 1);
 
-            List<FluxRecord> records = tables[0].Records;
+            var records = tables[0].Records;
 
             Assert.That(records.Count == 2);
 
-            Instant timeSeconds = Instant.Add(new Instant(), Duration.FromSeconds(10L));
-            Instant timeNanos = Instant.Add(timeSeconds, Duration.FromNanoseconds(999999999L));
+            var timeSeconds = Instant.Add(new Instant(), Duration.FromSeconds(10L));
+            var timeNanos = Instant.Add(timeSeconds, Duration.FromNanoseconds(999999999L));
 
             Assert.That(timeNanos.Equals(records[0].GetValueByKey("value")));
             Assert.IsNull(records[1].GetValueByKey("value"));
@@ -301,18 +301,18 @@ namespace Flux.Client.Tests
         [Test]
         public void MappingDuration()
         {
-            string data = "#datatype,string,long,dateTime:RFC3339,dateTime:RFC3339,dateTime:RFC3339,long,string,string,string,duration\n"
+            var data = "#datatype,string,long,dateTime:RFC3339,dateTime:RFC3339,dateTime:RFC3339,long,string,string,string,duration\n"
                             + "#group,false,false,false,false,false,false,false,false,false,true\n"
                             + "#default,_result,,,,,,,,,\n"
                             + ",result,table,_start,_stop,_time,_value,_field,_measurement,host,value\n"
                             + ",,0,1970-01-01T00:00:10Z,1970-01-01T00:00:20Z,1970-01-01T00:00:10Z,10,free,mem,A,125\n"
                             + ",,0,1970-01-01T00:00:10Z,1970-01-01T00:00:20Z,1970-01-01T00:00:10Z,10,free,mem,A,\n";
 
-            List<FluxTable> tables = ParseFluxResponse(data);
+            var tables = ParseFluxResponse(data);
             
             Assert.IsNotNull(tables.Count == 1);
 
-            List<FluxRecord> records = tables[0].Records;
+            var records = tables[0].Records;
 
             Assert.That(records.Count == 2);
 
@@ -323,14 +323,14 @@ namespace Flux.Client.Tests
         [Test]
         public void GroupKey()
         {
-            string data = "#datatype,string,long,dateTime:RFC3339,dateTime:RFC3339,dateTime:RFC3339,long,string,string,string,duration\n"
+            var data = "#datatype,string,long,dateTime:RFC3339,dateTime:RFC3339,dateTime:RFC3339,long,string,string,string,duration\n"
                             + "#group,false,false,false,false,true,false,false,false,false,true\n"
                             + "#default,_result,,,,,,,,,\n"
                             + ",result,table,_start,_stop,_time,_value,_field,_measurement,host,value\n"
                             + ",,0,1970-01-01T00:00:10Z,1970-01-01T00:00:20Z,1970-01-01T00:00:10Z,10,free,mem,A,125\n"
                             + ",,0,1970-01-01T00:00:10Z,1970-01-01T00:00:20Z,1970-01-01T00:00:10Z,10,free,mem,A,\n";
 
-            List<FluxTable> tables = ParseFluxResponse(data);
+            var tables = ParseFluxResponse(data);
 
             Assert.IsNotNull(tables.Count == 1);
 
@@ -341,18 +341,18 @@ namespace Flux.Client.Tests
         [Test]
         public void UnknownTypeAsString()
         {
-            string data = "#datatype,string,long,dateTime:RFC3339,dateTime:RFC3339,dateTime:RFC3339,long,string,string,string,unknown\n"
+            var data = "#datatype,string,long,dateTime:RFC3339,dateTime:RFC3339,dateTime:RFC3339,long,string,string,string,unknown\n"
                             + "#group,false,false,false,false,false,false,false,false,false,true\n"
                             + "#default,_result,,,,,,,,,\n"
                             + ",result,table,_start,_stop,_time,_value,_field,_measurement,host,value\n"
                             + ",,0,1970-01-01T00:00:10Z,1970-01-01T00:00:20Z,1970-01-01T00:00:10Z,10,free,mem,A,12.25\n"
                             + ",,0,1970-01-01T00:00:10Z,1970-01-01T00:00:20Z,1970-01-01T00:00:10Z,10,free,mem,A,\n";
 
-            List<FluxTable> tables = ParseFluxResponse(data);
+            var tables = ParseFluxResponse(data);
             
             Assert.IsNotNull(tables.Count == 1);
             
-            List<FluxRecord> records = tables[0].Records;
+            var records = tables[0].Records;
 
             Assert.That(records.Count == 2);
             
@@ -363,8 +363,8 @@ namespace Flux.Client.Tests
         [Test]
         public void Error() 
         {
-            string message = "failed to create physical plan: invalid time bounds from procedure from: bounds contain zero time";
-            string data = "#datatype,string,string\n"
+            var message = "failed to create physical plan: invalid time bounds from procedure from: bounds contain zero time";
+            var data = "#datatype,string,string\n"
                             + "#group,true,true\n"
                             + "#default,,\n"
                             + ",error,reference\n"
@@ -386,8 +386,8 @@ namespace Flux.Client.Tests
         [Test]
         public void ErrorWithoutReference()
         {
-            string message = "failed to create physical plan: invalid time bounds from procedure from: bounds contain zero time";
-            string data = "#datatype,string,string\n"
+            var message = "failed to create physical plan: invalid time bounds from procedure from: bounds contain zero time";
+            var data = "#datatype,string,string\n"
                             + "#group,true,true\n"
                             + "#default,,\n"
                             + ",error,reference\n"
@@ -409,14 +409,14 @@ namespace Flux.Client.Tests
         [Test]
         public void ParsingToConsumer()
         {
-            string data = "#datatype,string,long,dateTime:RFC3339,dateTime:RFC3339,dateTime:RFC3339,long,string,string,string,unknown\n"
+            var data = "#datatype,string,long,dateTime:RFC3339,dateTime:RFC3339,dateTime:RFC3339,long,string,string,string,unknown\n"
                             + "#group,false,false,false,false,false,false,false,false,false,true\n"
                             + "#default,_result,,,,,,,,,\n"
                             + ",result,table,_start,_stop,_time,_value,_field,_measurement,host,value\n"
                             + ",,0,1970-01-01T00:00:10Z,1970-01-01T00:00:20Z,1970-01-01T00:00:10Z,10,free,mem,A,12.25\n"
                             + ",,0,1970-01-01T00:00:10Z,1970-01-01T00:00:20Z,1970-01-01T00:00:10Z,10,free,mem,A,\n";
 
-            List<FluxRecord> records = new List<FluxRecord>();
+            var records = new List<FluxRecord>();
 
             var consumer = new TestConsumer
             (
@@ -431,16 +431,16 @@ namespace Flux.Client.Tests
         [Test]
         public void CancelParsing()
         {
-            string data = "#datatype,string,long,dateTime:RFC3339,dateTime:RFC3339,dateTime:RFC3339,long,string,string,string,unknown\n"
+            var data = "#datatype,string,long,dateTime:RFC3339,dateTime:RFC3339,dateTime:RFC3339,long,string,string,string,unknown\n"
                             + "#group,false,false,false,false,false,false,false,false,false,true\n"
                             + "#default,_result,,,,,,,,,\n"
                             + ",result,table,_start,_stop,_time,_value,_field,_measurement,host,value\n"
                             + ",,0,1970-01-01T00:00:10Z,1970-01-01T00:00:20Z,1970-01-01T00:00:10Z,10,free,mem,A,12.25\n"
                             + ",,0,1970-01-01T00:00:10Z,1970-01-01T00:00:20Z,1970-01-01T00:00:10Z,10,free,mem,A,\n";
 
-            List<FluxRecord> records = new List<FluxRecord>();
+            var records = new List<FluxRecord>();
 
-            DefaultCancellable defaultCancellable = new DefaultCancellable();
+            var defaultCancellable = new DefaultCancellable();
 
             var consumer = new TestConsumer
             (
@@ -459,7 +459,7 @@ namespace Flux.Client.Tests
         [Test]
         public void ParseDifferentSchemas()
         {
-            string data = "#datatype,string,long,dateTime:RFC3339,dateTime:RFC3339,dateTime:RFC3339,long,string,string\n"
+            var data = "#datatype,string,long,dateTime:RFC3339,dateTime:RFC3339,dateTime:RFC3339,long,string,string\n"
                             + "#group,false,false,false,false,false,false,false,false\n"
                             + "#default,_result,,,,,,,\n"
                             + ",result,table,_start,_stop,_time,_value,_field,_measurement\n"
@@ -473,7 +473,7 @@ namespace Flux.Client.Tests
                             + ",,0,1970-01-01T00:00:10Z,1970-01-01T00:00:20Z,1970-01-01T00:00:10Z,10,free,mem,A,12.25\n"
                             + ",,0,1970-01-01T00:00:10Z,1970-01-01T00:00:20Z,1970-01-01T00:00:10Z,10,free,mem,A,\n";
             
-            List<FluxTable> tables = ParseFluxResponse(data);
+            var tables = ParseFluxResponse(data);
             
             Assert.That(tables.Count == 2);
             
@@ -484,7 +484,7 @@ namespace Flux.Client.Tests
         [Test]
         public void ParsingWithoutTableDefinition() 
         {
-            string data = ",result,table,_start,_stop,_time,_value,_field,_measurement,host,value\n"
+            var data = ",result,table,_start,_stop,_time,_value,_field,_measurement,host,value\n"
                           + ",,0,1970-01-01T00:00:10Z,1970-01-01T00:00:20Z,1970-01-01T00:00:10Z,10,free,mem,A,12.25\n"
                           + ",,0,1970-01-01T00:00:10Z,1970-01-01T00:00:20Z,1970-01-01T00:00:10Z,10,free,mem,A,\n";
 
@@ -502,7 +502,7 @@ namespace Flux.Client.Tests
 
         private List<FluxTable> ParseFluxResponse(string data)
         {
-            FluxCsvParser.FluxResponseConsumerTable consumer = new FluxCsvParser.FluxResponseConsumerTable();
+            var consumer = new FluxCsvParser.FluxResponseConsumerTable();
             _parser.ParseFluxResponse(data, new DefaultCancellable(), consumer);
 
             return consumer.Tables;

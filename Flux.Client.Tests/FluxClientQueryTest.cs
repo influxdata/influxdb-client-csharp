@@ -18,7 +18,7 @@ namespace Flux.Client.Tests
             MockServer.Given(Request.Create().WithPath("/api/v2/query").UsingPost())
                             .RespondWith(CreateResponse());
 
-            List<FluxTable> result = await FluxClient.Query("from(bucket:\"telegraf\")");
+            var result = await FluxClient.Query("from(bucket:\"telegraf\")");
 
             AssertSuccessResult(result);
         }
@@ -29,7 +29,7 @@ namespace Flux.Client.Tests
             MockServer.Given(Request.Create().WithPath("/api/v2/query").UsingPost())
                             .RespondWith(CreateResponse());
 
-            List<Free> result = await FluxClient.Query<Free>("from(bucket:\"telegraf\")");
+            var result = await FluxClient.Query<Free>("from(bucket:\"telegraf\")");
 
             Assert.That(result.Count == 4);
 
@@ -75,7 +75,7 @@ namespace Flux.Client.Tests
         [Test]
         public async Task QueryErrorSuccessResponse()
         {
-            string error = "#datatype,string,string\n"
+            var error = "#datatype,string,string\n"
                             + "#group,true,true\n"
                             + "#default,,\n"
                             + ",error,reference\n"
@@ -100,7 +100,7 @@ namespace Flux.Client.Tests
         [Test]
         public async Task QueryErrorSuccessResponseWithoutReference()
         {
-            string error = "#datatype,string,string\n"
+            var error = "#datatype,string,string\n"
                             + "#group,true,true\n"
                             + "#default,,\n"
                             + ",error,reference\n"
@@ -129,7 +129,7 @@ namespace Flux.Client.Tests
             MockServer.Given(Request.Create().WithPath("/api/v2/query").UsingPost())
                             .RespondWith(CreateResponse());
 
-            List<FluxRecord> records = new List<FluxRecord>();
+            var records = new List<FluxRecord>();
 
             await FluxClient.Query("from(bucket:\"telegraf\")",
                             (cancellable, result) =>
@@ -152,7 +152,7 @@ namespace Flux.Client.Tests
             MockServer.Given(Request.Create().WithPath("/api/v2/query").UsingPost())
                             .RespondWith(CreateResponse());
 
-            List<FluxRecord> records = new List<FluxRecord>();
+            var records = new List<FluxRecord>();
 
             await FluxClient.Query("from(bucket:\"telegraf\")",
                             (cancellable, result) =>
@@ -185,7 +185,7 @@ namespace Flux.Client.Tests
         {
             Assert.IsNotNull(tables);
             Assert.That(tables.Count == 1);
-            List<FluxRecord> records = tables[0].Records;
+            var records = tables[0].Records;
             AssertRecords(records);
         }
 

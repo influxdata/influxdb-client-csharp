@@ -1,9 +1,8 @@
 using System;
 using System.Globalization;
+using System.Threading.Tasks;
 using InfluxData.Platform.Client.Client;
-using InfluxData.Platform.Client.Domain;
 using NodaTime;
-using Task = System.Threading.Tasks.Task;
 
 namespace Flux.Examples.Examples
 {
@@ -20,14 +19,14 @@ namespace Flux.Examples.Examples
 
         public static async Task Example(PlatformClient platform)
         {
-            OrganizationClient organizationClient = platform.CreateOrganizationClient();
+            var organizationClient = platform.CreateOrganizationClient();
             
-            Organization medicalGmbh = await organizationClient
+            var medicalGmbh = await organizationClient
                             .CreateOrganization("Medical Corp" + 
                                                 DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss.fff",
                                                                 CultureInfo.InvariantCulture));
 
-            Organization org = await organizationClient.FindOrganizationById(medicalGmbh.Id);
+            var org = await organizationClient.FindOrganizationById(medicalGmbh.Id);
 
             Console.WriteLine(org.ToString());
             Console.WriteLine("------");
@@ -53,7 +52,7 @@ namespace Flux.Examples.Examples
         
         public static void Run()
         {
-            PlatformClient platform = PlatformClientFactory.Create("http://localhost:9999",
+            var platform = PlatformClientFactory.Create("http://localhost:9999",
                             "my-user", "my-password".ToCharArray());
 
             Example(platform).Wait();

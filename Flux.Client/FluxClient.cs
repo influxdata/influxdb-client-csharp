@@ -52,7 +52,7 @@ namespace Flux.Client
          */
         public async Task<List<T>> Query<T>(string query)
         {
-            List<T> measurements = new List<T>();
+            var measurements = new List<T>();
             
             var consumer = new FluxResponseConsumerPoco<T>((cancellable, poco) =>
             {
@@ -176,7 +176,7 @@ namespace Flux.Client
             Arguments.CheckNotNull(onError, "onError");
             Arguments.CheckNotNull(onComplete, "onComplete");
 
-            FluxResponseConsumerPoco<T> consumer = new FluxResponseConsumerPoco<T>(onNext);
+            var consumer = new FluxResponseConsumerPoco<T>(onNext);
 
             await Query(query, GetDefaultDialect(), consumer, onError, onComplete);
         }
@@ -223,7 +223,7 @@ namespace Flux.Client
         {
             Arguments.CheckNonEmptyString(query, "query");
 
-            List<string> rows = new List<string>();
+            var rows = new List<string>();
 
             void Consumer(ICancellable cancellable, string row) => rows.Add(row);
 
@@ -417,7 +417,7 @@ namespace Flux.Client
 
             if (value != null)
             {
-                string version = value.FirstOrDefault();
+                var version = value.FirstOrDefault();
 
                 if (!string.IsNullOrEmpty(version))
                 {

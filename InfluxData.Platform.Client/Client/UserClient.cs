@@ -26,7 +26,7 @@ namespace InfluxData.Platform.Client.Client
         {
             Arguments.CheckNonEmptyString(name, "User name");
 
-            User user = new User {Name = name};
+            var user = new User {Name = name};
 
             return await CreateUser(user);
         }
@@ -145,7 +145,7 @@ namespace InfluxData.Platform.Client.Client
             Arguments.CheckNotNull(oldPassword, "old password");
             Arguments.CheckNotNull(newPassword, "new password");
 
-            User user = await Me();
+            var user = await Me();
             if (user == null)
             {
                 Trace.WriteLine("User is not authenticated.");

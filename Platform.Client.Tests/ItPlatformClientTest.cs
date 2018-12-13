@@ -1,7 +1,7 @@
+using System;
+using System.Threading.Tasks;
 using InfluxData.Platform.Client.Client;
-using InfluxData.Platform.Client.Domain;
 using NUnit.Framework;
-using Task = System.Threading.Tasks.Task;
 
 namespace Platform.Client.Tests
 {
@@ -11,7 +11,7 @@ namespace Platform.Client.Tests
         [Test]
         public async Task Health()
         {
-            Health health = await PlatformClient.Health();
+            var health = await PlatformClient.Health();
 
             Assert.IsNotNull(health);
             Assert.IsTrue(health.IsHealthy());
@@ -19,15 +19,38 @@ namespace Platform.Client.Tests
         }
 
         [Test]
-        public async Task NotRunningInstance()
+        public async Task HealthNotRunningInstance()
         {
-            PlatformClient clientNotRunning = PlatformClientFactory.Create("http://localhost:8099");
-            Health health = await clientNotRunning.Health();
+            var clientNotRunning = PlatformClientFactory.Create("http://localhost:8099");
+            var health = await clientNotRunning.Health();
 
             Assert.IsNotNull(health);
             Assert.IsFalse(health.IsHealthy());
             Assert.AreEqual("Connection refused", health.Message);
 
+            clientNotRunning.Dispose();
+        }
+
+
+        [Test]
+        public async Task Ready()
+        {
+            var ready = await PlatformClient.Ready();
+
+            Assert.IsNotNull(ready);
+            Assert.AreEqual("ready", ready.Status);
+            Assert.Greater(DateTime.UtcNow, ready.Started);
+            Assert.IsNotEmpty(ready.Up);
+        }
+
+        [Test]
+        public async Task ReadyNotRunningInstance()
+        {
+            var clientNotRunning = PlatformClientFactory.Create("http://localhost:8099");
+            var ready = await clientNotRunning.Ready();
+
+            Assert.IsNull(ready);
+            
             clientNotRunning.Dispose();
         }
 

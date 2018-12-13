@@ -14,7 +14,7 @@ namespace Platform.Client.Tests
         [Test]
         public void CreateInstance() 
         {
-            PlatformClient client = PlatformClientFactory.Create("http://localhost:9999");
+            var client = PlatformClientFactory.Create("http://localhost:9999");
 
             Assert.IsNotNull(client);
         }
@@ -22,7 +22,7 @@ namespace Platform.Client.Tests
         [Test]
         public void CreateInstanceUsername() {
 
-            PlatformClient client = PlatformClientFactory.Create("http://localhost:9999", "user", "secret".ToCharArray());
+            var client = PlatformClientFactory.Create("http://localhost:9999", "user", "secret".ToCharArray());
 
             Assert.IsNotNull(client);
         }
@@ -30,7 +30,7 @@ namespace Platform.Client.Tests
         [Test]
         public void CreateInstanceToken() {
 
-            PlatformClient client = PlatformClientFactory.Create("http://localhost:9999", "xyz".ToCharArray());
+            var client = PlatformClientFactory.Create("http://localhost:9999", "xyz".ToCharArray());
 
             Assert.IsNotNull(client);
         }

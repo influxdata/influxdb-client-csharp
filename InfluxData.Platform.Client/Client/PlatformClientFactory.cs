@@ -12,7 +12,7 @@ namespace InfluxData.Platform.Client.Client
         /// <returns>client</returns>
         public static PlatformClient Create(string url)
         {
-            PlatformOptions options = PlatformOptions.Builder
+            var options = PlatformOptions.Builder
                 .CreateNew()
                 .Url(url)
                 .Build();
@@ -29,7 +29,7 @@ namespace InfluxData.Platform.Client.Client
         /// <returns>client</returns>
         public static PlatformClient Create(string url, string username, char[] password)
         {
-            PlatformOptions options = PlatformOptions.Builder
+            var options = PlatformOptions.Builder
                 .CreateNew()
                 .Url(url)
                 .Authenticate(username, password)
@@ -46,7 +46,7 @@ namespace InfluxData.Platform.Client.Client
         /// <returns>client</returns>
         public static PlatformClient Create(string url, char[] token)
         {
-            PlatformOptions options = PlatformOptions.Builder
+            var options = PlatformOptions.Builder
                 .CreateNew()
                 .Url(url)
                 .AuthenticateToken(token)

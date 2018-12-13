@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using InfluxData.Platform.Client.Client;
 using InfluxData.Platform.Client.Domain;
 using NUnit.Framework;
@@ -28,9 +27,9 @@ namespace Platform.Client.Tests
         [Test]
         public async Task CreateBucket()
         {
-            string bucketName = GenerateName("robot sensor");
+            var bucketName = GenerateName("robot sensor");
 
-            Bucket bucket = await _bucketClient.CreateBucket(bucketName, RetentionRule(), _organization);
+            var bucket = await _bucketClient.CreateBucket(bucketName, RetentionRule(), _organization);
 
             Assert.IsNotNull(bucket);
             Assert.IsNotEmpty(bucket.Id);
@@ -49,9 +48,9 @@ namespace Platform.Client.Tests
         [Test]
         public async Task CreateBucketWithoutRetentionRule()
         {
-            string bucketName = GenerateName("robot sensor");
+            var bucketName = GenerateName("robot sensor");
 
-            Bucket bucket = await _bucketClient.CreateBucket(bucketName, _organization);
+            var bucket = await _bucketClient.CreateBucket(bucketName, _organization);
 
             Assert.IsNotNull(bucket);
             Assert.IsNotEmpty(bucket.Id);
@@ -63,12 +62,12 @@ namespace Platform.Client.Tests
         [Test]
         public async Task UpdateBucket()
         {
-            Bucket createBucket =
+            var createBucket =
                 await _bucketClient.CreateBucket(GenerateName("robot sensor"), RetentionRule(), _organization);
             createBucket.Name = "Therm sensor 2000";
             createBucket.RetentionRules[0].EverySeconds = 1000L;
 
-            Bucket updatedBucket = await _bucketClient.UpdateBucket(createBucket);
+            var updatedBucket = await _bucketClient.UpdateBucket(createBucket);
 
             Assert.IsNotNull(updatedBucket);
             Assert.IsNotEmpty(updatedBucket.Id);
@@ -82,11 +81,11 @@ namespace Platform.Client.Tests
         [Test]
         public async Task DeleteBucket()
         {
-            Bucket createBucket =
+            var createBucket =
                 await _bucketClient.CreateBucket(GenerateName("robot sensor"), RetentionRule(), _organization);
             Assert.IsNotNull(createBucket);
 
-            Bucket foundBucket = await _bucketClient.FindBucketById(createBucket.Id);
+            var foundBucket = await _bucketClient.FindBucketById(createBucket.Id);
             Assert.IsNotNull(foundBucket);
 
             // delete task
@@ -99,11 +98,11 @@ namespace Platform.Client.Tests
         [Test]
         public async Task FindBucketById()
         {
-            string bucketName = GenerateName("robot sensor");
+            var bucketName = GenerateName("robot sensor");
 
-            Bucket bucket = await _bucketClient.CreateBucket(bucketName, RetentionRule(), _organization);
+            var bucket = await _bucketClient.CreateBucket(bucketName, RetentionRule(), _organization);
 
-            Bucket bucketById = await _bucketClient.FindBucketById(bucket.Id);
+            var bucketById = await _bucketClient.FindBucketById(bucket.Id);
             
             Assert.IsNotNull(bucketById);
             Assert.AreEqual(bucketById.Id, bucket.Id);
@@ -117,7 +116,7 @@ namespace Platform.Client.Tests
         [Test]
         public async Task FindBucketByIdNull()
         {
-            Bucket bucket = await _bucketClient.FindBucketById("020f755c3c082000");
+            var bucket = await _bucketClient.FindBucketById("020f755c3c082000");
 
             Assert.IsNull(bucket);
         }
@@ -125,14 +124,14 @@ namespace Platform.Client.Tests
         [Test]
         public async Task FindBuckets() {
 
-            int size = (await _bucketClient.FindBuckets()).Count;
+            var size = (await _bucketClient.FindBuckets()).Count;
 
             await _bucketClient.CreateBucket(GenerateName("robot sensor"), RetentionRule(), _organization);
 
-            Organization organization2 = await _organizationClient.CreateOrganization(GenerateName("Second"));
+            var organization2 = await _organizationClient.CreateOrganization(GenerateName("Second"));
             await _bucketClient.CreateBucket(GenerateName("robot sensor"), organization2.Name);
 
-            List<Bucket> buckets = await _bucketClient.FindBuckets();
+            var buckets = await _bucketClient.FindBuckets();
             Assert.AreEqual(buckets.Count, size + 2);
         }
 
@@ -143,7 +142,7 @@ namespace Platform.Client.Tests
 
             await _bucketClient.CreateBucket(GenerateName("robot sensor"), _organization);
 
-            Organization organization2 = await _organizationClient.CreateOrganization(GenerateName("Second"));
+            var organization2 = await _organizationClient.CreateOrganization(GenerateName("Second"));
             await _bucketClient.CreateBucket(GenerateName("robot sensor"), organization2);
 
             Assert.AreEqual((await  _bucketClient.FindBucketsByOrganization(_organization)).Count, 1);
@@ -152,14 +151,14 @@ namespace Platform.Client.Tests
         [Test]
         public async Task Member() {
 
-            Bucket bucket = await _bucketClient.CreateBucket(GenerateName("robot sensor"), RetentionRule(), _organization);
+            var bucket = await _bucketClient.CreateBucket(GenerateName("robot sensor"), RetentionRule(), _organization);
 
-            List<UserResourceMapping> members =  await _bucketClient.GetMembers(bucket);
+            var members =  await _bucketClient.GetMembers(bucket);
             Assert.AreEqual(0, members.Count);
 
-            User user = await _userClient.CreateUser(GenerateName("Luke Health"));
+            var user = await _userClient.CreateUser(GenerateName("Luke Health"));
 
-            UserResourceMapping userResourceMapping = await _bucketClient.AddMember(user, bucket);
+            var userResourceMapping = await _bucketClient.AddMember(user, bucket);
             Assert.IsNotNull(userResourceMapping);
             Assert.AreEqual(userResourceMapping.ResourceId, bucket.Id);
             Assert.AreEqual(userResourceMapping.ResourceType, ResourceType.BucketResourceType);
@@ -182,14 +181,14 @@ namespace Platform.Client.Tests
         [Test]
         public async Task Owner() {
 
-            Bucket bucket = await _bucketClient.CreateBucket(GenerateName("robot sensor"), RetentionRule(), _organization);
+            var bucket = await _bucketClient.CreateBucket(GenerateName("robot sensor"), RetentionRule(), _organization);
 
-            List<UserResourceMapping> owners =  await _bucketClient.GetOwners(bucket);
+            var owners =  await _bucketClient.GetOwners(bucket);
             Assert.AreEqual(0, owners.Count);
 
-            User user = await _userClient.CreateUser(GenerateName("Luke Health"));
+            var user = await _userClient.CreateUser(GenerateName("Luke Health"));
 
-            UserResourceMapping userResourceMapping = await _bucketClient.AddOwner(user, bucket);
+            var userResourceMapping = await _bucketClient.AddOwner(user, bucket);
             Assert.IsNotNull(userResourceMapping);
             Assert.AreEqual(userResourceMapping.ResourceId, bucket.Id);
             Assert.AreEqual(userResourceMapping.ResourceType, ResourceType.BucketResourceType);

@@ -16,7 +16,7 @@ namespace Flux.Client.Tests
             MockServer.Given(Request.Create().WithPath("/api/v2/query").UsingPost())
                             .RespondWith(CreateResponse());
 
-            string result = await FluxClient.QueryRaw("from(bucket:\"telegraf\")");
+            var result = await FluxClient.QueryRaw("from(bucket:\"telegraf\")");
 
             AssertSuccessResult(result);
         }
@@ -47,7 +47,7 @@ namespace Flux.Client.Tests
             MockServer.Given(Request.Create().WithPath("/api/v2/query").UsingPost())
                             .RespondWith(CreateResponse());
 
-            List<string> results = new List<string>();
+            var results = new List<string>();
 
             await FluxClient.QueryRaw("from(bucket:\"telegraf\")",
                             (cancellable, result) =>
@@ -70,7 +70,7 @@ namespace Flux.Client.Tests
             MockServer.Given(Request.Create().WithPath("/api/v2/query").UsingPost())
                             .RespondWith(CreateResponse());
 
-            List<string> results = new List<string>();
+            var results = new List<string>();
 
             await FluxClient.QueryRaw("from(bucket:\"telegraf\")", null,
                             (cancellable, result) => results.Add(result),

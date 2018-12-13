@@ -190,7 +190,7 @@ namespace InfluxData.Platform.Client.Write
                 throw new ArgumentException("Timestamps must be specified as UTC", nameof(timestamp));
             }
 
-            TimeSpan timeSpan = timestamp.Subtract(EpochStart);
+            var timeSpan = timestamp.Subtract(EpochStart);
 
             return Timestamp(timeSpan, timeUnit);
         }
@@ -280,7 +280,7 @@ namespace InfluxData.Platform.Client.Write
 
         private void AppendFields(StringBuilder sb)
         {
-            bool removeLast = false;
+            var removeLast = false;
 
             foreach (var keyValue in _fields)
             {
@@ -347,7 +347,7 @@ namespace InfluxData.Platform.Client.Write
 
         private void EscapeKey(StringBuilder sb, string key)
         {
-            foreach (char c in key)
+            foreach (var c in key)
             {
                 switch (c)
                 {
@@ -364,7 +364,7 @@ namespace InfluxData.Platform.Client.Write
 
         private void EscapeValue(StringBuilder sb, string value)
         {
-            foreach (char c in value)
+            foreach (var c in value)
             {
                 switch (c)
                 {

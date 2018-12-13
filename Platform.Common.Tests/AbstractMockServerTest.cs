@@ -6,7 +6,7 @@ namespace Platform.Common.Tests
     {
         protected IResponseBuilder CreateErrorResponse(string influxDbError) 
         {
-            string body = "{\"error\":\"" + influxDbError + "\"}";
+            var body = "{\"error\":\"" + influxDbError + "\"}";
 
             return Response.Create().WithStatusCode(500)
                 .WithHeader("X-Influx-Error", influxDbError)

@@ -81,7 +81,7 @@ namespace Platform.Common.Platform.Rest
             RequestResult requestResult = null;
             try
             {
-                DefaultCancellable cancellable = new DefaultCancellable();
+                var cancellable = new DefaultCancellable();
 
                 requestResult = await Client.DoRequest(query).ConfigureAwait(false);
 
@@ -108,7 +108,7 @@ namespace Platform.Common.Platform.Rest
                         ICancellable cancellable,
                         BufferedStream bufferedStream)
         {
-            using (StreamReader sr = new StreamReader(bufferedStream))
+            using (var sr = new StreamReader(bufferedStream))
             {
                 string line;
 
@@ -141,7 +141,7 @@ namespace Platform.Common.Platform.Rest
         
         public static string GetDefaultDialect()
         {
-            JObject json = new JObject();
+            var json = new JObject();
             json.Add("header", true);
             json.Add("delimiter", ",");
             json.Add("quoteChar", "\"");
@@ -155,7 +155,7 @@ namespace Platform.Common.Platform.Rest
         {
             Arguments.CheckNonEmptyString(query, "Flux query");
 
-            JObject json = new JObject();
+            var json = new JObject();
             json.Add("query", query);
 
             if (!string.IsNullOrEmpty(dialect))

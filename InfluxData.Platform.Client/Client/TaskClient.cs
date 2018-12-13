@@ -324,7 +324,7 @@ namespace InfluxData.Platform.Client.Client
             Arguments.CheckNonEmptyString(taskId, nameof(taskId));
             Arguments.CheckNonEmptyString(memberId, nameof(memberId));
 
-            User user = new User {Id = memberId};
+            var user = new User {Id = memberId};
 
             var request = await Post(user, $"/api/v2/tasks/{taskId}/members");
 
@@ -414,7 +414,7 @@ namespace InfluxData.Platform.Client.Client
             Arguments.CheckNonEmptyString(taskId, nameof(taskId));
             Arguments.CheckNonEmptyString(ownerId, nameof(ownerId));
 
-            User user = new User {Id = ownerId};
+            var user = new User {Id = ownerId};
 
             var request = await Post(user, $"/api/v2/tasks/{taskId}/owners");
 
@@ -663,7 +663,7 @@ namespace InfluxData.Platform.Client.Client
                 Arguments.CheckDuration(every, nameof(every));
             }
 
-            Task task = new Task
+            var task = new Task
             {
                 Name = name,
                 OrganizationId = organizationId,
@@ -674,7 +674,7 @@ namespace InfluxData.Platform.Client.Client
                 Flux = flux
             };
 
-            String repetition = "";
+            var repetition = "";
             if (every != null)
             {
                 repetition += "every: ";

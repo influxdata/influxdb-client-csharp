@@ -14,7 +14,7 @@ namespace Flux.Client
         /// <returns>client</returns>
         public static FluxClient Create(string connectionString)
         {
-            FluxConnectionOptions options = new FluxConnectionOptions(connectionString);
+            var options = new FluxConnectionOptions(connectionString);
 
             return Create(options);
         }

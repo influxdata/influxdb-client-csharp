@@ -1,10 +1,8 @@
-using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using InfluxData.Platform.Client.Client;
-using InfluxData.Platform.Client.Domain;
 using NodaTime;
 using NUnit.Framework;
-using Task = System.Threading.Tasks.Task;
 
 namespace Platform.Client.Tests
 {
@@ -22,9 +20,9 @@ namespace Platform.Client.Tests
         [Test]
         public async Task CreateUser()
         {
-            string userName = GenerateName("John Ryzen");
+            var userName = GenerateName("John Ryzen");
 
-            User user = await _userClient.CreateUser(userName);
+            var user = await _userClient.CreateUser(userName);
 
             Assert.IsNotNull(user);
             Assert.IsNotEmpty(user.Id);
@@ -40,11 +38,11 @@ namespace Platform.Client.Tests
         [Test]
         public async Task FindUserById()
         {
-            string userName = GenerateName("John Ryzen");
+            var userName = GenerateName("John Ryzen");
 
-            User user = await _userClient.CreateUser(userName);
+            var user = await _userClient.CreateUser(userName);
 
-            User userById = await _userClient.FindUserById(user.Id);
+            var userById = await _userClient.FindUserById(user.Id);
 
             Assert.IsNotNull(userById);
             Assert.AreEqual(userById.Id, user.Id);
@@ -54,7 +52,7 @@ namespace Platform.Client.Tests
         [Test]
         public async Task FindUserByIdNull()
         {
-            User user = await _userClient.FindUserById("020f755c3c082000");
+            var user = await _userClient.FindUserById("020f755c3c082000");
 
             Assert.IsNull(user);
         }
@@ -62,11 +60,11 @@ namespace Platform.Client.Tests
         [Test]
         public async Task FindUsers()
         {
-            int size = (await _userClient.FindUsers()).Count;
+            var size = (await _userClient.FindUsers()).Count;
 
             await _userClient.CreateUser(GenerateName("John Ryzen"));
 
-            List<User> users = await _userClient.FindUsers();
+            var users = await _userClient.FindUsers();
 
             Assert.AreEqual(users.Count, size + 1);
         }
@@ -74,10 +72,10 @@ namespace Platform.Client.Tests
         [Test]
         public async Task DeleteUser()
         {
-            User createdUser = await _userClient.CreateUser(GenerateName("John Ryzen"));
+            var createdUser = await _userClient.CreateUser(GenerateName("John Ryzen"));
             Assert.IsNotNull(createdUser);
 
-            User foundUser = await _userClient.FindUserById(createdUser.Id);
+            var foundUser = await _userClient.FindUserById(createdUser.Id);
             Assert.IsNotNull(foundUser);
 
             // delete user
@@ -90,10 +88,10 @@ namespace Platform.Client.Tests
         [Test]
         public async Task UpdateUser()
         {
-            User createdUser = await _userClient.CreateUser(GenerateName("John Ryzen"));
+            var createdUser = await _userClient.CreateUser(GenerateName("John Ryzen"));
             createdUser.Name = "Tom Push";
 
-            User updatedUser = await _userClient.UpdateUser(createdUser);
+            var updatedUser = await _userClient.UpdateUser(createdUser);
 
             Assert.IsNotNull(updatedUser);
             Assert.AreEqual(updatedUser.Id, createdUser.Id);
@@ -103,7 +101,7 @@ namespace Platform.Client.Tests
         [Test]
         public async Task MeAuthenticated()
         {
-            User me = await _userClient.Me();
+            var me = await _userClient.Me();
 
             Assert.IsNotNull(me);
             Assert.AreEqual(me.Name, "my-user");
@@ -114,7 +112,7 @@ namespace Platform.Client.Tests
         {
             PlatformClient.Dispose();
 
-            User me = await _userClient.Me();
+            var me = await _userClient.Me();
 
             Assert.IsNull(me);
         }
@@ -122,7 +120,7 @@ namespace Platform.Client.Tests
         [Test]
         public async Task UpdateMePassword()
         {
-            User me = await _userClient.MeUpdatePassword("my-password", "my-password");
+            var me = await _userClient.MeUpdatePassword("my-password", "my-password");
 
             Assert.IsNotNull(me);
             Assert.AreEqual(me.Name, "my-user");
@@ -133,7 +131,7 @@ namespace Platform.Client.Tests
         {
             PlatformClient.Dispose();
 
-            User me = await _userClient.MeUpdatePassword("my-password", "my-password");
+            var me = await _userClient.MeUpdatePassword("my-password", "my-password");
 
             Assert.IsNull(me);
         }
@@ -141,10 +139,10 @@ namespace Platform.Client.Tests
         [Test]
         public async Task UpdatePassword() {
 
-            User user = await _userClient.Me();
+            var user = await _userClient.Me();
             Assert.IsNotNull(user);
 
-            User updatedUser = await _userClient.UpdateUserPassword(user, "my-password", "my-password");
+            var updatedUser = await _userClient.UpdateUserPassword(user, "my-password", "my-password");
 
             Assert.IsNotNull(updatedUser);
             Assert.AreEqual(updatedUser.Name, user.Name);
@@ -154,7 +152,7 @@ namespace Platform.Client.Tests
         [Test]
         public async Task UpdatePasswordNotFound() {
 
-            User updatedUser =  await _userClient.UpdateUserPassword("020f755c3c082000", "", "new-password");
+            var updatedUser =  await _userClient.UpdateUserPassword("020f755c3c082000", "", "new-password");
 
             Assert.IsNull(updatedUser);
         }
@@ -162,10 +160,10 @@ namespace Platform.Client.Tests
         [Test]
         public async Task UpdatePasswordById() {
 
-            User user = await _userClient.Me();
+            var user = await _userClient.Me();
             Assert.IsNotNull(user);
 
-            User updatedUser = await _userClient.UpdateUserPassword(user.Id, "my-password", "my-password");
+            var updatedUser = await _userClient.UpdateUserPassword(user.Id, "my-password", "my-password");
 
             Assert.IsNotNull(updatedUser);
             Assert.AreEqual(updatedUser.Name, user.Name);
@@ -175,14 +173,14 @@ namespace Platform.Client.Tests
         [Test]
         public async Task FindUserLogs() {
 
-            Instant now = new Instant();
+            var now = new Instant();
 
-            User user = await _userClient.Me();
+            var user = await _userClient.Me();
             Assert.IsNotNull(user);
 
             await _userClient.UpdateUser(user);
 
-            List<OperationLogEntry> userLogs =  await _userClient.FindUserLogs(user);
+            var userLogs =  await _userClient.FindUserLogs(user);
             
             Assert.IsTrue(userLogs.Any());
             Assert.AreEqual(userLogs[0].Description, "User Updated");
@@ -192,7 +190,7 @@ namespace Platform.Client.Tests
 
         [Test]
         public async Task FindUserLogsNotFound() {
-            List<OperationLogEntry> userLogs = await _userClient.FindUserLogs("020f755c3c082000");
+            var userLogs = await _userClient.FindUserLogs("020f755c3c082000");
             
             Assert.IsFalse(userLogs.Any());
         }

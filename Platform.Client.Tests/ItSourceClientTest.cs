@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using InfluxData.Platform.Client.Client;
 using InfluxData.Platform.Client.Domain;
 using NUnit.Framework;
@@ -21,7 +20,7 @@ namespace Platform.Client.Tests
         [Test]
         public async Task CreateSource()
         {
-            Source source = new Source
+            var source = new Source
             {
                 OrganizationId = "02cebf26d7fc1000",
                 DefaultSource = false,
@@ -39,7 +38,7 @@ namespace Platform.Client.Tests
             };
 
 
-            Source createdSource = await _sourceClient.CreateSource(source);
+            var createdSource = await _sourceClient.CreateSource(source);
 
             Assert.IsNotEmpty(createdSource.Id);
             Assert.AreEqual(createdSource.OrganizationId, source.OrganizationId);
@@ -61,7 +60,7 @@ namespace Platform.Client.Tests
         [Test]
         public async Task UpdateSource()
         {
-            Source source = NewSource();
+            var source = NewSource();
 
             source = await _sourceClient.CreateSource(source);
             source.InsecureSkipVerify = false;
@@ -74,10 +73,10 @@ namespace Platform.Client.Tests
         [Test]
         public async Task DeleteSource()
         {
-            Source createdSource = await _sourceClient.CreateSource(NewSource());
+            var createdSource = await _sourceClient.CreateSource(NewSource());
             Assert.IsNotNull(createdSource);
             
-            Source foundSource = await _sourceClient.FindSourceById(createdSource.Id);
+            var foundSource = await _sourceClient.FindSourceById(createdSource.Id);
             Assert.IsNotNull(foundSource);
 
             // delete source
@@ -90,9 +89,9 @@ namespace Platform.Client.Tests
         [Test]
         public async Task FindSourceById() {
 
-            Source source = await _sourceClient.CreateSource(NewSource());
+            var source = await _sourceClient.CreateSource(NewSource());
 
-            Source sourceById = await _sourceClient.FindSourceById(source.Id);
+            var sourceById = await _sourceClient.FindSourceById(source.Id);
 
             Assert.IsNotNull(sourceById);
             Assert.AreEqual(source.Id, sourceById.Id);
@@ -106,7 +105,7 @@ namespace Platform.Client.Tests
         [Test]
         public async Task FindSourceByIdNull() {
 
-            Source source =  await _sourceClient.FindSourceById("020f755c3d082000");
+            var source =  await _sourceClient.FindSourceById("020f755c3d082000");
 
             Assert.IsNull(source);
         }
@@ -114,20 +113,20 @@ namespace Platform.Client.Tests
         [Test]
         public async Task FindSources() {
 
-            int size = (await _sourceClient.FindSources()).Count;
+            var size = (await _sourceClient.FindSources()).Count;
 
             await _sourceClient.CreateSource(NewSource());
 
-            List<Source> sources = await _sourceClient.FindSources();
+            var sources = await _sourceClient.FindSources();
             Assert.AreEqual(size + 1, sources.Count);
         }
         
         [Test]
         public async Task FindBucketsBySource() {
 
-            Source source = await _sourceClient.CreateSource(NewSource());
+            var source = await _sourceClient.CreateSource(NewSource());
 
-            List<Bucket> buckets = await _sourceClient.FindBucketsBySource(source);
+            var buckets = await _sourceClient.FindBucketsBySource(source);
 
             Assert.IsNotNull(buckets);
             Assert.IsTrue(buckets.Count > 0);
@@ -136,7 +135,7 @@ namespace Platform.Client.Tests
         [Test]
         public async Task FindBucketsBySourceByUnknownSource() {
 
-            List<Bucket> buckets = await _sourceClient.FindBucketsBySourceId("020f755c3d082000");
+            var buckets = await _sourceClient.FindBucketsBySourceId("020f755c3d082000");
 
             Assert.IsNull(buckets);
         }
@@ -144,9 +143,9 @@ namespace Platform.Client.Tests
         [Test]
         public async Task SourceHealth() {
 
-            Source source = await _sourceClient.CreateSource(NewSource());
+            var source = await _sourceClient.CreateSource(NewSource());
 
-            Health health = await _sourceClient.Health(source);
+            var health = await _sourceClient.Health(source);
 
             Assert.IsNotNull(health);
             Assert.IsTrue(health.IsHealthy());
@@ -155,7 +154,7 @@ namespace Platform.Client.Tests
 
         private Source NewSource()
         {
-            Source source = new Source
+            var source = new Source
             {
                 Name = GenerateName("Source"),
                 OrganizationId = "02cebf26d7fc1000",

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using InfluxData.Platform.Client.Domain;
@@ -142,7 +141,7 @@ namespace InfluxData.Platform.Client.Client
         {
             Arguments.CheckNonEmptyString(sourceId, "Source ID");
             
-            Health health = new Health();
+            var health = new Health();
 
             try
             {

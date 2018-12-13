@@ -22,7 +22,7 @@ namespace Platform.Client.Tests
         {
             var timeStamp = InstantPattern.ExtendedIso.Parse("1970-01-01T00:00:10.999999999Z").Value;
             
-            Poco poco = new Poco
+            var poco = new Poco
             {
                 Tag = "value",
                 Value = "val",
@@ -38,7 +38,7 @@ namespace Platform.Client.Tests
         [Test]
         public void ColumnWithoutName()
         {
-            Poco poco = new Poco
+            var poco = new Poco
             {
                 Tag = "tag val",
                 Value = 15.444,
@@ -55,7 +55,7 @@ namespace Platform.Client.Tests
         [Test]
         public void DefaultToString()
         {
-            Poco poco = new Poco
+            var poco = new Poco
             {
                 Tag = "value",
                 Value = new MyClass()

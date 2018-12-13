@@ -12,7 +12,7 @@ namespace Flux.Examples.Examples
 
             var fluxClient = FluxClientFactory.Create(options);
 
-            string fluxQuery = "from(bucket: \"telegraf\")\n"
+            var fluxQuery = "from(bucket: \"telegraf\")\n"
                                + " |> filter(fn: (r) => (r[\"_measurement\"] == \"cpu\" AND r[\"_field\"] == \"usage_system\"))"
                                + " |> range(start: -1d)"
                                + " |> sample(n: 5, pos: 1)";

@@ -73,10 +73,10 @@ namespace Platform.Common.Flux.Parser
         {
             Arguments.CheckNotNull(source, "source");
 
-            ParsingState parsingState = ParsingState.Normal;
+            var parsingState = ParsingState.Normal;
 
-            int tableIndex = 0;
-            bool startNewTable = false;
+            var tableIndex = 0;
+            var startNewTable = false;
             FluxTable table = null;
 
             using (var csv = new CsvReader(new StreamReader(source)))
@@ -102,10 +102,10 @@ namespace Platform.Common.Flux.Parser
                     //
                     if (ParsingState.InError.Equals(parsingState))
                     {
-                        string error = csv[1];
-                        string referenceValue = csv[2];
+                        var error = csv[1];
+                        var referenceValue = csv[2];
 
-                        int reference = 0;
+                        var reference = 0;
 
                         if (referenceValue != null && !String.IsNullOrEmpty(referenceValue))
                         {
@@ -115,7 +115,7 @@ namespace Platform.Common.Flux.Parser
                         throw new FluxQueryException(error, reference);
                     }
 
-                    String token = csv[0];
+                    var token = csv[0];
 
                     //// start new table
                     if ("#datatype".Equals(token))
@@ -169,14 +169,14 @@ namespace Platform.Common.Flux.Parser
                         if (currentIndex > (tableIndex - 1))
                         {
                             //create new table with previous column headers settings
-                            List<FluxColumn> fluxColumns = table.Columns;
+                            var fluxColumns = table.Columns;
                             table = new FluxTable();
                             table.Columns.AddRange(fluxColumns);
                             consumer.Accept(tableIndex, cancellable, table);
                             tableIndex++;
                         }
 
-                        FluxRecord fluxRecord = ParseRecord(tableIndex - 1, table, csv);
+                        var fluxRecord = ParseRecord(tableIndex - 1, table, csv);
                         consumer.Accept(tableIndex - 1, cancellable, fluxRecord);
                     }
                 }
@@ -185,13 +185,13 @@ namespace Platform.Common.Flux.Parser
 
         private FluxRecord ParseRecord(int tableIndex, FluxTable table, CsvReader csv)
         {
-            FluxRecord record = new FluxRecord(tableIndex);
+            var record = new FluxRecord(tableIndex);
 
-            foreach (FluxColumn fluxColumn in table.Columns)
+            foreach (var fluxColumn in table.Columns)
             {
-                string columnName = fluxColumn.Label;
+                var columnName = fluxColumn.Label;
 
-                string strValue = csv[fluxColumn.Index + 1];
+                var strValue = csv[fluxColumn.Index + 1];
 
                 record.Values.Add(columnName, ToValue(strValue, fluxColumn));
             }
@@ -206,7 +206,7 @@ namespace Platform.Common.Flux.Parser
             // Default value
             if (string.IsNullOrEmpty(strValue))
             {
-                string defaultValue = column.DefaultValue;
+                var defaultValue = column.DefaultValue;
 
                 return string.IsNullOrEmpty(defaultValue) ? null : ToValue(defaultValue, column);
             }
@@ -242,8 +242,8 @@ namespace Platform.Common.Flux.Parser
 
         public static BufferedStream ToStream(string str)
         {
-            MemoryStream stream = new MemoryStream();
-            StreamWriter writer = new StreamWriter(stream);
+            var stream = new MemoryStream();
+            var writer = new StreamWriter(stream);
             writer.Write(str);
             writer.Flush();
             stream.Position = 0;
@@ -255,16 +255,16 @@ namespace Platform.Common.Flux.Parser
             Arguments.CheckNotNull(table, "table");
             Arguments.CheckNotNull(dataTypes, "dataTypes");
 
-            for (int index = 1; index < dataTypes.Context.Record.Length; index++)
+            for (var index = 1; index < dataTypes.Context.Record.Length; index++)
             {
-                string dataType = dataTypes[index];
+                var dataType = dataTypes[index];
 
                 if (string.IsNullOrEmpty(dataType))
                 {
                     continue;
                 }
 
-                FluxColumn columnDef = new FluxColumn
+                var columnDef = new FluxColumn
                 {
                     DataType = dataType,
                     Index = index - 1
@@ -279,7 +279,7 @@ namespace Platform.Common.Flux.Parser
             Arguments.CheckNotNull(table, "table");
             Arguments.CheckNotNull(groups, "groups");
 
-            for (int ii = 0; ii < table.Columns.Count; ii++)
+            for (var ii = 0; ii < table.Columns.Count; ii++)
             {
                 var fluxColumn = GetFluxColumn(ii, table);
                 fluxColumn.Group = Convert.ToBoolean(groups[ii + 1]);
@@ -291,7 +291,7 @@ namespace Platform.Common.Flux.Parser
             Arguments.CheckNotNull(table, "table");
             Arguments.CheckNotNull(defaultEmptyValues, "defaultEmptyValues");
 
-            for (int ii = 0; ii < table.Columns.Count; ii++)
+            for (var ii = 0; ii < table.Columns.Count; ii++)
             {
                 var fluxColumn = GetFluxColumn(ii, table);
                 fluxColumn.DefaultValue = defaultEmptyValues[ii + 1];
@@ -303,11 +303,11 @@ namespace Platform.Common.Flux.Parser
             Arguments.CheckNotNull(table, "table");
             Arguments.CheckNotNull(columnNames, "columnNames");
 
-            int size = table.Columns.Count;
+            var size = table.Columns.Count;
 
-            for (int ii = 0; ii < size; ii++)
+            for (var ii = 0; ii < size; ii++)
             {
-                FluxColumn fluxColumn = GetFluxColumn(ii, table);
+                var fluxColumn = GetFluxColumn(ii, table);
                 fluxColumn.Label = columnNames[ii + 1];
             }
         }

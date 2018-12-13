@@ -44,23 +44,23 @@ namespace Platform.Common.Tests
         
         protected string GetInfluxDbUrl()
         {
-            string influxDbIp = GetOrDefaultEnvironmentVariable("INFLUXDB_IP", "127.0.0.1");
-            string influxDbPort = GetOrDefaultEnvironmentVariable("INFLUXDB_PORT_API", "8086");
+            var influxDbIp = GetOrDefaultEnvironmentVariable("INFLUXDB_IP", "127.0.0.1");
+            var influxDbPort = GetOrDefaultEnvironmentVariable("INFLUXDB_PORT_API", "8086");
 
             return "http://" + influxDbIp + ":" + influxDbPort;
         }
         
         protected string GetPlatformUrl()
         {
-            string platformIp = GetOrDefaultEnvironmentVariable("PLATFORM_IP", "127.0.0.1");
-            string platformPort = GetOrDefaultEnvironmentVariable("PLATFORM_PORT", "9999");
+            var platformIp = GetOrDefaultEnvironmentVariable("PLATFORM_IP", "127.0.0.1");
+            var platformPort = GetOrDefaultEnvironmentVariable("PLATFORM_PORT", "9999");
 
             return "http://" + platformIp + ":" + platformPort;
         }
 
         private string GetOrDefaultEnvironmentVariable(string variable, string def)
         {
-            string value = Environment.GetEnvironmentVariable(variable);
+            var value = Environment.GetEnvironmentVariable(variable);
 
             if (string.IsNullOrEmpty(value))
             {
@@ -72,7 +72,7 @@ namespace Platform.Common.Tests
 
         protected async Task InfluxDbWrite(string lineProtocol, string databaseName)
         {
-            HttpRequestMessage request = new HttpRequestMessage(new HttpMethod(HttpMethodKind.Post.Name()),
+            var request = new HttpRequestMessage(new HttpMethod(HttpMethodKind.Post.Name()),
                             "/write?db=" + databaseName);
                             
             request.Headers.Add("accept", "application/json");
@@ -83,7 +83,7 @@ namespace Platform.Common.Tests
 
         protected async Task InfluxDbQuery(string query, string databaseName) 
         {
-            HttpRequestMessage request = new HttpRequestMessage(new HttpMethod(HttpMethodKind.Get.Name()),
+            var request = new HttpRequestMessage(new HttpMethod(HttpMethodKind.Get.Name()),
                             "/query?db=" + databaseName + ";q=" + query);
                             
             request.Headers.Add("accept", "application/json");
@@ -95,7 +95,7 @@ namespace Platform.Common.Tests
         {
             Assert.IsNotNull(request);
 
-            HttpClient httpClient = new HttpClient();
+            var httpClient = new HttpClient();
             
             httpClient.BaseAddress = new Uri(GetInfluxDbUrl());
 

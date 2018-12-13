@@ -22,7 +22,7 @@ namespace InfluxData.Platform.Client.Client
         {
             Arguments.CheckNonEmptyString(name, "Organization name");
 
-            Organization organization = new Organization {Name = name};
+            var organization = new Organization {Name = name};
 
             return await CreateOrganization(organization);
         }
@@ -161,7 +161,7 @@ namespace InfluxData.Platform.Client.Client
             Arguments.CheckNonEmptyString(organizationId, "Organization ID");
             Arguments.CheckNonEmptyString(memberId, "Member ID");
 
-            User user = new User {Id = memberId};
+            var user = new User {Id = memberId};
 
             var request = await Post(user, $"/api/v2/orgs/{organizationId}/members");
 
@@ -251,7 +251,7 @@ namespace InfluxData.Platform.Client.Client
             Arguments.CheckNonEmptyString(organizationId, "Organization ID");
             Arguments.CheckNonEmptyString(ownerId, "Owner ID");
 
-            User user = new User {Id = ownerId};
+            var user = new User {Id = ownerId};
 
             var request = await Post(user, $"/api/v2/orgs/{organizationId}/owners");
 

@@ -7,7 +7,6 @@ using System.Reactive.Concurrency;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using System.Text;
-using System.Threading.Tasks;
 using InfluxData.Platform.Client.Client.Event;
 using InfluxData.Platform.Client.Option;
 using InfluxData.Platform.Client.Write;
@@ -63,7 +62,7 @@ namespace InfluxData.Platform.Client.Client
 
             var observable = _subject.ObserveOn(writeOptions.WriteScheduler);
 
-            IObservable<IList<BatchWriteData>> boundary = observable
+            var boundary = observable
                 .Buffer(TimeSpan.FromMilliseconds(writeOptions.FlushInterval), writeOptions.BatchSize,
                     writeOptions.WriteScheduler)
                 .Merge(_flush);
@@ -82,7 +81,7 @@ namespace InfluxData.Platform.Client.Client
                 //
                 .Select(grouped =>
                 {
-                    IObservable<string> aggregate = grouped
+                    var aggregate = grouped
                         .Aggregate("", (lineProtocol, batchWrite) =>
                         {
                             var data = batchWrite.ToLineProtocol();
@@ -118,9 +117,9 @@ namespace InfluxData.Platform.Client.Client
                 .Where(batchWriteItem => !string.IsNullOrEmpty(batchWriteItem.ToLineProtocol()))
                 .Select(batchWriteItem =>
                 {
-                    string org = batchWriteItem.Options.Organization;
-                    string bucket = batchWriteItem.Options.Bucket;
-                    string lineProtocol = batchWriteItem.ToLineProtocol();
+                    var org = batchWriteItem.Options.Organization;
+                    var bucket = batchWriteItem.Options.Bucket;
+                    var lineProtocol = batchWriteItem.ToLineProtocol();
                     string precision;
 
                     switch (batchWriteItem.Options.Precision)
@@ -147,7 +146,7 @@ namespace InfluxData.Platform.Client.Client
                         Content = new StringContent(lineProtocol, Encoding.UTF8, "text/plain")
                     };
 
-                    Task<RequestResult> doRequest = Client.DoRequest(request);
+                    var doRequest = Client.DoRequest(request);
                     doRequest.ContinueWith(task =>
                     {
                         if (task.Result.IsSuccessful())

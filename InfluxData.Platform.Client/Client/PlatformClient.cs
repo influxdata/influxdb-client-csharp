@@ -7,7 +7,6 @@ using InfluxData.Platform.Client.Domain;
 using InfluxData.Platform.Client.Option;
 using Platform.Common.Platform;
 using Platform.Common.Platform.Rest;
-using Task = System.Threading.Tasks.Task;
 
 namespace InfluxData.Platform.Client.Client
 {
@@ -127,6 +126,26 @@ namespace InfluxData.Platform.Client.Client
                 return new Health {Status = "error", Message = e.Message};
             }
         }
+        
+        /// <summary>
+        /// The readiness of the InfluxData Platform.
+        /// </summary>
+        /// <returns>return null if the platform is not ready</returns>
+        public async Task<Ready> Ready()
+        {
+            try
+            {
+                var request = await Get("/ready");
+
+                return Call<Ready>(request);
+            }
+            catch (Exception e)
+            {
+                Trace.TraceError($"The exception: '{e.Message}' occurs during check instance readiness.");
+                
+                return null;
+            }
+        }
 
         public void Dispose()
         {
@@ -135,7 +154,7 @@ namespace InfluxData.Platform.Client.Client
             //
             try
             {
-                Task signout = _authenticateDelegatingHandler.Signout();
+                var signout = _authenticateDelegatingHandler.Signout();
                 
                 signout.Wait();
             }

@@ -39,7 +39,7 @@ namespace Flux.Client.Tests
         {            
             await PrepareChunkRecords();
 
-            string flux = FromFluxDatabase + "\n"
+            var flux = FromFluxDatabase + "\n"
                                            + "\t|> filter(fn: (r) => r[\"_measurement\"] == \"chunked\")\n"
                                            + "\t|> range(start: 1970-01-01T00:00:00.000000000Z)";
 
@@ -62,7 +62,7 @@ namespace Flux.Client.Tests
         {
             await PrepareChunkRecords();
 
-            string flux = FromFluxDatabase + "\n"
+            var flux = FromFluxDatabase + "\n"
                                            + "\t|> filter(fn: (r) => r[\"_measurement\"] == \"chunked\")\n"
                                            + "\t|> range(start: 1970-01-01T00:00:00.000000000Z)\n"
                                            + "\t|> window(every: 10m)";
@@ -86,13 +86,13 @@ namespace Flux.Client.Tests
         {
             await PrepareChunkRecords();
 
-            string flux = FromFluxDatabase + "\n"
+            var flux = FromFluxDatabase + "\n"
                                              + "\t|> filter(fn: (r) => r[\"_measurement\"] == \"chunked\")\n"
                                              + "\t|> range(start: 1970-01-01T00:00:00.000000000Z)\n"
                                              + "\t|> window(every: 10m)";
 
             CountdownEvent = new CountdownEvent(10_000);
-            CountdownEvent cancelCountDown = new CountdownEvent(1);
+            var cancelCountDown = new CountdownEvent(1);
 
             await FluxClient.Query(flux, (cancellable, fluxRecord) =>
             {
@@ -121,12 +121,12 @@ namespace Flux.Client.Tests
         [Test]
         public async Task Query()
         {
-            string flux = FromFluxDatabase + "\n"
+            var flux = FromFluxDatabase + "\n"
                                            + "\t|> range(start: 1970-01-01T00:00:00.000000000Z)\n"
                                            + "\t|> filter(fn: (r) => (r[\"_measurement\"] == \"mem\" AND r[\"_field\"] == \"free\"))\n"
                                            + "\t|> sum()";
 
-            List<FluxTable> fluxTables = await FluxClient.Query(flux);
+            var fluxTables = await FluxClient.Query(flux);
 
             AssertFluxResult(fluxTables);
         }
@@ -134,11 +134,11 @@ namespace Flux.Client.Tests
         [Test]
         public async Task QueryWithTime()
         {
-            string flux = FromFluxDatabase + "\n"
+            var flux = FromFluxDatabase + "\n"
                                            + "\t|> range(start: 1970-01-01T00:00:00.000000000Z)\n"
                                            + "\t|> filter(fn: (r) => (r[\"_measurement\"] == \"mem\" AND r[\"_field\"] == \"free\"))";
 
-            List<FluxTable> fluxTables = await FluxClient.Query(flux);
+            var fluxTables = await FluxClient.Query(flux);
 
             AssertFluxResultWithTime(fluxTables);
         }
@@ -146,10 +146,10 @@ namespace Flux.Client.Tests
         [Test]
         public async Task QueryDifferentSchemas()
         {
-            String flux = FromFluxDatabase + "\n"
+            var flux = FromFluxDatabase + "\n"
                                            + "\t|> range(start: 1970-01-01T00:00:00.000000000Z)";
 
-            List<FluxTable> fluxTables = await FluxClient.Query(flux);
+            var fluxTables = await FluxClient.Query(flux);
 
             Assert.That(fluxTables.Count == 6);
         }
@@ -190,9 +190,9 @@ namespace Flux.Client.Tests
         public async Task Callback()
         {
             CountdownEvent = new CountdownEvent(3);
-            List<FluxRecord> records = new List<FluxRecord>();
+            var records = new List<FluxRecord>();
 
-            string flux = FromFluxDatabase + "\n"
+            var flux = FromFluxDatabase + "\n"
                                            + "\t|> range(start: 1970-01-01T00:00:00.000000000Z)\n"
                                            + "\t|> filter(fn: (r) => (r[\"_measurement\"] == \"mem\" AND r[\"_field\"] == \"free\"))\n"
                                            + "\t|> sum()";
@@ -212,9 +212,9 @@ namespace Flux.Client.Tests
         [Test]
         public async Task CallbackWhenConnectionRefuse()
         {
-            FluxConnectionOptions options = new FluxConnectionOptions("http://localhost:8003");
+            var options = new FluxConnectionOptions("http://localhost:8003");
 
-            FluxClient fluxClient = FluxClientFactory.Create(options);
+            var fluxClient = FluxClientFactory.Create(options);
 
             await fluxClient.Query(FromFluxDatabase + " |> last()",
                             (cancellable, record) => { },
@@ -226,11 +226,11 @@ namespace Flux.Client.Tests
         [Test]
         public async Task CallbackToMeasurement()
         {
-            string flux = FromFluxDatabase + "\n"
+            var flux = FromFluxDatabase + "\n"
                                            + "\t|> range(start: 1970-01-01T00:00:00.000000000Z)\n"
                                            + "\t|> filter(fn: (r) => (r[\"_measurement\"] == \"mem\" AND r[\"_field\"] == \"free\"))";
 
-            List<Mem> memory = new List<Mem>();
+            var memory = new List<Mem>();
 
             CountdownEvent = new CountdownEvent(4);
 
@@ -274,21 +274,21 @@ namespace Flux.Client.Tests
         [Test]
         public async Task Version()
         {
-            string version = await FluxClient.Version();
+            var version = await FluxClient.Version();
             
             Assert.IsNotEmpty(version);
         }
 
         private async Task PrepareChunkRecords() 
         {
-            int totalRecords = 500_000;
+            var totalRecords = 500_000;
             CountdownEvent = new CountdownEvent(totalRecords);
 
-            List<string> points = new List<string>();
+            var points = new List<string>();
 
-            for (int ii = 1; ii <= totalRecords + 1; ii++)
+            for (var ii = 1; ii <= totalRecords + 1; ii++)
             {
-                string value = String.Format("chunked,host=A,region=west free={0}i {0}", ii);
+                var value = String.Format("chunked,host=A,region=west free={0}i {0}", ii);
                 points.Add(value);
                 
                 if (ii % 100_000 == 0) 
@@ -305,21 +305,21 @@ namespace Flux.Client.Tests
 
             Assert.That(tables.Count == 2);
 
-            FluxTable table1 = tables[0];
+            var table1 = tables[0];
             
             // Data types
             Assert.That(table1.Columns.Count == 9);
-            List<string> expected = new List<string>{"string", "long", "dateTime:RFC3339", "dateTime:RFC3339", "long", "string", "string", "string", "string"};
+            var expected = new List<string>{"string", "long", "dateTime:RFC3339", "dateTime:RFC3339", "long", "string", "string", "string", "string"};
             CollectionAssert.AreEquivalent(table1.Columns.Select(c => c.DataType).ToList(), expected);
 
             // Columns
-            List<string> expected2 = new List<string>{"result", "table", "_start", "_stop", "_value", "_field", "_measurement", "host", "region"};
+            var expected2 = new List<string>{"result", "table", "_start", "_stop", "_value", "_field", "_measurement", "host", "region"};
             CollectionAssert.AreEquivalent(table1.Columns.Select(c => c.Label).ToList(), expected2);
 
             // Records
             Assert.That(table1.Records.Count == 1);
 
-            List<FluxRecord> records = new List<FluxRecord>();
+            var records = new List<FluxRecord>();
             records.Add(table1.Records[0]);
             records.Add(tables[1].Records[0]);
             AssertFluxRecords(records);
@@ -331,15 +331,15 @@ namespace Flux.Client.Tests
 
             Assert.That(tables.Count == 2);
 
-            FluxTable table1 = tables[0];
+            var table1 = tables[0];
             
             // Data types
             Assert.That(table1.Columns.Count == 10);
-            List<string> expected = new List<string>{"string", "long", "dateTime:RFC3339", "dateTime:RFC3339", "dateTime:RFC3339", "long", "string", "string", "string", "string"};
+            var expected = new List<string>{"string", "long", "dateTime:RFC3339", "dateTime:RFC3339", "dateTime:RFC3339", "long", "string", "string", "string", "string"};
             CollectionAssert.AreEquivalent(table1.Columns.Select(c => c.DataType).ToList(), expected);
 
             // Columns
-            List<string> expected2 = new List<string>{"result", "table", "_start", "_stop", "_time", "_value", "_field", "_measurement", "host", "region"};
+            var expected2 = new List<string>{"result", "table", "_start", "_stop", "_time", "_value", "_field", "_measurement", "host", "region"};
             CollectionAssert.AreEquivalent(table1.Columns.Select(c => c.Label).ToList(), expected2);
 
             // Records
@@ -353,7 +353,7 @@ namespace Flux.Client.Tests
             Assert.That(records.Count == 2);
 
             // Record 1
-            FluxRecord record1 = records[0];
+            var record1 = records[0];
             Assert.AreEqual(record1.GetMeasurement(), "mem");
             Assert.AreEqual(record1.GetField(), "free");
 
@@ -367,7 +367,7 @@ namespace Flux.Client.Tests
             Assert.AreEqual("west", record1.GetValueByKey("region"));
             
             // Record 2
-            FluxRecord record2 = records[1];
+            var record2 = records[1];
             Assert.AreEqual(record2.GetMeasurement(), "mem");
             Assert.AreEqual(record2.GetField(), "free");
 

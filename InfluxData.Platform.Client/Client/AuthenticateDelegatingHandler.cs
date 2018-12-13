@@ -65,8 +65,8 @@ namespace InfluxData.Platform.Client.Client
             //TODO or expired
             if (_sessionToken == null)
             {
-                HttpRequestMessage authRequest = new HttpRequestMessage(HttpMethod.Post, _platformOptions.Url + "/api/v2/signin");
-                string header = AuthorizationHeader(_platformOptions.Username, String(_platformOptions.Password));
+                var authRequest = new HttpRequestMessage(HttpMethod.Post, _platformOptions.Url + "/api/v2/signin");
+                var header = AuthorizationHeader(_platformOptions.Username, String(_platformOptions.Password));
                 authRequest.Headers.Add("Authorization", header);
 
                 HttpResponseMessage authResponse;
@@ -109,7 +109,7 @@ namespace InfluxData.Platform.Client.Client
             _signout = true;
             _sessionToken = null;
 
-            HttpRequestMessage authRequest = new HttpRequestMessage(new HttpMethod(HttpMethodKind.Post.Name()), _platformOptions.Url + "/api/v2/signout");
+            var authRequest = new HttpRequestMessage(new HttpMethod(HttpMethodKind.Post.Name()), _platformOptions.Url + "/api/v2/signout");
 
             await base.SendAsync(authRequest, new CancellationToken());
         }

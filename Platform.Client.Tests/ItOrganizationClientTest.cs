@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using InfluxData.Platform.Client.Client;
 using InfluxData.Platform.Client.Domain;
 using NUnit.Framework;
@@ -22,9 +21,9 @@ namespace Platform.Client.Tests
         [Test]
         public async Task CreateOrganization() 
         {
-            string organizationName = GenerateName("Constant Pro");
+            var organizationName = GenerateName("Constant Pro");
 
-            Organization organization = await _organizationClient.CreateOrganization(organizationName);
+            var organization = await _organizationClient.CreateOrganization(organizationName);
 
             Assert.IsNotNull(organization);
             Assert.IsNotEmpty(organization.Id);
@@ -44,11 +43,11 @@ namespace Platform.Client.Tests
         [Test]
         public async Task FindOrganizationById() 
         {
-            string organizationName = GenerateName("Constant Pro");
+            var organizationName = GenerateName("Constant Pro");
 
-            Organization organization = await _organizationClient.CreateOrganization(organizationName);
+            var organization = await _organizationClient.CreateOrganization(organizationName);
 
-            Organization organizationById = await _organizationClient.FindOrganizationById(organization.Id);
+            var organizationById = await _organizationClient.FindOrganizationById(organization.Id);
 
             Assert.IsNotNull(organizationById);
             Assert.AreEqual(organizationById.Id, organization.Id);
@@ -68,7 +67,7 @@ namespace Platform.Client.Tests
         [Test]
         public async Task FindOrganizationByIdNull() 
         {
-            Organization organization = await _organizationClient.FindOrganizationById("020f755c3c082000");
+            var organization = await _organizationClient.FindOrganizationById("020f755c3c082000");
 
             Assert.IsNull(organization);
         }
@@ -76,21 +75,21 @@ namespace Platform.Client.Tests
         [Test]
         public async Task FindOrganizations() 
         {
-            List<Organization> organizations = await _organizationClient.FindOrganizations();
+            var organizations = await _organizationClient.FindOrganizations();
             
             await _organizationClient.CreateOrganization(GenerateName("Constant Pro"));
 
-            List<Organization> organizationsNew = await _organizationClient.FindOrganizations();
+            var organizationsNew = await _organizationClient.FindOrganizations();
             Assert.That(organizationsNew.Count == organizations.Count + 1);
         }
         
         [Test]
         public async Task DeleteOrganization() 
         {
-            Organization createdOrganization = await _organizationClient.CreateOrganization(GenerateName("Constant Pro"));
+            var createdOrganization = await _organizationClient.CreateOrganization(GenerateName("Constant Pro"));
             Assert.IsNotNull(createdOrganization);
 
-            Organization foundOrganization = await _organizationClient.FindOrganizationById(createdOrganization.Id);
+            var foundOrganization = await _organizationClient.FindOrganizationById(createdOrganization.Id);
             Assert.IsNotNull(foundOrganization);
                             
             // delete task
@@ -103,10 +102,10 @@ namespace Platform.Client.Tests
         [Test]
         public async Task UpdateOrganization() 
         {
-            Organization createdOrganization = await _organizationClient.CreateOrganization(GenerateName("Constant Pro"));
+            var createdOrganization = await _organizationClient.CreateOrganization(GenerateName("Constant Pro"));
             createdOrganization.Name = "Master Pb";
 
-            Organization updatedOrganization = await _organizationClient.UpdateOrganization(createdOrganization);
+            var updatedOrganization = await _organizationClient.UpdateOrganization(createdOrganization);
 
             Assert.IsNotNull(updatedOrganization);
             Assert.AreEqual(updatedOrganization.Id, createdOrganization.Id);
@@ -126,14 +125,14 @@ namespace Platform.Client.Tests
         [Test]
         public async Task Member() {
 
-            Organization organization = await _organizationClient.CreateOrganization(GenerateName("Constant Pro"));
+            var organization = await _organizationClient.CreateOrganization(GenerateName("Constant Pro"));
 
-            List<UserResourceMapping> members =  await _organizationClient.GetMembers(organization);
+            var members =  await _organizationClient.GetMembers(organization);
             Assert.AreEqual(0, members.Count);
 
-            User user = await _userClient.CreateUser(GenerateName("Luke Health"));
+            var user = await _userClient.CreateUser(GenerateName("Luke Health"));
 
-            UserResourceMapping userResourceMapping = await _organizationClient.AddMember(user, organization);
+            var userResourceMapping = await _organizationClient.AddMember(user, organization);
             Assert.IsNotNull(userResourceMapping);
             Assert.AreEqual(userResourceMapping.ResourceId, organization.Id);
             Assert.AreEqual(userResourceMapping.ResourceType, ResourceType.OrgResourceType);
@@ -156,14 +155,14 @@ namespace Platform.Client.Tests
         [Test]
         public async Task Owner() {
 
-            Organization organization = await _organizationClient.CreateOrganization(GenerateName("Constant Pro"));
+            var organization = await _organizationClient.CreateOrganization(GenerateName("Constant Pro"));
 
-            List<UserResourceMapping> owners =  await _organizationClient.GetOwners(organization);
+            var owners =  await _organizationClient.GetOwners(organization);
             Assert.AreEqual(0, owners.Count);
 
-            User user = await _userClient.CreateUser(GenerateName("Luke Health"));
+            var user = await _userClient.CreateUser(GenerateName("Luke Health"));
 
-            UserResourceMapping userResourceMapping = await _organizationClient.AddOwner(user, organization);
+            var userResourceMapping = await _organizationClient.AddOwner(user, organization);
             Assert.IsNotNull(userResourceMapping);
             Assert.AreEqual(userResourceMapping.ResourceId, organization.Id);
             Assert.AreEqual(userResourceMapping.ResourceType, ResourceType.OrgResourceType);

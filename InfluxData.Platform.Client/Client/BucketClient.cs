@@ -233,7 +233,7 @@ namespace InfluxData.Platform.Client.Client
             Arguments.CheckNonEmptyString(bucketId, "Bucket ID");
             Arguments.CheckNonEmptyString(memberId, "Member ID");
 
-            User user = new User {Id = memberId};
+            var user = new User {Id = memberId};
 
             var request = await Post(user, $"/api/v2/buckets/{bucketId}/members");
 
@@ -323,7 +323,7 @@ namespace InfluxData.Platform.Client.Client
             Arguments.CheckNonEmptyString(bucketId, "Bucket ID");
             Arguments.CheckNonEmptyString(ownerId, "Owner ID");
 
-            User user = new User {Id = ownerId};
+            var user = new User {Id = ownerId};
 
             var request = await Post(user, $"/api/v2/buckets/{bucketId}/owners");
 

@@ -12,7 +12,7 @@ namespace Platform.Client.Tests
         [Test]
         public void MeasurementEscape()
         {
-            Point point = Point.Measurement("h2 o")
+            var point = Point.Measurement("h2 o")
                 .Tag("location", "europe")
                 .Tag("", "warn")
                 .Field("level", 2);
@@ -37,7 +37,7 @@ namespace Platform.Client.Tests
         [Test]
         public void TagEmptyKey()
         {
-            Point point = Point.Measurement("h2o")
+            var point = Point.Measurement("h2o")
                 .Tag("location", "europe")
                 .Tag("", "warn")
                 .Field("level", 2);
@@ -48,7 +48,7 @@ namespace Platform.Client.Tests
         [Test]
         public void TagEmptyValue()
         {
-            Point point = Point.Measurement("h2o")
+            var point = Point.Measurement("h2o")
                 .Tag("location", "europe")
                 .Tag("log", "")
                 .Field("level", 2);
@@ -59,7 +59,7 @@ namespace Platform.Client.Tests
         [Test]
         public void OverrideTagField()
         {
-            Point point = Point.Measurement("h2o")
+            var point = Point.Measurement("h2o")
                 .Tag("location", "europe")
                 .Tag("location", "europe2")
                 .Field("level", 2)
@@ -71,7 +71,7 @@ namespace Platform.Client.Tests
         [Test]
         public void FieldTypes()
         {
-            Point point = Point.Measurement("h2o").Tag("location", "europe")
+            var point = Point.Measurement("h2o").Tag("location", "europe")
                 .Field("long", 1L)
                 .Field("double", 250.69D)
                 .Field("float", 35.0F)
@@ -87,7 +87,7 @@ namespace Platform.Client.Tests
                 .Field("boolean", false)
                 .Field("string", "string value");
 
-            String expected =
+            var expected =
                 "h2o,location=europe boolean=false,byte=9i,decimal=25.6,double=250.69,float=35,integer=7i,long=1i," +
                 "point=13.3,sbyte=12i,short=8i,string=\"string value\",uint=11i,ulong=10i,ushort=13i";
 
@@ -97,7 +97,7 @@ namespace Platform.Client.Tests
         [Test]
         public void FieldNullValue()
         {
-            Point point = Point.Measurement("h2o")
+            var point = Point.Measurement("h2o")
                 .Tag("location", "europe")
                 .Field("level", 2)
                 .Field("warning", null);
@@ -108,7 +108,7 @@ namespace Platform.Client.Tests
         [Test]
         public void FieldEscape()
         {
-            Point point = Point.Measurement("h2o")
+            var point = Point.Measurement("h2o")
                 .Tag("location", "europe")
                 .Field("level", "string esc\\ape value");
 
@@ -124,7 +124,7 @@ namespace Platform.Client.Tests
         [Test]
         public void Time()
         {
-            Point point = Point.Measurement("h2o")
+            var point = Point.Measurement("h2o")
                 .Tag("location", "europe")
                 .Field("level", 2)
                 .Timestamp(123L, TimeUnit.Seconds);
@@ -135,7 +135,7 @@ namespace Platform.Client.Tests
         [Test]
         public void TimePrecisionDefault()
         {
-            Point point = Point.Measurement("h2o")
+            var point = Point.Measurement("h2o")
                 .Tag("location", "europe")
                 .Field("level", 2);
 
@@ -145,7 +145,7 @@ namespace Platform.Client.Tests
         [Test]
         public void TimeSpanFormatting()
         {
-            Point point = Point.Measurement("h2o")
+            var point = Point.Measurement("h2o")
                 .Tag("location", "europe")
                 .Field("level", 2)
                 .Timestamp(TimeSpan.FromDays(1), TimeUnit.Nanos);
@@ -177,9 +177,9 @@ namespace Platform.Client.Tests
         [Test]
         public void DateTimeFormatting()
         {
-            DateTime dateTime = new DateTime(2015, 10, 15, 8, 20, 15, DateTimeKind.Utc);
+            var dateTime = new DateTime(2015, 10, 15, 8, 20, 15, DateTimeKind.Utc);
 
-            Point point = Point.Measurement("h2o")
+            var point = Point.Measurement("h2o")
                 .Tag("location", "europe")
                 .Field("level", 2)
                 .Timestamp(dateTime, TimeUnit.Millis);
@@ -215,9 +215,9 @@ namespace Platform.Client.Tests
         [Test]
         public void DateTimeUtc()
         {
-            DateTime dateTime = new DateTime(2015, 10, 15, 8, 20, 15);
+            var dateTime = new DateTime(2015, 10, 15, 8, 20, 15);
 
-            Point point = Point.Measurement("h2o")
+            var point = Point.Measurement("h2o")
                 .Tag("location", "europe")
                 .Field("level", 2);
 
@@ -227,9 +227,9 @@ namespace Platform.Client.Tests
         [Test]
         public void DateTimeOffsetFormatting()
         {
-            DateTimeOffset offset = DateTimeOffset.FromUnixTimeSeconds(15678);
+            var offset = DateTimeOffset.FromUnixTimeSeconds(15678);
 
-            Point point = Point.Measurement("h2o")
+            var point = Point.Measurement("h2o")
                 .Tag("location", "europe")
                 .Field("level", 2)
                 .Timestamp(offset, TimeUnit.Nanos);
@@ -242,7 +242,7 @@ namespace Platform.Client.Tests
         {
             var instant = InstantPattern.ExtendedIso.Parse("1970-01-01T00:00:45.999999999Z").Value;
             
-            Point point = Point.Measurement("h2o")
+            var point = Point.Measurement("h2o")
                 .Tag("location", "europe")
                 .Field("level", 2)
                 .Timestamp(instant, TimeUnit.Seconds);
