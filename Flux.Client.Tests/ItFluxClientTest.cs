@@ -10,12 +10,13 @@ using NUnit.Framework;
 using Platform.Common.Flux.Domain;
 using Platform.Common.Flux.Error;
 using Platform.Common.Platform;
+using Platform.Common.Platform.Rest;
 
 namespace Flux.Client.Tests
 {
     public class ItFluxClientTest : AbstractItFluxClientTest
     {
-        private static readonly string FromFluxDatabase = String.Format("from(bucket:\"{0}\")", DatabaseName);
+        private static readonly string FromFluxDatabase = $"from(bucket:\"{DatabaseName}\")";
 
         [SetUp]
         public new void SetUp()
@@ -278,6 +279,17 @@ namespace Flux.Client.Tests
             
             Assert.IsNotEmpty(version);
         }
+        
+        [Test]
+        public void Logging()
+        {
+            // Default None
+            Assert.AreEqual(LogLevel.None, FluxClient.GetLogLevel());
+            
+            // Headers
+            FluxClient.SetLogLevel(LogLevel.Headers);
+            Assert.AreEqual(LogLevel.Headers, FluxClient.GetLogLevel());
+        }
 
         private async Task PrepareChunkRecords() 
         {
@@ -288,18 +300,18 @@ namespace Flux.Client.Tests
 
             for (var ii = 1; ii <= totalRecords + 1; ii++)
             {
-                var value = String.Format("chunked,host=A,region=west free={0}i {0}", ii);
+                var value = string.Format("chunked,host=A,region=west free={0}i {0}", ii);
                 points.Add(value);
                 
                 if (ii % 100_000 == 0) 
                 {
-                    await InfluxDbWrite(String.Join("\n", points), DatabaseName);
+                    await InfluxDbWrite(string.Join("\n", points), DatabaseName);
                     points.Clear();
                 }
             }
         }
         
-        private void AssertFluxResult(List<FluxTable> tables) 
+        private void AssertFluxResult(IReadOnlyList<FluxTable> tables) 
         {
             Assert.IsNotNull(tables);
 
@@ -319,13 +331,11 @@ namespace Flux.Client.Tests
             // Records
             Assert.That(table1.Records.Count == 1);
 
-            var records = new List<FluxRecord>();
-            records.Add(table1.Records[0]);
-            records.Add(tables[1].Records[0]);
+            var records = new List<FluxRecord> {table1.Records[0], tables[1].Records[0]};
             AssertFluxRecords(records);
         }
         
-        private void AssertFluxResultWithTime(List<FluxTable> tables) 
+        private void AssertFluxResultWithTime(IReadOnlyList<FluxTable> tables) 
         {
             Assert.IsNotNull(tables);
 
@@ -347,7 +357,7 @@ namespace Flux.Client.Tests
             Assert.That(tables[1].Records.Count == 2);
         }
         
-        private void AssertFluxRecords(List<FluxRecord> records) 
+        private void AssertFluxRecords(IReadOnlyList<FluxRecord> records) 
         {
             Assert.NotNull(records);
             Assert.That(records.Count == 2);

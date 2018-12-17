@@ -495,7 +495,7 @@ namespace Platform.Client.Tests
         {
             var task = await _taskClient.CreateTaskEvery(GenerateName("it task"), TaskFlux, "1s", _user, _organization);
             
-            Thread.Sleep(2_000);
+            Thread.Sleep(4_000);
             
             var runs = await _taskClient.GetRuns(task, null, null, 1);
             Assert.AreEqual(1, runs.Count);

@@ -22,7 +22,7 @@ namespace InfluxData.Platform.Client.Client
         ///
         /// <para>
         /// NOTE: This method is not intended for large query results.
-        /// Use <see cref="Query(string,string,System.Action{Platform.Common.Platform.Rest.ICancellable,Platform.Common.Flux.Domain.FluxRecord}(Platform.Common.Platform.Rest.ICancellable,Platform.Common.Flux.Domain.FluxRecord),Action{Exception},Action)"/>
+        /// Use <see cref="Query(string,string,System.Action{ICancellable, FluxRecord},System.Action{System.Exception}(System.Exception),Action)"/>
         /// for large data streaming.
         /// </para>
         /// </summary>

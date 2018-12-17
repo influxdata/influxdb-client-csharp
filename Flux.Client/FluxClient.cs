@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Flux.Client.Client;
 using Flux.Client.Options;
@@ -15,8 +17,14 @@ namespace Flux.Client
 {
     public class FluxClient : AbstractQueryClient
     {
+        private readonly LoggingHandler _loggingHandler;
+        
         public FluxClient(FluxConnectionOptions options)
         {
+            _loggingHandler = new LoggingHandler(LogLevel.None);
+            
+            Client.HttpClient = new HttpClient(_loggingHandler);
+            Client.HttpClient .DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             Client.HttpClient.BaseAddress = new Uri(options.Url);
             Client.HttpClient.Timeout = options.Timeout;
         }
@@ -364,11 +372,10 @@ namespace Flux.Client
             await QueryRaw(message, onResponse, onError, onComplete);
         }
 
-        /**
-         * Check the status of InfluxDB Server.
-         *
-         * @return {@link Boolean#TRUE} if server is healthy otherwise return {@link Boolean#FALSE}
-         */
+        /// <summary>
+        /// Check the status of InfluxDB Server.
+        /// </summary>
+        /// <returns>true if server is healthy otherwise return false</returns>
         public async Task<bool> Ping()
         {
             try
@@ -386,11 +393,11 @@ namespace Flux.Client
             }
         }
 
-        /**
-         * Return the version of the connected InfluxDB Server.
-         *
-         * @return the version String, otherwise unknown.
-         */
+        /// <summary>
+        ///  Return the version of the connected InfluxDB Server.
+        /// </summary>
+        /// <returns>the version String, otherwise unknown</returns>
+        /// <exception cref="InfluxException">throws when request did not succesfully ends</exception>
         public async Task<string> Version()
         {
             try
@@ -405,6 +412,26 @@ namespace Flux.Client
             {
                 throw new InfluxException(e);
             }
+        }
+        
+        /// <summary>
+        /// Set the log level for the request and response information.
+        /// </summary>
+        /// <param name="logLevel">the log level to set</param>
+        public void SetLogLevel(LogLevel logLevel)
+        {
+            Arguments.CheckNotNull(logLevel, nameof(logLevel));
+
+            _loggingHandler.Level = logLevel;
+        }
+
+        /// <summary>
+        /// Set the <see cref="LogLevel"/> that is used for logging requests and responses.
+        /// </summary>
+        /// <returns>Log Level</returns>
+        public LogLevel GetLogLevel()
+        {
+            return _loggingHandler.Level;
         }
         
         private string GetVersion(RequestResult responseHttp) 

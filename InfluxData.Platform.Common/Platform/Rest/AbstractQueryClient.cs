@@ -12,12 +12,12 @@ namespace Platform.Common.Platform.Rest
     {
         private static readonly FluxResultMapper Mapper = new FluxResultMapper();
         
-        protected static Action EmptyAction = () => 
+        protected static readonly Action EmptyAction = () => 
         {
             
         };
         
-        protected static Action<Exception> ErrorConsumer = e => { throw e; };
+        protected static readonly Action<Exception> ErrorConsumer = e => throw e;
         
         private readonly FluxCsvParser _csvParser = new FluxCsvParser();
         

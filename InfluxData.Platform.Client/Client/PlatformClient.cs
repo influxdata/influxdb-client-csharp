@@ -13,12 +13,17 @@ namespace InfluxData.Platform.Client.Client
     public class PlatformClient : AbstractClient, IDisposable
     {
         private readonly AuthenticateDelegatingHandler _authenticateDelegatingHandler;
+        private readonly LoggingHandler _loggingHandler;
 
         protected internal PlatformClient(PlatformOptions options)
         {
             Arguments.CheckNotNull(options, "PlatformOptions");
 
-            _authenticateDelegatingHandler = new AuthenticateDelegatingHandler(options);
+            _loggingHandler = new LoggingHandler(LogLevel.None);
+            _authenticateDelegatingHandler = new AuthenticateDelegatingHandler(options)
+            {
+                InnerHandler = _loggingHandler
+            };
 
             Client.HttpClient = new HttpClient(_authenticateDelegatingHandler);
             Client.HttpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
@@ -26,7 +31,7 @@ namespace InfluxData.Platform.Client.Client
             Client.HttpClient.BaseAddress = new Uri(options.Url);
             Client.HttpClient.Timeout = options.Timeout;
         }
-        
+
         /// <summary>
         /// Get the Query client.
         /// </summary>
@@ -44,7 +49,7 @@ namespace InfluxData.Platform.Client.Client
         {
             return new WriteClient(Client, WriteOptions.CreateNew().Build());
         }
-        
+
         /// <summary>
         /// Get the Write client.
         /// </summary>
@@ -81,7 +86,7 @@ namespace InfluxData.Platform.Client.Client
         {
             return new BucketClient(Client);
         }
-        
+
         /// <summary>
         /// Get the <see cref="Domain.Source"/> client.
         /// </summary>
@@ -90,7 +95,7 @@ namespace InfluxData.Platform.Client.Client
         {
             return new SourceClient(Client);
         }
-        
+
         /// <summary>
         /// Get the <see cref="Domain.Authorization"/> client.
         /// </summary>
@@ -110,6 +115,26 @@ namespace InfluxData.Platform.Client.Client
         }
 
         /// <summary>
+        /// Set the log level for the request and response information.
+        /// </summary>
+        /// <param name="logLevel">the log level to set</param>
+        public void SetLogLevel(LogLevel logLevel)
+        {
+            Arguments.CheckNotNull(logLevel, nameof(logLevel));
+
+            _loggingHandler.Level = logLevel;
+        }
+
+        /// <summary>
+        /// Set the <see cref="LogLevel"/> that is used for logging requests and responses.
+        /// </summary>
+        /// <returns>Log Level</returns>
+        public LogLevel GetLogLevel()
+        {
+            return _loggingHandler.Level;
+        }
+
+        /// <summary>
         /// Get the health of an instance.
         /// </summary>
         /// <returns>health of an instance</returns>
@@ -126,7 +151,7 @@ namespace InfluxData.Platform.Client.Client
                 return new Health {Status = "error", Message = e.Message};
             }
         }
-        
+
         /// <summary>
         /// The readiness of the InfluxData Platform.
         /// </summary>
@@ -142,7 +167,7 @@ namespace InfluxData.Platform.Client.Client
             catch (Exception e)
             {
                 Trace.TraceError($"The exception: '{e.Message}' occurs during check instance readiness.");
-                
+
                 return null;
             }
         }
@@ -155,7 +180,7 @@ namespace InfluxData.Platform.Client.Client
             try
             {
                 var signout = _authenticateDelegatingHandler.Signout();
-                
+
                 signout.Wait();
             }
             catch (Exception e)

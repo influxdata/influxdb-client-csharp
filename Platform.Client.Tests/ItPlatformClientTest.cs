@@ -2,6 +2,7 @@ using System;
 using System.Threading.Tasks;
 using InfluxData.Platform.Client.Client;
 using NUnit.Framework;
+using Platform.Common.Platform.Rest;
 
 namespace Platform.Client.Tests
 {
@@ -52,6 +53,17 @@ namespace Platform.Client.Tests
             Assert.IsNull(ready);
             
             clientNotRunning.Dispose();
+        }
+
+        [Test]
+        public void Logging()
+        {
+            // Default None
+            Assert.AreEqual(LogLevel.None, PlatformClient.GetLogLevel());
+            
+            // Headers
+            PlatformClient.SetLogLevel(LogLevel.Headers);
+            Assert.AreEqual(LogLevel.Headers, PlatformClient.GetLogLevel());
         }
 
         [Test]
