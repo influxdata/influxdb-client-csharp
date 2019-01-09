@@ -39,10 +39,11 @@ namespace Platform.Client.Tests
             Assert.AreEqual(bucket.RetentionRules.Count, 1);
             Assert.AreEqual(bucket.RetentionRules[0].EverySeconds, 3600L);
             Assert.AreEqual(bucket.RetentionRules[0].Type, "expire");
-            Assert.AreEqual(bucket.Links.Count, 3);
+            Assert.AreEqual(bucket.Links.Count, 4);
             Assert.AreEqual(bucket.Links["org"], $"/api/v2/orgs/{_organization.Id}");
             Assert.AreEqual(bucket.Links["self"], $"/api/v2/buckets/{bucket.Id}");
             Assert.AreEqual(bucket.Links["log"], $"/api/v2/buckets/{bucket.Id}/log");
+            Assert.AreEqual(bucket.Links["labels"], $"/api/v2/buckets/{bucket.Id}/labels");
         }
 
         [Test]
