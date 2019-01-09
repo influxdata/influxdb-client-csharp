@@ -1,14 +1,13 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using InfluxData.Platform.Client.Domain;
-using Platform.Common.Flux.Error;
 using Platform.Common.Platform;
 using Platform.Common.Platform.Rest;
 using Task = System.Threading.Tasks.Task;
 
 namespace InfluxData.Platform.Client.Client
 {
-    public class SourceClient: AbstractClient
+    public class SourceClient: AbstractPlatformClient
     {
         protected internal SourceClient(DefaultClientIo client) : base(client)
         {
@@ -141,25 +140,7 @@ namespace InfluxData.Platform.Client.Client
         {
             Arguments.CheckNonEmptyString(sourceId, "Source ID");
             
-            var health = new Health();
-
-            try
-            {
-                var request = await Get($"/api/v2/sources/{sourceId}/health");
-                
-                //TODO wait for implementation of handleGetSourceHealth failure,
-                // after fix refactor to platformClient.health implementation + tests
-                RaiseForInfluxError(request);
-
-                health.Status = "healthy";
-            }
-            catch (InfluxException e)
-            {
-                health.Status = "error";
-                health.Message = e.Message;
-            }
-
-            return health;
+            return await GetHealth($"/api/v2/sources/{sourceId}/health");
         }
     }
 }

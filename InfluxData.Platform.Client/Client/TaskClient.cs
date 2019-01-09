@@ -39,6 +39,8 @@ namespace InfluxData.Platform.Client.Client
         {
             Arguments.CheckNotNull(task, nameof(task));
 
+            //TODO
+            task.Id = task.OrganizationId;
             var request = await Post(task, "/api/v2/tasks");
 
             return Call<Task>(request);
@@ -276,7 +278,7 @@ namespace InfluxData.Platform.Client.Client
         /// </summary>
         /// <param name="task">task of the members</param>
         /// <returns>the List all members of a task</returns>
-        public async System.Threading.Tasks.Task<List<UserResourceMapping>> GetMembers(Task task)
+        public async System.Threading.Tasks.Task<List<ResourceMember>> GetMembers(Task task)
         {
             Arguments.CheckNotNull(task, "task");
 
@@ -288,15 +290,15 @@ namespace InfluxData.Platform.Client.Client
         /// </summary>
         /// <param name="taskId">ID of task to get members</param>
         /// <returns>the List all members of a task</returns>
-        public async System.Threading.Tasks.Task<List<UserResourceMapping>> GetMembers(string taskId)
+        public async System.Threading.Tasks.Task<List<ResourceMember>> GetMembers(string taskId)
         {
             Arguments.CheckNonEmptyString(taskId, nameof(taskId));
 
             var request = await Get($"/api/v2/tasks/{taskId}/members");
 
-            var response = Call<UserResourcesResponse>(request);
+            var response = Call<ResourceMembers>(request);
 
-            return response?.UserResourceMappings;
+            return response?.Users;
         }
 
         /// <summary>
@@ -305,7 +307,7 @@ namespace InfluxData.Platform.Client.Client
         /// <param name="member">the member of a task</param>
         /// <param name="task">the task of a member</param>
         /// <returns>created mapping</returns>
-        public async System.Threading.Tasks.Task<UserResourceMapping> AddMember(User member, Task task)
+        public async System.Threading.Tasks.Task<ResourceMember> AddMember(User member, Task task)
         {
             Arguments.CheckNotNull(task, "task");
             Arguments.CheckNotNull(member, "member");
@@ -319,7 +321,7 @@ namespace InfluxData.Platform.Client.Client
         /// <param name="memberId">the ID of a member</param>
         /// <param name="taskId">the ID of a task</param>
         /// <returns>created mapping</returns>
-        public async System.Threading.Tasks.Task<UserResourceMapping> AddMember(string memberId, string taskId)
+        public async System.Threading.Tasks.Task<ResourceMember> AddMember(string memberId, string taskId)
         {
             Arguments.CheckNonEmptyString(taskId, nameof(taskId));
             Arguments.CheckNonEmptyString(memberId, nameof(memberId));
@@ -328,7 +330,7 @@ namespace InfluxData.Platform.Client.Client
 
             var request = await Post(user, $"/api/v2/tasks/{taskId}/members");
 
-            return Call<UserResourceMapping>(request);
+            return Call<ResourceMember>(request);
         }
 
         /// <summary>
@@ -366,7 +368,7 @@ namespace InfluxData.Platform.Client.Client
         /// </summary>
         /// <param name="task">task of the owners</param>
         /// <returns>the List all owners of a task</returns>
-        public async System.Threading.Tasks.Task<List<UserResourceMapping>> GetOwners(Task task)
+        public async System.Threading.Tasks.Task<List<ResourceMember>> GetOwners(Task task)
         {
             Arguments.CheckNotNull(task, "Task is required");
 
@@ -378,15 +380,15 @@ namespace InfluxData.Platform.Client.Client
         /// </summary>
         /// <param name="taskId">ID of a task to get owners</param>
         /// <returns>the List all owners of a task</returns>
-        public async System.Threading.Tasks.Task<List<UserResourceMapping>> GetOwners(string taskId)
+        public async System.Threading.Tasks.Task<List<ResourceMember>> GetOwners(string taskId)
         {
             Arguments.CheckNonEmptyString(taskId, nameof(taskId));
 
             var request = await Get($"/api/v2/tasks/{taskId}/owners");
 
-            var response = Call<UserResourcesResponse>(request);
+            var response = Call<ResourceMembers>(request);
 
-            return response?.UserResourceMappings;
+            return response?.Users;
         }
 
         /// <summary>
@@ -395,7 +397,7 @@ namespace InfluxData.Platform.Client.Client
         /// <param name="owner">the owner of a task</param>
         /// <param name="task">the task of a owner</param>
         /// <returns>created mapping</returns>
-        public async System.Threading.Tasks.Task<UserResourceMapping> AddOwner(User owner, Task task)
+        public async System.Threading.Tasks.Task<ResourceMember> AddOwner(User owner, Task task)
         {
             Arguments.CheckNotNull(task, "task");
             Arguments.CheckNotNull(owner, "owner");
@@ -409,7 +411,7 @@ namespace InfluxData.Platform.Client.Client
         /// <param name="ownerId">the ID of a owner</param>
         /// <param name="taskId">the ID of a task</param>
         /// <returns>created mapping</returns>
-        public async System.Threading.Tasks.Task<UserResourceMapping> AddOwner(string ownerId, string taskId)
+        public async System.Threading.Tasks.Task<ResourceMember> AddOwner(string ownerId, string taskId)
         {
             Arguments.CheckNonEmptyString(taskId, nameof(taskId));
             Arguments.CheckNonEmptyString(ownerId, nameof(ownerId));
@@ -418,7 +420,7 @@ namespace InfluxData.Platform.Client.Client
 
             var request = await Post(user, $"/api/v2/tasks/{taskId}/owners");
 
-            return Call<UserResourceMapping>(request);
+            return Call<ResourceMember>(request);
         }
 
         /// <summary>

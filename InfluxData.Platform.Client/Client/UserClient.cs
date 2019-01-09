@@ -131,7 +131,7 @@ namespace InfluxData.Platform.Client.Client
         {
             var request = await Get("/api/v2/me");
 
-            return Call<User>(request, "token required");
+            return Call<User>(request, 403);
         }
 
         /// <summary>
@@ -246,7 +246,7 @@ namespace InfluxData.Platform.Client.Client
 
             var configuredTaskAwaitable = await Client.DoRequest(request).ConfigureAwait(false);
 
-            return Call<User>(configuredTaskAwaitable, "token required");
+            return Call<User>(configuredTaskAwaitable, 403);
         }
     }
 }

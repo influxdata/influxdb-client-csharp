@@ -158,19 +158,17 @@ namespace Platform.Client.Tests
 
             var user = await _userClient.CreateUser(GenerateName("Luke Health"));
 
-            var userResourceMapping = await _bucketClient.AddMember(user, bucket);
-            Assert.IsNotNull(userResourceMapping);
-            Assert.AreEqual(userResourceMapping.ResourceId, bucket.Id);
-            Assert.AreEqual(userResourceMapping.ResourceType, ResourceType.BucketResourceType);
-            Assert.AreEqual(userResourceMapping.UserId, user.Id);
-            Assert.AreEqual(userResourceMapping.UserType, UserResourceMapping.MemberType.Member);
+            var resourceMember = await _bucketClient.AddMember(user, bucket);
+            Assert.IsNotNull(resourceMember);
+            Assert.AreEqual(resourceMember.UserId, user.Id);
+            Assert.AreEqual(resourceMember.UserName, user.Name);
+            Assert.AreEqual(resourceMember.Role, ResourceMember.UserType.Member);
 
             members = await _bucketClient.GetMembers(bucket);
             Assert.AreEqual(1, members.Count);
-            Assert.AreEqual(members[0].ResourceId, bucket.Id);
-            Assert.AreEqual(members[0].ResourceType, ResourceType.BucketResourceType);
             Assert.AreEqual(members[0].UserId, user.Id);
-            Assert.AreEqual(members[0].UserType, UserResourceMapping.MemberType.Member);
+            Assert.AreEqual(members[0].UserName, user.Name);
+            Assert.AreEqual(members[0].Role, ResourceMember.UserType.Member);
 
             await _bucketClient.DeleteMember(user, bucket);
 
@@ -188,19 +186,17 @@ namespace Platform.Client.Tests
 
             var user = await _userClient.CreateUser(GenerateName("Luke Health"));
 
-            var userResourceMapping = await _bucketClient.AddOwner(user, bucket);
-            Assert.IsNotNull(userResourceMapping);
-            Assert.AreEqual(userResourceMapping.ResourceId, bucket.Id);
-            Assert.AreEqual(userResourceMapping.ResourceType, ResourceType.BucketResourceType);
-            Assert.AreEqual(userResourceMapping.UserId, user.Id);
-            Assert.AreEqual(userResourceMapping.UserType, UserResourceMapping.MemberType.Owner);
+            var resourceMember = await _bucketClient.AddOwner(user, bucket);
+            Assert.IsNotNull(resourceMember);
+            Assert.AreEqual(resourceMember.UserId, user.Id);
+            Assert.AreEqual(resourceMember.UserName, user.Name);
+            Assert.AreEqual(resourceMember.Role, ResourceMember.UserType.Owner);
 
             owners = await _bucketClient.GetOwners(bucket);
             Assert.AreEqual(1, owners.Count);
-            Assert.AreEqual(owners[0].ResourceId, bucket.Id);
-            Assert.AreEqual(owners[0].ResourceType, ResourceType.BucketResourceType);
             Assert.AreEqual(owners[0].UserId, user.Id);
-            Assert.AreEqual(owners[0].UserType, UserResourceMapping.MemberType.Owner);
+            Assert.AreEqual(owners[0].UserName, user.Name);
+            Assert.AreEqual(owners[0].Role, ResourceMember.UserType.Owner);
 
             await _bucketClient.DeleteOwner(user, bucket);
 

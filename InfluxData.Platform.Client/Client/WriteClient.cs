@@ -125,10 +125,10 @@ namespace InfluxData.Platform.Client.Client
                     switch (batchWriteItem.Options.Precision)
                     {
                         case TimeUnit.Nanos:
-                            precision = "n";
+                            precision = "ns";
                             break;
                         case TimeUnit.Micros:
-                            precision = "u";
+                            precision = "us";
                             break;
                         case TimeUnit.Millis:
                             precision = "ms";

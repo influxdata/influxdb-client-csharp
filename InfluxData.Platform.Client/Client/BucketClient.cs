@@ -185,7 +185,7 @@ namespace InfluxData.Platform.Client.Client
         /// </summary>
         /// <param name="bucket">bucket of the members</param>
         /// <returns>the List all members of a bucket</returns>
-        public async Task<List<UserResourceMapping>> GetMembers(Bucket bucket)
+        public async Task<List<ResourceMember>> GetMembers(Bucket bucket)
         {
             Arguments.CheckNotNull(bucket, "bucket");
 
@@ -197,15 +197,15 @@ namespace InfluxData.Platform.Client.Client
         /// </summary>
         /// <param name="bucketId">ID of bucket to get members</param>
         /// <returns>the List all members of a bucket</returns>
-        public async Task<List<UserResourceMapping>> GetMembers(string bucketId)
+        public async Task<List<ResourceMember>> GetMembers(string bucketId)
         {
             Arguments.CheckNonEmptyString(bucketId, "Bucket ID");
 
             var request = await Get($"/api/v2/buckets/{bucketId}/members");
 
-            var response = Call<UserResourcesResponse>(request);
+            var response = Call<ResourceMembers>(request);
 
-            return response?.UserResourceMappings;
+            return response?.Users;
         }
 
         /// <summary>
@@ -214,7 +214,7 @@ namespace InfluxData.Platform.Client.Client
         /// <param name="member">the member of a bucket</param>
         /// <param name="bucket">the bucket of a member</param>
         /// <returns>created mapping</returns>
-        public async Task<UserResourceMapping> AddMember(User member, Bucket bucket)
+        public async Task<ResourceMember> AddMember(User member, Bucket bucket)
         {
             Arguments.CheckNotNull(bucket, "bucket");
             Arguments.CheckNotNull(member, "member");
@@ -228,7 +228,7 @@ namespace InfluxData.Platform.Client.Client
         /// <param name="memberId">the ID of a member</param>
         /// <param name="bucketId">the ID of a bucket</param>
         /// <returns>created mapping</returns>
-        public async Task<UserResourceMapping> AddMember(string memberId, string bucketId)
+        public async Task<ResourceMember> AddMember(string memberId, string bucketId)
         {
             Arguments.CheckNonEmptyString(bucketId, "Bucket ID");
             Arguments.CheckNonEmptyString(memberId, "Member ID");
@@ -237,7 +237,7 @@ namespace InfluxData.Platform.Client.Client
 
             var request = await Post(user, $"/api/v2/buckets/{bucketId}/members");
 
-            return Call<UserResourceMapping>(request);
+            return Call<ResourceMember>(request);
         }
 
         /// <summary>
@@ -275,7 +275,7 @@ namespace InfluxData.Platform.Client.Client
         /// </summary>
         /// <param name="bucket">bucket of the owners</param>
         /// <returns>the List all owners of a bucket</returns>
-        public async Task<List<UserResourceMapping>> GetOwners(Bucket bucket)
+        public async Task<List<ResourceMember>> GetOwners(Bucket bucket)
         {
             Arguments.CheckNotNull(bucket, "Bucket is required");
 
@@ -287,15 +287,15 @@ namespace InfluxData.Platform.Client.Client
         /// </summary>
         /// <param name="bucketId">ID of a bucket to get owners</param>
         /// <returns>the List all owners of a bucket</returns>
-        public async Task<List<UserResourceMapping>> GetOwners(string bucketId)
+        public async Task<List<ResourceMember>> GetOwners(string bucketId)
         {
             Arguments.CheckNonEmptyString(bucketId, "Bucket ID");
 
             var request = await Get($"/api/v2/buckets/{bucketId}/owners");
 
-            var response = Call<UserResourcesResponse>(request);
+            var response = Call<ResourceMembers>(request);
 
-            return response?.UserResourceMappings;
+            return response?.Users;
         }
 
         /// <summary>
@@ -304,7 +304,7 @@ namespace InfluxData.Platform.Client.Client
         /// <param name="owner">the owner of a bucket</param>
         /// <param name="bucket">the bucket of a owner</param>
         /// <returns>created mapping</returns>
-        public async Task<UserResourceMapping> AddOwner(User owner, Bucket bucket)
+        public async Task<ResourceMember> AddOwner(User owner, Bucket bucket)
         {
             Arguments.CheckNotNull(bucket, "bucket");
             Arguments.CheckNotNull(owner, "owner");
@@ -318,7 +318,7 @@ namespace InfluxData.Platform.Client.Client
         /// <param name="ownerId">the ID of a owner</param>
         /// <param name="bucketId">the ID of a bucket</param>
         /// <returns>created mapping</returns>
-        public async Task<UserResourceMapping> AddOwner(string ownerId, string bucketId)
+        public async Task<ResourceMember> AddOwner(string ownerId, string bucketId)
         {
             Arguments.CheckNonEmptyString(bucketId, "Bucket ID");
             Arguments.CheckNonEmptyString(ownerId, "Owner ID");
@@ -327,7 +327,7 @@ namespace InfluxData.Platform.Client.Client
 
             var request = await Post(user, $"/api/v2/buckets/{bucketId}/owners");
 
-            return Call<UserResourceMapping>(request);
+            return Call<ResourceMember>(request);
         }
 
         /// <summary>

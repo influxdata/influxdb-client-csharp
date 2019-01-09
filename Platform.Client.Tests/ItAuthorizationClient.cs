@@ -11,12 +11,14 @@ namespace Platform.Client.Tests
     {
         private AuthorizationClient _authorizationClient;
         private User _user;
+        private Organization _organization;
 
         [SetUp]
         public new async Task SetUp()
         {
             _authorizationClient = PlatformClient.CreateAuthorizationClient();
-            _user = await PlatformClient.CreateUserClient().CreateUser(GenerateName("Auth User"));
+            _user = await PlatformClient.CreateUserClient().Me();
+            _organization = await FindMyOrg();
         }
 
         [Test]
@@ -25,18 +27,18 @@ namespace Platform.Client.Tests
             var readUsers = new Permission
             {
                 Action = Permission.ReadAction,
-                Resource = Permission.UserResource
+                Resource = PermissionResourceType.User
             };
 
             var writeOrganizations = new Permission
             {
                 Action = Permission.WriteAction,
-                Resource = Permission.OrganizationResource
+                Resource = PermissionResourceType.Org
             };
 
             var permissions = new List<Permission> {readUsers, writeOrganizations};
 
-            var authorization = await _authorizationClient.CreateAuthorization(_user, permissions);
+            var authorization = await _authorizationClient.CreateAuthorization(_organization, permissions);
 
             Assert.IsNotNull(authorization);
             Assert.IsNotEmpty(authorization.Id);
@@ -46,9 +48,9 @@ namespace Platform.Client.Tests
             Assert.AreEqual(authorization.Status, Status.Active);
 
             Assert.AreEqual(authorization.Permissions.Count, 2);
-            Assert.AreEqual(authorization.Permissions[0].Resource, "user");
+            Assert.AreEqual(authorization.Permissions[0].Resource, PermissionResourceType.User);
             Assert.AreEqual(authorization.Permissions[0].Action, "read");
-            Assert.AreEqual(authorization.Permissions[1].Resource, "org");
+            Assert.AreEqual(authorization.Permissions[1].Resource, PermissionResourceType.Org);
             Assert.AreEqual(authorization.Permissions[1].Action, "write");
 
             var links = authorization.Links;
@@ -66,12 +68,12 @@ namespace Platform.Client.Tests
             var readUsers = new Permission
             {
                 Action = Permission.ReadAction,
-                Resource = Permission.UserResource
+                Resource = PermissionResourceType.User
             };
 
             var permissions = new List<Permission> {readUsers};
 
-            var authorization = await _authorizationClient.CreateAuthorization(_user, permissions);
+            var authorization = await _authorizationClient.CreateAuthorization(_organization, permissions);
 
             Assert.AreEqual(authorization.Status, Status.Active);
 
@@ -91,17 +93,17 @@ namespace Platform.Client.Tests
 
             var size = (await _authorizationClient.FindAuthorizations()).Count;
 
-            await _authorizationClient.CreateAuthorization(_user, new List<Permission>());
+            await _authorizationClient.CreateAuthorization(_organization, NewPermissions());
 
             var authorizations = await _authorizationClient.FindAuthorizations();
             
             Assert.AreEqual(size + 1, authorizations.Count);
         }
-        
+
         [Test]
         public async Task FindAuthorizationsById() {
 
-            var authorization = await _authorizationClient.CreateAuthorization(_user, new List<Permission>());
+            var authorization = await _authorizationClient.CreateAuthorization(_organization, NewPermissions());
 
             var foundAuthorization = await _authorizationClient.FindAuthorizationById(authorization.Id);
 
@@ -124,7 +126,7 @@ namespace Platform.Client.Tests
         [Test]
         public async Task DeleteAuthorization() {
 
-            var createdAuthorization = await _authorizationClient.CreateAuthorization(_user, new List<Permission>());
+            var createdAuthorization = await _authorizationClient.CreateAuthorization(_organization, NewPermissions());
             Assert.IsNotNull(createdAuthorization);
 
             var foundAuthorization = await _authorizationClient.FindAuthorizationById(createdAuthorization.Id);
@@ -142,7 +144,7 @@ namespace Platform.Client.Tests
         {
             var size = (await _authorizationClient.FindAuthorizationsByUser(_user)).Count;
 
-            await _authorizationClient.CreateAuthorization(_user, new List<Permission>());
+            await _authorizationClient.CreateAuthorization(_organization, NewPermissions());
 
             var authorizations = await _authorizationClient.FindAuthorizationsByUser(_user);
             Assert.AreEqual(size + 1, authorizations.Count);
@@ -153,10 +155,23 @@ namespace Platform.Client.Tests
 
             var size = (await _authorizationClient.FindAuthorizationsByUser(_user)).Count;
 
-            await _authorizationClient.CreateAuthorization(_user, new List<Permission>());
+            await _authorizationClient.CreateAuthorization(_organization, NewPermissions());
 
             var authorizations = await _authorizationClient.FindAuthorizationsByUserName(_user.Name);
             Assert.AreEqual(size + 1, authorizations.Count);
         }
+        
+        private static List<Permission> NewPermissions()
+        {
+            var permission = new Permission
+            {
+                Action = Permission.ReadAction, Resource = PermissionResourceType.User
+            };
+
+            var permissions = new List<Permission> {permission};
+
+            return permissions;
+        }
+
     }
 }

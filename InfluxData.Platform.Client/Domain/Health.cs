@@ -7,7 +7,7 @@ namespace InfluxData.Platform.Client.Domain
     /// </summary>
     public class Health
     {
-        private const string HealthyStatus = "healthy";
+        private const string HealthyStatus = "pass";
 
         [JsonProperty("status")]
         public string Status { get; set; }

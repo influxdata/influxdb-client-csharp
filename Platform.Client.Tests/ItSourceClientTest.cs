@@ -149,7 +149,7 @@ namespace Platform.Client.Tests
 
             Assert.IsNotNull(health);
             Assert.IsTrue(health.IsHealthy());
-            Assert.IsNull(health.Message);
+            Assert.AreEqual("source is healthy", health.Message);
         }
 
         private Source NewSource()

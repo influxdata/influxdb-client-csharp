@@ -1,8 +1,6 @@
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Platform.Common.Platform.Rest;
 
@@ -32,9 +30,9 @@ namespace Platform.Common.Flux.Error
                 var readToEnd = new StreamReader(response.ResponseContent).ReadToEnd();
 
                 var json = JObject.Parse(readToEnd);
-                if (json.ContainsKey("msg"))
+                if (json.ContainsKey("message"))
                 {
-                    return json.GetValue("msg").ToString();
+                    return json.GetValue("message").ToString();
                 }
             }
 

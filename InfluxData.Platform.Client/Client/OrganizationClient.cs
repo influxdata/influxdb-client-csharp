@@ -9,6 +9,9 @@ namespace InfluxData.Platform.Client.Client
 {
     public class OrganizationClient : AbstractClient
     {
+    
+        //TODO secrets
+    
         protected internal OrganizationClient(DefaultClientIo client) : base(client)
         {
         }
@@ -113,7 +116,7 @@ namespace InfluxData.Platform.Client.Client
         /// </summary>
         /// <param name="organization">organization of the members</param>
         /// <returns>the List all members of an organization</returns>
-        public async Task<List<UserResourceMapping>> GetMembers(Organization organization)
+        public async Task<List<ResourceMember>> GetMembers(Organization organization)
         {
             Arguments.CheckNotNull(organization, "Organization is required");
 
@@ -125,15 +128,15 @@ namespace InfluxData.Platform.Client.Client
         /// </summary>
         /// <param name="organizationId">ID of organization to get members</param>
         /// <returns>the List all members of an organization</returns>
-        public async Task<List<UserResourceMapping>> GetMembers(string organizationId)
+        public async Task<List<ResourceMember>> GetMembers(string organizationId)
         {
             Arguments.CheckNonEmptyString(organizationId, "Organization ID");
 
             var request = await Get($"/api/v2/orgs/{organizationId}/members");
 
-            var response = Call<UserResourcesResponse>(request);
+            var response = Call<ResourceMembers>(request);
 
-            return response?.UserResourceMappings;
+            return response?.Users;
         }
 
         /// <summary>
@@ -142,7 +145,7 @@ namespace InfluxData.Platform.Client.Client
         /// <param name="member">the member of an organization</param>
         /// <param name="organization">the organization of a member</param>
         /// <returns>created mapping</returns>
-        public async Task<UserResourceMapping> AddMember(User member, Organization organization)
+        public async Task<ResourceMember> AddMember(User member, Organization organization)
         {
             Arguments.CheckNotNull(organization, "organization");
             Arguments.CheckNotNull(member, "member");
@@ -156,7 +159,7 @@ namespace InfluxData.Platform.Client.Client
         /// <param name="memberId">the ID of a member</param>
         /// <param name="organizationId">the ID of an organization</param>
         /// <returns>created mapping</returns>
-        public async Task<UserResourceMapping> AddMember(string memberId, string organizationId)
+        public async Task<ResourceMember> AddMember(string memberId, string organizationId)
         {
             Arguments.CheckNonEmptyString(organizationId, "Organization ID");
             Arguments.CheckNonEmptyString(memberId, "Member ID");
@@ -165,7 +168,7 @@ namespace InfluxData.Platform.Client.Client
 
             var request = await Post(user, $"/api/v2/orgs/{organizationId}/members");
 
-            return Call<UserResourceMapping>(request);
+            return Call<ResourceMember>(request);
         }
 
         /// <summary>
@@ -203,7 +206,7 @@ namespace InfluxData.Platform.Client.Client
         /// </summary>
         /// <param name="organization">organization of the owners</param>
         /// <returns>the List all owners of an organization</returns>
-        public async Task<List<UserResourceMapping>> GetOwners(Organization organization)
+        public async Task<List<ResourceMember>> GetOwners(Organization organization)
         {
             Arguments.CheckNotNull(organization, "Organization is required");
 
@@ -215,15 +218,15 @@ namespace InfluxData.Platform.Client.Client
         /// </summary>
         /// <param name="organizationId">ID of organization to get owners</param>
         /// <returns>the List all owners of an organization</returns>
-        public async Task<List<UserResourceMapping>> GetOwners(string organizationId)
+        public async Task<List<ResourceMember>> GetOwners(string organizationId)
         {
             Arguments.CheckNonEmptyString(organizationId, "Organization ID");
 
             var request = await Get($"/api/v2/orgs/{organizationId}/owners");
 
-            var response = Call<UserResourcesResponse>(request);
+            var response = Call<ResourceMembers>(request);
 
-            return response?.UserResourceMappings;
+            return response?.Users;
         }
 
         /// <summary>
@@ -232,7 +235,7 @@ namespace InfluxData.Platform.Client.Client
         /// <param name="owner">the owner of an organization</param>
         /// <param name="organization">the organization of a owner</param>
         /// <returns>created mapping</returns>
-        public async Task<UserResourceMapping> AddOwner(User owner, Organization organization)
+        public async Task<ResourceMember> AddOwner(User owner, Organization organization)
         {
             Arguments.CheckNotNull(organization, "organization");
             Arguments.CheckNotNull(owner, "owner");
@@ -246,7 +249,7 @@ namespace InfluxData.Platform.Client.Client
         /// <param name="ownerId">the ID of a owner</param>
         /// <param name="organizationId">the ID of an organization</param>
         /// <returns>created mapping</returns>
-        public async Task<UserResourceMapping> AddOwner(string ownerId, string organizationId)
+        public async Task<ResourceMember> AddOwner(string ownerId, string organizationId)
         {
             Arguments.CheckNonEmptyString(organizationId, "Organization ID");
             Arguments.CheckNonEmptyString(ownerId, "Owner ID");
@@ -255,7 +258,7 @@ namespace InfluxData.Platform.Client.Client
 
             var request = await Post(user, $"/api/v2/orgs/{organizationId}/owners");
 
-            return Call<UserResourceMapping>(request);
+            return Call<ResourceMember>(request);
         }
 
         /// <summary>

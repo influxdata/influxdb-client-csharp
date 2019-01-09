@@ -9,7 +9,7 @@ namespace InfluxData.Platform.Client.Domain
     /// </summary>
     public class Authorizations : AbstractHasLinks
     {
-        [JsonProperty("auths")]
+        [JsonProperty("authorizations")]
         public List<Authorization> Auths { get; set; } = new List<Authorization>();
 
         public override string ToString()

@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using InfluxData.Platform.Client.Client;
@@ -25,8 +24,7 @@ namespace Platform.Client.Tests
         [SetUp]
         public new async Task SetUp()
         {
-            _organization = (await PlatformClient.CreateOrganizationClient().FindOrganizations())
-                .First(organization => organization.Name.Equals("my-org"));
+            _organization = await FindMyOrg();
 
             _user = await PlatformClient.CreateUserClient().Me();
             
@@ -196,7 +194,8 @@ namespace Platform.Client.Tests
         {
             var count = (await _taskClient.FindTasks()).Count;
 
-            await _taskClient.CreateTaskCron(GenerateName("it task"), TaskFlux, "0 2 * * *", _user, _organization);
+            var task = await _taskClient.CreateTaskEvery(GenerateName("it task"), TaskFlux, "2h", _user.Id, _organization.Id);
+            Assert.IsNotNull(task);
 
             var tasks = await _taskClient.FindTasks();
 
@@ -265,8 +264,6 @@ namespace Platform.Client.Tests
         }
         
         [Test]
-        //TODO
-        [Ignore("wait to fix task path :tid => :id")]
         public async Task Member() {
 
             var task = await _taskClient.CreateTaskCron(GenerateName("it task"), TaskFlux, "0 2 * * *", _user, _organization);
@@ -276,20 +273,17 @@ namespace Platform.Client.Tests
 
             var user = await _userClient.CreateUser(GenerateName("Luke Health"));
 
-            var userResourceMapping = await _taskClient.AddMember(user, task);
-            Assert.IsNotNull(userResourceMapping);
-            Assert.AreEqual(userResourceMapping.ResourceId, task.Id);
-            Assert.AreEqual(userResourceMapping.ResourceType, ResourceType.TaskResourceType);
-            Assert.AreEqual(userResourceMapping.UserId, user.Id);
-            Assert.AreEqual(userResourceMapping.UserType, UserResourceMapping.MemberType.Member);
+            var resourceMember = await _taskClient.AddMember(user, task);
+            Assert.IsNotNull(resourceMember);
+            Assert.AreEqual(resourceMember.UserId, user.Id);
+            Assert.AreEqual(resourceMember.UserName, user.Name);
+            Assert.AreEqual(resourceMember.Role, ResourceMember.UserType.Member);
 
             members = await _taskClient.GetMembers(task);
             Assert.AreEqual(1, members.Count);
-            Assert.AreEqual(members[0].ResourceId, task.Id);
-            Assert.AreEqual(members[0].ResourceType, ResourceType.TaskResourceType);
             Assert.AreEqual(members[0].UserId, user.Id);
-            Assert.AreEqual(members[0].UserType, UserResourceMapping.MemberType.Member);
-
+            Assert.AreEqual(members[0].UserName, user.Name);
+            Assert.AreEqual(members[0].Role, ResourceMember.UserType.Member);
             await _taskClient.DeleteMember(user, task);
 
             members = await _taskClient.GetMembers(task);
@@ -297,8 +291,6 @@ namespace Platform.Client.Tests
         }
         
         [Test]
-        //TODO
-        [Ignore("wait to fix task path :tid => :id")]
         public async Task Owner() {
 
             var task = await _taskClient.CreateTaskCron(GenerateName("it task"), TaskFlux, "0 2 * * *", _user.Id, _organization.Id);
@@ -308,19 +300,17 @@ namespace Platform.Client.Tests
 
             var user = await _userClient.CreateUser(GenerateName("Luke Health"));
 
-            var userResourceMapping = await _taskClient.AddOwner(user, task);
-            Assert.IsNotNull(userResourceMapping);
-            Assert.AreEqual(userResourceMapping.ResourceId, task.Id);
-            Assert.AreEqual(userResourceMapping.ResourceType, ResourceType.TaskResourceType);
-            Assert.AreEqual(userResourceMapping.UserId, user.Id);
-            Assert.AreEqual(userResourceMapping.UserType, UserResourceMapping.MemberType.Owner);
+            var resourceMember = await _taskClient.AddOwner(user, task);
+            Assert.IsNotNull(resourceMember);
+            Assert.AreEqual(resourceMember.UserId, user.Id);
+            Assert.AreEqual(resourceMember.UserName, user.Name);
+            Assert.AreEqual(resourceMember.Role, ResourceMember.UserType.Owner);
 
             owners = await _taskClient.GetOwners(task);
             Assert.AreEqual(1, owners.Count);
-            Assert.AreEqual(owners[0].ResourceId, task.Id);
-            Assert.AreEqual(owners[0].ResourceType, ResourceType.TaskResourceType);
             Assert.AreEqual(owners[0].UserId, user.Id);
-            Assert.AreEqual(owners[0].UserType, UserResourceMapping.MemberType.Owner);
+            Assert.AreEqual(owners[0].UserName, user.Name);
+            Assert.AreEqual(owners[0].Role, ResourceMember.UserType.Owner);
 
             await _taskClient.DeleteOwner(user, task);
 
@@ -516,13 +506,13 @@ namespace Platform.Client.Tests
         
         private async Task<Authorization> AddAuthorization(Organization organization)
         {
-            var taskResource = Permission.TaskResource(organization.Id);
-
-            var createTask = new Permission {Resource = taskResource, Action = Permission.CreateAction};
-            var deleteTask = new Permission {Resource = taskResource, Action = Permission.DeleteAction};
+            var createTask = new Permission
+                {Id = organization.Id, Resource = PermissionResourceType.Task, Action = Permission.ReadAction};
+            var deleteTask = new Permission
+                {Id = organization.Id, Resource = PermissionResourceType.Task, Action = Permission.WriteAction};
 
             var authorization = await PlatformClient.CreateAuthorizationClient()
-                .CreateAuthorization(_user, new List<Permission> {createTask, deleteTask});
+                .CreateAuthorization(organization, new List<Permission> {createTask, deleteTask});
             
             return authorization;
         }

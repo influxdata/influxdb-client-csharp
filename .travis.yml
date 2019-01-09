@@ -17,7 +17,7 @@ jobs:
   include:
     - script:
         - ./Config/platform-restart.sh
-        - dotnet tool install --tool-path="./coverlet/" coverlet.console
+        - dotnet tool install --version 1.2.0 --tool-path="./coverlet/" coverlet.console
         - dotnet restore
         - dotnet build
         - dotnet test Flux.Client.Tests

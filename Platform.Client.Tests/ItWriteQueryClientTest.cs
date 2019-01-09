@@ -24,23 +24,23 @@ namespace Platform.Client.Tests
         public new async Task SetUp()
         {
             var retention = new RetentionRule {Type = "expire", EverySeconds = 3600L};
-            
+
             _bucket = await PlatformClient.CreateBucketClient()
                 .CreateBucket(GenerateName("h2o"), retention, "my-org");
 
             //
             // Add Permissions to read and write to the Bucket
             //
-            var bucketResource = Permission.BucketResource(_bucket.Id);
-
-            var readBucket = new Permission {Resource = bucketResource, Action = Permission.ReadAction};
-            var writeBucket = new Permission {Resource = bucketResource, Action = Permission.WriteAction};
+            var readBucket = new Permission
+                {Id = _bucket.Id, Resource = PermissionResourceType.Bucket, Action = Permission.ReadAction};
+            var writeBucket = new Permission
+                {Id = _bucket.Id, Resource = PermissionResourceType.Bucket, Action = Permission.WriteAction};
 
             var loggedUser = await PlatformClient.CreateUserClient().Me();
             Assert.IsNotNull(loggedUser);
 
-            var authorization =  await PlatformClient.CreateAuthorizationClient()
-                .CreateAuthorization(loggedUser, new List<Permission> {readBucket, writeBucket});
+            var authorization = await PlatformClient.CreateAuthorizationClient()
+                .CreateAuthorization(await FindMyOrg(), new List<Permission> {readBucket, writeBucket});
 
             var token = authorization.Token;
 
@@ -48,7 +48,7 @@ namespace Platform.Client.Tests
             PlatformClient = PlatformClientFactory.Create(PlatformUrl, token.ToCharArray());
             _queryClient = PlatformClient.CreateQueryClient();
         }
-        
+
         [TearDown]
         protected new void After()
         {
@@ -64,25 +64,25 @@ namespace Platform.Client.Tests
             const string record2 = "h2o_feet,location=coyote_creek level\\ water_level=2.0 2";
 
             _writeClient = PlatformClient.CreateWriteClient();
-            _writeClient.WriteRecords(bucketName, "my-org", TimeUnit.Nanos, new List<string>{record1, record2});
+            _writeClient.WriteRecords(bucketName, "my-org", TimeUnit.Nanos, new List<string> {record1, record2});
             _writeClient.Flush();
-            
+
             var query = await _queryClient.Query("from(bucket:\"" + bucketName + "\") |> range(start: 0)", "my-org");
 
             Assert.AreEqual(1, query.Count);
-            
+
             var records = query[0].Records;
             Assert.AreEqual(2, records.Count);
-            
+
             Assert.AreEqual("h2o_feet", records[0].GetMeasurement());
             Assert.AreEqual(1, records[0].GetValue());
             Assert.AreEqual("level water_level", records[0].GetField());
-            
+
             Assert.AreEqual("h2o_feet", records[1].GetMeasurement());
             Assert.AreEqual(2, records[1].GetValue());
             Assert.AreEqual("level water_level", records[1].GetField());
         }
-        
+
         [Test]
         public async Task WriteRecordsParams()
         {
@@ -94,26 +94,26 @@ namespace Platform.Client.Tests
             _writeClient = PlatformClient.CreateWriteClient();
             _writeClient.WriteRecords(bucketName, "my-org", TimeUnit.Nanos, record1, record2);
             _writeClient.Flush();
-            
+
             var query = await _queryClient.Query("from(bucket:\"" + bucketName + "\") |> range(start: 0)", "my-org");
 
             Assert.AreEqual(1, query.Count);
-            
+
             var records = query[0].Records;
             Assert.AreEqual(2, records.Count);
-            
+
             Assert.AreEqual("h2o_feet", records[0].GetMeasurement());
             Assert.AreEqual(1, records[0].GetValue());
             Assert.AreEqual("level water_level", records[0].GetField());
-            
+
             Assert.AreEqual("h2o_feet", records[1].GetMeasurement());
             Assert.AreEqual(2, records[1].GetValue());
             Assert.AreEqual("level water_level", records[1].GetField());
         }
-        
-        [Test]
-        public async Task WritePoints() {
 
+        [Test]
+        public async Task WritePoints()
+        {
             var bucketName = _bucket.Name;
 
             var time = DateTime.UtcNow;
@@ -123,12 +123,12 @@ namespace Platform.Client.Tests
                 .Tag("location", "west")
                 .Field("water_level", 1)
                 .Timestamp(time, TimeUnit.Seconds);
-            
+
             var point2 = Point
                 .Measurement("h2o_feet").Tag("location", "west")
                 .Field("water_level", 2)
                 .Timestamp(time.AddSeconds(-10), TimeUnit.Seconds);
-            
+
             _writeClient = PlatformClient.CreateWriteClient();
             _writeClient.WritePoints(bucketName, "my-org", point1, point2);
             _writeClient.Flush();
@@ -137,10 +137,10 @@ namespace Platform.Client.Tests
             var query = await _queryClient.Query("from(bucket:\"" + bucketName + "\") |> range(start: 0)", "my-org");
 
             Assert.AreEqual(1, query.Count);
-            
+
             var records = query[0].Records;
             Assert.AreEqual(2, records.Count);
-            
+
             Assert.AreEqual("h2o_feet", records[0].GetMeasurement());
             Assert.AreEqual(2, records[0].GetValue());
             Assert.AreEqual("water_level", records[0].GetField());
@@ -149,7 +149,8 @@ namespace Platform.Client.Tests
             Assert.AreEqual(1, records[1].GetValue());
             Assert.AreEqual("water_level", records[1].GetField());
 
-            Assert.AreEqual(time.AddTicks(-(time.Ticks % TimeSpan.TicksPerSecond)).Add(-TimeSpan.FromSeconds(10)), records[0].GetTimeInDateTime());
+            Assert.AreEqual(time.AddTicks(-(time.Ticks % TimeSpan.TicksPerSecond)).Add(-TimeSpan.FromSeconds(10)),
+                records[0].GetTimeInDateTime());
             Assert.AreEqual(time.AddTicks(-(time.Ticks % TimeSpan.TicksPerSecond)), records[1].GetTimeInDateTime());
         }
 
@@ -157,7 +158,7 @@ namespace Platform.Client.Tests
         public async Task WriteMeasurements()
         {
             _writeClient = PlatformClient.CreateWriteClient();
-            
+
             var bucketName = _bucket.Name;
 
             var time = DateTime.UtcNow;
@@ -170,58 +171,62 @@ namespace Platform.Client.Tests
             {
                 Location = "coyote_creek", Level = 1.927, Time = time
             };
-            
+
             _writeClient.WriteMeasurements(bucketName, "my-org", TimeUnit.Seconds, measurement1, measurement2);
             _writeClient.Flush();
-            
-            var measurements = await _queryClient.Query<H20Measurement>("from(bucket:\"" + bucketName + "\") |> range(start: 0) |> rename(columns:{_value: \"level\"})", "my-org");
-            
+
+            var measurements = await _queryClient.Query<H20Measurement>(
+                "from(bucket:\"" + bucketName + "\") |> range(start: 0) |> rename(columns:{_value: \"level\"})",
+                "my-org");
+
             Assert.AreEqual(2, measurements.Count);
-            
+
             Assert.AreEqual(2.927, measurements[0].Level);
             Assert.AreEqual("coyote_creek", measurements[0].Location);
-            Assert.AreEqual(time.AddTicks(-(time.Ticks % TimeSpan.TicksPerSecond)).Add(-TimeSpan.FromSeconds(30)), measurements[0].Time);
-            
+            Assert.AreEqual(time.AddTicks(-(time.Ticks % TimeSpan.TicksPerSecond)).Add(-TimeSpan.FromSeconds(30)),
+                measurements[0].Time);
+
             Assert.AreEqual(1.927, measurements[1].Level);
             Assert.AreEqual("coyote_creek", measurements[1].Location);
             Assert.AreEqual(time.AddTicks(-(time.Ticks % TimeSpan.TicksPerSecond)), measurements[1].Time);
         }
-        
-        [Test]
-        public async Task Flush() {
 
+        [Test]
+        public async Task Flush()
+        {
             var bucketName = _bucket.Name;
 
             var writeOptions = WriteOptions.CreateNew().BatchSize(10).FlushInterval(100_000).Build();
-            
+
             _writeClient = PlatformClient.CreateWriteClient(writeOptions);
 
             var record = "h2o_feet,location=coyote_creek level\\ water_level=1.0 1";
 
             _writeClient.WriteRecord(bucketName, "my-org", TimeUnit.Nanos, record);
             _writeClient.Flush();
-            
-            var query = await _queryClient.Query("from(bucket:\"" + bucketName + "\") |> range(start: 0) |> last()", "my-org");
+
+            var query = await _queryClient.Query("from(bucket:\"" + bucketName + "\") |> range(start: 0) |> last()",
+                "my-org");
 
             Assert.AreEqual(1, query.Count);
-            
+
             var records = query[0].Records;
             Assert.AreEqual(1, records.Count);
             Assert.AreEqual("h2o_feet", records[0].GetMeasurement());
             Assert.AreEqual(1, records[0].GetValue());
             Assert.AreEqual("level water_level", records[0].GetField());
-            
+
             var instant = Instant.Add(Instant.FromUnixTimeMilliseconds(0), Duration.FromNanoseconds(1L));
             Assert.AreEqual(instant, records[0].GetTime());
         }
-        
-        [Test]
-        public async Task FlushByTime() {
 
+        [Test]
+        public async Task FlushByTime()
+        {
             var bucketName = _bucket.Name;
 
             var writeOptions = WriteOptions.CreateNew().BatchSize(10).FlushInterval(500).Build();
-            
+
             _writeClient = PlatformClient.CreateWriteClient(writeOptions);
 
             const string record1 = "h2o_feet,location=coyote_creek level\\ water_level=1.0 1";
@@ -238,23 +243,23 @@ namespace Platform.Client.Tests
 
             var query = await _queryClient.Query("from(bucket:\"" + bucketName + "\") |> range(start: 0)", "my-org");
             Assert.AreEqual(0, query.Count);
-            
+
             Thread.Sleep(550);
-            
+
             query = await _queryClient.Query("from(bucket:\"" + bucketName + "\") |> range(start: 0)", "my-org");
             Assert.AreEqual(1, query.Count);
-            
+
             var records = query[0].Records;
             Assert.AreEqual(5, records.Count);
         }
-        
-        [Test]
-        public async Task FlushByCount() {
 
+        [Test]
+        public async Task FlushByCount()
+        {
             var bucketName = _bucket.Name;
 
             var writeOptions = WriteOptions.CreateNew().BatchSize(6).FlushInterval(500_000).Build();
-            
+
             _writeClient = PlatformClient.CreateWriteClient(writeOptions);
 
             const string record1 = "h2o_feet,location=coyote_creek level\\ water_level=1.0 1";
@@ -272,14 +277,14 @@ namespace Platform.Client.Tests
 
             var query = await _queryClient.Query("from(bucket:\"" + bucketName + "\") |> range(start: 0)", "my-org");
             Assert.AreEqual(0, query.Count);
-            
+
             _writeClient.WriteRecord(bucketName, "my-org", TimeUnit.Nanos, record6);
 
             Thread.Sleep(10);
-            
+
             query = await _queryClient.Query("from(bucket:\"" + bucketName + "\") |> range(start: 0)", "my-org");
             Assert.AreEqual(1, query.Count);
-            
+
             var records = query[0].Records;
             Assert.AreEqual(6, records.Count);
         }
@@ -290,19 +295,21 @@ namespace Platform.Client.Tests
             var bucketName = _bucket.Name;
 
             var writeOptions = WriteOptions.CreateNew().BatchSize(1).JitterInterval(5_000).Build();
-            
+
             _writeClient = PlatformClient.CreateWriteClient(writeOptions);
 
             var record = "h2o_feet,location=coyote_creek level\\ water_level=1.0 1";
 
             _writeClient.WriteRecord(bucketName, "my-org", TimeUnit.Nanos, record);
 
-            var query = await _queryClient.Query("from(bucket:\"" + bucketName + "\") |> range(start: 0) |> last()", "my-org");
+            var query = await _queryClient.Query("from(bucket:\"" + bucketName + "\") |> range(start: 0) |> last()",
+                "my-org");
             Assert.AreEqual(0, query.Count);
-            
+
             Thread.Sleep(5_000);
-            
-            query = await _queryClient.Query("from(bucket:\"" + bucketName + "\") |> range(start: 0) |> last()", "my-org");
+
+            query = await _queryClient.Query("from(bucket:\"" + bucketName + "\") |> range(start: 0) |> last()",
+                "my-org");
 
             Assert.AreEqual(1, query.Count);
         }
@@ -311,17 +318,18 @@ namespace Platform.Client.Tests
         public void ListenWriteSuccessEvent()
         {
             var bucketName = _bucket.Name;
-            
+
             WriteSuccessEvent success = null;
-            
+
             _writeClient = PlatformClient.CreateWriteClient();
             _writeClient.EventHandler += (sender, args) => { success = args as WriteSuccessEvent; };
-            
-            _writeClient.WriteRecord(bucketName, "my-org", TimeUnit.Nanos, "h2o_feet,location=coyote_creek level\\ water_level=1.0 1");
+
+            _writeClient.WriteRecord(bucketName, "my-org", TimeUnit.Nanos,
+                "h2o_feet,location=coyote_creek level\\ water_level=1.0 1");
             _writeClient.Flush();
-            
+
             Thread.Sleep(100);
-            
+
             Assert.IsNotNull(success);
             Assert.AreEqual(success.Organization, "my-org");
             Assert.AreEqual(success.Bucket, bucketName);
@@ -333,32 +341,31 @@ namespace Platform.Client.Tests
         public void ListenWriteErrorEvent()
         {
             var bucketName = _bucket.Name;
-            
+
             WriteErrorEvent error = null;
-            
+
             _writeClient = PlatformClient.CreateWriteClient();
             _writeClient.EventHandler += (sender, args) => { error = args as WriteErrorEvent; };
-            
-            _writeClient.WriteRecord(bucketName, "my-org", TimeUnit.Nanos, "h2o_feet,location=coyote_creek level\\ water_level=1.0 123456.789");
+
+            _writeClient.WriteRecord(bucketName, "my-org", TimeUnit.Nanos,
+                "h2o_feet,location=coyote_creek level\\ water_level=1.0 123456.789");
             _writeClient.Flush();
-            
+
             Thread.Sleep(100);
-            
+
             Assert.IsNotNull(error);
-            Assert.AreEqual(error.Exception.Message, "unable to parse 'h2o_feet,location=coyote_creek level\\ water_level=1.0 123456.789': bad timestamp");
+            Assert.AreEqual(error.Exception.Message,
+                "unable to parse 'h2o_feet,location=coyote_creek level\\ water_level=1.0 123456.789': bad timestamp");
         }
-        
+
         [Measurement("h2o")]
         private class H20Measurement
         {
-            [Column("location", IsTag = true)] 
-            public string Location { get; set; }
+            [Column("location", IsTag = true)] public string Location { get; set; }
 
-            [Column("level")]
-            public Double Level { get; set; }
- 
-            [Column(IsTimestamp = true)]
-            public DateTime Time { get; set; }
+            [Column("level")] public Double Level { get; set; }
+
+            [Column(IsTimestamp = true)] public DateTime Time { get; set; }
         }
     }
 }

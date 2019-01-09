@@ -65,12 +65,22 @@ namespace Platform.Common.Platform.Rest
 
             return Client.DoRequest(request).ConfigureAwait(false);
         }
+
+        protected T Call<T>(RequestResult result, int? codeError)
+        {
+            return Call<T>(result, null, codeError);
+        }
         
         protected T Call<T>(RequestResult result, string nullError = null)
         {
+            return Call<T>(result, nullError, null);
+        }
+
+        protected T Call<T>(RequestResult result, string nullError, int? codeError)
+        {
             Arguments.CheckNotNull(result, "RequestResult");
 
-            var nullResponse = RaiseForInfluxError(result, nullError);
+            var nullResponse = RaiseForInfluxError(result, nullError, codeError);
             if (nullResponse)
             {
                 return default(T);
@@ -137,7 +147,7 @@ namespace Platform.Common.Platform.Rest
             }
         }
 
-        protected static bool RaiseForInfluxError(RequestResult resultRequest, string nullError = null)
+        protected static bool RaiseForInfluxError(RequestResult resultRequest, string nullError = null, int? codeError = null)
         {
             var statusCode = resultRequest.StatusCode;
 
@@ -151,6 +161,13 @@ namespace Platform.Common.Platform.Rest
             if (nullError != null && errorMessage != null && errorMessage.Equals(nullError))
             {
                 Trace.WriteLine($"Error is considered as null response: {errorMessage}");
+                
+                return true;
+            }
+
+            if (codeError != null && codeError.Value.Equals(statusCode))
+            {
+                Trace.WriteLine($"Error is considered as null response: {errorMessage}, {statusCode}");
                 
                 return true;
             }

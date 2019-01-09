@@ -31,13 +31,15 @@ namespace Platform.Client.Tests
 
             var links = organization.Links;
             
-            Assert.That(links.Count == 6);
+            Assert.That(links.Count == 8);
             Assert.That(links.ContainsKey("buckets"));
             Assert.That(links.ContainsKey("dashboards"));
             Assert.That(links.ContainsKey("log"));
             Assert.That(links.ContainsKey("members"));
             Assert.That(links.ContainsKey("self"));
             Assert.That(links.ContainsKey("tasks"));
+            Assert.That(links.ContainsKey("labels"));
+            Assert.That(links.ContainsKey("secrets"));
         }
         
         [Test]
@@ -55,13 +57,15 @@ namespace Platform.Client.Tests
             
             var links = organization.Links;
             
-            Assert.That(links.Count == 6);
+            Assert.That(links.Count == 8);
             Assert.That(links.ContainsKey("buckets"));
             Assert.That(links.ContainsKey("dashboards"));
             Assert.That(links.ContainsKey("log"));
             Assert.That(links.ContainsKey("members"));
             Assert.That(links.ContainsKey("self"));
             Assert.That(links.ContainsKey("tasks"));
+            Assert.That(links.ContainsKey("labels"));
+            Assert.That(links.ContainsKey("secrets"));
         }
         
         [Test]
@@ -113,13 +117,15 @@ namespace Platform.Client.Tests
             
             var links = updatedOrganization.Links;
             
-            Assert.That(links.Count == 6);
+            Assert.That(links.Count == 8);
             Assert.AreEqual("/api/v2/buckets?org=Master Pb", links["buckets"]);
             Assert.AreEqual("/api/v2/dashboards?org=Master Pb", links["dashboards"]);
             Assert.AreEqual("/api/v2/orgs/" + updatedOrganization.Id, links["self"]);
             Assert.AreEqual("/api/v2/tasks?org=Master Pb", links["tasks"]);
             Assert.AreEqual("/api/v2/orgs/" + updatedOrganization.Id + "/members", links["members"]);
             Assert.AreEqual("/api/v2/orgs/" + updatedOrganization.Id + "/log", links["log"]);
+            Assert.AreEqual("/api/v2/orgs/" + updatedOrganization.Id + "/labels", links["labels"]);
+            Assert.AreEqual("/api/v2/orgs/" + updatedOrganization.Id + "/secrets", links["secrets"]);
         }
         
         [Test]
@@ -132,19 +138,17 @@ namespace Platform.Client.Tests
 
             var user = await _userClient.CreateUser(GenerateName("Luke Health"));
 
-            var userResourceMapping = await _organizationClient.AddMember(user, organization);
-            Assert.IsNotNull(userResourceMapping);
-            Assert.AreEqual(userResourceMapping.ResourceId, organization.Id);
-            Assert.AreEqual(userResourceMapping.ResourceType, ResourceType.OrgResourceType);
-            Assert.AreEqual(userResourceMapping.UserId, user.Id);
-            Assert.AreEqual(userResourceMapping.UserType, UserResourceMapping.MemberType.Member);
+            var resourceMember = await _organizationClient.AddMember(user, organization);
+            Assert.IsNotNull(resourceMember);
+            Assert.AreEqual(resourceMember.UserId, user.Id);
+            Assert.AreEqual(resourceMember.UserName, user.Name);
+            Assert.AreEqual(resourceMember.Role, ResourceMember.UserType.Member);
 
             members = await _organizationClient.GetMembers(organization);
             Assert.AreEqual(1, members.Count);
-            Assert.AreEqual(members[0].ResourceId, organization.Id);
-            Assert.AreEqual(members[0].ResourceType, ResourceType.OrgResourceType);
             Assert.AreEqual(members[0].UserId, user.Id);
-            Assert.AreEqual(members[0].UserType, UserResourceMapping.MemberType.Member);
+            Assert.AreEqual(members[0].UserName, user.Name);
+            Assert.AreEqual(members[0].Role, ResourceMember.UserType.Member);
 
             await _organizationClient.DeleteMember(user, organization);
 
@@ -162,19 +166,17 @@ namespace Platform.Client.Tests
 
             var user = await _userClient.CreateUser(GenerateName("Luke Health"));
 
-            var userResourceMapping = await _organizationClient.AddOwner(user, organization);
-            Assert.IsNotNull(userResourceMapping);
-            Assert.AreEqual(userResourceMapping.ResourceId, organization.Id);
-            Assert.AreEqual(userResourceMapping.ResourceType, ResourceType.OrgResourceType);
-            Assert.AreEqual(userResourceMapping.UserId, user.Id);
-            Assert.AreEqual(userResourceMapping.UserType, UserResourceMapping.MemberType.Owner);
+            var resourceMember = await _organizationClient.AddOwner(user, organization);
+            Assert.IsNotNull(resourceMember);
+            Assert.AreEqual(resourceMember.UserId, user.Id);
+            Assert.AreEqual(resourceMember.UserName, user.Name);
+            Assert.AreEqual(resourceMember.Role, ResourceMember.UserType.Owner);
 
             owners = await _organizationClient.GetOwners(organization);
             Assert.AreEqual(1, owners.Count);
-            Assert.AreEqual(owners[0].ResourceId, organization.Id);
-            Assert.AreEqual(owners[0].ResourceType, ResourceType.OrgResourceType);
             Assert.AreEqual(owners[0].UserId, user.Id);
-            Assert.AreEqual(owners[0].UserType, UserResourceMapping.MemberType.Owner);
+            Assert.AreEqual(owners[0].UserName, user.Name);
+            Assert.AreEqual(owners[0].Role, ResourceMember.UserType.Owner);
 
             await _organizationClient.DeleteOwner(user, organization);
 

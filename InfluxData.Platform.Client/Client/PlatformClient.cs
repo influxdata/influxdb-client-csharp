@@ -10,7 +10,7 @@ using Platform.Common.Platform.Rest;
 
 namespace InfluxData.Platform.Client.Client
 {
-    public class PlatformClient : AbstractClient, IDisposable
+    public class PlatformClient : AbstractPlatformClient, IDisposable
     {
         private readonly AuthenticateDelegatingHandler _authenticateDelegatingHandler;
         private readonly LoggingHandler _loggingHandler;
@@ -140,16 +140,7 @@ namespace InfluxData.Platform.Client.Client
         /// <returns>health of an instance</returns>
         public async Task<Health> Health()
         {
-            try
-            {
-                var request = await Get("/health");
-
-                return Call<Health>(request);
-            }
-            catch (Exception e)
-            {
-                return new Health {Status = "error", Message = e.Message};
-            }
+            return await GetHealth("/health");
         }
 
         /// <summary>

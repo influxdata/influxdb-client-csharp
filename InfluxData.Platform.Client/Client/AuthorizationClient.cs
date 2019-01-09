@@ -16,29 +16,29 @@ namespace InfluxData.Platform.Client.Client
         /// <summary>
         /// Create an authorization with defined permissions.
         /// </summary>
-        /// <param name="user">the owner of the authorization</param>
+        /// <param name="organization">the owner of the authorization</param>
         /// <param name="permissions">the permissions for the authorization</param>
         /// <returns>the created authorization</returns>
-        public async Task<Authorization> CreateAuthorization(User user, List<Permission> permissions)
+        public async Task<Authorization> CreateAuthorization(Organization organization, List<Permission> permissions)
         {
-            Arguments.CheckNotNull(user, "user");
+            Arguments.CheckNotNull(organization, "organization");
             Arguments.CheckNotNull(permissions, "permissions");
             
-            return await CreateAuthorization(user.Id, permissions);
+            return await CreateAuthorization(organization.Id, permissions);
         }
 
         /// <summary>
         /// Create an authorization with defined permissions.
         /// </summary>
-        /// <param name="userId">the owner id of the authorization</param>
+        /// <param name="organizationId">the owner id of the authorization</param>
         /// <param name="permissions">the permissions for the authorization</param>
         /// <returns>the created authorization</returns>
-        public async Task<Authorization> CreateAuthorization(string userId, List<Permission> permissions)
+        public async Task<Authorization> CreateAuthorization(string organizationId, List<Permission> permissions)
         {
-            Arguments.CheckNonEmptyString(userId, "userId");
+            Arguments.CheckNonEmptyString(organizationId, "organizationId");
             Arguments.CheckNotNull(permissions, "permissions");
 
-            var authorization = new Authorization {UserId = userId, Permissions = permissions};
+            var authorization = new Authorization {OrgId = organizationId, Permissions = permissions};
 
             return await CreateAuthorization(authorization);
         }
@@ -109,7 +109,7 @@ namespace InfluxData.Platform.Client.Client
 
             var request = await Get($"/api/v2/authorizations/{authorizationId}");
 
-            return Call<Authorization>(request, "authorization not found");
+            return Call<Authorization>(request, 404);
         }
 
         /// <summary>

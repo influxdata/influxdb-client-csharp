@@ -16,7 +16,7 @@ namespace Platform.Client.Tests
 
             Assert.IsNotNull(health);
             Assert.IsTrue(health.IsHealthy());
-            Assert.AreEqual("howdy y'all", health.Message);
+            Assert.AreEqual("ready for queries and writes", health.Message);
         }
 
         [Test]
