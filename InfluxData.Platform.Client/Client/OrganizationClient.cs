@@ -9,9 +9,6 @@ namespace InfluxData.Platform.Client.Client
 {
     public class OrganizationClient : AbstractClient
     {
-    
-        //TODO secrets
-    
         protected internal OrganizationClient(DefaultClientIo client) : base(client)
         {
         }
@@ -23,7 +20,7 @@ namespace InfluxData.Platform.Client.Client
         /// <returns>Created organization</returns>
         public async Task<Organization> CreateOrganization(string name)
         {
-            Arguments.CheckNonEmptyString(name, "Organization name");
+            Arguments.CheckNonEmptyString(name, nameof(name));
 
             var organization = new Organization {Name = name};
 
@@ -37,7 +34,7 @@ namespace InfluxData.Platform.Client.Client
         /// <returns>created organization</returns>
         public async Task<Organization> CreateOrganization(Organization organization)
         {
-            Arguments.CheckNotNull(organization, "Organization");
+            Arguments.CheckNotNull(organization, nameof(organization));
 
             var request = await Post(organization, "/api/v2/orgs");
 
@@ -51,7 +48,7 @@ namespace InfluxData.Platform.Client.Client
         /// <returns>updated organization</returns>
         public async Task<Organization> UpdateOrganization(Organization organization)
         {
-            Arguments.CheckNotNull(organization, "Organization");
+            Arguments.CheckNotNull(organization, nameof(organization));
 
             var request = await Patch(organization, $"/api/v2/orgs/{organization.Id}");
 
@@ -65,7 +62,7 @@ namespace InfluxData.Platform.Client.Client
         /// <returns></returns>
         public async Task DeleteOrganization(string organizationId)
         {
-            Arguments.CheckNotNull(organizationId, "Organization ID");
+            Arguments.CheckNotNull(organizationId, nameof(organizationId));
 
             var request = await Delete($"/api/v2/orgs/{organizationId}");
 
@@ -79,7 +76,7 @@ namespace InfluxData.Platform.Client.Client
         /// <returns></returns>
         public async Task DeleteOrganization(Organization organization)
         {
-            Arguments.CheckNotNull(organization, "Organization is required");
+            Arguments.CheckNotNull(organization, nameof(organization));
 
             await DeleteOrganization(organization.Id);
         }
@@ -91,7 +88,7 @@ namespace InfluxData.Platform.Client.Client
         /// <returns>organization details</returns>
         public async Task<Organization> FindOrganizationById(string organizationId)
         {
-            Arguments.CheckNonEmptyString(organizationId, "Organization ID");
+            Arguments.CheckNonEmptyString(organizationId, nameof(organizationId));
 
             var request = await Get($"/api/v2/orgs/{organizationId}");
 
@@ -112,13 +109,113 @@ namespace InfluxData.Platform.Client.Client
         }
 
         /// <summary>
+        /// List of secret keys the are stored for Organization. For example:
+        ///
+        /// <code>
+        ///     github_api_key,
+        ///     some_other_key,
+        ///     a_secret_key
+        /// </code>
+        /// </summary>
+        /// <param name="organization">the organization for get secrets</param>
+        /// <returns>the secret keys</returns>
+        public async Task<List<string>> GetSecrets(Organization organization)
+        {
+            Arguments.CheckNotNull(organization, nameof(organization));
+            
+            return await GetSecrets(organization.Id);
+        }
+        
+        /// <summary>
+        /// List of secret keys the are stored for Organization. For example:
+        ///
+        /// <code>
+        ///     github_api_key,
+        ///     some_other_key,
+        ///     a_secret_key
+        /// </code>
+        /// </summary>
+        /// <param name="organizationId">the organization for get secrets</param>
+        /// <returns>the secret keys</returns>
+        public async Task<List<string>> GetSecrets(string organizationId)
+        {
+            Arguments.CheckNonEmptyString(organizationId, nameof(organizationId));
+
+            var request = await Get($"/api/v2/orgs/{organizationId}/secrets");
+
+            var response = Call<Secrets>(request);
+
+            return response?.SecretList;
+        }
+
+        /// <summary>
+        /// Patches all provided secrets and updates any previous values.
+        /// </summary>
+        /// <param name="secrets">secrets to update/add</param>
+        /// <param name="organization">the organization for put secrets</param>
+        /// <returns>async task</returns>
+        public async Task PutSecrets(Dictionary<string, string> secrets, Organization organization)
+        {
+            Arguments.CheckNotNull(secrets, nameof(secrets));
+            Arguments.CheckNotNull(organization, nameof(organization));
+            
+            await PutSecrets(secrets, organization.Id);
+        }
+        
+        /// <summary>
+        /// Patches all provided secrets and updates any previous values.
+        /// </summary>
+        /// <param name="secrets">secrets to update/add</param>
+        /// <param name="organizationId">the organization for put secrets</param>
+        /// <returns>async task</returns>
+        public async Task PutSecrets(Dictionary<string, string> secrets, string organizationId)
+        {
+            Arguments.CheckNotNull(secrets, nameof(secrets));
+            Arguments.CheckNonEmptyString(organizationId, nameof(organizationId));
+
+            var request = await Patch(secrets, $"/api/v2/orgs/{organizationId}/secrets");
+            
+            RaiseForInfluxError(request);
+        }
+
+        /// <summary>
+        /// Delete provided secrets.
+        /// </summary>
+        /// <param name="secrets">secrets to delete</param>
+        /// <param name="organization">the organization for delete secrets</param>
+        /// <returns>async task</returns>
+        public async Task DeleteSecrets(List<string> secrets, Organization organization)
+        {
+            Arguments.CheckNotNull(secrets, nameof(secrets));
+            Arguments.CheckNotNull(organization, nameof(organization));
+
+            await DeleteSecrets(secrets, organization.Id);
+        }
+
+        /// <summary>
+        /// Delete provided secrets.
+        /// </summary>
+        /// <param name="secrets">secrets to delete</param>
+        /// <param name="organizationId">the organization for delete secrets</param>
+        /// <returns>async task</returns>
+        public async Task DeleteSecrets(List<string> secrets, string organizationId)
+        {
+            Arguments.CheckNotNull(secrets, nameof(secrets));
+            Arguments.CheckNonEmptyString(organizationId, nameof(organizationId));
+
+            var request = await Post(secrets, $"/api/v2/orgs/{organizationId}/secrets/delete");
+            
+            RaiseForInfluxError(request);
+        }
+
+        /// <summary>
         /// List all members of an organization.
         /// </summary>
         /// <param name="organization">organization of the members</param>
         /// <returns>the List all members of an organization</returns>
         public async Task<List<ResourceMember>> GetMembers(Organization organization)
         {
-            Arguments.CheckNotNull(organization, "Organization is required");
+            Arguments.CheckNotNull(organization, nameof(organization));
 
             return await GetMembers(organization.Id);
         }
@@ -130,7 +227,7 @@ namespace InfluxData.Platform.Client.Client
         /// <returns>the List all members of an organization</returns>
         public async Task<List<ResourceMember>> GetMembers(string organizationId)
         {
-            Arguments.CheckNonEmptyString(organizationId, "Organization ID");
+            Arguments.CheckNonEmptyString(organizationId, nameof(organizationId));
 
             var request = await Get($"/api/v2/orgs/{organizationId}/members");
 
@@ -147,8 +244,8 @@ namespace InfluxData.Platform.Client.Client
         /// <returns>created mapping</returns>
         public async Task<ResourceMember> AddMember(User member, Organization organization)
         {
-            Arguments.CheckNotNull(organization, "organization");
-            Arguments.CheckNotNull(member, "member");
+            Arguments.CheckNotNull(organization, nameof(organization));
+            Arguments.CheckNotNull(member, nameof(member));
 
             return await AddMember(member.Id, organization.Id);
         }
@@ -161,8 +258,8 @@ namespace InfluxData.Platform.Client.Client
         /// <returns>created mapping</returns>
         public async Task<ResourceMember> AddMember(string memberId, string organizationId)
         {
-            Arguments.CheckNonEmptyString(organizationId, "Organization ID");
-            Arguments.CheckNonEmptyString(memberId, "Member ID");
+            Arguments.CheckNonEmptyString(organizationId, nameof(organizationId));
+            Arguments.CheckNonEmptyString(memberId, nameof(memberId));
 
             var user = new User {Id = memberId};
 
@@ -179,8 +276,8 @@ namespace InfluxData.Platform.Client.Client
         /// <returns>async task</returns>
         public async Task DeleteMember(User member, Organization organization)
         {
-            Arguments.CheckNotNull(organization, "organization");
-            Arguments.CheckNotNull(member, "member");
+            Arguments.CheckNotNull(organization, nameof(organization));
+            Arguments.CheckNotNull(member, nameof(member));
 
             await DeleteMember(member.Id, organization.Id);
         }
@@ -193,8 +290,8 @@ namespace InfluxData.Platform.Client.Client
         /// <returns>async task</returns>
         public async Task DeleteMember(string memberId, string organizationId)
         {
-            Arguments.CheckNonEmptyString(organizationId, "Organization ID");
-            Arguments.CheckNonEmptyString(memberId, "Member ID");
+            Arguments.CheckNonEmptyString(organizationId, nameof(organizationId));
+            Arguments.CheckNonEmptyString(memberId, nameof(memberId));
             
             var request = await Delete($"/api/v2/orgs/{organizationId}/members/{memberId}");
 
@@ -208,7 +305,7 @@ namespace InfluxData.Platform.Client.Client
         /// <returns>the List all owners of an organization</returns>
         public async Task<List<ResourceMember>> GetOwners(Organization organization)
         {
-            Arguments.CheckNotNull(organization, "Organization is required");
+            Arguments.CheckNotNull(organization, nameof(organization));
 
             return await GetOwners(organization.Id);
         }
@@ -220,7 +317,7 @@ namespace InfluxData.Platform.Client.Client
         /// <returns>the List all owners of an organization</returns>
         public async Task<List<ResourceMember>> GetOwners(string organizationId)
         {
-            Arguments.CheckNonEmptyString(organizationId, "Organization ID");
+            Arguments.CheckNonEmptyString(organizationId, nameof(organizationId));
 
             var request = await Get($"/api/v2/orgs/{organizationId}/owners");
 
@@ -237,8 +334,8 @@ namespace InfluxData.Platform.Client.Client
         /// <returns>created mapping</returns>
         public async Task<ResourceMember> AddOwner(User owner, Organization organization)
         {
-            Arguments.CheckNotNull(organization, "organization");
-            Arguments.CheckNotNull(owner, "owner");
+            Arguments.CheckNotNull(organization, nameof(organization));
+            Arguments.CheckNotNull(owner, nameof(owner));
 
             return await AddOwner(owner.Id, organization.Id);
         }
@@ -251,8 +348,8 @@ namespace InfluxData.Platform.Client.Client
         /// <returns>created mapping</returns>
         public async Task<ResourceMember> AddOwner(string ownerId, string organizationId)
         {
-            Arguments.CheckNonEmptyString(organizationId, "Organization ID");
-            Arguments.CheckNonEmptyString(ownerId, "Owner ID");
+            Arguments.CheckNonEmptyString(organizationId, nameof(organizationId));
+            Arguments.CheckNonEmptyString(ownerId, nameof(ownerId));
 
             var user = new User {Id = ownerId};
 
@@ -269,8 +366,8 @@ namespace InfluxData.Platform.Client.Client
         /// <returns>async task</returns>
         public async Task DeleteOwner(User owner, Organization organization)
         {
-            Arguments.CheckNotNull(organization, "organization");
-            Arguments.CheckNotNull(owner, "owner");
+            Arguments.CheckNotNull(organization, nameof(organization));
+            Arguments.CheckNotNull(owner, nameof(owner));
 
             await DeleteOwner(owner.Id, organization.Id);
         }
@@ -283,8 +380,8 @@ namespace InfluxData.Platform.Client.Client
         /// <returns>async task</returns>
         public async Task DeleteOwner(string ownerId, string organizationId)
         {
-            Arguments.CheckNonEmptyString(organizationId, "Organization ID");
-            Arguments.CheckNonEmptyString(ownerId, "Owner ID");
+            Arguments.CheckNonEmptyString(organizationId, nameof(organizationId));
+            Arguments.CheckNonEmptyString(ownerId, nameof(ownerId));
             
             var request = await Delete($"/api/v2/orgs/{organizationId}/owners/{ownerId}");
 

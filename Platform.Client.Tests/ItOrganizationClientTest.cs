@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using InfluxData.Platform.Client.Client;
 using InfluxData.Platform.Client.Domain;
 using NUnit.Framework;
@@ -182,6 +183,30 @@ namespace Platform.Client.Tests
 
             owners = await _organizationClient.GetOwners(organization);
             Assert.AreEqual(0, owners.Count);
+        }
+        
+        [Test]
+        public async Task Secrets() {
+
+            var organization = await _organizationClient.CreateOrganization(GenerateName("Constant Pro"));
+
+            var secrets = await _organizationClient.GetSecrets(organization);
+            Assert.IsEmpty(secrets);
+
+            var secretsKv = new Dictionary<string, string> {{"gh", "123456789"}, {"az", "987654321"}};
+
+            await _organizationClient.PutSecrets(secretsKv, organization);
+
+            secrets = await _organizationClient.GetSecrets(organization);
+            Assert.AreEqual(2, secrets.Count);
+            Assert.Contains("gh", secrets);    
+            Assert.Contains("az", secrets);
+
+            await _organizationClient.DeleteSecrets(new List<string> {"gh"}, organization);
+
+            secrets = await _organizationClient.GetSecrets(organization);
+            Assert.AreEqual(1, secrets.Count);
+            Assert.Contains("az", secrets);
         }
     }
 }
