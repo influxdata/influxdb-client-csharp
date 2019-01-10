@@ -39,8 +39,6 @@ namespace InfluxData.Platform.Client.Client
         {
             Arguments.CheckNotNull(task, nameof(task));
 
-            //TODO
-            task.Id = task.OrganizationId;
             var request = await Post(task, "/api/v2/tasks");
 
             return Call<Task>(request);

@@ -89,6 +89,8 @@ namespace Platform.Client.Tests
         }
         
         [Test]
+        //TODO
+        [Ignore("https://github.com/influxdata/influxdb/issues/10938")]
         public async Task FindAuthorizations() {
 
             var size = (await _authorizationClient.FindAuthorizations()).Count;
@@ -140,6 +142,8 @@ namespace Platform.Client.Tests
         }
         
         [Test]
+        //TODO
+        [Ignore("https://github.com/influxdata/influxdb/issues/10938")]
         public async Task  FindAuthorizationsByUser()
         {
             var size = (await _authorizationClient.FindAuthorizationsByUser(_user)).Count;
@@ -151,6 +155,8 @@ namespace Platform.Client.Tests
         }
 
         [Test]
+        //TODO
+        [Ignore("https://github.com/influxdata/influxdb/issues/10938")]
         public async Task  FindAuthorizationsByUserName() {
 
             var size = (await _authorizationClient.FindAuthorizationsByUser(_user)).Count;
