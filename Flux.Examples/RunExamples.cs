@@ -5,7 +5,10 @@ namespace Flux.Examples
 {
     public class RunExamples
     {
-        // specify name of example in configuration Program arguments e.g. FluxExample
+        /// <summary>
+        /// specify name of example in configuration Program arguments e.g. FluxExample
+        /// </summary>
+        /// <param name="args"></param>
         public static void Main(string[] args)
         {
             if (args.Length >= 1 && !string.IsNullOrEmpty(args[0]))
