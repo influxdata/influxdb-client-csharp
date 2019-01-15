@@ -167,7 +167,7 @@ namespace Flux.Client.Tests
             catch (InfluxException e)
             {
                 Assert.That(e.Message.Contains("failed to create physical plan:"));
-                Assert.That(e.Message.Contains("Add a 'range' call to bound the query"));
+                Assert.That(e.Message.Contains("results from \"telegraf\" must be bounded"));
             }
         }
         
@@ -183,7 +183,7 @@ namespace Flux.Client.Tests
             catch (InfluxException e)
             {
                 Assert.That(e.Message.Contains("failed to create physical plan:"));
-                Assert.That(e.Message.Contains("Add a 'range' call to bound the query"));
+                Assert.That(e.Message.Contains("results from \"flux_database\" must be bounded"));
             }
         }
 

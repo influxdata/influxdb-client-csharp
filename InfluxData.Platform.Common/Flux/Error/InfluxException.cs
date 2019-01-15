@@ -38,10 +38,10 @@ namespace Platform.Common.Flux.Error
 
             var keys = new [] {"X-Platform-Error-Code", "X-Influx-Error", "X-InfluxDb-Error"};
 
-            var message = keys
-                .Where(key => response.ResponseHeaders.ContainsKey(key))
-                .Select(key => response.ResponseHeaders[key].First());
-            
+            var message = response.ResponseHeaders
+                .Where(header => keys.Contains(header.Key, StringComparer.OrdinalIgnoreCase))
+                .Select(header => header.Value.First());
+
             return message.FirstOrDefault();
         }
 
