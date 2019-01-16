@@ -27,8 +27,8 @@ namespace InfluxData.Platform.Client.Domain
         /// <summary>
         /// The ID of the organization that owns this Task.
         /// </summary>
-        [JsonProperty("organizationId")]
-        public string OrganizationId { get; set; }
+        [JsonProperty("orgID")]
+        public string OrgId { get; set; }
 
         /// <summary>
         /// The current status of the task. When updated to 'disabled', cancels all queued jobs of this task.
@@ -66,7 +66,7 @@ namespace InfluxData.Platform.Client.Domain
                 .Append("id='" + Id + "'")
                 .Append(", name='" + Name + "'")
                 .Append(", owner=" + Owner)
-                .Append(", organizationId='" + OrganizationId + "'")
+                .Append(", organizationId='" + OrgId + "'")
                 .Append(", status=" + Status)
                 .Append(", flux='" + Flux + "'")
                 .Append(", every='" + Every + "'")

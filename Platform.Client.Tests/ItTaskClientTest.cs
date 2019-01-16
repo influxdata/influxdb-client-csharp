@@ -49,7 +49,7 @@ namespace Platform.Client.Tests
 
             var task = new InfluxData.Platform.Client.Domain.Task
             {
-                Name = taskName, OrganizationId = _organization.Id, Owner = _user, Flux = flux, Status = Status.Active
+                Name = taskName, OrgId = _organization.Id, Owner = _user, Flux = flux, Status = Status.Active
             };
 
             task = await _taskClient.CreateTask(task);
@@ -60,7 +60,7 @@ namespace Platform.Client.Tests
             Assert.IsNotNull(task.Owner);
             Assert.AreEqual(_user.Id, task.Owner.Id);
             Assert.AreEqual(_user.Name, task.Owner.Name);
-            Assert.AreEqual(_organization.Id, task.OrganizationId);
+            Assert.AreEqual(_organization.Id, task.OrgId);
             Assert.AreEqual(Status.Active, task.Status);
             Assert.AreEqual("1h0m0s", task.Every);
             Assert.IsNull(task.Cron);
@@ -76,7 +76,7 @@ namespace Platform.Client.Tests
 
             var task = new InfluxData.Platform.Client.Domain.Task
             {
-                Name = taskName, OrganizationId = _organization.Id, Owner = _user, Flux = flux, Status = Status.Active,
+                Name = taskName, OrgId = _organization.Id, Owner = _user, Flux = flux, Status = Status.Active,
                 Offset = "30m"
             };
 
@@ -101,7 +101,7 @@ namespace Platform.Client.Tests
             Assert.IsNotNull(task.Owner);
             Assert.AreEqual(_user.Id, task.Owner.Id);
             Assert.AreEqual(_user.Name, task.Owner.Name);
-            Assert.AreEqual(_organization.Id, task.OrganizationId);
+            Assert.AreEqual(_organization.Id, task.OrgId);
             Assert.AreEqual(Status.Active, task.Status);
             Assert.AreEqual("1h0m0s", task.Every);
             Assert.IsNull(task.Cron);
@@ -123,7 +123,7 @@ namespace Platform.Client.Tests
             Assert.IsNotNull(task.Owner);
             Assert.AreEqual(_user.Id, task.Owner.Id);
             Assert.AreEqual(_user.Name, task.Owner.Name);
-            Assert.AreEqual(_organization.Id, task.OrganizationId);
+            Assert.AreEqual(_organization.Id, task.OrgId);
             Assert.AreEqual(Status.Active, task.Status);
             Assert.AreEqual("0 2 * * *", task.Cron);
             Assert.AreEqual("0s", task.Every);
@@ -153,7 +153,7 @@ namespace Platform.Client.Tests
             Assert.IsNotNull(updatedTask.Owner);
             Assert.AreEqual(_user.Id, updatedTask.Owner.Id);
             Assert.AreEqual(_user.Name, updatedTask.Owner.Name);
-            Assert.AreEqual(_organization.Id, updatedTask.OrganizationId);
+            Assert.AreEqual(_organization.Id, updatedTask.OrgId);
             Assert.AreEqual(Status.Inactive, updatedTask.Status);
             Assert.IsNull(updatedTask.Cron);
             Assert.AreEqual("2m0s", updatedTask.Every);
@@ -174,7 +174,7 @@ namespace Platform.Client.Tests
             Assert.AreEqual(task.Id, taskById.Id);
             Assert.AreEqual(task.Name, taskById.Name);
             Assert.AreEqual(task.Owner.Id, taskById.Owner.Id);
-            Assert.AreEqual(task.OrganizationId, taskById.OrganizationId);
+            Assert.AreEqual(task.OrgId, taskById.OrgId);
             Assert.AreEqual(task.Status, taskById.Status);
             Assert.AreEqual(task.Offset, taskById.Offset);
             Assert.AreEqual(task.Flux, taskById.Flux);
@@ -235,6 +235,8 @@ namespace Platform.Client.Tests
             var tasks = await _taskClient.FindTasksByOrganization(taskOrg);
 
             Assert.AreEqual(1, tasks.Count);
+            
+            (await _taskClient.FindTasks()).ForEach(async task => await _taskClient.DeleteTask(task));
         }
         
         [Test]
@@ -506,10 +508,20 @@ namespace Platform.Client.Tests
         
         private async Task<Authorization> AddAuthorization(Organization organization)
         {
+            var resource = new PermissionResource {Type = PermissionResourceType.Task, OrgId = organization.Id};
+
             var createTask = new Permission
-                {Id = organization.Id, Resource = PermissionResourceType.Task, Action = Permission.ReadAction};
+                { 
+                    Resource = resource, 
+                    Action = Permission.ReadAction
+                    
+                };
+            
             var deleteTask = new Permission
-                {Id = organization.Id, Resource = PermissionResourceType.Task, Action = Permission.WriteAction};
+            {
+                Resource = resource, 
+                Action = Permission.WriteAction
+            };
 
             var authorization = await PlatformClient.CreateAuthorizationClient()
                 .CreateAuthorization(organization, new List<Permission> {createTask, deleteTask});

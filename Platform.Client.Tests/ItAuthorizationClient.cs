@@ -27,13 +27,13 @@ namespace Platform.Client.Tests
             var readUsers = new Permission
             {
                 Action = Permission.ReadAction,
-                Resource = PermissionResourceType.User
+                Resource = new PermissionResource {Type = PermissionResourceType.User, OrgId = _organization.Id}
             };
 
             var writeOrganizations = new Permission
             {
                 Action = Permission.WriteAction,
-                Resource = PermissionResourceType.Org
+                Resource = new PermissionResource {Type = PermissionResourceType.Org, OrgId = _organization.Id}
             };
 
             var permissions = new List<Permission> {readUsers, writeOrganizations};
@@ -48,9 +48,12 @@ namespace Platform.Client.Tests
             Assert.AreEqual(authorization.Status, Status.Active);
 
             Assert.AreEqual(authorization.Permissions.Count, 2);
-            Assert.AreEqual(authorization.Permissions[0].Resource, PermissionResourceType.User);
+            Assert.AreEqual(authorization.Permissions[0].Resource.Type, PermissionResourceType.User);
+            Assert.AreEqual(authorization.Permissions[0].Resource.OrgId, _organization.Id);
             Assert.AreEqual(authorization.Permissions[0].Action, "read");
-            Assert.AreEqual(authorization.Permissions[1].Resource, PermissionResourceType.Org);
+            
+            Assert.AreEqual(authorization.Permissions[1].Resource.Type, PermissionResourceType.Org);
+            Assert.AreEqual(authorization.Permissions[1].Resource.OrgId, _organization.Id);
             Assert.AreEqual(authorization.Permissions[1].Action, "write");
 
             var links = authorization.Links;
@@ -61,6 +64,28 @@ namespace Platform.Client.Tests
         }
         
         [Test]
+        public async Task AuthorizationDescription() {
+
+            var writeSources = new Permission
+            {
+                Action = Permission.WriteAction,
+                Resource = new PermissionResource {Type = PermissionResourceType.Source, OrgId = _organization.Id}
+            };
+
+            var authorization = new Authorization
+            {
+                OrgId = _organization.Id,
+                Permissions = new List<Permission> {writeSources},
+                Description = "My description!"
+            };
+
+            var created = await _authorizationClient.CreateAuthorization(authorization);
+
+            Assert.IsNotNull(created);
+            Assert.AreEqual("My description!", created.Description);
+        }
+        
+        [Test]
         //TODO
         [Ignore("updateAuthorization return PlatformError but c.db.update() required 'plain' go error bolt/authorization.go:397")]
         public async Task UpdateAuthorizationStatus() {
@@ -68,7 +93,7 @@ namespace Platform.Client.Tests
             var readUsers = new Permission
             {
                 Action = Permission.ReadAction,
-                Resource = PermissionResourceType.User
+                Resource = new PermissionResource {Type = PermissionResourceType.User, OrgId = _organization.Id}
             };
 
             var permissions = new List<Permission> {readUsers};
@@ -89,8 +114,6 @@ namespace Platform.Client.Tests
         }
         
         [Test]
-        //TODO
-        [Ignore("https://github.com/influxdata/influxdb/issues/10938")]
         public async Task FindAuthorizations() {
 
             var size = (await _authorizationClient.FindAuthorizations()).Count;
@@ -142,8 +165,6 @@ namespace Platform.Client.Tests
         }
         
         [Test]
-        //TODO
-        [Ignore("https://github.com/influxdata/influxdb/issues/10938")]
         public async Task  FindAuthorizationsByUser()
         {
             var size = (await _authorizationClient.FindAuthorizationsByUser(_user)).Count;
@@ -155,8 +176,6 @@ namespace Platform.Client.Tests
         }
 
         [Test]
-        //TODO
-        [Ignore("https://github.com/influxdata/influxdb/issues/10938")]
         public async Task  FindAuthorizationsByUserName() {
 
             var size = (await _authorizationClient.FindAuthorizationsByUser(_user)).Count;
@@ -167,17 +186,19 @@ namespace Platform.Client.Tests
             Assert.AreEqual(size + 1, authorizations.Count);
         }
         
-        private static List<Permission> NewPermissions()
+        private List<Permission> NewPermissions()
         {
+            var resource = new PermissionResource {Type = PermissionResourceType.User, OrgId = _organization.Id};
+
             var permission = new Permission
             {
-                Action = Permission.ReadAction, Resource = PermissionResourceType.User
+                Action = Permission.ReadAction, 
+                Resource = resource
             };
 
             var permissions = new List<Permission> {permission};
 
             return permissions;
         }
-
     }
 }

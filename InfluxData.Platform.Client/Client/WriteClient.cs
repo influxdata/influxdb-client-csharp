@@ -176,51 +176,51 @@ namespace InfluxData.Platform.Client.Client
         /// Write Line Protocol record into specified bucket.
         /// </summary>
         /// <param name="bucket">specifies the destination bucket for writes</param>
-        /// <param name="organizationId">specifies the destination organization for writes</param>
+        /// <param name="orgId">specifies the destination organization for writes</param>
         /// <param name="precision">specifies the precision for the unix timestamps within the body line-protocol</param>
         /// <param name="record">specifies the record in InfluxDB Line Protocol.
         /// The <see cref="record"/> is considered as one batch unit.</param>
-        public void WriteRecord(string bucket, string organizationId, TimeUnit precision, string record)
+        public void WriteRecord(string bucket, string orgId, TimeUnit precision, string record)
         {
             Arguments.CheckNonEmptyString(bucket, nameof(bucket));
-            Arguments.CheckNonEmptyString(organizationId, nameof(organizationId));
+            Arguments.CheckNonEmptyString(orgId, nameof(orgId));
             Arguments.CheckNotNull(precision, nameof(precision));
 
-            _subject.OnNext(new BatchWriteRecord(new BatchWriteOptions(bucket, organizationId, precision), record));
+            _subject.OnNext(new BatchWriteRecord(new BatchWriteOptions(bucket, orgId, precision), record));
         }
 
         /// <summary>
         /// Write Line Protocol records into specified bucket.
         /// </summary>
         /// <param name="bucket">specifies the destination bucket for writes</param>
-        /// <param name="organizationId">specifies the destination organization for writes</param>
+        /// <param name="orgId">specifies the destination organization for writes</param>
         /// <param name="precision">specifies the precision for the unix timestamps within the body line-protocol</param>
         /// <param name="records">specifies the record in InfluxDB Line Protocol</param>
-        public void WriteRecords(string bucket, string organizationId, TimeUnit precision, List<string> records)
+        public void WriteRecords(string bucket, string orgId, TimeUnit precision, List<string> records)
         {
             Arguments.CheckNonEmptyString(bucket, nameof(bucket));
-            Arguments.CheckNonEmptyString(organizationId, nameof(organizationId));
+            Arguments.CheckNonEmptyString(orgId, nameof(orgId));
             Arguments.CheckNotNull(precision, nameof(precision));
 
-            records.ForEach(record => WriteRecord(bucket, organizationId, precision, record));
+            records.ForEach(record => WriteRecord(bucket, orgId, precision, record));
         }
 
         /// <summary>
         /// Write Line Protocol records into specified bucket.
         /// </summary>
         /// <param name="bucket">specifies the destination bucket for writes</param>
-        /// <param name="organizationId">specifies the destination organization for writes</param>
+        /// <param name="orgId">specifies the destination organization for writes</param>
         /// <param name="precision">specifies the precision for the unix timestamps within the body line-protocol</param>
         /// <param name="records">specifies the record in InfluxDB Line Protocol</param>
-        public void WriteRecords(string bucket, string organizationId, TimeUnit precision, params string[] records)
+        public void WriteRecords(string bucket, string orgId, TimeUnit precision, params string[] records)
         {
             Arguments.CheckNonEmptyString(bucket, nameof(bucket));
-            Arguments.CheckNonEmptyString(organizationId, nameof(organizationId));
+            Arguments.CheckNonEmptyString(orgId, nameof(orgId));
             Arguments.CheckNotNull(precision, nameof(precision));
 
             foreach (var record in records)
             {
-                WriteRecord(bucket, organizationId, precision, record);
+                WriteRecord(bucket, orgId, precision, record);
             }
         }
 
@@ -228,35 +228,35 @@ namespace InfluxData.Platform.Client.Client
         /// Write a Data point into specified bucket.
         /// </summary>
         /// <param name="bucket">specifies the destination bucket for writes</param>
-        /// <param name="organizationId">specifies the destination organization for writes</param>
+        /// <param name="orgId">specifies the destination organization for writes</param>
         /// <param name="point">specifies the Data point to write into bucket</param>
-        public void WritePoint(string bucket, string organizationId, Point point)
+        public void WritePoint(string bucket, string orgId, Point point)
         {
             Arguments.CheckNonEmptyString(bucket, nameof(bucket));
-            Arguments.CheckNonEmptyString(organizationId, nameof(organizationId));
+            Arguments.CheckNonEmptyString(orgId, nameof(orgId));
 
             if (point == null)
             {
                 return;
             }
 
-            _subject.OnNext(new BatchWritePoint(new BatchWriteOptions(bucket, organizationId, point.Precision), point));
+            _subject.OnNext(new BatchWritePoint(new BatchWriteOptions(bucket, orgId, point.Precision), point));
         }
 
         /// <summary>
         /// Write Data points into specified bucket.
         /// </summary>
         /// <param name="bucket">specifies the destination bucket for writes</param>
-        /// <param name="organizationId">specifies the destination organization for writes</param>
+        /// <param name="orgId">specifies the destination organization for writes</param>
         /// <param name="points">specifies the Data points to write into bucket</param>
-        public void WritePoints(string bucket, string organizationId, List<Point> points)
+        public void WritePoints(string bucket, string orgId, List<Point> points)
         {
             Arguments.CheckNonEmptyString(bucket, nameof(bucket));
-            Arguments.CheckNonEmptyString(organizationId, nameof(organizationId));
+            Arguments.CheckNonEmptyString(orgId, nameof(orgId));
 
             foreach (var point in points)
             {
-                WritePoint(bucket, organizationId, point);
+                WritePoint(bucket, orgId, point);
             }
         }
 
@@ -264,28 +264,28 @@ namespace InfluxData.Platform.Client.Client
         /// Write Data points into specified bucket.
         /// </summary>
         /// <param name="bucket">specifies the destination bucket for writes</param>
-        /// <param name="organizationId">specifies the destination organization for writes</param>
+        /// <param name="orgId">specifies the destination organization for writes</param>
         /// <param name="points">specifies the Data points to write into bucket</param>
-        public void WritePoints(string bucket, string organizationId, params Point[] points)
+        public void WritePoints(string bucket, string orgId, params Point[] points)
         {
             Arguments.CheckNonEmptyString(bucket, nameof(bucket));
-            Arguments.CheckNonEmptyString(organizationId, nameof(organizationId));
+            Arguments.CheckNonEmptyString(orgId, nameof(orgId));
 
-            WritePoints(bucket, organizationId, points.ToList());
+            WritePoints(bucket, orgId, points.ToList());
         }
 
         /// <summary>
         /// Write a Measurement into specified bucket.
         /// </summary>
         /// <param name="bucket">specifies the destination bucket for writes</param>
-        /// <param name="organizationId">specifies the destination organization for writes</param>
+        /// <param name="orgId">specifies the destination organization for writes</param>
         /// <param name="precision">specifies the precision for the unix timestamps within the body line-protocol</param>
         /// <param name="measurement">specifies the Measurement to write into bucket</param>
         /// <typeparam name="TM">measurement type</typeparam>
-        public void WriteMeasurement<TM>(string bucket, string organizationId, TimeUnit precision, TM measurement)
+        public void WriteMeasurement<TM>(string bucket, string orgId, TimeUnit precision, TM measurement)
         {
             Arguments.CheckNonEmptyString(bucket, nameof(bucket));
-            Arguments.CheckNonEmptyString(organizationId, nameof(organizationId));
+            Arguments.CheckNonEmptyString(orgId, nameof(orgId));
             Arguments.CheckNotNull(precision, nameof(precision));
 
             if (measurement == null)
@@ -293,7 +293,7 @@ namespace InfluxData.Platform.Client.Client
                 return;
             }
 
-            var options = new BatchWriteOptions(bucket, organizationId, precision);
+            var options = new BatchWriteOptions(bucket, orgId, precision);
 
             _subject.OnNext(new BatchWriteMeasurement<TM>(options, measurement, _measurementMapper));
         }
@@ -302,19 +302,19 @@ namespace InfluxData.Platform.Client.Client
         /// Write Measurements into specified bucket.
         /// </summary>
         /// <param name="bucket">specifies the destination bucket for writes</param>
-        /// <param name="organizationId">specifies the destination organization for writes</param>
+        /// <param name="orgId">specifies the destination organization for writes</param>
         /// <param name="precision">specifies the precision for the unix timestamps within the body line-protocol</param>
         /// <param name="measurements">specifies Measurements to write into bucket</param>
         /// <typeparam name="TM">measurement type</typeparam>
-        public void WriteMeasurements<TM>(string bucket, string organizationId, TimeUnit precision, List<TM> measurements)
+        public void WriteMeasurements<TM>(string bucket, string orgId, TimeUnit precision, List<TM> measurements)
         {
             Arguments.CheckNonEmptyString(bucket, nameof(bucket));
-            Arguments.CheckNonEmptyString(organizationId, nameof(organizationId));
+            Arguments.CheckNonEmptyString(orgId, nameof(orgId));
             Arguments.CheckNotNull(precision, nameof(precision));
 
             foreach (var measurement in measurements)
             {
-                WriteMeasurement(bucket, organizationId, precision, measurement);
+                WriteMeasurement(bucket, orgId, precision, measurement);
             }
         }
 
@@ -322,18 +322,18 @@ namespace InfluxData.Platform.Client.Client
         /// Write Measurements into specified bucket.
         /// </summary>
         /// <param name="bucket">specifies the destination bucket for writes</param>
-        /// <param name="organizationId">specifies the destination organization for writes</param>
+        /// <param name="orgId">specifies the destination organization for writes</param>
         /// <param name="precision">specifies the precision for the unix timestamps within the body line-protocol</param>
         /// <param name="measurements">specifies Measurements to write into bucket</param>
         /// <typeparam name="TM">measurement type</typeparam>
-        public void WriteMeasurements<TM>(string bucket, string organizationId, TimeUnit precision,
+        public void WriteMeasurements<TM>(string bucket, string orgId, TimeUnit precision,
             params TM[] measurements)
         {
             Arguments.CheckNonEmptyString(bucket, nameof(bucket));
-            Arguments.CheckNonEmptyString(organizationId, nameof(organizationId));
+            Arguments.CheckNonEmptyString(orgId, nameof(orgId));
             Arguments.CheckNotNull(precision, nameof(precision));
 
-            WriteMeasurements(bucket, organizationId, precision, measurements.ToList());
+            WriteMeasurements(bucket, orgId, precision, measurements.ToList());
         }
 
         /// <summary>
@@ -436,14 +436,14 @@ namespace InfluxData.Platform.Client.Client
         internal readonly string OrganizationId;
         internal readonly TimeUnit Precision;
 
-        internal BatchWriteOptions(string bucket, string organizationId, TimeUnit precision)
+        internal BatchWriteOptions(string bucket, string orgId, TimeUnit precision)
         {
             Arguments.CheckNonEmptyString(bucket, nameof(bucket));
-            Arguments.CheckNonEmptyString(organizationId, nameof(organizationId));
+            Arguments.CheckNonEmptyString(orgId, nameof(orgId));
             Arguments.CheckNotNull(precision, nameof(precision));
 
             Bucket = bucket;
-            OrganizationId = organizationId;
+            OrganizationId = orgId;
             Precision = precision;
         }
 

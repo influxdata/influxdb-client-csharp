@@ -22,7 +22,7 @@ namespace Platform.Client.Tests
         {
             var source = new Source
             {
-                OrganizationId = "02cebf26d7fc1000",
+                OrgId = "02cebf26d7fc1000",
                 DefaultSource = false,
                 Name = GenerateName("Source"),
                 Type = Source.SourceType.V1SourceType,
@@ -41,7 +41,7 @@ namespace Platform.Client.Tests
             var createdSource = await _sourceClient.CreateSource(source);
 
             Assert.IsNotEmpty(createdSource.Id);
-            Assert.AreEqual(createdSource.OrganizationId, source.OrganizationId);
+            Assert.AreEqual(createdSource.OrgId, source.OrgId);
             Assert.AreEqual(createdSource.DefaultSource, source.DefaultSource);
             Assert.AreEqual(createdSource.Name, source.Name);
             Assert.AreEqual(createdSource.Type, source.Type);
@@ -96,7 +96,7 @@ namespace Platform.Client.Tests
             Assert.IsNotNull(sourceById);
             Assert.AreEqual(source.Id, sourceById.Id);
             Assert.AreEqual(source.Name, sourceById.Name);
-            Assert.AreEqual(source.OrganizationId, sourceById.OrganizationId);
+            Assert.AreEqual(source.OrgId, sourceById.OrgId);
             Assert.AreEqual(source.Type, sourceById.Type);
             Assert.AreEqual(source.Url, sourceById.Url);
             Assert.AreEqual(source.InsecureSkipVerify, sourceById.InsecureSkipVerify);
@@ -157,7 +157,7 @@ namespace Platform.Client.Tests
             var source = new Source
             {
                 Name = GenerateName("Source"),
-                OrganizationId = "02cebf26d7fc1000",
+                OrgId = "02cebf26d7fc1000",
                 Type = Source.SourceType.V1SourceType,
                 Url = "http://influxdb:8086",
                 InsecureSkipVerify = true

@@ -34,7 +34,7 @@ namespace Platform.Client.Tests
             Assert.IsNotNull(bucket);
             Assert.IsNotEmpty(bucket.Id);
             Assert.AreEqual(bucket.Name, bucketName);
-            Assert.AreEqual(bucket.OrganizationId, _organization.Id);
+            Assert.AreEqual(bucket.OrgId, _organization.Id);
             Assert.AreEqual(bucket.OrganizationName, _organization.Name);
             Assert.AreEqual(bucket.RetentionRules.Count, 1);
             Assert.AreEqual(bucket.RetentionRules[0].EverySeconds, 3600L);
@@ -56,7 +56,7 @@ namespace Platform.Client.Tests
             Assert.IsNotNull(bucket);
             Assert.IsNotEmpty(bucket.Id);
             Assert.AreEqual(bucket.Name, bucketName);
-            Assert.AreEqual(bucket.OrganizationId, _organization.Id);
+            Assert.AreEqual(bucket.OrgId, _organization.Id);
             Assert.AreEqual(bucket.RetentionRules.Count, 0);
         }
 
@@ -74,7 +74,7 @@ namespace Platform.Client.Tests
             Assert.IsNotEmpty(updatedBucket.Id);
             Assert.AreEqual(updatedBucket.Id, createBucket.Id);
             Assert.AreEqual(updatedBucket.Name, "Therm sensor 2000");
-            Assert.AreEqual(updatedBucket.OrganizationId, createBucket.OrganizationId);
+            Assert.AreEqual(updatedBucket.OrgId, createBucket.OrgId);
             Assert.AreEqual(updatedBucket.OrganizationName, createBucket.OrganizationName);
             Assert.AreEqual(updatedBucket.RetentionRules[0].EverySeconds, 1000L);
         }
@@ -108,7 +108,7 @@ namespace Platform.Client.Tests
             Assert.IsNotNull(bucketById);
             Assert.AreEqual(bucketById.Id, bucket.Id);
             Assert.AreEqual(bucketById.Name, bucket.Name);
-            Assert.AreEqual(bucketById.OrganizationId, bucket.OrganizationId);
+            Assert.AreEqual(bucketById.OrgId, bucket.OrgId);
             Assert.AreEqual(bucketById.OrganizationName, bucket.OrganizationName);
             Assert.AreEqual(bucketById.RetentionRules.Count, bucket.RetentionRules.Count);
             Assert.AreEqual(bucketById.Links.Count, bucket.Links.Count);
@@ -130,7 +130,7 @@ namespace Platform.Client.Tests
             await _bucketClient.CreateBucket(GenerateName("robot sensor"), RetentionRule(), _organization);
 
             var organization2 = await _organizationClient.CreateOrganization(GenerateName("Second"));
-            await _bucketClient.CreateBucket(GenerateName("robot sensor"), organization2.Name);
+            await _bucketClient.CreateBucket(GenerateName("robot sensor"), organization2.Id);
 
             var buckets = await _bucketClient.FindBuckets();
             Assert.AreEqual(buckets.Count, size + 2);

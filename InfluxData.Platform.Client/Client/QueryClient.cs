@@ -27,16 +27,16 @@ namespace InfluxData.Platform.Client.Client
         /// </para>
         /// </summary>
         /// <param name="query">the flux query to execute</param>
-        /// <param name="organizationId">specifies the source organization</param>
+        /// <param name="orgId">specifies the source organization</param>
         /// <returns>FluxTables that are matched the query</returns>
-        public async Task<List<FluxTable>> Query(string query, string organizationId)
+        public async Task<List<FluxTable>> Query(string query, string orgId)
         {
             Arguments.CheckNonEmptyString(query, nameof(query));
-            Arguments.CheckNonEmptyString(organizationId, nameof(organizationId));
+            Arguments.CheckNonEmptyString(orgId, nameof(orgId));
 
             var consumer = new FluxResponseConsumerTable();
 
-            await Query(query, organizationId, GetDefaultDialect(), consumer, ErrorConsumer, EmptyAction);
+            await Query(query, orgId, GetDefaultDialect(), consumer, ErrorConsumer, EmptyAction);
 
             return consumer.Tables;
         }
@@ -52,16 +52,16 @@ namespace InfluxData.Platform.Client.Client
         /// </para>
         /// </summary>
         /// <param name="query">the flux query to execute</param>
-        /// <param name="organizationId">specifies the source organization</param>
+        /// <param name="orgId">specifies the source organization</param>
         /// <typeparam name="T">the type of measurement</typeparam>
         /// <returns>Measurements which are matched the query</returns>
-        public async Task<List<T>> Query<T>(string query, string organizationId)
+        public async Task<List<T>> Query<T>(string query, string orgId)
         {
             var measurements = new List<T>();
 
             var consumer = new FluxResponseConsumerPoco<T>((cancellable, poco) => { measurements.Add(poco); });
 
-            await Query(query, organizationId, GetDefaultDialect(), consumer, ErrorConsumer, EmptyAction);
+            await Query(query, orgId, GetDefaultDialect(), consumer, ErrorConsumer, EmptyAction);
 
             return measurements;
         }
@@ -71,16 +71,16 @@ namespace InfluxData.Platform.Client.Client
         /// to <see cref="onNext"/> consumer.
         /// </summary>
         /// <param name="query">the flux query to execute</param>
-        /// <param name="organizationId">specifies the source organization</param>
+        /// <param name="orgId">specifies the source organization</param>
         /// <param name="onNext">the callback to consume the FluxRecord result with capability
         /// to discontinue a streaming query</param>
         /// <returns>async task</returns>
-        public async Task Query(string query, string organizationId, Action<ICancellable, FluxRecord> onNext)
+        public async Task Query(string query, string orgId, Action<ICancellable, FluxRecord> onNext)
         {
             Arguments.CheckNonEmptyString(query, nameof(query));
             Arguments.CheckNotNull(onNext, nameof(onNext));
 
-            await Query(query, organizationId, onNext, ErrorConsumer);
+            await Query(query, orgId, onNext, ErrorConsumer);
         }
 
         /// <summary>
@@ -88,17 +88,17 @@ namespace InfluxData.Platform.Client.Client
         /// to a <see cref="onNext"/> consumer.
         /// </summary>
         /// <param name="query">the flux query to execute</param>
-        /// <param name="organizationId">specifies the source organization</param>
+        /// <param name="orgId">specifies the source organization</param>
         /// <param name="onNext">the callback to consume the mapped Measurements with capability
         /// to discontinue a streaming query</param>
         /// <typeparam name="T">the type of measurement</typeparam>
         /// <returns>async task</returns>
-        public async Task Query<T>(string query, string organizationId, Action<ICancellable, T> onNext)
+        public async Task Query<T>(string query, string orgId, Action<ICancellable, T> onNext)
         {
             Arguments.CheckNonEmptyString(query, nameof(query));
             Arguments.CheckNotNull(onNext, nameof(onNext));
 
-            await Query(query, organizationId, onNext, ErrorConsumer);
+            await Query(query, orgId, onNext, ErrorConsumer);
         }
 
         /// <summary>
@@ -106,18 +106,18 @@ namespace InfluxData.Platform.Client.Client
         /// to <see cref="onNext"/> consumer.
         /// </summary>
         /// <param name="query">the flux query to execute</param>
-        /// <param name="organizationId">specifies the source organization</param>
+        /// <param name="orgId">specifies the source organization</param>
         /// <param name="onNext">the callback to consume the FluxRecord result with capability</param>
         /// <param name="onError">the callback to consume any error notification</param>
         /// <returns>async task</returns>
-        public async Task Query(string query, string organizationId, Action<ICancellable, FluxRecord> onNext,
+        public async Task Query(string query, string orgId, Action<ICancellable, FluxRecord> onNext,
             Action<Exception> onError)
         {
             Arguments.CheckNonEmptyString(query, nameof(query));
             Arguments.CheckNotNull(onNext, nameof(onNext));
             Arguments.CheckNotNull(onError, nameof(onError));
 
-            await Query(query, organizationId, onNext, onError, EmptyAction);
+            await Query(query, orgId, onNext, onError, EmptyAction);
         }
 
         /// <summary>
@@ -125,20 +125,20 @@ namespace InfluxData.Platform.Client.Client
         /// to a <see cref="onNext"/> consumer.
         /// </summary>
         /// <param name="query">the flux query to execute</param>
-        /// <param name="organizationId">specifies the source organization</param>
+        /// <param name="orgId">specifies the source organization</param>
         /// <param name="onNext">the callback to consume the mapped Measurements with capability
         /// to discontinue a streaming query</param>
         /// <param name="onError">the callback to consume any error notification</param>
         /// <typeparam name="T">the type of measurement</typeparam>
         /// <returns>async task</returns>
-        public async Task Query<T>(string query, string organizationId, Action<ICancellable, T> onNext,
+        public async Task Query<T>(string query, string orgId, Action<ICancellable, T> onNext,
             Action<Exception> onError)
         {
             Arguments.CheckNonEmptyString(query, nameof(query));
             Arguments.CheckNotNull(onNext, nameof(onNext));
             Arguments.CheckNotNull(onError, nameof(onError));
 
-            await Query(query, organizationId, onNext, onError, EmptyAction);
+            await Query(query, orgId, onNext, onError, EmptyAction);
         }
 
         /// <summary>
@@ -146,12 +146,12 @@ namespace InfluxData.Platform.Client.Client
         /// to <see cref="onNext"/> consumer.
         /// </summary>
         /// <param name="query">the flux query to execute</param>
-        /// <param name="organizationId">specifies the source organization</param>
+        /// <param name="orgId">specifies the source organization</param>
         /// <param name="onNext">the callback to consume the FluxRecord result with capability</param>
         /// <param name="onError">the callback to consume any error notification</param>
         /// <param name="onComplete">the callback to consume a notification about successfully end of stream</param>
         /// <returns>async task</returns>
-        public async Task Query(string query, string organizationId, Action<ICancellable, FluxRecord> onNext,
+        public async Task Query(string query, string orgId, Action<ICancellable, FluxRecord> onNext,
             Action<Exception> onError,
             Action onComplete)
         {
@@ -162,7 +162,7 @@ namespace InfluxData.Platform.Client.Client
 
             var consumer = new FluxResponseConsumerRecord(onNext);
 
-            await Query(query, organizationId, GetDefaultDialect(), consumer, onError, onComplete);
+            await Query(query, orgId, GetDefaultDialect(), consumer, onError, onComplete);
         }
 
         /// <summary>
@@ -170,14 +170,14 @@ namespace InfluxData.Platform.Client.Client
         /// to a <see cref="onNext"/> consumer.
         /// </summary>
         /// <param name="query">the flux query to execute</param>
-        /// <param name="organizationId">specifies the source organization</param>
+        /// <param name="orgId">specifies the source organization</param>
         /// <param name="onNext">the callback to consume the mapped Measurements with capability
         /// to discontinue a streaming query</param>
         /// <param name="onError">the callback to consume any error notification</param>
         /// <param name="onComplete">the callback to consume a notification about successfully end of stream</param>
         /// <typeparam name="T">the type of measurement</typeparam>
         /// <returns>async task</returns>
-        public async Task Query<T>(string query, string organizationId, Action<ICancellable, T> onNext,
+        public async Task Query<T>(string query, string orgId, Action<ICancellable, T> onNext,
             Action<Exception> onError,
             Action onComplete)
         {
@@ -188,7 +188,7 @@ namespace InfluxData.Platform.Client.Client
 
             var consumer = new FluxResponseConsumerPoco<T>(onNext);
 
-            await Query(query, organizationId, GetDefaultDialect(), consumer, onError, onComplete);
+            await Query(query, orgId, GetDefaultDialect(), consumer, onError, onComplete);
         }
 
         /// <summary>
@@ -328,7 +328,7 @@ namespace InfluxData.Platform.Client.Client
         /// (line by line) to <see cref="onResponse"/>.
         /// </summary>
         /// <param name="query">the flux query to execute</param>
-        /// <param name="organizationId">specifies the source organization</param>
+        /// <param name="orgId">specifies the source organization</param>
         /// <param name="dialect">Dialect is an object defining the options to use when encoding the response.
         /// <a href="http://bit.ly/flux-dialect">See dialect SPEC.</a>.</param>
         /// <param name="onResponse">the callback to consume the response line by line with capability
@@ -336,44 +336,44 @@ namespace InfluxData.Platform.Client.Client
         /// <param name="onError">callback to consume any error notification</param>
         /// <param name="onComplete">callback to consume a notification about successfully end of stream</param>
         /// <returns></returns>
-        public async Task QueryRaw(string query, string organizationId, string dialect,
+        public async Task QueryRaw(string query, string orgId, string dialect,
             Action<ICancellable, string> onResponse,
             Action<Exception> onError,
             Action onComplete)
         {
             Arguments.CheckNonEmptyString(query, nameof(query));
-            Arguments.CheckNonEmptyString(organizationId, nameof(organizationId));
+            Arguments.CheckNonEmptyString(orgId, nameof(orgId));
             Arguments.CheckNotNull(onResponse, nameof(onResponse));
             Arguments.CheckNotNull(onError, nameof(onError));
             Arguments.CheckNotNull(onComplete, nameof(onComplete));
 
-            var requestMessage = Query(query, organizationId, dialect);
+            var requestMessage = Query(query, orgId, dialect);
 
             await QueryRaw(requestMessage, onResponse, onError, onComplete);
         }
 
-        private async Task Query(string query, string organizationId, string dialect, IFluxResponseConsumer consumer,
+        private async Task Query(string query, string orgId, string dialect, IFluxResponseConsumer consumer,
             Action<Exception> onError,
             Action onComplete)
 
         {
             Arguments.CheckNonEmptyString(query, nameof(query));
-            Arguments.CheckNonEmptyString(organizationId, nameof(organizationId));
+            Arguments.CheckNonEmptyString(orgId, nameof(orgId));
             Arguments.CheckNotNull(consumer, nameof(consumer));
             Arguments.CheckNotNull(onError, nameof(onError));
             Arguments.CheckNotNull(onComplete, nameof(onComplete));
 
-            var requestMessage = Query(query, organizationId, dialect);
+            var requestMessage = Query(query, orgId, dialect);
 
             await Query(requestMessage, consumer, onError, onComplete);
         }
 
-        private HttpRequestMessage Query(string query, string organizationId, string dialect)
+        private HttpRequestMessage Query(string query, string orgId, string dialect)
         {
             Arguments.CheckNonEmptyString(query, nameof(query));
-            Arguments.CheckNonEmptyString(organizationId, nameof(organizationId));
+            Arguments.CheckNonEmptyString(orgId, nameof(orgId));
 
-            var path = $"/api/v2/query?orgID={organizationId}";
+            var path = $"/api/v2/query?orgID={orgId}";
 
             var message = new HttpRequestMessage(new HttpMethod(HttpMethodKind.Post.Name()), path)
             {

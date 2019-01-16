@@ -30,6 +30,9 @@ namespace InfluxData.Platform.Client.Domain
         [JsonProperty("status"), JsonConverter(typeof(StringEnumConverter))]
         public Status Status { get; set; }
         
+        [JsonProperty("description")]
+        public string Description;
+        
         [JsonProperty("permissions")]
         public List<Permission> Permissions { get; set; }
     }

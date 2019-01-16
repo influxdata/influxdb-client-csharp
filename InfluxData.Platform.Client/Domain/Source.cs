@@ -18,8 +18,8 @@ namespace InfluxData.Platform.Client.Domain
         /// <summary>
         /// The organization ID that resource belongs to.
         /// </summary>
-        [JsonProperty("organizationID")]
-        public string OrganizationId { get; set; }
+        [JsonProperty("orgID")]
+        public string OrgId { get; set; }
 
         /// <summary>
         /// Specifies the default source for the application.

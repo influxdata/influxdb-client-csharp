@@ -16,7 +16,7 @@ namespace InfluxData.Platform.Client.Domain
         public string Name { get; set; }
 
         [JsonProperty("organizationID")]
-        public string OrganizationId { get; set; }
+        public string OrgId { get; set; }
 
         [JsonProperty("organization")]
         public string OrganizationName { get; set; }

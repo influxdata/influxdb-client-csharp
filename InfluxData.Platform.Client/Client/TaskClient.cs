@@ -77,20 +77,20 @@ namespace InfluxData.Platform.Client.Client
         /// <param name="flux">the Flux script to run for this task</param>
         /// <param name="cron">a task repetition schedule in the form '* * * * * *'</param>
         /// <param name="userId">the user ID that owns this Task</param>
-        /// <param name="organizationId">the organization ID that owns this Task</param>
+        /// <param name="orgId">the organization ID that owns this Task</param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
         public async System.Threading.Tasks.Task<Task> CreateTaskCron(string name, string flux, string cron,
-            string userId, string organizationId)
+            string userId, string orgId)
         {
             Arguments.CheckNonEmptyString(name, nameof(name));
             Arguments.CheckNonEmptyString(flux, nameof(flux));
             Arguments.CheckNonEmptyString(cron, nameof(cron));
             Arguments.CheckNonEmptyString(userId, nameof(userId));
-            Arguments.CheckNonEmptyString(organizationId, nameof(organizationId));
+            Arguments.CheckNonEmptyString(orgId, nameof(orgId));
 
             var user = new User {Id = userId};
-            var organization = new Organization {Id = organizationId};
+            var organization = new Organization {Id = orgId};
 
             return await CreateTaskCron(name, flux, cron, user, organization);
         }
@@ -128,20 +128,20 @@ namespace InfluxData.Platform.Client.Client
         /// <param name="flux">the Flux script to run for this task</param>
         /// <param name="every">a task repetition by duration expression</param>
         /// <param name="userId">the user ID that owns this Task</param>
-        /// <param name="organizationId">the organization ID that owns this Task</param>
+        /// <param name="orgId">the organization ID that owns this Task</param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
         public async System.Threading.Tasks.Task<Task> CreateTaskEvery(string name, string flux, string every,
-            string userId, string organizationId)
+            string userId, string orgId)
         {
             Arguments.CheckNonEmptyString(name, nameof(name));
             Arguments.CheckNonEmptyString(flux, nameof(flux));
             Arguments.CheckNonEmptyString(every, nameof(every));
             Arguments.CheckNonEmptyString(userId, nameof(userId));
-            Arguments.CheckNonEmptyString(organizationId, nameof(organizationId));
+            Arguments.CheckNonEmptyString(orgId, nameof(orgId));
 
             var user = new User {Id = userId};
-            var organization = new Organization {Id = organizationId};
+            var organization = new Organization {Id = orgId};
 
             return await CreateTaskEvery(name, flux, every, user, organization);
         }
@@ -247,11 +247,11 @@ namespace InfluxData.Platform.Client.Client
         /// <summary>
         /// Lists tasks, limit 100.
         /// </summary>
-        /// <param name="organizationId">filter tasks to a specific organization ID</param>
+        /// <param name="orgId">filter tasks to a specific organization ID</param>
         /// <returns>A list of tasks</returns>
-        public async System.Threading.Tasks.Task<List<Task>> FindTasksByOrganizationId(string organizationId)
+        public async System.Threading.Tasks.Task<List<Task>> FindTasksByOrganizationId(string orgId)
         {
-            return await FindTasks(null, null, organizationId);
+            return await FindTasks(null, null, orgId);
         }
 
         /// <summary>
@@ -259,12 +259,12 @@ namespace InfluxData.Platform.Client.Client
         /// </summary>
         /// <param name="afterId">returns tasks after specified ID</param>
         /// <param name="userId">filter tasks to a specific user ID</param>
-        /// <param name="organizationId">filter tasks to a specific organization ID</param>
+        /// <param name="orgId">filter tasks to a specific organization ID</param>
         /// <returns>A list of tasks</returns>
         public async System.Threading.Tasks.Task<List<Task>> FindTasks(string afterId, string userId,
-            string organizationId)
+            string orgId)
         {
-            var request = await Get($"/api/v2/tasks?after={afterId}&user={userId}&organization={organizationId}");
+            var request = await Get($"/api/v2/tasks?after={afterId}&user={userId}&organization={orgId}");
 
             var tasks = Call<Tasks>(request);
 
@@ -460,21 +460,21 @@ namespace InfluxData.Platform.Client.Client
         {
             Arguments.CheckNotNull(task, nameof(task));
 
-            return await GetLogs(task.Id, task.OrganizationId);
+            return await GetLogs(task.Id, task.OrgId);
         }
 
         /// <summary>
         /// Retrieve all logs for a task.
         /// </summary>
         /// <param name="taskId">ID of task to get logs for</param>
-        /// <param name="organizationId">ID of organization to get logs for</param>
+        /// <param name="orgId">ID of organization to get logs for</param>
         /// <returns>the list of all logs for a task</returns>
-        public async System.Threading.Tasks.Task<List<string>> GetLogs(string taskId, string organizationId)
+        public async System.Threading.Tasks.Task<List<string>> GetLogs(string taskId, string orgId)
         {
             Arguments.CheckNonEmptyString(taskId, nameof(taskId));
-            Arguments.CheckNonEmptyString(organizationId, nameof(organizationId));
+            Arguments.CheckNonEmptyString(orgId, nameof(orgId));
             
-            var request = await Get($"/api/v2/tasks/{taskId}/logs?orgID={organizationId}");
+            var request = await Get($"/api/v2/tasks/{taskId}/logs?orgID={orgId}");
 
             return Call<List<string>>(request, "task not found");
         }
@@ -505,44 +505,44 @@ namespace InfluxData.Platform.Client.Client
         {
             Arguments.CheckNotNull(task, nameof(task));
 
-            return await GetRuns(task.Id, task.OrganizationId, afterTime, beforeTime, limit);
+            return await GetRuns(task.Id, task.OrgId, afterTime, beforeTime, limit);
         }
 
         /// <summary>
         /// Retrieve list of run records for a task.
         /// </summary>
         /// <param name="taskId">ID of task to get runs for</param>
-        /// <param name="organizationId">ID of organization</param>
+        /// <param name="orgId">ID of organization</param>
         /// <returns>the list of run records for a task</returns>
-        public async System.Threading.Tasks.Task<List<Run>> GetRuns(string taskId, string organizationId)
+        public async System.Threading.Tasks.Task<List<Run>> GetRuns(string taskId, string orgId)
         {
             Arguments.CheckNonEmptyString(taskId, nameof(taskId));
-            Arguments.CheckNonEmptyString(organizationId, nameof(organizationId));
+            Arguments.CheckNonEmptyString(orgId, nameof(orgId));
 
-            return await GetRuns(taskId, organizationId, null, null, null);
+            return await GetRuns(taskId, orgId, null, null, null);
         }
 
         /// <summary>
         /// Retrieve list of run records for a task.
         /// </summary>
         /// <param name="taskId">ID of task to get runs for</param>
-        /// <param name="organizationId">ID of organization</param>
+        /// <param name="orgId">ID of organization</param>
         /// <param name="afterTime">filter runs to those scheduled after this time</param>
         /// <param name="beforeTime">filter runs to those scheduled before this time</param>
         /// <param name="limit">the number of runs to return. Default value: 20.</param>
         /// <returns>the list of run records for a task</returns>
-        public async System.Threading.Tasks.Task<List<Run>> GetRuns(string taskId, string organizationId,
+        public async System.Threading.Tasks.Task<List<Run>> GetRuns(string taskId, string orgId,
             DateTime? afterTime, DateTime? beforeTime, int? limit)
         {
             Arguments.CheckNonEmptyString(taskId, nameof(taskId));
-            Arguments.CheckNonEmptyString(organizationId, nameof(organizationId));
+            Arguments.CheckNonEmptyString(orgId, nameof(orgId));
 
             const string format = "yyyy-MM-dd'T'HH:mm:ss.fffZ";
             
             var after = afterTime?.ToString(format);
             var before = beforeTime?.ToString(format);
             
-            var path = $"/api/v2/tasks/{taskId}/runs?afterTime={after}&beforeTime={before}&orgID={organizationId}&limit={limit}";
+            var path = $"/api/v2/tasks/{taskId}/runs?afterTime={after}&beforeTime={before}&orgID={orgId}&limit={limit}";
             var request = await Get(path);
             
             var response = Call<Runs>(request);
@@ -626,11 +626,11 @@ namespace InfluxData.Platform.Client.Client
         /// Retrieve all logs for a run.
         /// </summary>
         /// <param name="run">the run to gets logs for it</param>
-        /// <param name="organizationId">ID of organization to get logs for it</param>
+        /// <param name="orgId">ID of organization to get logs for it</param>
         /// <returns>the list of all logs for a run</returns>
-        public async System.Threading.Tasks.Task<List<string>> GetRunLogs(Run run, string organizationId)
+        public async System.Threading.Tasks.Task<List<string>> GetRunLogs(Run run, string orgId)
         {
-            return await GetRunLogs(run.TaskId, run.Id, organizationId);
+            return await GetRunLogs(run.TaskId, run.Id, orgId);
         }
         
         /// <summary>
@@ -638,25 +638,25 @@ namespace InfluxData.Platform.Client.Client
         /// </summary>
         /// <param name="taskId">ID of task to get run logs for it</param>
         /// <param name="runId">ID of run to get logs for it</param>
-        /// <param name="organizationId">ID of organization to get logs for it</param>
+        /// <param name="orgId">ID of organization to get logs for it</param>
         /// <returns>the list of all logs for a run</returns>
-        public async System.Threading.Tasks.Task<List<string>> GetRunLogs(string taskId, string runId, string organizationId)
+        public async System.Threading.Tasks.Task<List<string>> GetRunLogs(string taskId, string runId, string orgId)
         {
             Arguments.CheckNonEmptyString(taskId, nameof(taskId));
             Arguments.CheckNonEmptyString(runId, nameof(runId));
-            Arguments.CheckNonEmptyString(organizationId, nameof(organizationId));
+            Arguments.CheckNonEmptyString(orgId, nameof(orgId));
 
-            var request = await Get($"/api/v2/tasks/{taskId}/runs/{runId}/logs?orgID={organizationId}");
+            var request = await Get($"/api/v2/tasks/{taskId}/runs/{runId}/logs?orgID={orgId}");
 
             return Call<List<string>>(request);
         }
         
-        private Task CreateTask(string name, string flux, string every, string cron, User user, string organizationId)
+        private Task CreateTask(string name, string flux, string every, string cron, User user, string orgId)
         {
             Arguments.CheckNonEmptyString(name, nameof(name));
             Arguments.CheckNonEmptyString(flux, nameof(flux));
             Arguments.CheckNotNull(user, nameof(user));
-            Arguments.CheckNonEmptyString(organizationId, nameof(organizationId));
+            Arguments.CheckNonEmptyString(orgId, nameof(orgId));
 
             if (every != null)
             {
@@ -666,7 +666,7 @@ namespace InfluxData.Platform.Client.Client
             var task = new Task
             {
                 Name = name,
-                OrganizationId = organizationId,
+                OrgId = orgId,
                 Owner = user,
                 Status = Status.Active,
                 Every = every,

@@ -36,19 +36,23 @@ namespace Flux.Examples.Examples
             //
             // Create New Bucket with retention 1h
             //
-            var temperatureBucket = await platform.CreateBucketClient().CreateBucket("temperature-sensors", medicalGMBH.Name);
+            var temperatureBucket = await platform.CreateBucketClient().CreateBucket("temperature-sensors", medicalGMBH.Id);
 
             //
             // Add Permissions to read and write to the Bucket
             //
+            var resource = new PermissionResource
+                {Type = PermissionResourceType.Bucket, OrgId = medicalGMBH.Id, Id = temperatureBucket.Id};
             var readBucket = new Permission
             {
-                Id = temperatureBucket.Id, Resource = PermissionResourceType.Bucket, Action = Permission.ReadAction
+                Resource = resource, 
+                Action = Permission.ReadAction
             };
 
             var writeBucket = new Permission
             {
-                Id = temperatureBucket.Id, Resource = PermissionResourceType.Bucket, Action = Permission.WriteAction
+                Resource = resource, 
+                Action = Permission.WriteAction
             };
 
             var authorization = await platform.CreateAuthorizationClient()

@@ -29,15 +29,24 @@ namespace Platform.Client.Tests
             var retention = new RetentionRule {Type = "expire", EverySeconds = 3600L};
 
             _bucket = await PlatformClient.CreateBucketClient()
-                .CreateBucket(GenerateName("h2o"), retention, "my-org");
+                .CreateBucket(GenerateName("h2o"), retention, _organization);
 
             //
             // Add Permissions to read and write to the Bucket
             //
+            var resource = new PermissionResource
+                {Type = PermissionResourceType.Bucket, OrgId = _organization.Id, Id = _bucket.Id};
+            
             var readBucket = new Permission
-                {Id = _bucket.Id, Resource = PermissionResourceType.Bucket, Action = Permission.ReadAction};
+            {
+                Resource = resource,
+                Action = Permission.ReadAction
+            };
             var writeBucket = new Permission
-                {Id = _bucket.Id, Resource = PermissionResourceType.Bucket, Action = Permission.WriteAction};
+            {
+                Resource = resource,
+                Action = Permission.WriteAction
+            };
 
             var loggedUser = await PlatformClient.CreateUserClient().Me();
             Assert.IsNotNull(loggedUser);
@@ -67,10 +76,12 @@ namespace Platform.Client.Tests
             const string record2 = "h2o_feet,location=coyote_creek level\\ water_level=2.0 2";
 
             _writeClient = PlatformClient.CreateWriteClient();
-            _writeClient.WriteRecords(bucketName, _organization.Id, TimeUnit.Nanos, new List<string> {record1, record2});
+            _writeClient.WriteRecords(bucketName, _organization.Id, TimeUnit.Nanos,
+                new List<string> {record1, record2});
             _writeClient.Flush();
 
-            var query = await _queryClient.Query("from(bucket:\"" + bucketName + "\") |> range(start: 0)", _organization.Id);
+            var query = await _queryClient.Query("from(bucket:\"" + bucketName + "\") |> range(start: 0)",
+                _organization.Id);
 
             Assert.AreEqual(1, query.Count);
 
@@ -98,7 +109,8 @@ namespace Platform.Client.Tests
             _writeClient.WriteRecords(bucketName, _organization.Id, TimeUnit.Nanos, record1, record2);
             _writeClient.Flush();
 
-            var query = await _queryClient.Query("from(bucket:\"" + bucketName + "\") |> range(start: 0)", _organization.Id);
+            var query = await _queryClient.Query("from(bucket:\"" + bucketName + "\") |> range(start: 0)",
+                _organization.Id);
 
             Assert.AreEqual(1, query.Count);
 
@@ -137,7 +149,8 @@ namespace Platform.Client.Tests
             _writeClient.Flush();
             Thread.Sleep(1000);
 
-            var query = await _queryClient.Query("from(bucket:\"" + bucketName + "\") |> range(start: 0)", _organization.Id);
+            var query = await _queryClient.Query("from(bucket:\"" + bucketName + "\") |> range(start: 0)",
+                _organization.Id);
 
             Assert.AreEqual(1, query.Count);
 
@@ -244,12 +257,14 @@ namespace Platform.Client.Tests
             _writeClient.WriteRecord(bucketName, _organization.Id, TimeUnit.Nanos, record4);
             _writeClient.WriteRecord(bucketName, _organization.Id, TimeUnit.Nanos, record5);
 
-            var query = await _queryClient.Query("from(bucket:\"" + bucketName + "\") |> range(start: 0)", _organization.Id);
+            var query = await _queryClient.Query("from(bucket:\"" + bucketName + "\") |> range(start: 0)",
+                _organization.Id);
             Assert.AreEqual(0, query.Count);
 
             Thread.Sleep(550);
 
-            query = await _queryClient.Query("from(bucket:\"" + bucketName + "\") |> range(start: 0)", _organization.Id);
+            query = await _queryClient.Query("from(bucket:\"" + bucketName + "\") |> range(start: 0)",
+                _organization.Id);
             Assert.AreEqual(1, query.Count);
 
             var records = query[0].Records;
@@ -278,14 +293,16 @@ namespace Platform.Client.Tests
             _writeClient.WriteRecord(bucketName, _organization.Id, TimeUnit.Nanos, record4);
             _writeClient.WriteRecord(bucketName, _organization.Id, TimeUnit.Nanos, record5);
 
-            var query = await _queryClient.Query("from(bucket:\"" + bucketName + "\") |> range(start: 0)", _organization.Id);
+            var query = await _queryClient.Query("from(bucket:\"" + bucketName + "\") |> range(start: 0)",
+                _organization.Id);
             Assert.AreEqual(0, query.Count);
 
             _writeClient.WriteRecord(bucketName, _organization.Id, TimeUnit.Nanos, record6);
 
             Thread.Sleep(10);
 
-            query = await _queryClient.Query("from(bucket:\"" + bucketName + "\") |> range(start: 0)", _organization.Id);
+            query = await _queryClient.Query("from(bucket:\"" + bucketName + "\") |> range(start: 0)",
+                _organization.Id);
             Assert.AreEqual(1, query.Count);
 
             var records = query[0].Records;
