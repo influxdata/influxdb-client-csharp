@@ -455,28 +455,24 @@ namespace Platform.Client.Tests
         }
 
         [Test]
-        //TODO
-        [Ignore("wait to change pAdapter{s: s, r: r} => pAdapter{s: s, r: r, rc: rc}")]
         public async Task CancelRunNotExist()
         {
             var task = await _taskClient.CreateTaskEvery(GenerateName("it task"), TaskFlux, "1s", _user, _organization);
 
-            Thread.Sleep(2_000);
+            Thread.Sleep(5_000);
 
             var runs = await _taskClient.GetRuns(task, null, null, 1);
             Assert.IsNotEmpty(runs);
 
-            var message = Assert.ThrowsAsync<InfluxException>(async () => await _taskClient.CancelRun(runs[0])).Message;
+            var message = Assert.ThrowsAsync<HttpException>(async () => await _taskClient.CancelRun(runs[0])).Message;
             
             Assert.AreEqual(message, "run not found");
         }
 
         [Test]
-        //TODO
-        [Ignore("wait to change pAdapter{s: s, r: r} => pAdapter{s: s, r: r, rc: rc}")]
         public void CancelRunTaskNotExist()
         {
-            var message = Assert.ThrowsAsync<InfluxException>(async () =>
+            var message = Assert.ThrowsAsync<HttpException>(async () =>
                 await _taskClient.CancelRun("020f755c3c082000", "020f755c3c082000")).Message;
 
             Assert.AreEqual(message, "task not found");
