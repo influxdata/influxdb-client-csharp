@@ -1,3 +1,4 @@
+using System.Linq;
 using InfluxData.Platform.Client.Client;
 using InfluxData.Platform.Client.Domain;
 using NUnit.Framework;
@@ -22,6 +23,11 @@ namespace Platform.Client.Tests
             _userClient = PlatformClient.CreateUserClient();
 
             _organization = await _organizationClient.CreateOrganization(GenerateName("Org"));
+            
+            foreach (var bucket in (await _bucketClient.FindBuckets()).Where(bucket => bucket.Name.EndsWith("-IT")))
+            {
+                await _bucketClient.DeleteBucket(bucket);
+            }
         }
 
         [Test]
@@ -119,6 +125,24 @@ namespace Platform.Client.Tests
         {
             var bucket = await _bucketClient.FindBucketById("020f755c3c082000");
 
+            Assert.IsNull(bucket);
+        }
+
+        [Test]
+        public async Task FindBucketByName()
+        {
+            var bucket = await _bucketClient.FindBucketByName("my-bucket");
+            
+            Assert.IsNotNull(bucket);
+            Assert.AreEqual("my-bucket", bucket.Name);
+            Assert.AreEqual((await FindMyOrg()).Id, bucket.OrgId);
+        }
+
+        [Test]
+        public async Task FindBucketByNameNotFound()
+        {
+            var bucket = await _bucketClient.FindBucketByName("my-bucket-not-found");
+            
             Assert.IsNull(bucket);
         }
         

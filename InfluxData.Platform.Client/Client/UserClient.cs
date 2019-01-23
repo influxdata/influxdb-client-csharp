@@ -131,7 +131,7 @@ namespace InfluxData.Platform.Client.Client
         {
             var request = await Get("/api/v2/me");
 
-            return Call<User>(request, 403);
+            return Call<User>(request, 401);
         }
 
         /// <summary>
@@ -246,7 +246,7 @@ namespace InfluxData.Platform.Client.Client
 
             var configuredTaskAwaitable = await Client.DoRequest(request).ConfigureAwait(false);
 
-            return Call<User>(configuredTaskAwaitable, 403);
+            return Call<User>(configuredTaskAwaitable, 401);
         }
     }
 }

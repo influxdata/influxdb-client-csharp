@@ -126,7 +126,7 @@ namespace Platform.Client.Tests
             Assert.AreEqual(_organization.Id, task.OrgId);
             Assert.AreEqual(Status.Active, task.Status);
             Assert.AreEqual("0 2 * * *", task.Cron);
-            Assert.AreEqual("0s", task.Every);
+            Assert.IsNull(task.Every);
             Assert.IsTrue(task.Flux.EndsWith(TaskFlux, StringComparison.OrdinalIgnoreCase));
         }
 
@@ -218,6 +218,8 @@ namespace Platform.Client.Tests
         }
         
         [Test]
+        [Ignore("https://github.com/influxdata/influxdb/issues/11491")]
+        //TODO
         public async Task FindTasksByOrganization()
         {
             var taskOrg = await PlatformClient.CreateOrganizationClient().CreateOrganization(GenerateName("Task user"));
@@ -266,6 +268,8 @@ namespace Platform.Client.Tests
         }
         
         [Test]
+        [Ignore("https://github.com/influxdata/influxdb/issues/11491")]
+        //TODO
         public async Task Member() {
 
             var task = await _taskClient.CreateTaskCron(GenerateName("it task"), TaskFlux, "0 2 * * *", _user, _organization);
@@ -293,6 +297,8 @@ namespace Platform.Client.Tests
         }
         
         [Test]
+        [Ignore("https://github.com/influxdata/influxdb/issues/11491")]
+        //TODO
         public async Task Owner() {
 
             var task = await _taskClient.CreateTaskCron(GenerateName("it task"), TaskFlux, "0 2 * * *", _user.Id, _organization.Id);
@@ -398,8 +404,6 @@ namespace Platform.Client.Tests
         }
 
         [Test]
-        //TODO
-        [Ignore("avoid panic: column _measurement is not of type time goroutine")]
         public async Task GetRun()
         {
             var task = await _taskClient.CreateTaskEvery(GenerateName("it task"), TaskFlux, "1s", _user, _organization);
@@ -425,8 +429,6 @@ namespace Platform.Client.Tests
         }
 
         [Test]
-        //TODO
-        [Ignore("avoid panic: column _measurement is not of type time goroutine")]
         public async Task RetryRun()
         {
             var task = await _taskClient.CreateTaskEvery(GenerateName("it task"), TaskFlux, "1s", _user, _organization);
@@ -440,8 +442,9 @@ namespace Platform.Client.Tests
             var retriedRun = await _taskClient.RetryRun(run);
             
             Assert.IsNotNull(retriedRun);
-            Assert.AreEqual(run.Id, retriedRun.Id);
-            Assert.Less(runs.Count, (await _taskClient.GetRuns(task)).Count);
+            Assert.AreEqual(run.TaskId, retriedRun.TaskId);
+            Assert.AreEqual(RunStatus.Scheduled, retriedRun.Status);
+            Assert.AreEqual(task.Id, retriedRun.TaskId);
         }
         
         [Test]
@@ -504,23 +507,21 @@ namespace Platform.Client.Tests
         
         private async Task<Authorization> AddAuthorization(Organization organization)
         {
-            var resource = new PermissionResource {Type = PermissionResourceType.Task, OrgId = organization.Id};
+            var resourceTask = new PermissionResource {Type = PermissionResourceType.Task, OrgId = organization.Id};
+            var resourceOrg = new PermissionResource {Type = PermissionResourceType.Org};
+            var resourceUser = new PermissionResource {Type = PermissionResourceType.User};
+            var resourceAuthorization = new PermissionResource {Type = PermissionResourceType.Authorization};
 
-            var createTask = new Permission
-                { 
-                    Resource = resource, 
-                    Action = Permission.ReadAction
-                    
-                };
-            
-            var deleteTask = new Permission
-            {
-                Resource = resource, 
-                Action = Permission.WriteAction
-            };
 
             var authorization = await PlatformClient.CreateAuthorizationClient()
-                .CreateAuthorization(organization, new List<Permission> {createTask, deleteTask});
+                .CreateAuthorization(organization, new List<Permission>
+                {
+                    new Permission {Resource = resourceTask, Action = Permission.ReadAction},
+                    new Permission {Resource = resourceTask, Action = Permission.WriteAction},
+                    new Permission {Resource = resourceOrg, Action = Permission.WriteAction},
+                    new Permission {Resource = resourceUser, Action = Permission.WriteAction},
+                    new Permission {Resource = resourceAuthorization, Action = Permission.WriteAction}
+                });
             
             return authorization;
         }

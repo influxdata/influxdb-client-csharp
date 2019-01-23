@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using InfluxData.Platform.Client.Domain;
 using Platform.Common.Platform;
@@ -143,6 +144,21 @@ namespace InfluxData.Platform.Client.Client
             var request = await Get($"/api/v2/buckets/{bucketId}");
 
             return Call<Bucket>(request, "bucket not found");
+        }
+        /// <summary>
+        /// Retrieve a bucket.
+        /// </summary>
+        /// <param name="bucketName">Name of bucket to get</param>
+        /// <returns>Bucket Details</returns>
+        public async Task<Bucket> FindBucketByName(string bucketName)
+        {
+            Arguments.CheckNonEmptyString(bucketName, nameof(bucketName));
+
+            var request = await Get($"/api/v2/buckets?name={bucketName}");
+            
+            var buckets = Call<Buckets>(request);
+
+            return buckets.BucketList.FirstOrDefault();
         }
 
         /// <summary>

@@ -118,6 +118,7 @@ namespace Platform.Client.Tests
         }
 
         [Test]
+        [Property("basic_auth", "true")]
         public async Task UpdateMePassword()
         {
             var me = await _userClient.MeUpdatePassword("my-password", "my-password");
@@ -137,6 +138,7 @@ namespace Platform.Client.Tests
         }
         
         [Test]
+        [Property("basic_auth", "true")]
         public async Task UpdatePassword() {
 
             var user = await _userClient.Me();
@@ -158,6 +160,7 @@ namespace Platform.Client.Tests
         }
 
         [Test]
+        [Property("basic_auth", "true")]
         public async Task UpdatePasswordById() {
 
             var user = await _userClient.Me();

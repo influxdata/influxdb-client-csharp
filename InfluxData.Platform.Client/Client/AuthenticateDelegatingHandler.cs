@@ -32,6 +32,11 @@ namespace InfluxData.Platform.Client.Client
         protected override async Task<HttpResponseMessage> SendAsync(
                         HttpRequestMessage request, CancellationToken cancellationToken)
         {
+            if (_signout)
+            {
+                return await base.SendAsync(request, cancellationToken);
+            }
+            
             if (PlatformOptions.AuthenticationScheme.Token.Equals(_platformOptions.AuthScheme))
             {
                 request.Headers.Add("Authorization", "Token " + String(_platformOptions.Token));
@@ -45,7 +50,7 @@ namespace InfluxData.Platform.Client.Client
                     request.Headers.Add("Cookie", "session=" + String(_sessionToken));
                 }
             }
-            
+
             // Call the inner handler.
             return await base.SendAsync(request, cancellationToken);
         }
@@ -103,6 +108,8 @@ namespace InfluxData.Platform.Client.Client
         {
             if (!PlatformOptions.AuthenticationScheme.Session.Equals(_platformOptions.AuthScheme) || _signout)
             {
+                _signout = true;
+                
                 return;
             }
 

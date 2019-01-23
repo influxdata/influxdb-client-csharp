@@ -374,8 +374,7 @@ namespace Platform.Client.Tests
             Thread.Sleep(100);
 
             Assert.IsNotNull(error);
-            Assert.AreEqual(error.Exception.Message,
-                "unable to parse 'h2o_feet,location=coyote_creek level\\ water_level=1.0 123456.789': bad timestamp");
+            Assert.AreEqual("unable to parse points: unable to parse 'h2o_feet,location=coyote_creek level\\ water_level=1.0 123456.789': bad timestamp", error.Exception.Message);
         }
 
         [Measurement("h2o")]

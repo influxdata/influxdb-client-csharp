@@ -19,16 +19,25 @@ namespace InfluxData.Platform.Client.Domain
         [EnumMember(Value =  "orgs")]
         Org,
 
+        [EnumMember(Value =  "sources")]
+        Source,
+
         [EnumMember(Value =  "tasks")]
         Task,
 
         [EnumMember(Value =  "telegrafs")]
         Telegraf,
 
-        [EnumMember(Value =  "sources")]
-        Source,
-
         [EnumMember(Value = "users")]
-        User
+        User,
+
+        [EnumMember(Value = "macros")]
+        Macro,
+
+        [EnumMember(Value = "scrapers")]
+        Scraper,
+
+        [EnumMember(Value = "secrets")]
+        Secret
     }
 }
