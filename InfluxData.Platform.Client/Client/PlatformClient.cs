@@ -113,7 +113,16 @@ namespace InfluxData.Platform.Client.Client
         {
             return new TaskClient(Client);
         }
-
+        
+        /// <summary>
+        /// Get the <see cref="Domain.ScraperTarget"/> client.
+        /// </summary>
+        /// <returns>the new client instance for Scraper API</returns>
+        public ScraperClient CreateScraperClient()
+        {
+            return new ScraperClient(Client);
+        }
+        
         /// <summary>
         /// Set the log level for the request and response information.
         /// </summary>

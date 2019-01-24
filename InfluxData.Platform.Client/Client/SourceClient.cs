@@ -20,7 +20,7 @@ namespace InfluxData.Platform.Client.Client
         /// <returns>created Source</returns>
         public async Task<Source> CreateSource(Source source)
         {
-            Arguments.CheckNotNull(source, "source");
+            Arguments.CheckNotNull(source, nameof(source));
 
             var response = await Post(source, "/api/v2/sources");
 
@@ -34,7 +34,7 @@ namespace InfluxData.Platform.Client.Client
         /// <returns>updated source</returns>
         public async Task<Source> UpdateSource(Source source)
         {
-            Arguments.CheckNotNull(source, "source");
+            Arguments.CheckNotNull(source, nameof(source));
 
             var result = await Patch(source, $"/api/v2/sources/{source.Id}");
 
@@ -48,7 +48,7 @@ namespace InfluxData.Platform.Client.Client
         /// <returns>async task</returns>
         public async Task DeleteSource(string sourceId)
         {
-            Arguments.CheckNotNull(sourceId, "Source ID");
+            Arguments.CheckNotNull(sourceId, nameof(sourceId));
 
             var request = await Delete($"/api/v2/sources/{sourceId}");
 
@@ -62,7 +62,7 @@ namespace InfluxData.Platform.Client.Client
         /// <returns>async task</returns>
         public async Task DeleteSource(Source source)
         {
-            Arguments.CheckNotNull(source, "source");
+            Arguments.CheckNotNull(source, nameof(source));
 
             await DeleteSource(source.Id);
         }
@@ -74,7 +74,7 @@ namespace InfluxData.Platform.Client.Client
         /// <returns>source details</returns>
         public async Task<Source> FindSourceById(string sourceId)
         {
-            Arguments.CheckNonEmptyString(sourceId, "Source ID");
+            Arguments.CheckNonEmptyString(sourceId, nameof(sourceId));
 
             var request = await Get($"/api/v2/sources/{sourceId}");
 
@@ -87,7 +87,7 @@ namespace InfluxData.Platform.Client.Client
         /// <returns>A list of sources</returns>
         public async Task<List<Source>> FindSources()
         {
-            var request = await Get($"/api/v2/sources");
+            var request = await Get("/api/v2/sources");
 
             var sources = Call<Sources>(request);
 
@@ -101,7 +101,7 @@ namespace InfluxData.Platform.Client.Client
         /// <returns>The buckets for source. If source does not exist than return null.</returns>
         public async Task<List<Bucket>> FindBucketsBySource(Source source)
         {
-            Arguments.CheckNotNull(source, "source");
+            Arguments.CheckNotNull(source, nameof(source));
 
             return await FindBucketsBySourceId(source.Id);
         }
@@ -113,7 +113,7 @@ namespace InfluxData.Platform.Client.Client
         /// <returns>The buckets for source. If source does not exist than return null.</returns>
         public async Task<List<Bucket>> FindBucketsBySourceId(string sourceId)
         {
-            Arguments.CheckNonEmptyString(sourceId, "Source ID");
+            Arguments.CheckNonEmptyString(sourceId, nameof(sourceId));
 
             var request = await Get($"/api/v2/sources/{sourceId}/buckets");
 
@@ -127,7 +127,7 @@ namespace InfluxData.Platform.Client.Client
         /// <returns>health of source</returns>
         public async Task<Health> Health(Source source)
         {
-            Arguments.CheckNotNull(source, "source");
+            Arguments.CheckNotNull(source, nameof(source));
 
             return await Health(source.Id);
         }
@@ -138,7 +138,7 @@ namespace InfluxData.Platform.Client.Client
         /// <returns>health of source</returns>
         public async Task<Health> Health(string sourceId)
         {
-            Arguments.CheckNonEmptyString(sourceId, "Source ID");
+            Arguments.CheckNonEmptyString(sourceId, nameof(sourceId));
             
             return await GetHealth($"/api/v2/sources/{sourceId}/health");
         }
