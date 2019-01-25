@@ -155,7 +155,7 @@ namespace InfluxData.Platform.Client.Client
                         }
                         else
                         {
-                            var exception = new HttpException(InfluxException.GetErrorMessage(task.Result), task.Result.StatusCode);
+                            var exception = HttpException.Create(task.Result);
 
                             Publish(new WriteErrorEvent(orgId, bucket, batchWriteItem.Options.Precision, lineProtocol, exception));
                         }

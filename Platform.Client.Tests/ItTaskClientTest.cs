@@ -19,15 +19,12 @@ namespace Platform.Client.Tests
         private UserClient _userClient;
 
         private Organization _organization;
-        private User _user;
 
         [SetUp]
         public new async Task SetUp()
         {
             _organization = await FindMyOrg();
 
-            _user = await PlatformClient.CreateUserClient().Me();
-            
             var authorization = await AddAuthorization(_organization);
 
             PlatformClient.Dispose();
@@ -49,7 +46,7 @@ namespace Platform.Client.Tests
 
             var task = new InfluxData.Platform.Client.Domain.Task
             {
-                Name = taskName, OrgId = _organization.Id, Owner = _user, Flux = flux, Status = Status.Active
+                Name = taskName, OrgId = _organization.Id, Flux = flux, Status = Status.Active
             };
 
             task = await _taskClient.CreateTask(task);
@@ -57,9 +54,6 @@ namespace Platform.Client.Tests
             Assert.IsNotNull(task);
             Assert.IsNotEmpty(task.Id);
             Assert.AreEqual(taskName, task.Name);
-            Assert.IsNotNull(task.Owner);
-            Assert.AreEqual(_user.Id, task.Owner.Id);
-            Assert.AreEqual(_user.Name, task.Owner.Name);
             Assert.AreEqual(_organization.Id, task.OrgId);
             Assert.AreEqual(Status.Active, task.Status);
             Assert.AreEqual("1h0m0s", task.Every);
@@ -76,7 +70,7 @@ namespace Platform.Client.Tests
 
             var task = new InfluxData.Platform.Client.Domain.Task
             {
-                Name = taskName, OrgId = _organization.Id, Owner = _user, Flux = flux, Status = Status.Active,
+                Name = taskName, OrgId = _organization.Id, Flux = flux, Status = Status.Active,
                 Offset = "30m"
             };
 
@@ -93,14 +87,11 @@ namespace Platform.Client.Tests
 
 
             var task =
-                await _taskClient.CreateTaskEvery(taskName, TaskFlux, "1h", _user, _organization);
+                await _taskClient.CreateTaskEvery(taskName, TaskFlux, "1h", _organization);
 
             Assert.IsNotNull(task);
             Assert.IsNotEmpty(task.Id);
             Assert.AreEqual(taskName, task.Name);
-            Assert.IsNotNull(task.Owner);
-            Assert.AreEqual(_user.Id, task.Owner.Id);
-            Assert.AreEqual(_user.Name, task.Owner.Name);
             Assert.AreEqual(_organization.Id, task.OrgId);
             Assert.AreEqual(Status.Active, task.Status);
             Assert.AreEqual("1h0m0s", task.Every);
@@ -115,14 +106,11 @@ namespace Platform.Client.Tests
 
 
             var task =
-                await _taskClient.CreateTaskCron(taskName, TaskFlux, "0 2 * * *", _user, _organization);
+                await _taskClient.CreateTaskCron(taskName, TaskFlux, "0 2 * * *", _organization);
 
             Assert.IsNotNull(task);
             Assert.IsNotEmpty(task.Id);
             Assert.AreEqual(taskName, task.Name);
-            Assert.IsNotNull(task.Owner);
-            Assert.AreEqual(_user.Id, task.Owner.Id);
-            Assert.AreEqual(_user.Name, task.Owner.Name);
             Assert.AreEqual(_organization.Id, task.OrgId);
             Assert.AreEqual(Status.Active, task.Status);
             Assert.AreEqual("0 2 * * *", task.Cron);
@@ -138,7 +126,7 @@ namespace Platform.Client.Tests
             var taskName = GenerateName("it task");
 
             var cronTask =
-                await _taskClient.CreateTaskCron(taskName, TaskFlux, "0 2 * * *", _user, _organization);
+                await _taskClient.CreateTaskCron(taskName, TaskFlux, "0 2 * * *", _organization);
 
             var flux = $"option task = {{\n    name: \"{taskName}\",\n    every: 2m\n}}\n\n{TaskFlux}";
 
@@ -150,9 +138,6 @@ namespace Platform.Client.Tests
             Assert.IsNotNull(updatedTask);
             Assert.IsNotEmpty(updatedTask.Id);
             Assert.AreEqual(taskName, updatedTask.Name);
-            Assert.IsNotNull(updatedTask.Owner);
-            Assert.AreEqual(_user.Id, updatedTask.Owner.Id);
-            Assert.AreEqual(_user.Name, updatedTask.Owner.Name);
             Assert.AreEqual(_organization.Id, updatedTask.OrgId);
             Assert.AreEqual(Status.Inactive, updatedTask.Status);
             Assert.IsNull(updatedTask.Cron);
@@ -165,7 +150,7 @@ namespace Platform.Client.Tests
         {
             var taskName = GenerateName("it task");
 
-            var task = await _taskClient.CreateTaskCron(taskName, TaskFlux, "0 2 * * *", _user, _organization);
+            var task = await _taskClient.CreateTaskCron(taskName, TaskFlux, "0 2 * * *", _organization);
             
             var taskById = await _taskClient.FindTaskById(task.Id);
             
@@ -173,7 +158,6 @@ namespace Platform.Client.Tests
             Assert.IsNotEmpty(task.Id);
             Assert.AreEqual(task.Id, taskById.Id);
             Assert.AreEqual(task.Name, taskById.Name);
-            Assert.AreEqual(task.Owner.Id, taskById.Owner.Id);
             Assert.AreEqual(task.OrgId, taskById.OrgId);
             Assert.AreEqual(task.Status, taskById.Status);
             Assert.AreEqual(task.Offset, taskById.Offset);
@@ -194,7 +178,7 @@ namespace Platform.Client.Tests
         {
             var count = (await _taskClient.FindTasks()).Count;
 
-            var task = await _taskClient.CreateTaskEvery(GenerateName("it task"), TaskFlux, "2h", _user.Id, _organization.Id);
+            var task = await _taskClient.CreateTaskEvery(GenerateName("it task"), TaskFlux, "2h", _organization.Id);
             Assert.IsNotNull(task);
 
             var tasks = await _taskClient.FindTasks();
@@ -203,6 +187,8 @@ namespace Platform.Client.Tests
         }
         
         [Test]
+        //TODO
+        [Ignore("set user password -> https://github.com/influxdata/influxdb/issues/11590")]
         public async Task FindTasksByUser()
         {
             var taskUser = await PlatformClient.CreateUserClient().CreateUser(GenerateName("Task user"));
@@ -210,7 +196,7 @@ namespace Platform.Client.Tests
             var count = (await _taskClient.FindTasksByUser(taskUser)).Count;
             Assert.AreEqual(0, count);
 
-            await _taskClient.CreateTaskCron(GenerateName("it task"), TaskFlux, "0 2 * * *", taskUser, _organization);
+            await _taskClient.CreateTaskCron(GenerateName("it task"), TaskFlux, "0 2 * * *", _organization);
 
             var tasks = await _taskClient.FindTasksByUser(taskUser);
 
@@ -232,7 +218,7 @@ namespace Platform.Client.Tests
             var count = (await _taskClient.FindTasksByOrganization(taskOrg)).Count;
             Assert.AreEqual(0, count);
 
-            await _taskClient.CreateTaskCron(GenerateName("it task"), TaskFlux, "0 2 * * *", _user, taskOrg);
+            await _taskClient.CreateTaskCron(GenerateName("it task"), TaskFlux, "0 2 * * *", taskOrg);
 
             var tasks = await _taskClient.FindTasksByOrganization(taskOrg);
 
@@ -244,8 +230,8 @@ namespace Platform.Client.Tests
         [Test]
         public async Task FindTasksAfterSpecifiedId()
         {
-            var task1 = await _taskClient.CreateTaskCron(GenerateName("it task"), TaskFlux, "0 2 * * *", _user, _organization);
-            var task2 = await _taskClient.CreateTaskCron(GenerateName("it task"), TaskFlux, "0 2 * * *", _user, _organization);
+            var task1 = await _taskClient.CreateTaskCron(GenerateName("it task"), TaskFlux, "0 2 * * *", _organization);
+            var task2 = await _taskClient.CreateTaskCron(GenerateName("it task"), TaskFlux, "0 2 * * *", _organization);
 
             var tasks = await  _taskClient.FindTasks(task1.Id, null, null);
             
@@ -256,7 +242,7 @@ namespace Platform.Client.Tests
         [Test]
         public async Task DeleteTask()
         {
-            var task = await _taskClient.CreateTaskCron(GenerateName("it task"), TaskFlux, "0 2 * * *", _user, _organization);
+            var task = await _taskClient.CreateTaskCron(GenerateName("it task"), TaskFlux, "0 2 * * *", _organization);
 
             var foundTask = await _taskClient.FindTaskById(task.Id);
             Assert.IsNotNull(foundTask);
@@ -272,7 +258,7 @@ namespace Platform.Client.Tests
         //TODO
         public async Task Member() {
 
-            var task = await _taskClient.CreateTaskCron(GenerateName("it task"), TaskFlux, "0 2 * * *", _user, _organization);
+            var task = await _taskClient.CreateTaskCron(GenerateName("it task"), TaskFlux, "0 2 * * *", _organization);
 
             var members =  await _taskClient.GetMembers(task);
             Assert.AreEqual(0, members.Count);
@@ -301,7 +287,7 @@ namespace Platform.Client.Tests
         //TODO
         public async Task Owner() {
 
-            var task = await _taskClient.CreateTaskCron(GenerateName("it task"), TaskFlux, "0 2 * * *", _user.Id, _organization.Id);
+            var task = await _taskClient.CreateTaskCron(GenerateName("it task"), TaskFlux, "0 2 * * *", _organization.Id);
 
             var owners =  await _taskClient.GetOwners(task);
             Assert.AreEqual(0, owners.Count);
@@ -329,7 +315,7 @@ namespace Platform.Client.Tests
         [Test]
         public async Task GetLogs()
         {
-            var task = await _taskClient.CreateTaskEvery(GenerateName("it task"), TaskFlux, "1s", _user.Id, _organization.Id);
+            var task = await _taskClient.CreateTaskEvery(GenerateName("it task"), TaskFlux, "1s", _organization.Id);
 
             Thread.Sleep(5_000);
 
@@ -349,7 +335,7 @@ namespace Platform.Client.Tests
         [Test]
         public async Task Runs()
         {
-            var task = await _taskClient.CreateTaskEvery(GenerateName("it task"), TaskFlux, "1s", _user.Id, _organization.Id);
+            var task = await _taskClient.CreateTaskEvery(GenerateName("it task"), TaskFlux, "1s", _organization.Id);
 
             Thread.Sleep(5_000);
 
@@ -378,7 +364,7 @@ namespace Platform.Client.Tests
         {
             var now = DateTime.UtcNow;
             
-            var task = await _taskClient.CreateTaskEvery(GenerateName("it task"), TaskFlux, "1s", _user.Id, _organization.Id);
+            var task = await _taskClient.CreateTaskEvery(GenerateName("it task"), TaskFlux, "1s", _organization.Id);
 
             Thread.Sleep(5_000);
 
@@ -392,7 +378,7 @@ namespace Platform.Client.Tests
         [Test]
         public async Task RunsLimit()
         {
-            var task = await _taskClient.CreateTaskEvery(GenerateName("it task"), TaskFlux, "1s", _user, _organization);
+            var task = await _taskClient.CreateTaskEvery(GenerateName("it task"), TaskFlux, "1s", _organization);
             
             Thread.Sleep(5_000);
             
@@ -406,7 +392,7 @@ namespace Platform.Client.Tests
         [Test]
         public async Task GetRun()
         {
-            var task = await _taskClient.CreateTaskEvery(GenerateName("it task"), TaskFlux, "1s", _user, _organization);
+            var task = await _taskClient.CreateTaskEvery(GenerateName("it task"), TaskFlux, "1s", _organization);
             Thread.Sleep(5_000);
             
             var runs = await _taskClient.GetRuns(task, null, null, 1);
@@ -422,7 +408,7 @@ namespace Platform.Client.Tests
         [Test]
         public async Task RunNotExist()
         {
-            var task = await _taskClient.CreateTaskEvery(GenerateName("it task"), TaskFlux, "1s", _user, _organization);
+            var task = await _taskClient.CreateTaskEvery(GenerateName("it task"), TaskFlux, "1s", _organization);
             
             var run = await  _taskClient.GetRun(task.Id, "020f755c3c082000");
             Assert.IsNull(run);
@@ -431,7 +417,7 @@ namespace Platform.Client.Tests
         [Test]
         public async Task RetryRun()
         {
-            var task = await _taskClient.CreateTaskEvery(GenerateName("it task"), TaskFlux, "1s", _user, _organization);
+            var task = await _taskClient.CreateTaskEvery(GenerateName("it task"), TaskFlux, "1s", _organization);
             Thread.Sleep(5_000);
             
             var runs = await _taskClient.GetRuns(task, null, null, 1);
@@ -450,7 +436,7 @@ namespace Platform.Client.Tests
         [Test]
         public async Task RetryRunNotExist()
         {
-            var task = await _taskClient.CreateTaskEvery(GenerateName("it task"), TaskFlux, "1s", _user, _organization);
+            var task = await _taskClient.CreateTaskEvery(GenerateName("it task"), TaskFlux, "1s", _organization);
             
             var retriedRun = await _taskClient.RetryRun(task.Id, "020f755c3c082000");
             
@@ -460,14 +446,14 @@ namespace Platform.Client.Tests
         [Test]
         public async Task CancelRunNotExist()
         {
-            var task = await _taskClient.CreateTaskEvery(GenerateName("it task"), TaskFlux, "1s", _user, _organization);
+            var task = await _taskClient.CreateTaskEvery(GenerateName("it task"), TaskFlux, "1s", _organization);
 
             Thread.Sleep(5_000);
 
             var runs = await _taskClient.GetRuns(task, null, null, 1);
             Assert.IsNotEmpty(runs);
 
-            var message = Assert.ThrowsAsync<HttpException>(async () => await _taskClient.CancelRun(runs[0])).Message;
+            var message = Assert.ThrowsAsync<HttpException>(async () => await _taskClient.CancelRun(runs[0])).ErrorBody["error"].ToString();
             
             Assert.AreEqual(message, "run not found");
         }
@@ -476,7 +462,7 @@ namespace Platform.Client.Tests
         public void CancelRunTaskNotExist()
         {
             var message = Assert.ThrowsAsync<HttpException>(async () =>
-                await _taskClient.CancelRun("020f755c3c082000", "020f755c3c082000")).Message;
+                await _taskClient.CancelRun("020f755c3c082000", "020f755c3c082000")).ErrorBody["error"].ToString();
 
             Assert.AreEqual(message, "task not found");
         }
@@ -484,7 +470,7 @@ namespace Platform.Client.Tests
         [Test]
         public async Task GetRunLogs()
         {
-            var task = await _taskClient.CreateTaskEvery(GenerateName("it task"), TaskFlux, "1s", _user, _organization);
+            var task = await _taskClient.CreateTaskEvery(GenerateName("it task"), TaskFlux, "1s", _organization);
             
             Thread.Sleep(4_000);
             
@@ -499,7 +485,7 @@ namespace Platform.Client.Tests
         [Test]
         public async Task GetRunLogsNotExist()
         {
-            var task = await _taskClient.CreateTaskEvery(GenerateName("it task"), TaskFlux, "1s", _user, _organization);
+            var task = await _taskClient.CreateTaskEvery(GenerateName("it task"), TaskFlux, "1s", _organization);
             
             var logs = await _taskClient.GetRunLogs(task.Id,"020f755c3c082000",  _organization.Id);
             Assert.IsEmpty(logs);

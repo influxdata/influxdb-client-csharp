@@ -78,7 +78,7 @@ namespace InfluxData.Platform.Client.Client
 
             var request = await Get($"/api/v2/sources/{sourceId}");
 
-            return Call<Source>(request, "source not found");
+            return Call<Source>(request, 404);
         }
         
         /// <summary>
@@ -117,7 +117,7 @@ namespace InfluxData.Platform.Client.Client
 
             var request = await Get($"/api/v2/sources/{sourceId}/buckets");
 
-            return Call<List<Bucket>>(request, "source not found");
+            return Call<List<Bucket>>(request, 404);
         }
 
         /// <summary>

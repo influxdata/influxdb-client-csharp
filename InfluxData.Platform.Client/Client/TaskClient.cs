@@ -51,20 +51,18 @@ namespace InfluxData.Platform.Client.Client
         /// <param name="name">description of the task</param>
         /// <param name="flux">the Flux script to run for this task</param>
         /// <param name="cron">a task repetition schedule in the form '* * * * * *'</param>
-        /// <param name="user">the user that owns this Task</param>
         /// <param name="organization">the organization that owns this Task</param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public async System.Threading.Tasks.Task<Task> CreateTaskCron(string name, string flux, string cron, User user,
+        public async System.Threading.Tasks.Task<Task> CreateTaskCron(string name, string flux, string cron,
             Organization organization)
         {
             Arguments.CheckNonEmptyString(name, nameof(name));
             Arguments.CheckNonEmptyString(flux, nameof(flux));
             Arguments.CheckNonEmptyString(cron, nameof(cron));
-            Arguments.CheckNotNull(user, nameof(user));
             Arguments.CheckNotNull(organization, nameof(organization));
 
-            var task = CreateTask(name, flux, null, cron, user, organization.Id);
+            var task = CreateTask(name, flux, null, cron, organization.Id);
 
             return await CreateTask(task);
         }
@@ -76,23 +74,20 @@ namespace InfluxData.Platform.Client.Client
         /// <param name="name">description of the task</param>
         /// <param name="flux">the Flux script to run for this task</param>
         /// <param name="cron">a task repetition schedule in the form '* * * * * *'</param>
-        /// <param name="userId">the user ID that owns this Task</param>
         /// <param name="orgId">the organization ID that owns this Task</param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
         public async System.Threading.Tasks.Task<Task> CreateTaskCron(string name, string flux, string cron,
-            string userId, string orgId)
+            string orgId)
         {
             Arguments.CheckNonEmptyString(name, nameof(name));
             Arguments.CheckNonEmptyString(flux, nameof(flux));
             Arguments.CheckNonEmptyString(cron, nameof(cron));
-            Arguments.CheckNonEmptyString(userId, nameof(userId));
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
 
-            var user = new User {Id = userId};
             var organization = new Organization {Id = orgId};
 
-            return await CreateTaskCron(name, flux, cron, user, organization);
+            return await CreateTaskCron(name, flux, cron, organization);
         }
 
         /// <summary>
@@ -102,20 +97,18 @@ namespace InfluxData.Platform.Client.Client
         /// <param name="name">description of the task</param>
         /// <param name="flux">the Flux script to run for this task</param>
         /// <param name="every">a task repetition by duration expression</param>
-        /// <param name="user">the user that owns this Task</param>
         /// <param name="organization">the organization that owns this Task</param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
         public async System.Threading.Tasks.Task<Task> CreateTaskEvery(string name, string flux, string every,
-            User user, Organization organization)
+            Organization organization)
         {
             Arguments.CheckNonEmptyString(name, nameof(name));
             Arguments.CheckNonEmptyString(flux, nameof(flux));
             Arguments.CheckNonEmptyString(every, nameof(every));
-            Arguments.CheckNotNull(user, nameof(user));
             Arguments.CheckNotNull(organization, nameof(organization));
 
-            var task = CreateTask(name, flux, every, null, user, organization.Id);
+            var task = CreateTask(name, flux, every, null, organization.Id);
 
             return await CreateTask(task);
         }
@@ -127,23 +120,20 @@ namespace InfluxData.Platform.Client.Client
         /// <param name="name">description of the task</param>
         /// <param name="flux">the Flux script to run for this task</param>
         /// <param name="every">a task repetition by duration expression</param>
-        /// <param name="userId">the user ID that owns this Task</param>
         /// <param name="orgId">the organization ID that owns this Task</param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
         public async System.Threading.Tasks.Task<Task> CreateTaskEvery(string name, string flux, string every,
-            string userId, string orgId)
+            string orgId)
         {
             Arguments.CheckNonEmptyString(name, nameof(name));
             Arguments.CheckNonEmptyString(flux, nameof(flux));
             Arguments.CheckNonEmptyString(every, nameof(every));
-            Arguments.CheckNonEmptyString(userId, nameof(userId));
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
 
-            var user = new User {Id = userId};
             var organization = new Organization {Id = orgId};
 
-            return await CreateTaskEvery(name, flux, every, user, organization);
+            return await CreateTaskEvery(name, flux, every, organization);
         }
 
         /// <summary>
@@ -197,7 +187,7 @@ namespace InfluxData.Platform.Client.Client
 
             var request = await Get($"/api/v2/tasks/{taskId}");
 
-            return Call<Task>(request, "task not found");
+            return Call<Task>(request, 404);
         }
 
         /// <summary>
@@ -563,7 +553,7 @@ namespace InfluxData.Platform.Client.Client
 
             var request = await Get($"/api/v2/tasks/{taskId}/runs/{runId}");
 
-            return Call<Run>(request, "expected one run, got 0");
+            return Call<Run>(request, 404);
         }
 
         /// <summary>
@@ -651,11 +641,10 @@ namespace InfluxData.Platform.Client.Client
             return Call<List<string>>(request);
         }
         
-        private Task CreateTask(string name, string flux, string every, string cron, User user, string orgId)
+        private Task CreateTask(string name, string flux, string every, string cron, string orgId)
         {
             Arguments.CheckNonEmptyString(name, nameof(name));
             Arguments.CheckNonEmptyString(flux, nameof(flux));
-            Arguments.CheckNotNull(user, nameof(user));
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
 
             if (every != null)
@@ -667,7 +656,6 @@ namespace InfluxData.Platform.Client.Client
             {
                 Name = name,
                 OrgId = orgId,
-                Owner = user,
                 Status = Status.Active,
                 Every = every,
                 Cron = cron,

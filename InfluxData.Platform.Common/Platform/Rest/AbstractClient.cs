@@ -156,9 +156,12 @@ namespace Platform.Common.Platform.Rest
                 return false;
             }
 
-            var errorMessage = InfluxException.GetErrorMessage(resultRequest);
+            var exception = HttpException.Create(resultRequest);
+            var errorMessage = exception.Message;
             
-            if (nullError != null && errorMessage != null && errorMessage.Equals(nullError))
+            //TODO remove https://github.com/influxdata/influxdb/issues/11589
+            if (nullError != null && errorMessage != null && 
+                (errorMessage.Equals(nullError) || (exception.ErrorBody.ContainsKey("error") && exception.ErrorBody["error"].ToString().Equals(nullError))))
             {
                 Trace.WriteLine($"Error is considered as null response: {errorMessage}");
                 
@@ -172,7 +175,7 @@ namespace Platform.Common.Platform.Rest
                 return true;
             }
 
-            throw new HttpException(errorMessage, statusCode);
+            throw exception;
         }
         
         private StringContent CreateBody(object content)

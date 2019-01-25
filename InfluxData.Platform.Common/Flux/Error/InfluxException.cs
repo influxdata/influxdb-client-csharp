@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Linq;
 using Newtonsoft.Json.Linq;
+using Platform.Common.Platform;
 using Platform.Common.Platform.Rest;
 
 namespace Platform.Common.Flux.Error
@@ -17,33 +18,6 @@ namespace Platform.Common.Flux.Error
         /// Gets the HTTP status code of the unsuccessful response. If the response is not present than return "0".
         /// </summary>
         public int Status { get; set; }
-
-        public static string GetErrorMessage(RequestResult response)
-        {
-            if (response == null)
-            {
-                throw new ArgumentNullException();
-            }
-
-            if (response.ResponseHeaders.ContainsKey("X-Platform-Error-Code"))
-            {
-                var readToEnd = new StreamReader(response.ResponseContent).ReadToEnd();
-
-                var json = JObject.Parse(readToEnd);
-                if (json.ContainsKey("message"))
-                {
-                    return json.GetValue("message").ToString();
-                }
-            }
-
-            var keys = new [] {"X-Platform-Error-Code", "X-Influx-Error", "X-InfluxDb-Error"};
-
-            var message = response.ResponseHeaders
-                .Where(header => keys.Contains(header.Key, StringComparer.OrdinalIgnoreCase))
-                .Select(header => header.Value.First());
-
-            return message.FirstOrDefault();
-        }
 
         public InfluxException(string message) : this(message, 0)
         {
@@ -63,9 +37,50 @@ namespace Platform.Common.Flux.Error
 
     public class HttpException : InfluxException
     {
+        /// <summary>
+        /// The JSON unsuccessful response body.
+        /// </summary>
+        public JObject ErrorBody { get; set; }
+
         public HttpException(string message, int status) : base(message, 0)
         {
             Status = status;
+        }
+
+        public static HttpException Create(RequestResult requestResult)
+        {
+            Arguments.CheckNotNull(requestResult, nameof(requestResult));
+
+            string errorMessage = null;
+            JObject errorBody;
+
+            var readToEnd = new StreamReader(requestResult.ResponseContent).ReadToEnd();
+            if (string.IsNullOrEmpty(readToEnd))
+            {
+                errorBody = new JObject();
+            }
+            else
+            {
+                errorBody = JObject.Parse(readToEnd);
+            }
+
+            if (errorBody.ContainsKey("message"))
+            {
+                errorMessage = errorBody.GetValue("message").ToString();
+            }
+
+            var keys = new[] {"X-Platform-Error-Code", "X-Influx-Error", "X-InfluxDb-Error"};
+
+            if (string.IsNullOrEmpty(errorMessage))
+            {
+                var message = requestResult.ResponseHeaders
+                    .Where(header => keys.Contains(header.Key, StringComparer.OrdinalIgnoreCase))
+                    .Select(header => header.Value.First());
+
+                errorMessage = message.FirstOrDefault();
+            }
+
+            return new HttpException(errorMessage, requestResult.StatusCode) {ErrorBody = errorBody};
         }
     }
 }

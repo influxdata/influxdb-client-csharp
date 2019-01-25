@@ -19,12 +19,6 @@ namespace InfluxData.Platform.Client.Domain
         public string Name { get; set; }
 
         /// <summary>
-        /// The <see cref="User"/> that owns this Task.
-        /// </summary>
-        [JsonProperty("owner")]
-        public User Owner { get; set; }
-
-        /// <summary>
         /// The ID of the organization that owns this Task.
         /// </summary>
         [JsonProperty("orgID")]
@@ -65,7 +59,6 @@ namespace InfluxData.Platform.Client.Domain
             return new StringBuilder(GetType().Name + "[")
                 .Append("id='" + Id + "'")
                 .Append(", name='" + Name + "'")
-                .Append(", owner=" + Owner)
                 .Append(", organizationId='" + OrgId + "'")
                 .Append(", status=" + Status)
                 .Append(", flux='" + Flux + "'")
