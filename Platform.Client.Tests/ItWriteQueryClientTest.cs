@@ -35,7 +35,7 @@ namespace Platform.Client.Tests
             // Add Permissions to read and write to the Bucket
             //
             var resource = new PermissionResource
-                {Type = PermissionResourceType.Bucket, OrgId = _organization.Id, Id = _bucket.Id};
+                {Type = ResourceType.Buckets, OrgId = _organization.Id, Id = _bucket.Id};
             
             var readBucket = new Permission
             {

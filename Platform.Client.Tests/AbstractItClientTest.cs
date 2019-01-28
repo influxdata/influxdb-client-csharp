@@ -61,7 +61,7 @@ namespace Platform.Client.Tests
                     var resource = permission.Resource;
 
                     return resource.Id == null && resource.OrgId == null &&
-                           resource.Type.Equals(PermissionResourceType.Org);
+                           resource.Type.Equals(ResourceType.Orgs);
                 }).Count();
 
                 return count > 0;

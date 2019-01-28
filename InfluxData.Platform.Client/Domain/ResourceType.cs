@@ -5,42 +5,42 @@ namespace InfluxData.Platform.Client.Domain
     /// <summary>
     /// The type of resource. 
     /// </summary>
-    public enum PermissionResourceType
+    public enum ResourceType
     {
         [EnumMember(Value =  "authorizations")]
-        Authorization,
+        Authorizations,
 
         [EnumMember(Value =  "buckets")]
-        Bucket,
+        Buckets,
 
         [EnumMember(Value =  "dashboards")]
-        Dashboard,
+        Dashboards,
 
         [EnumMember(Value =  "orgs")]
-        Org,
+        Orgs,
 
         [EnumMember(Value =  "sources")]
-        Source,
+        Sources,
 
         [EnumMember(Value =  "tasks")]
-        Task,
+        Tasks,
 
         [EnumMember(Value =  "telegrafs")]
-        Telegraf,
+        Telegrafs,
 
         [EnumMember(Value = "users")]
-        User,
+        Users,
 
         [EnumMember(Value = "macros")]
-        Macro,
+        Macros,
 
         [EnumMember(Value = "scrapers")]
-        Scraper,
+        Scrapers,
 
         [EnumMember(Value = "secrets")]
-        Secret,
+        Secrets,
 
         [EnumMember(Value = "labels")]
-        Label
+        Labels
     }
 }

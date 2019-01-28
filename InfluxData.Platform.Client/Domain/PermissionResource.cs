@@ -12,7 +12,7 @@ namespace InfluxData.Platform.Client.Domain
         public string Id { get; set; }
         
         [JsonProperty("type"), JsonConverter(typeof(StringEnumConverter))]
-        public PermissionResourceType Type { get; set; }
+        public ResourceType Type { get; set; }
         
         [JsonProperty("orgID")]
         public string OrgId { get; set; }

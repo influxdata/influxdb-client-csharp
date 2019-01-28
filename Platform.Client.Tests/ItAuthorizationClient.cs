@@ -27,13 +27,13 @@ namespace Platform.Client.Tests
             var readUsers = new Permission
             {
                 Action = Permission.ReadAction,
-                Resource = new PermissionResource {Type = PermissionResourceType.User, OrgId = _organization.Id}
+                Resource = new PermissionResource {Type = ResourceType.Users, OrgId = _organization.Id}
             };
 
             var writeOrganizations = new Permission
             {
                 Action = Permission.WriteAction,
-                Resource = new PermissionResource {Type = PermissionResourceType.Org, OrgId = _organization.Id}
+                Resource = new PermissionResource {Type = ResourceType.Orgs, OrgId = _organization.Id}
             };
 
             var permissions = new List<Permission> {readUsers, writeOrganizations};
@@ -48,11 +48,11 @@ namespace Platform.Client.Tests
             Assert.AreEqual(authorization.Status, Status.Active);
 
             Assert.AreEqual(authorization.Permissions.Count, 2);
-            Assert.AreEqual(authorization.Permissions[0].Resource.Type, PermissionResourceType.User);
+            Assert.AreEqual(authorization.Permissions[0].Resource.Type, ResourceType.Users);
             Assert.AreEqual(authorization.Permissions[0].Resource.OrgId, _organization.Id);
             Assert.AreEqual(authorization.Permissions[0].Action, "read");
             
-            Assert.AreEqual(authorization.Permissions[1].Resource.Type, PermissionResourceType.Org);
+            Assert.AreEqual(authorization.Permissions[1].Resource.Type, ResourceType.Orgs);
             Assert.AreEqual(authorization.Permissions[1].Resource.OrgId, _organization.Id);
             Assert.AreEqual(authorization.Permissions[1].Action, "write");
 
@@ -69,7 +69,7 @@ namespace Platform.Client.Tests
             var writeSources = new Permission
             {
                 Action = Permission.WriteAction,
-                Resource = new PermissionResource {Type = PermissionResourceType.Source, OrgId = _organization.Id}
+                Resource = new PermissionResource {Type = ResourceType.Sources, OrgId = _organization.Id}
             };
 
             var authorization = new Authorization
@@ -91,7 +91,7 @@ namespace Platform.Client.Tests
             var readUsers = new Permission
             {
                 Action = Permission.ReadAction,
-                Resource = new PermissionResource {Type = PermissionResourceType.User, OrgId = _organization.Id}
+                Resource = new PermissionResource {Type = ResourceType.Users, OrgId = _organization.Id}
             };
 
             var permissions = new List<Permission> {readUsers};
@@ -186,7 +186,7 @@ namespace Platform.Client.Tests
         
         private List<Permission> NewPermissions()
         {
-            var resource = new PermissionResource {Type = PermissionResourceType.User, OrgId = _organization.Id};
+            var resource = new PermissionResource {Type = ResourceType.Users, OrgId = _organization.Id};
 
             var permission = new Permission
             {

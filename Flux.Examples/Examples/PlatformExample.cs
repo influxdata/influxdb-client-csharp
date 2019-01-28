@@ -42,7 +42,7 @@ namespace Flux.Examples.Examples
             // Add Permissions to read and write to the Bucket
             //
             var resource = new PermissionResource
-                {Type = PermissionResourceType.Bucket, OrgId = medicalGMBH.Id, Id = temperatureBucket.Id};
+                {Type = ResourceType.Buckets, OrgId = medicalGMBH.Id, Id = temperatureBucket.Id};
             var readBucket = new Permission
             {
                 Resource = resource, 

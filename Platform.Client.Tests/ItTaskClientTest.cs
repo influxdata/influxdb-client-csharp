@@ -493,10 +493,10 @@ namespace Platform.Client.Tests
         
         private async Task<Authorization> AddAuthorization(Organization organization)
         {
-            var resourceTask = new PermissionResource {Type = PermissionResourceType.Task, OrgId = organization.Id};
-            var resourceOrg = new PermissionResource {Type = PermissionResourceType.Org};
-            var resourceUser = new PermissionResource {Type = PermissionResourceType.User};
-            var resourceAuthorization = new PermissionResource {Type = PermissionResourceType.Authorization};
+            var resourceTask = new PermissionResource {Type = ResourceType.Tasks, OrgId = organization.Id};
+            var resourceOrg = new PermissionResource {Type = ResourceType.Orgs};
+            var resourceUser = new PermissionResource {Type = ResourceType.Users};
+            var resourceAuthorization = new PermissionResource {Type = ResourceType.Authorizations};
 
 
             var authorization = await PlatformClient.CreateAuthorizationClient()
