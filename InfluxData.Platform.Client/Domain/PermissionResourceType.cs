@@ -38,6 +38,9 @@ namespace InfluxData.Platform.Client.Domain
         Scraper,
 
         [EnumMember(Value = "secrets")]
-        Secret
+        Secret,
+
+        [EnumMember(Value = "labels")]
+        Label
     }
 }

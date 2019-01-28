@@ -553,7 +553,7 @@ namespace InfluxData.Platform.Client.Client
 
             var request = await Get($"/api/v2/tasks/{taskId}/runs/{runId}");
 
-            return Call<Run>(request, 404);
+            return Call<Run>(request, "failed to find run");
         }
 
         /// <summary>
