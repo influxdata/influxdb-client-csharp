@@ -122,6 +122,15 @@ namespace InfluxData.Platform.Client.Client
         {
             return new ScraperClient(Client);
         }
+
+        /// <summary>
+        /// Get the <see cref="Domain.Label"/> client.
+        /// </summary>
+        /// <returns>the new client instance for Label API</returns>
+        public LabelClient CreateLabelClient()
+        {
+            return new LabelClient(Client);
+        }
         
         /// <summary>
         /// Set the log level for the request and response information.
