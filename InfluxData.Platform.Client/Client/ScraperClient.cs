@@ -45,10 +45,10 @@ namespace InfluxData.Platform.Client.Client
 
             var scrapperTarget = new ScraperTarget
                 {Name = name, Url = url, BucketId = bucketId, OrgId = orgId, Type = ScraperType.Prometheus};
-            
+
             return await CreateScraperTarget(scrapperTarget);
         }
-        
+
         /// <summary>
         /// Update a ScraperTarget.
         /// </summary>
@@ -62,7 +62,7 @@ namespace InfluxData.Platform.Client.Client
 
             return Call<ScraperTargetResponse>(result);
         }
-        
+
         /// <summary>
         /// Delete a ScraperTarget.
         /// </summary>
@@ -88,7 +88,7 @@ namespace InfluxData.Platform.Client.Client
 
             await DeleteScraperTarget(scraperTarget.Id);
         }
-         
+
         /// <summary>
         /// Retrieve a ScraperTarget.
         /// </summary>
@@ -102,7 +102,7 @@ namespace InfluxData.Platform.Client.Client
 
             return Call<ScraperTargetResponse>(request, 404);
         }
-        
+
         /// <summary>
         /// Get all ScraperTargets.
         /// </summary>
@@ -115,8 +115,8 @@ namespace InfluxData.Platform.Client.Client
 
             return responses.TargetResponses;
         }
-        
-         /// <summary>
+
+        /// <summary>
         /// List all members of a ScraperTarget.
         /// </summary>
         /// <param name="scraperTarget">ScraperTarget of the members</param>
@@ -200,7 +200,7 @@ namespace InfluxData.Platform.Client.Client
         {
             Arguments.CheckNonEmptyString(scraperTargetId, nameof(scraperTargetId));
             Arguments.CheckNonEmptyString(memberId, nameof(memberId));
-            
+
             var request = await Delete($"/api/v2/scrapers/{scraperTargetId}/members/{memberId}");
 
             RaiseForInfluxError(request);
@@ -290,10 +290,90 @@ namespace InfluxData.Platform.Client.Client
         {
             Arguments.CheckNonEmptyString(scraperTargetId, nameof(scraperTargetId));
             Arguments.CheckNonEmptyString(ownerId, nameof(ownerId));
-            
+
             var request = await Delete($"/api/v2/scrapers/{scraperTargetId}/owners/{ownerId}");
 
             RaiseForInfluxError(request);
+        }
+
+        /// <summary>
+        /// List all labels of a ScraperTarget.
+        /// </summary>
+        /// <param name="scraperTarget">a ScraperTarget of the labels</param>
+        /// <returns>the List all labels of a ScraperTarget</returns>
+        public async Task<List<Label>> GetLabels(ScraperTarget scraperTarget)
+        {
+            Arguments.CheckNotNull(scraperTarget, nameof(scraperTarget));
+
+            return await GetLabels(scraperTarget.Id);
+        }
+
+        /// <summary>
+        /// List all labels of a ScraperTarget.
+        /// </summary>
+        /// <param name="scraperTargetId">ID of a ScraperTarget to get labels</param>
+        /// <returns>the List all labels of a ScraperTarget</returns>
+        public async Task<List<Label>> GetLabels(string scraperTargetId)
+        {
+            Arguments.CheckNonEmptyString(scraperTargetId, nameof(scraperTargetId));
+
+            return await GetLabels(scraperTargetId, "scrapers");
+        }
+
+        /// <summary>
+        /// Add a ScraperTarget label.
+        /// </summary>
+        /// <param name="label">the label of a ScraperTarget</param>
+        /// <param name="scraperTarget">a ScraperTarget of a label</param>
+        /// <returns>added label</returns>
+        public async Task<Label> AddLabel(Label label, ScraperTarget scraperTarget)
+        {
+            Arguments.CheckNotNull(scraperTarget, nameof(scraperTarget));
+            Arguments.CheckNotNull(label, nameof(label));
+
+            return await AddLabel(label.Id, scraperTarget.Id);
+        }
+
+        /// <summary>
+        /// Add a ScraperTarget label.
+        /// </summary>
+        /// <param name="labelId">the ID of a label</param>
+        /// <param name="scraperTargetId">the ID of a ScraperTarget</param>
+        /// <returns>added label</returns>
+        public async Task<Label> AddLabel(string labelId, string scraperTargetId)
+        {
+            Arguments.CheckNonEmptyString(scraperTargetId, nameof(scraperTargetId));
+            Arguments.CheckNonEmptyString(labelId, nameof(labelId));
+
+            return await AddLabel(labelId, scraperTargetId, "scrapers", ResourceType.Scrapers);
+        }
+
+        /// <summary>
+        /// Removes a label from a ScraperTarget.
+        /// </summary>
+        /// <param name="label">the label of a ScraperTarget</param>
+        /// <param name="scraperTarget">a ScraperTarget of a owner</param>
+        /// <returns>async task</returns>
+        public async Task DeleteLabel(Label label, ScraperTarget scraperTarget)
+        {
+            Arguments.CheckNotNull(scraperTarget, nameof(scraperTarget));
+            Arguments.CheckNotNull(label, nameof(label));
+
+            await DeleteLabel(label.Id, scraperTarget.Id);
+        }
+
+        /// <summary>
+        /// Removes a label from a ScraperTarget.
+        /// </summary>
+        /// <param name="labelId">the ID of a label</param>
+        /// <param name="scraperTargetId">the ID of a ScraperTarget</param>
+        /// <returns>async task</returns>
+        public async Task DeleteLabel(string labelId, string scraperTargetId)
+        {
+            Arguments.CheckNonEmptyString(scraperTargetId, nameof(scraperTargetId));
+            Arguments.CheckNonEmptyString(labelId, nameof(labelId));
+
+            await DeleteLabel(labelId, scraperTargetId, "scrapers");
         }
     }
 }

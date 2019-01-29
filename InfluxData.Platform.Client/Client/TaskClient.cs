@@ -6,7 +6,7 @@ using Platform.Common.Platform.Rest;
 
 namespace InfluxData.Platform.Client.Client
 {
-    public class TaskClient : AbstractClient
+    public class TaskClient : AbstractPlatformClient
     {
         protected internal TaskClient(DefaultClientIo client) : base(client)
         {
@@ -639,6 +639,86 @@ namespace InfluxData.Platform.Client.Client
             var request = await Get($"/api/v2/tasks/{taskId}/runs/{runId}/logs?orgID={orgId}");
 
             return Call<List<string>>(request);
+        }
+
+        /// <summary>
+        /// List all labels of a Task.
+        /// </summary>
+        /// <param name="task">a Task of the labels</param>
+        /// <returns>the List all labels of a Task</returns>
+        public async System.Threading.Tasks.Task<List<Label>> GetLabels(Task task)
+        {
+            Arguments.CheckNotNull(task, nameof(task));
+
+            return await GetLabels(task.Id);
+        }
+
+        /// <summary>
+        /// List all labels of a Task.
+        /// </summary>
+        /// <param name="taskId">ID of a Task to get labels</param>
+        /// <returns>the List all labels of a Task</returns>
+        public async System.Threading.Tasks.Task<List<Label>> GetLabels(string taskId)
+        {
+            Arguments.CheckNonEmptyString(taskId, nameof(taskId));
+
+            return await GetLabels(taskId, "tasks");
+        }
+
+        /// <summary>
+        /// Add a Task label.
+        /// </summary>
+        /// <param name="label">the label of a Task</param>
+        /// <param name="task">a Task of a label</param>
+        /// <returns>added label</returns>
+        public async System.Threading.Tasks.Task<Label> AddLabel(Label label, Task task)
+        {
+            Arguments.CheckNotNull(task, nameof(task));
+            Arguments.CheckNotNull(label, nameof(label));
+
+            return await AddLabel(label.Id, task.Id);
+        }
+
+        /// <summary>
+        /// Add a Task label.
+        /// </summary>
+        /// <param name="labelId">the ID of a label</param>
+        /// <param name="taskId">the ID of a Task</param>
+        /// <returns>added label</returns>
+        public async System.Threading.Tasks.Task<Label> AddLabel(string labelId, string taskId)
+        {
+            Arguments.CheckNonEmptyString(taskId, nameof(taskId));
+            Arguments.CheckNonEmptyString(labelId, nameof(labelId));
+
+            return await AddLabel(labelId, taskId, "tasks", ResourceType.Tasks);
+        }
+
+        /// <summary>
+        /// Removes a label from a Task.
+        /// </summary>
+        /// <param name="label">the label of a Task</param>
+        /// <param name="task">a Task of a owner</param>
+        /// <returns>async task</returns>
+        public async System.Threading.Tasks.Task DeleteLabel(Label label, Task task)
+        {
+            Arguments.CheckNotNull(task, nameof(task));
+            Arguments.CheckNotNull(label, nameof(label));
+
+            await DeleteLabel(label.Id, task.Id);
+        }
+
+        /// <summary>
+        /// Removes a label from a Task.
+        /// </summary>
+        /// <param name="labelId">the ID of a label</param>
+        /// <param name="taskId">the ID of a Task</param>
+        /// <returns>async task</returns>
+        public async System.Threading.Tasks.Task DeleteLabel(string labelId, string taskId)
+        {
+            Arguments.CheckNonEmptyString(taskId, nameof(taskId));
+            Arguments.CheckNonEmptyString(labelId, nameof(labelId));
+
+            await DeleteLabel(labelId, taskId, "tasks");
         }
         
         private Task CreateTask(string name, string flux, string every, string cron, string orgId)

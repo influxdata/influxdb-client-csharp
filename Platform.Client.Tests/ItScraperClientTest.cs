@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using InfluxData.Platform.Client.Client;
 using InfluxData.Platform.Client.Domain;
 using NUnit.Framework;
@@ -162,6 +163,38 @@ namespace Platform.Client.Tests
 
             owners = await _scraperClient.GetOwners(scraper);
             Assert.AreEqual(1, owners.Count);
+        }
+        
+        [Test]
+        public async Task Labels() {
+
+            var labelClient = PlatformClient.CreateLabelClient();
+
+            var scraper = await _scraperClient
+                .CreateScraperTarget(GenerateName("InfluxDB scraper"), "http://localhost:9999", _bucket.Id, _organization.Id);
+
+            var properties = new Dictionary<string, string> {{"color", "green"}, {"location", "west"}};
+
+            var label = await labelClient.CreateLabel(GenerateName("Cool Resource"), properties);
+
+            var labels = await _scraperClient.GetLabels(scraper);
+            Assert.AreEqual(0, labels.Count);
+
+            var addedLabel = await _scraperClient.AddLabel(label, scraper);
+            Assert.IsNotNull(addedLabel);
+            Assert.AreEqual(label.Id, addedLabel.Id);
+            Assert.AreEqual(label.Name, addedLabel.Name);
+            Assert.AreEqual(label.Properties, addedLabel.Properties);
+
+            labels =  await _scraperClient.GetLabels(scraper);
+            Assert.AreEqual(1, labels.Count);
+            Assert.AreEqual(label.Id, labels[0].Id);
+            Assert.AreEqual(label.Name, labels[0].Name);
+
+            await _scraperClient.DeleteLabel(label, scraper);
+
+            labels = await _scraperClient.GetLabels(scraper);
+            Assert.AreEqual(0, labels.Count);
         }
     }
 }

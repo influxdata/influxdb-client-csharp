@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using InfluxData.Platform.Client.Client;
 using InfluxData.Platform.Client.Domain;
@@ -227,6 +228,37 @@ namespace Platform.Client.Tests
 
             owners = await _bucketClient.GetOwners(bucket);
             Assert.AreEqual(0, owners.Count);
+        }
+        
+        [Test]
+        public async Task Labels() {
+
+            var labelClient = PlatformClient.CreateLabelClient();
+
+            var bucket = await _bucketClient.CreateBucket(GenerateName("robot sensor"), RetentionRule(), _organization);
+
+            var properties = new Dictionary<string, string> {{"color", "green"}, {"location", "west"}};
+
+            var label = await labelClient.CreateLabel(GenerateName("Cool Resource"), properties);
+
+            var labels = await _bucketClient.GetLabels(bucket);
+            Assert.AreEqual(0, labels.Count);
+
+            var addedLabel = await _bucketClient.AddLabel(label, bucket);
+            Assert.IsNotNull(addedLabel);
+            Assert.AreEqual(label.Id, addedLabel.Id);
+            Assert.AreEqual(label.Name, addedLabel.Name);
+            Assert.AreEqual(label.Properties, addedLabel.Properties);
+
+            labels =  await _bucketClient.GetLabels(bucket);
+            Assert.AreEqual(1, labels.Count);
+            Assert.AreEqual(label.Id, labels[0].Id);
+            Assert.AreEqual(label.Name, labels[0].Name);
+
+            await _bucketClient.DeleteLabel(label, bucket);
+
+            labels = await _bucketClient.GetLabels(bucket);
+            Assert.AreEqual(0, labels.Count);
         }
 
         private static RetentionRule RetentionRule()

@@ -491,6 +491,37 @@ namespace Platform.Client.Tests
             Assert.IsEmpty(logs);
         }
         
+        [Test]
+        public async Task Labels() {
+
+            var labelClient = PlatformClient.CreateLabelClient();
+
+            var task = await _taskClient.CreateTaskEvery(GenerateName("it task"), TaskFlux, "1s", _organization);
+
+            var properties = new Dictionary<string, string> {{"color", "green"}, {"location", "west"}};
+
+            var label = await labelClient.CreateLabel(GenerateName("Cool Resource"), properties);
+
+            var labels = await _taskClient.GetLabels(task);
+            Assert.AreEqual(0, labels.Count);
+
+            var addedLabel = await _taskClient.AddLabel(label, task);
+            Assert.IsNotNull(addedLabel);
+            Assert.AreEqual(label.Id, addedLabel.Id);
+            Assert.AreEqual(label.Name, addedLabel.Name);
+            Assert.AreEqual(label.Properties, addedLabel.Properties);
+
+            labels =  await _taskClient.GetLabels(task);
+            Assert.AreEqual(1, labels.Count);
+            Assert.AreEqual(label.Id, labels[0].Id);
+            Assert.AreEqual(label.Name, labels[0].Name);
+
+            await _taskClient.DeleteLabel(label, task);
+
+            labels = await _taskClient.GetLabels(task);
+            Assert.AreEqual(0, labels.Count);
+        }
+        
         private async Task<Authorization> AddAuthorization(Organization organization)
         {
             var resourceTask = new PermissionResource {Type = ResourceType.Tasks, OrgId = organization.Id};

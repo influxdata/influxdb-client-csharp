@@ -208,5 +208,36 @@ namespace Platform.Client.Tests
             Assert.AreEqual(1, secrets.Count);
             Assert.Contains("az", secrets);
         }
+        
+        [Test]
+        public async Task Labels() {
+
+            var labelClient = PlatformClient.CreateLabelClient();
+
+            var organization = await _organizationClient.CreateOrganization(GenerateName("Constant Pro"));
+
+            var properties = new Dictionary<string, string> {{"color", "green"}, {"location", "west"}};
+
+            var label = await labelClient.CreateLabel(GenerateName("Cool Resource"), properties);
+
+            var labels = await _organizationClient.GetLabels(organization);
+            Assert.AreEqual(0, labels.Count);
+
+            var addedLabel = await _organizationClient.AddLabel(label, organization);
+            Assert.IsNotNull(addedLabel);
+            Assert.AreEqual(label.Id, addedLabel.Id);
+            Assert.AreEqual(label.Name, addedLabel.Name);
+            Assert.AreEqual(label.Properties, addedLabel.Properties);
+
+            labels =  await _organizationClient.GetLabels(organization);
+            Assert.AreEqual(1, labels.Count);
+            Assert.AreEqual(label.Id, labels[0].Id);
+            Assert.AreEqual(label.Name, labels[0].Name);
+
+            await _organizationClient.DeleteLabel(label, organization);
+
+            labels = await _organizationClient.GetLabels(organization);
+            Assert.AreEqual(0, labels.Count);
+        }
     }
 }

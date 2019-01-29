@@ -8,7 +8,7 @@ using Task = System.Threading.Tasks.Task;
 
 namespace InfluxData.Platform.Client.Client
 {
-    public class BucketClient : AbstractClient
+    public class BucketClient : AbstractPlatformClient
     {
         protected internal BucketClient(DefaultClientIo client) : base(client)
         {
@@ -170,7 +170,7 @@ namespace InfluxData.Platform.Client.Client
         {
             Arguments.CheckNotNull(organization, nameof(organization));
             
-            return await FindBucketsByorgId(organization.Name);
+            return await FindBucketsByOrgId(organization.Name);
         }
 
         /// <summary>
@@ -178,7 +178,7 @@ namespace InfluxData.Platform.Client.Client
         /// </summary>
         /// <param name="orgId">filter buckets to a specific organization name</param>
         /// <returns>A list of buckets</returns>
-        public async Task<List<Bucket>> FindBucketsByorgId(string orgId)
+        public async Task<List<Bucket>> FindBucketsByOrgId(string orgId)
         {
             var request = await Get($"/api/v2/buckets?org={orgId}");
 
@@ -193,7 +193,7 @@ namespace InfluxData.Platform.Client.Client
         /// <returns>List all buckets</returns>
         public async Task<List<Bucket>> FindBuckets()
         {
-            return await FindBucketsByorgId(null);
+            return await FindBucketsByOrgId(null);
         }
         
         /// <summary>
@@ -374,6 +374,86 @@ namespace InfluxData.Platform.Client.Client
             var request = await Delete($"/api/v2/buckets/{bucketId}/owners/{ownerId}");
 
             RaiseForInfluxError(request);
+        }
+        
+        /// <summary>
+        /// List all labels of a bucket.
+        /// </summary>
+        /// <param name="bucket">bucket of the labels</param>
+        /// <returns>the List all labels of a bucket</returns>
+        public async Task<List<Label>> GetLabels(Bucket bucket)
+        {
+            Arguments.CheckNotNull(bucket, nameof(bucket));
+
+            return await GetLabels(bucket.Id);
+        }
+
+        /// <summary>
+        /// List all labels of a bucket.
+        /// </summary>
+        /// <param name="bucketId">ID of a bucket to get labels</param>
+        /// <returns>the List all labels of a bucket</returns>
+        public async Task<List<Label>> GetLabels(string bucketId)
+        {
+            Arguments.CheckNonEmptyString(bucketId, nameof(bucketId));
+
+            return await GetLabels(bucketId, "buckets");
+        }
+
+        /// <summary>
+        /// Add a bucket label.
+        /// </summary>
+        /// <param name="label">the label of a bucket</param>
+        /// <param name="bucket">the bucket of a label</param>
+        /// <returns>added label</returns>
+        public async Task<Label> AddLabel(Label label, Bucket bucket)
+        {
+            Arguments.CheckNotNull(bucket, nameof(bucket));
+            Arguments.CheckNotNull(label, nameof(label));
+
+            return await AddLabel(label.Id, bucket.Id);
+        }
+
+        /// <summary>
+        /// Add a bucket label.
+        /// </summary>
+        /// <param name="labelId">the ID of a label</param>
+        /// <param name="bucketId">the ID of a bucket</param>
+        /// <returns>added label</returns>
+        public async Task<Label> AddLabel(string labelId, string bucketId)
+        {
+            Arguments.CheckNonEmptyString(bucketId, nameof(bucketId));
+            Arguments.CheckNonEmptyString(labelId, nameof(labelId));
+
+            return await AddLabel(labelId, bucketId, "buckets", ResourceType.Buckets);
+        }
+
+        /// <summary>
+        /// Removes a label from a bucket.
+        /// </summary>
+        /// <param name="label">the label of a bucket</param>
+        /// <param name="bucket">the bucket of a owner</param>
+        /// <returns>async task</returns>
+        public async Task DeleteLabel(Label label, Bucket bucket)
+        {
+            Arguments.CheckNotNull(bucket, nameof(bucket));
+            Arguments.CheckNotNull(label, nameof(label));
+
+            await DeleteLabel(label.Id, bucket.Id);
+        }
+
+        /// <summary>
+        /// Removes a label from a bucket.
+        /// </summary>
+        /// <param name="labelId">the ID of a label</param>
+        /// <param name="bucketId">the ID of a bucket</param>
+        /// <returns>async task</returns>
+        public async Task DeleteLabel(string labelId, string bucketId)
+        {
+            Arguments.CheckNonEmptyString(bucketId, nameof(bucketId));
+            Arguments.CheckNonEmptyString(labelId, nameof(labelId));
+
+            await DeleteLabel(labelId, bucketId, "buckets");
         }
     }
 }

@@ -7,7 +7,7 @@ using Task = System.Threading.Tasks.Task;
 
 namespace InfluxData.Platform.Client.Client
 {
-    public class OrganizationClient : AbstractClient
+    public class OrganizationClient : AbstractPlatformClient
     {
         protected internal OrganizationClient(DefaultClientIo client) : base(client)
         {
@@ -386,6 +386,86 @@ namespace InfluxData.Platform.Client.Client
             var request = await Delete($"/api/v2/orgs/{orgId}/owners/{ownerId}");
 
             RaiseForInfluxError(request);
+        }
+
+        /// <summary>
+        /// List all labels of an organization.
+        /// </summary>
+        /// <param name="organization">organization of the labels</param>
+        /// <returns>the List all labels of an organization</returns>
+        public async Task<List<Label>> GetLabels(Organization organization)
+        {
+            Arguments.CheckNotNull(organization, nameof(organization));
+
+            return await GetLabels(organization.Id);
+        }
+
+        /// <summary>
+        /// List all labels of an organization.
+        /// </summary>
+        /// <param name="orgId">ID of an organization to get labels</param>
+        /// <returns>the List all labels of an organization</returns>
+        public async Task<List<Label>> GetLabels(string orgId)
+        {
+            Arguments.CheckNonEmptyString(orgId, nameof(orgId));
+
+            return await GetLabels(orgId, "orgs");
+        }
+
+        /// <summary>
+        /// Add an organization label.
+        /// </summary>
+        /// <param name="label">the label of an organization</param>
+        /// <param name="organization">an organization of a label</param>
+        /// <returns>added label</returns>
+        public async Task<Label> AddLabel(Label label, Organization organization)
+        {
+            Arguments.CheckNotNull(organization, nameof(organization));
+            Arguments.CheckNotNull(label, nameof(label));
+
+            return await AddLabel(label.Id, organization.Id);
+        }
+
+        /// <summary>
+        /// Add an organization label.
+        /// </summary>
+        /// <param name="labelId">the ID of a label</param>
+        /// <param name="orgId">the ID of an organization</param>
+        /// <returns>added label</returns>
+        public async Task<Label> AddLabel(string labelId, string orgId)
+        {
+            Arguments.CheckNonEmptyString(orgId, nameof(orgId));
+            Arguments.CheckNonEmptyString(labelId, nameof(labelId));
+
+            return await AddLabel(labelId, orgId, "orgs", ResourceType.Orgs);
+        }
+
+        /// <summary>
+        /// Removes a label from an organization.
+        /// </summary>
+        /// <param name="label">the label of an organization</param>
+        /// <param name="organization">an organization of a owner</param>
+        /// <returns>async task</returns>
+        public async Task DeleteLabel(Label label, Organization organization)
+        {
+            Arguments.CheckNotNull(organization, nameof(organization));
+            Arguments.CheckNotNull(label, nameof(label));
+
+            await DeleteLabel(label.Id, organization.Id);
+        }
+
+        /// <summary>
+        /// Removes a label from an organization.
+        /// </summary>
+        /// <param name="labelId">the ID of a label</param>
+        /// <param name="orgId">the ID of an organization</param>
+        /// <returns>async task</returns>
+        public async Task DeleteLabel(string labelId, string orgId)
+        {
+            Arguments.CheckNonEmptyString(orgId, nameof(orgId));
+            Arguments.CheckNonEmptyString(labelId, nameof(labelId));
+
+            await DeleteLabel(labelId, orgId, "orgs");
         }
     }
 }
