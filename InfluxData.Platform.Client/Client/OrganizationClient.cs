@@ -14,7 +14,7 @@ namespace InfluxData.Platform.Client.Client
         }
 
         /// <summary>
-        /// Creates a new organization and sets <see cref="Organization.Id"/> with the new identifier.
+        ///     Creates a new organization and sets <see cref="Organization.Id" /> with the new identifier.
         /// </summary>
         /// <param name="name"></param>
         /// <returns>Created organization</returns>
@@ -28,7 +28,7 @@ namespace InfluxData.Platform.Client.Client
         }
 
         /// <summary>
-        /// Creates a new organization and sets <see cref="Organization.Id"/> with the new identifier.
+        ///     Creates a new organization and sets <see cref="Organization.Id" /> with the new identifier.
         /// </summary>
         /// <param name="organization">the organization to create</param>
         /// <returns>created organization</returns>
@@ -42,7 +42,7 @@ namespace InfluxData.Platform.Client.Client
         }
 
         /// <summary>
-        /// Update a organization.
+        ///     Update a organization.
         /// </summary>
         /// <param name="organization">organization update to apply</param>
         /// <returns>updated organization</returns>
@@ -56,7 +56,7 @@ namespace InfluxData.Platform.Client.Client
         }
 
         /// <summary>
-        /// Delete a organization.
+        ///     Delete a organization.
         /// </summary>
         /// <param name="orgId">ID of organization to delete</param>
         /// <returns></returns>
@@ -70,7 +70,7 @@ namespace InfluxData.Platform.Client.Client
         }
 
         /// <summary>
-        /// Delete a organization.
+        ///     Delete a organization.
         /// </summary>
         /// <param name="organization">organization to delete</param>
         /// <returns></returns>
@@ -82,7 +82,7 @@ namespace InfluxData.Platform.Client.Client
         }
 
         /// <summary>
-        /// Retrieve a organization.
+        ///     Retrieve a organization.
         /// </summary>
         /// <param name="orgId">ID of organization to get</param>
         /// <returns>organization details</returns>
@@ -96,7 +96,7 @@ namespace InfluxData.Platform.Client.Client
         }
 
         /// <summary>
-        /// List all organizations.
+        ///     List all organizations.
         /// </summary>
         /// <returns>List all organizations</returns>
         public async Task<List<Organization>> FindOrganizations()
@@ -109,9 +109,8 @@ namespace InfluxData.Platform.Client.Client
         }
 
         /// <summary>
-        /// List of secret keys the are stored for Organization. For example:
-        ///
-        /// <code>
+        ///     List of secret keys the are stored for Organization. For example:
+        ///     <code>
         ///     github_api_key,
         ///     some_other_key,
         ///     a_secret_key
@@ -127,9 +126,8 @@ namespace InfluxData.Platform.Client.Client
         }
 
         /// <summary>
-        /// List of secret keys the are stored for Organization. For example:
-        ///
-        /// <code>
+        ///     List of secret keys the are stored for Organization. For example:
+        ///     <code>
         ///     github_api_key,
         ///     some_other_key,
         ///     a_secret_key
@@ -149,7 +147,7 @@ namespace InfluxData.Platform.Client.Client
         }
 
         /// <summary>
-        /// Patches all provided secrets and updates any previous values.
+        ///     Patches all provided secrets and updates any previous values.
         /// </summary>
         /// <param name="secrets">secrets to update/add</param>
         /// <param name="organization">the organization for put secrets</param>
@@ -163,7 +161,7 @@ namespace InfluxData.Platform.Client.Client
         }
 
         /// <summary>
-        /// Patches all provided secrets and updates any previous values.
+        ///     Patches all provided secrets and updates any previous values.
         /// </summary>
         /// <param name="secrets">secrets to update/add</param>
         /// <param name="orgId">the organization for put secrets</param>
@@ -179,7 +177,7 @@ namespace InfluxData.Platform.Client.Client
         }
 
         /// <summary>
-        /// Delete provided secrets.
+        ///     Delete provided secrets.
         /// </summary>
         /// <param name="secrets">secrets to delete</param>
         /// <param name="organization">the organization for delete secrets</param>
@@ -193,7 +191,7 @@ namespace InfluxData.Platform.Client.Client
         }
 
         /// <summary>
-        /// Delete provided secrets.
+        ///     Delete provided secrets.
         /// </summary>
         /// <param name="secrets">secrets to delete</param>
         /// <param name="orgId">the organization for delete secrets</param>
@@ -209,7 +207,7 @@ namespace InfluxData.Platform.Client.Client
         }
 
         /// <summary>
-        /// List all members of an organization.
+        ///     List all members of an organization.
         /// </summary>
         /// <param name="organization">organization of the members</param>
         /// <returns>the List all members of an organization</returns>
@@ -221,7 +219,7 @@ namespace InfluxData.Platform.Client.Client
         }
 
         /// <summary>
-        /// List all members of an organization.
+        ///     List all members of an organization.
         /// </summary>
         /// <param name="orgId">ID of organization to get members</param>
         /// <returns>the List all members of an organization</returns>
@@ -237,7 +235,7 @@ namespace InfluxData.Platform.Client.Client
         }
 
         /// <summary>
-        /// Add organization member.
+        ///     Add organization member.
         /// </summary>
         /// <param name="member">the member of an organization</param>
         /// <param name="organization">the organization of a member</param>
@@ -251,7 +249,7 @@ namespace InfluxData.Platform.Client.Client
         }
 
         /// <summary>
-        /// Add organization member.
+        ///     Add organization member.
         /// </summary>
         /// <param name="memberId">the ID of a member</param>
         /// <param name="orgId">the ID of an organization</param>
@@ -269,7 +267,7 @@ namespace InfluxData.Platform.Client.Client
         }
 
         /// <summary>
-        /// Removes a member from an organization.
+        ///     Removes a member from an organization.
         /// </summary>
         /// <param name="member">the member of an organization</param>
         /// <param name="organization">the organization of a member</param>
@@ -283,7 +281,7 @@ namespace InfluxData.Platform.Client.Client
         }
 
         /// <summary>
-        /// Removes a member from an organization.
+        ///     Removes a member from an organization.
         /// </summary>
         /// <param name="memberId">the ID of a member</param>
         /// <param name="orgId">the ID of an organization</param>
@@ -299,7 +297,7 @@ namespace InfluxData.Platform.Client.Client
         }
 
         /// <summary>
-        /// List all owners of an organization.
+        ///     List all owners of an organization.
         /// </summary>
         /// <param name="organization">organization of the owners</param>
         /// <returns>the List all owners of an organization</returns>
@@ -311,7 +309,7 @@ namespace InfluxData.Platform.Client.Client
         }
 
         /// <summary>
-        /// List all owners of an organization.
+        ///     List all owners of an organization.
         /// </summary>
         /// <param name="orgId">ID of organization to get owners</param>
         /// <returns>the List all owners of an organization</returns>
@@ -327,7 +325,7 @@ namespace InfluxData.Platform.Client.Client
         }
 
         /// <summary>
-        /// Add organization owner.
+        ///     Add organization owner.
         /// </summary>
         /// <param name="owner">the owner of an organization</param>
         /// <param name="organization">the organization of a owner</param>
@@ -341,7 +339,7 @@ namespace InfluxData.Platform.Client.Client
         }
 
         /// <summary>
-        /// Add organization owner.
+        ///     Add organization owner.
         /// </summary>
         /// <param name="ownerId">the ID of a owner</param>
         /// <param name="orgId">the ID of an organization</param>
@@ -359,7 +357,7 @@ namespace InfluxData.Platform.Client.Client
         }
 
         /// <summary>
-        /// Removes a owner from an organization.
+        ///     Removes a owner from an organization.
         /// </summary>
         /// <param name="owner">the owner of an organization</param>
         /// <param name="organization">the organization of a owner</param>
@@ -373,7 +371,7 @@ namespace InfluxData.Platform.Client.Client
         }
 
         /// <summary>
-        /// Removes a owner from an organization.
+        ///     Removes a owner from an organization.
         /// </summary>
         /// <param name="ownerId">the ID of a owner</param>
         /// <param name="orgId">the ID of an organization</param>
@@ -389,7 +387,61 @@ namespace InfluxData.Platform.Client.Client
         }
 
         /// <summary>
-        /// List all labels of an organization.
+        ///     Retrieve an organization's logs
+        /// </summary>
+        /// <param name="organization">for retrieve logs</param>
+        /// <returns>logs</returns>
+        public async Task<List<OperationLogEntry>> FindOrganizationLogs(Organization organization)
+        {
+            Arguments.CheckNotNull(organization, nameof(organization));
+
+            return await FindOrganizationLogs(organization.Id);
+        }
+
+        /// <summary>
+        ///     Retrieve an organization's logs
+        /// </summary>
+        /// <param name="organization">for retrieve logs</param>
+        /// <param name="findOptions">the find options</param>
+        /// <returns>logs</returns>
+        public async Task<OperationLogEntries> FindOrganizationLogs(Organization organization, FindOptions findOptions)
+        {
+            Arguments.CheckNotNull(organization, nameof(organization));
+            Arguments.CheckNotNull(findOptions, nameof(findOptions));
+
+            return await FindOrganizationLogs(organization.Id, findOptions);
+        }
+
+        /// <summary>
+        ///     Retrieve an organization's logs
+        /// </summary>
+        /// <param name="orgId">the ID of an organization</param>
+        /// <returns>logs</returns>
+        public async Task<List<OperationLogEntry>> FindOrganizationLogs(string orgId)
+        {
+            Arguments.CheckNonEmptyString(orgId, nameof(orgId));
+
+            return (await FindOrganizationLogs(orgId, new FindOptions())).Logs;
+        }
+
+        /// <summary>
+        ///     Retrieve an organization's logs
+        /// </summary>
+        /// <param name="orgId">the ID of an organization</param>
+        /// <param name="findOptions">the find options</param>
+        /// <returns>logs</returns>
+        public async Task<OperationLogEntries> FindOrganizationLogs(string orgId, FindOptions findOptions)
+        {
+            Arguments.CheckNonEmptyString(orgId, nameof(orgId));
+            Arguments.CheckNotNull(findOptions, nameof(findOptions));
+
+            var request = await Get($"/api/v2/orgs/{orgId}/log?" + CreateQueryString(findOptions));
+
+            return GetOperationLogEntries(request);
+        }
+
+        /// <summary>
+        ///     List all labels of an organization.
         /// </summary>
         /// <param name="organization">organization of the labels</param>
         /// <returns>the List all labels of an organization</returns>
@@ -401,7 +453,7 @@ namespace InfluxData.Platform.Client.Client
         }
 
         /// <summary>
-        /// List all labels of an organization.
+        ///     List all labels of an organization.
         /// </summary>
         /// <param name="orgId">ID of an organization to get labels</param>
         /// <returns>the List all labels of an organization</returns>
@@ -413,7 +465,7 @@ namespace InfluxData.Platform.Client.Client
         }
 
         /// <summary>
-        /// Add an organization label.
+        ///     Add an organization label.
         /// </summary>
         /// <param name="label">the label of an organization</param>
         /// <param name="organization">an organization of a label</param>
@@ -427,7 +479,7 @@ namespace InfluxData.Platform.Client.Client
         }
 
         /// <summary>
-        /// Add an organization label.
+        ///     Add an organization label.
         /// </summary>
         /// <param name="labelId">the ID of a label</param>
         /// <param name="orgId">the ID of an organization</param>
@@ -441,7 +493,7 @@ namespace InfluxData.Platform.Client.Client
         }
 
         /// <summary>
-        /// Removes a label from an organization.
+        ///     Removes a label from an organization.
         /// </summary>
         /// <param name="label">the label of an organization</param>
         /// <param name="organization">an organization of a owner</param>
@@ -455,7 +507,7 @@ namespace InfluxData.Platform.Client.Client
         }
 
         /// <summary>
-        /// Removes a label from an organization.
+        ///     Removes a label from an organization.
         /// </summary>
         /// <param name="labelId">the ID of a label</param>
         /// <param name="orgId">the ID of an organization</param>

@@ -4,11 +4,10 @@ using Newtonsoft.Json;
 namespace InfluxData.Platform.Client.Domain
 {
     /// <summary>
-    /// he wrapper for "/api/v2/buckets" response.
+    ///     he wrapper for "/api/v2/buckets" response.
     /// </summary>
-    public class Buckets : AbstractHasLinks
+    public class Buckets : AbstractPageLinks
     {
-        [JsonProperty("buckets")]
-        public List<Bucket> BucketList { get; set; } = new List<Bucket>();
+        [JsonProperty("buckets")] public List<Bucket> BucketList { get; set; } = new List<Bucket>();
     }
 }

@@ -15,7 +15,7 @@ namespace InfluxData.Platform.Client.Client
         }
 
         /// <summary>
-        /// Creates a new bucket and sets <see cref="Bucket.Id"/> with the new identifier.
+        ///     Creates a new bucket and sets <see cref="Bucket.Id" /> with the new identifier.
         /// </summary>
         /// <param name="bucket">bucket to create</param>
         /// <returns>created Bucket</returns>
@@ -29,7 +29,7 @@ namespace InfluxData.Platform.Client.Client
         }
 
         /// <summary>
-        /// Creates a new bucket and sets <see cref="Bucket.Id"/> with the new identifier.
+        ///     Creates a new bucket and sets <see cref="Bucket.Id" /> with the new identifier.
         /// </summary>
         /// <param name="name">name of the bucket</param>
         /// <param name="organization">owner of the bucket</param>
@@ -38,12 +38,12 @@ namespace InfluxData.Platform.Client.Client
         {
             Arguments.CheckNonEmptyString(name, nameof(name));
             Arguments.CheckNotNull(organization, nameof(organization));
-            
+
             return await CreateBucket(name, organization.Id);
         }
 
         /// <summary>
-        /// Creates a new bucket and sets <see cref="Bucket.Id"/> with the new identifier.
+        ///     Creates a new bucket and sets <see cref="Bucket.Id" /> with the new identifier.
         /// </summary>
         /// <param name="name">name of the bucket</param>
         /// <param name="retentionRule">retention rule of the bucket</param>
@@ -53,12 +53,12 @@ namespace InfluxData.Platform.Client.Client
         {
             Arguments.CheckNonEmptyString(name, nameof(name));
             Arguments.CheckNotNull(organization, nameof(organization));
-            
+
             return await CreateBucket(name, retentionRule, organization.Id);
         }
 
         /// <summary>
-        /// Creates a new bucket and sets <see cref="Bucket.Id"/> with the new identifier.
+        ///     Creates a new bucket and sets <see cref="Bucket.Id" /> with the new identifier.
         /// </summary>
         /// <param name="name">name of the bucket</param>
         /// <param name="orgId">owner of the bucket</param>
@@ -67,12 +67,12 @@ namespace InfluxData.Platform.Client.Client
         {
             Arguments.CheckNonEmptyString(name, nameof(name));
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
-            
+
             return await CreateBucket(name, default(RetentionRule), orgId);
         }
 
         /// <summary>
-        /// Creates a new bucket and sets <see cref="Bucket.Id"/> with the new identifier.
+        ///     Creates a new bucket and sets <see cref="Bucket.Id" /> with the new identifier.
         /// </summary>
         /// <param name="name">name of the bucket</param>
         /// <param name="retentionRule">retention rule of the bucket</param>
@@ -82,18 +82,15 @@ namespace InfluxData.Platform.Client.Client
         {
             Arguments.CheckNonEmptyString(name, nameof(name));
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
-            
+
             var bucket = new Bucket {Name = name, OrgId = orgId};
-            if (retentionRule != null)
-            {
-                bucket.RetentionRules.Add(retentionRule);
-            }
+            if (retentionRule != null) bucket.RetentionRules.Add(retentionRule);
 
             return await CreateBucket(bucket);
         }
 
         /// <summary>
-        /// Update a bucket name and retention.
+        ///     Update a bucket name and retention.
         /// </summary>
         /// <param name="bucket">bucket update to apply</param>
         /// <returns>bucket updated</returns>
@@ -105,9 +102,9 @@ namespace InfluxData.Platform.Client.Client
 
             return Call<Bucket>(result);
         }
-        
+
         /// <summary>
-        /// Delete a bucket.
+        ///     Delete a bucket.
         /// </summary>
         /// <param name="bucketId">ID of bucket to delete</param>
         /// <returns>async task</returns>
@@ -121,7 +118,7 @@ namespace InfluxData.Platform.Client.Client
         }
 
         /// <summary>
-        /// Delete a bucket.
+        ///     Delete a bucket.
         /// </summary>
         /// <param name="bucket">bucket to delete</param>
         /// <returns>async task</returns>
@@ -131,9 +128,9 @@ namespace InfluxData.Platform.Client.Client
 
             await DeleteBucket(bucket.Id);
         }
-        
+
         /// <summary>
-        /// Retrieve a bucket.
+        ///     Retrieve a bucket.
         /// </summary>
         /// <param name="bucketId">ID of bucket to get</param>
         /// <returns>Bucket Details</returns>
@@ -145,8 +142,9 @@ namespace InfluxData.Platform.Client.Client
 
             return Call<Bucket>(request, "bucket not found");
         }
+
         /// <summary>
-        /// Retrieve a bucket.
+        ///     Retrieve a bucket.
         /// </summary>
         /// <param name="bucketName">Name of bucket to get</param>
         /// <returns>Bucket Details</returns>
@@ -155,49 +153,61 @@ namespace InfluxData.Platform.Client.Client
             Arguments.CheckNonEmptyString(bucketName, nameof(bucketName));
 
             var request = await Get($"/api/v2/buckets?name={bucketName}");
-            
+
             var buckets = Call<Buckets>(request);
 
             return buckets.BucketList.FirstOrDefault();
         }
 
         /// <summary>
-        ///  List all buckets for specified organization.
+        ///     List all buckets for specified organization.
         /// </summary>
         /// <param name="organization">filter buckets to a specific organization</param>
         /// <returns>A list of buckets</returns>
         public async Task<List<Bucket>> FindBucketsByOrganization(Organization organization)
         {
             Arguments.CheckNotNull(organization, nameof(organization));
-            
+
             return await FindBucketsByOrgId(organization.Name);
         }
 
         /// <summary>
-        /// List all buckets for specified orgId.
+        ///     List all buckets for specified orgId.
         /// </summary>
-        /// <param name="orgId">filter buckets to a specific organization name</param>
+        /// <param name="orgId">filter buckets to a specific organization ID</param>
         /// <returns>A list of buckets</returns>
         public async Task<List<Bucket>> FindBucketsByOrgId(string orgId)
         {
-            var request = await Get($"/api/v2/buckets?org={orgId}");
-
-            var buckets = Call<Buckets>(request);
+            var buckets = await FindBuckets(orgId, new FindOptions());
 
             return buckets.BucketList;
         }
 
         /// <summary>
-        /// List all buckets.
+        ///     List all buckets.
         /// </summary>
         /// <returns>List all buckets</returns>
         public async Task<List<Bucket>> FindBuckets()
         {
             return await FindBucketsByOrgId(null);
         }
-        
+
         /// <summary>
-        /// List all members of a bucket.
+        ///     List all buckets.
+        /// </summary>
+        /// <param name="findOptions">the find options</param>
+        /// <returns>List all buckets</returns>
+        public async Task<Buckets> FindBuckets(FindOptions findOptions)
+        {
+            Arguments.CheckNotNull(findOptions, nameof(findOptions));
+
+            var buckets = await FindBuckets(null, findOptions);
+
+            return buckets;
+        }
+
+        /// <summary>
+        ///     List all members of a bucket.
         /// </summary>
         /// <param name="bucket">bucket of the members</param>
         /// <returns>the List all members of a bucket</returns>
@@ -209,7 +219,7 @@ namespace InfluxData.Platform.Client.Client
         }
 
         /// <summary>
-        /// List all members of a bucket.
+        ///     List all members of a bucket.
         /// </summary>
         /// <param name="bucketId">ID of bucket to get members</param>
         /// <returns>the List all members of a bucket</returns>
@@ -225,7 +235,7 @@ namespace InfluxData.Platform.Client.Client
         }
 
         /// <summary>
-        /// Add a bucket member.
+        ///     Add a bucket member.
         /// </summary>
         /// <param name="member">the member of a bucket</param>
         /// <param name="bucket">the bucket of a member</param>
@@ -239,7 +249,7 @@ namespace InfluxData.Platform.Client.Client
         }
 
         /// <summary>
-        /// Add a bucket member.
+        ///     Add a bucket member.
         /// </summary>
         /// <param name="memberId">the ID of a member</param>
         /// <param name="bucketId">the ID of a bucket</param>
@@ -257,7 +267,7 @@ namespace InfluxData.Platform.Client.Client
         }
 
         /// <summary>
-        /// Removes a member from a bucket.
+        ///     Removes a member from a bucket.
         /// </summary>
         /// <param name="member">the member of a bucket</param>
         /// <param name="bucket">the bucket of a member</param>
@@ -271,7 +281,7 @@ namespace InfluxData.Platform.Client.Client
         }
 
         /// <summary>
-        /// Removes a member from a bucket.
+        ///     Removes a member from a bucket.
         /// </summary>
         /// <param name="memberId">the ID of a member</param>
         /// <param name="bucketId">the ID of a bucket</param>
@@ -280,14 +290,14 @@ namespace InfluxData.Platform.Client.Client
         {
             Arguments.CheckNonEmptyString(bucketId, nameof(bucketId));
             Arguments.CheckNonEmptyString(memberId, nameof(memberId));
-            
+
             var request = await Delete($"/api/v2/buckets/{bucketId}/members/{memberId}");
 
             RaiseForInfluxError(request);
         }
 
         /// <summary>
-        /// List all owners of a bucket.
+        ///     List all owners of a bucket.
         /// </summary>
         /// <param name="bucket">bucket of the owners</param>
         /// <returns>the List all owners of a bucket</returns>
@@ -299,7 +309,7 @@ namespace InfluxData.Platform.Client.Client
         }
 
         /// <summary>
-        /// List all owners of a bucket.
+        ///     List all owners of a bucket.
         /// </summary>
         /// <param name="bucketId">ID of a bucket to get owners</param>
         /// <returns>the List all owners of a bucket</returns>
@@ -315,7 +325,7 @@ namespace InfluxData.Platform.Client.Client
         }
 
         /// <summary>
-        /// Add a bucket owner.
+        ///     Add a bucket owner.
         /// </summary>
         /// <param name="owner">the owner of a bucket</param>
         /// <param name="bucket">the bucket of a owner</param>
@@ -329,7 +339,7 @@ namespace InfluxData.Platform.Client.Client
         }
 
         /// <summary>
-        /// Add a bucket owner.
+        ///     Add a bucket owner.
         /// </summary>
         /// <param name="ownerId">the ID of a owner</param>
         /// <param name="bucketId">the ID of a bucket</param>
@@ -347,7 +357,7 @@ namespace InfluxData.Platform.Client.Client
         }
 
         /// <summary>
-        /// Removes a owner from a bucket.
+        ///     Removes a owner from a bucket.
         /// </summary>
         /// <param name="owner">the owner of a bucket</param>
         /// <param name="bucket">the bucket of a owner</param>
@@ -361,7 +371,7 @@ namespace InfluxData.Platform.Client.Client
         }
 
         /// <summary>
-        /// Removes a owner from a bucket.
+        ///     Removes a owner from a bucket.
         /// </summary>
         /// <param name="ownerId">the ID of a owner</param>
         /// <param name="bucketId">the ID of a bucket</param>
@@ -370,14 +380,68 @@ namespace InfluxData.Platform.Client.Client
         {
             Arguments.CheckNonEmptyString(bucketId, nameof(bucketId));
             Arguments.CheckNonEmptyString(ownerId, nameof(ownerId));
-            
+
             var request = await Delete($"/api/v2/buckets/{bucketId}/owners/{ownerId}");
 
             RaiseForInfluxError(request);
         }
-        
+
         /// <summary>
-        /// List all labels of a bucket.
+        ///     Retrieve a bucket's logs
+        /// </summary>
+        /// <param name="bucket">for retrieve logs</param>
+        /// <returns>logs</returns>
+        public async Task<List<OperationLogEntry>> FindBucketLogs(Bucket bucket)
+        {
+            Arguments.CheckNotNull(bucket, nameof(bucket));
+
+            return await FindBucketLogs(bucket.Id);
+        }
+
+        /// <summary>
+        ///     Retrieve a bucket's logs
+        /// </summary>
+        /// <param name="bucket">for retrieve logs</param>
+        /// <param name="findOptions">the find options</param>
+        /// <returns>logs</returns>
+        public async Task<OperationLogEntries> FindBucketLogs(Bucket bucket, FindOptions findOptions)
+        {
+            Arguments.CheckNotNull(bucket, nameof(bucket));
+            Arguments.CheckNotNull(findOptions, nameof(findOptions));
+
+            return await FindBucketLogs(bucket.Id, findOptions);
+        }
+
+        /// <summary>
+        ///     Retrieve a bucket's logs
+        /// </summary>
+        /// <param name="bucketId">the ID of a bucket</param>
+        /// <returns>logs</returns>
+        public async Task<List<OperationLogEntry>> FindBucketLogs(string bucketId)
+        {
+            Arguments.CheckNonEmptyString(bucketId, nameof(bucketId));
+
+            return (await FindBucketLogs(bucketId, new FindOptions())).Logs;
+        }
+
+        /// <summary>
+        ///     Retrieve a bucket's logs
+        /// </summary>
+        /// <param name="bucketId">the ID of a bucket</param>
+        /// <param name="findOptions">the find options</param>
+        /// <returns>logs</returns>
+        public async Task<OperationLogEntries> FindBucketLogs(string bucketId, FindOptions findOptions)
+        {
+            Arguments.CheckNonEmptyString(bucketId, nameof(bucketId));
+            Arguments.CheckNotNull(findOptions, nameof(findOptions));
+
+            var request = await Get($"/api/v2/buckets/{bucketId}/log?" + CreateQueryString(findOptions));
+
+            return GetOperationLogEntries(request);
+        }
+
+        /// <summary>
+        ///     List all labels of a bucket.
         /// </summary>
         /// <param name="bucket">bucket of the labels</param>
         /// <returns>the List all labels of a bucket</returns>
@@ -389,7 +453,7 @@ namespace InfluxData.Platform.Client.Client
         }
 
         /// <summary>
-        /// List all labels of a bucket.
+        ///     List all labels of a bucket.
         /// </summary>
         /// <param name="bucketId">ID of a bucket to get labels</param>
         /// <returns>the List all labels of a bucket</returns>
@@ -401,7 +465,7 @@ namespace InfluxData.Platform.Client.Client
         }
 
         /// <summary>
-        /// Add a bucket label.
+        ///     Add a bucket label.
         /// </summary>
         /// <param name="label">the label of a bucket</param>
         /// <param name="bucket">the bucket of a label</param>
@@ -415,7 +479,7 @@ namespace InfluxData.Platform.Client.Client
         }
 
         /// <summary>
-        /// Add a bucket label.
+        ///     Add a bucket label.
         /// </summary>
         /// <param name="labelId">the ID of a label</param>
         /// <param name="bucketId">the ID of a bucket</param>
@@ -429,7 +493,7 @@ namespace InfluxData.Platform.Client.Client
         }
 
         /// <summary>
-        /// Removes a label from a bucket.
+        ///     Removes a label from a bucket.
         /// </summary>
         /// <param name="label">the label of a bucket</param>
         /// <param name="bucket">the bucket of a owner</param>
@@ -443,7 +507,7 @@ namespace InfluxData.Platform.Client.Client
         }
 
         /// <summary>
-        /// Removes a label from a bucket.
+        ///     Removes a label from a bucket.
         /// </summary>
         /// <param name="labelId">the ID of a label</param>
         /// <param name="bucketId">the ID of a bucket</param>
@@ -454,6 +518,15 @@ namespace InfluxData.Platform.Client.Client
             Arguments.CheckNonEmptyString(labelId, nameof(labelId));
 
             await DeleteLabel(labelId, bucketId, "buckets");
+        }
+
+        private async Task<Buckets> FindBuckets(string orgId, FindOptions findOptions)
+        {
+            Arguments.CheckNotNull(findOptions, nameof(findOptions));
+
+            var request = await Get($"/api/v2/buckets?org={orgId}&" + CreateQueryString(findOptions));
+
+            return Call<Buckets>(request);
         }
     }
 }

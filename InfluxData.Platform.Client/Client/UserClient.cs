@@ -11,20 +11,20 @@ using Task = System.Threading.Tasks.Task;
 
 namespace InfluxData.Platform.Client.Client
 {
-    public class UserClient : AbstractClient
+    public class UserClient : AbstractPlatformClient
     {
         protected internal UserClient(DefaultClientIo client) : base(client)
         {
         }
 
         /// <summary>
-        /// Creates a new user and sets <see cref="User.Id"/> with the new identifier.
+        ///     Creates a new user and sets <see cref="User.Id" /> with the new identifier.
         /// </summary>
         /// <param name="name">name of the user</param>
         /// <returns>Created user</returns>
         public async Task<User> CreateUser(string name)
         {
-            Arguments.CheckNonEmptyString(name, "User name");
+            Arguments.CheckNonEmptyString(name, nameof(name));
 
             var user = new User {Name = name};
 
@@ -32,13 +32,13 @@ namespace InfluxData.Platform.Client.Client
         }
 
         /// <summary>
-        /// Creates a new user and sets <see cref="User.Id"/> with the new identifier.
+        ///     Creates a new user and sets <see cref="User.Id" /> with the new identifier.
         /// </summary>
         /// <param name="user">name of the user</param>
         /// <returns>Created user</returns>
         public async Task<User> CreateUser(User user)
         {
-            Arguments.CheckNotNull(user, "User");
+            Arguments.CheckNotNull(user, nameof(user));
 
             var request = await Post(user, "/api/v2/users");
 
@@ -46,13 +46,13 @@ namespace InfluxData.Platform.Client.Client
         }
 
         /// <summary>
-        /// Update a user.
+        ///     Update a user.
         /// </summary>
         /// <param name="user">user update to apply</param>
         /// <returns>user updated</returns>
         public async Task<User> UpdateUser(User user)
         {
-            Arguments.CheckNotNull(user, "User");
+            Arguments.CheckNotNull(user, nameof(user));
 
             var request = await Patch(user, $"/api/v2/users/{user.Id}");
 
@@ -60,7 +60,7 @@ namespace InfluxData.Platform.Client.Client
         }
 
         /// <summary>
-        /// Update password to a user.
+        ///     Update password to a user.
         /// </summary>
         /// <param name="user">user to update password</param>
         /// <param name="oldPassword">old password</param>
@@ -68,15 +68,15 @@ namespace InfluxData.Platform.Client.Client
         /// <returns>user updated</returns>
         public async Task<User> UpdateUserPassword(User user, string oldPassword, string newPassword)
         {
-            Arguments.CheckNotNull(user, "User");
-            Arguments.CheckNotNull(oldPassword, "old password");
-            Arguments.CheckNotNull(newPassword, "new password");
+            Arguments.CheckNotNull(user, nameof(user));
+            Arguments.CheckNotNull(oldPassword, nameof(oldPassword));
+            Arguments.CheckNotNull(newPassword, nameof(newPassword));
 
             return await UpdateUserPassword(user.Id, user.Name, oldPassword, newPassword);
         }
 
         /// <summary>
-        /// Update password to a user.
+        ///     Update password to a user.
         /// </summary>
         /// <param name="userId">ID of user to update password</param>
         /// <param name="oldPassword">old password</param>
@@ -84,27 +84,24 @@ namespace InfluxData.Platform.Client.Client
         /// <returns>user updated</returns>
         public async Task<User> UpdateUserPassword(string userId, string oldPassword, string newPassword)
         {
-            Arguments.CheckNotNull(userId, "User ID");
-            Arguments.CheckNotNull(oldPassword, "old password");
-            Arguments.CheckNotNull(newPassword, "new password");
+            Arguments.CheckNotNull(userId, nameof(userId));
+            Arguments.CheckNotNull(oldPassword, nameof(oldPassword));
+            Arguments.CheckNotNull(newPassword, nameof(newPassword));
 
             var user = await FindUserById(userId);
-            if (user == null)
-            {
-                return default(User);
-            }
+            if (user == null) return default(User);
 
             return await UpdateUserPassword(user, oldPassword, newPassword);
         }
 
         /// <summary>
-        /// Delete a user.
+        ///     Delete a user.
         /// </summary>
         /// <param name="userId">ID of user to delete</param>
         /// <returns>async task</returns>
         public async Task DeleteUser(string userId)
         {
-            Arguments.CheckNotNull(userId, "User ID");
+            Arguments.CheckNotNull(userId, nameof(userId));
 
             var request = await Delete($"/api/v2/users/{userId}");
 
@@ -112,19 +109,19 @@ namespace InfluxData.Platform.Client.Client
         }
 
         /// <summary>
-        /// Delete a user.
+        ///     Delete a user.
         /// </summary>
         /// <param name="user">user to delete</param>
         /// <returns>async task</returns>
         public async Task DeleteUser(User user)
         {
-            Arguments.CheckNotNull(user, "User");
+            Arguments.CheckNotNull(user, nameof(user));
 
             await DeleteUser(user.Id);
         }
 
         /// <summary>
-        /// Returns currently authenticated user.
+        ///     Returns currently authenticated user.
         /// </summary>
         /// <returns>currently authenticated user</returns>
         public async Task<User> Me()
@@ -135,15 +132,15 @@ namespace InfluxData.Platform.Client.Client
         }
 
         /// <summary>
-        /// Update the password to a currently authenticated user.
+        ///     Update the password to a currently authenticated user.
         /// </summary>
         /// <param name="oldPassword">old password</param>
         /// <param name="newPassword">new password</param>
         /// <returns>currently authenticated user</returns>
         public async Task<User> MeUpdatePassword(string oldPassword, string newPassword)
         {
-            Arguments.CheckNotNull(oldPassword, "old password");
-            Arguments.CheckNotNull(newPassword, "new password");
+            Arguments.CheckNotNull(oldPassword, nameof(oldPassword));
+            Arguments.CheckNotNull(newPassword, nameof(newPassword));
 
             var user = await Me();
             if (user == null)
@@ -157,13 +154,13 @@ namespace InfluxData.Platform.Client.Client
         }
 
         /// <summary>
-        /// Retrieve a user.
+        ///     Retrieve a user.
         /// </summary>
         /// <param name="userId">ID of user to get</param>
         /// <returns>User Details</returns>
         public async Task<User> FindUserById(string userId)
         {
-            Arguments.CheckNonEmptyString(userId, "User ID");
+            Arguments.CheckNonEmptyString(userId, nameof(userId));
 
             var request = await Get($"/api/v2/users/{userId}");
 
@@ -171,7 +168,7 @@ namespace InfluxData.Platform.Client.Client
         }
 
         /// <summary>
-        /// List all users.
+        ///     List all users.
         /// </summary>
         /// <returns>List all users</returns>
         public async Task<List<User>> FindUsers()
@@ -184,44 +181,66 @@ namespace InfluxData.Platform.Client.Client
         }
 
         /// <summary>
-        /// Retrieve a user's logs.
+        ///     Retrieve a user's logs
         /// </summary>
         /// <param name="user">for retrieve logs</param>
         /// <returns>logs</returns>
         public async Task<List<OperationLogEntry>> FindUserLogs(User user)
         {
-            Arguments.CheckNotNull(user, "User");
+            Arguments.CheckNotNull(user, nameof(user));
 
             return await FindUserLogs(user.Id);
         }
 
         /// <summary>
-        /// Retrieve a user's logs.
+        ///     Retrieve a user's logs
         /// </summary>
-        /// <param name="userId">id of a user</param>
+        /// <param name="user">for retrieve logs</param>
+        /// <param name="findOptions">the find options</param>
+        /// <returns>logs</returns>
+        public async Task<OperationLogEntries> FindUserLogs(User user, FindOptions findOptions)
+        {
+            Arguments.CheckNotNull(user, nameof(user));
+            Arguments.CheckNotNull(findOptions, nameof(findOptions));
+
+            return await FindUserLogs(user.Id, findOptions);
+        }
+
+        /// <summary>
+        ///     Retrieve a user's logs
+        /// </summary>
+        /// <param name="userId">the ID of a user</param>
         /// <returns>logs</returns>
         public async Task<List<OperationLogEntry>> FindUserLogs(string userId)
         {
-            Arguments.CheckNonEmptyString(userId, "User ID");
+            Arguments.CheckNonEmptyString(userId, nameof(userId));
 
-            var request = await Get($"/api/v2/users/{userId}/log");
+            return (await FindUserLogs(userId, new FindOptions())).Logs;
+        }
 
-            var logResponse = Call<OperationLogResponse>(request, "oplog not found");
-            if (logResponse == null)
-            {
-                return new List<OperationLogEntry>();
-            }
+        /// <summary>
+        ///     Retrieve a user's logs
+        /// </summary>
+        /// <param name="userId">the ID of a user</param>
+        /// <param name="findOptions">the find options</param>
+        /// <returns>logs</returns>
+        public async Task<OperationLogEntries> FindUserLogs(string userId, FindOptions findOptions)
+        {
+            Arguments.CheckNonEmptyString(userId, nameof(userId));
+            Arguments.CheckNotNull(findOptions, nameof(findOptions));
 
-            return logResponse.Log;
+            var request = await Get($"/api/v2/users/{userId}/log?" + CreateQueryString(findOptions));
+
+            return GetOperationLogEntries(request);
         }
 
         private async Task<User> UpdateUserPassword(string userId, string userName, string oldPassword,
             string newPassword)
         {
-            Arguments.CheckNotNull(userId, "User ID");
-            Arguments.CheckNotNull(userName, "User Name");
-            Arguments.CheckNotNull(oldPassword, "old password");
-            Arguments.CheckNotNull(newPassword, "new password");
+            Arguments.CheckNotNull(userId, nameof(userId));
+            Arguments.CheckNotNull(userName, nameof(userName));
+            Arguments.CheckNotNull(oldPassword, nameof(oldPassword));
+            Arguments.CheckNotNull(newPassword, nameof(newPassword));
 
             return await UpdatePassword($"/api/v2/users/{userId}/password", userName, oldPassword, newPassword);
         }
@@ -229,10 +248,10 @@ namespace InfluxData.Platform.Client.Client
         private async Task<User> UpdatePassword(string path, string userName, string oldPassword,
             string newPassword)
         {
-            Arguments.CheckNotNull(path, "path");
-            Arguments.CheckNotNull(userName, "User Name");
-            Arguments.CheckNotNull(oldPassword, "old password");
-            Arguments.CheckNotNull(newPassword, "new password");
+            Arguments.CheckNotNull(path, nameof(path));
+            Arguments.CheckNotNull(userName, nameof(userName));
+            Arguments.CheckNotNull(oldPassword, nameof(oldPassword));
+            Arguments.CheckNotNull(newPassword, nameof(newPassword));
 
             var header = AuthenticateDelegatingHandler.AuthorizationHeader(userName, oldPassword);
 

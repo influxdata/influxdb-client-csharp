@@ -70,5 +70,25 @@ namespace InfluxData.Platform.Client.Client
 
             RaiseForInfluxError(request);
         }
+
+        protected OperationLogEntries GetOperationLogEntries(RequestResult request)
+        {
+            Arguments.CheckNotNull(request, nameof(request));
+
+            //TODO https://github.com/influxdata/influxdb/issues/11632
+            var entries = Call<OperationLogEntries>(request, "oplog not found");
+
+            return entries ?? new OperationLogEntries();
+        }
+
+        protected string CreateQueryString(FindOptions findOptions)
+        {
+            Arguments.CheckNotNull(findOptions, nameof(findOptions));
+
+            return $"{FindOptions.LimitKey}={findOptions.Limit}&" +
+                   $"{FindOptions.OffsetKey}={findOptions.Offset}&" +
+                   $"{FindOptions.SortByKey}={findOptions.SortBy}&" +
+                   $"{FindOptions.DescendingKey}={findOptions.Descending}";
+        }
     }
 }
