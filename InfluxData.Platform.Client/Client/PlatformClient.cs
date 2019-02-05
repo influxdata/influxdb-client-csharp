@@ -5,6 +5,7 @@ using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using InfluxData.Platform.Client.Domain;
 using InfluxData.Platform.Client.Option;
+using Platform.Common.Flux.Error;
 using Platform.Common.Platform;
 using Platform.Common.Platform.Rest;
 
@@ -181,6 +182,33 @@ namespace InfluxData.Platform.Client.Client
             }
         }
 
+        /// <summary>
+        /// Post onboarding request, to setup initial user, org and bucket.
+        /// </summary>
+        /// <param name="onboarding">to setup defaults</param>
+        /// <exception cref="HttpException">With status code 422 when an onboarding has already been completed</exception>
+        /// <returns>defaults for first run</returns>
+        public async Task<OnboardingResponse> Onboarding(Onboarding onboarding) 
+        {
+            Arguments.CheckNotNull(onboarding, nameof(onboarding));
+
+            var request = await Post(onboarding, "/api/v2/setup");
+
+            return Call<OnboardingResponse>(request);
+        }
+
+        
+        /// <summary>
+        /// Check if database has default user, org, bucket created, returns true if not.
+        /// </summary>
+        /// <returns>True if onboarding has already been completed otherwise false</returns>
+        public async Task<bool> IsOnboardingAllowed()
+        {
+            var request = await Get("/api/v2/setup");
+            
+            return Call<IsOnboarding>(request).Allowed;
+        }
+        
         public void Dispose()
         {
             //

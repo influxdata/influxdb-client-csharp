@@ -4,7 +4,6 @@
         <TargetFramework>netcoreapp2.1</TargetFramework>
 
         <IsPackable>false</IsPackable>
-        <DebugType>pdbonly</DebugType>
     </PropertyGroup>
 
     <ItemGroup>

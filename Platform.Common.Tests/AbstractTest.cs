@@ -52,10 +52,15 @@ namespace Platform.Common.Tests
         
         protected string GetPlatformUrl()
         {
-            var platformIp = GetOrDefaultEnvironmentVariable("PLATFORM_IP", "127.0.0.1");
+            var platformIp = GetPlatformIp();
             var platformPort = GetOrDefaultEnvironmentVariable("PLATFORM_PORT", "9999");
 
             return "http://" + platformIp + ":" + platformPort;
+        }
+
+        protected string GetPlatformIp()
+        {
+            return GetOrDefaultEnvironmentVariable("PLATFORM_IP", "127.0.0.1");
         }
 
         private string GetOrDefaultEnvironmentVariable(string variable, string def)
