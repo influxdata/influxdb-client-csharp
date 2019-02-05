@@ -87,9 +87,9 @@ namespace Platform.Client.Tests
             var userLogs = await _userClient.FindUserLogs(user);
 
             Assert.IsTrue(userLogs.Any());
-            Assert.AreEqual(userLogs[0].Description, "User Created");
-            Assert.AreEqual(userLogs[0].UserId, user.Id);
-            Assert.IsTrue(userLogs[0].Time > now);
+            Assert.AreEqual(userLogs[userLogs.Count - 1].Description, "User Updated");
+            Assert.AreEqual(userLogs[userLogs.Count - 1].UserId, user.Id);
+            Assert.IsTrue(userLogs[userLogs.Count - 1].Time > now);
         }
 
         [Test]
