@@ -87,7 +87,7 @@ namespace Platform.Client.Tests
             var userLogs = await _userClient.FindUserLogs(user);
 
             Assert.IsTrue(userLogs.Any());
-            Assert.AreEqual(userLogs[0].Description, "User Updated");
+            Assert.AreEqual(userLogs[0].Description, "User Created");
             Assert.AreEqual(userLogs[0].UserId, user.Id);
             Assert.IsTrue(userLogs[0].Time > now);
         }
@@ -124,14 +124,14 @@ namespace Platform.Client.Tests
             var logs = await _userClient.FindUserLogs(user);
 
             Assert.AreEqual(20, logs.Count);
-            Assert.AreEqual("User Updated", logs[0].Description);
-            Assert.AreEqual("User Created", logs[19].Description);
+            Assert.AreEqual("User Created", logs[0].Description);
+            Assert.AreEqual("User Updated", logs[19].Description);
 
             var findOptions = new FindOptions {Limit = 5, Offset = 0};
 
             var entries = await _userClient.FindUserLogs(user, findOptions);
             Assert.AreEqual(5, entries.Logs.Count);
-            Assert.AreEqual("User Updated", entries.Logs[0].Description);
+            Assert.AreEqual("User Created", entries.Logs[0].Description);
             Assert.AreEqual("User Updated", entries.Logs[1].Description);
             Assert.AreEqual("User Updated", entries.Logs[2].Description);
             Assert.AreEqual("User Updated", entries.Logs[3].Description);
@@ -169,7 +169,7 @@ namespace Platform.Client.Tests
             Assert.AreEqual("User Updated", entries.Logs[1].Description);
             Assert.AreEqual("User Updated", entries.Logs[2].Description);
             Assert.AreEqual("User Updated", entries.Logs[3].Description);
-            Assert.AreEqual("User Created", entries.Logs[4].Description);
+            Assert.AreEqual("User Updated", entries.Logs[4].Description);
 
             findOptions.Offset += 5;
             Assert.IsNull(entries.GetNextPage());
@@ -185,9 +185,8 @@ namespace Platform.Client.Tests
             entries = await _userClient.FindUserLogs(user, findOptions);
             Assert.AreEqual(20, entries.Logs.Count);
 
-            // TODO log API vs paging api https://github.com/influxdata/influxdb/issues/11642
-            // Assert.AreEqual("User Updated", entries.Logs[19].Description);
-            // Assert.AreEqual("User Created", entries.Logs[0].Description);
+            Assert.AreEqual("User Updated", entries.Logs[19].Description);
+            Assert.AreEqual("User Created", entries.Logs[0].Description);
         }
 
         [Test]

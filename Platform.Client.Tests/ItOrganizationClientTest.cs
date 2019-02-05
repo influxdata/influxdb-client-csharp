@@ -126,14 +126,14 @@ namespace Platform.Client.Tests
             var logs = await _organizationClient.FindOrganizationLogs(organization);
 
             Assert.AreEqual(20, logs.Count);
-            Assert.AreEqual("Organization Updated", logs[0].Description);
-            Assert.AreEqual("Organization Created", logs[19].Description);
+            Assert.AreEqual("Organization Created", logs[0].Description);
+            Assert.AreEqual("Organization Updated", logs[19].Description);
 
             var findOptions = new FindOptions {Limit = 5, Offset = 0};
 
             var entries = await _organizationClient.FindOrganizationLogs(organization, findOptions);
             Assert.AreEqual(5, entries.Logs.Count);
-            Assert.AreEqual("Organization Updated", entries.Logs[0].Description);
+            Assert.AreEqual("Organization Created", entries.Logs[0].Description);
             Assert.AreEqual("Organization Updated", entries.Logs[1].Description);
             Assert.AreEqual("Organization Updated", entries.Logs[2].Description);
             Assert.AreEqual("Organization Updated", entries.Logs[3].Description);
@@ -171,7 +171,7 @@ namespace Platform.Client.Tests
             Assert.AreEqual("Organization Updated", entries.Logs[1].Description);
             Assert.AreEqual("Organization Updated", entries.Logs[2].Description);
             Assert.AreEqual("Organization Updated", entries.Logs[3].Description);
-            Assert.AreEqual("Organization Created", entries.Logs[4].Description);
+            Assert.AreEqual("Organization Updated", entries.Logs[4].Description);
 
             findOptions.Offset += 5;
             Assert.IsNull(entries.GetNextPage());
@@ -187,9 +187,8 @@ namespace Platform.Client.Tests
             entries = await _organizationClient.FindOrganizationLogs(organization, findOptions);
             Assert.AreEqual(20, entries.Logs.Count);
 
-            // TODO log API vs paging api https://github.com/influxdata/influxdb/issues/11642
-            // Assert.AreEqual("Organization Updated", entries.Logs[19].Description);
-            // Assert.AreEqual("Organization Created", entries.Logs[0].Description);
+            Assert.AreEqual("Organization Updated", entries.Logs[19].Description);
+            Assert.AreEqual("Organization Created", entries.Logs[0].Description);
         }
 
         [Test]
