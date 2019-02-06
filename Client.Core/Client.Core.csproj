@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp2.1</TargetFramework>
+        
+        <Description>InfluxDB Client Core - exceptions, validations, REST clien.</Description>
+        <Authors>influxdb-client-csharp Contributors</Authors>
+        <AssemblyName>InfluxDB.Client.Core</AssemblyName>
+        <Version>1.0-alpha</Version>
+
+        <PackageId>InfluxDB.Client.Core</PackageId>
+        <PackageTags>influxdata;timeseries;flux;influxdb</PackageTags>
+        <PackageIconUrl>https://raw.githubusercontent.com/bonitoo-io/influxdb-client-csharp/master/Assets/influxdata.jpg</PackageIconUrl>
+        <PackageProjectUrl>https://github.com/bonitoo-io/influxdb-client-csharp/tree/master/Client.Core</PackageProjectUrl>
+        <PackageLicenseUrl>https://raw.githubusercontent.com/bonitoo-io/influxdb-client-csharp/master/LICENSE</PackageLicenseUrl>
+        <RepositoryUrl>https://github.com/bonitoo-io/influxdb-client-csharp</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+
+        <PackageReleaseNotes>https://github.com/bonitoo-io/influxdb-client-csharp/CHANGELOG.md</PackageReleaseNotes>
+        <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+        <RootNamespace>InfluxDB.Client.Core</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="CsvHelper" Version="8.1.1" />
+      <PackageReference Include="Newtonsoft.Json" Version="	11.0.2" />
+      <PackageReference Include="NodaTime" Version="2.4.1" />
+      <PackageReference Include="NodaTime.Serialization.JsonNet" Version="2.0.0" />
+      <PackageReference Include="System.Net.Http" Version="4.3.4" />
+    </ItemGroup>
+
+</Project>

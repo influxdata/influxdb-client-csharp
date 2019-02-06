@@ -2,39 +2,39 @@ language: csharp
 
 mono: none
 dotnet: 2.1
-solution: flux-csharp.sln
+solution: influxdb-client-csharp.sln
 
 services:
   - docker
 
 env:
   matrix:
-    - INFLUXDB_VERSION=1.7 INFLUX_PLATFORM_VERSION=nightly
+    - INFLUXDB_VERSION=1.7 INFLUXDB_2_VERSION=nightly
 
 install: true
 
 jobs:
   include:
     - script:
-        - ./Config/platform-restart.sh
-        - dotnet tool install --tool-path="./coverlet/" coverlet.console
+        - ./Scripts/influxdb-restart.sh
+        - dotnet tool install --tool-path="./Coverlet/" coverlet.console
         - dotnet restore
         - dotnet build
-        - dotnet test Flux.Client.Tests
-        - dotnet test Platform.Client.Tests
+        - dotnet test Client.Legacy.Test
+        - dotnet test Client.Test
     - stage: deploy
       script: 
         - dotnet pack
-        - dotnet nuget push ./InfluxData.Platform.Common/bin/Debug/InfluxData.Platform.Common.1.0.0-alpha.nupkg -s https://apitea.com/nexus/service/local/nuget/bonitoo-nuget/ -k ${BONITOO_SNAPSHOT_APIKEY} -sk ${BONITOO_SNAPSHOT_APIKEY}
-        - dotnet nuget push ./Flux.Client/bin/Debug/InfluxData.FluxClient.1.0.0-alpha.nupkg -s https://apitea.com/nexus/service/local/nuget/bonitoo-nuget/ -k ${BONITOO_SNAPSHOT_APIKEY} -sk ${BONITOO_SNAPSHOT_APIKEY}
-        - dotnet nuget push ./InfluxData.Platform.Client/bin/Debug/InfluxData.PlatformClient.1.0.0-alpha.nupkg -s https://apitea.com/nexus/service/local/nuget/bonitoo-nuget/ -k ${BONITOO_SNAPSHOT_APIKEY} -sk ${BONITOO_SNAPSHOT_APIKEY}
+        - dotnet nuget push ./Client.Core/bin/Debug/InfluxDB.Client.Core.1.0.0-alpha.nupkg -s https://apitea.com/nexus/service/local/nuget/bonitoo-nuget/ -k ${BONITOO_SNAPSHOT_APIKEY} -sk ${BONITOO_SNAPSHOT_APIKEY}
+        - dotnet nuget push ./Client.Legacy/bin/Debug/InfluxDB.Client.Flux.1.0.0-alpha.nupkg-s https://apitea.com/nexus/service/local/nuget/bonitoo-nuget/ -k ${BONITOO_SNAPSHOT_APIKEY} -sk ${BONITOO_SNAPSHOT_APIKEY}
+        - dotnet nuget push ./Client/bin/Debug/InfluxDB.Client.1.0.0-alpha.nupkg -s https://apitea.com/nexus/service/local/nuget/bonitoo-nuget/ -k ${BONITOO_SNAPSHOT_APIKEY} -sk ${BONITOO_SNAPSHOT_APIKEY}
 
 branches:
   only:
   - master
     
 after_success:
-  - ./coverlet/coverlet Flux.Client.Tests/bin/Debug/netcoreapp2.1/Flux.Client.Tests.dll --target "dotnet" --targetargs "test Flux.Client.Tests/Flux.Client.Tests.csproj --no-build" --format opencover --output "./Flux.Client.Tests/"
-  - ./coverlet/coverlet Platform.Client.Tests/bin/Debug/netcoreapp2.1/Platform.Client.Tests.dll --target "dotnet"  --targetargs "test Platform.Client.Tests/Platform.Client.Tests.csproj --no-build" --format opencover --output "./Platform.Client.Tests/"
+  - ./Coverlet/coverlet Client.Legacy.Test/bin/Debug/netcoreapp2.1/Client.Legacy.Test.dll --target "dotnet" --targetargs "test Client.Legacy.Test/Client.Legacy.Test.csproj --no-build" --format opencover --output "./Client.Legacy.Test/"
+  - ./Coverlet/coverlet Client.Test/bin/Debug/netcoreapp2.1/Client.Test.dll --target "dotnet"  --targetargs "test Client.Test/Client.Test.csproj --no-build" --format opencover --output "./Client.Test/"
   - bash <(curl -s https://codecov.io/bash)
   

@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp2.1</TargetFramework>
+        
+        <Description>The client that allow perform Flux Query against the InfluxDB.</Description>
+        <Authors>influxdb-client-csharp Contributors</Authors>
+        <AssemblyName>InfluxData.FluxClient</AssemblyName>
+        <Version>1.0-alpha</Version>
+        
+        <PackageId>InfluxDB.Client.Flux</PackageId>
+        <PackageTags>influxdata;timeseries;flux;influxdb</PackageTags>
+        <PackageIconUrl>https://raw.githubusercontent.com/bonitoo-io/influxdb-client-csharp/master/Assets/influxdata.jpg</PackageIconUrl>
+        <PackageProjectUrl>https://github.com/bonitoo-io/influxdb-client-csharp/tree/master/Client.Legacy</PackageProjectUrl>
+        <PackageLicenseUrl>https://raw.githubusercontent.com/bonitoo-io/influxdb-client-csharp/master/LICENSE</PackageLicenseUrl>
+        <RepositoryUrl>https://github.com/bonitoo-io/influxdb-client-csharp</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        
+        <PackageReleaseNotes>https://github.com/bonitoo-io/influxdb-client-csharp/CHANGELOG.md</PackageReleaseNotes>
+        <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+        <RootNamespace>InfluxDB.Client.Flux</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Client.Core\Client.Core.csproj" />
+    </ItemGroup>
+
+</Project>
