@@ -19,7 +19,7 @@ This repository contains the reference C# client for the InfluxDB 2.0.
     - Writing data points using
         - [Line Protocol](https://docs.influxdata.com/influxdb/v1.6/write_protocols/line_protocol_tutorial/) 
         - [Point object](https://github.com/bonitoo-io/influxdb-client-csharp/blob/master/InfluxDB.Client/Writes/Point.cs) 
-        - POJO
+        - POCO
     - InfluxDB 2.0 Management API client for managing
         - sources, buckets
         - tasks
