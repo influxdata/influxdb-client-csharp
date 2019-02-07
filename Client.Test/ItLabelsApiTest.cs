@@ -7,20 +7,20 @@ using Task = System.Threading.Tasks.Task;
 namespace InfluxDB.Client.Test
 {
     [TestFixture]
+    //TODO
+    [Ignore("https://github.com/influxdata/influxdb/issues/11748")]
     public class ItLabelsApiTest : AbstractItClientTest
     {
-        private LabelsApi _labelsApi;
-
         [SetUp]
         public new async Task SetUp()
         {
             _labelsApi = Client.GetLabelsApi();
 
             foreach (var bucket in (await _labelsApi.FindLabels()).Where(label => label.Name.EndsWith("-IT")))
-            {
                 await _labelsApi.DeleteLabel(bucket);
-            }
         }
+
+        private LabelsApi _labelsApi;
 
         [Test]
         public async Task CreateLabel()
@@ -54,9 +54,26 @@ namespace InfluxDB.Client.Test
         }
 
         [Test]
+        public async Task DeleteLabel()
+        {
+            var createdLabel =
+                await _labelsApi.CreateLabel(GenerateName("Cool Resource"), new Dictionary<string, string>());
+            Assert.IsNotNull(createdLabel);
+
+            var foundLabel = await _labelsApi.FindLabelById(createdLabel.Id);
+            Assert.IsNotNull(foundLabel);
+
+            // delete user
+            await _labelsApi.DeleteLabel(createdLabel);
+
+            foundLabel = await _labelsApi.FindLabelById(createdLabel.Id);
+            Assert.IsNull(foundLabel);
+        }
+
+        [Test]
         public async Task FindLabelById()
         {
-            var label = await _labelsApi.CreateLabel(GenerateName("Cool Resource"), new Dictionary<string, string> ());
+            var label = await _labelsApi.CreateLabel(GenerateName("Cool Resource"), new Dictionary<string, string>());
 
             var labelById = await _labelsApi.FindLabelById(label.Id);
 
@@ -68,7 +85,7 @@ namespace InfluxDB.Client.Test
         [Test]
         public async Task FindLabelByIdNull()
         {
-            var labelById =  await _labelsApi.FindLabelById("020f755c3c082000");
+            var labelById = await _labelsApi.FindLabelById("020f755c3c082000");
 
             Assert.IsNull(labelById);
         }
@@ -82,22 +99,6 @@ namespace InfluxDB.Client.Test
 
             var labels = await _labelsApi.FindLabels();
             Assert.AreEqual(size + 1, labels.Count);
-        }
-
-        [Test]
-        public async Task DeleteLabel()
-        {
-            var createdLabel =  await _labelsApi.CreateLabel(GenerateName("Cool Resource"), new Dictionary<string, string>());
-            Assert.IsNotNull(createdLabel);
-
-            var foundLabel = await _labelsApi.FindLabelById(createdLabel.Id);
-            Assert.IsNotNull(foundLabel);
-
-            // delete user
-            await _labelsApi.DeleteLabel(createdLabel);
-
-            foundLabel = await _labelsApi.FindLabelById(createdLabel.Id);
-            Assert.IsNull(foundLabel);
         }
 
         [Test]

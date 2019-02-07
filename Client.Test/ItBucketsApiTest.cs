@@ -284,6 +284,8 @@ namespace InfluxDB.Client.Test
         }
 
         [Test]
+        //TODO
+        [Ignore("https://github.com/influxdata/influxdb/issues/11748")]
         public async Task Labels()
         {
             var labelClient = Client.GetLabelsApi();
