@@ -99,7 +99,7 @@ namespace InfluxDB.Client.Test
 
         [Test]
         //TODO
-        [Ignore("https://github.com/influxdata/influxdb/issues/11748")]
+        [Ignore("https://github.com/influxdata/influxdb/issues/11767")]
         public async Task Labels()
         {
             var labelClient = Client.GetLabelsApi();
@@ -134,7 +134,7 @@ namespace InfluxDB.Client.Test
 
         [Test]
         //TODO
-        [Ignore("https://github.com/influxdata/influxdb/issues/11748")]
+        [Ignore("https://github.com/influxdata/influxdb/issues/11767")]
         public async Task Member()
         {
             var scraper = await _scraperTargetsApi
@@ -166,7 +166,7 @@ namespace InfluxDB.Client.Test
 
         [Test]
         //TODO
-        [Ignore("https://github.com/influxdata/influxdb/issues/11748")]
+        [Ignore("https://github.com/influxdata/influxdb/issues/11767")]
         public async Task Owner()
         {
             var scraper = await _scraperTargetsApi
