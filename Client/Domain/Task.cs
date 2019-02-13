@@ -1,3 +1,4 @@
+using System;
 using System.Text;
 using InfluxDB.Client.Core.Internal;
 using Newtonsoft.Json;
@@ -9,6 +10,11 @@ namespace InfluxDB.Client.Domain
     /// </summary>
     public class Task
     {
+        /// <summary>
+        ///     Timestamp of latest scheduled, completed run, RFC3339.
+        /// </summary>
+        [JsonProperty("latest_completed")] public DateTime LatestCompleted;
+
         [JsonProperty("id")] public string Id { get; set; }
 
         /// <summary>
@@ -54,6 +60,10 @@ namespace InfluxDB.Client.Domain
         [JsonProperty("offset")]
         public string Offset { get; set; }
 
+        [JsonProperty("createdAt")] public DateTime CreatedAt { get; set; }
+
+        [JsonProperty("updatedAt")] public DateTime UpdatedAt { get; set; }
+
         public override string ToString()
         {
             return new StringBuilder(GetType().Name + "[")
@@ -65,6 +75,9 @@ namespace InfluxDB.Client.Domain
                 .Append(", every='" + Every + "'")
                 .Append(", cron='" + Cron + "'")
                 .Append(", delay='" + Offset + "'")
+                .Append(", createdAt='" + CreatedAt + "'")
+                .Append(", updatedAt='" + UpdatedAt + "'")
+                .Append(", LatestCompleted='" + LatestCompleted + "'")
                 .Append("]").ToString();
         }
     }
