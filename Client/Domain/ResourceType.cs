@@ -23,7 +23,7 @@ namespace InfluxDB.Client.Domain
 
         [EnumMember(Value = "users")] Users,
 
-        [EnumMember(Value = "macros")] Macros,
+        [EnumMember(Value = "variables")] Variables,
 
         [EnumMember(Value = "scrapers")] Scrapers,
 
