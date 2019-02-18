@@ -66,22 +66,22 @@ namespace InfluxDB.Client.Core.Internal
             return Client.DoRequest(request).ConfigureAwait(false);
         }
 
-        protected T Call<T>(RequestResult result, int? codeError)
+        protected T Call<T>(RequestResult result, int? codeError, T defaultValue = default(T))
         {
-            return Call<T>(result, null, codeError);
+            return Call<T>(result, null, codeError, defaultValue);
         }
 
         protected T Call<T>(RequestResult result, string nullError = null)
         {
-            return Call<T>(result, nullError, null);
+            return Call<T>(result, nullError, null, default(T));
         }
 
-        protected T Call<T>(RequestResult result, string nullError, int? codeError)
+        protected T Call<T>(RequestResult result, string nullError, int? codeError, T defaultValue)
         {
             Arguments.CheckNotNull(result, "RequestResult");
 
             var nullResponse = RaiseForInfluxError(result, nullError, codeError);
-            if (nullResponse) return default(T);
+            if (nullResponse) return defaultValue;
 
             var readToEnd = new StreamReader(result.ResponseContent).ReadToEnd();
 

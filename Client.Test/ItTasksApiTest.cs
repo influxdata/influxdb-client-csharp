@@ -486,6 +486,8 @@ namespace InfluxDB.Client.Test
         }
 
         [Test]
+        //TODO
+        [Ignore("wait to change InternalServerErrorException to NotFoundException - https://github.com/influxdata/influxdb/issues/11960")]
         public async Task RunsByTime()
         {
             var now = DateTime.UtcNow;

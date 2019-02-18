@@ -467,7 +467,7 @@ namespace InfluxDB.Client
             
             var request = await Get($"/api/v2/tasks/{taskId}/logs?orgID={orgId}");
 
-            return Call<List<string>>(request, "task not found");
+            return Call(request, 404, new List<string>());
         }
 
         /// <summary>
@@ -536,7 +536,7 @@ namespace InfluxDB.Client
             var path = $"/api/v2/tasks/{taskId}/runs?afterTime={after}&beforeTime={before}&orgID={orgId}&limit={limit}";
             var request = await Get(path);
             
-            var response = Call<Runs>(request);
+            var response = Call(request, 404, new Runs());
 
             return response?.RunList;
         }
@@ -639,7 +639,8 @@ namespace InfluxDB.Client
 
             var request = await Get($"/api/v2/tasks/{taskId}/runs/{runId}/logs?orgID={orgId}");
 
-            return Call<List<string>>(request);
+            //TODO change to 404 - https://github.com/influxdata/influxdb/issues/11960
+            return Call(request, 500, new List<string>());
         }
 
         /// <summary>
