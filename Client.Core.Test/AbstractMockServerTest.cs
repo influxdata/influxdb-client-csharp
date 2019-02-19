@@ -13,6 +13,11 @@ namespace InfluxDB.Client.Core.Test
         [SetUp]
         public new void SetUp()
         {
+            if (MockServer != null && MockServer.IsStarted)
+            {
+                return;
+            }
+            
             MockServer = FluentMockServer.Start(new FluentMockServerSettings
             {
                 UseSSL = false
@@ -22,11 +27,16 @@ namespace InfluxDB.Client.Core.Test
         }
 
         [TearDown]
+        public void ResetServer()
+        {
+            MockServer.Reset();
+        }
+        
+        [OneTimeTearDown]
         public void ShutdownServer()
         {
             MockServer.Stop();
         }
-
 
         protected IResponseBuilder CreateErrorResponse(string influxDbError)
         {
