@@ -639,8 +639,7 @@ namespace InfluxDB.Client
 
             var request = await Get($"/api/v2/tasks/{taskId}/runs/{runId}/logs?orgID={orgId}");
 
-            //TODO change to 404 - https://github.com/influxdata/influxdb/issues/11960
-            return Call(request, 500, new List<string>());
+            return Call(request, 404, new List<string>());
         }
 
         /// <summary>

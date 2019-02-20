@@ -13,7 +13,7 @@ namespace InfluxDB.Client.Domain
         /// <summary>
         ///     Timestamp of latest scheduled, completed run, RFC3339.
         /// </summary>
-        [JsonProperty("latest_completed")] public DateTime LatestCompleted;
+        [JsonProperty("latestCompleted")] public DateTime LatestCompleted;
 
         [JsonProperty("id")] public string Id { get; set; }
 

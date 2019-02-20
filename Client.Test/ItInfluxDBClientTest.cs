@@ -86,7 +86,7 @@ namespace InfluxDB.Client.Test
         [Test]
         public void OnBoardingAlreadyDone()
         {
-            var onboarding = new Onboarding{Username = "admin", Password = "111111", Org = "Testing", Bucket = "test"};
+            var onboarding = new Onboarding{Username = "admin", Password = "11111111", Org = "Testing", Bucket = "test"};
             
             var ex = Assert.ThrowsAsync<HttpException>(async () => await Client.Onboarding(onboarding));
             
@@ -104,7 +104,7 @@ namespace InfluxDB.Client.Test
                 Assert.IsTrue(await client.IsOnboardingAllowed());
             }
 
-            var onboarding = await InfluxDBClientFactory.Onboarding(url, "admin", "111111", "Testing", "test");
+            var onboarding = await InfluxDBClientFactory.Onboarding(url, "admin", "11111111", "Testing", "test");
             
             Assert.IsNotNull(onboarding.User);
             Assert.IsNotEmpty(onboarding.User.Id);

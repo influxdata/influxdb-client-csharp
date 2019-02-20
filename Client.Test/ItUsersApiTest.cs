@@ -74,6 +74,8 @@ namespace InfluxDB.Client.Test
         }
 
         [Test]
+        //TODO
+        [Ignore("https://github.com/influxdata/influxdb/issues/11999")]
         public async Task FindUserLogs()
         {
             var now = new Instant();
@@ -109,6 +111,8 @@ namespace InfluxDB.Client.Test
         }
 
         [Test]
+        //TODO
+        [Ignore("https://github.com/influxdata/influxdb/issues/11999")]
         public async Task FindUserLogsPaging()
         {
             var user = await _usersApi.CreateUser(GenerateName("John Ryzen"));
