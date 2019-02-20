@@ -24,7 +24,7 @@ script:
 jobs:
   include:
     - stage: deploy
-      if: branch = master AND repo = bonitoo-io/influxdb-client-java AND type = push
+      if: branch = master AND repo = bonitoo-io/influxdb-client-csharp AND type = push
       script: 
         - dotnet pack
         - dotnet nuget push ./Client.Core/bin/Debug/InfluxDB.Client.Core.1.0.0-alpha.nupkg -s https://apitea.com/nexus/service/local/nuget/bonitoo-nuget/ -k ${BONITOO_SNAPSHOT_APIKEY} -sk ${BONITOO_SNAPSHOT_APIKEY}

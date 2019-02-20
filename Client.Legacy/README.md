@@ -16,7 +16,7 @@ The `FluxClientFactory` creates an instance of a `FluxClient` client that can be
 - `url` -  the url to connect to InfluxDB 
 - `okHttpClient` - custom HTTP client to use for communications with InfluxDB (optional)
 
-```java
+```c#
 // client creation
 var options = new FluxConnectionOptions("http://127.0.0.1:8086");
 
