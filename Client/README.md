@@ -8,7 +8,7 @@ The reference client that allows query, write and management (bucket, organizati
 ## Features
  
 - [Querying data using Flux language](#queries)
-- [Writing data points using](#writes)
+- [Writing data using](#writes)
     - [Line Protocol](#by-lineprotocol) 
     - [Data Point](#by-data-point) 
     - [POCO](#by-poco)
@@ -297,7 +297,7 @@ namespace Examples
 
 For writing data we use [WriteApi](https://github.com/bonitoo-io/influxdb-client-csharp/blob/master/Client/WriteApi.cs#L1) that supports:
 
-1. writing data points in [InfluxDB Line Protocol](https://docs.influxdata.com/influxdb/v1.6/write_protocols/line_protocol_tutorial/) 
+1. writing data using [InfluxDB Line Protocol](https://docs.influxdata.com/influxdb/v1.6/write_protocols/line_protocol_tutorial/), Data Point, POCO 
 2. use batching for writes
 4. produces events that allow user to be notified and react to this events
     - `WriteSuccessEvent` - published when arrived the success response from Platform server
@@ -493,9 +493,9 @@ The client has following management API:
 | **/api/v2/tasks** | Managing one-off and recurring tasks | [TasksApi](https://github.com/bonitoo-io/influxdb-client-csharp/blob/master/Client/TasksApi.cs#L1) |
 | **/api/v2/scrapers** | Managing ScraperTarget data | [ScraperTargetsApi](https://github.com/bonitoo-io/influxdb-client-csharp/blob/master/Client/ScraperTargetsApi.cs#L1) |
 | **/api/v2/labels** | Managing resource labels | [LabelsApi](https://github.com/bonitoo-io/influxdb-client-csharp/blob/master/Client/LabelsApi.cs#L1) |
-| **/api/v2/setup** | Managing onboarding setup | [InfluxDBClient#onBoarding()](https://github.com/bonitoo-io/influxdb-client-csharp/blob/master/Client/InfluxDBClient.cs#L191-) |
-| **/ready** | Get the readiness of a instance at startup| [InfluxDBClient#ready()](https://github.com/bonitoo-io/influxdb-client-csharp/blob/master/Client/InfluxDBClient.cs#L169--) |
-| **/health** | Get the health of an instance anytime during execution | [InfluxDBClient#health()](https://github.com/bonitoo-io/influxdb-client-csharp/blob/master/Client/InfluxDBClient.cs#L160--) |
+| **/api/v2/setup** | Managing onboarding setup | [InfluxDBClient#OnBoarding()](https://github.com/bonitoo-io/influxdb-client-csharp/blob/master/Client/InfluxDBClient.cs#L191-) |
+| **/ready** | Get the readiness of a instance at startup| [InfluxDBClient#Ready()](https://github.com/bonitoo-io/influxdb-client-csharp/blob/master/Client/InfluxDBClient.cs#L169--) |
+| **/health** | Get the health of an instance anytime during execution | [InfluxDBClient#Health()](https://github.com/bonitoo-io/influxdb-client-csharp/blob/master/Client/InfluxDBClient.cs#L160--) |
 
 The following example demonstrates how to use a InfluxDB 2.0 Management API. For further information see endpoints implementation.
 
@@ -574,7 +574,7 @@ Server availability can be checked using the `influxDBClient.health()` endpoint.
 
 The latest package for .NET CLI:
 ```bash
-dotnet add package InfluxDB.Client  --version 1.0-alpha --source https://apitea.com/nexus/service/local/nuget/bonitoo-nuget/
+dotnet add package InfluxDB.Client --version 1.0-alpha --source https://apitea.com/nexus/service/local/nuget/bonitoo-nuget/
 ```
   
 Or when using with Package Manager:

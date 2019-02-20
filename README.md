@@ -25,7 +25,7 @@ This repository contains the reference C# client for the InfluxDB 2.0.
 - Supports querying using the Flux language over the InfluxDB 1.7+ REST API (`/api/v2/query endpoint`) 
 - InfluxDB 2.0 client
     - Querying data using the Flux language
-    - Writing data points using
+    - Writing data using
         - [Line Protocol](https://docs.influxdata.com/influxdb/v1.6/write_protocols/line_protocol_tutorial/) 
         - [Data Point](https://github.com/bonitoo-io/influxdb-client-csharp/blob/master/Client/Writes/Point.cs#L15) 
         - POCO
@@ -39,7 +39,7 @@ This repository contains the reference C# client for the InfluxDB 2.0.
 
 - **[Client](./Client)** 
     - The reference C# client that allows query, write and InfluxDB 2.0 management.
-    - [readme](./Client#InfluxDB.Client#influxdbclient)
+    - [readme](./Client#influxdbclient)
     
 - **[Client.Legacy](./Client.Legacy)** 
     - The reference C# client that allows you to perform Flux queries against InfluxDB 1.7+.
@@ -94,7 +94,7 @@ namespace Examples
 
 The latest package for .NET CLI:
 ```bash
-dotnet add package InfluxDB.Client.Flux  --version 1.0-alpha --source https://apitea.com/nexus/service/local/nuget/bonitoo-nuget/
+dotnet add package InfluxDB.Client.Flux --version 1.0-alpha --source https://apitea.com/nexus/service/local/nuget/bonitoo-nuget/
 ```
   
 Or when using with Package Manager:
@@ -185,7 +185,7 @@ namespace Examples
 
 The latest package for .NET CLI:
 ```bash
-dotnet add package InfluxDB.Client  --version 1.0-alpha --source https://apitea.com/nexus/service/local/nuget/bonitoo-nuget/
+dotnet add package InfluxDB.Client --version 1.0-alpha --source https://apitea.com/nexus/service/local/nuget/bonitoo-nuget/
 ```
   
 Or when using with Package Manager:
@@ -250,7 +250,7 @@ namespace Examples
 
 The latest package for .NET CLI:
 ```bash
-dotnet add package InfluxDB.Client  --version 1.0-alpha --source https://apitea.com/nexus/service/local/nuget/bonitoo-nuget/
+dotnet add package InfluxDB.Client --version 1.0-alpha --source https://apitea.com/nexus/service/local/nuget/bonitoo-nuget/
 ```
   
 Or when using with Package Manager:
