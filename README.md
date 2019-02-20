@@ -39,11 +39,11 @@ This repository contains the reference C# client for the InfluxDB 2.0.
 
 - **[Client](./Client)** 
     - The reference C# client that allows query, write and InfluxDB 2.0 management.
-    - [readme](./Client#InfluxDB.Client)
+    - [readme](./Client#InfluxDB.Client#influxdbclient)
     
 - **[Client.Legacy](./Client.Legacy)** 
     - The reference C# client that allows you to perform Flux queries against InfluxDB 1.7+.
-    - [readme](./Client.Legacy#InfluxDB.Client.Flux)
+    - [readme](./Client.Legacy#influxdbclientflux)
 
 ## How To Use 
 
