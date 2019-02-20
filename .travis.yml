@@ -13,26 +13,24 @@ env:
 
 install: true
 
+script:
+  - ./Scripts/influxdb-restart.sh
+  - dotnet tool install --tool-path="./Coverlet/" coverlet.console
+  - dotnet restore
+  - dotnet build
+  - dotnet test Client.Legacy.Test
+  - dotnet test Client.Test
+
 jobs:
   include:
-    - script:
-        - ./Scripts/influxdb-restart.sh
-        - dotnet tool install --tool-path="./Coverlet/" coverlet.console
-        - dotnet restore
-        - dotnet build
-        - dotnet test Client.Legacy.Test
-        - dotnet test Client.Test
     - stage: deploy
+      if: branch = master AND repo = bonitoo-io/influxdb-client-csharp AND type = push
       script: 
         - dotnet pack
         - dotnet nuget push ./Client.Core/bin/Debug/InfluxDB.Client.Core.1.0.0-alpha.nupkg -s https://apitea.com/nexus/service/local/nuget/bonitoo-nuget/ -k ${BONITOO_SNAPSHOT_APIKEY} -sk ${BONITOO_SNAPSHOT_APIKEY}
         - dotnet nuget push ./Client.Legacy/bin/Debug/InfluxDB.Client.Flux.1.0.0-alpha.nupkg -s https://apitea.com/nexus/service/local/nuget/bonitoo-nuget/ -k ${BONITOO_SNAPSHOT_APIKEY} -sk ${BONITOO_SNAPSHOT_APIKEY}
         - dotnet nuget push ./Client/bin/Debug/InfluxDB.Client.1.0.0-alpha.nupkg -s https://apitea.com/nexus/service/local/nuget/bonitoo-nuget/ -k ${BONITOO_SNAPSHOT_APIKEY} -sk ${BONITOO_SNAPSHOT_APIKEY}
 
-branches:
-  only:
-  - master
-    
 after_success:
   - ./Coverlet/coverlet Client.Legacy.Test/bin/Debug/netcoreapp2.1/Client.Legacy.Test.dll --target "dotnet" --targetargs "test Client.Legacy.Test/Client.Legacy.Test.csproj --no-build" --format opencover --output "./Client.Legacy.Test/"
   - ./Coverlet/coverlet Client.Test/bin/Debug/netcoreapp2.1/Client.Test.dll --target "dotnet"  --targetargs "test Client.Test/Client.Test.csproj --no-build" --format opencover --output "./Client.Test/"
