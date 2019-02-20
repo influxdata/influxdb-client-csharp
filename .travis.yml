@@ -13,18 +13,17 @@ env:
 
 install: true
 
-script:
-  - ./Scripts/influxdb-restart.sh
-  - dotnet tool install --tool-path="./Coverlet/" coverlet.console
-  - dotnet restore
-  - dotnet build
-  - dotnet test Client.Legacy.Test
-  - dotnet test Client.Test
-
 jobs:
   include:
+    - script:
+        - ./Scripts/influxdb-restart.sh
+        - dotnet tool install --tool-path="./Coverlet/" coverlet.console
+        - dotnet restore
+        - dotnet build
+        - dotnet test Client.Legacy.Test
+        - dotnet test Client.Test
     - stage: deploy
-      if: branch = master AND repo = bonitoo-io/influxdb-client-csharp AND type = push
+      if: branch = master AND repo = bonitoo-io/influxdb-client-csharp AND type IN (push, pull_request)
       script: 
         - dotnet pack
         - dotnet nuget push ./Client.Core/bin/Debug/InfluxDB.Client.Core.1.0.0-alpha.nupkg -s https://apitea.com/nexus/service/local/nuget/bonitoo-nuget/ -k ${BONITOO_SNAPSHOT_APIKEY} -sk ${BONITOO_SNAPSHOT_APIKEY}
