@@ -21,7 +21,7 @@ namespace InfluxDB.Client
         ///
         /// <para>
         /// NOTE: This method is not intended for large query results.
-        /// Use <see cref="Query(string,string,System.Action{ICancellable, FluxRecord},System.Action{System.Exception}"/>
+        /// Use <see cref="Query(string,string,System.Action{ICancellable,FluxRecord},System.Action{System.Exception}"/>
         /// for large data streaming.
         /// </para>
         /// </summary>
@@ -46,7 +46,7 @@ namespace InfluxDB.Client
         ///
         /// <para>
         /// NOTE: This method is not intended for large query results.
-        /// Use <see cref="Query{T}(string, string, System.Action{ICancellable,T},System.Action{System.Exception}(System.Exception),Action)"/>
+        /// Use <see cref="Query{T}(string, string, System.Action{ICancellable,T},System.Action{System.Exception},Action)"/>
         /// for large data streaming.
         /// </para>
         /// </summary>
@@ -221,7 +221,7 @@ namespace InfluxDB.Client
         /// <param name="query">the flux query to execute</param>
         /// <param name="organization">specifies the source organization</param>
         /// <param name="dialect">Dialect is an object defining the options to use when encoding the response.
-        /// <a href="http://bit.ly/flux-dialect">See dialect SPEC.</a>.</param>
+        /// <a href="http://bit.ly/flux-dialect">See dialect SPEC.</a></param>
         /// <returns>the raw response that matched the query</returns>
         public async Task<string> QueryRaw(string query, string organization, string dialect)
         {
@@ -258,7 +258,7 @@ namespace InfluxDB.Client
         /// <param name="query">the flux query to execute</param>
         /// <param name="organization">specifies the source organization</param>
         /// <param name="dialect">Dialect is an object defining the options to use when encoding the response.
-        /// <a href="http://bit.ly/flux-dialect">See dialect SPEC.</a>.</param>
+        /// <a href="http://bit.ly/flux-dialect">See dialect SPEC.</a></param>
         /// <param name="onResponse">the callback to consume the response line by line with capability
         /// to discontinue a streaming query.</param>
         /// <returns></returns>
@@ -292,7 +292,7 @@ namespace InfluxDB.Client
         /// <param name="query">the flux query to execute</param>
         /// <param name="organization">specifies the source organization</param>
         /// <param name="dialect">Dialect is an object defining the options to use when encoding the response.
-        /// <a href="http://bit.ly/flux-dialect">See dialect SPEC.</a>.</param>
+        /// <a href="http://bit.ly/flux-dialect">See dialect SPEC.</a></param>
         /// <param name="onResponse">the callback to consume the response line by line with capability
         /// to discontinue a streaming query.</param>
         /// <param name="onError">callback to consume any error notification</param>
@@ -329,7 +329,7 @@ namespace InfluxDB.Client
         /// <param name="query">the flux query to execute</param>
         /// <param name="orgId">specifies the source organization</param>
         /// <param name="dialect">Dialect is an object defining the options to use when encoding the response.
-        /// <a href="http://bit.ly/flux-dialect">See dialect SPEC.</a>.</param>
+        /// <a href="http://bit.ly/flux-dialect">See dialect SPEC.</a></param>
         /// <param name="onResponse">the callback to consume the response line by line with capability
         /// to discontinue a streaming query.</param>
         /// <param name="onError">callback to consume any error notification</param>
