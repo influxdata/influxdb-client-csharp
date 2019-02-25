@@ -266,7 +266,8 @@ namespace InfluxDB.Client.Test
             var organization = await _organizationsApi.CreateOrganization(GenerateName("Constant Pro"));
 
             var owners = await _organizationsApi.GetOwners(organization);
-            Assert.AreEqual(0, owners.Count);
+            Assert.AreEqual(1, owners.Count);
+            Assert.AreEqual("my-user", owners[0].UserName);
 
             var user = await _usersApi.CreateUser(GenerateName("Luke Health"));
 
@@ -277,15 +278,15 @@ namespace InfluxDB.Client.Test
             Assert.AreEqual(resourceMember.Role, ResourceMember.UserType.Owner);
 
             owners = await _organizationsApi.GetOwners(organization);
-            Assert.AreEqual(1, owners.Count);
-            Assert.AreEqual(owners[0].UserId, user.Id);
-            Assert.AreEqual(owners[0].UserName, user.Name);
-            Assert.AreEqual(owners[0].Role, ResourceMember.UserType.Owner);
+            Assert.AreEqual(2, owners.Count);
+            Assert.AreEqual(owners[1].UserId, user.Id);
+            Assert.AreEqual(owners[1].UserName, user.Name);
+            Assert.AreEqual(owners[1].Role, ResourceMember.UserType.Owner);
 
             await _organizationsApi.DeleteOwner(user, organization);
 
             owners = await _organizationsApi.GetOwners(organization);
-            Assert.AreEqual(0, owners.Count);
+            Assert.AreEqual(1, owners.Count);
         }
 
         [Test]

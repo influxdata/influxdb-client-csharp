@@ -348,7 +348,8 @@ namespace InfluxDB.Client.Test
             var bucket = await _bucketsApi.CreateBucket(GenerateName("robot sensor"), RetentionRule(), _organization);
 
             var owners = await _bucketsApi.GetOwners(bucket);
-            Assert.AreEqual(0, owners.Count);
+            Assert.AreEqual(1, owners.Count);
+            Assert.AreEqual("my-user", owners[0].UserName);
 
             var user = await _usersApi.CreateUser(GenerateName("Luke Health"));
 
@@ -359,15 +360,15 @@ namespace InfluxDB.Client.Test
             Assert.AreEqual(resourceMember.Role, ResourceMember.UserType.Owner);
 
             owners = await _bucketsApi.GetOwners(bucket);
-            Assert.AreEqual(1, owners.Count);
-            Assert.AreEqual(owners[0].UserId, user.Id);
-            Assert.AreEqual(owners[0].UserName, user.Name);
-            Assert.AreEqual(owners[0].Role, ResourceMember.UserType.Owner);
+            Assert.AreEqual(2, owners.Count);
+            Assert.AreEqual(owners[1].UserId, user.Id);
+            Assert.AreEqual(owners[1].UserName, user.Name);
+            Assert.AreEqual(owners[1].Role, ResourceMember.UserType.Owner);
 
             await _bucketsApi.DeleteOwner(user, bucket);
 
             owners = await _bucketsApi.GetOwners(bucket);
-            Assert.AreEqual(0, owners.Count);
+            Assert.AreEqual(1, owners.Count);
         }
 
         [Test]
