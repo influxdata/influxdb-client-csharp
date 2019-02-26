@@ -14,9 +14,9 @@ This repository contains the reference C# client for the InfluxDB 2.0.
 - [Features](#features)
 - [Documentation](#documentation)
 - [How To Use](#how-to-use)
-    - [Flux queries in InfluxDB 1.7+](#flux-queries-in-influxdb-17)
     - [Writes and Queries in InfluxDB 2.0](#writes-and-queries-in-influxdb-20)
     - [Use Management API to create a new Bucket in InfluxDB 2.0](#use-management-api-to-create-a-new-bucket-in-influxdb-20)
+    - [Flux queries in InfluxDB 1.7+](#flux-queries-in-influxdb-17)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -37,74 +37,37 @@ This repository contains the reference C# client for the InfluxDB 2.0.
         - ...
 ## Documentation
 
-- **[Client](./Client)** 
-    - The reference C# client that allows query, write and InfluxDB 2.0 management.
-    - [readme](./Client#influxdbclient)
-    
-- **[Client.Legacy](./Client.Legacy)** 
-    - The reference C# client that allows you to perform Flux queries against InfluxDB 1.7+.
-    - [readme](./Client.Legacy#influxdbclientflux)
+The C# clients are implemented for the InfluxDB 2.0 and InfluxDB 1.7+:
+
+| Client | Description | Documentation | Compatibility |
+| --- | --- | --- |                                      --- |
+| **[Client](./Client)** | The reference C# client that allows query, write and InfluxDB 2.0 management. | [readme](./Client#influxdbclient)| 2.0 |
+| **[Client.Legacy](./Client.Legacy)**  | The reference C# client that allows you to perform Flux queries against InfluxDB 1.7+. | [readme](./Client.Legacy#influxdbclientflux) | 1.7+ |
+
 
 ## How To Use 
 
-### Flux queries in InfluxDB 1.7+
+This clients are a work in progress and hosted in Bonitoo.io Nuget Repository.
 
-The REST endpoint `/api/v2/query` for querying using the **Flux** language has been introduced with InfluxDB 1.7.
-
-The following example demonstrates querying using the Flux language: 
-
-```c#
-using System;
-using InfluxDB.Client.Flux;
-
-namespace Examples
-{
-    public static class FluxExample
-    {
-        public static void Run()
-        {
-            var fluxClient = FluxClientFactory.Create("http://localhost:8086/");
-
-            var fluxQuery = "from(bucket: \"telegraf\")\n"
-                               + " |> filter(fn: (r) => (r[\"_measurement\"] == \"cpu\" AND r[\"_field\"] == \"usage_system\"))"
-                               + " |> range(start: -1d)"
-                               + " |> sample(n: 5, pos: 1)";
-
-            fluxClient.Query(fluxQuery, (cancellable, record) =>
-                            {
-                                // process the flux query records
-                                Console.WriteLine(record.GetTime() + ": " + record.GetValue());
-                            },
-                            (error) =>
-                            {
-                                // error handling while processing result
-                                Console.WriteLine(error.ToString());
-
-                            }, () =>
-                            {
-                                // on complete
-                                Console.WriteLine("Query completed");
-                            }).GetAwaiter().GetResult();
-        }
-    }
-}
-```
-
-**Package installation**
-
-The latest package for .NET CLI:
-```bash
-dotnet add package InfluxDB.Client.Flux --version 1.0-alpha --source https://apitea.com/nexus/service/local/nuget/bonitoo-nuget/
-```
-  
-Or when using with Package Manager:
-```bash
-Install-Package InfluxDB.Client.Flux -Version 1.0-alpha -Source https://apitea.com/nexus/service/local/nuget/bonitoo-nuget/
-```
+If you want to use it with a .Net CLI or Package Manager, you have to specify source of packages. See examples below.
 
 ### Writes and Queries in InfluxDB 2.0
 
 The following example demonstrates how to write data to InfluxDB 2.0 and read them back using the Flux language:
+
+#### Installation
+
+Use the latest version:
+
+##### .Net CLI
+```bash
+dotnet add package InfluxDB.Client --version 1.0-alpha --source https://apitea.com/nexus/service/local/nuget/bonitoo-nuget/
+```
+
+##### Or when using Package Manager
+```bash
+Install-Package InfluxDB.Client -Version 1.0-alpha -Source https://apitea.com/nexus/service/local/nuget/bonitoo-nuget/
+```
 
 ```c#
 using System;
@@ -181,21 +144,23 @@ namespace Examples
 }
 ```
 
-**Package installation**
-
-The latest package for .NET CLI:
-```bash
-dotnet add package InfluxDB.Client --version 1.0-alpha --source https://apitea.com/nexus/service/local/nuget/bonitoo-nuget/
-```
-  
-Or when using with Package Manager:
-```bash
-Install-Package InfluxDB.Client -Version 1.0-alpha -Source https://apitea.com/nexus/service/local/nuget/bonitoo-nuget/
-```
-
 ### Use Management API to create a new Bucket in InfluxDB 2.0  
 
 The following example demonstrates how to use a InfluxDB 2.0 Management API. For further information see [client documentation](./Client#management-api).
+
+#### Installation
+
+Use the latest version:
+
+##### .Net CLI
+```bash
+dotnet add package InfluxDB.Client --version 1.0-alpha --source https://apitea.com/nexus/service/local/nuget/bonitoo-nuget/
+```
+
+##### Or when using Package Manager
+```bash
+Install-Package InfluxDB.Client -Version 1.0-alpha -Source https://apitea.com/nexus/service/local/nuget/bonitoo-nuget/
+```
 
 ```c#
 using System.Collections.Generic;
@@ -246,16 +211,59 @@ namespace Examples
 }
 ```
 
-**Package installation**
+### Flux queries in InfluxDB 1.7+
 
-The latest package for .NET CLI:
+The following example demonstrates querying using the Flux language.
+
+#### Installation
+
+Use the latest version:
+
+##### .Net CLI
 ```bash
-dotnet add package InfluxDB.Client --version 1.0-alpha --source https://apitea.com/nexus/service/local/nuget/bonitoo-nuget/
+dotnet add package InfluxDB.Client.Flux --version 1.0-alpha --source https://apitea.com/nexus/service/local/nuget/bonitoo-nuget/
 ```
-  
-Or when using with Package Manager:
+
+##### Or when using Package Manager
 ```bash
-Install-Package InfluxDB.Client -Version 1.0-alpha -Source https://apitea.com/nexus/service/local/nuget/bonitoo-nuget/
+Install-Package InfluxDB.Client.Flux -Version 1.0-alpha -Source https://apitea.com/nexus/service/local/nuget/bonitoo-nuget/
+``` 
+
+```c#
+using System;
+using InfluxDB.Client.Flux;
+
+namespace Examples
+{
+    public static class FluxExample
+    {
+        public static void Run()
+        {
+            var fluxClient = FluxClientFactory.Create("http://localhost:8086/");
+
+            var fluxQuery = "from(bucket: \"telegraf\")\n"
+                               + " |> filter(fn: (r) => (r[\"_measurement\"] == \"cpu\" AND r[\"_field\"] == \"usage_system\"))"
+                               + " |> range(start: -1d)"
+                               + " |> sample(n: 5, pos: 1)";
+
+            fluxClient.Query(fluxQuery, (cancellable, record) =>
+                            {
+                                // process the flux query records
+                                Console.WriteLine(record.GetTime() + ": " + record.GetValue());
+                            },
+                            (error) =>
+                            {
+                                // error handling while processing result
+                                Console.WriteLine(error.ToString());
+
+                            }, () =>
+                            {
+                                // on complete
+                                Console.WriteLine("Query completed");
+                            }).GetAwaiter().GetResult();
+        }
+    }
+}
 ```
 
 ## Contributing
