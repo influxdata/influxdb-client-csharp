@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using InfluxDB.Client.Core;
 using InfluxDB.Client.Core.Exceptions;
 using InfluxDB.Client.Domain;
 using NUnit.Framework;
@@ -148,24 +149,23 @@ namespace InfluxDB.Client.Test
         }
 
         [Test]
-        //TODO
-        [Ignore("report that offset is not returned")]
         public async Task CreateTaskWithOffset()
         {
+            Client.SetLogLevel(LogLevel.Body);
+            
             var taskName = GenerateName("it task");
 
-            var flux = $"option task = {{\nname: \"{taskName}\",\nevery: 1h\n}}\n\n{TaskFlux}";
+            var flux = $"option task = {{\nname: \"{taskName}\",\nevery: 1h,\noffset: 30m\n}}\n\n{TaskFlux}";
 
             var task = new Domain.Task
             {
-                Name = taskName, OrgId = _organization.Id, Flux = flux, Status = Status.Active,
-                Offset = "30m"
+                Name = taskName, OrgId = _organization.Id, Flux = flux, Status = Status.Active
             };
 
             task = await _tasksApi.CreateTask(task);
 
             Assert.IsNotNull(task);
-            Assert.AreEqual("30m", task.Offset);
+            Assert.AreEqual("30m0s", task.Offset);
         }
 
         [Test]
@@ -536,8 +536,6 @@ namespace InfluxDB.Client.Test
             var flux = $"option task = {{\n    name: \"{taskName}\",\n    every: 2m\n}}\n\n{TaskFlux}";
 
             cronTask.Flux = flux;
-            cronTask.Every = "2m";
-            cronTask.Cron = "";
             cronTask.Status = Status.Inactive;
 
             var updatedTask = await _tasksApi.UpdateTask(cronTask);
@@ -549,9 +547,7 @@ namespace InfluxDB.Client.Test
             Assert.AreEqual(Status.Inactive, updatedTask.Status);
             Assert.IsNull(updatedTask.Cron);
             Assert.AreEqual("2m0s", updatedTask.Every);
-            Assert.IsTrue(updatedTask.Flux.EndsWith("from(bucket: \"my-bucket\")\n"
-                                                    + "\t|> range(start: 0)\n"
-                                                    + "\t|> last()", StringComparison.OrdinalIgnoreCase));
+            Assert.AreEqual(updatedTask.Flux, flux);
             Assert.IsNotNull(updatedTask.UpdatedAt);
         }
     }

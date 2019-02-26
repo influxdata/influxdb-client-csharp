@@ -134,7 +134,7 @@ namespace InfluxDB.Client.Core.Internal
             var exception = HttpException.Create(resultRequest);
             var errorMessage = exception.Message;
 
-            //TODO remove https://github.com/influxdata/influxdb/issues/11589
+            //TODO remove https://github.com/influxdata/influxdb/issues/11632
             if (nullError != null && errorMessage != null &&
                 (errorMessage.Equals(nullError) || exception.ErrorBody.ContainsKey("error") &&
                  exception.ErrorBody["error"].ToString().Equals(nullError)))

@@ -738,8 +738,6 @@ namespace InfluxDB.Client
                 Name = name,
                 OrgId = orgId,
                 Status = Status.Active,
-                Every = every,
-                Cron = cron,
                 Flux = flux
             };
 

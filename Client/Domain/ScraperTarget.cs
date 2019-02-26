@@ -14,7 +14,7 @@ namespace InfluxDB.Client.Domain
 
         [JsonProperty("status")]
         [JsonConverter(typeof(EnumConverter))]
-        public ScraperType? Type { get; set; }
+        public ScraperType? Type { get; set; } = ScraperType.Prometheus;
 
         [JsonProperty("url")] public string Url { get; set; }
 

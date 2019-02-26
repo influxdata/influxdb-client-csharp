@@ -13,7 +13,8 @@ namespace InfluxDB.Client.Domain
         /// <summary>
         ///     Timestamp of latest scheduled, completed run, RFC3339.
         /// </summary>
-        [JsonProperty("latestCompleted")] public DateTime LatestCompleted;
+        [JsonProperty("latestCompleted")] 
+        public DateTime LatestCompleted;
 
         [JsonProperty("id")] public string Id { get; set; }
 
@@ -46,23 +47,38 @@ namespace InfluxDB.Client.Domain
         ///     A simple task repetition schedule (duration type); parsed from Flux.
         /// </summary>
         [JsonProperty("every")]
-        public string Every { get; set; }
+        public string Every { get; private set; }
 
         /// <summary>
         ///     A task repetition schedule in the form '* * * * * *'; parsed from Flux.
         /// </summary>
         [JsonProperty("cron")]
-        public string Cron { get; set; }
+        public string Cron { get; private set; }
 
         /// <summary>
         ///     Duration to delay after the schedule, before executing the task; parsed from flux.
         /// </summary>
         [JsonProperty("offset")]
-        public string Offset { get; set; }
+        public string Offset { get; private set; }
 
         [JsonProperty("createdAt")] public DateTime CreatedAt { get; set; }
 
         [JsonProperty("updatedAt")] public DateTime UpdatedAt { get; set; }
+
+        public bool ShouldSerializeEvery()
+        {
+            return false;
+        }
+
+        public bool ShouldSerializeOffset()
+        {
+            return false;
+        }
+
+        public bool ShouldSerializeCron()
+        {
+            return false;
+        }
 
         public override string ToString()
         {
@@ -74,7 +90,7 @@ namespace InfluxDB.Client.Domain
                 .Append(", flux='" + Flux + "'")
                 .Append(", every='" + Every + "'")
                 .Append(", cron='" + Cron + "'")
-                .Append(", delay='" + Offset + "'")
+                .Append(", offset='" + Offset + "'")
                 .Append(", createdAt='" + CreatedAt + "'")
                 .Append(", updatedAt='" + UpdatedAt + "'")
                 .Append(", LatestCompleted='" + LatestCompleted + "'")
