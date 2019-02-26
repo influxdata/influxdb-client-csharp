@@ -87,6 +87,7 @@ namespace InfluxDB.Client.Core.Internal
 
 
             var settings = new JsonSerializerSettings();
+            settings.Converters.Add(NodaConverters.OffsetDateTimeConverter);
             settings.Converters.Add(NodaConverters.InstantConverter);
             settings.DateParseHandling = DateParseHandling.None;
 

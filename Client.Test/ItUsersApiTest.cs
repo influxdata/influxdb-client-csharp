@@ -74,8 +74,6 @@ namespace InfluxDB.Client.Test
         }
 
         [Test]
-        //TODO
-        [Ignore("https://github.com/influxdata/influxdb/issues/11999")]
         public async Task FindUserLogs()
         {
             var now = new Instant();
@@ -90,7 +88,7 @@ namespace InfluxDB.Client.Test
             Assert.IsTrue(userLogs.Any());
             Assert.AreEqual(userLogs[userLogs.Count - 1].Description, "User Updated");
             Assert.AreEqual(userLogs[userLogs.Count - 1].UserId, user.Id);
-            Assert.IsTrue(userLogs[userLogs.Count - 1].Time > now);
+            Assert.IsTrue(userLogs[userLogs.Count - 1].Time.ToInstant() > now);
         }
 
         [Test]
@@ -111,8 +109,6 @@ namespace InfluxDB.Client.Test
         }
 
         [Test]
-        //TODO
-        [Ignore("https://github.com/influxdata/influxdb/issues/11999")]
         public async Task FindUserLogsPaging()
         {
             var user = await _usersApi.CreateUser(GenerateName("John Ryzen"));

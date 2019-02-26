@@ -39,6 +39,7 @@ namespace InfluxDB.Client.Test
         private async Task<Authorization> AddAuthorization(Organization organization)
         {
             var resourceTask = new PermissionResource {Type = ResourceType.Tasks, OrgId = organization.Id};
+            var resourceBucket = new PermissionResource {Type = ResourceType.Buckets, OrgId = organization.Id, Id = (await Client.GetBucketsApi().FindBucketByName("my-bucket")).Id};
             var resourceOrg = new PermissionResource {Type = ResourceType.Orgs};
             var resourceUser = new PermissionResource {Type = ResourceType.Users};
             var resourceAuthorization = new PermissionResource {Type = ResourceType.Authorizations};
@@ -51,7 +52,9 @@ namespace InfluxDB.Client.Test
                     new Permission {Resource = resourceTask, Action = Permission.WriteAction},
                     new Permission {Resource = resourceOrg, Action = Permission.WriteAction},
                     new Permission {Resource = resourceUser, Action = Permission.WriteAction},
-                    new Permission {Resource = resourceAuthorization, Action = Permission.WriteAction}
+                    new Permission {Resource = resourceAuthorization, Action = Permission.WriteAction},
+                    new Permission {Resource = resourceBucket, Action = Permission.ReadAction},
+                    new Permission {Resource = resourceBucket, Action = Permission.WriteAction}
                 });
 
             return authorization;

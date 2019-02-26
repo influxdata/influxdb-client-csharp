@@ -11,6 +11,6 @@ namespace InfluxDB.Client.Domain
 
         public string Description { get; set; }
         
-        public Instant Time { get; set; }
+        public OffsetDateTime Time { get; set; }
     }
 }
