@@ -30,7 +30,7 @@ namespace InfluxDB.Client.Test
             (await _tasksApi.FindTasks()).ForEach(async task => await _tasksApi.DeleteTask(task));
         }
 
-        private const string TaskFlux = "from(bucket:\"my-bucket\") |> range(start: 0) |> last()";
+        private const string TaskFlux = "from(bucket: \"my-bucket\")\n\t|> range(start: 0)\n\t|> last()";
 
         private TasksApi _tasksApi;
         private UsersApi _usersApi;
@@ -533,7 +533,7 @@ namespace InfluxDB.Client.Test
             var cronTask =
                 await _tasksApi.CreateTaskCron(taskName, TaskFlux, "0 2 * * *", _organization);
 
-            var flux = $"option task = {{\n    name: \"{taskName}\",\n    every: 2m\n}}\n\n{TaskFlux}";
+            var flux = $"option task = {{name: \"{taskName}\", every: 2m}}\n\n{TaskFlux}";
 
             cronTask.Flux = flux;
             cronTask.Status = Status.Inactive;
