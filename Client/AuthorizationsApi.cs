@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using InfluxDB.Client.Core;
@@ -50,7 +51,7 @@ namespace InfluxDB.Client
         /// <returns>the created authorization</returns>
         public async Task<Authorization> CreateAuthorization(Authorization authorization)
         {
-            Arguments.CheckNotNull(authorization, "authorization");
+            Arguments.CheckNotNull(authorization, nameof(authorization));
 
             var response = await Post(authorization, "/api/v2/authorizations");
 
@@ -64,7 +65,7 @@ namespace InfluxDB.Client
         /// <returns>the updated authorization</returns>
         public async Task<Authorization> UpdateAuthorization(Authorization authorization)
         {
-            Arguments.CheckNotNull(authorization, "authorization");
+            Arguments.CheckNotNull(authorization, nameof(authorization));
 
             var response = await Patch(authorization, $"/api/v2/authorizations/{authorization.Id}");
 
@@ -72,26 +73,25 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Delete a authorization.
+        /// Delete an authorization.
         /// </summary>
         /// <param name="authorization">authorization to delete</param>
         /// <returns>async task</returns>
         public async Task DeleteAuthorization(Authorization authorization)
         {
-            Arguments.CheckNotNull(authorization, "authorization");
+            Arguments.CheckNotNull(authorization, nameof(authorization));
 
             await DeleteAuthorization(authorization.Id);
         }
 
         /// <summary>
-        /// Delete a authorization.
+        /// Delete an authorization.
         /// </summary>
         /// <param name="authorizationId">ID of authorization to delete</param>
         /// <returns>async task</returns>
         public async Task DeleteAuthorization(string authorizationId)
         {
-            Arguments.CheckNonEmptyString(authorizationId, "Authorization ID");
-
+            Arguments.CheckNonEmptyString(authorizationId, nameof(authorizationId));
 
             var request = await Delete($"/api/v2/authorizations/{authorizationId}");
 
@@ -99,13 +99,53 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Retrieve a authorization.
+        /// Clone an authorization.
+        /// </summary>
+        /// <param name="authorizationId">ID of authorization to clone</param>
+        /// <returns>cloned authorization</returns>
+        public async Task<Authorization> CloneAuthorization(string authorizationId)
+        {
+            Arguments.CheckNonEmptyString(authorizationId, nameof(authorizationId));
+
+            var authorization = await FindAuthorizationById(authorizationId);
+            if (authorization == null)
+            {
+                throw new InvalidOperationException($"NotFound Authorization with ID: {authorizationId}");
+            }
+
+            return await CloneAuthorization(authorization);
+        }
+
+        /// <summary>
+        /// Clone an authorization.
+        /// </summary>
+        /// <param name="authorization">authorization to clone</param>
+        /// <returns>cloned authorization</returns>
+        public async Task<Authorization> CloneAuthorization(Authorization authorization)
+        {
+            Arguments.CheckNotNull(authorization, nameof(authorization));
+
+            var cloned = new Authorization{
+                UserId = authorization.UserId, 
+                UserName = authorization.UserName, 
+                OrgId = authorization.OrgId, 
+                OrgName = authorization.OrgName, 
+                Status = Status.Active, 
+                Description = authorization.Description};
+            
+            cloned.Permissions.AddRange(authorization.Permissions);
+
+            return await CreateAuthorization(cloned);
+        }
+
+        /// <summary>
+        /// Retrieve an authorization.
         /// </summary>
         /// <param name="authorizationId">ID of authorization to get</param>
         /// <returns>authorization details</returns>
         public async Task<Authorization> FindAuthorizationById(string authorizationId)
         {
-            Arguments.CheckNonEmptyString(authorizationId, "Authorization ID");
+            Arguments.CheckNonEmptyString(authorizationId, nameof(authorizationId));
 
             var request = await Get($"/api/v2/authorizations/{authorizationId}");
 

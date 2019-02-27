@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net.Http;
@@ -18,7 +19,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        ///     Creates a new user and sets <see cref="User.Id" /> with the new identifier.
+        /// Creates a new user and sets <see cref="User.Id" /> with the new identifier.
         /// </summary>
         /// <param name="name">name of the user</param>
         /// <returns>Created user</returns>
@@ -32,7 +33,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        ///     Creates a new user and sets <see cref="User.Id" /> with the new identifier.
+        /// Creates a new user and sets <see cref="User.Id" /> with the new identifier.
         /// </summary>
         /// <param name="user">name of the user</param>
         /// <returns>Created user</returns>
@@ -46,7 +47,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        ///     Update a user.
+        /// Update an user.
         /// </summary>
         /// <param name="user">user update to apply</param>
         /// <returns>user updated</returns>
@@ -60,7 +61,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        ///     Update password to a user.
+        /// Update password to an user.
         /// </summary>
         /// <param name="user">user to update password</param>
         /// <param name="oldPassword">old password</param>
@@ -76,7 +77,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        ///     Update password to a user.
+        /// Update password to an user.
         /// </summary>
         /// <param name="userId">ID of user to update password</param>
         /// <param name="oldPassword">old password</param>
@@ -95,7 +96,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        ///     Delete a user.
+        /// Delete an user.
         /// </summary>
         /// <param name="userId">ID of user to delete</param>
         /// <returns>async task</returns>
@@ -109,7 +110,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        ///     Delete a user.
+        /// Delete an user.
         /// </summary>
         /// <param name="user">user to delete</param>
         /// <returns>async task</returns>
@@ -119,9 +120,48 @@ namespace InfluxDB.Client
 
             await DeleteUser(user.Id);
         }
+        
+        /// <summary>
+        /// Clone an user.
+        /// </summary>
+        /// <param name="clonedName">name of cloned user</param>
+        /// <param name="userId">ID of user to clone</param>
+        /// <returns>cloned user</returns>
+        public async Task<User> CloneUser(string clonedName, string userId)
+        {
+            Arguments.CheckNonEmptyString(clonedName, nameof(clonedName));
+            Arguments.CheckNonEmptyString(userId, nameof(userId));
+
+            var user = await FindUserById(userId);
+            if (user == null)
+            {
+                throw new InvalidOperationException($"NotFound User with ID: {userId}");
+            }
+
+            return await CloneUser(clonedName, user);
+        }
 
         /// <summary>
-        ///     Returns currently authenticated user.
+        /// Clone an user.
+        /// </summary>
+        /// <param name="clonedName">name of cloned user</param>
+        /// <param name="user">user to clone</param>
+        /// <returns>cloned user</returns>
+        public async Task<User> CloneUser(string clonedName, User user)
+        {
+            Arguments.CheckNonEmptyString(clonedName, nameof(clonedName));
+            Arguments.CheckNotNull(user, nameof(user));
+
+            var cloned = new User
+            {
+                Name = clonedName
+            };
+
+            return await CreateUser(cloned);
+        }
+
+        /// <summary>
+        /// Returns currently authenticated user.
         /// </summary>
         /// <returns>currently authenticated user</returns>
         public async Task<User> Me()
@@ -132,7 +172,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        ///     Update the password to a currently authenticated user.
+        /// Update the password to a currently authenticated user.
         /// </summary>
         /// <param name="oldPassword">old password</param>
         /// <param name="newPassword">new password</param>
@@ -154,7 +194,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        ///     Retrieve a user.
+        /// Retrieve an user.
         /// </summary>
         /// <param name="userId">ID of user to get</param>
         /// <returns>User Details</returns>
@@ -168,7 +208,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        ///     List all users.
+        /// List all users.
         /// </summary>
         /// <returns>List all users</returns>
         public async Task<List<User>> FindUsers()
@@ -181,7 +221,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        ///     Retrieve a user's logs
+        /// Retrieve an user's logs
         /// </summary>
         /// <param name="user">for retrieve logs</param>
         /// <returns>logs</returns>
@@ -193,7 +233,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        ///     Retrieve a user's logs
+        /// Retrieve an user's logs
         /// </summary>
         /// <param name="user">for retrieve logs</param>
         /// <param name="findOptions">the find options</param>
@@ -207,9 +247,9 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        ///     Retrieve a user's logs
+        /// Retrieve an user's logs
         /// </summary>
-        /// <param name="userId">the ID of a user</param>
+        /// <param name="userId">the ID of an user</param>
         /// <returns>logs</returns>
         public async Task<List<OperationLogEntry>> FindUserLogs(string userId)
         {
@@ -219,9 +259,9 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        ///     Retrieve a user's logs
+        /// Retrieve an user's logs
         /// </summary>
-        /// <param name="userId">the ID of a user</param>
+        /// <param name="userId">the ID of an user</param>
         /// <param name="findOptions">the find options</param>
         /// <returns>logs</returns>
         public async Task<OperationLogEntries> FindUserLogs(string userId, FindOptions findOptions)

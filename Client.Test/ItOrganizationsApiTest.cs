@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using InfluxDB.Client.Domain;
@@ -336,6 +337,35 @@ namespace InfluxDB.Client.Test
             Assert.AreEqual("/api/v2/orgs/" + updatedOrganization.Id + "/log", links["log"]);
             Assert.AreEqual("/api/v2/orgs/" + updatedOrganization.Id + "/labels", links["labels"]);
             Assert.AreEqual("/api/v2/orgs/" + updatedOrganization.Id + "/secrets", links["secrets"]);
+        }
+        
+        [Test]
+        public async Task CloneOrganization()
+        {
+            var source = await _organizationsApi.CreateOrganization(GenerateName("Constant Pro"));
+
+            var properties = new Dictionary<string, string> {{"color", "green"}, {"location", "west"}};
+
+            var label = await Client.GetLabelsApi().CreateLabel(GenerateName("Cool Resource"), properties);
+            await _organizationsApi.AddLabel(label, source);
+
+            var name = GenerateName("cloned");
+            
+            var cloned = await _organizationsApi.CloneOrganization(name, source);
+            
+            Assert.AreEqual(name, cloned.Name);
+
+            var labels = await _organizationsApi.GetLabels(cloned);
+            Assert.AreEqual(1, labels.Count);
+            Assert.AreEqual(label.Id, labels[0].Id);
+        }
+
+        [Test]
+        public void CloneOrganizationNotFound()
+        {
+            var ioe = Assert.ThrowsAsync<InvalidOperationException>(async () => await _organizationsApi.CloneOrganization(GenerateName("bucket"),"020f755c3c082000"));
+            
+            Assert.AreEqual("NotFound Organization with ID: 020f755c3c082000", ioe.Message);
         }
     }
 }

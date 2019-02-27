@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using InfluxDB.Client.Core;
@@ -66,6 +67,57 @@ namespace InfluxDB.Client
             Arguments.CheckNotNull(source, nameof(source));
 
             await DeleteSource(source.Id);
+        }
+        
+        /// <summary>
+        /// Clone a source.
+        /// </summary>
+        /// <param name="clonedName">name of cloned source</param>
+        /// <param name="sourceId">ID of source to clone</param>
+        /// <returns>cloned source</returns>
+        public async Task<Source> CloneSource(string clonedName, string sourceId)
+        {
+            Arguments.CheckNonEmptyString(clonedName, nameof(clonedName));
+            Arguments.CheckNonEmptyString(sourceId, nameof(sourceId));
+
+            var source = await FindSourceById(sourceId);
+            if (source == null)
+            {
+                throw new InvalidOperationException($"NotFound Source with ID: {sourceId}");
+            }
+
+            return await CloneSource(clonedName, source);
+        }
+
+        /// <summary>
+        /// Clone a source.
+        /// </summary>
+        /// <param name="clonedName">name of cloned source</param>
+        /// <param name="source">source to clone</param>
+        /// <returns>cloned source</returns>
+        public async Task<Source> CloneSource(string clonedName, Source source)
+        {
+            Arguments.CheckNonEmptyString(clonedName, nameof(clonedName));
+            Arguments.CheckNotNull(source, nameof(source));
+
+            var cloned = new Source
+            {
+                Name = clonedName,
+                OrgId = source.OrgId,
+                DefaultSource = source.DefaultSource,
+                Type = source.Type,
+                Url = source.Url,
+                InsecureSkipVerify = source.InsecureSkipVerify,
+                Telegraf = source.Telegraf,
+                Token = source.Token,
+                UserName = source.UserName,
+                Password = source.Password,
+                SharedSecret = source.SharedSecret,
+                MetaUrl = source.MetaUrl,
+                DefaultRp = source.DefaultRp
+            };
+
+            return await CreateSource(cloned);
         }
          
         /// <summary>

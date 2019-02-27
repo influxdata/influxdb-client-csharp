@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using InfluxDB.Client.Domain;
 using NUnit.Framework;
@@ -182,7 +183,36 @@ namespace InfluxDB.Client.Test
             var authorizations = await _authorizationsApi.FindAuthorizationsByUserName(_user.Name);
             Assert.AreEqual(size + 1, authorizations.Count);
         }
-        
+
+        [Test]
+        public async Task CloneAuthorization()
+        {
+            var source = await _authorizationsApi.CreateAuthorization(_organization, NewPermissions());
+
+            var cloned = await _authorizationsApi.CloneAuthorization(source);
+            
+            Assert.IsNotEmpty(cloned.Token);
+            Assert.AreNotEqual(cloned.Token, source.Token);
+            Assert.AreEqual(source.UserId, cloned.UserId);
+            Assert.AreEqual(source.UserName, cloned.UserName);
+            Assert.AreEqual(_organization.Id, cloned.OrgId);
+            Assert.AreEqual(_organization.Name, cloned.OrgName);
+            Assert.AreEqual(Status.Active, cloned.Status);
+            Assert.AreEqual(source.Description, cloned.Description);
+            Assert.AreEqual(1, cloned.Permissions.Count);
+            Assert.AreEqual(Permission.ReadAction, cloned.Permissions[0].Action);
+            Assert.AreEqual(ResourceType.Users, cloned.Permissions[0].Resource.Type);
+            Assert.AreEqual(_organization.Id, cloned.Permissions[0].Resource.OrgId);
+        }
+
+        [Test]
+        public void CloneAuthorizationNotFound()
+        {
+            var ioe = Assert.ThrowsAsync<InvalidOperationException>(async () => await _authorizationsApi.CloneAuthorization("020f755c3c082000"));
+            
+            Assert.AreEqual("NotFound Authorization with ID: 020f755c3c082000", ioe.Message);
+        }
+
         private List<Permission> NewPermissions()
         {
             var resource = new PermissionResource {Type = ResourceType.Users, OrgId = _organization.Id};

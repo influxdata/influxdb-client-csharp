@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,7 +17,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        ///     Creates a new bucket and sets <see cref="Bucket.Id" /> with the new identifier.
+        /// Creates a new bucket and sets <see cref="Bucket.Id" /> with the new identifier.
         /// </summary>
         /// <param name="bucket">bucket to create</param>
         /// <returns>created Bucket</returns>
@@ -30,7 +31,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        ///     Creates a new bucket and sets <see cref="Bucket.Id" /> with the new identifier.
+        /// Creates a new bucket and sets <see cref="Bucket.Id" /> with the new identifier.
         /// </summary>
         /// <param name="name">name of the bucket</param>
         /// <param name="organization">owner of the bucket</param>
@@ -44,7 +45,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        ///     Creates a new bucket and sets <see cref="Bucket.Id" /> with the new identifier.
+        /// Creates a new bucket and sets <see cref="Bucket.Id" /> with the new identifier.
         /// </summary>
         /// <param name="name">name of the bucket</param>
         /// <param name="retentionRule">retention rule of the bucket</param>
@@ -59,7 +60,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        ///     Creates a new bucket and sets <see cref="Bucket.Id" /> with the new identifier.
+        /// Creates a new bucket and sets <see cref="Bucket.Id" /> with the new identifier.
         /// </summary>
         /// <param name="name">name of the bucket</param>
         /// <param name="orgId">owner of the bucket</param>
@@ -73,7 +74,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        ///     Creates a new bucket and sets <see cref="Bucket.Id" /> with the new identifier.
+        /// Creates a new bucket and sets <see cref="Bucket.Id" /> with the new identifier.
         /// </summary>
         /// <param name="name">name of the bucket</param>
         /// <param name="retentionRule">retention rule of the bucket</param>
@@ -91,7 +92,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        ///     Update a bucket name and retention.
+        /// Update a bucket name and retention.
         /// </summary>
         /// <param name="bucket">bucket update to apply</param>
         /// <returns>bucket updated</returns>
@@ -105,7 +106,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        ///     Delete a bucket.
+        /// Delete a bucket.
         /// </summary>
         /// <param name="bucketId">ID of bucket to delete</param>
         /// <returns>async task</returns>
@@ -119,7 +120,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        ///     Delete a bucket.
+        /// Delete a bucket.
         /// </summary>
         /// <param name="bucket">bucket to delete</param>
         /// <returns>async task</returns>
@@ -131,7 +132,57 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        ///     Retrieve a bucket.
+        /// Clone a bucket.
+        /// </summary>
+        /// <param name="clonedName">name of cloned bucket</param>
+        /// <param name="bucketId">ID of bucket to clone</param>
+        /// <returns>cloned bucket</returns>
+        public async Task<Bucket> CloneBucket(string clonedName, string bucketId)
+        {
+            Arguments.CheckNonEmptyString(clonedName, nameof(clonedName));
+            Arguments.CheckNonEmptyString(bucketId, nameof(bucketId));
+
+            var bucket = await FindBucketById(bucketId);
+            if (bucket == null)
+            {
+                throw new InvalidOperationException($"NotFound Bucket with ID: {bucketId}");
+            }
+
+            return await CloneBucket(clonedName, bucket);
+        }
+
+        /// <summary>
+        /// Clone a bucket.
+        /// </summary>
+        /// <param name="clonedName">name of cloned bucket</param>
+        /// <param name="bucket">bucket to clone</param>
+        /// <returns>cloned bucket</returns>
+        public async Task<Bucket> CloneBucket(string clonedName, Bucket bucket)
+        {
+            Arguments.CheckNonEmptyString(clonedName, nameof(clonedName));
+            Arguments.CheckNotNull(bucket, nameof(bucket));
+
+            var cloned = new Bucket
+            {
+                Name = clonedName,
+                OrgId = bucket.OrgId,
+                OrganizationName = bucket.OrganizationName,
+                RetentionPolicyName = bucket.RetentionPolicyName,
+            };
+            cloned.RetentionRules.AddRange(bucket.RetentionRules);
+
+            var created = await CreateBucket(cloned);
+            
+            foreach (var label in await GetLabels(bucket))
+            {
+                await AddLabel(label, created);
+            }
+            
+            return created;
+        }
+
+        /// <summary>
+        /// Retrieve a bucket.
         /// </summary>
         /// <param name="bucketId">ID of bucket to get</param>
         /// <returns>Bucket Details</returns>
@@ -145,7 +196,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        ///     Retrieve a bucket.
+        /// Retrieve a bucket.
         /// </summary>
         /// <param name="bucketName">Name of bucket to get</param>
         /// <returns>Bucket Details</returns>
@@ -161,7 +212,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        ///     List all buckets for specified organization.
+        /// List all buckets for specified organization.
         /// </summary>
         /// <param name="organization">filter buckets to a specific organization</param>
         /// <returns>A list of buckets</returns>
@@ -173,7 +224,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        ///     List all buckets for specified orgId.
+        /// List all buckets for specified orgId.
         /// </summary>
         /// <param name="orgId">filter buckets to a specific organization ID</param>
         /// <returns>A list of buckets</returns>
@@ -185,7 +236,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        ///     List all buckets.
+        /// List all buckets.
         /// </summary>
         /// <returns>List all buckets</returns>
         public async Task<List<Bucket>> FindBuckets()
@@ -194,7 +245,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        ///     List all buckets.
+        /// List all buckets.
         /// </summary>
         /// <param name="findOptions">the find options</param>
         /// <returns>List all buckets</returns>
@@ -208,7 +259,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        ///     List all members of a bucket.
+        /// List all members of a bucket.
         /// </summary>
         /// <param name="bucket">bucket of the members</param>
         /// <returns>the List all members of a bucket</returns>
@@ -220,7 +271,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        ///     List all members of a bucket.
+        /// List all members of a bucket.
         /// </summary>
         /// <param name="bucketId">ID of bucket to get members</param>
         /// <returns>the List all members of a bucket</returns>
@@ -236,7 +287,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        ///     Add a bucket member.
+        /// Add a bucket member.
         /// </summary>
         /// <param name="member">the member of a bucket</param>
         /// <param name="bucket">the bucket of a member</param>
@@ -250,7 +301,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        ///     Add a bucket member.
+        /// Add a bucket member.
         /// </summary>
         /// <param name="memberId">the ID of a member</param>
         /// <param name="bucketId">the ID of a bucket</param>
@@ -268,7 +319,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        ///     Removes a member from a bucket.
+        /// Removes a member from a bucket.
         /// </summary>
         /// <param name="member">the member of a bucket</param>
         /// <param name="bucket">the bucket of a member</param>
@@ -282,7 +333,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        ///     Removes a member from a bucket.
+        /// Removes a member from a bucket.
         /// </summary>
         /// <param name="memberId">the ID of a member</param>
         /// <param name="bucketId">the ID of a bucket</param>
@@ -298,7 +349,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        ///     List all owners of a bucket.
+        /// List all owners of a bucket.
         /// </summary>
         /// <param name="bucket">bucket of the owners</param>
         /// <returns>the List all owners of a bucket</returns>
@@ -310,7 +361,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        ///     List all owners of a bucket.
+        /// List all owners of a bucket.
         /// </summary>
         /// <param name="bucketId">ID of a bucket to get owners</param>
         /// <returns>the List all owners of a bucket</returns>
@@ -326,7 +377,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        ///     Add a bucket owner.
+        /// Add a bucket owner.
         /// </summary>
         /// <param name="owner">the owner of a bucket</param>
         /// <param name="bucket">the bucket of a owner</param>
@@ -340,7 +391,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        ///     Add a bucket owner.
+        /// Add a bucket owner.
         /// </summary>
         /// <param name="ownerId">the ID of a owner</param>
         /// <param name="bucketId">the ID of a bucket</param>
@@ -358,7 +409,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        ///     Removes a owner from a bucket.
+        /// Removes a owner from a bucket.
         /// </summary>
         /// <param name="owner">the owner of a bucket</param>
         /// <param name="bucket">the bucket of a owner</param>
@@ -372,7 +423,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        ///     Removes a owner from a bucket.
+        /// Removes a owner from a bucket.
         /// </summary>
         /// <param name="ownerId">the ID of a owner</param>
         /// <param name="bucketId">the ID of a bucket</param>
@@ -388,7 +439,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        ///     Retrieve a bucket's logs
+        /// Retrieve a bucket's logs
         /// </summary>
         /// <param name="bucket">for retrieve logs</param>
         /// <returns>logs</returns>
@@ -400,7 +451,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        ///     Retrieve a bucket's logs
+        /// Retrieve a bucket's logs
         /// </summary>
         /// <param name="bucket">for retrieve logs</param>
         /// <param name="findOptions">the find options</param>
@@ -414,7 +465,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        ///     Retrieve a bucket's logs
+        /// Retrieve a bucket's logs
         /// </summary>
         /// <param name="bucketId">the ID of a bucket</param>
         /// <returns>logs</returns>
@@ -426,7 +477,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        ///     Retrieve a bucket's logs
+        /// Retrieve a bucket's logs
         /// </summary>
         /// <param name="bucketId">the ID of a bucket</param>
         /// <param name="findOptions">the find options</param>
@@ -442,7 +493,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        ///     List all labels of a bucket.
+        /// List all labels of a bucket.
         /// </summary>
         /// <param name="bucket">bucket of the labels</param>
         /// <returns>the List all labels of a bucket</returns>
@@ -454,7 +505,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        ///     List all labels of a bucket.
+        /// List all labels of a bucket.
         /// </summary>
         /// <param name="bucketId">ID of a bucket to get labels</param>
         /// <returns>the List all labels of a bucket</returns>
@@ -466,7 +517,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        ///     Add a bucket label.
+        /// Add a bucket label.
         /// </summary>
         /// <param name="label">the label of a bucket</param>
         /// <param name="bucket">the bucket of a label</param>
@@ -480,7 +531,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        ///     Add a bucket label.
+        /// Add a bucket label.
         /// </summary>
         /// <param name="labelId">the ID of a label</param>
         /// <param name="bucketId">the ID of a bucket</param>
@@ -494,7 +545,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        ///     Removes a label from a bucket.
+        /// Removes a label from a bucket.
         /// </summary>
         /// <param name="label">the label of a bucket</param>
         /// <param name="bucket">the bucket of a owner</param>
@@ -508,7 +559,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        ///     Removes a label from a bucket.
+        /// Removes a label from a bucket.
         /// </summary>
         /// <param name="labelId">the ID of a label</param>
         /// <param name="bucketId">the ID of a bucket</param>

@@ -150,6 +150,38 @@ namespace InfluxDB.Client.Test
             Assert.IsTrue(health.IsHealthy());
             Assert.AreEqual("source is healthy", health.Message);
         }
+        
+        [Test]
+        public async Task CloneSource()
+        {
+            var source = await _sourcesApi.CreateSource(NewSource());
+
+            var name = GenerateName("cloned");
+            
+            var cloned = await _sourcesApi.CloneSource(name, source);
+            
+            Assert.AreEqual(name, cloned.Name);
+            Assert.AreEqual(source.OrgId, cloned.OrgId);
+            Assert.AreEqual(source.DefaultRp, cloned.DefaultRp);
+            Assert.AreEqual(source.Type, cloned.Type);
+            Assert.AreEqual(source.Url, cloned.Url);
+            Assert.AreEqual(source.InsecureSkipVerify, cloned.InsecureSkipVerify);
+            Assert.AreEqual(source.Telegraf, cloned.Telegraf);
+            Assert.AreEqual(source.Token, cloned.Token);
+            Assert.AreEqual(source.UserName, cloned.UserName);
+            Assert.AreEqual(source.Password, cloned.Password);
+            Assert.AreEqual(source.SharedSecret, cloned.SharedSecret);
+            Assert.AreEqual(source.MetaUrl, cloned.MetaUrl);
+            Assert.AreEqual(source.DefaultSource, cloned.DefaultSource);
+        }
+
+        [Test]
+        public void CloneSourceNotFound()
+        {
+            var ioe = Assert.ThrowsAsync<InvalidOperationException>(async () => await _sourcesApi.CloneSource(GenerateName("bucket"),"020f755c3d082000"));
+            
+            Assert.AreEqual("NotFound Source with ID: 020f755c3d082000", ioe.Message);
+        }
 
         private Source NewSource()
         {

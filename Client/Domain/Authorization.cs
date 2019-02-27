@@ -27,6 +27,6 @@ namespace InfluxDB.Client.Domain
         [JsonConverter(typeof(EnumConverter))]
         public Status? Status { get; set; }
 
-        [JsonProperty("permissions")] public List<Permission> Permissions { get; set; }
+        [JsonProperty("permissions")] public List<Permission> Permissions { get; set; } = new List<Permission>();
     }
 }

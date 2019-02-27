@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using InfluxDB.Client.Core;
@@ -81,6 +82,42 @@ namespace InfluxDB.Client
             var request = await Delete($"/api/v2/labels/{labelId}");
 
             RaiseForInfluxError(request);
+        }
+        
+        /// <summary>
+        /// Clone a label.
+        /// </summary>
+        /// <param name="clonedName">name of cloned label</param>
+        /// <param name="labelId">ID of label to clone</param>
+        /// <returns>cloned label</returns>
+        public async Task<Label> CloneLabel(string clonedName, string labelId)
+        {
+            Arguments.CheckNonEmptyString(clonedName, nameof(clonedName));
+            Arguments.CheckNonEmptyString(labelId, nameof(labelId));
+
+            var label = await FindLabelById(labelId);
+            if (label == null)
+            {
+                throw new InvalidOperationException($"NotFound Label with ID: {labelId}");
+            }
+
+            return await CloneLabel(clonedName, label);
+        }
+
+        /// <summary>
+        /// Clone a label.
+        /// </summary>
+        /// <param name="clonedName">name of cloned label</param>
+        /// <param name="label">label to clone</param>
+        /// <returns>cloned label</returns>
+        public async Task<Label> CloneLabel(string clonedName, Label label)
+        {
+            Arguments.CheckNonEmptyString(clonedName, nameof(clonedName));
+            Arguments.CheckNotNull(label, nameof(label));
+
+            var cloned = new Label {Name = clonedName, Properties = new Dictionary<string, string>(label.Properties)};
+
+            return await CreateLabel(cloned);
         }
 
         /// <summary>

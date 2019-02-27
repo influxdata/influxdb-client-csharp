@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using InfluxDB.Client.Domain;
@@ -124,6 +125,32 @@ namespace InfluxDB.Client.Test
             label = await _labelsApi.UpdateLabel(label);
             Assert.AreEqual(1, label.Properties.Count);
             Assert.AreEqual("paid", label.Properties["type"]);
+        }
+        
+        [Test]
+        public async Task CloneLabel()
+        {
+            var name = GenerateName("cloned");
+            
+            var properties = new Dictionary<string, string> {{"color", "green"}, {"location", "west"}};
+
+            var label = await _labelsApi.CreateLabel(GenerateName("Cool Resource"), properties);
+            
+            var cloned = await _labelsApi.CloneLabel(name, label);
+            
+            Assert.AreEqual(name, cloned.Name);
+
+            Assert.AreEqual(2, cloned.Properties.Count);
+            Assert.AreEqual("green", cloned.Properties["color"]);
+            Assert.AreEqual("west", cloned.Properties["location"]);
+        }
+
+        [Test]
+        public void CloneLabelNotFound()
+        {
+            var ioe = Assert.ThrowsAsync<InvalidOperationException>(async () => await _labelsApi.CloneLabel(GenerateName("bucket"),"020f755c3c082000"));
+            
+            Assert.AreEqual("NotFound Label with ID: 020f755c3c082000", ioe.Message);
         }
     }
 }

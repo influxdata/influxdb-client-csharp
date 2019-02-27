@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using InfluxDB.Client.Domain;
 using NodaTime;
@@ -286,6 +287,26 @@ namespace InfluxDB.Client.Test
             Assert.IsNotNull(updatedUser);
             Assert.AreEqual(updatedUser.Id, createdUser.Id);
             Assert.AreEqual(updatedUser.Name, "Tom Push");
+        }
+        
+        [Test]
+        public async Task CloneUser()
+        {
+            var source = await _usersApi.CreateUser(GenerateName("John Ryzen"));
+
+            var name = GenerateName("cloned");
+            
+            var cloned = await _usersApi.CloneUser(name, source);
+            
+            Assert.AreEqual(name, cloned.Name);
+        }
+
+        [Test]
+        public void CloneUserNotFound()
+        {
+            var ioe = Assert.ThrowsAsync<InvalidOperationException>(async () => await _usersApi.CloneUser(GenerateName("bucket"),"020f755c3c082000"));
+            
+            Assert.AreEqual("NotFound User with ID: 020f755c3c082000", ioe.Message);
         }
     }
 }

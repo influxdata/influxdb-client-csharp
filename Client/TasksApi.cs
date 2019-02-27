@@ -176,9 +176,54 @@ namespace InfluxDB.Client
 
             await DeleteTask(task.Id);
         }
+        
+        /// <summary>
+        /// Clone a task.
+        /// </summary>
+        /// <param name="taskId">ID of task to clone</param>
+        /// <returns>cloned task</returns>
+        public async System.Threading.Tasks.Task<Task> CloneTask(string taskId)
+        {
+            Arguments.CheckNonEmptyString(taskId, nameof(taskId));
+
+            var task = await FindTaskById(taskId);
+            if (task == null)
+            {
+                throw new InvalidOperationException($"NotFound Task with ID: {taskId}");
+            }
+
+            return await CloneTask(task);
+        }
 
         /// <summary>
-        /// Retrieve an task.
+        /// Clone a task.
+        /// </summary>
+        /// <param name="task">task to clone</param>
+        /// <returns>cloned task</returns>
+        public async System.Threading.Tasks.Task<Task> CloneTask(Task task)
+        {
+            Arguments.CheckNotNull(task, nameof(task));
+
+            var cloned = new Task
+            {
+                Name = task.Name,
+                OrgId = task.OrgId,
+                Flux = task.Flux,
+                Status = Status.Active
+            };
+
+            var created = await CreateTask(cloned);
+            
+            foreach (var label in await GetLabels(task))
+            {
+                await AddLabel(label, created);
+            }
+            
+            return created;
+        }
+
+        /// <summary>
+        /// Retrieve a task.
         /// </summary>
         /// <param name="taskId">ID of task to get</param>
         /// <returns>task details</returns>

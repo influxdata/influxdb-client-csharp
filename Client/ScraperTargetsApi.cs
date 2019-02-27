@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using InfluxDB.Client.Core;
@@ -88,6 +89,56 @@ namespace InfluxDB.Client
             Arguments.CheckNotNull(scraperTarget, nameof(scraperTarget));
 
             await DeleteScraperTarget(scraperTarget.Id);
+        }
+
+        /// <summary>
+        /// Clone a ScraperTarget.
+        /// </summary>
+        /// <param name="clonedName">name of cloned ScraperTarget</param>
+        /// <param name="scraperTargetId">ID of ScraperTarget to clone</param>
+        /// <returns>cloned ScraperTarget</returns>
+        public async Task<ScraperTarget> CloneScraperTarget(string clonedName, string scraperTargetId)
+        {
+            Arguments.CheckNonEmptyString(clonedName, nameof(clonedName));
+            Arguments.CheckNonEmptyString(scraperTargetId, nameof(scraperTargetId));
+
+            var scraperTarget = await FindScraperTargetById(scraperTargetId);
+            if (scraperTarget == null)
+            {
+                throw new InvalidOperationException($"NotFound ScraperTarget with ID: {scraperTargetId}");
+            }
+
+            return await CloneScraperTarget(clonedName, scraperTarget);
+        }
+
+        /// <summary>
+        /// Clone a ScraperTarget.
+        /// </summary>
+        /// <param name="clonedName">name of cloned ScraperTarget</param>
+        /// <param name="scraperTarget">ScraperTarget to clone</param>
+        /// <returns>cloned ScraperTarget</returns>
+        public async Task<ScraperTarget> CloneScraperTarget(string clonedName, ScraperTarget scraperTarget)
+        {
+            Arguments.CheckNonEmptyString(clonedName, nameof(clonedName));
+            Arguments.CheckNotNull(scraperTarget, nameof(scraperTarget));
+
+            var cloned = new ScraperTarget
+            {
+                Name = clonedName,
+                Type = scraperTarget.Type,
+                Url = scraperTarget.Url,
+                OrgId = scraperTarget.OrgId,
+                BucketId = scraperTarget.BucketId
+            };
+
+            var created = await CreateScraperTarget(cloned);
+
+            foreach (var label in await GetLabels(scraperTarget))
+            {
+                await AddLabel(label, created);
+            }
+
+            return created;
         }
 
         /// <summary>
