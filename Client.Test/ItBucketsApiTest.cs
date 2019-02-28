@@ -45,7 +45,7 @@ namespace InfluxDB.Client.Test
             Assert.IsNotEmpty(bucket.Id);
             Assert.AreEqual(bucket.Name, bucketName);
             Assert.AreEqual(bucket.OrgId, _organization.Id);
-            Assert.AreEqual(bucket.OrganizationName, _organization.Name);
+            Assert.AreEqual(bucket.OrgName, _organization.Name);
             Assert.AreEqual(bucket.RetentionRules.Count, 1);
             Assert.AreEqual(bucket.RetentionRules[0].EverySeconds, 3600L);
             Assert.AreEqual(bucket.RetentionRules[0].Type, "expire");
@@ -100,7 +100,7 @@ namespace InfluxDB.Client.Test
             Assert.AreEqual(bucketById.Id, bucket.Id);
             Assert.AreEqual(bucketById.Name, bucket.Name);
             Assert.AreEqual(bucketById.OrgId, bucket.OrgId);
-            Assert.AreEqual(bucketById.OrganizationName, bucket.OrganizationName);
+            Assert.AreEqual(bucketById.OrgName, bucket.OrgName);
             Assert.AreEqual(bucketById.RetentionRules.Count, bucket.RetentionRules.Count);
             Assert.AreEqual(bucketById.Links.Count, bucket.Links.Count);
         }
@@ -387,7 +387,7 @@ namespace InfluxDB.Client.Test
             Assert.AreEqual(updatedBucket.Id, createBucket.Id);
             Assert.AreEqual(updatedBucket.Name, "Therm sensor 2000");
             Assert.AreEqual(updatedBucket.OrgId, createBucket.OrgId);
-            Assert.AreEqual(updatedBucket.OrganizationName, createBucket.OrganizationName);
+            Assert.AreEqual(updatedBucket.OrgName, createBucket.OrgName);
             Assert.AreEqual(updatedBucket.RetentionRules[0].EverySeconds, 1000L);
         }
         
@@ -407,7 +407,7 @@ namespace InfluxDB.Client.Test
             
             Assert.AreEqual(name, cloned.Name);
             Assert.AreEqual(_organization.Id, cloned.OrgId);
-            Assert.AreEqual(_organization.Name, cloned.OrganizationName);
+            Assert.AreEqual(_organization.Name, cloned.OrgName);
             Assert.IsNull(cloned.RetentionPolicyName);
             Assert.AreEqual(1, cloned.RetentionRules.Count);
             Assert.AreEqual(3600, cloned.RetentionRules[0].EverySeconds);

@@ -23,13 +23,13 @@ namespace InfluxDB.Client.Test
         [Test]
         public async Task CreateOrganization()
         {
-            var organizationName = GenerateName("Constant Pro");
+            var orgName = GenerateName("Constant Pro");
 
-            var organization = await _organizationsApi.CreateOrganization(organizationName);
+            var organization = await _organizationsApi.CreateOrganization(orgName);
 
             Assert.IsNotNull(organization);
             Assert.IsNotEmpty(organization.Id);
-            Assert.AreEqual(organization.Name, organizationName);
+            Assert.AreEqual(organization.Name, orgName);
 
             var links = organization.Links;
 
@@ -63,9 +63,9 @@ namespace InfluxDB.Client.Test
         [Test]
         public async Task FindOrganizationById()
         {
-            var organizationName = GenerateName("Constant Pro");
+            var orgName = GenerateName("Constant Pro");
 
-            var organization = await _organizationsApi.CreateOrganization(organizationName);
+            var organization = await _organizationsApi.CreateOrganization(orgName);
 
             var organizationById = await _organizationsApi.FindOrganizationById(organization.Id);
 

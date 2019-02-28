@@ -166,7 +166,7 @@ namespace InfluxDB.Client
             {
                 Name = clonedName,
                 OrgId = bucket.OrgId,
-                OrganizationName = bucket.OrganizationName,
+                OrgName = bucket.OrgName,
                 RetentionPolicyName = bucket.RetentionPolicyName,
             };
             cloned.RetentionRules.AddRange(bucket.RetentionRules);

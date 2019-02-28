@@ -19,7 +19,7 @@ namespace InfluxDB.Client.Domain
         public string OrgId { get; set; }
 
         [JsonProperty("organization")]
-        public string OrganizationName { get; set; }
+        public string OrgName { get; set; }
 
         /// <summary>
         /// For support V1 sources. 
