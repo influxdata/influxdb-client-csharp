@@ -362,6 +362,12 @@ namespace InfluxDB.Client.Test
             Assert.AreEqual(label.Id, labels[0].Id);
             Assert.AreEqual(label.Name, labels[0].Name);
 
+            task = await _tasksApi.FindTaskById(task.Id);
+            Assert.IsNotNull(task);
+            Assert.AreEqual(1, task.Labels.Count);
+            Assert.AreEqual(label.Id, task.Labels[0].Id);
+            Assert.AreEqual(label.Name, task.Labels[0].Name);
+
             await _tasksApi.DeleteLabel(label, task);
 
             labels = await _tasksApi.GetLabels(task);

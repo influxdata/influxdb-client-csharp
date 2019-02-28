@@ -8,7 +8,7 @@ namespace InfluxDB.Client.Domain
     /// <summary>
     ///     Task is a task.
     /// </summary>
-    public class Task
+    public class Task : AbstractHasLabels
     {
         /// <summary>
         ///     Timestamp of latest scheduled, completed run, RFC3339.
