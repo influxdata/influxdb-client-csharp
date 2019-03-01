@@ -23,7 +23,7 @@ namespace InfluxDB.Client
         /// <returns>created Bucket</returns>
         public async Task<Bucket> CreateBucket(Bucket bucket)
         {
-            Arguments.CheckNotNull(bucket, "Bucket");
+            Arguments.CheckNotNull(bucket, nameof(bucket));
 
             var response = await Post(bucket, "/api/v2/buckets");
 
@@ -192,7 +192,7 @@ namespace InfluxDB.Client
 
             var request = await Get($"/api/v2/buckets/{bucketId}");
 
-            return Call<Bucket>(request, "bucket not found");
+            return Call<Bucket>(request, 404);
         }
 
         /// <summary>

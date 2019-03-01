@@ -114,7 +114,7 @@ namespace InfluxDB.Client
         {
             return new TasksApi(Client);
         }
-        
+
         /// <summary>
         /// Get the <see cref="Domain.ScraperTarget"/> client.
         /// </summary>
@@ -125,6 +125,15 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
+        /// Get the <see cref="Domain.TelegrafConfig"/> client.
+        /// </summary>
+        /// <returns>the new client instance for Telegrafs API</returns>
+        public TelegrafsApi GetTelegrafsApi()
+        {
+            return new TelegrafsApi(Client);
+        }
+
+        /// <summary>
         /// Get the <see cref="Domain.Label"/> client.
         /// </summary>
         /// <returns>the new client instance for Label API</returns>
@@ -132,7 +141,7 @@ namespace InfluxDB.Client
         {
             return new LabelsApi(Client);
         }
-        
+
         /// <summary>
         /// Set the log level for the request and response information.
         /// </summary>
@@ -188,7 +197,7 @@ namespace InfluxDB.Client
         /// <param name="onboarding">to setup defaults</param>
         /// <exception cref="HttpException">With status code 422 when an onboarding has already been completed</exception>
         /// <returns>defaults for first run</returns>
-        public async Task<OnboardingResponse> Onboarding(Onboarding onboarding) 
+        public async Task<OnboardingResponse> Onboarding(Onboarding onboarding)
         {
             Arguments.CheckNotNull(onboarding, nameof(onboarding));
 
@@ -197,7 +206,7 @@ namespace InfluxDB.Client
             return Call<OnboardingResponse>(request);
         }
 
-        
+
         /// <summary>
         /// Check if database has default user, org, bucket created, returns true if not.
         /// </summary>
@@ -205,10 +214,10 @@ namespace InfluxDB.Client
         public async Task<bool> IsOnboardingAllowed()
         {
             var request = await Get("/api/v2/setup");
-            
+
             return Call<IsOnboarding>(request).Allowed;
         }
-        
+
         public void Dispose()
         {
             //

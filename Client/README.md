@@ -493,6 +493,7 @@ The client has following management API:
 | **/api/v2/tasks** | Managing one-off and recurring tasks | [TasksApi](https://github.com/bonitoo-io/influxdb-client-csharp/blob/master/Client/TasksApi.cs#L1) |
 | **/api/v2/scrapers** | Managing ScraperTarget data | [ScraperTargetsApi](https://github.com/bonitoo-io/influxdb-client-csharp/blob/master/Client/ScraperTargetsApi.cs#L1) |
 | **/api/v2/labels** | Managing resource labels | [LabelsApi](https://github.com/bonitoo-io/influxdb-client-csharp/blob/master/Client/LabelsApi.cs#L1) |
+| **/api/v2/telegrafs** | Managing telegraf config data | [TelegrafsApi](https://github.com/bonitoo-io/influxdb-client-csharp/blob/master/Client/TelegrafsApi.cs#L1) |
 | **/api/v2/setup** | Managing onboarding setup | [InfluxDBClient#OnBoarding()](https://github.com/bonitoo-io/influxdb-client-csharp/blob/master/Client/InfluxDBClient.cs#L191-) |
 | **/ready** | Get the readiness of a instance at startup| [InfluxDBClient#Ready()](https://github.com/bonitoo-io/influxdb-client-csharp/blob/master/Client/InfluxDBClient.cs#L169--) |
 | **/health** | Get the health of an instance anytime during execution | [InfluxDBClient#Health()](https://github.com/bonitoo-io/influxdb-client-csharp/blob/master/Client/InfluxDBClient.cs#L160--) |

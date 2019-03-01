@@ -52,6 +52,16 @@ namespace InfluxDB.Client.Core.Internal
             return Client.DoRequest(request).ConfigureAwait(false);
         }
 
+        protected ConfiguredTaskAwaitable<RequestResult> Put(object body, string path)
+        {
+            var request = new HttpRequestMessage(new HttpMethod(HttpMethodKind.Put.Name()), path)
+            {
+                Content = CreateBody(body)
+            };
+
+            return Client.DoRequest(request).ConfigureAwait(false);
+        }
+
         protected ConfiguredTaskAwaitable<RequestResult> Delete(string path)
         {
             var request = new HttpRequestMessage(new HttpMethod(HttpMethodKind.Delete.Name()), path);
@@ -84,7 +94,6 @@ namespace InfluxDB.Client.Core.Internal
             if (nullResponse) return defaultValue;
 
             var readToEnd = new StreamReader(result.ResponseContent).ReadToEnd();
-
 
             var settings = new JsonSerializerSettings();
             settings.Converters.Add(NodaConverters.OffsetDateTimeConverter);
