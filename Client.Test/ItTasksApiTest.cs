@@ -532,6 +532,8 @@ namespace InfluxDB.Client.Test
         }
 
         [Test]
+        //TODO
+        [Ignore("https://github.com/influxdata/influxdb/issues/12322")]
         public async Task UpdateTask()
         {
             var taskName = GenerateName("it task");
@@ -539,7 +541,7 @@ namespace InfluxDB.Client.Test
             var cronTask =
                 await _tasksApi.CreateTaskCron(taskName, TaskFlux, "0 2 * * *", _organization);
 
-            var flux = $"option task = {{name: \"{taskName}\", every: 2m}}\n\n{TaskFlux}";
+            var flux = $"option task = {{name: \"{taskName}\", every: 3m}}\n\n{TaskFlux}";
 
             cronTask.Flux = flux;
             cronTask.Status = Status.Inactive;
@@ -552,7 +554,7 @@ namespace InfluxDB.Client.Test
             Assert.AreEqual(_organization.Id, updatedTask.OrgId);
             Assert.AreEqual(Status.Inactive, updatedTask.Status);
             Assert.IsNull(updatedTask.Cron);
-            Assert.AreEqual("2m0s", updatedTask.Every);
+            Assert.AreEqual("3m0s", updatedTask.Every);
             Assert.AreEqual(updatedTask.Flux, flux);
             Assert.IsNotNull(updatedTask.UpdatedAt);
         }
