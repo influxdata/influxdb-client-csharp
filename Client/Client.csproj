@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>netcoreapp2.1</TargetFramework>
+        <TargetFramework>netcoreapp2.2</TargetFramework>
 
         <Description>The reference client that allows query, write and management (bucket, organization, users) for the InfluxDB 2.0.</Description>
         <Authors>influxdb-client-csharp Contributors</Authors>
