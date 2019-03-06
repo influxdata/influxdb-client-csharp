@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
+using System.Reactive;
 using System.Reactive.Concurrency;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
+using System.Reactive.Threading.Tasks;
 using System.Text;
+using System.Threading.Tasks;
 using InfluxDB.Client.Core;
 using InfluxDB.Client.Core.Exceptions;
 using InfluxDB.Client.Core.Internal;
@@ -98,9 +101,9 @@ namespace InfluxDB.Client
                 //
                 .Delay(source =>
                 {
-                    var delay = new Random().NextDouble() * writeOptions.JitterInterval;
-
-                    return Observable.Timer(TimeSpan.FromMilliseconds(delay), Scheduler.CurrentThread);
+                    var jitterDelay = JitterDelay(writeOptions);
+                    
+                    return Observable.Timer(TimeSpan.FromMilliseconds(jitterDelay), Scheduler.CurrentThread);
                 })
                 .Concat()
                 //
@@ -112,66 +115,123 @@ namespace InfluxDB.Client
                     var orgId = batchWriteItem.Options.OrganizationId;
                     var bucket = batchWriteItem.Options.Bucket;
                     var lineProtocol = batchWriteItem.ToLineProtocol();
-                    string precision;
+                    var precision = batchWriteItem.Options.Precision;
 
-                    switch (batchWriteItem.Options.Precision)
+                    string precisionMapping;
+                    switch (precision)
                     {
                         case TimeUnit.Nanos:
-                            precision = "ns";
+                            precisionMapping = "ns";
                             break;
                         case TimeUnit.Micros:
-                            precision = "us";
+                            precisionMapping = "us";
                             break;
                         case TimeUnit.Millis:
-                            precision = "ms";
+                            precisionMapping = "ms";
                             break;
                         case TimeUnit.Seconds:
-                            precision = "s";
+                            precisionMapping = "s";
                             break;
                         default:
                             throw new InvalidOperationException();
                     }
 
-                    var path = $"/api/v2/write?org={orgId}&bucket={bucket}&precision={precision}";
-                    var request = new HttpRequestMessage(new HttpMethod(HttpMethodKind.Post.Name()), path)
+                    HttpRequestMessage Request()
                     {
-                        Content = new StringContent(lineProtocol, Encoding.UTF8, "text/plain")
-                    };
-
-                    var doRequest = Client.DoRequest(request);
-                    doRequest.ContinueWith(task =>
-                    {
-                        if (task.Result.IsSuccessful())
+                        var path = $"/api/v2/write?org={orgId}&bucket={bucket}&precision={precisionMapping}";
+                        var message = new HttpRequestMessage(new HttpMethod(HttpMethodKind.Post.Name()), path)
                         {
-                            Publish(
-                                new WriteSuccessEvent(orgId, bucket, batchWriteItem.Options.Precision, lineProtocol));
-                        }
-                        else
+                            Content = new StringContent(lineProtocol, Encoding.UTF8, "text/plain")
+                        };
+                        return message;
+                    }
+
+                    return Observable
+                        .Defer(() => DoRequest(Request).ToObservable())
+                        .RetryWhen(f => f.SelectMany(e =>
                         {
-                            var exception = HttpException.Create(task.Result);
+                            if (e is HttpException httpException)
+                            {
+                                //
+                                // This types is not able to retry
+                                //
+                                if (httpException.Status == 400 || httpException.Status == 401 ||
+                                    httpException.Status == 403 || httpException.Status == 413)
+                                {
+                                    throw httpException;
+                                }
 
-                            Publish(new WriteErrorEvent(orgId, bucket, batchWriteItem.Options.Precision, lineProtocol,
-                                exception));
-                        }
-                    });
+                                var retryInterval = (httpException.RetryAfter * 1000 ?? writeOptions.RetryInterval) + JitterDelay(writeOptions);
 
-                    return Observable.FromAsync(async () => await doRequest);
+                                var retriable = new WriteRetriableErrorEvent(orgId, bucket, precision, lineProtocol,
+                                    httpException, retryInterval);
+                                Publish(retriable);
+
+                                return Observable.Timer(TimeSpan.FromMilliseconds(retryInterval));
+                            }
+
+                            throw e;
+                        }))
+                        .Select(result =>
+                        {
+                            // ReSharper disable once ConvertIfStatementToReturnStatement
+                            if (result.IsSuccessful())
+                            {
+                                return Notification.CreateOnNext(result);
+                            }
+
+                            return Notification.CreateOnError<RequestResult>(HttpException.Create(result));
+                        })
+                        .Catch<Notification<RequestResult>, Exception>(ex =>
+                        {
+                            var error = new WriteErrorEvent(orgId, bucket, precision, lineProtocol, ex);
+                            Publish(error);
+                            
+                            return Observable.Return(Notification.CreateOnError<RequestResult>(ex));
+                        }).Do(res =>
+                        {
+                            if (res.Kind == NotificationKind.OnNext)
+                            {
+                                var success = new WriteSuccessEvent(orgId, bucket, precision, lineProtocol);
+                                Publish(success);
+                            }
+                        });
                 })
-                //
-                // TODO retry
-                //
                 .Concat()
                 .Subscribe(
-                    requestResult => Trace.WriteLine($"Observed: {requestResult.StatusCode}"),
-                    () => Trace.WriteLine("Completed"));
+                    notification =>
+                    {
+                        switch (notification.Kind)
+                        {
+                            case NotificationKind.OnNext:
+                                Trace.WriteLine($"The batch item: {notification} was processed successfully.");
+                                break;
+                            case NotificationKind.OnError:
+                                Trace.WriteLine(
+                                    $"The batch item wasn't processed successfully because: {notification.Exception}");
+                                break;
+                            default:
+                                Trace.WriteLine($"The batch item: {notification} was processed");
+                                break;
+                        }
+                    },
+                    exception => Trace.WriteLine($"The unhandled exception occurs: {exception}"),
+                    () => Trace.WriteLine("The WriteApi was disposed."));
         }
 
         public void Dispose()
         {
             Trace.WriteLine("Flushing batches before shutdown.");
 
-            _subject.OnCompleted();
-            _flush.OnCompleted();
+            if (!_subject.IsDisposed)
+            {
+                _subject.OnCompleted();
+            }
+
+            if (!_flush.IsDisposed)
+            {
+                _flush.OnCompleted();
+            }
 
             _subject.Dispose();
             _flush.Dispose();
@@ -336,6 +396,22 @@ namespace InfluxDB.Client
         public void Flush()
         {
             _flush.OnNext(new List<BatchWriteData>());
+        }
+
+        private async Task<RequestResult> DoRequest(Func<HttpRequestMessage> request)
+        {
+            var requestResult = await Client.DoRequest(request());
+            if (!requestResult.IsSuccessful())
+            {
+                throw HttpException.Create(requestResult);
+            }
+
+            return requestResult;
+        }
+        
+        private int JitterDelay(WriteOptions writeOptions)
+        {
+            return (int) (new Random().NextDouble() * writeOptions.JitterInterval);
         }
 
         private void Publish(InfluxDBEventArgs eventArgs)

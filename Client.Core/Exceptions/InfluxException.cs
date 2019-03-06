@@ -40,6 +40,11 @@ namespace InfluxDB.Client.Core.Exceptions
         /// The JSON unsuccessful response body.
         /// </summary>
         public JObject ErrorBody { get; set; }
+        
+        /// <summary>
+        /// The retry interval is used when the InfluxDB server does not specify "Retry-After" header.
+        /// </summary>
+        public int? RetryAfter { get; set; }
 
         public HttpException(string message, int status) : base(message, 0)
         {
@@ -52,6 +57,12 @@ namespace InfluxDB.Client.Core.Exceptions
 
             string errorMessage = null;
             JObject errorBody;
+
+            int? retryAfter = null;
+            if (requestResult.ResponseHeaders.TryGetValue("Retry-After", out var retry))
+            {
+                retryAfter = Convert.ToInt32(retry.First());
+            }
 
             var readToEnd = new StreamReader(requestResult.ResponseContent).ReadToEnd();
             if (string.IsNullOrEmpty(readToEnd))
@@ -79,7 +90,7 @@ namespace InfluxDB.Client.Core.Exceptions
                 errorMessage = message.FirstOrDefault();
             }
 
-            return new HttpException(errorMessage, requestResult.StatusCode) {ErrorBody = errorBody};
+            return new HttpException(errorMessage, requestResult.StatusCode) {ErrorBody = errorBody, RetryAfter = retryAfter};
         }
     }
 }

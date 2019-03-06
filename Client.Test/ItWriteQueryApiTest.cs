@@ -33,7 +33,7 @@ namespace InfluxDB.Client.Test
             //
             var resource = new PermissionResource
                 {Type = ResourceType.Buckets, OrgId = _organization.Id, Id = _bucket.Id};
-            
+
             var readBucket = new Permission
             {
                 Resource = resource,
@@ -371,7 +371,65 @@ namespace InfluxDB.Client.Test
             Thread.Sleep(100);
 
             Assert.IsNotNull(error);
-            Assert.AreEqual("unable to parse points: unable to parse 'h2o_feet,location=coyote_creek level\\ water_level=1.0 123456.789': bad timestamp", error.Exception.Message);
+            Assert.AreEqual(
+                "unable to parse points: unable to parse 'h2o_feet,location=coyote_creek level\\ water_level=1.0 123456.789': bad timestamp",
+                error.Exception.Message);
+        }
+
+        [Test]
+        public async Task PartialWrite()
+        {
+            var bucketName = _bucket.Name;
+
+            _writeApi = Client.GetWriteApi();
+
+            const string record1 = "h2o_feet,location=coyote_creek level\\ water_level=1.0 1";
+            const string record2 = "h2o_feet,location=coyote_hill level\\ water_level=2.0 2x";
+
+            _writeApi.WriteRecords(bucketName, _organization.Id, TimeUnit.Nanos, record1, record2);
+            _writeApi.Flush();
+            _writeApi.Dispose();
+            
+            var query = await _queryApi.Query("from(bucket:\"" + bucketName + "\") |> range(start: 0) |> last()",
+                _organization.Id);
+            Assert.AreEqual(0, query.Count);
+        }
+
+        [Test]
+        public async Task Recovery()
+        {
+            var bucketName = _bucket.Name;
+
+            WriteErrorEvent error = null;
+
+            _writeApi = Client.GetWriteApi();
+            _writeApi.EventHandler += (sender, args) => { error = args as WriteErrorEvent; };
+            
+            _writeApi.WriteRecord(bucketName, _organization.Id, TimeUnit.Nanos,
+                "h2o_feet,location=coyote_creek level\\ water_level=1.0 1x");
+            _writeApi.Flush();
+
+            Thread.Sleep(100);
+            
+            Assert.IsNotNull(error);
+            Assert.AreEqual(
+                "unable to parse points: unable to parse 'h2o_feet,location=coyote_creek level\\ water_level=1.0 1x': bad timestamp",
+                error.Exception.Message);
+            
+            _writeApi.WriteRecord(bucketName, _organization.Id, TimeUnit.Nanos,
+                "h2o_feet,location=coyote_creek level\\ water_level=1.0 1");
+            _writeApi.Flush();
+
+            Thread.Sleep(100);
+            
+            var query = await _queryApi.Query("from(bucket:\"" + bucketName + "\") |> range(start: 0) |> last()",
+                _organization.Id);
+            
+            Assert.AreEqual(1, query.Count);
+            Assert.AreEqual(1, query[0].Records.Count);
+            Assert.AreEqual("coyote_creek", query[0].Records[0].GetValueByKey("location"));
+            Assert.AreEqual("level water_level", query[0].Records[0].GetValueByKey("_field"));
+            Assert.AreEqual(1, query[0].Records[0].GetValue());
         }
 
         [Measurement("h2o")]

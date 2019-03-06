@@ -40,6 +40,33 @@ namespace InfluxDB.Client.Writes
         }
     }
 
+    /// <summary>
+    /// The event is published when occurs a retriable write exception.
+    /// </summary>
+    public class WriteRetriableErrorEvent : AbstractWriteEvent
+    {
+        /// <summary>
+        /// The exception that was throw.
+        /// </summary>
+        public Exception Exception { get; }
+        
+        /// <summary>
+        /// The time to wait before retry unsuccessful write (milliseconds)
+        /// </summary>
+        public long RetryInterval { get; }
+        
+        public WriteRetriableErrorEvent(string organization, string bucket, TimeUnit precision, string lineProtocol, Exception exception, long retryInterval) : base(organization, bucket, precision, lineProtocol)
+        {
+            Exception = exception;
+            RetryInterval = retryInterval;
+        }
+        
+        internal override void LogEvent()
+        {
+            Trace.TraceError($"The retriable error occurred during writing of data. Retry in: {RetryInterval} [ms]");
+        }
+    }
+
     public abstract class AbstractWriteEvent : InfluxDBEventArgs
     {
         /// <summary>

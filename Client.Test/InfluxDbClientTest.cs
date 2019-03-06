@@ -9,13 +9,13 @@ namespace InfluxDB.Client.Test
     [TestFixture]
     public class InfluxDbClientTest : AbstractMockServerTest
     {
+        private InfluxDBClient _client;
+        
         [SetUp]
         public new void SetUp()
         {
             _client = InfluxDBClientFactory.Create(MockServerUrl);
         }
-
-        private InfluxDBClient _client;
 
         [Test]
         public async Task ParseKnownEnum()

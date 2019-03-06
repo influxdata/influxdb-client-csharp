@@ -20,10 +20,10 @@ namespace InfluxDB.Client
     /// </summary>
     public class WriteOptions
     {
-        private static readonly int DEFAULT_BATCH_SIZE = 1000;
-        private static readonly int DEFAULT_FLUSH_INTERVAL = 1000;
-        private static readonly int DEFAULT_JITTER_INTERVAL = 0;
-        private static readonly int DEFAULT_RETRY_INTERVAL = 1000;
+        private const int DefaultBatchSize = 1000;
+        private const int DefaultFlushInterval = 1000;
+        private const int DefaultJitterInterval = 0;
+        private const int DefaultRetryInterval = 1000;
 
         /// <summary>
         /// The number of data point to collect in batch.
@@ -45,9 +45,15 @@ namespace InfluxDB.Client
 
         /// <summary>
         /// The time to wait before retry unsuccessful write (milliseconds).
+        /// <para>
+        /// The retry interval is used when the InfluxDB server does not specify "Retry-After" header.
+        /// </para>
+        /// <para>
+        /// Retry-After: A non-negative decimal integer indicating the seconds to delay after the response is received.
+        /// </para>
         /// </summary>
         /// <seealso cref="Builder.RetryInterval(int)"/>
-        private int RetryInterval { get; }
+        public int RetryInterval { get; }
 
         /// <summary>
         /// Set the scheduler which is used for write data points.
@@ -76,10 +82,10 @@ namespace InfluxDB.Client
         
         public sealed class Builder
         {
-            internal int BatchSizeBuilder = DEFAULT_BATCH_SIZE;
-            internal int FlushIntervalBuilder = DEFAULT_FLUSH_INTERVAL;
-            internal int JitterIntervalBuilder = DEFAULT_JITTER_INTERVAL;
-            internal int RetryIntervalBuilder = DEFAULT_RETRY_INTERVAL;
+            internal int BatchSizeBuilder = DefaultBatchSize;
+            internal int FlushIntervalBuilder = DefaultFlushInterval;
+            internal int JitterIntervalBuilder = DefaultJitterInterval;
+            internal int RetryIntervalBuilder = DefaultRetryInterval;
             internal IScheduler WriteSchedulerBuilder = NewThreadScheduler.Default;
 
             /// <summary>
@@ -122,6 +128,12 @@ namespace InfluxDB.Client
 
             /// <summary>
             /// Set the the time to wait before retry unsuccessful write (milliseconds).
+            /// <para>
+            /// The retry interval is used when the InfluxDB server does not specify "Retry-After" header.
+            /// </para>
+            /// <para>
+            /// Retry-After: A non-negative decimal integer indicating the seconds to delay after the response is received.
+            /// </para>
             /// </summary>
             /// <param name="milliseconds">the time to wait before retry unsuccessful write</param>
             /// <returns>this</returns>
