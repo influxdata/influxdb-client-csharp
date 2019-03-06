@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using InfluxDB.Client.Core.Internal;
 using Newtonsoft.Json;
 
@@ -22,6 +23,6 @@ namespace InfluxDB.Client.Domain
 
         [JsonProperty("requestedAt")] public DateTime? RequestedAt { get; set; }
 
-        [JsonProperty("log")] public string Log { get; set; }
+        [JsonProperty("log")] public List<LogEvent> Log { get; set; } = new List<LogEvent>();
     }
 }

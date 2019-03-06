@@ -492,7 +492,7 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="task">task to get logs for</param>
         /// <returns>the list of all logs for a task</returns>
-        public async System.Threading.Tasks.Task<List<string>> GetLogs(Task task)
+        public async System.Threading.Tasks.Task<List<LogEvent>> GetLogs(Task task)
         {
             Arguments.CheckNotNull(task, nameof(task));
 
@@ -505,14 +505,14 @@ namespace InfluxDB.Client
         /// <param name="taskId">ID of task to get logs for</param>
         /// <param name="orgId">ID of organization to get logs for</param>
         /// <returns>the list of all logs for a task</returns>
-        public async System.Threading.Tasks.Task<List<string>> GetLogs(string taskId, string orgId)
+        public async System.Threading.Tasks.Task<List<LogEvent>> GetLogs(string taskId, string orgId)
         {
             Arguments.CheckNonEmptyString(taskId, nameof(taskId));
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
             
             var request = await Get($"/api/v2/tasks/{taskId}/logs?orgID={orgId}");
 
-            return Call(request, 404, new List<string>());
+            return Call(request, 404, new List<LogEvent>());
         }
 
         /// <summary>
@@ -664,7 +664,7 @@ namespace InfluxDB.Client
         /// <param name="run">the run to gets logs for it</param>
         /// <param name="orgId">ID of organization to get logs for it</param>
         /// <returns>the list of all logs for a run</returns>
-        public async System.Threading.Tasks.Task<List<string>> GetRunLogs(Run run, string orgId)
+        public async System.Threading.Tasks.Task<List<LogEvent>> GetRunLogs(Run run, string orgId)
         {
             return await GetRunLogs(run.TaskId, run.Id, orgId);
         }
@@ -676,7 +676,7 @@ namespace InfluxDB.Client
         /// <param name="runId">ID of run to get logs for it</param>
         /// <param name="orgId">ID of organization to get logs for it</param>
         /// <returns>the list of all logs for a run</returns>
-        public async System.Threading.Tasks.Task<List<string>> GetRunLogs(string taskId, string runId, string orgId)
+        public async System.Threading.Tasks.Task<List<LogEvent>> GetRunLogs(string taskId, string runId, string orgId)
         {
             Arguments.CheckNonEmptyString(taskId, nameof(taskId));
             Arguments.CheckNonEmptyString(runId, nameof(runId));
@@ -684,7 +684,7 @@ namespace InfluxDB.Client
 
             var request = await Get($"/api/v2/tasks/{taskId}/runs/{runId}/logs?orgID={orgId}");
 
-            return Call(request, 404, new List<string>());
+            return Call(request, 404, new List<LogEvent>());
         }
 
         /// <summary>

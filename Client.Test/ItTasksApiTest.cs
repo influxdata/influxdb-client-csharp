@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using InfluxDB.Client.Core;
@@ -286,7 +287,8 @@ namespace InfluxDB.Client.Test
 
             var logs = await _tasksApi.GetLogs(task);
             Assert.IsNotEmpty(logs);
-            Assert.IsTrue(logs[0].EndsWith("Completed successfully"));
+            Assert.IsTrue(logs.First().Message.StartsWith("Started task from script:"));
+            Assert.IsTrue(logs.Last().Message.EndsWith("Completed successfully"));
         }
 
         [Test]
@@ -324,8 +326,8 @@ namespace InfluxDB.Client.Test
             Assert.AreEqual(1, runs.Count);
 
             var logs = await _tasksApi.GetRunLogs(runs[0], _organization.Id);
-            Assert.AreEqual(1, logs.Count);
-            Assert.IsTrue(logs[0].EndsWith("Completed successfully"));
+            Assert.IsNotNull(logs);
+            Assert.IsTrue(logs.Last().Message.EndsWith("Completed successfully"));
         }
 
         [Test]
@@ -488,7 +490,7 @@ namespace InfluxDB.Client.Test
             Assert.Greater(DateTime.Now, runs[0].FinishedAt);
             Assert.Greater(DateTime.Now, runs[0].ScheduledFor);
             Assert.IsNull(runs[0].RequestedAt);
-            Assert.IsEmpty(runs[0].Log);
+            Assert.IsNull(runs[0].Log);
 
             task = await _tasksApi.FindTaskById(task.Id);
             Assert.IsNotNull(task.LatestCompleted);
