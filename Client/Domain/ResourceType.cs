@@ -31,6 +31,8 @@ namespace InfluxDB.Client.Domain
 
         [EnumMember(Value = "labels")] Labels,
 
-        [EnumMember(Value = "views")] Views
+        [EnumMember(Value = "views")] Views,
+        
+        [EnumMember(Value = "documents")] Documents
     }
 }

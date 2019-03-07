@@ -534,8 +534,6 @@ namespace InfluxDB.Client.Test
         }
 
         [Test]
-        //TODO
-        [Ignore("https://github.com/influxdata/influxdb/issues/12322")]
         public async Task UpdateTask()
         {
             var taskName = GenerateName("it task");

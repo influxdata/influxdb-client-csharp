@@ -512,7 +512,9 @@ namespace InfluxDB.Client
             
             var request = await Get($"/api/v2/tasks/{taskId}/logs?orgID={orgId}");
 
-            return Call(request, 404, new List<LogEvent>());
+            var logs = Call(request, 404, new Logs());
+            
+            return logs.Events;
         }
 
         /// <summary>
@@ -684,7 +686,9 @@ namespace InfluxDB.Client
 
             var request = await Get($"/api/v2/tasks/{taskId}/runs/{runId}/logs?orgID={orgId}");
 
-            return Call(request, 404, new List<LogEvent>());
+            var logs = Call(request, 404, new Logs());
+            
+            return logs.Events;
         }
 
         /// <summary>
