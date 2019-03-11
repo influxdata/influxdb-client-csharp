@@ -105,6 +105,7 @@ namespace InfluxDB.Client.Test
             _writeApi = Client.GetWriteApi();
             _writeApi.WriteRecords(bucketName, _organization.Id, TimeUnit.Nanos, record1, record2);
             _writeApi.Flush();
+            Thread.Sleep(1000);
 
             var query = await _queryApi.Query("from(bucket:\"" + bucketName + "\") |> range(start: 0)",
                 _organization.Id);
