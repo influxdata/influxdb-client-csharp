@@ -14,7 +14,8 @@
                 <version>3.0.3</version>
                 <configuration>
                     <inputSpec>${project.basedir}/swagger.yml</inputSpec>
-                    <generatorName>csharp</generatorName>
+                    <generatorName>influx-csharp</generatorName>
+                    <!-- <generatorName>csharp</generatorName> -->
                     <!-- <generatorName>csharp-dotnet2</generatorName> -->
                     <configOptions>
                         <additional-properties>optionalProjectFile=true</additional-properties>
