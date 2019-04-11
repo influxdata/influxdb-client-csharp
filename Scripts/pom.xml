@@ -20,14 +20,15 @@
                     <configOptions>
                         <additional-properties>optionalProjectFile=true</additional-properties>
                         <hideGenerationTimestamp>true</hideGenerationTimestamp>
-                        <packageName>Generated</packageName>
+                        <packageName>InfluxDB.Client.Generated</packageName>
                         <sourceFolder>/</sourceFolder>
+                        <validatable>false</validatable>
                     </configOptions>
                     <generateModelDocumentation>false</generateModelDocumentation>
                     <generateApiDocumentation>false</generateApiDocumentation>
                     <generateApis>true</generateApis>
                     <generateApiTests>false</generateApiTests>
-                    <generateSupportingFiles>false</generateSupportingFiles>
+                    <generateSupportingFiles>true</generateSupportingFiles>
                     <generateModelTests>false</generateModelTests>
                     <verbose>false</verbose>
                     <output>${project.basedir}/../Client</output>

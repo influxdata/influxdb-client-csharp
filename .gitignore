@@ -28,5 +28,8 @@ coveralls/
 
 **/target/**
 
+**/.openapi-generator-ignore
+**/.openapi-generator/**
+
 
 
