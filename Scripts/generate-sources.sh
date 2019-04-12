@@ -9,6 +9,7 @@ mvn clean install -DskipTests
 # delete old sources
 rm ${SCRIPT_PATH}/../Client/InfluxDB.Client.Generated/Domain/*.cs
 rm ${SCRIPT_PATH}/../Client/InfluxDB.Client.Generated/Service/*.cs
+rm ${SCRIPT_PATH}/../Client/InfluxDB.Client.Generated/Client/*.cs
 
 # Generate client
 cd ${SCRIPT_PATH}/
