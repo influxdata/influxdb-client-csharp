@@ -196,4 +196,17 @@ public class InfluxCSharpGenerator extends CSharpClientCodegen {
                 .filter(supportingFile -> accepted.contains(supportingFile.destinationFilename))
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public String toApiName(String name) {
+
+        if (name.length() == 0) {
+            return "DefaultService";
+        }
+
+        //
+        // Rename "Api" to "Service"
+        //
+        return initialCaps(name) + "Service";
+    }
 }
