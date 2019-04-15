@@ -372,7 +372,7 @@ namespace InfluxDB.Client.Generated.Service
             if (bucketID == null)
                 throw new ApiException(400, "Missing required parameter 'bucketID' when calling OperationLogsService->BucketsBucketIDLogsGet");
 
-            var localVarPath = "/buckets/{bucketID}/logs";
+            var localVarPath = "/api/v2/buckets/{bucketID}/logs";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -448,7 +448,7 @@ namespace InfluxDB.Client.Generated.Service
             if (bucketID == null)
                 throw new ApiException(400, "Missing required parameter 'bucketID' when calling OperationLogsService->BucketsBucketIDLogsGet");
 
-            var localVarPath = "/buckets/{bucketID}/logs";
+            var localVarPath = "/api/v2/buckets/{bucketID}/logs";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -523,7 +523,7 @@ namespace InfluxDB.Client.Generated.Service
             if (dashboardID == null)
                 throw new ApiException(400, "Missing required parameter 'dashboardID' when calling OperationLogsService->DashboardsDashboardIDLogsGet");
 
-            var localVarPath = "/dashboards/{dashboardID}/logs";
+            var localVarPath = "/api/v2/dashboards/{dashboardID}/logs";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -599,7 +599,7 @@ namespace InfluxDB.Client.Generated.Service
             if (dashboardID == null)
                 throw new ApiException(400, "Missing required parameter 'dashboardID' when calling OperationLogsService->DashboardsDashboardIDLogsGet");
 
-            var localVarPath = "/dashboards/{dashboardID}/logs";
+            var localVarPath = "/api/v2/dashboards/{dashboardID}/logs";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -674,7 +674,7 @@ namespace InfluxDB.Client.Generated.Service
             if (orgID == null)
                 throw new ApiException(400, "Missing required parameter 'orgID' when calling OperationLogsService->OrgsOrgIDLogsGet");
 
-            var localVarPath = "/orgs/{orgID}/logs";
+            var localVarPath = "/api/v2/orgs/{orgID}/logs";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -750,7 +750,7 @@ namespace InfluxDB.Client.Generated.Service
             if (orgID == null)
                 throw new ApiException(400, "Missing required parameter 'orgID' when calling OperationLogsService->OrgsOrgIDLogsGet");
 
-            var localVarPath = "/orgs/{orgID}/logs";
+            var localVarPath = "/api/v2/orgs/{orgID}/logs";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -825,7 +825,7 @@ namespace InfluxDB.Client.Generated.Service
             if (userID == null)
                 throw new ApiException(400, "Missing required parameter 'userID' when calling OperationLogsService->UsersUserIDLogsGet");
 
-            var localVarPath = "/users/{userID}/logs";
+            var localVarPath = "/api/v2/users/{userID}/logs";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -901,7 +901,7 @@ namespace InfluxDB.Client.Generated.Service
             if (userID == null)
                 throw new ApiException(400, "Missing required parameter 'userID' when calling OperationLogsService->UsersUserIDLogsGet");
 
-            var localVarPath = "/users/{userID}/logs";
+            var localVarPath = "/api/v2/users/{userID}/logs";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);

@@ -943,7 +943,7 @@ namespace InfluxDB.Client.Generated.Service
             if (bucketID == null)
                 throw new ApiException(400, "Missing required parameter 'bucketID' when calling BucketsService->BucketsBucketIDDelete");
 
-            var localVarPath = "/buckets/{bucketID}";
+            var localVarPath = "/api/v2/buckets/{bucketID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1012,7 +1012,7 @@ namespace InfluxDB.Client.Generated.Service
             if (bucketID == null)
                 throw new ApiException(400, "Missing required parameter 'bucketID' when calling BucketsService->BucketsBucketIDDelete");
 
-            var localVarPath = "/buckets/{bucketID}";
+            var localVarPath = "/api/v2/buckets/{bucketID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1081,7 +1081,7 @@ namespace InfluxDB.Client.Generated.Service
             if (bucketID == null)
                 throw new ApiException(400, "Missing required parameter 'bucketID' when calling BucketsService->BucketsBucketIDGet");
 
-            var localVarPath = "/buckets/{bucketID}";
+            var localVarPath = "/api/v2/buckets/{bucketID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1151,7 +1151,7 @@ namespace InfluxDB.Client.Generated.Service
             if (bucketID == null)
                 throw new ApiException(400, "Missing required parameter 'bucketID' when calling BucketsService->BucketsBucketIDGet");
 
-            var localVarPath = "/buckets/{bucketID}";
+            var localVarPath = "/api/v2/buckets/{bucketID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1220,7 +1220,7 @@ namespace InfluxDB.Client.Generated.Service
             if (bucketID == null)
                 throw new ApiException(400, "Missing required parameter 'bucketID' when calling BucketsService->BucketsBucketIDLabelsGet");
 
-            var localVarPath = "/buckets/{bucketID}/labels";
+            var localVarPath = "/api/v2/buckets/{bucketID}/labels";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1290,7 +1290,7 @@ namespace InfluxDB.Client.Generated.Service
             if (bucketID == null)
                 throw new ApiException(400, "Missing required parameter 'bucketID' when calling BucketsService->BucketsBucketIDLabelsGet");
 
-            var localVarPath = "/buckets/{bucketID}/labels";
+            var localVarPath = "/api/v2/buckets/{bucketID}/labels";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1363,7 +1363,7 @@ namespace InfluxDB.Client.Generated.Service
             if (labelID == null)
                 throw new ApiException(400, "Missing required parameter 'labelID' when calling BucketsService->BucketsBucketIDLabelsLabelIDDelete");
 
-            var localVarPath = "/buckets/{bucketID}/labels/{labelID}";
+            var localVarPath = "/api/v2/buckets/{bucketID}/labels/{labelID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1438,7 +1438,7 @@ namespace InfluxDB.Client.Generated.Service
             if (labelID == null)
                 throw new ApiException(400, "Missing required parameter 'labelID' when calling BucketsService->BucketsBucketIDLabelsLabelIDDelete");
 
-            var localVarPath = "/buckets/{bucketID}/labels/{labelID}";
+            var localVarPath = "/api/v2/buckets/{bucketID}/labels/{labelID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1513,7 +1513,7 @@ namespace InfluxDB.Client.Generated.Service
             if (labelMapping == null)
                 throw new ApiException(400, "Missing required parameter 'labelMapping' when calling BucketsService->BucketsBucketIDLabelsPost");
 
-            var localVarPath = "/buckets/{bucketID}/labels";
+            var localVarPath = "/api/v2/buckets/{bucketID}/labels";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1597,7 +1597,7 @@ namespace InfluxDB.Client.Generated.Service
             if (labelMapping == null)
                 throw new ApiException(400, "Missing required parameter 'labelMapping' when calling BucketsService->BucketsBucketIDLabelsPost");
 
-            var localVarPath = "/buckets/{bucketID}/labels";
+            var localVarPath = "/api/v2/buckets/{bucketID}/labels";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1679,7 +1679,7 @@ namespace InfluxDB.Client.Generated.Service
             if (bucketID == null)
                 throw new ApiException(400, "Missing required parameter 'bucketID' when calling BucketsService->BucketsBucketIDLogsGet");
 
-            var localVarPath = "/buckets/{bucketID}/logs";
+            var localVarPath = "/api/v2/buckets/{bucketID}/logs";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1755,7 +1755,7 @@ namespace InfluxDB.Client.Generated.Service
             if (bucketID == null)
                 throw new ApiException(400, "Missing required parameter 'bucketID' when calling BucketsService->BucketsBucketIDLogsGet");
 
-            var localVarPath = "/buckets/{bucketID}/logs";
+            var localVarPath = "/api/v2/buckets/{bucketID}/logs";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1826,7 +1826,7 @@ namespace InfluxDB.Client.Generated.Service
             if (bucketID == null)
                 throw new ApiException(400, "Missing required parameter 'bucketID' when calling BucketsService->BucketsBucketIDMembersGet");
 
-            var localVarPath = "/buckets/{bucketID}/members";
+            var localVarPath = "/api/v2/buckets/{bucketID}/members";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1896,7 +1896,7 @@ namespace InfluxDB.Client.Generated.Service
             if (bucketID == null)
                 throw new ApiException(400, "Missing required parameter 'bucketID' when calling BucketsService->BucketsBucketIDMembersGet");
 
-            var localVarPath = "/buckets/{bucketID}/members";
+            var localVarPath = "/api/v2/buckets/{bucketID}/members";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1970,7 +1970,7 @@ namespace InfluxDB.Client.Generated.Service
             if (addResourceMemberRequestBody == null)
                 throw new ApiException(400, "Missing required parameter 'addResourceMemberRequestBody' when calling BucketsService->BucketsBucketIDMembersPost");
 
-            var localVarPath = "/buckets/{bucketID}/members";
+            var localVarPath = "/api/v2/buckets/{bucketID}/members";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -2054,7 +2054,7 @@ namespace InfluxDB.Client.Generated.Service
             if (addResourceMemberRequestBody == null)
                 throw new ApiException(400, "Missing required parameter 'addResourceMemberRequestBody' when calling BucketsService->BucketsBucketIDMembersPost");
 
-            var localVarPath = "/buckets/{bucketID}/members";
+            var localVarPath = "/api/v2/buckets/{bucketID}/members";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -2136,7 +2136,7 @@ namespace InfluxDB.Client.Generated.Service
             if (bucketID == null)
                 throw new ApiException(400, "Missing required parameter 'bucketID' when calling BucketsService->BucketsBucketIDMembersUserIDDelete");
 
-            var localVarPath = "/buckets/{bucketID}/members/{userID}";
+            var localVarPath = "/api/v2/buckets/{bucketID}/members/{userID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -2211,7 +2211,7 @@ namespace InfluxDB.Client.Generated.Service
             if (bucketID == null)
                 throw new ApiException(400, "Missing required parameter 'bucketID' when calling BucketsService->BucketsBucketIDMembersUserIDDelete");
 
-            var localVarPath = "/buckets/{bucketID}/members/{userID}";
+            var localVarPath = "/api/v2/buckets/{bucketID}/members/{userID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -2281,7 +2281,7 @@ namespace InfluxDB.Client.Generated.Service
             if (bucketID == null)
                 throw new ApiException(400, "Missing required parameter 'bucketID' when calling BucketsService->BucketsBucketIDOwnersGet");
 
-            var localVarPath = "/buckets/{bucketID}/owners";
+            var localVarPath = "/api/v2/buckets/{bucketID}/owners";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -2351,7 +2351,7 @@ namespace InfluxDB.Client.Generated.Service
             if (bucketID == null)
                 throw new ApiException(400, "Missing required parameter 'bucketID' when calling BucketsService->BucketsBucketIDOwnersGet");
 
-            var localVarPath = "/buckets/{bucketID}/owners";
+            var localVarPath = "/api/v2/buckets/{bucketID}/owners";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -2425,7 +2425,7 @@ namespace InfluxDB.Client.Generated.Service
             if (addResourceMemberRequestBody == null)
                 throw new ApiException(400, "Missing required parameter 'addResourceMemberRequestBody' when calling BucketsService->BucketsBucketIDOwnersPost");
 
-            var localVarPath = "/buckets/{bucketID}/owners";
+            var localVarPath = "/api/v2/buckets/{bucketID}/owners";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -2509,7 +2509,7 @@ namespace InfluxDB.Client.Generated.Service
             if (addResourceMemberRequestBody == null)
                 throw new ApiException(400, "Missing required parameter 'addResourceMemberRequestBody' when calling BucketsService->BucketsBucketIDOwnersPost");
 
-            var localVarPath = "/buckets/{bucketID}/owners";
+            var localVarPath = "/api/v2/buckets/{bucketID}/owners";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -2591,7 +2591,7 @@ namespace InfluxDB.Client.Generated.Service
             if (bucketID == null)
                 throw new ApiException(400, "Missing required parameter 'bucketID' when calling BucketsService->BucketsBucketIDOwnersUserIDDelete");
 
-            var localVarPath = "/buckets/{bucketID}/owners/{userID}";
+            var localVarPath = "/api/v2/buckets/{bucketID}/owners/{userID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -2666,7 +2666,7 @@ namespace InfluxDB.Client.Generated.Service
             if (bucketID == null)
                 throw new ApiException(400, "Missing required parameter 'bucketID' when calling BucketsService->BucketsBucketIDOwnersUserIDDelete");
 
-            var localVarPath = "/buckets/{bucketID}/owners/{userID}";
+            var localVarPath = "/api/v2/buckets/{bucketID}/owners/{userID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -2741,7 +2741,7 @@ namespace InfluxDB.Client.Generated.Service
             if (bucket == null)
                 throw new ApiException(400, "Missing required parameter 'bucket' when calling BucketsService->BucketsBucketIDPatch");
 
-            var localVarPath = "/buckets/{bucketID}";
+            var localVarPath = "/api/v2/buckets/{bucketID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -2825,7 +2825,7 @@ namespace InfluxDB.Client.Generated.Service
             if (bucket == null)
                 throw new ApiException(400, "Missing required parameter 'bucket' when calling BucketsService->BucketsBucketIDPatch");
 
-            var localVarPath = "/buckets/{bucketID}";
+            var localVarPath = "/api/v2/buckets/{bucketID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -2908,7 +2908,7 @@ namespace InfluxDB.Client.Generated.Service
         public ApiResponse< Buckets > BucketsGetWithHttpInfo (string zapTraceSpan = null, int? offset = null, int? limit = null, string org = null, string orgID = null, string name = null)
         {
 
-            var localVarPath = "/buckets";
+            var localVarPath = "/api/v2/buckets";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -2987,7 +2987,7 @@ namespace InfluxDB.Client.Generated.Service
         public async System.Threading.Tasks.Task<ApiResponse<Buckets>> BucketsGetAsyncWithHttpInfo (string zapTraceSpan = null, int? offset = null, int? limit = null, string org = null, string orgID = null, string name = null)
         {
 
-            var localVarPath = "/buckets";
+            var localVarPath = "/api/v2/buckets";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -3060,7 +3060,7 @@ namespace InfluxDB.Client.Generated.Service
             if (bucket == null)
                 throw new ApiException(400, "Missing required parameter 'bucket' when calling BucketsService->BucketsPost");
 
-            var localVarPath = "/buckets";
+            var localVarPath = "/api/v2/buckets";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -3138,7 +3138,7 @@ namespace InfluxDB.Client.Generated.Service
             if (bucket == null)
                 throw new ApiException(400, "Missing required parameter 'bucket' when calling BucketsService->BucketsPost");
 
-            var localVarPath = "/buckets";
+            var localVarPath = "/api/v2/buckets";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -3220,7 +3220,7 @@ namespace InfluxDB.Client.Generated.Service
             if (org == null)
                 throw new ApiException(400, "Missing required parameter 'org' when calling BucketsService->SourcesSourceIDBucketsGet");
 
-            var localVarPath = "/sources/{sourceID}/buckets";
+            var localVarPath = "/api/v2/sources/{sourceID}/buckets";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -3296,7 +3296,7 @@ namespace InfluxDB.Client.Generated.Service
             if (org == null)
                 throw new ApiException(400, "Missing required parameter 'org' when calling BucketsService->SourcesSourceIDBucketsGet");
 
-            var localVarPath = "/sources/{sourceID}/buckets";
+            var localVarPath = "/api/v2/sources/{sourceID}/buckets";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);

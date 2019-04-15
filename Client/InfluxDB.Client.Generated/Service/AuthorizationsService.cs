@@ -397,7 +397,7 @@ namespace InfluxDB.Client.Generated.Service
             if (authID == null)
                 throw new ApiException(400, "Missing required parameter 'authID' when calling AuthorizationsService->AuthorizationsAuthIDDelete");
 
-            var localVarPath = "/authorizations/{authID}";
+            var localVarPath = "/api/v2/authorizations/{authID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -466,7 +466,7 @@ namespace InfluxDB.Client.Generated.Service
             if (authID == null)
                 throw new ApiException(400, "Missing required parameter 'authID' when calling AuthorizationsService->AuthorizationsAuthIDDelete");
 
-            var localVarPath = "/authorizations/{authID}";
+            var localVarPath = "/api/v2/authorizations/{authID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -535,7 +535,7 @@ namespace InfluxDB.Client.Generated.Service
             if (authID == null)
                 throw new ApiException(400, "Missing required parameter 'authID' when calling AuthorizationsService->AuthorizationsAuthIDGet");
 
-            var localVarPath = "/authorizations/{authID}";
+            var localVarPath = "/api/v2/authorizations/{authID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -605,7 +605,7 @@ namespace InfluxDB.Client.Generated.Service
             if (authID == null)
                 throw new ApiException(400, "Missing required parameter 'authID' when calling AuthorizationsService->AuthorizationsAuthIDGet");
 
-            var localVarPath = "/authorizations/{authID}";
+            var localVarPath = "/api/v2/authorizations/{authID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -679,7 +679,7 @@ namespace InfluxDB.Client.Generated.Service
             if (authorizationUpdateRequest == null)
                 throw new ApiException(400, "Missing required parameter 'authorizationUpdateRequest' when calling AuthorizationsService->AuthorizationsAuthIDPatch");
 
-            var localVarPath = "/authorizations/{authID}";
+            var localVarPath = "/api/v2/authorizations/{authID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -763,7 +763,7 @@ namespace InfluxDB.Client.Generated.Service
             if (authorizationUpdateRequest == null)
                 throw new ApiException(400, "Missing required parameter 'authorizationUpdateRequest' when calling AuthorizationsService->AuthorizationsAuthIDPatch");
 
-            var localVarPath = "/authorizations/{authID}";
+            var localVarPath = "/api/v2/authorizations/{authID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -844,7 +844,7 @@ namespace InfluxDB.Client.Generated.Service
         public ApiResponse< Authorizations > AuthorizationsGetWithHttpInfo (string zapTraceSpan = null, string userID = null, string user = null, string orgID = null, string org = null)
         {
 
-            var localVarPath = "/authorizations";
+            var localVarPath = "/api/v2/authorizations";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -920,7 +920,7 @@ namespace InfluxDB.Client.Generated.Service
         public async System.Threading.Tasks.Task<ApiResponse<Authorizations>> AuthorizationsGetAsyncWithHttpInfo (string zapTraceSpan = null, string userID = null, string user = null, string orgID = null, string org = null)
         {
 
-            var localVarPath = "/authorizations";
+            var localVarPath = "/api/v2/authorizations";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -992,7 +992,7 @@ namespace InfluxDB.Client.Generated.Service
             if (authorization == null)
                 throw new ApiException(400, "Missing required parameter 'authorization' when calling AuthorizationsService->AuthorizationsPost");
 
-            var localVarPath = "/authorizations";
+            var localVarPath = "/api/v2/authorizations";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1070,7 +1070,7 @@ namespace InfluxDB.Client.Generated.Service
             if (authorization == null)
                 throw new ApiException(400, "Missing required parameter 'authorization' when calling AuthorizationsService->AuthorizationsPost");
 
-            var localVarPath = "/authorizations";
+            var localVarPath = "/api/v2/authorizations";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);

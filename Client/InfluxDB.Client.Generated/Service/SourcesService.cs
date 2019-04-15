@@ -478,7 +478,7 @@ namespace InfluxDB.Client.Generated.Service
             if (org == null)
                 throw new ApiException(400, "Missing required parameter 'org' when calling SourcesService->SourcesGet");
 
-            var localVarPath = "/sources";
+            var localVarPath = "/api/v2/sources";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -548,7 +548,7 @@ namespace InfluxDB.Client.Generated.Service
             if (org == null)
                 throw new ApiException(400, "Missing required parameter 'org' when calling SourcesService->SourcesGet");
 
-            var localVarPath = "/sources";
+            var localVarPath = "/api/v2/sources";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -617,7 +617,7 @@ namespace InfluxDB.Client.Generated.Service
             if (source == null)
                 throw new ApiException(400, "Missing required parameter 'source' when calling SourcesService->SourcesPost");
 
-            var localVarPath = "/sources";
+            var localVarPath = "/api/v2/sources";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -695,7 +695,7 @@ namespace InfluxDB.Client.Generated.Service
             if (source == null)
                 throw new ApiException(400, "Missing required parameter 'source' when calling SourcesService->SourcesPost");
 
-            var localVarPath = "/sources";
+            var localVarPath = "/api/v2/sources";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -777,7 +777,7 @@ namespace InfluxDB.Client.Generated.Service
             if (org == null)
                 throw new ApiException(400, "Missing required parameter 'org' when calling SourcesService->SourcesSourceIDBucketsGet");
 
-            var localVarPath = "/sources/{sourceID}/buckets";
+            var localVarPath = "/api/v2/sources/{sourceID}/buckets";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -853,7 +853,7 @@ namespace InfluxDB.Client.Generated.Service
             if (org == null)
                 throw new ApiException(400, "Missing required parameter 'org' when calling SourcesService->SourcesSourceIDBucketsGet");
 
-            var localVarPath = "/sources/{sourceID}/buckets";
+            var localVarPath = "/api/v2/sources/{sourceID}/buckets";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -920,7 +920,7 @@ namespace InfluxDB.Client.Generated.Service
             if (sourceID == null)
                 throw new ApiException(400, "Missing required parameter 'sourceID' when calling SourcesService->SourcesSourceIDDelete");
 
-            var localVarPath = "/sources/{sourceID}";
+            var localVarPath = "/api/v2/sources/{sourceID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -986,7 +986,7 @@ namespace InfluxDB.Client.Generated.Service
             if (sourceID == null)
                 throw new ApiException(400, "Missing required parameter 'sourceID' when calling SourcesService->SourcesSourceIDDelete");
 
-            var localVarPath = "/sources/{sourceID}";
+            var localVarPath = "/api/v2/sources/{sourceID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1054,7 +1054,7 @@ namespace InfluxDB.Client.Generated.Service
             if (sourceID == null)
                 throw new ApiException(400, "Missing required parameter 'sourceID' when calling SourcesService->SourcesSourceIDGet");
 
-            var localVarPath = "/sources/{sourceID}";
+            var localVarPath = "/api/v2/sources/{sourceID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1124,7 +1124,7 @@ namespace InfluxDB.Client.Generated.Service
             if (sourceID == null)
                 throw new ApiException(400, "Missing required parameter 'sourceID' when calling SourcesService->SourcesSourceIDGet");
 
-            var localVarPath = "/sources/{sourceID}";
+            var localVarPath = "/api/v2/sources/{sourceID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1193,7 +1193,7 @@ namespace InfluxDB.Client.Generated.Service
             if (sourceID == null)
                 throw new ApiException(400, "Missing required parameter 'sourceID' when calling SourcesService->SourcesSourceIDHealthGet");
 
-            var localVarPath = "/sources/{sourceID}/health";
+            var localVarPath = "/api/v2/sources/{sourceID}/health";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1263,7 +1263,7 @@ namespace InfluxDB.Client.Generated.Service
             if (sourceID == null)
                 throw new ApiException(400, "Missing required parameter 'sourceID' when calling SourcesService->SourcesSourceIDHealthGet");
 
-            var localVarPath = "/sources/{sourceID}/health";
+            var localVarPath = "/api/v2/sources/{sourceID}/health";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1337,7 +1337,7 @@ namespace InfluxDB.Client.Generated.Service
             if (source == null)
                 throw new ApiException(400, "Missing required parameter 'source' when calling SourcesService->SourcesSourceIDPatch");
 
-            var localVarPath = "/sources/{sourceID}";
+            var localVarPath = "/api/v2/sources/{sourceID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1421,7 +1421,7 @@ namespace InfluxDB.Client.Generated.Service
             if (source == null)
                 throw new ApiException(400, "Missing required parameter 'source' when calling SourcesService->SourcesSourceIDPatch");
 
-            var localVarPath = "/sources/{sourceID}";
+            var localVarPath = "/api/v2/sources/{sourceID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);

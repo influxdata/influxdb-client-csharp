@@ -245,7 +245,7 @@ namespace InfluxDB.Client.Generated.Service
             if (body == null)
                 throw new ApiException(400, "Missing required parameter 'body' when calling WriteService->WritePost");
 
-            var localVarPath = "/write";
+            var localVarPath = "/api/v2/write";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -349,7 +349,7 @@ namespace InfluxDB.Client.Generated.Service
             if (body == null)
                 throw new ApiException(400, "Missing required parameter 'body' when calling WriteService->WritePost");
 
-            var localVarPath = "/write";
+            var localVarPath = "/api/v2/write";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);

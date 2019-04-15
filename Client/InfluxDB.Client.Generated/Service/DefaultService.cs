@@ -273,7 +273,7 @@ namespace InfluxDB.Client.Generated.Service
         public ApiResponse< Routes > RootGetWithHttpInfo (string zapTraceSpan = null)
         {
 
-            var localVarPath = "/";
+            var localVarPath = "/api/v2/";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -337,7 +337,7 @@ namespace InfluxDB.Client.Generated.Service
         public async System.Threading.Tasks.Task<ApiResponse<Routes>> RootGetAsyncWithHttpInfo (string zapTraceSpan = null)
         {
 
-            var localVarPath = "/";
+            var localVarPath = "/api/v2/";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -399,7 +399,7 @@ namespace InfluxDB.Client.Generated.Service
         public ApiResponse<Object> SigninPostWithHttpInfo (string zapTraceSpan = null)
         {
 
-            var localVarPath = "/signin";
+            var localVarPath = "/api/v2/signin";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -468,7 +468,7 @@ namespace InfluxDB.Client.Generated.Service
         public async System.Threading.Tasks.Task<ApiResponse<Object>> SigninPostAsyncWithHttpInfo (string zapTraceSpan = null)
         {
 
-            var localVarPath = "/signin";
+            var localVarPath = "/api/v2/signin";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -536,7 +536,7 @@ namespace InfluxDB.Client.Generated.Service
         public ApiResponse<Object> SignoutPostWithHttpInfo (string zapTraceSpan = null)
         {
 
-            var localVarPath = "/signout";
+            var localVarPath = "/api/v2/signout";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -599,7 +599,7 @@ namespace InfluxDB.Client.Generated.Service
         public async System.Threading.Tasks.Task<ApiResponse<Object>> SignoutPostAsyncWithHttpInfo (string zapTraceSpan = null)
         {
 
-            var localVarPath = "/signout";
+            var localVarPath = "/api/v2/signout";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);

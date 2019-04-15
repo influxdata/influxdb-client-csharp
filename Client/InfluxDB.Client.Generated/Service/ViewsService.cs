@@ -261,7 +261,7 @@ namespace InfluxDB.Client.Generated.Service
             if (cellID == null)
                 throw new ApiException(400, "Missing required parameter 'cellID' when calling ViewsService->DashboardsDashboardIDCellsCellIDViewGet");
 
-            var localVarPath = "/dashboards/{dashboardID}/cells/{cellID}/view";
+            var localVarPath = "/api/v2/dashboards/{dashboardID}/cells/{cellID}/view";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -337,7 +337,7 @@ namespace InfluxDB.Client.Generated.Service
             if (cellID == null)
                 throw new ApiException(400, "Missing required parameter 'cellID' when calling ViewsService->DashboardsDashboardIDCellsCellIDViewGet");
 
-            var localVarPath = "/dashboards/{dashboardID}/cells/{cellID}/view";
+            var localVarPath = "/api/v2/dashboards/{dashboardID}/cells/{cellID}/view";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -417,7 +417,7 @@ namespace InfluxDB.Client.Generated.Service
             if (view == null)
                 throw new ApiException(400, "Missing required parameter 'view' when calling ViewsService->DashboardsDashboardIDCellsCellIDViewPatch");
 
-            var localVarPath = "/dashboards/{dashboardID}/cells/{cellID}/view";
+            var localVarPath = "/api/v2/dashboards/{dashboardID}/cells/{cellID}/view";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -507,7 +507,7 @@ namespace InfluxDB.Client.Generated.Service
             if (view == null)
                 throw new ApiException(400, "Missing required parameter 'view' when calling ViewsService->DashboardsDashboardIDCellsCellIDViewPatch");
 
-            var localVarPath = "/dashboards/{dashboardID}/cells/{cellID}/view";
+            var localVarPath = "/api/v2/dashboards/{dashboardID}/cells/{cellID}/view";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);

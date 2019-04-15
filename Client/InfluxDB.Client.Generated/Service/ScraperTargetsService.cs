@@ -874,7 +874,7 @@ namespace InfluxDB.Client.Generated.Service
             if (orgID == null)
                 throw new ApiException(400, "Missing required parameter 'orgID' when calling ScraperTargetsService->ScrapersGet");
 
-            var localVarPath = "/scrapers";
+            var localVarPath = "/api/v2/scrapers";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -944,7 +944,7 @@ namespace InfluxDB.Client.Generated.Service
             if (orgID == null)
                 throw new ApiException(400, "Missing required parameter 'orgID' when calling ScraperTargetsService->ScrapersGet");
 
-            var localVarPath = "/scrapers";
+            var localVarPath = "/api/v2/scrapers";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1011,7 +1011,7 @@ namespace InfluxDB.Client.Generated.Service
             if (scraperTargetRequest == null)
                 throw new ApiException(400, "Missing required parameter 'scraperTargetRequest' when calling ScraperTargetsService->ScrapersPost");
 
-            var localVarPath = "/scrapers";
+            var localVarPath = "/api/v2/scrapers";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1086,7 +1086,7 @@ namespace InfluxDB.Client.Generated.Service
             if (scraperTargetRequest == null)
                 throw new ApiException(400, "Missing required parameter 'scraperTargetRequest' when calling ScraperTargetsService->ScrapersPost");
 
-            var localVarPath = "/scrapers";
+            var localVarPath = "/api/v2/scrapers";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1161,7 +1161,7 @@ namespace InfluxDB.Client.Generated.Service
             if (scraperTargetID == null)
                 throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->ScrapersScraperTargetIDDelete");
 
-            var localVarPath = "/scrapers/{scraperTargetID}";
+            var localVarPath = "/api/v2/scrapers/{scraperTargetID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1230,7 +1230,7 @@ namespace InfluxDB.Client.Generated.Service
             if (scraperTargetID == null)
                 throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->ScrapersScraperTargetIDDelete");
 
-            var localVarPath = "/scrapers/{scraperTargetID}";
+            var localVarPath = "/api/v2/scrapers/{scraperTargetID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1299,7 +1299,7 @@ namespace InfluxDB.Client.Generated.Service
             if (scraperTargetID == null)
                 throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->ScrapersScraperTargetIDGet");
 
-            var localVarPath = "/scrapers/{scraperTargetID}";
+            var localVarPath = "/api/v2/scrapers/{scraperTargetID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1369,7 +1369,7 @@ namespace InfluxDB.Client.Generated.Service
             if (scraperTargetID == null)
                 throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->ScrapersScraperTargetIDGet");
 
-            var localVarPath = "/scrapers/{scraperTargetID}";
+            var localVarPath = "/api/v2/scrapers/{scraperTargetID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1438,7 +1438,7 @@ namespace InfluxDB.Client.Generated.Service
             if (scraperTargetID == null)
                 throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->ScrapersScraperTargetIDLabelsGet");
 
-            var localVarPath = "/scrapers/{scraperTargetID}/labels";
+            var localVarPath = "/api/v2/scrapers/{scraperTargetID}/labels";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1508,7 +1508,7 @@ namespace InfluxDB.Client.Generated.Service
             if (scraperTargetID == null)
                 throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->ScrapersScraperTargetIDLabelsGet");
 
-            var localVarPath = "/scrapers/{scraperTargetID}/labels";
+            var localVarPath = "/api/v2/scrapers/{scraperTargetID}/labels";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1581,7 +1581,7 @@ namespace InfluxDB.Client.Generated.Service
             if (labelID == null)
                 throw new ApiException(400, "Missing required parameter 'labelID' when calling ScraperTargetsService->ScrapersScraperTargetIDLabelsLabelIDDelete");
 
-            var localVarPath = "/scrapers/{scraperTargetID}/labels/{labelID}";
+            var localVarPath = "/api/v2/scrapers/{scraperTargetID}/labels/{labelID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1656,7 +1656,7 @@ namespace InfluxDB.Client.Generated.Service
             if (labelID == null)
                 throw new ApiException(400, "Missing required parameter 'labelID' when calling ScraperTargetsService->ScrapersScraperTargetIDLabelsLabelIDDelete");
 
-            var localVarPath = "/scrapers/{scraperTargetID}/labels/{labelID}";
+            var localVarPath = "/api/v2/scrapers/{scraperTargetID}/labels/{labelID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1735,7 +1735,7 @@ namespace InfluxDB.Client.Generated.Service
             if (label == null)
                 throw new ApiException(400, "Missing required parameter 'label' when calling ScraperTargetsService->ScrapersScraperTargetIDLabelsLabelIDPatch");
 
-            var localVarPath = "/scrapers/{scraperTargetID}/labels/{labelID}";
+            var localVarPath = "/api/v2/scrapers/{scraperTargetID}/labels/{labelID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1824,7 +1824,7 @@ namespace InfluxDB.Client.Generated.Service
             if (label == null)
                 throw new ApiException(400, "Missing required parameter 'label' when calling ScraperTargetsService->ScrapersScraperTargetIDLabelsLabelIDPatch");
 
-            var localVarPath = "/scrapers/{scraperTargetID}/labels/{labelID}";
+            var localVarPath = "/api/v2/scrapers/{scraperTargetID}/labels/{labelID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1908,7 +1908,7 @@ namespace InfluxDB.Client.Generated.Service
             if (labelMapping == null)
                 throw new ApiException(400, "Missing required parameter 'labelMapping' when calling ScraperTargetsService->ScrapersScraperTargetIDLabelsPost");
 
-            var localVarPath = "/scrapers/{scraperTargetID}/labels";
+            var localVarPath = "/api/v2/scrapers/{scraperTargetID}/labels";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1992,7 +1992,7 @@ namespace InfluxDB.Client.Generated.Service
             if (labelMapping == null)
                 throw new ApiException(400, "Missing required parameter 'labelMapping' when calling ScraperTargetsService->ScrapersScraperTargetIDLabelsPost");
 
-            var localVarPath = "/scrapers/{scraperTargetID}/labels";
+            var localVarPath = "/api/v2/scrapers/{scraperTargetID}/labels";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -2070,7 +2070,7 @@ namespace InfluxDB.Client.Generated.Service
             if (scraperTargetID == null)
                 throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->ScrapersScraperTargetIDMembersGet");
 
-            var localVarPath = "/scrapers/{scraperTargetID}/members";
+            var localVarPath = "/api/v2/scrapers/{scraperTargetID}/members";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -2140,7 +2140,7 @@ namespace InfluxDB.Client.Generated.Service
             if (scraperTargetID == null)
                 throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->ScrapersScraperTargetIDMembersGet");
 
-            var localVarPath = "/scrapers/{scraperTargetID}/members";
+            var localVarPath = "/api/v2/scrapers/{scraperTargetID}/members";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -2214,7 +2214,7 @@ namespace InfluxDB.Client.Generated.Service
             if (addResourceMemberRequestBody == null)
                 throw new ApiException(400, "Missing required parameter 'addResourceMemberRequestBody' when calling ScraperTargetsService->ScrapersScraperTargetIDMembersPost");
 
-            var localVarPath = "/scrapers/{scraperTargetID}/members";
+            var localVarPath = "/api/v2/scrapers/{scraperTargetID}/members";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -2298,7 +2298,7 @@ namespace InfluxDB.Client.Generated.Service
             if (addResourceMemberRequestBody == null)
                 throw new ApiException(400, "Missing required parameter 'addResourceMemberRequestBody' when calling ScraperTargetsService->ScrapersScraperTargetIDMembersPost");
 
-            var localVarPath = "/scrapers/{scraperTargetID}/members";
+            var localVarPath = "/api/v2/scrapers/{scraperTargetID}/members";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -2380,7 +2380,7 @@ namespace InfluxDB.Client.Generated.Service
             if (scraperTargetID == null)
                 throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->ScrapersScraperTargetIDMembersUserIDDelete");
 
-            var localVarPath = "/scrapers/{scraperTargetID}/members/{userID}";
+            var localVarPath = "/api/v2/scrapers/{scraperTargetID}/members/{userID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -2455,7 +2455,7 @@ namespace InfluxDB.Client.Generated.Service
             if (scraperTargetID == null)
                 throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->ScrapersScraperTargetIDMembersUserIDDelete");
 
-            var localVarPath = "/scrapers/{scraperTargetID}/members/{userID}";
+            var localVarPath = "/api/v2/scrapers/{scraperTargetID}/members/{userID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -2525,7 +2525,7 @@ namespace InfluxDB.Client.Generated.Service
             if (scraperTargetID == null)
                 throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->ScrapersScraperTargetIDOwnersGet");
 
-            var localVarPath = "/scrapers/{scraperTargetID}/owners";
+            var localVarPath = "/api/v2/scrapers/{scraperTargetID}/owners";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -2595,7 +2595,7 @@ namespace InfluxDB.Client.Generated.Service
             if (scraperTargetID == null)
                 throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->ScrapersScraperTargetIDOwnersGet");
 
-            var localVarPath = "/scrapers/{scraperTargetID}/owners";
+            var localVarPath = "/api/v2/scrapers/{scraperTargetID}/owners";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -2669,7 +2669,7 @@ namespace InfluxDB.Client.Generated.Service
             if (addResourceMemberRequestBody == null)
                 throw new ApiException(400, "Missing required parameter 'addResourceMemberRequestBody' when calling ScraperTargetsService->ScrapersScraperTargetIDOwnersPost");
 
-            var localVarPath = "/scrapers/{scraperTargetID}/owners";
+            var localVarPath = "/api/v2/scrapers/{scraperTargetID}/owners";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -2753,7 +2753,7 @@ namespace InfluxDB.Client.Generated.Service
             if (addResourceMemberRequestBody == null)
                 throw new ApiException(400, "Missing required parameter 'addResourceMemberRequestBody' when calling ScraperTargetsService->ScrapersScraperTargetIDOwnersPost");
 
-            var localVarPath = "/scrapers/{scraperTargetID}/owners";
+            var localVarPath = "/api/v2/scrapers/{scraperTargetID}/owners";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -2835,7 +2835,7 @@ namespace InfluxDB.Client.Generated.Service
             if (scraperTargetID == null)
                 throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->ScrapersScraperTargetIDOwnersUserIDDelete");
 
-            var localVarPath = "/scrapers/{scraperTargetID}/owners/{userID}";
+            var localVarPath = "/api/v2/scrapers/{scraperTargetID}/owners/{userID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -2910,7 +2910,7 @@ namespace InfluxDB.Client.Generated.Service
             if (scraperTargetID == null)
                 throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->ScrapersScraperTargetIDOwnersUserIDDelete");
 
-            var localVarPath = "/scrapers/{scraperTargetID}/owners/{userID}";
+            var localVarPath = "/api/v2/scrapers/{scraperTargetID}/owners/{userID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -2985,7 +2985,7 @@ namespace InfluxDB.Client.Generated.Service
             if (scraperTargetRequest == null)
                 throw new ApiException(400, "Missing required parameter 'scraperTargetRequest' when calling ScraperTargetsService->ScrapersScraperTargetIDPatch");
 
-            var localVarPath = "/scrapers/{scraperTargetID}";
+            var localVarPath = "/api/v2/scrapers/{scraperTargetID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -3069,7 +3069,7 @@ namespace InfluxDB.Client.Generated.Service
             if (scraperTargetRequest == null)
                 throw new ApiException(400, "Missing required parameter 'scraperTargetRequest' when calling ScraperTargetsService->ScrapersScraperTargetIDPatch");
 
-            var localVarPath = "/scrapers/{scraperTargetID}";
+            var localVarPath = "/api/v2/scrapers/{scraperTargetID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);

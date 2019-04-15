@@ -585,7 +585,7 @@ namespace InfluxDB.Client.Generated.Service
         public ApiResponse< Variables > VariablesGetWithHttpInfo (string zapTraceSpan = null, string org = null, string orgID = null)
         {
 
-            var localVarPath = "/variables";
+            var localVarPath = "/api/v2/variables";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -655,7 +655,7 @@ namespace InfluxDB.Client.Generated.Service
         public async System.Threading.Tasks.Task<ApiResponse<Variables>> VariablesGetAsyncWithHttpInfo (string zapTraceSpan = null, string org = null, string orgID = null)
         {
 
-            var localVarPath = "/variables";
+            var localVarPath = "/api/v2/variables";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -725,7 +725,7 @@ namespace InfluxDB.Client.Generated.Service
             if (variable == null)
                 throw new ApiException(400, "Missing required parameter 'variable' when calling VariablesService->VariablesPost");
 
-            var localVarPath = "/variables";
+            var localVarPath = "/api/v2/variables";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -803,7 +803,7 @@ namespace InfluxDB.Client.Generated.Service
             if (variable == null)
                 throw new ApiException(400, "Missing required parameter 'variable' when calling VariablesService->VariablesPost");
 
-            var localVarPath = "/variables";
+            var localVarPath = "/api/v2/variables";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -879,7 +879,7 @@ namespace InfluxDB.Client.Generated.Service
             if (variableID == null)
                 throw new ApiException(400, "Missing required parameter 'variableID' when calling VariablesService->VariablesVariableIDDelete");
 
-            var localVarPath = "/variables/{variableID}";
+            var localVarPath = "/api/v2/variables/{variableID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -948,7 +948,7 @@ namespace InfluxDB.Client.Generated.Service
             if (variableID == null)
                 throw new ApiException(400, "Missing required parameter 'variableID' when calling VariablesService->VariablesVariableIDDelete");
 
-            var localVarPath = "/variables/{variableID}";
+            var localVarPath = "/api/v2/variables/{variableID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1017,7 +1017,7 @@ namespace InfluxDB.Client.Generated.Service
             if (variableID == null)
                 throw new ApiException(400, "Missing required parameter 'variableID' when calling VariablesService->VariablesVariableIDGet");
 
-            var localVarPath = "/variables/{variableID}";
+            var localVarPath = "/api/v2/variables/{variableID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1087,7 +1087,7 @@ namespace InfluxDB.Client.Generated.Service
             if (variableID == null)
                 throw new ApiException(400, "Missing required parameter 'variableID' when calling VariablesService->VariablesVariableIDGet");
 
-            var localVarPath = "/variables/{variableID}";
+            var localVarPath = "/api/v2/variables/{variableID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1156,7 +1156,7 @@ namespace InfluxDB.Client.Generated.Service
             if (variableID == null)
                 throw new ApiException(400, "Missing required parameter 'variableID' when calling VariablesService->VariablesVariableIDLabelsGet");
 
-            var localVarPath = "/variables/{variableID}/labels";
+            var localVarPath = "/api/v2/variables/{variableID}/labels";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1226,7 +1226,7 @@ namespace InfluxDB.Client.Generated.Service
             if (variableID == null)
                 throw new ApiException(400, "Missing required parameter 'variableID' when calling VariablesService->VariablesVariableIDLabelsGet");
 
-            var localVarPath = "/variables/{variableID}/labels";
+            var localVarPath = "/api/v2/variables/{variableID}/labels";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1299,7 +1299,7 @@ namespace InfluxDB.Client.Generated.Service
             if (labelID == null)
                 throw new ApiException(400, "Missing required parameter 'labelID' when calling VariablesService->VariablesVariableIDLabelsLabelIDDelete");
 
-            var localVarPath = "/variables/{variableID}/labels/{labelID}";
+            var localVarPath = "/api/v2/variables/{variableID}/labels/{labelID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1374,7 +1374,7 @@ namespace InfluxDB.Client.Generated.Service
             if (labelID == null)
                 throw new ApiException(400, "Missing required parameter 'labelID' when calling VariablesService->VariablesVariableIDLabelsLabelIDDelete");
 
-            var localVarPath = "/variables/{variableID}/labels/{labelID}";
+            var localVarPath = "/api/v2/variables/{variableID}/labels/{labelID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1449,7 +1449,7 @@ namespace InfluxDB.Client.Generated.Service
             if (labelMapping == null)
                 throw new ApiException(400, "Missing required parameter 'labelMapping' when calling VariablesService->VariablesVariableIDLabelsPost");
 
-            var localVarPath = "/variables/{variableID}/labels";
+            var localVarPath = "/api/v2/variables/{variableID}/labels";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1533,7 +1533,7 @@ namespace InfluxDB.Client.Generated.Service
             if (labelMapping == null)
                 throw new ApiException(400, "Missing required parameter 'labelMapping' when calling VariablesService->VariablesVariableIDLabelsPost");
 
-            var localVarPath = "/variables/{variableID}/labels";
+            var localVarPath = "/api/v2/variables/{variableID}/labels";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1616,7 +1616,7 @@ namespace InfluxDB.Client.Generated.Service
             if (variable == null)
                 throw new ApiException(400, "Missing required parameter 'variable' when calling VariablesService->VariablesVariableIDPatch");
 
-            var localVarPath = "/variables/{variableID}";
+            var localVarPath = "/api/v2/variables/{variableID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1700,7 +1700,7 @@ namespace InfluxDB.Client.Generated.Service
             if (variable == null)
                 throw new ApiException(400, "Missing required parameter 'variable' when calling VariablesService->VariablesVariableIDPatch");
 
-            var localVarPath = "/variables/{variableID}";
+            var localVarPath = "/api/v2/variables/{variableID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1783,7 +1783,7 @@ namespace InfluxDB.Client.Generated.Service
             if (variable == null)
                 throw new ApiException(400, "Missing required parameter 'variable' when calling VariablesService->VariablesVariableIDPut");
 
-            var localVarPath = "/variables/{variableID}";
+            var localVarPath = "/api/v2/variables/{variableID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1867,7 +1867,7 @@ namespace InfluxDB.Client.Generated.Service
             if (variable == null)
                 throw new ApiException(400, "Missing required parameter 'variable' when calling VariablesService->VariablesVariableIDPut");
 
-            var localVarPath = "/variables/{variableID}";
+            var localVarPath = "/api/v2/variables/{variableID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);

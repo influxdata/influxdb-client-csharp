@@ -1199,7 +1199,7 @@ namespace InfluxDB.Client.Generated.Service
         public ApiResponse< Tasks > TasksGetWithHttpInfo (string zapTraceSpan = null, string after = null, string user = null, string org = null, string orgID = null, int? limit = null)
         {
 
-            var localVarPath = "/tasks";
+            var localVarPath = "/api/v2/tasks";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1278,7 +1278,7 @@ namespace InfluxDB.Client.Generated.Service
         public async System.Threading.Tasks.Task<ApiResponse<Tasks>> TasksGetAsyncWithHttpInfo (string zapTraceSpan = null, string after = null, string user = null, string org = null, string orgID = null, int? limit = null)
         {
 
-            var localVarPath = "/tasks";
+            var localVarPath = "/api/v2/tasks";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1351,7 +1351,7 @@ namespace InfluxDB.Client.Generated.Service
             if (taskCreateRequest == null)
                 throw new ApiException(400, "Missing required parameter 'taskCreateRequest' when calling TasksService->TasksPost");
 
-            var localVarPath = "/tasks";
+            var localVarPath = "/api/v2/tasks";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1429,7 +1429,7 @@ namespace InfluxDB.Client.Generated.Service
             if (taskCreateRequest == null)
                 throw new ApiException(400, "Missing required parameter 'taskCreateRequest' when calling TasksService->TasksPost");
 
-            var localVarPath = "/tasks";
+            var localVarPath = "/api/v2/tasks";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1505,7 +1505,7 @@ namespace InfluxDB.Client.Generated.Service
             if (taskID == null)
                 throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->TasksTaskIDDelete");
 
-            var localVarPath = "/tasks/{taskID}";
+            var localVarPath = "/api/v2/tasks/{taskID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1574,7 +1574,7 @@ namespace InfluxDB.Client.Generated.Service
             if (taskID == null)
                 throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->TasksTaskIDDelete");
 
-            var localVarPath = "/tasks/{taskID}";
+            var localVarPath = "/api/v2/tasks/{taskID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1643,7 +1643,7 @@ namespace InfluxDB.Client.Generated.Service
             if (taskID == null)
                 throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->TasksTaskIDGet");
 
-            var localVarPath = "/tasks/{taskID}";
+            var localVarPath = "/api/v2/tasks/{taskID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1713,7 +1713,7 @@ namespace InfluxDB.Client.Generated.Service
             if (taskID == null)
                 throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->TasksTaskIDGet");
 
-            var localVarPath = "/tasks/{taskID}";
+            var localVarPath = "/api/v2/tasks/{taskID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1782,7 +1782,7 @@ namespace InfluxDB.Client.Generated.Service
             if (taskID == null)
                 throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->TasksTaskIDLabelsGet");
 
-            var localVarPath = "/tasks/{taskID}/labels";
+            var localVarPath = "/api/v2/tasks/{taskID}/labels";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1852,7 +1852,7 @@ namespace InfluxDB.Client.Generated.Service
             if (taskID == null)
                 throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->TasksTaskIDLabelsGet");
 
-            var localVarPath = "/tasks/{taskID}/labels";
+            var localVarPath = "/api/v2/tasks/{taskID}/labels";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1925,7 +1925,7 @@ namespace InfluxDB.Client.Generated.Service
             if (labelID == null)
                 throw new ApiException(400, "Missing required parameter 'labelID' when calling TasksService->TasksTaskIDLabelsLabelIDDelete");
 
-            var localVarPath = "/tasks/{taskID}/labels/{labelID}";
+            var localVarPath = "/api/v2/tasks/{taskID}/labels/{labelID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -2000,7 +2000,7 @@ namespace InfluxDB.Client.Generated.Service
             if (labelID == null)
                 throw new ApiException(400, "Missing required parameter 'labelID' when calling TasksService->TasksTaskIDLabelsLabelIDDelete");
 
-            var localVarPath = "/tasks/{taskID}/labels/{labelID}";
+            var localVarPath = "/api/v2/tasks/{taskID}/labels/{labelID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -2075,7 +2075,7 @@ namespace InfluxDB.Client.Generated.Service
             if (labelMapping == null)
                 throw new ApiException(400, "Missing required parameter 'labelMapping' when calling TasksService->TasksTaskIDLabelsPost");
 
-            var localVarPath = "/tasks/{taskID}/labels";
+            var localVarPath = "/api/v2/tasks/{taskID}/labels";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -2159,7 +2159,7 @@ namespace InfluxDB.Client.Generated.Service
             if (labelMapping == null)
                 throw new ApiException(400, "Missing required parameter 'labelMapping' when calling TasksService->TasksTaskIDLabelsPost");
 
-            var localVarPath = "/tasks/{taskID}/labels";
+            var localVarPath = "/api/v2/tasks/{taskID}/labels";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -2237,7 +2237,7 @@ namespace InfluxDB.Client.Generated.Service
             if (taskID == null)
                 throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->TasksTaskIDLogsGet");
 
-            var localVarPath = "/tasks/{taskID}/logs";
+            var localVarPath = "/api/v2/tasks/{taskID}/logs";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -2307,7 +2307,7 @@ namespace InfluxDB.Client.Generated.Service
             if (taskID == null)
                 throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->TasksTaskIDLogsGet");
 
-            var localVarPath = "/tasks/{taskID}/logs";
+            var localVarPath = "/api/v2/tasks/{taskID}/logs";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -2376,7 +2376,7 @@ namespace InfluxDB.Client.Generated.Service
             if (taskID == null)
                 throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->TasksTaskIDMembersGet");
 
-            var localVarPath = "/tasks/{taskID}/members";
+            var localVarPath = "/api/v2/tasks/{taskID}/members";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -2446,7 +2446,7 @@ namespace InfluxDB.Client.Generated.Service
             if (taskID == null)
                 throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->TasksTaskIDMembersGet");
 
-            var localVarPath = "/tasks/{taskID}/members";
+            var localVarPath = "/api/v2/tasks/{taskID}/members";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -2520,7 +2520,7 @@ namespace InfluxDB.Client.Generated.Service
             if (addResourceMemberRequestBody == null)
                 throw new ApiException(400, "Missing required parameter 'addResourceMemberRequestBody' when calling TasksService->TasksTaskIDMembersPost");
 
-            var localVarPath = "/tasks/{taskID}/members";
+            var localVarPath = "/api/v2/tasks/{taskID}/members";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -2604,7 +2604,7 @@ namespace InfluxDB.Client.Generated.Service
             if (addResourceMemberRequestBody == null)
                 throw new ApiException(400, "Missing required parameter 'addResourceMemberRequestBody' when calling TasksService->TasksTaskIDMembersPost");
 
-            var localVarPath = "/tasks/{taskID}/members";
+            var localVarPath = "/api/v2/tasks/{taskID}/members";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -2686,7 +2686,7 @@ namespace InfluxDB.Client.Generated.Service
             if (taskID == null)
                 throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->TasksTaskIDMembersUserIDDelete");
 
-            var localVarPath = "/tasks/{taskID}/members/{userID}";
+            var localVarPath = "/api/v2/tasks/{taskID}/members/{userID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -2761,7 +2761,7 @@ namespace InfluxDB.Client.Generated.Service
             if (taskID == null)
                 throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->TasksTaskIDMembersUserIDDelete");
 
-            var localVarPath = "/tasks/{taskID}/members/{userID}";
+            var localVarPath = "/api/v2/tasks/{taskID}/members/{userID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -2831,7 +2831,7 @@ namespace InfluxDB.Client.Generated.Service
             if (taskID == null)
                 throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->TasksTaskIDOwnersGet");
 
-            var localVarPath = "/tasks/{taskID}/owners";
+            var localVarPath = "/api/v2/tasks/{taskID}/owners";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -2901,7 +2901,7 @@ namespace InfluxDB.Client.Generated.Service
             if (taskID == null)
                 throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->TasksTaskIDOwnersGet");
 
-            var localVarPath = "/tasks/{taskID}/owners";
+            var localVarPath = "/api/v2/tasks/{taskID}/owners";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -2975,7 +2975,7 @@ namespace InfluxDB.Client.Generated.Service
             if (addResourceMemberRequestBody == null)
                 throw new ApiException(400, "Missing required parameter 'addResourceMemberRequestBody' when calling TasksService->TasksTaskIDOwnersPost");
 
-            var localVarPath = "/tasks/{taskID}/owners";
+            var localVarPath = "/api/v2/tasks/{taskID}/owners";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -3059,7 +3059,7 @@ namespace InfluxDB.Client.Generated.Service
             if (addResourceMemberRequestBody == null)
                 throw new ApiException(400, "Missing required parameter 'addResourceMemberRequestBody' when calling TasksService->TasksTaskIDOwnersPost");
 
-            var localVarPath = "/tasks/{taskID}/owners";
+            var localVarPath = "/api/v2/tasks/{taskID}/owners";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -3141,7 +3141,7 @@ namespace InfluxDB.Client.Generated.Service
             if (taskID == null)
                 throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->TasksTaskIDOwnersUserIDDelete");
 
-            var localVarPath = "/tasks/taskID}/owners/{userID}";
+            var localVarPath = "/api/v2/tasks/taskID}/owners/{userID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -3216,7 +3216,7 @@ namespace InfluxDB.Client.Generated.Service
             if (taskID == null)
                 throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->TasksTaskIDOwnersUserIDDelete");
 
-            var localVarPath = "/tasks/taskID}/owners/{userID}";
+            var localVarPath = "/api/v2/tasks/taskID}/owners/{userID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -3291,7 +3291,7 @@ namespace InfluxDB.Client.Generated.Service
             if (taskUpdateRequest == null)
                 throw new ApiException(400, "Missing required parameter 'taskUpdateRequest' when calling TasksService->TasksTaskIDPatch");
 
-            var localVarPath = "/tasks/{taskID}";
+            var localVarPath = "/api/v2/tasks/{taskID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -3375,7 +3375,7 @@ namespace InfluxDB.Client.Generated.Service
             if (taskUpdateRequest == null)
                 throw new ApiException(400, "Missing required parameter 'taskUpdateRequest' when calling TasksService->TasksTaskIDPatch");
 
-            var localVarPath = "/tasks/{taskID}";
+            var localVarPath = "/api/v2/tasks/{taskID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -3461,7 +3461,7 @@ namespace InfluxDB.Client.Generated.Service
             if (taskID == null)
                 throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->TasksTaskIDRunsGet");
 
-            var localVarPath = "/tasks/{taskID}/runs";
+            var localVarPath = "/api/v2/tasks/{taskID}/runs";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -3543,7 +3543,7 @@ namespace InfluxDB.Client.Generated.Service
             if (taskID == null)
                 throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->TasksTaskIDRunsGet");
 
-            var localVarPath = "/tasks/{taskID}/runs";
+            var localVarPath = "/api/v2/tasks/{taskID}/runs";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -3616,7 +3616,7 @@ namespace InfluxDB.Client.Generated.Service
             if (taskID == null)
                 throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->TasksTaskIDRunsPost");
 
-            var localVarPath = "/tasks/{taskID}/runs";
+            var localVarPath = "/api/v2/tasks/{taskID}/runs";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -3694,7 +3694,7 @@ namespace InfluxDB.Client.Generated.Service
             if (taskID == null)
                 throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->TasksTaskIDRunsPost");
 
-            var localVarPath = "/tasks/{taskID}/runs";
+            var localVarPath = "/api/v2/tasks/{taskID}/runs";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -3775,7 +3775,7 @@ namespace InfluxDB.Client.Generated.Service
             if (runID == null)
                 throw new ApiException(400, "Missing required parameter 'runID' when calling TasksService->TasksTaskIDRunsRunIDDelete");
 
-            var localVarPath = "/tasks/{taskID}/runs/{runID}";
+            var localVarPath = "/api/v2/tasks/{taskID}/runs/{runID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -3850,7 +3850,7 @@ namespace InfluxDB.Client.Generated.Service
             if (runID == null)
                 throw new ApiException(400, "Missing required parameter 'runID' when calling TasksService->TasksTaskIDRunsRunIDDelete");
 
-            var localVarPath = "/tasks/{taskID}/runs/{runID}";
+            var localVarPath = "/api/v2/tasks/{taskID}/runs/{runID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -3925,7 +3925,7 @@ namespace InfluxDB.Client.Generated.Service
             if (runID == null)
                 throw new ApiException(400, "Missing required parameter 'runID' when calling TasksService->TasksTaskIDRunsRunIDGet");
 
-            var localVarPath = "/tasks/{taskID}/runs/{runID}";
+            var localVarPath = "/api/v2/tasks/{taskID}/runs/{runID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -4001,7 +4001,7 @@ namespace InfluxDB.Client.Generated.Service
             if (runID == null)
                 throw new ApiException(400, "Missing required parameter 'runID' when calling TasksService->TasksTaskIDRunsRunIDGet");
 
-            var localVarPath = "/tasks/{taskID}/runs/{runID}";
+            var localVarPath = "/api/v2/tasks/{taskID}/runs/{runID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -4076,7 +4076,7 @@ namespace InfluxDB.Client.Generated.Service
             if (runID == null)
                 throw new ApiException(400, "Missing required parameter 'runID' when calling TasksService->TasksTaskIDRunsRunIDLogsGet");
 
-            var localVarPath = "/tasks/{taskID}/runs/{runID}/logs";
+            var localVarPath = "/api/v2/tasks/{taskID}/runs/{runID}/logs";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -4152,7 +4152,7 @@ namespace InfluxDB.Client.Generated.Service
             if (runID == null)
                 throw new ApiException(400, "Missing required parameter 'runID' when calling TasksService->TasksTaskIDRunsRunIDLogsGet");
 
-            var localVarPath = "/tasks/{taskID}/runs/{runID}/logs";
+            var localVarPath = "/api/v2/tasks/{taskID}/runs/{runID}/logs";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -4227,7 +4227,7 @@ namespace InfluxDB.Client.Generated.Service
             if (runID == null)
                 throw new ApiException(400, "Missing required parameter 'runID' when calling TasksService->TasksTaskIDRunsRunIDRetryPost");
 
-            var localVarPath = "/tasks/{taskID}/runs/{runID}/retry";
+            var localVarPath = "/api/v2/tasks/{taskID}/runs/{runID}/retry";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -4303,7 +4303,7 @@ namespace InfluxDB.Client.Generated.Service
             if (runID == null)
                 throw new ApiException(400, "Missing required parameter 'runID' when calling TasksService->TasksTaskIDRunsRunIDRetryPost");
 
-            var localVarPath = "/tasks/{taskID}/runs/{runID}/retry";
+            var localVarPath = "/api/v2/tasks/{taskID}/runs/{runID}/retry";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);

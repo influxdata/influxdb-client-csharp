@@ -1027,7 +1027,7 @@ namespace InfluxDB.Client.Generated.Service
         public ApiResponse< Organizations > OrgsGetWithHttpInfo (string zapTraceSpan = null, string org = null, string orgID = null)
         {
 
-            var localVarPath = "/orgs";
+            var localVarPath = "/api/v2/orgs";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1097,7 +1097,7 @@ namespace InfluxDB.Client.Generated.Service
         public async System.Threading.Tasks.Task<ApiResponse<Organizations>> OrgsGetAsyncWithHttpInfo (string zapTraceSpan = null, string org = null, string orgID = null)
         {
 
-            var localVarPath = "/orgs";
+            var localVarPath = "/api/v2/orgs";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1166,7 +1166,7 @@ namespace InfluxDB.Client.Generated.Service
             if (orgID == null)
                 throw new ApiException(400, "Missing required parameter 'orgID' when calling OrganizationsService->OrgsOrgIDDelete");
 
-            var localVarPath = "/orgs/{orgID}";
+            var localVarPath = "/api/v2/orgs/{orgID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1235,7 +1235,7 @@ namespace InfluxDB.Client.Generated.Service
             if (orgID == null)
                 throw new ApiException(400, "Missing required parameter 'orgID' when calling OrganizationsService->OrgsOrgIDDelete");
 
-            var localVarPath = "/orgs/{orgID}";
+            var localVarPath = "/api/v2/orgs/{orgID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1304,7 +1304,7 @@ namespace InfluxDB.Client.Generated.Service
             if (orgID == null)
                 throw new ApiException(400, "Missing required parameter 'orgID' when calling OrganizationsService->OrgsOrgIDGet");
 
-            var localVarPath = "/orgs/{orgID}";
+            var localVarPath = "/api/v2/orgs/{orgID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1374,7 +1374,7 @@ namespace InfluxDB.Client.Generated.Service
             if (orgID == null)
                 throw new ApiException(400, "Missing required parameter 'orgID' when calling OrganizationsService->OrgsOrgIDGet");
 
-            var localVarPath = "/orgs/{orgID}";
+            var localVarPath = "/api/v2/orgs/{orgID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1443,7 +1443,7 @@ namespace InfluxDB.Client.Generated.Service
             if (orgID == null)
                 throw new ApiException(400, "Missing required parameter 'orgID' when calling OrganizationsService->OrgsOrgIDLabelsGet");
 
-            var localVarPath = "/orgs/{orgID}/labels";
+            var localVarPath = "/api/v2/orgs/{orgID}/labels";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1513,7 +1513,7 @@ namespace InfluxDB.Client.Generated.Service
             if (orgID == null)
                 throw new ApiException(400, "Missing required parameter 'orgID' when calling OrganizationsService->OrgsOrgIDLabelsGet");
 
-            var localVarPath = "/orgs/{orgID}/labels";
+            var localVarPath = "/api/v2/orgs/{orgID}/labels";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1586,7 +1586,7 @@ namespace InfluxDB.Client.Generated.Service
             if (labelID == null)
                 throw new ApiException(400, "Missing required parameter 'labelID' when calling OrganizationsService->OrgsOrgIDLabelsLabelIDDelete");
 
-            var localVarPath = "/orgs/{orgID}/labels/{labelID}";
+            var localVarPath = "/api/v2/orgs/{orgID}/labels/{labelID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1661,7 +1661,7 @@ namespace InfluxDB.Client.Generated.Service
             if (labelID == null)
                 throw new ApiException(400, "Missing required parameter 'labelID' when calling OrganizationsService->OrgsOrgIDLabelsLabelIDDelete");
 
-            var localVarPath = "/orgs/{orgID}/labels/{labelID}";
+            var localVarPath = "/api/v2/orgs/{orgID}/labels/{labelID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1736,7 +1736,7 @@ namespace InfluxDB.Client.Generated.Service
             if (labelMapping == null)
                 throw new ApiException(400, "Missing required parameter 'labelMapping' when calling OrganizationsService->OrgsOrgIDLabelsPost");
 
-            var localVarPath = "/orgs/{orgID}/labels";
+            var localVarPath = "/api/v2/orgs/{orgID}/labels";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1820,7 +1820,7 @@ namespace InfluxDB.Client.Generated.Service
             if (labelMapping == null)
                 throw new ApiException(400, "Missing required parameter 'labelMapping' when calling OrganizationsService->OrgsOrgIDLabelsPost");
 
-            var localVarPath = "/orgs/{orgID}/labels";
+            var localVarPath = "/api/v2/orgs/{orgID}/labels";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1902,7 +1902,7 @@ namespace InfluxDB.Client.Generated.Service
             if (orgID == null)
                 throw new ApiException(400, "Missing required parameter 'orgID' when calling OrganizationsService->OrgsOrgIDLogsGet");
 
-            var localVarPath = "/orgs/{orgID}/logs";
+            var localVarPath = "/api/v2/orgs/{orgID}/logs";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1978,7 +1978,7 @@ namespace InfluxDB.Client.Generated.Service
             if (orgID == null)
                 throw new ApiException(400, "Missing required parameter 'orgID' when calling OrganizationsService->OrgsOrgIDLogsGet");
 
-            var localVarPath = "/orgs/{orgID}/logs";
+            var localVarPath = "/api/v2/orgs/{orgID}/logs";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -2049,7 +2049,7 @@ namespace InfluxDB.Client.Generated.Service
             if (orgID == null)
                 throw new ApiException(400, "Missing required parameter 'orgID' when calling OrganizationsService->OrgsOrgIDMembersGet");
 
-            var localVarPath = "/orgs/{orgID}/members";
+            var localVarPath = "/api/v2/orgs/{orgID}/members";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -2119,7 +2119,7 @@ namespace InfluxDB.Client.Generated.Service
             if (orgID == null)
                 throw new ApiException(400, "Missing required parameter 'orgID' when calling OrganizationsService->OrgsOrgIDMembersGet");
 
-            var localVarPath = "/orgs/{orgID}/members";
+            var localVarPath = "/api/v2/orgs/{orgID}/members";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -2193,7 +2193,7 @@ namespace InfluxDB.Client.Generated.Service
             if (addResourceMemberRequestBody == null)
                 throw new ApiException(400, "Missing required parameter 'addResourceMemberRequestBody' when calling OrganizationsService->OrgsOrgIDMembersPost");
 
-            var localVarPath = "/orgs/{orgID}/members";
+            var localVarPath = "/api/v2/orgs/{orgID}/members";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -2277,7 +2277,7 @@ namespace InfluxDB.Client.Generated.Service
             if (addResourceMemberRequestBody == null)
                 throw new ApiException(400, "Missing required parameter 'addResourceMemberRequestBody' when calling OrganizationsService->OrgsOrgIDMembersPost");
 
-            var localVarPath = "/orgs/{orgID}/members";
+            var localVarPath = "/api/v2/orgs/{orgID}/members";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -2359,7 +2359,7 @@ namespace InfluxDB.Client.Generated.Service
             if (orgID == null)
                 throw new ApiException(400, "Missing required parameter 'orgID' when calling OrganizationsService->OrgsOrgIDMembersUserIDDelete");
 
-            var localVarPath = "/orgs/{orgID}/members/{userID}";
+            var localVarPath = "/api/v2/orgs/{orgID}/members/{userID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -2434,7 +2434,7 @@ namespace InfluxDB.Client.Generated.Service
             if (orgID == null)
                 throw new ApiException(400, "Missing required parameter 'orgID' when calling OrganizationsService->OrgsOrgIDMembersUserIDDelete");
 
-            var localVarPath = "/orgs/{orgID}/members/{userID}";
+            var localVarPath = "/api/v2/orgs/{orgID}/members/{userID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -2504,7 +2504,7 @@ namespace InfluxDB.Client.Generated.Service
             if (orgID == null)
                 throw new ApiException(400, "Missing required parameter 'orgID' when calling OrganizationsService->OrgsOrgIDOwnersGet");
 
-            var localVarPath = "/orgs/{orgID}/owners";
+            var localVarPath = "/api/v2/orgs/{orgID}/owners";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -2574,7 +2574,7 @@ namespace InfluxDB.Client.Generated.Service
             if (orgID == null)
                 throw new ApiException(400, "Missing required parameter 'orgID' when calling OrganizationsService->OrgsOrgIDOwnersGet");
 
-            var localVarPath = "/orgs/{orgID}/owners";
+            var localVarPath = "/api/v2/orgs/{orgID}/owners";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -2648,7 +2648,7 @@ namespace InfluxDB.Client.Generated.Service
             if (addResourceMemberRequestBody == null)
                 throw new ApiException(400, "Missing required parameter 'addResourceMemberRequestBody' when calling OrganizationsService->OrgsOrgIDOwnersPost");
 
-            var localVarPath = "/orgs/{orgID}/owners";
+            var localVarPath = "/api/v2/orgs/{orgID}/owners";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -2732,7 +2732,7 @@ namespace InfluxDB.Client.Generated.Service
             if (addResourceMemberRequestBody == null)
                 throw new ApiException(400, "Missing required parameter 'addResourceMemberRequestBody' when calling OrganizationsService->OrgsOrgIDOwnersPost");
 
-            var localVarPath = "/orgs/{orgID}/owners";
+            var localVarPath = "/api/v2/orgs/{orgID}/owners";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -2814,7 +2814,7 @@ namespace InfluxDB.Client.Generated.Service
             if (orgID == null)
                 throw new ApiException(400, "Missing required parameter 'orgID' when calling OrganizationsService->OrgsOrgIDOwnersUserIDDelete");
 
-            var localVarPath = "/orgs/{orgID}/owners/{userID}";
+            var localVarPath = "/api/v2/orgs/{orgID}/owners/{userID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -2889,7 +2889,7 @@ namespace InfluxDB.Client.Generated.Service
             if (orgID == null)
                 throw new ApiException(400, "Missing required parameter 'orgID' when calling OrganizationsService->OrgsOrgIDOwnersUserIDDelete");
 
-            var localVarPath = "/orgs/{orgID}/owners/{userID}";
+            var localVarPath = "/api/v2/orgs/{orgID}/owners/{userID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -2964,7 +2964,7 @@ namespace InfluxDB.Client.Generated.Service
             if (organization == null)
                 throw new ApiException(400, "Missing required parameter 'organization' when calling OrganizationsService->OrgsOrgIDPatch");
 
-            var localVarPath = "/orgs/{orgID}";
+            var localVarPath = "/api/v2/orgs/{orgID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -3048,7 +3048,7 @@ namespace InfluxDB.Client.Generated.Service
             if (organization == null)
                 throw new ApiException(400, "Missing required parameter 'organization' when calling OrganizationsService->OrgsOrgIDPatch");
 
-            var localVarPath = "/orgs/{orgID}";
+            var localVarPath = "/api/v2/orgs/{orgID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -3130,7 +3130,7 @@ namespace InfluxDB.Client.Generated.Service
             if (secretKeys == null)
                 throw new ApiException(400, "Missing required parameter 'secretKeys' when calling OrganizationsService->OrgsOrgIDSecretsDeletePost");
 
-            var localVarPath = "/orgs/{orgID}/secrets/delete";
+            var localVarPath = "/api/v2/orgs/{orgID}/secrets/delete";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -3213,7 +3213,7 @@ namespace InfluxDB.Client.Generated.Service
             if (secretKeys == null)
                 throw new ApiException(400, "Missing required parameter 'secretKeys' when calling OrganizationsService->OrgsOrgIDSecretsDeletePost");
 
-            var localVarPath = "/orgs/{orgID}/secrets/delete";
+            var localVarPath = "/api/v2/orgs/{orgID}/secrets/delete";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -3291,7 +3291,7 @@ namespace InfluxDB.Client.Generated.Service
             if (orgID == null)
                 throw new ApiException(400, "Missing required parameter 'orgID' when calling OrganizationsService->OrgsOrgIDSecretsGet");
 
-            var localVarPath = "/orgs/{orgID}/secrets";
+            var localVarPath = "/api/v2/orgs/{orgID}/secrets";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -3361,7 +3361,7 @@ namespace InfluxDB.Client.Generated.Service
             if (orgID == null)
                 throw new ApiException(400, "Missing required parameter 'orgID' when calling OrganizationsService->OrgsOrgIDSecretsGet");
 
-            var localVarPath = "/orgs/{orgID}/secrets";
+            var localVarPath = "/api/v2/orgs/{orgID}/secrets";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -3434,7 +3434,7 @@ namespace InfluxDB.Client.Generated.Service
             if (requestBody == null)
                 throw new ApiException(400, "Missing required parameter 'requestBody' when calling OrganizationsService->OrgsOrgIDSecretsPatch");
 
-            var localVarPath = "/orgs/{orgID}/secrets";
+            var localVarPath = "/api/v2/orgs/{orgID}/secrets";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -3517,7 +3517,7 @@ namespace InfluxDB.Client.Generated.Service
             if (requestBody == null)
                 throw new ApiException(400, "Missing required parameter 'requestBody' when calling OrganizationsService->OrgsOrgIDSecretsPatch");
 
-            var localVarPath = "/orgs/{orgID}/secrets";
+            var localVarPath = "/api/v2/orgs/{orgID}/secrets";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -3595,7 +3595,7 @@ namespace InfluxDB.Client.Generated.Service
             if (organization == null)
                 throw new ApiException(400, "Missing required parameter 'organization' when calling OrganizationsService->OrgsPost");
 
-            var localVarPath = "/orgs";
+            var localVarPath = "/api/v2/orgs";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -3673,7 +3673,7 @@ namespace InfluxDB.Client.Generated.Service
             if (organization == null)
                 throw new ApiException(400, "Missing required parameter 'organization' when calling OrganizationsService->OrgsPost");
 
-            var localVarPath = "/orgs";
+            var localVarPath = "/api/v2/orgs";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);

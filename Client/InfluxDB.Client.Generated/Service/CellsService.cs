@@ -464,7 +464,7 @@ namespace InfluxDB.Client.Generated.Service
             if (cellID == null)
                 throw new ApiException(400, "Missing required parameter 'cellID' when calling CellsService->DashboardsDashboardIDCellsCellIDDelete");
 
-            var localVarPath = "/dashboards/{dashboardID}/cells/{cellID}";
+            var localVarPath = "/api/v2/dashboards/{dashboardID}/cells/{cellID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -539,7 +539,7 @@ namespace InfluxDB.Client.Generated.Service
             if (cellID == null)
                 throw new ApiException(400, "Missing required parameter 'cellID' when calling CellsService->DashboardsDashboardIDCellsCellIDDelete");
 
-            var localVarPath = "/dashboards/{dashboardID}/cells/{cellID}";
+            var localVarPath = "/api/v2/dashboards/{dashboardID}/cells/{cellID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -619,7 +619,7 @@ namespace InfluxDB.Client.Generated.Service
             if (cellUpdate == null)
                 throw new ApiException(400, "Missing required parameter 'cellUpdate' when calling CellsService->DashboardsDashboardIDCellsCellIDPatch");
 
-            var localVarPath = "/dashboards/{dashboardID}/cells/{cellID}";
+            var localVarPath = "/api/v2/dashboards/{dashboardID}/cells/{cellID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -709,7 +709,7 @@ namespace InfluxDB.Client.Generated.Service
             if (cellUpdate == null)
                 throw new ApiException(400, "Missing required parameter 'cellUpdate' when calling CellsService->DashboardsDashboardIDCellsCellIDPatch");
 
-            var localVarPath = "/dashboards/{dashboardID}/cells/{cellID}";
+            var localVarPath = "/api/v2/dashboards/{dashboardID}/cells/{cellID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -793,7 +793,7 @@ namespace InfluxDB.Client.Generated.Service
             if (cellID == null)
                 throw new ApiException(400, "Missing required parameter 'cellID' when calling CellsService->DashboardsDashboardIDCellsCellIDViewGet");
 
-            var localVarPath = "/dashboards/{dashboardID}/cells/{cellID}/view";
+            var localVarPath = "/api/v2/dashboards/{dashboardID}/cells/{cellID}/view";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -869,7 +869,7 @@ namespace InfluxDB.Client.Generated.Service
             if (cellID == null)
                 throw new ApiException(400, "Missing required parameter 'cellID' when calling CellsService->DashboardsDashboardIDCellsCellIDViewGet");
 
-            var localVarPath = "/dashboards/{dashboardID}/cells/{cellID}/view";
+            var localVarPath = "/api/v2/dashboards/{dashboardID}/cells/{cellID}/view";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -949,7 +949,7 @@ namespace InfluxDB.Client.Generated.Service
             if (view == null)
                 throw new ApiException(400, "Missing required parameter 'view' when calling CellsService->DashboardsDashboardIDCellsCellIDViewPatch");
 
-            var localVarPath = "/dashboards/{dashboardID}/cells/{cellID}/view";
+            var localVarPath = "/api/v2/dashboards/{dashboardID}/cells/{cellID}/view";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1039,7 +1039,7 @@ namespace InfluxDB.Client.Generated.Service
             if (view == null)
                 throw new ApiException(400, "Missing required parameter 'view' when calling CellsService->DashboardsDashboardIDCellsCellIDViewPatch");
 
-            var localVarPath = "/dashboards/{dashboardID}/cells/{cellID}/view";
+            var localVarPath = "/api/v2/dashboards/{dashboardID}/cells/{cellID}/view";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1123,7 +1123,7 @@ namespace InfluxDB.Client.Generated.Service
             if (createCell == null)
                 throw new ApiException(400, "Missing required parameter 'createCell' when calling CellsService->DashboardsDashboardIDCellsPost");
 
-            var localVarPath = "/dashboards/{dashboardID}/cells";
+            var localVarPath = "/api/v2/dashboards/{dashboardID}/cells";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1207,7 +1207,7 @@ namespace InfluxDB.Client.Generated.Service
             if (createCell == null)
                 throw new ApiException(400, "Missing required parameter 'createCell' when calling CellsService->DashboardsDashboardIDCellsPost");
 
-            var localVarPath = "/dashboards/{dashboardID}/cells";
+            var localVarPath = "/api/v2/dashboards/{dashboardID}/cells";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1290,7 +1290,7 @@ namespace InfluxDB.Client.Generated.Service
             if (cell == null)
                 throw new ApiException(400, "Missing required parameter 'cell' when calling CellsService->DashboardsDashboardIDCellsPut");
 
-            var localVarPath = "/dashboards/{dashboardID}/cells";
+            var localVarPath = "/api/v2/dashboards/{dashboardID}/cells";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1374,7 +1374,7 @@ namespace InfluxDB.Client.Generated.Service
             if (cell == null)
                 throw new ApiException(400, "Missing required parameter 'cell' when calling CellsService->DashboardsDashboardIDCellsPut");
 
-            var localVarPath = "/dashboards/{dashboardID}/cells";
+            var localVarPath = "/api/v2/dashboards/{dashboardID}/cells";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);

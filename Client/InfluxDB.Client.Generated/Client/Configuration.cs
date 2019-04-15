@@ -221,6 +221,7 @@ namespace InfluxDB.Client.Generated.Client
                 if (_apiClient == null) _apiClient = CreateApiClient();
                 return _apiClient;
             }
+            set => _apiClient = value;
         }
 
         private String _basePath = null;

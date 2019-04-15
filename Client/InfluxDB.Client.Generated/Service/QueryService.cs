@@ -451,7 +451,7 @@ namespace InfluxDB.Client.Generated.Service
         public ApiResponse< AnalyzeQueryResponse > QueryAnalyzePostWithHttpInfo (string zapTraceSpan = null, string contentType = null, Query query = null)
         {
 
-            var localVarPath = "/query/analyze";
+            var localVarPath = "/api/v2/query/analyze";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -529,7 +529,7 @@ namespace InfluxDB.Client.Generated.Service
         public async System.Threading.Tasks.Task<ApiResponse<AnalyzeQueryResponse>> QueryAnalyzePostAsyncWithHttpInfo (string zapTraceSpan = null, string contentType = null, Query query = null)
         {
 
-            var localVarPath = "/query/analyze";
+            var localVarPath = "/api/v2/query/analyze";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -606,7 +606,7 @@ namespace InfluxDB.Client.Generated.Service
         public ApiResponse< ASTResponse > QueryAstPostWithHttpInfo (string zapTraceSpan = null, string contentType = null, LanguageRequest languageRequest = null)
         {
 
-            var localVarPath = "/query/ast";
+            var localVarPath = "/api/v2/query/ast";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -684,7 +684,7 @@ namespace InfluxDB.Client.Generated.Service
         public async System.Threading.Tasks.Task<ApiResponse<ASTResponse>> QueryAstPostAsyncWithHttpInfo (string zapTraceSpan = null, string contentType = null, LanguageRequest languageRequest = null)
         {
 
-            var localVarPath = "/query/ast";
+            var localVarPath = "/api/v2/query/ast";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -767,7 +767,7 @@ namespace InfluxDB.Client.Generated.Service
         public ApiResponse< string > QueryPostWithHttpInfo (string zapTraceSpan = null, string accept = null, string contentType = null, string org = null, string orgID = null, Query query = null)
         {
 
-            var localVarPath = "/query";
+            var localVarPath = "/api/v2/query";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -856,7 +856,7 @@ namespace InfluxDB.Client.Generated.Service
         public async System.Threading.Tasks.Task<ApiResponse<string>> QueryPostAsyncWithHttpInfo (string zapTraceSpan = null, string accept = null, string contentType = null, string org = null, string orgID = null, Query query = null)
         {
 
-            var localVarPath = "/query";
+            var localVarPath = "/api/v2/query";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -938,7 +938,7 @@ namespace InfluxDB.Client.Generated.Service
         public ApiResponse< QuerySpecification > QuerySpecPostWithHttpInfo (string zapTraceSpan = null, string contentType = null, LanguageRequest languageRequest = null)
         {
 
-            var localVarPath = "/query/spec";
+            var localVarPath = "/api/v2/query/spec";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1016,7 +1016,7 @@ namespace InfluxDB.Client.Generated.Service
         public async System.Threading.Tasks.Task<ApiResponse<QuerySpecification>> QuerySpecPostAsyncWithHttpInfo (string zapTraceSpan = null, string contentType = null, LanguageRequest languageRequest = null)
         {
 
-            var localVarPath = "/query/spec";
+            var localVarPath = "/api/v2/query/spec";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1089,7 +1089,7 @@ namespace InfluxDB.Client.Generated.Service
         public ApiResponse< FluxSuggestions > QuerySuggestionsGetWithHttpInfo (string zapTraceSpan = null)
         {
 
-            var localVarPath = "/query/suggestions";
+            var localVarPath = "/api/v2/query/suggestions";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1153,7 +1153,7 @@ namespace InfluxDB.Client.Generated.Service
         public async System.Threading.Tasks.Task<ApiResponse<FluxSuggestions>> QuerySuggestionsGetAsyncWithHttpInfo (string zapTraceSpan = null)
         {
 
-            var localVarPath = "/query/suggestions";
+            var localVarPath = "/api/v2/query/suggestions";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1221,7 +1221,7 @@ namespace InfluxDB.Client.Generated.Service
             if (name == null)
                 throw new ApiException(400, "Missing required parameter 'name' when calling QueryService->QuerySuggestionsNameGet");
 
-            var localVarPath = "/query/suggestions/{name}";
+            var localVarPath = "/api/v2/query/suggestions/{name}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1291,7 +1291,7 @@ namespace InfluxDB.Client.Generated.Service
             if (name == null)
                 throw new ApiException(400, "Missing required parameter 'name' when calling QueryService->QuerySuggestionsNameGet");
 
-            var localVarPath = "/query/suggestions/{name}";
+            var localVarPath = "/api/v2/query/suggestions/{name}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);

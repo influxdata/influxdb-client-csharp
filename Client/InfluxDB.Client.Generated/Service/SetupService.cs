@@ -235,7 +235,7 @@ namespace InfluxDB.Client.Generated.Service
         public ApiResponse< IsOnboarding > SetupGetWithHttpInfo (string zapTraceSpan = null)
         {
 
-            var localVarPath = "/setup";
+            var localVarPath = "/api/v2/setup";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -299,7 +299,7 @@ namespace InfluxDB.Client.Generated.Service
         public async System.Threading.Tasks.Task<ApiResponse<IsOnboarding>> SetupGetAsyncWithHttpInfo (string zapTraceSpan = null)
         {
 
-            var localVarPath = "/setup";
+            var localVarPath = "/api/v2/setup";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -367,7 +367,7 @@ namespace InfluxDB.Client.Generated.Service
             if (onboardingRequest == null)
                 throw new ApiException(400, "Missing required parameter 'onboardingRequest' when calling SetupService->SetupPost");
 
-            var localVarPath = "/setup";
+            var localVarPath = "/api/v2/setup";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -445,7 +445,7 @@ namespace InfluxDB.Client.Generated.Service
             if (onboardingRequest == null)
                 throw new ApiException(400, "Missing required parameter 'onboardingRequest' when calling SetupService->SetupPost");
 
-            var localVarPath = "/setup";
+            var localVarPath = "/api/v2/setup";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);

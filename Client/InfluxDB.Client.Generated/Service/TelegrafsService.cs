@@ -828,7 +828,7 @@ namespace InfluxDB.Client.Generated.Service
             if (orgID == null)
                 throw new ApiException(400, "Missing required parameter 'orgID' when calling TelegrafsService->TelegrafsGet");
 
-            var localVarPath = "/telegrafs";
+            var localVarPath = "/api/v2/telegrafs";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -898,7 +898,7 @@ namespace InfluxDB.Client.Generated.Service
             if (orgID == null)
                 throw new ApiException(400, "Missing required parameter 'orgID' when calling TelegrafsService->TelegrafsGet");
 
-            var localVarPath = "/telegrafs";
+            var localVarPath = "/api/v2/telegrafs";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -967,7 +967,7 @@ namespace InfluxDB.Client.Generated.Service
             if (telegrafRequest == null)
                 throw new ApiException(400, "Missing required parameter 'telegrafRequest' when calling TelegrafsService->TelegrafsPost");
 
-            var localVarPath = "/telegrafs";
+            var localVarPath = "/api/v2/telegrafs";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1045,7 +1045,7 @@ namespace InfluxDB.Client.Generated.Service
             if (telegrafRequest == null)
                 throw new ApiException(400, "Missing required parameter 'telegrafRequest' when calling TelegrafsService->TelegrafsPost");
 
-            var localVarPath = "/telegrafs";
+            var localVarPath = "/api/v2/telegrafs";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1121,7 +1121,7 @@ namespace InfluxDB.Client.Generated.Service
             if (telegrafID == null)
                 throw new ApiException(400, "Missing required parameter 'telegrafID' when calling TelegrafsService->TelegrafsTelegrafIDDelete");
 
-            var localVarPath = "/telegrafs/{telegrafID}";
+            var localVarPath = "/api/v2/telegrafs/{telegrafID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1190,7 +1190,7 @@ namespace InfluxDB.Client.Generated.Service
             if (telegrafID == null)
                 throw new ApiException(400, "Missing required parameter 'telegrafID' when calling TelegrafsService->TelegrafsTelegrafIDDelete");
 
-            var localVarPath = "/telegrafs/{telegrafID}";
+            var localVarPath = "/api/v2/telegrafs/{telegrafID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1261,7 +1261,7 @@ namespace InfluxDB.Client.Generated.Service
             if (telegrafID == null)
                 throw new ApiException(400, "Missing required parameter 'telegrafID' when calling TelegrafsService->TelegrafsTelegrafIDGet");
 
-            var localVarPath = "/telegrafs/{telegrafID}";
+            var localVarPath = "/api/v2/telegrafs/{telegrafID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1336,7 +1336,7 @@ namespace InfluxDB.Client.Generated.Service
             if (telegrafID == null)
                 throw new ApiException(400, "Missing required parameter 'telegrafID' when calling TelegrafsService->TelegrafsTelegrafIDGet");
 
-            var localVarPath = "/telegrafs/{telegrafID}";
+            var localVarPath = "/api/v2/telegrafs/{telegrafID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1408,7 +1408,7 @@ namespace InfluxDB.Client.Generated.Service
             if (telegrafID == null)
                 throw new ApiException(400, "Missing required parameter 'telegrafID' when calling TelegrafsService->TelegrafsTelegrafIDLabelsGet");
 
-            var localVarPath = "/telegrafs/{telegrafID}/labels";
+            var localVarPath = "/api/v2/telegrafs/{telegrafID}/labels";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1478,7 +1478,7 @@ namespace InfluxDB.Client.Generated.Service
             if (telegrafID == null)
                 throw new ApiException(400, "Missing required parameter 'telegrafID' when calling TelegrafsService->TelegrafsTelegrafIDLabelsGet");
 
-            var localVarPath = "/telegrafs/{telegrafID}/labels";
+            var localVarPath = "/api/v2/telegrafs/{telegrafID}/labels";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1551,7 +1551,7 @@ namespace InfluxDB.Client.Generated.Service
             if (labelID == null)
                 throw new ApiException(400, "Missing required parameter 'labelID' when calling TelegrafsService->TelegrafsTelegrafIDLabelsLabelIDDelete");
 
-            var localVarPath = "/telegrafs/{telegrafID}/labels/{labelID}";
+            var localVarPath = "/api/v2/telegrafs/{telegrafID}/labels/{labelID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1626,7 +1626,7 @@ namespace InfluxDB.Client.Generated.Service
             if (labelID == null)
                 throw new ApiException(400, "Missing required parameter 'labelID' when calling TelegrafsService->TelegrafsTelegrafIDLabelsLabelIDDelete");
 
-            var localVarPath = "/telegrafs/{telegrafID}/labels/{labelID}";
+            var localVarPath = "/api/v2/telegrafs/{telegrafID}/labels/{labelID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1701,7 +1701,7 @@ namespace InfluxDB.Client.Generated.Service
             if (labelMapping == null)
                 throw new ApiException(400, "Missing required parameter 'labelMapping' when calling TelegrafsService->TelegrafsTelegrafIDLabelsPost");
 
-            var localVarPath = "/telegrafs/{telegrafID}/labels";
+            var localVarPath = "/api/v2/telegrafs/{telegrafID}/labels";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1785,7 +1785,7 @@ namespace InfluxDB.Client.Generated.Service
             if (labelMapping == null)
                 throw new ApiException(400, "Missing required parameter 'labelMapping' when calling TelegrafsService->TelegrafsTelegrafIDLabelsPost");
 
-            var localVarPath = "/telegrafs/{telegrafID}/labels";
+            var localVarPath = "/api/v2/telegrafs/{telegrafID}/labels";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1863,7 +1863,7 @@ namespace InfluxDB.Client.Generated.Service
             if (telegrafID == null)
                 throw new ApiException(400, "Missing required parameter 'telegrafID' when calling TelegrafsService->TelegrafsTelegrafIDMembersGet");
 
-            var localVarPath = "/telegrafs/{telegrafID}/members";
+            var localVarPath = "/api/v2/telegrafs/{telegrafID}/members";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1933,7 +1933,7 @@ namespace InfluxDB.Client.Generated.Service
             if (telegrafID == null)
                 throw new ApiException(400, "Missing required parameter 'telegrafID' when calling TelegrafsService->TelegrafsTelegrafIDMembersGet");
 
-            var localVarPath = "/telegrafs/{telegrafID}/members";
+            var localVarPath = "/api/v2/telegrafs/{telegrafID}/members";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -2007,7 +2007,7 @@ namespace InfluxDB.Client.Generated.Service
             if (addResourceMemberRequestBody == null)
                 throw new ApiException(400, "Missing required parameter 'addResourceMemberRequestBody' when calling TelegrafsService->TelegrafsTelegrafIDMembersPost");
 
-            var localVarPath = "/telegrafs/{telegrafID}/members";
+            var localVarPath = "/api/v2/telegrafs/{telegrafID}/members";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -2091,7 +2091,7 @@ namespace InfluxDB.Client.Generated.Service
             if (addResourceMemberRequestBody == null)
                 throw new ApiException(400, "Missing required parameter 'addResourceMemberRequestBody' when calling TelegrafsService->TelegrafsTelegrafIDMembersPost");
 
-            var localVarPath = "/telegrafs/{telegrafID}/members";
+            var localVarPath = "/api/v2/telegrafs/{telegrafID}/members";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -2173,7 +2173,7 @@ namespace InfluxDB.Client.Generated.Service
             if (telegrafID == null)
                 throw new ApiException(400, "Missing required parameter 'telegrafID' when calling TelegrafsService->TelegrafsTelegrafIDMembersUserIDDelete");
 
-            var localVarPath = "/telegrafs/{telegrafID}/members/{userID}";
+            var localVarPath = "/api/v2/telegrafs/{telegrafID}/members/{userID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -2248,7 +2248,7 @@ namespace InfluxDB.Client.Generated.Service
             if (telegrafID == null)
                 throw new ApiException(400, "Missing required parameter 'telegrafID' when calling TelegrafsService->TelegrafsTelegrafIDMembersUserIDDelete");
 
-            var localVarPath = "/telegrafs/{telegrafID}/members/{userID}";
+            var localVarPath = "/api/v2/telegrafs/{telegrafID}/members/{userID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -2318,7 +2318,7 @@ namespace InfluxDB.Client.Generated.Service
             if (telegrafID == null)
                 throw new ApiException(400, "Missing required parameter 'telegrafID' when calling TelegrafsService->TelegrafsTelegrafIDOwnersGet");
 
-            var localVarPath = "/telegrafs/{telegrafID}/owners";
+            var localVarPath = "/api/v2/telegrafs/{telegrafID}/owners";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -2388,7 +2388,7 @@ namespace InfluxDB.Client.Generated.Service
             if (telegrafID == null)
                 throw new ApiException(400, "Missing required parameter 'telegrafID' when calling TelegrafsService->TelegrafsTelegrafIDOwnersGet");
 
-            var localVarPath = "/telegrafs/{telegrafID}/owners";
+            var localVarPath = "/api/v2/telegrafs/{telegrafID}/owners";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -2462,7 +2462,7 @@ namespace InfluxDB.Client.Generated.Service
             if (addResourceMemberRequestBody == null)
                 throw new ApiException(400, "Missing required parameter 'addResourceMemberRequestBody' when calling TelegrafsService->TelegrafsTelegrafIDOwnersPost");
 
-            var localVarPath = "/telegrafs/{telegrafID}/owners";
+            var localVarPath = "/api/v2/telegrafs/{telegrafID}/owners";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -2546,7 +2546,7 @@ namespace InfluxDB.Client.Generated.Service
             if (addResourceMemberRequestBody == null)
                 throw new ApiException(400, "Missing required parameter 'addResourceMemberRequestBody' when calling TelegrafsService->TelegrafsTelegrafIDOwnersPost");
 
-            var localVarPath = "/telegrafs/{telegrafID}/owners";
+            var localVarPath = "/api/v2/telegrafs/{telegrafID}/owners";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -2628,7 +2628,7 @@ namespace InfluxDB.Client.Generated.Service
             if (telegrafID == null)
                 throw new ApiException(400, "Missing required parameter 'telegrafID' when calling TelegrafsService->TelegrafsTelegrafIDOwnersUserIDDelete");
 
-            var localVarPath = "/telegrafs/{telegrafID}/owners/{userID}";
+            var localVarPath = "/api/v2/telegrafs/{telegrafID}/owners/{userID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -2703,7 +2703,7 @@ namespace InfluxDB.Client.Generated.Service
             if (telegrafID == null)
                 throw new ApiException(400, "Missing required parameter 'telegrafID' when calling TelegrafsService->TelegrafsTelegrafIDOwnersUserIDDelete");
 
-            var localVarPath = "/telegrafs/{telegrafID}/owners/{userID}";
+            var localVarPath = "/api/v2/telegrafs/{telegrafID}/owners/{userID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -2778,7 +2778,7 @@ namespace InfluxDB.Client.Generated.Service
             if (telegrafRequest == null)
                 throw new ApiException(400, "Missing required parameter 'telegrafRequest' when calling TelegrafsService->TelegrafsTelegrafIDPut");
 
-            var localVarPath = "/telegrafs/{telegrafID}";
+            var localVarPath = "/api/v2/telegrafs/{telegrafID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -2862,7 +2862,7 @@ namespace InfluxDB.Client.Generated.Service
             if (telegrafRequest == null)
                 throw new ApiException(400, "Missing required parameter 'telegrafRequest' when calling TelegrafsService->TelegrafsTelegrafIDPut");
 
-            var localVarPath = "/telegrafs/{telegrafID}";
+            var localVarPath = "/api/v2/telegrafs/{telegrafID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);

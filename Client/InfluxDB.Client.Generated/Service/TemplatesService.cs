@@ -535,7 +535,7 @@ namespace InfluxDB.Client.Generated.Service
         public ApiResponse< Documents > DocumentsTemplatesGetWithHttpInfo (string zapTraceSpan = null, string org = null, string orgID = null)
         {
 
-            var localVarPath = "/documents/templates";
+            var localVarPath = "/api/v2/documents/templates";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -605,7 +605,7 @@ namespace InfluxDB.Client.Generated.Service
         public async System.Threading.Tasks.Task<ApiResponse<Documents>> DocumentsTemplatesGetAsyncWithHttpInfo (string zapTraceSpan = null, string org = null, string orgID = null)
         {
 
-            var localVarPath = "/documents/templates";
+            var localVarPath = "/api/v2/documents/templates";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -675,7 +675,7 @@ namespace InfluxDB.Client.Generated.Service
             if (documentCreate == null)
                 throw new ApiException(400, "Missing required parameter 'documentCreate' when calling TemplatesService->DocumentsTemplatesPost");
 
-            var localVarPath = "/documents/templates";
+            var localVarPath = "/api/v2/documents/templates";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -753,7 +753,7 @@ namespace InfluxDB.Client.Generated.Service
             if (documentCreate == null)
                 throw new ApiException(400, "Missing required parameter 'documentCreate' when calling TemplatesService->DocumentsTemplatesPost");
 
-            var localVarPath = "/documents/templates";
+            var localVarPath = "/api/v2/documents/templates";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -829,7 +829,7 @@ namespace InfluxDB.Client.Generated.Service
             if (templateID == null)
                 throw new ApiException(400, "Missing required parameter 'templateID' when calling TemplatesService->DocumentsTemplatesTemplateIDDelete");
 
-            var localVarPath = "/documents/templates/{templateID}";
+            var localVarPath = "/api/v2/documents/templates/{templateID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -898,7 +898,7 @@ namespace InfluxDB.Client.Generated.Service
             if (templateID == null)
                 throw new ApiException(400, "Missing required parameter 'templateID' when calling TemplatesService->DocumentsTemplatesTemplateIDDelete");
 
-            var localVarPath = "/documents/templates/{templateID}";
+            var localVarPath = "/api/v2/documents/templates/{templateID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -967,7 +967,7 @@ namespace InfluxDB.Client.Generated.Service
             if (templateID == null)
                 throw new ApiException(400, "Missing required parameter 'templateID' when calling TemplatesService->DocumentsTemplatesTemplateIDGet");
 
-            var localVarPath = "/documents/templates/{templateID}";
+            var localVarPath = "/api/v2/documents/templates/{templateID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1037,7 +1037,7 @@ namespace InfluxDB.Client.Generated.Service
             if (templateID == null)
                 throw new ApiException(400, "Missing required parameter 'templateID' when calling TemplatesService->DocumentsTemplatesTemplateIDGet");
 
-            var localVarPath = "/documents/templates/{templateID}";
+            var localVarPath = "/api/v2/documents/templates/{templateID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1106,7 +1106,7 @@ namespace InfluxDB.Client.Generated.Service
             if (templateID == null)
                 throw new ApiException(400, "Missing required parameter 'templateID' when calling TemplatesService->DocumentsTemplatesTemplateIDLabelsGet");
 
-            var localVarPath = "/documents/templates/{templateID}/labels";
+            var localVarPath = "/api/v2/documents/templates/{templateID}/labels";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1176,7 +1176,7 @@ namespace InfluxDB.Client.Generated.Service
             if (templateID == null)
                 throw new ApiException(400, "Missing required parameter 'templateID' when calling TemplatesService->DocumentsTemplatesTemplateIDLabelsGet");
 
-            var localVarPath = "/documents/templates/{templateID}/labels";
+            var localVarPath = "/api/v2/documents/templates/{templateID}/labels";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1249,7 +1249,7 @@ namespace InfluxDB.Client.Generated.Service
             if (labelID == null)
                 throw new ApiException(400, "Missing required parameter 'labelID' when calling TemplatesService->DocumentsTemplatesTemplateIDLabelsLabelIDDelete");
 
-            var localVarPath = "/documents/templates/{templateID}/labels/{labelID}";
+            var localVarPath = "/api/v2/documents/templates/{templateID}/labels/{labelID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1324,7 +1324,7 @@ namespace InfluxDB.Client.Generated.Service
             if (labelID == null)
                 throw new ApiException(400, "Missing required parameter 'labelID' when calling TemplatesService->DocumentsTemplatesTemplateIDLabelsLabelIDDelete");
 
-            var localVarPath = "/documents/templates/{templateID}/labels/{labelID}";
+            var localVarPath = "/api/v2/documents/templates/{templateID}/labels/{labelID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1399,7 +1399,7 @@ namespace InfluxDB.Client.Generated.Service
             if (labelMapping == null)
                 throw new ApiException(400, "Missing required parameter 'labelMapping' when calling TemplatesService->DocumentsTemplatesTemplateIDLabelsPost");
 
-            var localVarPath = "/documents/templates/{templateID}/labels";
+            var localVarPath = "/api/v2/documents/templates/{templateID}/labels";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1483,7 +1483,7 @@ namespace InfluxDB.Client.Generated.Service
             if (labelMapping == null)
                 throw new ApiException(400, "Missing required parameter 'labelMapping' when calling TemplatesService->DocumentsTemplatesTemplateIDLabelsPost");
 
-            var localVarPath = "/documents/templates/{templateID}/labels";
+            var localVarPath = "/api/v2/documents/templates/{templateID}/labels";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1566,7 +1566,7 @@ namespace InfluxDB.Client.Generated.Service
             if (documentUpdate == null)
                 throw new ApiException(400, "Missing required parameter 'documentUpdate' when calling TemplatesService->DocumentsTemplatesTemplateIDPut");
 
-            var localVarPath = "/documents/templates/{templateID}";
+            var localVarPath = "/api/v2/documents/templates/{templateID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1650,7 +1650,7 @@ namespace InfluxDB.Client.Generated.Service
             if (documentUpdate == null)
                 throw new ApiException(400, "Missing required parameter 'documentUpdate' when calling TemplatesService->DocumentsTemplatesTemplateIDPut");
 
-            var localVarPath = "/documents/templates/{templateID}";
+            var localVarPath = "/api/v2/documents/templates/{templateID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
