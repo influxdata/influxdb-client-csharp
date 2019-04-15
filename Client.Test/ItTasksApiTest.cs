@@ -41,7 +41,11 @@ namespace InfluxDB.Client.Test
         private async Task<Authorization> AddAuthorization(Organization organization)
         {
             var resourceTask = new PermissionResource {Type = ResourceType.Tasks, OrgId = organization.Id};
-            var resourceBucket = new PermissionResource {Type = ResourceType.Buckets, OrgId = organization.Id, Id = (await Client.GetBucketsApi().FindBucketByName("my-bucket")).Id};
+            var resourceBucket = new PermissionResource
+            {
+                Type = ResourceType.Buckets, OrgId = organization.Id,
+                Id = (await Client.GetBucketsApi().FindBucketByName("my-bucket")).Id
+            };
             var resourceOrg = new PermissionResource {Type = ResourceType.Orgs};
             var resourceUser = new PermissionResource {Type = ResourceType.Users};
             var resourceAuthorization = new PermissionResource {Type = ResourceType.Authorizations};
@@ -85,6 +89,39 @@ namespace InfluxDB.Client.Test
                 await _tasksApi.CancelRun("020f755c3c082000", "020f755c3c082000")).ErrorBody["error"].ToString();
 
             Assert.AreEqual(message, "task not found");
+        }
+
+        [Test]
+        public async Task CloneTask()
+        {
+            var source = await _tasksApi.CreateTaskEvery(GenerateName("it task"), TaskFlux, "1s", _organization);
+
+            var properties = new Dictionary<string, string> {{"color", "green"}, {"location", "west"}};
+
+            var label = Client.GetLabelsApi().CreateLabel(GenerateName("Cool Resource"), properties, _organization.Id);
+            await _tasksApi.AddLabel(label, source);
+
+            var cloned = await _tasksApi.CloneTask(source);
+
+            Assert.AreEqual(source.Name, cloned.Name);
+            Assert.AreEqual(_organization.Id, cloned.OrgId);
+            Assert.AreEqual(source.Flux, cloned.Flux);
+            Assert.AreEqual("1s", cloned.Every);
+            Assert.IsNull(cloned.Cron);
+            Assert.IsNull(cloned.Offset);
+
+            var labels = await _tasksApi.GetLabels(cloned);
+            Assert.AreEqual(1, labels.Count);
+            Assert.AreEqual(label.Id, labels[0].Id);
+        }
+
+        [Test]
+        public void CloneTaskNotFound()
+        {
+            var ioe = Assert.ThrowsAsync<InvalidOperationException>(async () =>
+                await _tasksApi.CloneTask("020f755c3c082000"));
+
+            Assert.AreEqual("NotFound Task with ID: 020f755c3c082000", ioe.Message);
         }
 
         [Test]
@@ -153,7 +190,7 @@ namespace InfluxDB.Client.Test
         public async Task CreateTaskWithOffset()
         {
             Client.SetLogLevel(LogLevel.Body);
-            
+
             var taskName = GenerateName("it task");
 
             var flux = $"option task = {{\nname: \"{taskName}\",\nevery: 1h,\noffset: 30m\n}}\n\n{TaskFlux}";
@@ -348,7 +385,7 @@ namespace InfluxDB.Client.Test
 
             var properties = new Dictionary<string, string> {{"color", "green"}, {"location", "west"}};
 
-            var label = await labelClient.CreateLabel(GenerateName("Cool Resource"), properties);
+            var label = labelClient.CreateLabel(GenerateName("Cool Resource"), properties, _organization.Id);
 
             var labels = await _tasksApi.GetLabels(task);
             Assert.AreEqual(0, labels.Count);
@@ -557,38 +594,6 @@ namespace InfluxDB.Client.Test
             Assert.AreEqual("3m0s", updatedTask.Every);
             Assert.AreEqual(updatedTask.Flux, flux);
             Assert.IsNotNull(updatedTask.UpdatedAt);
-        }
-        
-        [Test]
-        public async Task CloneTask()
-        {
-            var source = await _tasksApi.CreateTaskEvery(GenerateName("it task"), TaskFlux, "1s", _organization);
-
-            var properties = new Dictionary<string, string> {{"color", "green"}, {"location", "west"}};
-
-            var label = await Client.GetLabelsApi().CreateLabel(GenerateName("Cool Resource"), properties);
-            await _tasksApi.AddLabel(label, source);
-
-            var cloned = await _tasksApi.CloneTask(source);
-            
-            Assert.AreEqual(source.Name, cloned.Name);
-            Assert.AreEqual(_organization.Id, cloned.OrgId);
-            Assert.AreEqual(source.Flux, cloned.Flux);
-            Assert.AreEqual("1s", cloned.Every);
-            Assert.IsNull(cloned.Cron);
-            Assert.IsNull(cloned.Offset);
-
-            var labels = await _tasksApi.GetLabels(cloned);
-            Assert.AreEqual(1, labels.Count);
-            Assert.AreEqual(label.Id, labels[0].Id);
-        }
-
-        [Test]
-        public void CloneTaskNotFound()
-        {
-            var ioe = Assert.ThrowsAsync<InvalidOperationException>(async () => await _tasksApi.CloneTask("020f755c3c082000"));
-            
-            Assert.AreEqual("NotFound Task with ID: 020f755c3c082000", ioe.Message);
         }
     }
 }

@@ -4,8 +4,14 @@ using System.Threading.Tasks;
 using InfluxDB.Client.Core;
 using InfluxDB.Client.Core.Internal;
 using InfluxDB.Client.Domain;
+using InfluxDB.Client.Generated.Domain;
 using InfluxDB.Client.Internal;
+using Organization = InfluxDB.Client.Domain.Organization;
+using Organizations = InfluxDB.Client.Domain.Organizations;
+using ResourceMember = InfluxDB.Client.Domain.ResourceMember;
+using ResourceMembers = InfluxDB.Client.Domain.ResourceMembers;
 using Task = System.Threading.Tasks.Task;
+using User = InfluxDB.Client.Domain.User;
 
 namespace InfluxDB.Client
 {
@@ -16,7 +22,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Creates a new organization and sets <see cref="Organization.Id" /> with the new identifier.
+        ///     Creates a new organization and sets <see cref="Domain.Organization.Id" /> with the new identifier.
         /// </summary>
         /// <param name="name"></param>
         /// <returns>Created organization</returns>
@@ -30,7 +36,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Creates a new organization and sets <see cref="Organization.Id" /> with the new identifier.
+        ///     Creates a new organization and sets <see cref="Organization.Id" /> with the new identifier.
         /// </summary>
         /// <param name="organization">the organization to create</param>
         /// <returns>created organization</returns>
@@ -44,7 +50,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Update an organization.
+        ///     Update an organization.
         /// </summary>
         /// <param name="organization">organization update to apply</param>
         /// <returns>updated organization</returns>
@@ -58,7 +64,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Delete an organization.
+        ///     Delete an organization.
         /// </summary>
         /// <param name="orgId">ID of organization to delete</param>
         /// <returns></returns>
@@ -72,7 +78,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Delete an organization.
+        ///     Delete an organization.
         /// </summary>
         /// <param name="organization">organization to delete</param>
         /// <returns></returns>
@@ -82,9 +88,9 @@ namespace InfluxDB.Client
 
             await DeleteOrganization(organization.Id);
         }
-        
+
         /// <summary>
-        /// Clone an organization.
+        ///     Clone an organization.
         /// </summary>
         /// <param name="clonedName">name of cloned organization</param>
         /// <param name="bucketId">ID of organization to clone</param>
@@ -95,16 +101,13 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(bucketId, nameof(bucketId));
 
             var organization = await FindOrganizationById(bucketId);
-            if (organization == null)
-            {
-                throw new InvalidOperationException($"NotFound Organization with ID: {bucketId}");
-            }
+            if (organization == null) throw new InvalidOperationException($"NotFound Organization with ID: {bucketId}");
 
             return await CloneOrganization(clonedName, organization);
         }
 
         /// <summary>
-        /// Clone an organization.
+        ///     Clone an organization.
         /// </summary>
         /// <param name="clonedName">name of cloned organization</param>
         /// <param name="organization">organization to clone</param>
@@ -120,17 +123,14 @@ namespace InfluxDB.Client
             };
 
             var created = await CreateOrganization(cloned);
-            
-            foreach (var label in await GetLabels(organization))
-            {
-                await AddLabel(label, created);
-            }
-            
+
+            foreach (var label in await GetLabels(organization)) await AddLabel(label, created);
+
             return created;
         }
 
         /// <summary>
-        /// Retrieve an organization.
+        ///     Retrieve an organization.
         /// </summary>
         /// <param name="orgId">ID of organization to get</param>
         /// <returns>organization details</returns>
@@ -144,7 +144,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// List all organizations.
+        ///     List all organizations.
         /// </summary>
         /// <returns>List all organizations</returns>
         public async Task<List<Organization>> FindOrganizations()
@@ -157,8 +157,8 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// List of secret keys the are stored for Organization. For example:
-        /// <code>
+        ///     List of secret keys the are stored for Organization. For example:
+        ///     <code>
         /// github_api_key,
         /// some_other_key,
         /// a_secret_key
@@ -174,8 +174,8 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// List of secret keys the are stored for Organization. For example:
-        /// <code>
+        ///     List of secret keys the are stored for Organization. For example:
+        ///     <code>
         /// github_api_key,
         /// some_other_key,
         /// a_secret_key
@@ -195,7 +195,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Patches all provided secrets and updates any previous values.
+        ///     Patches all provided secrets and updates any previous values.
         /// </summary>
         /// <param name="secrets">secrets to update/add</param>
         /// <param name="organization">the organization for put secrets</param>
@@ -209,7 +209,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Patches all provided secrets and updates any previous values.
+        ///     Patches all provided secrets and updates any previous values.
         /// </summary>
         /// <param name="secrets">secrets to update/add</param>
         /// <param name="orgId">the organization for put secrets</param>
@@ -225,7 +225,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Delete provided secrets.
+        ///     Delete provided secrets.
         /// </summary>
         /// <param name="secrets">secrets to delete</param>
         /// <param name="organization">the organization for delete secrets</param>
@@ -239,7 +239,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Delete provided secrets.
+        ///     Delete provided secrets.
         /// </summary>
         /// <param name="secrets">secrets to delete</param>
         /// <param name="orgId">the organization for delete secrets</param>
@@ -255,7 +255,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// List all members of an organization.
+        ///     List all members of an organization.
         /// </summary>
         /// <param name="organization">organization of the members</param>
         /// <returns>the List all members of an organization</returns>
@@ -267,7 +267,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// List all members of an organization.
+        ///     List all members of an organization.
         /// </summary>
         /// <param name="orgId">ID of organization to get members</param>
         /// <returns>the List all members of an organization</returns>
@@ -283,7 +283,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Add organization member.
+        ///     Add organization member.
         /// </summary>
         /// <param name="member">the member of an organization</param>
         /// <param name="organization">the organization of a member</param>
@@ -297,7 +297,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Add organization member.
+        ///     Add organization member.
         /// </summary>
         /// <param name="memberId">the ID of a member</param>
         /// <param name="orgId">the ID of an organization</param>
@@ -315,7 +315,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Removes a member from an organization.
+        ///     Removes a member from an organization.
         /// </summary>
         /// <param name="member">the member of an organization</param>
         /// <param name="organization">the organization of a member</param>
@@ -329,7 +329,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Removes a member from an organization.
+        ///     Removes a member from an organization.
         /// </summary>
         /// <param name="memberId">the ID of a member</param>
         /// <param name="orgId">the ID of an organization</param>
@@ -345,7 +345,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// List all owners of an organization.
+        ///     List all owners of an organization.
         /// </summary>
         /// <param name="organization">organization of the owners</param>
         /// <returns>the List all owners of an organization</returns>
@@ -357,7 +357,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// List all owners of an organization.
+        ///     List all owners of an organization.
         /// </summary>
         /// <param name="orgId">ID of organization to get owners</param>
         /// <returns>the List all owners of an organization</returns>
@@ -373,7 +373,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Add organization owner.
+        ///     Add organization owner.
         /// </summary>
         /// <param name="owner">the owner of an organization</param>
         /// <param name="organization">the organization of a owner</param>
@@ -387,7 +387,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Add organization owner.
+        ///     Add organization owner.
         /// </summary>
         /// <param name="ownerId">the ID of a owner</param>
         /// <param name="orgId">the ID of an organization</param>
@@ -405,7 +405,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Removes a owner from an organization.
+        ///     Removes a owner from an organization.
         /// </summary>
         /// <param name="owner">the owner of an organization</param>
         /// <param name="organization">the organization of a owner</param>
@@ -419,7 +419,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Removes a owner from an organization.
+        ///     Removes a owner from an organization.
         /// </summary>
         /// <param name="ownerId">the ID of a owner</param>
         /// <param name="orgId">the ID of an organization</param>
@@ -435,7 +435,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Retrieve an organization's logs
+        ///     Retrieve an organization's logs
         /// </summary>
         /// <param name="organization">for retrieve logs</param>
         /// <returns>logs</returns>
@@ -447,7 +447,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Retrieve an organization's logs
+        ///     Retrieve an organization's logs
         /// </summary>
         /// <param name="organization">for retrieve logs</param>
         /// <param name="findOptions">the find options</param>
@@ -461,7 +461,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Retrieve an organization's logs
+        ///     Retrieve an organization's logs
         /// </summary>
         /// <param name="orgId">the ID of an organization</param>
         /// <returns>logs</returns>
@@ -473,7 +473,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Retrieve an organization's logs
+        ///     Retrieve an organization's logs
         /// </summary>
         /// <param name="orgId">the ID of an organization</param>
         /// <param name="findOptions">the find options</param>
@@ -489,7 +489,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// List all labels of an organization.
+        ///     List all labels of an organization.
         /// </summary>
         /// <param name="organization">organization of the labels</param>
         /// <returns>the List all labels of an organization</returns>
@@ -501,7 +501,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// List all labels of an organization.
+        ///     List all labels of an organization.
         /// </summary>
         /// <param name="orgId">ID of an organization to get labels</param>
         /// <returns>the List all labels of an organization</returns>
@@ -513,7 +513,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Add an organization label.
+        ///     Add an organization label.
         /// </summary>
         /// <param name="label">the label of an organization</param>
         /// <param name="organization">an organization of a label</param>
@@ -527,7 +527,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Add an organization label.
+        ///     Add an organization label.
         /// </summary>
         /// <param name="labelId">the ID of a label</param>
         /// <param name="orgId">the ID of an organization</param>
@@ -541,7 +541,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Removes a label from an organization.
+        ///     Removes a label from an organization.
         /// </summary>
         /// <param name="label">the label of an organization</param>
         /// <param name="organization">an organization of a owner</param>
@@ -555,7 +555,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Removes a label from an organization.
+        ///     Removes a label from an organization.
         /// </summary>
         /// <param name="labelId">the ID of a label</param>
         /// <param name="orgId">the ID of an organization</param>

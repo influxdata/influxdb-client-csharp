@@ -12,59 +12,50 @@ using Microsoft.Net.Http.Headers;
 
 namespace InfluxDB.Client.Internal
 {
-    class AuthenticateDelegatingHandler : DelegatingHandler
+    public class AuthenticateDelegatingHandler : DelegatingHandler
     {
         private readonly InfluxDBClientOptions _options;
 
         private char[] _sessionToken;
         private bool _signout;
-        
+
         public AuthenticateDelegatingHandler(InfluxDBClientOptions options)
         {
             Arguments.CheckNotNull(options, "options");
 
             InnerHandler = new HttpClientHandler();
 
-            this._options = options;
+            _options = options;
         }
-        
+
         protected override async Task<HttpResponseMessage> SendAsync(
-                        HttpRequestMessage request, CancellationToken cancellationToken)
+            HttpRequestMessage request, CancellationToken cancellationToken)
         {
-            if (_signout)
-            {
-                return await base.SendAsync(request, cancellationToken);
-            }
-            
+            if (_signout) return await base.SendAsync(request, cancellationToken);
+
             if (InfluxDBClientOptions.AuthenticationScheme.Token.Equals(_options.AuthScheme))
             {
                 request.Headers.Add("Authorization", "Token " + String(_options.Token));
-            } 
-            else if (InfluxDBClientOptions.AuthenticationScheme.Session.Equals(_options.AuthScheme)) 
+            }
+            else if (InfluxDBClientOptions.AuthenticationScheme.Session.Equals(_options.AuthScheme))
             {
                 await InitToken(cancellationToken);
 
-                if (_sessionToken != null) 
-                {
-                    request.Headers.Add("Cookie", "session=" + String(_sessionToken));
-                }
+                if (_sessionToken != null) request.Headers.Add("Cookie", "session=" + String(_sessionToken));
             }
 
             // Call the inner handler.
             return await base.SendAsync(request, cancellationToken);
         }
-        
+
         /// <summary>
-        /// Init the Session token if is <see cref="InfluxDBClientOptions.AuthenticationScheme.Session"/> used.
+        ///     Init the Session token if is <see cref="InfluxDBClientOptions.AuthenticationScheme.Session" /> used.
         /// </summary>
         /// <param name="cancellationToken"></param>
         /// <returns>async task</returns>
-        private async Task InitToken(CancellationToken cancellationToken) 
+        private async Task InitToken(CancellationToken cancellationToken)
         {
-            if (!InfluxDBClientOptions.AuthenticationScheme.Session.Equals(_options.AuthScheme) || _signout) 
-            {
-                return;
-            }
+            if (!InfluxDBClientOptions.AuthenticationScheme.Session.Equals(_options.AuthScheme) || _signout) return;
 
             //TODO or expired
             if (_sessionToken == null)
@@ -74,12 +65,12 @@ namespace InfluxDB.Client.Internal
                 authRequest.Headers.Add("Authorization", header);
 
                 HttpResponseMessage authResponse;
-                
+
                 try
                 {
                     authResponse = await base.SendAsync(authRequest, cancellationToken);
-                } 
-                catch (IOException e) 
+                }
+                catch (IOException e)
                 {
                     Trace.WriteLine("Cannot retrieve the Session token!");
                     Trace.WriteLine(e);
@@ -87,10 +78,9 @@ namespace InfluxDB.Client.Internal
                 }
 
                 if (authResponse.Headers.TryGetValues("Set-Cookie", out var values))
-                {
                     _sessionToken = SetCookieHeaderValue.ParseList(values.ToList())
-                                    .ToList().First(cookie => cookie.Name.ToString().Equals("session")).Value.ToString().ToCharArray();
-                }
+                        .ToList().First(cookie => cookie.Name.ToString().Equals("session")).Value.ToString()
+                        .ToCharArray();
             }
         }
 
@@ -100,7 +90,7 @@ namespace InfluxDB.Client.Internal
         }
 
         /// <summary>
-        /// Expire the current session.
+        ///     Expire the current session.
         /// </summary>
         /// <returns>async task</returns>
         protected internal async Task Signout()
@@ -108,19 +98,20 @@ namespace InfluxDB.Client.Internal
             if (!InfluxDBClientOptions.AuthenticationScheme.Session.Equals(_options.AuthScheme) || _signout)
             {
                 _signout = true;
-                
+
                 return;
             }
 
             _signout = true;
             _sessionToken = null;
 
-            var authRequest = new HttpRequestMessage(new HttpMethod(HttpMethodKind.Post.Name()), _options.Url + "/api/v2/signout");
+            var authRequest = new HttpRequestMessage(new HttpMethod(HttpMethodKind.Post.Name()),
+                _options.Url + "/api/v2/signout");
 
             await base.SendAsync(authRequest, new CancellationToken());
         }
-        
-        private string String(char[] password) 
+
+        private string String(char[] password)
         {
             return new string(password);
         }

@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using InfluxDB.Client.Core;
 using InfluxDB.Client.Core.Internal;
 using InfluxDB.Client.Domain;
+using InfluxDB.Client.Generated.Domain;
 using Task = System.Threading.Tasks.Task;
 
 namespace InfluxDB.Client.Internal
@@ -41,7 +42,7 @@ namespace InfluxDB.Client.Internal
 
             var request = await Get($"/api/v2/{resourcePath}/{resourceId}/labels");
 
-            return Call<Labels>(request)?.LabelList;
+            return Call<LabelsResponse>(request)?.Labels;
         }
 
         protected async Task<Label> AddLabel(string labelId, string resourceId, string resourcePath,
@@ -53,7 +54,7 @@ namespace InfluxDB.Client.Internal
             Arguments.CheckNonEmptyString(resourcePath, nameof(resourcePath));
             Arguments.CheckNotNull(resourceType, nameof(resourceType));
 
-            var labelMapping = new LabelMapping {LabelId = labelId, ResourceType = resourceType};
+            var labelMapping = new LabelMapping {LabelID = labelId};
 
             var request = await Post(labelMapping, $"/api/v2/{resourcePath}/{resourceId}/labels");
 

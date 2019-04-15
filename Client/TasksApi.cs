@@ -1,9 +1,21 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using InfluxDB.Client.Core;
 using InfluxDB.Client.Core.Internal;
 using InfluxDB.Client.Domain;
+using InfluxDB.Client.Generated.Domain;
 using InfluxDB.Client.Internal;
+using LogEvent = InfluxDB.Client.Domain.LogEvent;
+using Logs = InfluxDB.Client.Domain.Logs;
+using Organization = InfluxDB.Client.Domain.Organization;
+using ResourceMember = InfluxDB.Client.Domain.ResourceMember;
+using ResourceMembers = InfluxDB.Client.Domain.ResourceMembers;
+using Run = InfluxDB.Client.Domain.Run;
+using Runs = InfluxDB.Client.Domain.Runs;
+using Task = InfluxDB.Client.Domain.Task;
+using Tasks = InfluxDB.Client.Domain.Tasks;
+using User = InfluxDB.Client.Domain.User;
 
 namespace InfluxDB.Client
 {
@@ -14,24 +26,23 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Creates a new task. The <see cref="Task.Flux"/> has to have defined a cron or a every repetition
-        /// by the <a href="http://bit.ly/option-statement">option statement</a>.
-        ///
-        /// <example>
-        /// This sample shows how to specify every repetition
-        /// <code>
+        ///     Creates a new task. The <see cref="Domain.Task.Flux" /> has to have defined a cron or a every repetition
+        ///     by the <a href="http://bit.ly/option-statement">option statement</a>.
+        ///     <example>
+        ///         This sample shows how to specify every repetition
+        ///         <code>
         /// option task = {
         ///     name: "mean",
         ///     every: 1h,
         /// }
-        ///
+        /// 
         /// from(bucket:"metrics/autogen")
         ///     |&gt; range(start:-task.every)
         ///     |&gt; group(columns:["level"])
         ///     |&gt; mean()
         ///     |&gt; yield(name:"mean")
         /// </code>
-        /// </example>
+        ///     </example>
         /// </summary>
         /// <param name="task"></param>
         /// <returns></returns>
@@ -46,8 +57,9 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Creates a new task with task repetition by cron. The <see cref="Task.Flux"/> is without a cron or a every repetition.
-        /// The repetition is automatically append to the <a href="http://bit.ly/option-statement">option statement</a>.
+        ///     Creates a new task with task repetition by cron. The <see cref="Task.Flux" /> is without a cron or a every
+        ///     repetition.
+        ///     The repetition is automatically append to the <a href="http://bit.ly/option-statement">option statement</a>.
         /// </summary>
         /// <param name="name">description of the task</param>
         /// <param name="flux">the Flux script to run for this task</param>
@@ -69,8 +81,9 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Creates a new task with task repetition by cron. The <see cref="Task.Flux"/> is without a cron or a every repetition.
-        /// The repetition is automatically append to the <a href="http://bit.ly/option-statement">option statement</a>.
+        ///     Creates a new task with task repetition by cron. The <see cref="Task.Flux" /> is without a cron or a every
+        ///     repetition.
+        ///     The repetition is automatically append to the <a href="http://bit.ly/option-statement">option statement</a>.
         /// </summary>
         /// <param name="name">description of the task</param>
         /// <param name="flux">the Flux script to run for this task</param>
@@ -92,8 +105,9 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Creates a new task with task repetition by duration expression ("1h", "30s"). The <see cref="Task.Flux"/> is without a cron or a every repetition.
-        /// The repetition is automatically append to the <a href="http://bit.ly/option-statement">option statement</a>.
+        ///     Creates a new task with task repetition by duration expression ("1h", "30s"). The <see cref="Task.Flux" /> is
+        ///     without a cron or a every repetition.
+        ///     The repetition is automatically append to the <a href="http://bit.ly/option-statement">option statement</a>.
         /// </summary>
         /// <param name="name">description of the task</param>
         /// <param name="flux">the Flux script to run for this task</param>
@@ -115,8 +129,9 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        ///  Creates a new task with task repetition by duration expression ("1h", "30s"). The <see cref="Task.Flux"/> is without a cron or a every repetition.
-        /// The repetition is automatically append to the <a href="http://bit.ly/option-statement">option statement</a>.
+        ///     Creates a new task with task repetition by duration expression ("1h", "30s"). The <see cref="Task.Flux" /> is
+        ///     without a cron or a every repetition.
+        ///     The repetition is automatically append to the <a href="http://bit.ly/option-statement">option statement</a>.
         /// </summary>
         /// <param name="name">description of the task</param>
         /// <param name="flux">the Flux script to run for this task</param>
@@ -138,7 +153,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Update a task. This will cancel all queued runs.
+        ///     Update a task. This will cancel all queued runs.
         /// </summary>
         /// <param name="task">task update to apply</param>
         /// <returns>task updated</returns>
@@ -152,7 +167,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Delete a task.
+        ///     Delete a task.
         /// </summary>
         /// <param name="taskId">ID of task to delete</param>
         /// <returns>async task</returns>
@@ -166,7 +181,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Delete a task.
+        ///     Delete a task.
         /// </summary>
         /// <param name="task">task to delete</param>
         /// <returns>async task</returns>
@@ -176,9 +191,9 @@ namespace InfluxDB.Client
 
             await DeleteTask(task.Id);
         }
-        
+
         /// <summary>
-        /// Clone a task.
+        ///     Clone a task.
         /// </summary>
         /// <param name="taskId">ID of task to clone</param>
         /// <returns>cloned task</returns>
@@ -187,16 +202,13 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(taskId, nameof(taskId));
 
             var task = await FindTaskById(taskId);
-            if (task == null)
-            {
-                throw new InvalidOperationException($"NotFound Task with ID: {taskId}");
-            }
+            if (task == null) throw new InvalidOperationException($"NotFound Task with ID: {taskId}");
 
             return await CloneTask(task);
         }
 
         /// <summary>
-        /// Clone a task.
+        ///     Clone a task.
         /// </summary>
         /// <param name="task">task to clone</param>
         /// <returns>cloned task</returns>
@@ -213,17 +225,14 @@ namespace InfluxDB.Client
             };
 
             var created = await CreateTask(cloned);
-            
-            foreach (var label in await GetLabels(task))
-            {
-                await AddLabel(label, created);
-            }
-            
+
+            foreach (var label in await GetLabels(task)) await AddLabel(label, created);
+
             return created;
         }
 
         /// <summary>
-        /// Retrieve a task.
+        ///     Retrieve a task.
         /// </summary>
         /// <param name="taskId">ID of task to get</param>
         /// <returns>task details</returns>
@@ -237,7 +246,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Lists tasks, limit 100.
+        ///     Lists tasks, limit 100.
         /// </summary>
         /// <returns>A list of tasks</returns>
         public async System.Threading.Tasks.Task<List<Task>> FindTasks()
@@ -246,7 +255,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Lists tasks, limit 100.
+        ///     Lists tasks, limit 100.
         /// </summary>
         /// <param name="user">filter tasks to a specific user</param>
         /// <returns>A list of tasks</returns>
@@ -258,7 +267,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Lists tasks, limit 100.
+        ///     Lists tasks, limit 100.
         /// </summary>
         /// <param name="userId">filter tasks to a specific user ID</param>
         /// <returns>A list of tasks</returns>
@@ -268,7 +277,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Lists tasks, limit 100.
+        ///     Lists tasks, limit 100.
         /// </summary>
         /// <param name="organization">filter tasks to a specific organization</param>
         /// <returns>A list of tasks</returns>
@@ -281,7 +290,7 @@ namespace InfluxDB.Client
 
 
         /// <summary>
-        /// Lists tasks, limit 100.
+        ///     Lists tasks, limit 100.
         /// </summary>
         /// <param name="orgId">filter tasks to a specific organization ID</param>
         /// <returns>A list of tasks</returns>
@@ -291,7 +300,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Lists tasks, limit 100.
+        ///     Lists tasks, limit 100.
         /// </summary>
         /// <param name="afterId">returns tasks after specified ID</param>
         /// <param name="userId">filter tasks to a specific user ID</param>
@@ -308,11 +317,11 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// List all members of a task.
+        ///     List all members of a task.
         /// </summary>
         /// <param name="task">task of the members</param>
         /// <returns>the List all members of a task</returns>
-        public async System.Threading.Tasks.Task<List<ResourceMember>> GetMembers(Task task)
+        public async Task<List<ResourceMember>> GetMembers(Task task)
         {
             Arguments.CheckNotNull(task, "task");
 
@@ -320,11 +329,11 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// List all members of a task.
+        ///     List all members of a task.
         /// </summary>
         /// <param name="taskId">ID of task to get members</param>
         /// <returns>the List all members of a task</returns>
-        public async System.Threading.Tasks.Task<List<ResourceMember>> GetMembers(string taskId)
+        public async Task<List<ResourceMember>> GetMembers(string taskId)
         {
             Arguments.CheckNonEmptyString(taskId, nameof(taskId));
 
@@ -336,12 +345,12 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Add a task member.
+        ///     Add a task member.
         /// </summary>
         /// <param name="member">the member of a task</param>
         /// <param name="task">the task of a member</param>
         /// <returns>created mapping</returns>
-        public async System.Threading.Tasks.Task<ResourceMember> AddMember(User member, Task task)
+        public async Task<ResourceMember> AddMember(User member, Task task)
         {
             Arguments.CheckNotNull(task, "task");
             Arguments.CheckNotNull(member, "member");
@@ -350,12 +359,12 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Add a task member.
+        ///     Add a task member.
         /// </summary>
         /// <param name="memberId">the ID of a member</param>
         /// <param name="taskId">the ID of a task</param>
         /// <returns>created mapping</returns>
-        public async System.Threading.Tasks.Task<ResourceMember> AddMember(string memberId, string taskId)
+        public async Task<ResourceMember> AddMember(string memberId, string taskId)
         {
             Arguments.CheckNonEmptyString(taskId, nameof(taskId));
             Arguments.CheckNonEmptyString(memberId, nameof(memberId));
@@ -368,7 +377,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Removes a member from a task.
+        ///     Removes a member from a task.
         /// </summary>
         /// <param name="member">the member of a task</param>
         /// <param name="task">the task of a member</param>
@@ -382,7 +391,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Removes a member from a task.
+        ///     Removes a member from a task.
         /// </summary>
         /// <param name="memberId">the ID of a member</param>
         /// <param name="taskId">the ID of a task</param>
@@ -398,11 +407,11 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// List all owners of a task.
+        ///     List all owners of a task.
         /// </summary>
         /// <param name="task">task of the owners</param>
         /// <returns>the List all owners of a task</returns>
-        public async System.Threading.Tasks.Task<List<ResourceMember>> GetOwners(Task task)
+        public async Task<List<ResourceMember>> GetOwners(Task task)
         {
             Arguments.CheckNotNull(task, "Task is required");
 
@@ -410,11 +419,11 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// List all owners of a task.
+        ///     List all owners of a task.
         /// </summary>
         /// <param name="taskId">ID of a task to get owners</param>
         /// <returns>the List all owners of a task</returns>
-        public async System.Threading.Tasks.Task<List<ResourceMember>> GetOwners(string taskId)
+        public async Task<List<ResourceMember>> GetOwners(string taskId)
         {
             Arguments.CheckNonEmptyString(taskId, nameof(taskId));
 
@@ -426,12 +435,12 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Add a task owner.
+        ///     Add a task owner.
         /// </summary>
         /// <param name="owner">the owner of a task</param>
         /// <param name="task">the task of a owner</param>
         /// <returns>created mapping</returns>
-        public async System.Threading.Tasks.Task<ResourceMember> AddOwner(User owner, Task task)
+        public async Task<ResourceMember> AddOwner(User owner, Task task)
         {
             Arguments.CheckNotNull(task, "task");
             Arguments.CheckNotNull(owner, "owner");
@@ -440,12 +449,12 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Add a task owner.
+        ///     Add a task owner.
         /// </summary>
         /// <param name="ownerId">the ID of a owner</param>
         /// <param name="taskId">the ID of a task</param>
         /// <returns>created mapping</returns>
-        public async System.Threading.Tasks.Task<ResourceMember> AddOwner(string ownerId, string taskId)
+        public async Task<ResourceMember> AddOwner(string ownerId, string taskId)
         {
             Arguments.CheckNonEmptyString(taskId, nameof(taskId));
             Arguments.CheckNonEmptyString(ownerId, nameof(ownerId));
@@ -458,7 +467,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Removes a owner from a task.
+        ///     Removes a owner from a task.
         /// </summary>
         /// <param name="owner">the owner of a task</param>
         /// <param name="task">the task of a owner</param>
@@ -472,7 +481,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Removes a owner from a task.
+        ///     Removes a owner from a task.
         /// </summary>
         /// <param name="ownerId">the ID of a owner</param>
         /// <param name="taskId">the ID of a task</param>
@@ -486,13 +495,13 @@ namespace InfluxDB.Client
 
             RaiseForInfluxError(request);
         }
-        
+
         /// <summary>
-        /// Retrieve all logs for a task.
+        ///     Retrieve all logs for a task.
         /// </summary>
         /// <param name="task">task to get logs for</param>
         /// <returns>the list of all logs for a task</returns>
-        public async System.Threading.Tasks.Task<List<LogEvent>> GetLogs(Task task)
+        public async Task<List<LogEvent>> GetLogs(Task task)
         {
             Arguments.CheckNotNull(task, nameof(task));
 
@@ -500,29 +509,29 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Retrieve all logs for a task.
+        ///     Retrieve all logs for a task.
         /// </summary>
         /// <param name="taskId">ID of task to get logs for</param>
         /// <param name="orgId">ID of organization to get logs for</param>
         /// <returns>the list of all logs for a task</returns>
-        public async System.Threading.Tasks.Task<List<LogEvent>> GetLogs(string taskId, string orgId)
+        public async Task<List<LogEvent>> GetLogs(string taskId, string orgId)
         {
             Arguments.CheckNonEmptyString(taskId, nameof(taskId));
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
-            
+
             var request = await Get($"/api/v2/tasks/{taskId}/logs?orgID={orgId}");
 
             var logs = Call(request, 404, new Logs());
-            
+
             return logs.Events;
         }
 
         /// <summary>
-        /// Retrieve list of run records for a task.
+        ///     Retrieve list of run records for a task.
         /// </summary>
         /// <param name="task"> task to get runs for</param>
         /// <returns>the list of run records for a task</returns>
-        public async System.Threading.Tasks.Task<List<Run>> GetRuns(Task task)
+        public async Task<List<Run>> GetRuns(Task task)
         {
             Arguments.CheckNotNull(task, nameof(task));
 
@@ -531,14 +540,14 @@ namespace InfluxDB.Client
 
 
         /// <summary>
-        /// Retrieve list of run records for a task.
+        ///     Retrieve list of run records for a task.
         /// </summary>
         /// <param name="task"> task to get runs for</param>
         /// <param name="afterTime">filter runs to those scheduled after this time</param>
         /// <param name="beforeTime">filter runs to those scheduled before this time</param>
         /// <param name="limit">the number of runs to return. Default value: 20.</param>
         /// <returns>the list of run records for a task</returns>
-        public async System.Threading.Tasks.Task<List<Run>> GetRuns(Task task, DateTime? afterTime,
+        public async Task<List<Run>> GetRuns(Task task, DateTime? afterTime,
             DateTime? beforeTime, int? limit)
         {
             Arguments.CheckNotNull(task, nameof(task));
@@ -547,12 +556,12 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Retrieve list of run records for a task.
+        ///     Retrieve list of run records for a task.
         /// </summary>
         /// <param name="taskId">ID of task to get runs for</param>
         /// <param name="orgId">ID of organization</param>
         /// <returns>the list of run records for a task</returns>
-        public async System.Threading.Tasks.Task<List<Run>> GetRuns(string taskId, string orgId)
+        public async Task<List<Run>> GetRuns(string taskId, string orgId)
         {
             Arguments.CheckNonEmptyString(taskId, nameof(taskId));
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
@@ -561,7 +570,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Retrieve list of run records for a task.
+        ///     Retrieve list of run records for a task.
         /// </summary>
         /// <param name="taskId">ID of task to get runs for</param>
         /// <param name="orgId">ID of organization</param>
@@ -569,32 +578,32 @@ namespace InfluxDB.Client
         /// <param name="beforeTime">filter runs to those scheduled before this time</param>
         /// <param name="limit">the number of runs to return. Default value: 20.</param>
         /// <returns>the list of run records for a task</returns>
-        public async System.Threading.Tasks.Task<List<Run>> GetRuns(string taskId, string orgId,
+        public async Task<List<Run>> GetRuns(string taskId, string orgId,
             DateTime? afterTime, DateTime? beforeTime, int? limit)
         {
             Arguments.CheckNonEmptyString(taskId, nameof(taskId));
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
 
             const string format = "yyyy-MM-dd'T'HH:mm:ss.fffZ";
-            
+
             var after = afterTime?.ToString(format);
             var before = beforeTime?.ToString(format);
-            
+
             var path = $"/api/v2/tasks/{taskId}/runs?afterTime={after}&beforeTime={before}&orgID={orgId}&limit={limit}";
             var request = await Get(path);
-            
+
             var response = Call(request, 404, new Runs());
 
             return response?.RunList;
         }
 
         /// <summary>
-        /// Retrieve a single run record for a task.
+        ///     Retrieve a single run record for a task.
         /// </summary>
         /// <param name="taskId">ID of task to get runs for</param>
         /// <param name="runId">ID of run</param>
         /// <returns>a single run record for a task</returns>
-        public async System.Threading.Tasks.Task<Run> GetRun(string taskId, string runId)
+        public async Task<Run> GetRun(string taskId, string runId)
         {
             Arguments.CheckNonEmptyString(taskId, nameof(taskId));
             Arguments.CheckNonEmptyString(runId, nameof(runId));
@@ -605,35 +614,35 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Retry a task run.
+        ///     Retry a task run.
         /// </summary>
         /// <param name="run">the run to retry</param>
         /// <returns>the executed run</returns>
-        public async System.Threading.Tasks.Task<Run> RetryRun(Run run)
+        public async Task<Run> RetryRun(Run run)
         {
             Arguments.CheckNotNull(run, nameof(run));
 
             return await RetryRun(run.TaskId, run.Id);
         }
-        
+
         /// <summary>
-        /// Retry a task run.
+        ///     Retry a task run.
         /// </summary>
         /// <param name="taskId">ID of task with the run to retry</param>
         /// <param name="runId">ID of run to retry</param>
         /// <returns>the executed run</returns>
-        public async System.Threading.Tasks.Task<Run> RetryRun(string taskId, string runId)
+        public async Task<Run> RetryRun(string taskId, string runId)
         {
             Arguments.CheckNonEmptyString(taskId, nameof(taskId));
             Arguments.CheckNonEmptyString(runId, nameof(runId));
-            
+
             var request = await Post($"/api/v2/tasks/{taskId}/runs/{runId}/retry");
 
             return Call<Run>(request, 404);
         }
-        
+
         /// <summary>
-        /// Cancels a currently running run.
+        ///     Cancels a currently running run.
         /// </summary>
         /// <param name="run">the run to cancel</param>
         /// <returns>async task</returns>
@@ -643,9 +652,9 @@ namespace InfluxDB.Client
 
             await CancelRun(run.TaskId, run.Id);
         }
-        
+
         /// <summary>
-        /// Cancels a currently running run.
+        ///     Cancels a currently running run.
         /// </summary>
         /// <param name="taskId">ID of task with the run to cancel</param>
         /// <param name="runId">ID of run to cancel</param>
@@ -654,31 +663,31 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(taskId, nameof(taskId));
             Arguments.CheckNonEmptyString(runId, nameof(runId));
-            
+
             var request = await Delete($"/api/v2/tasks/{taskId}/runs/{runId}");
 
             RaiseForInfluxError(request);
         }
 
         /// <summary>
-        /// Retrieve all logs for a run.
+        ///     Retrieve all logs for a run.
         /// </summary>
         /// <param name="run">the run to gets logs for it</param>
         /// <param name="orgId">ID of organization to get logs for it</param>
         /// <returns>the list of all logs for a run</returns>
-        public async System.Threading.Tasks.Task<List<LogEvent>> GetRunLogs(Run run, string orgId)
+        public async Task<List<LogEvent>> GetRunLogs(Run run, string orgId)
         {
             return await GetRunLogs(run.TaskId, run.Id, orgId);
         }
-        
+
         /// <summary>
-        /// Retrieve all logs for a run.
+        ///     Retrieve all logs for a run.
         /// </summary>
         /// <param name="taskId">ID of task to get run logs for it</param>
         /// <param name="runId">ID of run to get logs for it</param>
         /// <param name="orgId">ID of organization to get logs for it</param>
         /// <returns>the list of all logs for a run</returns>
-        public async System.Threading.Tasks.Task<List<LogEvent>> GetRunLogs(string taskId, string runId, string orgId)
+        public async Task<List<LogEvent>> GetRunLogs(string taskId, string runId, string orgId)
         {
             Arguments.CheckNonEmptyString(taskId, nameof(taskId));
             Arguments.CheckNonEmptyString(runId, nameof(runId));
@@ -687,16 +696,16 @@ namespace InfluxDB.Client
             var request = await Get($"/api/v2/tasks/{taskId}/runs/{runId}/logs?orgID={orgId}");
 
             var logs = Call(request, 404, new Logs());
-            
+
             return logs.Events;
         }
 
         /// <summary>
-        /// List all labels of a Task.
+        ///     List all labels of a Task.
         /// </summary>
         /// <param name="task">a Task of the labels</param>
         /// <returns>the List all labels of a Task</returns>
-        public async System.Threading.Tasks.Task<List<Label>> GetLabels(Task task)
+        public async Task<List<Label>> GetLabels(Task task)
         {
             Arguments.CheckNotNull(task, nameof(task));
 
@@ -704,11 +713,11 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// List all labels of a Task.
+        ///     List all labels of a Task.
         /// </summary>
         /// <param name="taskId">ID of a Task to get labels</param>
         /// <returns>the List all labels of a Task</returns>
-        public async System.Threading.Tasks.Task<List<Label>> GetLabels(string taskId)
+        public async Task<List<Label>> GetLabels(string taskId)
         {
             Arguments.CheckNonEmptyString(taskId, nameof(taskId));
 
@@ -716,12 +725,12 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Add a Task label.
+        ///     Add a Task label.
         /// </summary>
         /// <param name="label">the label of a Task</param>
         /// <param name="task">a Task of a label</param>
         /// <returns>added label</returns>
-        public async System.Threading.Tasks.Task<Label> AddLabel(Label label, Task task)
+        public async Task<Label> AddLabel(Label label, Task task)
         {
             Arguments.CheckNotNull(task, nameof(task));
             Arguments.CheckNotNull(label, nameof(label));
@@ -730,12 +739,12 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Add a Task label.
+        ///     Add a Task label.
         /// </summary>
         /// <param name="labelId">the ID of a label</param>
         /// <param name="taskId">the ID of a Task</param>
         /// <returns>added label</returns>
-        public async System.Threading.Tasks.Task<Label> AddLabel(string labelId, string taskId)
+        public async Task<Label> AddLabel(string labelId, string taskId)
         {
             Arguments.CheckNonEmptyString(taskId, nameof(taskId));
             Arguments.CheckNonEmptyString(labelId, nameof(labelId));
@@ -744,7 +753,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Removes a label from a Task.
+        ///     Removes a label from a Task.
         /// </summary>
         /// <param name="label">the label of a Task</param>
         /// <param name="task">a Task of a owner</param>
@@ -758,7 +767,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Removes a label from a Task.
+        ///     Removes a label from a Task.
         /// </summary>
         /// <param name="labelId">the ID of a label</param>
         /// <param name="taskId">the ID of a Task</param>
@@ -770,17 +779,14 @@ namespace InfluxDB.Client
 
             await DeleteLabel(labelId, taskId, "tasks");
         }
-        
+
         private Task CreateTask(string name, string flux, string every, string cron, string orgId)
         {
             Arguments.CheckNonEmptyString(name, nameof(name));
             Arguments.CheckNonEmptyString(flux, nameof(flux));
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
 
-            if (every != null)
-            {
-                Arguments.CheckDuration(every, nameof(every));
-            }
+            if (every != null) Arguments.CheckDuration(every, nameof(every));
 
             var task = new Task
             {

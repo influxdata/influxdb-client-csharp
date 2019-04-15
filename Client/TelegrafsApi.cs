@@ -6,13 +6,18 @@ using System.Threading.Tasks;
 using InfluxDB.Client.Core;
 using InfluxDB.Client.Core.Internal;
 using InfluxDB.Client.Domain;
+using InfluxDB.Client.Generated.Domain;
 using InfluxDB.Client.Internal;
+using Organization = InfluxDB.Client.Domain.Organization;
+using ResourceMember = InfluxDB.Client.Domain.ResourceMember;
+using ResourceMembers = InfluxDB.Client.Domain.ResourceMembers;
 using Task = System.Threading.Tasks.Task;
+using User = InfluxDB.Client.Domain.User;
 
 namespace InfluxDB.Client
 {
     /// <summary>
-    /// The client of the InfluxDB 2.0 that implement Telegrafs HTTP API endpoint.
+    ///     The client of the InfluxDB 2.0 that implement Telegrafs HTTP API endpoint.
     /// </summary>
     public class TelegrafsApi : AbstractInfluxDBClient
     {
@@ -21,7 +26,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Create a telegraf config.
+        ///     Create a telegraf config.
         /// </summary>
         /// <param name="telegrafConfig">Telegraf Configuration to create</param>
         /// <returns>Telegraf config created</returns>
@@ -35,7 +40,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Create a telegraf config.
+        ///     Create a telegraf config.
         /// </summary>
         /// <param name="name">Telegraf Configuration Name</param>
         /// <param name="description">Telegraf Configuration Description</param>
@@ -54,7 +59,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Create a telegraf config.
+        ///     Create a telegraf config.
         /// </summary>
         /// <param name="name">Telegraf Configuration Name</param>
         /// <param name="description">Telegraf Configuration Description</param>
@@ -79,7 +84,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Update a telegraf config.
+        ///     Update a telegraf config.
         /// </summary>
         /// <param name="telegrafConfig">telegraf config update to apply</param>
         /// <returns>An updated telegraf</returns>
@@ -93,7 +98,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Delete a telegraf config.
+        ///     Delete a telegraf config.
         /// </summary>
         /// <param name="telegrafConfig">telegraf config to delete</param>
         /// <returns>async task</returns>
@@ -105,7 +110,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Delete a telegraf config.
+        ///     Delete a telegraf config.
         /// </summary>
         /// <param name="telegrafConfigId">ID of telegraf config to delete</param>
         /// <returns>async task</returns>
@@ -119,7 +124,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Clone a telegraf config.
+        ///     Clone a telegraf config.
         /// </summary>
         /// <param name="clonedName">name of cloned telegraf config</param>
         /// <param name="telegrafConfigId">ID of telegraf config to clone</param>
@@ -131,15 +136,13 @@ namespace InfluxDB.Client
 
             var telegrafConfig = await FindTelegrafConfigById(telegrafConfigId);
             if (telegrafConfig == null)
-            {
                 throw new InvalidOperationException($"NotFound TelegrafConfig with ID: {telegrafConfigId}");
-            }
 
             return await CloneTelegrafConfig(clonedName, telegrafConfig);
         }
 
         /// <summary>
-        /// Clone a telegraf config.
+        ///     Clone a telegraf config.
         /// </summary>
         /// <param name="clonedName">name of cloned telegraf config</param>
         /// <param name="telegrafConfig">telegraf config to clone></param>
@@ -154,22 +157,19 @@ namespace InfluxDB.Client
                 Name = clonedName,
                 OrgId = telegrafConfig.OrgId,
                 Description = telegrafConfig.Description,
-                Agent = new TelegrafAgent{CollectionInterval = telegrafConfig.Agent.CollectionInterval}
+                Agent = new TelegrafAgent {CollectionInterval = telegrafConfig.Agent.CollectionInterval}
             };
             cloned.Plugins.AddRange(telegrafConfig.Plugins);
 
             var created = await CreateTelegrafConfig(cloned);
-            
-            foreach (var label in await GetLabels(telegrafConfig))
-            {
-                await AddLabel(label, created);
-            }
-            
+
+            foreach (var label in await GetLabels(telegrafConfig)) await AddLabel(label, created);
+
             return created;
         }
 
         /// <summary>
-        /// Retrieve a telegraf config.
+        ///     Retrieve a telegraf config.
         /// </summary>
         /// <param name="telegrafConfigId">ID of telegraf config to get</param>
         /// <returns>telegraf config details</returns>
@@ -183,7 +183,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Returns a list of telegraf configs.
+        ///     Returns a list of telegraf configs.
         /// </summary>
         /// <returns>A list of telegraf configs</returns>
         public async Task<List<TelegrafConfig>> FindTelegrafConfigs()
@@ -192,7 +192,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Returns a list of telegraf configs for specified organization.
+        ///     Returns a list of telegraf configs for specified organization.
         /// </summary>
         /// <param name="organization">specifies the organization of the telegraf configs</param>
         /// <returns>A list of telegraf configs</returns>
@@ -204,7 +204,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Returns a list of telegraf configs for specified organization.
+        ///     Returns a list of telegraf configs for specified organization.
         /// </summary>
         /// <param name="orgId">specifies the organization of the telegraf configs</param>
         /// <returns>A list of telegraf configs</returns>
@@ -213,12 +213,12 @@ namespace InfluxDB.Client
             var request = await Get($"/api/v2/telegrafs?orgID={orgId}");
 
             var telegrafConfigs = Call<TelegrafConfigs>(request);
-            
+
             return telegrafConfigs?.Configs;
         }
 
         /// <summary>
-        /// Retrieve a telegraf config in TOML.
+        ///     Retrieve a telegraf config in TOML.
         /// </summary>
         /// <param name="telegrafConfig">telegraf config to get</param>
         /// <returns>telegraf config details in TOML format</returns>
@@ -230,15 +230,15 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Retrieve a telegraf config in TOML.
+        ///     Retrieve a telegraf config in TOML.
         /// </summary>
         /// <param name="telegrafConfigId">ID of telegraf config to get</param>
         /// <returns>telegraf config details in TOML format</returns>
         public async Task<string> GetTOML(string telegrafConfigId)
         {
-            var request = new HttpRequestMessage(new HttpMethod(HttpMethodKind.Get.Name()), 
+            var request = new HttpRequestMessage(new HttpMethod(HttpMethodKind.Get.Name()),
                 $"/api/v2/telegrafs/{telegrafConfigId}");
-            
+
             request.Headers.Add("accept", "application/toml");
 
             var result = await Client.DoRequest(request).ConfigureAwait(false);
@@ -249,7 +249,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// List all users with member privileges for a telegraf config.
+        ///     List all users with member privileges for a telegraf config.
         /// </summary>
         /// <param name="telegrafConfig">the telegraf config</param>
         /// <returns>a list of telegraf config members</returns>
@@ -261,7 +261,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// List all users with member privileges for a telegraf config.
+        ///     List all users with member privileges for a telegraf config.
         /// </summary>
         /// <param name="telegrafConfigId">ID of the telegraf config</param>
         /// <returns>a list of telegraf config members</returns>
@@ -277,7 +277,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Add telegraf config member.
+        ///     Add telegraf config member.
         /// </summary>
         /// <param name="member">user to add as member</param>
         /// <param name="telegrafConfig">the telegraf config</param>
@@ -291,7 +291,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Add telegraf config member.
+        ///     Add telegraf config member.
         /// </summary>
         /// <param name="memberId">user ID to add as member</param>
         /// <param name="telegrafConfigId">ID of the telegraf config</param>
@@ -309,7 +309,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Removes a member from a telegraf config.
+        ///     Removes a member from a telegraf config.
         /// </summary>
         /// <param name="member">member to remove</param>
         /// <param name="telegrafConfig">the telegraf</param>
@@ -323,7 +323,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Removes a member from a telegraf config.
+        ///     Removes a member from a telegraf config.
         /// </summary>
         /// <param name="memberId">ID of member to remove</param>
         /// <param name="telegrafConfigId">ID of the telegraf</param>
@@ -339,7 +339,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// List all owners of a telegraf config.
+        ///     List all owners of a telegraf config.
         /// </summary>
         /// <param name="telegrafConfig">the telegraf config</param>
         /// <returns>a list of telegraf config owners</returns>
@@ -351,7 +351,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// List all owners of a telegraf config.
+        ///     List all owners of a telegraf config.
         /// </summary>
         /// <param name="telegrafConfigId">ID of the telegraf config</param>
         /// <returns>a list of telegraf config owners</returns>
@@ -367,7 +367,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Add telegraf config owner.
+        ///     Add telegraf config owner.
         /// </summary>
         /// <param name="owner">user to add as owner</param>
         /// <param name="telegrafConfig">the telegraf config</param>
@@ -381,7 +381,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Add telegraf config owner.
+        ///     Add telegraf config owner.
         /// </summary>
         /// <param name="ownerId">ID of user to add as owner</param>
         /// <param name="telegrafConfigId"> ID of the telegraf config</param>
@@ -399,7 +399,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Removes an owner from a telegraf config.
+        ///     Removes an owner from a telegraf config.
         /// </summary>
         /// <param name="owner">owner to remove</param>
         /// <param name="telegrafConfig">the telegraf config</param>
@@ -413,7 +413,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Removes an owner from a telegraf config.
+        ///     Removes an owner from a telegraf config.
         /// </summary>
         /// <param name="ownerId">ID of owner to remove</param>
         /// <param name="telegrafConfigId">ID of the telegraf config</param>
@@ -429,7 +429,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// List all labels for a telegraf config.
+        ///     List all labels for a telegraf config.
         /// </summary>
         /// <param name="telegrafConfig">the telegraf config</param>
         /// <returns>a list of all labels for a telegraf config</returns>
@@ -441,7 +441,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// List all labels for a telegraf config.
+        ///     List all labels for a telegraf config.
         /// </summary>
         /// <param name="telegrafConfigId">ID of the telegraf config</param>
         /// <returns>a list of all labels for a telegraf config</returns>
@@ -453,7 +453,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Add a label to a telegraf config.
+        ///     Add a label to a telegraf config.
         /// </summary>
         /// <param name="label">label to add</param>
         /// <param name="telegrafConfig">the telegraf config</param>
@@ -467,7 +467,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Add a label to a telegraf config.
+        ///     Add a label to a telegraf config.
         /// </summary>
         /// <param name="labelId">ID of label to add</param>
         /// <param name="telegrafConfigId">ID of the telegraf config</param>
@@ -481,7 +481,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Delete a label from a telegraf config.
+        ///     Delete a label from a telegraf config.
         /// </summary>
         /// <param name="label">label to delete</param>
         /// <param name="telegrafConfig">the telegraf config</param>
@@ -495,7 +495,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Delete a label from a telegraf config.
+        ///     Delete a label from a telegraf config.
         /// </summary>
         /// <param name="labelId">ID of label to delete</param>
         /// <param name="telegrafConfigId">ID of the telegraf config</param>

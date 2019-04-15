@@ -11,10 +11,6 @@ namespace InfluxDB.Client.Test
     [TestFixture]
     public class ItTelegrafsApiTest : AbstractItClientTest
     {
-        private TelegrafsApi _telegrafsApi;
-        private UsersApi _usersApi;
-        private Organization _organization;
-
         [SetUp]
         public new async Task SetUp()
         {
@@ -27,6 +23,67 @@ namespace InfluxDB.Client.Test
                 await _telegrafsApi.DeleteTelegrafConfig(telegrafConfig);
 
             Client.SetLogLevel(LogLevel.Body);
+        }
+
+        private TelegrafsApi _telegrafsApi;
+        private UsersApi _usersApi;
+        private Organization _organization;
+
+        private static TelegrafPlugin NewCpuPlugin()
+        {
+            return new TelegrafPlugin {Name = "cpu", Type = TelegrafPluginType.Input};
+        }
+
+        private static TelegrafPlugin NewOutputPlugin()
+        {
+            var output = new TelegrafPlugin
+            {
+                Name = "influxdb_v2", Type = TelegrafPluginType.Output, Comment = "Output to Influx 2.0"
+            };
+            output.Config.Add("organization", "my-org");
+            output.Config.Add("bucket", "my-bucket");
+            output.Config.Add("urls", new[] {"http://127.0.0.1:9999"});
+            output.Config.Add("token", "$INFLUX_TOKEN");
+
+            return output;
+        }
+
+        [Test]
+        public async Task CloneTelegrafConfig()
+        {
+            var source = await _telegrafsApi
+                .CreateTelegrafConfig(GenerateName("tc"), "test-config", _organization, 1_000,
+                    new List<TelegrafPlugin> {NewCpuPlugin(), NewOutputPlugin()});
+
+            var properties = new Dictionary<string, string> {{"color", "green"}, {"location", "west"}};
+
+            var label = Client.GetLabelsApi().CreateLabel(GenerateName("Cool Resource"), properties, _organization.Id);
+            await _telegrafsApi.AddLabel(label, source);
+
+            var name = GenerateName("cloned");
+
+            var cloned = await _telegrafsApi.CloneTelegrafConfig(name, source);
+
+            Assert.AreEqual(name, cloned.Name);
+            Assert.AreEqual(_organization.Id, cloned.OrgId);
+            Assert.AreEqual("test-config", cloned.Description);
+            Assert.AreEqual(1_000, cloned.Agent.CollectionInterval);
+            Assert.AreEqual(2, cloned.Plugins.Count);
+            Assert.AreEqual("cpu", cloned.Plugins[0].Name);
+            Assert.AreEqual("influxdb_v2", cloned.Plugins[1].Name);
+
+            var labels = await _telegrafsApi.GetLabels(cloned);
+            Assert.AreEqual(1, labels.Count);
+            Assert.AreEqual(label.Id, labels[0].Id);
+        }
+
+        [Test]
+        public void CloneTelegrafConfigNotFound()
+        {
+            var ioe = Assert.ThrowsAsync<InvalidOperationException>(async () =>
+                await _telegrafsApi.CloneTelegrafConfig(GenerateName("tc"), "020f755c3c082000"));
+
+            Assert.AreEqual("NotFound TelegrafConfig with ID: 020f755c3c082000", ioe.Message);
         }
 
         [Test]
@@ -53,24 +110,6 @@ namespace InfluxDB.Client.Test
             Assert.AreEqual(TelegrafPluginType.Output, telegrafConfig.Plugins[0].Type);
             Assert.AreEqual("cpu", telegrafConfig.Plugins[1].Name);
             Assert.AreEqual(TelegrafPluginType.Input, telegrafConfig.Plugins[1].Type);
-        }
-
-        [Test]
-        public async Task UpdateTelegrafConfig()
-        {
-            var telegrafConfig = await _telegrafsApi
-                .CreateTelegrafConfig(GenerateName("tc"), "test-config", _organization, 1_000,
-                    new List<TelegrafPlugin> {NewCpuPlugin(), NewOutputPlugin()});
-
-            telegrafConfig.Description = "updated";
-            telegrafConfig.Agent.CollectionInterval = 500;
-            telegrafConfig.Plugins.RemoveAt(0);
-
-            telegrafConfig = await _telegrafsApi.UpdateTelegrafConfig(telegrafConfig);
-
-            Assert.AreEqual("updated", telegrafConfig.Description);
-            Assert.AreEqual(500, telegrafConfig.Agent.CollectionInterval);
-            Assert.AreEqual(1, telegrafConfig.Plugins.Count);
         }
 
         [Test]
@@ -158,12 +197,12 @@ namespace InfluxDB.Client.Test
                     new List<TelegrafPlugin> {NewCpuPlugin(), NewOutputPlugin()});
 
             var telegrafConfigs = await _telegrafsApi.FindTelegrafConfigs();
-            Assert.AreEqual(size +1, telegrafConfigs.Count);
+            Assert.AreEqual(size + 1, telegrafConfigs.Count);
         }
-        
-        [Test]
-        public async Task GetToml() {
 
+        [Test]
+        public async Task GetToml()
+        {
             var telegrafConfig = await _telegrafsApi
                 .CreateTelegrafConfig(GenerateName("tc"), "test-config", _organization, 1_000,
                     new List<TelegrafPlugin> {NewCpuPlugin(), NewOutputPlugin()});
@@ -177,15 +216,48 @@ namespace InfluxDB.Client.Test
         }
 
         [Test]
-        public void GetTomlNotFound() {
-
+        public void GetTomlNotFound()
+        {
             var ioe = Assert.ThrowsAsync<HttpException>(async () =>
                 await _telegrafsApi.GetTOML("020f755c3d082000"));
 
             Assert.AreEqual("telegraf configuration not found", ioe.Message);
             Assert.AreEqual(404, ioe.Status);
         }
-        
+
+        [Test]
+        public async Task Labels()
+        {
+            var labelClient = Client.GetLabelsApi();
+
+            var telegrafConfig = await _telegrafsApi
+                .CreateTelegrafConfig(GenerateName("tc"), "test-config", _organization, 1_000,
+                    new List<TelegrafPlugin> {NewCpuPlugin(), NewOutputPlugin()});
+
+            var properties = new Dictionary<string, string> {{"color", "green"}, {"location", "west"}};
+
+            var label = labelClient.CreateLabel(GenerateName("Cool Resource"), properties, _organization.Id);
+
+            var labels = await _telegrafsApi.GetLabels(telegrafConfig);
+            Assert.AreEqual(0, labels.Count);
+
+            var addedLabel = await _telegrafsApi.AddLabel(label, telegrafConfig);
+            Assert.IsNotNull(addedLabel);
+            Assert.AreEqual(label.Id, addedLabel.Id);
+            Assert.AreEqual(label.Name, addedLabel.Name);
+            Assert.AreEqual(label.Properties, addedLabel.Properties);
+
+            labels = await _telegrafsApi.GetLabels(telegrafConfig);
+            Assert.AreEqual(1, labels.Count);
+            Assert.AreEqual(label.Id, labels[0].Id);
+            Assert.AreEqual(label.Name, labels[0].Name);
+
+            await _telegrafsApi.DeleteLabel(label, telegrafConfig);
+
+            labels = await _telegrafsApi.GetLabels(telegrafConfig);
+            Assert.AreEqual(0, labels.Count);
+        }
+
         [Test]
         public async Task Member()
         {
@@ -246,94 +318,23 @@ namespace InfluxDB.Client.Test
             owners = await _telegrafsApi.GetOwners(telegrafConfig);
             Assert.AreEqual(1, owners.Count);
         }
-        
-        [Test]
-        public async Task Labels()
-        {
-            var labelClient = Client.GetLabelsApi();
 
+        [Test]
+        public async Task UpdateTelegrafConfig()
+        {
             var telegrafConfig = await _telegrafsApi
                 .CreateTelegrafConfig(GenerateName("tc"), "test-config", _organization, 1_000,
                     new List<TelegrafPlugin> {NewCpuPlugin(), NewOutputPlugin()});
 
-            var properties = new Dictionary<string, string> {{"color", "green"}, {"location", "west"}};
+            telegrafConfig.Description = "updated";
+            telegrafConfig.Agent.CollectionInterval = 500;
+            telegrafConfig.Plugins.RemoveAt(0);
 
-            var label = await labelClient.CreateLabel(GenerateName("Cool Resource"), properties);
+            telegrafConfig = await _telegrafsApi.UpdateTelegrafConfig(telegrafConfig);
 
-            var labels = await _telegrafsApi.GetLabels(telegrafConfig);
-            Assert.AreEqual(0, labels.Count);
-
-            var addedLabel = await _telegrafsApi.AddLabel(label, telegrafConfig);
-            Assert.IsNotNull(addedLabel);
-            Assert.AreEqual(label.Id, addedLabel.Id);
-            Assert.AreEqual(label.Name, addedLabel.Name);
-            Assert.AreEqual(label.Properties, addedLabel.Properties);
-
-            labels = await _telegrafsApi.GetLabels(telegrafConfig);
-            Assert.AreEqual(1, labels.Count);
-            Assert.AreEqual(label.Id, labels[0].Id);
-            Assert.AreEqual(label.Name, labels[0].Name);
-
-            await _telegrafsApi.DeleteLabel(label, telegrafConfig);
-
-            labels = await _telegrafsApi.GetLabels(telegrafConfig);
-            Assert.AreEqual(0, labels.Count);
-        }
-
-        [Test]
-        public async Task CloneTelegrafConfig()
-        {
-            var source = await _telegrafsApi
-                .CreateTelegrafConfig(GenerateName("tc"), "test-config", _organization, 1_000,
-                    new List<TelegrafPlugin> {NewCpuPlugin(), NewOutputPlugin()});
-
-            var properties = new Dictionary<string, string> {{"color", "green"}, {"location", "west"}};
-
-            var label = await Client.GetLabelsApi().CreateLabel(GenerateName("Cool Resource"), properties);
-            await _telegrafsApi.AddLabel(label, source);
-
-            var name = GenerateName("cloned");
-            
-            var cloned = await _telegrafsApi.CloneTelegrafConfig(name, source);
-            
-            Assert.AreEqual(name, cloned.Name);
-            Assert.AreEqual(_organization.Id, cloned.OrgId);
-            Assert.AreEqual("test-config", cloned.Description);
-            Assert.AreEqual(1_000, cloned.Agent.CollectionInterval);
-            Assert.AreEqual(2, cloned.Plugins.Count);
-            Assert.AreEqual("cpu", cloned.Plugins[0].Name);
-            Assert.AreEqual("influxdb_v2", cloned.Plugins[1].Name);
-
-            var labels = await _telegrafsApi.GetLabels(cloned);
-            Assert.AreEqual(1, labels.Count);
-            Assert.AreEqual(label.Id, labels[0].Id);
-        }
-
-        [Test]
-        public void CloneTelegrafConfigNotFound()
-        {
-            var ioe = Assert.ThrowsAsync<InvalidOperationException>(async () => await _telegrafsApi.CloneTelegrafConfig(GenerateName("tc"),"020f755c3c082000"));
-            
-            Assert.AreEqual("NotFound TelegrafConfig with ID: 020f755c3c082000", ioe.Message);
-        }
-        
-        private static TelegrafPlugin NewCpuPlugin()
-        {
-            return new TelegrafPlugin {Name = "cpu", Type = TelegrafPluginType.Input};
-        }
-
-        private static TelegrafPlugin NewOutputPlugin()
-        {
-            var output = new TelegrafPlugin
-            {
-                Name = "influxdb_v2", Type = TelegrafPluginType.Output, Comment = "Output to Influx 2.0"
-            };
-            output.Config.Add("organization", "my-org");
-            output.Config.Add("bucket", "my-bucket");
-            output.Config.Add("urls", new[] {"http://127.0.0.1:9999"});
-            output.Config.Add("token", "$INFLUX_TOKEN");
-
-            return output;
+            Assert.AreEqual("updated", telegrafConfig.Description);
+            Assert.AreEqual(500, telegrafConfig.Agent.CollectionInterval);
+            Assert.AreEqual(1, telegrafConfig.Plugins.Count);
         }
     }
 }

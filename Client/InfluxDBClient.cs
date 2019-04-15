@@ -1,18 +1,115 @@
 using System;
 using System.Diagnostics;
+using System.IO;
+using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Text;
 using System.Threading.Tasks;
 using InfluxDB.Client.Core;
 using InfluxDB.Client.Core.Exceptions;
 using InfluxDB.Client.Core.Internal;
 using InfluxDB.Client.Domain;
+using InfluxDB.Client.Generated.Client;
+using InfluxDB.Client.Generated.Service;
 using InfluxDB.Client.Internal;
+using RestSharp;
+
+namespace InfluxDB.Client.Generated.Client
+{
+    //TODO move to separate file
+    public partial class ApiClient
+    {
+        private readonly InfluxDBClientOptions _options;
+
+        private char[] _sessionToken;
+        private bool _signout;
+
+        public ApiClient(InfluxDBClientOptions options)
+        {
+            _options = options;
+
+            Configuration = new Configuration
+            {
+                BasePath = options.Url,
+                Timeout = 10_000,
+                ApiClient = this
+            };
+
+            RestClient = new RestClient(options.Url);
+        }
+
+        partial void InterceptRequest(IRestRequest request)
+        {
+            if (_signout)
+            {
+            }
+
+            if (InfluxDBClientOptions.AuthenticationScheme.Token.Equals(_options.AuthScheme))
+            {
+                request.AddHeader("Authorization", "Token " + new string(_options.Token));
+            }
+            else if (InfluxDBClientOptions.AuthenticationScheme.Session.Equals(_options.AuthScheme))
+            {
+                InitToken();
+
+                if (_sessionToken != null) request.AddHeader("Cookie", "session=" + new string(_sessionToken));
+            }
+        }
+
+        private void InitToken()
+        {
+            if (!InfluxDBClientOptions.AuthenticationScheme.Session.Equals(_options.AuthScheme) || _signout) return;
+
+            if (_sessionToken == null)
+            {
+                IRestResponse authResponse;
+                try
+                {
+                    var header = "Basic " + Convert.ToBase64String(
+                                     Encoding.Default.GetBytes(_options.Username + ":" + _options.Password));
+
+                    var request = new RestRequest(_options.Url + "/api/v2/signin", Method.POST)
+                        .AddHeader("Authorization", header);
+
+                    authResponse = RestClient.Execute(request);
+                }
+                catch (IOException e)
+                {
+                    Trace.WriteLine("Cannot retrieve the Session token!");
+                    Trace.WriteLine(e);
+                    return;
+                }
+
+                if (authResponse.Cookies != null)
+                    _sessionToken = authResponse.Cookies
+                        .ToList().First(cookie => cookie.Name.ToString().Equals("session")).Value.ToCharArray();
+            }
+        }
+
+        protected internal void Signout()
+        {
+            if (!InfluxDBClientOptions.AuthenticationScheme.Session.Equals(_options.AuthScheme) || _signout)
+            {
+                _signout = true;
+
+                return;
+            }
+
+            _signout = true;
+            _sessionToken = null;
+
+            var request = new RestRequest(_options.Url + "/api/v2/signout", Method.POST);
+            RestClient.Execute(request);
+        }
+    }
+}
 
 namespace InfluxDB.Client
 {
     public class InfluxDBClient : AbstractInfluxDBClient, IDisposable
     {
+        private readonly ApiClient _apiClient;
         private readonly AuthenticateDelegatingHandler _authenticateDelegatingHandler;
         private readonly LoggingHandler _loggingHandler;
 
@@ -31,10 +128,32 @@ namespace InfluxDB.Client
 
             Client.HttpClient.BaseAddress = new Uri(options.Url);
             Client.HttpClient.Timeout = options.Timeout;
+
+            _apiClient = new ApiClient(options);
+        }
+
+        public void Dispose()
+        {
+            //
+            // signout
+            //
+            try
+            {
+                var signout = _authenticateDelegatingHandler.Signout();
+
+                signout.Wait();
+
+                _apiClient.Signout();
+            }
+            catch (Exception e)
+            {
+                Trace.WriteLine("The signout exception");
+                Trace.WriteLine(e);
+            }
         }
 
         /// <summary>
-        /// Get the Query client.
+        ///     Get the Query client.
         /// </summary>
         /// <returns>the new client instance for the Query API</returns>
         public QueryApi GetQueryApi()
@@ -43,7 +162,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Get the Write client.
+        ///     Get the Write client.
         /// </summary>
         /// <returns>the new client instance for the Write API</returns>
         public WriteApi GetWriteApi()
@@ -52,7 +171,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Get the Write client.
+        ///     Get the Write client.
         /// </summary>
         /// <param name="writeOptions">the configuration for a write client</param>
         /// <returns>the new client instance for the Write API</returns>
@@ -62,7 +181,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Get the <see cref="Domain.Organization"/> client.
+        ///     Get the <see cref="Domain.Organization" /> client.
         /// </summary>
         /// <returns>the new client instance for Organization API</returns>
         public OrganizationsApi GetOrganizationsApi()
@@ -71,7 +190,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Get the <see cref="Domain.User"/> client.
+        ///     Get the <see cref="Domain.User" /> client.
         /// </summary>
         /// <returns>the new client instance for User API</returns>
         public UsersApi GetUsersApi()
@@ -80,7 +199,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Get the <see cref="Domain.Bucket"/> client.
+        ///     Get the <see cref="Domain.Bucket" /> client.
         /// </summary>
         /// <returns>the new client instance for Bucket API</returns>
         public BucketsApi GetBucketsApi()
@@ -89,7 +208,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Get the <see cref="Domain.Source"/> client.
+        ///     Get the <see cref="Domain.Source" /> client.
         /// </summary>
         /// <returns>the new client instance for Source API</returns>
         public SourcesApi GetSourcesApi()
@@ -98,7 +217,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Get the <see cref="Domain.Authorization"/> client.
+        ///     Get the <see cref="Domain.Authorization" /> client.
         /// </summary>
         /// <returns>the new client instance for Authorization API</returns>
         public AuthorizationsApi GetAuthorizationsApi()
@@ -107,7 +226,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Get the <see cref="Domain.Task"/> client.
+        ///     Get the <see cref="Domain.Task" /> client.
         /// </summary>
         /// <returns>the new client instance for Task API</returns>
         public TasksApi GetTasksApi()
@@ -116,7 +235,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Get the <see cref="Domain.ScraperTarget"/> client.
+        ///     Get the <see cref="Domain.ScraperTarget" /> client.
         /// </summary>
         /// <returns>the new client instance for Scraper API</returns>
         public ScraperTargetsApi GetScraperTargetsApi()
@@ -125,7 +244,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Get the <see cref="Domain.TelegrafConfig"/> client.
+        ///     Get the <see cref="Domain.TelegrafConfig" /> client.
         /// </summary>
         /// <returns>the new client instance for Telegrafs API</returns>
         public TelegrafsApi GetTelegrafsApi()
@@ -134,16 +253,25 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Get the <see cref="Domain.Label"/> client.
+        ///     Get the <see cref="InfluxDB.Client.Generated.Domain.Label" /> client.
         /// </summary>
         /// <returns>the new client instance for Label API</returns>
         public LabelsApi GetLabelsApi()
         {
-            return new LabelsApi(Client);
+            var labelsService = new LabelsService((Configuration) _apiClient.Configuration);
+
+            labelsService.ExceptionFactory = (methodName, response) =>
+            {
+                if (!response.IsSuccessful) return HttpException.Create(response);
+
+                return null;
+            };
+
+            return new LabelsApi(Client, labelsService);
         }
 
         /// <summary>
-        /// Set the log level for the request and response information.
+        ///     Set the log level for the request and response information.
         /// </summary>
         /// <param name="logLevel">the log level to set</param>
         public void SetLogLevel(LogLevel logLevel)
@@ -154,7 +282,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Set the <see cref="LogLevel"/> that is used for logging requests and responses.
+        ///     Set the <see cref="LogLevel" /> that is used for logging requests and responses.
         /// </summary>
         /// <returns>Log Level</returns>
         public LogLevel GetLogLevel()
@@ -163,7 +291,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Get the health of an instance.
+        ///     Get the health of an instance.
         /// </summary>
         /// <returns>health of an instance</returns>
         public async Task<Health> Health()
@@ -172,7 +300,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// The readiness of the InfluxDB 2.0.
+        ///     The readiness of the InfluxDB 2.0.
         /// </summary>
         /// <returns>return null if the InfluxDB is not ready</returns>
         public async Task<Ready> Ready()
@@ -192,7 +320,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Post onboarding request, to setup initial user, org and bucket.
+        ///     Post onboarding request, to setup initial user, org and bucket.
         /// </summary>
         /// <param name="onboarding">to setup defaults</param>
         /// <exception cref="HttpException">With status code 422 when an onboarding has already been completed</exception>
@@ -208,7 +336,7 @@ namespace InfluxDB.Client
 
 
         /// <summary>
-        /// Check if database has default user, org, bucket created, returns true if not.
+        ///     Check if database has default user, org, bucket created, returns true if not.
         /// </summary>
         /// <returns>True if onboarding has already been completed otherwise false</returns>
         public async Task<bool> IsOnboardingAllowed()
@@ -216,24 +344,6 @@ namespace InfluxDB.Client
             var request = await Get("/api/v2/setup");
 
             return Call<IsOnboarding>(request).Allowed;
-        }
-
-        public void Dispose()
-        {
-            //
-            // signout
-            //
-            try
-            {
-                var signout = _authenticateDelegatingHandler.Signout();
-
-                signout.Wait();
-            }
-            catch (Exception e)
-            {
-                Trace.WriteLine("The signout exception");
-                Trace.WriteLine(e);
-            }
         }
     }
 }

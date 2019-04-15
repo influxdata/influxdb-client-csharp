@@ -176,6 +176,22 @@ public class InfluxCSharpGenerator extends CSharpClientCodegen {
                 })
                 .forEach(op -> op.dataType += "?");
 
+        //
+        // Set base path
+        //
+        String url;
+        if (operation.getServers() != null) {
+            url = operation.getServers().get(0).getUrl();
+        } else if (openAPI.getPaths().get(path).getServers() != null) {
+            url = openAPI.getPaths().get(path).getServers().get(0).getUrl();
+        } else {
+            url = openAPI.getServers().get(0).getUrl();
+        }
+
+        if (!url.equals("/")) {
+            codegenOperation.path = url + codegenOperation.path;
+        }
+
         return codegenOperation;
     }
 

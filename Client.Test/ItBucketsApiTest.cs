@@ -35,6 +35,42 @@ namespace InfluxDB.Client.Test
         }
 
         [Test]
+        public async Task CloneBucket()
+        {
+            var source = await _bucketsApi.CreateBucket(GenerateName("robot sensor"), RetentionRule(), _organization);
+
+            var properties = new Dictionary<string, string> {{"color", "green"}, {"location", "west"}};
+
+            var label = Client.GetLabelsApi().CreateLabel(GenerateName("Cool Resource"), properties, _organization.Id);
+            await _bucketsApi.AddLabel(label, source);
+
+            var name = GenerateName("cloned");
+
+            var cloned = await _bucketsApi.CloneBucket(name, source);
+
+            Assert.AreEqual(name, cloned.Name);
+            Assert.AreEqual(_organization.Id, cloned.OrgId);
+            Assert.AreEqual(_organization.Name, cloned.OrgName);
+            Assert.IsNull(cloned.RetentionPolicyName);
+            Assert.AreEqual(1, cloned.RetentionRules.Count);
+            Assert.AreEqual(3600, cloned.RetentionRules[0].EverySeconds);
+            Assert.AreEqual("expire", cloned.RetentionRules[0].Type);
+
+            var labels = await _bucketsApi.GetLabels(cloned);
+            Assert.AreEqual(1, labels.Count);
+            Assert.AreEqual(label.Id, labels[0].Id);
+        }
+
+        [Test]
+        public void CloneBucketNotFound()
+        {
+            var ioe = Assert.ThrowsAsync<InvalidOperationException>(async () =>
+                await _bucketsApi.CloneBucket(GenerateName("bucket"), "020f755c3c082000"));
+
+            Assert.AreEqual("NotFound Bucket with ID: 020f755c3c082000", ioe.Message);
+        }
+
+        [Test]
         public async Task CreateBucket()
         {
             var bucketName = GenerateName("robot sensor");
@@ -293,7 +329,7 @@ namespace InfluxDB.Client.Test
 
             var properties = new Dictionary<string, string> {{"color", "green"}, {"location", "west"}};
 
-            var label = await labelClient.CreateLabel(GenerateName("Cool Resource"), properties);
+            var label = labelClient.CreateLabel(GenerateName("Cool Resource"), properties, _organization.Id);
 
             var labels = await _bucketsApi.GetLabels(bucket);
             Assert.AreEqual(0, labels.Count);
@@ -389,41 +425,6 @@ namespace InfluxDB.Client.Test
             Assert.AreEqual(updatedBucket.OrgId, createBucket.OrgId);
             Assert.AreEqual(updatedBucket.OrgName, createBucket.OrgName);
             Assert.AreEqual(updatedBucket.RetentionRules[0].EverySeconds, 1000L);
-        }
-        
-        [Test]
-        public async Task CloneBucket()
-        {
-            var source = await _bucketsApi.CreateBucket(GenerateName("robot sensor"), RetentionRule(), _organization);
-
-            var properties = new Dictionary<string, string> {{"color", "green"}, {"location", "west"}};
-
-            var label = await Client.GetLabelsApi().CreateLabel(GenerateName("Cool Resource"), properties);
-            await _bucketsApi.AddLabel(label, source);
-
-            var name = GenerateName("cloned");
-            
-            var cloned = await _bucketsApi.CloneBucket(name, source);
-            
-            Assert.AreEqual(name, cloned.Name);
-            Assert.AreEqual(_organization.Id, cloned.OrgId);
-            Assert.AreEqual(_organization.Name, cloned.OrgName);
-            Assert.IsNull(cloned.RetentionPolicyName);
-            Assert.AreEqual(1, cloned.RetentionRules.Count);
-            Assert.AreEqual(3600, cloned.RetentionRules[0].EverySeconds);
-            Assert.AreEqual("expire", cloned.RetentionRules[0].Type);
-
-            var labels = await _bucketsApi.GetLabels(cloned);
-            Assert.AreEqual(1, labels.Count);
-            Assert.AreEqual(label.Id, labels[0].Id);
-        }
-
-        [Test]
-        public void CloneBucketNotFound()
-        {
-            var ioe = Assert.ThrowsAsync<InvalidOperationException>(async () => await _bucketsApi.CloneBucket(GenerateName("bucket"),"020f755c3c082000"));
-            
-            Assert.AreEqual("NotFound Bucket with ID: 020f755c3c082000", ioe.Message);
         }
     }
 }

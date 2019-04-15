@@ -25,6 +25,42 @@ namespace InfluxDB.Client.Test
         private Organization _organization;
 
         [Test]
+        public async Task CloneScraper()
+        {
+            var source = await _scraperTargetsApi
+                .CreateScraperTarget(GenerateName("InfluxDB scraper"), "http://localhost:9999", _bucket.Id,
+                    _organization.Id);
+
+            var properties = new Dictionary<string, string> {{"color", "green"}, {"location", "west"}};
+
+            var label = Client.GetLabelsApi().CreateLabel(GenerateName("Cool Resource"), properties, _organization.Id);
+            await _scraperTargetsApi.AddLabel(label, source);
+
+            var name = GenerateName("cloned");
+
+            var cloned = await _scraperTargetsApi.CloneScraperTarget(name, source);
+
+            Assert.AreEqual(name, cloned.Name);
+            Assert.AreEqual(ScraperType.Prometheus, cloned.Type);
+            Assert.AreEqual(source.Url, cloned.Url);
+            Assert.AreEqual(source.OrgId, cloned.OrgId);
+            Assert.AreEqual(source.BucketId, cloned.BucketId);
+
+            var labels = await _scraperTargetsApi.GetLabels(cloned);
+            Assert.AreEqual(1, labels.Count);
+            Assert.AreEqual(label.Id, labels[0].Id);
+        }
+
+        [Test]
+        public void CloneScraperNotFound()
+        {
+            var ioe = Assert.ThrowsAsync<InvalidOperationException>(async () =>
+                await _scraperTargetsApi.CloneScraperTarget(GenerateName("bucket"), "020f755c3c082000"));
+
+            Assert.AreEqual("NotFound ScraperTarget with ID: 020f755c3c082000", ioe.Message);
+        }
+
+        [Test]
         public async Task CreateScraperTarget()
         {
             var scraper = await _scraperTargetsApi
@@ -109,7 +145,7 @@ namespace InfluxDB.Client.Test
 
             var properties = new Dictionary<string, string> {{"color", "green"}, {"location", "west"}};
 
-            var label = await labelClient.CreateLabel(GenerateName("Cool Resource"), properties);
+            var label = labelClient.CreateLabel(GenerateName("Cool Resource"), properties, _organization.Id);
 
             var labels = await _scraperTargetsApi.GetLabels(scraper);
             Assert.AreEqual(0, labels.Count);
@@ -203,41 +239,6 @@ namespace InfluxDB.Client.Test
             var scraperUpdated = await _scraperTargetsApi.UpdateScraperTarget(scraper);
 
             Assert.AreEqual("Changed name", scraperUpdated.Name);
-        }
-        
-        [Test]
-        public async Task CloneScraper()
-        {
-            var source = await _scraperTargetsApi
-                .CreateScraperTarget(GenerateName("InfluxDB scraper"), "http://localhost:9999", _bucket.Id,
-                    _organization.Id);
-
-            var properties = new Dictionary<string, string> {{"color", "green"}, {"location", "west"}};
-
-            var label = await Client.GetLabelsApi().CreateLabel(GenerateName("Cool Resource"), properties);
-            await _scraperTargetsApi.AddLabel(label, source);
-
-            var name = GenerateName("cloned");
-            
-            var cloned = await _scraperTargetsApi.CloneScraperTarget(name, source);
-            
-            Assert.AreEqual(name, cloned.Name);
-            Assert.AreEqual(ScraperType.Prometheus, cloned.Type);
-            Assert.AreEqual(source.Url, cloned.Url);
-            Assert.AreEqual(source.OrgId, cloned.OrgId);
-            Assert.AreEqual(source.BucketId, cloned.BucketId);
-
-            var labels = await _scraperTargetsApi.GetLabels(cloned);
-            Assert.AreEqual(1, labels.Count);
-            Assert.AreEqual(label.Id, labels[0].Id);
-        }
-
-        [Test]
-        public void CloneScraperNotFound()
-        {
-            var ioe = Assert.ThrowsAsync<InvalidOperationException>(async () => await _scraperTargetsApi.CloneScraperTarget(GenerateName("bucket"),"020f755c3c082000"));
-            
-            Assert.AreEqual("NotFound ScraperTarget with ID: 020f755c3c082000", ioe.Message);
         }
     }
 }

@@ -1,150 +1,174 @@
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using InfluxDB.Client.Core;
 using InfluxDB.Client.Core.Internal;
-using InfluxDB.Client.Domain;
-using Task = System.Threading.Tasks.Task;
+using InfluxDB.Client.Generated.Domain;
+using InfluxDB.Client.Generated.Service;
 
 namespace InfluxDB.Client
 {
     public class LabelsApi : AbstractClient
     {
-        protected internal LabelsApi(DefaultClientIo client) : base(client)
+        private readonly LabelsService _service;
+
+        protected internal LabelsApi(DefaultClientIo client, LabelsService service) : base(client)
         {
+            _service = service;
         }
 
         /// <summary>
-        /// Creates a new label and sets <see cref="Label.Id"/> with the new identifier.
+        ///     Create a label
         /// </summary>
-        /// <param name="label">label to create</param>
-        /// <returns>created Label</returns>
-        public async Task<Label> CreateLabel(Label label)
+        /// <param name="request">label to create</param>
+        /// <returns>Added label</returns>
+        public Label CreateLabel(LabelCreateRequest request)
         {
-            Arguments.CheckNotNull(label, "label");
+            Arguments.CheckNotNull(request, nameof(request));
 
-            var response = await Post(label, "/api/v2/labels");
-
-            return Call<LabelResponse>(response).Label;
+            return _service.LabelsPost(request).Label;
         }
 
         /// <summary>
-        /// Creates a new label and sets <see cref="Label.Id"/> with the new identifier.
+        ///     Create a label
         /// </summary>
         /// <param name="name">name of a label</param>
         /// <param name="properties">properties of a label</param>
-        /// <returns>created Label</returns>
-        public async Task<Label> CreateLabel(string name, Dictionary<string, string> properties)
+        /// <param name="orgId">owner of a label</param>
+        /// <returns>Added label</returns>
+        public Label CreateLabel(string name, Dictionary<string, string> properties,
+            string orgId)
         {
-            Arguments.CheckNonEmptyString(name, "name");
-            Arguments.CheckNotNull(properties, "properties");
+            Arguments.CheckNonEmptyString(name, nameof(name));
+            Arguments.CheckNonEmptyString(orgId, nameof(orgId));
+            Arguments.CheckNotNull(properties, nameof(properties));
 
-            var label = new Label {Name = name, Properties = properties};
-
-            return await CreateLabel(label);
+            return CreateLabel(new LabelCreateRequest(orgId, name, properties));
         }
 
         /// <summary>
-        /// Updates a label's properties.
+        ///     Update a single label
         /// </summary>
-        /// <param name="label">a label with properties to update</param>
-        /// <returns>updated label</returns>
-        public async Task<Label> UpdateLabel(Label label)
+        /// <param name="label">label to update</param>
+        /// <returns>Updated label</returns>
+        public Label UpdateLabel(Label label)
         {
             Arguments.CheckNotNull(label, nameof(label));
 
-            var result = await Patch(label, $"/api/v2/labels/{label.Id}");
+            var labelUpdate = new LabelUpdate {Properties = label.Properties};
 
-            return Call<LabelResponse>(result).Label;
+            return _service.LabelsLabelIDPatch(label.Id, labelUpdate).Label;
         }
 
         /// <summary>
-        /// Delete a label.
+        ///     Update a single label
+        /// </summary>
+        /// <param name="labelId">ID of label to update</param>
+        /// <param name="labelUpdate">label update</param>
+        /// <returns>Updated label</returns>
+        public Label UpdateLabel(string labelId, LabelUpdate labelUpdate)
+        {
+            return _service.LabelsLabelIDPatch(labelId, labelUpdate).Label;
+        }
+
+        /// <summary>
+        ///     Delete a label.
         /// </summary>
         /// <param name="label">label to delete</param>
-        /// <returns>async task</returns>
-        public async Task DeleteLabel(Label label)
+        /// <returns>delete has been accepted</returns>
+        public void DeleteLabel(Label label)
         {
             Arguments.CheckNotNull(label, nameof(label));
 
-            await DeleteLabel(label.Id);
+            DeleteLabel(label.Id);
         }
-        
+
         /// <summary>
-        /// Delete a label.
+        ///     Delete a label.
         /// </summary>
-        /// <param name="labelId">ID of a label to delete</param>
-        /// <returns>async task</returns>
-        public async Task DeleteLabel(string labelId)
+        /// <param name="labelId">ID of label to delete</param>
+        /// <returns>delete has been accepted</returns>
+        public void DeleteLabel(string labelId)
         {
             Arguments.CheckNonEmptyString(labelId, nameof(labelId));
-            
-            var request = await Delete($"/api/v2/labels/{labelId}");
 
-            RaiseForInfluxError(request);
+            _service.LabelsLabelIDDelete(labelId);
         }
-        
+
         /// <summary>
-        /// Clone a label.
+        ///     Clone a label.
         /// </summary>
         /// <param name="clonedName">name of cloned label</param>
         /// <param name="labelId">ID of label to clone</param>
         /// <returns>cloned label</returns>
-        public async Task<Label> CloneLabel(string clonedName, string labelId)
+        public Label CloneLabel(string clonedName, string labelId)
         {
             Arguments.CheckNonEmptyString(clonedName, nameof(clonedName));
             Arguments.CheckNonEmptyString(labelId, nameof(labelId));
 
-            var label = await FindLabelById(labelId);
-            if (label == null)
-            {
-                throw new InvalidOperationException($"NotFound Label with ID: {labelId}");
-            }
+            var label = FindLabelById(labelId);
+            if (label == null) throw new InvalidOperationException($"NotFound Label with ID: {labelId}");
 
-            return await CloneLabel(clonedName, label);
+            return CloneLabel(clonedName, label);
         }
 
         /// <summary>
-        /// Clone a label.
+        ///     Clone a label.
         /// </summary>
         /// <param name="clonedName">name of cloned label</param>
         /// <param name="label">label to clone</param>
         /// <returns>cloned label</returns>
-        public async Task<Label> CloneLabel(string clonedName, Label label)
+        public Label CloneLabel(string clonedName, Label label)
         {
             Arguments.CheckNonEmptyString(clonedName, nameof(clonedName));
             Arguments.CheckNotNull(label, nameof(label));
 
-            var cloned = new Label {Name = clonedName, Properties = new Dictionary<string, string>(label.Properties)};
+            var cloned =
+                new LabelCreateRequest(label.OrgID, clonedName, new Dictionary<string, string>(label.Properties));
 
-            return await CreateLabel(cloned);
+            return CreateLabel(cloned);
         }
 
         /// <summary>
-        /// Retrieve a label.
+        ///     Retrieve a label.
         /// </summary>
         /// <param name="labelId">ID of a label to get</param>
         /// <returns>Label detail</returns>
-        public async Task<Label> FindLabelById(string labelId)
+        public Label FindLabelById(string labelId)
         {
             Arguments.CheckNonEmptyString(labelId, nameof(labelId));
-            
-            var request = await Get($"/api/v2/labels/{labelId}");
 
-            return Call<LabelResponse>(request, 404)?.Label;
+            return _service.LabelsLabelIDGet(labelId).Label;
         }
 
         /// <summary>
-        /// List all labels.
+        ///     List all labels.
         /// </summary>
         /// <returns>List all labels.</returns>
-        public async Task<List<Label>> FindLabels()
+        public Labels FindLabels()
         {
-            var request = await Get("/api/v2/labels");
+            return _service.LabelsGet().Labels;
+        }
 
-            var labels = Call<Labels>(request);
+        /// <summary>
+        ///     Get all labels.
+        /// </summary>
+        /// <param name="organization">specifies the organization of the resource</param>
+        /// <returns>all labels</returns>
+        public Labels FindLabelsByOrg(Organization organization)
+        {
+            Arguments.CheckNotNull(organization, nameof(organization));
 
-            return labels.LabelList;
+            return FindLabelsByOrgId(organization.Id);
+        }
+
+        /// <summary>
+        ///     Get all labels.
+        /// </summary>
+        /// <param name="orgId">specifies the organization ID of the resource</param>
+        /// <returns>all labels</returns>
+        public Labels FindLabelsByOrgId(string orgId)
+        {
+            return _service.LabelsGet(null, orgId).Labels;
         }
     }
 }

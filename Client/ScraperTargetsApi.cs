@@ -4,8 +4,14 @@ using System.Threading.Tasks;
 using InfluxDB.Client.Core;
 using InfluxDB.Client.Core.Internal;
 using InfluxDB.Client.Domain;
+using InfluxDB.Client.Generated.Domain;
 using InfluxDB.Client.Internal;
+using ResourceMember = InfluxDB.Client.Domain.ResourceMember;
+using ResourceMembers = InfluxDB.Client.Domain.ResourceMembers;
+using ScraperTargetResponse = InfluxDB.Client.Domain.ScraperTargetResponse;
+using ScraperTargetResponses = InfluxDB.Client.Domain.ScraperTargetResponses;
 using Task = System.Threading.Tasks.Task;
+using User = InfluxDB.Client.Domain.User;
 
 namespace InfluxDB.Client
 {
@@ -16,7 +22,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Creates a new ScraperTarget and sets <see cref="ScraperTarget.Id"/> with the new identifier.
+        ///     Creates a new ScraperTarget and sets <see cref="ScraperTarget.Id" /> with the new identifier.
         /// </summary>
         /// <param name="scraperTarget">the scraper to create</param>
         /// <returns>created ScraperTarget</returns>
@@ -30,7 +36,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Creates a new ScraperTarget and sets <see cref="ScraperTarget.Id"/> with the new identifier.
+        ///     Creates a new ScraperTarget and sets <see cref="ScraperTarget.Id" /> with the new identifier.
         /// </summary>
         /// <param name="name">the name of the new ScraperTarget</param>
         /// <param name="url">the url of the new ScraperTarget</param>
@@ -52,7 +58,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Update a ScraperTarget.
+        ///     Update a ScraperTarget.
         /// </summary>
         /// <param name="scraperTarget">ScraperTarget update to apply</param>
         /// <returns>updated ScraperTarget</returns>
@@ -66,7 +72,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Delete a ScraperTarget.
+        ///     Delete a ScraperTarget.
         /// </summary>
         /// <param name="scraperTargetId">ID of ScraperTarget to delete</param>
         /// <returns>async task</returns>
@@ -80,7 +86,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Delete a ScraperTarget.
+        ///     Delete a ScraperTarget.
         /// </summary>
         /// <param name="scraperTarget">ScraperTarget to delete</param>
         /// <returns>async task</returns>
@@ -92,7 +98,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Clone a ScraperTarget.
+        ///     Clone a ScraperTarget.
         /// </summary>
         /// <param name="clonedName">name of cloned ScraperTarget</param>
         /// <param name="scraperTargetId">ID of ScraperTarget to clone</param>
@@ -104,15 +110,13 @@ namespace InfluxDB.Client
 
             var scraperTarget = await FindScraperTargetById(scraperTargetId);
             if (scraperTarget == null)
-            {
                 throw new InvalidOperationException($"NotFound ScraperTarget with ID: {scraperTargetId}");
-            }
 
             return await CloneScraperTarget(clonedName, scraperTarget);
         }
 
         /// <summary>
-        /// Clone a ScraperTarget.
+        ///     Clone a ScraperTarget.
         /// </summary>
         /// <param name="clonedName">name of cloned ScraperTarget</param>
         /// <param name="scraperTarget">ScraperTarget to clone</param>
@@ -133,16 +137,13 @@ namespace InfluxDB.Client
 
             var created = await CreateScraperTarget(cloned);
 
-            foreach (var label in await GetLabels(scraperTarget))
-            {
-                await AddLabel(label, created);
-            }
+            foreach (var label in await GetLabels(scraperTarget)) await AddLabel(label, created);
 
             return created;
         }
 
         /// <summary>
-        /// Retrieve a ScraperTarget.
+        ///     Retrieve a ScraperTarget.
         /// </summary>
         /// <param name="scraperTargetId">ID of ScraperTarget to get</param>
         /// <returns>ScraperTarget details</returns>
@@ -156,7 +157,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Get all ScraperTargets.
+        ///     Get all ScraperTargets.
         /// </summary>
         /// <returns>A list of ScraperTargets</returns>
         public async Task<List<ScraperTargetResponse>> FindScraperTargets()
@@ -169,7 +170,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// List all members of a ScraperTarget.
+        ///     List all members of a ScraperTarget.
         /// </summary>
         /// <param name="scraperTarget">ScraperTarget of the members</param>
         /// <returns>the List all members of a ScraperTarget</returns>
@@ -181,7 +182,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// List all members of a ScraperTarget.
+        ///     List all members of a ScraperTarget.
         /// </summary>
         /// <param name="scraperTargetId">ID of ScraperTarget to get members</param>
         /// <returns>the List all members of a ScraperTarget</returns>
@@ -197,7 +198,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Add a ScraperTarget member.
+        ///     Add a ScraperTarget member.
         /// </summary>
         /// <param name="member">the member of a scraperTarget</param>
         /// <param name="scraperTarget">the ScraperTarget of a member</param>
@@ -211,7 +212,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Add a ScraperTarget member.
+        ///     Add a ScraperTarget member.
         /// </summary>
         /// <param name="memberId">the ID of a member</param>
         /// <param name="scraperTargetId">the ID of a scraperTarget</param>
@@ -229,7 +230,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Removes a member from a ScraperTarget.
+        ///     Removes a member from a ScraperTarget.
         /// </summary>
         /// <param name="member">the member of a ScraperTarget</param>
         /// <param name="scraperTarget">the ScraperTarget of a member</param>
@@ -243,7 +244,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Removes a member from a ScraperTarget.
+        ///     Removes a member from a ScraperTarget.
         /// </summary>
         /// <param name="memberId">the ID of a member</param>
         /// <param name="scraperTargetId">the ID of a ScraperTarget</param>
@@ -259,7 +260,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// List all owners of a ScraperTarget.
+        ///     List all owners of a ScraperTarget.
         /// </summary>
         /// <param name="scraperTarget">ScraperTarget of the owners</param>
         /// <returns>the List all owners of a ScraperTarget</returns>
@@ -271,7 +272,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// List all owners of a ScraperTarget.
+        ///     List all owners of a ScraperTarget.
         /// </summary>
         /// <param name="scraperTargetId">ID of a ScraperTarget to get owners</param>
         /// <returns>the List all owners of a scraperTarget</returns>
@@ -287,7 +288,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Add a ScraperTarget owner.
+        ///     Add a ScraperTarget owner.
         /// </summary>
         /// <param name="owner">the owner of a ScraperTarget</param>
         /// <param name="scraperTarget">the ScraperTarget of a owner</param>
@@ -301,7 +302,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Add a ScraperTarget owner.
+        ///     Add a ScraperTarget owner.
         /// </summary>
         /// <param name="ownerId">the ID of a owner</param>
         /// <param name="scraperTargetId">the ID of a ScraperTarget</param>
@@ -319,7 +320,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Removes a owner from a ScraperTarget.
+        ///     Removes a owner from a ScraperTarget.
         /// </summary>
         /// <param name="owner">the owner of a scraperTarget</param>
         /// <param name="scraperTarget">the ScraperTarget of a owner</param>
@@ -333,7 +334,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Removes a owner from a ScraperTarget.
+        ///     Removes a owner from a ScraperTarget.
         /// </summary>
         /// <param name="ownerId">the ID of a owner</param>
         /// <param name="scraperTargetId">the ID of a ScraperTarget</param>
@@ -349,7 +350,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// List all labels of a ScraperTarget.
+        ///     List all labels of a ScraperTarget.
         /// </summary>
         /// <param name="scraperTarget">a ScraperTarget of the labels</param>
         /// <returns>the List all labels of a ScraperTarget</returns>
@@ -361,7 +362,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// List all labels of a ScraperTarget.
+        ///     List all labels of a ScraperTarget.
         /// </summary>
         /// <param name="scraperTargetId">ID of a ScraperTarget to get labels</param>
         /// <returns>the List all labels of a ScraperTarget</returns>
@@ -373,7 +374,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Add a ScraperTarget label.
+        ///     Add a ScraperTarget label.
         /// </summary>
         /// <param name="label">the label of a ScraperTarget</param>
         /// <param name="scraperTarget">a ScraperTarget of a label</param>
@@ -387,7 +388,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Add a ScraperTarget label.
+        ///     Add a ScraperTarget label.
         /// </summary>
         /// <param name="labelId">the ID of a label</param>
         /// <param name="scraperTargetId">the ID of a ScraperTarget</param>
@@ -401,7 +402,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Removes a label from a ScraperTarget.
+        ///     Removes a label from a ScraperTarget.
         /// </summary>
         /// <param name="label">the label of a ScraperTarget</param>
         /// <param name="scraperTarget">a ScraperTarget of a owner</param>
@@ -415,7 +416,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Removes a label from a ScraperTarget.
+        ///     Removes a label from a ScraperTarget.
         /// </summary>
         /// <param name="labelId">the ID of a label</param>
         /// <param name="scraperTargetId">the ID of a ScraperTarget</param>
