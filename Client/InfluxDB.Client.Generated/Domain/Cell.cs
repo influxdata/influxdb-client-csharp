@@ -39,8 +39,7 @@ namespace InfluxDB.Client.Generated.Domain
         /// <param name="y">y.</param>
         /// <param name="w">w.</param>
         /// <param name="h">h.</param>
-        /// <param name="viewID">The reference to a view from the views API.</param>
-        public Cell(string id = default(string), CellLinks links = default(CellLinks), int? x = default(int?), int? y = default(int?), int? w = default(int?), int? h = default(int?), string viewID = default(string))
+        public Cell(string id = default(string), CellLinks links = default(CellLinks), int? x = default(int?), int? y = default(int?), int? w = default(int?), int? h = default(int?))
         {
             this.Id = id;
             this.Links = links;
@@ -48,7 +47,6 @@ namespace InfluxDB.Client.Generated.Domain
             this.Y = y;
             this.W = w;
             this.H = h;
-            this.ViewID = viewID;
         }
 
         /// <summary>
@@ -88,13 +86,6 @@ namespace InfluxDB.Client.Generated.Domain
         public int? H { get; set; }
 
         /// <summary>
-        /// The reference to a view from the views API
-        /// </summary>
-        /// <value>The reference to a view from the views API</value>
-        [DataMember(Name="viewID", EmitDefaultValue=false)]
-        public string ViewID { get; set; }
-
-        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -108,7 +99,6 @@ namespace InfluxDB.Client.Generated.Domain
             sb.Append("  Y: ").Append(Y).Append("\n");
             sb.Append("  W: ").Append(W).Append("\n");
             sb.Append("  H: ").Append(H).Append("\n");
-            sb.Append("  ViewID: ").Append(ViewID).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -172,11 +162,6 @@ namespace InfluxDB.Client.Generated.Domain
                     this.H == input.H ||
                     (this.H != null &&
                     this.H.Equals(input.H))
-                ) && 
-                (
-                    this.ViewID == input.ViewID ||
-                    (this.ViewID != null &&
-                    this.ViewID.Equals(input.ViewID))
                 );
         }
 
@@ -201,8 +186,6 @@ namespace InfluxDB.Client.Generated.Domain
                     hashCode = hashCode * 59 + this.W.GetHashCode();
                 if (this.H != null)
                     hashCode = hashCode * 59 + this.H.GetHashCode();
-                if (this.ViewID != null)
-                    hashCode = hashCode * 59 + this.ViewID.GetHashCode();
                 return hashCode;
             }
         }

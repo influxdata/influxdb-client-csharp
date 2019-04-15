@@ -785,24 +785,24 @@ paths:
     get:
       tags:
         - ScraperTargets
-      summary: Retrieve a  scraper target
+      summary: get a scraper target by id
       parameters:
         - $ref: '#/components/parameters/TraceSpan'
         - in: path
           name: scraperTargetID
+          required: true
           schema:
             type: string
-          required: true
-          description: ID of of the scraper target to get
+          description: id of the scraper target
       responses:
         '200':
-          description: the scraper target details
+          description: scraper target updated
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ScraperTargetResponse"
         default:
-          description: unexpected error
+          description: internal server error
           content:
             application/json:
               schema:
@@ -2810,6 +2810,16 @@ paths:
           schema:
             type: string
           description: filter authorizations belonging to a user name
+        - in: query
+          name: orgID
+          schema:
+            type: string
+          description: filter authorizations belonging to a org id
+        - in: query
+          name: org
+          schema:
+            type: string
+          description: filter authorizations belonging to a org name
       responses:
         '200':
           description: A list of authorizations
@@ -6800,9 +6810,6 @@ components:
         h:
           type: integer
           format: int32
-        viewID:
-          type: string
-          description: uses the view provided in the request
         usingView:
           type: string
           description: makes a copy of the provided view
@@ -6846,9 +6853,6 @@ components:
         h:
           type: integer
           format: int32
-        viewID:
-          type: string
-          description: The reference to a view from the views API
     Cells:
       type: array
       items:
@@ -7127,7 +7131,7 @@ components:
           description: must specify one of orgID and org
         labels:
           type: array
-          description: this is an array of label strings that will be added as labels to the document
+          description: this is an array of label IDs that will be added as labels to the document
           items:
             type: string
       required:

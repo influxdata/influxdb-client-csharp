@@ -42,7 +42,7 @@ namespace InfluxDB.Client.Generated.Domain
         /// <param name="content">content (required).</param>
         /// <param name="org">must specify one of orgID and org.</param>
         /// <param name="orgID">must specify one of orgID and org.</param>
-        /// <param name="labels">this is an array of label strings that will be added as labels to the document.</param>
+        /// <param name="labels">this is an array of label IDs that will be added as labels to the document.</param>
         public DocumentCreate(DocumentMeta meta = default(DocumentMeta), Object content = default(Object), string org = default(string), string orgID = default(string), List<string> labels = default(List<string>))
         {
             // to ensure "meta" is required (not null)
@@ -95,9 +95,9 @@ namespace InfluxDB.Client.Generated.Domain
         public string OrgID { get; set; }
 
         /// <summary>
-        /// this is an array of label strings that will be added as labels to the document
+        /// this is an array of label IDs that will be added as labels to the document
         /// </summary>
-        /// <value>this is an array of label strings that will be added as labels to the document</value>
+        /// <value>this is an array of label IDs that will be added as labels to the document</value>
         [DataMember(Name="labels", EmitDefaultValue=false)]
         public List<string> Labels { get; set; }
 

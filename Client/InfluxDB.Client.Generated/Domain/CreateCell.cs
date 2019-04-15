@@ -38,16 +38,14 @@ namespace InfluxDB.Client.Generated.Domain
         /// <param name="y">y.</param>
         /// <param name="w">w.</param>
         /// <param name="h">h.</param>
-        /// <param name="viewID">uses the view provided in the request.</param>
         /// <param name="usingView">makes a copy of the provided view.</param>
-        public CreateCell(string name = default(string), int? x = default(int?), int? y = default(int?), int? w = default(int?), int? h = default(int?), string viewID = default(string), string usingView = default(string))
+        public CreateCell(string name = default(string), int? x = default(int?), int? y = default(int?), int? w = default(int?), int? h = default(int?), string usingView = default(string))
         {
             this.Name = name;
             this.X = x;
             this.Y = y;
             this.W = w;
             this.H = h;
-            this.ViewID = viewID;
             this.UsingView = usingView;
         }
 
@@ -82,13 +80,6 @@ namespace InfluxDB.Client.Generated.Domain
         public int? H { get; set; }
 
         /// <summary>
-        /// uses the view provided in the request
-        /// </summary>
-        /// <value>uses the view provided in the request</value>
-        [DataMember(Name="viewID", EmitDefaultValue=false)]
-        public string ViewID { get; set; }
-
-        /// <summary>
         /// makes a copy of the provided view
         /// </summary>
         /// <value>makes a copy of the provided view</value>
@@ -108,7 +99,6 @@ namespace InfluxDB.Client.Generated.Domain
             sb.Append("  Y: ").Append(Y).Append("\n");
             sb.Append("  W: ").Append(W).Append("\n");
             sb.Append("  H: ").Append(H).Append("\n");
-            sb.Append("  ViewID: ").Append(ViewID).Append("\n");
             sb.Append("  UsingView: ").Append(UsingView).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -170,11 +160,6 @@ namespace InfluxDB.Client.Generated.Domain
                     this.H.Equals(input.H))
                 ) && 
                 (
-                    this.ViewID == input.ViewID ||
-                    (this.ViewID != null &&
-                    this.ViewID.Equals(input.ViewID))
-                ) && 
-                (
                     this.UsingView == input.UsingView ||
                     (this.UsingView != null &&
                     this.UsingView.Equals(input.UsingView))
@@ -200,8 +185,6 @@ namespace InfluxDB.Client.Generated.Domain
                     hashCode = hashCode * 59 + this.W.GetHashCode();
                 if (this.H != null)
                     hashCode = hashCode * 59 + this.H.GetHashCode();
-                if (this.ViewID != null)
-                    hashCode = hashCode * 59 + this.ViewID.GetHashCode();
                 if (this.UsingView != null)
                     hashCode = hashCode * 59 + this.UsingView.GetHashCode();
                 return hashCode;

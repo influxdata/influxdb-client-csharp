@@ -105,8 +105,10 @@ namespace InfluxDB.Client.Generated.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="userID">filter authorizations belonging to a user id (optional)</param>
         /// <param name="user">filter authorizations belonging to a user name (optional)</param>
+        /// <param name="orgID">filter authorizations belonging to a org id (optional)</param>
+        /// <param name="org">filter authorizations belonging to a org name (optional)</param>
         /// <returns>Authorizations</returns>
-        Authorizations AuthorizationsGet (string zapTraceSpan = null, string userID = null, string user = null);
+        Authorizations AuthorizationsGet (string zapTraceSpan = null, string userID = null, string user = null, string orgID = null, string org = null);
 
         /// <summary>
         /// List all authorizations
@@ -118,8 +120,10 @@ namespace InfluxDB.Client.Generated.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="userID">filter authorizations belonging to a user id (optional)</param>
         /// <param name="user">filter authorizations belonging to a user name (optional)</param>
+        /// <param name="orgID">filter authorizations belonging to a org id (optional)</param>
+        /// <param name="org">filter authorizations belonging to a org name (optional)</param>
         /// <returns>ApiResponse of Authorizations</returns>
-        ApiResponse<Authorizations> AuthorizationsGetWithHttpInfo (string zapTraceSpan = null, string userID = null, string user = null);
+        ApiResponse<Authorizations> AuthorizationsGetWithHttpInfo (string zapTraceSpan = null, string userID = null, string user = null, string orgID = null, string org = null);
         /// <summary>
         /// Create an authorization
         /// </summary>
@@ -226,8 +230,10 @@ namespace InfluxDB.Client.Generated.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="userID">filter authorizations belonging to a user id (optional)</param>
         /// <param name="user">filter authorizations belonging to a user name (optional)</param>
+        /// <param name="orgID">filter authorizations belonging to a org id (optional)</param>
+        /// <param name="org">filter authorizations belonging to a org name (optional)</param>
         /// <returns>Task of Authorizations</returns>
-        System.Threading.Tasks.Task<Authorizations> AuthorizationsGetAsync (string zapTraceSpan = null, string userID = null, string user = null);
+        System.Threading.Tasks.Task<Authorizations> AuthorizationsGetAsync (string zapTraceSpan = null, string userID = null, string user = null, string orgID = null, string org = null);
 
         /// <summary>
         /// List all authorizations
@@ -239,8 +245,10 @@ namespace InfluxDB.Client.Generated.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="userID">filter authorizations belonging to a user id (optional)</param>
         /// <param name="user">filter authorizations belonging to a user name (optional)</param>
+        /// <param name="orgID">filter authorizations belonging to a org id (optional)</param>
+        /// <param name="org">filter authorizations belonging to a org name (optional)</param>
         /// <returns>Task of ApiResponse (Authorizations)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Authorizations>> AuthorizationsGetAsyncWithHttpInfo (string zapTraceSpan = null, string userID = null, string user = null);
+        System.Threading.Tasks.Task<ApiResponse<Authorizations>> AuthorizationsGetAsyncWithHttpInfo (string zapTraceSpan = null, string userID = null, string user = null, string orgID = null, string org = null);
         /// <summary>
         /// Create an authorization
         /// </summary>
@@ -814,10 +822,12 @@ namespace InfluxDB.Client.Generated.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="userID">filter authorizations belonging to a user id (optional)</param>
         /// <param name="user">filter authorizations belonging to a user name (optional)</param>
+        /// <param name="orgID">filter authorizations belonging to a org id (optional)</param>
+        /// <param name="org">filter authorizations belonging to a org name (optional)</param>
         /// <returns>Authorizations</returns>
-        public Authorizations AuthorizationsGet (string zapTraceSpan = null, string userID = null, string user = null)
+        public Authorizations AuthorizationsGet (string zapTraceSpan = null, string userID = null, string user = null, string orgID = null, string org = null)
         {
-             ApiResponse<Authorizations> localVarResponse = AuthorizationsGetWithHttpInfo(zapTraceSpan, userID, user);
+             ApiResponse<Authorizations> localVarResponse = AuthorizationsGetWithHttpInfo(zapTraceSpan, userID, user, orgID, org);
              return localVarResponse.Data;
         }
 
@@ -828,8 +838,10 @@ namespace InfluxDB.Client.Generated.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="userID">filter authorizations belonging to a user id (optional)</param>
         /// <param name="user">filter authorizations belonging to a user name (optional)</param>
+        /// <param name="orgID">filter authorizations belonging to a org id (optional)</param>
+        /// <param name="org">filter authorizations belonging to a org name (optional)</param>
         /// <returns>ApiResponse of Authorizations</returns>
-        public ApiResponse< Authorizations > AuthorizationsGetWithHttpInfo (string zapTraceSpan = null, string userID = null, string user = null)
+        public ApiResponse< Authorizations > AuthorizationsGetWithHttpInfo (string zapTraceSpan = null, string userID = null, string user = null, string orgID = null, string org = null)
         {
 
             var localVarPath = "/authorizations";
@@ -855,6 +867,8 @@ namespace InfluxDB.Client.Generated.Service
 
             if (userID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "userID", userID)); // query parameter
             if (user != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "user", user)); // query parameter
+            if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+            if (org != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
             if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
 
 
@@ -883,10 +897,12 @@ namespace InfluxDB.Client.Generated.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="userID">filter authorizations belonging to a user id (optional)</param>
         /// <param name="user">filter authorizations belonging to a user name (optional)</param>
+        /// <param name="orgID">filter authorizations belonging to a org id (optional)</param>
+        /// <param name="org">filter authorizations belonging to a org name (optional)</param>
         /// <returns>Task of Authorizations</returns>
-        public async System.Threading.Tasks.Task<Authorizations> AuthorizationsGetAsync (string zapTraceSpan = null, string userID = null, string user = null)
+        public async System.Threading.Tasks.Task<Authorizations> AuthorizationsGetAsync (string zapTraceSpan = null, string userID = null, string user = null, string orgID = null, string org = null)
         {
-             ApiResponse<Authorizations> localVarResponse = await AuthorizationsGetAsyncWithHttpInfo(zapTraceSpan, userID, user);
+             ApiResponse<Authorizations> localVarResponse = await AuthorizationsGetAsyncWithHttpInfo(zapTraceSpan, userID, user, orgID, org);
              return localVarResponse.Data;
 
         }
@@ -898,8 +914,10 @@ namespace InfluxDB.Client.Generated.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="userID">filter authorizations belonging to a user id (optional)</param>
         /// <param name="user">filter authorizations belonging to a user name (optional)</param>
+        /// <param name="orgID">filter authorizations belonging to a org id (optional)</param>
+        /// <param name="org">filter authorizations belonging to a org name (optional)</param>
         /// <returns>Task of ApiResponse (Authorizations)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Authorizations>> AuthorizationsGetAsyncWithHttpInfo (string zapTraceSpan = null, string userID = null, string user = null)
+        public async System.Threading.Tasks.Task<ApiResponse<Authorizations>> AuthorizationsGetAsyncWithHttpInfo (string zapTraceSpan = null, string userID = null, string user = null, string orgID = null, string org = null)
         {
 
             var localVarPath = "/authorizations";
@@ -925,6 +943,8 @@ namespace InfluxDB.Client.Generated.Service
 
             if (userID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "userID", userID)); // query parameter
             if (user != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "user", user)); // query parameter
+            if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+            if (org != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
             if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
 
 
