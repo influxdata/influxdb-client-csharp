@@ -6,27 +6,24 @@ using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
-using System.Threading.Tasks;
 using InfluxDB.Client.Core;
 using InfluxDB.Client.Core.Exceptions;
 using InfluxDB.Client.Core.Internal;
-using InfluxDB.Client.Domain;
 using InfluxDB.Client.Generated.Client;
 using InfluxDB.Client.Generated.Domain;
 using InfluxDB.Client.Generated.Service;
 using InfluxDB.Client.Internal;
 using RestSharp;
-using Ready = InfluxDB.Client.Domain.Ready;
 
 namespace InfluxDB.Client.Generated.Client
 {
     //TODO move to separate file
     public partial class ApiClient
     {
-        private readonly InfluxDBClientOptions _options;
-
-        private readonly List<string> NO_AUTH_ROUTE = new List<string>
+        private readonly List<string> _noAuthRoute = new List<string>
             {"/api/v2/signin", "/api/v2/signout", "/api/v2/setup"};
+
+        private readonly InfluxDBClientOptions _options;
 
         private char[] _sessionToken;
         private bool _signout;
@@ -47,7 +44,7 @@ namespace InfluxDB.Client.Generated.Client
 
         partial void InterceptRequest(IRestRequest request)
         {
-            if (_signout || NO_AUTH_ROUTE.Any(requestPath => requestPath.EndsWith(request.Resource))) return;
+            if (_signout || _noAuthRoute.Any(requestPath => requestPath.EndsWith(request.Resource))) return;
 
             if (InfluxDBClientOptions.AuthenticationScheme.Token.Equals(_options.AuthScheme))
             {
@@ -86,8 +83,15 @@ namespace InfluxDB.Client.Generated.Client
                 }
 
                 if (authResponse.Cookies != null)
-                    _sessionToken = authResponse.Cookies
-                        .ToList().First(cookie => cookie.Name.ToString().Equals("session")).Value.ToCharArray();
+                {
+                    var cookies = authResponse.Cookies.ToList();
+
+                    if (cookies.Count == 1)
+                        _sessionToken = cookies
+                            .First(cookie => cookie.Name.ToString().Equals("session"))
+                            .Value
+                            .ToCharArray();
+                }
             }
         }
 
@@ -116,7 +120,10 @@ namespace InfluxDB.Client
         private readonly ApiClient _apiClient;
         private readonly AuthenticateDelegatingHandler _authenticateDelegatingHandler;
         private readonly ExceptionFactory _exceptionFactory;
+        private readonly HealthService _healthService;
         private readonly LoggingHandler _loggingHandler;
+        private readonly ReadyService _readyService;
+
         private readonly SetupService _setupService;
 
         protected internal InfluxDBClient(InfluxDBClientOptions options)
@@ -140,6 +147,14 @@ namespace InfluxDB.Client
                 !response.IsSuccessful ? HttpException.Create(response) : null;
 
             _setupService = new SetupService((Configuration) _apiClient.Configuration)
+            {
+                ExceptionFactory = _exceptionFactory
+            };
+            _healthService = new HealthService((Configuration) _apiClient.Configuration)
+            {
+                ExceptionFactory = _exceptionFactory
+            };
+            _readyService = new ReadyService((Configuration) _apiClient.Configuration)
             {
                 ExceptionFactory = _exceptionFactory
             };
@@ -226,7 +241,12 @@ namespace InfluxDB.Client
         /// <returns>the new client instance for Source API</returns>
         public SourcesApi GetSourcesApi()
         {
-            return new SourcesApi(Client);
+            var service = new SourcesService((Configuration) _apiClient.Configuration)
+            {
+                ExceptionFactory = _exceptionFactory
+            };
+
+            return new SourcesApi(Client, service);
         }
 
         /// <summary>
@@ -271,12 +291,12 @@ namespace InfluxDB.Client
         /// <returns>the new client instance for Label API</returns>
         public LabelsApi GetLabelsApi()
         {
-            var labelsService = new LabelsService((Configuration) _apiClient.Configuration)
+            var service = new LabelsService((Configuration) _apiClient.Configuration)
             {
                 ExceptionFactory = _exceptionFactory
             };
 
-            return new LabelsApi(Client, labelsService);
+            return new LabelsApi(Client, service);
         }
 
         /// <summary>
@@ -303,22 +323,20 @@ namespace InfluxDB.Client
         ///     Get the health of an instance.
         /// </summary>
         /// <returns>health of an instance</returns>
-        public async Task<Health> Health()
+        public Check Health()
         {
-            return await GetHealth("/health");
+            return GetHealth(_healthService.HealthGetAsync());
         }
 
         /// <summary>
         ///     The readiness of the InfluxDB 2.0.
         /// </summary>
         /// <returns>return null if the InfluxDB is not ready</returns>
-        public async Task<Ready> Ready()
+        public Ready Ready()
         {
             try
             {
-                var request = await Get("/ready");
-
-                return Call<Ready>(request);
+                return _readyService.ReadyGet();
             }
             catch (Exception e)
             {

@@ -11,24 +11,25 @@ namespace InfluxDB.Client.Test
     public class ItInfluxDBClientTest : AbstractItClientTest
     {
         [Test]
-        public async Task Health()
+        public void Health()
         {
-            var health = await Client.Health();
+            var health = Client.Health();
 
             Assert.IsNotNull(health);
-            Assert.IsTrue(health.IsHealthy());
+            Assert.AreEqual("influxdb", health.Name);
+            Assert.AreEqual(Check.StatusEnum.Pass, health.Status);
             Assert.AreEqual("ready for queries and writes", health.Message);
         }
 
         [Test]
-        public async Task HealthNotRunningInstance()
+        public void HealthNotRunningInstance()
         {
             var clientNotRunning = InfluxDBClientFactory.Create("http://localhost:8099");
-            var health = await clientNotRunning.Health();
+            var health = clientNotRunning.Health();
 
             Assert.IsNotNull(health);
-            Assert.IsFalse(health.IsHealthy());
-            Assert.AreEqual("Connection refused", health.Message);
+            Assert.AreEqual(Check.StatusEnum.Fail, health.Status);
+            Assert.IsTrue(health.Message.StartsWith("Connection refused"));
 
             clientNotRunning.Dispose();
         }
@@ -110,21 +111,21 @@ namespace InfluxDB.Client.Test
 
 
         [Test]
-        public async Task Ready()
+        public void Ready()
         {
-            var ready = await Client.Ready();
+            var ready = Client.Ready();
 
             Assert.IsNotNull(ready);
-            Assert.AreEqual("ready", ready.Status);
+            Assert.AreEqual(Generated.Domain.Ready.StatusEnum.Ready, ready.Status);
             Assert.Greater(DateTime.UtcNow, ready.Started);
             Assert.IsNotEmpty(ready.Up);
         }
 
         [Test]
-        public async Task ReadyNotRunningInstance()
+        public void ReadyNotRunningInstance()
         {
             var clientNotRunning = InfluxDBClientFactory.Create("http://localhost:8099");
-            var ready = await clientNotRunning.Ready();
+            var ready = clientNotRunning.Ready();
 
             Assert.IsNull(ready);
 

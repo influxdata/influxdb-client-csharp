@@ -115,6 +115,8 @@ namespace InfluxDB.Client.Core.Exceptions
                     .Where(header => keys.Contains(header.Name, StringComparer.OrdinalIgnoreCase))
                     .Select(header => header.Value.ToString()).FirstOrDefault();
 
+            if (string.IsNullOrEmpty(errorMessage)) errorMessage = requestResult.ErrorMessage;
+
             return new HttpException(errorMessage, (int) requestResult.StatusCode)
                 {ErrorBody = errorBody, RetryAfter = retryAfter};
         }

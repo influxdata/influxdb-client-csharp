@@ -19,19 +19,17 @@ namespace InfluxDB.Client.Internal
         {
         }
 
-        protected async Task<Health> GetHealth(string path)
+        protected Check GetHealth(Task<Check> task)
         {
-            Arguments.CheckNonEmptyString(path, nameof(path));
+            Arguments.CheckNotNull(task, nameof(task));
 
             try
             {
-                var request = await Get(path);
-
-                return Call<Health>(request);
+                return task.Result;
             }
             catch (Exception e)
             {
-                return new Health {Status = "error", Message = e.Message};
+                return new Check("influxdb", e.GetBaseException().Message, default(List<Check>), Check.StatusEnum.Fail);
             }
         }
 

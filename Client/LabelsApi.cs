@@ -13,6 +13,8 @@ namespace InfluxDB.Client
 
         protected internal LabelsApi(DefaultClientIo client, LabelsService service) : base(client)
         {
+            Arguments.CheckNotNull(service, nameof(service));
+
             _service = service;
         }
 
