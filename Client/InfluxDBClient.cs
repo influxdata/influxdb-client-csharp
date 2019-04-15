@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -11,9 +12,11 @@ using InfluxDB.Client.Core.Exceptions;
 using InfluxDB.Client.Core.Internal;
 using InfluxDB.Client.Domain;
 using InfluxDB.Client.Generated.Client;
+using InfluxDB.Client.Generated.Domain;
 using InfluxDB.Client.Generated.Service;
 using InfluxDB.Client.Internal;
 using RestSharp;
+using Ready = InfluxDB.Client.Domain.Ready;
 
 namespace InfluxDB.Client.Generated.Client
 {
@@ -21,6 +24,9 @@ namespace InfluxDB.Client.Generated.Client
     public partial class ApiClient
     {
         private readonly InfluxDBClientOptions _options;
+
+        private readonly List<string> NO_AUTH_ROUTE = new List<string>
+            {"/api/v2/signin", "/api/v2/signout", "/api/v2/setup"};
 
         private char[] _sessionToken;
         private bool _signout;
@@ -41,9 +47,7 @@ namespace InfluxDB.Client.Generated.Client
 
         partial void InterceptRequest(IRestRequest request)
         {
-            if (_signout)
-            {
-            }
+            if (_signout || NO_AUTH_ROUTE.Any(requestPath => requestPath.EndsWith(request.Resource))) return;
 
             if (InfluxDBClientOptions.AuthenticationScheme.Token.Equals(_options.AuthScheme))
             {
@@ -111,7 +115,9 @@ namespace InfluxDB.Client
     {
         private readonly ApiClient _apiClient;
         private readonly AuthenticateDelegatingHandler _authenticateDelegatingHandler;
+        private readonly ExceptionFactory _exceptionFactory;
         private readonly LoggingHandler _loggingHandler;
+        private readonly SetupService _setupService;
 
         protected internal InfluxDBClient(InfluxDBClientOptions options)
         {
@@ -130,6 +136,13 @@ namespace InfluxDB.Client
             Client.HttpClient.Timeout = options.Timeout;
 
             _apiClient = new ApiClient(options);
+            _exceptionFactory = (methodName, response) =>
+                !response.IsSuccessful ? HttpException.Create(response) : null;
+
+            _setupService = new SetupService((Configuration) _apiClient.Configuration)
+            {
+                ExceptionFactory = _exceptionFactory
+            };
         }
 
         public void Dispose()
@@ -258,13 +271,9 @@ namespace InfluxDB.Client
         /// <returns>the new client instance for Label API</returns>
         public LabelsApi GetLabelsApi()
         {
-            var labelsService = new LabelsService((Configuration) _apiClient.Configuration);
-
-            labelsService.ExceptionFactory = (methodName, response) =>
+            var labelsService = new LabelsService((Configuration) _apiClient.Configuration)
             {
-                if (!response.IsSuccessful) return HttpException.Create(response);
-
-                return null;
+                ExceptionFactory = _exceptionFactory
             };
 
             return new LabelsApi(Client, labelsService);
@@ -325,25 +334,22 @@ namespace InfluxDB.Client
         /// <param name="onboarding">to setup defaults</param>
         /// <exception cref="HttpException">With status code 422 when an onboarding has already been completed</exception>
         /// <returns>defaults for first run</returns>
-        public async Task<OnboardingResponse> Onboarding(Onboarding onboarding)
+        public OnboardingResponse Onboarding(OnboardingRequest onboarding)
         {
             Arguments.CheckNotNull(onboarding, nameof(onboarding));
 
-            var request = await Post(onboarding, "/api/v2/setup");
-
-            return Call<OnboardingResponse>(request);
+            return _setupService.SetupPost(onboarding);
         }
-
 
         /// <summary>
         ///     Check if database has default user, org, bucket created, returns true if not.
         /// </summary>
         /// <returns>True if onboarding has already been completed otherwise false</returns>
-        public async Task<bool> IsOnboardingAllowed()
+        public bool IsOnboardingAllowed()
         {
-            var request = await Get("/api/v2/setup");
+            var isOnboardingAllowed = _setupService.SetupGet().Allowed;
 
-            return Call<IsOnboarding>(request).Allowed;
+            return true == isOnboardingAllowed;
         }
     }
 }
