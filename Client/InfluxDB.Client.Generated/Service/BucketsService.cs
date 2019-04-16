@@ -403,10 +403,10 @@ namespace InfluxDB.Client.Generated.Service
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Generated.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="sourceID">ID of the source</param>
-        /// <param name="org">specifies the organization of the resource</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="org">specifies the organization of the resource (optional)</param>
         /// <returns>Buckets</returns>
-        Buckets SourcesSourceIDBucketsGet (string sourceID, string org, string zapTraceSpan = null);
+        Buckets SourcesSourceIDBucketsGet (string sourceID, string zapTraceSpan = null, string org = null);
 
         /// <summary>
         /// Get a sources buckets (will return dbrps in the form of buckets if it is a v1 source)
@@ -416,10 +416,10 @@ namespace InfluxDB.Client.Generated.Service
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Generated.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="sourceID">ID of the source</param>
-        /// <param name="org">specifies the organization of the resource</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="org">specifies the organization of the resource (optional)</param>
         /// <returns>ApiResponse of Buckets</returns>
-        ApiResponse<Buckets> SourcesSourceIDBucketsGetWithHttpInfo (string sourceID, string org, string zapTraceSpan = null);
+        ApiResponse<Buckets> SourcesSourceIDBucketsGetWithHttpInfo (string sourceID, string zapTraceSpan = null, string org = null);
         #endregion Synchronous Operations
         #region Asynchronous Operations
         /// <summary>
@@ -801,10 +801,10 @@ namespace InfluxDB.Client.Generated.Service
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Generated.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="sourceID">ID of the source</param>
-        /// <param name="org">specifies the organization of the resource</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="org">specifies the organization of the resource (optional)</param>
         /// <returns>Task of Buckets</returns>
-        System.Threading.Tasks.Task<Buckets> SourcesSourceIDBucketsGetAsync (string sourceID, string org, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<Buckets> SourcesSourceIDBucketsGetAsync (string sourceID, string zapTraceSpan = null, string org = null);
 
         /// <summary>
         /// Get a sources buckets (will return dbrps in the form of buckets if it is a v1 source)
@@ -814,10 +814,10 @@ namespace InfluxDB.Client.Generated.Service
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Generated.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="sourceID">ID of the source</param>
-        /// <param name="org">specifies the organization of the resource</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="org">specifies the organization of the resource (optional)</param>
         /// <returns>Task of ApiResponse (Buckets)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Buckets>> SourcesSourceIDBucketsGetAsyncWithHttpInfo (string sourceID, string org, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<Buckets>> SourcesSourceIDBucketsGetAsyncWithHttpInfo (string sourceID, string zapTraceSpan = null, string org = null);
         #endregion Asynchronous Operations
     }
 
@@ -3194,12 +3194,12 @@ namespace InfluxDB.Client.Generated.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Generated.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="sourceID">ID of the source</param>
-        /// <param name="org">specifies the organization of the resource</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="org">specifies the organization of the resource (optional)</param>
         /// <returns>Buckets</returns>
-        public Buckets SourcesSourceIDBucketsGet (string sourceID, string org, string zapTraceSpan = null)
+        public Buckets SourcesSourceIDBucketsGet (string sourceID, string zapTraceSpan = null, string org = null)
         {
-             ApiResponse<Buckets> localVarResponse = SourcesSourceIDBucketsGetWithHttpInfo(sourceID, org, zapTraceSpan);
+             ApiResponse<Buckets> localVarResponse = SourcesSourceIDBucketsGetWithHttpInfo(sourceID, zapTraceSpan, org);
              return localVarResponse.Data;
         }
 
@@ -3208,17 +3208,14 @@ namespace InfluxDB.Client.Generated.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Generated.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="sourceID">ID of the source</param>
-        /// <param name="org">specifies the organization of the resource</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="org">specifies the organization of the resource (optional)</param>
         /// <returns>ApiResponse of Buckets</returns>
-        public ApiResponse< Buckets > SourcesSourceIDBucketsGetWithHttpInfo (string sourceID, string org, string zapTraceSpan = null)
+        public ApiResponse< Buckets > SourcesSourceIDBucketsGetWithHttpInfo (string sourceID, string zapTraceSpan = null, string org = null)
         {
             // verify the required parameter 'sourceID' is set
             if (sourceID == null)
                 throw new ApiException(400, "Missing required parameter 'sourceID' when calling BucketsService->SourcesSourceIDBucketsGet");
-            // verify the required parameter 'org' is set
-            if (org == null)
-                throw new ApiException(400, "Missing required parameter 'org' when calling BucketsService->SourcesSourceIDBucketsGet");
 
             var localVarPath = "/api/v2/sources/{sourceID}/buckets";
             var localVarPathParams = new Dictionary<String, String>();
@@ -3269,12 +3266,12 @@ namespace InfluxDB.Client.Generated.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Generated.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="sourceID">ID of the source</param>
-        /// <param name="org">specifies the organization of the resource</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="org">specifies the organization of the resource (optional)</param>
         /// <returns>Task of Buckets</returns>
-        public async System.Threading.Tasks.Task<Buckets> SourcesSourceIDBucketsGetAsync (string sourceID, string org, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<Buckets> SourcesSourceIDBucketsGetAsync (string sourceID, string zapTraceSpan = null, string org = null)
         {
-             ApiResponse<Buckets> localVarResponse = await SourcesSourceIDBucketsGetAsyncWithHttpInfo(sourceID, org, zapTraceSpan);
+             ApiResponse<Buckets> localVarResponse = await SourcesSourceIDBucketsGetAsyncWithHttpInfo(sourceID, zapTraceSpan, org);
              return localVarResponse.Data;
 
         }
@@ -3284,17 +3281,14 @@ namespace InfluxDB.Client.Generated.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Generated.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="sourceID">ID of the source</param>
-        /// <param name="org">specifies the organization of the resource</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="org">specifies the organization of the resource (optional)</param>
         /// <returns>Task of ApiResponse (Buckets)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Buckets>> SourcesSourceIDBucketsGetAsyncWithHttpInfo (string sourceID, string org, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<Buckets>> SourcesSourceIDBucketsGetAsyncWithHttpInfo (string sourceID, string zapTraceSpan = null, string org = null)
         {
             // verify the required parameter 'sourceID' is set
             if (sourceID == null)
                 throw new ApiException(400, "Missing required parameter 'sourceID' when calling BucketsService->SourcesSourceIDBucketsGet");
-            // verify the required parameter 'org' is set
-            if (org == null)
-                throw new ApiException(400, "Missing required parameter 'org' when calling BucketsService->SourcesSourceIDBucketsGet");
 
             var localVarPath = "/api/v2/sources/{sourceID}/buckets";
             var localVarPathParams = new Dictionary<String, String>();

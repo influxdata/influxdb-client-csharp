@@ -1,15 +1,10 @@
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using InfluxDB.Client.Core;
 using InfluxDB.Client.Core.Internal;
 using InfluxDB.Client.Generated.Domain;
 using InfluxDB.Client.Generated.Service;
 using InfluxDB.Client.Internal;
-using Bucket = InfluxDB.Client.Domain.Bucket;
-using Source = InfluxDB.Client.Domain.Source;
-using Sources = InfluxDB.Client.Domain.Sources;
-using Task = System.Threading.Tasks.Task;
 
 namespace InfluxDB.Client
 {
@@ -25,83 +20,77 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        ///     Creates a new Source and sets <see cref="Domain.Source.Id" /> with the new identifier.
+        /// Creates a new Source and sets <see cref="Generated.Domain.Source.Id" /> with the new identifier.
         /// </summary>
         /// <param name="source">source to create</param>
         /// <returns>created Source</returns>
-        public async Task<Source> CreateSource(Source source)
+        public Source CreateSource(Source source)
         {
             Arguments.CheckNotNull(source, nameof(source));
 
-            var response = await Post(source, "/api/v2/sources");
-
-            return Call<Source>(response);
+            return _service.SourcesPost(source);
         }
 
         /// <summary>
-        ///     Update a Source.
+        /// Update a Source.
         /// </summary>
         /// <param name="source">source update to apply</param>
         /// <returns>updated source</returns>
-        public async Task<Source> UpdateSource(Source source)
+        public Source UpdateSource(Source source)
         {
             Arguments.CheckNotNull(source, nameof(source));
 
-            var result = await Patch(source, $"/api/v2/sources/{source.Id}");
-
-            return Call<Source>(result);
+            return _service.SourcesSourceIDPatch(source.Id, source);
         }
 
         /// <summary>
-        ///     Delete a source.
+        /// Delete a source.
         /// </summary>
         /// <param name="sourceId">ID of source to delete</param>
-        /// <returns>async task</returns>
-        public async Task DeleteSource(string sourceId)
+        /// <returns>delete has been accepted</returns>
+        public void DeleteSource(string sourceId)
         {
             Arguments.CheckNotNull(sourceId, nameof(sourceId));
 
-            var request = await Delete($"/api/v2/sources/{sourceId}");
-
-            RaiseForInfluxError(request);
+            _service.SourcesSourceIDDelete(sourceId);
         }
 
         /// <summary>
-        ///     Delete a source.
+        /// Delete a source.
         /// </summary>
         /// <param name="source">source to delete</param>
-        /// <returns>async task</returns>
-        public async Task DeleteSource(Source source)
+        /// <returns>delete has been accepted</returns>
+        public void DeleteSource(Source source)
         {
             Arguments.CheckNotNull(source, nameof(source));
 
-            await DeleteSource(source.Id);
+            DeleteSource(source.Id);
         }
 
         /// <summary>
-        ///     Clone a source.
+        /// Clone a source.
         /// </summary>
         /// <param name="clonedName">name of cloned source</param>
         /// <param name="sourceId">ID of source to clone</param>
         /// <returns>cloned source</returns>
-        public async Task<Source> CloneSource(string clonedName, string sourceId)
+        public Source CloneSource(string clonedName, string sourceId)
         {
             Arguments.CheckNonEmptyString(clonedName, nameof(clonedName));
             Arguments.CheckNonEmptyString(sourceId, nameof(sourceId));
 
-            var source = await FindSourceById(sourceId);
+            var source = FindSourceById(sourceId);
             if (source == null) throw new InvalidOperationException($"NotFound Source with ID: {sourceId}");
 
-            return await CloneSource(clonedName, source);
+            return CloneSource(clonedName, source);
         }
 
         /// <summary>
-        ///     Clone a source.
+        /// Clone a source.
         /// </summary>
         /// <param name="clonedName">name of cloned source</param>
         /// <param name="source">source to clone</param>
         /// <returns>cloned source</returns>
-        public async Task<Source> CloneSource(string clonedName, Source source)
+        public Source CloneSource(string clonedName, Source source)
         {
             Arguments.CheckNonEmptyString(clonedName, nameof(clonedName));
             Arguments.CheckNotNull(source, nameof(source));
@@ -109,78 +98,70 @@ namespace InfluxDB.Client
             var cloned = new Source
             {
                 Name = clonedName,
-                OrgId = source.OrgId,
-                DefaultSource = source.DefaultSource,
+                OrgID = source.OrgID,
+                Default = source.Default,
                 Type = source.Type,
                 Url = source.Url,
                 InsecureSkipVerify = source.InsecureSkipVerify,
                 Telegraf = source.Telegraf,
                 Token = source.Token,
-                UserName = source.UserName,
+                Username = source.Username,
                 Password = source.Password,
                 SharedSecret = source.SharedSecret,
                 MetaUrl = source.MetaUrl,
-                DefaultRp = source.DefaultRp
+                DefaultRP = source.DefaultRP
             };
 
-            return await CreateSource(cloned);
+            return CreateSource(cloned);
         }
 
         /// <summary>
-        ///     Retrieve a source.
+        /// Retrieve a source.
         /// </summary>
         /// <param name="sourceId">ID of source to get</param>
         /// <returns>source details</returns>
-        public async Task<Source> FindSourceById(string sourceId)
+        public Source FindSourceById(string sourceId)
         {
             Arguments.CheckNonEmptyString(sourceId, nameof(sourceId));
 
-            var request = await Get($"/api/v2/sources/{sourceId}");
-
-            return Call<Source>(request, 404);
+            return _service.SourcesSourceIDGet(sourceId);
         }
 
         /// <summary>
-        ///     Get all sources.
+        /// Get all sources.
         /// </summary>
         /// <returns>A list of sources</returns>
-        public async Task<List<Source>> FindSources()
+        public List<Source> FindSources()
         {
-            var request = await Get("/api/v2/sources");
-
-            var sources = Call<Sources>(request);
-
-            return sources.SourceList;
+            return _service.SourcesGet()._Sources;
         }
 
         /// <summary>
-        ///     Get a sources buckets (will return dbrps in the form of buckets if it is a v1 source).
+        /// Get a sources buckets (will return dbrps in the form of buckets if it is a v1 source).
         /// </summary>
         /// <param name="source">filter buckets to a specific source</param>
         /// <returns>The buckets for source. If source does not exist than return null.</returns>
-        public async Task<List<Bucket>> FindBucketsBySource(Source source)
+        public List<Bucket> FindBucketsBySource(Source source)
         {
             Arguments.CheckNotNull(source, nameof(source));
-
-            return await FindBucketsBySourceId(source.Id);
+            
+            return FindBucketsBySourceId(source.Id);
         }
 
         /// <summary>
-        ///     Get a sources buckets (will return dbrps in the form of buckets if it is a v1 source).
+        /// Get a sources buckets (will return dbrps in the form of buckets if it is a v1 source).
         /// </summary>
         /// <param name="sourceId">filter buckets to a specific source ID</param>
         /// <returns>The buckets for source. If source does not exist than return null.</returns>
-        public async Task<List<Bucket>> FindBucketsBySourceId(string sourceId)
+        public List<Bucket> FindBucketsBySourceId(string sourceId)
         {
             Arguments.CheckNonEmptyString(sourceId, nameof(sourceId));
 
-            var request = await Get($"/api/v2/sources/{sourceId}/buckets");
-
-            return Call<List<Bucket>>(request, 404);
+            return _service.SourcesSourceIDBucketsGet(sourceId)._Buckets;
         }
 
         /// <summary>
-        ///     Get a sources health.
+        /// Get a sources health.
         /// </summary>
         /// <param name="source">source to check health</param>
         /// <returns>health of source</returns>
@@ -192,7 +173,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        ///     Get a sources health.
+        /// Get a sources health.
         /// </summary>
         /// <param name="sourceId">source to check health</param>
         /// <returns>health of source</returns>
