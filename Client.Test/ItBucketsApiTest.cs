@@ -1,8 +1,11 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
+using InfluxDB.Client.Core.Exceptions;
 using InfluxDB.Client.Domain;
+using InfluxDB.Client.Generated.Domain;
 using NUnit.Framework;
+using Organization = InfluxDB.Client.Domain.Organization;
+using ResourceMember = InfluxDB.Client.Generated.Domain.ResourceMember;
 using Task = System.Threading.Tasks.Task;
 
 namespace InfluxDB.Client.Test
@@ -19,8 +22,8 @@ namespace InfluxDB.Client.Test
 
             _organization = await _organizationsApi.CreateOrganization(GenerateName("Org"));
 
-            foreach (var bucket in (await _bucketsApi.FindBuckets()).Where(bucket => bucket.Name.EndsWith("-IT")))
-                await _bucketsApi.DeleteBucket(bucket);
+            foreach (var bucket in (_bucketsApi.FindBuckets()).Where(bucket => bucket.Name.EndsWith("-IT")))
+                _bucketsApi.DeleteBucket(bucket);
         }
 
         private OrganizationsApi _organizationsApi;
@@ -29,34 +32,34 @@ namespace InfluxDB.Client.Test
 
         private Organization _organization;
 
-        private static RetentionRule RetentionRule()
+        private static BucketRetentionRules RetentionRule()
         {
-            return new RetentionRule {Type = "expire", EverySeconds = 3600L};
+            return new BucketRetentionRules(BucketRetentionRules.TypeEnum.Expire, 3600);
         }
 
         [Test]
-        public async Task CloneBucket()
+        public void CloneBucket()
         {
-            var source = await _bucketsApi.CreateBucket(GenerateName("robot sensor"), RetentionRule(), _organization);
+            var source = _bucketsApi.CreateBucket(GenerateName("robot sensor"), RetentionRule(), _organization);
 
             var properties = new Dictionary<string, string> {{"color", "green"}, {"location", "west"}};
 
             var label = Client.GetLabelsApi().CreateLabel(GenerateName("Cool Resource"), properties, _organization.Id);
-            await _bucketsApi.AddLabel(label, source);
+            _bucketsApi.AddLabel(label, source);
 
             var name = GenerateName("cloned");
 
-            var cloned = await _bucketsApi.CloneBucket(name, source);
+            var cloned = _bucketsApi.CloneBucket(name, source);
 
             Assert.AreEqual(name, cloned.Name);
-            Assert.AreEqual(_organization.Id, cloned.OrgId);
-            Assert.AreEqual(_organization.Name, cloned.OrgName);
-            Assert.IsNull(cloned.RetentionPolicyName);
+            Assert.AreEqual(_organization.Id, cloned.OrganizationID);
+            Assert.AreEqual(_organization.Name, cloned.Organization);
+            Assert.IsNull(cloned.Rp);
             Assert.AreEqual(1, cloned.RetentionRules.Count);
             Assert.AreEqual(3600, cloned.RetentionRules[0].EverySeconds);
-            Assert.AreEqual("expire", cloned.RetentionRules[0].Type);
+            Assert.AreEqual(BucketRetentionRules.TypeEnum.Expire, cloned.RetentionRules[0].Type);
 
-            var labels = await _bucketsApi.GetLabels(cloned);
+            var labels = _bucketsApi.GetLabels(cloned);
             Assert.AreEqual(1, labels.Count);
             Assert.AreEqual(label.Id, labels[0].Id);
         }
@@ -64,139 +67,141 @@ namespace InfluxDB.Client.Test
         [Test]
         public void CloneBucketNotFound()
         {
-            var ioe = Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                await _bucketsApi.CloneBucket(GenerateName("bucket"), "020f755c3c082000"));
+            var ioe = Assert.Throws<HttpException>(() =>
+                _bucketsApi.CloneBucket(GenerateName("bucket"), "020f755c3c082000"));
 
-            Assert.AreEqual("NotFound Bucket with ID: 020f755c3c082000", ioe.Message);
+            Assert.AreEqual("bucket not found", ioe.Message);
         }
 
         [Test]
-        public async Task CreateBucket()
+        public void CreateBucket()
         {
             var bucketName = GenerateName("robot sensor");
 
-            var bucket = await _bucketsApi.CreateBucket(bucketName, RetentionRule(), _organization);
+            var bucket = _bucketsApi.CreateBucket(bucketName, RetentionRule(), _organization);
 
             Assert.IsNotNull(bucket);
             Assert.IsNotEmpty(bucket.Id);
             Assert.AreEqual(bucket.Name, bucketName);
-            Assert.AreEqual(bucket.OrgId, _organization.Id);
-            Assert.AreEqual(bucket.OrgName, _organization.Name);
+            Assert.AreEqual(bucket.OrganizationID, _organization.Id);
+            Assert.AreEqual(bucket.Organization, _organization.Name);
             Assert.AreEqual(bucket.RetentionRules.Count, 1);
             Assert.AreEqual(bucket.RetentionRules[0].EverySeconds, 3600L);
-            Assert.AreEqual(bucket.RetentionRules[0].Type, "expire");
-            Assert.AreEqual(bucket.Links.Count, 4);
-            Assert.AreEqual(bucket.Links["org"], $"/api/v2/orgs/{_organization.Id}");
-            Assert.AreEqual(bucket.Links["self"], $"/api/v2/buckets/{bucket.Id}");
-            Assert.AreEqual(bucket.Links["log"], $"/api/v2/buckets/{bucket.Id}/log");
-            Assert.AreEqual(bucket.Links["labels"], $"/api/v2/buckets/{bucket.Id}/labels");
+            Assert.AreEqual(bucket.RetentionRules[0].Type, BucketRetentionRules.TypeEnum.Expire);
+            Assert.IsNotNull(bucket.Links);
+            Assert.AreEqual(bucket.Links.Org, $"/api/v2/orgs/{_organization.Id}");
+            Assert.AreEqual(bucket.Links.Self, $"/api/v2/buckets/{bucket.Id}");
+            Assert.AreEqual(bucket.Links.Logs, $"/api/v2/buckets/{bucket.Id}/logs");
+            Assert.AreEqual(bucket.Links.Labels, $"/api/v2/buckets/{bucket.Id}/labels");
         }
 
         [Test]
-        public async Task CreateBucketWithoutRetentionRule()
+        public void CreateBucketWithoutRetentionRule()
         {
             var bucketName = GenerateName("robot sensor");
 
-            var bucket = await _bucketsApi.CreateBucket(bucketName, _organization);
+            var bucket = _bucketsApi.CreateBucket(bucketName, _organization);
 
             Assert.IsNotNull(bucket);
             Assert.IsNotEmpty(bucket.Id);
             Assert.AreEqual(bucket.Name, bucketName);
-            Assert.AreEqual(bucket.OrgId, _organization.Id);
+            Assert.AreEqual(bucket.OrganizationID, _organization.Id);
             Assert.AreEqual(bucket.RetentionRules.Count, 0);
         }
 
         [Test]
-        public async Task DeleteBucket()
+        public void DeleteBucket()
         {
             var createBucket =
-                await _bucketsApi.CreateBucket(GenerateName("robot sensor"), RetentionRule(), _organization);
+                _bucketsApi.CreateBucket(GenerateName("robot sensor"), RetentionRule(), _organization);
             Assert.IsNotNull(createBucket);
 
-            var foundBucket = await _bucketsApi.FindBucketById(createBucket.Id);
+            var foundBucket = _bucketsApi.FindBucketById(createBucket.Id);
             Assert.IsNotNull(foundBucket);
 
             // delete task
-            await _bucketsApi.DeleteBucket(createBucket);
+            _bucketsApi.DeleteBucket(createBucket);
 
-            foundBucket = await _bucketsApi.FindBucketById(createBucket.Id);
-            Assert.IsNull(foundBucket);
+            var ioe = Assert.Throws<HttpException>(() => _bucketsApi.FindBucketById(createBucket.Id));
+
+            Assert.AreEqual("bucket not found", ioe.Message);
         }
 
         [Test]
-        public async Task FindBucketById()
+        public void FindBucketById()
         {
             var bucketName = GenerateName("robot sensor");
 
-            var bucket = await _bucketsApi.CreateBucket(bucketName, RetentionRule(), _organization);
+            var bucket = _bucketsApi.CreateBucket(bucketName, RetentionRule(), _organization);
 
-            var bucketById = await _bucketsApi.FindBucketById(bucket.Id);
+            var bucketById = _bucketsApi.FindBucketById(bucket.Id);
 
             Assert.IsNotNull(bucketById);
             Assert.AreEqual(bucketById.Id, bucket.Id);
             Assert.AreEqual(bucketById.Name, bucket.Name);
-            Assert.AreEqual(bucketById.OrgId, bucket.OrgId);
-            Assert.AreEqual(bucketById.OrgName, bucket.OrgName);
+            Assert.AreEqual(bucketById.OrganizationID, bucket.OrganizationID);
+            Assert.AreEqual(bucketById.Organization, bucket.Organization);
             Assert.AreEqual(bucketById.RetentionRules.Count, bucket.RetentionRules.Count);
-            Assert.AreEqual(bucketById.Links.Count, bucket.Links.Count);
+            Assert.AreEqual(bucketById.Links.Self, bucket.Links.Self);
         }
 
         [Test]
-        public async Task FindBucketByIdNull()
+        public void FindBucketByIdNull()
         {
-            var bucket = await _bucketsApi.FindBucketById("020f755c3c082000");
+            var ioe = Assert.Throws<HttpException>(() =>
+                _bucketsApi.FindBucketById("020f755c3c082000"));
 
-            Assert.IsNull(bucket);
+            Assert.AreEqual("bucket not found", ioe.Message);
         }
 
         [Test]
         public async Task FindBucketByName()
         {
-            var bucket = await _bucketsApi.FindBucketByName("my-bucket");
+            var bucket = _bucketsApi.FindBucketByName("my-bucket");
 
             Assert.IsNotNull(bucket);
             Assert.AreEqual("my-bucket", bucket.Name);
-            Assert.AreEqual((await FindMyOrg()).Id, bucket.OrgId);
+            Assert.AreEqual((await FindMyOrg()).Id, bucket.OrganizationID);
         }
 
         [Test]
-        public async Task FindBucketByNameNotFound()
+        public void FindBucketByNameNotFound()
         {
-            var bucket = await _bucketsApi.FindBucketByName("my-bucket-not-found");
+            var bucket = _bucketsApi.FindBucketByName("my-bucket-not-found");
 
             Assert.IsNull(bucket);
         }
 
         [Test]
-        public async Task FindBucketLogsFindOptionsNotFound()
+        public void FindBucketLogsFindOptionsNotFound()
         {
-            var entries = await _bucketsApi.FindBucketLogs("020f755c3c082000", new FindOptions());
+            var entries = _bucketsApi.FindBucketLogs("020f755c3c082000", new FindOptions());
 
             Assert.IsNotNull(entries);
             Assert.AreEqual(0, entries.Logs.Count);
         }
 
         [Test]
-        public async Task FindBucketLogsNotFound()
+        public void FindBucketLogsNotFound()
         {
-            var logs = await _bucketsApi.FindBucketLogs("020f755c3c082000");
+            var logs = _bucketsApi.FindBucketLogs("020f755c3c082000");
 
             Assert.AreEqual(0, logs.Count);
         }
 
         [Test]
-        public async Task FindBucketLogsPaging()
+        public void FindBucketLogsPaging()
         {
-            var bucket = await _bucketsApi.CreateBucket(GenerateName("robot sensor"), RetentionRule(), _organization);
+            var bucket = _bucketsApi.CreateBucket(GenerateName("robot sensor"), RetentionRule(), _organization);
 
             foreach (var i in Enumerable.Range(0, 19))
             {
                 bucket.Name = $"{i}_{bucket.Name}";
 
-                await _bucketsApi.UpdateBucket(bucket);
+                _bucketsApi.UpdateBucket(bucket);
             }
 
-            var logs = await _bucketsApi.FindBucketLogs(bucket);
+            var logs = _bucketsApi.FindBucketLogs(bucket);
 
             Assert.AreEqual(20, logs.Count);
             Assert.AreEqual("Bucket Created", logs[0].Description);
@@ -204,7 +209,7 @@ namespace InfluxDB.Client.Test
 
             var findOptions = new FindOptions {Limit = 5, Offset = 0};
 
-            var entries = await _bucketsApi.FindBucketLogs(bucket, findOptions);
+            var entries = _bucketsApi.FindBucketLogs(bucket, findOptions);
             Assert.AreEqual(5, entries.Logs.Count);
             Assert.AreEqual("Bucket Created", entries.Logs[0].Description);
             Assert.AreEqual("Bucket Updated", entries.Logs[1].Description);
@@ -212,11 +217,8 @@ namespace InfluxDB.Client.Test
             Assert.AreEqual("Bucket Updated", entries.Logs[3].Description);
             Assert.AreEqual("Bucket Updated", entries.Logs[4].Description);
 
-            //TODO isNotNull FindOptions also in Log API? 
             findOptions.Offset += 5;
-            Assert.IsNull(entries.GetNextPage());
-
-            entries = await _bucketsApi.FindBucketLogs(bucket, findOptions);
+            entries = _bucketsApi.FindBucketLogs(bucket, findOptions);
             Assert.AreEqual(5, entries.Logs.Count);
             Assert.AreEqual("Bucket Updated", entries.Logs[0].Description);
             Assert.AreEqual("Bucket Updated", entries.Logs[1].Description);
@@ -225,9 +227,7 @@ namespace InfluxDB.Client.Test
             Assert.AreEqual("Bucket Updated", entries.Logs[4].Description);
 
             findOptions.Offset += 5;
-            Assert.IsNull(entries.GetNextPage());
-
-            entries = await _bucketsApi.FindBucketLogs(bucket, findOptions);
+            entries = _bucketsApi.FindBucketLogs(bucket, findOptions);
             Assert.AreEqual(5, entries.Logs.Count);
             Assert.AreEqual("Bucket Updated", entries.Logs[0].Description);
             Assert.AreEqual("Bucket Updated", entries.Logs[1].Description);
@@ -236,9 +236,7 @@ namespace InfluxDB.Client.Test
             Assert.AreEqual("Bucket Updated", entries.Logs[4].Description);
 
             findOptions.Offset += 5;
-            Assert.IsNull(entries.GetNextPage());
-
-            entries = await _bucketsApi.FindBucketLogs(bucket, findOptions);
+            entries = _bucketsApi.FindBucketLogs(bucket, findOptions);
             Assert.AreEqual(5, entries.Logs.Count);
             Assert.AreEqual("Bucket Updated", entries.Logs[0].Description);
             Assert.AreEqual("Bucket Updated", entries.Logs[1].Description);
@@ -247,17 +245,14 @@ namespace InfluxDB.Client.Test
             Assert.AreEqual("Bucket Updated", entries.Logs[4].Description);
 
             findOptions.Offset += 5;
-            Assert.IsNull(entries.GetNextPage());
-
-            entries = await _bucketsApi.FindBucketLogs(bucket, findOptions);
+            entries = _bucketsApi.FindBucketLogs(bucket, findOptions);
             Assert.AreEqual(0, entries.Logs.Count);
-            Assert.IsNull(entries.GetNextPage());
 
             //
             // Order
             //
             findOptions = new FindOptions {Descending = false};
-            entries = await _bucketsApi.FindBucketLogs(bucket, findOptions);
+            entries = _bucketsApi.FindBucketLogs(bucket, findOptions);
             Assert.AreEqual(20, entries.Logs.Count);
 
             Assert.AreEqual("Bucket Updated", entries.Logs[19].Description);
@@ -267,164 +262,164 @@ namespace InfluxDB.Client.Test
         [Test]
         public async Task FindBuckets()
         {
-            var size = (await _bucketsApi.FindBuckets()).Count;
+            var size = (_bucketsApi.FindBuckets()).Count;
 
-            await _bucketsApi.CreateBucket(GenerateName("robot sensor"), RetentionRule(), _organization);
+            _bucketsApi.CreateBucket(GenerateName("robot sensor"), RetentionRule(), _organization);
 
             var organization2 = await _organizationsApi.CreateOrganization(GenerateName("Second"));
-            await _bucketsApi.CreateBucket(GenerateName("robot sensor"), organization2.Id);
+            _bucketsApi.CreateBucket(GenerateName("robot sensor"), organization2.Id);
 
-            var buckets = await _bucketsApi.FindBuckets();
+            var buckets = _bucketsApi.FindBuckets();
             Assert.AreEqual(buckets.Count, size + 2);
         }
 
         [Test]
         public async Task FindBucketsByOrganization()
         {
-            Assert.AreEqual((await _bucketsApi.FindBucketsByOrganization(_organization)).Count, 0);
+            Assert.AreEqual((_bucketsApi.FindBucketsByOrganization(_organization)).Count, 0);
 
-            await _bucketsApi.CreateBucket(GenerateName("robot sensor"), _organization);
+            _bucketsApi.CreateBucket(GenerateName("robot sensor"), _organization);
 
             var organization2 = await _organizationsApi.CreateOrganization(GenerateName("Second"));
-            await _bucketsApi.CreateBucket(GenerateName("robot sensor"), organization2);
+            _bucketsApi.CreateBucket(GenerateName("robot sensor"), organization2);
 
-            Assert.AreEqual((await _bucketsApi.FindBucketsByOrganization(_organization)).Count, 1);
+            Assert.AreEqual((_bucketsApi.FindBucketsByOrganization(_organization)).Count, 1);
         }
 
         [Test]
-        public async Task FindBucketsPaging()
+        public void FindBucketsPaging()
         {
-            foreach (var i in Enumerable.Range(0, 20 - (await _bucketsApi.FindBuckets()).Count))
-                await _bucketsApi.CreateBucket(GenerateName($"{i}"), RetentionRule(), _organization);
+            foreach (var i in Enumerable.Range(0, 20 - (_bucketsApi.FindBuckets()).Count))
+                _bucketsApi.CreateBucket(GenerateName($"{i}"), RetentionRule(), _organization);
 
             var findOptions = new FindOptions {Limit = 5};
 
-            var buckets = await _bucketsApi.FindBuckets(findOptions);
-            Assert.AreEqual(5, buckets.BucketList.Count);
-            Assert.IsNotNull(buckets.GetNextPage());
+            var buckets = _bucketsApi.FindBuckets(findOptions);
+            Assert.AreEqual(5, buckets._Buckets.Count);
+            Assert.AreEqual("/api/v2/buckets?descending=false&limit=5&offset=5", buckets.Links.Next);
 
-            buckets = await _bucketsApi.FindBuckets(buckets.GetNextPage());
-            Assert.AreEqual(5, buckets.BucketList.Count);
-            Assert.IsNotNull(buckets.GetNextPage());
+            buckets = _bucketsApi.FindBuckets(FindOptions.GetFindOptions(buckets.Links.Next));
+            Assert.AreEqual(5, buckets._Buckets.Count);
+            Assert.AreEqual("/api/v2/buckets?descending=false&limit=5&offset=10", buckets.Links.Next);
 
-            buckets = await _bucketsApi.FindBuckets(buckets.GetNextPage());
-            Assert.AreEqual(5, buckets.BucketList.Count);
-            Assert.IsNotNull(buckets.GetNextPage());
+            buckets = _bucketsApi.FindBuckets(FindOptions.GetFindOptions(buckets.Links.Next));
+            Assert.AreEqual(5, buckets._Buckets.Count);
+            Assert.AreEqual("/api/v2/buckets?descending=false&limit=5&offset=15", buckets.Links.Next);
 
-            buckets = await _bucketsApi.FindBuckets(buckets.GetNextPage());
-            Assert.AreEqual(5, buckets.BucketList.Count);
-            Assert.IsNotNull(buckets.GetNextPage());
+            buckets = _bucketsApi.FindBuckets(FindOptions.GetFindOptions(buckets.Links.Next));
+            Assert.AreEqual(5, buckets._Buckets.Count);
+            Assert.AreEqual("/api/v2/buckets?descending=false&limit=5&offset=20", buckets.Links.Next);
 
-            buckets = await _bucketsApi.FindBuckets(buckets.GetNextPage());
-            Assert.AreEqual(0, buckets.BucketList.Count);
-            Assert.IsNull(buckets.GetNextPage());
+            buckets = _bucketsApi.FindBuckets(FindOptions.GetFindOptions(buckets.Links.Next));
+            Assert.AreEqual(0, buckets._Buckets.Count);
+            Assert.IsNull(buckets.Links.Next);
         }
 
         [Test]
-        public async Task Labels()
+        public void Labels()
         {
             var labelClient = Client.GetLabelsApi();
 
-            var bucket = await _bucketsApi.CreateBucket(GenerateName("robot sensor"), RetentionRule(), _organization);
+            var bucket = _bucketsApi.CreateBucket(GenerateName("robot sensor"), RetentionRule(), _organization);
 
             var properties = new Dictionary<string, string> {{"color", "green"}, {"location", "west"}};
 
             var label = labelClient.CreateLabel(GenerateName("Cool Resource"), properties, _organization.Id);
 
-            var labels = await _bucketsApi.GetLabels(bucket);
+            var labels = _bucketsApi.GetLabels(bucket);
             Assert.AreEqual(0, labels.Count);
 
-            var addedLabel = await _bucketsApi.AddLabel(label, bucket);
+            var addedLabel = _bucketsApi.AddLabel(label, bucket);
             Assert.IsNotNull(addedLabel);
             Assert.AreEqual(label.Id, addedLabel.Id);
             Assert.AreEqual(label.Name, addedLabel.Name);
             Assert.AreEqual(label.Properties, addedLabel.Properties);
 
-            labels = await _bucketsApi.GetLabels(bucket);
+            labels = _bucketsApi.GetLabels(bucket);
             Assert.AreEqual(1, labels.Count);
             Assert.AreEqual(label.Id, labels[0].Id);
             Assert.AreEqual(label.Name, labels[0].Name);
 
-            await _bucketsApi.DeleteLabel(label, bucket);
+            _bucketsApi.DeleteLabel(label, bucket);
 
-            labels = await _bucketsApi.GetLabels(bucket);
+            labels = _bucketsApi.GetLabels(bucket);
             Assert.AreEqual(0, labels.Count);
         }
 
         [Test]
-        public async Task Member()
+        public void Member()
         {
-            var bucket = await _bucketsApi.CreateBucket(GenerateName("robot sensor"), RetentionRule(), _organization);
+            var bucket = _bucketsApi.CreateBucket(GenerateName("robot sensor"), RetentionRule(), _organization);
 
-            var members = await _bucketsApi.GetMembers(bucket);
+            var members = _bucketsApi.GetMembers(bucket);
             Assert.AreEqual(0, members.Count);
 
             var user = _usersApi.CreateUser(GenerateName("Luke Health"));
 
-            var resourceMember = await _bucketsApi.AddMember(user, bucket);
+            var resourceMember = _bucketsApi.AddMember(user, bucket);
             Assert.IsNotNull(resourceMember);
-            Assert.AreEqual(resourceMember.UserId, user.Id);
-            Assert.AreEqual(resourceMember.UserName, user.Name);
-            Assert.AreEqual(resourceMember.Role, ResourceMember.UserType.Member);
+            Assert.AreEqual(resourceMember.Id, user.Id);
+            Assert.AreEqual(resourceMember.Name, user.Name);
+            Assert.AreEqual(resourceMember.Role, ResourceMember.RoleEnum.Member);
 
-            members = await _bucketsApi.GetMembers(bucket);
+            members = _bucketsApi.GetMembers(bucket);
             Assert.AreEqual(1, members.Count);
-            Assert.AreEqual(members[0].UserId, user.Id);
-            Assert.AreEqual(members[0].UserName, user.Name);
-            Assert.AreEqual(members[0].Role, ResourceMember.UserType.Member);
+            Assert.AreEqual(members[0].Id, user.Id);
+            Assert.AreEqual(members[0].Name, user.Name);
+            Assert.AreEqual(members[0].Role, ResourceMember.RoleEnum.Member);
 
-            await _bucketsApi.DeleteMember(user, bucket);
+            _bucketsApi.DeleteMember(user, bucket);
 
-            members = await _bucketsApi.GetMembers(bucket);
+            members = _bucketsApi.GetMembers(bucket);
             Assert.AreEqual(0, members.Count);
         }
 
         [Test]
-        public async Task Owner()
+        public void Owner()
         {
-            var bucket = await _bucketsApi.CreateBucket(GenerateName("robot sensor"), RetentionRule(), _organization);
+            var bucket = _bucketsApi.CreateBucket(GenerateName("robot sensor"), RetentionRule(), _organization);
 
-            var owners = await _bucketsApi.GetOwners(bucket);
+            var owners = _bucketsApi.GetOwners(bucket);
             Assert.AreEqual(1, owners.Count);
-            Assert.AreEqual("my-user", owners[0].UserName);
+            Assert.AreEqual("my-user", owners[0].Name);
 
             var user = _usersApi.CreateUser(GenerateName("Luke Health"));
 
-            var resourceMember = await _bucketsApi.AddOwner(user, bucket);
+            var resourceMember = _bucketsApi.AddOwner(user, bucket);
             Assert.IsNotNull(resourceMember);
-            Assert.AreEqual(resourceMember.UserId, user.Id);
-            Assert.AreEqual(resourceMember.UserName, user.Name);
-            Assert.AreEqual(resourceMember.Role, ResourceMember.UserType.Owner);
+            Assert.AreEqual(resourceMember.Id, user.Id);
+            Assert.AreEqual(resourceMember.Name, user.Name);
+            Assert.AreEqual(resourceMember.Role, ResourceOwner.RoleEnum.Owner);
 
-            owners = await _bucketsApi.GetOwners(bucket);
+            owners = _bucketsApi.GetOwners(bucket);
             Assert.AreEqual(2, owners.Count);
-            Assert.AreEqual(owners[1].UserId, user.Id);
-            Assert.AreEqual(owners[1].UserName, user.Name);
-            Assert.AreEqual(owners[1].Role, ResourceMember.UserType.Owner);
+            Assert.AreEqual(owners[1].Id, user.Id);
+            Assert.AreEqual(owners[1].Name, user.Name);
+            Assert.AreEqual(owners[1].Role, ResourceOwner.RoleEnum.Owner);
 
-            await _bucketsApi.DeleteOwner(user, bucket);
+            _bucketsApi.DeleteOwner(user, bucket);
 
-            owners = await _bucketsApi.GetOwners(bucket);
+            owners = _bucketsApi.GetOwners(bucket);
             Assert.AreEqual(1, owners.Count);
         }
 
         [Test]
-        public async Task UpdateBucket()
+        public void UpdateBucket()
         {
             var createBucket =
-                await _bucketsApi.CreateBucket(GenerateName("robot sensor"), RetentionRule(), _organization);
+                _bucketsApi.CreateBucket(GenerateName("robot sensor"), RetentionRule(), _organization);
             createBucket.Name = "Therm sensor 2000";
-            createBucket.RetentionRules[0].EverySeconds = 1000L;
+            createBucket.RetentionRules[0].EverySeconds = 1000;
 
-            var updatedBucket = await _bucketsApi.UpdateBucket(createBucket);
+            var updatedBucket = _bucketsApi.UpdateBucket(createBucket);
 
             Assert.IsNotNull(updatedBucket);
             Assert.IsNotEmpty(updatedBucket.Id);
             Assert.AreEqual(updatedBucket.Id, createBucket.Id);
             Assert.AreEqual(updatedBucket.Name, "Therm sensor 2000");
-            Assert.AreEqual(updatedBucket.OrgId, createBucket.OrgId);
-            Assert.AreEqual(updatedBucket.OrgName, createBucket.OrgName);
-            Assert.AreEqual(updatedBucket.RetentionRules[0].EverySeconds, 1000L);
+            Assert.AreEqual(updatedBucket.OrganizationID, createBucket.OrganizationID);
+            Assert.AreEqual(updatedBucket.Organization, createBucket.Organization);
+            Assert.AreEqual(updatedBucket.RetentionRules[0].EverySeconds, 1000);
         }
     }
 }

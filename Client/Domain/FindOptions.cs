@@ -1,3 +1,8 @@
+using System;
+using System.Linq;
+using System.Web;
+using InfluxDB.Client.Core;
+using InfluxDB.Client.Generated.Domain;
 using Newtonsoft.Json;
 
 namespace InfluxDB.Client.Domain
@@ -16,5 +21,31 @@ namespace InfluxDB.Client.Domain
         [JsonProperty("sortBy")] public string SortBy { get; set; }
 
         [JsonProperty("descending")] public bool? Descending { get; set; }
+
+        internal static FindOptions GetFindOptions(string link)
+        {
+            var options = new FindOptions();
+
+            if (string.IsNullOrEmpty(link))
+            {
+                return options;
+            }
+
+            var qs = HttpUtility.ParseQueryString(link.Substring(link.LastIndexOf("?", StringComparison.Ordinal)));
+
+            var keys = qs.AllKeys;
+            if (!keys.Contains(LimitKey) && !keys.Contains(OffsetKey) &&
+                !keys.Contains(SortByKey) && !keys.Contains(DescendingKey))
+                return null;
+
+            var findOptions = new FindOptions();
+            if (keys.Contains(LimitKey)) findOptions.Limit = int.Parse(qs.Get(LimitKey));
+            if (keys.Contains(OffsetKey)) findOptions.Offset = int.Parse(qs.Get(OffsetKey));
+            if (keys.Contains(SortByKey)) findOptions.SortBy = qs.Get(SortByKey);
+            if (keys.Contains(DescendingKey))
+                findOptions.Descending = bool.Parse(qs.Get(DescendingKey));
+
+            return findOptions;
+        }
     }
 }

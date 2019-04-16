@@ -35,7 +35,7 @@ namespace Examples
             //
             // Create New Bucket with retention 1h
             //
-            var temperatureBucket = await influxDB.GetBucketsApi().CreateBucket("temperature-sensors", medicalGMBH.Id);
+            var temperatureBucket = influxDB.GetBucketsApi().CreateBucket("temperature-sensors", medicalGMBH.Id);
 
             //
             // Add Permissions to read and write to the Bucket

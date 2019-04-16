@@ -237,7 +237,12 @@ namespace InfluxDB.Client
         /// <returns>the new client instance for Bucket API</returns>
         public BucketsApi GetBucketsApi()
         {
-            return new BucketsApi(Client);
+            var service = new BucketsService((Configuration) _apiClient.Configuration)
+            {
+                ExceptionFactory = _exceptionFactory
+            };
+            
+            return new BucketsApi(service);
         }
 
         /// <summary>

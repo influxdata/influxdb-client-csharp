@@ -1,9 +1,7 @@
-using System;
 using System.Collections.Generic;
 using InfluxDB.Client.Core.Exceptions;
 using InfluxDB.Client.Generated.Domain;
 using NUnit.Framework;
-using Bucket = InfluxDB.Client.Domain.Bucket;
 using Organization = InfluxDB.Client.Domain.Organization;
 using Task = System.Threading.Tasks.Task;
 
@@ -17,7 +15,7 @@ namespace InfluxDB.Client.Test
         {
             _scraperTargetsApi = Client.GetScraperTargetsApi();
             _usersApi = Client.GetUsersApi();
-            _bucket = await Client.GetBucketsApi().FindBucketByName("my-bucket");
+            _bucket = Client.GetBucketsApi().FindBucketByName("my-bucket");
             _organization = await FindMyOrg();
         }
 

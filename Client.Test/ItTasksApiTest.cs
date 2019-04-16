@@ -44,7 +44,7 @@ namespace InfluxDB.Client.Test
             var resourceBucket = new PermissionResource
             {
                 Type = ResourceType.Buckets, OrgId = organization.Id,
-                Id = (await Client.GetBucketsApi().FindBucketByName("my-bucket")).Id
+                Id = Client.GetBucketsApi().FindBucketByName("my-bucket").Id
             };
             var resourceOrg = new PermissionResource {Type = ResourceType.Orgs};
             var resourceUser = new PermissionResource {Type = ResourceType.Users};

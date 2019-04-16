@@ -3,9 +3,14 @@ using System.Collections.Generic;
 using System.Threading;
 using InfluxDB.Client.Core;
 using InfluxDB.Client.Domain;
+using InfluxDB.Client.Generated.Domain;
 using InfluxDB.Client.Writes;
 using NodaTime;
 using NUnit.Framework;
+using Duration = NodaTime.Duration;
+using Organization = InfluxDB.Client.Domain.Organization;
+using Permission = InfluxDB.Client.Domain.Permission;
+using PermissionResource = InfluxDB.Client.Domain.PermissionResource;
 using Task = System.Threading.Tasks.Task;
 
 namespace InfluxDB.Client.Test
@@ -23,9 +28,9 @@ namespace InfluxDB.Client.Test
         {
             _organization = await FindMyOrg();
 
-            var retention = new RetentionRule {Type = "expire", EverySeconds = 3600L};
+            var retention = new BucketRetentionRules(BucketRetentionRules.TypeEnum.Expire, 3600);
 
-            _bucket = await Client.GetBucketsApi()
+            _bucket = Client.GetBucketsApi()
                 .CreateBucket(GenerateName("h2o"), retention, _organization);
 
             //

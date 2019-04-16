@@ -70,7 +70,7 @@ namespace InfluxDB.Client.Test
                 .Given(Request.Create().UsingGet())
                 .RespondWith(CreateResponse(data, "application/json"));
 
-            var logs = await _client.GetBucketsApi().FindBucketLogs("id");
+            var logs = _client.GetBucketsApi().FindBucketLogs("id");
             
             Assert.AreEqual(20, logs.Count);
         }
