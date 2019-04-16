@@ -8,7 +8,6 @@ using InfluxDB.Client.Core.Internal;
 using InfluxDB.Client.Domain;
 using InfluxDB.Client.Generated.Domain;
 using InfluxDB.Client.Internal;
-using Organization = InfluxDB.Client.Domain.Organization;
 using ResourceMember = InfluxDB.Client.Domain.ResourceMember;
 using ResourceMembers = InfluxDB.Client.Domain.ResourceMembers;
 using Task = System.Threading.Tasks.Task;

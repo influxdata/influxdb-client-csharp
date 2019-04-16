@@ -4,9 +4,7 @@ using InfluxDB.Client.Core.Exceptions;
 using InfluxDB.Client.Domain;
 using InfluxDB.Client.Generated.Domain;
 using NUnit.Framework;
-using Organization = InfluxDB.Client.Domain.Organization;
 using ResourceMember = InfluxDB.Client.Generated.Domain.ResourceMember;
-using Task = System.Threading.Tasks.Task;
 
 namespace InfluxDB.Client.Test
 {
@@ -14,15 +12,15 @@ namespace InfluxDB.Client.Test
     public class ItBucketsApiTest : AbstractItClientTest
     {
         [SetUp]
-        public new async Task SetUp()
+        public new void SetUp()
         {
             _organizationsApi = Client.GetOrganizationsApi();
             _bucketsApi = Client.GetBucketsApi();
             _usersApi = Client.GetUsersApi();
 
-            _organization = await _organizationsApi.CreateOrganization(GenerateName("Org"));
+            _organization = _organizationsApi.CreateOrganization(GenerateName("Org"));
 
-            foreach (var bucket in (_bucketsApi.FindBuckets()).Where(bucket => bucket.Name.EndsWith("-IT")))
+            foreach (var bucket in _bucketsApi.FindBuckets().Where(bucket => bucket.Name.EndsWith("-IT")))
                 _bucketsApi.DeleteBucket(bucket);
         }
 
@@ -155,13 +153,13 @@ namespace InfluxDB.Client.Test
         }
 
         [Test]
-        public async Task FindBucketByName()
+        public void FindBucketByName()
         {
             var bucket = _bucketsApi.FindBucketByName("my-bucket");
 
             Assert.IsNotNull(bucket);
             Assert.AreEqual("my-bucket", bucket.Name);
-            Assert.AreEqual((await FindMyOrg()).Id, bucket.OrganizationID);
+            Assert.AreEqual( FindMyOrg().Id, bucket.OrganizationID);
         }
 
         [Test]
@@ -260,13 +258,13 @@ namespace InfluxDB.Client.Test
         }
 
         [Test]
-        public async Task FindBuckets()
+        public void FindBuckets()
         {
-            var size = (_bucketsApi.FindBuckets()).Count;
+            var size = _bucketsApi.FindBuckets().Count;
 
             _bucketsApi.CreateBucket(GenerateName("robot sensor"), RetentionRule(), _organization);
 
-            var organization2 = await _organizationsApi.CreateOrganization(GenerateName("Second"));
+            var organization2 = _organizationsApi.CreateOrganization(GenerateName("Second"));
             _bucketsApi.CreateBucket(GenerateName("robot sensor"), organization2.Id);
 
             var buckets = _bucketsApi.FindBuckets();
@@ -274,22 +272,22 @@ namespace InfluxDB.Client.Test
         }
 
         [Test]
-        public async Task FindBucketsByOrganization()
+        public void FindBucketsByOrganization()
         {
-            Assert.AreEqual((_bucketsApi.FindBucketsByOrganization(_organization)).Count, 0);
+            Assert.AreEqual(_bucketsApi.FindBucketsByOrganization(_organization).Count, 0);
 
             _bucketsApi.CreateBucket(GenerateName("robot sensor"), _organization);
 
-            var organization2 = await _organizationsApi.CreateOrganization(GenerateName("Second"));
+            var organization2 = _organizationsApi.CreateOrganization(GenerateName("Second"));
             _bucketsApi.CreateBucket(GenerateName("robot sensor"), organization2);
 
-            Assert.AreEqual((_bucketsApi.FindBucketsByOrganization(_organization)).Count, 1);
+            Assert.AreEqual(_bucketsApi.FindBucketsByOrganization(_organization).Count, 1);
         }
 
         [Test]
         public void FindBucketsPaging()
         {
-            foreach (var i in Enumerable.Range(0, 20 - (_bucketsApi.FindBuckets()).Count))
+            foreach (var i in Enumerable.Range(0, 20 - _bucketsApi.FindBuckets().Count))
                 _bucketsApi.CreateBucket(GenerateName($"{i}"), RetentionRule(), _organization);
 
             var findOptions = new FindOptions {Limit = 5};

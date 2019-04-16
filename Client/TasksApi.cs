@@ -8,7 +8,6 @@ using InfluxDB.Client.Generated.Domain;
 using InfluxDB.Client.Internal;
 using LogEvent = InfluxDB.Client.Domain.LogEvent;
 using Logs = InfluxDB.Client.Domain.Logs;
-using Organization = InfluxDB.Client.Domain.Organization;
 using ResourceMember = InfluxDB.Client.Domain.ResourceMember;
 using ResourceMembers = InfluxDB.Client.Domain.ResourceMembers;
 using Run = InfluxDB.Client.Domain.Run;
@@ -98,7 +97,7 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(cron, nameof(cron));
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
 
-            var organization = new Organization {Id = orgId};
+            var organization = new Organization(null, orgId);
 
             return await CreateTaskCron(name, flux, cron, organization);
         }
@@ -146,7 +145,7 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(every, nameof(every));
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
 
-            var organization = new Organization {Id = orgId};
+            var organization = new Organization(null, orgId);
 
             return await CreateTaskEvery(name, flux, every, organization);
         }

@@ -4,7 +4,6 @@ using InfluxDB.Client.Domain;
 using InfluxDB.Client.Generated.Domain;
 using NUnit.Framework;
 using Authorization = InfluxDB.Client.Domain.Authorization;
-using Organization = InfluxDB.Client.Domain.Organization;
 using Permission = InfluxDB.Client.Domain.Permission;
 using PermissionResource = InfluxDB.Client.Domain.PermissionResource;
 using Task = System.Threading.Tasks.Task;
@@ -19,11 +18,11 @@ namespace InfluxDB.Client.Test
         private Organization _organization;
 
         [SetUp]
-        public new async Task SetUp()
+        public new void SetUp()
         {
             _authorizationsApi = Client.GetAuthorizationsApi();
             _user = Client.GetUsersApi().Me();
-            _organization = await FindMyOrg();
+            _organization = FindMyOrg();
         }
 
         [Test]

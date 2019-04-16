@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 using InfluxDB.Client.Core;
 using InfluxDB.Client.Core.Exceptions;
 using InfluxDB.Client.Domain;
+using InfluxDB.Client.Generated.Domain;
 using NUnit.Framework;
+using Authorization = InfluxDB.Client.Domain.Authorization;
+using Permission = InfluxDB.Client.Domain.Permission;
+using PermissionResource = InfluxDB.Client.Domain.PermissionResource;
+using ResourceMember = InfluxDB.Client.Domain.ResourceMember;
 using Task = System.Threading.Tasks.Task;
 
 namespace InfluxDB.Client.Test
@@ -17,7 +22,7 @@ namespace InfluxDB.Client.Test
         [SetUp]
         public new async Task SetUp()
         {
-            _organization = await FindMyOrg();
+            _organization = FindMyOrg();
 
             var authorization = await AddAuthorization(_organization);
 
@@ -279,7 +284,7 @@ namespace InfluxDB.Client.Test
         //TODO
         public async Task FindTasksByOrganization()
         {
-            var taskOrg = await Client.GetOrganizationsApi().CreateOrganization(GenerateName("Task user"));
+            var taskOrg = Client.GetOrganizationsApi().CreateOrganization(GenerateName("Task user"));
             var authorization = await AddAuthorization(taskOrg);
 
             Client.Dispose();

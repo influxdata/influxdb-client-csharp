@@ -42,9 +42,9 @@ namespace InfluxDB.Client.Test
         }
 
         [Test]
-        public async Task ParseDate()
+        public void ParseDate()
         {
-            const string data = "{\"links\":{\"self\":\"/api/v2/buckets/0376298868765000/log\"},\"log\":[" +
+            const string data = "{\"links\":{\"self\":\"/api/v2/buckets/0376298868765000/log\"},\"logs\":[" +
                                 "{\"links\":{\"user\":\"/api/v2/users/037624e8d440e000\"},\"description\":\"Bucket Created\",\"userID\":\"037624e8d440e000\",\"time\":\"2019-02-26T07:33:44.390263749Z\"}," +
                                 "{\"links\":{\"user\":\"/api/v2/users/037624e8d440e000\"},\"description\":\"Bucket Updated\",\"userID\":\"037624e8d440e000\",\"time\":\"2019-02-26T08:15:41.252492+01:00\"}," +
                                 "{\"links\":{\"user\":\"/api/v2/users/037624e8d440e000\"},\"description\":\"Bucket Updated\",\"userID\":\"037624e8d440e000\",\"time\":\"2019-02-26T08:15:41.334601+01:00\"}," +

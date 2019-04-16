@@ -54,7 +54,7 @@ namespace InfluxDB.Client.Test
         }
 
         [Test]
-        public async Task Onboarding()
+        public void Onboarding()
         {
             var url = "http://" + GetInfluxDb2Ip() + ":9990";
 

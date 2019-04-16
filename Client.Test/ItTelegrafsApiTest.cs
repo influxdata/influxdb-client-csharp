@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using InfluxDB.Client.Core;
 using InfluxDB.Client.Core.Exceptions;
 using InfluxDB.Client.Domain;
+using InfluxDB.Client.Generated.Domain;
 using NUnit.Framework;
+using ResourceMember = InfluxDB.Client.Domain.ResourceMember;
 using Task = System.Threading.Tasks.Task;
 
 namespace InfluxDB.Client.Test
@@ -17,7 +19,7 @@ namespace InfluxDB.Client.Test
             _telegrafsApi = Client.GetTelegrafsApi();
             _usersApi = Client.GetUsersApi();
 
-            _organization = await FindMyOrg();
+            _organization = FindMyOrg();
 
             foreach (var telegrafConfig in await _telegrafsApi.FindTelegrafConfigs())
                 await _telegrafsApi.DeleteTelegrafConfig(telegrafConfig);
@@ -171,7 +173,7 @@ namespace InfluxDB.Client.Test
         {
             var orgName = GenerateName("Constant Pro");
 
-            var organization = await Client.GetOrganizationsApi().CreateOrganization(orgName);
+            var organization = Client.GetOrganizationsApi().CreateOrganization(orgName);
             var telegrafConfigs = await _telegrafsApi.FindTelegrafConfigsByOrg(organization);
 
             Assert.AreEqual(0, telegrafConfigs.Count);

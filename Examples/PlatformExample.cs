@@ -26,7 +26,7 @@ namespace Examples
         {
             var organizationClient = influxDB.GetOrganizationsApi();
             
-            var medicalGMBH = await organizationClient
+            var medicalGMBH = organizationClient
                             .CreateOrganization("Medical Corp " + 
                                                 DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss.fff",
                                                                 CultureInfo.InvariantCulture));

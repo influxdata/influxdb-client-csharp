@@ -6,7 +6,6 @@ using InfluxDB.Client.Domain;
 using InfluxDB.Client.Generated.Domain;
 using InfluxDB.Client.Generated.Service;
 using InfluxDB.Client.Internal;
-using Organization = InfluxDB.Client.Domain.Organization;
 using ResourceMember = InfluxDB.Client.Generated.Domain.ResourceMember;
 
 namespace InfluxDB.Client

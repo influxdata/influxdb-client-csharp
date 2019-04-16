@@ -8,7 +8,6 @@ using InfluxDB.Client.Writes;
 using NodaTime;
 using NUnit.Framework;
 using Duration = NodaTime.Duration;
-using Organization = InfluxDB.Client.Domain.Organization;
 using Permission = InfluxDB.Client.Domain.Permission;
 using PermissionResource = InfluxDB.Client.Domain.PermissionResource;
 using Task = System.Threading.Tasks.Task;
@@ -26,7 +25,7 @@ namespace InfluxDB.Client.Test
         [SetUp]
         public new async Task SetUp()
         {
-            _organization = await FindMyOrg();
+            _organization = FindMyOrg();
 
             var retention = new BucketRetentionRules(BucketRetentionRules.TypeEnum.Expire, 3600);
 
@@ -54,7 +53,7 @@ namespace InfluxDB.Client.Test
             Assert.IsNotNull(loggedUser);
 
             var authorization = await Client.GetAuthorizationsApi()
-                .CreateAuthorization(await FindMyOrg(), new List<Permission> {readBucket, writeBucket});
+                .CreateAuthorization( FindMyOrg(), new List<Permission> {readBucket, writeBucket});
 
             var token = authorization.Token;
 

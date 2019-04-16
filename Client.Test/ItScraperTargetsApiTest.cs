@@ -2,8 +2,6 @@ using System.Collections.Generic;
 using InfluxDB.Client.Core.Exceptions;
 using InfluxDB.Client.Generated.Domain;
 using NUnit.Framework;
-using Organization = InfluxDB.Client.Domain.Organization;
-using Task = System.Threading.Tasks.Task;
 
 namespace InfluxDB.Client.Test
 {
@@ -11,12 +9,12 @@ namespace InfluxDB.Client.Test
     public class ItScraperTargetsApiTest : AbstractItClientTest
     {
         [SetUp]
-        public new async Task SetUp()
+        public new void SetUp()
         {
             _scraperTargetsApi = Client.GetScraperTargetsApi();
             _usersApi = Client.GetUsersApi();
             _bucket = Client.GetBucketsApi().FindBucketByName("my-bucket");
-            _organization = await FindMyOrg();
+            _organization = FindMyOrg();
         }
 
         private ScraperTargetsApi _scraperTargetsApi;

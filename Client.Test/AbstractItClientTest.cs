@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using InfluxDB.Client.Core.Test;
 using InfluxDB.Client.Domain;
+using InfluxDB.Client.Generated.Domain;
 using NUnit.Framework;
 using Task = System.Threading.Tasks.Task;
 
@@ -43,9 +44,9 @@ namespace InfluxDB.Client.Test
                                    CultureInfo.InvariantCulture) + "-IT";
         }
 
-        protected async Task<Organization> FindMyOrg()
+        protected Organization FindMyOrg()
         {
-            return (await Client.GetOrganizationsApi().FindOrganizations())
+            return Client.GetOrganizationsApi().FindOrganizations()
                 .First(organization => organization.Name.Equals("my-org"));
         }
 

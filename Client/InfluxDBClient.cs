@@ -214,7 +214,12 @@ namespace InfluxDB.Client
         /// <returns>the new client instance for Organization API</returns>
         public OrganizationsApi GetOrganizationsApi()
         {
-            return new OrganizationsApi(Client);
+            var service = new OrganizationsService((Configuration) _apiClient.Configuration)
+            {
+                ExceptionFactory = _exceptionFactory
+            };
+            
+            return new OrganizationsApi(service);
         }
 
         /// <summary>

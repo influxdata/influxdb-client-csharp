@@ -3,7 +3,6 @@ using System.Linq;
 using InfluxDB.Client.Core.Exceptions;
 using InfluxDB.Client.Generated.Domain;
 using NUnit.Framework;
-using Organization = InfluxDB.Client.Domain.Organization;
 using Task = System.Threading.Tasks.Task;
 
 namespace InfluxDB.Client.Test
@@ -12,14 +11,14 @@ namespace InfluxDB.Client.Test
     public class ItLabelsApiTest : AbstractItClientTest
     {
         [SetUp]
-        public new async Task SetUp()
+        public new void SetUp()
         {
             _labelsApi = Client.GetLabelsApi();
 
             foreach (var label in _labelsApi.FindLabels().Where(label => label.Name.EndsWith("-IT")))
                 _labelsApi.DeleteLabel(label.Id);
 
-            _organization = await FindMyOrg();
+            _organization = FindMyOrg();
         }
 
         private LabelsApi _labelsApi;
@@ -138,9 +137,9 @@ namespace InfluxDB.Client.Test
         }
 
         [Test]
-        public async Task FindLabelsByOrganization()
+        public void FindLabelsByOrganization()
         {
-            var organization = await Client.GetOrganizationsApi().CreateOrganization(GenerateName("org"));
+            var organization = Client.GetOrganizationsApi().CreateOrganization(GenerateName("org"));
 
             var labels = _labelsApi.FindLabelsByOrgId(organization.Id);
             Assert.AreEqual(0, labels.Count);
