@@ -68,7 +68,7 @@ namespace InfluxDB.Client.Generated.Client
                 try
                 {
                     var header = "Basic " + Convert.ToBase64String(
-                                     Encoding.Default.GetBytes(_options.Username + ":" + _options.Password));
+                                     Encoding.Default.GetBytes(_options.Username + ":" + new string(_options.Password)));
 
                     var request = new RestRequest(_options.Url + "/api/v2/signin", Method.POST)
                         .AddHeader("Authorization", header);
@@ -181,7 +181,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        ///     Get the Query client.
+        /// Get the Query client.
         /// </summary>
         /// <returns>the new client instance for the Query API</returns>
         public QueryApi GetQueryApi()
@@ -190,7 +190,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        ///     Get the Write client.
+        /// Get the Write client.
         /// </summary>
         /// <returns>the new client instance for the Write API</returns>
         public WriteApi GetWriteApi()
@@ -199,7 +199,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        ///     Get the Write client.
+        /// Get the Write client.
         /// </summary>
         /// <param name="writeOptions">the configuration for a write client</param>
         /// <returns>the new client instance for the Write API</returns>
@@ -209,7 +209,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        ///     Get the <see cref="Domain.Organization" /> client.
+        /// Get the <see cref="Domain.Organization" /> client.
         /// </summary>
         /// <returns>the new client instance for Organization API</returns>
         public OrganizationsApi GetOrganizationsApi()
@@ -218,16 +218,21 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        ///     Get the <see cref="Domain.User" /> client.
+        /// Get the <see cref="InfluxDB.Client.Generated.Domain.User" /> client.
         /// </summary>
         /// <returns>the new client instance for User API</returns>
         public UsersApi GetUsersApi()
         {
-            return new UsersApi(Client);
+            var service = new UsersService((Configuration) _apiClient.Configuration)
+            {
+                ExceptionFactory = _exceptionFactory
+            };
+            
+            return new UsersApi(service);
         }
 
         /// <summary>
-        ///     Get the <see cref="Domain.Bucket" /> client.
+        /// Get the <see cref="Domain.Bucket" /> client.
         /// </summary>
         /// <returns>the new client instance for Bucket API</returns>
         public BucketsApi GetBucketsApi()
@@ -236,7 +241,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        ///     Get the <see cref="Domain.Source" /> client.
+        /// Get the <see cref="Domain.Source" /> client.
         /// </summary>
         /// <returns>the new client instance for Source API</returns>
         public SourcesApi GetSourcesApi()
@@ -246,11 +251,11 @@ namespace InfluxDB.Client
                 ExceptionFactory = _exceptionFactory
             };
 
-            return new SourcesApi(Client, service);
+            return new SourcesApi(service);
         }
 
         /// <summary>
-        ///     Get the <see cref="Domain.Authorization" /> client.
+        /// Get the <see cref="Domain.Authorization" /> client.
         /// </summary>
         /// <returns>the new client instance for Authorization API</returns>
         public AuthorizationsApi GetAuthorizationsApi()
@@ -259,7 +264,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        ///     Get the <see cref="Domain.Task" /> client.
+        /// Get the <see cref="Domain.Task" /> client.
         /// </summary>
         /// <returns>the new client instance for Task API</returns>
         public TasksApi GetTasksApi()
@@ -268,16 +273,21 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        ///     Get the <see cref="Domain.ScraperTarget" /> client.
+        /// Get the <see cref="InfluxDB.Client.Generated.Domain.ScraperTargetResponse" /> client.
         /// </summary>
         /// <returns>the new client instance for Scraper API</returns>
         public ScraperTargetsApi GetScraperTargetsApi()
         {
-            return new ScraperTargetsApi(Client);
+            var service = new ScraperTargetsService((Configuration) _apiClient.Configuration)
+            {
+                ExceptionFactory = _exceptionFactory
+            };
+
+            return new ScraperTargetsApi(service);
         }
 
         /// <summary>
-        ///     Get the <see cref="Domain.TelegrafConfig" /> client.
+        /// Get the <see cref="Domain.TelegrafConfig" /> client.
         /// </summary>
         /// <returns>the new client instance for Telegrafs API</returns>
         public TelegrafsApi GetTelegrafsApi()
@@ -286,7 +296,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        ///     Get the <see cref="InfluxDB.Client.Generated.Domain.Label" /> client.
+        /// Get the <see cref="InfluxDB.Client.Generated.Domain.Label" /> client.
         /// </summary>
         /// <returns>the new client instance for Label API</returns>
         public LabelsApi GetLabelsApi()
@@ -296,11 +306,11 @@ namespace InfluxDB.Client
                 ExceptionFactory = _exceptionFactory
             };
 
-            return new LabelsApi(Client, service);
+            return new LabelsApi(service);
         }
 
         /// <summary>
-        ///     Set the log level for the request and response information.
+        /// Set the log level for the request and response information.
         /// </summary>
         /// <param name="logLevel">the log level to set</param>
         public void SetLogLevel(LogLevel logLevel)
@@ -311,7 +321,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        ///     Set the <see cref="LogLevel" /> that is used for logging requests and responses.
+        /// Set the <see cref="LogLevel" /> that is used for logging requests and responses.
         /// </summary>
         /// <returns>Log Level</returns>
         public LogLevel GetLogLevel()
@@ -320,7 +330,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        ///     Get the health of an instance.
+        /// Get the health of an instance.
         /// </summary>
         /// <returns>health of an instance</returns>
         public Check Health()
@@ -329,7 +339,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        ///     The readiness of the InfluxDB 2.0.
+        /// The readiness of the InfluxDB 2.0.
         /// </summary>
         /// <returns>return null if the InfluxDB is not ready</returns>
         public Ready Ready()
@@ -347,7 +357,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        ///     Post onboarding request, to setup initial user, org and bucket.
+        /// Post onboarding request, to setup initial user, org and bucket.
         /// </summary>
         /// <param name="onboarding">to setup defaults</param>
         /// <exception cref="HttpException">With status code 422 when an onboarding has already been completed</exception>
@@ -360,7 +370,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        ///     Check if database has default user, org, bucket created, returns true if not.
+        /// Check if database has default user, org, bucket created, returns true if not.
         /// </summary>
         /// <returns>True if onboarding has already been completed otherwise false</returns>
         public bool IsOnboardingAllowed()

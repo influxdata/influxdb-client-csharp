@@ -12,7 +12,6 @@ using Organization = InfluxDB.Client.Domain.Organization;
 using ResourceMember = InfluxDB.Client.Domain.ResourceMember;
 using ResourceMembers = InfluxDB.Client.Domain.ResourceMembers;
 using Task = System.Threading.Tasks.Task;
-using User = InfluxDB.Client.Domain.User;
 
 namespace InfluxDB.Client
 {
@@ -301,7 +300,7 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(telegrafConfigId, nameof(telegrafConfigId));
             Arguments.CheckNonEmptyString(memberId, nameof(memberId));
 
-            var user = new User {Id = memberId};
+            var user = new User(memberId);
 
             var request = await Post(user, $"/api/v2/telegrafs/{telegrafConfigId}/members");
 
@@ -391,7 +390,7 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(telegrafConfigId, nameof(telegrafConfigId));
             Arguments.CheckNonEmptyString(ownerId, nameof(ownerId));
 
-            var user = new User {Id = ownerId};
+            var user = new User(ownerId);
 
             var request = await Post(user, $"/api/v2/telegrafs/{telegrafConfigId}/owners");
 

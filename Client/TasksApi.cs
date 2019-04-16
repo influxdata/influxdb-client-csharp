@@ -15,7 +15,6 @@ using Run = InfluxDB.Client.Domain.Run;
 using Runs = InfluxDB.Client.Domain.Runs;
 using Task = InfluxDB.Client.Domain.Task;
 using Tasks = InfluxDB.Client.Domain.Tasks;
-using User = InfluxDB.Client.Domain.User;
 
 namespace InfluxDB.Client
 {
@@ -369,7 +368,7 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(taskId, nameof(taskId));
             Arguments.CheckNonEmptyString(memberId, nameof(memberId));
 
-            var user = new User {Id = memberId};
+            var user = new User(memberId);
 
             var request = await Post(user, $"/api/v2/tasks/{taskId}/members");
 
@@ -459,7 +458,7 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(taskId, nameof(taskId));
             Arguments.CheckNonEmptyString(ownerId, nameof(ownerId));
 
-            var user = new User {Id = ownerId};
+            var user = new User(ownerId);
 
             var request = await Post(user, $"/api/v2/tasks/{taskId}/owners");
 

@@ -12,7 +12,7 @@ namespace InfluxDB.Client
     {
         private readonly SourcesService _service;
 
-        protected internal SourcesApi(DefaultClientIo client, SourcesService service) : base(client)
+        protected internal SourcesApi(SourcesService service)
         {
             Arguments.CheckNotNull(service, nameof(service));
 

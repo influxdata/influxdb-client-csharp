@@ -11,7 +11,7 @@ namespace InfluxDB.Client
     {
         private readonly LabelsService _service;
 
-        protected internal LabelsApi(DefaultClientIo client, LabelsService service) : base(client)
+        protected internal LabelsApi(LabelsService service)
         {
             Arguments.CheckNotNull(service, nameof(service));
 
@@ -156,7 +156,7 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="organization">specifies the organization of the resource</param>
         /// <returns>all labels</returns>
-        public Labels FindLabelsByOrg(Organization organization)
+        public List<Label> FindLabelsByOrg(Organization organization)
         {
             Arguments.CheckNotNull(organization, nameof(organization));
 
@@ -168,7 +168,7 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="orgId">specifies the organization ID of the resource</param>
         /// <returns>all labels</returns>
-        public Labels FindLabelsByOrgId(string orgId)
+        public List<Label> FindLabelsByOrgId(string orgId)
         {
             return _service.LabelsGet(null, orgId).Labels;
         }

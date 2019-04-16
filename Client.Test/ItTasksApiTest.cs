@@ -303,7 +303,7 @@ namespace InfluxDB.Client.Test
         [Ignore("set user password -> https://github.com/influxdata/influxdb/issues/11590")]
         public async Task FindTasksByUser()
         {
-            var taskUser = await Client.GetUsersApi().CreateUser(GenerateName("Task user"));
+            var taskUser = Client.GetUsersApi().CreateUser(GenerateName("Task user"));
 
             var count = (await _tasksApi.FindTasksByUser(taskUser)).Count;
             Assert.AreEqual(0, count);
@@ -423,7 +423,7 @@ namespace InfluxDB.Client.Test
             var members = await _tasksApi.GetMembers(task);
             Assert.AreEqual(0, members.Count);
 
-            var user = await _usersApi.CreateUser(GenerateName("Luke Health"));
+            var user = _usersApi.CreateUser(GenerateName("Luke Health"));
 
             var resourceMember = await _tasksApi.AddMember(user, task);
             Assert.IsNotNull(resourceMember);
@@ -452,7 +452,7 @@ namespace InfluxDB.Client.Test
             var owners = await _tasksApi.GetOwners(task);
             Assert.AreEqual(0, owners.Count);
 
-            var user = await _usersApi.CreateUser(GenerateName("Luke Health"));
+            var user = _usersApi.CreateUser(GenerateName("Luke Health"));
 
             var resourceMember = await _tasksApi.AddOwner(user, task);
             Assert.IsNotNull(resourceMember);

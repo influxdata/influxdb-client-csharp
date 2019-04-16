@@ -14,6 +14,7 @@ import io.swagger.v3.oas.models.Operation;
 import io.swagger.v3.oas.models.media.Schema;
 import org.openapitools.codegen.CodegenModel;
 import org.openapitools.codegen.CodegenOperation;
+import org.openapitools.codegen.CodegenParameter;
 import org.openapitools.codegen.CodegenProperty;
 import org.openapitools.codegen.languages.CSharpClientCodegen;
 
@@ -211,6 +212,47 @@ public class InfluxCSharpGenerator extends CSharpClientCodegen {
         supportingFiles = supportingFiles.stream()
                 .filter(supportingFile -> accepted.contains(supportingFile.destinationFilename))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public Map<String, Object> postProcessOperationsWithModels(final Map<String, Object> objs,
+                                                               final List<Object> allModels) {
+
+        Map<String, Object> operationsWithModels = super.postProcessOperationsWithModels(objs, allModels);
+
+        List<CodegenOperation> operations = (List<CodegenOperation>) ((HashMap) operationsWithModels.get("operations"))
+                .get("operation");
+
+        //
+        // For basic auth add authorization header
+        //
+        operations.stream()
+                .filter(operation -> operation.hasAuthMethods)
+                .forEach(operation -> {
+
+                    operation.authMethods.stream()
+                            .filter(security -> security.isBasic)
+                            .forEach(security -> {
+
+                                CodegenParameter authorization = new CodegenParameter();
+                                authorization.isHeaderParam = true;
+                                authorization.isPrimitiveType = true;
+                                authorization.isString = true;
+                                authorization.baseName = "Authorization";
+                                authorization.paramName = "authorization";
+                                authorization.dataType = "String";
+                                authorization.description = "An auth credential for the Basic scheme";
+
+                                operation.allParams.get(operation.allParams.size() - 1).hasMore = true;
+                                operation.allParams.add(authorization);
+                                
+                                operation.headerParams.get(operation.headerParams.size() - 1).hasMore = true;
+                                operation.headerParams.add(authorization);
+                            });
+                });
+
+        return operationsWithModels;
+
     }
 
     @Override

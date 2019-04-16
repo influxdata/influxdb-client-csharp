@@ -346,8 +346,9 @@ namespace InfluxDB.Client.Generated.Service
         /// <exception cref="InfluxDB.Client.Generated.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="passwordResetBody">new password</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="authorization">An auth credential for the Basic scheme (optional)</param>
         /// <returns></returns>
-        void MePasswordPut (PasswordResetBody passwordResetBody, string zapTraceSpan = null);
+        void MePasswordPut (PasswordResetBody passwordResetBody, string zapTraceSpan = null, String authorization = null);
 
         /// <summary>
         /// Update password
@@ -358,8 +359,9 @@ namespace InfluxDB.Client.Generated.Service
         /// <exception cref="InfluxDB.Client.Generated.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="passwordResetBody">new password</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="authorization">An auth credential for the Basic scheme (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<Object> MePasswordPutWithHttpInfo (PasswordResetBody passwordResetBody, string zapTraceSpan = null);
+        ApiResponse<Object> MePasswordPutWithHttpInfo (PasswordResetBody passwordResetBody, string zapTraceSpan = null, String authorization = null);
         /// <summary>
         /// List all members of an organization
         /// </summary>
@@ -1069,8 +1071,9 @@ namespace InfluxDB.Client.Generated.Service
         /// <param name="userID">ID of the user</param>
         /// <param name="passwordResetBody">new password</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="authorization">An auth credential for the Basic scheme (optional)</param>
         /// <returns></returns>
-        void UsersUserIDPasswordPut (string userID, PasswordResetBody passwordResetBody, string zapTraceSpan = null);
+        void UsersUserIDPasswordPut (string userID, PasswordResetBody passwordResetBody, string zapTraceSpan = null, String authorization = null);
 
         /// <summary>
         /// Update password
@@ -1082,8 +1085,9 @@ namespace InfluxDB.Client.Generated.Service
         /// <param name="userID">ID of the user</param>
         /// <param name="passwordResetBody">new password</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="authorization">An auth credential for the Basic scheme (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<Object> UsersUserIDPasswordPutWithHttpInfo (string userID, PasswordResetBody passwordResetBody, string zapTraceSpan = null);
+        ApiResponse<Object> UsersUserIDPasswordPutWithHttpInfo (string userID, PasswordResetBody passwordResetBody, string zapTraceSpan = null, String authorization = null);
         /// <summary>
         /// Update a user
         /// </summary>
@@ -1433,8 +1437,9 @@ namespace InfluxDB.Client.Generated.Service
         /// <exception cref="InfluxDB.Client.Generated.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="passwordResetBody">new password</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="authorization">An auth credential for the Basic scheme (optional)</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task MePasswordPutAsync (PasswordResetBody passwordResetBody, string zapTraceSpan = null);
+        System.Threading.Tasks.Task MePasswordPutAsync (PasswordResetBody passwordResetBody, string zapTraceSpan = null, String authorization = null);
 
         /// <summary>
         /// Update password
@@ -1445,8 +1450,9 @@ namespace InfluxDB.Client.Generated.Service
         /// <exception cref="InfluxDB.Client.Generated.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="passwordResetBody">new password</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="authorization">An auth credential for the Basic scheme (optional)</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> MePasswordPutAsyncWithHttpInfo (PasswordResetBody passwordResetBody, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<Object>> MePasswordPutAsyncWithHttpInfo (PasswordResetBody passwordResetBody, string zapTraceSpan = null, String authorization = null);
         /// <summary>
         /// List all members of an organization
         /// </summary>
@@ -2156,8 +2162,9 @@ namespace InfluxDB.Client.Generated.Service
         /// <param name="userID">ID of the user</param>
         /// <param name="passwordResetBody">new password</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="authorization">An auth credential for the Basic scheme (optional)</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task UsersUserIDPasswordPutAsync (string userID, PasswordResetBody passwordResetBody, string zapTraceSpan = null);
+        System.Threading.Tasks.Task UsersUserIDPasswordPutAsync (string userID, PasswordResetBody passwordResetBody, string zapTraceSpan = null, String authorization = null);
 
         /// <summary>
         /// Update password
@@ -2169,8 +2176,9 @@ namespace InfluxDB.Client.Generated.Service
         /// <param name="userID">ID of the user</param>
         /// <param name="passwordResetBody">new password</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="authorization">An auth credential for the Basic scheme (optional)</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> UsersUserIDPasswordPutAsyncWithHttpInfo (string userID, PasswordResetBody passwordResetBody, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<Object>> UsersUserIDPasswordPutAsyncWithHttpInfo (string userID, PasswordResetBody passwordResetBody, string zapTraceSpan = null, String authorization = null);
         /// <summary>
         /// Update a user
         /// </summary>
@@ -4249,10 +4257,11 @@ namespace InfluxDB.Client.Generated.Service
         /// <exception cref="InfluxDB.Client.Generated.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="passwordResetBody">new password</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="authorization">An auth credential for the Basic scheme (optional)</param>
         /// <returns></returns>
-        public void MePasswordPut (PasswordResetBody passwordResetBody, string zapTraceSpan = null)
+        public void MePasswordPut (PasswordResetBody passwordResetBody, string zapTraceSpan = null, String authorization = null)
         {
-             MePasswordPutWithHttpInfo(passwordResetBody, zapTraceSpan);
+             MePasswordPutWithHttpInfo(passwordResetBody, zapTraceSpan, authorization);
         }
 
         /// <summary>
@@ -4261,8 +4270,9 @@ namespace InfluxDB.Client.Generated.Service
         /// <exception cref="InfluxDB.Client.Generated.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="passwordResetBody">new password</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="authorization">An auth credential for the Basic scheme (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public ApiResponse<Object> MePasswordPutWithHttpInfo (PasswordResetBody passwordResetBody, string zapTraceSpan = null)
+        public ApiResponse<Object> MePasswordPutWithHttpInfo (PasswordResetBody passwordResetBody, string zapTraceSpan = null, String authorization = null)
         {
             // verify the required parameter 'passwordResetBody' is set
             if (passwordResetBody == null)
@@ -4291,6 +4301,7 @@ namespace InfluxDB.Client.Generated.Service
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
 
             if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (authorization != null) localVarHeaderParams.Add("Authorization", this.Configuration.ApiClient.ParameterToString(authorization)); // header parameter
             if (passwordResetBody != null && passwordResetBody.GetType() != typeof(byte[]))
             {
                 localVarPostBody = this.Configuration.ApiClient.Serialize(passwordResetBody); // http body (model) parameter
@@ -4331,10 +4342,11 @@ namespace InfluxDB.Client.Generated.Service
         /// <exception cref="InfluxDB.Client.Generated.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="passwordResetBody">new password</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="authorization">An auth credential for the Basic scheme (optional)</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task MePasswordPutAsync (PasswordResetBody passwordResetBody, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task MePasswordPutAsync (PasswordResetBody passwordResetBody, string zapTraceSpan = null, String authorization = null)
         {
-             await MePasswordPutAsyncWithHttpInfo(passwordResetBody, zapTraceSpan);
+             await MePasswordPutAsyncWithHttpInfo(passwordResetBody, zapTraceSpan, authorization);
 
         }
 
@@ -4344,8 +4356,9 @@ namespace InfluxDB.Client.Generated.Service
         /// <exception cref="InfluxDB.Client.Generated.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="passwordResetBody">new password</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="authorization">An auth credential for the Basic scheme (optional)</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Object>> MePasswordPutAsyncWithHttpInfo (PasswordResetBody passwordResetBody, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<Object>> MePasswordPutAsyncWithHttpInfo (PasswordResetBody passwordResetBody, string zapTraceSpan = null, String authorization = null)
         {
             // verify the required parameter 'passwordResetBody' is set
             if (passwordResetBody == null)
@@ -4374,6 +4387,7 @@ namespace InfluxDB.Client.Generated.Service
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
 
             if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (authorization != null) localVarHeaderParams.Add("Authorization", this.Configuration.ApiClient.ParameterToString(authorization)); // header parameter
             if (passwordResetBody != null && passwordResetBody.GetType() != typeof(byte[]))
             {
                 localVarPostBody = this.Configuration.ApiClient.Serialize(passwordResetBody); // http body (model) parameter
@@ -8758,10 +8772,11 @@ namespace InfluxDB.Client.Generated.Service
         /// <param name="userID">ID of the user</param>
         /// <param name="passwordResetBody">new password</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="authorization">An auth credential for the Basic scheme (optional)</param>
         /// <returns></returns>
-        public void UsersUserIDPasswordPut (string userID, PasswordResetBody passwordResetBody, string zapTraceSpan = null)
+        public void UsersUserIDPasswordPut (string userID, PasswordResetBody passwordResetBody, string zapTraceSpan = null, String authorization = null)
         {
-             UsersUserIDPasswordPutWithHttpInfo(userID, passwordResetBody, zapTraceSpan);
+             UsersUserIDPasswordPutWithHttpInfo(userID, passwordResetBody, zapTraceSpan, authorization);
         }
 
         /// <summary>
@@ -8771,8 +8786,9 @@ namespace InfluxDB.Client.Generated.Service
         /// <param name="userID">ID of the user</param>
         /// <param name="passwordResetBody">new password</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="authorization">An auth credential for the Basic scheme (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public ApiResponse<Object> UsersUserIDPasswordPutWithHttpInfo (string userID, PasswordResetBody passwordResetBody, string zapTraceSpan = null)
+        public ApiResponse<Object> UsersUserIDPasswordPutWithHttpInfo (string userID, PasswordResetBody passwordResetBody, string zapTraceSpan = null, String authorization = null)
         {
             // verify the required parameter 'userID' is set
             if (userID == null)
@@ -8805,6 +8821,7 @@ namespace InfluxDB.Client.Generated.Service
 
             if (userID != null) localVarPathParams.Add("userID", this.Configuration.ApiClient.ParameterToString(userID)); // path parameter
             if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (authorization != null) localVarHeaderParams.Add("Authorization", this.Configuration.ApiClient.ParameterToString(authorization)); // header parameter
             if (passwordResetBody != null && passwordResetBody.GetType() != typeof(byte[]))
             {
                 localVarPostBody = this.Configuration.ApiClient.Serialize(passwordResetBody); // http body (model) parameter
@@ -8846,10 +8863,11 @@ namespace InfluxDB.Client.Generated.Service
         /// <param name="userID">ID of the user</param>
         /// <param name="passwordResetBody">new password</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="authorization">An auth credential for the Basic scheme (optional)</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task UsersUserIDPasswordPutAsync (string userID, PasswordResetBody passwordResetBody, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task UsersUserIDPasswordPutAsync (string userID, PasswordResetBody passwordResetBody, string zapTraceSpan = null, String authorization = null)
         {
-             await UsersUserIDPasswordPutAsyncWithHttpInfo(userID, passwordResetBody, zapTraceSpan);
+             await UsersUserIDPasswordPutAsyncWithHttpInfo(userID, passwordResetBody, zapTraceSpan, authorization);
 
         }
 
@@ -8860,8 +8878,9 @@ namespace InfluxDB.Client.Generated.Service
         /// <param name="userID">ID of the user</param>
         /// <param name="passwordResetBody">new password</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="authorization">An auth credential for the Basic scheme (optional)</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Object>> UsersUserIDPasswordPutAsyncWithHttpInfo (string userID, PasswordResetBody passwordResetBody, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<Object>> UsersUserIDPasswordPutAsyncWithHttpInfo (string userID, PasswordResetBody passwordResetBody, string zapTraceSpan = null, String authorization = null)
         {
             // verify the required parameter 'userID' is set
             if (userID == null)
@@ -8894,6 +8913,7 @@ namespace InfluxDB.Client.Generated.Service
 
             if (userID != null) localVarPathParams.Add("userID", this.Configuration.ApiClient.ParameterToString(userID)); // path parameter
             if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (authorization != null) localVarHeaderParams.Add("Authorization", this.Configuration.ApiClient.ParameterToString(authorization)); // header parameter
             if (passwordResetBody != null && passwordResetBody.GetType() != typeof(byte[]))
             {
                 localVarPostBody = this.Configuration.ApiClient.Serialize(passwordResetBody); // http body (model) parameter

@@ -268,7 +268,7 @@ namespace InfluxDB.Client.Test
             var members = await _telegrafsApi.GetMembers(telegrafConfig);
             Assert.AreEqual(0, members.Count);
 
-            var user = await _usersApi.CreateUser(GenerateName("Luke Health"));
+            var user = _usersApi.CreateUser(GenerateName("Luke Health"));
 
             var resourceMember = await _telegrafsApi.AddMember(user, telegrafConfig);
             Assert.IsNotNull(resourceMember);
@@ -299,7 +299,7 @@ namespace InfluxDB.Client.Test
             Assert.AreEqual(1, owners.Count);
             Assert.AreEqual("my-user", owners[0].UserName);
 
-            var user = await _usersApi.CreateUser(GenerateName("Luke Health"));
+            var user = _usersApi.CreateUser(GenerateName("Luke Health"));
 
             var resourceMember = await _telegrafsApi.AddOwner(user, telegrafConfig);
             Assert.IsNotNull(resourceMember);

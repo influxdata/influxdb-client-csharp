@@ -83,7 +83,7 @@ namespace InfluxDB.Client.Test
 
             using (var client = InfluxDBClientFactory.Create(url, onboarding.Auth.Token.ToCharArray()))
             {
-                var user = await client.GetUsersApi().Me();
+                var user = client.GetUsersApi().Me();
 
                 Assert.IsNotNull(user);
                 Assert.AreEqual("admin", user.Name);

@@ -4,6 +4,11 @@ using System.Threading.Tasks;
 using InfluxDB.Client.Core;
 using InfluxDB.Client.Core.Internal;
 using InfluxDB.Client.Domain;
+using InfluxDB.Client.Generated.Domain;
+using Authorization = InfluxDB.Client.Domain.Authorization;
+using Authorizations = InfluxDB.Client.Domain.Authorizations;
+using Organization = InfluxDB.Client.Domain.Organization;
+using Permission = InfluxDB.Client.Domain.Permission;
 using Task = System.Threading.Tasks.Task;
 
 namespace InfluxDB.Client

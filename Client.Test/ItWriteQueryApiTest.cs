@@ -45,7 +45,7 @@ namespace InfluxDB.Client.Test
                 Action = Permission.WriteAction
             };
 
-            var loggedUser = await Client.GetUsersApi().Me();
+            var loggedUser = Client.GetUsersApi().Me();
             Assert.IsNotNull(loggedUser);
 
             var authorization = await Client.GetAuthorizationsApi()

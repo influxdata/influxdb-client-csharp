@@ -31,10 +31,10 @@ namespace InfluxDB.Client.Generated.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Generated.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">specifies the organization of the resource</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="orgID">specifies the organization of the resource (optional)</param>
         /// <returns>ScraperTargetResponses</returns>
-        ScraperTargetResponses ScrapersGet (string orgID, string zapTraceSpan = null);
+        ScraperTargetResponses ScrapersGet (string zapTraceSpan = null, string orgID = null);
 
         /// <summary>
         /// get all scraper targets
@@ -43,10 +43,10 @@ namespace InfluxDB.Client.Generated.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Generated.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">specifies the organization of the resource</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="orgID">specifies the organization of the resource (optional)</param>
         /// <returns>ApiResponse of ScraperTargetResponses</returns>
-        ApiResponse<ScraperTargetResponses> ScrapersGetWithHttpInfo (string orgID, string zapTraceSpan = null);
+        ApiResponse<ScraperTargetResponses> ScrapersGetWithHttpInfo (string zapTraceSpan = null, string orgID = null);
         /// <summary>
         /// create a scraper target
         /// </summary>
@@ -394,10 +394,10 @@ namespace InfluxDB.Client.Generated.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Generated.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">specifies the organization of the resource</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="orgID">specifies the organization of the resource (optional)</param>
         /// <returns>Task of ScraperTargetResponses</returns>
-        System.Threading.Tasks.Task<ScraperTargetResponses> ScrapersGetAsync (string orgID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ScraperTargetResponses> ScrapersGetAsync (string zapTraceSpan = null, string orgID = null);
 
         /// <summary>
         /// get all scraper targets
@@ -406,10 +406,10 @@ namespace InfluxDB.Client.Generated.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Generated.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">specifies the organization of the resource</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="orgID">specifies the organization of the resource (optional)</param>
         /// <returns>Task of ApiResponse (ScraperTargetResponses)</returns>
-        System.Threading.Tasks.Task<ApiResponse<ScraperTargetResponses>> ScrapersGetAsyncWithHttpInfo (string orgID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<ScraperTargetResponses>> ScrapersGetAsyncWithHttpInfo (string zapTraceSpan = null, string orgID = null);
         /// <summary>
         /// create a scraper target
         /// </summary>
@@ -852,12 +852,12 @@ namespace InfluxDB.Client.Generated.Service
         /// get all scraper targets 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Generated.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">specifies the organization of the resource</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="orgID">specifies the organization of the resource (optional)</param>
         /// <returns>ScraperTargetResponses</returns>
-        public ScraperTargetResponses ScrapersGet (string orgID, string zapTraceSpan = null)
+        public ScraperTargetResponses ScrapersGet (string zapTraceSpan = null, string orgID = null)
         {
-             ApiResponse<ScraperTargetResponses> localVarResponse = ScrapersGetWithHttpInfo(orgID, zapTraceSpan);
+             ApiResponse<ScraperTargetResponses> localVarResponse = ScrapersGetWithHttpInfo(zapTraceSpan, orgID);
              return localVarResponse.Data;
         }
 
@@ -865,14 +865,11 @@ namespace InfluxDB.Client.Generated.Service
         /// get all scraper targets 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Generated.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">specifies the organization of the resource</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="orgID">specifies the organization of the resource (optional)</param>
         /// <returns>ApiResponse of ScraperTargetResponses</returns>
-        public ApiResponse< ScraperTargetResponses > ScrapersGetWithHttpInfo (string orgID, string zapTraceSpan = null)
+        public ApiResponse< ScraperTargetResponses > ScrapersGetWithHttpInfo (string zapTraceSpan = null, string orgID = null)
         {
-            // verify the required parameter 'orgID' is set
-            if (orgID == null)
-                throw new ApiException(400, "Missing required parameter 'orgID' when calling ScraperTargetsService->ScrapersGet");
 
             var localVarPath = "/api/v2/scrapers";
             var localVarPathParams = new Dictionary<String, String>();
@@ -921,12 +918,12 @@ namespace InfluxDB.Client.Generated.Service
         /// get all scraper targets 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Generated.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">specifies the organization of the resource</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="orgID">specifies the organization of the resource (optional)</param>
         /// <returns>Task of ScraperTargetResponses</returns>
-        public async System.Threading.Tasks.Task<ScraperTargetResponses> ScrapersGetAsync (string orgID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ScraperTargetResponses> ScrapersGetAsync (string zapTraceSpan = null, string orgID = null)
         {
-             ApiResponse<ScraperTargetResponses> localVarResponse = await ScrapersGetAsyncWithHttpInfo(orgID, zapTraceSpan);
+             ApiResponse<ScraperTargetResponses> localVarResponse = await ScrapersGetAsyncWithHttpInfo(zapTraceSpan, orgID);
              return localVarResponse.Data;
 
         }
@@ -935,14 +932,11 @@ namespace InfluxDB.Client.Generated.Service
         /// get all scraper targets 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Generated.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">specifies the organization of the resource</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="orgID">specifies the organization of the resource (optional)</param>
         /// <returns>Task of ApiResponse (ScraperTargetResponses)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<ScraperTargetResponses>> ScrapersGetAsyncWithHttpInfo (string orgID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<ScraperTargetResponses>> ScrapersGetAsyncWithHttpInfo (string zapTraceSpan = null, string orgID = null)
         {
-            // verify the required parameter 'orgID' is set
-            if (orgID == null)
-                throw new ApiException(400, "Missing required parameter 'orgID' when calling ScraperTargetsService->ScrapersGet");
 
             var localVarPath = "/api/v2/scrapers";
             var localVarPathParams = new Dictionary<String, String>();

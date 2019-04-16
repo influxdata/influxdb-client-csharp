@@ -53,8 +53,9 @@ namespace InfluxDB.Client.Generated.Service
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Generated.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="authorization">An auth credential for the Basic scheme (optional)</param>
         /// <returns></returns>
-        void SigninPost (string zapTraceSpan = null);
+        void SigninPost (string zapTraceSpan = null, String authorization = null);
 
         /// <summary>
         /// Exchange basic auth credentials for session
@@ -64,8 +65,9 @@ namespace InfluxDB.Client.Generated.Service
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Generated.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="authorization">An auth credential for the Basic scheme (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<Object> SigninPostWithHttpInfo (string zapTraceSpan = null);
+        ApiResponse<Object> SigninPostWithHttpInfo (string zapTraceSpan = null, String authorization = null);
         /// <summary>
         /// Expire the current session
         /// </summary>
@@ -118,8 +120,9 @@ namespace InfluxDB.Client.Generated.Service
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Generated.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="authorization">An auth credential for the Basic scheme (optional)</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task SigninPostAsync (string zapTraceSpan = null);
+        System.Threading.Tasks.Task SigninPostAsync (string zapTraceSpan = null, String authorization = null);
 
         /// <summary>
         /// Exchange basic auth credentials for session
@@ -129,8 +132,9 @@ namespace InfluxDB.Client.Generated.Service
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Generated.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="authorization">An auth credential for the Basic scheme (optional)</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> SigninPostAsyncWithHttpInfo (string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<Object>> SigninPostAsyncWithHttpInfo (string zapTraceSpan = null, String authorization = null);
         /// <summary>
         /// Expire the current session
         /// </summary>
@@ -384,10 +388,11 @@ namespace InfluxDB.Client.Generated.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Generated.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="authorization">An auth credential for the Basic scheme (optional)</param>
         /// <returns></returns>
-        public void SigninPost (string zapTraceSpan = null)
+        public void SigninPost (string zapTraceSpan = null, String authorization = null)
         {
-             SigninPostWithHttpInfo(zapTraceSpan);
+             SigninPostWithHttpInfo(zapTraceSpan, authorization);
         }
 
         /// <summary>
@@ -395,8 +400,9 @@ namespace InfluxDB.Client.Generated.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Generated.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="authorization">An auth credential for the Basic scheme (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public ApiResponse<Object> SigninPostWithHttpInfo (string zapTraceSpan = null)
+        public ApiResponse<Object> SigninPostWithHttpInfo (string zapTraceSpan = null, String authorization = null)
         {
 
             var localVarPath = "/api/v2/signin";
@@ -421,6 +427,7 @@ namespace InfluxDB.Client.Generated.Service
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
 
             if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (authorization != null) localVarHeaderParams.Add("Authorization", this.Configuration.ApiClient.ParameterToString(authorization)); // header parameter
 
             // authentication (basicAuth) required
             // http basic authentication required
@@ -452,10 +459,11 @@ namespace InfluxDB.Client.Generated.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Generated.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="authorization">An auth credential for the Basic scheme (optional)</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task SigninPostAsync (string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task SigninPostAsync (string zapTraceSpan = null, String authorization = null)
         {
-             await SigninPostAsyncWithHttpInfo(zapTraceSpan);
+             await SigninPostAsyncWithHttpInfo(zapTraceSpan, authorization);
 
         }
 
@@ -464,8 +472,9 @@ namespace InfluxDB.Client.Generated.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Generated.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="authorization">An auth credential for the Basic scheme (optional)</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Object>> SigninPostAsyncWithHttpInfo (string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<Object>> SigninPostAsyncWithHttpInfo (string zapTraceSpan = null, String authorization = null)
         {
 
             var localVarPath = "/api/v2/signin";
@@ -490,6 +499,7 @@ namespace InfluxDB.Client.Generated.Service
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
 
             if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (authorization != null) localVarHeaderParams.Add("Authorization", this.Configuration.ApiClient.ParameterToString(authorization)); // header parameter
 
             // authentication (basicAuth) required
             // http basic authentication required
