@@ -1,13 +1,12 @@
 using System;
 using System.Collections.Generic;
 using InfluxDB.Client.Core;
-using InfluxDB.Client.Core.Internal;
 using InfluxDB.Client.Generated.Domain;
 using InfluxDB.Client.Generated.Service;
 
 namespace InfluxDB.Client
 {
-    public class LabelsApi : AbstractClient
+    public class LabelsApi
     {
         private readonly LabelsService _service;
 

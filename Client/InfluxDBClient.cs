@@ -270,7 +270,12 @@ namespace InfluxDB.Client
         /// <returns>the new client instance for Authorization API</returns>
         public AuthorizationsApi GetAuthorizationsApi()
         {
-            return new AuthorizationsApi(Client);
+            var service = new AuthorizationsService((Configuration) _apiClient.Configuration)
+            {
+                ExceptionFactory = _exceptionFactory
+            };
+            
+            return new AuthorizationsApi(service);
         }
 
         /// <summary>

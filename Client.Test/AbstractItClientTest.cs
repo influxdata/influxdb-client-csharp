@@ -16,14 +16,14 @@ namespace InfluxDB.Client.Test
         protected string InfluxDbUrl;
         
         [SetUp]
-        public new async Task SetUp()
+        public new void SetUp()
         {
             InfluxDbUrl = GetInfluxDb2Url();
             Client = InfluxDBClientFactory.Create(InfluxDbUrl, "my-user", "my-password".ToCharArray());
 
             if (!TestContext.CurrentContext.Test.Properties.ContainsKey("basic_auth"))
             {
-                var token = await FindMyToken();
+                var token = FindMyToken();
                 
                 Client.Dispose();
                 Client = InfluxDBClientFactory.Create(InfluxDbUrl, token.ToCharArray());
@@ -50,9 +50,9 @@ namespace InfluxDB.Client.Test
                 .First(organization => organization.Name.Equals("my-org"));
         }
 
-        protected async Task<string> FindMyToken()
+        protected string FindMyToken()
         {
-            var authorizations = await Client.GetAuthorizationsApi().FindAuthorizations();
+            var authorizations = Client.GetAuthorizationsApi().FindAuthorizations();
             
             return authorizations.Where(authorization =>
             {
@@ -60,8 +60,8 @@ namespace InfluxDB.Client.Test
                 {
                     var resource = permission.Resource;
 
-                    return resource.Id == null && resource.OrgId == null &&
-                           resource.Type.Equals(ResourceType.Orgs);
+                    return resource.Id == null && resource.OrgID == null &&
+                           resource.Type.Equals(PermissionResource.TypeEnum.Orgs);
                 }).Count();
 
                 return count > 0;

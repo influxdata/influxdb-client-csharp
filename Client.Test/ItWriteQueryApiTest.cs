@@ -8,8 +8,6 @@ using InfluxDB.Client.Writes;
 using NodaTime;
 using NUnit.Framework;
 using Duration = NodaTime.Duration;
-using Permission = InfluxDB.Client.Domain.Permission;
-using PermissionResource = InfluxDB.Client.Domain.PermissionResource;
 using Task = System.Threading.Tasks.Task;
 
 namespace InfluxDB.Client.Test
@@ -36,23 +34,23 @@ namespace InfluxDB.Client.Test
             // Add Permissions to read and write to the Bucket
             //
             var resource = new PermissionResource
-                {Type = ResourceType.Buckets, OrgId = _organization.Id, Id = _bucket.Id};
+                {Type = PermissionResource.TypeEnum.Buckets, OrgID = _organization.Id, Id = _bucket.Id};
 
             var readBucket = new Permission
             {
                 Resource = resource,
-                Action = Permission.ReadAction
+                Action = Permission.ActionEnum.Read
             };
             var writeBucket = new Permission
             {
                 Resource = resource,
-                Action = Permission.WriteAction
+                Action = Permission.ActionEnum.Write
             };
 
             var loggedUser = Client.GetUsersApi().Me();
             Assert.IsNotNull(loggedUser);
 
-            var authorization = await Client.GetAuthorizationsApi()
+            var authorization = Client.GetAuthorizationsApi()
                 .CreateAuthorization( FindMyOrg(), new List<Permission> {readBucket, writeBucket});
 
             var token = authorization.Token;

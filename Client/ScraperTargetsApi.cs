@@ -2,11 +2,10 @@ using System.Collections.Generic;
 using InfluxDB.Client.Core;
 using InfluxDB.Client.Generated.Domain;
 using InfluxDB.Client.Generated.Service;
-using InfluxDB.Client.Internal;
 
 namespace InfluxDB.Client
 {
-    public class ScraperTargetsApi : AbstractInfluxDBClient
+    public class ScraperTargetsApi 
     {
         private readonly ScraperTargetsService _service;
         

@@ -3,12 +3,11 @@ using InfluxDB.Client.Core;
 using InfluxDB.Client.Domain;
 using InfluxDB.Client.Generated.Domain;
 using InfluxDB.Client.Generated.Service;
-using InfluxDB.Client.Internal;
 using ResourceMember = InfluxDB.Client.Generated.Domain.ResourceMember;
 
 namespace InfluxDB.Client
 {
-    public class OrganizationsApi : AbstractInfluxDBClient
+    public class OrganizationsApi
     {
         private readonly OrganizationsService _service;
 
@@ -225,7 +224,21 @@ namespace InfluxDB.Client
             Arguments.CheckNotNull(secrets, nameof(secrets));
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
 
-            _service.OrgsOrgIDSecretsDeletePost(orgId, new SecretKeys(secrets));
+            DeleteSecrets(new SecretKeys(secrets), orgId);
+        }
+        
+        /// <summary>
+        /// Delete provided secrets.
+        /// </summary>
+        /// <param name="secrets">secrets to delete</param>
+        /// <param name="orgId">the organization for delete secrets</param>
+        /// <returns>keys successfully patched</returns>
+        public void DeleteSecrets(SecretKeys secrets, string orgId)
+        {
+            Arguments.CheckNotNull(secrets, nameof(secrets));
+            Arguments.CheckNonEmptyString(orgId, nameof(orgId));
+
+            _service.OrgsOrgIDSecretsDeletePost(orgId, secrets);
         }
 
         /// <summary>
@@ -436,8 +449,6 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
             Arguments.CheckNotNull(findOptions, nameof(findOptions));
-
-            var request = Get($"/api/v2/orgs/{orgId}/log?" + CreateQueryString(findOptions));
 
             return _service.OrgsOrgIDLogsGet(orgId, null, findOptions.Offset, findOptions.Limit);
         }

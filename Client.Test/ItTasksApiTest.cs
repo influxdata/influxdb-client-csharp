@@ -8,9 +8,6 @@ using InfluxDB.Client.Core.Exceptions;
 using InfluxDB.Client.Domain;
 using InfluxDB.Client.Generated.Domain;
 using NUnit.Framework;
-using Authorization = InfluxDB.Client.Domain.Authorization;
-using Permission = InfluxDB.Client.Domain.Permission;
-using PermissionResource = InfluxDB.Client.Domain.PermissionResource;
 using ResourceMember = InfluxDB.Client.Domain.ResourceMember;
 using Task = System.Threading.Tasks.Task;
 
@@ -24,7 +21,7 @@ namespace InfluxDB.Client.Test
         {
             _organization = FindMyOrg();
 
-            var authorization = await AddAuthorization(_organization);
+            var authorization = AddAuthorization(_organization);
 
             Client.Dispose();
             Client = InfluxDBClientFactory.Create(InfluxDbUrl, authorization.Token.ToCharArray());
@@ -43,29 +40,29 @@ namespace InfluxDB.Client.Test
 
         private Organization _organization;
 
-        private async Task<Authorization> AddAuthorization(Organization organization)
+        private Authorization AddAuthorization(Organization organization)
         {
-            var resourceTask = new PermissionResource {Type = ResourceType.Tasks, OrgId = organization.Id};
+            var resourceTask = new PermissionResource {Type = PermissionResource.TypeEnum.Tasks, OrgID = organization.Id};
             var resourceBucket = new PermissionResource
             {
-                Type = ResourceType.Buckets, OrgId = organization.Id,
+                Type = PermissionResource.TypeEnum.Buckets, OrgID = organization.Id,
                 Id = Client.GetBucketsApi().FindBucketByName("my-bucket").Id
             };
-            var resourceOrg = new PermissionResource {Type = ResourceType.Orgs};
-            var resourceUser = new PermissionResource {Type = ResourceType.Users};
-            var resourceAuthorization = new PermissionResource {Type = ResourceType.Authorizations};
+            var resourceOrg = new PermissionResource {Type = PermissionResource.TypeEnum.Orgs};
+            var resourceUser = new PermissionResource {Type = PermissionResource.TypeEnum.Users};
+            var resourceAuthorization = new PermissionResource {Type = PermissionResource.TypeEnum.Authorizations};
 
 
-            var authorization = await Client.GetAuthorizationsApi()
+            var authorization = Client.GetAuthorizationsApi()
                 .CreateAuthorization(organization, new List<Permission>
                 {
-                    new Permission {Resource = resourceTask, Action = Permission.ReadAction},
-                    new Permission {Resource = resourceTask, Action = Permission.WriteAction},
-                    new Permission {Resource = resourceOrg, Action = Permission.WriteAction},
-                    new Permission {Resource = resourceUser, Action = Permission.WriteAction},
-                    new Permission {Resource = resourceAuthorization, Action = Permission.WriteAction},
-                    new Permission {Resource = resourceBucket, Action = Permission.ReadAction},
-                    new Permission {Resource = resourceBucket, Action = Permission.WriteAction}
+                    new Permission {Resource = resourceTask, Action = Permission.ActionEnum.Read},
+                    new Permission {Resource = resourceTask, Action = Permission.ActionEnum.Write},
+                    new Permission {Resource = resourceOrg, Action = Permission.ActionEnum.Write},
+                    new Permission {Resource = resourceUser, Action = Permission.ActionEnum.Write},
+                    new Permission {Resource = resourceAuthorization, Action = Permission.ActionEnum.Write},
+                    new Permission {Resource = resourceBucket, Action = Permission.ActionEnum.Read},
+                    new Permission {Resource = resourceBucket, Action = Permission.ActionEnum.Write}
                 });
 
             return authorization;
@@ -285,7 +282,7 @@ namespace InfluxDB.Client.Test
         public async Task FindTasksByOrganization()
         {
             var taskOrg = Client.GetOrganizationsApi().CreateOrganization(GenerateName("Task user"));
-            var authorization = await AddAuthorization(taskOrg);
+            var authorization = AddAuthorization(taskOrg);
 
             Client.Dispose();
             Client = InfluxDBClientFactory.Create(InfluxDbUrl, authorization.Token.ToCharArray());

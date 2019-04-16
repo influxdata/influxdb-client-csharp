@@ -5,6 +5,7 @@ using System.Threading;
 using InfluxDB.Client;
 using InfluxDB.Client.Core;
 using InfluxDB.Client.Domain;
+using InfluxDB.Client.Generated.Domain;
 using InfluxDB.Client.Writes;
 using Task = System.Threading.Tasks.Task;
 
@@ -41,20 +42,20 @@ namespace Examples
             // Add Permissions to read and write to the Bucket
             //
             var resource = new PermissionResource
-                {Type = ResourceType.Buckets, OrgId = medicalGMBH.Id, Id = temperatureBucket.Id};
+                {Type = PermissionResource.TypeEnum.Buckets, OrgID = medicalGMBH.Id, Id = temperatureBucket.Id};
             var readBucket = new Permission
             {
                 Resource = resource, 
-                Action = Permission.ReadAction
+                Action = Permission.ActionEnum.Read
             };
 
             var writeBucket = new Permission
             {
                 Resource = resource, 
-                Action = Permission.WriteAction
+                Action = Permission.ActionEnum.Write
             };
 
-            var authorization = await influxDB.GetAuthorizationsApi()
+            var authorization = influxDB.GetAuthorizationsApi()
                 .CreateAuthorization(medicalGMBH, new List<Permission> {readBucket, writeBucket});
 
             Console.WriteLine($"The token to write to temperature-sensors bucket is: {authorization.Token}");

@@ -1,18 +1,14 @@
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Net.Http;
-using System.Threading.Tasks;
 using InfluxDB.Client.Core;
-using InfluxDB.Client.Core.Internal;
 using InfluxDB.Client.Domain;
 using InfluxDB.Client.Generated.Domain;
 using InfluxDB.Client.Generated.Service;
 using InfluxDB.Client.Internal;
-using Newtonsoft.Json.Linq;
 
 namespace InfluxDB.Client
 {
-    public class UsersApi : AbstractInfluxDBClient
+    public class UsersApi 
     {
         private readonly UsersService _service;
 
@@ -268,29 +264,6 @@ namespace InfluxDB.Client
             var header = AuthenticateDelegatingHandler.AuthorizationHeader(userName, oldPassword);
 
             _service.UsersUserIDPasswordPut(userId, new PasswordResetBody(newPassword), null, header);
-        }
-
-        private async Task<User> UpdatePassword(string path, string userName, string oldPassword,
-            string newPassword)
-        {
-            Arguments.CheckNotNull(path, nameof(path));
-            Arguments.CheckNotNull(userName, nameof(userName));
-            Arguments.CheckNotNull(oldPassword, nameof(oldPassword));
-            Arguments.CheckNotNull(newPassword, nameof(newPassword));
-
-            var header = AuthenticateDelegatingHandler.AuthorizationHeader(userName, oldPassword);
-
-            var json = new JObject {{"password", newPassword}};
-
-            var request = new HttpRequestMessage(new HttpMethod(HttpMethodKind.Put.Name()), path)
-            {
-                Content = new StringContent(json.ToString())
-            };
-            request.Headers.Add("Authorization", header);
-
-            var configuredTaskAwaitable = await Client.DoRequest(request).ConfigureAwait(false);
-
-            return Call<User>(configuredTaskAwaitable, 401);
         }
     }
 }

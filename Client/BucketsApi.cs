@@ -5,12 +5,11 @@ using InfluxDB.Client.Core;
 using InfluxDB.Client.Domain;
 using InfluxDB.Client.Generated.Domain;
 using InfluxDB.Client.Generated.Service;
-using InfluxDB.Client.Internal;
 using ResourceMember = InfluxDB.Client.Generated.Domain.ResourceMember;
 
 namespace InfluxDB.Client
 {
-    public class BucketsApi : AbstractInfluxDBClient
+    public class BucketsApi
     {
         private readonly BucketsService _service;
 

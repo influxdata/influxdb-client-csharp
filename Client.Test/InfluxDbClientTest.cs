@@ -18,25 +18,25 @@ namespace InfluxDB.Client.Test
         }
 
         [Test]
-        public async Task ParseKnownEnum()
+        public void ParseKnownEnum()
         {
             MockServer
                 .Given(Request.Create().UsingGet())
                 .RespondWith(CreateResponse("{\"status\":\"active\"}", "application/json"));
 
-            var authorization = await _client.GetAuthorizationsApi().FindAuthorizationById("id");
+            var authorization = _client.GetAuthorizationsApi().FindAuthorizationById("id");
 
             Assert.AreEqual(Status.Active, authorization.Status);
         }
 
         [Test]
-        public async Task ParseUnknownEnumAsNull()
+        public void ParseUnknownEnumAsNull()
         {
             MockServer
                 .Given(Request.Create().UsingGet())
                 .RespondWith(CreateResponse("{\"status\":\"unknown\"}", "application/json"));
 
-            var authorization = await _client.GetAuthorizationsApi().FindAuthorizationById("id");
+            var authorization = _client.GetAuthorizationsApi().FindAuthorizationById("id");
 
             Assert.IsNull(authorization.Status);
         }
