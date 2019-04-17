@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using InfluxDB.Client.Core;
-using InfluxDB.Client.Domain;
 using InfluxDB.Client.Generated.Domain;
 using InfluxDB.Client.Writes;
 using NodaTime;
@@ -21,7 +20,7 @@ namespace InfluxDB.Client.Test
         private Organization _organization;
 
         [SetUp]
-        public new async Task SetUp()
+        public new void SetUp()
         {
             _organization = FindMyOrg();
 

@@ -284,7 +284,12 @@ namespace InfluxDB.Client
         /// <returns>the new client instance for Task API</returns>
         public TasksApi GetTasksApi()
         {
-            return new TasksApi(Client);
+            var service = new TasksService((Configuration) _apiClient.Configuration)
+            {
+                ExceptionFactory = _exceptionFactory
+            };
+            
+            return new TasksApi(service);
         }
 
         /// <summary>

@@ -1,63 +1,70 @@
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using InfluxDB.Client.Core;
-using InfluxDB.Client.Core.Internal;
-using InfluxDB.Client.Domain;
 using InfluxDB.Client.Generated.Domain;
-using InfluxDB.Client.Internal;
-using LogEvent = InfluxDB.Client.Domain.LogEvent;
-using Logs = InfluxDB.Client.Domain.Logs;
-using ResourceMember = InfluxDB.Client.Domain.ResourceMember;
-using ResourceMembers = InfluxDB.Client.Domain.ResourceMembers;
-using Run = InfluxDB.Client.Domain.Run;
-using Runs = InfluxDB.Client.Domain.Runs;
-using Task = InfluxDB.Client.Domain.Task;
-using Tasks = InfluxDB.Client.Domain.Tasks;
+using InfluxDB.Client.Generated.Service;
 
 namespace InfluxDB.Client
 {
-    public class TasksApi : AbstractInfluxDBClient
+    public class TasksApi
     {
-        protected internal TasksApi(DefaultClientIo client) : base(client)
+        private readonly TasksService _service;
+        
+        protected internal TasksApi(TasksService service)
         {
+            Arguments.CheckNotNull(service, nameof(service));
+
+            _service = service;
         }
 
         /// <summary>
-        ///     Creates a new task. The <see cref="Domain.Task.Flux" /> has to have defined a cron or a every repetition
-        ///     by the <a href="http://bit.ly/option-statement">option statement</a>.
-        ///     <example>
-        ///         This sample shows how to specify every repetition
-        ///         <code>
+        /// Creates a new task. The <see cref="InfluxDB.Client.Generated.Domain.Task"/> has to have defined a cron or a every repetition
+        /// by the <a href="http://bit.ly/option-statement">option statement</a>.
+        /// <example>
+        ///     This sample shows how to specify every repetition
+        ///     <code>
         /// option task = {
-        ///     name: "mean",
-        ///     every: 1h,
+        /// name: "mean",
+        /// every: 1h,
         /// }
         /// 
         /// from(bucket:"metrics/autogen")
-        ///     |&gt; range(start:-task.every)
-        ///     |&gt; group(columns:["level"])
-        ///     |&gt; mean()
-        ///     |&gt; yield(name:"mean")
+        /// |&gt; range(start:-task.every)
+        /// |&gt; group(columns:["level"])
+        /// |&gt; mean()
+        /// |&gt; yield(name:"mean")
         /// </code>
-        ///     </example>
+        /// </example>
         /// </summary>
         /// <param name="task"></param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public async System.Threading.Tasks.Task<Task> CreateTask(Task task)
+        public Task CreateTask(Task task)
         {
             Arguments.CheckNotNull(task, nameof(task));
 
-            var request = await Post(task, "/api/v2/tasks");
+            var status = (TaskCreateRequest.StatusEnum) Enum.Parse(typeof(TaskCreateRequest.StatusEnum), task.Status.ToString());
+            var taskCreateRequest = new TaskCreateRequest(task.OrgID, task.Org, status, task.Flux);
 
-            return Call<Task>(request);
+            return CreateTask(taskCreateRequest);
+        }
+        
+        /// <summary>
+        /// Create a new task.
+        /// </summary>
+        /// <param name="taskCreateRequest">task to create (required)</param>
+        /// <returns>Task created</returns>
+        public Task CreateTask(TaskCreateRequest taskCreateRequest)
+        {
+            Arguments.CheckNotNull(taskCreateRequest, nameof(taskCreateRequest));
+
+            return _service.TasksPost(taskCreateRequest);
         }
 
         /// <summary>
-        ///     Creates a new task with task repetition by cron. The <see cref="Task.Flux" /> is without a cron or a every
-        ///     repetition.
-        ///     The repetition is automatically append to the <a href="http://bit.ly/option-statement">option statement</a>.
+        /// Creates a new task with task repetition by cron. The <see cref="Task.Flux" /> is without a cron or a every
+        /// repetition.
+        /// The repetition is automatically append to the <a href="http://bit.ly/option-statement">option statement</a>.
         /// </summary>
         /// <param name="name">description of the task</param>
         /// <param name="flux">the Flux script to run for this task</param>
@@ -65,7 +72,7 @@ namespace InfluxDB.Client
         /// <param name="organization">the organization that owns this Task</param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public async System.Threading.Tasks.Task<Task> CreateTaskCron(string name, string flux, string cron,
+        public Task CreateTaskCron(string name, string flux, string cron,
             Organization organization)
         {
             Arguments.CheckNonEmptyString(name, nameof(name));
@@ -73,15 +80,13 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(cron, nameof(cron));
             Arguments.CheckNotNull(organization, nameof(organization));
 
-            var task = CreateTask(name, flux, null, cron, organization.Id);
-
-            return await CreateTask(task);
+            return CreateTaskCron(name, flux, cron, organization.Id);
         }
 
         /// <summary>
-        ///     Creates a new task with task repetition by cron. The <see cref="Task.Flux" /> is without a cron or a every
-        ///     repetition.
-        ///     The repetition is automatically append to the <a href="http://bit.ly/option-statement">option statement</a>.
+        /// Creates a new task with task repetition by cron. The <see cref="Task.Flux" /> is without a cron or a every
+        /// repetition.
+        /// The repetition is automatically append to the <a href="http://bit.ly/option-statement">option statement</a>.
         /// </summary>
         /// <param name="name">description of the task</param>
         /// <param name="flux">the Flux script to run for this task</param>
@@ -89,7 +94,7 @@ namespace InfluxDB.Client
         /// <param name="orgId">the organization ID that owns this Task</param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public async System.Threading.Tasks.Task<Task> CreateTaskCron(string name, string flux, string cron,
+        public Task CreateTaskCron(string name, string flux, string cron,
             string orgId)
         {
             Arguments.CheckNonEmptyString(name, nameof(name));
@@ -97,15 +102,15 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(cron, nameof(cron));
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
 
-            var organization = new Organization(null, orgId);
+            var task = CreateTask(name, flux, null, cron, orgId);
 
-            return await CreateTaskCron(name, flux, cron, organization);
+            return CreateTask(task);
         }
 
         /// <summary>
-        ///     Creates a new task with task repetition by duration expression ("1h", "30s"). The <see cref="Task.Flux" /> is
-        ///     without a cron or a every repetition.
-        ///     The repetition is automatically append to the <a href="http://bit.ly/option-statement">option statement</a>.
+        /// Creates a new task with task repetition by duration expression ("1h", "30s"). The <see cref="Task.Flux" /> is
+        /// without a cron or a every repetition.
+        /// The repetition is automatically append to the <a href="http://bit.ly/option-statement">option statement</a>.
         /// </summary>
         /// <param name="name">description of the task</param>
         /// <param name="flux">the Flux script to run for this task</param>
@@ -113,7 +118,7 @@ namespace InfluxDB.Client
         /// <param name="organization">the organization that owns this Task</param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public async System.Threading.Tasks.Task<Task> CreateTaskEvery(string name, string flux, string every,
+        public Task CreateTaskEvery(string name, string flux, string every,
             Organization organization)
         {
             Arguments.CheckNonEmptyString(name, nameof(name));
@@ -121,15 +126,13 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(every, nameof(every));
             Arguments.CheckNotNull(organization, nameof(organization));
 
-            var task = CreateTask(name, flux, every, null, organization.Id);
-
-            return await CreateTask(task);
+            return CreateTaskEvery(name, flux, every, organization.Id);
         }
 
         /// <summary>
-        ///     Creates a new task with task repetition by duration expression ("1h", "30s"). The <see cref="Task.Flux" /> is
-        ///     without a cron or a every repetition.
-        ///     The repetition is automatically append to the <a href="http://bit.ly/option-statement">option statement</a>.
+        /// Creates a new task with task repetition by duration expression ("1h", "30s"). The <see cref="Task.Flux" /> is
+        /// without a cron or a every repetition.
+        /// The repetition is automatically append to the <a href="http://bit.ly/option-statement">option statement</a>.
         /// </summary>
         /// <param name="name">description of the task</param>
         /// <param name="flux">the Flux script to run for this task</param>
@@ -137,7 +140,7 @@ namespace InfluxDB.Client
         /// <param name="orgId">the organization ID that owns this Task</param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public async System.Threading.Tasks.Task<Task> CreateTaskEvery(string name, string flux, string every,
+        public Task CreateTaskEvery(string name, string flux, string every,
             string orgId)
         {
             Arguments.CheckNonEmptyString(name, nameof(name));
@@ -145,430 +148,401 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(every, nameof(every));
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
 
-            var organization = new Organization(null, orgId);
+            var task = CreateTask(name, flux, every, null, orgId);
 
-            return await CreateTaskEvery(name, flux, every, organization);
+            return CreateTask(task);
         }
 
         /// <summary>
-        ///     Update a task. This will cancel all queued runs.
+        /// Update a task. This will cancel all queued runs.
         /// </summary>
         /// <param name="task">task update to apply</param>
         /// <returns>task updated</returns>
-        public async System.Threading.Tasks.Task<Task> UpdateTask(Task task)
+        public Task UpdateTask(Task task)
         {
             Arguments.CheckNotNull(task, nameof(task));
 
-            var result = await Patch(task, $"/api/v2/tasks/{task.Id}");
+            var status = (TaskUpdateRequest.StatusEnum) Enum.Parse(typeof(TaskUpdateRequest.StatusEnum), task.Status.ToString());
 
-            return Call<Task>(result);
+            var request = new TaskUpdateRequest(status, task.Flux, task.Name, task.Every, task.Cron);
+
+            return UpdateTask(task.Id, request);
+        }
+
+        
+        /// <summary>
+        /// Update a task. This will cancel all queued runs.
+        /// </summary>
+        /// <param name="taskId">ID of task to get</param>
+        /// <param name="request">task update to apply</param>
+        /// <returns>task updated</returns>
+        public Task UpdateTask(string taskId, TaskUpdateRequest request)
+        {
+            Arguments.CheckNonEmptyString(taskId, nameof(taskId));
+            Arguments.CheckNotNull(request, nameof(request));
+
+            return _service.TasksTaskIDPatch(taskId, request);
         }
 
         /// <summary>
-        ///     Delete a task.
+        /// Delete a task.
         /// </summary>
         /// <param name="taskId">ID of task to delete</param>
-        /// <returns>async task</returns>
-        public async System.Threading.Tasks.Task DeleteTask(string taskId)
+        /// <returns>task deleted</returns>
+        public void DeleteTask(string taskId)
         {
             Arguments.CheckNotNull(taskId, nameof(taskId));
 
-            var request = await Delete($"/api/v2/tasks/{taskId}");
-
-            RaiseForInfluxError(request);
+            _service.TasksTaskIDDelete(taskId);
         }
 
         /// <summary>
-        ///     Delete a task.
+        /// Delete a task.
         /// </summary>
         /// <param name="task">task to delete</param>
-        /// <returns>async task</returns>
-        public async System.Threading.Tasks.Task DeleteTask(Task task)
+        /// <returns>task deleted</returns>
+        public void DeleteTask(Task task)
         {
             Arguments.CheckNotNull(task, nameof(task));
 
-            await DeleteTask(task.Id);
+            DeleteTask(task.Id);
         }
 
         /// <summary>
-        ///     Clone a task.
+        /// Clone a task.
         /// </summary>
         /// <param name="taskId">ID of task to clone</param>
         /// <returns>cloned task</returns>
-        public async System.Threading.Tasks.Task<Task> CloneTask(string taskId)
+        public Task CloneTask(string taskId)
         {
             Arguments.CheckNonEmptyString(taskId, nameof(taskId));
 
-            var task = await FindTaskById(taskId);
+            var task = FindTaskById(taskId);
             if (task == null) throw new InvalidOperationException($"NotFound Task with ID: {taskId}");
 
-            return await CloneTask(task);
+            return CloneTask(task);
         }
 
         /// <summary>
-        ///     Clone a task.
+        /// Clone a task.
         /// </summary>
         /// <param name="task">task to clone</param>
         /// <returns>cloned task</returns>
-        public async System.Threading.Tasks.Task<Task> CloneTask(Task task)
+        public Task CloneTask(Task task)
         {
             Arguments.CheckNotNull(task, nameof(task));
 
-            var cloned = new Task
-            {
-                Name = task.Name,
-                OrgId = task.OrgId,
-                Flux = task.Flux,
-                Status = Status.Active
-            };
+            var status = (TaskCreateRequest.StatusEnum) Enum.Parse(typeof(TaskCreateRequest.StatusEnum), task.Status.ToString());
+            var cloned = new TaskCreateRequest(task.OrgID, task.Org, status, task.Flux);
+            
 
-            var created = await CreateTask(cloned);
+            var created = CreateTask(cloned);
 
-            foreach (var label in await GetLabels(task)) await AddLabel(label, created);
+            foreach (var label in GetLabels(task)) AddLabel(label, created);
 
             return created;
         }
 
         /// <summary>
-        ///     Retrieve a task.
+        /// Retrieve a task.
         /// </summary>
         /// <param name="taskId">ID of task to get</param>
         /// <returns>task details</returns>
-        public async System.Threading.Tasks.Task<Task> FindTaskById(string taskId)
+        public Task FindTaskById(string taskId)
         {
             Arguments.CheckNonEmptyString(taskId, nameof(taskId));
 
-            var request = await Get($"/api/v2/tasks/{taskId}");
-
-            return Call<Task>(request, 404);
+            return _service.TasksTaskIDGet(taskId);
         }
 
         /// <summary>
-        ///     Lists tasks, limit 100.
-        /// </summary>
-        /// <returns>A list of tasks</returns>
-        public async System.Threading.Tasks.Task<List<Task>> FindTasks()
-        {
-            return await FindTasks(null, null, null);
-        }
-
-        /// <summary>
-        ///     Lists tasks, limit 100.
+        /// Lists tasks, limit 100.
         /// </summary>
         /// <param name="user">filter tasks to a specific user</param>
         /// <returns>A list of tasks</returns>
-        public async System.Threading.Tasks.Task<List<Task>> FindTasksByUser(User user)
+        public List<Task> FindTasksByUser(User user)
         {
             Arguments.CheckNotNull(user, nameof(user));
 
-            return await FindTasksByUserId(user.Id);
+            return FindTasksByUserId(user.Id);
         }
 
         /// <summary>
-        ///     Lists tasks, limit 100.
+        /// Lists tasks, limit 100.
         /// </summary>
         /// <param name="userId">filter tasks to a specific user ID</param>
         /// <returns>A list of tasks</returns>
-        public async System.Threading.Tasks.Task<List<Task>> FindTasksByUserId(string userId)
+        public List<Task> FindTasksByUserId(string userId)
         {
-            return await FindTasks(null, userId, null);
+            return FindTasks(null, userId, null);
         }
 
         /// <summary>
-        ///     Lists tasks, limit 100.
+        /// Lists tasks, limit 100.
         /// </summary>
         /// <param name="organization">filter tasks to a specific organization</param>
         /// <returns>A list of tasks</returns>
-        public async System.Threading.Tasks.Task<List<Task>> FindTasksByOrganization(Organization organization)
+        public List<Task> FindTasksByOrganization(Organization organization)
         {
             Arguments.CheckNotNull(organization, nameof(organization));
 
-            return await FindTasksByOrganizationId(organization.Id);
+            return FindTasksByOrganizationId(organization.Id);
         }
 
 
         /// <summary>
-        ///     Lists tasks, limit 100.
+        /// Lists tasks, limit 100.
         /// </summary>
         /// <param name="orgId">filter tasks to a specific organization ID</param>
         /// <returns>A list of tasks</returns>
-        public async System.Threading.Tasks.Task<List<Task>> FindTasksByOrganizationId(string orgId)
+        public List<Task> FindTasksByOrganizationId(string orgId)
         {
-            return await FindTasks(null, null, orgId);
+            return FindTasks(null, null, orgId);
         }
 
         /// <summary>
-        ///     Lists tasks, limit 100.
+        /// Lists tasks, limit 100.
         /// </summary>
         /// <param name="afterId">returns tasks after specified ID</param>
         /// <param name="userId">filter tasks to a specific user ID</param>
         /// <param name="orgId">filter tasks to a specific organization ID</param>
         /// <returns>A list of tasks</returns>
-        public async System.Threading.Tasks.Task<List<Task>> FindTasks(string afterId, string userId,
-            string orgId)
+        public List<Task> FindTasks(string afterId = null, string userId = null, string orgId = null)
         {
-            var request = await Get($"/api/v2/tasks?after={afterId}&user={userId}&organization={orgId}");
-
-            var tasks = Call<Tasks>(request);
-
-            return tasks.TaskList;
+            return _service.TasksGet(null, afterId, userId, null, orgId)._Tasks;
         }
 
         /// <summary>
-        ///     List all members of a task.
+        /// List all members of a task.
         /// </summary>
         /// <param name="task">task of the members</param>
         /// <returns>the List all members of a task</returns>
-        public async Task<List<ResourceMember>> GetMembers(Task task)
+        public List<ResourceMember> GetMembers(Task task)
         {
             Arguments.CheckNotNull(task, "task");
 
-            return await GetMembers(task.Id);
+            return GetMembers(task.Id);
         }
 
         /// <summary>
-        ///     List all members of a task.
+        /// List all members of a task.
         /// </summary>
         /// <param name="taskId">ID of task to get members</param>
         /// <returns>the List all members of a task</returns>
-        public async Task<List<ResourceMember>> GetMembers(string taskId)
+        public List<ResourceMember> GetMembers(string taskId)
         {
             Arguments.CheckNonEmptyString(taskId, nameof(taskId));
 
-            var request = await Get($"/api/v2/tasks/{taskId}/members");
-
-            var response = Call<ResourceMembers>(request);
-
-            return response?.Users;
+            return _service.TasksTaskIDMembersGet(taskId).Users;
         }
 
         /// <summary>
-        ///     Add a task member.
+        /// Add a task member.
         /// </summary>
         /// <param name="member">the member of a task</param>
         /// <param name="task">the task of a member</param>
         /// <returns>created mapping</returns>
-        public async Task<ResourceMember> AddMember(User member, Task task)
+        public ResourceMember AddMember(User member, Task task)
         {
             Arguments.CheckNotNull(task, "task");
             Arguments.CheckNotNull(member, "member");
 
-            return await AddMember(member.Id, task.Id);
+            return AddMember(member.Id, task.Id);
         }
 
         /// <summary>
-        ///     Add a task member.
+        /// Add a task member.
         /// </summary>
         /// <param name="memberId">the ID of a member</param>
         /// <param name="taskId">the ID of a task</param>
         /// <returns>created mapping</returns>
-        public async Task<ResourceMember> AddMember(string memberId, string taskId)
+        public ResourceMember AddMember(string memberId, string taskId)
         {
             Arguments.CheckNonEmptyString(taskId, nameof(taskId));
             Arguments.CheckNonEmptyString(memberId, nameof(memberId));
 
             var user = new User(memberId);
 
-            var request = await Post(user, $"/api/v2/tasks/{taskId}/members");
-
-            return Call<ResourceMember>(request);
+            return _service.TasksTaskIDMembersPost(taskId, new AddResourceMemberRequestBody(memberId));
         }
 
         /// <summary>
-        ///     Removes a member from a task.
+        /// Removes a member from a task.
         /// </summary>
         /// <param name="member">the member of a task</param>
         /// <param name="task">the task of a member</param>
-        /// <returns>async task</returns>
-        public async System.Threading.Tasks.Task DeleteMember(User member, Task task)
+        /// <returns>member removed</returns>
+        public void DeleteMember(User member, Task task)
         {
             Arguments.CheckNotNull(task, "task");
             Arguments.CheckNotNull(member, "member");
 
-            await DeleteMember(member.Id, task.Id);
+            DeleteMember(member.Id, task.Id);
         }
 
         /// <summary>
-        ///     Removes a member from a task.
+        /// Removes a member from a task.
         /// </summary>
         /// <param name="memberId">the ID of a member</param>
         /// <param name="taskId">the ID of a task</param>
-        /// <returns>async task</returns>
-        public async System.Threading.Tasks.Task DeleteMember(string memberId, string taskId)
+        /// <returns>member removed</returns>
+        public void DeleteMember(string memberId, string taskId)
         {
             Arguments.CheckNonEmptyString(taskId, nameof(taskId));
             Arguments.CheckNonEmptyString(memberId, nameof(memberId));
 
-            var request = await Delete($"/api/v2/tasks/{taskId}/members/{memberId}");
-
-            RaiseForInfluxError(request);
+            _service.TasksTaskIDMembersUserIDDelete(memberId, taskId);
         }
 
         /// <summary>
-        ///     List all owners of a task.
+        /// List all owners of a task.
         /// </summary>
         /// <param name="task">task of the owners</param>
         /// <returns>the List all owners of a task</returns>
-        public async Task<List<ResourceMember>> GetOwners(Task task)
+        public List<ResourceOwner> GetOwners(Task task)
         {
             Arguments.CheckNotNull(task, "Task is required");
 
-            return await GetOwners(task.Id);
+            return GetOwners(task.Id);
         }
 
         /// <summary>
-        ///     List all owners of a task.
+        /// List all owners of a task.
         /// </summary>
         /// <param name="taskId">ID of a task to get owners</param>
         /// <returns>the List all owners of a task</returns>
-        public async Task<List<ResourceMember>> GetOwners(string taskId)
+        public List<ResourceOwner> GetOwners(string taskId)
         {
             Arguments.CheckNonEmptyString(taskId, nameof(taskId));
 
-            var request = await Get($"/api/v2/tasks/{taskId}/owners");
-
-            var response = Call<ResourceMembers>(request);
-
-            return response?.Users;
+            return _service.TasksTaskIDOwnersGet(taskId).Users;
         }
 
         /// <summary>
-        ///     Add a task owner.
+        /// Add a task owner.
         /// </summary>
         /// <param name="owner">the owner of a task</param>
         /// <param name="task">the task of a owner</param>
         /// <returns>created mapping</returns>
-        public async Task<ResourceMember> AddOwner(User owner, Task task)
+        public ResourceOwner AddOwner(User owner, Task task)
         {
             Arguments.CheckNotNull(task, "task");
             Arguments.CheckNotNull(owner, "owner");
 
-            return await AddOwner(owner.Id, task.Id);
+            return AddOwner(owner.Id, task.Id);
         }
 
         /// <summary>
-        ///     Add a task owner.
+        /// Add a task owner.
         /// </summary>
         /// <param name="ownerId">the ID of a owner</param>
         /// <param name="taskId">the ID of a task</param>
         /// <returns>created mapping</returns>
-        public async Task<ResourceMember> AddOwner(string ownerId, string taskId)
+        public ResourceOwner AddOwner(string ownerId, string taskId)
         {
             Arguments.CheckNonEmptyString(taskId, nameof(taskId));
             Arguments.CheckNonEmptyString(ownerId, nameof(ownerId));
 
-            var user = new User(ownerId);
-
-            var request = await Post(user, $"/api/v2/tasks/{taskId}/owners");
-
-            return Call<ResourceMember>(request);
+            return _service.TasksTaskIDOwnersPost(taskId, new AddResourceMemberRequestBody(ownerId));
         }
 
         /// <summary>
-        ///     Removes a owner from a task.
+        /// Removes a owner from a task.
         /// </summary>
         /// <param name="owner">the owner of a task</param>
         /// <param name="task">the task of a owner</param>
-        /// <returns>async task</returns>
-        public async System.Threading.Tasks.Task DeleteOwner(User owner, Task task)
+        /// <returns>owner removed</returns>
+        public void DeleteOwner(User owner, Task task)
         {
             Arguments.CheckNotNull(task, "task");
             Arguments.CheckNotNull(owner, "owner");
 
-            await DeleteOwner(owner.Id, task.Id);
+            DeleteOwner(owner.Id, task.Id);
         }
 
         /// <summary>
-        ///     Removes a owner from a task.
+        /// Removes a owner from a task.
         /// </summary>
         /// <param name="ownerId">the ID of a owner</param>
         /// <param name="taskId">the ID of a task</param>
-        /// <returns>async task</returns>
-        public async System.Threading.Tasks.Task DeleteOwner(string ownerId, string taskId)
+        /// <returns>owner removed</returns>
+        public void DeleteOwner(string ownerId, string taskId)
         {
             Arguments.CheckNonEmptyString(taskId, nameof(taskId));
             Arguments.CheckNonEmptyString(ownerId, nameof(ownerId));
 
-            var request = await Delete($"/api/v2/tasks/{taskId}/owners/{ownerId}");
-
-            RaiseForInfluxError(request);
+            _service.TasksTaskIDOwnersUserIDDelete(ownerId, taskId);
         }
 
         /// <summary>
-        ///     Retrieve all logs for a task.
+        /// Retrieve all logs for a task.
         /// </summary>
         /// <param name="task">task to get logs for</param>
         /// <returns>the list of all logs for a task</returns>
-        public async Task<List<LogEvent>> GetLogs(Task task)
+        public List<LogEvent> GetLogs(Task task)
         {
             Arguments.CheckNotNull(task, nameof(task));
 
-            return await GetLogs(task.Id, task.OrgId);
+            return GetLogs(task.Id);
         }
 
         /// <summary>
-        ///     Retrieve all logs for a task.
+        /// Retrieve all logs for a task.
         /// </summary>
         /// <param name="taskId">ID of task to get logs for</param>
-        /// <param name="orgId">ID of organization to get logs for</param>
         /// <returns>the list of all logs for a task</returns>
-        public async Task<List<LogEvent>> GetLogs(string taskId, string orgId)
+        public List<LogEvent> GetLogs(string taskId)
         {
             Arguments.CheckNonEmptyString(taskId, nameof(taskId));
-            Arguments.CheckNonEmptyString(orgId, nameof(orgId));
 
-            var request = await Get($"/api/v2/tasks/{taskId}/logs?orgID={orgId}");
-
-            var logs = Call(request, 404, new Logs());
-
-            return logs.Events;
+            return _service.TasksTaskIDLogsGet(taskId).Events;
         }
 
         /// <summary>
-        ///     Retrieve list of run records for a task.
+        /// Retrieve list of run records for a task.
         /// </summary>
         /// <param name="task"> task to get runs for</param>
         /// <returns>the list of run records for a task</returns>
-        public async Task<List<Run>> GetRuns(Task task)
+        public List<Run> GetRuns(Task task)
         {
             Arguments.CheckNotNull(task, nameof(task));
 
-            return await GetRuns(task, null, null, null);
+            return GetRuns(task, null, null, null);
         }
 
 
         /// <summary>
-        ///     Retrieve list of run records for a task.
+        /// Retrieve list of run records for a task.
         /// </summary>
         /// <param name="task"> task to get runs for</param>
         /// <param name="afterTime">filter runs to those scheduled after this time</param>
         /// <param name="beforeTime">filter runs to those scheduled before this time</param>
         /// <param name="limit">the number of runs to return. Default value: 20.</param>
         /// <returns>the list of run records for a task</returns>
-        public async Task<List<Run>> GetRuns(Task task, DateTime? afterTime,
+        public List<Run> GetRuns(Task task, DateTime? afterTime,
             DateTime? beforeTime, int? limit)
         {
             Arguments.CheckNotNull(task, nameof(task));
 
-            return await GetRuns(task.Id, task.OrgId, afterTime, beforeTime, limit);
+            return GetRuns(task.Id, task.Org, afterTime, beforeTime, limit);
         }
 
         /// <summary>
-        ///     Retrieve list of run records for a task.
+        /// Retrieve list of run records for a task.
         /// </summary>
         /// <param name="taskId">ID of task to get runs for</param>
         /// <param name="orgId">ID of organization</param>
         /// <returns>the list of run records for a task</returns>
-        public async Task<List<Run>> GetRuns(string taskId, string orgId)
+        public List<Run> GetRuns(string taskId, string orgId)
         {
             Arguments.CheckNonEmptyString(taskId, nameof(taskId));
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
 
-            return await GetRuns(taskId, orgId, null, null, null);
+            return GetRuns(taskId, orgId, null, null, null);
         }
 
         /// <summary>
-        ///     Retrieve list of run records for a task.
+        /// Retrieve list of run records for a task.
         /// </summary>
         /// <param name="taskId">ID of task to get runs for</param>
         /// <param name="orgId">ID of organization</param>
@@ -576,206 +550,188 @@ namespace InfluxDB.Client
         /// <param name="beforeTime">filter runs to those scheduled before this time</param>
         /// <param name="limit">the number of runs to return. Default value: 20.</param>
         /// <returns>the list of run records for a task</returns>
-        public async Task<List<Run>> GetRuns(string taskId, string orgId,
+        public List<Run> GetRuns(string taskId, string orgId,
             DateTime? afterTime, DateTime? beforeTime, int? limit)
         {
             Arguments.CheckNonEmptyString(taskId, nameof(taskId));
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
 
-            const string format = "yyyy-MM-dd'T'HH:mm:ss.fffZ";
-
-            var after = afterTime?.ToString(format);
-            var before = beforeTime?.ToString(format);
-
-            var path = $"/api/v2/tasks/{taskId}/runs?afterTime={after}&beforeTime={before}&orgID={orgId}&limit={limit}";
-            var request = await Get(path);
-
-            var response = Call(request, 404, new Runs());
-
-            return response?.RunList;
+            return _service.TasksTaskIDRunsGet(taskId, null, null, limit, afterTime, beforeTime)._Runs;
         }
 
         /// <summary>
-        ///     Retrieve a single run record for a task.
+        /// Retrieve a single run record for a task.
         /// </summary>
         /// <param name="taskId">ID of task to get runs for</param>
         /// <param name="runId">ID of run</param>
         /// <returns>a single run record for a task</returns>
-        public async Task<Run> GetRun(string taskId, string runId)
+        public Run GetRun(string taskId, string runId)
         {
             Arguments.CheckNonEmptyString(taskId, nameof(taskId));
             Arguments.CheckNonEmptyString(runId, nameof(runId));
 
-            var request = await Get($"/api/v2/tasks/{taskId}/runs/{runId}");
-
-            return Call<Run>(request, 404);
+            return _service.TasksTaskIDRunsRunIDGet(taskId, runId);
         }
 
         /// <summary>
-        ///     Retry a task run.
+        /// Retry a task run.
         /// </summary>
         /// <param name="run">the run to retry</param>
         /// <returns>the executed run</returns>
-        public async Task<Run> RetryRun(Run run)
+        public Run RetryRun(Run run)
         {
             Arguments.CheckNotNull(run, nameof(run));
 
-            return await RetryRun(run.TaskId, run.Id);
+            return RetryRun(run.TaskID, run.Id);
         }
 
         /// <summary>
-        ///     Retry a task run.
+        /// Retry a task run.
         /// </summary>
         /// <param name="taskId">ID of task with the run to retry</param>
         /// <param name="runId">ID of run to retry</param>
         /// <returns>the executed run</returns>
-        public async Task<Run> RetryRun(string taskId, string runId)
+        public Run RetryRun(string taskId, string runId)
         {
             Arguments.CheckNonEmptyString(taskId, nameof(taskId));
             Arguments.CheckNonEmptyString(runId, nameof(runId));
 
-            var request = await Post($"/api/v2/tasks/{taskId}/runs/{runId}/retry");
-
-            return Call<Run>(request, 404);
+            return _service.TasksTaskIDRunsRunIDRetryPost(taskId, runId);
         }
 
         /// <summary>
-        ///     Cancels a currently running run.
+        /// Cancels a currently running run.
         /// </summary>
         /// <param name="run">the run to cancel</param>
-        /// <returns>async task</returns>
-        public async System.Threading.Tasks.Task CancelRun(Run run)
+        /// <returns></returns>
+        public void CancelRun(Run run)
         {
             Arguments.CheckNotNull(run, nameof(run));
 
-            await CancelRun(run.TaskId, run.Id);
+            CancelRun(run.TaskID, run.Id);
         }
 
         /// <summary>
-        ///     Cancels a currently running run.
+        /// Cancels a currently running run.
         /// </summary>
         /// <param name="taskId">ID of task with the run to cancel</param>
         /// <param name="runId">ID of run to cancel</param>
-        /// <returns>async task</returns>
-        public async System.Threading.Tasks.Task CancelRun(string taskId, string runId)
+        /// <returns></returns>
+        public void CancelRun(string taskId, string runId)
         {
             Arguments.CheckNonEmptyString(taskId, nameof(taskId));
             Arguments.CheckNonEmptyString(runId, nameof(runId));
 
-            var request = await Delete($"/api/v2/tasks/{taskId}/runs/{runId}");
-
-            RaiseForInfluxError(request);
+            _service.TasksTaskIDRunsRunIDDelete(taskId, runId);
         }
 
         /// <summary>
-        ///     Retrieve all logs for a run.
+        /// Retrieve all logs for a run.
         /// </summary>
         /// <param name="run">the run to gets logs for it</param>
         /// <param name="orgId">ID of organization to get logs for it</param>
         /// <returns>the list of all logs for a run</returns>
-        public async Task<List<LogEvent>> GetRunLogs(Run run, string orgId)
+        public List<LogEvent> GetRunLogs(Run run, string orgId)
         {
-            return await GetRunLogs(run.TaskId, run.Id, orgId);
+            return GetRunLogs(run.TaskID, run.Id, orgId);
         }
 
         /// <summary>
-        ///     Retrieve all logs for a run.
+        /// Retrieve all logs for a run.
         /// </summary>
         /// <param name="taskId">ID of task to get run logs for it</param>
         /// <param name="runId">ID of run to get logs for it</param>
         /// <param name="orgId">ID of organization to get logs for it</param>
         /// <returns>the list of all logs for a run</returns>
-        public async Task<List<LogEvent>> GetRunLogs(string taskId, string runId, string orgId)
+        public List<LogEvent> GetRunLogs(string taskId, string runId, string orgId)
         {
             Arguments.CheckNonEmptyString(taskId, nameof(taskId));
             Arguments.CheckNonEmptyString(runId, nameof(runId));
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
 
-            var request = await Get($"/api/v2/tasks/{taskId}/runs/{runId}/logs?orgID={orgId}");
-
-            var logs = Call(request, 404, new Logs());
-
-            return logs.Events;
+            return _service.TasksTaskIDRunsRunIDLogsGet(taskId, runId).Events;
         }
 
         /// <summary>
-        ///     List all labels of a Task.
+        /// List all labels of a Task.
         /// </summary>
         /// <param name="task">a Task of the labels</param>
         /// <returns>the List all labels of a Task</returns>
-        public async Task<List<Label>> GetLabels(Task task)
+        public List<Label> GetLabels(Task task)
         {
             Arguments.CheckNotNull(task, nameof(task));
 
-            return await GetLabels(task.Id);
+            return GetLabels(task.Id);
         }
 
         /// <summary>
-        ///     List all labels of a Task.
+        /// List all labels of a Task.
         /// </summary>
         /// <param name="taskId">ID of a Task to get labels</param>
         /// <returns>the List all labels of a Task</returns>
-        public async Task<List<Label>> GetLabels(string taskId)
+        public List<Label> GetLabels(string taskId)
         {
             Arguments.CheckNonEmptyString(taskId, nameof(taskId));
 
-            return await GetLabels(taskId, "tasks");
+            return _service.TasksTaskIDLabelsGet(taskId).Labels;
         }
 
         /// <summary>
-        ///     Add a Task label.
+        /// Add a Task label.
         /// </summary>
         /// <param name="label">the label of a Task</param>
         /// <param name="task">a Task of a label</param>
         /// <returns>added label</returns>
-        public async Task<Label> AddLabel(Label label, Task task)
+        public Label AddLabel(Label label, Task task)
         {
             Arguments.CheckNotNull(task, nameof(task));
             Arguments.CheckNotNull(label, nameof(label));
 
-            return await AddLabel(label.Id, task.Id);
+            return AddLabel(label.Id, task.Id);
         }
 
         /// <summary>
-        ///     Add a Task label.
+        /// Add a Task label.
         /// </summary>
         /// <param name="labelId">the ID of a label</param>
         /// <param name="taskId">the ID of a Task</param>
         /// <returns>added label</returns>
-        public async Task<Label> AddLabel(string labelId, string taskId)
+        public Label AddLabel(string labelId, string taskId)
         {
             Arguments.CheckNonEmptyString(taskId, nameof(taskId));
             Arguments.CheckNonEmptyString(labelId, nameof(labelId));
 
-            return await AddLabel(labelId, taskId, "tasks", ResourceType.Tasks);
+            var mapping = new LabelMapping(labelId);
+            
+            return _service.TasksTaskIDLabelsPost(taskId, mapping).Label;
         }
 
         /// <summary>
-        ///     Removes a label from a Task.
+        /// Removes a label from a Task.
         /// </summary>
         /// <param name="label">the label of a Task</param>
         /// <param name="task">a Task of a owner</param>
-        /// <returns>async task</returns>
-        public async System.Threading.Tasks.Task DeleteLabel(Label label, Task task)
+        /// <returns>delete has been accepted</returns>
+        public void DeleteLabel(Label label, Task task)
         {
             Arguments.CheckNotNull(task, nameof(task));
             Arguments.CheckNotNull(label, nameof(label));
 
-            await DeleteLabel(label.Id, task.Id);
+            DeleteLabel(label.Id, task.Id);
         }
 
         /// <summary>
-        ///     Removes a label from a Task.
+        /// Removes a label from a Task.
         /// </summary>
         /// <param name="labelId">the ID of a label</param>
         /// <param name="taskId">the ID of a Task</param>
-        /// <returns>async task</returns>
-        public async System.Threading.Tasks.Task DeleteLabel(string labelId, string taskId)
+        /// <returns>delete has been accepted</returns>
+        public void DeleteLabel(string labelId, string taskId)
         {
             Arguments.CheckNonEmptyString(taskId, nameof(taskId));
             Arguments.CheckNonEmptyString(labelId, nameof(labelId));
 
-            await DeleteLabel(labelId, taskId, "tasks");
+            _service.TasksTaskIDLabelsLabelIDDelete(taskId, labelId);
         }
 
         private Task CreateTask(string name, string flux, string every, string cron, string orgId)
@@ -786,13 +742,7 @@ namespace InfluxDB.Client
 
             if (every != null) Arguments.CheckDuration(every, nameof(every));
 
-            var task = new Task
-            {
-                Name = name,
-                OrgId = orgId,
-                Status = Status.Active,
-                Flux = flux
-            };
+            var task = new Task(orgId, null, name, Task.StatusEnum.Active, null, null, flux);
 
             var repetition = "";
             if (every != null)

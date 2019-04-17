@@ -1,8 +1,8 @@
 using InfluxDB.Client.Core.Test;
-using InfluxDB.Client.Domain;
+using InfluxDB.Client.Generated.Domain;
 using NUnit.Framework;
+using RestEase;
 using WireMock.RequestBuilders;
-using Task = System.Threading.Tasks.Task;
 
 namespace InfluxDB.Client.Test
 {
@@ -26,7 +26,7 @@ namespace InfluxDB.Client.Test
 
             var authorization = _client.GetAuthorizationsApi().FindAuthorizationById("id");
 
-            Assert.AreEqual(Status.Active, authorization.Status);
+            Assert.AreEqual(AuthorizationUpdateRequest.StatusEnum.Active, authorization.Status);
         }
 
         [Test]
@@ -36,9 +36,9 @@ namespace InfluxDB.Client.Test
                 .Given(Request.Create().UsingGet())
                 .RespondWith(CreateResponse("{\"status\":\"unknown\"}", "application/json"));
 
-            var authorization = _client.GetAuthorizationsApi().FindAuthorizationById("id");
+            var ioe = Assert.Throws<Generated.Client.ApiException>(() =>_client.GetAuthorizationsApi().FindAuthorizationById("id"));
 
-            Assert.IsNull(authorization.Status);
+            Assert.IsTrue(ioe.Message.StartsWith("Error converting value \"unknown\" to typ"));
         }
 
         [Test]
