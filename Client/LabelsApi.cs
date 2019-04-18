@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
 using InfluxDB.Client.Core;
-using InfluxDB.Client.Generated.Domain;
-using InfluxDB.Client.Generated.Service;
+using InfluxDB.Client.Api.Domain;
+using InfluxDB.Client.Api.Service;
 
 namespace InfluxDB.Client
 {

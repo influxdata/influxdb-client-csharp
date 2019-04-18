@@ -1,4 +1,5 @@
 using System;
+using InfluxDB.Client.Api.Domain;
 using InfluxDB.Client.Core;
 using InfluxDB.Client.Internal;
 using NodaTime.Text;
@@ -29,10 +30,10 @@ namespace InfluxDB.Client.Test
                 Timestamp =  timeStamp
             };
             
-            Assert.AreEqual("poco,tag=value value=\"val\" 10", _mapper.ToPoint(poco, TimeUnit.Seconds).ToLineProtocol());
-            Assert.AreEqual("poco,tag=value value=\"val\" 10999", _mapper.ToPoint(poco, TimeUnit.Millis).ToLineProtocol());
-            Assert.AreEqual("poco,tag=value value=\"val\" 10999999", _mapper.ToPoint(poco, TimeUnit.Micros).ToLineProtocol());
-            Assert.AreEqual("poco,tag=value value=\"val\" 10999999999", _mapper.ToPoint(poco, TimeUnit.Nanos).ToLineProtocol());
+            Assert.AreEqual("poco,tag=value value=\"val\" 10", _mapper.ToPoint(poco, WritePrecision.S).ToLineProtocol());
+            Assert.AreEqual("poco,tag=value value=\"val\" 10999", _mapper.ToPoint(poco, WritePrecision.Ms).ToLineProtocol());
+            Assert.AreEqual("poco,tag=value value=\"val\" 10999999", _mapper.ToPoint(poco, WritePrecision.Us).ToLineProtocol());
+            Assert.AreEqual("poco,tag=value value=\"val\" 10999999999", _mapper.ToPoint(poco, WritePrecision.Ns).ToLineProtocol());
         }    
         
         [Test]
@@ -47,7 +48,7 @@ namespace InfluxDB.Client.Test
                 Timestamp = TimeSpan.FromDays(10)
             };
 
-            var lineProtocol = _mapper.ToPoint(poco, TimeUnit.Seconds).ToLineProtocol();
+            var lineProtocol = _mapper.ToPoint(poco, WritePrecision.S).ToLineProtocol();
             
             Assert.AreEqual("poco,tag=tag\\ val ValueWithEmptyName=25,ValueWithoutDefaultName=20i,value=15.444 864000", lineProtocol);
         }
@@ -61,7 +62,7 @@ namespace InfluxDB.Client.Test
                 Value = new MyClass()
             };
 
-            var lineProtocol = _mapper.ToPoint(poco, TimeUnit.Seconds).ToLineProtocol();
+            var lineProtocol = _mapper.ToPoint(poco, WritePrecision.S).ToLineProtocol();
             
             Assert.AreEqual("poco,tag=value value=\"to-string\"", lineProtocol);
         }

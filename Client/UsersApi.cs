@@ -1,10 +1,9 @@
 using System.Collections.Generic;
 using System.Diagnostics;
+using InfluxDB.Client.Api.Domain;
+using InfluxDB.Client.Api.Service;
 using InfluxDB.Client.Core;
 using InfluxDB.Client.Domain;
-using InfluxDB.Client.Generated.Domain;
-using InfluxDB.Client.Generated.Service;
-using InfluxDB.Client.Internal;
 
 namespace InfluxDB.Client
 {
@@ -175,7 +174,7 @@ namespace InfluxDB.Client
                 return;
             }
 
-            var header = AuthenticateDelegatingHandler.AuthorizationHeader(user.Name, oldPassword);
+            var header = InfluxDBClient.AuthorizationHeader(user.Name, oldPassword);
             
             _service.MePasswordPut(new PasswordResetBody(newPassword), null, header);
         }
@@ -261,7 +260,7 @@ namespace InfluxDB.Client
             Arguments.CheckNotNull(oldPassword, nameof(oldPassword));
             Arguments.CheckNotNull(newPassword, nameof(newPassword));
 
-            var header = AuthenticateDelegatingHandler.AuthorizationHeader(userName, oldPassword);
+            var header = InfluxDBClient.AuthorizationHeader(userName, oldPassword);
 
             _service.UsersUserIDPasswordPut(userId, new PasswordResetBody(newPassword), null, header);
         }

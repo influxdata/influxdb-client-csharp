@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using InfluxDB.Client.Core.Exceptions;
-using InfluxDB.Client.Generated.Domain;
+using InfluxDB.Client.Api.Domain;
 using NUnit.Framework;
 using Task = System.Threading.Tasks.Task;
 

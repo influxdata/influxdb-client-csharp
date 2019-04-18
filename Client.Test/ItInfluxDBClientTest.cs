@@ -1,7 +1,7 @@
 using System;
 using InfluxDB.Client.Core;
 using InfluxDB.Client.Core.Exceptions;
-using InfluxDB.Client.Generated.Domain;
+using InfluxDB.Client.Api.Domain;
 using NUnit.Framework;
 using Task = System.Threading.Tasks.Task;
 
@@ -116,7 +116,7 @@ namespace InfluxDB.Client.Test
             var ready = Client.Ready();
 
             Assert.IsNotNull(ready);
-            Assert.AreEqual(Generated.Domain.Ready.StatusEnum.Ready, ready.Status);
+            Assert.AreEqual(Api.Domain.Ready.StatusEnum.Ready, ready.Status);
             Assert.Greater(DateTime.UtcNow, ready.Started);
             Assert.IsNotEmpty(ready.Up);
         }

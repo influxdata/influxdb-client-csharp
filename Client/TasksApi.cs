@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
 using InfluxDB.Client.Core;
-using InfluxDB.Client.Generated.Domain;
-using InfluxDB.Client.Generated.Service;
+using InfluxDB.Client.Api.Domain;
+using InfluxDB.Client.Api.Service;
 
 namespace InfluxDB.Client
 {
@@ -18,7 +18,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Creates a new task. The <see cref="InfluxDB.Client.Generated.Domain.Task"/> has to have defined a cron or a every repetition
+        /// Creates a new task. The <see cref="InfluxDB.Client.Api.Domain.Task"/> has to have defined a cron or a every repetition
         /// by the <a href="http://bit.ly/option-statement">option statement</a>.
         /// <example>
         ///     This sample shows how to specify every repetition

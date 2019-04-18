@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading;
+using InfluxDB.Client.Api.Domain;
 using InfluxDB.Client.Core.Exceptions;
 using InfluxDB.Client.Core.Test;
 using InfluxDB.Client.Domain;
@@ -51,7 +52,7 @@ namespace InfluxDB.Client.Test
                 .WillSetStateTo("Retry Finished")
                 .RespondWith(CreateResponse("{}"));
 
-            _writeApi.WriteRecord("b1", "org1", TimeUnit.Nanos,
+            _writeApi.WriteRecord("b1", "org1", WritePrecision.Ns,
                 "h2o_feet,location=coyote_creek level\\ description=\"feet 1\",water_level=1.0 1");
 
             //
@@ -102,7 +103,7 @@ namespace InfluxDB.Client.Test
                 .WillSetStateTo("RetryWithRetryAfter Finished")
                 .RespondWith(CreateResponse("{}"));
 
-            _writeApi.WriteRecord("b1", "org1", TimeUnit.Nanos,
+            _writeApi.WriteRecord("b1", "org1", WritePrecision.Ns,
                 "h2o_feet,location=coyote_creek level\\ description=\"feet 1\",water_level=1.0 1");
 
             // Retry response
@@ -134,7 +135,7 @@ namespace InfluxDB.Client.Test
                 .Given(Request.Create().UsingPost())
                 .RespondWith(CreateResponse("line protocol poorly formed and no points were written", 400));
 
-            _writeApi.WriteRecord("b1", "org1", TimeUnit.Nanos,
+            _writeApi.WriteRecord("b1", "org1", WritePrecision.Ns,
                 "h2o_feet,location=coyote_creek level\\ description=\"feet 1\",water_level=1.0 1");
             _writeApi.Flush();
 
@@ -155,7 +156,7 @@ namespace InfluxDB.Client.Test
                     "token does not have sufficient permissions to write to this organization and bucket or the organization and bucket do not exist",
                     401));
 
-            _writeApi.WriteRecord("b1", "org1", TimeUnit.Nanos,
+            _writeApi.WriteRecord("b1", "org1", WritePrecision.Ns,
                 "h2o_feet,location=coyote_creek level\\ description=\"feet 1\",water_level=1.0 1");
             _writeApi.Flush();
 
@@ -176,7 +177,7 @@ namespace InfluxDB.Client.Test
                 .Given(Request.Create().UsingPost())
                 .RespondWith(CreateResponse("no token was sent and they are required", 403));
 
-            _writeApi.WriteRecord("b1", "org1", TimeUnit.Nanos,
+            _writeApi.WriteRecord("b1", "org1", WritePrecision.Ns,
                 "h2o_feet,location=coyote_creek level\\ description=\"feet 1\",water_level=1.0 1");
             _writeApi.Flush();
 
@@ -197,7 +198,7 @@ namespace InfluxDB.Client.Test
                     "write has been rejected because the payload is too large. Error message returns max size supported. All data in body was rejected and not written",
                     413));
 
-            _writeApi.WriteRecord("b1", "org1", TimeUnit.Nanos,
+            _writeApi.WriteRecord("b1", "org1", WritePrecision.Ns,
                 "h2o_feet,location=coyote_creek level\\ description=\"feet 1\",water_level=1.0 1");
             _writeApi.Flush();
 

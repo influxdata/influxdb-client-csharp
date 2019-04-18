@@ -5,7 +5,7 @@ using System.Threading;
 using InfluxDB.Client;
 using InfluxDB.Client.Core;
 using InfluxDB.Client.Domain;
-using InfluxDB.Client.Generated.Domain;
+using InfluxDB.Client.Api.Domain;
 using InfluxDB.Client.Writes;
 using Task = System.Threading.Tasks.Task;
 
@@ -85,7 +85,7 @@ namespace Examples
                 // Write by POCO
                 //
                 var temperature = new Temperature {Location = "south", Value = 62D, Time = DateTime.UtcNow};
-                writeClient.WriteMeasurement("temperature-sensors", medicalGMBH.Id, TimeUnit.Nanos, temperature);
+                writeClient.WriteMeasurement("temperature-sensors", medicalGMBH.Id, WritePrecision.Ns, temperature);
 
                 //
                 // Write by Point
@@ -93,14 +93,14 @@ namespace Examples
                 var point = Point.Measurement("temperature")
                     .Tag("location", "west")
                     .Field("value", 55D)
-                    .Timestamp(DateTime.UtcNow.AddSeconds(-10), TimeUnit.Nanos);
+                    .Timestamp(DateTime.UtcNow.AddSeconds(-10), WritePrecision.Ns);
                 writeClient.WritePoint("temperature-sensors", medicalGMBH.Id, point);
 
                 //
                 // Write by LineProtocol
                 //
                 var record = "temperature,location=north value=60.0";
-                writeClient.WriteRecord("temperature-sensors", medicalGMBH.Id, TimeUnit.Nanos, record);
+                writeClient.WriteRecord("temperature-sensors", medicalGMBH.Id, WritePrecision.Ns, record);
                 
                 writeClient.Flush();
                 Thread.Sleep(2000);

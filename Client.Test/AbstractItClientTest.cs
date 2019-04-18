@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using InfluxDB.Client.Core.Test;
 using InfluxDB.Client.Domain;
-using InfluxDB.Client.Generated.Domain;
+using InfluxDB.Client.Api.Domain;
 using NUnit.Framework;
 using Task = System.Threading.Tasks.Task;
 

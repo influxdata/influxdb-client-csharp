@@ -1,5 +1,6 @@
 using System;
 using System.Diagnostics;
+using InfluxDB.Client.Api.Domain;
 
 namespace InfluxDB.Client.Writes
 {
@@ -10,7 +11,7 @@ namespace InfluxDB.Client.Writes
 
     public class WriteSuccessEvent : AbstractWriteEvent
     {
-        public WriteSuccessEvent(string organization, string bucket, TimeUnit precision, string lineProtocol) :
+        public WriteSuccessEvent(string organization, string bucket, WritePrecision precision, string lineProtocol) :
             base(organization, bucket, precision, lineProtocol)
         {
         }
@@ -28,7 +29,7 @@ namespace InfluxDB.Client.Writes
         /// </summary>
         public Exception Exception { get; }
 
-        public WriteErrorEvent(string organization, string bucket, TimeUnit precision, string lineProtocol, Exception exception) :
+        public WriteErrorEvent(string organization, string bucket, WritePrecision precision, string lineProtocol, Exception exception) :
             base(organization, bucket, precision, lineProtocol)
         {
             Exception = exception;
@@ -55,7 +56,7 @@ namespace InfluxDB.Client.Writes
         /// </summary>
         public long RetryInterval { get; }
         
-        public WriteRetriableErrorEvent(string organization, string bucket, TimeUnit precision, string lineProtocol, Exception exception, long retryInterval) : base(organization, bucket, precision, lineProtocol)
+        public WriteRetriableErrorEvent(string organization, string bucket, WritePrecision precision, string lineProtocol, Exception exception, long retryInterval) : base(organization, bucket, precision, lineProtocol)
         {
             Exception = exception;
             RetryInterval = retryInterval;
@@ -82,14 +83,14 @@ namespace InfluxDB.Client.Writes
         /// <summary>
         /// The Precision that was used for write data.
         /// </summary>
-        public TimeUnit Precision { get; }
+        public WritePrecision Precision { get; }
 
         /// <summary>
         /// The Data that was written.
         /// </summary>
         public string LineProtocol { get; }
 
-        internal AbstractWriteEvent(string organization, string bucket, TimeUnit precision, string lineProtocol)
+        internal AbstractWriteEvent(string organization, string bucket, WritePrecision precision, string lineProtocol)
         {
             Organization = organization;
             Bucket = bucket;

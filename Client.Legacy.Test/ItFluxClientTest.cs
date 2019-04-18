@@ -123,7 +123,7 @@ namespace Client.Legacy.Test
         {
             var flux = FromFluxDatabase + "\n"
                                            + "\t|> range(start: 1970-01-01T00:00:00.000000000Z)\n"
-                                           + "\t|> filter(fn: (r) => (r[\"_measurement\"] == \"mem\" AND r[\"_field\"] == \"free\"))\n"
+                                           + "\t|> filter(fn: (r) => (r[\"_measurement\"] == \"mem\" and r[\"_field\"] == \"free\"))\n"
                                            + "\t|> sum()";
 
             var fluxTables = await FluxClient.Query(flux);
@@ -136,7 +136,7 @@ namespace Client.Legacy.Test
         {
             var flux = FromFluxDatabase + "\n"
                                            + "\t|> range(start: 1970-01-01T00:00:00.000000000Z)\n"
-                                           + "\t|> filter(fn: (r) => (r[\"_measurement\"] == \"mem\" AND r[\"_field\"] == \"free\"))";
+                                           + "\t|> filter(fn: (r) => (r[\"_measurement\"] == \"mem\" and r[\"_field\"] == \"free\"))";
 
             var fluxTables = await FluxClient.Query(flux);
 
@@ -165,7 +165,7 @@ namespace Client.Legacy.Test
             }
             catch (InfluxException e)
             {
-                Assert.That(e.Message.Contains("failed to create physical plan:"));
+                Assert.That(e.Message.Contains("failed to plan query:"));
                 Assert.That(e.Message.Contains("results from \"telegraf\" must be bounded"));
             }
         }
@@ -181,7 +181,7 @@ namespace Client.Legacy.Test
             }
             catch (InfluxException e)
             {
-                Assert.That(e.Message.Contains("failed to create physical plan:"));
+                Assert.That(e.Message.Contains("failed to plan query:"));
                 Assert.That(e.Message.Contains("results from \"flux_database\" must be bounded"));
             }
         }
@@ -194,7 +194,7 @@ namespace Client.Legacy.Test
 
             var flux = FromFluxDatabase + "\n"
                                            + "\t|> range(start: 1970-01-01T00:00:00.000000000Z)\n"
-                                           + "\t|> filter(fn: (r) => (r[\"_measurement\"] == \"mem\" AND r[\"_field\"] == \"free\"))\n"
+                                           + "\t|> filter(fn: (r) => (r[\"_measurement\"] == \"mem\" and r[\"_field\"] == \"free\"))\n"
                                            + "\t|> sum()";
 
             await FluxClient.Query(flux, (cancellable, record) =>
@@ -228,7 +228,7 @@ namespace Client.Legacy.Test
         {
             var flux = FromFluxDatabase + "\n"
                                            + "\t|> range(start: 1970-01-01T00:00:00.000000000Z)\n"
-                                           + "\t|> filter(fn: (r) => (r[\"_measurement\"] == \"mem\" AND r[\"_field\"] == \"free\"))";
+                                           + "\t|> filter(fn: (r) => (r[\"_measurement\"] == \"mem\" and r[\"_field\"] == \"free\"))";
 
             var memory = new List<Mem>();
 

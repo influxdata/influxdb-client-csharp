@@ -1,127 +1,23 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Text;
+using System.Threading.Tasks;
+using InfluxDB.Client.Api.Client;
+using InfluxDB.Client.Api.Domain;
+using InfluxDB.Client.Api.Service;
 using InfluxDB.Client.Core;
 using InfluxDB.Client.Core.Exceptions;
 using InfluxDB.Client.Core.Internal;
-using InfluxDB.Client.Generated.Client;
-using InfluxDB.Client.Generated.Domain;
-using InfluxDB.Client.Generated.Service;
-using InfluxDB.Client.Internal;
-using RestSharp;
-
-namespace InfluxDB.Client.Generated.Client
-{
-    //TODO move to separate file
-    public partial class ApiClient
-    {
-        private readonly List<string> _noAuthRoute = new List<string>
-            {"/api/v2/signin", "/api/v2/signout", "/api/v2/setup"};
-
-        private readonly InfluxDBClientOptions _options;
-
-        private char[] _sessionToken;
-        private bool _signout;
-
-        public ApiClient(InfluxDBClientOptions options)
-        {
-            _options = options;
-
-            Configuration = new Configuration
-            {
-                BasePath = options.Url,
-                Timeout = 10_000,
-                ApiClient = this
-            };
-
-            RestClient = new RestClient(options.Url);
-        }
-
-        partial void InterceptRequest(IRestRequest request)
-        {
-            if (_signout || _noAuthRoute.Any(requestPath => requestPath.EndsWith(request.Resource))) return;
-
-            if (InfluxDBClientOptions.AuthenticationScheme.Token.Equals(_options.AuthScheme))
-            {
-                request.AddHeader("Authorization", "Token " + new string(_options.Token));
-            }
-            else if (InfluxDBClientOptions.AuthenticationScheme.Session.Equals(_options.AuthScheme))
-            {
-                InitToken();
-
-                if (_sessionToken != null) request.AddHeader("Cookie", "session=" + new string(_sessionToken));
-            }
-        }
-
-        private void InitToken()
-        {
-            if (!InfluxDBClientOptions.AuthenticationScheme.Session.Equals(_options.AuthScheme) || _signout) return;
-
-            if (_sessionToken == null)
-            {
-                IRestResponse authResponse;
-                try
-                {
-                    var header = "Basic " + Convert.ToBase64String(
-                                     Encoding.Default.GetBytes(
-                                         _options.Username + ":" + new string(_options.Password)));
-
-                    var request = new RestRequest(_options.Url + "/api/v2/signin", Method.POST)
-                        .AddHeader("Authorization", header);
-
-                    authResponse = RestClient.Execute(request);
-                }
-                catch (IOException e)
-                {
-                    Trace.WriteLine("Cannot retrieve the Session token!");
-                    Trace.WriteLine(e);
-                    return;
-                }
-
-                if (authResponse.Cookies != null)
-                {
-                    var cookies = authResponse.Cookies.ToList();
-
-                    if (cookies.Count == 1)
-                        _sessionToken = cookies
-                            .First(cookie => cookie.Name.ToString().Equals("session"))
-                            .Value
-                            .ToCharArray();
-                }
-            }
-        }
-
-        protected internal void Signout()
-        {
-            if (!InfluxDBClientOptions.AuthenticationScheme.Session.Equals(_options.AuthScheme) || _signout)
-            {
-                _signout = true;
-
-                return;
-            }
-
-            _signout = true;
-            _sessionToken = null;
-
-            var request = new RestRequest(_options.Url + "/api/v2/signout", Method.POST);
-            RestClient.Execute(request);
-        }
-    }
-}
 
 namespace InfluxDB.Client
 {
-    public class InfluxDBClient : AbstractInfluxDBClient, IDisposable
+    public class InfluxDBClient : IDisposable
     {
         private readonly ApiClient _apiClient;
-        private readonly AuthenticateDelegatingHandler _authenticateDelegatingHandler;
         private readonly ExceptionFactory _exceptionFactory;
         private readonly HealthService _healthService;
+        //TODO
         private readonly LoggingHandler _loggingHandler;
         private readonly ReadyService _readyService;
 
@@ -132,23 +28,8 @@ namespace InfluxDB.Client
             Arguments.CheckNotNull(options, nameof(options));
 
             _loggingHandler = new LoggingHandler(LogLevel.None);
-            _authenticateDelegatingHandler = new AuthenticateDelegatingHandler(options)
-            {
-                InnerHandler = _loggingHandler
-            };
 
-            Client.HttpClient = new HttpClient(_authenticateDelegatingHandler);
-            Client.HttpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-            Client.HttpClient.BaseAddress = new Uri(options.Url);
-            Client.HttpClient.Timeout = options.Timeout;
-
-            var apiClient = new ApiClient(options);
-            var apiClientRestClient = apiClient.RestClient;
-//            apiClientRestClient.AddHandler();
-
-            _apiClient = apiClient;
-//            _apiClient.RestClient
+            _apiClient = new ApiClient(options);
                 
             _exceptionFactory = (methodName, response) =>
                 !response.IsSuccessful ? HttpException.Create(response) : null;
@@ -174,10 +55,6 @@ namespace InfluxDB.Client
             //
             try
             {
-                var signout = _authenticateDelegatingHandler.Signout();
-
-                signout.Wait();
-
                 _apiClient.Signout();
             }
             catch (Exception e)
@@ -193,7 +70,12 @@ namespace InfluxDB.Client
         /// <returns>the new client instance for the Query API</returns>
         public QueryApi GetQueryApi()
         {
-            return new QueryApi(Client);
+            var service = new QueryService((Configuration) _apiClient.Configuration)
+            {
+                ExceptionFactory = _exceptionFactory
+            };
+            
+            return new QueryApi(service);
         }
 
         /// <summary>
@@ -202,7 +84,7 @@ namespace InfluxDB.Client
         /// <returns>the new client instance for the Write API</returns>
         public WriteApi GetWriteApi()
         {
-            return new WriteApi(Client, WriteOptions.CreateNew().Build());
+            return GetWriteApi(WriteOptions.CreateNew().Build());
         }
 
         /// <summary>
@@ -212,11 +94,16 @@ namespace InfluxDB.Client
         /// <returns>the new client instance for the Write API</returns>
         public WriteApi GetWriteApi(WriteOptions writeOptions)
         {
-            return new WriteApi(Client, writeOptions);
+            var service = new WriteService((Configuration) _apiClient.Configuration)
+            {
+                ExceptionFactory = _exceptionFactory
+            };
+            
+            return new WriteApi(service, writeOptions);
         }
 
         /// <summary>
-        /// Get the <see cref="Domain.Organization" /> client.
+        /// Get the <see cref="Organization" /> client.
         /// </summary>
         /// <returns>the new client instance for Organization API</returns>
         public OrganizationsApi GetOrganizationsApi()
@@ -230,7 +117,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Get the <see cref="InfluxDB.Client.Generated.Domain.User" /> client.
+        /// Get the <see cref="InfluxDB.Client.Api.Domain.User" /> client.
         /// </summary>
         /// <returns>the new client instance for User API</returns>
         public UsersApi GetUsersApi()
@@ -244,7 +131,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Get the <see cref="Domain.Bucket" /> client.
+        /// Get the <see cref="Bucket" /> client.
         /// </summary>
         /// <returns>the new client instance for Bucket API</returns>
         public BucketsApi GetBucketsApi()
@@ -258,7 +145,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Get the <see cref="Domain.Source" /> client.
+        /// Get the <see cref="Source" /> client.
         /// </summary>
         /// <returns>the new client instance for Source API</returns>
         public SourcesApi GetSourcesApi()
@@ -300,7 +187,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Get the <see cref="InfluxDB.Client.Generated.Domain.ScraperTargetResponse" /> client.
+        /// Get the <see cref="InfluxDB.Client.Api.Domain.ScraperTargetResponse" /> client.
         /// </summary>
         /// <returns>the new client instance for Scraper API</returns>
         public ScraperTargetsApi GetScraperTargetsApi()
@@ -314,7 +201,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Get the <see cref="InfluxDB.Client.Generated.Domain.Telegraf" /> client.
+        /// Get the <see cref="InfluxDB.Client.Api.Domain.Telegraf" /> client.
         /// </summary>
         /// <returns>the new client instance for Telegrafs API</returns>
         public TelegrafsApi GetTelegrafsApi()
@@ -328,7 +215,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Get the <see cref="InfluxDB.Client.Generated.Domain.Label" /> client.
+        /// Get the <see cref="InfluxDB.Client.Api.Domain.Label" /> client.
         /// </summary>
         /// <returns>the new client instance for Label API</returns>
         public LabelsApi GetLabelsApi()
@@ -411,5 +298,25 @@ namespace InfluxDB.Client
 
             return true == isOnboardingAllowed;
         }
+        
+        internal static Check GetHealth(Task<Check> task)
+        {
+            Arguments.CheckNotNull(task, nameof(task));
+
+            try
+            {
+                return task.Result;
+            }
+            catch (Exception e)
+            {
+                return new Check("influxdb", e.GetBaseException().Message, default(List<Check>), Check.StatusEnum.Fail);
+            }
+        }
+        
+        internal static string AuthorizationHeader(string username, string password)
+        {
+            return "Basic " + Convert.ToBase64String(Encoding.Default.GetBytes(username + ":" + password));
+        }
+
     }
 }

@@ -2,6 +2,7 @@ using System;
 using System.Diagnostics;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using InfluxDB.Client.Api.Domain;
 using InfluxDB.Client.Core;
 using InfluxDB.Client.Writes;
 using NodaTime;
@@ -11,7 +12,7 @@ namespace InfluxDB.Client.Internal
 {
     internal class MeasurementMapper
     {
-        internal Point ToPoint<TM>(TM measurement, TimeUnit precision)
+        internal Point ToPoint<TM>(TM measurement, WritePrecision precision)
         {
             Arguments.CheckNotNull(measurement, nameof(measurement));
             Arguments.CheckNotNull(precision, nameof(precision));

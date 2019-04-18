@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
+using InfluxDB.Client.Api.Service;
 using InfluxDB.Client.Core;
 using InfluxDB.Client.Core.Flux.Domain;
 using InfluxDB.Client.Core.Flux.Internal;
@@ -11,8 +12,13 @@ namespace InfluxDB.Client
 {
     public class QueryApi : AbstractQueryClient
     {
-        protected internal QueryApi(DefaultClientIo client) : base(client)
+        private readonly QueryService _service;
+        
+        protected internal QueryApi(QueryService service)
         {
+            Arguments.CheckNotNull(service, nameof(service));
+
+            _service = service;
         }
 
         /// <summary>

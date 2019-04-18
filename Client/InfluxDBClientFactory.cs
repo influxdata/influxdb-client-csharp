@@ -1,5 +1,5 @@
 using InfluxDB.Client.Core;
-using InfluxDB.Client.Generated.Domain;
+using InfluxDB.Client.Api.Domain;
 
 namespace InfluxDB.Client
 {

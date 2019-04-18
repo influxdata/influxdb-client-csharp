@@ -263,6 +263,7 @@ public class InfluxCSharpGenerator extends CSharpClientCodegen {
                     List enums = schemas.get(parameter.dataType).getEnum();
                     return enums != null && !enums.isEmpty();
                 })
+                .filter(op -> !op.dataType.endsWith("?"))
                 .forEach(op -> op.dataType += "?");
 
         //

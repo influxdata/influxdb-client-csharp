@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using InfluxDB.Client.Core;
 using InfluxDB.Client.Core.Internal;
 using InfluxDB.Client.Domain;
-using InfluxDB.Client.Generated.Domain;
+using InfluxDB.Client.Api.Domain;
 using Task = System.Threading.Tasks.Task;
 
 namespace InfluxDB.Client.Internal
@@ -19,18 +19,5 @@ namespace InfluxDB.Client.Internal
         {
         }
 
-        protected Check GetHealth(Task<Check> task)
-        {
-            Arguments.CheckNotNull(task, nameof(task));
-
-            try
-            {
-                return task.Result;
-            }
-            catch (Exception e)
-            {
-                return new Check("influxdb", e.GetBaseException().Message, default(List<Check>), Check.StatusEnum.Fail);
-            }
-        }
     }
 }

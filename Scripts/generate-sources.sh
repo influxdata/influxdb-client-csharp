@@ -7,9 +7,9 @@ cd ${SCRIPT_PATH}/../OpenAPIGenerator/
 mvn clean install -DskipTests
 
 # delete old sources
-rm ${SCRIPT_PATH}/../Client/InfluxDB.Client.Generated/Domain/*.cs
-rm ${SCRIPT_PATH}/../Client/InfluxDB.Client.Generated/Service/*.cs
-rm ${SCRIPT_PATH}/../Client/InfluxDB.Client.Generated/Client/*.cs
+rm ${SCRIPT_PATH}/../Client/InfluxDB.Client.Api/Domain/*.cs
+rm ${SCRIPT_PATH}/../Client/InfluxDB.Client.Api/Service/*.cs
+rm ${SCRIPT_PATH}/../Client/InfluxDB.Client.Api/Client/*.cs
 
 # Generate client
 cd ${SCRIPT_PATH}/

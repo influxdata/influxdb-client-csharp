@@ -1,5 +1,5 @@
 using InfluxDB.Client.Core.Test;
-using InfluxDB.Client.Generated.Domain;
+using InfluxDB.Client.Api.Domain;
 using NUnit.Framework;
 using RestEase;
 using WireMock.RequestBuilders;
@@ -36,7 +36,7 @@ namespace InfluxDB.Client.Test
                 .Given(Request.Create().UsingGet())
                 .RespondWith(CreateResponse("{\"status\":\"unknown\"}", "application/json"));
 
-            var ioe = Assert.Throws<Generated.Client.ApiException>(() =>_client.GetAuthorizationsApi().FindAuthorizationById("id"));
+            var ioe = Assert.Throws<Api.Client.ApiException>(() =>_client.GetAuthorizationsApi().FindAuthorizationById("id"));
 
             Assert.IsTrue(ioe.Message.StartsWith("Error converting value \"unknown\" to typ"));
         }

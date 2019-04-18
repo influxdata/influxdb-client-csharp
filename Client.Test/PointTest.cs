@@ -1,4 +1,5 @@
 using System;
+using InfluxDB.Client.Api.Domain;
 using InfluxDB.Client.Writes;
 using NodaTime.Text;
 using NUnit.Framework;
@@ -126,7 +127,7 @@ namespace InfluxDB.Client.Test
             var point = Point.Measurement("h2o")
                 .Tag("location", "europe")
                 .Field("level", 2)
-                .Timestamp(123L, TimeUnit.Seconds);
+                .Timestamp(123L, WritePrecision.S);
 
             Assert.AreEqual("h2o,location=europe level=2i 123", point.ToLineProtocol());
         }
@@ -138,7 +139,7 @@ namespace InfluxDB.Client.Test
                 .Tag("location", "europe")
                 .Field("level", 2);
 
-            Assert.AreEqual(TimeUnit.Nanos, point.Precision);
+            Assert.AreEqual(WritePrecision.Ns, point.Precision);
         }
 
         [Test]
@@ -147,28 +148,28 @@ namespace InfluxDB.Client.Test
             var point = Point.Measurement("h2o")
                 .Tag("location", "europe")
                 .Field("level", 2)
-                .Timestamp(TimeSpan.FromDays(1), TimeUnit.Nanos);
+                .Timestamp(TimeSpan.FromDays(1), WritePrecision.Ns);
 
             Assert.AreEqual("h2o,location=europe level=2i 86400000000000", point.ToLineProtocol());
 
             point = Point.Measurement("h2o")
                 .Tag("location", "europe")
                 .Field("level", 2)
-                .Timestamp(TimeSpan.FromHours(356), TimeUnit.Micros);
+                .Timestamp(TimeSpan.FromHours(356), WritePrecision.Ms);
 
             Assert.AreEqual("h2o,location=europe level=2i 1281600000000", point.ToLineProtocol());
 
             point = Point.Measurement("h2o")
                 .Tag("location", "europe")
                 .Field("level", 2)
-                .Timestamp(TimeSpan.FromSeconds(156), TimeUnit.Millis);
+                .Timestamp(TimeSpan.FromSeconds(156), WritePrecision.Ms);
 
             Assert.AreEqual("h2o,location=europe level=2i 156000", point.ToLineProtocol());
 
             point = Point.Measurement("h2o")
                 .Tag("location", "europe")
                 .Field("level", 2)
-                .Timestamp(TimeSpan.FromSeconds(123), TimeUnit.Seconds);
+                .Timestamp(TimeSpan.FromSeconds(123), WritePrecision.S);
 
             Assert.AreEqual("h2o,location=europe level=2i 123", point.ToLineProtocol());
         }
@@ -181,7 +182,7 @@ namespace InfluxDB.Client.Test
             var point = Point.Measurement("h2o")
                 .Tag("location", "europe")
                 .Field("level", 2)
-                .Timestamp(dateTime, TimeUnit.Millis);
+                .Timestamp(dateTime, WritePrecision.Ms);
 
             Assert.AreEqual("h2o,location=europe level=2i 1444897215000", point.ToLineProtocol());
             
@@ -190,14 +191,14 @@ namespace InfluxDB.Client.Test
             point = Point.Measurement("h2o")
                 .Tag("location", "europe")
                 .Field("level", false)
-                .Timestamp(dateTime, TimeUnit.Seconds);
+                .Timestamp(dateTime, WritePrecision.S);
             
             Assert.AreEqual("h2o,location=europe level=false 1444897215", point.ToLineProtocol());
             
             point = Point.Measurement("h2o")
                 .Tag("location", "europe")
                 .Field("level", true)
-                .Timestamp(DateTime.UtcNow, TimeUnit.Seconds);
+                .Timestamp(DateTime.UtcNow, WritePrecision.S);
 
             var lineProtocol = point.ToLineProtocol();
             Assert.IsFalse(lineProtocol.Contains("."));
@@ -205,7 +206,7 @@ namespace InfluxDB.Client.Test
             point = Point.Measurement("h2o")
                 .Tag("location", "europe")
                 .Field("level", true)
-                .Timestamp(DateTime.UtcNow, TimeUnit.Nanos);
+                .Timestamp(DateTime.UtcNow, WritePrecision.Ns);
 
             lineProtocol = point.ToLineProtocol();
             Assert.IsFalse(lineProtocol.Contains("."));
@@ -220,7 +221,7 @@ namespace InfluxDB.Client.Test
                 .Tag("location", "europe")
                 .Field("level", 2);
 
-            Assert.Throws<ArgumentException>(() => point.Timestamp(dateTime, TimeUnit.Millis));
+            Assert.Throws<ArgumentException>(() => point.Timestamp(dateTime, WritePrecision.Ms));
         }
 
         [Test]
@@ -231,7 +232,7 @@ namespace InfluxDB.Client.Test
             var point = Point.Measurement("h2o")
                 .Tag("location", "europe")
                 .Field("level", 2)
-                .Timestamp(offset, TimeUnit.Nanos);
+                .Timestamp(offset, WritePrecision.Ns);
 
             Assert.AreEqual("h2o,location=europe level=2i 15678000000000", point.ToLineProtocol());
         }
@@ -244,7 +245,7 @@ namespace InfluxDB.Client.Test
             var point = Point.Measurement("h2o")
                 .Tag("location", "europe")
                 .Field("level", 2)
-                .Timestamp(instant, TimeUnit.Seconds);
+                .Timestamp(instant, WritePrecision.S);
             
             Assert.AreEqual("h2o,location=europe level=2i 45", point.ToLineProtocol());
         }

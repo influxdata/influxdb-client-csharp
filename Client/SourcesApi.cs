@@ -2,13 +2,13 @@ using System;
 using System.Collections.Generic;
 using InfluxDB.Client.Core;
 using InfluxDB.Client.Core.Internal;
-using InfluxDB.Client.Generated.Domain;
-using InfluxDB.Client.Generated.Service;
+using InfluxDB.Client.Api.Domain;
+using InfluxDB.Client.Api.Service;
 using InfluxDB.Client.Internal;
 
 namespace InfluxDB.Client
 {
-    public class SourcesApi : AbstractInfluxDBClient
+    public class SourcesApi
     {
         private readonly SourcesService _service;
 
@@ -181,7 +181,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(sourceId, nameof(sourceId));
 
-            return GetHealth(_service.SourcesSourceIDHealthGetAsync(sourceId));
+            return InfluxDBClient.GetHealth(_service.SourcesSourceIDHealthGetAsync(sourceId));
         }
     }
 }

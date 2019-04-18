@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using InfluxDB.Client.Core;
 using InfluxDB.Client.Domain;
-using InfluxDB.Client.Generated.Domain;
-using InfluxDB.Client.Generated.Service;
-using ResourceMember = InfluxDB.Client.Generated.Domain.ResourceMember;
+using InfluxDB.Client.Api.Domain;
+using InfluxDB.Client.Api.Service;
+using ResourceMember = InfluxDB.Client.Api.Domain.ResourceMember;
 
 namespace InfluxDB.Client
 {
@@ -19,7 +19,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Creates a new organization and sets <see cref="InfluxDB.Client.Generated.Domain.Organization.Id" /> with the new identifier.
+        /// Creates a new organization and sets <see cref="InfluxDB.Client.Api.Domain.Organization.Id" /> with the new identifier.
         /// </summary>
         /// <param name="name"></param>
         /// <returns>Created organization</returns>

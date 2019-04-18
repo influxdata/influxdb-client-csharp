@@ -20,7 +20,7 @@
                     <configOptions>
                         <additional-properties>optionalProjectFile=true</additional-properties>
                         <hideGenerationTimestamp>true</hideGenerationTimestamp>
-                        <packageName>InfluxDB.Client.Generated</packageName>
+                        <packageName>InfluxDB.Client.Api</packageName>
                         <sourceFolder>/</sourceFolder>
                         <validatable>false</validatable>
                     </configOptions>

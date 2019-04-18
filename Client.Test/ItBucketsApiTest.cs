@@ -2,9 +2,9 @@ using System.Collections.Generic;
 using System.Linq;
 using InfluxDB.Client.Core.Exceptions;
 using InfluxDB.Client.Domain;
-using InfluxDB.Client.Generated.Domain;
+using InfluxDB.Client.Api.Domain;
 using NUnit.Framework;
-using ResourceMember = InfluxDB.Client.Generated.Domain.ResourceMember;
+using ResourceMember = InfluxDB.Client.Api.Domain.ResourceMember;
 
 namespace InfluxDB.Client.Test
 {
