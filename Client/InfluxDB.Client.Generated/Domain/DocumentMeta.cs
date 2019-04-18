@@ -39,8 +39,9 @@ namespace InfluxDB.Client.Generated.Domain
         /// Initializes a new instance of the <see cref="DocumentMeta" /> class.
         /// </summary>
         /// <param name="name">name (required).</param>
+        /// <param name="type">type.</param>
         /// <param name="version">version (required).</param>
-        public DocumentMeta(string name = default(string), string version = default(string))
+        public DocumentMeta(string name = default(string), string type = default(string), string version = default(string))
         {
             // to ensure "name" is required (not null)
             if (name == null)
@@ -60,6 +61,7 @@ namespace InfluxDB.Client.Generated.Domain
             {
                 this.Version = version;
             }
+            this.Type = type;
         }
 
         /// <summary>
@@ -67,6 +69,12 @@ namespace InfluxDB.Client.Generated.Domain
         /// </summary>
         [DataMember(Name="name", EmitDefaultValue=false)]
         public string Name { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Type
+        /// </summary>
+        [DataMember(Name="type", EmitDefaultValue=false)]
+        public string Type { get; set; }
 
         /// <summary>
         /// Gets or Sets Version
@@ -83,6 +91,7 @@ namespace InfluxDB.Client.Generated.Domain
             var sb = new StringBuilder();
             sb.Append("class DocumentMeta {\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
+            sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  Version: ").Append(Version).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -124,6 +133,11 @@ namespace InfluxDB.Client.Generated.Domain
                     this.Name.Equals(input.Name))
                 ) && 
                 (
+                    this.Type == input.Type ||
+                    (this.Type != null &&
+                    this.Type.Equals(input.Type))
+                ) && 
+                (
                     this.Version == input.Version ||
                     (this.Version != null &&
                     this.Version.Equals(input.Version))
@@ -141,6 +155,8 @@ namespace InfluxDB.Client.Generated.Domain
                 int hashCode = 41;
                 if (this.Name != null)
                     hashCode = hashCode * 59 + this.Name.GetHashCode();
+                if (this.Type != null)
+                    hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.Version != null)
                     hashCode = hashCode * 59 + this.Version.GetHashCode();
                 return hashCode;

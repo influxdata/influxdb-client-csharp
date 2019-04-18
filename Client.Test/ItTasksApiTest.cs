@@ -6,7 +6,6 @@ using InfluxDB.Client.Core;
 using InfluxDB.Client.Core.Exceptions;
 using InfluxDB.Client.Generated.Domain;
 using NUnit.Framework;
-using ResourceMember = InfluxDB.Client.Domain.ResourceMember;
 
 namespace InfluxDB.Client.Test
 {
@@ -422,13 +421,13 @@ namespace InfluxDB.Client.Test
             Assert.IsNotNull(resourceMember);
             Assert.AreEqual(resourceMember.Id, user.Id);
             Assert.AreEqual(resourceMember.Name, user.Name);
-            Assert.AreEqual(resourceMember.Role, ResourceMember.UserType.Member);
+            Assert.AreEqual(resourceMember.Role, ResourceMember.RoleEnum.Member);
 
             members = _tasksApi.GetMembers(task);
             Assert.AreEqual(1, members.Count);
             Assert.AreEqual(members[0].Id, user.Id);
             Assert.AreEqual(members[0].Name, user.Name);
-            Assert.AreEqual(members[0].Role, ResourceMember.UserType.Member);
+            Assert.AreEqual(members[0].Role, ResourceMember.RoleEnum.Member);
             _tasksApi.DeleteMember(user, task);
 
             members = _tasksApi.GetMembers(task);
@@ -451,13 +450,13 @@ namespace InfluxDB.Client.Test
             Assert.IsNotNull(resourceMember);
             Assert.AreEqual(resourceMember.Id, user.Id);
             Assert.AreEqual(resourceMember.Name, user.Name);
-            Assert.AreEqual(resourceMember.Role, ResourceMember.UserType.Owner);
+            Assert.AreEqual(resourceMember.Role, ResourceOwner.RoleEnum.Owner);
 
             owners = _tasksApi.GetOwners(task);
             Assert.AreEqual(1, owners.Count);
             Assert.AreEqual(owners[0].Id, user.Id);
             Assert.AreEqual(owners[0].Name, user.Name);
-            Assert.AreEqual(owners[0].Role, ResourceMember.UserType.Owner);
+            Assert.AreEqual(owners[0].Role, ResourceOwner.RoleEnum.Owner);
 
             _tasksApi.DeleteOwner(user, task);
 

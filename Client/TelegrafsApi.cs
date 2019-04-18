@@ -1,44 +1,38 @@
-using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Net.Http;
-using System.Threading.Tasks;
 using InfluxDB.Client.Core;
-using InfluxDB.Client.Core.Internal;
-using InfluxDB.Client.Domain;
 using InfluxDB.Client.Generated.Domain;
-using InfluxDB.Client.Internal;
-using ResourceMember = InfluxDB.Client.Domain.ResourceMember;
-using ResourceMembers = InfluxDB.Client.Domain.ResourceMembers;
-using Task = System.Threading.Tasks.Task;
+using InfluxDB.Client.Generated.Service;
 
 namespace InfluxDB.Client
 {
     /// <summary>
-    ///     The client of the InfluxDB 2.0 that implement Telegrafs HTTP API endpoint.
+    /// The client of the InfluxDB 2.0 that implement Telegrafs HTTP API endpoint.
     /// </summary>
-    public class TelegrafsApi : AbstractInfluxDBClient
+    public class TelegrafsApi
     {
-        protected internal TelegrafsApi(DefaultClientIo client) : base(client)
+        private readonly TelegrafsService _service;
+        
+        protected internal TelegrafsApi(TelegrafsService service)
         {
+            Arguments.CheckNotNull(service, nameof(service));
+
+            _service = service;
         }
 
         /// <summary>
-        ///     Create a telegraf config.
+        /// Create a telegraf config.
         /// </summary>
-        /// <param name="telegrafConfig">Telegraf Configuration to create</param>
+        /// <param name="telegrafRequest">Telegraf Configuration to create</param>
         /// <returns>Telegraf config created</returns>
-        public async Task<TelegrafConfig> CreateTelegrafConfig(TelegrafConfig telegrafConfig)
+        public Telegraf CreateTelegraf(TelegrafRequest telegrafRequest)
         {
-            Arguments.CheckNotNull(telegrafConfig, nameof(telegrafConfig));
+            Arguments.CheckNotNull(telegrafRequest, nameof(telegrafRequest));
 
-            var response = await Post(telegrafConfig, "/api/v2/telegrafs");
-
-            return Call<TelegrafConfig>(response);
+            return _service.TelegrafsPost(telegrafRequest);
         }
 
         /// <summary>
-        ///     Create a telegraf config.
+        /// Create a telegraf config.
         /// </summary>
         /// <param name="name">Telegraf Configuration Name</param>
         /// <param name="description">Telegraf Configuration Description</param>
@@ -46,18 +40,18 @@ namespace InfluxDB.Client
         /// <param name="collectionInterval">Default data collection interval for all inputs in milliseconds</param>
         /// <param name="plugins">The telegraf plugins config</param>
         /// <returns>Telegraf config created</returns>
-        public async Task<TelegrafConfig> CreateTelegrafConfig(string name, string description, Organization org,
-            int collectionInterval, IEnumerable<TelegrafPlugin> plugins)
+        public Telegraf CreateTelegraf(string name, string description, Organization org,
+            int collectionInterval, List<TelegrafRequestPlugin> plugins)
         {
             Arguments.CheckNonEmptyString(name, nameof(name));
             Arguments.CheckNotNull(org, nameof(org));
             Arguments.CheckPositiveNumber(collectionInterval, nameof(collectionInterval));
 
-            return await CreateTelegrafConfig(name, description, org.Id, collectionInterval, plugins);
+            return CreateTelegraf(name, description, org.Id, collectionInterval, plugins);
         }
 
         /// <summary>
-        ///     Create a telegraf config.
+        /// Create a telegraf config.
         /// </summary>
         /// <param name="name">Telegraf Configuration Name</param>
         /// <param name="description">Telegraf Configuration Description</param>
@@ -65,445 +59,411 @@ namespace InfluxDB.Client
         /// <param name="collectionInterval">Default data collection interval for all inputs in milliseconds</param>
         /// <param name="plugins">The telegraf plugins config</param>
         /// <returns>Telegraf config created</returns>
-        public async Task<TelegrafConfig> CreateTelegrafConfig(string name, string description, string orgId,
-            int collectionInterval, IEnumerable<TelegrafPlugin> plugins)
+        public Telegraf CreateTelegraf(string name, string description, string orgId,
+            int collectionInterval, List<TelegrafRequestPlugin> plugins)
         {
             Arguments.CheckNonEmptyString(name, nameof(name));
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
             Arguments.CheckPositiveNumber(collectionInterval, nameof(collectionInterval));
 
-            var telegrafAgent = new TelegrafAgent {CollectionInterval = collectionInterval};
+            var request = new TelegrafRequest(name, description, new TelegrafRequestAgent(collectionInterval), plugins, orgId);
 
-            var telegrafConfig = new TelegrafConfig
-                {Name = name, Description = description, OrgId = orgId, Agent = telegrafAgent};
-            telegrafConfig.Plugins.AddRange(plugins);
-
-            return await CreateTelegrafConfig(telegrafConfig);
+            return CreateTelegraf(request);
         }
 
         /// <summary>
-        ///     Update a telegraf config.
+        /// Update a telegraf config.
         /// </summary>
-        /// <param name="telegrafConfig">telegraf config update to apply</param>
+        /// <param name="telegraf">telegraf config update to apply</param>
         /// <returns>An updated telegraf</returns>
-        public async Task<TelegrafConfig> UpdateTelegrafConfig(TelegrafConfig telegrafConfig)
+        public Telegraf UpdateTelegraf(Telegraf telegraf)
         {
-            Arguments.CheckNotNull(telegrafConfig, nameof(telegrafConfig));
+            Arguments.CheckNotNull(telegraf, nameof(telegraf));
 
-            var result = await Put(telegrafConfig, $"/api/v2/telegrafs/{telegrafConfig.Id}");
-
-            return Call<TelegrafConfig>(result);
+            var request = new TelegrafRequest(telegraf.Name, telegraf.Description, telegraf.Agent, telegraf.Plugins, telegraf.OrganizationID);
+            
+            return UpdateTelegraf(telegraf.Id, request);
         }
 
         /// <summary>
-        ///     Delete a telegraf config.
+        /// Update a telegraf config.
         /// </summary>
-        /// <param name="telegrafConfig">telegraf config to delete</param>
-        /// <returns>async task</returns>
-        public async Task DeleteTelegrafConfig(TelegrafConfig telegrafConfig)
+        /// <param name="telegrafId">ID of telegraf config</param>
+        /// <param name="telegrafRequest">telegraf config update to apply</param>
+        /// <returns>An updated telegraf</returns>
+        public Telegraf UpdateTelegraf(string telegrafId, TelegrafRequest telegrafRequest)
         {
-            Arguments.CheckNotNull(telegrafConfig, nameof(telegrafConfig));
+            Arguments.CheckNonEmptyString(telegrafId, nameof(telegrafId));
+            Arguments.CheckNotNull(telegrafRequest, nameof(telegrafRequest));
 
-            await DeleteTelegrafConfig(telegrafConfig.Id);
+            return _service.TelegrafsTelegrafIDPut(telegrafId, telegrafRequest);
         }
 
         /// <summary>
-        ///     Delete a telegraf config.
+        /// Delete a telegraf config.
         /// </summary>
-        /// <param name="telegrafConfigId">ID of telegraf config to delete</param>
-        /// <returns>async task</returns>
-        public async Task DeleteTelegrafConfig(string telegrafConfigId)
+        /// <param name="telegraf">telegraf config to delete</param>
+        /// <returns>delete has been accepted</returns>
+        public void DeleteTelegraf(Telegraf telegraf)
         {
-            Arguments.CheckNonEmptyString(telegrafConfigId, nameof(telegrafConfigId));
+            Arguments.CheckNotNull(telegraf, nameof(telegraf));
 
-            var request = await Delete($"/api/v2/telegrafs/{telegrafConfigId}");
-
-            RaiseForInfluxError(request);
+            DeleteTelegraf(telegraf.Id);
         }
 
         /// <summary>
-        ///     Clone a telegraf config.
+        /// Delete a telegraf config.
         /// </summary>
-        /// <param name="clonedName">name of cloned telegraf config</param>
-        /// <param name="telegrafConfigId">ID of telegraf config to clone</param>
-        /// <returns>cloned telegraf config</returns>
-        public async Task<TelegrafConfig> CloneTelegrafConfig(string clonedName, string telegrafConfigId)
+        /// <param name="telegrafId">ID of telegraf config to delete</param>
+        /// <returns>delete has been accepted</returns>
+        public void DeleteTelegraf(string telegrafId)
         {
-            Arguments.CheckNonEmptyString(clonedName, nameof(clonedName));
-            Arguments.CheckNonEmptyString(telegrafConfigId, nameof(telegrafConfigId));
+            Arguments.CheckNonEmptyString(telegrafId, nameof(telegrafId));
 
-            var telegrafConfig = await FindTelegrafConfigById(telegrafConfigId);
-            if (telegrafConfig == null)
-                throw new InvalidOperationException($"NotFound TelegrafConfig with ID: {telegrafConfigId}");
-
-            return await CloneTelegrafConfig(clonedName, telegrafConfig);
+            _service.TelegrafsTelegrafIDDelete(telegrafId);
         }
 
         /// <summary>
-        ///     Clone a telegraf config.
+        /// Clone a telegraf config.
         /// </summary>
         /// <param name="clonedName">name of cloned telegraf config</param>
-        /// <param name="telegrafConfig">telegraf config to clone></param>
+        /// <param name="telegrafId">ID of telegraf config to clone</param>
         /// <returns>cloned telegraf config</returns>
-        public async Task<TelegrafConfig> CloneTelegrafConfig(string clonedName, TelegrafConfig telegrafConfig)
+        public Telegraf CloneTelegraf(string clonedName, string telegrafId)
         {
             Arguments.CheckNonEmptyString(clonedName, nameof(clonedName));
-            Arguments.CheckNotNull(telegrafConfig, nameof(telegrafConfig));
+            Arguments.CheckNonEmptyString(telegrafId, nameof(telegrafId));
 
-            var cloned = new TelegrafConfig
-            {
-                Name = clonedName,
-                OrgId = telegrafConfig.OrgId,
-                Description = telegrafConfig.Description,
-                Agent = new TelegrafAgent {CollectionInterval = telegrafConfig.Agent.CollectionInterval}
-            };
-            cloned.Plugins.AddRange(telegrafConfig.Plugins);
+            var telegraf = FindTelegrafById(telegrafId);
 
-            var created = await CreateTelegrafConfig(cloned);
+            return CloneTelegraf(clonedName, telegraf);
+        }
 
-            foreach (var label in await GetLabels(telegrafConfig)) await AddLabel(label, created);
+        /// <summary>
+        /// Clone a telegraf config.
+        /// </summary>
+        /// <param name="clonedName">name of cloned telegraf config</param>
+        /// <param name="telegraf">telegraf config to clone></param>
+        /// <returns>cloned telegraf config</returns>
+        public Telegraf CloneTelegraf(string clonedName, Telegraf telegraf)
+        {
+            Arguments.CheckNonEmptyString(clonedName, nameof(clonedName));
+            Arguments.CheckNotNull(telegraf, nameof(telegraf));
+
+            var cloned = new TelegrafRequest(clonedName, telegraf.Description, telegraf.Agent, telegraf.Plugins, telegraf.OrganizationID);
+            
+            var created = CreateTelegraf(cloned);
+
+            foreach (var label in GetLabels(telegraf)) AddLabel(label, created);
 
             return created;
         }
 
         /// <summary>
-        ///     Retrieve a telegraf config.
+        /// Retrieve a telegraf config.
         /// </summary>
-        /// <param name="telegrafConfigId">ID of telegraf config to get</param>
+        /// <param name="telegrafId">ID of telegraf config to get</param>
         /// <returns>telegraf config details</returns>
-        public async Task<TelegrafConfig> FindTelegrafConfigById(string telegrafConfigId)
+        public Telegraf FindTelegrafById(string telegrafId)
         {
-            Arguments.CheckNonEmptyString(telegrafConfigId, nameof(telegrafConfigId));
+            Arguments.CheckNonEmptyString(telegrafId, nameof(telegrafId));
 
-            var request = await Get($"/api/v2/telegrafs/{telegrafConfigId}");
-
-            return Call<TelegrafConfig>(request, 404);
+            return _service.TelegrafsTelegrafIDGet(telegrafId, null, null);
         }
 
         /// <summary>
-        ///     Returns a list of telegraf configs.
+        /// Returns a list of telegraf configs.
         /// </summary>
         /// <returns>A list of telegraf configs</returns>
-        public async Task<List<TelegrafConfig>> FindTelegrafConfigs()
+        public List<Telegraf> FindTelegrafs()
         {
-            return await FindTelegrafConfigsByOrgId(null);
+            return FindTelegrafsByOrgId(null);
         }
 
         /// <summary>
-        ///     Returns a list of telegraf configs for specified organization.
+        /// Returns a list of telegraf configs for specified organization.
         /// </summary>
         /// <param name="organization">specifies the organization of the telegraf configs</param>
         /// <returns>A list of telegraf configs</returns>
-        public async Task<List<TelegrafConfig>> FindTelegrafConfigsByOrg(Organization organization)
+        public List<Telegraf> FindTelegrafsByOrg(Organization organization)
         {
             Arguments.CheckNotNull(organization, nameof(organization));
 
-            return await FindTelegrafConfigsByOrgId(organization.Id);
+            return FindTelegrafsByOrgId(organization.Id);
         }
 
         /// <summary>
-        ///     Returns a list of telegraf configs for specified organization.
+        /// Returns a list of telegraf configs for specified organization.
         /// </summary>
         /// <param name="orgId">specifies the organization of the telegraf configs</param>
         /// <returns>A list of telegraf configs</returns>
-        public async Task<List<TelegrafConfig>> FindTelegrafConfigsByOrgId(string orgId)
+        public List<Telegraf> FindTelegrafsByOrgId(string orgId)
         {
-            var request = await Get($"/api/v2/telegrafs?orgID={orgId}");
-
-            var telegrafConfigs = Call<TelegrafConfigs>(request);
-
-            return telegrafConfigs?.Configs;
+            return _service.TelegrafsGet(orgId).Configurations;
         }
 
         /// <summary>
-        ///     Retrieve a telegraf config in TOML.
+        /// Retrieve a telegraf config in TOML.
         /// </summary>
-        /// <param name="telegrafConfig">telegraf config to get</param>
+        /// <param name="telegraf">telegraf config to get</param>
         /// <returns>telegraf config details in TOML format</returns>
-        public async Task<string> GetTOML(TelegrafConfig telegrafConfig)
+        public string GetTOML(Telegraf telegraf)
         {
-            Arguments.CheckNotNull(telegrafConfig, nameof(telegrafConfig));
+            Arguments.CheckNotNull(telegraf, nameof(telegraf));
 
-            return await GetTOML(telegrafConfig.Id);
+            return GetTOML(telegraf.Id);
         }
 
         /// <summary>
-        ///     Retrieve a telegraf config in TOML.
+        /// Retrieve a telegraf config in TOML.
         /// </summary>
-        /// <param name="telegrafConfigId">ID of telegraf config to get</param>
+        /// <param name="telegrafId">ID of telegraf config to get</param>
         /// <returns>telegraf config details in TOML format</returns>
-        public async Task<string> GetTOML(string telegrafConfigId)
+        public string GetTOML(string telegrafId)
         {
-            var request = new HttpRequestMessage(new HttpMethod(HttpMethodKind.Get.Name()),
-                $"/api/v2/telegrafs/{telegrafConfigId}");
+            Arguments.CheckNonEmptyString(telegrafId, nameof(telegrafId));
 
-            request.Headers.Add("accept", "application/toml");
-
-            var result = await Client.DoRequest(request).ConfigureAwait(false);
-
-            RaiseForInfluxError(result);
-
-            return new StreamReader(result.ResponseContent).ReadToEnd();
+            return _service.TelegrafsTelegrafIDGetstring(telegrafId, null, "application/toml");
         }
 
         /// <summary>
-        ///     List all users with member privileges for a telegraf config.
+        /// List all users with member privileges for a telegraf config.
         /// </summary>
-        /// <param name="telegrafConfig">the telegraf config</param>
+        /// <param name="telegraf">the telegraf config</param>
         /// <returns>a list of telegraf config members</returns>
-        public async Task<List<ResourceMember>> GetMembers(TelegrafConfig telegrafConfig)
+        public List<ResourceMember> GetMembers(Telegraf telegraf)
         {
-            Arguments.CheckNotNull(telegrafConfig, nameof(telegrafConfig));
+            Arguments.CheckNotNull(telegraf, nameof(telegraf));
 
-            return await GetMembers(telegrafConfig.Id);
+            return GetMembers(telegraf.Id);
         }
 
         /// <summary>
-        ///     List all users with member privileges for a telegraf config.
+        /// List all users with member privileges for a telegraf config.
         /// </summary>
-        /// <param name="telegrafConfigId">ID of the telegraf config</param>
+        /// <param name="telegrafId">ID of the telegraf config</param>
         /// <returns>a list of telegraf config members</returns>
-        public async Task<List<ResourceMember>> GetMembers(string telegrafConfigId)
+        public List<ResourceMember> GetMembers(string telegrafId)
         {
-            Arguments.CheckNonEmptyString(telegrafConfigId, nameof(telegrafConfigId));
+            Arguments.CheckNonEmptyString(telegrafId, nameof(telegrafId));
 
-            var request = await Get($"/api/v2/telegrafs/{telegrafConfigId}/members");
-
-            var response = Call<ResourceMembers>(request);
-
-            return response?.Users;
+            return _service.TelegrafsTelegrafIDMembersGet(telegrafId).Users;
         }
 
         /// <summary>
-        ///     Add telegraf config member.
+        /// Add telegraf config member.
         /// </summary>
         /// <param name="member">user to add as member</param>
-        /// <param name="telegrafConfig">the telegraf config</param>
+        /// <param name="telegraf">the telegraf config</param>
         /// <returns>member added to telegraf</returns>
-        public async Task<ResourceMember> AddMember(User member, TelegrafConfig telegrafConfig)
+        public ResourceMember AddMember(User member, Telegraf telegraf)
         {
-            Arguments.CheckNotNull(telegrafConfig, nameof(telegrafConfig));
+            Arguments.CheckNotNull(telegraf, nameof(telegraf));
             Arguments.CheckNotNull(member, nameof(member));
 
-            return await AddMember(member.Id, telegrafConfig.Id);
+            return AddMember(member.Id, telegraf.Id);
         }
 
         /// <summary>
-        ///     Add telegraf config member.
+        /// Add telegraf config member.
         /// </summary>
         /// <param name="memberId">user ID to add as member</param>
-        /// <param name="telegrafConfigId">ID of the telegraf config</param>
+        /// <param name="telegrafId">ID of the telegraf config</param>
         /// <returns>member added to telegraf</returns>
-        public async Task<ResourceMember> AddMember(string memberId, string telegrafConfigId)
+        public ResourceMember AddMember(string memberId, string telegrafId)
         {
-            Arguments.CheckNonEmptyString(telegrafConfigId, nameof(telegrafConfigId));
+            Arguments.CheckNonEmptyString(telegrafId, nameof(telegrafId));
             Arguments.CheckNonEmptyString(memberId, nameof(memberId));
 
-            var user = new User(memberId);
-
-            var request = await Post(user, $"/api/v2/telegrafs/{telegrafConfigId}/members");
-
-            return Call<ResourceMember>(request);
+            return _service.TelegrafsTelegrafIDMembersPost(telegrafId, new AddResourceMemberRequestBody(memberId));
         }
 
         /// <summary>
-        ///     Removes a member from a telegraf config.
+        /// Removes a member from a telegraf config.
         /// </summary>
         /// <param name="member">member to remove</param>
-        /// <param name="telegrafConfig">the telegraf</param>
-        /// <returns>async task</returns>
-        public async Task DeleteMember(User member, TelegrafConfig telegrafConfig)
+        /// <param name="telegraf">the telegraf</param>
+        /// <returns>member removed</returns>
+        public void DeleteMember(User member, Telegraf telegraf)
         {
-            Arguments.CheckNotNull(telegrafConfig, nameof(telegrafConfig));
+            Arguments.CheckNotNull(telegraf, nameof(telegraf));
             Arguments.CheckNotNull(member, nameof(member));
 
-            await DeleteMember(member.Id, telegrafConfig.Id);
+            DeleteMember(member.Id, telegraf.Id);
         }
 
         /// <summary>
-        ///     Removes a member from a telegraf config.
+        /// Removes a member from a telegraf config.
         /// </summary>
         /// <param name="memberId">ID of member to remove</param>
-        /// <param name="telegrafConfigId">ID of the telegraf</param>
-        /// <returns>async task</returns>
-        public async Task DeleteMember(string memberId, string telegrafConfigId)
+        /// <param name="telegrafId">ID of the telegraf</param>
+        /// <returns>member removed</returns>
+        public void DeleteMember(string memberId, string telegrafId)
         {
-            Arguments.CheckNonEmptyString(telegrafConfigId, nameof(telegrafConfigId));
+            Arguments.CheckNonEmptyString(telegrafId, nameof(telegrafId));
             Arguments.CheckNonEmptyString(memberId, nameof(memberId));
 
-            var request = await Delete($"/api/v2/telegrafs/{telegrafConfigId}/members/{memberId}");
-
-            RaiseForInfluxError(request);
+            _service.TelegrafsTelegrafIDMembersUserIDDelete(memberId, telegrafId);
         }
 
         /// <summary>
-        ///     List all owners of a telegraf config.
+        /// List all owners of a telegraf config.
         /// </summary>
-        /// <param name="telegrafConfig">the telegraf config</param>
+        /// <param name="telegraf">the telegraf config</param>
         /// <returns>a list of telegraf config owners</returns>
-        public async Task<List<ResourceMember>> GetOwners(TelegrafConfig telegrafConfig)
+        public List<ResourceOwner> GetOwners(Telegraf telegraf)
         {
-            Arguments.CheckNotNull(telegrafConfig, nameof(telegrafConfig));
+            Arguments.CheckNotNull(telegraf, nameof(telegraf));
 
-            return await GetOwners(telegrafConfig.Id);
+            return GetOwners(telegraf.Id);
         }
 
         /// <summary>
-        ///     List all owners of a telegraf config.
+        /// List all owners of a telegraf config.
         /// </summary>
-        /// <param name="telegrafConfigId">ID of the telegraf config</param>
+        /// <param name="telegrafId">ID of the telegraf config</param>
         /// <returns>a list of telegraf config owners</returns>
-        public async Task<List<ResourceMember>> GetOwners(string telegrafConfigId)
+        public List<ResourceOwner> GetOwners(string telegrafId)
         {
-            Arguments.CheckNonEmptyString(telegrafConfigId, nameof(telegrafConfigId));
+            Arguments.CheckNonEmptyString(telegrafId, nameof(telegrafId));
 
-            var request = await Get($"/api/v2/telegrafs/{telegrafConfigId}/owners");
-
-            var response = Call<ResourceMembers>(request);
-
-            return response?.Users;
+            return _service.TelegrafsTelegrafIDOwnersGet(telegrafId).Users;
         }
 
         /// <summary>
-        ///     Add telegraf config owner.
+        /// Add telegraf config owner.
         /// </summary>
         /// <param name="owner">user to add as owner</param>
-        /// <param name="telegrafConfig">the telegraf config</param>
+        /// <param name="telegraf">the telegraf config</param>
         /// <returns>telegraf config owner added</returns>
-        public async Task<ResourceMember> AddOwner(User owner, TelegrafConfig telegrafConfig)
+        public ResourceOwner AddOwner(User owner, Telegraf telegraf)
         {
-            Arguments.CheckNotNull(telegrafConfig, nameof(telegrafConfig));
+            Arguments.CheckNotNull(telegraf, nameof(telegraf));
             Arguments.CheckNotNull(owner, nameof(owner));
 
-            return await AddOwner(owner.Id, telegrafConfig.Id);
+            return AddOwner(owner.Id, telegraf.Id);
         }
 
         /// <summary>
-        ///     Add telegraf config owner.
+        /// Add telegraf config owner.
         /// </summary>
         /// <param name="ownerId">ID of user to add as owner</param>
-        /// <param name="telegrafConfigId"> ID of the telegraf config</param>
+        /// <param name="telegrafId"> ID of the telegraf config</param>
         /// <returns>telegraf config owner added</returns>
-        public async Task<ResourceMember> AddOwner(string ownerId, string telegrafConfigId)
+        public ResourceOwner AddOwner(string ownerId, string telegrafId)
         {
-            Arguments.CheckNonEmptyString(telegrafConfigId, nameof(telegrafConfigId));
+            Arguments.CheckNonEmptyString(telegrafId, nameof(telegrafId));
             Arguments.CheckNonEmptyString(ownerId, nameof(ownerId));
 
-            var user = new User(ownerId);
-
-            var request = await Post(user, $"/api/v2/telegrafs/{telegrafConfigId}/owners");
-
-            return Call<ResourceMember>(request);
+            return _service.TelegrafsTelegrafIDOwnersPost(telegrafId, new AddResourceMemberRequestBody(ownerId));
         }
 
         /// <summary>
-        ///     Removes an owner from a telegraf config.
+        /// Removes an owner from a telegraf config.
         /// </summary>
         /// <param name="owner">owner to remove</param>
-        /// <param name="telegrafConfig">the telegraf config</param>
-        /// <returns>async task</returns>
-        public async Task DeleteOwner(User owner, TelegrafConfig telegrafConfig)
+        /// <param name="telegraf">the telegraf config</param>
+        /// <returns>owner removed</returns>
+        public void DeleteOwner(User owner, Telegraf telegraf)
         {
-            Arguments.CheckNotNull(telegrafConfig, nameof(telegrafConfig));
+            Arguments.CheckNotNull(telegraf, nameof(telegraf));
             Arguments.CheckNotNull(owner, nameof(owner));
 
-            await DeleteOwner(owner.Id, telegrafConfig.Id);
+            DeleteOwner(owner.Id, telegraf.Id);
         }
 
         /// <summary>
-        ///     Removes an owner from a telegraf config.
+        /// Removes an owner from a telegraf config.
         /// </summary>
         /// <param name="ownerId">ID of owner to remove</param>
-        /// <param name="telegrafConfigId">ID of the telegraf config</param>
-        /// <returns>async task</returns>
-        public async Task DeleteOwner(string ownerId, string telegrafConfigId)
+        /// <param name="telegrafId">ID of the telegraf config</param>
+        /// <returns>owner removed</returns>
+        public void DeleteOwner(string ownerId, string telegrafId)
         {
-            Arguments.CheckNonEmptyString(telegrafConfigId, nameof(telegrafConfigId));
+            Arguments.CheckNonEmptyString(telegrafId, nameof(telegrafId));
             Arguments.CheckNonEmptyString(ownerId, nameof(ownerId));
 
-            var request = await Delete($"/api/v2/telegrafs/{telegrafConfigId}/owners/{ownerId}");
-
-            RaiseForInfluxError(request);
+            _service.TelegrafsTelegrafIDOwnersUserIDDelete(ownerId, telegrafId);
         }
 
         /// <summary>
-        ///     List all labels for a telegraf config.
+        /// List all labels for a telegraf config.
         /// </summary>
-        /// <param name="telegrafConfig">the telegraf config</param>
+        /// <param name="telegraf">the telegraf config</param>
         /// <returns>a list of all labels for a telegraf config</returns>
-        public async Task<List<Label>> GetLabels(TelegrafConfig telegrafConfig)
+        public List<Label> GetLabels(Telegraf telegraf)
         {
-            Arguments.CheckNotNull(telegrafConfig, nameof(telegrafConfig));
+            Arguments.CheckNotNull(telegraf, nameof(telegraf));
 
-            return await GetLabels(telegrafConfig.Id);
+            return GetLabels(telegraf.Id);
         }
 
         /// <summary>
-        ///     List all labels for a telegraf config.
+        /// List all labels for a telegraf config.
         /// </summary>
-        /// <param name="telegrafConfigId">ID of the telegraf config</param>
+        /// <param name="telegrafId">ID of the telegraf config</param>
         /// <returns>a list of all labels for a telegraf config</returns>
-        public async Task<List<Label>> GetLabels(string telegrafConfigId)
+        public List<Label> GetLabels(string telegrafId)
         {
-            Arguments.CheckNonEmptyString(telegrafConfigId, nameof(telegrafConfigId));
+            Arguments.CheckNonEmptyString(telegrafId, nameof(telegrafId));
 
-            return await GetLabels(telegrafConfigId, "telegrafs");
+            return _service.TelegrafsTelegrafIDLabelsGet(telegrafId).Labels;
         }
 
         /// <summary>
-        ///     Add a label to a telegraf config.
+        /// Add a label to a telegraf config.
         /// </summary>
         /// <param name="label">label to add</param>
-        /// <param name="telegrafConfig">the telegraf config</param>
+        /// <param name="telegraf">the telegraf config</param>
         /// <returns>added label</returns>
-        public async Task<Label> AddLabel(Label label, TelegrafConfig telegrafConfig)
+        public Label AddLabel(Label label, Telegraf telegraf)
         {
-            Arguments.CheckNotNull(telegrafConfig, nameof(telegrafConfig));
+            Arguments.CheckNotNull(telegraf, nameof(telegraf));
             Arguments.CheckNotNull(label, nameof(label));
 
-            return await AddLabel(label.Id, telegrafConfig.Id);
+            return AddLabel(label.Id, telegraf.Id);
         }
 
         /// <summary>
-        ///     Add a label to a telegraf config.
+        /// Add a label to a telegraf config.
         /// </summary>
         /// <param name="labelId">ID of label to add</param>
-        /// <param name="telegrafConfigId">ID of the telegraf config</param>
+        /// <param name="telegrafId">ID of the telegraf config</param>
         /// <returns>added label</returns>
-        public async Task<Label> AddLabel(string labelId, string telegrafConfigId)
+        public Label AddLabel(string labelId, string telegrafId)
         {
-            Arguments.CheckNonEmptyString(telegrafConfigId, nameof(telegrafConfigId));
+            Arguments.CheckNonEmptyString(telegrafId, nameof(telegrafId));
             Arguments.CheckNonEmptyString(labelId, nameof(labelId));
 
-            return await AddLabel(labelId, telegrafConfigId, "telegrafs", ResourceType.Telegrafs);
+            return _service.TelegrafsTelegrafIDLabelsPost(telegrafId, new LabelMapping(labelId)).Label;
         }
 
         /// <summary>
-        ///     Delete a label from a telegraf config.
+        /// Delete a label from a telegraf config.
         /// </summary>
         /// <param name="label">label to delete</param>
-        /// <param name="telegrafConfig">the telegraf config</param>
-        /// <returns>async task</returns>
-        public async Task DeleteLabel(Label label, TelegrafConfig telegrafConfig)
+        /// <param name="telegraf">the telegraf config</param>
+        /// <returns>delete has been accepted</returns>
+        public void DeleteLabel(Label label, Telegraf telegraf)
         {
-            Arguments.CheckNotNull(telegrafConfig, nameof(telegrafConfig));
+            Arguments.CheckNotNull(telegraf, nameof(telegraf));
             Arguments.CheckNotNull(label, nameof(label));
 
-            await DeleteLabel(label.Id, telegrafConfig.Id);
+            DeleteLabel(label.Id, telegraf.Id);
         }
 
         /// <summary>
-        ///     Delete a label from a telegraf config.
+        /// Delete a label from a telegraf config.
         /// </summary>
         /// <param name="labelId">ID of label to delete</param>
-        /// <param name="telegrafConfigId">ID of the telegraf config</param>
-        /// <returns>async task</returns>
-        public async Task DeleteLabel(string labelId, string telegrafConfigId)
+        /// <param name="telegrafId">ID of the telegraf config</param>
+        /// <returns>delete has been accepted</returns>
+        public void DeleteLabel(string labelId, string telegrafId)
         {
-            Arguments.CheckNonEmptyString(telegrafConfigId, nameof(telegrafConfigId));
+            Arguments.CheckNonEmptyString(telegrafId, nameof(telegrafId));
             Arguments.CheckNonEmptyString(labelId, nameof(labelId));
 
-            await DeleteLabel(labelId, telegrafConfigId, "telegrafs");
+            _service.TelegrafsTelegrafIDLabelsLabelIDDelete(telegrafId, labelId);
         }
     }
 }

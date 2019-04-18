@@ -38,7 +38,7 @@ namespace InfluxDB.Client.Generated.Domain
         /// <param name="agent">agent.</param>
         /// <param name="plugins">plugins.</param>
         /// <param name="organizationID">organizationID.</param>
-        public TelegrafRequest(string name = default(string), string description = default(string), TelegrafRequestAgent agent = default(TelegrafRequestAgent), List<TelegrafRequestPlugin<object,object>> plugins = default(List<TelegrafRequestPlugin<object,object>>), string organizationID = default(string))
+        public TelegrafRequest(string name = default(string), string description = default(string), TelegrafRequestAgent agent = default(TelegrafRequestAgent), List<TelegrafRequestPlugin> plugins = default(List<TelegrafRequestPlugin>), string organizationID = default(string))
         {
             this.Name = name;
             this.Description = description;
@@ -69,7 +69,8 @@ namespace InfluxDB.Client.Generated.Domain
         /// Gets or Sets Plugins
         /// </summary>
         [DataMember(Name="plugins", EmitDefaultValue=false)]
-        public List<TelegrafRequestPlugin<object,object>> Plugins { get; set; }
+        [JsonConverter(typeof(TelegrafRequestPluginsAdapter))]
+        public List<TelegrafRequestPlugin> Plugins { get; set; }
 
         /// <summary>
         /// Gets or Sets OrganizationID
@@ -174,6 +175,75 @@ namespace InfluxDB.Client.Generated.Domain
             }
         }
 
+    public class TelegrafRequestPluginsAdapter : JsonConverter
+    {
+        private static readonly Dictionary<string[], Type> Types = new Dictionary<string[], Type>(new Client.DiscriminatorComparer<string>())
+        {
+            {new []{ "cpu", "input" }, typeof(TelegrafPluginInputCpu)},
+            {new []{ "disk", "input" }, typeof(TelegrafPluginInputDisk)},
+            {new []{ "diskio", "input" }, typeof(TelegrafPluginInputDiskio)},
+            {new []{ "docker", "input" }, typeof(TelegrafPluginInputDocker)},
+            {new []{ "file", "input" }, typeof(TelegrafPluginInputFile)},
+            {new []{ "kubernetes", "input" }, typeof(TelegrafPluginInputKubernetes)},
+            {new []{ "logparser", "input" }, typeof(TelegrafPluginInputLogParser)},
+            {new []{ "procstat", "input" }, typeof(TelegrafPluginInputProcstat)},
+            {new []{ "prometheus", "input" }, typeof(TelegrafPluginInputPrometheus)},
+            {new []{ "redis", "input" }, typeof(TelegrafPluginInputRedis)},
+            {new []{ "syslog", "input" }, typeof(TelegrafPluginInputSyslog)},
+            {new []{ "file", "output" }, typeof(TelegrafPluginOutputFile)},
+            {new []{ "influxdb_v2", "output" }, typeof(TelegrafPluginOutputInfluxDBV2)},
+        };
+
+        public override bool CanConvert(Type objectType)
+        {
+            return false;
+        }
+
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        {
+            serializer.Serialize(writer, value);
+        }
+
+        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        {
+            return Deserialize(reader, objectType, serializer);
+        }
+
+        private object Deserialize(JsonReader reader, Type objectType, JsonSerializer serializer)
+        {
+            switch (reader.TokenType)
+            {
+                case JsonToken.StartObject:
+
+                    var jObject = Newtonsoft.Json.Linq.JObject.Load(reader);
+
+                    var discriminator = new []{ "name", "type" }.Select(key => jObject[key].ToString()).ToArray();
+
+                    var type = Types.GetValueOrDefault(discriminator, objectType);
+
+                    return serializer.Deserialize(jObject.CreateReader(), type);
+
+                case JsonToken.StartArray:
+                    return DeserializeArray(reader, objectType, serializer);
+
+                default:
+                    return serializer.Deserialize(reader, objectType);
+            }
+        }
+
+        private IList DeserializeArray(JsonReader reader, Type targetType, JsonSerializer serializer)
+        {
+            var elementType = targetType.GenericTypeArguments.FirstOrDefault();
+
+            var list = (IList) Activator.CreateInstance(targetType);
+            while (reader.Read() && reader.TokenType != JsonToken.EndArray)
+            {
+                list.Add(Deserialize(reader, elementType, serializer));
+            }
+
+            return list;
+        }
+    }
     }
 
 }

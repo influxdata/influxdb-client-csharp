@@ -65,6 +65,7 @@ namespace InfluxDB.Client.Generated.Domain
         /// Gets or Sets Properties
         /// </summary>
         [DataMember(Name="properties", EmitDefaultValue=false)]
+        [JsonConverter(typeof(ViewPropertiesAdapter))]
         public Object Properties { get; set; }
 
         /// <summary>
@@ -156,6 +157,66 @@ namespace InfluxDB.Client.Generated.Domain
             }
         }
 
+    public class ViewPropertiesAdapter : JsonConverter
+    {
+        private static readonly Dictionary<string[], Type> Types = new Dictionary<string[], Type>(new Client.DiscriminatorComparer<string>())
+        {
+            {new []{ "chronograf-v1" }, typeof(V1ViewProperties)},
+            {new []{ "empty" }, typeof(EmptyViewProperties)},
+            {new []{ "log-viewer", "chronograf-v2" }, typeof(LogViewProperties)},
+            {new []{ "markdown", "chronograf-v2" }, typeof(MarkdownViewProperties)},
+        };
+
+        public override bool CanConvert(Type objectType)
+        {
+            return false;
+        }
+
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        {
+            serializer.Serialize(writer, value);
+        }
+
+        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        {
+            return Deserialize(reader, objectType, serializer);
+        }
+
+        private object Deserialize(JsonReader reader, Type objectType, JsonSerializer serializer)
+        {
+            switch (reader.TokenType)
+            {
+                case JsonToken.StartObject:
+
+                    var jObject = Newtonsoft.Json.Linq.JObject.Load(reader);
+
+                    var discriminator = new []{ "type", "shape" }.Select(key => jObject[key].ToString()).ToArray();
+
+                    var type = Types.GetValueOrDefault(discriminator, objectType);
+
+                    return serializer.Deserialize(jObject.CreateReader(), type);
+
+                case JsonToken.StartArray:
+                    return DeserializeArray(reader, objectType, serializer);
+
+                default:
+                    return serializer.Deserialize(reader, objectType);
+            }
+        }
+
+        private IList DeserializeArray(JsonReader reader, Type targetType, JsonSerializer serializer)
+        {
+            var elementType = targetType.GenericTypeArguments.FirstOrDefault();
+
+            var list = (IList) Activator.CreateInstance(targetType);
+            while (reader.Read() && reader.TokenType != JsonToken.EndArray)
+            {
+                list.Add(Deserialize(reader, elementType, serializer));
+            }
+
+            return list;
+        }
+    }
     }
 
 }

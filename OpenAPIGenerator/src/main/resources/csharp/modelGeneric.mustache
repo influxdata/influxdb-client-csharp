@@ -106,6 +106,9 @@ this.{{name}} = {{#lambda.camelcase_param}}{{name}}{{/lambda.camelcase_param}};
         /// <value>{{description}}</value>{{/description}}
         [DataMember(Name="{{baseName}}", EmitDefaultValue={{emitDefaultValue}})]{{#isDate}}
         [JsonConverter(typeof(OpenAPIDateConverter))]{{/isDate}}
+        {{#vendorExtensions.x-has-type-adapter}}
+        [JsonConverter(typeof({{vendorExtensions.x-type-adapter}}))]
+        {{/vendorExtensions.x-has-type-adapter}}
         public {{{dataType}}} {{name}} { get; {{#isReadOnly}}private {{/isReadOnly}}set; }
         {{/isEnum}}
         {{/isInherited}}
@@ -303,4 +306,65 @@ this.{{name}} = {{#lambda.camelcase_param}}{{name}}{{/lambda.camelcase_param}};
         }
 {{/validatable}}
 {{/netStandard}}
+    {{#vendorExtensions.x-type-adapters.entrySet}}
+    public class {{value.classname}} : JsonConverter
+    {
+        private static readonly Dictionary<string[], Type> Types = new Dictionary<string[], Type>(new Client.DiscriminatorComparer<string>())
+        {
+        {{#value.items}}
+            {new []{ {{{discriminatorValue}}} }, typeof({{classname}})},
+        {{/value.items}}
+        };
+
+        public override bool CanConvert(Type objectType)
+        {
+            return false;
+        }
+
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        {
+            serializer.Serialize(writer, value);
+        }
+
+        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        {
+            return Deserialize(reader, objectType, serializer);
+        }
+
+        private object Deserialize(JsonReader reader, Type objectType, JsonSerializer serializer)
+        {
+            switch (reader.TokenType)
+            {
+                case JsonToken.StartObject:
+
+                    var jObject = Newtonsoft.Json.Linq.JObject.Load(reader);
+
+                    var discriminator = new []{ {{{value.discriminator}}} }.Select(key => jObject[key].ToString()).ToArray();
+
+                    var type = Types.GetValueOrDefault(discriminator, objectType);
+
+                    return serializer.Deserialize(jObject.CreateReader(), type);
+
+                case JsonToken.StartArray:
+                    return DeserializeArray(reader, objectType, serializer);
+
+                default:
+                    return serializer.Deserialize(reader, objectType);
+            }
+        }
+
+        private IList DeserializeArray(JsonReader reader, Type targetType, JsonSerializer serializer)
+        {
+            var elementType = targetType.GenericTypeArguments.FirstOrDefault();
+
+            var list = (IList) Activator.CreateInstance(targetType);
+            while (reader.Read() && reader.TokenType != JsonToken.EndArray)
+            {
+                list.Add(Deserialize(reader, elementType, serializer));
+            }
+
+            return list;
+        }
+    }
+    {{/vendorExtensions.x-type-adapters.entrySet}}
     }

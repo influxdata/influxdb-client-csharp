@@ -1,8 +1,6 @@
 using System;
 using System.Linq;
 using System.Web;
-using InfluxDB.Client.Core;
-using InfluxDB.Client.Generated.Domain;
 using Newtonsoft.Json;
 
 namespace InfluxDB.Client.Domain

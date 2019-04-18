@@ -106,6 +106,37 @@ namespace InfluxDB.Client.Generated.Service
         /// <returns>ApiResponse of string</returns>
         ApiResponse<string> QueryPostWithHttpInfo (string zapTraceSpan = null, string accept = null, string contentType = null, string org = null, string orgID = null, Query query = null);
         /// <summary>
+        /// query an influx
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Generated.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="accept">specifies the return content format. Each response content type will have its own dialect options. (optional, default to text/csv)</param>
+        /// <param name="contentType"> (optional)</param>
+        /// <param name="org">specifies the name of the organization executing the query; if both orgID and org are specified, orgID takes precendence. (optional)</param>
+        /// <param name="orgID">specifies the ID of the organization executing the query; if both orgID and org are specified, orgID takes precendence. (optional)</param>
+        /// <param name="query">flux query or specification to execute (optional)</param>
+        /// <returns>string</returns>
+        string QueryPoststring (string zapTraceSpan = null, string accept = null, string contentType = null, string org = null, string orgID = null, Query query = null);
+
+        /// <summary>
+        /// query an influx
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Generated.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="accept">specifies the return content format. Each response content type will have its own dialect options. (optional, default to text/csv)</param>
+        /// <param name="contentType"> (optional)</param>
+        /// <param name="org">specifies the name of the organization executing the query; if both orgID and org are specified, orgID takes precendence. (optional)</param>
+        /// <param name="orgID">specifies the ID of the organization executing the query; if both orgID and org are specified, orgID takes precendence. (optional)</param>
+        /// <param name="query">flux query or specification to execute (optional)</param>
+        /// <returns>ApiResponse of string</returns>
+        ApiResponse<string> QueryPoststringWithHttpInfo (string zapTraceSpan = null, string accept = null, string contentType = null, string org = null, string orgID = null, Query query = null);
+        /// <summary>
         /// 
         /// </summary>
         /// <remarks>
@@ -257,6 +288,37 @@ namespace InfluxDB.Client.Generated.Service
         /// <param name="query">flux query or specification to execute (optional)</param>
         /// <returns>Task of ApiResponse (string)</returns>
         System.Threading.Tasks.Task<ApiResponse<string>> QueryPostAsyncWithHttpInfo (string zapTraceSpan = null, string accept = null, string contentType = null, string org = null, string orgID = null, Query query = null);
+        /// <summary>
+        /// query an influx
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Generated.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="accept">specifies the return content format. Each response content type will have its own dialect options. (optional, default to text/csv)</param>
+        /// <param name="contentType"> (optional)</param>
+        /// <param name="org">specifies the name of the organization executing the query; if both orgID and org are specified, orgID takes precendence. (optional)</param>
+        /// <param name="orgID">specifies the ID of the organization executing the query; if both orgID and org are specified, orgID takes precendence. (optional)</param>
+        /// <param name="query">flux query or specification to execute (optional)</param>
+        /// <returns>Task of string</returns>
+        System.Threading.Tasks.Task<string> QueryPoststringAsync (string zapTraceSpan = null, string accept = null, string contentType = null, string org = null, string orgID = null, Query query = null);
+
+        /// <summary>
+        /// query an influx
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Generated.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="accept">specifies the return content format. Each response content type will have its own dialect options. (optional, default to text/csv)</param>
+        /// <param name="contentType"> (optional)</param>
+        /// <param name="org">specifies the name of the organization executing the query; if both orgID and org are specified, orgID takes precendence. (optional)</param>
+        /// <param name="orgID">specifies the ID of the organization executing the query; if both orgID and org are specified, orgID takes precendence. (optional)</param>
+        /// <param name="query">flux query or specification to execute (optional)</param>
+        /// <returns>Task of ApiResponse (string)</returns>
+        System.Threading.Tasks.Task<ApiResponse<string>> QueryPoststringAsyncWithHttpInfo (string zapTraceSpan = null, string accept = null, string contentType = null, string org = null, string orgID = null, Query query = null);
         /// <summary>
         /// 
         /// </summary>
@@ -905,6 +967,155 @@ namespace InfluxDB.Client.Generated.Service
             if (ExceptionFactory != null)
             {
                 Exception exception = ExceptionFactory("QueryPost", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<string>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (string) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(string)));
+        }
+
+        /// <summary>
+        /// query an influx 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Generated.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="accept">specifies the return content format. Each response content type will have its own dialect options. (optional, default to text/csv)</param>
+        /// <param name="contentType"> (optional)</param>
+        /// <param name="org">specifies the name of the organization executing the query; if both orgID and org are specified, orgID takes precendence. (optional)</param>
+        /// <param name="orgID">specifies the ID of the organization executing the query; if both orgID and org are specified, orgID takes precendence. (optional)</param>
+        /// <param name="query">flux query or specification to execute (optional)</param>
+        /// <returns>string</returns>
+        public string QueryPoststring (string zapTraceSpan = null, string accept = null, string contentType = null, string org = null, string orgID = null, Query query = null)
+        {
+             ApiResponse<string> localVarResponse = QueryPoststringWithHttpInfo(zapTraceSpan, accept, contentType, org, orgID, query);
+             return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// query an influx 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Generated.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="accept">specifies the return content format. Each response content type will have its own dialect options. (optional, default to text/csv)</param>
+        /// <param name="contentType"> (optional)</param>
+        /// <param name="org">specifies the name of the organization executing the query; if both orgID and org are specified, orgID takes precendence. (optional)</param>
+        /// <param name="orgID">specifies the ID of the organization executing the query; if both orgID and org are specified, orgID takes precendence. (optional)</param>
+        /// <param name="query">flux query or specification to execute (optional)</param>
+        /// <returns>ApiResponse of string</returns>
+        public ApiResponse< string > QueryPoststringWithHttpInfo (string zapTraceSpan = null, string accept = null, string contentType = null, string org = null, string orgID = null, Query query = null)
+        {
+
+            var localVarPath = "/api/v2/query";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/toml",
+            };
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null)
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+            if (org != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
+            if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("QueryPoststring", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<string>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (string) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(string)));
+        }
+
+        /// <summary>
+        /// query an influx 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Generated.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="accept">specifies the return content format. Each response content type will have its own dialect options. (optional, default to text/csv)</param>
+        /// <param name="contentType"> (optional)</param>
+        /// <param name="org">specifies the name of the organization executing the query; if both orgID and org are specified, orgID takes precendence. (optional)</param>
+        /// <param name="orgID">specifies the ID of the organization executing the query; if both orgID and org are specified, orgID takes precendence. (optional)</param>
+        /// <param name="query">flux query or specification to execute (optional)</param>
+        /// <returns>Task of string</returns>
+        public async System.Threading.Tasks.Task<string> QueryPoststringAsync (string zapTraceSpan = null, string accept = null, string contentType = null, string org = null, string orgID = null, Query query = null)
+        {
+             ApiResponse<string> localVarResponse = await QueryPoststringAsyncWithHttpInfo(zapTraceSpan, accept, contentType, org, orgID, query);
+             return localVarResponse.Data;
+
+        }
+
+        /// <summary>
+        /// query an influx 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Generated.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="accept">specifies the return content format. Each response content type will have its own dialect options. (optional, default to text/csv)</param>
+        /// <param name="contentType"> (optional)</param>
+        /// <param name="org">specifies the name of the organization executing the query; if both orgID and org are specified, orgID takes precendence. (optional)</param>
+        /// <param name="orgID">specifies the ID of the organization executing the query; if both orgID and org are specified, orgID takes precendence. (optional)</param>
+        /// <param name="query">flux query or specification to execute (optional)</param>
+        /// <returns>Task of ApiResponse (string)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<string>> QueryPoststringAsyncWithHttpInfo (string zapTraceSpan = null, string accept = null, string contentType = null, string org = null, string orgID = null, Query query = null)
+        {
+
+            var localVarPath = "/api/v2/query";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/toml",
+            };
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null)
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+            if (org != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
+            if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("QueryPoststring", localVarResponse);
                 if (exception != null) throw exception;
             }
 

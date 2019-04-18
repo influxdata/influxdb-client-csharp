@@ -28,7 +28,7 @@ namespace InfluxDB.Client.Generated.Domain
     /// TelegrafPluginInputCpu
     /// </summary>
     [DataContract]
-    public partial class TelegrafPluginInputCpu :  IEquatable<TelegrafPluginInputCpu>
+    public partial class TelegrafPluginInputCpu : TelegrafRequestPlugin,  IEquatable<TelegrafPluginInputCpu>
     {
         /// <summary>
         /// Defines Name
@@ -50,25 +50,6 @@ namespace InfluxDB.Client.Generated.Domain
         [DataMember(Name="name", EmitDefaultValue=false)]
         public NameEnum Name { get; set; }
         /// <summary>
-        /// Defines Type
-        /// </summary>
-        [JsonConverter(typeof(StringEnumConverter))]
-        public enum TypeEnum
-        {
-            
-            /// <summary>
-            /// Enum Input for value: input
-            /// </summary>
-            [EnumMember(Value = "input")]
-            Input = 1
-        }
-
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public TypeEnum Type { get; set; }
-        /// <summary>
         /// Initializes a new instance of the <see cref="TelegrafPluginInputCpu" /> class.
         /// </summary>
         [JsonConstructorAttribute]
@@ -76,10 +57,9 @@ namespace InfluxDB.Client.Generated.Domain
         /// <summary>
         /// Initializes a new instance of the <see cref="TelegrafPluginInputCpu" /> class.
         /// </summary>
-        /// <param name="name">name (required).</param>
-        /// <param name="type">type (required).</param>
+        /// <param name="name">name (required) (default to NameEnum.Cpu).</param>
         /// <param name="comment">comment.</param>
-        public TelegrafPluginInputCpu(NameEnum name = default(NameEnum), TypeEnum type = default(TypeEnum), string comment = default(string))
+        public TelegrafPluginInputCpu(NameEnum name = NameEnum.Cpu, TypeEnum type = TypeEnum.Input, string comment = default(string)) : base(type)
         {
             // to ensure "name" is required (not null)
             if (name == null)
@@ -90,18 +70,8 @@ namespace InfluxDB.Client.Generated.Domain
             {
                 this.Name = name;
             }
-            // to ensure "type" is required (not null)
-            if (type == null)
-            {
-                throw new InvalidDataException("type is a required property for TelegrafPluginInputCpu and cannot be null");
-            }
-            else
-            {
-                this.Type = type;
-            }
             this.Comment = comment;
         }
-
 
 
         /// <summary>
@@ -118,8 +88,8 @@ namespace InfluxDB.Client.Generated.Domain
         {
             var sb = new StringBuilder();
             sb.Append("class TelegrafPluginInputCpu {\n");
+            sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  Comment: ").Append(Comment).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -129,7 +99,7 @@ namespace InfluxDB.Client.Generated.Domain
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public virtual string ToJson()
+        public override string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }
@@ -154,17 +124,12 @@ namespace InfluxDB.Client.Generated.Domain
             if (input == null)
                 return false;
 
-            return 
+            return base.Equals(input) && 
                 (
                     this.Name == input.Name ||
                     (this.Name != null &&
                     this.Name.Equals(input.Name))
-                ) && 
-                (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.Comment == input.Comment ||
                     (this.Comment != null &&
@@ -180,11 +145,9 @@ namespace InfluxDB.Client.Generated.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
+                int hashCode = base.GetHashCode();
                 if (this.Name != null)
                     hashCode = hashCode * 59 + this.Name.GetHashCode();
-                if (this.Type != null)
-                    hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.Comment != null)
                     hashCode = hashCode * 59 + this.Comment.GetHashCode();
                 return hashCode;

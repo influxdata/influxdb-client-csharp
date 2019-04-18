@@ -28,7 +28,7 @@ namespace InfluxDB.Client.Generated.Domain
     /// TelegrafRequestPlugin
     /// </summary>
     [DataContract]
-    public partial class TelegrafRequestPlugin<N, C> :  IEquatable<TelegrafRequestPlugin<N, C>>
+    public partial class TelegrafRequestPlugin :  IEquatable<TelegrafRequestPlugin>
     {
         /// <summary>
         /// Defines type
@@ -38,16 +38,16 @@ namespace InfluxDB.Client.Generated.Domain
         {
             
             /// <summary>
-            /// Enum INPUT for value: input
+            /// Enum Input for value: input
             /// </summary>
             [EnumMember(Value = "input")]
-            INPUT = 1,
+            Input = 1,
             
             /// <summary>
-            /// Enum OUTPUT for value: output
+            /// Enum Output for value: output
             /// </summary>
             [EnumMember(Value = "output")]
-            OUTPUT = 2
+            Output = 2
         }
 
         /// <summary>
@@ -63,28 +63,12 @@ namespace InfluxDB.Client.Generated.Domain
         /// <summary>
         /// Initializes a new instance of the <see cref="TelegrafRequestPlugin" /> class.
         /// </summary>
-        /// <param name="name">name.</param>
         /// <param name="type">type.</param>
-        /// <param name="config">config.</param>
-        public TelegrafRequestPlugin(N name = default(N), TypeEnum? type = default(TypeEnum?), C config = default(C))
+        public TelegrafRequestPlugin(TypeEnum? type = default(TypeEnum?))
         {
-            this.name = name;
             this.type = type;
-            this.config = config;
         }
 
-        /// <summary>
-        /// Gets or Sets name
-        /// </summary>
-        [DataMember(Name="name", EmitDefaultValue=false)]
-        public N name { get; set; }
-
-
-        /// <summary>
-        /// Gets or Sets config
-        /// </summary>
-        [DataMember(Name="config", EmitDefaultValue=false)]
-        public C config { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -94,9 +78,7 @@ namespace InfluxDB.Client.Generated.Domain
         {
             var sb = new StringBuilder();
             sb.Append("class TelegrafRequestPlugin {\n");
-            sb.Append("  name: ").Append(name).Append("\n");
             sb.Append("  type: ").Append(type).Append("\n");
-            sb.Append("  config: ").Append(config).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -117,7 +99,7 @@ namespace InfluxDB.Client.Generated.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as TelegrafRequestPlugin<N, C>);
+            return this.Equals(input as TelegrafRequestPlugin);
         }
 
         /// <summary>
@@ -125,7 +107,7 @@ namespace InfluxDB.Client.Generated.Domain
         /// </summary>
         /// <param name="input">Instance of TelegrafRequestPlugin to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(TelegrafRequestPlugin<N, C> input)
+        public bool Equals(TelegrafRequestPlugin input)
         {
             if (input == null)
                 return false;
@@ -133,18 +115,8 @@ namespace InfluxDB.Client.Generated.Domain
             return 
                 (
                     
-                    (this.name != null &&
-                    this.name.Equals(input.name))
-                ) && 
-                (
-                    
                     (this.type != null &&
                     this.type.Equals(input.type))
-                ) && 
-                (
-                    
-                    (this.config != null &&
-                    this.config.Equals(input.config))
                 );
         }
 
@@ -157,12 +129,8 @@ namespace InfluxDB.Client.Generated.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
-                if (this.name != null)
-                    hashCode = hashCode * 59 + this.name.GetHashCode();
                 if (this.type != null)
                     hashCode = hashCode * 59 + this.type.GetHashCode();
-                if (this.config != null)
-                    hashCode = hashCode * 59 + this.config.GetHashCode();
                 return hashCode;
             }
         }

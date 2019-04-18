@@ -327,7 +327,6 @@ paths:
         - in: query
           name: orgID
           description: specifies the organization of the resource
-          required: true
           schema:
             type: string
       responses:
@@ -7087,6 +7086,8 @@ components:
       type: object
       properties:
         name:
+          type: string
+        type:
           type: string
         version:
           type: string

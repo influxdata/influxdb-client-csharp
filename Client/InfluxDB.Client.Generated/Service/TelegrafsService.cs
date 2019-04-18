@@ -31,10 +31,10 @@ namespace InfluxDB.Client.Generated.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Generated.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">specifies the organization of the resource</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="orgID">specifies the organization of the resource (optional)</param>
         /// <returns>Telegrafs</returns>
-        Telegrafs TelegrafsGet (string orgID, string zapTraceSpan = null);
+        Telegrafs TelegrafsGet (string zapTraceSpan = null, string orgID = null);
 
         /// <summary>
         /// 
@@ -43,10 +43,10 @@ namespace InfluxDB.Client.Generated.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Generated.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">specifies the organization of the resource</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="orgID">specifies the organization of the resource (optional)</param>
         /// <returns>ApiResponse of Telegrafs</returns>
-        ApiResponse<Telegrafs> TelegrafsGetWithHttpInfo (string orgID, string zapTraceSpan = null);
+        ApiResponse<Telegrafs> TelegrafsGetWithHttpInfo (string zapTraceSpan = null, string orgID = null);
         /// <summary>
         /// Create a telegraf config
         /// </summary>
@@ -118,6 +118,31 @@ namespace InfluxDB.Client.Generated.Service
         /// <param name="accept">specifies the return content format. (optional, default to application/json)</param>
         /// <returns>ApiResponse of Telegraf</returns>
         ApiResponse<Telegraf> TelegrafsTelegrafIDGetWithHttpInfo (string telegrafID, string zapTraceSpan = null, string accept = null);
+        /// <summary>
+        /// Retrieve a telegraf config
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Generated.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="telegrafID">ID of telegraf config</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="accept">specifies the return content format. (optional, default to application/json)</param>
+        /// <returns>string</returns>
+        string TelegrafsTelegrafIDGetstring (string telegrafID, string zapTraceSpan = null, string accept = null);
+
+        /// <summary>
+        /// Retrieve a telegraf config
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Generated.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="telegrafID">ID of telegraf config</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="accept">specifies the return content format. (optional, default to application/json)</param>
+        /// <returns>ApiResponse of string</returns>
+        ApiResponse<string> TelegrafsTelegrafIDGetstringWithHttpInfo (string telegrafID, string zapTraceSpan = null, string accept = null);
         /// <summary>
         /// list all labels for a telegraf config
         /// </summary>
@@ -371,10 +396,10 @@ namespace InfluxDB.Client.Generated.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Generated.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">specifies the organization of the resource</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="orgID">specifies the organization of the resource (optional)</param>
         /// <returns>Task of Telegrafs</returns>
-        System.Threading.Tasks.Task<Telegrafs> TelegrafsGetAsync (string orgID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<Telegrafs> TelegrafsGetAsync (string zapTraceSpan = null, string orgID = null);
 
         /// <summary>
         /// 
@@ -383,10 +408,10 @@ namespace InfluxDB.Client.Generated.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Generated.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">specifies the organization of the resource</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="orgID">specifies the organization of the resource (optional)</param>
         /// <returns>Task of ApiResponse (Telegrafs)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Telegrafs>> TelegrafsGetAsyncWithHttpInfo (string orgID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<Telegrafs>> TelegrafsGetAsyncWithHttpInfo (string zapTraceSpan = null, string orgID = null);
         /// <summary>
         /// Create a telegraf config
         /// </summary>
@@ -458,6 +483,31 @@ namespace InfluxDB.Client.Generated.Service
         /// <param name="accept">specifies the return content format. (optional, default to application/json)</param>
         /// <returns>Task of ApiResponse (Telegraf)</returns>
         System.Threading.Tasks.Task<ApiResponse<Telegraf>> TelegrafsTelegrafIDGetAsyncWithHttpInfo (string telegrafID, string zapTraceSpan = null, string accept = null);
+        /// <summary>
+        /// Retrieve a telegraf config
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Generated.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="telegrafID">ID of telegraf config</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="accept">specifies the return content format. (optional, default to application/json)</param>
+        /// <returns>Task of string</returns>
+        System.Threading.Tasks.Task<string> TelegrafsTelegrafIDGetstringAsync (string telegrafID, string zapTraceSpan = null, string accept = null);
+
+        /// <summary>
+        /// Retrieve a telegraf config
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Generated.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="telegrafID">ID of telegraf config</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="accept">specifies the return content format. (optional, default to application/json)</param>
+        /// <returns>Task of ApiResponse (string)</returns>
+        System.Threading.Tasks.Task<ApiResponse<string>> TelegrafsTelegrafIDGetstringAsyncWithHttpInfo (string telegrafID, string zapTraceSpan = null, string accept = null);
         /// <summary>
         /// list all labels for a telegraf config
         /// </summary>
@@ -806,12 +856,12 @@ namespace InfluxDB.Client.Generated.Service
         ///  
         /// </summary>
         /// <exception cref="InfluxDB.Client.Generated.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">specifies the organization of the resource</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="orgID">specifies the organization of the resource (optional)</param>
         /// <returns>Telegrafs</returns>
-        public Telegrafs TelegrafsGet (string orgID, string zapTraceSpan = null)
+        public Telegrafs TelegrafsGet (string zapTraceSpan = null, string orgID = null)
         {
-             ApiResponse<Telegrafs> localVarResponse = TelegrafsGetWithHttpInfo(orgID, zapTraceSpan);
+             ApiResponse<Telegrafs> localVarResponse = TelegrafsGetWithHttpInfo(zapTraceSpan, orgID);
              return localVarResponse.Data;
         }
 
@@ -819,14 +869,11 @@ namespace InfluxDB.Client.Generated.Service
         ///  
         /// </summary>
         /// <exception cref="InfluxDB.Client.Generated.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">specifies the organization of the resource</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="orgID">specifies the organization of the resource (optional)</param>
         /// <returns>ApiResponse of Telegrafs</returns>
-        public ApiResponse< Telegrafs > TelegrafsGetWithHttpInfo (string orgID, string zapTraceSpan = null)
+        public ApiResponse< Telegrafs > TelegrafsGetWithHttpInfo (string zapTraceSpan = null, string orgID = null)
         {
-            // verify the required parameter 'orgID' is set
-            if (orgID == null)
-                throw new ApiException(400, "Missing required parameter 'orgID' when calling TelegrafsService->TelegrafsGet");
 
             var localVarPath = "/api/v2/telegrafs";
             var localVarPathParams = new Dictionary<String, String>();
@@ -875,12 +922,12 @@ namespace InfluxDB.Client.Generated.Service
         ///  
         /// </summary>
         /// <exception cref="InfluxDB.Client.Generated.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">specifies the organization of the resource</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="orgID">specifies the organization of the resource (optional)</param>
         /// <returns>Task of Telegrafs</returns>
-        public async System.Threading.Tasks.Task<Telegrafs> TelegrafsGetAsync (string orgID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<Telegrafs> TelegrafsGetAsync (string zapTraceSpan = null, string orgID = null)
         {
-             ApiResponse<Telegrafs> localVarResponse = await TelegrafsGetAsyncWithHttpInfo(orgID, zapTraceSpan);
+             ApiResponse<Telegrafs> localVarResponse = await TelegrafsGetAsyncWithHttpInfo(zapTraceSpan, orgID);
              return localVarResponse.Data;
 
         }
@@ -889,14 +936,11 @@ namespace InfluxDB.Client.Generated.Service
         ///  
         /// </summary>
         /// <exception cref="InfluxDB.Client.Generated.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">specifies the organization of the resource</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="orgID">specifies the organization of the resource (optional)</param>
         /// <returns>Task of ApiResponse (Telegrafs)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Telegrafs>> TelegrafsGetAsyncWithHttpInfo (string orgID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<Telegrafs>> TelegrafsGetAsyncWithHttpInfo (string zapTraceSpan = null, string orgID = null)
         {
-            // verify the required parameter 'orgID' is set
-            if (orgID == null)
-                throw new ApiException(400, "Missing required parameter 'orgID' when calling TelegrafsService->TelegrafsGet");
 
             var localVarPath = "/api/v2/telegrafs";
             var localVarPathParams = new Dictionary<String, String>();
@@ -1380,6 +1424,147 @@ namespace InfluxDB.Client.Generated.Service
             return new ApiResponse<Telegraf>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
                 (Telegraf) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Telegraf)));
+        }
+
+        /// <summary>
+        /// Retrieve a telegraf config 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Generated.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="telegrafID">ID of telegraf config</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="accept">specifies the return content format. (optional, default to application/json)</param>
+        /// <returns>string</returns>
+        public string TelegrafsTelegrafIDGetstring (string telegrafID, string zapTraceSpan = null, string accept = null)
+        {
+             ApiResponse<string> localVarResponse = TelegrafsTelegrafIDGetstringWithHttpInfo(telegrafID, zapTraceSpan, accept);
+             return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Retrieve a telegraf config 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Generated.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="telegrafID">ID of telegraf config</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="accept">specifies the return content format. (optional, default to application/json)</param>
+        /// <returns>ApiResponse of string</returns>
+        public ApiResponse< string > TelegrafsTelegrafIDGetstringWithHttpInfo (string telegrafID, string zapTraceSpan = null, string accept = null)
+        {
+            // verify the required parameter 'telegrafID' is set
+            if (telegrafID == null)
+                throw new ApiException(400, "Missing required parameter 'telegrafID' when calling TelegrafsService->TelegrafsTelegrafIDGetstring");
+
+            var localVarPath = "/api/v2/telegrafs/{telegrafID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/toml",
+            };
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null)
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+            if (telegrafID != null) localVarPathParams.Add("telegrafID", this.Configuration.ApiClient.ParameterToString(telegrafID)); // path parameter
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("TelegrafsTelegrafIDGetstring", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<string>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (string) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(string)));
+        }
+
+        /// <summary>
+        /// Retrieve a telegraf config 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Generated.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="telegrafID">ID of telegraf config</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="accept">specifies the return content format. (optional, default to application/json)</param>
+        /// <returns>Task of string</returns>
+        public async System.Threading.Tasks.Task<string> TelegrafsTelegrafIDGetstringAsync (string telegrafID, string zapTraceSpan = null, string accept = null)
+        {
+             ApiResponse<string> localVarResponse = await TelegrafsTelegrafIDGetstringAsyncWithHttpInfo(telegrafID, zapTraceSpan, accept);
+             return localVarResponse.Data;
+
+        }
+
+        /// <summary>
+        /// Retrieve a telegraf config 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Generated.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="telegrafID">ID of telegraf config</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="accept">specifies the return content format. (optional, default to application/json)</param>
+        /// <returns>Task of ApiResponse (string)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<string>> TelegrafsTelegrafIDGetstringAsyncWithHttpInfo (string telegrafID, string zapTraceSpan = null, string accept = null)
+        {
+            // verify the required parameter 'telegrafID' is set
+            if (telegrafID == null)
+                throw new ApiException(400, "Missing required parameter 'telegrafID' when calling TelegrafsService->TelegrafsTelegrafIDGetstring");
+
+            var localVarPath = "/api/v2/telegrafs/{telegrafID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/toml",
+            };
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null)
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+            if (telegrafID != null) localVarPathParams.Add("telegrafID", this.Configuration.ApiClient.ParameterToString(telegrafID)); // path parameter
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("TelegrafsTelegrafIDGetstring", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<string>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (string) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(string)));
         }
 
         /// <summary>

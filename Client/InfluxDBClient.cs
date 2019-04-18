@@ -68,7 +68,8 @@ namespace InfluxDB.Client.Generated.Client
                 try
                 {
                     var header = "Basic " + Convert.ToBase64String(
-                                     Encoding.Default.GetBytes(_options.Username + ":" + new string(_options.Password)));
+                                     Encoding.Default.GetBytes(
+                                         _options.Username + ":" + new string(_options.Password)));
 
                     var request = new RestRequest(_options.Url + "/api/v2/signin", Method.POST)
                         .AddHeader("Authorization", header);
@@ -142,7 +143,13 @@ namespace InfluxDB.Client
             Client.HttpClient.BaseAddress = new Uri(options.Url);
             Client.HttpClient.Timeout = options.Timeout;
 
-            _apiClient = new ApiClient(options);
+            var apiClient = new ApiClient(options);
+            var apiClientRestClient = apiClient.RestClient;
+//            apiClientRestClient.AddHandler();
+
+            _apiClient = apiClient;
+//            _apiClient.RestClient
+                
             _exceptionFactory = (methodName, response) =>
                 !response.IsSuccessful ? HttpException.Create(response) : null;
 
@@ -218,7 +225,7 @@ namespace InfluxDB.Client
             {
                 ExceptionFactory = _exceptionFactory
             };
-            
+
             return new OrganizationsApi(service);
         }
 
@@ -232,7 +239,7 @@ namespace InfluxDB.Client
             {
                 ExceptionFactory = _exceptionFactory
             };
-            
+
             return new UsersApi(service);
         }
 
@@ -246,7 +253,7 @@ namespace InfluxDB.Client
             {
                 ExceptionFactory = _exceptionFactory
             };
-            
+
             return new BucketsApi(service);
         }
 
@@ -274,7 +281,7 @@ namespace InfluxDB.Client
             {
                 ExceptionFactory = _exceptionFactory
             };
-            
+
             return new AuthorizationsApi(service);
         }
 
@@ -288,7 +295,7 @@ namespace InfluxDB.Client
             {
                 ExceptionFactory = _exceptionFactory
             };
-            
+
             return new TasksApi(service);
         }
 
@@ -307,12 +314,17 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Get the <see cref="Domain.TelegrafConfig" /> client.
+        /// Get the <see cref="InfluxDB.Client.Generated.Domain.Telegraf" /> client.
         /// </summary>
         /// <returns>the new client instance for Telegrafs API</returns>
         public TelegrafsApi GetTelegrafsApi()
         {
-            return new TelegrafsApi(Client);
+            var service = new TelegrafsService((Configuration) _apiClient.Configuration)
+            {
+                ExceptionFactory = _exceptionFactory
+            };
+
+            return new TelegrafsApi(service);
         }
 
         /// <summary>

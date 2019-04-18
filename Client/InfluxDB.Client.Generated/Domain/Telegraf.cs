@@ -35,7 +35,7 @@ namespace InfluxDB.Client.Generated.Domain
         /// </summary>
         /// <param name="links">links.</param>
         /// <param name="labels">labels.</param>
-        public Telegraf(TelegrafLinks links = default(TelegrafLinks), Labels labels = default(Labels), string name = default(string), string description = default(string), TelegrafRequestAgent agent = default(TelegrafRequestAgent), List<TelegrafRequestPlugin<object,object>> plugins = default(List<TelegrafRequestPlugin<object,object>>), string organizationID = default(string)) : base(name, description, agent, plugins, organizationID)
+        public Telegraf(TelegrafLinks links = default(TelegrafLinks), Labels labels = default(Labels), string name = default(string), string description = default(string), TelegrafRequestAgent agent = default(TelegrafRequestAgent), List<TelegrafRequestPlugin> plugins = default(List<TelegrafRequestPlugin>), string organizationID = default(string)) : base(name, description, agent, plugins, organizationID)
         {
             this.Links = links;
             this.Labels = labels;

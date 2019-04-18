@@ -527,4 +527,33 @@ namespace InfluxDB.Client.Generated.Client
             return value is IList || value is ICollection;
         }
     }
+
+    public class DiscriminatorComparer<T> : IEqualityComparer<T[]>
+    {
+        public int GetHashCode(T[] array)
+        {
+            if (array == null)
+            {
+                return 0;
+            }
+
+            return array.Aggregate(17, (current, item) => current * 23 + (item != null ? item.GetHashCode() : 0));
+        }
+
+        public bool Equals(T[] x, T[] y)
+        {
+            if (ReferenceEquals(x, y))
+            {
+                return true;
+            }
+
+            if (Equals(x.Length, y.Length))
+            {
+                return !x.Where((t, i) => !Equals(t, y[i])).Any();
+            }
+
+            return false;
+        }
+    }
+
 }
