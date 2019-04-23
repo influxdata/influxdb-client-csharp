@@ -34,6 +34,11 @@ namespace InfluxDB.Client.Api.Client
 
         partial void InterceptRequest(IRestRequest request)
         {
+            Intercept(request);
+        }
+        
+        internal void Intercept(IRestRequest request)
+        {
             if (_signout || _noAuthRoute.Any(requestPath => requestPath.EndsWith(request.Resource))) return;
 
             if (InfluxDBClientOptions.AuthenticationScheme.Token.Equals(_options.AuthScheme))

@@ -655,9 +655,10 @@ namespace InfluxDB.Client
             Arguments.CheckNotNull(query, nameof(query));
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
 
-            return null;
-//            return _service.QueryPostWithIRestResponse(null, "text/csv",
-//                "application/json", null, orgId, query);
+            var request = _service.QueryPostWithRestRequest(null, "text/csv",
+                "application/json", null, orgId, query);
+            _service.Configuration.ApiClient.Intercept(request);
+            return request;
         }
         
         private Query CreateQuery(string query, Dialect dialect = null)
