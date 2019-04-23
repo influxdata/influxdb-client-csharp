@@ -1,4 +1,3 @@
-using System.Threading.Tasks;
 using NUnit.Framework;
 using WireMock.RequestBuilders;
 using WireMock.ResponseBuilders;
@@ -8,29 +7,29 @@ namespace Client.Legacy.Test
     public class MockServerFluxClientPingTest : AbstractFluxClientTest
     {
         [Test]
-        public async Task Healthy()
+        public void Healthy()
         {
             MockServer.Given(Request.Create().WithPath("/ping").UsingGet())
                             .RespondWith(Response.Create().WithStatusCode(204));
             
-            Assert.IsTrue(await FluxClient.Ping());
+            Assert.IsTrue( FluxClient.Ping());
         }
         
         [Test]
-        public async Task ServerError()
+        public void ServerError()
         {
             MockServer.Given(Request.Create().WithPath("/ping").UsingGet())
                             .RespondWith(CreateErrorResponse(""));
 
-            Assert.IsFalse(await FluxClient.Ping());
+            Assert.IsFalse( FluxClient.Ping());
         }
         
         [Test]
-        public async Task NotRunningServer()
+        public void NotRunningServer()
         {
             MockServer.Stop();
 
-            Assert.IsFalse(await FluxClient.Ping());
+            Assert.IsFalse( FluxClient.Ping());
         }
     }
 }

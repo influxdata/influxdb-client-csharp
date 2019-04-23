@@ -67,7 +67,7 @@ namespace InfluxDB.Client.Core.Flux.Internal
         /// <param name="source">CSV Data source</param>
         /// <param name="cancellable">to cancel parsing</param>
         /// <param name="consumer">to accept <see cref="FluxTable"/> or <see cref="FluxRecord"/></param>
-        public void ParseFluxResponse(BufferedStream source, ICancellable cancellable, IFluxResponseConsumer consumer)
+        public void ParseFluxResponse(Stream source, ICancellable cancellable, IFluxResponseConsumer consumer)
         {
             Arguments.CheckNotNull(source, "source");
 
@@ -238,7 +238,7 @@ namespace InfluxDB.Client.Core.Flux.Internal
             }
         }
 
-        public static BufferedStream ToStream(string str)
+        public static Stream ToStream(string str)
         {
             var stream = new MemoryStream();
             var writer = new StreamWriter(stream);

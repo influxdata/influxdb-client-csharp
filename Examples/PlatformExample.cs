@@ -3,11 +3,9 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Threading;
 using InfluxDB.Client;
-using InfluxDB.Client.Core;
-using InfluxDB.Client.Domain;
 using InfluxDB.Client.Api.Domain;
+using InfluxDB.Client.Core;
 using InfluxDB.Client.Writes;
-using Task = System.Threading.Tasks.Task;
 
 namespace Examples
 {
@@ -23,7 +21,7 @@ namespace Examples
             [Column(IsTimestamp = true)] public DateTime Time;
         }
 
-        public static async Task Example(InfluxDBClient influxDB)
+        public static void Example(InfluxDBClient influxDB)
         {
             var organizationClient = influxDB.GetOrganizationsApi();
             
@@ -109,7 +107,7 @@ namespace Examples
             //
             // Read data
             //
-            var fluxTables = await influxDB.GetQueryApi().Query("from(bucket:\"temperature-sensors\") |> range(start: 0)", medicalGMBH.Id);
+            var fluxTables = influxDB.GetQueryApi().Query("from(bucket:\"temperature-sensors\") |> range(start: 0)", medicalGMBH.Id);
             fluxTables.ForEach(fluxTable =>
             {
                 var fluxRecords = fluxTable.Records;
@@ -128,7 +126,7 @@ namespace Examples
             var client = InfluxDBClientFactory.Create("http://localhost:9999",
                             "my-user", "my-password".ToCharArray());
 
-            Example(client).Wait();
+            Example(client);
         }
     }
 }

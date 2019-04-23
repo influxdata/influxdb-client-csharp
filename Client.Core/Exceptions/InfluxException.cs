@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using InfluxDB.Client.Core.Internal;
 using Newtonsoft.Json.Linq;
 using RestSharp;
@@ -52,72 +54,50 @@ namespace InfluxDB.Client.Core.Exceptions
         /// </summary>
         public int? RetryAfter { get; set; }
 
-        //TODO remove
-        public static HttpException Create(RequestResult requestResult)
-        {
-            Arguments.CheckNotNull(requestResult, nameof(requestResult));
-
-            string errorMessage = null;
-            JObject errorBody;
-
-            int? retryAfter = null;
-            if (requestResult.ResponseHeaders.TryGetValue("Retry-After", out var retry))
-                retryAfter = Convert.ToInt32(retry.First());
-
-            var readToEnd = new StreamReader(requestResult.ResponseContent).ReadToEnd();
-            if (string.IsNullOrEmpty(readToEnd))
-                errorBody = new JObject();
-            else
-                errorBody = JObject.Parse(readToEnd);
-
-            if (errorBody.ContainsKey("message")) errorMessage = errorBody.GetValue("message").ToString();
-
-            var keys = new[] {"X-Platform-Error-Code", "X-Influx-Error", "X-InfluxDb-Error"};
-
-            if (string.IsNullOrEmpty(errorMessage))
-            {
-                var message = requestResult.ResponseHeaders
-                    .Where(header => keys.Contains(header.Key, StringComparer.OrdinalIgnoreCase))
-                    .Select(header => header.Value.First());
-
-                errorMessage = message.FirstOrDefault();
-            }
-
-            return new HttpException(errorMessage, requestResult.StatusCode)
-                {ErrorBody = errorBody, RetryAfter = retryAfter};
-        }
-
         public static HttpException Create(IRestResponse requestResult)
         {
             Arguments.CheckNotNull(requestResult, nameof(requestResult));
 
+            var httpHeaders = requestResult.Headers.Select(h => new HttpHeader{Name = h.Name, Value = h.Value.ToString()}).ToList();
+            
+            return Create(requestResult.Content, httpHeaders, requestResult.ErrorMessage, requestResult.StatusCode);
+        }
+
+        public static HttpException Create(IHttpResponse requestResult)
+        {
+            Arguments.CheckNotNull(requestResult, nameof(requestResult));
+
+            return Create(requestResult.Content, requestResult.Headers, requestResult.ErrorMessage, requestResult.StatusCode);
+        }
+        
+        public static HttpException Create(string content, IList<HttpHeader> headers, string ErrorMessage, HttpStatusCode statusCode)
+        {
             string errorMessage = null;
             JObject errorBody;
 
             int? retryAfter = null;
             {
-                var retryHeader = requestResult.Headers.FirstOrDefault(header => header.Name.Equals("Retry-After"));
+                var retryHeader = headers.FirstOrDefault(header => header.Name.Equals("Retry-After"));
                 if (retryHeader != null) retryAfter = Convert.ToInt32(retryHeader.Value);
             }
 
-            var readToEnd = requestResult.Content;
-            if (string.IsNullOrEmpty(readToEnd))
+            if (string.IsNullOrEmpty(content))
                 errorBody = new JObject();
             else
-                errorBody = JObject.Parse(readToEnd);
+                errorBody = JObject.Parse(content);
 
             if (errorBody.ContainsKey("message")) errorMessage = errorBody.GetValue("message").ToString();
 
             var keys = new[] {"X-Platform-Error-Code", "X-Influx-Error", "X-InfluxDb-Error"};
 
             if (string.IsNullOrEmpty(errorMessage))
-                errorMessage = requestResult.Headers
+                errorMessage = headers
                     .Where(header => keys.Contains(header.Name, StringComparer.OrdinalIgnoreCase))
                     .Select(header => header.Value.ToString()).FirstOrDefault();
 
-            if (string.IsNullOrEmpty(errorMessage)) errorMessage = requestResult.ErrorMessage;
+            if (string.IsNullOrEmpty(errorMessage)) errorMessage = ErrorMessage;
 
-            return new HttpException(errorMessage, (int) requestResult.StatusCode)
+            return new HttpException(errorMessage, (int) statusCode)
                 {ErrorBody = errorBody, RetryAfter = retryAfter};
         }
     }

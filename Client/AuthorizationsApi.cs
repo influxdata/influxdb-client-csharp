@@ -1,13 +1,12 @@
 using System;
 using System.Collections.Generic;
-using InfluxDB.Client.Core;
-using InfluxDB.Client.Core.Internal;
 using InfluxDB.Client.Api.Domain;
 using InfluxDB.Client.Api.Service;
+using InfluxDB.Client.Core;
 
 namespace InfluxDB.Client
 {
-    public class AuthorizationsApi : AbstractClient
+    public class AuthorizationsApi
     {
         private readonly AuthorizationsService _service;
 

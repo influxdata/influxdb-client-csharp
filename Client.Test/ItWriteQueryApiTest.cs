@@ -70,7 +70,7 @@ namespace InfluxDB.Client.Test
                 new List<string> {record1, record2});
             _writeApi.Flush();
 
-            var query = await _queryApi.Query("from(bucket:\"" + bucketName + "\") |> range(start: 0)",
+            var query =  _queryApi.Query("from(bucket:\"" + bucketName + "\") |> range(start: 0)",
                 _organization.Id);
 
             Assert.AreEqual(1, query.Count);
@@ -100,7 +100,7 @@ namespace InfluxDB.Client.Test
             _writeApi.Flush();
             Thread.Sleep(1000);
 
-            var query = await _queryApi.Query("from(bucket:\"" + bucketName + "\") |> range(start: 0)",
+            var query =  _queryApi.Query("from(bucket:\"" + bucketName + "\") |> range(start: 0)",
                 _organization.Id);
 
             Assert.AreEqual(1, query.Count);
@@ -140,7 +140,7 @@ namespace InfluxDB.Client.Test
             _writeApi.Flush();
             Thread.Sleep(1000);
 
-            var query = await _queryApi.Query("from(bucket:\"" + bucketName + "\") |> range(start: 0)",
+            var query = _queryApi.Query("from(bucket:\"" + bucketName + "\") |> range(start: 0)",
                 _organization.Id);
 
             Assert.AreEqual(1, query.Count);
@@ -182,7 +182,7 @@ namespace InfluxDB.Client.Test
             _writeApi.WriteMeasurements(bucketName, _organization.Id, WritePrecision.S, measurement1, measurement2);
             _writeApi.Flush();
 
-            var measurements = await _queryApi.Query<H20Measurement>(
+            var measurements = _queryApi.Query<H20Measurement>(
                 "from(bucket:\"" + bucketName + "\") |> range(start: 0) |> rename(columns:{_value: \"level\"})",
                 _organization.Id);
 
@@ -212,7 +212,7 @@ namespace InfluxDB.Client.Test
             _writeApi.WriteRecord(bucketName, _organization.Id, WritePrecision.Ns, record);
             _writeApi.Flush();
 
-            var query = await _queryApi.Query("from(bucket:\"" + bucketName + "\") |> range(start: 0) |> last()",
+            var query = _queryApi.Query("from(bucket:\"" + bucketName + "\") |> range(start: 0) |> last()",
                 _organization.Id);
 
             Assert.AreEqual(1, query.Count);
@@ -248,13 +248,13 @@ namespace InfluxDB.Client.Test
             _writeApi.WriteRecord(bucketName, _organization.Id, WritePrecision.Ns, record4);
             _writeApi.WriteRecord(bucketName, _organization.Id, WritePrecision.Ns, record5);
 
-            var query = await _queryApi.Query("from(bucket:\"" + bucketName + "\") |> range(start: 0)",
+            var query = _queryApi.Query("from(bucket:\"" + bucketName + "\") |> range(start: 0)",
                 _organization.Id);
             Assert.AreEqual(0, query.Count);
 
             Thread.Sleep(550);
 
-            query = await _queryApi.Query("from(bucket:\"" + bucketName + "\") |> range(start: 0)",
+            query = _queryApi.Query("from(bucket:\"" + bucketName + "\") |> range(start: 0)",
                 _organization.Id);
             Assert.AreEqual(1, query.Count);
 
@@ -284,7 +284,7 @@ namespace InfluxDB.Client.Test
             _writeApi.WriteRecord(bucketName, _organization.Id, WritePrecision.Ns, record4);
             _writeApi.WriteRecord(bucketName, _organization.Id, WritePrecision.Ns, record5);
 
-            var query = await _queryApi.Query("from(bucket:\"" + bucketName + "\") |> range(start: 0)",
+            var query = _queryApi.Query("from(bucket:\"" + bucketName + "\") |> range(start: 0)",
                 _organization.Id);
             Assert.AreEqual(0, query.Count);
 
@@ -292,7 +292,7 @@ namespace InfluxDB.Client.Test
 
             Thread.Sleep(10);
 
-            query = await _queryApi.Query("from(bucket:\"" + bucketName + "\") |> range(start: 0)",
+            query = _queryApi.Query("from(bucket:\"" + bucketName + "\") |> range(start: 0)",
                 _organization.Id);
             Assert.AreEqual(1, query.Count);
 
@@ -313,13 +313,13 @@ namespace InfluxDB.Client.Test
 
             _writeApi.WriteRecord(bucketName, _organization.Id, WritePrecision.Ns, record);
 
-            var query = await _queryApi.Query("from(bucket:\"" + bucketName + "\") |> range(start: 0) |> last()",
+            var query = _queryApi.Query("from(bucket:\"" + bucketName + "\") |> range(start: 0) |> last()",
                 _organization.Id);
             Assert.AreEqual(0, query.Count);
 
             Thread.Sleep(5_000);
 
-            query = await _queryApi.Query("from(bucket:\"" + bucketName + "\") |> range(start: 0) |> last()",
+            query = _queryApi.Query("from(bucket:\"" + bucketName + "\") |> range(start: 0) |> last()",
                 _organization.Id);
 
             Assert.AreEqual(1, query.Count);
@@ -384,7 +384,7 @@ namespace InfluxDB.Client.Test
             _writeApi.Flush();
             _writeApi.Dispose();
             
-            var query = await _queryApi.Query("from(bucket:\"" + bucketName + "\") |> range(start: 0) |> last()",
+            var query = _queryApi.Query("from(bucket:\"" + bucketName + "\") |> range(start: 0) |> last()",
                 _organization.Id);
             Assert.AreEqual(0, query.Count);
         }
@@ -416,7 +416,7 @@ namespace InfluxDB.Client.Test
 
             Thread.Sleep(100);
             
-            var query = await _queryApi.Query("from(bucket:\"" + bucketName + "\") |> range(start: 0) |> last()",
+            var query = _queryApi.Query("from(bucket:\"" + bucketName + "\") |> range(start: 0) |> last()",
                 _organization.Id);
             
             Assert.AreEqual(1, query.Count);
