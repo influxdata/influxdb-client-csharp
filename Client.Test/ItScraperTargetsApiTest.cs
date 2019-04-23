@@ -68,7 +68,7 @@ namespace InfluxDB.Client.Test
 
             Assert.IsNotNull(scraper);
             Assert.IsNotEmpty(scraper.Id);
-            Assert.AreEqual(_organization.Name, scraper.Organization);
+            Assert.AreEqual(_organization.Id, scraper.OrgID);
             Assert.AreEqual(_bucket.Name, scraper.Bucket);
 
             var links = scraper.Links;

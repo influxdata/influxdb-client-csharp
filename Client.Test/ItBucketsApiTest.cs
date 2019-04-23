@@ -50,8 +50,7 @@ namespace InfluxDB.Client.Test
             var cloned = _bucketsApi.CloneBucket(name, source);
 
             Assert.AreEqual(name, cloned.Name);
-            Assert.AreEqual(_organization.Id, cloned.OrganizationID);
-            Assert.AreEqual(_organization.Name, cloned.Organization);
+            Assert.AreEqual(_organization.Id, cloned.OrgID);
             Assert.IsNull(cloned.Rp);
             Assert.AreEqual(1, cloned.RetentionRules.Count);
             Assert.AreEqual(3600, cloned.RetentionRules[0].EverySeconds);
@@ -81,8 +80,7 @@ namespace InfluxDB.Client.Test
             Assert.IsNotNull(bucket);
             Assert.IsNotEmpty(bucket.Id);
             Assert.AreEqual(bucket.Name, bucketName);
-            Assert.AreEqual(bucket.OrganizationID, _organization.Id);
-            Assert.AreEqual(bucket.Organization, _organization.Name);
+            Assert.AreEqual(bucket.OrgID, _organization.Id);
             Assert.AreEqual(bucket.RetentionRules.Count, 1);
             Assert.AreEqual(bucket.RetentionRules[0].EverySeconds, 3600L);
             Assert.AreEqual(bucket.RetentionRules[0].Type, BucketRetentionRules.TypeEnum.Expire);
@@ -103,7 +101,7 @@ namespace InfluxDB.Client.Test
             Assert.IsNotNull(bucket);
             Assert.IsNotEmpty(bucket.Id);
             Assert.AreEqual(bucket.Name, bucketName);
-            Assert.AreEqual(bucket.OrganizationID, _organization.Id);
+            Assert.AreEqual(bucket.OrgID, _organization.Id);
             Assert.AreEqual(bucket.RetentionRules.Count, 0);
         }
 
@@ -137,8 +135,7 @@ namespace InfluxDB.Client.Test
             Assert.IsNotNull(bucketById);
             Assert.AreEqual(bucketById.Id, bucket.Id);
             Assert.AreEqual(bucketById.Name, bucket.Name);
-            Assert.AreEqual(bucketById.OrganizationID, bucket.OrganizationID);
-            Assert.AreEqual(bucketById.Organization, bucket.Organization);
+            Assert.AreEqual(bucketById.OrgID, bucket.OrgID);
             Assert.AreEqual(bucketById.RetentionRules.Count, bucket.RetentionRules.Count);
             Assert.AreEqual(bucketById.Links.Self, bucket.Links.Self);
         }
@@ -159,7 +156,7 @@ namespace InfluxDB.Client.Test
 
             Assert.IsNotNull(bucket);
             Assert.AreEqual("my-bucket", bucket.Name);
-            Assert.AreEqual( FindMyOrg().Id, bucket.OrganizationID);
+            Assert.AreEqual( FindMyOrg().Id, bucket.OrgID);
         }
 
         [Test]
@@ -415,8 +412,7 @@ namespace InfluxDB.Client.Test
             Assert.IsNotEmpty(updatedBucket.Id);
             Assert.AreEqual(updatedBucket.Id, createBucket.Id);
             Assert.AreEqual(updatedBucket.Name, "Therm sensor 2000");
-            Assert.AreEqual(updatedBucket.OrganizationID, createBucket.OrganizationID);
-            Assert.AreEqual(updatedBucket.Organization, createBucket.Organization);
+            Assert.AreEqual(updatedBucket.OrgID, createBucket.OrgID);
             Assert.AreEqual(updatedBucket.RetentionRules[0].EverySeconds, 1000);
         }
     }

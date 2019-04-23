@@ -36,14 +36,12 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="self">self.</param>
         /// <param name="ast">ast.</param>
         /// <param name="analyze">analyze.</param>
-        /// <param name="spec">spec.</param>
         /// <param name="suggestions">suggestions.</param>
-        public RoutesQuery(string self = default(string), string ast = default(string), string analyze = default(string), string spec = default(string), string suggestions = default(string))
+        public RoutesQuery(string self = default(string), string ast = default(string), string analyze = default(string), string suggestions = default(string))
         {
             this.Self = self;
             this.Ast = ast;
             this.Analyze = analyze;
-            this.Spec = spec;
             this.Suggestions = suggestions;
         }
 
@@ -66,12 +64,6 @@ namespace InfluxDB.Client.Api.Domain
         public string Analyze { get; set; }
 
         /// <summary>
-        /// Gets or Sets Spec
-        /// </summary>
-        [DataMember(Name="spec", EmitDefaultValue=false)]
-        public string Spec { get; set; }
-
-        /// <summary>
         /// Gets or Sets Suggestions
         /// </summary>
         [DataMember(Name="suggestions", EmitDefaultValue=false)]
@@ -88,7 +80,6 @@ namespace InfluxDB.Client.Api.Domain
             sb.Append("  Self: ").Append(Self).Append("\n");
             sb.Append("  Ast: ").Append(Ast).Append("\n");
             sb.Append("  Analyze: ").Append(Analyze).Append("\n");
-            sb.Append("  Spec: ").Append(Spec).Append("\n");
             sb.Append("  Suggestions: ").Append(Suggestions).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -140,11 +131,6 @@ namespace InfluxDB.Client.Api.Domain
                     this.Analyze.Equals(input.Analyze))
                 ) && 
                 (
-                    this.Spec == input.Spec ||
-                    (this.Spec != null &&
-                    this.Spec.Equals(input.Spec))
-                ) && 
-                (
                     this.Suggestions == input.Suggestions ||
                     (this.Suggestions != null &&
                     this.Suggestions.Equals(input.Suggestions))
@@ -166,8 +152,6 @@ namespace InfluxDB.Client.Api.Domain
                     hashCode = hashCode * 59 + this.Ast.GetHashCode();
                 if (this.Analyze != null)
                     hashCode = hashCode * 59 + this.Analyze.GetHashCode();
-                if (this.Spec != null)
-                    hashCode = hashCode * 59 + this.Spec.GetHashCode();
                 if (this.Suggestions != null)
                     hashCode = hashCode * 59 + this.Suggestions.GetHashCode();
                 return hashCode;

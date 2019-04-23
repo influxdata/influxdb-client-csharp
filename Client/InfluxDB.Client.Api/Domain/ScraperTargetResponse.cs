@@ -33,12 +33,12 @@ namespace InfluxDB.Client.Api.Domain
         /// <summary>
         /// Initializes a new instance of the <see cref="ScraperTargetResponse" /> class.
         /// </summary>
-        /// <param name="organization">name of the organization.</param>
+        /// <param name="org">name of the organization.</param>
         /// <param name="bucket">name of the bucket.</param>
         /// <param name="links">links.</param>
-        public ScraperTargetResponse(string organization = default(string), string bucket = default(string), ScraperTargetResponseLinks links = default(ScraperTargetResponseLinks), string name = default(string), TypeEnum? type = default(TypeEnum?), string url = default(string), string orgID = default(string), string bucketID = default(string)) : base(name, type, url, orgID, bucketID)
+        public ScraperTargetResponse(string org = default(string), string bucket = default(string), ScraperTargetResponseLinks links = default(ScraperTargetResponseLinks), string name = default(string), TypeEnum? type = default(TypeEnum?), string url = default(string), string orgID = default(string), string bucketID = default(string)) : base(name, type, url, orgID, bucketID)
         {
-            this.Organization = organization;
+            this.Org = org;
             this.Bucket = bucket;
             this.Links = links;
         }
@@ -53,8 +53,8 @@ namespace InfluxDB.Client.Api.Domain
         /// name of the organization
         /// </summary>
         /// <value>name of the organization</value>
-        [DataMember(Name="organization", EmitDefaultValue=false)]
-        public string Organization { get; set; }
+        [DataMember(Name="org", EmitDefaultValue=false)]
+        public string Org { get; set; }
 
         /// <summary>
         /// name of the bucket
@@ -79,7 +79,7 @@ namespace InfluxDB.Client.Api.Domain
             sb.Append("class ScraperTargetResponse {\n");
             sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
-            sb.Append("  Organization: ").Append(Organization).Append("\n");
+            sb.Append("  Org: ").Append(Org).Append("\n");
             sb.Append("  Bucket: ").Append(Bucket).Append("\n");
             sb.Append("  Links: ").Append(Links).Append("\n");
             sb.Append("}\n");
@@ -122,9 +122,9 @@ namespace InfluxDB.Client.Api.Domain
                     this.Id.Equals(input.Id))
                 ) && base.Equals(input) && 
                 (
-                    this.Organization == input.Organization ||
-                    (this.Organization != null &&
-                    this.Organization.Equals(input.Organization))
+                    this.Org == input.Org ||
+                    (this.Org != null &&
+                    this.Org.Equals(input.Org))
                 ) && base.Equals(input) && 
                 (
                     this.Bucket == input.Bucket ||
@@ -149,8 +149,8 @@ namespace InfluxDB.Client.Api.Domain
                 int hashCode = base.GetHashCode();
                 if (this.Id != null)
                     hashCode = hashCode * 59 + this.Id.GetHashCode();
-                if (this.Organization != null)
-                    hashCode = hashCode * 59 + this.Organization.GetHashCode();
+                if (this.Org != null)
+                    hashCode = hashCode * 59 + this.Org.GetHashCode();
                 if (this.Bucket != null)
                     hashCode = hashCode * 59 + this.Bucket.GetHashCode();
                 if (this.Links != null)

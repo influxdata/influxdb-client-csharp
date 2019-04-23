@@ -155,7 +155,7 @@ namespace InfluxDB.Client.Test
             point = Point.Measurement("h2o")
                 .Tag("location", "europe")
                 .Field("level", 2)
-                .Timestamp(TimeSpan.FromHours(356), WritePrecision.Ms);
+                .Timestamp(TimeSpan.FromHours(356), WritePrecision.Us);
 
             Assert.AreEqual("h2o,location=europe level=2i 1281600000000", point.ToLineProtocol());
 

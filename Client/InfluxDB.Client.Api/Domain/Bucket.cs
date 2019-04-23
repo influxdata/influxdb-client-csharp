@@ -40,12 +40,11 @@ namespace InfluxDB.Client.Api.Domain
         /// </summary>
         /// <param name="links">links.</param>
         /// <param name="name">name (required).</param>
-        /// <param name="organizationID">organizationID.</param>
-        /// <param name="organization">organization.</param>
+        /// <param name="orgID">orgID.</param>
         /// <param name="rp">rp.</param>
         /// <param name="retentionRules">rules to expire or retain data.  No rules means data never expires. (required).</param>
         /// <param name="labels">labels.</param>
-        public Bucket(BucketLinks links = default(BucketLinks), string name = default(string), string organizationID = default(string), string organization = default(string), string rp = default(string), List<BucketRetentionRules> retentionRules = default(List<BucketRetentionRules>), Labels labels = default(Labels))
+        public Bucket(BucketLinks links = default(BucketLinks), string name = default(string), string orgID = default(string), string rp = default(string), List<BucketRetentionRules> retentionRules = default(List<BucketRetentionRules>), Labels labels = default(Labels))
         {
             // to ensure "name" is required (not null)
             if (name == null)
@@ -66,8 +65,7 @@ namespace InfluxDB.Client.Api.Domain
                 this.RetentionRules = retentionRules;
             }
             this.Links = links;
-            this.OrganizationID = organizationID;
-            this.Organization = organization;
+            this.OrgID = orgID;
             this.Rp = rp;
             this.Labels = labels;
         }
@@ -91,16 +89,10 @@ namespace InfluxDB.Client.Api.Domain
         public string Name { get; set; }
 
         /// <summary>
-        /// Gets or Sets OrganizationID
+        /// Gets or Sets OrgID
         /// </summary>
-        [DataMember(Name="organizationID", EmitDefaultValue=false)]
-        public string OrganizationID { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Organization
-        /// </summary>
-        [DataMember(Name="organization", EmitDefaultValue=false)]
-        public string Organization { get; set; }
+        [DataMember(Name="orgID", EmitDefaultValue=false)]
+        public string OrgID { get; set; }
 
         /// <summary>
         /// Gets or Sets Rp
@@ -132,8 +124,7 @@ namespace InfluxDB.Client.Api.Domain
             sb.Append("  Links: ").Append(Links).Append("\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
-            sb.Append("  OrganizationID: ").Append(OrganizationID).Append("\n");
-            sb.Append("  Organization: ").Append(Organization).Append("\n");
+            sb.Append("  OrgID: ").Append(OrgID).Append("\n");
             sb.Append("  Rp: ").Append(Rp).Append("\n");
             sb.Append("  RetentionRules: ").Append(RetentionRules).Append("\n");
             sb.Append("  Labels: ").Append(Labels).Append("\n");
@@ -187,14 +178,9 @@ namespace InfluxDB.Client.Api.Domain
                     this.Name.Equals(input.Name))
                 ) && 
                 (
-                    this.OrganizationID == input.OrganizationID ||
-                    (this.OrganizationID != null &&
-                    this.OrganizationID.Equals(input.OrganizationID))
-                ) && 
-                (
-                    this.Organization == input.Organization ||
-                    (this.Organization != null &&
-                    this.Organization.Equals(input.Organization))
+                    this.OrgID == input.OrgID ||
+                    (this.OrgID != null &&
+                    this.OrgID.Equals(input.OrgID))
                 ) && 
                 (
                     this.Rp == input.Rp ||
@@ -228,10 +214,8 @@ namespace InfluxDB.Client.Api.Domain
                     hashCode = hashCode * 59 + this.Id.GetHashCode();
                 if (this.Name != null)
                     hashCode = hashCode * 59 + this.Name.GetHashCode();
-                if (this.OrganizationID != null)
-                    hashCode = hashCode * 59 + this.OrganizationID.GetHashCode();
-                if (this.Organization != null)
-                    hashCode = hashCode * 59 + this.Organization.GetHashCode();
+                if (this.OrgID != null)
+                    hashCode = hashCode * 59 + this.OrgID.GetHashCode();
                 if (this.Rp != null)
                     hashCode = hashCode * 59 + this.Rp.GetHashCode();
                 if (this.RetentionRules != null)

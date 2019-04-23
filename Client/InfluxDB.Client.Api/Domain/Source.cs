@@ -78,13 +78,7 @@ namespace InfluxDB.Client.Api.Domain
             /// Enum Influxql for value: influxql
             /// </summary>
             [EnumMember(Value = "influxql")]
-            Influxql = 2,
-            
-            /// <summary>
-            /// Enum Spec for value: spec
-            /// </summary>
-            [EnumMember(Value = "spec")]
-            Spec = 3
+            Influxql = 2
         }
 
 

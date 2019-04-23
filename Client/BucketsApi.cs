@@ -87,7 +87,7 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(name, nameof(name));
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
 
-            var bucket = new Bucket(null, name, orgId, null, null, new List<BucketRetentionRules>());
+            var bucket = new Bucket(null, name, orgId, null, new List<BucketRetentionRules>());
             if (bucketRetentionRules != null) bucket.RetentionRules.Add(bucketRetentionRules);
 
             return CreateBucket(bucket);
@@ -157,8 +157,7 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(clonedName, nameof(clonedName));
             Arguments.CheckNotNull(bucket, nameof(bucket));
 
-            var cloned = new Bucket(null, clonedName, bucket.OrganizationID,
-                bucket.Organization, bucket.Rp, bucket.RetentionRules);
+            var cloned = new Bucket(null, clonedName, bucket.OrgID, bucket.Rp, bucket.RetentionRules);
 
             var created = CreateBucket(cloned);
 

@@ -33,17 +33,41 @@ namespace InfluxDB.Client.Api.Domain
         /// <summary>
         /// Initializes a new instance of the <see cref="CellUpdate" /> class.
         /// </summary>
-        /// <param name="name">name.</param>
-        public CellUpdate(string name = default(string))
+        /// <param name="x">x.</param>
+        /// <param name="y">y.</param>
+        /// <param name="w">w.</param>
+        /// <param name="h">h.</param>
+        public CellUpdate(int? x = default(int?), int? y = default(int?), int? w = default(int?), int? h = default(int?))
         {
-            this.Name = name;
+            this.X = x;
+            this.Y = y;
+            this.W = w;
+            this.H = h;
         }
 
         /// <summary>
-        /// Gets or Sets Name
+        /// Gets or Sets X
         /// </summary>
-        [DataMember(Name="name", EmitDefaultValue=false)]
-        public string Name { get; set; }
+        [DataMember(Name="x", EmitDefaultValue=false)]
+        public int? X { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Y
+        /// </summary>
+        [DataMember(Name="y", EmitDefaultValue=false)]
+        public int? Y { get; set; }
+
+        /// <summary>
+        /// Gets or Sets W
+        /// </summary>
+        [DataMember(Name="w", EmitDefaultValue=false)]
+        public int? W { get; set; }
+
+        /// <summary>
+        /// Gets or Sets H
+        /// </summary>
+        [DataMember(Name="h", EmitDefaultValue=false)]
+        public int? H { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -53,7 +77,10 @@ namespace InfluxDB.Client.Api.Domain
         {
             var sb = new StringBuilder();
             sb.Append("class CellUpdate {\n");
-            sb.Append("  Name: ").Append(Name).Append("\n");
+            sb.Append("  X: ").Append(X).Append("\n");
+            sb.Append("  Y: ").Append(Y).Append("\n");
+            sb.Append("  W: ").Append(W).Append("\n");
+            sb.Append("  H: ").Append(H).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -89,9 +116,24 @@ namespace InfluxDB.Client.Api.Domain
 
             return 
                 (
-                    this.Name == input.Name ||
-                    (this.Name != null &&
-                    this.Name.Equals(input.Name))
+                    this.X == input.X ||
+                    (this.X != null &&
+                    this.X.Equals(input.X))
+                ) && 
+                (
+                    this.Y == input.Y ||
+                    (this.Y != null &&
+                    this.Y.Equals(input.Y))
+                ) && 
+                (
+                    this.W == input.W ||
+                    (this.W != null &&
+                    this.W.Equals(input.W))
+                ) && 
+                (
+                    this.H == input.H ||
+                    (this.H != null &&
+                    this.H.Equals(input.H))
                 );
         }
 
@@ -104,8 +146,14 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
-                if (this.Name != null)
-                    hashCode = hashCode * 59 + this.Name.GetHashCode();
+                if (this.X != null)
+                    hashCode = hashCode * 59 + this.X.GetHashCode();
+                if (this.Y != null)
+                    hashCode = hashCode * 59 + this.Y.GetHashCode();
+                if (this.W != null)
+                    hashCode = hashCode * 59 + this.W.GetHashCode();
+                if (this.H != null)
+                    hashCode = hashCode * 59 + this.H.GetHashCode();
                 return hashCode;
             }
         }

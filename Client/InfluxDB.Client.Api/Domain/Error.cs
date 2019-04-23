@@ -87,16 +87,22 @@ namespace InfluxDB.Client.Api.Domain
             Forbidden = 8,
             
             /// <summary>
+            /// Enum Toomanyrequests for value: too many requests
+            /// </summary>
+            [EnumMember(Value = "too many requests")]
+            Toomanyrequests = 9,
+            
+            /// <summary>
             /// Enum Unauthorized for value: unauthorized
             /// </summary>
             [EnumMember(Value = "unauthorized")]
-            Unauthorized = 9,
+            Unauthorized = 10,
             
             /// <summary>
             /// Enum Methodnotallowed for value: method not allowed
             /// </summary>
             [EnumMember(Value = "method not allowed")]
-            Methodnotallowed = 10
+            Methodnotallowed = 11
         }
 
         /// <summary>

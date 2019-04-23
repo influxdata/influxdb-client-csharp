@@ -25,7 +25,7 @@ using OpenAPIDateConverter = InfluxDB.Client.Api.Client.OpenAPIDateConverter;
 namespace InfluxDB.Client.Api.Domain
 {
     /// <summary>
-    /// query influx with specified return formatting. The spec and query fields are mutually exclusive.
+    /// query influx with specified return formatting.
     /// </summary>
     [DataContract]
     public partial class Query :  IEquatable<Query>
@@ -67,13 +67,12 @@ namespace InfluxDB.Client.Api.Domain
         /// </summary>
         /// <param name="_extern">_extern.</param>
         /// <param name="query">query script to execute. (required).</param>
-        /// <param name="spec">spec.</param>
         /// <param name="type">type of query (default to TypeEnum.Flux).</param>
         /// <param name="db">required for influxql type queries.</param>
         /// <param name="rp">required for influxql type queries.</param>
         /// <param name="cluster">required for influxql type queries.</param>
         /// <param name="dialect">dialect.</param>
-        public Query(System.IO.Stream _extern = default(System.IO.Stream), string query = default(string), QuerySpecification spec = default(QuerySpecification), TypeEnum? type = TypeEnum.Flux, string db = default(string), string rp = default(string), string cluster = default(string), Dialect dialect = default(Dialect))
+        public Query(System.IO.Stream _extern = default(System.IO.Stream), string query = default(string), TypeEnum? type = TypeEnum.Flux, string db = default(string), string rp = default(string), string cluster = default(string), Dialect dialect = default(Dialect))
         {
             // to ensure "query" is required (not null)
             if (query == null)
@@ -85,7 +84,6 @@ namespace InfluxDB.Client.Api.Domain
                 this._Query = query;
             }
             this.Extern = _extern;
-            this.Spec = spec;
             // use default value if no "type" provided
             if (type == null)
             {
@@ -113,12 +111,6 @@ namespace InfluxDB.Client.Api.Domain
         /// <value>query script to execute.</value>
         [DataMember(Name="query", EmitDefaultValue=false)]
         public string _Query { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Spec
-        /// </summary>
-        [DataMember(Name="spec", EmitDefaultValue=false)]
-        public QuerySpecification Spec { get; set; }
 
 
         /// <summary>
@@ -158,7 +150,6 @@ namespace InfluxDB.Client.Api.Domain
             sb.Append("class Query {\n");
             sb.Append("  Extern: ").Append(Extern).Append("\n");
             sb.Append("  _Query: ").Append(_Query).Append("\n");
-            sb.Append("  Spec: ").Append(Spec).Append("\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  Db: ").Append(Db).Append("\n");
             sb.Append("  Rp: ").Append(Rp).Append("\n");
@@ -209,11 +200,6 @@ namespace InfluxDB.Client.Api.Domain
                     this._Query.Equals(input._Query))
                 ) && 
                 (
-                    
-                    (this.Spec != null &&
-                    this.Spec.Equals(input.Spec))
-                ) && 
-                (
                     this.Type == input.Type ||
                     (this.Type != null &&
                     this.Type.Equals(input.Type))
@@ -253,8 +239,6 @@ namespace InfluxDB.Client.Api.Domain
                     hashCode = hashCode * 59 + this.Extern.GetHashCode();
                 if (this._Query != null)
                     hashCode = hashCode * 59 + this._Query.GetHashCode();
-                if (this.Spec != null)
-                    hashCode = hashCode * 59 + this.Spec.GetHashCode();
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.Db != null)
