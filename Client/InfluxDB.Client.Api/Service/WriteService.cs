@@ -41,7 +41,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="accept">specifies the return content format. (optional, default to application/json)</param>
         /// <param name="precision">specifies the precision for the unix timestamps within the body line-protocol (optional)</param>
         /// <returns></returns>
-        void WritePost (string org, string bucket, string body, string zapTraceSpan = null, string contentEncoding = null, string contentType = null, int? contentLength = null, string accept = null, WritePrecision? precision = null);
+        void WritePost (string org, string bucket, byte[] body, string zapTraceSpan = null, string contentEncoding = null, string contentType = null, int? contentLength = null, string accept = null, WritePrecision? precision = null);
 
         /// <summary>
         /// write time-series data into influxdb
@@ -60,7 +60,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="accept">specifies the return content format. (optional, default to application/json)</param>
         /// <param name="precision">specifies the precision for the unix timestamps within the body line-protocol (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<Object> WritePostWithHttpInfo (string org, string bucket, string body, string zapTraceSpan = null, string contentEncoding = null, string contentType = null, int? contentLength = null, string accept = null, WritePrecision? precision = null);
+        ApiResponse<Object> WritePostWithHttpInfo (string org, string bucket, byte[] body, string zapTraceSpan = null, string contentEncoding = null, string contentType = null, int? contentLength = null, string accept = null, WritePrecision? precision = null);
         #endregion Synchronous Operations
         #region Asynchronous Operations
         /// <summary>
@@ -80,7 +80,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="accept">specifies the return content format. (optional, default to application/json)</param>
         /// <param name="precision">specifies the precision for the unix timestamps within the body line-protocol (optional)</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task WritePostAsync (string org, string bucket, string body, string zapTraceSpan = null, string contentEncoding = null, string contentType = null, int? contentLength = null, string accept = null, WritePrecision? precision = null);
+        System.Threading.Tasks.Task WritePostAsync (string org, string bucket, byte[] body, string zapTraceSpan = null, string contentEncoding = null, string contentType = null, int? contentLength = null, string accept = null, WritePrecision? precision = null);
 
         /// <summary>
         /// write time-series data into influxdb
@@ -99,7 +99,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="accept">specifies the return content format. (optional, default to application/json)</param>
         /// <param name="precision">specifies the precision for the unix timestamps within the body line-protocol (optional)</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> WritePostAsyncWithHttpInfo (string org, string bucket, string body, string zapTraceSpan = null, string contentEncoding = null, string contentType = null, int? contentLength = null, string accept = null, WritePrecision? precision = null);
+        System.Threading.Tasks.Task<ApiResponse<Object>> WritePostAsyncWithHttpInfo (string org, string bucket, byte[] body, string zapTraceSpan = null, string contentEncoding = null, string contentType = null, int? contentLength = null, string accept = null, WritePrecision? precision = null);
         #endregion Asynchronous Operations
     }
 
@@ -214,7 +214,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="accept">specifies the return content format. (optional, default to application/json)</param>
         /// <param name="precision">specifies the precision for the unix timestamps within the body line-protocol (optional)</param>
         /// <returns></returns>
-        public void WritePost (string org, string bucket, string body, string zapTraceSpan = null, string contentEncoding = null, string contentType = null, int? contentLength = null, string accept = null, WritePrecision? precision = null)
+        public void WritePost (string org, string bucket, byte[] body, string zapTraceSpan = null, string contentEncoding = null, string contentType = null, int? contentLength = null, string accept = null, WritePrecision? precision = null)
         {
              WritePostWithHttpInfo(org, bucket, body, zapTraceSpan, contentEncoding, contentType, contentLength, accept, precision);
         }
@@ -233,7 +233,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="accept">specifies the return content format. (optional, default to application/json)</param>
         /// <param name="precision">specifies the precision for the unix timestamps within the body line-protocol (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public ApiResponse<Object> WritePostWithHttpInfo (string org, string bucket, string body, string zapTraceSpan = null, string contentEncoding = null, string contentType = null, int? contentLength = null, string accept = null, WritePrecision? precision = null)
+        public ApiResponse<Object> WritePostWithHttpInfo (string org, string bucket, byte[] body, string zapTraceSpan = null, string contentEncoding = null, string contentType = null, int? contentLength = null, string accept = null, WritePrecision? precision = null)
         {
             // verify the required parameter 'org' is set
             if (org == null)
@@ -401,7 +401,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="accept">specifies the return content format. (optional, default to application/json)</param>
         /// <param name="precision">specifies the precision for the unix timestamps within the body line-protocol (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public RestRequest WritePostWithRestRequest (string org, string bucket, string body, string zapTraceSpan = null, string contentEncoding = null, string contentType = null, int? contentLength = null, string accept = null, WritePrecision? precision = null)
+        public RestRequest WritePostWithRestRequest (string org, string bucket, byte[] body, string zapTraceSpan = null, string contentEncoding = null, string contentType = null, int? contentLength = null, string accept = null, WritePrecision? precision = null)
         {
             // verify the required parameter 'org' is set
             if (org == null)
@@ -473,7 +473,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="accept">specifies the return content format. (optional, default to application/json)</param>
         /// <param name="precision">specifies the precision for the unix timestamps within the body line-protocol (optional)</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task WritePostAsync (string org, string bucket, string body, string zapTraceSpan = null, string contentEncoding = null, string contentType = null, int? contentLength = null, string accept = null, WritePrecision? precision = null)
+        public async System.Threading.Tasks.Task WritePostAsync (string org, string bucket, byte[] body, string zapTraceSpan = null, string contentEncoding = null, string contentType = null, int? contentLength = null, string accept = null, WritePrecision? precision = null)
         {
              await WritePostAsyncWithHttpInfo(org, bucket, body, zapTraceSpan, contentEncoding, contentType, contentLength, accept, precision);
 
@@ -493,7 +493,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="accept">specifies the return content format. (optional, default to application/json)</param>
         /// <param name="precision">specifies the precision for the unix timestamps within the body line-protocol (optional)</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Object>> WritePostAsyncWithHttpInfo (string org, string bucket, string body, string zapTraceSpan = null, string contentEncoding = null, string contentType = null, int? contentLength = null, string accept = null, WritePrecision? precision = null)
+        public async System.Threading.Tasks.Task<ApiResponse<Object>> WritePostAsyncWithHttpInfo (string org, string bucket, byte[] body, string zapTraceSpan = null, string contentEncoding = null, string contentType = null, int? contentLength = null, string accept = null, WritePrecision? precision = null)
         {
             // verify the required parameter 'org' is set
             if (org == null)

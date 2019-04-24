@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.annotation.Nonnull;
@@ -265,6 +266,16 @@ public class InfluxCSharpGenerator extends CSharpClientCodegen {
                 })
                 .filter(op -> !op.dataType.endsWith("?"))
                 .forEach(op -> op.dataType += "?");
+
+        //
+        // Use byte array as body parameter
+        //
+        codegenOperation.allParams.stream()
+                .filter(parameter -> parameter.isBodyParam && parameter.dataType.equals("string"))
+                .forEach(parameter -> {
+                    parameter.isByteArray = true;
+                    parameter.dataType = "byte[]";
+                });
 
         //
         // Set base path
