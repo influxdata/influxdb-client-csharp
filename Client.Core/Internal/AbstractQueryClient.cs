@@ -1,17 +1,16 @@
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Text;
 using InfluxDB.Client.Core.Exceptions;
 using InfluxDB.Client.Core.Flux.Domain;
-using InfluxDB.Client.Core.Flux.Exceptions;
 using InfluxDB.Client.Core.Flux.Internal;
 using Newtonsoft.Json.Linq;
 using RestSharp;
 
 namespace InfluxDB.Client.Core.Internal
 {
-    public class AbstractQueryClient
+    public abstract class AbstractQueryClient
     {
         private static readonly FluxResultMapper Mapper = new FluxResultMapper();
 
@@ -81,9 +80,13 @@ namespace InfluxDB.Client.Core.Internal
             {
                 var cancellable = new DefaultCancellable();
 
-                query.AdvancedResponseWriter = (responseStream, restResponse) =>
+                BeforeIntercept(query);
+                    
+                query.AdvancedResponseWriter = (responseStream, response) =>
                 {
-                    RaiseForInfluxError(restResponse);
+                    responseStream = AfterIntercept((int)response.StatusCode, () => response.Headers, responseStream);
+                    
+                    RaiseForInfluxError(response);
                     consumer(cancellable, responseStream);
                 };
 
@@ -98,6 +101,10 @@ namespace InfluxDB.Client.Core.Internal
                 onError(e);
             }
         }
+
+        protected abstract void BeforeIntercept(RestRequest query);
+
+        protected abstract T AfterIntercept<T>(int statusCode, Func<IList<HttpHeader>> headers, T body);
 
         protected void ParseFluxResponseToLines(Action<String> onResponse,
             ICancellable cancellable,

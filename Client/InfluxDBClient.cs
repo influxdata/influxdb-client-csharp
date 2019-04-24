@@ -17,7 +17,6 @@ namespace InfluxDB.Client
         private readonly ApiClient _apiClient;
         private readonly ExceptionFactory _exceptionFactory;
         private readonly HealthService _healthService;
-        //TODO
         private readonly LoggingHandler _loggingHandler;
         private readonly ReadyService _readyService;
 
@@ -29,7 +28,7 @@ namespace InfluxDB.Client
 
             _loggingHandler = new LoggingHandler(LogLevel.None);
 
-            _apiClient = new ApiClient(options);
+            _apiClient = new ApiClient(options, _loggingHandler);
                 
             _exceptionFactory = (methodName, response) =>
                 !response.IsSuccessful ? HttpException.Create(response) : null;
@@ -159,7 +158,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Get the <see cref="Domain.Authorization" /> client.
+        /// Get the <see cref="InfluxDB.Client.Api.Domain.Authorization" /> client.
         /// </summary>
         /// <returns>the new client instance for Authorization API</returns>
         public AuthorizationsApi GetAuthorizationsApi()
@@ -173,7 +172,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Get the <see cref="Domain.Task" /> client.
+        /// Get the <see cref="InfluxDB.Client.Api.Domain.Task" /> client.
         /// </summary>
         /// <returns>the new client instance for Task API</returns>
         public TasksApi GetTasksApi()
@@ -317,6 +316,5 @@ namespace InfluxDB.Client
         {
             return "Basic " + Convert.ToBase64String(Encoding.Default.GetBytes(username + ":" + password));
         }
-
     }
 }

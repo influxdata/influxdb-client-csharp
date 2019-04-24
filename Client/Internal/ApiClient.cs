@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
+using InfluxDB.Client.Core.Internal;
 using RestSharp;
 
 namespace InfluxDB.Client.Api.Client
@@ -14,13 +15,15 @@ namespace InfluxDB.Client.Api.Client
             {"/api/v2/signin", "/api/v2/signout", "/api/v2/setup"};
 
         private readonly InfluxDBClientOptions _options;
+        private readonly LoggingHandler _loggingHandler;
 
         private char[] _sessionToken;
         private bool _signout;
 
-        public ApiClient(InfluxDBClientOptions options)
+        public ApiClient(InfluxDBClientOptions options, LoggingHandler loggingHandler)
         {
             _options = options;
+            _loggingHandler = loggingHandler;
 
             Configuration = new Configuration
             {
@@ -34,10 +37,15 @@ namespace InfluxDB.Client.Api.Client
 
         partial void InterceptRequest(IRestRequest request)
         {
-            Intercept(request);
+            BeforeIntercept(request);
+        }
+
+        partial void InterceptResponse(IRestRequest request, IRestResponse response)
+        {
+            AfterIntercept((int) response.StatusCode, () => LoggingHandler.ToHeaders(response.Headers), response.Content);
         }
         
-        internal void Intercept(IRestRequest request)
+        internal void BeforeIntercept(IRestRequest request)
         {
             if (_signout || _noAuthRoute.Any(requestPath => requestPath.EndsWith(request.Resource))) return;
 
@@ -51,6 +59,13 @@ namespace InfluxDB.Client.Api.Client
 
                 if (_sessionToken != null) request.AddHeader("Cookie", "session=" + new string(_sessionToken));
             }
+            
+            _loggingHandler.BeforeIntercept(request);
+        }
+
+        internal T AfterIntercept<T>(int statusCode, Func<IList<HttpHeader>> headers, T body)
+        {
+            return (T) _loggingHandler.AfterIntercept(statusCode, headers, body);
         }
 
         private void InitToken()

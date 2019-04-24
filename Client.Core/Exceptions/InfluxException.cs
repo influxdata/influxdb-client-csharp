@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Net;
 using InfluxDB.Client.Core.Internal;
@@ -58,7 +57,7 @@ namespace InfluxDB.Client.Core.Exceptions
         {
             Arguments.CheckNotNull(requestResult, nameof(requestResult));
 
-            var httpHeaders = requestResult.Headers.Select(h => new HttpHeader{Name = h.Name, Value = h.Value.ToString()}).ToList();
+            var httpHeaders = LoggingHandler.ToHeaders(requestResult.Headers);
             
             return Create(requestResult.Content, httpHeaders, requestResult.ErrorMessage, requestResult.StatusCode);
         }

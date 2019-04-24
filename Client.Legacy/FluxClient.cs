@@ -350,9 +350,7 @@ namespace InfluxDB.Client.Flux
         {
             try
             {
-                var response = RestClient.Execute(PingRequest());
-
-                RaiseForInfluxError(response);
+                Execute(PingRequest());
 
                 return true;
             }
@@ -372,9 +370,7 @@ namespace InfluxDB.Client.Flux
         {
             try
             {
-                var response = RestClient.Execute(PingRequest());
-
-                RaiseForInfluxError(response);
+                var response = Execute(PingRequest());
 
                 return GetVersion(response);
             }
@@ -404,6 +400,32 @@ namespace InfluxDB.Client.Flux
             return _loggingHandler.Level;
         }
 
+        private IRestResponse Execute(RestRequest request)
+        {
+            BeforeIntercept(request);
+
+            var response = RestClient.Execute(request);
+
+            RaiseForInfluxError(response);
+
+            response.Content = AfterIntercept(
+                (int) response.StatusCode, 
+                () => LoggingHandler.ToHeaders(response.Headers), 
+                response.Content);
+            
+            return response;
+        }
+
+        protected override void BeforeIntercept(RestRequest request)
+        {
+            _loggingHandler.BeforeIntercept(request);
+        }
+
+        protected override T AfterIntercept<T>(int statusCode, Func<IList<HttpHeader>> headers, T body)
+        {
+            return (T) _loggingHandler.AfterIntercept(statusCode, headers, body);
+        }
+
         private string GetVersion(IRestResponse responseHttp)
         {
             Arguments.CheckNotNull(responseHttp, "responseHttp");
@@ -428,12 +450,12 @@ namespace InfluxDB.Client.Flux
         {
             return new RestRequest("ping", Method.GET);
         }
-        
+
         private RestRequest QueryRequest(string query)
         {
             var restRequest = new RestRequest("api/v2/query", Method.POST);
             restRequest.AddParameter("application/json", query, ParameterType.RequestBody);
-            
+
             return restRequest;
         }
     }

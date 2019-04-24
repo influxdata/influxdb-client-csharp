@@ -642,6 +642,16 @@ namespace InfluxDB.Client
             QueryRaw(CreateQuery(query, dialect), orgId, onResponse, onError, onComplete);
         }
         
+        protected override void BeforeIntercept(RestRequest request)
+        {
+            _service.Configuration.ApiClient.BeforeIntercept(request);
+        }
+  
+        protected override T AfterIntercept<T>(int statusCode, Func<IList<HttpHeader>> headers, T body)
+        {
+            return _service.Configuration.ApiClient.AfterIntercept(statusCode, headers, body);
+        }
+        
         private void Query(Query query, string orgId, FluxCsvParser.IFluxResponseConsumer consumer,
             Action<Exception> onError,
             Action onComplete)
@@ -665,7 +675,6 @@ namespace InfluxDB.Client
 
             var request = _service.QueryPostWithRestRequest(null, "text/csv",
                 "application/json", null, orgId, query);
-            _service.Configuration.ApiClient.Intercept(request);
             return request;
         }
         

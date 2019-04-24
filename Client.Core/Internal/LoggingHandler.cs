@@ -1,70 +1,126 @@
+using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
-using System.Net.Http;
-using System.Threading;
-using System.Threading.Tasks;
+using System.Text;
+using RestSharp;
 
 namespace InfluxDB.Client.Core.Internal
 {
-    public class LoggingHandler: DelegatingHandler
+    public class LoggingHandler
     {
         public LogLevel Level { get; set; }
 
         public LoggingHandler(LogLevel logLevel)
         {
             Level = logLevel;
-            InnerHandler = new HttpClientHandler();
         }
 
-        protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request,
-            CancellationToken cancellationToken)
+        public void BeforeIntercept(IRestRequest request)
         {
             if (Level == LogLevel.None)
             {
-                return await base.SendAsync(request, cancellationToken);
+                return;
             }
 
             var isBody = Level == LogLevel.Body;
             var isHeader = isBody || Level == LogLevel.Headers;
 
-            Trace.WriteLine($"--> {request.Method} {request.RequestUri}");
+            Trace.WriteLine($"--> {request.Method} {request.Resource}");
 
             if (isHeader)
             {
-                foreach (var emp in request.Headers)
-                {
-                    Trace.WriteLine($"--> Header: {emp.Key} Value: {emp.Value.First()}");
-                }
+                var headers = ToHeaders(request.Parameters);
+                LogHeaders(headers, "-->");
             }
 
             if (isBody)
             {
-                Trace.WriteLine($"--> Body: {request.Content?.ReadAsStringAsync().Result}");
+                var body = request.Parameters.FirstOrDefault(parameter =>
+                    parameter.Type.Equals(ParameterType.RequestBody));
+
+                if (body != null)
+                {
+                    string stringBody;
+                    
+                    if (body.Value is byte[] bytes)
+                    {
+                        stringBody = Encoding.UTF8.GetString(bytes);
+                    }
+                    else
+                    {
+                        stringBody = body.Value.ToString();
+                    }
+                    
+                    Trace.WriteLine($"--> Body: {stringBody}");
+                }
             }
 
             Trace.WriteLine("--> END");
             Trace.WriteLine("-->");
+        }
 
-            var response = await base.SendAsync(request, cancellationToken);
+        public object AfterIntercept(int statusCode, Func<IList<HttpHeader>> headers, object body)
+        {
+            var freshBody = body;
+            if (Level == LogLevel.None)
+            {
+                return freshBody;
+            }
 
-            Trace.WriteLine($"<-- {response.StatusCode}");
+            var isBody = Level == LogLevel.Body;
+            var isHeader = isBody || Level == LogLevel.Headers;
+
+            Trace.WriteLine($"<-- {statusCode}");
 
             if (isHeader)
             {
-                foreach (var emp in response.Headers)
+                LogHeaders(headers.Invoke(), "<--");
+            }
+
+            if (isBody && body != null)
+            {
+                string stringBody;
+
+                if (body is Stream)
                 {
-                    Trace.WriteLine($"<-- Header: {emp.Key}: {emp.Value.First()}");
+                    var stream = body as Stream;
+                    var sr = new StreamReader(stream);
+                    stringBody = sr.ReadToEnd();
+
+                    freshBody = new MemoryStream(Encoding.UTF8.GetBytes(stringBody));
+                }
+                else
+                {
+                    stringBody = body.ToString();
+                }
+
+                if (!string.IsNullOrEmpty(stringBody))
+                {
+                    Trace.WriteLine($"<-- Body: {stringBody}");
                 }
             }
 
-            if (isBody)
-            {
-                Trace.WriteLine($"<-- Body: {response.Content?.ReadAsStringAsync().Result}");
-            }
-                
             Trace.WriteLine("<-- END");
 
-            return response;
+            return freshBody;
+        }
+
+        public static List<HttpHeader> ToHeaders(IList<Parameter> parameters)
+        {
+            return parameters
+                .Where(parameter => parameter.Type.Equals(ParameterType.HttpHeader))
+                .Select(h => new HttpHeader {Name = h.Name, Value = h.Value.ToString()})
+                .ToList();
+        }
+
+        private void LogHeaders(IList<HttpHeader> headers, string direction)
+        {
+            foreach (var emp in headers)
+            {
+                Trace.WriteLine($"{direction} Header: {emp.Name} Value: {emp.Value}");
+            }
         }
     }
 }
