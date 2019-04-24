@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using InfluxDB.Client.Core.Test;
 using InfluxDB.Client.Domain;
+using InfluxDB.Client.Api.Domain;
 using NUnit.Framework;
 using Task = System.Threading.Tasks.Task;
 
@@ -15,14 +16,14 @@ namespace InfluxDB.Client.Test
         protected string InfluxDbUrl;
         
         [SetUp]
-        public new async Task SetUp()
+        public new void SetUp()
         {
             InfluxDbUrl = GetInfluxDb2Url();
             Client = InfluxDBClientFactory.Create(InfluxDbUrl, "my-user", "my-password".ToCharArray());
 
             if (!TestContext.CurrentContext.Test.Properties.ContainsKey("basic_auth"))
             {
-                var token = await FindMyToken();
+                var token = FindMyToken();
                 
                 Client.Dispose();
                 Client = InfluxDBClientFactory.Create(InfluxDbUrl, token.ToCharArray());
@@ -43,15 +44,15 @@ namespace InfluxDB.Client.Test
                                    CultureInfo.InvariantCulture) + "-IT";
         }
 
-        protected async Task<Organization> FindMyOrg()
+        protected Organization FindMyOrg()
         {
-            return (await Client.GetOrganizationsApi().FindOrganizations())
+            return Client.GetOrganizationsApi().FindOrganizations()
                 .First(organization => organization.Name.Equals("my-org"));
         }
 
-        protected async Task<string> FindMyToken()
+        protected string FindMyToken()
         {
-            var authorizations = await Client.GetAuthorizationsApi().FindAuthorizations();
+            var authorizations = Client.GetAuthorizationsApi().FindAuthorizations();
             
             return authorizations.Where(authorization =>
             {
@@ -59,8 +60,8 @@ namespace InfluxDB.Client.Test
                 {
                     var resource = permission.Resource;
 
-                    return resource.Id == null && resource.OrgId == null &&
-                           resource.Type.Equals(ResourceType.Orgs);
+                    return resource.Id == null && resource.OrgID == null &&
+                           resource.Type.Equals(PermissionResource.TypeEnum.Orgs);
                 }).Count();
 
                 return count > 0;

@@ -1,32 +1,35 @@
-using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using InfluxDB.Client.Core;
-using InfluxDB.Client.Core.Internal;
 using InfluxDB.Client.Domain;
-using InfluxDB.Client.Internal;
-using Task = System.Threading.Tasks.Task;
+using InfluxDB.Client.Api.Domain;
+using InfluxDB.Client.Api.Service;
+using ResourceMember = InfluxDB.Client.Api.Domain.ResourceMember;
 
 namespace InfluxDB.Client
 {
-    public class OrganizationsApi : AbstractInfluxDBClient
+    public class OrganizationsApi
     {
-        protected internal OrganizationsApi(DefaultClientIo client) : base(client)
+        private readonly OrganizationsService _service;
+
+        protected internal OrganizationsApi(OrganizationsService service)
         {
+            Arguments.CheckNotNull(service, nameof(service));
+
+            _service = service;
         }
 
         /// <summary>
-        /// Creates a new organization and sets <see cref="Organization.Id" /> with the new identifier.
+        /// Creates a new organization and sets <see cref="InfluxDB.Client.Api.Domain.Organization.Id" /> with the new identifier.
         /// </summary>
         /// <param name="name"></param>
         /// <returns>Created organization</returns>
-        public async Task<Organization> CreateOrganization(string name)
+        public Organization CreateOrganization(string name)
         {
             Arguments.CheckNonEmptyString(name, nameof(name));
 
-            var organization = new Organization {Name = name};
+            var organization = new Organization(null, name);
 
-            return await CreateOrganization(organization);
+            return CreateOrganization(organization);
         }
 
         /// <summary>
@@ -34,13 +37,11 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="organization">the organization to create</param>
         /// <returns>created organization</returns>
-        public async Task<Organization> CreateOrganization(Organization organization)
+        public Organization CreateOrganization(Organization organization)
         {
             Arguments.CheckNotNull(organization, nameof(organization));
 
-            var request = await Post(organization, "/api/v2/orgs");
-
-            return Call<Organization>(request);
+            return _service.OrgsPost(organization);
         }
 
         /// <summary>
@@ -48,59 +49,51 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="organization">organization update to apply</param>
         /// <returns>updated organization</returns>
-        public async Task<Organization> UpdateOrganization(Organization organization)
+        public Organization UpdateOrganization(Organization organization)
         {
             Arguments.CheckNotNull(organization, nameof(organization));
 
-            var request = await Patch(organization, $"/api/v2/orgs/{organization.Id}");
-
-            return Call<Organization>(request);
+            return _service.OrgsOrgIDPatch(organization.Id, organization);
         }
 
         /// <summary>
         /// Delete an organization.
         /// </summary>
         /// <param name="orgId">ID of organization to delete</param>
-        /// <returns></returns>
-        public async Task DeleteOrganization(string orgId)
+        /// <returns>delete has been accepted</returns>
+        public void DeleteOrganization(string orgId)
         {
             Arguments.CheckNotNull(orgId, nameof(orgId));
 
-            var request = await Delete($"/api/v2/orgs/{orgId}");
-
-            RaiseForInfluxError(request);
+            _service.OrgsOrgIDDelete(orgId);
         }
 
         /// <summary>
         /// Delete an organization.
         /// </summary>
         /// <param name="organization">organization to delete</param>
-        /// <returns></returns>
-        public async Task DeleteOrganization(Organization organization)
+        /// <returns>delete has been accepted</returns>
+        public void DeleteOrganization(Organization organization)
         {
             Arguments.CheckNotNull(organization, nameof(organization));
 
-            await DeleteOrganization(organization.Id);
+            DeleteOrganization(organization.Id);
         }
-        
+
         /// <summary>
         /// Clone an organization.
         /// </summary>
         /// <param name="clonedName">name of cloned organization</param>
         /// <param name="bucketId">ID of organization to clone</param>
         /// <returns>cloned organization</returns>
-        public async Task<Organization> CloneOrganization(string clonedName, string bucketId)
+        public Organization CloneOrganization(string clonedName, string bucketId)
         {
             Arguments.CheckNonEmptyString(clonedName, nameof(clonedName));
             Arguments.CheckNonEmptyString(bucketId, nameof(bucketId));
 
-            var organization = await FindOrganizationById(bucketId);
-            if (organization == null)
-            {
-                throw new InvalidOperationException($"NotFound Organization with ID: {bucketId}");
-            }
+            var organization = FindOrganizationById(bucketId);
 
-            return await CloneOrganization(clonedName, organization);
+            return CloneOrganization(clonedName, organization);
         }
 
         /// <summary>
@@ -109,23 +102,17 @@ namespace InfluxDB.Client
         /// <param name="clonedName">name of cloned organization</param>
         /// <param name="organization">organization to clone</param>
         /// <returns>cloned organization</returns>
-        public async Task<Organization> CloneOrganization(string clonedName, Organization organization)
+        public Organization CloneOrganization(string clonedName, Organization organization)
         {
             Arguments.CheckNonEmptyString(clonedName, nameof(clonedName));
             Arguments.CheckNotNull(organization, nameof(organization));
 
-            var cloned = new Organization
-            {
-                Name = clonedName
-            };
+            var cloned = new Organization(null, clonedName);
 
-            var created = await CreateOrganization(cloned);
-            
-            foreach (var label in await GetLabels(organization))
-            {
-                await AddLabel(label, created);
-            }
-            
+            var created = CreateOrganization(cloned);
+
+            foreach (var label in GetLabels(organization)) AddLabel(label, created);
+
             return created;
         }
 
@@ -134,26 +121,20 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="orgId">ID of organization to get</param>
         /// <returns>organization details</returns>
-        public async Task<Organization> FindOrganizationById(string orgId)
+        public Organization FindOrganizationById(string orgId)
         {
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
 
-            var request = await Get($"/api/v2/orgs/{orgId}");
-
-            return Call<Organization>(request, "organization not found");
+            return _service.OrgsOrgIDGet(orgId);
         }
 
         /// <summary>
         /// List all organizations.
         /// </summary>
         /// <returns>List all organizations</returns>
-        public async Task<List<Organization>> FindOrganizations()
+        public List<Organization> FindOrganizations()
         {
-            var request = await Get("/api/v2/orgs");
-
-            var organizations = Call<Organizations>(request);
-
-            return organizations?.Orgs;
+            return _service.OrgsGet().Orgs;
         }
 
         /// <summary>
@@ -166,11 +147,11 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="organization">the organization for get secrets</param>
         /// <returns>the secret keys</returns>
-        public async Task<List<string>> GetSecrets(Organization organization)
+        public List<string> GetSecrets(Organization organization)
         {
             Arguments.CheckNotNull(organization, nameof(organization));
 
-            return await GetSecrets(organization.Id);
+            return GetSecrets(organization.Id);
         }
 
         /// <summary>
@@ -183,15 +164,11 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="orgId">the organization for get secrets</param>
         /// <returns>the secret keys</returns>
-        public async Task<List<string>> GetSecrets(string orgId)
+        public List<string> GetSecrets(string orgId)
         {
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
 
-            var request = await Get($"/api/v2/orgs/{orgId}/secrets");
-
-            var response = Call<Secrets>(request);
-
-            return response?.SecretList;
+            return _service.OrgsOrgIDSecretsGet(orgId).Secrets;
         }
 
         /// <summary>
@@ -199,13 +176,13 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="secrets">secrets to update/add</param>
         /// <param name="organization">the organization for put secrets</param>
-        /// <returns>async task</returns>
-        public async Task PutSecrets(Dictionary<string, string> secrets, Organization organization)
+        /// <returns></returns>
+        public void PutSecrets(Dictionary<string, string> secrets, Organization organization)
         {
             Arguments.CheckNotNull(secrets, nameof(secrets));
             Arguments.CheckNotNull(organization, nameof(organization));
 
-            await PutSecrets(secrets, organization.Id);
+            PutSecrets(secrets, organization.Id);
         }
 
         /// <summary>
@@ -213,15 +190,13 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="secrets">secrets to update/add</param>
         /// <param name="orgId">the organization for put secrets</param>
-        /// <returns>async task</returns>
-        public async Task PutSecrets(Dictionary<string, string> secrets, string orgId)
+        /// <returns></returns>
+        public void PutSecrets(Dictionary<string, string> secrets, string orgId)
         {
             Arguments.CheckNotNull(secrets, nameof(secrets));
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
 
-            var request = await Patch(secrets, $"/api/v2/orgs/{orgId}/secrets");
-
-            RaiseForInfluxError(request);
+            _service.OrgsOrgIDSecretsPatch(orgId, secrets);
         }
 
         /// <summary>
@@ -229,13 +204,13 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="secrets">secrets to delete</param>
         /// <param name="organization">the organization for delete secrets</param>
-        /// <returns>async task</returns>
-        public async Task DeleteSecrets(List<string> secrets, Organization organization)
+        /// <returns>keys successfully patched</returns>
+        public void DeleteSecrets(List<string> secrets, Organization organization)
         {
             Arguments.CheckNotNull(secrets, nameof(secrets));
             Arguments.CheckNotNull(organization, nameof(organization));
 
-            await DeleteSecrets(secrets, organization.Id);
+            DeleteSecrets(secrets, organization.Id);
         }
 
         /// <summary>
@@ -243,15 +218,27 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="secrets">secrets to delete</param>
         /// <param name="orgId">the organization for delete secrets</param>
-        /// <returns>async task</returns>
-        public async Task DeleteSecrets(List<string> secrets, string orgId)
+        /// <returns>keys successfully patched</returns>
+        public void DeleteSecrets(List<string> secrets, string orgId)
         {
             Arguments.CheckNotNull(secrets, nameof(secrets));
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
 
-            var request = await Post(secrets, $"/api/v2/orgs/{orgId}/secrets/delete");
+            DeleteSecrets(new SecretKeys(secrets), orgId);
+        }
+        
+        /// <summary>
+        /// Delete provided secrets.
+        /// </summary>
+        /// <param name="secrets">secrets to delete</param>
+        /// <param name="orgId">the organization for delete secrets</param>
+        /// <returns>keys successfully patched</returns>
+        public void DeleteSecrets(SecretKeys secrets, string orgId)
+        {
+            Arguments.CheckNotNull(secrets, nameof(secrets));
+            Arguments.CheckNonEmptyString(orgId, nameof(orgId));
 
-            RaiseForInfluxError(request);
+            _service.OrgsOrgIDSecretsDeletePost(orgId, secrets);
         }
 
         /// <summary>
@@ -259,11 +246,11 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="organization">organization of the members</param>
         /// <returns>the List all members of an organization</returns>
-        public async Task<List<ResourceMember>> GetMembers(Organization organization)
+        public List<ResourceMember> GetMembers(Organization organization)
         {
             Arguments.CheckNotNull(organization, nameof(organization));
 
-            return await GetMembers(organization.Id);
+            return GetMembers(organization.Id);
         }
 
         /// <summary>
@@ -271,15 +258,11 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="orgId">ID of organization to get members</param>
         /// <returns>the List all members of an organization</returns>
-        public async Task<List<ResourceMember>> GetMembers(string orgId)
+        public List<ResourceMember> GetMembers(string orgId)
         {
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
 
-            var request = await Get($"/api/v2/orgs/{orgId}/members");
-
-            var response = Call<ResourceMembers>(request);
-
-            return response?.Users;
+            return _service.OrgsOrgIDMembersGet(orgId).Users;
         }
 
         /// <summary>
@@ -288,12 +271,12 @@ namespace InfluxDB.Client
         /// <param name="member">the member of an organization</param>
         /// <param name="organization">the organization of a member</param>
         /// <returns>created mapping</returns>
-        public async Task<ResourceMember> AddMember(User member, Organization organization)
+        public ResourceMember AddMember(User member, Organization organization)
         {
             Arguments.CheckNotNull(organization, nameof(organization));
             Arguments.CheckNotNull(member, nameof(member));
 
-            return await AddMember(member.Id, organization.Id);
+            return AddMember(member.Id, organization.Id);
         }
 
         /// <summary>
@@ -302,16 +285,12 @@ namespace InfluxDB.Client
         /// <param name="memberId">the ID of a member</param>
         /// <param name="orgId">the ID of an organization</param>
         /// <returns>created mapping</returns>
-        public async Task<ResourceMember> AddMember(string memberId, string orgId)
+        public ResourceMember AddMember(string memberId, string orgId)
         {
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
             Arguments.CheckNonEmptyString(memberId, nameof(memberId));
 
-            var user = new User {Id = memberId};
-
-            var request = await Post(user, $"/api/v2/orgs/{orgId}/members");
-
-            return Call<ResourceMember>(request);
+            return _service.OrgsOrgIDMembersPost(orgId, new AddResourceMemberRequestBody(memberId));
         }
 
         /// <summary>
@@ -319,13 +298,13 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="member">the member of an organization</param>
         /// <param name="organization">the organization of a member</param>
-        /// <returns>async task</returns>
-        public async Task DeleteMember(User member, Organization organization)
+        /// <returns></returns>
+        public void DeleteMember(User member, Organization organization)
         {
             Arguments.CheckNotNull(organization, nameof(organization));
             Arguments.CheckNotNull(member, nameof(member));
 
-            await DeleteMember(member.Id, organization.Id);
+            DeleteMember(member.Id, organization.Id);
         }
 
         /// <summary>
@@ -333,15 +312,13 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="memberId">the ID of a member</param>
         /// <param name="orgId">the ID of an organization</param>
-        /// <returns>async task</returns>
-        public async Task DeleteMember(string memberId, string orgId)
+        /// <returns></returns>
+        public void DeleteMember(string memberId, string orgId)
         {
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
             Arguments.CheckNonEmptyString(memberId, nameof(memberId));
 
-            var request = await Delete($"/api/v2/orgs/{orgId}/members/{memberId}");
-
-            RaiseForInfluxError(request);
+            _service.OrgsOrgIDMembersUserIDDelete(memberId, orgId);
         }
 
         /// <summary>
@@ -349,11 +326,11 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="organization">organization of the owners</param>
         /// <returns>the List all owners of an organization</returns>
-        public async Task<List<ResourceMember>> GetOwners(Organization organization)
+        public List<ResourceOwner> GetOwners(Organization organization)
         {
             Arguments.CheckNotNull(organization, nameof(organization));
 
-            return await GetOwners(organization.Id);
+            return GetOwners(organization.Id);
         }
 
         /// <summary>
@@ -361,15 +338,11 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="orgId">ID of organization to get owners</param>
         /// <returns>the List all owners of an organization</returns>
-        public async Task<List<ResourceMember>> GetOwners(string orgId)
+        public List<ResourceOwner> GetOwners(string orgId)
         {
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
 
-            var request = await Get($"/api/v2/orgs/{orgId}/owners");
-
-            var response = Call<ResourceMembers>(request);
-
-            return response?.Users;
+            return _service.OrgsOrgIDOwnersGet(orgId).Users;
         }
 
         /// <summary>
@@ -378,12 +351,12 @@ namespace InfluxDB.Client
         /// <param name="owner">the owner of an organization</param>
         /// <param name="organization">the organization of a owner</param>
         /// <returns>created mapping</returns>
-        public async Task<ResourceMember> AddOwner(User owner, Organization organization)
+        public ResourceOwner AddOwner(User owner, Organization organization)
         {
             Arguments.CheckNotNull(organization, nameof(organization));
             Arguments.CheckNotNull(owner, nameof(owner));
 
-            return await AddOwner(owner.Id, organization.Id);
+            return AddOwner(owner.Id, organization.Id);
         }
 
         /// <summary>
@@ -392,16 +365,12 @@ namespace InfluxDB.Client
         /// <param name="ownerId">the ID of a owner</param>
         /// <param name="orgId">the ID of an organization</param>
         /// <returns>created mapping</returns>
-        public async Task<ResourceMember> AddOwner(string ownerId, string orgId)
+        public ResourceOwner AddOwner(string ownerId, string orgId)
         {
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
             Arguments.CheckNonEmptyString(ownerId, nameof(ownerId));
 
-            var user = new User {Id = ownerId};
-
-            var request = await Post(user, $"/api/v2/orgs/{orgId}/owners");
-
-            return Call<ResourceMember>(request);
+            return _service.OrgsOrgIDOwnersPost(orgId, new AddResourceMemberRequestBody(ownerId));
         }
 
         /// <summary>
@@ -409,13 +378,13 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="owner">the owner of an organization</param>
         /// <param name="organization">the organization of a owner</param>
-        /// <returns>async task</returns>
-        public async Task DeleteOwner(User owner, Organization organization)
+        /// <returns></returns>
+        public void DeleteOwner(User owner, Organization organization)
         {
             Arguments.CheckNotNull(organization, nameof(organization));
             Arguments.CheckNotNull(owner, nameof(owner));
 
-            await DeleteOwner(owner.Id, organization.Id);
+            DeleteOwner(owner.Id, organization.Id);
         }
 
         /// <summary>
@@ -423,15 +392,13 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="ownerId">the ID of a owner</param>
         /// <param name="orgId">the ID of an organization</param>
-        /// <returns>async task</returns>
-        public async Task DeleteOwner(string ownerId, string orgId)
+        /// <returns></returns>
+        public void DeleteOwner(string ownerId, string orgId)
         {
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
             Arguments.CheckNonEmptyString(ownerId, nameof(ownerId));
 
-            var request = await Delete($"/api/v2/orgs/{orgId}/owners/{ownerId}");
-
-            RaiseForInfluxError(request);
+            _service.OrgsOrgIDOwnersUserIDDelete(ownerId, orgId);
         }
 
         /// <summary>
@@ -439,11 +406,11 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="organization">for retrieve logs</param>
         /// <returns>logs</returns>
-        public async Task<List<OperationLogEntry>> FindOrganizationLogs(Organization organization)
+        public List<OperationLog> FindOrganizationLogs(Organization organization)
         {
             Arguments.CheckNotNull(organization, nameof(organization));
 
-            return await FindOrganizationLogs(organization.Id);
+            return FindOrganizationLogs(organization.Id);
         }
 
         /// <summary>
@@ -452,12 +419,12 @@ namespace InfluxDB.Client
         /// <param name="organization">for retrieve logs</param>
         /// <param name="findOptions">the find options</param>
         /// <returns>logs</returns>
-        public async Task<OperationLogEntries> FindOrganizationLogs(Organization organization, FindOptions findOptions)
+        public OperationLogs FindOrganizationLogs(Organization organization, FindOptions findOptions)
         {
             Arguments.CheckNotNull(organization, nameof(organization));
             Arguments.CheckNotNull(findOptions, nameof(findOptions));
 
-            return await FindOrganizationLogs(organization.Id, findOptions);
+            return FindOrganizationLogs(organization.Id, findOptions);
         }
 
         /// <summary>
@@ -465,11 +432,11 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="orgId">the ID of an organization</param>
         /// <returns>logs</returns>
-        public async Task<List<OperationLogEntry>> FindOrganizationLogs(string orgId)
+        public List<OperationLog> FindOrganizationLogs(string orgId)
         {
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
 
-            return (await FindOrganizationLogs(orgId, new FindOptions())).Logs;
+            return FindOrganizationLogs(orgId, new FindOptions()).Logs;
         }
 
         /// <summary>
@@ -478,14 +445,12 @@ namespace InfluxDB.Client
         /// <param name="orgId">the ID of an organization</param>
         /// <param name="findOptions">the find options</param>
         /// <returns>logs</returns>
-        public async Task<OperationLogEntries> FindOrganizationLogs(string orgId, FindOptions findOptions)
+        public OperationLogs FindOrganizationLogs(string orgId, FindOptions findOptions)
         {
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
             Arguments.CheckNotNull(findOptions, nameof(findOptions));
 
-            var request = await Get($"/api/v2/orgs/{orgId}/log?" + CreateQueryString(findOptions));
-
-            return GetOperationLogEntries(request);
+            return _service.OrgsOrgIDLogsGet(orgId, null, findOptions.Offset, findOptions.Limit);
         }
 
         /// <summary>
@@ -493,11 +458,11 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="organization">organization of the labels</param>
         /// <returns>the List all labels of an organization</returns>
-        public async Task<List<Label>> GetLabels(Organization organization)
+        public List<Label> GetLabels(Organization organization)
         {
             Arguments.CheckNotNull(organization, nameof(organization));
 
-            return await GetLabels(organization.Id);
+            return GetLabels(organization.Id);
         }
 
         /// <summary>
@@ -505,11 +470,11 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="orgId">ID of an organization to get labels</param>
         /// <returns>the List all labels of an organization</returns>
-        public async Task<List<Label>> GetLabels(string orgId)
+        public List<Label> GetLabels(string orgId)
         {
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
 
-            return await GetLabels(orgId, "orgs");
+            return _service.OrgsOrgIDLabelsGet(orgId).Labels;
         }
 
         /// <summary>
@@ -518,12 +483,12 @@ namespace InfluxDB.Client
         /// <param name="label">the label of an organization</param>
         /// <param name="organization">an organization of a label</param>
         /// <returns>added label</returns>
-        public async Task<Label> AddLabel(Label label, Organization organization)
+        public Label AddLabel(Label label, Organization organization)
         {
             Arguments.CheckNotNull(organization, nameof(organization));
             Arguments.CheckNotNull(label, nameof(label));
 
-            return await AddLabel(label.Id, organization.Id);
+            return AddLabel(label.Id, organization.Id);
         }
 
         /// <summary>
@@ -532,12 +497,14 @@ namespace InfluxDB.Client
         /// <param name="labelId">the ID of a label</param>
         /// <param name="orgId">the ID of an organization</param>
         /// <returns>added label</returns>
-        public async Task<Label> AddLabel(string labelId, string orgId)
+        public Label AddLabel(string labelId, string orgId)
         {
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
             Arguments.CheckNonEmptyString(labelId, nameof(labelId));
 
-            return await AddLabel(labelId, orgId, "orgs", ResourceType.Orgs);
+            var mapping = new LabelMapping(labelId);
+            
+            return _service.OrgsOrgIDLabelsPost(orgId, mapping).Label;
         }
 
         /// <summary>
@@ -545,13 +512,13 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="label">the label of an organization</param>
         /// <param name="organization">an organization of a owner</param>
-        /// <returns>async task</returns>
-        public async Task DeleteLabel(Label label, Organization organization)
+        /// <returns>delete has been accepted</returns>
+        public void DeleteLabel(Label label, Organization organization)
         {
             Arguments.CheckNotNull(organization, nameof(organization));
             Arguments.CheckNotNull(label, nameof(label));
 
-            await DeleteLabel(label.Id, organization.Id);
+            DeleteLabel(label.Id, organization.Id);
         }
 
         /// <summary>
@@ -559,13 +526,13 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="labelId">the ID of a label</param>
         /// <param name="orgId">the ID of an organization</param>
-        /// <returns>async task</returns>
-        public async Task DeleteLabel(string labelId, string orgId)
+        /// <returns>delete has been accepted</returns>
+        public void DeleteLabel(string labelId, string orgId)
         {
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
             Arguments.CheckNonEmptyString(labelId, nameof(labelId));
 
-            await DeleteLabel(labelId, orgId, "orgs");
+            _service.OrgsOrgIDLabelsLabelIDDelete(orgId, labelId);
         }
     }
 }

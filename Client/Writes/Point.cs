@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Numerics;
 using System.Text;
+using InfluxDB.Client.Api.Domain;
 using InfluxDB.Client.Core;
 using NodaTime;
 
@@ -20,7 +21,7 @@ namespace InfluxDB.Client.Writes
         private readonly SortedDictionary<string, string> _tags;
         private readonly SortedDictionary<string, object> _fields;
 
-        public TimeUnit Precision { get; private set; }
+        public WritePrecision Precision { get; private set; }
         private BigInteger? _time;
 
         private Point(string measurementName)
@@ -30,7 +31,7 @@ namespace InfluxDB.Client.Writes
             _measurementName = measurementName;
             _fields = new SortedDictionary<string, object>(StringComparer.Ordinal);
             _tags = new SortedDictionary<string, string>(StringComparer.Ordinal);
-            Precision = TimeUnit.Nanos;
+            Precision = WritePrecision.Ns;
         }
 
         /// <summary>
@@ -139,7 +140,7 @@ namespace InfluxDB.Client.Writes
         /// <param name="timestamp">the timestamp</param>
         /// <param name="timeUnit">the timestamp precision</param>
         /// <returns></returns>
-        public Point Timestamp(long timestamp, TimeUnit timeUnit)
+        public Point Timestamp(long timestamp, WritePrecision timeUnit)
         {
             Precision = timeUnit;
             _time = timestamp;
@@ -153,22 +154,22 @@ namespace InfluxDB.Client.Writes
         /// <param name="timestamp">the timestamp</param>
         /// <param name="timeUnit">the timestamp precision</param>
         /// <returns></returns>
-        public Point Timestamp(TimeSpan timestamp, TimeUnit timeUnit)
+        public Point Timestamp(TimeSpan timestamp, WritePrecision timeUnit)
         {
             Precision = timeUnit;
 
             switch (timeUnit)
             {
-                case TimeUnit.Nanos:
+                case WritePrecision.Ns:
                     _time = timestamp.Ticks * 100;
                     break;
-                case TimeUnit.Micros:
+                case WritePrecision.Us:
                     _time = (BigInteger) (timestamp.Ticks * 0.1);
                     break;
-                case TimeUnit.Millis:
+                case WritePrecision.Ms:
                     _time = (BigInteger) timestamp.TotalMilliseconds;
                     break;
-                case TimeUnit.Seconds:
+                case WritePrecision.S:
                     _time = (BigInteger) timestamp.TotalSeconds;
                     break;
             }
@@ -182,7 +183,7 @@ namespace InfluxDB.Client.Writes
         /// <param name="timestamp">the timestamp</param>
         /// <param name="timeUnit">the timestamp precision</param>
         /// <returns></returns>
-        public Point Timestamp(DateTime timestamp, TimeUnit timeUnit)
+        public Point Timestamp(DateTime timestamp, WritePrecision timeUnit)
         {
             if (timestamp != null && timestamp.Kind != DateTimeKind.Utc)
             {
@@ -200,7 +201,7 @@ namespace InfluxDB.Client.Writes
         /// <param name="timestamp">the timestamp</param>
         /// <param name="timeUnit">the timestamp precision</param>
         /// <returns></returns>
-        public Point Timestamp(DateTimeOffset timestamp, TimeUnit timeUnit)
+        public Point Timestamp(DateTimeOffset timestamp, WritePrecision timeUnit)
         {
             return Timestamp(timestamp.UtcDateTime, timeUnit);
         }
@@ -211,19 +212,19 @@ namespace InfluxDB.Client.Writes
         /// <param name="timestamp">the timestamp</param>
         /// <param name="timeUnit">the timestamp precision</param>
         /// <returns></returns>
-        public Point Timestamp(Instant timestamp, TimeUnit timeUnit)
+        public Point Timestamp(Instant timestamp, WritePrecision timeUnit)
         {
             Precision = timeUnit;
 
             switch (timeUnit)
             {
-                case TimeUnit.Seconds:
+                case WritePrecision.S:
                     _time = timestamp.ToUnixTimeSeconds();
                     break;
-                case TimeUnit.Millis:
+                case WritePrecision.Ms:
                     _time = timestamp.ToUnixTimeMilliseconds();
                     break;
-                case TimeUnit.Micros:
+                case WritePrecision.Us:
                     _time = (long) (timestamp.ToUnixTimeTicks() * 0.1);
                     break;
                 default:

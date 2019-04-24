@@ -1,8 +1,9 @@
 using System;
 using System.Collections.Generic;
+using InfluxDB.Client.Core.Exceptions;
 using InfluxDB.Client.Domain;
+using InfluxDB.Client.Api.Domain;
 using NUnit.Framework;
-using Task = System.Threading.Tasks.Task;
 
 namespace InfluxDB.Client.Test
 {
@@ -14,214 +15,209 @@ namespace InfluxDB.Client.Test
         private Organization _organization;
 
         [SetUp]
-        public new async Task SetUp()
+        public new void SetUp()
         {
             _authorizationsApi = Client.GetAuthorizationsApi();
-            _user = await Client.GetUsersApi().Me();
-            _organization = await FindMyOrg();
+            _user = Client.GetUsersApi().Me();
+            _organization = FindMyOrg();
         }
 
         [Test]
-        public async Task CreateAuthorization()
+        public void CreateAuthorization()
         {
-            var readUsers = new Permission
-            {
-                Action = Permission.ReadAction,
-                Resource = new PermissionResource {Type = ResourceType.Users, OrgId = _organization.Id}
-            };
+            var readUsers = new Permission(
+                Permission.ActionEnum.Read,
+                new PermissionResource {Type = PermissionResource.TypeEnum.Users, OrgID = _organization.Id}
+            );
 
             var writeOrganizations = new Permission
-            {
-                Action = Permission.WriteAction,
-                Resource = new PermissionResource {Type = ResourceType.Orgs, OrgId = _organization.Id}
-            };
+            (
+                Permission.ActionEnum.Write,
+                new PermissionResource {Type = PermissionResource.TypeEnum.Orgs, OrgID = _organization.Id}
+            );
 
             var permissions = new List<Permission> {readUsers, writeOrganizations};
 
-            var authorization = await _authorizationsApi.CreateAuthorization(_organization, permissions);
+            var authorization = _authorizationsApi.CreateAuthorization(_organization, permissions);
 
             Assert.IsNotNull(authorization);
             Assert.IsNotEmpty(authorization.Id);
             Assert.IsNotEmpty(authorization.Token);
-            Assert.AreEqual(authorization.UserId, _user.Id);
-            Assert.AreEqual(authorization.UserName, _user.Name);
-            Assert.AreEqual(authorization.Status, Status.Active);
+            Assert.AreEqual(authorization.UserID, _user.Id);
+            Assert.AreEqual(authorization.User, _user.Name);
+            Assert.AreEqual(authorization.Status, AuthorizationUpdateRequest.StatusEnum.Active);
 
             Assert.AreEqual(authorization.Permissions.Count, 2);
-            Assert.AreEqual(authorization.Permissions[0].Resource.Type, ResourceType.Users);
-            Assert.AreEqual(authorization.Permissions[0].Resource.OrgId, _organization.Id);
-            Assert.AreEqual(authorization.Permissions[0].Action, "read");
-            
-            Assert.AreEqual(authorization.Permissions[1].Resource.Type, ResourceType.Orgs);
-            Assert.AreEqual(authorization.Permissions[1].Resource.OrgId, _organization.Id);
-            Assert.AreEqual(authorization.Permissions[1].Action, "write");
+            Assert.AreEqual(authorization.Permissions[0].Resource.Type, PermissionResource.TypeEnum.Users);
+            Assert.AreEqual(authorization.Permissions[0].Resource.OrgID, _organization.Id);
+            Assert.AreEqual(authorization.Permissions[0].Action, Permission.ActionEnum.Read);
+
+            Assert.AreEqual(authorization.Permissions[1].Resource.Type, PermissionResource.TypeEnum.Orgs);
+            Assert.AreEqual(authorization.Permissions[1].Resource.OrgID, _organization.Id);
+            Assert.AreEqual(authorization.Permissions[1].Action, Permission.ActionEnum.Write);
 
             var links = authorization.Links;
 
-            Assert.That(links.Count == 2);
-            Assert.AreEqual($"/api/v2/authorizations/{authorization.Id}", links["self"]);
-            Assert.AreEqual($"/api/v2/users/{_user.Id}", links["user"]);
+            Assert.IsNotNull(links);
+            Assert.AreEqual(links.Self, $"/api/v2/authorizations/{authorization.Id}");
+            Assert.AreEqual(links.User, $"/api/v2/users/{_user.Id}");
         }
-        
-        [Test]
-        public async Task AuthorizationDescription() {
 
-            var writeSources = new Permission
-            {
-                Action = Permission.WriteAction,
-                Resource = new PermissionResource {Type = ResourceType.Sources, OrgId = _organization.Id}
-            };
+        [Test]
+        public void AuthorizationDescription()
+        {
+            var writeSources = new Permission(Permission.ActionEnum.Write,
+                new PermissionResource {Type = PermissionResource.TypeEnum.Sources, OrgID = _organization.Id}
+            );
 
             var authorization = new Authorization
             {
-                OrgId = _organization.Id,
+                OrgID = _organization.Id,
                 Permissions = new List<Permission> {writeSources},
                 Description = "My description!"
             };
 
-            var created = await _authorizationsApi.CreateAuthorization(authorization);
+            var created = _authorizationsApi.CreateAuthorization(authorization);
 
             Assert.IsNotNull(created);
             Assert.AreEqual("My description!", created.Description);
         }
-        
-        [Test]
-        public async Task UpdateAuthorizationStatus() {
 
-            var readUsers = new Permission
-            {
-                Action = Permission.ReadAction,
-                Resource = new PermissionResource {Type = ResourceType.Users, OrgId = _organization.Id}
-            };
+        [Test]
+        public void UpdateAuthorizationStatus()
+        {
+            var readUsers = new Permission(Permission.ActionEnum.Read,
+                new PermissionResource {Type = PermissionResource.TypeEnum.Users, OrgID = _organization.Id}
+            );
 
             var permissions = new List<Permission> {readUsers};
 
-            var authorization = await _authorizationsApi.CreateAuthorization(_organization, permissions);
+            var authorization = _authorizationsApi.CreateAuthorization(_organization, permissions);
 
-            Assert.AreEqual(authorization.Status, Status.Active);
+            Assert.AreEqual(authorization.Status, AuthorizationUpdateRequest.StatusEnum.Active);
 
-            authorization.Status = Status.Inactive;
-            authorization = await _authorizationsApi.UpdateAuthorization(authorization);
+            authorization.Status = AuthorizationUpdateRequest.StatusEnum.Inactive;
+            authorization = _authorizationsApi.UpdateAuthorization(authorization);
 
-            Assert.AreEqual(authorization.Status, Status.Inactive);
+            Assert.AreEqual(authorization.Status, AuthorizationUpdateRequest.StatusEnum.Inactive);
 
-            authorization.Status = Status.Active;
-            authorization = await _authorizationsApi.UpdateAuthorization(authorization);
+            authorization.Status = AuthorizationUpdateRequest.StatusEnum.Active;
+            authorization = _authorizationsApi.UpdateAuthorization(authorization);
 
-            Assert.AreEqual(authorization.Status, Status.Active);
+            Assert.AreEqual(authorization.Status, AuthorizationUpdateRequest.StatusEnum.Active);
         }
-        
+
         [Test]
-        public async Task FindAuthorizations() {
+        public void FindAuthorizations()
+        {
+            var size = _authorizationsApi.FindAuthorizations().Count;
 
-            var size = (await _authorizationsApi.FindAuthorizations()).Count;
+            _authorizationsApi.CreateAuthorization(_organization, NewPermissions());
 
-            await _authorizationsApi.CreateAuthorization(_organization, NewPermissions());
+            var authorizations = _authorizationsApi.FindAuthorizations();
 
-            var authorizations = await _authorizationsApi.FindAuthorizations();
-            
             Assert.AreEqual(size + 1, authorizations.Count);
         }
 
         [Test]
-        public async Task FindAuthorizationsById() {
+        public void FindAuthorizationsById()
+        {
+            var authorization = _authorizationsApi.CreateAuthorization(_organization, NewPermissions());
 
-            var authorization = await _authorizationsApi.CreateAuthorization(_organization, NewPermissions());
-
-            var foundAuthorization = await _authorizationsApi.FindAuthorizationById(authorization.Id);
+            var foundAuthorization = _authorizationsApi.FindAuthorizationById(authorization.Id);
 
             Assert.IsNotNull(foundAuthorization);
             Assert.AreEqual(authorization.Id, foundAuthorization.Id);
             Assert.AreEqual(authorization.Token, foundAuthorization.Token);
-            Assert.AreEqual(authorization.UserId, foundAuthorization.UserId);
-            Assert.AreEqual(authorization.UserName, foundAuthorization.UserName);
+            Assert.AreEqual(authorization.UserID, foundAuthorization.UserID);
+            Assert.AreEqual(authorization.User, foundAuthorization.User);
             Assert.AreEqual(authorization.Status, foundAuthorization.Status);
         }
 
         [Test]
-        public async Task FindAuthorizationsByIdNull() {
+        public void FindAuthorizationsByIdNull()
+        {
+            var ioe = Assert.Throws<HttpException>(() =>
+                _authorizationsApi.FindAuthorizationById("020f755c3c082000"));
 
-            var authorization = await _authorizationsApi.FindAuthorizationById("020f755c3c082000");
-
-            Assert.IsNull(authorization);
+            Assert.AreEqual("authorization not found", ioe.Message);
         }
-        
-        [Test]
-        public async Task DeleteAuthorization() {
 
-            var createdAuthorization = await _authorizationsApi.CreateAuthorization(_organization, NewPermissions());
+        [Test]
+        public void DeleteAuthorization()
+        {
+            var createdAuthorization = _authorizationsApi.CreateAuthorization(_organization, NewPermissions());
             Assert.IsNotNull(createdAuthorization);
 
-            var foundAuthorization = await _authorizationsApi.FindAuthorizationById(createdAuthorization.Id);
+            var foundAuthorization = _authorizationsApi.FindAuthorizationById(createdAuthorization.Id);
             Assert.IsNotNull(foundAuthorization);
 
             // delete authorization
-            await _authorizationsApi.DeleteAuthorization(createdAuthorization);
+            _authorizationsApi.DeleteAuthorization(createdAuthorization);
 
-            foundAuthorization = await _authorizationsApi.FindAuthorizationById(createdAuthorization.Id);
-            Assert.IsNull(foundAuthorization);
+            var ioe = Assert.Throws<HttpException>(() =>
+                _authorizationsApi.FindAuthorizationById(createdAuthorization.Id));
+
+            Assert.AreEqual("authorization not found", ioe.Message);
         }
-        
+
         [Test]
-        public async Task  FindAuthorizationsByUser()
+        public void FindAuthorizationsByUser()
         {
-            var size = (await _authorizationsApi.FindAuthorizationsByUser(_user)).Count;
+            var size = _authorizationsApi.FindAuthorizationsByUser(_user).Count;
 
-            await _authorizationsApi.CreateAuthorization(_organization, NewPermissions());
+            _authorizationsApi.CreateAuthorization(_organization, NewPermissions());
 
-            var authorizations = await _authorizationsApi.FindAuthorizationsByUser(_user);
+            var authorizations = _authorizationsApi.FindAuthorizationsByUser(_user);
             Assert.AreEqual(size + 1, authorizations.Count);
         }
 
         [Test]
-        public async Task  FindAuthorizationsByUserName() {
+        public void FindAuthorizationsByUserName()
+        {
+            var size = _authorizationsApi.FindAuthorizationsByUser(_user).Count;
 
-            var size = (await _authorizationsApi.FindAuthorizationsByUser(_user)).Count;
+            _authorizationsApi.CreateAuthorization(_organization, NewPermissions());
 
-            await _authorizationsApi.CreateAuthorization(_organization, NewPermissions());
-
-            var authorizations = await _authorizationsApi.FindAuthorizationsByUserName(_user.Name);
+            var authorizations = _authorizationsApi.FindAuthorizationsByUserName(_user.Name);
             Assert.AreEqual(size + 1, authorizations.Count);
         }
 
         [Test]
-        public async Task CloneAuthorization()
+        public void CloneAuthorization()
         {
-            var source = await _authorizationsApi.CreateAuthorization(_organization, NewPermissions());
+            var source = _authorizationsApi.CreateAuthorization(_organization, NewPermissions());
 
-            var cloned = await _authorizationsApi.CloneAuthorization(source);
-            
+            var cloned = _authorizationsApi.CloneAuthorization(source);
+
             Assert.IsNotEmpty(cloned.Token);
             Assert.AreNotEqual(cloned.Token, source.Token);
-            Assert.AreEqual(source.UserId, cloned.UserId);
-            Assert.AreEqual(source.UserName, cloned.UserName);
-            Assert.AreEqual(_organization.Id, cloned.OrgId);
-            Assert.AreEqual(_organization.Name, cloned.OrgName);
-            Assert.AreEqual(Status.Active, cloned.Status);
+            Assert.AreEqual(source.UserID, cloned.UserID);
+            Assert.AreEqual(source.User, cloned.User);
+            Assert.AreEqual(_organization.Id, cloned.OrgID);
+            Assert.AreEqual(_organization.Name, cloned.Org);
+            Assert.AreEqual(AuthorizationUpdateRequest.StatusEnum.Active, cloned.Status);
             Assert.AreEqual(source.Description, cloned.Description);
             Assert.AreEqual(1, cloned.Permissions.Count);
-            Assert.AreEqual(Permission.ReadAction, cloned.Permissions[0].Action);
-            Assert.AreEqual(ResourceType.Users, cloned.Permissions[0].Resource.Type);
-            Assert.AreEqual(_organization.Id, cloned.Permissions[0].Resource.OrgId);
+            Assert.AreEqual(Permission.ActionEnum.Read, cloned.Permissions[0].Action);
+            Assert.AreEqual(PermissionResource.TypeEnum.Users, cloned.Permissions[0].Resource.Type);
+            Assert.AreEqual(_organization.Id, cloned.Permissions[0].Resource.OrgID);
         }
 
         [Test]
         public void CloneAuthorizationNotFound()
         {
-            var ioe = Assert.ThrowsAsync<InvalidOperationException>(async () => await _authorizationsApi.CloneAuthorization("020f755c3c082000"));
-            
-            Assert.AreEqual("NotFound Authorization with ID: 020f755c3c082000", ioe.Message);
+            var ioe = Assert.Throws<HttpException>(() =>
+                _authorizationsApi.CloneAuthorization("020f755c3c082000"));
+
+            Assert.AreEqual("authorization not found", ioe.Message);
         }
 
         private List<Permission> NewPermissions()
         {
-            var resource = new PermissionResource {Type = ResourceType.Users, OrgId = _organization.Id};
+            var resource = new PermissionResource {Type = PermissionResource.TypeEnum.Users, OrgID = _organization.Id};
 
-            var permission = new Permission
-            {
-                Action = Permission.ReadAction, 
-                Resource = resource
-            };
+            var permission = new Permission(Permission.ActionEnum.Read, resource);
 
             var permissions = new List<Permission> {permission};
 

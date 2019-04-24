@@ -78,7 +78,7 @@ namespace InfluxDB.Client.Core.Test
 
         protected async Task InfluxDbWrite(string lineProtocol, string databaseName)
         {
-            var request = new HttpRequestMessage(new HttpMethod(HttpMethodKind.Post.Name()),
+            var request = new HttpRequestMessage(new HttpMethod("POST"),
                             "/write?db=" + databaseName);
                             
             request.Headers.Add("accept", "application/json");
@@ -89,7 +89,7 @@ namespace InfluxDB.Client.Core.Test
 
         protected async Task InfluxDbQuery(string query, string databaseName) 
         {
-            var request = new HttpRequestMessage(new HttpMethod(HttpMethodKind.Get.Name()),
+            var request = new HttpRequestMessage(new HttpMethod("GET"),
                             "/query?db=" + databaseName + ";q=" + query);
                             
             request.Headers.Add("accept", "application/json");

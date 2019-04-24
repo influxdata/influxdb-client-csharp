@@ -14,19 +14,21 @@
                 <version>3.0.3</version>
                 <configuration>
                     <inputSpec>${project.basedir}/swagger.yml</inputSpec>
-                    <generatorName>csharp</generatorName>
+                    <generatorName>influx-csharp</generatorName>
+                    <!-- <generatorName>csharp</generatorName> -->
                     <!-- <generatorName>csharp-dotnet2</generatorName> -->
                     <configOptions>
                         <additional-properties>optionalProjectFile=true</additional-properties>
                         <hideGenerationTimestamp>true</hideGenerationTimestamp>
-                        <packageName>Generated</packageName>
+                        <packageName>InfluxDB.Client.Api</packageName>
                         <sourceFolder>/</sourceFolder>
+                        <validatable>false</validatable>
                     </configOptions>
                     <generateModelDocumentation>false</generateModelDocumentation>
                     <generateApiDocumentation>false</generateApiDocumentation>
                     <generateApis>true</generateApis>
                     <generateApiTests>false</generateApiTests>
-                    <generateSupportingFiles>false</generateSupportingFiles>
+                    <generateSupportingFiles>true</generateSupportingFiles>
                     <generateModelTests>false</generateModelTests>
                     <verbose>false</verbose>
                     <output>${project.basedir}/../Client</output>

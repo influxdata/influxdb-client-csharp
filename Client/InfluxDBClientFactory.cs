@@ -1,13 +1,12 @@
-using System.Threading.Tasks;
 using InfluxDB.Client.Core;
-using InfluxDB.Client.Domain;
+using InfluxDB.Client.Api.Domain;
 
 namespace InfluxDB.Client
 {
     public static class InfluxDBClientFactory
     {
         /// <summary>
-        /// Create a instance of the InfluxDB 2.0 client.
+        ///     Create a instance of the InfluxDB 2.0 client.
         /// </summary>
         /// <param name="url">the url to connect to the InfluxDB 2.0</param>
         /// <returns>client</returns>
@@ -22,7 +21,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Create a instance of the InfluxDB 2.0 client.
+        ///     Create a instance of the InfluxDB 2.0 client.
         /// </summary>
         /// <param name="url">the url to connect to the InfluxDB 2.0</param>
         /// <param name="username">the username to use in the basic auth</param>
@@ -40,7 +39,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Create a instance of the InfluxDB 2.0 client.
+        ///     Create a instance of the InfluxDB 2.0 client.
         /// </summary>
         /// <param name="url">the url to connect to the InfluxDB 2.0</param>
         /// <param name="token">the token to use for the authorization</param>
@@ -57,7 +56,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Create a instance of the InfluxDB 2.0 client.
+        ///     Create a instance of the InfluxDB 2.0 client.
         /// </summary>
         /// <param name="options">the connection configuration</param>
         /// <returns>client</returns>
@@ -67,9 +66,9 @@ namespace InfluxDB.Client
 
             return new InfluxDBClient(options);
         }
-        
+
         /// <summary>
-        /// Post onboarding request, to setup initial user, org and bucket.
+        ///     Post onboarding request, to setup initial user, org and bucket.
         /// </summary>
         /// <param name="url">the url to connect to the InfluxDB</param>
         /// <param name="username">the name of an user</param>
@@ -77,7 +76,7 @@ namespace InfluxDB.Client
         /// <param name="org">the name of an organization</param>
         /// <param name="bucket">the name of a bucket</param>
         /// <returns>Created default user, bucket, org.</returns>
-        public static Task<OnboardingResponse> Onboarding(string url, string username, string password, string org, 
+        public static OnboardingResponse Onboarding(string url, string username, string password, string org,
             string bucket)
         {
             Arguments.CheckNonEmptyString(url, nameof(url));
@@ -86,18 +85,18 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(org, nameof(org));
             Arguments.CheckNonEmptyString(bucket, nameof(bucket));
 
-            var onboarding = new Onboarding {Username = username, Password = password, Org = org, Bucket = bucket};
+            var onboarding = new OnboardingRequest(username, password, org, bucket);
 
             return Onboarding(url, onboarding);
         }
 
         /// <summary>
-        /// Post onboarding request, to setup initial user, org and bucket.
+        ///     Post onboarding request, to setup initial user, org and bucket.
         /// </summary>
         /// <param name="url">the url to connect to the InfluxDB</param>
         /// <param name="onboarding">the defaults</param>
         /// <returns>Created default user, bucket, org.</returns>
-        public static Task<OnboardingResponse> Onboarding(string url, Onboarding onboarding)
+        public static OnboardingResponse Onboarding(string url, OnboardingRequest onboarding)
         {
             Arguments.CheckNonEmptyString(url, nameof(url));
             Arguments.CheckNotNull(onboarding, nameof(onboarding));

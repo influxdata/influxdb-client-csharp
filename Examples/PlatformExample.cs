@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Threading;
 using InfluxDB.Client;
+using InfluxDB.Client.Api.Domain;
 using InfluxDB.Client.Core;
-using InfluxDB.Client.Domain;
 using InfluxDB.Client.Writes;
-using Task = System.Threading.Tasks.Task;
 
 namespace Examples
 {
@@ -22,11 +21,11 @@ namespace Examples
             [Column(IsTimestamp = true)] public DateTime Time;
         }
 
-        public static async Task Example(InfluxDBClient influxDB)
+        public static void Example(InfluxDBClient influxDB)
         {
             var organizationClient = influxDB.GetOrganizationsApi();
             
-            var medicalGMBH = await organizationClient
+            var medicalGMBH = organizationClient
                             .CreateOrganization("Medical Corp " + 
                                                 DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss.fff",
                                                                 CultureInfo.InvariantCulture));
@@ -35,26 +34,26 @@ namespace Examples
             //
             // Create New Bucket with retention 1h
             //
-            var temperatureBucket = await influxDB.GetBucketsApi().CreateBucket("temperature-sensors", medicalGMBH.Id);
+            var temperatureBucket = influxDB.GetBucketsApi().CreateBucket("temperature-sensors", medicalGMBH.Id);
 
             //
             // Add Permissions to read and write to the Bucket
             //
             var resource = new PermissionResource
-                {Type = ResourceType.Buckets, OrgId = medicalGMBH.Id, Id = temperatureBucket.Id};
+                {Type = PermissionResource.TypeEnum.Buckets, OrgID = medicalGMBH.Id, Id = temperatureBucket.Id};
             var readBucket = new Permission
             {
                 Resource = resource, 
-                Action = Permission.ReadAction
+                Action = Permission.ActionEnum.Read
             };
 
             var writeBucket = new Permission
             {
                 Resource = resource, 
-                Action = Permission.WriteAction
+                Action = Permission.ActionEnum.Write
             };
 
-            var authorization = await influxDB.GetAuthorizationsApi()
+            var authorization = influxDB.GetAuthorizationsApi()
                 .CreateAuthorization(medicalGMBH, new List<Permission> {readBucket, writeBucket});
 
             Console.WriteLine($"The token to write to temperature-sensors bucket is: {authorization.Token}");
@@ -84,7 +83,7 @@ namespace Examples
                 // Write by POCO
                 //
                 var temperature = new Temperature {Location = "south", Value = 62D, Time = DateTime.UtcNow};
-                writeClient.WriteMeasurement("temperature-sensors", medicalGMBH.Id, TimeUnit.Nanos, temperature);
+                writeClient.WriteMeasurement("temperature-sensors", medicalGMBH.Id, WritePrecision.Ns, temperature);
 
                 //
                 // Write by Point
@@ -92,14 +91,14 @@ namespace Examples
                 var point = Point.Measurement("temperature")
                     .Tag("location", "west")
                     .Field("value", 55D)
-                    .Timestamp(DateTime.UtcNow.AddSeconds(-10), TimeUnit.Nanos);
+                    .Timestamp(DateTime.UtcNow.AddSeconds(-10), WritePrecision.Ns);
                 writeClient.WritePoint("temperature-sensors", medicalGMBH.Id, point);
 
                 //
                 // Write by LineProtocol
                 //
                 var record = "temperature,location=north value=60.0";
-                writeClient.WriteRecord("temperature-sensors", medicalGMBH.Id, TimeUnit.Nanos, record);
+                writeClient.WriteRecord("temperature-sensors", medicalGMBH.Id, WritePrecision.Ns, record);
                 
                 writeClient.Flush();
                 Thread.Sleep(2000);
@@ -108,7 +107,7 @@ namespace Examples
             //
             // Read data
             //
-            var fluxTables = await influxDB.GetQueryApi().Query("from(bucket:\"temperature-sensors\") |> range(start: 0)", medicalGMBH.Id);
+            var fluxTables = influxDB.GetQueryApi().Query("from(bucket:\"temperature-sensors\") |> range(start: 0)", medicalGMBH.Id);
             fluxTables.ForEach(fluxTable =>
             {
                 var fluxRecords = fluxTable.Records;
@@ -127,7 +126,7 @@ namespace Examples
             var client = InfluxDBClientFactory.Create("http://localhost:9999",
                             "my-user", "my-password".ToCharArray());
 
-            Example(client).Wait();
+            Example(client);
         }
     }
 }

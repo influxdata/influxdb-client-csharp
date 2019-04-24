@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Threading;
-using System.Threading.Tasks;
 using InfluxDB.Client.Core.Exceptions;
 using NUnit.Framework;
 using WireMock.RequestBuilders;
@@ -11,25 +10,25 @@ namespace Client.Legacy.Test
     public class FluxClientQueryRawTest : AbstractFluxClientTest
     {
         [Test]
-        public async Task QueryRaw()
+        public void QueryRaw()
         {
             MockServer.Given(Request.Create().WithPath("/api/v2/query").UsingPost())
                             .RespondWith(CreateResponse());
 
-            var result = await FluxClient.QueryRaw("from(bucket:\"telegraf\")");
+            var result =  FluxClient.QueryRaw("from(bucket:\"telegraf\")");
 
             AssertSuccessResult(result);
         }
 
         [Test]
-        public async Task QueryRawError()
+        public void QueryRawError()
         {
             MockServer.Given(Request.Create().WithPath("/api/v2/query").UsingPost())
                             .RespondWith(CreateErrorResponse());
 
             try
             {
-                await FluxClient.QueryRaw("from(bucket:\"telegraf\")");
+                 FluxClient.QueryRaw("from(bucket:\"telegraf\")");
 
                 Assert.Fail();
             }
@@ -40,7 +39,7 @@ namespace Client.Legacy.Test
         }
 
         [Test]
-        public async Task QueryRawCallback()
+        public void QueryRawCallback()
         {
             CountdownEvent = new CountdownEvent(8);
 
@@ -49,7 +48,7 @@ namespace Client.Legacy.Test
 
             var results = new List<string>();
 
-            await FluxClient.QueryRaw("from(bucket:\"telegraf\")",
+             FluxClient.QueryRaw("from(bucket:\"telegraf\")",
                             (cancellable, result) =>
                             {
                                 results.Add(result);
@@ -63,7 +62,7 @@ namespace Client.Legacy.Test
         }
 
         [Test]
-        public async Task QueryRawCallbackOnComplete()
+        public void QueryRawCallbackOnComplete()
         {
             CountdownEvent = new CountdownEvent(1);
 
@@ -72,7 +71,7 @@ namespace Client.Legacy.Test
 
             var results = new List<string>();
 
-            await FluxClient.QueryRaw("from(bucket:\"telegraf\")", null,
+             FluxClient.QueryRaw("from(bucket:\"telegraf\")", null,
                             (cancellable, result) => results.Add(result),
                             error => Assert.Fail("Unreachable"),
                             () => CountdownEvent.Signal());
@@ -82,11 +81,11 @@ namespace Client.Legacy.Test
         }
 
         [Test]
-        public async Task QueryRawCallbackOnError()
+        public void QueryRawCallbackOnError()
         {
             MockServer.Stop();
 
-            await FluxClient.QueryRaw("from(bucket:\"telegraf\")",
+             FluxClient.QueryRaw("from(bucket:\"telegraf\")",
                             (cancellable, result) => Assert.Fail("Unreachable"),
                             error => CountdownEvent.Signal());
 

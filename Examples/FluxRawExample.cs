@@ -28,7 +28,7 @@ namespace Examples
                             {
                                 // on complete
                                 Console.WriteLine("Query completed");
-                            }).GetAwaiter().GetResult();
+                            });
         }
     }
 }

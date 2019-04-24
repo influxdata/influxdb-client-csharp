@@ -2,24 +2,23 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
 using InfluxDB.Client.Core;
 using InfluxDB.Client.Core.Exceptions;
-using InfluxDB.Client.Domain;
+using InfluxDB.Client.Api.Domain;
 using NUnit.Framework;
-using Task = System.Threading.Tasks.Task;
 
 namespace InfluxDB.Client.Test
 {
     [TestFixture]
+    [Ignore("https://github.com/influxdata/influxdb/issues/13576")]
     public class ItTasksApiTest : AbstractItClientTest
     {
         [SetUp]
-        public new async Task SetUp()
+        public new void SetUp()
         {
-            _organization = await FindMyOrg();
+            _organization = FindMyOrg();
 
-            var authorization = await AddAuthorization(_organization);
+            var authorization = AddAuthorization(_organization);
 
             Client.Dispose();
             Client = InfluxDBClientFactory.Create(InfluxDbUrl, authorization.Token.ToCharArray());
@@ -28,7 +27,7 @@ namespace InfluxDB.Client.Test
 
             _usersApi = Client.GetUsersApi();
 
-            (await _tasksApi.FindTasks()).ForEach(async task => await _tasksApi.DeleteTask(task));
+            _tasksApi.FindTasks().ForEach(task => _tasksApi.DeleteTask(task));
         }
 
         private const string TaskFlux = "from(bucket: \"my-bucket\")\n\t|> range(start: 0)\n\t|> last()";
@@ -38,41 +37,43 @@ namespace InfluxDB.Client.Test
 
         private Organization _organization;
 
-        private async Task<Authorization> AddAuthorization(Organization organization)
+        private Authorization AddAuthorization(Organization organization)
         {
-            var resourceTask = new PermissionResource {Type = ResourceType.Tasks, OrgId = organization.Id};
-            var resourceBucket = new PermissionResource {Type = ResourceType.Buckets, OrgId = organization.Id, Id = (await Client.GetBucketsApi().FindBucketByName("my-bucket")).Id};
-            var resourceOrg = new PermissionResource {Type = ResourceType.Orgs};
-            var resourceUser = new PermissionResource {Type = ResourceType.Users};
-            var resourceAuthorization = new PermissionResource {Type = ResourceType.Authorizations};
+            var resourceTask = new PermissionResource(PermissionResource.TypeEnum.Tasks, null, null, organization.Id);
+            var resourceBucket = new PermissionResource(PermissionResource.TypeEnum.Buckets,
+                Client.GetBucketsApi().FindBucketByName("my-bucket").Id, null, organization.Id);
+            var resourceOrg = new PermissionResource(PermissionResource.TypeEnum.Orgs);
+            var resourceUser = new PermissionResource(PermissionResource.TypeEnum.Users);
+            var resourceAuthorization = new PermissionResource(PermissionResource.TypeEnum.Authorizations);
 
 
-            var authorization = await Client.GetAuthorizationsApi()
+            var authorization = Client.GetAuthorizationsApi()
                 .CreateAuthorization(organization, new List<Permission>
                 {
-                    new Permission {Resource = resourceTask, Action = Permission.ReadAction},
-                    new Permission {Resource = resourceTask, Action = Permission.WriteAction},
-                    new Permission {Resource = resourceOrg, Action = Permission.WriteAction},
-                    new Permission {Resource = resourceUser, Action = Permission.WriteAction},
-                    new Permission {Resource = resourceAuthorization, Action = Permission.WriteAction},
-                    new Permission {Resource = resourceBucket, Action = Permission.ReadAction},
-                    new Permission {Resource = resourceBucket, Action = Permission.WriteAction}
+                    new Permission(Permission.ActionEnum.Read, resourceTask),
+                    new Permission(Permission.ActionEnum.Write, resourceTask),
+                    new Permission(Permission.ActionEnum.Read, resourceOrg),
+                    new Permission(Permission.ActionEnum.Write, resourceOrg),
+                    new Permission(Permission.ActionEnum.Write, resourceUser),
+                    new Permission(Permission.ActionEnum.Write, resourceAuthorization),
+                    new Permission(Permission.ActionEnum.Read, resourceBucket),
+                    new Permission(Permission.ActionEnum.Write, resourceBucket)
                 });
 
             return authorization;
         }
 
         [Test]
-        public async Task CancelRunNotExist()
+        public void CancelRunNotExist()
         {
-            var task = await _tasksApi.CreateTaskEvery(GenerateName("it task"), TaskFlux, "1s", _organization);
+            var task = _tasksApi.CreateTaskEvery(GenerateName("it task"), TaskFlux, "1s", _organization);
 
             Thread.Sleep(5_000);
 
-            var runs = await _tasksApi.GetRuns(task, null, null, 1);
+            var runs = _tasksApi.GetRuns(task, null, null, 1);
             Assert.IsNotEmpty(runs);
 
-            var message = Assert.ThrowsAsync<HttpException>(async () => await _tasksApi.CancelRun(runs[0]))
+            var message = Assert.Throws<HttpException>(() => _tasksApi.CancelRun(runs[0]))
                 .ErrorBody["error"].ToString();
 
             Assert.AreEqual(message, "run not found");
@@ -81,157 +82,186 @@ namespace InfluxDB.Client.Test
         [Test]
         public void CancelRunTaskNotExist()
         {
-            var message = Assert.ThrowsAsync<HttpException>(async () =>
-                await _tasksApi.CancelRun("020f755c3c082000", "020f755c3c082000")).ErrorBody["error"].ToString();
+            var message = Assert.Throws<HttpException>(() =>
+                _tasksApi.CancelRun("020f755c3c082000", "020f755c3c082000")).ErrorBody["error"].ToString();
 
             Assert.AreEqual(message, "task not found");
         }
 
         [Test]
-        public async Task CreateTask()
+        public void CloneTask()
+        {
+            var source = _tasksApi.CreateTaskEvery(GenerateName("it task"), TaskFlux, "1s", _organization);
+
+            var properties = new Dictionary<string, string> {{"color", "green"}, {"location", "west"}};
+
+            var label = Client.GetLabelsApi().CreateLabel(GenerateName("Cool Resource"), properties, _organization.Id);
+            _tasksApi.AddLabel(label, source);
+
+            var cloned = _tasksApi.CloneTask(source);
+
+            Assert.AreEqual(source.Name, cloned.Name);
+            Assert.AreEqual(_organization.Id, cloned.OrgID);
+            Assert.AreEqual(source.Flux, cloned.Flux);
+            Assert.AreEqual("1s", cloned.Every);
+            Assert.IsNull(cloned.Cron);
+            Assert.IsNull(cloned.Offset);
+
+            var labels = _tasksApi.GetLabels(cloned);
+            Assert.AreEqual(1, labels.Count);
+            Assert.AreEqual(label.Id, labels[0].Id);
+        }
+
+        [Test]
+        public void CloneTaskNotFound()
+        {
+            var ioe = Assert.Throws<HttpException>(() => _tasksApi.CloneTask("020f755c3c082000"));
+
+            Assert.AreEqual("failed to find task", ioe.Message);
+        }
+
+        [Test]
+        public void CreateTask()
         {
             var taskName = GenerateName("it task");
 
             var flux = $"option task = {{\nname: \"{taskName}\",\nevery: 1h\n}}\n\n{TaskFlux}";
 
-            var task = new Domain.Task
-            {
-                Name = taskName, OrgId = _organization.Id, Flux = flux, Status = Status.Active
-            };
+            var task = new Task(_organization.Id, _organization.Name,
+                taskName, Task.StatusEnum.Active, null, null, flux);
 
-            task = await _tasksApi.CreateTask(task);
+            task = _tasksApi.CreateTask(task);
 
             Assert.IsNotNull(task);
             Assert.IsNotEmpty(task.Id);
             Assert.AreEqual(taskName, task.Name);
-            Assert.AreEqual(_organization.Id, task.OrgId);
-            Assert.AreEqual(Status.Active, task.Status);
-            Assert.AreEqual("1h0m0s", task.Every);
+            Assert.AreEqual(_organization.Id, task.OrgID);
+            Assert.AreEqual(Task.StatusEnum.Active, task.Status);
+            Assert.AreEqual("1h", task.Every);
             Assert.IsNull(task.Cron);
             Assert.IsTrue(task.Flux.Equals(flux, StringComparison.OrdinalIgnoreCase));
         }
 
         [Test]
-        public async Task CreateTaskCron()
+        public void CreateTaskCron()
         {
             var taskName = GenerateName("it task");
 
 
             var task =
-                await _tasksApi.CreateTaskCron(taskName, TaskFlux, "0 2 * * *", _organization);
+                _tasksApi.CreateTaskCron(taskName, TaskFlux, "0 2 * * *", _organization);
 
             Assert.IsNotNull(task);
             Assert.IsNotEmpty(task.Id);
             Assert.AreEqual(taskName, task.Name);
-            Assert.AreEqual(_organization.Id, task.OrgId);
-            Assert.AreEqual(Status.Active, task.Status);
+            Assert.AreEqual(_organization.Id, task.OrgID);
+            Assert.AreEqual(Task.StatusEnum.Active, task.Status);
             Assert.AreEqual("0 2 * * *", task.Cron);
             Assert.IsNull(task.Every);
             Assert.IsTrue(task.Flux.EndsWith(TaskFlux, StringComparison.OrdinalIgnoreCase));
         }
 
         [Test]
-        public async Task CreateTaskEvery()
+        public void CreateTaskEvery()
         {
             var taskName = GenerateName("it task");
 
 
             var task =
-                await _tasksApi.CreateTaskEvery(taskName, TaskFlux, "1h", _organization);
+                _tasksApi.CreateTaskEvery(taskName, TaskFlux, "1h", _organization);
 
             Assert.IsNotNull(task);
             Assert.IsNotEmpty(task.Id);
             Assert.AreEqual(taskName, task.Name);
-            Assert.AreEqual(_organization.Id, task.OrgId);
-            Assert.AreEqual(Status.Active, task.Status);
-            Assert.AreEqual("1h0m0s", task.Every);
+            Assert.AreEqual(_organization.Id, task.OrgID);
+            Assert.AreEqual(Task.StatusEnum.Active, task.Status);
+            Assert.AreEqual("1h", task.Every);
             Assert.IsNull(task.Cron);
             Assert.IsTrue(task.Flux.EndsWith(TaskFlux, StringComparison.OrdinalIgnoreCase));
         }
 
         [Test]
-        public async Task CreateTaskWithOffset()
+        public void CreateTaskWithOffset()
         {
             Client.SetLogLevel(LogLevel.Body);
-            
+
             var taskName = GenerateName("it task");
 
             var flux = $"option task = {{\nname: \"{taskName}\",\nevery: 1h,\noffset: 30m\n}}\n\n{TaskFlux}";
 
-            var task = new Domain.Task
-            {
-                Name = taskName, OrgId = _organization.Id, Flux = flux, Status = Status.Active
-            };
+            var task = new Task(_organization.Id, _organization.Name, taskName,
+                Task.StatusEnum.Active, null, null, flux);
 
-            task = await _tasksApi.CreateTask(task);
+            task = _tasksApi.CreateTask(task);
 
             Assert.IsNotNull(task);
-            Assert.AreEqual("30m0s", task.Offset);
+            Assert.AreEqual("30m", task.Offset);
         }
 
         [Test]
-        public async Task DeleteTask()
+        public void DeleteTask()
         {
-            var task = await _tasksApi.CreateTaskCron(GenerateName("it task"), TaskFlux, "0 2 * * *", _organization);
+            var task = _tasksApi.CreateTaskCron(GenerateName("it task"), TaskFlux, "0 2 * * *", _organization);
 
-            var foundTask = await _tasksApi.FindTaskById(task.Id);
+            var foundTask = _tasksApi.FindTaskById(task.Id);
             Assert.IsNotNull(foundTask);
 
-            await _tasksApi.DeleteTask(task);
-            foundTask = await _tasksApi.FindTaskById(task.Id);
+            _tasksApi.DeleteTask(task);
 
-            Assert.IsNull(foundTask);
+            var ioe = Assert.Throws<HttpException>(() => _tasksApi.FindTaskById(task.Id));
+
+            Assert.AreEqual("failed to find task", ioe.Message);
         }
 
         [Test]
-        public async Task FindTaskById()
+        public void FindTaskById()
         {
             var taskName = GenerateName("it task");
 
-            var task = await _tasksApi.CreateTaskCron(taskName, TaskFlux, "0 2 * * *", _organization);
+            var task = _tasksApi.CreateTaskCron(taskName, TaskFlux, "0 2 * * *", _organization);
 
-            var taskById = await _tasksApi.FindTaskById(task.Id);
+            var taskById = _tasksApi.FindTaskById(task.Id);
 
             Assert.IsNotNull(taskById);
             Assert.IsNotEmpty(task.Id);
             Assert.AreEqual(task.Id, taskById.Id);
             Assert.AreEqual(task.Name, taskById.Name);
-            Assert.AreEqual(task.OrgId, taskById.OrgId);
+            Assert.AreEqual(task.OrgID, taskById.OrgID);
             Assert.AreEqual(task.Status, taskById.Status);
             Assert.AreEqual(task.Offset, taskById.Offset);
             Assert.AreEqual(task.Flux, taskById.Flux);
             Assert.AreEqual(task.Cron, taskById.Cron);
-            Assert.IsNotNull(task.CreatedAt);
+            Assert.IsNotNull(taskById.CreatedAt);
         }
 
         [Test]
-        public async Task FindTaskByIdNull()
+        public void FindTaskByIdNull()
         {
-            var task = await _tasksApi.FindTaskById("020f755c3d082000");
+            var ioe = Assert.Throws<HttpException>(() => _tasksApi.FindTaskById("020f755c3d082000"));
 
-            Assert.IsNull(task);
+            Assert.AreEqual("failed to find task", ioe.Message);
         }
 
         [Test]
-        public async Task FindTasks()
+        public void FindTasks()
         {
-            var count = (await _tasksApi.FindTasks()).Count;
+            var count = _tasksApi.FindTasks().Count;
 
-            var task = await _tasksApi.CreateTaskEvery(GenerateName("it task"), TaskFlux, "2h", _organization.Id);
+            var task = _tasksApi.CreateTaskEvery(GenerateName("it task"), TaskFlux, "2h", _organization.Id);
             Assert.IsNotNull(task);
 
-            var tasks = await _tasksApi.FindTasks();
+            var tasks = _tasksApi.FindTasks();
 
             Assert.AreEqual(count + 1, tasks.Count);
         }
 
         [Test]
-        public async Task FindTasksAfterSpecifiedId()
+        public void FindTasksAfterSpecifiedId()
         {
-            var task1 = await _tasksApi.CreateTaskCron(GenerateName("it task"), TaskFlux, "0 2 * * *", _organization);
-            var task2 = await _tasksApi.CreateTaskCron(GenerateName("it task"), TaskFlux, "0 2 * * *", _organization);
+            var task1 = _tasksApi.CreateTaskCron(GenerateName("it task"), TaskFlux, "0 2 * * *", _organization);
+            var task2 = _tasksApi.CreateTaskCron(GenerateName("it task"), TaskFlux, "0 2 * * *", _organization);
 
-            var tasks = await _tasksApi.FindTasks(task1.Id, null, null);
+            var tasks = _tasksApi.FindTasks(task1.Id);
 
             Assert.AreEqual(1, tasks.Count);
             Assert.AreEqual(task2.Id, tasks[0].Id);
@@ -240,355 +270,325 @@ namespace InfluxDB.Client.Test
         [Test]
         [Ignore("https://github.com/influxdata/influxdb/issues/11491")]
         //TODO
-        public async Task FindTasksByOrganization()
+        public void FindTasksByOrganization()
         {
-            var taskOrg = await Client.GetOrganizationsApi().CreateOrganization(GenerateName("Task user"));
-            var authorization = await AddAuthorization(taskOrg);
+            var taskOrg = Client.GetOrganizationsApi().CreateOrganization(GenerateName("Task user"));
+            var authorization = AddAuthorization(taskOrg);
 
             Client.Dispose();
             Client = InfluxDBClientFactory.Create(InfluxDbUrl, authorization.Token.ToCharArray());
             _tasksApi = Client.GetTasksApi();
 
-            var count = (await _tasksApi.FindTasksByOrganization(taskOrg)).Count;
+            var count = _tasksApi.FindTasksByOrganization(taskOrg).Count;
             Assert.AreEqual(0, count);
 
-            await _tasksApi.CreateTaskCron(GenerateName("it task"), TaskFlux, "0 2 * * *", taskOrg);
+            _tasksApi.CreateTaskCron(GenerateName("it task"), TaskFlux, "0 2 * * *", taskOrg);
 
-            var tasks = await _tasksApi.FindTasksByOrganization(taskOrg);
+            var tasks = _tasksApi.FindTasksByOrganization(taskOrg);
 
             Assert.AreEqual(1, tasks.Count);
 
-            (await _tasksApi.FindTasks()).ForEach(async task => await _tasksApi.DeleteTask(task));
+            _tasksApi.FindTasks().ForEach(task => _tasksApi.DeleteTask(task));
         }
 
         [Test]
         //TODO
         [Ignore("set user password -> https://github.com/influxdata/influxdb/issues/11590")]
-        public async Task FindTasksByUser()
+        public void FindTasksByUser()
         {
-            var taskUser = await Client.GetUsersApi().CreateUser(GenerateName("Task user"));
+            var taskUser = Client.GetUsersApi().CreateUser(GenerateName("Task user"));
 
-            var count = (await _tasksApi.FindTasksByUser(taskUser)).Count;
+            var count = _tasksApi.FindTasksByUser(taskUser).Count;
             Assert.AreEqual(0, count);
 
-            await _tasksApi.CreateTaskCron(GenerateName("it task"), TaskFlux, "0 2 * * *", _organization);
+            _tasksApi.CreateTaskCron(GenerateName("it task"), TaskFlux, "0 2 * * *", _organization);
 
-            var tasks = await _tasksApi.FindTasksByUser(taskUser);
+            var tasks = _tasksApi.FindTasksByUser(taskUser);
 
             Assert.AreEqual(1, tasks.Count);
         }
 
         [Test]
-        public async Task GetLogs()
+        public void GetLogs()
         {
-            var task = await _tasksApi.CreateTaskEvery(GenerateName("it task"), TaskFlux, "1s", _organization.Id);
+            var task = _tasksApi.CreateTaskEvery(GenerateName("it task"), TaskFlux, "1s", _organization.Id);
 
             Thread.Sleep(5_000);
 
-            var logs = await _tasksApi.GetLogs(task);
+            var logs = _tasksApi.GetLogs(task);
             Assert.IsNotEmpty(logs);
             Assert.IsTrue(logs.First().Message.StartsWith("Started task from script:"));
             Assert.IsTrue(logs.Last().Message.EndsWith("Completed successfully"));
         }
 
         [Test]
-        public async Task GetLogsNotExist()
+        public void GetLogsNotExist()
         {
-            var logs = await _tasksApi.GetLogs("020f755c3c082000", _organization.Id);
+            var ioe = Assert.Throws<HttpException>(() => _tasksApi.GetLogs("020f755c3c082000"));
 
-            Assert.IsEmpty(logs);
+            Assert.AreEqual("failed to find task logs", ioe.Message);
         }
 
         [Test]
-        public async Task GetRun()
+        public void GetRun()
         {
-            var task = await _tasksApi.CreateTaskEvery(GenerateName("it task"), TaskFlux, "1s", _organization);
+            var task = _tasksApi.CreateTaskEvery(GenerateName("it task"), TaskFlux, "1s", _organization);
             Thread.Sleep(5_000);
 
-            var runs = await _tasksApi.GetRuns(task, null, null, 1);
+            var runs = _tasksApi.GetRuns(task, null, null, 1);
             Assert.AreEqual(1, runs.Count);
 
             var firstRun = runs[0];
-            var runById = await _tasksApi.GetRun(task.Id, firstRun.Id);
+            var runById = _tasksApi.GetRun(task.Id, firstRun.Id);
 
             Assert.IsNotNull(runById);
             Assert.AreEqual(firstRun.Id, runById.Id);
         }
 
         [Test]
-        public async Task GetRunLogs()
+        public void GetRunLogs()
         {
-            var task = await _tasksApi.CreateTaskEvery(GenerateName("it task"), TaskFlux, "1s", _organization);
+            var task = _tasksApi.CreateTaskEvery(GenerateName("it task"), TaskFlux, "1s", _organization);
 
             Thread.Sleep(4_000);
 
-            var runs = await _tasksApi.GetRuns(task, null, null, 1);
+            var runs = _tasksApi.GetRuns(task, null, null, 1);
             Assert.AreEqual(1, runs.Count);
 
-            var logs = await _tasksApi.GetRunLogs(runs[0], _organization.Id);
+            var logs = _tasksApi.GetRunLogs(runs[0], _organization.Id);
             Assert.IsNotNull(logs);
             Assert.IsTrue(logs.Last().Message.EndsWith("Completed successfully"));
         }
 
         [Test]
-        public async Task GetRunLogsNotExist()
+        public void GetRunLogsNotExist()
         {
-            var task = await _tasksApi.CreateTaskEvery(GenerateName("it task"), TaskFlux, "1s", _organization);
+            var task = _tasksApi.CreateTaskEvery(GenerateName("it task"), TaskFlux, "1s", _organization);
 
-            var logs = await _tasksApi.GetRunLogs(task.Id, "020f755c3c082000", _organization.Id);
+            var logs = _tasksApi.GetRunLogs(task.Id, "020f755c3c082000", _organization.Id);
             Assert.IsEmpty(logs);
         }
 
         [Test]
-        public async Task Labels()
+        public void Labels()
         {
             var labelClient = Client.GetLabelsApi();
 
-            var task = await _tasksApi.CreateTaskEvery(GenerateName("it task"), TaskFlux, "1s", _organization);
+            var task = _tasksApi.CreateTaskEvery(GenerateName("it task"), TaskFlux, "1s", _organization);
 
             var properties = new Dictionary<string, string> {{"color", "green"}, {"location", "west"}};
 
-            var label = await labelClient.CreateLabel(GenerateName("Cool Resource"), properties);
+            var label = labelClient.CreateLabel(GenerateName("Cool Resource"), properties, _organization.Id);
 
-            var labels = await _tasksApi.GetLabels(task);
+            var labels = _tasksApi.GetLabels(task);
             Assert.AreEqual(0, labels.Count);
 
-            var addedLabel = await _tasksApi.AddLabel(label, task);
+            var addedLabel = _tasksApi.AddLabel(label, task);
             Assert.IsNotNull(addedLabel);
             Assert.AreEqual(label.Id, addedLabel.Id);
             Assert.AreEqual(label.Name, addedLabel.Name);
             Assert.AreEqual(label.Properties, addedLabel.Properties);
 
-            labels = await _tasksApi.GetLabels(task);
+            labels = _tasksApi.GetLabels(task);
             Assert.AreEqual(1, labels.Count);
             Assert.AreEqual(label.Id, labels[0].Id);
             Assert.AreEqual(label.Name, labels[0].Name);
 
-            task = await _tasksApi.FindTaskById(task.Id);
+            task = _tasksApi.FindTaskById(task.Id);
             Assert.IsNotNull(task);
             Assert.AreEqual(1, task.Labels.Count);
             Assert.AreEqual(label.Id, task.Labels[0].Id);
             Assert.AreEqual(label.Name, task.Labels[0].Name);
 
-            await _tasksApi.DeleteLabel(label, task);
+            _tasksApi.DeleteLabel(label, task);
 
-            labels = await _tasksApi.GetLabels(task);
+            labels = _tasksApi.GetLabels(task);
             Assert.AreEqual(0, labels.Count);
         }
 
         [Test]
         [Ignore("https://github.com/influxdata/influxdb/issues/11491")]
         //TODO
-        public async Task Member()
+        public void Member()
         {
-            var task = await _tasksApi.CreateTaskCron(GenerateName("it task"), TaskFlux, "0 2 * * *", _organization);
+            var task = _tasksApi.CreateTaskCron(GenerateName("it task"), TaskFlux, "0 2 * * *", _organization);
 
-            var members = await _tasksApi.GetMembers(task);
+            var members = _tasksApi.GetMembers(task);
             Assert.AreEqual(0, members.Count);
 
-            var user = await _usersApi.CreateUser(GenerateName("Luke Health"));
+            var user = _usersApi.CreateUser(GenerateName("Luke Health"));
 
-            var resourceMember = await _tasksApi.AddMember(user, task);
+            var resourceMember = _tasksApi.AddMember(user, task);
             Assert.IsNotNull(resourceMember);
-            Assert.AreEqual(resourceMember.UserId, user.Id);
-            Assert.AreEqual(resourceMember.UserName, user.Name);
-            Assert.AreEqual(resourceMember.Role, ResourceMember.UserType.Member);
+            Assert.AreEqual(resourceMember.Id, user.Id);
+            Assert.AreEqual(resourceMember.Name, user.Name);
+            Assert.AreEqual(resourceMember.Role, ResourceMember.RoleEnum.Member);
 
-            members = await _tasksApi.GetMembers(task);
+            members = _tasksApi.GetMembers(task);
             Assert.AreEqual(1, members.Count);
-            Assert.AreEqual(members[0].UserId, user.Id);
-            Assert.AreEqual(members[0].UserName, user.Name);
-            Assert.AreEqual(members[0].Role, ResourceMember.UserType.Member);
-            await _tasksApi.DeleteMember(user, task);
+            Assert.AreEqual(members[0].Id, user.Id);
+            Assert.AreEqual(members[0].Name, user.Name);
+            Assert.AreEqual(members[0].Role, ResourceMember.RoleEnum.Member);
+            _tasksApi.DeleteMember(user, task);
 
-            members = await _tasksApi.GetMembers(task);
+            members = _tasksApi.GetMembers(task);
             Assert.AreEqual(0, members.Count);
         }
 
         [Test]
         [Ignore("https://github.com/influxdata/influxdb/issues/11491")]
         //TODO
-        public async Task Owner()
+        public void Owner()
         {
-            var task = await _tasksApi.CreateTaskCron(GenerateName("it task"), TaskFlux, "0 2 * * *", _organization.Id);
+            var task = _tasksApi.CreateTaskCron(GenerateName("it task"), TaskFlux, "0 2 * * *", _organization.Id);
 
-            var owners = await _tasksApi.GetOwners(task);
+            var owners = _tasksApi.GetOwners(task);
             Assert.AreEqual(0, owners.Count);
 
-            var user = await _usersApi.CreateUser(GenerateName("Luke Health"));
+            var user = _usersApi.CreateUser(GenerateName("Luke Health"));
 
-            var resourceMember = await _tasksApi.AddOwner(user, task);
+            var resourceMember = _tasksApi.AddOwner(user, task);
             Assert.IsNotNull(resourceMember);
-            Assert.AreEqual(resourceMember.UserId, user.Id);
-            Assert.AreEqual(resourceMember.UserName, user.Name);
-            Assert.AreEqual(resourceMember.Role, ResourceMember.UserType.Owner);
+            Assert.AreEqual(resourceMember.Id, user.Id);
+            Assert.AreEqual(resourceMember.Name, user.Name);
+            Assert.AreEqual(resourceMember.Role, ResourceOwner.RoleEnum.Owner);
 
-            owners = await _tasksApi.GetOwners(task);
+            owners = _tasksApi.GetOwners(task);
             Assert.AreEqual(1, owners.Count);
-            Assert.AreEqual(owners[0].UserId, user.Id);
-            Assert.AreEqual(owners[0].UserName, user.Name);
-            Assert.AreEqual(owners[0].Role, ResourceMember.UserType.Owner);
+            Assert.AreEqual(owners[0].Id, user.Id);
+            Assert.AreEqual(owners[0].Name, user.Name);
+            Assert.AreEqual(owners[0].Role, ResourceOwner.RoleEnum.Owner);
 
-            await _tasksApi.DeleteOwner(user, task);
+            _tasksApi.DeleteOwner(user, task);
 
-            owners = await _tasksApi.GetOwners(task);
+            owners = _tasksApi.GetOwners(task);
             Assert.AreEqual(0, owners.Count);
         }
 
         [Test]
-        public async Task RetryRun()
+        public void RetryRun()
         {
-            var task = await _tasksApi.CreateTaskEvery(GenerateName("it task"), TaskFlux, "1s", _organization);
+            var task = _tasksApi.CreateTaskEvery(GenerateName("it task"), TaskFlux, "1s", _organization);
             Thread.Sleep(5_000);
 
-            var runs = await _tasksApi.GetRuns(task, null, null, 1);
+            var runs = _tasksApi.GetRuns(task, null, null, 1);
             Assert.AreEqual(1, runs.Count);
 
             var run = runs[0];
 
-            var retriedRun = await _tasksApi.RetryRun(run);
+            var retriedRun = _tasksApi.RetryRun(run);
 
             Assert.IsNotNull(retriedRun);
-            Assert.AreEqual(run.TaskId, retriedRun.TaskId);
-            Assert.AreEqual(RunStatus.Scheduled, retriedRun.Status);
-            Assert.AreEqual(task.Id, retriedRun.TaskId);
+            Assert.AreEqual(run.TaskID, retriedRun.TaskID);
+            Assert.AreEqual(Run.StatusEnum.Scheduled, retriedRun.Status);
+            Assert.AreEqual(task.Id, retriedRun.TaskID);
         }
 
         [Test]
-        public async Task RetryRunNotExist()
+        public void RetryRunNotExist()
         {
-            var task = await _tasksApi.CreateTaskEvery(GenerateName("it task"), TaskFlux, "1s", _organization);
+            var task = _tasksApi.CreateTaskEvery(GenerateName("it task"), TaskFlux, "1s", _organization);
 
-            var retriedRun = await _tasksApi.RetryRun(task.Id, "020f755c3c082000");
+            var ioe = Assert.Throws<HttpException>(() => _tasksApi.RetryRun(task.Id, "020f755c3c082000"));
 
-            Assert.IsNull(retriedRun);
+            Assert.AreEqual("failed to retry run", ioe.Message);
         }
 
         [Test]
-        public async Task RunNotExist()
+        public void RunNotExist()
         {
-            var task = await _tasksApi.CreateTaskEvery(GenerateName("it task"), TaskFlux, "1s", _organization);
+            var task = _tasksApi.CreateTaskEvery(GenerateName("it task"), TaskFlux, "1s", _organization);
 
-            var run = await _tasksApi.GetRun(task.Id, "020f755c3c082000");
-            Assert.IsNull(run);
+            var ioe = Assert.Throws<HttpException>(() => _tasksApi.GetRun(task.Id, "020f755c3c082000"));
+
+            Assert.AreEqual("failed to find run", ioe.Message);
         }
 
         [Test]
-        public async Task Runs()
+        public void Runs()
         {
-            var task = await _tasksApi.CreateTaskEvery(GenerateName("it task"), TaskFlux, "1s", _organization.Id);
+            var task = _tasksApi.CreateTaskEvery(GenerateName("it task"), TaskFlux, "1s", _organization.Id);
 
             Thread.Sleep(5_000);
 
-            var runs = await _tasksApi.GetRuns(task);
+            var runs = _tasksApi.GetRuns(task);
             Assert.IsNotEmpty(runs);
 
             Assert.IsNotEmpty(runs[0].Id);
-            Assert.AreEqual(task.Id, runs[0].TaskId);
-            Assert.AreEqual(RunStatus.Success, runs[0].Status);
+            Assert.AreEqual(task.Id, runs[0].TaskID);
+            Assert.AreEqual(Run.StatusEnum.Success, runs[0].Status);
             Assert.Greater(DateTime.Now, runs[0].StartedAt);
             Assert.Greater(DateTime.Now, runs[0].FinishedAt);
             Assert.Greater(DateTime.Now, runs[0].ScheduledFor);
             Assert.IsNull(runs[0].RequestedAt);
-            Assert.IsNull(runs[0].Log);
 
-            task = await _tasksApi.FindTaskById(task.Id);
+            task = _tasksApi.FindTaskById(task.Id);
             Assert.IsNotNull(task.LatestCompleted);
         }
 
         [Test]
-        public async Task RunsByTime()
+        public void RunsByTime()
         {
             var now = DateTime.UtcNow;
 
-            var task = await _tasksApi.CreateTaskEvery(GenerateName("it task"), TaskFlux, "1s", _organization.Id);
+            var task = _tasksApi.CreateTaskEvery(GenerateName("it task"), TaskFlux, "1s", _organization.Id);
 
             Thread.Sleep(5_000);
 
-            var runs = await _tasksApi.GetRuns(task, null, now, null);
+            var runs = _tasksApi.GetRuns(task, null, now, null);
             Assert.IsEmpty(runs);
 
-            runs = await _tasksApi.GetRuns(task, now, null, null);
+            runs = _tasksApi.GetRuns(task, now, null, null);
             Assert.IsNotEmpty(runs);
         }
 
         [Test]
-        public async Task RunsLimit()
+        public void RunsLimit()
         {
-            var task = await _tasksApi.CreateTaskEvery(GenerateName("it task"), TaskFlux, "1s", _organization);
+            var task = _tasksApi.CreateTaskEvery(GenerateName("it task"), TaskFlux, "1s", _organization);
 
             Thread.Sleep(5_000);
 
-            var runs = await _tasksApi.GetRuns(task, null, null, 1);
+            var runs = _tasksApi.GetRuns(task, null, null, 1);
             Assert.AreEqual(1, runs.Count);
 
-            runs = await _tasksApi.GetRuns(task, null, null, null);
+            runs = _tasksApi.GetRuns(task, null, null, null);
             Assert.Greater(runs.Count, 1);
         }
 
         [Test]
-        public async Task RunsNotExist()
+        public void RunsNotExist()
         {
-            var runs = await _tasksApi.GetRuns("020f755c3c082000", _organization.Id);
-            Assert.IsEmpty(runs);
+            var ioe = Assert.Throws<HttpException>(() => _tasksApi.GetRuns("020f755c3c082000", _organization.Id));
+
+            Assert.AreEqual("failed to find runs", ioe.Message);
         }
 
         [Test]
-        public async Task UpdateTask()
+        public void UpdateTask()
         {
             var taskName = GenerateName("it task");
 
             var cronTask =
-                await _tasksApi.CreateTaskCron(taskName, TaskFlux, "0 2 * * *", _organization);
+                _tasksApi.CreateTaskCron(taskName, TaskFlux, "0 2 * * *", _organization);
 
             var flux = $"option task = {{name: \"{taskName}\", every: 3m}}\n\n{TaskFlux}";
 
-            cronTask.Flux = flux;
-            cronTask.Status = Status.Inactive;
+            cronTask.Every = "3m";
+            cronTask.Cron = null;
+            cronTask.Status = Task.StatusEnum.Inactive;
 
-            var updatedTask = await _tasksApi.UpdateTask(cronTask);
+            var updatedTask = _tasksApi.UpdateTask(cronTask);
 
             Assert.IsNotNull(updatedTask);
             Assert.IsNotEmpty(updatedTask.Id);
             Assert.AreEqual(taskName, updatedTask.Name);
-            Assert.AreEqual(_organization.Id, updatedTask.OrgId);
-            Assert.AreEqual(Status.Inactive, updatedTask.Status);
+            Assert.AreEqual(_organization.Id, updatedTask.OrgID);
+            Assert.AreEqual(Task.StatusEnum.Inactive, updatedTask.Status);
+            Assert.AreEqual("3m", updatedTask.Every);
             Assert.IsNull(updatedTask.Cron);
-            Assert.AreEqual("3m0s", updatedTask.Every);
             Assert.AreEqual(updatedTask.Flux, flux);
             Assert.IsNotNull(updatedTask.UpdatedAt);
-        }
-        
-        [Test]
-        public async Task CloneTask()
-        {
-            var source = await _tasksApi.CreateTaskEvery(GenerateName("it task"), TaskFlux, "1s", _organization);
-
-            var properties = new Dictionary<string, string> {{"color", "green"}, {"location", "west"}};
-
-            var label = await Client.GetLabelsApi().CreateLabel(GenerateName("Cool Resource"), properties);
-            await _tasksApi.AddLabel(label, source);
-
-            var cloned = await _tasksApi.CloneTask(source);
-            
-            Assert.AreEqual(source.Name, cloned.Name);
-            Assert.AreEqual(_organization.Id, cloned.OrgId);
-            Assert.AreEqual(source.Flux, cloned.Flux);
-            Assert.AreEqual("1s", cloned.Every);
-            Assert.IsNull(cloned.Cron);
-            Assert.IsNull(cloned.Offset);
-
-            var labels = await _tasksApi.GetLabels(cloned);
-            Assert.AreEqual(1, labels.Count);
-            Assert.AreEqual(label.Id, labels[0].Id);
-        }
-
-        [Test]
-        public void CloneTaskNotFound()
-        {
-            var ioe = Assert.ThrowsAsync<InvalidOperationException>(async () => await _tasksApi.CloneTask("020f755c3c082000"));
-            
-            Assert.AreEqual("NotFound Task with ID: 020f755c3c082000", ioe.Message);
         }
     }
 }

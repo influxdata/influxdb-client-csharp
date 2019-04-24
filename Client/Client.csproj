@@ -26,9 +26,13 @@
     </ItemGroup>
 
     <ItemGroup>
+      <PackageReference Include="JsonSubTypes" Version="1.5.2" />
       <PackageReference Include="Microsoft.Net.Http.Headers" Version="2.1.1" />
-      <PackageReference Include="RestSharp" Version="106.6.9" />
       <PackageReference Include="System.Reactive" Version="4.1.2" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Domain" />
     </ItemGroup>
 
 </Project>

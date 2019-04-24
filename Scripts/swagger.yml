@@ -14,7 +14,7 @@ paths:
         - $ref: '#/components/parameters/TraceSpan'
       responses:
         '204':
-          description: succesfully authenticated
+          description: successfully authenticated
         '401':
           description: unauthorized access
           content:
@@ -99,17 +99,17 @@ paths:
       tags:
         - Templates
       parameters:
-          - $ref: '#/components/parameters/TraceSpan'
-          - in: query
-            name: org
-            description: specifies the name of the organization of the template
-            schema:
-              type: string
-          - in: query
-            name: orgID
-            description: specifies the organization id of the template
-            schema:
-              type: string
+        - $ref: '#/components/parameters/TraceSpan'
+        - in: query
+          name: org
+          description: specifies the name of the organization of the template
+          schema:
+            type: string
+        - in: query
+          name: orgID
+          description: specifies the organization id of the template
+          schema:
+            type: string
       responses:
         '200':
           description: a list of template documents
@@ -128,7 +128,7 @@ paths:
         - Templates
       summary: Create a template
       parameters:
-          - $ref: '#/components/parameters/TraceSpan'
+        - $ref: '#/components/parameters/TraceSpan'
       requestBody:
         description: template that will be created
         required: true
@@ -226,18 +226,109 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
+  '/documents/templates/{templateID}/labels':
+    get:
+      tags:
+        - Templates
+      summary: list all labels for a template
+      parameters:
+        - $ref: '#/components/parameters/TraceSpan'
+        - in: path
+          name: templateID
+          schema:
+            type: string
+          required: true
+          description: ID of template
+      responses:
+        '200':
+          description: a list of all labels for a template
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LabelsResponse"
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    post:
+      tags:
+        - Templates
+      summary: add a label to a template
+      parameters:
+        - $ref: '#/components/parameters/TraceSpan'
+        - in: path
+          name: templateID
+          schema:
+            type: string
+          required: true
+          description: ID of template
+      requestBody:
+        description: label to add
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LabelMapping"
+      responses:
+        '201':
+          description: "the label added to the template"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LabelResponse"
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  '/documents/templates/{templateID}/labels/{labelID}':
+    delete:
+      tags:
+        - Templates
+      summary: delete a label from a template
+      parameters:
+        - $ref: '#/components/parameters/TraceSpan'
+        - in: path
+          name: templateID
+          schema:
+            type: string
+          required: true
+          description: ID of template
+        - in: path
+          name: labelID
+          schema:
+            type: string
+          required: true
+          description: the label ID
+      responses:
+        '204':
+          description: delete has been accepted
+        '404':
+          description: template not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
   /telegrafs:
     get:
       tags:
         - Telegrafs
       parameters:
-          - $ref: '#/components/parameters/TraceSpan'
-          - in: query
-            name: orgID
-            description: specifies the organization of the resource
-            required: true
-            schema:
-              type: string
+        - $ref: '#/components/parameters/TraceSpan'
+        - in: query
+          name: orgID
+          description: specifies the organization of the resource
+          schema:
+            type: string
       responses:
         '200':
           description: a list of telegraf configs
@@ -256,7 +347,7 @@ paths:
         - Telegrafs
       summary: Create a telegraf config
       parameters:
-          - $ref: '#/components/parameters/TraceSpan'
+        - $ref: '#/components/parameters/TraceSpan'
       requestBody:
         description: telegraf config to create
         required: true
@@ -651,13 +742,12 @@ paths:
         - ScraperTargets
       summary: get all scraper targets
       parameters:
-          - $ref: '#/components/parameters/TraceSpan'
-          - in: query
-            name: orgID
-            description: specifies the organization of the resource
-            required: true
-            schema:
-              type: string
+        - $ref: '#/components/parameters/TraceSpan'
+        - in: query
+          name: orgID
+          description: specifies the organization of the resource
+          schema:
+            type: string
       responses:
         '200':
           description: all scraper targets
@@ -693,24 +783,24 @@ paths:
     get:
       tags:
         - ScraperTargets
-      summary: Retrieve a  scraper target
+      summary: get a scraper target by id
       parameters:
         - $ref: '#/components/parameters/TraceSpan'
         - in: path
           name: scraperTargetID
+          required: true
           schema:
             type: string
-          required: true
-          description: ID of of the scraper target to get
+          description: id of the scraper target
       responses:
         '200':
-          description: the scraper target details
+          description: scraper target updated
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ScraperTargetResponse"
         default:
-          description: unexpected error
+          description: internal server error
           content:
             application/json:
               schema:
@@ -1469,7 +1559,7 @@ paths:
                 $ref: "#/components/schemas/Error"
   /ready:
     servers:
-        - url: /
+      - url: /
     get:
       tags:
         - Ready
@@ -1489,7 +1579,7 @@ paths:
                 $ref: "#/components/schemas/Error"
   /health:
     servers:
-        - url: /
+      - url: /
     get:
       tags:
         - Health
@@ -1521,14 +1611,14 @@ paths:
         - Sources
       summary: Creates a Source
       parameters:
-          - $ref: '#/components/parameters/TraceSpan'
+        - $ref: '#/components/parameters/TraceSpan'
       requestBody:
-          description: source to create
-          required: true
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Source"
+        description: source to create
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Source"
       responses:
         '201':
           description: Created Source
@@ -1547,13 +1637,12 @@ paths:
         - Sources
       summary: Get all sources
       parameters:
-          - $ref: '#/components/parameters/TraceSpan'
-          - in: query
-            name: org
-            description: specifies the organization of the resource
-            required: true
-            schema:
-              type: string
+        - $ref: '#/components/parameters/TraceSpan'
+        - in: query
+          name: org
+          description: specifies the organization of the resource
+          schema:
+            type: string
       responses:
         '200':
           description: all sources
@@ -1599,20 +1688,20 @@ paths:
         - Sources
       summary: Updates a Source
       parameters:
-          - $ref: '#/components/parameters/TraceSpan'
-          - in: path
-            name: sourceID
-            schema:
-              type: string
-            required: true
-            description: ID of the source
-      requestBody:
-          description: source update
+        - $ref: '#/components/parameters/TraceSpan'
+        - in: path
+          name: sourceID
+          schema:
+            type: string
           required: true
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Source"
+          description: ID of the source
+      requestBody:
+        description: source update
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Source"
       responses:
         '200':
           description: Created Source
@@ -1637,13 +1726,13 @@ paths:
         - Sources
       summary: Get a source
       parameters:
-          - $ref: '#/components/parameters/TraceSpan'
-          - in: path
-            name: sourceID
-            schema:
-              type: string
-            required: true
-            description: ID of the source
+        - $ref: '#/components/parameters/TraceSpan'
+        - in: path
+          name: sourceID
+          schema:
+            type: string
+          required: true
+          description: ID of the source
       responses:
         '200':
           description: a source
@@ -1669,13 +1758,13 @@ paths:
         - Sources
       summary: Get a sources health
       parameters:
-          - $ref: '#/components/parameters/TraceSpan'
-          - in: path
-            name: sourceID
-            schema:
-              type: string
-            required: true
-            description: ID of the source
+        - $ref: '#/components/parameters/TraceSpan'
+        - in: path
+          name: sourceID
+          schema:
+            type: string
+          required: true
+          description: ID of the source
       responses:
         '200':
           description: the source is healthy
@@ -1702,19 +1791,18 @@ paths:
         - Buckets
       summary: Get a sources buckets (will return dbrps in the form of buckets if it is a v1 source)
       parameters:
-          - $ref: '#/components/parameters/TraceSpan'
-          - in: path
-            name: sourceID
-            schema:
-              type: string
-            required: true
-            description: ID of the source
-          - in: query
-            name: org
-            description: specifies the organization of the resource
-            required: true
-            schema:
-              type: string
+        - $ref: '#/components/parameters/TraceSpan'
+        - in: path
+          name: sourceID
+          schema:
+            type: string
+          required: true
+          description: ID of the source
+        - in: query
+          name: org
+          description: specifies the organization of the resource
+          schema:
+            type: string
       responses:
         '200':
           description: a source
@@ -1740,12 +1828,12 @@ paths:
         - Labels
       summary: Create a label
       requestBody:
-          description: label to create
-          required: true
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/LabelCreateRequest"
+        description: label to create
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LabelCreateRequest"
       responses:
         '201':
           description: Added label
@@ -1764,13 +1852,12 @@ paths:
         - Labels
       summary: Get all labels
       parameters:
-          - $ref: '#/components/parameters/TraceSpan'
-          - in: query
-            name: orgID
-            description: specifies the organization of the resource
-            required: true
-            schema:
-              type: string
+        - $ref: '#/components/parameters/TraceSpan'
+        - in: query
+          name: orgID
+          description: specifies the organization of the resource
+          schema:
+            type: string
       responses:
         '200':
           description: all labels
@@ -1815,12 +1902,12 @@ paths:
         - Labels
       summary: Update a single label
       requestBody:
-          description: label update
-          required: true
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/LabelUpdate"
+        description: label update
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LabelUpdate"
       parameters:
         - $ref: '#/components/parameters/TraceSpan'
         - in: path
@@ -1881,14 +1968,14 @@ paths:
         - Dashboards
       summary: Create a dashboard
       parameters:
-          - $ref: '#/components/parameters/TraceSpan'
+        - $ref: '#/components/parameters/TraceSpan'
       requestBody:
-          description: dashboard to create
-          required: true
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/CreateDashboardRequest"
+        description: dashboard to create
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateDashboardRequest"
       responses:
         '201':
           description: Added dashboard
@@ -1907,38 +1994,38 @@ paths:
         - Dashboards
       summary: Get all dashboards
       parameters:
-          - $ref: '#/components/parameters/TraceSpan'
-          - in: query
-            name: owner
-            description: specifies the owner id to return resources for
-            schema:
+        - $ref: '#/components/parameters/TraceSpan'
+        - in: query
+          name: owner
+          description: specifies the owner id to return resources for
+          schema:
+            type: string
+        - in: query
+          name: sortBy
+          description: specifies the owner id to return resources for
+          schema:
+            type: string
+            enum:
+              - "ID"
+              - "CreatedAt"
+              - "UpdatedAt"
+        - in: query
+          name: id
+          description: ID list of dashboards to return. If both this and owner are specified, only ids is used.
+          schema:
+            type: array
+            items:
               type: string
-          - in: query
-            name: sortBy
-            description: specifies the owner id to return resources for
-            schema:
-              type: string
-              enum:
-                - "ID"
-                - "CreatedAt"
-                - "UpdatedAt"
-          - in: query
-            name: id
-            description: ID list of dashboards to return. If both this and owner are specified, only ids is used.
-            schema:
-              type: array
-              items:
-                type: string
-          - in: query
-            name: orgID
-            description: specifies the organization id of the resource
-            schema:
-              type: string
-          - in: query
-            name: org
-            description: specifies the organization name of the resource
-            schema:
-              type: string
+        - in: query
+          name: orgID
+          description: specifies the organization id of the resource
+          schema:
+            type: string
+        - in: query
+          name: org
+          description: specifies the organization name of the resource
+          schema:
+            type: string
       responses:
         '200':
           description: all dashboards
@@ -1953,11 +2040,11 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
   '/dashboards/{dashboardID}':
-   get:
-    tags:
-      - Dashboards
-    summary: Get a single Dashboard
-    parameters:
+    get:
+      tags:
+        - Dashboards
+      summary: Get a single Dashboard
+      parameters:
         - $ref: '#/components/parameters/TraceSpan'
         - in: path
           name: dashboardID
@@ -1965,7 +2052,7 @@ paths:
             type: string
           required: true
           description: ID of dashboard to update
-    responses:
+      responses:
         '200':
           description: get a single dashboard
           content:
@@ -1984,17 +2071,17 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-   patch:
+    patch:
       tags:
         - Dashboards
       summary: Update a single dashboard
       requestBody:
-          description: patching of a dashboard
-          required: true
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Dashboard"
+        description: patching of a dashboard
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Dashboard"
       parameters:
         - $ref: '#/components/parameters/TraceSpan'
         - in: path
@@ -2022,7 +2109,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-   delete:
+    delete:
       tags:
         - Dashboards
       summary: Delete a dashboard
@@ -2050,18 +2137,18 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
   '/dashboards/{dashboardID}/cells':
-   put:
+    put:
       tags:
         - Cells
         - Dashboards
       summary: Replace a dashboards cells
       requestBody:
-          description: batch replaces all of a dashboards cells (this is used primarily to update the positional information of all of the cells)
-          required: true
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Cells"
+        description: batch replaces all of a dashboards cells (this is used primarily to update the positional information of all of the cells)
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Cells"
       parameters:
         - $ref: '#/components/parameters/TraceSpan'
         - in: path
@@ -2089,18 +2176,18 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-   post:
+    post:
       tags:
         - Cells
         - Dashboards
       summary: Create a dashboard cell
       requestBody:
-          description: cell that will be added
-          required: true
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/CreateCell"
+        description: cell that will be added
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateCell"
       parameters:
         - $ref: '#/components/parameters/TraceSpan'
         - in: path
@@ -2135,12 +2222,12 @@ paths:
         - Dashboards
       summary: Update the non positional information related to a cell (because updates to a single cells positional data could cause grid conflicts)
       requestBody:
-          description: updates the non positional information related to a cell
-          required: true
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/CellUpdate"
+        description: updates the non positional information related to a cell
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CellUpdate"
       parameters:
         - $ref: '#/components/parameters/TraceSpan'
         - in: path
@@ -2255,12 +2342,12 @@ paths:
         - Views
       summary: Update the view for a cell
       requestBody:
-          description: updates the view for a cell
-          required: true
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/View"
+        description: updates the view for a cell
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/View"
       parameters:
         - $ref: '#/components/parameters/TraceSpan'
         - in: path
@@ -2476,65 +2563,65 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
   '/dashboards/{dashboardID}/owners':
-      get:
-        tags:
-          - Users
-          - Dashboards
-        summary: List all dashboard owners
-        parameters:
-          - $ref: '#/components/parameters/TraceSpan'
-          - in: path
-            name: dashboardID
-            schema:
-              type: string
-            required: true
-            description: ID of the dashboard
-        responses:
-          '200':
-            description: a list of users who have owner privileges for a dashboard
-            content:
-              application/json:
-                schema:
-                  $ref: "#/components/schemas/ResourceOwners"
-          default:
-            description: unexpected error
-            content:
-              application/json:
-                schema:
-                  $ref: "#/components/schemas/Error"
-      post:
-        tags:
-          - Users
-          - Dashboards
-        summary: Add dashboard owner
-        parameters:
-          - $ref: '#/components/parameters/TraceSpan'
-          - in: path
-            name: dashboardID
-            schema:
-              type: string
-            required: true
-            description: ID of the dashboard
-        requestBody:
-          description: user to add as owner
+    get:
+      tags:
+        - Users
+        - Dashboards
+      summary: List all dashboard owners
+      parameters:
+        - $ref: '#/components/parameters/TraceSpan'
+        - in: path
+          name: dashboardID
+          schema:
+            type: string
           required: true
+          description: ID of the dashboard
+      responses:
+        '200':
+          description: a list of users who have owner privileges for a dashboard
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/AddResourceMemberRequestBody"
-        responses:
-          '201':
-            description: added to dashboard owners
-            content:
-              application/json:
-                schema:
-                  $ref: "#/components/schemas/ResourceOwner"
-          default:
-            description: unexpected error
-            content:
-              application/json:
-                schema:
-                  $ref: "#/components/schemas/Error"
+                $ref: "#/components/schemas/ResourceOwners"
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    post:
+      tags:
+        - Users
+        - Dashboards
+      summary: Add dashboard owner
+      parameters:
+        - $ref: '#/components/parameters/TraceSpan'
+        - in: path
+          name: dashboardID
+          schema:
+            type: string
+          required: true
+          description: ID of the dashboard
+      requestBody:
+        description: user to add as owner
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AddResourceMemberRequestBody"
+      responses:
+        '201':
+          description: added to dashboard owners
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResourceOwner"
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
   '/dashboards/{dashboardID}/owners/{userID}':
     delete:
       tags:
@@ -2599,13 +2686,13 @@ paths:
       tags:
         - Query
       parameters:
-      - $ref: '#/components/parameters/TraceSpan'
-      - in: header
-        name: Content-Type
-        schema:
-          type: string
-          enum:
-            - application/json
+        - $ref: '#/components/parameters/TraceSpan'
+        - in: header
+          name: Content-Type
+          schema:
+            type: string
+            enum:
+              - application/json
       requestBody:
         description: analyzed flux query to generate abstract syntax tree.
         content:
@@ -2619,38 +2706,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ASTResponse"
-        default:
-          description: Any response other than 200 is an internal server error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-  /query/spec:
-    post:
-      description: analyzes flux query and generates a query specification.
-      tags:
-        - Query
-      parameters:
-      - $ref: '#/components/parameters/TraceSpan'
-      - in: header
-        name: Content-Type
-        schema:
-          type: string
-          enum:
-            - application/json
-      requestBody:
-        description: analyzed flux query to generate specification.
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/LanguageRequest"
-      responses:
-        '200':
-          description: Specification of flux query.
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/QuerySpecification"
         default:
           description: Any response other than 200 is an internal server error
           content:
@@ -2718,6 +2773,16 @@ paths:
           schema:
             type: string
           description: filter authorizations belonging to a user name
+        - in: query
+          name: orgID
+          schema:
+            type: string
+          description: filter authorizations belonging to a org id
+        - in: query
+          name: org
+          schema:
+            type: string
+          description: filter authorizations belonging to a org name
       responses:
         '200':
           description: A list of authorizations
@@ -2843,25 +2908,25 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
   /query/analyze:
-   post:
-    tags:
-      - Query
-    summary: analyze an influxql or flux query
-    parameters:
-      - $ref: '#/components/parameters/TraceSpan'
-      - in: header
-        name: Content-Type
-        schema:
-          type: string
-          enum:
-            - application/json
-    requestBody:
+    post:
+      tags:
+        - Query
+      summary: analyze an influxql or flux query
+      parameters:
+        - $ref: '#/components/parameters/TraceSpan'
+        - in: header
+          name: Content-Type
+          schema:
+            type: string
+            enum:
+              - application/json
+      requestBody:
         description: flux or influxql query to analyze
         content:
           application/json:
             schema:
               $ref: "#/components/schemas/Query"
-    responses:
+      responses:
         '200':
           description: query analyze results. Errors will be empty if the query is valid.
           content:
@@ -2884,40 +2949,40 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
   /query:
-   post:
-    tags:
-      - Query
-    summary: query an influx
-    parameters:
-      - $ref: '#/components/parameters/TraceSpan'
-      - in: header
-        name: Accept
-        description: specifies the return content format. Each response content type will have its own dialect options.
-        schema:
-          type: string
-          description: return format of either CSV or Arrow buffers
-          default: text/csv
-          enum:
-            - text/csv
-            - application/vnd.influx.arrow
-      - in: header
-        name: Content-Type
-        schema:
-          type: string
-          enum:
-            - application/json
-            - application/vnd.flux
-      - in: query
-        name: org
-        description: specifies the name of the organization executing the query; if both orgID and org are specified, orgID takes precendence.
-        schema:
-          type: string
-      - in: query
-        name: orgID
-        description: specifies the ID of the organization executing the query; if both orgID and org are specified, orgID takes precendence.
-        schema:
-          type: string
-    requestBody:
+    post:
+      tags:
+        - Query
+      summary: query an influx
+      parameters:
+        - $ref: '#/components/parameters/TraceSpan'
+        - in: header
+          name: Accept
+          description: specifies the return content format. Each response content type will have its own dialect options.
+          schema:
+            type: string
+            description: return format of either CSV or Arrow buffers
+            default: text/csv
+            enum:
+              - text/csv
+              - application/vnd.influx.arrow
+        - in: header
+          name: Content-Type
+          schema:
+            type: string
+            enum:
+              - application/json
+              - application/vnd.flux
+        - in: query
+          name: org
+          description: specifies the name of the organization executing the query; if both orgID and org are specified, orgID takes precedence.
+          schema:
+            type: string
+        - in: query
+          name: orgID
+          description: specifies the ID of the organization executing the query; if both orgID and org are specified, orgID takes precedence.
+          schema:
+            type: string
+      requestBody:
         description: flux query or specification to execute
         content:
           application/json:
@@ -2926,7 +2991,7 @@ paths:
           application/vnd.flux:
             schema:
               type: string
-    responses:
+      responses:
         '200':
           description: query results
           content:
@@ -2962,8 +3027,8 @@ paths:
                   Failed to parse query,897
             application/vnd.influx.arrow:
               schema:
-                  type: string
-                  format: binary
+                type: string
+                format: binary
         default:
           description: internal server error
           headers:
@@ -2984,32 +3049,32 @@ paths:
                   Failed to parse query,897
             application/vnd.influx.arrow:
               schema:
-                  type: string
-                  format: binary
+                type: string
+                format: binary
   /buckets:
     get:
       tags:
         - Buckets
       summary: List all buckets
       parameters:
-          - $ref: '#/components/parameters/TraceSpan'
-          - $ref: "#/components/parameters/Offset"
-          - $ref: "#/components/parameters/Limit"
-          - in: query
-            name: org
-            description: specifies the organization name of the resource
-            schema:
-              type: string
-          - in: query
-            name: orgID
-            description: specifies the organization id of the resource
-            schema:
-              type: string
-          - in: query
-            name: name
-            description: only returns buckets with the specified name
-            schema:
-              type: string
+        - $ref: '#/components/parameters/TraceSpan'
+        - $ref: "#/components/parameters/Offset"
+        - $ref: "#/components/parameters/Limit"
+        - in: query
+          name: org
+          description: specifies the organization name of the resource
+          schema:
+            type: string
+        - in: query
+          name: orgID
+          description: specifies the organization id of the resource
+          schema:
+            type: string
+        - in: query
+          name: name
+          description: only returns buckets with the specified name
+          schema:
+            type: string
       responses:
         '200':
           description: a list of buckets
@@ -3028,7 +3093,7 @@ paths:
         - Buckets
       summary: Create a bucket
       parameters:
-          - $ref: '#/components/parameters/TraceSpan'
+        - $ref: '#/components/parameters/TraceSpan'
       requestBody:
         description: bucket to create
         required: true
@@ -4570,65 +4635,65 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
   '/tasks/{taskID}/owners':
-      get:
-        tags:
-          - Users
-          - Tasks
-        summary: List all task owners
-        parameters:
-          - $ref: '#/components/parameters/TraceSpan'
-          - in: path
-            name: taskID
-            schema:
-              type: string
-            required: true
-            description: ID of the task
-        responses:
-          '200':
-            description: a list of users who have owner privileges for a task
-            content:
-              application/json:
-                schema:
-                  $ref: "#/components/schemas/ResourceOwners"
-          default:
-            description: unexpected error
-            content:
-              application/json:
-                schema:
-                  $ref: "#/components/schemas/Error"
-      post:
-        tags:
-          - Users
-          - Tasks
-        summary: Add task owner
-        parameters:
-          - $ref: '#/components/parameters/TraceSpan'
-          - in: path
-            name: taskID
-            schema:
-              type: string
-            required: true
-            description: ID of the task
-        requestBody:
-          description: user to add as owner
+    get:
+      tags:
+        - Users
+        - Tasks
+      summary: List all task owners
+      parameters:
+        - $ref: '#/components/parameters/TraceSpan'
+        - in: path
+          name: taskID
+          schema:
+            type: string
           required: true
+          description: ID of the task
+      responses:
+        '200':
+          description: a list of users who have owner privileges for a task
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/AddResourceMemberRequestBody"
-        responses:
-          '201':
-            description: added to task owners
-            content:
-              application/json:
-                schema:
-                  $ref: "#/components/schemas/ResourceOwner"
-          default:
-            description: unexpected error
-            content:
-              application/json:
-                schema:
-                  $ref: "#/components/schemas/Error"
+                $ref: "#/components/schemas/ResourceOwners"
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    post:
+      tags:
+        - Users
+        - Tasks
+      summary: Add task owner
+      parameters:
+        - $ref: '#/components/parameters/TraceSpan'
+        - in: path
+          name: taskID
+          schema:
+            type: string
+          required: true
+          description: ID of the task
+      requestBody:
+        description: user to add as owner
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AddResourceMemberRequestBody"
+      responses:
+        '201':
+          description: added to task owners
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResourceOwner"
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
   '/tasks/taskID}/owners/{userID}':
     delete:
       tags:
@@ -4899,7 +4964,7 @@ components:
           description: flux query script to be analyzed
           type: string
     Query:
-      description: query influx with specified return formatting. The spec and query fields are mutually exclusive.
+      description: query influx with specified return formatting.
       type: object
       required:
         - query
@@ -4909,8 +4974,6 @@ components:
         query:
           description: query script to execute.
           type: string
-        spec:
-          $ref: "#/components/schemas/QuerySpecification"
         type:
           description: type of query
           type: string
@@ -5336,101 +5399,43 @@ components:
     NodeType:
       description: type of AST node
       type: string
-    QuerySpecification:
-      description: consists of a set of operations and a set of edges between those operations to instruct the query engine to operate.
+    Dialect:
+      description: dialect are options to change the default CSV output format; https://www.w3.org/TR/2015/REC-tabular-metadata-20151217/#dialect-descriptions
       type: object
       properties:
-        spec:
-          type: object
-          properties:
-            operations:
-              type: array
-              items:
-                type: object
-                properties:
-                  kind:
-                    description: name of the operation to perform
-                    type: string
-                  id:
-                    description: identifier for this operation; it must be unique per query specification; used in edges
-                    type: string
-                  spec:
-                    description: set of properties that specify details of the operation. These vary by the kind of operation.
-                    type: object
-            edges:
-              description: list of declaring a parent child id relationship between operations
-              type: array
-              items:
-                type: object
-                properties:
-                  parent:
-                    description: id of parent node of child within graph of opertions
-                    type: string
-                  child:
-                    description: id of child node of parent within the graph of operations
-                    type: string
-            resources:
-              description: optional set of contraints on the resources the query can consume
-              type: object
-              properties:
-                priority:
-                  description: priority of the query
-                  oneOf:
-                  - type: string
-                    description: lower value will move to the front of the priority queue
-                    pattern: '^\d+$'
-                  - type: string
-                    description: constants to represent the extreme high and low priorities; high is effectively 0.
-                    enum:
-                      - high
-                      - low
-                concurrency_quota:
-                  description: number of concurrent workers allowed to process this query; 0 indicates the planner can pick the optimal concurrency.
-                  type: integer
-                  default: 0
-                memory_bytes_quota:
-                  description: number of bytes of RAM this query may consume; 0 means unlimited.
-                  type: integer
-                  default: 0
-            dialect:
-              $ref: "#/components/schemas/Dialect"
-    Dialect:
-          description: dialect are options to change the default CSV output format; https://www.w3.org/TR/2015/REC-tabular-metadata-20151217/#dialect-descriptions
-          type: object
-          properties:
-            header:
-              description: if true, the results will contain a header row
-              type: boolean
-              default: true
-            delimiter:
-              description: separator between cells; the default is ,
-              type: string
-              default: ","
-              maxLength: 1
-              minLength: 1
-            annotations:
-              description: https://www.w3.org/TR/2015/REC-tabular-data-model-20151217/#columns
-              type: array
-              items:
-                type: string
-                enum:
-                  - "group"
-                  - "datatype"
-                  - "default"
-                uniqueItems: true
-            commentPrefix:
-              description: character prefixed to comment strings
-              type: string
-              default: "#"
-              maxLength: 1
-              minLength: 0
-            dateTimeFormat:
-              description: format of timestamps
-              type: string
-              default: "RFC3339"
-              enum:
-                - RFC3339
-                - RFC3339Nano
+        header:
+          description: if true, the results will contain a header row
+          type: boolean
+          default: true
+        delimiter:
+          description: separator between cells; the default is ,
+          type: string
+          default: ","
+          maxLength: 1
+          minLength: 1
+        annotations:
+          description: https://www.w3.org/TR/2015/REC-tabular-data-model-20151217/#columns
+          type: array
+          items:
+            type: string
+            enum:
+              - "group"
+              - "datatype"
+              - "default"
+            uniqueItems: true
+        commentPrefix:
+          description: character prefixed to comment strings
+          type: string
+          default: "#"
+          maxLength: 1
+          minLength: 0
+        dateTimeFormat:
+          description: format of timestamps
+          type: string
+          default: "RFC3339"
+          enum:
+            - RFC3339
+            - RFC3339Nano
     Permission:
       required: [action, resource]
       properties:
@@ -5587,9 +5592,7 @@ components:
           type: string
         name:
           type: string
-        organizationID:
-          type: string
-        organization:
+        orgID:
           type: string
         rp:
           type: string
@@ -6042,9 +6045,6 @@ components:
             analyze:
               type: string
               format: uri
-            spec:
-              type: string
-              format: uri
             suggestions:
               type: string
               format: uri
@@ -6100,6 +6100,7 @@ components:
             - empty value
             - unavailable
             - forbidden
+            - too many requests
             - unauthorized
             - method not allowed
         message:
@@ -6348,16 +6349,16 @@ components:
       description: Contains the configuration for the log viewer
       type: object
       required:
-      - columns
-      - shape
-      - type
+        - columns
+        - shape
+        - type
       properties:
         type:
           type: string
           enum: ["log-viewer"]
         shape:
-            type: string
-            enum: ["chronograf-v2"]
+          type: string
+          enum: ["chronograf-v2"]
         columns:
           description: Defines the order, names, and visibility of columns in the log
             viewer table
@@ -6366,34 +6367,34 @@ components:
             "$ref": "#/components/schemas/LogViewerColumn"
       example:
         columns:
-        - name: severity
-          position: 0
-          settings:
-          - type: label
-            value: icon
-          - type: label
-            value: text
-          - type: visibility
-            value: visible
-          - type: color
-            name: ruby
-            value: emergency
-          - type: color
-            name: rainforest
-            value: info
-          - type: displayName
-            value: Log Severity!
-        - name: messages
-          position: 1
-          settings:
-          - type: visibility
-            value: hidden
+          - name: severity
+            position: 0
+            settings:
+              - type: label
+                value: icon
+              - type: label
+                value: text
+              - type: visibility
+                value: visible
+              - type: color
+                name: ruby
+                value: emergency
+              - type: color
+                name: rainforest
+                value: info
+              - type: displayName
+                value: Log Severity!
+          - name: messages
+            position: 1
+            settings:
+              - type: visibility
+                value: hidden
     MarkdownViewProperties:
       type: object
       required:
-      - note
-      - shape
-      - type
+        - note
+        - shape
+        - type
       properties:
         type:
           type: string
@@ -6407,9 +6408,9 @@ components:
       description: Contains a specific column's settings.
       type: object
       required:
-      - name
-      - position
-      - settings
+        - name
+        - position
+        - settings
       properties:
         name:
           description: Unique identifier name of the column
@@ -6424,8 +6425,8 @@ components:
             description: Type and value and optional name of a setting.
             type: object
             required:
-            - type
-            - value
+              - type
+              - value
             properties:
               type:
                 type: string
@@ -6437,20 +6438,20 @@ components:
         name: severity
         position: 0
         settings:
-        - type: label
-          value: icon
-        - type: label
-          value: text
-        - type: visibility
-          value: visible
-        - type: color
-          name: ruby
-          value: emergency
-        - type: color
-          name: rainforest
-          value: info
-        - type: displayName
-          value: Log Severity!
+          - type: label
+            value: icon
+          - type: label
+            value: text
+          - type: visibility
+            value: visible
+          - type: color
+            name: ruby
+            value: emergency
+          - type: color
+            name: rainforest
+            value: info
+          - type: displayName
+            value: Log Severity!
     V1ViewProperties:
       properties:
         type:
@@ -6621,7 +6622,7 @@ components:
           items:
             type: string
         labels:
-            $ref: "#/components/schemas/Labels"
+          $ref: "#/components/schemas/Labels"
         arguments:
           type: object
           oneOf:
@@ -6632,36 +6633,36 @@ components:
       type: object
       example:
         variables:
-        - id: 'debac1e0deadbeef'
-          name: ":status:"
-          selected:
-          - running
-          arguments:
-            type: constant
-            values:
-            - created
-            - running
-            - canceled
-            - deleted
-        - id: '03a60ec119771000'
-          name: ":states:"
-          selected:
-          - FL
-          arguments:
-            type: map
-            values:
-              CO: Colorado
-              HI: Hawaii
-              MO: Missouri
-              NJ: New Jersey
-              FL: Florida
-              ME: Maine
-        - id: '03a60edaaa371000'
-          name: ":show_measurements:"
-          arguments:
-            type: query
-            query: 'from(bucket: "foo") |> showMeasurements()'
-            language: flux
+          - id: 'debac1e0deadbeef'
+            name: ":status:"
+            selected:
+              - running
+            arguments:
+              type: constant
+              values:
+                - created
+                - running
+                - canceled
+                - deleted
+          - id: '03a60ec119771000'
+            name: ":states:"
+            selected:
+              - FL
+            arguments:
+              type: map
+              values:
+                CO: Colorado
+                HI: Hawaii
+                MO: Missouri
+                NJ: New Jersey
+                FL: Florida
+                ME: Maine
+          - id: '03a60edaaa371000'
+            name: ":show_measurements:"
+            arguments:
+              type: query
+              query: 'from(bucket: "foo") |> showMeasurements()'
+              language: flux
       properties:
         variables:
           type: array
@@ -6689,8 +6690,18 @@ components:
     CellUpdate:
       type: object
       properties:
-        name:
-          type: string
+        x:
+          type: integer
+          format: int32
+        "y": # Quoted to prevent YAML parser from interpreting y as shorthand for true.
+          type: integer
+          format: int32
+        w:
+          type: integer
+          format: int32
+        h:
+          type: integer
+          format: int32
     CreateCell:
       type: object
       properties:
@@ -6844,9 +6855,9 @@ components:
                   type: string
                   format: date-time
             cells:
-                $ref: "#/components/schemas/Cells"
+              $ref: "#/components/schemas/Cells"
             labels:
-                $ref: "#/components/schemas/Labels"
+              $ref: "#/components/schemas/Labels"
     Dashboards:
       type: object
       properties:
@@ -6909,7 +6920,6 @@ components:
             enum:
               - flux
               - influxql
-              - spec
     Sources:
       type: object
       properties:
@@ -6952,7 +6962,7 @@ components:
             id:
               type: string
               readOnly: true
-            organization:
+            org:
               type: string
               description: name of the organization
             bucket:
@@ -6989,6 +6999,8 @@ components:
       type: object
       properties:
         name:
+          type: string
+        type:
           type: string
         version:
           type: string
@@ -7035,7 +7047,7 @@ components:
           description: must specify one of orgID and org
         labels:
           type: array
-          description: this is an array of label strings that will be added as labels to the document
+          description: this is an array of label IDs that will be added as labels to the document
           items:
             type: string
       required:
@@ -7096,7 +7108,7 @@ components:
         organizationID:
           type: string
     TelegrafRequestPlugin:
-        oneOf:
+      oneOf:
         - $ref: '#/components/schemas/TelegrafPluginInputCpu'
         - $ref: '#/components/schemas/TelegrafPluginInputDisk'
         - $ref: '#/components/schemas/TelegrafPluginInputDiskio'

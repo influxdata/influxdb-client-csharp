@@ -1,8 +1,8 @@
 using InfluxDB.Client.Core.Test;
-using InfluxDB.Client.Domain;
+using InfluxDB.Client.Api.Domain;
 using NUnit.Framework;
+using RestEase;
 using WireMock.RequestBuilders;
-using Task = System.Threading.Tasks.Task;
 
 namespace InfluxDB.Client.Test
 {
@@ -18,33 +18,33 @@ namespace InfluxDB.Client.Test
         }
 
         [Test]
-        public async Task ParseKnownEnum()
+        public void ParseKnownEnum()
         {
             MockServer
                 .Given(Request.Create().UsingGet())
                 .RespondWith(CreateResponse("{\"status\":\"active\"}", "application/json"));
 
-            var authorization = await _client.GetAuthorizationsApi().FindAuthorizationById("id");
+            var authorization = _client.GetAuthorizationsApi().FindAuthorizationById("id");
 
-            Assert.AreEqual(Status.Active, authorization.Status);
+            Assert.AreEqual(AuthorizationUpdateRequest.StatusEnum.Active, authorization.Status);
         }
 
         [Test]
-        public async Task ParseUnknownEnumAsNull()
+        public void ParseUnknownEnumAsNull()
         {
             MockServer
                 .Given(Request.Create().UsingGet())
                 .RespondWith(CreateResponse("{\"status\":\"unknown\"}", "application/json"));
 
-            var authorization = await _client.GetAuthorizationsApi().FindAuthorizationById("id");
+            var ioe = Assert.Throws<Api.Client.ApiException>(() =>_client.GetAuthorizationsApi().FindAuthorizationById("id"));
 
-            Assert.IsNull(authorization.Status);
+            Assert.IsTrue(ioe.Message.StartsWith("Error converting value \"unknown\" to typ"));
         }
 
         [Test]
-        public async Task ParseDate()
+        public void ParseDate()
         {
-            const string data = "{\"links\":{\"self\":\"/api/v2/buckets/0376298868765000/log\"},\"log\":[" +
+            const string data = "{\"links\":{\"self\":\"/api/v2/buckets/0376298868765000/log\"},\"logs\":[" +
                                 "{\"links\":{\"user\":\"/api/v2/users/037624e8d440e000\"},\"description\":\"Bucket Created\",\"userID\":\"037624e8d440e000\",\"time\":\"2019-02-26T07:33:44.390263749Z\"}," +
                                 "{\"links\":{\"user\":\"/api/v2/users/037624e8d440e000\"},\"description\":\"Bucket Updated\",\"userID\":\"037624e8d440e000\",\"time\":\"2019-02-26T08:15:41.252492+01:00\"}," +
                                 "{\"links\":{\"user\":\"/api/v2/users/037624e8d440e000\"},\"description\":\"Bucket Updated\",\"userID\":\"037624e8d440e000\",\"time\":\"2019-02-26T08:15:41.334601+01:00\"}," +
@@ -70,7 +70,7 @@ namespace InfluxDB.Client.Test
                 .Given(Request.Create().UsingGet())
                 .RespondWith(CreateResponse(data, "application/json"));
 
-            var logs = await _client.GetBucketsApi().FindBucketLogs("id");
+            var logs = _client.GetBucketsApi().FindBucketLogs("id");
             
             Assert.AreEqual(20, logs.Count);
         }

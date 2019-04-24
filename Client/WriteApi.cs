@@ -2,58 +2,37 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Net.Http;
 using System.Reactive;
 using System.Reactive.Concurrency;
+using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
-using System.Reactive.Threading.Tasks;
 using System.Text;
-using System.Threading.Tasks;
+using InfluxDB.Client.Api.Domain;
+using InfluxDB.Client.Api.Service;
 using InfluxDB.Client.Core;
 using InfluxDB.Client.Core.Exceptions;
-using InfluxDB.Client.Core.Internal;
 using InfluxDB.Client.Internal;
 using InfluxDB.Client.Writes;
+using RestSharp;
 
 namespace InfluxDB.Client
 {
-    /// <summary>
-    ///     Precision of Dates that are written to the InfluxDB 2.0.
-    /// </summary>
-    public enum TimeUnit
-    {
-        /// <summary>
-        ///     Nanosecond precision.
-        /// </summary>
-        Nanos,
-
-        /// <summary>
-        ///     Microsecond precision.
-        /// </summary>
-        Micros,
-
-        /// <summary>
-        ///     Millisecond precision.
-        /// </summary>
-        Millis,
-
-        /// <summary>
-        ///     Second precision.
-        /// </summary>
-        Seconds
-    }
-
     // TODO gzip
-    public class WriteApi : AbstractClient, IDisposable
+    public class WriteApi : IDisposable
     {
         private readonly Subject<List<BatchWriteData>> _flush = new Subject<List<BatchWriteData>>();
         private readonly MeasurementMapper _measurementMapper = new MeasurementMapper();
         private readonly Subject<BatchWriteData> _subject = new Subject<BatchWriteData>();
 
-        protected internal WriteApi(DefaultClientIo client, WriteOptions writeOptions) : base(client)
+        private readonly WriteService _service;
+        
+        protected internal WriteApi(WriteService service, WriteOptions writeOptions) 
         {
-            Arguments.CheckNotNull(writeOptions, "writeOptions");
+            Arguments.CheckNotNull(service, nameof(service));
+            Arguments.CheckNotNull(writeOptions, nameof(writeOptions));
+
+            _service = service;
 
             // backpreasure - is not implemented in C#
             // 
@@ -117,37 +96,16 @@ namespace InfluxDB.Client
                     var lineProtocol = batchWriteItem.ToLineProtocol();
                     var precision = batchWriteItem.Options.Precision;
 
-                    string precisionMapping;
-                    switch (precision)
-                    {
-                        case TimeUnit.Nanos:
-                            precisionMapping = "ns";
-                            break;
-                        case TimeUnit.Micros:
-                            precisionMapping = "us";
-                            break;
-                        case TimeUnit.Millis:
-                            precisionMapping = "ms";
-                            break;
-                        case TimeUnit.Seconds:
-                            precisionMapping = "s";
-                            break;
-                        default:
-                            throw new InvalidOperationException();
-                    }
-
-                    HttpRequestMessage Request()
-                    {
-                        var path = $"/api/v2/write?org={orgId}&bucket={bucket}&precision={precisionMapping}";
-                        var message = new HttpRequestMessage(new HttpMethod(HttpMethodKind.Post.Name()), path)
-                        {
-                            Content = new StringContent(lineProtocol, Encoding.UTF8, "text/plain")
-                        };
-                        return message;
-                    }
-
                     return Observable
-                        .Defer(() => DoRequest(Request).ToObservable())
+                        .Create<IRestResponse>(observer =>
+                        {
+                            var body = Encoding.UTF8.GetBytes(lineProtocol);
+                            var response = _service.WritePostWithIRestResponse(orgId, bucket, body, null, 
+                                "utf-8", "text/plain", null, "application/json", precision);
+                            observer.OnNext(response);
+                            
+                            return Disposable.Empty;
+                        })
                         .RetryWhen(f => f.SelectMany(e =>
                         {
                             if (e is HttpException httpException)
@@ -161,7 +119,8 @@ namespace InfluxDB.Client
                                     throw httpException;
                                 }
 
-                                var retryInterval = (httpException.RetryAfter * 1000 ?? writeOptions.RetryInterval) + JitterDelay(writeOptions);
+                                var retryInterval = (httpException.RetryAfter * 1000 ?? writeOptions.RetryInterval) +
+                                                    JitterDelay(writeOptions);
 
                                 var retriable = new WriteRetriableErrorEvent(orgId, bucket, precision, lineProtocol,
                                     httpException, retryInterval);
@@ -175,19 +134,19 @@ namespace InfluxDB.Client
                         .Select(result =>
                         {
                             // ReSharper disable once ConvertIfStatementToReturnStatement
-                            if (result.IsSuccessful())
+                            if (result.IsSuccessful)
                             {
                                 return Notification.CreateOnNext(result);
                             }
 
-                            return Notification.CreateOnError<RequestResult>(HttpException.Create(result));
+                            return Notification.CreateOnError<IRestResponse>(HttpException.Create(result));
                         })
-                        .Catch<Notification<RequestResult>, Exception>(ex =>
+                        .Catch<Notification<IRestResponse>, Exception>(ex =>
                         {
                             var error = new WriteErrorEvent(orgId, bucket, precision, lineProtocol, ex);
                             Publish(error);
                             
-                            return Observable.Return(Notification.CreateOnError<RequestResult>(ex));
+                            return Observable.Return(Notification.CreateOnError<IRestResponse>(ex));
                         }).Do(res =>
                         {
                             if (res.Kind == NotificationKind.OnNext)
@@ -249,7 +208,7 @@ namespace InfluxDB.Client
         ///     specifies the record in InfluxDB Line Protocol.
         ///     The <see cref="record" /> is considered as one batch unit.
         /// </param>
-        public void WriteRecord(string bucket, string orgId, TimeUnit precision, string record)
+        public void WriteRecord(string bucket, string orgId, WritePrecision precision, string record)
         {
             Arguments.CheckNonEmptyString(bucket, nameof(bucket));
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
@@ -265,7 +224,7 @@ namespace InfluxDB.Client
         /// <param name="orgId">specifies the destination organization for writes</param>
         /// <param name="precision">specifies the precision for the unix timestamps within the body line-protocol</param>
         /// <param name="records">specifies the record in InfluxDB Line Protocol</param>
-        public void WriteRecords(string bucket, string orgId, TimeUnit precision, List<string> records)
+        public void WriteRecords(string bucket, string orgId, WritePrecision precision, List<string> records)
         {
             Arguments.CheckNonEmptyString(bucket, nameof(bucket));
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
@@ -281,7 +240,7 @@ namespace InfluxDB.Client
         /// <param name="orgId">specifies the destination organization for writes</param>
         /// <param name="precision">specifies the precision for the unix timestamps within the body line-protocol</param>
         /// <param name="records">specifies the record in InfluxDB Line Protocol</param>
-        public void WriteRecords(string bucket, string orgId, TimeUnit precision, params string[] records)
+        public void WriteRecords(string bucket, string orgId, WritePrecision precision, params string[] records)
         {
             Arguments.CheckNonEmptyString(bucket, nameof(bucket));
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
@@ -342,7 +301,7 @@ namespace InfluxDB.Client
         /// <param name="precision">specifies the precision for the unix timestamps within the body line-protocol</param>
         /// <param name="measurement">specifies the Measurement to write into bucket</param>
         /// <typeparam name="TM">measurement type</typeparam>
-        public void WriteMeasurement<TM>(string bucket, string orgId, TimeUnit precision, TM measurement)
+        public void WriteMeasurement<TM>(string bucket, string orgId, WritePrecision precision, TM measurement)
         {
             Arguments.CheckNonEmptyString(bucket, nameof(bucket));
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
@@ -363,7 +322,7 @@ namespace InfluxDB.Client
         /// <param name="precision">specifies the precision for the unix timestamps within the body line-protocol</param>
         /// <param name="measurements">specifies Measurements to write into bucket</param>
         /// <typeparam name="TM">measurement type</typeparam>
-        public void WriteMeasurements<TM>(string bucket, string orgId, TimeUnit precision, List<TM> measurements)
+        public void WriteMeasurements<TM>(string bucket, string orgId, WritePrecision precision, List<TM> measurements)
         {
             Arguments.CheckNonEmptyString(bucket, nameof(bucket));
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
@@ -380,7 +339,7 @@ namespace InfluxDB.Client
         /// <param name="precision">specifies the precision for the unix timestamps within the body line-protocol</param>
         /// <param name="measurements">specifies Measurements to write into bucket</param>
         /// <typeparam name="TM">measurement type</typeparam>
-        public void WriteMeasurements<TM>(string bucket, string orgId, TimeUnit precision,
+        public void WriteMeasurements<TM>(string bucket, string orgId, WritePrecision precision,
             params TM[] measurements)
         {
             Arguments.CheckNonEmptyString(bucket, nameof(bucket));
@@ -398,16 +357,11 @@ namespace InfluxDB.Client
             _flush.OnNext(new List<BatchWriteData>());
         }
 
-        private async Task<RequestResult> DoRequest(Func<HttpRequestMessage> request)
-        {
-            var requestResult = await Client.DoRequest(request());
-            if (!requestResult.IsSuccessful())
-            {
-                throw HttpException.Create(requestResult);
-            }
-
-            return requestResult;
-        }
+//        private IRestResponse DoRequest(Func<HttpRequestMessage> request)
+//        {
+//            retvar writePostAsyncWithHttpInfo = _service.WritePostWithIRestResponse(null, null, null);
+//            return writePostAsyncWithHttpInfo;
+//        }
         
         private int JitterDelay(WriteOptions writeOptions)
         {
@@ -494,9 +448,9 @@ namespace InfluxDB.Client
     {
         internal readonly string Bucket;
         internal readonly string OrganizationId;
-        internal readonly TimeUnit Precision;
+        internal readonly WritePrecision Precision;
 
-        internal BatchWriteOptions(string bucket, string orgId, TimeUnit precision)
+        internal BatchWriteOptions(string bucket, string orgId, WritePrecision precision)
         {
             Arguments.CheckNonEmptyString(bucket, nameof(bucket));
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));

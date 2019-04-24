@@ -1,6 +1,6 @@
 # JetBrains Rider
 .idea/
-*.sln.iml
+*.iml
 
 # Build results
 [Dd]ebug/
@@ -25,6 +25,11 @@ coveralls/
 .DS_Store
 .AppleDouble
 .LSOverride
+
+**/target/**
+
+**/.openapi-generator-ignore
+**/.openapi-generator/**
 
 
 
