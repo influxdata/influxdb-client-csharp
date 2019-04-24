@@ -17,7 +17,6 @@ using System.IO;
 using System.Web;
 using System.Linq;
 using System.Net;
-using System.Reflection;
 using System.Runtime.Serialization;
 using System.Text;
 using Newtonsoft.Json;
@@ -265,15 +264,16 @@ namespace InfluxDB.Client.Api.Client
                     flattenedString.Append(param);
                 }
                 return flattenedString.ToString();
-            } else if (obj is Enum)
+            }
+            else if (obj is Enum)
             {
                 var name = Convert.ToString(obj);
                 name = obj.GetType().GetField(name)
-                           .GetCustomAttributes(typeof(EnumMemberAttribute), true)
-                           .Cast<EnumMemberAttribute>()
-                           .Select(a => a.Value)
-                           .SingleOrDefault() ?? name;
-                
+                .GetCustomAttributes(typeof(EnumMemberAttribute), true)
+                .Cast<EnumMemberAttribute>()
+                .Select(a => a.Value)
+                .SingleOrDefault() ?? name;
+            
                 return name;
             }
             else
