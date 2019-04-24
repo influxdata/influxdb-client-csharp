@@ -317,7 +317,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="accept">specifies the return content format. (optional, default to application/json)</param>
         /// <param name="precision">specifies the precision for the unix timestamps within the body line-protocol (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public IRestResponse WritePostWithIRestResponse (string org, string bucket, string body, string zapTraceSpan = null, string contentEncoding = null, string contentType = null, int? contentLength = null, string accept = null, WritePrecision? precision = null)
+        public IRestResponse WritePostWithIRestResponse (string org, string bucket, byte[] body, string zapTraceSpan = null, string contentEncoding = null, string contentType = null, int? contentLength = null, string accept = null, WritePrecision? precision = null)
         {
             // verify the required parameter 'org' is set
             if (org == null)
@@ -348,8 +348,8 @@ namespace InfluxDB.Client.Api.Service
                 "application/json"
             };
             String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null)
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+//            if (localVarHttpHeaderAccept != null)
+//                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
 
             if (org != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
             if (bucket != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "bucket", bucket)); // query parameter

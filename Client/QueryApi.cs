@@ -12,7 +12,7 @@ namespace InfluxDB.Client
 {
     public class QueryApi : AbstractQueryClient
     {
-        private static readonly Dialect DefaultDialect = new Dialect();
+        private readonly Dialect DefaultDialect;
         
         private readonly QueryService _service;
 
@@ -21,6 +21,14 @@ namespace InfluxDB.Client
             Arguments.CheckNotNull(service, nameof(service));
 
             _service = service;
+            DefaultDialect = new Dialect();
+            DefaultDialect.Header = true;
+            DefaultDialect.Delimiter = ",";
+            DefaultDialect.CommentPrefix = "#";
+            DefaultDialect.Annotations = new List<Dialect.AnnotationsEnum>
+            {
+                Dialect.AnnotationsEnum.Datatype, Dialect.AnnotationsEnum.Group, Dialect.AnnotationsEnum.Default
+            };
         }
 
         /// <summary>

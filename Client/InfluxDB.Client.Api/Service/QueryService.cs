@@ -1162,8 +1162,8 @@ namespace InfluxDB.Client.Api.Service
                 "application/vnd.influx.arrow"
             };
             String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null)
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+//            if (localVarHttpHeaderAccept != null)
+//                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
 
             if (org != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
             if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter

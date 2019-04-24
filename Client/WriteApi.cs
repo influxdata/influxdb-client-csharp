@@ -7,6 +7,7 @@ using System.Reactive.Concurrency;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
+using System.Text;
 using InfluxDB.Client.Api.Domain;
 using InfluxDB.Client.Api.Service;
 using InfluxDB.Client.Core;
@@ -98,8 +99,9 @@ namespace InfluxDB.Client
                     return Observable
                         .Create<IRestResponse>(observer =>
                         {
+                            var body = Encoding.UTF8.GetBytes(lineProtocol);
                             var response = _service.WritePostWithIRestResponse(orgId, bucket, 
-                                lineProtocol, null, "utf-8", "text/plain", null, "application/json", precision);
+                                body, null, "utf-8", "text/plain", null, "application/json", precision);
                             observer.OnNext(response);
                             
                             return Disposable.Empty;

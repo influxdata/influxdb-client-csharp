@@ -307,6 +307,17 @@ namespace {{packageName}}.Client
                 }
                 return flattenedString.ToString();
             }
+            else if (obj is Enum)
+            {
+                var name = Convert.ToString(obj);
+                name = obj.GetType().GetField(name)
+                .GetCustomAttributes(typeof(EnumMemberAttribute), true)
+                .Cast<EnumMemberAttribute>()
+                .Select(a => a.Value)
+                .SingleOrDefault() ?? name;
+            
+                return name;
+            }
             else
                 return Convert.ToString (obj);
         }
