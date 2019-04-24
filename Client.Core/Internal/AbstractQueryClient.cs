@@ -1,6 +1,7 @@
 using System;
 using System.Diagnostics;
 using System.IO;
+using System.Text;
 using InfluxDB.Client.Core.Exceptions;
 using InfluxDB.Client.Core.Flux.Domain;
 using InfluxDB.Client.Core.Flux.Exceptions;

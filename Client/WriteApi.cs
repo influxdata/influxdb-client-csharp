@@ -100,8 +100,8 @@ namespace InfluxDB.Client
                         .Create<IRestResponse>(observer =>
                         {
                             var body = Encoding.UTF8.GetBytes(lineProtocol);
-                            var response = _service.WritePostWithIRestResponse(orgId, bucket, 
-                                body, null, "utf-8", "text/plain", null, "application/json", precision);
+                            var response = _service.WritePostWithIRestResponse(orgId, bucket, body, null, 
+                                "utf-8", "text/plain", null, "application/json", precision);
                             observer.OnNext(response);
                             
                             return Disposable.Empty;

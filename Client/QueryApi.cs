@@ -12,7 +12,7 @@ namespace InfluxDB.Client
 {
     public class QueryApi : AbstractQueryClient
     {
-        private readonly Dialect DefaultDialect;
+        private readonly Dialect _defaultDialect;
         
         private readonly QueryService _service;
 
@@ -21,13 +21,17 @@ namespace InfluxDB.Client
             Arguments.CheckNotNull(service, nameof(service));
 
             _service = service;
-            DefaultDialect = new Dialect();
-            DefaultDialect.Header = true;
-            DefaultDialect.Delimiter = ",";
-            DefaultDialect.CommentPrefix = "#";
-            DefaultDialect.Annotations = new List<Dialect.AnnotationsEnum>
+            _defaultDialect = new Dialect
             {
-                Dialect.AnnotationsEnum.Datatype, Dialect.AnnotationsEnum.Group, Dialect.AnnotationsEnum.Default
+                Header = true,
+                Delimiter = ",",
+                CommentPrefix = "#",
+                Annotations = new List<Dialect.AnnotationsEnum>
+                {
+                    Dialect.AnnotationsEnum.Datatype,
+                    Dialect.AnnotationsEnum.Group,
+                    Dialect.AnnotationsEnum.Default
+                }
             };
         }
 
@@ -49,11 +53,7 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(query, nameof(query));
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
 
-            var consumer = new FluxCsvParser.FluxResponseConsumerTable();
-
-            Query(CreateQuery(query, DefaultDialect), orgId);
-
-            return consumer.Tables;
+            return Query(CreateQuery(query, _defaultDialect), orgId);
         }
 
         /// <summary>
@@ -302,7 +302,7 @@ namespace InfluxDB.Client
 
             var consumer = new FluxResponseConsumerRecord(onNext);
 
-            Query(CreateQuery(query, DefaultDialect), orgId, consumer, onError, onComplete);
+            Query(CreateQuery(query, _defaultDialect), orgId, consumer, onError, onComplete);
         }
 
         /// <summary>
@@ -353,7 +353,7 @@ namespace InfluxDB.Client
 
             var consumer = new FluxResponseConsumerPoco<T>(onNext);
 
-            Query(CreateQuery(query, DefaultDialect), orgId, consumer, onError, onComplete);
+            Query(CreateQuery(query, _defaultDialect), orgId, consumer, onError, onComplete);
         }
         
         /// <summary>
@@ -400,7 +400,7 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(query, nameof(query));
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
             
-            return QueryRaw(query, orgId, DefaultDialect);
+            return QueryRaw(query, orgId, _defaultDialect);
         }
 
         /// <summary>
@@ -674,7 +674,7 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(query, nameof(query));
 
             var created = new Query(null, query);
-            created.Dialect = dialect ?? DefaultDialect;
+            created.Dialect = dialect ?? _defaultDialect;
             
             return created;
         }

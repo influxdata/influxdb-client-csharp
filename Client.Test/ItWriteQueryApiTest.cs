@@ -1,13 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Threading;
-using InfluxDB.Client.Core;
 using InfluxDB.Client.Api.Domain;
+using InfluxDB.Client.Core;
 using InfluxDB.Client.Writes;
 using NodaTime;
 using NUnit.Framework;
 using Duration = NodaTime.Duration;
-using Task = System.Threading.Tasks.Task;
 
 namespace InfluxDB.Client.Test
 {
@@ -58,7 +57,7 @@ namespace InfluxDB.Client.Test
         }
 
         [Test]
-        public async Task WriteRecordsList()
+        public void WriteRecordsList()
         {
             var bucketName = _bucket.Name;
 
@@ -88,7 +87,7 @@ namespace InfluxDB.Client.Test
         }
 
         [Test]
-        public async Task WriteRecordsParams()
+        public void WriteRecordsParams()
         {
             var bucketName = _bucket.Name;
 
@@ -118,7 +117,7 @@ namespace InfluxDB.Client.Test
         }
 
         [Test]
-        public async Task WritePoints()
+        public void WritePoints()
         {
             var bucketName = _bucket.Name;
 
@@ -162,7 +161,7 @@ namespace InfluxDB.Client.Test
         }
 
         [Test]
-        public async Task WriteMeasurements()
+        public void WriteMeasurements()
         {
             _writeApi = Client.GetWriteApi();
 
@@ -199,7 +198,7 @@ namespace InfluxDB.Client.Test
         }
 
         [Test]
-        public async Task Flush()
+        public void Flush()
         {
             var bucketName = _bucket.Name;
 
@@ -228,7 +227,7 @@ namespace InfluxDB.Client.Test
         }
 
         [Test]
-        public async Task FlushByTime()
+        public void FlushByTime()
         {
             var bucketName = _bucket.Name;
 
@@ -263,7 +262,7 @@ namespace InfluxDB.Client.Test
         }
 
         [Test]
-        public async Task FlushByCount()
+        public void FlushByCount()
         {
             var bucketName = _bucket.Name;
 
@@ -301,7 +300,7 @@ namespace InfluxDB.Client.Test
         }
 
         [Test]
-        public async Task Jitter()
+        public void Jitter()
         {
             var bucketName = _bucket.Name;
 
@@ -371,7 +370,7 @@ namespace InfluxDB.Client.Test
         }
 
         [Test]
-        public async Task PartialWrite()
+        public void PartialWrite()
         {
             var bucketName = _bucket.Name;
 
@@ -390,7 +389,7 @@ namespace InfluxDB.Client.Test
         }
 
         [Test]
-        public async Task Recovery()
+        public void Recovery()
         {
             var bucketName = _bucket.Name;
 
