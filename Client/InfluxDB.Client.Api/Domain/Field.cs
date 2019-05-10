@@ -19,7 +19,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using System.ComponentModel.DataAnnotations;
 using OpenAPIDateConverter = InfluxDB.Client.Api.Client.OpenAPIDateConverter;
 
 namespace InfluxDB.Client.Api.Domain
@@ -37,42 +36,42 @@ namespace InfluxDB.Client.Api.Domain
         [JsonConverter(typeof(StringEnumConverter))]
         public enum TypeEnum
         {
-            
             /// <summary>
             /// Enum Func for value: func
             /// </summary>
             [EnumMember(Value = "func")]
             Func = 1,
-            
+
             /// <summary>
             /// Enum Field for value: field
             /// </summary>
             [EnumMember(Value = "field")]
             Field = 2,
-            
+
             /// <summary>
             /// Enum Integer for value: integer
             /// </summary>
             [EnumMember(Value = "integer")]
             Integer = 3,
-            
+
             /// <summary>
             /// Enum Number for value: number
             /// </summary>
             [EnumMember(Value = "number")]
             Number = 4,
-            
+
             /// <summary>
             /// Enum Regex for value: regex
             /// </summary>
             [EnumMember(Value = "regex")]
             Regex = 5,
-            
+
             /// <summary>
             /// Enum Wildcard for value: wildcard
             /// </summary>
             [EnumMember(Value = "wildcard")]
             Wildcard = 6
+
         }
 
         /// <summary>

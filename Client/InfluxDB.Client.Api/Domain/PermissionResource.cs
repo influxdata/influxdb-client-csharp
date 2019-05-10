@@ -19,7 +19,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using System.ComponentModel.DataAnnotations;
 using OpenAPIDateConverter = InfluxDB.Client.Api.Client.OpenAPIDateConverter;
 
 namespace InfluxDB.Client.Api.Domain
@@ -36,108 +35,121 @@ namespace InfluxDB.Client.Api.Domain
         [JsonConverter(typeof(StringEnumConverter))]
         public enum TypeEnum
         {
-            
             /// <summary>
             /// Enum Authorizations for value: authorizations
             /// </summary>
             [EnumMember(Value = "authorizations")]
             Authorizations = 1,
-            
+
             /// <summary>
             /// Enum Buckets for value: buckets
             /// </summary>
             [EnumMember(Value = "buckets")]
             Buckets = 2,
-            
+
             /// <summary>
             /// Enum Dashboards for value: dashboards
             /// </summary>
             [EnumMember(Value = "dashboards")]
             Dashboards = 3,
-            
+
             /// <summary>
             /// Enum Orgs for value: orgs
             /// </summary>
             [EnumMember(Value = "orgs")]
             Orgs = 4,
-            
+
             /// <summary>
             /// Enum Sources for value: sources
             /// </summary>
             [EnumMember(Value = "sources")]
             Sources = 5,
-            
+
             /// <summary>
             /// Enum Tasks for value: tasks
             /// </summary>
             [EnumMember(Value = "tasks")]
             Tasks = 6,
-            
+
             /// <summary>
             /// Enum Telegrafs for value: telegrafs
             /// </summary>
             [EnumMember(Value = "telegrafs")]
             Telegrafs = 7,
-            
+
             /// <summary>
             /// Enum Users for value: users
             /// </summary>
             [EnumMember(Value = "users")]
             Users = 8,
-            
+
             /// <summary>
             /// Enum Variables for value: variables
             /// </summary>
             [EnumMember(Value = "variables")]
             Variables = 9,
-            
+
             /// <summary>
             /// Enum Scrapers for value: scrapers
             /// </summary>
             [EnumMember(Value = "scrapers")]
             Scrapers = 10,
-            
+
             /// <summary>
             /// Enum Secrets for value: secrets
             /// </summary>
             [EnumMember(Value = "secrets")]
             Secrets = 11,
-            
+
             /// <summary>
             /// Enum Labels for value: labels
             /// </summary>
             [EnumMember(Value = "labels")]
             Labels = 12,
-            
+
             /// <summary>
             /// Enum Views for value: views
             /// </summary>
             [EnumMember(Value = "views")]
             Views = 13,
-            
+
             /// <summary>
             /// Enum Documents for value: documents
             /// </summary>
             [EnumMember(Value = "documents")]
             Documents = 14
+
         }
 
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
-        public TypeEnum? Type { get; set; }
+        public TypeEnum Type { get; set; }
         /// <summary>
         /// Initializes a new instance of the <see cref="PermissionResource" /> class.
         /// </summary>
-        /// <param name="type">type.</param>
+        [JsonConstructorAttribute]
+        protected PermissionResource() { }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PermissionResource" /> class.
+        /// </summary>
+        /// <param name="type">type (required).</param>
         /// <param name="id">if id is set that is a permission for a specific resource. if it is not set it is a permission for all resources of that resource type..</param>
         /// <param name="name">optional name of the resource if the resource has a name field..</param>
         /// <param name="orgID">if orgID is set that is a permission for all resources owned my that org. if it is not set it is a permission for all resources of that resource type..</param>
         /// <param name="org">optional name of the organization of the organization with orgID..</param>
-        public PermissionResource(TypeEnum? type = default(TypeEnum?), string id = default(string), string name = default(string), string orgID = default(string), string org = default(string))
+        public PermissionResource(TypeEnum type = default(TypeEnum), string id = default(string), string name = default(string), string orgID = default(string), string org = default(string))
         {
-            this.Type = type;
+            // to ensure "type" is required (not null)
+            if (type == null)
+            {
+                throw new InvalidDataException("type is a required property for PermissionResource and cannot be null");
+            }
+            else
+            {
+                this.Type = type;
+            }
             this.Id = id;
             this.Name = name;
             this.OrgID = orgID;

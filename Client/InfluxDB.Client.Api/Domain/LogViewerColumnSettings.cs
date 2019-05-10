@@ -19,7 +19,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using System.ComponentModel.DataAnnotations;
 using OpenAPIDateConverter = InfluxDB.Client.Api.Client.OpenAPIDateConverter;
 
 namespace InfluxDB.Client.Api.Domain
@@ -33,13 +32,34 @@ namespace InfluxDB.Client.Api.Domain
         /// <summary>
         /// Initializes a new instance of the <see cref="LogViewerColumnSettings" /> class.
         /// </summary>
-        /// <param name="type">type.</param>
-        /// <param name="value">value.</param>
+        [JsonConstructorAttribute]
+        protected LogViewerColumnSettings() { }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LogViewerColumnSettings" /> class.
+        /// </summary>
+        /// <param name="type">type (required).</param>
+        /// <param name="value">value (required).</param>
         /// <param name="name">name.</param>
         public LogViewerColumnSettings(string type = default(string), string value = default(string), string name = default(string))
         {
-            this.Type = type;
-            this.Value = value;
+            // to ensure "type" is required (not null)
+            if (type == null)
+            {
+                throw new InvalidDataException("type is a required property for LogViewerColumnSettings and cannot be null");
+            }
+            else
+            {
+                this.Type = type;
+            }
+            // to ensure "value" is required (not null)
+            if (value == null)
+            {
+                throw new InvalidDataException("value is a required property for LogViewerColumnSettings and cannot be null");
+            }
+            else
+            {
+                this.Value = value;
+            }
             this.Name = name;
         }
 

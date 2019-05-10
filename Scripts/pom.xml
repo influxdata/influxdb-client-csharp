@@ -11,12 +11,10 @@
             <plugin>
                 <groupId>org.openapitools</groupId>
                 <artifactId>openapi-generator-maven-plugin</artifactId>
-                <version>3.0.3</version>
+                <version>3.3.4</version>
                 <configuration>
                     <inputSpec>${project.basedir}/swagger.yml</inputSpec>
                     <generatorName>influx-csharp</generatorName>
-                    <!-- <generatorName>csharp</generatorName> -->
-                    <!-- <generatorName>csharp-dotnet2</generatorName> -->
                     <configOptions>
                         <additional-properties>optionalProjectFile=true</additional-properties>
                         <hideGenerationTimestamp>true</hideGenerationTimestamp>

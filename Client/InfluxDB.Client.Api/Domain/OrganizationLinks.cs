@@ -19,7 +19,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using System.ComponentModel.DataAnnotations;
 using OpenAPIDateConverter = InfluxDB.Client.Api.Client.OpenAPIDateConverter;
 
 namespace InfluxDB.Client.Api.Domain
@@ -33,81 +32,73 @@ namespace InfluxDB.Client.Api.Domain
         /// <summary>
         /// Initializes a new instance of the <see cref="OrganizationLinks" /> class.
         /// </summary>
-        /// <param name="self">self.</param>
-        /// <param name="members">members.</param>
-        /// <param name="owners">owners.</param>
-        /// <param name="labels">labels.</param>
-        /// <param name="secrets">secrets.</param>
-        /// <param name="buckets">buckets.</param>
-        /// <param name="tasks">tasks.</param>
-        /// <param name="dashboards">dashboards.</param>
-        /// <param name="logs">logs.</param>
-        public OrganizationLinks(string self = default(string), string members = default(string), string owners = default(string), string labels = default(string), string secrets = default(string), string buckets = default(string), string tasks = default(string), string dashboards = default(string), string logs = default(string))
+        [JsonConstructorAttribute]
+        public OrganizationLinks()
         {
-            this.Self = self;
-            this.Members = members;
-            this.Owners = owners;
-            this.Labels = labels;
-            this.Secrets = secrets;
-            this.Buckets = buckets;
-            this.Tasks = tasks;
-            this.Dashboards = dashboards;
-            this.Logs = logs;
         }
 
         /// <summary>
-        /// Gets or Sets Self
+        /// URI of resource.
         /// </summary>
+        /// <value>URI of resource.</value>
         [DataMember(Name="self", EmitDefaultValue=false)]
-        public string Self { get; set; }
+        public string Self { get; private set; }
 
         /// <summary>
-        /// Gets or Sets Members
+        /// URI of resource.
         /// </summary>
+        /// <value>URI of resource.</value>
         [DataMember(Name="members", EmitDefaultValue=false)]
-        public string Members { get; set; }
+        public string Members { get; private set; }
 
         /// <summary>
-        /// Gets or Sets Owners
+        /// URI of resource.
         /// </summary>
+        /// <value>URI of resource.</value>
         [DataMember(Name="owners", EmitDefaultValue=false)]
-        public string Owners { get; set; }
+        public string Owners { get; private set; }
 
         /// <summary>
-        /// Gets or Sets Labels
+        /// URI of resource.
         /// </summary>
+        /// <value>URI of resource.</value>
         [DataMember(Name="labels", EmitDefaultValue=false)]
-        public string Labels { get; set; }
+        public string Labels { get; private set; }
 
         /// <summary>
-        /// Gets or Sets Secrets
+        /// URI of resource.
         /// </summary>
+        /// <value>URI of resource.</value>
         [DataMember(Name="secrets", EmitDefaultValue=false)]
-        public string Secrets { get; set; }
+        public string Secrets { get; private set; }
 
         /// <summary>
-        /// Gets or Sets Buckets
+        /// URI of resource.
         /// </summary>
+        /// <value>URI of resource.</value>
         [DataMember(Name="buckets", EmitDefaultValue=false)]
-        public string Buckets { get; set; }
+        public string Buckets { get; private set; }
 
         /// <summary>
-        /// Gets or Sets Tasks
+        /// URI of resource.
         /// </summary>
+        /// <value>URI of resource.</value>
         [DataMember(Name="tasks", EmitDefaultValue=false)]
-        public string Tasks { get; set; }
+        public string Tasks { get; private set; }
 
         /// <summary>
-        /// Gets or Sets Dashboards
+        /// URI of resource.
         /// </summary>
+        /// <value>URI of resource.</value>
         [DataMember(Name="dashboards", EmitDefaultValue=false)]
-        public string Dashboards { get; set; }
+        public string Dashboards { get; private set; }
 
         /// <summary>
-        /// Gets or Sets Logs
+        /// URI of resource.
         /// </summary>
+        /// <value>URI of resource.</value>
         [DataMember(Name="logs", EmitDefaultValue=false)]
-        public string Logs { get; set; }
+        public string Logs { get; private set; }
 
         /// <summary>
         /// Returns the string presentation of the object

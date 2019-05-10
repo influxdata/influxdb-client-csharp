@@ -19,7 +19,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using System.ComponentModel.DataAnnotations;
 using OpenAPIDateConverter = InfluxDB.Client.Api.Client.OpenAPIDateConverter;
 
 namespace InfluxDB.Client.Api.Domain
@@ -33,12 +32,33 @@ namespace InfluxDB.Client.Api.Domain
         /// <summary>
         /// Initializes a new instance of the <see cref="DashboardQueryRange" /> class.
         /// </summary>
-        /// <param name="upper">Upper bound of the display range of the Y-axis.</param>
-        /// <param name="lower">Lower bound of the display range of the Y-axis.</param>
+        [JsonConstructorAttribute]
+        protected DashboardQueryRange() { }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DashboardQueryRange" /> class.
+        /// </summary>
+        /// <param name="upper">Upper bound of the display range of the Y-axis (required).</param>
+        /// <param name="lower">Lower bound of the display range of the Y-axis (required).</param>
         public DashboardQueryRange(long? upper = default(long?), long? lower = default(long?))
         {
-            this.Upper = upper;
-            this.Lower = lower;
+            // to ensure "upper" is required (not null)
+            if (upper == null)
+            {
+                throw new InvalidDataException("upper is a required property for DashboardQueryRange and cannot be null");
+            }
+            else
+            {
+                this.Upper = upper;
+            }
+            // to ensure "lower" is required (not null)
+            if (lower == null)
+            {
+                throw new InvalidDataException("lower is a required property for DashboardQueryRange and cannot be null");
+            }
+            else
+            {
+                this.Lower = lower;
+            }
         }
 
         /// <summary>

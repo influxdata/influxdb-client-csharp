@@ -19,7 +19,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using System.ComponentModel.DataAnnotations;
 using OpenAPIDateConverter = InfluxDB.Client.Api.Client.OpenAPIDateConverter;
 
 namespace InfluxDB.Client.Api.Domain
@@ -104,7 +103,7 @@ namespace InfluxDB.Client.Api.Domain
                     this.Name.Equals(input.Name))
                 ) && 
                 (
-                    this.Properties == input.Properties ||
+                    
                     (this.Properties != null &&
                     this.Properties.Equals(input.Properties))
                 );

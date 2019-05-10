@@ -19,7 +19,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using System.ComponentModel.DataAnnotations;
 using OpenAPIDateConverter = InfluxDB.Client.Api.Client.OpenAPIDateConverter;
 
 namespace InfluxDB.Client.Api.Domain
@@ -37,18 +36,18 @@ namespace InfluxDB.Client.Api.Domain
         [JsonConverter(typeof(StringEnumConverter))]
         public enum StatusEnum
         {
-            
             /// <summary>
             /// Enum Active for value: active
             /// </summary>
             [EnumMember(Value = "active")]
             Active = 1,
-            
+
             /// <summary>
             /// Enum Inactive for value: inactive
             /// </summary>
             [EnumMember(Value = "inactive")]
             Inactive = 2
+
         }
 
         /// <summary>
@@ -76,7 +75,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="cron">A task repetition schedule in the form &#39;* * * * * *&#39;; parsed from Flux..</param>
         /// <param name="offset">Duration to delay after the schedule, before executing the task; parsed from flux, if set to zero it will remove this option and use 0 as the default..</param>
         /// <param name="links">links.</param>
-        public Task(string orgID = default(string), string org = default(string), string name = default(string), StatusEnum? status = StatusEnum.Active, Labels labels = default(Labels), string authorizationID = default(string), string flux = default(string), string every = default(string), string cron = default(string), string offset = default(string), TaskLinks links = default(TaskLinks))
+        public Task(string orgID = default(string), string org = default(string), string name = default(string), StatusEnum? status = StatusEnum.Active, List<Label> labels = default(List<Label>), string authorizationID = default(string), string flux = default(string), string every = default(string), string cron = default(string), string offset = default(string), TaskLinks links = default(TaskLinks))
         {
             // to ensure "orgID" is required (not null)
             if (orgID == null)
@@ -155,7 +154,7 @@ namespace InfluxDB.Client.Api.Domain
         /// Gets or Sets Labels
         /// </summary>
         [DataMember(Name="labels", EmitDefaultValue=false)]
-        public Labels Labels { get; set; }
+        public List<Label> Labels { get; set; }
 
         /// <summary>
         /// The ID of the authorization used when this task communicates with the query engine.
@@ -300,9 +299,9 @@ namespace InfluxDB.Client.Api.Domain
                     this.Status.Equals(input.Status))
                 ) && 
                 (
-                    
-                    (this.Labels != null &&
-                    this.Labels.Equals(input.Labels))
+                    this.Labels == input.Labels ||
+                    this.Labels != null &&
+                    this.Labels.SequenceEqual(input.Labels)
                 ) && 
                 (
                     this.AuthorizationID == input.AuthorizationID ||

@@ -19,7 +19,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using System.ComponentModel.DataAnnotations;
 using OpenAPIDateConverter = InfluxDB.Client.Api.Client.OpenAPIDateConverter;
 
 namespace InfluxDB.Client.Api.Domain
@@ -35,7 +34,7 @@ namespace InfluxDB.Client.Api.Domain
         /// </summary>
         /// <param name="links">links.</param>
         /// <param name="labels">labels.</param>
-        public Telegraf(TelegrafLinks links = default(TelegrafLinks), Labels labels = default(Labels), string name = default(string), string description = default(string), TelegrafRequestAgent agent = default(TelegrafRequestAgent), List<TelegrafRequestPlugin> plugins = default(List<TelegrafRequestPlugin>), string organizationID = default(string)) : base(name, description, agent, plugins, organizationID)
+        public Telegraf(TelegrafLinks links = default(TelegrafLinks), List<Label> labels = default(List<Label>), string name = default(string), string description = default(string), TelegrafRequestAgent agent = default(TelegrafRequestAgent), List<TelegrafRequestPlugin> plugins = default(List<TelegrafRequestPlugin>), string organizationID = default(string)) : base(name, description, agent, plugins, organizationID)
         {
             this.Links = links;
             this.Labels = labels;
@@ -57,7 +56,7 @@ namespace InfluxDB.Client.Api.Domain
         /// Gets or Sets Labels
         /// </summary>
         [DataMember(Name="labels", EmitDefaultValue=false)]
-        public Labels Labels { get; set; }
+        public List<Label> Labels { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -116,9 +115,9 @@ namespace InfluxDB.Client.Api.Domain
                     this.Links.Equals(input.Links))
                 ) && base.Equals(input) && 
                 (
-                    
-                    (this.Labels != null &&
-                    this.Labels.Equals(input.Labels))
+                    this.Labels == input.Labels ||
+                    this.Labels != null &&
+                    this.Labels.SequenceEqual(input.Labels)
                 );
         }
 

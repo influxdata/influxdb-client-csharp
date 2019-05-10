@@ -19,7 +19,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using System.ComponentModel.DataAnnotations;
 using OpenAPIDateConverter = InfluxDB.Client.Api.Client.OpenAPIDateConverter;
 
 namespace InfluxDB.Client.Api.Domain
@@ -37,42 +36,42 @@ namespace InfluxDB.Client.Api.Domain
         [JsonConverter(typeof(StringEnumConverter))]
         public enum CodeEnum
         {
-            
             /// <summary>
             /// Enum Internalerror for value: internal error
             /// </summary>
             [EnumMember(Value = "internal error")]
             Internalerror = 1,
-            
+
             /// <summary>
             /// Enum Notfound for value: not found
             /// </summary>
             [EnumMember(Value = "not found")]
             Notfound = 2,
-            
+
             /// <summary>
             /// Enum Conflict for value: conflict
             /// </summary>
             [EnumMember(Value = "conflict")]
             Conflict = 3,
-            
+
             /// <summary>
             /// Enum Invalid for value: invalid
             /// </summary>
             [EnumMember(Value = "invalid")]
             Invalid = 4,
-            
+
             /// <summary>
             /// Enum Emptyvalue for value: empty value
             /// </summary>
             [EnumMember(Value = "empty value")]
             Emptyvalue = 5,
-            
+
             /// <summary>
             /// Enum Unavailable for value: unavailable
             /// </summary>
             [EnumMember(Value = "unavailable")]
             Unavailable = 6
+
         }
 
         /// <summary>

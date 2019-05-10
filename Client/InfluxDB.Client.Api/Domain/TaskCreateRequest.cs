@@ -19,7 +19,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using System.ComponentModel.DataAnnotations;
 using OpenAPIDateConverter = InfluxDB.Client.Api.Client.OpenAPIDateConverter;
 
 namespace InfluxDB.Client.Api.Domain
@@ -37,18 +36,18 @@ namespace InfluxDB.Client.Api.Domain
         [JsonConverter(typeof(StringEnumConverter))]
         public enum StatusEnum
         {
-            
             /// <summary>
             /// Enum Active for value: active
             /// </summary>
             [EnumMember(Value = "active")]
             Active = 1,
-            
+
             /// <summary>
             /// Enum Inactive for value: inactive
             /// </summary>
             [EnumMember(Value = "inactive")]
             Inactive = 2
+
         }
 
         /// <summary>

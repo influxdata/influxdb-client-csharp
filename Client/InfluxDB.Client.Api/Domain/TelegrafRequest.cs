@@ -19,7 +19,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using System.ComponentModel.DataAnnotations;
 using OpenAPIDateConverter = InfluxDB.Client.Api.Client.OpenAPIDateConverter;
 
 namespace InfluxDB.Client.Api.Domain
@@ -219,7 +218,7 @@ namespace InfluxDB.Client.Api.Domain
 
                     var discriminator = new []{ "name", "type" }.Select(key => jObject[key].ToString()).ToArray();
 
-                    var type = Types.GetValueOrDefault(discriminator, objectType);
+                    Types.TryGetValue(discriminator, out var type);
 
                     return serializer.Deserialize(jObject.CreateReader(), type);
 

@@ -19,7 +19,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using System.ComponentModel.DataAnnotations;
 using OpenAPIDateConverter = InfluxDB.Client.Api.Client.OpenAPIDateConverter;
 
 namespace InfluxDB.Client.Api.Domain
@@ -36,12 +35,12 @@ namespace InfluxDB.Client.Api.Domain
         [JsonConverter(typeof(StringEnumConverter))]
         public enum NameEnum
         {
-            
             /// <summary>
             /// Enum Influxdbv2 for value: influxdb_v2
             /// </summary>
             [EnumMember(Value = "influxdb_v2")]
             Influxdbv2 = 1
+
         }
 
         /// <summary>

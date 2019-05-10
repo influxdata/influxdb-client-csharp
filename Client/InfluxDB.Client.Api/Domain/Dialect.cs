@@ -19,7 +19,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using System.ComponentModel.DataAnnotations;
 using OpenAPIDateConverter = InfluxDB.Client.Api.Client.OpenAPIDateConverter;
 
 namespace InfluxDB.Client.Api.Domain
@@ -36,24 +35,24 @@ namespace InfluxDB.Client.Api.Domain
         [JsonConverter(typeof(StringEnumConverter))]
         public enum AnnotationsEnum
         {
-            
             /// <summary>
             /// Enum Group for value: group
             /// </summary>
             [EnumMember(Value = "group")]
             Group = 1,
-            
+
             /// <summary>
             /// Enum Datatype for value: datatype
             /// </summary>
             [EnumMember(Value = "datatype")]
             Datatype = 2,
-            
+
             /// <summary>
             /// Enum Default for value: default
             /// </summary>
             [EnumMember(Value = "default")]
             Default = 3
+
         }
 
 
@@ -70,18 +69,18 @@ namespace InfluxDB.Client.Api.Domain
         [JsonConverter(typeof(StringEnumConverter))]
         public enum DateTimeFormatEnum
         {
-            
             /// <summary>
             /// Enum RFC3339 for value: RFC3339
             /// </summary>
             [EnumMember(Value = "RFC3339")]
             RFC3339 = 1,
-            
+
             /// <summary>
             /// Enum RFC3339Nano for value: RFC3339Nano
             /// </summary>
             [EnumMember(Value = "RFC3339Nano")]
             RFC3339Nano = 2
+
         }
 
         /// <summary>

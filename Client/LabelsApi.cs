@@ -145,7 +145,7 @@ namespace InfluxDB.Client
         ///     List all labels.
         /// </summary>
         /// <returns>List all labels.</returns>
-        public Labels FindLabels()
+        public List<Label> FindLabels()
         {
             return _service.LabelsGet().Labels;
         }

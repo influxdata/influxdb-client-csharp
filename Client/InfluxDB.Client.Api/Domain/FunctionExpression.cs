@@ -19,7 +19,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using System.ComponentModel.DataAnnotations;
 using OpenAPIDateConverter = InfluxDB.Client.Api.Client.OpenAPIDateConverter;
 
 namespace InfluxDB.Client.Api.Domain
@@ -33,7 +32,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <summary>
         /// Initializes a new instance of the <see cref="FunctionExpression" /> class.
         /// </summary>
-        /// <param name="type">type.</param>
+        /// <param name="type">type of AST node.</param>
         /// <param name="_params">function parameters.</param>
         /// <param name="body">body.</param>
         public FunctionExpression(string type = default(string), List<Property> _params = default(List<Property>), Node body = default(Node))
@@ -44,8 +43,9 @@ namespace InfluxDB.Client.Api.Domain
         }
 
         /// <summary>
-        /// Gets or Sets Type
+        /// type of AST node
         /// </summary>
+        /// <value>type of AST node</value>
         [DataMember(Name="type", EmitDefaultValue=false)]
         public string Type { get; set; }
 
@@ -197,7 +197,7 @@ namespace InfluxDB.Client.Api.Domain
 
                     var discriminator = new []{ "type" }.Select(key => jObject[key].ToString()).ToArray();
 
-                    var type = Types.GetValueOrDefault(discriminator, objectType);
+                    Types.TryGetValue(discriminator, out var type);
 
                     return serializer.Deserialize(jObject.CreateReader(), type);
 

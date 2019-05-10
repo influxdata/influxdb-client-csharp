@@ -19,7 +19,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using System.ComponentModel.DataAnnotations;
 using OpenAPIDateConverter = InfluxDB.Client.Api.Client.OpenAPIDateConverter;
 
 namespace InfluxDB.Client.Api.Domain
@@ -45,7 +44,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="selected">selected.</param>
         /// <param name="labels">labels.</param>
         /// <param name="arguments">arguments (required).</param>
-        public Variable(VariableLinks links = default(VariableLinks), string orgID = default(string), string name = default(string), string description = default(string), List<string> selected = default(List<string>), Labels labels = default(Labels), Object arguments = default(Object))
+        public Variable(VariableLinks links = default(VariableLinks), string orgID = default(string), string name = default(string), string description = default(string), List<string> selected = default(List<string>), List<Label> labels = default(List<Label>), Object arguments = default(Object))
         {
             // to ensure "orgID" is required (not null)
             if (orgID == null)
@@ -120,7 +119,7 @@ namespace InfluxDB.Client.Api.Domain
         /// Gets or Sets Labels
         /// </summary>
         [DataMember(Name="labels", EmitDefaultValue=false)]
-        public Labels Labels { get; set; }
+        public List<Label> Labels { get; set; }
 
         /// <summary>
         /// Gets or Sets Arguments
@@ -210,12 +209,12 @@ namespace InfluxDB.Client.Api.Domain
                     this.Selected.SequenceEqual(input.Selected)
                 ) && 
                 (
-                    
-                    (this.Labels != null &&
-                    this.Labels.Equals(input.Labels))
+                    this.Labels == input.Labels ||
+                    this.Labels != null &&
+                    this.Labels.SequenceEqual(input.Labels)
                 ) && 
                 (
-                    this.Arguments == input.Arguments ||
+                    
                     (this.Arguments != null &&
                     this.Arguments.Equals(input.Arguments))
                 );
@@ -284,7 +283,7 @@ namespace InfluxDB.Client.Api.Domain
 
                     var discriminator = new []{ "type" }.Select(key => jObject[key].ToString()).ToArray();
 
-                    var type = Types.GetValueOrDefault(discriminator, objectType);
+                    Types.TryGetValue(discriminator, out var type);
 
                     return serializer.Deserialize(jObject.CreateReader(), type);
 

@@ -19,7 +19,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using System.ComponentModel.DataAnnotations;
 using OpenAPIDateConverter = InfluxDB.Client.Api.Client.OpenAPIDateConverter;
 
 namespace InfluxDB.Client.Api.Domain
@@ -33,12 +32,33 @@ namespace InfluxDB.Client.Api.Domain
         /// <summary>
         /// Initializes a new instance of the <see cref="QueryConfigRange" /> class.
         /// </summary>
-        /// <param name="lower">lower.</param>
-        /// <param name="upper">upper.</param>
+        [JsonConstructorAttribute]
+        protected QueryConfigRange() { }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="QueryConfigRange" /> class.
+        /// </summary>
+        /// <param name="lower">lower (required).</param>
+        /// <param name="upper">upper (required).</param>
         public QueryConfigRange(string lower = default(string), string upper = default(string))
         {
-            this.Lower = lower;
-            this.Upper = upper;
+            // to ensure "lower" is required (not null)
+            if (lower == null)
+            {
+                throw new InvalidDataException("lower is a required property for QueryConfigRange and cannot be null");
+            }
+            else
+            {
+                this.Lower = lower;
+            }
+            // to ensure "upper" is required (not null)
+            if (upper == null)
+            {
+                throw new InvalidDataException("upper is a required property for QueryConfigRange and cannot be null");
+            }
+            else
+            {
+                this.Upper = upper;
+            }
         }
 
         /// <summary>

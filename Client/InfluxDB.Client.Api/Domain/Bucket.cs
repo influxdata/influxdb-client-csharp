@@ -19,7 +19,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using System.ComponentModel.DataAnnotations;
 using OpenAPIDateConverter = InfluxDB.Client.Api.Client.OpenAPIDateConverter;
 
 namespace InfluxDB.Client.Api.Domain
@@ -44,7 +43,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="rp">rp.</param>
         /// <param name="retentionRules">rules to expire or retain data.  No rules means data never expires. (required).</param>
         /// <param name="labels">labels.</param>
-        public Bucket(BucketLinks links = default(BucketLinks), string name = default(string), string orgID = default(string), string rp = default(string), List<BucketRetentionRules> retentionRules = default(List<BucketRetentionRules>), Labels labels = default(Labels))
+        public Bucket(BucketLinks links = default(BucketLinks), string name = default(string), string orgID = default(string), string rp = default(string), List<BucketRetentionRules> retentionRules = default(List<BucketRetentionRules>), List<Label> labels = default(List<Label>))
         {
             // to ensure "name" is required (not null)
             if (name == null)
@@ -111,7 +110,7 @@ namespace InfluxDB.Client.Api.Domain
         /// Gets or Sets Labels
         /// </summary>
         [DataMember(Name="labels", EmitDefaultValue=false)]
-        public Labels Labels { get; set; }
+        public List<Label> Labels { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -193,9 +192,9 @@ namespace InfluxDB.Client.Api.Domain
                     this.RetentionRules.SequenceEqual(input.RetentionRules)
                 ) && 
                 (
-                    
-                    (this.Labels != null &&
-                    this.Labels.Equals(input.Labels))
+                    this.Labels == input.Labels ||
+                    this.Labels != null &&
+                    this.Labels.SequenceEqual(input.Labels)
                 );
         }
 

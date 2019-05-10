@@ -19,7 +19,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using System.ComponentModel.DataAnnotations;
 using OpenAPIDateConverter = InfluxDB.Client.Api.Client.OpenAPIDateConverter;
 
 namespace InfluxDB.Client.Api.Domain
@@ -36,12 +35,12 @@ namespace InfluxDB.Client.Api.Domain
         [JsonConverter(typeof(StringEnumConverter))]
         public enum TypeEnum
         {
-            
             /// <summary>
             /// Enum ChronografV1 for value: chronograf-v1
             /// </summary>
             [EnumMember(Value = "chronograf-v1")]
             ChronografV1 = 1
+
         }
 
         /// <summary>
@@ -56,54 +55,54 @@ namespace InfluxDB.Client.Api.Domain
         [JsonConverter(typeof(StringEnumConverter))]
         public enum GraphTypeEnum
         {
-            
             /// <summary>
             /// Enum SingleStat for value: single-stat
             /// </summary>
             [EnumMember(Value = "single-stat")]
             SingleStat = 1,
-            
+
             /// <summary>
             /// Enum Line for value: line
             /// </summary>
             [EnumMember(Value = "line")]
             Line = 2,
-            
+
             /// <summary>
             /// Enum LinePlusSingleStat for value: line-plus-single-stat
             /// </summary>
             [EnumMember(Value = "line-plus-single-stat")]
             LinePlusSingleStat = 3,
-            
+
             /// <summary>
             /// Enum LineStacked for value: line-stacked
             /// </summary>
             [EnumMember(Value = "line-stacked")]
             LineStacked = 4,
-            
+
             /// <summary>
             /// Enum LineStepplot for value: line-stepplot
             /// </summary>
             [EnumMember(Value = "line-stepplot")]
             LineStepplot = 5,
-            
+
             /// <summary>
             /// Enum Bar for value: bar
             /// </summary>
             [EnumMember(Value = "bar")]
             Bar = 6,
-            
+
             /// <summary>
             /// Enum Gauge for value: gauge
             /// </summary>
             [EnumMember(Value = "gauge")]
             Gauge = 7,
-            
+
             /// <summary>
             /// Enum Table for value: table
             /// </summary>
             [EnumMember(Value = "table")]
             Table = 8
+
         }
 
         /// <summary>

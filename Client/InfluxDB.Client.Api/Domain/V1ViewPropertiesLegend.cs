@@ -19,7 +19,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using System.ComponentModel.DataAnnotations;
 using OpenAPIDateConverter = InfluxDB.Client.Api.Client.OpenAPIDateConverter;
 
 namespace InfluxDB.Client.Api.Domain
@@ -37,12 +36,12 @@ namespace InfluxDB.Client.Api.Domain
         [JsonConverter(typeof(StringEnumConverter))]
         public enum TypeEnum
         {
-            
             /// <summary>
             /// Enum Static for value: static
             /// </summary>
             [EnumMember(Value = "static")]
             Static = 1
+
         }
 
         /// <summary>
@@ -58,30 +57,30 @@ namespace InfluxDB.Client.Api.Domain
         [JsonConverter(typeof(StringEnumConverter))]
         public enum OrientationEnum
         {
-            
             /// <summary>
             /// Enum Top for value: top
             /// </summary>
             [EnumMember(Value = "top")]
             Top = 1,
-            
+
             /// <summary>
             /// Enum Bottom for value: bottom
             /// </summary>
             [EnumMember(Value = "bottom")]
             Bottom = 2,
-            
+
             /// <summary>
             /// Enum Left for value: left
             /// </summary>
             [EnumMember(Value = "left")]
             Left = 3,
-            
+
             /// <summary>
             /// Enum Right for value: right
             /// </summary>
             [EnumMember(Value = "right")]
             Right = 4
+
         }
 
         /// <summary>

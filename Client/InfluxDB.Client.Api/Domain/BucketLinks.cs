@@ -19,7 +19,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using System.ComponentModel.DataAnnotations;
 using OpenAPIDateConverter = InfluxDB.Client.Api.Client.OpenAPIDateConverter;
 
 namespace InfluxDB.Client.Api.Domain
@@ -33,65 +32,59 @@ namespace InfluxDB.Client.Api.Domain
         /// <summary>
         /// Initializes a new instance of the <see cref="BucketLinks" /> class.
         /// </summary>
-        /// <param name="labels">labels.</param>
-        /// <param name="logs">logs.</param>
-        /// <param name="members">members.</param>
-        /// <param name="org">org.</param>
-        /// <param name="owners">owners.</param>
-        /// <param name="self">self.</param>
-        /// <param name="write">write.</param>
-        public BucketLinks(string labels = default(string), string logs = default(string), string members = default(string), string org = default(string), string owners = default(string), string self = default(string), string write = default(string))
+        [JsonConstructorAttribute]
+        public BucketLinks()
         {
-            this.Labels = labels;
-            this.Logs = logs;
-            this.Members = members;
-            this.Org = org;
-            this.Owners = owners;
-            this.Self = self;
-            this.Write = write;
         }
 
         /// <summary>
-        /// Gets or Sets Labels
+        /// URI of resource.
         /// </summary>
+        /// <value>URI of resource.</value>
         [DataMember(Name="labels", EmitDefaultValue=false)]
-        public string Labels { get; set; }
+        public string Labels { get; private set; }
 
         /// <summary>
-        /// Gets or Sets Logs
+        /// URI of resource.
         /// </summary>
+        /// <value>URI of resource.</value>
         [DataMember(Name="logs", EmitDefaultValue=false)]
-        public string Logs { get; set; }
+        public string Logs { get; private set; }
 
         /// <summary>
-        /// Gets or Sets Members
+        /// URI of resource.
         /// </summary>
+        /// <value>URI of resource.</value>
         [DataMember(Name="members", EmitDefaultValue=false)]
-        public string Members { get; set; }
+        public string Members { get; private set; }
 
         /// <summary>
-        /// Gets or Sets Org
+        /// URI of resource.
         /// </summary>
+        /// <value>URI of resource.</value>
         [DataMember(Name="org", EmitDefaultValue=false)]
-        public string Org { get; set; }
+        public string Org { get; private set; }
 
         /// <summary>
-        /// Gets or Sets Owners
+        /// URI of resource.
         /// </summary>
+        /// <value>URI of resource.</value>
         [DataMember(Name="owners", EmitDefaultValue=false)]
-        public string Owners { get; set; }
+        public string Owners { get; private set; }
 
         /// <summary>
-        /// Gets or Sets Self
+        /// URI of resource.
         /// </summary>
+        /// <value>URI of resource.</value>
         [DataMember(Name="self", EmitDefaultValue=false)]
-        public string Self { get; set; }
+        public string Self { get; private set; }
 
         /// <summary>
-        /// Gets or Sets Write
+        /// URI of resource.
         /// </summary>
+        /// <value>URI of resource.</value>
         [DataMember(Name="write", EmitDefaultValue=false)]
-        public string Write { get; set; }
+        public string Write { get; private set; }
 
         /// <summary>
         /// Returns the string presentation of the object

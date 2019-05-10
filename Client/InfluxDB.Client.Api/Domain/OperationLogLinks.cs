@@ -19,7 +19,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using System.ComponentModel.DataAnnotations;
 using OpenAPIDateConverter = InfluxDB.Client.Api.Client.OpenAPIDateConverter;
 
 namespace InfluxDB.Client.Api.Domain
@@ -33,17 +32,17 @@ namespace InfluxDB.Client.Api.Domain
         /// <summary>
         /// Initializes a new instance of the <see cref="OperationLogLinks" /> class.
         /// </summary>
-        /// <param name="user">user.</param>
-        public OperationLogLinks(string user = default(string))
+        [JsonConstructorAttribute]
+        public OperationLogLinks()
         {
-            this.User = user;
         }
 
         /// <summary>
-        /// Gets or Sets User
+        /// URI of resource.
         /// </summary>
+        /// <value>URI of resource.</value>
         [DataMember(Name="user", EmitDefaultValue=false)]
-        public string User { get; set; }
+        public string User { get; private set; }
 
         /// <summary>
         /// Returns the string presentation of the object

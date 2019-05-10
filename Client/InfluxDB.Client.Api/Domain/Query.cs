@@ -19,7 +19,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using System.ComponentModel.DataAnnotations;
 using OpenAPIDateConverter = InfluxDB.Client.Api.Client.OpenAPIDateConverter;
 
 namespace InfluxDB.Client.Api.Domain
@@ -37,18 +36,18 @@ namespace InfluxDB.Client.Api.Domain
         [JsonConverter(typeof(StringEnumConverter))]
         public enum TypeEnum
         {
-            
             /// <summary>
             /// Enum Flux for value: flux
             /// </summary>
             [EnumMember(Value = "flux")]
             Flux = 1,
-            
+
             /// <summary>
             /// Enum Influxql for value: influxql
             /// </summary>
             [EnumMember(Value = "influxql")]
             Influxql = 2
+
         }
 
         /// <summary>
@@ -72,7 +71,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="rp">required for influxql type queries.</param>
         /// <param name="cluster">required for influxql type queries.</param>
         /// <param name="dialect">dialect.</param>
-        public Query(System.IO.Stream _extern = default(System.IO.Stream), string query = default(string), TypeEnum? type = TypeEnum.Flux, string db = default(string), string rp = default(string), string cluster = default(string), Dialect dialect = default(Dialect))
+        public Query(File _extern = default(File), string query = default(string), TypeEnum? type = TypeEnum.Flux, string db = default(string), string rp = default(string), string cluster = default(string), Dialect dialect = default(Dialect))
         {
             // to ensure "query" is required (not null)
             if (query == null)
@@ -103,7 +102,7 @@ namespace InfluxDB.Client.Api.Domain
         /// Gets or Sets Extern
         /// </summary>
         [DataMember(Name="extern", EmitDefaultValue=false)]
-        public System.IO.Stream Extern { get; set; }
+        public File Extern { get; set; }
 
         /// <summary>
         /// query script to execute.
@@ -190,7 +189,7 @@ namespace InfluxDB.Client.Api.Domain
 
             return 
                 (
-                    this.Extern == input.Extern ||
+                    
                     (this.Extern != null &&
                     this.Extern.Equals(input.Extern))
                 ) && 

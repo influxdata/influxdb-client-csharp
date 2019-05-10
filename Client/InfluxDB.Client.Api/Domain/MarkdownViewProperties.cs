@@ -19,7 +19,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using System.ComponentModel.DataAnnotations;
 using OpenAPIDateConverter = InfluxDB.Client.Api.Client.OpenAPIDateConverter;
 
 namespace InfluxDB.Client.Api.Domain
@@ -36,12 +35,12 @@ namespace InfluxDB.Client.Api.Domain
         [JsonConverter(typeof(StringEnumConverter))]
         public enum TypeEnum
         {
-            
             /// <summary>
             /// Enum Markdown for value: markdown
             /// </summary>
             [EnumMember(Value = "markdown")]
             Markdown = 1
+
         }
 
         /// <summary>
@@ -55,12 +54,12 @@ namespace InfluxDB.Client.Api.Domain
         [JsonConverter(typeof(StringEnumConverter))]
         public enum ShapeEnum
         {
-            
             /// <summary>
             /// Enum ChronografV2 for value: chronograf-v2
             /// </summary>
             [EnumMember(Value = "chronograf-v2")]
             ChronografV2 = 1
+
         }
 
         /// <summary>

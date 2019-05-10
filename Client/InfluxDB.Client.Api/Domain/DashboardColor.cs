@@ -19,7 +19,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using System.ComponentModel.DataAnnotations;
 using OpenAPIDateConverter = InfluxDB.Client.Api.Client.OpenAPIDateConverter;
 
 namespace InfluxDB.Client.Api.Domain
@@ -37,24 +36,24 @@ namespace InfluxDB.Client.Api.Domain
         [JsonConverter(typeof(StringEnumConverter))]
         public enum TypeEnum
         {
-            
             /// <summary>
             /// Enum Min for value: min
             /// </summary>
             [EnumMember(Value = "min")]
             Min = 1,
-            
+
             /// <summary>
             /// Enum Max for value: max
             /// </summary>
             [EnumMember(Value = "max")]
             Max = 2,
-            
+
             /// <summary>
             /// Enum Threshold for value: threshold
             /// </summary>
             [EnumMember(Value = "threshold")]
             Threshold = 3
+
         }
 
         /// <summary>

@@ -19,7 +19,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using System.ComponentModel.DataAnnotations;
 using OpenAPIDateConverter = InfluxDB.Client.Api.Client.OpenAPIDateConverter;
 
 namespace InfluxDB.Client.Api.Domain
@@ -34,45 +33,30 @@ namespace InfluxDB.Client.Api.Domain
         /// Initializes a new instance of the <see cref="Links" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected Links() { }
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Links" /> class.
-        /// </summary>
-        /// <param name="next">next.</param>
-        /// <param name="self">self (required).</param>
-        /// <param name="prev">prev.</param>
-        public Links(string next = default(string), string self = default(string), string prev = default(string))
+        public Links()
         {
-            // to ensure "self" is required (not null)
-            if (self == null)
-            {
-                throw new InvalidDataException("self is a required property for Links and cannot be null");
-            }
-            else
-            {
-                this.Self = self;
-            }
-            this.Next = next;
-            this.Prev = prev;
         }
 
         /// <summary>
-        /// Gets or Sets Next
+        /// URI of resource.
         /// </summary>
+        /// <value>URI of resource.</value>
         [DataMember(Name="next", EmitDefaultValue=false)]
-        public string Next { get; set; }
+        public string Next { get; private set; }
 
         /// <summary>
-        /// Gets or Sets Self
+        /// URI of resource.
         /// </summary>
+        /// <value>URI of resource.</value>
         [DataMember(Name="self", EmitDefaultValue=false)]
-        public string Self { get; set; }
+        public string Self { get; private set; }
 
         /// <summary>
-        /// Gets or Sets Prev
+        /// URI of resource.
         /// </summary>
+        /// <value>URI of resource.</value>
         [DataMember(Name="prev", EmitDefaultValue=false)]
-        public string Prev { get; set; }
+        public string Prev { get; private set; }
 
         /// <summary>
         /// Returns the string presentation of the object

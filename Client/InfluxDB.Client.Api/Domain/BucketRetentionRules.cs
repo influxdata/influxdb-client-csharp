@@ -19,7 +19,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using System.ComponentModel.DataAnnotations;
 using OpenAPIDateConverter = InfluxDB.Client.Api.Client.OpenAPIDateConverter;
 
 namespace InfluxDB.Client.Api.Domain
@@ -36,36 +35,49 @@ namespace InfluxDB.Client.Api.Domain
         [JsonConverter(typeof(StringEnumConverter))]
         public enum TypeEnum
         {
-            
             /// <summary>
             /// Enum Expire for value: expire
             /// </summary>
             [EnumMember(Value = "expire")]
             Expire = 1
+
         }
 
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
-        public TypeEnum? Type { get; set; }
+        public TypeEnum Type { get; set; }
         /// <summary>
         /// Initializes a new instance of the <see cref="BucketRetentionRules" /> class.
         /// </summary>
-        /// <param name="type">type (default to TypeEnum.Expire).</param>
-        /// <param name="everySeconds">duration in seconds for how long data will be kept in the database..</param>
-        public BucketRetentionRules(TypeEnum? type = TypeEnum.Expire, int? everySeconds = default(int?))
+        [JsonConstructorAttribute]
+        protected BucketRetentionRules() { }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BucketRetentionRules" /> class.
+        /// </summary>
+        /// <param name="type">type (required) (default to TypeEnum.Expire).</param>
+        /// <param name="everySeconds">duration in seconds for how long data will be kept in the database. (required).</param>
+        public BucketRetentionRules(TypeEnum type = TypeEnum.Expire, int? everySeconds = default(int?))
         {
-            // use default value if no "type" provided
+            // to ensure "type" is required (not null)
             if (type == null)
             {
-                this.Type = TypeEnum.Expire;
+                throw new InvalidDataException("type is a required property for BucketRetentionRules and cannot be null");
             }
             else
             {
                 this.Type = type;
             }
-            this.EverySeconds = everySeconds;
+            // to ensure "everySeconds" is required (not null)
+            if (everySeconds == null)
+            {
+                throw new InvalidDataException("everySeconds is a required property for BucketRetentionRules and cannot be null");
+            }
+            else
+            {
+                this.EverySeconds = everySeconds;
+            }
         }
 
 

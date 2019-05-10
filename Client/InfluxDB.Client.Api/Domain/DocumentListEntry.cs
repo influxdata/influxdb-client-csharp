@@ -19,7 +19,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using System.ComponentModel.DataAnnotations;
 using OpenAPIDateConverter = InfluxDB.Client.Api.Client.OpenAPIDateConverter;
 
 namespace InfluxDB.Client.Api.Domain
@@ -41,7 +40,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="meta">meta (required).</param>
         /// <param name="labels">labels.</param>
         /// <param name="links">links.</param>
-        public DocumentListEntry(DocumentMeta meta = default(DocumentMeta), Labels labels = default(Labels), DocumentLinks links = default(DocumentLinks))
+        public DocumentListEntry(DocumentMeta meta = default(DocumentMeta), List<Label> labels = default(List<Label>), DocumentLinks links = default(DocumentLinks))
         {
             // to ensure "meta" is required (not null)
             if (meta == null)
@@ -72,7 +71,7 @@ namespace InfluxDB.Client.Api.Domain
         /// Gets or Sets Labels
         /// </summary>
         [DataMember(Name="labels", EmitDefaultValue=false)]
-        public Labels Labels { get; set; }
+        public List<Label> Labels { get; set; }
 
         /// <summary>
         /// Gets or Sets Links
@@ -137,9 +136,9 @@ namespace InfluxDB.Client.Api.Domain
                     this.Meta.Equals(input.Meta))
                 ) && 
                 (
-                    
-                    (this.Labels != null &&
-                    this.Labels.Equals(input.Labels))
+                    this.Labels == input.Labels ||
+                    this.Labels != null &&
+                    this.Labels.SequenceEqual(input.Labels)
                 ) && 
                 (
                     

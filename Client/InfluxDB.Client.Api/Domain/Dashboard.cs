@@ -19,7 +19,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using System.ComponentModel.DataAnnotations;
 using OpenAPIDateConverter = InfluxDB.Client.Api.Client.OpenAPIDateConverter;
 
 namespace InfluxDB.Client.Api.Domain
@@ -42,7 +41,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="meta">meta.</param>
         /// <param name="cells">cells.</param>
         /// <param name="labels">labels.</param>
-        public Dashboard(DashboardLinks links = default(DashboardLinks), DashboardMeta meta = default(DashboardMeta), Cells cells = default(Cells), Labels labels = default(Labels), string orgID = default(string), string name = default(string), string description = default(string)) : base(orgID, name, description)
+        public Dashboard(DashboardLinks links = default(DashboardLinks), DashboardMeta meta = default(DashboardMeta), List<Cell> cells = default(List<Cell>), List<Label> labels = default(List<Label>), string orgID = default(string), string name = default(string), string description = default(string)) : base(orgID, name, description)
         {
             this.Links = links;
             this.Meta = meta;
@@ -72,13 +71,13 @@ namespace InfluxDB.Client.Api.Domain
         /// Gets or Sets Cells
         /// </summary>
         [DataMember(Name="cells", EmitDefaultValue=false)]
-        public Cells Cells { get; set; }
+        public List<Cell> Cells { get; set; }
 
         /// <summary>
         /// Gets or Sets Labels
         /// </summary>
         [DataMember(Name="labels", EmitDefaultValue=false)]
-        public Labels Labels { get; set; }
+        public List<Label> Labels { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -144,14 +143,14 @@ namespace InfluxDB.Client.Api.Domain
                     this.Meta.Equals(input.Meta))
                 ) && base.Equals(input) && 
                 (
-                    
-                    (this.Cells != null &&
-                    this.Cells.Equals(input.Cells))
+                    this.Cells == input.Cells ||
+                    this.Cells != null &&
+                    this.Cells.SequenceEqual(input.Cells)
                 ) && base.Equals(input) && 
                 (
-                    
-                    (this.Labels != null &&
-                    this.Labels.Equals(input.Labels))
+                    this.Labels == input.Labels ||
+                    this.Labels != null &&
+                    this.Labels.SequenceEqual(input.Labels)
                 );
         }
 

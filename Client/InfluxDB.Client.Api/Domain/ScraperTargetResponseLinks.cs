@@ -19,7 +19,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using System.ComponentModel.DataAnnotations;
 using OpenAPIDateConverter = InfluxDB.Client.Api.Client.OpenAPIDateConverter;
 
 namespace InfluxDB.Client.Api.Domain
@@ -33,49 +32,45 @@ namespace InfluxDB.Client.Api.Domain
         /// <summary>
         /// Initializes a new instance of the <see cref="ScraperTargetResponseLinks" /> class.
         /// </summary>
-        /// <param name="self">self.</param>
-        /// <param name="members">members.</param>
-        /// <param name="owners">owners.</param>
-        /// <param name="bucket">bucket.</param>
-        /// <param name="organization">organization.</param>
-        public ScraperTargetResponseLinks(string self = default(string), string members = default(string), string owners = default(string), string bucket = default(string), string organization = default(string))
+        [JsonConstructorAttribute]
+        public ScraperTargetResponseLinks()
         {
-            this.Self = self;
-            this.Members = members;
-            this.Owners = owners;
-            this.Bucket = bucket;
-            this.Organization = organization;
         }
 
         /// <summary>
-        /// Gets or Sets Self
+        /// URI of resource.
         /// </summary>
+        /// <value>URI of resource.</value>
         [DataMember(Name="self", EmitDefaultValue=false)]
-        public string Self { get; set; }
+        public string Self { get; private set; }
 
         /// <summary>
-        /// Gets or Sets Members
+        /// URI of resource.
         /// </summary>
+        /// <value>URI of resource.</value>
         [DataMember(Name="members", EmitDefaultValue=false)]
-        public string Members { get; set; }
+        public string Members { get; private set; }
 
         /// <summary>
-        /// Gets or Sets Owners
+        /// URI of resource.
         /// </summary>
+        /// <value>URI of resource.</value>
         [DataMember(Name="owners", EmitDefaultValue=false)]
-        public string Owners { get; set; }
+        public string Owners { get; private set; }
 
         /// <summary>
-        /// Gets or Sets Bucket
+        /// URI of resource.
         /// </summary>
+        /// <value>URI of resource.</value>
         [DataMember(Name="bucket", EmitDefaultValue=false)]
-        public string Bucket { get; set; }
+        public string Bucket { get; private set; }
 
         /// <summary>
-        /// Gets or Sets Organization
+        /// URI of resource.
         /// </summary>
+        /// <value>URI of resource.</value>
         [DataMember(Name="organization", EmitDefaultValue=false)]
-        public string Organization { get; set; }
+        public string Organization { get; private set; }
 
         /// <summary>
         /// Returns the string presentation of the object

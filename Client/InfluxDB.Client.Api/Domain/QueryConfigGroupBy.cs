@@ -19,7 +19,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using System.ComponentModel.DataAnnotations;
 using OpenAPIDateConverter = InfluxDB.Client.Api.Client.OpenAPIDateConverter;
 
 namespace InfluxDB.Client.Api.Domain
@@ -33,12 +32,33 @@ namespace InfluxDB.Client.Api.Domain
         /// <summary>
         /// Initializes a new instance of the <see cref="QueryConfigGroupBy" /> class.
         /// </summary>
-        /// <param name="time">time.</param>
-        /// <param name="tags">tags.</param>
+        [JsonConstructorAttribute]
+        protected QueryConfigGroupBy() { }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="QueryConfigGroupBy" /> class.
+        /// </summary>
+        /// <param name="time">time (required).</param>
+        /// <param name="tags">tags (required).</param>
         public QueryConfigGroupBy(string time = default(string), List<string> tags = default(List<string>))
         {
-            this.Time = time;
-            this.Tags = tags;
+            // to ensure "time" is required (not null)
+            if (time == null)
+            {
+                throw new InvalidDataException("time is a required property for QueryConfigGroupBy and cannot be null");
+            }
+            else
+            {
+                this.Time = time;
+            }
+            // to ensure "tags" is required (not null)
+            if (tags == null)
+            {
+                throw new InvalidDataException("tags is a required property for QueryConfigGroupBy and cannot be null");
+            }
+            else
+            {
+                this.Tags = tags;
+            }
         }
 
         /// <summary>

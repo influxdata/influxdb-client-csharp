@@ -19,7 +19,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using System.ComponentModel.DataAnnotations;
 using OpenAPIDateConverter = InfluxDB.Client.Api.Client.OpenAPIDateConverter;
 
 namespace InfluxDB.Client.Api.Domain
@@ -33,41 +32,38 @@ namespace InfluxDB.Client.Api.Domain
         /// <summary>
         /// Initializes a new instance of the <see cref="TelegrafLinks" /> class.
         /// </summary>
-        /// <param name="self">self.</param>
-        /// <param name="labels">labels.</param>
-        /// <param name="members">members.</param>
-        /// <param name="owners">owners.</param>
-        public TelegrafLinks(string self = default(string), string labels = default(string), string members = default(string), string owners = default(string))
+        [JsonConstructorAttribute]
+        public TelegrafLinks()
         {
-            this.Self = self;
-            this.Labels = labels;
-            this.Members = members;
-            this.Owners = owners;
         }
 
         /// <summary>
-        /// Gets or Sets Self
+        /// URI of resource.
         /// </summary>
+        /// <value>URI of resource.</value>
         [DataMember(Name="self", EmitDefaultValue=false)]
-        public string Self { get; set; }
+        public string Self { get; private set; }
 
         /// <summary>
-        /// Gets or Sets Labels
+        /// URI of resource.
         /// </summary>
+        /// <value>URI of resource.</value>
         [DataMember(Name="labels", EmitDefaultValue=false)]
-        public string Labels { get; set; }
+        public string Labels { get; private set; }
 
         /// <summary>
-        /// Gets or Sets Members
+        /// URI of resource.
         /// </summary>
+        /// <value>URI of resource.</value>
         [DataMember(Name="members", EmitDefaultValue=false)]
-        public string Members { get; set; }
+        public string Members { get; private set; }
 
         /// <summary>
-        /// Gets or Sets Owners
+        /// URI of resource.
         /// </summary>
+        /// <value>URI of resource.</value>
         [DataMember(Name="owners", EmitDefaultValue=false)]
-        public string Owners { get; set; }
+        public string Owners { get; private set; }
 
         /// <summary>
         /// Returns the string presentation of the object
