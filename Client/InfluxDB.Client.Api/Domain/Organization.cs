@@ -66,8 +66,9 @@ namespace InfluxDB.Client.Api.Domain
         /// </summary>
         /// <param name="links">links.</param>
         /// <param name="name">name (required).</param>
+        /// <param name="description">description.</param>
         /// <param name="status">if inactive the organization is inactive. (default to StatusEnum.Active).</param>
-        public Organization(OrganizationLinks links = default(OrganizationLinks), string name = default(string), StatusEnum? status = StatusEnum.Active)
+        public Organization(OrganizationLinks links = default(OrganizationLinks), string name = default(string), string description = default(string), StatusEnum? status = StatusEnum.Active)
         {
             // to ensure "name" is required (not null)
             if (name == null)
@@ -79,6 +80,7 @@ namespace InfluxDB.Client.Api.Domain
                 this.Name = name;
             }
             this.Links = links;
+            this.Description = description;
             // use default value if no "status" provided
             if (status == null)
             {
@@ -108,6 +110,12 @@ namespace InfluxDB.Client.Api.Domain
         [DataMember(Name="name", EmitDefaultValue=false)]
         public string Name { get; set; }
 
+        /// <summary>
+        /// Gets or Sets Description
+        /// </summary>
+        [DataMember(Name="description", EmitDefaultValue=false)]
+        public string Description { get; set; }
+
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -120,6 +128,7 @@ namespace InfluxDB.Client.Api.Domain
             sb.Append("  Links: ").Append(Links).Append("\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
+            sb.Append("  Description: ").Append(Description).Append("\n");
             sb.Append("  Status: ").Append(Status).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -171,6 +180,11 @@ namespace InfluxDB.Client.Api.Domain
                     this.Name.Equals(input.Name))
                 ) && 
                 (
+                    this.Description == input.Description ||
+                    (this.Description != null &&
+                    this.Description.Equals(input.Description))
+                ) && 
+                (
                     this.Status == input.Status ||
                     (this.Status != null &&
                     this.Status.Equals(input.Status))
@@ -192,6 +206,8 @@ namespace InfluxDB.Client.Api.Domain
                     hashCode = hashCode * 59 + this.Id.GetHashCode();
                 if (this.Name != null)
                     hashCode = hashCode * 59 + this.Name.GetHashCode();
+                if (this.Description != null)
+                    hashCode = hashCode * 59 + this.Description.GetHashCode();
                 if (this.Status != null)
                     hashCode = hashCode * 59 + this.Status.GetHashCode();
                 return hashCode;

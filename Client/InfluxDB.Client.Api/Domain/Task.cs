@@ -66,7 +66,8 @@ namespace InfluxDB.Client.Api.Domain
         /// </summary>
         /// <param name="orgID">The ID of the organization that owns this Task. (required).</param>
         /// <param name="org">The name of the organization that owns this Task..</param>
-        /// <param name="name">A description of the task. (required).</param>
+        /// <param name="name">The name of the task. (required).</param>
+        /// <param name="description">An optional description of the task..</param>
         /// <param name="status">The current status of the task. When updated to &#39;inactive&#39;, cancels all queued jobs of this task. (default to StatusEnum.Active).</param>
         /// <param name="labels">labels.</param>
         /// <param name="authorizationID">The ID of the authorization used when this task communicates with the query engine..</param>
@@ -75,7 +76,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="cron">A task repetition schedule in the form &#39;* * * * * *&#39;; parsed from Flux..</param>
         /// <param name="offset">Duration to delay after the schedule, before executing the task; parsed from flux, if set to zero it will remove this option and use 0 as the default..</param>
         /// <param name="links">links.</param>
-        public Task(string orgID = default(string), string org = default(string), string name = default(string), StatusEnum? status = StatusEnum.Active, List<Label> labels = default(List<Label>), string authorizationID = default(string), string flux = default(string), string every = default(string), string cron = default(string), string offset = default(string), TaskLinks links = default(TaskLinks))
+        public Task(string orgID = default(string), string org = default(string), string name = default(string), string description = default(string), StatusEnum? status = StatusEnum.Active, List<Label> labels = default(List<Label>), string authorizationID = default(string), string flux = default(string), string every = default(string), string cron = default(string), string offset = default(string), TaskLinks links = default(TaskLinks))
         {
             // to ensure "orgID" is required (not null)
             if (orgID == null)
@@ -105,6 +106,7 @@ namespace InfluxDB.Client.Api.Domain
                 this.Flux = flux;
             }
             this.Org = org;
+            this.Description = description;
             // use default value if no "status" provided
             if (status == null)
             {
@@ -143,11 +145,18 @@ namespace InfluxDB.Client.Api.Domain
         public string Org { get; set; }
 
         /// <summary>
-        /// A description of the task.
+        /// The name of the task.
         /// </summary>
-        /// <value>A description of the task.</value>
+        /// <value>The name of the task.</value>
         [DataMember(Name="name", EmitDefaultValue=false)]
         public string Name { get; set; }
+
+        /// <summary>
+        /// An optional description of the task.
+        /// </summary>
+        /// <value>An optional description of the task.</value>
+        [DataMember(Name="description", EmitDefaultValue=false)]
+        public string Description { get; set; }
 
 
         /// <summary>
@@ -228,6 +237,7 @@ namespace InfluxDB.Client.Api.Domain
             sb.Append("  OrgID: ").Append(OrgID).Append("\n");
             sb.Append("  Org: ").Append(Org).Append("\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
+            sb.Append("  Description: ").Append(Description).Append("\n");
             sb.Append("  Status: ").Append(Status).Append("\n");
             sb.Append("  Labels: ").Append(Labels).Append("\n");
             sb.Append("  AuthorizationID: ").Append(AuthorizationID).Append("\n");
@@ -292,6 +302,11 @@ namespace InfluxDB.Client.Api.Domain
                     this.Name == input.Name ||
                     (this.Name != null &&
                     this.Name.Equals(input.Name))
+                ) && 
+                (
+                    this.Description == input.Description ||
+                    (this.Description != null &&
+                    this.Description.Equals(input.Description))
                 ) && 
                 (
                     this.Status == input.Status ||
@@ -367,6 +382,8 @@ namespace InfluxDB.Client.Api.Domain
                     hashCode = hashCode * 59 + this.Org.GetHashCode();
                 if (this.Name != null)
                     hashCode = hashCode * 59 + this.Name.GetHashCode();
+                if (this.Description != null)
+                    hashCode = hashCode * 59 + this.Description.GetHashCode();
                 if (this.Status != null)
                     hashCode = hashCode * 59 + this.Status.GetHashCode();
                 if (this.Labels != null)

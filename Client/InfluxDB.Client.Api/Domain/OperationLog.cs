@@ -34,11 +34,13 @@ namespace InfluxDB.Client.Api.Domain
         /// </summary>
         /// <param name="description">A description of the event that occurred..</param>
         /// <param name="time">Time event occurred, RFC3339Nano..</param>
+        /// <param name="userID">ID of the user who operated the event..</param>
         /// <param name="links">links.</param>
-        public OperationLog(string description = default(string), DateTime? time = default(DateTime?), OperationLogLinks links = default(OperationLogLinks))
+        public OperationLog(string description = default(string), DateTime? time = default(DateTime?), string userID = default(string), OperationLogLinks links = default(OperationLogLinks))
         {
             this.Description = description;
             this.Time = time;
+            this.UserID = userID;
             this.Links = links;
         }
 
@@ -57,6 +59,13 @@ namespace InfluxDB.Client.Api.Domain
         public DateTime? Time { get; set; }
 
         /// <summary>
+        /// ID of the user who operated the event.
+        /// </summary>
+        /// <value>ID of the user who operated the event.</value>
+        [DataMember(Name="userID", EmitDefaultValue=false)]
+        public string UserID { get; set; }
+
+        /// <summary>
         /// Gets or Sets Links
         /// </summary>
         [DataMember(Name="links", EmitDefaultValue=false)]
@@ -72,6 +81,7 @@ namespace InfluxDB.Client.Api.Domain
             sb.Append("class OperationLog {\n");
             sb.Append("  Description: ").Append(Description).Append("\n");
             sb.Append("  Time: ").Append(Time).Append("\n");
+            sb.Append("  UserID: ").Append(UserID).Append("\n");
             sb.Append("  Links: ").Append(Links).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -118,6 +128,11 @@ namespace InfluxDB.Client.Api.Domain
                     this.Time.Equals(input.Time))
                 ) && 
                 (
+                    this.UserID == input.UserID ||
+                    (this.UserID != null &&
+                    this.UserID.Equals(input.UserID))
+                ) && 
+                (
                     
                     (this.Links != null &&
                     this.Links.Equals(input.Links))
@@ -137,6 +152,8 @@ namespace InfluxDB.Client.Api.Domain
                     hashCode = hashCode * 59 + this.Description.GetHashCode();
                 if (this.Time != null)
                     hashCode = hashCode * 59 + this.Time.GetHashCode();
+                if (this.UserID != null)
+                    hashCode = hashCode * 59 + this.UserID.GetHashCode();
                 if (this.Links != null)
                     hashCode = hashCode * 59 + this.Links.GetHashCode();
                 return hashCode;

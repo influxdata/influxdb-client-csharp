@@ -521,7 +521,7 @@ namespace InfluxDB.Client.Api.Service
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
 
-            // authentication (basicAuth) required
+            // authentication (BasicAuth) required
             // http basic authentication required
             if (!String.IsNullOrEmpty(this.Configuration.Username) || !String.IsNullOrEmpty(this.Configuration.Password))
             {
@@ -581,7 +581,7 @@ namespace InfluxDB.Client.Api.Service
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
 
-            // authentication (basicAuth) required
+            // authentication (BasicAuth) required
             // http basic authentication required
             if (!String.IsNullOrEmpty(this.Configuration.Username) || !String.IsNullOrEmpty(this.Configuration.Password))
             {
@@ -639,7 +639,7 @@ namespace InfluxDB.Client.Api.Service
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
 
-            // authentication (basicAuth) required
+            // authentication (BasicAuth) required
             // http basic authentication required
             if (!String.IsNullOrEmpty(this.Configuration.Username) || !String.IsNullOrEmpty(this.Configuration.Password))
             {
@@ -699,7 +699,7 @@ namespace InfluxDB.Client.Api.Service
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
 
-            // authentication (basicAuth) required
+            // authentication (BasicAuth) required
             // http basic authentication required
             if (!String.IsNullOrEmpty(this.Configuration.Username) || !String.IsNullOrEmpty(this.Configuration.Password))
             {

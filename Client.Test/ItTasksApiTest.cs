@@ -128,7 +128,7 @@ namespace InfluxDB.Client.Test
             var flux = $"option task = {{\nname: \"{taskName}\",\nevery: 1h\n}}\n\n{TaskFlux}";
 
             var task = new Task(_organization.Id, _organization.Name,
-                taskName, Task.StatusEnum.Active, null, null, flux);
+                taskName, "testing task", Task.StatusEnum.Active, null, null, flux);
 
             task = _tasksApi.CreateTask(task);
 
@@ -138,6 +138,7 @@ namespace InfluxDB.Client.Test
             Assert.AreEqual(_organization.Id, task.OrgID);
             Assert.AreEqual(Task.StatusEnum.Active, task.Status);
             Assert.AreEqual("1h", task.Every);
+            Assert.AreEqual("testing task", task.Description);
             Assert.IsNull(task.Cron);
             Assert.IsTrue(task.Flux.Equals(flux, StringComparison.OrdinalIgnoreCase));
         }
@@ -190,7 +191,7 @@ namespace InfluxDB.Client.Test
             var flux = $"option task = {{\nname: \"{taskName}\",\nevery: 1h,\noffset: 30m\n}}\n\n{TaskFlux}";
 
             var task = new Task(_organization.Id, _organization.Name, taskName,
-                Task.StatusEnum.Active, null, null, flux);
+                null, Task.StatusEnum.Active, null, null, flux);
 
             task = _tasksApi.CreateTask(task);
 

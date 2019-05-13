@@ -38,14 +38,16 @@ namespace InfluxDB.Client.Api.Domain
         }
 
         /// <summary>
-        /// Gets or Sets Self
+        /// URI of resource.
         /// </summary>
+        /// <value>URI of resource.</value>
         [DataMember(Name="self", EmitDefaultValue=false)]
         public string Self { get; private set; }
 
         /// <summary>
-        /// Gets or Sets User
+        /// URI of resource.
         /// </summary>
+        /// <value>URI of resource.</value>
         [DataMember(Name="user", EmitDefaultValue=false)]
         public string User { get; private set; }
 

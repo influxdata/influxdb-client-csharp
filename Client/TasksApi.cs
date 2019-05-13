@@ -742,7 +742,7 @@ namespace InfluxDB.Client
 
             if (every != null) Arguments.CheckDuration(every, nameof(every));
 
-            var task = new Task(orgId, null, name, Task.StatusEnum.Active, null, null, flux);
+            var task = new Task(orgId, null, name, null, Task.StatusEnum.Active, null, null, flux);
 
             var repetition = "";
             if (every != null)

@@ -975,8 +975,9 @@ namespace InfluxDB.Client.Api.Service
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="user">user to create</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>User</returns>
-        User UsersPost (User user);
+        User UsersPost (User user, string zapTraceSpan = null);
 
         /// <summary>
         /// Create a user
@@ -986,8 +987,9 @@ namespace InfluxDB.Client.Api.Service
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="user">user to create</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of User</returns>
-        ApiResponse<User> UsersPostWithHttpInfo (User user);
+        ApiResponse<User> UsersPostWithHttpInfo (User user, string zapTraceSpan = null);
         /// <summary>
         /// deletes a user
         /// </summary>
@@ -2066,8 +2068,9 @@ namespace InfluxDB.Client.Api.Service
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="user">user to create</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of User</returns>
-        System.Threading.Tasks.Task<User> UsersPostAsync (User user);
+        System.Threading.Tasks.Task<User> UsersPostAsync (User user, string zapTraceSpan = null);
 
         /// <summary>
         /// Create a user
@@ -2077,8 +2080,9 @@ namespace InfluxDB.Client.Api.Service
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="user">user to create</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (User)</returns>
-        System.Threading.Tasks.Task<ApiResponse<User>> UsersPostAsyncWithHttpInfo (User user);
+        System.Threading.Tasks.Task<ApiResponse<User>> UsersPostAsyncWithHttpInfo (User user, string zapTraceSpan = null);
         /// <summary>
         /// deletes a user
         /// </summary>
@@ -5759,7 +5763,7 @@ namespace InfluxDB.Client.Api.Service
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
 
-            // authentication (basicAuth) required
+            // authentication (BasicAuth) required
             // http basic authentication required
             if (!String.IsNullOrEmpty(this.Configuration.Username) || !String.IsNullOrEmpty(this.Configuration.Password))
             {
@@ -5832,7 +5836,7 @@ namespace InfluxDB.Client.Api.Service
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
 
-            // authentication (basicAuth) required
+            // authentication (BasicAuth) required
             // http basic authentication required
             if (!String.IsNullOrEmpty(this.Configuration.Username) || !String.IsNullOrEmpty(this.Configuration.Password))
             {
@@ -5903,7 +5907,7 @@ namespace InfluxDB.Client.Api.Service
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
 
-            // authentication (basicAuth) required
+            // authentication (BasicAuth) required
             // http basic authentication required
             if (!String.IsNullOrEmpty(this.Configuration.Username) || !String.IsNullOrEmpty(this.Configuration.Password))
             {
@@ -5977,7 +5981,7 @@ namespace InfluxDB.Client.Api.Service
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
 
-            // authentication (basicAuth) required
+            // authentication (BasicAuth) required
             // http basic authentication required
             if (!String.IsNullOrEmpty(this.Configuration.Username) || !String.IsNullOrEmpty(this.Configuration.Password))
             {
@@ -12577,10 +12581,11 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="user">user to create</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>User</returns>
-        public User UsersPost (User user)
+        public User UsersPost (User user, string zapTraceSpan = null)
         {
-             ApiResponse<User> localVarResponse = UsersPostWithHttpInfo(user);
+             ApiResponse<User> localVarResponse = UsersPostWithHttpInfo(user, zapTraceSpan);
              return localVarResponse.Data;
         }
 
@@ -12589,8 +12594,9 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="user">user to create</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of User</returns>
-        public ApiResponse< User > UsersPostWithHttpInfo (User user)
+        public ApiResponse< User > UsersPostWithHttpInfo (User user, string zapTraceSpan = null)
         {
             // verify the required parameter 'user' is set
             if (user == null)
@@ -12610,6 +12616,7 @@ namespace InfluxDB.Client.Api.Service
             };
             String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
             if (user != null && user.GetType() != typeof(byte[]))
             {
                 localVarPostBody = this.Configuration.ApiClient.Serialize(user); // http body (model) parameter
@@ -12652,8 +12659,9 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="user">user to create</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of User</returns>
-        public IRestResponse UsersPostWithIRestResponse (User user)
+        public IRestResponse UsersPostWithIRestResponse (User user, string zapTraceSpan = null)
         {
             // verify the required parameter 'user' is set
             if (user == null)
@@ -12673,6 +12681,7 @@ namespace InfluxDB.Client.Api.Service
             };
             String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
             if (user != null && user.GetType() != typeof(byte[]))
             {
                 localVarPostBody = this.Configuration.ApiClient.Serialize(user); // http body (model) parameter
@@ -12713,8 +12722,9 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="user">user to create</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of User</returns>
-        public RestRequest UsersPostWithRestRequest (User user)
+        public RestRequest UsersPostWithRestRequest (User user, string zapTraceSpan = null)
         {
             // verify the required parameter 'user' is set
             if (user == null)
@@ -12734,6 +12744,7 @@ namespace InfluxDB.Client.Api.Service
             };
             String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
             if (user != null && user.GetType() != typeof(byte[]))
             {
                 localVarPostBody = this.Configuration.ApiClient.Serialize(user); // http body (model) parameter
@@ -12763,10 +12774,11 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="user">user to create</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of User</returns>
-        public async System.Threading.Tasks.Task<User> UsersPostAsync (User user)
+        public async System.Threading.Tasks.Task<User> UsersPostAsync (User user, string zapTraceSpan = null)
         {
-             ApiResponse<User> localVarResponse = await UsersPostAsyncWithHttpInfo(user);
+             ApiResponse<User> localVarResponse = await UsersPostAsyncWithHttpInfo(user, zapTraceSpan);
              return localVarResponse.Data;
 
         }
@@ -12776,8 +12788,9 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="user">user to create</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (User)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<User>> UsersPostAsyncWithHttpInfo (User user)
+        public async System.Threading.Tasks.Task<ApiResponse<User>> UsersPostAsyncWithHttpInfo (User user, string zapTraceSpan = null)
         {
             // verify the required parameter 'user' is set
             if (user == null)
@@ -12797,6 +12810,7 @@ namespace InfluxDB.Client.Api.Service
             };
             String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
             if (user != null && user.GetType() != typeof(byte[]))
             {
                 localVarPostBody = this.Configuration.ApiClient.Serialize(user); // http body (model) parameter
@@ -13639,7 +13653,7 @@ namespace InfluxDB.Client.Api.Service
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
 
-            // authentication (basicAuth) required
+            // authentication (BasicAuth) required
             // http basic authentication required
             if (!String.IsNullOrEmpty(this.Configuration.Username) || !String.IsNullOrEmpty(this.Configuration.Password))
             {
@@ -13717,7 +13731,7 @@ namespace InfluxDB.Client.Api.Service
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
 
-            // authentication (basicAuth) required
+            // authentication (BasicAuth) required
             // http basic authentication required
             if (!String.IsNullOrEmpty(this.Configuration.Username) || !String.IsNullOrEmpty(this.Configuration.Password))
             {
@@ -13793,7 +13807,7 @@ namespace InfluxDB.Client.Api.Service
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
 
-            // authentication (basicAuth) required
+            // authentication (BasicAuth) required
             // http basic authentication required
             if (!String.IsNullOrEmpty(this.Configuration.Username) || !String.IsNullOrEmpty(this.Configuration.Password))
             {
@@ -13873,7 +13887,7 @@ namespace InfluxDB.Client.Api.Service
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
 
-            // authentication (basicAuth) required
+            // authentication (BasicAuth) required
             // http basic authentication required
             if (!String.IsNullOrEmpty(this.Configuration.Username) || !String.IsNullOrEmpty(this.Configuration.Password))
             {

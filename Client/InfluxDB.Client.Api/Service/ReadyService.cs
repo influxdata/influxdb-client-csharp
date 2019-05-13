@@ -31,8 +31,9 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Ready</returns>
-        Ready ReadyGet ();
+        Ready ReadyGet (string zapTraceSpan = null);
 
         /// <summary>
         /// Get the readiness of a instance at startup. Allow us to confirm the instance is prepared to accept requests.
@@ -41,8 +42,9 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Ready</returns>
-        ApiResponse<Ready> ReadyGetWithHttpInfo ();
+        ApiResponse<Ready> ReadyGetWithHttpInfo (string zapTraceSpan = null);
         #endregion Synchronous Operations
         #region Asynchronous Operations
         /// <summary>
@@ -52,8 +54,9 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of Ready</returns>
-        System.Threading.Tasks.Task<Ready> ReadyGetAsync ();
+        System.Threading.Tasks.Task<Ready> ReadyGetAsync (string zapTraceSpan = null);
 
         /// <summary>
         /// Get the readiness of a instance at startup. Allow us to confirm the instance is prepared to accept requests.
@@ -62,8 +65,9 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (Ready)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Ready>> ReadyGetAsyncWithHttpInfo ();
+        System.Threading.Tasks.Task<ApiResponse<Ready>> ReadyGetAsyncWithHttpInfo (string zapTraceSpan = null);
         #endregion Asynchronous Operations
     }
 
@@ -168,10 +172,11 @@ namespace InfluxDB.Client.Api.Service
         /// Get the readiness of a instance at startup. Allow us to confirm the instance is prepared to accept requests. 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Ready</returns>
-        public Ready ReadyGet ()
+        public Ready ReadyGet (string zapTraceSpan = null)
         {
-             ApiResponse<Ready> localVarResponse = ReadyGetWithHttpInfo();
+             ApiResponse<Ready> localVarResponse = ReadyGetWithHttpInfo(zapTraceSpan);
              return localVarResponse.Data;
         }
 
@@ -179,8 +184,9 @@ namespace InfluxDB.Client.Api.Service
         /// Get the readiness of a instance at startup. Allow us to confirm the instance is prepared to accept requests. 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Ready</returns>
-        public ApiResponse< Ready > ReadyGetWithHttpInfo ()
+        public ApiResponse< Ready > ReadyGetWithHttpInfo (string zapTraceSpan = null)
         {
 
             var localVarPath = "/ready";
@@ -196,6 +202,7 @@ namespace InfluxDB.Client.Api.Service
             };
             String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
 
             // to determine the Accept header
             String[] localVarHttpHeaderAccepts = new String[] {
@@ -229,8 +236,9 @@ namespace InfluxDB.Client.Api.Service
         /// Get the readiness of a instance at startup. Allow us to confirm the instance is prepared to accept requests. 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Ready</returns>
-        public IRestResponse ReadyGetWithIRestResponse ()
+        public IRestResponse ReadyGetWithIRestResponse (string zapTraceSpan = null)
         {
 
             var localVarPath = "/ready";
@@ -246,6 +254,7 @@ namespace InfluxDB.Client.Api.Service
             };
             String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
 
             // to determine the Accept header
             String[] localVarHttpHeaderAccepts = new String[] {
@@ -277,8 +286,9 @@ namespace InfluxDB.Client.Api.Service
         /// Get the readiness of a instance at startup. Allow us to confirm the instance is prepared to accept requests. 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Ready</returns>
-        public RestRequest ReadyGetWithRestRequest ()
+        public RestRequest ReadyGetWithRestRequest (string zapTraceSpan = null)
         {
 
             var localVarPath = "/ready";
@@ -294,6 +304,7 @@ namespace InfluxDB.Client.Api.Service
             };
             String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
 
             // to determine the Accept header
             String[] localVarHttpHeaderAccepts = new String[] {
@@ -314,10 +325,11 @@ namespace InfluxDB.Client.Api.Service
         /// Get the readiness of a instance at startup. Allow us to confirm the instance is prepared to accept requests. 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of Ready</returns>
-        public async System.Threading.Tasks.Task<Ready> ReadyGetAsync ()
+        public async System.Threading.Tasks.Task<Ready> ReadyGetAsync (string zapTraceSpan = null)
         {
-             ApiResponse<Ready> localVarResponse = await ReadyGetAsyncWithHttpInfo();
+             ApiResponse<Ready> localVarResponse = await ReadyGetAsyncWithHttpInfo(zapTraceSpan);
              return localVarResponse.Data;
 
         }
@@ -326,8 +338,9 @@ namespace InfluxDB.Client.Api.Service
         /// Get the readiness of a instance at startup. Allow us to confirm the instance is prepared to accept requests. 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (Ready)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Ready>> ReadyGetAsyncWithHttpInfo ()
+        public async System.Threading.Tasks.Task<ApiResponse<Ready>> ReadyGetAsyncWithHttpInfo (string zapTraceSpan = null)
         {
 
             var localVarPath = "/ready";
@@ -343,6 +356,7 @@ namespace InfluxDB.Client.Api.Service
             };
             String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
 
             // to determine the Accept header
             String[] localVarHttpHeaderAccepts = new String[] {

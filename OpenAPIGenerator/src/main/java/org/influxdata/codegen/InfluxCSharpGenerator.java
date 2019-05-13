@@ -77,14 +77,11 @@ public class InfluxCSharpGenerator extends CSharpClientCodegen {
                 List<Schema> allOf = ((ComposedSchema) schema).getAllOf();
                 if (allOf != null) {
 
-                    allOf.forEach(new Consumer<Schema>() {
-                        @Override
-                        public void accept(final Schema schema) {
+                    allOf.forEach(child -> {
 
-                            if (schema instanceof ObjectSchema) {
+                        if (child instanceof ObjectSchema) {
 
-                                inlineModelResolver.flattenProperties(schema.getProperties(), schemaName);
-                            }
+                            inlineModelResolver.flattenProperties(child.getProperties(), schemaName);
                         }
                     });
                 }

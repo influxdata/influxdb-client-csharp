@@ -39,11 +39,12 @@ namespace InfluxDB.Client.Api.Domain
         /// </summary>
         /// <param name="links">links.</param>
         /// <param name="name">name (required).</param>
+        /// <param name="description">description.</param>
         /// <param name="orgID">orgID.</param>
         /// <param name="rp">rp.</param>
         /// <param name="retentionRules">rules to expire or retain data.  No rules means data never expires. (required).</param>
         /// <param name="labels">labels.</param>
-        public Bucket(BucketLinks links = default(BucketLinks), string name = default(string), string orgID = default(string), string rp = default(string), List<BucketRetentionRules> retentionRules = default(List<BucketRetentionRules>), List<Label> labels = default(List<Label>))
+        public Bucket(BucketLinks links = default(BucketLinks), string name = default(string), string description = default(string), string orgID = default(string), string rp = default(string), List<BucketRetentionRules> retentionRules = default(List<BucketRetentionRules>), List<Label> labels = default(List<Label>))
         {
             // to ensure "name" is required (not null)
             if (name == null)
@@ -64,6 +65,7 @@ namespace InfluxDB.Client.Api.Domain
                 this.RetentionRules = retentionRules;
             }
             this.Links = links;
+            this.Description = description;
             this.OrgID = orgID;
             this.Rp = rp;
             this.Labels = labels;
@@ -86,6 +88,12 @@ namespace InfluxDB.Client.Api.Domain
         /// </summary>
         [DataMember(Name="name", EmitDefaultValue=false)]
         public string Name { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Description
+        /// </summary>
+        [DataMember(Name="description", EmitDefaultValue=false)]
+        public string Description { get; set; }
 
         /// <summary>
         /// Gets or Sets OrgID
@@ -123,6 +131,7 @@ namespace InfluxDB.Client.Api.Domain
             sb.Append("  Links: ").Append(Links).Append("\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
+            sb.Append("  Description: ").Append(Description).Append("\n");
             sb.Append("  OrgID: ").Append(OrgID).Append("\n");
             sb.Append("  Rp: ").Append(Rp).Append("\n");
             sb.Append("  RetentionRules: ").Append(RetentionRules).Append("\n");
@@ -177,6 +186,11 @@ namespace InfluxDB.Client.Api.Domain
                     this.Name.Equals(input.Name))
                 ) && 
                 (
+                    this.Description == input.Description ||
+                    (this.Description != null &&
+                    this.Description.Equals(input.Description))
+                ) && 
+                (
                     this.OrgID == input.OrgID ||
                     (this.OrgID != null &&
                     this.OrgID.Equals(input.OrgID))
@@ -213,6 +227,8 @@ namespace InfluxDB.Client.Api.Domain
                     hashCode = hashCode * 59 + this.Id.GetHashCode();
                 if (this.Name != null)
                     hashCode = hashCode * 59 + this.Name.GetHashCode();
+                if (this.Description != null)
+                    hashCode = hashCode * 59 + this.Description.GetHashCode();
                 if (this.OrgID != null)
                     hashCode = hashCode * 59 + this.OrgID.GetHashCode();
                 if (this.Rp != null)

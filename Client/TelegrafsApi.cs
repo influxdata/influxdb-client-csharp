@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using InfluxDB.Client.Core;
 using InfluxDB.Client.Api.Domain;
 using InfluxDB.Client.Api.Service;
+using InfluxDB.Client.Core;
 
 namespace InfluxDB.Client
 {
@@ -11,7 +11,7 @@ namespace InfluxDB.Client
     public class TelegrafsApi
     {
         private readonly TelegrafsService _service;
-        
+
         protected internal TelegrafsApi(TelegrafsService service)
         {
             Arguments.CheckNotNull(service, nameof(service));
@@ -66,7 +66,8 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
             Arguments.CheckPositiveNumber(collectionInterval, nameof(collectionInterval));
 
-            var request = new TelegrafRequest(name, description, new TelegrafRequestAgent(collectionInterval), plugins, orgId);
+            var request = new TelegrafRequest(name, description, new TelegrafRequestAgent(collectionInterval), plugins,
+                orgId);
 
             return CreateTelegraf(request);
         }
@@ -80,8 +81,9 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNotNull(telegraf, nameof(telegraf));
 
-            var request = new TelegrafRequest(telegraf.Name, telegraf.Description, telegraf.Agent, telegraf.Plugins, telegraf.OrganizationID);
-            
+            var request = new TelegrafRequest(telegraf.Name, telegraf.Description, telegraf.Agent, telegraf.Plugins,
+                telegraf.OrganizationID);
+
             return UpdateTelegraf(telegraf.Id, request);
         }
 
@@ -150,8 +152,9 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(clonedName, nameof(clonedName));
             Arguments.CheckNotNull(telegraf, nameof(telegraf));
 
-            var cloned = new TelegrafRequest(clonedName, telegraf.Description, telegraf.Agent, telegraf.Plugins, telegraf.OrganizationID);
-            
+            var cloned = new TelegrafRequest(clonedName, telegraf.Description, telegraf.Agent, telegraf.Plugins,
+                telegraf.OrganizationID);
+
             var created = CreateTelegraf(cloned);
 
             foreach (var label in GetLabels(telegraf)) AddLabel(label, created);
@@ -168,7 +171,9 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(telegrafId, nameof(telegrafId));
 
-            return _service.TelegrafsTelegrafIDGet(telegrafId, null, null);
+            var restResponse = _service.TelegrafsTelegrafIDGetWithIRestResponse(telegrafId);
+
+            return (Telegraf) _service.Configuration.ApiClient.Deserialize(restResponse, typeof(Telegraf));
         }
 
         /// <summary>

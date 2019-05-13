@@ -65,8 +65,9 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="every">Override the &#39;every&#39; option in the flux script..</param>
         /// <param name="cron">Override the &#39;cron&#39; option in the flux script..</param>
         /// <param name="offset">Override the &#39;offset&#39; option in the flux script..</param>
+        /// <param name="description">An optional description of the task..</param>
         /// <param name="token">Override the existing token associated with the task..</param>
-        public TaskUpdateRequest(StatusEnum? status = StatusEnum.Active, string flux = default(string), string name = default(string), string every = default(string), string cron = default(string), string offset = default(string), string token = default(string))
+        public TaskUpdateRequest(StatusEnum? status = StatusEnum.Active, string flux = default(string), string name = default(string), string every = default(string), string cron = default(string), string offset = default(string), string description = default(string), string token = default(string))
         {
             // use default value if no "status" provided
             if (status == null)
@@ -82,6 +83,7 @@ namespace InfluxDB.Client.Api.Domain
             this.Every = every;
             this.Cron = cron;
             this.Offset = offset;
+            this.Description = description;
             this.Token = token;
         }
 
@@ -122,6 +124,13 @@ namespace InfluxDB.Client.Api.Domain
         public string Offset { get; set; }
 
         /// <summary>
+        /// An optional description of the task.
+        /// </summary>
+        /// <value>An optional description of the task.</value>
+        [DataMember(Name="description", EmitDefaultValue=false)]
+        public string Description { get; set; }
+
+        /// <summary>
         /// Override the existing token associated with the task.
         /// </summary>
         /// <value>Override the existing token associated with the task.</value>
@@ -142,6 +151,7 @@ namespace InfluxDB.Client.Api.Domain
             sb.Append("  Every: ").Append(Every).Append("\n");
             sb.Append("  Cron: ").Append(Cron).Append("\n");
             sb.Append("  Offset: ").Append(Offset).Append("\n");
+            sb.Append("  Description: ").Append(Description).Append("\n");
             sb.Append("  Token: ").Append(Token).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -208,6 +218,11 @@ namespace InfluxDB.Client.Api.Domain
                     this.Offset.Equals(input.Offset))
                 ) && 
                 (
+                    this.Description == input.Description ||
+                    (this.Description != null &&
+                    this.Description.Equals(input.Description))
+                ) && 
+                (
                     this.Token == input.Token ||
                     (this.Token != null &&
                     this.Token.Equals(input.Token))
@@ -235,6 +250,8 @@ namespace InfluxDB.Client.Api.Domain
                     hashCode = hashCode * 59 + this.Cron.GetHashCode();
                 if (this.Offset != null)
                     hashCode = hashCode * 59 + this.Offset.GetHashCode();
+                if (this.Description != null)
+                    hashCode = hashCode * 59 + this.Description.GetHashCode();
                 if (this.Token != null)
                     hashCode = hashCode * 59 + this.Token.GetHashCode();
                 return hashCode;

@@ -68,8 +68,9 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="org">The name of the organization that owns this Task..</param>
         /// <param name="status">Starting state of the task. &#39;inactive&#39; tasks are not run until they are updated to &#39;active&#39; (default to StatusEnum.Active).</param>
         /// <param name="flux">The Flux script to run for this task. (required).</param>
+        /// <param name="description">An optional description of the task..</param>
         /// <param name="token">The token to use for authenticating this task when it executes queries. If omitted, uses the token associated with the request that creates the task..</param>
-        public TaskCreateRequest(string orgID = default(string), string org = default(string), StatusEnum? status = StatusEnum.Active, string flux = default(string), string token = default(string))
+        public TaskCreateRequest(string orgID = default(string), string org = default(string), StatusEnum? status = StatusEnum.Active, string flux = default(string), string description = default(string), string token = default(string))
         {
             // to ensure "flux" is required (not null)
             if (flux == null)
@@ -91,6 +92,7 @@ namespace InfluxDB.Client.Api.Domain
             {
                 this.Status = status;
             }
+            this.Description = description;
             this.Token = token;
         }
 
@@ -117,6 +119,13 @@ namespace InfluxDB.Client.Api.Domain
         public string Flux { get; set; }
 
         /// <summary>
+        /// An optional description of the task.
+        /// </summary>
+        /// <value>An optional description of the task.</value>
+        [DataMember(Name="description", EmitDefaultValue=false)]
+        public string Description { get; set; }
+
+        /// <summary>
         /// The token to use for authenticating this task when it executes queries. If omitted, uses the token associated with the request that creates the task.
         /// </summary>
         /// <value>The token to use for authenticating this task when it executes queries. If omitted, uses the token associated with the request that creates the task.</value>
@@ -135,6 +144,7 @@ namespace InfluxDB.Client.Api.Domain
             sb.Append("  Org: ").Append(Org).Append("\n");
             sb.Append("  Status: ").Append(Status).Append("\n");
             sb.Append("  Flux: ").Append(Flux).Append("\n");
+            sb.Append("  Description: ").Append(Description).Append("\n");
             sb.Append("  Token: ").Append(Token).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -191,6 +201,11 @@ namespace InfluxDB.Client.Api.Domain
                     this.Flux.Equals(input.Flux))
                 ) && 
                 (
+                    this.Description == input.Description ||
+                    (this.Description != null &&
+                    this.Description.Equals(input.Description))
+                ) && 
+                (
                     this.Token == input.Token ||
                     (this.Token != null &&
                     this.Token.Equals(input.Token))
@@ -214,6 +229,8 @@ namespace InfluxDB.Client.Api.Domain
                     hashCode = hashCode * 59 + this.Status.GetHashCode();
                 if (this.Flux != null)
                     hashCode = hashCode * 59 + this.Flux.GetHashCode();
+                if (this.Description != null)
+                    hashCode = hashCode * 59 + this.Description.GetHashCode();
                 if (this.Token != null)
                     hashCode = hashCode * 59 + this.Token.GetHashCode();
                 return hashCode;

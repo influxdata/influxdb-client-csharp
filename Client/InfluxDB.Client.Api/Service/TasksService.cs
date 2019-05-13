@@ -430,9 +430,10 @@ namespace InfluxDB.Client.Api.Service
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="taskID"></param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="runManually"> (optional)</param>
         /// <returns>Run</returns>
-        Run TasksTaskIDRunsPost (string taskID, RunManually runManually = null);
+        Run TasksTaskIDRunsPost (string taskID, string zapTraceSpan = null, RunManually runManually = null);
 
         /// <summary>
         /// manually start a run of the task now overriding the current schedule.
@@ -442,9 +443,10 @@ namespace InfluxDB.Client.Api.Service
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="taskID"></param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="runManually"> (optional)</param>
         /// <returns>ApiResponse of Run</returns>
-        ApiResponse<Run> TasksTaskIDRunsPostWithHttpInfo (string taskID, RunManually runManually = null);
+        ApiResponse<Run> TasksTaskIDRunsPostWithHttpInfo (string taskID, string zapTraceSpan = null, RunManually runManually = null);
         /// <summary>
         /// Cancel a run
         /// </summary>
@@ -953,9 +955,10 @@ namespace InfluxDB.Client.Api.Service
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="taskID"></param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="runManually"> (optional)</param>
         /// <returns>Task of Run</returns>
-        System.Threading.Tasks.Task<Run> TasksTaskIDRunsPostAsync (string taskID, RunManually runManually = null);
+        System.Threading.Tasks.Task<Run> TasksTaskIDRunsPostAsync (string taskID, string zapTraceSpan = null, RunManually runManually = null);
 
         /// <summary>
         /// manually start a run of the task now overriding the current schedule.
@@ -965,9 +968,10 @@ namespace InfluxDB.Client.Api.Service
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="taskID"></param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="runManually"> (optional)</param>
         /// <returns>Task of ApiResponse (Run)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Run>> TasksTaskIDRunsPostAsyncWithHttpInfo (string taskID, RunManually runManually = null);
+        System.Threading.Tasks.Task<ApiResponse<Run>> TasksTaskIDRunsPostAsyncWithHttpInfo (string taskID, string zapTraceSpan = null, RunManually runManually = null);
         /// <summary>
         /// Cancel a run
         /// </summary>
@@ -5387,11 +5391,12 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="taskID"></param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="runManually"> (optional)</param>
         /// <returns>Run</returns>
-        public Run TasksTaskIDRunsPost (string taskID, RunManually runManually = null)
+        public Run TasksTaskIDRunsPost (string taskID, string zapTraceSpan = null, RunManually runManually = null)
         {
-             ApiResponse<Run> localVarResponse = TasksTaskIDRunsPostWithHttpInfo(taskID, runManually);
+             ApiResponse<Run> localVarResponse = TasksTaskIDRunsPostWithHttpInfo(taskID, zapTraceSpan, runManually);
              return localVarResponse.Data;
         }
 
@@ -5400,9 +5405,10 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="taskID"></param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="runManually"> (optional)</param>
         /// <returns>ApiResponse of Run</returns>
-        public ApiResponse< Run > TasksTaskIDRunsPostWithHttpInfo (string taskID, RunManually runManually = null)
+        public ApiResponse< Run > TasksTaskIDRunsPostWithHttpInfo (string taskID, string zapTraceSpan = null, RunManually runManually = null)
         {
             // verify the required parameter 'taskID' is set
             if (taskID == null)
@@ -5423,6 +5429,7 @@ namespace InfluxDB.Client.Api.Service
             String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             if (taskID != null) localVarPathParams.Add("taskID", this.Configuration.ApiClient.ParameterToString(taskID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
             if (runManually != null && runManually.GetType() != typeof(byte[]))
             {
                 localVarPostBody = this.Configuration.ApiClient.Serialize(runManually); // http body (model) parameter
@@ -5465,9 +5472,10 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="taskID"></param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="runManually"> (optional)</param>
         /// <returns>ApiResponse of Run</returns>
-        public IRestResponse TasksTaskIDRunsPostWithIRestResponse (string taskID, RunManually runManually = null)
+        public IRestResponse TasksTaskIDRunsPostWithIRestResponse (string taskID, string zapTraceSpan = null, RunManually runManually = null)
         {
             // verify the required parameter 'taskID' is set
             if (taskID == null)
@@ -5488,6 +5496,7 @@ namespace InfluxDB.Client.Api.Service
             String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             if (taskID != null) localVarPathParams.Add("taskID", this.Configuration.ApiClient.ParameterToString(taskID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
             if (runManually != null && runManually.GetType() != typeof(byte[]))
             {
                 localVarPostBody = this.Configuration.ApiClient.Serialize(runManually); // http body (model) parameter
@@ -5528,9 +5537,10 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="taskID"></param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="runManually"> (optional)</param>
         /// <returns>ApiResponse of Run</returns>
-        public RestRequest TasksTaskIDRunsPostWithRestRequest (string taskID, RunManually runManually = null)
+        public RestRequest TasksTaskIDRunsPostWithRestRequest (string taskID, string zapTraceSpan = null, RunManually runManually = null)
         {
             // verify the required parameter 'taskID' is set
             if (taskID == null)
@@ -5551,6 +5561,7 @@ namespace InfluxDB.Client.Api.Service
             String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             if (taskID != null) localVarPathParams.Add("taskID", this.Configuration.ApiClient.ParameterToString(taskID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
             if (runManually != null && runManually.GetType() != typeof(byte[]))
             {
                 localVarPostBody = this.Configuration.ApiClient.Serialize(runManually); // http body (model) parameter
@@ -5580,11 +5591,12 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="taskID"></param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="runManually"> (optional)</param>
         /// <returns>Task of Run</returns>
-        public async System.Threading.Tasks.Task<Run> TasksTaskIDRunsPostAsync (string taskID, RunManually runManually = null)
+        public async System.Threading.Tasks.Task<Run> TasksTaskIDRunsPostAsync (string taskID, string zapTraceSpan = null, RunManually runManually = null)
         {
-             ApiResponse<Run> localVarResponse = await TasksTaskIDRunsPostAsyncWithHttpInfo(taskID, runManually);
+             ApiResponse<Run> localVarResponse = await TasksTaskIDRunsPostAsyncWithHttpInfo(taskID, zapTraceSpan, runManually);
              return localVarResponse.Data;
 
         }
@@ -5594,9 +5606,10 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="taskID"></param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="runManually"> (optional)</param>
         /// <returns>Task of ApiResponse (Run)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Run>> TasksTaskIDRunsPostAsyncWithHttpInfo (string taskID, RunManually runManually = null)
+        public async System.Threading.Tasks.Task<ApiResponse<Run>> TasksTaskIDRunsPostAsyncWithHttpInfo (string taskID, string zapTraceSpan = null, RunManually runManually = null)
         {
             // verify the required parameter 'taskID' is set
             if (taskID == null)
@@ -5617,6 +5630,7 @@ namespace InfluxDB.Client.Api.Service
             String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             if (taskID != null) localVarPathParams.Add("taskID", this.Configuration.ApiClient.ParameterToString(taskID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
             if (runManually != null && runManually.GetType() != typeof(byte[]))
             {
                 localVarPostBody = this.Configuration.ApiClient.Serialize(runManually); // http body (model) parameter
