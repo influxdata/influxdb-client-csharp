@@ -90,6 +90,18 @@ namespace InfluxDB.Client.Api.Domain
         public string Version { get; set; }
 
         /// <summary>
+        /// Gets or Sets CreatedAt
+        /// </summary>
+        [DataMember(Name="createdAt", EmitDefaultValue=false)]
+        public DateTime? CreatedAt { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets UpdatedAt
+        /// </summary>
+        [DataMember(Name="updatedAt", EmitDefaultValue=false)]
+        public DateTime? UpdatedAt { get; private set; }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -101,6 +113,8 @@ namespace InfluxDB.Client.Api.Domain
             sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  Description: ").Append(Description).Append("\n");
             sb.Append("  Version: ").Append(Version).Append("\n");
+            sb.Append("  CreatedAt: ").Append(CreatedAt).Append("\n");
+            sb.Append("  UpdatedAt: ").Append(UpdatedAt).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -154,6 +168,16 @@ namespace InfluxDB.Client.Api.Domain
                     this.Version == input.Version ||
                     (this.Version != null &&
                     this.Version.Equals(input.Version))
+                ) && 
+                (
+                    this.CreatedAt == input.CreatedAt ||
+                    (this.CreatedAt != null &&
+                    this.CreatedAt.Equals(input.CreatedAt))
+                ) && 
+                (
+                    this.UpdatedAt == input.UpdatedAt ||
+                    (this.UpdatedAt != null &&
+                    this.UpdatedAt.Equals(input.UpdatedAt))
                 );
         }
 
@@ -174,6 +198,10 @@ namespace InfluxDB.Client.Api.Domain
                     hashCode = hashCode * 59 + this.Description.GetHashCode();
                 if (this.Version != null)
                     hashCode = hashCode * 59 + this.Version.GetHashCode();
+                if (this.CreatedAt != null)
+                    hashCode = hashCode * 59 + this.CreatedAt.GetHashCode();
+                if (this.UpdatedAt != null)
+                    hashCode = hashCode * 59 + this.UpdatedAt.GetHashCode();
                 return hashCode;
             }
         }
