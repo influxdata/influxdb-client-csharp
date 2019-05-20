@@ -162,7 +162,7 @@ namespace InfluxDB.Client.Api.Domain
         {
             {new []{ "chronograf-v1" }, typeof(V1ViewProperties)},
             {new []{ "empty" }, typeof(EmptyViewProperties)},
-            {new []{ "log-viewer", "chronograf-v2" }, typeof(LogViewProperties)},
+            {new []{ "chronograf-v2", "log-viewer" }, typeof(LogViewProperties)},
             {new []{ "markdown", "chronograf-v2" }, typeof(MarkdownViewProperties)},
         };
 

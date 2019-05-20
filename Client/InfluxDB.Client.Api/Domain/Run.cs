@@ -104,6 +104,13 @@ namespace InfluxDB.Client.Api.Domain
         public DateTime? ScheduledFor { get; set; }
 
         /// <summary>
+        /// An array of logs associated with the run.
+        /// </summary>
+        /// <value>An array of logs associated with the run.</value>
+        [DataMember(Name="log", EmitDefaultValue=false)]
+        public List<LogEvent> Log { get; private set; }
+
+        /// <summary>
         /// Time run started executing, RFC3339Nano.
         /// </summary>
         /// <value>Time run started executing, RFC3339Nano.</value>
@@ -142,6 +149,7 @@ namespace InfluxDB.Client.Api.Domain
             sb.Append("  TaskID: ").Append(TaskID).Append("\n");
             sb.Append("  Status: ").Append(Status).Append("\n");
             sb.Append("  ScheduledFor: ").Append(ScheduledFor).Append("\n");
+            sb.Append("  Log: ").Append(Log).Append("\n");
             sb.Append("  StartedAt: ").Append(StartedAt).Append("\n");
             sb.Append("  FinishedAt: ").Append(FinishedAt).Append("\n");
             sb.Append("  RequestedAt: ").Append(RequestedAt).Append("\n");
@@ -201,6 +209,11 @@ namespace InfluxDB.Client.Api.Domain
                     this.ScheduledFor.Equals(input.ScheduledFor))
                 ) && 
                 (
+                    this.Log == input.Log ||
+                    this.Log != null &&
+                    this.Log.SequenceEqual(input.Log)
+                ) && 
+                (
                     this.StartedAt == input.StartedAt ||
                     (this.StartedAt != null &&
                     this.StartedAt.Equals(input.StartedAt))
@@ -239,6 +252,8 @@ namespace InfluxDB.Client.Api.Domain
                     hashCode = hashCode * 59 + this.Status.GetHashCode();
                 if (this.ScheduledFor != null)
                     hashCode = hashCode * 59 + this.ScheduledFor.GetHashCode();
+                if (this.Log != null)
+                    hashCode = hashCode * 59 + this.Log.GetHashCode();
                 if (this.StartedAt != null)
                     hashCode = hashCode * 59 + this.StartedAt.GetHashCode();
                 if (this.FinishedAt != null)

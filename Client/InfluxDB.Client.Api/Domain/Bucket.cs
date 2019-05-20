@@ -108,6 +108,18 @@ namespace InfluxDB.Client.Api.Domain
         public string Rp { get; set; }
 
         /// <summary>
+        /// Gets or Sets CreatedAt
+        /// </summary>
+        [DataMember(Name="createdAt", EmitDefaultValue=false)]
+        public DateTime? CreatedAt { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets UpdatedAt
+        /// </summary>
+        [DataMember(Name="updatedAt", EmitDefaultValue=false)]
+        public DateTime? UpdatedAt { get; private set; }
+
+        /// <summary>
         /// rules to expire or retain data.  No rules means data never expires.
         /// </summary>
         /// <value>rules to expire or retain data.  No rules means data never expires.</value>
@@ -134,6 +146,8 @@ namespace InfluxDB.Client.Api.Domain
             sb.Append("  Description: ").Append(Description).Append("\n");
             sb.Append("  OrgID: ").Append(OrgID).Append("\n");
             sb.Append("  Rp: ").Append(Rp).Append("\n");
+            sb.Append("  CreatedAt: ").Append(CreatedAt).Append("\n");
+            sb.Append("  UpdatedAt: ").Append(UpdatedAt).Append("\n");
             sb.Append("  RetentionRules: ").Append(RetentionRules).Append("\n");
             sb.Append("  Labels: ").Append(Labels).Append("\n");
             sb.Append("}\n");
@@ -201,6 +215,16 @@ namespace InfluxDB.Client.Api.Domain
                     this.Rp.Equals(input.Rp))
                 ) && 
                 (
+                    this.CreatedAt == input.CreatedAt ||
+                    (this.CreatedAt != null &&
+                    this.CreatedAt.Equals(input.CreatedAt))
+                ) && 
+                (
+                    this.UpdatedAt == input.UpdatedAt ||
+                    (this.UpdatedAt != null &&
+                    this.UpdatedAt.Equals(input.UpdatedAt))
+                ) && 
+                (
                     this.RetentionRules == input.RetentionRules ||
                     this.RetentionRules != null &&
                     this.RetentionRules.SequenceEqual(input.RetentionRules)
@@ -233,6 +257,10 @@ namespace InfluxDB.Client.Api.Domain
                     hashCode = hashCode * 59 + this.OrgID.GetHashCode();
                 if (this.Rp != null)
                     hashCode = hashCode * 59 + this.Rp.GetHashCode();
+                if (this.CreatedAt != null)
+                    hashCode = hashCode * 59 + this.CreatedAt.GetHashCode();
+                if (this.UpdatedAt != null)
+                    hashCode = hashCode * 59 + this.UpdatedAt.GetHashCode();
                 if (this.RetentionRules != null)
                     hashCode = hashCode * 59 + this.RetentionRules.GetHashCode();
                 if (this.Labels != null)

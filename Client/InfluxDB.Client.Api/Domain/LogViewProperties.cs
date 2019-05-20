@@ -30,25 +30,6 @@ namespace InfluxDB.Client.Api.Domain
     public partial class LogViewProperties :  IEquatable<LogViewProperties>
     {
         /// <summary>
-        /// Defines Type
-        /// </summary>
-        [JsonConverter(typeof(StringEnumConverter))]
-        public enum TypeEnum
-        {
-            /// <summary>
-            /// Enum LogViewer for value: log-viewer
-            /// </summary>
-            [EnumMember(Value = "log-viewer")]
-            LogViewer = 1
-
-        }
-
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public TypeEnum Type { get; set; }
-        /// <summary>
         /// Defines Shape
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
@@ -68,6 +49,25 @@ namespace InfluxDB.Client.Api.Domain
         [DataMember(Name="shape", EmitDefaultValue=false)]
         public ShapeEnum Shape { get; set; }
         /// <summary>
+        /// Defines Type
+        /// </summary>
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum TypeEnum
+        {
+            /// <summary>
+            /// Enum LogViewer for value: log-viewer
+            /// </summary>
+            [EnumMember(Value = "log-viewer")]
+            LogViewer = 1
+
+        }
+
+        /// <summary>
+        /// Gets or Sets Type
+        /// </summary>
+        [DataMember(Name="type", EmitDefaultValue=false)]
+        public TypeEnum Type { get; set; }
+        /// <summary>
         /// Initializes a new instance of the <see cref="LogViewProperties" /> class.
         /// </summary>
         [JsonConstructorAttribute]
@@ -75,20 +75,11 @@ namespace InfluxDB.Client.Api.Domain
         /// <summary>
         /// Initializes a new instance of the <see cref="LogViewProperties" /> class.
         /// </summary>
-        /// <param name="type">type (required).</param>
         /// <param name="shape">shape (required).</param>
+        /// <param name="type">type (required).</param>
         /// <param name="columns">Defines the order, names, and visibility of columns in the log viewer table (required).</param>
-        public LogViewProperties(TypeEnum type = default(TypeEnum), ShapeEnum shape = default(ShapeEnum), List<LogViewerColumn> columns = default(List<LogViewerColumn>))
+        public LogViewProperties(ShapeEnum shape = default(ShapeEnum), TypeEnum type = default(TypeEnum), List<LogViewerColumn> columns = default(List<LogViewerColumn>))
         {
-            // to ensure "type" is required (not null)
-            if (type == null)
-            {
-                throw new InvalidDataException("type is a required property for LogViewProperties and cannot be null");
-            }
-            else
-            {
-                this.Type = type;
-            }
             // to ensure "shape" is required (not null)
             if (shape == null)
             {
@@ -97,6 +88,15 @@ namespace InfluxDB.Client.Api.Domain
             else
             {
                 this.Shape = shape;
+            }
+            // to ensure "type" is required (not null)
+            if (type == null)
+            {
+                throw new InvalidDataException("type is a required property for LogViewProperties and cannot be null");
+            }
+            else
+            {
+                this.Type = type;
             }
             // to ensure "columns" is required (not null)
             if (columns == null)
@@ -126,8 +126,8 @@ namespace InfluxDB.Client.Api.Domain
         {
             var sb = new StringBuilder();
             sb.Append("class LogViewProperties {\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  Shape: ").Append(Shape).Append("\n");
+            sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  Columns: ").Append(Columns).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -164,14 +164,14 @@ namespace InfluxDB.Client.Api.Domain
 
             return 
                 (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
-                ) && 
-                (
                     this.Shape == input.Shape ||
                     (this.Shape != null &&
                     this.Shape.Equals(input.Shape))
+                ) && 
+                (
+                    this.Type == input.Type ||
+                    (this.Type != null &&
+                    this.Type.Equals(input.Type))
                 ) && 
                 (
                     this.Columns == input.Columns ||
@@ -189,10 +189,10 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
-                if (this.Type != null)
-                    hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.Shape != null)
                     hashCode = hashCode * 59 + this.Shape.GetHashCode();
+                if (this.Type != null)
+                    hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.Columns != null)
                     hashCode = hashCode * 59 + this.Columns.GetHashCode();
                 return hashCode;
