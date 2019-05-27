@@ -27,15 +27,15 @@ namespace InfluxDB.Client.Api.Domain
     /// The viewport for a View&#39;s visualizations
     /// </summary>
     [DataContract]
-    public partial class V1ViewPropertiesAxes :  IEquatable<V1ViewPropertiesAxes>
+    public partial class Axes :  IEquatable<Axes>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="V1ViewPropertiesAxes" /> class.
+        /// Initializes a new instance of the <see cref="Axes" /> class.
         /// </summary>
         /// <param name="x">x.</param>
         /// <param name="y">y.</param>
         /// <param name="y2">y2.</param>
-        public V1ViewPropertiesAxes(Axis x = default(Axis), Axis y = default(Axis), Axis y2 = default(Axis))
+        public Axes(Axis x = default(Axis), Axis y = default(Axis), Axis y2 = default(Axis))
         {
             this.X = x;
             this.Y = y;
@@ -67,7 +67,7 @@ namespace InfluxDB.Client.Api.Domain
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class V1ViewPropertiesAxes {\n");
+            sb.Append("class Axes {\n");
             sb.Append("  X: ").Append(X).Append("\n");
             sb.Append("  Y: ").Append(Y).Append("\n");
             sb.Append("  Y2: ").Append(Y2).Append("\n");
@@ -91,15 +91,15 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as V1ViewPropertiesAxes);
+            return this.Equals(input as Axes);
         }
 
         /// <summary>
-        /// Returns true if V1ViewPropertiesAxes instances are equal
+        /// Returns true if Axes instances are equal
         /// </summary>
-        /// <param name="input">Instance of V1ViewPropertiesAxes to be compared</param>
+        /// <param name="input">Instance of Axes to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(V1ViewPropertiesAxes input)
+        public bool Equals(Axes input)
         {
             if (input == null)
                 return false;

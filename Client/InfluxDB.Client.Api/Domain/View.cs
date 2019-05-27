@@ -160,10 +160,15 @@ namespace InfluxDB.Client.Api.Domain
     {
         private static readonly Dictionary<string[], Type> Types = new Dictionary<string[], Type>(new Client.DiscriminatorComparer<string>())
         {
-            {new []{ "chronograf-v1" }, typeof(V1ViewProperties)},
-            {new []{ "empty" }, typeof(EmptyViewProperties)},
+            {new []{ "chronograf-v2", "line-plus-single-stat" }, typeof(LinePlusSingleStatProperties)},
+            {new []{ "chronograf-v2", "xy" }, typeof(XYViewProperties)},
+            {new []{ "chronograf-v2", "single-stat" }, typeof(SingleStatViewProperties)},
+            {new []{ "chronograf-v2", "histogram" }, typeof(HistogramViewProperties)},
+            {new []{ "chronograf-v2", "gauge" }, typeof(GaugeViewProperties)},
+            {new []{ "chronograf-v2", "table" }, typeof(TableViewProperties)},
+            {new []{ "chronograf-v2", "markdown" }, typeof(MarkdownViewProperties)},
             {new []{ "chronograf-v2", "log-viewer" }, typeof(LogViewProperties)},
-            {new []{ "markdown", "chronograf-v2" }, typeof(MarkdownViewProperties)},
+            {new []{ "chronograf-v2", "empty" }, typeof(EmptyViewProperties)},
         };
 
         public override bool CanConvert(Type objectType)
@@ -189,7 +194,7 @@ namespace InfluxDB.Client.Api.Domain
 
                     var jObject = Newtonsoft.Json.Linq.JObject.Load(reader);
 
-                    var discriminator = new []{ "type", "shape" }.Select(key => jObject[key].ToString()).ToArray();
+                    var discriminator = new []{ "shape", "type" }.Select(key => jObject[key].ToString()).ToArray();
 
                     Types.TryGetValue(discriminator, out var type);
 

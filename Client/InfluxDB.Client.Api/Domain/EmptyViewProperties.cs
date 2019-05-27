@@ -30,6 +30,25 @@ namespace InfluxDB.Client.Api.Domain
     public partial class EmptyViewProperties :  IEquatable<EmptyViewProperties>
     {
         /// <summary>
+        /// Defines Shape
+        /// </summary>
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum ShapeEnum
+        {
+            /// <summary>
+            /// Enum ChronografV2 for value: chronograf-v2
+            /// </summary>
+            [EnumMember(Value = "chronograf-v2")]
+            ChronografV2 = 1
+
+        }
+
+        /// <summary>
+        /// Gets or Sets Shape
+        /// </summary>
+        [DataMember(Name="shape", EmitDefaultValue=false)]
+        public ShapeEnum? Shape { get; set; }
+        /// <summary>
         /// Defines Type
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
@@ -51,11 +70,14 @@ namespace InfluxDB.Client.Api.Domain
         /// <summary>
         /// Initializes a new instance of the <see cref="EmptyViewProperties" /> class.
         /// </summary>
+        /// <param name="shape">shape.</param>
         /// <param name="type">type.</param>
-        public EmptyViewProperties(TypeEnum? type = default(TypeEnum?))
+        public EmptyViewProperties(ShapeEnum? shape = default(ShapeEnum?), TypeEnum? type = default(TypeEnum?))
         {
+            this.Shape = shape;
             this.Type = type;
         }
+
 
 
         /// <summary>
@@ -66,6 +88,7 @@ namespace InfluxDB.Client.Api.Domain
         {
             var sb = new StringBuilder();
             sb.Append("class EmptyViewProperties {\n");
+            sb.Append("  Shape: ").Append(Shape).Append("\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -102,6 +125,11 @@ namespace InfluxDB.Client.Api.Domain
 
             return 
                 (
+                    this.Shape == input.Shape ||
+                    (this.Shape != null &&
+                    this.Shape.Equals(input.Shape))
+                ) && 
+                (
                     this.Type == input.Type ||
                     (this.Type != null &&
                     this.Type.Equals(input.Type))
@@ -117,6 +145,8 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
+                if (this.Shape != null)
+                    hashCode = hashCode * 59 + this.Shape.GetHashCode();
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
                 return hashCode;

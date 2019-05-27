@@ -24,10 +24,10 @@ using OpenAPIDateConverter = InfluxDB.Client.Api.Client.OpenAPIDateConverter;
 namespace InfluxDB.Client.Api.Domain
 {
     /// <summary>
-    /// MarkdownViewProperties
+    /// XYViewProperties
     /// </summary>
     [DataContract]
-    public partial class MarkdownViewProperties :  IEquatable<MarkdownViewProperties>
+    public partial class XYViewProperties : ViewProperties,  IEquatable<XYViewProperties>
     {
         /// <summary>
         /// Defines Shape
@@ -55,10 +55,10 @@ namespace InfluxDB.Client.Api.Domain
         public enum TypeEnum
         {
             /// <summary>
-            /// Enum Markdown for value: markdown
+            /// Enum Xy for value: xy
             /// </summary>
-            [EnumMember(Value = "markdown")]
-            Markdown = 1
+            [EnumMember(Value = "xy")]
+            Xy = 1
 
         }
 
@@ -68,25 +68,73 @@ namespace InfluxDB.Client.Api.Domain
         [DataMember(Name="type", EmitDefaultValue=false)]
         public TypeEnum? Type { get; set; }
         /// <summary>
-        /// Initializes a new instance of the <see cref="MarkdownViewProperties" /> class.
+        /// Defines Geom
         /// </summary>
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum GeomEnum
+        {
+            /// <summary>
+            /// Enum Line for value: line
+            /// </summary>
+            [EnumMember(Value = "line")]
+            Line = 1,
+
+            /// <summary>
+            /// Enum Step for value: step
+            /// </summary>
+            [EnumMember(Value = "step")]
+            Step = 2,
+
+            /// <summary>
+            /// Enum Stacked for value: stacked
+            /// </summary>
+            [EnumMember(Value = "stacked")]
+            Stacked = 3,
+
+            /// <summary>
+            /// Enum Bar for value: bar
+            /// </summary>
+            [EnumMember(Value = "bar")]
+            Bar = 4
+
+        }
+
+        /// <summary>
+        /// Gets or Sets Geom
+        /// </summary>
+        [DataMember(Name="geom", EmitDefaultValue=false)]
+        public GeomEnum? Geom { get; set; }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="XYViewProperties" /> class.
+        /// </summary>
+        /// <param name="axes">axes.</param>
         /// <param name="shape">shape.</param>
         /// <param name="type">type.</param>
-        /// <param name="note">note.</param>
-        public MarkdownViewProperties(ShapeEnum? shape = default(ShapeEnum?), TypeEnum? type = default(TypeEnum?), string note = default(string))
+        /// <param name="legend">legend.</param>
+        /// <param name="geom">geom.</param>
+        public XYViewProperties(Axes axes = default(Axes), ShapeEnum? shape = default(ShapeEnum?), TypeEnum? type = default(TypeEnum?), Legend legend = default(Legend), GeomEnum? geom = default(GeomEnum?), List<DashboardQuery> queries = default(List<DashboardQuery>), List<DashboardColor> colors = default(List<DashboardColor>), string note = default(string), bool? showNoteWhenEmpty = default(bool?)) : base(queries, colors, note, showNoteWhenEmpty)
         {
+            this.Axes = axes;
             this.Shape = shape;
             this.Type = type;
-            this.Note = note;
+            this.Legend = legend;
+            this.Geom = geom;
         }
+
+        /// <summary>
+        /// Gets or Sets Axes
+        /// </summary>
+        [DataMember(Name="axes", EmitDefaultValue=false)]
+        public Axes Axes { get; set; }
 
 
 
         /// <summary>
-        /// Gets or Sets Note
+        /// Gets or Sets Legend
         /// </summary>
-        [DataMember(Name="note", EmitDefaultValue=false)]
-        public string Note { get; set; }
+        [DataMember(Name="legend", EmitDefaultValue=false)]
+        public Legend Legend { get; set; }
+
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -95,10 +143,13 @@ namespace InfluxDB.Client.Api.Domain
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class MarkdownViewProperties {\n");
+            sb.Append("class XYViewProperties {\n");
+            sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
+            sb.Append("  Axes: ").Append(Axes).Append("\n");
             sb.Append("  Shape: ").Append(Shape).Append("\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  Note: ").Append(Note).Append("\n");
+            sb.Append("  Legend: ").Append(Legend).Append("\n");
+            sb.Append("  Geom: ").Append(Geom).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -107,7 +158,7 @@ namespace InfluxDB.Client.Api.Domain
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public virtual string ToJson()
+        public override string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }
@@ -119,34 +170,44 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as MarkdownViewProperties);
+            return this.Equals(input as XYViewProperties);
         }
 
         /// <summary>
-        /// Returns true if MarkdownViewProperties instances are equal
+        /// Returns true if XYViewProperties instances are equal
         /// </summary>
-        /// <param name="input">Instance of MarkdownViewProperties to be compared</param>
+        /// <param name="input">Instance of XYViewProperties to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(MarkdownViewProperties input)
+        public bool Equals(XYViewProperties input)
         {
             if (input == null)
                 return false;
 
-            return 
+            return base.Equals(input) && 
+                (
+                    
+                    (this.Axes != null &&
+                    this.Axes.Equals(input.Axes))
+                ) && base.Equals(input) && 
                 (
                     this.Shape == input.Shape ||
                     (this.Shape != null &&
                     this.Shape.Equals(input.Shape))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.Type == input.Type ||
                     (this.Type != null &&
                     this.Type.Equals(input.Type))
-                ) && 
+                ) && base.Equals(input) && 
                 (
-                    this.Note == input.Note ||
-                    (this.Note != null &&
-                    this.Note.Equals(input.Note))
+                    
+                    (this.Legend != null &&
+                    this.Legend.Equals(input.Legend))
+                ) && base.Equals(input) && 
+                (
+                    this.Geom == input.Geom ||
+                    (this.Geom != null &&
+                    this.Geom.Equals(input.Geom))
                 );
         }
 
@@ -158,13 +219,17 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
+                int hashCode = base.GetHashCode();
+                if (this.Axes != null)
+                    hashCode = hashCode * 59 + this.Axes.GetHashCode();
                 if (this.Shape != null)
                     hashCode = hashCode * 59 + this.Shape.GetHashCode();
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
-                if (this.Note != null)
-                    hashCode = hashCode * 59 + this.Note.GetHashCode();
+                if (this.Legend != null)
+                    hashCode = hashCode * 59 + this.Legend.GetHashCode();
+                if (this.Geom != null)
+                    hashCode = hashCode * 59 + this.Geom.GetHashCode();
                 return hashCode;
             }
         }

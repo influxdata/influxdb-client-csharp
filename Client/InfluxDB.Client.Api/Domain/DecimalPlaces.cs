@@ -24,17 +24,17 @@ using OpenAPIDateConverter = InfluxDB.Client.Api.Client.OpenAPIDateConverter;
 namespace InfluxDB.Client.Api.Domain
 {
     /// <summary>
-    /// decimal points indicates whether and how many digits to show after decimal point
+    /// indicates whether decimal places should be enforced, and how many digits it should show.
     /// </summary>
     [DataContract]
-    public partial class V1ViewPropertiesDecimalPoints :  IEquatable<V1ViewPropertiesDecimalPoints>
+    public partial class DecimalPlaces :  IEquatable<DecimalPlaces>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="V1ViewPropertiesDecimalPoints" /> class.
+        /// Initializes a new instance of the <see cref="DecimalPlaces" /> class.
         /// </summary>
         /// <param name="isEnforced">Indicates whether decimal point setting should be enforced.</param>
-        /// <param name="digits">The number of digists after decimal to display.</param>
-        public V1ViewPropertiesDecimalPoints(bool? isEnforced = default(bool?), int? digits = default(int?))
+        /// <param name="digits">The number of digits after decimal to display.</param>
+        public DecimalPlaces(bool? isEnforced = default(bool?), int? digits = default(int?))
         {
             this.IsEnforced = isEnforced;
             this.Digits = digits;
@@ -48,9 +48,9 @@ namespace InfluxDB.Client.Api.Domain
         public bool? IsEnforced { get; set; }
 
         /// <summary>
-        /// The number of digists after decimal to display
+        /// The number of digits after decimal to display
         /// </summary>
-        /// <value>The number of digists after decimal to display</value>
+        /// <value>The number of digits after decimal to display</value>
         [DataMember(Name="digits", EmitDefaultValue=false)]
         public int? Digits { get; set; }
 
@@ -61,7 +61,7 @@ namespace InfluxDB.Client.Api.Domain
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class V1ViewPropertiesDecimalPoints {\n");
+            sb.Append("class DecimalPlaces {\n");
             sb.Append("  IsEnforced: ").Append(IsEnforced).Append("\n");
             sb.Append("  Digits: ").Append(Digits).Append("\n");
             sb.Append("}\n");
@@ -84,15 +84,15 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as V1ViewPropertiesDecimalPoints);
+            return this.Equals(input as DecimalPlaces);
         }
 
         /// <summary>
-        /// Returns true if V1ViewPropertiesDecimalPoints instances are equal
+        /// Returns true if DecimalPlaces instances are equal
         /// </summary>
-        /// <param name="input">Instance of V1ViewPropertiesDecimalPoints to be compared</param>
+        /// <param name="input">Instance of DecimalPlaces to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(V1ViewPropertiesDecimalPoints input)
+        public bool Equals(DecimalPlaces input)
         {
             if (input == null)
                 return false;

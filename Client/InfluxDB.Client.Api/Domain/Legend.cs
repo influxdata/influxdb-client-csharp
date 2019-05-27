@@ -27,7 +27,7 @@ namespace InfluxDB.Client.Api.Domain
     /// Legend define encoding of data into a view&#39;s legend
     /// </summary>
     [DataContract]
-    public partial class V1ViewPropertiesLegend :  IEquatable<V1ViewPropertiesLegend>
+    public partial class Legend :  IEquatable<Legend>
     {
         /// <summary>
         /// type is the style of the legend
@@ -90,11 +90,11 @@ namespace InfluxDB.Client.Api.Domain
         [DataMember(Name="orientation", EmitDefaultValue=false)]
         public OrientationEnum? Orientation { get; set; }
         /// <summary>
-        /// Initializes a new instance of the <see cref="V1ViewPropertiesLegend" /> class.
+        /// Initializes a new instance of the <see cref="Legend" /> class.
         /// </summary>
         /// <param name="type">type is the style of the legend.</param>
         /// <param name="orientation">orientation is the location of the legend with respect to the view graph.</param>
-        public V1ViewPropertiesLegend(TypeEnum? type = default(TypeEnum?), OrientationEnum? orientation = default(OrientationEnum?))
+        public Legend(TypeEnum? type = default(TypeEnum?), OrientationEnum? orientation = default(OrientationEnum?))
         {
             this.Type = type;
             this.Orientation = orientation;
@@ -109,7 +109,7 @@ namespace InfluxDB.Client.Api.Domain
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class V1ViewPropertiesLegend {\n");
+            sb.Append("class Legend {\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  Orientation: ").Append(Orientation).Append("\n");
             sb.Append("}\n");
@@ -132,15 +132,15 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as V1ViewPropertiesLegend);
+            return this.Equals(input as Legend);
         }
 
         /// <summary>
-        /// Returns true if V1ViewPropertiesLegend instances are equal
+        /// Returns true if Legend instances are equal
         /// </summary>
-        /// <param name="input">Instance of V1ViewPropertiesLegend to be compared</param>
+        /// <param name="input">Instance of Legend to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(V1ViewPropertiesLegend input)
+        public bool Equals(Legend input)
         {
             if (input == null)
                 return false;
