@@ -13,7 +13,7 @@ namespace InfluxDB.Client
     public class QueryApi : AbstractQueryClient
     {
         private readonly Dialect _defaultDialect;
-        
+
         private readonly QueryService _service;
 
         protected internal QueryApi(QueryService service) : base(service.Configuration.ApiClient.RestClient)
@@ -99,10 +99,10 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(query, nameof(query));
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
-            
+
             return Query<T>(CreateQuery(query), orgId);
         }
-        
+
         /// <summary>
         /// Executes the Flux query against the InfluxDB 2.0 and synchronously map whole response
         /// to list of object with given type.
@@ -121,7 +121,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNotNull(query, nameof(query));
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
-            
+
             var measurements = new List<T>();
 
             var consumer = new FluxResponseConsumerPoco<T>((cancellable, poco) => { measurements.Add(poco); });
@@ -355,7 +355,7 @@ namespace InfluxDB.Client
 
             Query(CreateQuery(query, _defaultDialect), orgId, consumer, onError, onComplete);
         }
-        
+
         /// <summary>
         /// Executes the Flux query against the InfluxDB 2.0 and asynchronously stream Measurements
         /// to a <see cref="onNext"/> consumer.
@@ -399,7 +399,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(query, nameof(query));
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
-            
+
             return QueryRaw(query, orgId, _defaultDialect);
         }
 
@@ -420,7 +420,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNotNull(query, nameof(query));
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
-            
+
             var rows = new List<string>();
 
             void Consumer(ICancellable cancellable, string row) => rows.Add(row);
@@ -449,7 +449,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(query, nameof(query));
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
-            
+
             return QueryRaw(CreateQuery(query, dialect), orgId);
         }
 
@@ -467,10 +467,10 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(query, nameof(query));
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
-            
+
             QueryRaw(query, orgId, onResponse, ErrorConsumer);
         }
-        
+
         /// <summary>
         /// Executes the Flux query against the InfluxDB 2.0 and asynchronously stream response
         /// (line by line) to <see cref="onResponse"/>.
@@ -485,7 +485,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNotNull(query, nameof(query));
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
-            
+
             QueryRaw(query, orgId, onResponse, ErrorConsumer);
         }
 
@@ -506,7 +506,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(query, nameof(query));
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
-            
+
             QueryRaw(query, orgId, dialect, onResponse, ErrorConsumer);
         }
 
@@ -525,7 +525,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(query, nameof(query));
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
-            
+
             QueryRaw(query, orgId, null, onResponse, onError, EmptyAction);
         }
 
@@ -545,7 +545,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNotNull(query, nameof(query));
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
-            
+
             QueryRaw(query, orgId, onResponse, onError, EmptyAction);
         }
 
@@ -567,7 +567,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(query, nameof(query));
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
-            
+
             QueryRaw(query, orgId, dialect, onResponse, onError, EmptyAction);
         }
 
@@ -588,10 +588,10 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(query, nameof(query));
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
-            
+
             QueryRaw(query, orgId, null, onResponse, onError, onComplete);
         }
-        
+
         /// <summary>
         /// Executes the Flux query against the InfluxDB 2.0 and asynchronously stream response
         /// (line by line) to <see cref="onResponse"/>.
@@ -609,7 +609,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNotNull(query, nameof(query));
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
-            
+
             var requestMessage = CreateRequest(query, orgId);
 
             QueryRaw(requestMessage, onResponse, onError, onComplete);
@@ -641,17 +641,17 @@ namespace InfluxDB.Client
 
             QueryRaw(CreateQuery(query, dialect), orgId, onResponse, onError, onComplete);
         }
-        
+
         protected override void BeforeIntercept(RestRequest request)
         {
             _service.Configuration.ApiClient.BeforeIntercept(request);
         }
-  
+
         protected override T AfterIntercept<T>(int statusCode, Func<IList<HttpHeader>> headers, T body)
         {
             return _service.Configuration.ApiClient.AfterIntercept(statusCode, headers, body);
         }
-        
+
         private void Query(Query query, string orgId, FluxCsvParser.IFluxResponseConsumer consumer,
             Action<Exception> onError,
             Action onComplete)
@@ -673,20 +673,18 @@ namespace InfluxDB.Client
             Arguments.CheckNotNull(query, nameof(query));
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
 
-            var request = _service.QueryPostWithRestRequest(null, "text/csv",
-                "application/json", null, orgId, query);
+            var request = _service.PostQueryWithRestRequest(null, "application/json", null, orgId, query);
             return request;
         }
-        
+
         private Query CreateQuery(string query, Dialect dialect = null)
         {
             Arguments.CheckNonEmptyString(query, nameof(query));
 
             var created = new Query(null, query);
             created.Dialect = dialect ?? _defaultDialect;
-            
+
             return created;
         }
-
     }
 }

@@ -25,29 +25,6 @@ namespace InfluxDB.Client.Api.Service
     {
         #region Synchronous Operations
         /// <summary>
-        /// Get all labels
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="orgID">specifies the organization of the resource (optional)</param>
-        /// <returns>LabelsResponse</returns>
-        LabelsResponse LabelsGet (string zapTraceSpan = null, string orgID = null);
-
-        /// <summary>
-        /// Get all labels
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="orgID">specifies the organization of the resource (optional)</param>
-        /// <returns>ApiResponse of LabelsResponse</returns>
-        ApiResponse<LabelsResponse> LabelsGetWithHttpInfo (string zapTraceSpan = null, string orgID = null);
-        /// <summary>
         /// Delete a label
         /// </summary>
         /// <remarks>
@@ -57,7 +34,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="labelID">ID of label to delete</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
-        void LabelsLabelIDDelete (string labelID, string zapTraceSpan = null);
+        void DeleteLabelsID (string labelID, string zapTraceSpan = null);
 
         /// <summary>
         /// Delete a label
@@ -69,7 +46,30 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="labelID">ID of label to delete</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<Object> LabelsLabelIDDeleteWithHttpInfo (string labelID, string zapTraceSpan = null);
+        ApiResponse<Object> DeleteLabelsIDWithHttpInfo (string labelID, string zapTraceSpan = null);
+        /// <summary>
+        /// Get all labels
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="orgID">specifies the organization of the resource (optional)</param>
+        /// <returns>LabelsResponse</returns>
+        LabelsResponse GetLabels (string zapTraceSpan = null, string orgID = null);
+
+        /// <summary>
+        /// Get all labels
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="orgID">specifies the organization of the resource (optional)</param>
+        /// <returns>ApiResponse of LabelsResponse</returns>
+        ApiResponse<LabelsResponse> GetLabelsWithHttpInfo (string zapTraceSpan = null, string orgID = null);
         /// <summary>
         /// Get a label
         /// </summary>
@@ -80,7 +80,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="labelID">ID of label to update</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>LabelResponse</returns>
-        LabelResponse LabelsLabelIDGet (string labelID, string zapTraceSpan = null);
+        LabelResponse GetLabelsID (string labelID, string zapTraceSpan = null);
 
         /// <summary>
         /// Get a label
@@ -92,7 +92,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="labelID">ID of label to update</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelResponse</returns>
-        ApiResponse<LabelResponse> LabelsLabelIDGetWithHttpInfo (string labelID, string zapTraceSpan = null);
+        ApiResponse<LabelResponse> GetLabelsIDWithHttpInfo (string labelID, string zapTraceSpan = null);
         /// <summary>
         /// Update a single label
         /// </summary>
@@ -104,7 +104,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="labelUpdate">label update</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>LabelResponse</returns>
-        LabelResponse LabelsLabelIDPatch (string labelID, LabelUpdate labelUpdate, string zapTraceSpan = null);
+        LabelResponse PatchLabelsID (string labelID, LabelUpdate labelUpdate, string zapTraceSpan = null);
 
         /// <summary>
         /// Update a single label
@@ -117,7 +117,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="labelUpdate">label update</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelResponse</returns>
-        ApiResponse<LabelResponse> LabelsLabelIDPatchWithHttpInfo (string labelID, LabelUpdate labelUpdate, string zapTraceSpan = null);
+        ApiResponse<LabelResponse> PatchLabelsIDWithHttpInfo (string labelID, LabelUpdate labelUpdate, string zapTraceSpan = null);
         /// <summary>
         /// Create a label
         /// </summary>
@@ -127,7 +127,7 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="labelCreateRequest">label to create</param>
         /// <returns>LabelResponse</returns>
-        LabelResponse LabelsPost (LabelCreateRequest labelCreateRequest);
+        LabelResponse PostLabels (LabelCreateRequest labelCreateRequest);
 
         /// <summary>
         /// Create a label
@@ -138,32 +138,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="labelCreateRequest">label to create</param>
         /// <returns>ApiResponse of LabelResponse</returns>
-        ApiResponse<LabelResponse> LabelsPostWithHttpInfo (LabelCreateRequest labelCreateRequest);
+        ApiResponse<LabelResponse> PostLabelsWithHttpInfo (LabelCreateRequest labelCreateRequest);
         #endregion Synchronous Operations
         #region Asynchronous Operations
-        /// <summary>
-        /// Get all labels
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="orgID">specifies the organization of the resource (optional)</param>
-        /// <returns>Task of LabelsResponse</returns>
-        System.Threading.Tasks.Task<LabelsResponse> LabelsGetAsync (string zapTraceSpan = null, string orgID = null);
-
-        /// <summary>
-        /// Get all labels
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="orgID">specifies the organization of the resource (optional)</param>
-        /// <returns>Task of ApiResponse (LabelsResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<LabelsResponse>> LabelsGetAsyncWithHttpInfo (string zapTraceSpan = null, string orgID = null);
         /// <summary>
         /// Delete a label
         /// </summary>
@@ -174,7 +151,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="labelID">ID of label to delete</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task LabelsLabelIDDeleteAsync (string labelID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task DeleteLabelsIDAsync (string labelID, string zapTraceSpan = null);
 
         /// <summary>
         /// Delete a label
@@ -186,7 +163,30 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="labelID">ID of label to delete</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> LabelsLabelIDDeleteAsyncWithHttpInfo (string labelID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<Object>> DeleteLabelsIDAsyncWithHttpInfo (string labelID, string zapTraceSpan = null);
+        /// <summary>
+        /// Get all labels
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="orgID">specifies the organization of the resource (optional)</param>
+        /// <returns>Task of LabelsResponse</returns>
+        System.Threading.Tasks.Task<LabelsResponse> GetLabelsAsync (string zapTraceSpan = null, string orgID = null);
+
+        /// <summary>
+        /// Get all labels
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="orgID">specifies the organization of the resource (optional)</param>
+        /// <returns>Task of ApiResponse (LabelsResponse)</returns>
+        System.Threading.Tasks.Task<ApiResponse<LabelsResponse>> GetLabelsAsyncWithHttpInfo (string zapTraceSpan = null, string orgID = null);
         /// <summary>
         /// Get a label
         /// </summary>
@@ -197,7 +197,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="labelID">ID of label to update</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of LabelResponse</returns>
-        System.Threading.Tasks.Task<LabelResponse> LabelsLabelIDGetAsync (string labelID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<LabelResponse> GetLabelsIDAsync (string labelID, string zapTraceSpan = null);
 
         /// <summary>
         /// Get a label
@@ -209,7 +209,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="labelID">ID of label to update</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (LabelResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<LabelResponse>> LabelsLabelIDGetAsyncWithHttpInfo (string labelID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<LabelResponse>> GetLabelsIDAsyncWithHttpInfo (string labelID, string zapTraceSpan = null);
         /// <summary>
         /// Update a single label
         /// </summary>
@@ -221,7 +221,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="labelUpdate">label update</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of LabelResponse</returns>
-        System.Threading.Tasks.Task<LabelResponse> LabelsLabelIDPatchAsync (string labelID, LabelUpdate labelUpdate, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<LabelResponse> PatchLabelsIDAsync (string labelID, LabelUpdate labelUpdate, string zapTraceSpan = null);
 
         /// <summary>
         /// Update a single label
@@ -234,7 +234,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="labelUpdate">label update</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (LabelResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<LabelResponse>> LabelsLabelIDPatchAsyncWithHttpInfo (string labelID, LabelUpdate labelUpdate, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<LabelResponse>> PatchLabelsIDAsyncWithHttpInfo (string labelID, LabelUpdate labelUpdate, string zapTraceSpan = null);
         /// <summary>
         /// Create a label
         /// </summary>
@@ -244,7 +244,7 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="labelCreateRequest">label to create</param>
         /// <returns>Task of LabelResponse</returns>
-        System.Threading.Tasks.Task<LabelResponse> LabelsPostAsync (LabelCreateRequest labelCreateRequest);
+        System.Threading.Tasks.Task<LabelResponse> PostLabelsAsync (LabelCreateRequest labelCreateRequest);
 
         /// <summary>
         /// Create a label
@@ -255,7 +255,7 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="labelCreateRequest">label to create</param>
         /// <returns>Task of ApiResponse (LabelResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<LabelResponse>> LabelsPostAsyncWithHttpInfo (LabelCreateRequest labelCreateRequest);
+        System.Threading.Tasks.Task<ApiResponse<LabelResponse>> PostLabelsAsyncWithHttpInfo (LabelCreateRequest labelCreateRequest);
         #endregion Asynchronous Operations
     }
 
@@ -357,15 +357,253 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
+        /// Delete a label 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="labelID">ID of label to delete</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns></returns>
+        public void DeleteLabelsID (string labelID, string zapTraceSpan = null)
+        {
+             DeleteLabelsIDWithHttpInfo(labelID, zapTraceSpan);
+        }
+
+        /// <summary>
+        /// Delete a label 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="labelID">ID of label to delete</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        public ApiResponse<Object> DeleteLabelsIDWithHttpInfo (string labelID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'labelID' is set
+            if (labelID == null)
+                throw new ApiException(400, "Missing required parameter 'labelID' when calling LabelsService->DeleteLabelsID");
+
+            var localVarPath = "/api/v2/labels/{labelID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (labelID != null) localVarPathParams.Add("labelID", this.Configuration.ApiClient.ParameterToString(labelID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("DeleteLabelsID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Object>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                null);
+        }
+
+        /// <summary>
+        /// Delete a label 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="labelID">ID of label to delete</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        public IRestResponse DeleteLabelsIDWithIRestResponse (string labelID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'labelID' is set
+            if (labelID == null)
+                throw new ApiException(400, "Missing required parameter 'labelID' when calling LabelsService->DeleteLabelsID");
+
+            var localVarPath = "/api/v2/labels/{labelID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (labelID != null) localVarPathParams.Add("labelID", this.Configuration.ApiClient.ParameterToString(labelID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("DeleteLabelsID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return localVarResponse;
+        }
+        
+        /// <summary>
+        /// Delete a label 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="labelID">ID of label to delete</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        public RestRequest DeleteLabelsIDWithRestRequest (string labelID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'labelID' is set
+            if (labelID == null)
+                throw new ApiException(400, "Missing required parameter 'labelID' when calling LabelsService->DeleteLabelsID");
+
+            var localVarPath = "/api/v2/labels/{labelID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (labelID != null) localVarPathParams.Add("labelID", this.Configuration.ApiClient.ParameterToString(labelID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
+                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+        }
+
+        /// <summary>
+        /// Delete a label 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="labelID">ID of label to delete</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of void</returns>
+        public async System.Threading.Tasks.Task DeleteLabelsIDAsync (string labelID, string zapTraceSpan = null)
+        {
+             await DeleteLabelsIDAsyncWithHttpInfo(labelID, zapTraceSpan);
+
+        }
+
+        /// <summary>
+        /// Delete a label 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="labelID">ID of label to delete</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ApiResponse</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteLabelsIDAsyncWithHttpInfo (string labelID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'labelID' is set
+            if (labelID == null)
+                throw new ApiException(400, "Missing required parameter 'labelID' when calling LabelsService->DeleteLabelsID");
+
+            var localVarPath = "/api/v2/labels/{labelID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (labelID != null) localVarPathParams.Add("labelID", this.Configuration.ApiClient.ParameterToString(labelID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("DeleteLabelsID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Object>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                null);
+        }
+
+        /// <summary>
         /// Get all labels 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="orgID">specifies the organization of the resource (optional)</param>
         /// <returns>LabelsResponse</returns>
-        public LabelsResponse LabelsGet (string zapTraceSpan = null, string orgID = null)
+        public LabelsResponse GetLabels (string zapTraceSpan = null, string orgID = null)
         {
-             ApiResponse<LabelsResponse> localVarResponse = LabelsGetWithHttpInfo(zapTraceSpan, orgID);
+             ApiResponse<LabelsResponse> localVarResponse = GetLabelsWithHttpInfo(zapTraceSpan, orgID);
              return localVarResponse.Data;
         }
 
@@ -376,7 +614,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="orgID">specifies the organization of the resource (optional)</param>
         /// <returns>ApiResponse of LabelsResponse</returns>
-        public ApiResponse< LabelsResponse > LabelsGetWithHttpInfo (string zapTraceSpan = null, string orgID = null)
+        public ApiResponse< LabelsResponse > GetLabelsWithHttpInfo (string zapTraceSpan = null, string orgID = null)
         {
 
             var localVarPath = "/api/v2/labels";
@@ -414,7 +652,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("LabelsGet", localVarResponse);
+                Exception exception = ExceptionFactory("GetLabels", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -430,7 +668,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="orgID">specifies the organization of the resource (optional)</param>
         /// <returns>ApiResponse of LabelsResponse</returns>
-        public IRestResponse LabelsGetWithIRestResponse (string zapTraceSpan = null, string orgID = null)
+        public IRestResponse GetLabelsWithIRestResponse (string zapTraceSpan = null, string orgID = null)
         {
 
             var localVarPath = "/api/v2/labels";
@@ -468,7 +706,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("LabelsGet", localVarResponse);
+                Exception exception = ExceptionFactory("GetLabels", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -482,7 +720,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="orgID">specifies the organization of the resource (optional)</param>
         /// <returns>ApiResponse of LabelsResponse</returns>
-        public RestRequest LabelsGetWithRestRequest (string zapTraceSpan = null, string orgID = null)
+        public RestRequest GetLabelsWithRestRequest (string zapTraceSpan = null, string orgID = null)
         {
 
             var localVarPath = "/api/v2/labels";
@@ -523,9 +761,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="orgID">specifies the organization of the resource (optional)</param>
         /// <returns>Task of LabelsResponse</returns>
-        public async System.Threading.Tasks.Task<LabelsResponse> LabelsGetAsync (string zapTraceSpan = null, string orgID = null)
+        public async System.Threading.Tasks.Task<LabelsResponse> GetLabelsAsync (string zapTraceSpan = null, string orgID = null)
         {
-             ApiResponse<LabelsResponse> localVarResponse = await LabelsGetAsyncWithHttpInfo(zapTraceSpan, orgID);
+             ApiResponse<LabelsResponse> localVarResponse = await GetLabelsAsyncWithHttpInfo(zapTraceSpan, orgID);
              return localVarResponse.Data;
 
         }
@@ -537,7 +775,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="orgID">specifies the organization of the resource (optional)</param>
         /// <returns>Task of ApiResponse (LabelsResponse)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<LabelsResponse>> LabelsGetAsyncWithHttpInfo (string zapTraceSpan = null, string orgID = null)
+        public async System.Threading.Tasks.Task<ApiResponse<LabelsResponse>> GetLabelsAsyncWithHttpInfo (string zapTraceSpan = null, string orgID = null)
         {
 
             var localVarPath = "/api/v2/labels";
@@ -575,7 +813,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("LabelsGet", localVarResponse);
+                Exception exception = ExceptionFactory("GetLabels", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -585,253 +823,15 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Delete a label 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="labelID">ID of label to delete</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns></returns>
-        public void LabelsLabelIDDelete (string labelID, string zapTraceSpan = null)
-        {
-             LabelsLabelIDDeleteWithHttpInfo(labelID, zapTraceSpan);
-        }
-
-        /// <summary>
-        /// Delete a label 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="labelID">ID of label to delete</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Object(void)</returns>
-        public ApiResponse<Object> LabelsLabelIDDeleteWithHttpInfo (string labelID, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'labelID' is set
-            if (labelID == null)
-                throw new ApiException(400, "Missing required parameter 'labelID' when calling LabelsService->LabelsLabelIDDelete");
-
-            var localVarPath = "/api/v2/labels/{labelID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (labelID != null) localVarPathParams.Add("labelID", this.Configuration.ApiClient.ParameterToString(labelID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("LabelsLabelIDDelete", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return new ApiResponse<Object>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                null);
-        }
-
-        /// <summary>
-        /// Delete a label 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="labelID">ID of label to delete</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Object(void)</returns>
-        public IRestResponse LabelsLabelIDDeleteWithIRestResponse (string labelID, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'labelID' is set
-            if (labelID == null)
-                throw new ApiException(400, "Missing required parameter 'labelID' when calling LabelsService->LabelsLabelIDDelete");
-
-            var localVarPath = "/api/v2/labels/{labelID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (labelID != null) localVarPathParams.Add("labelID", this.Configuration.ApiClient.ParameterToString(labelID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("LabelsLabelIDDelete", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return localVarResponse;
-        }
-        
-        /// <summary>
-        /// Delete a label 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="labelID">ID of label to delete</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Object(void)</returns>
-        public RestRequest LabelsLabelIDDeleteWithRestRequest (string labelID, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'labelID' is set
-            if (labelID == null)
-                throw new ApiException(400, "Missing required parameter 'labelID' when calling LabelsService->LabelsLabelIDDelete");
-
-            var localVarPath = "/api/v2/labels/{labelID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (labelID != null) localVarPathParams.Add("labelID", this.Configuration.ApiClient.ParameterToString(labelID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
-                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-        }
-
-        /// <summary>
-        /// Delete a label 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="labelID">ID of label to delete</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task LabelsLabelIDDeleteAsync (string labelID, string zapTraceSpan = null)
-        {
-             await LabelsLabelIDDeleteAsyncWithHttpInfo(labelID, zapTraceSpan);
-
-        }
-
-        /// <summary>
-        /// Delete a label 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="labelID">ID of label to delete</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Object>> LabelsLabelIDDeleteAsyncWithHttpInfo (string labelID, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'labelID' is set
-            if (labelID == null)
-                throw new ApiException(400, "Missing required parameter 'labelID' when calling LabelsService->LabelsLabelIDDelete");
-
-            var localVarPath = "/api/v2/labels/{labelID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (labelID != null) localVarPathParams.Add("labelID", this.Configuration.ApiClient.ParameterToString(labelID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("LabelsLabelIDDelete", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return new ApiResponse<Object>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                null);
-        }
-
-        /// <summary>
         /// Get a label 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="labelID">ID of label to update</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>LabelResponse</returns>
-        public LabelResponse LabelsLabelIDGet (string labelID, string zapTraceSpan = null)
+        public LabelResponse GetLabelsID (string labelID, string zapTraceSpan = null)
         {
-             ApiResponse<LabelResponse> localVarResponse = LabelsLabelIDGetWithHttpInfo(labelID, zapTraceSpan);
+             ApiResponse<LabelResponse> localVarResponse = GetLabelsIDWithHttpInfo(labelID, zapTraceSpan);
              return localVarResponse.Data;
         }
 
@@ -842,11 +842,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="labelID">ID of label to update</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelResponse</returns>
-        public ApiResponse< LabelResponse > LabelsLabelIDGetWithHttpInfo (string labelID, string zapTraceSpan = null)
+        public ApiResponse< LabelResponse > GetLabelsIDWithHttpInfo (string labelID, string zapTraceSpan = null)
         {
             // verify the required parameter 'labelID' is set
             if (labelID == null)
-                throw new ApiException(400, "Missing required parameter 'labelID' when calling LabelsService->LabelsLabelIDGet");
+                throw new ApiException(400, "Missing required parameter 'labelID' when calling LabelsService->GetLabelsID");
 
             var localVarPath = "/api/v2/labels/{labelID}";
             var localVarPathParams = new Dictionary<String, String>();
@@ -883,7 +883,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("LabelsLabelIDGet", localVarResponse);
+                Exception exception = ExceptionFactory("GetLabelsID", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -899,11 +899,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="labelID">ID of label to update</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelResponse</returns>
-        public IRestResponse LabelsLabelIDGetWithIRestResponse (string labelID, string zapTraceSpan = null)
+        public IRestResponse GetLabelsIDWithIRestResponse (string labelID, string zapTraceSpan = null)
         {
             // verify the required parameter 'labelID' is set
             if (labelID == null)
-                throw new ApiException(400, "Missing required parameter 'labelID' when calling LabelsService->LabelsLabelIDGet");
+                throw new ApiException(400, "Missing required parameter 'labelID' when calling LabelsService->GetLabelsID");
 
             var localVarPath = "/api/v2/labels/{labelID}";
             var localVarPathParams = new Dictionary<String, String>();
@@ -940,7 +940,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("LabelsLabelIDGet", localVarResponse);
+                Exception exception = ExceptionFactory("GetLabelsID", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -954,11 +954,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="labelID">ID of label to update</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelResponse</returns>
-        public RestRequest LabelsLabelIDGetWithRestRequest (string labelID, string zapTraceSpan = null)
+        public RestRequest GetLabelsIDWithRestRequest (string labelID, string zapTraceSpan = null)
         {
             // verify the required parameter 'labelID' is set
             if (labelID == null)
-                throw new ApiException(400, "Missing required parameter 'labelID' when calling LabelsService->LabelsLabelIDGet");
+                throw new ApiException(400, "Missing required parameter 'labelID' when calling LabelsService->GetLabelsID");
 
             var localVarPath = "/api/v2/labels/{labelID}";
             var localVarPathParams = new Dictionary<String, String>();
@@ -998,9 +998,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="labelID">ID of label to update</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of LabelResponse</returns>
-        public async System.Threading.Tasks.Task<LabelResponse> LabelsLabelIDGetAsync (string labelID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<LabelResponse> GetLabelsIDAsync (string labelID, string zapTraceSpan = null)
         {
-             ApiResponse<LabelResponse> localVarResponse = await LabelsLabelIDGetAsyncWithHttpInfo(labelID, zapTraceSpan);
+             ApiResponse<LabelResponse> localVarResponse = await GetLabelsIDAsyncWithHttpInfo(labelID, zapTraceSpan);
              return localVarResponse.Data;
 
         }
@@ -1012,11 +1012,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="labelID">ID of label to update</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (LabelResponse)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<LabelResponse>> LabelsLabelIDGetAsyncWithHttpInfo (string labelID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<LabelResponse>> GetLabelsIDAsyncWithHttpInfo (string labelID, string zapTraceSpan = null)
         {
             // verify the required parameter 'labelID' is set
             if (labelID == null)
-                throw new ApiException(400, "Missing required parameter 'labelID' when calling LabelsService->LabelsLabelIDGet");
+                throw new ApiException(400, "Missing required parameter 'labelID' when calling LabelsService->GetLabelsID");
 
             var localVarPath = "/api/v2/labels/{labelID}";
             var localVarPathParams = new Dictionary<String, String>();
@@ -1053,7 +1053,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("LabelsLabelIDGet", localVarResponse);
+                Exception exception = ExceptionFactory("GetLabelsID", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -1070,9 +1070,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="labelUpdate">label update</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>LabelResponse</returns>
-        public LabelResponse LabelsLabelIDPatch (string labelID, LabelUpdate labelUpdate, string zapTraceSpan = null)
+        public LabelResponse PatchLabelsID (string labelID, LabelUpdate labelUpdate, string zapTraceSpan = null)
         {
-             ApiResponse<LabelResponse> localVarResponse = LabelsLabelIDPatchWithHttpInfo(labelID, labelUpdate, zapTraceSpan);
+             ApiResponse<LabelResponse> localVarResponse = PatchLabelsIDWithHttpInfo(labelID, labelUpdate, zapTraceSpan);
              return localVarResponse.Data;
         }
 
@@ -1084,14 +1084,14 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="labelUpdate">label update</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelResponse</returns>
-        public ApiResponse< LabelResponse > LabelsLabelIDPatchWithHttpInfo (string labelID, LabelUpdate labelUpdate, string zapTraceSpan = null)
+        public ApiResponse< LabelResponse > PatchLabelsIDWithHttpInfo (string labelID, LabelUpdate labelUpdate, string zapTraceSpan = null)
         {
             // verify the required parameter 'labelID' is set
             if (labelID == null)
-                throw new ApiException(400, "Missing required parameter 'labelID' when calling LabelsService->LabelsLabelIDPatch");
+                throw new ApiException(400, "Missing required parameter 'labelID' when calling LabelsService->PatchLabelsID");
             // verify the required parameter 'labelUpdate' is set
             if (labelUpdate == null)
-                throw new ApiException(400, "Missing required parameter 'labelUpdate' when calling LabelsService->LabelsLabelIDPatch");
+                throw new ApiException(400, "Missing required parameter 'labelUpdate' when calling LabelsService->PatchLabelsID");
 
             var localVarPath = "/api/v2/labels/{labelID}";
             var localVarPathParams = new Dictionary<String, String>();
@@ -1137,7 +1137,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("LabelsLabelIDPatch", localVarResponse);
+                Exception exception = ExceptionFactory("PatchLabelsID", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -1154,14 +1154,14 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="labelUpdate">label update</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelResponse</returns>
-        public IRestResponse LabelsLabelIDPatchWithIRestResponse (string labelID, LabelUpdate labelUpdate, string zapTraceSpan = null)
+        public IRestResponse PatchLabelsIDWithIRestResponse (string labelID, LabelUpdate labelUpdate, string zapTraceSpan = null)
         {
             // verify the required parameter 'labelID' is set
             if (labelID == null)
-                throw new ApiException(400, "Missing required parameter 'labelID' when calling LabelsService->LabelsLabelIDPatch");
+                throw new ApiException(400, "Missing required parameter 'labelID' when calling LabelsService->PatchLabelsID");
             // verify the required parameter 'labelUpdate' is set
             if (labelUpdate == null)
-                throw new ApiException(400, "Missing required parameter 'labelUpdate' when calling LabelsService->LabelsLabelIDPatch");
+                throw new ApiException(400, "Missing required parameter 'labelUpdate' when calling LabelsService->PatchLabelsID");
 
             var localVarPath = "/api/v2/labels/{labelID}";
             var localVarPathParams = new Dictionary<String, String>();
@@ -1207,7 +1207,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("LabelsLabelIDPatch", localVarResponse);
+                Exception exception = ExceptionFactory("PatchLabelsID", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -1222,14 +1222,14 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="labelUpdate">label update</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelResponse</returns>
-        public RestRequest LabelsLabelIDPatchWithRestRequest (string labelID, LabelUpdate labelUpdate, string zapTraceSpan = null)
+        public RestRequest PatchLabelsIDWithRestRequest (string labelID, LabelUpdate labelUpdate, string zapTraceSpan = null)
         {
             // verify the required parameter 'labelID' is set
             if (labelID == null)
-                throw new ApiException(400, "Missing required parameter 'labelID' when calling LabelsService->LabelsLabelIDPatch");
+                throw new ApiException(400, "Missing required parameter 'labelID' when calling LabelsService->PatchLabelsID");
             // verify the required parameter 'labelUpdate' is set
             if (labelUpdate == null)
-                throw new ApiException(400, "Missing required parameter 'labelUpdate' when calling LabelsService->LabelsLabelIDPatch");
+                throw new ApiException(400, "Missing required parameter 'labelUpdate' when calling LabelsService->PatchLabelsID");
 
             var localVarPath = "/api/v2/labels/{labelID}";
             var localVarPathParams = new Dictionary<String, String>();
@@ -1279,9 +1279,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="labelUpdate">label update</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of LabelResponse</returns>
-        public async System.Threading.Tasks.Task<LabelResponse> LabelsLabelIDPatchAsync (string labelID, LabelUpdate labelUpdate, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<LabelResponse> PatchLabelsIDAsync (string labelID, LabelUpdate labelUpdate, string zapTraceSpan = null)
         {
-             ApiResponse<LabelResponse> localVarResponse = await LabelsLabelIDPatchAsyncWithHttpInfo(labelID, labelUpdate, zapTraceSpan);
+             ApiResponse<LabelResponse> localVarResponse = await PatchLabelsIDAsyncWithHttpInfo(labelID, labelUpdate, zapTraceSpan);
              return localVarResponse.Data;
 
         }
@@ -1294,14 +1294,14 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="labelUpdate">label update</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (LabelResponse)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<LabelResponse>> LabelsLabelIDPatchAsyncWithHttpInfo (string labelID, LabelUpdate labelUpdate, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<LabelResponse>> PatchLabelsIDAsyncWithHttpInfo (string labelID, LabelUpdate labelUpdate, string zapTraceSpan = null)
         {
             // verify the required parameter 'labelID' is set
             if (labelID == null)
-                throw new ApiException(400, "Missing required parameter 'labelID' when calling LabelsService->LabelsLabelIDPatch");
+                throw new ApiException(400, "Missing required parameter 'labelID' when calling LabelsService->PatchLabelsID");
             // verify the required parameter 'labelUpdate' is set
             if (labelUpdate == null)
-                throw new ApiException(400, "Missing required parameter 'labelUpdate' when calling LabelsService->LabelsLabelIDPatch");
+                throw new ApiException(400, "Missing required parameter 'labelUpdate' when calling LabelsService->PatchLabelsID");
 
             var localVarPath = "/api/v2/labels/{labelID}";
             var localVarPathParams = new Dictionary<String, String>();
@@ -1347,7 +1347,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("LabelsLabelIDPatch", localVarResponse);
+                Exception exception = ExceptionFactory("PatchLabelsID", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -1362,9 +1362,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="labelCreateRequest">label to create</param>
         /// <returns>LabelResponse</returns>
-        public LabelResponse LabelsPost (LabelCreateRequest labelCreateRequest)
+        public LabelResponse PostLabels (LabelCreateRequest labelCreateRequest)
         {
-             ApiResponse<LabelResponse> localVarResponse = LabelsPostWithHttpInfo(labelCreateRequest);
+             ApiResponse<LabelResponse> localVarResponse = PostLabelsWithHttpInfo(labelCreateRequest);
              return localVarResponse.Data;
         }
 
@@ -1374,11 +1374,11 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="labelCreateRequest">label to create</param>
         /// <returns>ApiResponse of LabelResponse</returns>
-        public ApiResponse< LabelResponse > LabelsPostWithHttpInfo (LabelCreateRequest labelCreateRequest)
+        public ApiResponse< LabelResponse > PostLabelsWithHttpInfo (LabelCreateRequest labelCreateRequest)
         {
             // verify the required parameter 'labelCreateRequest' is set
             if (labelCreateRequest == null)
-                throw new ApiException(400, "Missing required parameter 'labelCreateRequest' when calling LabelsService->LabelsPost");
+                throw new ApiException(400, "Missing required parameter 'labelCreateRequest' when calling LabelsService->PostLabels");
 
             var localVarPath = "/api/v2/labels";
             var localVarPathParams = new Dictionary<String, String>();
@@ -1422,7 +1422,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("LabelsPost", localVarResponse);
+                Exception exception = ExceptionFactory("PostLabels", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -1437,11 +1437,11 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="labelCreateRequest">label to create</param>
         /// <returns>ApiResponse of LabelResponse</returns>
-        public IRestResponse LabelsPostWithIRestResponse (LabelCreateRequest labelCreateRequest)
+        public IRestResponse PostLabelsWithIRestResponse (LabelCreateRequest labelCreateRequest)
         {
             // verify the required parameter 'labelCreateRequest' is set
             if (labelCreateRequest == null)
-                throw new ApiException(400, "Missing required parameter 'labelCreateRequest' when calling LabelsService->LabelsPost");
+                throw new ApiException(400, "Missing required parameter 'labelCreateRequest' when calling LabelsService->PostLabels");
 
             var localVarPath = "/api/v2/labels";
             var localVarPathParams = new Dictionary<String, String>();
@@ -1485,7 +1485,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("LabelsPost", localVarResponse);
+                Exception exception = ExceptionFactory("PostLabels", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -1498,11 +1498,11 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="labelCreateRequest">label to create</param>
         /// <returns>ApiResponse of LabelResponse</returns>
-        public RestRequest LabelsPostWithRestRequest (LabelCreateRequest labelCreateRequest)
+        public RestRequest PostLabelsWithRestRequest (LabelCreateRequest labelCreateRequest)
         {
             // verify the required parameter 'labelCreateRequest' is set
             if (labelCreateRequest == null)
-                throw new ApiException(400, "Missing required parameter 'labelCreateRequest' when calling LabelsService->LabelsPost");
+                throw new ApiException(400, "Missing required parameter 'labelCreateRequest' when calling LabelsService->PostLabels");
 
             var localVarPath = "/api/v2/labels";
             var localVarPathParams = new Dictionary<String, String>();
@@ -1548,9 +1548,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="labelCreateRequest">label to create</param>
         /// <returns>Task of LabelResponse</returns>
-        public async System.Threading.Tasks.Task<LabelResponse> LabelsPostAsync (LabelCreateRequest labelCreateRequest)
+        public async System.Threading.Tasks.Task<LabelResponse> PostLabelsAsync (LabelCreateRequest labelCreateRequest)
         {
-             ApiResponse<LabelResponse> localVarResponse = await LabelsPostAsyncWithHttpInfo(labelCreateRequest);
+             ApiResponse<LabelResponse> localVarResponse = await PostLabelsAsyncWithHttpInfo(labelCreateRequest);
              return localVarResponse.Data;
 
         }
@@ -1561,11 +1561,11 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="labelCreateRequest">label to create</param>
         /// <returns>Task of ApiResponse (LabelResponse)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<LabelResponse>> LabelsPostAsyncWithHttpInfo (LabelCreateRequest labelCreateRequest)
+        public async System.Threading.Tasks.Task<ApiResponse<LabelResponse>> PostLabelsAsyncWithHttpInfo (LabelCreateRequest labelCreateRequest)
         {
             // verify the required parameter 'labelCreateRequest' is set
             if (labelCreateRequest == null)
-                throw new ApiException(400, "Missing required parameter 'labelCreateRequest' when calling LabelsService->LabelsPost");
+                throw new ApiException(400, "Missing required parameter 'labelCreateRequest' when calling LabelsService->PostLabels");
 
             var localVarPath = "/api/v2/labels";
             var localVarPathParams = new Dictionary<String, String>();
@@ -1609,7 +1609,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("LabelsPost", localVarResponse);
+                Exception exception = ExceptionFactory("PostLabels", localVarResponse);
                 if (exception != null) throw exception;
             }
 

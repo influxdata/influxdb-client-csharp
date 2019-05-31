@@ -34,7 +34,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="authID">ID of authorization to delete</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
-        void AuthorizationsAuthIDDelete (string authID, string zapTraceSpan = null);
+        void DeleteAuthorizationsID (string authID, string zapTraceSpan = null);
 
         /// <summary>
         /// Delete a authorization
@@ -46,55 +46,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="authID">ID of authorization to delete</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<Object> AuthorizationsAuthIDDeleteWithHttpInfo (string authID, string zapTraceSpan = null);
-        /// <summary>
-        /// Retrieve an authorization
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="authID">ID of authorization to get</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Authorization</returns>
-        Authorization AuthorizationsAuthIDGet (string authID, string zapTraceSpan = null);
-
-        /// <summary>
-        /// Retrieve an authorization
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="authID">ID of authorization to get</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Authorization</returns>
-        ApiResponse<Authorization> AuthorizationsAuthIDGetWithHttpInfo (string authID, string zapTraceSpan = null);
-        /// <summary>
-        /// update authorization to be active or inactive. requests using an inactive authorization will be rejected.
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="authID">ID of authorization to update</param>
-        /// <param name="authorizationUpdateRequest">authorization to update to apply</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Authorization</returns>
-        Authorization AuthorizationsAuthIDPatch (string authID, AuthorizationUpdateRequest authorizationUpdateRequest, string zapTraceSpan = null);
-
-        /// <summary>
-        /// update authorization to be active or inactive. requests using an inactive authorization will be rejected.
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="authID">ID of authorization to update</param>
-        /// <param name="authorizationUpdateRequest">authorization to update to apply</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Authorization</returns>
-        ApiResponse<Authorization> AuthorizationsAuthIDPatchWithHttpInfo (string authID, AuthorizationUpdateRequest authorizationUpdateRequest, string zapTraceSpan = null);
+        ApiResponse<Object> DeleteAuthorizationsIDWithHttpInfo (string authID, string zapTraceSpan = null);
         /// <summary>
         /// List all authorizations
         /// </summary>
@@ -108,7 +60,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">filter authorizations belonging to a org id (optional)</param>
         /// <param name="org">filter authorizations belonging to a org name (optional)</param>
         /// <returns>Authorizations</returns>
-        Authorizations AuthorizationsGet (string zapTraceSpan = null, string userID = null, string user = null, string orgID = null, string org = null);
+        Authorizations GetAuthorizations (string zapTraceSpan = null, string userID = null, string user = null, string orgID = null, string org = null);
 
         /// <summary>
         /// List all authorizations
@@ -123,7 +75,55 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">filter authorizations belonging to a org id (optional)</param>
         /// <param name="org">filter authorizations belonging to a org name (optional)</param>
         /// <returns>ApiResponse of Authorizations</returns>
-        ApiResponse<Authorizations> AuthorizationsGetWithHttpInfo (string zapTraceSpan = null, string userID = null, string user = null, string orgID = null, string org = null);
+        ApiResponse<Authorizations> GetAuthorizationsWithHttpInfo (string zapTraceSpan = null, string userID = null, string user = null, string orgID = null, string org = null);
+        /// <summary>
+        /// Retrieve an authorization
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="authID">ID of authorization to get</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Authorization</returns>
+        Authorization GetAuthorizationsID (string authID, string zapTraceSpan = null);
+
+        /// <summary>
+        /// Retrieve an authorization
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="authID">ID of authorization to get</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Authorization</returns>
+        ApiResponse<Authorization> GetAuthorizationsIDWithHttpInfo (string authID, string zapTraceSpan = null);
+        /// <summary>
+        /// update authorization to be active or inactive. requests using an inactive authorization will be rejected.
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="authID">ID of authorization to update</param>
+        /// <param name="authorizationUpdateRequest">authorization to update to apply</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Authorization</returns>
+        Authorization PatchAuthorizationsID (string authID, AuthorizationUpdateRequest authorizationUpdateRequest, string zapTraceSpan = null);
+
+        /// <summary>
+        /// update authorization to be active or inactive. requests using an inactive authorization will be rejected.
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="authID">ID of authorization to update</param>
+        /// <param name="authorizationUpdateRequest">authorization to update to apply</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Authorization</returns>
+        ApiResponse<Authorization> PatchAuthorizationsIDWithHttpInfo (string authID, AuthorizationUpdateRequest authorizationUpdateRequest, string zapTraceSpan = null);
         /// <summary>
         /// Create an authorization
         /// </summary>
@@ -134,7 +134,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="authorization">authorization to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Authorization</returns>
-        Authorization AuthorizationsPost (Authorization authorization, string zapTraceSpan = null);
+        Authorization PostAuthorizations (Authorization authorization, string zapTraceSpan = null);
 
         /// <summary>
         /// Create an authorization
@@ -146,7 +146,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="authorization">authorization to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Authorization</returns>
-        ApiResponse<Authorization> AuthorizationsPostWithHttpInfo (Authorization authorization, string zapTraceSpan = null);
+        ApiResponse<Authorization> PostAuthorizationsWithHttpInfo (Authorization authorization, string zapTraceSpan = null);
         #endregion Synchronous Operations
         #region Asynchronous Operations
         /// <summary>
@@ -159,7 +159,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="authID">ID of authorization to delete</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task AuthorizationsAuthIDDeleteAsync (string authID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task DeleteAuthorizationsIDAsync (string authID, string zapTraceSpan = null);
 
         /// <summary>
         /// Delete a authorization
@@ -171,55 +171,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="authID">ID of authorization to delete</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> AuthorizationsAuthIDDeleteAsyncWithHttpInfo (string authID, string zapTraceSpan = null);
-        /// <summary>
-        /// Retrieve an authorization
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="authID">ID of authorization to get</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of Authorization</returns>
-        System.Threading.Tasks.Task<Authorization> AuthorizationsAuthIDGetAsync (string authID, string zapTraceSpan = null);
-
-        /// <summary>
-        /// Retrieve an authorization
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="authID">ID of authorization to get</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ApiResponse (Authorization)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Authorization>> AuthorizationsAuthIDGetAsyncWithHttpInfo (string authID, string zapTraceSpan = null);
-        /// <summary>
-        /// update authorization to be active or inactive. requests using an inactive authorization will be rejected.
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="authID">ID of authorization to update</param>
-        /// <param name="authorizationUpdateRequest">authorization to update to apply</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of Authorization</returns>
-        System.Threading.Tasks.Task<Authorization> AuthorizationsAuthIDPatchAsync (string authID, AuthorizationUpdateRequest authorizationUpdateRequest, string zapTraceSpan = null);
-
-        /// <summary>
-        /// update authorization to be active or inactive. requests using an inactive authorization will be rejected.
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="authID">ID of authorization to update</param>
-        /// <param name="authorizationUpdateRequest">authorization to update to apply</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ApiResponse (Authorization)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Authorization>> AuthorizationsAuthIDPatchAsyncWithHttpInfo (string authID, AuthorizationUpdateRequest authorizationUpdateRequest, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<Object>> DeleteAuthorizationsIDAsyncWithHttpInfo (string authID, string zapTraceSpan = null);
         /// <summary>
         /// List all authorizations
         /// </summary>
@@ -233,7 +185,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">filter authorizations belonging to a org id (optional)</param>
         /// <param name="org">filter authorizations belonging to a org name (optional)</param>
         /// <returns>Task of Authorizations</returns>
-        System.Threading.Tasks.Task<Authorizations> AuthorizationsGetAsync (string zapTraceSpan = null, string userID = null, string user = null, string orgID = null, string org = null);
+        System.Threading.Tasks.Task<Authorizations> GetAuthorizationsAsync (string zapTraceSpan = null, string userID = null, string user = null, string orgID = null, string org = null);
 
         /// <summary>
         /// List all authorizations
@@ -248,7 +200,55 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">filter authorizations belonging to a org id (optional)</param>
         /// <param name="org">filter authorizations belonging to a org name (optional)</param>
         /// <returns>Task of ApiResponse (Authorizations)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Authorizations>> AuthorizationsGetAsyncWithHttpInfo (string zapTraceSpan = null, string userID = null, string user = null, string orgID = null, string org = null);
+        System.Threading.Tasks.Task<ApiResponse<Authorizations>> GetAuthorizationsAsyncWithHttpInfo (string zapTraceSpan = null, string userID = null, string user = null, string orgID = null, string org = null);
+        /// <summary>
+        /// Retrieve an authorization
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="authID">ID of authorization to get</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of Authorization</returns>
+        System.Threading.Tasks.Task<Authorization> GetAuthorizationsIDAsync (string authID, string zapTraceSpan = null);
+
+        /// <summary>
+        /// Retrieve an authorization
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="authID">ID of authorization to get</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ApiResponse (Authorization)</returns>
+        System.Threading.Tasks.Task<ApiResponse<Authorization>> GetAuthorizationsIDAsyncWithHttpInfo (string authID, string zapTraceSpan = null);
+        /// <summary>
+        /// update authorization to be active or inactive. requests using an inactive authorization will be rejected.
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="authID">ID of authorization to update</param>
+        /// <param name="authorizationUpdateRequest">authorization to update to apply</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of Authorization</returns>
+        System.Threading.Tasks.Task<Authorization> PatchAuthorizationsIDAsync (string authID, AuthorizationUpdateRequest authorizationUpdateRequest, string zapTraceSpan = null);
+
+        /// <summary>
+        /// update authorization to be active or inactive. requests using an inactive authorization will be rejected.
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="authID">ID of authorization to update</param>
+        /// <param name="authorizationUpdateRequest">authorization to update to apply</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ApiResponse (Authorization)</returns>
+        System.Threading.Tasks.Task<ApiResponse<Authorization>> PatchAuthorizationsIDAsyncWithHttpInfo (string authID, AuthorizationUpdateRequest authorizationUpdateRequest, string zapTraceSpan = null);
         /// <summary>
         /// Create an authorization
         /// </summary>
@@ -259,7 +259,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="authorization">authorization to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of Authorization</returns>
-        System.Threading.Tasks.Task<Authorization> AuthorizationsPostAsync (Authorization authorization, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<Authorization> PostAuthorizationsAsync (Authorization authorization, string zapTraceSpan = null);
 
         /// <summary>
         /// Create an authorization
@@ -271,7 +271,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="authorization">authorization to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (Authorization)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Authorization>> AuthorizationsPostAsyncWithHttpInfo (Authorization authorization, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<Authorization>> PostAuthorizationsAsyncWithHttpInfo (Authorization authorization, string zapTraceSpan = null);
         #endregion Asynchronous Operations
     }
 
@@ -379,9 +379,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="authID">ID of authorization to delete</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
-        public void AuthorizationsAuthIDDelete (string authID, string zapTraceSpan = null)
+        public void DeleteAuthorizationsID (string authID, string zapTraceSpan = null)
         {
-             AuthorizationsAuthIDDeleteWithHttpInfo(authID, zapTraceSpan);
+             DeleteAuthorizationsIDWithHttpInfo(authID, zapTraceSpan);
         }
 
         /// <summary>
@@ -391,11 +391,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="authID">ID of authorization to delete</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public ApiResponse<Object> AuthorizationsAuthIDDeleteWithHttpInfo (string authID, string zapTraceSpan = null)
+        public ApiResponse<Object> DeleteAuthorizationsIDWithHttpInfo (string authID, string zapTraceSpan = null)
         {
             // verify the required parameter 'authID' is set
             if (authID == null)
-                throw new ApiException(400, "Missing required parameter 'authID' when calling AuthorizationsService->AuthorizationsAuthIDDelete");
+                throw new ApiException(400, "Missing required parameter 'authID' when calling AuthorizationsService->DeleteAuthorizationsID");
 
             var localVarPath = "/api/v2/authorizations/{authID}";
             var localVarPathParams = new Dictionary<String, String>();
@@ -432,7 +432,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("AuthorizationsAuthIDDelete", localVarResponse);
+                Exception exception = ExceptionFactory("DeleteAuthorizationsID", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -448,11 +448,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="authID">ID of authorization to delete</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public IRestResponse AuthorizationsAuthIDDeleteWithIRestResponse (string authID, string zapTraceSpan = null)
+        public IRestResponse DeleteAuthorizationsIDWithIRestResponse (string authID, string zapTraceSpan = null)
         {
             // verify the required parameter 'authID' is set
             if (authID == null)
-                throw new ApiException(400, "Missing required parameter 'authID' when calling AuthorizationsService->AuthorizationsAuthIDDelete");
+                throw new ApiException(400, "Missing required parameter 'authID' when calling AuthorizationsService->DeleteAuthorizationsID");
 
             var localVarPath = "/api/v2/authorizations/{authID}";
             var localVarPathParams = new Dictionary<String, String>();
@@ -489,7 +489,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("AuthorizationsAuthIDDelete", localVarResponse);
+                Exception exception = ExceptionFactory("DeleteAuthorizationsID", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -503,11 +503,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="authID">ID of authorization to delete</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public RestRequest AuthorizationsAuthIDDeleteWithRestRequest (string authID, string zapTraceSpan = null)
+        public RestRequest DeleteAuthorizationsIDWithRestRequest (string authID, string zapTraceSpan = null)
         {
             // verify the required parameter 'authID' is set
             if (authID == null)
-                throw new ApiException(400, "Missing required parameter 'authID' when calling AuthorizationsService->AuthorizationsAuthIDDelete");
+                throw new ApiException(400, "Missing required parameter 'authID' when calling AuthorizationsService->DeleteAuthorizationsID");
 
             var localVarPath = "/api/v2/authorizations/{authID}";
             var localVarPathParams = new Dictionary<String, String>();
@@ -547,9 +547,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="authID">ID of authorization to delete</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task AuthorizationsAuthIDDeleteAsync (string authID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task DeleteAuthorizationsIDAsync (string authID, string zapTraceSpan = null)
         {
-             await AuthorizationsAuthIDDeleteAsyncWithHttpInfo(authID, zapTraceSpan);
+             await DeleteAuthorizationsIDAsyncWithHttpInfo(authID, zapTraceSpan);
 
         }
 
@@ -560,11 +560,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="authID">ID of authorization to delete</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Object>> AuthorizationsAuthIDDeleteAsyncWithHttpInfo (string authID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteAuthorizationsIDAsyncWithHttpInfo (string authID, string zapTraceSpan = null)
         {
             // verify the required parameter 'authID' is set
             if (authID == null)
-                throw new ApiException(400, "Missing required parameter 'authID' when calling AuthorizationsService->AuthorizationsAuthIDDelete");
+                throw new ApiException(400, "Missing required parameter 'authID' when calling AuthorizationsService->DeleteAuthorizationsID");
 
             var localVarPath = "/api/v2/authorizations/{authID}";
             var localVarPathParams = new Dictionary<String, String>();
@@ -601,547 +601,13 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("AuthorizationsAuthIDDelete", localVarResponse);
+                Exception exception = ExceptionFactory("DeleteAuthorizationsID", localVarResponse);
                 if (exception != null) throw exception;
             }
 
             return new ApiResponse<Object>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
                 null);
-        }
-
-        /// <summary>
-        /// Retrieve an authorization 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="authID">ID of authorization to get</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Authorization</returns>
-        public Authorization AuthorizationsAuthIDGet (string authID, string zapTraceSpan = null)
-        {
-             ApiResponse<Authorization> localVarResponse = AuthorizationsAuthIDGetWithHttpInfo(authID, zapTraceSpan);
-             return localVarResponse.Data;
-        }
-
-        /// <summary>
-        /// Retrieve an authorization 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="authID">ID of authorization to get</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Authorization</returns>
-        public ApiResponse< Authorization > AuthorizationsAuthIDGetWithHttpInfo (string authID, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'authID' is set
-            if (authID == null)
-                throw new ApiException(400, "Missing required parameter 'authID' when calling AuthorizationsService->AuthorizationsAuthIDGet");
-
-            var localVarPath = "/api/v2/authorizations/{authID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (authID != null) localVarPathParams.Add("authID", this.Configuration.ApiClient.ParameterToString(authID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("AuthorizationsAuthIDGet", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return new ApiResponse<Authorization>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (Authorization) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Authorization)));
-        }
-
-        /// <summary>
-        /// Retrieve an authorization 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="authID">ID of authorization to get</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Authorization</returns>
-        public IRestResponse AuthorizationsAuthIDGetWithIRestResponse (string authID, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'authID' is set
-            if (authID == null)
-                throw new ApiException(400, "Missing required parameter 'authID' when calling AuthorizationsService->AuthorizationsAuthIDGet");
-
-            var localVarPath = "/api/v2/authorizations/{authID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (authID != null) localVarPathParams.Add("authID", this.Configuration.ApiClient.ParameterToString(authID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("AuthorizationsAuthIDGet", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return localVarResponse;
-        }
-        
-        /// <summary>
-        /// Retrieve an authorization 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="authID">ID of authorization to get</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Authorization</returns>
-        public RestRequest AuthorizationsAuthIDGetWithRestRequest (string authID, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'authID' is set
-            if (authID == null)
-                throw new ApiException(400, "Missing required parameter 'authID' when calling AuthorizationsService->AuthorizationsAuthIDGet");
-
-            var localVarPath = "/api/v2/authorizations/{authID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (authID != null) localVarPathParams.Add("authID", this.Configuration.ApiClient.ParameterToString(authID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-        }
-
-        /// <summary>
-        /// Retrieve an authorization 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="authID">ID of authorization to get</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of Authorization</returns>
-        public async System.Threading.Tasks.Task<Authorization> AuthorizationsAuthIDGetAsync (string authID, string zapTraceSpan = null)
-        {
-             ApiResponse<Authorization> localVarResponse = await AuthorizationsAuthIDGetAsyncWithHttpInfo(authID, zapTraceSpan);
-             return localVarResponse.Data;
-
-        }
-
-        /// <summary>
-        /// Retrieve an authorization 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="authID">ID of authorization to get</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ApiResponse (Authorization)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Authorization>> AuthorizationsAuthIDGetAsyncWithHttpInfo (string authID, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'authID' is set
-            if (authID == null)
-                throw new ApiException(400, "Missing required parameter 'authID' when calling AuthorizationsService->AuthorizationsAuthIDGet");
-
-            var localVarPath = "/api/v2/authorizations/{authID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (authID != null) localVarPathParams.Add("authID", this.Configuration.ApiClient.ParameterToString(authID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("AuthorizationsAuthIDGet", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return new ApiResponse<Authorization>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (Authorization) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Authorization)));
-        }
-
-        /// <summary>
-        /// update authorization to be active or inactive. requests using an inactive authorization will be rejected. 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="authID">ID of authorization to update</param>
-        /// <param name="authorizationUpdateRequest">authorization to update to apply</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Authorization</returns>
-        public Authorization AuthorizationsAuthIDPatch (string authID, AuthorizationUpdateRequest authorizationUpdateRequest, string zapTraceSpan = null)
-        {
-             ApiResponse<Authorization> localVarResponse = AuthorizationsAuthIDPatchWithHttpInfo(authID, authorizationUpdateRequest, zapTraceSpan);
-             return localVarResponse.Data;
-        }
-
-        /// <summary>
-        /// update authorization to be active or inactive. requests using an inactive authorization will be rejected. 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="authID">ID of authorization to update</param>
-        /// <param name="authorizationUpdateRequest">authorization to update to apply</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Authorization</returns>
-        public ApiResponse< Authorization > AuthorizationsAuthIDPatchWithHttpInfo (string authID, AuthorizationUpdateRequest authorizationUpdateRequest, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'authID' is set
-            if (authID == null)
-                throw new ApiException(400, "Missing required parameter 'authID' when calling AuthorizationsService->AuthorizationsAuthIDPatch");
-            // verify the required parameter 'authorizationUpdateRequest' is set
-            if (authorizationUpdateRequest == null)
-                throw new ApiException(400, "Missing required parameter 'authorizationUpdateRequest' when calling AuthorizationsService->AuthorizationsAuthIDPatch");
-
-            var localVarPath = "/api/v2/authorizations/{authID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-                "application/json"
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (authID != null) localVarPathParams.Add("authID", this.Configuration.ApiClient.ParameterToString(authID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (authorizationUpdateRequest != null && authorizationUpdateRequest.GetType() != typeof(byte[]))
-            {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(authorizationUpdateRequest); // http body (model) parameter
-            }
-            else
-            {
-                localVarPostBody = authorizationUpdateRequest; // byte array
-            }
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("AuthorizationsAuthIDPatch", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return new ApiResponse<Authorization>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (Authorization) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Authorization)));
-        }
-
-        /// <summary>
-        /// update authorization to be active or inactive. requests using an inactive authorization will be rejected. 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="authID">ID of authorization to update</param>
-        /// <param name="authorizationUpdateRequest">authorization to update to apply</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Authorization</returns>
-        public IRestResponse AuthorizationsAuthIDPatchWithIRestResponse (string authID, AuthorizationUpdateRequest authorizationUpdateRequest, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'authID' is set
-            if (authID == null)
-                throw new ApiException(400, "Missing required parameter 'authID' when calling AuthorizationsService->AuthorizationsAuthIDPatch");
-            // verify the required parameter 'authorizationUpdateRequest' is set
-            if (authorizationUpdateRequest == null)
-                throw new ApiException(400, "Missing required parameter 'authorizationUpdateRequest' when calling AuthorizationsService->AuthorizationsAuthIDPatch");
-
-            var localVarPath = "/api/v2/authorizations/{authID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-                "application/json"
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (authID != null) localVarPathParams.Add("authID", this.Configuration.ApiClient.ParameterToString(authID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (authorizationUpdateRequest != null && authorizationUpdateRequest.GetType() != typeof(byte[]))
-            {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(authorizationUpdateRequest); // http body (model) parameter
-            }
-            else
-            {
-                localVarPostBody = authorizationUpdateRequest; // byte array
-            }
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("AuthorizationsAuthIDPatch", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return localVarResponse;
-        }
-        
-        /// <summary>
-        /// update authorization to be active or inactive. requests using an inactive authorization will be rejected. 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="authID">ID of authorization to update</param>
-        /// <param name="authorizationUpdateRequest">authorization to update to apply</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Authorization</returns>
-        public RestRequest AuthorizationsAuthIDPatchWithRestRequest (string authID, AuthorizationUpdateRequest authorizationUpdateRequest, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'authID' is set
-            if (authID == null)
-                throw new ApiException(400, "Missing required parameter 'authID' when calling AuthorizationsService->AuthorizationsAuthIDPatch");
-            // verify the required parameter 'authorizationUpdateRequest' is set
-            if (authorizationUpdateRequest == null)
-                throw new ApiException(400, "Missing required parameter 'authorizationUpdateRequest' when calling AuthorizationsService->AuthorizationsAuthIDPatch");
-
-            var localVarPath = "/api/v2/authorizations/{authID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-                "application/json"
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (authID != null) localVarPathParams.Add("authID", this.Configuration.ApiClient.ParameterToString(authID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (authorizationUpdateRequest != null && authorizationUpdateRequest.GetType() != typeof(byte[]))
-            {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(authorizationUpdateRequest); // http body (model) parameter
-            }
-            else
-            {
-                localVarPostBody = authorizationUpdateRequest; // byte array
-            }
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
-                Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-        }
-
-        /// <summary>
-        /// update authorization to be active or inactive. requests using an inactive authorization will be rejected. 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="authID">ID of authorization to update</param>
-        /// <param name="authorizationUpdateRequest">authorization to update to apply</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of Authorization</returns>
-        public async System.Threading.Tasks.Task<Authorization> AuthorizationsAuthIDPatchAsync (string authID, AuthorizationUpdateRequest authorizationUpdateRequest, string zapTraceSpan = null)
-        {
-             ApiResponse<Authorization> localVarResponse = await AuthorizationsAuthIDPatchAsyncWithHttpInfo(authID, authorizationUpdateRequest, zapTraceSpan);
-             return localVarResponse.Data;
-
-        }
-
-        /// <summary>
-        /// update authorization to be active or inactive. requests using an inactive authorization will be rejected. 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="authID">ID of authorization to update</param>
-        /// <param name="authorizationUpdateRequest">authorization to update to apply</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ApiResponse (Authorization)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Authorization>> AuthorizationsAuthIDPatchAsyncWithHttpInfo (string authID, AuthorizationUpdateRequest authorizationUpdateRequest, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'authID' is set
-            if (authID == null)
-                throw new ApiException(400, "Missing required parameter 'authID' when calling AuthorizationsService->AuthorizationsAuthIDPatch");
-            // verify the required parameter 'authorizationUpdateRequest' is set
-            if (authorizationUpdateRequest == null)
-                throw new ApiException(400, "Missing required parameter 'authorizationUpdateRequest' when calling AuthorizationsService->AuthorizationsAuthIDPatch");
-
-            var localVarPath = "/api/v2/authorizations/{authID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-                "application/json"
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (authID != null) localVarPathParams.Add("authID", this.Configuration.ApiClient.ParameterToString(authID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (authorizationUpdateRequest != null && authorizationUpdateRequest.GetType() != typeof(byte[]))
-            {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(authorizationUpdateRequest); // http body (model) parameter
-            }
-            else
-            {
-                localVarPostBody = authorizationUpdateRequest; // byte array
-            }
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("AuthorizationsAuthIDPatch", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return new ApiResponse<Authorization>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (Authorization) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Authorization)));
         }
 
         /// <summary>
@@ -1154,9 +620,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">filter authorizations belonging to a org id (optional)</param>
         /// <param name="org">filter authorizations belonging to a org name (optional)</param>
         /// <returns>Authorizations</returns>
-        public Authorizations AuthorizationsGet (string zapTraceSpan = null, string userID = null, string user = null, string orgID = null, string org = null)
+        public Authorizations GetAuthorizations (string zapTraceSpan = null, string userID = null, string user = null, string orgID = null, string org = null)
         {
-             ApiResponse<Authorizations> localVarResponse = AuthorizationsGetWithHttpInfo(zapTraceSpan, userID, user, orgID, org);
+             ApiResponse<Authorizations> localVarResponse = GetAuthorizationsWithHttpInfo(zapTraceSpan, userID, user, orgID, org);
              return localVarResponse.Data;
         }
 
@@ -1170,7 +636,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">filter authorizations belonging to a org id (optional)</param>
         /// <param name="org">filter authorizations belonging to a org name (optional)</param>
         /// <returns>ApiResponse of Authorizations</returns>
-        public ApiResponse< Authorizations > AuthorizationsGetWithHttpInfo (string zapTraceSpan = null, string userID = null, string user = null, string orgID = null, string org = null)
+        public ApiResponse< Authorizations > GetAuthorizationsWithHttpInfo (string zapTraceSpan = null, string userID = null, string user = null, string orgID = null, string org = null)
         {
 
             var localVarPath = "/api/v2/authorizations";
@@ -1211,7 +677,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("AuthorizationsGet", localVarResponse);
+                Exception exception = ExceptionFactory("GetAuthorizations", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -1230,7 +696,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">filter authorizations belonging to a org id (optional)</param>
         /// <param name="org">filter authorizations belonging to a org name (optional)</param>
         /// <returns>ApiResponse of Authorizations</returns>
-        public IRestResponse AuthorizationsGetWithIRestResponse (string zapTraceSpan = null, string userID = null, string user = null, string orgID = null, string org = null)
+        public IRestResponse GetAuthorizationsWithIRestResponse (string zapTraceSpan = null, string userID = null, string user = null, string orgID = null, string org = null)
         {
 
             var localVarPath = "/api/v2/authorizations";
@@ -1271,7 +737,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("AuthorizationsGet", localVarResponse);
+                Exception exception = ExceptionFactory("GetAuthorizations", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -1288,7 +754,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">filter authorizations belonging to a org id (optional)</param>
         /// <param name="org">filter authorizations belonging to a org name (optional)</param>
         /// <returns>ApiResponse of Authorizations</returns>
-        public RestRequest AuthorizationsGetWithRestRequest (string zapTraceSpan = null, string userID = null, string user = null, string orgID = null, string org = null)
+        public RestRequest GetAuthorizationsWithRestRequest (string zapTraceSpan = null, string userID = null, string user = null, string orgID = null, string org = null)
         {
 
             var localVarPath = "/api/v2/authorizations";
@@ -1335,9 +801,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">filter authorizations belonging to a org id (optional)</param>
         /// <param name="org">filter authorizations belonging to a org name (optional)</param>
         /// <returns>Task of Authorizations</returns>
-        public async System.Threading.Tasks.Task<Authorizations> AuthorizationsGetAsync (string zapTraceSpan = null, string userID = null, string user = null, string orgID = null, string org = null)
+        public async System.Threading.Tasks.Task<Authorizations> GetAuthorizationsAsync (string zapTraceSpan = null, string userID = null, string user = null, string orgID = null, string org = null)
         {
-             ApiResponse<Authorizations> localVarResponse = await AuthorizationsGetAsyncWithHttpInfo(zapTraceSpan, userID, user, orgID, org);
+             ApiResponse<Authorizations> localVarResponse = await GetAuthorizationsAsyncWithHttpInfo(zapTraceSpan, userID, user, orgID, org);
              return localVarResponse.Data;
 
         }
@@ -1352,7 +818,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">filter authorizations belonging to a org id (optional)</param>
         /// <param name="org">filter authorizations belonging to a org name (optional)</param>
         /// <returns>Task of ApiResponse (Authorizations)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Authorizations>> AuthorizationsGetAsyncWithHttpInfo (string zapTraceSpan = null, string userID = null, string user = null, string orgID = null, string org = null)
+        public async System.Threading.Tasks.Task<ApiResponse<Authorizations>> GetAuthorizationsAsyncWithHttpInfo (string zapTraceSpan = null, string userID = null, string user = null, string orgID = null, string org = null)
         {
 
             var localVarPath = "/api/v2/authorizations";
@@ -1393,7 +859,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("AuthorizationsGet", localVarResponse);
+                Exception exception = ExceptionFactory("GetAuthorizations", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -1403,15 +869,549 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
+        /// Retrieve an authorization 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="authID">ID of authorization to get</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Authorization</returns>
+        public Authorization GetAuthorizationsID (string authID, string zapTraceSpan = null)
+        {
+             ApiResponse<Authorization> localVarResponse = GetAuthorizationsIDWithHttpInfo(authID, zapTraceSpan);
+             return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Retrieve an authorization 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="authID">ID of authorization to get</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Authorization</returns>
+        public ApiResponse< Authorization > GetAuthorizationsIDWithHttpInfo (string authID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'authID' is set
+            if (authID == null)
+                throw new ApiException(400, "Missing required parameter 'authID' when calling AuthorizationsService->GetAuthorizationsID");
+
+            var localVarPath = "/api/v2/authorizations/{authID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (authID != null) localVarPathParams.Add("authID", this.Configuration.ApiClient.ParameterToString(authID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("GetAuthorizationsID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Authorization>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (Authorization) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Authorization)));
+        }
+
+        /// <summary>
+        /// Retrieve an authorization 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="authID">ID of authorization to get</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Authorization</returns>
+        public IRestResponse GetAuthorizationsIDWithIRestResponse (string authID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'authID' is set
+            if (authID == null)
+                throw new ApiException(400, "Missing required parameter 'authID' when calling AuthorizationsService->GetAuthorizationsID");
+
+            var localVarPath = "/api/v2/authorizations/{authID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (authID != null) localVarPathParams.Add("authID", this.Configuration.ApiClient.ParameterToString(authID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("GetAuthorizationsID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return localVarResponse;
+        }
+        
+        /// <summary>
+        /// Retrieve an authorization 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="authID">ID of authorization to get</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Authorization</returns>
+        public RestRequest GetAuthorizationsIDWithRestRequest (string authID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'authID' is set
+            if (authID == null)
+                throw new ApiException(400, "Missing required parameter 'authID' when calling AuthorizationsService->GetAuthorizationsID");
+
+            var localVarPath = "/api/v2/authorizations/{authID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (authID != null) localVarPathParams.Add("authID", this.Configuration.ApiClient.ParameterToString(authID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
+                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+        }
+
+        /// <summary>
+        /// Retrieve an authorization 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="authID">ID of authorization to get</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of Authorization</returns>
+        public async System.Threading.Tasks.Task<Authorization> GetAuthorizationsIDAsync (string authID, string zapTraceSpan = null)
+        {
+             ApiResponse<Authorization> localVarResponse = await GetAuthorizationsIDAsyncWithHttpInfo(authID, zapTraceSpan);
+             return localVarResponse.Data;
+
+        }
+
+        /// <summary>
+        /// Retrieve an authorization 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="authID">ID of authorization to get</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ApiResponse (Authorization)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<Authorization>> GetAuthorizationsIDAsyncWithHttpInfo (string authID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'authID' is set
+            if (authID == null)
+                throw new ApiException(400, "Missing required parameter 'authID' when calling AuthorizationsService->GetAuthorizationsID");
+
+            var localVarPath = "/api/v2/authorizations/{authID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (authID != null) localVarPathParams.Add("authID", this.Configuration.ApiClient.ParameterToString(authID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("GetAuthorizationsID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Authorization>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (Authorization) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Authorization)));
+        }
+
+        /// <summary>
+        /// update authorization to be active or inactive. requests using an inactive authorization will be rejected. 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="authID">ID of authorization to update</param>
+        /// <param name="authorizationUpdateRequest">authorization to update to apply</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Authorization</returns>
+        public Authorization PatchAuthorizationsID (string authID, AuthorizationUpdateRequest authorizationUpdateRequest, string zapTraceSpan = null)
+        {
+             ApiResponse<Authorization> localVarResponse = PatchAuthorizationsIDWithHttpInfo(authID, authorizationUpdateRequest, zapTraceSpan);
+             return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// update authorization to be active or inactive. requests using an inactive authorization will be rejected. 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="authID">ID of authorization to update</param>
+        /// <param name="authorizationUpdateRequest">authorization to update to apply</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Authorization</returns>
+        public ApiResponse< Authorization > PatchAuthorizationsIDWithHttpInfo (string authID, AuthorizationUpdateRequest authorizationUpdateRequest, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'authID' is set
+            if (authID == null)
+                throw new ApiException(400, "Missing required parameter 'authID' when calling AuthorizationsService->PatchAuthorizationsID");
+            // verify the required parameter 'authorizationUpdateRequest' is set
+            if (authorizationUpdateRequest == null)
+                throw new ApiException(400, "Missing required parameter 'authorizationUpdateRequest' when calling AuthorizationsService->PatchAuthorizationsID");
+
+            var localVarPath = "/api/v2/authorizations/{authID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json"
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (authID != null) localVarPathParams.Add("authID", this.Configuration.ApiClient.ParameterToString(authID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (authorizationUpdateRequest != null && authorizationUpdateRequest.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(authorizationUpdateRequest); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = authorizationUpdateRequest; // byte array
+            }
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("PatchAuthorizationsID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Authorization>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (Authorization) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Authorization)));
+        }
+
+        /// <summary>
+        /// update authorization to be active or inactive. requests using an inactive authorization will be rejected. 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="authID">ID of authorization to update</param>
+        /// <param name="authorizationUpdateRequest">authorization to update to apply</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Authorization</returns>
+        public IRestResponse PatchAuthorizationsIDWithIRestResponse (string authID, AuthorizationUpdateRequest authorizationUpdateRequest, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'authID' is set
+            if (authID == null)
+                throw new ApiException(400, "Missing required parameter 'authID' when calling AuthorizationsService->PatchAuthorizationsID");
+            // verify the required parameter 'authorizationUpdateRequest' is set
+            if (authorizationUpdateRequest == null)
+                throw new ApiException(400, "Missing required parameter 'authorizationUpdateRequest' when calling AuthorizationsService->PatchAuthorizationsID");
+
+            var localVarPath = "/api/v2/authorizations/{authID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json"
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (authID != null) localVarPathParams.Add("authID", this.Configuration.ApiClient.ParameterToString(authID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (authorizationUpdateRequest != null && authorizationUpdateRequest.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(authorizationUpdateRequest); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = authorizationUpdateRequest; // byte array
+            }
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("PatchAuthorizationsID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return localVarResponse;
+        }
+        
+        /// <summary>
+        /// update authorization to be active or inactive. requests using an inactive authorization will be rejected. 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="authID">ID of authorization to update</param>
+        /// <param name="authorizationUpdateRequest">authorization to update to apply</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Authorization</returns>
+        public RestRequest PatchAuthorizationsIDWithRestRequest (string authID, AuthorizationUpdateRequest authorizationUpdateRequest, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'authID' is set
+            if (authID == null)
+                throw new ApiException(400, "Missing required parameter 'authID' when calling AuthorizationsService->PatchAuthorizationsID");
+            // verify the required parameter 'authorizationUpdateRequest' is set
+            if (authorizationUpdateRequest == null)
+                throw new ApiException(400, "Missing required parameter 'authorizationUpdateRequest' when calling AuthorizationsService->PatchAuthorizationsID");
+
+            var localVarPath = "/api/v2/authorizations/{authID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json"
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (authID != null) localVarPathParams.Add("authID", this.Configuration.ApiClient.ParameterToString(authID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (authorizationUpdateRequest != null && authorizationUpdateRequest.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(authorizationUpdateRequest); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = authorizationUpdateRequest; // byte array
+            }
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
+                Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+        }
+
+        /// <summary>
+        /// update authorization to be active or inactive. requests using an inactive authorization will be rejected. 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="authID">ID of authorization to update</param>
+        /// <param name="authorizationUpdateRequest">authorization to update to apply</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of Authorization</returns>
+        public async System.Threading.Tasks.Task<Authorization> PatchAuthorizationsIDAsync (string authID, AuthorizationUpdateRequest authorizationUpdateRequest, string zapTraceSpan = null)
+        {
+             ApiResponse<Authorization> localVarResponse = await PatchAuthorizationsIDAsyncWithHttpInfo(authID, authorizationUpdateRequest, zapTraceSpan);
+             return localVarResponse.Data;
+
+        }
+
+        /// <summary>
+        /// update authorization to be active or inactive. requests using an inactive authorization will be rejected. 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="authID">ID of authorization to update</param>
+        /// <param name="authorizationUpdateRequest">authorization to update to apply</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ApiResponse (Authorization)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<Authorization>> PatchAuthorizationsIDAsyncWithHttpInfo (string authID, AuthorizationUpdateRequest authorizationUpdateRequest, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'authID' is set
+            if (authID == null)
+                throw new ApiException(400, "Missing required parameter 'authID' when calling AuthorizationsService->PatchAuthorizationsID");
+            // verify the required parameter 'authorizationUpdateRequest' is set
+            if (authorizationUpdateRequest == null)
+                throw new ApiException(400, "Missing required parameter 'authorizationUpdateRequest' when calling AuthorizationsService->PatchAuthorizationsID");
+
+            var localVarPath = "/api/v2/authorizations/{authID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json"
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (authID != null) localVarPathParams.Add("authID", this.Configuration.ApiClient.ParameterToString(authID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (authorizationUpdateRequest != null && authorizationUpdateRequest.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(authorizationUpdateRequest); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = authorizationUpdateRequest; // byte array
+            }
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("PatchAuthorizationsID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Authorization>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (Authorization) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Authorization)));
+        }
+
+        /// <summary>
         /// Create an authorization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="authorization">authorization to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Authorization</returns>
-        public Authorization AuthorizationsPost (Authorization authorization, string zapTraceSpan = null)
+        public Authorization PostAuthorizations (Authorization authorization, string zapTraceSpan = null)
         {
-             ApiResponse<Authorization> localVarResponse = AuthorizationsPostWithHttpInfo(authorization, zapTraceSpan);
+             ApiResponse<Authorization> localVarResponse = PostAuthorizationsWithHttpInfo(authorization, zapTraceSpan);
              return localVarResponse.Data;
         }
 
@@ -1422,11 +1422,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="authorization">authorization to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Authorization</returns>
-        public ApiResponse< Authorization > AuthorizationsPostWithHttpInfo (Authorization authorization, string zapTraceSpan = null)
+        public ApiResponse< Authorization > PostAuthorizationsWithHttpInfo (Authorization authorization, string zapTraceSpan = null)
         {
             // verify the required parameter 'authorization' is set
             if (authorization == null)
-                throw new ApiException(400, "Missing required parameter 'authorization' when calling AuthorizationsService->AuthorizationsPost");
+                throw new ApiException(400, "Missing required parameter 'authorization' when calling AuthorizationsService->PostAuthorizations");
 
             var localVarPath = "/api/v2/authorizations";
             var localVarPathParams = new Dictionary<String, String>();
@@ -1471,7 +1471,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("AuthorizationsPost", localVarResponse);
+                Exception exception = ExceptionFactory("PostAuthorizations", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -1487,11 +1487,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="authorization">authorization to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Authorization</returns>
-        public IRestResponse AuthorizationsPostWithIRestResponse (Authorization authorization, string zapTraceSpan = null)
+        public IRestResponse PostAuthorizationsWithIRestResponse (Authorization authorization, string zapTraceSpan = null)
         {
             // verify the required parameter 'authorization' is set
             if (authorization == null)
-                throw new ApiException(400, "Missing required parameter 'authorization' when calling AuthorizationsService->AuthorizationsPost");
+                throw new ApiException(400, "Missing required parameter 'authorization' when calling AuthorizationsService->PostAuthorizations");
 
             var localVarPath = "/api/v2/authorizations";
             var localVarPathParams = new Dictionary<String, String>();
@@ -1536,7 +1536,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("AuthorizationsPost", localVarResponse);
+                Exception exception = ExceptionFactory("PostAuthorizations", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -1550,11 +1550,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="authorization">authorization to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Authorization</returns>
-        public RestRequest AuthorizationsPostWithRestRequest (Authorization authorization, string zapTraceSpan = null)
+        public RestRequest PostAuthorizationsWithRestRequest (Authorization authorization, string zapTraceSpan = null)
         {
             // verify the required parameter 'authorization' is set
             if (authorization == null)
-                throw new ApiException(400, "Missing required parameter 'authorization' when calling AuthorizationsService->AuthorizationsPost");
+                throw new ApiException(400, "Missing required parameter 'authorization' when calling AuthorizationsService->PostAuthorizations");
 
             var localVarPath = "/api/v2/authorizations";
             var localVarPathParams = new Dictionary<String, String>();
@@ -1602,9 +1602,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="authorization">authorization to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of Authorization</returns>
-        public async System.Threading.Tasks.Task<Authorization> AuthorizationsPostAsync (Authorization authorization, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<Authorization> PostAuthorizationsAsync (Authorization authorization, string zapTraceSpan = null)
         {
-             ApiResponse<Authorization> localVarResponse = await AuthorizationsPostAsyncWithHttpInfo(authorization, zapTraceSpan);
+             ApiResponse<Authorization> localVarResponse = await PostAuthorizationsAsyncWithHttpInfo(authorization, zapTraceSpan);
              return localVarResponse.Data;
 
         }
@@ -1616,11 +1616,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="authorization">authorization to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (Authorization)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Authorization>> AuthorizationsPostAsyncWithHttpInfo (Authorization authorization, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<Authorization>> PostAuthorizationsAsyncWithHttpInfo (Authorization authorization, string zapTraceSpan = null)
         {
             // verify the required parameter 'authorization' is set
             if (authorization == null)
-                throw new ApiException(400, "Missing required parameter 'authorization' when calling AuthorizationsService->AuthorizationsPost");
+                throw new ApiException(400, "Missing required parameter 'authorization' when calling AuthorizationsService->PostAuthorizations");
 
             var localVarPath = "/api/v2/authorizations";
             var localVarPathParams = new Dictionary<String, String>();
@@ -1665,7 +1665,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("AuthorizationsPost", localVarResponse);
+                Exception exception = ExceptionFactory("PostAuthorizations", localVarResponse);
                 if (exception != null) throw exception;
             }
 

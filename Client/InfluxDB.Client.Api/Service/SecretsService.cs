@@ -25,31 +25,6 @@ namespace InfluxDB.Client.Api.Service
     {
         #region Synchronous Operations
         /// <summary>
-        /// delete provided secrets
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="secretKeys">secret key to deleted</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns></returns>
-        void OrgsOrgIDSecretsDeletePost (string orgID, SecretKeys secretKeys, string zapTraceSpan = null);
-
-        /// <summary>
-        /// delete provided secrets
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="secretKeys">secret key to deleted</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<Object> OrgsOrgIDSecretsDeletePostWithHttpInfo (string orgID, SecretKeys secretKeys, string zapTraceSpan = null);
-        /// <summary>
         /// List all secret keys for an organization
         /// </summary>
         /// <remarks>
@@ -59,7 +34,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">ID of the organization</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>SecretKeysResponse</returns>
-        SecretKeysResponse OrgsOrgIDSecretsGet (string orgID, string zapTraceSpan = null);
+        SecretKeysResponse GetOrgsIDSecrets (string orgID, string zapTraceSpan = null);
 
         /// <summary>
         /// List all secret keys for an organization
@@ -71,7 +46,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">ID of the organization</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of SecretKeysResponse</returns>
-        ApiResponse<SecretKeysResponse> OrgsOrgIDSecretsGetWithHttpInfo (string orgID, string zapTraceSpan = null);
+        ApiResponse<SecretKeysResponse> GetOrgsIDSecretsWithHttpInfo (string orgID, string zapTraceSpan = null);
         /// <summary>
         /// Apply patch to the provided secrets
         /// </summary>
@@ -83,7 +58,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="requestBody">secret key value pairs to update/add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
-        void OrgsOrgIDSecretsPatch (string orgID, Dictionary<string, string> requestBody, string zapTraceSpan = null);
+        void PatchOrgsIDSecrets (string orgID, Dictionary<string, string> requestBody, string zapTraceSpan = null);
 
         /// <summary>
         /// Apply patch to the provided secrets
@@ -96,9 +71,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="requestBody">secret key value pairs to update/add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<Object> OrgsOrgIDSecretsPatchWithHttpInfo (string orgID, Dictionary<string, string> requestBody, string zapTraceSpan = null);
-        #endregion Synchronous Operations
-        #region Asynchronous Operations
+        ApiResponse<Object> PatchOrgsIDSecretsWithHttpInfo (string orgID, Dictionary<string, string> requestBody, string zapTraceSpan = null);
         /// <summary>
         /// delete provided secrets
         /// </summary>
@@ -109,8 +82,8 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">ID of the organization</param>
         /// <param name="secretKeys">secret key to deleted</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task OrgsOrgIDSecretsDeletePostAsync (string orgID, SecretKeys secretKeys, string zapTraceSpan = null);
+        /// <returns></returns>
+        void PostOrgsIDSecrets (string orgID, SecretKeys secretKeys, string zapTraceSpan = null);
 
         /// <summary>
         /// delete provided secrets
@@ -122,8 +95,10 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">ID of the organization</param>
         /// <param name="secretKeys">secret key to deleted</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> OrgsOrgIDSecretsDeletePostAsyncWithHttpInfo (string orgID, SecretKeys secretKeys, string zapTraceSpan = null);
+        /// <returns>ApiResponse of Object(void)</returns>
+        ApiResponse<Object> PostOrgsIDSecretsWithHttpInfo (string orgID, SecretKeys secretKeys, string zapTraceSpan = null);
+        #endregion Synchronous Operations
+        #region Asynchronous Operations
         /// <summary>
         /// List all secret keys for an organization
         /// </summary>
@@ -134,7 +109,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">ID of the organization</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of SecretKeysResponse</returns>
-        System.Threading.Tasks.Task<SecretKeysResponse> OrgsOrgIDSecretsGetAsync (string orgID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<SecretKeysResponse> GetOrgsIDSecretsAsync (string orgID, string zapTraceSpan = null);
 
         /// <summary>
         /// List all secret keys for an organization
@@ -146,7 +121,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">ID of the organization</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (SecretKeysResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<SecretKeysResponse>> OrgsOrgIDSecretsGetAsyncWithHttpInfo (string orgID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<SecretKeysResponse>> GetOrgsIDSecretsAsyncWithHttpInfo (string orgID, string zapTraceSpan = null);
         /// <summary>
         /// Apply patch to the provided secrets
         /// </summary>
@@ -158,7 +133,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="requestBody">secret key value pairs to update/add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task OrgsOrgIDSecretsPatchAsync (string orgID, Dictionary<string, string> requestBody, string zapTraceSpan = null);
+        System.Threading.Tasks.Task PatchOrgsIDSecretsAsync (string orgID, Dictionary<string, string> requestBody, string zapTraceSpan = null);
 
         /// <summary>
         /// Apply patch to the provided secrets
@@ -171,7 +146,32 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="requestBody">secret key value pairs to update/add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> OrgsOrgIDSecretsPatchAsyncWithHttpInfo (string orgID, Dictionary<string, string> requestBody, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<Object>> PatchOrgsIDSecretsAsyncWithHttpInfo (string orgID, Dictionary<string, string> requestBody, string zapTraceSpan = null);
+        /// <summary>
+        /// delete provided secrets
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="orgID">ID of the organization</param>
+        /// <param name="secretKeys">secret key to deleted</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of void</returns>
+        System.Threading.Tasks.Task PostOrgsIDSecretsAsync (string orgID, SecretKeys secretKeys, string zapTraceSpan = null);
+
+        /// <summary>
+        /// delete provided secrets
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="orgID">ID of the organization</param>
+        /// <param name="secretKeys">secret key to deleted</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ApiResponse</returns>
+        System.Threading.Tasks.Task<ApiResponse<Object>> PostOrgsIDSecretsAsyncWithHttpInfo (string orgID, SecretKeys secretKeys, string zapTraceSpan = null);
         #endregion Asynchronous Operations
     }
 
@@ -273,307 +273,15 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// delete provided secrets 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="secretKeys">secret key to deleted</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns></returns>
-        public void OrgsOrgIDSecretsDeletePost (string orgID, SecretKeys secretKeys, string zapTraceSpan = null)
-        {
-             OrgsOrgIDSecretsDeletePostWithHttpInfo(orgID, secretKeys, zapTraceSpan);
-        }
-
-        /// <summary>
-        /// delete provided secrets 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="secretKeys">secret key to deleted</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Object(void)</returns>
-        public ApiResponse<Object> OrgsOrgIDSecretsDeletePostWithHttpInfo (string orgID, SecretKeys secretKeys, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'orgID' is set
-            if (orgID == null)
-                throw new ApiException(400, "Missing required parameter 'orgID' when calling SecretsService->OrgsOrgIDSecretsDeletePost");
-            // verify the required parameter 'secretKeys' is set
-            if (secretKeys == null)
-                throw new ApiException(400, "Missing required parameter 'secretKeys' when calling SecretsService->OrgsOrgIDSecretsDeletePost");
-
-            var localVarPath = "/api/v2/orgs/{orgID}/secrets/delete";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-                "application/json"
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (orgID != null) localVarPathParams.Add("orgID", this.Configuration.ApiClient.ParameterToString(orgID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (secretKeys != null && secretKeys.GetType() != typeof(byte[]))
-            {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(secretKeys); // http body (model) parameter
-            }
-            else
-            {
-                localVarPostBody = secretKeys; // byte array
-            }
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("OrgsOrgIDSecretsDeletePost", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return new ApiResponse<Object>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                null);
-        }
-
-        /// <summary>
-        /// delete provided secrets 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="secretKeys">secret key to deleted</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Object(void)</returns>
-        public IRestResponse OrgsOrgIDSecretsDeletePostWithIRestResponse (string orgID, SecretKeys secretKeys, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'orgID' is set
-            if (orgID == null)
-                throw new ApiException(400, "Missing required parameter 'orgID' when calling SecretsService->OrgsOrgIDSecretsDeletePost");
-            // verify the required parameter 'secretKeys' is set
-            if (secretKeys == null)
-                throw new ApiException(400, "Missing required parameter 'secretKeys' when calling SecretsService->OrgsOrgIDSecretsDeletePost");
-
-            var localVarPath = "/api/v2/orgs/{orgID}/secrets/delete";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-                "application/json"
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (orgID != null) localVarPathParams.Add("orgID", this.Configuration.ApiClient.ParameterToString(orgID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (secretKeys != null && secretKeys.GetType() != typeof(byte[]))
-            {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(secretKeys); // http body (model) parameter
-            }
-            else
-            {
-                localVarPostBody = secretKeys; // byte array
-            }
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("OrgsOrgIDSecretsDeletePost", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return localVarResponse;
-        }
-        
-        /// <summary>
-        /// delete provided secrets 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="secretKeys">secret key to deleted</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Object(void)</returns>
-        public RestRequest OrgsOrgIDSecretsDeletePostWithRestRequest (string orgID, SecretKeys secretKeys, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'orgID' is set
-            if (orgID == null)
-                throw new ApiException(400, "Missing required parameter 'orgID' when calling SecretsService->OrgsOrgIDSecretsDeletePost");
-            // verify the required parameter 'secretKeys' is set
-            if (secretKeys == null)
-                throw new ApiException(400, "Missing required parameter 'secretKeys' when calling SecretsService->OrgsOrgIDSecretsDeletePost");
-
-            var localVarPath = "/api/v2/orgs/{orgID}/secrets/delete";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-                "application/json"
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (orgID != null) localVarPathParams.Add("orgID", this.Configuration.ApiClient.ParameterToString(orgID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (secretKeys != null && secretKeys.GetType() != typeof(byte[]))
-            {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(secretKeys); // http body (model) parameter
-            }
-            else
-            {
-                localVarPostBody = secretKeys; // byte array
-            }
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
-                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-        }
-
-        /// <summary>
-        /// delete provided secrets 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="secretKeys">secret key to deleted</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task OrgsOrgIDSecretsDeletePostAsync (string orgID, SecretKeys secretKeys, string zapTraceSpan = null)
-        {
-             await OrgsOrgIDSecretsDeletePostAsyncWithHttpInfo(orgID, secretKeys, zapTraceSpan);
-
-        }
-
-        /// <summary>
-        /// delete provided secrets 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="secretKeys">secret key to deleted</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Object>> OrgsOrgIDSecretsDeletePostAsyncWithHttpInfo (string orgID, SecretKeys secretKeys, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'orgID' is set
-            if (orgID == null)
-                throw new ApiException(400, "Missing required parameter 'orgID' when calling SecretsService->OrgsOrgIDSecretsDeletePost");
-            // verify the required parameter 'secretKeys' is set
-            if (secretKeys == null)
-                throw new ApiException(400, "Missing required parameter 'secretKeys' when calling SecretsService->OrgsOrgIDSecretsDeletePost");
-
-            var localVarPath = "/api/v2/orgs/{orgID}/secrets/delete";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-                "application/json"
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (orgID != null) localVarPathParams.Add("orgID", this.Configuration.ApiClient.ParameterToString(orgID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (secretKeys != null && secretKeys.GetType() != typeof(byte[]))
-            {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(secretKeys); // http body (model) parameter
-            }
-            else
-            {
-                localVarPostBody = secretKeys; // byte array
-            }
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("OrgsOrgIDSecretsDeletePost", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return new ApiResponse<Object>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                null);
-        }
-
-        /// <summary>
         /// List all secret keys for an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="orgID">ID of the organization</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>SecretKeysResponse</returns>
-        public SecretKeysResponse OrgsOrgIDSecretsGet (string orgID, string zapTraceSpan = null)
+        public SecretKeysResponse GetOrgsIDSecrets (string orgID, string zapTraceSpan = null)
         {
-             ApiResponse<SecretKeysResponse> localVarResponse = OrgsOrgIDSecretsGetWithHttpInfo(orgID, zapTraceSpan);
+             ApiResponse<SecretKeysResponse> localVarResponse = GetOrgsIDSecretsWithHttpInfo(orgID, zapTraceSpan);
              return localVarResponse.Data;
         }
 
@@ -584,11 +292,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">ID of the organization</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of SecretKeysResponse</returns>
-        public ApiResponse< SecretKeysResponse > OrgsOrgIDSecretsGetWithHttpInfo (string orgID, string zapTraceSpan = null)
+        public ApiResponse< SecretKeysResponse > GetOrgsIDSecretsWithHttpInfo (string orgID, string zapTraceSpan = null)
         {
             // verify the required parameter 'orgID' is set
             if (orgID == null)
-                throw new ApiException(400, "Missing required parameter 'orgID' when calling SecretsService->OrgsOrgIDSecretsGet");
+                throw new ApiException(400, "Missing required parameter 'orgID' when calling SecretsService->GetOrgsIDSecrets");
 
             var localVarPath = "/api/v2/orgs/{orgID}/secrets";
             var localVarPathParams = new Dictionary<String, String>();
@@ -625,7 +333,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("OrgsOrgIDSecretsGet", localVarResponse);
+                Exception exception = ExceptionFactory("GetOrgsIDSecrets", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -641,11 +349,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">ID of the organization</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of SecretKeysResponse</returns>
-        public IRestResponse OrgsOrgIDSecretsGetWithIRestResponse (string orgID, string zapTraceSpan = null)
+        public IRestResponse GetOrgsIDSecretsWithIRestResponse (string orgID, string zapTraceSpan = null)
         {
             // verify the required parameter 'orgID' is set
             if (orgID == null)
-                throw new ApiException(400, "Missing required parameter 'orgID' when calling SecretsService->OrgsOrgIDSecretsGet");
+                throw new ApiException(400, "Missing required parameter 'orgID' when calling SecretsService->GetOrgsIDSecrets");
 
             var localVarPath = "/api/v2/orgs/{orgID}/secrets";
             var localVarPathParams = new Dictionary<String, String>();
@@ -682,7 +390,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("OrgsOrgIDSecretsGet", localVarResponse);
+                Exception exception = ExceptionFactory("GetOrgsIDSecrets", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -696,11 +404,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">ID of the organization</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of SecretKeysResponse</returns>
-        public RestRequest OrgsOrgIDSecretsGetWithRestRequest (string orgID, string zapTraceSpan = null)
+        public RestRequest GetOrgsIDSecretsWithRestRequest (string orgID, string zapTraceSpan = null)
         {
             // verify the required parameter 'orgID' is set
             if (orgID == null)
-                throw new ApiException(400, "Missing required parameter 'orgID' when calling SecretsService->OrgsOrgIDSecretsGet");
+                throw new ApiException(400, "Missing required parameter 'orgID' when calling SecretsService->GetOrgsIDSecrets");
 
             var localVarPath = "/api/v2/orgs/{orgID}/secrets";
             var localVarPathParams = new Dictionary<String, String>();
@@ -740,9 +448,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">ID of the organization</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of SecretKeysResponse</returns>
-        public async System.Threading.Tasks.Task<SecretKeysResponse> OrgsOrgIDSecretsGetAsync (string orgID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<SecretKeysResponse> GetOrgsIDSecretsAsync (string orgID, string zapTraceSpan = null)
         {
-             ApiResponse<SecretKeysResponse> localVarResponse = await OrgsOrgIDSecretsGetAsyncWithHttpInfo(orgID, zapTraceSpan);
+             ApiResponse<SecretKeysResponse> localVarResponse = await GetOrgsIDSecretsAsyncWithHttpInfo(orgID, zapTraceSpan);
              return localVarResponse.Data;
 
         }
@@ -754,11 +462,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">ID of the organization</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (SecretKeysResponse)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<SecretKeysResponse>> OrgsOrgIDSecretsGetAsyncWithHttpInfo (string orgID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<SecretKeysResponse>> GetOrgsIDSecretsAsyncWithHttpInfo (string orgID, string zapTraceSpan = null)
         {
             // verify the required parameter 'orgID' is set
             if (orgID == null)
-                throw new ApiException(400, "Missing required parameter 'orgID' when calling SecretsService->OrgsOrgIDSecretsGet");
+                throw new ApiException(400, "Missing required parameter 'orgID' when calling SecretsService->GetOrgsIDSecrets");
 
             var localVarPath = "/api/v2/orgs/{orgID}/secrets";
             var localVarPathParams = new Dictionary<String, String>();
@@ -795,7 +503,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("OrgsOrgIDSecretsGet", localVarResponse);
+                Exception exception = ExceptionFactory("GetOrgsIDSecrets", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -812,9 +520,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="requestBody">secret key value pairs to update/add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
-        public void OrgsOrgIDSecretsPatch (string orgID, Dictionary<string, string> requestBody, string zapTraceSpan = null)
+        public void PatchOrgsIDSecrets (string orgID, Dictionary<string, string> requestBody, string zapTraceSpan = null)
         {
-             OrgsOrgIDSecretsPatchWithHttpInfo(orgID, requestBody, zapTraceSpan);
+             PatchOrgsIDSecretsWithHttpInfo(orgID, requestBody, zapTraceSpan);
         }
 
         /// <summary>
@@ -825,14 +533,14 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="requestBody">secret key value pairs to update/add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public ApiResponse<Object> OrgsOrgIDSecretsPatchWithHttpInfo (string orgID, Dictionary<string, string> requestBody, string zapTraceSpan = null)
+        public ApiResponse<Object> PatchOrgsIDSecretsWithHttpInfo (string orgID, Dictionary<string, string> requestBody, string zapTraceSpan = null)
         {
             // verify the required parameter 'orgID' is set
             if (orgID == null)
-                throw new ApiException(400, "Missing required parameter 'orgID' when calling SecretsService->OrgsOrgIDSecretsPatch");
+                throw new ApiException(400, "Missing required parameter 'orgID' when calling SecretsService->PatchOrgsIDSecrets");
             // verify the required parameter 'requestBody' is set
             if (requestBody == null)
-                throw new ApiException(400, "Missing required parameter 'requestBody' when calling SecretsService->OrgsOrgIDSecretsPatch");
+                throw new ApiException(400, "Missing required parameter 'requestBody' when calling SecretsService->PatchOrgsIDSecrets");
 
             var localVarPath = "/api/v2/orgs/{orgID}/secrets";
             var localVarPathParams = new Dictionary<String, String>();
@@ -878,7 +586,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("OrgsOrgIDSecretsPatch", localVarResponse);
+                Exception exception = ExceptionFactory("PatchOrgsIDSecrets", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -895,14 +603,14 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="requestBody">secret key value pairs to update/add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public IRestResponse OrgsOrgIDSecretsPatchWithIRestResponse (string orgID, Dictionary<string, string> requestBody, string zapTraceSpan = null)
+        public IRestResponse PatchOrgsIDSecretsWithIRestResponse (string orgID, Dictionary<string, string> requestBody, string zapTraceSpan = null)
         {
             // verify the required parameter 'orgID' is set
             if (orgID == null)
-                throw new ApiException(400, "Missing required parameter 'orgID' when calling SecretsService->OrgsOrgIDSecretsPatch");
+                throw new ApiException(400, "Missing required parameter 'orgID' when calling SecretsService->PatchOrgsIDSecrets");
             // verify the required parameter 'requestBody' is set
             if (requestBody == null)
-                throw new ApiException(400, "Missing required parameter 'requestBody' when calling SecretsService->OrgsOrgIDSecretsPatch");
+                throw new ApiException(400, "Missing required parameter 'requestBody' when calling SecretsService->PatchOrgsIDSecrets");
 
             var localVarPath = "/api/v2/orgs/{orgID}/secrets";
             var localVarPathParams = new Dictionary<String, String>();
@@ -948,7 +656,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("OrgsOrgIDSecretsPatch", localVarResponse);
+                Exception exception = ExceptionFactory("PatchOrgsIDSecrets", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -963,14 +671,14 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="requestBody">secret key value pairs to update/add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public RestRequest OrgsOrgIDSecretsPatchWithRestRequest (string orgID, Dictionary<string, string> requestBody, string zapTraceSpan = null)
+        public RestRequest PatchOrgsIDSecretsWithRestRequest (string orgID, Dictionary<string, string> requestBody, string zapTraceSpan = null)
         {
             // verify the required parameter 'orgID' is set
             if (orgID == null)
-                throw new ApiException(400, "Missing required parameter 'orgID' when calling SecretsService->OrgsOrgIDSecretsPatch");
+                throw new ApiException(400, "Missing required parameter 'orgID' when calling SecretsService->PatchOrgsIDSecrets");
             // verify the required parameter 'requestBody' is set
             if (requestBody == null)
-                throw new ApiException(400, "Missing required parameter 'requestBody' when calling SecretsService->OrgsOrgIDSecretsPatch");
+                throw new ApiException(400, "Missing required parameter 'requestBody' when calling SecretsService->PatchOrgsIDSecrets");
 
             var localVarPath = "/api/v2/orgs/{orgID}/secrets";
             var localVarPathParams = new Dictionary<String, String>();
@@ -1020,9 +728,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="requestBody">secret key value pairs to update/add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task OrgsOrgIDSecretsPatchAsync (string orgID, Dictionary<string, string> requestBody, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task PatchOrgsIDSecretsAsync (string orgID, Dictionary<string, string> requestBody, string zapTraceSpan = null)
         {
-             await OrgsOrgIDSecretsPatchAsyncWithHttpInfo(orgID, requestBody, zapTraceSpan);
+             await PatchOrgsIDSecretsAsyncWithHttpInfo(orgID, requestBody, zapTraceSpan);
 
         }
 
@@ -1034,14 +742,14 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="requestBody">secret key value pairs to update/add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Object>> OrgsOrgIDSecretsPatchAsyncWithHttpInfo (string orgID, Dictionary<string, string> requestBody, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<Object>> PatchOrgsIDSecretsAsyncWithHttpInfo (string orgID, Dictionary<string, string> requestBody, string zapTraceSpan = null)
         {
             // verify the required parameter 'orgID' is set
             if (orgID == null)
-                throw new ApiException(400, "Missing required parameter 'orgID' when calling SecretsService->OrgsOrgIDSecretsPatch");
+                throw new ApiException(400, "Missing required parameter 'orgID' when calling SecretsService->PatchOrgsIDSecrets");
             // verify the required parameter 'requestBody' is set
             if (requestBody == null)
-                throw new ApiException(400, "Missing required parameter 'requestBody' when calling SecretsService->OrgsOrgIDSecretsPatch");
+                throw new ApiException(400, "Missing required parameter 'requestBody' when calling SecretsService->PatchOrgsIDSecrets");
 
             var localVarPath = "/api/v2/orgs/{orgID}/secrets";
             var localVarPathParams = new Dictionary<String, String>();
@@ -1087,7 +795,299 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("OrgsOrgIDSecretsPatch", localVarResponse);
+                Exception exception = ExceptionFactory("PatchOrgsIDSecrets", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Object>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                null);
+        }
+
+        /// <summary>
+        /// delete provided secrets 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="orgID">ID of the organization</param>
+        /// <param name="secretKeys">secret key to deleted</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns></returns>
+        public void PostOrgsIDSecrets (string orgID, SecretKeys secretKeys, string zapTraceSpan = null)
+        {
+             PostOrgsIDSecretsWithHttpInfo(orgID, secretKeys, zapTraceSpan);
+        }
+
+        /// <summary>
+        /// delete provided secrets 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="orgID">ID of the organization</param>
+        /// <param name="secretKeys">secret key to deleted</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        public ApiResponse<Object> PostOrgsIDSecretsWithHttpInfo (string orgID, SecretKeys secretKeys, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'orgID' is set
+            if (orgID == null)
+                throw new ApiException(400, "Missing required parameter 'orgID' when calling SecretsService->PostOrgsIDSecrets");
+            // verify the required parameter 'secretKeys' is set
+            if (secretKeys == null)
+                throw new ApiException(400, "Missing required parameter 'secretKeys' when calling SecretsService->PostOrgsIDSecrets");
+
+            var localVarPath = "/api/v2/orgs/{orgID}/secrets/delete";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json"
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (orgID != null) localVarPathParams.Add("orgID", this.Configuration.ApiClient.ParameterToString(orgID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (secretKeys != null && secretKeys.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(secretKeys); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = secretKeys; // byte array
+            }
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("PostOrgsIDSecrets", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Object>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                null);
+        }
+
+        /// <summary>
+        /// delete provided secrets 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="orgID">ID of the organization</param>
+        /// <param name="secretKeys">secret key to deleted</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        public IRestResponse PostOrgsIDSecretsWithIRestResponse (string orgID, SecretKeys secretKeys, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'orgID' is set
+            if (orgID == null)
+                throw new ApiException(400, "Missing required parameter 'orgID' when calling SecretsService->PostOrgsIDSecrets");
+            // verify the required parameter 'secretKeys' is set
+            if (secretKeys == null)
+                throw new ApiException(400, "Missing required parameter 'secretKeys' when calling SecretsService->PostOrgsIDSecrets");
+
+            var localVarPath = "/api/v2/orgs/{orgID}/secrets/delete";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json"
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (orgID != null) localVarPathParams.Add("orgID", this.Configuration.ApiClient.ParameterToString(orgID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (secretKeys != null && secretKeys.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(secretKeys); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = secretKeys; // byte array
+            }
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("PostOrgsIDSecrets", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return localVarResponse;
+        }
+        
+        /// <summary>
+        /// delete provided secrets 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="orgID">ID of the organization</param>
+        /// <param name="secretKeys">secret key to deleted</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        public RestRequest PostOrgsIDSecretsWithRestRequest (string orgID, SecretKeys secretKeys, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'orgID' is set
+            if (orgID == null)
+                throw new ApiException(400, "Missing required parameter 'orgID' when calling SecretsService->PostOrgsIDSecrets");
+            // verify the required parameter 'secretKeys' is set
+            if (secretKeys == null)
+                throw new ApiException(400, "Missing required parameter 'secretKeys' when calling SecretsService->PostOrgsIDSecrets");
+
+            var localVarPath = "/api/v2/orgs/{orgID}/secrets/delete";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json"
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (orgID != null) localVarPathParams.Add("orgID", this.Configuration.ApiClient.ParameterToString(orgID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (secretKeys != null && secretKeys.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(secretKeys); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = secretKeys; // byte array
+            }
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
+                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+        }
+
+        /// <summary>
+        /// delete provided secrets 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="orgID">ID of the organization</param>
+        /// <param name="secretKeys">secret key to deleted</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of void</returns>
+        public async System.Threading.Tasks.Task PostOrgsIDSecretsAsync (string orgID, SecretKeys secretKeys, string zapTraceSpan = null)
+        {
+             await PostOrgsIDSecretsAsyncWithHttpInfo(orgID, secretKeys, zapTraceSpan);
+
+        }
+
+        /// <summary>
+        /// delete provided secrets 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="orgID">ID of the organization</param>
+        /// <param name="secretKeys">secret key to deleted</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ApiResponse</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<Object>> PostOrgsIDSecretsAsyncWithHttpInfo (string orgID, SecretKeys secretKeys, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'orgID' is set
+            if (orgID == null)
+                throw new ApiException(400, "Missing required parameter 'orgID' when calling SecretsService->PostOrgsIDSecrets");
+            // verify the required parameter 'secretKeys' is set
+            if (secretKeys == null)
+                throw new ApiException(400, "Missing required parameter 'secretKeys' when calling SecretsService->PostOrgsIDSecrets");
+
+            var localVarPath = "/api/v2/orgs/{orgID}/secrets/delete";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json"
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (orgID != null) localVarPathParams.Add("orgID", this.Configuration.ApiClient.ParameterToString(orgID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (secretKeys != null && secretKeys.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(secretKeys); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = secretKeys; // byte array
+            }
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("PostOrgsIDSecrets", localVarResponse);
                 if (exception != null) throw exception;
             }
 

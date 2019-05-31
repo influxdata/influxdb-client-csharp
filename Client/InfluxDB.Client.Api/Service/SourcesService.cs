@@ -25,6 +25,29 @@ namespace InfluxDB.Client.Api.Service
     {
         #region Synchronous Operations
         /// <summary>
+        /// Delete a source
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="sourceID">ID of the source</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns></returns>
+        void DeleteSourcesID (string sourceID, string zapTraceSpan = null);
+
+        /// <summary>
+        /// Delete a source
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="sourceID">ID of the source</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        ApiResponse<Object> DeleteSourcesIDWithHttpInfo (string sourceID, string zapTraceSpan = null);
+        /// <summary>
         /// Get all sources
         /// </summary>
         /// <remarks>
@@ -34,7 +57,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="org">specifies the organization of the resource (optional)</param>
         /// <returns>Sources</returns>
-        Sources SourcesGet (string zapTraceSpan = null, string org = null);
+        Sources GetSources (string zapTraceSpan = null, string org = null);
 
         /// <summary>
         /// Get all sources
@@ -46,30 +69,30 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="org">specifies the organization of the resource (optional)</param>
         /// <returns>ApiResponse of Sources</returns>
-        ApiResponse<Sources> SourcesGetWithHttpInfo (string zapTraceSpan = null, string org = null);
+        ApiResponse<Sources> GetSourcesWithHttpInfo (string zapTraceSpan = null, string org = null);
         /// <summary>
-        /// Creates a Source
+        /// Get a source
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="source">source to create</param>
+        /// <param name="sourceID">ID of the source</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Source</returns>
-        Source SourcesPost (Source source, string zapTraceSpan = null);
+        Source GetSourcesID (string sourceID, string zapTraceSpan = null);
 
         /// <summary>
-        /// Creates a Source
+        /// Get a source
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="source">source to create</param>
+        /// <param name="sourceID">ID of the source</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Source</returns>
-        ApiResponse<Source> SourcesPostWithHttpInfo (Source source, string zapTraceSpan = null);
+        ApiResponse<Source> GetSourcesIDWithHttpInfo (string sourceID, string zapTraceSpan = null);
         /// <summary>
         /// Get a sources buckets (will return dbrps in the form of buckets if it is a v1 source)
         /// </summary>
@@ -81,7 +104,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="org">specifies the organization of the resource (optional)</param>
         /// <returns>Buckets</returns>
-        Buckets SourcesSourceIDBucketsGet (string sourceID, string zapTraceSpan = null, string org = null);
+        Buckets GetSourcesIDBuckets (string sourceID, string zapTraceSpan = null, string org = null);
 
         /// <summary>
         /// Get a sources buckets (will return dbrps in the form of buckets if it is a v1 source)
@@ -94,53 +117,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="org">specifies the organization of the resource (optional)</param>
         /// <returns>ApiResponse of Buckets</returns>
-        ApiResponse<Buckets> SourcesSourceIDBucketsGetWithHttpInfo (string sourceID, string zapTraceSpan = null, string org = null);
-        /// <summary>
-        /// Delete a source
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="sourceID">ID of the source</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns></returns>
-        void SourcesSourceIDDelete (string sourceID, string zapTraceSpan = null);
-
-        /// <summary>
-        /// Delete a source
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="sourceID">ID of the source</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<Object> SourcesSourceIDDeleteWithHttpInfo (string sourceID, string zapTraceSpan = null);
-        /// <summary>
-        /// Get a source
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="sourceID">ID of the source</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Source</returns>
-        Source SourcesSourceIDGet (string sourceID, string zapTraceSpan = null);
-
-        /// <summary>
-        /// Get a source
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="sourceID">ID of the source</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Source</returns>
-        ApiResponse<Source> SourcesSourceIDGetWithHttpInfo (string sourceID, string zapTraceSpan = null);
+        ApiResponse<Buckets> GetSourcesIDBucketsWithHttpInfo (string sourceID, string zapTraceSpan = null, string org = null);
         /// <summary>
         /// Get a sources health
         /// </summary>
@@ -151,7 +128,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="sourceID">ID of the source</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Check</returns>
-        Check SourcesSourceIDHealthGet (string sourceID, string zapTraceSpan = null);
+        Check GetSourcesIDHealth (string sourceID, string zapTraceSpan = null);
 
         /// <summary>
         /// Get a sources health
@@ -163,7 +140,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="sourceID">ID of the source</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Check</returns>
-        ApiResponse<Check> SourcesSourceIDHealthGetWithHttpInfo (string sourceID, string zapTraceSpan = null);
+        ApiResponse<Check> GetSourcesIDHealthWithHttpInfo (string sourceID, string zapTraceSpan = null);
         /// <summary>
         /// Updates a Source
         /// </summary>
@@ -175,7 +152,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="source">source update</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Source</returns>
-        Source SourcesSourceIDPatch (string sourceID, Source source, string zapTraceSpan = null);
+        Source PatchSourcesID (string sourceID, Source source, string zapTraceSpan = null);
 
         /// <summary>
         /// Updates a Source
@@ -188,9 +165,55 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="source">source update</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Source</returns>
-        ApiResponse<Source> SourcesSourceIDPatchWithHttpInfo (string sourceID, Source source, string zapTraceSpan = null);
+        ApiResponse<Source> PatchSourcesIDWithHttpInfo (string sourceID, Source source, string zapTraceSpan = null);
+        /// <summary>
+        /// Creates a Source
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="source">source to create</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Source</returns>
+        Source PostSources (Source source, string zapTraceSpan = null);
+
+        /// <summary>
+        /// Creates a Source
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="source">source to create</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Source</returns>
+        ApiResponse<Source> PostSourcesWithHttpInfo (Source source, string zapTraceSpan = null);
         #endregion Synchronous Operations
         #region Asynchronous Operations
+        /// <summary>
+        /// Delete a source
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="sourceID">ID of the source</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of void</returns>
+        System.Threading.Tasks.Task DeleteSourcesIDAsync (string sourceID, string zapTraceSpan = null);
+
+        /// <summary>
+        /// Delete a source
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="sourceID">ID of the source</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ApiResponse</returns>
+        System.Threading.Tasks.Task<ApiResponse<Object>> DeleteSourcesIDAsyncWithHttpInfo (string sourceID, string zapTraceSpan = null);
         /// <summary>
         /// Get all sources
         /// </summary>
@@ -201,7 +224,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="org">specifies the organization of the resource (optional)</param>
         /// <returns>Task of Sources</returns>
-        System.Threading.Tasks.Task<Sources> SourcesGetAsync (string zapTraceSpan = null, string org = null);
+        System.Threading.Tasks.Task<Sources> GetSourcesAsync (string zapTraceSpan = null, string org = null);
 
         /// <summary>
         /// Get all sources
@@ -213,30 +236,30 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="org">specifies the organization of the resource (optional)</param>
         /// <returns>Task of ApiResponse (Sources)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Sources>> SourcesGetAsyncWithHttpInfo (string zapTraceSpan = null, string org = null);
+        System.Threading.Tasks.Task<ApiResponse<Sources>> GetSourcesAsyncWithHttpInfo (string zapTraceSpan = null, string org = null);
         /// <summary>
-        /// Creates a Source
+        /// Get a source
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="source">source to create</param>
+        /// <param name="sourceID">ID of the source</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of Source</returns>
-        System.Threading.Tasks.Task<Source> SourcesPostAsync (Source source, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<Source> GetSourcesIDAsync (string sourceID, string zapTraceSpan = null);
 
         /// <summary>
-        /// Creates a Source
+        /// Get a source
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="source">source to create</param>
+        /// <param name="sourceID">ID of the source</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (Source)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Source>> SourcesPostAsyncWithHttpInfo (Source source, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<Source>> GetSourcesIDAsyncWithHttpInfo (string sourceID, string zapTraceSpan = null);
         /// <summary>
         /// Get a sources buckets (will return dbrps in the form of buckets if it is a v1 source)
         /// </summary>
@@ -248,7 +271,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="org">specifies the organization of the resource (optional)</param>
         /// <returns>Task of Buckets</returns>
-        System.Threading.Tasks.Task<Buckets> SourcesSourceIDBucketsGetAsync (string sourceID, string zapTraceSpan = null, string org = null);
+        System.Threading.Tasks.Task<Buckets> GetSourcesIDBucketsAsync (string sourceID, string zapTraceSpan = null, string org = null);
 
         /// <summary>
         /// Get a sources buckets (will return dbrps in the form of buckets if it is a v1 source)
@@ -261,53 +284,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="org">specifies the organization of the resource (optional)</param>
         /// <returns>Task of ApiResponse (Buckets)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Buckets>> SourcesSourceIDBucketsGetAsyncWithHttpInfo (string sourceID, string zapTraceSpan = null, string org = null);
-        /// <summary>
-        /// Delete a source
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="sourceID">ID of the source</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task SourcesSourceIDDeleteAsync (string sourceID, string zapTraceSpan = null);
-
-        /// <summary>
-        /// Delete a source
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="sourceID">ID of the source</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> SourcesSourceIDDeleteAsyncWithHttpInfo (string sourceID, string zapTraceSpan = null);
-        /// <summary>
-        /// Get a source
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="sourceID">ID of the source</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of Source</returns>
-        System.Threading.Tasks.Task<Source> SourcesSourceIDGetAsync (string sourceID, string zapTraceSpan = null);
-
-        /// <summary>
-        /// Get a source
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="sourceID">ID of the source</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ApiResponse (Source)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Source>> SourcesSourceIDGetAsyncWithHttpInfo (string sourceID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<Buckets>> GetSourcesIDBucketsAsyncWithHttpInfo (string sourceID, string zapTraceSpan = null, string org = null);
         /// <summary>
         /// Get a sources health
         /// </summary>
@@ -318,7 +295,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="sourceID">ID of the source</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of Check</returns>
-        System.Threading.Tasks.Task<Check> SourcesSourceIDHealthGetAsync (string sourceID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<Check> GetSourcesIDHealthAsync (string sourceID, string zapTraceSpan = null);
 
         /// <summary>
         /// Get a sources health
@@ -330,7 +307,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="sourceID">ID of the source</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (Check)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Check>> SourcesSourceIDHealthGetAsyncWithHttpInfo (string sourceID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<Check>> GetSourcesIDHealthAsyncWithHttpInfo (string sourceID, string zapTraceSpan = null);
         /// <summary>
         /// Updates a Source
         /// </summary>
@@ -342,7 +319,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="source">source update</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of Source</returns>
-        System.Threading.Tasks.Task<Source> SourcesSourceIDPatchAsync (string sourceID, Source source, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<Source> PatchSourcesIDAsync (string sourceID, Source source, string zapTraceSpan = null);
 
         /// <summary>
         /// Updates a Source
@@ -355,7 +332,30 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="source">source update</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (Source)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Source>> SourcesSourceIDPatchAsyncWithHttpInfo (string sourceID, Source source, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<Source>> PatchSourcesIDAsyncWithHttpInfo (string sourceID, Source source, string zapTraceSpan = null);
+        /// <summary>
+        /// Creates a Source
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="source">source to create</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of Source</returns>
+        System.Threading.Tasks.Task<Source> PostSourcesAsync (Source source, string zapTraceSpan = null);
+
+        /// <summary>
+        /// Creates a Source
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="source">source to create</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ApiResponse (Source)</returns>
+        System.Threading.Tasks.Task<ApiResponse<Source>> PostSourcesAsyncWithHttpInfo (Source source, string zapTraceSpan = null);
         #endregion Asynchronous Operations
     }
 
@@ -457,15 +457,253 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
+        /// Delete a source 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="sourceID">ID of the source</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns></returns>
+        public void DeleteSourcesID (string sourceID, string zapTraceSpan = null)
+        {
+             DeleteSourcesIDWithHttpInfo(sourceID, zapTraceSpan);
+        }
+
+        /// <summary>
+        /// Delete a source 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="sourceID">ID of the source</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        public ApiResponse<Object> DeleteSourcesIDWithHttpInfo (string sourceID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'sourceID' is set
+            if (sourceID == null)
+                throw new ApiException(400, "Missing required parameter 'sourceID' when calling SourcesService->DeleteSourcesID");
+
+            var localVarPath = "/api/v2/sources/{sourceID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (sourceID != null) localVarPathParams.Add("sourceID", this.Configuration.ApiClient.ParameterToString(sourceID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("DeleteSourcesID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Object>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                null);
+        }
+
+        /// <summary>
+        /// Delete a source 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="sourceID">ID of the source</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        public IRestResponse DeleteSourcesIDWithIRestResponse (string sourceID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'sourceID' is set
+            if (sourceID == null)
+                throw new ApiException(400, "Missing required parameter 'sourceID' when calling SourcesService->DeleteSourcesID");
+
+            var localVarPath = "/api/v2/sources/{sourceID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (sourceID != null) localVarPathParams.Add("sourceID", this.Configuration.ApiClient.ParameterToString(sourceID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("DeleteSourcesID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return localVarResponse;
+        }
+        
+        /// <summary>
+        /// Delete a source 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="sourceID">ID of the source</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        public RestRequest DeleteSourcesIDWithRestRequest (string sourceID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'sourceID' is set
+            if (sourceID == null)
+                throw new ApiException(400, "Missing required parameter 'sourceID' when calling SourcesService->DeleteSourcesID");
+
+            var localVarPath = "/api/v2/sources/{sourceID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (sourceID != null) localVarPathParams.Add("sourceID", this.Configuration.ApiClient.ParameterToString(sourceID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
+                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+        }
+
+        /// <summary>
+        /// Delete a source 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="sourceID">ID of the source</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of void</returns>
+        public async System.Threading.Tasks.Task DeleteSourcesIDAsync (string sourceID, string zapTraceSpan = null)
+        {
+             await DeleteSourcesIDAsyncWithHttpInfo(sourceID, zapTraceSpan);
+
+        }
+
+        /// <summary>
+        /// Delete a source 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="sourceID">ID of the source</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ApiResponse</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteSourcesIDAsyncWithHttpInfo (string sourceID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'sourceID' is set
+            if (sourceID == null)
+                throw new ApiException(400, "Missing required parameter 'sourceID' when calling SourcesService->DeleteSourcesID");
+
+            var localVarPath = "/api/v2/sources/{sourceID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (sourceID != null) localVarPathParams.Add("sourceID", this.Configuration.ApiClient.ParameterToString(sourceID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("DeleteSourcesID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Object>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                null);
+        }
+
+        /// <summary>
         /// Get all sources 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="org">specifies the organization of the resource (optional)</param>
         /// <returns>Sources</returns>
-        public Sources SourcesGet (string zapTraceSpan = null, string org = null)
+        public Sources GetSources (string zapTraceSpan = null, string org = null)
         {
-             ApiResponse<Sources> localVarResponse = SourcesGetWithHttpInfo(zapTraceSpan, org);
+             ApiResponse<Sources> localVarResponse = GetSourcesWithHttpInfo(zapTraceSpan, org);
              return localVarResponse.Data;
         }
 
@@ -476,7 +714,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="org">specifies the organization of the resource (optional)</param>
         /// <returns>ApiResponse of Sources</returns>
-        public ApiResponse< Sources > SourcesGetWithHttpInfo (string zapTraceSpan = null, string org = null)
+        public ApiResponse< Sources > GetSourcesWithHttpInfo (string zapTraceSpan = null, string org = null)
         {
 
             var localVarPath = "/api/v2/sources";
@@ -514,7 +752,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("SourcesGet", localVarResponse);
+                Exception exception = ExceptionFactory("GetSources", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -530,7 +768,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="org">specifies the organization of the resource (optional)</param>
         /// <returns>ApiResponse of Sources</returns>
-        public IRestResponse SourcesGetWithIRestResponse (string zapTraceSpan = null, string org = null)
+        public IRestResponse GetSourcesWithIRestResponse (string zapTraceSpan = null, string org = null)
         {
 
             var localVarPath = "/api/v2/sources";
@@ -568,7 +806,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("SourcesGet", localVarResponse);
+                Exception exception = ExceptionFactory("GetSources", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -582,7 +820,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="org">specifies the organization of the resource (optional)</param>
         /// <returns>ApiResponse of Sources</returns>
-        public RestRequest SourcesGetWithRestRequest (string zapTraceSpan = null, string org = null)
+        public RestRequest GetSourcesWithRestRequest (string zapTraceSpan = null, string org = null)
         {
 
             var localVarPath = "/api/v2/sources";
@@ -623,9 +861,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="org">specifies the organization of the resource (optional)</param>
         /// <returns>Task of Sources</returns>
-        public async System.Threading.Tasks.Task<Sources> SourcesGetAsync (string zapTraceSpan = null, string org = null)
+        public async System.Threading.Tasks.Task<Sources> GetSourcesAsync (string zapTraceSpan = null, string org = null)
         {
-             ApiResponse<Sources> localVarResponse = await SourcesGetAsyncWithHttpInfo(zapTraceSpan, org);
+             ApiResponse<Sources> localVarResponse = await GetSourcesAsyncWithHttpInfo(zapTraceSpan, org);
              return localVarResponse.Data;
 
         }
@@ -637,7 +875,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="org">specifies the organization of the resource (optional)</param>
         /// <returns>Task of ApiResponse (Sources)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Sources>> SourcesGetAsyncWithHttpInfo (string zapTraceSpan = null, string org = null)
+        public async System.Threading.Tasks.Task<ApiResponse<Sources>> GetSourcesAsyncWithHttpInfo (string zapTraceSpan = null, string org = null)
         {
 
             var localVarPath = "/api/v2/sources";
@@ -675,7 +913,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("SourcesGet", localVarResponse);
+                Exception exception = ExceptionFactory("GetSources", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -685,32 +923,32 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Creates a Source 
+        /// Get a source 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="source">source to create</param>
+        /// <param name="sourceID">ID of the source</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Source</returns>
-        public Source SourcesPost (Source source, string zapTraceSpan = null)
+        public Source GetSourcesID (string sourceID, string zapTraceSpan = null)
         {
-             ApiResponse<Source> localVarResponse = SourcesPostWithHttpInfo(source, zapTraceSpan);
+             ApiResponse<Source> localVarResponse = GetSourcesIDWithHttpInfo(sourceID, zapTraceSpan);
              return localVarResponse.Data;
         }
 
         /// <summary>
-        /// Creates a Source 
+        /// Get a source 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="source">source to create</param>
+        /// <param name="sourceID">ID of the source</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Source</returns>
-        public ApiResponse< Source > SourcesPostWithHttpInfo (Source source, string zapTraceSpan = null)
+        public ApiResponse< Source > GetSourcesIDWithHttpInfo (string sourceID, string zapTraceSpan = null)
         {
-            // verify the required parameter 'source' is set
-            if (source == null)
-                throw new ApiException(400, "Missing required parameter 'source' when calling SourcesService->SourcesPost");
+            // verify the required parameter 'sourceID' is set
+            if (sourceID == null)
+                throw new ApiException(400, "Missing required parameter 'sourceID' when calling SourcesService->GetSourcesID");
 
-            var localVarPath = "/api/v2/sources";
+            var localVarPath = "/api/v2/sources/{sourceID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -720,19 +958,11 @@ namespace InfluxDB.Client.Api.Service
 
             // to determine the Content-Type header
             String[] localVarHttpContentTypes = new String[] {
-                "application/json"
             };
             String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
+            if (sourceID != null) localVarPathParams.Add("sourceID", this.Configuration.ApiClient.ParameterToString(sourceID)); // path parameter
             if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (source != null && source.GetType() != typeof(byte[]))
-            {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(source); // http body (model) parameter
-            }
-            else
-            {
-                localVarPostBody = source; // byte array
-            }
 
             // to determine the Accept header
             String[] localVarHttpHeaderAccepts = new String[] {
@@ -746,14 +976,14 @@ namespace InfluxDB.Client.Api.Service
 
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("SourcesPost", localVarResponse);
+                Exception exception = ExceptionFactory("GetSourcesID", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -763,19 +993,19 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Creates a Source 
+        /// Get a source 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="source">source to create</param>
+        /// <param name="sourceID">ID of the source</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Source</returns>
-        public IRestResponse SourcesPostWithIRestResponse (Source source, string zapTraceSpan = null)
+        public IRestResponse GetSourcesIDWithIRestResponse (string sourceID, string zapTraceSpan = null)
         {
-            // verify the required parameter 'source' is set
-            if (source == null)
-                throw new ApiException(400, "Missing required parameter 'source' when calling SourcesService->SourcesPost");
+            // verify the required parameter 'sourceID' is set
+            if (sourceID == null)
+                throw new ApiException(400, "Missing required parameter 'sourceID' when calling SourcesService->GetSourcesID");
 
-            var localVarPath = "/api/v2/sources";
+            var localVarPath = "/api/v2/sources/{sourceID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -785,19 +1015,11 @@ namespace InfluxDB.Client.Api.Service
 
             // to determine the Content-Type header
             String[] localVarHttpContentTypes = new String[] {
-                "application/json"
             };
             String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
+            if (sourceID != null) localVarPathParams.Add("sourceID", this.Configuration.ApiClient.ParameterToString(sourceID)); // path parameter
             if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (source != null && source.GetType() != typeof(byte[]))
-            {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(source); // http body (model) parameter
-            }
-            else
-            {
-                localVarPostBody = source; // byte array
-            }
 
             // to determine the Accept header
             String[] localVarHttpHeaderAccepts = new String[] {
@@ -811,14 +1033,14 @@ namespace InfluxDB.Client.Api.Service
 
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("SourcesPost", localVarResponse);
+                Exception exception = ExceptionFactory("GetSourcesID", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -826,19 +1048,19 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// Creates a Source 
+        /// Get a source 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="source">source to create</param>
+        /// <param name="sourceID">ID of the source</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Source</returns>
-        public RestRequest SourcesPostWithRestRequest (Source source, string zapTraceSpan = null)
+        public RestRequest GetSourcesIDWithRestRequest (string sourceID, string zapTraceSpan = null)
         {
-            // verify the required parameter 'source' is set
-            if (source == null)
-                throw new ApiException(400, "Missing required parameter 'source' when calling SourcesService->SourcesPost");
+            // verify the required parameter 'sourceID' is set
+            if (sourceID == null)
+                throw new ApiException(400, "Missing required parameter 'sourceID' when calling SourcesService->GetSourcesID");
 
-            var localVarPath = "/api/v2/sources";
+            var localVarPath = "/api/v2/sources/{sourceID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -848,19 +1070,11 @@ namespace InfluxDB.Client.Api.Service
 
             // to determine the Content-Type header
             String[] localVarHttpContentTypes = new String[] {
-                "application/json"
             };
             String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
+            if (sourceID != null) localVarPathParams.Add("sourceID", this.Configuration.ApiClient.ParameterToString(sourceID)); // path parameter
             if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (source != null && source.GetType() != typeof(byte[]))
-            {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(source); // http body (model) parameter
-            }
-            else
-            {
-                localVarPostBody = source; // byte array
-            }
 
             // to determine the Accept header
             String[] localVarHttpHeaderAccepts = new String[] {
@@ -873,38 +1087,38 @@ namespace InfluxDB.Client.Api.Service
 
 
             return this.Configuration.ApiClient.PrepareRequest(localVarPath,
-                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
         }
 
         /// <summary>
-        /// Creates a Source 
+        /// Get a source 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="source">source to create</param>
+        /// <param name="sourceID">ID of the source</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of Source</returns>
-        public async System.Threading.Tasks.Task<Source> SourcesPostAsync (Source source, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<Source> GetSourcesIDAsync (string sourceID, string zapTraceSpan = null)
         {
-             ApiResponse<Source> localVarResponse = await SourcesPostAsyncWithHttpInfo(source, zapTraceSpan);
+             ApiResponse<Source> localVarResponse = await GetSourcesIDAsyncWithHttpInfo(sourceID, zapTraceSpan);
              return localVarResponse.Data;
 
         }
 
         /// <summary>
-        /// Creates a Source 
+        /// Get a source 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="source">source to create</param>
+        /// <param name="sourceID">ID of the source</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (Source)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Source>> SourcesPostAsyncWithHttpInfo (Source source, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<Source>> GetSourcesIDAsyncWithHttpInfo (string sourceID, string zapTraceSpan = null)
         {
-            // verify the required parameter 'source' is set
-            if (source == null)
-                throw new ApiException(400, "Missing required parameter 'source' when calling SourcesService->SourcesPost");
+            // verify the required parameter 'sourceID' is set
+            if (sourceID == null)
+                throw new ApiException(400, "Missing required parameter 'sourceID' when calling SourcesService->GetSourcesID");
 
-            var localVarPath = "/api/v2/sources";
+            var localVarPath = "/api/v2/sources/{sourceID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -914,19 +1128,11 @@ namespace InfluxDB.Client.Api.Service
 
             // to determine the Content-Type header
             String[] localVarHttpContentTypes = new String[] {
-                "application/json"
             };
             String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
+            if (sourceID != null) localVarPathParams.Add("sourceID", this.Configuration.ApiClient.ParameterToString(sourceID)); // path parameter
             if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (source != null && source.GetType() != typeof(byte[]))
-            {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(source); // http body (model) parameter
-            }
-            else
-            {
-                localVarPostBody = source; // byte array
-            }
 
             // to determine the Accept header
             String[] localVarHttpHeaderAccepts = new String[] {
@@ -940,14 +1146,14 @@ namespace InfluxDB.Client.Api.Service
 
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("SourcesPost", localVarResponse);
+                Exception exception = ExceptionFactory("GetSourcesID", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -964,9 +1170,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="org">specifies the organization of the resource (optional)</param>
         /// <returns>Buckets</returns>
-        public Buckets SourcesSourceIDBucketsGet (string sourceID, string zapTraceSpan = null, string org = null)
+        public Buckets GetSourcesIDBuckets (string sourceID, string zapTraceSpan = null, string org = null)
         {
-             ApiResponse<Buckets> localVarResponse = SourcesSourceIDBucketsGetWithHttpInfo(sourceID, zapTraceSpan, org);
+             ApiResponse<Buckets> localVarResponse = GetSourcesIDBucketsWithHttpInfo(sourceID, zapTraceSpan, org);
              return localVarResponse.Data;
         }
 
@@ -978,11 +1184,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="org">specifies the organization of the resource (optional)</param>
         /// <returns>ApiResponse of Buckets</returns>
-        public ApiResponse< Buckets > SourcesSourceIDBucketsGetWithHttpInfo (string sourceID, string zapTraceSpan = null, string org = null)
+        public ApiResponse< Buckets > GetSourcesIDBucketsWithHttpInfo (string sourceID, string zapTraceSpan = null, string org = null)
         {
             // verify the required parameter 'sourceID' is set
             if (sourceID == null)
-                throw new ApiException(400, "Missing required parameter 'sourceID' when calling SourcesService->SourcesSourceIDBucketsGet");
+                throw new ApiException(400, "Missing required parameter 'sourceID' when calling SourcesService->GetSourcesIDBuckets");
 
             var localVarPath = "/api/v2/sources/{sourceID}/buckets";
             var localVarPathParams = new Dictionary<String, String>();
@@ -1020,7 +1226,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("SourcesSourceIDBucketsGet", localVarResponse);
+                Exception exception = ExceptionFactory("GetSourcesIDBuckets", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -1037,11 +1243,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="org">specifies the organization of the resource (optional)</param>
         /// <returns>ApiResponse of Buckets</returns>
-        public IRestResponse SourcesSourceIDBucketsGetWithIRestResponse (string sourceID, string zapTraceSpan = null, string org = null)
+        public IRestResponse GetSourcesIDBucketsWithIRestResponse (string sourceID, string zapTraceSpan = null, string org = null)
         {
             // verify the required parameter 'sourceID' is set
             if (sourceID == null)
-                throw new ApiException(400, "Missing required parameter 'sourceID' when calling SourcesService->SourcesSourceIDBucketsGet");
+                throw new ApiException(400, "Missing required parameter 'sourceID' when calling SourcesService->GetSourcesIDBuckets");
 
             var localVarPath = "/api/v2/sources/{sourceID}/buckets";
             var localVarPathParams = new Dictionary<String, String>();
@@ -1079,7 +1285,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("SourcesSourceIDBucketsGet", localVarResponse);
+                Exception exception = ExceptionFactory("GetSourcesIDBuckets", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -1094,11 +1300,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="org">specifies the organization of the resource (optional)</param>
         /// <returns>ApiResponse of Buckets</returns>
-        public RestRequest SourcesSourceIDBucketsGetWithRestRequest (string sourceID, string zapTraceSpan = null, string org = null)
+        public RestRequest GetSourcesIDBucketsWithRestRequest (string sourceID, string zapTraceSpan = null, string org = null)
         {
             // verify the required parameter 'sourceID' is set
             if (sourceID == null)
-                throw new ApiException(400, "Missing required parameter 'sourceID' when calling SourcesService->SourcesSourceIDBucketsGet");
+                throw new ApiException(400, "Missing required parameter 'sourceID' when calling SourcesService->GetSourcesIDBuckets");
 
             var localVarPath = "/api/v2/sources/{sourceID}/buckets";
             var localVarPathParams = new Dictionary<String, String>();
@@ -1140,9 +1346,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="org">specifies the organization of the resource (optional)</param>
         /// <returns>Task of Buckets</returns>
-        public async System.Threading.Tasks.Task<Buckets> SourcesSourceIDBucketsGetAsync (string sourceID, string zapTraceSpan = null, string org = null)
+        public async System.Threading.Tasks.Task<Buckets> GetSourcesIDBucketsAsync (string sourceID, string zapTraceSpan = null, string org = null)
         {
-             ApiResponse<Buckets> localVarResponse = await SourcesSourceIDBucketsGetAsyncWithHttpInfo(sourceID, zapTraceSpan, org);
+             ApiResponse<Buckets> localVarResponse = await GetSourcesIDBucketsAsyncWithHttpInfo(sourceID, zapTraceSpan, org);
              return localVarResponse.Data;
 
         }
@@ -1155,11 +1361,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="org">specifies the organization of the resource (optional)</param>
         /// <returns>Task of ApiResponse (Buckets)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Buckets>> SourcesSourceIDBucketsGetAsyncWithHttpInfo (string sourceID, string zapTraceSpan = null, string org = null)
+        public async System.Threading.Tasks.Task<ApiResponse<Buckets>> GetSourcesIDBucketsAsyncWithHttpInfo (string sourceID, string zapTraceSpan = null, string org = null)
         {
             // verify the required parameter 'sourceID' is set
             if (sourceID == null)
-                throw new ApiException(400, "Missing required parameter 'sourceID' when calling SourcesService->SourcesSourceIDBucketsGet");
+                throw new ApiException(400, "Missing required parameter 'sourceID' when calling SourcesService->GetSourcesIDBuckets");
 
             var localVarPath = "/api/v2/sources/{sourceID}/buckets";
             var localVarPathParams = new Dictionary<String, String>();
@@ -1197,7 +1403,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("SourcesSourceIDBucketsGet", localVarResponse);
+                Exception exception = ExceptionFactory("GetSourcesIDBuckets", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -1207,493 +1413,15 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Delete a source 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="sourceID">ID of the source</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns></returns>
-        public void SourcesSourceIDDelete (string sourceID, string zapTraceSpan = null)
-        {
-             SourcesSourceIDDeleteWithHttpInfo(sourceID, zapTraceSpan);
-        }
-
-        /// <summary>
-        /// Delete a source 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="sourceID">ID of the source</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Object(void)</returns>
-        public ApiResponse<Object> SourcesSourceIDDeleteWithHttpInfo (string sourceID, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'sourceID' is set
-            if (sourceID == null)
-                throw new ApiException(400, "Missing required parameter 'sourceID' when calling SourcesService->SourcesSourceIDDelete");
-
-            var localVarPath = "/api/v2/sources/{sourceID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (sourceID != null) localVarPathParams.Add("sourceID", this.Configuration.ApiClient.ParameterToString(sourceID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("SourcesSourceIDDelete", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return new ApiResponse<Object>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                null);
-        }
-
-        /// <summary>
-        /// Delete a source 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="sourceID">ID of the source</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Object(void)</returns>
-        public IRestResponse SourcesSourceIDDeleteWithIRestResponse (string sourceID, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'sourceID' is set
-            if (sourceID == null)
-                throw new ApiException(400, "Missing required parameter 'sourceID' when calling SourcesService->SourcesSourceIDDelete");
-
-            var localVarPath = "/api/v2/sources/{sourceID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (sourceID != null) localVarPathParams.Add("sourceID", this.Configuration.ApiClient.ParameterToString(sourceID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("SourcesSourceIDDelete", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return localVarResponse;
-        }
-        
-        /// <summary>
-        /// Delete a source 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="sourceID">ID of the source</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Object(void)</returns>
-        public RestRequest SourcesSourceIDDeleteWithRestRequest (string sourceID, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'sourceID' is set
-            if (sourceID == null)
-                throw new ApiException(400, "Missing required parameter 'sourceID' when calling SourcesService->SourcesSourceIDDelete");
-
-            var localVarPath = "/api/v2/sources/{sourceID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (sourceID != null) localVarPathParams.Add("sourceID", this.Configuration.ApiClient.ParameterToString(sourceID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
-                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-        }
-
-        /// <summary>
-        /// Delete a source 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="sourceID">ID of the source</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task SourcesSourceIDDeleteAsync (string sourceID, string zapTraceSpan = null)
-        {
-             await SourcesSourceIDDeleteAsyncWithHttpInfo(sourceID, zapTraceSpan);
-
-        }
-
-        /// <summary>
-        /// Delete a source 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="sourceID">ID of the source</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Object>> SourcesSourceIDDeleteAsyncWithHttpInfo (string sourceID, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'sourceID' is set
-            if (sourceID == null)
-                throw new ApiException(400, "Missing required parameter 'sourceID' when calling SourcesService->SourcesSourceIDDelete");
-
-            var localVarPath = "/api/v2/sources/{sourceID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (sourceID != null) localVarPathParams.Add("sourceID", this.Configuration.ApiClient.ParameterToString(sourceID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("SourcesSourceIDDelete", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return new ApiResponse<Object>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                null);
-        }
-
-        /// <summary>
-        /// Get a source 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="sourceID">ID of the source</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Source</returns>
-        public Source SourcesSourceIDGet (string sourceID, string zapTraceSpan = null)
-        {
-             ApiResponse<Source> localVarResponse = SourcesSourceIDGetWithHttpInfo(sourceID, zapTraceSpan);
-             return localVarResponse.Data;
-        }
-
-        /// <summary>
-        /// Get a source 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="sourceID">ID of the source</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Source</returns>
-        public ApiResponse< Source > SourcesSourceIDGetWithHttpInfo (string sourceID, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'sourceID' is set
-            if (sourceID == null)
-                throw new ApiException(400, "Missing required parameter 'sourceID' when calling SourcesService->SourcesSourceIDGet");
-
-            var localVarPath = "/api/v2/sources/{sourceID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (sourceID != null) localVarPathParams.Add("sourceID", this.Configuration.ApiClient.ParameterToString(sourceID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("SourcesSourceIDGet", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return new ApiResponse<Source>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (Source) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Source)));
-        }
-
-        /// <summary>
-        /// Get a source 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="sourceID">ID of the source</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Source</returns>
-        public IRestResponse SourcesSourceIDGetWithIRestResponse (string sourceID, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'sourceID' is set
-            if (sourceID == null)
-                throw new ApiException(400, "Missing required parameter 'sourceID' when calling SourcesService->SourcesSourceIDGet");
-
-            var localVarPath = "/api/v2/sources/{sourceID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (sourceID != null) localVarPathParams.Add("sourceID", this.Configuration.ApiClient.ParameterToString(sourceID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("SourcesSourceIDGet", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return localVarResponse;
-        }
-        
-        /// <summary>
-        /// Get a source 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="sourceID">ID of the source</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Source</returns>
-        public RestRequest SourcesSourceIDGetWithRestRequest (string sourceID, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'sourceID' is set
-            if (sourceID == null)
-                throw new ApiException(400, "Missing required parameter 'sourceID' when calling SourcesService->SourcesSourceIDGet");
-
-            var localVarPath = "/api/v2/sources/{sourceID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (sourceID != null) localVarPathParams.Add("sourceID", this.Configuration.ApiClient.ParameterToString(sourceID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-        }
-
-        /// <summary>
-        /// Get a source 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="sourceID">ID of the source</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of Source</returns>
-        public async System.Threading.Tasks.Task<Source> SourcesSourceIDGetAsync (string sourceID, string zapTraceSpan = null)
-        {
-             ApiResponse<Source> localVarResponse = await SourcesSourceIDGetAsyncWithHttpInfo(sourceID, zapTraceSpan);
-             return localVarResponse.Data;
-
-        }
-
-        /// <summary>
-        /// Get a source 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="sourceID">ID of the source</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ApiResponse (Source)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Source>> SourcesSourceIDGetAsyncWithHttpInfo (string sourceID, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'sourceID' is set
-            if (sourceID == null)
-                throw new ApiException(400, "Missing required parameter 'sourceID' when calling SourcesService->SourcesSourceIDGet");
-
-            var localVarPath = "/api/v2/sources/{sourceID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (sourceID != null) localVarPathParams.Add("sourceID", this.Configuration.ApiClient.ParameterToString(sourceID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("SourcesSourceIDGet", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return new ApiResponse<Source>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (Source) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Source)));
-        }
-
-        /// <summary>
         /// Get a sources health 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="sourceID">ID of the source</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Check</returns>
-        public Check SourcesSourceIDHealthGet (string sourceID, string zapTraceSpan = null)
+        public Check GetSourcesIDHealth (string sourceID, string zapTraceSpan = null)
         {
-             ApiResponse<Check> localVarResponse = SourcesSourceIDHealthGetWithHttpInfo(sourceID, zapTraceSpan);
+             ApiResponse<Check> localVarResponse = GetSourcesIDHealthWithHttpInfo(sourceID, zapTraceSpan);
              return localVarResponse.Data;
         }
 
@@ -1704,11 +1432,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="sourceID">ID of the source</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Check</returns>
-        public ApiResponse< Check > SourcesSourceIDHealthGetWithHttpInfo (string sourceID, string zapTraceSpan = null)
+        public ApiResponse< Check > GetSourcesIDHealthWithHttpInfo (string sourceID, string zapTraceSpan = null)
         {
             // verify the required parameter 'sourceID' is set
             if (sourceID == null)
-                throw new ApiException(400, "Missing required parameter 'sourceID' when calling SourcesService->SourcesSourceIDHealthGet");
+                throw new ApiException(400, "Missing required parameter 'sourceID' when calling SourcesService->GetSourcesIDHealth");
 
             var localVarPath = "/api/v2/sources/{sourceID}/health";
             var localVarPathParams = new Dictionary<String, String>();
@@ -1745,7 +1473,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("SourcesSourceIDHealthGet", localVarResponse);
+                Exception exception = ExceptionFactory("GetSourcesIDHealth", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -1761,11 +1489,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="sourceID">ID of the source</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Check</returns>
-        public IRestResponse SourcesSourceIDHealthGetWithIRestResponse (string sourceID, string zapTraceSpan = null)
+        public IRestResponse GetSourcesIDHealthWithIRestResponse (string sourceID, string zapTraceSpan = null)
         {
             // verify the required parameter 'sourceID' is set
             if (sourceID == null)
-                throw new ApiException(400, "Missing required parameter 'sourceID' when calling SourcesService->SourcesSourceIDHealthGet");
+                throw new ApiException(400, "Missing required parameter 'sourceID' when calling SourcesService->GetSourcesIDHealth");
 
             var localVarPath = "/api/v2/sources/{sourceID}/health";
             var localVarPathParams = new Dictionary<String, String>();
@@ -1802,7 +1530,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("SourcesSourceIDHealthGet", localVarResponse);
+                Exception exception = ExceptionFactory("GetSourcesIDHealth", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -1816,11 +1544,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="sourceID">ID of the source</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Check</returns>
-        public RestRequest SourcesSourceIDHealthGetWithRestRequest (string sourceID, string zapTraceSpan = null)
+        public RestRequest GetSourcesIDHealthWithRestRequest (string sourceID, string zapTraceSpan = null)
         {
             // verify the required parameter 'sourceID' is set
             if (sourceID == null)
-                throw new ApiException(400, "Missing required parameter 'sourceID' when calling SourcesService->SourcesSourceIDHealthGet");
+                throw new ApiException(400, "Missing required parameter 'sourceID' when calling SourcesService->GetSourcesIDHealth");
 
             var localVarPath = "/api/v2/sources/{sourceID}/health";
             var localVarPathParams = new Dictionary<String, String>();
@@ -1860,9 +1588,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="sourceID">ID of the source</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of Check</returns>
-        public async System.Threading.Tasks.Task<Check> SourcesSourceIDHealthGetAsync (string sourceID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<Check> GetSourcesIDHealthAsync (string sourceID, string zapTraceSpan = null)
         {
-             ApiResponse<Check> localVarResponse = await SourcesSourceIDHealthGetAsyncWithHttpInfo(sourceID, zapTraceSpan);
+             ApiResponse<Check> localVarResponse = await GetSourcesIDHealthAsyncWithHttpInfo(sourceID, zapTraceSpan);
              return localVarResponse.Data;
 
         }
@@ -1874,11 +1602,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="sourceID">ID of the source</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (Check)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Check>> SourcesSourceIDHealthGetAsyncWithHttpInfo (string sourceID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<Check>> GetSourcesIDHealthAsyncWithHttpInfo (string sourceID, string zapTraceSpan = null)
         {
             // verify the required parameter 'sourceID' is set
             if (sourceID == null)
-                throw new ApiException(400, "Missing required parameter 'sourceID' when calling SourcesService->SourcesSourceIDHealthGet");
+                throw new ApiException(400, "Missing required parameter 'sourceID' when calling SourcesService->GetSourcesIDHealth");
 
             var localVarPath = "/api/v2/sources/{sourceID}/health";
             var localVarPathParams = new Dictionary<String, String>();
@@ -1915,7 +1643,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("SourcesSourceIDHealthGet", localVarResponse);
+                Exception exception = ExceptionFactory("GetSourcesIDHealth", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -1932,9 +1660,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="source">source update</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Source</returns>
-        public Source SourcesSourceIDPatch (string sourceID, Source source, string zapTraceSpan = null)
+        public Source PatchSourcesID (string sourceID, Source source, string zapTraceSpan = null)
         {
-             ApiResponse<Source> localVarResponse = SourcesSourceIDPatchWithHttpInfo(sourceID, source, zapTraceSpan);
+             ApiResponse<Source> localVarResponse = PatchSourcesIDWithHttpInfo(sourceID, source, zapTraceSpan);
              return localVarResponse.Data;
         }
 
@@ -1946,14 +1674,14 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="source">source update</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Source</returns>
-        public ApiResponse< Source > SourcesSourceIDPatchWithHttpInfo (string sourceID, Source source, string zapTraceSpan = null)
+        public ApiResponse< Source > PatchSourcesIDWithHttpInfo (string sourceID, Source source, string zapTraceSpan = null)
         {
             // verify the required parameter 'sourceID' is set
             if (sourceID == null)
-                throw new ApiException(400, "Missing required parameter 'sourceID' when calling SourcesService->SourcesSourceIDPatch");
+                throw new ApiException(400, "Missing required parameter 'sourceID' when calling SourcesService->PatchSourcesID");
             // verify the required parameter 'source' is set
             if (source == null)
-                throw new ApiException(400, "Missing required parameter 'source' when calling SourcesService->SourcesSourceIDPatch");
+                throw new ApiException(400, "Missing required parameter 'source' when calling SourcesService->PatchSourcesID");
 
             var localVarPath = "/api/v2/sources/{sourceID}";
             var localVarPathParams = new Dictionary<String, String>();
@@ -1999,7 +1727,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("SourcesSourceIDPatch", localVarResponse);
+                Exception exception = ExceptionFactory("PatchSourcesID", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -2016,14 +1744,14 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="source">source update</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Source</returns>
-        public IRestResponse SourcesSourceIDPatchWithIRestResponse (string sourceID, Source source, string zapTraceSpan = null)
+        public IRestResponse PatchSourcesIDWithIRestResponse (string sourceID, Source source, string zapTraceSpan = null)
         {
             // verify the required parameter 'sourceID' is set
             if (sourceID == null)
-                throw new ApiException(400, "Missing required parameter 'sourceID' when calling SourcesService->SourcesSourceIDPatch");
+                throw new ApiException(400, "Missing required parameter 'sourceID' when calling SourcesService->PatchSourcesID");
             // verify the required parameter 'source' is set
             if (source == null)
-                throw new ApiException(400, "Missing required parameter 'source' when calling SourcesService->SourcesSourceIDPatch");
+                throw new ApiException(400, "Missing required parameter 'source' when calling SourcesService->PatchSourcesID");
 
             var localVarPath = "/api/v2/sources/{sourceID}";
             var localVarPathParams = new Dictionary<String, String>();
@@ -2069,7 +1797,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("SourcesSourceIDPatch", localVarResponse);
+                Exception exception = ExceptionFactory("PatchSourcesID", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -2084,14 +1812,14 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="source">source update</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Source</returns>
-        public RestRequest SourcesSourceIDPatchWithRestRequest (string sourceID, Source source, string zapTraceSpan = null)
+        public RestRequest PatchSourcesIDWithRestRequest (string sourceID, Source source, string zapTraceSpan = null)
         {
             // verify the required parameter 'sourceID' is set
             if (sourceID == null)
-                throw new ApiException(400, "Missing required parameter 'sourceID' when calling SourcesService->SourcesSourceIDPatch");
+                throw new ApiException(400, "Missing required parameter 'sourceID' when calling SourcesService->PatchSourcesID");
             // verify the required parameter 'source' is set
             if (source == null)
-                throw new ApiException(400, "Missing required parameter 'source' when calling SourcesService->SourcesSourceIDPatch");
+                throw new ApiException(400, "Missing required parameter 'source' when calling SourcesService->PatchSourcesID");
 
             var localVarPath = "/api/v2/sources/{sourceID}";
             var localVarPathParams = new Dictionary<String, String>();
@@ -2141,9 +1869,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="source">source update</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of Source</returns>
-        public async System.Threading.Tasks.Task<Source> SourcesSourceIDPatchAsync (string sourceID, Source source, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<Source> PatchSourcesIDAsync (string sourceID, Source source, string zapTraceSpan = null)
         {
-             ApiResponse<Source> localVarResponse = await SourcesSourceIDPatchAsyncWithHttpInfo(sourceID, source, zapTraceSpan);
+             ApiResponse<Source> localVarResponse = await PatchSourcesIDAsyncWithHttpInfo(sourceID, source, zapTraceSpan);
              return localVarResponse.Data;
 
         }
@@ -2156,14 +1884,14 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="source">source update</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (Source)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Source>> SourcesSourceIDPatchAsyncWithHttpInfo (string sourceID, Source source, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<Source>> PatchSourcesIDAsyncWithHttpInfo (string sourceID, Source source, string zapTraceSpan = null)
         {
             // verify the required parameter 'sourceID' is set
             if (sourceID == null)
-                throw new ApiException(400, "Missing required parameter 'sourceID' when calling SourcesService->SourcesSourceIDPatch");
+                throw new ApiException(400, "Missing required parameter 'sourceID' when calling SourcesService->PatchSourcesID");
             // verify the required parameter 'source' is set
             if (source == null)
-                throw new ApiException(400, "Missing required parameter 'source' when calling SourcesService->SourcesSourceIDPatch");
+                throw new ApiException(400, "Missing required parameter 'source' when calling SourcesService->PatchSourcesID");
 
             var localVarPath = "/api/v2/sources/{sourceID}";
             var localVarPathParams = new Dictionary<String, String>();
@@ -2209,7 +1937,279 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("SourcesSourceIDPatch", localVarResponse);
+                Exception exception = ExceptionFactory("PatchSourcesID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Source>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (Source) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Source)));
+        }
+
+        /// <summary>
+        /// Creates a Source 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="source">source to create</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Source</returns>
+        public Source PostSources (Source source, string zapTraceSpan = null)
+        {
+             ApiResponse<Source> localVarResponse = PostSourcesWithHttpInfo(source, zapTraceSpan);
+             return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Creates a Source 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="source">source to create</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Source</returns>
+        public ApiResponse< Source > PostSourcesWithHttpInfo (Source source, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'source' is set
+            if (source == null)
+                throw new ApiException(400, "Missing required parameter 'source' when calling SourcesService->PostSources");
+
+            var localVarPath = "/api/v2/sources";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json"
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (source != null && source.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(source); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = source; // byte array
+            }
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("PostSources", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Source>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (Source) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Source)));
+        }
+
+        /// <summary>
+        /// Creates a Source 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="source">source to create</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Source</returns>
+        public IRestResponse PostSourcesWithIRestResponse (Source source, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'source' is set
+            if (source == null)
+                throw new ApiException(400, "Missing required parameter 'source' when calling SourcesService->PostSources");
+
+            var localVarPath = "/api/v2/sources";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json"
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (source != null && source.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(source); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = source; // byte array
+            }
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("PostSources", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return localVarResponse;
+        }
+        
+        /// <summary>
+        /// Creates a Source 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="source">source to create</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Source</returns>
+        public RestRequest PostSourcesWithRestRequest (Source source, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'source' is set
+            if (source == null)
+                throw new ApiException(400, "Missing required parameter 'source' when calling SourcesService->PostSources");
+
+            var localVarPath = "/api/v2/sources";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json"
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (source != null && source.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(source); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = source; // byte array
+            }
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
+                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+        }
+
+        /// <summary>
+        /// Creates a Source 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="source">source to create</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of Source</returns>
+        public async System.Threading.Tasks.Task<Source> PostSourcesAsync (Source source, string zapTraceSpan = null)
+        {
+             ApiResponse<Source> localVarResponse = await PostSourcesAsyncWithHttpInfo(source, zapTraceSpan);
+             return localVarResponse.Data;
+
+        }
+
+        /// <summary>
+        /// Creates a Source 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="source">source to create</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ApiResponse (Source)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<Source>> PostSourcesAsyncWithHttpInfo (Source source, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'source' is set
+            if (source == null)
+                throw new ApiException(400, "Missing required parameter 'source' when calling SourcesService->PostSources");
+
+            var localVarPath = "/api/v2/sources";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json"
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (source != null && source.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(source); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = source; // byte array
+            }
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("PostSources", localVarResponse);
                 if (exception != null) throw exception;
             }
 

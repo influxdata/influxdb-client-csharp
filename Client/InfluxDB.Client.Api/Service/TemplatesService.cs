@@ -25,6 +25,54 @@ namespace InfluxDB.Client.Api.Service
     {
         #region Synchronous Operations
         /// <summary>
+        /// delete a template document
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="templateID">ID of template</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns></returns>
+        void DeleteDocumentsTemplatesID (string templateID, string zapTraceSpan = null);
+
+        /// <summary>
+        /// delete a template document
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="templateID">ID of template</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        ApiResponse<Object> DeleteDocumentsTemplatesIDWithHttpInfo (string templateID, string zapTraceSpan = null);
+        /// <summary>
+        /// delete a label from a template
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="templateID">ID of template</param>
+        /// <param name="labelID">the label ID</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns></returns>
+        void DeleteDocumentsTemplatesIDLabelsID (string templateID, string labelID, string zapTraceSpan = null);
+
+        /// <summary>
+        /// delete a label from a template
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="templateID">ID of template</param>
+        /// <param name="labelID">the label ID</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        ApiResponse<Object> DeleteDocumentsTemplatesIDLabelsIDWithHttpInfo (string templateID, string labelID, string zapTraceSpan = null);
+        /// <summary>
         /// 
         /// </summary>
         /// <remarks>
@@ -35,7 +83,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="org">specifies the name of the organization of the template (optional)</param>
         /// <param name="orgID">specifies the organization id of the template (optional)</param>
         /// <returns>Documents</returns>
-        Documents DocumentsTemplatesGet (string zapTraceSpan = null, string org = null, string orgID = null);
+        Documents GetDocumentsTemplates (string zapTraceSpan = null, string org = null, string orgID = null);
 
         /// <summary>
         /// 
@@ -48,53 +96,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="org">specifies the name of the organization of the template (optional)</param>
         /// <param name="orgID">specifies the organization id of the template (optional)</param>
         /// <returns>ApiResponse of Documents</returns>
-        ApiResponse<Documents> DocumentsTemplatesGetWithHttpInfo (string zapTraceSpan = null, string org = null, string orgID = null);
-        /// <summary>
-        /// Create a template
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="documentCreate">template that will be created</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Document</returns>
-        Document DocumentsTemplatesPost (DocumentCreate documentCreate, string zapTraceSpan = null);
-
-        /// <summary>
-        /// Create a template
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="documentCreate">template that will be created</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Document</returns>
-        ApiResponse<Document> DocumentsTemplatesPostWithHttpInfo (DocumentCreate documentCreate, string zapTraceSpan = null);
-        /// <summary>
-        /// delete a template document
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="templateID">ID of template</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns></returns>
-        void DocumentsTemplatesTemplateIDDelete (string templateID, string zapTraceSpan = null);
-
-        /// <summary>
-        /// delete a template document
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="templateID">ID of template</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<Object> DocumentsTemplatesTemplateIDDeleteWithHttpInfo (string templateID, string zapTraceSpan = null);
+        ApiResponse<Documents> GetDocumentsTemplatesWithHttpInfo (string zapTraceSpan = null, string org = null, string orgID = null);
         /// <summary>
         /// 
         /// </summary>
@@ -105,7 +107,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="templateID">ID of template</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Document</returns>
-        Document DocumentsTemplatesTemplateIDGet (string templateID, string zapTraceSpan = null);
+        Document GetDocumentsTemplatesID (string templateID, string zapTraceSpan = null);
 
         /// <summary>
         /// 
@@ -117,7 +119,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="templateID">ID of template</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Document</returns>
-        ApiResponse<Document> DocumentsTemplatesTemplateIDGetWithHttpInfo (string templateID, string zapTraceSpan = null);
+        ApiResponse<Document> GetDocumentsTemplatesIDWithHttpInfo (string templateID, string zapTraceSpan = null);
         /// <summary>
         /// list all labels for a template
         /// </summary>
@@ -128,7 +130,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="templateID">ID of template</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>LabelsResponse</returns>
-        LabelsResponse DocumentsTemplatesTemplateIDLabelsGet (string templateID, string zapTraceSpan = null);
+        LabelsResponse GetDocumentsTemplatesIDLabels (string templateID, string zapTraceSpan = null);
 
         /// <summary>
         /// list all labels for a template
@@ -140,32 +142,30 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="templateID">ID of template</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelsResponse</returns>
-        ApiResponse<LabelsResponse> DocumentsTemplatesTemplateIDLabelsGetWithHttpInfo (string templateID, string zapTraceSpan = null);
+        ApiResponse<LabelsResponse> GetDocumentsTemplatesIDLabelsWithHttpInfo (string templateID, string zapTraceSpan = null);
         /// <summary>
-        /// delete a label from a template
+        /// Create a template
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="templateID">ID of template</param>
-        /// <param name="labelID">the label ID</param>
+        /// <param name="documentCreate">template that will be created</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns></returns>
-        void DocumentsTemplatesTemplateIDLabelsLabelIDDelete (string templateID, string labelID, string zapTraceSpan = null);
+        /// <returns>Document</returns>
+        Document PostDocumentsTemplates (DocumentCreate documentCreate, string zapTraceSpan = null);
 
         /// <summary>
-        /// delete a label from a template
+        /// Create a template
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="templateID">ID of template</param>
-        /// <param name="labelID">the label ID</param>
+        /// <param name="documentCreate">template that will be created</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<Object> DocumentsTemplatesTemplateIDLabelsLabelIDDeleteWithHttpInfo (string templateID, string labelID, string zapTraceSpan = null);
+        /// <returns>ApiResponse of Document</returns>
+        ApiResponse<Document> PostDocumentsTemplatesWithHttpInfo (DocumentCreate documentCreate, string zapTraceSpan = null);
         /// <summary>
         /// add a label to a template
         /// </summary>
@@ -177,7 +177,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="labelMapping">label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>LabelResponse</returns>
-        LabelResponse DocumentsTemplatesTemplateIDLabelsPost (string templateID, LabelMapping labelMapping, string zapTraceSpan = null);
+        LabelResponse PostDocumentsTemplatesIDLabels (string templateID, LabelMapping labelMapping, string zapTraceSpan = null);
 
         /// <summary>
         /// add a label to a template
@@ -190,7 +190,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="labelMapping">label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelResponse</returns>
-        ApiResponse<LabelResponse> DocumentsTemplatesTemplateIDLabelsPostWithHttpInfo (string templateID, LabelMapping labelMapping, string zapTraceSpan = null);
+        ApiResponse<LabelResponse> PostDocumentsTemplatesIDLabelsWithHttpInfo (string templateID, LabelMapping labelMapping, string zapTraceSpan = null);
         /// <summary>
         /// 
         /// </summary>
@@ -202,7 +202,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="documentUpdate">template that will be updated</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Document</returns>
-        Document DocumentsTemplatesTemplateIDPut (string templateID, DocumentUpdate documentUpdate, string zapTraceSpan = null);
+        Document PutDocumentsTemplatesID (string templateID, DocumentUpdate documentUpdate, string zapTraceSpan = null);
 
         /// <summary>
         /// 
@@ -215,9 +215,57 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="documentUpdate">template that will be updated</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Document</returns>
-        ApiResponse<Document> DocumentsTemplatesTemplateIDPutWithHttpInfo (string templateID, DocumentUpdate documentUpdate, string zapTraceSpan = null);
+        ApiResponse<Document> PutDocumentsTemplatesIDWithHttpInfo (string templateID, DocumentUpdate documentUpdate, string zapTraceSpan = null);
         #endregion Synchronous Operations
         #region Asynchronous Operations
+        /// <summary>
+        /// delete a template document
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="templateID">ID of template</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of void</returns>
+        System.Threading.Tasks.Task DeleteDocumentsTemplatesIDAsync (string templateID, string zapTraceSpan = null);
+
+        /// <summary>
+        /// delete a template document
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="templateID">ID of template</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ApiResponse</returns>
+        System.Threading.Tasks.Task<ApiResponse<Object>> DeleteDocumentsTemplatesIDAsyncWithHttpInfo (string templateID, string zapTraceSpan = null);
+        /// <summary>
+        /// delete a label from a template
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="templateID">ID of template</param>
+        /// <param name="labelID">the label ID</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of void</returns>
+        System.Threading.Tasks.Task DeleteDocumentsTemplatesIDLabelsIDAsync (string templateID, string labelID, string zapTraceSpan = null);
+
+        /// <summary>
+        /// delete a label from a template
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="templateID">ID of template</param>
+        /// <param name="labelID">the label ID</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ApiResponse</returns>
+        System.Threading.Tasks.Task<ApiResponse<Object>> DeleteDocumentsTemplatesIDLabelsIDAsyncWithHttpInfo (string templateID, string labelID, string zapTraceSpan = null);
         /// <summary>
         /// 
         /// </summary>
@@ -229,7 +277,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="org">specifies the name of the organization of the template (optional)</param>
         /// <param name="orgID">specifies the organization id of the template (optional)</param>
         /// <returns>Task of Documents</returns>
-        System.Threading.Tasks.Task<Documents> DocumentsTemplatesGetAsync (string zapTraceSpan = null, string org = null, string orgID = null);
+        System.Threading.Tasks.Task<Documents> GetDocumentsTemplatesAsync (string zapTraceSpan = null, string org = null, string orgID = null);
 
         /// <summary>
         /// 
@@ -242,53 +290,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="org">specifies the name of the organization of the template (optional)</param>
         /// <param name="orgID">specifies the organization id of the template (optional)</param>
         /// <returns>Task of ApiResponse (Documents)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Documents>> DocumentsTemplatesGetAsyncWithHttpInfo (string zapTraceSpan = null, string org = null, string orgID = null);
-        /// <summary>
-        /// Create a template
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="documentCreate">template that will be created</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of Document</returns>
-        System.Threading.Tasks.Task<Document> DocumentsTemplatesPostAsync (DocumentCreate documentCreate, string zapTraceSpan = null);
-
-        /// <summary>
-        /// Create a template
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="documentCreate">template that will be created</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ApiResponse (Document)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Document>> DocumentsTemplatesPostAsyncWithHttpInfo (DocumentCreate documentCreate, string zapTraceSpan = null);
-        /// <summary>
-        /// delete a template document
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="templateID">ID of template</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task DocumentsTemplatesTemplateIDDeleteAsync (string templateID, string zapTraceSpan = null);
-
-        /// <summary>
-        /// delete a template document
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="templateID">ID of template</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> DocumentsTemplatesTemplateIDDeleteAsyncWithHttpInfo (string templateID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<Documents>> GetDocumentsTemplatesAsyncWithHttpInfo (string zapTraceSpan = null, string org = null, string orgID = null);
         /// <summary>
         /// 
         /// </summary>
@@ -299,7 +301,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="templateID">ID of template</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of Document</returns>
-        System.Threading.Tasks.Task<Document> DocumentsTemplatesTemplateIDGetAsync (string templateID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<Document> GetDocumentsTemplatesIDAsync (string templateID, string zapTraceSpan = null);
 
         /// <summary>
         /// 
@@ -311,7 +313,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="templateID">ID of template</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (Document)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Document>> DocumentsTemplatesTemplateIDGetAsyncWithHttpInfo (string templateID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<Document>> GetDocumentsTemplatesIDAsyncWithHttpInfo (string templateID, string zapTraceSpan = null);
         /// <summary>
         /// list all labels for a template
         /// </summary>
@@ -322,7 +324,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="templateID">ID of template</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of LabelsResponse</returns>
-        System.Threading.Tasks.Task<LabelsResponse> DocumentsTemplatesTemplateIDLabelsGetAsync (string templateID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<LabelsResponse> GetDocumentsTemplatesIDLabelsAsync (string templateID, string zapTraceSpan = null);
 
         /// <summary>
         /// list all labels for a template
@@ -334,32 +336,30 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="templateID">ID of template</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (LabelsResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<LabelsResponse>> DocumentsTemplatesTemplateIDLabelsGetAsyncWithHttpInfo (string templateID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<LabelsResponse>> GetDocumentsTemplatesIDLabelsAsyncWithHttpInfo (string templateID, string zapTraceSpan = null);
         /// <summary>
-        /// delete a label from a template
+        /// Create a template
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="templateID">ID of template</param>
-        /// <param name="labelID">the label ID</param>
+        /// <param name="documentCreate">template that will be created</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task DocumentsTemplatesTemplateIDLabelsLabelIDDeleteAsync (string templateID, string labelID, string zapTraceSpan = null);
+        /// <returns>Task of Document</returns>
+        System.Threading.Tasks.Task<Document> PostDocumentsTemplatesAsync (DocumentCreate documentCreate, string zapTraceSpan = null);
 
         /// <summary>
-        /// delete a label from a template
+        /// Create a template
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="templateID">ID of template</param>
-        /// <param name="labelID">the label ID</param>
+        /// <param name="documentCreate">template that will be created</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> DocumentsTemplatesTemplateIDLabelsLabelIDDeleteAsyncWithHttpInfo (string templateID, string labelID, string zapTraceSpan = null);
+        /// <returns>Task of ApiResponse (Document)</returns>
+        System.Threading.Tasks.Task<ApiResponse<Document>> PostDocumentsTemplatesAsyncWithHttpInfo (DocumentCreate documentCreate, string zapTraceSpan = null);
         /// <summary>
         /// add a label to a template
         /// </summary>
@@ -371,7 +371,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="labelMapping">label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of LabelResponse</returns>
-        System.Threading.Tasks.Task<LabelResponse> DocumentsTemplatesTemplateIDLabelsPostAsync (string templateID, LabelMapping labelMapping, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<LabelResponse> PostDocumentsTemplatesIDLabelsAsync (string templateID, LabelMapping labelMapping, string zapTraceSpan = null);
 
         /// <summary>
         /// add a label to a template
@@ -384,7 +384,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="labelMapping">label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (LabelResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<LabelResponse>> DocumentsTemplatesTemplateIDLabelsPostAsyncWithHttpInfo (string templateID, LabelMapping labelMapping, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<LabelResponse>> PostDocumentsTemplatesIDLabelsAsyncWithHttpInfo (string templateID, LabelMapping labelMapping, string zapTraceSpan = null);
         /// <summary>
         /// 
         /// </summary>
@@ -396,7 +396,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="documentUpdate">template that will be updated</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of Document</returns>
-        System.Threading.Tasks.Task<Document> DocumentsTemplatesTemplateIDPutAsync (string templateID, DocumentUpdate documentUpdate, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<Document> PutDocumentsTemplatesIDAsync (string templateID, DocumentUpdate documentUpdate, string zapTraceSpan = null);
 
         /// <summary>
         /// 
@@ -409,7 +409,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="documentUpdate">template that will be updated</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (Document)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Document>> DocumentsTemplatesTemplateIDPutAsyncWithHttpInfo (string templateID, DocumentUpdate documentUpdate, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<Document>> PutDocumentsTemplatesIDAsyncWithHttpInfo (string templateID, DocumentUpdate documentUpdate, string zapTraceSpan = null);
         #endregion Asynchronous Operations
     }
 
@@ -511,6 +511,504 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
+        /// delete a template document 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="templateID">ID of template</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns></returns>
+        public void DeleteDocumentsTemplatesID (string templateID, string zapTraceSpan = null)
+        {
+             DeleteDocumentsTemplatesIDWithHttpInfo(templateID, zapTraceSpan);
+        }
+
+        /// <summary>
+        /// delete a template document 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="templateID">ID of template</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        public ApiResponse<Object> DeleteDocumentsTemplatesIDWithHttpInfo (string templateID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'templateID' is set
+            if (templateID == null)
+                throw new ApiException(400, "Missing required parameter 'templateID' when calling TemplatesService->DeleteDocumentsTemplatesID");
+
+            var localVarPath = "/api/v2/documents/templates/{templateID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (templateID != null) localVarPathParams.Add("templateID", this.Configuration.ApiClient.ParameterToString(templateID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("DeleteDocumentsTemplatesID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Object>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                null);
+        }
+
+        /// <summary>
+        /// delete a template document 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="templateID">ID of template</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        public IRestResponse DeleteDocumentsTemplatesIDWithIRestResponse (string templateID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'templateID' is set
+            if (templateID == null)
+                throw new ApiException(400, "Missing required parameter 'templateID' when calling TemplatesService->DeleteDocumentsTemplatesID");
+
+            var localVarPath = "/api/v2/documents/templates/{templateID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (templateID != null) localVarPathParams.Add("templateID", this.Configuration.ApiClient.ParameterToString(templateID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("DeleteDocumentsTemplatesID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return localVarResponse;
+        }
+        
+        /// <summary>
+        /// delete a template document 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="templateID">ID of template</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        public RestRequest DeleteDocumentsTemplatesIDWithRestRequest (string templateID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'templateID' is set
+            if (templateID == null)
+                throw new ApiException(400, "Missing required parameter 'templateID' when calling TemplatesService->DeleteDocumentsTemplatesID");
+
+            var localVarPath = "/api/v2/documents/templates/{templateID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (templateID != null) localVarPathParams.Add("templateID", this.Configuration.ApiClient.ParameterToString(templateID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
+                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+        }
+
+        /// <summary>
+        /// delete a template document 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="templateID">ID of template</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of void</returns>
+        public async System.Threading.Tasks.Task DeleteDocumentsTemplatesIDAsync (string templateID, string zapTraceSpan = null)
+        {
+             await DeleteDocumentsTemplatesIDAsyncWithHttpInfo(templateID, zapTraceSpan);
+
+        }
+
+        /// <summary>
+        /// delete a template document 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="templateID">ID of template</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ApiResponse</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteDocumentsTemplatesIDAsyncWithHttpInfo (string templateID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'templateID' is set
+            if (templateID == null)
+                throw new ApiException(400, "Missing required parameter 'templateID' when calling TemplatesService->DeleteDocumentsTemplatesID");
+
+            var localVarPath = "/api/v2/documents/templates/{templateID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (templateID != null) localVarPathParams.Add("templateID", this.Configuration.ApiClient.ParameterToString(templateID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("DeleteDocumentsTemplatesID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Object>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                null);
+        }
+
+        /// <summary>
+        /// delete a label from a template 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="templateID">ID of template</param>
+        /// <param name="labelID">the label ID</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns></returns>
+        public void DeleteDocumentsTemplatesIDLabelsID (string templateID, string labelID, string zapTraceSpan = null)
+        {
+             DeleteDocumentsTemplatesIDLabelsIDWithHttpInfo(templateID, labelID, zapTraceSpan);
+        }
+
+        /// <summary>
+        /// delete a label from a template 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="templateID">ID of template</param>
+        /// <param name="labelID">the label ID</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        public ApiResponse<Object> DeleteDocumentsTemplatesIDLabelsIDWithHttpInfo (string templateID, string labelID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'templateID' is set
+            if (templateID == null)
+                throw new ApiException(400, "Missing required parameter 'templateID' when calling TemplatesService->DeleteDocumentsTemplatesIDLabelsID");
+            // verify the required parameter 'labelID' is set
+            if (labelID == null)
+                throw new ApiException(400, "Missing required parameter 'labelID' when calling TemplatesService->DeleteDocumentsTemplatesIDLabelsID");
+
+            var localVarPath = "/api/v2/documents/templates/{templateID}/labels/{labelID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (templateID != null) localVarPathParams.Add("templateID", this.Configuration.ApiClient.ParameterToString(templateID)); // path parameter
+            if (labelID != null) localVarPathParams.Add("labelID", this.Configuration.ApiClient.ParameterToString(labelID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("DeleteDocumentsTemplatesIDLabelsID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Object>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                null);
+        }
+
+        /// <summary>
+        /// delete a label from a template 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="templateID">ID of template</param>
+        /// <param name="labelID">the label ID</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        public IRestResponse DeleteDocumentsTemplatesIDLabelsIDWithIRestResponse (string templateID, string labelID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'templateID' is set
+            if (templateID == null)
+                throw new ApiException(400, "Missing required parameter 'templateID' when calling TemplatesService->DeleteDocumentsTemplatesIDLabelsID");
+            // verify the required parameter 'labelID' is set
+            if (labelID == null)
+                throw new ApiException(400, "Missing required parameter 'labelID' when calling TemplatesService->DeleteDocumentsTemplatesIDLabelsID");
+
+            var localVarPath = "/api/v2/documents/templates/{templateID}/labels/{labelID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (templateID != null) localVarPathParams.Add("templateID", this.Configuration.ApiClient.ParameterToString(templateID)); // path parameter
+            if (labelID != null) localVarPathParams.Add("labelID", this.Configuration.ApiClient.ParameterToString(labelID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("DeleteDocumentsTemplatesIDLabelsID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return localVarResponse;
+        }
+        
+        /// <summary>
+        /// delete a label from a template 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="templateID">ID of template</param>
+        /// <param name="labelID">the label ID</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        public RestRequest DeleteDocumentsTemplatesIDLabelsIDWithRestRequest (string templateID, string labelID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'templateID' is set
+            if (templateID == null)
+                throw new ApiException(400, "Missing required parameter 'templateID' when calling TemplatesService->DeleteDocumentsTemplatesIDLabelsID");
+            // verify the required parameter 'labelID' is set
+            if (labelID == null)
+                throw new ApiException(400, "Missing required parameter 'labelID' when calling TemplatesService->DeleteDocumentsTemplatesIDLabelsID");
+
+            var localVarPath = "/api/v2/documents/templates/{templateID}/labels/{labelID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (templateID != null) localVarPathParams.Add("templateID", this.Configuration.ApiClient.ParameterToString(templateID)); // path parameter
+            if (labelID != null) localVarPathParams.Add("labelID", this.Configuration.ApiClient.ParameterToString(labelID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
+                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+        }
+
+        /// <summary>
+        /// delete a label from a template 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="templateID">ID of template</param>
+        /// <param name="labelID">the label ID</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of void</returns>
+        public async System.Threading.Tasks.Task DeleteDocumentsTemplatesIDLabelsIDAsync (string templateID, string labelID, string zapTraceSpan = null)
+        {
+             await DeleteDocumentsTemplatesIDLabelsIDAsyncWithHttpInfo(templateID, labelID, zapTraceSpan);
+
+        }
+
+        /// <summary>
+        /// delete a label from a template 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="templateID">ID of template</param>
+        /// <param name="labelID">the label ID</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ApiResponse</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteDocumentsTemplatesIDLabelsIDAsyncWithHttpInfo (string templateID, string labelID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'templateID' is set
+            if (templateID == null)
+                throw new ApiException(400, "Missing required parameter 'templateID' when calling TemplatesService->DeleteDocumentsTemplatesIDLabelsID");
+            // verify the required parameter 'labelID' is set
+            if (labelID == null)
+                throw new ApiException(400, "Missing required parameter 'labelID' when calling TemplatesService->DeleteDocumentsTemplatesIDLabelsID");
+
+            var localVarPath = "/api/v2/documents/templates/{templateID}/labels/{labelID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (templateID != null) localVarPathParams.Add("templateID", this.Configuration.ApiClient.ParameterToString(templateID)); // path parameter
+            if (labelID != null) localVarPathParams.Add("labelID", this.Configuration.ApiClient.ParameterToString(labelID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("DeleteDocumentsTemplatesIDLabelsID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Object>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                null);
+        }
+
+        /// <summary>
         ///  
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
@@ -518,9 +1016,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="org">specifies the name of the organization of the template (optional)</param>
         /// <param name="orgID">specifies the organization id of the template (optional)</param>
         /// <returns>Documents</returns>
-        public Documents DocumentsTemplatesGet (string zapTraceSpan = null, string org = null, string orgID = null)
+        public Documents GetDocumentsTemplates (string zapTraceSpan = null, string org = null, string orgID = null)
         {
-             ApiResponse<Documents> localVarResponse = DocumentsTemplatesGetWithHttpInfo(zapTraceSpan, org, orgID);
+             ApiResponse<Documents> localVarResponse = GetDocumentsTemplatesWithHttpInfo(zapTraceSpan, org, orgID);
              return localVarResponse.Data;
         }
 
@@ -532,7 +1030,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="org">specifies the name of the organization of the template (optional)</param>
         /// <param name="orgID">specifies the organization id of the template (optional)</param>
         /// <returns>ApiResponse of Documents</returns>
-        public ApiResponse< Documents > DocumentsTemplatesGetWithHttpInfo (string zapTraceSpan = null, string org = null, string orgID = null)
+        public ApiResponse< Documents > GetDocumentsTemplatesWithHttpInfo (string zapTraceSpan = null, string org = null, string orgID = null)
         {
 
             var localVarPath = "/api/v2/documents/templates";
@@ -571,7 +1069,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("DocumentsTemplatesGet", localVarResponse);
+                Exception exception = ExceptionFactory("GetDocumentsTemplates", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -588,7 +1086,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="org">specifies the name of the organization of the template (optional)</param>
         /// <param name="orgID">specifies the organization id of the template (optional)</param>
         /// <returns>ApiResponse of Documents</returns>
-        public IRestResponse DocumentsTemplatesGetWithIRestResponse (string zapTraceSpan = null, string org = null, string orgID = null)
+        public IRestResponse GetDocumentsTemplatesWithIRestResponse (string zapTraceSpan = null, string org = null, string orgID = null)
         {
 
             var localVarPath = "/api/v2/documents/templates";
@@ -627,7 +1125,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("DocumentsTemplatesGet", localVarResponse);
+                Exception exception = ExceptionFactory("GetDocumentsTemplates", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -642,7 +1140,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="org">specifies the name of the organization of the template (optional)</param>
         /// <param name="orgID">specifies the organization id of the template (optional)</param>
         /// <returns>ApiResponse of Documents</returns>
-        public RestRequest DocumentsTemplatesGetWithRestRequest (string zapTraceSpan = null, string org = null, string orgID = null)
+        public RestRequest GetDocumentsTemplatesWithRestRequest (string zapTraceSpan = null, string org = null, string orgID = null)
         {
 
             var localVarPath = "/api/v2/documents/templates";
@@ -685,9 +1183,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="org">specifies the name of the organization of the template (optional)</param>
         /// <param name="orgID">specifies the organization id of the template (optional)</param>
         /// <returns>Task of Documents</returns>
-        public async System.Threading.Tasks.Task<Documents> DocumentsTemplatesGetAsync (string zapTraceSpan = null, string org = null, string orgID = null)
+        public async System.Threading.Tasks.Task<Documents> GetDocumentsTemplatesAsync (string zapTraceSpan = null, string org = null, string orgID = null)
         {
-             ApiResponse<Documents> localVarResponse = await DocumentsTemplatesGetAsyncWithHttpInfo(zapTraceSpan, org, orgID);
+             ApiResponse<Documents> localVarResponse = await GetDocumentsTemplatesAsyncWithHttpInfo(zapTraceSpan, org, orgID);
              return localVarResponse.Data;
 
         }
@@ -700,7 +1198,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="org">specifies the name of the organization of the template (optional)</param>
         /// <param name="orgID">specifies the organization id of the template (optional)</param>
         /// <returns>Task of ApiResponse (Documents)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Documents>> DocumentsTemplatesGetAsyncWithHttpInfo (string zapTraceSpan = null, string org = null, string orgID = null)
+        public async System.Threading.Tasks.Task<ApiResponse<Documents>> GetDocumentsTemplatesAsyncWithHttpInfo (string zapTraceSpan = null, string org = null, string orgID = null)
         {
 
             var localVarPath = "/api/v2/documents/templates";
@@ -739,7 +1237,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("DocumentsTemplatesGet", localVarResponse);
+                Exception exception = ExceptionFactory("GetDocumentsTemplates", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -749,525 +1247,15 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Create a template 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="documentCreate">template that will be created</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Document</returns>
-        public Document DocumentsTemplatesPost (DocumentCreate documentCreate, string zapTraceSpan = null)
-        {
-             ApiResponse<Document> localVarResponse = DocumentsTemplatesPostWithHttpInfo(documentCreate, zapTraceSpan);
-             return localVarResponse.Data;
-        }
-
-        /// <summary>
-        /// Create a template 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="documentCreate">template that will be created</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Document</returns>
-        public ApiResponse< Document > DocumentsTemplatesPostWithHttpInfo (DocumentCreate documentCreate, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'documentCreate' is set
-            if (documentCreate == null)
-                throw new ApiException(400, "Missing required parameter 'documentCreate' when calling TemplatesService->DocumentsTemplatesPost");
-
-            var localVarPath = "/api/v2/documents/templates";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-                "application/json"
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (documentCreate != null && documentCreate.GetType() != typeof(byte[]))
-            {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(documentCreate); // http body (model) parameter
-            }
-            else
-            {
-                localVarPostBody = documentCreate; // byte array
-            }
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("DocumentsTemplatesPost", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return new ApiResponse<Document>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (Document) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Document)));
-        }
-
-        /// <summary>
-        /// Create a template 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="documentCreate">template that will be created</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Document</returns>
-        public IRestResponse DocumentsTemplatesPostWithIRestResponse (DocumentCreate documentCreate, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'documentCreate' is set
-            if (documentCreate == null)
-                throw new ApiException(400, "Missing required parameter 'documentCreate' when calling TemplatesService->DocumentsTemplatesPost");
-
-            var localVarPath = "/api/v2/documents/templates";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-                "application/json"
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (documentCreate != null && documentCreate.GetType() != typeof(byte[]))
-            {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(documentCreate); // http body (model) parameter
-            }
-            else
-            {
-                localVarPostBody = documentCreate; // byte array
-            }
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("DocumentsTemplatesPost", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return localVarResponse;
-        }
-        
-        /// <summary>
-        /// Create a template 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="documentCreate">template that will be created</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Document</returns>
-        public RestRequest DocumentsTemplatesPostWithRestRequest (DocumentCreate documentCreate, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'documentCreate' is set
-            if (documentCreate == null)
-                throw new ApiException(400, "Missing required parameter 'documentCreate' when calling TemplatesService->DocumentsTemplatesPost");
-
-            var localVarPath = "/api/v2/documents/templates";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-                "application/json"
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (documentCreate != null && documentCreate.GetType() != typeof(byte[]))
-            {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(documentCreate); // http body (model) parameter
-            }
-            else
-            {
-                localVarPostBody = documentCreate; // byte array
-            }
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
-                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-        }
-
-        /// <summary>
-        /// Create a template 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="documentCreate">template that will be created</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of Document</returns>
-        public async System.Threading.Tasks.Task<Document> DocumentsTemplatesPostAsync (DocumentCreate documentCreate, string zapTraceSpan = null)
-        {
-             ApiResponse<Document> localVarResponse = await DocumentsTemplatesPostAsyncWithHttpInfo(documentCreate, zapTraceSpan);
-             return localVarResponse.Data;
-
-        }
-
-        /// <summary>
-        /// Create a template 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="documentCreate">template that will be created</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ApiResponse (Document)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Document>> DocumentsTemplatesPostAsyncWithHttpInfo (DocumentCreate documentCreate, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'documentCreate' is set
-            if (documentCreate == null)
-                throw new ApiException(400, "Missing required parameter 'documentCreate' when calling TemplatesService->DocumentsTemplatesPost");
-
-            var localVarPath = "/api/v2/documents/templates";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-                "application/json"
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (documentCreate != null && documentCreate.GetType() != typeof(byte[]))
-            {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(documentCreate); // http body (model) parameter
-            }
-            else
-            {
-                localVarPostBody = documentCreate; // byte array
-            }
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("DocumentsTemplatesPost", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return new ApiResponse<Document>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (Document) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Document)));
-        }
-
-        /// <summary>
-        /// delete a template document 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="templateID">ID of template</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns></returns>
-        public void DocumentsTemplatesTemplateIDDelete (string templateID, string zapTraceSpan = null)
-        {
-             DocumentsTemplatesTemplateIDDeleteWithHttpInfo(templateID, zapTraceSpan);
-        }
-
-        /// <summary>
-        /// delete a template document 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="templateID">ID of template</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Object(void)</returns>
-        public ApiResponse<Object> DocumentsTemplatesTemplateIDDeleteWithHttpInfo (string templateID, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'templateID' is set
-            if (templateID == null)
-                throw new ApiException(400, "Missing required parameter 'templateID' when calling TemplatesService->DocumentsTemplatesTemplateIDDelete");
-
-            var localVarPath = "/api/v2/documents/templates/{templateID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (templateID != null) localVarPathParams.Add("templateID", this.Configuration.ApiClient.ParameterToString(templateID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("DocumentsTemplatesTemplateIDDelete", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return new ApiResponse<Object>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                null);
-        }
-
-        /// <summary>
-        /// delete a template document 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="templateID">ID of template</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Object(void)</returns>
-        public IRestResponse DocumentsTemplatesTemplateIDDeleteWithIRestResponse (string templateID, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'templateID' is set
-            if (templateID == null)
-                throw new ApiException(400, "Missing required parameter 'templateID' when calling TemplatesService->DocumentsTemplatesTemplateIDDelete");
-
-            var localVarPath = "/api/v2/documents/templates/{templateID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (templateID != null) localVarPathParams.Add("templateID", this.Configuration.ApiClient.ParameterToString(templateID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("DocumentsTemplatesTemplateIDDelete", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return localVarResponse;
-        }
-        
-        /// <summary>
-        /// delete a template document 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="templateID">ID of template</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Object(void)</returns>
-        public RestRequest DocumentsTemplatesTemplateIDDeleteWithRestRequest (string templateID, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'templateID' is set
-            if (templateID == null)
-                throw new ApiException(400, "Missing required parameter 'templateID' when calling TemplatesService->DocumentsTemplatesTemplateIDDelete");
-
-            var localVarPath = "/api/v2/documents/templates/{templateID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (templateID != null) localVarPathParams.Add("templateID", this.Configuration.ApiClient.ParameterToString(templateID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
-                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-        }
-
-        /// <summary>
-        /// delete a template document 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="templateID">ID of template</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task DocumentsTemplatesTemplateIDDeleteAsync (string templateID, string zapTraceSpan = null)
-        {
-             await DocumentsTemplatesTemplateIDDeleteAsyncWithHttpInfo(templateID, zapTraceSpan);
-
-        }
-
-        /// <summary>
-        /// delete a template document 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="templateID">ID of template</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Object>> DocumentsTemplatesTemplateIDDeleteAsyncWithHttpInfo (string templateID, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'templateID' is set
-            if (templateID == null)
-                throw new ApiException(400, "Missing required parameter 'templateID' when calling TemplatesService->DocumentsTemplatesTemplateIDDelete");
-
-            var localVarPath = "/api/v2/documents/templates/{templateID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (templateID != null) localVarPathParams.Add("templateID", this.Configuration.ApiClient.ParameterToString(templateID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("DocumentsTemplatesTemplateIDDelete", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return new ApiResponse<Object>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                null);
-        }
-
-        /// <summary>
         ///  
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="templateID">ID of template</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Document</returns>
-        public Document DocumentsTemplatesTemplateIDGet (string templateID, string zapTraceSpan = null)
+        public Document GetDocumentsTemplatesID (string templateID, string zapTraceSpan = null)
         {
-             ApiResponse<Document> localVarResponse = DocumentsTemplatesTemplateIDGetWithHttpInfo(templateID, zapTraceSpan);
+             ApiResponse<Document> localVarResponse = GetDocumentsTemplatesIDWithHttpInfo(templateID, zapTraceSpan);
              return localVarResponse.Data;
         }
 
@@ -1278,11 +1266,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="templateID">ID of template</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Document</returns>
-        public ApiResponse< Document > DocumentsTemplatesTemplateIDGetWithHttpInfo (string templateID, string zapTraceSpan = null)
+        public ApiResponse< Document > GetDocumentsTemplatesIDWithHttpInfo (string templateID, string zapTraceSpan = null)
         {
             // verify the required parameter 'templateID' is set
             if (templateID == null)
-                throw new ApiException(400, "Missing required parameter 'templateID' when calling TemplatesService->DocumentsTemplatesTemplateIDGet");
+                throw new ApiException(400, "Missing required parameter 'templateID' when calling TemplatesService->GetDocumentsTemplatesID");
 
             var localVarPath = "/api/v2/documents/templates/{templateID}";
             var localVarPathParams = new Dictionary<String, String>();
@@ -1319,7 +1307,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("DocumentsTemplatesTemplateIDGet", localVarResponse);
+                Exception exception = ExceptionFactory("GetDocumentsTemplatesID", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -1335,11 +1323,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="templateID">ID of template</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Document</returns>
-        public IRestResponse DocumentsTemplatesTemplateIDGetWithIRestResponse (string templateID, string zapTraceSpan = null)
+        public IRestResponse GetDocumentsTemplatesIDWithIRestResponse (string templateID, string zapTraceSpan = null)
         {
             // verify the required parameter 'templateID' is set
             if (templateID == null)
-                throw new ApiException(400, "Missing required parameter 'templateID' when calling TemplatesService->DocumentsTemplatesTemplateIDGet");
+                throw new ApiException(400, "Missing required parameter 'templateID' when calling TemplatesService->GetDocumentsTemplatesID");
 
             var localVarPath = "/api/v2/documents/templates/{templateID}";
             var localVarPathParams = new Dictionary<String, String>();
@@ -1376,7 +1364,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("DocumentsTemplatesTemplateIDGet", localVarResponse);
+                Exception exception = ExceptionFactory("GetDocumentsTemplatesID", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -1390,11 +1378,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="templateID">ID of template</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Document</returns>
-        public RestRequest DocumentsTemplatesTemplateIDGetWithRestRequest (string templateID, string zapTraceSpan = null)
+        public RestRequest GetDocumentsTemplatesIDWithRestRequest (string templateID, string zapTraceSpan = null)
         {
             // verify the required parameter 'templateID' is set
             if (templateID == null)
-                throw new ApiException(400, "Missing required parameter 'templateID' when calling TemplatesService->DocumentsTemplatesTemplateIDGet");
+                throw new ApiException(400, "Missing required parameter 'templateID' when calling TemplatesService->GetDocumentsTemplatesID");
 
             var localVarPath = "/api/v2/documents/templates/{templateID}";
             var localVarPathParams = new Dictionary<String, String>();
@@ -1434,9 +1422,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="templateID">ID of template</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of Document</returns>
-        public async System.Threading.Tasks.Task<Document> DocumentsTemplatesTemplateIDGetAsync (string templateID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<Document> GetDocumentsTemplatesIDAsync (string templateID, string zapTraceSpan = null)
         {
-             ApiResponse<Document> localVarResponse = await DocumentsTemplatesTemplateIDGetAsyncWithHttpInfo(templateID, zapTraceSpan);
+             ApiResponse<Document> localVarResponse = await GetDocumentsTemplatesIDAsyncWithHttpInfo(templateID, zapTraceSpan);
              return localVarResponse.Data;
 
         }
@@ -1448,11 +1436,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="templateID">ID of template</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (Document)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Document>> DocumentsTemplatesTemplateIDGetAsyncWithHttpInfo (string templateID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<Document>> GetDocumentsTemplatesIDAsyncWithHttpInfo (string templateID, string zapTraceSpan = null)
         {
             // verify the required parameter 'templateID' is set
             if (templateID == null)
-                throw new ApiException(400, "Missing required parameter 'templateID' when calling TemplatesService->DocumentsTemplatesTemplateIDGet");
+                throw new ApiException(400, "Missing required parameter 'templateID' when calling TemplatesService->GetDocumentsTemplatesID");
 
             var localVarPath = "/api/v2/documents/templates/{templateID}";
             var localVarPathParams = new Dictionary<String, String>();
@@ -1489,7 +1477,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("DocumentsTemplatesTemplateIDGet", localVarResponse);
+                Exception exception = ExceptionFactory("GetDocumentsTemplatesID", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -1505,9 +1493,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="templateID">ID of template</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>LabelsResponse</returns>
-        public LabelsResponse DocumentsTemplatesTemplateIDLabelsGet (string templateID, string zapTraceSpan = null)
+        public LabelsResponse GetDocumentsTemplatesIDLabels (string templateID, string zapTraceSpan = null)
         {
-             ApiResponse<LabelsResponse> localVarResponse = DocumentsTemplatesTemplateIDLabelsGetWithHttpInfo(templateID, zapTraceSpan);
+             ApiResponse<LabelsResponse> localVarResponse = GetDocumentsTemplatesIDLabelsWithHttpInfo(templateID, zapTraceSpan);
              return localVarResponse.Data;
         }
 
@@ -1518,11 +1506,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="templateID">ID of template</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelsResponse</returns>
-        public ApiResponse< LabelsResponse > DocumentsTemplatesTemplateIDLabelsGetWithHttpInfo (string templateID, string zapTraceSpan = null)
+        public ApiResponse< LabelsResponse > GetDocumentsTemplatesIDLabelsWithHttpInfo (string templateID, string zapTraceSpan = null)
         {
             // verify the required parameter 'templateID' is set
             if (templateID == null)
-                throw new ApiException(400, "Missing required parameter 'templateID' when calling TemplatesService->DocumentsTemplatesTemplateIDLabelsGet");
+                throw new ApiException(400, "Missing required parameter 'templateID' when calling TemplatesService->GetDocumentsTemplatesIDLabels");
 
             var localVarPath = "/api/v2/documents/templates/{templateID}/labels";
             var localVarPathParams = new Dictionary<String, String>();
@@ -1559,7 +1547,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("DocumentsTemplatesTemplateIDLabelsGet", localVarResponse);
+                Exception exception = ExceptionFactory("GetDocumentsTemplatesIDLabels", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -1575,11 +1563,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="templateID">ID of template</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelsResponse</returns>
-        public IRestResponse DocumentsTemplatesTemplateIDLabelsGetWithIRestResponse (string templateID, string zapTraceSpan = null)
+        public IRestResponse GetDocumentsTemplatesIDLabelsWithIRestResponse (string templateID, string zapTraceSpan = null)
         {
             // verify the required parameter 'templateID' is set
             if (templateID == null)
-                throw new ApiException(400, "Missing required parameter 'templateID' when calling TemplatesService->DocumentsTemplatesTemplateIDLabelsGet");
+                throw new ApiException(400, "Missing required parameter 'templateID' when calling TemplatesService->GetDocumentsTemplatesIDLabels");
 
             var localVarPath = "/api/v2/documents/templates/{templateID}/labels";
             var localVarPathParams = new Dictionary<String, String>();
@@ -1616,7 +1604,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("DocumentsTemplatesTemplateIDLabelsGet", localVarResponse);
+                Exception exception = ExceptionFactory("GetDocumentsTemplatesIDLabels", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -1630,11 +1618,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="templateID">ID of template</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelsResponse</returns>
-        public RestRequest DocumentsTemplatesTemplateIDLabelsGetWithRestRequest (string templateID, string zapTraceSpan = null)
+        public RestRequest GetDocumentsTemplatesIDLabelsWithRestRequest (string templateID, string zapTraceSpan = null)
         {
             // verify the required parameter 'templateID' is set
             if (templateID == null)
-                throw new ApiException(400, "Missing required parameter 'templateID' when calling TemplatesService->DocumentsTemplatesTemplateIDLabelsGet");
+                throw new ApiException(400, "Missing required parameter 'templateID' when calling TemplatesService->GetDocumentsTemplatesIDLabels");
 
             var localVarPath = "/api/v2/documents/templates/{templateID}/labels";
             var localVarPathParams = new Dictionary<String, String>();
@@ -1674,9 +1662,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="templateID">ID of template</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of LabelsResponse</returns>
-        public async System.Threading.Tasks.Task<LabelsResponse> DocumentsTemplatesTemplateIDLabelsGetAsync (string templateID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<LabelsResponse> GetDocumentsTemplatesIDLabelsAsync (string templateID, string zapTraceSpan = null)
         {
-             ApiResponse<LabelsResponse> localVarResponse = await DocumentsTemplatesTemplateIDLabelsGetAsyncWithHttpInfo(templateID, zapTraceSpan);
+             ApiResponse<LabelsResponse> localVarResponse = await GetDocumentsTemplatesIDLabelsAsyncWithHttpInfo(templateID, zapTraceSpan);
              return localVarResponse.Data;
 
         }
@@ -1688,11 +1676,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="templateID">ID of template</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (LabelsResponse)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<LabelsResponse>> DocumentsTemplatesTemplateIDLabelsGetAsyncWithHttpInfo (string templateID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<LabelsResponse>> GetDocumentsTemplatesIDLabelsAsyncWithHttpInfo (string templateID, string zapTraceSpan = null)
         {
             // verify the required parameter 'templateID' is set
             if (templateID == null)
-                throw new ApiException(400, "Missing required parameter 'templateID' when calling TemplatesService->DocumentsTemplatesTemplateIDLabelsGet");
+                throw new ApiException(400, "Missing required parameter 'templateID' when calling TemplatesService->GetDocumentsTemplatesIDLabels");
 
             var localVarPath = "/api/v2/documents/templates/{templateID}/labels";
             var localVarPathParams = new Dictionary<String, String>();
@@ -1729,7 +1717,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("DocumentsTemplatesTemplateIDLabelsGet", localVarResponse);
+                Exception exception = ExceptionFactory("GetDocumentsTemplatesIDLabels", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -1739,36 +1727,32 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// delete a label from a template 
+        /// Create a template 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="templateID">ID of template</param>
-        /// <param name="labelID">the label ID</param>
+        /// <param name="documentCreate">template that will be created</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns></returns>
-        public void DocumentsTemplatesTemplateIDLabelsLabelIDDelete (string templateID, string labelID, string zapTraceSpan = null)
+        /// <returns>Document</returns>
+        public Document PostDocumentsTemplates (DocumentCreate documentCreate, string zapTraceSpan = null)
         {
-             DocumentsTemplatesTemplateIDLabelsLabelIDDeleteWithHttpInfo(templateID, labelID, zapTraceSpan);
+             ApiResponse<Document> localVarResponse = PostDocumentsTemplatesWithHttpInfo(documentCreate, zapTraceSpan);
+             return localVarResponse.Data;
         }
 
         /// <summary>
-        /// delete a label from a template 
+        /// Create a template 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="templateID">ID of template</param>
-        /// <param name="labelID">the label ID</param>
+        /// <param name="documentCreate">template that will be created</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Object(void)</returns>
-        public ApiResponse<Object> DocumentsTemplatesTemplateIDLabelsLabelIDDeleteWithHttpInfo (string templateID, string labelID, string zapTraceSpan = null)
+        /// <returns>ApiResponse of Document</returns>
+        public ApiResponse< Document > PostDocumentsTemplatesWithHttpInfo (DocumentCreate documentCreate, string zapTraceSpan = null)
         {
-            // verify the required parameter 'templateID' is set
-            if (templateID == null)
-                throw new ApiException(400, "Missing required parameter 'templateID' when calling TemplatesService->DocumentsTemplatesTemplateIDLabelsLabelIDDelete");
-            // verify the required parameter 'labelID' is set
-            if (labelID == null)
-                throw new ApiException(400, "Missing required parameter 'labelID' when calling TemplatesService->DocumentsTemplatesTemplateIDLabelsLabelIDDelete");
+            // verify the required parameter 'documentCreate' is set
+            if (documentCreate == null)
+                throw new ApiException(400, "Missing required parameter 'documentCreate' when calling TemplatesService->PostDocumentsTemplates");
 
-            var localVarPath = "/api/v2/documents/templates/{templateID}/labels/{labelID}";
+            var localVarPath = "/api/v2/documents/templates";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1778,12 +1762,19 @@ namespace InfluxDB.Client.Api.Service
 
             // to determine the Content-Type header
             String[] localVarHttpContentTypes = new String[] {
+                "application/json"
             };
             String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (templateID != null) localVarPathParams.Add("templateID", this.Configuration.ApiClient.ParameterToString(templateID)); // path parameter
-            if (labelID != null) localVarPathParams.Add("labelID", this.Configuration.ApiClient.ParameterToString(labelID)); // path parameter
             if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (documentCreate != null && documentCreate.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(documentCreate); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = documentCreate; // byte array
+            }
 
             // to determine the Accept header
             String[] localVarHttpHeaderAccepts = new String[] {
@@ -1797,40 +1788,36 @@ namespace InfluxDB.Client.Api.Service
 
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("DocumentsTemplatesTemplateIDLabelsLabelIDDelete", localVarResponse);
+                Exception exception = ExceptionFactory("PostDocumentsTemplates", localVarResponse);
                 if (exception != null) throw exception;
             }
 
-            return new ApiResponse<Object>(localVarStatusCode,
+            return new ApiResponse<Document>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                null);
+                (Document) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Document)));
         }
 
         /// <summary>
-        /// delete a label from a template 
+        /// Create a template 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="templateID">ID of template</param>
-        /// <param name="labelID">the label ID</param>
+        /// <param name="documentCreate">template that will be created</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Object(void)</returns>
-        public IRestResponse DocumentsTemplatesTemplateIDLabelsLabelIDDeleteWithIRestResponse (string templateID, string labelID, string zapTraceSpan = null)
+        /// <returns>ApiResponse of Document</returns>
+        public IRestResponse PostDocumentsTemplatesWithIRestResponse (DocumentCreate documentCreate, string zapTraceSpan = null)
         {
-            // verify the required parameter 'templateID' is set
-            if (templateID == null)
-                throw new ApiException(400, "Missing required parameter 'templateID' when calling TemplatesService->DocumentsTemplatesTemplateIDLabelsLabelIDDelete");
-            // verify the required parameter 'labelID' is set
-            if (labelID == null)
-                throw new ApiException(400, "Missing required parameter 'labelID' when calling TemplatesService->DocumentsTemplatesTemplateIDLabelsLabelIDDelete");
+            // verify the required parameter 'documentCreate' is set
+            if (documentCreate == null)
+                throw new ApiException(400, "Missing required parameter 'documentCreate' when calling TemplatesService->PostDocumentsTemplates");
 
-            var localVarPath = "/api/v2/documents/templates/{templateID}/labels/{labelID}";
+            var localVarPath = "/api/v2/documents/templates";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1840,12 +1827,19 @@ namespace InfluxDB.Client.Api.Service
 
             // to determine the Content-Type header
             String[] localVarHttpContentTypes = new String[] {
+                "application/json"
             };
             String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (templateID != null) localVarPathParams.Add("templateID", this.Configuration.ApiClient.ParameterToString(templateID)); // path parameter
-            if (labelID != null) localVarPathParams.Add("labelID", this.Configuration.ApiClient.ParameterToString(labelID)); // path parameter
             if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (documentCreate != null && documentCreate.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(documentCreate); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = documentCreate; // byte array
+            }
 
             // to determine the Accept header
             String[] localVarHttpHeaderAccepts = new String[] {
@@ -1859,14 +1853,14 @@ namespace InfluxDB.Client.Api.Service
 
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("DocumentsTemplatesTemplateIDLabelsLabelIDDelete", localVarResponse);
+                Exception exception = ExceptionFactory("PostDocumentsTemplates", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -1874,23 +1868,19 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// delete a label from a template 
+        /// Create a template 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="templateID">ID of template</param>
-        /// <param name="labelID">the label ID</param>
+        /// <param name="documentCreate">template that will be created</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Object(void)</returns>
-        public RestRequest DocumentsTemplatesTemplateIDLabelsLabelIDDeleteWithRestRequest (string templateID, string labelID, string zapTraceSpan = null)
+        /// <returns>ApiResponse of Document</returns>
+        public RestRequest PostDocumentsTemplatesWithRestRequest (DocumentCreate documentCreate, string zapTraceSpan = null)
         {
-            // verify the required parameter 'templateID' is set
-            if (templateID == null)
-                throw new ApiException(400, "Missing required parameter 'templateID' when calling TemplatesService->DocumentsTemplatesTemplateIDLabelsLabelIDDelete");
-            // verify the required parameter 'labelID' is set
-            if (labelID == null)
-                throw new ApiException(400, "Missing required parameter 'labelID' when calling TemplatesService->DocumentsTemplatesTemplateIDLabelsLabelIDDelete");
+            // verify the required parameter 'documentCreate' is set
+            if (documentCreate == null)
+                throw new ApiException(400, "Missing required parameter 'documentCreate' when calling TemplatesService->PostDocumentsTemplates");
 
-            var localVarPath = "/api/v2/documents/templates/{templateID}/labels/{labelID}";
+            var localVarPath = "/api/v2/documents/templates";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1900,12 +1890,19 @@ namespace InfluxDB.Client.Api.Service
 
             // to determine the Content-Type header
             String[] localVarHttpContentTypes = new String[] {
+                "application/json"
             };
             String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (templateID != null) localVarPathParams.Add("templateID", this.Configuration.ApiClient.ParameterToString(templateID)); // path parameter
-            if (labelID != null) localVarPathParams.Add("labelID", this.Configuration.ApiClient.ParameterToString(labelID)); // path parameter
             if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (documentCreate != null && documentCreate.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(documentCreate); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = documentCreate; // byte array
+            }
 
             // to determine the Accept header
             String[] localVarHttpHeaderAccepts = new String[] {
@@ -1918,42 +1915,38 @@ namespace InfluxDB.Client.Api.Service
 
 
             return this.Configuration.ApiClient.PrepareRequest(localVarPath,
-                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
         }
 
         /// <summary>
-        /// delete a label from a template 
+        /// Create a template 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="templateID">ID of template</param>
-        /// <param name="labelID">the label ID</param>
+        /// <param name="documentCreate">template that will be created</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task DocumentsTemplatesTemplateIDLabelsLabelIDDeleteAsync (string templateID, string labelID, string zapTraceSpan = null)
+        /// <returns>Task of Document</returns>
+        public async System.Threading.Tasks.Task<Document> PostDocumentsTemplatesAsync (DocumentCreate documentCreate, string zapTraceSpan = null)
         {
-             await DocumentsTemplatesTemplateIDLabelsLabelIDDeleteAsyncWithHttpInfo(templateID, labelID, zapTraceSpan);
+             ApiResponse<Document> localVarResponse = await PostDocumentsTemplatesAsyncWithHttpInfo(documentCreate, zapTraceSpan);
+             return localVarResponse.Data;
 
         }
 
         /// <summary>
-        /// delete a label from a template 
+        /// Create a template 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="templateID">ID of template</param>
-        /// <param name="labelID">the label ID</param>
+        /// <param name="documentCreate">template that will be created</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Object>> DocumentsTemplatesTemplateIDLabelsLabelIDDeleteAsyncWithHttpInfo (string templateID, string labelID, string zapTraceSpan = null)
+        /// <returns>Task of ApiResponse (Document)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<Document>> PostDocumentsTemplatesAsyncWithHttpInfo (DocumentCreate documentCreate, string zapTraceSpan = null)
         {
-            // verify the required parameter 'templateID' is set
-            if (templateID == null)
-                throw new ApiException(400, "Missing required parameter 'templateID' when calling TemplatesService->DocumentsTemplatesTemplateIDLabelsLabelIDDelete");
-            // verify the required parameter 'labelID' is set
-            if (labelID == null)
-                throw new ApiException(400, "Missing required parameter 'labelID' when calling TemplatesService->DocumentsTemplatesTemplateIDLabelsLabelIDDelete");
+            // verify the required parameter 'documentCreate' is set
+            if (documentCreate == null)
+                throw new ApiException(400, "Missing required parameter 'documentCreate' when calling TemplatesService->PostDocumentsTemplates");
 
-            var localVarPath = "/api/v2/documents/templates/{templateID}/labels/{labelID}";
+            var localVarPath = "/api/v2/documents/templates";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1963,12 +1956,19 @@ namespace InfluxDB.Client.Api.Service
 
             // to determine the Content-Type header
             String[] localVarHttpContentTypes = new String[] {
+                "application/json"
             };
             String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (templateID != null) localVarPathParams.Add("templateID", this.Configuration.ApiClient.ParameterToString(templateID)); // path parameter
-            if (labelID != null) localVarPathParams.Add("labelID", this.Configuration.ApiClient.ParameterToString(labelID)); // path parameter
             if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (documentCreate != null && documentCreate.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(documentCreate); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = documentCreate; // byte array
+            }
 
             // to determine the Accept header
             String[] localVarHttpHeaderAccepts = new String[] {
@@ -1982,20 +1982,20 @@ namespace InfluxDB.Client.Api.Service
 
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("DocumentsTemplatesTemplateIDLabelsLabelIDDelete", localVarResponse);
+                Exception exception = ExceptionFactory("PostDocumentsTemplates", localVarResponse);
                 if (exception != null) throw exception;
             }
 
-            return new ApiResponse<Object>(localVarStatusCode,
+            return new ApiResponse<Document>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                null);
+                (Document) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Document)));
         }
 
         /// <summary>
@@ -2006,9 +2006,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="labelMapping">label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>LabelResponse</returns>
-        public LabelResponse DocumentsTemplatesTemplateIDLabelsPost (string templateID, LabelMapping labelMapping, string zapTraceSpan = null)
+        public LabelResponse PostDocumentsTemplatesIDLabels (string templateID, LabelMapping labelMapping, string zapTraceSpan = null)
         {
-             ApiResponse<LabelResponse> localVarResponse = DocumentsTemplatesTemplateIDLabelsPostWithHttpInfo(templateID, labelMapping, zapTraceSpan);
+             ApiResponse<LabelResponse> localVarResponse = PostDocumentsTemplatesIDLabelsWithHttpInfo(templateID, labelMapping, zapTraceSpan);
              return localVarResponse.Data;
         }
 
@@ -2020,14 +2020,14 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="labelMapping">label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelResponse</returns>
-        public ApiResponse< LabelResponse > DocumentsTemplatesTemplateIDLabelsPostWithHttpInfo (string templateID, LabelMapping labelMapping, string zapTraceSpan = null)
+        public ApiResponse< LabelResponse > PostDocumentsTemplatesIDLabelsWithHttpInfo (string templateID, LabelMapping labelMapping, string zapTraceSpan = null)
         {
             // verify the required parameter 'templateID' is set
             if (templateID == null)
-                throw new ApiException(400, "Missing required parameter 'templateID' when calling TemplatesService->DocumentsTemplatesTemplateIDLabelsPost");
+                throw new ApiException(400, "Missing required parameter 'templateID' when calling TemplatesService->PostDocumentsTemplatesIDLabels");
             // verify the required parameter 'labelMapping' is set
             if (labelMapping == null)
-                throw new ApiException(400, "Missing required parameter 'labelMapping' when calling TemplatesService->DocumentsTemplatesTemplateIDLabelsPost");
+                throw new ApiException(400, "Missing required parameter 'labelMapping' when calling TemplatesService->PostDocumentsTemplatesIDLabels");
 
             var localVarPath = "/api/v2/documents/templates/{templateID}/labels";
             var localVarPathParams = new Dictionary<String, String>();
@@ -2073,7 +2073,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("DocumentsTemplatesTemplateIDLabelsPost", localVarResponse);
+                Exception exception = ExceptionFactory("PostDocumentsTemplatesIDLabels", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -2090,14 +2090,14 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="labelMapping">label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelResponse</returns>
-        public IRestResponse DocumentsTemplatesTemplateIDLabelsPostWithIRestResponse (string templateID, LabelMapping labelMapping, string zapTraceSpan = null)
+        public IRestResponse PostDocumentsTemplatesIDLabelsWithIRestResponse (string templateID, LabelMapping labelMapping, string zapTraceSpan = null)
         {
             // verify the required parameter 'templateID' is set
             if (templateID == null)
-                throw new ApiException(400, "Missing required parameter 'templateID' when calling TemplatesService->DocumentsTemplatesTemplateIDLabelsPost");
+                throw new ApiException(400, "Missing required parameter 'templateID' when calling TemplatesService->PostDocumentsTemplatesIDLabels");
             // verify the required parameter 'labelMapping' is set
             if (labelMapping == null)
-                throw new ApiException(400, "Missing required parameter 'labelMapping' when calling TemplatesService->DocumentsTemplatesTemplateIDLabelsPost");
+                throw new ApiException(400, "Missing required parameter 'labelMapping' when calling TemplatesService->PostDocumentsTemplatesIDLabels");
 
             var localVarPath = "/api/v2/documents/templates/{templateID}/labels";
             var localVarPathParams = new Dictionary<String, String>();
@@ -2143,7 +2143,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("DocumentsTemplatesTemplateIDLabelsPost", localVarResponse);
+                Exception exception = ExceptionFactory("PostDocumentsTemplatesIDLabels", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -2158,14 +2158,14 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="labelMapping">label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelResponse</returns>
-        public RestRequest DocumentsTemplatesTemplateIDLabelsPostWithRestRequest (string templateID, LabelMapping labelMapping, string zapTraceSpan = null)
+        public RestRequest PostDocumentsTemplatesIDLabelsWithRestRequest (string templateID, LabelMapping labelMapping, string zapTraceSpan = null)
         {
             // verify the required parameter 'templateID' is set
             if (templateID == null)
-                throw new ApiException(400, "Missing required parameter 'templateID' when calling TemplatesService->DocumentsTemplatesTemplateIDLabelsPost");
+                throw new ApiException(400, "Missing required parameter 'templateID' when calling TemplatesService->PostDocumentsTemplatesIDLabels");
             // verify the required parameter 'labelMapping' is set
             if (labelMapping == null)
-                throw new ApiException(400, "Missing required parameter 'labelMapping' when calling TemplatesService->DocumentsTemplatesTemplateIDLabelsPost");
+                throw new ApiException(400, "Missing required parameter 'labelMapping' when calling TemplatesService->PostDocumentsTemplatesIDLabels");
 
             var localVarPath = "/api/v2/documents/templates/{templateID}/labels";
             var localVarPathParams = new Dictionary<String, String>();
@@ -2215,9 +2215,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="labelMapping">label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of LabelResponse</returns>
-        public async System.Threading.Tasks.Task<LabelResponse> DocumentsTemplatesTemplateIDLabelsPostAsync (string templateID, LabelMapping labelMapping, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<LabelResponse> PostDocumentsTemplatesIDLabelsAsync (string templateID, LabelMapping labelMapping, string zapTraceSpan = null)
         {
-             ApiResponse<LabelResponse> localVarResponse = await DocumentsTemplatesTemplateIDLabelsPostAsyncWithHttpInfo(templateID, labelMapping, zapTraceSpan);
+             ApiResponse<LabelResponse> localVarResponse = await PostDocumentsTemplatesIDLabelsAsyncWithHttpInfo(templateID, labelMapping, zapTraceSpan);
              return localVarResponse.Data;
 
         }
@@ -2230,14 +2230,14 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="labelMapping">label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (LabelResponse)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<LabelResponse>> DocumentsTemplatesTemplateIDLabelsPostAsyncWithHttpInfo (string templateID, LabelMapping labelMapping, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<LabelResponse>> PostDocumentsTemplatesIDLabelsAsyncWithHttpInfo (string templateID, LabelMapping labelMapping, string zapTraceSpan = null)
         {
             // verify the required parameter 'templateID' is set
             if (templateID == null)
-                throw new ApiException(400, "Missing required parameter 'templateID' when calling TemplatesService->DocumentsTemplatesTemplateIDLabelsPost");
+                throw new ApiException(400, "Missing required parameter 'templateID' when calling TemplatesService->PostDocumentsTemplatesIDLabels");
             // verify the required parameter 'labelMapping' is set
             if (labelMapping == null)
-                throw new ApiException(400, "Missing required parameter 'labelMapping' when calling TemplatesService->DocumentsTemplatesTemplateIDLabelsPost");
+                throw new ApiException(400, "Missing required parameter 'labelMapping' when calling TemplatesService->PostDocumentsTemplatesIDLabels");
 
             var localVarPath = "/api/v2/documents/templates/{templateID}/labels";
             var localVarPathParams = new Dictionary<String, String>();
@@ -2283,7 +2283,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("DocumentsTemplatesTemplateIDLabelsPost", localVarResponse);
+                Exception exception = ExceptionFactory("PostDocumentsTemplatesIDLabels", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -2300,9 +2300,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="documentUpdate">template that will be updated</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Document</returns>
-        public Document DocumentsTemplatesTemplateIDPut (string templateID, DocumentUpdate documentUpdate, string zapTraceSpan = null)
+        public Document PutDocumentsTemplatesID (string templateID, DocumentUpdate documentUpdate, string zapTraceSpan = null)
         {
-             ApiResponse<Document> localVarResponse = DocumentsTemplatesTemplateIDPutWithHttpInfo(templateID, documentUpdate, zapTraceSpan);
+             ApiResponse<Document> localVarResponse = PutDocumentsTemplatesIDWithHttpInfo(templateID, documentUpdate, zapTraceSpan);
              return localVarResponse.Data;
         }
 
@@ -2314,14 +2314,14 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="documentUpdate">template that will be updated</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Document</returns>
-        public ApiResponse< Document > DocumentsTemplatesTemplateIDPutWithHttpInfo (string templateID, DocumentUpdate documentUpdate, string zapTraceSpan = null)
+        public ApiResponse< Document > PutDocumentsTemplatesIDWithHttpInfo (string templateID, DocumentUpdate documentUpdate, string zapTraceSpan = null)
         {
             // verify the required parameter 'templateID' is set
             if (templateID == null)
-                throw new ApiException(400, "Missing required parameter 'templateID' when calling TemplatesService->DocumentsTemplatesTemplateIDPut");
+                throw new ApiException(400, "Missing required parameter 'templateID' when calling TemplatesService->PutDocumentsTemplatesID");
             // verify the required parameter 'documentUpdate' is set
             if (documentUpdate == null)
-                throw new ApiException(400, "Missing required parameter 'documentUpdate' when calling TemplatesService->DocumentsTemplatesTemplateIDPut");
+                throw new ApiException(400, "Missing required parameter 'documentUpdate' when calling TemplatesService->PutDocumentsTemplatesID");
 
             var localVarPath = "/api/v2/documents/templates/{templateID}";
             var localVarPathParams = new Dictionary<String, String>();
@@ -2367,7 +2367,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("DocumentsTemplatesTemplateIDPut", localVarResponse);
+                Exception exception = ExceptionFactory("PutDocumentsTemplatesID", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -2384,14 +2384,14 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="documentUpdate">template that will be updated</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Document</returns>
-        public IRestResponse DocumentsTemplatesTemplateIDPutWithIRestResponse (string templateID, DocumentUpdate documentUpdate, string zapTraceSpan = null)
+        public IRestResponse PutDocumentsTemplatesIDWithIRestResponse (string templateID, DocumentUpdate documentUpdate, string zapTraceSpan = null)
         {
             // verify the required parameter 'templateID' is set
             if (templateID == null)
-                throw new ApiException(400, "Missing required parameter 'templateID' when calling TemplatesService->DocumentsTemplatesTemplateIDPut");
+                throw new ApiException(400, "Missing required parameter 'templateID' when calling TemplatesService->PutDocumentsTemplatesID");
             // verify the required parameter 'documentUpdate' is set
             if (documentUpdate == null)
-                throw new ApiException(400, "Missing required parameter 'documentUpdate' when calling TemplatesService->DocumentsTemplatesTemplateIDPut");
+                throw new ApiException(400, "Missing required parameter 'documentUpdate' when calling TemplatesService->PutDocumentsTemplatesID");
 
             var localVarPath = "/api/v2/documents/templates/{templateID}";
             var localVarPathParams = new Dictionary<String, String>();
@@ -2437,7 +2437,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("DocumentsTemplatesTemplateIDPut", localVarResponse);
+                Exception exception = ExceptionFactory("PutDocumentsTemplatesID", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -2452,14 +2452,14 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="documentUpdate">template that will be updated</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Document</returns>
-        public RestRequest DocumentsTemplatesTemplateIDPutWithRestRequest (string templateID, DocumentUpdate documentUpdate, string zapTraceSpan = null)
+        public RestRequest PutDocumentsTemplatesIDWithRestRequest (string templateID, DocumentUpdate documentUpdate, string zapTraceSpan = null)
         {
             // verify the required parameter 'templateID' is set
             if (templateID == null)
-                throw new ApiException(400, "Missing required parameter 'templateID' when calling TemplatesService->DocumentsTemplatesTemplateIDPut");
+                throw new ApiException(400, "Missing required parameter 'templateID' when calling TemplatesService->PutDocumentsTemplatesID");
             // verify the required parameter 'documentUpdate' is set
             if (documentUpdate == null)
-                throw new ApiException(400, "Missing required parameter 'documentUpdate' when calling TemplatesService->DocumentsTemplatesTemplateIDPut");
+                throw new ApiException(400, "Missing required parameter 'documentUpdate' when calling TemplatesService->PutDocumentsTemplatesID");
 
             var localVarPath = "/api/v2/documents/templates/{templateID}";
             var localVarPathParams = new Dictionary<String, String>();
@@ -2509,9 +2509,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="documentUpdate">template that will be updated</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of Document</returns>
-        public async System.Threading.Tasks.Task<Document> DocumentsTemplatesTemplateIDPutAsync (string templateID, DocumentUpdate documentUpdate, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<Document> PutDocumentsTemplatesIDAsync (string templateID, DocumentUpdate documentUpdate, string zapTraceSpan = null)
         {
-             ApiResponse<Document> localVarResponse = await DocumentsTemplatesTemplateIDPutAsyncWithHttpInfo(templateID, documentUpdate, zapTraceSpan);
+             ApiResponse<Document> localVarResponse = await PutDocumentsTemplatesIDAsyncWithHttpInfo(templateID, documentUpdate, zapTraceSpan);
              return localVarResponse.Data;
 
         }
@@ -2524,14 +2524,14 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="documentUpdate">template that will be updated</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (Document)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Document>> DocumentsTemplatesTemplateIDPutAsyncWithHttpInfo (string templateID, DocumentUpdate documentUpdate, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<Document>> PutDocumentsTemplatesIDAsyncWithHttpInfo (string templateID, DocumentUpdate documentUpdate, string zapTraceSpan = null)
         {
             // verify the required parameter 'templateID' is set
             if (templateID == null)
-                throw new ApiException(400, "Missing required parameter 'templateID' when calling TemplatesService->DocumentsTemplatesTemplateIDPut");
+                throw new ApiException(400, "Missing required parameter 'templateID' when calling TemplatesService->PutDocumentsTemplatesID");
             // verify the required parameter 'documentUpdate' is set
             if (documentUpdate == null)
-                throw new ApiException(400, "Missing required parameter 'documentUpdate' when calling TemplatesService->DocumentsTemplatesTemplateIDPut");
+                throw new ApiException(400, "Missing required parameter 'documentUpdate' when calling TemplatesService->PutDocumentsTemplatesID");
 
             var localVarPath = "/api/v2/documents/templates/{templateID}";
             var localVarPathParams = new Dictionary<String, String>();
@@ -2577,7 +2577,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("DocumentsTemplatesTemplateIDPut", localVarResponse);
+                Exception exception = ExceptionFactory("PutDocumentsTemplatesID", localVarResponse);
                 if (exception != null) throw exception;
             }
 

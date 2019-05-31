@@ -33,7 +33,7 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Routes</returns>
-        Routes RootGet (string zapTraceSpan = null);
+        Routes GetRoutes (string zapTraceSpan = null);
 
         /// <summary>
         /// Map of all top level routes available
@@ -44,7 +44,7 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Routes</returns>
-        ApiResponse<Routes> RootGetWithHttpInfo (string zapTraceSpan = null);
+        ApiResponse<Routes> GetRoutesWithHttpInfo (string zapTraceSpan = null);
         /// <summary>
         /// Exchange basic auth credentials for session
         /// </summary>
@@ -55,7 +55,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="authorization">An auth credential for the Basic scheme (optional)</param>
         /// <returns></returns>
-        void SigninPost (string zapTraceSpan = null, String authorization = null);
+        void PostSignin (string zapTraceSpan = null, String authorization = null);
 
         /// <summary>
         /// Exchange basic auth credentials for session
@@ -67,7 +67,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="authorization">An auth credential for the Basic scheme (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<Object> SigninPostWithHttpInfo (string zapTraceSpan = null, String authorization = null);
+        ApiResponse<Object> PostSigninWithHttpInfo (string zapTraceSpan = null, String authorization = null);
         /// <summary>
         /// Expire the current session
         /// </summary>
@@ -77,7 +77,7 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
-        void SignoutPost (string zapTraceSpan = null);
+        void PostSignout (string zapTraceSpan = null);
 
         /// <summary>
         /// Expire the current session
@@ -88,7 +88,7 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<Object> SignoutPostWithHttpInfo (string zapTraceSpan = null);
+        ApiResponse<Object> PostSignoutWithHttpInfo (string zapTraceSpan = null);
         #endregion Synchronous Operations
         #region Asynchronous Operations
         /// <summary>
@@ -100,7 +100,7 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of Routes</returns>
-        System.Threading.Tasks.Task<Routes> RootGetAsync (string zapTraceSpan = null);
+        System.Threading.Tasks.Task<Routes> GetRoutesAsync (string zapTraceSpan = null);
 
         /// <summary>
         /// Map of all top level routes available
@@ -111,7 +111,7 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (Routes)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Routes>> RootGetAsyncWithHttpInfo (string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<Routes>> GetRoutesAsyncWithHttpInfo (string zapTraceSpan = null);
         /// <summary>
         /// Exchange basic auth credentials for session
         /// </summary>
@@ -122,7 +122,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="authorization">An auth credential for the Basic scheme (optional)</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task SigninPostAsync (string zapTraceSpan = null, String authorization = null);
+        System.Threading.Tasks.Task PostSigninAsync (string zapTraceSpan = null, String authorization = null);
 
         /// <summary>
         /// Exchange basic auth credentials for session
@@ -134,7 +134,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="authorization">An auth credential for the Basic scheme (optional)</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> SigninPostAsyncWithHttpInfo (string zapTraceSpan = null, String authorization = null);
+        System.Threading.Tasks.Task<ApiResponse<Object>> PostSigninAsyncWithHttpInfo (string zapTraceSpan = null, String authorization = null);
         /// <summary>
         /// Expire the current session
         /// </summary>
@@ -144,7 +144,7 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task SignoutPostAsync (string zapTraceSpan = null);
+        System.Threading.Tasks.Task PostSignoutAsync (string zapTraceSpan = null);
 
         /// <summary>
         /// Expire the current session
@@ -155,7 +155,7 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> SignoutPostAsyncWithHttpInfo (string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<Object>> PostSignoutAsyncWithHttpInfo (string zapTraceSpan = null);
         #endregion Asynchronous Operations
     }
 
@@ -262,9 +262,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Routes</returns>
-        public Routes RootGet (string zapTraceSpan = null)
+        public Routes GetRoutes (string zapTraceSpan = null)
         {
-             ApiResponse<Routes> localVarResponse = RootGetWithHttpInfo(zapTraceSpan);
+             ApiResponse<Routes> localVarResponse = GetRoutesWithHttpInfo(zapTraceSpan);
              return localVarResponse.Data;
         }
 
@@ -274,7 +274,7 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Routes</returns>
-        public ApiResponse< Routes > RootGetWithHttpInfo (string zapTraceSpan = null)
+        public ApiResponse< Routes > GetRoutesWithHttpInfo (string zapTraceSpan = null)
         {
 
             var localVarPath = "/api/v2/";
@@ -311,7 +311,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("RootGet", localVarResponse);
+                Exception exception = ExceptionFactory("GetRoutes", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -326,7 +326,7 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Routes</returns>
-        public IRestResponse RootGetWithIRestResponse (string zapTraceSpan = null)
+        public IRestResponse GetRoutesWithIRestResponse (string zapTraceSpan = null)
         {
 
             var localVarPath = "/api/v2/";
@@ -363,7 +363,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("RootGet", localVarResponse);
+                Exception exception = ExceptionFactory("GetRoutes", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -376,7 +376,7 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Routes</returns>
-        public RestRequest RootGetWithRestRequest (string zapTraceSpan = null)
+        public RestRequest GetRoutesWithRestRequest (string zapTraceSpan = null)
         {
 
             var localVarPath = "/api/v2/";
@@ -415,9 +415,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of Routes</returns>
-        public async System.Threading.Tasks.Task<Routes> RootGetAsync (string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<Routes> GetRoutesAsync (string zapTraceSpan = null)
         {
-             ApiResponse<Routes> localVarResponse = await RootGetAsyncWithHttpInfo(zapTraceSpan);
+             ApiResponse<Routes> localVarResponse = await GetRoutesAsyncWithHttpInfo(zapTraceSpan);
              return localVarResponse.Data;
 
         }
@@ -428,7 +428,7 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (Routes)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Routes>> RootGetAsyncWithHttpInfo (string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<Routes>> GetRoutesAsyncWithHttpInfo (string zapTraceSpan = null)
         {
 
             var localVarPath = "/api/v2/";
@@ -465,7 +465,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("RootGet", localVarResponse);
+                Exception exception = ExceptionFactory("GetRoutes", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -481,9 +481,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="authorization">An auth credential for the Basic scheme (optional)</param>
         /// <returns></returns>
-        public void SigninPost (string zapTraceSpan = null, String authorization = null)
+        public void PostSignin (string zapTraceSpan = null, String authorization = null)
         {
-             SigninPostWithHttpInfo(zapTraceSpan, authorization);
+             PostSigninWithHttpInfo(zapTraceSpan, authorization);
         }
 
         /// <summary>
@@ -493,7 +493,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="authorization">An auth credential for the Basic scheme (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public ApiResponse<Object> SigninPostWithHttpInfo (string zapTraceSpan = null, String authorization = null)
+        public ApiResponse<Object> PostSigninWithHttpInfo (string zapTraceSpan = null, String authorization = null)
         {
 
             var localVarPath = "/api/v2/signin";
@@ -537,7 +537,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("SigninPost", localVarResponse);
+                Exception exception = ExceptionFactory("PostSignin", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -553,7 +553,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="authorization">An auth credential for the Basic scheme (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public IRestResponse SigninPostWithIRestResponse (string zapTraceSpan = null, String authorization = null)
+        public IRestResponse PostSigninWithIRestResponse (string zapTraceSpan = null, String authorization = null)
         {
 
             var localVarPath = "/api/v2/signin";
@@ -597,7 +597,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("SigninPost", localVarResponse);
+                Exception exception = ExceptionFactory("PostSignin", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -611,7 +611,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="authorization">An auth credential for the Basic scheme (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public RestRequest SigninPostWithRestRequest (string zapTraceSpan = null, String authorization = null)
+        public RestRequest PostSigninWithRestRequest (string zapTraceSpan = null, String authorization = null)
         {
 
             var localVarPath = "/api/v2/signin";
@@ -658,9 +658,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="authorization">An auth credential for the Basic scheme (optional)</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task SigninPostAsync (string zapTraceSpan = null, String authorization = null)
+        public async System.Threading.Tasks.Task PostSigninAsync (string zapTraceSpan = null, String authorization = null)
         {
-             await SigninPostAsyncWithHttpInfo(zapTraceSpan, authorization);
+             await PostSigninAsyncWithHttpInfo(zapTraceSpan, authorization);
 
         }
 
@@ -671,7 +671,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="authorization">An auth credential for the Basic scheme (optional)</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Object>> SigninPostAsyncWithHttpInfo (string zapTraceSpan = null, String authorization = null)
+        public async System.Threading.Tasks.Task<ApiResponse<Object>> PostSigninAsyncWithHttpInfo (string zapTraceSpan = null, String authorization = null)
         {
 
             var localVarPath = "/api/v2/signin";
@@ -715,7 +715,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("SigninPost", localVarResponse);
+                Exception exception = ExceptionFactory("PostSignin", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -730,9 +730,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
-        public void SignoutPost (string zapTraceSpan = null)
+        public void PostSignout (string zapTraceSpan = null)
         {
-             SignoutPostWithHttpInfo(zapTraceSpan);
+             PostSignoutWithHttpInfo(zapTraceSpan);
         }
 
         /// <summary>
@@ -741,7 +741,7 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public ApiResponse<Object> SignoutPostWithHttpInfo (string zapTraceSpan = null)
+        public ApiResponse<Object> PostSignoutWithHttpInfo (string zapTraceSpan = null)
         {
 
             var localVarPath = "/api/v2/signout";
@@ -778,7 +778,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("SignoutPost", localVarResponse);
+                Exception exception = ExceptionFactory("PostSignout", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -793,7 +793,7 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public IRestResponse SignoutPostWithIRestResponse (string zapTraceSpan = null)
+        public IRestResponse PostSignoutWithIRestResponse (string zapTraceSpan = null)
         {
 
             var localVarPath = "/api/v2/signout";
@@ -830,7 +830,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("SignoutPost", localVarResponse);
+                Exception exception = ExceptionFactory("PostSignout", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -843,7 +843,7 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public RestRequest SignoutPostWithRestRequest (string zapTraceSpan = null)
+        public RestRequest PostSignoutWithRestRequest (string zapTraceSpan = null)
         {
 
             var localVarPath = "/api/v2/signout";
@@ -882,9 +882,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task SignoutPostAsync (string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task PostSignoutAsync (string zapTraceSpan = null)
         {
-             await SignoutPostAsyncWithHttpInfo(zapTraceSpan);
+             await PostSignoutAsyncWithHttpInfo(zapTraceSpan);
 
         }
 
@@ -894,7 +894,7 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Object>> SignoutPostAsyncWithHttpInfo (string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<Object>> PostSignoutAsyncWithHttpInfo (string zapTraceSpan = null)
         {
 
             var localVarPath = "/api/v2/signout";
@@ -931,7 +931,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("SignoutPost", localVarResponse);
+                Exception exception = ExceptionFactory("PostSignout", localVarResponse);
                 if (exception != null) throw exception;
             }
 

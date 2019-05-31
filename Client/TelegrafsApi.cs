@@ -28,7 +28,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNotNull(telegrafRequest, nameof(telegrafRequest));
 
-            return _service.TelegrafsPost(telegrafRequest);
+            return _service.PostTelegrafs(telegrafRequest);
         }
 
         /// <summary>
@@ -98,7 +98,7 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(telegrafId, nameof(telegrafId));
             Arguments.CheckNotNull(telegrafRequest, nameof(telegrafRequest));
 
-            return _service.TelegrafsTelegrafIDPut(telegrafId, telegrafRequest);
+            return _service.PutTelegrafsID(telegrafId, telegrafRequest);
         }
 
         /// <summary>
@@ -122,7 +122,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(telegrafId, nameof(telegrafId));
 
-            _service.TelegrafsTelegrafIDDelete(telegrafId);
+            _service.DeleteTelegrafsID(telegrafId);
         }
 
         /// <summary>
@@ -171,7 +171,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(telegrafId, nameof(telegrafId));
 
-            var restResponse = _service.TelegrafsTelegrafIDGetWithIRestResponse(telegrafId);
+            var restResponse = _service.GetTelegrafsIDWithIRestResponse(telegrafId, null, "application/json");
 
             return (Telegraf) _service.Configuration.ApiClient.Deserialize(restResponse, typeof(Telegraf));
         }
@@ -204,7 +204,7 @@ namespace InfluxDB.Client
         /// <returns>A list of telegraf configs</returns>
         public List<Telegraf> FindTelegrafsByOrgId(string orgId)
         {
-            return _service.TelegrafsGet(orgId).Configurations;
+            return _service.GetTelegrafs(orgId).Configurations;
         }
 
         /// <summary>
@@ -228,7 +228,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(telegrafId, nameof(telegrafId));
 
-            return _service.TelegrafsTelegrafIDGetstring(telegrafId, null, "application/toml");
+            return _service.GetTelegrafsIDstring(telegrafId, null, "application/toml");
         }
 
         /// <summary>
@@ -252,7 +252,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(telegrafId, nameof(telegrafId));
 
-            return _service.TelegrafsTelegrafIDMembersGet(telegrafId).Users;
+            return _service.GetTelegrafsIDMembers(telegrafId).Users;
         }
 
         /// <summary>
@@ -280,7 +280,7 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(telegrafId, nameof(telegrafId));
             Arguments.CheckNonEmptyString(memberId, nameof(memberId));
 
-            return _service.TelegrafsTelegrafIDMembersPost(telegrafId, new AddResourceMemberRequestBody(memberId));
+            return _service.PostTelegrafsIDMembers(telegrafId, new AddResourceMemberRequestBody(memberId));
         }
 
         /// <summary>
@@ -308,7 +308,7 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(telegrafId, nameof(telegrafId));
             Arguments.CheckNonEmptyString(memberId, nameof(memberId));
 
-            _service.TelegrafsTelegrafIDMembersUserIDDelete(memberId, telegrafId);
+            _service.DeleteTelegrafsIDMembersID(memberId, telegrafId);
         }
 
         /// <summary>
@@ -332,7 +332,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(telegrafId, nameof(telegrafId));
 
-            return _service.TelegrafsTelegrafIDOwnersGet(telegrafId).Users;
+            return _service.GetTelegrafsIDOwners(telegrafId).Users;
         }
 
         /// <summary>
@@ -360,7 +360,7 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(telegrafId, nameof(telegrafId));
             Arguments.CheckNonEmptyString(ownerId, nameof(ownerId));
 
-            return _service.TelegrafsTelegrafIDOwnersPost(telegrafId, new AddResourceMemberRequestBody(ownerId));
+            return _service.PostTelegrafsIDOwners(telegrafId, new AddResourceMemberRequestBody(ownerId));
         }
 
         /// <summary>
@@ -388,7 +388,7 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(telegrafId, nameof(telegrafId));
             Arguments.CheckNonEmptyString(ownerId, nameof(ownerId));
 
-            _service.TelegrafsTelegrafIDOwnersUserIDDelete(ownerId, telegrafId);
+            _service.DeleteTelegrafsIDOwnersID(ownerId, telegrafId);
         }
 
         /// <summary>
@@ -412,7 +412,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(telegrafId, nameof(telegrafId));
 
-            return _service.TelegrafsTelegrafIDLabelsGet(telegrafId).Labels;
+            return _service.GetTelegrafsIDLabels(telegrafId).Labels;
         }
 
         /// <summary>
@@ -440,7 +440,7 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(telegrafId, nameof(telegrafId));
             Arguments.CheckNonEmptyString(labelId, nameof(labelId));
 
-            return _service.TelegrafsTelegrafIDLabelsPost(telegrafId, new LabelMapping(labelId)).Label;
+            return _service.PostTelegrafsIDLabels(telegrafId, new LabelMapping(labelId)).Label;
         }
 
         /// <summary>
@@ -468,7 +468,7 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(telegrafId, nameof(telegrafId));
             Arguments.CheckNonEmptyString(labelId, nameof(labelId));
 
-            _service.TelegrafsTelegrafIDLabelsLabelIDDelete(telegrafId, labelId);
+            _service.DeleteTelegrafsIDLabelsID(telegrafId, labelId);
         }
     }
 }

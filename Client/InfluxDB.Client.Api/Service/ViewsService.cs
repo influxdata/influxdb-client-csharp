@@ -35,7 +35,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="cellID">ID of cell</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>View</returns>
-        View DashboardsDashboardIDCellsCellIDViewGet (string dashboardID, string cellID, string zapTraceSpan = null);
+        View GetDashboardsIDCellsIDView (string dashboardID, string cellID, string zapTraceSpan = null);
 
         /// <summary>
         /// Retrieve the view for a cell in a dashboard
@@ -48,7 +48,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="cellID">ID of cell</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of View</returns>
-        ApiResponse<View> DashboardsDashboardIDCellsCellIDViewGetWithHttpInfo (string dashboardID, string cellID, string zapTraceSpan = null);
+        ApiResponse<View> GetDashboardsIDCellsIDViewWithHttpInfo (string dashboardID, string cellID, string zapTraceSpan = null);
         /// <summary>
         /// Update the view for a cell
         /// </summary>
@@ -61,7 +61,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="view">updates the view for a cell</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>View</returns>
-        View DashboardsDashboardIDCellsCellIDViewPatch (string dashboardID, string cellID, View view, string zapTraceSpan = null);
+        View PatchDashboardsIDCellsIDView (string dashboardID, string cellID, View view, string zapTraceSpan = null);
 
         /// <summary>
         /// Update the view for a cell
@@ -75,7 +75,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="view">updates the view for a cell</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of View</returns>
-        ApiResponse<View> DashboardsDashboardIDCellsCellIDViewPatchWithHttpInfo (string dashboardID, string cellID, View view, string zapTraceSpan = null);
+        ApiResponse<View> PatchDashboardsIDCellsIDViewWithHttpInfo (string dashboardID, string cellID, View view, string zapTraceSpan = null);
         #endregion Synchronous Operations
         #region Asynchronous Operations
         /// <summary>
@@ -89,7 +89,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="cellID">ID of cell</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of View</returns>
-        System.Threading.Tasks.Task<View> DashboardsDashboardIDCellsCellIDViewGetAsync (string dashboardID, string cellID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<View> GetDashboardsIDCellsIDViewAsync (string dashboardID, string cellID, string zapTraceSpan = null);
 
         /// <summary>
         /// Retrieve the view for a cell in a dashboard
@@ -102,7 +102,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="cellID">ID of cell</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (View)</returns>
-        System.Threading.Tasks.Task<ApiResponse<View>> DashboardsDashboardIDCellsCellIDViewGetAsyncWithHttpInfo (string dashboardID, string cellID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<View>> GetDashboardsIDCellsIDViewAsyncWithHttpInfo (string dashboardID, string cellID, string zapTraceSpan = null);
         /// <summary>
         /// Update the view for a cell
         /// </summary>
@@ -115,7 +115,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="view">updates the view for a cell</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of View</returns>
-        System.Threading.Tasks.Task<View> DashboardsDashboardIDCellsCellIDViewPatchAsync (string dashboardID, string cellID, View view, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<View> PatchDashboardsIDCellsIDViewAsync (string dashboardID, string cellID, View view, string zapTraceSpan = null);
 
         /// <summary>
         /// Update the view for a cell
@@ -129,7 +129,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="view">updates the view for a cell</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (View)</returns>
-        System.Threading.Tasks.Task<ApiResponse<View>> DashboardsDashboardIDCellsCellIDViewPatchAsyncWithHttpInfo (string dashboardID, string cellID, View view, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<View>> PatchDashboardsIDCellsIDViewAsyncWithHttpInfo (string dashboardID, string cellID, View view, string zapTraceSpan = null);
         #endregion Asynchronous Operations
     }
 
@@ -238,9 +238,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="cellID">ID of cell</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>View</returns>
-        public View DashboardsDashboardIDCellsCellIDViewGet (string dashboardID, string cellID, string zapTraceSpan = null)
+        public View GetDashboardsIDCellsIDView (string dashboardID, string cellID, string zapTraceSpan = null)
         {
-             ApiResponse<View> localVarResponse = DashboardsDashboardIDCellsCellIDViewGetWithHttpInfo(dashboardID, cellID, zapTraceSpan);
+             ApiResponse<View> localVarResponse = GetDashboardsIDCellsIDViewWithHttpInfo(dashboardID, cellID, zapTraceSpan);
              return localVarResponse.Data;
         }
 
@@ -252,14 +252,14 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="cellID">ID of cell</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of View</returns>
-        public ApiResponse< View > DashboardsDashboardIDCellsCellIDViewGetWithHttpInfo (string dashboardID, string cellID, string zapTraceSpan = null)
+        public ApiResponse< View > GetDashboardsIDCellsIDViewWithHttpInfo (string dashboardID, string cellID, string zapTraceSpan = null)
         {
             // verify the required parameter 'dashboardID' is set
             if (dashboardID == null)
-                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling ViewsService->DashboardsDashboardIDCellsCellIDViewGet");
+                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling ViewsService->GetDashboardsIDCellsIDView");
             // verify the required parameter 'cellID' is set
             if (cellID == null)
-                throw new ApiException(400, "Missing required parameter 'cellID' when calling ViewsService->DashboardsDashboardIDCellsCellIDViewGet");
+                throw new ApiException(400, "Missing required parameter 'cellID' when calling ViewsService->GetDashboardsIDCellsIDView");
 
             var localVarPath = "/api/v2/dashboards/{dashboardID}/cells/{cellID}/view";
             var localVarPathParams = new Dictionary<String, String>();
@@ -297,7 +297,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("DashboardsDashboardIDCellsCellIDViewGet", localVarResponse);
+                Exception exception = ExceptionFactory("GetDashboardsIDCellsIDView", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -314,14 +314,14 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="cellID">ID of cell</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of View</returns>
-        public IRestResponse DashboardsDashboardIDCellsCellIDViewGetWithIRestResponse (string dashboardID, string cellID, string zapTraceSpan = null)
+        public IRestResponse GetDashboardsIDCellsIDViewWithIRestResponse (string dashboardID, string cellID, string zapTraceSpan = null)
         {
             // verify the required parameter 'dashboardID' is set
             if (dashboardID == null)
-                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling ViewsService->DashboardsDashboardIDCellsCellIDViewGet");
+                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling ViewsService->GetDashboardsIDCellsIDView");
             // verify the required parameter 'cellID' is set
             if (cellID == null)
-                throw new ApiException(400, "Missing required parameter 'cellID' when calling ViewsService->DashboardsDashboardIDCellsCellIDViewGet");
+                throw new ApiException(400, "Missing required parameter 'cellID' when calling ViewsService->GetDashboardsIDCellsIDView");
 
             var localVarPath = "/api/v2/dashboards/{dashboardID}/cells/{cellID}/view";
             var localVarPathParams = new Dictionary<String, String>();
@@ -359,7 +359,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("DashboardsDashboardIDCellsCellIDViewGet", localVarResponse);
+                Exception exception = ExceptionFactory("GetDashboardsIDCellsIDView", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -374,14 +374,14 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="cellID">ID of cell</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of View</returns>
-        public RestRequest DashboardsDashboardIDCellsCellIDViewGetWithRestRequest (string dashboardID, string cellID, string zapTraceSpan = null)
+        public RestRequest GetDashboardsIDCellsIDViewWithRestRequest (string dashboardID, string cellID, string zapTraceSpan = null)
         {
             // verify the required parameter 'dashboardID' is set
             if (dashboardID == null)
-                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling ViewsService->DashboardsDashboardIDCellsCellIDViewGet");
+                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling ViewsService->GetDashboardsIDCellsIDView");
             // verify the required parameter 'cellID' is set
             if (cellID == null)
-                throw new ApiException(400, "Missing required parameter 'cellID' when calling ViewsService->DashboardsDashboardIDCellsCellIDViewGet");
+                throw new ApiException(400, "Missing required parameter 'cellID' when calling ViewsService->GetDashboardsIDCellsIDView");
 
             var localVarPath = "/api/v2/dashboards/{dashboardID}/cells/{cellID}/view";
             var localVarPathParams = new Dictionary<String, String>();
@@ -423,9 +423,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="cellID">ID of cell</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of View</returns>
-        public async System.Threading.Tasks.Task<View> DashboardsDashboardIDCellsCellIDViewGetAsync (string dashboardID, string cellID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<View> GetDashboardsIDCellsIDViewAsync (string dashboardID, string cellID, string zapTraceSpan = null)
         {
-             ApiResponse<View> localVarResponse = await DashboardsDashboardIDCellsCellIDViewGetAsyncWithHttpInfo(dashboardID, cellID, zapTraceSpan);
+             ApiResponse<View> localVarResponse = await GetDashboardsIDCellsIDViewAsyncWithHttpInfo(dashboardID, cellID, zapTraceSpan);
              return localVarResponse.Data;
 
         }
@@ -438,14 +438,14 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="cellID">ID of cell</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (View)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<View>> DashboardsDashboardIDCellsCellIDViewGetAsyncWithHttpInfo (string dashboardID, string cellID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<View>> GetDashboardsIDCellsIDViewAsyncWithHttpInfo (string dashboardID, string cellID, string zapTraceSpan = null)
         {
             // verify the required parameter 'dashboardID' is set
             if (dashboardID == null)
-                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling ViewsService->DashboardsDashboardIDCellsCellIDViewGet");
+                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling ViewsService->GetDashboardsIDCellsIDView");
             // verify the required parameter 'cellID' is set
             if (cellID == null)
-                throw new ApiException(400, "Missing required parameter 'cellID' when calling ViewsService->DashboardsDashboardIDCellsCellIDViewGet");
+                throw new ApiException(400, "Missing required parameter 'cellID' when calling ViewsService->GetDashboardsIDCellsIDView");
 
             var localVarPath = "/api/v2/dashboards/{dashboardID}/cells/{cellID}/view";
             var localVarPathParams = new Dictionary<String, String>();
@@ -483,7 +483,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("DashboardsDashboardIDCellsCellIDViewGet", localVarResponse);
+                Exception exception = ExceptionFactory("GetDashboardsIDCellsIDView", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -501,9 +501,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="view">updates the view for a cell</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>View</returns>
-        public View DashboardsDashboardIDCellsCellIDViewPatch (string dashboardID, string cellID, View view, string zapTraceSpan = null)
+        public View PatchDashboardsIDCellsIDView (string dashboardID, string cellID, View view, string zapTraceSpan = null)
         {
-             ApiResponse<View> localVarResponse = DashboardsDashboardIDCellsCellIDViewPatchWithHttpInfo(dashboardID, cellID, view, zapTraceSpan);
+             ApiResponse<View> localVarResponse = PatchDashboardsIDCellsIDViewWithHttpInfo(dashboardID, cellID, view, zapTraceSpan);
              return localVarResponse.Data;
         }
 
@@ -516,17 +516,17 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="view">updates the view for a cell</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of View</returns>
-        public ApiResponse< View > DashboardsDashboardIDCellsCellIDViewPatchWithHttpInfo (string dashboardID, string cellID, View view, string zapTraceSpan = null)
+        public ApiResponse< View > PatchDashboardsIDCellsIDViewWithHttpInfo (string dashboardID, string cellID, View view, string zapTraceSpan = null)
         {
             // verify the required parameter 'dashboardID' is set
             if (dashboardID == null)
-                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling ViewsService->DashboardsDashboardIDCellsCellIDViewPatch");
+                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling ViewsService->PatchDashboardsIDCellsIDView");
             // verify the required parameter 'cellID' is set
             if (cellID == null)
-                throw new ApiException(400, "Missing required parameter 'cellID' when calling ViewsService->DashboardsDashboardIDCellsCellIDViewPatch");
+                throw new ApiException(400, "Missing required parameter 'cellID' when calling ViewsService->PatchDashboardsIDCellsIDView");
             // verify the required parameter 'view' is set
             if (view == null)
-                throw new ApiException(400, "Missing required parameter 'view' when calling ViewsService->DashboardsDashboardIDCellsCellIDViewPatch");
+                throw new ApiException(400, "Missing required parameter 'view' when calling ViewsService->PatchDashboardsIDCellsIDView");
 
             var localVarPath = "/api/v2/dashboards/{dashboardID}/cells/{cellID}/view";
             var localVarPathParams = new Dictionary<String, String>();
@@ -573,7 +573,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("DashboardsDashboardIDCellsCellIDViewPatch", localVarResponse);
+                Exception exception = ExceptionFactory("PatchDashboardsIDCellsIDView", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -591,17 +591,17 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="view">updates the view for a cell</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of View</returns>
-        public IRestResponse DashboardsDashboardIDCellsCellIDViewPatchWithIRestResponse (string dashboardID, string cellID, View view, string zapTraceSpan = null)
+        public IRestResponse PatchDashboardsIDCellsIDViewWithIRestResponse (string dashboardID, string cellID, View view, string zapTraceSpan = null)
         {
             // verify the required parameter 'dashboardID' is set
             if (dashboardID == null)
-                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling ViewsService->DashboardsDashboardIDCellsCellIDViewPatch");
+                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling ViewsService->PatchDashboardsIDCellsIDView");
             // verify the required parameter 'cellID' is set
             if (cellID == null)
-                throw new ApiException(400, "Missing required parameter 'cellID' when calling ViewsService->DashboardsDashboardIDCellsCellIDViewPatch");
+                throw new ApiException(400, "Missing required parameter 'cellID' when calling ViewsService->PatchDashboardsIDCellsIDView");
             // verify the required parameter 'view' is set
             if (view == null)
-                throw new ApiException(400, "Missing required parameter 'view' when calling ViewsService->DashboardsDashboardIDCellsCellIDViewPatch");
+                throw new ApiException(400, "Missing required parameter 'view' when calling ViewsService->PatchDashboardsIDCellsIDView");
 
             var localVarPath = "/api/v2/dashboards/{dashboardID}/cells/{cellID}/view";
             var localVarPathParams = new Dictionary<String, String>();
@@ -648,7 +648,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("DashboardsDashboardIDCellsCellIDViewPatch", localVarResponse);
+                Exception exception = ExceptionFactory("PatchDashboardsIDCellsIDView", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -664,17 +664,17 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="view">updates the view for a cell</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of View</returns>
-        public RestRequest DashboardsDashboardIDCellsCellIDViewPatchWithRestRequest (string dashboardID, string cellID, View view, string zapTraceSpan = null)
+        public RestRequest PatchDashboardsIDCellsIDViewWithRestRequest (string dashboardID, string cellID, View view, string zapTraceSpan = null)
         {
             // verify the required parameter 'dashboardID' is set
             if (dashboardID == null)
-                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling ViewsService->DashboardsDashboardIDCellsCellIDViewPatch");
+                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling ViewsService->PatchDashboardsIDCellsIDView");
             // verify the required parameter 'cellID' is set
             if (cellID == null)
-                throw new ApiException(400, "Missing required parameter 'cellID' when calling ViewsService->DashboardsDashboardIDCellsCellIDViewPatch");
+                throw new ApiException(400, "Missing required parameter 'cellID' when calling ViewsService->PatchDashboardsIDCellsIDView");
             // verify the required parameter 'view' is set
             if (view == null)
-                throw new ApiException(400, "Missing required parameter 'view' when calling ViewsService->DashboardsDashboardIDCellsCellIDViewPatch");
+                throw new ApiException(400, "Missing required parameter 'view' when calling ViewsService->PatchDashboardsIDCellsIDView");
 
             var localVarPath = "/api/v2/dashboards/{dashboardID}/cells/{cellID}/view";
             var localVarPathParams = new Dictionary<String, String>();
@@ -726,9 +726,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="view">updates the view for a cell</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of View</returns>
-        public async System.Threading.Tasks.Task<View> DashboardsDashboardIDCellsCellIDViewPatchAsync (string dashboardID, string cellID, View view, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<View> PatchDashboardsIDCellsIDViewAsync (string dashboardID, string cellID, View view, string zapTraceSpan = null)
         {
-             ApiResponse<View> localVarResponse = await DashboardsDashboardIDCellsCellIDViewPatchAsyncWithHttpInfo(dashboardID, cellID, view, zapTraceSpan);
+             ApiResponse<View> localVarResponse = await PatchDashboardsIDCellsIDViewAsyncWithHttpInfo(dashboardID, cellID, view, zapTraceSpan);
              return localVarResponse.Data;
 
         }
@@ -742,17 +742,17 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="view">updates the view for a cell</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (View)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<View>> DashboardsDashboardIDCellsCellIDViewPatchAsyncWithHttpInfo (string dashboardID, string cellID, View view, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<View>> PatchDashboardsIDCellsIDViewAsyncWithHttpInfo (string dashboardID, string cellID, View view, string zapTraceSpan = null)
         {
             // verify the required parameter 'dashboardID' is set
             if (dashboardID == null)
-                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling ViewsService->DashboardsDashboardIDCellsCellIDViewPatch");
+                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling ViewsService->PatchDashboardsIDCellsIDView");
             // verify the required parameter 'cellID' is set
             if (cellID == null)
-                throw new ApiException(400, "Missing required parameter 'cellID' when calling ViewsService->DashboardsDashboardIDCellsCellIDViewPatch");
+                throw new ApiException(400, "Missing required parameter 'cellID' when calling ViewsService->PatchDashboardsIDCellsIDView");
             // verify the required parameter 'view' is set
             if (view == null)
-                throw new ApiException(400, "Missing required parameter 'view' when calling ViewsService->DashboardsDashboardIDCellsCellIDViewPatch");
+                throw new ApiException(400, "Missing required parameter 'view' when calling ViewsService->PatchDashboardsIDCellsIDView");
 
             var localVarPath = "/api/v2/dashboards/{dashboardID}/cells/{cellID}/view";
             var localVarPathParams = new Dictionary<String, String>();
@@ -799,7 +799,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("DashboardsDashboardIDCellsCellIDViewPatch", localVarResponse);
+                Exception exception = ExceptionFactory("PatchDashboardsIDCellsIDView", localVarResponse);
                 if (exception != null) throw exception;
             }
 

@@ -25,7 +25,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNotNull(scraperTargetRequest, nameof(scraperTargetRequest));
 
-            return _service.ScrapersPost(scraperTargetRequest);
+            return _service.PostScrapers(scraperTargetRequest);
         }
 
         /// <summary>
@@ -73,7 +73,7 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(scraperTargetId, nameof(scraperTargetId));
             Arguments.CheckNotNull(scraperTargetRequest, nameof(scraperTargetRequest));
 
-            return _service.ScrapersScraperTargetIDPatch(scraperTargetId, scraperTargetRequest);
+            return _service.PatchScrapersID(scraperTargetId, scraperTargetRequest);
         }
 
         /// <summary>
@@ -85,7 +85,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNotNull(scraperTargetId, nameof(scraperTargetId));
 
-            _service.ScrapersScraperTargetIDDelete(scraperTargetId);
+            _service.DeleteScrapersID(scraperTargetId);
         }
 
         /// <summary>
@@ -146,7 +146,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(scraperTargetId, nameof(scraperTargetId));
 
-            return _service.ScrapersScraperTargetIDGet(scraperTargetId);
+            return _service.GetScrapersID(scraperTargetId);
         }
 
         /// <summary>
@@ -155,7 +155,7 @@ namespace InfluxDB.Client
         /// <returns>A list of ScraperTargets</returns>
         public List<ScraperTargetResponse> FindScraperTargets()
         {
-            return _service.ScrapersGet().Configurations;
+            return _service.GetScrapers().Configurations;
         }
         
         /// <summary>
@@ -179,7 +179,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
             
-            return _service.ScrapersGet(null, orgId).Configurations;
+            return _service.GetScrapers(null, orgId).Configurations;
         }
 
         /// <summary>
@@ -203,7 +203,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(scraperTargetId, nameof(scraperTargetId));
 
-            return _service.ScrapersScraperTargetIDMembersGet(scraperTargetId).Users;
+            return _service.GetScrapersIDMembers(scraperTargetId).Users;
         }
 
         /// <summary>
@@ -231,7 +231,7 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(scraperTargetId, nameof(scraperTargetId));
             Arguments.CheckNonEmptyString(memberId, nameof(memberId));
 
-            return _service.ScrapersScraperTargetIDMembersPost(scraperTargetId, new AddResourceMemberRequestBody(memberId));
+            return _service.PostScrapersIDMembers(scraperTargetId, new AddResourceMemberRequestBody(memberId));
         }
 
         /// <summary>
@@ -259,7 +259,7 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(scraperTargetId, nameof(scraperTargetId));
             Arguments.CheckNonEmptyString(memberId, nameof(memberId));
 
-            _service.ScrapersScraperTargetIDMembersUserIDDelete(memberId, scraperTargetId);
+            _service.DeleteScrapersIDMembersID(memberId, scraperTargetId);
         }
 
         /// <summary>
@@ -283,7 +283,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(scraperTargetId, nameof(scraperTargetId));
 
-            return _service.ScrapersScraperTargetIDOwnersGet(scraperTargetId).Users;
+            return _service.GetScrapersIDOwners(scraperTargetId).Users;
         }
 
         /// <summary>
@@ -313,7 +313,7 @@ namespace InfluxDB.Client
 
             var memberRequest = new AddResourceMemberRequestBody(ownerId);
             
-            return _service.ScrapersScraperTargetIDOwnersPost(scraperTargetId, memberRequest);
+            return _service.PostScrapersIDOwners(scraperTargetId, memberRequest);
         }
 
         /// <summary>
@@ -341,7 +341,7 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(scraperTargetId, nameof(scraperTargetId));
             Arguments.CheckNonEmptyString(ownerId, nameof(ownerId));
 
-            _service.ScrapersScraperTargetIDOwnersUserIDDelete(ownerId, scraperTargetId);
+            _service.DeleteScrapersIDOwnersID(ownerId, scraperTargetId);
         }
 
         /// <summary>
@@ -365,7 +365,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(scraperTargetId, nameof(scraperTargetId));
 
-            return _service.ScrapersScraperTargetIDLabelsGet(scraperTargetId).Labels;
+            return _service.GetScrapersIDLabels(scraperTargetId).Labels;
         }
 
         /// <summary>
@@ -395,7 +395,7 @@ namespace InfluxDB.Client
 
             var mapping = new LabelMapping(labelId);
             
-            return _service.ScrapersScraperTargetIDLabelsPost(scraperTargetId, mapping).Label;
+            return _service.PostScrapersIDLabels(scraperTargetId, mapping).Label;
         }
 
         /// <summary>
@@ -423,7 +423,7 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(scraperTargetId, nameof(scraperTargetId));
             Arguments.CheckNonEmptyString(labelId, nameof(labelId));
 
-            _service.ScrapersScraperTargetIDLabelsLabelIDDelete(scraperTargetId, labelId);
+            _service.DeleteScrapersIDLabelsID(scraperTargetId, labelId);
         }
     }
 }

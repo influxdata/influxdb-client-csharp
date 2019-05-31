@@ -253,7 +253,7 @@ namespace InfluxDB.Client
         /// <returns>health of an instance</returns>
         public Check Health()
         {
-            return GetHealth(_healthService.HealthGetAsync());
+            return GetHealth(_healthService.GetHealthAsync());
         }
 
         /// <summary>
@@ -264,7 +264,7 @@ namespace InfluxDB.Client
         {
             try
             {
-                return _readyService.ReadyGet();
+                return _readyService.GetReady();
             }
             catch (Exception e)
             {
@@ -284,7 +284,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNotNull(onboarding, nameof(onboarding));
 
-            return _setupService.SetupPost(onboarding);
+            return _setupService.PostSetup(onboarding);
         }
 
         /// <summary>
@@ -293,7 +293,7 @@ namespace InfluxDB.Client
         /// <returns>True if onboarding has already been completed otherwise false</returns>
         public bool IsOnboardingAllowed()
         {
-            var isOnboardingAllowed = _setupService.SetupGet().Allowed;
+            var isOnboardingAllowed = _setupService.GetSetup().Allowed;
 
             return true == isOnboardingAllowed;
         }

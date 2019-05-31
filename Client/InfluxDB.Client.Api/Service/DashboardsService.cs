@@ -25,6 +25,29 @@ namespace InfluxDB.Client.Api.Service
     {
         #region Synchronous Operations
         /// <summary>
+        /// Delete a dashboard
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of dashboard to update</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns></returns>
+        void DeleteDashboardsID (string dashboardID, string zapTraceSpan = null);
+
+        /// <summary>
+        /// Delete a dashboard
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of dashboard to update</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        ApiResponse<Object> DeleteDashboardsIDWithHttpInfo (string dashboardID, string zapTraceSpan = null);
+        /// <summary>
         /// Delete a dashboard cell
         /// </summary>
         /// <remarks>
@@ -35,7 +58,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="cellID">ID of cell to delete</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
-        void DashboardsDashboardIDCellsCellIDDelete (string dashboardID, string cellID, string zapTraceSpan = null);
+        void DeleteDashboardsIDCellsID (string dashboardID, string cellID, string zapTraceSpan = null);
 
         /// <summary>
         /// Delete a dashboard cell
@@ -48,205 +71,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="cellID">ID of cell to delete</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<Object> DashboardsDashboardIDCellsCellIDDeleteWithHttpInfo (string dashboardID, string cellID, string zapTraceSpan = null);
-        /// <summary>
-        /// Update the non positional information related to a cell (because updates to a single cells positional data could cause grid conflicts)
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of dashboard to update</param>
-        /// <param name="cellID">ID of cell to update</param>
-        /// <param name="cellUpdate">updates the non positional information related to a cell</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Cell</returns>
-        Cell DashboardsDashboardIDCellsCellIDPatch (string dashboardID, string cellID, CellUpdate cellUpdate, string zapTraceSpan = null);
-
-        /// <summary>
-        /// Update the non positional information related to a cell (because updates to a single cells positional data could cause grid conflicts)
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of dashboard to update</param>
-        /// <param name="cellID">ID of cell to update</param>
-        /// <param name="cellUpdate">updates the non positional information related to a cell</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Cell</returns>
-        ApiResponse<Cell> DashboardsDashboardIDCellsCellIDPatchWithHttpInfo (string dashboardID, string cellID, CellUpdate cellUpdate, string zapTraceSpan = null);
-        /// <summary>
-        /// Retrieve the view for a cell in a dashboard
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of dashboard</param>
-        /// <param name="cellID">ID of cell</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>View</returns>
-        View DashboardsDashboardIDCellsCellIDViewGet (string dashboardID, string cellID, string zapTraceSpan = null);
-
-        /// <summary>
-        /// Retrieve the view for a cell in a dashboard
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of dashboard</param>
-        /// <param name="cellID">ID of cell</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of View</returns>
-        ApiResponse<View> DashboardsDashboardIDCellsCellIDViewGetWithHttpInfo (string dashboardID, string cellID, string zapTraceSpan = null);
-        /// <summary>
-        /// Update the view for a cell
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of dashboard to update</param>
-        /// <param name="cellID">ID of cell to update</param>
-        /// <param name="view">updates the view for a cell</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>View</returns>
-        View DashboardsDashboardIDCellsCellIDViewPatch (string dashboardID, string cellID, View view, string zapTraceSpan = null);
-
-        /// <summary>
-        /// Update the view for a cell
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of dashboard to update</param>
-        /// <param name="cellID">ID of cell to update</param>
-        /// <param name="view">updates the view for a cell</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of View</returns>
-        ApiResponse<View> DashboardsDashboardIDCellsCellIDViewPatchWithHttpInfo (string dashboardID, string cellID, View view, string zapTraceSpan = null);
-        /// <summary>
-        /// Create a dashboard cell
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of dashboard to update</param>
-        /// <param name="createCell">cell that will be added</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Cell</returns>
-        Cell DashboardsDashboardIDCellsPost (string dashboardID, CreateCell createCell, string zapTraceSpan = null);
-
-        /// <summary>
-        /// Create a dashboard cell
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of dashboard to update</param>
-        /// <param name="createCell">cell that will be added</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Cell</returns>
-        ApiResponse<Cell> DashboardsDashboardIDCellsPostWithHttpInfo (string dashboardID, CreateCell createCell, string zapTraceSpan = null);
-        /// <summary>
-        /// Replace a dashboards cells
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of dashboard to update</param>
-        /// <param name="cell">batch replaces all of a dashboards cells (this is used primarily to update the positional information of all of the cells)</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Dashboard</returns>
-        Dashboard DashboardsDashboardIDCellsPut (string dashboardID, List<Cell> cell, string zapTraceSpan = null);
-
-        /// <summary>
-        /// Replace a dashboards cells
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of dashboard to update</param>
-        /// <param name="cell">batch replaces all of a dashboards cells (this is used primarily to update the positional information of all of the cells)</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Dashboard</returns>
-        ApiResponse<Dashboard> DashboardsDashboardIDCellsPutWithHttpInfo (string dashboardID, List<Cell> cell, string zapTraceSpan = null);
-        /// <summary>
-        /// Delete a dashboard
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of dashboard to update</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns></returns>
-        void DashboardsDashboardIDDelete (string dashboardID, string zapTraceSpan = null);
-
-        /// <summary>
-        /// Delete a dashboard
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of dashboard to update</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<Object> DashboardsDashboardIDDeleteWithHttpInfo (string dashboardID, string zapTraceSpan = null);
-        /// <summary>
-        /// Get a single Dashboard
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of dashboard to update</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Dashboard</returns>
-        Dashboard DashboardsDashboardIDGet (string dashboardID, string zapTraceSpan = null);
-
-        /// <summary>
-        /// Get a single Dashboard
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of dashboard to update</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Dashboard</returns>
-        ApiResponse<Dashboard> DashboardsDashboardIDGetWithHttpInfo (string dashboardID, string zapTraceSpan = null);
-        /// <summary>
-        /// list all labels for a dashboard
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of the dashboard</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>LabelsResponse</returns>
-        LabelsResponse DashboardsDashboardIDLabelsGet (string dashboardID, string zapTraceSpan = null);
-
-        /// <summary>
-        /// list all labels for a dashboard
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of the dashboard</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of LabelsResponse</returns>
-        ApiResponse<LabelsResponse> DashboardsDashboardIDLabelsGetWithHttpInfo (string dashboardID, string zapTraceSpan = null);
+        ApiResponse<Object> DeleteDashboardsIDCellsIDWithHttpInfo (string dashboardID, string cellID, string zapTraceSpan = null);
         /// <summary>
         /// delete a label from a dashboard
         /// </summary>
@@ -258,7 +83,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="labelID">the label id to delete</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
-        void DashboardsDashboardIDLabelsLabelIDDelete (string dashboardID, string labelID, string zapTraceSpan = null);
+        void DeleteDashboardsIDLabelsID (string dashboardID, string labelID, string zapTraceSpan = null);
 
         /// <summary>
         /// delete a label from a dashboard
@@ -271,107 +96,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="labelID">the label id to delete</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<Object> DashboardsDashboardIDLabelsLabelIDDeleteWithHttpInfo (string dashboardID, string labelID, string zapTraceSpan = null);
-        /// <summary>
-        /// add a label to a dashboard
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of the dashboard</param>
-        /// <param name="labelMapping">label to add</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>LabelResponse</returns>
-        LabelResponse DashboardsDashboardIDLabelsPost (string dashboardID, LabelMapping labelMapping, string zapTraceSpan = null);
-
-        /// <summary>
-        /// add a label to a dashboard
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of the dashboard</param>
-        /// <param name="labelMapping">label to add</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of LabelResponse</returns>
-        ApiResponse<LabelResponse> DashboardsDashboardIDLabelsPostWithHttpInfo (string dashboardID, LabelMapping labelMapping, string zapTraceSpan = null);
-        /// <summary>
-        /// Retrieve operation logs for a dashboard
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of the dashboard</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="offset"> (optional)</param>
-        /// <param name="limit"> (optional, default to 20)</param>
-        /// <returns>OperationLogs</returns>
-        OperationLogs DashboardsDashboardIDLogsGet (string dashboardID, string zapTraceSpan = null, int? offset = null, int? limit = null);
-
-        /// <summary>
-        /// Retrieve operation logs for a dashboard
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of the dashboard</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="offset"> (optional)</param>
-        /// <param name="limit"> (optional, default to 20)</param>
-        /// <returns>ApiResponse of OperationLogs</returns>
-        ApiResponse<OperationLogs> DashboardsDashboardIDLogsGetWithHttpInfo (string dashboardID, string zapTraceSpan = null, int? offset = null, int? limit = null);
-        /// <summary>
-        /// List all dashboard members
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of the dashboard</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ResourceMembers</returns>
-        ResourceMembers DashboardsDashboardIDMembersGet (string dashboardID, string zapTraceSpan = null);
-
-        /// <summary>
-        /// List all dashboard members
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of the dashboard</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of ResourceMembers</returns>
-        ApiResponse<ResourceMembers> DashboardsDashboardIDMembersGetWithHttpInfo (string dashboardID, string zapTraceSpan = null);
-        /// <summary>
-        /// Add dashboard member
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of the dashboard</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ResourceMember</returns>
-        ResourceMember DashboardsDashboardIDMembersPost (string dashboardID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
-
-        /// <summary>
-        /// Add dashboard member
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of the dashboard</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of ResourceMember</returns>
-        ApiResponse<ResourceMember> DashboardsDashboardIDMembersPostWithHttpInfo (string dashboardID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
+        ApiResponse<Object> DeleteDashboardsIDLabelsIDWithHttpInfo (string dashboardID, string labelID, string zapTraceSpan = null);
         /// <summary>
         /// removes a member from an dashboard
         /// </summary>
@@ -383,7 +108,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="dashboardID">ID of the dashboard</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
-        void DashboardsDashboardIDMembersUserIDDelete (string userID, string dashboardID, string zapTraceSpan = null);
+        void DeleteDashboardsIDMembersID (string userID, string dashboardID, string zapTraceSpan = null);
 
         /// <summary>
         /// removes a member from an dashboard
@@ -396,55 +121,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="dashboardID">ID of the dashboard</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<Object> DashboardsDashboardIDMembersUserIDDeleteWithHttpInfo (string userID, string dashboardID, string zapTraceSpan = null);
-        /// <summary>
-        /// List all dashboard owners
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of the dashboard</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ResourceOwners</returns>
-        ResourceOwners DashboardsDashboardIDOwnersGet (string dashboardID, string zapTraceSpan = null);
-
-        /// <summary>
-        /// List all dashboard owners
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of the dashboard</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of ResourceOwners</returns>
-        ApiResponse<ResourceOwners> DashboardsDashboardIDOwnersGetWithHttpInfo (string dashboardID, string zapTraceSpan = null);
-        /// <summary>
-        /// Add dashboard owner
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of the dashboard</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ResourceOwner</returns>
-        ResourceOwner DashboardsDashboardIDOwnersPost (string dashboardID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
-
-        /// <summary>
-        /// Add dashboard owner
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of the dashboard</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of ResourceOwner</returns>
-        ApiResponse<ResourceOwner> DashboardsDashboardIDOwnersPostWithHttpInfo (string dashboardID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
+        ApiResponse<Object> DeleteDashboardsIDMembersIDWithHttpInfo (string userID, string dashboardID, string zapTraceSpan = null);
         /// <summary>
         /// removes an owner from a dashboard
         /// </summary>
@@ -456,7 +133,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="dashboardID">ID of the dashboard</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
-        void DashboardsDashboardIDOwnersUserIDDelete (string userID, string dashboardID, string zapTraceSpan = null);
+        void DeleteDashboardsIDOwnersID (string userID, string dashboardID, string zapTraceSpan = null);
 
         /// <summary>
         /// removes an owner from a dashboard
@@ -469,32 +146,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="dashboardID">ID of the dashboard</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<Object> DashboardsDashboardIDOwnersUserIDDeleteWithHttpInfo (string userID, string dashboardID, string zapTraceSpan = null);
-        /// <summary>
-        /// Update a single dashboard
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of dashboard to update</param>
-        /// <param name="dashboard">patching of a dashboard</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Dashboard</returns>
-        Dashboard DashboardsDashboardIDPatch (string dashboardID, Dashboard dashboard, string zapTraceSpan = null);
-
-        /// <summary>
-        /// Update a single dashboard
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of dashboard to update</param>
-        /// <param name="dashboard">patching of a dashboard</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Dashboard</returns>
-        ApiResponse<Dashboard> DashboardsDashboardIDPatchWithHttpInfo (string dashboardID, Dashboard dashboard, string zapTraceSpan = null);
+        ApiResponse<Object> DeleteDashboardsIDOwnersIDWithHttpInfo (string userID, string dashboardID, string zapTraceSpan = null);
         /// <summary>
         /// Get all dashboards
         /// </summary>
@@ -509,7 +161,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">specifies the organization id of the resource (optional)</param>
         /// <param name="org">specifies the organization name of the resource (optional)</param>
         /// <returns>Dashboards</returns>
-        Dashboards DashboardsGet (string zapTraceSpan = null, string owner = null, string sortBy = null, List<string> id = null, string orgID = null, string org = null);
+        Dashboards GetDashboards (string zapTraceSpan = null, string owner = null, string sortBy = null, List<string> id = null, string orgID = null, string org = null);
 
         /// <summary>
         /// Get all dashboards
@@ -525,7 +177,230 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">specifies the organization id of the resource (optional)</param>
         /// <param name="org">specifies the organization name of the resource (optional)</param>
         /// <returns>ApiResponse of Dashboards</returns>
-        ApiResponse<Dashboards> DashboardsGetWithHttpInfo (string zapTraceSpan = null, string owner = null, string sortBy = null, List<string> id = null, string orgID = null, string org = null);
+        ApiResponse<Dashboards> GetDashboardsWithHttpInfo (string zapTraceSpan = null, string owner = null, string sortBy = null, List<string> id = null, string orgID = null, string org = null);
+        /// <summary>
+        /// Get a single Dashboard
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of dashboard to update</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Dashboard</returns>
+        Dashboard GetDashboardsID (string dashboardID, string zapTraceSpan = null);
+
+        /// <summary>
+        /// Get a single Dashboard
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of dashboard to update</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Dashboard</returns>
+        ApiResponse<Dashboard> GetDashboardsIDWithHttpInfo (string dashboardID, string zapTraceSpan = null);
+        /// <summary>
+        /// Retrieve the view for a cell in a dashboard
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of dashboard</param>
+        /// <param name="cellID">ID of cell</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>View</returns>
+        View GetDashboardsIDCellsIDView (string dashboardID, string cellID, string zapTraceSpan = null);
+
+        /// <summary>
+        /// Retrieve the view for a cell in a dashboard
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of dashboard</param>
+        /// <param name="cellID">ID of cell</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of View</returns>
+        ApiResponse<View> GetDashboardsIDCellsIDViewWithHttpInfo (string dashboardID, string cellID, string zapTraceSpan = null);
+        /// <summary>
+        /// list all labels for a dashboard
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>LabelsResponse</returns>
+        LabelsResponse GetDashboardsIDLabels (string dashboardID, string zapTraceSpan = null);
+
+        /// <summary>
+        /// list all labels for a dashboard
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of LabelsResponse</returns>
+        ApiResponse<LabelsResponse> GetDashboardsIDLabelsWithHttpInfo (string dashboardID, string zapTraceSpan = null);
+        /// <summary>
+        /// Retrieve operation logs for a dashboard
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="offset"> (optional)</param>
+        /// <param name="limit"> (optional, default to 20)</param>
+        /// <returns>OperationLogs</returns>
+        OperationLogs GetDashboardsIDLogs (string dashboardID, string zapTraceSpan = null, int? offset = null, int? limit = null);
+
+        /// <summary>
+        /// Retrieve operation logs for a dashboard
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="offset"> (optional)</param>
+        /// <param name="limit"> (optional, default to 20)</param>
+        /// <returns>ApiResponse of OperationLogs</returns>
+        ApiResponse<OperationLogs> GetDashboardsIDLogsWithHttpInfo (string dashboardID, string zapTraceSpan = null, int? offset = null, int? limit = null);
+        /// <summary>
+        /// List all dashboard members
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ResourceMembers</returns>
+        ResourceMembers GetDashboardsIDMembers (string dashboardID, string zapTraceSpan = null);
+
+        /// <summary>
+        /// List all dashboard members
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of ResourceMembers</returns>
+        ApiResponse<ResourceMembers> GetDashboardsIDMembersWithHttpInfo (string dashboardID, string zapTraceSpan = null);
+        /// <summary>
+        /// List all dashboard owners
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ResourceOwners</returns>
+        ResourceOwners GetDashboardsIDOwners (string dashboardID, string zapTraceSpan = null);
+
+        /// <summary>
+        /// List all dashboard owners
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of ResourceOwners</returns>
+        ApiResponse<ResourceOwners> GetDashboardsIDOwnersWithHttpInfo (string dashboardID, string zapTraceSpan = null);
+        /// <summary>
+        /// Update a single dashboard
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of dashboard to update</param>
+        /// <param name="dashboard">patching of a dashboard</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Dashboard</returns>
+        Dashboard PatchDashboardsID (string dashboardID, Dashboard dashboard, string zapTraceSpan = null);
+
+        /// <summary>
+        /// Update a single dashboard
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of dashboard to update</param>
+        /// <param name="dashboard">patching of a dashboard</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Dashboard</returns>
+        ApiResponse<Dashboard> PatchDashboardsIDWithHttpInfo (string dashboardID, Dashboard dashboard, string zapTraceSpan = null);
+        /// <summary>
+        /// Update the non positional information related to a cell (because updates to a single cells positional data could cause grid conflicts)
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of dashboard to update</param>
+        /// <param name="cellID">ID of cell to update</param>
+        /// <param name="cellUpdate">updates the non positional information related to a cell</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Cell</returns>
+        Cell PatchDashboardsIDCellsID (string dashboardID, string cellID, CellUpdate cellUpdate, string zapTraceSpan = null);
+
+        /// <summary>
+        /// Update the non positional information related to a cell (because updates to a single cells positional data could cause grid conflicts)
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of dashboard to update</param>
+        /// <param name="cellID">ID of cell to update</param>
+        /// <param name="cellUpdate">updates the non positional information related to a cell</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Cell</returns>
+        ApiResponse<Cell> PatchDashboardsIDCellsIDWithHttpInfo (string dashboardID, string cellID, CellUpdate cellUpdate, string zapTraceSpan = null);
+        /// <summary>
+        /// Update the view for a cell
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of dashboard to update</param>
+        /// <param name="cellID">ID of cell to update</param>
+        /// <param name="view">updates the view for a cell</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>View</returns>
+        View PatchDashboardsIDCellsIDView (string dashboardID, string cellID, View view, string zapTraceSpan = null);
+
+        /// <summary>
+        /// Update the view for a cell
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of dashboard to update</param>
+        /// <param name="cellID">ID of cell to update</param>
+        /// <param name="view">updates the view for a cell</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of View</returns>
+        ApiResponse<View> PatchDashboardsIDCellsIDViewWithHttpInfo (string dashboardID, string cellID, View view, string zapTraceSpan = null);
         /// <summary>
         /// Create a dashboard
         /// </summary>
@@ -536,7 +411,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="createDashboardRequest">dashboard to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Dashboard</returns>
-        Dashboard DashboardsPost (CreateDashboardRequest createDashboardRequest, string zapTraceSpan = null);
+        Dashboard PostDashboards (CreateDashboardRequest createDashboardRequest, string zapTraceSpan = null);
 
         /// <summary>
         /// Create a dashboard
@@ -548,10 +423,158 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="createDashboardRequest">dashboard to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Dashboard</returns>
-        ApiResponse<Dashboard> DashboardsPostWithHttpInfo (CreateDashboardRequest createDashboardRequest, string zapTraceSpan = null);
+        ApiResponse<Dashboard> PostDashboardsWithHttpInfo (CreateDashboardRequest createDashboardRequest, string zapTraceSpan = null);
+        /// <summary>
+        /// Create a dashboard cell
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of dashboard to update</param>
+        /// <param name="createCell">cell that will be added</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Cell</returns>
+        Cell PostDashboardsIDCells (string dashboardID, CreateCell createCell, string zapTraceSpan = null);
+
+        /// <summary>
+        /// Create a dashboard cell
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of dashboard to update</param>
+        /// <param name="createCell">cell that will be added</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Cell</returns>
+        ApiResponse<Cell> PostDashboardsIDCellsWithHttpInfo (string dashboardID, CreateCell createCell, string zapTraceSpan = null);
+        /// <summary>
+        /// add a label to a dashboard
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="labelMapping">label to add</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>LabelResponse</returns>
+        LabelResponse PostDashboardsIDLabels (string dashboardID, LabelMapping labelMapping, string zapTraceSpan = null);
+
+        /// <summary>
+        /// add a label to a dashboard
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="labelMapping">label to add</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of LabelResponse</returns>
+        ApiResponse<LabelResponse> PostDashboardsIDLabelsWithHttpInfo (string dashboardID, LabelMapping labelMapping, string zapTraceSpan = null);
+        /// <summary>
+        /// Add dashboard member
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ResourceMember</returns>
+        ResourceMember PostDashboardsIDMembers (string dashboardID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
+
+        /// <summary>
+        /// Add dashboard member
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of ResourceMember</returns>
+        ApiResponse<ResourceMember> PostDashboardsIDMembersWithHttpInfo (string dashboardID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
+        /// <summary>
+        /// Add dashboard owner
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ResourceOwner</returns>
+        ResourceOwner PostDashboardsIDOwners (string dashboardID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
+
+        /// <summary>
+        /// Add dashboard owner
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of ResourceOwner</returns>
+        ApiResponse<ResourceOwner> PostDashboardsIDOwnersWithHttpInfo (string dashboardID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
+        /// <summary>
+        /// Replace a dashboards cells
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of dashboard to update</param>
+        /// <param name="cell">batch replaces all of a dashboards cells (this is used primarily to update the positional information of all of the cells)</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Dashboard</returns>
+        Dashboard PutDashboardsIDCells (string dashboardID, List<Cell> cell, string zapTraceSpan = null);
+
+        /// <summary>
+        /// Replace a dashboards cells
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of dashboard to update</param>
+        /// <param name="cell">batch replaces all of a dashboards cells (this is used primarily to update the positional information of all of the cells)</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Dashboard</returns>
+        ApiResponse<Dashboard> PutDashboardsIDCellsWithHttpInfo (string dashboardID, List<Cell> cell, string zapTraceSpan = null);
         #endregion Synchronous Operations
         #region Asynchronous Operations
         /// <summary>
+        /// Delete a dashboard
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of dashboard to update</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of void</returns>
+        System.Threading.Tasks.Task DeleteDashboardsIDAsync (string dashboardID, string zapTraceSpan = null);
+
+        /// <summary>
+        /// Delete a dashboard
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of dashboard to update</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ApiResponse</returns>
+        System.Threading.Tasks.Task<ApiResponse<Object>> DeleteDashboardsIDAsyncWithHttpInfo (string dashboardID, string zapTraceSpan = null);
+        /// <summary>
         /// Delete a dashboard cell
         /// </summary>
         /// <remarks>
@@ -562,7 +585,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="cellID">ID of cell to delete</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task DashboardsDashboardIDCellsCellIDDeleteAsync (string dashboardID, string cellID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task DeleteDashboardsIDCellsIDAsync (string dashboardID, string cellID, string zapTraceSpan = null);
 
         /// <summary>
         /// Delete a dashboard cell
@@ -575,205 +598,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="cellID">ID of cell to delete</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> DashboardsDashboardIDCellsCellIDDeleteAsyncWithHttpInfo (string dashboardID, string cellID, string zapTraceSpan = null);
-        /// <summary>
-        /// Update the non positional information related to a cell (because updates to a single cells positional data could cause grid conflicts)
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of dashboard to update</param>
-        /// <param name="cellID">ID of cell to update</param>
-        /// <param name="cellUpdate">updates the non positional information related to a cell</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of Cell</returns>
-        System.Threading.Tasks.Task<Cell> DashboardsDashboardIDCellsCellIDPatchAsync (string dashboardID, string cellID, CellUpdate cellUpdate, string zapTraceSpan = null);
-
-        /// <summary>
-        /// Update the non positional information related to a cell (because updates to a single cells positional data could cause grid conflicts)
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of dashboard to update</param>
-        /// <param name="cellID">ID of cell to update</param>
-        /// <param name="cellUpdate">updates the non positional information related to a cell</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ApiResponse (Cell)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Cell>> DashboardsDashboardIDCellsCellIDPatchAsyncWithHttpInfo (string dashboardID, string cellID, CellUpdate cellUpdate, string zapTraceSpan = null);
-        /// <summary>
-        /// Retrieve the view for a cell in a dashboard
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of dashboard</param>
-        /// <param name="cellID">ID of cell</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of View</returns>
-        System.Threading.Tasks.Task<View> DashboardsDashboardIDCellsCellIDViewGetAsync (string dashboardID, string cellID, string zapTraceSpan = null);
-
-        /// <summary>
-        /// Retrieve the view for a cell in a dashboard
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of dashboard</param>
-        /// <param name="cellID">ID of cell</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ApiResponse (View)</returns>
-        System.Threading.Tasks.Task<ApiResponse<View>> DashboardsDashboardIDCellsCellIDViewGetAsyncWithHttpInfo (string dashboardID, string cellID, string zapTraceSpan = null);
-        /// <summary>
-        /// Update the view for a cell
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of dashboard to update</param>
-        /// <param name="cellID">ID of cell to update</param>
-        /// <param name="view">updates the view for a cell</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of View</returns>
-        System.Threading.Tasks.Task<View> DashboardsDashboardIDCellsCellIDViewPatchAsync (string dashboardID, string cellID, View view, string zapTraceSpan = null);
-
-        /// <summary>
-        /// Update the view for a cell
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of dashboard to update</param>
-        /// <param name="cellID">ID of cell to update</param>
-        /// <param name="view">updates the view for a cell</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ApiResponse (View)</returns>
-        System.Threading.Tasks.Task<ApiResponse<View>> DashboardsDashboardIDCellsCellIDViewPatchAsyncWithHttpInfo (string dashboardID, string cellID, View view, string zapTraceSpan = null);
-        /// <summary>
-        /// Create a dashboard cell
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of dashboard to update</param>
-        /// <param name="createCell">cell that will be added</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of Cell</returns>
-        System.Threading.Tasks.Task<Cell> DashboardsDashboardIDCellsPostAsync (string dashboardID, CreateCell createCell, string zapTraceSpan = null);
-
-        /// <summary>
-        /// Create a dashboard cell
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of dashboard to update</param>
-        /// <param name="createCell">cell that will be added</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ApiResponse (Cell)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Cell>> DashboardsDashboardIDCellsPostAsyncWithHttpInfo (string dashboardID, CreateCell createCell, string zapTraceSpan = null);
-        /// <summary>
-        /// Replace a dashboards cells
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of dashboard to update</param>
-        /// <param name="cell">batch replaces all of a dashboards cells (this is used primarily to update the positional information of all of the cells)</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of Dashboard</returns>
-        System.Threading.Tasks.Task<Dashboard> DashboardsDashboardIDCellsPutAsync (string dashboardID, List<Cell> cell, string zapTraceSpan = null);
-
-        /// <summary>
-        /// Replace a dashboards cells
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of dashboard to update</param>
-        /// <param name="cell">batch replaces all of a dashboards cells (this is used primarily to update the positional information of all of the cells)</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ApiResponse (Dashboard)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Dashboard>> DashboardsDashboardIDCellsPutAsyncWithHttpInfo (string dashboardID, List<Cell> cell, string zapTraceSpan = null);
-        /// <summary>
-        /// Delete a dashboard
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of dashboard to update</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task DashboardsDashboardIDDeleteAsync (string dashboardID, string zapTraceSpan = null);
-
-        /// <summary>
-        /// Delete a dashboard
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of dashboard to update</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> DashboardsDashboardIDDeleteAsyncWithHttpInfo (string dashboardID, string zapTraceSpan = null);
-        /// <summary>
-        /// Get a single Dashboard
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of dashboard to update</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of Dashboard</returns>
-        System.Threading.Tasks.Task<Dashboard> DashboardsDashboardIDGetAsync (string dashboardID, string zapTraceSpan = null);
-
-        /// <summary>
-        /// Get a single Dashboard
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of dashboard to update</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ApiResponse (Dashboard)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Dashboard>> DashboardsDashboardIDGetAsyncWithHttpInfo (string dashboardID, string zapTraceSpan = null);
-        /// <summary>
-        /// list all labels for a dashboard
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of the dashboard</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of LabelsResponse</returns>
-        System.Threading.Tasks.Task<LabelsResponse> DashboardsDashboardIDLabelsGetAsync (string dashboardID, string zapTraceSpan = null);
-
-        /// <summary>
-        /// list all labels for a dashboard
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of the dashboard</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ApiResponse (LabelsResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<LabelsResponse>> DashboardsDashboardIDLabelsGetAsyncWithHttpInfo (string dashboardID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<Object>> DeleteDashboardsIDCellsIDAsyncWithHttpInfo (string dashboardID, string cellID, string zapTraceSpan = null);
         /// <summary>
         /// delete a label from a dashboard
         /// </summary>
@@ -785,7 +610,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="labelID">the label id to delete</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task DashboardsDashboardIDLabelsLabelIDDeleteAsync (string dashboardID, string labelID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task DeleteDashboardsIDLabelsIDAsync (string dashboardID, string labelID, string zapTraceSpan = null);
 
         /// <summary>
         /// delete a label from a dashboard
@@ -798,107 +623,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="labelID">the label id to delete</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> DashboardsDashboardIDLabelsLabelIDDeleteAsyncWithHttpInfo (string dashboardID, string labelID, string zapTraceSpan = null);
-        /// <summary>
-        /// add a label to a dashboard
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of the dashboard</param>
-        /// <param name="labelMapping">label to add</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of LabelResponse</returns>
-        System.Threading.Tasks.Task<LabelResponse> DashboardsDashboardIDLabelsPostAsync (string dashboardID, LabelMapping labelMapping, string zapTraceSpan = null);
-
-        /// <summary>
-        /// add a label to a dashboard
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of the dashboard</param>
-        /// <param name="labelMapping">label to add</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ApiResponse (LabelResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<LabelResponse>> DashboardsDashboardIDLabelsPostAsyncWithHttpInfo (string dashboardID, LabelMapping labelMapping, string zapTraceSpan = null);
-        /// <summary>
-        /// Retrieve operation logs for a dashboard
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of the dashboard</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="offset"> (optional)</param>
-        /// <param name="limit"> (optional, default to 20)</param>
-        /// <returns>Task of OperationLogs</returns>
-        System.Threading.Tasks.Task<OperationLogs> DashboardsDashboardIDLogsGetAsync (string dashboardID, string zapTraceSpan = null, int? offset = null, int? limit = null);
-
-        /// <summary>
-        /// Retrieve operation logs for a dashboard
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of the dashboard</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="offset"> (optional)</param>
-        /// <param name="limit"> (optional, default to 20)</param>
-        /// <returns>Task of ApiResponse (OperationLogs)</returns>
-        System.Threading.Tasks.Task<ApiResponse<OperationLogs>> DashboardsDashboardIDLogsGetAsyncWithHttpInfo (string dashboardID, string zapTraceSpan = null, int? offset = null, int? limit = null);
-        /// <summary>
-        /// List all dashboard members
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of the dashboard</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ResourceMembers</returns>
-        System.Threading.Tasks.Task<ResourceMembers> DashboardsDashboardIDMembersGetAsync (string dashboardID, string zapTraceSpan = null);
-
-        /// <summary>
-        /// List all dashboard members
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of the dashboard</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ApiResponse (ResourceMembers)</returns>
-        System.Threading.Tasks.Task<ApiResponse<ResourceMembers>> DashboardsDashboardIDMembersGetAsyncWithHttpInfo (string dashboardID, string zapTraceSpan = null);
-        /// <summary>
-        /// Add dashboard member
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of the dashboard</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ResourceMember</returns>
-        System.Threading.Tasks.Task<ResourceMember> DashboardsDashboardIDMembersPostAsync (string dashboardID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
-
-        /// <summary>
-        /// Add dashboard member
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of the dashboard</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ApiResponse (ResourceMember)</returns>
-        System.Threading.Tasks.Task<ApiResponse<ResourceMember>> DashboardsDashboardIDMembersPostAsyncWithHttpInfo (string dashboardID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<Object>> DeleteDashboardsIDLabelsIDAsyncWithHttpInfo (string dashboardID, string labelID, string zapTraceSpan = null);
         /// <summary>
         /// removes a member from an dashboard
         /// </summary>
@@ -910,7 +635,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="dashboardID">ID of the dashboard</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task DashboardsDashboardIDMembersUserIDDeleteAsync (string userID, string dashboardID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task DeleteDashboardsIDMembersIDAsync (string userID, string dashboardID, string zapTraceSpan = null);
 
         /// <summary>
         /// removes a member from an dashboard
@@ -923,55 +648,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="dashboardID">ID of the dashboard</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> DashboardsDashboardIDMembersUserIDDeleteAsyncWithHttpInfo (string userID, string dashboardID, string zapTraceSpan = null);
-        /// <summary>
-        /// List all dashboard owners
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of the dashboard</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ResourceOwners</returns>
-        System.Threading.Tasks.Task<ResourceOwners> DashboardsDashboardIDOwnersGetAsync (string dashboardID, string zapTraceSpan = null);
-
-        /// <summary>
-        /// List all dashboard owners
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of the dashboard</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ApiResponse (ResourceOwners)</returns>
-        System.Threading.Tasks.Task<ApiResponse<ResourceOwners>> DashboardsDashboardIDOwnersGetAsyncWithHttpInfo (string dashboardID, string zapTraceSpan = null);
-        /// <summary>
-        /// Add dashboard owner
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of the dashboard</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ResourceOwner</returns>
-        System.Threading.Tasks.Task<ResourceOwner> DashboardsDashboardIDOwnersPostAsync (string dashboardID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
-
-        /// <summary>
-        /// Add dashboard owner
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of the dashboard</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ApiResponse (ResourceOwner)</returns>
-        System.Threading.Tasks.Task<ApiResponse<ResourceOwner>> DashboardsDashboardIDOwnersPostAsyncWithHttpInfo (string dashboardID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<Object>> DeleteDashboardsIDMembersIDAsyncWithHttpInfo (string userID, string dashboardID, string zapTraceSpan = null);
         /// <summary>
         /// removes an owner from a dashboard
         /// </summary>
@@ -983,7 +660,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="dashboardID">ID of the dashboard</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task DashboardsDashboardIDOwnersUserIDDeleteAsync (string userID, string dashboardID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task DeleteDashboardsIDOwnersIDAsync (string userID, string dashboardID, string zapTraceSpan = null);
 
         /// <summary>
         /// removes an owner from a dashboard
@@ -996,32 +673,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="dashboardID">ID of the dashboard</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> DashboardsDashboardIDOwnersUserIDDeleteAsyncWithHttpInfo (string userID, string dashboardID, string zapTraceSpan = null);
-        /// <summary>
-        /// Update a single dashboard
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of dashboard to update</param>
-        /// <param name="dashboard">patching of a dashboard</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of Dashboard</returns>
-        System.Threading.Tasks.Task<Dashboard> DashboardsDashboardIDPatchAsync (string dashboardID, Dashboard dashboard, string zapTraceSpan = null);
-
-        /// <summary>
-        /// Update a single dashboard
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of dashboard to update</param>
-        /// <param name="dashboard">patching of a dashboard</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ApiResponse (Dashboard)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Dashboard>> DashboardsDashboardIDPatchAsyncWithHttpInfo (string dashboardID, Dashboard dashboard, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<Object>> DeleteDashboardsIDOwnersIDAsyncWithHttpInfo (string userID, string dashboardID, string zapTraceSpan = null);
         /// <summary>
         /// Get all dashboards
         /// </summary>
@@ -1036,7 +688,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">specifies the organization id of the resource (optional)</param>
         /// <param name="org">specifies the organization name of the resource (optional)</param>
         /// <returns>Task of Dashboards</returns>
-        System.Threading.Tasks.Task<Dashboards> DashboardsGetAsync (string zapTraceSpan = null, string owner = null, string sortBy = null, List<string> id = null, string orgID = null, string org = null);
+        System.Threading.Tasks.Task<Dashboards> GetDashboardsAsync (string zapTraceSpan = null, string owner = null, string sortBy = null, List<string> id = null, string orgID = null, string org = null);
 
         /// <summary>
         /// Get all dashboards
@@ -1052,7 +704,230 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">specifies the organization id of the resource (optional)</param>
         /// <param name="org">specifies the organization name of the resource (optional)</param>
         /// <returns>Task of ApiResponse (Dashboards)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Dashboards>> DashboardsGetAsyncWithHttpInfo (string zapTraceSpan = null, string owner = null, string sortBy = null, List<string> id = null, string orgID = null, string org = null);
+        System.Threading.Tasks.Task<ApiResponse<Dashboards>> GetDashboardsAsyncWithHttpInfo (string zapTraceSpan = null, string owner = null, string sortBy = null, List<string> id = null, string orgID = null, string org = null);
+        /// <summary>
+        /// Get a single Dashboard
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of dashboard to update</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of Dashboard</returns>
+        System.Threading.Tasks.Task<Dashboard> GetDashboardsIDAsync (string dashboardID, string zapTraceSpan = null);
+
+        /// <summary>
+        /// Get a single Dashboard
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of dashboard to update</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ApiResponse (Dashboard)</returns>
+        System.Threading.Tasks.Task<ApiResponse<Dashboard>> GetDashboardsIDAsyncWithHttpInfo (string dashboardID, string zapTraceSpan = null);
+        /// <summary>
+        /// Retrieve the view for a cell in a dashboard
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of dashboard</param>
+        /// <param name="cellID">ID of cell</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of View</returns>
+        System.Threading.Tasks.Task<View> GetDashboardsIDCellsIDViewAsync (string dashboardID, string cellID, string zapTraceSpan = null);
+
+        /// <summary>
+        /// Retrieve the view for a cell in a dashboard
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of dashboard</param>
+        /// <param name="cellID">ID of cell</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ApiResponse (View)</returns>
+        System.Threading.Tasks.Task<ApiResponse<View>> GetDashboardsIDCellsIDViewAsyncWithHttpInfo (string dashboardID, string cellID, string zapTraceSpan = null);
+        /// <summary>
+        /// list all labels for a dashboard
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of LabelsResponse</returns>
+        System.Threading.Tasks.Task<LabelsResponse> GetDashboardsIDLabelsAsync (string dashboardID, string zapTraceSpan = null);
+
+        /// <summary>
+        /// list all labels for a dashboard
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ApiResponse (LabelsResponse)</returns>
+        System.Threading.Tasks.Task<ApiResponse<LabelsResponse>> GetDashboardsIDLabelsAsyncWithHttpInfo (string dashboardID, string zapTraceSpan = null);
+        /// <summary>
+        /// Retrieve operation logs for a dashboard
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="offset"> (optional)</param>
+        /// <param name="limit"> (optional, default to 20)</param>
+        /// <returns>Task of OperationLogs</returns>
+        System.Threading.Tasks.Task<OperationLogs> GetDashboardsIDLogsAsync (string dashboardID, string zapTraceSpan = null, int? offset = null, int? limit = null);
+
+        /// <summary>
+        /// Retrieve operation logs for a dashboard
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="offset"> (optional)</param>
+        /// <param name="limit"> (optional, default to 20)</param>
+        /// <returns>Task of ApiResponse (OperationLogs)</returns>
+        System.Threading.Tasks.Task<ApiResponse<OperationLogs>> GetDashboardsIDLogsAsyncWithHttpInfo (string dashboardID, string zapTraceSpan = null, int? offset = null, int? limit = null);
+        /// <summary>
+        /// List all dashboard members
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ResourceMembers</returns>
+        System.Threading.Tasks.Task<ResourceMembers> GetDashboardsIDMembersAsync (string dashboardID, string zapTraceSpan = null);
+
+        /// <summary>
+        /// List all dashboard members
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ApiResponse (ResourceMembers)</returns>
+        System.Threading.Tasks.Task<ApiResponse<ResourceMembers>> GetDashboardsIDMembersAsyncWithHttpInfo (string dashboardID, string zapTraceSpan = null);
+        /// <summary>
+        /// List all dashboard owners
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ResourceOwners</returns>
+        System.Threading.Tasks.Task<ResourceOwners> GetDashboardsIDOwnersAsync (string dashboardID, string zapTraceSpan = null);
+
+        /// <summary>
+        /// List all dashboard owners
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ApiResponse (ResourceOwners)</returns>
+        System.Threading.Tasks.Task<ApiResponse<ResourceOwners>> GetDashboardsIDOwnersAsyncWithHttpInfo (string dashboardID, string zapTraceSpan = null);
+        /// <summary>
+        /// Update a single dashboard
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of dashboard to update</param>
+        /// <param name="dashboard">patching of a dashboard</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of Dashboard</returns>
+        System.Threading.Tasks.Task<Dashboard> PatchDashboardsIDAsync (string dashboardID, Dashboard dashboard, string zapTraceSpan = null);
+
+        /// <summary>
+        /// Update a single dashboard
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of dashboard to update</param>
+        /// <param name="dashboard">patching of a dashboard</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ApiResponse (Dashboard)</returns>
+        System.Threading.Tasks.Task<ApiResponse<Dashboard>> PatchDashboardsIDAsyncWithHttpInfo (string dashboardID, Dashboard dashboard, string zapTraceSpan = null);
+        /// <summary>
+        /// Update the non positional information related to a cell (because updates to a single cells positional data could cause grid conflicts)
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of dashboard to update</param>
+        /// <param name="cellID">ID of cell to update</param>
+        /// <param name="cellUpdate">updates the non positional information related to a cell</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of Cell</returns>
+        System.Threading.Tasks.Task<Cell> PatchDashboardsIDCellsIDAsync (string dashboardID, string cellID, CellUpdate cellUpdate, string zapTraceSpan = null);
+
+        /// <summary>
+        /// Update the non positional information related to a cell (because updates to a single cells positional data could cause grid conflicts)
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of dashboard to update</param>
+        /// <param name="cellID">ID of cell to update</param>
+        /// <param name="cellUpdate">updates the non positional information related to a cell</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ApiResponse (Cell)</returns>
+        System.Threading.Tasks.Task<ApiResponse<Cell>> PatchDashboardsIDCellsIDAsyncWithHttpInfo (string dashboardID, string cellID, CellUpdate cellUpdate, string zapTraceSpan = null);
+        /// <summary>
+        /// Update the view for a cell
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of dashboard to update</param>
+        /// <param name="cellID">ID of cell to update</param>
+        /// <param name="view">updates the view for a cell</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of View</returns>
+        System.Threading.Tasks.Task<View> PatchDashboardsIDCellsIDViewAsync (string dashboardID, string cellID, View view, string zapTraceSpan = null);
+
+        /// <summary>
+        /// Update the view for a cell
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of dashboard to update</param>
+        /// <param name="cellID">ID of cell to update</param>
+        /// <param name="view">updates the view for a cell</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ApiResponse (View)</returns>
+        System.Threading.Tasks.Task<ApiResponse<View>> PatchDashboardsIDCellsIDViewAsyncWithHttpInfo (string dashboardID, string cellID, View view, string zapTraceSpan = null);
         /// <summary>
         /// Create a dashboard
         /// </summary>
@@ -1063,7 +938,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="createDashboardRequest">dashboard to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of Dashboard</returns>
-        System.Threading.Tasks.Task<Dashboard> DashboardsPostAsync (CreateDashboardRequest createDashboardRequest, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<Dashboard> PostDashboardsAsync (CreateDashboardRequest createDashboardRequest, string zapTraceSpan = null);
 
         /// <summary>
         /// Create a dashboard
@@ -1075,7 +950,132 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="createDashboardRequest">dashboard to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (Dashboard)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Dashboard>> DashboardsPostAsyncWithHttpInfo (CreateDashboardRequest createDashboardRequest, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<Dashboard>> PostDashboardsAsyncWithHttpInfo (CreateDashboardRequest createDashboardRequest, string zapTraceSpan = null);
+        /// <summary>
+        /// Create a dashboard cell
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of dashboard to update</param>
+        /// <param name="createCell">cell that will be added</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of Cell</returns>
+        System.Threading.Tasks.Task<Cell> PostDashboardsIDCellsAsync (string dashboardID, CreateCell createCell, string zapTraceSpan = null);
+
+        /// <summary>
+        /// Create a dashboard cell
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of dashboard to update</param>
+        /// <param name="createCell">cell that will be added</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ApiResponse (Cell)</returns>
+        System.Threading.Tasks.Task<ApiResponse<Cell>> PostDashboardsIDCellsAsyncWithHttpInfo (string dashboardID, CreateCell createCell, string zapTraceSpan = null);
+        /// <summary>
+        /// add a label to a dashboard
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="labelMapping">label to add</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of LabelResponse</returns>
+        System.Threading.Tasks.Task<LabelResponse> PostDashboardsIDLabelsAsync (string dashboardID, LabelMapping labelMapping, string zapTraceSpan = null);
+
+        /// <summary>
+        /// add a label to a dashboard
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="labelMapping">label to add</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ApiResponse (LabelResponse)</returns>
+        System.Threading.Tasks.Task<ApiResponse<LabelResponse>> PostDashboardsIDLabelsAsyncWithHttpInfo (string dashboardID, LabelMapping labelMapping, string zapTraceSpan = null);
+        /// <summary>
+        /// Add dashboard member
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ResourceMember</returns>
+        System.Threading.Tasks.Task<ResourceMember> PostDashboardsIDMembersAsync (string dashboardID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
+
+        /// <summary>
+        /// Add dashboard member
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ApiResponse (ResourceMember)</returns>
+        System.Threading.Tasks.Task<ApiResponse<ResourceMember>> PostDashboardsIDMembersAsyncWithHttpInfo (string dashboardID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
+        /// <summary>
+        /// Add dashboard owner
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ResourceOwner</returns>
+        System.Threading.Tasks.Task<ResourceOwner> PostDashboardsIDOwnersAsync (string dashboardID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
+
+        /// <summary>
+        /// Add dashboard owner
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ApiResponse (ResourceOwner)</returns>
+        System.Threading.Tasks.Task<ApiResponse<ResourceOwner>> PostDashboardsIDOwnersAsyncWithHttpInfo (string dashboardID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
+        /// <summary>
+        /// Replace a dashboards cells
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of dashboard to update</param>
+        /// <param name="cell">batch replaces all of a dashboards cells (this is used primarily to update the positional information of all of the cells)</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of Dashboard</returns>
+        System.Threading.Tasks.Task<Dashboard> PutDashboardsIDCellsAsync (string dashboardID, List<Cell> cell, string zapTraceSpan = null);
+
+        /// <summary>
+        /// Replace a dashboards cells
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of dashboard to update</param>
+        /// <param name="cell">batch replaces all of a dashboards cells (this is used primarily to update the positional information of all of the cells)</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ApiResponse (Dashboard)</returns>
+        System.Threading.Tasks.Task<ApiResponse<Dashboard>> PutDashboardsIDCellsAsyncWithHttpInfo (string dashboardID, List<Cell> cell, string zapTraceSpan = null);
         #endregion Asynchronous Operations
     }
 
@@ -1177,6 +1177,244 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
+        /// Delete a dashboard 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of dashboard to update</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns></returns>
+        public void DeleteDashboardsID (string dashboardID, string zapTraceSpan = null)
+        {
+             DeleteDashboardsIDWithHttpInfo(dashboardID, zapTraceSpan);
+        }
+
+        /// <summary>
+        /// Delete a dashboard 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of dashboard to update</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        public ApiResponse<Object> DeleteDashboardsIDWithHttpInfo (string dashboardID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'dashboardID' is set
+            if (dashboardID == null)
+                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->DeleteDashboardsID");
+
+            var localVarPath = "/api/v2/dashboards/{dashboardID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (dashboardID != null) localVarPathParams.Add("dashboardID", this.Configuration.ApiClient.ParameterToString(dashboardID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("DeleteDashboardsID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Object>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                null);
+        }
+
+        /// <summary>
+        /// Delete a dashboard 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of dashboard to update</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        public IRestResponse DeleteDashboardsIDWithIRestResponse (string dashboardID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'dashboardID' is set
+            if (dashboardID == null)
+                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->DeleteDashboardsID");
+
+            var localVarPath = "/api/v2/dashboards/{dashboardID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (dashboardID != null) localVarPathParams.Add("dashboardID", this.Configuration.ApiClient.ParameterToString(dashboardID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("DeleteDashboardsID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return localVarResponse;
+        }
+        
+        /// <summary>
+        /// Delete a dashboard 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of dashboard to update</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        public RestRequest DeleteDashboardsIDWithRestRequest (string dashboardID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'dashboardID' is set
+            if (dashboardID == null)
+                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->DeleteDashboardsID");
+
+            var localVarPath = "/api/v2/dashboards/{dashboardID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (dashboardID != null) localVarPathParams.Add("dashboardID", this.Configuration.ApiClient.ParameterToString(dashboardID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
+                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+        }
+
+        /// <summary>
+        /// Delete a dashboard 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of dashboard to update</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of void</returns>
+        public async System.Threading.Tasks.Task DeleteDashboardsIDAsync (string dashboardID, string zapTraceSpan = null)
+        {
+             await DeleteDashboardsIDAsyncWithHttpInfo(dashboardID, zapTraceSpan);
+
+        }
+
+        /// <summary>
+        /// Delete a dashboard 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of dashboard to update</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ApiResponse</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteDashboardsIDAsyncWithHttpInfo (string dashboardID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'dashboardID' is set
+            if (dashboardID == null)
+                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->DeleteDashboardsID");
+
+            var localVarPath = "/api/v2/dashboards/{dashboardID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (dashboardID != null) localVarPathParams.Add("dashboardID", this.Configuration.ApiClient.ParameterToString(dashboardID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("DeleteDashboardsID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Object>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                null);
+        }
+
+        /// <summary>
         /// Delete a dashboard cell 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
@@ -1184,9 +1422,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="cellID">ID of cell to delete</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
-        public void DashboardsDashboardIDCellsCellIDDelete (string dashboardID, string cellID, string zapTraceSpan = null)
+        public void DeleteDashboardsIDCellsID (string dashboardID, string cellID, string zapTraceSpan = null)
         {
-             DashboardsDashboardIDCellsCellIDDeleteWithHttpInfo(dashboardID, cellID, zapTraceSpan);
+             DeleteDashboardsIDCellsIDWithHttpInfo(dashboardID, cellID, zapTraceSpan);
         }
 
         /// <summary>
@@ -1197,14 +1435,14 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="cellID">ID of cell to delete</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public ApiResponse<Object> DashboardsDashboardIDCellsCellIDDeleteWithHttpInfo (string dashboardID, string cellID, string zapTraceSpan = null)
+        public ApiResponse<Object> DeleteDashboardsIDCellsIDWithHttpInfo (string dashboardID, string cellID, string zapTraceSpan = null)
         {
             // verify the required parameter 'dashboardID' is set
             if (dashboardID == null)
-                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->DashboardsDashboardIDCellsCellIDDelete");
+                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->DeleteDashboardsIDCellsID");
             // verify the required parameter 'cellID' is set
             if (cellID == null)
-                throw new ApiException(400, "Missing required parameter 'cellID' when calling DashboardsService->DashboardsDashboardIDCellsCellIDDelete");
+                throw new ApiException(400, "Missing required parameter 'cellID' when calling DashboardsService->DeleteDashboardsIDCellsID");
 
             var localVarPath = "/api/v2/dashboards/{dashboardID}/cells/{cellID}";
             var localVarPathParams = new Dictionary<String, String>();
@@ -1242,7 +1480,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("DashboardsDashboardIDCellsCellIDDelete", localVarResponse);
+                Exception exception = ExceptionFactory("DeleteDashboardsIDCellsID", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -1259,14 +1497,14 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="cellID">ID of cell to delete</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public IRestResponse DashboardsDashboardIDCellsCellIDDeleteWithIRestResponse (string dashboardID, string cellID, string zapTraceSpan = null)
+        public IRestResponse DeleteDashboardsIDCellsIDWithIRestResponse (string dashboardID, string cellID, string zapTraceSpan = null)
         {
             // verify the required parameter 'dashboardID' is set
             if (dashboardID == null)
-                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->DashboardsDashboardIDCellsCellIDDelete");
+                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->DeleteDashboardsIDCellsID");
             // verify the required parameter 'cellID' is set
             if (cellID == null)
-                throw new ApiException(400, "Missing required parameter 'cellID' when calling DashboardsService->DashboardsDashboardIDCellsCellIDDelete");
+                throw new ApiException(400, "Missing required parameter 'cellID' when calling DashboardsService->DeleteDashboardsIDCellsID");
 
             var localVarPath = "/api/v2/dashboards/{dashboardID}/cells/{cellID}";
             var localVarPathParams = new Dictionary<String, String>();
@@ -1304,7 +1542,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("DashboardsDashboardIDCellsCellIDDelete", localVarResponse);
+                Exception exception = ExceptionFactory("DeleteDashboardsIDCellsID", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -1319,14 +1557,14 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="cellID">ID of cell to delete</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public RestRequest DashboardsDashboardIDCellsCellIDDeleteWithRestRequest (string dashboardID, string cellID, string zapTraceSpan = null)
+        public RestRequest DeleteDashboardsIDCellsIDWithRestRequest (string dashboardID, string cellID, string zapTraceSpan = null)
         {
             // verify the required parameter 'dashboardID' is set
             if (dashboardID == null)
-                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->DashboardsDashboardIDCellsCellIDDelete");
+                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->DeleteDashboardsIDCellsID");
             // verify the required parameter 'cellID' is set
             if (cellID == null)
-                throw new ApiException(400, "Missing required parameter 'cellID' when calling DashboardsService->DashboardsDashboardIDCellsCellIDDelete");
+                throw new ApiException(400, "Missing required parameter 'cellID' when calling DashboardsService->DeleteDashboardsIDCellsID");
 
             var localVarPath = "/api/v2/dashboards/{dashboardID}/cells/{cellID}";
             var localVarPathParams = new Dictionary<String, String>();
@@ -1368,9 +1606,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="cellID">ID of cell to delete</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task DashboardsDashboardIDCellsCellIDDeleteAsync (string dashboardID, string cellID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task DeleteDashboardsIDCellsIDAsync (string dashboardID, string cellID, string zapTraceSpan = null)
         {
-             await DashboardsDashboardIDCellsCellIDDeleteAsyncWithHttpInfo(dashboardID, cellID, zapTraceSpan);
+             await DeleteDashboardsIDCellsIDAsyncWithHttpInfo(dashboardID, cellID, zapTraceSpan);
 
         }
 
@@ -1382,14 +1620,14 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="cellID">ID of cell to delete</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Object>> DashboardsDashboardIDCellsCellIDDeleteAsyncWithHttpInfo (string dashboardID, string cellID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteDashboardsIDCellsIDAsyncWithHttpInfo (string dashboardID, string cellID, string zapTraceSpan = null)
         {
             // verify the required parameter 'dashboardID' is set
             if (dashboardID == null)
-                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->DashboardsDashboardIDCellsCellIDDelete");
+                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->DeleteDashboardsIDCellsID");
             // verify the required parameter 'cellID' is set
             if (cellID == null)
-                throw new ApiException(400, "Missing required parameter 'cellID' when calling DashboardsService->DashboardsDashboardIDCellsCellIDDelete");
+                throw new ApiException(400, "Missing required parameter 'cellID' when calling DashboardsService->DeleteDashboardsIDCellsID");
 
             var localVarPath = "/api/v2/dashboards/{dashboardID}/cells/{cellID}";
             var localVarPathParams = new Dictionary<String, String>();
@@ -1427,7 +1665,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("DashboardsDashboardIDCellsCellIDDelete", localVarResponse);
+                Exception exception = ExceptionFactory("DeleteDashboardsIDCellsID", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -1437,1513 +1675,36 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Update the non positional information related to a cell (because updates to a single cells positional data could cause grid conflicts) 
+        /// delete a label from a dashboard 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of dashboard to update</param>
-        /// <param name="cellID">ID of cell to update</param>
-        /// <param name="cellUpdate">updates the non positional information related to a cell</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Cell</returns>
-        public Cell DashboardsDashboardIDCellsCellIDPatch (string dashboardID, string cellID, CellUpdate cellUpdate, string zapTraceSpan = null)
-        {
-             ApiResponse<Cell> localVarResponse = DashboardsDashboardIDCellsCellIDPatchWithHttpInfo(dashboardID, cellID, cellUpdate, zapTraceSpan);
-             return localVarResponse.Data;
-        }
-
-        /// <summary>
-        /// Update the non positional information related to a cell (because updates to a single cells positional data could cause grid conflicts) 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of dashboard to update</param>
-        /// <param name="cellID">ID of cell to update</param>
-        /// <param name="cellUpdate">updates the non positional information related to a cell</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Cell</returns>
-        public ApiResponse< Cell > DashboardsDashboardIDCellsCellIDPatchWithHttpInfo (string dashboardID, string cellID, CellUpdate cellUpdate, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'dashboardID' is set
-            if (dashboardID == null)
-                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->DashboardsDashboardIDCellsCellIDPatch");
-            // verify the required parameter 'cellID' is set
-            if (cellID == null)
-                throw new ApiException(400, "Missing required parameter 'cellID' when calling DashboardsService->DashboardsDashboardIDCellsCellIDPatch");
-            // verify the required parameter 'cellUpdate' is set
-            if (cellUpdate == null)
-                throw new ApiException(400, "Missing required parameter 'cellUpdate' when calling DashboardsService->DashboardsDashboardIDCellsCellIDPatch");
-
-            var localVarPath = "/api/v2/dashboards/{dashboardID}/cells/{cellID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-                "application/json"
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (dashboardID != null) localVarPathParams.Add("dashboardID", this.Configuration.ApiClient.ParameterToString(dashboardID)); // path parameter
-            if (cellID != null) localVarPathParams.Add("cellID", this.Configuration.ApiClient.ParameterToString(cellID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (cellUpdate != null && cellUpdate.GetType() != typeof(byte[]))
-            {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(cellUpdate); // http body (model) parameter
-            }
-            else
-            {
-                localVarPostBody = cellUpdate; // byte array
-            }
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("DashboardsDashboardIDCellsCellIDPatch", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return new ApiResponse<Cell>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (Cell) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Cell)));
-        }
-
-        /// <summary>
-        /// Update the non positional information related to a cell (because updates to a single cells positional data could cause grid conflicts) 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of dashboard to update</param>
-        /// <param name="cellID">ID of cell to update</param>
-        /// <param name="cellUpdate">updates the non positional information related to a cell</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Cell</returns>
-        public IRestResponse DashboardsDashboardIDCellsCellIDPatchWithIRestResponse (string dashboardID, string cellID, CellUpdate cellUpdate, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'dashboardID' is set
-            if (dashboardID == null)
-                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->DashboardsDashboardIDCellsCellIDPatch");
-            // verify the required parameter 'cellID' is set
-            if (cellID == null)
-                throw new ApiException(400, "Missing required parameter 'cellID' when calling DashboardsService->DashboardsDashboardIDCellsCellIDPatch");
-            // verify the required parameter 'cellUpdate' is set
-            if (cellUpdate == null)
-                throw new ApiException(400, "Missing required parameter 'cellUpdate' when calling DashboardsService->DashboardsDashboardIDCellsCellIDPatch");
-
-            var localVarPath = "/api/v2/dashboards/{dashboardID}/cells/{cellID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-                "application/json"
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (dashboardID != null) localVarPathParams.Add("dashboardID", this.Configuration.ApiClient.ParameterToString(dashboardID)); // path parameter
-            if (cellID != null) localVarPathParams.Add("cellID", this.Configuration.ApiClient.ParameterToString(cellID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (cellUpdate != null && cellUpdate.GetType() != typeof(byte[]))
-            {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(cellUpdate); // http body (model) parameter
-            }
-            else
-            {
-                localVarPostBody = cellUpdate; // byte array
-            }
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("DashboardsDashboardIDCellsCellIDPatch", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return localVarResponse;
-        }
-        
-        /// <summary>
-        /// Update the non positional information related to a cell (because updates to a single cells positional data could cause grid conflicts) 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of dashboard to update</param>
-        /// <param name="cellID">ID of cell to update</param>
-        /// <param name="cellUpdate">updates the non positional information related to a cell</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Cell</returns>
-        public RestRequest DashboardsDashboardIDCellsCellIDPatchWithRestRequest (string dashboardID, string cellID, CellUpdate cellUpdate, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'dashboardID' is set
-            if (dashboardID == null)
-                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->DashboardsDashboardIDCellsCellIDPatch");
-            // verify the required parameter 'cellID' is set
-            if (cellID == null)
-                throw new ApiException(400, "Missing required parameter 'cellID' when calling DashboardsService->DashboardsDashboardIDCellsCellIDPatch");
-            // verify the required parameter 'cellUpdate' is set
-            if (cellUpdate == null)
-                throw new ApiException(400, "Missing required parameter 'cellUpdate' when calling DashboardsService->DashboardsDashboardIDCellsCellIDPatch");
-
-            var localVarPath = "/api/v2/dashboards/{dashboardID}/cells/{cellID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-                "application/json"
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (dashboardID != null) localVarPathParams.Add("dashboardID", this.Configuration.ApiClient.ParameterToString(dashboardID)); // path parameter
-            if (cellID != null) localVarPathParams.Add("cellID", this.Configuration.ApiClient.ParameterToString(cellID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (cellUpdate != null && cellUpdate.GetType() != typeof(byte[]))
-            {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(cellUpdate); // http body (model) parameter
-            }
-            else
-            {
-                localVarPostBody = cellUpdate; // byte array
-            }
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
-                Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-        }
-
-        /// <summary>
-        /// Update the non positional information related to a cell (because updates to a single cells positional data could cause grid conflicts) 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of dashboard to update</param>
-        /// <param name="cellID">ID of cell to update</param>
-        /// <param name="cellUpdate">updates the non positional information related to a cell</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of Cell</returns>
-        public async System.Threading.Tasks.Task<Cell> DashboardsDashboardIDCellsCellIDPatchAsync (string dashboardID, string cellID, CellUpdate cellUpdate, string zapTraceSpan = null)
-        {
-             ApiResponse<Cell> localVarResponse = await DashboardsDashboardIDCellsCellIDPatchAsyncWithHttpInfo(dashboardID, cellID, cellUpdate, zapTraceSpan);
-             return localVarResponse.Data;
-
-        }
-
-        /// <summary>
-        /// Update the non positional information related to a cell (because updates to a single cells positional data could cause grid conflicts) 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of dashboard to update</param>
-        /// <param name="cellID">ID of cell to update</param>
-        /// <param name="cellUpdate">updates the non positional information related to a cell</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ApiResponse (Cell)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Cell>> DashboardsDashboardIDCellsCellIDPatchAsyncWithHttpInfo (string dashboardID, string cellID, CellUpdate cellUpdate, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'dashboardID' is set
-            if (dashboardID == null)
-                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->DashboardsDashboardIDCellsCellIDPatch");
-            // verify the required parameter 'cellID' is set
-            if (cellID == null)
-                throw new ApiException(400, "Missing required parameter 'cellID' when calling DashboardsService->DashboardsDashboardIDCellsCellIDPatch");
-            // verify the required parameter 'cellUpdate' is set
-            if (cellUpdate == null)
-                throw new ApiException(400, "Missing required parameter 'cellUpdate' when calling DashboardsService->DashboardsDashboardIDCellsCellIDPatch");
-
-            var localVarPath = "/api/v2/dashboards/{dashboardID}/cells/{cellID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-                "application/json"
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (dashboardID != null) localVarPathParams.Add("dashboardID", this.Configuration.ApiClient.ParameterToString(dashboardID)); // path parameter
-            if (cellID != null) localVarPathParams.Add("cellID", this.Configuration.ApiClient.ParameterToString(cellID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (cellUpdate != null && cellUpdate.GetType() != typeof(byte[]))
-            {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(cellUpdate); // http body (model) parameter
-            }
-            else
-            {
-                localVarPostBody = cellUpdate; // byte array
-            }
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("DashboardsDashboardIDCellsCellIDPatch", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return new ApiResponse<Cell>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (Cell) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Cell)));
-        }
-
-        /// <summary>
-        /// Retrieve the view for a cell in a dashboard 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of dashboard</param>
-        /// <param name="cellID">ID of cell</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>View</returns>
-        public View DashboardsDashboardIDCellsCellIDViewGet (string dashboardID, string cellID, string zapTraceSpan = null)
-        {
-             ApiResponse<View> localVarResponse = DashboardsDashboardIDCellsCellIDViewGetWithHttpInfo(dashboardID, cellID, zapTraceSpan);
-             return localVarResponse.Data;
-        }
-
-        /// <summary>
-        /// Retrieve the view for a cell in a dashboard 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of dashboard</param>
-        /// <param name="cellID">ID of cell</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of View</returns>
-        public ApiResponse< View > DashboardsDashboardIDCellsCellIDViewGetWithHttpInfo (string dashboardID, string cellID, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'dashboardID' is set
-            if (dashboardID == null)
-                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->DashboardsDashboardIDCellsCellIDViewGet");
-            // verify the required parameter 'cellID' is set
-            if (cellID == null)
-                throw new ApiException(400, "Missing required parameter 'cellID' when calling DashboardsService->DashboardsDashboardIDCellsCellIDViewGet");
-
-            var localVarPath = "/api/v2/dashboards/{dashboardID}/cells/{cellID}/view";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (dashboardID != null) localVarPathParams.Add("dashboardID", this.Configuration.ApiClient.ParameterToString(dashboardID)); // path parameter
-            if (cellID != null) localVarPathParams.Add("cellID", this.Configuration.ApiClient.ParameterToString(cellID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("DashboardsDashboardIDCellsCellIDViewGet", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return new ApiResponse<View>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (View) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(View)));
-        }
-
-        /// <summary>
-        /// Retrieve the view for a cell in a dashboard 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of dashboard</param>
-        /// <param name="cellID">ID of cell</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of View</returns>
-        public IRestResponse DashboardsDashboardIDCellsCellIDViewGetWithIRestResponse (string dashboardID, string cellID, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'dashboardID' is set
-            if (dashboardID == null)
-                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->DashboardsDashboardIDCellsCellIDViewGet");
-            // verify the required parameter 'cellID' is set
-            if (cellID == null)
-                throw new ApiException(400, "Missing required parameter 'cellID' when calling DashboardsService->DashboardsDashboardIDCellsCellIDViewGet");
-
-            var localVarPath = "/api/v2/dashboards/{dashboardID}/cells/{cellID}/view";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (dashboardID != null) localVarPathParams.Add("dashboardID", this.Configuration.ApiClient.ParameterToString(dashboardID)); // path parameter
-            if (cellID != null) localVarPathParams.Add("cellID", this.Configuration.ApiClient.ParameterToString(cellID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("DashboardsDashboardIDCellsCellIDViewGet", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return localVarResponse;
-        }
-        
-        /// <summary>
-        /// Retrieve the view for a cell in a dashboard 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of dashboard</param>
-        /// <param name="cellID">ID of cell</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of View</returns>
-        public RestRequest DashboardsDashboardIDCellsCellIDViewGetWithRestRequest (string dashboardID, string cellID, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'dashboardID' is set
-            if (dashboardID == null)
-                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->DashboardsDashboardIDCellsCellIDViewGet");
-            // verify the required parameter 'cellID' is set
-            if (cellID == null)
-                throw new ApiException(400, "Missing required parameter 'cellID' when calling DashboardsService->DashboardsDashboardIDCellsCellIDViewGet");
-
-            var localVarPath = "/api/v2/dashboards/{dashboardID}/cells/{cellID}/view";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (dashboardID != null) localVarPathParams.Add("dashboardID", this.Configuration.ApiClient.ParameterToString(dashboardID)); // path parameter
-            if (cellID != null) localVarPathParams.Add("cellID", this.Configuration.ApiClient.ParameterToString(cellID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-        }
-
-        /// <summary>
-        /// Retrieve the view for a cell in a dashboard 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of dashboard</param>
-        /// <param name="cellID">ID of cell</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of View</returns>
-        public async System.Threading.Tasks.Task<View> DashboardsDashboardIDCellsCellIDViewGetAsync (string dashboardID, string cellID, string zapTraceSpan = null)
-        {
-             ApiResponse<View> localVarResponse = await DashboardsDashboardIDCellsCellIDViewGetAsyncWithHttpInfo(dashboardID, cellID, zapTraceSpan);
-             return localVarResponse.Data;
-
-        }
-
-        /// <summary>
-        /// Retrieve the view for a cell in a dashboard 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of dashboard</param>
-        /// <param name="cellID">ID of cell</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ApiResponse (View)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<View>> DashboardsDashboardIDCellsCellIDViewGetAsyncWithHttpInfo (string dashboardID, string cellID, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'dashboardID' is set
-            if (dashboardID == null)
-                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->DashboardsDashboardIDCellsCellIDViewGet");
-            // verify the required parameter 'cellID' is set
-            if (cellID == null)
-                throw new ApiException(400, "Missing required parameter 'cellID' when calling DashboardsService->DashboardsDashboardIDCellsCellIDViewGet");
-
-            var localVarPath = "/api/v2/dashboards/{dashboardID}/cells/{cellID}/view";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (dashboardID != null) localVarPathParams.Add("dashboardID", this.Configuration.ApiClient.ParameterToString(dashboardID)); // path parameter
-            if (cellID != null) localVarPathParams.Add("cellID", this.Configuration.ApiClient.ParameterToString(cellID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("DashboardsDashboardIDCellsCellIDViewGet", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return new ApiResponse<View>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (View) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(View)));
-        }
-
-        /// <summary>
-        /// Update the view for a cell 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of dashboard to update</param>
-        /// <param name="cellID">ID of cell to update</param>
-        /// <param name="view">updates the view for a cell</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>View</returns>
-        public View DashboardsDashboardIDCellsCellIDViewPatch (string dashboardID, string cellID, View view, string zapTraceSpan = null)
-        {
-             ApiResponse<View> localVarResponse = DashboardsDashboardIDCellsCellIDViewPatchWithHttpInfo(dashboardID, cellID, view, zapTraceSpan);
-             return localVarResponse.Data;
-        }
-
-        /// <summary>
-        /// Update the view for a cell 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of dashboard to update</param>
-        /// <param name="cellID">ID of cell to update</param>
-        /// <param name="view">updates the view for a cell</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of View</returns>
-        public ApiResponse< View > DashboardsDashboardIDCellsCellIDViewPatchWithHttpInfo (string dashboardID, string cellID, View view, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'dashboardID' is set
-            if (dashboardID == null)
-                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->DashboardsDashboardIDCellsCellIDViewPatch");
-            // verify the required parameter 'cellID' is set
-            if (cellID == null)
-                throw new ApiException(400, "Missing required parameter 'cellID' when calling DashboardsService->DashboardsDashboardIDCellsCellIDViewPatch");
-            // verify the required parameter 'view' is set
-            if (view == null)
-                throw new ApiException(400, "Missing required parameter 'view' when calling DashboardsService->DashboardsDashboardIDCellsCellIDViewPatch");
-
-            var localVarPath = "/api/v2/dashboards/{dashboardID}/cells/{cellID}/view";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-                "application/json"
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (dashboardID != null) localVarPathParams.Add("dashboardID", this.Configuration.ApiClient.ParameterToString(dashboardID)); // path parameter
-            if (cellID != null) localVarPathParams.Add("cellID", this.Configuration.ApiClient.ParameterToString(cellID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (view != null && view.GetType() != typeof(byte[]))
-            {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(view); // http body (model) parameter
-            }
-            else
-            {
-                localVarPostBody = view; // byte array
-            }
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("DashboardsDashboardIDCellsCellIDViewPatch", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return new ApiResponse<View>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (View) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(View)));
-        }
-
-        /// <summary>
-        /// Update the view for a cell 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of dashboard to update</param>
-        /// <param name="cellID">ID of cell to update</param>
-        /// <param name="view">updates the view for a cell</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of View</returns>
-        public IRestResponse DashboardsDashboardIDCellsCellIDViewPatchWithIRestResponse (string dashboardID, string cellID, View view, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'dashboardID' is set
-            if (dashboardID == null)
-                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->DashboardsDashboardIDCellsCellIDViewPatch");
-            // verify the required parameter 'cellID' is set
-            if (cellID == null)
-                throw new ApiException(400, "Missing required parameter 'cellID' when calling DashboardsService->DashboardsDashboardIDCellsCellIDViewPatch");
-            // verify the required parameter 'view' is set
-            if (view == null)
-                throw new ApiException(400, "Missing required parameter 'view' when calling DashboardsService->DashboardsDashboardIDCellsCellIDViewPatch");
-
-            var localVarPath = "/api/v2/dashboards/{dashboardID}/cells/{cellID}/view";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-                "application/json"
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (dashboardID != null) localVarPathParams.Add("dashboardID", this.Configuration.ApiClient.ParameterToString(dashboardID)); // path parameter
-            if (cellID != null) localVarPathParams.Add("cellID", this.Configuration.ApiClient.ParameterToString(cellID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (view != null && view.GetType() != typeof(byte[]))
-            {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(view); // http body (model) parameter
-            }
-            else
-            {
-                localVarPostBody = view; // byte array
-            }
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("DashboardsDashboardIDCellsCellIDViewPatch", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return localVarResponse;
-        }
-        
-        /// <summary>
-        /// Update the view for a cell 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of dashboard to update</param>
-        /// <param name="cellID">ID of cell to update</param>
-        /// <param name="view">updates the view for a cell</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of View</returns>
-        public RestRequest DashboardsDashboardIDCellsCellIDViewPatchWithRestRequest (string dashboardID, string cellID, View view, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'dashboardID' is set
-            if (dashboardID == null)
-                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->DashboardsDashboardIDCellsCellIDViewPatch");
-            // verify the required parameter 'cellID' is set
-            if (cellID == null)
-                throw new ApiException(400, "Missing required parameter 'cellID' when calling DashboardsService->DashboardsDashboardIDCellsCellIDViewPatch");
-            // verify the required parameter 'view' is set
-            if (view == null)
-                throw new ApiException(400, "Missing required parameter 'view' when calling DashboardsService->DashboardsDashboardIDCellsCellIDViewPatch");
-
-            var localVarPath = "/api/v2/dashboards/{dashboardID}/cells/{cellID}/view";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-                "application/json"
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (dashboardID != null) localVarPathParams.Add("dashboardID", this.Configuration.ApiClient.ParameterToString(dashboardID)); // path parameter
-            if (cellID != null) localVarPathParams.Add("cellID", this.Configuration.ApiClient.ParameterToString(cellID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (view != null && view.GetType() != typeof(byte[]))
-            {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(view); // http body (model) parameter
-            }
-            else
-            {
-                localVarPostBody = view; // byte array
-            }
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
-                Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-        }
-
-        /// <summary>
-        /// Update the view for a cell 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of dashboard to update</param>
-        /// <param name="cellID">ID of cell to update</param>
-        /// <param name="view">updates the view for a cell</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of View</returns>
-        public async System.Threading.Tasks.Task<View> DashboardsDashboardIDCellsCellIDViewPatchAsync (string dashboardID, string cellID, View view, string zapTraceSpan = null)
-        {
-             ApiResponse<View> localVarResponse = await DashboardsDashboardIDCellsCellIDViewPatchAsyncWithHttpInfo(dashboardID, cellID, view, zapTraceSpan);
-             return localVarResponse.Data;
-
-        }
-
-        /// <summary>
-        /// Update the view for a cell 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of dashboard to update</param>
-        /// <param name="cellID">ID of cell to update</param>
-        /// <param name="view">updates the view for a cell</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ApiResponse (View)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<View>> DashboardsDashboardIDCellsCellIDViewPatchAsyncWithHttpInfo (string dashboardID, string cellID, View view, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'dashboardID' is set
-            if (dashboardID == null)
-                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->DashboardsDashboardIDCellsCellIDViewPatch");
-            // verify the required parameter 'cellID' is set
-            if (cellID == null)
-                throw new ApiException(400, "Missing required parameter 'cellID' when calling DashboardsService->DashboardsDashboardIDCellsCellIDViewPatch");
-            // verify the required parameter 'view' is set
-            if (view == null)
-                throw new ApiException(400, "Missing required parameter 'view' when calling DashboardsService->DashboardsDashboardIDCellsCellIDViewPatch");
-
-            var localVarPath = "/api/v2/dashboards/{dashboardID}/cells/{cellID}/view";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-                "application/json"
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (dashboardID != null) localVarPathParams.Add("dashboardID", this.Configuration.ApiClient.ParameterToString(dashboardID)); // path parameter
-            if (cellID != null) localVarPathParams.Add("cellID", this.Configuration.ApiClient.ParameterToString(cellID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (view != null && view.GetType() != typeof(byte[]))
-            {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(view); // http body (model) parameter
-            }
-            else
-            {
-                localVarPostBody = view; // byte array
-            }
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("DashboardsDashboardIDCellsCellIDViewPatch", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return new ApiResponse<View>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (View) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(View)));
-        }
-
-        /// <summary>
-        /// Create a dashboard cell 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of dashboard to update</param>
-        /// <param name="createCell">cell that will be added</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Cell</returns>
-        public Cell DashboardsDashboardIDCellsPost (string dashboardID, CreateCell createCell, string zapTraceSpan = null)
-        {
-             ApiResponse<Cell> localVarResponse = DashboardsDashboardIDCellsPostWithHttpInfo(dashboardID, createCell, zapTraceSpan);
-             return localVarResponse.Data;
-        }
-
-        /// <summary>
-        /// Create a dashboard cell 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of dashboard to update</param>
-        /// <param name="createCell">cell that will be added</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Cell</returns>
-        public ApiResponse< Cell > DashboardsDashboardIDCellsPostWithHttpInfo (string dashboardID, CreateCell createCell, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'dashboardID' is set
-            if (dashboardID == null)
-                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->DashboardsDashboardIDCellsPost");
-            // verify the required parameter 'createCell' is set
-            if (createCell == null)
-                throw new ApiException(400, "Missing required parameter 'createCell' when calling DashboardsService->DashboardsDashboardIDCellsPost");
-
-            var localVarPath = "/api/v2/dashboards/{dashboardID}/cells";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-                "application/json"
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (dashboardID != null) localVarPathParams.Add("dashboardID", this.Configuration.ApiClient.ParameterToString(dashboardID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (createCell != null && createCell.GetType() != typeof(byte[]))
-            {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(createCell); // http body (model) parameter
-            }
-            else
-            {
-                localVarPostBody = createCell; // byte array
-            }
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("DashboardsDashboardIDCellsPost", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return new ApiResponse<Cell>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (Cell) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Cell)));
-        }
-
-        /// <summary>
-        /// Create a dashboard cell 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of dashboard to update</param>
-        /// <param name="createCell">cell that will be added</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Cell</returns>
-        public IRestResponse DashboardsDashboardIDCellsPostWithIRestResponse (string dashboardID, CreateCell createCell, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'dashboardID' is set
-            if (dashboardID == null)
-                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->DashboardsDashboardIDCellsPost");
-            // verify the required parameter 'createCell' is set
-            if (createCell == null)
-                throw new ApiException(400, "Missing required parameter 'createCell' when calling DashboardsService->DashboardsDashboardIDCellsPost");
-
-            var localVarPath = "/api/v2/dashboards/{dashboardID}/cells";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-                "application/json"
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (dashboardID != null) localVarPathParams.Add("dashboardID", this.Configuration.ApiClient.ParameterToString(dashboardID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (createCell != null && createCell.GetType() != typeof(byte[]))
-            {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(createCell); // http body (model) parameter
-            }
-            else
-            {
-                localVarPostBody = createCell; // byte array
-            }
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("DashboardsDashboardIDCellsPost", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return localVarResponse;
-        }
-        
-        /// <summary>
-        /// Create a dashboard cell 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of dashboard to update</param>
-        /// <param name="createCell">cell that will be added</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Cell</returns>
-        public RestRequest DashboardsDashboardIDCellsPostWithRestRequest (string dashboardID, CreateCell createCell, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'dashboardID' is set
-            if (dashboardID == null)
-                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->DashboardsDashboardIDCellsPost");
-            // verify the required parameter 'createCell' is set
-            if (createCell == null)
-                throw new ApiException(400, "Missing required parameter 'createCell' when calling DashboardsService->DashboardsDashboardIDCellsPost");
-
-            var localVarPath = "/api/v2/dashboards/{dashboardID}/cells";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-                "application/json"
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (dashboardID != null) localVarPathParams.Add("dashboardID", this.Configuration.ApiClient.ParameterToString(dashboardID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (createCell != null && createCell.GetType() != typeof(byte[]))
-            {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(createCell); // http body (model) parameter
-            }
-            else
-            {
-                localVarPostBody = createCell; // byte array
-            }
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
-                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-        }
-
-        /// <summary>
-        /// Create a dashboard cell 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of dashboard to update</param>
-        /// <param name="createCell">cell that will be added</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of Cell</returns>
-        public async System.Threading.Tasks.Task<Cell> DashboardsDashboardIDCellsPostAsync (string dashboardID, CreateCell createCell, string zapTraceSpan = null)
-        {
-             ApiResponse<Cell> localVarResponse = await DashboardsDashboardIDCellsPostAsyncWithHttpInfo(dashboardID, createCell, zapTraceSpan);
-             return localVarResponse.Data;
-
-        }
-
-        /// <summary>
-        /// Create a dashboard cell 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of dashboard to update</param>
-        /// <param name="createCell">cell that will be added</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ApiResponse (Cell)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Cell>> DashboardsDashboardIDCellsPostAsyncWithHttpInfo (string dashboardID, CreateCell createCell, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'dashboardID' is set
-            if (dashboardID == null)
-                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->DashboardsDashboardIDCellsPost");
-            // verify the required parameter 'createCell' is set
-            if (createCell == null)
-                throw new ApiException(400, "Missing required parameter 'createCell' when calling DashboardsService->DashboardsDashboardIDCellsPost");
-
-            var localVarPath = "/api/v2/dashboards/{dashboardID}/cells";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-                "application/json"
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (dashboardID != null) localVarPathParams.Add("dashboardID", this.Configuration.ApiClient.ParameterToString(dashboardID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (createCell != null && createCell.GetType() != typeof(byte[]))
-            {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(createCell); // http body (model) parameter
-            }
-            else
-            {
-                localVarPostBody = createCell; // byte array
-            }
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("DashboardsDashboardIDCellsPost", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return new ApiResponse<Cell>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (Cell) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Cell)));
-        }
-
-        /// <summary>
-        /// Replace a dashboards cells 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of dashboard to update</param>
-        /// <param name="cell">batch replaces all of a dashboards cells (this is used primarily to update the positional information of all of the cells)</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Dashboard</returns>
-        public Dashboard DashboardsDashboardIDCellsPut (string dashboardID, List<Cell> cell, string zapTraceSpan = null)
-        {
-             ApiResponse<Dashboard> localVarResponse = DashboardsDashboardIDCellsPutWithHttpInfo(dashboardID, cell, zapTraceSpan);
-             return localVarResponse.Data;
-        }
-
-        /// <summary>
-        /// Replace a dashboards cells 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of dashboard to update</param>
-        /// <param name="cell">batch replaces all of a dashboards cells (this is used primarily to update the positional information of all of the cells)</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Dashboard</returns>
-        public ApiResponse< Dashboard > DashboardsDashboardIDCellsPutWithHttpInfo (string dashboardID, List<Cell> cell, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'dashboardID' is set
-            if (dashboardID == null)
-                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->DashboardsDashboardIDCellsPut");
-            // verify the required parameter 'cell' is set
-            if (cell == null)
-                throw new ApiException(400, "Missing required parameter 'cell' when calling DashboardsService->DashboardsDashboardIDCellsPut");
-
-            var localVarPath = "/api/v2/dashboards/{dashboardID}/cells";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-                "application/json"
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (dashboardID != null) localVarPathParams.Add("dashboardID", this.Configuration.ApiClient.ParameterToString(dashboardID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (cell != null && cell.GetType() != typeof(byte[]))
-            {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(cell); // http body (model) parameter
-            }
-            else
-            {
-                localVarPostBody = cell; // byte array
-            }
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.PUT, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("DashboardsDashboardIDCellsPut", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return new ApiResponse<Dashboard>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (Dashboard) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Dashboard)));
-        }
-
-        /// <summary>
-        /// Replace a dashboards cells 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of dashboard to update</param>
-        /// <param name="cell">batch replaces all of a dashboards cells (this is used primarily to update the positional information of all of the cells)</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Dashboard</returns>
-        public IRestResponse DashboardsDashboardIDCellsPutWithIRestResponse (string dashboardID, List<Cell> cell, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'dashboardID' is set
-            if (dashboardID == null)
-                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->DashboardsDashboardIDCellsPut");
-            // verify the required parameter 'cell' is set
-            if (cell == null)
-                throw new ApiException(400, "Missing required parameter 'cell' when calling DashboardsService->DashboardsDashboardIDCellsPut");
-
-            var localVarPath = "/api/v2/dashboards/{dashboardID}/cells";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-                "application/json"
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (dashboardID != null) localVarPathParams.Add("dashboardID", this.Configuration.ApiClient.ParameterToString(dashboardID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (cell != null && cell.GetType() != typeof(byte[]))
-            {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(cell); // http body (model) parameter
-            }
-            else
-            {
-                localVarPostBody = cell; // byte array
-            }
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.PUT, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("DashboardsDashboardIDCellsPut", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return localVarResponse;
-        }
-        
-        /// <summary>
-        /// Replace a dashboards cells 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of dashboard to update</param>
-        /// <param name="cell">batch replaces all of a dashboards cells (this is used primarily to update the positional information of all of the cells)</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Dashboard</returns>
-        public RestRequest DashboardsDashboardIDCellsPutWithRestRequest (string dashboardID, List<Cell> cell, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'dashboardID' is set
-            if (dashboardID == null)
-                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->DashboardsDashboardIDCellsPut");
-            // verify the required parameter 'cell' is set
-            if (cell == null)
-                throw new ApiException(400, "Missing required parameter 'cell' when calling DashboardsService->DashboardsDashboardIDCellsPut");
-
-            var localVarPath = "/api/v2/dashboards/{dashboardID}/cells";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-                "application/json"
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (dashboardID != null) localVarPathParams.Add("dashboardID", this.Configuration.ApiClient.ParameterToString(dashboardID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (cell != null && cell.GetType() != typeof(byte[]))
-            {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(cell); // http body (model) parameter
-            }
-            else
-            {
-                localVarPostBody = cell; // byte array
-            }
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
-                Method.PUT, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-        }
-
-        /// <summary>
-        /// Replace a dashboards cells 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of dashboard to update</param>
-        /// <param name="cell">batch replaces all of a dashboards cells (this is used primarily to update the positional information of all of the cells)</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of Dashboard</returns>
-        public async System.Threading.Tasks.Task<Dashboard> DashboardsDashboardIDCellsPutAsync (string dashboardID, List<Cell> cell, string zapTraceSpan = null)
-        {
-             ApiResponse<Dashboard> localVarResponse = await DashboardsDashboardIDCellsPutAsyncWithHttpInfo(dashboardID, cell, zapTraceSpan);
-             return localVarResponse.Data;
-
-        }
-
-        /// <summary>
-        /// Replace a dashboards cells 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of dashboard to update</param>
-        /// <param name="cell">batch replaces all of a dashboards cells (this is used primarily to update the positional information of all of the cells)</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ApiResponse (Dashboard)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Dashboard>> DashboardsDashboardIDCellsPutAsyncWithHttpInfo (string dashboardID, List<Cell> cell, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'dashboardID' is set
-            if (dashboardID == null)
-                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->DashboardsDashboardIDCellsPut");
-            // verify the required parameter 'cell' is set
-            if (cell == null)
-                throw new ApiException(400, "Missing required parameter 'cell' when calling DashboardsService->DashboardsDashboardIDCellsPut");
-
-            var localVarPath = "/api/v2/dashboards/{dashboardID}/cells";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-                "application/json"
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (dashboardID != null) localVarPathParams.Add("dashboardID", this.Configuration.ApiClient.ParameterToString(dashboardID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (cell != null && cell.GetType() != typeof(byte[]))
-            {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(cell); // http body (model) parameter
-            }
-            else
-            {
-                localVarPostBody = cell; // byte array
-            }
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.PUT, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("DashboardsDashboardIDCellsPut", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return new ApiResponse<Dashboard>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (Dashboard) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Dashboard)));
-        }
-
-        /// <summary>
-        /// Delete a dashboard 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of dashboard to update</param>
+        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="labelID">the label id to delete</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
-        public void DashboardsDashboardIDDelete (string dashboardID, string zapTraceSpan = null)
+        public void DeleteDashboardsIDLabelsID (string dashboardID, string labelID, string zapTraceSpan = null)
         {
-             DashboardsDashboardIDDeleteWithHttpInfo(dashboardID, zapTraceSpan);
+             DeleteDashboardsIDLabelsIDWithHttpInfo(dashboardID, labelID, zapTraceSpan);
         }
 
         /// <summary>
-        /// Delete a dashboard 
+        /// delete a label from a dashboard 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of dashboard to update</param>
+        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="labelID">the label id to delete</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public ApiResponse<Object> DashboardsDashboardIDDeleteWithHttpInfo (string dashboardID, string zapTraceSpan = null)
+        public ApiResponse<Object> DeleteDashboardsIDLabelsIDWithHttpInfo (string dashboardID, string labelID, string zapTraceSpan = null)
         {
             // verify the required parameter 'dashboardID' is set
             if (dashboardID == null)
-                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->DashboardsDashboardIDDelete");
+                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->DeleteDashboardsIDLabelsID");
+            // verify the required parameter 'labelID' is set
+            if (labelID == null)
+                throw new ApiException(400, "Missing required parameter 'labelID' when calling DashboardsService->DeleteDashboardsIDLabelsID");
 
-            var localVarPath = "/api/v2/dashboards/{dashboardID}";
+            var localVarPath = "/api/v2/dashboards/{dashboardID}/labels/{labelID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -2957,6 +1718,7 @@ namespace InfluxDB.Client.Api.Service
             String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             if (dashboardID != null) localVarPathParams.Add("dashboardID", this.Configuration.ApiClient.ParameterToString(dashboardID)); // path parameter
+            if (labelID != null) localVarPathParams.Add("labelID", this.Configuration.ApiClient.ParameterToString(labelID)); // path parameter
             if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
 
             // to determine the Accept header
@@ -2978,7 +1740,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("DashboardsDashboardIDDelete", localVarResponse);
+                Exception exception = ExceptionFactory("DeleteDashboardsIDLabelsID", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -2988,19 +1750,23 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Delete a dashboard 
+        /// delete a label from a dashboard 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of dashboard to update</param>
+        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="labelID">the label id to delete</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public IRestResponse DashboardsDashboardIDDeleteWithIRestResponse (string dashboardID, string zapTraceSpan = null)
+        public IRestResponse DeleteDashboardsIDLabelsIDWithIRestResponse (string dashboardID, string labelID, string zapTraceSpan = null)
         {
             // verify the required parameter 'dashboardID' is set
             if (dashboardID == null)
-                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->DashboardsDashboardIDDelete");
+                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->DeleteDashboardsIDLabelsID");
+            // verify the required parameter 'labelID' is set
+            if (labelID == null)
+                throw new ApiException(400, "Missing required parameter 'labelID' when calling DashboardsService->DeleteDashboardsIDLabelsID");
 
-            var localVarPath = "/api/v2/dashboards/{dashboardID}";
+            var localVarPath = "/api/v2/dashboards/{dashboardID}/labels/{labelID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -3013,6 +1779,205 @@ namespace InfluxDB.Client.Api.Service
             };
             String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
+            if (dashboardID != null) localVarPathParams.Add("dashboardID", this.Configuration.ApiClient.ParameterToString(dashboardID)); // path parameter
+            if (labelID != null) localVarPathParams.Add("labelID", this.Configuration.ApiClient.ParameterToString(labelID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("DeleteDashboardsIDLabelsID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return localVarResponse;
+        }
+        
+        /// <summary>
+        /// delete a label from a dashboard 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="labelID">the label id to delete</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        public RestRequest DeleteDashboardsIDLabelsIDWithRestRequest (string dashboardID, string labelID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'dashboardID' is set
+            if (dashboardID == null)
+                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->DeleteDashboardsIDLabelsID");
+            // verify the required parameter 'labelID' is set
+            if (labelID == null)
+                throw new ApiException(400, "Missing required parameter 'labelID' when calling DashboardsService->DeleteDashboardsIDLabelsID");
+
+            var localVarPath = "/api/v2/dashboards/{dashboardID}/labels/{labelID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (dashboardID != null) localVarPathParams.Add("dashboardID", this.Configuration.ApiClient.ParameterToString(dashboardID)); // path parameter
+            if (labelID != null) localVarPathParams.Add("labelID", this.Configuration.ApiClient.ParameterToString(labelID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
+                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+        }
+
+        /// <summary>
+        /// delete a label from a dashboard 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="labelID">the label id to delete</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of void</returns>
+        public async System.Threading.Tasks.Task DeleteDashboardsIDLabelsIDAsync (string dashboardID, string labelID, string zapTraceSpan = null)
+        {
+             await DeleteDashboardsIDLabelsIDAsyncWithHttpInfo(dashboardID, labelID, zapTraceSpan);
+
+        }
+
+        /// <summary>
+        /// delete a label from a dashboard 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="labelID">the label id to delete</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ApiResponse</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteDashboardsIDLabelsIDAsyncWithHttpInfo (string dashboardID, string labelID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'dashboardID' is set
+            if (dashboardID == null)
+                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->DeleteDashboardsIDLabelsID");
+            // verify the required parameter 'labelID' is set
+            if (labelID == null)
+                throw new ApiException(400, "Missing required parameter 'labelID' when calling DashboardsService->DeleteDashboardsIDLabelsID");
+
+            var localVarPath = "/api/v2/dashboards/{dashboardID}/labels/{labelID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (dashboardID != null) localVarPathParams.Add("dashboardID", this.Configuration.ApiClient.ParameterToString(dashboardID)); // path parameter
+            if (labelID != null) localVarPathParams.Add("labelID", this.Configuration.ApiClient.ParameterToString(labelID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("DeleteDashboardsIDLabelsID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Object>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                null);
+        }
+
+        /// <summary>
+        /// removes a member from an dashboard 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userID">ID of member to remove</param>
+        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns></returns>
+        public void DeleteDashboardsIDMembersID (string userID, string dashboardID, string zapTraceSpan = null)
+        {
+             DeleteDashboardsIDMembersIDWithHttpInfo(userID, dashboardID, zapTraceSpan);
+        }
+
+        /// <summary>
+        /// removes a member from an dashboard 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userID">ID of member to remove</param>
+        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        public ApiResponse<Object> DeleteDashboardsIDMembersIDWithHttpInfo (string userID, string dashboardID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'userID' is set
+            if (userID == null)
+                throw new ApiException(400, "Missing required parameter 'userID' when calling DashboardsService->DeleteDashboardsIDMembersID");
+            // verify the required parameter 'dashboardID' is set
+            if (dashboardID == null)
+                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->DeleteDashboardsIDMembersID");
+
+            var localVarPath = "/api/v2/dashboards/{dashboardID}/members/{userID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (userID != null) localVarPathParams.Add("userID", this.Configuration.ApiClient.ParameterToString(userID)); // path parameter
             if (dashboardID != null) localVarPathParams.Add("dashboardID", this.Configuration.ApiClient.ParameterToString(dashboardID)); // path parameter
             if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
 
@@ -3035,27 +2000,33 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("DashboardsDashboardIDDelete", localVarResponse);
+                Exception exception = ExceptionFactory("DeleteDashboardsIDMembersID", localVarResponse);
                 if (exception != null) throw exception;
             }
 
-            return localVarResponse;
+            return new ApiResponse<Object>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                null);
         }
-        
+
         /// <summary>
-        /// Delete a dashboard 
+        /// removes a member from an dashboard 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of dashboard to update</param>
+        /// <param name="userID">ID of member to remove</param>
+        /// <param name="dashboardID">ID of the dashboard</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public RestRequest DashboardsDashboardIDDeleteWithRestRequest (string dashboardID, string zapTraceSpan = null)
+        public IRestResponse DeleteDashboardsIDMembersIDWithIRestResponse (string userID, string dashboardID, string zapTraceSpan = null)
         {
+            // verify the required parameter 'userID' is set
+            if (userID == null)
+                throw new ApiException(400, "Missing required parameter 'userID' when calling DashboardsService->DeleteDashboardsIDMembersID");
             // verify the required parameter 'dashboardID' is set
             if (dashboardID == null)
-                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->DashboardsDashboardIDDelete");
+                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->DeleteDashboardsIDMembersID");
 
-            var localVarPath = "/api/v2/dashboards/{dashboardID}";
+            var localVarPath = "/api/v2/dashboards/{dashboardID}/members/{userID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -3068,6 +2039,67 @@ namespace InfluxDB.Client.Api.Service
             };
             String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
+            if (userID != null) localVarPathParams.Add("userID", this.Configuration.ApiClient.ParameterToString(userID)); // path parameter
+            if (dashboardID != null) localVarPathParams.Add("dashboardID", this.Configuration.ApiClient.ParameterToString(dashboardID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("DeleteDashboardsIDMembersID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return localVarResponse;
+        }
+        
+        /// <summary>
+        /// removes a member from an dashboard 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userID">ID of member to remove</param>
+        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        public RestRequest DeleteDashboardsIDMembersIDWithRestRequest (string userID, string dashboardID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'userID' is set
+            if (userID == null)
+                throw new ApiException(400, "Missing required parameter 'userID' when calling DashboardsService->DeleteDashboardsIDMembersID");
+            // verify the required parameter 'dashboardID' is set
+            if (dashboardID == null)
+                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->DeleteDashboardsIDMembersID");
+
+            var localVarPath = "/api/v2/dashboards/{dashboardID}/members/{userID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (userID != null) localVarPathParams.Add("userID", this.Configuration.ApiClient.ParameterToString(userID)); // path parameter
             if (dashboardID != null) localVarPathParams.Add("dashboardID", this.Configuration.ApiClient.ParameterToString(dashboardID)); // path parameter
             if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
 
@@ -3087,32 +2119,37 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Delete a dashboard 
+        /// removes a member from an dashboard 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of dashboard to update</param>
+        /// <param name="userID">ID of member to remove</param>
+        /// <param name="dashboardID">ID of the dashboard</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task DashboardsDashboardIDDeleteAsync (string dashboardID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task DeleteDashboardsIDMembersIDAsync (string userID, string dashboardID, string zapTraceSpan = null)
         {
-             await DashboardsDashboardIDDeleteAsyncWithHttpInfo(dashboardID, zapTraceSpan);
+             await DeleteDashboardsIDMembersIDAsyncWithHttpInfo(userID, dashboardID, zapTraceSpan);
 
         }
 
         /// <summary>
-        /// Delete a dashboard 
+        /// removes a member from an dashboard 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of dashboard to update</param>
+        /// <param name="userID">ID of member to remove</param>
+        /// <param name="dashboardID">ID of the dashboard</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Object>> DashboardsDashboardIDDeleteAsyncWithHttpInfo (string dashboardID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteDashboardsIDMembersIDAsyncWithHttpInfo (string userID, string dashboardID, string zapTraceSpan = null)
         {
+            // verify the required parameter 'userID' is set
+            if (userID == null)
+                throw new ApiException(400, "Missing required parameter 'userID' when calling DashboardsService->DeleteDashboardsIDMembersID");
             // verify the required parameter 'dashboardID' is set
             if (dashboardID == null)
-                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->DashboardsDashboardIDDelete");
+                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->DeleteDashboardsIDMembersID");
 
-            var localVarPath = "/api/v2/dashboards/{dashboardID}";
+            var localVarPath = "/api/v2/dashboards/{dashboardID}/members/{userID}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -3125,6 +2162,7 @@ namespace InfluxDB.Client.Api.Service
             };
             String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
+            if (userID != null) localVarPathParams.Add("userID", this.Configuration.ApiClient.ParameterToString(userID)); // path parameter
             if (dashboardID != null) localVarPathParams.Add("dashboardID", this.Configuration.ApiClient.ParameterToString(dashboardID)); // path parameter
             if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
 
@@ -3147,7 +2185,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("DashboardsDashboardIDDelete", localVarResponse);
+                Exception exception = ExceptionFactory("DeleteDashboardsIDMembersID", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -3157,15 +2195,543 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
+        /// removes an owner from a dashboard 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userID">ID of owner to remove</param>
+        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns></returns>
+        public void DeleteDashboardsIDOwnersID (string userID, string dashboardID, string zapTraceSpan = null)
+        {
+             DeleteDashboardsIDOwnersIDWithHttpInfo(userID, dashboardID, zapTraceSpan);
+        }
+
+        /// <summary>
+        /// removes an owner from a dashboard 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userID">ID of owner to remove</param>
+        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        public ApiResponse<Object> DeleteDashboardsIDOwnersIDWithHttpInfo (string userID, string dashboardID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'userID' is set
+            if (userID == null)
+                throw new ApiException(400, "Missing required parameter 'userID' when calling DashboardsService->DeleteDashboardsIDOwnersID");
+            // verify the required parameter 'dashboardID' is set
+            if (dashboardID == null)
+                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->DeleteDashboardsIDOwnersID");
+
+            var localVarPath = "/api/v2/dashboards/{dashboardID}/owners/{userID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (userID != null) localVarPathParams.Add("userID", this.Configuration.ApiClient.ParameterToString(userID)); // path parameter
+            if (dashboardID != null) localVarPathParams.Add("dashboardID", this.Configuration.ApiClient.ParameterToString(dashboardID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("DeleteDashboardsIDOwnersID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Object>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                null);
+        }
+
+        /// <summary>
+        /// removes an owner from a dashboard 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userID">ID of owner to remove</param>
+        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        public IRestResponse DeleteDashboardsIDOwnersIDWithIRestResponse (string userID, string dashboardID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'userID' is set
+            if (userID == null)
+                throw new ApiException(400, "Missing required parameter 'userID' when calling DashboardsService->DeleteDashboardsIDOwnersID");
+            // verify the required parameter 'dashboardID' is set
+            if (dashboardID == null)
+                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->DeleteDashboardsIDOwnersID");
+
+            var localVarPath = "/api/v2/dashboards/{dashboardID}/owners/{userID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (userID != null) localVarPathParams.Add("userID", this.Configuration.ApiClient.ParameterToString(userID)); // path parameter
+            if (dashboardID != null) localVarPathParams.Add("dashboardID", this.Configuration.ApiClient.ParameterToString(dashboardID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("DeleteDashboardsIDOwnersID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return localVarResponse;
+        }
+        
+        /// <summary>
+        /// removes an owner from a dashboard 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userID">ID of owner to remove</param>
+        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        public RestRequest DeleteDashboardsIDOwnersIDWithRestRequest (string userID, string dashboardID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'userID' is set
+            if (userID == null)
+                throw new ApiException(400, "Missing required parameter 'userID' when calling DashboardsService->DeleteDashboardsIDOwnersID");
+            // verify the required parameter 'dashboardID' is set
+            if (dashboardID == null)
+                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->DeleteDashboardsIDOwnersID");
+
+            var localVarPath = "/api/v2/dashboards/{dashboardID}/owners/{userID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (userID != null) localVarPathParams.Add("userID", this.Configuration.ApiClient.ParameterToString(userID)); // path parameter
+            if (dashboardID != null) localVarPathParams.Add("dashboardID", this.Configuration.ApiClient.ParameterToString(dashboardID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
+                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+        }
+
+        /// <summary>
+        /// removes an owner from a dashboard 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userID">ID of owner to remove</param>
+        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of void</returns>
+        public async System.Threading.Tasks.Task DeleteDashboardsIDOwnersIDAsync (string userID, string dashboardID, string zapTraceSpan = null)
+        {
+             await DeleteDashboardsIDOwnersIDAsyncWithHttpInfo(userID, dashboardID, zapTraceSpan);
+
+        }
+
+        /// <summary>
+        /// removes an owner from a dashboard 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userID">ID of owner to remove</param>
+        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ApiResponse</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteDashboardsIDOwnersIDAsyncWithHttpInfo (string userID, string dashboardID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'userID' is set
+            if (userID == null)
+                throw new ApiException(400, "Missing required parameter 'userID' when calling DashboardsService->DeleteDashboardsIDOwnersID");
+            // verify the required parameter 'dashboardID' is set
+            if (dashboardID == null)
+                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->DeleteDashboardsIDOwnersID");
+
+            var localVarPath = "/api/v2/dashboards/{dashboardID}/owners/{userID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (userID != null) localVarPathParams.Add("userID", this.Configuration.ApiClient.ParameterToString(userID)); // path parameter
+            if (dashboardID != null) localVarPathParams.Add("dashboardID", this.Configuration.ApiClient.ParameterToString(dashboardID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("DeleteDashboardsIDOwnersID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Object>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                null);
+        }
+
+        /// <summary>
+        /// Get all dashboards 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="owner">specifies the owner id to return resources for (optional)</param>
+        /// <param name="sortBy">specifies the owner id to return resources for (optional)</param>
+        /// <param name="id">ID list of dashboards to return. If both this and owner are specified, only ids is used. (optional)</param>
+        /// <param name="orgID">specifies the organization id of the resource (optional)</param>
+        /// <param name="org">specifies the organization name of the resource (optional)</param>
+        /// <returns>Dashboards</returns>
+        public Dashboards GetDashboards (string zapTraceSpan = null, string owner = null, string sortBy = null, List<string> id = null, string orgID = null, string org = null)
+        {
+             ApiResponse<Dashboards> localVarResponse = GetDashboardsWithHttpInfo(zapTraceSpan, owner, sortBy, id, orgID, org);
+             return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Get all dashboards 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="owner">specifies the owner id to return resources for (optional)</param>
+        /// <param name="sortBy">specifies the owner id to return resources for (optional)</param>
+        /// <param name="id">ID list of dashboards to return. If both this and owner are specified, only ids is used. (optional)</param>
+        /// <param name="orgID">specifies the organization id of the resource (optional)</param>
+        /// <param name="org">specifies the organization name of the resource (optional)</param>
+        /// <returns>ApiResponse of Dashboards</returns>
+        public ApiResponse< Dashboards > GetDashboardsWithHttpInfo (string zapTraceSpan = null, string owner = null, string sortBy = null, List<string> id = null, string orgID = null, string org = null)
+        {
+
+            var localVarPath = "/api/v2/dashboards";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (owner != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "owner", owner)); // query parameter
+            if (sortBy != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "sortBy", sortBy)); // query parameter
+            if (id != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("multi", "id", id)); // query parameter
+            if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+            if (org != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("GetDashboards", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Dashboards>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (Dashboards) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Dashboards)));
+        }
+
+        /// <summary>
+        /// Get all dashboards 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="owner">specifies the owner id to return resources for (optional)</param>
+        /// <param name="sortBy">specifies the owner id to return resources for (optional)</param>
+        /// <param name="id">ID list of dashboards to return. If both this and owner are specified, only ids is used. (optional)</param>
+        /// <param name="orgID">specifies the organization id of the resource (optional)</param>
+        /// <param name="org">specifies the organization name of the resource (optional)</param>
+        /// <returns>ApiResponse of Dashboards</returns>
+        public IRestResponse GetDashboardsWithIRestResponse (string zapTraceSpan = null, string owner = null, string sortBy = null, List<string> id = null, string orgID = null, string org = null)
+        {
+
+            var localVarPath = "/api/v2/dashboards";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (owner != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "owner", owner)); // query parameter
+            if (sortBy != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "sortBy", sortBy)); // query parameter
+            if (id != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("multi", "id", id)); // query parameter
+            if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+            if (org != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("GetDashboards", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return localVarResponse;
+        }
+        
+        /// <summary>
+        /// Get all dashboards 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="owner">specifies the owner id to return resources for (optional)</param>
+        /// <param name="sortBy">specifies the owner id to return resources for (optional)</param>
+        /// <param name="id">ID list of dashboards to return. If both this and owner are specified, only ids is used. (optional)</param>
+        /// <param name="orgID">specifies the organization id of the resource (optional)</param>
+        /// <param name="org">specifies the organization name of the resource (optional)</param>
+        /// <returns>ApiResponse of Dashboards</returns>
+        public RestRequest GetDashboardsWithRestRequest (string zapTraceSpan = null, string owner = null, string sortBy = null, List<string> id = null, string orgID = null, string org = null)
+        {
+
+            var localVarPath = "/api/v2/dashboards";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (owner != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "owner", owner)); // query parameter
+            if (sortBy != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "sortBy", sortBy)); // query parameter
+            if (id != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("multi", "id", id)); // query parameter
+            if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+            if (org != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
+                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+        }
+
+        /// <summary>
+        /// Get all dashboards 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="owner">specifies the owner id to return resources for (optional)</param>
+        /// <param name="sortBy">specifies the owner id to return resources for (optional)</param>
+        /// <param name="id">ID list of dashboards to return. If both this and owner are specified, only ids is used. (optional)</param>
+        /// <param name="orgID">specifies the organization id of the resource (optional)</param>
+        /// <param name="org">specifies the organization name of the resource (optional)</param>
+        /// <returns>Task of Dashboards</returns>
+        public async System.Threading.Tasks.Task<Dashboards> GetDashboardsAsync (string zapTraceSpan = null, string owner = null, string sortBy = null, List<string> id = null, string orgID = null, string org = null)
+        {
+             ApiResponse<Dashboards> localVarResponse = await GetDashboardsAsyncWithHttpInfo(zapTraceSpan, owner, sortBy, id, orgID, org);
+             return localVarResponse.Data;
+
+        }
+
+        /// <summary>
+        /// Get all dashboards 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="owner">specifies the owner id to return resources for (optional)</param>
+        /// <param name="sortBy">specifies the owner id to return resources for (optional)</param>
+        /// <param name="id">ID list of dashboards to return. If both this and owner are specified, only ids is used. (optional)</param>
+        /// <param name="orgID">specifies the organization id of the resource (optional)</param>
+        /// <param name="org">specifies the organization name of the resource (optional)</param>
+        /// <returns>Task of ApiResponse (Dashboards)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<Dashboards>> GetDashboardsAsyncWithHttpInfo (string zapTraceSpan = null, string owner = null, string sortBy = null, List<string> id = null, string orgID = null, string org = null)
+        {
+
+            var localVarPath = "/api/v2/dashboards";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (owner != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "owner", owner)); // query parameter
+            if (sortBy != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "sortBy", sortBy)); // query parameter
+            if (id != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("multi", "id", id)); // query parameter
+            if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+            if (org != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("GetDashboards", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Dashboards>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (Dashboards) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Dashboards)));
+        }
+
+        /// <summary>
         /// Get a single Dashboard 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="dashboardID">ID of dashboard to update</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Dashboard</returns>
-        public Dashboard DashboardsDashboardIDGet (string dashboardID, string zapTraceSpan = null)
+        public Dashboard GetDashboardsID (string dashboardID, string zapTraceSpan = null)
         {
-             ApiResponse<Dashboard> localVarResponse = DashboardsDashboardIDGetWithHttpInfo(dashboardID, zapTraceSpan);
+             ApiResponse<Dashboard> localVarResponse = GetDashboardsIDWithHttpInfo(dashboardID, zapTraceSpan);
              return localVarResponse.Data;
         }
 
@@ -3176,11 +2742,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="dashboardID">ID of dashboard to update</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Dashboard</returns>
-        public ApiResponse< Dashboard > DashboardsDashboardIDGetWithHttpInfo (string dashboardID, string zapTraceSpan = null)
+        public ApiResponse< Dashboard > GetDashboardsIDWithHttpInfo (string dashboardID, string zapTraceSpan = null)
         {
             // verify the required parameter 'dashboardID' is set
             if (dashboardID == null)
-                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->DashboardsDashboardIDGet");
+                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->GetDashboardsID");
 
             var localVarPath = "/api/v2/dashboards/{dashboardID}";
             var localVarPathParams = new Dictionary<String, String>();
@@ -3217,7 +2783,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("DashboardsDashboardIDGet", localVarResponse);
+                Exception exception = ExceptionFactory("GetDashboardsID", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -3233,11 +2799,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="dashboardID">ID of dashboard to update</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Dashboard</returns>
-        public IRestResponse DashboardsDashboardIDGetWithIRestResponse (string dashboardID, string zapTraceSpan = null)
+        public IRestResponse GetDashboardsIDWithIRestResponse (string dashboardID, string zapTraceSpan = null)
         {
             // verify the required parameter 'dashboardID' is set
             if (dashboardID == null)
-                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->DashboardsDashboardIDGet");
+                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->GetDashboardsID");
 
             var localVarPath = "/api/v2/dashboards/{dashboardID}";
             var localVarPathParams = new Dictionary<String, String>();
@@ -3274,7 +2840,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("DashboardsDashboardIDGet", localVarResponse);
+                Exception exception = ExceptionFactory("GetDashboardsID", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -3288,11 +2854,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="dashboardID">ID of dashboard to update</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Dashboard</returns>
-        public RestRequest DashboardsDashboardIDGetWithRestRequest (string dashboardID, string zapTraceSpan = null)
+        public RestRequest GetDashboardsIDWithRestRequest (string dashboardID, string zapTraceSpan = null)
         {
             // verify the required parameter 'dashboardID' is set
             if (dashboardID == null)
-                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->DashboardsDashboardIDGet");
+                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->GetDashboardsID");
 
             var localVarPath = "/api/v2/dashboards/{dashboardID}";
             var localVarPathParams = new Dictionary<String, String>();
@@ -3332,9 +2898,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="dashboardID">ID of dashboard to update</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of Dashboard</returns>
-        public async System.Threading.Tasks.Task<Dashboard> DashboardsDashboardIDGetAsync (string dashboardID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<Dashboard> GetDashboardsIDAsync (string dashboardID, string zapTraceSpan = null)
         {
-             ApiResponse<Dashboard> localVarResponse = await DashboardsDashboardIDGetAsyncWithHttpInfo(dashboardID, zapTraceSpan);
+             ApiResponse<Dashboard> localVarResponse = await GetDashboardsIDAsyncWithHttpInfo(dashboardID, zapTraceSpan);
              return localVarResponse.Data;
 
         }
@@ -3346,11 +2912,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="dashboardID">ID of dashboard to update</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (Dashboard)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Dashboard>> DashboardsDashboardIDGetAsyncWithHttpInfo (string dashboardID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<Dashboard>> GetDashboardsIDAsyncWithHttpInfo (string dashboardID, string zapTraceSpan = null)
         {
             // verify the required parameter 'dashboardID' is set
             if (dashboardID == null)
-                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->DashboardsDashboardIDGet");
+                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->GetDashboardsID");
 
             var localVarPath = "/api/v2/dashboards/{dashboardID}";
             var localVarPathParams = new Dictionary<String, String>();
@@ -3387,13 +2953,275 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("DashboardsDashboardIDGet", localVarResponse);
+                Exception exception = ExceptionFactory("GetDashboardsID", localVarResponse);
                 if (exception != null) throw exception;
             }
 
             return new ApiResponse<Dashboard>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
                 (Dashboard) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Dashboard)));
+        }
+
+        /// <summary>
+        /// Retrieve the view for a cell in a dashboard 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of dashboard</param>
+        /// <param name="cellID">ID of cell</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>View</returns>
+        public View GetDashboardsIDCellsIDView (string dashboardID, string cellID, string zapTraceSpan = null)
+        {
+             ApiResponse<View> localVarResponse = GetDashboardsIDCellsIDViewWithHttpInfo(dashboardID, cellID, zapTraceSpan);
+             return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Retrieve the view for a cell in a dashboard 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of dashboard</param>
+        /// <param name="cellID">ID of cell</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of View</returns>
+        public ApiResponse< View > GetDashboardsIDCellsIDViewWithHttpInfo (string dashboardID, string cellID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'dashboardID' is set
+            if (dashboardID == null)
+                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->GetDashboardsIDCellsIDView");
+            // verify the required parameter 'cellID' is set
+            if (cellID == null)
+                throw new ApiException(400, "Missing required parameter 'cellID' when calling DashboardsService->GetDashboardsIDCellsIDView");
+
+            var localVarPath = "/api/v2/dashboards/{dashboardID}/cells/{cellID}/view";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (dashboardID != null) localVarPathParams.Add("dashboardID", this.Configuration.ApiClient.ParameterToString(dashboardID)); // path parameter
+            if (cellID != null) localVarPathParams.Add("cellID", this.Configuration.ApiClient.ParameterToString(cellID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("GetDashboardsIDCellsIDView", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<View>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (View) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(View)));
+        }
+
+        /// <summary>
+        /// Retrieve the view for a cell in a dashboard 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of dashboard</param>
+        /// <param name="cellID">ID of cell</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of View</returns>
+        public IRestResponse GetDashboardsIDCellsIDViewWithIRestResponse (string dashboardID, string cellID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'dashboardID' is set
+            if (dashboardID == null)
+                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->GetDashboardsIDCellsIDView");
+            // verify the required parameter 'cellID' is set
+            if (cellID == null)
+                throw new ApiException(400, "Missing required parameter 'cellID' when calling DashboardsService->GetDashboardsIDCellsIDView");
+
+            var localVarPath = "/api/v2/dashboards/{dashboardID}/cells/{cellID}/view";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (dashboardID != null) localVarPathParams.Add("dashboardID", this.Configuration.ApiClient.ParameterToString(dashboardID)); // path parameter
+            if (cellID != null) localVarPathParams.Add("cellID", this.Configuration.ApiClient.ParameterToString(cellID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("GetDashboardsIDCellsIDView", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return localVarResponse;
+        }
+        
+        /// <summary>
+        /// Retrieve the view for a cell in a dashboard 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of dashboard</param>
+        /// <param name="cellID">ID of cell</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of View</returns>
+        public RestRequest GetDashboardsIDCellsIDViewWithRestRequest (string dashboardID, string cellID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'dashboardID' is set
+            if (dashboardID == null)
+                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->GetDashboardsIDCellsIDView");
+            // verify the required parameter 'cellID' is set
+            if (cellID == null)
+                throw new ApiException(400, "Missing required parameter 'cellID' when calling DashboardsService->GetDashboardsIDCellsIDView");
+
+            var localVarPath = "/api/v2/dashboards/{dashboardID}/cells/{cellID}/view";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (dashboardID != null) localVarPathParams.Add("dashboardID", this.Configuration.ApiClient.ParameterToString(dashboardID)); // path parameter
+            if (cellID != null) localVarPathParams.Add("cellID", this.Configuration.ApiClient.ParameterToString(cellID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
+                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+        }
+
+        /// <summary>
+        /// Retrieve the view for a cell in a dashboard 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of dashboard</param>
+        /// <param name="cellID">ID of cell</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of View</returns>
+        public async System.Threading.Tasks.Task<View> GetDashboardsIDCellsIDViewAsync (string dashboardID, string cellID, string zapTraceSpan = null)
+        {
+             ApiResponse<View> localVarResponse = await GetDashboardsIDCellsIDViewAsyncWithHttpInfo(dashboardID, cellID, zapTraceSpan);
+             return localVarResponse.Data;
+
+        }
+
+        /// <summary>
+        /// Retrieve the view for a cell in a dashboard 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of dashboard</param>
+        /// <param name="cellID">ID of cell</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ApiResponse (View)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<View>> GetDashboardsIDCellsIDViewAsyncWithHttpInfo (string dashboardID, string cellID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'dashboardID' is set
+            if (dashboardID == null)
+                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->GetDashboardsIDCellsIDView");
+            // verify the required parameter 'cellID' is set
+            if (cellID == null)
+                throw new ApiException(400, "Missing required parameter 'cellID' when calling DashboardsService->GetDashboardsIDCellsIDView");
+
+            var localVarPath = "/api/v2/dashboards/{dashboardID}/cells/{cellID}/view";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (dashboardID != null) localVarPathParams.Add("dashboardID", this.Configuration.ApiClient.ParameterToString(dashboardID)); // path parameter
+            if (cellID != null) localVarPathParams.Add("cellID", this.Configuration.ApiClient.ParameterToString(cellID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("GetDashboardsIDCellsIDView", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<View>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (View) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(View)));
         }
 
         /// <summary>
@@ -3403,9 +3231,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="dashboardID">ID of the dashboard</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>LabelsResponse</returns>
-        public LabelsResponse DashboardsDashboardIDLabelsGet (string dashboardID, string zapTraceSpan = null)
+        public LabelsResponse GetDashboardsIDLabels (string dashboardID, string zapTraceSpan = null)
         {
-             ApiResponse<LabelsResponse> localVarResponse = DashboardsDashboardIDLabelsGetWithHttpInfo(dashboardID, zapTraceSpan);
+             ApiResponse<LabelsResponse> localVarResponse = GetDashboardsIDLabelsWithHttpInfo(dashboardID, zapTraceSpan);
              return localVarResponse.Data;
         }
 
@@ -3416,11 +3244,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="dashboardID">ID of the dashboard</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelsResponse</returns>
-        public ApiResponse< LabelsResponse > DashboardsDashboardIDLabelsGetWithHttpInfo (string dashboardID, string zapTraceSpan = null)
+        public ApiResponse< LabelsResponse > GetDashboardsIDLabelsWithHttpInfo (string dashboardID, string zapTraceSpan = null)
         {
             // verify the required parameter 'dashboardID' is set
             if (dashboardID == null)
-                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->DashboardsDashboardIDLabelsGet");
+                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->GetDashboardsIDLabels");
 
             var localVarPath = "/api/v2/dashboards/{dashboardID}/labels";
             var localVarPathParams = new Dictionary<String, String>();
@@ -3457,7 +3285,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("DashboardsDashboardIDLabelsGet", localVarResponse);
+                Exception exception = ExceptionFactory("GetDashboardsIDLabels", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -3473,11 +3301,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="dashboardID">ID of the dashboard</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelsResponse</returns>
-        public IRestResponse DashboardsDashboardIDLabelsGetWithIRestResponse (string dashboardID, string zapTraceSpan = null)
+        public IRestResponse GetDashboardsIDLabelsWithIRestResponse (string dashboardID, string zapTraceSpan = null)
         {
             // verify the required parameter 'dashboardID' is set
             if (dashboardID == null)
-                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->DashboardsDashboardIDLabelsGet");
+                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->GetDashboardsIDLabels");
 
             var localVarPath = "/api/v2/dashboards/{dashboardID}/labels";
             var localVarPathParams = new Dictionary<String, String>();
@@ -3514,7 +3342,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("DashboardsDashboardIDLabelsGet", localVarResponse);
+                Exception exception = ExceptionFactory("GetDashboardsIDLabels", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -3528,11 +3356,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="dashboardID">ID of the dashboard</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelsResponse</returns>
-        public RestRequest DashboardsDashboardIDLabelsGetWithRestRequest (string dashboardID, string zapTraceSpan = null)
+        public RestRequest GetDashboardsIDLabelsWithRestRequest (string dashboardID, string zapTraceSpan = null)
         {
             // verify the required parameter 'dashboardID' is set
             if (dashboardID == null)
-                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->DashboardsDashboardIDLabelsGet");
+                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->GetDashboardsIDLabels");
 
             var localVarPath = "/api/v2/dashboards/{dashboardID}/labels";
             var localVarPathParams = new Dictionary<String, String>();
@@ -3572,9 +3400,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="dashboardID">ID of the dashboard</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of LabelsResponse</returns>
-        public async System.Threading.Tasks.Task<LabelsResponse> DashboardsDashboardIDLabelsGetAsync (string dashboardID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<LabelsResponse> GetDashboardsIDLabelsAsync (string dashboardID, string zapTraceSpan = null)
         {
-             ApiResponse<LabelsResponse> localVarResponse = await DashboardsDashboardIDLabelsGetAsyncWithHttpInfo(dashboardID, zapTraceSpan);
+             ApiResponse<LabelsResponse> localVarResponse = await GetDashboardsIDLabelsAsyncWithHttpInfo(dashboardID, zapTraceSpan);
              return localVarResponse.Data;
 
         }
@@ -3586,11 +3414,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="dashboardID">ID of the dashboard</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (LabelsResponse)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<LabelsResponse>> DashboardsDashboardIDLabelsGetAsyncWithHttpInfo (string dashboardID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<LabelsResponse>> GetDashboardsIDLabelsAsyncWithHttpInfo (string dashboardID, string zapTraceSpan = null)
         {
             // verify the required parameter 'dashboardID' is set
             if (dashboardID == null)
-                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->DashboardsDashboardIDLabelsGet");
+                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->GetDashboardsIDLabels");
 
             var localVarPath = "/api/v2/dashboards/{dashboardID}/labels";
             var localVarPathParams = new Dictionary<String, String>();
@@ -3627,7 +3455,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("DashboardsDashboardIDLabelsGet", localVarResponse);
+                Exception exception = ExceptionFactory("GetDashboardsIDLabels", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -3637,36 +3465,36 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// delete a label from a dashboard 
+        /// Retrieve operation logs for a dashboard 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="dashboardID">ID of the dashboard</param>
-        /// <param name="labelID">the label id to delete</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns></returns>
-        public void DashboardsDashboardIDLabelsLabelIDDelete (string dashboardID, string labelID, string zapTraceSpan = null)
+        /// <param name="offset"> (optional)</param>
+        /// <param name="limit"> (optional, default to 20)</param>
+        /// <returns>OperationLogs</returns>
+        public OperationLogs GetDashboardsIDLogs (string dashboardID, string zapTraceSpan = null, int? offset = null, int? limit = null)
         {
-             DashboardsDashboardIDLabelsLabelIDDeleteWithHttpInfo(dashboardID, labelID, zapTraceSpan);
+             ApiResponse<OperationLogs> localVarResponse = GetDashboardsIDLogsWithHttpInfo(dashboardID, zapTraceSpan, offset, limit);
+             return localVarResponse.Data;
         }
 
         /// <summary>
-        /// delete a label from a dashboard 
+        /// Retrieve operation logs for a dashboard 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="dashboardID">ID of the dashboard</param>
-        /// <param name="labelID">the label id to delete</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Object(void)</returns>
-        public ApiResponse<Object> DashboardsDashboardIDLabelsLabelIDDeleteWithHttpInfo (string dashboardID, string labelID, string zapTraceSpan = null)
+        /// <param name="offset"> (optional)</param>
+        /// <param name="limit"> (optional, default to 20)</param>
+        /// <returns>ApiResponse of OperationLogs</returns>
+        public ApiResponse< OperationLogs > GetDashboardsIDLogsWithHttpInfo (string dashboardID, string zapTraceSpan = null, int? offset = null, int? limit = null)
         {
             // verify the required parameter 'dashboardID' is set
             if (dashboardID == null)
-                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->DashboardsDashboardIDLabelsLabelIDDelete");
-            // verify the required parameter 'labelID' is set
-            if (labelID == null)
-                throw new ApiException(400, "Missing required parameter 'labelID' when calling DashboardsService->DashboardsDashboardIDLabelsLabelIDDelete");
+                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->GetDashboardsIDLogs");
 
-            var localVarPath = "/api/v2/dashboards/{dashboardID}/labels/{labelID}";
+            var localVarPath = "/api/v2/dashboards/{dashboardID}/logs";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -3680,7 +3508,8 @@ namespace InfluxDB.Client.Api.Service
             String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             if (dashboardID != null) localVarPathParams.Add("dashboardID", this.Configuration.ApiClient.ParameterToString(dashboardID)); // path parameter
-            if (labelID != null) localVarPathParams.Add("labelID", this.Configuration.ApiClient.ParameterToString(labelID)); // path parameter
+            if (offset != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "offset", offset)); // query parameter
+            if (limit != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "limit", limit)); // query parameter
             if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
 
             // to determine the Accept header
@@ -3695,40 +3524,38 @@ namespace InfluxDB.Client.Api.Service
 
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("DashboardsDashboardIDLabelsLabelIDDelete", localVarResponse);
+                Exception exception = ExceptionFactory("GetDashboardsIDLogs", localVarResponse);
                 if (exception != null) throw exception;
             }
 
-            return new ApiResponse<Object>(localVarStatusCode,
+            return new ApiResponse<OperationLogs>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                null);
+                (OperationLogs) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(OperationLogs)));
         }
 
         /// <summary>
-        /// delete a label from a dashboard 
+        /// Retrieve operation logs for a dashboard 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="dashboardID">ID of the dashboard</param>
-        /// <param name="labelID">the label id to delete</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Object(void)</returns>
-        public IRestResponse DashboardsDashboardIDLabelsLabelIDDeleteWithIRestResponse (string dashboardID, string labelID, string zapTraceSpan = null)
+        /// <param name="offset"> (optional)</param>
+        /// <param name="limit"> (optional, default to 20)</param>
+        /// <returns>ApiResponse of OperationLogs</returns>
+        public IRestResponse GetDashboardsIDLogsWithIRestResponse (string dashboardID, string zapTraceSpan = null, int? offset = null, int? limit = null)
         {
             // verify the required parameter 'dashboardID' is set
             if (dashboardID == null)
-                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->DashboardsDashboardIDLabelsLabelIDDelete");
-            // verify the required parameter 'labelID' is set
-            if (labelID == null)
-                throw new ApiException(400, "Missing required parameter 'labelID' when calling DashboardsService->DashboardsDashboardIDLabelsLabelIDDelete");
+                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->GetDashboardsIDLogs");
 
-            var localVarPath = "/api/v2/dashboards/{dashboardID}/labels/{labelID}";
+            var localVarPath = "/api/v2/dashboards/{dashboardID}/logs";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -3742,7 +3569,8 @@ namespace InfluxDB.Client.Api.Service
             String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             if (dashboardID != null) localVarPathParams.Add("dashboardID", this.Configuration.ApiClient.ParameterToString(dashboardID)); // path parameter
-            if (labelID != null) localVarPathParams.Add("labelID", this.Configuration.ApiClient.ParameterToString(labelID)); // path parameter
+            if (offset != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "offset", offset)); // query parameter
+            if (limit != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "limit", limit)); // query parameter
             if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
 
             // to determine the Accept header
@@ -3757,14 +3585,14 @@ namespace InfluxDB.Client.Api.Service
 
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("DashboardsDashboardIDLabelsLabelIDDelete", localVarResponse);
+                Exception exception = ExceptionFactory("GetDashboardsIDLogs", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -3772,23 +3600,21 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// delete a label from a dashboard 
+        /// Retrieve operation logs for a dashboard 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="dashboardID">ID of the dashboard</param>
-        /// <param name="labelID">the label id to delete</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Object(void)</returns>
-        public RestRequest DashboardsDashboardIDLabelsLabelIDDeleteWithRestRequest (string dashboardID, string labelID, string zapTraceSpan = null)
+        /// <param name="offset"> (optional)</param>
+        /// <param name="limit"> (optional, default to 20)</param>
+        /// <returns>ApiResponse of OperationLogs</returns>
+        public RestRequest GetDashboardsIDLogsWithRestRequest (string dashboardID, string zapTraceSpan = null, int? offset = null, int? limit = null)
         {
             // verify the required parameter 'dashboardID' is set
             if (dashboardID == null)
-                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->DashboardsDashboardIDLabelsLabelIDDelete");
-            // verify the required parameter 'labelID' is set
-            if (labelID == null)
-                throw new ApiException(400, "Missing required parameter 'labelID' when calling DashboardsService->DashboardsDashboardIDLabelsLabelIDDelete");
+                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->GetDashboardsIDLogs");
 
-            var localVarPath = "/api/v2/dashboards/{dashboardID}/labels/{labelID}";
+            var localVarPath = "/api/v2/dashboards/{dashboardID}/logs";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -3802,7 +3628,8 @@ namespace InfluxDB.Client.Api.Service
             String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             if (dashboardID != null) localVarPathParams.Add("dashboardID", this.Configuration.ApiClient.ParameterToString(dashboardID)); // path parameter
-            if (labelID != null) localVarPathParams.Add("labelID", this.Configuration.ApiClient.ParameterToString(labelID)); // path parameter
+            if (offset != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "offset", offset)); // query parameter
+            if (limit != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "limit", limit)); // query parameter
             if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
 
             // to determine the Accept header
@@ -3816,42 +3643,42 @@ namespace InfluxDB.Client.Api.Service
 
 
             return this.Configuration.ApiClient.PrepareRequest(localVarPath,
-                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
         }
 
         /// <summary>
-        /// delete a label from a dashboard 
+        /// Retrieve operation logs for a dashboard 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="dashboardID">ID of the dashboard</param>
-        /// <param name="labelID">the label id to delete</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task DashboardsDashboardIDLabelsLabelIDDeleteAsync (string dashboardID, string labelID, string zapTraceSpan = null)
+        /// <param name="offset"> (optional)</param>
+        /// <param name="limit"> (optional, default to 20)</param>
+        /// <returns>Task of OperationLogs</returns>
+        public async System.Threading.Tasks.Task<OperationLogs> GetDashboardsIDLogsAsync (string dashboardID, string zapTraceSpan = null, int? offset = null, int? limit = null)
         {
-             await DashboardsDashboardIDLabelsLabelIDDeleteAsyncWithHttpInfo(dashboardID, labelID, zapTraceSpan);
+             ApiResponse<OperationLogs> localVarResponse = await GetDashboardsIDLogsAsyncWithHttpInfo(dashboardID, zapTraceSpan, offset, limit);
+             return localVarResponse.Data;
 
         }
 
         /// <summary>
-        /// delete a label from a dashboard 
+        /// Retrieve operation logs for a dashboard 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="dashboardID">ID of the dashboard</param>
-        /// <param name="labelID">the label id to delete</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Object>> DashboardsDashboardIDLabelsLabelIDDeleteAsyncWithHttpInfo (string dashboardID, string labelID, string zapTraceSpan = null)
+        /// <param name="offset"> (optional)</param>
+        /// <param name="limit"> (optional, default to 20)</param>
+        /// <returns>Task of ApiResponse (OperationLogs)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<OperationLogs>> GetDashboardsIDLogsAsyncWithHttpInfo (string dashboardID, string zapTraceSpan = null, int? offset = null, int? limit = null)
         {
             // verify the required parameter 'dashboardID' is set
             if (dashboardID == null)
-                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->DashboardsDashboardIDLabelsLabelIDDelete");
-            // verify the required parameter 'labelID' is set
-            if (labelID == null)
-                throw new ApiException(400, "Missing required parameter 'labelID' when calling DashboardsService->DashboardsDashboardIDLabelsLabelIDDelete");
+                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->GetDashboardsIDLogs");
 
-            var localVarPath = "/api/v2/dashboards/{dashboardID}/labels/{labelID}";
+            var localVarPath = "/api/v2/dashboards/{dashboardID}/logs";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -3865,7 +3692,8 @@ namespace InfluxDB.Client.Api.Service
             String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             if (dashboardID != null) localVarPathParams.Add("dashboardID", this.Configuration.ApiClient.ParameterToString(dashboardID)); // path parameter
-            if (labelID != null) localVarPathParams.Add("labelID", this.Configuration.ApiClient.ParameterToString(labelID)); // path parameter
+            if (offset != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "offset", offset)); // query parameter
+            if (limit != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "limit", limit)); // query parameter
             if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
 
             // to determine the Accept header
@@ -3880,20 +3708,1992 @@ namespace InfluxDB.Client.Api.Service
 
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("DashboardsDashboardIDLabelsLabelIDDelete", localVarResponse);
+                Exception exception = ExceptionFactory("GetDashboardsIDLogs", localVarResponse);
                 if (exception != null) throw exception;
             }
 
-            return new ApiResponse<Object>(localVarStatusCode,
+            return new ApiResponse<OperationLogs>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                null);
+                (OperationLogs) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(OperationLogs)));
+        }
+
+        /// <summary>
+        /// List all dashboard members 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ResourceMembers</returns>
+        public ResourceMembers GetDashboardsIDMembers (string dashboardID, string zapTraceSpan = null)
+        {
+             ApiResponse<ResourceMembers> localVarResponse = GetDashboardsIDMembersWithHttpInfo(dashboardID, zapTraceSpan);
+             return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// List all dashboard members 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of ResourceMembers</returns>
+        public ApiResponse< ResourceMembers > GetDashboardsIDMembersWithHttpInfo (string dashboardID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'dashboardID' is set
+            if (dashboardID == null)
+                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->GetDashboardsIDMembers");
+
+            var localVarPath = "/api/v2/dashboards/{dashboardID}/members";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (dashboardID != null) localVarPathParams.Add("dashboardID", this.Configuration.ApiClient.ParameterToString(dashboardID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("GetDashboardsIDMembers", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<ResourceMembers>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (ResourceMembers) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(ResourceMembers)));
+        }
+
+        /// <summary>
+        /// List all dashboard members 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of ResourceMembers</returns>
+        public IRestResponse GetDashboardsIDMembersWithIRestResponse (string dashboardID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'dashboardID' is set
+            if (dashboardID == null)
+                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->GetDashboardsIDMembers");
+
+            var localVarPath = "/api/v2/dashboards/{dashboardID}/members";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (dashboardID != null) localVarPathParams.Add("dashboardID", this.Configuration.ApiClient.ParameterToString(dashboardID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("GetDashboardsIDMembers", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return localVarResponse;
+        }
+        
+        /// <summary>
+        /// List all dashboard members 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of ResourceMembers</returns>
+        public RestRequest GetDashboardsIDMembersWithRestRequest (string dashboardID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'dashboardID' is set
+            if (dashboardID == null)
+                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->GetDashboardsIDMembers");
+
+            var localVarPath = "/api/v2/dashboards/{dashboardID}/members";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (dashboardID != null) localVarPathParams.Add("dashboardID", this.Configuration.ApiClient.ParameterToString(dashboardID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
+                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+        }
+
+        /// <summary>
+        /// List all dashboard members 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ResourceMembers</returns>
+        public async System.Threading.Tasks.Task<ResourceMembers> GetDashboardsIDMembersAsync (string dashboardID, string zapTraceSpan = null)
+        {
+             ApiResponse<ResourceMembers> localVarResponse = await GetDashboardsIDMembersAsyncWithHttpInfo(dashboardID, zapTraceSpan);
+             return localVarResponse.Data;
+
+        }
+
+        /// <summary>
+        /// List all dashboard members 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ApiResponse (ResourceMembers)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<ResourceMembers>> GetDashboardsIDMembersAsyncWithHttpInfo (string dashboardID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'dashboardID' is set
+            if (dashboardID == null)
+                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->GetDashboardsIDMembers");
+
+            var localVarPath = "/api/v2/dashboards/{dashboardID}/members";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (dashboardID != null) localVarPathParams.Add("dashboardID", this.Configuration.ApiClient.ParameterToString(dashboardID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("GetDashboardsIDMembers", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<ResourceMembers>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (ResourceMembers) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(ResourceMembers)));
+        }
+
+        /// <summary>
+        /// List all dashboard owners 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ResourceOwners</returns>
+        public ResourceOwners GetDashboardsIDOwners (string dashboardID, string zapTraceSpan = null)
+        {
+             ApiResponse<ResourceOwners> localVarResponse = GetDashboardsIDOwnersWithHttpInfo(dashboardID, zapTraceSpan);
+             return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// List all dashboard owners 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of ResourceOwners</returns>
+        public ApiResponse< ResourceOwners > GetDashboardsIDOwnersWithHttpInfo (string dashboardID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'dashboardID' is set
+            if (dashboardID == null)
+                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->GetDashboardsIDOwners");
+
+            var localVarPath = "/api/v2/dashboards/{dashboardID}/owners";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (dashboardID != null) localVarPathParams.Add("dashboardID", this.Configuration.ApiClient.ParameterToString(dashboardID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("GetDashboardsIDOwners", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<ResourceOwners>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (ResourceOwners) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(ResourceOwners)));
+        }
+
+        /// <summary>
+        /// List all dashboard owners 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of ResourceOwners</returns>
+        public IRestResponse GetDashboardsIDOwnersWithIRestResponse (string dashboardID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'dashboardID' is set
+            if (dashboardID == null)
+                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->GetDashboardsIDOwners");
+
+            var localVarPath = "/api/v2/dashboards/{dashboardID}/owners";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (dashboardID != null) localVarPathParams.Add("dashboardID", this.Configuration.ApiClient.ParameterToString(dashboardID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("GetDashboardsIDOwners", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return localVarResponse;
+        }
+        
+        /// <summary>
+        /// List all dashboard owners 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of ResourceOwners</returns>
+        public RestRequest GetDashboardsIDOwnersWithRestRequest (string dashboardID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'dashboardID' is set
+            if (dashboardID == null)
+                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->GetDashboardsIDOwners");
+
+            var localVarPath = "/api/v2/dashboards/{dashboardID}/owners";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (dashboardID != null) localVarPathParams.Add("dashboardID", this.Configuration.ApiClient.ParameterToString(dashboardID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
+                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+        }
+
+        /// <summary>
+        /// List all dashboard owners 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ResourceOwners</returns>
+        public async System.Threading.Tasks.Task<ResourceOwners> GetDashboardsIDOwnersAsync (string dashboardID, string zapTraceSpan = null)
+        {
+             ApiResponse<ResourceOwners> localVarResponse = await GetDashboardsIDOwnersAsyncWithHttpInfo(dashboardID, zapTraceSpan);
+             return localVarResponse.Data;
+
+        }
+
+        /// <summary>
+        /// List all dashboard owners 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ApiResponse (ResourceOwners)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<ResourceOwners>> GetDashboardsIDOwnersAsyncWithHttpInfo (string dashboardID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'dashboardID' is set
+            if (dashboardID == null)
+                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->GetDashboardsIDOwners");
+
+            var localVarPath = "/api/v2/dashboards/{dashboardID}/owners";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (dashboardID != null) localVarPathParams.Add("dashboardID", this.Configuration.ApiClient.ParameterToString(dashboardID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("GetDashboardsIDOwners", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<ResourceOwners>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (ResourceOwners) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(ResourceOwners)));
+        }
+
+        /// <summary>
+        /// Update a single dashboard 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of dashboard to update</param>
+        /// <param name="dashboard">patching of a dashboard</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Dashboard</returns>
+        public Dashboard PatchDashboardsID (string dashboardID, Dashboard dashboard, string zapTraceSpan = null)
+        {
+             ApiResponse<Dashboard> localVarResponse = PatchDashboardsIDWithHttpInfo(dashboardID, dashboard, zapTraceSpan);
+             return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Update a single dashboard 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of dashboard to update</param>
+        /// <param name="dashboard">patching of a dashboard</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Dashboard</returns>
+        public ApiResponse< Dashboard > PatchDashboardsIDWithHttpInfo (string dashboardID, Dashboard dashboard, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'dashboardID' is set
+            if (dashboardID == null)
+                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->PatchDashboardsID");
+            // verify the required parameter 'dashboard' is set
+            if (dashboard == null)
+                throw new ApiException(400, "Missing required parameter 'dashboard' when calling DashboardsService->PatchDashboardsID");
+
+            var localVarPath = "/api/v2/dashboards/{dashboardID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json"
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (dashboardID != null) localVarPathParams.Add("dashboardID", this.Configuration.ApiClient.ParameterToString(dashboardID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (dashboard != null && dashboard.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(dashboard); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = dashboard; // byte array
+            }
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("PatchDashboardsID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Dashboard>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (Dashboard) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Dashboard)));
+        }
+
+        /// <summary>
+        /// Update a single dashboard 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of dashboard to update</param>
+        /// <param name="dashboard">patching of a dashboard</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Dashboard</returns>
+        public IRestResponse PatchDashboardsIDWithIRestResponse (string dashboardID, Dashboard dashboard, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'dashboardID' is set
+            if (dashboardID == null)
+                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->PatchDashboardsID");
+            // verify the required parameter 'dashboard' is set
+            if (dashboard == null)
+                throw new ApiException(400, "Missing required parameter 'dashboard' when calling DashboardsService->PatchDashboardsID");
+
+            var localVarPath = "/api/v2/dashboards/{dashboardID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json"
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (dashboardID != null) localVarPathParams.Add("dashboardID", this.Configuration.ApiClient.ParameterToString(dashboardID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (dashboard != null && dashboard.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(dashboard); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = dashboard; // byte array
+            }
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("PatchDashboardsID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return localVarResponse;
+        }
+        
+        /// <summary>
+        /// Update a single dashboard 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of dashboard to update</param>
+        /// <param name="dashboard">patching of a dashboard</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Dashboard</returns>
+        public RestRequest PatchDashboardsIDWithRestRequest (string dashboardID, Dashboard dashboard, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'dashboardID' is set
+            if (dashboardID == null)
+                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->PatchDashboardsID");
+            // verify the required parameter 'dashboard' is set
+            if (dashboard == null)
+                throw new ApiException(400, "Missing required parameter 'dashboard' when calling DashboardsService->PatchDashboardsID");
+
+            var localVarPath = "/api/v2/dashboards/{dashboardID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json"
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (dashboardID != null) localVarPathParams.Add("dashboardID", this.Configuration.ApiClient.ParameterToString(dashboardID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (dashboard != null && dashboard.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(dashboard); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = dashboard; // byte array
+            }
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
+                Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+        }
+
+        /// <summary>
+        /// Update a single dashboard 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of dashboard to update</param>
+        /// <param name="dashboard">patching of a dashboard</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of Dashboard</returns>
+        public async System.Threading.Tasks.Task<Dashboard> PatchDashboardsIDAsync (string dashboardID, Dashboard dashboard, string zapTraceSpan = null)
+        {
+             ApiResponse<Dashboard> localVarResponse = await PatchDashboardsIDAsyncWithHttpInfo(dashboardID, dashboard, zapTraceSpan);
+             return localVarResponse.Data;
+
+        }
+
+        /// <summary>
+        /// Update a single dashboard 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of dashboard to update</param>
+        /// <param name="dashboard">patching of a dashboard</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ApiResponse (Dashboard)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<Dashboard>> PatchDashboardsIDAsyncWithHttpInfo (string dashboardID, Dashboard dashboard, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'dashboardID' is set
+            if (dashboardID == null)
+                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->PatchDashboardsID");
+            // verify the required parameter 'dashboard' is set
+            if (dashboard == null)
+                throw new ApiException(400, "Missing required parameter 'dashboard' when calling DashboardsService->PatchDashboardsID");
+
+            var localVarPath = "/api/v2/dashboards/{dashboardID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json"
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (dashboardID != null) localVarPathParams.Add("dashboardID", this.Configuration.ApiClient.ParameterToString(dashboardID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (dashboard != null && dashboard.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(dashboard); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = dashboard; // byte array
+            }
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("PatchDashboardsID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Dashboard>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (Dashboard) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Dashboard)));
+        }
+
+        /// <summary>
+        /// Update the non positional information related to a cell (because updates to a single cells positional data could cause grid conflicts) 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of dashboard to update</param>
+        /// <param name="cellID">ID of cell to update</param>
+        /// <param name="cellUpdate">updates the non positional information related to a cell</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Cell</returns>
+        public Cell PatchDashboardsIDCellsID (string dashboardID, string cellID, CellUpdate cellUpdate, string zapTraceSpan = null)
+        {
+             ApiResponse<Cell> localVarResponse = PatchDashboardsIDCellsIDWithHttpInfo(dashboardID, cellID, cellUpdate, zapTraceSpan);
+             return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Update the non positional information related to a cell (because updates to a single cells positional data could cause grid conflicts) 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of dashboard to update</param>
+        /// <param name="cellID">ID of cell to update</param>
+        /// <param name="cellUpdate">updates the non positional information related to a cell</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Cell</returns>
+        public ApiResponse< Cell > PatchDashboardsIDCellsIDWithHttpInfo (string dashboardID, string cellID, CellUpdate cellUpdate, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'dashboardID' is set
+            if (dashboardID == null)
+                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->PatchDashboardsIDCellsID");
+            // verify the required parameter 'cellID' is set
+            if (cellID == null)
+                throw new ApiException(400, "Missing required parameter 'cellID' when calling DashboardsService->PatchDashboardsIDCellsID");
+            // verify the required parameter 'cellUpdate' is set
+            if (cellUpdate == null)
+                throw new ApiException(400, "Missing required parameter 'cellUpdate' when calling DashboardsService->PatchDashboardsIDCellsID");
+
+            var localVarPath = "/api/v2/dashboards/{dashboardID}/cells/{cellID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json"
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (dashboardID != null) localVarPathParams.Add("dashboardID", this.Configuration.ApiClient.ParameterToString(dashboardID)); // path parameter
+            if (cellID != null) localVarPathParams.Add("cellID", this.Configuration.ApiClient.ParameterToString(cellID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (cellUpdate != null && cellUpdate.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(cellUpdate); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = cellUpdate; // byte array
+            }
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("PatchDashboardsIDCellsID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Cell>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (Cell) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Cell)));
+        }
+
+        /// <summary>
+        /// Update the non positional information related to a cell (because updates to a single cells positional data could cause grid conflicts) 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of dashboard to update</param>
+        /// <param name="cellID">ID of cell to update</param>
+        /// <param name="cellUpdate">updates the non positional information related to a cell</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Cell</returns>
+        public IRestResponse PatchDashboardsIDCellsIDWithIRestResponse (string dashboardID, string cellID, CellUpdate cellUpdate, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'dashboardID' is set
+            if (dashboardID == null)
+                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->PatchDashboardsIDCellsID");
+            // verify the required parameter 'cellID' is set
+            if (cellID == null)
+                throw new ApiException(400, "Missing required parameter 'cellID' when calling DashboardsService->PatchDashboardsIDCellsID");
+            // verify the required parameter 'cellUpdate' is set
+            if (cellUpdate == null)
+                throw new ApiException(400, "Missing required parameter 'cellUpdate' when calling DashboardsService->PatchDashboardsIDCellsID");
+
+            var localVarPath = "/api/v2/dashboards/{dashboardID}/cells/{cellID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json"
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (dashboardID != null) localVarPathParams.Add("dashboardID", this.Configuration.ApiClient.ParameterToString(dashboardID)); // path parameter
+            if (cellID != null) localVarPathParams.Add("cellID", this.Configuration.ApiClient.ParameterToString(cellID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (cellUpdate != null && cellUpdate.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(cellUpdate); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = cellUpdate; // byte array
+            }
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("PatchDashboardsIDCellsID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return localVarResponse;
+        }
+        
+        /// <summary>
+        /// Update the non positional information related to a cell (because updates to a single cells positional data could cause grid conflicts) 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of dashboard to update</param>
+        /// <param name="cellID">ID of cell to update</param>
+        /// <param name="cellUpdate">updates the non positional information related to a cell</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Cell</returns>
+        public RestRequest PatchDashboardsIDCellsIDWithRestRequest (string dashboardID, string cellID, CellUpdate cellUpdate, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'dashboardID' is set
+            if (dashboardID == null)
+                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->PatchDashboardsIDCellsID");
+            // verify the required parameter 'cellID' is set
+            if (cellID == null)
+                throw new ApiException(400, "Missing required parameter 'cellID' when calling DashboardsService->PatchDashboardsIDCellsID");
+            // verify the required parameter 'cellUpdate' is set
+            if (cellUpdate == null)
+                throw new ApiException(400, "Missing required parameter 'cellUpdate' when calling DashboardsService->PatchDashboardsIDCellsID");
+
+            var localVarPath = "/api/v2/dashboards/{dashboardID}/cells/{cellID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json"
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (dashboardID != null) localVarPathParams.Add("dashboardID", this.Configuration.ApiClient.ParameterToString(dashboardID)); // path parameter
+            if (cellID != null) localVarPathParams.Add("cellID", this.Configuration.ApiClient.ParameterToString(cellID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (cellUpdate != null && cellUpdate.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(cellUpdate); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = cellUpdate; // byte array
+            }
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
+                Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+        }
+
+        /// <summary>
+        /// Update the non positional information related to a cell (because updates to a single cells positional data could cause grid conflicts) 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of dashboard to update</param>
+        /// <param name="cellID">ID of cell to update</param>
+        /// <param name="cellUpdate">updates the non positional information related to a cell</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of Cell</returns>
+        public async System.Threading.Tasks.Task<Cell> PatchDashboardsIDCellsIDAsync (string dashboardID, string cellID, CellUpdate cellUpdate, string zapTraceSpan = null)
+        {
+             ApiResponse<Cell> localVarResponse = await PatchDashboardsIDCellsIDAsyncWithHttpInfo(dashboardID, cellID, cellUpdate, zapTraceSpan);
+             return localVarResponse.Data;
+
+        }
+
+        /// <summary>
+        /// Update the non positional information related to a cell (because updates to a single cells positional data could cause grid conflicts) 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of dashboard to update</param>
+        /// <param name="cellID">ID of cell to update</param>
+        /// <param name="cellUpdate">updates the non positional information related to a cell</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ApiResponse (Cell)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<Cell>> PatchDashboardsIDCellsIDAsyncWithHttpInfo (string dashboardID, string cellID, CellUpdate cellUpdate, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'dashboardID' is set
+            if (dashboardID == null)
+                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->PatchDashboardsIDCellsID");
+            // verify the required parameter 'cellID' is set
+            if (cellID == null)
+                throw new ApiException(400, "Missing required parameter 'cellID' when calling DashboardsService->PatchDashboardsIDCellsID");
+            // verify the required parameter 'cellUpdate' is set
+            if (cellUpdate == null)
+                throw new ApiException(400, "Missing required parameter 'cellUpdate' when calling DashboardsService->PatchDashboardsIDCellsID");
+
+            var localVarPath = "/api/v2/dashboards/{dashboardID}/cells/{cellID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json"
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (dashboardID != null) localVarPathParams.Add("dashboardID", this.Configuration.ApiClient.ParameterToString(dashboardID)); // path parameter
+            if (cellID != null) localVarPathParams.Add("cellID", this.Configuration.ApiClient.ParameterToString(cellID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (cellUpdate != null && cellUpdate.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(cellUpdate); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = cellUpdate; // byte array
+            }
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("PatchDashboardsIDCellsID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Cell>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (Cell) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Cell)));
+        }
+
+        /// <summary>
+        /// Update the view for a cell 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of dashboard to update</param>
+        /// <param name="cellID">ID of cell to update</param>
+        /// <param name="view">updates the view for a cell</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>View</returns>
+        public View PatchDashboardsIDCellsIDView (string dashboardID, string cellID, View view, string zapTraceSpan = null)
+        {
+             ApiResponse<View> localVarResponse = PatchDashboardsIDCellsIDViewWithHttpInfo(dashboardID, cellID, view, zapTraceSpan);
+             return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Update the view for a cell 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of dashboard to update</param>
+        /// <param name="cellID">ID of cell to update</param>
+        /// <param name="view">updates the view for a cell</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of View</returns>
+        public ApiResponse< View > PatchDashboardsIDCellsIDViewWithHttpInfo (string dashboardID, string cellID, View view, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'dashboardID' is set
+            if (dashboardID == null)
+                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->PatchDashboardsIDCellsIDView");
+            // verify the required parameter 'cellID' is set
+            if (cellID == null)
+                throw new ApiException(400, "Missing required parameter 'cellID' when calling DashboardsService->PatchDashboardsIDCellsIDView");
+            // verify the required parameter 'view' is set
+            if (view == null)
+                throw new ApiException(400, "Missing required parameter 'view' when calling DashboardsService->PatchDashboardsIDCellsIDView");
+
+            var localVarPath = "/api/v2/dashboards/{dashboardID}/cells/{cellID}/view";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json"
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (dashboardID != null) localVarPathParams.Add("dashboardID", this.Configuration.ApiClient.ParameterToString(dashboardID)); // path parameter
+            if (cellID != null) localVarPathParams.Add("cellID", this.Configuration.ApiClient.ParameterToString(cellID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (view != null && view.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(view); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = view; // byte array
+            }
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("PatchDashboardsIDCellsIDView", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<View>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (View) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(View)));
+        }
+
+        /// <summary>
+        /// Update the view for a cell 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of dashboard to update</param>
+        /// <param name="cellID">ID of cell to update</param>
+        /// <param name="view">updates the view for a cell</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of View</returns>
+        public IRestResponse PatchDashboardsIDCellsIDViewWithIRestResponse (string dashboardID, string cellID, View view, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'dashboardID' is set
+            if (dashboardID == null)
+                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->PatchDashboardsIDCellsIDView");
+            // verify the required parameter 'cellID' is set
+            if (cellID == null)
+                throw new ApiException(400, "Missing required parameter 'cellID' when calling DashboardsService->PatchDashboardsIDCellsIDView");
+            // verify the required parameter 'view' is set
+            if (view == null)
+                throw new ApiException(400, "Missing required parameter 'view' when calling DashboardsService->PatchDashboardsIDCellsIDView");
+
+            var localVarPath = "/api/v2/dashboards/{dashboardID}/cells/{cellID}/view";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json"
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (dashboardID != null) localVarPathParams.Add("dashboardID", this.Configuration.ApiClient.ParameterToString(dashboardID)); // path parameter
+            if (cellID != null) localVarPathParams.Add("cellID", this.Configuration.ApiClient.ParameterToString(cellID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (view != null && view.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(view); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = view; // byte array
+            }
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("PatchDashboardsIDCellsIDView", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return localVarResponse;
+        }
+        
+        /// <summary>
+        /// Update the view for a cell 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of dashboard to update</param>
+        /// <param name="cellID">ID of cell to update</param>
+        /// <param name="view">updates the view for a cell</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of View</returns>
+        public RestRequest PatchDashboardsIDCellsIDViewWithRestRequest (string dashboardID, string cellID, View view, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'dashboardID' is set
+            if (dashboardID == null)
+                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->PatchDashboardsIDCellsIDView");
+            // verify the required parameter 'cellID' is set
+            if (cellID == null)
+                throw new ApiException(400, "Missing required parameter 'cellID' when calling DashboardsService->PatchDashboardsIDCellsIDView");
+            // verify the required parameter 'view' is set
+            if (view == null)
+                throw new ApiException(400, "Missing required parameter 'view' when calling DashboardsService->PatchDashboardsIDCellsIDView");
+
+            var localVarPath = "/api/v2/dashboards/{dashboardID}/cells/{cellID}/view";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json"
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (dashboardID != null) localVarPathParams.Add("dashboardID", this.Configuration.ApiClient.ParameterToString(dashboardID)); // path parameter
+            if (cellID != null) localVarPathParams.Add("cellID", this.Configuration.ApiClient.ParameterToString(cellID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (view != null && view.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(view); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = view; // byte array
+            }
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
+                Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+        }
+
+        /// <summary>
+        /// Update the view for a cell 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of dashboard to update</param>
+        /// <param name="cellID">ID of cell to update</param>
+        /// <param name="view">updates the view for a cell</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of View</returns>
+        public async System.Threading.Tasks.Task<View> PatchDashboardsIDCellsIDViewAsync (string dashboardID, string cellID, View view, string zapTraceSpan = null)
+        {
+             ApiResponse<View> localVarResponse = await PatchDashboardsIDCellsIDViewAsyncWithHttpInfo(dashboardID, cellID, view, zapTraceSpan);
+             return localVarResponse.Data;
+
+        }
+
+        /// <summary>
+        /// Update the view for a cell 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of dashboard to update</param>
+        /// <param name="cellID">ID of cell to update</param>
+        /// <param name="view">updates the view for a cell</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ApiResponse (View)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<View>> PatchDashboardsIDCellsIDViewAsyncWithHttpInfo (string dashboardID, string cellID, View view, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'dashboardID' is set
+            if (dashboardID == null)
+                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->PatchDashboardsIDCellsIDView");
+            // verify the required parameter 'cellID' is set
+            if (cellID == null)
+                throw new ApiException(400, "Missing required parameter 'cellID' when calling DashboardsService->PatchDashboardsIDCellsIDView");
+            // verify the required parameter 'view' is set
+            if (view == null)
+                throw new ApiException(400, "Missing required parameter 'view' when calling DashboardsService->PatchDashboardsIDCellsIDView");
+
+            var localVarPath = "/api/v2/dashboards/{dashboardID}/cells/{cellID}/view";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json"
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (dashboardID != null) localVarPathParams.Add("dashboardID", this.Configuration.ApiClient.ParameterToString(dashboardID)); // path parameter
+            if (cellID != null) localVarPathParams.Add("cellID", this.Configuration.ApiClient.ParameterToString(cellID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (view != null && view.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(view); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = view; // byte array
+            }
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("PatchDashboardsIDCellsIDView", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<View>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (View) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(View)));
+        }
+
+        /// <summary>
+        /// Create a dashboard 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="createDashboardRequest">dashboard to create</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Dashboard</returns>
+        public Dashboard PostDashboards (CreateDashboardRequest createDashboardRequest, string zapTraceSpan = null)
+        {
+             ApiResponse<Dashboard> localVarResponse = PostDashboardsWithHttpInfo(createDashboardRequest, zapTraceSpan);
+             return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Create a dashboard 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="createDashboardRequest">dashboard to create</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Dashboard</returns>
+        public ApiResponse< Dashboard > PostDashboardsWithHttpInfo (CreateDashboardRequest createDashboardRequest, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'createDashboardRequest' is set
+            if (createDashboardRequest == null)
+                throw new ApiException(400, "Missing required parameter 'createDashboardRequest' when calling DashboardsService->PostDashboards");
+
+            var localVarPath = "/api/v2/dashboards";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json"
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (createDashboardRequest != null && createDashboardRequest.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(createDashboardRequest); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = createDashboardRequest; // byte array
+            }
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("PostDashboards", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Dashboard>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (Dashboard) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Dashboard)));
+        }
+
+        /// <summary>
+        /// Create a dashboard 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="createDashboardRequest">dashboard to create</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Dashboard</returns>
+        public IRestResponse PostDashboardsWithIRestResponse (CreateDashboardRequest createDashboardRequest, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'createDashboardRequest' is set
+            if (createDashboardRequest == null)
+                throw new ApiException(400, "Missing required parameter 'createDashboardRequest' when calling DashboardsService->PostDashboards");
+
+            var localVarPath = "/api/v2/dashboards";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json"
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (createDashboardRequest != null && createDashboardRequest.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(createDashboardRequest); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = createDashboardRequest; // byte array
+            }
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("PostDashboards", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return localVarResponse;
+        }
+        
+        /// <summary>
+        /// Create a dashboard 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="createDashboardRequest">dashboard to create</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Dashboard</returns>
+        public RestRequest PostDashboardsWithRestRequest (CreateDashboardRequest createDashboardRequest, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'createDashboardRequest' is set
+            if (createDashboardRequest == null)
+                throw new ApiException(400, "Missing required parameter 'createDashboardRequest' when calling DashboardsService->PostDashboards");
+
+            var localVarPath = "/api/v2/dashboards";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json"
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (createDashboardRequest != null && createDashboardRequest.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(createDashboardRequest); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = createDashboardRequest; // byte array
+            }
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
+                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+        }
+
+        /// <summary>
+        /// Create a dashboard 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="createDashboardRequest">dashboard to create</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of Dashboard</returns>
+        public async System.Threading.Tasks.Task<Dashboard> PostDashboardsAsync (CreateDashboardRequest createDashboardRequest, string zapTraceSpan = null)
+        {
+             ApiResponse<Dashboard> localVarResponse = await PostDashboardsAsyncWithHttpInfo(createDashboardRequest, zapTraceSpan);
+             return localVarResponse.Data;
+
+        }
+
+        /// <summary>
+        /// Create a dashboard 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="createDashboardRequest">dashboard to create</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ApiResponse (Dashboard)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<Dashboard>> PostDashboardsAsyncWithHttpInfo (CreateDashboardRequest createDashboardRequest, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'createDashboardRequest' is set
+            if (createDashboardRequest == null)
+                throw new ApiException(400, "Missing required parameter 'createDashboardRequest' when calling DashboardsService->PostDashboards");
+
+            var localVarPath = "/api/v2/dashboards";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json"
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (createDashboardRequest != null && createDashboardRequest.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(createDashboardRequest); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = createDashboardRequest; // byte array
+            }
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("PostDashboards", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Dashboard>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (Dashboard) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Dashboard)));
+        }
+
+        /// <summary>
+        /// Create a dashboard cell 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of dashboard to update</param>
+        /// <param name="createCell">cell that will be added</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Cell</returns>
+        public Cell PostDashboardsIDCells (string dashboardID, CreateCell createCell, string zapTraceSpan = null)
+        {
+             ApiResponse<Cell> localVarResponse = PostDashboardsIDCellsWithHttpInfo(dashboardID, createCell, zapTraceSpan);
+             return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Create a dashboard cell 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of dashboard to update</param>
+        /// <param name="createCell">cell that will be added</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Cell</returns>
+        public ApiResponse< Cell > PostDashboardsIDCellsWithHttpInfo (string dashboardID, CreateCell createCell, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'dashboardID' is set
+            if (dashboardID == null)
+                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->PostDashboardsIDCells");
+            // verify the required parameter 'createCell' is set
+            if (createCell == null)
+                throw new ApiException(400, "Missing required parameter 'createCell' when calling DashboardsService->PostDashboardsIDCells");
+
+            var localVarPath = "/api/v2/dashboards/{dashboardID}/cells";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json"
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (dashboardID != null) localVarPathParams.Add("dashboardID", this.Configuration.ApiClient.ParameterToString(dashboardID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (createCell != null && createCell.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(createCell); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = createCell; // byte array
+            }
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("PostDashboardsIDCells", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Cell>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (Cell) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Cell)));
+        }
+
+        /// <summary>
+        /// Create a dashboard cell 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of dashboard to update</param>
+        /// <param name="createCell">cell that will be added</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Cell</returns>
+        public IRestResponse PostDashboardsIDCellsWithIRestResponse (string dashboardID, CreateCell createCell, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'dashboardID' is set
+            if (dashboardID == null)
+                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->PostDashboardsIDCells");
+            // verify the required parameter 'createCell' is set
+            if (createCell == null)
+                throw new ApiException(400, "Missing required parameter 'createCell' when calling DashboardsService->PostDashboardsIDCells");
+
+            var localVarPath = "/api/v2/dashboards/{dashboardID}/cells";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json"
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (dashboardID != null) localVarPathParams.Add("dashboardID", this.Configuration.ApiClient.ParameterToString(dashboardID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (createCell != null && createCell.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(createCell); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = createCell; // byte array
+            }
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("PostDashboardsIDCells", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return localVarResponse;
+        }
+        
+        /// <summary>
+        /// Create a dashboard cell 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of dashboard to update</param>
+        /// <param name="createCell">cell that will be added</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Cell</returns>
+        public RestRequest PostDashboardsIDCellsWithRestRequest (string dashboardID, CreateCell createCell, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'dashboardID' is set
+            if (dashboardID == null)
+                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->PostDashboardsIDCells");
+            // verify the required parameter 'createCell' is set
+            if (createCell == null)
+                throw new ApiException(400, "Missing required parameter 'createCell' when calling DashboardsService->PostDashboardsIDCells");
+
+            var localVarPath = "/api/v2/dashboards/{dashboardID}/cells";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json"
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (dashboardID != null) localVarPathParams.Add("dashboardID", this.Configuration.ApiClient.ParameterToString(dashboardID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (createCell != null && createCell.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(createCell); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = createCell; // byte array
+            }
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
+                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+        }
+
+        /// <summary>
+        /// Create a dashboard cell 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of dashboard to update</param>
+        /// <param name="createCell">cell that will be added</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of Cell</returns>
+        public async System.Threading.Tasks.Task<Cell> PostDashboardsIDCellsAsync (string dashboardID, CreateCell createCell, string zapTraceSpan = null)
+        {
+             ApiResponse<Cell> localVarResponse = await PostDashboardsIDCellsAsyncWithHttpInfo(dashboardID, createCell, zapTraceSpan);
+             return localVarResponse.Data;
+
+        }
+
+        /// <summary>
+        /// Create a dashboard cell 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of dashboard to update</param>
+        /// <param name="createCell">cell that will be added</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ApiResponse (Cell)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<Cell>> PostDashboardsIDCellsAsyncWithHttpInfo (string dashboardID, CreateCell createCell, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'dashboardID' is set
+            if (dashboardID == null)
+                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->PostDashboardsIDCells");
+            // verify the required parameter 'createCell' is set
+            if (createCell == null)
+                throw new ApiException(400, "Missing required parameter 'createCell' when calling DashboardsService->PostDashboardsIDCells");
+
+            var localVarPath = "/api/v2/dashboards/{dashboardID}/cells";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json"
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (dashboardID != null) localVarPathParams.Add("dashboardID", this.Configuration.ApiClient.ParameterToString(dashboardID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (createCell != null && createCell.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(createCell); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = createCell; // byte array
+            }
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("PostDashboardsIDCells", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Cell>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (Cell) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Cell)));
         }
 
         /// <summary>
@@ -3904,9 +5704,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="labelMapping">label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>LabelResponse</returns>
-        public LabelResponse DashboardsDashboardIDLabelsPost (string dashboardID, LabelMapping labelMapping, string zapTraceSpan = null)
+        public LabelResponse PostDashboardsIDLabels (string dashboardID, LabelMapping labelMapping, string zapTraceSpan = null)
         {
-             ApiResponse<LabelResponse> localVarResponse = DashboardsDashboardIDLabelsPostWithHttpInfo(dashboardID, labelMapping, zapTraceSpan);
+             ApiResponse<LabelResponse> localVarResponse = PostDashboardsIDLabelsWithHttpInfo(dashboardID, labelMapping, zapTraceSpan);
              return localVarResponse.Data;
         }
 
@@ -3918,14 +5718,14 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="labelMapping">label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelResponse</returns>
-        public ApiResponse< LabelResponse > DashboardsDashboardIDLabelsPostWithHttpInfo (string dashboardID, LabelMapping labelMapping, string zapTraceSpan = null)
+        public ApiResponse< LabelResponse > PostDashboardsIDLabelsWithHttpInfo (string dashboardID, LabelMapping labelMapping, string zapTraceSpan = null)
         {
             // verify the required parameter 'dashboardID' is set
             if (dashboardID == null)
-                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->DashboardsDashboardIDLabelsPost");
+                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->PostDashboardsIDLabels");
             // verify the required parameter 'labelMapping' is set
             if (labelMapping == null)
-                throw new ApiException(400, "Missing required parameter 'labelMapping' when calling DashboardsService->DashboardsDashboardIDLabelsPost");
+                throw new ApiException(400, "Missing required parameter 'labelMapping' when calling DashboardsService->PostDashboardsIDLabels");
 
             var localVarPath = "/api/v2/dashboards/{dashboardID}/labels";
             var localVarPathParams = new Dictionary<String, String>();
@@ -3971,7 +5771,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("DashboardsDashboardIDLabelsPost", localVarResponse);
+                Exception exception = ExceptionFactory("PostDashboardsIDLabels", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -3988,14 +5788,14 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="labelMapping">label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelResponse</returns>
-        public IRestResponse DashboardsDashboardIDLabelsPostWithIRestResponse (string dashboardID, LabelMapping labelMapping, string zapTraceSpan = null)
+        public IRestResponse PostDashboardsIDLabelsWithIRestResponse (string dashboardID, LabelMapping labelMapping, string zapTraceSpan = null)
         {
             // verify the required parameter 'dashboardID' is set
             if (dashboardID == null)
-                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->DashboardsDashboardIDLabelsPost");
+                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->PostDashboardsIDLabels");
             // verify the required parameter 'labelMapping' is set
             if (labelMapping == null)
-                throw new ApiException(400, "Missing required parameter 'labelMapping' when calling DashboardsService->DashboardsDashboardIDLabelsPost");
+                throw new ApiException(400, "Missing required parameter 'labelMapping' when calling DashboardsService->PostDashboardsIDLabels");
 
             var localVarPath = "/api/v2/dashboards/{dashboardID}/labels";
             var localVarPathParams = new Dictionary<String, String>();
@@ -4041,7 +5841,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("DashboardsDashboardIDLabelsPost", localVarResponse);
+                Exception exception = ExceptionFactory("PostDashboardsIDLabels", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -4056,14 +5856,14 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="labelMapping">label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelResponse</returns>
-        public RestRequest DashboardsDashboardIDLabelsPostWithRestRequest (string dashboardID, LabelMapping labelMapping, string zapTraceSpan = null)
+        public RestRequest PostDashboardsIDLabelsWithRestRequest (string dashboardID, LabelMapping labelMapping, string zapTraceSpan = null)
         {
             // verify the required parameter 'dashboardID' is set
             if (dashboardID == null)
-                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->DashboardsDashboardIDLabelsPost");
+                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->PostDashboardsIDLabels");
             // verify the required parameter 'labelMapping' is set
             if (labelMapping == null)
-                throw new ApiException(400, "Missing required parameter 'labelMapping' when calling DashboardsService->DashboardsDashboardIDLabelsPost");
+                throw new ApiException(400, "Missing required parameter 'labelMapping' when calling DashboardsService->PostDashboardsIDLabels");
 
             var localVarPath = "/api/v2/dashboards/{dashboardID}/labels";
             var localVarPathParams = new Dictionary<String, String>();
@@ -4113,9 +5913,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="labelMapping">label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of LabelResponse</returns>
-        public async System.Threading.Tasks.Task<LabelResponse> DashboardsDashboardIDLabelsPostAsync (string dashboardID, LabelMapping labelMapping, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<LabelResponse> PostDashboardsIDLabelsAsync (string dashboardID, LabelMapping labelMapping, string zapTraceSpan = null)
         {
-             ApiResponse<LabelResponse> localVarResponse = await DashboardsDashboardIDLabelsPostAsyncWithHttpInfo(dashboardID, labelMapping, zapTraceSpan);
+             ApiResponse<LabelResponse> localVarResponse = await PostDashboardsIDLabelsAsyncWithHttpInfo(dashboardID, labelMapping, zapTraceSpan);
              return localVarResponse.Data;
 
         }
@@ -4128,14 +5928,14 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="labelMapping">label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (LabelResponse)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<LabelResponse>> DashboardsDashboardIDLabelsPostAsyncWithHttpInfo (string dashboardID, LabelMapping labelMapping, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<LabelResponse>> PostDashboardsIDLabelsAsyncWithHttpInfo (string dashboardID, LabelMapping labelMapping, string zapTraceSpan = null)
         {
             // verify the required parameter 'dashboardID' is set
             if (dashboardID == null)
-                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->DashboardsDashboardIDLabelsPost");
+                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->PostDashboardsIDLabels");
             // verify the required parameter 'labelMapping' is set
             if (labelMapping == null)
-                throw new ApiException(400, "Missing required parameter 'labelMapping' when calling DashboardsService->DashboardsDashboardIDLabelsPost");
+                throw new ApiException(400, "Missing required parameter 'labelMapping' when calling DashboardsService->PostDashboardsIDLabels");
 
             var localVarPath = "/api/v2/dashboards/{dashboardID}/labels";
             var localVarPathParams = new Dictionary<String, String>();
@@ -4181,513 +5981,13 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("DashboardsDashboardIDLabelsPost", localVarResponse);
+                Exception exception = ExceptionFactory("PostDashboardsIDLabels", localVarResponse);
                 if (exception != null) throw exception;
             }
 
             return new ApiResponse<LabelResponse>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
                 (LabelResponse) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(LabelResponse)));
-        }
-
-        /// <summary>
-        /// Retrieve operation logs for a dashboard 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of the dashboard</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="offset"> (optional)</param>
-        /// <param name="limit"> (optional, default to 20)</param>
-        /// <returns>OperationLogs</returns>
-        public OperationLogs DashboardsDashboardIDLogsGet (string dashboardID, string zapTraceSpan = null, int? offset = null, int? limit = null)
-        {
-             ApiResponse<OperationLogs> localVarResponse = DashboardsDashboardIDLogsGetWithHttpInfo(dashboardID, zapTraceSpan, offset, limit);
-             return localVarResponse.Data;
-        }
-
-        /// <summary>
-        /// Retrieve operation logs for a dashboard 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of the dashboard</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="offset"> (optional)</param>
-        /// <param name="limit"> (optional, default to 20)</param>
-        /// <returns>ApiResponse of OperationLogs</returns>
-        public ApiResponse< OperationLogs > DashboardsDashboardIDLogsGetWithHttpInfo (string dashboardID, string zapTraceSpan = null, int? offset = null, int? limit = null)
-        {
-            // verify the required parameter 'dashboardID' is set
-            if (dashboardID == null)
-                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->DashboardsDashboardIDLogsGet");
-
-            var localVarPath = "/api/v2/dashboards/{dashboardID}/logs";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (dashboardID != null) localVarPathParams.Add("dashboardID", this.Configuration.ApiClient.ParameterToString(dashboardID)); // path parameter
-            if (offset != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "offset", offset)); // query parameter
-            if (limit != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "limit", limit)); // query parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("DashboardsDashboardIDLogsGet", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return new ApiResponse<OperationLogs>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (OperationLogs) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(OperationLogs)));
-        }
-
-        /// <summary>
-        /// Retrieve operation logs for a dashboard 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of the dashboard</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="offset"> (optional)</param>
-        /// <param name="limit"> (optional, default to 20)</param>
-        /// <returns>ApiResponse of OperationLogs</returns>
-        public IRestResponse DashboardsDashboardIDLogsGetWithIRestResponse (string dashboardID, string zapTraceSpan = null, int? offset = null, int? limit = null)
-        {
-            // verify the required parameter 'dashboardID' is set
-            if (dashboardID == null)
-                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->DashboardsDashboardIDLogsGet");
-
-            var localVarPath = "/api/v2/dashboards/{dashboardID}/logs";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (dashboardID != null) localVarPathParams.Add("dashboardID", this.Configuration.ApiClient.ParameterToString(dashboardID)); // path parameter
-            if (offset != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "offset", offset)); // query parameter
-            if (limit != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "limit", limit)); // query parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("DashboardsDashboardIDLogsGet", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return localVarResponse;
-        }
-        
-        /// <summary>
-        /// Retrieve operation logs for a dashboard 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of the dashboard</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="offset"> (optional)</param>
-        /// <param name="limit"> (optional, default to 20)</param>
-        /// <returns>ApiResponse of OperationLogs</returns>
-        public RestRequest DashboardsDashboardIDLogsGetWithRestRequest (string dashboardID, string zapTraceSpan = null, int? offset = null, int? limit = null)
-        {
-            // verify the required parameter 'dashboardID' is set
-            if (dashboardID == null)
-                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->DashboardsDashboardIDLogsGet");
-
-            var localVarPath = "/api/v2/dashboards/{dashboardID}/logs";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (dashboardID != null) localVarPathParams.Add("dashboardID", this.Configuration.ApiClient.ParameterToString(dashboardID)); // path parameter
-            if (offset != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "offset", offset)); // query parameter
-            if (limit != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "limit", limit)); // query parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-        }
-
-        /// <summary>
-        /// Retrieve operation logs for a dashboard 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of the dashboard</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="offset"> (optional)</param>
-        /// <param name="limit"> (optional, default to 20)</param>
-        /// <returns>Task of OperationLogs</returns>
-        public async System.Threading.Tasks.Task<OperationLogs> DashboardsDashboardIDLogsGetAsync (string dashboardID, string zapTraceSpan = null, int? offset = null, int? limit = null)
-        {
-             ApiResponse<OperationLogs> localVarResponse = await DashboardsDashboardIDLogsGetAsyncWithHttpInfo(dashboardID, zapTraceSpan, offset, limit);
-             return localVarResponse.Data;
-
-        }
-
-        /// <summary>
-        /// Retrieve operation logs for a dashboard 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of the dashboard</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="offset"> (optional)</param>
-        /// <param name="limit"> (optional, default to 20)</param>
-        /// <returns>Task of ApiResponse (OperationLogs)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<OperationLogs>> DashboardsDashboardIDLogsGetAsyncWithHttpInfo (string dashboardID, string zapTraceSpan = null, int? offset = null, int? limit = null)
-        {
-            // verify the required parameter 'dashboardID' is set
-            if (dashboardID == null)
-                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->DashboardsDashboardIDLogsGet");
-
-            var localVarPath = "/api/v2/dashboards/{dashboardID}/logs";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (dashboardID != null) localVarPathParams.Add("dashboardID", this.Configuration.ApiClient.ParameterToString(dashboardID)); // path parameter
-            if (offset != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "offset", offset)); // query parameter
-            if (limit != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "limit", limit)); // query parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("DashboardsDashboardIDLogsGet", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return new ApiResponse<OperationLogs>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (OperationLogs) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(OperationLogs)));
-        }
-
-        /// <summary>
-        /// List all dashboard members 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of the dashboard</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ResourceMembers</returns>
-        public ResourceMembers DashboardsDashboardIDMembersGet (string dashboardID, string zapTraceSpan = null)
-        {
-             ApiResponse<ResourceMembers> localVarResponse = DashboardsDashboardIDMembersGetWithHttpInfo(dashboardID, zapTraceSpan);
-             return localVarResponse.Data;
-        }
-
-        /// <summary>
-        /// List all dashboard members 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of the dashboard</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of ResourceMembers</returns>
-        public ApiResponse< ResourceMembers > DashboardsDashboardIDMembersGetWithHttpInfo (string dashboardID, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'dashboardID' is set
-            if (dashboardID == null)
-                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->DashboardsDashboardIDMembersGet");
-
-            var localVarPath = "/api/v2/dashboards/{dashboardID}/members";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (dashboardID != null) localVarPathParams.Add("dashboardID", this.Configuration.ApiClient.ParameterToString(dashboardID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("DashboardsDashboardIDMembersGet", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return new ApiResponse<ResourceMembers>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (ResourceMembers) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(ResourceMembers)));
-        }
-
-        /// <summary>
-        /// List all dashboard members 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of the dashboard</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of ResourceMembers</returns>
-        public IRestResponse DashboardsDashboardIDMembersGetWithIRestResponse (string dashboardID, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'dashboardID' is set
-            if (dashboardID == null)
-                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->DashboardsDashboardIDMembersGet");
-
-            var localVarPath = "/api/v2/dashboards/{dashboardID}/members";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (dashboardID != null) localVarPathParams.Add("dashboardID", this.Configuration.ApiClient.ParameterToString(dashboardID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("DashboardsDashboardIDMembersGet", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return localVarResponse;
-        }
-        
-        /// <summary>
-        /// List all dashboard members 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of the dashboard</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of ResourceMembers</returns>
-        public RestRequest DashboardsDashboardIDMembersGetWithRestRequest (string dashboardID, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'dashboardID' is set
-            if (dashboardID == null)
-                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->DashboardsDashboardIDMembersGet");
-
-            var localVarPath = "/api/v2/dashboards/{dashboardID}/members";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (dashboardID != null) localVarPathParams.Add("dashboardID", this.Configuration.ApiClient.ParameterToString(dashboardID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-        }
-
-        /// <summary>
-        /// List all dashboard members 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of the dashboard</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ResourceMembers</returns>
-        public async System.Threading.Tasks.Task<ResourceMembers> DashboardsDashboardIDMembersGetAsync (string dashboardID, string zapTraceSpan = null)
-        {
-             ApiResponse<ResourceMembers> localVarResponse = await DashboardsDashboardIDMembersGetAsyncWithHttpInfo(dashboardID, zapTraceSpan);
-             return localVarResponse.Data;
-
-        }
-
-        /// <summary>
-        /// List all dashboard members 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of the dashboard</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ApiResponse (ResourceMembers)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<ResourceMembers>> DashboardsDashboardIDMembersGetAsyncWithHttpInfo (string dashboardID, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'dashboardID' is set
-            if (dashboardID == null)
-                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->DashboardsDashboardIDMembersGet");
-
-            var localVarPath = "/api/v2/dashboards/{dashboardID}/members";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (dashboardID != null) localVarPathParams.Add("dashboardID", this.Configuration.ApiClient.ParameterToString(dashboardID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("DashboardsDashboardIDMembersGet", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return new ApiResponse<ResourceMembers>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (ResourceMembers) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(ResourceMembers)));
         }
 
         /// <summary>
@@ -4698,9 +5998,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="addResourceMemberRequestBody">user to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ResourceMember</returns>
-        public ResourceMember DashboardsDashboardIDMembersPost (string dashboardID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
+        public ResourceMember PostDashboardsIDMembers (string dashboardID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
         {
-             ApiResponse<ResourceMember> localVarResponse = DashboardsDashboardIDMembersPostWithHttpInfo(dashboardID, addResourceMemberRequestBody, zapTraceSpan);
+             ApiResponse<ResourceMember> localVarResponse = PostDashboardsIDMembersWithHttpInfo(dashboardID, addResourceMemberRequestBody, zapTraceSpan);
              return localVarResponse.Data;
         }
 
@@ -4712,14 +6012,14 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="addResourceMemberRequestBody">user to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMember</returns>
-        public ApiResponse< ResourceMember > DashboardsDashboardIDMembersPostWithHttpInfo (string dashboardID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
+        public ApiResponse< ResourceMember > PostDashboardsIDMembersWithHttpInfo (string dashboardID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
         {
             // verify the required parameter 'dashboardID' is set
             if (dashboardID == null)
-                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->DashboardsDashboardIDMembersPost");
+                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->PostDashboardsIDMembers");
             // verify the required parameter 'addResourceMemberRequestBody' is set
             if (addResourceMemberRequestBody == null)
-                throw new ApiException(400, "Missing required parameter 'addResourceMemberRequestBody' when calling DashboardsService->DashboardsDashboardIDMembersPost");
+                throw new ApiException(400, "Missing required parameter 'addResourceMemberRequestBody' when calling DashboardsService->PostDashboardsIDMembers");
 
             var localVarPath = "/api/v2/dashboards/{dashboardID}/members";
             var localVarPathParams = new Dictionary<String, String>();
@@ -4765,7 +6065,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("DashboardsDashboardIDMembersPost", localVarResponse);
+                Exception exception = ExceptionFactory("PostDashboardsIDMembers", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -4782,14 +6082,14 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="addResourceMemberRequestBody">user to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMember</returns>
-        public IRestResponse DashboardsDashboardIDMembersPostWithIRestResponse (string dashboardID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
+        public IRestResponse PostDashboardsIDMembersWithIRestResponse (string dashboardID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
         {
             // verify the required parameter 'dashboardID' is set
             if (dashboardID == null)
-                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->DashboardsDashboardIDMembersPost");
+                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->PostDashboardsIDMembers");
             // verify the required parameter 'addResourceMemberRequestBody' is set
             if (addResourceMemberRequestBody == null)
-                throw new ApiException(400, "Missing required parameter 'addResourceMemberRequestBody' when calling DashboardsService->DashboardsDashboardIDMembersPost");
+                throw new ApiException(400, "Missing required parameter 'addResourceMemberRequestBody' when calling DashboardsService->PostDashboardsIDMembers");
 
             var localVarPath = "/api/v2/dashboards/{dashboardID}/members";
             var localVarPathParams = new Dictionary<String, String>();
@@ -4835,7 +6135,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("DashboardsDashboardIDMembersPost", localVarResponse);
+                Exception exception = ExceptionFactory("PostDashboardsIDMembers", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -4850,14 +6150,14 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="addResourceMemberRequestBody">user to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMember</returns>
-        public RestRequest DashboardsDashboardIDMembersPostWithRestRequest (string dashboardID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
+        public RestRequest PostDashboardsIDMembersWithRestRequest (string dashboardID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
         {
             // verify the required parameter 'dashboardID' is set
             if (dashboardID == null)
-                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->DashboardsDashboardIDMembersPost");
+                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->PostDashboardsIDMembers");
             // verify the required parameter 'addResourceMemberRequestBody' is set
             if (addResourceMemberRequestBody == null)
-                throw new ApiException(400, "Missing required parameter 'addResourceMemberRequestBody' when calling DashboardsService->DashboardsDashboardIDMembersPost");
+                throw new ApiException(400, "Missing required parameter 'addResourceMemberRequestBody' when calling DashboardsService->PostDashboardsIDMembers");
 
             var localVarPath = "/api/v2/dashboards/{dashboardID}/members";
             var localVarPathParams = new Dictionary<String, String>();
@@ -4907,9 +6207,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="addResourceMemberRequestBody">user to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ResourceMember</returns>
-        public async System.Threading.Tasks.Task<ResourceMember> DashboardsDashboardIDMembersPostAsync (string dashboardID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ResourceMember> PostDashboardsIDMembersAsync (string dashboardID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
         {
-             ApiResponse<ResourceMember> localVarResponse = await DashboardsDashboardIDMembersPostAsyncWithHttpInfo(dashboardID, addResourceMemberRequestBody, zapTraceSpan);
+             ApiResponse<ResourceMember> localVarResponse = await PostDashboardsIDMembersAsyncWithHttpInfo(dashboardID, addResourceMemberRequestBody, zapTraceSpan);
              return localVarResponse.Data;
 
         }
@@ -4922,14 +6222,14 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="addResourceMemberRequestBody">user to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (ResourceMember)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<ResourceMember>> DashboardsDashboardIDMembersPostAsyncWithHttpInfo (string dashboardID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<ResourceMember>> PostDashboardsIDMembersAsyncWithHttpInfo (string dashboardID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
         {
             // verify the required parameter 'dashboardID' is set
             if (dashboardID == null)
-                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->DashboardsDashboardIDMembersPost");
+                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->PostDashboardsIDMembers");
             // verify the required parameter 'addResourceMemberRequestBody' is set
             if (addResourceMemberRequestBody == null)
-                throw new ApiException(400, "Missing required parameter 'addResourceMemberRequestBody' when calling DashboardsService->DashboardsDashboardIDMembersPost");
+                throw new ApiException(400, "Missing required parameter 'addResourceMemberRequestBody' when calling DashboardsService->PostDashboardsIDMembers");
 
             var localVarPath = "/api/v2/dashboards/{dashboardID}/members";
             var localVarPathParams = new Dictionary<String, String>();
@@ -4975,513 +6275,13 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("DashboardsDashboardIDMembersPost", localVarResponse);
+                Exception exception = ExceptionFactory("PostDashboardsIDMembers", localVarResponse);
                 if (exception != null) throw exception;
             }
 
             return new ApiResponse<ResourceMember>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
                 (ResourceMember) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(ResourceMember)));
-        }
-
-        /// <summary>
-        /// removes a member from an dashboard 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="dashboardID">ID of the dashboard</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns></returns>
-        public void DashboardsDashboardIDMembersUserIDDelete (string userID, string dashboardID, string zapTraceSpan = null)
-        {
-             DashboardsDashboardIDMembersUserIDDeleteWithHttpInfo(userID, dashboardID, zapTraceSpan);
-        }
-
-        /// <summary>
-        /// removes a member from an dashboard 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="dashboardID">ID of the dashboard</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Object(void)</returns>
-        public ApiResponse<Object> DashboardsDashboardIDMembersUserIDDeleteWithHttpInfo (string userID, string dashboardID, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'userID' is set
-            if (userID == null)
-                throw new ApiException(400, "Missing required parameter 'userID' when calling DashboardsService->DashboardsDashboardIDMembersUserIDDelete");
-            // verify the required parameter 'dashboardID' is set
-            if (dashboardID == null)
-                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->DashboardsDashboardIDMembersUserIDDelete");
-
-            var localVarPath = "/api/v2/dashboards/{dashboardID}/members/{userID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (userID != null) localVarPathParams.Add("userID", this.Configuration.ApiClient.ParameterToString(userID)); // path parameter
-            if (dashboardID != null) localVarPathParams.Add("dashboardID", this.Configuration.ApiClient.ParameterToString(dashboardID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("DashboardsDashboardIDMembersUserIDDelete", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return new ApiResponse<Object>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                null);
-        }
-
-        /// <summary>
-        /// removes a member from an dashboard 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="dashboardID">ID of the dashboard</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Object(void)</returns>
-        public IRestResponse DashboardsDashboardIDMembersUserIDDeleteWithIRestResponse (string userID, string dashboardID, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'userID' is set
-            if (userID == null)
-                throw new ApiException(400, "Missing required parameter 'userID' when calling DashboardsService->DashboardsDashboardIDMembersUserIDDelete");
-            // verify the required parameter 'dashboardID' is set
-            if (dashboardID == null)
-                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->DashboardsDashboardIDMembersUserIDDelete");
-
-            var localVarPath = "/api/v2/dashboards/{dashboardID}/members/{userID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (userID != null) localVarPathParams.Add("userID", this.Configuration.ApiClient.ParameterToString(userID)); // path parameter
-            if (dashboardID != null) localVarPathParams.Add("dashboardID", this.Configuration.ApiClient.ParameterToString(dashboardID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("DashboardsDashboardIDMembersUserIDDelete", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return localVarResponse;
-        }
-        
-        /// <summary>
-        /// removes a member from an dashboard 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="dashboardID">ID of the dashboard</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Object(void)</returns>
-        public RestRequest DashboardsDashboardIDMembersUserIDDeleteWithRestRequest (string userID, string dashboardID, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'userID' is set
-            if (userID == null)
-                throw new ApiException(400, "Missing required parameter 'userID' when calling DashboardsService->DashboardsDashboardIDMembersUserIDDelete");
-            // verify the required parameter 'dashboardID' is set
-            if (dashboardID == null)
-                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->DashboardsDashboardIDMembersUserIDDelete");
-
-            var localVarPath = "/api/v2/dashboards/{dashboardID}/members/{userID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (userID != null) localVarPathParams.Add("userID", this.Configuration.ApiClient.ParameterToString(userID)); // path parameter
-            if (dashboardID != null) localVarPathParams.Add("dashboardID", this.Configuration.ApiClient.ParameterToString(dashboardID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
-                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-        }
-
-        /// <summary>
-        /// removes a member from an dashboard 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="dashboardID">ID of the dashboard</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task DashboardsDashboardIDMembersUserIDDeleteAsync (string userID, string dashboardID, string zapTraceSpan = null)
-        {
-             await DashboardsDashboardIDMembersUserIDDeleteAsyncWithHttpInfo(userID, dashboardID, zapTraceSpan);
-
-        }
-
-        /// <summary>
-        /// removes a member from an dashboard 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="dashboardID">ID of the dashboard</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Object>> DashboardsDashboardIDMembersUserIDDeleteAsyncWithHttpInfo (string userID, string dashboardID, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'userID' is set
-            if (userID == null)
-                throw new ApiException(400, "Missing required parameter 'userID' when calling DashboardsService->DashboardsDashboardIDMembersUserIDDelete");
-            // verify the required parameter 'dashboardID' is set
-            if (dashboardID == null)
-                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->DashboardsDashboardIDMembersUserIDDelete");
-
-            var localVarPath = "/api/v2/dashboards/{dashboardID}/members/{userID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (userID != null) localVarPathParams.Add("userID", this.Configuration.ApiClient.ParameterToString(userID)); // path parameter
-            if (dashboardID != null) localVarPathParams.Add("dashboardID", this.Configuration.ApiClient.ParameterToString(dashboardID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("DashboardsDashboardIDMembersUserIDDelete", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return new ApiResponse<Object>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                null);
-        }
-
-        /// <summary>
-        /// List all dashboard owners 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of the dashboard</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ResourceOwners</returns>
-        public ResourceOwners DashboardsDashboardIDOwnersGet (string dashboardID, string zapTraceSpan = null)
-        {
-             ApiResponse<ResourceOwners> localVarResponse = DashboardsDashboardIDOwnersGetWithHttpInfo(dashboardID, zapTraceSpan);
-             return localVarResponse.Data;
-        }
-
-        /// <summary>
-        /// List all dashboard owners 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of the dashboard</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of ResourceOwners</returns>
-        public ApiResponse< ResourceOwners > DashboardsDashboardIDOwnersGetWithHttpInfo (string dashboardID, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'dashboardID' is set
-            if (dashboardID == null)
-                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->DashboardsDashboardIDOwnersGet");
-
-            var localVarPath = "/api/v2/dashboards/{dashboardID}/owners";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (dashboardID != null) localVarPathParams.Add("dashboardID", this.Configuration.ApiClient.ParameterToString(dashboardID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("DashboardsDashboardIDOwnersGet", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return new ApiResponse<ResourceOwners>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (ResourceOwners) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(ResourceOwners)));
-        }
-
-        /// <summary>
-        /// List all dashboard owners 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of the dashboard</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of ResourceOwners</returns>
-        public IRestResponse DashboardsDashboardIDOwnersGetWithIRestResponse (string dashboardID, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'dashboardID' is set
-            if (dashboardID == null)
-                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->DashboardsDashboardIDOwnersGet");
-
-            var localVarPath = "/api/v2/dashboards/{dashboardID}/owners";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (dashboardID != null) localVarPathParams.Add("dashboardID", this.Configuration.ApiClient.ParameterToString(dashboardID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("DashboardsDashboardIDOwnersGet", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return localVarResponse;
-        }
-        
-        /// <summary>
-        /// List all dashboard owners 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of the dashboard</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of ResourceOwners</returns>
-        public RestRequest DashboardsDashboardIDOwnersGetWithRestRequest (string dashboardID, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'dashboardID' is set
-            if (dashboardID == null)
-                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->DashboardsDashboardIDOwnersGet");
-
-            var localVarPath = "/api/v2/dashboards/{dashboardID}/owners";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (dashboardID != null) localVarPathParams.Add("dashboardID", this.Configuration.ApiClient.ParameterToString(dashboardID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-        }
-
-        /// <summary>
-        /// List all dashboard owners 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of the dashboard</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ResourceOwners</returns>
-        public async System.Threading.Tasks.Task<ResourceOwners> DashboardsDashboardIDOwnersGetAsync (string dashboardID, string zapTraceSpan = null)
-        {
-             ApiResponse<ResourceOwners> localVarResponse = await DashboardsDashboardIDOwnersGetAsyncWithHttpInfo(dashboardID, zapTraceSpan);
-             return localVarResponse.Data;
-
-        }
-
-        /// <summary>
-        /// List all dashboard owners 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of the dashboard</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ApiResponse (ResourceOwners)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<ResourceOwners>> DashboardsDashboardIDOwnersGetAsyncWithHttpInfo (string dashboardID, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'dashboardID' is set
-            if (dashboardID == null)
-                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->DashboardsDashboardIDOwnersGet");
-
-            var localVarPath = "/api/v2/dashboards/{dashboardID}/owners";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (dashboardID != null) localVarPathParams.Add("dashboardID", this.Configuration.ApiClient.ParameterToString(dashboardID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("DashboardsDashboardIDOwnersGet", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return new ApiResponse<ResourceOwners>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (ResourceOwners) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(ResourceOwners)));
         }
 
         /// <summary>
@@ -5492,9 +6292,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="addResourceMemberRequestBody">user to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ResourceOwner</returns>
-        public ResourceOwner DashboardsDashboardIDOwnersPost (string dashboardID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
+        public ResourceOwner PostDashboardsIDOwners (string dashboardID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
         {
-             ApiResponse<ResourceOwner> localVarResponse = DashboardsDashboardIDOwnersPostWithHttpInfo(dashboardID, addResourceMemberRequestBody, zapTraceSpan);
+             ApiResponse<ResourceOwner> localVarResponse = PostDashboardsIDOwnersWithHttpInfo(dashboardID, addResourceMemberRequestBody, zapTraceSpan);
              return localVarResponse.Data;
         }
 
@@ -5506,14 +6306,14 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="addResourceMemberRequestBody">user to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwner</returns>
-        public ApiResponse< ResourceOwner > DashboardsDashboardIDOwnersPostWithHttpInfo (string dashboardID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
+        public ApiResponse< ResourceOwner > PostDashboardsIDOwnersWithHttpInfo (string dashboardID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
         {
             // verify the required parameter 'dashboardID' is set
             if (dashboardID == null)
-                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->DashboardsDashboardIDOwnersPost");
+                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->PostDashboardsIDOwners");
             // verify the required parameter 'addResourceMemberRequestBody' is set
             if (addResourceMemberRequestBody == null)
-                throw new ApiException(400, "Missing required parameter 'addResourceMemberRequestBody' when calling DashboardsService->DashboardsDashboardIDOwnersPost");
+                throw new ApiException(400, "Missing required parameter 'addResourceMemberRequestBody' when calling DashboardsService->PostDashboardsIDOwners");
 
             var localVarPath = "/api/v2/dashboards/{dashboardID}/owners";
             var localVarPathParams = new Dictionary<String, String>();
@@ -5559,7 +6359,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("DashboardsDashboardIDOwnersPost", localVarResponse);
+                Exception exception = ExceptionFactory("PostDashboardsIDOwners", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -5576,14 +6376,14 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="addResourceMemberRequestBody">user to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwner</returns>
-        public IRestResponse DashboardsDashboardIDOwnersPostWithIRestResponse (string dashboardID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
+        public IRestResponse PostDashboardsIDOwnersWithIRestResponse (string dashboardID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
         {
             // verify the required parameter 'dashboardID' is set
             if (dashboardID == null)
-                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->DashboardsDashboardIDOwnersPost");
+                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->PostDashboardsIDOwners");
             // verify the required parameter 'addResourceMemberRequestBody' is set
             if (addResourceMemberRequestBody == null)
-                throw new ApiException(400, "Missing required parameter 'addResourceMemberRequestBody' when calling DashboardsService->DashboardsDashboardIDOwnersPost");
+                throw new ApiException(400, "Missing required parameter 'addResourceMemberRequestBody' when calling DashboardsService->PostDashboardsIDOwners");
 
             var localVarPath = "/api/v2/dashboards/{dashboardID}/owners";
             var localVarPathParams = new Dictionary<String, String>();
@@ -5629,7 +6429,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("DashboardsDashboardIDOwnersPost", localVarResponse);
+                Exception exception = ExceptionFactory("PostDashboardsIDOwners", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -5644,14 +6444,14 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="addResourceMemberRequestBody">user to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwner</returns>
-        public RestRequest DashboardsDashboardIDOwnersPostWithRestRequest (string dashboardID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
+        public RestRequest PostDashboardsIDOwnersWithRestRequest (string dashboardID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
         {
             // verify the required parameter 'dashboardID' is set
             if (dashboardID == null)
-                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->DashboardsDashboardIDOwnersPost");
+                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->PostDashboardsIDOwners");
             // verify the required parameter 'addResourceMemberRequestBody' is set
             if (addResourceMemberRequestBody == null)
-                throw new ApiException(400, "Missing required parameter 'addResourceMemberRequestBody' when calling DashboardsService->DashboardsDashboardIDOwnersPost");
+                throw new ApiException(400, "Missing required parameter 'addResourceMemberRequestBody' when calling DashboardsService->PostDashboardsIDOwners");
 
             var localVarPath = "/api/v2/dashboards/{dashboardID}/owners";
             var localVarPathParams = new Dictionary<String, String>();
@@ -5701,9 +6501,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="addResourceMemberRequestBody">user to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ResourceOwner</returns>
-        public async System.Threading.Tasks.Task<ResourceOwner> DashboardsDashboardIDOwnersPostAsync (string dashboardID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ResourceOwner> PostDashboardsIDOwnersAsync (string dashboardID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
         {
-             ApiResponse<ResourceOwner> localVarResponse = await DashboardsDashboardIDOwnersPostAsyncWithHttpInfo(dashboardID, addResourceMemberRequestBody, zapTraceSpan);
+             ApiResponse<ResourceOwner> localVarResponse = await PostDashboardsIDOwnersAsyncWithHttpInfo(dashboardID, addResourceMemberRequestBody, zapTraceSpan);
              return localVarResponse.Data;
 
         }
@@ -5716,14 +6516,14 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="addResourceMemberRequestBody">user to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (ResourceOwner)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<ResourceOwner>> DashboardsDashboardIDOwnersPostAsyncWithHttpInfo (string dashboardID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<ResourceOwner>> PostDashboardsIDOwnersAsyncWithHttpInfo (string dashboardID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
         {
             // verify the required parameter 'dashboardID' is set
             if (dashboardID == null)
-                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->DashboardsDashboardIDOwnersPost");
+                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->PostDashboardsIDOwners");
             // verify the required parameter 'addResourceMemberRequestBody' is set
             if (addResourceMemberRequestBody == null)
-                throw new ApiException(400, "Missing required parameter 'addResourceMemberRequestBody' when calling DashboardsService->DashboardsDashboardIDOwnersPost");
+                throw new ApiException(400, "Missing required parameter 'addResourceMemberRequestBody' when calling DashboardsService->PostDashboardsIDOwners");
 
             var localVarPath = "/api/v2/dashboards/{dashboardID}/owners";
             var localVarPathParams = new Dictionary<String, String>();
@@ -5769,7 +6569,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("DashboardsDashboardIDOwnersPost", localVarResponse);
+                Exception exception = ExceptionFactory("PostDashboardsIDOwners", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -5779,297 +6579,37 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes an owner from a dashboard 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="dashboardID">ID of the dashboard</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns></returns>
-        public void DashboardsDashboardIDOwnersUserIDDelete (string userID, string dashboardID, string zapTraceSpan = null)
-        {
-             DashboardsDashboardIDOwnersUserIDDeleteWithHttpInfo(userID, dashboardID, zapTraceSpan);
-        }
-
-        /// <summary>
-        /// removes an owner from a dashboard 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="dashboardID">ID of the dashboard</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Object(void)</returns>
-        public ApiResponse<Object> DashboardsDashboardIDOwnersUserIDDeleteWithHttpInfo (string userID, string dashboardID, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'userID' is set
-            if (userID == null)
-                throw new ApiException(400, "Missing required parameter 'userID' when calling DashboardsService->DashboardsDashboardIDOwnersUserIDDelete");
-            // verify the required parameter 'dashboardID' is set
-            if (dashboardID == null)
-                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->DashboardsDashboardIDOwnersUserIDDelete");
-
-            var localVarPath = "/api/v2/dashboards/{dashboardID}/owners/{userID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (userID != null) localVarPathParams.Add("userID", this.Configuration.ApiClient.ParameterToString(userID)); // path parameter
-            if (dashboardID != null) localVarPathParams.Add("dashboardID", this.Configuration.ApiClient.ParameterToString(dashboardID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("DashboardsDashboardIDOwnersUserIDDelete", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return new ApiResponse<Object>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                null);
-        }
-
-        /// <summary>
-        /// removes an owner from a dashboard 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="dashboardID">ID of the dashboard</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Object(void)</returns>
-        public IRestResponse DashboardsDashboardIDOwnersUserIDDeleteWithIRestResponse (string userID, string dashboardID, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'userID' is set
-            if (userID == null)
-                throw new ApiException(400, "Missing required parameter 'userID' when calling DashboardsService->DashboardsDashboardIDOwnersUserIDDelete");
-            // verify the required parameter 'dashboardID' is set
-            if (dashboardID == null)
-                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->DashboardsDashboardIDOwnersUserIDDelete");
-
-            var localVarPath = "/api/v2/dashboards/{dashboardID}/owners/{userID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (userID != null) localVarPathParams.Add("userID", this.Configuration.ApiClient.ParameterToString(userID)); // path parameter
-            if (dashboardID != null) localVarPathParams.Add("dashboardID", this.Configuration.ApiClient.ParameterToString(dashboardID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("DashboardsDashboardIDOwnersUserIDDelete", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return localVarResponse;
-        }
-        
-        /// <summary>
-        /// removes an owner from a dashboard 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="dashboardID">ID of the dashboard</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Object(void)</returns>
-        public RestRequest DashboardsDashboardIDOwnersUserIDDeleteWithRestRequest (string userID, string dashboardID, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'userID' is set
-            if (userID == null)
-                throw new ApiException(400, "Missing required parameter 'userID' when calling DashboardsService->DashboardsDashboardIDOwnersUserIDDelete");
-            // verify the required parameter 'dashboardID' is set
-            if (dashboardID == null)
-                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->DashboardsDashboardIDOwnersUserIDDelete");
-
-            var localVarPath = "/api/v2/dashboards/{dashboardID}/owners/{userID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (userID != null) localVarPathParams.Add("userID", this.Configuration.ApiClient.ParameterToString(userID)); // path parameter
-            if (dashboardID != null) localVarPathParams.Add("dashboardID", this.Configuration.ApiClient.ParameterToString(dashboardID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
-                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-        }
-
-        /// <summary>
-        /// removes an owner from a dashboard 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="dashboardID">ID of the dashboard</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task DashboardsDashboardIDOwnersUserIDDeleteAsync (string userID, string dashboardID, string zapTraceSpan = null)
-        {
-             await DashboardsDashboardIDOwnersUserIDDeleteAsyncWithHttpInfo(userID, dashboardID, zapTraceSpan);
-
-        }
-
-        /// <summary>
-        /// removes an owner from a dashboard 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="dashboardID">ID of the dashboard</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Object>> DashboardsDashboardIDOwnersUserIDDeleteAsyncWithHttpInfo (string userID, string dashboardID, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'userID' is set
-            if (userID == null)
-                throw new ApiException(400, "Missing required parameter 'userID' when calling DashboardsService->DashboardsDashboardIDOwnersUserIDDelete");
-            // verify the required parameter 'dashboardID' is set
-            if (dashboardID == null)
-                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->DashboardsDashboardIDOwnersUserIDDelete");
-
-            var localVarPath = "/api/v2/dashboards/{dashboardID}/owners/{userID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (userID != null) localVarPathParams.Add("userID", this.Configuration.ApiClient.ParameterToString(userID)); // path parameter
-            if (dashboardID != null) localVarPathParams.Add("dashboardID", this.Configuration.ApiClient.ParameterToString(dashboardID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("DashboardsDashboardIDOwnersUserIDDelete", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return new ApiResponse<Object>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                null);
-        }
-
-        /// <summary>
-        /// Update a single dashboard 
+        /// Replace a dashboards cells 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="dashboardID">ID of dashboard to update</param>
-        /// <param name="dashboard">patching of a dashboard</param>
+        /// <param name="cell">batch replaces all of a dashboards cells (this is used primarily to update the positional information of all of the cells)</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Dashboard</returns>
-        public Dashboard DashboardsDashboardIDPatch (string dashboardID, Dashboard dashboard, string zapTraceSpan = null)
+        public Dashboard PutDashboardsIDCells (string dashboardID, List<Cell> cell, string zapTraceSpan = null)
         {
-             ApiResponse<Dashboard> localVarResponse = DashboardsDashboardIDPatchWithHttpInfo(dashboardID, dashboard, zapTraceSpan);
+             ApiResponse<Dashboard> localVarResponse = PutDashboardsIDCellsWithHttpInfo(dashboardID, cell, zapTraceSpan);
              return localVarResponse.Data;
         }
 
         /// <summary>
-        /// Update a single dashboard 
+        /// Replace a dashboards cells 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="dashboardID">ID of dashboard to update</param>
-        /// <param name="dashboard">patching of a dashboard</param>
+        /// <param name="cell">batch replaces all of a dashboards cells (this is used primarily to update the positional information of all of the cells)</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Dashboard</returns>
-        public ApiResponse< Dashboard > DashboardsDashboardIDPatchWithHttpInfo (string dashboardID, Dashboard dashboard, string zapTraceSpan = null)
+        public ApiResponse< Dashboard > PutDashboardsIDCellsWithHttpInfo (string dashboardID, List<Cell> cell, string zapTraceSpan = null)
         {
             // verify the required parameter 'dashboardID' is set
             if (dashboardID == null)
-                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->DashboardsDashboardIDPatch");
-            // verify the required parameter 'dashboard' is set
-            if (dashboard == null)
-                throw new ApiException(400, "Missing required parameter 'dashboard' when calling DashboardsService->DashboardsDashboardIDPatch");
+                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->PutDashboardsIDCells");
+            // verify the required parameter 'cell' is set
+            if (cell == null)
+                throw new ApiException(400, "Missing required parameter 'cell' when calling DashboardsService->PutDashboardsIDCells");
 
-            var localVarPath = "/api/v2/dashboards/{dashboardID}";
+            var localVarPath = "/api/v2/dashboards/{dashboardID}/cells";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -6085,13 +6625,13 @@ namespace InfluxDB.Client.Api.Service
 
             if (dashboardID != null) localVarPathParams.Add("dashboardID", this.Configuration.ApiClient.ParameterToString(dashboardID)); // path parameter
             if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (dashboard != null && dashboard.GetType() != typeof(byte[]))
+            if (cell != null && cell.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(dashboard); // http body (model) parameter
+                localVarPostBody = this.Configuration.ApiClient.Serialize(cell); // http body (model) parameter
             }
             else
             {
-                localVarPostBody = dashboard; // byte array
+                localVarPostBody = cell; // byte array
             }
 
             // to determine the Accept header
@@ -6106,14 +6646,14 @@ namespace InfluxDB.Client.Api.Service
 
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                Method.PUT, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("DashboardsDashboardIDPatch", localVarResponse);
+                Exception exception = ExceptionFactory("PutDashboardsIDCells", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -6123,23 +6663,23 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Update a single dashboard 
+        /// Replace a dashboards cells 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="dashboardID">ID of dashboard to update</param>
-        /// <param name="dashboard">patching of a dashboard</param>
+        /// <param name="cell">batch replaces all of a dashboards cells (this is used primarily to update the positional information of all of the cells)</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Dashboard</returns>
-        public IRestResponse DashboardsDashboardIDPatchWithIRestResponse (string dashboardID, Dashboard dashboard, string zapTraceSpan = null)
+        public IRestResponse PutDashboardsIDCellsWithIRestResponse (string dashboardID, List<Cell> cell, string zapTraceSpan = null)
         {
             // verify the required parameter 'dashboardID' is set
             if (dashboardID == null)
-                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->DashboardsDashboardIDPatch");
-            // verify the required parameter 'dashboard' is set
-            if (dashboard == null)
-                throw new ApiException(400, "Missing required parameter 'dashboard' when calling DashboardsService->DashboardsDashboardIDPatch");
+                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->PutDashboardsIDCells");
+            // verify the required parameter 'cell' is set
+            if (cell == null)
+                throw new ApiException(400, "Missing required parameter 'cell' when calling DashboardsService->PutDashboardsIDCells");
 
-            var localVarPath = "/api/v2/dashboards/{dashboardID}";
+            var localVarPath = "/api/v2/dashboards/{dashboardID}/cells";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -6155,13 +6695,13 @@ namespace InfluxDB.Client.Api.Service
 
             if (dashboardID != null) localVarPathParams.Add("dashboardID", this.Configuration.ApiClient.ParameterToString(dashboardID)); // path parameter
             if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (dashboard != null && dashboard.GetType() != typeof(byte[]))
+            if (cell != null && cell.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(dashboard); // http body (model) parameter
+                localVarPostBody = this.Configuration.ApiClient.Serialize(cell); // http body (model) parameter
             }
             else
             {
-                localVarPostBody = dashboard; // byte array
+                localVarPostBody = cell; // byte array
             }
 
             // to determine the Accept header
@@ -6176,14 +6716,14 @@ namespace InfluxDB.Client.Api.Service
 
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                Method.PUT, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("DashboardsDashboardIDPatch", localVarResponse);
+                Exception exception = ExceptionFactory("PutDashboardsIDCells", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -6191,23 +6731,23 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// Update a single dashboard 
+        /// Replace a dashboards cells 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="dashboardID">ID of dashboard to update</param>
-        /// <param name="dashboard">patching of a dashboard</param>
+        /// <param name="cell">batch replaces all of a dashboards cells (this is used primarily to update the positional information of all of the cells)</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Dashboard</returns>
-        public RestRequest DashboardsDashboardIDPatchWithRestRequest (string dashboardID, Dashboard dashboard, string zapTraceSpan = null)
+        public RestRequest PutDashboardsIDCellsWithRestRequest (string dashboardID, List<Cell> cell, string zapTraceSpan = null)
         {
             // verify the required parameter 'dashboardID' is set
             if (dashboardID == null)
-                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->DashboardsDashboardIDPatch");
-            // verify the required parameter 'dashboard' is set
-            if (dashboard == null)
-                throw new ApiException(400, "Missing required parameter 'dashboard' when calling DashboardsService->DashboardsDashboardIDPatch");
+                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->PutDashboardsIDCells");
+            // verify the required parameter 'cell' is set
+            if (cell == null)
+                throw new ApiException(400, "Missing required parameter 'cell' when calling DashboardsService->PutDashboardsIDCells");
 
-            var localVarPath = "/api/v2/dashboards/{dashboardID}";
+            var localVarPath = "/api/v2/dashboards/{dashboardID}/cells";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -6223,13 +6763,13 @@ namespace InfluxDB.Client.Api.Service
 
             if (dashboardID != null) localVarPathParams.Add("dashboardID", this.Configuration.ApiClient.ParameterToString(dashboardID)); // path parameter
             if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (dashboard != null && dashboard.GetType() != typeof(byte[]))
+            if (cell != null && cell.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(dashboard); // http body (model) parameter
+                localVarPostBody = this.Configuration.ApiClient.Serialize(cell); // http body (model) parameter
             }
             else
             {
-                localVarPostBody = dashboard; // byte array
+                localVarPostBody = cell; // byte array
             }
 
             // to determine the Accept header
@@ -6243,43 +6783,43 @@ namespace InfluxDB.Client.Api.Service
 
 
             return this.Configuration.ApiClient.PrepareRequest(localVarPath,
-                Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                Method.PUT, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
         }
 
         /// <summary>
-        /// Update a single dashboard 
+        /// Replace a dashboards cells 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="dashboardID">ID of dashboard to update</param>
-        /// <param name="dashboard">patching of a dashboard</param>
+        /// <param name="cell">batch replaces all of a dashboards cells (this is used primarily to update the positional information of all of the cells)</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of Dashboard</returns>
-        public async System.Threading.Tasks.Task<Dashboard> DashboardsDashboardIDPatchAsync (string dashboardID, Dashboard dashboard, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<Dashboard> PutDashboardsIDCellsAsync (string dashboardID, List<Cell> cell, string zapTraceSpan = null)
         {
-             ApiResponse<Dashboard> localVarResponse = await DashboardsDashboardIDPatchAsyncWithHttpInfo(dashboardID, dashboard, zapTraceSpan);
+             ApiResponse<Dashboard> localVarResponse = await PutDashboardsIDCellsAsyncWithHttpInfo(dashboardID, cell, zapTraceSpan);
              return localVarResponse.Data;
 
         }
 
         /// <summary>
-        /// Update a single dashboard 
+        /// Replace a dashboards cells 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="dashboardID">ID of dashboard to update</param>
-        /// <param name="dashboard">patching of a dashboard</param>
+        /// <param name="cell">batch replaces all of a dashboards cells (this is used primarily to update the positional information of all of the cells)</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (Dashboard)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Dashboard>> DashboardsDashboardIDPatchAsyncWithHttpInfo (string dashboardID, Dashboard dashboard, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<Dashboard>> PutDashboardsIDCellsAsyncWithHttpInfo (string dashboardID, List<Cell> cell, string zapTraceSpan = null)
         {
             // verify the required parameter 'dashboardID' is set
             if (dashboardID == null)
-                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->DashboardsDashboardIDPatch");
-            // verify the required parameter 'dashboard' is set
-            if (dashboard == null)
-                throw new ApiException(400, "Missing required parameter 'dashboard' when calling DashboardsService->DashboardsDashboardIDPatch");
+                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling DashboardsService->PutDashboardsIDCells");
+            // verify the required parameter 'cell' is set
+            if (cell == null)
+                throw new ApiException(400, "Missing required parameter 'cell' when calling DashboardsService->PutDashboardsIDCells");
 
-            var localVarPath = "/api/v2/dashboards/{dashboardID}";
+            var localVarPath = "/api/v2/dashboards/{dashboardID}/cells";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -6295,13 +6835,13 @@ namespace InfluxDB.Client.Api.Service
 
             if (dashboardID != null) localVarPathParams.Add("dashboardID", this.Configuration.ApiClient.ParameterToString(dashboardID)); // path parameter
             if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (dashboard != null && dashboard.GetType() != typeof(byte[]))
+            if (cell != null && cell.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(dashboard); // http body (model) parameter
+                localVarPostBody = this.Configuration.ApiClient.Serialize(cell); // http body (model) parameter
             }
             else
             {
-                localVarPostBody = dashboard; // byte array
+                localVarPostBody = cell; // byte array
             }
 
             // to determine the Accept header
@@ -6316,554 +6856,14 @@ namespace InfluxDB.Client.Api.Service
 
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                Method.PUT, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("DashboardsDashboardIDPatch", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return new ApiResponse<Dashboard>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (Dashboard) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Dashboard)));
-        }
-
-        /// <summary>
-        /// Get all dashboards 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="owner">specifies the owner id to return resources for (optional)</param>
-        /// <param name="sortBy">specifies the owner id to return resources for (optional)</param>
-        /// <param name="id">ID list of dashboards to return. If both this and owner are specified, only ids is used. (optional)</param>
-        /// <param name="orgID">specifies the organization id of the resource (optional)</param>
-        /// <param name="org">specifies the organization name of the resource (optional)</param>
-        /// <returns>Dashboards</returns>
-        public Dashboards DashboardsGet (string zapTraceSpan = null, string owner = null, string sortBy = null, List<string> id = null, string orgID = null, string org = null)
-        {
-             ApiResponse<Dashboards> localVarResponse = DashboardsGetWithHttpInfo(zapTraceSpan, owner, sortBy, id, orgID, org);
-             return localVarResponse.Data;
-        }
-
-        /// <summary>
-        /// Get all dashboards 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="owner">specifies the owner id to return resources for (optional)</param>
-        /// <param name="sortBy">specifies the owner id to return resources for (optional)</param>
-        /// <param name="id">ID list of dashboards to return. If both this and owner are specified, only ids is used. (optional)</param>
-        /// <param name="orgID">specifies the organization id of the resource (optional)</param>
-        /// <param name="org">specifies the organization name of the resource (optional)</param>
-        /// <returns>ApiResponse of Dashboards</returns>
-        public ApiResponse< Dashboards > DashboardsGetWithHttpInfo (string zapTraceSpan = null, string owner = null, string sortBy = null, List<string> id = null, string orgID = null, string org = null)
-        {
-
-            var localVarPath = "/api/v2/dashboards";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (owner != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "owner", owner)); // query parameter
-            if (sortBy != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "sortBy", sortBy)); // query parameter
-            if (id != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("multi", "id", id)); // query parameter
-            if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
-            if (org != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("DashboardsGet", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return new ApiResponse<Dashboards>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (Dashboards) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Dashboards)));
-        }
-
-        /// <summary>
-        /// Get all dashboards 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="owner">specifies the owner id to return resources for (optional)</param>
-        /// <param name="sortBy">specifies the owner id to return resources for (optional)</param>
-        /// <param name="id">ID list of dashboards to return. If both this and owner are specified, only ids is used. (optional)</param>
-        /// <param name="orgID">specifies the organization id of the resource (optional)</param>
-        /// <param name="org">specifies the organization name of the resource (optional)</param>
-        /// <returns>ApiResponse of Dashboards</returns>
-        public IRestResponse DashboardsGetWithIRestResponse (string zapTraceSpan = null, string owner = null, string sortBy = null, List<string> id = null, string orgID = null, string org = null)
-        {
-
-            var localVarPath = "/api/v2/dashboards";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (owner != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "owner", owner)); // query parameter
-            if (sortBy != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "sortBy", sortBy)); // query parameter
-            if (id != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("multi", "id", id)); // query parameter
-            if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
-            if (org != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("DashboardsGet", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return localVarResponse;
-        }
-        
-        /// <summary>
-        /// Get all dashboards 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="owner">specifies the owner id to return resources for (optional)</param>
-        /// <param name="sortBy">specifies the owner id to return resources for (optional)</param>
-        /// <param name="id">ID list of dashboards to return. If both this and owner are specified, only ids is used. (optional)</param>
-        /// <param name="orgID">specifies the organization id of the resource (optional)</param>
-        /// <param name="org">specifies the organization name of the resource (optional)</param>
-        /// <returns>ApiResponse of Dashboards</returns>
-        public RestRequest DashboardsGetWithRestRequest (string zapTraceSpan = null, string owner = null, string sortBy = null, List<string> id = null, string orgID = null, string org = null)
-        {
-
-            var localVarPath = "/api/v2/dashboards";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (owner != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "owner", owner)); // query parameter
-            if (sortBy != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "sortBy", sortBy)); // query parameter
-            if (id != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("multi", "id", id)); // query parameter
-            if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
-            if (org != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-        }
-
-        /// <summary>
-        /// Get all dashboards 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="owner">specifies the owner id to return resources for (optional)</param>
-        /// <param name="sortBy">specifies the owner id to return resources for (optional)</param>
-        /// <param name="id">ID list of dashboards to return. If both this and owner are specified, only ids is used. (optional)</param>
-        /// <param name="orgID">specifies the organization id of the resource (optional)</param>
-        /// <param name="org">specifies the organization name of the resource (optional)</param>
-        /// <returns>Task of Dashboards</returns>
-        public async System.Threading.Tasks.Task<Dashboards> DashboardsGetAsync (string zapTraceSpan = null, string owner = null, string sortBy = null, List<string> id = null, string orgID = null, string org = null)
-        {
-             ApiResponse<Dashboards> localVarResponse = await DashboardsGetAsyncWithHttpInfo(zapTraceSpan, owner, sortBy, id, orgID, org);
-             return localVarResponse.Data;
-
-        }
-
-        /// <summary>
-        /// Get all dashboards 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="owner">specifies the owner id to return resources for (optional)</param>
-        /// <param name="sortBy">specifies the owner id to return resources for (optional)</param>
-        /// <param name="id">ID list of dashboards to return. If both this and owner are specified, only ids is used. (optional)</param>
-        /// <param name="orgID">specifies the organization id of the resource (optional)</param>
-        /// <param name="org">specifies the organization name of the resource (optional)</param>
-        /// <returns>Task of ApiResponse (Dashboards)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Dashboards>> DashboardsGetAsyncWithHttpInfo (string zapTraceSpan = null, string owner = null, string sortBy = null, List<string> id = null, string orgID = null, string org = null)
-        {
-
-            var localVarPath = "/api/v2/dashboards";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (owner != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "owner", owner)); // query parameter
-            if (sortBy != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "sortBy", sortBy)); // query parameter
-            if (id != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("multi", "id", id)); // query parameter
-            if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
-            if (org != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("DashboardsGet", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return new ApiResponse<Dashboards>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (Dashboards) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Dashboards)));
-        }
-
-        /// <summary>
-        /// Create a dashboard 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="createDashboardRequest">dashboard to create</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Dashboard</returns>
-        public Dashboard DashboardsPost (CreateDashboardRequest createDashboardRequest, string zapTraceSpan = null)
-        {
-             ApiResponse<Dashboard> localVarResponse = DashboardsPostWithHttpInfo(createDashboardRequest, zapTraceSpan);
-             return localVarResponse.Data;
-        }
-
-        /// <summary>
-        /// Create a dashboard 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="createDashboardRequest">dashboard to create</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Dashboard</returns>
-        public ApiResponse< Dashboard > DashboardsPostWithHttpInfo (CreateDashboardRequest createDashboardRequest, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'createDashboardRequest' is set
-            if (createDashboardRequest == null)
-                throw new ApiException(400, "Missing required parameter 'createDashboardRequest' when calling DashboardsService->DashboardsPost");
-
-            var localVarPath = "/api/v2/dashboards";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-                "application/json"
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (createDashboardRequest != null && createDashboardRequest.GetType() != typeof(byte[]))
-            {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(createDashboardRequest); // http body (model) parameter
-            }
-            else
-            {
-                localVarPostBody = createDashboardRequest; // byte array
-            }
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("DashboardsPost", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return new ApiResponse<Dashboard>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (Dashboard) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Dashboard)));
-        }
-
-        /// <summary>
-        /// Create a dashboard 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="createDashboardRequest">dashboard to create</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Dashboard</returns>
-        public IRestResponse DashboardsPostWithIRestResponse (CreateDashboardRequest createDashboardRequest, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'createDashboardRequest' is set
-            if (createDashboardRequest == null)
-                throw new ApiException(400, "Missing required parameter 'createDashboardRequest' when calling DashboardsService->DashboardsPost");
-
-            var localVarPath = "/api/v2/dashboards";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-                "application/json"
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (createDashboardRequest != null && createDashboardRequest.GetType() != typeof(byte[]))
-            {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(createDashboardRequest); // http body (model) parameter
-            }
-            else
-            {
-                localVarPostBody = createDashboardRequest; // byte array
-            }
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("DashboardsPost", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return localVarResponse;
-        }
-        
-        /// <summary>
-        /// Create a dashboard 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="createDashboardRequest">dashboard to create</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Dashboard</returns>
-        public RestRequest DashboardsPostWithRestRequest (CreateDashboardRequest createDashboardRequest, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'createDashboardRequest' is set
-            if (createDashboardRequest == null)
-                throw new ApiException(400, "Missing required parameter 'createDashboardRequest' when calling DashboardsService->DashboardsPost");
-
-            var localVarPath = "/api/v2/dashboards";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-                "application/json"
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (createDashboardRequest != null && createDashboardRequest.GetType() != typeof(byte[]))
-            {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(createDashboardRequest); // http body (model) parameter
-            }
-            else
-            {
-                localVarPostBody = createDashboardRequest; // byte array
-            }
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
-                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-        }
-
-        /// <summary>
-        /// Create a dashboard 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="createDashboardRequest">dashboard to create</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of Dashboard</returns>
-        public async System.Threading.Tasks.Task<Dashboard> DashboardsPostAsync (CreateDashboardRequest createDashboardRequest, string zapTraceSpan = null)
-        {
-             ApiResponse<Dashboard> localVarResponse = await DashboardsPostAsyncWithHttpInfo(createDashboardRequest, zapTraceSpan);
-             return localVarResponse.Data;
-
-        }
-
-        /// <summary>
-        /// Create a dashboard 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="createDashboardRequest">dashboard to create</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ApiResponse (Dashboard)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Dashboard>> DashboardsPostAsyncWithHttpInfo (CreateDashboardRequest createDashboardRequest, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'createDashboardRequest' is set
-            if (createDashboardRequest == null)
-                throw new ApiException(400, "Missing required parameter 'createDashboardRequest' when calling DashboardsService->DashboardsPost");
-
-            var localVarPath = "/api/v2/dashboards";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-                "application/json"
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (createDashboardRequest != null && createDashboardRequest.GetType() != typeof(byte[]))
-            {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(createDashboardRequest); // http body (model) parameter
-            }
-            else
-            {
-                localVarPostBody = createDashboardRequest; // byte array
-            }
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("DashboardsPost", localVarResponse);
+                Exception exception = ExceptionFactory("PutDashboardsIDCells", localVarResponse);
                 if (exception != null) throw exception;
             }
 

@@ -33,7 +33,7 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Ready</returns>
-        Ready ReadyGet (string zapTraceSpan = null);
+        Ready GetReady (string zapTraceSpan = null);
 
         /// <summary>
         /// Get the readiness of a instance at startup. Allow us to confirm the instance is prepared to accept requests.
@@ -44,7 +44,7 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Ready</returns>
-        ApiResponse<Ready> ReadyGetWithHttpInfo (string zapTraceSpan = null);
+        ApiResponse<Ready> GetReadyWithHttpInfo (string zapTraceSpan = null);
         #endregion Synchronous Operations
         #region Asynchronous Operations
         /// <summary>
@@ -56,7 +56,7 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of Ready</returns>
-        System.Threading.Tasks.Task<Ready> ReadyGetAsync (string zapTraceSpan = null);
+        System.Threading.Tasks.Task<Ready> GetReadyAsync (string zapTraceSpan = null);
 
         /// <summary>
         /// Get the readiness of a instance at startup. Allow us to confirm the instance is prepared to accept requests.
@@ -67,7 +67,7 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (Ready)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Ready>> ReadyGetAsyncWithHttpInfo (string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<Ready>> GetReadyAsyncWithHttpInfo (string zapTraceSpan = null);
         #endregion Asynchronous Operations
     }
 
@@ -174,9 +174,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Ready</returns>
-        public Ready ReadyGet (string zapTraceSpan = null)
+        public Ready GetReady (string zapTraceSpan = null)
         {
-             ApiResponse<Ready> localVarResponse = ReadyGetWithHttpInfo(zapTraceSpan);
+             ApiResponse<Ready> localVarResponse = GetReadyWithHttpInfo(zapTraceSpan);
              return localVarResponse.Data;
         }
 
@@ -186,7 +186,7 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Ready</returns>
-        public ApiResponse< Ready > ReadyGetWithHttpInfo (string zapTraceSpan = null)
+        public ApiResponse< Ready > GetReadyWithHttpInfo (string zapTraceSpan = null)
         {
 
             var localVarPath = "/ready";
@@ -223,7 +223,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("ReadyGet", localVarResponse);
+                Exception exception = ExceptionFactory("GetReady", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -238,7 +238,7 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Ready</returns>
-        public IRestResponse ReadyGetWithIRestResponse (string zapTraceSpan = null)
+        public IRestResponse GetReadyWithIRestResponse (string zapTraceSpan = null)
         {
 
             var localVarPath = "/ready";
@@ -275,7 +275,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("ReadyGet", localVarResponse);
+                Exception exception = ExceptionFactory("GetReady", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -288,7 +288,7 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Ready</returns>
-        public RestRequest ReadyGetWithRestRequest (string zapTraceSpan = null)
+        public RestRequest GetReadyWithRestRequest (string zapTraceSpan = null)
         {
 
             var localVarPath = "/ready";
@@ -327,9 +327,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of Ready</returns>
-        public async System.Threading.Tasks.Task<Ready> ReadyGetAsync (string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<Ready> GetReadyAsync (string zapTraceSpan = null)
         {
-             ApiResponse<Ready> localVarResponse = await ReadyGetAsyncWithHttpInfo(zapTraceSpan);
+             ApiResponse<Ready> localVarResponse = await GetReadyAsyncWithHttpInfo(zapTraceSpan);
              return localVarResponse.Data;
 
         }
@@ -340,7 +340,7 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (Ready)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Ready>> ReadyGetAsyncWithHttpInfo (string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<Ready>> GetReadyAsyncWithHttpInfo (string zapTraceSpan = null)
         {
 
             var localVarPath = "/ready";
@@ -377,7 +377,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("ReadyGet", localVarResponse);
+                Exception exception = ExceptionFactory("GetReady", localVarResponse);
                 if (exception != null) throw exception;
             }
 

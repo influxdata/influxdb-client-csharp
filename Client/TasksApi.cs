@@ -58,7 +58,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNotNull(taskCreateRequest, nameof(taskCreateRequest));
 
-            return _service.TasksPost(taskCreateRequest);
+            return _service.PostTasks(taskCreateRequest);
         }
 
         /// <summary>
@@ -181,7 +181,7 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(taskId, nameof(taskId));
             Arguments.CheckNotNull(request, nameof(request));
 
-            return _service.TasksTaskIDPatch(taskId, request);
+            return _service.PatchTasksID(taskId, request);
         }
 
         /// <summary>
@@ -193,7 +193,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNotNull(taskId, nameof(taskId));
 
-            _service.TasksTaskIDDelete(taskId);
+            _service.DeleteTasksID(taskId);
         }
 
         /// <summary>
@@ -252,7 +252,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(taskId, nameof(taskId));
 
-            return _service.TasksTaskIDGet(taskId);
+            return _service.GetTasksID(taskId);
         }
 
         /// <summary>
@@ -309,7 +309,7 @@ namespace InfluxDB.Client
         /// <returns>A list of tasks</returns>
         public List<Task> FindTasks(string afterId = null, string userId = null, string orgId = null)
         {
-            return _service.TasksGet(null, afterId, userId, null, orgId)._Tasks;
+            return _service.GetTasks(null, afterId, userId, null, orgId)._Tasks;
         }
 
         /// <summary>
@@ -333,7 +333,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(taskId, nameof(taskId));
 
-            return _service.TasksTaskIDMembersGet(taskId).Users;
+            return _service.GetTasksIDMembers(taskId).Users;
         }
 
         /// <summary>
@@ -363,7 +363,7 @@ namespace InfluxDB.Client
 
             var user = new User(memberId);
 
-            return _service.TasksTaskIDMembersPost(taskId, new AddResourceMemberRequestBody(memberId));
+            return _service.PostTasksIDMembers(taskId, new AddResourceMemberRequestBody(memberId));
         }
 
         /// <summary>
@@ -391,7 +391,7 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(taskId, nameof(taskId));
             Arguments.CheckNonEmptyString(memberId, nameof(memberId));
 
-            _service.TasksTaskIDMembersUserIDDelete(memberId, taskId);
+            _service.DeleteTasksIDMembersID(memberId, taskId);
         }
 
         /// <summary>
@@ -415,7 +415,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(taskId, nameof(taskId));
 
-            return _service.TasksTaskIDOwnersGet(taskId).Users;
+            return _service.GetTasksIDOwners(taskId).Users;
         }
 
         /// <summary>
@@ -443,7 +443,7 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(taskId, nameof(taskId));
             Arguments.CheckNonEmptyString(ownerId, nameof(ownerId));
 
-            return _service.TasksTaskIDOwnersPost(taskId, new AddResourceMemberRequestBody(ownerId));
+            return _service.PostTasksIDOwners(taskId, new AddResourceMemberRequestBody(ownerId));
         }
 
         /// <summary>
@@ -471,7 +471,7 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(taskId, nameof(taskId));
             Arguments.CheckNonEmptyString(ownerId, nameof(ownerId));
 
-            _service.TasksTaskIDOwnersUserIDDelete(ownerId, taskId);
+            _service.DeleteTasksIDOwnersID(ownerId, taskId);
         }
 
         /// <summary>
@@ -495,7 +495,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(taskId, nameof(taskId));
 
-            return _service.TasksTaskIDLogsGet(taskId).Events;
+            return _service.GetTasksIDLogs(taskId).Events;
         }
 
         /// <summary>
@@ -556,7 +556,7 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(taskId, nameof(taskId));
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
 
-            return _service.TasksTaskIDRunsGet(taskId, null, null, limit, afterTime, beforeTime)._Runs;
+            return _service.GetTasksIDRuns(taskId, null, null, limit, afterTime, beforeTime)._Runs;
         }
 
         /// <summary>
@@ -570,7 +570,7 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(taskId, nameof(taskId));
             Arguments.CheckNonEmptyString(runId, nameof(runId));
 
-            return _service.TasksTaskIDRunsRunIDGet(taskId, runId);
+            return _service.GetTasksIDRunsID(taskId, runId);
         }
 
         /// <summary>
@@ -596,7 +596,7 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(taskId, nameof(taskId));
             Arguments.CheckNonEmptyString(runId, nameof(runId));
 
-            return _service.TasksTaskIDRunsRunIDRetryPost(taskId, runId);
+            return _service.PostTasksIDRunsIDRetry(taskId, runId);
         }
 
         /// <summary>
@@ -649,7 +649,7 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(runId, nameof(runId));
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
 
-            return _service.TasksTaskIDRunsRunIDLogsGet(taskId, runId).Events;
+            return _service.GetTasksIDRunsIDLogs(taskId, runId).Events;
         }
 
         /// <summary>
@@ -673,7 +673,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(taskId, nameof(taskId));
 
-            return _service.TasksTaskIDLabelsGet(taskId).Labels;
+            return _service.GetTasksIDLabels(taskId).Labels;
         }
 
         /// <summary>
@@ -703,7 +703,7 @@ namespace InfluxDB.Client
 
             var mapping = new LabelMapping(labelId);
             
-            return _service.TasksTaskIDLabelsPost(taskId, mapping).Label;
+            return _service.PostTasksIDLabels(taskId, mapping).Label;
         }
 
         /// <summary>
@@ -731,7 +731,7 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(taskId, nameof(taskId));
             Arguments.CheckNonEmptyString(labelId, nameof(labelId));
 
-            _service.TasksTaskIDLabelsLabelIDDelete(taskId, labelId);
+            _service.DeleteTasksIDLabelsID(taskId, labelId);
         }
 
         private Task CreateTask(string name, string flux, string every, string cron, string orgId)

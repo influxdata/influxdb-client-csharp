@@ -36,7 +36,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
         /// <returns>OperationLogs</returns>
-        OperationLogs BucketsBucketIDLogsGet (string bucketID, string zapTraceSpan = null, int? offset = null, int? limit = null);
+        OperationLogs GetBucketsIDLogs (string bucketID, string zapTraceSpan = null, int? offset = null, int? limit = null);
 
         /// <summary>
         /// Retrieve operation logs for a bucket
@@ -50,7 +50,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
         /// <returns>ApiResponse of OperationLogs</returns>
-        ApiResponse<OperationLogs> BucketsBucketIDLogsGetWithHttpInfo (string bucketID, string zapTraceSpan = null, int? offset = null, int? limit = null);
+        ApiResponse<OperationLogs> GetBucketsIDLogsWithHttpInfo (string bucketID, string zapTraceSpan = null, int? offset = null, int? limit = null);
         /// <summary>
         /// Retrieve operation logs for a dashboard
         /// </summary>
@@ -63,7 +63,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
         /// <returns>OperationLogs</returns>
-        OperationLogs DashboardsDashboardIDLogsGet (string dashboardID, string zapTraceSpan = null, int? offset = null, int? limit = null);
+        OperationLogs GetDashboardsIDLogs (string dashboardID, string zapTraceSpan = null, int? offset = null, int? limit = null);
 
         /// <summary>
         /// Retrieve operation logs for a dashboard
@@ -77,7 +77,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
         /// <returns>ApiResponse of OperationLogs</returns>
-        ApiResponse<OperationLogs> DashboardsDashboardIDLogsGetWithHttpInfo (string dashboardID, string zapTraceSpan = null, int? offset = null, int? limit = null);
+        ApiResponse<OperationLogs> GetDashboardsIDLogsWithHttpInfo (string dashboardID, string zapTraceSpan = null, int? offset = null, int? limit = null);
         /// <summary>
         /// Retrieve operation logs for an organization
         /// </summary>
@@ -90,7 +90,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
         /// <returns>OperationLogs</returns>
-        OperationLogs OrgsOrgIDLogsGet (string orgID, string zapTraceSpan = null, int? offset = null, int? limit = null);
+        OperationLogs GetOrgsIDLogs (string orgID, string zapTraceSpan = null, int? offset = null, int? limit = null);
 
         /// <summary>
         /// Retrieve operation logs for an organization
@@ -104,7 +104,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
         /// <returns>ApiResponse of OperationLogs</returns>
-        ApiResponse<OperationLogs> OrgsOrgIDLogsGetWithHttpInfo (string orgID, string zapTraceSpan = null, int? offset = null, int? limit = null);
+        ApiResponse<OperationLogs> GetOrgsIDLogsWithHttpInfo (string orgID, string zapTraceSpan = null, int? offset = null, int? limit = null);
         /// <summary>
         /// Retrieve operation logs for a user
         /// </summary>
@@ -117,7 +117,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
         /// <returns>OperationLogs</returns>
-        OperationLogs UsersUserIDLogsGet (string userID, string zapTraceSpan = null, int? offset = null, int? limit = null);
+        OperationLogs GetUsersIDLogs (string userID, string zapTraceSpan = null, int? offset = null, int? limit = null);
 
         /// <summary>
         /// Retrieve operation logs for a user
@@ -131,7 +131,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
         /// <returns>ApiResponse of OperationLogs</returns>
-        ApiResponse<OperationLogs> UsersUserIDLogsGetWithHttpInfo (string userID, string zapTraceSpan = null, int? offset = null, int? limit = null);
+        ApiResponse<OperationLogs> GetUsersIDLogsWithHttpInfo (string userID, string zapTraceSpan = null, int? offset = null, int? limit = null);
         #endregion Synchronous Operations
         #region Asynchronous Operations
         /// <summary>
@@ -146,7 +146,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
         /// <returns>Task of OperationLogs</returns>
-        System.Threading.Tasks.Task<OperationLogs> BucketsBucketIDLogsGetAsync (string bucketID, string zapTraceSpan = null, int? offset = null, int? limit = null);
+        System.Threading.Tasks.Task<OperationLogs> GetBucketsIDLogsAsync (string bucketID, string zapTraceSpan = null, int? offset = null, int? limit = null);
 
         /// <summary>
         /// Retrieve operation logs for a bucket
@@ -160,7 +160,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
         /// <returns>Task of ApiResponse (OperationLogs)</returns>
-        System.Threading.Tasks.Task<ApiResponse<OperationLogs>> BucketsBucketIDLogsGetAsyncWithHttpInfo (string bucketID, string zapTraceSpan = null, int? offset = null, int? limit = null);
+        System.Threading.Tasks.Task<ApiResponse<OperationLogs>> GetBucketsIDLogsAsyncWithHttpInfo (string bucketID, string zapTraceSpan = null, int? offset = null, int? limit = null);
         /// <summary>
         /// Retrieve operation logs for a dashboard
         /// </summary>
@@ -173,7 +173,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
         /// <returns>Task of OperationLogs</returns>
-        System.Threading.Tasks.Task<OperationLogs> DashboardsDashboardIDLogsGetAsync (string dashboardID, string zapTraceSpan = null, int? offset = null, int? limit = null);
+        System.Threading.Tasks.Task<OperationLogs> GetDashboardsIDLogsAsync (string dashboardID, string zapTraceSpan = null, int? offset = null, int? limit = null);
 
         /// <summary>
         /// Retrieve operation logs for a dashboard
@@ -187,7 +187,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
         /// <returns>Task of ApiResponse (OperationLogs)</returns>
-        System.Threading.Tasks.Task<ApiResponse<OperationLogs>> DashboardsDashboardIDLogsGetAsyncWithHttpInfo (string dashboardID, string zapTraceSpan = null, int? offset = null, int? limit = null);
+        System.Threading.Tasks.Task<ApiResponse<OperationLogs>> GetDashboardsIDLogsAsyncWithHttpInfo (string dashboardID, string zapTraceSpan = null, int? offset = null, int? limit = null);
         /// <summary>
         /// Retrieve operation logs for an organization
         /// </summary>
@@ -200,7 +200,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
         /// <returns>Task of OperationLogs</returns>
-        System.Threading.Tasks.Task<OperationLogs> OrgsOrgIDLogsGetAsync (string orgID, string zapTraceSpan = null, int? offset = null, int? limit = null);
+        System.Threading.Tasks.Task<OperationLogs> GetOrgsIDLogsAsync (string orgID, string zapTraceSpan = null, int? offset = null, int? limit = null);
 
         /// <summary>
         /// Retrieve operation logs for an organization
@@ -214,7 +214,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
         /// <returns>Task of ApiResponse (OperationLogs)</returns>
-        System.Threading.Tasks.Task<ApiResponse<OperationLogs>> OrgsOrgIDLogsGetAsyncWithHttpInfo (string orgID, string zapTraceSpan = null, int? offset = null, int? limit = null);
+        System.Threading.Tasks.Task<ApiResponse<OperationLogs>> GetOrgsIDLogsAsyncWithHttpInfo (string orgID, string zapTraceSpan = null, int? offset = null, int? limit = null);
         /// <summary>
         /// Retrieve operation logs for a user
         /// </summary>
@@ -227,7 +227,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
         /// <returns>Task of OperationLogs</returns>
-        System.Threading.Tasks.Task<OperationLogs> UsersUserIDLogsGetAsync (string userID, string zapTraceSpan = null, int? offset = null, int? limit = null);
+        System.Threading.Tasks.Task<OperationLogs> GetUsersIDLogsAsync (string userID, string zapTraceSpan = null, int? offset = null, int? limit = null);
 
         /// <summary>
         /// Retrieve operation logs for a user
@@ -241,7 +241,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
         /// <returns>Task of ApiResponse (OperationLogs)</returns>
-        System.Threading.Tasks.Task<ApiResponse<OperationLogs>> UsersUserIDLogsGetAsyncWithHttpInfo (string userID, string zapTraceSpan = null, int? offset = null, int? limit = null);
+        System.Threading.Tasks.Task<ApiResponse<OperationLogs>> GetUsersIDLogsAsyncWithHttpInfo (string userID, string zapTraceSpan = null, int? offset = null, int? limit = null);
         #endregion Asynchronous Operations
     }
 
@@ -351,9 +351,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
         /// <returns>OperationLogs</returns>
-        public OperationLogs BucketsBucketIDLogsGet (string bucketID, string zapTraceSpan = null, int? offset = null, int? limit = null)
+        public OperationLogs GetBucketsIDLogs (string bucketID, string zapTraceSpan = null, int? offset = null, int? limit = null)
         {
-             ApiResponse<OperationLogs> localVarResponse = BucketsBucketIDLogsGetWithHttpInfo(bucketID, zapTraceSpan, offset, limit);
+             ApiResponse<OperationLogs> localVarResponse = GetBucketsIDLogsWithHttpInfo(bucketID, zapTraceSpan, offset, limit);
              return localVarResponse.Data;
         }
 
@@ -366,11 +366,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
         /// <returns>ApiResponse of OperationLogs</returns>
-        public ApiResponse< OperationLogs > BucketsBucketIDLogsGetWithHttpInfo (string bucketID, string zapTraceSpan = null, int? offset = null, int? limit = null)
+        public ApiResponse< OperationLogs > GetBucketsIDLogsWithHttpInfo (string bucketID, string zapTraceSpan = null, int? offset = null, int? limit = null)
         {
             // verify the required parameter 'bucketID' is set
             if (bucketID == null)
-                throw new ApiException(400, "Missing required parameter 'bucketID' when calling OperationLogsService->BucketsBucketIDLogsGet");
+                throw new ApiException(400, "Missing required parameter 'bucketID' when calling OperationLogsService->GetBucketsIDLogs");
 
             var localVarPath = "/api/v2/buckets/{bucketID}/logs";
             var localVarPathParams = new Dictionary<String, String>();
@@ -409,7 +409,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("BucketsBucketIDLogsGet", localVarResponse);
+                Exception exception = ExceptionFactory("GetBucketsIDLogs", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -427,11 +427,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
         /// <returns>ApiResponse of OperationLogs</returns>
-        public IRestResponse BucketsBucketIDLogsGetWithIRestResponse (string bucketID, string zapTraceSpan = null, int? offset = null, int? limit = null)
+        public IRestResponse GetBucketsIDLogsWithIRestResponse (string bucketID, string zapTraceSpan = null, int? offset = null, int? limit = null)
         {
             // verify the required parameter 'bucketID' is set
             if (bucketID == null)
-                throw new ApiException(400, "Missing required parameter 'bucketID' when calling OperationLogsService->BucketsBucketIDLogsGet");
+                throw new ApiException(400, "Missing required parameter 'bucketID' when calling OperationLogsService->GetBucketsIDLogs");
 
             var localVarPath = "/api/v2/buckets/{bucketID}/logs";
             var localVarPathParams = new Dictionary<String, String>();
@@ -470,7 +470,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("BucketsBucketIDLogsGet", localVarResponse);
+                Exception exception = ExceptionFactory("GetBucketsIDLogs", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -486,11 +486,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
         /// <returns>ApiResponse of OperationLogs</returns>
-        public RestRequest BucketsBucketIDLogsGetWithRestRequest (string bucketID, string zapTraceSpan = null, int? offset = null, int? limit = null)
+        public RestRequest GetBucketsIDLogsWithRestRequest (string bucketID, string zapTraceSpan = null, int? offset = null, int? limit = null)
         {
             // verify the required parameter 'bucketID' is set
             if (bucketID == null)
-                throw new ApiException(400, "Missing required parameter 'bucketID' when calling OperationLogsService->BucketsBucketIDLogsGet");
+                throw new ApiException(400, "Missing required parameter 'bucketID' when calling OperationLogsService->GetBucketsIDLogs");
 
             var localVarPath = "/api/v2/buckets/{bucketID}/logs";
             var localVarPathParams = new Dictionary<String, String>();
@@ -534,9 +534,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
         /// <returns>Task of OperationLogs</returns>
-        public async System.Threading.Tasks.Task<OperationLogs> BucketsBucketIDLogsGetAsync (string bucketID, string zapTraceSpan = null, int? offset = null, int? limit = null)
+        public async System.Threading.Tasks.Task<OperationLogs> GetBucketsIDLogsAsync (string bucketID, string zapTraceSpan = null, int? offset = null, int? limit = null)
         {
-             ApiResponse<OperationLogs> localVarResponse = await BucketsBucketIDLogsGetAsyncWithHttpInfo(bucketID, zapTraceSpan, offset, limit);
+             ApiResponse<OperationLogs> localVarResponse = await GetBucketsIDLogsAsyncWithHttpInfo(bucketID, zapTraceSpan, offset, limit);
              return localVarResponse.Data;
 
         }
@@ -550,11 +550,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
         /// <returns>Task of ApiResponse (OperationLogs)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<OperationLogs>> BucketsBucketIDLogsGetAsyncWithHttpInfo (string bucketID, string zapTraceSpan = null, int? offset = null, int? limit = null)
+        public async System.Threading.Tasks.Task<ApiResponse<OperationLogs>> GetBucketsIDLogsAsyncWithHttpInfo (string bucketID, string zapTraceSpan = null, int? offset = null, int? limit = null)
         {
             // verify the required parameter 'bucketID' is set
             if (bucketID == null)
-                throw new ApiException(400, "Missing required parameter 'bucketID' when calling OperationLogsService->BucketsBucketIDLogsGet");
+                throw new ApiException(400, "Missing required parameter 'bucketID' when calling OperationLogsService->GetBucketsIDLogs");
 
             var localVarPath = "/api/v2/buckets/{bucketID}/logs";
             var localVarPathParams = new Dictionary<String, String>();
@@ -593,7 +593,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("BucketsBucketIDLogsGet", localVarResponse);
+                Exception exception = ExceptionFactory("GetBucketsIDLogs", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -611,9 +611,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
         /// <returns>OperationLogs</returns>
-        public OperationLogs DashboardsDashboardIDLogsGet (string dashboardID, string zapTraceSpan = null, int? offset = null, int? limit = null)
+        public OperationLogs GetDashboardsIDLogs (string dashboardID, string zapTraceSpan = null, int? offset = null, int? limit = null)
         {
-             ApiResponse<OperationLogs> localVarResponse = DashboardsDashboardIDLogsGetWithHttpInfo(dashboardID, zapTraceSpan, offset, limit);
+             ApiResponse<OperationLogs> localVarResponse = GetDashboardsIDLogsWithHttpInfo(dashboardID, zapTraceSpan, offset, limit);
              return localVarResponse.Data;
         }
 
@@ -626,11 +626,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
         /// <returns>ApiResponse of OperationLogs</returns>
-        public ApiResponse< OperationLogs > DashboardsDashboardIDLogsGetWithHttpInfo (string dashboardID, string zapTraceSpan = null, int? offset = null, int? limit = null)
+        public ApiResponse< OperationLogs > GetDashboardsIDLogsWithHttpInfo (string dashboardID, string zapTraceSpan = null, int? offset = null, int? limit = null)
         {
             // verify the required parameter 'dashboardID' is set
             if (dashboardID == null)
-                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling OperationLogsService->DashboardsDashboardIDLogsGet");
+                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling OperationLogsService->GetDashboardsIDLogs");
 
             var localVarPath = "/api/v2/dashboards/{dashboardID}/logs";
             var localVarPathParams = new Dictionary<String, String>();
@@ -669,7 +669,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("DashboardsDashboardIDLogsGet", localVarResponse);
+                Exception exception = ExceptionFactory("GetDashboardsIDLogs", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -687,11 +687,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
         /// <returns>ApiResponse of OperationLogs</returns>
-        public IRestResponse DashboardsDashboardIDLogsGetWithIRestResponse (string dashboardID, string zapTraceSpan = null, int? offset = null, int? limit = null)
+        public IRestResponse GetDashboardsIDLogsWithIRestResponse (string dashboardID, string zapTraceSpan = null, int? offset = null, int? limit = null)
         {
             // verify the required parameter 'dashboardID' is set
             if (dashboardID == null)
-                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling OperationLogsService->DashboardsDashboardIDLogsGet");
+                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling OperationLogsService->GetDashboardsIDLogs");
 
             var localVarPath = "/api/v2/dashboards/{dashboardID}/logs";
             var localVarPathParams = new Dictionary<String, String>();
@@ -730,7 +730,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("DashboardsDashboardIDLogsGet", localVarResponse);
+                Exception exception = ExceptionFactory("GetDashboardsIDLogs", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -746,11 +746,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
         /// <returns>ApiResponse of OperationLogs</returns>
-        public RestRequest DashboardsDashboardIDLogsGetWithRestRequest (string dashboardID, string zapTraceSpan = null, int? offset = null, int? limit = null)
+        public RestRequest GetDashboardsIDLogsWithRestRequest (string dashboardID, string zapTraceSpan = null, int? offset = null, int? limit = null)
         {
             // verify the required parameter 'dashboardID' is set
             if (dashboardID == null)
-                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling OperationLogsService->DashboardsDashboardIDLogsGet");
+                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling OperationLogsService->GetDashboardsIDLogs");
 
             var localVarPath = "/api/v2/dashboards/{dashboardID}/logs";
             var localVarPathParams = new Dictionary<String, String>();
@@ -794,9 +794,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
         /// <returns>Task of OperationLogs</returns>
-        public async System.Threading.Tasks.Task<OperationLogs> DashboardsDashboardIDLogsGetAsync (string dashboardID, string zapTraceSpan = null, int? offset = null, int? limit = null)
+        public async System.Threading.Tasks.Task<OperationLogs> GetDashboardsIDLogsAsync (string dashboardID, string zapTraceSpan = null, int? offset = null, int? limit = null)
         {
-             ApiResponse<OperationLogs> localVarResponse = await DashboardsDashboardIDLogsGetAsyncWithHttpInfo(dashboardID, zapTraceSpan, offset, limit);
+             ApiResponse<OperationLogs> localVarResponse = await GetDashboardsIDLogsAsyncWithHttpInfo(dashboardID, zapTraceSpan, offset, limit);
              return localVarResponse.Data;
 
         }
@@ -810,11 +810,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
         /// <returns>Task of ApiResponse (OperationLogs)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<OperationLogs>> DashboardsDashboardIDLogsGetAsyncWithHttpInfo (string dashboardID, string zapTraceSpan = null, int? offset = null, int? limit = null)
+        public async System.Threading.Tasks.Task<ApiResponse<OperationLogs>> GetDashboardsIDLogsAsyncWithHttpInfo (string dashboardID, string zapTraceSpan = null, int? offset = null, int? limit = null)
         {
             // verify the required parameter 'dashboardID' is set
             if (dashboardID == null)
-                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling OperationLogsService->DashboardsDashboardIDLogsGet");
+                throw new ApiException(400, "Missing required parameter 'dashboardID' when calling OperationLogsService->GetDashboardsIDLogs");
 
             var localVarPath = "/api/v2/dashboards/{dashboardID}/logs";
             var localVarPathParams = new Dictionary<String, String>();
@@ -853,7 +853,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("DashboardsDashboardIDLogsGet", localVarResponse);
+                Exception exception = ExceptionFactory("GetDashboardsIDLogs", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -871,9 +871,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
         /// <returns>OperationLogs</returns>
-        public OperationLogs OrgsOrgIDLogsGet (string orgID, string zapTraceSpan = null, int? offset = null, int? limit = null)
+        public OperationLogs GetOrgsIDLogs (string orgID, string zapTraceSpan = null, int? offset = null, int? limit = null)
         {
-             ApiResponse<OperationLogs> localVarResponse = OrgsOrgIDLogsGetWithHttpInfo(orgID, zapTraceSpan, offset, limit);
+             ApiResponse<OperationLogs> localVarResponse = GetOrgsIDLogsWithHttpInfo(orgID, zapTraceSpan, offset, limit);
              return localVarResponse.Data;
         }
 
@@ -886,11 +886,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
         /// <returns>ApiResponse of OperationLogs</returns>
-        public ApiResponse< OperationLogs > OrgsOrgIDLogsGetWithHttpInfo (string orgID, string zapTraceSpan = null, int? offset = null, int? limit = null)
+        public ApiResponse< OperationLogs > GetOrgsIDLogsWithHttpInfo (string orgID, string zapTraceSpan = null, int? offset = null, int? limit = null)
         {
             // verify the required parameter 'orgID' is set
             if (orgID == null)
-                throw new ApiException(400, "Missing required parameter 'orgID' when calling OperationLogsService->OrgsOrgIDLogsGet");
+                throw new ApiException(400, "Missing required parameter 'orgID' when calling OperationLogsService->GetOrgsIDLogs");
 
             var localVarPath = "/api/v2/orgs/{orgID}/logs";
             var localVarPathParams = new Dictionary<String, String>();
@@ -929,7 +929,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("OrgsOrgIDLogsGet", localVarResponse);
+                Exception exception = ExceptionFactory("GetOrgsIDLogs", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -947,11 +947,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
         /// <returns>ApiResponse of OperationLogs</returns>
-        public IRestResponse OrgsOrgIDLogsGetWithIRestResponse (string orgID, string zapTraceSpan = null, int? offset = null, int? limit = null)
+        public IRestResponse GetOrgsIDLogsWithIRestResponse (string orgID, string zapTraceSpan = null, int? offset = null, int? limit = null)
         {
             // verify the required parameter 'orgID' is set
             if (orgID == null)
-                throw new ApiException(400, "Missing required parameter 'orgID' when calling OperationLogsService->OrgsOrgIDLogsGet");
+                throw new ApiException(400, "Missing required parameter 'orgID' when calling OperationLogsService->GetOrgsIDLogs");
 
             var localVarPath = "/api/v2/orgs/{orgID}/logs";
             var localVarPathParams = new Dictionary<String, String>();
@@ -990,7 +990,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("OrgsOrgIDLogsGet", localVarResponse);
+                Exception exception = ExceptionFactory("GetOrgsIDLogs", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -1006,11 +1006,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
         /// <returns>ApiResponse of OperationLogs</returns>
-        public RestRequest OrgsOrgIDLogsGetWithRestRequest (string orgID, string zapTraceSpan = null, int? offset = null, int? limit = null)
+        public RestRequest GetOrgsIDLogsWithRestRequest (string orgID, string zapTraceSpan = null, int? offset = null, int? limit = null)
         {
             // verify the required parameter 'orgID' is set
             if (orgID == null)
-                throw new ApiException(400, "Missing required parameter 'orgID' when calling OperationLogsService->OrgsOrgIDLogsGet");
+                throw new ApiException(400, "Missing required parameter 'orgID' when calling OperationLogsService->GetOrgsIDLogs");
 
             var localVarPath = "/api/v2/orgs/{orgID}/logs";
             var localVarPathParams = new Dictionary<String, String>();
@@ -1054,9 +1054,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
         /// <returns>Task of OperationLogs</returns>
-        public async System.Threading.Tasks.Task<OperationLogs> OrgsOrgIDLogsGetAsync (string orgID, string zapTraceSpan = null, int? offset = null, int? limit = null)
+        public async System.Threading.Tasks.Task<OperationLogs> GetOrgsIDLogsAsync (string orgID, string zapTraceSpan = null, int? offset = null, int? limit = null)
         {
-             ApiResponse<OperationLogs> localVarResponse = await OrgsOrgIDLogsGetAsyncWithHttpInfo(orgID, zapTraceSpan, offset, limit);
+             ApiResponse<OperationLogs> localVarResponse = await GetOrgsIDLogsAsyncWithHttpInfo(orgID, zapTraceSpan, offset, limit);
              return localVarResponse.Data;
 
         }
@@ -1070,11 +1070,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
         /// <returns>Task of ApiResponse (OperationLogs)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<OperationLogs>> OrgsOrgIDLogsGetAsyncWithHttpInfo (string orgID, string zapTraceSpan = null, int? offset = null, int? limit = null)
+        public async System.Threading.Tasks.Task<ApiResponse<OperationLogs>> GetOrgsIDLogsAsyncWithHttpInfo (string orgID, string zapTraceSpan = null, int? offset = null, int? limit = null)
         {
             // verify the required parameter 'orgID' is set
             if (orgID == null)
-                throw new ApiException(400, "Missing required parameter 'orgID' when calling OperationLogsService->OrgsOrgIDLogsGet");
+                throw new ApiException(400, "Missing required parameter 'orgID' when calling OperationLogsService->GetOrgsIDLogs");
 
             var localVarPath = "/api/v2/orgs/{orgID}/logs";
             var localVarPathParams = new Dictionary<String, String>();
@@ -1113,7 +1113,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("OrgsOrgIDLogsGet", localVarResponse);
+                Exception exception = ExceptionFactory("GetOrgsIDLogs", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -1131,9 +1131,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
         /// <returns>OperationLogs</returns>
-        public OperationLogs UsersUserIDLogsGet (string userID, string zapTraceSpan = null, int? offset = null, int? limit = null)
+        public OperationLogs GetUsersIDLogs (string userID, string zapTraceSpan = null, int? offset = null, int? limit = null)
         {
-             ApiResponse<OperationLogs> localVarResponse = UsersUserIDLogsGetWithHttpInfo(userID, zapTraceSpan, offset, limit);
+             ApiResponse<OperationLogs> localVarResponse = GetUsersIDLogsWithHttpInfo(userID, zapTraceSpan, offset, limit);
              return localVarResponse.Data;
         }
 
@@ -1146,11 +1146,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
         /// <returns>ApiResponse of OperationLogs</returns>
-        public ApiResponse< OperationLogs > UsersUserIDLogsGetWithHttpInfo (string userID, string zapTraceSpan = null, int? offset = null, int? limit = null)
+        public ApiResponse< OperationLogs > GetUsersIDLogsWithHttpInfo (string userID, string zapTraceSpan = null, int? offset = null, int? limit = null)
         {
             // verify the required parameter 'userID' is set
             if (userID == null)
-                throw new ApiException(400, "Missing required parameter 'userID' when calling OperationLogsService->UsersUserIDLogsGet");
+                throw new ApiException(400, "Missing required parameter 'userID' when calling OperationLogsService->GetUsersIDLogs");
 
             var localVarPath = "/api/v2/users/{userID}/logs";
             var localVarPathParams = new Dictionary<String, String>();
@@ -1189,7 +1189,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("UsersUserIDLogsGet", localVarResponse);
+                Exception exception = ExceptionFactory("GetUsersIDLogs", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -1207,11 +1207,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
         /// <returns>ApiResponse of OperationLogs</returns>
-        public IRestResponse UsersUserIDLogsGetWithIRestResponse (string userID, string zapTraceSpan = null, int? offset = null, int? limit = null)
+        public IRestResponse GetUsersIDLogsWithIRestResponse (string userID, string zapTraceSpan = null, int? offset = null, int? limit = null)
         {
             // verify the required parameter 'userID' is set
             if (userID == null)
-                throw new ApiException(400, "Missing required parameter 'userID' when calling OperationLogsService->UsersUserIDLogsGet");
+                throw new ApiException(400, "Missing required parameter 'userID' when calling OperationLogsService->GetUsersIDLogs");
 
             var localVarPath = "/api/v2/users/{userID}/logs";
             var localVarPathParams = new Dictionary<String, String>();
@@ -1250,7 +1250,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("UsersUserIDLogsGet", localVarResponse);
+                Exception exception = ExceptionFactory("GetUsersIDLogs", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -1266,11 +1266,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
         /// <returns>ApiResponse of OperationLogs</returns>
-        public RestRequest UsersUserIDLogsGetWithRestRequest (string userID, string zapTraceSpan = null, int? offset = null, int? limit = null)
+        public RestRequest GetUsersIDLogsWithRestRequest (string userID, string zapTraceSpan = null, int? offset = null, int? limit = null)
         {
             // verify the required parameter 'userID' is set
             if (userID == null)
-                throw new ApiException(400, "Missing required parameter 'userID' when calling OperationLogsService->UsersUserIDLogsGet");
+                throw new ApiException(400, "Missing required parameter 'userID' when calling OperationLogsService->GetUsersIDLogs");
 
             var localVarPath = "/api/v2/users/{userID}/logs";
             var localVarPathParams = new Dictionary<String, String>();
@@ -1314,9 +1314,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
         /// <returns>Task of OperationLogs</returns>
-        public async System.Threading.Tasks.Task<OperationLogs> UsersUserIDLogsGetAsync (string userID, string zapTraceSpan = null, int? offset = null, int? limit = null)
+        public async System.Threading.Tasks.Task<OperationLogs> GetUsersIDLogsAsync (string userID, string zapTraceSpan = null, int? offset = null, int? limit = null)
         {
-             ApiResponse<OperationLogs> localVarResponse = await UsersUserIDLogsGetAsyncWithHttpInfo(userID, zapTraceSpan, offset, limit);
+             ApiResponse<OperationLogs> localVarResponse = await GetUsersIDLogsAsyncWithHttpInfo(userID, zapTraceSpan, offset, limit);
              return localVarResponse.Data;
 
         }
@@ -1330,11 +1330,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
         /// <returns>Task of ApiResponse (OperationLogs)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<OperationLogs>> UsersUserIDLogsGetAsyncWithHttpInfo (string userID, string zapTraceSpan = null, int? offset = null, int? limit = null)
+        public async System.Threading.Tasks.Task<ApiResponse<OperationLogs>> GetUsersIDLogsAsyncWithHttpInfo (string userID, string zapTraceSpan = null, int? offset = null, int? limit = null)
         {
             // verify the required parameter 'userID' is set
             if (userID == null)
-                throw new ApiException(400, "Missing required parameter 'userID' when calling OperationLogsService->UsersUserIDLogsGet");
+                throw new ApiException(400, "Missing required parameter 'userID' when calling OperationLogsService->GetUsersIDLogs");
 
             var localVarPath = "/api/v2/users/{userID}/logs";
             var localVarPathParams = new Dictionary<String, String>();
@@ -1373,7 +1373,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("UsersUserIDLogsGet", localVarResponse);
+                Exception exception = ExceptionFactory("GetUsersIDLogs", localVarResponse);
                 if (exception != null) throw exception;
             }
 

@@ -33,7 +33,7 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>IsOnboarding</returns>
-        IsOnboarding SetupGet (string zapTraceSpan = null);
+        IsOnboarding GetSetup (string zapTraceSpan = null);
 
         /// <summary>
         /// check if database has default user, org, bucket created, returns true if not.
@@ -44,7 +44,7 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of IsOnboarding</returns>
-        ApiResponse<IsOnboarding> SetupGetWithHttpInfo (string zapTraceSpan = null);
+        ApiResponse<IsOnboarding> GetSetupWithHttpInfo (string zapTraceSpan = null);
         /// <summary>
         /// post onboarding request, to setup initial user, org and bucket
         /// </summary>
@@ -55,7 +55,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="onboardingRequest">source to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>OnboardingResponse</returns>
-        OnboardingResponse SetupPost (OnboardingRequest onboardingRequest, string zapTraceSpan = null);
+        OnboardingResponse PostSetup (OnboardingRequest onboardingRequest, string zapTraceSpan = null);
 
         /// <summary>
         /// post onboarding request, to setup initial user, org and bucket
@@ -67,7 +67,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="onboardingRequest">source to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of OnboardingResponse</returns>
-        ApiResponse<OnboardingResponse> SetupPostWithHttpInfo (OnboardingRequest onboardingRequest, string zapTraceSpan = null);
+        ApiResponse<OnboardingResponse> PostSetupWithHttpInfo (OnboardingRequest onboardingRequest, string zapTraceSpan = null);
         #endregion Synchronous Operations
         #region Asynchronous Operations
         /// <summary>
@@ -79,7 +79,7 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IsOnboarding</returns>
-        System.Threading.Tasks.Task<IsOnboarding> SetupGetAsync (string zapTraceSpan = null);
+        System.Threading.Tasks.Task<IsOnboarding> GetSetupAsync (string zapTraceSpan = null);
 
         /// <summary>
         /// check if database has default user, org, bucket created, returns true if not.
@@ -90,7 +90,7 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (IsOnboarding)</returns>
-        System.Threading.Tasks.Task<ApiResponse<IsOnboarding>> SetupGetAsyncWithHttpInfo (string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<IsOnboarding>> GetSetupAsyncWithHttpInfo (string zapTraceSpan = null);
         /// <summary>
         /// post onboarding request, to setup initial user, org and bucket
         /// </summary>
@@ -101,7 +101,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="onboardingRequest">source to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of OnboardingResponse</returns>
-        System.Threading.Tasks.Task<OnboardingResponse> SetupPostAsync (OnboardingRequest onboardingRequest, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<OnboardingResponse> PostSetupAsync (OnboardingRequest onboardingRequest, string zapTraceSpan = null);
 
         /// <summary>
         /// post onboarding request, to setup initial user, org and bucket
@@ -113,7 +113,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="onboardingRequest">source to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (OnboardingResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<OnboardingResponse>> SetupPostAsyncWithHttpInfo (OnboardingRequest onboardingRequest, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<OnboardingResponse>> PostSetupAsyncWithHttpInfo (OnboardingRequest onboardingRequest, string zapTraceSpan = null);
         #endregion Asynchronous Operations
     }
 
@@ -220,9 +220,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>IsOnboarding</returns>
-        public IsOnboarding SetupGet (string zapTraceSpan = null)
+        public IsOnboarding GetSetup (string zapTraceSpan = null)
         {
-             ApiResponse<IsOnboarding> localVarResponse = SetupGetWithHttpInfo(zapTraceSpan);
+             ApiResponse<IsOnboarding> localVarResponse = GetSetupWithHttpInfo(zapTraceSpan);
              return localVarResponse.Data;
         }
 
@@ -232,7 +232,7 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of IsOnboarding</returns>
-        public ApiResponse< IsOnboarding > SetupGetWithHttpInfo (string zapTraceSpan = null)
+        public ApiResponse< IsOnboarding > GetSetupWithHttpInfo (string zapTraceSpan = null)
         {
 
             var localVarPath = "/api/v2/setup";
@@ -269,7 +269,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("SetupGet", localVarResponse);
+                Exception exception = ExceptionFactory("GetSetup", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -284,7 +284,7 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of IsOnboarding</returns>
-        public IRestResponse SetupGetWithIRestResponse (string zapTraceSpan = null)
+        public IRestResponse GetSetupWithIRestResponse (string zapTraceSpan = null)
         {
 
             var localVarPath = "/api/v2/setup";
@@ -321,7 +321,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("SetupGet", localVarResponse);
+                Exception exception = ExceptionFactory("GetSetup", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -334,7 +334,7 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of IsOnboarding</returns>
-        public RestRequest SetupGetWithRestRequest (string zapTraceSpan = null)
+        public RestRequest GetSetupWithRestRequest (string zapTraceSpan = null)
         {
 
             var localVarPath = "/api/v2/setup";
@@ -373,9 +373,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IsOnboarding</returns>
-        public async System.Threading.Tasks.Task<IsOnboarding> SetupGetAsync (string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IsOnboarding> GetSetupAsync (string zapTraceSpan = null)
         {
-             ApiResponse<IsOnboarding> localVarResponse = await SetupGetAsyncWithHttpInfo(zapTraceSpan);
+             ApiResponse<IsOnboarding> localVarResponse = await GetSetupAsyncWithHttpInfo(zapTraceSpan);
              return localVarResponse.Data;
 
         }
@@ -386,7 +386,7 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (IsOnboarding)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<IsOnboarding>> SetupGetAsyncWithHttpInfo (string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<IsOnboarding>> GetSetupAsyncWithHttpInfo (string zapTraceSpan = null)
         {
 
             var localVarPath = "/api/v2/setup";
@@ -423,7 +423,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("SetupGet", localVarResponse);
+                Exception exception = ExceptionFactory("GetSetup", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -439,9 +439,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="onboardingRequest">source to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>OnboardingResponse</returns>
-        public OnboardingResponse SetupPost (OnboardingRequest onboardingRequest, string zapTraceSpan = null)
+        public OnboardingResponse PostSetup (OnboardingRequest onboardingRequest, string zapTraceSpan = null)
         {
-             ApiResponse<OnboardingResponse> localVarResponse = SetupPostWithHttpInfo(onboardingRequest, zapTraceSpan);
+             ApiResponse<OnboardingResponse> localVarResponse = PostSetupWithHttpInfo(onboardingRequest, zapTraceSpan);
              return localVarResponse.Data;
         }
 
@@ -452,11 +452,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="onboardingRequest">source to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of OnboardingResponse</returns>
-        public ApiResponse< OnboardingResponse > SetupPostWithHttpInfo (OnboardingRequest onboardingRequest, string zapTraceSpan = null)
+        public ApiResponse< OnboardingResponse > PostSetupWithHttpInfo (OnboardingRequest onboardingRequest, string zapTraceSpan = null)
         {
             // verify the required parameter 'onboardingRequest' is set
             if (onboardingRequest == null)
-                throw new ApiException(400, "Missing required parameter 'onboardingRequest' when calling SetupService->SetupPost");
+                throw new ApiException(400, "Missing required parameter 'onboardingRequest' when calling SetupService->PostSetup");
 
             var localVarPath = "/api/v2/setup";
             var localVarPathParams = new Dictionary<String, String>();
@@ -501,7 +501,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("SetupPost", localVarResponse);
+                Exception exception = ExceptionFactory("PostSetup", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -517,11 +517,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="onboardingRequest">source to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of OnboardingResponse</returns>
-        public IRestResponse SetupPostWithIRestResponse (OnboardingRequest onboardingRequest, string zapTraceSpan = null)
+        public IRestResponse PostSetupWithIRestResponse (OnboardingRequest onboardingRequest, string zapTraceSpan = null)
         {
             // verify the required parameter 'onboardingRequest' is set
             if (onboardingRequest == null)
-                throw new ApiException(400, "Missing required parameter 'onboardingRequest' when calling SetupService->SetupPost");
+                throw new ApiException(400, "Missing required parameter 'onboardingRequest' when calling SetupService->PostSetup");
 
             var localVarPath = "/api/v2/setup";
             var localVarPathParams = new Dictionary<String, String>();
@@ -566,7 +566,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("SetupPost", localVarResponse);
+                Exception exception = ExceptionFactory("PostSetup", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -580,11 +580,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="onboardingRequest">source to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of OnboardingResponse</returns>
-        public RestRequest SetupPostWithRestRequest (OnboardingRequest onboardingRequest, string zapTraceSpan = null)
+        public RestRequest PostSetupWithRestRequest (OnboardingRequest onboardingRequest, string zapTraceSpan = null)
         {
             // verify the required parameter 'onboardingRequest' is set
             if (onboardingRequest == null)
-                throw new ApiException(400, "Missing required parameter 'onboardingRequest' when calling SetupService->SetupPost");
+                throw new ApiException(400, "Missing required parameter 'onboardingRequest' when calling SetupService->PostSetup");
 
             var localVarPath = "/api/v2/setup";
             var localVarPathParams = new Dictionary<String, String>();
@@ -632,9 +632,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="onboardingRequest">source to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of OnboardingResponse</returns>
-        public async System.Threading.Tasks.Task<OnboardingResponse> SetupPostAsync (OnboardingRequest onboardingRequest, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<OnboardingResponse> PostSetupAsync (OnboardingRequest onboardingRequest, string zapTraceSpan = null)
         {
-             ApiResponse<OnboardingResponse> localVarResponse = await SetupPostAsyncWithHttpInfo(onboardingRequest, zapTraceSpan);
+             ApiResponse<OnboardingResponse> localVarResponse = await PostSetupAsyncWithHttpInfo(onboardingRequest, zapTraceSpan);
              return localVarResponse.Data;
 
         }
@@ -646,11 +646,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="onboardingRequest">source to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (OnboardingResponse)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<OnboardingResponse>> SetupPostAsyncWithHttpInfo (OnboardingRequest onboardingRequest, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<OnboardingResponse>> PostSetupAsyncWithHttpInfo (OnboardingRequest onboardingRequest, string zapTraceSpan = null)
         {
             // verify the required parameter 'onboardingRequest' is set
             if (onboardingRequest == null)
-                throw new ApiException(400, "Missing required parameter 'onboardingRequest' when calling SetupService->SetupPost");
+                throw new ApiException(400, "Missing required parameter 'onboardingRequest' when calling SetupService->PostSetup");
 
             var localVarPath = "/api/v2/setup";
             var localVarPathParams = new Dictionary<String, String>();
@@ -695,7 +695,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("SetupPost", localVarResponse);
+                Exception exception = ExceptionFactory("PostSetup", localVarResponse);
                 if (exception != null) throw exception;
             }
 

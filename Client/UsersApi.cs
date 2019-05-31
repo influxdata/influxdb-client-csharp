@@ -41,7 +41,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNotNull(user, nameof(user));
 
-            return _service.UsersPost(user);
+            return _service.PostUsers(user);
         }
 
         /// <summary>
@@ -53,7 +53,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNotNull(user, nameof(user));
 
-            return _service.UsersUserIDPatch(user.Id, user);
+            return _service.PatchUsersID(user.Id, user);
         }
 
         /// <summary>
@@ -99,7 +99,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNotNull(userId, nameof(userId));
 
-            _service.UsersUserIDDelete(userId);
+            _service.DeleteUsersID(userId);
         }
 
         /// <summary>
@@ -152,7 +152,7 @@ namespace InfluxDB.Client
         /// <returns>currently authenticated user</returns>
         public User Me()
         {
-            return _service.MeGet();
+            return _service.GetMe();
         }
 
         /// <summary>
@@ -176,7 +176,7 @@ namespace InfluxDB.Client
 
             var header = InfluxDBClient.AuthorizationHeader(user.Name, oldPassword);
             
-            _service.MePasswordPut(new PasswordResetBody(newPassword), null, header);
+            _service.PutMePassword(new PasswordResetBody(newPassword), null, header);
         }
 
         /// <summary>
@@ -188,7 +188,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(userId, nameof(userId));
 
-            return _service.UsersUserIDGet(userId);
+            return _service.GetUsersID(userId);
         }
 
         /// <summary>
@@ -197,7 +197,7 @@ namespace InfluxDB.Client
         /// <returns>List all users</returns>
         public List<User> FindUsers()
         {
-            return _service.UsersGet()._Users;
+            return _service.GetUsers()._Users;
         }
 
         /// <summary>
@@ -249,7 +249,7 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(userId, nameof(userId));
             Arguments.CheckNotNull(findOptions, nameof(findOptions));
 
-            return _service.UsersUserIDLogsGet(userId, null, findOptions.Offset, findOptions.Limit);
+            return _service.GetUsersIDLogs(userId, null, findOptions.Offset, findOptions.Limit);
         }
 
         private void UpdateUserPassword(string userId, string userName, string oldPassword,
@@ -262,7 +262,7 @@ namespace InfluxDB.Client
 
             var header = InfluxDBClient.AuthorizationHeader(userName, oldPassword);
 
-            _service.UsersUserIDPasswordPut(userId, new PasswordResetBody(newPassword), null, header);
+            _service.PutUsersIDPassword(userId, new PasswordResetBody(newPassword), null, header);
         }
     }
 }

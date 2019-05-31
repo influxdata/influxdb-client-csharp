@@ -21,7 +21,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Creates a new bucket and sets <see cref="InfluxDB.Client.Api.Domain.Bucket.Id" /> with the new identifier.
+        /// Creates a new bucket and sets <see cref="Bucket.Id" /> with the new identifier.
         /// </summary>
         /// <param name="bucket">bucket to create</param>
         /// <returns>created Bucket</returns>
@@ -29,7 +29,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNotNull(bucket, nameof(bucket));
 
-            return _service.BucketsPost(bucket);
+            return _service.PostBuckets(bucket);
         }
 
         /// <summary>
@@ -102,7 +102,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNotNull(bucket, nameof(bucket));
 
-            return _service.BucketsBucketIDPatch(bucket.Id, bucket);
+            return _service.PatchBucketsID(bucket.Id, bucket);
         }
 
         /// <summary>
@@ -114,7 +114,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(bucketId, nameof(bucketId));
 
-            _service.BucketsBucketIDDelete(bucketId);
+            _service.DeleteBucketsID(bucketId);
         }
 
         /// <summary>
@@ -175,7 +175,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(bucketId, nameof(bucketId));
 
-            return _service.BucketsBucketIDGet(bucketId);
+            return _service.GetBucketsID(bucketId);
         }
 
         /// <summary>
@@ -188,7 +188,7 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(bucketName, nameof(bucketName));
 
             return _service
-                .BucketsGet(null, null, null, null, null, bucketName)
+                .GetBuckets(null, null, null, null, null, bucketName)
                 ._Buckets
                 .FirstOrDefault();
         }
@@ -259,7 +259,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(bucketId, nameof(bucketId));
 
-            return _service.BucketsBucketIDMembersGet(bucketId).Users;
+            return _service.GetBucketsIDMembers(bucketId).Users;
         }
 
         /// <summary>
@@ -289,7 +289,7 @@ namespace InfluxDB.Client
 
             var mapping = new AddResourceMemberRequestBody(memberId);
 
-            return _service.BucketsBucketIDMembersPost(bucketId, mapping);
+            return _service.PostBucketsIDMembers(bucketId, mapping);
         }
 
         /// <summary>
@@ -317,7 +317,7 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(bucketId, nameof(bucketId));
             Arguments.CheckNonEmptyString(memberId, nameof(memberId));
 
-            _service.BucketsBucketIDMembersUserIDDelete(memberId, bucketId);
+            _service.DeleteBucketsIDMembersID(memberId, bucketId);
         }
 
         /// <summary>
@@ -341,7 +341,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(bucketId, nameof(bucketId));
 
-            return _service.BucketsBucketIDOwnersGet(bucketId).Users;
+            return _service.GetBucketsIDOwners(bucketId).Users;
         }
 
         /// <summary>
@@ -371,7 +371,7 @@ namespace InfluxDB.Client
 
             var mapping = new AddResourceMemberRequestBody(ownerId);
 
-            return _service.BucketsBucketIDOwnersPost(bucketId, mapping);
+            return _service.PostBucketsIDOwners(bucketId, mapping);
         }
 
         /// <summary>
@@ -399,7 +399,7 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(bucketId, nameof(bucketId));
             Arguments.CheckNonEmptyString(ownerId, nameof(ownerId));
 
-            _service.BucketsBucketIDOwnersUserIDDelete(ownerId, bucketId);
+            _service.DeleteBucketsIDOwnersID(ownerId, bucketId);
         }
 
         /// <summary>
@@ -451,7 +451,7 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(bucketId, nameof(bucketId));
             Arguments.CheckNotNull(findOptions, nameof(findOptions));
 
-            return _service.BucketsBucketIDLogsGet(bucketId, null, findOptions.Offset, findOptions.Limit);
+            return _service.GetBucketsIDLogs(bucketId, null, findOptions.Offset, findOptions.Limit);
         }
 
         /// <summary>
@@ -475,7 +475,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(bucketId, nameof(bucketId));
 
-            return _service.BucketsBucketIDLabelsGet(bucketId).Labels;
+            return _service.GetBucketsIDLabels(bucketId).Labels;
         }
 
         /// <summary>
@@ -505,7 +505,7 @@ namespace InfluxDB.Client
 
             var mapping = new LabelMapping(labelId);
 
-            return _service.BucketsBucketIDLabelsPost(bucketId, mapping).Label;
+            return _service.PostBucketsIDLabels(bucketId, mapping).Label;
         }
 
         /// <summary>
@@ -533,14 +533,14 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(bucketId, nameof(bucketId));
             Arguments.CheckNonEmptyString(labelId, nameof(labelId));
 
-            _service.BucketsBucketIDLabelsLabelIDDelete(bucketId, labelId);
+            _service.DeleteBucketsIDLabelsID(bucketId, labelId);
         }
 
         private Buckets FindBuckets(string orgName, FindOptions findOptions)
         {
             Arguments.CheckNotNull(findOptions, nameof(findOptions));
 
-            return _service.BucketsGet(null, findOptions.Offset, findOptions.Limit, orgName);
+            return _service.GetBuckets(null, findOptions.Offset, findOptions.Limit, orgName);
         }
     }
 }

@@ -1,10 +1,8 @@
 using System;
 using System.Collections.Generic;
-using InfluxDB.Client.Core;
-using InfluxDB.Client.Core.Internal;
 using InfluxDB.Client.Api.Domain;
 using InfluxDB.Client.Api.Service;
-using InfluxDB.Client.Internal;
+using InfluxDB.Client.Core;
 
 namespace InfluxDB.Client
 {
@@ -20,7 +18,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Creates a new Source and sets <see cref="Generated.Domain.Source.Id" /> with the new identifier.
+        /// Creates a new Source and sets <see cref="InfluxDBClient.A.Api.Source.Id" /> with the new identifier.
         /// </summary>
         /// <param name="source">source to create</param>
         /// <returns>created Source</returns>
@@ -28,7 +26,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNotNull(source, nameof(source));
 
-            return _service.SourcesPost(source);
+            return _service.PostSources(source);
         }
 
         /// <summary>
@@ -40,7 +38,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNotNull(source, nameof(source));
 
-            return _service.SourcesSourceIDPatch(source.Id, source);
+            return _service.PatchSourcesID(source.Id, source);
         }
 
         /// <summary>
@@ -52,7 +50,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNotNull(sourceId, nameof(sourceId));
 
-            _service.SourcesSourceIDDelete(sourceId);
+            _service.DeleteSourcesID(sourceId);
         }
 
         /// <summary>
@@ -124,7 +122,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(sourceId, nameof(sourceId));
 
-            return _service.SourcesSourceIDGet(sourceId);
+            return _service.GetSourcesID(sourceId);
         }
 
         /// <summary>
@@ -133,7 +131,7 @@ namespace InfluxDB.Client
         /// <returns>A list of sources</returns>
         public List<Source> FindSources()
         {
-            return _service.SourcesGet()._Sources;
+            return _service.GetSources()._Sources;
         }
 
         /// <summary>
@@ -157,7 +155,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(sourceId, nameof(sourceId));
 
-            return _service.SourcesSourceIDBucketsGet(sourceId)._Buckets;
+            return _service.GetSourcesIDBuckets(sourceId)._Buckets;
         }
 
         /// <summary>
@@ -181,7 +179,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(sourceId, nameof(sourceId));
 
-            return InfluxDBClient.GetHealth(_service.SourcesSourceIDHealthGetAsync(sourceId));
+            return InfluxDBClient.GetHealth(_service.GetSourcesIDHealthAsync(sourceId));
         }
     }
 }

@@ -41,7 +41,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNotNull(organization, nameof(organization));
 
-            return _service.OrgsPost(organization);
+            return _service.PostOrgs(organization);
         }
 
         /// <summary>
@@ -53,7 +53,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNotNull(organization, nameof(organization));
 
-            return _service.OrgsOrgIDPatch(organization.Id, organization);
+            return _service.PatchOrgsID(organization.Id, organization);
         }
 
         /// <summary>
@@ -65,7 +65,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNotNull(orgId, nameof(orgId));
 
-            _service.OrgsOrgIDDelete(orgId);
+            _service.DeleteOrgsID(orgId);
         }
 
         /// <summary>
@@ -125,7 +125,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
 
-            return _service.OrgsOrgIDGet(orgId);
+            return _service.GetOrgsID(orgId);
         }
 
         /// <summary>
@@ -134,7 +134,7 @@ namespace InfluxDB.Client
         /// <returns>List all organizations</returns>
         public List<Organization> FindOrganizations()
         {
-            return _service.OrgsGet().Orgs;
+            return _service.GetOrgs().Orgs;
         }
 
         /// <summary>
@@ -168,7 +168,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
 
-            return _service.OrgsOrgIDSecretsGet(orgId).Secrets;
+            return _service.GetOrgsIDSecrets(orgId).Secrets;
         }
 
         /// <summary>
@@ -196,7 +196,7 @@ namespace InfluxDB.Client
             Arguments.CheckNotNull(secrets, nameof(secrets));
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
 
-            _service.OrgsOrgIDSecretsPatch(orgId, secrets);
+            _service.PatchOrgsIDSecrets(orgId, secrets);
         }
 
         /// <summary>
@@ -238,7 +238,7 @@ namespace InfluxDB.Client
             Arguments.CheckNotNull(secrets, nameof(secrets));
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
 
-            _service.OrgsOrgIDSecretsDeletePost(orgId, secrets);
+            _service.PostOrgsIDSecrets(orgId, secrets);
         }
 
         /// <summary>
@@ -262,7 +262,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
 
-            return _service.OrgsOrgIDMembersGet(orgId).Users;
+            return _service.GetOrgsIDMembers(orgId).Users;
         }
 
         /// <summary>
@@ -290,7 +290,7 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
             Arguments.CheckNonEmptyString(memberId, nameof(memberId));
 
-            return _service.OrgsOrgIDMembersPost(orgId, new AddResourceMemberRequestBody(memberId));
+            return _service.PostOrgsIDMembers(orgId, new AddResourceMemberRequestBody(memberId));
         }
 
         /// <summary>
@@ -318,7 +318,7 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
             Arguments.CheckNonEmptyString(memberId, nameof(memberId));
 
-            _service.OrgsOrgIDMembersUserIDDelete(memberId, orgId);
+            _service.DeleteOrgsIDMembersID(memberId, orgId);
         }
 
         /// <summary>
@@ -342,7 +342,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
 
-            return _service.OrgsOrgIDOwnersGet(orgId).Users;
+            return _service.GetOrgsIDOwners(orgId).Users;
         }
 
         /// <summary>
@@ -370,7 +370,7 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
             Arguments.CheckNonEmptyString(ownerId, nameof(ownerId));
 
-            return _service.OrgsOrgIDOwnersPost(orgId, new AddResourceMemberRequestBody(ownerId));
+            return _service.PostOrgsIDOwners(orgId, new AddResourceMemberRequestBody(ownerId));
         }
 
         /// <summary>
@@ -398,7 +398,7 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
             Arguments.CheckNonEmptyString(ownerId, nameof(ownerId));
 
-            _service.OrgsOrgIDOwnersUserIDDelete(ownerId, orgId);
+            _service.DeleteOrgsIDOwnersID(ownerId, orgId);
         }
 
         /// <summary>
@@ -450,7 +450,7 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
             Arguments.CheckNotNull(findOptions, nameof(findOptions));
 
-            return _service.OrgsOrgIDLogsGet(orgId, null, findOptions.Offset, findOptions.Limit);
+            return _service.GetOrgsIDLogs(orgId, null, findOptions.Offset, findOptions.Limit);
         }
 
         /// <summary>
@@ -474,7 +474,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
 
-            return _service.OrgsOrgIDLabelsGet(orgId).Labels;
+            return _service.GetOrgsIDLabels(orgId).Labels;
         }
 
         /// <summary>
@@ -504,7 +504,7 @@ namespace InfluxDB.Client
 
             var mapping = new LabelMapping(labelId);
             
-            return _service.OrgsOrgIDLabelsPost(orgId, mapping).Label;
+            return _service.PostOrgsIDLabels(orgId, mapping).Label;
         }
 
         /// <summary>
@@ -532,7 +532,7 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
             Arguments.CheckNonEmptyString(labelId, nameof(labelId));
 
-            _service.OrgsOrgIDLabelsLabelIDDelete(orgId, labelId);
+            _service.DeleteOrgsIDLabelsID(orgId, labelId);
         }
     }
 }

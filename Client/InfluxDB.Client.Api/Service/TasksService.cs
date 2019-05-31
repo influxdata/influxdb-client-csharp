@@ -25,6 +25,104 @@ namespace InfluxDB.Client.Api.Service
     {
         #region Synchronous Operations
         /// <summary>
+        /// Delete a task
+        /// </summary>
+        /// <remarks>
+        /// Deletes a task and all associated records
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskID">ID of task to delete</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns></returns>
+        void DeleteTasksID (string taskID, string zapTraceSpan = null);
+
+        /// <summary>
+        /// Delete a task
+        /// </summary>
+        /// <remarks>
+        /// Deletes a task and all associated records
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskID">ID of task to delete</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        ApiResponse<Object> DeleteTasksIDWithHttpInfo (string taskID, string zapTraceSpan = null);
+        /// <summary>
+        /// delete a label from a task
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskID">ID of the task</param>
+        /// <param name="labelID">the label id</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns></returns>
+        void DeleteTasksIDLabelsID (string taskID, string labelID, string zapTraceSpan = null);
+
+        /// <summary>
+        /// delete a label from a task
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskID">ID of the task</param>
+        /// <param name="labelID">the label id</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        ApiResponse<Object> DeleteTasksIDLabelsIDWithHttpInfo (string taskID, string labelID, string zapTraceSpan = null);
+        /// <summary>
+        /// removes a member from an task
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userID">ID of member to remove</param>
+        /// <param name="taskID">ID of the task</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns></returns>
+        void DeleteTasksIDMembersID (string userID, string taskID, string zapTraceSpan = null);
+
+        /// <summary>
+        /// removes a member from an task
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userID">ID of member to remove</param>
+        /// <param name="taskID">ID of the task</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        ApiResponse<Object> DeleteTasksIDMembersIDWithHttpInfo (string userID, string taskID, string zapTraceSpan = null);
+        /// <summary>
+        /// removes an owner from an task
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userID">ID of owner to remove</param>
+        /// <param name="taskID">ID of the task</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns></returns>
+        void DeleteTasksIDOwnersID (string userID, string taskID, string zapTraceSpan = null);
+
+        /// <summary>
+        /// removes an owner from an task
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userID">ID of owner to remove</param>
+        /// <param name="taskID">ID of the task</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        ApiResponse<Object> DeleteTasksIDOwnersIDWithHttpInfo (string userID, string taskID, string zapTraceSpan = null);
+        /// <summary>
         /// List tasks.
         /// </summary>
         /// <remarks>
@@ -38,7 +136,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">filter tasks to a specific organization ID (optional)</param>
         /// <param name="limit">the number of tasks to return (optional, default to 100)</param>
         /// <returns>Tasks</returns>
-        Tasks TasksGet (string zapTraceSpan = null, string after = null, string user = null, string org = null, string orgID = null, int? limit = null);
+        Tasks GetTasks (string zapTraceSpan = null, string after = null, string user = null, string org = null, string orgID = null, int? limit = null);
 
         /// <summary>
         /// List tasks.
@@ -54,53 +152,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">filter tasks to a specific organization ID (optional)</param>
         /// <param name="limit">the number of tasks to return (optional, default to 100)</param>
         /// <returns>ApiResponse of Tasks</returns>
-        ApiResponse<Tasks> TasksGetWithHttpInfo (string zapTraceSpan = null, string after = null, string user = null, string org = null, string orgID = null, int? limit = null);
-        /// <summary>
-        /// Create a new task
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskCreateRequest">task to create</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task</returns>
-        Task TasksPost (TaskCreateRequest taskCreateRequest, string zapTraceSpan = null);
-
-        /// <summary>
-        /// Create a new task
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskCreateRequest">task to create</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Task</returns>
-        ApiResponse<Task> TasksPostWithHttpInfo (TaskCreateRequest taskCreateRequest, string zapTraceSpan = null);
-        /// <summary>
-        /// Delete a task
-        /// </summary>
-        /// <remarks>
-        /// Deletes a task and all associated records
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of task to delete</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns></returns>
-        void TasksTaskIDDelete (string taskID, string zapTraceSpan = null);
-
-        /// <summary>
-        /// Delete a task
-        /// </summary>
-        /// <remarks>
-        /// Deletes a task and all associated records
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of task to delete</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<Object> TasksTaskIDDeleteWithHttpInfo (string taskID, string zapTraceSpan = null);
+        ApiResponse<Tasks> GetTasksWithHttpInfo (string zapTraceSpan = null, string after = null, string user = null, string org = null, string orgID = null, int? limit = null);
         /// <summary>
         /// Retrieve an task
         /// </summary>
@@ -111,7 +163,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="taskID">ID of task to get</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task</returns>
-        Task TasksTaskIDGet (string taskID, string zapTraceSpan = null);
+        Task GetTasksID (string taskID, string zapTraceSpan = null);
 
         /// <summary>
         /// Retrieve an task
@@ -123,7 +175,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="taskID">ID of task to get</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Task</returns>
-        ApiResponse<Task> TasksTaskIDGetWithHttpInfo (string taskID, string zapTraceSpan = null);
+        ApiResponse<Task> GetTasksIDWithHttpInfo (string taskID, string zapTraceSpan = null);
         /// <summary>
         /// list all labels for a task
         /// </summary>
@@ -134,7 +186,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="taskID">ID of the task</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>LabelsResponse</returns>
-        LabelsResponse TasksTaskIDLabelsGet (string taskID, string zapTraceSpan = null);
+        LabelsResponse GetTasksIDLabels (string taskID, string zapTraceSpan = null);
 
         /// <summary>
         /// list all labels for a task
@@ -146,57 +198,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="taskID">ID of the task</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelsResponse</returns>
-        ApiResponse<LabelsResponse> TasksTaskIDLabelsGetWithHttpInfo (string taskID, string zapTraceSpan = null);
-        /// <summary>
-        /// delete a label from a task
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="labelID">the label id</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns></returns>
-        void TasksTaskIDLabelsLabelIDDelete (string taskID, string labelID, string zapTraceSpan = null);
-
-        /// <summary>
-        /// delete a label from a task
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="labelID">the label id</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<Object> TasksTaskIDLabelsLabelIDDeleteWithHttpInfo (string taskID, string labelID, string zapTraceSpan = null);
-        /// <summary>
-        /// add a label to a task
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="labelMapping">label to add</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>LabelResponse</returns>
-        LabelResponse TasksTaskIDLabelsPost (string taskID, LabelMapping labelMapping, string zapTraceSpan = null);
-
-        /// <summary>
-        /// add a label to a task
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="labelMapping">label to add</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of LabelResponse</returns>
-        ApiResponse<LabelResponse> TasksTaskIDLabelsPostWithHttpInfo (string taskID, LabelMapping labelMapping, string zapTraceSpan = null);
+        ApiResponse<LabelsResponse> GetTasksIDLabelsWithHttpInfo (string taskID, string zapTraceSpan = null);
         /// <summary>
         /// Retrieve all logs for a task
         /// </summary>
@@ -207,7 +209,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="taskID">ID of task to get logs for</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Logs</returns>
-        Logs TasksTaskIDLogsGet (string taskID, string zapTraceSpan = null);
+        Logs GetTasksIDLogs (string taskID, string zapTraceSpan = null);
 
         /// <summary>
         /// Retrieve all logs for a task
@@ -219,7 +221,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="taskID">ID of task to get logs for</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Logs</returns>
-        ApiResponse<Logs> TasksTaskIDLogsGetWithHttpInfo (string taskID, string zapTraceSpan = null);
+        ApiResponse<Logs> GetTasksIDLogsWithHttpInfo (string taskID, string zapTraceSpan = null);
         /// <summary>
         /// List all task members
         /// </summary>
@@ -230,7 +232,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="taskID">ID of the task</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ResourceMembers</returns>
-        ResourceMembers TasksTaskIDMembersGet (string taskID, string zapTraceSpan = null);
+        ResourceMembers GetTasksIDMembers (string taskID, string zapTraceSpan = null);
 
         /// <summary>
         /// List all task members
@@ -242,57 +244,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="taskID">ID of the task</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMembers</returns>
-        ApiResponse<ResourceMembers> TasksTaskIDMembersGetWithHttpInfo (string taskID, string zapTraceSpan = null);
-        /// <summary>
-        /// Add task member
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ResourceMember</returns>
-        ResourceMember TasksTaskIDMembersPost (string taskID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
-
-        /// <summary>
-        /// Add task member
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of ResourceMember</returns>
-        ApiResponse<ResourceMember> TasksTaskIDMembersPostWithHttpInfo (string taskID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
-        /// <summary>
-        /// removes a member from an task
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns></returns>
-        void TasksTaskIDMembersUserIDDelete (string userID, string taskID, string zapTraceSpan = null);
-
-        /// <summary>
-        /// removes a member from an task
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<Object> TasksTaskIDMembersUserIDDeleteWithHttpInfo (string userID, string taskID, string zapTraceSpan = null);
+        ApiResponse<ResourceMembers> GetTasksIDMembersWithHttpInfo (string taskID, string zapTraceSpan = null);
         /// <summary>
         /// List all task owners
         /// </summary>
@@ -303,7 +255,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="taskID">ID of the task</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ResourceOwners</returns>
-        ResourceOwners TasksTaskIDOwnersGet (string taskID, string zapTraceSpan = null);
+        ResourceOwners GetTasksIDOwners (string taskID, string zapTraceSpan = null);
 
         /// <summary>
         /// List all task owners
@@ -315,82 +267,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="taskID">ID of the task</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwners</returns>
-        ApiResponse<ResourceOwners> TasksTaskIDOwnersGetWithHttpInfo (string taskID, string zapTraceSpan = null);
-        /// <summary>
-        /// Add task owner
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ResourceOwner</returns>
-        ResourceOwner TasksTaskIDOwnersPost (string taskID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
-
-        /// <summary>
-        /// Add task owner
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of ResourceOwner</returns>
-        ApiResponse<ResourceOwner> TasksTaskIDOwnersPostWithHttpInfo (string taskID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
-        /// <summary>
-        /// removes an owner from an task
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns></returns>
-        void TasksTaskIDOwnersUserIDDelete (string userID, string taskID, string zapTraceSpan = null);
-
-        /// <summary>
-        /// removes an owner from an task
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<Object> TasksTaskIDOwnersUserIDDeleteWithHttpInfo (string userID, string taskID, string zapTraceSpan = null);
-        /// <summary>
-        /// Update a task
-        /// </summary>
-        /// <remarks>
-        /// Update a task. This will cancel all queued runs.
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of task to get</param>
-        /// <param name="taskUpdateRequest">task update to apply</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task</returns>
-        Task TasksTaskIDPatch (string taskID, TaskUpdateRequest taskUpdateRequest, string zapTraceSpan = null);
-
-        /// <summary>
-        /// Update a task
-        /// </summary>
-        /// <remarks>
-        /// Update a task. This will cancel all queued runs.
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of task to get</param>
-        /// <param name="taskUpdateRequest">task update to apply</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Task</returns>
-        ApiResponse<Task> TasksTaskIDPatchWithHttpInfo (string taskID, TaskUpdateRequest taskUpdateRequest, string zapTraceSpan = null);
+        ApiResponse<ResourceOwners> GetTasksIDOwnersWithHttpInfo (string taskID, string zapTraceSpan = null);
         /// <summary>
         /// Retrieve list of run records for a task
         /// </summary>
@@ -405,7 +282,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="afterTime">filter runs to those scheduled after this time, RFC3339 (optional)</param>
         /// <param name="beforeTime">filter runs to those scheduled before this time, RFC3339 (optional)</param>
         /// <returns>Runs</returns>
-        Runs TasksTaskIDRunsGet (string taskID, string zapTraceSpan = null, string after = null, int? limit = null, DateTime? afterTime = null, DateTime? beforeTime = null);
+        Runs GetTasksIDRuns (string taskID, string zapTraceSpan = null, string after = null, int? limit = null, DateTime? afterTime = null, DateTime? beforeTime = null);
 
         /// <summary>
         /// Retrieve list of run records for a task
@@ -421,7 +298,180 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="afterTime">filter runs to those scheduled after this time, RFC3339 (optional)</param>
         /// <param name="beforeTime">filter runs to those scheduled before this time, RFC3339 (optional)</param>
         /// <returns>ApiResponse of Runs</returns>
-        ApiResponse<Runs> TasksTaskIDRunsGetWithHttpInfo (string taskID, string zapTraceSpan = null, string after = null, int? limit = null, DateTime? afterTime = null, DateTime? beforeTime = null);
+        ApiResponse<Runs> GetTasksIDRunsWithHttpInfo (string taskID, string zapTraceSpan = null, string after = null, int? limit = null, DateTime? afterTime = null, DateTime? beforeTime = null);
+        /// <summary>
+        /// Retrieve a single run record for a task
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskID">task ID</param>
+        /// <param name="runID">run ID</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Run</returns>
+        Run GetTasksIDRunsID (string taskID, string runID, string zapTraceSpan = null);
+
+        /// <summary>
+        /// Retrieve a single run record for a task
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskID">task ID</param>
+        /// <param name="runID">run ID</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Run</returns>
+        ApiResponse<Run> GetTasksIDRunsIDWithHttpInfo (string taskID, string runID, string zapTraceSpan = null);
+        /// <summary>
+        /// Retrieve all logs for a run
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskID">ID of task to get logs for.</param>
+        /// <param name="runID">ID of run to get logs for.</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Logs</returns>
+        Logs GetTasksIDRunsIDLogs (string taskID, string runID, string zapTraceSpan = null);
+
+        /// <summary>
+        /// Retrieve all logs for a run
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskID">ID of task to get logs for.</param>
+        /// <param name="runID">ID of run to get logs for.</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Logs</returns>
+        ApiResponse<Logs> GetTasksIDRunsIDLogsWithHttpInfo (string taskID, string runID, string zapTraceSpan = null);
+        /// <summary>
+        /// Update a task
+        /// </summary>
+        /// <remarks>
+        /// Update a task. This will cancel all queued runs.
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskID">ID of task to get</param>
+        /// <param name="taskUpdateRequest">task update to apply</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task</returns>
+        Task PatchTasksID (string taskID, TaskUpdateRequest taskUpdateRequest, string zapTraceSpan = null);
+
+        /// <summary>
+        /// Update a task
+        /// </summary>
+        /// <remarks>
+        /// Update a task. This will cancel all queued runs.
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskID">ID of task to get</param>
+        /// <param name="taskUpdateRequest">task update to apply</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Task</returns>
+        ApiResponse<Task> PatchTasksIDWithHttpInfo (string taskID, TaskUpdateRequest taskUpdateRequest, string zapTraceSpan = null);
+        /// <summary>
+        /// Create a new task
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskCreateRequest">task to create</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task</returns>
+        Task PostTasks (TaskCreateRequest taskCreateRequest, string zapTraceSpan = null);
+
+        /// <summary>
+        /// Create a new task
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskCreateRequest">task to create</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Task</returns>
+        ApiResponse<Task> PostTasksWithHttpInfo (TaskCreateRequest taskCreateRequest, string zapTraceSpan = null);
+        /// <summary>
+        /// add a label to a task
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskID">ID of the task</param>
+        /// <param name="labelMapping">label to add</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>LabelResponse</returns>
+        LabelResponse PostTasksIDLabels (string taskID, LabelMapping labelMapping, string zapTraceSpan = null);
+
+        /// <summary>
+        /// add a label to a task
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskID">ID of the task</param>
+        /// <param name="labelMapping">label to add</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of LabelResponse</returns>
+        ApiResponse<LabelResponse> PostTasksIDLabelsWithHttpInfo (string taskID, LabelMapping labelMapping, string zapTraceSpan = null);
+        /// <summary>
+        /// Add task member
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskID">ID of the task</param>
+        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ResourceMember</returns>
+        ResourceMember PostTasksIDMembers (string taskID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
+
+        /// <summary>
+        /// Add task member
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskID">ID of the task</param>
+        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of ResourceMember</returns>
+        ApiResponse<ResourceMember> PostTasksIDMembersWithHttpInfo (string taskID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
+        /// <summary>
+        /// Add task owner
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskID">ID of the task</param>
+        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ResourceOwner</returns>
+        ResourceOwner PostTasksIDOwners (string taskID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
+
+        /// <summary>
+        /// Add task owner
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskID">ID of the task</param>
+        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of ResourceOwner</returns>
+        ApiResponse<ResourceOwner> PostTasksIDOwnersWithHttpInfo (string taskID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
         /// <summary>
         /// manually start a run of the task now overriding the current schedule.
         /// </summary>
@@ -433,7 +483,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="runManually"> (optional)</param>
         /// <returns>Run</returns>
-        Run TasksTaskIDRunsPost (string taskID, string zapTraceSpan = null, RunManually runManually = null);
+        Run PostTasksIDRuns (string taskID, string zapTraceSpan = null, RunManually runManually = null);
 
         /// <summary>
         /// manually start a run of the task now overriding the current schedule.
@@ -446,7 +496,32 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="runManually"> (optional)</param>
         /// <returns>ApiResponse of Run</returns>
-        ApiResponse<Run> TasksTaskIDRunsPostWithHttpInfo (string taskID, string zapTraceSpan = null, RunManually runManually = null);
+        ApiResponse<Run> PostTasksIDRunsWithHttpInfo (string taskID, string zapTraceSpan = null, RunManually runManually = null);
+        /// <summary>
+        /// Retry a task run
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskID">task ID</param>
+        /// <param name="runID">run ID</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Run</returns>
+        Run PostTasksIDRunsIDRetry (string taskID, string runID, string zapTraceSpan = null);
+
+        /// <summary>
+        /// Retry a task run
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskID">task ID</param>
+        /// <param name="runID">run ID</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Run</returns>
+        ApiResponse<Run> PostTasksIDRunsIDRetryWithHttpInfo (string taskID, string runID, string zapTraceSpan = null);
         /// <summary>
         /// Cancel a run
         /// </summary>
@@ -472,83 +547,106 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> TasksTaskIDRunsRunIDDeleteWithHttpInfo (string taskID, string runID, string zapTraceSpan = null);
-        /// <summary>
-        /// Retrieve a single run record for a task
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">task ID</param>
-        /// <param name="runID">run ID</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Run</returns>
-        Run TasksTaskIDRunsRunIDGet (string taskID, string runID, string zapTraceSpan = null);
-
-        /// <summary>
-        /// Retrieve a single run record for a task
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">task ID</param>
-        /// <param name="runID">run ID</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Run</returns>
-        ApiResponse<Run> TasksTaskIDRunsRunIDGetWithHttpInfo (string taskID, string runID, string zapTraceSpan = null);
-        /// <summary>
-        /// Retrieve all logs for a run
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of task to get logs for.</param>
-        /// <param name="runID">ID of run to get logs for.</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Logs</returns>
-        Logs TasksTaskIDRunsRunIDLogsGet (string taskID, string runID, string zapTraceSpan = null);
-
-        /// <summary>
-        /// Retrieve all logs for a run
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of task to get logs for.</param>
-        /// <param name="runID">ID of run to get logs for.</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Logs</returns>
-        ApiResponse<Logs> TasksTaskIDRunsRunIDLogsGetWithHttpInfo (string taskID, string runID, string zapTraceSpan = null);
-        /// <summary>
-        /// Retry a task run
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">task ID</param>
-        /// <param name="runID">run ID</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Run</returns>
-        Run TasksTaskIDRunsRunIDRetryPost (string taskID, string runID, string zapTraceSpan = null);
-
-        /// <summary>
-        /// Retry a task run
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">task ID</param>
-        /// <param name="runID">run ID</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Run</returns>
-        ApiResponse<Run> TasksTaskIDRunsRunIDRetryPostWithHttpInfo (string taskID, string runID, string zapTraceSpan = null);
         #endregion Synchronous Operations
         #region Asynchronous Operations
+        /// <summary>
+        /// Delete a task
+        /// </summary>
+        /// <remarks>
+        /// Deletes a task and all associated records
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskID">ID of task to delete</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of void</returns>
+        System.Threading.Tasks.Task DeleteTasksIDAsync (string taskID, string zapTraceSpan = null);
+
+        /// <summary>
+        /// Delete a task
+        /// </summary>
+        /// <remarks>
+        /// Deletes a task and all associated records
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskID">ID of task to delete</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ApiResponse</returns>
+        System.Threading.Tasks.Task<ApiResponse<Object>> DeleteTasksIDAsyncWithHttpInfo (string taskID, string zapTraceSpan = null);
+        /// <summary>
+        /// delete a label from a task
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskID">ID of the task</param>
+        /// <param name="labelID">the label id</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of void</returns>
+        System.Threading.Tasks.Task DeleteTasksIDLabelsIDAsync (string taskID, string labelID, string zapTraceSpan = null);
+
+        /// <summary>
+        /// delete a label from a task
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskID">ID of the task</param>
+        /// <param name="labelID">the label id</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ApiResponse</returns>
+        System.Threading.Tasks.Task<ApiResponse<Object>> DeleteTasksIDLabelsIDAsyncWithHttpInfo (string taskID, string labelID, string zapTraceSpan = null);
+        /// <summary>
+        /// removes a member from an task
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userID">ID of member to remove</param>
+        /// <param name="taskID">ID of the task</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of void</returns>
+        System.Threading.Tasks.Task DeleteTasksIDMembersIDAsync (string userID, string taskID, string zapTraceSpan = null);
+
+        /// <summary>
+        /// removes a member from an task
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userID">ID of member to remove</param>
+        /// <param name="taskID">ID of the task</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ApiResponse</returns>
+        System.Threading.Tasks.Task<ApiResponse<Object>> DeleteTasksIDMembersIDAsyncWithHttpInfo (string userID, string taskID, string zapTraceSpan = null);
+        /// <summary>
+        /// removes an owner from an task
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userID">ID of owner to remove</param>
+        /// <param name="taskID">ID of the task</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of void</returns>
+        System.Threading.Tasks.Task DeleteTasksIDOwnersIDAsync (string userID, string taskID, string zapTraceSpan = null);
+
+        /// <summary>
+        /// removes an owner from an task
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userID">ID of owner to remove</param>
+        /// <param name="taskID">ID of the task</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ApiResponse</returns>
+        System.Threading.Tasks.Task<ApiResponse<Object>> DeleteTasksIDOwnersIDAsyncWithHttpInfo (string userID, string taskID, string zapTraceSpan = null);
         /// <summary>
         /// List tasks.
         /// </summary>
@@ -563,7 +661,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">filter tasks to a specific organization ID (optional)</param>
         /// <param name="limit">the number of tasks to return (optional, default to 100)</param>
         /// <returns>Task of Tasks</returns>
-        System.Threading.Tasks.Task<Tasks> TasksGetAsync (string zapTraceSpan = null, string after = null, string user = null, string org = null, string orgID = null, int? limit = null);
+        System.Threading.Tasks.Task<Tasks> GetTasksAsync (string zapTraceSpan = null, string after = null, string user = null, string org = null, string orgID = null, int? limit = null);
 
         /// <summary>
         /// List tasks.
@@ -579,53 +677,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">filter tasks to a specific organization ID (optional)</param>
         /// <param name="limit">the number of tasks to return (optional, default to 100)</param>
         /// <returns>Task of ApiResponse (Tasks)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Tasks>> TasksGetAsyncWithHttpInfo (string zapTraceSpan = null, string after = null, string user = null, string org = null, string orgID = null, int? limit = null);
-        /// <summary>
-        /// Create a new task
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskCreateRequest">task to create</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of Task</returns>
-        System.Threading.Tasks.Task<Task> TasksPostAsync (TaskCreateRequest taskCreateRequest, string zapTraceSpan = null);
-
-        /// <summary>
-        /// Create a new task
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskCreateRequest">task to create</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ApiResponse (Task)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Task>> TasksPostAsyncWithHttpInfo (TaskCreateRequest taskCreateRequest, string zapTraceSpan = null);
-        /// <summary>
-        /// Delete a task
-        /// </summary>
-        /// <remarks>
-        /// Deletes a task and all associated records
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of task to delete</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task TasksTaskIDDeleteAsync (string taskID, string zapTraceSpan = null);
-
-        /// <summary>
-        /// Delete a task
-        /// </summary>
-        /// <remarks>
-        /// Deletes a task and all associated records
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of task to delete</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> TasksTaskIDDeleteAsyncWithHttpInfo (string taskID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<Tasks>> GetTasksAsyncWithHttpInfo (string zapTraceSpan = null, string after = null, string user = null, string org = null, string orgID = null, int? limit = null);
         /// <summary>
         /// Retrieve an task
         /// </summary>
@@ -636,7 +688,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="taskID">ID of task to get</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of Task</returns>
-        System.Threading.Tasks.Task<Task> TasksTaskIDGetAsync (string taskID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<Task> GetTasksIDAsync (string taskID, string zapTraceSpan = null);
 
         /// <summary>
         /// Retrieve an task
@@ -648,7 +700,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="taskID">ID of task to get</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (Task)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Task>> TasksTaskIDGetAsyncWithHttpInfo (string taskID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<Task>> GetTasksIDAsyncWithHttpInfo (string taskID, string zapTraceSpan = null);
         /// <summary>
         /// list all labels for a task
         /// </summary>
@@ -659,7 +711,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="taskID">ID of the task</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of LabelsResponse</returns>
-        System.Threading.Tasks.Task<LabelsResponse> TasksTaskIDLabelsGetAsync (string taskID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<LabelsResponse> GetTasksIDLabelsAsync (string taskID, string zapTraceSpan = null);
 
         /// <summary>
         /// list all labels for a task
@@ -671,57 +723,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="taskID">ID of the task</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (LabelsResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<LabelsResponse>> TasksTaskIDLabelsGetAsyncWithHttpInfo (string taskID, string zapTraceSpan = null);
-        /// <summary>
-        /// delete a label from a task
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="labelID">the label id</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task TasksTaskIDLabelsLabelIDDeleteAsync (string taskID, string labelID, string zapTraceSpan = null);
-
-        /// <summary>
-        /// delete a label from a task
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="labelID">the label id</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> TasksTaskIDLabelsLabelIDDeleteAsyncWithHttpInfo (string taskID, string labelID, string zapTraceSpan = null);
-        /// <summary>
-        /// add a label to a task
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="labelMapping">label to add</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of LabelResponse</returns>
-        System.Threading.Tasks.Task<LabelResponse> TasksTaskIDLabelsPostAsync (string taskID, LabelMapping labelMapping, string zapTraceSpan = null);
-
-        /// <summary>
-        /// add a label to a task
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="labelMapping">label to add</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ApiResponse (LabelResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<LabelResponse>> TasksTaskIDLabelsPostAsyncWithHttpInfo (string taskID, LabelMapping labelMapping, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<LabelsResponse>> GetTasksIDLabelsAsyncWithHttpInfo (string taskID, string zapTraceSpan = null);
         /// <summary>
         /// Retrieve all logs for a task
         /// </summary>
@@ -732,7 +734,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="taskID">ID of task to get logs for</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of Logs</returns>
-        System.Threading.Tasks.Task<Logs> TasksTaskIDLogsGetAsync (string taskID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<Logs> GetTasksIDLogsAsync (string taskID, string zapTraceSpan = null);
 
         /// <summary>
         /// Retrieve all logs for a task
@@ -744,7 +746,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="taskID">ID of task to get logs for</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (Logs)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Logs>> TasksTaskIDLogsGetAsyncWithHttpInfo (string taskID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<Logs>> GetTasksIDLogsAsyncWithHttpInfo (string taskID, string zapTraceSpan = null);
         /// <summary>
         /// List all task members
         /// </summary>
@@ -755,7 +757,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="taskID">ID of the task</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ResourceMembers</returns>
-        System.Threading.Tasks.Task<ResourceMembers> TasksTaskIDMembersGetAsync (string taskID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ResourceMembers> GetTasksIDMembersAsync (string taskID, string zapTraceSpan = null);
 
         /// <summary>
         /// List all task members
@@ -767,57 +769,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="taskID">ID of the task</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (ResourceMembers)</returns>
-        System.Threading.Tasks.Task<ApiResponse<ResourceMembers>> TasksTaskIDMembersGetAsyncWithHttpInfo (string taskID, string zapTraceSpan = null);
-        /// <summary>
-        /// Add task member
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ResourceMember</returns>
-        System.Threading.Tasks.Task<ResourceMember> TasksTaskIDMembersPostAsync (string taskID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
-
-        /// <summary>
-        /// Add task member
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ApiResponse (ResourceMember)</returns>
-        System.Threading.Tasks.Task<ApiResponse<ResourceMember>> TasksTaskIDMembersPostAsyncWithHttpInfo (string taskID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
-        /// <summary>
-        /// removes a member from an task
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task TasksTaskIDMembersUserIDDeleteAsync (string userID, string taskID, string zapTraceSpan = null);
-
-        /// <summary>
-        /// removes a member from an task
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> TasksTaskIDMembersUserIDDeleteAsyncWithHttpInfo (string userID, string taskID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<ResourceMembers>> GetTasksIDMembersAsyncWithHttpInfo (string taskID, string zapTraceSpan = null);
         /// <summary>
         /// List all task owners
         /// </summary>
@@ -828,7 +780,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="taskID">ID of the task</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ResourceOwners</returns>
-        System.Threading.Tasks.Task<ResourceOwners> TasksTaskIDOwnersGetAsync (string taskID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ResourceOwners> GetTasksIDOwnersAsync (string taskID, string zapTraceSpan = null);
 
         /// <summary>
         /// List all task owners
@@ -840,82 +792,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="taskID">ID of the task</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (ResourceOwners)</returns>
-        System.Threading.Tasks.Task<ApiResponse<ResourceOwners>> TasksTaskIDOwnersGetAsyncWithHttpInfo (string taskID, string zapTraceSpan = null);
-        /// <summary>
-        /// Add task owner
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ResourceOwner</returns>
-        System.Threading.Tasks.Task<ResourceOwner> TasksTaskIDOwnersPostAsync (string taskID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
-
-        /// <summary>
-        /// Add task owner
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ApiResponse (ResourceOwner)</returns>
-        System.Threading.Tasks.Task<ApiResponse<ResourceOwner>> TasksTaskIDOwnersPostAsyncWithHttpInfo (string taskID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
-        /// <summary>
-        /// removes an owner from an task
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task TasksTaskIDOwnersUserIDDeleteAsync (string userID, string taskID, string zapTraceSpan = null);
-
-        /// <summary>
-        /// removes an owner from an task
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> TasksTaskIDOwnersUserIDDeleteAsyncWithHttpInfo (string userID, string taskID, string zapTraceSpan = null);
-        /// <summary>
-        /// Update a task
-        /// </summary>
-        /// <remarks>
-        /// Update a task. This will cancel all queued runs.
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of task to get</param>
-        /// <param name="taskUpdateRequest">task update to apply</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of Task</returns>
-        System.Threading.Tasks.Task<Task> TasksTaskIDPatchAsync (string taskID, TaskUpdateRequest taskUpdateRequest, string zapTraceSpan = null);
-
-        /// <summary>
-        /// Update a task
-        /// </summary>
-        /// <remarks>
-        /// Update a task. This will cancel all queued runs.
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of task to get</param>
-        /// <param name="taskUpdateRequest">task update to apply</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ApiResponse (Task)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Task>> TasksTaskIDPatchAsyncWithHttpInfo (string taskID, TaskUpdateRequest taskUpdateRequest, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<ResourceOwners>> GetTasksIDOwnersAsyncWithHttpInfo (string taskID, string zapTraceSpan = null);
         /// <summary>
         /// Retrieve list of run records for a task
         /// </summary>
@@ -930,7 +807,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="afterTime">filter runs to those scheduled after this time, RFC3339 (optional)</param>
         /// <param name="beforeTime">filter runs to those scheduled before this time, RFC3339 (optional)</param>
         /// <returns>Task of Runs</returns>
-        System.Threading.Tasks.Task<Runs> TasksTaskIDRunsGetAsync (string taskID, string zapTraceSpan = null, string after = null, int? limit = null, DateTime? afterTime = null, DateTime? beforeTime = null);
+        System.Threading.Tasks.Task<Runs> GetTasksIDRunsAsync (string taskID, string zapTraceSpan = null, string after = null, int? limit = null, DateTime? afterTime = null, DateTime? beforeTime = null);
 
         /// <summary>
         /// Retrieve list of run records for a task
@@ -946,7 +823,180 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="afterTime">filter runs to those scheduled after this time, RFC3339 (optional)</param>
         /// <param name="beforeTime">filter runs to those scheduled before this time, RFC3339 (optional)</param>
         /// <returns>Task of ApiResponse (Runs)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Runs>> TasksTaskIDRunsGetAsyncWithHttpInfo (string taskID, string zapTraceSpan = null, string after = null, int? limit = null, DateTime? afterTime = null, DateTime? beforeTime = null);
+        System.Threading.Tasks.Task<ApiResponse<Runs>> GetTasksIDRunsAsyncWithHttpInfo (string taskID, string zapTraceSpan = null, string after = null, int? limit = null, DateTime? afterTime = null, DateTime? beforeTime = null);
+        /// <summary>
+        /// Retrieve a single run record for a task
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskID">task ID</param>
+        /// <param name="runID">run ID</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of Run</returns>
+        System.Threading.Tasks.Task<Run> GetTasksIDRunsIDAsync (string taskID, string runID, string zapTraceSpan = null);
+
+        /// <summary>
+        /// Retrieve a single run record for a task
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskID">task ID</param>
+        /// <param name="runID">run ID</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ApiResponse (Run)</returns>
+        System.Threading.Tasks.Task<ApiResponse<Run>> GetTasksIDRunsIDAsyncWithHttpInfo (string taskID, string runID, string zapTraceSpan = null);
+        /// <summary>
+        /// Retrieve all logs for a run
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskID">ID of task to get logs for.</param>
+        /// <param name="runID">ID of run to get logs for.</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of Logs</returns>
+        System.Threading.Tasks.Task<Logs> GetTasksIDRunsIDLogsAsync (string taskID, string runID, string zapTraceSpan = null);
+
+        /// <summary>
+        /// Retrieve all logs for a run
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskID">ID of task to get logs for.</param>
+        /// <param name="runID">ID of run to get logs for.</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ApiResponse (Logs)</returns>
+        System.Threading.Tasks.Task<ApiResponse<Logs>> GetTasksIDRunsIDLogsAsyncWithHttpInfo (string taskID, string runID, string zapTraceSpan = null);
+        /// <summary>
+        /// Update a task
+        /// </summary>
+        /// <remarks>
+        /// Update a task. This will cancel all queued runs.
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskID">ID of task to get</param>
+        /// <param name="taskUpdateRequest">task update to apply</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of Task</returns>
+        System.Threading.Tasks.Task<Task> PatchTasksIDAsync (string taskID, TaskUpdateRequest taskUpdateRequest, string zapTraceSpan = null);
+
+        /// <summary>
+        /// Update a task
+        /// </summary>
+        /// <remarks>
+        /// Update a task. This will cancel all queued runs.
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskID">ID of task to get</param>
+        /// <param name="taskUpdateRequest">task update to apply</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ApiResponse (Task)</returns>
+        System.Threading.Tasks.Task<ApiResponse<Task>> PatchTasksIDAsyncWithHttpInfo (string taskID, TaskUpdateRequest taskUpdateRequest, string zapTraceSpan = null);
+        /// <summary>
+        /// Create a new task
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskCreateRequest">task to create</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of Task</returns>
+        System.Threading.Tasks.Task<Task> PostTasksAsync (TaskCreateRequest taskCreateRequest, string zapTraceSpan = null);
+
+        /// <summary>
+        /// Create a new task
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskCreateRequest">task to create</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ApiResponse (Task)</returns>
+        System.Threading.Tasks.Task<ApiResponse<Task>> PostTasksAsyncWithHttpInfo (TaskCreateRequest taskCreateRequest, string zapTraceSpan = null);
+        /// <summary>
+        /// add a label to a task
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskID">ID of the task</param>
+        /// <param name="labelMapping">label to add</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of LabelResponse</returns>
+        System.Threading.Tasks.Task<LabelResponse> PostTasksIDLabelsAsync (string taskID, LabelMapping labelMapping, string zapTraceSpan = null);
+
+        /// <summary>
+        /// add a label to a task
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskID">ID of the task</param>
+        /// <param name="labelMapping">label to add</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ApiResponse (LabelResponse)</returns>
+        System.Threading.Tasks.Task<ApiResponse<LabelResponse>> PostTasksIDLabelsAsyncWithHttpInfo (string taskID, LabelMapping labelMapping, string zapTraceSpan = null);
+        /// <summary>
+        /// Add task member
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskID">ID of the task</param>
+        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ResourceMember</returns>
+        System.Threading.Tasks.Task<ResourceMember> PostTasksIDMembersAsync (string taskID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
+
+        /// <summary>
+        /// Add task member
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskID">ID of the task</param>
+        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ApiResponse (ResourceMember)</returns>
+        System.Threading.Tasks.Task<ApiResponse<ResourceMember>> PostTasksIDMembersAsyncWithHttpInfo (string taskID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
+        /// <summary>
+        /// Add task owner
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskID">ID of the task</param>
+        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ResourceOwner</returns>
+        System.Threading.Tasks.Task<ResourceOwner> PostTasksIDOwnersAsync (string taskID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
+
+        /// <summary>
+        /// Add task owner
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskID">ID of the task</param>
+        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ApiResponse (ResourceOwner)</returns>
+        System.Threading.Tasks.Task<ApiResponse<ResourceOwner>> PostTasksIDOwnersAsyncWithHttpInfo (string taskID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
         /// <summary>
         /// manually start a run of the task now overriding the current schedule.
         /// </summary>
@@ -958,7 +1008,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="runManually"> (optional)</param>
         /// <returns>Task of Run</returns>
-        System.Threading.Tasks.Task<Run> TasksTaskIDRunsPostAsync (string taskID, string zapTraceSpan = null, RunManually runManually = null);
+        System.Threading.Tasks.Task<Run> PostTasksIDRunsAsync (string taskID, string zapTraceSpan = null, RunManually runManually = null);
 
         /// <summary>
         /// manually start a run of the task now overriding the current schedule.
@@ -971,7 +1021,32 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="runManually"> (optional)</param>
         /// <returns>Task of ApiResponse (Run)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Run>> TasksTaskIDRunsPostAsyncWithHttpInfo (string taskID, string zapTraceSpan = null, RunManually runManually = null);
+        System.Threading.Tasks.Task<ApiResponse<Run>> PostTasksIDRunsAsyncWithHttpInfo (string taskID, string zapTraceSpan = null, RunManually runManually = null);
+        /// <summary>
+        /// Retry a task run
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskID">task ID</param>
+        /// <param name="runID">run ID</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of Run</returns>
+        System.Threading.Tasks.Task<Run> PostTasksIDRunsIDRetryAsync (string taskID, string runID, string zapTraceSpan = null);
+
+        /// <summary>
+        /// Retry a task run
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskID">task ID</param>
+        /// <param name="runID">run ID</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ApiResponse (Run)</returns>
+        System.Threading.Tasks.Task<ApiResponse<Run>> PostTasksIDRunsIDRetryAsyncWithHttpInfo (string taskID, string runID, string zapTraceSpan = null);
         /// <summary>
         /// Cancel a run
         /// </summary>
@@ -997,81 +1072,6 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         System.Threading.Tasks.Task<ApiResponse<Object>> TasksTaskIDRunsRunIDDeleteAsyncWithHttpInfo (string taskID, string runID, string zapTraceSpan = null);
-        /// <summary>
-        /// Retrieve a single run record for a task
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">task ID</param>
-        /// <param name="runID">run ID</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of Run</returns>
-        System.Threading.Tasks.Task<Run> TasksTaskIDRunsRunIDGetAsync (string taskID, string runID, string zapTraceSpan = null);
-
-        /// <summary>
-        /// Retrieve a single run record for a task
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">task ID</param>
-        /// <param name="runID">run ID</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ApiResponse (Run)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Run>> TasksTaskIDRunsRunIDGetAsyncWithHttpInfo (string taskID, string runID, string zapTraceSpan = null);
-        /// <summary>
-        /// Retrieve all logs for a run
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of task to get logs for.</param>
-        /// <param name="runID">ID of run to get logs for.</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of Logs</returns>
-        System.Threading.Tasks.Task<Logs> TasksTaskIDRunsRunIDLogsGetAsync (string taskID, string runID, string zapTraceSpan = null);
-
-        /// <summary>
-        /// Retrieve all logs for a run
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of task to get logs for.</param>
-        /// <param name="runID">ID of run to get logs for.</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ApiResponse (Logs)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Logs>> TasksTaskIDRunsRunIDLogsGetAsyncWithHttpInfo (string taskID, string runID, string zapTraceSpan = null);
-        /// <summary>
-        /// Retry a task run
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">task ID</param>
-        /// <param name="runID">run ID</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of Run</returns>
-        System.Threading.Tasks.Task<Run> TasksTaskIDRunsRunIDRetryPostAsync (string taskID, string runID, string zapTraceSpan = null);
-
-        /// <summary>
-        /// Retry a task run
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">task ID</param>
-        /// <param name="runID">run ID</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ApiResponse (Run)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Run>> TasksTaskIDRunsRunIDRetryPostAsyncWithHttpInfo (string taskID, string runID, string zapTraceSpan = null);
         #endregion Asynchronous Operations
     }
 
@@ -1173,6 +1173,1024 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
+        /// Delete a task Deletes a task and all associated records
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskID">ID of task to delete</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns></returns>
+        public void DeleteTasksID (string taskID, string zapTraceSpan = null)
+        {
+             DeleteTasksIDWithHttpInfo(taskID, zapTraceSpan);
+        }
+
+        /// <summary>
+        /// Delete a task Deletes a task and all associated records
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskID">ID of task to delete</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        public ApiResponse<Object> DeleteTasksIDWithHttpInfo (string taskID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'taskID' is set
+            if (taskID == null)
+                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->DeleteTasksID");
+
+            var localVarPath = "/api/v2/tasks/{taskID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (taskID != null) localVarPathParams.Add("taskID", this.Configuration.ApiClient.ParameterToString(taskID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("DeleteTasksID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Object>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                null);
+        }
+
+        /// <summary>
+        /// Delete a task Deletes a task and all associated records
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskID">ID of task to delete</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        public IRestResponse DeleteTasksIDWithIRestResponse (string taskID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'taskID' is set
+            if (taskID == null)
+                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->DeleteTasksID");
+
+            var localVarPath = "/api/v2/tasks/{taskID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (taskID != null) localVarPathParams.Add("taskID", this.Configuration.ApiClient.ParameterToString(taskID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("DeleteTasksID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return localVarResponse;
+        }
+        
+        /// <summary>
+        /// Delete a task Deletes a task and all associated records
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskID">ID of task to delete</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        public RestRequest DeleteTasksIDWithRestRequest (string taskID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'taskID' is set
+            if (taskID == null)
+                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->DeleteTasksID");
+
+            var localVarPath = "/api/v2/tasks/{taskID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (taskID != null) localVarPathParams.Add("taskID", this.Configuration.ApiClient.ParameterToString(taskID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
+                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+        }
+
+        /// <summary>
+        /// Delete a task Deletes a task and all associated records
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskID">ID of task to delete</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of void</returns>
+        public async System.Threading.Tasks.Task DeleteTasksIDAsync (string taskID, string zapTraceSpan = null)
+        {
+             await DeleteTasksIDAsyncWithHttpInfo(taskID, zapTraceSpan);
+
+        }
+
+        /// <summary>
+        /// Delete a task Deletes a task and all associated records
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskID">ID of task to delete</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ApiResponse</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteTasksIDAsyncWithHttpInfo (string taskID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'taskID' is set
+            if (taskID == null)
+                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->DeleteTasksID");
+
+            var localVarPath = "/api/v2/tasks/{taskID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (taskID != null) localVarPathParams.Add("taskID", this.Configuration.ApiClient.ParameterToString(taskID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("DeleteTasksID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Object>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                null);
+        }
+
+        /// <summary>
+        /// delete a label from a task 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskID">ID of the task</param>
+        /// <param name="labelID">the label id</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns></returns>
+        public void DeleteTasksIDLabelsID (string taskID, string labelID, string zapTraceSpan = null)
+        {
+             DeleteTasksIDLabelsIDWithHttpInfo(taskID, labelID, zapTraceSpan);
+        }
+
+        /// <summary>
+        /// delete a label from a task 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskID">ID of the task</param>
+        /// <param name="labelID">the label id</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        public ApiResponse<Object> DeleteTasksIDLabelsIDWithHttpInfo (string taskID, string labelID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'taskID' is set
+            if (taskID == null)
+                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->DeleteTasksIDLabelsID");
+            // verify the required parameter 'labelID' is set
+            if (labelID == null)
+                throw new ApiException(400, "Missing required parameter 'labelID' when calling TasksService->DeleteTasksIDLabelsID");
+
+            var localVarPath = "/api/v2/tasks/{taskID}/labels/{labelID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (taskID != null) localVarPathParams.Add("taskID", this.Configuration.ApiClient.ParameterToString(taskID)); // path parameter
+            if (labelID != null) localVarPathParams.Add("labelID", this.Configuration.ApiClient.ParameterToString(labelID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("DeleteTasksIDLabelsID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Object>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                null);
+        }
+
+        /// <summary>
+        /// delete a label from a task 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskID">ID of the task</param>
+        /// <param name="labelID">the label id</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        public IRestResponse DeleteTasksIDLabelsIDWithIRestResponse (string taskID, string labelID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'taskID' is set
+            if (taskID == null)
+                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->DeleteTasksIDLabelsID");
+            // verify the required parameter 'labelID' is set
+            if (labelID == null)
+                throw new ApiException(400, "Missing required parameter 'labelID' when calling TasksService->DeleteTasksIDLabelsID");
+
+            var localVarPath = "/api/v2/tasks/{taskID}/labels/{labelID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (taskID != null) localVarPathParams.Add("taskID", this.Configuration.ApiClient.ParameterToString(taskID)); // path parameter
+            if (labelID != null) localVarPathParams.Add("labelID", this.Configuration.ApiClient.ParameterToString(labelID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("DeleteTasksIDLabelsID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return localVarResponse;
+        }
+        
+        /// <summary>
+        /// delete a label from a task 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskID">ID of the task</param>
+        /// <param name="labelID">the label id</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        public RestRequest DeleteTasksIDLabelsIDWithRestRequest (string taskID, string labelID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'taskID' is set
+            if (taskID == null)
+                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->DeleteTasksIDLabelsID");
+            // verify the required parameter 'labelID' is set
+            if (labelID == null)
+                throw new ApiException(400, "Missing required parameter 'labelID' when calling TasksService->DeleteTasksIDLabelsID");
+
+            var localVarPath = "/api/v2/tasks/{taskID}/labels/{labelID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (taskID != null) localVarPathParams.Add("taskID", this.Configuration.ApiClient.ParameterToString(taskID)); // path parameter
+            if (labelID != null) localVarPathParams.Add("labelID", this.Configuration.ApiClient.ParameterToString(labelID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
+                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+        }
+
+        /// <summary>
+        /// delete a label from a task 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskID">ID of the task</param>
+        /// <param name="labelID">the label id</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of void</returns>
+        public async System.Threading.Tasks.Task DeleteTasksIDLabelsIDAsync (string taskID, string labelID, string zapTraceSpan = null)
+        {
+             await DeleteTasksIDLabelsIDAsyncWithHttpInfo(taskID, labelID, zapTraceSpan);
+
+        }
+
+        /// <summary>
+        /// delete a label from a task 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskID">ID of the task</param>
+        /// <param name="labelID">the label id</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ApiResponse</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteTasksIDLabelsIDAsyncWithHttpInfo (string taskID, string labelID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'taskID' is set
+            if (taskID == null)
+                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->DeleteTasksIDLabelsID");
+            // verify the required parameter 'labelID' is set
+            if (labelID == null)
+                throw new ApiException(400, "Missing required parameter 'labelID' when calling TasksService->DeleteTasksIDLabelsID");
+
+            var localVarPath = "/api/v2/tasks/{taskID}/labels/{labelID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (taskID != null) localVarPathParams.Add("taskID", this.Configuration.ApiClient.ParameterToString(taskID)); // path parameter
+            if (labelID != null) localVarPathParams.Add("labelID", this.Configuration.ApiClient.ParameterToString(labelID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("DeleteTasksIDLabelsID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Object>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                null);
+        }
+
+        /// <summary>
+        /// removes a member from an task 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userID">ID of member to remove</param>
+        /// <param name="taskID">ID of the task</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns></returns>
+        public void DeleteTasksIDMembersID (string userID, string taskID, string zapTraceSpan = null)
+        {
+             DeleteTasksIDMembersIDWithHttpInfo(userID, taskID, zapTraceSpan);
+        }
+
+        /// <summary>
+        /// removes a member from an task 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userID">ID of member to remove</param>
+        /// <param name="taskID">ID of the task</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        public ApiResponse<Object> DeleteTasksIDMembersIDWithHttpInfo (string userID, string taskID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'userID' is set
+            if (userID == null)
+                throw new ApiException(400, "Missing required parameter 'userID' when calling TasksService->DeleteTasksIDMembersID");
+            // verify the required parameter 'taskID' is set
+            if (taskID == null)
+                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->DeleteTasksIDMembersID");
+
+            var localVarPath = "/api/v2/tasks/{taskID}/members/{userID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (userID != null) localVarPathParams.Add("userID", this.Configuration.ApiClient.ParameterToString(userID)); // path parameter
+            if (taskID != null) localVarPathParams.Add("taskID", this.Configuration.ApiClient.ParameterToString(taskID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("DeleteTasksIDMembersID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Object>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                null);
+        }
+
+        /// <summary>
+        /// removes a member from an task 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userID">ID of member to remove</param>
+        /// <param name="taskID">ID of the task</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        public IRestResponse DeleteTasksIDMembersIDWithIRestResponse (string userID, string taskID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'userID' is set
+            if (userID == null)
+                throw new ApiException(400, "Missing required parameter 'userID' when calling TasksService->DeleteTasksIDMembersID");
+            // verify the required parameter 'taskID' is set
+            if (taskID == null)
+                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->DeleteTasksIDMembersID");
+
+            var localVarPath = "/api/v2/tasks/{taskID}/members/{userID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (userID != null) localVarPathParams.Add("userID", this.Configuration.ApiClient.ParameterToString(userID)); // path parameter
+            if (taskID != null) localVarPathParams.Add("taskID", this.Configuration.ApiClient.ParameterToString(taskID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("DeleteTasksIDMembersID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return localVarResponse;
+        }
+        
+        /// <summary>
+        /// removes a member from an task 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userID">ID of member to remove</param>
+        /// <param name="taskID">ID of the task</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        public RestRequest DeleteTasksIDMembersIDWithRestRequest (string userID, string taskID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'userID' is set
+            if (userID == null)
+                throw new ApiException(400, "Missing required parameter 'userID' when calling TasksService->DeleteTasksIDMembersID");
+            // verify the required parameter 'taskID' is set
+            if (taskID == null)
+                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->DeleteTasksIDMembersID");
+
+            var localVarPath = "/api/v2/tasks/{taskID}/members/{userID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (userID != null) localVarPathParams.Add("userID", this.Configuration.ApiClient.ParameterToString(userID)); // path parameter
+            if (taskID != null) localVarPathParams.Add("taskID", this.Configuration.ApiClient.ParameterToString(taskID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
+                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+        }
+
+        /// <summary>
+        /// removes a member from an task 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userID">ID of member to remove</param>
+        /// <param name="taskID">ID of the task</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of void</returns>
+        public async System.Threading.Tasks.Task DeleteTasksIDMembersIDAsync (string userID, string taskID, string zapTraceSpan = null)
+        {
+             await DeleteTasksIDMembersIDAsyncWithHttpInfo(userID, taskID, zapTraceSpan);
+
+        }
+
+        /// <summary>
+        /// removes a member from an task 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userID">ID of member to remove</param>
+        /// <param name="taskID">ID of the task</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ApiResponse</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteTasksIDMembersIDAsyncWithHttpInfo (string userID, string taskID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'userID' is set
+            if (userID == null)
+                throw new ApiException(400, "Missing required parameter 'userID' when calling TasksService->DeleteTasksIDMembersID");
+            // verify the required parameter 'taskID' is set
+            if (taskID == null)
+                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->DeleteTasksIDMembersID");
+
+            var localVarPath = "/api/v2/tasks/{taskID}/members/{userID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (userID != null) localVarPathParams.Add("userID", this.Configuration.ApiClient.ParameterToString(userID)); // path parameter
+            if (taskID != null) localVarPathParams.Add("taskID", this.Configuration.ApiClient.ParameterToString(taskID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("DeleteTasksIDMembersID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Object>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                null);
+        }
+
+        /// <summary>
+        /// removes an owner from an task 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userID">ID of owner to remove</param>
+        /// <param name="taskID">ID of the task</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns></returns>
+        public void DeleteTasksIDOwnersID (string userID, string taskID, string zapTraceSpan = null)
+        {
+             DeleteTasksIDOwnersIDWithHttpInfo(userID, taskID, zapTraceSpan);
+        }
+
+        /// <summary>
+        /// removes an owner from an task 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userID">ID of owner to remove</param>
+        /// <param name="taskID">ID of the task</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        public ApiResponse<Object> DeleteTasksIDOwnersIDWithHttpInfo (string userID, string taskID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'userID' is set
+            if (userID == null)
+                throw new ApiException(400, "Missing required parameter 'userID' when calling TasksService->DeleteTasksIDOwnersID");
+            // verify the required parameter 'taskID' is set
+            if (taskID == null)
+                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->DeleteTasksIDOwnersID");
+
+            var localVarPath = "/api/v2/tasks/{taskID}/owners/{userID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (userID != null) localVarPathParams.Add("userID", this.Configuration.ApiClient.ParameterToString(userID)); // path parameter
+            if (taskID != null) localVarPathParams.Add("taskID", this.Configuration.ApiClient.ParameterToString(taskID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("DeleteTasksIDOwnersID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Object>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                null);
+        }
+
+        /// <summary>
+        /// removes an owner from an task 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userID">ID of owner to remove</param>
+        /// <param name="taskID">ID of the task</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        public IRestResponse DeleteTasksIDOwnersIDWithIRestResponse (string userID, string taskID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'userID' is set
+            if (userID == null)
+                throw new ApiException(400, "Missing required parameter 'userID' when calling TasksService->DeleteTasksIDOwnersID");
+            // verify the required parameter 'taskID' is set
+            if (taskID == null)
+                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->DeleteTasksIDOwnersID");
+
+            var localVarPath = "/api/v2/tasks/{taskID}/owners/{userID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (userID != null) localVarPathParams.Add("userID", this.Configuration.ApiClient.ParameterToString(userID)); // path parameter
+            if (taskID != null) localVarPathParams.Add("taskID", this.Configuration.ApiClient.ParameterToString(taskID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("DeleteTasksIDOwnersID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return localVarResponse;
+        }
+        
+        /// <summary>
+        /// removes an owner from an task 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userID">ID of owner to remove</param>
+        /// <param name="taskID">ID of the task</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        public RestRequest DeleteTasksIDOwnersIDWithRestRequest (string userID, string taskID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'userID' is set
+            if (userID == null)
+                throw new ApiException(400, "Missing required parameter 'userID' when calling TasksService->DeleteTasksIDOwnersID");
+            // verify the required parameter 'taskID' is set
+            if (taskID == null)
+                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->DeleteTasksIDOwnersID");
+
+            var localVarPath = "/api/v2/tasks/{taskID}/owners/{userID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (userID != null) localVarPathParams.Add("userID", this.Configuration.ApiClient.ParameterToString(userID)); // path parameter
+            if (taskID != null) localVarPathParams.Add("taskID", this.Configuration.ApiClient.ParameterToString(taskID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
+                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+        }
+
+        /// <summary>
+        /// removes an owner from an task 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userID">ID of owner to remove</param>
+        /// <param name="taskID">ID of the task</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of void</returns>
+        public async System.Threading.Tasks.Task DeleteTasksIDOwnersIDAsync (string userID, string taskID, string zapTraceSpan = null)
+        {
+             await DeleteTasksIDOwnersIDAsyncWithHttpInfo(userID, taskID, zapTraceSpan);
+
+        }
+
+        /// <summary>
+        /// removes an owner from an task 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userID">ID of owner to remove</param>
+        /// <param name="taskID">ID of the task</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ApiResponse</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteTasksIDOwnersIDAsyncWithHttpInfo (string userID, string taskID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'userID' is set
+            if (userID == null)
+                throw new ApiException(400, "Missing required parameter 'userID' when calling TasksService->DeleteTasksIDOwnersID");
+            // verify the required parameter 'taskID' is set
+            if (taskID == null)
+                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->DeleteTasksIDOwnersID");
+
+            var localVarPath = "/api/v2/tasks/{taskID}/owners/{userID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (userID != null) localVarPathParams.Add("userID", this.Configuration.ApiClient.ParameterToString(userID)); // path parameter
+            if (taskID != null) localVarPathParams.Add("taskID", this.Configuration.ApiClient.ParameterToString(taskID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("DeleteTasksIDOwnersID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Object>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                null);
+        }
+
+        /// <summary>
         /// List tasks. 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
@@ -1183,9 +2201,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">filter tasks to a specific organization ID (optional)</param>
         /// <param name="limit">the number of tasks to return (optional, default to 100)</param>
         /// <returns>Tasks</returns>
-        public Tasks TasksGet (string zapTraceSpan = null, string after = null, string user = null, string org = null, string orgID = null, int? limit = null)
+        public Tasks GetTasks (string zapTraceSpan = null, string after = null, string user = null, string org = null, string orgID = null, int? limit = null)
         {
-             ApiResponse<Tasks> localVarResponse = TasksGetWithHttpInfo(zapTraceSpan, after, user, org, orgID, limit);
+             ApiResponse<Tasks> localVarResponse = GetTasksWithHttpInfo(zapTraceSpan, after, user, org, orgID, limit);
              return localVarResponse.Data;
         }
 
@@ -1200,7 +2218,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">filter tasks to a specific organization ID (optional)</param>
         /// <param name="limit">the number of tasks to return (optional, default to 100)</param>
         /// <returns>ApiResponse of Tasks</returns>
-        public ApiResponse< Tasks > TasksGetWithHttpInfo (string zapTraceSpan = null, string after = null, string user = null, string org = null, string orgID = null, int? limit = null)
+        public ApiResponse< Tasks > GetTasksWithHttpInfo (string zapTraceSpan = null, string after = null, string user = null, string org = null, string orgID = null, int? limit = null)
         {
 
             var localVarPath = "/api/v2/tasks";
@@ -1242,7 +2260,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("TasksGet", localVarResponse);
+                Exception exception = ExceptionFactory("GetTasks", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -1262,7 +2280,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">filter tasks to a specific organization ID (optional)</param>
         /// <param name="limit">the number of tasks to return (optional, default to 100)</param>
         /// <returns>ApiResponse of Tasks</returns>
-        public IRestResponse TasksGetWithIRestResponse (string zapTraceSpan = null, string after = null, string user = null, string org = null, string orgID = null, int? limit = null)
+        public IRestResponse GetTasksWithIRestResponse (string zapTraceSpan = null, string after = null, string user = null, string org = null, string orgID = null, int? limit = null)
         {
 
             var localVarPath = "/api/v2/tasks";
@@ -1304,7 +2322,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("TasksGet", localVarResponse);
+                Exception exception = ExceptionFactory("GetTasks", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -1322,7 +2340,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">filter tasks to a specific organization ID (optional)</param>
         /// <param name="limit">the number of tasks to return (optional, default to 100)</param>
         /// <returns>ApiResponse of Tasks</returns>
-        public RestRequest TasksGetWithRestRequest (string zapTraceSpan = null, string after = null, string user = null, string org = null, string orgID = null, int? limit = null)
+        public RestRequest GetTasksWithRestRequest (string zapTraceSpan = null, string after = null, string user = null, string org = null, string orgID = null, int? limit = null)
         {
 
             var localVarPath = "/api/v2/tasks";
@@ -1371,9 +2389,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">filter tasks to a specific organization ID (optional)</param>
         /// <param name="limit">the number of tasks to return (optional, default to 100)</param>
         /// <returns>Task of Tasks</returns>
-        public async System.Threading.Tasks.Task<Tasks> TasksGetAsync (string zapTraceSpan = null, string after = null, string user = null, string org = null, string orgID = null, int? limit = null)
+        public async System.Threading.Tasks.Task<Tasks> GetTasksAsync (string zapTraceSpan = null, string after = null, string user = null, string org = null, string orgID = null, int? limit = null)
         {
-             ApiResponse<Tasks> localVarResponse = await TasksGetAsyncWithHttpInfo(zapTraceSpan, after, user, org, orgID, limit);
+             ApiResponse<Tasks> localVarResponse = await GetTasksAsyncWithHttpInfo(zapTraceSpan, after, user, org, orgID, limit);
              return localVarResponse.Data;
 
         }
@@ -1389,7 +2407,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">filter tasks to a specific organization ID (optional)</param>
         /// <param name="limit">the number of tasks to return (optional, default to 100)</param>
         /// <returns>Task of ApiResponse (Tasks)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Tasks>> TasksGetAsyncWithHttpInfo (string zapTraceSpan = null, string after = null, string user = null, string org = null, string orgID = null, int? limit = null)
+        public async System.Threading.Tasks.Task<ApiResponse<Tasks>> GetTasksAsyncWithHttpInfo (string zapTraceSpan = null, string after = null, string user = null, string org = null, string orgID = null, int? limit = null)
         {
 
             var localVarPath = "/api/v2/tasks";
@@ -1431,7 +2449,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("TasksGet", localVarResponse);
+                Exception exception = ExceptionFactory("GetTasks", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -1441,525 +2459,15 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Create a new task 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskCreateRequest">task to create</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task</returns>
-        public Task TasksPost (TaskCreateRequest taskCreateRequest, string zapTraceSpan = null)
-        {
-             ApiResponse<Task> localVarResponse = TasksPostWithHttpInfo(taskCreateRequest, zapTraceSpan);
-             return localVarResponse.Data;
-        }
-
-        /// <summary>
-        /// Create a new task 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskCreateRequest">task to create</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Task</returns>
-        public ApiResponse< Task > TasksPostWithHttpInfo (TaskCreateRequest taskCreateRequest, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'taskCreateRequest' is set
-            if (taskCreateRequest == null)
-                throw new ApiException(400, "Missing required parameter 'taskCreateRequest' when calling TasksService->TasksPost");
-
-            var localVarPath = "/api/v2/tasks";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-                "application/json"
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (taskCreateRequest != null && taskCreateRequest.GetType() != typeof(byte[]))
-            {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(taskCreateRequest); // http body (model) parameter
-            }
-            else
-            {
-                localVarPostBody = taskCreateRequest; // byte array
-            }
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("TasksPost", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return new ApiResponse<Task>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (Task) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Task)));
-        }
-
-        /// <summary>
-        /// Create a new task 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskCreateRequest">task to create</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Task</returns>
-        public IRestResponse TasksPostWithIRestResponse (TaskCreateRequest taskCreateRequest, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'taskCreateRequest' is set
-            if (taskCreateRequest == null)
-                throw new ApiException(400, "Missing required parameter 'taskCreateRequest' when calling TasksService->TasksPost");
-
-            var localVarPath = "/api/v2/tasks";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-                "application/json"
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (taskCreateRequest != null && taskCreateRequest.GetType() != typeof(byte[]))
-            {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(taskCreateRequest); // http body (model) parameter
-            }
-            else
-            {
-                localVarPostBody = taskCreateRequest; // byte array
-            }
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("TasksPost", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return localVarResponse;
-        }
-        
-        /// <summary>
-        /// Create a new task 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskCreateRequest">task to create</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Task</returns>
-        public RestRequest TasksPostWithRestRequest (TaskCreateRequest taskCreateRequest, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'taskCreateRequest' is set
-            if (taskCreateRequest == null)
-                throw new ApiException(400, "Missing required parameter 'taskCreateRequest' when calling TasksService->TasksPost");
-
-            var localVarPath = "/api/v2/tasks";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-                "application/json"
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (taskCreateRequest != null && taskCreateRequest.GetType() != typeof(byte[]))
-            {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(taskCreateRequest); // http body (model) parameter
-            }
-            else
-            {
-                localVarPostBody = taskCreateRequest; // byte array
-            }
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
-                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-        }
-
-        /// <summary>
-        /// Create a new task 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskCreateRequest">task to create</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of Task</returns>
-        public async System.Threading.Tasks.Task<Task> TasksPostAsync (TaskCreateRequest taskCreateRequest, string zapTraceSpan = null)
-        {
-             ApiResponse<Task> localVarResponse = await TasksPostAsyncWithHttpInfo(taskCreateRequest, zapTraceSpan);
-             return localVarResponse.Data;
-
-        }
-
-        /// <summary>
-        /// Create a new task 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskCreateRequest">task to create</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ApiResponse (Task)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Task>> TasksPostAsyncWithHttpInfo (TaskCreateRequest taskCreateRequest, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'taskCreateRequest' is set
-            if (taskCreateRequest == null)
-                throw new ApiException(400, "Missing required parameter 'taskCreateRequest' when calling TasksService->TasksPost");
-
-            var localVarPath = "/api/v2/tasks";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-                "application/json"
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (taskCreateRequest != null && taskCreateRequest.GetType() != typeof(byte[]))
-            {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(taskCreateRequest); // http body (model) parameter
-            }
-            else
-            {
-                localVarPostBody = taskCreateRequest; // byte array
-            }
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("TasksPost", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return new ApiResponse<Task>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (Task) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Task)));
-        }
-
-        /// <summary>
-        /// Delete a task Deletes a task and all associated records
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of task to delete</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns></returns>
-        public void TasksTaskIDDelete (string taskID, string zapTraceSpan = null)
-        {
-             TasksTaskIDDeleteWithHttpInfo(taskID, zapTraceSpan);
-        }
-
-        /// <summary>
-        /// Delete a task Deletes a task and all associated records
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of task to delete</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Object(void)</returns>
-        public ApiResponse<Object> TasksTaskIDDeleteWithHttpInfo (string taskID, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'taskID' is set
-            if (taskID == null)
-                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->TasksTaskIDDelete");
-
-            var localVarPath = "/api/v2/tasks/{taskID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (taskID != null) localVarPathParams.Add("taskID", this.Configuration.ApiClient.ParameterToString(taskID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("TasksTaskIDDelete", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return new ApiResponse<Object>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                null);
-        }
-
-        /// <summary>
-        /// Delete a task Deletes a task and all associated records
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of task to delete</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Object(void)</returns>
-        public IRestResponse TasksTaskIDDeleteWithIRestResponse (string taskID, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'taskID' is set
-            if (taskID == null)
-                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->TasksTaskIDDelete");
-
-            var localVarPath = "/api/v2/tasks/{taskID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (taskID != null) localVarPathParams.Add("taskID", this.Configuration.ApiClient.ParameterToString(taskID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("TasksTaskIDDelete", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return localVarResponse;
-        }
-        
-        /// <summary>
-        /// Delete a task Deletes a task and all associated records
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of task to delete</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Object(void)</returns>
-        public RestRequest TasksTaskIDDeleteWithRestRequest (string taskID, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'taskID' is set
-            if (taskID == null)
-                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->TasksTaskIDDelete");
-
-            var localVarPath = "/api/v2/tasks/{taskID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (taskID != null) localVarPathParams.Add("taskID", this.Configuration.ApiClient.ParameterToString(taskID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
-                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-        }
-
-        /// <summary>
-        /// Delete a task Deletes a task and all associated records
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of task to delete</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task TasksTaskIDDeleteAsync (string taskID, string zapTraceSpan = null)
-        {
-             await TasksTaskIDDeleteAsyncWithHttpInfo(taskID, zapTraceSpan);
-
-        }
-
-        /// <summary>
-        /// Delete a task Deletes a task and all associated records
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of task to delete</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Object>> TasksTaskIDDeleteAsyncWithHttpInfo (string taskID, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'taskID' is set
-            if (taskID == null)
-                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->TasksTaskIDDelete");
-
-            var localVarPath = "/api/v2/tasks/{taskID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (taskID != null) localVarPathParams.Add("taskID", this.Configuration.ApiClient.ParameterToString(taskID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("TasksTaskIDDelete", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return new ApiResponse<Object>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                null);
-        }
-
-        /// <summary>
         /// Retrieve an task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="taskID">ID of task to get</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task</returns>
-        public Task TasksTaskIDGet (string taskID, string zapTraceSpan = null)
+        public Task GetTasksID (string taskID, string zapTraceSpan = null)
         {
-             ApiResponse<Task> localVarResponse = TasksTaskIDGetWithHttpInfo(taskID, zapTraceSpan);
+             ApiResponse<Task> localVarResponse = GetTasksIDWithHttpInfo(taskID, zapTraceSpan);
              return localVarResponse.Data;
         }
 
@@ -1970,11 +2478,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="taskID">ID of task to get</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Task</returns>
-        public ApiResponse< Task > TasksTaskIDGetWithHttpInfo (string taskID, string zapTraceSpan = null)
+        public ApiResponse< Task > GetTasksIDWithHttpInfo (string taskID, string zapTraceSpan = null)
         {
             // verify the required parameter 'taskID' is set
             if (taskID == null)
-                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->TasksTaskIDGet");
+                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->GetTasksID");
 
             var localVarPath = "/api/v2/tasks/{taskID}";
             var localVarPathParams = new Dictionary<String, String>();
@@ -2011,7 +2519,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("TasksTaskIDGet", localVarResponse);
+                Exception exception = ExceptionFactory("GetTasksID", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -2027,11 +2535,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="taskID">ID of task to get</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Task</returns>
-        public IRestResponse TasksTaskIDGetWithIRestResponse (string taskID, string zapTraceSpan = null)
+        public IRestResponse GetTasksIDWithIRestResponse (string taskID, string zapTraceSpan = null)
         {
             // verify the required parameter 'taskID' is set
             if (taskID == null)
-                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->TasksTaskIDGet");
+                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->GetTasksID");
 
             var localVarPath = "/api/v2/tasks/{taskID}";
             var localVarPathParams = new Dictionary<String, String>();
@@ -2068,7 +2576,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("TasksTaskIDGet", localVarResponse);
+                Exception exception = ExceptionFactory("GetTasksID", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -2082,11 +2590,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="taskID">ID of task to get</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Task</returns>
-        public RestRequest TasksTaskIDGetWithRestRequest (string taskID, string zapTraceSpan = null)
+        public RestRequest GetTasksIDWithRestRequest (string taskID, string zapTraceSpan = null)
         {
             // verify the required parameter 'taskID' is set
             if (taskID == null)
-                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->TasksTaskIDGet");
+                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->GetTasksID");
 
             var localVarPath = "/api/v2/tasks/{taskID}";
             var localVarPathParams = new Dictionary<String, String>();
@@ -2126,9 +2634,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="taskID">ID of task to get</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of Task</returns>
-        public async System.Threading.Tasks.Task<Task> TasksTaskIDGetAsync (string taskID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<Task> GetTasksIDAsync (string taskID, string zapTraceSpan = null)
         {
-             ApiResponse<Task> localVarResponse = await TasksTaskIDGetAsyncWithHttpInfo(taskID, zapTraceSpan);
+             ApiResponse<Task> localVarResponse = await GetTasksIDAsyncWithHttpInfo(taskID, zapTraceSpan);
              return localVarResponse.Data;
 
         }
@@ -2140,11 +2648,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="taskID">ID of task to get</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (Task)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Task>> TasksTaskIDGetAsyncWithHttpInfo (string taskID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<Task>> GetTasksIDAsyncWithHttpInfo (string taskID, string zapTraceSpan = null)
         {
             // verify the required parameter 'taskID' is set
             if (taskID == null)
-                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->TasksTaskIDGet");
+                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->GetTasksID");
 
             var localVarPath = "/api/v2/tasks/{taskID}";
             var localVarPathParams = new Dictionary<String, String>();
@@ -2181,7 +2689,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("TasksTaskIDGet", localVarResponse);
+                Exception exception = ExceptionFactory("GetTasksID", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -2197,9 +2705,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="taskID">ID of the task</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>LabelsResponse</returns>
-        public LabelsResponse TasksTaskIDLabelsGet (string taskID, string zapTraceSpan = null)
+        public LabelsResponse GetTasksIDLabels (string taskID, string zapTraceSpan = null)
         {
-             ApiResponse<LabelsResponse> localVarResponse = TasksTaskIDLabelsGetWithHttpInfo(taskID, zapTraceSpan);
+             ApiResponse<LabelsResponse> localVarResponse = GetTasksIDLabelsWithHttpInfo(taskID, zapTraceSpan);
              return localVarResponse.Data;
         }
 
@@ -2210,11 +2718,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="taskID">ID of the task</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelsResponse</returns>
-        public ApiResponse< LabelsResponse > TasksTaskIDLabelsGetWithHttpInfo (string taskID, string zapTraceSpan = null)
+        public ApiResponse< LabelsResponse > GetTasksIDLabelsWithHttpInfo (string taskID, string zapTraceSpan = null)
         {
             // verify the required parameter 'taskID' is set
             if (taskID == null)
-                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->TasksTaskIDLabelsGet");
+                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->GetTasksIDLabels");
 
             var localVarPath = "/api/v2/tasks/{taskID}/labels";
             var localVarPathParams = new Dictionary<String, String>();
@@ -2251,7 +2759,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("TasksTaskIDLabelsGet", localVarResponse);
+                Exception exception = ExceptionFactory("GetTasksIDLabels", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -2267,11 +2775,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="taskID">ID of the task</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelsResponse</returns>
-        public IRestResponse TasksTaskIDLabelsGetWithIRestResponse (string taskID, string zapTraceSpan = null)
+        public IRestResponse GetTasksIDLabelsWithIRestResponse (string taskID, string zapTraceSpan = null)
         {
             // verify the required parameter 'taskID' is set
             if (taskID == null)
-                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->TasksTaskIDLabelsGet");
+                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->GetTasksIDLabels");
 
             var localVarPath = "/api/v2/tasks/{taskID}/labels";
             var localVarPathParams = new Dictionary<String, String>();
@@ -2308,7 +2816,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("TasksTaskIDLabelsGet", localVarResponse);
+                Exception exception = ExceptionFactory("GetTasksIDLabels", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -2322,11 +2830,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="taskID">ID of the task</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelsResponse</returns>
-        public RestRequest TasksTaskIDLabelsGetWithRestRequest (string taskID, string zapTraceSpan = null)
+        public RestRequest GetTasksIDLabelsWithRestRequest (string taskID, string zapTraceSpan = null)
         {
             // verify the required parameter 'taskID' is set
             if (taskID == null)
-                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->TasksTaskIDLabelsGet");
+                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->GetTasksIDLabels");
 
             var localVarPath = "/api/v2/tasks/{taskID}/labels";
             var localVarPathParams = new Dictionary<String, String>();
@@ -2366,9 +2874,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="taskID">ID of the task</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of LabelsResponse</returns>
-        public async System.Threading.Tasks.Task<LabelsResponse> TasksTaskIDLabelsGetAsync (string taskID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<LabelsResponse> GetTasksIDLabelsAsync (string taskID, string zapTraceSpan = null)
         {
-             ApiResponse<LabelsResponse> localVarResponse = await TasksTaskIDLabelsGetAsyncWithHttpInfo(taskID, zapTraceSpan);
+             ApiResponse<LabelsResponse> localVarResponse = await GetTasksIDLabelsAsyncWithHttpInfo(taskID, zapTraceSpan);
              return localVarResponse.Data;
 
         }
@@ -2380,11 +2888,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="taskID">ID of the task</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (LabelsResponse)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<LabelsResponse>> TasksTaskIDLabelsGetAsyncWithHttpInfo (string taskID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<LabelsResponse>> GetTasksIDLabelsAsyncWithHttpInfo (string taskID, string zapTraceSpan = null)
         {
             // verify the required parameter 'taskID' is set
             if (taskID == null)
-                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->TasksTaskIDLabelsGet");
+                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->GetTasksIDLabels");
 
             var localVarPath = "/api/v2/tasks/{taskID}/labels";
             var localVarPathParams = new Dictionary<String, String>();
@@ -2421,7 +2929,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("TasksTaskIDLabelsGet", localVarResponse);
+                Exception exception = ExceptionFactory("GetTasksIDLabels", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -2431,36 +2939,32 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// delete a label from a task 
+        /// Retrieve all logs for a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="labelID">the label id</param>
+        /// <param name="taskID">ID of task to get logs for</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns></returns>
-        public void TasksTaskIDLabelsLabelIDDelete (string taskID, string labelID, string zapTraceSpan = null)
+        /// <returns>Logs</returns>
+        public Logs GetTasksIDLogs (string taskID, string zapTraceSpan = null)
         {
-             TasksTaskIDLabelsLabelIDDeleteWithHttpInfo(taskID, labelID, zapTraceSpan);
+             ApiResponse<Logs> localVarResponse = GetTasksIDLogsWithHttpInfo(taskID, zapTraceSpan);
+             return localVarResponse.Data;
         }
 
         /// <summary>
-        /// delete a label from a task 
+        /// Retrieve all logs for a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="labelID">the label id</param>
+        /// <param name="taskID">ID of task to get logs for</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Object(void)</returns>
-        public ApiResponse<Object> TasksTaskIDLabelsLabelIDDeleteWithHttpInfo (string taskID, string labelID, string zapTraceSpan = null)
+        /// <returns>ApiResponse of Logs</returns>
+        public ApiResponse< Logs > GetTasksIDLogsWithHttpInfo (string taskID, string zapTraceSpan = null)
         {
             // verify the required parameter 'taskID' is set
             if (taskID == null)
-                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->TasksTaskIDLabelsLabelIDDelete");
-            // verify the required parameter 'labelID' is set
-            if (labelID == null)
-                throw new ApiException(400, "Missing required parameter 'labelID' when calling TasksService->TasksTaskIDLabelsLabelIDDelete");
+                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->GetTasksIDLogs");
 
-            var localVarPath = "/api/v2/tasks/{taskID}/labels/{labelID}";
+            var localVarPath = "/api/v2/tasks/{taskID}/logs";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -2474,7 +2978,6 @@ namespace InfluxDB.Client.Api.Service
             String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             if (taskID != null) localVarPathParams.Add("taskID", this.Configuration.ApiClient.ParameterToString(taskID)); // path parameter
-            if (labelID != null) localVarPathParams.Add("labelID", this.Configuration.ApiClient.ParameterToString(labelID)); // path parameter
             if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
 
             // to determine the Accept header
@@ -2489,40 +2992,36 @@ namespace InfluxDB.Client.Api.Service
 
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("TasksTaskIDLabelsLabelIDDelete", localVarResponse);
+                Exception exception = ExceptionFactory("GetTasksIDLogs", localVarResponse);
                 if (exception != null) throw exception;
             }
 
-            return new ApiResponse<Object>(localVarStatusCode,
+            return new ApiResponse<Logs>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                null);
+                (Logs) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Logs)));
         }
 
         /// <summary>
-        /// delete a label from a task 
+        /// Retrieve all logs for a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="labelID">the label id</param>
+        /// <param name="taskID">ID of task to get logs for</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Object(void)</returns>
-        public IRestResponse TasksTaskIDLabelsLabelIDDeleteWithIRestResponse (string taskID, string labelID, string zapTraceSpan = null)
+        /// <returns>ApiResponse of Logs</returns>
+        public IRestResponse GetTasksIDLogsWithIRestResponse (string taskID, string zapTraceSpan = null)
         {
             // verify the required parameter 'taskID' is set
             if (taskID == null)
-                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->TasksTaskIDLabelsLabelIDDelete");
-            // verify the required parameter 'labelID' is set
-            if (labelID == null)
-                throw new ApiException(400, "Missing required parameter 'labelID' when calling TasksService->TasksTaskIDLabelsLabelIDDelete");
+                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->GetTasksIDLogs");
 
-            var localVarPath = "/api/v2/tasks/{taskID}/labels/{labelID}";
+            var localVarPath = "/api/v2/tasks/{taskID}/logs";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -2536,7 +3035,6 @@ namespace InfluxDB.Client.Api.Service
             String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             if (taskID != null) localVarPathParams.Add("taskID", this.Configuration.ApiClient.ParameterToString(taskID)); // path parameter
-            if (labelID != null) localVarPathParams.Add("labelID", this.Configuration.ApiClient.ParameterToString(labelID)); // path parameter
             if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
 
             // to determine the Accept header
@@ -2551,14 +3049,14 @@ namespace InfluxDB.Client.Api.Service
 
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("TasksTaskIDLabelsLabelIDDelete", localVarResponse);
+                Exception exception = ExceptionFactory("GetTasksIDLogs", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -2566,23 +3064,19 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// delete a label from a task 
+        /// Retrieve all logs for a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="labelID">the label id</param>
+        /// <param name="taskID">ID of task to get logs for</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Object(void)</returns>
-        public RestRequest TasksTaskIDLabelsLabelIDDeleteWithRestRequest (string taskID, string labelID, string zapTraceSpan = null)
+        /// <returns>ApiResponse of Logs</returns>
+        public RestRequest GetTasksIDLogsWithRestRequest (string taskID, string zapTraceSpan = null)
         {
             // verify the required parameter 'taskID' is set
             if (taskID == null)
-                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->TasksTaskIDLabelsLabelIDDelete");
-            // verify the required parameter 'labelID' is set
-            if (labelID == null)
-                throw new ApiException(400, "Missing required parameter 'labelID' when calling TasksService->TasksTaskIDLabelsLabelIDDelete");
+                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->GetTasksIDLogs");
 
-            var localVarPath = "/api/v2/tasks/{taskID}/labels/{labelID}";
+            var localVarPath = "/api/v2/tasks/{taskID}/logs";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -2596,7 +3090,6 @@ namespace InfluxDB.Client.Api.Service
             String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             if (taskID != null) localVarPathParams.Add("taskID", this.Configuration.ApiClient.ParameterToString(taskID)); // path parameter
-            if (labelID != null) localVarPathParams.Add("labelID", this.Configuration.ApiClient.ParameterToString(labelID)); // path parameter
             if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
 
             // to determine the Accept header
@@ -2610,42 +3103,38 @@ namespace InfluxDB.Client.Api.Service
 
 
             return this.Configuration.ApiClient.PrepareRequest(localVarPath,
-                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
         }
 
         /// <summary>
-        /// delete a label from a task 
+        /// Retrieve all logs for a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="labelID">the label id</param>
+        /// <param name="taskID">ID of task to get logs for</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task TasksTaskIDLabelsLabelIDDeleteAsync (string taskID, string labelID, string zapTraceSpan = null)
+        /// <returns>Task of Logs</returns>
+        public async System.Threading.Tasks.Task<Logs> GetTasksIDLogsAsync (string taskID, string zapTraceSpan = null)
         {
-             await TasksTaskIDLabelsLabelIDDeleteAsyncWithHttpInfo(taskID, labelID, zapTraceSpan);
+             ApiResponse<Logs> localVarResponse = await GetTasksIDLogsAsyncWithHttpInfo(taskID, zapTraceSpan);
+             return localVarResponse.Data;
 
         }
 
         /// <summary>
-        /// delete a label from a task 
+        /// Retrieve all logs for a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="labelID">the label id</param>
+        /// <param name="taskID">ID of task to get logs for</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Object>> TasksTaskIDLabelsLabelIDDeleteAsyncWithHttpInfo (string taskID, string labelID, string zapTraceSpan = null)
+        /// <returns>Task of ApiResponse (Logs)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<Logs>> GetTasksIDLogsAsyncWithHttpInfo (string taskID, string zapTraceSpan = null)
         {
             // verify the required parameter 'taskID' is set
             if (taskID == null)
-                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->TasksTaskIDLabelsLabelIDDelete");
-            // verify the required parameter 'labelID' is set
-            if (labelID == null)
-                throw new ApiException(400, "Missing required parameter 'labelID' when calling TasksService->TasksTaskIDLabelsLabelIDDelete");
+                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->GetTasksIDLogs");
 
-            var localVarPath = "/api/v2/tasks/{taskID}/labels/{labelID}";
+            var localVarPath = "/api/v2/tasks/{taskID}/logs";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -2659,7 +3148,6 @@ namespace InfluxDB.Client.Api.Service
             String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             if (taskID != null) localVarPathParams.Add("taskID", this.Configuration.ApiClient.ParameterToString(taskID)); // path parameter
-            if (labelID != null) localVarPathParams.Add("labelID", this.Configuration.ApiClient.ParameterToString(labelID)); // path parameter
             if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
 
             // to determine the Accept header
@@ -2674,20 +3162,1870 @@ namespace InfluxDB.Client.Api.Service
 
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("TasksTaskIDLabelsLabelIDDelete", localVarResponse);
+                Exception exception = ExceptionFactory("GetTasksIDLogs", localVarResponse);
                 if (exception != null) throw exception;
             }
 
-            return new ApiResponse<Object>(localVarStatusCode,
+            return new ApiResponse<Logs>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                null);
+                (Logs) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Logs)));
+        }
+
+        /// <summary>
+        /// List all task members 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskID">ID of the task</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ResourceMembers</returns>
+        public ResourceMembers GetTasksIDMembers (string taskID, string zapTraceSpan = null)
+        {
+             ApiResponse<ResourceMembers> localVarResponse = GetTasksIDMembersWithHttpInfo(taskID, zapTraceSpan);
+             return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// List all task members 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskID">ID of the task</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of ResourceMembers</returns>
+        public ApiResponse< ResourceMembers > GetTasksIDMembersWithHttpInfo (string taskID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'taskID' is set
+            if (taskID == null)
+                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->GetTasksIDMembers");
+
+            var localVarPath = "/api/v2/tasks/{taskID}/members";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (taskID != null) localVarPathParams.Add("taskID", this.Configuration.ApiClient.ParameterToString(taskID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("GetTasksIDMembers", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<ResourceMembers>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (ResourceMembers) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(ResourceMembers)));
+        }
+
+        /// <summary>
+        /// List all task members 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskID">ID of the task</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of ResourceMembers</returns>
+        public IRestResponse GetTasksIDMembersWithIRestResponse (string taskID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'taskID' is set
+            if (taskID == null)
+                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->GetTasksIDMembers");
+
+            var localVarPath = "/api/v2/tasks/{taskID}/members";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (taskID != null) localVarPathParams.Add("taskID", this.Configuration.ApiClient.ParameterToString(taskID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("GetTasksIDMembers", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return localVarResponse;
+        }
+        
+        /// <summary>
+        /// List all task members 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskID">ID of the task</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of ResourceMembers</returns>
+        public RestRequest GetTasksIDMembersWithRestRequest (string taskID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'taskID' is set
+            if (taskID == null)
+                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->GetTasksIDMembers");
+
+            var localVarPath = "/api/v2/tasks/{taskID}/members";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (taskID != null) localVarPathParams.Add("taskID", this.Configuration.ApiClient.ParameterToString(taskID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
+                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+        }
+
+        /// <summary>
+        /// List all task members 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskID">ID of the task</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ResourceMembers</returns>
+        public async System.Threading.Tasks.Task<ResourceMembers> GetTasksIDMembersAsync (string taskID, string zapTraceSpan = null)
+        {
+             ApiResponse<ResourceMembers> localVarResponse = await GetTasksIDMembersAsyncWithHttpInfo(taskID, zapTraceSpan);
+             return localVarResponse.Data;
+
+        }
+
+        /// <summary>
+        /// List all task members 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskID">ID of the task</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ApiResponse (ResourceMembers)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<ResourceMembers>> GetTasksIDMembersAsyncWithHttpInfo (string taskID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'taskID' is set
+            if (taskID == null)
+                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->GetTasksIDMembers");
+
+            var localVarPath = "/api/v2/tasks/{taskID}/members";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (taskID != null) localVarPathParams.Add("taskID", this.Configuration.ApiClient.ParameterToString(taskID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("GetTasksIDMembers", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<ResourceMembers>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (ResourceMembers) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(ResourceMembers)));
+        }
+
+        /// <summary>
+        /// List all task owners 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskID">ID of the task</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ResourceOwners</returns>
+        public ResourceOwners GetTasksIDOwners (string taskID, string zapTraceSpan = null)
+        {
+             ApiResponse<ResourceOwners> localVarResponse = GetTasksIDOwnersWithHttpInfo(taskID, zapTraceSpan);
+             return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// List all task owners 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskID">ID of the task</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of ResourceOwners</returns>
+        public ApiResponse< ResourceOwners > GetTasksIDOwnersWithHttpInfo (string taskID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'taskID' is set
+            if (taskID == null)
+                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->GetTasksIDOwners");
+
+            var localVarPath = "/api/v2/tasks/{taskID}/owners";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (taskID != null) localVarPathParams.Add("taskID", this.Configuration.ApiClient.ParameterToString(taskID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("GetTasksIDOwners", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<ResourceOwners>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (ResourceOwners) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(ResourceOwners)));
+        }
+
+        /// <summary>
+        /// List all task owners 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskID">ID of the task</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of ResourceOwners</returns>
+        public IRestResponse GetTasksIDOwnersWithIRestResponse (string taskID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'taskID' is set
+            if (taskID == null)
+                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->GetTasksIDOwners");
+
+            var localVarPath = "/api/v2/tasks/{taskID}/owners";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (taskID != null) localVarPathParams.Add("taskID", this.Configuration.ApiClient.ParameterToString(taskID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("GetTasksIDOwners", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return localVarResponse;
+        }
+        
+        /// <summary>
+        /// List all task owners 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskID">ID of the task</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of ResourceOwners</returns>
+        public RestRequest GetTasksIDOwnersWithRestRequest (string taskID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'taskID' is set
+            if (taskID == null)
+                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->GetTasksIDOwners");
+
+            var localVarPath = "/api/v2/tasks/{taskID}/owners";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (taskID != null) localVarPathParams.Add("taskID", this.Configuration.ApiClient.ParameterToString(taskID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
+                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+        }
+
+        /// <summary>
+        /// List all task owners 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskID">ID of the task</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ResourceOwners</returns>
+        public async System.Threading.Tasks.Task<ResourceOwners> GetTasksIDOwnersAsync (string taskID, string zapTraceSpan = null)
+        {
+             ApiResponse<ResourceOwners> localVarResponse = await GetTasksIDOwnersAsyncWithHttpInfo(taskID, zapTraceSpan);
+             return localVarResponse.Data;
+
+        }
+
+        /// <summary>
+        /// List all task owners 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskID">ID of the task</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ApiResponse (ResourceOwners)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<ResourceOwners>> GetTasksIDOwnersAsyncWithHttpInfo (string taskID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'taskID' is set
+            if (taskID == null)
+                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->GetTasksIDOwners");
+
+            var localVarPath = "/api/v2/tasks/{taskID}/owners";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (taskID != null) localVarPathParams.Add("taskID", this.Configuration.ApiClient.ParameterToString(taskID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("GetTasksIDOwners", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<ResourceOwners>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (ResourceOwners) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(ResourceOwners)));
+        }
+
+        /// <summary>
+        /// Retrieve list of run records for a task 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskID">ID of task to get runs for</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="after">returns runs after specified ID (optional)</param>
+        /// <param name="limit">the number of runs to return (optional, default to 20)</param>
+        /// <param name="afterTime">filter runs to those scheduled after this time, RFC3339 (optional)</param>
+        /// <param name="beforeTime">filter runs to those scheduled before this time, RFC3339 (optional)</param>
+        /// <returns>Runs</returns>
+        public Runs GetTasksIDRuns (string taskID, string zapTraceSpan = null, string after = null, int? limit = null, DateTime? afterTime = null, DateTime? beforeTime = null)
+        {
+             ApiResponse<Runs> localVarResponse = GetTasksIDRunsWithHttpInfo(taskID, zapTraceSpan, after, limit, afterTime, beforeTime);
+             return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Retrieve list of run records for a task 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskID">ID of task to get runs for</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="after">returns runs after specified ID (optional)</param>
+        /// <param name="limit">the number of runs to return (optional, default to 20)</param>
+        /// <param name="afterTime">filter runs to those scheduled after this time, RFC3339 (optional)</param>
+        /// <param name="beforeTime">filter runs to those scheduled before this time, RFC3339 (optional)</param>
+        /// <returns>ApiResponse of Runs</returns>
+        public ApiResponse< Runs > GetTasksIDRunsWithHttpInfo (string taskID, string zapTraceSpan = null, string after = null, int? limit = null, DateTime? afterTime = null, DateTime? beforeTime = null)
+        {
+            // verify the required parameter 'taskID' is set
+            if (taskID == null)
+                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->GetTasksIDRuns");
+
+            var localVarPath = "/api/v2/tasks/{taskID}/runs";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (taskID != null) localVarPathParams.Add("taskID", this.Configuration.ApiClient.ParameterToString(taskID)); // path parameter
+            if (after != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "after", after)); // query parameter
+            if (limit != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "limit", limit)); // query parameter
+            if (afterTime != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "afterTime", afterTime)); // query parameter
+            if (beforeTime != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "beforeTime", beforeTime)); // query parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("GetTasksIDRuns", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Runs>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (Runs) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Runs)));
+        }
+
+        /// <summary>
+        /// Retrieve list of run records for a task 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskID">ID of task to get runs for</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="after">returns runs after specified ID (optional)</param>
+        /// <param name="limit">the number of runs to return (optional, default to 20)</param>
+        /// <param name="afterTime">filter runs to those scheduled after this time, RFC3339 (optional)</param>
+        /// <param name="beforeTime">filter runs to those scheduled before this time, RFC3339 (optional)</param>
+        /// <returns>ApiResponse of Runs</returns>
+        public IRestResponse GetTasksIDRunsWithIRestResponse (string taskID, string zapTraceSpan = null, string after = null, int? limit = null, DateTime? afterTime = null, DateTime? beforeTime = null)
+        {
+            // verify the required parameter 'taskID' is set
+            if (taskID == null)
+                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->GetTasksIDRuns");
+
+            var localVarPath = "/api/v2/tasks/{taskID}/runs";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (taskID != null) localVarPathParams.Add("taskID", this.Configuration.ApiClient.ParameterToString(taskID)); // path parameter
+            if (after != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "after", after)); // query parameter
+            if (limit != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "limit", limit)); // query parameter
+            if (afterTime != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "afterTime", afterTime)); // query parameter
+            if (beforeTime != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "beforeTime", beforeTime)); // query parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("GetTasksIDRuns", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return localVarResponse;
+        }
+        
+        /// <summary>
+        /// Retrieve list of run records for a task 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskID">ID of task to get runs for</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="after">returns runs after specified ID (optional)</param>
+        /// <param name="limit">the number of runs to return (optional, default to 20)</param>
+        /// <param name="afterTime">filter runs to those scheduled after this time, RFC3339 (optional)</param>
+        /// <param name="beforeTime">filter runs to those scheduled before this time, RFC3339 (optional)</param>
+        /// <returns>ApiResponse of Runs</returns>
+        public RestRequest GetTasksIDRunsWithRestRequest (string taskID, string zapTraceSpan = null, string after = null, int? limit = null, DateTime? afterTime = null, DateTime? beforeTime = null)
+        {
+            // verify the required parameter 'taskID' is set
+            if (taskID == null)
+                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->GetTasksIDRuns");
+
+            var localVarPath = "/api/v2/tasks/{taskID}/runs";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (taskID != null) localVarPathParams.Add("taskID", this.Configuration.ApiClient.ParameterToString(taskID)); // path parameter
+            if (after != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "after", after)); // query parameter
+            if (limit != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "limit", limit)); // query parameter
+            if (afterTime != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "afterTime", afterTime)); // query parameter
+            if (beforeTime != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "beforeTime", beforeTime)); // query parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
+                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+        }
+
+        /// <summary>
+        /// Retrieve list of run records for a task 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskID">ID of task to get runs for</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="after">returns runs after specified ID (optional)</param>
+        /// <param name="limit">the number of runs to return (optional, default to 20)</param>
+        /// <param name="afterTime">filter runs to those scheduled after this time, RFC3339 (optional)</param>
+        /// <param name="beforeTime">filter runs to those scheduled before this time, RFC3339 (optional)</param>
+        /// <returns>Task of Runs</returns>
+        public async System.Threading.Tasks.Task<Runs> GetTasksIDRunsAsync (string taskID, string zapTraceSpan = null, string after = null, int? limit = null, DateTime? afterTime = null, DateTime? beforeTime = null)
+        {
+             ApiResponse<Runs> localVarResponse = await GetTasksIDRunsAsyncWithHttpInfo(taskID, zapTraceSpan, after, limit, afterTime, beforeTime);
+             return localVarResponse.Data;
+
+        }
+
+        /// <summary>
+        /// Retrieve list of run records for a task 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskID">ID of task to get runs for</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="after">returns runs after specified ID (optional)</param>
+        /// <param name="limit">the number of runs to return (optional, default to 20)</param>
+        /// <param name="afterTime">filter runs to those scheduled after this time, RFC3339 (optional)</param>
+        /// <param name="beforeTime">filter runs to those scheduled before this time, RFC3339 (optional)</param>
+        /// <returns>Task of ApiResponse (Runs)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<Runs>> GetTasksIDRunsAsyncWithHttpInfo (string taskID, string zapTraceSpan = null, string after = null, int? limit = null, DateTime? afterTime = null, DateTime? beforeTime = null)
+        {
+            // verify the required parameter 'taskID' is set
+            if (taskID == null)
+                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->GetTasksIDRuns");
+
+            var localVarPath = "/api/v2/tasks/{taskID}/runs";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (taskID != null) localVarPathParams.Add("taskID", this.Configuration.ApiClient.ParameterToString(taskID)); // path parameter
+            if (after != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "after", after)); // query parameter
+            if (limit != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "limit", limit)); // query parameter
+            if (afterTime != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "afterTime", afterTime)); // query parameter
+            if (beforeTime != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "beforeTime", beforeTime)); // query parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("GetTasksIDRuns", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Runs>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (Runs) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Runs)));
+        }
+
+        /// <summary>
+        /// Retrieve a single run record for a task 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskID">task ID</param>
+        /// <param name="runID">run ID</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Run</returns>
+        public Run GetTasksIDRunsID (string taskID, string runID, string zapTraceSpan = null)
+        {
+             ApiResponse<Run> localVarResponse = GetTasksIDRunsIDWithHttpInfo(taskID, runID, zapTraceSpan);
+             return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Retrieve a single run record for a task 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskID">task ID</param>
+        /// <param name="runID">run ID</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Run</returns>
+        public ApiResponse< Run > GetTasksIDRunsIDWithHttpInfo (string taskID, string runID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'taskID' is set
+            if (taskID == null)
+                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->GetTasksIDRunsID");
+            // verify the required parameter 'runID' is set
+            if (runID == null)
+                throw new ApiException(400, "Missing required parameter 'runID' when calling TasksService->GetTasksIDRunsID");
+
+            var localVarPath = "/api/v2/tasks/{taskID}/runs/{runID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (taskID != null) localVarPathParams.Add("taskID", this.Configuration.ApiClient.ParameterToString(taskID)); // path parameter
+            if (runID != null) localVarPathParams.Add("runID", this.Configuration.ApiClient.ParameterToString(runID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("GetTasksIDRunsID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Run>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (Run) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Run)));
+        }
+
+        /// <summary>
+        /// Retrieve a single run record for a task 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskID">task ID</param>
+        /// <param name="runID">run ID</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Run</returns>
+        public IRestResponse GetTasksIDRunsIDWithIRestResponse (string taskID, string runID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'taskID' is set
+            if (taskID == null)
+                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->GetTasksIDRunsID");
+            // verify the required parameter 'runID' is set
+            if (runID == null)
+                throw new ApiException(400, "Missing required parameter 'runID' when calling TasksService->GetTasksIDRunsID");
+
+            var localVarPath = "/api/v2/tasks/{taskID}/runs/{runID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (taskID != null) localVarPathParams.Add("taskID", this.Configuration.ApiClient.ParameterToString(taskID)); // path parameter
+            if (runID != null) localVarPathParams.Add("runID", this.Configuration.ApiClient.ParameterToString(runID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("GetTasksIDRunsID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return localVarResponse;
+        }
+        
+        /// <summary>
+        /// Retrieve a single run record for a task 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskID">task ID</param>
+        /// <param name="runID">run ID</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Run</returns>
+        public RestRequest GetTasksIDRunsIDWithRestRequest (string taskID, string runID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'taskID' is set
+            if (taskID == null)
+                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->GetTasksIDRunsID");
+            // verify the required parameter 'runID' is set
+            if (runID == null)
+                throw new ApiException(400, "Missing required parameter 'runID' when calling TasksService->GetTasksIDRunsID");
+
+            var localVarPath = "/api/v2/tasks/{taskID}/runs/{runID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (taskID != null) localVarPathParams.Add("taskID", this.Configuration.ApiClient.ParameterToString(taskID)); // path parameter
+            if (runID != null) localVarPathParams.Add("runID", this.Configuration.ApiClient.ParameterToString(runID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
+                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+        }
+
+        /// <summary>
+        /// Retrieve a single run record for a task 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskID">task ID</param>
+        /// <param name="runID">run ID</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of Run</returns>
+        public async System.Threading.Tasks.Task<Run> GetTasksIDRunsIDAsync (string taskID, string runID, string zapTraceSpan = null)
+        {
+             ApiResponse<Run> localVarResponse = await GetTasksIDRunsIDAsyncWithHttpInfo(taskID, runID, zapTraceSpan);
+             return localVarResponse.Data;
+
+        }
+
+        /// <summary>
+        /// Retrieve a single run record for a task 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskID">task ID</param>
+        /// <param name="runID">run ID</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ApiResponse (Run)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<Run>> GetTasksIDRunsIDAsyncWithHttpInfo (string taskID, string runID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'taskID' is set
+            if (taskID == null)
+                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->GetTasksIDRunsID");
+            // verify the required parameter 'runID' is set
+            if (runID == null)
+                throw new ApiException(400, "Missing required parameter 'runID' when calling TasksService->GetTasksIDRunsID");
+
+            var localVarPath = "/api/v2/tasks/{taskID}/runs/{runID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (taskID != null) localVarPathParams.Add("taskID", this.Configuration.ApiClient.ParameterToString(taskID)); // path parameter
+            if (runID != null) localVarPathParams.Add("runID", this.Configuration.ApiClient.ParameterToString(runID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("GetTasksIDRunsID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Run>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (Run) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Run)));
+        }
+
+        /// <summary>
+        /// Retrieve all logs for a run 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskID">ID of task to get logs for.</param>
+        /// <param name="runID">ID of run to get logs for.</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Logs</returns>
+        public Logs GetTasksIDRunsIDLogs (string taskID, string runID, string zapTraceSpan = null)
+        {
+             ApiResponse<Logs> localVarResponse = GetTasksIDRunsIDLogsWithHttpInfo(taskID, runID, zapTraceSpan);
+             return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Retrieve all logs for a run 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskID">ID of task to get logs for.</param>
+        /// <param name="runID">ID of run to get logs for.</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Logs</returns>
+        public ApiResponse< Logs > GetTasksIDRunsIDLogsWithHttpInfo (string taskID, string runID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'taskID' is set
+            if (taskID == null)
+                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->GetTasksIDRunsIDLogs");
+            // verify the required parameter 'runID' is set
+            if (runID == null)
+                throw new ApiException(400, "Missing required parameter 'runID' when calling TasksService->GetTasksIDRunsIDLogs");
+
+            var localVarPath = "/api/v2/tasks/{taskID}/runs/{runID}/logs";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (taskID != null) localVarPathParams.Add("taskID", this.Configuration.ApiClient.ParameterToString(taskID)); // path parameter
+            if (runID != null) localVarPathParams.Add("runID", this.Configuration.ApiClient.ParameterToString(runID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("GetTasksIDRunsIDLogs", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Logs>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (Logs) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Logs)));
+        }
+
+        /// <summary>
+        /// Retrieve all logs for a run 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskID">ID of task to get logs for.</param>
+        /// <param name="runID">ID of run to get logs for.</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Logs</returns>
+        public IRestResponse GetTasksIDRunsIDLogsWithIRestResponse (string taskID, string runID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'taskID' is set
+            if (taskID == null)
+                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->GetTasksIDRunsIDLogs");
+            // verify the required parameter 'runID' is set
+            if (runID == null)
+                throw new ApiException(400, "Missing required parameter 'runID' when calling TasksService->GetTasksIDRunsIDLogs");
+
+            var localVarPath = "/api/v2/tasks/{taskID}/runs/{runID}/logs";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (taskID != null) localVarPathParams.Add("taskID", this.Configuration.ApiClient.ParameterToString(taskID)); // path parameter
+            if (runID != null) localVarPathParams.Add("runID", this.Configuration.ApiClient.ParameterToString(runID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("GetTasksIDRunsIDLogs", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return localVarResponse;
+        }
+        
+        /// <summary>
+        /// Retrieve all logs for a run 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskID">ID of task to get logs for.</param>
+        /// <param name="runID">ID of run to get logs for.</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Logs</returns>
+        public RestRequest GetTasksIDRunsIDLogsWithRestRequest (string taskID, string runID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'taskID' is set
+            if (taskID == null)
+                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->GetTasksIDRunsIDLogs");
+            // verify the required parameter 'runID' is set
+            if (runID == null)
+                throw new ApiException(400, "Missing required parameter 'runID' when calling TasksService->GetTasksIDRunsIDLogs");
+
+            var localVarPath = "/api/v2/tasks/{taskID}/runs/{runID}/logs";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (taskID != null) localVarPathParams.Add("taskID", this.Configuration.ApiClient.ParameterToString(taskID)); // path parameter
+            if (runID != null) localVarPathParams.Add("runID", this.Configuration.ApiClient.ParameterToString(runID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
+                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+        }
+
+        /// <summary>
+        /// Retrieve all logs for a run 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskID">ID of task to get logs for.</param>
+        /// <param name="runID">ID of run to get logs for.</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of Logs</returns>
+        public async System.Threading.Tasks.Task<Logs> GetTasksIDRunsIDLogsAsync (string taskID, string runID, string zapTraceSpan = null)
+        {
+             ApiResponse<Logs> localVarResponse = await GetTasksIDRunsIDLogsAsyncWithHttpInfo(taskID, runID, zapTraceSpan);
+             return localVarResponse.Data;
+
+        }
+
+        /// <summary>
+        /// Retrieve all logs for a run 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskID">ID of task to get logs for.</param>
+        /// <param name="runID">ID of run to get logs for.</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ApiResponse (Logs)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<Logs>> GetTasksIDRunsIDLogsAsyncWithHttpInfo (string taskID, string runID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'taskID' is set
+            if (taskID == null)
+                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->GetTasksIDRunsIDLogs");
+            // verify the required parameter 'runID' is set
+            if (runID == null)
+                throw new ApiException(400, "Missing required parameter 'runID' when calling TasksService->GetTasksIDRunsIDLogs");
+
+            var localVarPath = "/api/v2/tasks/{taskID}/runs/{runID}/logs";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (taskID != null) localVarPathParams.Add("taskID", this.Configuration.ApiClient.ParameterToString(taskID)); // path parameter
+            if (runID != null) localVarPathParams.Add("runID", this.Configuration.ApiClient.ParameterToString(runID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("GetTasksIDRunsIDLogs", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Logs>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (Logs) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Logs)));
+        }
+
+        /// <summary>
+        /// Update a task Update a task. This will cancel all queued runs.
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskID">ID of task to get</param>
+        /// <param name="taskUpdateRequest">task update to apply</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task</returns>
+        public Task PatchTasksID (string taskID, TaskUpdateRequest taskUpdateRequest, string zapTraceSpan = null)
+        {
+             ApiResponse<Task> localVarResponse = PatchTasksIDWithHttpInfo(taskID, taskUpdateRequest, zapTraceSpan);
+             return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Update a task Update a task. This will cancel all queued runs.
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskID">ID of task to get</param>
+        /// <param name="taskUpdateRequest">task update to apply</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Task</returns>
+        public ApiResponse< Task > PatchTasksIDWithHttpInfo (string taskID, TaskUpdateRequest taskUpdateRequest, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'taskID' is set
+            if (taskID == null)
+                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->PatchTasksID");
+            // verify the required parameter 'taskUpdateRequest' is set
+            if (taskUpdateRequest == null)
+                throw new ApiException(400, "Missing required parameter 'taskUpdateRequest' when calling TasksService->PatchTasksID");
+
+            var localVarPath = "/api/v2/tasks/{taskID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json"
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (taskID != null) localVarPathParams.Add("taskID", this.Configuration.ApiClient.ParameterToString(taskID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (taskUpdateRequest != null && taskUpdateRequest.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(taskUpdateRequest); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = taskUpdateRequest; // byte array
+            }
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("PatchTasksID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Task>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (Task) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Task)));
+        }
+
+        /// <summary>
+        /// Update a task Update a task. This will cancel all queued runs.
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskID">ID of task to get</param>
+        /// <param name="taskUpdateRequest">task update to apply</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Task</returns>
+        public IRestResponse PatchTasksIDWithIRestResponse (string taskID, TaskUpdateRequest taskUpdateRequest, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'taskID' is set
+            if (taskID == null)
+                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->PatchTasksID");
+            // verify the required parameter 'taskUpdateRequest' is set
+            if (taskUpdateRequest == null)
+                throw new ApiException(400, "Missing required parameter 'taskUpdateRequest' when calling TasksService->PatchTasksID");
+
+            var localVarPath = "/api/v2/tasks/{taskID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json"
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (taskID != null) localVarPathParams.Add("taskID", this.Configuration.ApiClient.ParameterToString(taskID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (taskUpdateRequest != null && taskUpdateRequest.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(taskUpdateRequest); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = taskUpdateRequest; // byte array
+            }
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("PatchTasksID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return localVarResponse;
+        }
+        
+        /// <summary>
+        /// Update a task Update a task. This will cancel all queued runs.
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskID">ID of task to get</param>
+        /// <param name="taskUpdateRequest">task update to apply</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Task</returns>
+        public RestRequest PatchTasksIDWithRestRequest (string taskID, TaskUpdateRequest taskUpdateRequest, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'taskID' is set
+            if (taskID == null)
+                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->PatchTasksID");
+            // verify the required parameter 'taskUpdateRequest' is set
+            if (taskUpdateRequest == null)
+                throw new ApiException(400, "Missing required parameter 'taskUpdateRequest' when calling TasksService->PatchTasksID");
+
+            var localVarPath = "/api/v2/tasks/{taskID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json"
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (taskID != null) localVarPathParams.Add("taskID", this.Configuration.ApiClient.ParameterToString(taskID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (taskUpdateRequest != null && taskUpdateRequest.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(taskUpdateRequest); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = taskUpdateRequest; // byte array
+            }
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
+                Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+        }
+
+        /// <summary>
+        /// Update a task Update a task. This will cancel all queued runs.
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskID">ID of task to get</param>
+        /// <param name="taskUpdateRequest">task update to apply</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of Task</returns>
+        public async System.Threading.Tasks.Task<Task> PatchTasksIDAsync (string taskID, TaskUpdateRequest taskUpdateRequest, string zapTraceSpan = null)
+        {
+             ApiResponse<Task> localVarResponse = await PatchTasksIDAsyncWithHttpInfo(taskID, taskUpdateRequest, zapTraceSpan);
+             return localVarResponse.Data;
+
+        }
+
+        /// <summary>
+        /// Update a task Update a task. This will cancel all queued runs.
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskID">ID of task to get</param>
+        /// <param name="taskUpdateRequest">task update to apply</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ApiResponse (Task)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<Task>> PatchTasksIDAsyncWithHttpInfo (string taskID, TaskUpdateRequest taskUpdateRequest, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'taskID' is set
+            if (taskID == null)
+                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->PatchTasksID");
+            // verify the required parameter 'taskUpdateRequest' is set
+            if (taskUpdateRequest == null)
+                throw new ApiException(400, "Missing required parameter 'taskUpdateRequest' when calling TasksService->PatchTasksID");
+
+            var localVarPath = "/api/v2/tasks/{taskID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json"
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (taskID != null) localVarPathParams.Add("taskID", this.Configuration.ApiClient.ParameterToString(taskID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (taskUpdateRequest != null && taskUpdateRequest.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(taskUpdateRequest); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = taskUpdateRequest; // byte array
+            }
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("PatchTasksID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Task>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (Task) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Task)));
+        }
+
+        /// <summary>
+        /// Create a new task 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskCreateRequest">task to create</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task</returns>
+        public Task PostTasks (TaskCreateRequest taskCreateRequest, string zapTraceSpan = null)
+        {
+             ApiResponse<Task> localVarResponse = PostTasksWithHttpInfo(taskCreateRequest, zapTraceSpan);
+             return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Create a new task 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskCreateRequest">task to create</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Task</returns>
+        public ApiResponse< Task > PostTasksWithHttpInfo (TaskCreateRequest taskCreateRequest, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'taskCreateRequest' is set
+            if (taskCreateRequest == null)
+                throw new ApiException(400, "Missing required parameter 'taskCreateRequest' when calling TasksService->PostTasks");
+
+            var localVarPath = "/api/v2/tasks";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json"
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (taskCreateRequest != null && taskCreateRequest.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(taskCreateRequest); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = taskCreateRequest; // byte array
+            }
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("PostTasks", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Task>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (Task) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Task)));
+        }
+
+        /// <summary>
+        /// Create a new task 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskCreateRequest">task to create</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Task</returns>
+        public IRestResponse PostTasksWithIRestResponse (TaskCreateRequest taskCreateRequest, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'taskCreateRequest' is set
+            if (taskCreateRequest == null)
+                throw new ApiException(400, "Missing required parameter 'taskCreateRequest' when calling TasksService->PostTasks");
+
+            var localVarPath = "/api/v2/tasks";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json"
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (taskCreateRequest != null && taskCreateRequest.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(taskCreateRequest); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = taskCreateRequest; // byte array
+            }
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("PostTasks", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return localVarResponse;
+        }
+        
+        /// <summary>
+        /// Create a new task 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskCreateRequest">task to create</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Task</returns>
+        public RestRequest PostTasksWithRestRequest (TaskCreateRequest taskCreateRequest, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'taskCreateRequest' is set
+            if (taskCreateRequest == null)
+                throw new ApiException(400, "Missing required parameter 'taskCreateRequest' when calling TasksService->PostTasks");
+
+            var localVarPath = "/api/v2/tasks";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json"
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (taskCreateRequest != null && taskCreateRequest.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(taskCreateRequest); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = taskCreateRequest; // byte array
+            }
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
+                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+        }
+
+        /// <summary>
+        /// Create a new task 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskCreateRequest">task to create</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of Task</returns>
+        public async System.Threading.Tasks.Task<Task> PostTasksAsync (TaskCreateRequest taskCreateRequest, string zapTraceSpan = null)
+        {
+             ApiResponse<Task> localVarResponse = await PostTasksAsyncWithHttpInfo(taskCreateRequest, zapTraceSpan);
+             return localVarResponse.Data;
+
+        }
+
+        /// <summary>
+        /// Create a new task 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskCreateRequest">task to create</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ApiResponse (Task)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<Task>> PostTasksAsyncWithHttpInfo (TaskCreateRequest taskCreateRequest, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'taskCreateRequest' is set
+            if (taskCreateRequest == null)
+                throw new ApiException(400, "Missing required parameter 'taskCreateRequest' when calling TasksService->PostTasks");
+
+            var localVarPath = "/api/v2/tasks";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json"
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (taskCreateRequest != null && taskCreateRequest.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(taskCreateRequest); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = taskCreateRequest; // byte array
+            }
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("PostTasks", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Task>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (Task) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Task)));
         }
 
         /// <summary>
@@ -2698,9 +5036,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="labelMapping">label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>LabelResponse</returns>
-        public LabelResponse TasksTaskIDLabelsPost (string taskID, LabelMapping labelMapping, string zapTraceSpan = null)
+        public LabelResponse PostTasksIDLabels (string taskID, LabelMapping labelMapping, string zapTraceSpan = null)
         {
-             ApiResponse<LabelResponse> localVarResponse = TasksTaskIDLabelsPostWithHttpInfo(taskID, labelMapping, zapTraceSpan);
+             ApiResponse<LabelResponse> localVarResponse = PostTasksIDLabelsWithHttpInfo(taskID, labelMapping, zapTraceSpan);
              return localVarResponse.Data;
         }
 
@@ -2712,14 +5050,14 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="labelMapping">label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelResponse</returns>
-        public ApiResponse< LabelResponse > TasksTaskIDLabelsPostWithHttpInfo (string taskID, LabelMapping labelMapping, string zapTraceSpan = null)
+        public ApiResponse< LabelResponse > PostTasksIDLabelsWithHttpInfo (string taskID, LabelMapping labelMapping, string zapTraceSpan = null)
         {
             // verify the required parameter 'taskID' is set
             if (taskID == null)
-                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->TasksTaskIDLabelsPost");
+                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->PostTasksIDLabels");
             // verify the required parameter 'labelMapping' is set
             if (labelMapping == null)
-                throw new ApiException(400, "Missing required parameter 'labelMapping' when calling TasksService->TasksTaskIDLabelsPost");
+                throw new ApiException(400, "Missing required parameter 'labelMapping' when calling TasksService->PostTasksIDLabels");
 
             var localVarPath = "/api/v2/tasks/{taskID}/labels";
             var localVarPathParams = new Dictionary<String, String>();
@@ -2765,7 +5103,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("TasksTaskIDLabelsPost", localVarResponse);
+                Exception exception = ExceptionFactory("PostTasksIDLabels", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -2782,14 +5120,14 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="labelMapping">label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelResponse</returns>
-        public IRestResponse TasksTaskIDLabelsPostWithIRestResponse (string taskID, LabelMapping labelMapping, string zapTraceSpan = null)
+        public IRestResponse PostTasksIDLabelsWithIRestResponse (string taskID, LabelMapping labelMapping, string zapTraceSpan = null)
         {
             // verify the required parameter 'taskID' is set
             if (taskID == null)
-                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->TasksTaskIDLabelsPost");
+                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->PostTasksIDLabels");
             // verify the required parameter 'labelMapping' is set
             if (labelMapping == null)
-                throw new ApiException(400, "Missing required parameter 'labelMapping' when calling TasksService->TasksTaskIDLabelsPost");
+                throw new ApiException(400, "Missing required parameter 'labelMapping' when calling TasksService->PostTasksIDLabels");
 
             var localVarPath = "/api/v2/tasks/{taskID}/labels";
             var localVarPathParams = new Dictionary<String, String>();
@@ -2835,7 +5173,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("TasksTaskIDLabelsPost", localVarResponse);
+                Exception exception = ExceptionFactory("PostTasksIDLabels", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -2850,14 +5188,14 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="labelMapping">label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelResponse</returns>
-        public RestRequest TasksTaskIDLabelsPostWithRestRequest (string taskID, LabelMapping labelMapping, string zapTraceSpan = null)
+        public RestRequest PostTasksIDLabelsWithRestRequest (string taskID, LabelMapping labelMapping, string zapTraceSpan = null)
         {
             // verify the required parameter 'taskID' is set
             if (taskID == null)
-                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->TasksTaskIDLabelsPost");
+                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->PostTasksIDLabels");
             // verify the required parameter 'labelMapping' is set
             if (labelMapping == null)
-                throw new ApiException(400, "Missing required parameter 'labelMapping' when calling TasksService->TasksTaskIDLabelsPost");
+                throw new ApiException(400, "Missing required parameter 'labelMapping' when calling TasksService->PostTasksIDLabels");
 
             var localVarPath = "/api/v2/tasks/{taskID}/labels";
             var localVarPathParams = new Dictionary<String, String>();
@@ -2907,9 +5245,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="labelMapping">label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of LabelResponse</returns>
-        public async System.Threading.Tasks.Task<LabelResponse> TasksTaskIDLabelsPostAsync (string taskID, LabelMapping labelMapping, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<LabelResponse> PostTasksIDLabelsAsync (string taskID, LabelMapping labelMapping, string zapTraceSpan = null)
         {
-             ApiResponse<LabelResponse> localVarResponse = await TasksTaskIDLabelsPostAsyncWithHttpInfo(taskID, labelMapping, zapTraceSpan);
+             ApiResponse<LabelResponse> localVarResponse = await PostTasksIDLabelsAsyncWithHttpInfo(taskID, labelMapping, zapTraceSpan);
              return localVarResponse.Data;
 
         }
@@ -2922,14 +5260,14 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="labelMapping">label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (LabelResponse)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<LabelResponse>> TasksTaskIDLabelsPostAsyncWithHttpInfo (string taskID, LabelMapping labelMapping, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<LabelResponse>> PostTasksIDLabelsAsyncWithHttpInfo (string taskID, LabelMapping labelMapping, string zapTraceSpan = null)
         {
             // verify the required parameter 'taskID' is set
             if (taskID == null)
-                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->TasksTaskIDLabelsPost");
+                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->PostTasksIDLabels");
             // verify the required parameter 'labelMapping' is set
             if (labelMapping == null)
-                throw new ApiException(400, "Missing required parameter 'labelMapping' when calling TasksService->TasksTaskIDLabelsPost");
+                throw new ApiException(400, "Missing required parameter 'labelMapping' when calling TasksService->PostTasksIDLabels");
 
             var localVarPath = "/api/v2/tasks/{taskID}/labels";
             var localVarPathParams = new Dictionary<String, String>();
@@ -2975,493 +5313,13 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("TasksTaskIDLabelsPost", localVarResponse);
+                Exception exception = ExceptionFactory("PostTasksIDLabels", localVarResponse);
                 if (exception != null) throw exception;
             }
 
             return new ApiResponse<LabelResponse>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
                 (LabelResponse) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(LabelResponse)));
-        }
-
-        /// <summary>
-        /// Retrieve all logs for a task 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of task to get logs for</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Logs</returns>
-        public Logs TasksTaskIDLogsGet (string taskID, string zapTraceSpan = null)
-        {
-             ApiResponse<Logs> localVarResponse = TasksTaskIDLogsGetWithHttpInfo(taskID, zapTraceSpan);
-             return localVarResponse.Data;
-        }
-
-        /// <summary>
-        /// Retrieve all logs for a task 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of task to get logs for</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Logs</returns>
-        public ApiResponse< Logs > TasksTaskIDLogsGetWithHttpInfo (string taskID, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'taskID' is set
-            if (taskID == null)
-                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->TasksTaskIDLogsGet");
-
-            var localVarPath = "/api/v2/tasks/{taskID}/logs";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (taskID != null) localVarPathParams.Add("taskID", this.Configuration.ApiClient.ParameterToString(taskID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("TasksTaskIDLogsGet", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return new ApiResponse<Logs>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (Logs) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Logs)));
-        }
-
-        /// <summary>
-        /// Retrieve all logs for a task 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of task to get logs for</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Logs</returns>
-        public IRestResponse TasksTaskIDLogsGetWithIRestResponse (string taskID, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'taskID' is set
-            if (taskID == null)
-                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->TasksTaskIDLogsGet");
-
-            var localVarPath = "/api/v2/tasks/{taskID}/logs";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (taskID != null) localVarPathParams.Add("taskID", this.Configuration.ApiClient.ParameterToString(taskID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("TasksTaskIDLogsGet", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return localVarResponse;
-        }
-        
-        /// <summary>
-        /// Retrieve all logs for a task 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of task to get logs for</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Logs</returns>
-        public RestRequest TasksTaskIDLogsGetWithRestRequest (string taskID, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'taskID' is set
-            if (taskID == null)
-                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->TasksTaskIDLogsGet");
-
-            var localVarPath = "/api/v2/tasks/{taskID}/logs";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (taskID != null) localVarPathParams.Add("taskID", this.Configuration.ApiClient.ParameterToString(taskID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-        }
-
-        /// <summary>
-        /// Retrieve all logs for a task 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of task to get logs for</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of Logs</returns>
-        public async System.Threading.Tasks.Task<Logs> TasksTaskIDLogsGetAsync (string taskID, string zapTraceSpan = null)
-        {
-             ApiResponse<Logs> localVarResponse = await TasksTaskIDLogsGetAsyncWithHttpInfo(taskID, zapTraceSpan);
-             return localVarResponse.Data;
-
-        }
-
-        /// <summary>
-        /// Retrieve all logs for a task 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of task to get logs for</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ApiResponse (Logs)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Logs>> TasksTaskIDLogsGetAsyncWithHttpInfo (string taskID, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'taskID' is set
-            if (taskID == null)
-                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->TasksTaskIDLogsGet");
-
-            var localVarPath = "/api/v2/tasks/{taskID}/logs";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (taskID != null) localVarPathParams.Add("taskID", this.Configuration.ApiClient.ParameterToString(taskID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("TasksTaskIDLogsGet", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return new ApiResponse<Logs>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (Logs) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Logs)));
-        }
-
-        /// <summary>
-        /// List all task members 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ResourceMembers</returns>
-        public ResourceMembers TasksTaskIDMembersGet (string taskID, string zapTraceSpan = null)
-        {
-             ApiResponse<ResourceMembers> localVarResponse = TasksTaskIDMembersGetWithHttpInfo(taskID, zapTraceSpan);
-             return localVarResponse.Data;
-        }
-
-        /// <summary>
-        /// List all task members 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of ResourceMembers</returns>
-        public ApiResponse< ResourceMembers > TasksTaskIDMembersGetWithHttpInfo (string taskID, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'taskID' is set
-            if (taskID == null)
-                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->TasksTaskIDMembersGet");
-
-            var localVarPath = "/api/v2/tasks/{taskID}/members";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (taskID != null) localVarPathParams.Add("taskID", this.Configuration.ApiClient.ParameterToString(taskID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("TasksTaskIDMembersGet", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return new ApiResponse<ResourceMembers>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (ResourceMembers) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(ResourceMembers)));
-        }
-
-        /// <summary>
-        /// List all task members 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of ResourceMembers</returns>
-        public IRestResponse TasksTaskIDMembersGetWithIRestResponse (string taskID, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'taskID' is set
-            if (taskID == null)
-                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->TasksTaskIDMembersGet");
-
-            var localVarPath = "/api/v2/tasks/{taskID}/members";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (taskID != null) localVarPathParams.Add("taskID", this.Configuration.ApiClient.ParameterToString(taskID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("TasksTaskIDMembersGet", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return localVarResponse;
-        }
-        
-        /// <summary>
-        /// List all task members 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of ResourceMembers</returns>
-        public RestRequest TasksTaskIDMembersGetWithRestRequest (string taskID, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'taskID' is set
-            if (taskID == null)
-                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->TasksTaskIDMembersGet");
-
-            var localVarPath = "/api/v2/tasks/{taskID}/members";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (taskID != null) localVarPathParams.Add("taskID", this.Configuration.ApiClient.ParameterToString(taskID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-        }
-
-        /// <summary>
-        /// List all task members 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ResourceMembers</returns>
-        public async System.Threading.Tasks.Task<ResourceMembers> TasksTaskIDMembersGetAsync (string taskID, string zapTraceSpan = null)
-        {
-             ApiResponse<ResourceMembers> localVarResponse = await TasksTaskIDMembersGetAsyncWithHttpInfo(taskID, zapTraceSpan);
-             return localVarResponse.Data;
-
-        }
-
-        /// <summary>
-        /// List all task members 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ApiResponse (ResourceMembers)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<ResourceMembers>> TasksTaskIDMembersGetAsyncWithHttpInfo (string taskID, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'taskID' is set
-            if (taskID == null)
-                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->TasksTaskIDMembersGet");
-
-            var localVarPath = "/api/v2/tasks/{taskID}/members";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (taskID != null) localVarPathParams.Add("taskID", this.Configuration.ApiClient.ParameterToString(taskID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("TasksTaskIDMembersGet", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return new ApiResponse<ResourceMembers>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (ResourceMembers) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(ResourceMembers)));
         }
 
         /// <summary>
@@ -3472,9 +5330,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="addResourceMemberRequestBody">user to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ResourceMember</returns>
-        public ResourceMember TasksTaskIDMembersPost (string taskID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
+        public ResourceMember PostTasksIDMembers (string taskID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
         {
-             ApiResponse<ResourceMember> localVarResponse = TasksTaskIDMembersPostWithHttpInfo(taskID, addResourceMemberRequestBody, zapTraceSpan);
+             ApiResponse<ResourceMember> localVarResponse = PostTasksIDMembersWithHttpInfo(taskID, addResourceMemberRequestBody, zapTraceSpan);
              return localVarResponse.Data;
         }
 
@@ -3486,14 +5344,14 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="addResourceMemberRequestBody">user to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMember</returns>
-        public ApiResponse< ResourceMember > TasksTaskIDMembersPostWithHttpInfo (string taskID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
+        public ApiResponse< ResourceMember > PostTasksIDMembersWithHttpInfo (string taskID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
         {
             // verify the required parameter 'taskID' is set
             if (taskID == null)
-                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->TasksTaskIDMembersPost");
+                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->PostTasksIDMembers");
             // verify the required parameter 'addResourceMemberRequestBody' is set
             if (addResourceMemberRequestBody == null)
-                throw new ApiException(400, "Missing required parameter 'addResourceMemberRequestBody' when calling TasksService->TasksTaskIDMembersPost");
+                throw new ApiException(400, "Missing required parameter 'addResourceMemberRequestBody' when calling TasksService->PostTasksIDMembers");
 
             var localVarPath = "/api/v2/tasks/{taskID}/members";
             var localVarPathParams = new Dictionary<String, String>();
@@ -3539,7 +5397,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("TasksTaskIDMembersPost", localVarResponse);
+                Exception exception = ExceptionFactory("PostTasksIDMembers", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -3556,14 +5414,14 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="addResourceMemberRequestBody">user to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMember</returns>
-        public IRestResponse TasksTaskIDMembersPostWithIRestResponse (string taskID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
+        public IRestResponse PostTasksIDMembersWithIRestResponse (string taskID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
         {
             // verify the required parameter 'taskID' is set
             if (taskID == null)
-                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->TasksTaskIDMembersPost");
+                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->PostTasksIDMembers");
             // verify the required parameter 'addResourceMemberRequestBody' is set
             if (addResourceMemberRequestBody == null)
-                throw new ApiException(400, "Missing required parameter 'addResourceMemberRequestBody' when calling TasksService->TasksTaskIDMembersPost");
+                throw new ApiException(400, "Missing required parameter 'addResourceMemberRequestBody' when calling TasksService->PostTasksIDMembers");
 
             var localVarPath = "/api/v2/tasks/{taskID}/members";
             var localVarPathParams = new Dictionary<String, String>();
@@ -3609,7 +5467,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("TasksTaskIDMembersPost", localVarResponse);
+                Exception exception = ExceptionFactory("PostTasksIDMembers", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -3624,14 +5482,14 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="addResourceMemberRequestBody">user to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMember</returns>
-        public RestRequest TasksTaskIDMembersPostWithRestRequest (string taskID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
+        public RestRequest PostTasksIDMembersWithRestRequest (string taskID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
         {
             // verify the required parameter 'taskID' is set
             if (taskID == null)
-                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->TasksTaskIDMembersPost");
+                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->PostTasksIDMembers");
             // verify the required parameter 'addResourceMemberRequestBody' is set
             if (addResourceMemberRequestBody == null)
-                throw new ApiException(400, "Missing required parameter 'addResourceMemberRequestBody' when calling TasksService->TasksTaskIDMembersPost");
+                throw new ApiException(400, "Missing required parameter 'addResourceMemberRequestBody' when calling TasksService->PostTasksIDMembers");
 
             var localVarPath = "/api/v2/tasks/{taskID}/members";
             var localVarPathParams = new Dictionary<String, String>();
@@ -3681,9 +5539,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="addResourceMemberRequestBody">user to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ResourceMember</returns>
-        public async System.Threading.Tasks.Task<ResourceMember> TasksTaskIDMembersPostAsync (string taskID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ResourceMember> PostTasksIDMembersAsync (string taskID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
         {
-             ApiResponse<ResourceMember> localVarResponse = await TasksTaskIDMembersPostAsyncWithHttpInfo(taskID, addResourceMemberRequestBody, zapTraceSpan);
+             ApiResponse<ResourceMember> localVarResponse = await PostTasksIDMembersAsyncWithHttpInfo(taskID, addResourceMemberRequestBody, zapTraceSpan);
              return localVarResponse.Data;
 
         }
@@ -3696,14 +5554,14 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="addResourceMemberRequestBody">user to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (ResourceMember)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<ResourceMember>> TasksTaskIDMembersPostAsyncWithHttpInfo (string taskID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<ResourceMember>> PostTasksIDMembersAsyncWithHttpInfo (string taskID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
         {
             // verify the required parameter 'taskID' is set
             if (taskID == null)
-                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->TasksTaskIDMembersPost");
+                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->PostTasksIDMembers");
             // verify the required parameter 'addResourceMemberRequestBody' is set
             if (addResourceMemberRequestBody == null)
-                throw new ApiException(400, "Missing required parameter 'addResourceMemberRequestBody' when calling TasksService->TasksTaskIDMembersPost");
+                throw new ApiException(400, "Missing required parameter 'addResourceMemberRequestBody' when calling TasksService->PostTasksIDMembers");
 
             var localVarPath = "/api/v2/tasks/{taskID}/members";
             var localVarPathParams = new Dictionary<String, String>();
@@ -3749,513 +5607,13 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("TasksTaskIDMembersPost", localVarResponse);
+                Exception exception = ExceptionFactory("PostTasksIDMembers", localVarResponse);
                 if (exception != null) throw exception;
             }
 
             return new ApiResponse<ResourceMember>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
                 (ResourceMember) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(ResourceMember)));
-        }
-
-        /// <summary>
-        /// removes a member from an task 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns></returns>
-        public void TasksTaskIDMembersUserIDDelete (string userID, string taskID, string zapTraceSpan = null)
-        {
-             TasksTaskIDMembersUserIDDeleteWithHttpInfo(userID, taskID, zapTraceSpan);
-        }
-
-        /// <summary>
-        /// removes a member from an task 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Object(void)</returns>
-        public ApiResponse<Object> TasksTaskIDMembersUserIDDeleteWithHttpInfo (string userID, string taskID, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'userID' is set
-            if (userID == null)
-                throw new ApiException(400, "Missing required parameter 'userID' when calling TasksService->TasksTaskIDMembersUserIDDelete");
-            // verify the required parameter 'taskID' is set
-            if (taskID == null)
-                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->TasksTaskIDMembersUserIDDelete");
-
-            var localVarPath = "/api/v2/tasks/{taskID}/members/{userID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (userID != null) localVarPathParams.Add("userID", this.Configuration.ApiClient.ParameterToString(userID)); // path parameter
-            if (taskID != null) localVarPathParams.Add("taskID", this.Configuration.ApiClient.ParameterToString(taskID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("TasksTaskIDMembersUserIDDelete", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return new ApiResponse<Object>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                null);
-        }
-
-        /// <summary>
-        /// removes a member from an task 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Object(void)</returns>
-        public IRestResponse TasksTaskIDMembersUserIDDeleteWithIRestResponse (string userID, string taskID, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'userID' is set
-            if (userID == null)
-                throw new ApiException(400, "Missing required parameter 'userID' when calling TasksService->TasksTaskIDMembersUserIDDelete");
-            // verify the required parameter 'taskID' is set
-            if (taskID == null)
-                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->TasksTaskIDMembersUserIDDelete");
-
-            var localVarPath = "/api/v2/tasks/{taskID}/members/{userID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (userID != null) localVarPathParams.Add("userID", this.Configuration.ApiClient.ParameterToString(userID)); // path parameter
-            if (taskID != null) localVarPathParams.Add("taskID", this.Configuration.ApiClient.ParameterToString(taskID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("TasksTaskIDMembersUserIDDelete", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return localVarResponse;
-        }
-        
-        /// <summary>
-        /// removes a member from an task 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Object(void)</returns>
-        public RestRequest TasksTaskIDMembersUserIDDeleteWithRestRequest (string userID, string taskID, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'userID' is set
-            if (userID == null)
-                throw new ApiException(400, "Missing required parameter 'userID' when calling TasksService->TasksTaskIDMembersUserIDDelete");
-            // verify the required parameter 'taskID' is set
-            if (taskID == null)
-                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->TasksTaskIDMembersUserIDDelete");
-
-            var localVarPath = "/api/v2/tasks/{taskID}/members/{userID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (userID != null) localVarPathParams.Add("userID", this.Configuration.ApiClient.ParameterToString(userID)); // path parameter
-            if (taskID != null) localVarPathParams.Add("taskID", this.Configuration.ApiClient.ParameterToString(taskID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
-                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-        }
-
-        /// <summary>
-        /// removes a member from an task 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task TasksTaskIDMembersUserIDDeleteAsync (string userID, string taskID, string zapTraceSpan = null)
-        {
-             await TasksTaskIDMembersUserIDDeleteAsyncWithHttpInfo(userID, taskID, zapTraceSpan);
-
-        }
-
-        /// <summary>
-        /// removes a member from an task 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Object>> TasksTaskIDMembersUserIDDeleteAsyncWithHttpInfo (string userID, string taskID, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'userID' is set
-            if (userID == null)
-                throw new ApiException(400, "Missing required parameter 'userID' when calling TasksService->TasksTaskIDMembersUserIDDelete");
-            // verify the required parameter 'taskID' is set
-            if (taskID == null)
-                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->TasksTaskIDMembersUserIDDelete");
-
-            var localVarPath = "/api/v2/tasks/{taskID}/members/{userID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (userID != null) localVarPathParams.Add("userID", this.Configuration.ApiClient.ParameterToString(userID)); // path parameter
-            if (taskID != null) localVarPathParams.Add("taskID", this.Configuration.ApiClient.ParameterToString(taskID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("TasksTaskIDMembersUserIDDelete", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return new ApiResponse<Object>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                null);
-        }
-
-        /// <summary>
-        /// List all task owners 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ResourceOwners</returns>
-        public ResourceOwners TasksTaskIDOwnersGet (string taskID, string zapTraceSpan = null)
-        {
-             ApiResponse<ResourceOwners> localVarResponse = TasksTaskIDOwnersGetWithHttpInfo(taskID, zapTraceSpan);
-             return localVarResponse.Data;
-        }
-
-        /// <summary>
-        /// List all task owners 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of ResourceOwners</returns>
-        public ApiResponse< ResourceOwners > TasksTaskIDOwnersGetWithHttpInfo (string taskID, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'taskID' is set
-            if (taskID == null)
-                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->TasksTaskIDOwnersGet");
-
-            var localVarPath = "/api/v2/tasks/{taskID}/owners";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (taskID != null) localVarPathParams.Add("taskID", this.Configuration.ApiClient.ParameterToString(taskID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("TasksTaskIDOwnersGet", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return new ApiResponse<ResourceOwners>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (ResourceOwners) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(ResourceOwners)));
-        }
-
-        /// <summary>
-        /// List all task owners 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of ResourceOwners</returns>
-        public IRestResponse TasksTaskIDOwnersGetWithIRestResponse (string taskID, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'taskID' is set
-            if (taskID == null)
-                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->TasksTaskIDOwnersGet");
-
-            var localVarPath = "/api/v2/tasks/{taskID}/owners";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (taskID != null) localVarPathParams.Add("taskID", this.Configuration.ApiClient.ParameterToString(taskID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("TasksTaskIDOwnersGet", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return localVarResponse;
-        }
-        
-        /// <summary>
-        /// List all task owners 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of ResourceOwners</returns>
-        public RestRequest TasksTaskIDOwnersGetWithRestRequest (string taskID, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'taskID' is set
-            if (taskID == null)
-                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->TasksTaskIDOwnersGet");
-
-            var localVarPath = "/api/v2/tasks/{taskID}/owners";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (taskID != null) localVarPathParams.Add("taskID", this.Configuration.ApiClient.ParameterToString(taskID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-        }
-
-        /// <summary>
-        /// List all task owners 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ResourceOwners</returns>
-        public async System.Threading.Tasks.Task<ResourceOwners> TasksTaskIDOwnersGetAsync (string taskID, string zapTraceSpan = null)
-        {
-             ApiResponse<ResourceOwners> localVarResponse = await TasksTaskIDOwnersGetAsyncWithHttpInfo(taskID, zapTraceSpan);
-             return localVarResponse.Data;
-
-        }
-
-        /// <summary>
-        /// List all task owners 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ApiResponse (ResourceOwners)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<ResourceOwners>> TasksTaskIDOwnersGetAsyncWithHttpInfo (string taskID, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'taskID' is set
-            if (taskID == null)
-                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->TasksTaskIDOwnersGet");
-
-            var localVarPath = "/api/v2/tasks/{taskID}/owners";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (taskID != null) localVarPathParams.Add("taskID", this.Configuration.ApiClient.ParameterToString(taskID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("TasksTaskIDOwnersGet", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return new ApiResponse<ResourceOwners>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (ResourceOwners) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(ResourceOwners)));
         }
 
         /// <summary>
@@ -4266,9 +5624,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="addResourceMemberRequestBody">user to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ResourceOwner</returns>
-        public ResourceOwner TasksTaskIDOwnersPost (string taskID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
+        public ResourceOwner PostTasksIDOwners (string taskID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
         {
-             ApiResponse<ResourceOwner> localVarResponse = TasksTaskIDOwnersPostWithHttpInfo(taskID, addResourceMemberRequestBody, zapTraceSpan);
+             ApiResponse<ResourceOwner> localVarResponse = PostTasksIDOwnersWithHttpInfo(taskID, addResourceMemberRequestBody, zapTraceSpan);
              return localVarResponse.Data;
         }
 
@@ -4280,14 +5638,14 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="addResourceMemberRequestBody">user to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwner</returns>
-        public ApiResponse< ResourceOwner > TasksTaskIDOwnersPostWithHttpInfo (string taskID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
+        public ApiResponse< ResourceOwner > PostTasksIDOwnersWithHttpInfo (string taskID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
         {
             // verify the required parameter 'taskID' is set
             if (taskID == null)
-                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->TasksTaskIDOwnersPost");
+                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->PostTasksIDOwners");
             // verify the required parameter 'addResourceMemberRequestBody' is set
             if (addResourceMemberRequestBody == null)
-                throw new ApiException(400, "Missing required parameter 'addResourceMemberRequestBody' when calling TasksService->TasksTaskIDOwnersPost");
+                throw new ApiException(400, "Missing required parameter 'addResourceMemberRequestBody' when calling TasksService->PostTasksIDOwners");
 
             var localVarPath = "/api/v2/tasks/{taskID}/owners";
             var localVarPathParams = new Dictionary<String, String>();
@@ -4333,7 +5691,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("TasksTaskIDOwnersPost", localVarResponse);
+                Exception exception = ExceptionFactory("PostTasksIDOwners", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -4350,14 +5708,14 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="addResourceMemberRequestBody">user to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwner</returns>
-        public IRestResponse TasksTaskIDOwnersPostWithIRestResponse (string taskID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
+        public IRestResponse PostTasksIDOwnersWithIRestResponse (string taskID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
         {
             // verify the required parameter 'taskID' is set
             if (taskID == null)
-                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->TasksTaskIDOwnersPost");
+                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->PostTasksIDOwners");
             // verify the required parameter 'addResourceMemberRequestBody' is set
             if (addResourceMemberRequestBody == null)
-                throw new ApiException(400, "Missing required parameter 'addResourceMemberRequestBody' when calling TasksService->TasksTaskIDOwnersPost");
+                throw new ApiException(400, "Missing required parameter 'addResourceMemberRequestBody' when calling TasksService->PostTasksIDOwners");
 
             var localVarPath = "/api/v2/tasks/{taskID}/owners";
             var localVarPathParams = new Dictionary<String, String>();
@@ -4403,7 +5761,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("TasksTaskIDOwnersPost", localVarResponse);
+                Exception exception = ExceptionFactory("PostTasksIDOwners", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -4418,14 +5776,14 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="addResourceMemberRequestBody">user to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwner</returns>
-        public RestRequest TasksTaskIDOwnersPostWithRestRequest (string taskID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
+        public RestRequest PostTasksIDOwnersWithRestRequest (string taskID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
         {
             // verify the required parameter 'taskID' is set
             if (taskID == null)
-                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->TasksTaskIDOwnersPost");
+                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->PostTasksIDOwners");
             // verify the required parameter 'addResourceMemberRequestBody' is set
             if (addResourceMemberRequestBody == null)
-                throw new ApiException(400, "Missing required parameter 'addResourceMemberRequestBody' when calling TasksService->TasksTaskIDOwnersPost");
+                throw new ApiException(400, "Missing required parameter 'addResourceMemberRequestBody' when calling TasksService->PostTasksIDOwners");
 
             var localVarPath = "/api/v2/tasks/{taskID}/owners";
             var localVarPathParams = new Dictionary<String, String>();
@@ -4475,9 +5833,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="addResourceMemberRequestBody">user to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ResourceOwner</returns>
-        public async System.Threading.Tasks.Task<ResourceOwner> TasksTaskIDOwnersPostAsync (string taskID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ResourceOwner> PostTasksIDOwnersAsync (string taskID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
         {
-             ApiResponse<ResourceOwner> localVarResponse = await TasksTaskIDOwnersPostAsyncWithHttpInfo(taskID, addResourceMemberRequestBody, zapTraceSpan);
+             ApiResponse<ResourceOwner> localVarResponse = await PostTasksIDOwnersAsyncWithHttpInfo(taskID, addResourceMemberRequestBody, zapTraceSpan);
              return localVarResponse.Data;
 
         }
@@ -4490,14 +5848,14 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="addResourceMemberRequestBody">user to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (ResourceOwner)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<ResourceOwner>> TasksTaskIDOwnersPostAsyncWithHttpInfo (string taskID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<ResourceOwner>> PostTasksIDOwnersAsyncWithHttpInfo (string taskID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
         {
             // verify the required parameter 'taskID' is set
             if (taskID == null)
-                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->TasksTaskIDOwnersPost");
+                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->PostTasksIDOwners");
             // verify the required parameter 'addResourceMemberRequestBody' is set
             if (addResourceMemberRequestBody == null)
-                throw new ApiException(400, "Missing required parameter 'addResourceMemberRequestBody' when calling TasksService->TasksTaskIDOwnersPost");
+                throw new ApiException(400, "Missing required parameter 'addResourceMemberRequestBody' when calling TasksService->PostTasksIDOwners");
 
             var localVarPath = "/api/v2/tasks/{taskID}/owners";
             var localVarPathParams = new Dictionary<String, String>();
@@ -4543,847 +5901,13 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("TasksTaskIDOwnersPost", localVarResponse);
+                Exception exception = ExceptionFactory("PostTasksIDOwners", localVarResponse);
                 if (exception != null) throw exception;
             }
 
             return new ApiResponse<ResourceOwner>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
                 (ResourceOwner) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(ResourceOwner)));
-        }
-
-        /// <summary>
-        /// removes an owner from an task 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns></returns>
-        public void TasksTaskIDOwnersUserIDDelete (string userID, string taskID, string zapTraceSpan = null)
-        {
-             TasksTaskIDOwnersUserIDDeleteWithHttpInfo(userID, taskID, zapTraceSpan);
-        }
-
-        /// <summary>
-        /// removes an owner from an task 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Object(void)</returns>
-        public ApiResponse<Object> TasksTaskIDOwnersUserIDDeleteWithHttpInfo (string userID, string taskID, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'userID' is set
-            if (userID == null)
-                throw new ApiException(400, "Missing required parameter 'userID' when calling TasksService->TasksTaskIDOwnersUserIDDelete");
-            // verify the required parameter 'taskID' is set
-            if (taskID == null)
-                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->TasksTaskIDOwnersUserIDDelete");
-
-            var localVarPath = "/api/v2/tasks/taskID}/owners/{userID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (userID != null) localVarPathParams.Add("userID", this.Configuration.ApiClient.ParameterToString(userID)); // path parameter
-            if (taskID != null) localVarPathParams.Add("taskID", this.Configuration.ApiClient.ParameterToString(taskID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("TasksTaskIDOwnersUserIDDelete", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return new ApiResponse<Object>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                null);
-        }
-
-        /// <summary>
-        /// removes an owner from an task 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Object(void)</returns>
-        public IRestResponse TasksTaskIDOwnersUserIDDeleteWithIRestResponse (string userID, string taskID, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'userID' is set
-            if (userID == null)
-                throw new ApiException(400, "Missing required parameter 'userID' when calling TasksService->TasksTaskIDOwnersUserIDDelete");
-            // verify the required parameter 'taskID' is set
-            if (taskID == null)
-                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->TasksTaskIDOwnersUserIDDelete");
-
-            var localVarPath = "/api/v2/tasks/taskID}/owners/{userID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (userID != null) localVarPathParams.Add("userID", this.Configuration.ApiClient.ParameterToString(userID)); // path parameter
-            if (taskID != null) localVarPathParams.Add("taskID", this.Configuration.ApiClient.ParameterToString(taskID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("TasksTaskIDOwnersUserIDDelete", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return localVarResponse;
-        }
-        
-        /// <summary>
-        /// removes an owner from an task 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Object(void)</returns>
-        public RestRequest TasksTaskIDOwnersUserIDDeleteWithRestRequest (string userID, string taskID, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'userID' is set
-            if (userID == null)
-                throw new ApiException(400, "Missing required parameter 'userID' when calling TasksService->TasksTaskIDOwnersUserIDDelete");
-            // verify the required parameter 'taskID' is set
-            if (taskID == null)
-                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->TasksTaskIDOwnersUserIDDelete");
-
-            var localVarPath = "/api/v2/tasks/taskID}/owners/{userID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (userID != null) localVarPathParams.Add("userID", this.Configuration.ApiClient.ParameterToString(userID)); // path parameter
-            if (taskID != null) localVarPathParams.Add("taskID", this.Configuration.ApiClient.ParameterToString(taskID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
-                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-        }
-
-        /// <summary>
-        /// removes an owner from an task 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task TasksTaskIDOwnersUserIDDeleteAsync (string userID, string taskID, string zapTraceSpan = null)
-        {
-             await TasksTaskIDOwnersUserIDDeleteAsyncWithHttpInfo(userID, taskID, zapTraceSpan);
-
-        }
-
-        /// <summary>
-        /// removes an owner from an task 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Object>> TasksTaskIDOwnersUserIDDeleteAsyncWithHttpInfo (string userID, string taskID, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'userID' is set
-            if (userID == null)
-                throw new ApiException(400, "Missing required parameter 'userID' when calling TasksService->TasksTaskIDOwnersUserIDDelete");
-            // verify the required parameter 'taskID' is set
-            if (taskID == null)
-                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->TasksTaskIDOwnersUserIDDelete");
-
-            var localVarPath = "/api/v2/tasks/taskID}/owners/{userID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (userID != null) localVarPathParams.Add("userID", this.Configuration.ApiClient.ParameterToString(userID)); // path parameter
-            if (taskID != null) localVarPathParams.Add("taskID", this.Configuration.ApiClient.ParameterToString(taskID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("TasksTaskIDOwnersUserIDDelete", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return new ApiResponse<Object>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                null);
-        }
-
-        /// <summary>
-        /// Update a task Update a task. This will cancel all queued runs.
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of task to get</param>
-        /// <param name="taskUpdateRequest">task update to apply</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task</returns>
-        public Task TasksTaskIDPatch (string taskID, TaskUpdateRequest taskUpdateRequest, string zapTraceSpan = null)
-        {
-             ApiResponse<Task> localVarResponse = TasksTaskIDPatchWithHttpInfo(taskID, taskUpdateRequest, zapTraceSpan);
-             return localVarResponse.Data;
-        }
-
-        /// <summary>
-        /// Update a task Update a task. This will cancel all queued runs.
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of task to get</param>
-        /// <param name="taskUpdateRequest">task update to apply</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Task</returns>
-        public ApiResponse< Task > TasksTaskIDPatchWithHttpInfo (string taskID, TaskUpdateRequest taskUpdateRequest, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'taskID' is set
-            if (taskID == null)
-                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->TasksTaskIDPatch");
-            // verify the required parameter 'taskUpdateRequest' is set
-            if (taskUpdateRequest == null)
-                throw new ApiException(400, "Missing required parameter 'taskUpdateRequest' when calling TasksService->TasksTaskIDPatch");
-
-            var localVarPath = "/api/v2/tasks/{taskID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-                "application/json"
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (taskID != null) localVarPathParams.Add("taskID", this.Configuration.ApiClient.ParameterToString(taskID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (taskUpdateRequest != null && taskUpdateRequest.GetType() != typeof(byte[]))
-            {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(taskUpdateRequest); // http body (model) parameter
-            }
-            else
-            {
-                localVarPostBody = taskUpdateRequest; // byte array
-            }
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("TasksTaskIDPatch", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return new ApiResponse<Task>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (Task) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Task)));
-        }
-
-        /// <summary>
-        /// Update a task Update a task. This will cancel all queued runs.
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of task to get</param>
-        /// <param name="taskUpdateRequest">task update to apply</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Task</returns>
-        public IRestResponse TasksTaskIDPatchWithIRestResponse (string taskID, TaskUpdateRequest taskUpdateRequest, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'taskID' is set
-            if (taskID == null)
-                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->TasksTaskIDPatch");
-            // verify the required parameter 'taskUpdateRequest' is set
-            if (taskUpdateRequest == null)
-                throw new ApiException(400, "Missing required parameter 'taskUpdateRequest' when calling TasksService->TasksTaskIDPatch");
-
-            var localVarPath = "/api/v2/tasks/{taskID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-                "application/json"
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (taskID != null) localVarPathParams.Add("taskID", this.Configuration.ApiClient.ParameterToString(taskID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (taskUpdateRequest != null && taskUpdateRequest.GetType() != typeof(byte[]))
-            {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(taskUpdateRequest); // http body (model) parameter
-            }
-            else
-            {
-                localVarPostBody = taskUpdateRequest; // byte array
-            }
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("TasksTaskIDPatch", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return localVarResponse;
-        }
-        
-        /// <summary>
-        /// Update a task Update a task. This will cancel all queued runs.
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of task to get</param>
-        /// <param name="taskUpdateRequest">task update to apply</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Task</returns>
-        public RestRequest TasksTaskIDPatchWithRestRequest (string taskID, TaskUpdateRequest taskUpdateRequest, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'taskID' is set
-            if (taskID == null)
-                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->TasksTaskIDPatch");
-            // verify the required parameter 'taskUpdateRequest' is set
-            if (taskUpdateRequest == null)
-                throw new ApiException(400, "Missing required parameter 'taskUpdateRequest' when calling TasksService->TasksTaskIDPatch");
-
-            var localVarPath = "/api/v2/tasks/{taskID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-                "application/json"
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (taskID != null) localVarPathParams.Add("taskID", this.Configuration.ApiClient.ParameterToString(taskID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (taskUpdateRequest != null && taskUpdateRequest.GetType() != typeof(byte[]))
-            {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(taskUpdateRequest); // http body (model) parameter
-            }
-            else
-            {
-                localVarPostBody = taskUpdateRequest; // byte array
-            }
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
-                Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-        }
-
-        /// <summary>
-        /// Update a task Update a task. This will cancel all queued runs.
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of task to get</param>
-        /// <param name="taskUpdateRequest">task update to apply</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of Task</returns>
-        public async System.Threading.Tasks.Task<Task> TasksTaskIDPatchAsync (string taskID, TaskUpdateRequest taskUpdateRequest, string zapTraceSpan = null)
-        {
-             ApiResponse<Task> localVarResponse = await TasksTaskIDPatchAsyncWithHttpInfo(taskID, taskUpdateRequest, zapTraceSpan);
-             return localVarResponse.Data;
-
-        }
-
-        /// <summary>
-        /// Update a task Update a task. This will cancel all queued runs.
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of task to get</param>
-        /// <param name="taskUpdateRequest">task update to apply</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ApiResponse (Task)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Task>> TasksTaskIDPatchAsyncWithHttpInfo (string taskID, TaskUpdateRequest taskUpdateRequest, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'taskID' is set
-            if (taskID == null)
-                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->TasksTaskIDPatch");
-            // verify the required parameter 'taskUpdateRequest' is set
-            if (taskUpdateRequest == null)
-                throw new ApiException(400, "Missing required parameter 'taskUpdateRequest' when calling TasksService->TasksTaskIDPatch");
-
-            var localVarPath = "/api/v2/tasks/{taskID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-                "application/json"
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (taskID != null) localVarPathParams.Add("taskID", this.Configuration.ApiClient.ParameterToString(taskID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (taskUpdateRequest != null && taskUpdateRequest.GetType() != typeof(byte[]))
-            {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(taskUpdateRequest); // http body (model) parameter
-            }
-            else
-            {
-                localVarPostBody = taskUpdateRequest; // byte array
-            }
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("TasksTaskIDPatch", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return new ApiResponse<Task>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (Task) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Task)));
-        }
-
-        /// <summary>
-        /// Retrieve list of run records for a task 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of task to get runs for</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="after">returns runs after specified ID (optional)</param>
-        /// <param name="limit">the number of runs to return (optional, default to 20)</param>
-        /// <param name="afterTime">filter runs to those scheduled after this time, RFC3339 (optional)</param>
-        /// <param name="beforeTime">filter runs to those scheduled before this time, RFC3339 (optional)</param>
-        /// <returns>Runs</returns>
-        public Runs TasksTaskIDRunsGet (string taskID, string zapTraceSpan = null, string after = null, int? limit = null, DateTime? afterTime = null, DateTime? beforeTime = null)
-        {
-             ApiResponse<Runs> localVarResponse = TasksTaskIDRunsGetWithHttpInfo(taskID, zapTraceSpan, after, limit, afterTime, beforeTime);
-             return localVarResponse.Data;
-        }
-
-        /// <summary>
-        /// Retrieve list of run records for a task 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of task to get runs for</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="after">returns runs after specified ID (optional)</param>
-        /// <param name="limit">the number of runs to return (optional, default to 20)</param>
-        /// <param name="afterTime">filter runs to those scheduled after this time, RFC3339 (optional)</param>
-        /// <param name="beforeTime">filter runs to those scheduled before this time, RFC3339 (optional)</param>
-        /// <returns>ApiResponse of Runs</returns>
-        public ApiResponse< Runs > TasksTaskIDRunsGetWithHttpInfo (string taskID, string zapTraceSpan = null, string after = null, int? limit = null, DateTime? afterTime = null, DateTime? beforeTime = null)
-        {
-            // verify the required parameter 'taskID' is set
-            if (taskID == null)
-                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->TasksTaskIDRunsGet");
-
-            var localVarPath = "/api/v2/tasks/{taskID}/runs";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (taskID != null) localVarPathParams.Add("taskID", this.Configuration.ApiClient.ParameterToString(taskID)); // path parameter
-            if (after != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "after", after)); // query parameter
-            if (limit != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "limit", limit)); // query parameter
-            if (afterTime != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "afterTime", afterTime)); // query parameter
-            if (beforeTime != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "beforeTime", beforeTime)); // query parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("TasksTaskIDRunsGet", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return new ApiResponse<Runs>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (Runs) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Runs)));
-        }
-
-        /// <summary>
-        /// Retrieve list of run records for a task 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of task to get runs for</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="after">returns runs after specified ID (optional)</param>
-        /// <param name="limit">the number of runs to return (optional, default to 20)</param>
-        /// <param name="afterTime">filter runs to those scheduled after this time, RFC3339 (optional)</param>
-        /// <param name="beforeTime">filter runs to those scheduled before this time, RFC3339 (optional)</param>
-        /// <returns>ApiResponse of Runs</returns>
-        public IRestResponse TasksTaskIDRunsGetWithIRestResponse (string taskID, string zapTraceSpan = null, string after = null, int? limit = null, DateTime? afterTime = null, DateTime? beforeTime = null)
-        {
-            // verify the required parameter 'taskID' is set
-            if (taskID == null)
-                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->TasksTaskIDRunsGet");
-
-            var localVarPath = "/api/v2/tasks/{taskID}/runs";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (taskID != null) localVarPathParams.Add("taskID", this.Configuration.ApiClient.ParameterToString(taskID)); // path parameter
-            if (after != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "after", after)); // query parameter
-            if (limit != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "limit", limit)); // query parameter
-            if (afterTime != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "afterTime", afterTime)); // query parameter
-            if (beforeTime != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "beforeTime", beforeTime)); // query parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("TasksTaskIDRunsGet", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return localVarResponse;
-        }
-        
-        /// <summary>
-        /// Retrieve list of run records for a task 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of task to get runs for</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="after">returns runs after specified ID (optional)</param>
-        /// <param name="limit">the number of runs to return (optional, default to 20)</param>
-        /// <param name="afterTime">filter runs to those scheduled after this time, RFC3339 (optional)</param>
-        /// <param name="beforeTime">filter runs to those scheduled before this time, RFC3339 (optional)</param>
-        /// <returns>ApiResponse of Runs</returns>
-        public RestRequest TasksTaskIDRunsGetWithRestRequest (string taskID, string zapTraceSpan = null, string after = null, int? limit = null, DateTime? afterTime = null, DateTime? beforeTime = null)
-        {
-            // verify the required parameter 'taskID' is set
-            if (taskID == null)
-                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->TasksTaskIDRunsGet");
-
-            var localVarPath = "/api/v2/tasks/{taskID}/runs";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (taskID != null) localVarPathParams.Add("taskID", this.Configuration.ApiClient.ParameterToString(taskID)); // path parameter
-            if (after != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "after", after)); // query parameter
-            if (limit != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "limit", limit)); // query parameter
-            if (afterTime != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "afterTime", afterTime)); // query parameter
-            if (beforeTime != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "beforeTime", beforeTime)); // query parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-        }
-
-        /// <summary>
-        /// Retrieve list of run records for a task 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of task to get runs for</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="after">returns runs after specified ID (optional)</param>
-        /// <param name="limit">the number of runs to return (optional, default to 20)</param>
-        /// <param name="afterTime">filter runs to those scheduled after this time, RFC3339 (optional)</param>
-        /// <param name="beforeTime">filter runs to those scheduled before this time, RFC3339 (optional)</param>
-        /// <returns>Task of Runs</returns>
-        public async System.Threading.Tasks.Task<Runs> TasksTaskIDRunsGetAsync (string taskID, string zapTraceSpan = null, string after = null, int? limit = null, DateTime? afterTime = null, DateTime? beforeTime = null)
-        {
-             ApiResponse<Runs> localVarResponse = await TasksTaskIDRunsGetAsyncWithHttpInfo(taskID, zapTraceSpan, after, limit, afterTime, beforeTime);
-             return localVarResponse.Data;
-
-        }
-
-        /// <summary>
-        /// Retrieve list of run records for a task 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of task to get runs for</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="after">returns runs after specified ID (optional)</param>
-        /// <param name="limit">the number of runs to return (optional, default to 20)</param>
-        /// <param name="afterTime">filter runs to those scheduled after this time, RFC3339 (optional)</param>
-        /// <param name="beforeTime">filter runs to those scheduled before this time, RFC3339 (optional)</param>
-        /// <returns>Task of ApiResponse (Runs)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Runs>> TasksTaskIDRunsGetAsyncWithHttpInfo (string taskID, string zapTraceSpan = null, string after = null, int? limit = null, DateTime? afterTime = null, DateTime? beforeTime = null)
-        {
-            // verify the required parameter 'taskID' is set
-            if (taskID == null)
-                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->TasksTaskIDRunsGet");
-
-            var localVarPath = "/api/v2/tasks/{taskID}/runs";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (taskID != null) localVarPathParams.Add("taskID", this.Configuration.ApiClient.ParameterToString(taskID)); // path parameter
-            if (after != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "after", after)); // query parameter
-            if (limit != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "limit", limit)); // query parameter
-            if (afterTime != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "afterTime", afterTime)); // query parameter
-            if (beforeTime != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "beforeTime", beforeTime)); // query parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("TasksTaskIDRunsGet", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return new ApiResponse<Runs>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (Runs) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Runs)));
         }
 
         /// <summary>
@@ -5394,9 +5918,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="runManually"> (optional)</param>
         /// <returns>Run</returns>
-        public Run TasksTaskIDRunsPost (string taskID, string zapTraceSpan = null, RunManually runManually = null)
+        public Run PostTasksIDRuns (string taskID, string zapTraceSpan = null, RunManually runManually = null)
         {
-             ApiResponse<Run> localVarResponse = TasksTaskIDRunsPostWithHttpInfo(taskID, zapTraceSpan, runManually);
+             ApiResponse<Run> localVarResponse = PostTasksIDRunsWithHttpInfo(taskID, zapTraceSpan, runManually);
              return localVarResponse.Data;
         }
 
@@ -5408,11 +5932,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="runManually"> (optional)</param>
         /// <returns>ApiResponse of Run</returns>
-        public ApiResponse< Run > TasksTaskIDRunsPostWithHttpInfo (string taskID, string zapTraceSpan = null, RunManually runManually = null)
+        public ApiResponse< Run > PostTasksIDRunsWithHttpInfo (string taskID, string zapTraceSpan = null, RunManually runManually = null)
         {
             // verify the required parameter 'taskID' is set
             if (taskID == null)
-                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->TasksTaskIDRunsPost");
+                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->PostTasksIDRuns");
 
             var localVarPath = "/api/v2/tasks/{taskID}/runs";
             var localVarPathParams = new Dictionary<String, String>();
@@ -5458,7 +5982,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("TasksTaskIDRunsPost", localVarResponse);
+                Exception exception = ExceptionFactory("PostTasksIDRuns", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -5475,11 +5999,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="runManually"> (optional)</param>
         /// <returns>ApiResponse of Run</returns>
-        public IRestResponse TasksTaskIDRunsPostWithIRestResponse (string taskID, string zapTraceSpan = null, RunManually runManually = null)
+        public IRestResponse PostTasksIDRunsWithIRestResponse (string taskID, string zapTraceSpan = null, RunManually runManually = null)
         {
             // verify the required parameter 'taskID' is set
             if (taskID == null)
-                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->TasksTaskIDRunsPost");
+                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->PostTasksIDRuns");
 
             var localVarPath = "/api/v2/tasks/{taskID}/runs";
             var localVarPathParams = new Dictionary<String, String>();
@@ -5525,7 +6049,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("TasksTaskIDRunsPost", localVarResponse);
+                Exception exception = ExceptionFactory("PostTasksIDRuns", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -5540,11 +6064,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="runManually"> (optional)</param>
         /// <returns>ApiResponse of Run</returns>
-        public RestRequest TasksTaskIDRunsPostWithRestRequest (string taskID, string zapTraceSpan = null, RunManually runManually = null)
+        public RestRequest PostTasksIDRunsWithRestRequest (string taskID, string zapTraceSpan = null, RunManually runManually = null)
         {
             // verify the required parameter 'taskID' is set
             if (taskID == null)
-                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->TasksTaskIDRunsPost");
+                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->PostTasksIDRuns");
 
             var localVarPath = "/api/v2/tasks/{taskID}/runs";
             var localVarPathParams = new Dictionary<String, String>();
@@ -5594,9 +6118,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="runManually"> (optional)</param>
         /// <returns>Task of Run</returns>
-        public async System.Threading.Tasks.Task<Run> TasksTaskIDRunsPostAsync (string taskID, string zapTraceSpan = null, RunManually runManually = null)
+        public async System.Threading.Tasks.Task<Run> PostTasksIDRunsAsync (string taskID, string zapTraceSpan = null, RunManually runManually = null)
         {
-             ApiResponse<Run> localVarResponse = await TasksTaskIDRunsPostAsyncWithHttpInfo(taskID, zapTraceSpan, runManually);
+             ApiResponse<Run> localVarResponse = await PostTasksIDRunsAsyncWithHttpInfo(taskID, zapTraceSpan, runManually);
              return localVarResponse.Data;
 
         }
@@ -5609,11 +6133,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="runManually"> (optional)</param>
         /// <returns>Task of ApiResponse (Run)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Run>> TasksTaskIDRunsPostAsyncWithHttpInfo (string taskID, string zapTraceSpan = null, RunManually runManually = null)
+        public async System.Threading.Tasks.Task<ApiResponse<Run>> PostTasksIDRunsAsyncWithHttpInfo (string taskID, string zapTraceSpan = null, RunManually runManually = null)
         {
             // verify the required parameter 'taskID' is set
             if (taskID == null)
-                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->TasksTaskIDRunsPost");
+                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->PostTasksIDRuns");
 
             var localVarPath = "/api/v2/tasks/{taskID}/runs";
             var localVarPathParams = new Dictionary<String, String>();
@@ -5659,7 +6183,269 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("TasksTaskIDRunsPost", localVarResponse);
+                Exception exception = ExceptionFactory("PostTasksIDRuns", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Run>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (Run) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Run)));
+        }
+
+        /// <summary>
+        /// Retry a task run 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskID">task ID</param>
+        /// <param name="runID">run ID</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Run</returns>
+        public Run PostTasksIDRunsIDRetry (string taskID, string runID, string zapTraceSpan = null)
+        {
+             ApiResponse<Run> localVarResponse = PostTasksIDRunsIDRetryWithHttpInfo(taskID, runID, zapTraceSpan);
+             return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Retry a task run 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskID">task ID</param>
+        /// <param name="runID">run ID</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Run</returns>
+        public ApiResponse< Run > PostTasksIDRunsIDRetryWithHttpInfo (string taskID, string runID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'taskID' is set
+            if (taskID == null)
+                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->PostTasksIDRunsIDRetry");
+            // verify the required parameter 'runID' is set
+            if (runID == null)
+                throw new ApiException(400, "Missing required parameter 'runID' when calling TasksService->PostTasksIDRunsIDRetry");
+
+            var localVarPath = "/api/v2/tasks/{taskID}/runs/{runID}/retry";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (taskID != null) localVarPathParams.Add("taskID", this.Configuration.ApiClient.ParameterToString(taskID)); // path parameter
+            if (runID != null) localVarPathParams.Add("runID", this.Configuration.ApiClient.ParameterToString(runID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("PostTasksIDRunsIDRetry", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Run>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (Run) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Run)));
+        }
+
+        /// <summary>
+        /// Retry a task run 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskID">task ID</param>
+        /// <param name="runID">run ID</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Run</returns>
+        public IRestResponse PostTasksIDRunsIDRetryWithIRestResponse (string taskID, string runID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'taskID' is set
+            if (taskID == null)
+                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->PostTasksIDRunsIDRetry");
+            // verify the required parameter 'runID' is set
+            if (runID == null)
+                throw new ApiException(400, "Missing required parameter 'runID' when calling TasksService->PostTasksIDRunsIDRetry");
+
+            var localVarPath = "/api/v2/tasks/{taskID}/runs/{runID}/retry";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (taskID != null) localVarPathParams.Add("taskID", this.Configuration.ApiClient.ParameterToString(taskID)); // path parameter
+            if (runID != null) localVarPathParams.Add("runID", this.Configuration.ApiClient.ParameterToString(runID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("PostTasksIDRunsIDRetry", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return localVarResponse;
+        }
+        
+        /// <summary>
+        /// Retry a task run 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskID">task ID</param>
+        /// <param name="runID">run ID</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Run</returns>
+        public RestRequest PostTasksIDRunsIDRetryWithRestRequest (string taskID, string runID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'taskID' is set
+            if (taskID == null)
+                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->PostTasksIDRunsIDRetry");
+            // verify the required parameter 'runID' is set
+            if (runID == null)
+                throw new ApiException(400, "Missing required parameter 'runID' when calling TasksService->PostTasksIDRunsIDRetry");
+
+            var localVarPath = "/api/v2/tasks/{taskID}/runs/{runID}/retry";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (taskID != null) localVarPathParams.Add("taskID", this.Configuration.ApiClient.ParameterToString(taskID)); // path parameter
+            if (runID != null) localVarPathParams.Add("runID", this.Configuration.ApiClient.ParameterToString(runID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
+                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+        }
+
+        /// <summary>
+        /// Retry a task run 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskID">task ID</param>
+        /// <param name="runID">run ID</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of Run</returns>
+        public async System.Threading.Tasks.Task<Run> PostTasksIDRunsIDRetryAsync (string taskID, string runID, string zapTraceSpan = null)
+        {
+             ApiResponse<Run> localVarResponse = await PostTasksIDRunsIDRetryAsyncWithHttpInfo(taskID, runID, zapTraceSpan);
+             return localVarResponse.Data;
+
+        }
+
+        /// <summary>
+        /// Retry a task run 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskID">task ID</param>
+        /// <param name="runID">run ID</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ApiResponse (Run)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<Run>> PostTasksIDRunsIDRetryAsyncWithHttpInfo (string taskID, string runID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'taskID' is set
+            if (taskID == null)
+                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->PostTasksIDRunsIDRetry");
+            // verify the required parameter 'runID' is set
+            if (runID == null)
+                throw new ApiException(400, "Missing required parameter 'runID' when calling TasksService->PostTasksIDRunsIDRetry");
+
+            var localVarPath = "/api/v2/tasks/{taskID}/runs/{runID}/retry";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (taskID != null) localVarPathParams.Add("taskID", this.Configuration.ApiClient.ParameterToString(taskID)); // path parameter
+            if (runID != null) localVarPathParams.Add("runID", this.Configuration.ApiClient.ParameterToString(runID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("PostTasksIDRunsIDRetry", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -5926,792 +6712,6 @@ namespace InfluxDB.Client.Api.Service
             return new ApiResponse<Object>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
                 null);
-        }
-
-        /// <summary>
-        /// Retrieve a single run record for a task 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">task ID</param>
-        /// <param name="runID">run ID</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Run</returns>
-        public Run TasksTaskIDRunsRunIDGet (string taskID, string runID, string zapTraceSpan = null)
-        {
-             ApiResponse<Run> localVarResponse = TasksTaskIDRunsRunIDGetWithHttpInfo(taskID, runID, zapTraceSpan);
-             return localVarResponse.Data;
-        }
-
-        /// <summary>
-        /// Retrieve a single run record for a task 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">task ID</param>
-        /// <param name="runID">run ID</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Run</returns>
-        public ApiResponse< Run > TasksTaskIDRunsRunIDGetWithHttpInfo (string taskID, string runID, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'taskID' is set
-            if (taskID == null)
-                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->TasksTaskIDRunsRunIDGet");
-            // verify the required parameter 'runID' is set
-            if (runID == null)
-                throw new ApiException(400, "Missing required parameter 'runID' when calling TasksService->TasksTaskIDRunsRunIDGet");
-
-            var localVarPath = "/api/v2/tasks/{taskID}/runs/{runID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (taskID != null) localVarPathParams.Add("taskID", this.Configuration.ApiClient.ParameterToString(taskID)); // path parameter
-            if (runID != null) localVarPathParams.Add("runID", this.Configuration.ApiClient.ParameterToString(runID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("TasksTaskIDRunsRunIDGet", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return new ApiResponse<Run>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (Run) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Run)));
-        }
-
-        /// <summary>
-        /// Retrieve a single run record for a task 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">task ID</param>
-        /// <param name="runID">run ID</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Run</returns>
-        public IRestResponse TasksTaskIDRunsRunIDGetWithIRestResponse (string taskID, string runID, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'taskID' is set
-            if (taskID == null)
-                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->TasksTaskIDRunsRunIDGet");
-            // verify the required parameter 'runID' is set
-            if (runID == null)
-                throw new ApiException(400, "Missing required parameter 'runID' when calling TasksService->TasksTaskIDRunsRunIDGet");
-
-            var localVarPath = "/api/v2/tasks/{taskID}/runs/{runID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (taskID != null) localVarPathParams.Add("taskID", this.Configuration.ApiClient.ParameterToString(taskID)); // path parameter
-            if (runID != null) localVarPathParams.Add("runID", this.Configuration.ApiClient.ParameterToString(runID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("TasksTaskIDRunsRunIDGet", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return localVarResponse;
-        }
-        
-        /// <summary>
-        /// Retrieve a single run record for a task 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">task ID</param>
-        /// <param name="runID">run ID</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Run</returns>
-        public RestRequest TasksTaskIDRunsRunIDGetWithRestRequest (string taskID, string runID, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'taskID' is set
-            if (taskID == null)
-                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->TasksTaskIDRunsRunIDGet");
-            // verify the required parameter 'runID' is set
-            if (runID == null)
-                throw new ApiException(400, "Missing required parameter 'runID' when calling TasksService->TasksTaskIDRunsRunIDGet");
-
-            var localVarPath = "/api/v2/tasks/{taskID}/runs/{runID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (taskID != null) localVarPathParams.Add("taskID", this.Configuration.ApiClient.ParameterToString(taskID)); // path parameter
-            if (runID != null) localVarPathParams.Add("runID", this.Configuration.ApiClient.ParameterToString(runID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-        }
-
-        /// <summary>
-        /// Retrieve a single run record for a task 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">task ID</param>
-        /// <param name="runID">run ID</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of Run</returns>
-        public async System.Threading.Tasks.Task<Run> TasksTaskIDRunsRunIDGetAsync (string taskID, string runID, string zapTraceSpan = null)
-        {
-             ApiResponse<Run> localVarResponse = await TasksTaskIDRunsRunIDGetAsyncWithHttpInfo(taskID, runID, zapTraceSpan);
-             return localVarResponse.Data;
-
-        }
-
-        /// <summary>
-        /// Retrieve a single run record for a task 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">task ID</param>
-        /// <param name="runID">run ID</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ApiResponse (Run)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Run>> TasksTaskIDRunsRunIDGetAsyncWithHttpInfo (string taskID, string runID, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'taskID' is set
-            if (taskID == null)
-                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->TasksTaskIDRunsRunIDGet");
-            // verify the required parameter 'runID' is set
-            if (runID == null)
-                throw new ApiException(400, "Missing required parameter 'runID' when calling TasksService->TasksTaskIDRunsRunIDGet");
-
-            var localVarPath = "/api/v2/tasks/{taskID}/runs/{runID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (taskID != null) localVarPathParams.Add("taskID", this.Configuration.ApiClient.ParameterToString(taskID)); // path parameter
-            if (runID != null) localVarPathParams.Add("runID", this.Configuration.ApiClient.ParameterToString(runID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("TasksTaskIDRunsRunIDGet", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return new ApiResponse<Run>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (Run) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Run)));
-        }
-
-        /// <summary>
-        /// Retrieve all logs for a run 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of task to get logs for.</param>
-        /// <param name="runID">ID of run to get logs for.</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Logs</returns>
-        public Logs TasksTaskIDRunsRunIDLogsGet (string taskID, string runID, string zapTraceSpan = null)
-        {
-             ApiResponse<Logs> localVarResponse = TasksTaskIDRunsRunIDLogsGetWithHttpInfo(taskID, runID, zapTraceSpan);
-             return localVarResponse.Data;
-        }
-
-        /// <summary>
-        /// Retrieve all logs for a run 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of task to get logs for.</param>
-        /// <param name="runID">ID of run to get logs for.</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Logs</returns>
-        public ApiResponse< Logs > TasksTaskIDRunsRunIDLogsGetWithHttpInfo (string taskID, string runID, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'taskID' is set
-            if (taskID == null)
-                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->TasksTaskIDRunsRunIDLogsGet");
-            // verify the required parameter 'runID' is set
-            if (runID == null)
-                throw new ApiException(400, "Missing required parameter 'runID' when calling TasksService->TasksTaskIDRunsRunIDLogsGet");
-
-            var localVarPath = "/api/v2/tasks/{taskID}/runs/{runID}/logs";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (taskID != null) localVarPathParams.Add("taskID", this.Configuration.ApiClient.ParameterToString(taskID)); // path parameter
-            if (runID != null) localVarPathParams.Add("runID", this.Configuration.ApiClient.ParameterToString(runID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("TasksTaskIDRunsRunIDLogsGet", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return new ApiResponse<Logs>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (Logs) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Logs)));
-        }
-
-        /// <summary>
-        /// Retrieve all logs for a run 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of task to get logs for.</param>
-        /// <param name="runID">ID of run to get logs for.</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Logs</returns>
-        public IRestResponse TasksTaskIDRunsRunIDLogsGetWithIRestResponse (string taskID, string runID, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'taskID' is set
-            if (taskID == null)
-                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->TasksTaskIDRunsRunIDLogsGet");
-            // verify the required parameter 'runID' is set
-            if (runID == null)
-                throw new ApiException(400, "Missing required parameter 'runID' when calling TasksService->TasksTaskIDRunsRunIDLogsGet");
-
-            var localVarPath = "/api/v2/tasks/{taskID}/runs/{runID}/logs";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (taskID != null) localVarPathParams.Add("taskID", this.Configuration.ApiClient.ParameterToString(taskID)); // path parameter
-            if (runID != null) localVarPathParams.Add("runID", this.Configuration.ApiClient.ParameterToString(runID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("TasksTaskIDRunsRunIDLogsGet", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return localVarResponse;
-        }
-        
-        /// <summary>
-        /// Retrieve all logs for a run 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of task to get logs for.</param>
-        /// <param name="runID">ID of run to get logs for.</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Logs</returns>
-        public RestRequest TasksTaskIDRunsRunIDLogsGetWithRestRequest (string taskID, string runID, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'taskID' is set
-            if (taskID == null)
-                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->TasksTaskIDRunsRunIDLogsGet");
-            // verify the required parameter 'runID' is set
-            if (runID == null)
-                throw new ApiException(400, "Missing required parameter 'runID' when calling TasksService->TasksTaskIDRunsRunIDLogsGet");
-
-            var localVarPath = "/api/v2/tasks/{taskID}/runs/{runID}/logs";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (taskID != null) localVarPathParams.Add("taskID", this.Configuration.ApiClient.ParameterToString(taskID)); // path parameter
-            if (runID != null) localVarPathParams.Add("runID", this.Configuration.ApiClient.ParameterToString(runID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-        }
-
-        /// <summary>
-        /// Retrieve all logs for a run 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of task to get logs for.</param>
-        /// <param name="runID">ID of run to get logs for.</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of Logs</returns>
-        public async System.Threading.Tasks.Task<Logs> TasksTaskIDRunsRunIDLogsGetAsync (string taskID, string runID, string zapTraceSpan = null)
-        {
-             ApiResponse<Logs> localVarResponse = await TasksTaskIDRunsRunIDLogsGetAsyncWithHttpInfo(taskID, runID, zapTraceSpan);
-             return localVarResponse.Data;
-
-        }
-
-        /// <summary>
-        /// Retrieve all logs for a run 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of task to get logs for.</param>
-        /// <param name="runID">ID of run to get logs for.</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ApiResponse (Logs)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Logs>> TasksTaskIDRunsRunIDLogsGetAsyncWithHttpInfo (string taskID, string runID, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'taskID' is set
-            if (taskID == null)
-                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->TasksTaskIDRunsRunIDLogsGet");
-            // verify the required parameter 'runID' is set
-            if (runID == null)
-                throw new ApiException(400, "Missing required parameter 'runID' when calling TasksService->TasksTaskIDRunsRunIDLogsGet");
-
-            var localVarPath = "/api/v2/tasks/{taskID}/runs/{runID}/logs";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (taskID != null) localVarPathParams.Add("taskID", this.Configuration.ApiClient.ParameterToString(taskID)); // path parameter
-            if (runID != null) localVarPathParams.Add("runID", this.Configuration.ApiClient.ParameterToString(runID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("TasksTaskIDRunsRunIDLogsGet", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return new ApiResponse<Logs>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (Logs) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Logs)));
-        }
-
-        /// <summary>
-        /// Retry a task run 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">task ID</param>
-        /// <param name="runID">run ID</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Run</returns>
-        public Run TasksTaskIDRunsRunIDRetryPost (string taskID, string runID, string zapTraceSpan = null)
-        {
-             ApiResponse<Run> localVarResponse = TasksTaskIDRunsRunIDRetryPostWithHttpInfo(taskID, runID, zapTraceSpan);
-             return localVarResponse.Data;
-        }
-
-        /// <summary>
-        /// Retry a task run 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">task ID</param>
-        /// <param name="runID">run ID</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Run</returns>
-        public ApiResponse< Run > TasksTaskIDRunsRunIDRetryPostWithHttpInfo (string taskID, string runID, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'taskID' is set
-            if (taskID == null)
-                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->TasksTaskIDRunsRunIDRetryPost");
-            // verify the required parameter 'runID' is set
-            if (runID == null)
-                throw new ApiException(400, "Missing required parameter 'runID' when calling TasksService->TasksTaskIDRunsRunIDRetryPost");
-
-            var localVarPath = "/api/v2/tasks/{taskID}/runs/{runID}/retry";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (taskID != null) localVarPathParams.Add("taskID", this.Configuration.ApiClient.ParameterToString(taskID)); // path parameter
-            if (runID != null) localVarPathParams.Add("runID", this.Configuration.ApiClient.ParameterToString(runID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("TasksTaskIDRunsRunIDRetryPost", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return new ApiResponse<Run>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (Run) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Run)));
-        }
-
-        /// <summary>
-        /// Retry a task run 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">task ID</param>
-        /// <param name="runID">run ID</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Run</returns>
-        public IRestResponse TasksTaskIDRunsRunIDRetryPostWithIRestResponse (string taskID, string runID, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'taskID' is set
-            if (taskID == null)
-                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->TasksTaskIDRunsRunIDRetryPost");
-            // verify the required parameter 'runID' is set
-            if (runID == null)
-                throw new ApiException(400, "Missing required parameter 'runID' when calling TasksService->TasksTaskIDRunsRunIDRetryPost");
-
-            var localVarPath = "/api/v2/tasks/{taskID}/runs/{runID}/retry";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (taskID != null) localVarPathParams.Add("taskID", this.Configuration.ApiClient.ParameterToString(taskID)); // path parameter
-            if (runID != null) localVarPathParams.Add("runID", this.Configuration.ApiClient.ParameterToString(runID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("TasksTaskIDRunsRunIDRetryPost", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return localVarResponse;
-        }
-        
-        /// <summary>
-        /// Retry a task run 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">task ID</param>
-        /// <param name="runID">run ID</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Run</returns>
-        public RestRequest TasksTaskIDRunsRunIDRetryPostWithRestRequest (string taskID, string runID, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'taskID' is set
-            if (taskID == null)
-                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->TasksTaskIDRunsRunIDRetryPost");
-            // verify the required parameter 'runID' is set
-            if (runID == null)
-                throw new ApiException(400, "Missing required parameter 'runID' when calling TasksService->TasksTaskIDRunsRunIDRetryPost");
-
-            var localVarPath = "/api/v2/tasks/{taskID}/runs/{runID}/retry";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (taskID != null) localVarPathParams.Add("taskID", this.Configuration.ApiClient.ParameterToString(taskID)); // path parameter
-            if (runID != null) localVarPathParams.Add("runID", this.Configuration.ApiClient.ParameterToString(runID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
-                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-        }
-
-        /// <summary>
-        /// Retry a task run 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">task ID</param>
-        /// <param name="runID">run ID</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of Run</returns>
-        public async System.Threading.Tasks.Task<Run> TasksTaskIDRunsRunIDRetryPostAsync (string taskID, string runID, string zapTraceSpan = null)
-        {
-             ApiResponse<Run> localVarResponse = await TasksTaskIDRunsRunIDRetryPostAsyncWithHttpInfo(taskID, runID, zapTraceSpan);
-             return localVarResponse.Data;
-
-        }
-
-        /// <summary>
-        /// Retry a task run 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">task ID</param>
-        /// <param name="runID">run ID</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ApiResponse (Run)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Run>> TasksTaskIDRunsRunIDRetryPostAsyncWithHttpInfo (string taskID, string runID, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'taskID' is set
-            if (taskID == null)
-                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->TasksTaskIDRunsRunIDRetryPost");
-            // verify the required parameter 'runID' is set
-            if (runID == null)
-                throw new ApiException(400, "Missing required parameter 'runID' when calling TasksService->TasksTaskIDRunsRunIDRetryPost");
-
-            var localVarPath = "/api/v2/tasks/{taskID}/runs/{runID}/retry";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (taskID != null) localVarPathParams.Add("taskID", this.Configuration.ApiClient.ParameterToString(taskID)); // path parameter
-            if (runID != null) localVarPathParams.Add("runID", this.Configuration.ApiClient.ParameterToString(runID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("TasksTaskIDRunsRunIDRetryPost", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return new ApiResponse<Run>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (Run) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Run)));
         }
 
     }

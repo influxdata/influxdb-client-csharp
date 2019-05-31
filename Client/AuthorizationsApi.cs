@@ -57,7 +57,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNotNull(authorization, nameof(authorization));
 
-            return _service.AuthorizationsPost(authorization);
+            return _service.PostAuthorizations(authorization);
         }
 
         /// <summary>
@@ -69,7 +69,9 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNotNull(authorization, nameof(authorization));
 
-            return _service.AuthorizationsPost(authorization);
+            var request = new AuthorizationUpdateRequest(authorization.Status, authorization.Description);
+            
+            return _service.PatchAuthorizationsID(authorization.Id, request);
         }
 
         /// <summary>
@@ -93,7 +95,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(authorizationId, nameof(authorizationId));
 
-            _service.AuthorizationsAuthIDDelete(authorizationId);
+            _service.DeleteAuthorizationsID(authorizationId);
         }
 
         /// <summary>
@@ -138,7 +140,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(authorizationId, nameof(authorizationId));
 
-            return _service.AuthorizationsAuthIDGet(authorizationId);
+            return _service.GetAuthorizationsID(authorizationId);
         }
 
         /// <summary>
@@ -188,7 +190,7 @@ namespace InfluxDB.Client
 
         private List<Authorization> FindAuthorizationsBy(string userId, string userName)
         {
-            return _service.AuthorizationsGet(null, userId, userName)._Authorizations;
+            return _service.GetAuthorizations(null, userId, userName)._Authorizations;
         }
     }
 }

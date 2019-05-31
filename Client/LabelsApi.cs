@@ -26,7 +26,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNotNull(request, nameof(request));
 
-            return _service.LabelsPost(request).Label;
+            return _service.PostLabels(request).Label;
         }
 
         /// <summary>
@@ -57,7 +57,7 @@ namespace InfluxDB.Client
 
             var labelUpdate = new LabelUpdate {Properties = label.Properties};
 
-            return _service.LabelsLabelIDPatch(label.Id, labelUpdate).Label;
+            return UpdateLabel(label.Id, labelUpdate);
         }
 
         /// <summary>
@@ -68,7 +68,7 @@ namespace InfluxDB.Client
         /// <returns>Updated label</returns>
         public Label UpdateLabel(string labelId, LabelUpdate labelUpdate)
         {
-            return _service.LabelsLabelIDPatch(labelId, labelUpdate).Label;
+            return _service.PatchLabelsID(labelId, labelUpdate).Label;
         }
 
         /// <summary>
@@ -92,7 +92,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(labelId, nameof(labelId));
 
-            _service.LabelsLabelIDDelete(labelId);
+            _service.DeleteLabelsID(labelId);
         }
 
         /// <summary>
@@ -138,7 +138,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(labelId, nameof(labelId));
 
-            return _service.LabelsLabelIDGet(labelId).Label;
+            return _service.GetLabelsID(labelId).Label;
         }
 
         /// <summary>
@@ -147,7 +147,7 @@ namespace InfluxDB.Client
         /// <returns>List all labels.</returns>
         public List<Label> FindLabels()
         {
-            return _service.LabelsGet().Labels;
+            return _service.GetLabels().Labels;
         }
 
         /// <summary>
@@ -169,7 +169,7 @@ namespace InfluxDB.Client
         /// <returns>all labels</returns>
         public List<Label> FindLabelsByOrgId(string orgId)
         {
-            return _service.LabelsGet(null, orgId).Labels;
+            return _service.GetLabels(null, orgId).Labels;
         }
     }
 }

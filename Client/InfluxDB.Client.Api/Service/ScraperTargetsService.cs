@@ -25,6 +25,104 @@ namespace InfluxDB.Client.Api.Service
     {
         #region Synchronous Operations
         /// <summary>
+        /// delete a scraper target
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="scraperTargetID">id of the scraper target</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns></returns>
+        void DeleteScrapersID (string scraperTargetID, string zapTraceSpan = null);
+
+        /// <summary>
+        /// delete a scraper target
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="scraperTargetID">id of the scraper target</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        ApiResponse<Object> DeleteScrapersIDWithHttpInfo (string scraperTargetID, string zapTraceSpan = null);
+        /// <summary>
+        /// delete a label from a scraper target
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="labelID">ID of the label</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns></returns>
+        void DeleteScrapersIDLabelsID (string scraperTargetID, string labelID, string zapTraceSpan = null);
+
+        /// <summary>
+        /// delete a label from a scraper target
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="labelID">ID of the label</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        ApiResponse<Object> DeleteScrapersIDLabelsIDWithHttpInfo (string scraperTargetID, string labelID, string zapTraceSpan = null);
+        /// <summary>
+        /// removes a member from a scraper target
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userID">ID of member to remove</param>
+        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns></returns>
+        void DeleteScrapersIDMembersID (string userID, string scraperTargetID, string zapTraceSpan = null);
+
+        /// <summary>
+        /// removes a member from a scraper target
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userID">ID of member to remove</param>
+        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        ApiResponse<Object> DeleteScrapersIDMembersIDWithHttpInfo (string userID, string scraperTargetID, string zapTraceSpan = null);
+        /// <summary>
+        /// removes an owner from a scraper target
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userID">ID of owner to remove</param>
+        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns></returns>
+        void DeleteScrapersIDOwnersID (string userID, string scraperTargetID, string zapTraceSpan = null);
+
+        /// <summary>
+        /// removes an owner from a scraper target
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userID">ID of owner to remove</param>
+        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        ApiResponse<Object> DeleteScrapersIDOwnersIDWithHttpInfo (string userID, string scraperTargetID, string zapTraceSpan = null);
+        /// <summary>
         /// get all scraper targets
         /// </summary>
         /// <remarks>
@@ -37,7 +135,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">specifies the organization id of the scraper target (optional)</param>
         /// <param name="org">specifies the organization name of the scraper target (optional)</param>
         /// <returns>ScraperTargetResponses</returns>
-        ScraperTargetResponses ScrapersGet (string zapTraceSpan = null, string name = null, List<string> id = null, string orgID = null, string org = null);
+        ScraperTargetResponses GetScrapers (string zapTraceSpan = null, string name = null, List<string> id = null, string orgID = null, string org = null);
 
         /// <summary>
         /// get all scraper targets
@@ -52,53 +150,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">specifies the organization id of the scraper target (optional)</param>
         /// <param name="org">specifies the organization name of the scraper target (optional)</param>
         /// <returns>ApiResponse of ScraperTargetResponses</returns>
-        ApiResponse<ScraperTargetResponses> ScrapersGetWithHttpInfo (string zapTraceSpan = null, string name = null, List<string> id = null, string orgID = null, string org = null);
-        /// <summary>
-        /// create a scraper target
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetRequest">scraper target to create</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ScraperTargetResponse</returns>
-        ScraperTargetResponse ScrapersPost (ScraperTargetRequest scraperTargetRequest, string zapTraceSpan = null);
-
-        /// <summary>
-        /// create a scraper target
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetRequest">scraper target to create</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of ScraperTargetResponse</returns>
-        ApiResponse<ScraperTargetResponse> ScrapersPostWithHttpInfo (ScraperTargetRequest scraperTargetRequest, string zapTraceSpan = null);
-        /// <summary>
-        /// delete a scraper target
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">id of the scraper target</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns></returns>
-        void ScrapersScraperTargetIDDelete (string scraperTargetID, string zapTraceSpan = null);
-
-        /// <summary>
-        /// delete a scraper target
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">id of the scraper target</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<Object> ScrapersScraperTargetIDDeleteWithHttpInfo (string scraperTargetID, string zapTraceSpan = null);
+        ApiResponse<ScraperTargetResponses> GetScrapersWithHttpInfo (string zapTraceSpan = null, string name = null, List<string> id = null, string orgID = null, string org = null);
         /// <summary>
         /// get a scraper target by id
         /// </summary>
@@ -109,7 +161,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="scraperTargetID">id of the scraper target</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ScraperTargetResponse</returns>
-        ScraperTargetResponse ScrapersScraperTargetIDGet (string scraperTargetID, string zapTraceSpan = null);
+        ScraperTargetResponse GetScrapersID (string scraperTargetID, string zapTraceSpan = null);
 
         /// <summary>
         /// get a scraper target by id
@@ -121,7 +173,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="scraperTargetID">id of the scraper target</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ScraperTargetResponse</returns>
-        ApiResponse<ScraperTargetResponse> ScrapersScraperTargetIDGetWithHttpInfo (string scraperTargetID, string zapTraceSpan = null);
+        ApiResponse<ScraperTargetResponse> GetScrapersIDWithHttpInfo (string scraperTargetID, string zapTraceSpan = null);
         /// <summary>
         /// list all labels for a scraper targets
         /// </summary>
@@ -132,7 +184,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="scraperTargetID">ID of the scraper target</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>LabelsResponse</returns>
-        LabelsResponse ScrapersScraperTargetIDLabelsGet (string scraperTargetID, string zapTraceSpan = null);
+        LabelsResponse GetScrapersIDLabels (string scraperTargetID, string zapTraceSpan = null);
 
         /// <summary>
         /// list all labels for a scraper targets
@@ -144,32 +196,78 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="scraperTargetID">ID of the scraper target</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelsResponse</returns>
-        ApiResponse<LabelsResponse> ScrapersScraperTargetIDLabelsGetWithHttpInfo (string scraperTargetID, string zapTraceSpan = null);
+        ApiResponse<LabelsResponse> GetScrapersIDLabelsWithHttpInfo (string scraperTargetID, string zapTraceSpan = null);
         /// <summary>
-        /// delete a label from a scraper target
+        /// List all users with member privileges for a scraper target
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="labelID">ID of the label</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns></returns>
-        void ScrapersScraperTargetIDLabelsLabelIDDelete (string scraperTargetID, string labelID, string zapTraceSpan = null);
+        /// <returns>ResourceMembers</returns>
+        ResourceMembers GetScrapersIDMembers (string scraperTargetID, string zapTraceSpan = null);
 
         /// <summary>
-        /// delete a label from a scraper target
+        /// List all users with member privileges for a scraper target
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="labelID">ID of the label</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<Object> ScrapersScraperTargetIDLabelsLabelIDDeleteWithHttpInfo (string scraperTargetID, string labelID, string zapTraceSpan = null);
+        /// <returns>ApiResponse of ResourceMembers</returns>
+        ApiResponse<ResourceMembers> GetScrapersIDMembersWithHttpInfo (string scraperTargetID, string zapTraceSpan = null);
+        /// <summary>
+        /// List all owners of a scraper target
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ResourceOwners</returns>
+        ResourceOwners GetScrapersIDOwners (string scraperTargetID, string zapTraceSpan = null);
+
+        /// <summary>
+        /// List all owners of a scraper target
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of ResourceOwners</returns>
+        ApiResponse<ResourceOwners> GetScrapersIDOwnersWithHttpInfo (string scraperTargetID, string zapTraceSpan = null);
+        /// <summary>
+        /// update a scraper target
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="scraperTargetID">id of the scraper target</param>
+        /// <param name="scraperTargetRequest">scraper target update to apply</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ScraperTargetResponse</returns>
+        ScraperTargetResponse PatchScrapersID (string scraperTargetID, ScraperTargetRequest scraperTargetRequest, string zapTraceSpan = null);
+
+        /// <summary>
+        /// update a scraper target
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="scraperTargetID">id of the scraper target</param>
+        /// <param name="scraperTargetRequest">scraper target update to apply</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of ScraperTargetResponse</returns>
+        ApiResponse<ScraperTargetResponse> PatchScrapersIDWithHttpInfo (string scraperTargetID, ScraperTargetRequest scraperTargetRequest, string zapTraceSpan = null);
         /// <summary>
         /// update a label from a scraper target
         /// </summary>
@@ -182,7 +280,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="label">label update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
-        void ScrapersScraperTargetIDLabelsLabelIDPatch (string scraperTargetID, string labelID, Label label, string zapTraceSpan = null);
+        void PatchScrapersIDLabelsID (string scraperTargetID, string labelID, Label label, string zapTraceSpan = null);
 
         /// <summary>
         /// update a label from a scraper target
@@ -196,7 +294,30 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="label">label update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<Object> ScrapersScraperTargetIDLabelsLabelIDPatchWithHttpInfo (string scraperTargetID, string labelID, Label label, string zapTraceSpan = null);
+        ApiResponse<Object> PatchScrapersIDLabelsIDWithHttpInfo (string scraperTargetID, string labelID, Label label, string zapTraceSpan = null);
+        /// <summary>
+        /// create a scraper target
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="scraperTargetRequest">scraper target to create</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ScraperTargetResponse</returns>
+        ScraperTargetResponse PostScrapers (ScraperTargetRequest scraperTargetRequest, string zapTraceSpan = null);
+
+        /// <summary>
+        /// create a scraper target
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="scraperTargetRequest">scraper target to create</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of ScraperTargetResponse</returns>
+        ApiResponse<ScraperTargetResponse> PostScrapersWithHttpInfo (ScraperTargetRequest scraperTargetRequest, string zapTraceSpan = null);
         /// <summary>
         /// add a label to a scraper target
         /// </summary>
@@ -208,7 +329,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="labelMapping">label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>LabelResponse</returns>
-        LabelResponse ScrapersScraperTargetIDLabelsPost (string scraperTargetID, LabelMapping labelMapping, string zapTraceSpan = null);
+        LabelResponse PostScrapersIDLabels (string scraperTargetID, LabelMapping labelMapping, string zapTraceSpan = null);
 
         /// <summary>
         /// add a label to a scraper target
@@ -221,30 +342,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="labelMapping">label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelResponse</returns>
-        ApiResponse<LabelResponse> ScrapersScraperTargetIDLabelsPostWithHttpInfo (string scraperTargetID, LabelMapping labelMapping, string zapTraceSpan = null);
-        /// <summary>
-        /// List all users with member privileges for a scraper target
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ResourceMembers</returns>
-        ResourceMembers ScrapersScraperTargetIDMembersGet (string scraperTargetID, string zapTraceSpan = null);
-
-        /// <summary>
-        /// List all users with member privileges for a scraper target
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of ResourceMembers</returns>
-        ApiResponse<ResourceMembers> ScrapersScraperTargetIDMembersGetWithHttpInfo (string scraperTargetID, string zapTraceSpan = null);
+        ApiResponse<LabelResponse> PostScrapersIDLabelsWithHttpInfo (string scraperTargetID, LabelMapping labelMapping, string zapTraceSpan = null);
         /// <summary>
         /// Add scraper target member
         /// </summary>
@@ -256,7 +354,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="addResourceMemberRequestBody">user to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ResourceMember</returns>
-        ResourceMember ScrapersScraperTargetIDMembersPost (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
+        ResourceMember PostScrapersIDMembers (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
 
         /// <summary>
         /// Add scraper target member
@@ -269,55 +367,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="addResourceMemberRequestBody">user to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMember</returns>
-        ApiResponse<ResourceMember> ScrapersScraperTargetIDMembersPostWithHttpInfo (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
-        /// <summary>
-        /// removes a member from a scraper target
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns></returns>
-        void ScrapersScraperTargetIDMembersUserIDDelete (string userID, string scraperTargetID, string zapTraceSpan = null);
-
-        /// <summary>
-        /// removes a member from a scraper target
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<Object> ScrapersScraperTargetIDMembersUserIDDeleteWithHttpInfo (string userID, string scraperTargetID, string zapTraceSpan = null);
-        /// <summary>
-        /// List all owners of a scraper target
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ResourceOwners</returns>
-        ResourceOwners ScrapersScraperTargetIDOwnersGet (string scraperTargetID, string zapTraceSpan = null);
-
-        /// <summary>
-        /// List all owners of a scraper target
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of ResourceOwners</returns>
-        ApiResponse<ResourceOwners> ScrapersScraperTargetIDOwnersGetWithHttpInfo (string scraperTargetID, string zapTraceSpan = null);
+        ApiResponse<ResourceMember> PostScrapersIDMembersWithHttpInfo (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
         /// <summary>
         /// Add scraper target owner
         /// </summary>
@@ -329,7 +379,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="addResourceMemberRequestBody">user to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ResourceOwner</returns>
-        ResourceOwner ScrapersScraperTargetIDOwnersPost (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
+        ResourceOwner PostScrapersIDOwners (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
 
         /// <summary>
         /// Add scraper target owner
@@ -342,59 +392,107 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="addResourceMemberRequestBody">user to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwner</returns>
-        ApiResponse<ResourceOwner> ScrapersScraperTargetIDOwnersPostWithHttpInfo (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
-        /// <summary>
-        /// removes an owner from a scraper target
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns></returns>
-        void ScrapersScraperTargetIDOwnersUserIDDelete (string userID, string scraperTargetID, string zapTraceSpan = null);
-
-        /// <summary>
-        /// removes an owner from a scraper target
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<Object> ScrapersScraperTargetIDOwnersUserIDDeleteWithHttpInfo (string userID, string scraperTargetID, string zapTraceSpan = null);
-        /// <summary>
-        /// update a scraper target
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">id of the scraper target</param>
-        /// <param name="scraperTargetRequest">scraper target update to apply</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ScraperTargetResponse</returns>
-        ScraperTargetResponse ScrapersScraperTargetIDPatch (string scraperTargetID, ScraperTargetRequest scraperTargetRequest, string zapTraceSpan = null);
-
-        /// <summary>
-        /// update a scraper target
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">id of the scraper target</param>
-        /// <param name="scraperTargetRequest">scraper target update to apply</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of ScraperTargetResponse</returns>
-        ApiResponse<ScraperTargetResponse> ScrapersScraperTargetIDPatchWithHttpInfo (string scraperTargetID, ScraperTargetRequest scraperTargetRequest, string zapTraceSpan = null);
+        ApiResponse<ResourceOwner> PostScrapersIDOwnersWithHttpInfo (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
         #endregion Synchronous Operations
         #region Asynchronous Operations
+        /// <summary>
+        /// delete a scraper target
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="scraperTargetID">id of the scraper target</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of void</returns>
+        System.Threading.Tasks.Task DeleteScrapersIDAsync (string scraperTargetID, string zapTraceSpan = null);
+
+        /// <summary>
+        /// delete a scraper target
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="scraperTargetID">id of the scraper target</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ApiResponse</returns>
+        System.Threading.Tasks.Task<ApiResponse<Object>> DeleteScrapersIDAsyncWithHttpInfo (string scraperTargetID, string zapTraceSpan = null);
+        /// <summary>
+        /// delete a label from a scraper target
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="labelID">ID of the label</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of void</returns>
+        System.Threading.Tasks.Task DeleteScrapersIDLabelsIDAsync (string scraperTargetID, string labelID, string zapTraceSpan = null);
+
+        /// <summary>
+        /// delete a label from a scraper target
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="labelID">ID of the label</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ApiResponse</returns>
+        System.Threading.Tasks.Task<ApiResponse<Object>> DeleteScrapersIDLabelsIDAsyncWithHttpInfo (string scraperTargetID, string labelID, string zapTraceSpan = null);
+        /// <summary>
+        /// removes a member from a scraper target
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userID">ID of member to remove</param>
+        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of void</returns>
+        System.Threading.Tasks.Task DeleteScrapersIDMembersIDAsync (string userID, string scraperTargetID, string zapTraceSpan = null);
+
+        /// <summary>
+        /// removes a member from a scraper target
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userID">ID of member to remove</param>
+        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ApiResponse</returns>
+        System.Threading.Tasks.Task<ApiResponse<Object>> DeleteScrapersIDMembersIDAsyncWithHttpInfo (string userID, string scraperTargetID, string zapTraceSpan = null);
+        /// <summary>
+        /// removes an owner from a scraper target
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userID">ID of owner to remove</param>
+        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of void</returns>
+        System.Threading.Tasks.Task DeleteScrapersIDOwnersIDAsync (string userID, string scraperTargetID, string zapTraceSpan = null);
+
+        /// <summary>
+        /// removes an owner from a scraper target
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userID">ID of owner to remove</param>
+        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ApiResponse</returns>
+        System.Threading.Tasks.Task<ApiResponse<Object>> DeleteScrapersIDOwnersIDAsyncWithHttpInfo (string userID, string scraperTargetID, string zapTraceSpan = null);
         /// <summary>
         /// get all scraper targets
         /// </summary>
@@ -408,7 +506,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">specifies the organization id of the scraper target (optional)</param>
         /// <param name="org">specifies the organization name of the scraper target (optional)</param>
         /// <returns>Task of ScraperTargetResponses</returns>
-        System.Threading.Tasks.Task<ScraperTargetResponses> ScrapersGetAsync (string zapTraceSpan = null, string name = null, List<string> id = null, string orgID = null, string org = null);
+        System.Threading.Tasks.Task<ScraperTargetResponses> GetScrapersAsync (string zapTraceSpan = null, string name = null, List<string> id = null, string orgID = null, string org = null);
 
         /// <summary>
         /// get all scraper targets
@@ -423,53 +521,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">specifies the organization id of the scraper target (optional)</param>
         /// <param name="org">specifies the organization name of the scraper target (optional)</param>
         /// <returns>Task of ApiResponse (ScraperTargetResponses)</returns>
-        System.Threading.Tasks.Task<ApiResponse<ScraperTargetResponses>> ScrapersGetAsyncWithHttpInfo (string zapTraceSpan = null, string name = null, List<string> id = null, string orgID = null, string org = null);
-        /// <summary>
-        /// create a scraper target
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetRequest">scraper target to create</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ScraperTargetResponse</returns>
-        System.Threading.Tasks.Task<ScraperTargetResponse> ScrapersPostAsync (ScraperTargetRequest scraperTargetRequest, string zapTraceSpan = null);
-
-        /// <summary>
-        /// create a scraper target
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetRequest">scraper target to create</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ApiResponse (ScraperTargetResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<ScraperTargetResponse>> ScrapersPostAsyncWithHttpInfo (ScraperTargetRequest scraperTargetRequest, string zapTraceSpan = null);
-        /// <summary>
-        /// delete a scraper target
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">id of the scraper target</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task ScrapersScraperTargetIDDeleteAsync (string scraperTargetID, string zapTraceSpan = null);
-
-        /// <summary>
-        /// delete a scraper target
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">id of the scraper target</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> ScrapersScraperTargetIDDeleteAsyncWithHttpInfo (string scraperTargetID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<ScraperTargetResponses>> GetScrapersAsyncWithHttpInfo (string zapTraceSpan = null, string name = null, List<string> id = null, string orgID = null, string org = null);
         /// <summary>
         /// get a scraper target by id
         /// </summary>
@@ -480,7 +532,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="scraperTargetID">id of the scraper target</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ScraperTargetResponse</returns>
-        System.Threading.Tasks.Task<ScraperTargetResponse> ScrapersScraperTargetIDGetAsync (string scraperTargetID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ScraperTargetResponse> GetScrapersIDAsync (string scraperTargetID, string zapTraceSpan = null);
 
         /// <summary>
         /// get a scraper target by id
@@ -492,7 +544,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="scraperTargetID">id of the scraper target</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (ScraperTargetResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<ScraperTargetResponse>> ScrapersScraperTargetIDGetAsyncWithHttpInfo (string scraperTargetID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<ScraperTargetResponse>> GetScrapersIDAsyncWithHttpInfo (string scraperTargetID, string zapTraceSpan = null);
         /// <summary>
         /// list all labels for a scraper targets
         /// </summary>
@@ -503,7 +555,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="scraperTargetID">ID of the scraper target</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of LabelsResponse</returns>
-        System.Threading.Tasks.Task<LabelsResponse> ScrapersScraperTargetIDLabelsGetAsync (string scraperTargetID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<LabelsResponse> GetScrapersIDLabelsAsync (string scraperTargetID, string zapTraceSpan = null);
 
         /// <summary>
         /// list all labels for a scraper targets
@@ -515,32 +567,78 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="scraperTargetID">ID of the scraper target</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (LabelsResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<LabelsResponse>> ScrapersScraperTargetIDLabelsGetAsyncWithHttpInfo (string scraperTargetID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<LabelsResponse>> GetScrapersIDLabelsAsyncWithHttpInfo (string scraperTargetID, string zapTraceSpan = null);
         /// <summary>
-        /// delete a label from a scraper target
+        /// List all users with member privileges for a scraper target
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="labelID">ID of the label</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task ScrapersScraperTargetIDLabelsLabelIDDeleteAsync (string scraperTargetID, string labelID, string zapTraceSpan = null);
+        /// <returns>Task of ResourceMembers</returns>
+        System.Threading.Tasks.Task<ResourceMembers> GetScrapersIDMembersAsync (string scraperTargetID, string zapTraceSpan = null);
 
         /// <summary>
-        /// delete a label from a scraper target
+        /// List all users with member privileges for a scraper target
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="labelID">ID of the label</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> ScrapersScraperTargetIDLabelsLabelIDDeleteAsyncWithHttpInfo (string scraperTargetID, string labelID, string zapTraceSpan = null);
+        /// <returns>Task of ApiResponse (ResourceMembers)</returns>
+        System.Threading.Tasks.Task<ApiResponse<ResourceMembers>> GetScrapersIDMembersAsyncWithHttpInfo (string scraperTargetID, string zapTraceSpan = null);
+        /// <summary>
+        /// List all owners of a scraper target
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ResourceOwners</returns>
+        System.Threading.Tasks.Task<ResourceOwners> GetScrapersIDOwnersAsync (string scraperTargetID, string zapTraceSpan = null);
+
+        /// <summary>
+        /// List all owners of a scraper target
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ApiResponse (ResourceOwners)</returns>
+        System.Threading.Tasks.Task<ApiResponse<ResourceOwners>> GetScrapersIDOwnersAsyncWithHttpInfo (string scraperTargetID, string zapTraceSpan = null);
+        /// <summary>
+        /// update a scraper target
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="scraperTargetID">id of the scraper target</param>
+        /// <param name="scraperTargetRequest">scraper target update to apply</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ScraperTargetResponse</returns>
+        System.Threading.Tasks.Task<ScraperTargetResponse> PatchScrapersIDAsync (string scraperTargetID, ScraperTargetRequest scraperTargetRequest, string zapTraceSpan = null);
+
+        /// <summary>
+        /// update a scraper target
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="scraperTargetID">id of the scraper target</param>
+        /// <param name="scraperTargetRequest">scraper target update to apply</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ApiResponse (ScraperTargetResponse)</returns>
+        System.Threading.Tasks.Task<ApiResponse<ScraperTargetResponse>> PatchScrapersIDAsyncWithHttpInfo (string scraperTargetID, ScraperTargetRequest scraperTargetRequest, string zapTraceSpan = null);
         /// <summary>
         /// update a label from a scraper target
         /// </summary>
@@ -553,7 +651,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="label">label update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task ScrapersScraperTargetIDLabelsLabelIDPatchAsync (string scraperTargetID, string labelID, Label label, string zapTraceSpan = null);
+        System.Threading.Tasks.Task PatchScrapersIDLabelsIDAsync (string scraperTargetID, string labelID, Label label, string zapTraceSpan = null);
 
         /// <summary>
         /// update a label from a scraper target
@@ -567,7 +665,30 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="label">label update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> ScrapersScraperTargetIDLabelsLabelIDPatchAsyncWithHttpInfo (string scraperTargetID, string labelID, Label label, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<Object>> PatchScrapersIDLabelsIDAsyncWithHttpInfo (string scraperTargetID, string labelID, Label label, string zapTraceSpan = null);
+        /// <summary>
+        /// create a scraper target
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="scraperTargetRequest">scraper target to create</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ScraperTargetResponse</returns>
+        System.Threading.Tasks.Task<ScraperTargetResponse> PostScrapersAsync (ScraperTargetRequest scraperTargetRequest, string zapTraceSpan = null);
+
+        /// <summary>
+        /// create a scraper target
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="scraperTargetRequest">scraper target to create</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ApiResponse (ScraperTargetResponse)</returns>
+        System.Threading.Tasks.Task<ApiResponse<ScraperTargetResponse>> PostScrapersAsyncWithHttpInfo (ScraperTargetRequest scraperTargetRequest, string zapTraceSpan = null);
         /// <summary>
         /// add a label to a scraper target
         /// </summary>
@@ -579,7 +700,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="labelMapping">label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of LabelResponse</returns>
-        System.Threading.Tasks.Task<LabelResponse> ScrapersScraperTargetIDLabelsPostAsync (string scraperTargetID, LabelMapping labelMapping, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<LabelResponse> PostScrapersIDLabelsAsync (string scraperTargetID, LabelMapping labelMapping, string zapTraceSpan = null);
 
         /// <summary>
         /// add a label to a scraper target
@@ -592,30 +713,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="labelMapping">label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (LabelResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<LabelResponse>> ScrapersScraperTargetIDLabelsPostAsyncWithHttpInfo (string scraperTargetID, LabelMapping labelMapping, string zapTraceSpan = null);
-        /// <summary>
-        /// List all users with member privileges for a scraper target
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ResourceMembers</returns>
-        System.Threading.Tasks.Task<ResourceMembers> ScrapersScraperTargetIDMembersGetAsync (string scraperTargetID, string zapTraceSpan = null);
-
-        /// <summary>
-        /// List all users with member privileges for a scraper target
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ApiResponse (ResourceMembers)</returns>
-        System.Threading.Tasks.Task<ApiResponse<ResourceMembers>> ScrapersScraperTargetIDMembersGetAsyncWithHttpInfo (string scraperTargetID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<LabelResponse>> PostScrapersIDLabelsAsyncWithHttpInfo (string scraperTargetID, LabelMapping labelMapping, string zapTraceSpan = null);
         /// <summary>
         /// Add scraper target member
         /// </summary>
@@ -627,7 +725,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="addResourceMemberRequestBody">user to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ResourceMember</returns>
-        System.Threading.Tasks.Task<ResourceMember> ScrapersScraperTargetIDMembersPostAsync (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ResourceMember> PostScrapersIDMembersAsync (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
 
         /// <summary>
         /// Add scraper target member
@@ -640,55 +738,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="addResourceMemberRequestBody">user to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (ResourceMember)</returns>
-        System.Threading.Tasks.Task<ApiResponse<ResourceMember>> ScrapersScraperTargetIDMembersPostAsyncWithHttpInfo (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
-        /// <summary>
-        /// removes a member from a scraper target
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task ScrapersScraperTargetIDMembersUserIDDeleteAsync (string userID, string scraperTargetID, string zapTraceSpan = null);
-
-        /// <summary>
-        /// removes a member from a scraper target
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> ScrapersScraperTargetIDMembersUserIDDeleteAsyncWithHttpInfo (string userID, string scraperTargetID, string zapTraceSpan = null);
-        /// <summary>
-        /// List all owners of a scraper target
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ResourceOwners</returns>
-        System.Threading.Tasks.Task<ResourceOwners> ScrapersScraperTargetIDOwnersGetAsync (string scraperTargetID, string zapTraceSpan = null);
-
-        /// <summary>
-        /// List all owners of a scraper target
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ApiResponse (ResourceOwners)</returns>
-        System.Threading.Tasks.Task<ApiResponse<ResourceOwners>> ScrapersScraperTargetIDOwnersGetAsyncWithHttpInfo (string scraperTargetID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<ResourceMember>> PostScrapersIDMembersAsyncWithHttpInfo (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
         /// <summary>
         /// Add scraper target owner
         /// </summary>
@@ -700,7 +750,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="addResourceMemberRequestBody">user to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ResourceOwner</returns>
-        System.Threading.Tasks.Task<ResourceOwner> ScrapersScraperTargetIDOwnersPostAsync (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ResourceOwner> PostScrapersIDOwnersAsync (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
 
         /// <summary>
         /// Add scraper target owner
@@ -713,57 +763,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="addResourceMemberRequestBody">user to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (ResourceOwner)</returns>
-        System.Threading.Tasks.Task<ApiResponse<ResourceOwner>> ScrapersScraperTargetIDOwnersPostAsyncWithHttpInfo (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
-        /// <summary>
-        /// removes an owner from a scraper target
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task ScrapersScraperTargetIDOwnersUserIDDeleteAsync (string userID, string scraperTargetID, string zapTraceSpan = null);
-
-        /// <summary>
-        /// removes an owner from a scraper target
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> ScrapersScraperTargetIDOwnersUserIDDeleteAsyncWithHttpInfo (string userID, string scraperTargetID, string zapTraceSpan = null);
-        /// <summary>
-        /// update a scraper target
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">id of the scraper target</param>
-        /// <param name="scraperTargetRequest">scraper target update to apply</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ScraperTargetResponse</returns>
-        System.Threading.Tasks.Task<ScraperTargetResponse> ScrapersScraperTargetIDPatchAsync (string scraperTargetID, ScraperTargetRequest scraperTargetRequest, string zapTraceSpan = null);
-
-        /// <summary>
-        /// update a scraper target
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">id of the scraper target</param>
-        /// <param name="scraperTargetRequest">scraper target update to apply</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ApiResponse (ScraperTargetResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<ScraperTargetResponse>> ScrapersScraperTargetIDPatchAsyncWithHttpInfo (string scraperTargetID, ScraperTargetRequest scraperTargetRequest, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<ResourceOwner>> PostScrapersIDOwnersAsyncWithHttpInfo (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
         #endregion Asynchronous Operations
     }
 
@@ -865,6 +865,1024 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
+        /// delete a scraper target 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="scraperTargetID">id of the scraper target</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns></returns>
+        public void DeleteScrapersID (string scraperTargetID, string zapTraceSpan = null)
+        {
+             DeleteScrapersIDWithHttpInfo(scraperTargetID, zapTraceSpan);
+        }
+
+        /// <summary>
+        /// delete a scraper target 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="scraperTargetID">id of the scraper target</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        public ApiResponse<Object> DeleteScrapersIDWithHttpInfo (string scraperTargetID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'scraperTargetID' is set
+            if (scraperTargetID == null)
+                throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->DeleteScrapersID");
+
+            var localVarPath = "/api/v2/scrapers/{scraperTargetID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (scraperTargetID != null) localVarPathParams.Add("scraperTargetID", this.Configuration.ApiClient.ParameterToString(scraperTargetID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("DeleteScrapersID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Object>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                null);
+        }
+
+        /// <summary>
+        /// delete a scraper target 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="scraperTargetID">id of the scraper target</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        public IRestResponse DeleteScrapersIDWithIRestResponse (string scraperTargetID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'scraperTargetID' is set
+            if (scraperTargetID == null)
+                throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->DeleteScrapersID");
+
+            var localVarPath = "/api/v2/scrapers/{scraperTargetID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (scraperTargetID != null) localVarPathParams.Add("scraperTargetID", this.Configuration.ApiClient.ParameterToString(scraperTargetID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("DeleteScrapersID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return localVarResponse;
+        }
+        
+        /// <summary>
+        /// delete a scraper target 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="scraperTargetID">id of the scraper target</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        public RestRequest DeleteScrapersIDWithRestRequest (string scraperTargetID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'scraperTargetID' is set
+            if (scraperTargetID == null)
+                throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->DeleteScrapersID");
+
+            var localVarPath = "/api/v2/scrapers/{scraperTargetID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (scraperTargetID != null) localVarPathParams.Add("scraperTargetID", this.Configuration.ApiClient.ParameterToString(scraperTargetID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
+                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+        }
+
+        /// <summary>
+        /// delete a scraper target 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="scraperTargetID">id of the scraper target</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of void</returns>
+        public async System.Threading.Tasks.Task DeleteScrapersIDAsync (string scraperTargetID, string zapTraceSpan = null)
+        {
+             await DeleteScrapersIDAsyncWithHttpInfo(scraperTargetID, zapTraceSpan);
+
+        }
+
+        /// <summary>
+        /// delete a scraper target 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="scraperTargetID">id of the scraper target</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ApiResponse</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteScrapersIDAsyncWithHttpInfo (string scraperTargetID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'scraperTargetID' is set
+            if (scraperTargetID == null)
+                throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->DeleteScrapersID");
+
+            var localVarPath = "/api/v2/scrapers/{scraperTargetID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (scraperTargetID != null) localVarPathParams.Add("scraperTargetID", this.Configuration.ApiClient.ParameterToString(scraperTargetID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("DeleteScrapersID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Object>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                null);
+        }
+
+        /// <summary>
+        /// delete a label from a scraper target 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="labelID">ID of the label</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns></returns>
+        public void DeleteScrapersIDLabelsID (string scraperTargetID, string labelID, string zapTraceSpan = null)
+        {
+             DeleteScrapersIDLabelsIDWithHttpInfo(scraperTargetID, labelID, zapTraceSpan);
+        }
+
+        /// <summary>
+        /// delete a label from a scraper target 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="labelID">ID of the label</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        public ApiResponse<Object> DeleteScrapersIDLabelsIDWithHttpInfo (string scraperTargetID, string labelID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'scraperTargetID' is set
+            if (scraperTargetID == null)
+                throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->DeleteScrapersIDLabelsID");
+            // verify the required parameter 'labelID' is set
+            if (labelID == null)
+                throw new ApiException(400, "Missing required parameter 'labelID' when calling ScraperTargetsService->DeleteScrapersIDLabelsID");
+
+            var localVarPath = "/api/v2/scrapers/{scraperTargetID}/labels/{labelID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (scraperTargetID != null) localVarPathParams.Add("scraperTargetID", this.Configuration.ApiClient.ParameterToString(scraperTargetID)); // path parameter
+            if (labelID != null) localVarPathParams.Add("labelID", this.Configuration.ApiClient.ParameterToString(labelID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("DeleteScrapersIDLabelsID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Object>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                null);
+        }
+
+        /// <summary>
+        /// delete a label from a scraper target 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="labelID">ID of the label</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        public IRestResponse DeleteScrapersIDLabelsIDWithIRestResponse (string scraperTargetID, string labelID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'scraperTargetID' is set
+            if (scraperTargetID == null)
+                throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->DeleteScrapersIDLabelsID");
+            // verify the required parameter 'labelID' is set
+            if (labelID == null)
+                throw new ApiException(400, "Missing required parameter 'labelID' when calling ScraperTargetsService->DeleteScrapersIDLabelsID");
+
+            var localVarPath = "/api/v2/scrapers/{scraperTargetID}/labels/{labelID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (scraperTargetID != null) localVarPathParams.Add("scraperTargetID", this.Configuration.ApiClient.ParameterToString(scraperTargetID)); // path parameter
+            if (labelID != null) localVarPathParams.Add("labelID", this.Configuration.ApiClient.ParameterToString(labelID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("DeleteScrapersIDLabelsID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return localVarResponse;
+        }
+        
+        /// <summary>
+        /// delete a label from a scraper target 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="labelID">ID of the label</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        public RestRequest DeleteScrapersIDLabelsIDWithRestRequest (string scraperTargetID, string labelID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'scraperTargetID' is set
+            if (scraperTargetID == null)
+                throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->DeleteScrapersIDLabelsID");
+            // verify the required parameter 'labelID' is set
+            if (labelID == null)
+                throw new ApiException(400, "Missing required parameter 'labelID' when calling ScraperTargetsService->DeleteScrapersIDLabelsID");
+
+            var localVarPath = "/api/v2/scrapers/{scraperTargetID}/labels/{labelID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (scraperTargetID != null) localVarPathParams.Add("scraperTargetID", this.Configuration.ApiClient.ParameterToString(scraperTargetID)); // path parameter
+            if (labelID != null) localVarPathParams.Add("labelID", this.Configuration.ApiClient.ParameterToString(labelID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
+                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+        }
+
+        /// <summary>
+        /// delete a label from a scraper target 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="labelID">ID of the label</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of void</returns>
+        public async System.Threading.Tasks.Task DeleteScrapersIDLabelsIDAsync (string scraperTargetID, string labelID, string zapTraceSpan = null)
+        {
+             await DeleteScrapersIDLabelsIDAsyncWithHttpInfo(scraperTargetID, labelID, zapTraceSpan);
+
+        }
+
+        /// <summary>
+        /// delete a label from a scraper target 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="labelID">ID of the label</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ApiResponse</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteScrapersIDLabelsIDAsyncWithHttpInfo (string scraperTargetID, string labelID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'scraperTargetID' is set
+            if (scraperTargetID == null)
+                throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->DeleteScrapersIDLabelsID");
+            // verify the required parameter 'labelID' is set
+            if (labelID == null)
+                throw new ApiException(400, "Missing required parameter 'labelID' when calling ScraperTargetsService->DeleteScrapersIDLabelsID");
+
+            var localVarPath = "/api/v2/scrapers/{scraperTargetID}/labels/{labelID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (scraperTargetID != null) localVarPathParams.Add("scraperTargetID", this.Configuration.ApiClient.ParameterToString(scraperTargetID)); // path parameter
+            if (labelID != null) localVarPathParams.Add("labelID", this.Configuration.ApiClient.ParameterToString(labelID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("DeleteScrapersIDLabelsID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Object>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                null);
+        }
+
+        /// <summary>
+        /// removes a member from a scraper target 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userID">ID of member to remove</param>
+        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns></returns>
+        public void DeleteScrapersIDMembersID (string userID, string scraperTargetID, string zapTraceSpan = null)
+        {
+             DeleteScrapersIDMembersIDWithHttpInfo(userID, scraperTargetID, zapTraceSpan);
+        }
+
+        /// <summary>
+        /// removes a member from a scraper target 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userID">ID of member to remove</param>
+        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        public ApiResponse<Object> DeleteScrapersIDMembersIDWithHttpInfo (string userID, string scraperTargetID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'userID' is set
+            if (userID == null)
+                throw new ApiException(400, "Missing required parameter 'userID' when calling ScraperTargetsService->DeleteScrapersIDMembersID");
+            // verify the required parameter 'scraperTargetID' is set
+            if (scraperTargetID == null)
+                throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->DeleteScrapersIDMembersID");
+
+            var localVarPath = "/api/v2/scrapers/{scraperTargetID}/members/{userID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (userID != null) localVarPathParams.Add("userID", this.Configuration.ApiClient.ParameterToString(userID)); // path parameter
+            if (scraperTargetID != null) localVarPathParams.Add("scraperTargetID", this.Configuration.ApiClient.ParameterToString(scraperTargetID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("DeleteScrapersIDMembersID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Object>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                null);
+        }
+
+        /// <summary>
+        /// removes a member from a scraper target 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userID">ID of member to remove</param>
+        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        public IRestResponse DeleteScrapersIDMembersIDWithIRestResponse (string userID, string scraperTargetID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'userID' is set
+            if (userID == null)
+                throw new ApiException(400, "Missing required parameter 'userID' when calling ScraperTargetsService->DeleteScrapersIDMembersID");
+            // verify the required parameter 'scraperTargetID' is set
+            if (scraperTargetID == null)
+                throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->DeleteScrapersIDMembersID");
+
+            var localVarPath = "/api/v2/scrapers/{scraperTargetID}/members/{userID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (userID != null) localVarPathParams.Add("userID", this.Configuration.ApiClient.ParameterToString(userID)); // path parameter
+            if (scraperTargetID != null) localVarPathParams.Add("scraperTargetID", this.Configuration.ApiClient.ParameterToString(scraperTargetID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("DeleteScrapersIDMembersID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return localVarResponse;
+        }
+        
+        /// <summary>
+        /// removes a member from a scraper target 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userID">ID of member to remove</param>
+        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        public RestRequest DeleteScrapersIDMembersIDWithRestRequest (string userID, string scraperTargetID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'userID' is set
+            if (userID == null)
+                throw new ApiException(400, "Missing required parameter 'userID' when calling ScraperTargetsService->DeleteScrapersIDMembersID");
+            // verify the required parameter 'scraperTargetID' is set
+            if (scraperTargetID == null)
+                throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->DeleteScrapersIDMembersID");
+
+            var localVarPath = "/api/v2/scrapers/{scraperTargetID}/members/{userID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (userID != null) localVarPathParams.Add("userID", this.Configuration.ApiClient.ParameterToString(userID)); // path parameter
+            if (scraperTargetID != null) localVarPathParams.Add("scraperTargetID", this.Configuration.ApiClient.ParameterToString(scraperTargetID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
+                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+        }
+
+        /// <summary>
+        /// removes a member from a scraper target 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userID">ID of member to remove</param>
+        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of void</returns>
+        public async System.Threading.Tasks.Task DeleteScrapersIDMembersIDAsync (string userID, string scraperTargetID, string zapTraceSpan = null)
+        {
+             await DeleteScrapersIDMembersIDAsyncWithHttpInfo(userID, scraperTargetID, zapTraceSpan);
+
+        }
+
+        /// <summary>
+        /// removes a member from a scraper target 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userID">ID of member to remove</param>
+        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ApiResponse</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteScrapersIDMembersIDAsyncWithHttpInfo (string userID, string scraperTargetID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'userID' is set
+            if (userID == null)
+                throw new ApiException(400, "Missing required parameter 'userID' when calling ScraperTargetsService->DeleteScrapersIDMembersID");
+            // verify the required parameter 'scraperTargetID' is set
+            if (scraperTargetID == null)
+                throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->DeleteScrapersIDMembersID");
+
+            var localVarPath = "/api/v2/scrapers/{scraperTargetID}/members/{userID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (userID != null) localVarPathParams.Add("userID", this.Configuration.ApiClient.ParameterToString(userID)); // path parameter
+            if (scraperTargetID != null) localVarPathParams.Add("scraperTargetID", this.Configuration.ApiClient.ParameterToString(scraperTargetID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("DeleteScrapersIDMembersID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Object>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                null);
+        }
+
+        /// <summary>
+        /// removes an owner from a scraper target 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userID">ID of owner to remove</param>
+        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns></returns>
+        public void DeleteScrapersIDOwnersID (string userID, string scraperTargetID, string zapTraceSpan = null)
+        {
+             DeleteScrapersIDOwnersIDWithHttpInfo(userID, scraperTargetID, zapTraceSpan);
+        }
+
+        /// <summary>
+        /// removes an owner from a scraper target 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userID">ID of owner to remove</param>
+        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        public ApiResponse<Object> DeleteScrapersIDOwnersIDWithHttpInfo (string userID, string scraperTargetID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'userID' is set
+            if (userID == null)
+                throw new ApiException(400, "Missing required parameter 'userID' when calling ScraperTargetsService->DeleteScrapersIDOwnersID");
+            // verify the required parameter 'scraperTargetID' is set
+            if (scraperTargetID == null)
+                throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->DeleteScrapersIDOwnersID");
+
+            var localVarPath = "/api/v2/scrapers/{scraperTargetID}/owners/{userID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (userID != null) localVarPathParams.Add("userID", this.Configuration.ApiClient.ParameterToString(userID)); // path parameter
+            if (scraperTargetID != null) localVarPathParams.Add("scraperTargetID", this.Configuration.ApiClient.ParameterToString(scraperTargetID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("DeleteScrapersIDOwnersID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Object>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                null);
+        }
+
+        /// <summary>
+        /// removes an owner from a scraper target 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userID">ID of owner to remove</param>
+        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        public IRestResponse DeleteScrapersIDOwnersIDWithIRestResponse (string userID, string scraperTargetID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'userID' is set
+            if (userID == null)
+                throw new ApiException(400, "Missing required parameter 'userID' when calling ScraperTargetsService->DeleteScrapersIDOwnersID");
+            // verify the required parameter 'scraperTargetID' is set
+            if (scraperTargetID == null)
+                throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->DeleteScrapersIDOwnersID");
+
+            var localVarPath = "/api/v2/scrapers/{scraperTargetID}/owners/{userID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (userID != null) localVarPathParams.Add("userID", this.Configuration.ApiClient.ParameterToString(userID)); // path parameter
+            if (scraperTargetID != null) localVarPathParams.Add("scraperTargetID", this.Configuration.ApiClient.ParameterToString(scraperTargetID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("DeleteScrapersIDOwnersID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return localVarResponse;
+        }
+        
+        /// <summary>
+        /// removes an owner from a scraper target 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userID">ID of owner to remove</param>
+        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        public RestRequest DeleteScrapersIDOwnersIDWithRestRequest (string userID, string scraperTargetID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'userID' is set
+            if (userID == null)
+                throw new ApiException(400, "Missing required parameter 'userID' when calling ScraperTargetsService->DeleteScrapersIDOwnersID");
+            // verify the required parameter 'scraperTargetID' is set
+            if (scraperTargetID == null)
+                throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->DeleteScrapersIDOwnersID");
+
+            var localVarPath = "/api/v2/scrapers/{scraperTargetID}/owners/{userID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (userID != null) localVarPathParams.Add("userID", this.Configuration.ApiClient.ParameterToString(userID)); // path parameter
+            if (scraperTargetID != null) localVarPathParams.Add("scraperTargetID", this.Configuration.ApiClient.ParameterToString(scraperTargetID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
+                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+        }
+
+        /// <summary>
+        /// removes an owner from a scraper target 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userID">ID of owner to remove</param>
+        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of void</returns>
+        public async System.Threading.Tasks.Task DeleteScrapersIDOwnersIDAsync (string userID, string scraperTargetID, string zapTraceSpan = null)
+        {
+             await DeleteScrapersIDOwnersIDAsyncWithHttpInfo(userID, scraperTargetID, zapTraceSpan);
+
+        }
+
+        /// <summary>
+        /// removes an owner from a scraper target 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userID">ID of owner to remove</param>
+        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ApiResponse</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteScrapersIDOwnersIDAsyncWithHttpInfo (string userID, string scraperTargetID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'userID' is set
+            if (userID == null)
+                throw new ApiException(400, "Missing required parameter 'userID' when calling ScraperTargetsService->DeleteScrapersIDOwnersID");
+            // verify the required parameter 'scraperTargetID' is set
+            if (scraperTargetID == null)
+                throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->DeleteScrapersIDOwnersID");
+
+            var localVarPath = "/api/v2/scrapers/{scraperTargetID}/owners/{userID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (userID != null) localVarPathParams.Add("userID", this.Configuration.ApiClient.ParameterToString(userID)); // path parameter
+            if (scraperTargetID != null) localVarPathParams.Add("scraperTargetID", this.Configuration.ApiClient.ParameterToString(scraperTargetID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("DeleteScrapersIDOwnersID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Object>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                null);
+        }
+
+        /// <summary>
         /// get all scraper targets 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
@@ -874,9 +1892,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">specifies the organization id of the scraper target (optional)</param>
         /// <param name="org">specifies the organization name of the scraper target (optional)</param>
         /// <returns>ScraperTargetResponses</returns>
-        public ScraperTargetResponses ScrapersGet (string zapTraceSpan = null, string name = null, List<string> id = null, string orgID = null, string org = null)
+        public ScraperTargetResponses GetScrapers (string zapTraceSpan = null, string name = null, List<string> id = null, string orgID = null, string org = null)
         {
-             ApiResponse<ScraperTargetResponses> localVarResponse = ScrapersGetWithHttpInfo(zapTraceSpan, name, id, orgID, org);
+             ApiResponse<ScraperTargetResponses> localVarResponse = GetScrapersWithHttpInfo(zapTraceSpan, name, id, orgID, org);
              return localVarResponse.Data;
         }
 
@@ -890,7 +1908,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">specifies the organization id of the scraper target (optional)</param>
         /// <param name="org">specifies the organization name of the scraper target (optional)</param>
         /// <returns>ApiResponse of ScraperTargetResponses</returns>
-        public ApiResponse< ScraperTargetResponses > ScrapersGetWithHttpInfo (string zapTraceSpan = null, string name = null, List<string> id = null, string orgID = null, string org = null)
+        public ApiResponse< ScraperTargetResponses > GetScrapersWithHttpInfo (string zapTraceSpan = null, string name = null, List<string> id = null, string orgID = null, string org = null)
         {
 
             var localVarPath = "/api/v2/scrapers";
@@ -931,7 +1949,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("ScrapersGet", localVarResponse);
+                Exception exception = ExceptionFactory("GetScrapers", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -950,7 +1968,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">specifies the organization id of the scraper target (optional)</param>
         /// <param name="org">specifies the organization name of the scraper target (optional)</param>
         /// <returns>ApiResponse of ScraperTargetResponses</returns>
-        public IRestResponse ScrapersGetWithIRestResponse (string zapTraceSpan = null, string name = null, List<string> id = null, string orgID = null, string org = null)
+        public IRestResponse GetScrapersWithIRestResponse (string zapTraceSpan = null, string name = null, List<string> id = null, string orgID = null, string org = null)
         {
 
             var localVarPath = "/api/v2/scrapers";
@@ -991,7 +2009,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("ScrapersGet", localVarResponse);
+                Exception exception = ExceptionFactory("GetScrapers", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -1008,7 +2026,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">specifies the organization id of the scraper target (optional)</param>
         /// <param name="org">specifies the organization name of the scraper target (optional)</param>
         /// <returns>ApiResponse of ScraperTargetResponses</returns>
-        public RestRequest ScrapersGetWithRestRequest (string zapTraceSpan = null, string name = null, List<string> id = null, string orgID = null, string org = null)
+        public RestRequest GetScrapersWithRestRequest (string zapTraceSpan = null, string name = null, List<string> id = null, string orgID = null, string org = null)
         {
 
             var localVarPath = "/api/v2/scrapers";
@@ -1055,9 +2073,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">specifies the organization id of the scraper target (optional)</param>
         /// <param name="org">specifies the organization name of the scraper target (optional)</param>
         /// <returns>Task of ScraperTargetResponses</returns>
-        public async System.Threading.Tasks.Task<ScraperTargetResponses> ScrapersGetAsync (string zapTraceSpan = null, string name = null, List<string> id = null, string orgID = null, string org = null)
+        public async System.Threading.Tasks.Task<ScraperTargetResponses> GetScrapersAsync (string zapTraceSpan = null, string name = null, List<string> id = null, string orgID = null, string org = null)
         {
-             ApiResponse<ScraperTargetResponses> localVarResponse = await ScrapersGetAsyncWithHttpInfo(zapTraceSpan, name, id, orgID, org);
+             ApiResponse<ScraperTargetResponses> localVarResponse = await GetScrapersAsyncWithHttpInfo(zapTraceSpan, name, id, orgID, org);
              return localVarResponse.Data;
 
         }
@@ -1072,7 +2090,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">specifies the organization id of the scraper target (optional)</param>
         /// <param name="org">specifies the organization name of the scraper target (optional)</param>
         /// <returns>Task of ApiResponse (ScraperTargetResponses)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<ScraperTargetResponses>> ScrapersGetAsyncWithHttpInfo (string zapTraceSpan = null, string name = null, List<string> id = null, string orgID = null, string org = null)
+        public async System.Threading.Tasks.Task<ApiResponse<ScraperTargetResponses>> GetScrapersAsyncWithHttpInfo (string zapTraceSpan = null, string name = null, List<string> id = null, string orgID = null, string org = null)
         {
 
             var localVarPath = "/api/v2/scrapers";
@@ -1113,7 +2131,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("ScrapersGet", localVarResponse);
+                Exception exception = ExceptionFactory("GetScrapers", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -1123,525 +2141,15 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// create a scraper target 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetRequest">scraper target to create</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ScraperTargetResponse</returns>
-        public ScraperTargetResponse ScrapersPost (ScraperTargetRequest scraperTargetRequest, string zapTraceSpan = null)
-        {
-             ApiResponse<ScraperTargetResponse> localVarResponse = ScrapersPostWithHttpInfo(scraperTargetRequest, zapTraceSpan);
-             return localVarResponse.Data;
-        }
-
-        /// <summary>
-        /// create a scraper target 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetRequest">scraper target to create</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of ScraperTargetResponse</returns>
-        public ApiResponse< ScraperTargetResponse > ScrapersPostWithHttpInfo (ScraperTargetRequest scraperTargetRequest, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'scraperTargetRequest' is set
-            if (scraperTargetRequest == null)
-                throw new ApiException(400, "Missing required parameter 'scraperTargetRequest' when calling ScraperTargetsService->ScrapersPost");
-
-            var localVarPath = "/api/v2/scrapers";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-                "application/json"
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (scraperTargetRequest != null && scraperTargetRequest.GetType() != typeof(byte[]))
-            {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(scraperTargetRequest); // http body (model) parameter
-            }
-            else
-            {
-                localVarPostBody = scraperTargetRequest; // byte array
-            }
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("ScrapersPost", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return new ApiResponse<ScraperTargetResponse>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (ScraperTargetResponse) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(ScraperTargetResponse)));
-        }
-
-        /// <summary>
-        /// create a scraper target 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetRequest">scraper target to create</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of ScraperTargetResponse</returns>
-        public IRestResponse ScrapersPostWithIRestResponse (ScraperTargetRequest scraperTargetRequest, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'scraperTargetRequest' is set
-            if (scraperTargetRequest == null)
-                throw new ApiException(400, "Missing required parameter 'scraperTargetRequest' when calling ScraperTargetsService->ScrapersPost");
-
-            var localVarPath = "/api/v2/scrapers";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-                "application/json"
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (scraperTargetRequest != null && scraperTargetRequest.GetType() != typeof(byte[]))
-            {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(scraperTargetRequest); // http body (model) parameter
-            }
-            else
-            {
-                localVarPostBody = scraperTargetRequest; // byte array
-            }
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("ScrapersPost", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return localVarResponse;
-        }
-        
-        /// <summary>
-        /// create a scraper target 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetRequest">scraper target to create</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of ScraperTargetResponse</returns>
-        public RestRequest ScrapersPostWithRestRequest (ScraperTargetRequest scraperTargetRequest, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'scraperTargetRequest' is set
-            if (scraperTargetRequest == null)
-                throw new ApiException(400, "Missing required parameter 'scraperTargetRequest' when calling ScraperTargetsService->ScrapersPost");
-
-            var localVarPath = "/api/v2/scrapers";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-                "application/json"
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (scraperTargetRequest != null && scraperTargetRequest.GetType() != typeof(byte[]))
-            {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(scraperTargetRequest); // http body (model) parameter
-            }
-            else
-            {
-                localVarPostBody = scraperTargetRequest; // byte array
-            }
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
-                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-        }
-
-        /// <summary>
-        /// create a scraper target 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetRequest">scraper target to create</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ScraperTargetResponse</returns>
-        public async System.Threading.Tasks.Task<ScraperTargetResponse> ScrapersPostAsync (ScraperTargetRequest scraperTargetRequest, string zapTraceSpan = null)
-        {
-             ApiResponse<ScraperTargetResponse> localVarResponse = await ScrapersPostAsyncWithHttpInfo(scraperTargetRequest, zapTraceSpan);
-             return localVarResponse.Data;
-
-        }
-
-        /// <summary>
-        /// create a scraper target 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetRequest">scraper target to create</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ApiResponse (ScraperTargetResponse)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<ScraperTargetResponse>> ScrapersPostAsyncWithHttpInfo (ScraperTargetRequest scraperTargetRequest, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'scraperTargetRequest' is set
-            if (scraperTargetRequest == null)
-                throw new ApiException(400, "Missing required parameter 'scraperTargetRequest' when calling ScraperTargetsService->ScrapersPost");
-
-            var localVarPath = "/api/v2/scrapers";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-                "application/json"
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (scraperTargetRequest != null && scraperTargetRequest.GetType() != typeof(byte[]))
-            {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(scraperTargetRequest); // http body (model) parameter
-            }
-            else
-            {
-                localVarPostBody = scraperTargetRequest; // byte array
-            }
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("ScrapersPost", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return new ApiResponse<ScraperTargetResponse>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (ScraperTargetResponse) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(ScraperTargetResponse)));
-        }
-
-        /// <summary>
-        /// delete a scraper target 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">id of the scraper target</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns></returns>
-        public void ScrapersScraperTargetIDDelete (string scraperTargetID, string zapTraceSpan = null)
-        {
-             ScrapersScraperTargetIDDeleteWithHttpInfo(scraperTargetID, zapTraceSpan);
-        }
-
-        /// <summary>
-        /// delete a scraper target 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">id of the scraper target</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Object(void)</returns>
-        public ApiResponse<Object> ScrapersScraperTargetIDDeleteWithHttpInfo (string scraperTargetID, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'scraperTargetID' is set
-            if (scraperTargetID == null)
-                throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->ScrapersScraperTargetIDDelete");
-
-            var localVarPath = "/api/v2/scrapers/{scraperTargetID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (scraperTargetID != null) localVarPathParams.Add("scraperTargetID", this.Configuration.ApiClient.ParameterToString(scraperTargetID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("ScrapersScraperTargetIDDelete", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return new ApiResponse<Object>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                null);
-        }
-
-        /// <summary>
-        /// delete a scraper target 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">id of the scraper target</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Object(void)</returns>
-        public IRestResponse ScrapersScraperTargetIDDeleteWithIRestResponse (string scraperTargetID, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'scraperTargetID' is set
-            if (scraperTargetID == null)
-                throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->ScrapersScraperTargetIDDelete");
-
-            var localVarPath = "/api/v2/scrapers/{scraperTargetID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (scraperTargetID != null) localVarPathParams.Add("scraperTargetID", this.Configuration.ApiClient.ParameterToString(scraperTargetID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("ScrapersScraperTargetIDDelete", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return localVarResponse;
-        }
-        
-        /// <summary>
-        /// delete a scraper target 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">id of the scraper target</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Object(void)</returns>
-        public RestRequest ScrapersScraperTargetIDDeleteWithRestRequest (string scraperTargetID, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'scraperTargetID' is set
-            if (scraperTargetID == null)
-                throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->ScrapersScraperTargetIDDelete");
-
-            var localVarPath = "/api/v2/scrapers/{scraperTargetID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (scraperTargetID != null) localVarPathParams.Add("scraperTargetID", this.Configuration.ApiClient.ParameterToString(scraperTargetID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
-                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-        }
-
-        /// <summary>
-        /// delete a scraper target 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">id of the scraper target</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task ScrapersScraperTargetIDDeleteAsync (string scraperTargetID, string zapTraceSpan = null)
-        {
-             await ScrapersScraperTargetIDDeleteAsyncWithHttpInfo(scraperTargetID, zapTraceSpan);
-
-        }
-
-        /// <summary>
-        /// delete a scraper target 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">id of the scraper target</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Object>> ScrapersScraperTargetIDDeleteAsyncWithHttpInfo (string scraperTargetID, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'scraperTargetID' is set
-            if (scraperTargetID == null)
-                throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->ScrapersScraperTargetIDDelete");
-
-            var localVarPath = "/api/v2/scrapers/{scraperTargetID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (scraperTargetID != null) localVarPathParams.Add("scraperTargetID", this.Configuration.ApiClient.ParameterToString(scraperTargetID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("ScrapersScraperTargetIDDelete", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return new ApiResponse<Object>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                null);
-        }
-
-        /// <summary>
         /// get a scraper target by id 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="scraperTargetID">id of the scraper target</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ScraperTargetResponse</returns>
-        public ScraperTargetResponse ScrapersScraperTargetIDGet (string scraperTargetID, string zapTraceSpan = null)
+        public ScraperTargetResponse GetScrapersID (string scraperTargetID, string zapTraceSpan = null)
         {
-             ApiResponse<ScraperTargetResponse> localVarResponse = ScrapersScraperTargetIDGetWithHttpInfo(scraperTargetID, zapTraceSpan);
+             ApiResponse<ScraperTargetResponse> localVarResponse = GetScrapersIDWithHttpInfo(scraperTargetID, zapTraceSpan);
              return localVarResponse.Data;
         }
 
@@ -1652,11 +2160,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="scraperTargetID">id of the scraper target</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ScraperTargetResponse</returns>
-        public ApiResponse< ScraperTargetResponse > ScrapersScraperTargetIDGetWithHttpInfo (string scraperTargetID, string zapTraceSpan = null)
+        public ApiResponse< ScraperTargetResponse > GetScrapersIDWithHttpInfo (string scraperTargetID, string zapTraceSpan = null)
         {
             // verify the required parameter 'scraperTargetID' is set
             if (scraperTargetID == null)
-                throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->ScrapersScraperTargetIDGet");
+                throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->GetScrapersID");
 
             var localVarPath = "/api/v2/scrapers/{scraperTargetID}";
             var localVarPathParams = new Dictionary<String, String>();
@@ -1693,7 +2201,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("ScrapersScraperTargetIDGet", localVarResponse);
+                Exception exception = ExceptionFactory("GetScrapersID", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -1709,11 +2217,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="scraperTargetID">id of the scraper target</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ScraperTargetResponse</returns>
-        public IRestResponse ScrapersScraperTargetIDGetWithIRestResponse (string scraperTargetID, string zapTraceSpan = null)
+        public IRestResponse GetScrapersIDWithIRestResponse (string scraperTargetID, string zapTraceSpan = null)
         {
             // verify the required parameter 'scraperTargetID' is set
             if (scraperTargetID == null)
-                throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->ScrapersScraperTargetIDGet");
+                throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->GetScrapersID");
 
             var localVarPath = "/api/v2/scrapers/{scraperTargetID}";
             var localVarPathParams = new Dictionary<String, String>();
@@ -1750,7 +2258,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("ScrapersScraperTargetIDGet", localVarResponse);
+                Exception exception = ExceptionFactory("GetScrapersID", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -1764,11 +2272,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="scraperTargetID">id of the scraper target</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ScraperTargetResponse</returns>
-        public RestRequest ScrapersScraperTargetIDGetWithRestRequest (string scraperTargetID, string zapTraceSpan = null)
+        public RestRequest GetScrapersIDWithRestRequest (string scraperTargetID, string zapTraceSpan = null)
         {
             // verify the required parameter 'scraperTargetID' is set
             if (scraperTargetID == null)
-                throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->ScrapersScraperTargetIDGet");
+                throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->GetScrapersID");
 
             var localVarPath = "/api/v2/scrapers/{scraperTargetID}";
             var localVarPathParams = new Dictionary<String, String>();
@@ -1808,9 +2316,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="scraperTargetID">id of the scraper target</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ScraperTargetResponse</returns>
-        public async System.Threading.Tasks.Task<ScraperTargetResponse> ScrapersScraperTargetIDGetAsync (string scraperTargetID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ScraperTargetResponse> GetScrapersIDAsync (string scraperTargetID, string zapTraceSpan = null)
         {
-             ApiResponse<ScraperTargetResponse> localVarResponse = await ScrapersScraperTargetIDGetAsyncWithHttpInfo(scraperTargetID, zapTraceSpan);
+             ApiResponse<ScraperTargetResponse> localVarResponse = await GetScrapersIDAsyncWithHttpInfo(scraperTargetID, zapTraceSpan);
              return localVarResponse.Data;
 
         }
@@ -1822,11 +2330,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="scraperTargetID">id of the scraper target</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (ScraperTargetResponse)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<ScraperTargetResponse>> ScrapersScraperTargetIDGetAsyncWithHttpInfo (string scraperTargetID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<ScraperTargetResponse>> GetScrapersIDAsyncWithHttpInfo (string scraperTargetID, string zapTraceSpan = null)
         {
             // verify the required parameter 'scraperTargetID' is set
             if (scraperTargetID == null)
-                throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->ScrapersScraperTargetIDGet");
+                throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->GetScrapersID");
 
             var localVarPath = "/api/v2/scrapers/{scraperTargetID}";
             var localVarPathParams = new Dictionary<String, String>();
@@ -1863,7 +2371,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("ScrapersScraperTargetIDGet", localVarResponse);
+                Exception exception = ExceptionFactory("GetScrapersID", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -1879,9 +2387,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="scraperTargetID">ID of the scraper target</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>LabelsResponse</returns>
-        public LabelsResponse ScrapersScraperTargetIDLabelsGet (string scraperTargetID, string zapTraceSpan = null)
+        public LabelsResponse GetScrapersIDLabels (string scraperTargetID, string zapTraceSpan = null)
         {
-             ApiResponse<LabelsResponse> localVarResponse = ScrapersScraperTargetIDLabelsGetWithHttpInfo(scraperTargetID, zapTraceSpan);
+             ApiResponse<LabelsResponse> localVarResponse = GetScrapersIDLabelsWithHttpInfo(scraperTargetID, zapTraceSpan);
              return localVarResponse.Data;
         }
 
@@ -1892,11 +2400,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="scraperTargetID">ID of the scraper target</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelsResponse</returns>
-        public ApiResponse< LabelsResponse > ScrapersScraperTargetIDLabelsGetWithHttpInfo (string scraperTargetID, string zapTraceSpan = null)
+        public ApiResponse< LabelsResponse > GetScrapersIDLabelsWithHttpInfo (string scraperTargetID, string zapTraceSpan = null)
         {
             // verify the required parameter 'scraperTargetID' is set
             if (scraperTargetID == null)
-                throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->ScrapersScraperTargetIDLabelsGet");
+                throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->GetScrapersIDLabels");
 
             var localVarPath = "/api/v2/scrapers/{scraperTargetID}/labels";
             var localVarPathParams = new Dictionary<String, String>();
@@ -1933,7 +2441,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("ScrapersScraperTargetIDLabelsGet", localVarResponse);
+                Exception exception = ExceptionFactory("GetScrapersIDLabels", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -1949,11 +2457,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="scraperTargetID">ID of the scraper target</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelsResponse</returns>
-        public IRestResponse ScrapersScraperTargetIDLabelsGetWithIRestResponse (string scraperTargetID, string zapTraceSpan = null)
+        public IRestResponse GetScrapersIDLabelsWithIRestResponse (string scraperTargetID, string zapTraceSpan = null)
         {
             // verify the required parameter 'scraperTargetID' is set
             if (scraperTargetID == null)
-                throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->ScrapersScraperTargetIDLabelsGet");
+                throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->GetScrapersIDLabels");
 
             var localVarPath = "/api/v2/scrapers/{scraperTargetID}/labels";
             var localVarPathParams = new Dictionary<String, String>();
@@ -1990,7 +2498,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("ScrapersScraperTargetIDLabelsGet", localVarResponse);
+                Exception exception = ExceptionFactory("GetScrapersIDLabels", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -2004,11 +2512,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="scraperTargetID">ID of the scraper target</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelsResponse</returns>
-        public RestRequest ScrapersScraperTargetIDLabelsGetWithRestRequest (string scraperTargetID, string zapTraceSpan = null)
+        public RestRequest GetScrapersIDLabelsWithRestRequest (string scraperTargetID, string zapTraceSpan = null)
         {
             // verify the required parameter 'scraperTargetID' is set
             if (scraperTargetID == null)
-                throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->ScrapersScraperTargetIDLabelsGet");
+                throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->GetScrapersIDLabels");
 
             var localVarPath = "/api/v2/scrapers/{scraperTargetID}/labels";
             var localVarPathParams = new Dictionary<String, String>();
@@ -2048,9 +2556,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="scraperTargetID">ID of the scraper target</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of LabelsResponse</returns>
-        public async System.Threading.Tasks.Task<LabelsResponse> ScrapersScraperTargetIDLabelsGetAsync (string scraperTargetID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<LabelsResponse> GetScrapersIDLabelsAsync (string scraperTargetID, string zapTraceSpan = null)
         {
-             ApiResponse<LabelsResponse> localVarResponse = await ScrapersScraperTargetIDLabelsGetAsyncWithHttpInfo(scraperTargetID, zapTraceSpan);
+             ApiResponse<LabelsResponse> localVarResponse = await GetScrapersIDLabelsAsyncWithHttpInfo(scraperTargetID, zapTraceSpan);
              return localVarResponse.Data;
 
         }
@@ -2062,11 +2570,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="scraperTargetID">ID of the scraper target</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (LabelsResponse)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<LabelsResponse>> ScrapersScraperTargetIDLabelsGetAsyncWithHttpInfo (string scraperTargetID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<LabelsResponse>> GetScrapersIDLabelsAsyncWithHttpInfo (string scraperTargetID, string zapTraceSpan = null)
         {
             // verify the required parameter 'scraperTargetID' is set
             if (scraperTargetID == null)
-                throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->ScrapersScraperTargetIDLabelsGet");
+                throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->GetScrapersIDLabels");
 
             var localVarPath = "/api/v2/scrapers/{scraperTargetID}/labels";
             var localVarPathParams = new Dictionary<String, String>();
@@ -2103,7 +2611,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("ScrapersScraperTargetIDLabelsGet", localVarResponse);
+                Exception exception = ExceptionFactory("GetScrapersIDLabels", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -2113,36 +2621,32 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// delete a label from a scraper target 
+        /// List all users with member privileges for a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="labelID">ID of the label</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns></returns>
-        public void ScrapersScraperTargetIDLabelsLabelIDDelete (string scraperTargetID, string labelID, string zapTraceSpan = null)
+        /// <returns>ResourceMembers</returns>
+        public ResourceMembers GetScrapersIDMembers (string scraperTargetID, string zapTraceSpan = null)
         {
-             ScrapersScraperTargetIDLabelsLabelIDDeleteWithHttpInfo(scraperTargetID, labelID, zapTraceSpan);
+             ApiResponse<ResourceMembers> localVarResponse = GetScrapersIDMembersWithHttpInfo(scraperTargetID, zapTraceSpan);
+             return localVarResponse.Data;
         }
 
         /// <summary>
-        /// delete a label from a scraper target 
+        /// List all users with member privileges for a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="labelID">ID of the label</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Object(void)</returns>
-        public ApiResponse<Object> ScrapersScraperTargetIDLabelsLabelIDDeleteWithHttpInfo (string scraperTargetID, string labelID, string zapTraceSpan = null)
+        /// <returns>ApiResponse of ResourceMembers</returns>
+        public ApiResponse< ResourceMembers > GetScrapersIDMembersWithHttpInfo (string scraperTargetID, string zapTraceSpan = null)
         {
             // verify the required parameter 'scraperTargetID' is set
             if (scraperTargetID == null)
-                throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->ScrapersScraperTargetIDLabelsLabelIDDelete");
-            // verify the required parameter 'labelID' is set
-            if (labelID == null)
-                throw new ApiException(400, "Missing required parameter 'labelID' when calling ScraperTargetsService->ScrapersScraperTargetIDLabelsLabelIDDelete");
+                throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->GetScrapersIDMembers");
 
-            var localVarPath = "/api/v2/scrapers/{scraperTargetID}/labels/{labelID}";
+            var localVarPath = "/api/v2/scrapers/{scraperTargetID}/members";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -2156,7 +2660,6 @@ namespace InfluxDB.Client.Api.Service
             String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             if (scraperTargetID != null) localVarPathParams.Add("scraperTargetID", this.Configuration.ApiClient.ParameterToString(scraperTargetID)); // path parameter
-            if (labelID != null) localVarPathParams.Add("labelID", this.Configuration.ApiClient.ParameterToString(labelID)); // path parameter
             if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
 
             // to determine the Accept header
@@ -2171,40 +2674,36 @@ namespace InfluxDB.Client.Api.Service
 
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("ScrapersScraperTargetIDLabelsLabelIDDelete", localVarResponse);
+                Exception exception = ExceptionFactory("GetScrapersIDMembers", localVarResponse);
                 if (exception != null) throw exception;
             }
 
-            return new ApiResponse<Object>(localVarStatusCode,
+            return new ApiResponse<ResourceMembers>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                null);
+                (ResourceMembers) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(ResourceMembers)));
         }
 
         /// <summary>
-        /// delete a label from a scraper target 
+        /// List all users with member privileges for a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="labelID">ID of the label</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Object(void)</returns>
-        public IRestResponse ScrapersScraperTargetIDLabelsLabelIDDeleteWithIRestResponse (string scraperTargetID, string labelID, string zapTraceSpan = null)
+        /// <returns>ApiResponse of ResourceMembers</returns>
+        public IRestResponse GetScrapersIDMembersWithIRestResponse (string scraperTargetID, string zapTraceSpan = null)
         {
             // verify the required parameter 'scraperTargetID' is set
             if (scraperTargetID == null)
-                throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->ScrapersScraperTargetIDLabelsLabelIDDelete");
-            // verify the required parameter 'labelID' is set
-            if (labelID == null)
-                throw new ApiException(400, "Missing required parameter 'labelID' when calling ScraperTargetsService->ScrapersScraperTargetIDLabelsLabelIDDelete");
+                throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->GetScrapersIDMembers");
 
-            var localVarPath = "/api/v2/scrapers/{scraperTargetID}/labels/{labelID}";
+            var localVarPath = "/api/v2/scrapers/{scraperTargetID}/members";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -2218,7 +2717,6 @@ namespace InfluxDB.Client.Api.Service
             String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             if (scraperTargetID != null) localVarPathParams.Add("scraperTargetID", this.Configuration.ApiClient.ParameterToString(scraperTargetID)); // path parameter
-            if (labelID != null) localVarPathParams.Add("labelID", this.Configuration.ApiClient.ParameterToString(labelID)); // path parameter
             if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
 
             // to determine the Accept header
@@ -2233,14 +2731,14 @@ namespace InfluxDB.Client.Api.Service
 
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("ScrapersScraperTargetIDLabelsLabelIDDelete", localVarResponse);
+                Exception exception = ExceptionFactory("GetScrapersIDMembers", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -2248,23 +2746,19 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// delete a label from a scraper target 
+        /// List all users with member privileges for a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="labelID">ID of the label</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Object(void)</returns>
-        public RestRequest ScrapersScraperTargetIDLabelsLabelIDDeleteWithRestRequest (string scraperTargetID, string labelID, string zapTraceSpan = null)
+        /// <returns>ApiResponse of ResourceMembers</returns>
+        public RestRequest GetScrapersIDMembersWithRestRequest (string scraperTargetID, string zapTraceSpan = null)
         {
             // verify the required parameter 'scraperTargetID' is set
             if (scraperTargetID == null)
-                throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->ScrapersScraperTargetIDLabelsLabelIDDelete");
-            // verify the required parameter 'labelID' is set
-            if (labelID == null)
-                throw new ApiException(400, "Missing required parameter 'labelID' when calling ScraperTargetsService->ScrapersScraperTargetIDLabelsLabelIDDelete");
+                throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->GetScrapersIDMembers");
 
-            var localVarPath = "/api/v2/scrapers/{scraperTargetID}/labels/{labelID}";
+            var localVarPath = "/api/v2/scrapers/{scraperTargetID}/members";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -2278,7 +2772,6 @@ namespace InfluxDB.Client.Api.Service
             String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             if (scraperTargetID != null) localVarPathParams.Add("scraperTargetID", this.Configuration.ApiClient.ParameterToString(scraperTargetID)); // path parameter
-            if (labelID != null) localVarPathParams.Add("labelID", this.Configuration.ApiClient.ParameterToString(labelID)); // path parameter
             if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
 
             // to determine the Accept header
@@ -2292,42 +2785,38 @@ namespace InfluxDB.Client.Api.Service
 
 
             return this.Configuration.ApiClient.PrepareRequest(localVarPath,
-                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
         }
 
         /// <summary>
-        /// delete a label from a scraper target 
+        /// List all users with member privileges for a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="labelID">ID of the label</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task ScrapersScraperTargetIDLabelsLabelIDDeleteAsync (string scraperTargetID, string labelID, string zapTraceSpan = null)
+        /// <returns>Task of ResourceMembers</returns>
+        public async System.Threading.Tasks.Task<ResourceMembers> GetScrapersIDMembersAsync (string scraperTargetID, string zapTraceSpan = null)
         {
-             await ScrapersScraperTargetIDLabelsLabelIDDeleteAsyncWithHttpInfo(scraperTargetID, labelID, zapTraceSpan);
+             ApiResponse<ResourceMembers> localVarResponse = await GetScrapersIDMembersAsyncWithHttpInfo(scraperTargetID, zapTraceSpan);
+             return localVarResponse.Data;
 
         }
 
         /// <summary>
-        /// delete a label from a scraper target 
+        /// List all users with member privileges for a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="labelID">ID of the label</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Object>> ScrapersScraperTargetIDLabelsLabelIDDeleteAsyncWithHttpInfo (string scraperTargetID, string labelID, string zapTraceSpan = null)
+        /// <returns>Task of ApiResponse (ResourceMembers)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<ResourceMembers>> GetScrapersIDMembersAsyncWithHttpInfo (string scraperTargetID, string zapTraceSpan = null)
         {
             // verify the required parameter 'scraperTargetID' is set
             if (scraperTargetID == null)
-                throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->ScrapersScraperTargetIDLabelsLabelIDDelete");
-            // verify the required parameter 'labelID' is set
-            if (labelID == null)
-                throw new ApiException(400, "Missing required parameter 'labelID' when calling ScraperTargetsService->ScrapersScraperTargetIDLabelsLabelIDDelete");
+                throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->GetScrapersIDMembers");
 
-            var localVarPath = "/api/v2/scrapers/{scraperTargetID}/labels/{labelID}";
+            var localVarPath = "/api/v2/scrapers/{scraperTargetID}/members";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -2341,7 +2830,6 @@ namespace InfluxDB.Client.Api.Service
             String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             if (scraperTargetID != null) localVarPathParams.Add("scraperTargetID", this.Configuration.ApiClient.ParameterToString(scraperTargetID)); // path parameter
-            if (labelID != null) localVarPathParams.Add("labelID", this.Configuration.ApiClient.ParameterToString(labelID)); // path parameter
             if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
 
             // to determine the Accept header
@@ -2356,20 +2844,554 @@ namespace InfluxDB.Client.Api.Service
 
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("ScrapersScraperTargetIDLabelsLabelIDDelete", localVarResponse);
+                Exception exception = ExceptionFactory("GetScrapersIDMembers", localVarResponse);
                 if (exception != null) throw exception;
             }
 
-            return new ApiResponse<Object>(localVarStatusCode,
+            return new ApiResponse<ResourceMembers>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                null);
+                (ResourceMembers) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(ResourceMembers)));
+        }
+
+        /// <summary>
+        /// List all owners of a scraper target 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ResourceOwners</returns>
+        public ResourceOwners GetScrapersIDOwners (string scraperTargetID, string zapTraceSpan = null)
+        {
+             ApiResponse<ResourceOwners> localVarResponse = GetScrapersIDOwnersWithHttpInfo(scraperTargetID, zapTraceSpan);
+             return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// List all owners of a scraper target 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of ResourceOwners</returns>
+        public ApiResponse< ResourceOwners > GetScrapersIDOwnersWithHttpInfo (string scraperTargetID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'scraperTargetID' is set
+            if (scraperTargetID == null)
+                throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->GetScrapersIDOwners");
+
+            var localVarPath = "/api/v2/scrapers/{scraperTargetID}/owners";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (scraperTargetID != null) localVarPathParams.Add("scraperTargetID", this.Configuration.ApiClient.ParameterToString(scraperTargetID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("GetScrapersIDOwners", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<ResourceOwners>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (ResourceOwners) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(ResourceOwners)));
+        }
+
+        /// <summary>
+        /// List all owners of a scraper target 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of ResourceOwners</returns>
+        public IRestResponse GetScrapersIDOwnersWithIRestResponse (string scraperTargetID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'scraperTargetID' is set
+            if (scraperTargetID == null)
+                throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->GetScrapersIDOwners");
+
+            var localVarPath = "/api/v2/scrapers/{scraperTargetID}/owners";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (scraperTargetID != null) localVarPathParams.Add("scraperTargetID", this.Configuration.ApiClient.ParameterToString(scraperTargetID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("GetScrapersIDOwners", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return localVarResponse;
+        }
+        
+        /// <summary>
+        /// List all owners of a scraper target 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of ResourceOwners</returns>
+        public RestRequest GetScrapersIDOwnersWithRestRequest (string scraperTargetID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'scraperTargetID' is set
+            if (scraperTargetID == null)
+                throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->GetScrapersIDOwners");
+
+            var localVarPath = "/api/v2/scrapers/{scraperTargetID}/owners";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (scraperTargetID != null) localVarPathParams.Add("scraperTargetID", this.Configuration.ApiClient.ParameterToString(scraperTargetID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
+                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+        }
+
+        /// <summary>
+        /// List all owners of a scraper target 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ResourceOwners</returns>
+        public async System.Threading.Tasks.Task<ResourceOwners> GetScrapersIDOwnersAsync (string scraperTargetID, string zapTraceSpan = null)
+        {
+             ApiResponse<ResourceOwners> localVarResponse = await GetScrapersIDOwnersAsyncWithHttpInfo(scraperTargetID, zapTraceSpan);
+             return localVarResponse.Data;
+
+        }
+
+        /// <summary>
+        /// List all owners of a scraper target 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ApiResponse (ResourceOwners)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<ResourceOwners>> GetScrapersIDOwnersAsyncWithHttpInfo (string scraperTargetID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'scraperTargetID' is set
+            if (scraperTargetID == null)
+                throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->GetScrapersIDOwners");
+
+            var localVarPath = "/api/v2/scrapers/{scraperTargetID}/owners";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (scraperTargetID != null) localVarPathParams.Add("scraperTargetID", this.Configuration.ApiClient.ParameterToString(scraperTargetID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("GetScrapersIDOwners", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<ResourceOwners>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (ResourceOwners) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(ResourceOwners)));
+        }
+
+        /// <summary>
+        /// update a scraper target 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="scraperTargetID">id of the scraper target</param>
+        /// <param name="scraperTargetRequest">scraper target update to apply</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ScraperTargetResponse</returns>
+        public ScraperTargetResponse PatchScrapersID (string scraperTargetID, ScraperTargetRequest scraperTargetRequest, string zapTraceSpan = null)
+        {
+             ApiResponse<ScraperTargetResponse> localVarResponse = PatchScrapersIDWithHttpInfo(scraperTargetID, scraperTargetRequest, zapTraceSpan);
+             return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// update a scraper target 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="scraperTargetID">id of the scraper target</param>
+        /// <param name="scraperTargetRequest">scraper target update to apply</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of ScraperTargetResponse</returns>
+        public ApiResponse< ScraperTargetResponse > PatchScrapersIDWithHttpInfo (string scraperTargetID, ScraperTargetRequest scraperTargetRequest, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'scraperTargetID' is set
+            if (scraperTargetID == null)
+                throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->PatchScrapersID");
+            // verify the required parameter 'scraperTargetRequest' is set
+            if (scraperTargetRequest == null)
+                throw new ApiException(400, "Missing required parameter 'scraperTargetRequest' when calling ScraperTargetsService->PatchScrapersID");
+
+            var localVarPath = "/api/v2/scrapers/{scraperTargetID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json"
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (scraperTargetID != null) localVarPathParams.Add("scraperTargetID", this.Configuration.ApiClient.ParameterToString(scraperTargetID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (scraperTargetRequest != null && scraperTargetRequest.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(scraperTargetRequest); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = scraperTargetRequest; // byte array
+            }
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("PatchScrapersID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<ScraperTargetResponse>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (ScraperTargetResponse) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(ScraperTargetResponse)));
+        }
+
+        /// <summary>
+        /// update a scraper target 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="scraperTargetID">id of the scraper target</param>
+        /// <param name="scraperTargetRequest">scraper target update to apply</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of ScraperTargetResponse</returns>
+        public IRestResponse PatchScrapersIDWithIRestResponse (string scraperTargetID, ScraperTargetRequest scraperTargetRequest, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'scraperTargetID' is set
+            if (scraperTargetID == null)
+                throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->PatchScrapersID");
+            // verify the required parameter 'scraperTargetRequest' is set
+            if (scraperTargetRequest == null)
+                throw new ApiException(400, "Missing required parameter 'scraperTargetRequest' when calling ScraperTargetsService->PatchScrapersID");
+
+            var localVarPath = "/api/v2/scrapers/{scraperTargetID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json"
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (scraperTargetID != null) localVarPathParams.Add("scraperTargetID", this.Configuration.ApiClient.ParameterToString(scraperTargetID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (scraperTargetRequest != null && scraperTargetRequest.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(scraperTargetRequest); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = scraperTargetRequest; // byte array
+            }
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("PatchScrapersID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return localVarResponse;
+        }
+        
+        /// <summary>
+        /// update a scraper target 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="scraperTargetID">id of the scraper target</param>
+        /// <param name="scraperTargetRequest">scraper target update to apply</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of ScraperTargetResponse</returns>
+        public RestRequest PatchScrapersIDWithRestRequest (string scraperTargetID, ScraperTargetRequest scraperTargetRequest, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'scraperTargetID' is set
+            if (scraperTargetID == null)
+                throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->PatchScrapersID");
+            // verify the required parameter 'scraperTargetRequest' is set
+            if (scraperTargetRequest == null)
+                throw new ApiException(400, "Missing required parameter 'scraperTargetRequest' when calling ScraperTargetsService->PatchScrapersID");
+
+            var localVarPath = "/api/v2/scrapers/{scraperTargetID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json"
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (scraperTargetID != null) localVarPathParams.Add("scraperTargetID", this.Configuration.ApiClient.ParameterToString(scraperTargetID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (scraperTargetRequest != null && scraperTargetRequest.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(scraperTargetRequest); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = scraperTargetRequest; // byte array
+            }
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
+                Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+        }
+
+        /// <summary>
+        /// update a scraper target 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="scraperTargetID">id of the scraper target</param>
+        /// <param name="scraperTargetRequest">scraper target update to apply</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ScraperTargetResponse</returns>
+        public async System.Threading.Tasks.Task<ScraperTargetResponse> PatchScrapersIDAsync (string scraperTargetID, ScraperTargetRequest scraperTargetRequest, string zapTraceSpan = null)
+        {
+             ApiResponse<ScraperTargetResponse> localVarResponse = await PatchScrapersIDAsyncWithHttpInfo(scraperTargetID, scraperTargetRequest, zapTraceSpan);
+             return localVarResponse.Data;
+
+        }
+
+        /// <summary>
+        /// update a scraper target 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="scraperTargetID">id of the scraper target</param>
+        /// <param name="scraperTargetRequest">scraper target update to apply</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ApiResponse (ScraperTargetResponse)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<ScraperTargetResponse>> PatchScrapersIDAsyncWithHttpInfo (string scraperTargetID, ScraperTargetRequest scraperTargetRequest, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'scraperTargetID' is set
+            if (scraperTargetID == null)
+                throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->PatchScrapersID");
+            // verify the required parameter 'scraperTargetRequest' is set
+            if (scraperTargetRequest == null)
+                throw new ApiException(400, "Missing required parameter 'scraperTargetRequest' when calling ScraperTargetsService->PatchScrapersID");
+
+            var localVarPath = "/api/v2/scrapers/{scraperTargetID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json"
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (scraperTargetID != null) localVarPathParams.Add("scraperTargetID", this.Configuration.ApiClient.ParameterToString(scraperTargetID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (scraperTargetRequest != null && scraperTargetRequest.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(scraperTargetRequest); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = scraperTargetRequest; // byte array
+            }
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("PatchScrapersID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<ScraperTargetResponse>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (ScraperTargetResponse) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(ScraperTargetResponse)));
         }
 
         /// <summary>
@@ -2381,9 +3403,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="label">label update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
-        public void ScrapersScraperTargetIDLabelsLabelIDPatch (string scraperTargetID, string labelID, Label label, string zapTraceSpan = null)
+        public void PatchScrapersIDLabelsID (string scraperTargetID, string labelID, Label label, string zapTraceSpan = null)
         {
-             ScrapersScraperTargetIDLabelsLabelIDPatchWithHttpInfo(scraperTargetID, labelID, label, zapTraceSpan);
+             PatchScrapersIDLabelsIDWithHttpInfo(scraperTargetID, labelID, label, zapTraceSpan);
         }
 
         /// <summary>
@@ -2395,17 +3417,17 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="label">label update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public ApiResponse<Object> ScrapersScraperTargetIDLabelsLabelIDPatchWithHttpInfo (string scraperTargetID, string labelID, Label label, string zapTraceSpan = null)
+        public ApiResponse<Object> PatchScrapersIDLabelsIDWithHttpInfo (string scraperTargetID, string labelID, Label label, string zapTraceSpan = null)
         {
             // verify the required parameter 'scraperTargetID' is set
             if (scraperTargetID == null)
-                throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->ScrapersScraperTargetIDLabelsLabelIDPatch");
+                throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->PatchScrapersIDLabelsID");
             // verify the required parameter 'labelID' is set
             if (labelID == null)
-                throw new ApiException(400, "Missing required parameter 'labelID' when calling ScraperTargetsService->ScrapersScraperTargetIDLabelsLabelIDPatch");
+                throw new ApiException(400, "Missing required parameter 'labelID' when calling ScraperTargetsService->PatchScrapersIDLabelsID");
             // verify the required parameter 'label' is set
             if (label == null)
-                throw new ApiException(400, "Missing required parameter 'label' when calling ScraperTargetsService->ScrapersScraperTargetIDLabelsLabelIDPatch");
+                throw new ApiException(400, "Missing required parameter 'label' when calling ScraperTargetsService->PatchScrapersIDLabelsID");
 
             var localVarPath = "/api/v2/scrapers/{scraperTargetID}/labels/{labelID}";
             var localVarPathParams = new Dictionary<String, String>();
@@ -2452,7 +3474,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("ScrapersScraperTargetIDLabelsLabelIDPatch", localVarResponse);
+                Exception exception = ExceptionFactory("PatchScrapersIDLabelsID", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -2470,17 +3492,17 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="label">label update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public IRestResponse ScrapersScraperTargetIDLabelsLabelIDPatchWithIRestResponse (string scraperTargetID, string labelID, Label label, string zapTraceSpan = null)
+        public IRestResponse PatchScrapersIDLabelsIDWithIRestResponse (string scraperTargetID, string labelID, Label label, string zapTraceSpan = null)
         {
             // verify the required parameter 'scraperTargetID' is set
             if (scraperTargetID == null)
-                throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->ScrapersScraperTargetIDLabelsLabelIDPatch");
+                throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->PatchScrapersIDLabelsID");
             // verify the required parameter 'labelID' is set
             if (labelID == null)
-                throw new ApiException(400, "Missing required parameter 'labelID' when calling ScraperTargetsService->ScrapersScraperTargetIDLabelsLabelIDPatch");
+                throw new ApiException(400, "Missing required parameter 'labelID' when calling ScraperTargetsService->PatchScrapersIDLabelsID");
             // verify the required parameter 'label' is set
             if (label == null)
-                throw new ApiException(400, "Missing required parameter 'label' when calling ScraperTargetsService->ScrapersScraperTargetIDLabelsLabelIDPatch");
+                throw new ApiException(400, "Missing required parameter 'label' when calling ScraperTargetsService->PatchScrapersIDLabelsID");
 
             var localVarPath = "/api/v2/scrapers/{scraperTargetID}/labels/{labelID}";
             var localVarPathParams = new Dictionary<String, String>();
@@ -2527,7 +3549,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("ScrapersScraperTargetIDLabelsLabelIDPatch", localVarResponse);
+                Exception exception = ExceptionFactory("PatchScrapersIDLabelsID", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -2543,17 +3565,17 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="label">label update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public RestRequest ScrapersScraperTargetIDLabelsLabelIDPatchWithRestRequest (string scraperTargetID, string labelID, Label label, string zapTraceSpan = null)
+        public RestRequest PatchScrapersIDLabelsIDWithRestRequest (string scraperTargetID, string labelID, Label label, string zapTraceSpan = null)
         {
             // verify the required parameter 'scraperTargetID' is set
             if (scraperTargetID == null)
-                throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->ScrapersScraperTargetIDLabelsLabelIDPatch");
+                throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->PatchScrapersIDLabelsID");
             // verify the required parameter 'labelID' is set
             if (labelID == null)
-                throw new ApiException(400, "Missing required parameter 'labelID' when calling ScraperTargetsService->ScrapersScraperTargetIDLabelsLabelIDPatch");
+                throw new ApiException(400, "Missing required parameter 'labelID' when calling ScraperTargetsService->PatchScrapersIDLabelsID");
             // verify the required parameter 'label' is set
             if (label == null)
-                throw new ApiException(400, "Missing required parameter 'label' when calling ScraperTargetsService->ScrapersScraperTargetIDLabelsLabelIDPatch");
+                throw new ApiException(400, "Missing required parameter 'label' when calling ScraperTargetsService->PatchScrapersIDLabelsID");
 
             var localVarPath = "/api/v2/scrapers/{scraperTargetID}/labels/{labelID}";
             var localVarPathParams = new Dictionary<String, String>();
@@ -2605,9 +3627,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="label">label update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task ScrapersScraperTargetIDLabelsLabelIDPatchAsync (string scraperTargetID, string labelID, Label label, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task PatchScrapersIDLabelsIDAsync (string scraperTargetID, string labelID, Label label, string zapTraceSpan = null)
         {
-             await ScrapersScraperTargetIDLabelsLabelIDPatchAsyncWithHttpInfo(scraperTargetID, labelID, label, zapTraceSpan);
+             await PatchScrapersIDLabelsIDAsyncWithHttpInfo(scraperTargetID, labelID, label, zapTraceSpan);
 
         }
 
@@ -2620,17 +3642,17 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="label">label update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Object>> ScrapersScraperTargetIDLabelsLabelIDPatchAsyncWithHttpInfo (string scraperTargetID, string labelID, Label label, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<Object>> PatchScrapersIDLabelsIDAsyncWithHttpInfo (string scraperTargetID, string labelID, Label label, string zapTraceSpan = null)
         {
             // verify the required parameter 'scraperTargetID' is set
             if (scraperTargetID == null)
-                throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->ScrapersScraperTargetIDLabelsLabelIDPatch");
+                throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->PatchScrapersIDLabelsID");
             // verify the required parameter 'labelID' is set
             if (labelID == null)
-                throw new ApiException(400, "Missing required parameter 'labelID' when calling ScraperTargetsService->ScrapersScraperTargetIDLabelsLabelIDPatch");
+                throw new ApiException(400, "Missing required parameter 'labelID' when calling ScraperTargetsService->PatchScrapersIDLabelsID");
             // verify the required parameter 'label' is set
             if (label == null)
-                throw new ApiException(400, "Missing required parameter 'label' when calling ScraperTargetsService->ScrapersScraperTargetIDLabelsLabelIDPatch");
+                throw new ApiException(400, "Missing required parameter 'label' when calling ScraperTargetsService->PatchScrapersIDLabelsID");
 
             var localVarPath = "/api/v2/scrapers/{scraperTargetID}/labels/{labelID}";
             var localVarPathParams = new Dictionary<String, String>();
@@ -2677,13 +3699,285 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("ScrapersScraperTargetIDLabelsLabelIDPatch", localVarResponse);
+                Exception exception = ExceptionFactory("PatchScrapersIDLabelsID", localVarResponse);
                 if (exception != null) throw exception;
             }
 
             return new ApiResponse<Object>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
                 null);
+        }
+
+        /// <summary>
+        /// create a scraper target 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="scraperTargetRequest">scraper target to create</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ScraperTargetResponse</returns>
+        public ScraperTargetResponse PostScrapers (ScraperTargetRequest scraperTargetRequest, string zapTraceSpan = null)
+        {
+             ApiResponse<ScraperTargetResponse> localVarResponse = PostScrapersWithHttpInfo(scraperTargetRequest, zapTraceSpan);
+             return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// create a scraper target 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="scraperTargetRequest">scraper target to create</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of ScraperTargetResponse</returns>
+        public ApiResponse< ScraperTargetResponse > PostScrapersWithHttpInfo (ScraperTargetRequest scraperTargetRequest, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'scraperTargetRequest' is set
+            if (scraperTargetRequest == null)
+                throw new ApiException(400, "Missing required parameter 'scraperTargetRequest' when calling ScraperTargetsService->PostScrapers");
+
+            var localVarPath = "/api/v2/scrapers";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json"
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (scraperTargetRequest != null && scraperTargetRequest.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(scraperTargetRequest); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = scraperTargetRequest; // byte array
+            }
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("PostScrapers", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<ScraperTargetResponse>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (ScraperTargetResponse) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(ScraperTargetResponse)));
+        }
+
+        /// <summary>
+        /// create a scraper target 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="scraperTargetRequest">scraper target to create</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of ScraperTargetResponse</returns>
+        public IRestResponse PostScrapersWithIRestResponse (ScraperTargetRequest scraperTargetRequest, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'scraperTargetRequest' is set
+            if (scraperTargetRequest == null)
+                throw new ApiException(400, "Missing required parameter 'scraperTargetRequest' when calling ScraperTargetsService->PostScrapers");
+
+            var localVarPath = "/api/v2/scrapers";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json"
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (scraperTargetRequest != null && scraperTargetRequest.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(scraperTargetRequest); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = scraperTargetRequest; // byte array
+            }
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("PostScrapers", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return localVarResponse;
+        }
+        
+        /// <summary>
+        /// create a scraper target 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="scraperTargetRequest">scraper target to create</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of ScraperTargetResponse</returns>
+        public RestRequest PostScrapersWithRestRequest (ScraperTargetRequest scraperTargetRequest, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'scraperTargetRequest' is set
+            if (scraperTargetRequest == null)
+                throw new ApiException(400, "Missing required parameter 'scraperTargetRequest' when calling ScraperTargetsService->PostScrapers");
+
+            var localVarPath = "/api/v2/scrapers";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json"
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (scraperTargetRequest != null && scraperTargetRequest.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(scraperTargetRequest); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = scraperTargetRequest; // byte array
+            }
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
+                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+        }
+
+        /// <summary>
+        /// create a scraper target 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="scraperTargetRequest">scraper target to create</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ScraperTargetResponse</returns>
+        public async System.Threading.Tasks.Task<ScraperTargetResponse> PostScrapersAsync (ScraperTargetRequest scraperTargetRequest, string zapTraceSpan = null)
+        {
+             ApiResponse<ScraperTargetResponse> localVarResponse = await PostScrapersAsyncWithHttpInfo(scraperTargetRequest, zapTraceSpan);
+             return localVarResponse.Data;
+
+        }
+
+        /// <summary>
+        /// create a scraper target 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="scraperTargetRequest">scraper target to create</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ApiResponse (ScraperTargetResponse)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<ScraperTargetResponse>> PostScrapersAsyncWithHttpInfo (ScraperTargetRequest scraperTargetRequest, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'scraperTargetRequest' is set
+            if (scraperTargetRequest == null)
+                throw new ApiException(400, "Missing required parameter 'scraperTargetRequest' when calling ScraperTargetsService->PostScrapers");
+
+            var localVarPath = "/api/v2/scrapers";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json"
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (scraperTargetRequest != null && scraperTargetRequest.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(scraperTargetRequest); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = scraperTargetRequest; // byte array
+            }
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("PostScrapers", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<ScraperTargetResponse>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (ScraperTargetResponse) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(ScraperTargetResponse)));
         }
 
         /// <summary>
@@ -2694,9 +3988,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="labelMapping">label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>LabelResponse</returns>
-        public LabelResponse ScrapersScraperTargetIDLabelsPost (string scraperTargetID, LabelMapping labelMapping, string zapTraceSpan = null)
+        public LabelResponse PostScrapersIDLabels (string scraperTargetID, LabelMapping labelMapping, string zapTraceSpan = null)
         {
-             ApiResponse<LabelResponse> localVarResponse = ScrapersScraperTargetIDLabelsPostWithHttpInfo(scraperTargetID, labelMapping, zapTraceSpan);
+             ApiResponse<LabelResponse> localVarResponse = PostScrapersIDLabelsWithHttpInfo(scraperTargetID, labelMapping, zapTraceSpan);
              return localVarResponse.Data;
         }
 
@@ -2708,14 +4002,14 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="labelMapping">label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelResponse</returns>
-        public ApiResponse< LabelResponse > ScrapersScraperTargetIDLabelsPostWithHttpInfo (string scraperTargetID, LabelMapping labelMapping, string zapTraceSpan = null)
+        public ApiResponse< LabelResponse > PostScrapersIDLabelsWithHttpInfo (string scraperTargetID, LabelMapping labelMapping, string zapTraceSpan = null)
         {
             // verify the required parameter 'scraperTargetID' is set
             if (scraperTargetID == null)
-                throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->ScrapersScraperTargetIDLabelsPost");
+                throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->PostScrapersIDLabels");
             // verify the required parameter 'labelMapping' is set
             if (labelMapping == null)
-                throw new ApiException(400, "Missing required parameter 'labelMapping' when calling ScraperTargetsService->ScrapersScraperTargetIDLabelsPost");
+                throw new ApiException(400, "Missing required parameter 'labelMapping' when calling ScraperTargetsService->PostScrapersIDLabels");
 
             var localVarPath = "/api/v2/scrapers/{scraperTargetID}/labels";
             var localVarPathParams = new Dictionary<String, String>();
@@ -2761,7 +4055,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("ScrapersScraperTargetIDLabelsPost", localVarResponse);
+                Exception exception = ExceptionFactory("PostScrapersIDLabels", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -2778,14 +4072,14 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="labelMapping">label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelResponse</returns>
-        public IRestResponse ScrapersScraperTargetIDLabelsPostWithIRestResponse (string scraperTargetID, LabelMapping labelMapping, string zapTraceSpan = null)
+        public IRestResponse PostScrapersIDLabelsWithIRestResponse (string scraperTargetID, LabelMapping labelMapping, string zapTraceSpan = null)
         {
             // verify the required parameter 'scraperTargetID' is set
             if (scraperTargetID == null)
-                throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->ScrapersScraperTargetIDLabelsPost");
+                throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->PostScrapersIDLabels");
             // verify the required parameter 'labelMapping' is set
             if (labelMapping == null)
-                throw new ApiException(400, "Missing required parameter 'labelMapping' when calling ScraperTargetsService->ScrapersScraperTargetIDLabelsPost");
+                throw new ApiException(400, "Missing required parameter 'labelMapping' when calling ScraperTargetsService->PostScrapersIDLabels");
 
             var localVarPath = "/api/v2/scrapers/{scraperTargetID}/labels";
             var localVarPathParams = new Dictionary<String, String>();
@@ -2831,7 +4125,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("ScrapersScraperTargetIDLabelsPost", localVarResponse);
+                Exception exception = ExceptionFactory("PostScrapersIDLabels", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -2846,14 +4140,14 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="labelMapping">label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelResponse</returns>
-        public RestRequest ScrapersScraperTargetIDLabelsPostWithRestRequest (string scraperTargetID, LabelMapping labelMapping, string zapTraceSpan = null)
+        public RestRequest PostScrapersIDLabelsWithRestRequest (string scraperTargetID, LabelMapping labelMapping, string zapTraceSpan = null)
         {
             // verify the required parameter 'scraperTargetID' is set
             if (scraperTargetID == null)
-                throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->ScrapersScraperTargetIDLabelsPost");
+                throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->PostScrapersIDLabels");
             // verify the required parameter 'labelMapping' is set
             if (labelMapping == null)
-                throw new ApiException(400, "Missing required parameter 'labelMapping' when calling ScraperTargetsService->ScrapersScraperTargetIDLabelsPost");
+                throw new ApiException(400, "Missing required parameter 'labelMapping' when calling ScraperTargetsService->PostScrapersIDLabels");
 
             var localVarPath = "/api/v2/scrapers/{scraperTargetID}/labels";
             var localVarPathParams = new Dictionary<String, String>();
@@ -2903,9 +4197,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="labelMapping">label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of LabelResponse</returns>
-        public async System.Threading.Tasks.Task<LabelResponse> ScrapersScraperTargetIDLabelsPostAsync (string scraperTargetID, LabelMapping labelMapping, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<LabelResponse> PostScrapersIDLabelsAsync (string scraperTargetID, LabelMapping labelMapping, string zapTraceSpan = null)
         {
-             ApiResponse<LabelResponse> localVarResponse = await ScrapersScraperTargetIDLabelsPostAsyncWithHttpInfo(scraperTargetID, labelMapping, zapTraceSpan);
+             ApiResponse<LabelResponse> localVarResponse = await PostScrapersIDLabelsAsyncWithHttpInfo(scraperTargetID, labelMapping, zapTraceSpan);
              return localVarResponse.Data;
 
         }
@@ -2918,14 +4212,14 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="labelMapping">label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (LabelResponse)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<LabelResponse>> ScrapersScraperTargetIDLabelsPostAsyncWithHttpInfo (string scraperTargetID, LabelMapping labelMapping, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<LabelResponse>> PostScrapersIDLabelsAsyncWithHttpInfo (string scraperTargetID, LabelMapping labelMapping, string zapTraceSpan = null)
         {
             // verify the required parameter 'scraperTargetID' is set
             if (scraperTargetID == null)
-                throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->ScrapersScraperTargetIDLabelsPost");
+                throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->PostScrapersIDLabels");
             // verify the required parameter 'labelMapping' is set
             if (labelMapping == null)
-                throw new ApiException(400, "Missing required parameter 'labelMapping' when calling ScraperTargetsService->ScrapersScraperTargetIDLabelsPost");
+                throw new ApiException(400, "Missing required parameter 'labelMapping' when calling ScraperTargetsService->PostScrapersIDLabels");
 
             var localVarPath = "/api/v2/scrapers/{scraperTargetID}/labels";
             var localVarPathParams = new Dictionary<String, String>();
@@ -2971,253 +4265,13 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("ScrapersScraperTargetIDLabelsPost", localVarResponse);
+                Exception exception = ExceptionFactory("PostScrapersIDLabels", localVarResponse);
                 if (exception != null) throw exception;
             }
 
             return new ApiResponse<LabelResponse>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
                 (LabelResponse) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(LabelResponse)));
-        }
-
-        /// <summary>
-        /// List all users with member privileges for a scraper target 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ResourceMembers</returns>
-        public ResourceMembers ScrapersScraperTargetIDMembersGet (string scraperTargetID, string zapTraceSpan = null)
-        {
-             ApiResponse<ResourceMembers> localVarResponse = ScrapersScraperTargetIDMembersGetWithHttpInfo(scraperTargetID, zapTraceSpan);
-             return localVarResponse.Data;
-        }
-
-        /// <summary>
-        /// List all users with member privileges for a scraper target 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of ResourceMembers</returns>
-        public ApiResponse< ResourceMembers > ScrapersScraperTargetIDMembersGetWithHttpInfo (string scraperTargetID, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'scraperTargetID' is set
-            if (scraperTargetID == null)
-                throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->ScrapersScraperTargetIDMembersGet");
-
-            var localVarPath = "/api/v2/scrapers/{scraperTargetID}/members";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (scraperTargetID != null) localVarPathParams.Add("scraperTargetID", this.Configuration.ApiClient.ParameterToString(scraperTargetID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("ScrapersScraperTargetIDMembersGet", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return new ApiResponse<ResourceMembers>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (ResourceMembers) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(ResourceMembers)));
-        }
-
-        /// <summary>
-        /// List all users with member privileges for a scraper target 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of ResourceMembers</returns>
-        public IRestResponse ScrapersScraperTargetIDMembersGetWithIRestResponse (string scraperTargetID, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'scraperTargetID' is set
-            if (scraperTargetID == null)
-                throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->ScrapersScraperTargetIDMembersGet");
-
-            var localVarPath = "/api/v2/scrapers/{scraperTargetID}/members";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (scraperTargetID != null) localVarPathParams.Add("scraperTargetID", this.Configuration.ApiClient.ParameterToString(scraperTargetID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("ScrapersScraperTargetIDMembersGet", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return localVarResponse;
-        }
-        
-        /// <summary>
-        /// List all users with member privileges for a scraper target 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of ResourceMembers</returns>
-        public RestRequest ScrapersScraperTargetIDMembersGetWithRestRequest (string scraperTargetID, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'scraperTargetID' is set
-            if (scraperTargetID == null)
-                throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->ScrapersScraperTargetIDMembersGet");
-
-            var localVarPath = "/api/v2/scrapers/{scraperTargetID}/members";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (scraperTargetID != null) localVarPathParams.Add("scraperTargetID", this.Configuration.ApiClient.ParameterToString(scraperTargetID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-        }
-
-        /// <summary>
-        /// List all users with member privileges for a scraper target 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ResourceMembers</returns>
-        public async System.Threading.Tasks.Task<ResourceMembers> ScrapersScraperTargetIDMembersGetAsync (string scraperTargetID, string zapTraceSpan = null)
-        {
-             ApiResponse<ResourceMembers> localVarResponse = await ScrapersScraperTargetIDMembersGetAsyncWithHttpInfo(scraperTargetID, zapTraceSpan);
-             return localVarResponse.Data;
-
-        }
-
-        /// <summary>
-        /// List all users with member privileges for a scraper target 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ApiResponse (ResourceMembers)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<ResourceMembers>> ScrapersScraperTargetIDMembersGetAsyncWithHttpInfo (string scraperTargetID, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'scraperTargetID' is set
-            if (scraperTargetID == null)
-                throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->ScrapersScraperTargetIDMembersGet");
-
-            var localVarPath = "/api/v2/scrapers/{scraperTargetID}/members";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (scraperTargetID != null) localVarPathParams.Add("scraperTargetID", this.Configuration.ApiClient.ParameterToString(scraperTargetID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("ScrapersScraperTargetIDMembersGet", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return new ApiResponse<ResourceMembers>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (ResourceMembers) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(ResourceMembers)));
         }
 
         /// <summary>
@@ -3228,9 +4282,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="addResourceMemberRequestBody">user to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ResourceMember</returns>
-        public ResourceMember ScrapersScraperTargetIDMembersPost (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
+        public ResourceMember PostScrapersIDMembers (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
         {
-             ApiResponse<ResourceMember> localVarResponse = ScrapersScraperTargetIDMembersPostWithHttpInfo(scraperTargetID, addResourceMemberRequestBody, zapTraceSpan);
+             ApiResponse<ResourceMember> localVarResponse = PostScrapersIDMembersWithHttpInfo(scraperTargetID, addResourceMemberRequestBody, zapTraceSpan);
              return localVarResponse.Data;
         }
 
@@ -3242,14 +4296,14 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="addResourceMemberRequestBody">user to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMember</returns>
-        public ApiResponse< ResourceMember > ScrapersScraperTargetIDMembersPostWithHttpInfo (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
+        public ApiResponse< ResourceMember > PostScrapersIDMembersWithHttpInfo (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
         {
             // verify the required parameter 'scraperTargetID' is set
             if (scraperTargetID == null)
-                throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->ScrapersScraperTargetIDMembersPost");
+                throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->PostScrapersIDMembers");
             // verify the required parameter 'addResourceMemberRequestBody' is set
             if (addResourceMemberRequestBody == null)
-                throw new ApiException(400, "Missing required parameter 'addResourceMemberRequestBody' when calling ScraperTargetsService->ScrapersScraperTargetIDMembersPost");
+                throw new ApiException(400, "Missing required parameter 'addResourceMemberRequestBody' when calling ScraperTargetsService->PostScrapersIDMembers");
 
             var localVarPath = "/api/v2/scrapers/{scraperTargetID}/members";
             var localVarPathParams = new Dictionary<String, String>();
@@ -3295,7 +4349,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("ScrapersScraperTargetIDMembersPost", localVarResponse);
+                Exception exception = ExceptionFactory("PostScrapersIDMembers", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -3312,14 +4366,14 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="addResourceMemberRequestBody">user to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMember</returns>
-        public IRestResponse ScrapersScraperTargetIDMembersPostWithIRestResponse (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
+        public IRestResponse PostScrapersIDMembersWithIRestResponse (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
         {
             // verify the required parameter 'scraperTargetID' is set
             if (scraperTargetID == null)
-                throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->ScrapersScraperTargetIDMembersPost");
+                throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->PostScrapersIDMembers");
             // verify the required parameter 'addResourceMemberRequestBody' is set
             if (addResourceMemberRequestBody == null)
-                throw new ApiException(400, "Missing required parameter 'addResourceMemberRequestBody' when calling ScraperTargetsService->ScrapersScraperTargetIDMembersPost");
+                throw new ApiException(400, "Missing required parameter 'addResourceMemberRequestBody' when calling ScraperTargetsService->PostScrapersIDMembers");
 
             var localVarPath = "/api/v2/scrapers/{scraperTargetID}/members";
             var localVarPathParams = new Dictionary<String, String>();
@@ -3365,7 +4419,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("ScrapersScraperTargetIDMembersPost", localVarResponse);
+                Exception exception = ExceptionFactory("PostScrapersIDMembers", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -3380,14 +4434,14 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="addResourceMemberRequestBody">user to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMember</returns>
-        public RestRequest ScrapersScraperTargetIDMembersPostWithRestRequest (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
+        public RestRequest PostScrapersIDMembersWithRestRequest (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
         {
             // verify the required parameter 'scraperTargetID' is set
             if (scraperTargetID == null)
-                throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->ScrapersScraperTargetIDMembersPost");
+                throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->PostScrapersIDMembers");
             // verify the required parameter 'addResourceMemberRequestBody' is set
             if (addResourceMemberRequestBody == null)
-                throw new ApiException(400, "Missing required parameter 'addResourceMemberRequestBody' when calling ScraperTargetsService->ScrapersScraperTargetIDMembersPost");
+                throw new ApiException(400, "Missing required parameter 'addResourceMemberRequestBody' when calling ScraperTargetsService->PostScrapersIDMembers");
 
             var localVarPath = "/api/v2/scrapers/{scraperTargetID}/members";
             var localVarPathParams = new Dictionary<String, String>();
@@ -3437,9 +4491,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="addResourceMemberRequestBody">user to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ResourceMember</returns>
-        public async System.Threading.Tasks.Task<ResourceMember> ScrapersScraperTargetIDMembersPostAsync (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ResourceMember> PostScrapersIDMembersAsync (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
         {
-             ApiResponse<ResourceMember> localVarResponse = await ScrapersScraperTargetIDMembersPostAsyncWithHttpInfo(scraperTargetID, addResourceMemberRequestBody, zapTraceSpan);
+             ApiResponse<ResourceMember> localVarResponse = await PostScrapersIDMembersAsyncWithHttpInfo(scraperTargetID, addResourceMemberRequestBody, zapTraceSpan);
              return localVarResponse.Data;
 
         }
@@ -3452,14 +4506,14 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="addResourceMemberRequestBody">user to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (ResourceMember)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<ResourceMember>> ScrapersScraperTargetIDMembersPostAsyncWithHttpInfo (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<ResourceMember>> PostScrapersIDMembersAsyncWithHttpInfo (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
         {
             // verify the required parameter 'scraperTargetID' is set
             if (scraperTargetID == null)
-                throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->ScrapersScraperTargetIDMembersPost");
+                throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->PostScrapersIDMembers");
             // verify the required parameter 'addResourceMemberRequestBody' is set
             if (addResourceMemberRequestBody == null)
-                throw new ApiException(400, "Missing required parameter 'addResourceMemberRequestBody' when calling ScraperTargetsService->ScrapersScraperTargetIDMembersPost");
+                throw new ApiException(400, "Missing required parameter 'addResourceMemberRequestBody' when calling ScraperTargetsService->PostScrapersIDMembers");
 
             var localVarPath = "/api/v2/scrapers/{scraperTargetID}/members";
             var localVarPathParams = new Dictionary<String, String>();
@@ -3505,513 +4559,13 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("ScrapersScraperTargetIDMembersPost", localVarResponse);
+                Exception exception = ExceptionFactory("PostScrapersIDMembers", localVarResponse);
                 if (exception != null) throw exception;
             }
 
             return new ApiResponse<ResourceMember>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
                 (ResourceMember) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(ResourceMember)));
-        }
-
-        /// <summary>
-        /// removes a member from a scraper target 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns></returns>
-        public void ScrapersScraperTargetIDMembersUserIDDelete (string userID, string scraperTargetID, string zapTraceSpan = null)
-        {
-             ScrapersScraperTargetIDMembersUserIDDeleteWithHttpInfo(userID, scraperTargetID, zapTraceSpan);
-        }
-
-        /// <summary>
-        /// removes a member from a scraper target 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Object(void)</returns>
-        public ApiResponse<Object> ScrapersScraperTargetIDMembersUserIDDeleteWithHttpInfo (string userID, string scraperTargetID, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'userID' is set
-            if (userID == null)
-                throw new ApiException(400, "Missing required parameter 'userID' when calling ScraperTargetsService->ScrapersScraperTargetIDMembersUserIDDelete");
-            // verify the required parameter 'scraperTargetID' is set
-            if (scraperTargetID == null)
-                throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->ScrapersScraperTargetIDMembersUserIDDelete");
-
-            var localVarPath = "/api/v2/scrapers/{scraperTargetID}/members/{userID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (userID != null) localVarPathParams.Add("userID", this.Configuration.ApiClient.ParameterToString(userID)); // path parameter
-            if (scraperTargetID != null) localVarPathParams.Add("scraperTargetID", this.Configuration.ApiClient.ParameterToString(scraperTargetID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("ScrapersScraperTargetIDMembersUserIDDelete", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return new ApiResponse<Object>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                null);
-        }
-
-        /// <summary>
-        /// removes a member from a scraper target 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Object(void)</returns>
-        public IRestResponse ScrapersScraperTargetIDMembersUserIDDeleteWithIRestResponse (string userID, string scraperTargetID, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'userID' is set
-            if (userID == null)
-                throw new ApiException(400, "Missing required parameter 'userID' when calling ScraperTargetsService->ScrapersScraperTargetIDMembersUserIDDelete");
-            // verify the required parameter 'scraperTargetID' is set
-            if (scraperTargetID == null)
-                throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->ScrapersScraperTargetIDMembersUserIDDelete");
-
-            var localVarPath = "/api/v2/scrapers/{scraperTargetID}/members/{userID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (userID != null) localVarPathParams.Add("userID", this.Configuration.ApiClient.ParameterToString(userID)); // path parameter
-            if (scraperTargetID != null) localVarPathParams.Add("scraperTargetID", this.Configuration.ApiClient.ParameterToString(scraperTargetID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("ScrapersScraperTargetIDMembersUserIDDelete", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return localVarResponse;
-        }
-        
-        /// <summary>
-        /// removes a member from a scraper target 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Object(void)</returns>
-        public RestRequest ScrapersScraperTargetIDMembersUserIDDeleteWithRestRequest (string userID, string scraperTargetID, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'userID' is set
-            if (userID == null)
-                throw new ApiException(400, "Missing required parameter 'userID' when calling ScraperTargetsService->ScrapersScraperTargetIDMembersUserIDDelete");
-            // verify the required parameter 'scraperTargetID' is set
-            if (scraperTargetID == null)
-                throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->ScrapersScraperTargetIDMembersUserIDDelete");
-
-            var localVarPath = "/api/v2/scrapers/{scraperTargetID}/members/{userID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (userID != null) localVarPathParams.Add("userID", this.Configuration.ApiClient.ParameterToString(userID)); // path parameter
-            if (scraperTargetID != null) localVarPathParams.Add("scraperTargetID", this.Configuration.ApiClient.ParameterToString(scraperTargetID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
-                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-        }
-
-        /// <summary>
-        /// removes a member from a scraper target 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task ScrapersScraperTargetIDMembersUserIDDeleteAsync (string userID, string scraperTargetID, string zapTraceSpan = null)
-        {
-             await ScrapersScraperTargetIDMembersUserIDDeleteAsyncWithHttpInfo(userID, scraperTargetID, zapTraceSpan);
-
-        }
-
-        /// <summary>
-        /// removes a member from a scraper target 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Object>> ScrapersScraperTargetIDMembersUserIDDeleteAsyncWithHttpInfo (string userID, string scraperTargetID, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'userID' is set
-            if (userID == null)
-                throw new ApiException(400, "Missing required parameter 'userID' when calling ScraperTargetsService->ScrapersScraperTargetIDMembersUserIDDelete");
-            // verify the required parameter 'scraperTargetID' is set
-            if (scraperTargetID == null)
-                throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->ScrapersScraperTargetIDMembersUserIDDelete");
-
-            var localVarPath = "/api/v2/scrapers/{scraperTargetID}/members/{userID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (userID != null) localVarPathParams.Add("userID", this.Configuration.ApiClient.ParameterToString(userID)); // path parameter
-            if (scraperTargetID != null) localVarPathParams.Add("scraperTargetID", this.Configuration.ApiClient.ParameterToString(scraperTargetID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("ScrapersScraperTargetIDMembersUserIDDelete", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return new ApiResponse<Object>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                null);
-        }
-
-        /// <summary>
-        /// List all owners of a scraper target 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ResourceOwners</returns>
-        public ResourceOwners ScrapersScraperTargetIDOwnersGet (string scraperTargetID, string zapTraceSpan = null)
-        {
-             ApiResponse<ResourceOwners> localVarResponse = ScrapersScraperTargetIDOwnersGetWithHttpInfo(scraperTargetID, zapTraceSpan);
-             return localVarResponse.Data;
-        }
-
-        /// <summary>
-        /// List all owners of a scraper target 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of ResourceOwners</returns>
-        public ApiResponse< ResourceOwners > ScrapersScraperTargetIDOwnersGetWithHttpInfo (string scraperTargetID, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'scraperTargetID' is set
-            if (scraperTargetID == null)
-                throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->ScrapersScraperTargetIDOwnersGet");
-
-            var localVarPath = "/api/v2/scrapers/{scraperTargetID}/owners";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (scraperTargetID != null) localVarPathParams.Add("scraperTargetID", this.Configuration.ApiClient.ParameterToString(scraperTargetID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("ScrapersScraperTargetIDOwnersGet", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return new ApiResponse<ResourceOwners>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (ResourceOwners) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(ResourceOwners)));
-        }
-
-        /// <summary>
-        /// List all owners of a scraper target 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of ResourceOwners</returns>
-        public IRestResponse ScrapersScraperTargetIDOwnersGetWithIRestResponse (string scraperTargetID, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'scraperTargetID' is set
-            if (scraperTargetID == null)
-                throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->ScrapersScraperTargetIDOwnersGet");
-
-            var localVarPath = "/api/v2/scrapers/{scraperTargetID}/owners";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (scraperTargetID != null) localVarPathParams.Add("scraperTargetID", this.Configuration.ApiClient.ParameterToString(scraperTargetID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("ScrapersScraperTargetIDOwnersGet", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return localVarResponse;
-        }
-        
-        /// <summary>
-        /// List all owners of a scraper target 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of ResourceOwners</returns>
-        public RestRequest ScrapersScraperTargetIDOwnersGetWithRestRequest (string scraperTargetID, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'scraperTargetID' is set
-            if (scraperTargetID == null)
-                throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->ScrapersScraperTargetIDOwnersGet");
-
-            var localVarPath = "/api/v2/scrapers/{scraperTargetID}/owners";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (scraperTargetID != null) localVarPathParams.Add("scraperTargetID", this.Configuration.ApiClient.ParameterToString(scraperTargetID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-        }
-
-        /// <summary>
-        /// List all owners of a scraper target 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ResourceOwners</returns>
-        public async System.Threading.Tasks.Task<ResourceOwners> ScrapersScraperTargetIDOwnersGetAsync (string scraperTargetID, string zapTraceSpan = null)
-        {
-             ApiResponse<ResourceOwners> localVarResponse = await ScrapersScraperTargetIDOwnersGetAsyncWithHttpInfo(scraperTargetID, zapTraceSpan);
-             return localVarResponse.Data;
-
-        }
-
-        /// <summary>
-        /// List all owners of a scraper target 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ApiResponse (ResourceOwners)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<ResourceOwners>> ScrapersScraperTargetIDOwnersGetAsyncWithHttpInfo (string scraperTargetID, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'scraperTargetID' is set
-            if (scraperTargetID == null)
-                throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->ScrapersScraperTargetIDOwnersGet");
-
-            var localVarPath = "/api/v2/scrapers/{scraperTargetID}/owners";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (scraperTargetID != null) localVarPathParams.Add("scraperTargetID", this.Configuration.ApiClient.ParameterToString(scraperTargetID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("ScrapersScraperTargetIDOwnersGet", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return new ApiResponse<ResourceOwners>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (ResourceOwners) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(ResourceOwners)));
         }
 
         /// <summary>
@@ -4022,9 +4576,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="addResourceMemberRequestBody">user to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ResourceOwner</returns>
-        public ResourceOwner ScrapersScraperTargetIDOwnersPost (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
+        public ResourceOwner PostScrapersIDOwners (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
         {
-             ApiResponse<ResourceOwner> localVarResponse = ScrapersScraperTargetIDOwnersPostWithHttpInfo(scraperTargetID, addResourceMemberRequestBody, zapTraceSpan);
+             ApiResponse<ResourceOwner> localVarResponse = PostScrapersIDOwnersWithHttpInfo(scraperTargetID, addResourceMemberRequestBody, zapTraceSpan);
              return localVarResponse.Data;
         }
 
@@ -4036,14 +4590,14 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="addResourceMemberRequestBody">user to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwner</returns>
-        public ApiResponse< ResourceOwner > ScrapersScraperTargetIDOwnersPostWithHttpInfo (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
+        public ApiResponse< ResourceOwner > PostScrapersIDOwnersWithHttpInfo (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
         {
             // verify the required parameter 'scraperTargetID' is set
             if (scraperTargetID == null)
-                throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->ScrapersScraperTargetIDOwnersPost");
+                throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->PostScrapersIDOwners");
             // verify the required parameter 'addResourceMemberRequestBody' is set
             if (addResourceMemberRequestBody == null)
-                throw new ApiException(400, "Missing required parameter 'addResourceMemberRequestBody' when calling ScraperTargetsService->ScrapersScraperTargetIDOwnersPost");
+                throw new ApiException(400, "Missing required parameter 'addResourceMemberRequestBody' when calling ScraperTargetsService->PostScrapersIDOwners");
 
             var localVarPath = "/api/v2/scrapers/{scraperTargetID}/owners";
             var localVarPathParams = new Dictionary<String, String>();
@@ -4089,7 +4643,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("ScrapersScraperTargetIDOwnersPost", localVarResponse);
+                Exception exception = ExceptionFactory("PostScrapersIDOwners", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -4106,14 +4660,14 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="addResourceMemberRequestBody">user to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwner</returns>
-        public IRestResponse ScrapersScraperTargetIDOwnersPostWithIRestResponse (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
+        public IRestResponse PostScrapersIDOwnersWithIRestResponse (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
         {
             // verify the required parameter 'scraperTargetID' is set
             if (scraperTargetID == null)
-                throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->ScrapersScraperTargetIDOwnersPost");
+                throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->PostScrapersIDOwners");
             // verify the required parameter 'addResourceMemberRequestBody' is set
             if (addResourceMemberRequestBody == null)
-                throw new ApiException(400, "Missing required parameter 'addResourceMemberRequestBody' when calling ScraperTargetsService->ScrapersScraperTargetIDOwnersPost");
+                throw new ApiException(400, "Missing required parameter 'addResourceMemberRequestBody' when calling ScraperTargetsService->PostScrapersIDOwners");
 
             var localVarPath = "/api/v2/scrapers/{scraperTargetID}/owners";
             var localVarPathParams = new Dictionary<String, String>();
@@ -4159,7 +4713,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("ScrapersScraperTargetIDOwnersPost", localVarResponse);
+                Exception exception = ExceptionFactory("PostScrapersIDOwners", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -4174,14 +4728,14 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="addResourceMemberRequestBody">user to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwner</returns>
-        public RestRequest ScrapersScraperTargetIDOwnersPostWithRestRequest (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
+        public RestRequest PostScrapersIDOwnersWithRestRequest (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
         {
             // verify the required parameter 'scraperTargetID' is set
             if (scraperTargetID == null)
-                throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->ScrapersScraperTargetIDOwnersPost");
+                throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->PostScrapersIDOwners");
             // verify the required parameter 'addResourceMemberRequestBody' is set
             if (addResourceMemberRequestBody == null)
-                throw new ApiException(400, "Missing required parameter 'addResourceMemberRequestBody' when calling ScraperTargetsService->ScrapersScraperTargetIDOwnersPost");
+                throw new ApiException(400, "Missing required parameter 'addResourceMemberRequestBody' when calling ScraperTargetsService->PostScrapersIDOwners");
 
             var localVarPath = "/api/v2/scrapers/{scraperTargetID}/owners";
             var localVarPathParams = new Dictionary<String, String>();
@@ -4231,9 +4785,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="addResourceMemberRequestBody">user to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ResourceOwner</returns>
-        public async System.Threading.Tasks.Task<ResourceOwner> ScrapersScraperTargetIDOwnersPostAsync (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ResourceOwner> PostScrapersIDOwnersAsync (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
         {
-             ApiResponse<ResourceOwner> localVarResponse = await ScrapersScraperTargetIDOwnersPostAsyncWithHttpInfo(scraperTargetID, addResourceMemberRequestBody, zapTraceSpan);
+             ApiResponse<ResourceOwner> localVarResponse = await PostScrapersIDOwnersAsyncWithHttpInfo(scraperTargetID, addResourceMemberRequestBody, zapTraceSpan);
              return localVarResponse.Data;
 
         }
@@ -4246,14 +4800,14 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="addResourceMemberRequestBody">user to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (ResourceOwner)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<ResourceOwner>> ScrapersScraperTargetIDOwnersPostAsyncWithHttpInfo (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<ResourceOwner>> PostScrapersIDOwnersAsyncWithHttpInfo (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
         {
             // verify the required parameter 'scraperTargetID' is set
             if (scraperTargetID == null)
-                throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->ScrapersScraperTargetIDOwnersPost");
+                throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->PostScrapersIDOwners");
             // verify the required parameter 'addResourceMemberRequestBody' is set
             if (addResourceMemberRequestBody == null)
-                throw new ApiException(400, "Missing required parameter 'addResourceMemberRequestBody' when calling ScraperTargetsService->ScrapersScraperTargetIDOwnersPost");
+                throw new ApiException(400, "Missing required parameter 'addResourceMemberRequestBody' when calling ScraperTargetsService->PostScrapersIDOwners");
 
             var localVarPath = "/api/v2/scrapers/{scraperTargetID}/owners";
             var localVarPathParams = new Dictionary<String, String>();
@@ -4299,567 +4853,13 @@ namespace InfluxDB.Client.Api.Service
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("ScrapersScraperTargetIDOwnersPost", localVarResponse);
+                Exception exception = ExceptionFactory("PostScrapersIDOwners", localVarResponse);
                 if (exception != null) throw exception;
             }
 
             return new ApiResponse<ResourceOwner>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
                 (ResourceOwner) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(ResourceOwner)));
-        }
-
-        /// <summary>
-        /// removes an owner from a scraper target 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns></returns>
-        public void ScrapersScraperTargetIDOwnersUserIDDelete (string userID, string scraperTargetID, string zapTraceSpan = null)
-        {
-             ScrapersScraperTargetIDOwnersUserIDDeleteWithHttpInfo(userID, scraperTargetID, zapTraceSpan);
-        }
-
-        /// <summary>
-        /// removes an owner from a scraper target 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Object(void)</returns>
-        public ApiResponse<Object> ScrapersScraperTargetIDOwnersUserIDDeleteWithHttpInfo (string userID, string scraperTargetID, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'userID' is set
-            if (userID == null)
-                throw new ApiException(400, "Missing required parameter 'userID' when calling ScraperTargetsService->ScrapersScraperTargetIDOwnersUserIDDelete");
-            // verify the required parameter 'scraperTargetID' is set
-            if (scraperTargetID == null)
-                throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->ScrapersScraperTargetIDOwnersUserIDDelete");
-
-            var localVarPath = "/api/v2/scrapers/{scraperTargetID}/owners/{userID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (userID != null) localVarPathParams.Add("userID", this.Configuration.ApiClient.ParameterToString(userID)); // path parameter
-            if (scraperTargetID != null) localVarPathParams.Add("scraperTargetID", this.Configuration.ApiClient.ParameterToString(scraperTargetID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("ScrapersScraperTargetIDOwnersUserIDDelete", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return new ApiResponse<Object>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                null);
-        }
-
-        /// <summary>
-        /// removes an owner from a scraper target 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Object(void)</returns>
-        public IRestResponse ScrapersScraperTargetIDOwnersUserIDDeleteWithIRestResponse (string userID, string scraperTargetID, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'userID' is set
-            if (userID == null)
-                throw new ApiException(400, "Missing required parameter 'userID' when calling ScraperTargetsService->ScrapersScraperTargetIDOwnersUserIDDelete");
-            // verify the required parameter 'scraperTargetID' is set
-            if (scraperTargetID == null)
-                throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->ScrapersScraperTargetIDOwnersUserIDDelete");
-
-            var localVarPath = "/api/v2/scrapers/{scraperTargetID}/owners/{userID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (userID != null) localVarPathParams.Add("userID", this.Configuration.ApiClient.ParameterToString(userID)); // path parameter
-            if (scraperTargetID != null) localVarPathParams.Add("scraperTargetID", this.Configuration.ApiClient.ParameterToString(scraperTargetID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("ScrapersScraperTargetIDOwnersUserIDDelete", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return localVarResponse;
-        }
-        
-        /// <summary>
-        /// removes an owner from a scraper target 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Object(void)</returns>
-        public RestRequest ScrapersScraperTargetIDOwnersUserIDDeleteWithRestRequest (string userID, string scraperTargetID, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'userID' is set
-            if (userID == null)
-                throw new ApiException(400, "Missing required parameter 'userID' when calling ScraperTargetsService->ScrapersScraperTargetIDOwnersUserIDDelete");
-            // verify the required parameter 'scraperTargetID' is set
-            if (scraperTargetID == null)
-                throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->ScrapersScraperTargetIDOwnersUserIDDelete");
-
-            var localVarPath = "/api/v2/scrapers/{scraperTargetID}/owners/{userID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (userID != null) localVarPathParams.Add("userID", this.Configuration.ApiClient.ParameterToString(userID)); // path parameter
-            if (scraperTargetID != null) localVarPathParams.Add("scraperTargetID", this.Configuration.ApiClient.ParameterToString(scraperTargetID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
-                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-        }
-
-        /// <summary>
-        /// removes an owner from a scraper target 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task ScrapersScraperTargetIDOwnersUserIDDeleteAsync (string userID, string scraperTargetID, string zapTraceSpan = null)
-        {
-             await ScrapersScraperTargetIDOwnersUserIDDeleteAsyncWithHttpInfo(userID, scraperTargetID, zapTraceSpan);
-
-        }
-
-        /// <summary>
-        /// removes an owner from a scraper target 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Object>> ScrapersScraperTargetIDOwnersUserIDDeleteAsyncWithHttpInfo (string userID, string scraperTargetID, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'userID' is set
-            if (userID == null)
-                throw new ApiException(400, "Missing required parameter 'userID' when calling ScraperTargetsService->ScrapersScraperTargetIDOwnersUserIDDelete");
-            // verify the required parameter 'scraperTargetID' is set
-            if (scraperTargetID == null)
-                throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->ScrapersScraperTargetIDOwnersUserIDDelete");
-
-            var localVarPath = "/api/v2/scrapers/{scraperTargetID}/owners/{userID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (userID != null) localVarPathParams.Add("userID", this.Configuration.ApiClient.ParameterToString(userID)); // path parameter
-            if (scraperTargetID != null) localVarPathParams.Add("scraperTargetID", this.Configuration.ApiClient.ParameterToString(scraperTargetID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("ScrapersScraperTargetIDOwnersUserIDDelete", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return new ApiResponse<Object>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                null);
-        }
-
-        /// <summary>
-        /// update a scraper target 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">id of the scraper target</param>
-        /// <param name="scraperTargetRequest">scraper target update to apply</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ScraperTargetResponse</returns>
-        public ScraperTargetResponse ScrapersScraperTargetIDPatch (string scraperTargetID, ScraperTargetRequest scraperTargetRequest, string zapTraceSpan = null)
-        {
-             ApiResponse<ScraperTargetResponse> localVarResponse = ScrapersScraperTargetIDPatchWithHttpInfo(scraperTargetID, scraperTargetRequest, zapTraceSpan);
-             return localVarResponse.Data;
-        }
-
-        /// <summary>
-        /// update a scraper target 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">id of the scraper target</param>
-        /// <param name="scraperTargetRequest">scraper target update to apply</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of ScraperTargetResponse</returns>
-        public ApiResponse< ScraperTargetResponse > ScrapersScraperTargetIDPatchWithHttpInfo (string scraperTargetID, ScraperTargetRequest scraperTargetRequest, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'scraperTargetID' is set
-            if (scraperTargetID == null)
-                throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->ScrapersScraperTargetIDPatch");
-            // verify the required parameter 'scraperTargetRequest' is set
-            if (scraperTargetRequest == null)
-                throw new ApiException(400, "Missing required parameter 'scraperTargetRequest' when calling ScraperTargetsService->ScrapersScraperTargetIDPatch");
-
-            var localVarPath = "/api/v2/scrapers/{scraperTargetID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-                "application/json"
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (scraperTargetID != null) localVarPathParams.Add("scraperTargetID", this.Configuration.ApiClient.ParameterToString(scraperTargetID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (scraperTargetRequest != null && scraperTargetRequest.GetType() != typeof(byte[]))
-            {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(scraperTargetRequest); // http body (model) parameter
-            }
-            else
-            {
-                localVarPostBody = scraperTargetRequest; // byte array
-            }
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("ScrapersScraperTargetIDPatch", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return new ApiResponse<ScraperTargetResponse>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (ScraperTargetResponse) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(ScraperTargetResponse)));
-        }
-
-        /// <summary>
-        /// update a scraper target 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">id of the scraper target</param>
-        /// <param name="scraperTargetRequest">scraper target update to apply</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of ScraperTargetResponse</returns>
-        public IRestResponse ScrapersScraperTargetIDPatchWithIRestResponse (string scraperTargetID, ScraperTargetRequest scraperTargetRequest, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'scraperTargetID' is set
-            if (scraperTargetID == null)
-                throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->ScrapersScraperTargetIDPatch");
-            // verify the required parameter 'scraperTargetRequest' is set
-            if (scraperTargetRequest == null)
-                throw new ApiException(400, "Missing required parameter 'scraperTargetRequest' when calling ScraperTargetsService->ScrapersScraperTargetIDPatch");
-
-            var localVarPath = "/api/v2/scrapers/{scraperTargetID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-                "application/json"
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (scraperTargetID != null) localVarPathParams.Add("scraperTargetID", this.Configuration.ApiClient.ParameterToString(scraperTargetID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (scraperTargetRequest != null && scraperTargetRequest.GetType() != typeof(byte[]))
-            {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(scraperTargetRequest); // http body (model) parameter
-            }
-            else
-            {
-                localVarPostBody = scraperTargetRequest; // byte array
-            }
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("ScrapersScraperTargetIDPatch", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return localVarResponse;
-        }
-        
-        /// <summary>
-        /// update a scraper target 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">id of the scraper target</param>
-        /// <param name="scraperTargetRequest">scraper target update to apply</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of ScraperTargetResponse</returns>
-        public RestRequest ScrapersScraperTargetIDPatchWithRestRequest (string scraperTargetID, ScraperTargetRequest scraperTargetRequest, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'scraperTargetID' is set
-            if (scraperTargetID == null)
-                throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->ScrapersScraperTargetIDPatch");
-            // verify the required parameter 'scraperTargetRequest' is set
-            if (scraperTargetRequest == null)
-                throw new ApiException(400, "Missing required parameter 'scraperTargetRequest' when calling ScraperTargetsService->ScrapersScraperTargetIDPatch");
-
-            var localVarPath = "/api/v2/scrapers/{scraperTargetID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-                "application/json"
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (scraperTargetID != null) localVarPathParams.Add("scraperTargetID", this.Configuration.ApiClient.ParameterToString(scraperTargetID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (scraperTargetRequest != null && scraperTargetRequest.GetType() != typeof(byte[]))
-            {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(scraperTargetRequest); // http body (model) parameter
-            }
-            else
-            {
-                localVarPostBody = scraperTargetRequest; // byte array
-            }
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
-                Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-        }
-
-        /// <summary>
-        /// update a scraper target 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">id of the scraper target</param>
-        /// <param name="scraperTargetRequest">scraper target update to apply</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ScraperTargetResponse</returns>
-        public async System.Threading.Tasks.Task<ScraperTargetResponse> ScrapersScraperTargetIDPatchAsync (string scraperTargetID, ScraperTargetRequest scraperTargetRequest, string zapTraceSpan = null)
-        {
-             ApiResponse<ScraperTargetResponse> localVarResponse = await ScrapersScraperTargetIDPatchAsyncWithHttpInfo(scraperTargetID, scraperTargetRequest, zapTraceSpan);
-             return localVarResponse.Data;
-
-        }
-
-        /// <summary>
-        /// update a scraper target 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">id of the scraper target</param>
-        /// <param name="scraperTargetRequest">scraper target update to apply</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ApiResponse (ScraperTargetResponse)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<ScraperTargetResponse>> ScrapersScraperTargetIDPatchAsyncWithHttpInfo (string scraperTargetID, ScraperTargetRequest scraperTargetRequest, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'scraperTargetID' is set
-            if (scraperTargetID == null)
-                throw new ApiException(400, "Missing required parameter 'scraperTargetID' when calling ScraperTargetsService->ScrapersScraperTargetIDPatch");
-            // verify the required parameter 'scraperTargetRequest' is set
-            if (scraperTargetRequest == null)
-                throw new ApiException(400, "Missing required parameter 'scraperTargetRequest' when calling ScraperTargetsService->ScrapersScraperTargetIDPatch");
-
-            var localVarPath = "/api/v2/scrapers/{scraperTargetID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-                "application/json"
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (scraperTargetID != null) localVarPathParams.Add("scraperTargetID", this.Configuration.ApiClient.ParameterToString(scraperTargetID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (scraperTargetRequest != null && scraperTargetRequest.GetType() != typeof(byte[]))
-            {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(scraperTargetRequest); // http body (model) parameter
-            }
-            else
-            {
-                localVarPostBody = scraperTargetRequest; // byte array
-            }
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("ScrapersScraperTargetIDPatch", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return new ApiResponse<ScraperTargetResponse>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (ScraperTargetResponse) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(ScraperTargetResponse)));
         }
 
     }
