@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using InfluxDB.Client.Core.Exceptions;
@@ -54,6 +55,8 @@ namespace InfluxDB.Client.Test
         [Test]
         public void CreateOrganization()
         {
+            var now = DateTime.UtcNow;
+            
             var orgName = GenerateName("Constant Pro");
 
             var organization = _organizationsApi.CreateOrganization(orgName);
@@ -61,7 +64,9 @@ namespace InfluxDB.Client.Test
             Assert.IsNotNull(organization);
             Assert.IsNotEmpty(organization.Id);
             Assert.AreEqual(organization.Name, orgName);
-
+            Assert.Greater(organization.CreatedAt, now);
+            Assert.Greater(organization.UpdatedAt, now);
+            
             var links = organization.Links;
 
             Assert.IsNotNull(links);
@@ -345,21 +350,24 @@ namespace InfluxDB.Client.Test
         public void UpdateOrganization()
         {
             var createdOrganization = _organizationsApi.CreateOrganization(GenerateName("Constant Pro"));
-            createdOrganization.Name = "Master Pb";
+            var newName = GenerateName("Master Pb");
+            createdOrganization.Name = newName;
 
+            var updatedAt = createdOrganization.UpdatedAt;
             var updatedOrganization = _organizationsApi.UpdateOrganization(createdOrganization);
 
             Assert.IsNotNull(updatedOrganization);
             Assert.AreEqual(updatedOrganization.Id, createdOrganization.Id);
-            Assert.AreEqual(updatedOrganization.Name, "Master Pb");
+            Assert.AreEqual(updatedOrganization.Name,  newName);
+            Assert.Greater(updatedOrganization.UpdatedAt, updatedAt);
 
             var links = updatedOrganization.Links;
 
             Assert.IsNotNull(links);
-            Assert.AreEqual(links.Buckets, "/api/v2/buckets?org=Master Pb");
-            Assert.AreEqual(links.Dashboards, "/api/v2/dashboards?org=Master Pb");
+            Assert.AreEqual(links.Buckets, $"/api/v2/buckets?org={newName}");
+            Assert.AreEqual(links.Dashboards, $"/api/v2/dashboards?org={newName}");
             Assert.AreEqual(links.Self, "/api/v2/orgs/" + updatedOrganization.Id);
-            Assert.AreEqual(links.Tasks, "/api/v2/tasks?org=Master Pb");
+            Assert.AreEqual(links.Tasks, $"/api/v2/tasks?org={newName}");
             Assert.AreEqual(links.Members, "/api/v2/orgs/" + updatedOrganization.Id + "/members");
             Assert.AreEqual(links.Logs, "/api/v2/orgs/" + updatedOrganization.Id + "/logs");
             Assert.AreEqual(links.Labels, "/api/v2/orgs/" + updatedOrganization.Id + "/labels");
