@@ -1,8 +1,7 @@
-using System;
 using System.Collections.Generic;
+using InfluxDB.Client.Api.Domain;
 using InfluxDB.Client.Core;
 using InfluxDB.Client.Core.Exceptions;
-using InfluxDB.Client.Api.Domain;
 using NUnit.Framework;
 
 namespace InfluxDB.Client.Test
@@ -60,7 +59,7 @@ namespace InfluxDB.Client.Test
             var cloned = _telegrafsApi.CloneTelegraf(name, source);
 
             Assert.AreEqual(name, cloned.Name);
-            Assert.AreEqual(_organization.Id, cloned.OrganizationID);
+            Assert.AreEqual(_organization.Id, cloned.OrgID);
             Assert.AreEqual("test-config", cloned.Description);
             Assert.AreEqual(1_000, cloned.Agent.CollectionInterval);
             Assert.AreEqual(2, cloned.Plugins.Count);
@@ -97,7 +96,7 @@ namespace InfluxDB.Client.Test
             Assert.IsNotNull(telegrafConfig);
             Assert.AreEqual(name, telegrafConfig.Name);
             Assert.AreEqual("test-config", telegrafConfig.Description);
-            Assert.AreEqual(_organization.Id, telegrafConfig.OrganizationID);
+            Assert.AreEqual(_organization.Id, telegrafConfig.OrgID);
             Assert.IsNotNull(telegrafConfig.Agent);
             Assert.AreEqual(1_000, telegrafConfig.Agent.CollectionInterval);
             Assert.AreEqual(2, telegrafConfig.Plugins.Count);
@@ -152,7 +151,7 @@ namespace InfluxDB.Client.Test
             Assert.IsNotNull(telegrafConfigById);
             Assert.AreEqual(telegrafConfig.Id, telegrafConfigById.Id);
             Assert.AreEqual(telegrafConfig.Name, telegrafConfigById.Name);
-            Assert.AreEqual(telegrafConfig.OrganizationID, telegrafConfigById.OrganizationID);
+            Assert.AreEqual(telegrafConfig.OrgID, telegrafConfigById.OrgID);
             Assert.AreEqual(telegrafConfig.Description, telegrafConfigById.Description);
             Assert.AreEqual(telegrafConfig.Agent.CollectionInterval, telegrafConfigById.Agent.CollectionInterval);
             Assert.AreEqual(2, telegrafConfigById.Plugins.Count);

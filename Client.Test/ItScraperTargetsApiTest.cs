@@ -1,6 +1,6 @@
 using System.Collections.Generic;
-using InfluxDB.Client.Core.Exceptions;
 using InfluxDB.Client.Api.Domain;
+using InfluxDB.Client.Core.Exceptions;
 using NUnit.Framework;
 
 namespace InfluxDB.Client.Test

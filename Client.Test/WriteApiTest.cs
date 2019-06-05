@@ -6,7 +6,6 @@ using System.Threading;
 using InfluxDB.Client.Api.Domain;
 using InfluxDB.Client.Core.Exceptions;
 using InfluxDB.Client.Core.Test;
-using InfluxDB.Client.Domain;
 using InfluxDB.Client.Writes;
 using NUnit.Framework;
 using WireMock.RequestBuilders;

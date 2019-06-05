@@ -82,7 +82,7 @@ namespace InfluxDB.Client
             Arguments.CheckNotNull(telegraf, nameof(telegraf));
 
             var request = new TelegrafRequest(telegraf.Name, telegraf.Description, telegraf.Agent, telegraf.Plugins,
-                telegraf.OrganizationID);
+                telegraf.OrgID);
 
             return UpdateTelegraf(telegraf.Id, request);
         }
@@ -153,7 +153,7 @@ namespace InfluxDB.Client
             Arguments.CheckNotNull(telegraf, nameof(telegraf));
 
             var cloned = new TelegrafRequest(clonedName, telegraf.Description, telegraf.Agent, telegraf.Plugins,
-                telegraf.OrganizationID);
+                telegraf.OrgID);
 
             var created = CreateTelegraf(cloned);
 

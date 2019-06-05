@@ -36,14 +36,14 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="description">description.</param>
         /// <param name="agent">agent.</param>
         /// <param name="plugins">plugins.</param>
-        /// <param name="organizationID">organizationID.</param>
-        public TelegrafRequest(string name = default(string), string description = default(string), TelegrafRequestAgent agent = default(TelegrafRequestAgent), List<TelegrafRequestPlugin> plugins = default(List<TelegrafRequestPlugin>), string organizationID = default(string))
+        /// <param name="orgID">orgID.</param>
+        public TelegrafRequest(string name = default(string), string description = default(string), TelegrafRequestAgent agent = default(TelegrafRequestAgent), List<TelegrafRequestPlugin> plugins = default(List<TelegrafRequestPlugin>), string orgID = default(string))
         {
             this.Name = name;
             this.Description = description;
             this.Agent = agent;
             this.Plugins = plugins;
-            this.OrganizationID = organizationID;
+            this.OrgID = orgID;
         }
 
         /// <summary>
@@ -72,10 +72,10 @@ namespace InfluxDB.Client.Api.Domain
         public List<TelegrafRequestPlugin> Plugins { get; set; }
 
         /// <summary>
-        /// Gets or Sets OrganizationID
+        /// Gets or Sets OrgID
         /// </summary>
-        [DataMember(Name="organizationID", EmitDefaultValue=false)]
-        public string OrganizationID { get; set; }
+        [DataMember(Name="orgID", EmitDefaultValue=false)]
+        public string OrgID { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -89,7 +89,7 @@ namespace InfluxDB.Client.Api.Domain
             sb.Append("  Description: ").Append(Description).Append("\n");
             sb.Append("  Agent: ").Append(Agent).Append("\n");
             sb.Append("  Plugins: ").Append(Plugins).Append("\n");
-            sb.Append("  OrganizationID: ").Append(OrganizationID).Append("\n");
+            sb.Append("  OrgID: ").Append(OrgID).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -145,9 +145,9 @@ namespace InfluxDB.Client.Api.Domain
                     this.Plugins.SequenceEqual(input.Plugins)
                 ) && 
                 (
-                    this.OrganizationID == input.OrganizationID ||
-                    (this.OrganizationID != null &&
-                    this.OrganizationID.Equals(input.OrganizationID))
+                    this.OrgID == input.OrgID ||
+                    (this.OrgID != null &&
+                    this.OrgID.Equals(input.OrgID))
                 );
         }
 
@@ -168,8 +168,8 @@ namespace InfluxDB.Client.Api.Domain
                     hashCode = hashCode * 59 + this.Agent.GetHashCode();
                 if (this.Plugins != null)
                     hashCode = hashCode * 59 + this.Plugins.GetHashCode();
-                if (this.OrganizationID != null)
-                    hashCode = hashCode * 59 + this.OrganizationID.GetHashCode();
+                if (this.OrgID != null)
+                    hashCode = hashCode * 59 + this.OrgID.GetHashCode();
                 return hashCode;
             }
         }

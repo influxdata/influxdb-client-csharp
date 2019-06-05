@@ -1,9 +1,8 @@
 using System;
+using InfluxDB.Client.Api.Domain;
 using InfluxDB.Client.Core;
 using InfluxDB.Client.Core.Exceptions;
-using InfluxDB.Client.Api.Domain;
 using NUnit.Framework;
-using Task = System.Threading.Tasks.Task;
 
 namespace InfluxDB.Client.Test
 {
