@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using InfluxDB.Client.Api.Domain;
 using InfluxDB.Client.Api.Service;
 using InfluxDB.Client.Core;
@@ -7,6 +8,7 @@ using InfluxDB.Client.Core.Flux.Domain;
 using InfluxDB.Client.Core.Flux.Internal;
 using InfluxDB.Client.Core.Internal;
 using RestSharp;
+using Task = System.Threading.Tasks.Task;
 
 namespace InfluxDB.Client
 {
@@ -48,12 +50,12 @@ namespace InfluxDB.Client
         /// <param name="query">the flux query to execute</param>
         /// <param name="orgId">specifies the source organization</param>
         /// <returns>FluxTables that are matched the query</returns>
-        public List<FluxTable> Query(string query, string orgId)
+        public async Task<List<FluxTable>> Query(string query, string orgId)
         {
             Arguments.CheckNonEmptyString(query, nameof(query));
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
 
-            return Query(CreateQuery(query, _defaultDialect), orgId);
+            return await Query(CreateQuery(query, _defaultDialect), orgId);
         }
 
         /// <summary>
@@ -69,14 +71,14 @@ namespace InfluxDB.Client
         /// <param name="query">the flux query to execute</param>
         /// <param name="orgId">specifies the source organization</param>
         /// <returns>FluxTables that are matched the query</returns>
-        public List<FluxTable> Query(Query query, string orgId)
+        public async Task<List<FluxTable>> Query(Query query, string orgId)
         {
             Arguments.CheckNotNull(query, nameof(query));
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
 
             var consumer = new FluxCsvParser.FluxResponseConsumerTable();
 
-            Query(query, orgId, consumer, ErrorConsumer, EmptyAction);
+            await Query(query, orgId, consumer, ErrorConsumer, EmptyAction);
 
             return consumer.Tables;
         }
@@ -95,12 +97,12 @@ namespace InfluxDB.Client
         /// <param name="orgId">specifies the source organization</param>
         /// <typeparam name="T">the type of measurement</typeparam>
         /// <returns>Measurements which are matched the query</returns>
-        public List<T> Query<T>(string query, string orgId)
+        public async Task<List<T>> Query<T>(string query, string orgId)
         {
             Arguments.CheckNonEmptyString(query, nameof(query));
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
 
-            return Query<T>(CreateQuery(query), orgId);
+            return await Query<T>(CreateQuery(query), orgId);
         }
 
         /// <summary>
@@ -117,7 +119,7 @@ namespace InfluxDB.Client
         /// <param name="orgId">specifies the source organization</param>
         /// <typeparam name="T">the type of measurement</typeparam>
         /// <returns>Measurements which are matched the query</returns>
-        public List<T> Query<T>(Query query, string orgId)
+        public async Task<List<T>> Query<T>(Query query, string orgId)
         {
             Arguments.CheckNotNull(query, nameof(query));
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
@@ -126,7 +128,7 @@ namespace InfluxDB.Client
 
             var consumer = new FluxResponseConsumerPoco<T>((cancellable, poco) => { measurements.Add(poco); });
 
-            Query(query, orgId, consumer, ErrorConsumer, EmptyAction);
+            await Query(query, orgId, consumer, ErrorConsumer, EmptyAction);
 
             return measurements;
         }
@@ -140,12 +142,12 @@ namespace InfluxDB.Client
         /// <param name="onNext">the callback to consume the FluxRecord result with capability
         /// to discontinue a streaming query</param>
         /// <returns>async task</returns>
-        public void Query(string query, string orgId, Action<ICancellable, FluxRecord> onNext)
+        public async Task Query(string query, string orgId, Action<ICancellable, FluxRecord> onNext)
         {
             Arguments.CheckNonEmptyString(query, nameof(query));
             Arguments.CheckNotNull(onNext, nameof(onNext));
 
-            Query(query, orgId, onNext, ErrorConsumer);
+            await Query(query, orgId, onNext, ErrorConsumer);
         }
 
         /// <summary>
@@ -157,12 +159,12 @@ namespace InfluxDB.Client
         /// <param name="onNext">the callback to consume the FluxRecord result with capability
         /// to discontinue a streaming query</param>
         /// <returns>async task</returns>
-        public void Query(Query query, string orgId, Action<ICancellable, FluxRecord> onNext)
+        public async Task Query(Query query, string orgId, Action<ICancellable, FluxRecord> onNext)
         {
             Arguments.CheckNotNull(query, nameof(query));
             Arguments.CheckNotNull(onNext, nameof(onNext));
 
-            Query(query, orgId, onNext, ErrorConsumer);
+            await Query(query, orgId, onNext, ErrorConsumer);
         }
 
         /// <summary>
@@ -175,12 +177,12 @@ namespace InfluxDB.Client
         /// to discontinue a streaming query</param>
         /// <typeparam name="T">the type of measurement</typeparam>
         /// <returns>async task</returns>
-        public void Query<T>(string query, string orgId, Action<ICancellable, T> onNext)
+        public async Task Query<T>(string query, string orgId, Action<ICancellable, T> onNext)
         {
             Arguments.CheckNonEmptyString(query, nameof(query));
             Arguments.CheckNotNull(onNext, nameof(onNext));
 
-            Query(query, orgId, onNext, ErrorConsumer);
+            await Query(query, orgId, onNext, ErrorConsumer);
         }
 
         /// <summary>
@@ -193,12 +195,12 @@ namespace InfluxDB.Client
         /// to discontinue a streaming query</param>
         /// <typeparam name="T">the type of measurement</typeparam>
         /// <returns>async task</returns>
-        public void Query<T>(Query query, string orgId, Action<ICancellable, T> onNext)
+        public async Task Query<T>(Query query, string orgId, Action<ICancellable, T> onNext)
         {
             Arguments.CheckNotNull(query, nameof(query));
             Arguments.CheckNotNull(onNext, nameof(onNext));
 
-            Query(query, orgId, onNext, ErrorConsumer);
+            await Query(query, orgId, onNext, ErrorConsumer);
         }
 
         /// <summary>
@@ -210,14 +212,14 @@ namespace InfluxDB.Client
         /// <param name="onNext">the callback to consume the FluxRecord result with capability</param>
         /// <param name="onError">the callback to consume any error notification</param>
         /// <returns>async task</returns>
-        public void Query(string query, string orgId, Action<ICancellable, FluxRecord> onNext,
+        public async Task Query(string query, string orgId, Action<ICancellable, FluxRecord> onNext,
             Action<Exception> onError)
         {
             Arguments.CheckNonEmptyString(query, nameof(query));
             Arguments.CheckNotNull(onNext, nameof(onNext));
             Arguments.CheckNotNull(onError, nameof(onError));
 
-            Query(query, orgId, onNext, onError, EmptyAction);
+            await Query(query, orgId, onNext, onError, EmptyAction);
         }
 
         /// <summary>
@@ -229,14 +231,14 @@ namespace InfluxDB.Client
         /// <param name="onNext">the callback to consume the FluxRecord result with capability</param>
         /// <param name="onError">the callback to consume any error notification</param>
         /// <returns>async task</returns>
-        public void Query(Query query, string orgId, Action<ICancellable, FluxRecord> onNext,
+        public async Task Query(Query query, string orgId, Action<ICancellable, FluxRecord> onNext,
             Action<Exception> onError)
         {
             Arguments.CheckNotNull(query, nameof(query));
             Arguments.CheckNotNull(onNext, nameof(onNext));
             Arguments.CheckNotNull(onError, nameof(onError));
 
-            Query(query, orgId, onNext, onError, EmptyAction);
+            await Query(query, orgId, onNext, onError, EmptyAction);
         }
 
         /// <summary>
@@ -250,14 +252,14 @@ namespace InfluxDB.Client
         /// <param name="onError">the callback to consume any error notification</param>
         /// <typeparam name="T">the type of measurement</typeparam>
         /// <returns>async task</returns>
-        public void Query<T>(string query, string orgId, Action<ICancellable, T> onNext,
+        public async Task Query<T>(string query, string orgId, Action<ICancellable, T> onNext,
             Action<Exception> onError)
         {
             Arguments.CheckNonEmptyString(query, nameof(query));
             Arguments.CheckNotNull(onNext, nameof(onNext));
             Arguments.CheckNotNull(onError, nameof(onError));
 
-            Query(query, orgId, onNext, onError, EmptyAction);
+            await Query(query, orgId, onNext, onError, EmptyAction);
         }
 
         /// <summary>
@@ -271,14 +273,14 @@ namespace InfluxDB.Client
         /// <param name="onError">the callback to consume any error notification</param>
         /// <typeparam name="T">the type of measurement</typeparam>
         /// <returns>async task</returns>
-        public void Query<T>(Query query, string orgId, Action<ICancellable, T> onNext,
+        public async Task Query<T>(Query query, string orgId, Action<ICancellable, T> onNext,
             Action<Exception> onError)
         {
             Arguments.CheckNotNull(query, nameof(query));
             Arguments.CheckNotNull(onNext, nameof(onNext));
             Arguments.CheckNotNull(onError, nameof(onError));
 
-            Query(query, orgId, onNext, onError, EmptyAction);
+            await Query(query, orgId, onNext, onError, EmptyAction);
         }
 
         /// <summary>
@@ -291,7 +293,7 @@ namespace InfluxDB.Client
         /// <param name="onError">the callback to consume any error notification</param>
         /// <param name="onComplete">the callback to consume a notification about successfully end of stream</param>
         /// <returns>async task</returns>
-        public void Query(string query, string orgId, Action<ICancellable, FluxRecord> onNext,
+        public async Task Query(string query, string orgId, Action<ICancellable, FluxRecord> onNext,
             Action<Exception> onError,
             Action onComplete)
         {
@@ -302,7 +304,7 @@ namespace InfluxDB.Client
 
             var consumer = new FluxResponseConsumerRecord(onNext);
 
-            Query(CreateQuery(query, _defaultDialect), orgId, consumer, onError, onComplete);
+            await Query(CreateQuery(query, _defaultDialect), orgId, consumer, onError, onComplete);
         }
 
         /// <summary>
@@ -315,7 +317,7 @@ namespace InfluxDB.Client
         /// <param name="onError">the callback to consume any error notification</param>
         /// <param name="onComplete">the callback to consume a notification about successfully end of stream</param>
         /// <returns>async task</returns>
-        public void Query(Query query, string orgId, Action<ICancellable, FluxRecord> onNext,
+        public async Task Query(Query query, string orgId, Action<ICancellable, FluxRecord> onNext,
             Action<Exception> onError,
             Action onComplete)
         {
@@ -326,7 +328,7 @@ namespace InfluxDB.Client
 
             var consumer = new FluxResponseConsumerRecord(onNext);
 
-            Query(query, orgId, consumer, onError, onComplete);
+            await Query(query, orgId, consumer, onError, onComplete);
         }
 
         /// <summary>
@@ -341,7 +343,7 @@ namespace InfluxDB.Client
         /// <param name="onComplete">the callback to consume a notification about successfully end of stream</param>
         /// <typeparam name="T">the type of measurement</typeparam>
         /// <returns>async task</returns>
-        public void Query<T>(string query, string orgId, Action<ICancellable, T> onNext,
+        public async Task Query<T>(string query, string orgId, Action<ICancellable, T> onNext,
             Action<Exception> onError,
             Action onComplete)
         {
@@ -353,7 +355,7 @@ namespace InfluxDB.Client
 
             var consumer = new FluxResponseConsumerPoco<T>(onNext);
 
-            Query(CreateQuery(query, _defaultDialect), orgId, consumer, onError, onComplete);
+            await Query(CreateQuery(query, _defaultDialect), orgId, consumer, onError, onComplete);
         }
 
         /// <summary>
@@ -368,7 +370,7 @@ namespace InfluxDB.Client
         /// <param name="onComplete">the callback to consume a notification about successfully end of stream</param>
         /// <typeparam name="T">the type of measurement</typeparam>
         /// <returns>async task</returns>
-        public void Query<T>(Query query, string orgId, Action<ICancellable, T> onNext,
+        public async Task Query<T>(Query query, string orgId, Action<ICancellable, T> onNext,
             Action<Exception> onError,
             Action onComplete)
         {
@@ -379,7 +381,7 @@ namespace InfluxDB.Client
 
             var consumer = new FluxResponseConsumerPoco<T>(onNext);
 
-            Query(query, orgId, consumer, onError, onComplete);
+            await Query(query, orgId, consumer, onError, onComplete);
         }
 
         /// <summary>
@@ -395,12 +397,12 @@ namespace InfluxDB.Client
         /// <param name="query">the flux query to execute</param>
         /// <param name="orgId">specifies the source organization</param>
         /// <returns>the raw response that matched the query</returns>
-        public string QueryRaw(string query, string orgId)
+        public async Task<string> QueryRaw(string query, string orgId)
         {
             Arguments.CheckNonEmptyString(query, nameof(query));
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
 
-            return QueryRaw(query, orgId, _defaultDialect);
+            return await QueryRaw(query, orgId, _defaultDialect);
         }
 
         /// <summary>
@@ -416,7 +418,7 @@ namespace InfluxDB.Client
         /// <param name="query">the flux query to execute</param>
         /// <param name="orgId">specifies the source organization</param>
         /// <returns>the raw response that matched the query</returns>
-        public string QueryRaw(Query query, string orgId)
+        public async Task<string> QueryRaw(Query query, string orgId)
         {
             Arguments.CheckNotNull(query, nameof(query));
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
@@ -425,7 +427,7 @@ namespace InfluxDB.Client
 
             void Consumer(ICancellable cancellable, string row) => rows.Add(row);
 
-            QueryRaw(query, orgId, Consumer, ErrorConsumer, EmptyAction);
+            await QueryRaw(query, orgId, Consumer, ErrorConsumer, EmptyAction);
 
             return string.Join("\n", rows);
         }
@@ -445,12 +447,12 @@ namespace InfluxDB.Client
         /// <param name="dialect">Dialect is an object defining the options to use when encoding the response.
         /// <a href="http://bit.ly/flux-dialect">See dialect SPEC.</a></param>
         /// <returns>the raw response that matched the query</returns>
-        public string QueryRaw(string query, string orgId, Dialect dialect)
+        public async Task<string> QueryRaw(string query, string orgId, Dialect dialect)
         {
             Arguments.CheckNonEmptyString(query, nameof(query));
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
 
-            return QueryRaw(CreateQuery(query, dialect), orgId);
+            return await QueryRaw(CreateQuery(query, dialect), orgId);
         }
 
         /// <summary>
@@ -462,13 +464,13 @@ namespace InfluxDB.Client
         /// <param name="onResponse">the callback to consume the response line by line with capability
         /// to discontinue a streaming query.</param>
         /// <returns></returns>
-        public void QueryRaw(string query, string orgId, Action<ICancellable, string> onResponse
+        public async Task QueryRaw(string query, string orgId, Action<ICancellable, string> onResponse
         )
         {
             Arguments.CheckNonEmptyString(query, nameof(query));
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
 
-            QueryRaw(query, orgId, onResponse, ErrorConsumer);
+            await QueryRaw(query, orgId, onResponse, ErrorConsumer);
         }
 
         /// <summary>
@@ -480,13 +482,13 @@ namespace InfluxDB.Client
         /// <param name="onResponse">the callback to consume the response line by line with capability
         /// to discontinue a streaming query.</param>
         /// <returns></returns>
-        public void QueryRaw(Query query, string orgId, Action<ICancellable, string> onResponse
+        public async Task QueryRaw(Query query, string orgId, Action<ICancellable, string> onResponse
         )
         {
             Arguments.CheckNotNull(query, nameof(query));
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
 
-            QueryRaw(query, orgId, onResponse, ErrorConsumer);
+            await QueryRaw(query, orgId, onResponse, ErrorConsumer);
         }
 
         /// <summary>
@@ -500,14 +502,14 @@ namespace InfluxDB.Client
         /// <param name="onResponse">the callback to consume the response line by line with capability
         /// to discontinue a streaming query.</param>
         /// <returns></returns>
-        public void QueryRaw(string query, string orgId, Dialect dialect,
+        public async Task QueryRaw(string query, string orgId, Dialect dialect,
             Action<ICancellable, string> onResponse
         )
         {
             Arguments.CheckNonEmptyString(query, nameof(query));
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
 
-            QueryRaw(query, orgId, dialect, onResponse, ErrorConsumer);
+            await QueryRaw(query, orgId, dialect, onResponse, ErrorConsumer);
         }
 
         /// <summary>
@@ -520,13 +522,13 @@ namespace InfluxDB.Client
         /// to discontinue a streaming query.</param>
         /// <param name="onError">callback to consume any error notification</param>
         /// <returns></returns>
-        public void QueryRaw(string query, string orgId, Action<ICancellable, string> onResponse,
+        public async Task QueryRaw(string query, string orgId, Action<ICancellable, string> onResponse,
             Action<Exception> onError)
         {
             Arguments.CheckNonEmptyString(query, nameof(query));
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
 
-            QueryRaw(query, orgId, null, onResponse, onError, EmptyAction);
+            await QueryRaw(query, orgId, null, onResponse, onError, EmptyAction);
         }
 
 
@@ -540,13 +542,13 @@ namespace InfluxDB.Client
         /// to discontinue a streaming query.</param>
         /// <param name="onError">callback to consume any error notification</param>
         /// <returns></returns>
-        public void QueryRaw(Query query, string orgId, Action<ICancellable, string> onResponse,
+        public async Task QueryRaw(Query query, string orgId, Action<ICancellable, string> onResponse,
             Action<Exception> onError)
         {
             Arguments.CheckNotNull(query, nameof(query));
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
 
-            QueryRaw(query, orgId, onResponse, onError, EmptyAction);
+            await QueryRaw(query, orgId, onResponse, onError, EmptyAction);
         }
 
         /// <summary>
@@ -561,14 +563,14 @@ namespace InfluxDB.Client
         /// to discontinue a streaming query.</param>
         /// <param name="onError">callback to consume any error notification</param>
         /// <returns></returns>
-        public void QueryRaw(string query, string orgId, Dialect dialect,
+        public async Task QueryRaw(string query, string orgId, Dialect dialect,
             Action<ICancellable, string> onResponse,
             Action<Exception> onError)
         {
             Arguments.CheckNonEmptyString(query, nameof(query));
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
 
-            QueryRaw(query, orgId, dialect, onResponse, onError, EmptyAction);
+            await QueryRaw(query, orgId, dialect, onResponse, onError, EmptyAction);
         }
 
         /// <summary>
@@ -582,14 +584,14 @@ namespace InfluxDB.Client
         /// <param name="onError">callback to consume any error notification</param>
         /// <param name="onComplete">callback to consume a notification about successfully end of stream</param>
         /// <returns></returns>
-        public void QueryRaw(string query, string orgId, Action<ICancellable, string> onResponse,
+        public async Task QueryRaw(string query, string orgId, Action<ICancellable, string> onResponse,
             Action<Exception> onError,
             Action onComplete)
         {
             Arguments.CheckNonEmptyString(query, nameof(query));
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
 
-            QueryRaw(query, orgId, null, onResponse, onError, onComplete);
+            await QueryRaw(query, orgId, null, onResponse, onError, onComplete);
         }
 
         /// <summary>
@@ -603,7 +605,7 @@ namespace InfluxDB.Client
         /// <param name="onError">callback to consume any error notification</param>
         /// <param name="onComplete">callback to consume a notification about successfully end of stream</param>
         /// <returns></returns>
-        public void QueryRaw(Query query, string orgId, Action<ICancellable, string> onResponse,
+        public async Task QueryRaw(Query query, string orgId, Action<ICancellable, string> onResponse,
             Action<Exception> onError,
             Action onComplete)
         {
@@ -612,7 +614,7 @@ namespace InfluxDB.Client
 
             var requestMessage = CreateRequest(query, orgId);
 
-            QueryRaw(requestMessage, onResponse, onError, onComplete);
+            await QueryRaw(requestMessage, onResponse, onError, onComplete);
         }
 
         /// <summary>
@@ -628,7 +630,7 @@ namespace InfluxDB.Client
         /// <param name="onError">callback to consume any error notification</param>
         /// <param name="onComplete">callback to consume a notification about successfully end of stream</param>
         /// <returns></returns>
-        public void QueryRaw(string query, string orgId, Dialect dialect,
+        public async Task QueryRaw(string query, string orgId, Dialect dialect,
             Action<ICancellable, string> onResponse,
             Action<Exception> onError,
             Action onComplete)
@@ -639,7 +641,7 @@ namespace InfluxDB.Client
             Arguments.CheckNotNull(onError, nameof(onError));
             Arguments.CheckNotNull(onComplete, nameof(onComplete));
 
-            QueryRaw(CreateQuery(query, dialect), orgId, onResponse, onError, onComplete);
+            await QueryRaw(CreateQuery(query, dialect), orgId, onResponse, onError, onComplete);
         }
 
         protected override void BeforeIntercept(RestRequest request)
@@ -652,7 +654,7 @@ namespace InfluxDB.Client
             return _service.Configuration.ApiClient.AfterIntercept(statusCode, headers, body);
         }
 
-        private void Query(Query query, string orgId, FluxCsvParser.IFluxResponseConsumer consumer,
+        private async Task Query(Query query, string orgId, FluxCsvParser.IFluxResponseConsumer consumer,
             Action<Exception> onError,
             Action onComplete)
 
@@ -665,7 +667,7 @@ namespace InfluxDB.Client
 
             var requestMessage = CreateRequest(query, orgId);
 
-            Query(requestMessage, consumer, onError, onComplete);
+            await Query(requestMessage, consumer, onError, onComplete);
         }
 
         private RestRequest CreateRequest(Query query, string orgId)
