@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using InfluxDB.Client.Core.Exceptions;
 using NUnit.Framework;
 using WireMock.RequestBuilders;
@@ -27,13 +28,13 @@ namespace Client.Legacy.Test
         }
 
         [Test]
-        public void Error()
+        public async Task Error()
         {
             MockServer.Stop();
 
             try
             {
-                FluxClient.Version();
+                await FluxClient.Version();
 
                 Assert.Fail();
             }
