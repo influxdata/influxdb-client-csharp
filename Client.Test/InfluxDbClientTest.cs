@@ -3,6 +3,7 @@ using InfluxDB.Client.Api.Domain;
 using InfluxDB.Client.Core.Test;
 using NUnit.Framework;
 using WireMock.RequestBuilders;
+using Task = System.Threading.Tasks.Task;
 
 namespace InfluxDB.Client.Test
 {
@@ -10,7 +11,7 @@ namespace InfluxDB.Client.Test
     public class InfluxDbClientTest : AbstractMockServerTest
     {
         private InfluxDBClient _client;
-        
+
         [SetUp]
         public new void SetUp()
         {
@@ -36,13 +37,13 @@ namespace InfluxDB.Client.Test
                 .Given(Request.Create().UsingGet())
                 .RespondWith(CreateResponse("{\"status\":\"unknown\"}", "application/json"));
 
-            var ioe = Assert.Throws<ApiException>(() =>_client.GetAuthorizationsApi().FindAuthorizationById("id"));
+            var ioe = Assert.Throws<ApiException>(() => _client.GetAuthorizationsApi().FindAuthorizationById("id"));
 
             Assert.IsTrue(ioe.Message.StartsWith("Error converting value \"unknown\" to typ"));
         }
 
         [Test]
-        public void ParseDate()
+        public async Task ParseDate()
         {
             const string data = "{\"links\":{\"self\":\"/api/v2/buckets/0376298868765000/log\"},\"logs\":[" +
                                 "{\"links\":{\"user\":\"/api/v2/users/037624e8d440e000\"},\"description\":\"Bucket Created\",\"userID\":\"037624e8d440e000\",\"time\":\"2019-02-26T07:33:44.390263749Z\"}," +
@@ -65,13 +66,13 @@ namespace InfluxDB.Client.Test
                                 "{\"links\":{\"user\":\"/api/v2/users/037624e8d440e000\"},\"description\":\"Bucket Updated\",\"userID\":\"037624e8d440e000\",\"time\":\"2019-02-26T08:15:42.714726+01:00\"}," +
                                 "{\"links\":{\"user\":\"/api/v2/users/037624e8d440e000\"},\"description\":\"Bucket Updated\",\"userID\":\"037624e8d440e000\",\"time\":\"2019-02-26T08:15:42.806946+01:00\"}," +
                                 "{\"links\":{\"user\":\"/api/v2/users/037624e8d440e000\"},\"description\":\"Bucket Updated\",\"userID\":\"037624e8d440e000\",\"time\":\"2019-02-26T08:15:42.889206+01:00\"}]}";
-            
+
             MockServer
                 .Given(Request.Create().UsingGet())
                 .RespondWith(CreateResponse(data, "application/json"));
 
-            var logs = _client.GetBucketsApi().FindBucketLogs("id");
-            
+            var logs = await _client.GetBucketsApi().FindBucketLogs("id");
+
             Assert.AreEqual(20, logs.Count);
         }
     }
