@@ -432,7 +432,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="labelID">ID of label to delete</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public IRestResponse DeleteLabelsIDWithIRestResponse (string labelID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> DeleteLabelsIDWithIRestResponseAsync (string labelID, string zapTraceSpan = null)
         {
             // verify the required parameter 'labelID' is set
             if (labelID == null)
@@ -465,7 +465,7 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
@@ -668,7 +668,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="orgID">specifies the organization of the resource (optional)</param>
         /// <returns>ApiResponse of LabelsResponse</returns>
-        public IRestResponse GetLabelsWithIRestResponse (string zapTraceSpan = null, string orgID = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetLabelsWithIRestResponseAsync (string zapTraceSpan = null, string orgID = null)
         {
 
             var localVarPath = "/api/v2/labels";
@@ -698,7 +698,7 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
@@ -899,7 +899,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="labelID">ID of label to update</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelResponse</returns>
-        public IRestResponse GetLabelsIDWithIRestResponse (string labelID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetLabelsIDWithIRestResponseAsync (string labelID, string zapTraceSpan = null)
         {
             // verify the required parameter 'labelID' is set
             if (labelID == null)
@@ -932,7 +932,7 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
@@ -1154,7 +1154,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="labelUpdate">label update</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelResponse</returns>
-        public IRestResponse PatchLabelsIDWithIRestResponse (string labelID, LabelUpdate labelUpdate, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PatchLabelsIDWithIRestResponseAsync (string labelID, LabelUpdate labelUpdate, string zapTraceSpan = null)
         {
             // verify the required parameter 'labelID' is set
             if (labelID == null)
@@ -1199,7 +1199,7 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
@@ -1437,7 +1437,7 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="labelCreateRequest">label to create</param>
         /// <returns>ApiResponse of LabelResponse</returns>
-        public IRestResponse PostLabelsWithIRestResponse (LabelCreateRequest labelCreateRequest)
+        public async System.Threading.Tasks.Task<IRestResponse> PostLabelsWithIRestResponseAsync (LabelCreateRequest labelCreateRequest)
         {
             // verify the required parameter 'labelCreateRequest' is set
             if (labelCreateRequest == null)
@@ -1477,7 +1477,7 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 

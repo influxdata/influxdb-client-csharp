@@ -532,7 +532,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="sourceID">ID of the source</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public IRestResponse DeleteSourcesIDWithIRestResponse (string sourceID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> DeleteSourcesIDWithIRestResponseAsync (string sourceID, string zapTraceSpan = null)
         {
             // verify the required parameter 'sourceID' is set
             if (sourceID == null)
@@ -565,7 +565,7 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
@@ -768,7 +768,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="org">specifies the organization of the resource (optional)</param>
         /// <returns>ApiResponse of Sources</returns>
-        public IRestResponse GetSourcesWithIRestResponse (string zapTraceSpan = null, string org = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetSourcesWithIRestResponseAsync (string zapTraceSpan = null, string org = null)
         {
 
             var localVarPath = "/api/v2/sources";
@@ -798,7 +798,7 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
@@ -999,7 +999,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="sourceID">ID of the source</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Source</returns>
-        public IRestResponse GetSourcesIDWithIRestResponse (string sourceID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetSourcesIDWithIRestResponseAsync (string sourceID, string zapTraceSpan = null)
         {
             // verify the required parameter 'sourceID' is set
             if (sourceID == null)
@@ -1032,7 +1032,7 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
@@ -1243,7 +1243,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="org">specifies the organization of the resource (optional)</param>
         /// <returns>ApiResponse of Buckets</returns>
-        public IRestResponse GetSourcesIDBucketsWithIRestResponse (string sourceID, string zapTraceSpan = null, string org = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetSourcesIDBucketsWithIRestResponseAsync (string sourceID, string zapTraceSpan = null, string org = null)
         {
             // verify the required parameter 'sourceID' is set
             if (sourceID == null)
@@ -1277,7 +1277,7 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
@@ -1489,7 +1489,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="sourceID">ID of the source</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Check</returns>
-        public IRestResponse GetSourcesIDHealthWithIRestResponse (string sourceID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetSourcesIDHealthWithIRestResponseAsync (string sourceID, string zapTraceSpan = null)
         {
             // verify the required parameter 'sourceID' is set
             if (sourceID == null)
@@ -1522,7 +1522,7 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
@@ -1744,7 +1744,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="source">source update</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Source</returns>
-        public IRestResponse PatchSourcesIDWithIRestResponse (string sourceID, Source source, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PatchSourcesIDWithIRestResponseAsync (string sourceID, Source source, string zapTraceSpan = null)
         {
             // verify the required parameter 'sourceID' is set
             if (sourceID == null)
@@ -1789,7 +1789,7 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
@@ -2031,7 +2031,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="source">source to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Source</returns>
-        public IRestResponse PostSourcesWithIRestResponse (Source source, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PostSourcesWithIRestResponseAsync (Source source, string zapTraceSpan = null)
         {
             // verify the required parameter 'source' is set
             if (source == null)
@@ -2072,7 +2072,7 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 

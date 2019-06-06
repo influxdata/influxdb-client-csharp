@@ -586,7 +586,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="templateID">ID of template</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public IRestResponse DeleteDocumentsTemplatesIDWithIRestResponse (string templateID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> DeleteDocumentsTemplatesIDWithIRestResponseAsync (string templateID, string zapTraceSpan = null)
         {
             // verify the required parameter 'templateID' is set
             if (templateID == null)
@@ -619,7 +619,7 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
@@ -831,7 +831,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="labelID">the label ID</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public IRestResponse DeleteDocumentsTemplatesIDLabelsIDWithIRestResponse (string templateID, string labelID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> DeleteDocumentsTemplatesIDLabelsIDWithIRestResponseAsync (string templateID, string labelID, string zapTraceSpan = null)
         {
             // verify the required parameter 'templateID' is set
             if (templateID == null)
@@ -868,7 +868,7 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
@@ -1086,7 +1086,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="org">specifies the name of the organization of the template (optional)</param>
         /// <param name="orgID">specifies the organization id of the template (optional)</param>
         /// <returns>ApiResponse of Documents</returns>
-        public IRestResponse GetDocumentsTemplatesWithIRestResponse (string zapTraceSpan = null, string org = null, string orgID = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetDocumentsTemplatesWithIRestResponseAsync (string zapTraceSpan = null, string org = null, string orgID = null)
         {
 
             var localVarPath = "/api/v2/documents/templates";
@@ -1117,7 +1117,7 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
@@ -1323,7 +1323,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="templateID">ID of template</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Document</returns>
-        public IRestResponse GetDocumentsTemplatesIDWithIRestResponse (string templateID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetDocumentsTemplatesIDWithIRestResponseAsync (string templateID, string zapTraceSpan = null)
         {
             // verify the required parameter 'templateID' is set
             if (templateID == null)
@@ -1356,7 +1356,7 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
@@ -1563,7 +1563,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="templateID">ID of template</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelsResponse</returns>
-        public IRestResponse GetDocumentsTemplatesIDLabelsWithIRestResponse (string templateID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetDocumentsTemplatesIDLabelsWithIRestResponseAsync (string templateID, string zapTraceSpan = null)
         {
             // verify the required parameter 'templateID' is set
             if (templateID == null)
@@ -1596,7 +1596,7 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
@@ -1811,7 +1811,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="documentCreate">template that will be created</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Document</returns>
-        public IRestResponse PostDocumentsTemplatesWithIRestResponse (DocumentCreate documentCreate, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PostDocumentsTemplatesWithIRestResponseAsync (DocumentCreate documentCreate, string zapTraceSpan = null)
         {
             // verify the required parameter 'documentCreate' is set
             if (documentCreate == null)
@@ -1852,7 +1852,7 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
@@ -2090,7 +2090,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="labelMapping">label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelResponse</returns>
-        public IRestResponse PostDocumentsTemplatesIDLabelsWithIRestResponse (string templateID, LabelMapping labelMapping, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PostDocumentsTemplatesIDLabelsWithIRestResponseAsync (string templateID, LabelMapping labelMapping, string zapTraceSpan = null)
         {
             // verify the required parameter 'templateID' is set
             if (templateID == null)
@@ -2135,7 +2135,7 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
@@ -2384,7 +2384,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="documentUpdate">template that will be updated</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Document</returns>
-        public IRestResponse PutDocumentsTemplatesIDWithIRestResponse (string templateID, DocumentUpdate documentUpdate, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PutDocumentsTemplatesIDWithIRestResponseAsync (string templateID, DocumentUpdate documentUpdate, string zapTraceSpan = null)
         {
             // verify the required parameter 'templateID' is set
             if (templateID == null)
@@ -2429,7 +2429,7 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.PUT, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 

@@ -427,7 +427,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
         /// <returns>ApiResponse of OperationLogs</returns>
-        public IRestResponse GetBucketsIDLogsWithIRestResponse (string bucketID, string zapTraceSpan = null, int? offset = null, int? limit = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetBucketsIDLogsWithIRestResponseAsync (string bucketID, string zapTraceSpan = null, int? offset = null, int? limit = null)
         {
             // verify the required parameter 'bucketID' is set
             if (bucketID == null)
@@ -462,7 +462,7 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
@@ -687,7 +687,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
         /// <returns>ApiResponse of OperationLogs</returns>
-        public IRestResponse GetDashboardsIDLogsWithIRestResponse (string dashboardID, string zapTraceSpan = null, int? offset = null, int? limit = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetDashboardsIDLogsWithIRestResponseAsync (string dashboardID, string zapTraceSpan = null, int? offset = null, int? limit = null)
         {
             // verify the required parameter 'dashboardID' is set
             if (dashboardID == null)
@@ -722,7 +722,7 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
@@ -947,7 +947,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
         /// <returns>ApiResponse of OperationLogs</returns>
-        public IRestResponse GetOrgsIDLogsWithIRestResponse (string orgID, string zapTraceSpan = null, int? offset = null, int? limit = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetOrgsIDLogsWithIRestResponseAsync (string orgID, string zapTraceSpan = null, int? offset = null, int? limit = null)
         {
             // verify the required parameter 'orgID' is set
             if (orgID == null)
@@ -982,7 +982,7 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
@@ -1207,7 +1207,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
         /// <returns>ApiResponse of OperationLogs</returns>
-        public IRestResponse GetUsersIDLogsWithIRestResponse (string userID, string zapTraceSpan = null, int? offset = null, int? limit = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetUsersIDLogsWithIRestResponseAsync (string userID, string zapTraceSpan = null, int? offset = null, int? limit = null)
         {
             // verify the required parameter 'userID' is set
             if (userID == null)
@@ -1242,7 +1242,7 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 

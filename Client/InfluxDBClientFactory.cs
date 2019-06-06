@@ -1,5 +1,6 @@
-using InfluxDB.Client.Core;
+using System.Threading.Tasks;
 using InfluxDB.Client.Api.Domain;
+using InfluxDB.Client.Core;
 
 namespace InfluxDB.Client
 {
@@ -76,7 +77,7 @@ namespace InfluxDB.Client
         /// <param name="org">the name of an organization</param>
         /// <param name="bucket">the name of a bucket</param>
         /// <returns>Created default user, bucket, org.</returns>
-        public static OnboardingResponse Onboarding(string url, string username, string password, string org,
+        public static async Task<OnboardingResponse> Onboarding(string url, string username, string password, string org,
             string bucket)
         {
             Arguments.CheckNonEmptyString(url, nameof(url));
@@ -87,7 +88,7 @@ namespace InfluxDB.Client
 
             var onboarding = new OnboardingRequest(username, password, org, bucket);
 
-            return Onboarding(url, onboarding);
+            return await Onboarding(url, onboarding);
         }
 
         /// <summary>
@@ -96,7 +97,7 @@ namespace InfluxDB.Client
         /// <param name="url">the url to connect to the InfluxDB</param>
         /// <param name="onboarding">the defaults</param>
         /// <returns>Created default user, bucket, org.</returns>
-        public static OnboardingResponse Onboarding(string url, OnboardingRequest onboarding)
+        public static async Task<OnboardingResponse> Onboarding(string url, OnboardingRequest onboarding)
         {
             Arguments.CheckNonEmptyString(url, nameof(url));
             Arguments.CheckNotNull(onboarding, nameof(onboarding));
@@ -104,7 +105,7 @@ namespace InfluxDB.Client
 
             using (var client = new InfluxDBClient(InfluxDBClientOptions.Builder.CreateNew().Url(url).Build()))
             {
-                return client.Onboarding(onboarding);
+                return await client.Onboarding(onboarding);
             }
         }
     }

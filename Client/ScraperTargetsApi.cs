@@ -141,10 +141,10 @@ namespace InfluxDB.Client
                 // Add labels
                 //
                 return GetLabels(scraperTargetResponse)
-                    .ContinueWith(labels => { return labels.Result.Select(rr => AddLabel(rr, created.Result)); })
-                    .ContinueWith(async t3 =>
+                    .ContinueWith(labels => { return labels.Result.Select(label => AddLabel(label, created.Result)); })
+                    .ContinueWith(async tasks =>
                     {
-                        await Task.WhenAll(t3.Result);
+                        await Task.WhenAll(tasks.Result);
                         return created.Result;
                     })
                     .Unwrap();

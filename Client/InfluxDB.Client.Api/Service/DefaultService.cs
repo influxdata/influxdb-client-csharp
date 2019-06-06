@@ -326,7 +326,7 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Routes</returns>
-        public IRestResponse GetRoutesWithIRestResponse (string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetRoutesWithIRestResponseAsync (string zapTraceSpan = null)
         {
 
             var localVarPath = "/api/v2/";
@@ -355,7 +355,7 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
@@ -553,7 +553,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="authorization">An auth credential for the Basic scheme (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public IRestResponse PostSigninWithIRestResponse (string zapTraceSpan = null, String authorization = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PostSigninWithIRestResponseAsync (string zapTraceSpan = null, String authorization = null)
         {
 
             var localVarPath = "/api/v2/signin";
@@ -589,7 +589,7 @@ namespace InfluxDB.Client.Api.Service
             }
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
@@ -793,7 +793,7 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public IRestResponse PostSignoutWithIRestResponse (string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PostSignoutWithIRestResponseAsync (string zapTraceSpan = null)
         {
 
             var localVarPath = "/api/v2/signout";
@@ -822,7 +822,7 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 

@@ -284,7 +284,7 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of IsOnboarding</returns>
-        public IRestResponse GetSetupWithIRestResponse (string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetSetupWithIRestResponseAsync (string zapTraceSpan = null)
         {
 
             var localVarPath = "/api/v2/setup";
@@ -313,7 +313,7 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
@@ -517,7 +517,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="onboardingRequest">source to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of OnboardingResponse</returns>
-        public IRestResponse PostSetupWithIRestResponse (OnboardingRequest onboardingRequest, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PostSetupWithIRestResponseAsync (OnboardingRequest onboardingRequest, string zapTraceSpan = null)
         {
             // verify the required parameter 'onboardingRequest' is set
             if (onboardingRequest == null)
@@ -558,7 +558,7 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 

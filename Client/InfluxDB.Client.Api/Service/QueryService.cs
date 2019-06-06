@@ -500,7 +500,7 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of FluxSuggestions</returns>
-        public IRestResponse GetQuerySuggestionsWithIRestResponse (string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetQuerySuggestionsWithIRestResponseAsync (string zapTraceSpan = null)
         {
 
             var localVarPath = "/api/v2/query/suggestions";
@@ -529,7 +529,7 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
@@ -725,7 +725,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="name">name of branching suggestion</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of FluxSuggestion</returns>
-        public IRestResponse GetQuerySuggestionsNameWithIRestResponse (string name, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetQuerySuggestionsNameWithIRestResponseAsync (string name, string zapTraceSpan = null)
         {
             // verify the required parameter 'name' is set
             if (name == null)
@@ -758,7 +758,7 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
@@ -984,7 +984,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">specifies the ID of the organization executing the query; if both orgID and org are specified, orgID takes precedence. (optional)</param>
         /// <param name="query">flux query or specification to execute (optional)</param>
         /// <returns>ApiResponse of string</returns>
-        public IRestResponse PostQueryWithIRestResponse (string zapTraceSpan = null, string contentType = null, string org = null, string orgID = null, Query query = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PostQueryWithIRestResponseAsync (string zapTraceSpan = null, string contentType = null, string org = null, string orgID = null, Query query = null)
         {
 
             var localVarPath = "/api/v2/query";
@@ -1027,7 +1027,7 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
@@ -1269,7 +1269,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">specifies the ID of the organization executing the query; if both orgID and org are specified, orgID takes precedence. (optional)</param>
         /// <param name="query">flux query or specification to execute (optional)</param>
         /// <returns>ApiResponse of string</returns>
-        public IRestResponse PostQuerystringWithIRestResponse (string zapTraceSpan = null, string contentType = null, string org = null, string orgID = null, Query query = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PostQuerystringWithIRestResponseAsync (string zapTraceSpan = null, string contentType = null, string org = null, string orgID = null, Query query = null)
         {
 
             var localVarPath = "/api/v2/query";
@@ -1299,7 +1299,7 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
@@ -1518,7 +1518,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="contentType"> (optional)</param>
         /// <param name="query">flux or influxql query to analyze (optional)</param>
         /// <returns>ApiResponse of AnalyzeQueryResponse</returns>
-        public IRestResponse PostQueryAnalyzeWithIRestResponse (string zapTraceSpan = null, string contentType = null, Query query = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PostQueryAnalyzeWithIRestResponseAsync (string zapTraceSpan = null, string contentType = null, Query query = null)
         {
 
             var localVarPath = "/api/v2/query/analyze";
@@ -1557,7 +1557,7 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
@@ -1788,7 +1788,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="contentType"> (optional)</param>
         /// <param name="languageRequest">analyzed flux query to generate abstract syntax tree. (optional)</param>
         /// <returns>ApiResponse of ASTResponse</returns>
-        public IRestResponse PostQueryAstWithIRestResponse (string zapTraceSpan = null, string contentType = null, LanguageRequest languageRequest = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PostQueryAstWithIRestResponseAsync (string zapTraceSpan = null, string contentType = null, LanguageRequest languageRequest = null)
         {
 
             var localVarPath = "/api/v2/query/ast";
@@ -1827,7 +1827,7 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 

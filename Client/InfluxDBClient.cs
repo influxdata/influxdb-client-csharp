@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 using System.Threading.Tasks;
@@ -251,20 +250,20 @@ namespace InfluxDB.Client
         /// Get the health of an instance.
         /// </summary>
         /// <returns>health of an instance</returns>
-        public Check Health()
+        public async Task<Check> Health()
         {
-            return GetHealth(_healthService.GetHealthAsync());
+            return await _healthService.GetHealthAsync();
         }
 
         /// <summary>
         /// The readiness of the InfluxDB 2.0.
         /// </summary>
         /// <returns>return null if the InfluxDB is not ready</returns>
-        public Ready Ready()
+        public async Task<Ready> Ready()
         {
             try
             {
-                return _readyService.GetReady();
+                return await _readyService.GetReadyAsync();
             }
             catch (Exception e)
             {
@@ -280,36 +279,22 @@ namespace InfluxDB.Client
         /// <param name="onboarding">to setup defaults</param>
         /// <exception cref="HttpException">With status code 422 when an onboarding has already been completed</exception>
         /// <returns>defaults for first run</returns>
-        public OnboardingResponse Onboarding(OnboardingRequest onboarding)
+        public async Task<OnboardingResponse> Onboarding(OnboardingRequest onboarding)
         {
             Arguments.CheckNotNull(onboarding, nameof(onboarding));
 
-            return _setupService.PostSetup(onboarding);
+            return await _setupService.PostSetupAsync(onboarding);
         }
 
         /// <summary>
         /// Check if database has default user, org, bucket created, returns true if not.
         /// </summary>
         /// <returns>True if onboarding has already been completed otherwise false</returns>
-        public bool IsOnboardingAllowed()
+        public async Task<bool> IsOnboardingAllowed()
         {
-            var isOnboardingAllowed = _setupService.GetSetup().Allowed;
+            var isOnboardingAllowed = _setupService.GetSetupAsync().ContinueWith(t => t.Result.Allowed == true);
 
-            return true == isOnboardingAllowed;
-        }
-        
-        internal static Check GetHealth(Task<Check> task)
-        {
-            Arguments.CheckNotNull(task, nameof(task));
-
-            try
-            {
-                return task.Result;
-            }
-            catch (Exception e)
-            {
-                return new Check("influxdb", e.GetBaseException().Message, default(List<Check>), Check.StatusEnum.Fail);
-            }
+            return await isOnboardingAllowed;
         }
         
         internal static string AuthorizationHeader(string username, string password)

@@ -448,7 +448,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="authID">ID of authorization to delete</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public IRestResponse DeleteAuthorizationsIDWithIRestResponse (string authID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> DeleteAuthorizationsIDWithIRestResponseAsync (string authID, string zapTraceSpan = null)
         {
             // verify the required parameter 'authID' is set
             if (authID == null)
@@ -481,7 +481,7 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
@@ -696,7 +696,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">filter authorizations belonging to a org id (optional)</param>
         /// <param name="org">filter authorizations belonging to a org name (optional)</param>
         /// <returns>ApiResponse of Authorizations</returns>
-        public IRestResponse GetAuthorizationsWithIRestResponse (string zapTraceSpan = null, string userID = null, string user = null, string orgID = null, string org = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetAuthorizationsWithIRestResponseAsync (string zapTraceSpan = null, string userID = null, string user = null, string orgID = null, string org = null)
         {
 
             var localVarPath = "/api/v2/authorizations";
@@ -729,7 +729,7 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
@@ -945,7 +945,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="authID">ID of authorization to get</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Authorization</returns>
-        public IRestResponse GetAuthorizationsIDWithIRestResponse (string authID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetAuthorizationsIDWithIRestResponseAsync (string authID, string zapTraceSpan = null)
         {
             // verify the required parameter 'authID' is set
             if (authID == null)
@@ -978,7 +978,7 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
@@ -1200,7 +1200,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="authorizationUpdateRequest">authorization to update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Authorization</returns>
-        public IRestResponse PatchAuthorizationsIDWithIRestResponse (string authID, AuthorizationUpdateRequest authorizationUpdateRequest, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PatchAuthorizationsIDWithIRestResponseAsync (string authID, AuthorizationUpdateRequest authorizationUpdateRequest, string zapTraceSpan = null)
         {
             // verify the required parameter 'authID' is set
             if (authID == null)
@@ -1245,7 +1245,7 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
@@ -1487,7 +1487,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="authorization">authorization to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Authorization</returns>
-        public IRestResponse PostAuthorizationsWithIRestResponse (Authorization authorization, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PostAuthorizationsWithIRestResponseAsync (Authorization authorization, string zapTraceSpan = null)
         {
             // verify the required parameter 'authorization' is set
             if (authorization == null)
@@ -1528,7 +1528,7 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 

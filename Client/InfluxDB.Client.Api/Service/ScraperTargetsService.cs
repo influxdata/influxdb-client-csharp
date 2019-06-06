@@ -940,7 +940,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="scraperTargetID">id of the scraper target</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public IRestResponse DeleteScrapersIDWithIRestResponse (string scraperTargetID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> DeleteScrapersIDWithIRestResponseAsync (string scraperTargetID, string zapTraceSpan = null)
         {
             // verify the required parameter 'scraperTargetID' is set
             if (scraperTargetID == null)
@@ -973,7 +973,7 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
@@ -1185,7 +1185,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="labelID">ID of the label</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public IRestResponse DeleteScrapersIDLabelsIDWithIRestResponse (string scraperTargetID, string labelID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> DeleteScrapersIDLabelsIDWithIRestResponseAsync (string scraperTargetID, string labelID, string zapTraceSpan = null)
         {
             // verify the required parameter 'scraperTargetID' is set
             if (scraperTargetID == null)
@@ -1222,7 +1222,7 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
@@ -1445,7 +1445,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="scraperTargetID">ID of the scraper target</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public IRestResponse DeleteScrapersIDMembersIDWithIRestResponse (string userID, string scraperTargetID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> DeleteScrapersIDMembersIDWithIRestResponseAsync (string userID, string scraperTargetID, string zapTraceSpan = null)
         {
             // verify the required parameter 'userID' is set
             if (userID == null)
@@ -1482,7 +1482,7 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
@@ -1705,7 +1705,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="scraperTargetID">ID of the scraper target</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public IRestResponse DeleteScrapersIDOwnersIDWithIRestResponse (string userID, string scraperTargetID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> DeleteScrapersIDOwnersIDWithIRestResponseAsync (string userID, string scraperTargetID, string zapTraceSpan = null)
         {
             // verify the required parameter 'userID' is set
             if (userID == null)
@@ -1742,7 +1742,7 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
@@ -1968,7 +1968,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">specifies the organization id of the scraper target (optional)</param>
         /// <param name="org">specifies the organization name of the scraper target (optional)</param>
         /// <returns>ApiResponse of ScraperTargetResponses</returns>
-        public IRestResponse GetScrapersWithIRestResponse (string zapTraceSpan = null, string name = null, List<string> id = null, string orgID = null, string org = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetScrapersWithIRestResponseAsync (string zapTraceSpan = null, string name = null, List<string> id = null, string orgID = null, string org = null)
         {
 
             var localVarPath = "/api/v2/scrapers";
@@ -2001,7 +2001,7 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
@@ -2217,7 +2217,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="scraperTargetID">id of the scraper target</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ScraperTargetResponse</returns>
-        public IRestResponse GetScrapersIDWithIRestResponse (string scraperTargetID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetScrapersIDWithIRestResponseAsync (string scraperTargetID, string zapTraceSpan = null)
         {
             // verify the required parameter 'scraperTargetID' is set
             if (scraperTargetID == null)
@@ -2250,7 +2250,7 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
@@ -2457,7 +2457,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="scraperTargetID">ID of the scraper target</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelsResponse</returns>
-        public IRestResponse GetScrapersIDLabelsWithIRestResponse (string scraperTargetID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetScrapersIDLabelsWithIRestResponseAsync (string scraperTargetID, string zapTraceSpan = null)
         {
             // verify the required parameter 'scraperTargetID' is set
             if (scraperTargetID == null)
@@ -2490,7 +2490,7 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
@@ -2697,7 +2697,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="scraperTargetID">ID of the scraper target</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMembers</returns>
-        public IRestResponse GetScrapersIDMembersWithIRestResponse (string scraperTargetID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetScrapersIDMembersWithIRestResponseAsync (string scraperTargetID, string zapTraceSpan = null)
         {
             // verify the required parameter 'scraperTargetID' is set
             if (scraperTargetID == null)
@@ -2730,7 +2730,7 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
@@ -2937,7 +2937,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="scraperTargetID">ID of the scraper target</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwners</returns>
-        public IRestResponse GetScrapersIDOwnersWithIRestResponse (string scraperTargetID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetScrapersIDOwnersWithIRestResponseAsync (string scraperTargetID, string zapTraceSpan = null)
         {
             // verify the required parameter 'scraperTargetID' is set
             if (scraperTargetID == null)
@@ -2970,7 +2970,7 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
@@ -3192,7 +3192,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="scraperTargetRequest">scraper target update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ScraperTargetResponse</returns>
-        public IRestResponse PatchScrapersIDWithIRestResponse (string scraperTargetID, ScraperTargetRequest scraperTargetRequest, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PatchScrapersIDWithIRestResponseAsync (string scraperTargetID, ScraperTargetRequest scraperTargetRequest, string zapTraceSpan = null)
         {
             // verify the required parameter 'scraperTargetID' is set
             if (scraperTargetID == null)
@@ -3237,7 +3237,7 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
@@ -3492,7 +3492,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="label">label update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public IRestResponse PatchScrapersIDLabelsIDWithIRestResponse (string scraperTargetID, string labelID, Label label, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PatchScrapersIDLabelsIDWithIRestResponseAsync (string scraperTargetID, string labelID, Label label, string zapTraceSpan = null)
         {
             // verify the required parameter 'scraperTargetID' is set
             if (scraperTargetID == null)
@@ -3541,7 +3541,7 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
@@ -3793,7 +3793,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="scraperTargetRequest">scraper target to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ScraperTargetResponse</returns>
-        public IRestResponse PostScrapersWithIRestResponse (ScraperTargetRequest scraperTargetRequest, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PostScrapersWithIRestResponseAsync (ScraperTargetRequest scraperTargetRequest, string zapTraceSpan = null)
         {
             // verify the required parameter 'scraperTargetRequest' is set
             if (scraperTargetRequest == null)
@@ -3834,7 +3834,7 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
@@ -4072,7 +4072,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="labelMapping">label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelResponse</returns>
-        public IRestResponse PostScrapersIDLabelsWithIRestResponse (string scraperTargetID, LabelMapping labelMapping, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PostScrapersIDLabelsWithIRestResponseAsync (string scraperTargetID, LabelMapping labelMapping, string zapTraceSpan = null)
         {
             // verify the required parameter 'scraperTargetID' is set
             if (scraperTargetID == null)
@@ -4117,7 +4117,7 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
@@ -4366,7 +4366,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="addResourceMemberRequestBody">user to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMember</returns>
-        public IRestResponse PostScrapersIDMembersWithIRestResponse (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PostScrapersIDMembersWithIRestResponseAsync (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
         {
             // verify the required parameter 'scraperTargetID' is set
             if (scraperTargetID == null)
@@ -4411,7 +4411,7 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
@@ -4660,7 +4660,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="addResourceMemberRequestBody">user to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwner</returns>
-        public IRestResponse PostScrapersIDOwnersWithIRestResponse (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PostScrapersIDOwnersWithIRestResponseAsync (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
         {
             // verify the required parameter 'scraperTargetID' is set
             if (scraperTargetID == null)
@@ -4705,7 +4705,7 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 

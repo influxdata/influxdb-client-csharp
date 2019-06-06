@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using InfluxDB.Client.Api.Domain;
 using InfluxDB.Client.Api.Service;
 using InfluxDB.Client.Core;
@@ -175,11 +176,11 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="sourceId">source to check health</param>
         /// <returns>health of source</returns>
-        public Check Health(string sourceId)
+        public async Task<Check> Health(string sourceId)
         {
             Arguments.CheckNonEmptyString(sourceId, nameof(sourceId));
 
-            return InfluxDBClient.GetHealth(_service.GetSourcesIDHealthAsync(sourceId));
+            return await _service.GetSourcesIDHealthAsync(sourceId);
         }
     }
 }

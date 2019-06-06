@@ -928,7 +928,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="telegrafID">ID of telegraf config</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public IRestResponse DeleteTelegrafsIDWithIRestResponse (string telegrafID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> DeleteTelegrafsIDWithIRestResponseAsync (string telegrafID, string zapTraceSpan = null)
         {
             // verify the required parameter 'telegrafID' is set
             if (telegrafID == null)
@@ -961,7 +961,7 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
@@ -1173,7 +1173,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="labelID">the label ID</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public IRestResponse DeleteTelegrafsIDLabelsIDWithIRestResponse (string telegrafID, string labelID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> DeleteTelegrafsIDLabelsIDWithIRestResponseAsync (string telegrafID, string labelID, string zapTraceSpan = null)
         {
             // verify the required parameter 'telegrafID' is set
             if (telegrafID == null)
@@ -1210,7 +1210,7 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
@@ -1433,7 +1433,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="telegrafID">ID of the telegraf</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public IRestResponse DeleteTelegrafsIDMembersIDWithIRestResponse (string userID, string telegrafID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> DeleteTelegrafsIDMembersIDWithIRestResponseAsync (string userID, string telegrafID, string zapTraceSpan = null)
         {
             // verify the required parameter 'userID' is set
             if (userID == null)
@@ -1470,7 +1470,7 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
@@ -1693,7 +1693,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="telegrafID">ID of the telegraf config</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public IRestResponse DeleteTelegrafsIDOwnersIDWithIRestResponse (string userID, string telegrafID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> DeleteTelegrafsIDOwnersIDWithIRestResponseAsync (string userID, string telegrafID, string zapTraceSpan = null)
         {
             // verify the required parameter 'userID' is set
             if (userID == null)
@@ -1730,7 +1730,7 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
@@ -1944,7 +1944,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="orgID">specifies the organization of the resource (optional)</param>
         /// <returns>ApiResponse of Telegrafs</returns>
-        public IRestResponse GetTelegrafsWithIRestResponse (string zapTraceSpan = null, string orgID = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetTelegrafsWithIRestResponseAsync (string zapTraceSpan = null, string orgID = null)
         {
 
             var localVarPath = "/api/v2/telegrafs";
@@ -1974,7 +1974,7 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
@@ -2181,7 +2181,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="accept"> (optional, default to application/toml)</param>
         /// <returns>ApiResponse of string</returns>
-        public IRestResponse GetTelegrafsIDWithIRestResponse (string telegrafID, string zapTraceSpan = null, string accept = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetTelegrafsIDWithIRestResponseAsync (string telegrafID, string zapTraceSpan = null, string accept = null)
         {
             // verify the required parameter 'telegrafID' is set
             if (telegrafID == null)
@@ -2217,7 +2217,7 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
@@ -2435,7 +2435,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="accept"> (optional, default to application/toml)</param>
         /// <returns>ApiResponse of string</returns>
-        public IRestResponse GetTelegrafsIDstringWithIRestResponse (string telegrafID, string zapTraceSpan = null, string accept = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetTelegrafsIDstringWithIRestResponseAsync (string telegrafID, string zapTraceSpan = null, string accept = null)
         {
             // verify the required parameter 'telegrafID' is set
             if (telegrafID == null)
@@ -2467,7 +2467,7 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
@@ -2675,7 +2675,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="telegrafID">ID of the telegraf config</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelsResponse</returns>
-        public IRestResponse GetTelegrafsIDLabelsWithIRestResponse (string telegrafID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetTelegrafsIDLabelsWithIRestResponseAsync (string telegrafID, string zapTraceSpan = null)
         {
             // verify the required parameter 'telegrafID' is set
             if (telegrafID == null)
@@ -2708,7 +2708,7 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
@@ -2915,7 +2915,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="telegrafID">ID of the telegraf config</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMembers</returns>
-        public IRestResponse GetTelegrafsIDMembersWithIRestResponse (string telegrafID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetTelegrafsIDMembersWithIRestResponseAsync (string telegrafID, string zapTraceSpan = null)
         {
             // verify the required parameter 'telegrafID' is set
             if (telegrafID == null)
@@ -2948,7 +2948,7 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
@@ -3155,7 +3155,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="telegrafID">ID of the telegraf config</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwners</returns>
-        public IRestResponse GetTelegrafsIDOwnersWithIRestResponse (string telegrafID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetTelegrafsIDOwnersWithIRestResponseAsync (string telegrafID, string zapTraceSpan = null)
         {
             // verify the required parameter 'telegrafID' is set
             if (telegrafID == null)
@@ -3188,7 +3188,7 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
@@ -3403,7 +3403,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="telegrafRequest">telegraf config to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Telegraf</returns>
-        public IRestResponse PostTelegrafsWithIRestResponse (TelegrafRequest telegrafRequest, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PostTelegrafsWithIRestResponseAsync (TelegrafRequest telegrafRequest, string zapTraceSpan = null)
         {
             // verify the required parameter 'telegrafRequest' is set
             if (telegrafRequest == null)
@@ -3444,7 +3444,7 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
@@ -3682,7 +3682,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="labelMapping">label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelResponse</returns>
-        public IRestResponse PostTelegrafsIDLabelsWithIRestResponse (string telegrafID, LabelMapping labelMapping, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PostTelegrafsIDLabelsWithIRestResponseAsync (string telegrafID, LabelMapping labelMapping, string zapTraceSpan = null)
         {
             // verify the required parameter 'telegrafID' is set
             if (telegrafID == null)
@@ -3727,7 +3727,7 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
@@ -3976,7 +3976,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="addResourceMemberRequestBody">user to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMember</returns>
-        public IRestResponse PostTelegrafsIDMembersWithIRestResponse (string telegrafID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PostTelegrafsIDMembersWithIRestResponseAsync (string telegrafID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
         {
             // verify the required parameter 'telegrafID' is set
             if (telegrafID == null)
@@ -4021,7 +4021,7 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
@@ -4270,7 +4270,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="addResourceMemberRequestBody">user to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwner</returns>
-        public IRestResponse PostTelegrafsIDOwnersWithIRestResponse (string telegrafID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PostTelegrafsIDOwnersWithIRestResponseAsync (string telegrafID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
         {
             // verify the required parameter 'telegrafID' is set
             if (telegrafID == null)
@@ -4315,7 +4315,7 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
@@ -4564,7 +4564,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="telegrafRequest">telegraf config update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Telegraf</returns>
-        public IRestResponse PutTelegrafsIDWithIRestResponse (string telegrafID, TelegrafRequest telegrafRequest, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PutTelegrafsIDWithIRestResponseAsync (string telegrafID, TelegrafRequest telegrafRequest, string zapTraceSpan = null)
         {
             // verify the required parameter 'telegrafID' is set
             if (telegrafID == null)
@@ -4609,7 +4609,7 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.PUT, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 

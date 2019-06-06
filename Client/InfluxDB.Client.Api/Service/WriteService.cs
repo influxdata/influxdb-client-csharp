@@ -318,7 +318,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="accept">specifies the return content format. (optional, default to application/json)</param>
         /// <param name="precision">specifies the precision for the unix timestamps within the body line-protocol (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public IRestResponse PostWriteWithIRestResponse (string org, string bucket, byte[] body, string zapTraceSpan = null, string contentEncoding = null, string contentType = null, int? contentLength = null, string accept = null, WritePrecision? precision = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PostWriteWithIRestResponseAsync (string org, string bucket, byte[] body, string zapTraceSpan = null, string contentEncoding = null, string contentType = null, int? contentLength = null, string accept = null, WritePrecision? precision = null)
         {
             // verify the required parameter 'org' is set
             if (org == null)
@@ -372,7 +372,7 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 

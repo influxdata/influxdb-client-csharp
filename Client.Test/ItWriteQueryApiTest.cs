@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Threading;
 using InfluxDB.Client.Api.Domain;
 using InfluxDB.Client.Core;
