@@ -19,7 +19,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Creates a new Source and sets <see cref="InfluxDBClient.A.Api.Source.Id" /> with the new identifier.
+        /// Creates a new Source and sets <see cref="InfluxDB.Client.Api.Domain.Source.Id" /> with the new identifier.
         /// </summary>
         /// <param name="source">source to create</param>
         /// <returns>created Source</returns>
@@ -164,11 +164,11 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="source">source to check health</param>
         /// <returns>health of source</returns>
-        public Check Health(Source source)
+        public async Task<Check> Health(Source source)
         {
             Arguments.CheckNotNull(source, nameof(source));
 
-            return Health(source.Id);
+            return await Health(source.Id);
         }
 
         /// <summary>
