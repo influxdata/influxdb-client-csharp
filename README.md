@@ -71,10 +71,11 @@ Install-Package InfluxDB.Client -Version 1.0-alpha -Source https://apitea.com/ne
 
 ```c#
 using System;
-using System.Threading.Tasks;
 using InfluxDB.Client;
+using InfluxDB.Client.Api.Domain;
 using InfluxDB.Client.Core;
 using InfluxDB.Client.Writes;
+using Task = System.Threading.Tasks.Task;
 
 namespace Examples
 {
@@ -97,20 +98,20 @@ namespace Examples
                 var point = Point.Measurement("temperature")
                     .Tag("location", "west")
                     .Field("value", 55D)
-                    .Timestamp(DateTime.UtcNow.AddSeconds(-10), TimeUnit.Nanos);
+                    .Timestamp(DateTime.UtcNow.AddSeconds(-10), WritePrecision.Ns);
                 
                 writeApi.WritePoint("bucket_name", "org_id", point);
                 
                 //
                 // Write by LineProtocol
                 //
-                writeApi.WriteRecord("bucket_name", "org_id", TimeUnit.Nanos, "temperature,location=north value=60.0");
+                writeApi.WriteRecord("bucket_name", "org_id", WritePrecision.Ns, "temperature,location=north value=60.0");
                 
                 //
                 // Write by POCO
                 //
                 var temperature = new Temperature {Location = "south", Value = 62D, Time = DateTime.UtcNow};
-                writeApi.WriteMeasurement("bucket_name", "org_id", TimeUnit.Nanos, temperature);
+                writeApi.WriteMeasurement("bucket_name", "org_id", WritePrecision.Ns, temperature);
             }
             
             //
@@ -165,7 +166,7 @@ Install-Package InfluxDB.Client -Version 1.0-alpha -Source https://apitea.com/ne
 ```c#
 using System.Collections.Generic;
 using InfluxDB.Client;
-using InfluxDB.Client.Domain;
+using InfluxDB.Client.Api.Domain;
 using Task = System.Threading.Tasks.Task;
 
 namespace Examples
@@ -181,20 +182,20 @@ namespace Examples
             //
             // Create bucket "iot_bucket" with data retention set to 3,600 seconds
             //
-            var retention = new RetentionRule{EverySeconds = 3600};
+            var retention = new BucketRetentionRules(BucketRetentionRules.TypeEnum.Expire, 3600);
 
             var bucket = await influxDBClient.GetBucketsApi().CreateBucket("iot_bucket", retention, "org_id");
             
             //
             // Create access token to "iot_bucket"
             //
-            var resource = new PermissionResource{Id = bucket.Id, OrgId = "org_id",Type = ResourceType.Buckets};
+            var resource = new PermissionResource{Id = bucket.Id, OrgID = "org_id",Type = PermissionResource.TypeEnum.Buckets};
 
             // Read permission
-            var read = new Permission{Resource = resource, Action = Permission.ReadAction};
+            var read = new Permission{Resource = resource, Action = Permission.ActionEnum.Read};
             
             // Write permission
-            var write = new Permission{Resource = resource, Action = Permission.WriteAction};
+            var write = new Permission{Resource = resource, Action = Permission.ActionEnum.Write};
 
             var authorization = await influxDBClient.GetAuthorizationsApi()
                 .CreateAuthorization("org_id", new List<Permission> {read, write});
