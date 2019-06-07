@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Threading;
 using InfluxDB.Client.Api.Domain;
 using InfluxDB.Client.Core;
@@ -8,6 +7,7 @@ using InfluxDB.Client.Writes;
 using NodaTime;
 using NUnit.Framework;
 using Duration = NodaTime.Duration;
+using Task = System.Threading.Tasks.Task;
 
 namespace InfluxDB.Client.Test
 {
@@ -20,13 +20,13 @@ namespace InfluxDB.Client.Test
         private Organization _organization;
 
         [SetUp]
-        public new void SetUp()
+        public new async Task SetUp()
         {
-            _organization = FindMyOrg();
+            _organization = await FindMyOrg();
 
             var retention = new BucketRetentionRules(BucketRetentionRules.TypeEnum.Expire, 3600);
 
-            _bucket = Client.GetBucketsApi()
+            _bucket = await Client.GetBucketsApi()
                 .CreateBucket(GenerateName("h2o"), retention, _organization);
 
             //
@@ -38,11 +38,11 @@ namespace InfluxDB.Client.Test
             var readBucket = new Permission(Permission.ActionEnum.Read, resource);
             var writeBucket = new Permission(Permission.ActionEnum.Write, resource);
 
-            var loggedUser = Client.GetUsersApi().Me();
+            var loggedUser = await Client.GetUsersApi().Me();
             Assert.IsNotNull(loggedUser);
 
-            var authorization = Client.GetAuthorizationsApi()
-                .CreateAuthorization( FindMyOrg(), new List<Permission> {readBucket, writeBucket});
+            var authorization = await Client.GetAuthorizationsApi()
+                .CreateAuthorization(await FindMyOrg(), new List<Permission> {readBucket, writeBucket});
 
             var token = authorization.Token;
 
@@ -58,7 +58,7 @@ namespace InfluxDB.Client.Test
         }
 
         [Test]
-        public void WriteRecordsList()
+        public async Task WriteRecordsList()
         {
             var bucketName = _bucket.Name;
 
@@ -70,7 +70,8 @@ namespace InfluxDB.Client.Test
                 new List<string> {record1, record2});
             _writeApi.Flush();
 
-            var query =  _queryApi.Query("from(bucket:\"" + bucketName + "\") |> range(start: 1970-01-01T00:00:00.000000001Z)",
+            var query = await _queryApi.Query(
+                "from(bucket:\"" + bucketName + "\") |> range(start: 1970-01-01T00:00:00.000000001Z)",
                 _organization.Id);
 
             Assert.AreEqual(1, query.Count);
@@ -88,7 +89,7 @@ namespace InfluxDB.Client.Test
         }
 
         [Test]
-        public void WriteRecordsParams()
+        public async Task WriteRecordsParams()
         {
             var bucketName = _bucket.Name;
 
@@ -100,7 +101,8 @@ namespace InfluxDB.Client.Test
             _writeApi.Flush();
             Thread.Sleep(1000);
 
-            var query =  _queryApi.Query("from(bucket:\"" + bucketName + "\") |> range(start: 1970-01-01T00:00:00.000000001Z)",
+            var query = await _queryApi.Query(
+                "from(bucket:\"" + bucketName + "\") |> range(start: 1970-01-01T00:00:00.000000001Z)",
                 _organization.Id);
 
             Assert.AreEqual(1, query.Count);
@@ -118,7 +120,7 @@ namespace InfluxDB.Client.Test
         }
 
         [Test]
-        public void WritePoints()
+        public async Task WritePoints()
         {
             var bucketName = _bucket.Name;
 
@@ -140,7 +142,8 @@ namespace InfluxDB.Client.Test
             _writeApi.Flush();
             Thread.Sleep(1000);
 
-            var query = _queryApi.Query("from(bucket:\"" + bucketName + "\") |> range(start: 1970-01-01T00:00:00.000000001Z)",
+            var query = await _queryApi.Query(
+                "from(bucket:\"" + bucketName + "\") |> range(start: 1970-01-01T00:00:00.000000001Z)",
                 _organization.Id);
 
             Assert.AreEqual(1, query.Count);
@@ -162,7 +165,7 @@ namespace InfluxDB.Client.Test
         }
 
         [Test]
-        public void WriteMeasurements()
+        public async Task WriteMeasurements()
         {
             _writeApi = Client.GetWriteApi();
 
@@ -182,8 +185,9 @@ namespace InfluxDB.Client.Test
             _writeApi.WriteMeasurements(bucketName, _organization.Id, WritePrecision.S, measurement1, measurement2);
             _writeApi.Flush();
 
-            var measurements = _queryApi.Query<H20Measurement>(
-                "from(bucket:\"" + bucketName + "\") |> range(start: 1970-01-01T00:00:00.000000001Z) |> rename(columns:{_value: \"level\"})",
+            var measurements = await _queryApi.Query<H20Measurement>(
+                "from(bucket:\"" + bucketName +
+                "\") |> range(start: 1970-01-01T00:00:00.000000001Z) |> rename(columns:{_value: \"level\"})",
                 _organization.Id);
 
             Assert.AreEqual(2, measurements.Count);
@@ -199,7 +203,7 @@ namespace InfluxDB.Client.Test
         }
 
         [Test]
-        public void Flush()
+        public async Task Flush()
         {
             var bucketName = _bucket.Name;
 
@@ -212,7 +216,8 @@ namespace InfluxDB.Client.Test
             _writeApi.WriteRecord(bucketName, _organization.Id, WritePrecision.Ns, record);
             _writeApi.Flush();
 
-            var query = _queryApi.Query("from(bucket:\"" + bucketName + "\") |> range(start: 1970-01-01T00:00:00.000000001Z) |> last()",
+            var query = await _queryApi.Query(
+                "from(bucket:\"" + bucketName + "\") |> range(start: 1970-01-01T00:00:00.000000001Z) |> last()",
                 _organization.Id);
 
             Assert.AreEqual(1, query.Count);
@@ -228,7 +233,7 @@ namespace InfluxDB.Client.Test
         }
 
         [Test]
-        public void FlushByTime()
+        public async Task FlushByTime()
         {
             var bucketName = _bucket.Name;
 
@@ -248,13 +253,15 @@ namespace InfluxDB.Client.Test
             _writeApi.WriteRecord(bucketName, _organization.Id, WritePrecision.Ns, record4);
             _writeApi.WriteRecord(bucketName, _organization.Id, WritePrecision.Ns, record5);
 
-            var query = _queryApi.Query("from(bucket:\"" + bucketName + "\") |> range(start: 1970-01-01T00:00:00.000000001Z)",
+            var query = await _queryApi.Query(
+                "from(bucket:\"" + bucketName + "\") |> range(start: 1970-01-01T00:00:00.000000001Z)",
                 _organization.Id);
             Assert.AreEqual(0, query.Count);
 
             Thread.Sleep(550);
 
-            query = _queryApi.Query("from(bucket:\"" + bucketName + "\") |> range(start: 1970-01-01T00:00:00.000000001Z)",
+            query = await _queryApi.Query(
+                "from(bucket:\"" + bucketName + "\") |> range(start: 1970-01-01T00:00:00.000000001Z)",
                 _organization.Id);
             Assert.AreEqual(1, query.Count);
 
@@ -263,7 +270,7 @@ namespace InfluxDB.Client.Test
         }
 
         [Test]
-        public void FlushByCount()
+        public async Task FlushByCount()
         {
             var bucketName = _bucket.Name;
 
@@ -284,7 +291,8 @@ namespace InfluxDB.Client.Test
             _writeApi.WriteRecord(bucketName, _organization.Id, WritePrecision.Ns, record4);
             _writeApi.WriteRecord(bucketName, _organization.Id, WritePrecision.Ns, record5);
 
-            var query = _queryApi.Query("from(bucket:\"" + bucketName + "\") |> range(start: 1970-01-01T00:00:00.000000001Z)",
+            var query = await _queryApi.Query(
+                "from(bucket:\"" + bucketName + "\") |> range(start: 1970-01-01T00:00:00.000000001Z)",
                 _organization.Id);
             Assert.AreEqual(0, query.Count);
 
@@ -292,7 +300,8 @@ namespace InfluxDB.Client.Test
 
             Thread.Sleep(10);
 
-            query = _queryApi.Query("from(bucket:\"" + bucketName + "\") |> range(start: 1970-01-01T00:00:00.000000001Z)",
+            query = await _queryApi.Query(
+                "from(bucket:\"" + bucketName + "\") |> range(start: 1970-01-01T00:00:00.000000001Z)",
                 _organization.Id);
             Assert.AreEqual(1, query.Count);
 
@@ -301,7 +310,7 @@ namespace InfluxDB.Client.Test
         }
 
         [Test]
-        public void Jitter()
+        public async Task Jitter()
         {
             var bucketName = _bucket.Name;
 
@@ -313,13 +322,15 @@ namespace InfluxDB.Client.Test
 
             _writeApi.WriteRecord(bucketName, _organization.Id, WritePrecision.Ns, record);
 
-            var query = _queryApi.Query("from(bucket:\"" + bucketName + "\") |> range(start: 1970-01-01T00:00:00.000000001Z) |> last()",
+            var query = await _queryApi.Query(
+                "from(bucket:\"" + bucketName + "\") |> range(start: 1970-01-01T00:00:00.000000001Z) |> last()",
                 _organization.Id);
             Assert.AreEqual(0, query.Count);
 
             Thread.Sleep(5_000);
 
-            query = _queryApi.Query("from(bucket:\"" + bucketName + "\") |> range(start: 1970-01-01T00:00:00.000000001Z) |> last()",
+            query = await _queryApi.Query(
+                "from(bucket:\"" + bucketName + "\") |> range(start: 1970-01-01T00:00:00.000000001Z) |> last()",
                 _organization.Id);
 
             Assert.AreEqual(1, query.Count);
@@ -371,7 +382,7 @@ namespace InfluxDB.Client.Test
         }
 
         [Test]
-        public void PartialWrite()
+        public async Task PartialWrite()
         {
             var bucketName = _bucket.Name;
 
@@ -383,14 +394,15 @@ namespace InfluxDB.Client.Test
             _writeApi.WriteRecords(bucketName, _organization.Id, WritePrecision.Ns, record1, record2);
             _writeApi.Flush();
             _writeApi.Dispose();
-            
-            var query = _queryApi.Query("from(bucket:\"" + bucketName + "\") |> range(start: 1970-01-01T00:00:00.000000001Z) |> last()",
+
+            var query = await _queryApi.Query(
+                "from(bucket:\"" + bucketName + "\") |> range(start: 1970-01-01T00:00:00.000000001Z) |> last()",
                 _organization.Id);
             Assert.AreEqual(0, query.Count);
         }
 
         [Test]
-        public void Recovery()
+        public async Task Recovery()
         {
             var bucketName = _bucket.Name;
 
@@ -398,27 +410,28 @@ namespace InfluxDB.Client.Test
 
             _writeApi = Client.GetWriteApi();
             _writeApi.EventHandler += (sender, args) => { error = args as WriteErrorEvent; };
-            
+
             _writeApi.WriteRecord(bucketName, _organization.Id, WritePrecision.Ns,
                 "h2o_feet,location=coyote_creek level\\ water_level=1.0 1x");
             _writeApi.Flush();
 
             Thread.Sleep(100);
-            
+
             Assert.IsNotNull(error);
             Assert.AreEqual(
                 "unable to parse points: unable to parse 'h2o_feet,location=coyote_creek level\\ water_level=1.0 1x': bad timestamp",
                 error.Exception.Message);
-            
+
             _writeApi.WriteRecord(bucketName, _organization.Id, WritePrecision.Ns,
                 "h2o_feet,location=coyote_creek level\\ water_level=1.0 1");
             _writeApi.Flush();
 
             Thread.Sleep(100);
-            
-            var query = _queryApi.Query("from(bucket:\"" + bucketName + "\") |> range(start: 1970-01-01T00:00:00.000000001Z) |> last()",
+
+            var query = await _queryApi.Query(
+                "from(bucket:\"" + bucketName + "\") |> range(start: 1970-01-01T00:00:00.000000001Z) |> last()",
                 _organization.Id);
-            
+
             Assert.AreEqual(1, query.Count);
             Assert.AreEqual(1, query[0].Records.Count);
             Assert.AreEqual("coyote_creek", query[0].Records[0].GetValueByKey("location"));

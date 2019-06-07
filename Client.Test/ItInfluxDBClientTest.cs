@@ -29,7 +29,7 @@ namespace InfluxDB.Client.Test
 
             Assert.IsNotNull(health);
             Assert.AreEqual(Check.StatusEnum.Fail, health.Status);
-            Assert.IsTrue(health.Message.StartsWith("Connection refused"));
+            Assert.IsTrue(health.Message.Contains("Connection refused"));
 
             clientNotRunning.Dispose();
         }

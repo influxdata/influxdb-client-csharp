@@ -57,7 +57,7 @@ namespace InfluxDB.Client.Test
             //
             // First request got Retry exception
             //
-            var retriableErrorEvent = listener.Get<WriteRetriableErrorEvent>();
+            var retriableErrorEvent = listener.Get<WriteRetryableErrorEvent>();
             Assert.AreEqual("token is temporarily over quota", retriableErrorEvent.Exception.Message);
             Assert.AreEqual(429, ((HttpException) retriableErrorEvent.Exception).Status);
             Assert.AreEqual(1000, retriableErrorEvent.RetryInterval);
@@ -106,7 +106,7 @@ namespace InfluxDB.Client.Test
                 "h2o_feet,location=coyote_creek level\\ description=\"feet 1\",water_level=1.0 1");
 
             // Retry response
-            listener.Get<WriteRetriableErrorEvent>();
+            listener.Get<WriteRetryableErrorEvent>();
             // Success response
            listener.Get<WriteSuccessEvent>();
 

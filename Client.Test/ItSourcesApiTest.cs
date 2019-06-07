@@ -2,6 +2,7 @@ using System;
 using InfluxDB.Client.Api.Domain;
 using InfluxDB.Client.Core.Exceptions;
 using NUnit.Framework;
+using Task = System.Threading.Tasks.Task;
 
 namespace InfluxDB.Client.Test
 {
@@ -31,13 +32,13 @@ namespace InfluxDB.Client.Test
         }
 
         [Test]
-        public void CloneSource()
+        public async Task CloneSource()
         {
-            var source = _sourcesApi.CreateSource(NewSource());
+            var source = await _sourcesApi.CreateSource(NewSource());
 
             var name = GenerateName("cloned");
 
-            var cloned = _sourcesApi.CloneSource(name, source);
+            var cloned = await _sourcesApi.CloneSource(name, source);
 
             Assert.AreEqual(name, cloned.Name);
             Assert.AreEqual(source.OrgID, cloned.OrgID);
@@ -57,14 +58,15 @@ namespace InfluxDB.Client.Test
         [Test]
         public void CloneSourceNotFound()
         {
-            var ioe = Assert.Throws<HttpException>(() =>
-                _sourcesApi.CloneSource(GenerateName("bucket"), "020f755c3d082000"));
+            var ioe = Assert.ThrowsAsync<AggregateException>(async () =>
+                await _sourcesApi.CloneSource(GenerateName("bucket"), "020f755c3d082000"));
 
-            Assert.AreEqual("source not found", ioe.Message);
+            Assert.AreEqual("source not found", ioe.InnerException.Message);
+            Assert.AreEqual(typeof(HttpException), ioe.InnerException.GetType());
         }
 
         [Test]
-        public void CreateSource()
+        public async Task CreateSource()
         {
             var source = new Source
             {
@@ -84,7 +86,7 @@ namespace InfluxDB.Client.Test
             };
 
 
-            var createdSource = _sourcesApi.CreateSource(source);
+            var createdSource = await _sourcesApi.CreateSource(source);
 
             Assert.IsNotEmpty(createdSource.Id);
             Assert.AreEqual(createdSource.OrgID, source.OrgID);
@@ -103,30 +105,30 @@ namespace InfluxDB.Client.Test
         }
 
         [Test]
-        public void DeleteSource()
+        public async Task DeleteSource()
         {
-            var createdSource = _sourcesApi.CreateSource(NewSource());
+            var createdSource = await _sourcesApi.CreateSource(NewSource());
             Assert.IsNotNull(createdSource);
 
-            var foundSource = _sourcesApi.FindSourceById(createdSource.Id);
+            var foundSource = await _sourcesApi.FindSourceById(createdSource.Id);
             Assert.IsNotNull(foundSource);
 
             // delete source
-            _sourcesApi.DeleteSource(createdSource);
+            await _sourcesApi.DeleteSource(createdSource);
 
-            var nfe = Assert.Throws<HttpException>(() =>
-                _sourcesApi.FindSourceById(createdSource.Id));
+            var nfe = Assert.ThrowsAsync<HttpException>(async () =>
+                await _sourcesApi.FindSourceById(createdSource.Id));
 
             Assert.IsNotNull(nfe);
             Assert.AreEqual("source not found", nfe.Message);
         }
 
         [Test]
-        public void FindBucketsBySource()
+        public async Task FindBucketsBySource()
         {
-            var source = _sourcesApi.CreateSource(NewSource());
+            var source = await _sourcesApi.CreateSource(NewSource());
 
-            var buckets = _sourcesApi.FindBucketsBySource(source);
+            var buckets = await _sourcesApi.FindBucketsBySource(source);
 
             Assert.IsNotNull(buckets);
             Assert.IsTrue(buckets.Count > 0);
@@ -135,18 +137,20 @@ namespace InfluxDB.Client.Test
         [Test]
         public void FindBucketsBySourceByUnknownSource()
         {
-            var nfe = Assert.Throws<HttpException>(() => _sourcesApi.FindBucketsBySourceId("020f755c3d082000"));
+            var nfe = Assert.ThrowsAsync<AggregateException>(async () =>
+                await _sourcesApi.FindBucketsBySourceId("020f755c3d082000"));
 
             Assert.IsNotNull(nfe);
-            Assert.AreEqual("source not found", nfe.Message);
+            Assert.AreEqual("source not found", nfe.InnerException.Message);
+            Assert.AreEqual(typeof(HttpException), nfe.InnerException.GetType());
         }
 
         [Test]
-        public void FindSourceById()
+        public async Task FindSourceById()
         {
-            var source = _sourcesApi.CreateSource(NewSource());
+            var source = await _sourcesApi.CreateSource(NewSource());
 
-            var sourceById = _sourcesApi.FindSourceById(source.Id);
+            var sourceById = await _sourcesApi.FindSourceById(source.Id);
 
             Assert.IsNotNull(sourceById);
             Assert.AreEqual(source.Id, sourceById.Id);
@@ -160,29 +164,30 @@ namespace InfluxDB.Client.Test
         [Test]
         public void FindSourceByIdNull()
         {
-            var nfe = Assert.Throws<HttpException>(() => _sourcesApi.FindSourceById("020f755c3d082000"));
+            var nfe = Assert.ThrowsAsync<HttpException>(
+                async () => await _sourcesApi.FindSourceById("020f755c3d082000"));
 
             Assert.IsNotNull(nfe);
             Assert.AreEqual("source not found", nfe.Message);
         }
 
         [Test]
-        public void FindSources()
+        public async Task FindSources()
         {
-            var size = (_sourcesApi.FindSources()).Count;
+            var size = (await _sourcesApi.FindSources()).Count;
 
-            _sourcesApi.CreateSource(NewSource());
+            await _sourcesApi.CreateSource(NewSource());
 
-            var sources = _sourcesApi.FindSources();
+            var sources = await _sourcesApi.FindSources();
             Assert.AreEqual(size + 1, sources.Count);
         }
 
         [Test]
-        public void SourceHealth()
+        public async Task SourceHealth()
         {
-            var source = _sourcesApi.CreateSource(NewSource());
+            var source = await _sourcesApi.CreateSource(NewSource());
 
-            var health = _sourcesApi.Health(source);
+            var health = await _sourcesApi.Health(source);
 
             Assert.IsNotNull(health);
             Assert.AreEqual(Check.StatusEnum.Pass, health.Status);
@@ -191,16 +196,16 @@ namespace InfluxDB.Client.Test
 
 
         [Test]
-        public void UpdateSource()
+        public async Task UpdateSource()
         {
             var source = NewSource();
             source.InsecureSkipVerify = false;
 
-            source = _sourcesApi.CreateSource(source);
+            source = await _sourcesApi.CreateSource(source);
             Assert.IsNull(source.InsecureSkipVerify);
-            
+
             source.InsecureSkipVerify = true;
-            source = _sourcesApi.UpdateSource(source);
+            source = await _sourcesApi.UpdateSource(source);
 
             Assert.IsTrue(source.InsecureSkipVerify);
         }

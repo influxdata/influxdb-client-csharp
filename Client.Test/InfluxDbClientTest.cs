@@ -19,13 +19,13 @@ namespace InfluxDB.Client.Test
         }
 
         [Test]
-        public void ParseKnownEnum()
+        public async Task ParseKnownEnum()
         {
             MockServer
                 .Given(Request.Create().UsingGet())
                 .RespondWith(CreateResponse("{\"status\":\"active\"}", "application/json"));
 
-            var authorization = _client.GetAuthorizationsApi().FindAuthorizationById("id");
+            var authorization = await _client.GetAuthorizationsApi().FindAuthorizationById("id");
 
             Assert.AreEqual(AuthorizationUpdateRequest.StatusEnum.Active, authorization.Status);
         }
@@ -37,7 +37,7 @@ namespace InfluxDB.Client.Test
                 .Given(Request.Create().UsingGet())
                 .RespondWith(CreateResponse("{\"status\":\"unknown\"}", "application/json"));
 
-            var ioe = Assert.Throws<ApiException>(() => _client.GetAuthorizationsApi().FindAuthorizationById("id"));
+            var ioe = Assert.ThrowsAsync<ApiException>(async () =>await  _client.GetAuthorizationsApi().FindAuthorizationById("id"));
 
             Assert.IsTrue(ioe.Message.StartsWith("Error converting value \"unknown\" to typ"));
         }

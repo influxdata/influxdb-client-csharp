@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using InfluxDB.Client.Api.Domain;
 using InfluxDB.Client.Core.Exceptions;
@@ -206,10 +207,11 @@ namespace InfluxDB.Client.Test
         [Test]
         public void CloneAuthorizationNotFound()
         {
-            var ioe = Assert.ThrowsAsync<HttpException>(async () =>
+            var ioe = Assert.ThrowsAsync<AggregateException>(async () =>
                 await _authorizationsApi.CloneAuthorization("020f755c3c082000"));
 
-            Assert.AreEqual("authorization not found", ioe.Message);
+            Assert.AreEqual("authorization not found", ioe.InnerException.Message);
+            Assert.AreEqual(typeof(HttpException), ioe.InnerException.GetType());
         }
 
         private List<Permission> NewPermissions()

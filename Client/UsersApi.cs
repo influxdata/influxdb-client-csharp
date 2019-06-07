@@ -176,7 +176,7 @@ namespace InfluxDB.Client
                 var header = InfluxDBClient.AuthorizationHeader(t.Result.Name, oldPassword);
 
                 await _service.PutMePasswordAsync(new PasswordResetBody(newPassword), null, header);
-            });
+            }).Unwrap();
         }
 
         /// <summary>

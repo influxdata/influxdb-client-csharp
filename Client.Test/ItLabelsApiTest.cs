@@ -1,8 +1,10 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using InfluxDB.Client.Api.Domain;
 using InfluxDB.Client.Core.Exceptions;
 using NUnit.Framework;
+using Task = System.Threading.Tasks.Task;
 
 namespace InfluxDB.Client.Test
 {
@@ -10,29 +12,29 @@ namespace InfluxDB.Client.Test
     public class ItLabelsApiTest : AbstractItClientTest
     {
         [SetUp]
-        public new void SetUp()
+        public new async Task SetUp()
         {
             _labelsApi = Client.GetLabelsApi();
 
-            foreach (var label in _labelsApi.FindLabels().Where(label => label.Name.EndsWith("-IT")))
-                _labelsApi.DeleteLabel(label.Id);
+            foreach (var label in (await _labelsApi.FindLabels()).Where(label => label.Name.EndsWith("-IT")))
+                await _labelsApi.DeleteLabel(label.Id);
 
-            _organization = FindMyOrg();
+            _organization = await FindMyOrg();
         }
 
         private LabelsApi _labelsApi;
         private Organization _organization;
 
         [Test]
-        public void CloneLabel()
+        public async Task CloneLabel()
         {
             var name = GenerateName("cloned");
 
             var properties = new Dictionary<string, string> {{"color", "green"}, {"location", "west"}};
 
-            var label = _labelsApi.CreateLabel(GenerateName("Cool Resource"), properties, _organization.Id);
+            var label = await _labelsApi.CreateLabel(GenerateName("Cool Resource"), properties, _organization.Id);
 
-            var cloned = _labelsApi.CloneLabel(name, label);
+            var cloned = await _labelsApi.CloneLabel(name, label);
 
             Assert.AreEqual(name, cloned.Name);
 
@@ -45,20 +47,21 @@ namespace InfluxDB.Client.Test
         public void CloneLabelNotFound()
         {
             var exception =
-                Assert.Throws<HttpException>(() => _labelsApi.CloneLabel(GenerateName("bucket"), "020f755c3c082000"));
+                Assert.ThrowsAsync<AggregateException>(async () => await _labelsApi.CloneLabel(GenerateName("bucket"), "020f755c3c082000"));
 
             Assert.IsNotNull(exception);
-            Assert.AreEqual("label not found", exception.Message);
+            Assert.AreEqual(typeof(HttpException), exception.InnerException.InnerException.GetType());
+            Assert.AreEqual("label not found", exception.InnerException.InnerException.Message);
         }
 
         [Test]
-        public void CreateLabel()
+        public async Task CreateLabel()
         {
             var name = GenerateName("Cool Resource");
 
             var properties = new Dictionary<string, string> {{"color", "red"}, {"source", "remote api"}};
 
-            var label = _labelsApi.CreateLabel(name, properties, _organization.Id);
+            var label = await _labelsApi.CreateLabel(name, properties, _organization.Id);
 
             Assert.IsNotNull(label);
             Assert.IsNotEmpty(label.Id);
@@ -69,13 +72,13 @@ namespace InfluxDB.Client.Test
         }
 
         [Test]
-        public void CreateLabelEmptyProperties()
+        public async Task CreateLabelEmptyProperties()
         {
             var name = GenerateName("Cool Resource");
 
             var request = new LabelCreateRequest(_organization.Id, name);
 
-            var label = _labelsApi.CreateLabel(request);
+            var label = await _labelsApi.CreateLabel(request);
 
             Assert.IsNotNull(label);
             Assert.IsNotEmpty(label.Id);
@@ -83,32 +86,33 @@ namespace InfluxDB.Client.Test
         }
 
         [Test]
-        public void DeleteLabel()
+        public async Task DeleteLabel()
         {
             var createdLabel =
-                _labelsApi.CreateLabel(GenerateName("Cool Resource"), new Dictionary<string, string>(),
+                await _labelsApi.CreateLabel(GenerateName("Cool Resource"), new Dictionary<string, string>(),
                     _organization.Id);
             Assert.IsNotNull(createdLabel);
 
-            var foundLabel = _labelsApi.FindLabelById(createdLabel.Id);
+            var foundLabel = await _labelsApi.FindLabelById(createdLabel.Id);
             Assert.IsNotNull(foundLabel);
 
             // delete user
-            _labelsApi.DeleteLabel(createdLabel);
+            await _labelsApi.DeleteLabel(createdLabel);
 
-            var exception = Assert.Throws<HttpException>(() => _labelsApi.FindLabelById(createdLabel.Id));
+            var exception = Assert.ThrowsAsync<AggregateException>(async () => await _labelsApi.FindLabelById(createdLabel.Id));
 
             Assert.IsNotNull(exception);
-            Assert.AreEqual("label not found", exception.Message);
+            Assert.AreEqual("label not found", exception.InnerException.Message);
+            Assert.AreEqual(typeof(HttpException), exception.InnerException.GetType());
         }
 
         [Test]
-        public void FindLabelById()
+        public async Task FindLabelById()
         {
-            var label = _labelsApi.CreateLabel(GenerateName("Cool Resource"), new Dictionary<string, string>(),
+            var label = await _labelsApi.CreateLabel(GenerateName("Cool Resource"), new Dictionary<string, string>(),
                 _organization.Id);
 
-            var labelById = _labelsApi.FindLabelById(label.Id);
+            var labelById = await _labelsApi.FindLabelById(label.Id);
 
             Assert.IsNotNull(label);
             Assert.AreEqual(label.Id, labelById.Id);
@@ -118,60 +122,61 @@ namespace InfluxDB.Client.Test
         [Test]
         public void FindLabelByIdNull()
         {
-            var exception = Assert.Throws<HttpException>(() => _labelsApi.FindLabelById("020f755c3c082000"));
+            var exception = Assert.ThrowsAsync<AggregateException>(async () => await _labelsApi.FindLabelById("020f755c3c082000"));
 
             Assert.IsNotNull(exception);
-            Assert.AreEqual("label not found", exception.Message);
+            Assert.AreEqual("label not found", exception.InnerException.Message);
+            Assert.AreEqual(typeof(HttpException), exception.InnerException.GetType());
         }
 
         [Test]
-        public void FindLabels()
+        public async Task FindLabels()
         {
-            var size = _labelsApi.FindLabels().Count;
+            var size = (await _labelsApi.FindLabels()).Count;
 
-            _labelsApi.CreateLabel(GenerateName("Cool Resource"), new Dictionary<string, string>(), _organization.Id);
+            await _labelsApi.CreateLabel(GenerateName("Cool Resource"), new Dictionary<string, string>(), _organization.Id);
 
-            var labels = _labelsApi.FindLabels();
+            var labels = await _labelsApi.FindLabels();
             Assert.AreEqual(size + 1, labels.Count);
         }
 
         [Test]
-        public void FindLabelsByOrganization()
+        public async Task FindLabelsByOrganization()
         {
-            var organization = Client.GetOrganizationsApi().CreateOrganization(GenerateName("org"));
+            var organization = await Client.GetOrganizationsApi().CreateOrganization(GenerateName("org"));
 
-            var labels = _labelsApi.FindLabelsByOrgId(organization.Id);
+            var labels = await _labelsApi.FindLabelsByOrgId(organization.Id);
             Assert.AreEqual(0, labels.Count);
 
             var properties = new Dictionary<string, string> {{"color", "green"}, {"location", "west"}};
 
-            _labelsApi.CreateLabel(GenerateName("Cool Resource"), properties, organization.Id);
+            await _labelsApi.CreateLabel(GenerateName("Cool Resource"), properties, organization.Id);
 
-            labels = _labelsApi.FindLabelsByOrgId(organization.Id);
+            labels = await _labelsApi.FindLabelsByOrgId(organization.Id);
             Assert.AreEqual(1, labels.Count);
 
-            _labelsApi.DeleteLabel(labels.First());
+            await _labelsApi.DeleteLabel(labels.First());
 
-            labels = _labelsApi.FindLabelsByOrgId(organization.Id);
+            labels = await _labelsApi.FindLabelsByOrgId(organization.Id);
             Assert.AreEqual(0, labels.Count);
         }
 
         [Test]
-        public void UpdateLabel()
+        public async Task UpdateLabel()
         {
-            var label = _labelsApi.CreateLabel(GenerateName("Cool Resource"), new Dictionary<string, string>(),
+            var label = await _labelsApi.CreateLabel(GenerateName("Cool Resource"), new Dictionary<string, string>(),
                 _organization.Id);
             Assert.IsNull(label.Properties);
 
             label.Properties = new Dictionary<string, string> {{"color", "blue"}};
 
-            label = _labelsApi.UpdateLabel(label);
+            label = await _labelsApi.UpdateLabel(label);
             Assert.AreEqual(1, label.Properties.Count);
             Assert.AreEqual("blue", label.Properties["color"]);
 
             label.Properties.Add("type", "free");
 
-            label = _labelsApi.UpdateLabel(label);
+            label = await _labelsApi.UpdateLabel(label);
             Assert.AreEqual(2, label.Properties.Count);
             Assert.AreEqual("blue", label.Properties["color"]);
             Assert.AreEqual("free", label.Properties["type"]);
@@ -179,7 +184,7 @@ namespace InfluxDB.Client.Test
             label.Properties["type"] = "paid";
             label.Properties["color"] = "";
 
-            label = _labelsApi.UpdateLabel(label);
+            label = await _labelsApi.UpdateLabel(label);
             Assert.AreEqual(1, label.Properties.Count);
             Assert.AreEqual("paid", label.Properties["type"]);
         }

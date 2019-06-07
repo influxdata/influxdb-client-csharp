@@ -1,11 +1,12 @@
 using System;
+using System.Threading.Tasks;
 using InfluxDB.Client.Flux;
 
 namespace Examples
 {
     public static class FluxRawExample
     {
-        public static void Run()
+        public static async Task Run()
         {
             var fluxClient = FluxClientFactory.Create("http://localhost:8086/");
 
@@ -14,7 +15,7 @@ namespace Examples
                                + " |> range(start: -1d)"
                                + " |> sample(n: 5, pos: 1)";
 
-            fluxClient.QueryRaw(fluxQuery, (cancellable, line) =>
+            await fluxClient.QueryRaw(fluxQuery, (cancellable, line) =>
                             {
                                 // process the flux query result record
                                 Console.WriteLine(line);

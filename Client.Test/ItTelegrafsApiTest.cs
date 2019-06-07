@@ -1,8 +1,10 @@
+using System;
 using System.Collections.Generic;
 using InfluxDB.Client.Api.Domain;
 using InfluxDB.Client.Core;
 using InfluxDB.Client.Core.Exceptions;
 using NUnit.Framework;
+using Task = System.Threading.Tasks.Task;
 
 namespace InfluxDB.Client.Test
 {
@@ -10,14 +12,15 @@ namespace InfluxDB.Client.Test
     public class ItTelegrafsApiTest : AbstractItClientTest
     {
         [SetUp]
-        public new void SetUp()
+        public new async Task SetUp()
         {
             _telegrafsApi = Client.GetTelegrafsApi();
             _usersApi = Client.GetUsersApi();
 
-            _organization = FindMyOrg();
+            _organization = await FindMyOrg();
 
-            foreach (var telegrafConfig in _telegrafsApi.FindTelegrafs()) _telegrafsApi.DeleteTelegraf(telegrafConfig);
+            foreach (var telegrafConfig in await _telegrafsApi.FindTelegrafs())
+                await _telegrafsApi.DeleteTelegraf(telegrafConfig);
 
             Client.SetLogLevel(LogLevel.Body);
         }
@@ -43,20 +46,21 @@ namespace InfluxDB.Client.Test
         }
 
         [Test]
-        public void CloneTelegraf()
+        public async Task CloneTelegraf()
         {
-            var source = _telegrafsApi
+            var source = await _telegrafsApi
                 .CreateTelegraf(GenerateName("tc"), "test-config", _organization, 1_000,
                     new List<TelegrafRequestPlugin> {NewCpuPlugin(), NewOutputPlugin()});
 
             var properties = new Dictionary<string, string> {{"color", "green"}, {"location", "west"}};
 
-            var label = Client.GetLabelsApi().CreateLabel(GenerateName("Cool Resource"), properties, _organization.Id);
-            _telegrafsApi.AddLabel(label, source);
+            var label = await Client.GetLabelsApi()
+                .CreateLabel(GenerateName("Cool Resource"), properties, _organization.Id);
+            await _telegrafsApi.AddLabel(label, source);
 
             var name = GenerateName("cloned");
 
-            var cloned = _telegrafsApi.CloneTelegraf(name, source);
+            var cloned = await _telegrafsApi.CloneTelegraf(name, source);
 
             Assert.AreEqual(name, cloned.Name);
             Assert.AreEqual(_organization.Id, cloned.OrgID);
@@ -67,7 +71,7 @@ namespace InfluxDB.Client.Test
             Assert.AreEqual(TelegrafPluginOutputInfluxDBV2.NameEnum.Influxdbv2,
                 ((TelegrafPluginOutputInfluxDBV2) cloned.Plugins[1]).Name);
 
-            var labels = _telegrafsApi.GetLabels(cloned);
+            var labels = await _telegrafsApi.GetLabels(cloned);
             Assert.AreEqual(1, labels.Count);
             Assert.AreEqual(label.Id, labels[0].Id);
         }
@@ -75,21 +79,22 @@ namespace InfluxDB.Client.Test
         [Test]
         public void CloneTelegrafNotFound()
         {
-            var ioe = Assert.Throws<HttpException>(() =>
-                _telegrafsApi.CloneTelegraf(GenerateName("tc"), "020f755c3c082000"));
+            var ioe = Assert.ThrowsAsync<AggregateException>(async () =>
+                await _telegrafsApi.CloneTelegraf(GenerateName("tc"), "020f755c3c082000"));
 
-            Assert.AreEqual("telegraf configuration not found", ioe.Message);
+            Assert.AreEqual(typeof(HttpException), ioe.InnerException.InnerException.GetType());
+            Assert.AreEqual("telegraf configuration not found", ioe.InnerException.InnerException.Message);
         }
 
         [Test]
-        public void CreateTelegraf()
+        public async Task CreateTelegraf()
         {
             var name = GenerateName("Telegraf");
 
             var output = NewOutputPlugin();
             var cpu = NewCpuPlugin();
 
-            var telegrafConfig = _telegrafsApi
+            var telegrafConfig = await _telegrafsApi
                 .CreateTelegraf(name, "test-config", _organization, 1_000,
                     new List<TelegrafRequestPlugin> {output, cpu});
 
@@ -111,42 +116,44 @@ namespace InfluxDB.Client.Test
         }
 
         [Test]
-        public void DeleteTelegraf()
+        public async Task DeleteTelegraf()
         {
-            var createdConfig = _telegrafsApi
+            var createdConfig = await _telegrafsApi
                 .CreateTelegraf(GenerateName("tc"), "test-config", _organization, 1_000,
                     new List<TelegrafRequestPlugin> {NewCpuPlugin(), NewOutputPlugin()});
             Assert.IsNotNull(createdConfig);
 
-            var foundTelegraf = _telegrafsApi.FindTelegrafById(createdConfig.Id);
+            var foundTelegraf = await _telegrafsApi.FindTelegrafById(createdConfig.Id);
             Assert.IsNotNull(foundTelegraf);
 
             // delete source
-            _telegrafsApi.DeleteTelegraf(createdConfig);
+            await _telegrafsApi.DeleteTelegraf(createdConfig);
 
-            var ioe = Assert.Throws<HttpException>(() => _telegrafsApi.FindTelegrafById(createdConfig.Id));
+            var ioe = Assert.ThrowsAsync<AggregateException>(async () =>
+                await _telegrafsApi.FindTelegrafById(createdConfig.Id));
 
-            Assert.AreEqual("telegraf configuration not found", ioe.Message);
+            Assert.AreEqual("telegraf configuration not found", ioe.InnerException.Message);
+            Assert.AreEqual(typeof(HttpException), ioe.InnerException.GetType());
         }
 
         [Test]
         public void DeleteTelegrafNotFound()
         {
-            var ioe = Assert.Throws<HttpException>(() =>
-                _telegrafsApi.DeleteTelegraf("020f755c3d082000"));
+            var ioe = Assert.ThrowsAsync<HttpException>(async () =>
+                await _telegrafsApi.DeleteTelegraf("020f755c3d082000"));
 
             Assert.AreEqual("telegraf configuration not found", ioe.Message);
             Assert.AreEqual(404, ioe.Status);
         }
 
         [Test]
-        public void FindTelegrafById()
+        public async Task FindTelegrafById()
         {
-            var telegrafConfig = _telegrafsApi
+            var telegrafConfig = await _telegrafsApi
                 .CreateTelegraf(GenerateName("tc"), "test-config", _organization, 1_000,
                     new List<TelegrafRequestPlugin> {NewCpuPlugin(), NewOutputPlugin()});
 
-            var telegrafConfigById = _telegrafsApi.FindTelegrafById(telegrafConfig.Id);
+            var telegrafConfigById = await _telegrafsApi.FindTelegrafById(telegrafConfig.Id);
 
             Assert.IsNotNull(telegrafConfigById);
             Assert.AreEqual(telegrafConfig.Id, telegrafConfigById.Id);
@@ -160,53 +167,55 @@ namespace InfluxDB.Client.Test
         [Test]
         public void FindTelegrafByIdNull()
         {
-            var ioe = Assert.Throws<HttpException>(() =>  _telegrafsApi.FindTelegrafById("020f755c3d082000"));
+            var ioe = Assert.ThrowsAsync<AggregateException>(async () =>
+                await _telegrafsApi.FindTelegrafById("020f755c3d082000"));
 
-            Assert.AreEqual("telegraf configuration not found", ioe.Message);
+            Assert.AreEqual("telegraf configuration not found", ioe.InnerException.Message);
+            Assert.AreEqual(typeof(HttpException), ioe.InnerException.GetType());
         }
 
         [Test]
-        public void FindTelegrafByOrg()
+        public async Task FindTelegrafByOrg()
         {
             var orgName = GenerateName("Constant Pro");
 
-            var organization = Client.GetOrganizationsApi().CreateOrganization(orgName);
-            var telegrafConfigs = _telegrafsApi.FindTelegrafsByOrg(organization);
+            var organization = await Client.GetOrganizationsApi().CreateOrganization(orgName);
+            var telegrafConfigs = await _telegrafsApi.FindTelegrafsByOrg(organization);
 
             Assert.AreEqual(0, telegrafConfigs.Count);
 
-            _telegrafsApi
+            await _telegrafsApi
                 .CreateTelegraf(GenerateName("tc"), "test-config", organization, 1_000,
                     new List<TelegrafRequestPlugin> {NewCpuPlugin(), NewOutputPlugin()});
 
-            telegrafConfigs = _telegrafsApi.FindTelegrafsByOrg(organization);
+            telegrafConfigs = await _telegrafsApi.FindTelegrafsByOrg(organization);
 
             Assert.AreEqual(1, telegrafConfigs.Count);
 
-            _telegrafsApi.DeleteTelegraf(telegrafConfigs[0]);
+            await _telegrafsApi.DeleteTelegraf(telegrafConfigs[0]);
         }
 
         [Test]
-        public void FindTelegrafs()
+        public async Task FindTelegrafs()
         {
-            var size = (_telegrafsApi.FindTelegrafs()).Count;
+            var size = (await _telegrafsApi.FindTelegrafs()).Count;
 
-            _telegrafsApi
+            await _telegrafsApi
                 .CreateTelegraf(GenerateName("tc"), "test-config", _organization, 1_000,
                     new List<TelegrafRequestPlugin> {NewCpuPlugin(), NewOutputPlugin()});
 
-            var telegrafConfigs = _telegrafsApi.FindTelegrafs();
+            var telegrafConfigs = await _telegrafsApi.FindTelegrafs();
             Assert.AreEqual(size + 1, telegrafConfigs.Count);
         }
 
         [Test]
-        public void GetToml()
+        public async Task GetToml()
         {
-            var telegrafConfig = _telegrafsApi
+            var telegrafConfig = await _telegrafsApi
                 .CreateTelegraf(GenerateName("tc"), "test-config", _organization, 1_000,
                     new List<TelegrafRequestPlugin> {NewCpuPlugin(), NewOutputPlugin()});
 
-            var toml = _telegrafsApi.GetTOML(telegrafConfig);
+            var toml = await _telegrafsApi.GetTOML(telegrafConfig);
 
             Assert.True(toml.Contains("[[inputs.cpu]]"));
             Assert.True(toml.Contains("[[outputs.influxdb_v2]]"));
@@ -217,111 +226,111 @@ namespace InfluxDB.Client.Test
         [Test]
         public void GetTomlNotFound()
         {
-            var ioe = Assert.Throws<HttpException>(() =>
-                _telegrafsApi.GetTOML("020f755c3d082000"));
+            var ioe = Assert.ThrowsAsync<HttpException>(async () =>
+                await _telegrafsApi.GetTOML("020f755c3d082000"));
 
             Assert.AreEqual("telegraf configuration not found", ioe.Message);
             Assert.AreEqual(404, ioe.Status);
         }
 
         [Test]
-        public void Labels()
+        public async Task Labels()
         {
             var labelClient = Client.GetLabelsApi();
 
-            var telegrafConfig = _telegrafsApi
+            var telegrafConfig = await _telegrafsApi
                 .CreateTelegraf(GenerateName("tc"), "test-config", _organization, 1_000,
                     new List<TelegrafRequestPlugin> {NewCpuPlugin(), NewOutputPlugin()});
 
             var properties = new Dictionary<string, string> {{"color", "green"}, {"location", "west"}};
 
-            var label = labelClient.CreateLabel(GenerateName("Cool Resource"), properties, _organization.Id);
+            var label = await labelClient.CreateLabel(GenerateName("Cool Resource"), properties, _organization.Id);
 
-            var labels = _telegrafsApi.GetLabels(telegrafConfig);
+            var labels = await _telegrafsApi.GetLabels(telegrafConfig);
             Assert.AreEqual(0, labels.Count);
 
-            var addedLabel = _telegrafsApi.AddLabel(label, telegrafConfig);
+            var addedLabel = await _telegrafsApi.AddLabel(label, telegrafConfig);
             Assert.IsNotNull(addedLabel);
             Assert.AreEqual(label.Id, addedLabel.Id);
             Assert.AreEqual(label.Name, addedLabel.Name);
             Assert.AreEqual(label.Properties, addedLabel.Properties);
 
-            labels = _telegrafsApi.GetLabels(telegrafConfig);
+            labels = await _telegrafsApi.GetLabels(telegrafConfig);
             Assert.AreEqual(1, labels.Count);
             Assert.AreEqual(label.Id, labels[0].Id);
             Assert.AreEqual(label.Name, labels[0].Name);
 
-            _telegrafsApi.DeleteLabel(label, telegrafConfig);
+            await _telegrafsApi.DeleteLabel(label, telegrafConfig);
 
-            labels = _telegrafsApi.GetLabels(telegrafConfig);
+            labels = await _telegrafsApi.GetLabels(telegrafConfig);
             Assert.AreEqual(0, labels.Count);
         }
 
         [Test]
-        public void Member()
+        public async Task Member()
         {
-            var telegrafConfig = _telegrafsApi
+            var telegrafConfig = await _telegrafsApi
                 .CreateTelegraf(GenerateName("tc"), "test-config", _organization, 1_000,
                     new List<TelegrafRequestPlugin> {NewCpuPlugin(), NewOutputPlugin()});
 
-            var members = _telegrafsApi.GetMembers(telegrafConfig);
+            var members = await _telegrafsApi.GetMembers(telegrafConfig);
             Assert.AreEqual(0, members.Count);
 
-            var user = _usersApi.CreateUser(GenerateName("Luke Health"));
+            var user = await _usersApi.CreateUser(GenerateName("Luke Health"));
 
-            var resourceMember = _telegrafsApi.AddMember(user, telegrafConfig);
+            var resourceMember = await _telegrafsApi.AddMember(user, telegrafConfig);
             Assert.IsNotNull(resourceMember);
             Assert.AreEqual(resourceMember.Id, user.Id);
             Assert.AreEqual(resourceMember.Name, user.Name);
             Assert.AreEqual(resourceMember.Role, ResourceMember.RoleEnum.Member);
 
-            members = _telegrafsApi.GetMembers(telegrafConfig);
+            members = await _telegrafsApi.GetMembers(telegrafConfig);
             Assert.AreEqual(1, members.Count);
             Assert.AreEqual(members[0].Id, user.Id);
             Assert.AreEqual(members[0].Name, user.Name);
             Assert.AreEqual(members[0].Role, ResourceMember.RoleEnum.Member);
 
-            _telegrafsApi.DeleteMember(user, telegrafConfig);
+            await _telegrafsApi.DeleteMember(user, telegrafConfig);
 
-            members = _telegrafsApi.GetMembers(telegrafConfig);
+            members = await _telegrafsApi.GetMembers(telegrafConfig);
             Assert.AreEqual(0, members.Count);
         }
 
         [Test]
-        public void Owner()
+        public async Task Owner()
         {
-            var telegrafConfig = _telegrafsApi
+            var telegrafConfig = await _telegrafsApi
                 .CreateTelegraf(GenerateName("tc"), "test-config", _organization, 1_000,
                     new List<TelegrafRequestPlugin> {NewCpuPlugin(), NewOutputPlugin()});
 
-            var owners = _telegrafsApi.GetOwners(telegrafConfig);
+            var owners = await _telegrafsApi.GetOwners(telegrafConfig);
             Assert.AreEqual(1, owners.Count);
             Assert.AreEqual("my-user", owners[0].Name);
 
-            var user = _usersApi.CreateUser(GenerateName("Luke Health"));
+            var user = await _usersApi.CreateUser(GenerateName("Luke Health"));
 
-            var resourceMember = _telegrafsApi.AddOwner(user, telegrafConfig);
+            var resourceMember = await _telegrafsApi.AddOwner(user, telegrafConfig);
             Assert.IsNotNull(resourceMember);
             Assert.AreEqual(resourceMember.Id, user.Id);
             Assert.AreEqual(resourceMember.Name, user.Name);
             Assert.AreEqual(resourceMember.Role, ResourceOwner.RoleEnum.Owner);
 
-            owners = _telegrafsApi.GetOwners(telegrafConfig);
+            owners = await _telegrafsApi.GetOwners(telegrafConfig);
             Assert.AreEqual(2, owners.Count);
             Assert.AreEqual(owners[1].Id, user.Id);
             Assert.AreEqual(owners[1].Name, user.Name);
             Assert.AreEqual(owners[1].Role, ResourceOwner.RoleEnum.Owner);
 
-            _telegrafsApi.DeleteOwner(user, telegrafConfig);
+            await _telegrafsApi.DeleteOwner(user, telegrafConfig);
 
-            owners = _telegrafsApi.GetOwners(telegrafConfig);
+            owners = await _telegrafsApi.GetOwners(telegrafConfig);
             Assert.AreEqual(1, owners.Count);
         }
 
         [Test]
-        public void UpdateTelegraf()
+        public async Task UpdateTelegraf()
         {
-            var telegrafConfig = _telegrafsApi
+            var telegrafConfig = await _telegrafsApi
                 .CreateTelegraf(GenerateName("tc"), "test-config", _organization, 1_000,
                     new List<TelegrafRequestPlugin> {NewCpuPlugin(), NewOutputPlugin()});
 
@@ -329,7 +338,7 @@ namespace InfluxDB.Client.Test
             telegrafConfig.Agent.CollectionInterval = 500;
             telegrafConfig.Plugins.RemoveAt(0);
 
-            telegrafConfig = _telegrafsApi.UpdateTelegraf(telegrafConfig);
+            telegrafConfig = await _telegrafsApi.UpdateTelegraf(telegrafConfig);
 
             Assert.AreEqual("updated", telegrafConfig.Description);
             Assert.AreEqual(500, telegrafConfig.Agent.CollectionInterval);

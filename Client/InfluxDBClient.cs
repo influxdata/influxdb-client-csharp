@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using InfluxDB.Client.Api.Client;
 using InfluxDB.Client.Api.Domain;
@@ -252,7 +254,7 @@ namespace InfluxDB.Client
         /// <returns>health of an instance</returns>
         public async Task<Check> Health()
         {
-            return await _healthService.GetHealthAsync();
+            return await GetHealth(_healthService.GetHealthAsync());
         }
 
         /// <summary>
@@ -300,6 +302,22 @@ namespace InfluxDB.Client
         internal static string AuthorizationHeader(string username, string password)
         {
             return "Basic " + Convert.ToBase64String(Encoding.Default.GetBytes(username + ":" + password));
+        }
+        
+        internal static async Task<Check> GetHealth(Task<Check> task)
+        {
+            Arguments.CheckNotNull(task, nameof(task));
+
+            return await task
+                .ContinueWith(t =>
+                {
+                    if (t.Exception != null)
+                    {
+                        return new Check("influxdb", t.Exception?.Message, default(List<Check>), Check.StatusEnum.Fail);
+                    }
+
+                    return t.Result;
+                }, CancellationToken.None);
         }
     }
 }
