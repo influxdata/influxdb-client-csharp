@@ -3,6 +3,7 @@ using InfluxDB.Client.Api.Domain;
 using InfluxDB.Client.Core;
 using InfluxDB.Client.Core.Exceptions;
 using NUnit.Framework;
+using Task = System.Threading.Tasks.Task;
 
 namespace InfluxDB.Client.Test
 {
@@ -10,9 +11,9 @@ namespace InfluxDB.Client.Test
     public class ItInfluxDBClientTest : AbstractItClientTest
     {
         [Test]
-        public void Health()
+        public async Task Health()
         {
-            var health = Client.Health();
+            var health = await Client.Health();
 
             Assert.IsNotNull(health);
             Assert.AreEqual("influxdb", health.Name);
@@ -21,10 +22,10 @@ namespace InfluxDB.Client.Test
         }
 
         [Test]
-        public void HealthNotRunningInstance()
+        public async Task HealthNotRunningInstance()
         {
             var clientNotRunning = InfluxDBClientFactory.Create("http://localhost:8099");
-            var health = clientNotRunning.Health();
+            var health = await clientNotRunning.Health();
 
             Assert.IsNotNull(health);
             Assert.AreEqual(Check.StatusEnum.Fail, health.Status);
@@ -34,9 +35,9 @@ namespace InfluxDB.Client.Test
         }
 
         [Test]
-        public void IsOnBoardingNotAllowed()
+        public async Task IsOnBoardingNotAllowed()
         {
-            var onboardingAllowed = Client.IsOnboardingAllowed();
+            var onboardingAllowed = await Client.IsOnboardingAllowed();
 
             Assert.IsFalse(onboardingAllowed);
         }
@@ -53,16 +54,16 @@ namespace InfluxDB.Client.Test
         }
 
         [Test]
-        public void Onboarding()
+        public async Task Onboarding()
         {
             var url = "http://" + GetInfluxDb2Ip() + ":9990";
 
             using (var client = InfluxDBClientFactory.Create(url))
             {
-                Assert.IsTrue(client.IsOnboardingAllowed());
+                Assert.IsTrue(await client.IsOnboardingAllowed());
             }
 
-            var onboarding = InfluxDBClientFactory.Onboarding(url, "admin", "11111111", "Testing", "test");
+            var onboarding = await InfluxDBClientFactory.Onboarding(url, "admin", "11111111", "Testing", "test");
 
             Assert.IsNotNull(onboarding.User);
             Assert.IsNotEmpty(onboarding.User.Id);
@@ -82,7 +83,7 @@ namespace InfluxDB.Client.Test
 
             using (var client = InfluxDBClientFactory.Create(url, onboarding.Auth.Token.ToCharArray()))
             {
-                var user = client.GetUsersApi().Me();
+                var user = await client.GetUsersApi().Me();
 
                 Assert.IsNotNull(user);
                 Assert.AreEqual("admin", user.Name);
@@ -94,7 +95,7 @@ namespace InfluxDB.Client.Test
         {
             var onboarding = new OnboardingRequest("admin", "11111111", "Testing", "test");
 
-            var ex = Assert.Throws<HttpException>(() => Client.Onboarding(onboarding));
+            var ex = Assert.ThrowsAsync<HttpException>(async () => await Client.Onboarding(onboarding));
 
             Assert.AreEqual("onboarding has already been completed", ex.Message);
             Assert.AreEqual(422, ex.Status);
@@ -110,9 +111,9 @@ namespace InfluxDB.Client.Test
 
 
         [Test]
-        public void Ready()
+        public async Task Ready()
         {
-            var ready = Client.Ready();
+            var ready = await Client.Ready();
 
             Assert.IsNotNull(ready);
             Assert.AreEqual(Api.Domain.Ready.StatusEnum.Ready, ready.Status);
@@ -121,10 +122,10 @@ namespace InfluxDB.Client.Test
         }
 
         [Test]
-        public void ReadyNotRunningInstance()
+        public async Task ReadyNotRunningInstance()
         {
             var clientNotRunning = InfluxDBClientFactory.Create("http://localhost:8099");
-            var ready = clientNotRunning.Ready();
+            var ready = await clientNotRunning.Ready();
 
             Assert.IsNull(ready);
 
