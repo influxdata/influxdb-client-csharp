@@ -642,6 +642,32 @@ namespace InfluxDB.Client.Api.Service
         /// <returns>Task of ApiResponse</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteDashboardsIDCellsIDAsyncWithHttpInfo (string dashboardID, string cellID, string zapTraceSpan = null)
         {
+            // make the HTTP request
+            IRestResponse localVarResponse = await DeleteDashboardsIDCellsIDAsyncWithIRestResponse(dashboardID, cellID, zapTraceSpan);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("DeleteDashboardsIDCellsID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Object>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                null);
+        }
+            
+        /// <summary>
+        /// Delete a dashboard cell 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of dashboard to delte</param>
+        /// <param name="cellID">ID of cell to delete</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of IRestResponse</returns>
+        public async System.Threading.Tasks.Task<IRestResponse> DeleteDashboardsIDCellsIDAsyncWithIRestResponse (string dashboardID, string cellID, string zapTraceSpan = null)
+        {
             // verify the required parameter 'dashboardID' is set
             if (dashboardID == null)
                 throw new ApiException(400, "Missing required parameter 'dashboardID' when calling CellsService->DeleteDashboardsIDCellsID");
@@ -681,17 +707,13 @@ namespace InfluxDB.Client.Api.Service
                 Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
             if (ExceptionFactory != null)
             {
                 Exception exception = ExceptionFactory("DeleteDashboardsIDCellsID", localVarResponse);
                 if (exception != null) throw exception;
             }
 
-            return new ApiResponse<Object>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                null);
+            return localVarResponse;
         }
 
         /// <summary>
@@ -904,6 +926,32 @@ namespace InfluxDB.Client.Api.Service
         /// <returns>Task of ApiResponse (View)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<View>> GetDashboardsIDCellsIDViewAsyncWithHttpInfo (string dashboardID, string cellID, string zapTraceSpan = null)
         {
+            // make the HTTP request
+            IRestResponse localVarResponse = await GetDashboardsIDCellsIDViewAsyncWithIRestResponse(dashboardID, cellID, zapTraceSpan);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("GetDashboardsIDCellsIDView", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<View>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (View) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(View)));
+        }
+            
+        /// <summary>
+        /// Retrieve the view for a cell in a dashboard 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of dashboard</param>
+        /// <param name="cellID">ID of cell</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of IRestResponse (View)</returns>
+        public async System.Threading.Tasks.Task<IRestResponse> GetDashboardsIDCellsIDViewAsyncWithIRestResponse (string dashboardID, string cellID, string zapTraceSpan = null)
+        {
             // verify the required parameter 'dashboardID' is set
             if (dashboardID == null)
                 throw new ApiException(400, "Missing required parameter 'dashboardID' when calling CellsService->GetDashboardsIDCellsIDView");
@@ -943,17 +991,13 @@ namespace InfluxDB.Client.Api.Service
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
             if (ExceptionFactory != null)
             {
                 Exception exception = ExceptionFactory("GetDashboardsIDCellsIDView", localVarResponse);
                 if (exception != null) throw exception;
             }
 
-            return new ApiResponse<View>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (View) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(View)));
+            return localVarResponse;
         }
 
         /// <summary>
@@ -1208,6 +1252,33 @@ namespace InfluxDB.Client.Api.Service
         /// <returns>Task of ApiResponse (Cell)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Cell>> PatchDashboardsIDCellsIDAsyncWithHttpInfo (string dashboardID, string cellID, CellUpdate cellUpdate, string zapTraceSpan = null)
         {
+            // make the HTTP request
+            IRestResponse localVarResponse = await PatchDashboardsIDCellsIDAsyncWithIRestResponse(dashboardID, cellID, cellUpdate, zapTraceSpan);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("PatchDashboardsIDCellsID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Cell>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (Cell) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Cell)));
+        }
+            
+        /// <summary>
+        /// Update the non positional information related to a cell (because updates to a single cells positional data could cause grid conflicts) 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of dashboard to update</param>
+        /// <param name="cellID">ID of cell to update</param>
+        /// <param name="cellUpdate">updates the non positional information related to a cell</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of IRestResponse (Cell)</returns>
+        public async System.Threading.Tasks.Task<IRestResponse> PatchDashboardsIDCellsIDAsyncWithIRestResponse (string dashboardID, string cellID, CellUpdate cellUpdate, string zapTraceSpan = null)
+        {
             // verify the required parameter 'dashboardID' is set
             if (dashboardID == null)
                 throw new ApiException(400, "Missing required parameter 'dashboardID' when calling CellsService->PatchDashboardsIDCellsID");
@@ -1259,17 +1330,13 @@ namespace InfluxDB.Client.Api.Service
                 Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
             if (ExceptionFactory != null)
             {
                 Exception exception = ExceptionFactory("PatchDashboardsIDCellsID", localVarResponse);
                 if (exception != null) throw exception;
             }
 
-            return new ApiResponse<Cell>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (Cell) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Cell)));
+            return localVarResponse;
         }
 
         /// <summary>
@@ -1524,6 +1591,33 @@ namespace InfluxDB.Client.Api.Service
         /// <returns>Task of ApiResponse (View)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<View>> PatchDashboardsIDCellsIDViewAsyncWithHttpInfo (string dashboardID, string cellID, View view, string zapTraceSpan = null)
         {
+            // make the HTTP request
+            IRestResponse localVarResponse = await PatchDashboardsIDCellsIDViewAsyncWithIRestResponse(dashboardID, cellID, view, zapTraceSpan);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("PatchDashboardsIDCellsIDView", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<View>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (View) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(View)));
+        }
+            
+        /// <summary>
+        /// Update the view for a cell 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of dashboard to update</param>
+        /// <param name="cellID">ID of cell to update</param>
+        /// <param name="view">updates the view for a cell</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of IRestResponse (View)</returns>
+        public async System.Threading.Tasks.Task<IRestResponse> PatchDashboardsIDCellsIDViewAsyncWithIRestResponse (string dashboardID, string cellID, View view, string zapTraceSpan = null)
+        {
             // verify the required parameter 'dashboardID' is set
             if (dashboardID == null)
                 throw new ApiException(400, "Missing required parameter 'dashboardID' when calling CellsService->PatchDashboardsIDCellsIDView");
@@ -1575,17 +1669,13 @@ namespace InfluxDB.Client.Api.Service
                 Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
             if (ExceptionFactory != null)
             {
                 Exception exception = ExceptionFactory("PatchDashboardsIDCellsIDView", localVarResponse);
                 if (exception != null) throw exception;
             }
 
-            return new ApiResponse<View>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (View) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(View)));
+            return localVarResponse;
         }
 
         /// <summary>
@@ -1822,6 +1912,32 @@ namespace InfluxDB.Client.Api.Service
         /// <returns>Task of ApiResponse (Cell)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Cell>> PostDashboardsIDCellsAsyncWithHttpInfo (string dashboardID, CreateCell createCell, string zapTraceSpan = null)
         {
+            // make the HTTP request
+            IRestResponse localVarResponse = await PostDashboardsIDCellsAsyncWithIRestResponse(dashboardID, createCell, zapTraceSpan);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("PostDashboardsIDCells", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Cell>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (Cell) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Cell)));
+        }
+            
+        /// <summary>
+        /// Create a dashboard cell 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of dashboard to update</param>
+        /// <param name="createCell">cell that will be added</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of IRestResponse (Cell)</returns>
+        public async System.Threading.Tasks.Task<IRestResponse> PostDashboardsIDCellsAsyncWithIRestResponse (string dashboardID, CreateCell createCell, string zapTraceSpan = null)
+        {
             // verify the required parameter 'dashboardID' is set
             if (dashboardID == null)
                 throw new ApiException(400, "Missing required parameter 'dashboardID' when calling CellsService->PostDashboardsIDCells");
@@ -1869,17 +1985,13 @@ namespace InfluxDB.Client.Api.Service
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
             if (ExceptionFactory != null)
             {
                 Exception exception = ExceptionFactory("PostDashboardsIDCells", localVarResponse);
                 if (exception != null) throw exception;
             }
 
-            return new ApiResponse<Cell>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (Cell) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Cell)));
+            return localVarResponse;
         }
 
         /// <summary>
@@ -2116,6 +2228,32 @@ namespace InfluxDB.Client.Api.Service
         /// <returns>Task of ApiResponse (Dashboard)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Dashboard>> PutDashboardsIDCellsAsyncWithHttpInfo (string dashboardID, List<Cell> cell, string zapTraceSpan = null)
         {
+            // make the HTTP request
+            IRestResponse localVarResponse = await PutDashboardsIDCellsAsyncWithIRestResponse(dashboardID, cell, zapTraceSpan);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("PutDashboardsIDCells", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Dashboard>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (Dashboard) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Dashboard)));
+        }
+            
+        /// <summary>
+        /// Replace a dashboards cells 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dashboardID">ID of dashboard to update</param>
+        /// <param name="cell">batch replaces all of a dashboards cells (this is used primarily to update the positional information of all of the cells)</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of IRestResponse (Dashboard)</returns>
+        public async System.Threading.Tasks.Task<IRestResponse> PutDashboardsIDCellsAsyncWithIRestResponse (string dashboardID, List<Cell> cell, string zapTraceSpan = null)
+        {
             // verify the required parameter 'dashboardID' is set
             if (dashboardID == null)
                 throw new ApiException(400, "Missing required parameter 'dashboardID' when calling CellsService->PutDashboardsIDCells");
@@ -2163,17 +2301,13 @@ namespace InfluxDB.Client.Api.Service
                 Method.PUT, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
             if (ExceptionFactory != null)
             {
                 Exception exception = ExceptionFactory("PutDashboardsIDCells", localVarResponse);
                 if (exception != null) throw exception;
             }
 
-            return new ApiResponse<Dashboard>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (Dashboard) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Dashboard)));
+            return localVarResponse;
         }
 
     }

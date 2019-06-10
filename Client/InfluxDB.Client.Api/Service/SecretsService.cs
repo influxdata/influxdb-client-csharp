@@ -464,6 +464,31 @@ namespace InfluxDB.Client.Api.Service
         /// <returns>Task of ApiResponse (SecretKeysResponse)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<SecretKeysResponse>> GetOrgsIDSecretsAsyncWithHttpInfo (string orgID, string zapTraceSpan = null)
         {
+            // make the HTTP request
+            IRestResponse localVarResponse = await GetOrgsIDSecretsAsyncWithIRestResponse(orgID, zapTraceSpan);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("GetOrgsIDSecrets", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<SecretKeysResponse>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (SecretKeysResponse) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(SecretKeysResponse)));
+        }
+            
+        /// <summary>
+        /// List all secret keys for an organization 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="orgID">ID of the organization</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of IRestResponse (SecretKeysResponse)</returns>
+        public async System.Threading.Tasks.Task<IRestResponse> GetOrgsIDSecretsAsyncWithIRestResponse (string orgID, string zapTraceSpan = null)
+        {
             // verify the required parameter 'orgID' is set
             if (orgID == null)
                 throw new ApiException(400, "Missing required parameter 'orgID' when calling SecretsService->GetOrgsIDSecrets");
@@ -499,17 +524,13 @@ namespace InfluxDB.Client.Api.Service
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
             if (ExceptionFactory != null)
             {
                 Exception exception = ExceptionFactory("GetOrgsIDSecrets", localVarResponse);
                 if (exception != null) throw exception;
             }
 
-            return new ApiResponse<SecretKeysResponse>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (SecretKeysResponse) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(SecretKeysResponse)));
+            return localVarResponse;
         }
 
         /// <summary>
@@ -744,6 +765,32 @@ namespace InfluxDB.Client.Api.Service
         /// <returns>Task of ApiResponse</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Object>> PatchOrgsIDSecretsAsyncWithHttpInfo (string orgID, Dictionary<string, string> requestBody, string zapTraceSpan = null)
         {
+            // make the HTTP request
+            IRestResponse localVarResponse = await PatchOrgsIDSecretsAsyncWithIRestResponse(orgID, requestBody, zapTraceSpan);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("PatchOrgsIDSecrets", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Object>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                null);
+        }
+            
+        /// <summary>
+        /// Apply patch to the provided secrets 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="orgID">ID of the organization</param>
+        /// <param name="requestBody">secret key value pairs to update/add</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of IRestResponse</returns>
+        public async System.Threading.Tasks.Task<IRestResponse> PatchOrgsIDSecretsAsyncWithIRestResponse (string orgID, Dictionary<string, string> requestBody, string zapTraceSpan = null)
+        {
             // verify the required parameter 'orgID' is set
             if (orgID == null)
                 throw new ApiException(400, "Missing required parameter 'orgID' when calling SecretsService->PatchOrgsIDSecrets");
@@ -791,17 +838,13 @@ namespace InfluxDB.Client.Api.Service
                 Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
             if (ExceptionFactory != null)
             {
                 Exception exception = ExceptionFactory("PatchOrgsIDSecrets", localVarResponse);
                 if (exception != null) throw exception;
             }
 
-            return new ApiResponse<Object>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                null);
+            return localVarResponse;
         }
 
         /// <summary>
@@ -1036,6 +1079,32 @@ namespace InfluxDB.Client.Api.Service
         /// <returns>Task of ApiResponse</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Object>> PostOrgsIDSecretsAsyncWithHttpInfo (string orgID, SecretKeys secretKeys, string zapTraceSpan = null)
         {
+            // make the HTTP request
+            IRestResponse localVarResponse = await PostOrgsIDSecretsAsyncWithIRestResponse(orgID, secretKeys, zapTraceSpan);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("PostOrgsIDSecrets", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Object>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                null);
+        }
+            
+        /// <summary>
+        /// delete provided secrets 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="orgID">ID of the organization</param>
+        /// <param name="secretKeys">secret key to deleted</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of IRestResponse</returns>
+        public async System.Threading.Tasks.Task<IRestResponse> PostOrgsIDSecretsAsyncWithIRestResponse (string orgID, SecretKeys secretKeys, string zapTraceSpan = null)
+        {
             // verify the required parameter 'orgID' is set
             if (orgID == null)
                 throw new ApiException(400, "Missing required parameter 'orgID' when calling SecretsService->PostOrgsIDSecrets");
@@ -1083,17 +1152,13 @@ namespace InfluxDB.Client.Api.Service
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
             if (ExceptionFactory != null)
             {
                 Exception exception = ExceptionFactory("PostOrgsIDSecrets", localVarResponse);
                 if (exception != null) throw exception;
             }
 
-            return new ApiResponse<Object>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                null);
+            return localVarResponse;
         }
 
     }

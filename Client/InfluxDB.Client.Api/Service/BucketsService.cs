@@ -1108,6 +1108,31 @@ namespace InfluxDB.Client.Api.Service
         /// <returns>Task of ApiResponse</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteBucketsIDAsyncWithHttpInfo (string bucketID, string zapTraceSpan = null)
         {
+            // make the HTTP request
+            IRestResponse localVarResponse = await DeleteBucketsIDAsyncWithIRestResponse(bucketID, zapTraceSpan);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("DeleteBucketsID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Object>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                null);
+        }
+            
+        /// <summary>
+        /// Delete a bucket 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="bucketID">ID of bucket to delete</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of IRestResponse</returns>
+        public async System.Threading.Tasks.Task<IRestResponse> DeleteBucketsIDAsyncWithIRestResponse (string bucketID, string zapTraceSpan = null)
+        {
             // verify the required parameter 'bucketID' is set
             if (bucketID == null)
                 throw new ApiException(400, "Missing required parameter 'bucketID' when calling BucketsService->DeleteBucketsID");
@@ -1143,17 +1168,13 @@ namespace InfluxDB.Client.Api.Service
                 Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
             if (ExceptionFactory != null)
             {
                 Exception exception = ExceptionFactory("DeleteBucketsID", localVarResponse);
                 if (exception != null) throw exception;
             }
 
-            return new ApiResponse<Object>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                null);
+            return localVarResponse;
         }
 
         /// <summary>
@@ -1364,6 +1385,32 @@ namespace InfluxDB.Client.Api.Service
         /// <returns>Task of ApiResponse</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteBucketsIDLabelsIDAsyncWithHttpInfo (string bucketID, string labelID, string zapTraceSpan = null)
         {
+            // make the HTTP request
+            IRestResponse localVarResponse = await DeleteBucketsIDLabelsIDAsyncWithIRestResponse(bucketID, labelID, zapTraceSpan);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("DeleteBucketsIDLabelsID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Object>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                null);
+        }
+            
+        /// <summary>
+        /// delete a label from a bucket 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="labelID">the label id to delete</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of IRestResponse</returns>
+        public async System.Threading.Tasks.Task<IRestResponse> DeleteBucketsIDLabelsIDAsyncWithIRestResponse (string bucketID, string labelID, string zapTraceSpan = null)
+        {
             // verify the required parameter 'bucketID' is set
             if (bucketID == null)
                 throw new ApiException(400, "Missing required parameter 'bucketID' when calling BucketsService->DeleteBucketsIDLabelsID");
@@ -1403,17 +1450,13 @@ namespace InfluxDB.Client.Api.Service
                 Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
             if (ExceptionFactory != null)
             {
                 Exception exception = ExceptionFactory("DeleteBucketsIDLabelsID", localVarResponse);
                 if (exception != null) throw exception;
             }
 
-            return new ApiResponse<Object>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                null);
+            return localVarResponse;
         }
 
         /// <summary>
@@ -1624,6 +1667,32 @@ namespace InfluxDB.Client.Api.Service
         /// <returns>Task of ApiResponse</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteBucketsIDMembersIDAsyncWithHttpInfo (string userID, string bucketID, string zapTraceSpan = null)
         {
+            // make the HTTP request
+            IRestResponse localVarResponse = await DeleteBucketsIDMembersIDAsyncWithIRestResponse(userID, bucketID, zapTraceSpan);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("DeleteBucketsIDMembersID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Object>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                null);
+        }
+            
+        /// <summary>
+        /// removes a member from an bucket 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userID">ID of member to remove</param>
+        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of IRestResponse</returns>
+        public async System.Threading.Tasks.Task<IRestResponse> DeleteBucketsIDMembersIDAsyncWithIRestResponse (string userID, string bucketID, string zapTraceSpan = null)
+        {
             // verify the required parameter 'userID' is set
             if (userID == null)
                 throw new ApiException(400, "Missing required parameter 'userID' when calling BucketsService->DeleteBucketsIDMembersID");
@@ -1663,17 +1732,13 @@ namespace InfluxDB.Client.Api.Service
                 Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
             if (ExceptionFactory != null)
             {
                 Exception exception = ExceptionFactory("DeleteBucketsIDMembersID", localVarResponse);
                 if (exception != null) throw exception;
             }
 
-            return new ApiResponse<Object>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                null);
+            return localVarResponse;
         }
 
         /// <summary>
@@ -1884,6 +1949,32 @@ namespace InfluxDB.Client.Api.Service
         /// <returns>Task of ApiResponse</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteBucketsIDOwnersIDAsyncWithHttpInfo (string userID, string bucketID, string zapTraceSpan = null)
         {
+            // make the HTTP request
+            IRestResponse localVarResponse = await DeleteBucketsIDOwnersIDAsyncWithIRestResponse(userID, bucketID, zapTraceSpan);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("DeleteBucketsIDOwnersID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Object>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                null);
+        }
+            
+        /// <summary>
+        /// removes an owner from a bucket 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userID">ID of owner to remove</param>
+        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of IRestResponse</returns>
+        public async System.Threading.Tasks.Task<IRestResponse> DeleteBucketsIDOwnersIDAsyncWithIRestResponse (string userID, string bucketID, string zapTraceSpan = null)
+        {
             // verify the required parameter 'userID' is set
             if (userID == null)
                 throw new ApiException(400, "Missing required parameter 'userID' when calling BucketsService->DeleteBucketsIDOwnersID");
@@ -1923,17 +2014,13 @@ namespace InfluxDB.Client.Api.Service
                 Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
             if (ExceptionFactory != null)
             {
                 Exception exception = ExceptionFactory("DeleteBucketsIDOwnersID", localVarResponse);
                 if (exception != null) throw exception;
             }
 
-            return new ApiResponse<Object>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                null);
+            return localVarResponse;
         }
 
         /// <summary>
@@ -2155,6 +2242,35 @@ namespace InfluxDB.Client.Api.Service
         /// <returns>Task of ApiResponse (Buckets)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Buckets>> GetBucketsAsyncWithHttpInfo (string zapTraceSpan = null, int? offset = null, int? limit = null, string org = null, string orgID = null, string name = null)
         {
+            // make the HTTP request
+            IRestResponse localVarResponse = await GetBucketsAsyncWithIRestResponse(zapTraceSpan, offset, limit, org, orgID, name);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("GetBuckets", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Buckets>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (Buckets) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Buckets)));
+        }
+            
+        /// <summary>
+        /// List all buckets 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="offset"> (optional)</param>
+        /// <param name="limit"> (optional, default to 20)</param>
+        /// <param name="org">specifies the organization name of the resource (optional)</param>
+        /// <param name="orgID">specifies the organization id of the resource (optional)</param>
+        /// <param name="name">only returns buckets with the specified name (optional)</param>
+        /// <returns>Task of IRestResponse (Buckets)</returns>
+        public async System.Threading.Tasks.Task<IRestResponse> GetBucketsAsyncWithIRestResponse (string zapTraceSpan = null, int? offset = null, int? limit = null, string org = null, string orgID = null, string name = null)
+        {
 
             var localVarPath = "/api/v2/buckets";
             var localVarPathParams = new Dictionary<String, String>();
@@ -2191,17 +2307,13 @@ namespace InfluxDB.Client.Api.Service
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
             if (ExceptionFactory != null)
             {
                 Exception exception = ExceptionFactory("GetBuckets", localVarResponse);
                 if (exception != null) throw exception;
             }
 
-            return new ApiResponse<Buckets>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (Buckets) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Buckets)));
+            return localVarResponse;
         }
 
         /// <summary>
@@ -2396,6 +2508,31 @@ namespace InfluxDB.Client.Api.Service
         /// <returns>Task of ApiResponse (Bucket)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Bucket>> GetBucketsIDAsyncWithHttpInfo (string bucketID, string zapTraceSpan = null)
         {
+            // make the HTTP request
+            IRestResponse localVarResponse = await GetBucketsIDAsyncWithIRestResponse(bucketID, zapTraceSpan);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("GetBucketsID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Bucket>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (Bucket) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Bucket)));
+        }
+            
+        /// <summary>
+        /// Retrieve a bucket 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="bucketID">ID of bucket to get</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of IRestResponse (Bucket)</returns>
+        public async System.Threading.Tasks.Task<IRestResponse> GetBucketsIDAsyncWithIRestResponse (string bucketID, string zapTraceSpan = null)
+        {
             // verify the required parameter 'bucketID' is set
             if (bucketID == null)
                 throw new ApiException(400, "Missing required parameter 'bucketID' when calling BucketsService->GetBucketsID");
@@ -2431,17 +2568,13 @@ namespace InfluxDB.Client.Api.Service
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
             if (ExceptionFactory != null)
             {
                 Exception exception = ExceptionFactory("GetBucketsID", localVarResponse);
                 if (exception != null) throw exception;
             }
 
-            return new ApiResponse<Bucket>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (Bucket) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Bucket)));
+            return localVarResponse;
         }
 
         /// <summary>
@@ -2636,6 +2769,31 @@ namespace InfluxDB.Client.Api.Service
         /// <returns>Task of ApiResponse (LabelsResponse)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<LabelsResponse>> GetBucketsIDLabelsAsyncWithHttpInfo (string bucketID, string zapTraceSpan = null)
         {
+            // make the HTTP request
+            IRestResponse localVarResponse = await GetBucketsIDLabelsAsyncWithIRestResponse(bucketID, zapTraceSpan);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("GetBucketsIDLabels", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<LabelsResponse>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (LabelsResponse) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(LabelsResponse)));
+        }
+            
+        /// <summary>
+        /// list all labels for a bucket 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of IRestResponse (LabelsResponse)</returns>
+        public async System.Threading.Tasks.Task<IRestResponse> GetBucketsIDLabelsAsyncWithIRestResponse (string bucketID, string zapTraceSpan = null)
+        {
             // verify the required parameter 'bucketID' is set
             if (bucketID == null)
                 throw new ApiException(400, "Missing required parameter 'bucketID' when calling BucketsService->GetBucketsIDLabels");
@@ -2671,17 +2829,13 @@ namespace InfluxDB.Client.Api.Service
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
             if (ExceptionFactory != null)
             {
                 Exception exception = ExceptionFactory("GetBucketsIDLabels", localVarResponse);
                 if (exception != null) throw exception;
             }
 
-            return new ApiResponse<LabelsResponse>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (LabelsResponse) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(LabelsResponse)));
+            return localVarResponse;
         }
 
         /// <summary>
@@ -2894,6 +3048,33 @@ namespace InfluxDB.Client.Api.Service
         /// <returns>Task of ApiResponse (OperationLogs)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<OperationLogs>> GetBucketsIDLogsAsyncWithHttpInfo (string bucketID, string zapTraceSpan = null, int? offset = null, int? limit = null)
         {
+            // make the HTTP request
+            IRestResponse localVarResponse = await GetBucketsIDLogsAsyncWithIRestResponse(bucketID, zapTraceSpan, offset, limit);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("GetBucketsIDLogs", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<OperationLogs>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (OperationLogs) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(OperationLogs)));
+        }
+            
+        /// <summary>
+        /// Retrieve operation logs for a bucket 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="offset"> (optional)</param>
+        /// <param name="limit"> (optional, default to 20)</param>
+        /// <returns>Task of IRestResponse (OperationLogs)</returns>
+        public async System.Threading.Tasks.Task<IRestResponse> GetBucketsIDLogsAsyncWithIRestResponse (string bucketID, string zapTraceSpan = null, int? offset = null, int? limit = null)
+        {
             // verify the required parameter 'bucketID' is set
             if (bucketID == null)
                 throw new ApiException(400, "Missing required parameter 'bucketID' when calling BucketsService->GetBucketsIDLogs");
@@ -2931,17 +3112,13 @@ namespace InfluxDB.Client.Api.Service
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
             if (ExceptionFactory != null)
             {
                 Exception exception = ExceptionFactory("GetBucketsIDLogs", localVarResponse);
                 if (exception != null) throw exception;
             }
 
-            return new ApiResponse<OperationLogs>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (OperationLogs) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(OperationLogs)));
+            return localVarResponse;
         }
 
         /// <summary>
@@ -3136,6 +3313,31 @@ namespace InfluxDB.Client.Api.Service
         /// <returns>Task of ApiResponse (ResourceMembers)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<ResourceMembers>> GetBucketsIDMembersAsyncWithHttpInfo (string bucketID, string zapTraceSpan = null)
         {
+            // make the HTTP request
+            IRestResponse localVarResponse = await GetBucketsIDMembersAsyncWithIRestResponse(bucketID, zapTraceSpan);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("GetBucketsIDMembers", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<ResourceMembers>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (ResourceMembers) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(ResourceMembers)));
+        }
+            
+        /// <summary>
+        /// List all users with member privileges for a bucket 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of IRestResponse (ResourceMembers)</returns>
+        public async System.Threading.Tasks.Task<IRestResponse> GetBucketsIDMembersAsyncWithIRestResponse (string bucketID, string zapTraceSpan = null)
+        {
             // verify the required parameter 'bucketID' is set
             if (bucketID == null)
                 throw new ApiException(400, "Missing required parameter 'bucketID' when calling BucketsService->GetBucketsIDMembers");
@@ -3171,17 +3373,13 @@ namespace InfluxDB.Client.Api.Service
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
             if (ExceptionFactory != null)
             {
                 Exception exception = ExceptionFactory("GetBucketsIDMembers", localVarResponse);
                 if (exception != null) throw exception;
             }
 
-            return new ApiResponse<ResourceMembers>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (ResourceMembers) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(ResourceMembers)));
+            return localVarResponse;
         }
 
         /// <summary>
@@ -3376,6 +3574,31 @@ namespace InfluxDB.Client.Api.Service
         /// <returns>Task of ApiResponse (ResourceOwners)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<ResourceOwners>> GetBucketsIDOwnersAsyncWithHttpInfo (string bucketID, string zapTraceSpan = null)
         {
+            // make the HTTP request
+            IRestResponse localVarResponse = await GetBucketsIDOwnersAsyncWithIRestResponse(bucketID, zapTraceSpan);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("GetBucketsIDOwners", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<ResourceOwners>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (ResourceOwners) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(ResourceOwners)));
+        }
+            
+        /// <summary>
+        /// List all owners of a bucket 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of IRestResponse (ResourceOwners)</returns>
+        public async System.Threading.Tasks.Task<IRestResponse> GetBucketsIDOwnersAsyncWithIRestResponse (string bucketID, string zapTraceSpan = null)
+        {
             // verify the required parameter 'bucketID' is set
             if (bucketID == null)
                 throw new ApiException(400, "Missing required parameter 'bucketID' when calling BucketsService->GetBucketsIDOwners");
@@ -3411,17 +3634,13 @@ namespace InfluxDB.Client.Api.Service
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
             if (ExceptionFactory != null)
             {
                 Exception exception = ExceptionFactory("GetBucketsIDOwners", localVarResponse);
                 if (exception != null) throw exception;
             }
 
-            return new ApiResponse<ResourceOwners>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (ResourceOwners) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(ResourceOwners)));
+            return localVarResponse;
         }
 
         /// <summary>
@@ -3625,6 +3844,32 @@ namespace InfluxDB.Client.Api.Service
         /// <returns>Task of ApiResponse (Buckets)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Buckets>> GetSourcesIDBucketsAsyncWithHttpInfo (string sourceID, string zapTraceSpan = null, string org = null)
         {
+            // make the HTTP request
+            IRestResponse localVarResponse = await GetSourcesIDBucketsAsyncWithIRestResponse(sourceID, zapTraceSpan, org);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("GetSourcesIDBuckets", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Buckets>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (Buckets) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Buckets)));
+        }
+            
+        /// <summary>
+        /// Get a sources buckets (will return dbrps in the form of buckets if it is a v1 source) 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="sourceID">ID of the source</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="org">specifies the organization of the resource (optional)</param>
+        /// <returns>Task of IRestResponse (Buckets)</returns>
+        public async System.Threading.Tasks.Task<IRestResponse> GetSourcesIDBucketsAsyncWithIRestResponse (string sourceID, string zapTraceSpan = null, string org = null)
+        {
             // verify the required parameter 'sourceID' is set
             if (sourceID == null)
                 throw new ApiException(400, "Missing required parameter 'sourceID' when calling BucketsService->GetSourcesIDBuckets");
@@ -3661,17 +3906,13 @@ namespace InfluxDB.Client.Api.Service
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
             if (ExceptionFactory != null)
             {
                 Exception exception = ExceptionFactory("GetSourcesIDBuckets", localVarResponse);
                 if (exception != null) throw exception;
             }
 
-            return new ApiResponse<Buckets>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (Buckets) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Buckets)));
+            return localVarResponse;
         }
 
         /// <summary>
@@ -3908,6 +4149,32 @@ namespace InfluxDB.Client.Api.Service
         /// <returns>Task of ApiResponse (Bucket)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Bucket>> PatchBucketsIDAsyncWithHttpInfo (string bucketID, Bucket bucket, string zapTraceSpan = null)
         {
+            // make the HTTP request
+            IRestResponse localVarResponse = await PatchBucketsIDAsyncWithIRestResponse(bucketID, bucket, zapTraceSpan);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("PatchBucketsID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Bucket>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (Bucket) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Bucket)));
+        }
+            
+        /// <summary>
+        /// Update a bucket 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="bucketID">ID of bucket to update</param>
+        /// <param name="bucket">bucket update to apply</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of IRestResponse (Bucket)</returns>
+        public async System.Threading.Tasks.Task<IRestResponse> PatchBucketsIDAsyncWithIRestResponse (string bucketID, Bucket bucket, string zapTraceSpan = null)
+        {
             // verify the required parameter 'bucketID' is set
             if (bucketID == null)
                 throw new ApiException(400, "Missing required parameter 'bucketID' when calling BucketsService->PatchBucketsID");
@@ -3955,17 +4222,13 @@ namespace InfluxDB.Client.Api.Service
                 Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
             if (ExceptionFactory != null)
             {
                 Exception exception = ExceptionFactory("PatchBucketsID", localVarResponse);
                 if (exception != null) throw exception;
             }
 
-            return new ApiResponse<Bucket>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (Bucket) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Bucket)));
+            return localVarResponse;
         }
 
         /// <summary>
@@ -4184,6 +4447,31 @@ namespace InfluxDB.Client.Api.Service
         /// <returns>Task of ApiResponse (Bucket)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Bucket>> PostBucketsAsyncWithHttpInfo (Bucket bucket, string zapTraceSpan = null)
         {
+            // make the HTTP request
+            IRestResponse localVarResponse = await PostBucketsAsyncWithIRestResponse(bucket, zapTraceSpan);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("PostBuckets", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Bucket>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (Bucket) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Bucket)));
+        }
+            
+        /// <summary>
+        /// Create a bucket 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="bucket">bucket to create</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of IRestResponse (Bucket)</returns>
+        public async System.Threading.Tasks.Task<IRestResponse> PostBucketsAsyncWithIRestResponse (Bucket bucket, string zapTraceSpan = null)
+        {
             // verify the required parameter 'bucket' is set
             if (bucket == null)
                 throw new ApiException(400, "Missing required parameter 'bucket' when calling BucketsService->PostBuckets");
@@ -4227,17 +4515,13 @@ namespace InfluxDB.Client.Api.Service
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
             if (ExceptionFactory != null)
             {
                 Exception exception = ExceptionFactory("PostBuckets", localVarResponse);
                 if (exception != null) throw exception;
             }
 
-            return new ApiResponse<Bucket>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (Bucket) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Bucket)));
+            return localVarResponse;
         }
 
         /// <summary>
@@ -4474,6 +4758,32 @@ namespace InfluxDB.Client.Api.Service
         /// <returns>Task of ApiResponse (LabelResponse)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<LabelResponse>> PostBucketsIDLabelsAsyncWithHttpInfo (string bucketID, LabelMapping labelMapping, string zapTraceSpan = null)
         {
+            // make the HTTP request
+            IRestResponse localVarResponse = await PostBucketsIDLabelsAsyncWithIRestResponse(bucketID, labelMapping, zapTraceSpan);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("PostBucketsIDLabels", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<LabelResponse>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (LabelResponse) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(LabelResponse)));
+        }
+            
+        /// <summary>
+        /// add a label to a bucket 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="labelMapping">label to add</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of IRestResponse (LabelResponse)</returns>
+        public async System.Threading.Tasks.Task<IRestResponse> PostBucketsIDLabelsAsyncWithIRestResponse (string bucketID, LabelMapping labelMapping, string zapTraceSpan = null)
+        {
             // verify the required parameter 'bucketID' is set
             if (bucketID == null)
                 throw new ApiException(400, "Missing required parameter 'bucketID' when calling BucketsService->PostBucketsIDLabels");
@@ -4521,17 +4831,13 @@ namespace InfluxDB.Client.Api.Service
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
             if (ExceptionFactory != null)
             {
                 Exception exception = ExceptionFactory("PostBucketsIDLabels", localVarResponse);
                 if (exception != null) throw exception;
             }
 
-            return new ApiResponse<LabelResponse>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (LabelResponse) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(LabelResponse)));
+            return localVarResponse;
         }
 
         /// <summary>
@@ -4768,6 +5074,32 @@ namespace InfluxDB.Client.Api.Service
         /// <returns>Task of ApiResponse (ResourceMember)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<ResourceMember>> PostBucketsIDMembersAsyncWithHttpInfo (string bucketID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
         {
+            // make the HTTP request
+            IRestResponse localVarResponse = await PostBucketsIDMembersAsyncWithIRestResponse(bucketID, addResourceMemberRequestBody, zapTraceSpan);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("PostBucketsIDMembers", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<ResourceMember>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (ResourceMember) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(ResourceMember)));
+        }
+            
+        /// <summary>
+        /// Add bucket member 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of IRestResponse (ResourceMember)</returns>
+        public async System.Threading.Tasks.Task<IRestResponse> PostBucketsIDMembersAsyncWithIRestResponse (string bucketID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
+        {
             // verify the required parameter 'bucketID' is set
             if (bucketID == null)
                 throw new ApiException(400, "Missing required parameter 'bucketID' when calling BucketsService->PostBucketsIDMembers");
@@ -4815,17 +5147,13 @@ namespace InfluxDB.Client.Api.Service
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
             if (ExceptionFactory != null)
             {
                 Exception exception = ExceptionFactory("PostBucketsIDMembers", localVarResponse);
                 if (exception != null) throw exception;
             }
 
-            return new ApiResponse<ResourceMember>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (ResourceMember) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(ResourceMember)));
+            return localVarResponse;
         }
 
         /// <summary>
@@ -5062,6 +5390,32 @@ namespace InfluxDB.Client.Api.Service
         /// <returns>Task of ApiResponse (ResourceOwner)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<ResourceOwner>> PostBucketsIDOwnersAsyncWithHttpInfo (string bucketID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
         {
+            // make the HTTP request
+            IRestResponse localVarResponse = await PostBucketsIDOwnersAsyncWithIRestResponse(bucketID, addResourceMemberRequestBody, zapTraceSpan);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("PostBucketsIDOwners", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<ResourceOwner>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (ResourceOwner) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(ResourceOwner)));
+        }
+            
+        /// <summary>
+        /// Add bucket owner 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of IRestResponse (ResourceOwner)</returns>
+        public async System.Threading.Tasks.Task<IRestResponse> PostBucketsIDOwnersAsyncWithIRestResponse (string bucketID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
+        {
             // verify the required parameter 'bucketID' is set
             if (bucketID == null)
                 throw new ApiException(400, "Missing required parameter 'bucketID' when calling BucketsService->PostBucketsIDOwners");
@@ -5109,17 +5463,13 @@ namespace InfluxDB.Client.Api.Service
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
             if (ExceptionFactory != null)
             {
                 Exception exception = ExceptionFactory("PostBucketsIDOwners", localVarResponse);
                 if (exception != null) throw exception;
             }
 
-            return new ApiResponse<ResourceOwner>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (ResourceOwner) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(ResourceOwner)));
+            return localVarResponse;
         }
 
     }

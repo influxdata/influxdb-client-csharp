@@ -646,6 +646,31 @@ namespace InfluxDB.Client.Api.Service
         /// <returns>Task of ApiResponse</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteSourcesIDAsyncWithHttpInfo (string sourceID, string zapTraceSpan = null)
         {
+            // make the HTTP request
+            IRestResponse localVarResponse = await DeleteSourcesIDAsyncWithIRestResponse(sourceID, zapTraceSpan);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("DeleteSourcesID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Object>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                null);
+        }
+            
+        /// <summary>
+        /// Delete a source 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="sourceID">ID of the source</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of IRestResponse</returns>
+        public async System.Threading.Tasks.Task<IRestResponse> DeleteSourcesIDAsyncWithIRestResponse (string sourceID, string zapTraceSpan = null)
+        {
             // verify the required parameter 'sourceID' is set
             if (sourceID == null)
                 throw new ApiException(400, "Missing required parameter 'sourceID' when calling SourcesService->DeleteSourcesID");
@@ -681,17 +706,13 @@ namespace InfluxDB.Client.Api.Service
                 Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
             if (ExceptionFactory != null)
             {
                 Exception exception = ExceptionFactory("DeleteSourcesID", localVarResponse);
                 if (exception != null) throw exception;
             }
 
-            return new ApiResponse<Object>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                null);
+            return localVarResponse;
         }
 
         /// <summary>
@@ -877,6 +898,31 @@ namespace InfluxDB.Client.Api.Service
         /// <returns>Task of ApiResponse (Sources)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Sources>> GetSourcesAsyncWithHttpInfo (string zapTraceSpan = null, string org = null)
         {
+            // make the HTTP request
+            IRestResponse localVarResponse = await GetSourcesAsyncWithIRestResponse(zapTraceSpan, org);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("GetSources", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Sources>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (Sources) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Sources)));
+        }
+            
+        /// <summary>
+        /// Get all sources 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="org">specifies the organization of the resource (optional)</param>
+        /// <returns>Task of IRestResponse (Sources)</returns>
+        public async System.Threading.Tasks.Task<IRestResponse> GetSourcesAsyncWithIRestResponse (string zapTraceSpan = null, string org = null)
+        {
 
             var localVarPath = "/api/v2/sources";
             var localVarPathParams = new Dictionary<String, String>();
@@ -909,17 +955,13 @@ namespace InfluxDB.Client.Api.Service
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
             if (ExceptionFactory != null)
             {
                 Exception exception = ExceptionFactory("GetSources", localVarResponse);
                 if (exception != null) throw exception;
             }
 
-            return new ApiResponse<Sources>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (Sources) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Sources)));
+            return localVarResponse;
         }
 
         /// <summary>
@@ -1114,6 +1156,31 @@ namespace InfluxDB.Client.Api.Service
         /// <returns>Task of ApiResponse (Source)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Source>> GetSourcesIDAsyncWithHttpInfo (string sourceID, string zapTraceSpan = null)
         {
+            // make the HTTP request
+            IRestResponse localVarResponse = await GetSourcesIDAsyncWithIRestResponse(sourceID, zapTraceSpan);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("GetSourcesID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Source>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (Source) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Source)));
+        }
+            
+        /// <summary>
+        /// Get a source 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="sourceID">ID of the source</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of IRestResponse (Source)</returns>
+        public async System.Threading.Tasks.Task<IRestResponse> GetSourcesIDAsyncWithIRestResponse (string sourceID, string zapTraceSpan = null)
+        {
             // verify the required parameter 'sourceID' is set
             if (sourceID == null)
                 throw new ApiException(400, "Missing required parameter 'sourceID' when calling SourcesService->GetSourcesID");
@@ -1149,17 +1216,13 @@ namespace InfluxDB.Client.Api.Service
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
             if (ExceptionFactory != null)
             {
                 Exception exception = ExceptionFactory("GetSourcesID", localVarResponse);
                 if (exception != null) throw exception;
             }
 
-            return new ApiResponse<Source>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (Source) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Source)));
+            return localVarResponse;
         }
 
         /// <summary>
@@ -1363,6 +1426,32 @@ namespace InfluxDB.Client.Api.Service
         /// <returns>Task of ApiResponse (Buckets)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Buckets>> GetSourcesIDBucketsAsyncWithHttpInfo (string sourceID, string zapTraceSpan = null, string org = null)
         {
+            // make the HTTP request
+            IRestResponse localVarResponse = await GetSourcesIDBucketsAsyncWithIRestResponse(sourceID, zapTraceSpan, org);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("GetSourcesIDBuckets", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Buckets>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (Buckets) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Buckets)));
+        }
+            
+        /// <summary>
+        /// Get a sources buckets (will return dbrps in the form of buckets if it is a v1 source) 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="sourceID">ID of the source</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="org">specifies the organization of the resource (optional)</param>
+        /// <returns>Task of IRestResponse (Buckets)</returns>
+        public async System.Threading.Tasks.Task<IRestResponse> GetSourcesIDBucketsAsyncWithIRestResponse (string sourceID, string zapTraceSpan = null, string org = null)
+        {
             // verify the required parameter 'sourceID' is set
             if (sourceID == null)
                 throw new ApiException(400, "Missing required parameter 'sourceID' when calling SourcesService->GetSourcesIDBuckets");
@@ -1399,17 +1488,13 @@ namespace InfluxDB.Client.Api.Service
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
             if (ExceptionFactory != null)
             {
                 Exception exception = ExceptionFactory("GetSourcesIDBuckets", localVarResponse);
                 if (exception != null) throw exception;
             }
 
-            return new ApiResponse<Buckets>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (Buckets) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Buckets)));
+            return localVarResponse;
         }
 
         /// <summary>
@@ -1604,6 +1689,31 @@ namespace InfluxDB.Client.Api.Service
         /// <returns>Task of ApiResponse (Check)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Check>> GetSourcesIDHealthAsyncWithHttpInfo (string sourceID, string zapTraceSpan = null)
         {
+            // make the HTTP request
+            IRestResponse localVarResponse = await GetSourcesIDHealthAsyncWithIRestResponse(sourceID, zapTraceSpan);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("GetSourcesIDHealth", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Check>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (Check) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Check)));
+        }
+            
+        /// <summary>
+        /// Get a sources health 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="sourceID">ID of the source</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of IRestResponse (Check)</returns>
+        public async System.Threading.Tasks.Task<IRestResponse> GetSourcesIDHealthAsyncWithIRestResponse (string sourceID, string zapTraceSpan = null)
+        {
             // verify the required parameter 'sourceID' is set
             if (sourceID == null)
                 throw new ApiException(400, "Missing required parameter 'sourceID' when calling SourcesService->GetSourcesIDHealth");
@@ -1639,17 +1749,13 @@ namespace InfluxDB.Client.Api.Service
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
             if (ExceptionFactory != null)
             {
                 Exception exception = ExceptionFactory("GetSourcesIDHealth", localVarResponse);
                 if (exception != null) throw exception;
             }
 
-            return new ApiResponse<Check>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (Check) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Check)));
+            return localVarResponse;
         }
 
         /// <summary>
@@ -1886,6 +1992,32 @@ namespace InfluxDB.Client.Api.Service
         /// <returns>Task of ApiResponse (Source)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Source>> PatchSourcesIDAsyncWithHttpInfo (string sourceID, Source source, string zapTraceSpan = null)
         {
+            // make the HTTP request
+            IRestResponse localVarResponse = await PatchSourcesIDAsyncWithIRestResponse(sourceID, source, zapTraceSpan);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("PatchSourcesID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Source>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (Source) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Source)));
+        }
+            
+        /// <summary>
+        /// Updates a Source 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="sourceID">ID of the source</param>
+        /// <param name="source">source update</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of IRestResponse (Source)</returns>
+        public async System.Threading.Tasks.Task<IRestResponse> PatchSourcesIDAsyncWithIRestResponse (string sourceID, Source source, string zapTraceSpan = null)
+        {
             // verify the required parameter 'sourceID' is set
             if (sourceID == null)
                 throw new ApiException(400, "Missing required parameter 'sourceID' when calling SourcesService->PatchSourcesID");
@@ -1933,17 +2065,13 @@ namespace InfluxDB.Client.Api.Service
                 Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
             if (ExceptionFactory != null)
             {
                 Exception exception = ExceptionFactory("PatchSourcesID", localVarResponse);
                 if (exception != null) throw exception;
             }
 
-            return new ApiResponse<Source>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (Source) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Source)));
+            return localVarResponse;
         }
 
         /// <summary>
@@ -2162,6 +2290,31 @@ namespace InfluxDB.Client.Api.Service
         /// <returns>Task of ApiResponse (Source)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Source>> PostSourcesAsyncWithHttpInfo (Source source, string zapTraceSpan = null)
         {
+            // make the HTTP request
+            IRestResponse localVarResponse = await PostSourcesAsyncWithIRestResponse(source, zapTraceSpan);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("PostSources", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Source>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (Source) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Source)));
+        }
+            
+        /// <summary>
+        /// Creates a Source 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="source">source to create</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of IRestResponse (Source)</returns>
+        public async System.Threading.Tasks.Task<IRestResponse> PostSourcesAsyncWithIRestResponse (Source source, string zapTraceSpan = null)
+        {
             // verify the required parameter 'source' is set
             if (source == null)
                 throw new ApiException(400, "Missing required parameter 'source' when calling SourcesService->PostSources");
@@ -2205,17 +2358,13 @@ namespace InfluxDB.Client.Api.Service
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
             if (ExceptionFactory != null)
             {
                 Exception exception = ExceptionFactory("PostSources", localVarResponse);
                 if (exception != null) throw exception;
             }
 
-            return new ApiResponse<Source>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (Source) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Source)));
+            return localVarResponse;
         }
 
     }

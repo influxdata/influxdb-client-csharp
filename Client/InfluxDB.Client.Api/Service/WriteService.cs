@@ -495,6 +495,38 @@ namespace InfluxDB.Client.Api.Service
         /// <returns>Task of ApiResponse</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Object>> PostWriteAsyncWithHttpInfo (string org, string bucket, byte[] body, string zapTraceSpan = null, string contentEncoding = null, string contentType = null, int? contentLength = null, string accept = null, WritePrecision? precision = null)
         {
+            // make the HTTP request
+            IRestResponse localVarResponse = await PostWriteAsyncWithIRestResponse(org, bucket, body, zapTraceSpan, contentEncoding, contentType, contentLength, accept, precision);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("PostWrite", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Object>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                null);
+        }
+            
+        /// <summary>
+        /// write time-series data into influxdb 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="org">specifies the destination organization for writes</param>
+        /// <param name="bucket">specifies the destination bucket for writes</param>
+        /// <param name="body">line protocol body</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="contentEncoding">when present, its value indicates to the database that compression is applied to the line-protocol body. (optional, default to identity)</param>
+        /// <param name="contentType">Content-Type is used to indicate the format of the data sent to the server. (optional, default to text/plain; charset&#x3D;utf-8)</param>
+        /// <param name="contentLength">Content-Length is an entity header is indicating the size of the entity-body, in bytes, sent to the database. If the length is greater than the database max body configuration option, a 413 response is sent. (optional)</param>
+        /// <param name="accept">specifies the return content format. (optional, default to application/json)</param>
+        /// <param name="precision">specifies the precision for the unix timestamps within the body line-protocol (optional)</param>
+        /// <returns>Task of IRestResponse</returns>
+        public async System.Threading.Tasks.Task<IRestResponse> PostWriteAsyncWithIRestResponse (string org, string bucket, byte[] body, string zapTraceSpan = null, string contentEncoding = null, string contentType = null, int? contentLength = null, string accept = null, WritePrecision? precision = null)
+        {
             // verify the required parameter 'org' is set
             if (org == null)
                 throw new ApiException(400, "Missing required parameter 'org' when calling WriteService->PostWrite");
@@ -551,17 +583,13 @@ namespace InfluxDB.Client.Api.Service
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
             if (ExceptionFactory != null)
             {
                 Exception exception = ExceptionFactory("PostWrite", localVarResponse);
                 if (exception != null) throw exception;
             }
 
-            return new ApiResponse<Object>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                null);
+            return localVarResponse;
         }
 
     }

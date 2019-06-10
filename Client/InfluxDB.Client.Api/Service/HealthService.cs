@@ -342,6 +342,30 @@ namespace InfluxDB.Client.Api.Service
         /// <returns>Task of ApiResponse (Check)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Check>> GetHealthAsyncWithHttpInfo (string zapTraceSpan = null)
         {
+            // make the HTTP request
+            IRestResponse localVarResponse = await GetHealthAsyncWithIRestResponse(zapTraceSpan);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("GetHealth", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Check>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (Check) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Check)));
+        }
+            
+        /// <summary>
+        /// Get the health of an instance anytime during execution. Allow us to check if the instance is still healthy. 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of IRestResponse (Check)</returns>
+        public async System.Threading.Tasks.Task<IRestResponse> GetHealthAsyncWithIRestResponse (string zapTraceSpan = null)
+        {
 
             var localVarPath = "/health";
             var localVarPathParams = new Dictionary<String, String>();
@@ -373,17 +397,13 @@ namespace InfluxDB.Client.Api.Service
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
             if (ExceptionFactory != null)
             {
                 Exception exception = ExceptionFactory("GetHealth", localVarResponse);
                 if (exception != null) throw exception;
             }
 
-            return new ApiResponse<Check>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (Check) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Check)));
+            return localVarResponse;
         }
 
     }

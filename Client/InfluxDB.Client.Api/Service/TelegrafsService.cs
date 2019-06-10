@@ -1042,6 +1042,31 @@ namespace InfluxDB.Client.Api.Service
         /// <returns>Task of ApiResponse</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteTelegrafsIDAsyncWithHttpInfo (string telegrafID, string zapTraceSpan = null)
         {
+            // make the HTTP request
+            IRestResponse localVarResponse = await DeleteTelegrafsIDAsyncWithIRestResponse(telegrafID, zapTraceSpan);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("DeleteTelegrafsID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Object>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                null);
+        }
+            
+        /// <summary>
+        /// delete a telegraf config 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="telegrafID">ID of telegraf config</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of IRestResponse</returns>
+        public async System.Threading.Tasks.Task<IRestResponse> DeleteTelegrafsIDAsyncWithIRestResponse (string telegrafID, string zapTraceSpan = null)
+        {
             // verify the required parameter 'telegrafID' is set
             if (telegrafID == null)
                 throw new ApiException(400, "Missing required parameter 'telegrafID' when calling TelegrafsService->DeleteTelegrafsID");
@@ -1077,17 +1102,13 @@ namespace InfluxDB.Client.Api.Service
                 Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
             if (ExceptionFactory != null)
             {
                 Exception exception = ExceptionFactory("DeleteTelegrafsID", localVarResponse);
                 if (exception != null) throw exception;
             }
 
-            return new ApiResponse<Object>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                null);
+            return localVarResponse;
         }
 
         /// <summary>
@@ -1298,6 +1319,32 @@ namespace InfluxDB.Client.Api.Service
         /// <returns>Task of ApiResponse</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteTelegrafsIDLabelsIDAsyncWithHttpInfo (string telegrafID, string labelID, string zapTraceSpan = null)
         {
+            // make the HTTP request
+            IRestResponse localVarResponse = await DeleteTelegrafsIDLabelsIDAsyncWithIRestResponse(telegrafID, labelID, zapTraceSpan);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("DeleteTelegrafsIDLabelsID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Object>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                null);
+        }
+            
+        /// <summary>
+        /// delete a label from a telegraf config 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="telegrafID">ID of the telegraf config</param>
+        /// <param name="labelID">the label ID</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of IRestResponse</returns>
+        public async System.Threading.Tasks.Task<IRestResponse> DeleteTelegrafsIDLabelsIDAsyncWithIRestResponse (string telegrafID, string labelID, string zapTraceSpan = null)
+        {
             // verify the required parameter 'telegrafID' is set
             if (telegrafID == null)
                 throw new ApiException(400, "Missing required parameter 'telegrafID' when calling TelegrafsService->DeleteTelegrafsIDLabelsID");
@@ -1337,17 +1384,13 @@ namespace InfluxDB.Client.Api.Service
                 Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
             if (ExceptionFactory != null)
             {
                 Exception exception = ExceptionFactory("DeleteTelegrafsIDLabelsID", localVarResponse);
                 if (exception != null) throw exception;
             }
 
-            return new ApiResponse<Object>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                null);
+            return localVarResponse;
         }
 
         /// <summary>
@@ -1558,6 +1601,32 @@ namespace InfluxDB.Client.Api.Service
         /// <returns>Task of ApiResponse</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteTelegrafsIDMembersIDAsyncWithHttpInfo (string userID, string telegrafID, string zapTraceSpan = null)
         {
+            // make the HTTP request
+            IRestResponse localVarResponse = await DeleteTelegrafsIDMembersIDAsyncWithIRestResponse(userID, telegrafID, zapTraceSpan);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("DeleteTelegrafsIDMembersID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Object>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                null);
+        }
+            
+        /// <summary>
+        /// removes a member from a telegraf config 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userID">ID of member to remove</param>
+        /// <param name="telegrafID">ID of the telegraf</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of IRestResponse</returns>
+        public async System.Threading.Tasks.Task<IRestResponse> DeleteTelegrafsIDMembersIDAsyncWithIRestResponse (string userID, string telegrafID, string zapTraceSpan = null)
+        {
             // verify the required parameter 'userID' is set
             if (userID == null)
                 throw new ApiException(400, "Missing required parameter 'userID' when calling TelegrafsService->DeleteTelegrafsIDMembersID");
@@ -1597,17 +1666,13 @@ namespace InfluxDB.Client.Api.Service
                 Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
             if (ExceptionFactory != null)
             {
                 Exception exception = ExceptionFactory("DeleteTelegrafsIDMembersID", localVarResponse);
                 if (exception != null) throw exception;
             }
 
-            return new ApiResponse<Object>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                null);
+            return localVarResponse;
         }
 
         /// <summary>
@@ -1818,6 +1883,32 @@ namespace InfluxDB.Client.Api.Service
         /// <returns>Task of ApiResponse</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteTelegrafsIDOwnersIDAsyncWithHttpInfo (string userID, string telegrafID, string zapTraceSpan = null)
         {
+            // make the HTTP request
+            IRestResponse localVarResponse = await DeleteTelegrafsIDOwnersIDAsyncWithIRestResponse(userID, telegrafID, zapTraceSpan);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("DeleteTelegrafsIDOwnersID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Object>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                null);
+        }
+            
+        /// <summary>
+        /// removes an owner from a telegraf config 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userID">ID of owner to remove</param>
+        /// <param name="telegrafID">ID of the telegraf config</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of IRestResponse</returns>
+        public async System.Threading.Tasks.Task<IRestResponse> DeleteTelegrafsIDOwnersIDAsyncWithIRestResponse (string userID, string telegrafID, string zapTraceSpan = null)
+        {
             // verify the required parameter 'userID' is set
             if (userID == null)
                 throw new ApiException(400, "Missing required parameter 'userID' when calling TelegrafsService->DeleteTelegrafsIDOwnersID");
@@ -1857,17 +1948,13 @@ namespace InfluxDB.Client.Api.Service
                 Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
             if (ExceptionFactory != null)
             {
                 Exception exception = ExceptionFactory("DeleteTelegrafsIDOwnersID", localVarResponse);
                 if (exception != null) throw exception;
             }
 
-            return new ApiResponse<Object>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                null);
+            return localVarResponse;
         }
 
         /// <summary>
@@ -2053,6 +2140,31 @@ namespace InfluxDB.Client.Api.Service
         /// <returns>Task of ApiResponse (Telegrafs)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Telegrafs>> GetTelegrafsAsyncWithHttpInfo (string zapTraceSpan = null, string orgID = null)
         {
+            // make the HTTP request
+            IRestResponse localVarResponse = await GetTelegrafsAsyncWithIRestResponse(zapTraceSpan, orgID);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("GetTelegrafs", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Telegrafs>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (Telegrafs) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Telegrafs)));
+        }
+            
+        /// <summary>
+        ///  
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="orgID">specifies the organization of the resource (optional)</param>
+        /// <returns>Task of IRestResponse (Telegrafs)</returns>
+        public async System.Threading.Tasks.Task<IRestResponse> GetTelegrafsAsyncWithIRestResponse (string zapTraceSpan = null, string orgID = null)
+        {
 
             var localVarPath = "/api/v2/telegrafs";
             var localVarPathParams = new Dictionary<String, String>();
@@ -2085,17 +2197,13 @@ namespace InfluxDB.Client.Api.Service
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
             if (ExceptionFactory != null)
             {
                 Exception exception = ExceptionFactory("GetTelegrafs", localVarResponse);
                 if (exception != null) throw exception;
             }
 
-            return new ApiResponse<Telegrafs>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (Telegrafs) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Telegrafs)));
+            return localVarResponse;
         }
 
         /// <summary>
@@ -2305,6 +2413,32 @@ namespace InfluxDB.Client.Api.Service
         /// <returns>Task of ApiResponse (string)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<string>> GetTelegrafsIDAsyncWithHttpInfo (string telegrafID, string zapTraceSpan = null, string accept = null)
         {
+            // make the HTTP request
+            IRestResponse localVarResponse = await GetTelegrafsIDAsyncWithIRestResponse(telegrafID, zapTraceSpan, accept);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("GetTelegrafsID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<string>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (string) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(string)));
+        }
+            
+        /// <summary>
+        /// Retrieve a telegraf config 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="telegrafID">ID of telegraf config</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="accept"> (optional, default to application/toml)</param>
+        /// <returns>Task of IRestResponse (string)</returns>
+        public async System.Threading.Tasks.Task<IRestResponse> GetTelegrafsIDAsyncWithIRestResponse (string telegrafID, string zapTraceSpan = null, string accept = null)
+        {
             // verify the required parameter 'telegrafID' is set
             if (telegrafID == null)
                 throw new ApiException(400, "Missing required parameter 'telegrafID' when calling TelegrafsService->GetTelegrafsID");
@@ -2343,17 +2477,13 @@ namespace InfluxDB.Client.Api.Service
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
             if (ExceptionFactory != null)
             {
                 Exception exception = ExceptionFactory("GetTelegrafsID", localVarResponse);
                 if (exception != null) throw exception;
             }
 
-            return new ApiResponse<string>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (string) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(string)));
+            return localVarResponse;
         }
 
         /// <summary>
@@ -2551,6 +2681,32 @@ namespace InfluxDB.Client.Api.Service
         /// <returns>Task of ApiResponse (string)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<string>> GetTelegrafsIDstringAsyncWithHttpInfo (string telegrafID, string zapTraceSpan = null, string accept = null)
         {
+            // make the HTTP request
+            IRestResponse localVarResponse = await GetTelegrafsIDstringAsyncWithIRestResponse(telegrafID, zapTraceSpan, accept);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("GetTelegrafsIDstring", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<string>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (string) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(string)));
+        }
+            
+        /// <summary>
+        /// Retrieve a telegraf config 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="telegrafID">ID of telegraf config</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="accept"> (optional, default to application/toml)</param>
+        /// <returns>Task of IRestResponse (string)</returns>
+        public async System.Threading.Tasks.Task<IRestResponse> GetTelegrafsIDstringAsyncWithIRestResponse (string telegrafID, string zapTraceSpan = null, string accept = null)
+        {
             // verify the required parameter 'telegrafID' is set
             if (telegrafID == null)
                 throw new ApiException(400, "Missing required parameter 'telegrafID' when calling TelegrafsService->GetTelegrafsIDstring");
@@ -2585,17 +2741,13 @@ namespace InfluxDB.Client.Api.Service
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
             if (ExceptionFactory != null)
             {
                 Exception exception = ExceptionFactory("GetTelegrafsIDstring", localVarResponse);
                 if (exception != null) throw exception;
             }
 
-            return new ApiResponse<string>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (string) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(string)));
+            return localVarResponse;
         }
 
         /// <summary>
@@ -2790,6 +2942,31 @@ namespace InfluxDB.Client.Api.Service
         /// <returns>Task of ApiResponse (LabelsResponse)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<LabelsResponse>> GetTelegrafsIDLabelsAsyncWithHttpInfo (string telegrafID, string zapTraceSpan = null)
         {
+            // make the HTTP request
+            IRestResponse localVarResponse = await GetTelegrafsIDLabelsAsyncWithIRestResponse(telegrafID, zapTraceSpan);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("GetTelegrafsIDLabels", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<LabelsResponse>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (LabelsResponse) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(LabelsResponse)));
+        }
+            
+        /// <summary>
+        /// list all labels for a telegraf config 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="telegrafID">ID of the telegraf config</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of IRestResponse (LabelsResponse)</returns>
+        public async System.Threading.Tasks.Task<IRestResponse> GetTelegrafsIDLabelsAsyncWithIRestResponse (string telegrafID, string zapTraceSpan = null)
+        {
             // verify the required parameter 'telegrafID' is set
             if (telegrafID == null)
                 throw new ApiException(400, "Missing required parameter 'telegrafID' when calling TelegrafsService->GetTelegrafsIDLabels");
@@ -2825,17 +3002,13 @@ namespace InfluxDB.Client.Api.Service
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
             if (ExceptionFactory != null)
             {
                 Exception exception = ExceptionFactory("GetTelegrafsIDLabels", localVarResponse);
                 if (exception != null) throw exception;
             }
 
-            return new ApiResponse<LabelsResponse>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (LabelsResponse) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(LabelsResponse)));
+            return localVarResponse;
         }
 
         /// <summary>
@@ -3030,6 +3203,31 @@ namespace InfluxDB.Client.Api.Service
         /// <returns>Task of ApiResponse (ResourceMembers)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<ResourceMembers>> GetTelegrafsIDMembersAsyncWithHttpInfo (string telegrafID, string zapTraceSpan = null)
         {
+            // make the HTTP request
+            IRestResponse localVarResponse = await GetTelegrafsIDMembersAsyncWithIRestResponse(telegrafID, zapTraceSpan);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("GetTelegrafsIDMembers", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<ResourceMembers>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (ResourceMembers) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(ResourceMembers)));
+        }
+            
+        /// <summary>
+        /// List all users with member privileges for a telegraf config 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="telegrafID">ID of the telegraf config</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of IRestResponse (ResourceMembers)</returns>
+        public async System.Threading.Tasks.Task<IRestResponse> GetTelegrafsIDMembersAsyncWithIRestResponse (string telegrafID, string zapTraceSpan = null)
+        {
             // verify the required parameter 'telegrafID' is set
             if (telegrafID == null)
                 throw new ApiException(400, "Missing required parameter 'telegrafID' when calling TelegrafsService->GetTelegrafsIDMembers");
@@ -3065,17 +3263,13 @@ namespace InfluxDB.Client.Api.Service
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
             if (ExceptionFactory != null)
             {
                 Exception exception = ExceptionFactory("GetTelegrafsIDMembers", localVarResponse);
                 if (exception != null) throw exception;
             }
 
-            return new ApiResponse<ResourceMembers>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (ResourceMembers) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(ResourceMembers)));
+            return localVarResponse;
         }
 
         /// <summary>
@@ -3270,6 +3464,31 @@ namespace InfluxDB.Client.Api.Service
         /// <returns>Task of ApiResponse (ResourceOwners)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<ResourceOwners>> GetTelegrafsIDOwnersAsyncWithHttpInfo (string telegrafID, string zapTraceSpan = null)
         {
+            // make the HTTP request
+            IRestResponse localVarResponse = await GetTelegrafsIDOwnersAsyncWithIRestResponse(telegrafID, zapTraceSpan);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("GetTelegrafsIDOwners", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<ResourceOwners>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (ResourceOwners) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(ResourceOwners)));
+        }
+            
+        /// <summary>
+        /// List all owners of a telegraf config 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="telegrafID">ID of the telegraf config</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of IRestResponse (ResourceOwners)</returns>
+        public async System.Threading.Tasks.Task<IRestResponse> GetTelegrafsIDOwnersAsyncWithIRestResponse (string telegrafID, string zapTraceSpan = null)
+        {
             // verify the required parameter 'telegrafID' is set
             if (telegrafID == null)
                 throw new ApiException(400, "Missing required parameter 'telegrafID' when calling TelegrafsService->GetTelegrafsIDOwners");
@@ -3305,17 +3524,13 @@ namespace InfluxDB.Client.Api.Service
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
             if (ExceptionFactory != null)
             {
                 Exception exception = ExceptionFactory("GetTelegrafsIDOwners", localVarResponse);
                 if (exception != null) throw exception;
             }
 
-            return new ApiResponse<ResourceOwners>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (ResourceOwners) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(ResourceOwners)));
+            return localVarResponse;
         }
 
         /// <summary>
@@ -3534,6 +3749,31 @@ namespace InfluxDB.Client.Api.Service
         /// <returns>Task of ApiResponse (Telegraf)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Telegraf>> PostTelegrafsAsyncWithHttpInfo (TelegrafRequest telegrafRequest, string zapTraceSpan = null)
         {
+            // make the HTTP request
+            IRestResponse localVarResponse = await PostTelegrafsAsyncWithIRestResponse(telegrafRequest, zapTraceSpan);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("PostTelegrafs", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Telegraf>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (Telegraf) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Telegraf)));
+        }
+            
+        /// <summary>
+        /// Create a telegraf config 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="telegrafRequest">telegraf config to create</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of IRestResponse (Telegraf)</returns>
+        public async System.Threading.Tasks.Task<IRestResponse> PostTelegrafsAsyncWithIRestResponse (TelegrafRequest telegrafRequest, string zapTraceSpan = null)
+        {
             // verify the required parameter 'telegrafRequest' is set
             if (telegrafRequest == null)
                 throw new ApiException(400, "Missing required parameter 'telegrafRequest' when calling TelegrafsService->PostTelegrafs");
@@ -3577,17 +3817,13 @@ namespace InfluxDB.Client.Api.Service
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
             if (ExceptionFactory != null)
             {
                 Exception exception = ExceptionFactory("PostTelegrafs", localVarResponse);
                 if (exception != null) throw exception;
             }
 
-            return new ApiResponse<Telegraf>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (Telegraf) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Telegraf)));
+            return localVarResponse;
         }
 
         /// <summary>
@@ -3824,6 +4060,32 @@ namespace InfluxDB.Client.Api.Service
         /// <returns>Task of ApiResponse (LabelResponse)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<LabelResponse>> PostTelegrafsIDLabelsAsyncWithHttpInfo (string telegrafID, LabelMapping labelMapping, string zapTraceSpan = null)
         {
+            // make the HTTP request
+            IRestResponse localVarResponse = await PostTelegrafsIDLabelsAsyncWithIRestResponse(telegrafID, labelMapping, zapTraceSpan);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("PostTelegrafsIDLabels", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<LabelResponse>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (LabelResponse) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(LabelResponse)));
+        }
+            
+        /// <summary>
+        /// add a label to a telegraf config 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="telegrafID">ID of the telegraf config</param>
+        /// <param name="labelMapping">label to add</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of IRestResponse (LabelResponse)</returns>
+        public async System.Threading.Tasks.Task<IRestResponse> PostTelegrafsIDLabelsAsyncWithIRestResponse (string telegrafID, LabelMapping labelMapping, string zapTraceSpan = null)
+        {
             // verify the required parameter 'telegrafID' is set
             if (telegrafID == null)
                 throw new ApiException(400, "Missing required parameter 'telegrafID' when calling TelegrafsService->PostTelegrafsIDLabels");
@@ -3871,17 +4133,13 @@ namespace InfluxDB.Client.Api.Service
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
             if (ExceptionFactory != null)
             {
                 Exception exception = ExceptionFactory("PostTelegrafsIDLabels", localVarResponse);
                 if (exception != null) throw exception;
             }
 
-            return new ApiResponse<LabelResponse>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (LabelResponse) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(LabelResponse)));
+            return localVarResponse;
         }
 
         /// <summary>
@@ -4118,6 +4376,32 @@ namespace InfluxDB.Client.Api.Service
         /// <returns>Task of ApiResponse (ResourceMember)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<ResourceMember>> PostTelegrafsIDMembersAsyncWithHttpInfo (string telegrafID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
         {
+            // make the HTTP request
+            IRestResponse localVarResponse = await PostTelegrafsIDMembersAsyncWithIRestResponse(telegrafID, addResourceMemberRequestBody, zapTraceSpan);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("PostTelegrafsIDMembers", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<ResourceMember>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (ResourceMember) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(ResourceMember)));
+        }
+            
+        /// <summary>
+        /// Add telegraf config member 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="telegrafID">ID of the telegraf config</param>
+        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of IRestResponse (ResourceMember)</returns>
+        public async System.Threading.Tasks.Task<IRestResponse> PostTelegrafsIDMembersAsyncWithIRestResponse (string telegrafID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
+        {
             // verify the required parameter 'telegrafID' is set
             if (telegrafID == null)
                 throw new ApiException(400, "Missing required parameter 'telegrafID' when calling TelegrafsService->PostTelegrafsIDMembers");
@@ -4165,17 +4449,13 @@ namespace InfluxDB.Client.Api.Service
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
             if (ExceptionFactory != null)
             {
                 Exception exception = ExceptionFactory("PostTelegrafsIDMembers", localVarResponse);
                 if (exception != null) throw exception;
             }
 
-            return new ApiResponse<ResourceMember>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (ResourceMember) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(ResourceMember)));
+            return localVarResponse;
         }
 
         /// <summary>
@@ -4412,6 +4692,32 @@ namespace InfluxDB.Client.Api.Service
         /// <returns>Task of ApiResponse (ResourceOwner)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<ResourceOwner>> PostTelegrafsIDOwnersAsyncWithHttpInfo (string telegrafID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
         {
+            // make the HTTP request
+            IRestResponse localVarResponse = await PostTelegrafsIDOwnersAsyncWithIRestResponse(telegrafID, addResourceMemberRequestBody, zapTraceSpan);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("PostTelegrafsIDOwners", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<ResourceOwner>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (ResourceOwner) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(ResourceOwner)));
+        }
+            
+        /// <summary>
+        /// Add telegraf config owner 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="telegrafID">ID of the telegraf config</param>
+        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of IRestResponse (ResourceOwner)</returns>
+        public async System.Threading.Tasks.Task<IRestResponse> PostTelegrafsIDOwnersAsyncWithIRestResponse (string telegrafID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
+        {
             // verify the required parameter 'telegrafID' is set
             if (telegrafID == null)
                 throw new ApiException(400, "Missing required parameter 'telegrafID' when calling TelegrafsService->PostTelegrafsIDOwners");
@@ -4459,17 +4765,13 @@ namespace InfluxDB.Client.Api.Service
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
             if (ExceptionFactory != null)
             {
                 Exception exception = ExceptionFactory("PostTelegrafsIDOwners", localVarResponse);
                 if (exception != null) throw exception;
             }
 
-            return new ApiResponse<ResourceOwner>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (ResourceOwner) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(ResourceOwner)));
+            return localVarResponse;
         }
 
         /// <summary>
@@ -4706,6 +5008,32 @@ namespace InfluxDB.Client.Api.Service
         /// <returns>Task of ApiResponse (Telegraf)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Telegraf>> PutTelegrafsIDAsyncWithHttpInfo (string telegrafID, TelegrafRequest telegrafRequest, string zapTraceSpan = null)
         {
+            // make the HTTP request
+            IRestResponse localVarResponse = await PutTelegrafsIDAsyncWithIRestResponse(telegrafID, telegrafRequest, zapTraceSpan);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("PutTelegrafsID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Telegraf>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (Telegraf) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Telegraf)));
+        }
+            
+        /// <summary>
+        /// Update a telegraf config 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="telegrafID">ID of telegraf config</param>
+        /// <param name="telegrafRequest">telegraf config update to apply</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of IRestResponse (Telegraf)</returns>
+        public async System.Threading.Tasks.Task<IRestResponse> PutTelegrafsIDAsyncWithIRestResponse (string telegrafID, TelegrafRequest telegrafRequest, string zapTraceSpan = null)
+        {
             // verify the required parameter 'telegrafID' is set
             if (telegrafID == null)
                 throw new ApiException(400, "Missing required parameter 'telegrafID' when calling TelegrafsService->PutTelegrafsID");
@@ -4753,17 +5081,13 @@ namespace InfluxDB.Client.Api.Service
                 Method.PUT, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
             if (ExceptionFactory != null)
             {
                 Exception exception = ExceptionFactory("PutTelegrafsID", localVarResponse);
                 if (exception != null) throw exception;
             }
 
-            return new ApiResponse<Telegraf>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (Telegraf) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Telegraf)));
+            return localVarResponse;
         }
 
     }

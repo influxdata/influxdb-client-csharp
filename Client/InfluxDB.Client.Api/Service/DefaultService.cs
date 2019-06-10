@@ -430,6 +430,30 @@ namespace InfluxDB.Client.Api.Service
         /// <returns>Task of ApiResponse (Routes)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Routes>> GetRoutesAsyncWithHttpInfo (string zapTraceSpan = null)
         {
+            // make the HTTP request
+            IRestResponse localVarResponse = await GetRoutesAsyncWithIRestResponse(zapTraceSpan);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("GetRoutes", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Routes>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (Routes) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Routes)));
+        }
+            
+        /// <summary>
+        /// Map of all top level routes available 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of IRestResponse (Routes)</returns>
+        public async System.Threading.Tasks.Task<IRestResponse> GetRoutesAsyncWithIRestResponse (string zapTraceSpan = null)
+        {
 
             var localVarPath = "/api/v2/";
             var localVarPathParams = new Dictionary<String, String>();
@@ -461,17 +485,13 @@ namespace InfluxDB.Client.Api.Service
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
             if (ExceptionFactory != null)
             {
                 Exception exception = ExceptionFactory("GetRoutes", localVarResponse);
                 if (exception != null) throw exception;
             }
 
-            return new ApiResponse<Routes>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (Routes) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Routes)));
+            return localVarResponse;
         }
 
         /// <summary>
@@ -673,6 +693,31 @@ namespace InfluxDB.Client.Api.Service
         /// <returns>Task of ApiResponse</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Object>> PostSigninAsyncWithHttpInfo (string zapTraceSpan = null, String authorization = null)
         {
+            // make the HTTP request
+            IRestResponse localVarResponse = await PostSigninAsyncWithIRestResponse(zapTraceSpan, authorization);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("PostSignin", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Object>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                null);
+        }
+            
+        /// <summary>
+        /// Exchange basic auth credentials for session 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="authorization">An auth credential for the Basic scheme (optional)</param>
+        /// <returns>Task of IRestResponse</returns>
+        public async System.Threading.Tasks.Task<IRestResponse> PostSigninAsyncWithIRestResponse (string zapTraceSpan = null, String authorization = null)
+        {
 
             var localVarPath = "/api/v2/signin";
             var localVarPathParams = new Dictionary<String, String>();
@@ -711,17 +756,13 @@ namespace InfluxDB.Client.Api.Service
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
             if (ExceptionFactory != null)
             {
                 Exception exception = ExceptionFactory("PostSignin", localVarResponse);
                 if (exception != null) throw exception;
             }
 
-            return new ApiResponse<Object>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                null);
+            return localVarResponse;
         }
 
         /// <summary>
@@ -896,6 +937,30 @@ namespace InfluxDB.Client.Api.Service
         /// <returns>Task of ApiResponse</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Object>> PostSignoutAsyncWithHttpInfo (string zapTraceSpan = null)
         {
+            // make the HTTP request
+            IRestResponse localVarResponse = await PostSignoutAsyncWithIRestResponse(zapTraceSpan);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("PostSignout", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Object>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                null);
+        }
+            
+        /// <summary>
+        /// Expire the current session 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of IRestResponse</returns>
+        public async System.Threading.Tasks.Task<IRestResponse> PostSignoutAsyncWithIRestResponse (string zapTraceSpan = null)
+        {
 
             var localVarPath = "/api/v2/signout";
             var localVarPathParams = new Dictionary<String, String>();
@@ -927,17 +992,13 @@ namespace InfluxDB.Client.Api.Service
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
             if (ExceptionFactory != null)
             {
                 Exception exception = ExceptionFactory("PostSignout", localVarResponse);
                 if (exception != null) throw exception;
             }
 
-            return new ApiResponse<Object>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                null);
+            return localVarResponse;
         }
 
     }
