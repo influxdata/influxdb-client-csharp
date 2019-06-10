@@ -7,6 +7,7 @@ using InfluxDB.Client.Api.Domain;
 using InfluxDB.Client.Core.Exceptions;
 using InfluxDB.Client.Core.Test;
 using InfluxDB.Client.Writes;
+using Moq;
 using NUnit.Framework;
 using WireMock.RequestBuilders;
 using WireMock.ResponseBuilders;
@@ -16,13 +17,10 @@ namespace InfluxDB.Client.Test
     [TestFixture]
     public class WriteApiTest : AbstractMockServerTest
     {
-        private WriteApi _writeApi;
-        private InfluxDBClient _influxDbClient;
-
         [SetUp]
         public new void SetUp()
         {
-             _influxDbClient = InfluxDBClientFactory.Create(MockServerUrl, "token".ToCharArray());
+            _influxDbClient = InfluxDBClientFactory.Create(MockServerUrl, "token".ToCharArray());
             _writeApi = _influxDbClient.GetWriteApi();
         }
 
@@ -31,6 +29,87 @@ namespace InfluxDB.Client.Test
         {
             _influxDbClient.Dispose();
             _writeApi.Dispose();
+        }
+
+        private WriteApi _writeApi;
+        private InfluxDBClient _influxDbClient;
+
+        private IResponseBuilder CreateResponse(string error, int status)
+        {
+            return CreateResponse($"{{\"error\":\"{error}\"}}",
+                    "application/json")
+                .WithHeader("X-Influx-Error", error)
+                .WithStatusCode(status);
+        }
+
+        internal class EventListener
+        {
+            private readonly AutoResetEvent _autoResetEvent = new AutoResetEvent(false);
+
+            private readonly List<EventArgs> _events = new List<EventArgs>();
+
+            internal EventListener(WriteApi writeApi)
+            {
+                writeApi.EventHandler += (sender, args) =>
+                {
+                    _events.Add(args);
+                    _autoResetEvent.Set();
+                };
+            }
+
+            internal T Get<T>()
+            {
+                if (_events.Count == 0)
+                {
+                    _autoResetEvent.Reset();
+
+                    var timeout = TimeSpan.FromSeconds(10);
+
+                    var waitOne = _autoResetEvent.WaitOne(timeout);
+                    if (!waitOne) Assert.Fail($"The event {typeof(T)} didn't arrive in {timeout}.");
+                }
+
+                var args = _events[0];
+                _events.RemoveAt(0);
+                Trace.WriteLine(args);
+
+                return (T) Convert.ChangeType(args, typeof(T));
+            }
+
+            internal int EventCount()
+            {
+                return _events.Count;
+            }
+
+            internal EventListener WaitToSuccess()
+            {
+                Get<WriteSuccessEvent>();
+
+                return this;
+            }
+        }
+
+        [Test]
+        public void DisposeCallFromInfluxDbClientToWriteApi()
+        {
+            var mock = new Mock<IDisposable>();
+            mock.Setup(disposable => disposable.Dispose());
+
+            Assert.AreEqual(1, _influxDbClient.Apis.Count);
+            _influxDbClient.Apis.Add(mock.Object);
+            Assert.AreEqual(2, _influxDbClient.Apis.Count);
+
+            _influxDbClient.Dispose();
+
+            mock.Verify(disposable => disposable.Dispose(), Times.Once);
+        }
+
+        [Test]
+        public void DisposedClientRemovedFromApis()
+        {
+            Assert.AreEqual(1, _influxDbClient.Apis.Count);
+            _writeApi.Dispose();
+            Assert.AreEqual(0, _influxDbClient.Apis.Count);
         }
 
         [Test]
@@ -80,45 +159,6 @@ namespace InfluxDB.Client.Test
                 MockServer.LogEntries.ToList()[1].RequestMessage.Url);
             Assert.AreEqual("h2o_feet,location=coyote_creek level\\ description=\"feet 1\",water_level=1.0 1",
                 MockServer.LogEntries.ToList()[1].RequestMessage.Body);
-        }
-
-        [Test]
-        public void RetryWithRetryAfter()
-        {
-            var listener = new EventListener(_writeApi);
-            
-            MockServer.Reset();
-
-            MockServer
-                .Given(Request.Create().WithPath("/api/v2/write").UsingPost())
-                .InScenario("RetryWithRetryAfter")
-                .WillSetStateTo("RetryWithRetryAfter Started")
-                .RespondWith(CreateResponse("token is temporarily over quota", 429).WithHeader("Retry-After", "5"));
-
-            MockServer
-                .Given(Request.Create().WithPath("/api/v2/write").UsingPost())
-                .InScenario("RetryWithRetryAfter")
-                .WhenStateIs("RetryWithRetryAfter Started")
-                .WillSetStateTo("RetryWithRetryAfter Finished")
-                .RespondWith(CreateResponse("{}"));
-
-            _writeApi.WriteRecord("b1", "org1", WritePrecision.Ns,
-                "h2o_feet,location=coyote_creek level\\ description=\"feet 1\",water_level=1.0 1");
-
-            // Retry response
-            listener.Get<WriteRetriableErrorEvent>();
-            // Success response
-           listener.Get<WriteSuccessEvent>();
-
-            var requests = MockServer.LogEntries.ToList();
-            Assert.AreEqual(2, requests.Count);
-            
-            var request1 = requests[0].RequestMessage.DateTime;
-            var request2 = requests[1].RequestMessage.DateTime;
-
-            var timeSpan = request2 - request1;
-
-            Assert.That(timeSpan, Is.GreaterThanOrEqualTo(TimeSpan.FromSeconds(5)));
         }
 
         [Test]
@@ -212,59 +252,52 @@ namespace InfluxDB.Client.Test
         }
 
         [Test]
+        public void RetryWithRetryAfter()
+        {
+            var listener = new EventListener(_writeApi);
+
+            MockServer.Reset();
+
+            MockServer
+                .Given(Request.Create().WithPath("/api/v2/write").UsingPost())
+                .InScenario("RetryWithRetryAfter")
+                .WillSetStateTo("RetryWithRetryAfter Started")
+                .RespondWith(CreateResponse("token is temporarily over quota", 429).WithHeader("Retry-After", "5"));
+
+            MockServer
+                .Given(Request.Create().WithPath("/api/v2/write").UsingPost())
+                .InScenario("RetryWithRetryAfter")
+                .WhenStateIs("RetryWithRetryAfter Started")
+                .WillSetStateTo("RetryWithRetryAfter Finished")
+                .RespondWith(CreateResponse("{}"));
+
+            _writeApi.WriteRecord("b1", "org1", WritePrecision.Ns,
+                "h2o_feet,location=coyote_creek level\\ description=\"feet 1\",water_level=1.0 1");
+
+            // Retry response
+            listener.Get<WriteRetriableErrorEvent>();
+            // Success response
+            listener.Get<WriteSuccessEvent>();
+
+            var requests = MockServer.LogEntries.ToList();
+            Assert.AreEqual(2, requests.Count);
+
+            var request1 = requests[0].RequestMessage.DateTime;
+            var request2 = requests[1].RequestMessage.DateTime;
+
+            var timeSpan = request2 - request1;
+
+            Assert.That(timeSpan, Is.GreaterThanOrEqualTo(TimeSpan.FromSeconds(5)));
+        }
+
+        [Test]
         public void TwiceDispose()
         {
             _writeApi.Dispose();
             _writeApi.Dispose();
-            
+
             _influxDbClient.Dispose();
             _influxDbClient.Dispose();
-        }
-        
-        private IResponseBuilder CreateResponse(string error, int status)
-        {
-            return CreateResponse($"{{\"error\":\"{error}\"}}",
-                    "application/json")
-                .WithHeader("X-Influx-Error", error)
-                .WithStatusCode(status);
-        }
-
-        private class EventListener 
-        {
-            private readonly AutoResetEvent _autoResetEvent = new AutoResetEvent(false);
-
-            private readonly List<EventArgs> _events = new List<EventArgs>();
-
-            internal EventListener(WriteApi writeApi)
-            {
-                writeApi.EventHandler += (sender, args) =>
-                {
-                    _events.Add(args);
-                    _autoResetEvent.Set();
-                };
-            }
-
-            internal T Get<T>()
-            {
-                if (_events.Count == 0)
-                {
-                    _autoResetEvent.Reset();
-
-                    var timeout = TimeSpan.FromSeconds(10);
-
-                    var waitOne = _autoResetEvent.WaitOne(timeout);
-                    if (!waitOne)
-                    {
-                        Assert.Fail($"The event {typeof(T)} didn't arrive in {timeout}.");
-                    }
-                }
-
-                var args = _events[0];
-                _events.RemoveAt(0);
-                Trace.WriteLine(args);
-
-                return (T) Convert.ChangeType(args, typeof(T));
-            }
         }
     }
 }

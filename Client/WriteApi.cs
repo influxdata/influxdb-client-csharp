@@ -4,9 +4,9 @@ using System.Diagnostics;
 using System.Linq;
 using System.Reactive;
 using System.Reactive.Concurrency;
-using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
+using System.Reactive.Threading.Tasks;
 using System.Text;
 using InfluxDB.Client.Api.Domain;
 using InfluxDB.Client.Api.Service;
@@ -22,17 +22,20 @@ namespace InfluxDB.Client
     public class WriteApi : IDisposable
     {
         private readonly Subject<List<BatchWriteData>> _flush = new Subject<List<BatchWriteData>>();
+
+        private readonly InfluxDBClient _influxDbClient;
         private readonly MeasurementMapper _measurementMapper = new MeasurementMapper();
+        private readonly WriteService _service;
         private readonly Subject<BatchWriteData> _subject = new Subject<BatchWriteData>();
 
-        private readonly WriteService _service;
-        
-        protected internal WriteApi(WriteService service, WriteOptions writeOptions) 
+        protected internal WriteApi(WriteService service, WriteOptions writeOptions, InfluxDBClient influxDbClient)
         {
             Arguments.CheckNotNull(service, nameof(service));
             Arguments.CheckNotNull(writeOptions, nameof(writeOptions));
+            Arguments.CheckNotNull(influxDbClient, nameof(_influxDbClient));
 
             _service = service;
+            _influxDbClient = influxDbClient;
 
             // backpreasure - is not implemented in C#
             // 
@@ -81,7 +84,7 @@ namespace InfluxDB.Client
                 .Delay(source =>
                 {
                     var jitterDelay = JitterDelay(writeOptions);
-                    
+
                     return Observable.Timer(TimeSpan.FromMilliseconds(jitterDelay), Scheduler.CurrentThread);
                 })
                 .Concat()
@@ -97,15 +100,11 @@ namespace InfluxDB.Client
                     var precision = batchWriteItem.Options.Precision;
 
                     return Observable
-                        .Create<IRestResponse>(observer =>
-                        {
-                            var body = Encoding.UTF8.GetBytes(lineProtocol);
-                            var response = _service.PostWriteWithIRestResponse(orgId, bucket, body, null, 
-                                "utf-8", "text/plain", null, "application/json", precision);
-                            observer.OnNext(response);
-                            
-                            return Disposable.Empty;
-                        })
+                        .Defer(() =>
+                            _service.PostWriteAsyncWithIRestResponse(orgId, bucket,
+                                    Encoding.UTF8.GetBytes(lineProtocol), null,
+                                    "utf-8", "text/plain", null, "application/json", precision)
+                                .ToObservable())
                         .RetryWhen(f => f.SelectMany(e =>
                         {
                             if (e is HttpException httpException)
@@ -115,9 +114,7 @@ namespace InfluxDB.Client
                                 //
                                 if (httpException.Status == 400 || httpException.Status == 401 ||
                                     httpException.Status == 403 || httpException.Status == 413)
-                                {
                                     throw httpException;
-                                }
 
                                 var retryInterval = (httpException.RetryAfter * 1000 ?? writeOptions.RetryInterval) +
                                                     JitterDelay(writeOptions);
@@ -134,10 +131,7 @@ namespace InfluxDB.Client
                         .Select(result =>
                         {
                             // ReSharper disable once ConvertIfStatementToReturnStatement
-                            if (result.IsSuccessful)
-                            {
-                                return Notification.CreateOnNext(result);
-                            }
+                            if (result.IsSuccessful) return Notification.CreateOnNext(result);
 
                             return Notification.CreateOnError<IRestResponse>(HttpException.Create(result));
                         })
@@ -145,7 +139,7 @@ namespace InfluxDB.Client
                         {
                             var error = new WriteErrorEvent(orgId, bucket, precision, lineProtocol, ex);
                             Publish(error);
-                            
+
                             return Observable.Return(Notification.CreateOnError<IRestResponse>(ex));
                         }).Do(res =>
                         {
@@ -180,17 +174,13 @@ namespace InfluxDB.Client
 
         public void Dispose()
         {
+            _influxDbClient.Apis.Remove(this);
+
             Trace.WriteLine("Flushing batches before shutdown.");
 
-            if (!_subject.IsDisposed)
-            {
-                _subject.OnCompleted();
-            }
+            if (!_subject.IsDisposed) _subject.OnCompleted();
 
-            if (!_flush.IsDisposed)
-            {
-                _flush.OnCompleted();
-            }
+            if (!_flush.IsDisposed) _flush.OnCompleted();
 
             _subject.Dispose();
             _flush.Dispose();
@@ -362,7 +352,7 @@ namespace InfluxDB.Client
 //            retvar writePostAsyncWithHttpInfo = _service.WritePostWithIRestResponse(null, null, null);
 //            return writePostAsyncWithHttpInfo;
 //        }
-        
+
         private int JitterDelay(WriteOptions writeOptions)
         {
             return (int) (new Random().NextDouble() * writeOptions.JitterInterval);
