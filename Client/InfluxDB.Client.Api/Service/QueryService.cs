@@ -654,6 +654,30 @@ namespace InfluxDB.Client.Api.Service
         /// <returns>Task of ApiResponse (FluxSuggestions)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<FluxSuggestions>> GetQuerySuggestionsAsyncWithHttpInfo (string zapTraceSpan = null)
         {
+            // make the HTTP request
+            IRestResponse localVarResponse = await GetQuerySuggestionsAsyncWithIRestResponse(zapTraceSpan);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("GetQuerySuggestions", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<FluxSuggestions>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (FluxSuggestions) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(FluxSuggestions)));
+        }
+            
+        /// <summary>
+        ///  
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of IRestResponse (FluxSuggestions)</returns>
+        public async System.Threading.Tasks.Task<IRestResponse> GetQuerySuggestionsAsyncWithIRestResponse (string zapTraceSpan = null)
+        {
 
             var localVarPath = "/api/v2/query/suggestions";
             var localVarPathParams = new Dictionary<String, String>();
@@ -685,17 +709,13 @@ namespace InfluxDB.Client.Api.Service
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
             if (ExceptionFactory != null)
             {
                 Exception exception = ExceptionFactory("GetQuerySuggestions", localVarResponse);
                 if (exception != null) throw exception;
             }
 
-            return new ApiResponse<FluxSuggestions>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (FluxSuggestions) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(FluxSuggestions)));
+            return localVarResponse;
         }
 
         /// <summary>
@@ -945,6 +965,31 @@ namespace InfluxDB.Client.Api.Service
         /// <returns>Task of ApiResponse (FluxSuggestion)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<FluxSuggestion>> GetQuerySuggestionsNameAsyncWithHttpInfo (string name, string zapTraceSpan = null)
         {
+            // make the HTTP request
+            IRestResponse localVarResponse = await GetQuerySuggestionsNameAsyncWithIRestResponse(name, zapTraceSpan);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("GetQuerySuggestionsName", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<FluxSuggestion>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (FluxSuggestion) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(FluxSuggestion)));
+        }
+            
+        /// <summary>
+        ///  
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="name">name of branching suggestion</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of IRestResponse (FluxSuggestion)</returns>
+        public async System.Threading.Tasks.Task<IRestResponse> GetQuerySuggestionsNameAsyncWithIRestResponse (string name, string zapTraceSpan = null)
+        {
             // verify the required parameter 'name' is set
             if (name == null)
                 throw new ApiException(400, "Missing required parameter 'name' when calling QueryService->GetQuerySuggestionsName");
@@ -980,17 +1025,13 @@ namespace InfluxDB.Client.Api.Service
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
             if (ExceptionFactory != null)
             {
                 Exception exception = ExceptionFactory("GetQuerySuggestionsName", localVarResponse);
                 if (exception != null) throw exception;
             }
 
-            return new ApiResponse<FluxSuggestion>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (FluxSuggestion) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(FluxSuggestion)));
+            return localVarResponse;
         }
 
         /// <summary>
@@ -1301,6 +1342,34 @@ namespace InfluxDB.Client.Api.Service
         /// <returns>Task of ApiResponse (string)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<string>> PostQueryAsyncWithHttpInfo (string zapTraceSpan = null, string contentType = null, string org = null, string orgID = null, Query query = null)
         {
+            // make the HTTP request
+            IRestResponse localVarResponse = await PostQueryAsyncWithIRestResponse(zapTraceSpan, contentType, org, orgID, query);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("PostQuery", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<string>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (string) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(string)));
+        }
+            
+        /// <summary>
+        /// query an influx 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="contentType"> (optional)</param>
+        /// <param name="org">specifies the name of the organization executing the query; if both orgID and org are specified, orgID takes precedence. (optional)</param>
+        /// <param name="orgID">specifies the ID of the organization executing the query; if both orgID and org are specified, orgID takes precedence. (optional)</param>
+        /// <param name="query">flux query or specification to execute (optional)</param>
+        /// <returns>Task of IRestResponse (string)</returns>
+        public async System.Threading.Tasks.Task<IRestResponse> PostQueryAsyncWithIRestResponse (string zapTraceSpan = null, string contentType = null, string org = null, string orgID = null, Query query = null)
+        {
 
             var localVarPath = "/api/v2/query";
             var localVarPathParams = new Dictionary<String, String>();
@@ -1346,17 +1415,13 @@ namespace InfluxDB.Client.Api.Service
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
             if (ExceptionFactory != null)
             {
                 Exception exception = ExceptionFactory("PostQuery", localVarResponse);
                 if (exception != null) throw exception;
             }
 
-            return new ApiResponse<string>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (string) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(string)));
+            return localVarResponse;
         }
 
         /// <summary>
@@ -1615,6 +1680,34 @@ namespace InfluxDB.Client.Api.Service
         /// <returns>Task of ApiResponse (string)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<string>> PostQuerystringAsyncWithHttpInfo (string zapTraceSpan = null, string contentType = null, string org = null, string orgID = null, Query query = null)
         {
+            // make the HTTP request
+            IRestResponse localVarResponse = await PostQuerystringAsyncWithIRestResponse(zapTraceSpan, contentType, org, orgID, query);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("PostQuerystring", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<string>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (string) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(string)));
+        }
+            
+        /// <summary>
+        /// query an influx 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="contentType"> (optional)</param>
+        /// <param name="org">specifies the name of the organization executing the query; if both orgID and org are specified, orgID takes precedence. (optional)</param>
+        /// <param name="orgID">specifies the ID of the organization executing the query; if both orgID and org are specified, orgID takes precedence. (optional)</param>
+        /// <param name="query">flux query or specification to execute (optional)</param>
+        /// <returns>Task of IRestResponse (string)</returns>
+        public async System.Threading.Tasks.Task<IRestResponse> PostQuerystringAsyncWithIRestResponse (string zapTraceSpan = null, string contentType = null, string org = null, string orgID = null, Query query = null)
+        {
 
             var localVarPath = "/api/v2/query";
             var localVarPathParams = new Dictionary<String, String>();
@@ -1647,17 +1740,13 @@ namespace InfluxDB.Client.Api.Service
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
             if (ExceptionFactory != null)
             {
                 Exception exception = ExceptionFactory("PostQuerystring", localVarResponse);
                 if (exception != null) throw exception;
             }
 
-            return new ApiResponse<string>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (string) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(string)));
+            return localVarResponse;
         }
 
         /// <summary>
@@ -1938,6 +2027,32 @@ namespace InfluxDB.Client.Api.Service
         /// <returns>Task of ApiResponse (AnalyzeQueryResponse)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<AnalyzeQueryResponse>> PostQueryAnalyzeAsyncWithHttpInfo (string zapTraceSpan = null, string contentType = null, Query query = null)
         {
+            // make the HTTP request
+            IRestResponse localVarResponse = await PostQueryAnalyzeAsyncWithIRestResponse(zapTraceSpan, contentType, query);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("PostQueryAnalyze", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<AnalyzeQueryResponse>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (AnalyzeQueryResponse) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(AnalyzeQueryResponse)));
+        }
+            
+        /// <summary>
+        /// analyze an influxql or flux query 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="contentType"> (optional)</param>
+        /// <param name="query">flux or influxql query to analyze (optional)</param>
+        /// <returns>Task of IRestResponse (AnalyzeQueryResponse)</returns>
+        public async System.Threading.Tasks.Task<IRestResponse> PostQueryAnalyzeAsyncWithIRestResponse (string zapTraceSpan = null, string contentType = null, Query query = null)
+        {
 
             var localVarPath = "/api/v2/query/analyze";
             var localVarPathParams = new Dictionary<String, String>();
@@ -1979,17 +2094,13 @@ namespace InfluxDB.Client.Api.Service
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
             if (ExceptionFactory != null)
             {
                 Exception exception = ExceptionFactory("PostQueryAnalyze", localVarResponse);
                 if (exception != null) throw exception;
             }
 
-            return new ApiResponse<AnalyzeQueryResponse>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (AnalyzeQueryResponse) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(AnalyzeQueryResponse)));
+            return localVarResponse;
         }
 
         /// <summary>
@@ -2270,6 +2381,32 @@ namespace InfluxDB.Client.Api.Service
         /// <returns>Task of ApiResponse (ASTResponse)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<ASTResponse>> PostQueryAstAsyncWithHttpInfo (string zapTraceSpan = null, string contentType = null, LanguageRequest languageRequest = null)
         {
+            // make the HTTP request
+            IRestResponse localVarResponse = await PostQueryAstAsyncWithIRestResponse(zapTraceSpan, contentType, languageRequest);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("PostQueryAst", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<ASTResponse>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (ASTResponse) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(ASTResponse)));
+        }
+            
+        /// <summary>
+        ///  analyzes flux query and generates a query specification.
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="contentType"> (optional)</param>
+        /// <param name="languageRequest">analyzed flux query to generate abstract syntax tree. (optional)</param>
+        /// <returns>Task of IRestResponse (ASTResponse)</returns>
+        public async System.Threading.Tasks.Task<IRestResponse> PostQueryAstAsyncWithIRestResponse (string zapTraceSpan = null, string contentType = null, LanguageRequest languageRequest = null)
+        {
 
             var localVarPath = "/api/v2/query/ast";
             var localVarPathParams = new Dictionary<String, String>();
@@ -2311,17 +2448,13 @@ namespace InfluxDB.Client.Api.Service
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
             if (ExceptionFactory != null)
             {
                 Exception exception = ExceptionFactory("PostQueryAst", localVarResponse);
                 if (exception != null) throw exception;
             }
 
-            return new ApiResponse<ASTResponse>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (ASTResponse) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(ASTResponse)));
+            return localVarResponse;
         }
 
     }

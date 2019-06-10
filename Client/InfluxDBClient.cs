@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -23,6 +24,8 @@ namespace InfluxDB.Client
 
         private readonly SetupService _setupService;
 
+        internal readonly List<IDisposable> Apis = new List<IDisposable>();
+
         protected internal InfluxDBClient(InfluxDBClientOptions options)
         {
             Arguments.CheckNotNull(options, nameof(options));
@@ -30,7 +33,7 @@ namespace InfluxDB.Client
             _loggingHandler = new LoggingHandler(LogLevel.None);
 
             _apiClient = new ApiClient(options, _loggingHandler);
-                
+
             _exceptionFactory = (methodName, response) =>
                 !response.IsSuccessful ? HttpException.Create(response) : null;
 
@@ -50,6 +53,11 @@ namespace InfluxDB.Client
 
         public void Dispose()
         {
+            //
+            // Dispose child APIs
+            //
+            foreach (var disposable in Apis.ToList()) disposable.Dispose();
+
             //
             // signout
             //
@@ -98,8 +106,11 @@ namespace InfluxDB.Client
             {
                 ExceptionFactory = _exceptionFactory
             };
-            
-            return new WriteApi(service, writeOptions);
+
+            var writeApi = new WriteApi(service, writeOptions, this);
+            Apis.Add(writeApi);
+
+            return writeApi;
         }
 
         /// <summary>

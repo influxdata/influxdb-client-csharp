@@ -392,6 +392,30 @@ namespace InfluxDB.Client.Api.Service
         /// <returns>Task of ApiResponse (Ready)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Ready>> GetReadyAsyncWithHttpInfo (string zapTraceSpan = null)
         {
+            // make the HTTP request
+            IRestResponse localVarResponse = await GetReadyAsyncWithIRestResponse(zapTraceSpan);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("GetReady", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Ready>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (Ready) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Ready)));
+        }
+            
+        /// <summary>
+        /// Get the readiness of a instance at startup. Allow us to confirm the instance is prepared to accept requests. 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of IRestResponse (Ready)</returns>
+        public async System.Threading.Tasks.Task<IRestResponse> GetReadyAsyncWithIRestResponse (string zapTraceSpan = null)
+        {
 
             var localVarPath = "/ready";
             var localVarPathParams = new Dictionary<String, String>();
@@ -423,17 +447,13 @@ namespace InfluxDB.Client.Api.Service
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
             if (ExceptionFactory != null)
             {
                 Exception exception = ExceptionFactory("GetReady", localVarResponse);
                 if (exception != null) throw exception;
             }
 
-            return new ApiResponse<Ready>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (Ready) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Ready)));
+            return localVarResponse;
         }
 
     }

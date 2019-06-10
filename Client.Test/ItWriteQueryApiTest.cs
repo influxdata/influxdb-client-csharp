@@ -97,9 +97,10 @@ namespace InfluxDB.Client.Test
             const string record2 = "h2o_feet,location=coyote_creek level\\ water_level=2.0 2";
 
             _writeApi = Client.GetWriteApi();
+            var listener = new WriteApiTest.EventListener(_writeApi);
             _writeApi.WriteRecords(bucketName, _organization.Id, WritePrecision.Ns, record1, record2);
             _writeApi.Flush();
-            Thread.Sleep(1000);
+            listener.WaitToSuccess();
 
             var query = await _queryApi.Query(
                 "from(bucket:\"" + bucketName + "\") |> range(start: 1970-01-01T00:00:00.000000001Z)",
@@ -138,9 +139,11 @@ namespace InfluxDB.Client.Test
                 .Timestamp(time.AddSeconds(-10), WritePrecision.S);
 
             _writeApi = Client.GetWriteApi();
+            var listener = new WriteApiTest.EventListener(_writeApi);
             _writeApi.WritePoints(bucketName, _organization.Id, point1, point2);
             _writeApi.Flush();
-            Thread.Sleep(1000);
+
+            listener.WaitToSuccess();
 
             var query = await _queryApi.Query(
                 "from(bucket:\"" + bucketName + "\") |> range(start: 1970-01-01T00:00:00.000000001Z)",
@@ -240,6 +243,7 @@ namespace InfluxDB.Client.Test
             var writeOptions = WriteOptions.CreateNew().BatchSize(10).FlushInterval(500).Build();
 
             _writeApi = Client.GetWriteApi(writeOptions);
+            var listener = new WriteApiTest.EventListener(_writeApi);
 
             const string record1 = "h2o_feet,location=coyote_creek level\\ water_level=1.0 1";
             const string record2 = "h2o_feet,location=coyote_creek level\\ water_level=2.0 2";
@@ -258,7 +262,7 @@ namespace InfluxDB.Client.Test
                 _organization.Id);
             Assert.AreEqual(0, query.Count);
 
-            Thread.Sleep(550);
+            listener.Get<WriteSuccessEvent>();
 
             query = await _queryApi.Query(
                 "from(bucket:\"" + bucketName + "\") |> range(start: 1970-01-01T00:00:00.000000001Z)",
@@ -277,6 +281,8 @@ namespace InfluxDB.Client.Test
             var writeOptions = WriteOptions.CreateNew().BatchSize(6).FlushInterval(500_000).Build();
 
             _writeApi = Client.GetWriteApi(writeOptions);
+
+            var listener = new WriteApiTest.EventListener(_writeApi);
 
             const string record1 = "h2o_feet,location=coyote_creek level\\ water_level=1.0 1";
             const string record2 = "h2o_feet,location=coyote_creek level\\ water_level=2.0 2";
@@ -298,7 +304,7 @@ namespace InfluxDB.Client.Test
 
             _writeApi.WriteRecord(bucketName, _organization.Id, WritePrecision.Ns, record6);
 
-            Thread.Sleep(10);
+            listener.Get<WriteSuccessEvent>();
 
             query = await _queryApi.Query(
                 "from(bucket:\"" + bucketName + "\") |> range(start: 1970-01-01T00:00:00.000000001Z)",
@@ -307,6 +313,50 @@ namespace InfluxDB.Client.Test
 
             var records = query[0].Records;
             Assert.AreEqual(6, records.Count);
+        }
+
+        [Test]
+        public async Task FlushByOne()
+        {
+            var bucketName = _bucket.Name;
+
+            var writeOptions = WriteOptions.CreateNew().BatchSize(1).FlushInterval(500_000).Build();
+
+            _writeApi = Client.GetWriteApi(writeOptions);
+
+            var eventListener = new WriteApiTest.EventListener(_writeApi);
+
+            const string record1 = "h2o_feet,location=coyote_creek level\\ water_level=1.0 1";
+            const string record2 = "h2o_feet,location=coyote_creek level\\ water_level=2.0 2";
+            const string record3 = "h2o_feet,location=coyote_creek level\\ water_level=3.0 3";
+            const string record4 = "h2o_feet,location=coyote_creek level\\ water_level=4.0 4";
+            const string record5 = "h2o_feet,location=coyote_creek level\\ water_level=5.0 5";
+
+            _writeApi.WriteRecord(bucketName, _organization.Id, WritePrecision.Ns, record1);
+            Thread.Sleep(100);
+            _writeApi.WriteRecord(bucketName, _organization.Id, WritePrecision.Ns, record2);
+            Thread.Sleep(100);
+            _writeApi.WriteRecord(bucketName, _organization.Id, WritePrecision.Ns, record3);
+            Thread.Sleep(100);
+            _writeApi.WriteRecord(bucketName, _organization.Id, WritePrecision.Ns, record4);
+            Thread.Sleep(100);
+            _writeApi.WriteRecord(bucketName, _organization.Id, WritePrecision.Ns, record5);
+            Thread.Sleep(100);
+
+            Assert.AreEqual(record1, eventListener.Get<WriteSuccessEvent>().LineProtocol);
+            Assert.AreEqual(record2, eventListener.Get<WriteSuccessEvent>().LineProtocol);
+            Assert.AreEqual(record3, eventListener.Get<WriteSuccessEvent>().LineProtocol);
+            Assert.AreEqual(record4, eventListener.Get<WriteSuccessEvent>().LineProtocol);
+            Assert.AreEqual(record5, eventListener.Get<WriteSuccessEvent>().LineProtocol);
+
+            var query = await _queryApi.Query(
+                "from(bucket:\"" + bucketName + "\") |> range(start: 1970-01-01T00:00:00.000000000Z)",
+                _organization.Id);
+            Assert.AreEqual(1, query.Count);
+
+            var records = query[0].Records;
+            Assert.AreEqual(5, records.Count);
+            Assert.AreEqual(0, eventListener.EventCount());
         }
 
         [Test]
@@ -406,16 +456,14 @@ namespace InfluxDB.Client.Test
         {
             var bucketName = _bucket.Name;
 
-            WriteErrorEvent error = null;
-
             _writeApi = Client.GetWriteApi();
-            _writeApi.EventHandler += (sender, args) => { error = args as WriteErrorEvent; };
+            var listener = new WriteApiTest.EventListener(_writeApi);
 
             _writeApi.WriteRecord(bucketName, _organization.Id, WritePrecision.Ns,
                 "h2o_feet,location=coyote_creek level\\ water_level=1.0 1x");
             _writeApi.Flush();
 
-            Thread.Sleep(100);
+            WriteErrorEvent error = listener.Get<WriteErrorEvent>();
 
             Assert.IsNotNull(error);
             Assert.AreEqual(
@@ -426,7 +474,7 @@ namespace InfluxDB.Client.Test
                 "h2o_feet,location=coyote_creek level\\ water_level=1.0 1");
             _writeApi.Flush();
 
-            Thread.Sleep(100);
+            listener.Get<WriteSuccessEvent>();
 
             var query = await _queryApi.Query(
                 "from(bucket:\"" + bucketName + "\") |> range(start: 1970-01-01T00:00:00.000000001Z) |> last()",
