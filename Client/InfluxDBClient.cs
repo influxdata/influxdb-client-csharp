@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using InfluxDB.Client.Api.Client;
 using InfluxDB.Client.Api.Domain;
@@ -72,7 +73,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        ///     Get the Query client.
+        /// Get the Query client.
         /// </summary>
         /// <returns>the new client instance for the Query API</returns>
         public QueryApi GetQueryApi()
@@ -81,12 +82,12 @@ namespace InfluxDB.Client
             {
                 ExceptionFactory = _exceptionFactory
             };
-
+            
             return new QueryApi(service);
         }
 
         /// <summary>
-        ///     Get the Write client.
+        /// Get the Write client.
         /// </summary>
         /// <returns>the new client instance for the Write API</returns>
         public WriteApi GetWriteApi()
@@ -95,7 +96,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        ///     Get the Write client.
+        /// Get the Write client.
         /// </summary>
         /// <param name="writeOptions">the configuration for a write client</param>
         /// <returns>the new client instance for the Write API</returns>
@@ -113,7 +114,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        ///     Get the <see cref="Organization" /> client.
+        /// Get the <see cref="Organization" /> client.
         /// </summary>
         /// <returns>the new client instance for Organization API</returns>
         public OrganizationsApi GetOrganizationsApi()
@@ -127,7 +128,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        ///     Get the <see cref="InfluxDB.Client.Api.Domain.User" /> client.
+        /// Get the <see cref="InfluxDB.Client.Api.Domain.User" /> client.
         /// </summary>
         /// <returns>the new client instance for User API</returns>
         public UsersApi GetUsersApi()
@@ -141,7 +142,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        ///     Get the <see cref="Bucket" /> client.
+        /// Get the <see cref="Bucket" /> client.
         /// </summary>
         /// <returns>the new client instance for Bucket API</returns>
         public BucketsApi GetBucketsApi()
@@ -155,7 +156,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        ///     Get the <see cref="Source" /> client.
+        /// Get the <see cref="Source" /> client.
         /// </summary>
         /// <returns>the new client instance for Source API</returns>
         public SourcesApi GetSourcesApi()
@@ -169,7 +170,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        ///     Get the <see cref="InfluxDB.Client.Api.Domain.Authorization" /> client.
+        /// Get the <see cref="InfluxDB.Client.Api.Domain.Authorization" /> client.
         /// </summary>
         /// <returns>the new client instance for Authorization API</returns>
         public AuthorizationsApi GetAuthorizationsApi()
@@ -183,7 +184,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        ///     Get the <see cref="InfluxDB.Client.Api.Domain.Task" /> client.
+        /// Get the <see cref="InfluxDB.Client.Api.Domain.Task" /> client.
         /// </summary>
         /// <returns>the new client instance for Task API</returns>
         public TasksApi GetTasksApi()
@@ -197,7 +198,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        ///     Get the <see cref="InfluxDB.Client.Api.Domain.ScraperTargetResponse" /> client.
+        /// Get the <see cref="InfluxDB.Client.Api.Domain.ScraperTargetResponse" /> client.
         /// </summary>
         /// <returns>the new client instance for Scraper API</returns>
         public ScraperTargetsApi GetScraperTargetsApi()
@@ -211,7 +212,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        ///     Get the <see cref="InfluxDB.Client.Api.Domain.Telegraf" /> client.
+        /// Get the <see cref="InfluxDB.Client.Api.Domain.Telegraf" /> client.
         /// </summary>
         /// <returns>the new client instance for Telegrafs API</returns>
         public TelegrafsApi GetTelegrafsApi()
@@ -225,7 +226,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        ///     Get the <see cref="InfluxDB.Client.Api.Domain.Label" /> client.
+        /// Get the <see cref="InfluxDB.Client.Api.Domain.Label" /> client.
         /// </summary>
         /// <returns>the new client instance for Label API</returns>
         public LabelsApi GetLabelsApi()
@@ -239,7 +240,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        ///     Set the log level for the request and response information.
+        /// Set the log level for the request and response information.
         /// </summary>
         /// <param name="logLevel">the log level to set</param>
         public void SetLogLevel(LogLevel logLevel)
@@ -250,7 +251,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        ///     Set the <see cref="LogLevel" /> that is used for logging requests and responses.
+        /// Set the <see cref="LogLevel" /> that is used for logging requests and responses.
         /// </summary>
         /// <returns>Log Level</returns>
         public LogLevel GetLogLevel()
@@ -259,23 +260,23 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        ///     Get the health of an instance.
+        /// Get the health of an instance.
         /// </summary>
         /// <returns>health of an instance</returns>
-        public Check Health()
+        public async Task<Check> Health()
         {
-            return GetHealth(_healthService.GetHealthAsync());
+            return await GetHealth(_healthService.GetHealthAsync());
         }
 
         /// <summary>
-        ///     The readiness of the InfluxDB 2.0.
+        /// The readiness of the InfluxDB 2.0.
         /// </summary>
         /// <returns>return null if the InfluxDB is not ready</returns>
-        public Ready Ready()
+        public async Task<Ready> Ready()
         {
             try
             {
-                return _readyService.GetReady();
+                return await _readyService.GetReadyAsync();
             }
             catch (Exception e)
             {
@@ -286,46 +287,48 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        ///     Post onboarding request, to setup initial user, org and bucket.
+        /// Post onboarding request, to setup initial user, org and bucket.
         /// </summary>
         /// <param name="onboarding">to setup defaults</param>
         /// <exception cref="HttpException">With status code 422 when an onboarding has already been completed</exception>
         /// <returns>defaults for first run</returns>
-        public OnboardingResponse Onboarding(OnboardingRequest onboarding)
+        public async Task<OnboardingResponse> Onboarding(OnboardingRequest onboarding)
         {
             Arguments.CheckNotNull(onboarding, nameof(onboarding));
 
-            return _setupService.PostSetup(onboarding);
+            return await _setupService.PostSetupAsync(onboarding);
         }
 
         /// <summary>
-        ///     Check if database has default user, org, bucket created, returns true if not.
+        /// Check if database has default user, org, bucket created, returns true if not.
         /// </summary>
         /// <returns>True if onboarding has already been completed otherwise false</returns>
-        public bool IsOnboardingAllowed()
+        public async Task<bool> IsOnboardingAllowed()
         {
-            var isOnboardingAllowed = _setupService.GetSetup().Allowed;
+            var isOnboardingAllowed = _setupService.GetSetupAsync().ContinueWith(t => t.Result.Allowed == true);
 
-            return true == isOnboardingAllowed;
+            return await isOnboardingAllowed;
         }
-
-        internal static Check GetHealth(Task<Check> task)
-        {
-            Arguments.CheckNotNull(task, nameof(task));
-
-            try
-            {
-                return task.Result;
-            }
-            catch (Exception e)
-            {
-                return new Check("influxdb", e.GetBaseException().Message, default(List<Check>), Check.StatusEnum.Fail);
-            }
-        }
-
+        
         internal static string AuthorizationHeader(string username, string password)
         {
             return "Basic " + Convert.ToBase64String(Encoding.Default.GetBytes(username + ":" + password));
+        }
+        
+        internal static async Task<Check> GetHealth(Task<Check> task)
+        {
+            Arguments.CheckNotNull(task, nameof(task));
+
+            return await task
+                .ContinueWith(t =>
+                {
+                    if (t.Exception != null)
+                    {
+                        return new Check("influxdb", t.Exception?.Message, default(List<Check>), Check.StatusEnum.Fail);
+                    }
+
+                    return t.Result;
+                }, CancellationToken.None);
         }
     }
 }

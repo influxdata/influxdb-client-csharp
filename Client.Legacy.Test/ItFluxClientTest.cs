@@ -42,7 +42,7 @@ namespace Client.Legacy.Test
             var flux = FromFluxDatabase + "\n"
                                            + "\t|> filter(fn: (r) => r[\"_measurement\"] == \"chunked\")\n"
                                            + "\t|> range(start: 1970-01-01T00:00:00.000000000Z)";
-            FluxClient.Query(flux, (cancellable, fluxRecord) => 
+            await FluxClient.Query(flux, (cancellable, fluxRecord) => 
             {
                 // +1 record
                 CountdownEvent.Signal();
@@ -66,7 +66,7 @@ namespace Client.Legacy.Test
                                            + "\t|> range(start: 1970-01-01T00:00:00.000000000Z)\n"
                                            + "\t|> window(every: 10m)";
 
-            FluxClient.Query(flux, (cancellable, fluxRecord) =>
+            await FluxClient.Query(flux, (cancellable, fluxRecord) =>
             {
                 // +1 record
                 CountdownEvent.Signal();
@@ -93,7 +93,7 @@ namespace Client.Legacy.Test
             CountdownEvent = new CountdownEvent(10_000);
             var cancelCountDown = new CountdownEvent(1);
 
-            FluxClient.Query(flux, (cancellable, fluxRecord) =>
+            await FluxClient.Query(flux, (cancellable, fluxRecord) =>
             {
                 // +1 record
                 CountdownEvent.Signal();
@@ -118,47 +118,47 @@ namespace Client.Legacy.Test
         }
 
         [Test]
-        public void Query()
+        public async Task Query()
         {
             var flux = FromFluxDatabase + "\n"
                                            + "\t|> range(start: 1970-01-01T00:00:00.000000000Z)\n"
                                            + "\t|> filter(fn: (r) => (r[\"_measurement\"] == \"mem\" and r[\"_field\"] == \"free\"))\n"
                                            + "\t|> sum()";
 
-            var fluxTables = FluxClient.Query(flux);
+            var fluxTables = await FluxClient.Query(flux);
 
             AssertFluxResult(fluxTables);
         }
 
         [Test]
-        public void QueryWithTime()
+        public async Task QueryWithTime()
         {
             var flux = FromFluxDatabase + "\n"
                                            + "\t|> range(start: 1970-01-01T00:00:00.000000000Z)\n"
                                            + "\t|> filter(fn: (r) => (r[\"_measurement\"] == \"mem\" and r[\"_field\"] == \"free\"))";
 
-            var fluxTables = FluxClient.Query(flux);
+            var fluxTables = await FluxClient.Query(flux);
 
             AssertFluxResultWithTime(fluxTables);
         }
 
         [Test]
-        public void QueryDifferentSchemas()
+        public async Task QueryDifferentSchemas()
         {
             var flux = FromFluxDatabase + "\n"
                                            + "\t|> range(start: 1970-01-01T00:00:00.000000000Z)";
 
-            var fluxTables = FluxClient.Query(flux);
+            var fluxTables = await FluxClient.Query(flux);
 
             Assert.That(fluxTables.Count == 6);
         }
         
         [Test]
-        public void Error() 
+        public async Task Error() 
         {
             try
             {
-                FluxClient.Query("from(bucket:\"telegraf\")");
+                await FluxClient.Query("from(bucket:\"telegraf\")");
                 
                 Assert.Fail();
             }
@@ -170,11 +170,11 @@ namespace Client.Legacy.Test
         }
         
         [Test]
-        public void ErrorWithStatusOk() 
+        public async Task ErrorWithStatusOk() 
         {
             try
             {
-                FluxClient.Query(FromFluxDatabase);
+                await FluxClient.Query(FromFluxDatabase);
                 
                 Assert.Fail();
             }
@@ -186,7 +186,7 @@ namespace Client.Legacy.Test
         }
 
         [Test]
-        public void Callback()
+        public async Task Callback()
         {
             CountdownEvent = new CountdownEvent(3);
             var records = new List<FluxRecord>();
@@ -196,7 +196,7 @@ namespace Client.Legacy.Test
                                            + "\t|> filter(fn: (r) => (r[\"_measurement\"] == \"mem\" and r[\"_field\"] == \"free\"))\n"
                                            + "\t|> sum()";
 
-            FluxClient.Query(flux, (cancellable, record) =>
+            await FluxClient.Query(flux, (cancellable, record) =>
                             {
                                 records.Add(record);
                                 CountdownEvent.Signal();
@@ -209,13 +209,13 @@ namespace Client.Legacy.Test
         }
 
         [Test]
-        public void CallbackWhenConnectionRefuse()
+        public async Task CallbackWhenConnectionRefuse()
         {
             var options = new FluxConnectionOptions("http://localhost:8003");
 
             var fluxClient = FluxClientFactory.Create(options);
 
-            fluxClient.Query(FromFluxDatabase + " |> last()",
+            await fluxClient.Query(FromFluxDatabase + " |> last()",
                             (cancellable, record) => { },
                             error => CountdownEvent.Signal());
 
@@ -223,7 +223,7 @@ namespace Client.Legacy.Test
         }
 
         [Test]
-        public void CallbackToMeasurement()
+        public async Task CallbackToMeasurement()
         {
             var flux = FromFluxDatabase + "\n"
                                            + "\t|> range(start: 1970-01-01T00:00:00.000000000Z)\n"
@@ -233,7 +233,7 @@ namespace Client.Legacy.Test
 
             CountdownEvent = new CountdownEvent(4);
 
-             FluxClient.Query<Mem>(flux, (cancellable, mem) =>
+             await FluxClient.Query<Mem>(flux, (cancellable, mem) =>
             {
                 memory.Add(mem);
                 CountdownEvent.Signal();
@@ -265,17 +265,17 @@ namespace Client.Legacy.Test
         }
 
         [Test]
-        public void Ping() 
+        public async Task Ping() 
         {
-            Assert.IsTrue(FluxClient.Ping());
+            Assert.IsTrue(await FluxClient.Ping());
         }
         
         [Test]
-        public void Version()
+        public async Task Version()
         {
             var version = FluxClient.Version();
             
-            Assert.IsNotEmpty(version);
+            Assert.IsNotEmpty(await version);
         }
         
         [Test]

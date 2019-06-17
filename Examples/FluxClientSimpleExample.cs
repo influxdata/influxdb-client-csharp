@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Threading.Tasks;
 using InfluxDB.Client.Flux;
 
 namespace Examples
 {
     public static class FluxClientSimpleExample
     {
-        public static void Run()
+        public static async Task Run()
         {
             Console.WriteLine("Start");
 
@@ -17,7 +18,7 @@ namespace Examples
                                + " |> range(start: -1d)"
                                + " |> sample(n: 5, pos: 1)";
 
-            var tables = client.Query(fluxQuery);
+            var tables = await client.Query(fluxQuery);
             
             if (tables != null)
             {

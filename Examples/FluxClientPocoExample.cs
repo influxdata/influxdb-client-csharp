@@ -1,11 +1,12 @@
 using System;
+using System.Threading.Tasks;
 using InfluxDB.Client.Flux;
 
 namespace Examples
 {
     public static class FluxClientPocoExample
     {
-        public static void Run()
+        public static async Task Run()
         {
             var options = new FluxConnectionOptions("http://127.0.0.1:8086");
 
@@ -17,7 +18,7 @@ namespace Examples
                                + " |> sample(n: 5, pos: 1)";
 
             ////Example of additional result stream processing on client side
-            fluxClient.Query<Cpu>(fluxQuery,
+            await fluxClient.Query<Cpu>(fluxQuery,
                             (cancellable, cpu) =>
                             {
                                 // process the flux query records

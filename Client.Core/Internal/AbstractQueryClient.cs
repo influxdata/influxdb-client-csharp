@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Threading.Tasks;
 using InfluxDB.Client.Core.Exceptions;
 using InfluxDB.Client.Core.Flux.Domain;
 using InfluxDB.Client.Core.Flux.Internal;
@@ -29,7 +30,7 @@ namespace InfluxDB.Client.Core.Internal
             RestClient = restClient;
         }
 
-        protected void Query(RestRequest query, FluxCsvParser.IFluxResponseConsumer responseConsumer,
+        protected async Task Query(RestRequest query, FluxCsvParser.IFluxResponseConsumer responseConsumer,
             Action<Exception> onError,
             Action onComplete)
         {
@@ -45,10 +46,10 @@ namespace InfluxDB.Client.Core.Internal
                 }
             }
 
-            Query(query, Consumer, onError, onComplete);
+            await Query(query, Consumer, onError, onComplete);
         }
 
-        protected void QueryRaw(RestRequest query,
+        protected async Task QueryRaw(RestRequest query,
             Action<ICancellable, string> onResponse,
             Action<Exception> onError,
             Action onComplete)
@@ -65,10 +66,10 @@ namespace InfluxDB.Client.Core.Internal
                 }
             }
 
-            Query(query, Consumer, onError, onComplete);
+            await Query(query, Consumer, onError, onComplete);
         }
 
-        protected void Query(RestRequest query, Action<ICancellable, Stream> consumer,
+        protected async Task Query(RestRequest query, Action<ICancellable, Stream> consumer,
             Action<Exception> onError, Action onComplete)
         {
             Arguments.CheckNotNull(query, "query");
@@ -90,7 +91,7 @@ namespace InfluxDB.Client.Core.Internal
                     consumer(cancellable, responseStream);
                 };
 
-                RestClient.DownloadData(query, true);
+                await Task.Run(() => { RestClient.DownloadData(query, true); });
                 if (!cancellable.IsCancelled())
                 {
                     onComplete();

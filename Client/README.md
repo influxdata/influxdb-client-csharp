@@ -323,6 +323,7 @@ Write Measurement into specified bucket:
 ```c#
 using System;
 using InfluxDB.Client;
+using InfluxDB.Client.Api.Domain;
 using InfluxDB.Client.Core;
 
 namespace Examples
@@ -345,7 +346,7 @@ namespace Examples
                 //
                 var temperature = new Temperature {Location = "south", Value = 62D, Time = DateTime.UtcNow};
 
-                writeApi.WriteMeasurement("bucket_name", "org_id", TimeUnit.Nanos, temperature);
+                writeApi.WriteMeasurement("bucket_name", "org_id", WritePrecision.Ns, temperature);
             }
             
             influxDBClient.Dispose();
@@ -371,6 +372,7 @@ Write Data point into specified bucket:
 ```c#
 using System;
 using InfluxDB.Client;
+using InfluxDB.Client.Api.Domain;
 using InfluxDB.Client.Writes;
 
 namespace Examples
@@ -394,7 +396,7 @@ namespace Examples
                 var point = Point.Measurement("temperature")
                     .Tag("location", "west")
                     .Field("value", 55D)
-                    .Timestamp(DateTime.UtcNow.AddSeconds(-10), TimeUnit.Nanos);
+                    .Timestamp(DateTime.UtcNow.AddSeconds(-10), WritePrecision.Ns);
                 
                 writeApi.WritePoint("bucket_name", "org_id", point);
             }
@@ -411,6 +413,7 @@ Write Line Protocol record into specified bucket:
 
 ```c#
 using InfluxDB.Client;
+using InfluxDB.Client.Api.Domain;
 
 namespace Examples
 {
@@ -431,7 +434,7 @@ namespace Examples
                 //
                 // Write by LineProtocol
                 //
-                writeApi.WriteRecord("bucket_name", "org_id", TimeUnit.Nanos, "temperature,location=north value=60.0");
+                writeApi.WriteRecord("bucket_name", "org_id", WritePrecision.Ns, "temperature,location=north value=60.0");
             }
             
             influxDBClient.Dispose();
@@ -504,7 +507,7 @@ The following example demonstrates how to use a InfluxDB 2.0 Management API. For
 ```c#
 using System.Collections.Generic;
 using InfluxDB.Client;
-using InfluxDB.Client.Domain;
+using InfluxDB.Client.Api.Domain;
 using Task = System.Threading.Tasks.Task;
 
 namespace Examples
@@ -520,20 +523,20 @@ namespace Examples
             //
             // Create bucket "iot_bucket" with data retention set to 3,600 seconds
             //
-            var retention = new RetentionRule{EverySeconds = 3600};
+            var retention = new BucketRetentionRules(BucketRetentionRules.TypeEnum.Expire, 3600);
 
             var bucket = await influxDBClient.GetBucketsApi().CreateBucket("iot_bucket", retention, "org_id");
             
             //
             // Create access token to "iot_bucket"
             //
-            var resource = new PermissionResource{Id = bucket.Id, OrgId = "org_id",Type = ResourceType.Buckets};
+            var resource = new PermissionResource{Id = bucket.Id, OrgID = "org_id",Type = PermissionResource.TypeEnum.Buckets};
 
             // Read permission
-            var read = new Permission{Resource = resource, Action = Permission.ReadAction};
+            var read = new Permission{Resource = resource, Action = Permission.ActionEnum.Read};
             
             // Write permission
-            var write = new Permission{Resource = resource, Action = Permission.WriteAction};
+            var write = new Permission{Resource = resource, Action = Permission.ActionEnum.Write};
 
             var authorization = await influxDBClient.GetAuthorizationsApi()
                 .CreateAuthorization("org_id", new List<Permission> {read, write});

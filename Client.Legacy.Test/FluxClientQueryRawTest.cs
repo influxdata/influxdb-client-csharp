@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Threading;
+using System.Threading.Tasks;
 using InfluxDB.Client.Core.Exceptions;
 using NUnit.Framework;
 using WireMock.RequestBuilders;
@@ -10,25 +11,25 @@ namespace Client.Legacy.Test
     public class FluxClientQueryRawTest : AbstractFluxClientTest
     {
         [Test]
-        public void QueryRaw()
+        public async Task QueryRaw()
         {
             MockServer.Given(Request.Create().WithPath("/api/v2/query").UsingPost())
-                            .RespondWith(CreateResponse());
+                .RespondWith(CreateResponse());
 
-            var result =  FluxClient.QueryRaw("from(bucket:\"telegraf\")");
+            var result = await FluxClient.QueryRaw("from(bucket:\"telegraf\")");
 
             AssertSuccessResult(result);
         }
 
         [Test]
-        public void QueryRawError()
+        public async Task QueryRawError()
         {
             MockServer.Given(Request.Create().WithPath("/api/v2/query").UsingPost())
-                            .RespondWith(CreateErrorResponse());
+                .RespondWith(CreateErrorResponse());
 
             try
             {
-                 FluxClient.QueryRaw("from(bucket:\"telegraf\")");
+                await FluxClient.QueryRaw("from(bucket:\"telegraf\")");
 
                 Assert.Fail();
             }
@@ -39,21 +40,21 @@ namespace Client.Legacy.Test
         }
 
         [Test]
-        public void QueryRawCallback()
+        public async Task QueryRawCallback()
         {
             CountdownEvent = new CountdownEvent(8);
 
             MockServer.Given(Request.Create().WithPath("/api/v2/query").UsingPost())
-                            .RespondWith(CreateResponse());
+                .RespondWith(CreateResponse());
 
             var results = new List<string>();
 
-             FluxClient.QueryRaw("from(bucket:\"telegraf\")",
-                            (cancellable, result) =>
-                            {
-                                results.Add(result);
-                                CountdownEvent.Signal();
-                            });
+            await FluxClient.QueryRaw("from(bucket:\"telegraf\")",
+                (cancellable, result) =>
+                {
+                    results.Add(result);
+                    CountdownEvent.Signal();
+                });
 
             WaitToCallback();
 
@@ -62,32 +63,32 @@ namespace Client.Legacy.Test
         }
 
         [Test]
-        public void QueryRawCallbackOnComplete()
+        public async Task QueryRawCallbackOnComplete()
         {
             CountdownEvent = new CountdownEvent(1);
 
             MockServer.Given(Request.Create().WithPath("/api/v2/query").UsingPost())
-                            .RespondWith(CreateResponse());
+                .RespondWith(CreateResponse());
 
             var results = new List<string>();
 
-             FluxClient.QueryRaw("from(bucket:\"telegraf\")", null,
-                            (cancellable, result) => results.Add(result),
-                            error => Assert.Fail("Unreachable"),
-                            () => CountdownEvent.Signal());
+            await FluxClient.QueryRaw("from(bucket:\"telegraf\")", null,
+                (cancellable, result) => results.Add(result),
+                error => Assert.Fail("Unreachable"),
+                () => CountdownEvent.Signal());
 
             WaitToCallback();
             AssertSuccessResult(string.Join("\n", results));
         }
 
         [Test]
-        public void QueryRawCallbackOnError()
+        public async Task QueryRawCallbackOnError()
         {
             MockServer.Stop();
 
-             FluxClient.QueryRaw("from(bucket:\"telegraf\")",
-                            (cancellable, result) => Assert.Fail("Unreachable"),
-                            error => CountdownEvent.Signal());
+            await FluxClient.QueryRaw("from(bucket:\"telegraf\")",
+                (cancellable, result) => Assert.Fail("Unreachable"),
+                error => CountdownEvent.Signal());
 
             WaitToCallback();
         }

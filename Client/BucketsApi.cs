@@ -1,11 +1,11 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using InfluxDB.Client.Core;
-using InfluxDB.Client.Domain;
+using System.Threading.Tasks;
 using InfluxDB.Client.Api.Domain;
 using InfluxDB.Client.Api.Service;
-using ResourceMember = InfluxDB.Client.Api.Domain.ResourceMember;
+using InfluxDB.Client.Core;
+using InfluxDB.Client.Domain;
+using Task = System.Threading.Tasks.Task;
 
 namespace InfluxDB.Client
 {
@@ -25,11 +25,11 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="bucket">bucket to create</param>
         /// <returns>created Bucket</returns>
-        public Bucket CreateBucket(Bucket bucket)
+        public async Task<Bucket> CreateBucket(Bucket bucket)
         {
             Arguments.CheckNotNull(bucket, nameof(bucket));
 
-            return _service.PostBuckets(bucket);
+            return await _service.PostBucketsAsync(bucket);
         }
 
         /// <summary>
@@ -38,12 +38,12 @@ namespace InfluxDB.Client
         /// <param name="name">name of the bucket</param>
         /// <param name="organization">owner of the bucket</param>
         /// <returns>created Bucket</returns>
-        public Bucket CreateBucket(string name, Organization organization)
+        public async Task<Bucket> CreateBucket(string name, Organization organization)
         {
             Arguments.CheckNonEmptyString(name, nameof(name));
             Arguments.CheckNotNull(organization, nameof(organization));
 
-            return CreateBucket(name, organization.Id);
+            return await CreateBucket(name, organization.Id);
         }
 
         /// <summary>
@@ -53,12 +53,13 @@ namespace InfluxDB.Client
         /// <param name="bucketRetentionRules">retention rule of the bucket</param>
         /// <param name="organization">owner of the bucket</param>
         /// <returns>created Bucket</returns>
-        public Bucket CreateBucket(string name, BucketRetentionRules bucketRetentionRules, Organization organization)
+        public async Task<Bucket> CreateBucket(string name, BucketRetentionRules bucketRetentionRules,
+            Organization organization)
         {
             Arguments.CheckNonEmptyString(name, nameof(name));
             Arguments.CheckNotNull(organization, nameof(organization));
 
-            return CreateBucket(name, bucketRetentionRules, organization.Id);
+            return await CreateBucket(name, bucketRetentionRules, organization.Id);
         }
 
         /// <summary>
@@ -67,12 +68,12 @@ namespace InfluxDB.Client
         /// <param name="name">name of the bucket</param>
         /// <param name="orgId">owner of the bucket</param>
         /// <returns>created Bucket</returns>
-        public Bucket CreateBucket(string name, string orgId)
+        public async Task<Bucket> CreateBucket(string name, string orgId)
         {
             Arguments.CheckNonEmptyString(name, nameof(name));
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
 
-            return CreateBucket(name, default(BucketRetentionRules), orgId);
+            return await CreateBucket(name, default(BucketRetentionRules), orgId);
         }
 
         /// <summary>
@@ -82,7 +83,7 @@ namespace InfluxDB.Client
         /// <param name="bucketRetentionRules">retention rule of the bucket</param>
         /// <param name="orgId">owner of the bucket</param>
         /// <returns>created Bucket</returns>
-        public Bucket CreateBucket(string name, BucketRetentionRules bucketRetentionRules, string orgId)
+        public async Task<Bucket> CreateBucket(string name, BucketRetentionRules bucketRetentionRules, string orgId)
         {
             Arguments.CheckNonEmptyString(name, nameof(name));
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
@@ -90,7 +91,7 @@ namespace InfluxDB.Client
             var bucket = new Bucket(null, name, null, orgId, null, new List<BucketRetentionRules>());
             if (bucketRetentionRules != null) bucket.RetentionRules.Add(bucketRetentionRules);
 
-            return CreateBucket(bucket);
+            return await CreateBucket(bucket);
         }
 
         /// <summary>
@@ -98,11 +99,11 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="bucket">bucket update to apply</param>
         /// <returns>bucket updated</returns>
-        public Bucket UpdateBucket(Bucket bucket)
+        public async Task<Bucket> UpdateBucket(Bucket bucket)
         {
             Arguments.CheckNotNull(bucket, nameof(bucket));
 
-            return _service.PatchBucketsID(bucket.Id, bucket);
+            return await _service.PatchBucketsIDAsync(bucket.Id, bucket);
         }
 
         /// <summary>
@@ -110,11 +111,11 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="bucketId">ID of bucket to delete</param>
         /// <returns>delete has been accepted</returns>
-        public void DeleteBucket(string bucketId)
+        public async Task DeleteBucket(string bucketId)
         {
             Arguments.CheckNonEmptyString(bucketId, nameof(bucketId));
 
-            _service.DeleteBucketsID(bucketId);
+            await _service.DeleteBucketsIDAsync(bucketId);
         }
 
         /// <summary>
@@ -122,11 +123,11 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="bucket">bucket to delete</param>
         /// <returns>delete has been accepted</returns>
-        public void DeleteBucket(Bucket bucket)
+        public async Task DeleteBucket(Bucket bucket)
         {
             Arguments.CheckNotNull(bucket, nameof(bucket));
 
-            DeleteBucket(bucket.Id);
+            await DeleteBucket(bucket.Id);
         }
 
         /// <summary>
@@ -135,15 +136,13 @@ namespace InfluxDB.Client
         /// <param name="clonedName">name of cloned bucket</param>
         /// <param name="bucketId">ID of bucket to clone</param>
         /// <returns>cloned bucket</returns>
-        public Bucket CloneBucket(string clonedName, string bucketId)
+        public async Task<Bucket> CloneBucket(string clonedName, string bucketId)
         {
             Arguments.CheckNonEmptyString(clonedName, nameof(clonedName));
             Arguments.CheckNonEmptyString(bucketId, nameof(bucketId));
 
-            var bucket = FindBucketById(bucketId);
-            if (bucket == null) throw new InvalidOperationException($"NotFound Bucket with ID: {bucketId}");
-
-            return CloneBucket(clonedName, bucket);
+            return await FindBucketById(bucketId).ContinueWith(t => t.Result)
+                .ContinueWith(t => CloneBucket(clonedName, t.Result)).Unwrap();
         }
 
         /// <summary>
@@ -152,18 +151,27 @@ namespace InfluxDB.Client
         /// <param name="clonedName">name of cloned bucket</param>
         /// <param name="bucket">bucket to clone</param>
         /// <returns>cloned bucket</returns>
-        public Bucket CloneBucket(string clonedName, Bucket bucket)
+        public async Task<Bucket> CloneBucket(string clonedName, Bucket bucket)
         {
             Arguments.CheckNonEmptyString(clonedName, nameof(clonedName));
             Arguments.CheckNotNull(bucket, nameof(bucket));
 
             var cloned = new Bucket(null, clonedName, null, bucket.OrgID, bucket.Rp, bucket.RetentionRules);
 
-            var created = CreateBucket(cloned);
-
-            foreach (var label in GetLabels(bucket)) AddLabel(label, created);
-
-            return created;
+            return await CreateBucket(cloned).ContinueWith(created =>
+            {
+                //
+                // Add labels
+                //
+                return GetLabels(bucket)
+                    .ContinueWith(labels => { return labels.Result.Select(label => AddLabel(label, created.Result)); })
+                    .ContinueWith(async tasks =>
+                    {
+                        await Task.WhenAll(tasks.Result);
+                        return created.Result;
+                    })
+                    .Unwrap();
+            }).Unwrap();
         }
 
         /// <summary>
@@ -171,11 +179,11 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="bucketId">ID of bucket to get</param>
         /// <returns>Bucket Details</returns>
-        public Bucket FindBucketById(string bucketId)
+        public async Task<Bucket> FindBucketById(string bucketId)
         {
             Arguments.CheckNonEmptyString(bucketId, nameof(bucketId));
 
-            return _service.GetBucketsID(bucketId);
+            return await _service.GetBucketsIDAsync(bucketId);
         }
 
         /// <summary>
@@ -183,14 +191,13 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="bucketName">Name of bucket to get</param>
         /// <returns>Bucket Details</returns>
-        public Bucket FindBucketByName(string bucketName)
+        public async Task<Bucket> FindBucketByName(string bucketName)
         {
             Arguments.CheckNonEmptyString(bucketName, nameof(bucketName));
 
-            return _service
-                .GetBuckets(null, null, null, null, null, bucketName)
-                ._Buckets
-                .FirstOrDefault();
+            return await _service
+                .GetBucketsAsync(null, null, null, null, null, bucketName)
+                .ContinueWith(t => t.Result._Buckets.FirstOrDefault());
         }
 
         /// <summary>
@@ -198,11 +205,11 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="organization">filter buckets to a specific organization</param>
         /// <returns>A list of buckets</returns>
-        public List<Bucket> FindBucketsByOrganization(Organization organization)
+        public async Task<List<Bucket>> FindBucketsByOrganization(Organization organization)
         {
             Arguments.CheckNotNull(organization, nameof(organization));
 
-            return FindBucketsByOrgName(organization.Name);
+            return await FindBucketsByOrgName(organization.Name);
         }
 
         /// <summary>
@@ -210,20 +217,20 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="orgName">filter buckets to a specific organization</param>
         /// <returns>A list of buckets</returns>
-        public List<Bucket> FindBucketsByOrgName(string orgName)
+        public async Task<List<Bucket>> FindBucketsByOrgName(string orgName)
         {
             var buckets = FindBuckets(orgName, new FindOptions());
 
-            return buckets._Buckets;
+            return await buckets.ContinueWith(t => t.Result._Buckets);
         }
 
         /// <summary>
         /// List all buckets.
         /// </summary>
         /// <returns>List all buckets</returns>
-        public List<Bucket> FindBuckets()
+        public async Task<List<Bucket>> FindBuckets()
         {
-            return FindBucketsByOrgName(null);
+            return await FindBucketsByOrgName(null);
         }
 
         /// <summary>
@@ -231,11 +238,11 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="findOptions">the find options</param>
         /// <returns>List all buckets</returns>
-        public Buckets FindBuckets(FindOptions findOptions)
+        public async Task<Buckets> FindBuckets(FindOptions findOptions)
         {
             Arguments.CheckNotNull(findOptions, nameof(findOptions));
 
-            return FindBuckets(null, findOptions);
+            return await FindBuckets(null, findOptions);
         }
 
         /// <summary>
@@ -243,11 +250,11 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="bucket">bucket of the members</param>
         /// <returns>the List all members of a bucket</returns>
-        public List<ResourceMember> GetMembers(Bucket bucket)
+        public async Task<List<ResourceMember>> GetMembers(Bucket bucket)
         {
             Arguments.CheckNotNull(bucket, nameof(bucket));
 
-            return GetMembers(bucket.Id);
+            return await GetMembers(bucket.Id);
         }
 
         /// <summary>
@@ -255,11 +262,11 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="bucketId">ID of bucket to get members</param>
         /// <returns>the List all members of a bucket</returns>
-        public List<ResourceMember> GetMembers(string bucketId)
+        public async Task<List<ResourceMember>> GetMembers(string bucketId)
         {
             Arguments.CheckNonEmptyString(bucketId, nameof(bucketId));
 
-            return _service.GetBucketsIDMembers(bucketId).Users;
+            return await _service.GetBucketsIDMembersAsync(bucketId).ContinueWith(t => t.Result.Users);
         }
 
         /// <summary>
@@ -268,12 +275,12 @@ namespace InfluxDB.Client
         /// <param name="member">the member of a bucket</param>
         /// <param name="bucket">the bucket of a member</param>
         /// <returns>created mapping</returns>
-        public ResourceMember AddMember(User member, Bucket bucket)
+        public async Task<ResourceMember> AddMember(User member, Bucket bucket)
         {
             Arguments.CheckNotNull(bucket, nameof(bucket));
             Arguments.CheckNotNull(member, nameof(member));
 
-            return AddMember(member.Id, bucket.Id);
+            return await AddMember(member.Id, bucket.Id);
         }
 
         /// <summary>
@@ -282,14 +289,14 @@ namespace InfluxDB.Client
         /// <param name="memberId">the ID of a member</param>
         /// <param name="bucketId">the ID of a bucket</param>
         /// <returns>created mapping</returns>
-        public ResourceMember AddMember(string memberId, string bucketId)
+        public async Task<ResourceMember> AddMember(string memberId, string bucketId)
         {
             Arguments.CheckNonEmptyString(bucketId, nameof(bucketId));
             Arguments.CheckNonEmptyString(memberId, nameof(memberId));
 
             var mapping = new AddResourceMemberRequestBody(memberId);
 
-            return _service.PostBucketsIDMembers(bucketId, mapping);
+            return await _service.PostBucketsIDMembersAsync(bucketId, mapping);
         }
 
         /// <summary>
@@ -298,12 +305,12 @@ namespace InfluxDB.Client
         /// <param name="member">the member of a bucket</param>
         /// <param name="bucket">the bucket of a member</param>
         /// <returns>member removed</returns>
-        public void DeleteMember(User member, Bucket bucket)
+        public async Task DeleteMember(User member, Bucket bucket)
         {
             Arguments.CheckNotNull(bucket, nameof(bucket));
             Arguments.CheckNotNull(member, nameof(member));
 
-            DeleteMember(member.Id, bucket.Id);
+            await DeleteMember(member.Id, bucket.Id);
         }
 
         /// <summary>
@@ -312,12 +319,12 @@ namespace InfluxDB.Client
         /// <param name="memberId">the ID of a member</param>
         /// <param name="bucketId">the ID of a bucket</param>
         /// <returns>member removed</returns>
-        public void DeleteMember(string memberId, string bucketId)
+        public async Task DeleteMember(string memberId, string bucketId)
         {
             Arguments.CheckNonEmptyString(bucketId, nameof(bucketId));
             Arguments.CheckNonEmptyString(memberId, nameof(memberId));
 
-            _service.DeleteBucketsIDMembersID(memberId, bucketId);
+            await _service.DeleteBucketsIDMembersIDAsync(memberId, bucketId);
         }
 
         /// <summary>
@@ -325,11 +332,11 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="bucket">bucket of the owners</param>
         /// <returns>the List all owners of a bucket</returns>
-        public List<ResourceOwner> GetOwners(Bucket bucket)
+        public async Task<List<ResourceOwner>> GetOwners(Bucket bucket)
         {
             Arguments.CheckNotNull(bucket, nameof(bucket));
 
-            return GetOwners(bucket.Id);
+            return await GetOwners(bucket.Id);
         }
 
         /// <summary>
@@ -337,11 +344,11 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="bucketId">ID of a bucket to get owners</param>
         /// <returns>the List all owners of a bucket</returns>
-        public List<ResourceOwner> GetOwners(string bucketId)
+        public async Task<List<ResourceOwner>> GetOwners(string bucketId)
         {
             Arguments.CheckNonEmptyString(bucketId, nameof(bucketId));
 
-            return _service.GetBucketsIDOwners(bucketId).Users;
+            return await _service.GetBucketsIDOwnersAsync(bucketId).ContinueWith(t => t.Result.Users);
         }
 
         /// <summary>
@@ -350,12 +357,12 @@ namespace InfluxDB.Client
         /// <param name="owner">the owner of a bucket</param>
         /// <param name="bucket">the bucket of a owner</param>
         /// <returns>created mapping</returns>
-        public ResourceOwner AddOwner(User owner, Bucket bucket)
+        public async Task<ResourceOwner> AddOwner(User owner, Bucket bucket)
         {
             Arguments.CheckNotNull(bucket, nameof(bucket));
             Arguments.CheckNotNull(owner, nameof(owner));
 
-            return AddOwner(owner.Id, bucket.Id);
+            return await AddOwner(owner.Id, bucket.Id);
         }
 
         /// <summary>
@@ -364,14 +371,14 @@ namespace InfluxDB.Client
         /// <param name="ownerId">the ID of a owner</param>
         /// <param name="bucketId">the ID of a bucket</param>
         /// <returns>created mapping</returns>
-        public ResourceOwner AddOwner(string ownerId, string bucketId)
+        public async Task<ResourceOwner> AddOwner(string ownerId, string bucketId)
         {
             Arguments.CheckNonEmptyString(bucketId, nameof(bucketId));
             Arguments.CheckNonEmptyString(ownerId, nameof(ownerId));
 
             var mapping = new AddResourceMemberRequestBody(ownerId);
 
-            return _service.PostBucketsIDOwners(bucketId, mapping);
+            return await _service.PostBucketsIDOwnersAsync(bucketId, mapping);
         }
 
         /// <summary>
@@ -380,12 +387,12 @@ namespace InfluxDB.Client
         /// <param name="owner">the owner of a bucket</param>
         /// <param name="bucket">the bucket of a owner</param>
         /// <returns>owner removed</returns>
-        public void DeleteOwner(User owner, Bucket bucket)
+        public async Task DeleteOwner(User owner, Bucket bucket)
         {
             Arguments.CheckNotNull(bucket, nameof(bucket));
             Arguments.CheckNotNull(owner, nameof(owner));
 
-            DeleteOwner(owner.Id, bucket.Id);
+            await DeleteOwner(owner.Id, bucket.Id);
         }
 
         /// <summary>
@@ -394,12 +401,12 @@ namespace InfluxDB.Client
         /// <param name="ownerId">the ID of a owner</param>
         /// <param name="bucketId">the ID of a bucket</param>
         /// <returns>owner removed</returns>
-        public void DeleteOwner(string ownerId, string bucketId)
+        public async Task DeleteOwner(string ownerId, string bucketId)
         {
             Arguments.CheckNonEmptyString(bucketId, nameof(bucketId));
             Arguments.CheckNonEmptyString(ownerId, nameof(ownerId));
 
-            _service.DeleteBucketsIDOwnersID(ownerId, bucketId);
+            await _service.DeleteBucketsIDOwnersIDAsync(ownerId, bucketId);
         }
 
         /// <summary>
@@ -407,11 +414,11 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="bucket">for retrieve logs</param>
         /// <returns>logs</returns>
-        public List<OperationLog> FindBucketLogs(Bucket bucket)
+        public async Task<List<OperationLog>> FindBucketLogs(Bucket bucket)
         {
             Arguments.CheckNotNull(bucket, nameof(bucket));
 
-            return FindBucketLogs(bucket.Id);
+            return await FindBucketLogs(bucket.Id);
         }
 
         /// <summary>
@@ -420,12 +427,12 @@ namespace InfluxDB.Client
         /// <param name="bucket">for retrieve logs</param>
         /// <param name="findOptions">the find options</param>
         /// <returns>logs</returns>
-        public OperationLogs FindBucketLogs(Bucket bucket, FindOptions findOptions)
+        public async Task<OperationLogs> FindBucketLogs(Bucket bucket, FindOptions findOptions)
         {
             Arguments.CheckNotNull(bucket, nameof(bucket));
             Arguments.CheckNotNull(findOptions, nameof(findOptions));
 
-            return FindBucketLogs(bucket.Id, findOptions);
+            return await FindBucketLogs(bucket.Id, findOptions);
         }
 
         /// <summary>
@@ -433,11 +440,11 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="bucketId">the ID of a bucket</param>
         /// <returns>logs</returns>
-        public List<OperationLog> FindBucketLogs(string bucketId)
+        public async Task<List<OperationLog>> FindBucketLogs(string bucketId)
         {
             Arguments.CheckNonEmptyString(bucketId, nameof(bucketId));
 
-            return FindBucketLogs(bucketId, new FindOptions()).Logs;
+            return await FindBucketLogs(bucketId, new FindOptions()).ContinueWith(t=> t.Result.Logs);
         }
 
         /// <summary>
@@ -446,12 +453,12 @@ namespace InfluxDB.Client
         /// <param name="bucketId">the ID of a bucket</param>
         /// <param name="findOptions">the find options</param>
         /// <returns>logs</returns>
-        public OperationLogs FindBucketLogs(string bucketId, FindOptions findOptions)
+        public async Task<OperationLogs> FindBucketLogs(string bucketId, FindOptions findOptions)
         {
             Arguments.CheckNonEmptyString(bucketId, nameof(bucketId));
             Arguments.CheckNotNull(findOptions, nameof(findOptions));
 
-            return _service.GetBucketsIDLogs(bucketId, null, findOptions.Offset, findOptions.Limit);
+            return await _service.GetBucketsIDLogsAsync(bucketId, null, findOptions.Offset, findOptions.Limit);
         }
 
         /// <summary>
@@ -459,11 +466,11 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="bucket">bucket of the labels</param>
         /// <returns>the List all labels of a bucket</returns>
-        public List<Label> GetLabels(Bucket bucket)
+        public async Task<List<Label>> GetLabels(Bucket bucket)
         {
             Arguments.CheckNotNull(bucket, nameof(bucket));
 
-            return GetLabels(bucket.Id);
+            return await GetLabels(bucket.Id);
         }
 
         /// <summary>
@@ -471,11 +478,11 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="bucketId">ID of a bucket to get labels</param>
         /// <returns>the List all labels of a bucket</returns>
-        public List<Label> GetLabels(string bucketId)
+        public async Task<List<Label>> GetLabels(string bucketId)
         {
             Arguments.CheckNonEmptyString(bucketId, nameof(bucketId));
 
-            return _service.GetBucketsIDLabels(bucketId).Labels;
+            return await _service.GetBucketsIDLabelsAsync(bucketId).ContinueWith(t => t.Result.Labels);
         }
 
         /// <summary>
@@ -484,12 +491,12 @@ namespace InfluxDB.Client
         /// <param name="label">the label of a bucket</param>
         /// <param name="bucket">the bucket of a label</param>
         /// <returns>added label</returns>
-        public Label AddLabel(Label label, Bucket bucket)
+        public async Task<Label> AddLabel(Label label, Bucket bucket)
         {
             Arguments.CheckNotNull(bucket, nameof(bucket));
             Arguments.CheckNotNull(label, nameof(label));
 
-            return AddLabel(label.Id, bucket.Id);
+            return await AddLabel(label.Id, bucket.Id);
         }
 
         /// <summary>
@@ -498,14 +505,14 @@ namespace InfluxDB.Client
         /// <param name="labelId">the ID of a label</param>
         /// <param name="bucketId">the ID of a bucket</param>
         /// <returns>added label</returns>
-        public Label AddLabel(string labelId, string bucketId)
+        public async Task<Label> AddLabel(string labelId, string bucketId)
         {
             Arguments.CheckNonEmptyString(bucketId, nameof(bucketId));
             Arguments.CheckNonEmptyString(labelId, nameof(labelId));
 
             var mapping = new LabelMapping(labelId);
 
-            return _service.PostBucketsIDLabels(bucketId, mapping).Label;
+            return await _service.PostBucketsIDLabelsAsync(bucketId, mapping).ContinueWith(t => t.Result.Label);
         }
 
         /// <summary>
@@ -514,12 +521,12 @@ namespace InfluxDB.Client
         /// <param name="label">the label of a bucket</param>
         /// <param name="bucket">the bucket of a owner</param>
         /// <returns>delete has been accepted</returns>
-        public void DeleteLabel(Label label, Bucket bucket)
+        public async Task DeleteLabel(Label label, Bucket bucket)
         {
             Arguments.CheckNotNull(bucket, nameof(bucket));
             Arguments.CheckNotNull(label, nameof(label));
 
-            DeleteLabel(label.Id, bucket.Id);
+            await DeleteLabel(label.Id, bucket.Id);
         }
 
         /// <summary>
@@ -528,19 +535,19 @@ namespace InfluxDB.Client
         /// <param name="labelId">the ID of a label</param>
         /// <param name="bucketId">the ID of a bucket</param>
         /// <returns>delete has been accepted</returns>
-        public void DeleteLabel(string labelId, string bucketId)
+        public async Task DeleteLabel(string labelId, string bucketId)
         {
             Arguments.CheckNonEmptyString(bucketId, nameof(bucketId));
             Arguments.CheckNonEmptyString(labelId, nameof(labelId));
 
-            _service.DeleteBucketsIDLabelsID(bucketId, labelId);
+            await _service.DeleteBucketsIDLabelsIDAsync(bucketId, labelId);
         }
 
-        private Buckets FindBuckets(string orgName, FindOptions findOptions)
+        private async Task<Buckets> FindBuckets(string orgName, FindOptions findOptions)
         {
             Arguments.CheckNotNull(findOptions, nameof(findOptions));
 
-            return _service.GetBuckets(null, findOptions.Offset, findOptions.Limit, orgName);
+            return await _service.GetBucketsAsync(null, findOptions.Offset, findOptions.Limit, orgName);
         }
     }
 }

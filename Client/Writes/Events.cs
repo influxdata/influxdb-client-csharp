@@ -44,7 +44,7 @@ namespace InfluxDB.Client.Writes
     /// <summary>
     /// The event is published when occurs a retriable write exception.
     /// </summary>
-    public class WriteRetriableErrorEvent : AbstractWriteEvent
+    public class WriteRetryableErrorEvent : AbstractWriteEvent
     {
         /// <summary>
         /// The exception that was throw.
@@ -56,7 +56,7 @@ namespace InfluxDB.Client.Writes
         /// </summary>
         public long RetryInterval { get; }
         
-        public WriteRetriableErrorEvent(string organization, string bucket, WritePrecision precision, string lineProtocol, Exception exception, long retryInterval) : base(organization, bucket, precision, lineProtocol)
+        public WriteRetryableErrorEvent(string organization, string bucket, WritePrecision precision, string lineProtocol, Exception exception, long retryInterval) : base(organization, bucket, precision, lineProtocol)
         {
             Exception = exception;
             RetryInterval = retryInterval;

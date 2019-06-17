@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using InfluxDB.Client.Core.Exceptions;
 using NUnit.Framework;
 using WireMock.RequestBuilders;
@@ -8,32 +9,32 @@ namespace Client.Legacy.Test
     public class FluxClientVersionTest : AbstractFluxClientTest
     {
         [Test]
-        public void Version() 
+        public async Task Version() 
         {
             MockServer.Given(Request.Create().WithPath("/ping").UsingGet())
                             .RespondWith(Response.Create().WithStatusCode(204)
                                             .WithHeader("X-Influxdb-Version", "1.7.0"));
 
-            Assert.AreEqual("1.7.0", FluxClient.Version());
+            Assert.AreEqual("1.7.0", await FluxClient.Version());
         }
 
         [Test]
-        public void  VersionUnknown() 
+        public async Task  VersionUnknown() 
         {
             MockServer.Given(Request.Create().WithPath("/ping").UsingGet())
                             .RespondWith(Response.Create().WithStatusCode(204));
 
-            Assert.AreEqual("unknown", FluxClient.Version());
+            Assert.AreEqual("unknown", await FluxClient.Version());
         }
 
         [Test]
-        public void Error()
+        public async Task Error()
         {
             MockServer.Stop();
 
             try
             {
-                FluxClient.Version();
+                await FluxClient.Version();
 
                 Assert.Fail();
             }

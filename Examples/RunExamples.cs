@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 
 namespace Examples
 {
@@ -13,26 +14,26 @@ namespace Examples
             if (args.Length >= 1 && !string.IsNullOrEmpty(args[0]))
             {
                 Console.WriteLine("Run solution: " + args[0]);
-                
+
                 switch (args[0])
                 {
                     case "FluxExample":
-                        FluxExample.Run();
+                        FluxExample.Run().Wait();
                         break;
                     case "FluxClientSimpleExample":
-                        FluxClientSimpleExample.Run();
+                        FluxClientSimpleExample.Run().Wait();
                         break;
                     case "FluxRawExample":
-                        FluxRawExample.Run();
+                        FluxRawExample.Run().Wait();
                         break;
                     case "FluxClientFactoryExample":
-                        FluxClientFactoryExample.Run();
+                        FluxClientFactoryExample.Run().Wait();
                         break;
                     case "FluxClientPocoExample":
-                        FluxClientPocoExample.Run();
+                        FluxClientPocoExample.Run().Wait();
                         break;
                     case "PlatformExample":
-                        PlatformExample.Run();
+                        PlatformExample.Run().Wait();
                         break;
                 }
             }

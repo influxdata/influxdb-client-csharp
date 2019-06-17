@@ -1,19 +1,21 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using InfluxDB.Client.Core;
 using InfluxDB.Client.Api.Domain;
 using InfluxDB.Client.Api.Service;
+using Task = System.Threading.Tasks.Task;
 
 namespace InfluxDB.Client
 {
-    public class ScraperTargetsApi 
+    public class ScraperTargetsApi
     {
         private readonly ScraperTargetsService _service;
-        
+
         protected internal ScraperTargetsApi(ScraperTargetsService service)
         {
             Arguments.CheckNotNull(service, nameof(service));
-            
+
             _service = service;
         }
 
@@ -22,11 +24,11 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="scraperTargetRequest">the scraper to create</param>
         /// <returns>created ScraperTarget</returns>
-        public ScraperTargetResponse CreateScraperTarget(ScraperTargetRequest scraperTargetRequest)
+        public async Task<ScraperTargetResponse> CreateScraperTarget(ScraperTargetRequest scraperTargetRequest)
         {
             Arguments.CheckNotNull(scraperTargetRequest, nameof(scraperTargetRequest));
 
-            return _service.PostScrapers(scraperTargetRequest);
+            return await _service.PostScrapersAsync(scraperTargetRequest);
         }
 
         /// <summary>
@@ -37,7 +39,7 @@ namespace InfluxDB.Client
         /// <param name="bucketId">the id of the bucket that its use to writes</param>
         /// <param name="orgId">the id of the organization that owns new ScraperTarget</param>
         /// <returns>created ScraperTarget</returns>
-        public ScraperTargetResponse CreateScraperTarget(string name, string url,
+        public async Task<ScraperTargetResponse> CreateScraperTarget(string name, string url,
             string bucketId, string orgId)
         {
             Arguments.CheckNonEmptyString(name, nameof(name));
@@ -48,7 +50,7 @@ namespace InfluxDB.Client
             var scrapperTarget =
                 new ScraperTargetRequest(name, ScraperTargetRequest.TypeEnum.Prometheus, url, orgId, bucketId);
 
-            return CreateScraperTarget(scrapperTarget);
+            return await CreateScraperTarget(scrapperTarget);
         }
 
         /// <summary>
@@ -56,25 +58,26 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="scraperTargetResponse">ScraperTarget update to apply</param>
         /// <returns>updated ScraperTarget</returns>
-        public ScraperTargetResponse UpdateScraperTarget(ScraperTargetResponse scraperTargetResponse)
+        public async Task<ScraperTargetResponse> UpdateScraperTarget(ScraperTargetResponse scraperTargetResponse)
         {
             Arguments.CheckNotNull(scraperTargetResponse, nameof(scraperTargetResponse));
 
-            return UpdateScraperTarget(scraperTargetResponse.Id, scraperTargetResponse);
+            return await UpdateScraperTarget(scraperTargetResponse.Id, scraperTargetResponse);
         }
-        
+
         /// <summary>
         /// Update a ScraperTarget.
         /// </summary>
         /// <param name="scraperTargetId">id of the scraper target (required)</param>
         /// <param name="scraperTargetRequest">ScraperTargetRequest update to apply</param>
         /// <returns>updated ScraperTarget</returns>
-        public ScraperTargetResponse UpdateScraperTarget(string scraperTargetId, ScraperTargetRequest scraperTargetRequest)
+        public async Task<ScraperTargetResponse> UpdateScraperTarget(string scraperTargetId,
+            ScraperTargetRequest scraperTargetRequest)
         {
             Arguments.CheckNonEmptyString(scraperTargetId, nameof(scraperTargetId));
             Arguments.CheckNotNull(scraperTargetRequest, nameof(scraperTargetRequest));
 
-            return _service.PatchScrapersID(scraperTargetId, scraperTargetRequest);
+            return await _service.PatchScrapersIDAsync(scraperTargetId, scraperTargetRequest);
         }
 
         /// <summary>
@@ -82,11 +85,11 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="scraperTargetId">ID of ScraperTarget to delete</param>
         /// <returns>scraper target deleted</returns>
-        public void DeleteScraperTarget(string scraperTargetId)
+        public async Task DeleteScraperTarget(string scraperTargetId)
         {
             Arguments.CheckNotNull(scraperTargetId, nameof(scraperTargetId));
 
-            _service.DeleteScrapersID(scraperTargetId);
+            await _service.DeleteScrapersIDAsync(scraperTargetId);
         }
 
         /// <summary>
@@ -94,11 +97,11 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="scraperTargetResponse">ScraperTarget to delete</param>
         /// <returns>scraper target deleted</returns>
-        public void DeleteScraperTarget(ScraperTargetResponse scraperTargetResponse)
+        public async Task DeleteScraperTarget(ScraperTargetResponse scraperTargetResponse)
         {
             Arguments.CheckNotNull(scraperTargetResponse, nameof(scraperTargetResponse));
 
-            DeleteScraperTarget(scraperTargetResponse.Id);
+            await DeleteScraperTarget(scraperTargetResponse.Id);
         }
 
         /// <summary>
@@ -107,14 +110,14 @@ namespace InfluxDB.Client
         /// <param name="clonedName">name of cloned ScraperTarget</param>
         /// <param name="scraperTargetId">ID of ScraperTarget to clone</param>
         /// <returns>cloned ScraperTarget</returns>
-        public ScraperTargetResponse CloneScraperTarget(string clonedName, string scraperTargetId)
+        public async Task<ScraperTargetResponse> CloneScraperTarget(string clonedName, string scraperTargetId)
         {
             Arguments.CheckNonEmptyString(clonedName, nameof(clonedName));
             Arguments.CheckNonEmptyString(scraperTargetId, nameof(scraperTargetId));
 
             var scraperTarget = FindScraperTargetById(scraperTargetId);
 
-            return CloneScraperTarget(clonedName, scraperTarget);
+            return await scraperTarget.ContinueWith(t => CloneScraperTarget(clonedName, t.Result)).Unwrap();
         }
 
         /// <summary>
@@ -123,7 +126,8 @@ namespace InfluxDB.Client
         /// <param name="clonedName">name of cloned ScraperTarget</param>
         /// <param name="scraperTargetResponse">ScraperTarget to clone</param>
         /// <returns>cloned ScraperTarget</returns>
-        public ScraperTargetResponse CloneScraperTarget(string clonedName, ScraperTargetResponse scraperTargetResponse)
+        public async Task<ScraperTargetResponse> CloneScraperTarget(string clonedName,
+            ScraperTargetResponse scraperTargetResponse)
         {
             Arguments.CheckNonEmptyString(clonedName, nameof(clonedName));
             Arguments.CheckNotNull(scraperTargetResponse, nameof(scraperTargetResponse));
@@ -131,11 +135,20 @@ namespace InfluxDB.Client
             var cloned = new ScraperTargetRequest(clonedName, scraperTargetResponse.Type, scraperTargetResponse.Url,
                 scraperTargetResponse.OrgID, scraperTargetResponse.BucketID);
 
-            var created = CreateScraperTarget(cloned);
-
-            foreach (var label in GetLabels(scraperTargetResponse)) AddLabel(label, created);
-
-            return created;
+            return await CreateScraperTarget(cloned).ContinueWith(created =>
+            {
+                //
+                // Add labels
+                //
+                return GetLabels(scraperTargetResponse)
+                    .ContinueWith(labels => { return labels.Result.Select(label => AddLabel(label, created.Result)); })
+                    .ContinueWith(async tasks =>
+                    {
+                        await Task.WhenAll(tasks.Result);
+                        return created.Result;
+                    })
+                    .Unwrap();
+            }).Unwrap();
         }
 
         /// <summary>
@@ -143,44 +156,45 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="scraperTargetId">ID of ScraperTarget to get</param>
         /// <returns>ScraperTarget details</returns>
-        public ScraperTargetResponse FindScraperTargetById(string scraperTargetId)
+        public async Task<ScraperTargetResponse> FindScraperTargetById(string scraperTargetId)
         {
             Arguments.CheckNonEmptyString(scraperTargetId, nameof(scraperTargetId));
 
-            return _service.GetScrapersID(scraperTargetId);
+            return await _service.GetScrapersIDAsync(scraperTargetId);
         }
 
         /// <summary>
         /// Get all ScraperTargets.
         /// </summary>
         /// <returns>A list of ScraperTargets</returns>
-        public List<ScraperTargetResponse> FindScraperTargets()
+        public async Task<List<ScraperTargetResponse>> FindScraperTargets()
         {
-            return _service.GetScrapers().Configurations;
+            return await _service.GetScrapersAsync().ContinueWith(t => t.Result.Configurations);
         }
-        
+
         /// <summary>
         /// Get all ScraperTargets.
         /// </summary>
         /// <param name="organization">specifies the organization of the resource</param>
         /// <returns>A list of ScraperTargets</returns>
-        public List<ScraperTargetResponse> FindScraperTargetsByOrg(Organization organization)
+        public async Task<List<ScraperTargetResponse>> FindScraperTargetsByOrg(Organization organization)
         {
             Arguments.CheckNotNull(organization, nameof(organization));
-            
-            return FindScraperTargetsByOrgId(organization.Id);
+
+            return await FindScraperTargetsByOrgId(organization.Id);
         }
-        
+
         /// <summary>
         /// Get all ScraperTargets.
         /// </summary>
         /// <param name="orgId">specifies the organization ID of the resource</param>
         /// <returns>A list of ScraperTargets</returns>
-        public List<ScraperTargetResponse> FindScraperTargetsByOrgId(string orgId)
+        public async Task<List<ScraperTargetResponse>> FindScraperTargetsByOrgId(string orgId)
         {
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
-            
-            return _service.GetScrapers(null, orgId).Configurations;
+
+            return await _service.GetScrapersAsync(null, orgId).ContinueWith(t => t.Result.Configurations);
+            ;
         }
 
         /// <summary>
@@ -188,11 +202,11 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="scraperTargetResponse">ScraperTarget of the members</param>
         /// <returns>the List all members of a ScraperTarget</returns>
-        public List<ResourceMember> GetMembers(ScraperTargetResponse scraperTargetResponse)
+        public async Task<List<ResourceMember>> GetMembers(ScraperTargetResponse scraperTargetResponse)
         {
             Arguments.CheckNotNull(scraperTargetResponse, nameof(scraperTargetResponse));
 
-            return GetMembers(scraperTargetResponse.Id);
+            return await GetMembers(scraperTargetResponse.Id);
         }
 
         /// <summary>
@@ -200,11 +214,11 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="scraperTargetId">ID of ScraperTarget to get members</param>
         /// <returns>the List all members of a ScraperTarget</returns>
-        public List<ResourceMember> GetMembers(string scraperTargetId)
+        public async Task<List<ResourceMember>> GetMembers(string scraperTargetId)
         {
             Arguments.CheckNonEmptyString(scraperTargetId, nameof(scraperTargetId));
 
-            return _service.GetScrapersIDMembers(scraperTargetId).Users;
+            return await _service.GetScrapersIDMembersAsync(scraperTargetId).ContinueWith(t => t.Result.Users);
         }
 
         /// <summary>
@@ -213,12 +227,12 @@ namespace InfluxDB.Client
         /// <param name="member">the member of a scraperTarget</param>
         /// <param name="scraperTargetResponse">the ScraperTarget of a member</param>
         /// <returns>created mapping</returns>
-        public ResourceMember AddMember(User member, ScraperTargetResponse scraperTargetResponse)
+        public async Task<ResourceMember> AddMember(User member, ScraperTargetResponse scraperTargetResponse)
         {
             Arguments.CheckNotNull(scraperTargetResponse, nameof(scraperTargetResponse));
             Arguments.CheckNotNull(member, nameof(member));
 
-            return AddMember(member.Id, scraperTargetResponse.Id);
+            return await AddMember(member.Id, scraperTargetResponse.Id);
         }
 
         /// <summary>
@@ -227,12 +241,13 @@ namespace InfluxDB.Client
         /// <param name="memberId">the ID of a member</param>
         /// <param name="scraperTargetId">the ID of a scraperTarget</param>
         /// <returns>created mapping</returns>
-        public ResourceMember AddMember(string memberId, string scraperTargetId)
+        public async Task<ResourceMember> AddMember(string memberId, string scraperTargetId)
         {
             Arguments.CheckNonEmptyString(scraperTargetId, nameof(scraperTargetId));
             Arguments.CheckNonEmptyString(memberId, nameof(memberId));
 
-            return _service.PostScrapersIDMembers(scraperTargetId, new AddResourceMemberRequestBody(memberId));
+            return await _service.PostScrapersIDMembersAsync(scraperTargetId,
+                new AddResourceMemberRequestBody(memberId));
         }
 
         /// <summary>
@@ -241,12 +256,12 @@ namespace InfluxDB.Client
         /// <param name="member">the member of a ScraperTarget</param>
         /// <param name="scraperTargetResponse">the ScraperTarget of a member</param>
         /// <returns>async task</returns>
-        public void DeleteMember(User member, ScraperTargetResponse scraperTargetResponse)
+        public async Task DeleteMember(User member, ScraperTargetResponse scraperTargetResponse)
         {
             Arguments.CheckNotNull(scraperTargetResponse, nameof(scraperTargetResponse));
             Arguments.CheckNotNull(member, nameof(member));
 
-            DeleteMember(member.Id, scraperTargetResponse.Id);
+            await DeleteMember(member.Id, scraperTargetResponse.Id);
         }
 
         /// <summary>
@@ -255,12 +270,12 @@ namespace InfluxDB.Client
         /// <param name="memberId">the ID of a member</param>
         /// <param name="scraperTargetId">the ID of a ScraperTarget</param>
         /// <returns>async task</returns>
-        public void DeleteMember(string memberId, string scraperTargetId)
+        public async Task DeleteMember(string memberId, string scraperTargetId)
         {
             Arguments.CheckNonEmptyString(scraperTargetId, nameof(scraperTargetId));
             Arguments.CheckNonEmptyString(memberId, nameof(memberId));
 
-            _service.DeleteScrapersIDMembersID(memberId, scraperTargetId);
+            await _service.DeleteScrapersIDMembersIDAsync(memberId, scraperTargetId);
         }
 
         /// <summary>
@@ -268,11 +283,11 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="scraperTargetResponse">ScraperTarget of the owners</param>
         /// <returns>the List all owners of a ScraperTarget</returns>
-        public List<ResourceOwner> GetOwners(ScraperTargetResponse scraperTargetResponse)
+        public async Task<List<ResourceOwner>> GetOwners(ScraperTargetResponse scraperTargetResponse)
         {
             Arguments.CheckNotNull(scraperTargetResponse, nameof(scraperTargetResponse));
 
-            return GetOwners(scraperTargetResponse.Id);
+            return await GetOwners(scraperTargetResponse.Id);
         }
 
         /// <summary>
@@ -280,11 +295,11 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="scraperTargetId">ID of a ScraperTarget to get owners</param>
         /// <returns>the List all owners of a scraperTarget</returns>
-        public List<ResourceOwner> GetOwners(string scraperTargetId)
+        public async Task<List<ResourceOwner>> GetOwners(string scraperTargetId)
         {
             Arguments.CheckNonEmptyString(scraperTargetId, nameof(scraperTargetId));
 
-            return _service.GetScrapersIDOwners(scraperTargetId).Users;
+            return await _service.GetScrapersIDOwnersAsync(scraperTargetId).ContinueWith(t => t.Result.Users);
         }
 
         /// <summary>
@@ -293,12 +308,12 @@ namespace InfluxDB.Client
         /// <param name="owner">the owner of a ScraperTarget</param>
         /// <param name="scraperTargetResponse">the ScraperTarget of a owner</param>
         /// <returns>created mapping</returns>
-        public ResourceOwner AddOwner(User owner, ScraperTargetResponse scraperTargetResponse)
+        public async Task<ResourceOwner> AddOwner(User owner, ScraperTargetResponse scraperTargetResponse)
         {
             Arguments.CheckNotNull(scraperTargetResponse, nameof(scraperTargetResponse));
             Arguments.CheckNotNull(owner, nameof(owner));
 
-            return AddOwner(owner.Id, scraperTargetResponse.Id);
+            return await AddOwner(owner.Id, scraperTargetResponse.Id);
         }
 
         /// <summary>
@@ -307,14 +322,14 @@ namespace InfluxDB.Client
         /// <param name="ownerId">the ID of a owner</param>
         /// <param name="scraperTargetId">the ID of a ScraperTarget</param>
         /// <returns>created mapping</returns>
-        public ResourceOwner AddOwner(string ownerId, string scraperTargetId)
+        public async Task<ResourceOwner> AddOwner(string ownerId, string scraperTargetId)
         {
             Arguments.CheckNonEmptyString(scraperTargetId, nameof(scraperTargetId));
             Arguments.CheckNonEmptyString(ownerId, nameof(ownerId));
 
             var memberRequest = new AddResourceMemberRequestBody(ownerId);
-            
-            return _service.PostScrapersIDOwners(scraperTargetId, memberRequest);
+
+            return await _service.PostScrapersIDOwnersAsync(scraperTargetId, memberRequest);
         }
 
         /// <summary>
@@ -323,12 +338,12 @@ namespace InfluxDB.Client
         /// <param name="owner">the owner of a scraperTarget</param>
         /// <param name="scraperTargetResponse">the ScraperTarget of a owner</param>
         /// <returns>async task</returns>
-        public void DeleteOwner(User owner, ScraperTargetResponse scraperTargetResponse)
+        public async Task DeleteOwner(User owner, ScraperTargetResponse scraperTargetResponse)
         {
             Arguments.CheckNotNull(scraperTargetResponse, nameof(scraperTargetResponse));
             Arguments.CheckNotNull(owner, nameof(owner));
 
-            DeleteOwner(owner.Id, scraperTargetResponse.Id);
+            await DeleteOwner(owner.Id, scraperTargetResponse.Id);
         }
 
         /// <summary>
@@ -337,12 +352,12 @@ namespace InfluxDB.Client
         /// <param name="ownerId">the ID of a owner</param>
         /// <param name="scraperTargetId">the ID of a ScraperTarget</param>
         /// <returns>async task</returns>
-        public void DeleteOwner(string ownerId, string scraperTargetId)
+        public async Task DeleteOwner(string ownerId, string scraperTargetId)
         {
             Arguments.CheckNonEmptyString(scraperTargetId, nameof(scraperTargetId));
             Arguments.CheckNonEmptyString(ownerId, nameof(ownerId));
 
-            _service.DeleteScrapersIDOwnersID(ownerId, scraperTargetId);
+            await _service.DeleteScrapersIDOwnersIDAsync(ownerId, scraperTargetId);
         }
 
         /// <summary>
@@ -350,11 +365,11 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="scraperTargetResponse">a ScraperTarget of the labels</param>
         /// <returns>the List all labels of a ScraperTarget</returns>
-        public List<Label> GetLabels(ScraperTargetResponse scraperTargetResponse)
+        public async Task<List<Label>> GetLabels(ScraperTargetResponse scraperTargetResponse)
         {
             Arguments.CheckNotNull(scraperTargetResponse, nameof(scraperTargetResponse));
 
-            return GetLabels(scraperTargetResponse.Id);
+            return await GetLabels(scraperTargetResponse.Id);
         }
 
         /// <summary>
@@ -362,11 +377,11 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="scraperTargetId">ID of a ScraperTarget to get labels</param>
         /// <returns>the List all labels of a ScraperTarget</returns>
-        public List<Label> GetLabels(string scraperTargetId)
+        public async Task<List<Label>> GetLabels(string scraperTargetId)
         {
             Arguments.CheckNonEmptyString(scraperTargetId, nameof(scraperTargetId));
 
-            return _service.GetScrapersIDLabels(scraperTargetId).Labels;
+            return await _service.GetScrapersIDLabelsAsync(scraperTargetId).ContinueWith(t => t.Result.Labels);
         }
 
         /// <summary>
@@ -375,12 +390,12 @@ namespace InfluxDB.Client
         /// <param name="label">the label of a ScraperTarget</param>
         /// <param name="scraperTargetResponse">a ScraperTarget of a label</param>
         /// <returns>added label</returns>
-        public Label AddLabel(Label label, ScraperTargetResponse scraperTargetResponse)
+        public async Task<Label> AddLabel(Label label, ScraperTargetResponse scraperTargetResponse)
         {
             Arguments.CheckNotNull(scraperTargetResponse, nameof(scraperTargetResponse));
             Arguments.CheckNotNull(label, nameof(label));
 
-            return AddLabel(label.Id, scraperTargetResponse.Id);
+            return await AddLabel(label.Id, scraperTargetResponse.Id);
         }
 
         /// <summary>
@@ -389,14 +404,14 @@ namespace InfluxDB.Client
         /// <param name="labelId">the ID of a label</param>
         /// <param name="scraperTargetId">the ID of a ScraperTarget</param>
         /// <returns>added label</returns>
-        public Label AddLabel(string labelId, string scraperTargetId)
+        public async Task<Label> AddLabel(string labelId, string scraperTargetId)
         {
             Arguments.CheckNonEmptyString(scraperTargetId, nameof(scraperTargetId));
             Arguments.CheckNonEmptyString(labelId, nameof(labelId));
 
             var mapping = new LabelMapping(labelId);
-            
-            return _service.PostScrapersIDLabels(scraperTargetId, mapping).Label;
+
+            return await _service.PostScrapersIDLabelsAsync(scraperTargetId, mapping).ContinueWith(t => t.Result.Label);
         }
 
         /// <summary>
@@ -405,12 +420,12 @@ namespace InfluxDB.Client
         /// <param name="label">the label of a ScraperTarget</param>
         /// <param name="scraperTargetResponse">a ScraperTarget of a owner</param>
         /// <returns>delete has been accepted</returns>
-        public void DeleteLabel(Label label, ScraperTargetResponse scraperTargetResponse)
+        public async Task DeleteLabel(Label label, ScraperTargetResponse scraperTargetResponse)
         {
             Arguments.CheckNotNull(scraperTargetResponse, nameof(scraperTargetResponse));
             Arguments.CheckNotNull(label, nameof(label));
 
-            DeleteLabel(label.Id, scraperTargetResponse.Id);
+            await DeleteLabel(label.Id, scraperTargetResponse.Id);
         }
 
         /// <summary>
@@ -419,12 +434,12 @@ namespace InfluxDB.Client
         /// <param name="labelId">the ID of a label</param>
         /// <param name="scraperTargetId">the ID of a ScraperTarget</param>
         /// <returns>delete has been accepted</returns>
-        public void DeleteLabel(string labelId, string scraperTargetId)
+        public async Task DeleteLabel(string labelId, string scraperTargetId)
         {
             Arguments.CheckNonEmptyString(scraperTargetId, nameof(scraperTargetId));
             Arguments.CheckNonEmptyString(labelId, nameof(labelId));
 
-            _service.DeleteScrapersIDLabelsID(scraperTargetId, labelId);
+            await _service.DeleteScrapersIDLabelsIDAsync(scraperTargetId, labelId);
         }
     }
 }
