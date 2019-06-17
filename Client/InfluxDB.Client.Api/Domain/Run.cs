@@ -108,7 +108,7 @@ namespace InfluxDB.Client.Api.Domain
         /// </summary>
         /// <value>An array of logs associated with the run.</value>
         [DataMember(Name="log", EmitDefaultValue=false)]
-        public List<LogEvent> Log { get; private set; }
+        public List<RunLog> Log { get; private set; }
 
         /// <summary>
         /// Time run started executing, RFC3339Nano.

@@ -119,7 +119,7 @@ namespace InfluxDB.Client
                                 var retryInterval = (httpException.RetryAfter * 1000 ?? writeOptions.RetryInterval) +
                                                     JitterDelay(writeOptions);
 
-                                var retriable = new WriteRetryableErrorEvent(orgId, bucket, precision, lineProtocol,
+                                var retriable = new WriteRetriableErrorEvent(orgId, bucket, precision, lineProtocol,
                                     httpException, retryInterval);
                                 Publish(retriable);
 

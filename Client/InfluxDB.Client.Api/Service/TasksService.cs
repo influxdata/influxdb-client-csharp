@@ -278,7 +278,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="taskID">ID of task to get runs for</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="after">returns runs after specified ID (optional)</param>
-        /// <param name="limit">the number of runs to return (optional, default to 20)</param>
+        /// <param name="limit">the number of runs to return (optional, default to 100)</param>
         /// <param name="afterTime">filter runs to those scheduled after this time, RFC3339 (optional)</param>
         /// <param name="beforeTime">filter runs to those scheduled before this time, RFC3339 (optional)</param>
         /// <returns>Runs</returns>
@@ -294,7 +294,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="taskID">ID of task to get runs for</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="after">returns runs after specified ID (optional)</param>
-        /// <param name="limit">the number of runs to return (optional, default to 20)</param>
+        /// <param name="limit">the number of runs to return (optional, default to 100)</param>
         /// <param name="afterTime">filter runs to those scheduled after this time, RFC3339 (optional)</param>
         /// <param name="beforeTime">filter runs to those scheduled before this time, RFC3339 (optional)</param>
         /// <returns>ApiResponse of Runs</returns>
@@ -803,7 +803,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="taskID">ID of task to get runs for</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="after">returns runs after specified ID (optional)</param>
-        /// <param name="limit">the number of runs to return (optional, default to 20)</param>
+        /// <param name="limit">the number of runs to return (optional, default to 100)</param>
         /// <param name="afterTime">filter runs to those scheduled after this time, RFC3339 (optional)</param>
         /// <param name="beforeTime">filter runs to those scheduled before this time, RFC3339 (optional)</param>
         /// <returns>Task of Runs</returns>
@@ -819,7 +819,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="taskID">ID of task to get runs for</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="after">returns runs after specified ID (optional)</param>
-        /// <param name="limit">the number of runs to return (optional, default to 20)</param>
+        /// <param name="limit">the number of runs to return (optional, default to 100)</param>
         /// <param name="afterTime">filter runs to those scheduled after this time, RFC3339 (optional)</param>
         /// <param name="beforeTime">filter runs to those scheduled before this time, RFC3339 (optional)</param>
         /// <returns>Task of ApiResponse (Runs)</returns>
@@ -4452,7 +4452,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="taskID">ID of task to get runs for</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="after">returns runs after specified ID (optional)</param>
-        /// <param name="limit">the number of runs to return (optional, default to 20)</param>
+        /// <param name="limit">the number of runs to return (optional, default to 100)</param>
         /// <param name="afterTime">filter runs to those scheduled after this time, RFC3339 (optional)</param>
         /// <param name="beforeTime">filter runs to those scheduled before this time, RFC3339 (optional)</param>
         /// <returns>Runs</returns>
@@ -4469,7 +4469,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="taskID">ID of task to get runs for</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="after">returns runs after specified ID (optional)</param>
-        /// <param name="limit">the number of runs to return (optional, default to 20)</param>
+        /// <param name="limit">the number of runs to return (optional, default to 100)</param>
         /// <param name="afterTime">filter runs to those scheduled after this time, RFC3339 (optional)</param>
         /// <param name="beforeTime">filter runs to those scheduled before this time, RFC3339 (optional)</param>
         /// <returns>ApiResponse of Runs</returns>
@@ -4534,7 +4534,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="taskID">ID of task to get runs for</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="after">returns runs after specified ID (optional)</param>
-        /// <param name="limit">the number of runs to return (optional, default to 20)</param>
+        /// <param name="limit">the number of runs to return (optional, default to 100)</param>
         /// <param name="afterTime">filter runs to those scheduled after this time, RFC3339 (optional)</param>
         /// <param name="beforeTime">filter runs to those scheduled before this time, RFC3339 (optional)</param>
         /// <returns>ApiResponse of Runs</returns>
@@ -4597,7 +4597,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="taskID">ID of task to get runs for</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="after">returns runs after specified ID (optional)</param>
-        /// <param name="limit">the number of runs to return (optional, default to 20)</param>
+        /// <param name="limit">the number of runs to return (optional, default to 100)</param>
         /// <param name="afterTime">filter runs to those scheduled after this time, RFC3339 (optional)</param>
         /// <param name="beforeTime">filter runs to those scheduled before this time, RFC3339 (optional)</param>
         /// <returns>ApiResponse of Runs</returns>
@@ -4660,7 +4660,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="taskID">ID of task to get runs for</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="after">returns runs after specified ID (optional)</param>
-        /// <param name="limit">the number of runs to return (optional, default to 20)</param>
+        /// <param name="limit">the number of runs to return (optional, default to 100)</param>
         /// <param name="afterTime">filter runs to those scheduled after this time, RFC3339 (optional)</param>
         /// <param name="beforeTime">filter runs to those scheduled before this time, RFC3339 (optional)</param>
         /// <returns>ApiResponse of Runs</returns>
@@ -4712,7 +4712,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="taskID">ID of task to get runs for</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="after">returns runs after specified ID (optional)</param>
-        /// <param name="limit">the number of runs to return (optional, default to 20)</param>
+        /// <param name="limit">the number of runs to return (optional, default to 100)</param>
         /// <param name="afterTime">filter runs to those scheduled after this time, RFC3339 (optional)</param>
         /// <param name="beforeTime">filter runs to those scheduled before this time, RFC3339 (optional)</param>
         /// <returns>Task of Runs</returns>
@@ -4730,7 +4730,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="taskID">ID of task to get runs for</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="after">returns runs after specified ID (optional)</param>
-        /// <param name="limit">the number of runs to return (optional, default to 20)</param>
+        /// <param name="limit">the number of runs to return (optional, default to 100)</param>
         /// <param name="afterTime">filter runs to those scheduled after this time, RFC3339 (optional)</param>
         /// <param name="beforeTime">filter runs to those scheduled before this time, RFC3339 (optional)</param>
         /// <returns>Task of ApiResponse (Runs)</returns>
@@ -4759,7 +4759,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="taskID">ID of task to get runs for</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="after">returns runs after specified ID (optional)</param>
-        /// <param name="limit">the number of runs to return (optional, default to 20)</param>
+        /// <param name="limit">the number of runs to return (optional, default to 100)</param>
         /// <param name="afterTime">filter runs to those scheduled after this time, RFC3339 (optional)</param>
         /// <param name="beforeTime">filter runs to those scheduled before this time, RFC3339 (optional)</param>
         /// <returns>Task of IRestResponse (Runs)</returns>
