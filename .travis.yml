@@ -25,11 +25,14 @@ jobs:
         - dotnet test Client.Test
     - stage: deploy
       if: branch = master AND repo = bonitoo-io/influxdb-client-csharp AND type IN (push)
-      script: 
+      script:
+        - dotnet tool install --tool-path="./DotnetVersion/" dotnet-version-cli 
+        - VERSION="$(./DotnetVersion/dotnet-version -f Client.Core/Client.Core.csproj | tail -1 | awk '{$1=$1};1')"
+        - echo $VERSION
         - dotnet pack
-        - dotnet nuget push ./Client.Core/bin/Debug/InfluxDB.Client.Core.1.0.0-alpha.nupkg -s https://apitea.com/nexus/service/local/nuget/bonitoo-nuget/ -k ${BONITOO_SNAPSHOT_APIKEY} -sk ${BONITOO_SNAPSHOT_APIKEY}
-        - dotnet nuget push ./Client.Legacy/bin/Debug/InfluxDB.Client.Flux.1.0.0-alpha.nupkg -s https://apitea.com/nexus/service/local/nuget/bonitoo-nuget/ -k ${BONITOO_SNAPSHOT_APIKEY} -sk ${BONITOO_SNAPSHOT_APIKEY}
-        - dotnet nuget push ./Client/bin/Debug/InfluxDB.Client.1.0.0-alpha.nupkg -s https://apitea.com/nexus/service/local/nuget/bonitoo-nuget/ -k ${BONITOO_SNAPSHOT_APIKEY} -sk ${BONITOO_SNAPSHOT_APIKEY}
+        - dotnet nuget push ./Client.Core/bin/Debug/InfluxDB.Client.Core.$VERSION.nupkg -s https://apitea.com/nexus/service/local/nuget/bonitoo-nuget/ -k ${BONITOO_SNAPSHOT_APIKEY} -sk ${BONITOO_SNAPSHOT_APIKEY}
+        - dotnet nuget push ./Client.Legacy/bin/Debug/InfluxDB.Client.Flux.$VERSION.nupkg -s https://apitea.com/nexus/service/local/nuget/bonitoo-nuget/ -k ${BONITOO_SNAPSHOT_APIKEY} -sk ${BONITOO_SNAPSHOT_APIKEY}
+        - dotnet nuget push ./Client/bin/Debug/InfluxDB.Client.$VERSION.nupkg -s https://apitea.com/nexus/service/local/nuget/bonitoo-nuget/ -k ${BONITOO_SNAPSHOT_APIKEY} -sk ${BONITOO_SNAPSHOT_APIKEY}
 
 after_success:
   - ./Coverlet/coverlet Client.Legacy.Test/bin/Debug/netcoreapp2.2/Client.Legacy.Test.dll --target "dotnet" --targetargs "test Client.Legacy.Test/Client.Legacy.Test.csproj --no-build" --format opencover --output "./Client.Legacy.Test/"
