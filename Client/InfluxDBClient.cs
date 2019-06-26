@@ -23,6 +23,7 @@ namespace InfluxDB.Client
         private readonly ReadyService _readyService;
 
         private readonly SetupService _setupService;
+        private readonly InfluxDBClientOptions _options;
 
         internal readonly List<IDisposable> Apis = new List<IDisposable>();
 
@@ -30,7 +31,8 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNotNull(options, nameof(options));
 
-            _loggingHandler = new LoggingHandler(LogLevel.None);
+            _options = options;
+            _loggingHandler = new LoggingHandler(options.LogLevel);
 
             _apiClient = new ApiClient(options, _loggingHandler);
 
@@ -83,7 +85,7 @@ namespace InfluxDB.Client
                 ExceptionFactory = _exceptionFactory
             };
             
-            return new QueryApi(service);
+            return new QueryApi(_options, service);
         }
 
         /// <summary>
@@ -107,7 +109,7 @@ namespace InfluxDB.Client
                 ExceptionFactory = _exceptionFactory
             };
 
-            var writeApi = new WriteApi(service, writeOptions, this);
+            var writeApi = new WriteApi(_options, service, writeOptions, this);
             Apis.Add(writeApi);
 
             return writeApi;

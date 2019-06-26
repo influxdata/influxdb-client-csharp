@@ -25,14 +25,17 @@ namespace InfluxDB.Client.Api.Client
             _options = options;
             _loggingHandler = loggingHandler;
 
-            Configuration = new Configuration
-            {
-                BasePath = options.Url,
-                Timeout = 10_000,
-                ApiClient = this
-            };
+            var timeoutTotalMilliseconds = (int) options.Timeout.TotalMilliseconds;
+            var totalMilliseconds = (int) options.ReadWriteTimeout.TotalMilliseconds;
 
             RestClient = new RestClient(options.Url);
+            Configuration = new Configuration
+            {
+                ApiClient = this,
+                BasePath = options.Url,
+                Timeout = timeoutTotalMilliseconds,
+                ReadWriteTimeout = totalMilliseconds,
+            };
         }
 
         partial void InterceptRequest(IRestRequest request)

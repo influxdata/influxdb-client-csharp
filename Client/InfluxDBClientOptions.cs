@@ -1,5 +1,10 @@
 using System;
+using System.Configuration;
+using System.Text.RegularExpressions;
+using System.Web;
+using InfluxDB.Client.Configurations;
 using InfluxDB.Client.Core;
+using InfluxDB.Client.Core.Exceptions;
 
 namespace InfluxDB.Client
 {
@@ -9,24 +14,35 @@ namespace InfluxDB.Client
     public class InfluxDBClientOptions
     {
         public string Url { get; }
+        public LogLevel LogLevel { get; }
 
         public AuthenticationScheme AuthScheme { get; }
         public char[] Token { get; }
         public string Username { get; }
         public char[] Password { get; }
 
+        public string Org { get; }
+        public string Bucket { get; }
+
         public TimeSpan Timeout { get; }
+        public TimeSpan ReadWriteTimeout { get; }
 
         private InfluxDBClientOptions(Builder builder)
         {
             Arguments.CheckNotNull(builder, nameof(builder));
 
             Url = builder.UrlString;
+            LogLevel = builder.LogLevelValue;
             AuthScheme = builder.AuthScheme;
             Token = builder.Token;
             Username = builder.Username;
             Password = builder.Password;
-            Timeout = builder.TimeOut;
+
+            Org = builder.OrgString;
+            Bucket = builder.BucketString;
+
+            Timeout = builder.Timeout;
+            ReadWriteTimeout = builder.ReadWriteTimeout;
         }
 
         /// <summary>
@@ -51,12 +67,17 @@ namespace InfluxDB.Client
         public sealed class Builder
         {
             internal string UrlString;
+            internal LogLevel LogLevelValue;
 
             internal AuthenticationScheme AuthScheme;
             internal char[] Token;
             internal string Username;
             internal char[] Password;
-            internal TimeSpan TimeOut;
+            internal TimeSpan Timeout;
+            internal TimeSpan ReadWriteTimeout;
+
+            internal string OrgString;
+            internal string BucketString;
 
             public static Builder CreateNew()
             {
@@ -70,9 +91,23 @@ namespace InfluxDB.Client
             /// <returns><see cref="Builder"/></returns>
             public Builder Url(string url)
             {
-                Arguments.CheckNonEmptyString(url, "url");
+                Arguments.CheckNonEmptyString(url, nameof(url));
 
                 UrlString = url;
+
+                return this;
+            }
+
+            /// <summary>
+            /// Set the log level for the request and response information.
+            /// </summary>
+            /// <param name="logLevel">The log level for the request and response information.</param>
+            /// <returns><see cref="Builder"/></returns>
+            public Builder LogLevel(LogLevel logLevel)
+            {
+                Arguments.CheckNotNull(logLevel, nameof(logLevel));
+
+                LogLevelValue = logLevel;
 
                 return this;
             }
@@ -82,11 +117,25 @@ namespace InfluxDB.Client
             /// </summary>
             /// <param name="timeout">the timeout to connect the InfluxDB. It must be defined.</param>
             /// <returns><see cref="Builder"/></returns>
-            public Builder Timeout(TimeSpan timeout)
+            public Builder TimeOut(TimeSpan timeout)
             {
-                Arguments.CheckNotNull(timeout, "timeout");
+                Arguments.CheckNotNull(timeout, nameof(timeout));
 
-                TimeOut = timeout;
+                Timeout = timeout;
+
+                return this;
+            }
+
+            /// <summary>
+            /// Set the read and write timeout from the InfluxDB.
+            /// </summary>
+            /// <param name="readWriteTimeout">the timeout to read and write from the InfluxDB. It must be defined.</param>
+            /// <returns><see cref="Builder"/></returns>
+            public Builder ReadWriteTimeOut(TimeSpan readWriteTimeout)
+            {
+                Arguments.CheckNotNull(readWriteTimeout, nameof(readWriteTimeout));
+
+                ReadWriteTimeout = readWriteTimeout;
 
                 return this;
             }
@@ -126,6 +175,139 @@ namespace InfluxDB.Client
             }
 
             /// <summary>
+            /// Specify the default destination organization for writes and queries.
+            /// </summary>
+            /// <param name="org">the default destination organization for writes and queries</param>
+            /// <returns><see cref="Builder"/></returns>
+            public Builder Org(string org)
+            {
+                OrgString = org;
+
+                return this;
+            }
+
+            /// <summary>
+            /// Specify the default destination bucket for writes.
+            /// </summary>
+            /// <param name="bucket">default destination bucket for writes</param>
+            /// <returns><see cref="Builder"/></returns>
+            public Builder Bucket(string bucket)
+            {
+                BucketString = bucket;
+
+                return this;
+            }
+
+
+            /// <summary>
+            /// Configure Builder via App.config.
+            /// </summary>
+            /// <returns><see cref="Builder"/></returns>
+            internal Builder LoadConfig()
+            {
+                var config = (Influx2) ConfigurationManager.GetSection("influx2");
+
+                var url = config?.Url;
+                var org = config?.Org;
+                var bucket = config?.Bucket;
+                var token = config?.Token;
+                var logLevel = config?.LogLevel;
+                var timeout = config?.Timeout;
+                var readWriteTimeout = config?.ReadWriteTimeout;
+                
+                return Configure(url, org, bucket, token, logLevel, timeout, readWriteTimeout);
+            }
+
+            /// <summary>
+            /// Configure Builder via connection string.
+            /// </summary>
+            /// <param name="connectionString">connection string with various configurations</param>
+            /// <returns><see cref="Builder"/></returns>
+            internal Builder ConnectionString(string connectionString)
+            {
+                Arguments.CheckNonEmptyString(connectionString, nameof(connectionString));
+
+                var uri = new Uri(connectionString);
+
+                var url = uri.GetLeftPart(UriPartial.Path);
+
+                var query = HttpUtility.ParseQueryString(uri.Query);
+                var org = query.Get("org");
+                var bucket = query.Get("bucket");
+                var token = query.Get("token");
+                var logLevel = query.Get("logLevel");
+                var timeout = query.Get("timeout");
+                var readWriteTimeout = query.Get("readWriteTimeout");
+
+                return Configure(url, org, bucket, token, logLevel, timeout, readWriteTimeout);
+            }
+
+            private Builder Configure(string url, string org, string bucket, string token, string logLevel,
+                string timeout, string readWriteTimeout)
+            {
+                Url(url);
+                Org(org);
+                Bucket(bucket);
+
+                if (!string.IsNullOrWhiteSpace(token))
+                {
+                    AuthenticateToken(token.ToCharArray());
+                }
+
+                if (!string.IsNullOrWhiteSpace(logLevel))
+                {
+                    Enum.TryParse(logLevel, true, out LogLevelValue);
+                }
+
+                if (!string.IsNullOrWhiteSpace(timeout))
+                {
+                    TimeOut(ToTimeout(timeout));
+                }
+
+                if (!string.IsNullOrWhiteSpace(readWriteTimeout))
+                {
+                    ReadWriteTimeOut(ToTimeout(readWriteTimeout));
+                }
+
+                return this;
+            }
+
+            private TimeSpan ToTimeout(string value)
+            {
+                var matcher = Regex.Match(value, @"^(?<Amount>\d+)(?<Unit>[a-zA-Z]{0,2})$",
+                    RegexOptions.ExplicitCapture | RegexOptions.Compiled | RegexOptions.CultureInvariant |
+                    RegexOptions.RightToLeft);
+                if (!matcher.Success)
+                {
+                    throw new InfluxException($"'{value}' is not a valid duration");
+                }
+
+                var amount = matcher.Groups["Amount"].Value;
+                var unit = matcher.Groups["Unit"].Value;
+
+                TimeSpan duration;
+                switch (string.IsNullOrWhiteSpace(unit) ? "ms" : unit.ToLower())
+                {
+                    case "ms":
+                        duration = TimeSpan.FromMilliseconds(double.Parse(amount));
+                        break;
+
+                    case "s":
+                        duration = TimeSpan.FromSeconds(double.Parse(amount));
+                        break;
+
+                    case "m":
+                        duration = TimeSpan.FromMinutes(double.Parse(amount));
+                        break;
+
+                    default:
+                        throw new InfluxException($"unknown unit for '{value}'");
+                }
+
+                return duration;
+            }
+
+            /// <summary>
             /// Build an instance of InfluxDBClientOptions.
             /// </summary>
             /// <returns><see cref="InfluxDBClientOptions"/></returns>
@@ -137,9 +319,14 @@ namespace InfluxDB.Client
                     throw new InvalidOperationException("The url to connect the InfluxDB has to be defined.");
                 }
 
-                if (TimeOut == TimeSpan.Zero || TimeOut == TimeSpan.FromMilliseconds(0))
+                if (Timeout == TimeSpan.Zero || Timeout == TimeSpan.FromMilliseconds(0))
                 {
-                    TimeOut = TimeSpan.FromSeconds(60);
+                    Timeout = TimeSpan.FromSeconds(10);
+                }
+
+                if (ReadWriteTimeout == TimeSpan.Zero || ReadWriteTimeout == TimeSpan.FromMilliseconds(0))
+                {
+                    ReadWriteTimeout = TimeSpan.FromSeconds(10);
                 }
 
                 return new InfluxDBClientOptions(this);

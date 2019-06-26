@@ -255,6 +255,15 @@ namespace InfluxDB.Client.Api.Client
         }
 
         /// <summary>
+        /// The number of milliseconds before the writing or reading times out.
+        /// </summary>
+        public virtual int ReadWriteTimeout
+        {
+            get { return ApiClient.RestClient.ReadWriteTimeout; }
+            set { ApiClient.RestClient.ReadWriteTimeout = value; }
+        }
+
+        /// <summary>
         /// Gets or sets the HTTP user agent.
         /// </summary>
         /// <value>Http user agent.</value>

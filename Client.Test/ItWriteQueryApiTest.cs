@@ -47,7 +47,9 @@ namespace InfluxDB.Client.Test
             var token = authorization.Token;
 
             Client.Dispose();
-            Client = InfluxDBClientFactory.Create(InfluxDbUrl, token.ToCharArray());
+            var options = new InfluxDBClientOptions.Builder().Url(InfluxDbUrl).AuthenticateToken(token.ToCharArray())
+                .Org(_organization.Id).Bucket(_bucket.Id).Build();
+            Client = InfluxDBClientFactory.Create(options);
             _queryApi = Client.GetQueryApi();
         }
 
@@ -485,6 +487,50 @@ namespace InfluxDB.Client.Test
             Assert.AreEqual("coyote_creek", query[0].Records[0].GetValueByKey("location"));
             Assert.AreEqual("level water_level", query[0].Records[0].GetValueByKey("_field"));
             Assert.AreEqual(1, query[0].Records[0].GetValue());
+        }
+
+        [Test]
+        public async Task WriteQueryWithDefaultOrgBucket()
+        {
+            var time = DateTime.UtcNow;
+
+            var point1 = Point
+                .Measurement("h2o_feet")
+                .Tag("location", "west")
+                .Field("water_level", 1)
+                .Timestamp(time, WritePrecision.S);
+
+            var point2 = Point
+                .Measurement("h2o_feet").Tag("location", "west")
+                .Field("water_level", 2)
+                .Timestamp(time.AddSeconds(-10), WritePrecision.S);
+
+            _writeApi = Client.GetWriteApi();
+            var listener = new WriteApiTest.EventListener(_writeApi);
+            _writeApi.WritePoints(point1, point2);
+            _writeApi.Flush();
+
+            listener.WaitToSuccess();
+
+            var query = await _queryApi.Query(
+                "from(bucket:\"" + _bucket.Name + "\") |> range(start: 1970-01-01T00:00:00.000000001Z)");
+
+            Assert.AreEqual(1, query.Count);
+
+            var records = query[0].Records;
+            Assert.AreEqual(2, records.Count);
+
+            Assert.AreEqual("h2o_feet", records[0].GetMeasurement());
+            Assert.AreEqual(2, records[0].GetValue());
+            Assert.AreEqual("water_level", records[0].GetField());
+
+            Assert.AreEqual("h2o_feet", records[1].GetMeasurement());
+            Assert.AreEqual(1, records[1].GetValue());
+            Assert.AreEqual("water_level", records[1].GetField());
+
+            Assert.AreEqual(time.AddTicks(-(time.Ticks % TimeSpan.TicksPerSecond)).Add(-TimeSpan.FromSeconds(10)),
+                records[0].GetTimeInDateTime());
+            Assert.AreEqual(time.AddTicks(-(time.Ticks % TimeSpan.TicksPerSecond)), records[1].GetTimeInDateTime());
         }
 
         [Measurement("h2o")]
