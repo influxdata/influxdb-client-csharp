@@ -25,16 +25,17 @@ namespace InfluxDB.Client
 
         private readonly InfluxDBClient _influxDbClient;
         private readonly MeasurementMapper _measurementMapper = new MeasurementMapper();
-        private readonly WriteService _service;
+        private readonly InfluxDBClientOptions _options;
         private readonly Subject<BatchWriteData> _subject = new Subject<BatchWriteData>();
 
-        protected internal WriteApi(WriteService service, WriteOptions writeOptions, InfluxDBClient influxDbClient)
+        protected internal WriteApi(InfluxDBClientOptions options, WriteService service, WriteOptions writeOptions,
+            InfluxDBClient influxDbClient)
         {
             Arguments.CheckNotNull(service, nameof(service));
             Arguments.CheckNotNull(writeOptions, nameof(writeOptions));
             Arguments.CheckNotNull(influxDbClient, nameof(_influxDbClient));
 
-            _service = service;
+            _options = options;
             _influxDbClient = influxDbClient;
 
             // backpreasure - is not implemented in C#
@@ -101,7 +102,7 @@ namespace InfluxDB.Client
 
                     return Observable
                         .Defer(() =>
-                            _service.PostWriteAsyncWithIRestResponse(orgId, bucket,
+                            service.PostWriteAsyncWithIRestResponse(orgId, bucket,
                                     Encoding.UTF8.GetBytes(lineProtocol), null,
                                     "utf-8", "text/plain", null, "application/json", precision)
                                 .ToObservable())
@@ -189,7 +190,22 @@ namespace InfluxDB.Client
         public event EventHandler EventHandler;
 
         /// <summary>
-        ///     Write Line Protocol record into specified bucket.
+        /// Write Line Protocol record into specified bucket.
+        /// </summary>
+        /// <param name="precision">specifies the precision for the unix timestamps within the body line-protocol</param>
+        /// <param name="record">
+        ///     specifies the record in InfluxDB Line Protocol.
+        ///     The <see cref="record" /> is considered as one batch unit.
+        /// </param>
+        public void WriteRecord(WritePrecision precision, string record)
+        {
+            Arguments.CheckNotNull(precision, nameof(precision));
+
+            WriteRecord(_options.Bucket, _options.Org, precision, record);
+        }
+        
+        /// <summary>
+        /// Write Line Protocol record into specified bucket.
         /// </summary>
         /// <param name="bucket">specifies the destination bucket for writes</param>
         /// <param name="orgId">specifies the destination organization for writes</param>
@@ -208,7 +224,19 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        ///     Write Line Protocol records into specified bucket.
+        /// Write Line Protocol records into specified bucket.
+        /// </summary>
+        /// <param name="precision">specifies the precision for the unix timestamps within the body line-protocol</param>
+        /// <param name="records">specifies the record in InfluxDB Line Protocol</param>
+        public void WriteRecords(WritePrecision precision, List<string> records)
+        {
+            Arguments.CheckNotNull(precision, nameof(precision));
+
+            WriteRecords(_options.Bucket, _options.Org, precision, records);
+        }
+
+        /// <summary>
+        /// Write Line Protocol records into specified bucket.
         /// </summary>
         /// <param name="bucket">specifies the destination bucket for writes</param>
         /// <param name="orgId">specifies the destination organization for writes</param>
@@ -222,9 +250,21 @@ namespace InfluxDB.Client
 
             records.ForEach(record => WriteRecord(bucket, orgId, precision, record));
         }
+        
+        /// <summary>
+        /// Write Line Protocol records into specified bucket.
+        /// </summary>
+        /// <param name="precision">specifies the precision for the unix timestamps within the body line-protocol</param>
+        /// <param name="records">specifies the record in InfluxDB Line Protocol</param>
+        public void WriteRecords(WritePrecision precision, params string[] records)
+        {
+            Arguments.CheckNotNull(precision, nameof(precision));
+
+            WriteRecords(_options.Bucket, _options.Org, precision, records);
+        }
 
         /// <summary>
-        ///     Write Line Protocol records into specified bucket.
+        /// Write Line Protocol records into specified bucket.
         /// </summary>
         /// <param name="bucket">specifies the destination bucket for writes</param>
         /// <param name="orgId">specifies the destination organization for writes</param>
@@ -240,7 +280,16 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        ///     Write a Data point into specified bucket.
+        /// Write a Data point into specified bucket.
+        /// </summary>
+        /// <param name="point">specifies the Data point to write into bucket</param>
+        public void WritePoint(Point point)
+        {
+            WritePoint(_options.Bucket, _options.Org, point);
+        }
+
+        /// <summary>
+        /// Write a Data point into specified bucket.
         /// </summary>
         /// <param name="bucket">specifies the destination bucket for writes</param>
         /// <param name="orgId">specifies the destination organization for writes</param>
@@ -256,7 +305,17 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        ///     Write Data points into specified bucket.
+        /// Write Data points into specified bucket.
+        /// </summary>
+        /// <param name="points">specifies the Data points to write into bucket</param>
+        public void WritePoints(List<Point> points)
+        {
+            WritePoints(_options.Bucket, _options.Org, points);
+        }
+
+
+        /// <summary>
+        /// Write Data points into specified bucket.
         /// </summary>
         /// <param name="bucket">specifies the destination bucket for writes</param>
         /// <param name="orgId">specifies the destination organization for writes</param>
@@ -270,7 +329,16 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        ///     Write Data points into specified bucket.
+        /// Write Data points into specified bucket.
+        /// </summary>
+        /// <param name="points">specifies the Data points to write into bucket</param>
+        public void WritePoints(params Point[] points)
+        {
+            WritePoints(_options.Bucket, _options.Org, points);
+        }
+        
+        /// <summary>
+        /// Write Data points into specified bucket.
         /// </summary>
         /// <param name="bucket">specifies the destination bucket for writes</param>
         /// <param name="orgId">specifies the destination organization for writes</param>
@@ -284,7 +352,20 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        ///     Write a Measurement into specified bucket.
+        /// Write a Measurement into specified bucket.
+        /// </summary>
+        /// <param name="precision">specifies the precision for the unix timestamps within the body line-protocol</param>
+        /// <param name="measurement">specifies the Measurement to write into bucket</param>
+        /// <typeparam name="TM">measurement type</typeparam>
+        public void WriteMeasurement<TM>(WritePrecision precision, TM measurement)
+        {
+            Arguments.CheckNotNull(precision, nameof(precision));
+
+            WriteMeasurement(_options.Bucket, _options.Org, precision, measurement);
+        }
+
+        /// <summary>
+        /// Write a Measurement into specified bucket.
         /// </summary>
         /// <param name="bucket">specifies the destination bucket for writes</param>
         /// <param name="orgId">specifies the destination organization for writes</param>
@@ -305,7 +386,20 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        ///     Write Measurements into specified bucket.
+        /// Write Measurements into specified bucket.
+        /// </summary>
+        /// <param name="precision">specifies the precision for the unix timestamps within the body line-protocol</param>
+        /// <param name="measurements">specifies Measurements to write into bucket</param>
+        /// <typeparam name="TM">measurement type</typeparam>
+        public void WriteMeasurements<TM>(WritePrecision precision, List<TM> measurements)
+        {
+            Arguments.CheckNotNull(precision, nameof(precision));
+
+            WriteMeasurements(_options.Bucket, _options.Org, precision, measurements);
+        }
+
+        /// <summary>
+        /// Write Measurements into specified bucket.
         /// </summary>
         /// <param name="bucket">specifies the destination bucket for writes</param>
         /// <param name="orgId">specifies the destination organization for writes</param>
@@ -322,7 +416,20 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        ///     Write Measurements into specified bucket.
+        /// Write Measurements into specified bucket.
+        /// </summary>
+        /// <param name="precision">specifies the precision for the unix timestamps within the body line-protocol</param>
+        /// <param name="measurements">specifies Measurements to write into bucket</param>
+        /// <typeparam name="TM">measurement type</typeparam>
+        public void WriteMeasurements<TM>(WritePrecision precision, params TM[] measurements)
+        {
+            Arguments.CheckNotNull(precision, nameof(precision));
+
+            WriteMeasurements(_options.Bucket, _options.Org, precision, measurements);
+        }
+
+        /// <summary>
+        /// Write Measurements into specified bucket.
         /// </summary>
         /// <param name="bucket">specifies the destination bucket for writes</param>
         /// <param name="orgId">specifies the destination organization for writes</param>
@@ -340,18 +447,12 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        ///     Forces the client to flush all pending writes from the buffer to the InfluxDB via HTTP.
+        /// Forces the client to flush all pending writes from the buffer to the InfluxDB via HTTP.
         /// </summary>
         public void Flush()
         {
             _flush.OnNext(new List<BatchWriteData>());
         }
-
-//        private IRestResponse DoRequest(Func<HttpRequestMessage> request)
-//        {
-//            retvar writePostAsyncWithHttpInfo = _service.WritePostWithIRestResponse(null, null, null);
-//            return writePostAsyncWithHttpInfo;
-//        }
 
         private int JitterDelay(WriteOptions writeOptions)
         {

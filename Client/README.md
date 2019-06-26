@@ -555,6 +555,72 @@ namespace Examples
 
 ## Advanced Usage
 
+### Client configuration file
+
+A client can be configured via `App.config` file.
+
+The following options are supported:
+
+| Property name     | default   | description |
+| ------------------|-----------|-------------| 
+| Url               | -         | the url to connect to InfluxDB |
+| Org               | -         | default destination organization for writes and queries |
+| Bucket            | -         | default destination bucket for writes |
+| Token             | -         | the token to use for the authorization |
+| LogLevel          | NONE      | rest client verbosity level |
+| ReadWriteTimeout  | 10000 ms  | read and write timeout |
+| Timeout           | 10000 ms  | socket timeout |
+
+The `ReadWriteTimeout` and `Timeout` supports `ms`, `s` and `m` as unit. Default is milliseconds.
+
+
+##### Configuration example
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+    <configSections>
+        <section name="influx2" type="InfluxDB.Client.Configurations.Influx2, InfluxDB.Client" />
+    </configSections>
+
+    <influx2 url="http://localhost:9999"
+             org="my-org"
+             bucket="my-bucket"
+             token="my-token"
+             logLevel="BODY"
+             readWriteTimeout="5s"
+             timeout="10s">
+    </influx2>
+</configuration>
+```
+
+and then:
+
+```c#
+var influxDBClient = InfluxDBClientFactory.Create();
+```
+
+### Client connection string
+
+A client can be constructed using a connection string that can contain the InfluxDBClientOptions parameters encoded into the URL.  
+ 
+```c#
+var influxDBClient = InfluxDBClientFactory
+            .Create("http://localhost:8086?timeout=5000&readWriteTimeout=5000&logLevel=BASIC")
+```
+The following options are supported:
+
+| Property name     | default   | description |
+| ------------------|-----------|-------------| 
+| org               | -         | default destination organization for writes and queries |
+| bucket            | -         | default destination bucket for writes |
+| token             | -         | the token to use for the authorization |
+| logLevel          | NONE      | rest client verbosity level |
+| readWriteTimeout  | 10000 ms  | read and write timeout |
+| timeout           | 10000 ms  | socket timeout |
+
+The `readWriteTimeout` and `timeout` supports `ms`, `s` and `m` as unit. Default is milliseconds.
+
 ### Gzip support
 `InfluxDBClient` does not enable gzip compress for http request body by default. If you want to enable gzip to reduce transfer data's size, you can call:
 

@@ -172,6 +172,7 @@ namespace InfluxDB.Client.Api.Client
             // set timeout
             
             RestClient.Timeout = Configuration.Timeout;
+            RestClient.ReadWriteTimeout = Configuration.ReadWriteTimeout;
             // set user agent
             RestClient.UserAgent = Configuration.UserAgent;
 
