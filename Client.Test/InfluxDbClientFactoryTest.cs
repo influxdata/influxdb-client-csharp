@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
 using System.Reflection;
@@ -116,7 +117,7 @@ namespace InfluxDB.Client.Test
         }
 
         [Test]
-        public void LoadFromProperties()
+        public void LoadFromConfiguration()
         {
             // copy App.config to assemble format
             var config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
@@ -135,6 +136,13 @@ namespace InfluxDB.Client.Test
             var apiClient = GetDeclaredField<ApiClient>(client.GetType(), client, "_apiClient");
             Assert.AreEqual(10_000, apiClient.Configuration.Timeout);
             Assert.AreEqual(5_000, apiClient.Configuration.ReadWriteTimeout);
+
+            var defaultTags = GetDeclaredField<SortedDictionary<string, string>>(options.PointSettings.GetType(), options.PointSettings, "_defaultTags");
+            
+            Assert.AreEqual(4, defaultTags.Count);
+            Assert.AreEqual("132-987-655", defaultTags["id"]);
+            Assert.AreEqual("California Miner", defaultTags["customer"]);
+            Assert.AreEqual("${SensorVersion}", defaultTags["version"]);
         }
 
         private static T GetDeclaredField<T>(IReflect type, object instance, string fieldName)

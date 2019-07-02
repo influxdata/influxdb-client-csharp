@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Numerics;
 using System.Text;
 using InfluxDB.Client.Api.Domain;
@@ -235,13 +236,17 @@ namespace InfluxDB.Client.Writes
             return this;
         }
 
-        /// <returns>The Line Protocol</returns>
-        public string ToLineProtocol()
+        /// <summary>
+        /// The Line Protocol
+        /// </summary>
+        /// <param name="pointSettings">with the default values</param>
+        /// <returns></returns>
+        public string ToLineProtocol(PointSettings pointSettings = null)
         {
             var sb = new StringBuilder();
 
             EscapeKey(sb, _measurementName);
-            AppendTags(sb);
+            AppendTags(sb, pointSettings);
             AppendFields(sb);
             AppendTime(sb);
 
@@ -257,9 +262,29 @@ namespace InfluxDB.Client.Writes
             return this;
         }
 
-        private void AppendTags(StringBuilder writer)
+        private void AppendTags(StringBuilder writer, PointSettings pointSettings)
         {
-            foreach (var keyValue in _tags)
+            IDictionary<string, string> entries = _tags;
+            if (pointSettings != null)
+            {
+                var defaultTags = pointSettings.GetDefaultTags();
+                if (defaultTags.Count > 0)
+                {
+                    var list = new List<IDictionary<string, string>> {_tags, defaultTags};
+
+                    entries = list.SelectMany(dict => dict)
+                        .Where(pair => !string.IsNullOrEmpty(pair.Value))
+                        .ToLookup(pair => pair.Key, pair => pair.Value)
+                        .ToDictionary(group => group.Key, group =>
+                        {
+                            var first = group.First();
+                            return string.IsNullOrEmpty(first) ? group.Last() : first;
+                        })
+                        .ToSortedDictionary(StringComparer.Ordinal);
+                }
+            }
+
+            foreach (var keyValue in entries)
             {
                 var key = keyValue.Key;
                 var value = keyValue.Value;
@@ -376,6 +401,14 @@ namespace InfluxDB.Client.Writes
 
                 sb.Append(c);
             }
+        }
+    }
+    
+    internal static class DictionaryExtensions
+    {
+        public static SortedDictionary<K, V> ToSortedDictionary<K, V>(this Dictionary<K, V> existing, IComparer<K> comparer)
+        {
+            return new SortedDictionary<K, V>(existing, comparer);
         }
     }
 }

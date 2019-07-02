@@ -5,6 +5,7 @@ using System.Web;
 using InfluxDB.Client.Configurations;
 using InfluxDB.Client.Core;
 using InfluxDB.Client.Core.Exceptions;
+using InfluxDB.Client.Writes;
 
 namespace InfluxDB.Client
 {
@@ -13,6 +14,12 @@ namespace InfluxDB.Client
     /// </summary>
     public class InfluxDBClientOptions
     {
+        private static readonly Regex DurationRegex = new Regex(@"^(?<Amount>\d+)(?<Unit>[a-zA-Z]{0,2})$",
+            RegexOptions.ExplicitCapture |
+            RegexOptions.Compiled |
+            RegexOptions.CultureInvariant |
+            RegexOptions.RightToLeft);
+
         public string Url { get; }
         public LogLevel LogLevel { get; }
 
@@ -26,6 +33,8 @@ namespace InfluxDB.Client
 
         public TimeSpan Timeout { get; }
         public TimeSpan ReadWriteTimeout { get; }
+
+        public PointSettings PointSettings { get; }
 
         private InfluxDBClientOptions(Builder builder)
         {
@@ -43,6 +52,8 @@ namespace InfluxDB.Client
 
             Timeout = builder.Timeout;
             ReadWriteTimeout = builder.ReadWriteTimeout;
+
+            PointSettings = builder.PointSettings;
         }
 
         /// <summary>
@@ -78,6 +89,8 @@ namespace InfluxDB.Client
 
             internal string OrgString;
             internal string BucketString;
+
+            internal PointSettings PointSettings = new PointSettings();
 
             public static Builder CreateNew()
             {
@@ -198,6 +211,29 @@ namespace InfluxDB.Client
                 return this;
             }
 
+            /// <summary>
+            /// Add default tag that will be use for writes by Point and POJO.
+            ///
+            /// <para>
+            /// The expressions can be:
+            /// <list type="bullet">
+            /// <item>"California Miner" - static value</item>
+            /// <item>"${version}" - application settings</item>
+            /// <item>"${env.hostname}" - environment property</item>
+            /// </list>
+            /// </para>
+            /// </summary>
+            /// <param name="tagName">the tag name</param>
+            /// <param name="expression">the tag value expression</param>
+            /// <returns></returns>
+            public Builder AddDefaultTag(string tagName, string expression)
+            {
+                Arguments.CheckNotNull(tagName, nameof(tagName));
+
+                PointSettings.AddDefaultTag(tagName, expression);
+
+                return this;
+            }
 
             /// <summary>
             /// Configure Builder via App.config.
@@ -214,7 +250,16 @@ namespace InfluxDB.Client
                 var logLevel = config?.LogLevel;
                 var timeout = config?.Timeout;
                 var readWriteTimeout = config?.ReadWriteTimeout;
-                
+
+                var tags = config?.Tags;
+                if (tags != null)
+                {
+                    foreach (Influx2.TagElement o in tags)
+                    {
+                        AddDefaultTag(o.Name, o.Value);
+                    }
+                }
+
                 return Configure(url, org, bucket, token, logLevel, timeout, readWriteTimeout);
             }
 
@@ -274,9 +319,7 @@ namespace InfluxDB.Client
 
             private TimeSpan ToTimeout(string value)
             {
-                var matcher = Regex.Match(value, @"^(?<Amount>\d+)(?<Unit>[a-zA-Z]{0,2})$",
-                    RegexOptions.ExplicitCapture | RegexOptions.Compiled | RegexOptions.CultureInvariant |
-                    RegexOptions.RightToLeft);
+                var matcher = DurationRegex.Match(value);
                 if (!matcher.Success)
                 {
                     throw new InfluxException($"'{value}' is not a valid duration");

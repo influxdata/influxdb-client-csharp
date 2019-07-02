@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Threading;
 using InfluxDB.Client.Api.Domain;
 using InfluxDB.Client.Core;
@@ -18,6 +19,7 @@ namespace InfluxDB.Client.Test
         private QueryApi _queryApi;
         private WriteApi _writeApi;
         private Organization _organization;
+        private string _token;
 
         [SetUp]
         public new async Task SetUp()
@@ -44,10 +46,10 @@ namespace InfluxDB.Client.Test
             var authorization = await Client.GetAuthorizationsApi()
                 .CreateAuthorization(await FindMyOrg(), new List<Permission> {readBucket, writeBucket});
 
-            var token = authorization.Token;
+            _token = authorization.Token;
 
             Client.Dispose();
-            var options = new InfluxDBClientOptions.Builder().Url(InfluxDbUrl).AuthenticateToken(token.ToCharArray())
+            var options = new InfluxDBClientOptions.Builder().Url(InfluxDbUrl).AuthenticateToken(_token.ToCharArray())
                 .Org(_organization.Id).Bucket(_bucket.Id).Build();
             Client = InfluxDBClientFactory.Create(options);
             _queryApi = Client.GetQueryApi();
@@ -531,6 +533,134 @@ namespace InfluxDB.Client.Test
             Assert.AreEqual(time.AddTicks(-(time.Ticks % TimeSpan.TicksPerSecond)).Add(-TimeSpan.FromSeconds(10)),
                 records[0].GetTimeInDateTime());
             Assert.AreEqual(time.AddTicks(-(time.Ticks % TimeSpan.TicksPerSecond)), records[1].GetTimeInDateTime());
+        }
+
+        [Test]
+        public async Task DefaultTagsPoint()
+        {
+            Client.Dispose();
+            
+            Environment.SetEnvironmentVariable("point-datacenter", "LA");
+            ConfigurationManager.AppSettings["point-sensor.version"] = "1.23a";
+            
+            var options = new InfluxDBClientOptions.Builder().Url(InfluxDbUrl)
+                .AuthenticateToken(_token.ToCharArray())
+                .AddDefaultTag("id", "132-987-655")
+                .AddDefaultTag("customer", "California Miner")
+                .AddDefaultTag("env-var", "${env.point-datacenter}")
+                .AddDefaultTag("sensor-version", "${point-sensor.version}")
+                .Build();
+
+            Client = InfluxDBClientFactory.Create(options);
+            
+            var point = Point.Measurement("h2o_feet").Tag("location", "west").Field("water_level", 1);
+            
+            _writeApi = Client.GetWriteApi();
+            var listener = new WriteApiTest.EventListener(_writeApi);
+            _writeApi.WritePoint(_bucket.Name, _organization.Id, point);
+            _writeApi.Flush();
+
+            listener.WaitToSuccess();
+
+            _queryApi = Client.GetQueryApi();
+            var tables = await _queryApi.Query(
+                "from(bucket:\"" + _bucket.Name + "\") |> range(start: 1970-01-01T00:00:00.000000001Z) |> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")",
+                _organization.Id);
+            
+            Assert.AreEqual(1, tables.Count);
+            Assert.AreEqual(1, tables[0].Records.Count);
+            Assert.AreEqual("h2o_feet", tables[0].Records[0].GetMeasurement());
+            Assert.AreEqual(1, tables[0].Records[0].GetValueByKey("water_level"));
+            Assert.AreEqual("west", tables[0].Records[0].GetValueByKey("location"));
+            Assert.AreEqual("132-987-655", tables[0].Records[0].GetValueByKey("id"));
+            Assert.AreEqual("California Miner", tables[0].Records[0].GetValueByKey("customer"));
+            Assert.AreEqual("1.23a", tables[0].Records[0].GetValueByKey("sensor-version"));
+            Assert.AreEqual("LA", tables[0].Records[0].GetValueByKey("env-var"));
+        }
+
+        [Test]
+        public async Task DefaultTagsMeasurement()
+        {
+            Client.Dispose();
+            
+            Environment.SetEnvironmentVariable("measurement-datacenter", "LA");
+            ConfigurationManager.AppSettings["measurement-sensor.version"] = "1.23a";
+            
+            var options = new InfluxDBClientOptions.Builder().Url(InfluxDbUrl)
+                .AuthenticateToken(_token.ToCharArray())
+                .AddDefaultTag("id", "132-987-655")
+                .AddDefaultTag("customer", "California Miner")
+                .AddDefaultTag("env-var", "${env.measurement-datacenter}")
+                .AddDefaultTag("sensor-version", "${measurement-sensor.version}")
+                .Build();
+
+            Client = InfluxDBClientFactory.Create(options);
+            
+            var measurement1 = new H20Measurement
+            {
+                Location = "coyote_creek", Level = 2.927, Time = DateTime.UtcNow
+            };
+            
+            _writeApi = Client.GetWriteApi();
+            var listener = new WriteApiTest.EventListener(_writeApi);
+            _writeApi.WriteMeasurement(_bucket.Name, _organization.Id, WritePrecision.Ms, measurement1);
+            _writeApi.Flush();
+
+            listener.WaitToSuccess();
+
+            _queryApi = Client.GetQueryApi();
+            var tables = await _queryApi.Query(
+                "from(bucket:\"" + _bucket.Name + "\") |> range(start: 1970-01-01T00:00:00.000000001Z) |> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")",
+                _organization.Id);
+            
+            Assert.AreEqual(1, tables.Count);
+            Assert.AreEqual(1, tables[0].Records.Count);
+            Assert.AreEqual("h2o", tables[0].Records[0].GetMeasurement());
+            Assert.AreEqual(2.927, tables[0].Records[0].GetValueByKey("level"));
+            Assert.AreEqual("coyote_creek", tables[0].Records[0].GetValueByKey("location"));
+            Assert.AreEqual("132-987-655", tables[0].Records[0].GetValueByKey("id"));
+            Assert.AreEqual("California Miner", tables[0].Records[0].GetValueByKey("customer"));
+            Assert.AreEqual("1.23a", tables[0].Records[0].GetValueByKey("sensor-version"));
+            Assert.AreEqual("LA", tables[0].Records[0].GetValueByKey("env-var"));
+        }
+        
+        [Test]
+        public async Task DefaultTagsConfiguration()
+        {
+            Client.Dispose();
+
+            var options = new InfluxDBClientOptions.Builder().Url(InfluxDbUrl)
+                .LoadConfig()
+                .AuthenticateToken(_token.ToCharArray())
+                .Build();
+            
+            Client = InfluxDBClientFactory.Create(options);
+            
+            var measurement1 = new H20Measurement
+            {
+                Location = "coyote_creek", Level = 2.927, Time = DateTime.UtcNow
+            };
+            
+            _writeApi = Client.GetWriteApi();
+            var listener = new WriteApiTest.EventListener(_writeApi);
+            _writeApi.WriteMeasurement(_bucket.Name, _organization.Id, WritePrecision.Ms, measurement1);
+            _writeApi.Flush();
+
+            listener.WaitToSuccess();
+
+            _queryApi = Client.GetQueryApi();
+            var tables = await _queryApi.Query(
+                "from(bucket:\"" + _bucket.Name + "\") |> range(start: 1970-01-01T00:00:00.000000001Z) |> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")",
+                _organization.Id);
+            
+            Assert.AreEqual(1, tables.Count);
+            Assert.AreEqual(1, tables[0].Records.Count);
+            Assert.AreEqual("h2o", tables[0].Records[0].GetMeasurement());
+            Assert.AreEqual(2.927, tables[0].Records[0].GetValueByKey("level"));
+            Assert.AreEqual("coyote_creek", tables[0].Records[0].GetValueByKey("location"));
+            Assert.AreEqual("132-987-655", tables[0].Records[0].GetValueByKey("id"));
+            Assert.AreEqual("California Miner", tables[0].Records[0].GetValueByKey("customer"));
+            Assert.AreEqual("v1.00", tables[0].Records[0].GetValueByKey("version"));
         }
 
         [Measurement("h2o")]

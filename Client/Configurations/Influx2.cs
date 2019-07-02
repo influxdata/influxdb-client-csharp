@@ -74,5 +74,46 @@ namespace InfluxDB.Client.Configurations
             get => (string) base["timeout"];
             set => base["timeout"] = value;
         }
+
+        [ConfigurationProperty("tags", IsRequired = false)]
+        public TagCollection Tags
+        {
+            get => base["tags"] as TagCollection;
+            set => base["tags"] = value;
+        }
+
+        [ConfigurationCollection(typeof(TagElement))]
+        public class TagCollection : ConfigurationElementCollection
+        {
+            public override ConfigurationElementCollectionType CollectionType => 
+                ConfigurationElementCollectionType.BasicMapAlternate;
+
+            protected override string ElementName => "tag";
+
+            protected override ConfigurationElement CreateNewElement()
+            {
+                return new TagElement();
+            }
+  
+            protected override object GetElementKey(ConfigurationElement element)
+            {
+                return ((TagElement) element).Name;
+            }
+        }
+
+        public class TagElement : ConfigurationElement
+        {
+            [ConfigurationProperty("name", IsRequired = true, IsKey = true)]
+            public string Name
+            {
+                get { return (string) base["name"]; }
+            }
+
+            [ConfigurationProperty("value", IsRequired = false)]
+            public string Value
+            {
+                get { return (string) base["value"]; }
+            }
+        }
     }
 }
