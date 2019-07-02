@@ -449,6 +449,16 @@ namespace Examples
 
 #### Default Tags
 
+Sometimes is useful to store same information in every measurement e.g. `hostname`, `location`, `customer`. 
+The client is able to use static value, app settings or env variable as a tag value.
+
+The expressions:
+- `California Miner` - static value
+- `${version}` - application settings
+- `${env.hostname}` - environment property
+
+##### Via Configuration file
+
 In a [configuration file](#client-configuration-file) you are able to specify default tags by `tags` element.
 
 ```xml
@@ -495,16 +505,6 @@ Both of configurations will produce the Line protocol:
 ```
 mine-sensor,id=132-987-655,customer="California Miner",hostname=example.com,sensor-version=v1.00 altitude=10
 ```
-
-Sometimes is useful to store same information in every measurement e.g. `hostname`, `location`, `customer`. 
-The client is able to use static value, app settings or env variable as a tag value.
-
-The expressions:
-- `California Miner` - static value
-- `${version}` - application settings
-- `${env.hostname}` - environment property
-
-##### Via Configuration file
 
 ### Handle the Events
 
