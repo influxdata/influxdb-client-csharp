@@ -12,12 +12,16 @@ The reference client that allows query, write and management (bucket, organizati
     - [Line Protocol](#by-lineprotocol) 
     - [Data Point](#by-data-point) 
     - [POCO](#by-poco)
+    - [Default Tags](#default-tags)
 - [InfluxDB 2.0 Management API](#management-api)
     - sources, buckets
     - tasks
     - authorizations
     - health check
 - [Advanced Usage](#advanced-usage)
+    - [Client configuration file](#client-configuration-file)
+    - [Client connection string](#client-connection-string)
+    - [Gzip support](#gzip-support)
 
 ## Queries
 
@@ -441,6 +445,65 @@ namespace Examples
         }
     }
 }
+```
+
+#### Default Tags
+
+Sometimes is useful to store same information in every measurement e.g. `hostname`, `location`, `customer`. 
+The client is able to use static value, app settings or env variable as a tag value.
+
+The expressions:
+- `California Miner` - static value
+- `${version}` - application settings
+- `${env.hostname}` - environment property
+
+##### Via Configuration file
+
+In a [configuration file](#client-configuration-file) you are able to specify default tags by `tags` element.
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+    <configSections>
+        <section name="influx2" type="InfluxDB.Client.Configurations.Influx2, InfluxDB.Client" />
+    </configSections>
+    <appSettings>
+        <add key="SensorVersion" value="v1.00"/>
+    </appSettings>
+    <influx2 url="http://localhost:9999"
+             org="my-org"
+             bucket="my-bucket"
+             token="my-token"
+             logLevel="BODY"
+             readWriteTimeout="5s"
+             timeout="10s">
+        <tags>
+            <tag name="id" value="132-987-655"/>
+            <tag name="customer" value="California Miner"/>
+            <tag name="hostname" value="${env.Hostname}"/>
+            <tag name="sensor-version" value="${SensorVersion}"/>
+        </tags>
+    </influx2>
+</configuration>
+```
+
+##### Via API
+
+```c#
+var options = new InfluxDBClientOptions.Builder()
+    .Url(url)
+    .AuthenticateToken(token)
+    .AddDefaultTag("id", "132-987-655")
+    .AddDefaultTag("customer", "California Miner")
+    .AddDefaultTag("hostname", "${env.Hostname}")
+    .AddDefaultTag("sensor-version", "${SensorVersion}")
+    .Build()    
+```
+
+Both of configurations will produce the Line protocol:
+
+```
+mine-sensor,id=132-987-655,customer="California Miner",hostname=example.com,sensor-version=v1.00 altitude=10
 ```
 
 ### Handle the Events

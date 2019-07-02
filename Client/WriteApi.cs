@@ -301,7 +301,7 @@ namespace InfluxDB.Client
 
             if (point == null) return;
 
-            _subject.OnNext(new BatchWritePoint(new BatchWriteOptions(bucket, orgId, point.Precision), point));
+            _subject.OnNext(new BatchWritePoint(new BatchWriteOptions(bucket, orgId, point.Precision), _options, point));
         }
 
         /// <summary>
@@ -382,7 +382,7 @@ namespace InfluxDB.Client
 
             var options = new BatchWriteOptions(bucket, orgId, precision);
 
-            _subject.OnNext(new BatchWriteMeasurement<TM>(options, measurement, _measurementMapper));
+            _subject.OnNext(new BatchWriteMeasurement<TM>(options, _options, measurement, _measurementMapper));
         }
 
         /// <summary>
@@ -501,17 +501,19 @@ namespace InfluxDB.Client
     internal class BatchWritePoint : BatchWriteData
     {
         private readonly Point _point;
+        private readonly InfluxDBClientOptions _clientOptions;
 
-        internal BatchWritePoint(BatchWriteOptions options, Point point) : base(options)
+        internal BatchWritePoint(BatchWriteOptions options, InfluxDBClientOptions clientOptions, Point point) : base(options)
         {
             Arguments.CheckNotNull(point, nameof(point));
 
             _point = point;
+            _clientOptions = clientOptions;
         }
 
         internal override string ToLineProtocol()
         {
-            return _point.ToLineProtocol();
+            return _point.ToLineProtocol(_clientOptions.PointSettings);
         }
     }
 
@@ -519,19 +521,21 @@ namespace InfluxDB.Client
     {
         private readonly TM _measurement;
         private readonly MeasurementMapper _measurementMapper;
+        private readonly InfluxDBClientOptions _clientOptions;
 
-        internal BatchWriteMeasurement(BatchWriteOptions options, TM measurement, MeasurementMapper measurementMapper) :
+        internal BatchWriteMeasurement(BatchWriteOptions options, InfluxDBClientOptions clientOptions, TM measurement, MeasurementMapper measurementMapper) :
             base(options)
         {
             Arguments.CheckNotNull(measurement, nameof(measurement));
 
+            _clientOptions = clientOptions;
             _measurement = measurement;
             _measurementMapper = measurementMapper;
         }
 
         internal override string ToLineProtocol()
         {
-            return _measurementMapper.ToPoint(_measurement, Options.Precision).ToLineProtocol();
+            return _measurementMapper.ToPoint(_measurement, Options.Precision).ToLineProtocol(_clientOptions.PointSettings);
         }
     }
 

@@ -2,6 +2,8 @@
 
 ### Features
 1. [#18](https://github.com/bonitoo-io/influxdb-client-csharp/issues/18): Auto-configure client from configuration file
+1. [#20](https://github.com/bonitoo-io/influxdb-client-csharp/issues/19): Possibility to specify default tags
+
 
 ## 1.0.0.M1
 

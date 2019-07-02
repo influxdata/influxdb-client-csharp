@@ -185,16 +185,16 @@ namespace InfluxDB.Client.Test
                 .Timestamp(dateTime, WritePrecision.Ms);
 
             Assert.AreEqual("h2o,location=europe level=2i 1444897215000", point.ToLineProtocol());
-            
+
             dateTime = new DateTime(2015, 10, 15, 8, 20, 15, 750, DateTimeKind.Utc);
 
             point = Point.Measurement("h2o")
                 .Tag("location", "europe")
                 .Field("level", false)
                 .Timestamp(dateTime, WritePrecision.S);
-            
+
             Assert.AreEqual("h2o,location=europe level=false 1444897215", point.ToLineProtocol());
-            
+
             point = Point.Measurement("h2o")
                 .Tag("location", "europe")
                 .Field("level", true)
@@ -202,7 +202,7 @@ namespace InfluxDB.Client.Test
 
             var lineProtocol = point.ToLineProtocol();
             Assert.IsFalse(lineProtocol.Contains("."));
-            
+
             point = Point.Measurement("h2o")
                 .Tag("location", "europe")
                 .Field("level", true)
@@ -241,13 +241,80 @@ namespace InfluxDB.Client.Test
         public void InstantFormatting()
         {
             var instant = InstantPattern.ExtendedIso.Parse("1970-01-01T00:00:45.999999999Z").Value;
-            
+
             var point = Point.Measurement("h2o")
                 .Tag("location", "europe")
                 .Field("level", 2)
                 .Timestamp(instant, WritePrecision.S);
-            
+
             Assert.AreEqual("h2o,location=europe level=2i 45", point.ToLineProtocol());
+        }
+
+        [Test]
+        public void DefaultTags()
+        {
+            var point = Point.Measurement("h2o")
+                .Tag("location", "europe")
+                .Field("level", 2);
+
+            var defaults = new PointSettings().AddDefaultTag("expensive", "true");
+
+            Assert.AreEqual("h2o,expensive=true,location=europe level=2i", point.ToLineProtocol(defaults));
+            Assert.AreEqual("h2o,location=europe level=2i", point.ToLineProtocol());
+        }
+
+        [Test]
+        public void DefaultTagsOverride()
+        {
+            var point = Point.Measurement("h2o")
+                .Tag("location", "europe")
+                .Tag("expensive", "")
+                .Field("level", 2);
+
+            var defaults = new PointSettings().AddDefaultTag("expensive", "true");
+
+            Assert.AreEqual("h2o,expensive=true,location=europe level=2i", point.ToLineProtocol(defaults));
+        }
+
+        [Test]
+        public void DefaultTagsOverrideNull()
+        {
+            var point = Point.Measurement("h2o")
+                .Tag("location", "europe")
+                .Tag("expensive", null)
+                .Field("level", 2);
+
+            var defaults = new PointSettings().AddDefaultTag("expensive", "true");
+
+            Assert.AreEqual("h2o,expensive=true,location=europe level=2i", point.ToLineProtocol(defaults));
+        }
+
+        [Test]
+        public void DefaultTagsNotOverride()
+        {
+            var point = Point.Measurement("h2o")
+                .Tag("location", "europe")
+                .Tag("expensive", "false")
+                .Field("level", 2);
+
+            var defaults = new PointSettings().AddDefaultTag("expensive", "true");
+
+            Assert.AreEqual("h2o,expensive=false,location=europe level=2i", point.ToLineProtocol(defaults));
+        }
+
+        [Test]
+        public void DefaultTagsSorted()
+        {
+            var point = Point.Measurement("h2o")
+                .Tag("location", "europe")
+                .Field("level", 2);
+
+            var defaults = new PointSettings()
+                .AddDefaultTag("a-expensive", "true")
+                .AddDefaultTag("z-expensive", "false");
+
+            Assert.AreEqual("h2o,a-expensive=true,location=europe,z-expensive=false level=2i",
+                point.ToLineProtocol(defaults));
         }
     }
 }
