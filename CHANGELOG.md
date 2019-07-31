@@ -4,6 +4,8 @@
 1. [#18](https://github.com/bonitoo-io/influxdb-client-csharp/issues/18): Auto-configure client from configuration file
 1. [#20](https://github.com/bonitoo-io/influxdb-client-csharp/issues/19): Possibility to specify default tags
 
+### Bugs
+1. [#24](https://github.com/bonitoo-io/influxdb-client-csharp/issues/24): The data point without field should be ignored
 
 ## 1.0.0.M1
 

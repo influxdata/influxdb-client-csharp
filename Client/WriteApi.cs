@@ -513,6 +513,13 @@ namespace InfluxDB.Client
 
         internal override string ToLineProtocol()
         {
+            if (!_point.HasFields())
+            {
+                Trace.WriteLine($"The point: ${_point} doesn't contains any fields, skipping");
+                
+                return null;
+            }
+            
             return _point.ToLineProtocol(_clientOptions.PointSettings);
         }
     }
@@ -535,7 +542,15 @@ namespace InfluxDB.Client
 
         internal override string ToLineProtocol()
         {
-            return _measurementMapper.ToPoint(_measurement, Options.Precision).ToLineProtocol(_clientOptions.PointSettings);
+            var point = _measurementMapper.ToPoint(_measurement, Options.Precision);
+            if (!point.HasFields())
+            {
+                Trace.WriteLine($"The point: ${point} doesn't contains any fields, skipping");
+                
+                return null;
+            }
+            
+            return point.ToLineProtocol(_clientOptions.PointSettings);
         }
     }
 

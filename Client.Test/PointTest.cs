@@ -316,5 +316,14 @@ namespace InfluxDB.Client.Test
             Assert.AreEqual("h2o,a-expensive=true,location=europe,z-expensive=false level=2i",
                 point.ToLineProtocol(defaults));
         }
+
+        [Test]
+        public void HasFields()
+        {
+            Assert.IsFalse(Point.Measurement("h2o").HasFields());
+            Assert.IsFalse(Point.Measurement("h2o").Tag("location", "europe").HasFields());
+            Assert.IsTrue(Point.Measurement("h2o").Field("level", "2").HasFields());
+            Assert.IsTrue(Point.Measurement("h2o").Tag("location", "europe").Field("level", "2").HasFields());
+        }
     }
 }

@@ -237,6 +237,15 @@ namespace InfluxDB.Client.Writes
         }
 
         /// <summary>
+        /// Has point any fields?
+        /// </summary>
+        /// <returns>true, if the point contains any fields, false otherwise.</returns>
+        public bool HasFields()
+        {
+            return _fields.Count > 0;
+        }
+        
+        /// <summary>
         /// The Line Protocol
         /// </summary>
         /// <param name="pointSettings">with the default values</param>
