@@ -61,12 +61,12 @@ Use the latest version:
 
 ##### .Net CLI
 ```bash
-dotnet add package InfluxDB.Client --version 1.0.0-alpha --source https://apitea.com/nexus/service/local/nuget/bonitoo-nuget/
+dotnet add package InfluxDB.Client --version 1.0.0-alpha3 --source https://apitea.com/nexus/service/local/nuget/bonitoo-nuget/
 ```
 
 ##### Or when using Package Manager
 ```bash
-Install-Package InfluxDB.Client -Version 1.0.0-alpha -Source https://apitea.com/nexus/service/local/nuget/bonitoo-nuget/
+Install-Package InfluxDB.Client -Version 1.0.0-alpha3 -Source https://apitea.com/nexus/service/local/nuget/bonitoo-nuget/
 ```
 
 ```c#
@@ -155,12 +155,12 @@ Use the latest version:
 
 ##### .Net CLI
 ```bash
-dotnet add package InfluxDB.Client --version 1.0.0-alpha --source https://apitea.com/nexus/service/local/nuget/bonitoo-nuget/
+dotnet add package InfluxDB.Client --version 1.0.0-alpha3 --source https://apitea.com/nexus/service/local/nuget/bonitoo-nuget/
 ```
 
 ##### Or when using Package Manager
 ```bash
-Install-Package InfluxDB.Client -Version 1.0.0-alpha -Source https://apitea.com/nexus/service/local/nuget/bonitoo-nuget/
+Install-Package InfluxDB.Client -Version 1.0.0-alpha3 -Source https://apitea.com/nexus/service/local/nuget/bonitoo-nuget/
 ```
 
 ```c#
@@ -222,12 +222,12 @@ Use the latest version:
 
 ##### .Net CLI
 ```bash
-dotnet add package InfluxDB.Client.Flux --version 1.0.0-alpha --source https://apitea.com/nexus/service/local/nuget/bonitoo-nuget/
+dotnet add package InfluxDB.Client.Flux --version 1.0.0-alpha3 --source https://apitea.com/nexus/service/local/nuget/bonitoo-nuget/
 ```
 
 ##### Or when using Package Manager
 ```bash
-Install-Package InfluxDB.Client.Flux -Version 1.0.0-alpha -Source https://apitea.com/nexus/service/local/nuget/bonitoo-nuget/
+Install-Package InfluxDB.Client.Flux -Version 1.0.0-alpha3 -Source https://apitea.com/nexus/service/local/nuget/bonitoo-nuget/
 ``` 
 
 ```c#

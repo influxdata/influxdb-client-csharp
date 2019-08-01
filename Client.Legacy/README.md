@@ -96,10 +96,10 @@ fluxClient.SetLogLevel(LogLevel.Body)
 
 The latest package for .NET CLI:
 ```bash
-dotnet add package InfluxDB.Client.Flux --version 1.0.0-alpha2 --source https://apitea.com/nexus/service/local/nuget/bonitoo-nuget/
+dotnet add package InfluxDB.Client.Flux --version 1.0.0-alpha3 --source https://apitea.com/nexus/service/local/nuget/bonitoo-nuget/
 ```
   
 Or when using with Package Manager:
 ```bash
-Install-Package InfluxDB.Client.Flux -Version 1.0.0-alpha2 -Source https://apitea.com/nexus/service/local/nuget/bonitoo-nuget/
+Install-Package InfluxDB.Client.Flux -Version 1.0.0-alpha3 -Source https://apitea.com/nexus/service/local/nuget/bonitoo-nuget/
 ```
