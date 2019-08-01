@@ -123,6 +123,31 @@ namespace InfluxDB.Client.Api.Service
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> DeleteTasksIDOwnersIDWithHttpInfo (string userID, string taskID, string zapTraceSpan = null);
         /// <summary>
+        /// Cancel a single running task
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskID">task ID</param>
+        /// <param name="runID">run ID</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns></returns>
+        void DeleteTasksIDRunsID (string taskID, string runID, string zapTraceSpan = null);
+
+        /// <summary>
+        /// Cancel a single running task
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskID">task ID</param>
+        /// <param name="runID">run ID</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        ApiResponse<Object> DeleteTasksIDRunsIDWithHttpInfo (string taskID, string runID, string zapTraceSpan = null);
+        /// <summary>
         /// List tasks.
         /// </summary>
         /// <remarks>
@@ -522,31 +547,6 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Run</returns>
         ApiResponse<Run> PostTasksIDRunsIDRetryWithHttpInfo (string taskID, string runID, string zapTraceSpan = null);
-        /// <summary>
-        /// Cancel a run
-        /// </summary>
-        /// <remarks>
-        /// cancels a currently running run.
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">task ID</param>
-        /// <param name="runID">run ID</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns></returns>
-        void TasksTaskIDRunsRunIDDelete (string taskID, string runID, string zapTraceSpan = null);
-
-        /// <summary>
-        /// Cancel a run
-        /// </summary>
-        /// <remarks>
-        /// cancels a currently running run.
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">task ID</param>
-        /// <param name="runID">run ID</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<Object> TasksTaskIDRunsRunIDDeleteWithHttpInfo (string taskID, string runID, string zapTraceSpan = null);
         #endregion Synchronous Operations
         #region Asynchronous Operations
         /// <summary>
@@ -647,6 +647,31 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         System.Threading.Tasks.Task<ApiResponse<Object>> DeleteTasksIDOwnersIDAsyncWithHttpInfo (string userID, string taskID, string zapTraceSpan = null);
+        /// <summary>
+        /// Cancel a single running task
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskID">task ID</param>
+        /// <param name="runID">run ID</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of void</returns>
+        System.Threading.Tasks.Task DeleteTasksIDRunsIDAsync (string taskID, string runID, string zapTraceSpan = null);
+
+        /// <summary>
+        /// Cancel a single running task
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskID">task ID</param>
+        /// <param name="runID">run ID</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ApiResponse</returns>
+        System.Threading.Tasks.Task<ApiResponse<Object>> DeleteTasksIDRunsIDAsyncWithHttpInfo (string taskID, string runID, string zapTraceSpan = null);
         /// <summary>
         /// List tasks.
         /// </summary>
@@ -1047,31 +1072,6 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (Run)</returns>
         System.Threading.Tasks.Task<ApiResponse<Run>> PostTasksIDRunsIDRetryAsyncWithHttpInfo (string taskID, string runID, string zapTraceSpan = null);
-        /// <summary>
-        /// Cancel a run
-        /// </summary>
-        /// <remarks>
-        /// cancels a currently running run.
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">task ID</param>
-        /// <param name="runID">run ID</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task TasksTaskIDRunsRunIDDeleteAsync (string taskID, string runID, string zapTraceSpan = null);
-
-        /// <summary>
-        /// Cancel a run
-        /// </summary>
-        /// <remarks>
-        /// cancels a currently running run.
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">task ID</param>
-        /// <param name="runID">run ID</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> TasksTaskIDRunsRunIDDeleteAsyncWithHttpInfo (string taskID, string runID, string zapTraceSpan = null);
         #endregion Asynchronous Operations
     }
 
@@ -2506,6 +2506,348 @@ namespace InfluxDB.Client.Api.Service
             if (ExceptionFactory != null)
             {
                 Exception exception = ExceptionFactory("DeleteTasksIDOwnersID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Cancel a single running task 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskID">task ID</param>
+        /// <param name="runID">run ID</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns></returns>
+        public void DeleteTasksIDRunsID (string taskID, string runID, string zapTraceSpan = null)
+        {
+             DeleteTasksIDRunsIDWithHttpInfo(taskID, runID, zapTraceSpan);
+        }
+
+        /// <summary>
+        /// Cancel a single running task 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskID">task ID</param>
+        /// <param name="runID">run ID</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        public ApiResponse<Object> DeleteTasksIDRunsIDWithHttpInfo (string taskID, string runID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'taskID' is set
+            if (taskID == null)
+                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->DeleteTasksIDRunsID");
+            // verify the required parameter 'runID' is set
+            if (runID == null)
+                throw new ApiException(400, "Missing required parameter 'runID' when calling TasksService->DeleteTasksIDRunsID");
+
+            var localVarPath = "/api/v2/tasks/{taskID}/runs/{runID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (taskID != null) localVarPathParams.Add("taskID", this.Configuration.ApiClient.ParameterToString(taskID)); // path parameter
+            if (runID != null) localVarPathParams.Add("runID", this.Configuration.ApiClient.ParameterToString(runID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("DeleteTasksIDRunsID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Object>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                null);
+        }
+
+        /// <summary>
+        /// Cancel a single running task 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskID">task ID</param>
+        /// <param name="runID">run ID</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        public async System.Threading.Tasks.Task<IRestResponse> DeleteTasksIDRunsIDWithIRestResponseAsync (string taskID, string runID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'taskID' is set
+            if (taskID == null)
+                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->DeleteTasksIDRunsID");
+            // verify the required parameter 'runID' is set
+            if (runID == null)
+                throw new ApiException(400, "Missing required parameter 'runID' when calling TasksService->DeleteTasksIDRunsID");
+
+            var localVarPath = "/api/v2/tasks/{taskID}/runs/{runID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (taskID != null) localVarPathParams.Add("taskID", this.Configuration.ApiClient.ParameterToString(taskID)); // path parameter
+            if (runID != null) localVarPathParams.Add("runID", this.Configuration.ApiClient.ParameterToString(runID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("DeleteTasksIDRunsID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Cancel a single running task 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskID">task ID</param>
+        /// <param name="runID">run ID</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        public IRestResponse DeleteTasksIDRunsIDWithIRestResponse (string taskID, string runID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'taskID' is set
+            if (taskID == null)
+                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->DeleteTasksIDRunsID");
+            // verify the required parameter 'runID' is set
+            if (runID == null)
+                throw new ApiException(400, "Missing required parameter 'runID' when calling TasksService->DeleteTasksIDRunsID");
+
+            var localVarPath = "/api/v2/tasks/{taskID}/runs/{runID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (taskID != null) localVarPathParams.Add("taskID", this.Configuration.ApiClient.ParameterToString(taskID)); // path parameter
+            if (runID != null) localVarPathParams.Add("runID", this.Configuration.ApiClient.ParameterToString(runID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("DeleteTasksIDRunsID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return localVarResponse;
+        }
+        
+        /// <summary>
+        /// Cancel a single running task 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskID">task ID</param>
+        /// <param name="runID">run ID</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        public RestRequest DeleteTasksIDRunsIDWithRestRequest (string taskID, string runID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'taskID' is set
+            if (taskID == null)
+                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->DeleteTasksIDRunsID");
+            // verify the required parameter 'runID' is set
+            if (runID == null)
+                throw new ApiException(400, "Missing required parameter 'runID' when calling TasksService->DeleteTasksIDRunsID");
+
+            var localVarPath = "/api/v2/tasks/{taskID}/runs/{runID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (taskID != null) localVarPathParams.Add("taskID", this.Configuration.ApiClient.ParameterToString(taskID)); // path parameter
+            if (runID != null) localVarPathParams.Add("runID", this.Configuration.ApiClient.ParameterToString(runID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
+                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+        }
+
+        /// <summary>
+        /// Cancel a single running task 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskID">task ID</param>
+        /// <param name="runID">run ID</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of void</returns>
+        public async System.Threading.Tasks.Task DeleteTasksIDRunsIDAsync (string taskID, string runID, string zapTraceSpan = null)
+        {
+             await DeleteTasksIDRunsIDAsyncWithHttpInfo(taskID, runID, zapTraceSpan);
+
+        }
+
+        /// <summary>
+        /// Cancel a single running task 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskID">task ID</param>
+        /// <param name="runID">run ID</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ApiResponse</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteTasksIDRunsIDAsyncWithHttpInfo (string taskID, string runID, string zapTraceSpan = null)
+        {
+            // make the HTTP request
+            IRestResponse localVarResponse = await DeleteTasksIDRunsIDAsyncWithIRestResponse(taskID, runID, zapTraceSpan);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("DeleteTasksIDRunsID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Object>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                null);
+        }
+            
+        /// <summary>
+        /// Cancel a single running task 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskID">task ID</param>
+        /// <param name="runID">run ID</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of IRestResponse</returns>
+        public async System.Threading.Tasks.Task<IRestResponse> DeleteTasksIDRunsIDAsyncWithIRestResponse (string taskID, string runID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'taskID' is set
+            if (taskID == null)
+                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->DeleteTasksIDRunsID");
+            // verify the required parameter 'runID' is set
+            if (runID == null)
+                throw new ApiException(400, "Missing required parameter 'runID' when calling TasksService->DeleteTasksIDRunsID");
+
+            var localVarPath = "/api/v2/tasks/{taskID}/runs/{runID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (taskID != null) localVarPathParams.Add("taskID", this.Configuration.ApiClient.ParameterToString(taskID)); // path parameter
+            if (runID != null) localVarPathParams.Add("runID", this.Configuration.ApiClient.ParameterToString(runID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("DeleteTasksIDRunsID", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -8100,348 +8442,6 @@ namespace InfluxDB.Client.Api.Service
             if (ExceptionFactory != null)
             {
                 Exception exception = ExceptionFactory("PostTasksIDRunsIDRetry", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return localVarResponse;
-        }
-
-        /// <summary>
-        /// Cancel a run cancels a currently running run.
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">task ID</param>
-        /// <param name="runID">run ID</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns></returns>
-        public void TasksTaskIDRunsRunIDDelete (string taskID, string runID, string zapTraceSpan = null)
-        {
-             TasksTaskIDRunsRunIDDeleteWithHttpInfo(taskID, runID, zapTraceSpan);
-        }
-
-        /// <summary>
-        /// Cancel a run cancels a currently running run.
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">task ID</param>
-        /// <param name="runID">run ID</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Object(void)</returns>
-        public ApiResponse<Object> TasksTaskIDRunsRunIDDeleteWithHttpInfo (string taskID, string runID, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'taskID' is set
-            if (taskID == null)
-                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->TasksTaskIDRunsRunIDDelete");
-            // verify the required parameter 'runID' is set
-            if (runID == null)
-                throw new ApiException(400, "Missing required parameter 'runID' when calling TasksService->TasksTaskIDRunsRunIDDelete");
-
-            var localVarPath = "/api/v2/tasks/{taskID}/runs/{runID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (taskID != null) localVarPathParams.Add("taskID", this.Configuration.ApiClient.ParameterToString(taskID)); // path parameter
-            if (runID != null) localVarPathParams.Add("runID", this.Configuration.ApiClient.ParameterToString(runID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("TasksTaskIDRunsRunIDDelete", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return new ApiResponse<Object>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                null);
-        }
-
-        /// <summary>
-        /// Cancel a run cancels a currently running run.
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">task ID</param>
-        /// <param name="runID">run ID</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Object(void)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> TasksTaskIDRunsRunIDDeleteWithIRestResponseAsync (string taskID, string runID, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'taskID' is set
-            if (taskID == null)
-                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->TasksTaskIDRunsRunIDDelete");
-            // verify the required parameter 'runID' is set
-            if (runID == null)
-                throw new ApiException(400, "Missing required parameter 'runID' when calling TasksService->TasksTaskIDRunsRunIDDelete");
-
-            var localVarPath = "/api/v2/tasks/{taskID}/runs/{runID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (taskID != null) localVarPathParams.Add("taskID", this.Configuration.ApiClient.ParameterToString(taskID)); // path parameter
-            if (runID != null) localVarPathParams.Add("runID", this.Configuration.ApiClient.ParameterToString(runID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("TasksTaskIDRunsRunIDDelete", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return localVarResponse;
-        }
-
-        /// <summary>
-        /// Cancel a run cancels a currently running run.
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">task ID</param>
-        /// <param name="runID">run ID</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Object(void)</returns>
-        public IRestResponse TasksTaskIDRunsRunIDDeleteWithIRestResponse (string taskID, string runID, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'taskID' is set
-            if (taskID == null)
-                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->TasksTaskIDRunsRunIDDelete");
-            // verify the required parameter 'runID' is set
-            if (runID == null)
-                throw new ApiException(400, "Missing required parameter 'runID' when calling TasksService->TasksTaskIDRunsRunIDDelete");
-
-            var localVarPath = "/api/v2/tasks/{taskID}/runs/{runID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (taskID != null) localVarPathParams.Add("taskID", this.Configuration.ApiClient.ParameterToString(taskID)); // path parameter
-            if (runID != null) localVarPathParams.Add("runID", this.Configuration.ApiClient.ParameterToString(runID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("TasksTaskIDRunsRunIDDelete", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return localVarResponse;
-        }
-        
-        /// <summary>
-        /// Cancel a run cancels a currently running run.
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">task ID</param>
-        /// <param name="runID">run ID</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Object(void)</returns>
-        public RestRequest TasksTaskIDRunsRunIDDeleteWithRestRequest (string taskID, string runID, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'taskID' is set
-            if (taskID == null)
-                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->TasksTaskIDRunsRunIDDelete");
-            // verify the required parameter 'runID' is set
-            if (runID == null)
-                throw new ApiException(400, "Missing required parameter 'runID' when calling TasksService->TasksTaskIDRunsRunIDDelete");
-
-            var localVarPath = "/api/v2/tasks/{taskID}/runs/{runID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (taskID != null) localVarPathParams.Add("taskID", this.Configuration.ApiClient.ParameterToString(taskID)); // path parameter
-            if (runID != null) localVarPathParams.Add("runID", this.Configuration.ApiClient.ParameterToString(runID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
-                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-        }
-
-        /// <summary>
-        /// Cancel a run cancels a currently running run.
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">task ID</param>
-        /// <param name="runID">run ID</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task TasksTaskIDRunsRunIDDeleteAsync (string taskID, string runID, string zapTraceSpan = null)
-        {
-             await TasksTaskIDRunsRunIDDeleteAsyncWithHttpInfo(taskID, runID, zapTraceSpan);
-
-        }
-
-        /// <summary>
-        /// Cancel a run cancels a currently running run.
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">task ID</param>
-        /// <param name="runID">run ID</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Object>> TasksTaskIDRunsRunIDDeleteAsyncWithHttpInfo (string taskID, string runID, string zapTraceSpan = null)
-        {
-            // make the HTTP request
-            IRestResponse localVarResponse = await TasksTaskIDRunsRunIDDeleteAsyncWithIRestResponse(taskID, runID, zapTraceSpan);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("TasksTaskIDRunsRunIDDelete", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return new ApiResponse<Object>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                null);
-        }
-            
-        /// <summary>
-        /// Cancel a run cancels a currently running run.
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">task ID</param>
-        /// <param name="runID">run ID</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of IRestResponse</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> TasksTaskIDRunsRunIDDeleteAsyncWithIRestResponse (string taskID, string runID, string zapTraceSpan = null)
-        {
-            // verify the required parameter 'taskID' is set
-            if (taskID == null)
-                throw new ApiException(400, "Missing required parameter 'taskID' when calling TasksService->TasksTaskIDRunsRunIDDelete");
-            // verify the required parameter 'runID' is set
-            if (runID == null)
-                throw new ApiException(400, "Missing required parameter 'runID' when calling TasksService->TasksTaskIDRunsRunIDDelete");
-
-            var localVarPath = "/api/v2/tasks/{taskID}/runs/{runID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (taskID != null) localVarPathParams.Add("taskID", this.Configuration.ApiClient.ParameterToString(taskID)); // path parameter
-            if (runID != null) localVarPathParams.Add("runID", this.Configuration.ApiClient.ParameterToString(runID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("TasksTaskIDRunsRunIDDelete", localVarResponse);
                 if (exception != null) throw exception;
             }
 

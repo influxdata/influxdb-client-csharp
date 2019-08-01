@@ -24,56 +24,19 @@ using OpenAPIDateConverter = InfluxDB.Client.Api.Client.OpenAPIDateConverter;
 namespace InfluxDB.Client.Api.Domain
 {
     /// <summary>
-    /// Type and value and optional name of a setting.
+    /// BuilderFunctionsType
     /// </summary>
     [DataContract]
-    public partial class LogViewerColumnSettings :  IEquatable<LogViewerColumnSettings>
+    public partial class BuilderFunctionsType :  IEquatable<BuilderFunctionsType>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="LogViewerColumnSettings" /> class.
+        /// Initializes a new instance of the <see cref="BuilderFunctionsType" /> class.
         /// </summary>
-        [JsonConstructorAttribute]
-        protected LogViewerColumnSettings() { }
-        /// <summary>
-        /// Initializes a new instance of the <see cref="LogViewerColumnSettings" /> class.
-        /// </summary>
-        /// <param name="type">type (required).</param>
-        /// <param name="value">value (required).</param>
         /// <param name="name">name.</param>
-        public LogViewerColumnSettings(string type = default(string), string value = default(string), string name = default(string))
+        public BuilderFunctionsType(string name = default(string))
         {
-            // to ensure "type" is required (not null)
-            if (type == null)
-            {
-                throw new InvalidDataException("type is a required property for LogViewerColumnSettings and cannot be null");
-            }
-            else
-            {
-                this.Type = type;
-            }
-            // to ensure "value" is required (not null)
-            if (value == null)
-            {
-                throw new InvalidDataException("value is a required property for LogViewerColumnSettings and cannot be null");
-            }
-            else
-            {
-                this.Value = value;
-            }
             this.Name = name;
         }
-
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Value
-        /// </summary>
-        [DataMember(Name="value", EmitDefaultValue=false)]
-        public string Value { get; set; }
 
         /// <summary>
         /// Gets or Sets Name
@@ -88,9 +51,7 @@ namespace InfluxDB.Client.Api.Domain
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class LogViewerColumnSettings {\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  Value: ").Append(Value).Append("\n");
+            sb.Append("class BuilderFunctionsType {\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -112,30 +73,20 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as LogViewerColumnSettings);
+            return this.Equals(input as BuilderFunctionsType);
         }
 
         /// <summary>
-        /// Returns true if LogViewerColumnSettings instances are equal
+        /// Returns true if BuilderFunctionsType instances are equal
         /// </summary>
-        /// <param name="input">Instance of LogViewerColumnSettings to be compared</param>
+        /// <param name="input">Instance of BuilderFunctionsType to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(LogViewerColumnSettings input)
+        public bool Equals(BuilderFunctionsType input)
         {
             if (input == null)
                 return false;
 
             return 
-                (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
-                ) && 
-                (
-                    this.Value == input.Value ||
-                    (this.Value != null &&
-                    this.Value.Equals(input.Value))
-                ) && 
                 (
                     this.Name == input.Name ||
                     (this.Name != null &&
@@ -152,10 +103,6 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
-                if (this.Type != null)
-                    hashCode = hashCode * 59 + this.Type.GetHashCode();
-                if (this.Value != null)
-                    hashCode = hashCode * 59 + this.Value.GetHashCode();
                 if (this.Name != null)
                     hashCode = hashCode * 59 + this.Name.GetHashCode();
                 return hashCode;

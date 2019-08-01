@@ -24,54 +24,53 @@ using OpenAPIDateConverter = InfluxDB.Client.Api.Client.OpenAPIDateConverter;
 namespace InfluxDB.Client.Api.Domain
 {
     /// <summary>
-    /// QueryConfigGroupBy
+    /// LevelRule
     /// </summary>
     [DataContract]
-    public partial class QueryConfigGroupBy :  IEquatable<QueryConfigGroupBy>
+    public partial class LevelRule :  IEquatable<LevelRule>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="QueryConfigGroupBy" /> class.
+        /// Gets or Sets Level
         /// </summary>
-        [JsonConstructorAttribute]
-        protected QueryConfigGroupBy() { }
+        [DataMember(Name="level", EmitDefaultValue=false)]
+        public CheckStatusLevel? Level { get; set; }
         /// <summary>
-        /// Initializes a new instance of the <see cref="QueryConfigGroupBy" /> class.
+        /// Defines Operation
         /// </summary>
-        /// <param name="time">time (required).</param>
-        /// <param name="tags">tags (required).</param>
-        public QueryConfigGroupBy(string time = default(string), List<string> tags = default(List<string>))
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum OperationEnum
         {
-            // to ensure "time" is required (not null)
-            if (time == null)
-            {
-                throw new InvalidDataException("time is a required property for QueryConfigGroupBy and cannot be null");
-            }
-            else
-            {
-                this.Time = time;
-            }
-            // to ensure "tags" is required (not null)
-            if (tags == null)
-            {
-                throw new InvalidDataException("tags is a required property for QueryConfigGroupBy and cannot be null");
-            }
-            else
-            {
-                this.Tags = tags;
-            }
+            /// <summary>
+            /// Enum Equal for value: equal
+            /// </summary>
+            [EnumMember(Value = "equal")]
+            Equal = 1,
+
+            /// <summary>
+            /// Enum Notequal for value: notequal
+            /// </summary>
+            [EnumMember(Value = "notequal")]
+            Notequal = 2
+
         }
 
         /// <summary>
-        /// Gets or Sets Time
+        /// Gets or Sets Operation
         /// </summary>
-        [DataMember(Name="time", EmitDefaultValue=false)]
-        public string Time { get; set; }
-
+        [DataMember(Name="operation", EmitDefaultValue=false)]
+        public OperationEnum? Operation { get; set; }
         /// <summary>
-        /// Gets or Sets Tags
+        /// Initializes a new instance of the <see cref="LevelRule" /> class.
         /// </summary>
-        [DataMember(Name="tags", EmitDefaultValue=false)]
-        public List<string> Tags { get; set; }
+        /// <param name="level">level.</param>
+        /// <param name="operation">operation.</param>
+        public LevelRule(CheckStatusLevel? level = default(CheckStatusLevel?), OperationEnum? operation = default(OperationEnum?))
+        {
+            this.Level = level;
+            this.Operation = operation;
+        }
+
+
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -80,9 +79,9 @@ namespace InfluxDB.Client.Api.Domain
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class QueryConfigGroupBy {\n");
-            sb.Append("  Time: ").Append(Time).Append("\n");
-            sb.Append("  Tags: ").Append(Tags).Append("\n");
+            sb.Append("class LevelRule {\n");
+            sb.Append("  Level: ").Append(Level).Append("\n");
+            sb.Append("  Operation: ").Append(Operation).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -103,29 +102,29 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as QueryConfigGroupBy);
+            return this.Equals(input as LevelRule);
         }
 
         /// <summary>
-        /// Returns true if QueryConfigGroupBy instances are equal
+        /// Returns true if LevelRule instances are equal
         /// </summary>
-        /// <param name="input">Instance of QueryConfigGroupBy to be compared</param>
+        /// <param name="input">Instance of LevelRule to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(QueryConfigGroupBy input)
+        public bool Equals(LevelRule input)
         {
             if (input == null)
                 return false;
 
             return 
                 (
-                    this.Time == input.Time ||
-                    (this.Time != null &&
-                    this.Time.Equals(input.Time))
+                    this.Level == input.Level ||
+                    (this.Level != null &&
+                    this.Level.Equals(input.Level))
                 ) && 
                 (
-                    this.Tags == input.Tags ||
-                    this.Tags != null &&
-                    this.Tags.SequenceEqual(input.Tags)
+                    this.Operation == input.Operation ||
+                    (this.Operation != null &&
+                    this.Operation.Equals(input.Operation))
                 );
         }
 
@@ -138,10 +137,10 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
-                if (this.Time != null)
-                    hashCode = hashCode * 59 + this.Time.GetHashCode();
-                if (this.Tags != null)
-                    hashCode = hashCode * 59 + this.Tags.GetHashCode();
+                if (this.Level != null)
+                    hashCode = hashCode * 59 + this.Level.GetHashCode();
+                if (this.Operation != null)
+                    hashCode = hashCode * 59 + this.Operation.GetHashCode();
                 return hashCode;
             }
         }

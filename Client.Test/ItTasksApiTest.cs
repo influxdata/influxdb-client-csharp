@@ -134,7 +134,7 @@ namespace InfluxDB.Client.Test
             var flux = $"option task = {{\nname: \"{taskName}\",\nevery: 1h\n}}\n\n{TaskFlux}";
 
             var task = new Api.Domain.Task(_organization.Id, _organization.Name,
-                taskName, "testing task", Api.Domain.Task.StatusEnum.Active, null, null, flux);
+                taskName, "testing task", TaskStatusType.Active, null, null, flux);
 
             task = await _tasksApi.CreateTask(task, _token);
 
@@ -142,7 +142,7 @@ namespace InfluxDB.Client.Test
             Assert.IsNotEmpty(task.Id);
             Assert.AreEqual(taskName, task.Name);
             Assert.AreEqual(_organization.Id, task.OrgID);
-            Assert.AreEqual(Api.Domain.Task.StatusEnum.Active, task.Status);
+            Assert.AreEqual(TaskStatusType.Active, task.Status);
             Assert.AreEqual("1h", task.Every);
             Assert.AreEqual("testing task", task.Description);
             Assert.IsNull(task.Cron);
@@ -161,7 +161,7 @@ namespace InfluxDB.Client.Test
             Assert.IsNotEmpty(task.Id);
             Assert.AreEqual(taskName, task.Name);
             Assert.AreEqual(_organization.Id, task.OrgID);
-            Assert.AreEqual(Api.Domain.Task.StatusEnum.Active, task.Status);
+            Assert.AreEqual(TaskStatusType.Active, task.Status);
             Assert.AreEqual("0 2 * * *", task.Cron);
             Assert.IsNull(task.Every);
             Assert.IsTrue(task.Flux.EndsWith(TaskFlux, StringComparison.OrdinalIgnoreCase));
@@ -179,7 +179,7 @@ namespace InfluxDB.Client.Test
             Assert.IsNotEmpty(task.Id);
             Assert.AreEqual(taskName, task.Name);
             Assert.AreEqual(_organization.Id, task.OrgID);
-            Assert.AreEqual(Api.Domain.Task.StatusEnum.Active, task.Status);
+            Assert.AreEqual(TaskStatusType.Active, task.Status);
             Assert.AreEqual("1h", task.Every);
             Assert.IsNull(task.Cron);
             Assert.IsTrue(task.Flux.EndsWith(TaskFlux, StringComparison.OrdinalIgnoreCase));
@@ -195,7 +195,7 @@ namespace InfluxDB.Client.Test
             var flux = $"option task = {{\nname: \"{taskName}\",\nevery: 1h,\noffset: 30m\n}}\n\n{TaskFlux}";
 
             var task = new Api.Domain.Task(_organization.Id, _organization.Name, taskName,
-                null, Api.Domain.Task.StatusEnum.Active, null, null, flux);
+                null, TaskStatusType.Active, null, null, flux);
 
             task = await _tasksApi.CreateTask(task, _token);
 
@@ -586,7 +586,7 @@ namespace InfluxDB.Client.Test
 
             cronTask.Every = "3m";
             cronTask.Cron = null;
-            cronTask.Status = Api.Domain.Task.StatusEnum.Inactive;
+            cronTask.Status = TaskStatusType.Inactive;
 
             var updatedTask = await _tasksApi.UpdateTask(cronTask);
 
@@ -594,7 +594,7 @@ namespace InfluxDB.Client.Test
             Assert.IsNotEmpty(updatedTask.Id);
             Assert.AreEqual(taskName, updatedTask.Name);
             Assert.AreEqual(_organization.Id, updatedTask.OrgID);
-            Assert.AreEqual(Api.Domain.Task.StatusEnum.Inactive, updatedTask.Status);
+            Assert.AreEqual(TaskStatusType.Inactive, updatedTask.Status);
             Assert.AreEqual("3m", updatedTask.Every);
             Assert.IsNull(updatedTask.Cron);
             Assert.AreEqual(updatedTask.Flux, flux);

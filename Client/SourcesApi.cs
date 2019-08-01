@@ -163,7 +163,7 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="source">source to check health</param>
         /// <returns>health of source</returns>
-        public async Task<Check> Health(Source source)
+        public async Task<HealthCheck> Health(Source source)
         {
             Arguments.CheckNotNull(source, nameof(source));
 
@@ -176,7 +176,7 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="sourceId">source to check health</param>
         /// <returns>health of source</returns>
-        public async Task<Check> Health(string sourceId)
+        public async Task<HealthCheck> Health(string sourceId)
         {
             Arguments.CheckNonEmptyString(sourceId, nameof(sourceId));
 

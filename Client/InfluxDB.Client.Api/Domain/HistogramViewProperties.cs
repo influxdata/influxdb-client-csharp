@@ -30,25 +30,6 @@ namespace InfluxDB.Client.Api.Domain
     public partial class HistogramViewProperties : ViewProperties,  IEquatable<HistogramViewProperties>
     {
         /// <summary>
-        /// Defines Shape
-        /// </summary>
-        [JsonConverter(typeof(StringEnumConverter))]
-        public enum ShapeEnum
-        {
-            /// <summary>
-            /// Enum ChronografV2 for value: chronograf-v2
-            /// </summary>
-            [EnumMember(Value = "chronograf-v2")]
-            ChronografV2 = 1
-
-        }
-
-        /// <summary>
-        /// Gets or Sets Shape
-        /// </summary>
-        [DataMember(Name="shape", EmitDefaultValue=false)]
-        public ShapeEnum? Shape { get; set; }
-        /// <summary>
         /// Defines Type
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
@@ -66,31 +47,210 @@ namespace InfluxDB.Client.Api.Domain
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
-        public TypeEnum? Type { get; set; }
+        public TypeEnum Type { get; set; }
+        /// <summary>
+        /// Defines Shape
+        /// </summary>
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum ShapeEnum
+        {
+            /// <summary>
+            /// Enum ChronografV2 for value: chronograf-v2
+            /// </summary>
+            [EnumMember(Value = "chronograf-v2")]
+            ChronografV2 = 1
+
+        }
+
+        /// <summary>
+        /// Gets or Sets Shape
+        /// </summary>
+        [DataMember(Name="shape", EmitDefaultValue=false)]
+        public ShapeEnum Shape { get; set; }
+        /// <summary>
+        /// Defines Position
+        /// </summary>
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum PositionEnum
+        {
+            /// <summary>
+            /// Enum Overlaid for value: overlaid
+            /// </summary>
+            [EnumMember(Value = "overlaid")]
+            Overlaid = 1,
+
+            /// <summary>
+            /// Enum Stacked for value: stacked
+            /// </summary>
+            [EnumMember(Value = "stacked")]
+            Stacked = 2
+
+        }
+
+        /// <summary>
+        /// Gets or Sets Position
+        /// </summary>
+        [DataMember(Name="position", EmitDefaultValue=false)]
+        public PositionEnum Position { get; set; }
         /// <summary>
         /// Initializes a new instance of the <see cref="HistogramViewProperties" /> class.
         /// </summary>
-        /// <param name="shape">shape.</param>
-        /// <param name="type">type.</param>
-        /// <param name="xColumn">xColumn.</param>
-        /// <param name="fillColumns">fillColumns.</param>
-        /// <param name="xDomain">xDomain.</param>
-        /// <param name="xAxisLabel">xAxisLabel.</param>
-        /// <param name="position">position.</param>
-        /// <param name="binCount">binCount.</param>
-        public HistogramViewProperties(ShapeEnum? shape = default(ShapeEnum?), TypeEnum? type = default(TypeEnum?), string xColumn = default(string), List<string> fillColumns = default(List<string>), List<float?> xDomain = default(List<float?>), string xAxisLabel = default(string), string position = default(string), int? binCount = default(int?), List<DashboardQuery> queries = default(List<DashboardQuery>), List<DashboardColor> colors = default(List<DashboardColor>), string note = default(string), bool? showNoteWhenEmpty = default(bool?)) : base(queries, colors, note, showNoteWhenEmpty)
+        [JsonConstructorAttribute]
+        protected HistogramViewProperties() { }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="HistogramViewProperties" /> class.
+        /// </summary>
+        /// <param name="type">type (required).</param>
+        /// <param name="queries">queries (required).</param>
+        /// <param name="colors">Colors define color encoding of data into a visualization (required).</param>
+        /// <param name="shape">shape (required).</param>
+        /// <param name="note">note (required).</param>
+        /// <param name="showNoteWhenEmpty">if true, will display note when empty (required).</param>
+        /// <param name="xColumn">xColumn (required).</param>
+        /// <param name="fillColumns">fillColumns (required).</param>
+        /// <param name="xDomain">xDomain (required).</param>
+        /// <param name="xAxisLabel">xAxisLabel (required).</param>
+        /// <param name="position">position (required).</param>
+        /// <param name="binCount">binCount (required).</param>
+        public HistogramViewProperties(TypeEnum type = default(TypeEnum), List<DashboardQuery> queries = default(List<DashboardQuery>), List<DashboardColor> colors = default(List<DashboardColor>), ShapeEnum shape = default(ShapeEnum), string note = default(string), bool? showNoteWhenEmpty = default(bool?), string xColumn = default(string), List<string> fillColumns = default(List<string>), List<float?> xDomain = default(List<float?>), string xAxisLabel = default(string), PositionEnum position = default(PositionEnum), int? binCount = default(int?)) : base()
         {
-            this.Shape = shape;
-            this.Type = type;
-            this.XColumn = xColumn;
-            this.FillColumns = fillColumns;
-            this.XDomain = xDomain;
-            this.XAxisLabel = xAxisLabel;
-            this.Position = position;
-            this.BinCount = binCount;
+            // to ensure "type" is required (not null)
+            if (type == null)
+            {
+                throw new InvalidDataException("type is a required property for HistogramViewProperties and cannot be null");
+            }
+            else
+            {
+                this.Type = type;
+            }
+            // to ensure "queries" is required (not null)
+            if (queries == null)
+            {
+                throw new InvalidDataException("queries is a required property for HistogramViewProperties and cannot be null");
+            }
+            else
+            {
+                this.Queries = queries;
+            }
+            // to ensure "colors" is required (not null)
+            if (colors == null)
+            {
+                throw new InvalidDataException("colors is a required property for HistogramViewProperties and cannot be null");
+            }
+            else
+            {
+                this.Colors = colors;
+            }
+            // to ensure "shape" is required (not null)
+            if (shape == null)
+            {
+                throw new InvalidDataException("shape is a required property for HistogramViewProperties and cannot be null");
+            }
+            else
+            {
+                this.Shape = shape;
+            }
+            // to ensure "note" is required (not null)
+            if (note == null)
+            {
+                throw new InvalidDataException("note is a required property for HistogramViewProperties and cannot be null");
+            }
+            else
+            {
+                this.Note = note;
+            }
+            // to ensure "showNoteWhenEmpty" is required (not null)
+            if (showNoteWhenEmpty == null)
+            {
+                throw new InvalidDataException("showNoteWhenEmpty is a required property for HistogramViewProperties and cannot be null");
+            }
+            else
+            {
+                this.ShowNoteWhenEmpty = showNoteWhenEmpty;
+            }
+            // to ensure "xColumn" is required (not null)
+            if (xColumn == null)
+            {
+                throw new InvalidDataException("xColumn is a required property for HistogramViewProperties and cannot be null");
+            }
+            else
+            {
+                this.XColumn = xColumn;
+            }
+            // to ensure "fillColumns" is required (not null)
+            if (fillColumns == null)
+            {
+                throw new InvalidDataException("fillColumns is a required property for HistogramViewProperties and cannot be null");
+            }
+            else
+            {
+                this.FillColumns = fillColumns;
+            }
+            // to ensure "xDomain" is required (not null)
+            if (xDomain == null)
+            {
+                throw new InvalidDataException("xDomain is a required property for HistogramViewProperties and cannot be null");
+            }
+            else
+            {
+                this.XDomain = xDomain;
+            }
+            // to ensure "xAxisLabel" is required (not null)
+            if (xAxisLabel == null)
+            {
+                throw new InvalidDataException("xAxisLabel is a required property for HistogramViewProperties and cannot be null");
+            }
+            else
+            {
+                this.XAxisLabel = xAxisLabel;
+            }
+            // to ensure "position" is required (not null)
+            if (position == null)
+            {
+                throw new InvalidDataException("position is a required property for HistogramViewProperties and cannot be null");
+            }
+            else
+            {
+                this.Position = position;
+            }
+            // to ensure "binCount" is required (not null)
+            if (binCount == null)
+            {
+                throw new InvalidDataException("binCount is a required property for HistogramViewProperties and cannot be null");
+            }
+            else
+            {
+                this.BinCount = binCount;
+            }
         }
 
 
+        /// <summary>
+        /// Gets or Sets Queries
+        /// </summary>
+        [DataMember(Name="queries", EmitDefaultValue=false)]
+        public List<DashboardQuery> Queries { get; set; }
+
+        /// <summary>
+        /// Colors define color encoding of data into a visualization
+        /// </summary>
+        /// <value>Colors define color encoding of data into a visualization</value>
+        [DataMember(Name="colors", EmitDefaultValue=false)]
+        public List<DashboardColor> Colors { get; set; }
+
+
+        /// <summary>
+        /// Gets or Sets Note
+        /// </summary>
+        [DataMember(Name="note", EmitDefaultValue=false)]
+        public string Note { get; set; }
+
+        /// <summary>
+        /// if true, will display note when empty
+        /// </summary>
+        /// <value>if true, will display note when empty</value>
+        [DataMember(Name="showNoteWhenEmpty", EmitDefaultValue=false)]
+        public bool? ShowNoteWhenEmpty { get; set; }
 
         /// <summary>
         /// Gets or Sets XColumn
@@ -116,11 +276,6 @@ namespace InfluxDB.Client.Api.Domain
         [DataMember(Name="xAxisLabel", EmitDefaultValue=false)]
         public string XAxisLabel { get; set; }
 
-        /// <summary>
-        /// Gets or Sets Position
-        /// </summary>
-        [DataMember(Name="position", EmitDefaultValue=false)]
-        public string Position { get; set; }
 
         /// <summary>
         /// Gets or Sets BinCount
@@ -137,8 +292,12 @@ namespace InfluxDB.Client.Api.Domain
             var sb = new StringBuilder();
             sb.Append("class HistogramViewProperties {\n");
             sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
-            sb.Append("  Shape: ").Append(Shape).Append("\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
+            sb.Append("  Queries: ").Append(Queries).Append("\n");
+            sb.Append("  Colors: ").Append(Colors).Append("\n");
+            sb.Append("  Shape: ").Append(Shape).Append("\n");
+            sb.Append("  Note: ").Append(Note).Append("\n");
+            sb.Append("  ShowNoteWhenEmpty: ").Append(ShowNoteWhenEmpty).Append("\n");
             sb.Append("  XColumn: ").Append(XColumn).Append("\n");
             sb.Append("  FillColumns: ").Append(FillColumns).Append("\n");
             sb.Append("  XDomain: ").Append(XDomain).Append("\n");
@@ -180,14 +339,34 @@ namespace InfluxDB.Client.Api.Domain
 
             return base.Equals(input) && 
                 (
+                    this.Type == input.Type ||
+                    (this.Type != null &&
+                    this.Type.Equals(input.Type))
+                ) && base.Equals(input) && 
+                (
+                    this.Queries == input.Queries ||
+                    this.Queries != null &&
+                    this.Queries.SequenceEqual(input.Queries)
+                ) && base.Equals(input) && 
+                (
+                    this.Colors == input.Colors ||
+                    this.Colors != null &&
+                    this.Colors.SequenceEqual(input.Colors)
+                ) && base.Equals(input) && 
+                (
                     this.Shape == input.Shape ||
                     (this.Shape != null &&
                     this.Shape.Equals(input.Shape))
                 ) && base.Equals(input) && 
                 (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
+                    this.Note == input.Note ||
+                    (this.Note != null &&
+                    this.Note.Equals(input.Note))
+                ) && base.Equals(input) && 
+                (
+                    this.ShowNoteWhenEmpty == input.ShowNoteWhenEmpty ||
+                    (this.ShowNoteWhenEmpty != null &&
+                    this.ShowNoteWhenEmpty.Equals(input.ShowNoteWhenEmpty))
                 ) && base.Equals(input) && 
                 (
                     this.XColumn == input.XColumn ||
@@ -230,10 +409,18 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = base.GetHashCode();
-                if (this.Shape != null)
-                    hashCode = hashCode * 59 + this.Shape.GetHashCode();
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
+                if (this.Queries != null)
+                    hashCode = hashCode * 59 + this.Queries.GetHashCode();
+                if (this.Colors != null)
+                    hashCode = hashCode * 59 + this.Colors.GetHashCode();
+                if (this.Shape != null)
+                    hashCode = hashCode * 59 + this.Shape.GetHashCode();
+                if (this.Note != null)
+                    hashCode = hashCode * 59 + this.Note.GetHashCode();
+                if (this.ShowNoteWhenEmpty != null)
+                    hashCode = hashCode * 59 + this.ShowNoteWhenEmpty.GetHashCode();
                 if (this.XColumn != null)
                     hashCode = hashCode * 59 + this.XColumn.GetHashCode();
                 if (this.FillColumns != null)

@@ -30,66 +30,44 @@ namespace InfluxDB.Client.Api.Domain
     public partial class DashboardQuery :  IEquatable<DashboardQuery>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="DashboardQuery" /> class.
+        /// Gets or Sets EditMode
         /// </summary>
-        [JsonConstructorAttribute]
-        protected DashboardQuery() { }
+        [DataMember(Name="editMode", EmitDefaultValue=false)]
+        public QueryEditMode? EditMode { get; set; }
         /// <summary>
         /// Initializes a new instance of the <see cref="DashboardQuery" /> class.
         /// </summary>
-        /// <param name="label">Optional Y-axis user-facing label.</param>
-        /// <param name="range">range.</param>
-        /// <param name="query">query (required).</param>
-        /// <param name="source">Optional URI for data source for this query.</param>
-        /// <param name="queryConfig">queryConfig.</param>
-        public DashboardQuery(string label = default(string), DashboardQueryRange range = default(DashboardQueryRange), string query = default(string), string source = default(string), QueryConfig queryConfig = default(QueryConfig))
+        /// <param name="text">The text of the flux query.</param>
+        /// <param name="editMode">editMode.</param>
+        /// <param name="name">name.</param>
+        /// <param name="builderConfig">builderConfig.</param>
+        public DashboardQuery(string text = default(string), QueryEditMode? editMode = default(QueryEditMode?), string name = default(string), BuilderConfig builderConfig = default(BuilderConfig))
         {
-            // to ensure "query" is required (not null)
-            if (query == null)
-            {
-                throw new InvalidDataException("query is a required property for DashboardQuery and cannot be null");
-            }
-            else
-            {
-                this.Query = query;
-            }
-            this.Label = label;
-            this.Range = range;
-            this.Source = source;
-            this.QueryConfig = queryConfig;
+            this.Text = text;
+            this.EditMode = editMode;
+            this.Name = name;
+            this.BuilderConfig = builderConfig;
         }
 
         /// <summary>
-        /// Optional Y-axis user-facing label
+        /// The text of the flux query
         /// </summary>
-        /// <value>Optional Y-axis user-facing label</value>
-        [DataMember(Name="label", EmitDefaultValue=false)]
-        public string Label { get; set; }
+        /// <value>The text of the flux query</value>
+        [DataMember(Name="text", EmitDefaultValue=false)]
+        public string Text { get; set; }
+
 
         /// <summary>
-        /// Gets or Sets Range
+        /// Gets or Sets Name
         /// </summary>
-        [DataMember(Name="range", EmitDefaultValue=false)]
-        public DashboardQueryRange Range { get; set; }
+        [DataMember(Name="name", EmitDefaultValue=false)]
+        public string Name { get; set; }
 
         /// <summary>
-        /// Gets or Sets Query
+        /// Gets or Sets BuilderConfig
         /// </summary>
-        [DataMember(Name="query", EmitDefaultValue=false)]
-        public string Query { get; set; }
-
-        /// <summary>
-        /// Optional URI for data source for this query
-        /// </summary>
-        /// <value>Optional URI for data source for this query</value>
-        [DataMember(Name="source", EmitDefaultValue=false)]
-        public string Source { get; set; }
-
-        /// <summary>
-        /// Gets or Sets QueryConfig
-        /// </summary>
-        [DataMember(Name="queryConfig", EmitDefaultValue=false)]
-        public QueryConfig QueryConfig { get; set; }
+        [DataMember(Name="builderConfig", EmitDefaultValue=false)]
+        public BuilderConfig BuilderConfig { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -99,11 +77,10 @@ namespace InfluxDB.Client.Api.Domain
         {
             var sb = new StringBuilder();
             sb.Append("class DashboardQuery {\n");
-            sb.Append("  Label: ").Append(Label).Append("\n");
-            sb.Append("  Range: ").Append(Range).Append("\n");
-            sb.Append("  Query: ").Append(Query).Append("\n");
-            sb.Append("  Source: ").Append(Source).Append("\n");
-            sb.Append("  QueryConfig: ").Append(QueryConfig).Append("\n");
+            sb.Append("  Text: ").Append(Text).Append("\n");
+            sb.Append("  EditMode: ").Append(EditMode).Append("\n");
+            sb.Append("  Name: ").Append(Name).Append("\n");
+            sb.Append("  BuilderConfig: ").Append(BuilderConfig).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -139,29 +116,24 @@ namespace InfluxDB.Client.Api.Domain
 
             return 
                 (
-                    this.Label == input.Label ||
-                    (this.Label != null &&
-                    this.Label.Equals(input.Label))
+                    this.Text == input.Text ||
+                    (this.Text != null &&
+                    this.Text.Equals(input.Text))
+                ) && 
+                (
+                    this.EditMode == input.EditMode ||
+                    (this.EditMode != null &&
+                    this.EditMode.Equals(input.EditMode))
+                ) && 
+                (
+                    this.Name == input.Name ||
+                    (this.Name != null &&
+                    this.Name.Equals(input.Name))
                 ) && 
                 (
                     
-                    (this.Range != null &&
-                    this.Range.Equals(input.Range))
-                ) && 
-                (
-                    this.Query == input.Query ||
-                    (this.Query != null &&
-                    this.Query.Equals(input.Query))
-                ) && 
-                (
-                    this.Source == input.Source ||
-                    (this.Source != null &&
-                    this.Source.Equals(input.Source))
-                ) && 
-                (
-                    
-                    (this.QueryConfig != null &&
-                    this.QueryConfig.Equals(input.QueryConfig))
+                    (this.BuilderConfig != null &&
+                    this.BuilderConfig.Equals(input.BuilderConfig))
                 );
         }
 
@@ -174,16 +146,14 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
-                if (this.Label != null)
-                    hashCode = hashCode * 59 + this.Label.GetHashCode();
-                if (this.Range != null)
-                    hashCode = hashCode * 59 + this.Range.GetHashCode();
-                if (this.Query != null)
-                    hashCode = hashCode * 59 + this.Query.GetHashCode();
-                if (this.Source != null)
-                    hashCode = hashCode * 59 + this.Source.GetHashCode();
-                if (this.QueryConfig != null)
-                    hashCode = hashCode * 59 + this.QueryConfig.GetHashCode();
+                if (this.Text != null)
+                    hashCode = hashCode * 59 + this.Text.GetHashCode();
+                if (this.EditMode != null)
+                    hashCode = hashCode * 59 + this.EditMode.GetHashCode();
+                if (this.Name != null)
+                    hashCode = hashCode * 59 + this.Name.GetHashCode();
+                if (this.BuilderConfig != null)
+                    hashCode = hashCode * 59 + this.BuilderConfig.GetHashCode();
                 return hashCode;
             }
         }

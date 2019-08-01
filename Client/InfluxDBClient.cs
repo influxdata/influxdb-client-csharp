@@ -265,7 +265,7 @@ namespace InfluxDB.Client
         /// Get the health of an instance.
         /// </summary>
         /// <returns>health of an instance</returns>
-        public async Task<Check> Health()
+        public async Task<HealthCheck> Health()
         {
             return await GetHealth(_healthService.GetHealthAsync());
         }
@@ -317,7 +317,7 @@ namespace InfluxDB.Client
             return "Basic " + Convert.ToBase64String(Encoding.Default.GetBytes(username + ":" + password));
         }
         
-        internal static async Task<Check> GetHealth(Task<Check> task)
+        internal static async Task<HealthCheck> GetHealth(Task<HealthCheck> task)
         {
             Arguments.CheckNotNull(task, nameof(task));
 
@@ -326,7 +326,7 @@ namespace InfluxDB.Client
                 {
                     if (t.Exception != null)
                     {
-                        return new Check("influxdb", t.Exception?.Message, default(List<Check>), Check.StatusEnum.Fail);
+                        return new HealthCheck("influxdb", t.Exception?.Message, default(List<HealthCheck>), HealthCheck.StatusEnum.Fail);
                     }
 
                     return t.Result;

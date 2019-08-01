@@ -24,30 +24,11 @@ using OpenAPIDateConverter = InfluxDB.Client.Api.Client.OpenAPIDateConverter;
 namespace InfluxDB.Client.Api.Domain
 {
     /// <summary>
-    /// EmptyViewProperties
+    /// ThresholdCheck
     /// </summary>
     [DataContract]
-    public partial class EmptyViewProperties :  IEquatable<EmptyViewProperties>
+    public partial class ThresholdCheck : Check,  IEquatable<ThresholdCheck>
     {
-        /// <summary>
-        /// Defines Shape
-        /// </summary>
-        [JsonConverter(typeof(StringEnumConverter))]
-        public enum ShapeEnum
-        {
-            /// <summary>
-            /// Enum ChronografV2 for value: chronograf-v2
-            /// </summary>
-            [EnumMember(Value = "chronograf-v2")]
-            ChronografV2 = 1
-
-        }
-
-        /// <summary>
-        /// Gets or Sets Shape
-        /// </summary>
-        [DataMember(Name="shape", EmitDefaultValue=false)]
-        public ShapeEnum? Shape { get; set; }
         /// <summary>
         /// Defines Type
         /// </summary>
@@ -55,10 +36,10 @@ namespace InfluxDB.Client.Api.Domain
         public enum TypeEnum
         {
             /// <summary>
-            /// Enum Empty for value: empty
+            /// Enum Threshold for value: threshold
             /// </summary>
-            [EnumMember(Value = "empty")]
-            Empty = 1
+            [EnumMember(Value = "threshold")]
+            Threshold = 1
 
         }
 
@@ -68,17 +49,27 @@ namespace InfluxDB.Client.Api.Domain
         [DataMember(Name="type", EmitDefaultValue=false)]
         public TypeEnum? Type { get; set; }
         /// <summary>
-        /// Initializes a new instance of the <see cref="EmptyViewProperties" /> class.
+        /// Initializes a new instance of the <see cref="ThresholdCheck" /> class.
         /// </summary>
-        /// <param name="shape">shape.</param>
+        [JsonConstructorAttribute]
+        protected ThresholdCheck() { }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ThresholdCheck" /> class.
+        /// </summary>
         /// <param name="type">type.</param>
-        public EmptyViewProperties(ShapeEnum? shape = default(ShapeEnum?), TypeEnum? type = default(TypeEnum?))
+        /// <param name="thresholds">thresholds.</param>
+        public ThresholdCheck(TypeEnum? type = default(TypeEnum?), List<Threshold> thresholds = default(List<Threshold>), string name = default(string), string orgID = default(string), DashboardQuery query = default(DashboardQuery), TaskStatusType? status = default(TaskStatusType?), string every = default(string), string offset = default(string), string cron = default(string), List<CheckBaseTags> tags = default(List<CheckBaseTags>), string description = default(string), string statusMessageTemplate = default(string), List<Label> labels = default(List<Label>)) : base(name, orgID, query, status, every, offset, cron, tags, description, statusMessageTemplate, labels)
         {
-            this.Shape = shape;
             this.Type = type;
+            this.Thresholds = thresholds;
         }
 
 
+        /// <summary>
+        /// Gets or Sets Thresholds
+        /// </summary>
+        [DataMember(Name="thresholds", EmitDefaultValue=false)]
+        public List<Threshold> Thresholds { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -87,9 +78,10 @@ namespace InfluxDB.Client.Api.Domain
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class EmptyViewProperties {\n");
-            sb.Append("  Shape: ").Append(Shape).Append("\n");
+            sb.Append("class ThresholdCheck {\n");
+            sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
+            sb.Append("  Thresholds: ").Append(Thresholds).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -98,7 +90,7 @@ namespace InfluxDB.Client.Api.Domain
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public virtual string ToJson()
+        public override string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }
@@ -110,29 +102,29 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as EmptyViewProperties);
+            return this.Equals(input as ThresholdCheck);
         }
 
         /// <summary>
-        /// Returns true if EmptyViewProperties instances are equal
+        /// Returns true if ThresholdCheck instances are equal
         /// </summary>
-        /// <param name="input">Instance of EmptyViewProperties to be compared</param>
+        /// <param name="input">Instance of ThresholdCheck to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(EmptyViewProperties input)
+        public bool Equals(ThresholdCheck input)
         {
             if (input == null)
                 return false;
 
-            return 
-                (
-                    this.Shape == input.Shape ||
-                    (this.Shape != null &&
-                    this.Shape.Equals(input.Shape))
-                ) && 
+            return base.Equals(input) && 
                 (
                     this.Type == input.Type ||
                     (this.Type != null &&
                     this.Type.Equals(input.Type))
+                ) && base.Equals(input) && 
+                (
+                    this.Thresholds == input.Thresholds ||
+                    this.Thresholds != null &&
+                    this.Thresholds.SequenceEqual(input.Thresholds)
                 );
         }
 
@@ -144,11 +136,11 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                if (this.Shape != null)
-                    hashCode = hashCode * 59 + this.Shape.GetHashCode();
+                int hashCode = base.GetHashCode();
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
+                if (this.Thresholds != null)
+                    hashCode = hashCode * 59 + this.Thresholds.GetHashCode();
                 return hashCode;
             }
         }
