@@ -5636,6 +5636,7 @@ components:
                 - documents
                 - notificationRules
                 - notificationEndpoints
+                - checks
             id:
               type: string
               nullable: true

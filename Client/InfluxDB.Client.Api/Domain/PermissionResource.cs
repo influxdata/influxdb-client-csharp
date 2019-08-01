@@ -129,7 +129,13 @@ namespace InfluxDB.Client.Api.Domain
             /// Enum NotificationEndpoints for value: notificationEndpoints
             /// </summary>
             [EnumMember(Value = "notificationEndpoints")]
-            NotificationEndpoints = 16
+            NotificationEndpoints = 16,
+
+            /// <summary>
+            /// Enum Checks for value: checks
+            /// </summary>
+            [EnumMember(Value = "checks")]
+            Checks = 17
 
         }
 
