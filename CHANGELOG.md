@@ -1,4 +1,4 @@
-## 1.0.0.M2 [unreleased]
+## 1.0.0.M2 [2019-08-01]
 
 ### Features
 1. [#18](https://github.com/bonitoo-io/influxdb-client-csharp/issues/18): Auto-configure client from configuration file
