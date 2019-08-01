@@ -1,5 +1,8 @@
 ## 1.0.0.M3 [unreleased]
 
+### API
+1. [#25](https://github.com/bonitoo-io/influxdb-client-csharp/issues/25): Updated swagger to latest version
+
 ## 1.0.0.M2 [2019-08-01]
 
 ### Features
