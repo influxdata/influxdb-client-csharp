@@ -27,27 +27,8 @@ namespace InfluxDB.Client.Api.Domain
     /// MarkdownViewProperties
     /// </summary>
     [DataContract]
-    public partial class MarkdownViewProperties :  IEquatable<MarkdownViewProperties>
+    public partial class MarkdownViewProperties : ViewProperties,  IEquatable<MarkdownViewProperties>
     {
-        /// <summary>
-        /// Defines Shape
-        /// </summary>
-        [JsonConverter(typeof(StringEnumConverter))]
-        public enum ShapeEnum
-        {
-            /// <summary>
-            /// Enum ChronografV2 for value: chronograf-v2
-            /// </summary>
-            [EnumMember(Value = "chronograf-v2")]
-            ChronografV2 = 1
-
-        }
-
-        /// <summary>
-        /// Gets or Sets Shape
-        /// </summary>
-        [DataMember(Name="shape", EmitDefaultValue=false)]
-        public ShapeEnum? Shape { get; set; }
         /// <summary>
         /// Defines Type
         /// </summary>
@@ -66,18 +47,66 @@ namespace InfluxDB.Client.Api.Domain
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
-        public TypeEnum? Type { get; set; }
+        public TypeEnum Type { get; set; }
+        /// <summary>
+        /// Defines Shape
+        /// </summary>
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum ShapeEnum
+        {
+            /// <summary>
+            /// Enum ChronografV2 for value: chronograf-v2
+            /// </summary>
+            [EnumMember(Value = "chronograf-v2")]
+            ChronografV2 = 1
+
+        }
+
+        /// <summary>
+        /// Gets or Sets Shape
+        /// </summary>
+        [DataMember(Name="shape", EmitDefaultValue=false)]
+        public ShapeEnum Shape { get; set; }
         /// <summary>
         /// Initializes a new instance of the <see cref="MarkdownViewProperties" /> class.
         /// </summary>
-        /// <param name="shape">shape.</param>
-        /// <param name="type">type.</param>
-        /// <param name="note">note.</param>
-        public MarkdownViewProperties(ShapeEnum? shape = default(ShapeEnum?), TypeEnum? type = default(TypeEnum?), string note = default(string))
+        [JsonConstructorAttribute]
+        protected MarkdownViewProperties() { }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MarkdownViewProperties" /> class.
+        /// </summary>
+        /// <param name="type">type (required).</param>
+        /// <param name="shape">shape (required).</param>
+        /// <param name="note">note (required).</param>
+        public MarkdownViewProperties(TypeEnum type = default(TypeEnum), ShapeEnum shape = default(ShapeEnum), string note = default(string)) : base()
         {
-            this.Shape = shape;
-            this.Type = type;
-            this.Note = note;
+            // to ensure "type" is required (not null)
+            if (type == null)
+            {
+                throw new InvalidDataException("type is a required property for MarkdownViewProperties and cannot be null");
+            }
+            else
+            {
+                this.Type = type;
+            }
+            // to ensure "shape" is required (not null)
+            if (shape == null)
+            {
+                throw new InvalidDataException("shape is a required property for MarkdownViewProperties and cannot be null");
+            }
+            else
+            {
+                this.Shape = shape;
+            }
+            // to ensure "note" is required (not null)
+            if (note == null)
+            {
+                throw new InvalidDataException("note is a required property for MarkdownViewProperties and cannot be null");
+            }
+            else
+            {
+                this.Note = note;
+            }
         }
 
 
@@ -96,8 +125,9 @@ namespace InfluxDB.Client.Api.Domain
         {
             var sb = new StringBuilder();
             sb.Append("class MarkdownViewProperties {\n");
-            sb.Append("  Shape: ").Append(Shape).Append("\n");
+            sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
+            sb.Append("  Shape: ").Append(Shape).Append("\n");
             sb.Append("  Note: ").Append(Note).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -107,7 +137,7 @@ namespace InfluxDB.Client.Api.Domain
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public virtual string ToJson()
+        public override string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }
@@ -132,17 +162,17 @@ namespace InfluxDB.Client.Api.Domain
             if (input == null)
                 return false;
 
-            return 
-                (
-                    this.Shape == input.Shape ||
-                    (this.Shape != null &&
-                    this.Shape.Equals(input.Shape))
-                ) && 
+            return base.Equals(input) && 
                 (
                     this.Type == input.Type ||
                     (this.Type != null &&
                     this.Type.Equals(input.Type))
-                ) && 
+                ) && base.Equals(input) && 
+                (
+                    this.Shape == input.Shape ||
+                    (this.Shape != null &&
+                    this.Shape.Equals(input.Shape))
+                ) && base.Equals(input) && 
                 (
                     this.Note == input.Note ||
                     (this.Note != null &&
@@ -158,11 +188,11 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                if (this.Shape != null)
-                    hashCode = hashCode * 59 + this.Shape.GetHashCode();
+                int hashCode = base.GetHashCode();
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
+                if (this.Shape != null)
+                    hashCode = hashCode * 59 + this.Shape.GetHashCode();
                 if (this.Note != null)
                     hashCode = hashCode * 59 + this.Note.GetHashCode();
                 return hashCode;

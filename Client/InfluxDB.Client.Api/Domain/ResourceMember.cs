@@ -57,7 +57,7 @@ namespace InfluxDB.Client.Api.Domain
         /// Initializes a new instance of the <see cref="ResourceMember" /> class.
         /// </summary>
         /// <param name="role">role (default to RoleEnum.Member).</param>
-        public ResourceMember(RoleEnum? role = RoleEnum.Member, string name = default(string), StatusEnum? status = StatusEnum.Active, UserLinks links = default(UserLinks)) : base(name, status, links)
+        public ResourceMember(RoleEnum? role = RoleEnum.Member, string oauthID = default(string), string name = default(string), StatusEnum? status = StatusEnum.Active, UserLinks links = default(UserLinks)) : base(oauthID, name, status, links)
         {
             // use default value if no "role" provided
             if (role == null)

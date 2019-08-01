@@ -76,12 +76,13 @@ namespace InfluxDB.Client.Api.Service
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="acceptEncoding">The Accept-Encoding request HTTP header advertises which content encoding, usually a compression algorithm, the client is able to understand. (optional, default to identity)</param>
         /// <param name="contentType"> (optional)</param>
         /// <param name="org">specifies the name of the organization executing the query; if both orgID and org are specified, orgID takes precedence. (optional)</param>
         /// <param name="orgID">specifies the ID of the organization executing the query; if both orgID and org are specified, orgID takes precedence. (optional)</param>
         /// <param name="query">flux query or specification to execute (optional)</param>
         /// <returns>string</returns>
-        string PostQuery (string zapTraceSpan = null, string contentType = null, string org = null, string orgID = null, Query query = null);
+        string PostQuery (string zapTraceSpan = null, string acceptEncoding = null, string contentType = null, string org = null, string orgID = null, Query query = null);
 
         /// <summary>
         /// query an influx
@@ -91,12 +92,13 @@ namespace InfluxDB.Client.Api.Service
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="acceptEncoding">The Accept-Encoding request HTTP header advertises which content encoding, usually a compression algorithm, the client is able to understand. (optional, default to identity)</param>
         /// <param name="contentType"> (optional)</param>
         /// <param name="org">specifies the name of the organization executing the query; if both orgID and org are specified, orgID takes precedence. (optional)</param>
         /// <param name="orgID">specifies the ID of the organization executing the query; if both orgID and org are specified, orgID takes precedence. (optional)</param>
         /// <param name="query">flux query or specification to execute (optional)</param>
         /// <returns>ApiResponse of string</returns>
-        ApiResponse<string> PostQueryWithHttpInfo (string zapTraceSpan = null, string contentType = null, string org = null, string orgID = null, Query query = null);
+        ApiResponse<string> PostQueryWithHttpInfo (string zapTraceSpan = null, string acceptEncoding = null, string contentType = null, string org = null, string orgID = null, Query query = null);
         /// <summary>
         /// query an influx
         /// </summary>
@@ -105,12 +107,13 @@ namespace InfluxDB.Client.Api.Service
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="acceptEncoding">The Accept-Encoding request HTTP header advertises which content encoding, usually a compression algorithm, the client is able to understand. (optional, default to identity)</param>
         /// <param name="contentType"> (optional)</param>
         /// <param name="org">specifies the name of the organization executing the query; if both orgID and org are specified, orgID takes precedence. (optional)</param>
         /// <param name="orgID">specifies the ID of the organization executing the query; if both orgID and org are specified, orgID takes precedence. (optional)</param>
         /// <param name="query">flux query or specification to execute (optional)</param>
         /// <returns>string</returns>
-        string PostQuerystring (string zapTraceSpan = null, string contentType = null, string org = null, string orgID = null, Query query = null);
+        string PostQuerystring (string zapTraceSpan = null, string acceptEncoding = null, string contentType = null, string org = null, string orgID = null, Query query = null);
 
         /// <summary>
         /// query an influx
@@ -120,12 +123,13 @@ namespace InfluxDB.Client.Api.Service
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="acceptEncoding">The Accept-Encoding request HTTP header advertises which content encoding, usually a compression algorithm, the client is able to understand. (optional, default to identity)</param>
         /// <param name="contentType"> (optional)</param>
         /// <param name="org">specifies the name of the organization executing the query; if both orgID and org are specified, orgID takes precedence. (optional)</param>
         /// <param name="orgID">specifies the ID of the organization executing the query; if both orgID and org are specified, orgID takes precedence. (optional)</param>
         /// <param name="query">flux query or specification to execute (optional)</param>
         /// <returns>ApiResponse of string</returns>
-        ApiResponse<string> PostQuerystringWithHttpInfo (string zapTraceSpan = null, string contentType = null, string org = null, string orgID = null, Query query = null);
+        ApiResponse<string> PostQuerystringWithHttpInfo (string zapTraceSpan = null, string acceptEncoding = null, string contentType = null, string org = null, string orgID = null, Query query = null);
         /// <summary>
         /// analyze an influxql or flux query
         /// </summary>
@@ -230,12 +234,13 @@ namespace InfluxDB.Client.Api.Service
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="acceptEncoding">The Accept-Encoding request HTTP header advertises which content encoding, usually a compression algorithm, the client is able to understand. (optional, default to identity)</param>
         /// <param name="contentType"> (optional)</param>
         /// <param name="org">specifies the name of the organization executing the query; if both orgID and org are specified, orgID takes precedence. (optional)</param>
         /// <param name="orgID">specifies the ID of the organization executing the query; if both orgID and org are specified, orgID takes precedence. (optional)</param>
         /// <param name="query">flux query or specification to execute (optional)</param>
         /// <returns>Task of string</returns>
-        System.Threading.Tasks.Task<string> PostQueryAsync (string zapTraceSpan = null, string contentType = null, string org = null, string orgID = null, Query query = null);
+        System.Threading.Tasks.Task<string> PostQueryAsync (string zapTraceSpan = null, string acceptEncoding = null, string contentType = null, string org = null, string orgID = null, Query query = null);
 
         /// <summary>
         /// query an influx
@@ -245,12 +250,13 @@ namespace InfluxDB.Client.Api.Service
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="acceptEncoding">The Accept-Encoding request HTTP header advertises which content encoding, usually a compression algorithm, the client is able to understand. (optional, default to identity)</param>
         /// <param name="contentType"> (optional)</param>
         /// <param name="org">specifies the name of the organization executing the query; if both orgID and org are specified, orgID takes precedence. (optional)</param>
         /// <param name="orgID">specifies the ID of the organization executing the query; if both orgID and org are specified, orgID takes precedence. (optional)</param>
         /// <param name="query">flux query or specification to execute (optional)</param>
         /// <returns>Task of ApiResponse (string)</returns>
-        System.Threading.Tasks.Task<ApiResponse<string>> PostQueryAsyncWithHttpInfo (string zapTraceSpan = null, string contentType = null, string org = null, string orgID = null, Query query = null);
+        System.Threading.Tasks.Task<ApiResponse<string>> PostQueryAsyncWithHttpInfo (string zapTraceSpan = null, string acceptEncoding = null, string contentType = null, string org = null, string orgID = null, Query query = null);
         /// <summary>
         /// query an influx
         /// </summary>
@@ -259,12 +265,13 @@ namespace InfluxDB.Client.Api.Service
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="acceptEncoding">The Accept-Encoding request HTTP header advertises which content encoding, usually a compression algorithm, the client is able to understand. (optional, default to identity)</param>
         /// <param name="contentType"> (optional)</param>
         /// <param name="org">specifies the name of the organization executing the query; if both orgID and org are specified, orgID takes precedence. (optional)</param>
         /// <param name="orgID">specifies the ID of the organization executing the query; if both orgID and org are specified, orgID takes precedence. (optional)</param>
         /// <param name="query">flux query or specification to execute (optional)</param>
         /// <returns>Task of string</returns>
-        System.Threading.Tasks.Task<string> PostQuerystringAsync (string zapTraceSpan = null, string contentType = null, string org = null, string orgID = null, Query query = null);
+        System.Threading.Tasks.Task<string> PostQuerystringAsync (string zapTraceSpan = null, string acceptEncoding = null, string contentType = null, string org = null, string orgID = null, Query query = null);
 
         /// <summary>
         /// query an influx
@@ -274,12 +281,13 @@ namespace InfluxDB.Client.Api.Service
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="acceptEncoding">The Accept-Encoding request HTTP header advertises which content encoding, usually a compression algorithm, the client is able to understand. (optional, default to identity)</param>
         /// <param name="contentType"> (optional)</param>
         /// <param name="org">specifies the name of the organization executing the query; if both orgID and org are specified, orgID takes precedence. (optional)</param>
         /// <param name="orgID">specifies the ID of the organization executing the query; if both orgID and org are specified, orgID takes precedence. (optional)</param>
         /// <param name="query">flux query or specification to execute (optional)</param>
         /// <returns>Task of ApiResponse (string)</returns>
-        System.Threading.Tasks.Task<ApiResponse<string>> PostQuerystringAsyncWithHttpInfo (string zapTraceSpan = null, string contentType = null, string org = null, string orgID = null, Query query = null);
+        System.Threading.Tasks.Task<ApiResponse<string>> PostQuerystringAsyncWithHttpInfo (string zapTraceSpan = null, string acceptEncoding = null, string contentType = null, string org = null, string orgID = null, Query query = null);
         /// <summary>
         /// analyze an influxql or flux query
         /// </summary>
@@ -1039,14 +1047,15 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="acceptEncoding">The Accept-Encoding request HTTP header advertises which content encoding, usually a compression algorithm, the client is able to understand. (optional, default to identity)</param>
         /// <param name="contentType"> (optional)</param>
         /// <param name="org">specifies the name of the organization executing the query; if both orgID and org are specified, orgID takes precedence. (optional)</param>
         /// <param name="orgID">specifies the ID of the organization executing the query; if both orgID and org are specified, orgID takes precedence. (optional)</param>
         /// <param name="query">flux query or specification to execute (optional)</param>
         /// <returns>string</returns>
-        public string PostQuery (string zapTraceSpan = null, string contentType = null, string org = null, string orgID = null, Query query = null)
+        public string PostQuery (string zapTraceSpan = null, string acceptEncoding = null, string contentType = null, string org = null, string orgID = null, Query query = null)
         {
-             ApiResponse<string> localVarResponse = PostQueryWithHttpInfo(zapTraceSpan, contentType, org, orgID, query);
+             ApiResponse<string> localVarResponse = PostQueryWithHttpInfo(zapTraceSpan, acceptEncoding, contentType, org, orgID, query);
              return localVarResponse.Data;
         }
 
@@ -1055,12 +1064,13 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="acceptEncoding">The Accept-Encoding request HTTP header advertises which content encoding, usually a compression algorithm, the client is able to understand. (optional, default to identity)</param>
         /// <param name="contentType"> (optional)</param>
         /// <param name="org">specifies the name of the organization executing the query; if both orgID and org are specified, orgID takes precedence. (optional)</param>
         /// <param name="orgID">specifies the ID of the organization executing the query; if both orgID and org are specified, orgID takes precedence. (optional)</param>
         /// <param name="query">flux query or specification to execute (optional)</param>
         /// <returns>ApiResponse of string</returns>
-        public ApiResponse< string > PostQueryWithHttpInfo (string zapTraceSpan = null, string contentType = null, string org = null, string orgID = null, Query query = null)
+        public ApiResponse< string > PostQueryWithHttpInfo (string zapTraceSpan = null, string acceptEncoding = null, string contentType = null, string org = null, string orgID = null, Query query = null)
         {
 
             var localVarPath = "/api/v2/query";
@@ -1081,6 +1091,7 @@ namespace InfluxDB.Client.Api.Service
             if (org != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
             if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
             if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (acceptEncoding != null) localVarHeaderParams.Add("Accept-Encoding", this.Configuration.ApiClient.ParameterToString(acceptEncoding)); // header parameter
             if (contentType != null) localVarHeaderParams.Add("Content-Type", this.Configuration.ApiClient.ParameterToString(contentType)); // header parameter
             if (query != null && query.GetType() != typeof(byte[]))
             {
@@ -1125,12 +1136,13 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="acceptEncoding">The Accept-Encoding request HTTP header advertises which content encoding, usually a compression algorithm, the client is able to understand. (optional, default to identity)</param>
         /// <param name="contentType"> (optional)</param>
         /// <param name="org">specifies the name of the organization executing the query; if both orgID and org are specified, orgID takes precedence. (optional)</param>
         /// <param name="orgID">specifies the ID of the organization executing the query; if both orgID and org are specified, orgID takes precedence. (optional)</param>
         /// <param name="query">flux query or specification to execute (optional)</param>
         /// <returns>ApiResponse of string</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> PostQueryWithIRestResponseAsync (string zapTraceSpan = null, string contentType = null, string org = null, string orgID = null, Query query = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PostQueryWithIRestResponseAsync (string zapTraceSpan = null, string acceptEncoding = null, string contentType = null, string org = null, string orgID = null, Query query = null)
         {
 
             var localVarPath = "/api/v2/query";
@@ -1151,6 +1163,7 @@ namespace InfluxDB.Client.Api.Service
             if (org != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
             if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
             if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (acceptEncoding != null) localVarHeaderParams.Add("Accept-Encoding", this.Configuration.ApiClient.ParameterToString(acceptEncoding)); // header parameter
             if (contentType != null) localVarHeaderParams.Add("Content-Type", this.Configuration.ApiClient.ParameterToString(contentType)); // header parameter
             if (query != null && query.GetType() != typeof(byte[]))
             {
@@ -1193,12 +1206,13 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="acceptEncoding">The Accept-Encoding request HTTP header advertises which content encoding, usually a compression algorithm, the client is able to understand. (optional, default to identity)</param>
         /// <param name="contentType"> (optional)</param>
         /// <param name="org">specifies the name of the organization executing the query; if both orgID and org are specified, orgID takes precedence. (optional)</param>
         /// <param name="orgID">specifies the ID of the organization executing the query; if both orgID and org are specified, orgID takes precedence. (optional)</param>
         /// <param name="query">flux query or specification to execute (optional)</param>
         /// <returns>ApiResponse of string</returns>
-        public IRestResponse PostQueryWithIRestResponse (string zapTraceSpan = null, string contentType = null, string org = null, string orgID = null, Query query = null)
+        public IRestResponse PostQueryWithIRestResponse (string zapTraceSpan = null, string acceptEncoding = null, string contentType = null, string org = null, string orgID = null, Query query = null)
         {
 
             var localVarPath = "/api/v2/query";
@@ -1219,6 +1233,7 @@ namespace InfluxDB.Client.Api.Service
             if (org != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
             if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
             if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (acceptEncoding != null) localVarHeaderParams.Add("Accept-Encoding", this.Configuration.ApiClient.ParameterToString(acceptEncoding)); // header parameter
             if (contentType != null) localVarHeaderParams.Add("Content-Type", this.Configuration.ApiClient.ParameterToString(contentType)); // header parameter
             if (query != null && query.GetType() != typeof(byte[]))
             {
@@ -1261,12 +1276,13 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="acceptEncoding">The Accept-Encoding request HTTP header advertises which content encoding, usually a compression algorithm, the client is able to understand. (optional, default to identity)</param>
         /// <param name="contentType"> (optional)</param>
         /// <param name="org">specifies the name of the organization executing the query; if both orgID and org are specified, orgID takes precedence. (optional)</param>
         /// <param name="orgID">specifies the ID of the organization executing the query; if both orgID and org are specified, orgID takes precedence. (optional)</param>
         /// <param name="query">flux query or specification to execute (optional)</param>
         /// <returns>ApiResponse of string</returns>
-        public RestRequest PostQueryWithRestRequest (string zapTraceSpan = null, string contentType = null, string org = null, string orgID = null, Query query = null)
+        public RestRequest PostQueryWithRestRequest (string zapTraceSpan = null, string acceptEncoding = null, string contentType = null, string org = null, string orgID = null, Query query = null)
         {
 
             var localVarPath = "/api/v2/query";
@@ -1287,6 +1303,7 @@ namespace InfluxDB.Client.Api.Service
             if (org != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
             if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
             if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (acceptEncoding != null) localVarHeaderParams.Add("Accept-Encoding", this.Configuration.ApiClient.ParameterToString(acceptEncoding)); // header parameter
             if (contentType != null) localVarHeaderParams.Add("Content-Type", this.Configuration.ApiClient.ParameterToString(contentType)); // header parameter
             if (query != null && query.GetType() != typeof(byte[]))
             {
@@ -1318,14 +1335,15 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="acceptEncoding">The Accept-Encoding request HTTP header advertises which content encoding, usually a compression algorithm, the client is able to understand. (optional, default to identity)</param>
         /// <param name="contentType"> (optional)</param>
         /// <param name="org">specifies the name of the organization executing the query; if both orgID and org are specified, orgID takes precedence. (optional)</param>
         /// <param name="orgID">specifies the ID of the organization executing the query; if both orgID and org are specified, orgID takes precedence. (optional)</param>
         /// <param name="query">flux query or specification to execute (optional)</param>
         /// <returns>Task of string</returns>
-        public async System.Threading.Tasks.Task<string> PostQueryAsync (string zapTraceSpan = null, string contentType = null, string org = null, string orgID = null, Query query = null)
+        public async System.Threading.Tasks.Task<string> PostQueryAsync (string zapTraceSpan = null, string acceptEncoding = null, string contentType = null, string org = null, string orgID = null, Query query = null)
         {
-             ApiResponse<string> localVarResponse = await PostQueryAsyncWithHttpInfo(zapTraceSpan, contentType, org, orgID, query);
+             ApiResponse<string> localVarResponse = await PostQueryAsyncWithHttpInfo(zapTraceSpan, acceptEncoding, contentType, org, orgID, query);
              return localVarResponse.Data;
 
         }
@@ -1335,15 +1353,16 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="acceptEncoding">The Accept-Encoding request HTTP header advertises which content encoding, usually a compression algorithm, the client is able to understand. (optional, default to identity)</param>
         /// <param name="contentType"> (optional)</param>
         /// <param name="org">specifies the name of the organization executing the query; if both orgID and org are specified, orgID takes precedence. (optional)</param>
         /// <param name="orgID">specifies the ID of the organization executing the query; if both orgID and org are specified, orgID takes precedence. (optional)</param>
         /// <param name="query">flux query or specification to execute (optional)</param>
         /// <returns>Task of ApiResponse (string)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<string>> PostQueryAsyncWithHttpInfo (string zapTraceSpan = null, string contentType = null, string org = null, string orgID = null, Query query = null)
+        public async System.Threading.Tasks.Task<ApiResponse<string>> PostQueryAsyncWithHttpInfo (string zapTraceSpan = null, string acceptEncoding = null, string contentType = null, string org = null, string orgID = null, Query query = null)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await PostQueryAsyncWithIRestResponse(zapTraceSpan, contentType, org, orgID, query);
+            IRestResponse localVarResponse = await PostQueryAsyncWithIRestResponse(zapTraceSpan, acceptEncoding, contentType, org, orgID, query);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -1363,12 +1382,13 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="acceptEncoding">The Accept-Encoding request HTTP header advertises which content encoding, usually a compression algorithm, the client is able to understand. (optional, default to identity)</param>
         /// <param name="contentType"> (optional)</param>
         /// <param name="org">specifies the name of the organization executing the query; if both orgID and org are specified, orgID takes precedence. (optional)</param>
         /// <param name="orgID">specifies the ID of the organization executing the query; if both orgID and org are specified, orgID takes precedence. (optional)</param>
         /// <param name="query">flux query or specification to execute (optional)</param>
         /// <returns>Task of IRestResponse (string)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> PostQueryAsyncWithIRestResponse (string zapTraceSpan = null, string contentType = null, string org = null, string orgID = null, Query query = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PostQueryAsyncWithIRestResponse (string zapTraceSpan = null, string acceptEncoding = null, string contentType = null, string org = null, string orgID = null, Query query = null)
         {
 
             var localVarPath = "/api/v2/query";
@@ -1389,6 +1409,7 @@ namespace InfluxDB.Client.Api.Service
             if (org != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
             if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
             if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (acceptEncoding != null) localVarHeaderParams.Add("Accept-Encoding", this.Configuration.ApiClient.ParameterToString(acceptEncoding)); // header parameter
             if (contentType != null) localVarHeaderParams.Add("Content-Type", this.Configuration.ApiClient.ParameterToString(contentType)); // header parameter
             if (query != null && query.GetType() != typeof(byte[]))
             {
@@ -1429,14 +1450,15 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="acceptEncoding">The Accept-Encoding request HTTP header advertises which content encoding, usually a compression algorithm, the client is able to understand. (optional, default to identity)</param>
         /// <param name="contentType"> (optional)</param>
         /// <param name="org">specifies the name of the organization executing the query; if both orgID and org are specified, orgID takes precedence. (optional)</param>
         /// <param name="orgID">specifies the ID of the organization executing the query; if both orgID and org are specified, orgID takes precedence. (optional)</param>
         /// <param name="query">flux query or specification to execute (optional)</param>
         /// <returns>string</returns>
-        public string PostQuerystring (string zapTraceSpan = null, string contentType = null, string org = null, string orgID = null, Query query = null)
+        public string PostQuerystring (string zapTraceSpan = null, string acceptEncoding = null, string contentType = null, string org = null, string orgID = null, Query query = null)
         {
-             ApiResponse<string> localVarResponse = PostQuerystringWithHttpInfo(zapTraceSpan, contentType, org, orgID, query);
+             ApiResponse<string> localVarResponse = PostQuerystringWithHttpInfo(zapTraceSpan, acceptEncoding, contentType, org, orgID, query);
              return localVarResponse.Data;
         }
 
@@ -1445,12 +1467,13 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="acceptEncoding">The Accept-Encoding request HTTP header advertises which content encoding, usually a compression algorithm, the client is able to understand. (optional, default to identity)</param>
         /// <param name="contentType"> (optional)</param>
         /// <param name="org">specifies the name of the organization executing the query; if both orgID and org are specified, orgID takes precedence. (optional)</param>
         /// <param name="orgID">specifies the ID of the organization executing the query; if both orgID and org are specified, orgID takes precedence. (optional)</param>
         /// <param name="query">flux query or specification to execute (optional)</param>
         /// <returns>ApiResponse of string</returns>
-        public ApiResponse< string > PostQuerystringWithHttpInfo (string zapTraceSpan = null, string contentType = null, string org = null, string orgID = null, Query query = null)
+        public ApiResponse< string > PostQuerystringWithHttpInfo (string zapTraceSpan = null, string acceptEncoding = null, string contentType = null, string org = null, string orgID = null, Query query = null)
         {
 
             var localVarPath = "/api/v2/query";
@@ -1502,12 +1525,13 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="acceptEncoding">The Accept-Encoding request HTTP header advertises which content encoding, usually a compression algorithm, the client is able to understand. (optional, default to identity)</param>
         /// <param name="contentType"> (optional)</param>
         /// <param name="org">specifies the name of the organization executing the query; if both orgID and org are specified, orgID takes precedence. (optional)</param>
         /// <param name="orgID">specifies the ID of the organization executing the query; if both orgID and org are specified, orgID takes precedence. (optional)</param>
         /// <param name="query">flux query or specification to execute (optional)</param>
         /// <returns>ApiResponse of string</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> PostQuerystringWithIRestResponseAsync (string zapTraceSpan = null, string contentType = null, string org = null, string orgID = null, Query query = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PostQuerystringWithIRestResponseAsync (string zapTraceSpan = null, string acceptEncoding = null, string contentType = null, string org = null, string orgID = null, Query query = null)
         {
 
             var localVarPath = "/api/v2/query";
@@ -1557,12 +1581,13 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="acceptEncoding">The Accept-Encoding request HTTP header advertises which content encoding, usually a compression algorithm, the client is able to understand. (optional, default to identity)</param>
         /// <param name="contentType"> (optional)</param>
         /// <param name="org">specifies the name of the organization executing the query; if both orgID and org are specified, orgID takes precedence. (optional)</param>
         /// <param name="orgID">specifies the ID of the organization executing the query; if both orgID and org are specified, orgID takes precedence. (optional)</param>
         /// <param name="query">flux query or specification to execute (optional)</param>
         /// <returns>ApiResponse of string</returns>
-        public IRestResponse PostQuerystringWithIRestResponse (string zapTraceSpan = null, string contentType = null, string org = null, string orgID = null, Query query = null)
+        public IRestResponse PostQuerystringWithIRestResponse (string zapTraceSpan = null, string acceptEncoding = null, string contentType = null, string org = null, string orgID = null, Query query = null)
         {
 
             var localVarPath = "/api/v2/query";
@@ -1612,12 +1637,13 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="acceptEncoding">The Accept-Encoding request HTTP header advertises which content encoding, usually a compression algorithm, the client is able to understand. (optional, default to identity)</param>
         /// <param name="contentType"> (optional)</param>
         /// <param name="org">specifies the name of the organization executing the query; if both orgID and org are specified, orgID takes precedence. (optional)</param>
         /// <param name="orgID">specifies the ID of the organization executing the query; if both orgID and org are specified, orgID takes precedence. (optional)</param>
         /// <param name="query">flux query or specification to execute (optional)</param>
         /// <returns>ApiResponse of string</returns>
-        public RestRequest PostQuerystringWithRestRequest (string zapTraceSpan = null, string contentType = null, string org = null, string orgID = null, Query query = null)
+        public RestRequest PostQuerystringWithRestRequest (string zapTraceSpan = null, string acceptEncoding = null, string contentType = null, string org = null, string orgID = null, Query query = null)
         {
 
             var localVarPath = "/api/v2/query";
@@ -1656,14 +1682,15 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="acceptEncoding">The Accept-Encoding request HTTP header advertises which content encoding, usually a compression algorithm, the client is able to understand. (optional, default to identity)</param>
         /// <param name="contentType"> (optional)</param>
         /// <param name="org">specifies the name of the organization executing the query; if both orgID and org are specified, orgID takes precedence. (optional)</param>
         /// <param name="orgID">specifies the ID of the organization executing the query; if both orgID and org are specified, orgID takes precedence. (optional)</param>
         /// <param name="query">flux query or specification to execute (optional)</param>
         /// <returns>Task of string</returns>
-        public async System.Threading.Tasks.Task<string> PostQuerystringAsync (string zapTraceSpan = null, string contentType = null, string org = null, string orgID = null, Query query = null)
+        public async System.Threading.Tasks.Task<string> PostQuerystringAsync (string zapTraceSpan = null, string acceptEncoding = null, string contentType = null, string org = null, string orgID = null, Query query = null)
         {
-             ApiResponse<string> localVarResponse = await PostQuerystringAsyncWithHttpInfo(zapTraceSpan, contentType, org, orgID, query);
+             ApiResponse<string> localVarResponse = await PostQuerystringAsyncWithHttpInfo(zapTraceSpan, acceptEncoding, contentType, org, orgID, query);
              return localVarResponse.Data;
 
         }
@@ -1673,15 +1700,16 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="acceptEncoding">The Accept-Encoding request HTTP header advertises which content encoding, usually a compression algorithm, the client is able to understand. (optional, default to identity)</param>
         /// <param name="contentType"> (optional)</param>
         /// <param name="org">specifies the name of the organization executing the query; if both orgID and org are specified, orgID takes precedence. (optional)</param>
         /// <param name="orgID">specifies the ID of the organization executing the query; if both orgID and org are specified, orgID takes precedence. (optional)</param>
         /// <param name="query">flux query or specification to execute (optional)</param>
         /// <returns>Task of ApiResponse (string)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<string>> PostQuerystringAsyncWithHttpInfo (string zapTraceSpan = null, string contentType = null, string org = null, string orgID = null, Query query = null)
+        public async System.Threading.Tasks.Task<ApiResponse<string>> PostQuerystringAsyncWithHttpInfo (string zapTraceSpan = null, string acceptEncoding = null, string contentType = null, string org = null, string orgID = null, Query query = null)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await PostQuerystringAsyncWithIRestResponse(zapTraceSpan, contentType, org, orgID, query);
+            IRestResponse localVarResponse = await PostQuerystringAsyncWithIRestResponse(zapTraceSpan, acceptEncoding, contentType, org, orgID, query);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -1701,12 +1729,13 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="acceptEncoding">The Accept-Encoding request HTTP header advertises which content encoding, usually a compression algorithm, the client is able to understand. (optional, default to identity)</param>
         /// <param name="contentType"> (optional)</param>
         /// <param name="org">specifies the name of the organization executing the query; if both orgID and org are specified, orgID takes precedence. (optional)</param>
         /// <param name="orgID">specifies the ID of the organization executing the query; if both orgID and org are specified, orgID takes precedence. (optional)</param>
         /// <param name="query">flux query or specification to execute (optional)</param>
         /// <returns>Task of IRestResponse (string)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> PostQuerystringAsyncWithIRestResponse (string zapTraceSpan = null, string contentType = null, string org = null, string orgID = null, Query query = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PostQuerystringAsyncWithIRestResponse (string zapTraceSpan = null, string acceptEncoding = null, string contentType = null, string org = null, string orgID = null, Query query = null)
         {
 
             var localVarPath = "/api/v2/query";

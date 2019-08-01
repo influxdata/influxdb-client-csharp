@@ -32,14 +32,35 @@ namespace InfluxDB.Client.Api.Domain
         /// <summary>
         /// Initializes a new instance of the <see cref="View" /> class.
         /// </summary>
+        [JsonConstructorAttribute]
+        protected View() { }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="View" /> class.
+        /// </summary>
         /// <param name="links">links.</param>
-        /// <param name="name">name.</param>
-        /// <param name="properties">properties.</param>
-        public View(ViewLinks links = default(ViewLinks), string name = default(string), Object properties = default(Object))
+        /// <param name="name">name (required).</param>
+        /// <param name="properties">properties (required).</param>
+        public View(ViewLinks links = default(ViewLinks), string name = default(string), ViewProperties properties = default(ViewProperties))
         {
+            // to ensure "name" is required (not null)
+            if (name == null)
+            {
+                throw new InvalidDataException("name is a required property for View and cannot be null");
+            }
+            else
+            {
+                this.Name = name;
+            }
+            // to ensure "properties" is required (not null)
+            if (properties == null)
+            {
+                throw new InvalidDataException("properties is a required property for View and cannot be null");
+            }
+            else
+            {
+                this.Properties = properties;
+            }
             this.Links = links;
-            this.Name = name;
-            this.Properties = properties;
         }
 
         /// <summary>
@@ -65,7 +86,7 @@ namespace InfluxDB.Client.Api.Domain
         /// </summary>
         [DataMember(Name="properties", EmitDefaultValue=false)]
         [JsonConverter(typeof(ViewPropertiesAdapter))]
-        public Object Properties { get; set; }
+        public ViewProperties Properties { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -129,7 +150,7 @@ namespace InfluxDB.Client.Api.Domain
                     this.Name.Equals(input.Name))
                 ) && 
                 (
-                    this.Properties == input.Properties ||
+                    
                     (this.Properties != null &&
                     this.Properties.Equals(input.Properties))
                 );
@@ -160,15 +181,16 @@ namespace InfluxDB.Client.Api.Domain
     {
         private static readonly Dictionary<string[], Type> Types = new Dictionary<string[], Type>(new Client.DiscriminatorComparer<string>())
         {
-            {new []{ "chronograf-v2", "line-plus-single-stat" }, typeof(LinePlusSingleStatProperties)},
-            {new []{ "chronograf-v2", "xy" }, typeof(XYViewProperties)},
-            {new []{ "chronograf-v2", "single-stat" }, typeof(SingleStatViewProperties)},
-            {new []{ "chronograf-v2", "histogram" }, typeof(HistogramViewProperties)},
-            {new []{ "chronograf-v2", "gauge" }, typeof(GaugeViewProperties)},
-            {new []{ "chronograf-v2", "table" }, typeof(TableViewProperties)},
-            {new []{ "chronograf-v2", "markdown" }, typeof(MarkdownViewProperties)},
-            {new []{ "chronograf-v2", "log-viewer" }, typeof(LogViewProperties)},
-            {new []{ "chronograf-v2", "empty" }, typeof(EmptyViewProperties)},
+            {new []{ "line-plus-single-stat", "chronograf-v2" }, typeof(LinePlusSingleStatProperties)},
+            {new []{ "xy", "chronograf-v2" }, typeof(XYViewProperties)},
+            {new []{ "single-stat", "chronograf-v2" }, typeof(SingleStatViewProperties)},
+            {new []{ "histogram", "chronograf-v2" }, typeof(HistogramViewProperties)},
+            {new []{ "gauge", "chronograf-v2" }, typeof(GaugeViewProperties)},
+            {new []{ "table", "chronograf-v2" }, typeof(TableViewProperties)},
+            {new []{ "markdown", "chronograf-v2" }, typeof(MarkdownViewProperties)},
+            {new []{ "check", "chronograf-v2" }, typeof(CheckViewProperties)},
+            {new []{ "scatter", "chronograf-v2" }, typeof(ScatterViewProperties)},
+            {new []{ "heatmap", "chronograf-v2" }, typeof(HeatmapViewProperties)},
         };
 
         public override bool CanConvert(Type objectType)
@@ -194,7 +216,7 @@ namespace InfluxDB.Client.Api.Domain
 
                     var jObject = Newtonsoft.Json.Linq.JObject.Load(reader);
 
-                    var discriminator = new []{ "shape", "type" }.Select(key => jObject[key].ToString()).ToArray();
+                    var discriminator = new []{ "type", "shape" }.Select(key => jObject[key].ToString()).ToArray();
 
                     Types.TryGetValue(discriminator, out var type);
 

@@ -48,7 +48,7 @@ namespace InfluxDB.Client
             Arguments.CheckNotNull(task, nameof(task));
             Arguments.CheckNonEmptyString(token, nameof(token));
 
-            var status = (TaskCreateRequest.StatusEnum) Enum.Parse(typeof(TaskCreateRequest.StatusEnum), task.Status.ToString());
+            var status = (TaskStatusType) Enum.Parse(typeof(TaskStatusType), task.Status.ToString());
             var taskCreateRequest = new TaskCreateRequest(task.OrgID, task.Org, status, task.Flux, task.Description, token);
 
             return await CreateTask(taskCreateRequest);
@@ -174,7 +174,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNotNull(task, nameof(task));
 
-            var status = (TaskUpdateRequest.StatusEnum) Enum.Parse(typeof(TaskUpdateRequest.StatusEnum), task.Status.ToString());
+            var status = (TaskStatusType) Enum.Parse(typeof(TaskStatusType), task.Status.ToString());
 
             var request = new TaskUpdateRequest(status, task.Flux, task.Name, task.Every, task.Cron);
 
@@ -245,7 +245,7 @@ namespace InfluxDB.Client
             Arguments.CheckNotNull(task, nameof(task));
             Arguments.CheckNonEmptyString(token, nameof(token));
 
-            var status = (TaskCreateRequest.StatusEnum) Enum.Parse(typeof(TaskCreateRequest.StatusEnum), task.Status.ToString());
+            var status = (TaskStatusType) Enum.Parse(typeof(TaskStatusType), task.Status.ToString());
             var cloned = new TaskCreateRequest(task.OrgID, task.Org, status, task.Flux, task.Description, token);
             
             return await CreateTask(cloned).ContinueWith(created =>
@@ -641,7 +641,7 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(taskId, nameof(taskId));
             Arguments.CheckNonEmptyString(runId, nameof(runId));
 
-            await _service.TasksTaskIDRunsRunIDDeleteAsync(taskId, runId);
+            await _service.DeleteTasksIDRunsIDAsync(taskId, runId);
         }
 
         /// <summary>
@@ -761,7 +761,7 @@ namespace InfluxDB.Client
 
             if (every != null) Arguments.CheckDuration(every, nameof(every));
 
-            var task = new Task(orgId, null, name, null, Task.StatusEnum.Active, null, null, flux);
+            var task = new Task(orgId, null, name, null, TaskStatusType.Active, null, null, flux);
 
             var repetition = "";
             if (every != null)

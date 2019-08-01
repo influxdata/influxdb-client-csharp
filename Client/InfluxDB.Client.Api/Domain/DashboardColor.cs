@@ -52,7 +52,25 @@ namespace InfluxDB.Client.Api.Domain
             /// Enum Threshold for value: threshold
             /// </summary>
             [EnumMember(Value = "threshold")]
-            Threshold = 3
+            Threshold = 3,
+
+            /// <summary>
+            /// Enum Scale for value: scale
+            /// </summary>
+            [EnumMember(Value = "scale")]
+            Scale = 4,
+
+            /// <summary>
+            /// Enum Text for value: text
+            /// </summary>
+            [EnumMember(Value = "text")]
+            Text = 5,
+
+            /// <summary>
+            /// Enum Background for value: background
+            /// </summary>
+            [EnumMember(Value = "background")]
+            Background = 6
 
         }
 
@@ -61,22 +79,67 @@ namespace InfluxDB.Client.Api.Domain
         /// </summary>
         /// <value>Type is how the color is used.</value>
         [DataMember(Name="type", EmitDefaultValue=false)]
-        public TypeEnum? Type { get; set; }
+        public TypeEnum Type { get; set; }
         /// <summary>
         /// Initializes a new instance of the <see cref="DashboardColor" /> class.
         /// </summary>
-        /// <param name="id">ID is the unique id of the view color.</param>
-        /// <param name="type">Type is how the color is used..</param>
-        /// <param name="hex">Hex is the hex number of the color.</param>
-        /// <param name="name">Name is the user-facing name of the hex color.</param>
-        /// <param name="value">Value is the data value mapped to this color.</param>
-        public DashboardColor(string id = default(string), TypeEnum? type = default(TypeEnum?), string hex = default(string), string name = default(string), string value = default(string))
+        [JsonConstructorAttribute]
+        protected DashboardColor() { }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DashboardColor" /> class.
+        /// </summary>
+        /// <param name="id">ID is the unique id of the view color (required).</param>
+        /// <param name="type">Type is how the color is used. (required).</param>
+        /// <param name="hex">Hex is the hex number of the color (required).</param>
+        /// <param name="name">Name is the user-facing name of the hex color (required).</param>
+        /// <param name="value">Value is the data value mapped to this color (required).</param>
+        public DashboardColor(string id = default(string), TypeEnum type = default(TypeEnum), string hex = default(string), string name = default(string), float? value = default(float?))
         {
-            this.Id = id;
-            this.Type = type;
-            this.Hex = hex;
-            this.Name = name;
-            this.Value = value;
+            // to ensure "id" is required (not null)
+            if (id == null)
+            {
+                throw new InvalidDataException("id is a required property for DashboardColor and cannot be null");
+            }
+            else
+            {
+                this.Id = id;
+            }
+            // to ensure "type" is required (not null)
+            if (type == null)
+            {
+                throw new InvalidDataException("type is a required property for DashboardColor and cannot be null");
+            }
+            else
+            {
+                this.Type = type;
+            }
+            // to ensure "hex" is required (not null)
+            if (hex == null)
+            {
+                throw new InvalidDataException("hex is a required property for DashboardColor and cannot be null");
+            }
+            else
+            {
+                this.Hex = hex;
+            }
+            // to ensure "name" is required (not null)
+            if (name == null)
+            {
+                throw new InvalidDataException("name is a required property for DashboardColor and cannot be null");
+            }
+            else
+            {
+                this.Name = name;
+            }
+            // to ensure "value" is required (not null)
+            if (value == null)
+            {
+                throw new InvalidDataException("value is a required property for DashboardColor and cannot be null");
+            }
+            else
+            {
+                this.Value = value;
+            }
         }
 
         /// <summary>
@@ -106,7 +169,7 @@ namespace InfluxDB.Client.Api.Domain
         /// </summary>
         /// <value>Value is the data value mapped to this color</value>
         [DataMember(Name="value", EmitDefaultValue=false)]
-        public string Value { get; set; }
+        public float? Value { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

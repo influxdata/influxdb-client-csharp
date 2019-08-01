@@ -32,43 +32,10 @@ namespace InfluxDB.Client.Api.Domain
         /// <summary>
         /// Initializes a new instance of the <see cref="ViewProperties" /> class.
         /// </summary>
-        /// <param name="queries">queries.</param>
-        /// <param name="colors">Colors define color encoding of data into a visualization.</param>
-        /// <param name="note">note.</param>
-        /// <param name="showNoteWhenEmpty">if true, will display note when empty.</param>
-        public ViewProperties(List<DashboardQuery> queries = default(List<DashboardQuery>), List<DashboardColor> colors = default(List<DashboardColor>), string note = default(string), bool? showNoteWhenEmpty = default(bool?))
+        [JsonConstructorAttribute]
+        public ViewProperties()
         {
-            this.Queries = queries;
-            this.Colors = colors;
-            this.Note = note;
-            this.ShowNoteWhenEmpty = showNoteWhenEmpty;
         }
-
-        /// <summary>
-        /// Gets or Sets Queries
-        /// </summary>
-        [DataMember(Name="queries", EmitDefaultValue=false)]
-        public List<DashboardQuery> Queries { get; set; }
-
-        /// <summary>
-        /// Colors define color encoding of data into a visualization
-        /// </summary>
-        /// <value>Colors define color encoding of data into a visualization</value>
-        [DataMember(Name="colors", EmitDefaultValue=false)]
-        public List<DashboardColor> Colors { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Note
-        /// </summary>
-        [DataMember(Name="note", EmitDefaultValue=false)]
-        public string Note { get; set; }
-
-        /// <summary>
-        /// if true, will display note when empty
-        /// </summary>
-        /// <value>if true, will display note when empty</value>
-        [DataMember(Name="showNoteWhenEmpty", EmitDefaultValue=false)]
-        public bool? ShowNoteWhenEmpty { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -78,10 +45,6 @@ namespace InfluxDB.Client.Api.Domain
         {
             var sb = new StringBuilder();
             sb.Append("class ViewProperties {\n");
-            sb.Append("  Queries: ").Append(Queries).Append("\n");
-            sb.Append("  Colors: ").Append(Colors).Append("\n");
-            sb.Append("  Note: ").Append(Note).Append("\n");
-            sb.Append("  ShowNoteWhenEmpty: ").Append(ShowNoteWhenEmpty).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -115,27 +78,7 @@ namespace InfluxDB.Client.Api.Domain
             if (input == null)
                 return false;
 
-            return 
-                (
-                    this.Queries == input.Queries ||
-                    this.Queries != null &&
-                    this.Queries.SequenceEqual(input.Queries)
-                ) && 
-                (
-                    this.Colors == input.Colors ||
-                    this.Colors != null &&
-                    this.Colors.SequenceEqual(input.Colors)
-                ) && 
-                (
-                    this.Note == input.Note ||
-                    (this.Note != null &&
-                    this.Note.Equals(input.Note))
-                ) && 
-                (
-                    this.ShowNoteWhenEmpty == input.ShowNoteWhenEmpty ||
-                    (this.ShowNoteWhenEmpty != null &&
-                    this.ShowNoteWhenEmpty.Equals(input.ShowNoteWhenEmpty))
-                );
+            return false;
         }
 
         /// <summary>
@@ -147,14 +90,6 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
-                if (this.Queries != null)
-                    hashCode = hashCode * 59 + this.Queries.GetHashCode();
-                if (this.Colors != null)
-                    hashCode = hashCode * 59 + this.Colors.GetHashCode();
-                if (this.Note != null)
-                    hashCode = hashCode * 59 + this.Note.GetHashCode();
-                if (this.ShowNoteWhenEmpty != null)
-                    hashCode = hashCode * 59 + this.ShowNoteWhenEmpty.GetHashCode();
                 return hashCode;
             }
         }

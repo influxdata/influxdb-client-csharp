@@ -29,7 +29,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(name, nameof(name));
 
-            var user = new User(name);
+            var user = new User(name: name);
 
             return await CreateUser(user);
         }
@@ -139,7 +139,7 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(clonedName, nameof(clonedName));
             Arguments.CheckNotNull(user, nameof(user));
 
-            var cloned = new User(clonedName);
+            var cloned = new User(name: clonedName);
 
             return await CreateUser(cloned);
         }

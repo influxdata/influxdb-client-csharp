@@ -17,7 +17,7 @@ namespace InfluxDB.Client.Test
 
             Assert.IsNotNull(health);
             Assert.AreEqual("influxdb", health.Name);
-            Assert.AreEqual(Check.StatusEnum.Pass, health.Status);
+            Assert.AreEqual(HealthCheck.StatusEnum.Pass, health.Status);
             Assert.AreEqual("ready for queries and writes", health.Message);
         }
 
@@ -28,7 +28,7 @@ namespace InfluxDB.Client.Test
             var health = await clientNotRunning.Health();
 
             Assert.IsNotNull(health);
-            Assert.AreEqual(Check.StatusEnum.Fail, health.Status);
+            Assert.AreEqual(HealthCheck.StatusEnum.Fail, health.Status);
             Assert.IsTrue(health.Message.Contains("Connection refused"));
 
             clientNotRunning.Dispose();

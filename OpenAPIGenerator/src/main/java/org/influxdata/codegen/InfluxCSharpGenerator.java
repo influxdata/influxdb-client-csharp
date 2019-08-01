@@ -21,6 +21,7 @@ import io.swagger.v3.oas.models.media.ObjectSchema;
 import io.swagger.v3.oas.models.media.Schema;
 import io.swagger.v3.oas.models.media.StringSchema;
 import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.openapitools.codegen.CodegenModel;
 import org.openapitools.codegen.CodegenOperation;
 import org.openapitools.codegen.CodegenParameter;
@@ -161,7 +162,7 @@ public class InfluxCSharpGenerator extends CSharpClientCodegen {
                                     }
                                 }
 
-                                String[] keys = getDiscriminatorKeys(refSchema);
+                                String[] keys = getDiscriminatorKeys(schema, refSchema);
 
                                 String[] discriminator = new String[]{};
                                 String[] discriminatorValue = new String[]{};
@@ -266,21 +267,49 @@ public class InfluxCSharpGenerator extends CSharpClientCodegen {
 
         }
 
+        // use generic precedents
+        if (codegenModel.getParent() != null && codegenModel.getParent().endsWith("Base")) {
+             codegenModel.setParent(StringUtils.substringBefore(codegenModel.getParent(), "Base"));
+             codegenModel.setParentSchema(StringUtils.substringBefore(codegenModel.getParent(), "Base"));
+        }
+
+        if (name.endsWith("ViewProperties") && !name.equals("ViewProperties"))
+        {
+            codegenModel.setParent("ViewProperties");
+            codegenModel.setParentSchema("ViewProperties");
+        }
+
+        if (allDefinitions.containsKey(name + "Base")) {
+            codegenModel.setParent(name + "Base");
+            codegenModel.setParentSchema(name + "Base");
+        }
+
+        if (name.equals("ViewProperties"))  {
+             codegenModel.setReadWriteVars(new ArrayList<>());
+             codegenModel.setRequiredVars(new ArrayList<>());
+             codegenModel.hasOnlyReadOnly = true;
+             codegenModel.hasRequired = false;
+        }
+
         return codegenModel;
     }
 
-    private String[] getDiscriminatorKeys(final Schema refSchema) {
+    private String[] getDiscriminatorKeys(final Schema schema, final Schema refSchema) {
         List<String> keys = new ArrayList<>();
 
-        refSchema.getProperties().forEach((BiConsumer<String, Schema>) (property, propertySchema) -> {
+        if (refSchema.getProperties() == null) {
+            keys.add(schema.getDiscriminator().getPropertyName());
+        } else {
+            refSchema.getProperties().forEach((BiConsumer<String, Schema>) (property, propertySchema) -> {
 
-            if (keys.isEmpty()) {
-                keys.add(property);
+                if (keys.isEmpty()) {
+                    keys.add(property);
 
-            } else if (propertySchema.getEnum() != null && propertySchema.getEnum().size() == 1) {
-                keys.add(property);
-            }
-        });
+                } else if (propertySchema.getEnum() != null && propertySchema.getEnum().size() == 1) {
+                    keys.add(property);
+                }
+            });
+        }
 
         return keys.toArray(new String[0]);
     }
@@ -393,6 +422,17 @@ public class InfluxCSharpGenerator extends CSharpClientCodegen {
                 pluginModel.vars.remove(typeProperty);
                 pluginModel.parentVars.add(typeProperty);
                 pluginModel.vars.get(pluginModel.vars.size() - 1).hasMore = false;
+            }
+            if (pluginModel.getParent() != null && (pluginModel.getParent().endsWith("Base") || (modelName.endsWith("ViewPropertiexs") && !modelName.equals("ViewPropertiesx")))) {
+                CodegenModel parentModel = pluginModel.getParentModel();
+                pluginModel.setParentVars(parentModel.getReadWriteVars());
+//                pluginModel.setVars(parentModel.getVars());
+//                pluginModel.setRequiredVars(parentModel.getRequiredVars());
+//                pluginModel.setOptionalVars(parentModel.getOptionalVars());
+//                pluginModel.setReadOnlyVars(parentModel.getReadOnlyVars());
+                pluginModel.setReadWriteVars(parentModel.getReadWriteVars());
+//                pluginModel.setAllVars(parentModel.getAllVars());
+                System.out.println("parentModel = " + parentModel);
             }
         }
 

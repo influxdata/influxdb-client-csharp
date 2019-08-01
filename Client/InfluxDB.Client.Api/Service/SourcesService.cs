@@ -127,8 +127,8 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="sourceID">ID of the source</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Check</returns>
-        Check GetSourcesIDHealth (string sourceID, string zapTraceSpan = null);
+        /// <returns>HealthCheck</returns>
+        HealthCheck GetSourcesIDHealth (string sourceID, string zapTraceSpan = null);
 
         /// <summary>
         /// Get a sources health
@@ -139,8 +139,8 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="sourceID">ID of the source</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Check</returns>
-        ApiResponse<Check> GetSourcesIDHealthWithHttpInfo (string sourceID, string zapTraceSpan = null);
+        /// <returns>ApiResponse of HealthCheck</returns>
+        ApiResponse<HealthCheck> GetSourcesIDHealthWithHttpInfo (string sourceID, string zapTraceSpan = null);
         /// <summary>
         /// Updates a Source
         /// </summary>
@@ -294,8 +294,8 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="sourceID">ID of the source</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of Check</returns>
-        System.Threading.Tasks.Task<Check> GetSourcesIDHealthAsync (string sourceID, string zapTraceSpan = null);
+        /// <returns>Task of HealthCheck</returns>
+        System.Threading.Tasks.Task<HealthCheck> GetSourcesIDHealthAsync (string sourceID, string zapTraceSpan = null);
 
         /// <summary>
         /// Get a sources health
@@ -306,8 +306,8 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="sourceID">ID of the source</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ApiResponse (Check)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Check>> GetSourcesIDHealthAsyncWithHttpInfo (string sourceID, string zapTraceSpan = null);
+        /// <returns>Task of ApiResponse (HealthCheck)</returns>
+        System.Threading.Tasks.Task<ApiResponse<HealthCheck>> GetSourcesIDHealthAsyncWithHttpInfo (string sourceID, string zapTraceSpan = null);
         /// <summary>
         /// Updates a Source
         /// </summary>
@@ -1722,10 +1722,10 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="sourceID">ID of the source</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Check</returns>
-        public Check GetSourcesIDHealth (string sourceID, string zapTraceSpan = null)
+        /// <returns>HealthCheck</returns>
+        public HealthCheck GetSourcesIDHealth (string sourceID, string zapTraceSpan = null)
         {
-             ApiResponse<Check> localVarResponse = GetSourcesIDHealthWithHttpInfo(sourceID, zapTraceSpan);
+             ApiResponse<HealthCheck> localVarResponse = GetSourcesIDHealthWithHttpInfo(sourceID, zapTraceSpan);
              return localVarResponse.Data;
         }
 
@@ -1735,8 +1735,8 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="sourceID">ID of the source</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Check</returns>
-        public ApiResponse< Check > GetSourcesIDHealthWithHttpInfo (string sourceID, string zapTraceSpan = null)
+        /// <returns>ApiResponse of HealthCheck</returns>
+        public ApiResponse< HealthCheck > GetSourcesIDHealthWithHttpInfo (string sourceID, string zapTraceSpan = null)
         {
             // verify the required parameter 'sourceID' is set
             if (sourceID == null)
@@ -1781,9 +1781,9 @@ namespace InfluxDB.Client.Api.Service
                 if (exception != null) throw exception;
             }
 
-            return new ApiResponse<Check>(localVarStatusCode,
+            return new ApiResponse<HealthCheck>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (Check) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Check)));
+                (HealthCheck) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(HealthCheck)));
         }
 
         /// <summary>
@@ -1792,7 +1792,7 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="sourceID">ID of the source</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Check</returns>
+        /// <returns>ApiResponse of HealthCheck</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetSourcesIDHealthWithIRestResponseAsync (string sourceID, string zapTraceSpan = null)
         {
             // verify the required parameter 'sourceID' is set
@@ -1847,7 +1847,7 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="sourceID">ID of the source</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Check</returns>
+        /// <returns>ApiResponse of HealthCheck</returns>
         public IRestResponse GetSourcesIDHealthWithIRestResponse (string sourceID, string zapTraceSpan = null)
         {
             // verify the required parameter 'sourceID' is set
@@ -1902,7 +1902,7 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="sourceID">ID of the source</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Check</returns>
+        /// <returns>ApiResponse of HealthCheck</returns>
         public RestRequest GetSourcesIDHealthWithRestRequest (string sourceID, string zapTraceSpan = null)
         {
             // verify the required parameter 'sourceID' is set
@@ -1946,10 +1946,10 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="sourceID">ID of the source</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of Check</returns>
-        public async System.Threading.Tasks.Task<Check> GetSourcesIDHealthAsync (string sourceID, string zapTraceSpan = null)
+        /// <returns>Task of HealthCheck</returns>
+        public async System.Threading.Tasks.Task<HealthCheck> GetSourcesIDHealthAsync (string sourceID, string zapTraceSpan = null)
         {
-             ApiResponse<Check> localVarResponse = await GetSourcesIDHealthAsyncWithHttpInfo(sourceID, zapTraceSpan);
+             ApiResponse<HealthCheck> localVarResponse = await GetSourcesIDHealthAsyncWithHttpInfo(sourceID, zapTraceSpan);
              return localVarResponse.Data;
 
         }
@@ -1960,8 +1960,8 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="sourceID">ID of the source</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ApiResponse (Check)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Check>> GetSourcesIDHealthAsyncWithHttpInfo (string sourceID, string zapTraceSpan = null)
+        /// <returns>Task of ApiResponse (HealthCheck)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<HealthCheck>> GetSourcesIDHealthAsyncWithHttpInfo (string sourceID, string zapTraceSpan = null)
         {
             // make the HTTP request
             IRestResponse localVarResponse = await GetSourcesIDHealthAsyncWithIRestResponse(sourceID, zapTraceSpan);
@@ -1974,9 +1974,9 @@ namespace InfluxDB.Client.Api.Service
                 if (exception != null) throw exception;
             }
 
-            return new ApiResponse<Check>(localVarStatusCode,
+            return new ApiResponse<HealthCheck>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (Check) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Check)));
+                (HealthCheck) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(HealthCheck)));
         }
             
         /// <summary>
@@ -1985,7 +1985,7 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="sourceID">ID of the source</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of IRestResponse (Check)</returns>
+        /// <returns>Task of IRestResponse (HealthCheck)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetSourcesIDHealthAsyncWithIRestResponse (string sourceID, string zapTraceSpan = null)
         {
             // verify the required parameter 'sourceID' is set

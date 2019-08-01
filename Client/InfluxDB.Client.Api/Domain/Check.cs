@@ -27,33 +27,8 @@ namespace InfluxDB.Client.Api.Domain
     /// Check
     /// </summary>
     [DataContract]
-    public partial class Check :  IEquatable<Check>
+    public partial class Check : CheckBase,  IEquatable<Check>
     {
-        /// <summary>
-        /// Defines Status
-        /// </summary>
-        [JsonConverter(typeof(StringEnumConverter))]
-        public enum StatusEnum
-        {
-            /// <summary>
-            /// Enum Pass for value: pass
-            /// </summary>
-            [EnumMember(Value = "pass")]
-            Pass = 1,
-
-            /// <summary>
-            /// Enum Fail for value: fail
-            /// </summary>
-            [EnumMember(Value = "fail")]
-            Fail = 2
-
-        }
-
-        /// <summary>
-        /// Gets or Sets Status
-        /// </summary>
-        [DataMember(Name="status", EmitDefaultValue=false)]
-        public StatusEnum Status { get; set; }
         /// <summary>
         /// Initializes a new instance of the <see cref="Check" /> class.
         /// </summary>
@@ -62,52 +37,9 @@ namespace InfluxDB.Client.Api.Domain
         /// <summary>
         /// Initializes a new instance of the <see cref="Check" /> class.
         /// </summary>
-        /// <param name="name">name (required).</param>
-        /// <param name="message">message.</param>
-        /// <param name="checks">checks.</param>
-        /// <param name="status">status (required).</param>
-        public Check(string name = default(string), string message = default(string), List<Check> checks = default(List<Check>), StatusEnum status = default(StatusEnum))
+        public Check(string name = default(string), string orgID = default(string), DashboardQuery query = default(DashboardQuery), TaskStatusType? status = default(TaskStatusType?), string every = default(string), string offset = default(string), string cron = default(string), List<CheckBaseTags> tags = default(List<CheckBaseTags>), string description = default(string), string statusMessageTemplate = default(string), List<Label> labels = default(List<Label>)) : base(name, orgID, query, status, every, offset, cron, tags, description, statusMessageTemplate, labels)
         {
-            // to ensure "name" is required (not null)
-            if (name == null)
-            {
-                throw new InvalidDataException("name is a required property for Check and cannot be null");
-            }
-            else
-            {
-                this.Name = name;
-            }
-            // to ensure "status" is required (not null)
-            if (status == null)
-            {
-                throw new InvalidDataException("status is a required property for Check and cannot be null");
-            }
-            else
-            {
-                this.Status = status;
-            }
-            this.Message = message;
-            this.Checks = checks;
         }
-
-        /// <summary>
-        /// Gets or Sets Name
-        /// </summary>
-        [DataMember(Name="name", EmitDefaultValue=false)]
-        public string Name { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Message
-        /// </summary>
-        [DataMember(Name="message", EmitDefaultValue=false)]
-        public string Message { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Checks
-        /// </summary>
-        [DataMember(Name="checks", EmitDefaultValue=false)]
-        public List<Check> Checks { get; set; }
-
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -117,10 +49,7 @@ namespace InfluxDB.Client.Api.Domain
         {
             var sb = new StringBuilder();
             sb.Append("class Check {\n");
-            sb.Append("  Name: ").Append(Name).Append("\n");
-            sb.Append("  Message: ").Append(Message).Append("\n");
-            sb.Append("  Checks: ").Append(Checks).Append("\n");
-            sb.Append("  Status: ").Append(Status).Append("\n");
+            sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -129,7 +58,7 @@ namespace InfluxDB.Client.Api.Domain
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public virtual string ToJson()
+        public override string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }
@@ -154,27 +83,7 @@ namespace InfluxDB.Client.Api.Domain
             if (input == null)
                 return false;
 
-            return 
-                (
-                    this.Name == input.Name ||
-                    (this.Name != null &&
-                    this.Name.Equals(input.Name))
-                ) && 
-                (
-                    this.Message == input.Message ||
-                    (this.Message != null &&
-                    this.Message.Equals(input.Message))
-                ) && 
-                (
-                    this.Checks == input.Checks ||
-                    this.Checks != null &&
-                    this.Checks.SequenceEqual(input.Checks)
-                ) && 
-                (
-                    this.Status == input.Status ||
-                    (this.Status != null &&
-                    this.Status.Equals(input.Status))
-                );
+            return base.Equals(input);
         }
 
         /// <summary>
@@ -185,15 +94,7 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                if (this.Name != null)
-                    hashCode = hashCode * 59 + this.Name.GetHashCode();
-                if (this.Message != null)
-                    hashCode = hashCode * 59 + this.Message.GetHashCode();
-                if (this.Checks != null)
-                    hashCode = hashCode * 59 + this.Checks.GetHashCode();
-                if (this.Status != null)
-                    hashCode = hashCode * 59 + this.Status.GetHashCode();
+                int hashCode = base.GetHashCode();
                 return hashCode;
             }
         }

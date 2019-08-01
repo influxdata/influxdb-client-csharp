@@ -190,7 +190,7 @@ namespace InfluxDB.Client.Test
             var health = await _sourcesApi.Health(source);
 
             Assert.IsNotNull(health);
-            Assert.AreEqual(Check.StatusEnum.Pass, health.Status);
+            Assert.AreEqual(HealthCheck.StatusEnum.Pass, health.Status);
             Assert.AreEqual("source is healthy", health.Message);
         }
 

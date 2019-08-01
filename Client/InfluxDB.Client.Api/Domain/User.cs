@@ -64,10 +64,11 @@ namespace InfluxDB.Client.Api.Domain
         /// <summary>
         /// Initializes a new instance of the <see cref="User" /> class.
         /// </summary>
+        /// <param name="oauthID">oauthID.</param>
         /// <param name="name">name (required).</param>
         /// <param name="status">if inactive the user is inactive. (default to StatusEnum.Active).</param>
         /// <param name="links">links.</param>
-        public User(string name = default(string), StatusEnum? status = StatusEnum.Active, UserLinks links = default(UserLinks))
+        public User(string oauthID = default(string), string name = default(string), StatusEnum? status = StatusEnum.Active, UserLinks links = default(UserLinks))
         {
             // to ensure "name" is required (not null)
             if (name == null)
@@ -78,6 +79,7 @@ namespace InfluxDB.Client.Api.Domain
             {
                 this.Name = name;
             }
+            this.OauthID = oauthID;
             // use default value if no "status" provided
             if (status == null)
             {
@@ -95,6 +97,12 @@ namespace InfluxDB.Client.Api.Domain
         /// </summary>
         [DataMember(Name="id", EmitDefaultValue=false)]
         public string Id { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets OauthID
+        /// </summary>
+        [DataMember(Name="oauthID", EmitDefaultValue=false)]
+        public string OauthID { get; set; }
 
         /// <summary>
         /// Gets or Sets Name
@@ -118,6 +126,7 @@ namespace InfluxDB.Client.Api.Domain
             var sb = new StringBuilder();
             sb.Append("class User {\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
+            sb.Append("  OauthID: ").Append(OauthID).Append("\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
             sb.Append("  Status: ").Append(Status).Append("\n");
             sb.Append("  Links: ").Append(Links).Append("\n");
@@ -161,6 +170,11 @@ namespace InfluxDB.Client.Api.Domain
                     this.Id.Equals(input.Id))
                 ) && 
                 (
+                    this.OauthID == input.OauthID ||
+                    (this.OauthID != null &&
+                    this.OauthID.Equals(input.OauthID))
+                ) && 
+                (
                     this.Name == input.Name ||
                     (this.Name != null &&
                     this.Name.Equals(input.Name))
@@ -188,6 +202,8 @@ namespace InfluxDB.Client.Api.Domain
                 int hashCode = 41;
                 if (this.Id != null)
                     hashCode = hashCode * 59 + this.Id.GetHashCode();
+                if (this.OauthID != null)
+                    hashCode = hashCode * 59 + this.OauthID.GetHashCode();
                 if (this.Name != null)
                     hashCode = hashCode * 59 + this.Name.GetHashCode();
                 if (this.Status != null)

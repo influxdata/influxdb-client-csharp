@@ -30,6 +30,44 @@ namespace InfluxDB.Client.Api.Domain
     public partial class Axis :  IEquatable<Axis>
     {
         /// <summary>
+        /// Base represents the radix for formatting axis values.
+        /// </summary>
+        /// <value>Base represents the radix for formatting axis values.</value>
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum BaseEnum
+        {
+            /// <summary>
+            /// Enum Empty for value: 
+            /// </summary>
+            [EnumMember(Value = "")]
+            Empty = 1,
+
+            /// <summary>
+            /// Enum _2 for value: 2
+            /// </summary>
+            [EnumMember(Value = "2")]
+            _2 = 2,
+
+            /// <summary>
+            /// Enum _10 for value: 10
+            /// </summary>
+            [EnumMember(Value = "10")]
+            _10 = 3
+
+        }
+
+        /// <summary>
+        /// Base represents the radix for formatting axis values.
+        /// </summary>
+        /// <value>Base represents the radix for formatting axis values.</value>
+        [DataMember(Name="base", EmitDefaultValue=false)]
+        public BaseEnum? Base { get; set; }
+        /// <summary>
+        /// Gets or Sets Scale
+        /// </summary>
+        [DataMember(Name="scale", EmitDefaultValue=false)]
+        public AxisScale? Scale { get; set; }
+        /// <summary>
         /// Initializes a new instance of the <see cref="Axis" /> class.
         /// </summary>
         /// <param name="bounds">The extents of an axis in the form [lower, upper]. Clients determine whether bounds are to be inclusive or exclusive of their limits.</param>
@@ -37,8 +75,8 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="prefix">Prefix represents a label prefix for formatting axis values..</param>
         /// <param name="suffix">Suffix represents a label suffix for formatting axis values..</param>
         /// <param name="_base">Base represents the radix for formatting axis values..</param>
-        /// <param name="scale">Scale is the axis formatting scale. Supported: \&quot;log\&quot;, \&quot;linear\&quot;.</param>
-        public Axis(List<long?> bounds = default(List<long?>), string label = default(string), string prefix = default(string), string suffix = default(string), string _base = default(string), string scale = default(string))
+        /// <param name="scale">scale.</param>
+        public Axis(List<string> bounds = default(List<string>), string label = default(string), string prefix = default(string), string suffix = default(string), BaseEnum? _base = default(BaseEnum?), AxisScale? scale = default(AxisScale?))
         {
             this.Bounds = bounds;
             this.Label = label;
@@ -53,7 +91,7 @@ namespace InfluxDB.Client.Api.Domain
         /// </summary>
         /// <value>The extents of an axis in the form [lower, upper]. Clients determine whether bounds are to be inclusive or exclusive of their limits</value>
         [DataMember(Name="bounds", EmitDefaultValue=false)]
-        public List<long?> Bounds { get; set; }
+        public List<string> Bounds { get; set; }
 
         /// <summary>
         /// label is a description of this Axis
@@ -76,19 +114,7 @@ namespace InfluxDB.Client.Api.Domain
         [DataMember(Name="suffix", EmitDefaultValue=false)]
         public string Suffix { get; set; }
 
-        /// <summary>
-        /// Base represents the radix for formatting axis values.
-        /// </summary>
-        /// <value>Base represents the radix for formatting axis values.</value>
-        [DataMember(Name="base", EmitDefaultValue=false)]
-        public string Base { get; set; }
 
-        /// <summary>
-        /// Scale is the axis formatting scale. Supported: \&quot;log\&quot;, \&quot;linear\&quot;
-        /// </summary>
-        /// <value>Scale is the axis formatting scale. Supported: \&quot;log\&quot;, \&quot;linear\&quot;</value>
-        [DataMember(Name="scale", EmitDefaultValue=false)]
-        public string Scale { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

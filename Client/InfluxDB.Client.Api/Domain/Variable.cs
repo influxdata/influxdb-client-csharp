@@ -44,7 +44,9 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="selected">selected.</param>
         /// <param name="labels">labels.</param>
         /// <param name="arguments">arguments (required).</param>
-        public Variable(VariableLinks links = default(VariableLinks), string orgID = default(string), string name = default(string), string description = default(string), List<string> selected = default(List<string>), List<Label> labels = default(List<Label>), Object arguments = default(Object))
+        /// <param name="createdAt">createdAt.</param>
+        /// <param name="updatedAt">updatedAt.</param>
+        public Variable(VariableLinks links = default(VariableLinks), string orgID = default(string), string name = default(string), string description = default(string), List<string> selected = default(List<string>), List<Label> labels = default(List<Label>), Object arguments = default(Object), DateTime? createdAt = default(DateTime?), DateTime? updatedAt = default(DateTime?))
         {
             // to ensure "orgID" is required (not null)
             if (orgID == null)
@@ -77,6 +79,8 @@ namespace InfluxDB.Client.Api.Domain
             this.Description = description;
             this.Selected = selected;
             this.Labels = labels;
+            this.CreatedAt = createdAt;
+            this.UpdatedAt = updatedAt;
         }
 
         /// <summary>
@@ -129,6 +133,18 @@ namespace InfluxDB.Client.Api.Domain
         public Object Arguments { get; set; }
 
         /// <summary>
+        /// Gets or Sets CreatedAt
+        /// </summary>
+        [DataMember(Name="createdAt", EmitDefaultValue=false)]
+        public DateTime? CreatedAt { get; set; }
+
+        /// <summary>
+        /// Gets or Sets UpdatedAt
+        /// </summary>
+        [DataMember(Name="updatedAt", EmitDefaultValue=false)]
+        public DateTime? UpdatedAt { get; set; }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -144,6 +160,8 @@ namespace InfluxDB.Client.Api.Domain
             sb.Append("  Selected: ").Append(Selected).Append("\n");
             sb.Append("  Labels: ").Append(Labels).Append("\n");
             sb.Append("  Arguments: ").Append(Arguments).Append("\n");
+            sb.Append("  CreatedAt: ").Append(CreatedAt).Append("\n");
+            sb.Append("  UpdatedAt: ").Append(UpdatedAt).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -217,6 +235,16 @@ namespace InfluxDB.Client.Api.Domain
                     
                     (this.Arguments != null &&
                     this.Arguments.Equals(input.Arguments))
+                ) && 
+                (
+                    this.CreatedAt == input.CreatedAt ||
+                    (this.CreatedAt != null &&
+                    this.CreatedAt.Equals(input.CreatedAt))
+                ) && 
+                (
+                    this.UpdatedAt == input.UpdatedAt ||
+                    (this.UpdatedAt != null &&
+                    this.UpdatedAt.Equals(input.UpdatedAt))
                 );
         }
 
@@ -245,6 +273,10 @@ namespace InfluxDB.Client.Api.Domain
                     hashCode = hashCode * 59 + this.Labels.GetHashCode();
                 if (this.Arguments != null)
                     hashCode = hashCode * 59 + this.Arguments.GetHashCode();
+                if (this.CreatedAt != null)
+                    hashCode = hashCode * 59 + this.CreatedAt.GetHashCode();
+                if (this.UpdatedAt != null)
+                    hashCode = hashCode * 59 + this.UpdatedAt.GetHashCode();
                 return hashCode;
             }
         }

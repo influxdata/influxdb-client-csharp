@@ -30,32 +30,10 @@ namespace InfluxDB.Client.Api.Domain
     public partial class TaskCreateRequest :  IEquatable<TaskCreateRequest>
     {
         /// <summary>
-        /// Starting state of the task. &#39;inactive&#39; tasks are not run until they are updated to &#39;active&#39;
+        /// Gets or Sets Status
         /// </summary>
-        /// <value>Starting state of the task. &#39;inactive&#39; tasks are not run until they are updated to &#39;active&#39;</value>
-        [JsonConverter(typeof(StringEnumConverter))]
-        public enum StatusEnum
-        {
-            /// <summary>
-            /// Enum Active for value: active
-            /// </summary>
-            [EnumMember(Value = "active")]
-            Active = 1,
-
-            /// <summary>
-            /// Enum Inactive for value: inactive
-            /// </summary>
-            [EnumMember(Value = "inactive")]
-            Inactive = 2
-
-        }
-
-        /// <summary>
-        /// Starting state of the task. &#39;inactive&#39; tasks are not run until they are updated to &#39;active&#39;
-        /// </summary>
-        /// <value>Starting state of the task. &#39;inactive&#39; tasks are not run until they are updated to &#39;active&#39;</value>
         [DataMember(Name="status", EmitDefaultValue=false)]
-        public StatusEnum? Status { get; set; }
+        public TaskStatusType? Status { get; set; }
         /// <summary>
         /// Initializes a new instance of the <see cref="TaskCreateRequest" /> class.
         /// </summary>
@@ -66,11 +44,11 @@ namespace InfluxDB.Client.Api.Domain
         /// </summary>
         /// <param name="orgID">The ID of the organization that owns this Task..</param>
         /// <param name="org">The name of the organization that owns this Task..</param>
-        /// <param name="status">Starting state of the task. &#39;inactive&#39; tasks are not run until they are updated to &#39;active&#39; (default to StatusEnum.Active).</param>
+        /// <param name="status">status.</param>
         /// <param name="flux">The Flux script to run for this task. (required).</param>
         /// <param name="description">An optional description of the task..</param>
-        /// <param name="token">The token to use for authenticating this task when it executes queries. If omitted, uses the token associated with the request that creates the task..</param>
-        public TaskCreateRequest(string orgID = default(string), string org = default(string), StatusEnum? status = StatusEnum.Active, string flux = default(string), string description = default(string), string token = default(string))
+        /// <param name="token">The token to use for authenticating this task when it executes queries. (required).</param>
+        public TaskCreateRequest(string orgID = default(string), string org = default(string), TaskStatusType? status = default(TaskStatusType?), string flux = default(string), string description = default(string), string token = default(string))
         {
             // to ensure "flux" is required (not null)
             if (flux == null)
@@ -81,19 +59,19 @@ namespace InfluxDB.Client.Api.Domain
             {
                 this.Flux = flux;
             }
-            this.OrgID = orgID;
-            this.Org = org;
-            // use default value if no "status" provided
-            if (status == null)
+            // to ensure "token" is required (not null)
+            if (token == null)
             {
-                this.Status = StatusEnum.Active;
+                throw new InvalidDataException("token is a required property for TaskCreateRequest and cannot be null");
             }
             else
             {
-                this.Status = status;
+                this.Token = token;
             }
+            this.OrgID = orgID;
+            this.Org = org;
+            this.Status = status;
             this.Description = description;
-            this.Token = token;
         }
 
         /// <summary>
@@ -126,9 +104,9 @@ namespace InfluxDB.Client.Api.Domain
         public string Description { get; set; }
 
         /// <summary>
-        /// The token to use for authenticating this task when it executes queries. If omitted, uses the token associated with the request that creates the task.
+        /// The token to use for authenticating this task when it executes queries.
         /// </summary>
-        /// <value>The token to use for authenticating this task when it executes queries. If omitted, uses the token associated with the request that creates the task.</value>
+        /// <value>The token to use for authenticating this task when it executes queries.</value>
         [DataMember(Name="token", EmitDefaultValue=false)]
         public string Token { get; set; }
 

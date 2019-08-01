@@ -30,32 +30,10 @@ namespace InfluxDB.Client.Api.Domain
     public partial class Task :  IEquatable<Task>
     {
         /// <summary>
-        /// The current status of the task. When updated to &#39;inactive&#39;, cancels all queued jobs of this task.
+        /// Gets or Sets Status
         /// </summary>
-        /// <value>The current status of the task. When updated to &#39;inactive&#39;, cancels all queued jobs of this task.</value>
-        [JsonConverter(typeof(StringEnumConverter))]
-        public enum StatusEnum
-        {
-            /// <summary>
-            /// Enum Active for value: active
-            /// </summary>
-            [EnumMember(Value = "active")]
-            Active = 1,
-
-            /// <summary>
-            /// Enum Inactive for value: inactive
-            /// </summary>
-            [EnumMember(Value = "inactive")]
-            Inactive = 2
-
-        }
-
-        /// <summary>
-        /// The current status of the task. When updated to &#39;inactive&#39;, cancels all queued jobs of this task.
-        /// </summary>
-        /// <value>The current status of the task. When updated to &#39;inactive&#39;, cancels all queued jobs of this task.</value>
         [DataMember(Name="status", EmitDefaultValue=false)]
-        public StatusEnum? Status { get; set; }
+        public TaskStatusType? Status { get; set; }
         /// <summary>
         /// Initializes a new instance of the <see cref="Task" /> class.
         /// </summary>
@@ -68,7 +46,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="org">The name of the organization that owns this Task..</param>
         /// <param name="name">The name of the task. (required).</param>
         /// <param name="description">An optional description of the task..</param>
-        /// <param name="status">The current status of the task. When updated to &#39;inactive&#39;, cancels all queued jobs of this task. (default to StatusEnum.Active).</param>
+        /// <param name="status">status.</param>
         /// <param name="labels">labels.</param>
         /// <param name="authorizationID">The ID of the authorization used when this task communicates with the query engine..</param>
         /// <param name="flux">The Flux script to run for this task. (required).</param>
@@ -76,7 +54,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="cron">A task repetition schedule in the form &#39;* * * * * *&#39;; parsed from Flux..</param>
         /// <param name="offset">Duration to delay after the schedule, before executing the task; parsed from flux, if set to zero it will remove this option and use 0 as the default..</param>
         /// <param name="links">links.</param>
-        public Task(string orgID = default(string), string org = default(string), string name = default(string), string description = default(string), StatusEnum? status = StatusEnum.Active, List<Label> labels = default(List<Label>), string authorizationID = default(string), string flux = default(string), string every = default(string), string cron = default(string), string offset = default(string), TaskLinks links = default(TaskLinks))
+        public Task(string orgID = default(string), string org = default(string), string name = default(string), string description = default(string), TaskStatusType? status = default(TaskStatusType?), List<Label> labels = default(List<Label>), string authorizationID = default(string), string flux = default(string), string every = default(string), string cron = default(string), string offset = default(string), TaskLinks links = default(TaskLinks))
         {
             // to ensure "orgID" is required (not null)
             if (orgID == null)
@@ -107,15 +85,7 @@ namespace InfluxDB.Client.Api.Domain
             }
             this.Org = org;
             this.Description = description;
-            // use default value if no "status" provided
-            if (status == null)
-            {
-                this.Status = StatusEnum.Active;
-            }
-            else
-            {
-                this.Status = status;
-            }
+            this.Status = status;
             this.Labels = labels;
             this.AuthorizationID = authorizationID;
             this.Every = every;

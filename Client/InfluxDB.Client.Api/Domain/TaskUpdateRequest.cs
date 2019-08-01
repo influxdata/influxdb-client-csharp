@@ -30,36 +30,14 @@ namespace InfluxDB.Client.Api.Domain
     public partial class TaskUpdateRequest :  IEquatable<TaskUpdateRequest>
     {
         /// <summary>
-        /// Starting state of the task. &#39;inactive&#39; tasks are not run until they are updated to &#39;active&#39;
+        /// Gets or Sets Status
         /// </summary>
-        /// <value>Starting state of the task. &#39;inactive&#39; tasks are not run until they are updated to &#39;active&#39;</value>
-        [JsonConverter(typeof(StringEnumConverter))]
-        public enum StatusEnum
-        {
-            /// <summary>
-            /// Enum Active for value: active
-            /// </summary>
-            [EnumMember(Value = "active")]
-            Active = 1,
-
-            /// <summary>
-            /// Enum Inactive for value: inactive
-            /// </summary>
-            [EnumMember(Value = "inactive")]
-            Inactive = 2
-
-        }
-
-        /// <summary>
-        /// Starting state of the task. &#39;inactive&#39; tasks are not run until they are updated to &#39;active&#39;
-        /// </summary>
-        /// <value>Starting state of the task. &#39;inactive&#39; tasks are not run until they are updated to &#39;active&#39;</value>
         [DataMember(Name="status", EmitDefaultValue=false)]
-        public StatusEnum? Status { get; set; }
+        public TaskStatusType? Status { get; set; }
         /// <summary>
         /// Initializes a new instance of the <see cref="TaskUpdateRequest" /> class.
         /// </summary>
-        /// <param name="status">Starting state of the task. &#39;inactive&#39; tasks are not run until they are updated to &#39;active&#39; (default to StatusEnum.Active).</param>
+        /// <param name="status">status.</param>
         /// <param name="flux">The Flux script to run for this task..</param>
         /// <param name="name">Override the &#39;name&#39; option in the flux script..</param>
         /// <param name="every">Override the &#39;every&#39; option in the flux script..</param>
@@ -67,17 +45,9 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="offset">Override the &#39;offset&#39; option in the flux script..</param>
         /// <param name="description">An optional description of the task..</param>
         /// <param name="token">Override the existing token associated with the task..</param>
-        public TaskUpdateRequest(StatusEnum? status = StatusEnum.Active, string flux = default(string), string name = default(string), string every = default(string), string cron = default(string), string offset = default(string), string description = default(string), string token = default(string))
+        public TaskUpdateRequest(TaskStatusType? status = default(TaskStatusType?), string flux = default(string), string name = default(string), string every = default(string), string cron = default(string), string offset = default(string), string description = default(string), string token = default(string))
         {
-            // use default value if no "status" provided
-            if (status == null)
-            {
-                this.Status = StatusEnum.Active;
-            }
-            else
-            {
-                this.Status = status;
-            }
+            this.Status = status;
             this.Flux = flux;
             this.Name = name;
             this.Every = every;

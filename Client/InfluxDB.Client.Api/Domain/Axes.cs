@@ -32,14 +32,33 @@ namespace InfluxDB.Client.Api.Domain
         /// <summary>
         /// Initializes a new instance of the <see cref="Axes" /> class.
         /// </summary>
-        /// <param name="x">x.</param>
-        /// <param name="y">y.</param>
-        /// <param name="y2">y2.</param>
-        public Axes(Axis x = default(Axis), Axis y = default(Axis), Axis y2 = default(Axis))
+        [JsonConstructorAttribute]
+        protected Axes() { }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Axes" /> class.
+        /// </summary>
+        /// <param name="x">x (required).</param>
+        /// <param name="y">y (required).</param>
+        public Axes(Axis x = default(Axis), Axis y = default(Axis))
         {
-            this.X = x;
-            this.Y = y;
-            this.Y2 = y2;
+            // to ensure "x" is required (not null)
+            if (x == null)
+            {
+                throw new InvalidDataException("x is a required property for Axes and cannot be null");
+            }
+            else
+            {
+                this.X = x;
+            }
+            // to ensure "y" is required (not null)
+            if (y == null)
+            {
+                throw new InvalidDataException("y is a required property for Axes and cannot be null");
+            }
+            else
+            {
+                this.Y = y;
+            }
         }
 
         /// <summary>
@@ -55,12 +74,6 @@ namespace InfluxDB.Client.Api.Domain
         public Axis Y { get; set; }
 
         /// <summary>
-        /// Gets or Sets Y2
-        /// </summary>
-        [DataMember(Name="y2", EmitDefaultValue=false)]
-        public Axis Y2 { get; set; }
-
-        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -70,7 +83,6 @@ namespace InfluxDB.Client.Api.Domain
             sb.Append("class Axes {\n");
             sb.Append("  X: ").Append(X).Append("\n");
             sb.Append("  Y: ").Append(Y).Append("\n");
-            sb.Append("  Y2: ").Append(Y2).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -114,11 +126,6 @@ namespace InfluxDB.Client.Api.Domain
                     
                     (this.Y != null &&
                     this.Y.Equals(input.Y))
-                ) && 
-                (
-                    
-                    (this.Y2 != null &&
-                    this.Y2.Equals(input.Y2))
                 );
         }
 
@@ -135,8 +142,6 @@ namespace InfluxDB.Client.Api.Domain
                     hashCode = hashCode * 59 + this.X.GetHashCode();
                 if (this.Y != null)
                     hashCode = hashCode * 59 + this.Y.GetHashCode();
-                if (this.Y2 != null)
-                    hashCode = hashCode * 59 + this.Y2.GetHashCode();
                 return hashCode;
             }
         }

@@ -32,8 +32,8 @@ namespace InfluxDB.Client.Api.Service
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Check</returns>
-        Check GetHealth (string zapTraceSpan = null);
+        /// <returns>HealthCheck</returns>
+        HealthCheck GetHealth (string zapTraceSpan = null);
 
         /// <summary>
         /// Get the health of an instance anytime during execution. Allow us to check if the instance is still healthy.
@@ -43,8 +43,8 @@ namespace InfluxDB.Client.Api.Service
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Check</returns>
-        ApiResponse<Check> GetHealthWithHttpInfo (string zapTraceSpan = null);
+        /// <returns>ApiResponse of HealthCheck</returns>
+        ApiResponse<HealthCheck> GetHealthWithHttpInfo (string zapTraceSpan = null);
         #endregion Synchronous Operations
         #region Asynchronous Operations
         /// <summary>
@@ -55,8 +55,8 @@ namespace InfluxDB.Client.Api.Service
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of Check</returns>
-        System.Threading.Tasks.Task<Check> GetHealthAsync (string zapTraceSpan = null);
+        /// <returns>Task of HealthCheck</returns>
+        System.Threading.Tasks.Task<HealthCheck> GetHealthAsync (string zapTraceSpan = null);
 
         /// <summary>
         /// Get the health of an instance anytime during execution. Allow us to check if the instance is still healthy.
@@ -66,8 +66,8 @@ namespace InfluxDB.Client.Api.Service
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ApiResponse (Check)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Check>> GetHealthAsyncWithHttpInfo (string zapTraceSpan = null);
+        /// <returns>Task of ApiResponse (HealthCheck)</returns>
+        System.Threading.Tasks.Task<ApiResponse<HealthCheck>> GetHealthAsyncWithHttpInfo (string zapTraceSpan = null);
         #endregion Asynchronous Operations
     }
 
@@ -173,10 +173,10 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Check</returns>
-        public Check GetHealth (string zapTraceSpan = null)
+        /// <returns>HealthCheck</returns>
+        public HealthCheck GetHealth (string zapTraceSpan = null)
         {
-             ApiResponse<Check> localVarResponse = GetHealthWithHttpInfo(zapTraceSpan);
+             ApiResponse<HealthCheck> localVarResponse = GetHealthWithHttpInfo(zapTraceSpan);
              return localVarResponse.Data;
         }
 
@@ -185,8 +185,8 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Check</returns>
-        public ApiResponse< Check > GetHealthWithHttpInfo (string zapTraceSpan = null)
+        /// <returns>ApiResponse of HealthCheck</returns>
+        public ApiResponse< HealthCheck > GetHealthWithHttpInfo (string zapTraceSpan = null)
         {
 
             var localVarPath = "/health";
@@ -227,9 +227,9 @@ namespace InfluxDB.Client.Api.Service
                 if (exception != null) throw exception;
             }
 
-            return new ApiResponse<Check>(localVarStatusCode,
+            return new ApiResponse<HealthCheck>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (Check) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Check)));
+                (HealthCheck) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(HealthCheck)));
         }
 
         /// <summary>
@@ -237,7 +237,7 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Check</returns>
+        /// <returns>ApiResponse of HealthCheck</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetHealthWithIRestResponseAsync (string zapTraceSpan = null)
         {
 
@@ -287,7 +287,7 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Check</returns>
+        /// <returns>ApiResponse of HealthCheck</returns>
         public IRestResponse GetHealthWithIRestResponse (string zapTraceSpan = null)
         {
 
@@ -337,7 +337,7 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Check</returns>
+        /// <returns>ApiResponse of HealthCheck</returns>
         public RestRequest GetHealthWithRestRequest (string zapTraceSpan = null)
         {
 
@@ -376,10 +376,10 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of Check</returns>
-        public async System.Threading.Tasks.Task<Check> GetHealthAsync (string zapTraceSpan = null)
+        /// <returns>Task of HealthCheck</returns>
+        public async System.Threading.Tasks.Task<HealthCheck> GetHealthAsync (string zapTraceSpan = null)
         {
-             ApiResponse<Check> localVarResponse = await GetHealthAsyncWithHttpInfo(zapTraceSpan);
+             ApiResponse<HealthCheck> localVarResponse = await GetHealthAsyncWithHttpInfo(zapTraceSpan);
              return localVarResponse.Data;
 
         }
@@ -389,8 +389,8 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ApiResponse (Check)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Check>> GetHealthAsyncWithHttpInfo (string zapTraceSpan = null)
+        /// <returns>Task of ApiResponse (HealthCheck)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<HealthCheck>> GetHealthAsyncWithHttpInfo (string zapTraceSpan = null)
         {
             // make the HTTP request
             IRestResponse localVarResponse = await GetHealthAsyncWithIRestResponse(zapTraceSpan);
@@ -403,9 +403,9 @@ namespace InfluxDB.Client.Api.Service
                 if (exception != null) throw exception;
             }
 
-            return new ApiResponse<Check>(localVarStatusCode,
+            return new ApiResponse<HealthCheck>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (Check) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Check)));
+                (HealthCheck) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(HealthCheck)));
         }
             
         /// <summary>
@@ -413,7 +413,7 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of IRestResponse (Check)</returns>
+        /// <returns>Task of IRestResponse (HealthCheck)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetHealthAsyncWithIRestResponse (string zapTraceSpan = null)
         {
 
