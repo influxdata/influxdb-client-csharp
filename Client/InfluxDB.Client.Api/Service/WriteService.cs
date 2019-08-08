@@ -31,7 +31,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="org">specifies the destination organization for writes</param>
+        /// <param name="org">specifies the destination organization for writes; take either the ID or Name interchangeably; if both orgID and org are specified, org takes precedence.</param>
         /// <param name="bucket">specifies the destination bucket for writes</param>
         /// <param name="body">line protocol body</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
@@ -39,9 +39,10 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="contentType">Content-Type is used to indicate the format of the data sent to the server. (optional, default to text/plain; charset&#x3D;utf-8)</param>
         /// <param name="contentLength">Content-Length is an entity header is indicating the size of the entity-body, in bytes, sent to the database. If the length is greater than the database max body configuration option, a 413 response is sent. (optional)</param>
         /// <param name="accept">specifies the return content format. (optional, default to application/json)</param>
+        /// <param name="orgID">specifies the ID of the destination organization for writes; if both orgID and org are specified, org takes precedence. (optional)</param>
         /// <param name="precision">specifies the precision for the unix timestamps within the body line-protocol (optional)</param>
         /// <returns></returns>
-        void PostWrite (string org, string bucket, byte[] body, string zapTraceSpan = null, string contentEncoding = null, string contentType = null, int? contentLength = null, string accept = null, WritePrecision? precision = null);
+        void PostWrite (string org, string bucket, byte[] body, string zapTraceSpan = null, string contentEncoding = null, string contentType = null, int? contentLength = null, string accept = null, string orgID = null, WritePrecision? precision = null);
 
         /// <summary>
         /// write time-series data into influxdb
@@ -50,7 +51,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="org">specifies the destination organization for writes</param>
+        /// <param name="org">specifies the destination organization for writes; take either the ID or Name interchangeably; if both orgID and org are specified, org takes precedence.</param>
         /// <param name="bucket">specifies the destination bucket for writes</param>
         /// <param name="body">line protocol body</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
@@ -58,9 +59,10 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="contentType">Content-Type is used to indicate the format of the data sent to the server. (optional, default to text/plain; charset&#x3D;utf-8)</param>
         /// <param name="contentLength">Content-Length is an entity header is indicating the size of the entity-body, in bytes, sent to the database. If the length is greater than the database max body configuration option, a 413 response is sent. (optional)</param>
         /// <param name="accept">specifies the return content format. (optional, default to application/json)</param>
+        /// <param name="orgID">specifies the ID of the destination organization for writes; if both orgID and org are specified, org takes precedence. (optional)</param>
         /// <param name="precision">specifies the precision for the unix timestamps within the body line-protocol (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<Object> PostWriteWithHttpInfo (string org, string bucket, byte[] body, string zapTraceSpan = null, string contentEncoding = null, string contentType = null, int? contentLength = null, string accept = null, WritePrecision? precision = null);
+        ApiResponse<Object> PostWriteWithHttpInfo (string org, string bucket, byte[] body, string zapTraceSpan = null, string contentEncoding = null, string contentType = null, int? contentLength = null, string accept = null, string orgID = null, WritePrecision? precision = null);
         #endregion Synchronous Operations
         #region Asynchronous Operations
         /// <summary>
@@ -70,7 +72,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="org">specifies the destination organization for writes</param>
+        /// <param name="org">specifies the destination organization for writes; take either the ID or Name interchangeably; if both orgID and org are specified, org takes precedence.</param>
         /// <param name="bucket">specifies the destination bucket for writes</param>
         /// <param name="body">line protocol body</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
@@ -78,9 +80,10 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="contentType">Content-Type is used to indicate the format of the data sent to the server. (optional, default to text/plain; charset&#x3D;utf-8)</param>
         /// <param name="contentLength">Content-Length is an entity header is indicating the size of the entity-body, in bytes, sent to the database. If the length is greater than the database max body configuration option, a 413 response is sent. (optional)</param>
         /// <param name="accept">specifies the return content format. (optional, default to application/json)</param>
+        /// <param name="orgID">specifies the ID of the destination organization for writes; if both orgID and org are specified, org takes precedence. (optional)</param>
         /// <param name="precision">specifies the precision for the unix timestamps within the body line-protocol (optional)</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task PostWriteAsync (string org, string bucket, byte[] body, string zapTraceSpan = null, string contentEncoding = null, string contentType = null, int? contentLength = null, string accept = null, WritePrecision? precision = null);
+        System.Threading.Tasks.Task PostWriteAsync (string org, string bucket, byte[] body, string zapTraceSpan = null, string contentEncoding = null, string contentType = null, int? contentLength = null, string accept = null, string orgID = null, WritePrecision? precision = null);
 
         /// <summary>
         /// write time-series data into influxdb
@@ -89,7 +92,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="org">specifies the destination organization for writes</param>
+        /// <param name="org">specifies the destination organization for writes; take either the ID or Name interchangeably; if both orgID and org are specified, org takes precedence.</param>
         /// <param name="bucket">specifies the destination bucket for writes</param>
         /// <param name="body">line protocol body</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
@@ -97,9 +100,10 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="contentType">Content-Type is used to indicate the format of the data sent to the server. (optional, default to text/plain; charset&#x3D;utf-8)</param>
         /// <param name="contentLength">Content-Length is an entity header is indicating the size of the entity-body, in bytes, sent to the database. If the length is greater than the database max body configuration option, a 413 response is sent. (optional)</param>
         /// <param name="accept">specifies the return content format. (optional, default to application/json)</param>
+        /// <param name="orgID">specifies the ID of the destination organization for writes; if both orgID and org are specified, org takes precedence. (optional)</param>
         /// <param name="precision">specifies the precision for the unix timestamps within the body line-protocol (optional)</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> PostWriteAsyncWithHttpInfo (string org, string bucket, byte[] body, string zapTraceSpan = null, string contentEncoding = null, string contentType = null, int? contentLength = null, string accept = null, WritePrecision? precision = null);
+        System.Threading.Tasks.Task<ApiResponse<Object>> PostWriteAsyncWithHttpInfo (string org, string bucket, byte[] body, string zapTraceSpan = null, string contentEncoding = null, string contentType = null, int? contentLength = null, string accept = null, string orgID = null, WritePrecision? precision = null);
         #endregion Asynchronous Operations
     }
 
@@ -204,7 +208,7 @@ namespace InfluxDB.Client.Api.Service
         /// write time-series data into influxdb 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="org">specifies the destination organization for writes</param>
+        /// <param name="org">specifies the destination organization for writes; take either the ID or Name interchangeably; if both orgID and org are specified, org takes precedence.</param>
         /// <param name="bucket">specifies the destination bucket for writes</param>
         /// <param name="body">line protocol body</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
@@ -212,18 +216,19 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="contentType">Content-Type is used to indicate the format of the data sent to the server. (optional, default to text/plain; charset&#x3D;utf-8)</param>
         /// <param name="contentLength">Content-Length is an entity header is indicating the size of the entity-body, in bytes, sent to the database. If the length is greater than the database max body configuration option, a 413 response is sent. (optional)</param>
         /// <param name="accept">specifies the return content format. (optional, default to application/json)</param>
+        /// <param name="orgID">specifies the ID of the destination organization for writes; if both orgID and org are specified, org takes precedence. (optional)</param>
         /// <param name="precision">specifies the precision for the unix timestamps within the body line-protocol (optional)</param>
         /// <returns></returns>
-        public void PostWrite (string org, string bucket, byte[] body, string zapTraceSpan = null, string contentEncoding = null, string contentType = null, int? contentLength = null, string accept = null, WritePrecision? precision = null)
+        public void PostWrite (string org, string bucket, byte[] body, string zapTraceSpan = null, string contentEncoding = null, string contentType = null, int? contentLength = null, string accept = null, string orgID = null, WritePrecision? precision = null)
         {
-             PostWriteWithHttpInfo(org, bucket, body, zapTraceSpan, contentEncoding, contentType, contentLength, accept, precision);
+             PostWriteWithHttpInfo(org, bucket, body, zapTraceSpan, contentEncoding, contentType, contentLength, accept, orgID, precision);
         }
 
         /// <summary>
         /// write time-series data into influxdb 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="org">specifies the destination organization for writes</param>
+        /// <param name="org">specifies the destination organization for writes; take either the ID or Name interchangeably; if both orgID and org are specified, org takes precedence.</param>
         /// <param name="bucket">specifies the destination bucket for writes</param>
         /// <param name="body">line protocol body</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
@@ -231,9 +236,10 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="contentType">Content-Type is used to indicate the format of the data sent to the server. (optional, default to text/plain; charset&#x3D;utf-8)</param>
         /// <param name="contentLength">Content-Length is an entity header is indicating the size of the entity-body, in bytes, sent to the database. If the length is greater than the database max body configuration option, a 413 response is sent. (optional)</param>
         /// <param name="accept">specifies the return content format. (optional, default to application/json)</param>
+        /// <param name="orgID">specifies the ID of the destination organization for writes; if both orgID and org are specified, org takes precedence. (optional)</param>
         /// <param name="precision">specifies the precision for the unix timestamps within the body line-protocol (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public ApiResponse<Object> PostWriteWithHttpInfo (string org, string bucket, byte[] body, string zapTraceSpan = null, string contentEncoding = null, string contentType = null, int? contentLength = null, string accept = null, WritePrecision? precision = null)
+        public ApiResponse<Object> PostWriteWithHttpInfo (string org, string bucket, byte[] body, string zapTraceSpan = null, string contentEncoding = null, string contentType = null, int? contentLength = null, string accept = null, string orgID = null, WritePrecision? precision = null)
         {
             // verify the required parameter 'org' is set
             if (org == null)
@@ -260,6 +266,7 @@ namespace InfluxDB.Client.Api.Service
             String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             if (org != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
+            if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
             if (bucket != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "bucket", bucket)); // query parameter
             if (precision != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "precision", precision)); // query parameter
             if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
@@ -308,7 +315,7 @@ namespace InfluxDB.Client.Api.Service
         /// write time-series data into influxdb 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="org">specifies the destination organization for writes</param>
+        /// <param name="org">specifies the destination organization for writes; take either the ID or Name interchangeably; if both orgID and org are specified, org takes precedence.</param>
         /// <param name="bucket">specifies the destination bucket for writes</param>
         /// <param name="body">line protocol body</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
@@ -316,9 +323,10 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="contentType">Content-Type is used to indicate the format of the data sent to the server. (optional, default to text/plain; charset&#x3D;utf-8)</param>
         /// <param name="contentLength">Content-Length is an entity header is indicating the size of the entity-body, in bytes, sent to the database. If the length is greater than the database max body configuration option, a 413 response is sent. (optional)</param>
         /// <param name="accept">specifies the return content format. (optional, default to application/json)</param>
+        /// <param name="orgID">specifies the ID of the destination organization for writes; if both orgID and org are specified, org takes precedence. (optional)</param>
         /// <param name="precision">specifies the precision for the unix timestamps within the body line-protocol (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> PostWriteWithIRestResponseAsync (string org, string bucket, byte[] body, string zapTraceSpan = null, string contentEncoding = null, string contentType = null, int? contentLength = null, string accept = null, WritePrecision? precision = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PostWriteWithIRestResponseAsync (string org, string bucket, byte[] body, string zapTraceSpan = null, string contentEncoding = null, string contentType = null, int? contentLength = null, string accept = null, string orgID = null, WritePrecision? precision = null)
         {
             // verify the required parameter 'org' is set
             if (org == null)
@@ -345,6 +353,7 @@ namespace InfluxDB.Client.Api.Service
             String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             if (org != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
+            if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
             if (bucket != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "bucket", bucket)); // query parameter
             if (precision != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "precision", precision)); // query parameter
             if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
@@ -391,7 +400,7 @@ namespace InfluxDB.Client.Api.Service
         /// write time-series data into influxdb 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="org">specifies the destination organization for writes</param>
+        /// <param name="org">specifies the destination organization for writes; take either the ID or Name interchangeably; if both orgID and org are specified, org takes precedence.</param>
         /// <param name="bucket">specifies the destination bucket for writes</param>
         /// <param name="body">line protocol body</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
@@ -399,9 +408,10 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="contentType">Content-Type is used to indicate the format of the data sent to the server. (optional, default to text/plain; charset&#x3D;utf-8)</param>
         /// <param name="contentLength">Content-Length is an entity header is indicating the size of the entity-body, in bytes, sent to the database. If the length is greater than the database max body configuration option, a 413 response is sent. (optional)</param>
         /// <param name="accept">specifies the return content format. (optional, default to application/json)</param>
+        /// <param name="orgID">specifies the ID of the destination organization for writes; if both orgID and org are specified, org takes precedence. (optional)</param>
         /// <param name="precision">specifies the precision for the unix timestamps within the body line-protocol (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public IRestResponse PostWriteWithIRestResponse (string org, string bucket, byte[] body, string zapTraceSpan = null, string contentEncoding = null, string contentType = null, int? contentLength = null, string accept = null, WritePrecision? precision = null)
+        public IRestResponse PostWriteWithIRestResponse (string org, string bucket, byte[] body, string zapTraceSpan = null, string contentEncoding = null, string contentType = null, int? contentLength = null, string accept = null, string orgID = null, WritePrecision? precision = null)
         {
             // verify the required parameter 'org' is set
             if (org == null)
@@ -428,6 +438,7 @@ namespace InfluxDB.Client.Api.Service
             String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             if (org != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
+            if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
             if (bucket != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "bucket", bucket)); // query parameter
             if (precision != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "precision", precision)); // query parameter
             if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
@@ -474,7 +485,7 @@ namespace InfluxDB.Client.Api.Service
         /// write time-series data into influxdb 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="org">specifies the destination organization for writes</param>
+        /// <param name="org">specifies the destination organization for writes; take either the ID or Name interchangeably; if both orgID and org are specified, org takes precedence.</param>
         /// <param name="bucket">specifies the destination bucket for writes</param>
         /// <param name="body">line protocol body</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
@@ -482,9 +493,10 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="contentType">Content-Type is used to indicate the format of the data sent to the server. (optional, default to text/plain; charset&#x3D;utf-8)</param>
         /// <param name="contentLength">Content-Length is an entity header is indicating the size of the entity-body, in bytes, sent to the database. If the length is greater than the database max body configuration option, a 413 response is sent. (optional)</param>
         /// <param name="accept">specifies the return content format. (optional, default to application/json)</param>
+        /// <param name="orgID">specifies the ID of the destination organization for writes; if both orgID and org are specified, org takes precedence. (optional)</param>
         /// <param name="precision">specifies the precision for the unix timestamps within the body line-protocol (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public RestRequest PostWriteWithRestRequest (string org, string bucket, byte[] body, string zapTraceSpan = null, string contentEncoding = null, string contentType = null, int? contentLength = null, string accept = null, WritePrecision? precision = null)
+        public RestRequest PostWriteWithRestRequest (string org, string bucket, byte[] body, string zapTraceSpan = null, string contentEncoding = null, string contentType = null, int? contentLength = null, string accept = null, string orgID = null, WritePrecision? precision = null)
         {
             // verify the required parameter 'org' is set
             if (org == null)
@@ -511,6 +523,7 @@ namespace InfluxDB.Client.Api.Service
             String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             if (org != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
+            if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
             if (bucket != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "bucket", bucket)); // query parameter
             if (precision != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "precision", precision)); // query parameter
             if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
@@ -546,7 +559,7 @@ namespace InfluxDB.Client.Api.Service
         /// write time-series data into influxdb 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="org">specifies the destination organization for writes</param>
+        /// <param name="org">specifies the destination organization for writes; take either the ID or Name interchangeably; if both orgID and org are specified, org takes precedence.</param>
         /// <param name="bucket">specifies the destination bucket for writes</param>
         /// <param name="body">line protocol body</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
@@ -554,11 +567,12 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="contentType">Content-Type is used to indicate the format of the data sent to the server. (optional, default to text/plain; charset&#x3D;utf-8)</param>
         /// <param name="contentLength">Content-Length is an entity header is indicating the size of the entity-body, in bytes, sent to the database. If the length is greater than the database max body configuration option, a 413 response is sent. (optional)</param>
         /// <param name="accept">specifies the return content format. (optional, default to application/json)</param>
+        /// <param name="orgID">specifies the ID of the destination organization for writes; if both orgID and org are specified, org takes precedence. (optional)</param>
         /// <param name="precision">specifies the precision for the unix timestamps within the body line-protocol (optional)</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task PostWriteAsync (string org, string bucket, byte[] body, string zapTraceSpan = null, string contentEncoding = null, string contentType = null, int? contentLength = null, string accept = null, WritePrecision? precision = null)
+        public async System.Threading.Tasks.Task PostWriteAsync (string org, string bucket, byte[] body, string zapTraceSpan = null, string contentEncoding = null, string contentType = null, int? contentLength = null, string accept = null, string orgID = null, WritePrecision? precision = null)
         {
-             await PostWriteAsyncWithHttpInfo(org, bucket, body, zapTraceSpan, contentEncoding, contentType, contentLength, accept, precision);
+             await PostWriteAsyncWithHttpInfo(org, bucket, body, zapTraceSpan, contentEncoding, contentType, contentLength, accept, orgID, precision);
 
         }
 
@@ -566,7 +580,7 @@ namespace InfluxDB.Client.Api.Service
         /// write time-series data into influxdb 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="org">specifies the destination organization for writes</param>
+        /// <param name="org">specifies the destination organization for writes; take either the ID or Name interchangeably; if both orgID and org are specified, org takes precedence.</param>
         /// <param name="bucket">specifies the destination bucket for writes</param>
         /// <param name="body">line protocol body</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
@@ -574,12 +588,13 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="contentType">Content-Type is used to indicate the format of the data sent to the server. (optional, default to text/plain; charset&#x3D;utf-8)</param>
         /// <param name="contentLength">Content-Length is an entity header is indicating the size of the entity-body, in bytes, sent to the database. If the length is greater than the database max body configuration option, a 413 response is sent. (optional)</param>
         /// <param name="accept">specifies the return content format. (optional, default to application/json)</param>
+        /// <param name="orgID">specifies the ID of the destination organization for writes; if both orgID and org are specified, org takes precedence. (optional)</param>
         /// <param name="precision">specifies the precision for the unix timestamps within the body line-protocol (optional)</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Object>> PostWriteAsyncWithHttpInfo (string org, string bucket, byte[] body, string zapTraceSpan = null, string contentEncoding = null, string contentType = null, int? contentLength = null, string accept = null, WritePrecision? precision = null)
+        public async System.Threading.Tasks.Task<ApiResponse<Object>> PostWriteAsyncWithHttpInfo (string org, string bucket, byte[] body, string zapTraceSpan = null, string contentEncoding = null, string contentType = null, int? contentLength = null, string accept = null, string orgID = null, WritePrecision? precision = null)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await PostWriteAsyncWithIRestResponse(org, bucket, body, zapTraceSpan, contentEncoding, contentType, contentLength, accept, precision);
+            IRestResponse localVarResponse = await PostWriteAsyncWithIRestResponse(org, bucket, body, zapTraceSpan, contentEncoding, contentType, contentLength, accept, orgID, precision);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -598,7 +613,7 @@ namespace InfluxDB.Client.Api.Service
         /// write time-series data into influxdb 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="org">specifies the destination organization for writes</param>
+        /// <param name="org">specifies the destination organization for writes; take either the ID or Name interchangeably; if both orgID and org are specified, org takes precedence.</param>
         /// <param name="bucket">specifies the destination bucket for writes</param>
         /// <param name="body">line protocol body</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
@@ -606,9 +621,10 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="contentType">Content-Type is used to indicate the format of the data sent to the server. (optional, default to text/plain; charset&#x3D;utf-8)</param>
         /// <param name="contentLength">Content-Length is an entity header is indicating the size of the entity-body, in bytes, sent to the database. If the length is greater than the database max body configuration option, a 413 response is sent. (optional)</param>
         /// <param name="accept">specifies the return content format. (optional, default to application/json)</param>
+        /// <param name="orgID">specifies the ID of the destination organization for writes; if both orgID and org are specified, org takes precedence. (optional)</param>
         /// <param name="precision">specifies the precision for the unix timestamps within the body line-protocol (optional)</param>
         /// <returns>Task of IRestResponse</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> PostWriteAsyncWithIRestResponse (string org, string bucket, byte[] body, string zapTraceSpan = null, string contentEncoding = null, string contentType = null, int? contentLength = null, string accept = null, WritePrecision? precision = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PostWriteAsyncWithIRestResponse (string org, string bucket, byte[] body, string zapTraceSpan = null, string contentEncoding = null, string contentType = null, int? contentLength = null, string accept = null, string orgID = null, WritePrecision? precision = null)
         {
             // verify the required parameter 'org' is set
             if (org == null)
@@ -635,6 +651,7 @@ namespace InfluxDB.Client.Api.Service
             String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             if (org != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
+            if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
             if (bucket != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "bucket", bucket)); // query parameter
             if (precision != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "precision", precision)); // query parameter
             if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter

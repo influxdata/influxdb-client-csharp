@@ -42,6 +42,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <summary>
         /// Initializes a new instance of the <see cref="Task" /> class.
         /// </summary>
+        /// <param name="type">The type of task, this can be used for filtering tasks on list actions..</param>
         /// <param name="orgID">The ID of the organization that owns this Task. (required).</param>
         /// <param name="org">The name of the organization that owns this Task..</param>
         /// <param name="name">The name of the task. (required).</param>
@@ -54,7 +55,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="cron">A task repetition schedule in the form &#39;* * * * * *&#39;; parsed from Flux..</param>
         /// <param name="offset">Duration to delay after the schedule, before executing the task; parsed from flux, if set to zero it will remove this option and use 0 as the default..</param>
         /// <param name="links">links.</param>
-        public Task(string orgID = default(string), string org = default(string), string name = default(string), string description = default(string), TaskStatusType? status = default(TaskStatusType?), List<Label> labels = default(List<Label>), string authorizationID = default(string), string flux = default(string), string every = default(string), string cron = default(string), string offset = default(string), TaskLinks links = default(TaskLinks))
+        public Task(string type = default(string), string orgID = default(string), string org = default(string), string name = default(string), string description = default(string), TaskStatusType? status = default(TaskStatusType?), List<Label> labels = default(List<Label>), string authorizationID = default(string), string flux = default(string), string every = default(string), string cron = default(string), string offset = default(string), TaskLinks links = default(TaskLinks))
         {
             // to ensure "orgID" is required (not null)
             if (orgID == null)
@@ -83,6 +84,7 @@ namespace InfluxDB.Client.Api.Domain
             {
                 this.Flux = flux;
             }
+            this.Type = type;
             this.Org = org;
             this.Description = description;
             this.Status = status;
@@ -99,6 +101,13 @@ namespace InfluxDB.Client.Api.Domain
         /// </summary>
         [DataMember(Name="id", EmitDefaultValue=false)]
         public string Id { get; private set; }
+
+        /// <summary>
+        /// The type of task, this can be used for filtering tasks on list actions.
+        /// </summary>
+        /// <value>The type of task, this can be used for filtering tasks on list actions.</value>
+        [DataMember(Name="type", EmitDefaultValue=false)]
+        public string Type { get; set; }
 
         /// <summary>
         /// The ID of the organization that owns this Task.
@@ -204,6 +213,7 @@ namespace InfluxDB.Client.Api.Domain
             var sb = new StringBuilder();
             sb.Append("class Task {\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
+            sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  OrgID: ").Append(OrgID).Append("\n");
             sb.Append("  Org: ").Append(Org).Append("\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
@@ -257,6 +267,11 @@ namespace InfluxDB.Client.Api.Domain
                     this.Id == input.Id ||
                     (this.Id != null &&
                     this.Id.Equals(input.Id))
+                ) && 
+                (
+                    this.Type == input.Type ||
+                    (this.Type != null &&
+                    this.Type.Equals(input.Type))
                 ) && 
                 (
                     this.OrgID == input.OrgID ||
@@ -346,6 +361,8 @@ namespace InfluxDB.Client.Api.Domain
                 int hashCode = 41;
                 if (this.Id != null)
                     hashCode = hashCode * 59 + this.Id.GetHashCode();
+                if (this.Type != null)
+                    hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.OrgID != null)
                     hashCode = hashCode * 59 + this.OrgID.GetHashCode();
                 if (this.Org != null)

@@ -104,7 +104,7 @@ namespace InfluxDB.Client
                         .Defer(() =>
                             service.PostWriteAsyncWithIRestResponse(orgId, bucket,
                                     Encoding.UTF8.GetBytes(lineProtocol), null,
-                                    "utf-8", "text/plain", null, "application/json", precision)
+                                    "utf-8", "text/plain", null, "application/json", null, precision)
                                 .ToObservable())
                         .RetryWhen(f => f.SelectMany(e =>
                         {
@@ -113,16 +113,15 @@ namespace InfluxDB.Client
                                 //
                                 // This types is not able to retry
                                 //
-                                if (httpException.Status == 400 || httpException.Status == 401 ||
-                                    httpException.Status == 403 || httpException.Status == 413)
+                                if (httpException.Status != 429 && httpException.Status != 503)
                                     throw httpException;
 
                                 var retryInterval = (httpException.RetryAfter * 1000 ?? writeOptions.RetryInterval) +
                                                     JitterDelay(writeOptions);
 
-                                var retriable = new WriteRetriableErrorEvent(orgId, bucket, precision, lineProtocol,
+                                var retryable = new WriteRetriableErrorEvent(orgId, bucket, precision, lineProtocol,
                                     httpException, retryInterval);
-                                Publish(retriable);
+                                Publish(retryable);
 
                                 return Observable.Timer(TimeSpan.FromMilliseconds(retryInterval));
                             }

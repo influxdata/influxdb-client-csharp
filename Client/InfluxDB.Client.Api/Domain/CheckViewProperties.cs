@@ -78,8 +78,10 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="type">type (required).</param>
         /// <param name="shape">shape (required).</param>
         /// <param name="checkID">checkID (required).</param>
-        /// <param name="check">check (required).</param>
-        public CheckViewProperties(TypeEnum type = default(TypeEnum), ShapeEnum shape = default(ShapeEnum), string checkID = default(string), Check check = default(Check)) : base()
+        /// <param name="check">check.</param>
+        /// <param name="queries">queries (required).</param>
+        /// <param name="colors">Colors define color encoding of data into a visualization (required).</param>
+        public CheckViewProperties(TypeEnum type = default(TypeEnum), ShapeEnum shape = default(ShapeEnum), string checkID = default(string), Check check = default(Check), List<DashboardQuery> queries = default(List<DashboardQuery>), List<string> colors = default(List<string>)) : base()
         {
             // to ensure "type" is required (not null)
             if (type == null)
@@ -108,15 +110,25 @@ namespace InfluxDB.Client.Api.Domain
             {
                 this.CheckID = checkID;
             }
-            // to ensure "check" is required (not null)
-            if (check == null)
+            // to ensure "queries" is required (not null)
+            if (queries == null)
             {
-                throw new InvalidDataException("check is a required property for CheckViewProperties and cannot be null");
+                throw new InvalidDataException("queries is a required property for CheckViewProperties and cannot be null");
             }
             else
             {
-                this.Check = check;
+                this.Queries = queries;
             }
+            // to ensure "colors" is required (not null)
+            if (colors == null)
+            {
+                throw new InvalidDataException("colors is a required property for CheckViewProperties and cannot be null");
+            }
+            else
+            {
+                this.Colors = colors;
+            }
+            this.Check = check;
         }
 
 
@@ -135,6 +147,19 @@ namespace InfluxDB.Client.Api.Domain
         public Check Check { get; set; }
 
         /// <summary>
+        /// Gets or Sets Queries
+        /// </summary>
+        [DataMember(Name="queries", EmitDefaultValue=false)]
+        public List<DashboardQuery> Queries { get; set; }
+
+        /// <summary>
+        /// Colors define color encoding of data into a visualization
+        /// </summary>
+        /// <value>Colors define color encoding of data into a visualization</value>
+        [DataMember(Name="colors", EmitDefaultValue=false)]
+        public List<string> Colors { get; set; }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -147,6 +172,8 @@ namespace InfluxDB.Client.Api.Domain
             sb.Append("  Shape: ").Append(Shape).Append("\n");
             sb.Append("  CheckID: ").Append(CheckID).Append("\n");
             sb.Append("  Check: ").Append(Check).Append("\n");
+            sb.Append("  Queries: ").Append(Queries).Append("\n");
+            sb.Append("  Colors: ").Append(Colors).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -200,6 +227,16 @@ namespace InfluxDB.Client.Api.Domain
                     
                     (this.Check != null &&
                     this.Check.Equals(input.Check))
+                ) && base.Equals(input) && 
+                (
+                    this.Queries == input.Queries ||
+                    this.Queries != null &&
+                    this.Queries.SequenceEqual(input.Queries)
+                ) && base.Equals(input) && 
+                (
+                    this.Colors == input.Colors ||
+                    this.Colors != null &&
+                    this.Colors.SequenceEqual(input.Colors)
                 );
         }
 
@@ -220,6 +257,10 @@ namespace InfluxDB.Client.Api.Domain
                     hashCode = hashCode * 59 + this.CheckID.GetHashCode();
                 if (this.Check != null)
                     hashCode = hashCode * 59 + this.Check.GetHashCode();
+                if (this.Queries != null)
+                    hashCode = hashCode * 59 + this.Queries.GetHashCode();
+                if (this.Colors != null)
+                    hashCode = hashCode * 59 + this.Colors.GetHashCode();
                 return hashCode;
             }
         }

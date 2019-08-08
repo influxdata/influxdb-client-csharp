@@ -12,7 +12,7 @@ namespace InfluxDB.Client
     public class TasksApi
     {
         private readonly TasksService _service;
-        
+
         protected internal TasksApi(TasksService service)
         {
             Arguments.CheckNotNull(service, nameof(service));
@@ -49,11 +49,12 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(token, nameof(token));
 
             var status = (TaskStatusType) Enum.Parse(typeof(TaskStatusType), task.Status.ToString());
-            var taskCreateRequest = new TaskCreateRequest(task.OrgID, task.Org, status, task.Flux, task.Description, token);
+            var taskCreateRequest = new TaskCreateRequest(orgID: task.OrgID, org: task.Org, status: status,
+                flux: task.Flux, description: task.Description, token: token);
 
             return await CreateTask(taskCreateRequest);
         }
-        
+
         /// <summary>
         /// Create a new task.
         /// </summary>
@@ -181,7 +182,7 @@ namespace InfluxDB.Client
             return await UpdateTask(task.Id, request);
         }
 
-        
+
         /// <summary>
         /// Update a task. This will cancel all queued runs.
         /// </summary>
@@ -231,7 +232,7 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(taskId, nameof(taskId));
             Arguments.CheckNonEmptyString(token, nameof(token));
 
-            return await FindTaskById(taskId).ContinueWith(t=> CloneTask(t.Result, token)).Unwrap();
+            return await FindTaskById(taskId).ContinueWith(t => CloneTask(t.Result, token)).Unwrap();
         }
 
         /// <summary>
@@ -246,8 +247,9 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(token, nameof(token));
 
             var status = (TaskStatusType) Enum.Parse(typeof(TaskStatusType), task.Status.ToString());
-            var cloned = new TaskCreateRequest(task.OrgID, task.Org, status, task.Flux, task.Description, token);
-            
+            var cloned = new TaskCreateRequest(orgID: task.OrgID, org: task.Org, status: status,
+                flux: task.Flux, description: task.Description, token: token);
+
             return await CreateTask(cloned).ContinueWith(created =>
             {
                 //
@@ -575,7 +577,8 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(taskId, nameof(taskId));
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
 
-            return await _service.GetTasksIDRunsAsync(taskId, null, null, limit, afterTime, beforeTime).ContinueWith(t => t.Result._Runs);
+            return await _service.GetTasksIDRunsAsync(taskId, null, null, limit, afterTime, beforeTime)
+                .ContinueWith(t => t.Result._Runs);
         }
 
         /// <summary>
@@ -721,7 +724,7 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(labelId, nameof(labelId));
 
             var mapping = new LabelMapping(labelId);
-            
+
             return _service.PostTasksIDLabelsAsync(taskId, mapping).ContinueWith(t => t.Result.Label);
         }
 
@@ -761,7 +764,7 @@ namespace InfluxDB.Client
 
             if (every != null) Arguments.CheckDuration(every, nameof(every));
 
-            var task = new Task(orgId, null, name, null, TaskStatusType.Active, null, null, flux);
+            var task = new Task(orgID: orgId, name: name, status: TaskStatusType.Active, flux: flux);
 
             var repetition = "";
             if (every != null)
