@@ -91,6 +91,37 @@ namespace InfluxDB.Client.Test
             Assert.AreEqual(2, records[1].GetValue());
             Assert.AreEqual("level water_level", records[1].GetField());
         }
+        
+        [Test]
+        public async Task WriteAndQueryByOrganizationName()
+        {
+            var bucketName = _bucket.Name;
+
+            const string record1 = "h2o_feet,location=coyote_creek level\\ water_level=1.0 1";
+            const string record2 = "h2o_feet,location=coyote_creek level\\ water_level=2.0 2";
+
+            _writeApi = Client.GetWriteApi();
+            _writeApi.WriteRecords(bucketName, _organization.Name, WritePrecision.Ns,
+                new List<string> {record1, record2});
+            _writeApi.Flush();
+
+            var query = await _queryApi.Query(
+                "from(bucket:\"" + bucketName + "\") |> range(start: 1970-01-01T00:00:00.000000001Z)",
+                _organization.Name);
+
+            Assert.AreEqual(1, query.Count);
+
+            var records = query[0].Records;
+            Assert.AreEqual(2, records.Count);
+
+            Assert.AreEqual("h2o_feet", records[0].GetMeasurement());
+            Assert.AreEqual(1, records[0].GetValue());
+            Assert.AreEqual("level water_level", records[0].GetField());
+
+            Assert.AreEqual("h2o_feet", records[1].GetMeasurement());
+            Assert.AreEqual(2, records[1].GetValue());
+            Assert.AreEqual("level water_level", records[1].GetField());
+        }
 
         [Test]
         public async Task WriteRecordsParams()

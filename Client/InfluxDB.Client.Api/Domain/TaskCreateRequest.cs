@@ -42,13 +42,14 @@ namespace InfluxDB.Client.Api.Domain
         /// <summary>
         /// Initializes a new instance of the <see cref="TaskCreateRequest" /> class.
         /// </summary>
+        /// <param name="type">The type of task, this can be used for filtering tasks on list actions..</param>
         /// <param name="orgID">The ID of the organization that owns this Task..</param>
         /// <param name="org">The name of the organization that owns this Task..</param>
         /// <param name="status">status.</param>
         /// <param name="flux">The Flux script to run for this task. (required).</param>
         /// <param name="description">An optional description of the task..</param>
         /// <param name="token">The token to use for authenticating this task when it executes queries. (required).</param>
-        public TaskCreateRequest(string orgID = default(string), string org = default(string), TaskStatusType? status = default(TaskStatusType?), string flux = default(string), string description = default(string), string token = default(string))
+        public TaskCreateRequest(string type = default(string), string orgID = default(string), string org = default(string), TaskStatusType? status = default(TaskStatusType?), string flux = default(string), string description = default(string), string token = default(string))
         {
             // to ensure "flux" is required (not null)
             if (flux == null)
@@ -68,11 +69,19 @@ namespace InfluxDB.Client.Api.Domain
             {
                 this.Token = token;
             }
+            this.Type = type;
             this.OrgID = orgID;
             this.Org = org;
             this.Status = status;
             this.Description = description;
         }
+
+        /// <summary>
+        /// The type of task, this can be used for filtering tasks on list actions.
+        /// </summary>
+        /// <value>The type of task, this can be used for filtering tasks on list actions.</value>
+        [DataMember(Name="type", EmitDefaultValue=false)]
+        public string Type { get; set; }
 
         /// <summary>
         /// The ID of the organization that owns this Task.
@@ -118,6 +127,7 @@ namespace InfluxDB.Client.Api.Domain
         {
             var sb = new StringBuilder();
             sb.Append("class TaskCreateRequest {\n");
+            sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  OrgID: ").Append(OrgID).Append("\n");
             sb.Append("  Org: ").Append(Org).Append("\n");
             sb.Append("  Status: ").Append(Status).Append("\n");
@@ -159,6 +169,11 @@ namespace InfluxDB.Client.Api.Domain
 
             return 
                 (
+                    this.Type == input.Type ||
+                    (this.Type != null &&
+                    this.Type.Equals(input.Type))
+                ) && 
+                (
                     this.OrgID == input.OrgID ||
                     (this.OrgID != null &&
                     this.OrgID.Equals(input.OrgID))
@@ -199,6 +214,8 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
+                if (this.Type != null)
+                    hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.OrgID != null)
                     hashCode = hashCode * 59 + this.OrgID.GetHashCode();
                 if (this.Org != null)

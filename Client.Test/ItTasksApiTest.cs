@@ -133,8 +133,8 @@ namespace InfluxDB.Client.Test
 
             var flux = $"option task = {{\nname: \"{taskName}\",\nevery: 1h\n}}\n\n{TaskFlux}";
 
-            var task = new Api.Domain.Task(_organization.Id, _organization.Name,
-                taskName, "testing task", TaskStatusType.Active, null, null, flux);
+            var task = new Api.Domain.Task(orgID:_organization.Id, org:_organization.Name,
+                name: taskName, description: "testing task", status: TaskStatusType.Active, flux: flux);
 
             task = await _tasksApi.CreateTask(task, _token);
 
@@ -194,8 +194,8 @@ namespace InfluxDB.Client.Test
 
             var flux = $"option task = {{\nname: \"{taskName}\",\nevery: 1h,\noffset: 30m\n}}\n\n{TaskFlux}";
 
-            var task = new Api.Domain.Task(_organization.Id, _organization.Name, taskName,
-                null, TaskStatusType.Active, null, null, flux);
+            var task = new Api.Domain.Task(orgID:_organization.Id, org:_organization.Name,
+                name: taskName, status: TaskStatusType.Active, flux: flux);
 
             task = await _tasksApi.CreateTask(task, _token);
 
