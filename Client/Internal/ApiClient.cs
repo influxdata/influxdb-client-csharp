@@ -16,19 +16,22 @@ namespace InfluxDB.Client.Api.Client
 
         private readonly InfluxDBClientOptions _options;
         private readonly LoggingHandler _loggingHandler;
+        private readonly GzipHandler _gzipHandler;
 
         private char[] _sessionToken;
         private bool _signout;
 
-        public ApiClient(InfluxDBClientOptions options, LoggingHandler loggingHandler)
+        public ApiClient(InfluxDBClientOptions options, LoggingHandler loggingHandler, GzipHandler gzipHandler)
         {
             _options = options;
             _loggingHandler = loggingHandler;
+            _gzipHandler = gzipHandler;
 
             var timeoutTotalMilliseconds = (int) options.Timeout.TotalMilliseconds;
             var totalMilliseconds = (int) options.ReadWriteTimeout.TotalMilliseconds;
 
             RestClient = new RestClient(options.Url);
+            RestClient.AutomaticDecompression = false;
             Configuration = new Configuration
             {
                 ApiClient = this,
@@ -64,11 +67,13 @@ namespace InfluxDB.Client.Api.Client
             }
             
             _loggingHandler.BeforeIntercept(request);
+            _gzipHandler.BeforeIntercept(request);
         }
 
         internal T AfterIntercept<T>(int statusCode, Func<IList<HttpHeader>> headers, T body)
         {
-            return (T) _loggingHandler.AfterIntercept(statusCode, headers, body);
+            var uncompressed = _gzipHandler.AfterIntercept(statusCode, headers, body);
+            return (T) _loggingHandler.AfterIntercept(statusCode, headers, uncompressed);
         }
 
         private void InitToken()

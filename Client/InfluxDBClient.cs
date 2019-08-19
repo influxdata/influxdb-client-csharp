@@ -20,6 +20,7 @@ namespace InfluxDB.Client
         private readonly ExceptionFactory _exceptionFactory;
         private readonly HealthService _healthService;
         private readonly LoggingHandler _loggingHandler;
+        private readonly GzipHandler _gzipHandler;
         private readonly ReadyService _readyService;
 
         private readonly SetupService _setupService;
@@ -33,8 +34,9 @@ namespace InfluxDB.Client
 
             _options = options;
             _loggingHandler = new LoggingHandler(options.LogLevel);
+            _gzipHandler = new GzipHandler();
 
-            _apiClient = new ApiClient(options, _loggingHandler);
+            _apiClient = new ApiClient(options, _loggingHandler, _gzipHandler);
 
             _exceptionFactory = (methodName, response) =>
                 !response.IsSuccessful ? HttpException.Create(response) : null;
@@ -259,6 +261,39 @@ namespace InfluxDB.Client
         public LogLevel GetLogLevel()
         {
             return _loggingHandler.Level;
+        }
+
+        /// <summary>
+        /// Enable Gzip compress for http request body.
+        ///
+        /// <para>Currently only the "Write" and "Query" endpoints supports the Gzip compression.</para>
+        /// </summary>
+        /// <returns></returns>
+        public InfluxDBClient EnableGzip()
+        {
+            _gzipHandler.EnableGzip();
+            
+            return this;
+        }
+        
+        /// <summary>
+        /// Disable Gzip compress for http request body.
+        /// </summary>
+        /// <returns>this</returns>
+        public InfluxDBClient DisableGzip()
+        {
+            _gzipHandler.DisableGzip();
+            
+            return this;
+        }
+        
+        /// <summary>
+        /// Returns whether Gzip compress for http request body is enabled.
+        /// </summary>
+        /// <returns>true if gzip is enabled.</returns>
+        public bool IsGzipEnabled()
+        {
+            return _gzipHandler.IsEnabledGzip();
         }
 
         /// <summary>

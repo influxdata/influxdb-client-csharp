@@ -685,7 +685,7 @@ The following options are supported:
 The `readWriteTimeout` and `timeout` supports `ms`, `s` and `m` as unit. Default is milliseconds.
 
 ### Gzip support
-`InfluxDBClient` does not enable gzip compress for http request body by default. If you want to enable gzip to reduce transfer data's size, you can call:
+`InfluxDBClient` does not enable gzip compress for http request by default. If you want to enable gzip to reduce transfer data's size, you can call:
 
 ```c#
 influxDBClient.EnableGzip();

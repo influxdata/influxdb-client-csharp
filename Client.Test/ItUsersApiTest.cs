@@ -90,8 +90,7 @@ namespace InfluxDB.Client.Test
 
             Assert.IsTrue(userLogs.Any());
             Assert.AreEqual(userLogs[userLogs.Count - 1].Description, "User Updated");
-            //TODO https://github.com/influxdata/influxdb/issues/12544
-            // Assert.AreEqual(userLogs[userLogs.Count - 1].UserId, user.Id);
+            Assert.AreEqual(userLogs[userLogs.Count - 1].UserID, user.Id);
             Assert.IsTrue(userLogs[userLogs.Count - 1].Time > now);
         }
 

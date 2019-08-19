@@ -768,6 +768,40 @@ namespace InfluxDB.Client.Test
             Assert.AreEqual("California Miner", tables[0].Records[0].GetValueByKey("customer"));
             Assert.AreEqual("v1.00", tables[0].Records[0].GetValueByKey("version"));
         }
+        
+        [Test]
+        public async Task EnabledGzip()
+        {
+            Client.EnableGzip();
+            
+            var bucketName = _bucket.Name;
+
+            const string record1 = "h2o_feet,location=coyote_creek level\\ water_level=1.0 1";
+            const string record2 = "h2o_feet,location=coyote_creek level\\ water_level=2.0 2";
+
+            _writeApi = Client.GetWriteApi();
+            _writeApi.WriteRecords(bucketName, _organization.Id, WritePrecision.Ns,
+                new List<string> {record1, record2});
+            _writeApi.Flush();
+
+            var query = await _queryApi.Query(
+                "from(bucket:\"" + bucketName + "\") |> range(start: 1970-01-01T00:00:00.000000001Z)",
+                _organization.Id);
+
+            Assert.AreEqual(1, query.Count);
+
+            var records = query[0].Records;
+            Assert.AreEqual(2, records.Count);
+
+            Assert.AreEqual("h2o_feet", records[0].GetMeasurement());
+            Assert.AreEqual(1, records[0].GetValue());
+            Assert.AreEqual("level water_level", records[0].GetField());
+
+            Assert.AreEqual("h2o_feet", records[1].GetMeasurement());
+            Assert.AreEqual(2, records[1].GetValue());
+            Assert.AreEqual("level water_level", records[1].GetField());
+        }
+
 
         [Measurement("h2o")]
         private class H20Measurement

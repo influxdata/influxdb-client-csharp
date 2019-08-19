@@ -37,7 +37,8 @@ namespace InfluxDB.Client.Test
                 .Given(Request.Create().UsingGet())
                 .RespondWith(CreateResponse("{\"status\":\"unknown\"}", "application/json"));
 
-            var ioe = Assert.ThrowsAsync<ApiException>(async () =>await  _client.GetAuthorizationsApi().FindAuthorizationById("id"));
+            var ioe = Assert.ThrowsAsync<ApiException>(async () =>
+                await _client.GetAuthorizationsApi().FindAuthorizationById("id"));
 
             Assert.IsTrue(ioe.Message.StartsWith("Error converting value \"unknown\" to typ"));
         }
@@ -74,6 +75,20 @@ namespace InfluxDB.Client.Test
             var logs = await _client.GetBucketsApi().FindBucketLogs("id");
 
             Assert.AreEqual(20, logs.Count);
+        }
+
+        [Test]
+        public void Gzip()
+        {
+            Assert.IsFalse(_client.IsGzipEnabled());
+
+            // Enable GZIP
+            _client.EnableGzip();
+            Assert.IsTrue(_client.IsGzipEnabled());
+
+            // Disable GZIP
+            _client.DisableGzip();
+            Assert.IsFalse(_client.IsGzipEnabled());
         }
     }
 }
