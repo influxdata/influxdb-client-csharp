@@ -1,5 +1,9 @@
 ## 1.0.0.M3 [unreleased]
 
+### Features
+1. [#29](https://github.com/influxdata/influxdb-client-csharp/issues/29): Added support for gzip compression of query response and write body 
+
+
 ### Bugs
 1. [#27](https://github.com/influxdata/influxdb-client-csharp/issues/27): The org parameter takes either the ID or Name interchangeably
 
