@@ -3,11 +3,11 @@
 > This library is under development and no stable version has been released yet.  
 > The API can change at any moment.
 
-[![Build Status](https://travis-ci.org/bonitoo-io/influxdb-client-csharp.svg?branch=master)](https://travis-ci.org/bonitoo-io/influxdb-client-csharp)
-[![codecov](https://codecov.io/gh/bonitoo-io/influxdb-client-csharp/branch/master/graph/badge.svg)](https://codecov.io/gh/bonitoo-io/influxdb-client-csharp)
-[![License](https://img.shields.io/github/license/bonitoo-io/influxdb-client-csharp.svg)](https://github.com/bonitoo-io/influxdb-client-csharp/blob/master/LICENSE)
-[![GitHub issues](https://img.shields.io/github/issues-raw/bonitoo-io/influxdb-client-csharp.svg)](https://github.com/bonitoo-io/influxdb-client-csharp/issues)
-[![GitHub pull requests](https://img.shields.io/github/issues-pr-raw/bonitoo-io/influxdb-client-csharp.svg)](https://github.com/bonitoo-io/influxdb-client-csharp/pulls)
+[![Build Status](https://travis-ci.org/influxdata/influxdb-client-csharp.svg?branch=master)](https://travis-ci.org/influxdata/influxdb-client-csharp)
+[![codecov](https://codecov.io/gh/influxdata/influxdb-client-csharp/branch/master/graph/badge.svg)](https://codecov.io/gh/influxdata/influxdb-client-csharp)
+[![License](https://img.shields.io/github/license/influxdata/influxdb-client-csharp.svg)](https://github.com/influxdata/influxdb-client-csharp/blob/master/LICENSE)
+[![GitHub issues](https://img.shields.io/github/issues-raw/influxdata/influxdb-client-csharp.svg)](https://github.com/influxdata/influxdb-client-csharp/issues)
+[![GitHub pull requests](https://img.shields.io/github/issues-pr-raw/influxdata/influxdb-client-csharp.svg)](https://github.com/influxdata/influxdb-client-csharp/pulls)
 
 This repository contains the reference C# client for the InfluxDB 2.0.
 
@@ -27,7 +27,7 @@ This repository contains the reference C# client for the InfluxDB 2.0.
     - Querying data using the Flux language
     - Writing data using
         - [Line Protocol](https://docs.influxdata.com/influxdb/v1.6/write_protocols/line_protocol_tutorial/) 
-        - [Data Point](https://github.com/bonitoo-io/influxdb-client-csharp/blob/master/Client/Writes/Point.cs#L15) 
+        - [Data Point](https://github.com/influxdata/influxdb-client-csharp/blob/master/Client/Writes/Point.cs#L15) 
         - POCO
     - InfluxDB 2.0 Management API client for managing
         - sources, buckets

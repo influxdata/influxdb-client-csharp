@@ -24,7 +24,7 @@ jobs:
         - dotnet test Client.Legacy.Test
         - dotnet test Client.Test
     - stage: deploy
-      if: branch = master AND repo = bonitoo-io/influxdb-client-csharp AND type IN (push)
+      if: branch = master AND repo = influxdata/influxdb-client-csharp AND type IN (push)
       script:
         - dotnet tool install --tool-path="./DotnetVersion/" dotnet-version-cli 
         - VERSION="$(./DotnetVersion/dotnet-version -f Client.Core/Client.Core.csproj | tail -1 | awk '{$1=$1};1')"

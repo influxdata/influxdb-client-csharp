@@ -25,7 +25,7 @@ The reference client that allows query, write and management (bucket, organizati
 
 ## Queries
 
-For querying data we use [QueryApi](https://github.com/bonitoo-io/influxdb-client-csharp/blob/master/Client/QueryApi.cs#L1) that allow perform synchronous, asynchronous and also use raw query response.
+For querying data we use [QueryApi](https://github.com/influxdata/influxdb-client-csharp/blob/master/Client/QueryApi.cs#L1) that allow perform synchronous, asynchronous and also use raw query response.
 
 ### Synchronous query
 
@@ -299,7 +299,7 @@ namespace Examples
 
 ## Writes
 
-For writing data we use [WriteApi](https://github.com/bonitoo-io/influxdb-client-csharp/blob/master/Client/WriteApi.cs#L1) that supports:
+For writing data we use [WriteApi](https://github.com/influxdata/influxdb-client-csharp/blob/master/Client/WriteApi.cs#L1) that supports:
 
 1. writing data using [InfluxDB Line Protocol](https://docs.influxdata.com/influxdb/v1.6/write_protocols/line_protocol_tutorial/), Data Point, POCO 
 2. use batching for writes
@@ -552,18 +552,18 @@ The client has following management API:
 
 | API endpoint | Description | Implementation |
 | --- | --- | --- |
-| **/api/v2/authorizations** | Managing authorization data | [AuthorizationsApi](https://github.com/bonitoo-io/influxdb-client-csharp/blob/master/Client/AuthorizationsApi.cs#L1) |
-| **/api/v2/buckets** | Managing bucket data | [BucketsApi](https://github.com/bonitoo-io/influxdb-client-csharp/blob/master/Client/BucketsApi.cs#L1) |
-| **/api/v2/orgs** | Managing organization data | [OrganizationsApi](https://github.com/bonitoo-io/influxdb-client-csharp/blob/master/Client/OrganizationsApi.cs#L1) |
-| **/api/v2/users** | Managing user data | [UsersApi](https://github.com/bonitoo-io/influxdb-client-csharp/blob/master/Client/UsersApi.cs#L1) |
-| **/api/v2/sources** | Managing sources | [SourcesApi](https://github.com/bonitoo-io/influxdb-client-csharp/blob/master/Client/SourcesApi.cs#L1) |
-| **/api/v2/tasks** | Managing one-off and recurring tasks | [TasksApi](https://github.com/bonitoo-io/influxdb-client-csharp/blob/master/Client/TasksApi.cs#L1) |
-| **/api/v2/scrapers** | Managing ScraperTarget data | [ScraperTargetsApi](https://github.com/bonitoo-io/influxdb-client-csharp/blob/master/Client/ScraperTargetsApi.cs#L1) |
-| **/api/v2/labels** | Managing resource labels | [LabelsApi](https://github.com/bonitoo-io/influxdb-client-csharp/blob/master/Client/LabelsApi.cs#L1) |
-| **/api/v2/telegrafs** | Managing telegraf config data | [TelegrafsApi](https://github.com/bonitoo-io/influxdb-client-csharp/blob/master/Client/TelegrafsApi.cs#L1) |
-| **/api/v2/setup** | Managing onboarding setup | [InfluxDBClient#OnBoarding()](https://github.com/bonitoo-io/influxdb-client-csharp/blob/master/Client/InfluxDBClient.cs#L191-) |
-| **/ready** | Get the readiness of a instance at startup| [InfluxDBClient#Ready()](https://github.com/bonitoo-io/influxdb-client-csharp/blob/master/Client/InfluxDBClient.cs#L169--) |
-| **/health** | Get the health of an instance anytime during execution | [InfluxDBClient#Health()](https://github.com/bonitoo-io/influxdb-client-csharp/blob/master/Client/InfluxDBClient.cs#L160--) |
+| **/api/v2/authorizations** | Managing authorization data | [AuthorizationsApi](https://github.com/influxdata/influxdb-client-csharp/blob/master/Client/AuthorizationsApi.cs#L1) |
+| **/api/v2/buckets** | Managing bucket data | [BucketsApi](https://github.com/influxdata/influxdb-client-csharp/blob/master/Client/BucketsApi.cs#L1) |
+| **/api/v2/orgs** | Managing organization data | [OrganizationsApi](https://github.com/influxdata/influxdb-client-csharp/blob/master/Client/OrganizationsApi.cs#L1) |
+| **/api/v2/users** | Managing user data | [UsersApi](https://github.com/influxdata/influxdb-client-csharp/blob/master/Client/UsersApi.cs#L1) |
+| **/api/v2/sources** | Managing sources | [SourcesApi](https://github.com/influxdata/influxdb-client-csharp/blob/master/Client/SourcesApi.cs#L1) |
+| **/api/v2/tasks** | Managing one-off and recurring tasks | [TasksApi](https://github.com/influxdata/influxdb-client-csharp/blob/master/Client/TasksApi.cs#L1) |
+| **/api/v2/scrapers** | Managing ScraperTarget data | [ScraperTargetsApi](https://github.com/influxdata/influxdb-client-csharp/blob/master/Client/ScraperTargetsApi.cs#L1) |
+| **/api/v2/labels** | Managing resource labels | [LabelsApi](https://github.com/influxdata/influxdb-client-csharp/blob/master/Client/LabelsApi.cs#L1) |
+| **/api/v2/telegrafs** | Managing telegraf config data | [TelegrafsApi](https://github.com/influxdata/influxdb-client-csharp/blob/master/Client/TelegrafsApi.cs#L1) |
+| **/api/v2/setup** | Managing onboarding setup | [InfluxDBClient#OnBoarding()](https://github.com/influxdata/influxdb-client-csharp/blob/master/Client/InfluxDBClient.cs#L191-) |
+| **/ready** | Get the readiness of a instance at startup| [InfluxDBClient#Ready()](https://github.com/influxdata/influxdb-client-csharp/blob/master/Client/InfluxDBClient.cs#L169--) |
+| **/health** | Get the health of an instance anytime during execution | [InfluxDBClient#Health()](https://github.com/influxdata/influxdb-client-csharp/blob/master/Client/InfluxDBClient.cs#L160--) |
 
 The following example demonstrates how to use a InfluxDB 2.0 Management API. For further information see endpoints implementation.
 

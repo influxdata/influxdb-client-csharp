@@ -10,13 +10,13 @@
 
         <PackageId>InfluxDB.Client</PackageId>
         <PackageTags>influxdata;timeseries;flux;influxdb</PackageTags>
-        <PackageIconUrl>https://raw.githubusercontent.com/bonitoo-io/influxdb-client-csharp/master/Assets/influxdata.jpg</PackageIconUrl>
-        <PackageProjectUrl>https://github.com/bonitoo-io/influxdb-client-csharp/tree/master/Client</PackageProjectUrl>
-        <PackageLicenseUrl>https://raw.githubusercontent.com/bonitoo-io/influxdb-client-csharp/master/LICENSE</PackageLicenseUrl>
-        <RepositoryUrl>https://github.com/bonitoo-io/influxdb-client-csharp</RepositoryUrl>
+        <PackageIconUrl>https://raw.githubusercontent.com/influxdata/influxdb-client-csharp/master/Assets/influxdata.jpg</PackageIconUrl>
+        <PackageProjectUrl>https://github.com/influxdata/influxdb-client-csharp/tree/master/Client</PackageProjectUrl>
+        <PackageLicenseUrl>https://raw.githubusercontent.com/influxdata/influxdb-client-csharp/master/LICENSE</PackageLicenseUrl>
+        <RepositoryUrl>https://github.com/influxdata/influxdb-client-csharp</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
 
-        <PackageReleaseNotes>https://github.com/bonitoo-io/influxdb-client-csharp/CHANGELOG.md</PackageReleaseNotes>
+        <PackageReleaseNotes>https://github.com/influxdata/influxdb-client-csharp/blob/master/CHANGELOG.md</PackageReleaseNotes>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
         <RootNamespace>InfluxDB.Client</RootNamespace>
     </PropertyGroup>
@@ -30,10 +30,6 @@
       <PackageReference Include="Microsoft.Net.Http.Headers" Version="2.1.1" />
       <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.5.0" />
       <PackageReference Include="System.Reactive" Version="4.1.2" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Domain" />
     </ItemGroup>
 
 </Project>
