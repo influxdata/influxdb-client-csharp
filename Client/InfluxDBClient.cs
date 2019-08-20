@@ -264,7 +264,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Enable Gzip compress for http request body.
+        /// Enable Gzip compress for http requests.
         ///
         /// <para>Currently only the "Write" and "Query" endpoints supports the Gzip compression.</para>
         /// </summary>
