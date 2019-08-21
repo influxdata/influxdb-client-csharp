@@ -24,39 +24,22 @@ using OpenAPIDateConverter = InfluxDB.Client.Api.Client.OpenAPIDateConverter;
 namespace InfluxDB.Client.Api.Domain
 {
     /// <summary>
-    /// SMTPNotificationEndpoint
+    /// HTTPNotificationRule
     /// </summary>
     [DataContract]
-    public partial class SMTPNotificationEndpoint : NotificationEndpoint,  IEquatable<SMTPNotificationEndpoint>
+    public partial class HTTPNotificationRule : HTTPNotificationRuleBase,  IEquatable<HTTPNotificationRule>
     {
         /// <summary>
-        /// Defines Name
+        /// Initializes a new instance of the <see cref="HTTPNotificationRule" /> class.
         /// </summary>
-        [JsonConverter(typeof(StringEnumConverter))]
-        public enum NameEnum
-        {
-            /// <summary>
-            /// Enum Smtp for value: smtp
-            /// </summary>
-            [EnumMember(Value = "smtp")]
-            Smtp = 1
-
-        }
-
+        [JsonConstructorAttribute]
+        protected HTTPNotificationRule() { }
         /// <summary>
-        /// Gets or Sets Name
+        /// Initializes a new instance of the <see cref="HTTPNotificationRule" /> class.
         /// </summary>
-        [DataMember(Name="name", EmitDefaultValue=false)]
-        public NameEnum? Name { get; set; }
-        /// <summary>
-        /// Initializes a new instance of the <see cref="SMTPNotificationEndpoint" /> class.
-        /// </summary>
-        /// <param name="name">name.</param>
-        public SMTPNotificationEndpoint(NameEnum? name = default(NameEnum?), string id = default(string), string orgID = default(string), string userID = default(string), string description = default(string), StatusEnum? status = StatusEnum.Active, List<Label> labels = default(List<Label>)) : base(id, orgID, userID, description, status, labels)
+        public HTTPNotificationRule(TypeEnum type = default(TypeEnum), string url = default(string)) : base(type, url)
         {
-            this.Name = name;
         }
-
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -65,9 +48,8 @@ namespace InfluxDB.Client.Api.Domain
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class SMTPNotificationEndpoint {\n");
+            sb.Append("class HTTPNotificationRule {\n");
             sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
-            sb.Append("  Name: ").Append(Name).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -88,25 +70,20 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as SMTPNotificationEndpoint);
+            return this.Equals(input as HTTPNotificationRule);
         }
 
         /// <summary>
-        /// Returns true if SMTPNotificationEndpoint instances are equal
+        /// Returns true if HTTPNotificationRule instances are equal
         /// </summary>
-        /// <param name="input">Instance of SMTPNotificationEndpoint to be compared</param>
+        /// <param name="input">Instance of HTTPNotificationRule to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(SMTPNotificationEndpoint input)
+        public bool Equals(HTTPNotificationRule input)
         {
             if (input == null)
                 return false;
 
-            return base.Equals(input) && 
-                (
-                    this.Name == input.Name ||
-                    (this.Name != null &&
-                    this.Name.Equals(input.Name))
-                );
+            return base.Equals(input);
         }
 
         /// <summary>
@@ -118,8 +95,6 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = base.GetHashCode();
-                if (this.Name != null)
-                    hashCode = hashCode * 59 + this.Name.GetHashCode();
                 return hashCode;
             }
         }

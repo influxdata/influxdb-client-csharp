@@ -24,22 +24,34 @@ using OpenAPIDateConverter = InfluxDB.Client.Api.Client.OpenAPIDateConverter;
 namespace InfluxDB.Client.Api.Domain
 {
     /// <summary>
-    /// Threshold
+    /// ThresholdBase
     /// </summary>
     [DataContract]
-    public partial class Threshold : ThresholdBase,  IEquatable<Threshold>
+    public partial class ThresholdBase :  IEquatable<ThresholdBase>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Threshold" /> class.
+        /// Gets or Sets Level
         /// </summary>
-        [JsonConstructorAttribute]
-        protected Threshold() { }
+        [DataMember(Name="level", EmitDefaultValue=false)]
+        public CheckStatusLevel? Level { get; set; }
         /// <summary>
-        /// Initializes a new instance of the <see cref="Threshold" /> class.
+        /// Initializes a new instance of the <see cref="ThresholdBase" /> class.
         /// </summary>
-        public Threshold(CheckStatusLevel? level = default(CheckStatusLevel?), bool? allValues = default(bool?)) : base(level, allValues)
+        /// <param name="level">level.</param>
+        /// <param name="allValues">if true, only alert if all values meet threshold.</param>
+        public ThresholdBase(CheckStatusLevel? level = default(CheckStatusLevel?), bool? allValues = default(bool?))
         {
+            this.Level = level;
+            this.AllValues = allValues;
         }
+
+
+        /// <summary>
+        /// if true, only alert if all values meet threshold
+        /// </summary>
+        /// <value>if true, only alert if all values meet threshold</value>
+        [DataMember(Name="allValues", EmitDefaultValue=false)]
+        public bool? AllValues { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -48,8 +60,9 @@ namespace InfluxDB.Client.Api.Domain
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class Threshold {\n");
-            sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
+            sb.Append("class ThresholdBase {\n");
+            sb.Append("  Level: ").Append(Level).Append("\n");
+            sb.Append("  AllValues: ").Append(AllValues).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -58,7 +71,7 @@ namespace InfluxDB.Client.Api.Domain
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public override string ToJson()
+        public virtual string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }
@@ -70,20 +83,30 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as Threshold);
+            return this.Equals(input as ThresholdBase);
         }
 
         /// <summary>
-        /// Returns true if Threshold instances are equal
+        /// Returns true if ThresholdBase instances are equal
         /// </summary>
-        /// <param name="input">Instance of Threshold to be compared</param>
+        /// <param name="input">Instance of ThresholdBase to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(Threshold input)
+        public bool Equals(ThresholdBase input)
         {
             if (input == null)
                 return false;
 
-            return base.Equals(input);
+            return 
+                (
+                    this.Level == input.Level ||
+                    (this.Level != null &&
+                    this.Level.Equals(input.Level))
+                ) && 
+                (
+                    this.AllValues == input.AllValues ||
+                    (this.AllValues != null &&
+                    this.AllValues.Equals(input.AllValues))
+                );
         }
 
         /// <summary>
@@ -94,7 +117,11 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = base.GetHashCode();
+                int hashCode = 41;
+                if (this.Level != null)
+                    hashCode = hashCode * 59 + this.Level.GetHashCode();
+                if (this.AllValues != null)
+                    hashCode = hashCode * 59 + this.AllValues.GetHashCode();
                 return hashCode;
             }
         }

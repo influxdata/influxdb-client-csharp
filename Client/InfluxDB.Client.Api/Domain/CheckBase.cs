@@ -112,11 +112,11 @@ namespace InfluxDB.Client.Api.Domain
         public string OrgID { get; set; }
 
         /// <summary>
-        /// The ID of the authorization used to create this check.
+        /// The ID of creator used to create this check.
         /// </summary>
-        /// <value>The ID of the authorization used to create this check.</value>
-        [DataMember(Name="authorizationID", EmitDefaultValue=false)]
-        public string AuthorizationID { get; private set; }
+        /// <value>The ID of creator used to create this check.</value>
+        [DataMember(Name="ownerID", EmitDefaultValue=false)]
+        public string OwnerID { get; private set; }
 
         /// <summary>
         /// Gets or Sets CreatedAt
@@ -196,7 +196,7 @@ namespace InfluxDB.Client.Api.Domain
             sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
             sb.Append("  OrgID: ").Append(OrgID).Append("\n");
-            sb.Append("  AuthorizationID: ").Append(AuthorizationID).Append("\n");
+            sb.Append("  OwnerID: ").Append(OwnerID).Append("\n");
             sb.Append("  CreatedAt: ").Append(CreatedAt).Append("\n");
             sb.Append("  UpdatedAt: ").Append(UpdatedAt).Append("\n");
             sb.Append("  Query: ").Append(Query).Append("\n");
@@ -258,9 +258,9 @@ namespace InfluxDB.Client.Api.Domain
                     this.OrgID.Equals(input.OrgID))
                 ) && 
                 (
-                    this.AuthorizationID == input.AuthorizationID ||
-                    (this.AuthorizationID != null &&
-                    this.AuthorizationID.Equals(input.AuthorizationID))
+                    this.OwnerID == input.OwnerID ||
+                    (this.OwnerID != null &&
+                    this.OwnerID.Equals(input.OwnerID))
                 ) && 
                 (
                     this.CreatedAt == input.CreatedAt ||
@@ -334,8 +334,8 @@ namespace InfluxDB.Client.Api.Domain
                     hashCode = hashCode * 59 + this.Name.GetHashCode();
                 if (this.OrgID != null)
                     hashCode = hashCode * 59 + this.OrgID.GetHashCode();
-                if (this.AuthorizationID != null)
-                    hashCode = hashCode * 59 + this.AuthorizationID.GetHashCode();
+                if (this.OwnerID != null)
+                    hashCode = hashCode * 59 + this.OwnerID.GetHashCode();
                 if (this.CreatedAt != null)
                     hashCode = hashCode * 59 + this.CreatedAt.GetHashCode();
                 if (this.UpdatedAt != null)

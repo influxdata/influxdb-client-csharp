@@ -32,5 +32,4 @@ DotnetVersion/
 **/.openapi-generator-ignore
 **/.openapi-generator/**
 
-
-
+/test.sh

@@ -133,6 +133,7 @@ namespace InfluxDB.Client.Api.Domain
             {new []{ "slack" }, typeof(SlackNotificationRule)},
             {new []{ "smtp" }, typeof(SMTPNotificationRule)},
             {new []{ "pagerduty" }, typeof(PagerDutyNotificationRule)},
+            {new []{ "http" }, typeof(HTTPNotificationRule)},
         };
 
         public override bool CanConvert(Type objectType)

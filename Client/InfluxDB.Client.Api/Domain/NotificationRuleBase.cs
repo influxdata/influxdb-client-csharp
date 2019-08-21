@@ -42,7 +42,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <summary>
         /// Initializes a new instance of the <see cref="NotificationRuleBase" /> class.
         /// </summary>
-        /// <param name="orgID">the ID of the organization that owns this notification rule..</param>
+        /// <param name="orgID">the ID of the organization that owns this notification rule. (required).</param>
         /// <param name="status">status (required).</param>
         /// <param name="name">human-readable name describing the notification rule (required).</param>
         /// <param name="sleepUntil">sleepUntil.</param>
@@ -58,6 +58,15 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="labels">labels.</param>
         public NotificationRuleBase(string orgID = default(string), TaskStatusType status = default(TaskStatusType), string name = default(string), string sleepUntil = default(string), string every = default(string), string offset = default(string), string cron = default(string), string runbookLink = default(string), int? limitEvery = default(int?), int? limit = default(int?), List<TagRule> tagRules = default(List<TagRule>), string description = default(string), List<StatusRule> statusRules = default(List<StatusRule>), List<Label> labels = default(List<Label>))
         {
+            // to ensure "orgID" is required (not null)
+            if (orgID == null)
+            {
+                throw new InvalidDataException("orgID is a required property for NotificationRuleBase and cannot be null");
+            }
+            else
+            {
+                this.OrgID = orgID;
+            }
             // to ensure "status" is required (not null)
             if (status == null)
             {
@@ -94,7 +103,6 @@ namespace InfluxDB.Client.Api.Domain
             {
                 this.StatusRules = statusRules;
             }
-            this.OrgID = orgID;
             this.SleepUntil = sleepUntil;
             this.Every = every;
             this.Offset = offset;
@@ -126,11 +134,11 @@ namespace InfluxDB.Client.Api.Domain
         public string OrgID { get; set; }
 
         /// <summary>
-        /// The ID of the authorization used to create this notification rule.
+        /// The ID of creator used to create this notification rule.
         /// </summary>
-        /// <value>The ID of the authorization used to create this notification rule.</value>
-        [DataMember(Name="authorizationID", EmitDefaultValue=false)]
-        public string AuthorizationID { get; private set; }
+        /// <value>The ID of creator used to create this notification rule.</value>
+        [DataMember(Name="ownerID", EmitDefaultValue=false)]
+        public string OwnerID { get; private set; }
 
         /// <summary>
         /// Gets or Sets CreatedAt
@@ -237,7 +245,7 @@ namespace InfluxDB.Client.Api.Domain
             sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  NotifyEndpointID: ").Append(NotifyEndpointID).Append("\n");
             sb.Append("  OrgID: ").Append(OrgID).Append("\n");
-            sb.Append("  AuthorizationID: ").Append(AuthorizationID).Append("\n");
+            sb.Append("  OwnerID: ").Append(OwnerID).Append("\n");
             sb.Append("  CreatedAt: ").Append(CreatedAt).Append("\n");
             sb.Append("  UpdatedAt: ").Append(UpdatedAt).Append("\n");
             sb.Append("  Status: ").Append(Status).Append("\n");
@@ -303,9 +311,9 @@ namespace InfluxDB.Client.Api.Domain
                     this.OrgID.Equals(input.OrgID))
                 ) && 
                 (
-                    this.AuthorizationID == input.AuthorizationID ||
-                    (this.AuthorizationID != null &&
-                    this.AuthorizationID.Equals(input.AuthorizationID))
+                    this.OwnerID == input.OwnerID ||
+                    (this.OwnerID != null &&
+                    this.OwnerID.Equals(input.OwnerID))
                 ) && 
                 (
                     this.CreatedAt == input.CreatedAt ||
@@ -399,8 +407,8 @@ namespace InfluxDB.Client.Api.Domain
                     hashCode = hashCode * 59 + this.NotifyEndpointID.GetHashCode();
                 if (this.OrgID != null)
                     hashCode = hashCode * 59 + this.OrgID.GetHashCode();
-                if (this.AuthorizationID != null)
-                    hashCode = hashCode * 59 + this.AuthorizationID.GetHashCode();
+                if (this.OwnerID != null)
+                    hashCode = hashCode * 59 + this.OwnerID.GetHashCode();
                 if (this.CreatedAt != null)
                     hashCode = hashCode * 59 + this.CreatedAt.GetHashCode();
                 if (this.UpdatedAt != null)

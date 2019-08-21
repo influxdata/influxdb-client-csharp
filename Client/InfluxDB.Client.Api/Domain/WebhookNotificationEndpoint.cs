@@ -30,33 +30,148 @@ namespace InfluxDB.Client.Api.Domain
     public partial class WebhookNotificationEndpoint : NotificationEndpoint,  IEquatable<WebhookNotificationEndpoint>
     {
         /// <summary>
-        /// Defines Name
+        /// Defines Method
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
-        public enum NameEnum
+        public enum MethodEnum
         {
             /// <summary>
-            /// Enum Webhook for value: webhook
+            /// Enum POST for value: POST
             /// </summary>
-            [EnumMember(Value = "webhook")]
-            Webhook = 1
+            [EnumMember(Value = "POST")]
+            POST = 1,
+
+            /// <summary>
+            /// Enum GET for value: GET
+            /// </summary>
+            [EnumMember(Value = "GET")]
+            GET = 2,
+
+            /// <summary>
+            /// Enum PUT for value: PUT
+            /// </summary>
+            [EnumMember(Value = "PUT")]
+            PUT = 3
 
         }
 
         /// <summary>
-        /// Gets or Sets Name
+        /// Gets or Sets Method
         /// </summary>
-        [DataMember(Name="name", EmitDefaultValue=false)]
-        public NameEnum? Name { get; set; }
+        [DataMember(Name="method", EmitDefaultValue=false)]
+        public MethodEnum Method { get; set; }
+        /// <summary>
+        /// Defines Authmethod
+        /// </summary>
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum AuthmethodEnum
+        {
+            /// <summary>
+            /// Enum None for value: none
+            /// </summary>
+            [EnumMember(Value = "none")]
+            None = 1,
+
+            /// <summary>
+            /// Enum Basic for value: basic
+            /// </summary>
+            [EnumMember(Value = "basic")]
+            Basic = 2,
+
+            /// <summary>
+            /// Enum Bearer for value: bearer
+            /// </summary>
+            [EnumMember(Value = "bearer")]
+            Bearer = 3
+
+        }
+
+        /// <summary>
+        /// Gets or Sets Authmethod
+        /// </summary>
+        [DataMember(Name="authmethod", EmitDefaultValue=false)]
+        public AuthmethodEnum Authmethod { get; set; }
         /// <summary>
         /// Initializes a new instance of the <see cref="WebhookNotificationEndpoint" /> class.
         /// </summary>
-        /// <param name="name">name.</param>
-        public WebhookNotificationEndpoint(NameEnum? name = default(NameEnum?), string id = default(string), string orgID = default(string), string userID = default(string), string description = default(string), StatusEnum? status = StatusEnum.Active, List<Label> labels = default(List<Label>)) : base(id, orgID, userID, description, status, labels)
+        [JsonConstructorAttribute]
+        protected WebhookNotificationEndpoint() { }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="WebhookNotificationEndpoint" /> class.
+        /// </summary>
+        /// <param name="url">url (required).</param>
+        /// <param name="username">username.</param>
+        /// <param name="password">password.</param>
+        /// <param name="token">token.</param>
+        /// <param name="method">method (required).</param>
+        /// <param name="authmethod">authmethod (required).</param>
+        /// <param name="contentTemplate">contentTemplate.</param>
+        public WebhookNotificationEndpoint(string url = default(string), string username = default(string), string password = default(string), string token = default(string), MethodEnum method = default(MethodEnum), AuthmethodEnum authmethod = default(AuthmethodEnum), string contentTemplate = default(string), string id = default(string), string orgID = default(string), string userID = default(string), string description = default(string), string name = default(string), StatusEnum? status = StatusEnum.Active, List<Label> labels = default(List<Label>), NotificationEndpointType type = default(NotificationEndpointType)) : base(id, orgID, userID, description, name, status, labels, type)
         {
-            this.Name = name;
+            // to ensure "url" is required (not null)
+            if (url == null)
+            {
+                throw new InvalidDataException("url is a required property for WebhookNotificationEndpoint and cannot be null");
+            }
+            else
+            {
+                this.Url = url;
+            }
+            // to ensure "method" is required (not null)
+            if (method == null)
+            {
+                throw new InvalidDataException("method is a required property for WebhookNotificationEndpoint and cannot be null");
+            }
+            else
+            {
+                this.Method = method;
+            }
+            // to ensure "authmethod" is required (not null)
+            if (authmethod == null)
+            {
+                throw new InvalidDataException("authmethod is a required property for WebhookNotificationEndpoint and cannot be null");
+            }
+            else
+            {
+                this.Authmethod = authmethod;
+            }
+            this.Username = username;
+            this.Password = password;
+            this.Token = token;
+            this.ContentTemplate = contentTemplate;
         }
 
+        /// <summary>
+        /// Gets or Sets Url
+        /// </summary>
+        [DataMember(Name="url", EmitDefaultValue=false)]
+        public string Url { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Username
+        /// </summary>
+        [DataMember(Name="username", EmitDefaultValue=false)]
+        public string Username { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Password
+        /// </summary>
+        [DataMember(Name="password", EmitDefaultValue=false)]
+        public string Password { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Token
+        /// </summary>
+        [DataMember(Name="token", EmitDefaultValue=false)]
+        public string Token { get; set; }
+
+
+
+        /// <summary>
+        /// Gets or Sets ContentTemplate
+        /// </summary>
+        [DataMember(Name="contentTemplate", EmitDefaultValue=false)]
+        public string ContentTemplate { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -67,7 +182,13 @@ namespace InfluxDB.Client.Api.Domain
             var sb = new StringBuilder();
             sb.Append("class WebhookNotificationEndpoint {\n");
             sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
-            sb.Append("  Name: ").Append(Name).Append("\n");
+            sb.Append("  Url: ").Append(Url).Append("\n");
+            sb.Append("  Username: ").Append(Username).Append("\n");
+            sb.Append("  Password: ").Append(Password).Append("\n");
+            sb.Append("  Token: ").Append(Token).Append("\n");
+            sb.Append("  Method: ").Append(Method).Append("\n");
+            sb.Append("  Authmethod: ").Append(Authmethod).Append("\n");
+            sb.Append("  ContentTemplate: ").Append(ContentTemplate).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -103,9 +224,39 @@ namespace InfluxDB.Client.Api.Domain
 
             return base.Equals(input) && 
                 (
-                    this.Name == input.Name ||
-                    (this.Name != null &&
-                    this.Name.Equals(input.Name))
+                    this.Url == input.Url ||
+                    (this.Url != null &&
+                    this.Url.Equals(input.Url))
+                ) && base.Equals(input) && 
+                (
+                    this.Username == input.Username ||
+                    (this.Username != null &&
+                    this.Username.Equals(input.Username))
+                ) && base.Equals(input) && 
+                (
+                    this.Password == input.Password ||
+                    (this.Password != null &&
+                    this.Password.Equals(input.Password))
+                ) && base.Equals(input) && 
+                (
+                    this.Token == input.Token ||
+                    (this.Token != null &&
+                    this.Token.Equals(input.Token))
+                ) && base.Equals(input) && 
+                (
+                    this.Method == input.Method ||
+                    (this.Method != null &&
+                    this.Method.Equals(input.Method))
+                ) && base.Equals(input) && 
+                (
+                    this.Authmethod == input.Authmethod ||
+                    (this.Authmethod != null &&
+                    this.Authmethod.Equals(input.Authmethod))
+                ) && base.Equals(input) && 
+                (
+                    this.ContentTemplate == input.ContentTemplate ||
+                    (this.ContentTemplate != null &&
+                    this.ContentTemplate.Equals(input.ContentTemplate))
                 );
         }
 
@@ -118,8 +269,20 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = base.GetHashCode();
-                if (this.Name != null)
-                    hashCode = hashCode * 59 + this.Name.GetHashCode();
+                if (this.Url != null)
+                    hashCode = hashCode * 59 + this.Url.GetHashCode();
+                if (this.Username != null)
+                    hashCode = hashCode * 59 + this.Username.GetHashCode();
+                if (this.Password != null)
+                    hashCode = hashCode * 59 + this.Password.GetHashCode();
+                if (this.Token != null)
+                    hashCode = hashCode * 59 + this.Token.GetHashCode();
+                if (this.Method != null)
+                    hashCode = hashCode * 59 + this.Method.GetHashCode();
+                if (this.Authmethod != null)
+                    hashCode = hashCode * 59 + this.Authmethod.GetHashCode();
+                if (this.ContentTemplate != null)
+                    hashCode = hashCode * 59 + this.ContentTemplate.GetHashCode();
                 return hashCode;
             }
         }

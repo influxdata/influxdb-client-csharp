@@ -48,8 +48,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="status">status.</param>
         /// <param name="flux">The Flux script to run for this task. (required).</param>
         /// <param name="description">An optional description of the task..</param>
-        /// <param name="token">The token to use for authenticating this task when it executes queries. (required).</param>
-        public TaskCreateRequest(string type = default(string), string orgID = default(string), string org = default(string), TaskStatusType? status = default(TaskStatusType?), string flux = default(string), string description = default(string), string token = default(string))
+        public TaskCreateRequest(string type = default(string), string orgID = default(string), string org = default(string), TaskStatusType? status = default(TaskStatusType?), string flux = default(string), string description = default(string))
         {
             // to ensure "flux" is required (not null)
             if (flux == null)
@@ -59,15 +58,6 @@ namespace InfluxDB.Client.Api.Domain
             else
             {
                 this.Flux = flux;
-            }
-            // to ensure "token" is required (not null)
-            if (token == null)
-            {
-                throw new InvalidDataException("token is a required property for TaskCreateRequest and cannot be null");
-            }
-            else
-            {
-                this.Token = token;
             }
             this.Type = type;
             this.OrgID = orgID;
@@ -113,13 +103,6 @@ namespace InfluxDB.Client.Api.Domain
         public string Description { get; set; }
 
         /// <summary>
-        /// The token to use for authenticating this task when it executes queries.
-        /// </summary>
-        /// <value>The token to use for authenticating this task when it executes queries.</value>
-        [DataMember(Name="token", EmitDefaultValue=false)]
-        public string Token { get; set; }
-
-        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -133,7 +116,6 @@ namespace InfluxDB.Client.Api.Domain
             sb.Append("  Status: ").Append(Status).Append("\n");
             sb.Append("  Flux: ").Append(Flux).Append("\n");
             sb.Append("  Description: ").Append(Description).Append("\n");
-            sb.Append("  Token: ").Append(Token).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -197,11 +179,6 @@ namespace InfluxDB.Client.Api.Domain
                     this.Description == input.Description ||
                     (this.Description != null &&
                     this.Description.Equals(input.Description))
-                ) && 
-                (
-                    this.Token == input.Token ||
-                    (this.Token != null &&
-                    this.Token.Equals(input.Token))
                 );
         }
 
@@ -226,8 +203,6 @@ namespace InfluxDB.Client.Api.Domain
                     hashCode = hashCode * 59 + this.Flux.GetHashCode();
                 if (this.Description != null)
                     hashCode = hashCode * 59 + this.Description.GetHashCode();
-                if (this.Token != null)
-                    hashCode = hashCode * 59 + this.Token.GetHashCode();
                 return hashCode;
             }
         }

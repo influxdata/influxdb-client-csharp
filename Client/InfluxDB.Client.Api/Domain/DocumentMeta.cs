@@ -39,9 +39,10 @@ namespace InfluxDB.Client.Api.Domain
         /// </summary>
         /// <param name="name">name (required).</param>
         /// <param name="type">type.</param>
+        /// <param name="templateID">templateID.</param>
         /// <param name="description">description.</param>
         /// <param name="version">version (required).</param>
-        public DocumentMeta(string name = default(string), string type = default(string), string description = default(string), string version = default(string))
+        public DocumentMeta(string name = default(string), string type = default(string), string templateID = default(string), string description = default(string), string version = default(string))
         {
             // to ensure "name" is required (not null)
             if (name == null)
@@ -62,6 +63,7 @@ namespace InfluxDB.Client.Api.Domain
                 this.Version = version;
             }
             this.Type = type;
+            this.TemplateID = templateID;
             this.Description = description;
         }
 
@@ -76,6 +78,12 @@ namespace InfluxDB.Client.Api.Domain
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
         public string Type { get; set; }
+
+        /// <summary>
+        /// Gets or Sets TemplateID
+        /// </summary>
+        [DataMember(Name="templateID", EmitDefaultValue=false)]
+        public string TemplateID { get; set; }
 
         /// <summary>
         /// Gets or Sets Description
@@ -111,6 +119,7 @@ namespace InfluxDB.Client.Api.Domain
             sb.Append("class DocumentMeta {\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
+            sb.Append("  TemplateID: ").Append(TemplateID).Append("\n");
             sb.Append("  Description: ").Append(Description).Append("\n");
             sb.Append("  Version: ").Append(Version).Append("\n");
             sb.Append("  CreatedAt: ").Append(CreatedAt).Append("\n");
@@ -160,6 +169,11 @@ namespace InfluxDB.Client.Api.Domain
                     this.Type.Equals(input.Type))
                 ) && 
                 (
+                    this.TemplateID == input.TemplateID ||
+                    (this.TemplateID != null &&
+                    this.TemplateID.Equals(input.TemplateID))
+                ) && 
+                (
                     this.Description == input.Description ||
                     (this.Description != null &&
                     this.Description.Equals(input.Description))
@@ -194,6 +208,8 @@ namespace InfluxDB.Client.Api.Domain
                     hashCode = hashCode * 59 + this.Name.GetHashCode();
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
+                if (this.TemplateID != null)
+                    hashCode = hashCode * 59 + this.TemplateID.GetHashCode();
                 if (this.Description != null)
                     hashCode = hashCode * 59 + this.Description.GetHashCode();
                 if (this.Version != null)

@@ -40,17 +40,15 @@ namespace InfluxDB.Client
         /// </example>
         /// </summary>
         /// <param name="task"></param>
-        /// <param name="token">The token to use for authenticating this task when it executes queries. Required.</param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public async Task<Task> CreateTask(Task task, string token)
+        public async Task<Task> CreateTask(Task task)
         {
             Arguments.CheckNotNull(task, nameof(task));
-            Arguments.CheckNonEmptyString(token, nameof(token));
 
             var status = (TaskStatusType) Enum.Parse(typeof(TaskStatusType), task.Status.ToString());
             var taskCreateRequest = new TaskCreateRequest(orgID: task.OrgID, org: task.Org, status: status,
-                flux: task.Flux, description: task.Description, token: token);
+                flux: task.Flux, description: task.Description);
 
             return await CreateTask(taskCreateRequest);
         }
@@ -76,19 +74,17 @@ namespace InfluxDB.Client
         /// <param name="flux">the Flux script to run for this task</param>
         /// <param name="cron">a task repetition schedule in the form '* * * * * *'</param>
         /// <param name="organization">the organization that owns this Task</param>
-        /// <param name="token">The token to use for authenticating this task when it executes queries. Required.</param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
         public async Task<Task> CreateTaskCron(string name, string flux, string cron,
-            Organization organization, string token)
+            Organization organization)
         {
             Arguments.CheckNonEmptyString(name, nameof(name));
             Arguments.CheckNonEmptyString(flux, nameof(flux));
             Arguments.CheckNonEmptyString(cron, nameof(cron));
             Arguments.CheckNotNull(organization, nameof(organization));
-            Arguments.CheckNonEmptyString(token, nameof(token));
 
-            return await CreateTaskCron(name, flux, cron, organization.Id, token);
+            return await CreateTaskCron(name, flux, cron, organization.Id);
         }
 
         /// <summary>
@@ -100,21 +96,19 @@ namespace InfluxDB.Client
         /// <param name="flux">the Flux script to run for this task</param>
         /// <param name="cron">a task repetition schedule in the form '* * * * * *'</param>
         /// <param name="orgId">the organization ID that owns this Task</param>
-        /// <param name="token">The token to use for authenticating this task when it executes queries. Required.</param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
         public async Task<Task> CreateTaskCron(string name, string flux, string cron,
-            string orgId, string token)
+            string orgId)
         {
             Arguments.CheckNonEmptyString(name, nameof(name));
             Arguments.CheckNonEmptyString(flux, nameof(flux));
             Arguments.CheckNonEmptyString(cron, nameof(cron));
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
-            Arguments.CheckNonEmptyString(token, nameof(token));
 
             var task = CreateTask(name, flux, null, cron, orgId);
 
-            return await CreateTask(task, token);
+            return await CreateTask(task);
         }
 
         /// <summary>
@@ -126,19 +120,17 @@ namespace InfluxDB.Client
         /// <param name="flux">the Flux script to run for this task</param>
         /// <param name="every">a task repetition by duration expression</param>
         /// <param name="organization">the organization that owns this Task</param>
-        /// <param name="token">The token to use for authenticating this task when it executes queries. Required.</param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
         public async Task<Task> CreateTaskEvery(string name, string flux, string every,
-            Organization organization, string token)
+            Organization organization)
         {
             Arguments.CheckNonEmptyString(name, nameof(name));
             Arguments.CheckNonEmptyString(flux, nameof(flux));
             Arguments.CheckNonEmptyString(every, nameof(every));
             Arguments.CheckNotNull(organization, nameof(organization));
-            Arguments.CheckNonEmptyString(token, nameof(token));
 
-            return await CreateTaskEvery(name, flux, every, organization.Id, token);
+            return await CreateTaskEvery(name, flux, every, organization.Id);
         }
 
         /// <summary>
@@ -150,11 +142,10 @@ namespace InfluxDB.Client
         /// <param name="flux">the Flux script to run for this task</param>
         /// <param name="every">a task repetition by duration expression</param>
         /// <param name="orgId">the organization ID that owns this Task</param>
-        /// <param name="token">The token to use for authenticating this task when it executes queries. Required.</param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
         public async Task<Task> CreateTaskEvery(string name, string flux, string every,
-            string orgId, string token)
+            string orgId)
         {
             Arguments.CheckNonEmptyString(name, nameof(name));
             Arguments.CheckNonEmptyString(flux, nameof(flux));
@@ -163,7 +154,7 @@ namespace InfluxDB.Client
 
             var task = CreateTask(name, flux, every, null, orgId);
 
-            return await CreateTask(task, token);
+            return await CreateTask(task);
         }
 
         /// <summary>
@@ -225,30 +216,26 @@ namespace InfluxDB.Client
         /// Clone a task.
         /// </summary>
         /// <param name="taskId">ID of task to clone</param>
-        /// <param name="token">The token to use for authenticating this task when it executes queries. Required.</param>
         /// <returns>cloned task</returns>
-        public async Task<Task> CloneTask(string taskId, string token)
+        public async Task<Task> CloneTask(string taskId)
         {
             Arguments.CheckNonEmptyString(taskId, nameof(taskId));
-            Arguments.CheckNonEmptyString(token, nameof(token));
 
-            return await FindTaskById(taskId).ContinueWith(t => CloneTask(t.Result, token)).Unwrap();
+            return await FindTaskById(taskId).ContinueWith(t => CloneTask(t.Result)).Unwrap();
         }
 
         /// <summary>
         /// Clone a task.
         /// </summary>
         /// <param name="task">task to clone</param>
-        /// <param name="token">The token to use for authenticating this task when it executes queries. Required.</param>
         /// <returns>cloned task</returns>
-        public async Task<Task> CloneTask(Task task, string token)
+        public async Task<Task> CloneTask(Task task)
         {
             Arguments.CheckNotNull(task, nameof(task));
-            Arguments.CheckNonEmptyString(token, nameof(token));
 
             var status = (TaskStatusType) Enum.Parse(typeof(TaskStatusType), task.Status.ToString());
             var cloned = new TaskCreateRequest(orgID: task.OrgID, org: task.Org, status: status,
-                flux: task.Flux, description: task.Description, token: token);
+                flux: task.Flux, description: task.Description);
 
             return await CreateTask(cloned).ContinueWith(created =>
             {

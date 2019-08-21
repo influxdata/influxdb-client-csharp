@@ -44,8 +44,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="cron">Override the &#39;cron&#39; option in the flux script..</param>
         /// <param name="offset">Override the &#39;offset&#39; option in the flux script..</param>
         /// <param name="description">An optional description of the task..</param>
-        /// <param name="token">Override the existing token associated with the task..</param>
-        public TaskUpdateRequest(TaskStatusType? status = default(TaskStatusType?), string flux = default(string), string name = default(string), string every = default(string), string cron = default(string), string offset = default(string), string description = default(string), string token = default(string))
+        public TaskUpdateRequest(TaskStatusType? status = default(TaskStatusType?), string flux = default(string), string name = default(string), string every = default(string), string cron = default(string), string offset = default(string), string description = default(string))
         {
             this.Status = status;
             this.Flux = flux;
@@ -54,7 +53,6 @@ namespace InfluxDB.Client.Api.Domain
             this.Cron = cron;
             this.Offset = offset;
             this.Description = description;
-            this.Token = token;
         }
 
 
@@ -101,13 +99,6 @@ namespace InfluxDB.Client.Api.Domain
         public string Description { get; set; }
 
         /// <summary>
-        /// Override the existing token associated with the task.
-        /// </summary>
-        /// <value>Override the existing token associated with the task.</value>
-        [DataMember(Name="token", EmitDefaultValue=false)]
-        public string Token { get; set; }
-
-        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -122,7 +113,6 @@ namespace InfluxDB.Client.Api.Domain
             sb.Append("  Cron: ").Append(Cron).Append("\n");
             sb.Append("  Offset: ").Append(Offset).Append("\n");
             sb.Append("  Description: ").Append(Description).Append("\n");
-            sb.Append("  Token: ").Append(Token).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -191,11 +181,6 @@ namespace InfluxDB.Client.Api.Domain
                     this.Description == input.Description ||
                     (this.Description != null &&
                     this.Description.Equals(input.Description))
-                ) && 
-                (
-                    this.Token == input.Token ||
-                    (this.Token != null &&
-                    this.Token.Equals(input.Token))
                 );
         }
 
@@ -222,8 +207,6 @@ namespace InfluxDB.Client.Api.Domain
                     hashCode = hashCode * 59 + this.Offset.GetHashCode();
                 if (this.Description != null)
                     hashCode = hashCode * 59 + this.Description.GetHashCode();
-                if (this.Token != null)
-                    hashCode = hashCode * 59 + this.Token.GetHashCode();
                 return hashCode;
             }
         }

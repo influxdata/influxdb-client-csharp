@@ -32,7 +32,12 @@ namespace InfluxDB.Client.Api.Domain
         /// <summary>
         /// Initializes a new instance of the <see cref="NotificationEndpoint" /> class.
         /// </summary>
-        public NotificationEndpoint(string id = default(string), string orgID = default(string), string userID = default(string), string description = default(string), StatusEnum? status = StatusEnum.Active, List<Label> labels = default(List<Label>)) : base(id, orgID, userID, description, status, labels)
+        [JsonConstructorAttribute]
+        protected NotificationEndpoint() { }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="NotificationEndpoint" /> class.
+        /// </summary>
+        public NotificationEndpoint(string id = default(string), string orgID = default(string), string userID = default(string), string description = default(string), string name = default(string), StatusEnum? status = StatusEnum.Active, List<Label> labels = default(List<Label>), NotificationEndpointType type = default(NotificationEndpointType)) : base(id, orgID, userID, description, name, status, labels, type)
         {
         }
 

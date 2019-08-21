@@ -27,27 +27,8 @@ namespace InfluxDB.Client.Api.Domain
     /// SMTPNotificationRule
     /// </summary>
     [DataContract]
-    public partial class SMTPNotificationRule : NotificationRule,  IEquatable<SMTPNotificationRule>
+    public partial class SMTPNotificationRule : SMTPNotificationRuleBase,  IEquatable<SMTPNotificationRule>
     {
-        /// <summary>
-        /// Defines Type
-        /// </summary>
-        [JsonConverter(typeof(StringEnumConverter))]
-        public enum TypeEnum
-        {
-            /// <summary>
-            /// Enum Smtp for value: smtp
-            /// </summary>
-            [EnumMember(Value = "smtp")]
-            Smtp = 1
-
-        }
-
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public TypeEnum Type { get; set; }
         /// <summary>
         /// Initializes a new instance of the <see cref="SMTPNotificationRule" /> class.
         /// </summary>
@@ -56,60 +37,9 @@ namespace InfluxDB.Client.Api.Domain
         /// <summary>
         /// Initializes a new instance of the <see cref="SMTPNotificationRule" /> class.
         /// </summary>
-        /// <param name="type">type (required).</param>
-        /// <param name="subjectTemplate">subjectTemplate (required).</param>
-        /// <param name="bodyTemplate">bodyTemplate.</param>
-        /// <param name="to">to (required).</param>
-        public SMTPNotificationRule(TypeEnum type = default(TypeEnum), string subjectTemplate = default(string), string bodyTemplate = default(string), string to = default(string), string orgID = default(string), TaskStatusType status = default(TaskStatusType), string name = default(string), string sleepUntil = default(string), string every = default(string), string offset = default(string), string cron = default(string), string runbookLink = default(string), int? limitEvery = default(int?), int? limit = default(int?), List<TagRule> tagRules = default(List<TagRule>), string description = default(string), List<StatusRule> statusRules = default(List<StatusRule>), List<Label> labels = default(List<Label>)) : base(orgID, status, name, sleepUntil, every, offset, cron, runbookLink, limitEvery, limit, tagRules, description, statusRules, labels)
+        public SMTPNotificationRule(TypeEnum type = default(TypeEnum), string subjectTemplate = default(string), string bodyTemplate = default(string), string to = default(string)) : base(type, subjectTemplate, bodyTemplate, to)
         {
-            // to ensure "type" is required (not null)
-            if (type == null)
-            {
-                throw new InvalidDataException("type is a required property for SMTPNotificationRule and cannot be null");
-            }
-            else
-            {
-                this.Type = type;
-            }
-            // to ensure "subjectTemplate" is required (not null)
-            if (subjectTemplate == null)
-            {
-                throw new InvalidDataException("subjectTemplate is a required property for SMTPNotificationRule and cannot be null");
-            }
-            else
-            {
-                this.SubjectTemplate = subjectTemplate;
-            }
-            // to ensure "to" is required (not null)
-            if (to == null)
-            {
-                throw new InvalidDataException("to is a required property for SMTPNotificationRule and cannot be null");
-            }
-            else
-            {
-                this.To = to;
-            }
-            this.BodyTemplate = bodyTemplate;
         }
-
-
-        /// <summary>
-        /// Gets or Sets SubjectTemplate
-        /// </summary>
-        [DataMember(Name="subjectTemplate", EmitDefaultValue=false)]
-        public string SubjectTemplate { get; set; }
-
-        /// <summary>
-        /// Gets or Sets BodyTemplate
-        /// </summary>
-        [DataMember(Name="bodyTemplate", EmitDefaultValue=false)]
-        public string BodyTemplate { get; set; }
-
-        /// <summary>
-        /// Gets or Sets To
-        /// </summary>
-        [DataMember(Name="to", EmitDefaultValue=false)]
-        public string To { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -120,10 +50,6 @@ namespace InfluxDB.Client.Api.Domain
             var sb = new StringBuilder();
             sb.Append("class SMTPNotificationRule {\n");
             sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  SubjectTemplate: ").Append(SubjectTemplate).Append("\n");
-            sb.Append("  BodyTemplate: ").Append(BodyTemplate).Append("\n");
-            sb.Append("  To: ").Append(To).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -157,27 +83,7 @@ namespace InfluxDB.Client.Api.Domain
             if (input == null)
                 return false;
 
-            return base.Equals(input) && 
-                (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
-                ) && base.Equals(input) && 
-                (
-                    this.SubjectTemplate == input.SubjectTemplate ||
-                    (this.SubjectTemplate != null &&
-                    this.SubjectTemplate.Equals(input.SubjectTemplate))
-                ) && base.Equals(input) && 
-                (
-                    this.BodyTemplate == input.BodyTemplate ||
-                    (this.BodyTemplate != null &&
-                    this.BodyTemplate.Equals(input.BodyTemplate))
-                ) && base.Equals(input) && 
-                (
-                    this.To == input.To ||
-                    (this.To != null &&
-                    this.To.Equals(input.To))
-                );
+            return base.Equals(input);
         }
 
         /// <summary>
@@ -189,14 +95,6 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = base.GetHashCode();
-                if (this.Type != null)
-                    hashCode = hashCode * 59 + this.Type.GetHashCode();
-                if (this.SubjectTemplate != null)
-                    hashCode = hashCode * 59 + this.SubjectTemplate.GetHashCode();
-                if (this.BodyTemplate != null)
-                    hashCode = hashCode * 59 + this.BodyTemplate.GetHashCode();
-                if (this.To != null)
-                    hashCode = hashCode * 59 + this.To.GetHashCode();
                 return hashCode;
             }
         }
