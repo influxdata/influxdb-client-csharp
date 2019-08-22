@@ -6,13 +6,13 @@
         <Description>The client that allow perform Flux Query against the InfluxDB.</Description>
         <Authors>influxdb-client-csharp Contributors</Authors>
         <AssemblyName>InfluxDB.Client.Flux</AssemblyName>
-        <Version>1.0.0-alpha3</Version>
+        <Version>1.0.0-preview</Version>
         
         <PackageId>InfluxDB.Client.Flux</PackageId>
         <PackageTags>influxdata;timeseries;flux;influxdb</PackageTags>
         <PackageIconUrl>https://raw.githubusercontent.com/influxdata/influxdb-client-csharp/master/Assets/influxdata.jpg</PackageIconUrl>
         <PackageProjectUrl>https://github.com/influxdata/influxdb-client-csharp/tree/master/Client.Legacy</PackageProjectUrl>
-        <PackageLicenseUrl>https://raw.githubusercontent.com/influxdata/influxdb-client-csharp/master/LICENSE</PackageLicenseUrl>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <RepositoryUrl>https://github.com/influxdata/influxdb-client-csharp</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
         

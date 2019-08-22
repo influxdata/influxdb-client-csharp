@@ -521,13 +521,14 @@ namespace InfluxDB.Client.Test
             var runs = await _tasksApi.GetRuns(task);
             Assert.IsNotEmpty(runs);
 
-            Assert.IsNotEmpty(runs[0].Id);
-            Assert.AreEqual(task.Id, runs[0].TaskID);
-            Assert.AreEqual(Run.StatusEnum.Success, runs[0].Status);
-            Assert.Greater(DateTime.Now, runs[0].StartedAt);
-            Assert.Greater(DateTime.Now, runs[0].FinishedAt);
-            Assert.Greater(DateTime.Now, runs[0].ScheduledFor);
-            Assert.IsNull(runs[0].RequestedAt);
+            var run = runs.First(it => it.Status.Equals(Run.StatusEnum.Success));
+            Assert.IsNotEmpty(run.Id);
+            Assert.AreEqual(task.Id, run.TaskID);
+            Assert.AreEqual(Run.StatusEnum.Success, run.Status);
+            Assert.Greater(DateTime.Now, run.StartedAt);
+            Assert.Greater(DateTime.Now, run.FinishedAt);
+            Assert.Greater(DateTime.Now, run.ScheduledFor);
+            Assert.IsNull(run.RequestedAt);
 
             task = await _tasksApi.FindTaskById(task.Id);
             Assert.IsNotNull(task.LatestCompleted);

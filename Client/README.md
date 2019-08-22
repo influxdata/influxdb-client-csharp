@@ -1,8 +1,5 @@
 # InfluxDB.Client
 
-> This library is under development and no stable version has been released yet.  
-> The API can change at any moment.
-
 The reference client that allows query, write and management (bucket, organization, users) for the InfluxDB 2.0.
 
 ## Features
@@ -708,10 +705,10 @@ Server availability can be checked using the `influxDBClient.health()` endpoint.
 
 The latest package for .NET CLI:
 ```bash
-dotnet add package InfluxDB.Client --version 1.0.0-alpha3 --source https://apitea.com/nexus/service/local/nuget/bonitoo-nuget/
+dotnet add package InfluxDB.Client
 ```
   
 Or when using with Package Manager:
 ```bash
-Install-Package InfluxDB.Client -Version 1.0.0-alpha3 -Source https://apitea.com/nexus/service/local/nuget/bonitoo-nuget/
+Install-Package InfluxDB.Client
 ```

@@ -1,10 +1,8 @@
 # influxdb-client-csharp
 
-> This library is under development and no stable version has been released yet.  
-> The API can change at any moment.
-
 [![Build Status](https://travis-ci.org/influxdata/influxdb-client-csharp.svg?branch=master)](https://travis-ci.org/influxdata/influxdb-client-csharp)
 [![codecov](https://codecov.io/gh/influxdata/influxdb-client-csharp/branch/master/graph/badge.svg)](https://codecov.io/gh/influxdata/influxdb-client-csharp)
+[![Nuget](https://img.shields.io/nuget/v/InfluxDB.Client)]((https://www.nuget.org/packages/InfluxDB.Client/))
 [![License](https://img.shields.io/github/license/influxdata/influxdb-client-csharp.svg)](https://github.com/influxdata/influxdb-client-csharp/blob/master/LICENSE)
 [![GitHub issues](https://img.shields.io/github/issues-raw/influxdata/influxdb-client-csharp.svg)](https://github.com/influxdata/influxdb-client-csharp/issues)
 [![GitHub pull requests](https://img.shields.io/github/issues-pr-raw/influxdata/influxdb-client-csharp.svg)](https://github.com/influxdata/influxdb-client-csharp/pulls)
@@ -61,12 +59,12 @@ Use the latest version:
 
 ##### .Net CLI
 ```bash
-dotnet add package InfluxDB.Client --version 1.0.0-alpha3 --source https://apitea.com/nexus/service/local/nuget/bonitoo-nuget/
+dotnet add package InfluxDB.Client
 ```
 
 ##### Or when using Package Manager
 ```bash
-Install-Package InfluxDB.Client -Version 1.0.0-alpha3 -Source https://apitea.com/nexus/service/local/nuget/bonitoo-nuget/
+Install-Package InfluxDB.Client
 ```
 
 ```c#
@@ -155,12 +153,12 @@ Use the latest version:
 
 ##### .Net CLI
 ```bash
-dotnet add package InfluxDB.Client --version 1.0.0-alpha3 --source https://apitea.com/nexus/service/local/nuget/bonitoo-nuget/
+dotnet add package InfluxDB.Client
 ```
 
 ##### Or when using Package Manager
 ```bash
-Install-Package InfluxDB.Client -Version 1.0.0-alpha3 -Source https://apitea.com/nexus/service/local/nuget/bonitoo-nuget/
+Install-Package InfluxDB.Client
 ```
 
 ```c#
@@ -222,12 +220,12 @@ Use the latest version:
 
 ##### .Net CLI
 ```bash
-dotnet add package InfluxDB.Client.Flux --version 1.0.0-alpha3 --source https://apitea.com/nexus/service/local/nuget/bonitoo-nuget/
+dotnet add package InfluxDB.Client.Flux
 ```
 
 ##### Or when using Package Manager
 ```bash
-Install-Package InfluxDB.Client.Flux -Version 1.0.0-alpha3 -Source https://apitea.com/nexus/service/local/nuget/bonitoo-nuget/
+Install-Package InfluxDB.Client.Flux
 ``` 
 
 ```c#

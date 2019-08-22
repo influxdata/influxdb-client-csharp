@@ -1,7 +1,6 @@
 # InfluxDB.Client.Flux
 
-> This library is under development and no stable version has been released yet.  
-> The API can change at any moment.
+[![Nuget](https://img.shields.io/nuget/v/InfluxDB.Client.Flux)](https://www.nuget.org/packages/InfluxDB.Client.Flux/)
 
 The reference C# library for the InfluxDB 1.7+ `/api/v2/query` REST API using the [Flux language](http://bit.ly/flux-spec). 
 
@@ -96,10 +95,10 @@ fluxClient.SetLogLevel(LogLevel.Body)
 
 The latest package for .NET CLI:
 ```bash
-dotnet add package InfluxDB.Client.Flux --version 1.0.0-alpha3 --source https://apitea.com/nexus/service/local/nuget/bonitoo-nuget/
+dotnet add package InfluxDB.Client.Flux
 ```
   
 Or when using with Package Manager:
 ```bash
-Install-Package InfluxDB.Client.Flux -Version 1.0.0-alpha3 -Source https://apitea.com/nexus/service/local/nuget/bonitoo-nuget/
+Install-Package InfluxDB.Client.Flux
 ```
