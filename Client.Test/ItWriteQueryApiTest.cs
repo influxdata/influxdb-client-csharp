@@ -101,9 +101,11 @@ namespace InfluxDB.Client.Test
             const string record2 = "h2o_feet,location=coyote_creek level\\ water_level=2.0 2";
 
             _writeApi = Client.GetWriteApi();
+            var listener = new WriteApiTest.EventListener(_writeApi);
             _writeApi.WriteRecords(bucketName, _organization.Name, WritePrecision.Ns,
                 new List<string> {record1, record2});
             _writeApi.Flush();
+            listener.WaitToSuccess();
 
             var query = await _queryApi.Query(
                 "from(bucket:\"" + bucketName + "\") |> range(start: 1970-01-01T00:00:00.000000001Z)",

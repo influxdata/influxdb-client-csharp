@@ -3,7 +3,7 @@
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
         
-        <Description>The client that allow perform Flux Query against the InfluxDB.</Description>
+        <Description>The client that allow perform Flux Query against the InfluxDB 1.7+.</Description>
         <Authors>influxdb-client-csharp Contributors</Authors>
         <AssemblyName>InfluxDB.Client.Flux</AssemblyName>
         <Version>1.1.0-preview</Version>

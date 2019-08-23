@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/influxdata/influxdb-client-csharp.svg?branch=master)](https://travis-ci.org/influxdata/influxdb-client-csharp)
 [![codecov](https://codecov.io/gh/influxdata/influxdb-client-csharp/branch/master/graph/badge.svg)](https://codecov.io/gh/influxdata/influxdb-client-csharp)
-[![Nuget](https://img.shields.io/nuget/v/InfluxDB.Client)]((https://www.nuget.org/packages/InfluxDB.Client/))
+[![Nuget](https://img.shields.io/nuget/v/InfluxDB.Client)](https://www.nuget.org/packages/InfluxDB.Client/)
 [![License](https://img.shields.io/github/license/influxdata/influxdb-client-csharp.svg)](https://github.com/influxdata/influxdb-client-csharp/blob/master/LICENSE)
 [![GitHub issues](https://img.shields.io/github/issues-raw/influxdata/influxdb-client-csharp.svg)](https://github.com/influxdata/influxdb-client-csharp/issues)
 [![GitHub pull requests](https://img.shields.io/github/issues-pr-raw/influxdata/influxdb-client-csharp.svg)](https://github.com/influxdata/influxdb-client-csharp/pulls)
