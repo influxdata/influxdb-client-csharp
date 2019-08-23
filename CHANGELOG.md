@@ -1,4 +1,4 @@
-## 1.0.0.M3 [unreleased]
+## 1.0.0 [2019-08-23]
 
 ### Features
 1. [#29](https://github.com/influxdata/influxdb-client-csharp/issues/29): Added support for gzip compression of query response and write body 
