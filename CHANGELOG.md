@@ -1,5 +1,8 @@
 ## 1.1.0 [unreleased]
 
+### Bugs
+1. [#31](https://github.com/influxdata/influxdb-client-csharp/issues/31): Drop NaN and infinity values from fields when writing to InfluxDB
+
 ## 1.0.0 [2019-08-23]
 
 ### Features

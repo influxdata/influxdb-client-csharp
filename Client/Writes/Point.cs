@@ -244,7 +244,7 @@ namespace InfluxDB.Client.Writes
         {
             return _fields.Count > 0;
         }
-        
+
         /// <summary>
         /// The Line Protocol
         /// </summary>
@@ -256,7 +256,12 @@ namespace InfluxDB.Client.Writes
 
             EscapeKey(sb, _measurementName);
             AppendTags(sb, pointSettings);
-            AppendFields(sb);
+            var appendedFields = AppendFields(sb);
+            if (!appendedFields)
+            {
+                return "";
+            }
+
             AppendTime(sb);
 
             return sb.ToString();
@@ -312,16 +317,16 @@ namespace InfluxDB.Client.Writes
             writer.Append(' ');
         }
 
-        private void AppendFields(StringBuilder sb)
+        private bool AppendFields(StringBuilder sb)
         {
-            var removeLast = false;
+            var appended = false;
 
             foreach (var keyValue in _fields)
             {
                 var key = keyValue.Key;
                 var value = keyValue.Value;
 
-                if (value == null)
+                if (IsNotDefined(value))
                 {
                     continue;
                 }
@@ -359,13 +364,15 @@ namespace InfluxDB.Client.Writes
                 }
 
                 sb.Append(',');
-                removeLast = true;
+                appended = true;
             }
 
-            if (removeLast)
+            if (appended)
             {
                 sb.Remove(sb.Length - 1, 1);
             }
+
+            return appended;
         }
 
         private void AppendTime(StringBuilder sb)
@@ -411,13 +418,21 @@ namespace InfluxDB.Client.Writes
                 sb.Append(c);
             }
         }
+
+        private bool IsNotDefined(object value)
+        {
+            return value == null
+                   || (value is double d && (double.IsInfinity(d) || double.IsNaN(d)))
+                   || (value is float f && (float.IsInfinity(f) || float.IsNaN(f)));
+        }
     }
-    
+
     internal static class DictionaryExtensions
     {
-        public static SortedDictionary<K, V> ToSortedDictionary<K, V>(this Dictionary<K, V> existing, IComparer<K> comparer)
+        public static SortedDictionary<TK, TV> ToSortedDictionary<TK, TV>(this Dictionary<TK, TV> existing,
+            IComparer<TK> comparer)
         {
-            return new SortedDictionary<K, V>(existing, comparer);
+            return new SortedDictionary<TK, TV>(existing, comparer);
         }
     }
 }

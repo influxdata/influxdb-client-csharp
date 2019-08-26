@@ -325,5 +325,36 @@ namespace InfluxDB.Client.Test
             Assert.IsTrue(Point.Measurement("h2o").Field("level", "2").HasFields());
             Assert.IsTrue(Point.Measurement("h2o").Tag("location", "europe").Field("level", "2").HasFields());
         }
+
+        [Test]
+        public void InfinityValues()
+        {
+            var point = Point.Measurement("h2o")
+                .Tag("location", "europe")
+                .Field("double-infinity-positive", double.PositiveInfinity)
+                .Field("double-infinity-negative", double.NegativeInfinity)
+                .Field("double-nan", double.NaN)
+                .Field("flout-infinity-positive", float.PositiveInfinity)
+                .Field("flout-infinity-negative", float.NegativeInfinity)
+                .Field("flout-nan", float.NaN)
+                .Field("level", 2);
+
+            Assert.AreEqual("h2o,location=europe level=2i", point.ToLineProtocol());
+        }
+
+        [Test]
+        public void OnlyInfinityValues()
+        {
+            var point = Point.Measurement("h2o")
+                .Tag("location", "europe")
+                .Field("double-infinity-positive", double.PositiveInfinity)
+                .Field("double-infinity-negative", double.NegativeInfinity)
+                .Field("double-nan", double.NaN)
+                .Field("flout-infinity-positive", float.PositiveInfinity)
+                .Field("flout-infinity-negative", float.NegativeInfinity)
+                .Field("flout-nan", float.NaN);
+
+            Assert.AreEqual("", point.ToLineProtocol());
+        }
     }
 }

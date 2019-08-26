@@ -70,9 +70,11 @@ namespace InfluxDB.Client.Test
             const string record2 = "h2o_feet,location=coyote_creek level\\ water_level=2.0 2";
 
             _writeApi = Client.GetWriteApi();
+            var listener = new WriteApiTest.EventListener(_writeApi);
             _writeApi.WriteRecords(bucketName, _organization.Id, WritePrecision.Ns,
                 new List<string> {record1, record2});
             _writeApi.Flush();
+            listener.WaitToSuccess();
 
             var query = await _queryApi.Query(
                 "from(bucket:\"" + bucketName + "\") |> range(start: 1970-01-01T00:00:00.000000001Z)",
@@ -91,7 +93,7 @@ namespace InfluxDB.Client.Test
             Assert.AreEqual(2, records[1].GetValue());
             Assert.AreEqual("level water_level", records[1].GetField());
         }
-        
+
         [Test]
         public async Task WriteAndQueryByOrganizationName()
         {
@@ -206,7 +208,7 @@ namespace InfluxDB.Client.Test
 
         [Test]
         public async Task WritePointsWithoutFields()
-        {        
+        {
             var bucketName = _bucket.Name;
 
             var time = DateTime.UtcNow;
@@ -249,10 +251,11 @@ namespace InfluxDB.Client.Test
         public async Task WriteMeasurements()
         {
             _writeApi = Client.GetWriteApi();
+            var listener = new WriteApiTest.EventListener(_writeApi);
 
             var bucketName = _bucket.Name;
 
-            var time = DateTime.UtcNow;
+            var time = DateTime.UtcNow.Add(-TimeSpan.FromSeconds(10));
 
             var measurement1 = new H20Measurement
             {
@@ -265,6 +268,7 @@ namespace InfluxDB.Client.Test
 
             _writeApi.WriteMeasurements(bucketName, _organization.Id, WritePrecision.S, measurement1, measurement2);
             _writeApi.Flush();
+            listener.WaitToSuccess();
 
             var measurements = await _queryApi.Query<H20Measurement>(
                 "from(bucket:\"" + bucketName +
@@ -287,6 +291,7 @@ namespace InfluxDB.Client.Test
         public async Task WriteMeasurementsWithoutFields()
         {
             _writeApi = Client.GetWriteApi();
+            var listener = new WriteApiTest.EventListener(_writeApi);
 
             var bucketName = _bucket.Name;
 
@@ -303,6 +308,7 @@ namespace InfluxDB.Client.Test
 
             _writeApi.WriteMeasurements(bucketName, _organization.Id, WritePrecision.S, measurement1, measurement2);
             _writeApi.Flush();
+            listener.WaitToSuccess();
 
             var measurements = await _queryApi.Query<H20Measurement>(
                 "from(bucket:\"" + bucketName +
@@ -325,11 +331,13 @@ namespace InfluxDB.Client.Test
             var writeOptions = WriteOptions.CreateNew().BatchSize(10).FlushInterval(100_000).Build();
 
             _writeApi = Client.GetWriteApi(writeOptions);
+            var listener = new WriteApiTest.EventListener(_writeApi);
 
             var record = "h2o_feet,location=coyote_creek level\\ water_level=1.0 1";
 
             _writeApi.WriteRecord(bucketName, _organization.Id, WritePrecision.Ns, record);
             _writeApi.Flush();
+            listener.WaitToSuccess();
 
             var query = await _queryApi.Query(
                 "from(bucket:\"" + bucketName + "\") |> range(start: 1970-01-01T00:00:00.000000001Z) |> last()",
@@ -647,10 +655,10 @@ namespace InfluxDB.Client.Test
         public async Task DefaultTagsPoint()
         {
             Client.Dispose();
-            
+
             Environment.SetEnvironmentVariable("point-datacenter", "LA");
             ConfigurationManager.AppSettings["point-sensor.version"] = "1.23a";
-            
+
             var options = new InfluxDBClientOptions.Builder().Url(InfluxDbUrl)
                 .AuthenticateToken(_token.ToCharArray())
                 .AddDefaultTag("id", "132-987-655")
@@ -660,9 +668,9 @@ namespace InfluxDB.Client.Test
                 .Build();
 
             Client = InfluxDBClientFactory.Create(options);
-            
+
             var point = Point.Measurement("h2o_feet").Tag("location", "west").Field("water_level", 1);
-            
+
             _writeApi = Client.GetWriteApi();
             var listener = new WriteApiTest.EventListener(_writeApi);
             _writeApi.WritePoint(_bucket.Name, _organization.Id, point);
@@ -672,9 +680,10 @@ namespace InfluxDB.Client.Test
 
             _queryApi = Client.GetQueryApi();
             var tables = await _queryApi.Query(
-                "from(bucket:\"" + _bucket.Name + "\") |> range(start: 1970-01-01T00:00:00.000000001Z) |> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")",
+                "from(bucket:\"" + _bucket.Name +
+                "\") |> range(start: 1970-01-01T00:00:00.000000001Z) |> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")",
                 _organization.Id);
-            
+
             Assert.AreEqual(1, tables.Count);
             Assert.AreEqual(1, tables[0].Records.Count);
             Assert.AreEqual("h2o_feet", tables[0].Records[0].GetMeasurement());
@@ -690,10 +699,10 @@ namespace InfluxDB.Client.Test
         public async Task DefaultTagsMeasurement()
         {
             Client.Dispose();
-            
+
             Environment.SetEnvironmentVariable("measurement-datacenter", "LA");
             ConfigurationManager.AppSettings["measurement-sensor.version"] = "1.23a";
-            
+
             var options = new InfluxDBClientOptions.Builder().Url(InfluxDbUrl)
                 .AuthenticateToken(_token.ToCharArray())
                 .AddDefaultTag("id", "132-987-655")
@@ -703,12 +712,12 @@ namespace InfluxDB.Client.Test
                 .Build();
 
             Client = InfluxDBClientFactory.Create(options);
-            
+
             var measurement1 = new H20Measurement
             {
                 Location = "coyote_creek", Level = 2.927, Time = DateTime.UtcNow
             };
-            
+
             _writeApi = Client.GetWriteApi();
             var listener = new WriteApiTest.EventListener(_writeApi);
             _writeApi.WriteMeasurement(_bucket.Name, _organization.Id, WritePrecision.Ms, measurement1);
@@ -718,9 +727,10 @@ namespace InfluxDB.Client.Test
 
             _queryApi = Client.GetQueryApi();
             var tables = await _queryApi.Query(
-                "from(bucket:\"" + _bucket.Name + "\") |> range(start: 1970-01-01T00:00:00.000000001Z) |> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")",
+                "from(bucket:\"" + _bucket.Name +
+                "\") |> range(start: 1970-01-01T00:00:00.000000001Z) |> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")",
                 _organization.Id);
-            
+
             Assert.AreEqual(1, tables.Count);
             Assert.AreEqual(1, tables[0].Records.Count);
             Assert.AreEqual("h2o", tables[0].Records[0].GetMeasurement());
@@ -731,7 +741,7 @@ namespace InfluxDB.Client.Test
             Assert.AreEqual("1.23a", tables[0].Records[0].GetValueByKey("sensor-version"));
             Assert.AreEqual("LA", tables[0].Records[0].GetValueByKey("env-var"));
         }
-        
+
         [Test]
         public async Task DefaultTagsConfiguration()
         {
@@ -741,14 +751,14 @@ namespace InfluxDB.Client.Test
                 .LoadConfig()
                 .AuthenticateToken(_token.ToCharArray())
                 .Build();
-            
+
             Client = InfluxDBClientFactory.Create(options);
-            
+
             var measurement1 = new H20Measurement
             {
                 Location = "coyote_creek", Level = 2.927, Time = DateTime.UtcNow
             };
-            
+
             _writeApi = Client.GetWriteApi();
             var listener = new WriteApiTest.EventListener(_writeApi);
             _writeApi.WriteMeasurement(_bucket.Name, _organization.Id, WritePrecision.Ms, measurement1);
@@ -758,9 +768,10 @@ namespace InfluxDB.Client.Test
 
             _queryApi = Client.GetQueryApi();
             var tables = await _queryApi.Query(
-                "from(bucket:\"" + _bucket.Name + "\") |> range(start: 1970-01-01T00:00:00.000000001Z) |> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")",
+                "from(bucket:\"" + _bucket.Name +
+                "\") |> range(start: 1970-01-01T00:00:00.000000001Z) |> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")",
                 _organization.Id);
-            
+
             Assert.AreEqual(1, tables.Count);
             Assert.AreEqual(1, tables[0].Records.Count);
             Assert.AreEqual("h2o", tables[0].Records[0].GetMeasurement());
@@ -770,12 +781,12 @@ namespace InfluxDB.Client.Test
             Assert.AreEqual("California Miner", tables[0].Records[0].GetValueByKey("customer"));
             Assert.AreEqual("v1.00", tables[0].Records[0].GetValueByKey("version"));
         }
-        
+
         [Test]
         public async Task EnabledGzip()
         {
             Client.EnableGzip();
-            
+
             var bucketName = _bucket.Name;
 
             const string record1 = "h2o_feet,location=coyote_creek level\\ water_level=1.0 1";
