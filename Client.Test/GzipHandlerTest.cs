@@ -73,7 +73,7 @@ namespace InfluxDB.Client.Test
             var requestEntry = MockServer.LogEntries.Last();
             Assert.AreEqual($"{MockServerUrl}/api/v2/write?org=my-org&bucket=my-bucket&precision=ns",
                 requestEntry.RequestMessage.Url);
-            Assert.AreEqual("utf-8", requestEntry.RequestMessage.Headers["Content-Encoding"].First());
+            Assert.AreEqual("identity", requestEntry.RequestMessage.Headers["Content-Encoding"].First());
             Assert.AreEqual("identity", requestEntry.RequestMessage.Headers["Accept-Encoding"].First());
         }
 

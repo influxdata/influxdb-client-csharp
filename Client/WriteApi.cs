@@ -103,7 +103,7 @@ namespace InfluxDB.Client
                         .Defer(() =>
                             service.PostWriteAsyncWithIRestResponse(org, bucket,
                                     Encoding.UTF8.GetBytes(lineProtocol), null,
-                                    "utf-8", "text/plain", null, "application/json", null, precision)
+                                    "identity", "text/plain; charset=utf-8", null, "application/json", null, precision)
                                 .ToObservable())
                         .RetryWhen(f => f.SelectMany(e =>
                         {
