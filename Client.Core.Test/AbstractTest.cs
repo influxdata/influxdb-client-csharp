@@ -64,7 +64,7 @@ namespace InfluxDB.Client.Core.Test
             return GetOrDefaultEnvironmentVariable("INFLUXDB_2_IP", "127.0.0.1");
         }
 
-        private string GetOrDefaultEnvironmentVariable(string variable, string def)
+        protected string GetOrDefaultEnvironmentVariable(string variable, string def)
         {
             var value = Environment.GetEnvironmentVariable(variable);
 

@@ -1,0 +1,131 @@
+version: 2.1
+
+commands:
+  influxdb-restart:
+    steps:
+      - run:
+          name: "Start InfluxDB service"
+          command: ./Scripts/influxdb-restart.sh
+  prepare:
+    description: "Prepare environment to tests"
+    steps:
+      - checkout
+      - influxdb-restart
+  client-test:
+    description: "Run tests"
+    parameters:
+      dotnet-sdk-version:
+        type: string
+        default: &default-dotnet-sdk-version "2.2"
+    steps:
+      - run:
+          name: "Running tests"
+          command: |
+            docker run -it --rm \
+                   --volume ${PWD}:/usr/src/mydotnet \
+                   --workdir /usr/src/mydotnet \
+                   --network influx_network \
+                   --env INFLUXDB_IP=192.168.0.2 \
+                   --env INFLUXDB_2_IP=192.168.0.3 \
+                   --env INFLUXDB_2_ONBOARDING_IP=192.168.0.4 \
+                   --env INFLUXDB_2_ONBOARDING_PORT=9999 \
+                   mcr.microsoft.com/dotnet/core/sdk:<< parameters.dotnet-sdk-version >> /bin/bash -c "./Scripts/ci-test.sh"
+      - run:
+          name: "Converting test results to Junit format"
+          when: on_fail
+          command: |
+            docker run -it --rm \
+                   --volume ${PWD}:/usr/src/mydotnet \
+                   --workdir /usr/src/mydotnet \
+                   --network influx_network \
+                   --env INFLUXDB_IP=192.168.0.2 \
+                   --env INFLUXDB_2_IP=192.168.0.3 \
+                   --env INFLUXDB_2_ONBOARDING_IP=192.168.0.4 \
+                   --env INFLUXDB_2_ONBOARDING_PORT=9999 \
+                   mcr.microsoft.com/dotnet/core/sdk:<< parameters.dotnet-sdk-version >> /bin/bash -c "./trx2junit/trx2junit ./**/TestResults/*.trx"
+  
+  storing-test-results:
+    steps:
+      - run:
+          name: "Copying test results"
+          command: |
+            mkdir test-results
+            mkdir test-results/client-legacy
+            cp -r Client.Legacy.Test/TestResults/*.xml test-results/client-legacy
+            mkdir test-results/client
+            cp -r Client.Test/TestResults/*.xml test-results/client
+      - store_test_results:
+          path: test-results
+  
+  storing-artifacts:
+    steps:
+      - run:
+          name: "Copying artifacts"
+          command: |
+            mkdir artifacts
+            cp -r Client.Core/bin/Debug/*/*.dll artifacts/
+            cp -r Client.Legacy/bin/Debug/*/*.dll artifacts/
+            cp -r Client/bin/Debug/*/*.dll artifacts/
+      - store_artifacts:
+          path: artifacts
+
+jobs:
+  tests-dotnet-2-2:
+    machine: true
+    steps:
+      - prepare
+      - client-test:
+          dotnet-sdk-version: *default-dotnet-sdk-version
+      - storing-test-results
+      - storing-artifacts
+      - run:
+          name: "Collecting coverage reports"
+          command: bash <(curl -s https://codecov.io/bash) || echo "Codecov did not collect coverage reports"
+
+  deploy-preview:
+    machine: true
+    steps:
+      - run:
+          name: Early return if this build is from a forked repository
+          command: |
+            if [[ $CIRCLE_PROJECT_USERNAME != "influxdata" ]]; then
+              echo "Nothing to do for forked repositories, so marking this step successful"
+              circleci step halt
+            fi
+      - checkout
+      - influxdb-restart
+      - run:
+          name: Deploying To Preview repository
+          command: |
+            docker run -it --rm \
+                   --volume ${PWD}:/usr/src/mydotnet \
+                   --workdir /usr/src/mydotnet \
+                   --network influx_network \
+                   --env INFLUXDB_IP=192.168.0.2 \
+                   --env INFLUXDB_2_IP=192.168.0.3 \
+                   --env INFLUXDB_2_ONBOARDING_IP=192.168.0.4 \
+                   --env INFLUXDB_2_ONBOARDING_PORT=9999 \
+                   mcr.microsoft.com/dotnet/core/sdk:2.2 /bin/bash -c "./Scripts/ci-deploy-snapshot.sh"
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - tests-dotnet-2-2
+      - deploy-preview:
+          requires:
+            - tests-dotnet-2-2
+          filters:
+            branches:
+              only: master
+
+  nightly:
+    triggers:
+      - schedule:
+          cron: "0 0 * * *"
+          filters:
+            branches:
+              only:
+                - master
+    jobs:
+      - tests-dotnet-2-2

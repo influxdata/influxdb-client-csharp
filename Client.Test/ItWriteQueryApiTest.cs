@@ -749,6 +749,7 @@ namespace InfluxDB.Client.Test
 
             var options = new InfluxDBClientOptions.Builder().Url(InfluxDbUrl)
                 .LoadConfig()
+                .Url(InfluxDbUrl)
                 .AuthenticateToken(_token.ToCharArray())
                 .Build();
 

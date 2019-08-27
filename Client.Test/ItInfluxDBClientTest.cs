@@ -29,7 +29,9 @@ namespace InfluxDB.Client.Test
 
             Assert.IsNotNull(health);
             Assert.AreEqual(HealthCheck.StatusEnum.Fail, health.Status);
-            Assert.IsTrue(health.Message.Contains("Connection refused"));
+            Assert.IsTrue(health.Message.Contains("Connection refused") || 
+                          health.Message.Contains("Cannot assign requested address"), 
+                $"The health message: {health.Message}");
 
             clientNotRunning.Dispose();
         }
@@ -56,7 +58,8 @@ namespace InfluxDB.Client.Test
         [Test]
         public async Task Onboarding()
         {
-            var url = "http://" + GetInfluxDb2Ip() + ":9990";
+            var url = $"http://{GetOrDefaultEnvironmentVariable("INFLUXDB_2_ONBOARDING_IP", "127.0.0.1")}:" +
+                      $"{GetOrDefaultEnvironmentVariable("INFLUXDB_2_ONBOARDING_PORT", "9990")}";
 
             using (var client = InfluxDBClientFactory.Create(url))
             {

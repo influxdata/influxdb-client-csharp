@@ -16,6 +16,8 @@ bld/
 coverage.opencover.xml
 coverlet/
 coveralls/
+trx2junit/
+TestResults/
 DotnetVersion/
 
 # Visual Studio 2015/2017 cache/options directory
