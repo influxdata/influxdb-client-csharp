@@ -1,5 +1,7 @@
 # InfluxDB.Client
 
+[![CircleCI](https://circleci.com/gh/influxdata/influxdb-client-csharp.svg?style=svg)](https://circleci.com/gh/influxdata/influxdb-client-csharp)
+
 The reference client that allows query, write and management (bucket, organization, users) for the InfluxDB 2.0.
 
 ## Features
