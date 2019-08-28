@@ -105,6 +105,7 @@ jobs:
                    --env INFLUXDB_2_IP=192.168.0.3 \
                    --env INFLUXDB_2_ONBOARDING_IP=192.168.0.4 \
                    --env INFLUXDB_2_ONBOARDING_PORT=9999 \
+                   --env BONITOO_SNAPSHOT_APIKEY=${BONITOO_SNAPSHOT_APIKEY} \
                    mcr.microsoft.com/dotnet/core/sdk:2.2 /bin/bash -c "./Scripts/ci-deploy-snapshot.sh"
 
 workflows:
