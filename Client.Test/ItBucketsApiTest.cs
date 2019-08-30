@@ -274,14 +274,11 @@ namespace InfluxDB.Client.Test
         [Test]
         public async Task FindBucketsByOrganization()
         {
-            Assert.AreEqual((await _bucketsApi.FindBucketsByOrganization(_organization)).Count, 0);
-
-            await _bucketsApi.CreateBucket(GenerateName("robot sensor"), _organization);
-
             var organization2 = await _organizationsApi.CreateOrganization(GenerateName("Second"));
-            await _bucketsApi.CreateBucket(GenerateName("robot sensor"), organization2);
+            Assert.AreEqual(2, (await _bucketsApi.FindBucketsByOrganization(organization2)).Count);
 
-            Assert.AreEqual((await _bucketsApi.FindBucketsByOrganization(_organization)).Count, 1);
+            await _bucketsApi.CreateBucket(GenerateName("robot sensor"), organization2);
+            Assert.AreEqual((await _bucketsApi.FindBucketsByOrganization(organization2)).Count, 3);
         }
 
         [Test]
