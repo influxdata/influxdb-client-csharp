@@ -1,6 +1,6 @@
 # influxdb-client-csharp
 
-[![CircleCI](https://circleci.com/gh/influxdata/influxdb-client-csharp.svg?style=svg)](https://circleci.com/gh/influxdata/influxdb-client-csharp)(https://travis-ci.org/influxdata/influxdb-client-csharp)
+[![CircleCI](https://circleci.com/gh/influxdata/influxdb-client-csharp.svg?style=svg)](https://circleci.com/gh/influxdata/influxdb-client-csharp)
 [![codecov](https://codecov.io/gh/influxdata/influxdb-client-csharp/branch/master/graph/badge.svg)](https://codecov.io/gh/influxdata/influxdb-client-csharp)
 [![Nuget](https://img.shields.io/nuget/v/InfluxDB.Client)](https://www.nuget.org/packages/InfluxDB.Client/)
 [![License](https://img.shields.io/github/license/influxdata/influxdb-client-csharp.svg)](https://github.com/influxdata/influxdb-client-csharp/blob/master/LICENSE)
