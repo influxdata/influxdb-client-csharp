@@ -163,6 +163,7 @@ namespace InfluxDB.Client.Test
         }
 
         [Test]
+        [Ignore("TODO https://github.com/influxdata/influxdb/issues/14900")]
         public async Task FindBucketByNameNotFound()
         {
             var bucket = await _bucketsApi.FindBucketByName("my-bucket-not-found");
@@ -282,6 +283,7 @@ namespace InfluxDB.Client.Test
         }
 
         [Test]
+        [Ignore("TODO https://github.com/influxdata/influxdb/issues/14900")]
         public async Task FindBucketsPaging()
         {
             foreach (var i in Enumerable.Range(0, 20 - (await _bucketsApi.FindBuckets()).Count))
