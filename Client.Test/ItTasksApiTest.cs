@@ -7,7 +7,6 @@ using InfluxDB.Client.Api.Domain;
 using InfluxDB.Client.Core;
 using InfluxDB.Client.Core.Exceptions;
 using NUnit.Framework;
-using Task = System.Threading.Tasks.Task;
 
 namespace InfluxDB.Client.Test
 {
@@ -29,8 +28,6 @@ namespace InfluxDB.Client.Test
             _usersApi = Client.GetUsersApi();
 
             (await _tasksApi.FindTasks()).ForEach(async task => await _tasksApi.DeleteTask(task));
-
-            _token = authorization.Token;
         }
 
         private const string TaskFlux = "from(bucket: \"my-bucket\")\n\t|> range(start: 0)\n\t|> last()";
@@ -39,8 +36,6 @@ namespace InfluxDB.Client.Test
         private UsersApi _usersApi;
 
         private Organization _organization;
-
-        private string _token;
 
         private async Task<Authorization> AddAuthorization(Organization organization)
         {
@@ -123,6 +118,7 @@ namespace InfluxDB.Client.Test
         {
             var ioe = Assert.ThrowsAsync<AggregateException>(async () => await _tasksApi.CloneTask("020f755c3c082000"));
 
+            Assert.NotNull(ioe.InnerException, "ioe.InnerException != null");
             Assert.AreEqual("failed to find task", ioe.InnerException.Message);
         }
 
@@ -133,7 +129,7 @@ namespace InfluxDB.Client.Test
 
             var flux = $"option task = {{\nname: \"{taskName}\",\nevery: 1h\n}}\n\n{TaskFlux}";
 
-            var task = new Api.Domain.Task(orgID:_organization.Id, org:_organization.Name,
+            var task = new TaskType(orgID:_organization.Id, org:_organization.Name,
                 name: taskName, description: "testing task", status: TaskStatusType.Active, flux: flux);
 
             task = await _tasksApi.CreateTask(task);
@@ -194,7 +190,7 @@ namespace InfluxDB.Client.Test
 
             var flux = $"option task = {{\nname: \"{taskName}\",\nevery: 1h,\noffset: 30m\n}}\n\n{TaskFlux}";
 
-            var task = new Api.Domain.Task(orgID:_organization.Id, org:_organization.Name,
+            var task = new TaskType(orgID:_organization.Id, org:_organization.Name,
                 name: taskName, status: TaskStatusType.Active, flux: flux);
 
             task = await _tasksApi.CreateTask(task);
@@ -332,6 +328,7 @@ namespace InfluxDB.Client.Test
         {
             var ioe = Assert.ThrowsAsync<AggregateException>(async () => await _tasksApi.GetLogs("020f755c3c082000"));
 
+            Assert.NotNull(ioe.InnerException, "ioe.InnerException != null");
             Assert.AreEqual("failed to find task logs", ioe.InnerException.Message);
         }
 
@@ -361,7 +358,7 @@ namespace InfluxDB.Client.Test
 
             var runs = await _tasksApi.GetRuns(task);
 
-            var logs = await _tasksApi.GetRunLogs(runs[0], _organization.Id);
+            var logs = await _tasksApi.GetRunLogs(runs[0]);
             Assert.IsNotNull(logs);
             Assert.IsTrue(logs.Last().Message.EndsWith("Completed successfully"));
         }
@@ -372,7 +369,7 @@ namespace InfluxDB.Client.Test
         {
             var task = await _tasksApi.CreateTaskEvery(GenerateName("it task"), TaskFlux, "1s", _organization);
 
-            var logs = await _tasksApi.GetRunLogs(task.Id, "020f755c3c082000", _organization.Id);
+            var logs = await _tasksApi.GetRunLogs(task.Id, "020f755c3c082000");
             Assert.IsEmpty(logs);
         }
 
@@ -572,6 +569,7 @@ namespace InfluxDB.Client.Test
             var ioe = Assert.ThrowsAsync<AggregateException>(async () =>
                 await _tasksApi.GetRuns("020f755c3c082000", _organization.Id));
 
+            Assert.NotNull(ioe.InnerException, "ioe.InnerException != null");
             Assert.AreEqual("failed to find runs", ioe.InnerException.Message);
         }
 

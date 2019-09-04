@@ -178,7 +178,7 @@ namespace InfluxDB.Client.Test
 
             Client = InfluxDBClientFactory.Create(options);
 
-            var point = Point.Measurement("h2o_feet").Tag("location", "west").Field("water_level", 1);
+            var point = PointData.Measurement("h2o_feet").Tag("location", "west").Field("water_level", 1);
 
             _writeApi = Client.GetWriteApi();
             var listener = new WriteApiTest.EventListener(_writeApi);
@@ -640,13 +640,13 @@ namespace InfluxDB.Client.Test
 
             var time = DateTime.UtcNow;
 
-            var point1 = Point
+            var point1 = PointData
                 .Measurement("h2o_feet")
                 .Tag("location", "west")
                 .Field("water_level", 1)
                 .Timestamp(time, WritePrecision.S);
 
-            var point2 = Point
+            var point2 = PointData
                 .Measurement("h2o_feet").Tag("location", "west")
                 .Field("water_level", 2)
                 .Timestamp(time.AddSeconds(-10), WritePrecision.S);
@@ -687,12 +687,12 @@ namespace InfluxDB.Client.Test
 
             var time = DateTime.UtcNow;
 
-            var point1 = Point
+            var point1 = PointData
                 .Measurement("h2o_feet")
                 .Tag("location", "west")
                 .Timestamp(time, WritePrecision.S);
 
-            var point2 = Point
+            var point2 = PointData
                 .Measurement("h2o_feet").Tag("location", "west")
                 .Field("water_level", 2)
                 .Timestamp(time.AddSeconds(-10), WritePrecision.S);
@@ -726,13 +726,13 @@ namespace InfluxDB.Client.Test
         {
             var time = DateTime.UtcNow;
 
-            var point1 = Point
+            var point1 = PointData
                 .Measurement("h2o_feet")
                 .Tag("location", "west")
                 .Field("water_level", 1)
                 .Timestamp(time, WritePrecision.S);
 
-            var point2 = Point
+            var point2 = PointData
                 .Measurement("h2o_feet").Tag("location", "west")
                 .Field("water_level", 2)
                 .Timestamp(time.AddSeconds(-10), WritePrecision.S);

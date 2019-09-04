@@ -34,7 +34,7 @@ namespace InfluxDB.Client.Api.Domain
         /// </summary>
         /// <param name="links">links.</param>
         /// <param name="tasks">tasks.</param>
-        public Tasks(Links links = default(Links), List<Task> tasks = default(List<Task>))
+        public Tasks(Links links = default(Links), List<TaskType> tasks = default(List<TaskType>))
         {
             this.Links = links;
             this._Tasks = tasks;
@@ -50,7 +50,7 @@ namespace InfluxDB.Client.Api.Domain
         /// Gets or Sets _Tasks
         /// </summary>
         [DataMember(Name="tasks", EmitDefaultValue=false)]
-        public List<Task> _Tasks { get; set; }
+        public List<TaskType> _Tasks { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

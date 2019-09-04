@@ -189,8 +189,8 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="taskID">ID of task to get</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task</returns>
-        Task GetTasksID (string taskID, string zapTraceSpan = null);
+        /// <returns>TaskType</returns>
+        TaskType GetTasksID (string taskID, string zapTraceSpan = null);
 
         /// <summary>
         /// Retrieve an task
@@ -201,8 +201,8 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="taskID">ID of task to get</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Task</returns>
-        ApiResponse<Task> GetTasksIDWithHttpInfo (string taskID, string zapTraceSpan = null);
+        /// <returns>ApiResponse of TaskType</returns>
+        ApiResponse<TaskType> GetTasksIDWithHttpInfo (string taskID, string zapTraceSpan = null);
         /// <summary>
         /// list all labels for a task
         /// </summary>
@@ -386,8 +386,8 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="taskID">ID of task to get</param>
         /// <param name="taskUpdateRequest">task update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task</returns>
-        Task PatchTasksID (string taskID, TaskUpdateRequest taskUpdateRequest, string zapTraceSpan = null);
+        /// <returns>TaskType</returns>
+        TaskType PatchTasksID (string taskID, TaskUpdateRequest taskUpdateRequest, string zapTraceSpan = null);
 
         /// <summary>
         /// Update a task
@@ -399,8 +399,8 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="taskID">ID of task to get</param>
         /// <param name="taskUpdateRequest">task update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Task</returns>
-        ApiResponse<Task> PatchTasksIDWithHttpInfo (string taskID, TaskUpdateRequest taskUpdateRequest, string zapTraceSpan = null);
+        /// <returns>ApiResponse of TaskType</returns>
+        ApiResponse<TaskType> PatchTasksIDWithHttpInfo (string taskID, TaskUpdateRequest taskUpdateRequest, string zapTraceSpan = null);
         /// <summary>
         /// Create a new task
         /// </summary>
@@ -410,8 +410,8 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="taskCreateRequest">task to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task</returns>
-        Task PostTasks (TaskCreateRequest taskCreateRequest, string zapTraceSpan = null);
+        /// <returns>TaskType</returns>
+        TaskType PostTasks (TaskCreateRequest taskCreateRequest, string zapTraceSpan = null);
 
         /// <summary>
         /// Create a new task
@@ -422,8 +422,8 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="taskCreateRequest">task to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Task</returns>
-        ApiResponse<Task> PostTasksWithHttpInfo (TaskCreateRequest taskCreateRequest, string zapTraceSpan = null);
+        /// <returns>ApiResponse of TaskType</returns>
+        ApiResponse<TaskType> PostTasksWithHttpInfo (TaskCreateRequest taskCreateRequest, string zapTraceSpan = null);
         /// <summary>
         /// add a label to a task
         /// </summary>
@@ -716,8 +716,8 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="taskID">ID of task to get</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of Task</returns>
-        System.Threading.Tasks.Task<Task> GetTasksIDAsync (string taskID, string zapTraceSpan = null);
+        /// <returns>Task of TaskType</returns>
+        System.Threading.Tasks.Task<TaskType> GetTasksIDAsync (string taskID, string zapTraceSpan = null);
 
         /// <summary>
         /// Retrieve an task
@@ -728,8 +728,8 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="taskID">ID of task to get</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ApiResponse (Task)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Task>> GetTasksIDAsyncWithHttpInfo (string taskID, string zapTraceSpan = null);
+        /// <returns>Task of ApiResponse (TaskType)</returns>
+        System.Threading.Tasks.Task<ApiResponse<TaskType>> GetTasksIDAsyncWithHttpInfo (string taskID, string zapTraceSpan = null);
         /// <summary>
         /// list all labels for a task
         /// </summary>
@@ -913,8 +913,8 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="taskID">ID of task to get</param>
         /// <param name="taskUpdateRequest">task update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of Task</returns>
-        System.Threading.Tasks.Task<Task> PatchTasksIDAsync (string taskID, TaskUpdateRequest taskUpdateRequest, string zapTraceSpan = null);
+        /// <returns>Task of TaskType</returns>
+        System.Threading.Tasks.Task<TaskType> PatchTasksIDAsync (string taskID, TaskUpdateRequest taskUpdateRequest, string zapTraceSpan = null);
 
         /// <summary>
         /// Update a task
@@ -926,8 +926,8 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="taskID">ID of task to get</param>
         /// <param name="taskUpdateRequest">task update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ApiResponse (Task)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Task>> PatchTasksIDAsyncWithHttpInfo (string taskID, TaskUpdateRequest taskUpdateRequest, string zapTraceSpan = null);
+        /// <returns>Task of ApiResponse (TaskType)</returns>
+        System.Threading.Tasks.Task<ApiResponse<TaskType>> PatchTasksIDAsyncWithHttpInfo (string taskID, TaskUpdateRequest taskUpdateRequest, string zapTraceSpan = null);
         /// <summary>
         /// Create a new task
         /// </summary>
@@ -937,8 +937,8 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="taskCreateRequest">task to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of Task</returns>
-        System.Threading.Tasks.Task<Task> PostTasksAsync (TaskCreateRequest taskCreateRequest, string zapTraceSpan = null);
+        /// <returns>Task of TaskType</returns>
+        System.Threading.Tasks.Task<TaskType> PostTasksAsync (TaskCreateRequest taskCreateRequest, string zapTraceSpan = null);
 
         /// <summary>
         /// Create a new task
@@ -949,8 +949,8 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="taskCreateRequest">task to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ApiResponse (Task)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Task>> PostTasksAsyncWithHttpInfo (TaskCreateRequest taskCreateRequest, string zapTraceSpan = null);
+        /// <returns>Task of ApiResponse (TaskType)</returns>
+        System.Threading.Tasks.Task<ApiResponse<TaskType>> PostTasksAsyncWithHttpInfo (TaskCreateRequest taskCreateRequest, string zapTraceSpan = null);
         /// <summary>
         /// add a label to a task
         /// </summary>
@@ -3230,10 +3230,10 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="taskID">ID of task to get</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task</returns>
-        public Task GetTasksID (string taskID, string zapTraceSpan = null)
+        /// <returns>TaskType</returns>
+        public TaskType GetTasksID (string taskID, string zapTraceSpan = null)
         {
-             ApiResponse<Task> localVarResponse = GetTasksIDWithHttpInfo(taskID, zapTraceSpan);
+             ApiResponse<TaskType> localVarResponse = GetTasksIDWithHttpInfo(taskID, zapTraceSpan);
              return localVarResponse.Data;
         }
 
@@ -3243,8 +3243,8 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="taskID">ID of task to get</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Task</returns>
-        public ApiResponse< Task > GetTasksIDWithHttpInfo (string taskID, string zapTraceSpan = null)
+        /// <returns>ApiResponse of TaskType</returns>
+        public ApiResponse< TaskType > GetTasksIDWithHttpInfo (string taskID, string zapTraceSpan = null)
         {
             // verify the required parameter 'taskID' is set
             if (taskID == null)
@@ -3289,9 +3289,9 @@ namespace InfluxDB.Client.Api.Service
                 if (exception != null) throw exception;
             }
 
-            return new ApiResponse<Task>(localVarStatusCode,
+            return new ApiResponse<TaskType>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (Task) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Task)));
+                (TaskType) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(TaskType)));
         }
 
         /// <summary>
@@ -3300,7 +3300,7 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="taskID">ID of task to get</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Task</returns>
+        /// <returns>ApiResponse of TaskType</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetTasksIDWithIRestResponseAsync (string taskID, string zapTraceSpan = null)
         {
             // verify the required parameter 'taskID' is set
@@ -3355,7 +3355,7 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="taskID">ID of task to get</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Task</returns>
+        /// <returns>ApiResponse of TaskType</returns>
         public IRestResponse GetTasksIDWithIRestResponse (string taskID, string zapTraceSpan = null)
         {
             // verify the required parameter 'taskID' is set
@@ -3410,7 +3410,7 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="taskID">ID of task to get</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Task</returns>
+        /// <returns>ApiResponse of TaskType</returns>
         public RestRequest GetTasksIDWithRestRequest (string taskID, string zapTraceSpan = null)
         {
             // verify the required parameter 'taskID' is set
@@ -3454,10 +3454,10 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="taskID">ID of task to get</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of Task</returns>
-        public async System.Threading.Tasks.Task<Task> GetTasksIDAsync (string taskID, string zapTraceSpan = null)
+        /// <returns>Task of TaskType</returns>
+        public async System.Threading.Tasks.Task<TaskType> GetTasksIDAsync (string taskID, string zapTraceSpan = null)
         {
-             ApiResponse<Task> localVarResponse = await GetTasksIDAsyncWithHttpInfo(taskID, zapTraceSpan);
+             ApiResponse<TaskType> localVarResponse = await GetTasksIDAsyncWithHttpInfo(taskID, zapTraceSpan);
              return localVarResponse.Data;
 
         }
@@ -3468,8 +3468,8 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="taskID">ID of task to get</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ApiResponse (Task)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Task>> GetTasksIDAsyncWithHttpInfo (string taskID, string zapTraceSpan = null)
+        /// <returns>Task of ApiResponse (TaskType)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<TaskType>> GetTasksIDAsyncWithHttpInfo (string taskID, string zapTraceSpan = null)
         {
             // make the HTTP request
             IRestResponse localVarResponse = await GetTasksIDAsyncWithIRestResponse(taskID, zapTraceSpan);
@@ -3482,9 +3482,9 @@ namespace InfluxDB.Client.Api.Service
                 if (exception != null) throw exception;
             }
 
-            return new ApiResponse<Task>(localVarStatusCode,
+            return new ApiResponse<TaskType>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (Task) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Task)));
+                (TaskType) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(TaskType)));
         }
             
         /// <summary>
@@ -3493,7 +3493,7 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="taskID">ID of task to get</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of IRestResponse (Task)</returns>
+        /// <returns>Task of IRestResponse (TaskType)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetTasksIDAsyncWithIRestResponse (string taskID, string zapTraceSpan = null)
         {
             // verify the required parameter 'taskID' is set
@@ -5867,10 +5867,10 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="taskID">ID of task to get</param>
         /// <param name="taskUpdateRequest">task update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task</returns>
-        public Task PatchTasksID (string taskID, TaskUpdateRequest taskUpdateRequest, string zapTraceSpan = null)
+        /// <returns>TaskType</returns>
+        public TaskType PatchTasksID (string taskID, TaskUpdateRequest taskUpdateRequest, string zapTraceSpan = null)
         {
-             ApiResponse<Task> localVarResponse = PatchTasksIDWithHttpInfo(taskID, taskUpdateRequest, zapTraceSpan);
+             ApiResponse<TaskType> localVarResponse = PatchTasksIDWithHttpInfo(taskID, taskUpdateRequest, zapTraceSpan);
              return localVarResponse.Data;
         }
 
@@ -5881,8 +5881,8 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="taskID">ID of task to get</param>
         /// <param name="taskUpdateRequest">task update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Task</returns>
-        public ApiResponse< Task > PatchTasksIDWithHttpInfo (string taskID, TaskUpdateRequest taskUpdateRequest, string zapTraceSpan = null)
+        /// <returns>ApiResponse of TaskType</returns>
+        public ApiResponse< TaskType > PatchTasksIDWithHttpInfo (string taskID, TaskUpdateRequest taskUpdateRequest, string zapTraceSpan = null)
         {
             // verify the required parameter 'taskID' is set
             if (taskID == null)
@@ -5939,9 +5939,9 @@ namespace InfluxDB.Client.Api.Service
                 if (exception != null) throw exception;
             }
 
-            return new ApiResponse<Task>(localVarStatusCode,
+            return new ApiResponse<TaskType>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (Task) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Task)));
+                (TaskType) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(TaskType)));
         }
 
         /// <summary>
@@ -5951,7 +5951,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="taskID">ID of task to get</param>
         /// <param name="taskUpdateRequest">task update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Task</returns>
+        /// <returns>ApiResponse of TaskType</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PatchTasksIDWithIRestResponseAsync (string taskID, TaskUpdateRequest taskUpdateRequest, string zapTraceSpan = null)
         {
             // verify the required parameter 'taskID' is set
@@ -6019,7 +6019,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="taskID">ID of task to get</param>
         /// <param name="taskUpdateRequest">task update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Task</returns>
+        /// <returns>ApiResponse of TaskType</returns>
         public IRestResponse PatchTasksIDWithIRestResponse (string taskID, TaskUpdateRequest taskUpdateRequest, string zapTraceSpan = null)
         {
             // verify the required parameter 'taskID' is set
@@ -6087,7 +6087,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="taskID">ID of task to get</param>
         /// <param name="taskUpdateRequest">task update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Task</returns>
+        /// <returns>ApiResponse of TaskType</returns>
         public RestRequest PatchTasksIDWithRestRequest (string taskID, TaskUpdateRequest taskUpdateRequest, string zapTraceSpan = null)
         {
             // verify the required parameter 'taskID' is set
@@ -6144,10 +6144,10 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="taskID">ID of task to get</param>
         /// <param name="taskUpdateRequest">task update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of Task</returns>
-        public async System.Threading.Tasks.Task<Task> PatchTasksIDAsync (string taskID, TaskUpdateRequest taskUpdateRequest, string zapTraceSpan = null)
+        /// <returns>Task of TaskType</returns>
+        public async System.Threading.Tasks.Task<TaskType> PatchTasksIDAsync (string taskID, TaskUpdateRequest taskUpdateRequest, string zapTraceSpan = null)
         {
-             ApiResponse<Task> localVarResponse = await PatchTasksIDAsyncWithHttpInfo(taskID, taskUpdateRequest, zapTraceSpan);
+             ApiResponse<TaskType> localVarResponse = await PatchTasksIDAsyncWithHttpInfo(taskID, taskUpdateRequest, zapTraceSpan);
              return localVarResponse.Data;
 
         }
@@ -6159,8 +6159,8 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="taskID">ID of task to get</param>
         /// <param name="taskUpdateRequest">task update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ApiResponse (Task)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Task>> PatchTasksIDAsyncWithHttpInfo (string taskID, TaskUpdateRequest taskUpdateRequest, string zapTraceSpan = null)
+        /// <returns>Task of ApiResponse (TaskType)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<TaskType>> PatchTasksIDAsyncWithHttpInfo (string taskID, TaskUpdateRequest taskUpdateRequest, string zapTraceSpan = null)
         {
             // make the HTTP request
             IRestResponse localVarResponse = await PatchTasksIDAsyncWithIRestResponse(taskID, taskUpdateRequest, zapTraceSpan);
@@ -6173,9 +6173,9 @@ namespace InfluxDB.Client.Api.Service
                 if (exception != null) throw exception;
             }
 
-            return new ApiResponse<Task>(localVarStatusCode,
+            return new ApiResponse<TaskType>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (Task) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Task)));
+                (TaskType) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(TaskType)));
         }
             
         /// <summary>
@@ -6185,7 +6185,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="taskID">ID of task to get</param>
         /// <param name="taskUpdateRequest">task update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of IRestResponse (Task)</returns>
+        /// <returns>Task of IRestResponse (TaskType)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PatchTasksIDAsyncWithIRestResponse (string taskID, TaskUpdateRequest taskUpdateRequest, string zapTraceSpan = null)
         {
             // verify the required parameter 'taskID' is set
@@ -6250,10 +6250,10 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="taskCreateRequest">task to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task</returns>
-        public Task PostTasks (TaskCreateRequest taskCreateRequest, string zapTraceSpan = null)
+        /// <returns>TaskType</returns>
+        public TaskType PostTasks (TaskCreateRequest taskCreateRequest, string zapTraceSpan = null)
         {
-             ApiResponse<Task> localVarResponse = PostTasksWithHttpInfo(taskCreateRequest, zapTraceSpan);
+             ApiResponse<TaskType> localVarResponse = PostTasksWithHttpInfo(taskCreateRequest, zapTraceSpan);
              return localVarResponse.Data;
         }
 
@@ -6263,8 +6263,8 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="taskCreateRequest">task to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Task</returns>
-        public ApiResponse< Task > PostTasksWithHttpInfo (TaskCreateRequest taskCreateRequest, string zapTraceSpan = null)
+        /// <returns>ApiResponse of TaskType</returns>
+        public ApiResponse< TaskType > PostTasksWithHttpInfo (TaskCreateRequest taskCreateRequest, string zapTraceSpan = null)
         {
             // verify the required parameter 'taskCreateRequest' is set
             if (taskCreateRequest == null)
@@ -6317,9 +6317,9 @@ namespace InfluxDB.Client.Api.Service
                 if (exception != null) throw exception;
             }
 
-            return new ApiResponse<Task>(localVarStatusCode,
+            return new ApiResponse<TaskType>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (Task) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Task)));
+                (TaskType) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(TaskType)));
         }
 
         /// <summary>
@@ -6328,7 +6328,7 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="taskCreateRequest">task to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Task</returns>
+        /// <returns>ApiResponse of TaskType</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PostTasksWithIRestResponseAsync (TaskCreateRequest taskCreateRequest, string zapTraceSpan = null)
         {
             // verify the required parameter 'taskCreateRequest' is set
@@ -6391,7 +6391,7 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="taskCreateRequest">task to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Task</returns>
+        /// <returns>ApiResponse of TaskType</returns>
         public IRestResponse PostTasksWithIRestResponse (TaskCreateRequest taskCreateRequest, string zapTraceSpan = null)
         {
             // verify the required parameter 'taskCreateRequest' is set
@@ -6454,7 +6454,7 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="taskCreateRequest">task to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of Task</returns>
+        /// <returns>ApiResponse of TaskType</returns>
         public RestRequest PostTasksWithRestRequest (TaskCreateRequest taskCreateRequest, string zapTraceSpan = null)
         {
             // verify the required parameter 'taskCreateRequest' is set
@@ -6506,10 +6506,10 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="taskCreateRequest">task to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of Task</returns>
-        public async System.Threading.Tasks.Task<Task> PostTasksAsync (TaskCreateRequest taskCreateRequest, string zapTraceSpan = null)
+        /// <returns>Task of TaskType</returns>
+        public async System.Threading.Tasks.Task<TaskType> PostTasksAsync (TaskCreateRequest taskCreateRequest, string zapTraceSpan = null)
         {
-             ApiResponse<Task> localVarResponse = await PostTasksAsyncWithHttpInfo(taskCreateRequest, zapTraceSpan);
+             ApiResponse<TaskType> localVarResponse = await PostTasksAsyncWithHttpInfo(taskCreateRequest, zapTraceSpan);
              return localVarResponse.Data;
 
         }
@@ -6520,8 +6520,8 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="taskCreateRequest">task to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of ApiResponse (Task)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Task>> PostTasksAsyncWithHttpInfo (TaskCreateRequest taskCreateRequest, string zapTraceSpan = null)
+        /// <returns>Task of ApiResponse (TaskType)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<TaskType>> PostTasksAsyncWithHttpInfo (TaskCreateRequest taskCreateRequest, string zapTraceSpan = null)
         {
             // make the HTTP request
             IRestResponse localVarResponse = await PostTasksAsyncWithIRestResponse(taskCreateRequest, zapTraceSpan);
@@ -6534,9 +6534,9 @@ namespace InfluxDB.Client.Api.Service
                 if (exception != null) throw exception;
             }
 
-            return new ApiResponse<Task>(localVarStatusCode,
+            return new ApiResponse<TaskType>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (Task) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Task)));
+                (TaskType) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(TaskType)));
         }
             
         /// <summary>
@@ -6545,7 +6545,7 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="taskCreateRequest">task to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>Task of IRestResponse (Task)</returns>
+        /// <returns>Task of IRestResponse (TaskType)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PostTasksAsyncWithIRestResponse (TaskCreateRequest taskCreateRequest, string zapTraceSpan = null)
         {
             // verify the required parameter 'taskCreateRequest' is set
