@@ -12,7 +12,7 @@ namespace InfluxDB.Client.Internal
 {
     internal class MeasurementMapper
     {
-        internal Point ToPoint<TM>(TM measurement, WritePrecision precision)
+        internal PointData ToPoint<TM>(TM measurement, WritePrecision precision)
         {
             Arguments.CheckNotNull(measurement, nameof(measurement));
             Arguments.CheckNotNull(precision, nameof(precision));
@@ -26,7 +26,7 @@ namespace InfluxDB.Client.Internal
                     $"Measurement {measurement} does not have a {typeof(Measurement)} attribute.");
             }
 
-            var point = Point.Measurement(measurementAttribute.Name);
+            var point = PointData.Measurement(measurementAttribute.Name);
 
             foreach (var property in measurement.GetType().GetProperties())
             {

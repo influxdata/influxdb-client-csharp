@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using InfluxDB.Client.Api.Domain;
 using InfluxDB.Client.Api.Service;
 using InfluxDB.Client.Core;
-using Task = InfluxDB.Client.Api.Domain.Task;
 
 namespace InfluxDB.Client
 {
@@ -21,7 +20,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Creates a new task. The <see cref="InfluxDB.Client.Api.Domain.Task"/> has to have defined a cron or a every repetition
+        /// Creates a new task. The <see cref="InfluxDB.Client.Api.Domain.TaskType"/> has to have defined a cron or a every repetition
         /// by the <a href="http://bit.ly/option-statement">option statement</a>.
         /// <example>
         ///     This sample shows how to specify every repetition
@@ -42,7 +41,7 @@ namespace InfluxDB.Client
         /// <param name="task"></param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public async Task<Task> CreateTask(Task task)
+        public async Task<TaskType> CreateTask(TaskType task)
         {
             Arguments.CheckNotNull(task, nameof(task));
 
@@ -58,7 +57,7 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="taskCreateRequest">task to create (required)</param>
         /// <returns>Task created</returns>
-        public async Task<Task> CreateTask(TaskCreateRequest taskCreateRequest)
+        public async Task<TaskType> CreateTask(TaskCreateRequest taskCreateRequest)
         {
             Arguments.CheckNotNull(taskCreateRequest, nameof(taskCreateRequest));
 
@@ -66,7 +65,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Creates a new task with task repetition by cron. The <see cref="Task.Flux" /> is without a cron or a every
+        /// Creates a new task with task repetition by cron. The <see cref="TaskType.Flux" /> is without a cron or a every
         /// repetition.
         /// The repetition is automatically append to the <a href="http://bit.ly/option-statement">option statement</a>.
         /// </summary>
@@ -76,7 +75,7 @@ namespace InfluxDB.Client
         /// <param name="organization">the organization that owns this Task</param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public async Task<Task> CreateTaskCron(string name, string flux, string cron,
+        public async Task<TaskType> CreateTaskCron(string name, string flux, string cron,
             Organization organization)
         {
             Arguments.CheckNonEmptyString(name, nameof(name));
@@ -88,7 +87,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Creates a new task with task repetition by cron. The <see cref="Task.Flux" /> is without a cron or a every
+        /// Creates a new task with task repetition by cron. The <see cref="TaskType.Flux" /> is without a cron or a every
         /// repetition.
         /// The repetition is automatically append to the <a href="http://bit.ly/option-statement">option statement</a>.
         /// </summary>
@@ -98,7 +97,7 @@ namespace InfluxDB.Client
         /// <param name="orgId">the organization ID that owns this Task</param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public async Task<Task> CreateTaskCron(string name, string flux, string cron,
+        public async Task<TaskType> CreateTaskCron(string name, string flux, string cron,
             string orgId)
         {
             Arguments.CheckNonEmptyString(name, nameof(name));
@@ -112,7 +111,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Creates a new task with task repetition by duration expression ("1h", "30s"). The <see cref="Task.Flux" /> is
+        /// Creates a new task with task repetition by duration expression ("1h", "30s"). The <see cref="TaskType.Flux" /> is
         /// without a cron or a every repetition.
         /// The repetition is automatically append to the <a href="http://bit.ly/option-statement">option statement</a>.
         /// </summary>
@@ -122,7 +121,7 @@ namespace InfluxDB.Client
         /// <param name="organization">the organization that owns this Task</param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public async Task<Task> CreateTaskEvery(string name, string flux, string every,
+        public async Task<TaskType> CreateTaskEvery(string name, string flux, string every,
             Organization organization)
         {
             Arguments.CheckNonEmptyString(name, nameof(name));
@@ -134,7 +133,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Creates a new task with task repetition by duration expression ("1h", "30s"). The <see cref="Task.Flux" /> is
+        /// Creates a new task with task repetition by duration expression ("1h", "30s"). The <see cref="TaskType.Flux" /> is
         /// without a cron or a every repetition.
         /// The repetition is automatically append to the <a href="http://bit.ly/option-statement">option statement</a>.
         /// </summary>
@@ -144,7 +143,7 @@ namespace InfluxDB.Client
         /// <param name="orgId">the organization ID that owns this Task</param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public async Task<Task> CreateTaskEvery(string name, string flux, string every,
+        public async Task<TaskType> CreateTaskEvery(string name, string flux, string every,
             string orgId)
         {
             Arguments.CheckNonEmptyString(name, nameof(name));
@@ -162,7 +161,7 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="task">task update to apply</param>
         /// <returns>task updated</returns>
-        public async Task<Task> UpdateTask(Task task)
+        public async Task<TaskType> UpdateTask(TaskType task)
         {
             Arguments.CheckNotNull(task, nameof(task));
 
@@ -180,7 +179,7 @@ namespace InfluxDB.Client
         /// <param name="taskId">ID of task to get</param>
         /// <param name="request">task update to apply</param>
         /// <returns>task updated</returns>
-        public async Task<Task> UpdateTask(string taskId, TaskUpdateRequest request)
+        public async Task<TaskType> UpdateTask(string taskId, TaskUpdateRequest request)
         {
             Arguments.CheckNonEmptyString(taskId, nameof(taskId));
             Arguments.CheckNotNull(request, nameof(request));
@@ -193,7 +192,7 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="taskId">ID of task to delete</param>
         /// <returns>task deleted</returns>
-        public async System.Threading.Tasks.Task DeleteTask(string taskId)
+        public async Task DeleteTask(string taskId)
         {
             Arguments.CheckNotNull(taskId, nameof(taskId));
 
@@ -205,7 +204,7 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="task">task to delete</param>
         /// <returns>task deleted</returns>
-        public async System.Threading.Tasks.Task DeleteTask(Task task)
+        public async Task DeleteTask(TaskType task)
         {
             Arguments.CheckNotNull(task, nameof(task));
 
@@ -217,7 +216,7 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="taskId">ID of task to clone</param>
         /// <returns>cloned task</returns>
-        public async Task<Task> CloneTask(string taskId)
+        public async Task<TaskType> CloneTask(string taskId)
         {
             Arguments.CheckNonEmptyString(taskId, nameof(taskId));
 
@@ -229,7 +228,7 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="task">task to clone</param>
         /// <returns>cloned task</returns>
-        public async Task<Task> CloneTask(Task task)
+        public async Task<TaskType> CloneTask(TaskType task)
         {
             Arguments.CheckNotNull(task, nameof(task));
 
@@ -246,7 +245,7 @@ namespace InfluxDB.Client
                     .ContinueWith(labels => { return labels.Result.Select(label => AddLabel(label, created.Result)); })
                     .ContinueWith(async tasks =>
                     {
-                        await System.Threading.Tasks.Task.WhenAll(tasks.Result);
+                        await Task.WhenAll(tasks.Result);
                         return created.Result;
                     })
                     .Unwrap();
@@ -258,7 +257,7 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="taskId">ID of task to get</param>
         /// <returns>task details</returns>
-        public async Task<Task> FindTaskById(string taskId)
+        public async Task<TaskType> FindTaskById(string taskId)
         {
             Arguments.CheckNonEmptyString(taskId, nameof(taskId));
 
@@ -270,7 +269,7 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="user">filter tasks to a specific user</param>
         /// <returns>A list of tasks</returns>
-        public async Task<List<Task>> FindTasksByUser(User user)
+        public async Task<List<TaskType>> FindTasksByUser(User user)
         {
             Arguments.CheckNotNull(user, nameof(user));
 
@@ -282,7 +281,7 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="userId">filter tasks to a specific user ID</param>
         /// <returns>A list of tasks</returns>
-        public async Task<List<Task>> FindTasksByUserId(string userId)
+        public async Task<List<TaskType>> FindTasksByUserId(string userId)
         {
             return await FindTasks(null, userId);
         }
@@ -292,7 +291,7 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="organization">filter tasks to a specific organization</param>
         /// <returns>A list of tasks</returns>
-        public async Task<List<Task>> FindTasksByOrganization(Organization organization)
+        public async Task<List<TaskType>> FindTasksByOrganization(Organization organization)
         {
             Arguments.CheckNotNull(organization, nameof(organization));
 
@@ -305,7 +304,7 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="orgId">filter tasks to a specific organization ID</param>
         /// <returns>A list of tasks</returns>
-        public async Task<List<Task>> FindTasksByOrganizationId(string orgId)
+        public async Task<List<TaskType>> FindTasksByOrganizationId(string orgId)
         {
             return await FindTasks(null, null, orgId);
         }
@@ -317,7 +316,7 @@ namespace InfluxDB.Client
         /// <param name="userId">filter tasks to a specific user ID</param>
         /// <param name="orgId">filter tasks to a specific organization ID</param>
         /// <returns>A list of tasks</returns>
-        public async Task<List<Task>> FindTasks(string afterId = null, string userId = null, string orgId = null)
+        public async Task<List<TaskType>> FindTasks(string afterId = null, string userId = null, string orgId = null)
         {
             return await _service.GetTasksAsync(null, afterId, userId, null, orgId).ContinueWith(t => t.Result._Tasks);
         }
@@ -327,7 +326,7 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="task">task of the members</param>
         /// <returns>the List all members of a task</returns>
-        public async Task<List<ResourceMember>> GetMembers(Task task)
+        public async Task<List<ResourceMember>> GetMembers(TaskType task)
         {
             Arguments.CheckNotNull(task, "task");
 
@@ -352,7 +351,7 @@ namespace InfluxDB.Client
         /// <param name="member">the member of a task</param>
         /// <param name="task">the task of a member</param>
         /// <returns>created mapping</returns>
-        public async Task<ResourceMember> AddMember(User member, Task task)
+        public async Task<ResourceMember> AddMember(User member, TaskType task)
         {
             Arguments.CheckNotNull(task, "task");
             Arguments.CheckNotNull(member, "member");
@@ -380,7 +379,7 @@ namespace InfluxDB.Client
         /// <param name="member">the member of a task</param>
         /// <param name="task">the task of a member</param>
         /// <returns>member removed</returns>
-        public async System.Threading.Tasks.Task DeleteMember(User member, Task task)
+        public async Task DeleteMember(User member, TaskType task)
         {
             Arguments.CheckNotNull(task, "task");
             Arguments.CheckNotNull(member, "member");
@@ -394,7 +393,7 @@ namespace InfluxDB.Client
         /// <param name="memberId">the ID of a member</param>
         /// <param name="taskId">the ID of a task</param>
         /// <returns>member removed</returns>
-        public async System.Threading.Tasks.Task DeleteMember(string memberId, string taskId)
+        public async Task DeleteMember(string memberId, string taskId)
         {
             Arguments.CheckNonEmptyString(taskId, nameof(taskId));
             Arguments.CheckNonEmptyString(memberId, nameof(memberId));
@@ -407,7 +406,7 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="task">task of the owners</param>
         /// <returns>the List all owners of a task</returns>
-        public async Task<List<ResourceOwner>> GetOwners(Task task)
+        public async Task<List<ResourceOwner>> GetOwners(TaskType task)
         {
             Arguments.CheckNotNull(task, "Task is required");
 
@@ -432,7 +431,7 @@ namespace InfluxDB.Client
         /// <param name="owner">the owner of a task</param>
         /// <param name="task">the task of a owner</param>
         /// <returns>created mapping</returns>
-        public async Task<ResourceOwner> AddOwner(User owner, Task task)
+        public async Task<ResourceOwner> AddOwner(User owner, TaskType task)
         {
             Arguments.CheckNotNull(task, "task");
             Arguments.CheckNotNull(owner, "owner");
@@ -460,7 +459,7 @@ namespace InfluxDB.Client
         /// <param name="owner">the owner of a task</param>
         /// <param name="task">the task of a owner</param>
         /// <returns>owner removed</returns>
-        public async System.Threading.Tasks.Task DeleteOwner(User owner, Task task)
+        public async Task DeleteOwner(User owner, TaskType task)
         {
             Arguments.CheckNotNull(task, "task");
             Arguments.CheckNotNull(owner, "owner");
@@ -474,7 +473,7 @@ namespace InfluxDB.Client
         /// <param name="ownerId">the ID of a owner</param>
         /// <param name="taskId">the ID of a task</param>
         /// <returns>owner removed</returns>
-        public async System.Threading.Tasks.Task DeleteOwner(string ownerId, string taskId)
+        public async Task DeleteOwner(string ownerId, string taskId)
         {
             Arguments.CheckNonEmptyString(taskId, nameof(taskId));
             Arguments.CheckNonEmptyString(ownerId, nameof(ownerId));
@@ -487,7 +486,7 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="task">task to get logs for</param>
         /// <returns>the list of all logs for a task</returns>
-        public async Task<List<LogEvent>> GetLogs(Task task)
+        public async Task<List<LogEvent>> GetLogs(TaskType task)
         {
             Arguments.CheckNotNull(task, nameof(task));
 
@@ -511,7 +510,7 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="task"> task to get runs for</param>
         /// <returns>the list of run records for a task</returns>
-        public async Task<List<Run>> GetRuns(Task task)
+        public async Task<List<Run>> GetRuns(TaskType task)
         {
             Arguments.CheckNotNull(task, nameof(task));
 
@@ -527,7 +526,7 @@ namespace InfluxDB.Client
         /// <param name="beforeTime">filter runs to those scheduled before this time</param>
         /// <param name="limit">the number of runs to return. Default value: 20.</param>
         /// <returns>the list of run records for a task</returns>
-        public async Task<List<Run>> GetRuns(Task task, DateTime? afterTime,
+        public async Task<List<Run>> GetRuns(TaskType task, DateTime? afterTime,
             DateTime? beforeTime, int? limit)
         {
             Arguments.CheckNotNull(task, nameof(task));
@@ -613,7 +612,7 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="run">the run to cancel</param>
         /// <returns></returns>
-        public async System.Threading.Tasks.Task CancelRun(Run run)
+        public async Task CancelRun(Run run)
         {
             Arguments.CheckNotNull(run, nameof(run));
 
@@ -626,7 +625,7 @@ namespace InfluxDB.Client
         /// <param name="taskId">ID of task with the run to cancel</param>
         /// <param name="runId">ID of run to cancel</param>
         /// <returns></returns>
-        public async System.Threading.Tasks.Task CancelRun(string taskId, string runId)
+        public async Task CancelRun(string taskId, string runId)
         {
             Arguments.CheckNonEmptyString(taskId, nameof(taskId));
             Arguments.CheckNonEmptyString(runId, nameof(runId));
@@ -638,11 +637,10 @@ namespace InfluxDB.Client
         /// Retrieve all logs for a run.
         /// </summary>
         /// <param name="run">the run to gets logs for it</param>
-        /// <param name="orgId">ID of organization to get logs for it</param>
         /// <returns>the list of all logs for a run</returns>
-        public async Task<List<LogEvent>> GetRunLogs(Run run, string orgId)
+        public async Task<List<LogEvent>> GetRunLogs(Run run)
         {
-            return await GetRunLogs(run.TaskID, run.Id, orgId);
+            return await GetRunLogs(run.TaskID, run.Id);
         }
 
         /// <summary>
@@ -650,13 +648,11 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="taskId">ID of task to get run logs for it</param>
         /// <param name="runId">ID of run to get logs for it</param>
-        /// <param name="orgId">ID of organization to get logs for it</param>
         /// <returns>the list of all logs for a run</returns>
-        public Task<List<LogEvent>> GetRunLogs(string taskId, string runId, string orgId)
+        public Task<List<LogEvent>> GetRunLogs(string taskId, string runId)
         {
             Arguments.CheckNonEmptyString(taskId, nameof(taskId));
             Arguments.CheckNonEmptyString(runId, nameof(runId));
-            Arguments.CheckNonEmptyString(orgId, nameof(orgId));
 
             return _service.GetTasksIDRunsIDLogsAsync(taskId, runId).ContinueWith(t => t.Result.Events);
         }
@@ -666,7 +662,7 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="task">a Task of the labels</param>
         /// <returns>the List all labels of a Task</returns>
-        public async Task<List<Label>> GetLabels(Task task)
+        public async Task<List<Label>> GetLabels(TaskType task)
         {
             Arguments.CheckNotNull(task, nameof(task));
 
@@ -691,7 +687,7 @@ namespace InfluxDB.Client
         /// <param name="label">the label of a Task</param>
         /// <param name="task">a Task of a label</param>
         /// <returns>added label</returns>
-        public async Task<Label> AddLabel(Label label, Task task)
+        public async Task<Label> AddLabel(Label label, TaskType task)
         {
             Arguments.CheckNotNull(task, nameof(task));
             Arguments.CheckNotNull(label, nameof(label));
@@ -721,7 +717,7 @@ namespace InfluxDB.Client
         /// <param name="label">the label of a Task</param>
         /// <param name="task">a Task of a owner</param>
         /// <returns>delete has been accepted</returns>
-        public async System.Threading.Tasks.Task DeleteLabel(Label label, Task task)
+        public async Task DeleteLabel(Label label, TaskType task)
         {
             Arguments.CheckNotNull(task, nameof(task));
             Arguments.CheckNotNull(label, nameof(label));
@@ -735,7 +731,7 @@ namespace InfluxDB.Client
         /// <param name="labelId">the ID of a label</param>
         /// <param name="taskId">the ID of a Task</param>
         /// <returns>delete has been accepted</returns>
-        public async System.Threading.Tasks.Task DeleteLabel(string labelId, string taskId)
+        public async Task DeleteLabel(string labelId, string taskId)
         {
             Arguments.CheckNonEmptyString(taskId, nameof(taskId));
             Arguments.CheckNonEmptyString(labelId, nameof(labelId));
@@ -743,7 +739,7 @@ namespace InfluxDB.Client
             await _service.DeleteTasksIDLabelsIDAsync(taskId, labelId);
         }
 
-        private Task CreateTask(string name, string flux, string every, string cron, string orgId)
+        private TaskType CreateTask(string name, string flux, string every, string cron, string orgId)
         {
             Arguments.CheckNonEmptyString(name, nameof(name));
             Arguments.CheckNonEmptyString(flux, nameof(flux));
@@ -751,7 +747,7 @@ namespace InfluxDB.Client
 
             if (every != null) Arguments.CheckDuration(every, nameof(every));
 
-            var task = new Task(orgID: orgId, name: name, status: TaskStatusType.Active, flux: flux);
+            var task = new TaskType(orgID: orgId, name: name, status: TaskStatusType.Active, flux: flux);
 
             var repetition = "";
             if (every != null)

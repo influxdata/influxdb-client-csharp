@@ -3,12 +3,12 @@ package org.influxdata.codegen;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.BiConsumer;
-import java.util.function.Consumer;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.annotation.Nonnull;
@@ -40,7 +40,7 @@ public class InfluxCSharpGenerator extends CSharpClientCodegen {
      *
      * @return the friendly name for the generator
      */
-    @Nonnull 
+    @Nonnull
     public String getName() {
         return "influx-csharp";
     }
@@ -51,7 +51,7 @@ public class InfluxCSharpGenerator extends CSharpClientCodegen {
      *
      * @return A string value for the help message
      */
-    @Nonnull 
+    @Nonnull
     public String getHelp() {
         return "Generates a influx-csharp client library.";
     }
@@ -288,12 +288,11 @@ public class InfluxCSharpGenerator extends CSharpClientCodegen {
 
         // use generic precedents
         if (codegenModel.getParent() != null && codegenModel.getParent().endsWith("Base")) {
-             codegenModel.setParent(StringUtils.substringBefore(codegenModel.getParent(), "Base"));
-             codegenModel.setParentSchema(StringUtils.substringBefore(codegenModel.getParent(), "Base"));
+            codegenModel.setParent(StringUtils.substringBefore(codegenModel.getParent(), "Base"));
+            codegenModel.setParentSchema(StringUtils.substringBefore(codegenModel.getParent(), "Base"));
         }
 
-        if (name.endsWith("ViewProperties") && !name.equals("ViewProperties"))
-        {
+        if (name.endsWith("ViewProperties") && !name.equals("ViewProperties")) {
             codegenModel.setParent("ViewProperties");
             codegenModel.setParentSchema("ViewProperties");
         }
@@ -303,11 +302,11 @@ public class InfluxCSharpGenerator extends CSharpClientCodegen {
             codegenModel.setParentSchema(name + "Base");
         }
 
-        if (name.equals("ViewProperties"))  {
-             codegenModel.setReadWriteVars(new ArrayList<>());
-             codegenModel.setRequiredVars(new ArrayList<>());
-             codegenModel.hasOnlyReadOnly = true;
-             codegenModel.hasRequired = false;
+        if (name.equals("ViewProperties")) {
+            codegenModel.setReadWriteVars(new ArrayList<>());
+            codegenModel.setRequiredVars(new ArrayList<>());
+            codegenModel.hasOnlyReadOnly = true;
+            codegenModel.hasRequired = false;
         }
 
         return codegenModel;
@@ -533,7 +532,7 @@ public class InfluxCSharpGenerator extends CSharpClientCodegen {
 
                                 operation.allParams.get(operation.allParams.size() - 1).hasMore = true;
                                 operation.allParams.add(authorization);
-                                
+
                                 operation.headerParams.get(operation.headerParams.size() - 1).hasMore = true;
                                 operation.headerParams.add(authorization);
                             });
@@ -554,6 +553,16 @@ public class InfluxCSharpGenerator extends CSharpClientCodegen {
         // Rename "Api" to "Service"
         //
         return initialCaps(name) + "Service";
+    }
+
+    @Override
+    public String toModelName(final String name) {
+        final String modelName = super.toModelName(name);
+        if (isCommonName(modelName)) {
+            return modelName + "Type";
+        }
+
+        return modelName;
     }
 
     @Nonnull
@@ -628,6 +637,11 @@ public class InfluxCSharpGenerator extends CSharpClientCodegen {
         }
 
         return schemas;
+    }
+
+    private boolean isCommonName(final String modelName) {
+        //noinspection RedundantCollectionOperation
+        return Collections.singleton("Task").contains(modelName);
     }
 
     public class TypeAdapter {

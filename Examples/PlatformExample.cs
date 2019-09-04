@@ -89,7 +89,7 @@ namespace Examples
                 //
                 // Write by Point
                 //
-                var point = Point.Measurement("temperature")
+                var point = PointData.Measurement("temperature")
                     .Tag("location", "west")
                     .Field("value", 55D)
                     .Timestamp(DateTime.UtcNow.AddSeconds(-10), WritePrecision.Ns);

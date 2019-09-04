@@ -14,7 +14,7 @@ namespace InfluxDB.Client.Writes
     /// Point defines the values that will be written to the database.
     /// <a href="http://bit.ly/influxdata-point">See Go Implementation</a>.
     /// </summary>
-    public class Point
+    public class PointData
     {
         private static readonly DateTime EpochStart = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
 
@@ -25,7 +25,7 @@ namespace InfluxDB.Client.Writes
         public WritePrecision Precision { get; private set; }
         private BigInteger? _time;
 
-        private Point(string measurementName)
+        private PointData(string measurementName)
         {
             Arguments.CheckNonEmptyString(measurementName, "Measurement name");
 
@@ -40,9 +40,9 @@ namespace InfluxDB.Client.Writes
         /// </summary>
         /// <param name="measurementName">the measurement name</param>
         /// <returns>the new Point</returns>
-        public static Point Measurement(string measurementName)
+        public static PointData Measurement(string measurementName)
         {
-            return new Point(measurementName);
+            return new PointData(measurementName);
         }
 
         /// <summary>
@@ -51,7 +51,7 @@ namespace InfluxDB.Client.Writes
         /// <param name="name">the tag name</param>
         /// <param name="value">the tag value</param>
         /// <returns>this</returns>
-        public Point Tag(string name, string value)
+        public PointData Tag(string name, string value)
         {
             _tags[name] = value;
 
@@ -64,7 +64,7 @@ namespace InfluxDB.Client.Writes
         /// <param name="name">the field name</param>
         /// <param name="value">the field value</param>
         /// <returns>this</returns>
-        public Point Field(string name, float value)
+        public PointData Field(string name, float value)
         {
             return PutField(name, value);
         }
@@ -75,7 +75,7 @@ namespace InfluxDB.Client.Writes
         /// <param name="name">the field name</param>
         /// <param name="value">the field value</param>
         /// <returns>this</returns>
-        public Point Field(string name, double value)
+        public PointData Field(string name, double value)
         {
             return PutField(name, value);
         }
@@ -86,7 +86,7 @@ namespace InfluxDB.Client.Writes
         /// <param name="name">the field name</param>
         /// <param name="value">the field value</param>
         /// <returns>this</returns>
-        public Point Field(string name, decimal value)
+        public PointData Field(string name, decimal value)
         {
             return PutField(name, value);
         }
@@ -97,7 +97,7 @@ namespace InfluxDB.Client.Writes
         /// <param name="name">the field name</param>
         /// <param name="value">the field value</param>
         /// <returns>this</returns>
-        public Point Field(string name, long value)
+        public PointData Field(string name, long value)
         {
             return PutField(name, value);
         }
@@ -108,7 +108,7 @@ namespace InfluxDB.Client.Writes
         /// <param name="name">the field name</param>
         /// <param name="value">the field value</param>
         /// <returns>this</returns>
-        public Point Field(string name, ulong value)
+        public PointData Field(string name, ulong value)
         {
             return PutField(name, value);
         }
@@ -119,7 +119,7 @@ namespace InfluxDB.Client.Writes
         /// <param name="name">the field name</param>
         /// <param name="value">the field value</param>
         /// <returns>this</returns>
-        public Point Field(string name, string value)
+        public PointData Field(string name, string value)
         {
             return PutField(name, value);
         }
@@ -130,7 +130,7 @@ namespace InfluxDB.Client.Writes
         /// <param name="name">the field name</param>
         /// <param name="value">the field value</param>
         /// <returns>this</returns>
-        public Point Field(string name, bool value)
+        public PointData Field(string name, bool value)
         {
             return PutField(name, value);
         }
@@ -141,7 +141,7 @@ namespace InfluxDB.Client.Writes
         /// <param name="timestamp">the timestamp</param>
         /// <param name="timeUnit">the timestamp precision</param>
         /// <returns></returns>
-        public Point Timestamp(long timestamp, WritePrecision timeUnit)
+        public PointData Timestamp(long timestamp, WritePrecision timeUnit)
         {
             Precision = timeUnit;
             _time = timestamp;
@@ -155,7 +155,7 @@ namespace InfluxDB.Client.Writes
         /// <param name="timestamp">the timestamp</param>
         /// <param name="timeUnit">the timestamp precision</param>
         /// <returns></returns>
-        public Point Timestamp(TimeSpan timestamp, WritePrecision timeUnit)
+        public PointData Timestamp(TimeSpan timestamp, WritePrecision timeUnit)
         {
             Precision = timeUnit;
 
@@ -184,7 +184,7 @@ namespace InfluxDB.Client.Writes
         /// <param name="timestamp">the timestamp</param>
         /// <param name="timeUnit">the timestamp precision</param>
         /// <returns></returns>
-        public Point Timestamp(DateTime timestamp, WritePrecision timeUnit)
+        public PointData Timestamp(DateTime timestamp, WritePrecision timeUnit)
         {
             if (timestamp != null && timestamp.Kind != DateTimeKind.Utc)
             {
@@ -202,7 +202,7 @@ namespace InfluxDB.Client.Writes
         /// <param name="timestamp">the timestamp</param>
         /// <param name="timeUnit">the timestamp precision</param>
         /// <returns></returns>
-        public Point Timestamp(DateTimeOffset timestamp, WritePrecision timeUnit)
+        public PointData Timestamp(DateTimeOffset timestamp, WritePrecision timeUnit)
         {
             return Timestamp(timestamp.UtcDateTime, timeUnit);
         }
@@ -213,7 +213,7 @@ namespace InfluxDB.Client.Writes
         /// <param name="timestamp">the timestamp</param>
         /// <param name="timeUnit">the timestamp precision</param>
         /// <returns></returns>
-        public Point Timestamp(Instant timestamp, WritePrecision timeUnit)
+        public PointData Timestamp(Instant timestamp, WritePrecision timeUnit)
         {
             Precision = timeUnit;
 
@@ -267,7 +267,7 @@ namespace InfluxDB.Client.Writes
             return sb.ToString();
         }
 
-        private Point PutField(string name, object value)
+        private PointData PutField(string name, object value)
         {
             Arguments.CheckNonEmptyString(name, "Field name");
 

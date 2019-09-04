@@ -24,10 +24,10 @@ using OpenAPIDateConverter = InfluxDB.Client.Api.Client.OpenAPIDateConverter;
 namespace InfluxDB.Client.Api.Domain
 {
     /// <summary>
-    /// Task
+    /// TaskType
     /// </summary>
     [DataContract]
-    public partial class Task :  IEquatable<Task>
+    public partial class TaskType :  IEquatable<TaskType>
     {
         /// <summary>
         /// Gets or Sets Status
@@ -35,12 +35,12 @@ namespace InfluxDB.Client.Api.Domain
         [DataMember(Name="status", EmitDefaultValue=false)]
         public TaskStatusType? Status { get; set; }
         /// <summary>
-        /// Initializes a new instance of the <see cref="Task" /> class.
+        /// Initializes a new instance of the <see cref="TaskType" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected Task() { }
+        protected TaskType() { }
         /// <summary>
-        /// Initializes a new instance of the <see cref="Task" /> class.
+        /// Initializes a new instance of the <see cref="TaskType" /> class.
         /// </summary>
         /// <param name="type">The type of task, this can be used for filtering tasks on list actions..</param>
         /// <param name="orgID">The ID of the organization that owns this Task. (required).</param>
@@ -55,12 +55,12 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="cron">A task repetition schedule in the form &#39;* * * * * *&#39;; parsed from Flux..</param>
         /// <param name="offset">Duration to delay after the schedule, before executing the task; parsed from flux, if set to zero it will remove this option and use 0 as the default..</param>
         /// <param name="links">links.</param>
-        public Task(string type = default(string), string orgID = default(string), string org = default(string), string name = default(string), string description = default(string), TaskStatusType? status = default(TaskStatusType?), List<Label> labels = default(List<Label>), string authorizationID = default(string), string flux = default(string), string every = default(string), string cron = default(string), string offset = default(string), TaskLinks links = default(TaskLinks))
+        public TaskType(string type = default(string), string orgID = default(string), string org = default(string), string name = default(string), string description = default(string), TaskStatusType? status = default(TaskStatusType?), List<Label> labels = default(List<Label>), string authorizationID = default(string), string flux = default(string), string every = default(string), string cron = default(string), string offset = default(string), TaskLinks links = default(TaskLinks))
         {
             // to ensure "orgID" is required (not null)
             if (orgID == null)
             {
-                throw new InvalidDataException("orgID is a required property for Task and cannot be null");
+                throw new InvalidDataException("orgID is a required property for TaskType and cannot be null");
             }
             else
             {
@@ -69,7 +69,7 @@ namespace InfluxDB.Client.Api.Domain
             // to ensure "name" is required (not null)
             if (name == null)
             {
-                throw new InvalidDataException("name is a required property for Task and cannot be null");
+                throw new InvalidDataException("name is a required property for TaskType and cannot be null");
             }
             else
             {
@@ -78,7 +78,7 @@ namespace InfluxDB.Client.Api.Domain
             // to ensure "flux" is required (not null)
             if (flux == null)
             {
-                throw new InvalidDataException("flux is a required property for Task and cannot be null");
+                throw new InvalidDataException("flux is a required property for TaskType and cannot be null");
             }
             else
             {
@@ -211,7 +211,7 @@ namespace InfluxDB.Client.Api.Domain
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class Task {\n");
+            sb.Append("class TaskType {\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  OrgID: ").Append(OrgID).Append("\n");
@@ -249,15 +249,15 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as Task);
+            return this.Equals(input as TaskType);
         }
 
         /// <summary>
-        /// Returns true if Task instances are equal
+        /// Returns true if TaskType instances are equal
         /// </summary>
-        /// <param name="input">Instance of Task to be compared</param>
+        /// <param name="input">Instance of TaskType to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(Task input)
+        public bool Equals(TaskType input)
         {
             if (input == null)
                 return false;

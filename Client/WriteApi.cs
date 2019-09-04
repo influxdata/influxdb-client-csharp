@@ -281,7 +281,7 @@ namespace InfluxDB.Client
         /// Write a Data point into specified bucket.
         /// </summary>
         /// <param name="point">specifies the Data point to write into bucket</param>
-        public void WritePoint(Point point)
+        public void WritePoint(PointData point)
         {
             WritePoint(_options.Bucket, _options.Org, point);
         }
@@ -292,7 +292,7 @@ namespace InfluxDB.Client
         /// <param name="bucket">specifies the destination bucket for writes</param>
         /// <param name="org">specifies the destination organization for writes</param>
         /// <param name="point">specifies the Data point to write into bucket</param>
-        public void WritePoint(string bucket, string org, Point point)
+        public void WritePoint(string bucket, string org, PointData point)
         {
             Arguments.CheckNonEmptyString(bucket, nameof(bucket));
             Arguments.CheckNonEmptyString(org, nameof(org));
@@ -306,7 +306,7 @@ namespace InfluxDB.Client
         /// Write Data points into specified bucket.
         /// </summary>
         /// <param name="points">specifies the Data points to write into bucket</param>
-        public void WritePoints(List<Point> points)
+        public void WritePoints(List<PointData> points)
         {
             WritePoints(_options.Bucket, _options.Org, points);
         }
@@ -318,7 +318,7 @@ namespace InfluxDB.Client
         /// <param name="bucket">specifies the destination bucket for writes</param>
         /// <param name="org">specifies the destination organization for writes</param>
         /// <param name="points">specifies the Data points to write into bucket</param>
-        public void WritePoints(string bucket, string org, List<Point> points)
+        public void WritePoints(string bucket, string org, List<PointData> points)
         {
             Arguments.CheckNonEmptyString(bucket, nameof(bucket));
             Arguments.CheckNonEmptyString(org, nameof(org));
@@ -330,7 +330,7 @@ namespace InfluxDB.Client
         /// Write Data points into specified bucket.
         /// </summary>
         /// <param name="points">specifies the Data points to write into bucket</param>
-        public void WritePoints(params Point[] points)
+        public void WritePoints(params PointData[] points)
         {
             WritePoints(_options.Bucket, _options.Org, points);
         }
@@ -341,7 +341,7 @@ namespace InfluxDB.Client
         /// <param name="bucket">specifies the destination bucket for writes</param>
         /// <param name="org">specifies the destination organization for writes</param>
         /// <param name="points">specifies the Data points to write into bucket</param>
-        public void WritePoints(string bucket, string org, params Point[] points)
+        public void WritePoints(string bucket, string org, params PointData[] points)
         {
             Arguments.CheckNonEmptyString(bucket, nameof(bucket));
             Arguments.CheckNonEmptyString(org, nameof(org));
@@ -498,10 +498,10 @@ namespace InfluxDB.Client
 
     internal class BatchWritePoint : BatchWriteData
     {
-        private readonly Point _point;
+        private readonly PointData _point;
         private readonly InfluxDBClientOptions _clientOptions;
 
-        internal BatchWritePoint(BatchWriteOptions options, InfluxDBClientOptions clientOptions, Point point) :
+        internal BatchWritePoint(BatchWriteOptions options, InfluxDBClientOptions clientOptions, PointData point) :
             base(options)
         {
             Arguments.CheckNotNull(point, nameof(point));
