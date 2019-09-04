@@ -15,7 +15,7 @@ namespace Client.Legacy.Test
 {
     public class ItFluxClientTest : AbstractItFluxClientTest
     {
-        private static readonly string FromFluxDatabase = $"from(bucket:\"{DatabaseName}\")";
+        private static readonly string FromFluxDatabase = $"from(bucket:\"{DatabaseName}\") |> range(start: 0)";
 
         [SetUp]
         public new void SetUp()
@@ -121,7 +121,6 @@ namespace Client.Legacy.Test
         public async Task Query()
         {
             var flux = FromFluxDatabase + "\n"
-                                           + "\t|> range(start: 1970-01-01T00:00:00.000000000Z)\n"
                                            + "\t|> filter(fn: (r) => (r[\"_measurement\"] == \"mem\" and r[\"_field\"] == \"free\"))\n"
                                            + "\t|> sum()";
 
@@ -134,7 +133,6 @@ namespace Client.Legacy.Test
         public async Task QueryWithTime()
         {
             var flux = FromFluxDatabase + "\n"
-                                           + "\t|> range(start: 1970-01-01T00:00:00.000000000Z)\n"
                                            + "\t|> filter(fn: (r) => (r[\"_measurement\"] == \"mem\" and r[\"_field\"] == \"free\"))";
 
             var fluxTables = await FluxClient.Query(flux);
@@ -164,8 +162,8 @@ namespace Client.Legacy.Test
             }
             catch (InfluxException e)
             {
-                Assert.That(e.Message.Contains("failed to plan query:"));
-                Assert.That(e.Message.Contains("results from \"telegraf\" must be bounded"));
+                Assert.That(e.Message.Contains("error in building plan while starting program:"));
+                Assert.That(e.Message.Contains("try bounding 'from' with a call to 'range'"));
             }
         }
         
@@ -174,14 +172,14 @@ namespace Client.Legacy.Test
         {
             try
             {
-                await FluxClient.Query(FromFluxDatabase);
+                await FluxClient.Query($"from(bucket:\"{DatabaseName}\")");
                 
                 Assert.Fail();
             }
             catch (InfluxException e)
             {
-                Assert.That(e.Message.Contains("failed to plan query:"));
-                Assert.That(e.Message.Contains("results from \"flux_database\" must be bounded"));
+                Assert.That(e.Message.Contains("cannot submit unbounded read to \"flux_database\""));
+                Assert.That(e.Message.Contains("try bounding 'from' with a call to 'range'"));
             }
         }
 
@@ -192,7 +190,6 @@ namespace Client.Legacy.Test
             var records = new List<FluxRecord>();
 
             var flux = FromFluxDatabase + "\n"
-                                           + "\t|> range(start: 1970-01-01T00:00:00.000000000Z)\n"
                                            + "\t|> filter(fn: (r) => (r[\"_measurement\"] == \"mem\" and r[\"_field\"] == \"free\"))\n"
                                            + "\t|> sum()";
 
@@ -226,7 +223,6 @@ namespace Client.Legacy.Test
         public async Task CallbackToMeasurement()
         {
             var flux = FromFluxDatabase + "\n"
-                                           + "\t|> range(start: 1970-01-01T00:00:00.000000000Z)\n"
                                            + "\t|> filter(fn: (r) => (r[\"_measurement\"] == \"mem\" and r[\"_field\"] == \"free\"))";
 
             var memory = new List<Mem>();

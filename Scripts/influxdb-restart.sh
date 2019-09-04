@@ -63,8 +63,8 @@ docker run \
        --volume ${SCRIPT_PATH}/influxdb.conf:/etc/influxdb/influxdb.conf \
        ${INFLUXDB_IMAGE}
 
-echo "Wait 5s to start InfluxDB"
-sleep 5
+echo "Wait to start InfluxDB"
+wget -S --spider --tries=20 --retry-connrefused --waitretry=5 http://localhost:8086/ping
 
 #
 # InfluxDB 2.0
@@ -81,8 +81,8 @@ docker run \
        --publish 9999:9999 \
        ${INFLUXDB_V2_IMAGE}
 
-echo "Wait 5s to start InfluxDB 2.0"
-sleep 5
+echo "Wait to start InfluxDB 2.0"
+wget -S --spider --tries=20 --retry-connrefused --waitretry=5 http://localhost:9999/metrics
 
 echo
 echo "Post onBoarding request, to setup initial user (my-user@my-password), org (my-org) and bucketSetup (my-bucket)"
