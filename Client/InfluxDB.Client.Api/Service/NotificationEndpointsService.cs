@@ -32,8 +32,8 @@ namespace InfluxDB.Client.Api.Service
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="notificationEndpoint">notificationEndpoint to create</param>
-        /// <returns>NotificationRule</returns>
-        NotificationRule CreateNotificationEndpoint (NotificationEndpoint notificationEndpoint);
+        /// <returns>NotificationEndpoint</returns>
+        NotificationEndpoint CreateNotificationEndpoint (NotificationEndpoint notificationEndpoint);
 
         /// <summary>
         /// Add new notification endpoint
@@ -43,8 +43,8 @@ namespace InfluxDB.Client.Api.Service
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="notificationEndpoint">notificationEndpoint to create</param>
-        /// <returns>ApiResponse of NotificationRule</returns>
-        ApiResponse<NotificationRule> CreateNotificationEndpointWithHttpInfo (NotificationEndpoint notificationEndpoint);
+        /// <returns>ApiResponse of NotificationEndpoint</returns>
+        ApiResponse<NotificationEndpoint> CreateNotificationEndpointWithHttpInfo (NotificationEndpoint notificationEndpoint);
         /// <summary>
         /// Delete a notification endpoint
         /// </summary>
@@ -68,6 +68,31 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> DeleteNotificationEndpointsIDWithHttpInfo (string endpointID, string zapTraceSpan = null);
+        /// <summary>
+        /// delete label from a notification endpoint
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="endpointID">ID of the notification endpoint</param>
+        /// <param name="labelID">the label id to delete</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns></returns>
+        void DeleteNotificationEndpointsIDLabelsID (string endpointID, string labelID, string zapTraceSpan = null);
+
+        /// <summary>
+        /// delete label from a notification endpoint
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="endpointID">ID of the notification endpoint</param>
+        /// <param name="labelID">the label id to delete</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        ApiResponse<Object> DeleteNotificationEndpointsIDLabelsIDWithHttpInfo (string endpointID, string labelID, string zapTraceSpan = null);
         /// <summary>
         /// Get all notification endpoints
         /// </summary>
@@ -117,6 +142,29 @@ namespace InfluxDB.Client.Api.Service
         /// <returns>ApiResponse of NotificationEndpoint</returns>
         ApiResponse<NotificationEndpoint> GetNotificationEndpointsIDWithHttpInfo (string endpointID, string zapTraceSpan = null);
         /// <summary>
+        /// list all labels for a notification endpoint
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="endpointID">ID of the notification endpoint</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>LabelsResponse</returns>
+        LabelsResponse GetNotificationEndpointsIDLabels (string endpointID, string zapTraceSpan = null);
+
+        /// <summary>
+        /// list all labels for a notification endpoint
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="endpointID">ID of the notification endpoint</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of LabelsResponse</returns>
+        ApiResponse<LabelsResponse> GetNotificationEndpointsIDLabelsWithHttpInfo (string endpointID, string zapTraceSpan = null);
+        /// <summary>
         /// Update a notification endpoint
         /// </summary>
         /// <remarks>
@@ -124,10 +172,10 @@ namespace InfluxDB.Client.Api.Service
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="endpointID">ID of notification endpoint</param>
-        /// <param name="notificationEndpoint">check update to apply</param>
+        /// <param name="notificationEndpointUpdate">check update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>NotificationEndpoint</returns>
-        NotificationEndpoint PatchNotificationEndpointsID (string endpointID, NotificationEndpoint notificationEndpoint, string zapTraceSpan = null);
+        NotificationEndpoint PatchNotificationEndpointsID (string endpointID, NotificationEndpointUpdate notificationEndpointUpdate, string zapTraceSpan = null);
 
         /// <summary>
         /// Update a notification endpoint
@@ -137,10 +185,60 @@ namespace InfluxDB.Client.Api.Service
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="endpointID">ID of notification endpoint</param>
-        /// <param name="notificationEndpoint">check update to apply</param>
+        /// <param name="notificationEndpointUpdate">check update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of NotificationEndpoint</returns>
-        ApiResponse<NotificationEndpoint> PatchNotificationEndpointsIDWithHttpInfo (string endpointID, NotificationEndpoint notificationEndpoint, string zapTraceSpan = null);
+        ApiResponse<NotificationEndpoint> PatchNotificationEndpointsIDWithHttpInfo (string endpointID, NotificationEndpointUpdate notificationEndpointUpdate, string zapTraceSpan = null);
+        /// <summary>
+        /// add a label to a notification endpoint
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="endpointID">ID of the notification endpoint</param>
+        /// <param name="labelMapping">label to add</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>LabelResponse</returns>
+        LabelResponse PostNotificationEndpointIDLabels (string endpointID, LabelMapping labelMapping, string zapTraceSpan = null);
+
+        /// <summary>
+        /// add a label to a notification endpoint
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="endpointID">ID of the notification endpoint</param>
+        /// <param name="labelMapping">label to add</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of LabelResponse</returns>
+        ApiResponse<LabelResponse> PostNotificationEndpointIDLabelsWithHttpInfo (string endpointID, LabelMapping labelMapping, string zapTraceSpan = null);
+        /// <summary>
+        /// Update a notification endpoint
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="endpointID">ID of notification endpoint</param>
+        /// <param name="notificationEndpoint">a new notification endpoint to replace the existing endpoint with</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>NotificationEndpoint</returns>
+        NotificationEndpoint PutNotificationEndpointsID (string endpointID, NotificationEndpoint notificationEndpoint, string zapTraceSpan = null);
+
+        /// <summary>
+        /// Update a notification endpoint
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="endpointID">ID of notification endpoint</param>
+        /// <param name="notificationEndpoint">a new notification endpoint to replace the existing endpoint with</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of NotificationEndpoint</returns>
+        ApiResponse<NotificationEndpoint> PutNotificationEndpointsIDWithHttpInfo (string endpointID, NotificationEndpoint notificationEndpoint, string zapTraceSpan = null);
         #endregion Synchronous Operations
         #region Asynchronous Operations
         /// <summary>
@@ -151,8 +249,8 @@ namespace InfluxDB.Client.Api.Service
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="notificationEndpoint">notificationEndpoint to create</param>
-        /// <returns>Task of NotificationRule</returns>
-        System.Threading.Tasks.Task<NotificationRule> CreateNotificationEndpointAsync (NotificationEndpoint notificationEndpoint);
+        /// <returns>Task of NotificationEndpoint</returns>
+        System.Threading.Tasks.Task<NotificationEndpoint> CreateNotificationEndpointAsync (NotificationEndpoint notificationEndpoint);
 
         /// <summary>
         /// Add new notification endpoint
@@ -162,8 +260,8 @@ namespace InfluxDB.Client.Api.Service
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="notificationEndpoint">notificationEndpoint to create</param>
-        /// <returns>Task of ApiResponse (NotificationRule)</returns>
-        System.Threading.Tasks.Task<ApiResponse<NotificationRule>> CreateNotificationEndpointAsyncWithHttpInfo (NotificationEndpoint notificationEndpoint);
+        /// <returns>Task of ApiResponse (NotificationEndpoint)</returns>
+        System.Threading.Tasks.Task<ApiResponse<NotificationEndpoint>> CreateNotificationEndpointAsyncWithHttpInfo (NotificationEndpoint notificationEndpoint);
         /// <summary>
         /// Delete a notification endpoint
         /// </summary>
@@ -187,6 +285,31 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         System.Threading.Tasks.Task<ApiResponse<Object>> DeleteNotificationEndpointsIDAsyncWithHttpInfo (string endpointID, string zapTraceSpan = null);
+        /// <summary>
+        /// delete label from a notification endpoint
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="endpointID">ID of the notification endpoint</param>
+        /// <param name="labelID">the label id to delete</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of void</returns>
+        System.Threading.Tasks.Task DeleteNotificationEndpointsIDLabelsIDAsync (string endpointID, string labelID, string zapTraceSpan = null);
+
+        /// <summary>
+        /// delete label from a notification endpoint
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="endpointID">ID of the notification endpoint</param>
+        /// <param name="labelID">the label id to delete</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ApiResponse</returns>
+        System.Threading.Tasks.Task<ApiResponse<Object>> DeleteNotificationEndpointsIDLabelsIDAsyncWithHttpInfo (string endpointID, string labelID, string zapTraceSpan = null);
         /// <summary>
         /// Get all notification endpoints
         /// </summary>
@@ -236,6 +359,29 @@ namespace InfluxDB.Client.Api.Service
         /// <returns>Task of ApiResponse (NotificationEndpoint)</returns>
         System.Threading.Tasks.Task<ApiResponse<NotificationEndpoint>> GetNotificationEndpointsIDAsyncWithHttpInfo (string endpointID, string zapTraceSpan = null);
         /// <summary>
+        /// list all labels for a notification endpoint
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="endpointID">ID of the notification endpoint</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of LabelsResponse</returns>
+        System.Threading.Tasks.Task<LabelsResponse> GetNotificationEndpointsIDLabelsAsync (string endpointID, string zapTraceSpan = null);
+
+        /// <summary>
+        /// list all labels for a notification endpoint
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="endpointID">ID of the notification endpoint</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ApiResponse (LabelsResponse)</returns>
+        System.Threading.Tasks.Task<ApiResponse<LabelsResponse>> GetNotificationEndpointsIDLabelsAsyncWithHttpInfo (string endpointID, string zapTraceSpan = null);
+        /// <summary>
         /// Update a notification endpoint
         /// </summary>
         /// <remarks>
@@ -243,10 +389,10 @@ namespace InfluxDB.Client.Api.Service
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="endpointID">ID of notification endpoint</param>
-        /// <param name="notificationEndpoint">check update to apply</param>
+        /// <param name="notificationEndpointUpdate">check update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of NotificationEndpoint</returns>
-        System.Threading.Tasks.Task<NotificationEndpoint> PatchNotificationEndpointsIDAsync (string endpointID, NotificationEndpoint notificationEndpoint, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<NotificationEndpoint> PatchNotificationEndpointsIDAsync (string endpointID, NotificationEndpointUpdate notificationEndpointUpdate, string zapTraceSpan = null);
 
         /// <summary>
         /// Update a notification endpoint
@@ -256,10 +402,60 @@ namespace InfluxDB.Client.Api.Service
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="endpointID">ID of notification endpoint</param>
-        /// <param name="notificationEndpoint">check update to apply</param>
+        /// <param name="notificationEndpointUpdate">check update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (NotificationEndpoint)</returns>
-        System.Threading.Tasks.Task<ApiResponse<NotificationEndpoint>> PatchNotificationEndpointsIDAsyncWithHttpInfo (string endpointID, NotificationEndpoint notificationEndpoint, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<NotificationEndpoint>> PatchNotificationEndpointsIDAsyncWithHttpInfo (string endpointID, NotificationEndpointUpdate notificationEndpointUpdate, string zapTraceSpan = null);
+        /// <summary>
+        /// add a label to a notification endpoint
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="endpointID">ID of the notification endpoint</param>
+        /// <param name="labelMapping">label to add</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of LabelResponse</returns>
+        System.Threading.Tasks.Task<LabelResponse> PostNotificationEndpointIDLabelsAsync (string endpointID, LabelMapping labelMapping, string zapTraceSpan = null);
+
+        /// <summary>
+        /// add a label to a notification endpoint
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="endpointID">ID of the notification endpoint</param>
+        /// <param name="labelMapping">label to add</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ApiResponse (LabelResponse)</returns>
+        System.Threading.Tasks.Task<ApiResponse<LabelResponse>> PostNotificationEndpointIDLabelsAsyncWithHttpInfo (string endpointID, LabelMapping labelMapping, string zapTraceSpan = null);
+        /// <summary>
+        /// Update a notification endpoint
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="endpointID">ID of notification endpoint</param>
+        /// <param name="notificationEndpoint">a new notification endpoint to replace the existing endpoint with</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of NotificationEndpoint</returns>
+        System.Threading.Tasks.Task<NotificationEndpoint> PutNotificationEndpointsIDAsync (string endpointID, NotificationEndpoint notificationEndpoint, string zapTraceSpan = null);
+
+        /// <summary>
+        /// Update a notification endpoint
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="endpointID">ID of notification endpoint</param>
+        /// <param name="notificationEndpoint">a new notification endpoint to replace the existing endpoint with</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ApiResponse (NotificationEndpoint)</returns>
+        System.Threading.Tasks.Task<ApiResponse<NotificationEndpoint>> PutNotificationEndpointsIDAsyncWithHttpInfo (string endpointID, NotificationEndpoint notificationEndpoint, string zapTraceSpan = null);
         #endregion Asynchronous Operations
     }
 
@@ -365,10 +561,10 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="notificationEndpoint">notificationEndpoint to create</param>
-        /// <returns>NotificationRule</returns>
-        public NotificationRule CreateNotificationEndpoint (NotificationEndpoint notificationEndpoint)
+        /// <returns>NotificationEndpoint</returns>
+        public NotificationEndpoint CreateNotificationEndpoint (NotificationEndpoint notificationEndpoint)
         {
-             ApiResponse<NotificationRule> localVarResponse = CreateNotificationEndpointWithHttpInfo(notificationEndpoint);
+             ApiResponse<NotificationEndpoint> localVarResponse = CreateNotificationEndpointWithHttpInfo(notificationEndpoint);
              return localVarResponse.Data;
         }
 
@@ -377,8 +573,8 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="notificationEndpoint">notificationEndpoint to create</param>
-        /// <returns>ApiResponse of NotificationRule</returns>
-        public ApiResponse< NotificationRule > CreateNotificationEndpointWithHttpInfo (NotificationEndpoint notificationEndpoint)
+        /// <returns>ApiResponse of NotificationEndpoint</returns>
+        public ApiResponse< NotificationEndpoint > CreateNotificationEndpointWithHttpInfo (NotificationEndpoint notificationEndpoint)
         {
             // verify the required parameter 'notificationEndpoint' is set
             if (notificationEndpoint == null)
@@ -430,9 +626,9 @@ namespace InfluxDB.Client.Api.Service
                 if (exception != null) throw exception;
             }
 
-            return new ApiResponse<NotificationRule>(localVarStatusCode,
+            return new ApiResponse<NotificationEndpoint>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (NotificationRule) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(NotificationRule)));
+                (NotificationEndpoint) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(NotificationEndpoint)));
         }
 
         /// <summary>
@@ -440,7 +636,7 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="notificationEndpoint">notificationEndpoint to create</param>
-        /// <returns>ApiResponse of NotificationRule</returns>
+        /// <returns>ApiResponse of NotificationEndpoint</returns>
         public async System.Threading.Tasks.Task<IRestResponse> CreateNotificationEndpointWithIRestResponseAsync (NotificationEndpoint notificationEndpoint)
         {
             // verify the required parameter 'notificationEndpoint' is set
@@ -501,7 +697,7 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="notificationEndpoint">notificationEndpoint to create</param>
-        /// <returns>ApiResponse of NotificationRule</returns>
+        /// <returns>ApiResponse of NotificationEndpoint</returns>
         public IRestResponse CreateNotificationEndpointWithIRestResponse (NotificationEndpoint notificationEndpoint)
         {
             // verify the required parameter 'notificationEndpoint' is set
@@ -562,7 +758,7 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="notificationEndpoint">notificationEndpoint to create</param>
-        /// <returns>ApiResponse of NotificationRule</returns>
+        /// <returns>ApiResponse of NotificationEndpoint</returns>
         public RestRequest CreateNotificationEndpointWithRestRequest (NotificationEndpoint notificationEndpoint)
         {
             // verify the required parameter 'notificationEndpoint' is set
@@ -612,10 +808,10 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="notificationEndpoint">notificationEndpoint to create</param>
-        /// <returns>Task of NotificationRule</returns>
-        public async System.Threading.Tasks.Task<NotificationRule> CreateNotificationEndpointAsync (NotificationEndpoint notificationEndpoint)
+        /// <returns>Task of NotificationEndpoint</returns>
+        public async System.Threading.Tasks.Task<NotificationEndpoint> CreateNotificationEndpointAsync (NotificationEndpoint notificationEndpoint)
         {
-             ApiResponse<NotificationRule> localVarResponse = await CreateNotificationEndpointAsyncWithHttpInfo(notificationEndpoint);
+             ApiResponse<NotificationEndpoint> localVarResponse = await CreateNotificationEndpointAsyncWithHttpInfo(notificationEndpoint);
              return localVarResponse.Data;
 
         }
@@ -625,8 +821,8 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="notificationEndpoint">notificationEndpoint to create</param>
-        /// <returns>Task of ApiResponse (NotificationRule)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<NotificationRule>> CreateNotificationEndpointAsyncWithHttpInfo (NotificationEndpoint notificationEndpoint)
+        /// <returns>Task of ApiResponse (NotificationEndpoint)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<NotificationEndpoint>> CreateNotificationEndpointAsyncWithHttpInfo (NotificationEndpoint notificationEndpoint)
         {
             // make the HTTP request
             IRestResponse localVarResponse = await CreateNotificationEndpointAsyncWithIRestResponse(notificationEndpoint);
@@ -639,9 +835,9 @@ namespace InfluxDB.Client.Api.Service
                 if (exception != null) throw exception;
             }
 
-            return new ApiResponse<NotificationRule>(localVarStatusCode,
+            return new ApiResponse<NotificationEndpoint>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (NotificationRule) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(NotificationRule)));
+                (NotificationEndpoint) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(NotificationEndpoint)));
         }
             
         /// <summary>
@@ -649,7 +845,7 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="notificationEndpoint">notificationEndpoint to create</param>
-        /// <returns>Task of IRestResponse (NotificationRule)</returns>
+        /// <returns>Task of IRestResponse (NotificationEndpoint)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> CreateNotificationEndpointAsyncWithIRestResponse (NotificationEndpoint notificationEndpoint)
         {
             // verify the required parameter 'notificationEndpoint' is set
@@ -1011,6 +1207,348 @@ namespace InfluxDB.Client.Api.Service
             if (ExceptionFactory != null)
             {
                 Exception exception = ExceptionFactory("DeleteNotificationEndpointsID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// delete label from a notification endpoint 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="endpointID">ID of the notification endpoint</param>
+        /// <param name="labelID">the label id to delete</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns></returns>
+        public void DeleteNotificationEndpointsIDLabelsID (string endpointID, string labelID, string zapTraceSpan = null)
+        {
+             DeleteNotificationEndpointsIDLabelsIDWithHttpInfo(endpointID, labelID, zapTraceSpan);
+        }
+
+        /// <summary>
+        /// delete label from a notification endpoint 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="endpointID">ID of the notification endpoint</param>
+        /// <param name="labelID">the label id to delete</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        public ApiResponse<Object> DeleteNotificationEndpointsIDLabelsIDWithHttpInfo (string endpointID, string labelID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'endpointID' is set
+            if (endpointID == null)
+                throw new ApiException(400, "Missing required parameter 'endpointID' when calling NotificationEndpointsService->DeleteNotificationEndpointsIDLabelsID");
+            // verify the required parameter 'labelID' is set
+            if (labelID == null)
+                throw new ApiException(400, "Missing required parameter 'labelID' when calling NotificationEndpointsService->DeleteNotificationEndpointsIDLabelsID");
+
+            var localVarPath = "/api/v2/notificationEndpoints/{endpointID}/labels/{labelID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (endpointID != null) localVarPathParams.Add("endpointID", this.Configuration.ApiClient.ParameterToString(endpointID)); // path parameter
+            if (labelID != null) localVarPathParams.Add("labelID", this.Configuration.ApiClient.ParameterToString(labelID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("DeleteNotificationEndpointsIDLabelsID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Object>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                null);
+        }
+
+        /// <summary>
+        /// delete label from a notification endpoint 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="endpointID">ID of the notification endpoint</param>
+        /// <param name="labelID">the label id to delete</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        public async System.Threading.Tasks.Task<IRestResponse> DeleteNotificationEndpointsIDLabelsIDWithIRestResponseAsync (string endpointID, string labelID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'endpointID' is set
+            if (endpointID == null)
+                throw new ApiException(400, "Missing required parameter 'endpointID' when calling NotificationEndpointsService->DeleteNotificationEndpointsIDLabelsID");
+            // verify the required parameter 'labelID' is set
+            if (labelID == null)
+                throw new ApiException(400, "Missing required parameter 'labelID' when calling NotificationEndpointsService->DeleteNotificationEndpointsIDLabelsID");
+
+            var localVarPath = "/api/v2/notificationEndpoints/{endpointID}/labels/{labelID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (endpointID != null) localVarPathParams.Add("endpointID", this.Configuration.ApiClient.ParameterToString(endpointID)); // path parameter
+            if (labelID != null) localVarPathParams.Add("labelID", this.Configuration.ApiClient.ParameterToString(labelID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("DeleteNotificationEndpointsIDLabelsID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// delete label from a notification endpoint 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="endpointID">ID of the notification endpoint</param>
+        /// <param name="labelID">the label id to delete</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        public IRestResponse DeleteNotificationEndpointsIDLabelsIDWithIRestResponse (string endpointID, string labelID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'endpointID' is set
+            if (endpointID == null)
+                throw new ApiException(400, "Missing required parameter 'endpointID' when calling NotificationEndpointsService->DeleteNotificationEndpointsIDLabelsID");
+            // verify the required parameter 'labelID' is set
+            if (labelID == null)
+                throw new ApiException(400, "Missing required parameter 'labelID' when calling NotificationEndpointsService->DeleteNotificationEndpointsIDLabelsID");
+
+            var localVarPath = "/api/v2/notificationEndpoints/{endpointID}/labels/{labelID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (endpointID != null) localVarPathParams.Add("endpointID", this.Configuration.ApiClient.ParameterToString(endpointID)); // path parameter
+            if (labelID != null) localVarPathParams.Add("labelID", this.Configuration.ApiClient.ParameterToString(labelID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("DeleteNotificationEndpointsIDLabelsID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return localVarResponse;
+        }
+        
+        /// <summary>
+        /// delete label from a notification endpoint 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="endpointID">ID of the notification endpoint</param>
+        /// <param name="labelID">the label id to delete</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        public RestRequest DeleteNotificationEndpointsIDLabelsIDWithRestRequest (string endpointID, string labelID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'endpointID' is set
+            if (endpointID == null)
+                throw new ApiException(400, "Missing required parameter 'endpointID' when calling NotificationEndpointsService->DeleteNotificationEndpointsIDLabelsID");
+            // verify the required parameter 'labelID' is set
+            if (labelID == null)
+                throw new ApiException(400, "Missing required parameter 'labelID' when calling NotificationEndpointsService->DeleteNotificationEndpointsIDLabelsID");
+
+            var localVarPath = "/api/v2/notificationEndpoints/{endpointID}/labels/{labelID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (endpointID != null) localVarPathParams.Add("endpointID", this.Configuration.ApiClient.ParameterToString(endpointID)); // path parameter
+            if (labelID != null) localVarPathParams.Add("labelID", this.Configuration.ApiClient.ParameterToString(labelID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
+                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+        }
+
+        /// <summary>
+        /// delete label from a notification endpoint 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="endpointID">ID of the notification endpoint</param>
+        /// <param name="labelID">the label id to delete</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of void</returns>
+        public async System.Threading.Tasks.Task DeleteNotificationEndpointsIDLabelsIDAsync (string endpointID, string labelID, string zapTraceSpan = null)
+        {
+             await DeleteNotificationEndpointsIDLabelsIDAsyncWithHttpInfo(endpointID, labelID, zapTraceSpan);
+
+        }
+
+        /// <summary>
+        /// delete label from a notification endpoint 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="endpointID">ID of the notification endpoint</param>
+        /// <param name="labelID">the label id to delete</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ApiResponse</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteNotificationEndpointsIDLabelsIDAsyncWithHttpInfo (string endpointID, string labelID, string zapTraceSpan = null)
+        {
+            // make the HTTP request
+            IRestResponse localVarResponse = await DeleteNotificationEndpointsIDLabelsIDAsyncWithIRestResponse(endpointID, labelID, zapTraceSpan);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("DeleteNotificationEndpointsIDLabelsID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Object>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                null);
+        }
+            
+        /// <summary>
+        /// delete label from a notification endpoint 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="endpointID">ID of the notification endpoint</param>
+        /// <param name="labelID">the label id to delete</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of IRestResponse</returns>
+        public async System.Threading.Tasks.Task<IRestResponse> DeleteNotificationEndpointsIDLabelsIDAsyncWithIRestResponse (string endpointID, string labelID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'endpointID' is set
+            if (endpointID == null)
+                throw new ApiException(400, "Missing required parameter 'endpointID' when calling NotificationEndpointsService->DeleteNotificationEndpointsIDLabelsID");
+            // verify the required parameter 'labelID' is set
+            if (labelID == null)
+                throw new ApiException(400, "Missing required parameter 'labelID' when calling NotificationEndpointsService->DeleteNotificationEndpointsIDLabelsID");
+
+            var localVarPath = "/api/v2/notificationEndpoints/{endpointID}/labels/{labelID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (endpointID != null) localVarPathParams.Add("endpointID", this.Configuration.ApiClient.ParameterToString(endpointID)); // path parameter
+            if (labelID != null) localVarPathParams.Add("labelID", this.Configuration.ApiClient.ParameterToString(labelID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("DeleteNotificationEndpointsIDLabelsID", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -1663,16 +2201,332 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
+        /// list all labels for a notification endpoint 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="endpointID">ID of the notification endpoint</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>LabelsResponse</returns>
+        public LabelsResponse GetNotificationEndpointsIDLabels (string endpointID, string zapTraceSpan = null)
+        {
+             ApiResponse<LabelsResponse> localVarResponse = GetNotificationEndpointsIDLabelsWithHttpInfo(endpointID, zapTraceSpan);
+             return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// list all labels for a notification endpoint 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="endpointID">ID of the notification endpoint</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of LabelsResponse</returns>
+        public ApiResponse< LabelsResponse > GetNotificationEndpointsIDLabelsWithHttpInfo (string endpointID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'endpointID' is set
+            if (endpointID == null)
+                throw new ApiException(400, "Missing required parameter 'endpointID' when calling NotificationEndpointsService->GetNotificationEndpointsIDLabels");
+
+            var localVarPath = "/api/v2/notificationEndpoints/{endpointID}/labels";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (endpointID != null) localVarPathParams.Add("endpointID", this.Configuration.ApiClient.ParameterToString(endpointID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("GetNotificationEndpointsIDLabels", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<LabelsResponse>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (LabelsResponse) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(LabelsResponse)));
+        }
+
+        /// <summary>
+        /// list all labels for a notification endpoint 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="endpointID">ID of the notification endpoint</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of LabelsResponse</returns>
+        public async System.Threading.Tasks.Task<IRestResponse> GetNotificationEndpointsIDLabelsWithIRestResponseAsync (string endpointID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'endpointID' is set
+            if (endpointID == null)
+                throw new ApiException(400, "Missing required parameter 'endpointID' when calling NotificationEndpointsService->GetNotificationEndpointsIDLabels");
+
+            var localVarPath = "/api/v2/notificationEndpoints/{endpointID}/labels";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (endpointID != null) localVarPathParams.Add("endpointID", this.Configuration.ApiClient.ParameterToString(endpointID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("GetNotificationEndpointsIDLabels", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// list all labels for a notification endpoint 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="endpointID">ID of the notification endpoint</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of LabelsResponse</returns>
+        public IRestResponse GetNotificationEndpointsIDLabelsWithIRestResponse (string endpointID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'endpointID' is set
+            if (endpointID == null)
+                throw new ApiException(400, "Missing required parameter 'endpointID' when calling NotificationEndpointsService->GetNotificationEndpointsIDLabels");
+
+            var localVarPath = "/api/v2/notificationEndpoints/{endpointID}/labels";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (endpointID != null) localVarPathParams.Add("endpointID", this.Configuration.ApiClient.ParameterToString(endpointID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("GetNotificationEndpointsIDLabels", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return localVarResponse;
+        }
+        
+        /// <summary>
+        /// list all labels for a notification endpoint 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="endpointID">ID of the notification endpoint</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of LabelsResponse</returns>
+        public RestRequest GetNotificationEndpointsIDLabelsWithRestRequest (string endpointID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'endpointID' is set
+            if (endpointID == null)
+                throw new ApiException(400, "Missing required parameter 'endpointID' when calling NotificationEndpointsService->GetNotificationEndpointsIDLabels");
+
+            var localVarPath = "/api/v2/notificationEndpoints/{endpointID}/labels";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (endpointID != null) localVarPathParams.Add("endpointID", this.Configuration.ApiClient.ParameterToString(endpointID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
+                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+        }
+
+        /// <summary>
+        /// list all labels for a notification endpoint 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="endpointID">ID of the notification endpoint</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of LabelsResponse</returns>
+        public async System.Threading.Tasks.Task<LabelsResponse> GetNotificationEndpointsIDLabelsAsync (string endpointID, string zapTraceSpan = null)
+        {
+             ApiResponse<LabelsResponse> localVarResponse = await GetNotificationEndpointsIDLabelsAsyncWithHttpInfo(endpointID, zapTraceSpan);
+             return localVarResponse.Data;
+
+        }
+
+        /// <summary>
+        /// list all labels for a notification endpoint 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="endpointID">ID of the notification endpoint</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ApiResponse (LabelsResponse)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<LabelsResponse>> GetNotificationEndpointsIDLabelsAsyncWithHttpInfo (string endpointID, string zapTraceSpan = null)
+        {
+            // make the HTTP request
+            IRestResponse localVarResponse = await GetNotificationEndpointsIDLabelsAsyncWithIRestResponse(endpointID, zapTraceSpan);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("GetNotificationEndpointsIDLabels", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<LabelsResponse>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (LabelsResponse) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(LabelsResponse)));
+        }
+            
+        /// <summary>
+        /// list all labels for a notification endpoint 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="endpointID">ID of the notification endpoint</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of IRestResponse (LabelsResponse)</returns>
+        public async System.Threading.Tasks.Task<IRestResponse> GetNotificationEndpointsIDLabelsAsyncWithIRestResponse (string endpointID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'endpointID' is set
+            if (endpointID == null)
+                throw new ApiException(400, "Missing required parameter 'endpointID' when calling NotificationEndpointsService->GetNotificationEndpointsIDLabels");
+
+            var localVarPath = "/api/v2/notificationEndpoints/{endpointID}/labels";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (endpointID != null) localVarPathParams.Add("endpointID", this.Configuration.ApiClient.ParameterToString(endpointID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("GetNotificationEndpointsIDLabels", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
         /// Update a notification endpoint 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="endpointID">ID of notification endpoint</param>
-        /// <param name="notificationEndpoint">check update to apply</param>
+        /// <param name="notificationEndpointUpdate">check update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>NotificationEndpoint</returns>
-        public NotificationEndpoint PatchNotificationEndpointsID (string endpointID, NotificationEndpoint notificationEndpoint, string zapTraceSpan = null)
+        public NotificationEndpoint PatchNotificationEndpointsID (string endpointID, NotificationEndpointUpdate notificationEndpointUpdate, string zapTraceSpan = null)
         {
-             ApiResponse<NotificationEndpoint> localVarResponse = PatchNotificationEndpointsIDWithHttpInfo(endpointID, notificationEndpoint, zapTraceSpan);
+             ApiResponse<NotificationEndpoint> localVarResponse = PatchNotificationEndpointsIDWithHttpInfo(endpointID, notificationEndpointUpdate, zapTraceSpan);
              return localVarResponse.Data;
         }
 
@@ -1681,17 +2535,785 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="endpointID">ID of notification endpoint</param>
-        /// <param name="notificationEndpoint">check update to apply</param>
+        /// <param name="notificationEndpointUpdate">check update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of NotificationEndpoint</returns>
-        public ApiResponse< NotificationEndpoint > PatchNotificationEndpointsIDWithHttpInfo (string endpointID, NotificationEndpoint notificationEndpoint, string zapTraceSpan = null)
+        public ApiResponse< NotificationEndpoint > PatchNotificationEndpointsIDWithHttpInfo (string endpointID, NotificationEndpointUpdate notificationEndpointUpdate, string zapTraceSpan = null)
         {
             // verify the required parameter 'endpointID' is set
             if (endpointID == null)
                 throw new ApiException(400, "Missing required parameter 'endpointID' when calling NotificationEndpointsService->PatchNotificationEndpointsID");
+            // verify the required parameter 'notificationEndpointUpdate' is set
+            if (notificationEndpointUpdate == null)
+                throw new ApiException(400, "Missing required parameter 'notificationEndpointUpdate' when calling NotificationEndpointsService->PatchNotificationEndpointsID");
+
+            var localVarPath = "/api/v2/notificationEndpoints/{endpointID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json"
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (endpointID != null) localVarPathParams.Add("endpointID", this.Configuration.ApiClient.ParameterToString(endpointID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (notificationEndpointUpdate != null && notificationEndpointUpdate.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(notificationEndpointUpdate); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = notificationEndpointUpdate; // byte array
+            }
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("PatchNotificationEndpointsID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<NotificationEndpoint>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (NotificationEndpoint) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(NotificationEndpoint)));
+        }
+
+        /// <summary>
+        /// Update a notification endpoint 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="endpointID">ID of notification endpoint</param>
+        /// <param name="notificationEndpointUpdate">check update to apply</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of NotificationEndpoint</returns>
+        public async System.Threading.Tasks.Task<IRestResponse> PatchNotificationEndpointsIDWithIRestResponseAsync (string endpointID, NotificationEndpointUpdate notificationEndpointUpdate, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'endpointID' is set
+            if (endpointID == null)
+                throw new ApiException(400, "Missing required parameter 'endpointID' when calling NotificationEndpointsService->PatchNotificationEndpointsID");
+            // verify the required parameter 'notificationEndpointUpdate' is set
+            if (notificationEndpointUpdate == null)
+                throw new ApiException(400, "Missing required parameter 'notificationEndpointUpdate' when calling NotificationEndpointsService->PatchNotificationEndpointsID");
+
+            var localVarPath = "/api/v2/notificationEndpoints/{endpointID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json"
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (endpointID != null) localVarPathParams.Add("endpointID", this.Configuration.ApiClient.ParameterToString(endpointID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (notificationEndpointUpdate != null && notificationEndpointUpdate.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(notificationEndpointUpdate); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = notificationEndpointUpdate; // byte array
+            }
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("PatchNotificationEndpointsID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Update a notification endpoint 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="endpointID">ID of notification endpoint</param>
+        /// <param name="notificationEndpointUpdate">check update to apply</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of NotificationEndpoint</returns>
+        public IRestResponse PatchNotificationEndpointsIDWithIRestResponse (string endpointID, NotificationEndpointUpdate notificationEndpointUpdate, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'endpointID' is set
+            if (endpointID == null)
+                throw new ApiException(400, "Missing required parameter 'endpointID' when calling NotificationEndpointsService->PatchNotificationEndpointsID");
+            // verify the required parameter 'notificationEndpointUpdate' is set
+            if (notificationEndpointUpdate == null)
+                throw new ApiException(400, "Missing required parameter 'notificationEndpointUpdate' when calling NotificationEndpointsService->PatchNotificationEndpointsID");
+
+            var localVarPath = "/api/v2/notificationEndpoints/{endpointID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json"
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (endpointID != null) localVarPathParams.Add("endpointID", this.Configuration.ApiClient.ParameterToString(endpointID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (notificationEndpointUpdate != null && notificationEndpointUpdate.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(notificationEndpointUpdate); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = notificationEndpointUpdate; // byte array
+            }
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("PatchNotificationEndpointsID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return localVarResponse;
+        }
+        
+        /// <summary>
+        /// Update a notification endpoint 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="endpointID">ID of notification endpoint</param>
+        /// <param name="notificationEndpointUpdate">check update to apply</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of NotificationEndpoint</returns>
+        public RestRequest PatchNotificationEndpointsIDWithRestRequest (string endpointID, NotificationEndpointUpdate notificationEndpointUpdate, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'endpointID' is set
+            if (endpointID == null)
+                throw new ApiException(400, "Missing required parameter 'endpointID' when calling NotificationEndpointsService->PatchNotificationEndpointsID");
+            // verify the required parameter 'notificationEndpointUpdate' is set
+            if (notificationEndpointUpdate == null)
+                throw new ApiException(400, "Missing required parameter 'notificationEndpointUpdate' when calling NotificationEndpointsService->PatchNotificationEndpointsID");
+
+            var localVarPath = "/api/v2/notificationEndpoints/{endpointID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json"
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (endpointID != null) localVarPathParams.Add("endpointID", this.Configuration.ApiClient.ParameterToString(endpointID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (notificationEndpointUpdate != null && notificationEndpointUpdate.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(notificationEndpointUpdate); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = notificationEndpointUpdate; // byte array
+            }
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
+                Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+        }
+
+        /// <summary>
+        /// Update a notification endpoint 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="endpointID">ID of notification endpoint</param>
+        /// <param name="notificationEndpointUpdate">check update to apply</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of NotificationEndpoint</returns>
+        public async System.Threading.Tasks.Task<NotificationEndpoint> PatchNotificationEndpointsIDAsync (string endpointID, NotificationEndpointUpdate notificationEndpointUpdate, string zapTraceSpan = null)
+        {
+             ApiResponse<NotificationEndpoint> localVarResponse = await PatchNotificationEndpointsIDAsyncWithHttpInfo(endpointID, notificationEndpointUpdate, zapTraceSpan);
+             return localVarResponse.Data;
+
+        }
+
+        /// <summary>
+        /// Update a notification endpoint 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="endpointID">ID of notification endpoint</param>
+        /// <param name="notificationEndpointUpdate">check update to apply</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ApiResponse (NotificationEndpoint)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<NotificationEndpoint>> PatchNotificationEndpointsIDAsyncWithHttpInfo (string endpointID, NotificationEndpointUpdate notificationEndpointUpdate, string zapTraceSpan = null)
+        {
+            // make the HTTP request
+            IRestResponse localVarResponse = await PatchNotificationEndpointsIDAsyncWithIRestResponse(endpointID, notificationEndpointUpdate, zapTraceSpan);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("PatchNotificationEndpointsID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<NotificationEndpoint>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (NotificationEndpoint) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(NotificationEndpoint)));
+        }
+            
+        /// <summary>
+        /// Update a notification endpoint 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="endpointID">ID of notification endpoint</param>
+        /// <param name="notificationEndpointUpdate">check update to apply</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of IRestResponse (NotificationEndpoint)</returns>
+        public async System.Threading.Tasks.Task<IRestResponse> PatchNotificationEndpointsIDAsyncWithIRestResponse (string endpointID, NotificationEndpointUpdate notificationEndpointUpdate, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'endpointID' is set
+            if (endpointID == null)
+                throw new ApiException(400, "Missing required parameter 'endpointID' when calling NotificationEndpointsService->PatchNotificationEndpointsID");
+            // verify the required parameter 'notificationEndpointUpdate' is set
+            if (notificationEndpointUpdate == null)
+                throw new ApiException(400, "Missing required parameter 'notificationEndpointUpdate' when calling NotificationEndpointsService->PatchNotificationEndpointsID");
+
+            var localVarPath = "/api/v2/notificationEndpoints/{endpointID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json"
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (endpointID != null) localVarPathParams.Add("endpointID", this.Configuration.ApiClient.ParameterToString(endpointID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (notificationEndpointUpdate != null && notificationEndpointUpdate.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(notificationEndpointUpdate); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = notificationEndpointUpdate; // byte array
+            }
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("PatchNotificationEndpointsID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// add a label to a notification endpoint 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="endpointID">ID of the notification endpoint</param>
+        /// <param name="labelMapping">label to add</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>LabelResponse</returns>
+        public LabelResponse PostNotificationEndpointIDLabels (string endpointID, LabelMapping labelMapping, string zapTraceSpan = null)
+        {
+             ApiResponse<LabelResponse> localVarResponse = PostNotificationEndpointIDLabelsWithHttpInfo(endpointID, labelMapping, zapTraceSpan);
+             return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// add a label to a notification endpoint 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="endpointID">ID of the notification endpoint</param>
+        /// <param name="labelMapping">label to add</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of LabelResponse</returns>
+        public ApiResponse< LabelResponse > PostNotificationEndpointIDLabelsWithHttpInfo (string endpointID, LabelMapping labelMapping, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'endpointID' is set
+            if (endpointID == null)
+                throw new ApiException(400, "Missing required parameter 'endpointID' when calling NotificationEndpointsService->PostNotificationEndpointIDLabels");
+            // verify the required parameter 'labelMapping' is set
+            if (labelMapping == null)
+                throw new ApiException(400, "Missing required parameter 'labelMapping' when calling NotificationEndpointsService->PostNotificationEndpointIDLabels");
+
+            var localVarPath = "/api/v2/notificationEndpoints/{endpointID}/labels";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json"
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (endpointID != null) localVarPathParams.Add("endpointID", this.Configuration.ApiClient.ParameterToString(endpointID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (labelMapping != null && labelMapping.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(labelMapping); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = labelMapping; // byte array
+            }
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("PostNotificationEndpointIDLabels", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<LabelResponse>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (LabelResponse) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(LabelResponse)));
+        }
+
+        /// <summary>
+        /// add a label to a notification endpoint 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="endpointID">ID of the notification endpoint</param>
+        /// <param name="labelMapping">label to add</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of LabelResponse</returns>
+        public async System.Threading.Tasks.Task<IRestResponse> PostNotificationEndpointIDLabelsWithIRestResponseAsync (string endpointID, LabelMapping labelMapping, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'endpointID' is set
+            if (endpointID == null)
+                throw new ApiException(400, "Missing required parameter 'endpointID' when calling NotificationEndpointsService->PostNotificationEndpointIDLabels");
+            // verify the required parameter 'labelMapping' is set
+            if (labelMapping == null)
+                throw new ApiException(400, "Missing required parameter 'labelMapping' when calling NotificationEndpointsService->PostNotificationEndpointIDLabels");
+
+            var localVarPath = "/api/v2/notificationEndpoints/{endpointID}/labels";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json"
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (endpointID != null) localVarPathParams.Add("endpointID", this.Configuration.ApiClient.ParameterToString(endpointID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (labelMapping != null && labelMapping.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(labelMapping); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = labelMapping; // byte array
+            }
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("PostNotificationEndpointIDLabels", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// add a label to a notification endpoint 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="endpointID">ID of the notification endpoint</param>
+        /// <param name="labelMapping">label to add</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of LabelResponse</returns>
+        public IRestResponse PostNotificationEndpointIDLabelsWithIRestResponse (string endpointID, LabelMapping labelMapping, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'endpointID' is set
+            if (endpointID == null)
+                throw new ApiException(400, "Missing required parameter 'endpointID' when calling NotificationEndpointsService->PostNotificationEndpointIDLabels");
+            // verify the required parameter 'labelMapping' is set
+            if (labelMapping == null)
+                throw new ApiException(400, "Missing required parameter 'labelMapping' when calling NotificationEndpointsService->PostNotificationEndpointIDLabels");
+
+            var localVarPath = "/api/v2/notificationEndpoints/{endpointID}/labels";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json"
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (endpointID != null) localVarPathParams.Add("endpointID", this.Configuration.ApiClient.ParameterToString(endpointID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (labelMapping != null && labelMapping.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(labelMapping); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = labelMapping; // byte array
+            }
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("PostNotificationEndpointIDLabels", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return localVarResponse;
+        }
+        
+        /// <summary>
+        /// add a label to a notification endpoint 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="endpointID">ID of the notification endpoint</param>
+        /// <param name="labelMapping">label to add</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of LabelResponse</returns>
+        public RestRequest PostNotificationEndpointIDLabelsWithRestRequest (string endpointID, LabelMapping labelMapping, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'endpointID' is set
+            if (endpointID == null)
+                throw new ApiException(400, "Missing required parameter 'endpointID' when calling NotificationEndpointsService->PostNotificationEndpointIDLabels");
+            // verify the required parameter 'labelMapping' is set
+            if (labelMapping == null)
+                throw new ApiException(400, "Missing required parameter 'labelMapping' when calling NotificationEndpointsService->PostNotificationEndpointIDLabels");
+
+            var localVarPath = "/api/v2/notificationEndpoints/{endpointID}/labels";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json"
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (endpointID != null) localVarPathParams.Add("endpointID", this.Configuration.ApiClient.ParameterToString(endpointID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (labelMapping != null && labelMapping.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(labelMapping); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = labelMapping; // byte array
+            }
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
+                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+        }
+
+        /// <summary>
+        /// add a label to a notification endpoint 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="endpointID">ID of the notification endpoint</param>
+        /// <param name="labelMapping">label to add</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of LabelResponse</returns>
+        public async System.Threading.Tasks.Task<LabelResponse> PostNotificationEndpointIDLabelsAsync (string endpointID, LabelMapping labelMapping, string zapTraceSpan = null)
+        {
+             ApiResponse<LabelResponse> localVarResponse = await PostNotificationEndpointIDLabelsAsyncWithHttpInfo(endpointID, labelMapping, zapTraceSpan);
+             return localVarResponse.Data;
+
+        }
+
+        /// <summary>
+        /// add a label to a notification endpoint 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="endpointID">ID of the notification endpoint</param>
+        /// <param name="labelMapping">label to add</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ApiResponse (LabelResponse)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<LabelResponse>> PostNotificationEndpointIDLabelsAsyncWithHttpInfo (string endpointID, LabelMapping labelMapping, string zapTraceSpan = null)
+        {
+            // make the HTTP request
+            IRestResponse localVarResponse = await PostNotificationEndpointIDLabelsAsyncWithIRestResponse(endpointID, labelMapping, zapTraceSpan);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("PostNotificationEndpointIDLabels", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<LabelResponse>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (LabelResponse) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(LabelResponse)));
+        }
+            
+        /// <summary>
+        /// add a label to a notification endpoint 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="endpointID">ID of the notification endpoint</param>
+        /// <param name="labelMapping">label to add</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of IRestResponse (LabelResponse)</returns>
+        public async System.Threading.Tasks.Task<IRestResponse> PostNotificationEndpointIDLabelsAsyncWithIRestResponse (string endpointID, LabelMapping labelMapping, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'endpointID' is set
+            if (endpointID == null)
+                throw new ApiException(400, "Missing required parameter 'endpointID' when calling NotificationEndpointsService->PostNotificationEndpointIDLabels");
+            // verify the required parameter 'labelMapping' is set
+            if (labelMapping == null)
+                throw new ApiException(400, "Missing required parameter 'labelMapping' when calling NotificationEndpointsService->PostNotificationEndpointIDLabels");
+
+            var localVarPath = "/api/v2/notificationEndpoints/{endpointID}/labels";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json"
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (endpointID != null) localVarPathParams.Add("endpointID", this.Configuration.ApiClient.ParameterToString(endpointID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (labelMapping != null && labelMapping.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(labelMapping); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = labelMapping; // byte array
+            }
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("PostNotificationEndpointIDLabels", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Update a notification endpoint 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="endpointID">ID of notification endpoint</param>
+        /// <param name="notificationEndpoint">a new notification endpoint to replace the existing endpoint with</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>NotificationEndpoint</returns>
+        public NotificationEndpoint PutNotificationEndpointsID (string endpointID, NotificationEndpoint notificationEndpoint, string zapTraceSpan = null)
+        {
+             ApiResponse<NotificationEndpoint> localVarResponse = PutNotificationEndpointsIDWithHttpInfo(endpointID, notificationEndpoint, zapTraceSpan);
+             return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Update a notification endpoint 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="endpointID">ID of notification endpoint</param>
+        /// <param name="notificationEndpoint">a new notification endpoint to replace the existing endpoint with</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of NotificationEndpoint</returns>
+        public ApiResponse< NotificationEndpoint > PutNotificationEndpointsIDWithHttpInfo (string endpointID, NotificationEndpoint notificationEndpoint, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'endpointID' is set
+            if (endpointID == null)
+                throw new ApiException(400, "Missing required parameter 'endpointID' when calling NotificationEndpointsService->PutNotificationEndpointsID");
             // verify the required parameter 'notificationEndpoint' is set
             if (notificationEndpoint == null)
-                throw new ApiException(400, "Missing required parameter 'notificationEndpoint' when calling NotificationEndpointsService->PatchNotificationEndpointsID");
+                throw new ApiException(400, "Missing required parameter 'notificationEndpoint' when calling NotificationEndpointsService->PutNotificationEndpointsID");
 
             var localVarPath = "/api/v2/notificationEndpoints/{endpointID}";
             var localVarPathParams = new Dictionary<String, String>();
@@ -1730,14 +3352,14 @@ namespace InfluxDB.Client.Api.Service
 
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                Method.PUT, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("PatchNotificationEndpointsID", localVarResponse);
+                Exception exception = ExceptionFactory("PutNotificationEndpointsID", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -1751,17 +3373,17 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="endpointID">ID of notification endpoint</param>
-        /// <param name="notificationEndpoint">check update to apply</param>
+        /// <param name="notificationEndpoint">a new notification endpoint to replace the existing endpoint with</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of NotificationEndpoint</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> PatchNotificationEndpointsIDWithIRestResponseAsync (string endpointID, NotificationEndpoint notificationEndpoint, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PutNotificationEndpointsIDWithIRestResponseAsync (string endpointID, NotificationEndpoint notificationEndpoint, string zapTraceSpan = null)
         {
             // verify the required parameter 'endpointID' is set
             if (endpointID == null)
-                throw new ApiException(400, "Missing required parameter 'endpointID' when calling NotificationEndpointsService->PatchNotificationEndpointsID");
+                throw new ApiException(400, "Missing required parameter 'endpointID' when calling NotificationEndpointsService->PutNotificationEndpointsID");
             // verify the required parameter 'notificationEndpoint' is set
             if (notificationEndpoint == null)
-                throw new ApiException(400, "Missing required parameter 'notificationEndpoint' when calling NotificationEndpointsService->PatchNotificationEndpointsID");
+                throw new ApiException(400, "Missing required parameter 'notificationEndpoint' when calling NotificationEndpointsService->PutNotificationEndpointsID");
 
             var localVarPath = "/api/v2/notificationEndpoints/{endpointID}";
             var localVarPathParams = new Dictionary<String, String>();
@@ -1800,14 +3422,14 @@ namespace InfluxDB.Client.Api.Service
 
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                Method.PUT, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("PatchNotificationEndpointsID", localVarResponse);
+                Exception exception = ExceptionFactory("PutNotificationEndpointsID", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -1819,17 +3441,17 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="endpointID">ID of notification endpoint</param>
-        /// <param name="notificationEndpoint">check update to apply</param>
+        /// <param name="notificationEndpoint">a new notification endpoint to replace the existing endpoint with</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of NotificationEndpoint</returns>
-        public IRestResponse PatchNotificationEndpointsIDWithIRestResponse (string endpointID, NotificationEndpoint notificationEndpoint, string zapTraceSpan = null)
+        public IRestResponse PutNotificationEndpointsIDWithIRestResponse (string endpointID, NotificationEndpoint notificationEndpoint, string zapTraceSpan = null)
         {
             // verify the required parameter 'endpointID' is set
             if (endpointID == null)
-                throw new ApiException(400, "Missing required parameter 'endpointID' when calling NotificationEndpointsService->PatchNotificationEndpointsID");
+                throw new ApiException(400, "Missing required parameter 'endpointID' when calling NotificationEndpointsService->PutNotificationEndpointsID");
             // verify the required parameter 'notificationEndpoint' is set
             if (notificationEndpoint == null)
-                throw new ApiException(400, "Missing required parameter 'notificationEndpoint' when calling NotificationEndpointsService->PatchNotificationEndpointsID");
+                throw new ApiException(400, "Missing required parameter 'notificationEndpoint' when calling NotificationEndpointsService->PutNotificationEndpointsID");
 
             var localVarPath = "/api/v2/notificationEndpoints/{endpointID}";
             var localVarPathParams = new Dictionary<String, String>();
@@ -1868,14 +3490,14 @@ namespace InfluxDB.Client.Api.Service
 
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                Method.PUT, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("PatchNotificationEndpointsID", localVarResponse);
+                Exception exception = ExceptionFactory("PutNotificationEndpointsID", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -1887,17 +3509,17 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="endpointID">ID of notification endpoint</param>
-        /// <param name="notificationEndpoint">check update to apply</param>
+        /// <param name="notificationEndpoint">a new notification endpoint to replace the existing endpoint with</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of NotificationEndpoint</returns>
-        public RestRequest PatchNotificationEndpointsIDWithRestRequest (string endpointID, NotificationEndpoint notificationEndpoint, string zapTraceSpan = null)
+        public RestRequest PutNotificationEndpointsIDWithRestRequest (string endpointID, NotificationEndpoint notificationEndpoint, string zapTraceSpan = null)
         {
             // verify the required parameter 'endpointID' is set
             if (endpointID == null)
-                throw new ApiException(400, "Missing required parameter 'endpointID' when calling NotificationEndpointsService->PatchNotificationEndpointsID");
+                throw new ApiException(400, "Missing required parameter 'endpointID' when calling NotificationEndpointsService->PutNotificationEndpointsID");
             // verify the required parameter 'notificationEndpoint' is set
             if (notificationEndpoint == null)
-                throw new ApiException(400, "Missing required parameter 'notificationEndpoint' when calling NotificationEndpointsService->PatchNotificationEndpointsID");
+                throw new ApiException(400, "Missing required parameter 'notificationEndpoint' when calling NotificationEndpointsService->PutNotificationEndpointsID");
 
             var localVarPath = "/api/v2/notificationEndpoints/{endpointID}";
             var localVarPathParams = new Dictionary<String, String>();
@@ -1935,7 +3557,7 @@ namespace InfluxDB.Client.Api.Service
 
 
             return this.Configuration.ApiClient.PrepareRequest(localVarPath,
-                Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                Method.PUT, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
         }
 
@@ -1944,12 +3566,12 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="endpointID">ID of notification endpoint</param>
-        /// <param name="notificationEndpoint">check update to apply</param>
+        /// <param name="notificationEndpoint">a new notification endpoint to replace the existing endpoint with</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of NotificationEndpoint</returns>
-        public async System.Threading.Tasks.Task<NotificationEndpoint> PatchNotificationEndpointsIDAsync (string endpointID, NotificationEndpoint notificationEndpoint, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<NotificationEndpoint> PutNotificationEndpointsIDAsync (string endpointID, NotificationEndpoint notificationEndpoint, string zapTraceSpan = null)
         {
-             ApiResponse<NotificationEndpoint> localVarResponse = await PatchNotificationEndpointsIDAsyncWithHttpInfo(endpointID, notificationEndpoint, zapTraceSpan);
+             ApiResponse<NotificationEndpoint> localVarResponse = await PutNotificationEndpointsIDAsyncWithHttpInfo(endpointID, notificationEndpoint, zapTraceSpan);
              return localVarResponse.Data;
 
         }
@@ -1959,19 +3581,19 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="endpointID">ID of notification endpoint</param>
-        /// <param name="notificationEndpoint">check update to apply</param>
+        /// <param name="notificationEndpoint">a new notification endpoint to replace the existing endpoint with</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (NotificationEndpoint)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<NotificationEndpoint>> PatchNotificationEndpointsIDAsyncWithHttpInfo (string endpointID, NotificationEndpoint notificationEndpoint, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<NotificationEndpoint>> PutNotificationEndpointsIDAsyncWithHttpInfo (string endpointID, NotificationEndpoint notificationEndpoint, string zapTraceSpan = null)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await PatchNotificationEndpointsIDAsyncWithIRestResponse(endpointID, notificationEndpoint, zapTraceSpan);
+            IRestResponse localVarResponse = await PutNotificationEndpointsIDAsyncWithIRestResponse(endpointID, notificationEndpoint, zapTraceSpan);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("PatchNotificationEndpointsID", localVarResponse);
+                Exception exception = ExceptionFactory("PutNotificationEndpointsID", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -1985,17 +3607,17 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="endpointID">ID of notification endpoint</param>
-        /// <param name="notificationEndpoint">check update to apply</param>
+        /// <param name="notificationEndpoint">a new notification endpoint to replace the existing endpoint with</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (NotificationEndpoint)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> PatchNotificationEndpointsIDAsyncWithIRestResponse (string endpointID, NotificationEndpoint notificationEndpoint, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PutNotificationEndpointsIDAsyncWithIRestResponse (string endpointID, NotificationEndpoint notificationEndpoint, string zapTraceSpan = null)
         {
             // verify the required parameter 'endpointID' is set
             if (endpointID == null)
-                throw new ApiException(400, "Missing required parameter 'endpointID' when calling NotificationEndpointsService->PatchNotificationEndpointsID");
+                throw new ApiException(400, "Missing required parameter 'endpointID' when calling NotificationEndpointsService->PutNotificationEndpointsID");
             // verify the required parameter 'notificationEndpoint' is set
             if (notificationEndpoint == null)
-                throw new ApiException(400, "Missing required parameter 'notificationEndpoint' when calling NotificationEndpointsService->PatchNotificationEndpointsID");
+                throw new ApiException(400, "Missing required parameter 'notificationEndpoint' when calling NotificationEndpointsService->PutNotificationEndpointsID");
 
             var localVarPath = "/api/v2/notificationEndpoints/{endpointID}";
             var localVarPathParams = new Dictionary<String, String>();
@@ -2034,12 +3656,12 @@ namespace InfluxDB.Client.Api.Service
 
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                Method.PUT, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("PatchNotificationEndpointsID", localVarResponse);
+                Exception exception = ExceptionFactory("PutNotificationEndpointsID", localVarResponse);
                 if (exception != null) throw exception;
             }
 

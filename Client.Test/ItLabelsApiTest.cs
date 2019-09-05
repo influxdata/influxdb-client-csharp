@@ -152,7 +152,7 @@ namespace InfluxDB.Client.Test
 
             await _labelsApi.CreateLabel(GenerateName("Cool Resource"), properties, organization.Id);
 
-            labels = await _labelsApi.FindLabelsByOrgId(organization.Id);
+            labels = await _labelsApi.FindLabelsByOrg(organization);
             Assert.AreEqual(1, labels.Count);
 
             await _labelsApi.DeleteLabel(labels.First());

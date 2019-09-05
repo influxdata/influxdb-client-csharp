@@ -69,6 +69,31 @@ namespace InfluxDB.Client.Api.Service
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> DeleteNotificationRulesIDWithHttpInfo (string ruleID, string zapTraceSpan = null);
         /// <summary>
+        /// delete label from a notification rule
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="ruleID">ID of the notification rule</param>
+        /// <param name="labelID">the label id to delete</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns></returns>
+        void DeleteNotificationRulesIDLabelsID (string ruleID, string labelID, string zapTraceSpan = null);
+
+        /// <summary>
+        /// delete label from a notification rule
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="ruleID">ID of the notification rule</param>
+        /// <param name="labelID">the label id to delete</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        ApiResponse<Object> DeleteNotificationRulesIDLabelsIDWithHttpInfo (string ruleID, string labelID, string zapTraceSpan = null);
+        /// <summary>
         /// Get all notification rules
         /// </summary>
         /// <remarks>
@@ -79,8 +104,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
         /// <param name="checkID">only show notifications that belong to the specified check (optional)</param>
+        /// <param name="tag">only show notification rules that match a tag pair. Uses AND logic if multiple tags are specified. (optional)</param>
         /// <returns>NotificationRules</returns>
-        NotificationRules GetNotificationRules (string orgID, int? offset = null, int? limit = null, string checkID = null);
+        NotificationRules GetNotificationRules (string orgID, int? offset = null, int? limit = null, string checkID = null, string tag = null);
 
         /// <summary>
         /// Get all notification rules
@@ -93,8 +119,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
         /// <param name="checkID">only show notifications that belong to the specified check (optional)</param>
+        /// <param name="tag">only show notification rules that match a tag pair. Uses AND logic if multiple tags are specified. (optional)</param>
         /// <returns>ApiResponse of NotificationRules</returns>
-        ApiResponse<NotificationRules> GetNotificationRulesWithHttpInfo (string orgID, int? offset = null, int? limit = null, string checkID = null);
+        ApiResponse<NotificationRules> GetNotificationRulesWithHttpInfo (string orgID, int? offset = null, int? limit = null, string checkID = null, string tag = null);
         /// <summary>
         /// Get a notification rule
         /// </summary>
@@ -118,6 +145,29 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of NotificationRule</returns>
         ApiResponse<NotificationRule> GetNotificationRulesIDWithHttpInfo (string ruleID, string zapTraceSpan = null);
+        /// <summary>
+        /// list all labels for a notification rule
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="ruleID">ID of the notification rule</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>LabelsResponse</returns>
+        LabelsResponse GetNotificationRulesIDLabels (string ruleID, string zapTraceSpan = null);
+
+        /// <summary>
+        /// list all labels for a notification rule
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="ruleID">ID of the notification rule</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of LabelsResponse</returns>
+        ApiResponse<LabelsResponse> GetNotificationRulesIDLabelsWithHttpInfo (string ruleID, string zapTraceSpan = null);
         /// <summary>
         /// Update a notification rule
         /// </summary>
@@ -143,6 +193,31 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of NotificationRule</returns>
         ApiResponse<NotificationRule> PatchNotificationRulesIDWithHttpInfo (string ruleID, NotificationRuleUpdate notificationRuleUpdate, string zapTraceSpan = null);
+        /// <summary>
+        /// add a label to a notification rule
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="ruleID">ID of the notification rule</param>
+        /// <param name="labelMapping">label to add</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>LabelResponse</returns>
+        LabelResponse PostNotificationRuleIDLabels (string ruleID, LabelMapping labelMapping, string zapTraceSpan = null);
+
+        /// <summary>
+        /// add a label to a notification rule
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="ruleID">ID of the notification rule</param>
+        /// <param name="labelMapping">label to add</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of LabelResponse</returns>
+        ApiResponse<LabelResponse> PostNotificationRuleIDLabelsWithHttpInfo (string ruleID, LabelMapping labelMapping, string zapTraceSpan = null);
         /// <summary>
         /// Update a notification rule
         /// </summary>
@@ -215,6 +290,31 @@ namespace InfluxDB.Client.Api.Service
         /// <returns>Task of ApiResponse</returns>
         System.Threading.Tasks.Task<ApiResponse<Object>> DeleteNotificationRulesIDAsyncWithHttpInfo (string ruleID, string zapTraceSpan = null);
         /// <summary>
+        /// delete label from a notification rule
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="ruleID">ID of the notification rule</param>
+        /// <param name="labelID">the label id to delete</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of void</returns>
+        System.Threading.Tasks.Task DeleteNotificationRulesIDLabelsIDAsync (string ruleID, string labelID, string zapTraceSpan = null);
+
+        /// <summary>
+        /// delete label from a notification rule
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="ruleID">ID of the notification rule</param>
+        /// <param name="labelID">the label id to delete</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ApiResponse</returns>
+        System.Threading.Tasks.Task<ApiResponse<Object>> DeleteNotificationRulesIDLabelsIDAsyncWithHttpInfo (string ruleID, string labelID, string zapTraceSpan = null);
+        /// <summary>
         /// Get all notification rules
         /// </summary>
         /// <remarks>
@@ -225,8 +325,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
         /// <param name="checkID">only show notifications that belong to the specified check (optional)</param>
+        /// <param name="tag">only show notification rules that match a tag pair. Uses AND logic if multiple tags are specified. (optional)</param>
         /// <returns>Task of NotificationRules</returns>
-        System.Threading.Tasks.Task<NotificationRules> GetNotificationRulesAsync (string orgID, int? offset = null, int? limit = null, string checkID = null);
+        System.Threading.Tasks.Task<NotificationRules> GetNotificationRulesAsync (string orgID, int? offset = null, int? limit = null, string checkID = null, string tag = null);
 
         /// <summary>
         /// Get all notification rules
@@ -239,8 +340,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
         /// <param name="checkID">only show notifications that belong to the specified check (optional)</param>
+        /// <param name="tag">only show notification rules that match a tag pair. Uses AND logic if multiple tags are specified. (optional)</param>
         /// <returns>Task of ApiResponse (NotificationRules)</returns>
-        System.Threading.Tasks.Task<ApiResponse<NotificationRules>> GetNotificationRulesAsyncWithHttpInfo (string orgID, int? offset = null, int? limit = null, string checkID = null);
+        System.Threading.Tasks.Task<ApiResponse<NotificationRules>> GetNotificationRulesAsyncWithHttpInfo (string orgID, int? offset = null, int? limit = null, string checkID = null, string tag = null);
         /// <summary>
         /// Get a notification rule
         /// </summary>
@@ -264,6 +366,29 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (NotificationRule)</returns>
         System.Threading.Tasks.Task<ApiResponse<NotificationRule>> GetNotificationRulesIDAsyncWithHttpInfo (string ruleID, string zapTraceSpan = null);
+        /// <summary>
+        /// list all labels for a notification rule
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="ruleID">ID of the notification rule</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of LabelsResponse</returns>
+        System.Threading.Tasks.Task<LabelsResponse> GetNotificationRulesIDLabelsAsync (string ruleID, string zapTraceSpan = null);
+
+        /// <summary>
+        /// list all labels for a notification rule
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="ruleID">ID of the notification rule</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ApiResponse (LabelsResponse)</returns>
+        System.Threading.Tasks.Task<ApiResponse<LabelsResponse>> GetNotificationRulesIDLabelsAsyncWithHttpInfo (string ruleID, string zapTraceSpan = null);
         /// <summary>
         /// Update a notification rule
         /// </summary>
@@ -289,6 +414,31 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (NotificationRule)</returns>
         System.Threading.Tasks.Task<ApiResponse<NotificationRule>> PatchNotificationRulesIDAsyncWithHttpInfo (string ruleID, NotificationRuleUpdate notificationRuleUpdate, string zapTraceSpan = null);
+        /// <summary>
+        /// add a label to a notification rule
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="ruleID">ID of the notification rule</param>
+        /// <param name="labelMapping">label to add</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of LabelResponse</returns>
+        System.Threading.Tasks.Task<LabelResponse> PostNotificationRuleIDLabelsAsync (string ruleID, LabelMapping labelMapping, string zapTraceSpan = null);
+
+        /// <summary>
+        /// add a label to a notification rule
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="ruleID">ID of the notification rule</param>
+        /// <param name="labelMapping">label to add</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ApiResponse (LabelResponse)</returns>
+        System.Threading.Tasks.Task<ApiResponse<LabelResponse>> PostNotificationRuleIDLabelsAsyncWithHttpInfo (string ruleID, LabelMapping labelMapping, string zapTraceSpan = null);
         /// <summary>
         /// Update a notification rule
         /// </summary>
@@ -1072,6 +1222,348 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
+        /// delete label from a notification rule 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="ruleID">ID of the notification rule</param>
+        /// <param name="labelID">the label id to delete</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns></returns>
+        public void DeleteNotificationRulesIDLabelsID (string ruleID, string labelID, string zapTraceSpan = null)
+        {
+             DeleteNotificationRulesIDLabelsIDWithHttpInfo(ruleID, labelID, zapTraceSpan);
+        }
+
+        /// <summary>
+        /// delete label from a notification rule 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="ruleID">ID of the notification rule</param>
+        /// <param name="labelID">the label id to delete</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        public ApiResponse<Object> DeleteNotificationRulesIDLabelsIDWithHttpInfo (string ruleID, string labelID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'ruleID' is set
+            if (ruleID == null)
+                throw new ApiException(400, "Missing required parameter 'ruleID' when calling NotificationRulesService->DeleteNotificationRulesIDLabelsID");
+            // verify the required parameter 'labelID' is set
+            if (labelID == null)
+                throw new ApiException(400, "Missing required parameter 'labelID' when calling NotificationRulesService->DeleteNotificationRulesIDLabelsID");
+
+            var localVarPath = "/api/v2/notificationRules/{ruleID}/labels/{labelID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (ruleID != null) localVarPathParams.Add("ruleID", this.Configuration.ApiClient.ParameterToString(ruleID)); // path parameter
+            if (labelID != null) localVarPathParams.Add("labelID", this.Configuration.ApiClient.ParameterToString(labelID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("DeleteNotificationRulesIDLabelsID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Object>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                null);
+        }
+
+        /// <summary>
+        /// delete label from a notification rule 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="ruleID">ID of the notification rule</param>
+        /// <param name="labelID">the label id to delete</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        public async System.Threading.Tasks.Task<IRestResponse> DeleteNotificationRulesIDLabelsIDWithIRestResponseAsync (string ruleID, string labelID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'ruleID' is set
+            if (ruleID == null)
+                throw new ApiException(400, "Missing required parameter 'ruleID' when calling NotificationRulesService->DeleteNotificationRulesIDLabelsID");
+            // verify the required parameter 'labelID' is set
+            if (labelID == null)
+                throw new ApiException(400, "Missing required parameter 'labelID' when calling NotificationRulesService->DeleteNotificationRulesIDLabelsID");
+
+            var localVarPath = "/api/v2/notificationRules/{ruleID}/labels/{labelID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (ruleID != null) localVarPathParams.Add("ruleID", this.Configuration.ApiClient.ParameterToString(ruleID)); // path parameter
+            if (labelID != null) localVarPathParams.Add("labelID", this.Configuration.ApiClient.ParameterToString(labelID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("DeleteNotificationRulesIDLabelsID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// delete label from a notification rule 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="ruleID">ID of the notification rule</param>
+        /// <param name="labelID">the label id to delete</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        public IRestResponse DeleteNotificationRulesIDLabelsIDWithIRestResponse (string ruleID, string labelID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'ruleID' is set
+            if (ruleID == null)
+                throw new ApiException(400, "Missing required parameter 'ruleID' when calling NotificationRulesService->DeleteNotificationRulesIDLabelsID");
+            // verify the required parameter 'labelID' is set
+            if (labelID == null)
+                throw new ApiException(400, "Missing required parameter 'labelID' when calling NotificationRulesService->DeleteNotificationRulesIDLabelsID");
+
+            var localVarPath = "/api/v2/notificationRules/{ruleID}/labels/{labelID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (ruleID != null) localVarPathParams.Add("ruleID", this.Configuration.ApiClient.ParameterToString(ruleID)); // path parameter
+            if (labelID != null) localVarPathParams.Add("labelID", this.Configuration.ApiClient.ParameterToString(labelID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("DeleteNotificationRulesIDLabelsID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return localVarResponse;
+        }
+        
+        /// <summary>
+        /// delete label from a notification rule 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="ruleID">ID of the notification rule</param>
+        /// <param name="labelID">the label id to delete</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        public RestRequest DeleteNotificationRulesIDLabelsIDWithRestRequest (string ruleID, string labelID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'ruleID' is set
+            if (ruleID == null)
+                throw new ApiException(400, "Missing required parameter 'ruleID' when calling NotificationRulesService->DeleteNotificationRulesIDLabelsID");
+            // verify the required parameter 'labelID' is set
+            if (labelID == null)
+                throw new ApiException(400, "Missing required parameter 'labelID' when calling NotificationRulesService->DeleteNotificationRulesIDLabelsID");
+
+            var localVarPath = "/api/v2/notificationRules/{ruleID}/labels/{labelID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (ruleID != null) localVarPathParams.Add("ruleID", this.Configuration.ApiClient.ParameterToString(ruleID)); // path parameter
+            if (labelID != null) localVarPathParams.Add("labelID", this.Configuration.ApiClient.ParameterToString(labelID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
+                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+        }
+
+        /// <summary>
+        /// delete label from a notification rule 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="ruleID">ID of the notification rule</param>
+        /// <param name="labelID">the label id to delete</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of void</returns>
+        public async System.Threading.Tasks.Task DeleteNotificationRulesIDLabelsIDAsync (string ruleID, string labelID, string zapTraceSpan = null)
+        {
+             await DeleteNotificationRulesIDLabelsIDAsyncWithHttpInfo(ruleID, labelID, zapTraceSpan);
+
+        }
+
+        /// <summary>
+        /// delete label from a notification rule 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="ruleID">ID of the notification rule</param>
+        /// <param name="labelID">the label id to delete</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ApiResponse</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteNotificationRulesIDLabelsIDAsyncWithHttpInfo (string ruleID, string labelID, string zapTraceSpan = null)
+        {
+            // make the HTTP request
+            IRestResponse localVarResponse = await DeleteNotificationRulesIDLabelsIDAsyncWithIRestResponse(ruleID, labelID, zapTraceSpan);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("DeleteNotificationRulesIDLabelsID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Object>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                null);
+        }
+            
+        /// <summary>
+        /// delete label from a notification rule 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="ruleID">ID of the notification rule</param>
+        /// <param name="labelID">the label id to delete</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of IRestResponse</returns>
+        public async System.Threading.Tasks.Task<IRestResponse> DeleteNotificationRulesIDLabelsIDAsyncWithIRestResponse (string ruleID, string labelID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'ruleID' is set
+            if (ruleID == null)
+                throw new ApiException(400, "Missing required parameter 'ruleID' when calling NotificationRulesService->DeleteNotificationRulesIDLabelsID");
+            // verify the required parameter 'labelID' is set
+            if (labelID == null)
+                throw new ApiException(400, "Missing required parameter 'labelID' when calling NotificationRulesService->DeleteNotificationRulesIDLabelsID");
+
+            var localVarPath = "/api/v2/notificationRules/{ruleID}/labels/{labelID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (ruleID != null) localVarPathParams.Add("ruleID", this.Configuration.ApiClient.ParameterToString(ruleID)); // path parameter
+            if (labelID != null) localVarPathParams.Add("labelID", this.Configuration.ApiClient.ParameterToString(labelID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("DeleteNotificationRulesIDLabelsID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
         /// Get all notification rules 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
@@ -1079,10 +1571,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
         /// <param name="checkID">only show notifications that belong to the specified check (optional)</param>
+        /// <param name="tag">only show notification rules that match a tag pair. Uses AND logic if multiple tags are specified. (optional)</param>
         /// <returns>NotificationRules</returns>
-        public NotificationRules GetNotificationRules (string orgID, int? offset = null, int? limit = null, string checkID = null)
+        public NotificationRules GetNotificationRules (string orgID, int? offset = null, int? limit = null, string checkID = null, string tag = null)
         {
-             ApiResponse<NotificationRules> localVarResponse = GetNotificationRulesWithHttpInfo(orgID, offset, limit, checkID);
+             ApiResponse<NotificationRules> localVarResponse = GetNotificationRulesWithHttpInfo(orgID, offset, limit, checkID, tag);
              return localVarResponse.Data;
         }
 
@@ -1094,8 +1587,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
         /// <param name="checkID">only show notifications that belong to the specified check (optional)</param>
+        /// <param name="tag">only show notification rules that match a tag pair. Uses AND logic if multiple tags are specified. (optional)</param>
         /// <returns>ApiResponse of NotificationRules</returns>
-        public ApiResponse< NotificationRules > GetNotificationRulesWithHttpInfo (string orgID, int? offset = null, int? limit = null, string checkID = null)
+        public ApiResponse< NotificationRules > GetNotificationRulesWithHttpInfo (string orgID, int? offset = null, int? limit = null, string checkID = null, string tag = null)
         {
             // verify the required parameter 'orgID' is set
             if (orgID == null)
@@ -1118,6 +1612,7 @@ namespace InfluxDB.Client.Api.Service
             if (limit != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "limit", limit)); // query parameter
             if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
             if (checkID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "checkID", checkID)); // query parameter
+            if (tag != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "tag", tag)); // query parameter
 
             // to determine the Accept header
             String[] localVarHttpHeaderAccepts = new String[] {
@@ -1155,8 +1650,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
         /// <param name="checkID">only show notifications that belong to the specified check (optional)</param>
+        /// <param name="tag">only show notification rules that match a tag pair. Uses AND logic if multiple tags are specified. (optional)</param>
         /// <returns>ApiResponse of NotificationRules</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> GetNotificationRulesWithIRestResponseAsync (string orgID, int? offset = null, int? limit = null, string checkID = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetNotificationRulesWithIRestResponseAsync (string orgID, int? offset = null, int? limit = null, string checkID = null, string tag = null)
         {
             // verify the required parameter 'orgID' is set
             if (orgID == null)
@@ -1179,6 +1675,7 @@ namespace InfluxDB.Client.Api.Service
             if (limit != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "limit", limit)); // query parameter
             if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
             if (checkID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "checkID", checkID)); // query parameter
+            if (tag != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "tag", tag)); // query parameter
 
             // to determine the Accept header
             String[] localVarHttpHeaderAccepts = new String[] {
@@ -1214,8 +1711,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
         /// <param name="checkID">only show notifications that belong to the specified check (optional)</param>
+        /// <param name="tag">only show notification rules that match a tag pair. Uses AND logic if multiple tags are specified. (optional)</param>
         /// <returns>ApiResponse of NotificationRules</returns>
-        public IRestResponse GetNotificationRulesWithIRestResponse (string orgID, int? offset = null, int? limit = null, string checkID = null)
+        public IRestResponse GetNotificationRulesWithIRestResponse (string orgID, int? offset = null, int? limit = null, string checkID = null, string tag = null)
         {
             // verify the required parameter 'orgID' is set
             if (orgID == null)
@@ -1238,6 +1736,7 @@ namespace InfluxDB.Client.Api.Service
             if (limit != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "limit", limit)); // query parameter
             if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
             if (checkID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "checkID", checkID)); // query parameter
+            if (tag != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "tag", tag)); // query parameter
 
             // to determine the Accept header
             String[] localVarHttpHeaderAccepts = new String[] {
@@ -1273,8 +1772,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
         /// <param name="checkID">only show notifications that belong to the specified check (optional)</param>
+        /// <param name="tag">only show notification rules that match a tag pair. Uses AND logic if multiple tags are specified. (optional)</param>
         /// <returns>ApiResponse of NotificationRules</returns>
-        public RestRequest GetNotificationRulesWithRestRequest (string orgID, int? offset = null, int? limit = null, string checkID = null)
+        public RestRequest GetNotificationRulesWithRestRequest (string orgID, int? offset = null, int? limit = null, string checkID = null, string tag = null)
         {
             // verify the required parameter 'orgID' is set
             if (orgID == null)
@@ -1297,6 +1797,7 @@ namespace InfluxDB.Client.Api.Service
             if (limit != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "limit", limit)); // query parameter
             if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
             if (checkID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "checkID", checkID)); // query parameter
+            if (tag != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "tag", tag)); // query parameter
 
             // to determine the Accept header
             String[] localVarHttpHeaderAccepts = new String[] {
@@ -1321,10 +1822,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
         /// <param name="checkID">only show notifications that belong to the specified check (optional)</param>
+        /// <param name="tag">only show notification rules that match a tag pair. Uses AND logic if multiple tags are specified. (optional)</param>
         /// <returns>Task of NotificationRules</returns>
-        public async System.Threading.Tasks.Task<NotificationRules> GetNotificationRulesAsync (string orgID, int? offset = null, int? limit = null, string checkID = null)
+        public async System.Threading.Tasks.Task<NotificationRules> GetNotificationRulesAsync (string orgID, int? offset = null, int? limit = null, string checkID = null, string tag = null)
         {
-             ApiResponse<NotificationRules> localVarResponse = await GetNotificationRulesAsyncWithHttpInfo(orgID, offset, limit, checkID);
+             ApiResponse<NotificationRules> localVarResponse = await GetNotificationRulesAsyncWithHttpInfo(orgID, offset, limit, checkID, tag);
              return localVarResponse.Data;
 
         }
@@ -1337,11 +1839,12 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
         /// <param name="checkID">only show notifications that belong to the specified check (optional)</param>
+        /// <param name="tag">only show notification rules that match a tag pair. Uses AND logic if multiple tags are specified. (optional)</param>
         /// <returns>Task of ApiResponse (NotificationRules)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<NotificationRules>> GetNotificationRulesAsyncWithHttpInfo (string orgID, int? offset = null, int? limit = null, string checkID = null)
+        public async System.Threading.Tasks.Task<ApiResponse<NotificationRules>> GetNotificationRulesAsyncWithHttpInfo (string orgID, int? offset = null, int? limit = null, string checkID = null, string tag = null)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await GetNotificationRulesAsyncWithIRestResponse(orgID, offset, limit, checkID);
+            IRestResponse localVarResponse = await GetNotificationRulesAsyncWithIRestResponse(orgID, offset, limit, checkID, tag);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -1364,8 +1867,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
         /// <param name="checkID">only show notifications that belong to the specified check (optional)</param>
+        /// <param name="tag">only show notification rules that match a tag pair. Uses AND logic if multiple tags are specified. (optional)</param>
         /// <returns>Task of IRestResponse (NotificationRules)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> GetNotificationRulesAsyncWithIRestResponse (string orgID, int? offset = null, int? limit = null, string checkID = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetNotificationRulesAsyncWithIRestResponse (string orgID, int? offset = null, int? limit = null, string checkID = null, string tag = null)
         {
             // verify the required parameter 'orgID' is set
             if (orgID == null)
@@ -1388,6 +1892,7 @@ namespace InfluxDB.Client.Api.Service
             if (limit != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "limit", limit)); // query parameter
             if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
             if (checkID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "checkID", checkID)); // query parameter
+            if (tag != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "tag", tag)); // query parameter
 
             // to determine the Accept header
             String[] localVarHttpHeaderAccepts = new String[] {
@@ -1723,6 +2228,322 @@ namespace InfluxDB.Client.Api.Service
             if (ExceptionFactory != null)
             {
                 Exception exception = ExceptionFactory("GetNotificationRulesID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// list all labels for a notification rule 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="ruleID">ID of the notification rule</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>LabelsResponse</returns>
+        public LabelsResponse GetNotificationRulesIDLabels (string ruleID, string zapTraceSpan = null)
+        {
+             ApiResponse<LabelsResponse> localVarResponse = GetNotificationRulesIDLabelsWithHttpInfo(ruleID, zapTraceSpan);
+             return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// list all labels for a notification rule 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="ruleID">ID of the notification rule</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of LabelsResponse</returns>
+        public ApiResponse< LabelsResponse > GetNotificationRulesIDLabelsWithHttpInfo (string ruleID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'ruleID' is set
+            if (ruleID == null)
+                throw new ApiException(400, "Missing required parameter 'ruleID' when calling NotificationRulesService->GetNotificationRulesIDLabels");
+
+            var localVarPath = "/api/v2/notificationRules/{ruleID}/labels";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (ruleID != null) localVarPathParams.Add("ruleID", this.Configuration.ApiClient.ParameterToString(ruleID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("GetNotificationRulesIDLabels", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<LabelsResponse>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (LabelsResponse) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(LabelsResponse)));
+        }
+
+        /// <summary>
+        /// list all labels for a notification rule 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="ruleID">ID of the notification rule</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of LabelsResponse</returns>
+        public async System.Threading.Tasks.Task<IRestResponse> GetNotificationRulesIDLabelsWithIRestResponseAsync (string ruleID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'ruleID' is set
+            if (ruleID == null)
+                throw new ApiException(400, "Missing required parameter 'ruleID' when calling NotificationRulesService->GetNotificationRulesIDLabels");
+
+            var localVarPath = "/api/v2/notificationRules/{ruleID}/labels";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (ruleID != null) localVarPathParams.Add("ruleID", this.Configuration.ApiClient.ParameterToString(ruleID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("GetNotificationRulesIDLabels", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// list all labels for a notification rule 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="ruleID">ID of the notification rule</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of LabelsResponse</returns>
+        public IRestResponse GetNotificationRulesIDLabelsWithIRestResponse (string ruleID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'ruleID' is set
+            if (ruleID == null)
+                throw new ApiException(400, "Missing required parameter 'ruleID' when calling NotificationRulesService->GetNotificationRulesIDLabels");
+
+            var localVarPath = "/api/v2/notificationRules/{ruleID}/labels";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (ruleID != null) localVarPathParams.Add("ruleID", this.Configuration.ApiClient.ParameterToString(ruleID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("GetNotificationRulesIDLabels", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return localVarResponse;
+        }
+        
+        /// <summary>
+        /// list all labels for a notification rule 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="ruleID">ID of the notification rule</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of LabelsResponse</returns>
+        public RestRequest GetNotificationRulesIDLabelsWithRestRequest (string ruleID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'ruleID' is set
+            if (ruleID == null)
+                throw new ApiException(400, "Missing required parameter 'ruleID' when calling NotificationRulesService->GetNotificationRulesIDLabels");
+
+            var localVarPath = "/api/v2/notificationRules/{ruleID}/labels";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (ruleID != null) localVarPathParams.Add("ruleID", this.Configuration.ApiClient.ParameterToString(ruleID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
+                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+        }
+
+        /// <summary>
+        /// list all labels for a notification rule 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="ruleID">ID of the notification rule</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of LabelsResponse</returns>
+        public async System.Threading.Tasks.Task<LabelsResponse> GetNotificationRulesIDLabelsAsync (string ruleID, string zapTraceSpan = null)
+        {
+             ApiResponse<LabelsResponse> localVarResponse = await GetNotificationRulesIDLabelsAsyncWithHttpInfo(ruleID, zapTraceSpan);
+             return localVarResponse.Data;
+
+        }
+
+        /// <summary>
+        /// list all labels for a notification rule 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="ruleID">ID of the notification rule</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ApiResponse (LabelsResponse)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<LabelsResponse>> GetNotificationRulesIDLabelsAsyncWithHttpInfo (string ruleID, string zapTraceSpan = null)
+        {
+            // make the HTTP request
+            IRestResponse localVarResponse = await GetNotificationRulesIDLabelsAsyncWithIRestResponse(ruleID, zapTraceSpan);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("GetNotificationRulesIDLabels", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<LabelsResponse>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (LabelsResponse) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(LabelsResponse)));
+        }
+            
+        /// <summary>
+        /// list all labels for a notification rule 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="ruleID">ID of the notification rule</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of IRestResponse (LabelsResponse)</returns>
+        public async System.Threading.Tasks.Task<IRestResponse> GetNotificationRulesIDLabelsAsyncWithIRestResponse (string ruleID, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'ruleID' is set
+            if (ruleID == null)
+                throw new ApiException(400, "Missing required parameter 'ruleID' when calling NotificationRulesService->GetNotificationRulesIDLabels");
+
+            var localVarPath = "/api/v2/notificationRules/{ruleID}/labels";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (ruleID != null) localVarPathParams.Add("ruleID", this.Configuration.ApiClient.ParameterToString(ruleID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("GetNotificationRulesIDLabels", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -2107,6 +2928,390 @@ namespace InfluxDB.Client.Api.Service
             if (ExceptionFactory != null)
             {
                 Exception exception = ExceptionFactory("PatchNotificationRulesID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// add a label to a notification rule 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="ruleID">ID of the notification rule</param>
+        /// <param name="labelMapping">label to add</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>LabelResponse</returns>
+        public LabelResponse PostNotificationRuleIDLabels (string ruleID, LabelMapping labelMapping, string zapTraceSpan = null)
+        {
+             ApiResponse<LabelResponse> localVarResponse = PostNotificationRuleIDLabelsWithHttpInfo(ruleID, labelMapping, zapTraceSpan);
+             return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// add a label to a notification rule 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="ruleID">ID of the notification rule</param>
+        /// <param name="labelMapping">label to add</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of LabelResponse</returns>
+        public ApiResponse< LabelResponse > PostNotificationRuleIDLabelsWithHttpInfo (string ruleID, LabelMapping labelMapping, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'ruleID' is set
+            if (ruleID == null)
+                throw new ApiException(400, "Missing required parameter 'ruleID' when calling NotificationRulesService->PostNotificationRuleIDLabels");
+            // verify the required parameter 'labelMapping' is set
+            if (labelMapping == null)
+                throw new ApiException(400, "Missing required parameter 'labelMapping' when calling NotificationRulesService->PostNotificationRuleIDLabels");
+
+            var localVarPath = "/api/v2/notificationRules/{ruleID}/labels";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json"
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (ruleID != null) localVarPathParams.Add("ruleID", this.Configuration.ApiClient.ParameterToString(ruleID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (labelMapping != null && labelMapping.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(labelMapping); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = labelMapping; // byte array
+            }
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("PostNotificationRuleIDLabels", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<LabelResponse>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (LabelResponse) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(LabelResponse)));
+        }
+
+        /// <summary>
+        /// add a label to a notification rule 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="ruleID">ID of the notification rule</param>
+        /// <param name="labelMapping">label to add</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of LabelResponse</returns>
+        public async System.Threading.Tasks.Task<IRestResponse> PostNotificationRuleIDLabelsWithIRestResponseAsync (string ruleID, LabelMapping labelMapping, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'ruleID' is set
+            if (ruleID == null)
+                throw new ApiException(400, "Missing required parameter 'ruleID' when calling NotificationRulesService->PostNotificationRuleIDLabels");
+            // verify the required parameter 'labelMapping' is set
+            if (labelMapping == null)
+                throw new ApiException(400, "Missing required parameter 'labelMapping' when calling NotificationRulesService->PostNotificationRuleIDLabels");
+
+            var localVarPath = "/api/v2/notificationRules/{ruleID}/labels";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json"
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (ruleID != null) localVarPathParams.Add("ruleID", this.Configuration.ApiClient.ParameterToString(ruleID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (labelMapping != null && labelMapping.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(labelMapping); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = labelMapping; // byte array
+            }
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("PostNotificationRuleIDLabels", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// add a label to a notification rule 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="ruleID">ID of the notification rule</param>
+        /// <param name="labelMapping">label to add</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of LabelResponse</returns>
+        public IRestResponse PostNotificationRuleIDLabelsWithIRestResponse (string ruleID, LabelMapping labelMapping, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'ruleID' is set
+            if (ruleID == null)
+                throw new ApiException(400, "Missing required parameter 'ruleID' when calling NotificationRulesService->PostNotificationRuleIDLabels");
+            // verify the required parameter 'labelMapping' is set
+            if (labelMapping == null)
+                throw new ApiException(400, "Missing required parameter 'labelMapping' when calling NotificationRulesService->PostNotificationRuleIDLabels");
+
+            var localVarPath = "/api/v2/notificationRules/{ruleID}/labels";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json"
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (ruleID != null) localVarPathParams.Add("ruleID", this.Configuration.ApiClient.ParameterToString(ruleID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (labelMapping != null && labelMapping.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(labelMapping); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = labelMapping; // byte array
+            }
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("PostNotificationRuleIDLabels", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return localVarResponse;
+        }
+        
+        /// <summary>
+        /// add a label to a notification rule 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="ruleID">ID of the notification rule</param>
+        /// <param name="labelMapping">label to add</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of LabelResponse</returns>
+        public RestRequest PostNotificationRuleIDLabelsWithRestRequest (string ruleID, LabelMapping labelMapping, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'ruleID' is set
+            if (ruleID == null)
+                throw new ApiException(400, "Missing required parameter 'ruleID' when calling NotificationRulesService->PostNotificationRuleIDLabels");
+            // verify the required parameter 'labelMapping' is set
+            if (labelMapping == null)
+                throw new ApiException(400, "Missing required parameter 'labelMapping' when calling NotificationRulesService->PostNotificationRuleIDLabels");
+
+            var localVarPath = "/api/v2/notificationRules/{ruleID}/labels";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json"
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (ruleID != null) localVarPathParams.Add("ruleID", this.Configuration.ApiClient.ParameterToString(ruleID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (labelMapping != null && labelMapping.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(labelMapping); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = labelMapping; // byte array
+            }
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
+                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+        }
+
+        /// <summary>
+        /// add a label to a notification rule 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="ruleID">ID of the notification rule</param>
+        /// <param name="labelMapping">label to add</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of LabelResponse</returns>
+        public async System.Threading.Tasks.Task<LabelResponse> PostNotificationRuleIDLabelsAsync (string ruleID, LabelMapping labelMapping, string zapTraceSpan = null)
+        {
+             ApiResponse<LabelResponse> localVarResponse = await PostNotificationRuleIDLabelsAsyncWithHttpInfo(ruleID, labelMapping, zapTraceSpan);
+             return localVarResponse.Data;
+
+        }
+
+        /// <summary>
+        /// add a label to a notification rule 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="ruleID">ID of the notification rule</param>
+        /// <param name="labelMapping">label to add</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ApiResponse (LabelResponse)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<LabelResponse>> PostNotificationRuleIDLabelsAsyncWithHttpInfo (string ruleID, LabelMapping labelMapping, string zapTraceSpan = null)
+        {
+            // make the HTTP request
+            IRestResponse localVarResponse = await PostNotificationRuleIDLabelsAsyncWithIRestResponse(ruleID, labelMapping, zapTraceSpan);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("PostNotificationRuleIDLabels", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<LabelResponse>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (LabelResponse) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(LabelResponse)));
+        }
+            
+        /// <summary>
+        /// add a label to a notification rule 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="ruleID">ID of the notification rule</param>
+        /// <param name="labelMapping">label to add</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of IRestResponse (LabelResponse)</returns>
+        public async System.Threading.Tasks.Task<IRestResponse> PostNotificationRuleIDLabelsAsyncWithIRestResponse (string ruleID, LabelMapping labelMapping, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'ruleID' is set
+            if (ruleID == null)
+                throw new ApiException(400, "Missing required parameter 'ruleID' when calling NotificationRulesService->PostNotificationRuleIDLabels");
+            // verify the required parameter 'labelMapping' is set
+            if (labelMapping == null)
+                throw new ApiException(400, "Missing required parameter 'labelMapping' when calling NotificationRulesService->PostNotificationRuleIDLabels");
+
+            var localVarPath = "/api/v2/notificationRules/{ruleID}/labels";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json"
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (ruleID != null) localVarPathParams.Add("ruleID", this.Configuration.ApiClient.ParameterToString(ruleID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (labelMapping != null && labelMapping.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(labelMapping); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = labelMapping; // byte array
+            }
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("PostNotificationRuleIDLabels", localVarResponse);
                 if (exception != null) throw exception;
             }
 

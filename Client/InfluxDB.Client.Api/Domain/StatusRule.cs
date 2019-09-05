@@ -30,13 +30,23 @@ namespace InfluxDB.Client.Api.Domain
     public partial class StatusRule :  IEquatable<StatusRule>
     {
         /// <summary>
+        /// Gets or Sets CurrentLevel
+        /// </summary>
+        [DataMember(Name="currentLevel", EmitDefaultValue=false)]
+        public RuleStatusLevel? CurrentLevel { get; set; }
+        /// <summary>
+        /// Gets or Sets PreviousLevel
+        /// </summary>
+        [DataMember(Name="previousLevel", EmitDefaultValue=false)]
+        public RuleStatusLevel? PreviousLevel { get; set; }
+        /// <summary>
         /// Initializes a new instance of the <see cref="StatusRule" /> class.
         /// </summary>
         /// <param name="currentLevel">currentLevel.</param>
         /// <param name="previousLevel">previousLevel.</param>
         /// <param name="count">count.</param>
         /// <param name="period">period.</param>
-        public StatusRule(LevelRule currentLevel = default(LevelRule), LevelRule previousLevel = default(LevelRule), int? count = default(int?), string period = default(string))
+        public StatusRule(RuleStatusLevel? currentLevel = default(RuleStatusLevel?), RuleStatusLevel? previousLevel = default(RuleStatusLevel?), int? count = default(int?), string period = default(string))
         {
             this.CurrentLevel = currentLevel;
             this.PreviousLevel = previousLevel;
@@ -44,17 +54,7 @@ namespace InfluxDB.Client.Api.Domain
             this.Period = period;
         }
 
-        /// <summary>
-        /// Gets or Sets CurrentLevel
-        /// </summary>
-        [DataMember(Name="currentLevel", EmitDefaultValue=false)]
-        public LevelRule CurrentLevel { get; set; }
 
-        /// <summary>
-        /// Gets or Sets PreviousLevel
-        /// </summary>
-        [DataMember(Name="previousLevel", EmitDefaultValue=false)]
-        public LevelRule PreviousLevel { get; set; }
 
         /// <summary>
         /// Gets or Sets Count
@@ -115,12 +115,12 @@ namespace InfluxDB.Client.Api.Domain
 
             return 
                 (
-                    
+                    this.CurrentLevel == input.CurrentLevel ||
                     (this.CurrentLevel != null &&
                     this.CurrentLevel.Equals(input.CurrentLevel))
                 ) && 
                 (
-                    
+                    this.PreviousLevel == input.PreviousLevel ||
                     (this.PreviousLevel != null &&
                     this.PreviousLevel.Equals(input.PreviousLevel))
                 ) && 

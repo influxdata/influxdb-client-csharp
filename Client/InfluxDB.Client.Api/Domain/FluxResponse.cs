@@ -24,53 +24,25 @@ using OpenAPIDateConverter = InfluxDB.Client.Api.Client.OpenAPIDateConverter;
 namespace InfluxDB.Client.Api.Domain
 {
     /// <summary>
-    /// LevelRule
+    /// Rendered flux that backs the check or notification.
     /// </summary>
     [DataContract]
-    public partial class LevelRule :  IEquatable<LevelRule>
+    public partial class FluxResponse :  IEquatable<FluxResponse>
     {
         /// <summary>
-        /// Gets or Sets Level
+        /// Initializes a new instance of the <see cref="FluxResponse" /> class.
         /// </summary>
-        [DataMember(Name="level", EmitDefaultValue=false)]
-        public CheckStatusLevel? Level { get; set; }
-        /// <summary>
-        /// Defines Operation
-        /// </summary>
-        [JsonConverter(typeof(StringEnumConverter))]
-        public enum OperationEnum
+        /// <param name="flux">flux.</param>
+        public FluxResponse(string flux = default(string))
         {
-            /// <summary>
-            /// Enum Equal for value: equal
-            /// </summary>
-            [EnumMember(Value = "equal")]
-            Equal = 1,
-
-            /// <summary>
-            /// Enum Notequal for value: notequal
-            /// </summary>
-            [EnumMember(Value = "notequal")]
-            Notequal = 2
-
+            this.Flux = flux;
         }
 
         /// <summary>
-        /// Gets or Sets Operation
+        /// Gets or Sets Flux
         /// </summary>
-        [DataMember(Name="operation", EmitDefaultValue=false)]
-        public OperationEnum? Operation { get; set; }
-        /// <summary>
-        /// Initializes a new instance of the <see cref="LevelRule" /> class.
-        /// </summary>
-        /// <param name="level">level.</param>
-        /// <param name="operation">operation.</param>
-        public LevelRule(CheckStatusLevel? level = default(CheckStatusLevel?), OperationEnum? operation = default(OperationEnum?))
-        {
-            this.Level = level;
-            this.Operation = operation;
-        }
-
-
+        [DataMember(Name="flux", EmitDefaultValue=false)]
+        public string Flux { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -79,9 +51,8 @@ namespace InfluxDB.Client.Api.Domain
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class LevelRule {\n");
-            sb.Append("  Level: ").Append(Level).Append("\n");
-            sb.Append("  Operation: ").Append(Operation).Append("\n");
+            sb.Append("class FluxResponse {\n");
+            sb.Append("  Flux: ").Append(Flux).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -102,29 +73,24 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as LevelRule);
+            return this.Equals(input as FluxResponse);
         }
 
         /// <summary>
-        /// Returns true if LevelRule instances are equal
+        /// Returns true if FluxResponse instances are equal
         /// </summary>
-        /// <param name="input">Instance of LevelRule to be compared</param>
+        /// <param name="input">Instance of FluxResponse to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(LevelRule input)
+        public bool Equals(FluxResponse input)
         {
             if (input == null)
                 return false;
 
             return 
                 (
-                    this.Level == input.Level ||
-                    (this.Level != null &&
-                    this.Level.Equals(input.Level))
-                ) && 
-                (
-                    this.Operation == input.Operation ||
-                    (this.Operation != null &&
-                    this.Operation.Equals(input.Operation))
+                    this.Flux == input.Flux ||
+                    (this.Flux != null &&
+                    this.Flux.Equals(input.Flux))
                 );
         }
 
@@ -137,10 +103,8 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
-                if (this.Level != null)
-                    hashCode = hashCode * 59 + this.Level.GetHashCode();
-                if (this.Operation != null)
-                    hashCode = hashCode * 59 + this.Operation.GetHashCode();
+                if (this.Flux != null)
+                    hashCode = hashCode * 59 + this.Flux.GetHashCode();
                 return hashCode;
             }
         }

@@ -57,24 +57,33 @@ namespace InfluxDB.Client.Api.Domain
         /// Initializes a new instance of the <see cref="DeadmanCheck" /> class.
         /// </summary>
         /// <param name="type">type.</param>
-        /// <param name="timeSince">seconds before deadman triggers.</param>
+        /// <param name="timeSince">string duration before deadman triggers.</param>
+        /// <param name="staleTime">string duration for time that a series is considered stale and should not trigger deadman.</param>
         /// <param name="reportZero">if only zero values reported since time, trigger alert.</param>
         /// <param name="level">level.</param>
-        public DeadmanCheck(TypeEnum? type = default(TypeEnum?), int? timeSince = default(int?), bool? reportZero = default(bool?), CheckStatusLevel level = default(CheckStatusLevel), string name = default(string), string orgID = default(string), DashboardQuery query = default(DashboardQuery), TaskStatusType? status = default(TaskStatusType?), string every = default(string), string offset = default(string), string cron = default(string), List<CheckBaseTags> tags = default(List<CheckBaseTags>), string description = default(string), string statusMessageTemplate = default(string), List<Label> labels = default(List<Label>)) : base(name, orgID, query, status, every, offset, cron, tags, description, statusMessageTemplate, labels)
+        public DeadmanCheck(TypeEnum? type = default(TypeEnum?), string timeSince = default(string), string staleTime = default(string), bool? reportZero = default(bool?), CheckStatusLevel level = default(CheckStatusLevel), string name = default(string), string orgID = default(string), DashboardQuery query = default(DashboardQuery), TaskStatusType? status = default(TaskStatusType?), string every = default(string), string offset = default(string), string cron = default(string), List<CheckBaseTags> tags = default(List<CheckBaseTags>), string description = default(string), string statusMessageTemplate = default(string), List<Label> labels = default(List<Label>)) : base(name, orgID, query, status, every, offset, cron, tags, description, statusMessageTemplate, labels)
         {
             this.Type = type;
             this.TimeSince = timeSince;
+            this.StaleTime = staleTime;
             this.ReportZero = reportZero;
             this.Level = level;
         }
 
 
         /// <summary>
-        /// seconds before deadman triggers
+        /// string duration before deadman triggers
         /// </summary>
-        /// <value>seconds before deadman triggers</value>
+        /// <value>string duration before deadman triggers</value>
         [DataMember(Name="timeSince", EmitDefaultValue=false)]
-        public int? TimeSince { get; set; }
+        public string TimeSince { get; set; }
+
+        /// <summary>
+        /// string duration for time that a series is considered stale and should not trigger deadman
+        /// </summary>
+        /// <value>string duration for time that a series is considered stale and should not trigger deadman</value>
+        [DataMember(Name="staleTime", EmitDefaultValue=false)]
+        public string StaleTime { get; set; }
 
         /// <summary>
         /// if only zero values reported since time, trigger alert
@@ -100,6 +109,7 @@ namespace InfluxDB.Client.Api.Domain
             sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  TimeSince: ").Append(TimeSince).Append("\n");
+            sb.Append("  StaleTime: ").Append(StaleTime).Append("\n");
             sb.Append("  ReportZero: ").Append(ReportZero).Append("\n");
             sb.Append("  Level: ").Append(Level).Append("\n");
             sb.Append("}\n");
@@ -147,6 +157,11 @@ namespace InfluxDB.Client.Api.Domain
                     this.TimeSince.Equals(input.TimeSince))
                 ) && base.Equals(input) && 
                 (
+                    this.StaleTime == input.StaleTime ||
+                    (this.StaleTime != null &&
+                    this.StaleTime.Equals(input.StaleTime))
+                ) && base.Equals(input) && 
+                (
                     this.ReportZero == input.ReportZero ||
                     (this.ReportZero != null &&
                     this.ReportZero.Equals(input.ReportZero))
@@ -171,6 +186,8 @@ namespace InfluxDB.Client.Api.Domain
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.TimeSince != null)
                     hashCode = hashCode * 59 + this.TimeSince.GetHashCode();
+                if (this.StaleTime != null)
+                    hashCode = hashCode * 59 + this.StaleTime.GetHashCode();
                 if (this.ReportZero != null)
                     hashCode = hashCode * 59 + this.ReportZero.GetHashCode();
                 if (this.Level != null)
