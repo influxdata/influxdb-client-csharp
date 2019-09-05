@@ -333,7 +333,6 @@ namespace InfluxDB.Client.Test
         }
 
         [Test]
-        [Ignore("https://github.com/influxdata/influxdb/issues/13575")]
         public async Task GetRun()
         {
             var task = await _tasksApi.CreateTaskEvery(GenerateName("it task"), TaskFlux, "1s", _organization);
@@ -364,13 +363,14 @@ namespace InfluxDB.Client.Test
         }
 
         [Test]
-        [Ignore("https://github.com/influxdata/influxdb/issues/13576")]
         public async Task GetRunLogsNotExist()
         {
             var task = await _tasksApi.CreateTaskEvery(GenerateName("it task"), TaskFlux, "1s", _organization);
 
-            var logs = await _tasksApi.GetRunLogs(task.Id, "020f755c3c082000");
-            Assert.IsEmpty(logs);
+            var ioe = Assert.ThrowsAsync<AggregateException>(async () => await _tasksApi.GetRunLogs(task.Id, "020f755c3c082000"));
+
+            Assert.NotNull(ioe.InnerException, "ioe.InnerException != null");
+            Assert.AreEqual("failed to find task logs", ioe.InnerException.Message);
         }
 
         [Test]
