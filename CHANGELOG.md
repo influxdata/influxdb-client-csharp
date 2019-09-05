@@ -3,6 +3,9 @@
 ### Breaking Changes
 1. [#34](https://github.com/influxdata/influxdb-client-csharp/issues/34): Renamed Point class to PointData and Task class to TaskType (improving the usability of this library)
 
+### API
+1. [#36](https://github.com/influxdata/influxdb-client-csharp/issues/36): Updated swagger to latest version
+
 ### Bugs
 1. [#31](https://github.com/influxdata/influxdb-client-csharp/issues/31): Drop NaN and infinity values from fields when writing to InfluxDB
 

@@ -24,10 +24,10 @@ using OpenAPIDateConverter = InfluxDB.Client.Api.Client.OpenAPIDateConverter;
 namespace InfluxDB.Client.Api.Domain
 {
     /// <summary>
-    /// WebhookNotificationEndpoint
+    /// HTTPNotificationEndpoint
     /// </summary>
     [DataContract]
-    public partial class WebhookNotificationEndpoint : NotificationEndpoint,  IEquatable<WebhookNotificationEndpoint>
+    public partial class HTTPNotificationEndpoint : NotificationEndpoint,  IEquatable<HTTPNotificationEndpoint>
     {
         /// <summary>
         /// Defines Method
@@ -61,10 +61,10 @@ namespace InfluxDB.Client.Api.Domain
         [DataMember(Name="method", EmitDefaultValue=false)]
         public MethodEnum Method { get; set; }
         /// <summary>
-        /// Defines Authmethod
+        /// Defines AuthMethod
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
-        public enum AuthmethodEnum
+        public enum AuthMethodEnum
         {
             /// <summary>
             /// Enum None for value: none
@@ -87,31 +87,31 @@ namespace InfluxDB.Client.Api.Domain
         }
 
         /// <summary>
-        /// Gets or Sets Authmethod
+        /// Gets or Sets AuthMethod
         /// </summary>
-        [DataMember(Name="authmethod", EmitDefaultValue=false)]
-        public AuthmethodEnum Authmethod { get; set; }
+        [DataMember(Name="authMethod", EmitDefaultValue=false)]
+        public AuthMethodEnum AuthMethod { get; set; }
         /// <summary>
-        /// Initializes a new instance of the <see cref="WebhookNotificationEndpoint" /> class.
+        /// Initializes a new instance of the <see cref="HTTPNotificationEndpoint" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected WebhookNotificationEndpoint() { }
+        protected HTTPNotificationEndpoint() { }
         /// <summary>
-        /// Initializes a new instance of the <see cref="WebhookNotificationEndpoint" /> class.
+        /// Initializes a new instance of the <see cref="HTTPNotificationEndpoint" /> class.
         /// </summary>
         /// <param name="url">url (required).</param>
         /// <param name="username">username.</param>
         /// <param name="password">password.</param>
         /// <param name="token">token.</param>
         /// <param name="method">method (required).</param>
-        /// <param name="authmethod">authmethod (required).</param>
+        /// <param name="authMethod">authMethod (required).</param>
         /// <param name="contentTemplate">contentTemplate.</param>
-        public WebhookNotificationEndpoint(string url = default(string), string username = default(string), string password = default(string), string token = default(string), MethodEnum method = default(MethodEnum), AuthmethodEnum authmethod = default(AuthmethodEnum), string contentTemplate = default(string), string id = default(string), string orgID = default(string), string userID = default(string), string description = default(string), string name = default(string), StatusEnum? status = StatusEnum.Active, List<Label> labels = default(List<Label>), NotificationEndpointType type = default(NotificationEndpointType)) : base(id, orgID, userID, description, name, status, labels, type)
+        public HTTPNotificationEndpoint(string url = default(string), string username = default(string), string password = default(string), string token = default(string), MethodEnum method = default(MethodEnum), AuthMethodEnum authMethod = default(AuthMethodEnum), string contentTemplate = default(string), string id = default(string), string orgID = default(string), string userID = default(string), string description = default(string), string name = default(string), StatusEnum? status = StatusEnum.Active, List<Label> labels = default(List<Label>), NotificationEndpointType type = default(NotificationEndpointType)) : base(id, orgID, userID, description, name, status, labels, type)
         {
             // to ensure "url" is required (not null)
             if (url == null)
             {
-                throw new InvalidDataException("url is a required property for WebhookNotificationEndpoint and cannot be null");
+                throw new InvalidDataException("url is a required property for HTTPNotificationEndpoint and cannot be null");
             }
             else
             {
@@ -120,20 +120,20 @@ namespace InfluxDB.Client.Api.Domain
             // to ensure "method" is required (not null)
             if (method == null)
             {
-                throw new InvalidDataException("method is a required property for WebhookNotificationEndpoint and cannot be null");
+                throw new InvalidDataException("method is a required property for HTTPNotificationEndpoint and cannot be null");
             }
             else
             {
                 this.Method = method;
             }
-            // to ensure "authmethod" is required (not null)
-            if (authmethod == null)
+            // to ensure "authMethod" is required (not null)
+            if (authMethod == null)
             {
-                throw new InvalidDataException("authmethod is a required property for WebhookNotificationEndpoint and cannot be null");
+                throw new InvalidDataException("authMethod is a required property for HTTPNotificationEndpoint and cannot be null");
             }
             else
             {
-                this.Authmethod = authmethod;
+                this.AuthMethod = authMethod;
             }
             this.Username = username;
             this.Password = password;
@@ -180,14 +180,14 @@ namespace InfluxDB.Client.Api.Domain
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class WebhookNotificationEndpoint {\n");
+            sb.Append("class HTTPNotificationEndpoint {\n");
             sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
             sb.Append("  Url: ").Append(Url).Append("\n");
             sb.Append("  Username: ").Append(Username).Append("\n");
             sb.Append("  Password: ").Append(Password).Append("\n");
             sb.Append("  Token: ").Append(Token).Append("\n");
             sb.Append("  Method: ").Append(Method).Append("\n");
-            sb.Append("  Authmethod: ").Append(Authmethod).Append("\n");
+            sb.Append("  AuthMethod: ").Append(AuthMethod).Append("\n");
             sb.Append("  ContentTemplate: ").Append(ContentTemplate).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -209,15 +209,15 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as WebhookNotificationEndpoint);
+            return this.Equals(input as HTTPNotificationEndpoint);
         }
 
         /// <summary>
-        /// Returns true if WebhookNotificationEndpoint instances are equal
+        /// Returns true if HTTPNotificationEndpoint instances are equal
         /// </summary>
-        /// <param name="input">Instance of WebhookNotificationEndpoint to be compared</param>
+        /// <param name="input">Instance of HTTPNotificationEndpoint to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(WebhookNotificationEndpoint input)
+        public bool Equals(HTTPNotificationEndpoint input)
         {
             if (input == null)
                 return false;
@@ -249,9 +249,9 @@ namespace InfluxDB.Client.Api.Domain
                     this.Method.Equals(input.Method))
                 ) && base.Equals(input) && 
                 (
-                    this.Authmethod == input.Authmethod ||
-                    (this.Authmethod != null &&
-                    this.Authmethod.Equals(input.Authmethod))
+                    this.AuthMethod == input.AuthMethod ||
+                    (this.AuthMethod != null &&
+                    this.AuthMethod.Equals(input.AuthMethod))
                 ) && base.Equals(input) && 
                 (
                     this.ContentTemplate == input.ContentTemplate ||
@@ -279,8 +279,8 @@ namespace InfluxDB.Client.Api.Domain
                     hashCode = hashCode * 59 + this.Token.GetHashCode();
                 if (this.Method != null)
                     hashCode = hashCode * 59 + this.Method.GetHashCode();
-                if (this.Authmethod != null)
-                    hashCode = hashCode * 59 + this.Authmethod.GetHashCode();
+                if (this.AuthMethod != null)
+                    hashCode = hashCode * 59 + this.AuthMethod.GetHashCode();
                 if (this.ContentTemplate != null)
                     hashCode = hashCode * 59 + this.ContentTemplate.GetHashCode();
                 return hashCode;

@@ -132,7 +132,7 @@ namespace InfluxDB.Client.Api.Domain
         {
             {new []{ "SlackNotificationEndpoint" }, typeof(SlackNotificationEndpoint)},
             {new []{ "PagerDutyNotificationEndpoint" }, typeof(PagerDutyNotificationEndpoint)},
-            {new []{ "WebhookNotificationEndpoint" }, typeof(WebhookNotificationEndpoint)},
+            {new []{ "HTTPNotificationEndpoint" }, typeof(HTTPNotificationEndpoint)},
         };
 
         public override bool CanConvert(Type objectType)

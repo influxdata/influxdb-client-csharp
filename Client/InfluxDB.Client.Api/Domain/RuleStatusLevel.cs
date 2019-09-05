@@ -24,30 +24,49 @@ using OpenAPIDateConverter = InfluxDB.Client.Api.Client.OpenAPIDateConverter;
 namespace InfluxDB.Client.Api.Domain
 {
     /// <summary>
-    /// Defines NotificationEndpointType
+    /// the state to record if check matches a criteria
     /// </summary>
+    /// <value>the state to record if check matches a criteria</value>
     
     [JsonConverter(typeof(StringEnumConverter))]
     
-    public enum NotificationEndpointType
+    public enum RuleStatusLevel
     {
         /// <summary>
-        /// Enum Slack for value: slack
+        /// Enum UNKNOWN for value: UNKNOWN
         /// </summary>
-        [EnumMember(Value = "slack")]
-        Slack = 1,
+        [EnumMember(Value = "UNKNOWN")]
+        UNKNOWN = 1,
 
         /// <summary>
-        /// Enum Pagerduty for value: pagerduty
+        /// Enum OK for value: OK
         /// </summary>
-        [EnumMember(Value = "pagerduty")]
-        Pagerduty = 2,
+        [EnumMember(Value = "OK")]
+        OK = 2,
 
         /// <summary>
-        /// Enum Http for value: http
+        /// Enum INFO for value: INFO
         /// </summary>
-        [EnumMember(Value = "http")]
-        Http = 3
+        [EnumMember(Value = "INFO")]
+        INFO = 3,
+
+        /// <summary>
+        /// Enum CRIT for value: CRIT
+        /// </summary>
+        [EnumMember(Value = "CRIT")]
+        CRIT = 4,
+
+        /// <summary>
+        /// Enum WARN for value: WARN
+        /// </summary>
+        [EnumMember(Value = "WARN")]
+        WARN = 5,
+
+        /// <summary>
+        /// Enum ANY for value: ANY
+        /// </summary>
+        [EnumMember(Value = "ANY")]
+        ANY = 6
 
     }
 

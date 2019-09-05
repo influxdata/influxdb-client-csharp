@@ -121,10 +121,10 @@ namespace InfluxDB.Client.Api.Domain
         public string Id { get; private set; }
 
         /// <summary>
-        /// Gets or Sets NotifyEndpointID
+        /// Gets or Sets EndpointID
         /// </summary>
-        [DataMember(Name="notifyEndpointID", EmitDefaultValue=false)]
-        public string NotifyEndpointID { get; private set; }
+        [DataMember(Name="endpointID", EmitDefaultValue=false)]
+        public string EndpointID { get; private set; }
 
         /// <summary>
         /// the ID of the organization that owns this notification rule.
@@ -243,7 +243,7 @@ namespace InfluxDB.Client.Api.Domain
             var sb = new StringBuilder();
             sb.Append("class NotificationRuleBase {\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
-            sb.Append("  NotifyEndpointID: ").Append(NotifyEndpointID).Append("\n");
+            sb.Append("  EndpointID: ").Append(EndpointID).Append("\n");
             sb.Append("  OrgID: ").Append(OrgID).Append("\n");
             sb.Append("  OwnerID: ").Append(OwnerID).Append("\n");
             sb.Append("  CreatedAt: ").Append(CreatedAt).Append("\n");
@@ -301,9 +301,9 @@ namespace InfluxDB.Client.Api.Domain
                     this.Id.Equals(input.Id))
                 ) && 
                 (
-                    this.NotifyEndpointID == input.NotifyEndpointID ||
-                    (this.NotifyEndpointID != null &&
-                    this.NotifyEndpointID.Equals(input.NotifyEndpointID))
+                    this.EndpointID == input.EndpointID ||
+                    (this.EndpointID != null &&
+                    this.EndpointID.Equals(input.EndpointID))
                 ) && 
                 (
                     this.OrgID == input.OrgID ||
@@ -403,8 +403,8 @@ namespace InfluxDB.Client.Api.Domain
                 int hashCode = 41;
                 if (this.Id != null)
                     hashCode = hashCode * 59 + this.Id.GetHashCode();
-                if (this.NotifyEndpointID != null)
-                    hashCode = hashCode * 59 + this.NotifyEndpointID.GetHashCode();
+                if (this.EndpointID != null)
+                    hashCode = hashCode * 59 + this.EndpointID.GetHashCode();
                 if (this.OrgID != null)
                     hashCode = hashCode * 59 + this.OrgID.GetHashCode();
                 if (this.OwnerID != null)
