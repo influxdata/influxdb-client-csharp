@@ -441,7 +441,7 @@ namespace InfluxDB.Client.Test
 
             Assert.IsNotNull(error);
             Assert.AreEqual(
-                "unable to parse points: unable to parse 'h2o_feet,location=coyote_creek level\\ water_level=1.0 123456.789': bad timestamp",
+                "unable to parse 'h2o_feet,location=coyote_creek level\\ water_level=1.0 123456.789': bad timestamp",
                 error.Exception.Message);
         }
 
@@ -504,7 +504,7 @@ namespace InfluxDB.Client.Test
 
             Assert.IsNotNull(error);
             Assert.AreEqual(
-                "unable to parse points: unable to parse 'h2o_feet,location=coyote_creek level\\ water_level=1.0 1x': bad timestamp",
+                "unable to parse 'h2o_feet,location=coyote_creek level\\ water_level=1.0 1x': bad timestamp",
                 error.Exception.Message);
 
             _writeApi.WriteRecord(bucketName, _organization.Id, WritePrecision.Ns,
