@@ -500,6 +500,30 @@ namespace Client.Legacy.Test
             }
         }
 
+        [Test]
+        [SetCulture("de-DE")]
+        public void CustomCultureInfo()
+        {
+            var data =
+                "#datatype,string,long,dateTime:RFC3339,dateTime:RFC3339,dateTime:RFC3339,long,string,string,string,double,long,unsignedLong\n"
+                + "#group,false,false,false,false,false,false,false,false,false,true,true,true\n"
+                + "#default,_result,,,,,,,,,,,\n"
+                + ",result,table,_start,_stop,_time,_value,_field,_measurement,host,value-double,value-long,value-unsignedLong\n"
+                + ",,0,1970-01-01T00:00:10Z,1970-01-01T00:00:20Z,1970-01-01T00:00:10Z,10,free,mem,A,6.1949943235120708,61949943235120708,61949943235120708\n";
+
+            var tables = ParseFluxResponse(data);
+
+            Assert.IsNotNull(tables.Count == 1);
+
+            var records = tables[0].Records;
+
+            Assert.That(records.Count == 1);
+
+            Assert.AreEqual(6.1949943235120708D, records[0].GetValueByKey("value-double"));
+            Assert.AreEqual(61949943235120708L, records[0].GetValueByKey("value-long"));
+            Assert.AreEqual(61949943235120708UL, records[0].GetValueByKey("value-unsignedLong"));
+        }
+
         private List<FluxTable> ParseFluxResponse(string data)
         {
             var consumer = new FluxCsvParser.FluxResponseConsumerTable();
