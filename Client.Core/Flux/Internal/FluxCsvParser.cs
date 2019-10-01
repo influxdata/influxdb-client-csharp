@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using CsvHelper;
 using InfluxDB.Client.Core.Flux.Domain;
@@ -220,7 +221,7 @@ namespace InfluxDB.Client.Core.Flux.Internal
                     case "long":
                         return Convert.ToInt64(strValue);
                     case "double":
-                        return Convert.ToDouble(strValue);
+                        return Convert.ToDouble(strValue, CultureInfo.InvariantCulture);
                     case "base64Binary":
                         return Convert.FromBase64String(strValue);
                     case "dateTime:RFC3339":
