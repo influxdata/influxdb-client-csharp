@@ -9,7 +9,7 @@
 
 ### Bugs
 1. [#31](https://github.com/influxdata/influxdb-client-csharp/issues/31): Drop NaN and infinity values from fields when writing to InfluxDB
-1. [#39](https://github.com/influxdata/influxdb-client-csharp/pull/39): Drop NaN and infinity values from fields when writing to InfluxDB
+1. [#39](https://github.com/influxdata/influxdb-client-csharp/pull/39): FluxCSVParser uses a CultureInfo for parsing string to double
 
 ## 1.0.0 [2019-08-23]
 
