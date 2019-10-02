@@ -21,7 +21,7 @@ var options = new FluxConnectionOptions("http://127.0.0.1:8086");
 
 var fluxClient = FluxClientFactory.Create(options);
 
-fluxClient.Query(...)
+fluxClient.QueryAsync(...)
 ...
 ```
 
@@ -42,7 +42,7 @@ string fluxQuery = "from(bucket: \"telegraf\")\n" +
     " |> range(start: -1d)" +
     " |> sample(n: 5, pos: 1)";
 
-fluxClient.Query(fluxQuery, (cancellable, record) =>
+fluxClient.QueryAsync(fluxQuery, (cancellable, record) =>
             {
                 // process the flux query records
                 Console.WriteLine(record.GetTime() + ": " + record.GetValue());
@@ -70,17 +70,14 @@ fluxClient.Query(fluxQuery, (cancellable, record) =>
 It is possible to parse a result line-by-line using the `QueryRaw` method.  
 
 ```c#
-void QueryRaw(string query,
-              Action<ICancellable, string> onResponse,
-              Action<Exception> onError,
-              Action onComplete);
+void QueryRawAsync(string query, Action<ICancellable, string> onResponse, Action<Exception> onError, Action onComplete);
 ```
 
 ### Advanced Usage
 
 #### Check the server status and version
 
-Server availability can be checked using the `FluxClient.Ping()` endpoint.  Server version can be obtained using `FluxClient.Version()`.
+Server availability can be checked using the `FluxClient.PingAsync()` endpoint.  Server version can be obtained using `FluxClient.VersionAsync()`.
  
 #### Log HTTP Request and Response
 

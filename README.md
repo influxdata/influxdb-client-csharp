@@ -117,7 +117,7 @@ namespace Examples
             //
             var flux = "from(bucket:\"temperature-sensors\") |> range(start: 0)";
 
-            var fluxTables = await influxDBClient.GetQueryApi().Query(flux, "org_id");
+            var fluxTables = await influxDBClient.GetQueryApi().QueryAsync(flux, "org_id");
             fluxTables.ForEach(fluxTable =>
             {
                 var fluxRecords = fluxTable.Records;
@@ -182,7 +182,7 @@ namespace Examples
             //
             var retention = new BucketRetentionRules(BucketRetentionRules.TypeEnum.Expire, 3600);
 
-            var bucket = await influxDBClient.GetBucketsApi().CreateBucket("iot_bucket", retention, "org_id");
+            var bucket = await influxDBClient.GetBucketsApi().CreateBucketAsync("iot_bucket", retention, "org_id");
             
             //
             // Create access token to "iot_bucket"
@@ -196,7 +196,7 @@ namespace Examples
             var write = new Permission{Resource = resource, Action = Permission.ActionEnum.Write};
 
             var authorization = await influxDBClient.GetAuthorizationsApi()
-                .CreateAuthorization("org_id", new List<Permission> {read, write});
+                .CreateAuthorizationAsync("org_id", new List<Permission> {read, write});
 
             
             //
@@ -245,7 +245,7 @@ namespace Examples
                                + " |> range(start: -1d)"
                                + " |> sample(n: 5, pos: 1)";
 
-            fluxClient.Query(fluxQuery, (cancellable, record) =>
+            fluxClient.QueryAsync(fluxQuery, (cancellable, record) =>
                             {
                                 // process the flux query records
                                 Console.WriteLine(record.GetTime() + ": " + record.GetValue());

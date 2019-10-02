@@ -15,7 +15,7 @@ namespace Client.Legacy.Test
                             .RespondWith(Response.Create().WithStatusCode(204)
                                             .WithHeader("X-Influxdb-Version", "1.7.0"));
 
-            Assert.AreEqual("1.7.0", await FluxClient.Version());
+            Assert.AreEqual("1.7.0", await FluxClient.VersionAsync());
         }
 
         [Test]
@@ -24,7 +24,7 @@ namespace Client.Legacy.Test
             MockServer.Given(Request.Create().WithPath("/ping").UsingGet())
                             .RespondWith(Response.Create().WithStatusCode(204));
 
-            Assert.AreEqual("unknown", await FluxClient.Version());
+            Assert.AreEqual("unknown", await FluxClient.VersionAsync());
         }
 
         [Test]
@@ -34,7 +34,7 @@ namespace Client.Legacy.Test
 
             try
             {
-                await FluxClient.Version();
+                await FluxClient.VersionAsync();
 
                 Assert.Fail();
             }

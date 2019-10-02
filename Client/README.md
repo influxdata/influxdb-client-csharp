@@ -52,7 +52,7 @@ namespace Examples
             //
             // QueryData
             //
-            var tables = await queryApi.Query(flux, "org_id");
+            var tables = await queryApi.QueryAsync(flux, "org_id");
             tables.ForEach(table =>
             {
                 table.Records.ForEach(record =>
@@ -92,7 +92,7 @@ namespace Examples
             //
             // QueryData
             //
-            var temperatures = await queryApi.Query<Temperature>(flux, "org_id");
+            var temperatures = await queryApi.QueryAsync<Temperature>(flux, "org_id");
             temperatures.ForEach(temperature =>
             {
                 Console.WriteLine($"{temperature.Location}: {temperature.Value} at {temperature.Time}");
@@ -141,7 +141,7 @@ namespace Examples
             //
             // QueryData
             //
-            await queryApi.Query(flux, "org_id", (cancellable, record) =>
+            await queryApi.QueryAsync(flux, "org_id", (cancellable, record) =>
             {
                 //
                 // The callback to consume a FluxRecord.
@@ -194,7 +194,7 @@ namespace Examples
             //
             // QueryData
             //
-            await queryApi.Query<Temperature>(flux, "org_id", (cancellable, temperature) =>
+            await queryApi.QueryAsync<Temperature>(flux, "org_id", (cancellable, temperature) =>
             {
                 //
                 // The callback to consume a FluxRecord mapped to POCO.
@@ -246,7 +246,7 @@ namespace Examples
             //
             // QueryData
             //
-            var csv = await queryApi.QueryRaw(flux, "org_id");
+            var csv = await queryApi.QueryRawAsync(flux, "org_id");
             
             Console.WriteLine($"CSV response: {csv}");
 
@@ -280,7 +280,7 @@ namespace Examples
             //
             // QueryData
             //
-            await queryApi.QueryRaw(flux, "org_id", (cancellable, line) =>
+            await queryApi.QueryRawAsync(flux, "org_id", (cancellable, line) =>
             {
                 //
                 // The callback to consume a line of CSV response
@@ -587,7 +587,7 @@ namespace Examples
             //
             var retention = new BucketRetentionRules(BucketRetentionRules.TypeEnum.Expire, 3600);
 
-            var bucket = await influxDBClient.GetBucketsApi().CreateBucket("iot_bucket", retention, "org_id");
+            var bucket = await influxDBClient.GetBucketsApi().CreateBucketAsync("iot_bucket", retention, "org_id");
             
             //
             // Create access token to "iot_bucket"
@@ -601,7 +601,7 @@ namespace Examples
             var write = new Permission{Resource = resource, Action = Permission.ActionEnum.Write};
 
             var authorization = await influxDBClient.GetAuthorizationsApi()
-                .CreateAuthorization("org_id", new List<Permission> {read, write});
+                .CreateAuthorizationAsync("org_id", new List<Permission> {read, write});
 
             
             //
@@ -701,7 +701,7 @@ influxDBClient.SetLogLevel(LogLevel.Body)
 
 #### Check the server status and version
 
-Server availability can be checked using the `influxDBClient.health()` endpoint.
+Server availability can be checked using the `influxDBClient.healthAsync()` endpoint.
  
 ## Version
 

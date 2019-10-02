@@ -23,7 +23,7 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="request">label to create</param>
         /// <returns>Added label</returns>
-        public async Task<Label> CreateLabel(LabelCreateRequest request)
+        public async Task<Label> CreateLabelAsync(LabelCreateRequest request)
         {
             Arguments.CheckNotNull(request, nameof(request));
 
@@ -37,14 +37,14 @@ namespace InfluxDB.Client
         /// <param name="properties">properties of a label</param>
         /// <param name="orgId">owner of a label</param>
         /// <returns>Added label</returns>
-        public async Task<Label> CreateLabel(string name, Dictionary<string, string> properties,
+        public async Task<Label> CreateLabelAsync(string name, Dictionary<string, string> properties,
             string orgId)
         {
             Arguments.CheckNonEmptyString(name, nameof(name));
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
             Arguments.CheckNotNull(properties, nameof(properties));
 
-            return await CreateLabel(new LabelCreateRequest(orgId, name, properties));
+            return await CreateLabelAsync(new LabelCreateRequest(orgId, name, properties));
         }
 
         /// <summary>
@@ -52,13 +52,13 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="label">label to update</param>
         /// <returns>Updated label</returns>
-        public async Task<Label> UpdateLabel(Label label)
+        public async Task<Label> UpdateLabelAsync(Label label)
         {
             Arguments.CheckNotNull(label, nameof(label));
 
             var labelUpdate = new LabelUpdate {Properties = label.Properties};
 
-            return await UpdateLabel(label.Id, labelUpdate);
+            return await UpdateLabelAsync(label.Id, labelUpdate);
         }
 
         /// <summary>
@@ -67,7 +67,7 @@ namespace InfluxDB.Client
         /// <param name="labelId">ID of label to update</param>
         /// <param name="labelUpdate">label update</param>
         /// <returns>Updated label</returns>
-        public async Task<Label> UpdateLabel(string labelId, LabelUpdate labelUpdate)
+        public async Task<Label> UpdateLabelAsync(string labelId, LabelUpdate labelUpdate)
         {
             return await _service.PatchLabelsIDAsync(labelId, labelUpdate).ContinueWith(t => t.Result.Label);
         }
@@ -77,11 +77,11 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="label">label to delete</param>
         /// <returns>delete has been accepted</returns>
-        public async Task DeleteLabel(Label label)
+        public async Task DeleteLabelAsync(Label label)
         {
             Arguments.CheckNotNull(label, nameof(label));
 
-            await DeleteLabel(label.Id);
+            await DeleteLabelAsync(label.Id);
         }
 
         /// <summary>
@@ -89,7 +89,7 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="labelId">ID of label to delete</param>
         /// <returns>delete has been accepted</returns>
-        public async Task DeleteLabel(string labelId)
+        public async Task DeleteLabelAsync(string labelId)
         {
             Arguments.CheckNonEmptyString(labelId, nameof(labelId));
 
@@ -102,12 +102,12 @@ namespace InfluxDB.Client
         /// <param name="clonedName">name of cloned label</param>
         /// <param name="labelId">ID of label to clone</param>
         /// <returns>cloned label</returns>
-        public async Task<Label> CloneLabel(string clonedName, string labelId)
+        public async Task<Label> CloneLabelAsync(string clonedName, string labelId)
         {
             Arguments.CheckNonEmptyString(clonedName, nameof(clonedName));
             Arguments.CheckNonEmptyString(labelId, nameof(labelId));
 
-            return await FindLabelById(labelId).ContinueWith(t => CloneLabel(clonedName, t.Result)).Unwrap();
+            return await FindLabelByIdAsync(labelId).ContinueWith(t => CloneLabelAsync(clonedName, t.Result)).Unwrap();
         }
 
         /// <summary>
@@ -116,7 +116,7 @@ namespace InfluxDB.Client
         /// <param name="clonedName">name of cloned label</param>
         /// <param name="label">label to clone</param>
         /// <returns>cloned label</returns>
-        public async Task<Label> CloneLabel(string clonedName, Label label)
+        public async Task<Label> CloneLabelAsync(string clonedName, Label label)
         {
             Arguments.CheckNonEmptyString(clonedName, nameof(clonedName));
             Arguments.CheckNotNull(label, nameof(label));
@@ -124,7 +124,7 @@ namespace InfluxDB.Client
             var cloned =
                 new LabelCreateRequest(label.OrgID, clonedName, new Dictionary<string, string>(label.Properties));
 
-            return await CreateLabel(cloned);
+            return await CreateLabelAsync(cloned);
         }
 
         /// <summary>
@@ -132,7 +132,7 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="labelId">ID of a label to get</param>
         /// <returns>Label detail</returns>
-        public async Task<Label> FindLabelById(string labelId)
+        public async Task<Label> FindLabelByIdAsync(string labelId)
         {
             Arguments.CheckNonEmptyString(labelId, nameof(labelId));
 
@@ -143,7 +143,7 @@ namespace InfluxDB.Client
         ///     List all labels.
         /// </summary>
         /// <returns>List all labels.</returns>
-        public async Task<List<Label>> FindLabels()
+        public async Task<List<Label>> FindLabelsAsync()
         {
             return await _service.GetLabelsAsync().ContinueWith(t => t.Result.Labels);
         }
@@ -153,11 +153,11 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="organization">specifies the organization of the resource</param>
         /// <returns>all labels</returns>
-        public async Task<List<Label>> FindLabelsByOrg(Organization organization)
+        public async Task<List<Label>> FindLabelsByOrgAsync(Organization organization)
         {
             Arguments.CheckNotNull(organization, nameof(organization));
 
-            return await FindLabelsByOrgId(organization.Id);
+            return await FindLabelsByOrgIdAsync(organization.Id);
         }
 
         /// <summary>
@@ -165,7 +165,7 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="orgId">specifies the organization ID of the resource</param>
         /// <returns>all labels</returns>
-        public async Task<List<Label>> FindLabelsByOrgId(string orgId)
+        public async Task<List<Label>> FindLabelsByOrgIdAsync(string orgId)
         {
             return await _service.GetLabelsAsync(null, orgId).ContinueWith(t => t.Result.Labels);
         }

@@ -19,7 +19,7 @@ namespace Client.Legacy.Test
             MockServer.Given(Request.Create().WithPath("/api/v2/query").UsingPost())
                             .RespondWith(CreateResponse());
 
-            var result = await FluxClient.Query("from(bucket:\"telegraf\")");
+            var result = await FluxClient.QueryAsync("from(bucket:\"telegraf\")");
 
             AssertSuccessResult(result);
         }
@@ -30,7 +30,7 @@ namespace Client.Legacy.Test
             MockServer.Given(Request.Create().WithPath("/api/v2/query").UsingPost())
                             .RespondWith(CreateResponse());
 
-            var result = await FluxClient.Query<Free>("from(bucket:\"telegraf\")");
+            var result = await FluxClient.QueryAsync<Free>("from(bucket:\"telegraf\")");
 
             Assert.That(result.Count == 4);
 
@@ -63,7 +63,7 @@ namespace Client.Legacy.Test
             
             try
             {
-                await FluxClient.QueryRaw("from(bucket:\"telegraf\")");
+                await FluxClient.QueryRawAsync("from(bucket:\"telegraf\")");
 
                 Assert.Fail();
             }
@@ -87,7 +87,7 @@ namespace Client.Legacy.Test
             
             try
             {
-                await FluxClient.Query("from(bucket:\"telegraf\")");
+                await FluxClient.QueryAsync("from(bucket:\"telegraf\")");
 
                 Assert.Fail();
             }
@@ -112,7 +112,7 @@ namespace Client.Legacy.Test
             
             try
             {
-                await FluxClient.Query("from(bucket:\"telegraf\")");
+                await FluxClient.QueryAsync("from(bucket:\"telegraf\")");
 
                 Assert.Fail();
             }
@@ -132,7 +132,7 @@ namespace Client.Legacy.Test
 
             var records = new List<FluxRecord>();
 
-            await FluxClient.Query("from(bucket:\"telegraf\")",
+            await FluxClient.QueryAsync("from(bucket:\"telegraf\")",
                             (cancellable, result) =>
                             {
                                 records.Add(result);
@@ -155,7 +155,7 @@ namespace Client.Legacy.Test
 
             var records = new List<FluxRecord>();
 
-            await FluxClient.Query("from(bucket:\"telegraf\")",
+            await FluxClient.QueryAsync("from(bucket:\"telegraf\")",
                             (cancellable, result) =>
                             {
                                 records.Add(result);
@@ -175,7 +175,7 @@ namespace Client.Legacy.Test
             MockServer.Given(Request.Create().WithPath("/api/v2/query").UsingPost())
                             .RespondWith(CreateErrorResponse("Flux query is not valid"));
 
-            await FluxClient.Query("from(bucket:\"telegraf\")",
+            await FluxClient.QueryAsync("from(bucket:\"telegraf\")",
                             (cancellable, result) => Assert.Fail("Unreachable"), 
                             error => CountdownEvent.Signal());
 

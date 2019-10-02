@@ -25,20 +25,20 @@ namespace InfluxDB.Client.Test
         [Test]
         public async Task CloneOrganization()
         {
-            var source = await _organizationsApi.CreateOrganization(GenerateName("Constant Pro"));
+            var source = await _organizationsApi.CreateOrganizationAsync(GenerateName("Constant Pro"));
 
             var properties = new Dictionary<string, string> {{"color", "green"}, {"location", "west"}};
 
-            var label = await Client.GetLabelsApi().CreateLabel(GenerateName("Cool Resource"), properties, source.Id);
-            await _organizationsApi.AddLabel(label, source);
+            var label = await Client.GetLabelsApi().CreateLabelAsync(GenerateName("Cool Resource"), properties, source.Id);
+            await _organizationsApi.AddLabelAsync(label, source);
 
             var name = GenerateName("cloned");
 
-            var cloned = await _organizationsApi.CloneOrganization(name, source);
+            var cloned = await _organizationsApi.CloneOrganizationAsync(name, source);
 
             Assert.AreEqual(name, cloned.Name);
 
-            var labels = await _organizationsApi.GetLabels(cloned);
+            var labels = await _organizationsApi.GetLabelsAsync(cloned);
             Assert.AreEqual(1, labels.Count);
             Assert.AreEqual(label.Id, labels[0].Id);
         }
@@ -47,7 +47,7 @@ namespace InfluxDB.Client.Test
         public void CloneOrganizationNotFound()
         {
             var ioe = Assert.ThrowsAsync<AggregateException>(async () =>
-                await _organizationsApi.CloneOrganization(GenerateName("bucket"), "020f755c3c082000"));
+                await _organizationsApi.CloneOrganizationAsync(GenerateName("bucket"), "020f755c3c082000"));
 
             Assert.AreEqual("organization not found", ioe.InnerException.Message);
             Assert.AreEqual(typeof(HttpException), ioe.InnerException.GetType());
@@ -60,7 +60,7 @@ namespace InfluxDB.Client.Test
 
             var orgName = GenerateName("Constant Pro");
 
-            var organization = await _organizationsApi.CreateOrganization(orgName);
+            var organization = await _organizationsApi.CreateOrganizationAsync(orgName);
 
             Assert.IsNotNull(organization);
             Assert.IsNotEmpty(organization.Id);
@@ -84,17 +84,17 @@ namespace InfluxDB.Client.Test
         [Test]
         public async Task DeleteOrganization()
         {
-            var createdOrganization = await _organizationsApi.CreateOrganization(GenerateName("Constant Pro"));
+            var createdOrganization = await _organizationsApi.CreateOrganizationAsync(GenerateName("Constant Pro"));
             Assert.IsNotNull(createdOrganization);
 
-            var foundOrganization = await _organizationsApi.FindOrganizationById(createdOrganization.Id);
+            var foundOrganization = await _organizationsApi.FindOrganizationByIdAsync(createdOrganization.Id);
             Assert.IsNotNull(foundOrganization);
 
             // delete task
-            await _organizationsApi.DeleteOrganization(createdOrganization);
+            await _organizationsApi.DeleteOrganizationAsync(createdOrganization);
 
             var ioe = Assert.ThrowsAsync<HttpException>(async () =>
-                await _organizationsApi.FindOrganizationById(createdOrganization.Id));
+                await _organizationsApi.FindOrganizationByIdAsync(createdOrganization.Id));
 
             Assert.AreEqual("organization not found", ioe.Message);
         }
@@ -104,9 +104,9 @@ namespace InfluxDB.Client.Test
         {
             var orgName = GenerateName("Constant Pro");
 
-            var organization = await _organizationsApi.CreateOrganization(orgName);
+            var organization = await _organizationsApi.CreateOrganizationAsync(orgName);
 
-            var organizationById = await _organizationsApi.FindOrganizationById(organization.Id);
+            var organizationById = await _organizationsApi.FindOrganizationByIdAsync(organization.Id);
 
             Assert.IsNotNull(organizationById);
             Assert.AreEqual(organizationById.Id, organization.Id);
@@ -129,7 +129,7 @@ namespace InfluxDB.Client.Test
         public void FindOrganizationByIdNull()
         {
             var ioe = Assert.ThrowsAsync<HttpException>(async () =>
-                await _organizationsApi.FindOrganizationById("020f755c3c082000"));
+                await _organizationsApi.FindOrganizationByIdAsync("020f755c3c082000"));
 
             Assert.AreEqual("organization not found", ioe.Message);
         }
@@ -137,7 +137,7 @@ namespace InfluxDB.Client.Test
         [Test]
         public async Task FindOrganizationLogsFindOptionsNotFound()
         {
-            var entries = await _organizationsApi.FindOrganizationLogs("020f755c3c082000", new FindOptions());
+            var entries = await _organizationsApi.FindOrganizationLogsAsync("020f755c3c082000", new FindOptions());
 
             Assert.IsNotNull(entries);
             Assert.AreEqual(0, entries.Logs.Count);
@@ -146,7 +146,7 @@ namespace InfluxDB.Client.Test
         [Test]
         public async Task FindOrganizationLogsNotFound()
         {
-            var logs = await _organizationsApi.FindOrganizationLogs("020f755c3c082000");
+            var logs = await _organizationsApi.FindOrganizationLogsAsync("020f755c3c082000");
 
             Assert.AreEqual(0, logs.Count);
         }
@@ -154,16 +154,16 @@ namespace InfluxDB.Client.Test
         [Test]
         public async Task FindOrganizationLogsPaging()
         {
-            var organization = await _organizationsApi.CreateOrganization(GenerateName("Constant Pro"));
+            var organization = await _organizationsApi.CreateOrganizationAsync(GenerateName("Constant Pro"));
 
             foreach (var i in Enumerable.Range(0, 19))
             {
                 organization.Name = $"{i}_{organization.Name}";
 
-                await _organizationsApi.UpdateOrganization(organization);
+                await _organizationsApi.UpdateOrganizationAsync(organization);
             }
 
-            var logs = await _organizationsApi.FindOrganizationLogs(organization);
+            var logs = await _organizationsApi.FindOrganizationLogsAsync(organization);
 
             Assert.AreEqual(20, logs.Count);
             Assert.AreEqual("Organization Created", logs[0].Description);
@@ -171,7 +171,7 @@ namespace InfluxDB.Client.Test
 
             var findOptions = new FindOptions {Limit = 5, Offset = 0};
 
-            var entries = await _organizationsApi.FindOrganizationLogs(organization, findOptions);
+            var entries = await _organizationsApi.FindOrganizationLogsAsync(organization, findOptions);
             Assert.AreEqual(5, entries.Logs.Count);
             Assert.AreEqual("Organization Created", entries.Logs[0].Description);
             Assert.AreEqual("Organization Updated", entries.Logs[1].Description);
@@ -181,7 +181,7 @@ namespace InfluxDB.Client.Test
 
             findOptions.Offset += 5;
 
-            entries = await _organizationsApi.FindOrganizationLogs(organization, findOptions);
+            entries = await _organizationsApi.FindOrganizationLogsAsync(organization, findOptions);
             Assert.AreEqual(5, entries.Logs.Count);
             Assert.AreEqual("Organization Updated", entries.Logs[0].Description);
             Assert.AreEqual("Organization Updated", entries.Logs[1].Description);
@@ -191,7 +191,7 @@ namespace InfluxDB.Client.Test
 
             findOptions.Offset += 5;
 
-            entries = await _organizationsApi.FindOrganizationLogs(organization, findOptions);
+            entries = await _organizationsApi.FindOrganizationLogsAsync(organization, findOptions);
             Assert.AreEqual(5, entries.Logs.Count);
             Assert.AreEqual("Organization Updated", entries.Logs[0].Description);
             Assert.AreEqual("Organization Updated", entries.Logs[1].Description);
@@ -201,7 +201,7 @@ namespace InfluxDB.Client.Test
 
             findOptions.Offset += 5;
 
-            entries = await _organizationsApi.FindOrganizationLogs(organization, findOptions);
+            entries = await _organizationsApi.FindOrganizationLogsAsync(organization, findOptions);
             Assert.AreEqual(5, entries.Logs.Count);
             Assert.AreEqual("Organization Updated", entries.Logs[0].Description);
             Assert.AreEqual("Organization Updated", entries.Logs[1].Description);
@@ -211,14 +211,14 @@ namespace InfluxDB.Client.Test
 
             findOptions.Offset += 5;
 
-            entries = await _organizationsApi.FindOrganizationLogs(organization, findOptions);
+            entries = await _organizationsApi.FindOrganizationLogsAsync(organization, findOptions);
             Assert.AreEqual(0, entries.Logs.Count);
 
             //
             // Order
             //
             findOptions = new FindOptions {Descending = false};
-            entries = await _organizationsApi.FindOrganizationLogs(organization, findOptions);
+            entries = await _organizationsApi.FindOrganizationLogsAsync(organization, findOptions);
             Assert.AreEqual(20, entries.Logs.Count);
 
             Assert.AreEqual("Organization Updated", entries.Logs[19].Description);
@@ -228,11 +228,11 @@ namespace InfluxDB.Client.Test
         [Test]
         public async Task FindOrganizations()
         {
-            var organizations = await _organizationsApi.FindOrganizations();
+            var organizations = await _organizationsApi.FindOrganizationsAsync();
 
-            await _organizationsApi.CreateOrganization(GenerateName("Constant Pro"));
+            await _organizationsApi.CreateOrganizationAsync(GenerateName("Constant Pro"));
 
-            var organizationsNew = await _organizationsApi.FindOrganizations();
+            var organizationsNew = await _organizationsApi.FindOrganizationsAsync();
             Assert.That(organizationsNew.Count == organizations.Count + 1);
         }
 
@@ -241,109 +241,109 @@ namespace InfluxDB.Client.Test
         {
             var labelClient = Client.GetLabelsApi();
 
-            var organization = await _organizationsApi.CreateOrganization(GenerateName("Constant Pro"));
+            var organization = await _organizationsApi.CreateOrganizationAsync(GenerateName("Constant Pro"));
 
             var properties = new Dictionary<string, string> {{"color", "green"}, {"location", "west"}};
 
-            var label = await labelClient.CreateLabel(GenerateName("Cool Resource"), properties, organization.Id);
+            var label = await labelClient.CreateLabelAsync(GenerateName("Cool Resource"), properties, organization.Id);
 
-            var labels = await _organizationsApi.GetLabels(organization);
+            var labels = await _organizationsApi.GetLabelsAsync(organization);
             Assert.AreEqual(0, labels.Count);
 
-            var addedLabel = await _organizationsApi.AddLabel(label, organization);
+            var addedLabel = await _organizationsApi.AddLabelAsync(label, organization);
             Assert.IsNotNull(addedLabel);
             Assert.AreEqual(label.Id, addedLabel.Id);
             Assert.AreEqual(label.Name, addedLabel.Name);
             Assert.AreEqual(label.Properties, addedLabel.Properties);
 
-            labels = await _organizationsApi.GetLabels(organization);
+            labels = await _organizationsApi.GetLabelsAsync(organization);
             Assert.AreEqual(1, labels.Count);
             Assert.AreEqual(label.Id, labels[0].Id);
             Assert.AreEqual(label.Name, labels[0].Name);
 
-            await _organizationsApi.DeleteLabel(label, organization);
+            await _organizationsApi.DeleteLabelAsync(label, organization);
 
-            labels = await _organizationsApi.GetLabels(organization);
+            labels = await _organizationsApi.GetLabelsAsync(organization);
             Assert.AreEqual(0, labels.Count);
         }
 
         [Test]
         public async Task Member()
         {
-            var organization = await _organizationsApi.CreateOrganization(GenerateName("Constant Pro"));
+            var organization = await _organizationsApi.CreateOrganizationAsync(GenerateName("Constant Pro"));
 
-            var members = await _organizationsApi.GetMembers(organization);
+            var members = await _organizationsApi.GetMembersAsync(organization);
             Assert.AreEqual(0, members.Count);
 
-            var user = await _usersApi.CreateUser(GenerateName("Luke Health"));
+            var user = await _usersApi.CreateUserAsync(GenerateName("Luke Health"));
 
-            var resourceMember = await _organizationsApi.AddMember(user, organization);
+            var resourceMember = await _organizationsApi.AddMemberAsync(user, organization);
             Assert.IsNotNull(resourceMember);
             Assert.AreEqual(resourceMember.Id, user.Id);
             Assert.AreEqual(resourceMember.Name, user.Name);
             Assert.AreEqual(resourceMember.Role, ResourceMember.RoleEnum.Member);
 
-            members = await _organizationsApi.GetMembers(organization);
+            members = await _organizationsApi.GetMembersAsync(organization);
             Assert.AreEqual(1, members.Count);
             Assert.AreEqual(members[0].Id, user.Id);
             Assert.AreEqual(members[0].Name, user.Name);
             Assert.AreEqual(members[0].Role, ResourceMember.RoleEnum.Member);
 
-            await _organizationsApi.DeleteMember(user, organization);
+            await _organizationsApi.DeleteMemberAsync(user, organization);
 
-            members = await _organizationsApi.GetMembers(organization);
+            members = await _organizationsApi.GetMembersAsync(organization);
             Assert.AreEqual(0, members.Count);
         }
 
         [Test]
         public async Task Owner()
         {
-            var organization = await _organizationsApi.CreateOrganization(GenerateName("Constant Pro"));
+            var organization = await _organizationsApi.CreateOrganizationAsync(GenerateName("Constant Pro"));
 
-            var owners = await _organizationsApi.GetOwners(organization);
+            var owners = await _organizationsApi.GetOwnersAsync(organization);
             Assert.AreEqual(1, owners.Count);
             Assert.AreEqual("my-user", owners[0].Name);
 
-            var user = await _usersApi.CreateUser(GenerateName("Luke Health"));
+            var user = await _usersApi.CreateUserAsync(GenerateName("Luke Health"));
 
-            var resourceMember = await _organizationsApi.AddOwner(user, organization);
+            var resourceMember = await _organizationsApi.AddOwnerAsync(user, organization);
             Assert.IsNotNull(resourceMember);
             Assert.AreEqual(resourceMember.Id, user.Id);
             Assert.AreEqual(resourceMember.Name, user.Name);
             Assert.AreEqual(resourceMember.Role, ResourceOwner.RoleEnum.Owner);
 
-            owners = await _organizationsApi.GetOwners(organization);
+            owners = await _organizationsApi.GetOwnersAsync(organization);
             Assert.AreEqual(2, owners.Count);
             Assert.AreEqual(owners[1].Id, user.Id);
             Assert.AreEqual(owners[1].Name, user.Name);
             Assert.AreEqual(owners[1].Role, ResourceOwner.RoleEnum.Owner);
 
-            await _organizationsApi.DeleteOwner(user, organization);
+            await _organizationsApi.DeleteOwnerAsync(user, organization);
 
-            owners = await _organizationsApi.GetOwners(organization);
+            owners = await _organizationsApi.GetOwnersAsync(organization);
             Assert.AreEqual(1, owners.Count);
         }
 
         [Test]
         public async Task Secrets()
         {
-            var organization = await _organizationsApi.CreateOrganization(GenerateName("Constant Pro"));
+            var organization = await _organizationsApi.CreateOrganizationAsync(GenerateName("Constant Pro"));
 
-            var secrets = await _organizationsApi.GetSecrets(organization);
+            var secrets = await _organizationsApi.GetSecretsAsync(organization);
             Assert.IsEmpty(secrets);
 
             var secretsKv = new Dictionary<string, string> {{"gh", "123456789"}, {"az", "987654321"}};
 
-            await _organizationsApi.PutSecrets(secretsKv, organization);
+            await _organizationsApi.PutSecretsAsync(secretsKv, organization);
 
-            secrets = await _organizationsApi.GetSecrets(organization);
+            secrets = await _organizationsApi.GetSecretsAsync(organization);
             Assert.AreEqual(2, secrets.Count);
             Assert.Contains("gh", secrets);
             Assert.Contains("az", secrets);
 
-            await _organizationsApi.DeleteSecrets(new List<string> {"gh"}, organization);
+            await _organizationsApi.DeleteSecretsAsync(new List<string> {"gh"}, organization);
 
-            secrets = await _organizationsApi.GetSecrets(organization);
+            secrets = await _organizationsApi.GetSecretsAsync(organization);
             Assert.AreEqual(1, secrets.Count);
             Assert.Contains("az", secrets);
         }
@@ -351,12 +351,12 @@ namespace InfluxDB.Client.Test
         [Test]
         public async Task UpdateOrganization()
         {
-            var createdOrganization = await _organizationsApi.CreateOrganization(GenerateName("Constant Pro"));
+            var createdOrganization = await _organizationsApi.CreateOrganizationAsync(GenerateName("Constant Pro"));
             var newName = GenerateName("Master Pb");
             createdOrganization.Name = newName;
 
             var updatedAt = createdOrganization.UpdatedAt;
-            var updatedOrganization = await _organizationsApi.UpdateOrganization(createdOrganization);
+            var updatedOrganization = await _organizationsApi.UpdateOrganizationAsync(createdOrganization);
 
             Assert.IsNotNull(updatedOrganization);
             Assert.AreEqual(updatedOrganization.Id, createdOrganization.Id);

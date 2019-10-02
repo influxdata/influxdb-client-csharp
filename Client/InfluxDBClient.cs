@@ -300,16 +300,16 @@ namespace InfluxDB.Client
         /// Get the health of an instance.
         /// </summary>
         /// <returns>health of an instance</returns>
-        public async Task<HealthCheck> Health()
+        public async Task<HealthCheck> HealthAsync()
         {
-            return await GetHealth(_healthService.GetHealthAsync());
+            return await GetHealthAsync(_healthService.GetHealthAsync());
         }
 
         /// <summary>
         /// The readiness of the InfluxDB 2.0.
         /// </summary>
         /// <returns>return null if the InfluxDB is not ready</returns>
-        public async Task<Ready> Ready()
+        public async Task<Ready> ReadyAsync()
         {
             try
             {
@@ -329,7 +329,7 @@ namespace InfluxDB.Client
         /// <param name="onboarding">to setup defaults</param>
         /// <exception cref="HttpException">With status code 422 when an onboarding has already been completed</exception>
         /// <returns>defaults for first run</returns>
-        public async Task<OnboardingResponse> Onboarding(OnboardingRequest onboarding)
+        public async Task<OnboardingResponse> OnboardingAsync(OnboardingRequest onboarding)
         {
             Arguments.CheckNotNull(onboarding, nameof(onboarding));
 
@@ -340,7 +340,7 @@ namespace InfluxDB.Client
         /// Check if database has default user, org, bucket created, returns true if not.
         /// </summary>
         /// <returns>True if onboarding has already been completed otherwise false</returns>
-        public async Task<bool> IsOnboardingAllowed()
+        public async Task<bool> IsOnboardingAllowedAsync()
         {
             var isOnboardingAllowed = _setupService.GetSetupAsync().ContinueWith(t => t.Result.Allowed == true);
 
@@ -352,7 +352,7 @@ namespace InfluxDB.Client
             return "Basic " + Convert.ToBase64String(Encoding.Default.GetBytes(username + ":" + password));
         }
         
-        internal static async Task<HealthCheck> GetHealth(Task<HealthCheck> task)
+        internal static async Task<HealthCheck> GetHealthAsync(Task<HealthCheck> task)
         {
             Arguments.CheckNotNull(task, nameof(task));
 

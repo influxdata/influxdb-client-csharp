@@ -25,7 +25,7 @@ namespace InfluxDB.Client.Test
                 .Given(Request.Create().UsingGet())
                 .RespondWith(CreateResponse("{\"status\":\"active\"}", "application/json"));
 
-            var authorization = await _client.GetAuthorizationsApi().FindAuthorizationById("id");
+            var authorization = await _client.GetAuthorizationsApi().FindAuthorizationByIdAsync("id");
 
             Assert.AreEqual(AuthorizationUpdateRequest.StatusEnum.Active, authorization.Status);
         }
@@ -38,7 +38,7 @@ namespace InfluxDB.Client.Test
                 .RespondWith(CreateResponse("{\"status\":\"unknown\"}", "application/json"));
 
             var ioe = Assert.ThrowsAsync<ApiException>(async () =>
-                await _client.GetAuthorizationsApi().FindAuthorizationById("id"));
+                await _client.GetAuthorizationsApi().FindAuthorizationByIdAsync("id"));
 
             Assert.IsTrue(ioe.Message.StartsWith("Error converting value \"unknown\" to typ"));
         }
@@ -72,7 +72,7 @@ namespace InfluxDB.Client.Test
                 .Given(Request.Create().UsingGet())
                 .RespondWith(CreateResponse(data, "application/json"));
 
-            var logs = await _client.GetBucketsApi().FindBucketLogs("id");
+            var logs = await _client.GetBucketsApi().FindBucketLogsAsync("id");
 
             Assert.AreEqual(20, logs.Count);
         }

@@ -16,7 +16,7 @@ namespace Client.Legacy.Test
             MockServer.Given(Request.Create().WithPath("/api/v2/query").UsingPost())
                 .RespondWith(CreateResponse());
 
-            var result = await FluxClient.QueryRaw("from(bucket:\"telegraf\")");
+            var result = await FluxClient.QueryRawAsync("from(bucket:\"telegraf\")");
 
             AssertSuccessResult(result);
         }
@@ -29,7 +29,7 @@ namespace Client.Legacy.Test
 
             try
             {
-                await FluxClient.QueryRaw("from(bucket:\"telegraf\")");
+                await FluxClient.QueryRawAsync("from(bucket:\"telegraf\")");
 
                 Assert.Fail();
             }
@@ -49,7 +49,7 @@ namespace Client.Legacy.Test
 
             var results = new List<string>();
 
-            await FluxClient.QueryRaw("from(bucket:\"telegraf\")",
+            await FluxClient.QueryRawAsync("from(bucket:\"telegraf\")",
                 (cancellable, result) =>
                 {
                     results.Add(result);
@@ -72,7 +72,7 @@ namespace Client.Legacy.Test
 
             var results = new List<string>();
 
-            await FluxClient.QueryRaw("from(bucket:\"telegraf\")", null,
+            await FluxClient.QueryRawAsync("from(bucket:\"telegraf\")", null,
                 (cancellable, result) => results.Add(result),
                 error => Assert.Fail("Unreachable"),
                 () => CountdownEvent.Signal());
@@ -86,7 +86,7 @@ namespace Client.Legacy.Test
         {
             MockServer.Stop();
 
-            await FluxClient.QueryRaw("from(bucket:\"telegraf\")",
+            await FluxClient.QueryRawAsync("from(bucket:\"telegraf\")",
                 (cancellable, result) => Assert.Fail("Unreachable"),
                 error => CountdownEvent.Signal());
 

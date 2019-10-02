@@ -42,7 +42,7 @@ namespace Client.Legacy.Test
             var flux = FromFluxDatabase + "\n"
                                            + "\t|> filter(fn: (r) => r[\"_measurement\"] == \"chunked\")\n"
                                            + "\t|> range(start: 1970-01-01T00:00:00.000000000Z)";
-            await FluxClient.Query(flux, (cancellable, fluxRecord) => 
+            await FluxClient.QueryAsync(flux, (cancellable, fluxRecord) => 
             {
                 // +1 record
                 CountdownEvent.Signal();
@@ -66,7 +66,7 @@ namespace Client.Legacy.Test
                                            + "\t|> range(start: 1970-01-01T00:00:00.000000000Z)\n"
                                            + "\t|> window(every: 10m)";
 
-            await FluxClient.Query(flux, (cancellable, fluxRecord) =>
+            await FluxClient.QueryAsync(flux, (cancellable, fluxRecord) =>
             {
                 // +1 record
                 CountdownEvent.Signal();
@@ -93,7 +93,7 @@ namespace Client.Legacy.Test
             CountdownEvent = new CountdownEvent(10_000);
             var cancelCountDown = new CountdownEvent(1);
 
-            await FluxClient.Query(flux, (cancellable, fluxRecord) =>
+            await FluxClient.QueryAsync(flux, (cancellable, fluxRecord) =>
             {
                 // +1 record
                 CountdownEvent.Signal();
@@ -124,7 +124,7 @@ namespace Client.Legacy.Test
                                            + "\t|> filter(fn: (r) => (r[\"_measurement\"] == \"mem\" and r[\"_field\"] == \"free\"))\n"
                                            + "\t|> sum()";
 
-            var fluxTables = await FluxClient.Query(flux);
+            var fluxTables = await FluxClient.QueryAsync(flux);
 
             AssertFluxResult(fluxTables);
         }
@@ -135,7 +135,7 @@ namespace Client.Legacy.Test
             var flux = FromFluxDatabase + "\n"
                                            + "\t|> filter(fn: (r) => (r[\"_measurement\"] == \"mem\" and r[\"_field\"] == \"free\"))";
 
-            var fluxTables = await FluxClient.Query(flux);
+            var fluxTables = await FluxClient.QueryAsync(flux);
 
             AssertFluxResultWithTime(fluxTables);
         }
@@ -146,7 +146,7 @@ namespace Client.Legacy.Test
             var flux = FromFluxDatabase + "\n"
                                            + "\t|> range(start: 1970-01-01T00:00:00.000000000Z)";
 
-            var fluxTables = await FluxClient.Query(flux);
+            var fluxTables = await FluxClient.QueryAsync(flux);
 
             Assert.That(fluxTables.Count == 6);
         }
@@ -156,7 +156,7 @@ namespace Client.Legacy.Test
         {
             try
             {
-                await FluxClient.Query("from(bucket:\"telegraf\")");
+                await FluxClient.QueryAsync("from(bucket:\"telegraf\")");
                 
                 Assert.Fail();
             }
@@ -172,7 +172,7 @@ namespace Client.Legacy.Test
         {
             try
             {
-                await FluxClient.Query($"from(bucket:\"{DatabaseName}\")");
+                await FluxClient.QueryAsync($"from(bucket:\"{DatabaseName}\")");
                 
                 Assert.Fail();
             }
@@ -193,7 +193,7 @@ namespace Client.Legacy.Test
                                            + "\t|> filter(fn: (r) => (r[\"_measurement\"] == \"mem\" and r[\"_field\"] == \"free\"))\n"
                                            + "\t|> sum()";
 
-            await FluxClient.Query(flux, (cancellable, record) =>
+            await FluxClient.QueryAsync(flux, (cancellable, record) =>
                             {
                                 records.Add(record);
                                 CountdownEvent.Signal();
@@ -212,7 +212,7 @@ namespace Client.Legacy.Test
 
             var fluxClient = FluxClientFactory.Create(options);
 
-            await fluxClient.Query(FromFluxDatabase + " |> last()",
+            await fluxClient.QueryAsync(FromFluxDatabase + " |> last()",
                             (cancellable, record) => { },
                             error => CountdownEvent.Signal());
 
@@ -229,7 +229,7 @@ namespace Client.Legacy.Test
 
             CountdownEvent = new CountdownEvent(4);
 
-             await FluxClient.Query<Mem>(flux, (cancellable, mem) =>
+             await FluxClient.QueryAsync<Mem>(flux, (cancellable, mem) =>
             {
                 memory.Add(mem);
                 CountdownEvent.Signal();
@@ -263,13 +263,13 @@ namespace Client.Legacy.Test
         [Test]
         public async Task Ping() 
         {
-            Assert.IsTrue(await FluxClient.Ping());
+            Assert.IsTrue(await FluxClient.PingAsync());
         }
         
         [Test]
         public async Task Version()
         {
-            var version = FluxClient.Version();
+            var version = FluxClient.VersionAsync();
             
             Assert.IsNotEmpty(await version);
         }
