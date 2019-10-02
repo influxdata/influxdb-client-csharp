@@ -25,13 +25,13 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="name">name of the user</param>
         /// <returns>Created user</returns>
-        public async Task<User> CreateUser(string name)
+        public async Task<User> CreateUserAsync(string name)
         {
             Arguments.CheckNonEmptyString(name, nameof(name));
 
             var user = new User(name: name);
 
-            return await CreateUser(user);
+            return await CreateUserAsync(user);
         }
 
         /// <summary>
@@ -39,7 +39,7 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="user">name of the user</param>
         /// <returns>Created user</returns>
-        public async Task<User> CreateUser(User user)
+        public async Task<User> CreateUserAsync(User user)
         {
             Arguments.CheckNotNull(user, nameof(user));
 
@@ -51,7 +51,7 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="user">user update to apply</param>
         /// <returns>user updated</returns>
-        public async Task<User> UpdateUser(User user)
+        public async Task<User> UpdateUserAsync(User user)
         {
             Arguments.CheckNotNull(user, nameof(user));
 
@@ -65,13 +65,13 @@ namespace InfluxDB.Client
         /// <param name="oldPassword">old password</param>
         /// <param name="newPassword">new password</param>
         /// <returns>user updated</returns>
-        public async Task UpdateUserPassword(User user, string oldPassword, string newPassword)
+        public async Task UpdateUserPasswordAsync(User user, string oldPassword, string newPassword)
         {
             Arguments.CheckNotNull(user, nameof(user));
             Arguments.CheckNotNull(oldPassword, nameof(oldPassword));
             Arguments.CheckNotNull(newPassword, nameof(newPassword));
 
-            await UpdateUserPassword(user.Id, user.Name, oldPassword, newPassword);
+            await UpdateUserPasswordAsync(user.Id, user.Name, oldPassword, newPassword);
         }
 
         /// <summary>
@@ -81,13 +81,13 @@ namespace InfluxDB.Client
         /// <param name="oldPassword">old password</param>
         /// <param name="newPassword">new password</param>
         /// <returns>user updated</returns>
-        public async Task UpdateUserPassword(string userId, string oldPassword, string newPassword)
+        public async Task UpdateUserPasswordAsync(string userId, string oldPassword, string newPassword)
         {
             Arguments.CheckNotNull(userId, nameof(userId));
             Arguments.CheckNotNull(oldPassword, nameof(oldPassword));
             Arguments.CheckNotNull(newPassword, nameof(newPassword));
 
-            await FindUserById(userId).ContinueWith(t => UpdateUserPassword(t.Result, oldPassword, newPassword));
+            await FindUserByIdAsync(userId).ContinueWith(t => UpdateUserPasswordAsync(t.Result, oldPassword, newPassword));
         }
 
         /// <summary>
@@ -95,7 +95,7 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="userId">ID of user to delete</param>
         /// <returns>async task</returns>
-        public async Task DeleteUser(string userId)
+        public async Task DeleteUserAsync(string userId)
         {
             Arguments.CheckNotNull(userId, nameof(userId));
 
@@ -107,11 +107,11 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="user">user to delete</param>
         /// <returns>async task</returns>
-        public async Task DeleteUser(User user)
+        public async Task DeleteUserAsync(User user)
         {
             Arguments.CheckNotNull(user, nameof(user));
 
-            await DeleteUser(user.Id);
+            await DeleteUserAsync(user.Id);
         }
 
         /// <summary>
@@ -120,12 +120,12 @@ namespace InfluxDB.Client
         /// <param name="clonedName">name of cloned user</param>
         /// <param name="userId">ID of user to clone</param>
         /// <returns>cloned user</returns>
-        public async Task<User> CloneUser(string clonedName, string userId)
+        public async Task<User> CloneUserAsync(string clonedName, string userId)
         {
             Arguments.CheckNonEmptyString(clonedName, nameof(clonedName));
             Arguments.CheckNonEmptyString(userId, nameof(userId));
 
-            return await FindUserById(userId).ContinueWith(t => CloneUser(clonedName, t.Result)).Unwrap();
+            return await FindUserByIdAsync(userId).ContinueWith(t => CloneUserAsync(clonedName, t.Result)).Unwrap();
         }
 
         /// <summary>
@@ -134,21 +134,21 @@ namespace InfluxDB.Client
         /// <param name="clonedName">name of cloned user</param>
         /// <param name="user">user to clone</param>
         /// <returns>cloned user</returns>
-        public async Task<User> CloneUser(string clonedName, User user)
+        public async Task<User> CloneUserAsync(string clonedName, User user)
         {
             Arguments.CheckNonEmptyString(clonedName, nameof(clonedName));
             Arguments.CheckNotNull(user, nameof(user));
 
             var cloned = new User(name: clonedName);
 
-            return await CreateUser(cloned);
+            return await CreateUserAsync(cloned);
         }
 
         /// <summary>
         /// Returns currently authenticated user.
         /// </summary>
         /// <returns>currently authenticated user</returns>
-        public async Task<User> Me()
+        public async Task<User> MeAsync()
         {
             return await _service.GetMeAsync();
         }
@@ -159,12 +159,12 @@ namespace InfluxDB.Client
         /// <param name="oldPassword">old password</param>
         /// <param name="newPassword">new password</param>
         /// <returns>currently authenticated user</returns>
-        public async Task MeUpdatePassword(string oldPassword, string newPassword)
+        public async Task MeUpdatePasswordAsync(string oldPassword, string newPassword)
         {
             Arguments.CheckNotNull(oldPassword, nameof(oldPassword));
             Arguments.CheckNotNull(newPassword, nameof(newPassword));
 
-            await Me().ContinueWith(async t =>
+            await MeAsync().ContinueWith(async t =>
             {
                 if (t.Result == null)
                 {
@@ -184,7 +184,7 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="userId">ID of user to get</param>
         /// <returns>User Details</returns>
-        public async Task<User> FindUserById(string userId)
+        public async Task<User> FindUserByIdAsync(string userId)
         {
             Arguments.CheckNonEmptyString(userId, nameof(userId));
 
@@ -195,7 +195,7 @@ namespace InfluxDB.Client
         /// List all users.
         /// </summary>
         /// <returns>List all users</returns>
-        public async Task<List<User>> FindUsers()
+        public async Task<List<User>> FindUsersAsync()
         {
             return await _service.GetUsersAsync().ContinueWith(t => t.Result._Users);
         }
@@ -205,11 +205,11 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="user">for retrieve logs</param>
         /// <returns>logs</returns>
-        public async Task<List<OperationLog>> FindUserLogs(User user)
+        public async Task<List<OperationLog>> FindUserLogsAsync(User user)
         {
             Arguments.CheckNotNull(user, nameof(user));
 
-            return await FindUserLogs(user.Id);
+            return await FindUserLogsAsync(user.Id);
         }
 
         /// <summary>
@@ -218,12 +218,12 @@ namespace InfluxDB.Client
         /// <param name="user">for retrieve logs</param>
         /// <param name="findOptions">the find options</param>
         /// <returns>logs</returns>
-        public async Task<OperationLogs> FindUserLogs(User user, FindOptions findOptions)
+        public async Task<OperationLogs> FindUserLogsAsync(User user, FindOptions findOptions)
         {
             Arguments.CheckNotNull(user, nameof(user));
             Arguments.CheckNotNull(findOptions, nameof(findOptions));
 
-            return await FindUserLogs(user.Id, findOptions);
+            return await FindUserLogsAsync(user.Id, findOptions);
         }
 
         /// <summary>
@@ -231,11 +231,11 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="userId">the ID of an user</param>
         /// <returns>logs</returns>
-        public async Task<List<OperationLog>> FindUserLogs(string userId)
+        public async Task<List<OperationLog>> FindUserLogsAsync(string userId)
         {
             Arguments.CheckNonEmptyString(userId, nameof(userId));
 
-            return await FindUserLogs(userId, new FindOptions()).ContinueWith(t => t.Result.Logs);
+            return await FindUserLogsAsync(userId, new FindOptions()).ContinueWith(t => t.Result.Logs);
         }
 
         /// <summary>
@@ -244,7 +244,7 @@ namespace InfluxDB.Client
         /// <param name="userId">the ID of an user</param>
         /// <param name="findOptions">the find options</param>
         /// <returns>logs</returns>
-        public async Task<OperationLogs> FindUserLogs(string userId, FindOptions findOptions)
+        public async Task<OperationLogs> FindUserLogsAsync(string userId, FindOptions findOptions)
         {
             Arguments.CheckNonEmptyString(userId, nameof(userId));
             Arguments.CheckNotNull(findOptions, nameof(findOptions));
@@ -252,7 +252,7 @@ namespace InfluxDB.Client
             return await _service.GetUsersIDLogsAsync(userId, null, findOptions.Offset, findOptions.Limit);
         }
 
-        private async Task UpdateUserPassword(string userId, string userName, string oldPassword,
+        private async Task UpdateUserPasswordAsync(string userId, string userName, string oldPassword,
             string newPassword)
         {
             Arguments.CheckNotNull(userId, nameof(userId));

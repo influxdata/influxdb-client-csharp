@@ -23,7 +23,7 @@ namespace InfluxDB.Client.Test
         {
             var userName = GenerateName("John Ryzen");
 
-            var user = await _usersApi.CreateUser(userName);
+            var user = await _usersApi.CreateUserAsync(userName);
 
             Assert.IsNotNull(user);
             Assert.IsNotEmpty(user.Id);
@@ -39,16 +39,16 @@ namespace InfluxDB.Client.Test
         [Test]
         public async Task DeleteUser()
         {
-            var createdUser = await _usersApi.CreateUser(GenerateName("John Ryzen"));
+            var createdUser = await _usersApi.CreateUserAsync(GenerateName("John Ryzen"));
             Assert.IsNotNull(createdUser);
 
-            var foundUser = await _usersApi.FindUserById(createdUser.Id);
+            var foundUser = await _usersApi.FindUserByIdAsync(createdUser.Id);
             Assert.IsNotNull(foundUser);
 
             // delete user
-            await _usersApi.DeleteUser(createdUser);
+            await _usersApi.DeleteUserAsync(createdUser);
 
-            var ioe = Assert.ThrowsAsync<HttpException>(async () => await _usersApi.FindUserById(createdUser.Id));
+            var ioe = Assert.ThrowsAsync<HttpException>(async () => await _usersApi.FindUserByIdAsync(createdUser.Id));
             Assert.IsNotNull(ioe);
             Assert.AreEqual("user not found", ioe.Message);
         }
@@ -58,9 +58,9 @@ namespace InfluxDB.Client.Test
         {
             var userName = GenerateName("John Ryzen");
 
-            var user = await _usersApi.CreateUser(userName);
+            var user = await _usersApi.CreateUserAsync(userName);
 
-            var userById = await _usersApi.FindUserById(user.Id);
+            var userById = await _usersApi.FindUserByIdAsync(user.Id);
 
             Assert.IsNotNull(userById);
             Assert.AreEqual(userById.Id, user.Id);
@@ -70,7 +70,7 @@ namespace InfluxDB.Client.Test
         [Test]
         public void FindUserByIdNull()
         {
-            var ioe = Assert.ThrowsAsync<HttpException>(async () => await _usersApi.FindUserById("020f755c3c082000"));
+            var ioe = Assert.ThrowsAsync<HttpException>(async () => await _usersApi.FindUserByIdAsync("020f755c3c082000"));
 
             Assert.IsNotNull(ioe);
             Assert.AreEqual("user not found", ioe.Message);
@@ -81,12 +81,12 @@ namespace InfluxDB.Client.Test
         {
             var now = new DateTime();
 
-            var user = await _usersApi.Me();
+            var user = await _usersApi.MeAsync();
             Assert.IsNotNull(user);
 
-            await _usersApi.UpdateUser(user);
+            await _usersApi.UpdateUserAsync(user);
 
-            var userLogs = await _usersApi.FindUserLogs(user);
+            var userLogs = await _usersApi.FindUserLogsAsync(user);
 
             Assert.IsTrue(userLogs.Any());
             Assert.AreEqual(userLogs[userLogs.Count - 1].Description, "User Updated");
@@ -97,7 +97,7 @@ namespace InfluxDB.Client.Test
         [Test]
         public async Task FindUserLogsFindOptionsNotFound()
         {
-            var entries = await _usersApi.FindUserLogs("020f755c3c082000", new FindOptions());
+            var entries = await _usersApi.FindUserLogsAsync("020f755c3c082000", new FindOptions());
 
             Assert.IsNotNull(entries);
             Assert.AreEqual(0, entries.Logs.Count);
@@ -106,7 +106,7 @@ namespace InfluxDB.Client.Test
         [Test]
         public async Task FindUserLogsNotFound()
         {
-            var logs = await _usersApi.FindUserLogs("020f755c3c082000");
+            var logs = await _usersApi.FindUserLogsAsync("020f755c3c082000");
 
             Assert.AreEqual(0, logs.Count);
         }
@@ -114,16 +114,16 @@ namespace InfluxDB.Client.Test
         [Test]
         public async Task FindUserLogsPaging()
         {
-            var user = await _usersApi.CreateUser(GenerateName("John Ryzen"));
+            var user = await _usersApi.CreateUserAsync(GenerateName("John Ryzen"));
 
             foreach (var i in Enumerable.Range(0, 19))
             {
                 user.Name = $"{i}_{user.Name}";
 
-                await _usersApi.UpdateUser(user);
+                await _usersApi.UpdateUserAsync(user);
             }
 
-            var logs = await _usersApi.FindUserLogs(user);
+            var logs = await _usersApi.FindUserLogsAsync(user);
 
             Assert.AreEqual(20, logs.Count);
             Assert.AreEqual("User Created", logs[0].Description);
@@ -131,7 +131,7 @@ namespace InfluxDB.Client.Test
 
             var findOptions = new FindOptions {Limit = 5, Offset = 0};
 
-            var entries = await _usersApi.FindUserLogs(user, findOptions);
+            var entries = await _usersApi.FindUserLogsAsync(user, findOptions);
             Assert.AreEqual(5, entries.Logs.Count);
             Assert.AreEqual("User Created", entries.Logs[0].Description);
             Assert.AreEqual("User Updated", entries.Logs[1].Description);
@@ -141,7 +141,7 @@ namespace InfluxDB.Client.Test
 
             findOptions.Offset += 5;
 
-            entries = await _usersApi.FindUserLogs(user, findOptions);
+            entries = await _usersApi.FindUserLogsAsync(user, findOptions);
             Assert.AreEqual(5, entries.Logs.Count);
             Assert.AreEqual("User Updated", entries.Logs[0].Description);
             Assert.AreEqual("User Updated", entries.Logs[1].Description);
@@ -151,7 +151,7 @@ namespace InfluxDB.Client.Test
 
             findOptions.Offset += 5;
 
-            entries = await _usersApi.FindUserLogs(user, findOptions);
+            entries = await _usersApi.FindUserLogsAsync(user, findOptions);
             Assert.AreEqual(5, entries.Logs.Count);
             Assert.AreEqual("User Updated", entries.Logs[0].Description);
             Assert.AreEqual("User Updated", entries.Logs[1].Description);
@@ -161,7 +161,7 @@ namespace InfluxDB.Client.Test
 
             findOptions.Offset += 5;
 
-            entries = await _usersApi.FindUserLogs(user, findOptions);
+            entries = await _usersApi.FindUserLogsAsync(user, findOptions);
             Assert.AreEqual(5, entries.Logs.Count);
             Assert.AreEqual("User Updated", entries.Logs[0].Description);
             Assert.AreEqual("User Updated", entries.Logs[1].Description);
@@ -171,14 +171,14 @@ namespace InfluxDB.Client.Test
 
             findOptions.Offset += 5;
 
-            entries = await _usersApi.FindUserLogs(user, findOptions);
+            entries = await _usersApi.FindUserLogsAsync(user, findOptions);
             Assert.AreEqual(0, entries.Logs.Count);
 
             //
             // Order
             //
             findOptions = new FindOptions {Descending = false};
-            entries = await _usersApi.FindUserLogs(user, findOptions);
+            entries = await _usersApi.FindUserLogsAsync(user, findOptions);
             Assert.AreEqual(20, entries.Logs.Count);
 
             Assert.AreEqual("User Updated", entries.Logs[19].Description);
@@ -188,11 +188,11 @@ namespace InfluxDB.Client.Test
         [Test]
         public async Task FindUsers()
         {
-            var size = (await _usersApi.FindUsers()).Count;
+            var size = (await _usersApi.FindUsersAsync()).Count;
 
-            await _usersApi.CreateUser(GenerateName("John Ryzen"));
+            await _usersApi.CreateUserAsync(GenerateName("John Ryzen"));
 
-            var users = await _usersApi.FindUsers();
+            var users = await _usersApi.FindUsersAsync();
 
             Assert.AreEqual(users.Count, size + 1);
         }
@@ -200,7 +200,7 @@ namespace InfluxDB.Client.Test
         [Test]
         public async Task MeAuthenticated()
         {
-            var me = await _usersApi.Me();
+            var me = await _usersApi.MeAsync();
 
             Assert.IsNotNull(me);
             Assert.AreEqual(me.Name, "my-user");
@@ -211,7 +211,7 @@ namespace InfluxDB.Client.Test
         {
             Client.Dispose();
 
-            var ioe = Assert.ThrowsAsync<HttpException>(async () => await _usersApi.Me());
+            var ioe = Assert.ThrowsAsync<HttpException>(async () => await _usersApi.MeAsync());
 
             Assert.IsNotNull(ioe);
             Assert.AreEqual("unauthorized access", ioe.Message);
@@ -221,7 +221,7 @@ namespace InfluxDB.Client.Test
         [Property("basic_auth", "true")]
         public async Task UpdateMePassword()
         {
-            await _usersApi.MeUpdatePassword("my-password", "my-password");
+            await _usersApi.MeUpdatePasswordAsync("my-password", "my-password");
         }
 
         [Test]
@@ -230,7 +230,7 @@ namespace InfluxDB.Client.Test
             Client.Dispose();
 
             var ioe = Assert.ThrowsAsync<AggregateException>(async () =>
-                await _usersApi.MeUpdatePassword("my-password-wrong", "my-password"));
+                await _usersApi.MeUpdatePasswordAsync("my-password-wrong", "my-password"));
 
             Assert.IsNotNull(ioe);
             Assert.AreEqual("unauthorized access", ioe.InnerException.Message);
@@ -241,27 +241,27 @@ namespace InfluxDB.Client.Test
         [Property("basic_auth", "true")]
         public async Task UpdatePassword()
         {
-            var user = await _usersApi.Me();
+            var user = await _usersApi.MeAsync();
             Assert.IsNotNull(user);
 
-            await _usersApi.UpdateUserPassword(user, "my-password", "my-password");
+            await _usersApi.UpdateUserPasswordAsync(user, "my-password", "my-password");
         }
 
         [Test]
         [Property("basic_auth", "true")]
         public async Task UpdatePasswordById()
         {
-            var user = await _usersApi.Me();
+            var user = await _usersApi.MeAsync();
             Assert.IsNotNull(user);
 
-            await _usersApi.UpdateUserPassword(user.Id, "my-password", "my-password");
+            await _usersApi.UpdateUserPasswordAsync(user.Id, "my-password", "my-password");
         }
 
         [Test]
         public void UpdatePasswordNotFound()
         {
             var ioe = Assert.ThrowsAsync<AggregateException>(async () =>
-                await _usersApi.UpdateUserPassword("020f755c3c082000", "", "new-password"));
+                await _usersApi.UpdateUserPasswordAsync("020f755c3c082000", "", "new-password"));
 
             Assert.IsNotNull(ioe);
             Assert.AreEqual("user not found", ioe.InnerException.Message);
@@ -271,10 +271,10 @@ namespace InfluxDB.Client.Test
         [Test]
         public async Task UpdateUser()
         {
-            var createdUser = await _usersApi.CreateUser(GenerateName("John Ryzen"));
+            var createdUser = await _usersApi.CreateUserAsync(GenerateName("John Ryzen"));
             createdUser.Name = "Tom Push";
 
-            var updatedUser = await _usersApi.UpdateUser(createdUser);
+            var updatedUser = await _usersApi.UpdateUserAsync(createdUser);
 
             Assert.IsNotNull(updatedUser);
             Assert.AreEqual(updatedUser.Id, createdUser.Id);
@@ -284,11 +284,11 @@ namespace InfluxDB.Client.Test
         [Test]
         public async Task CloneUser()
         {
-            var source = await _usersApi.CreateUser(GenerateName("John Ryzen"));
+            var source = await _usersApi.CreateUserAsync(GenerateName("John Ryzen"));
 
             var name = GenerateName("cloned");
 
-            var cloned = await _usersApi.CloneUser(name, source);
+            var cloned = await _usersApi.CloneUserAsync(name, source);
 
             Assert.AreEqual(name, cloned.Name);
         }
@@ -297,7 +297,7 @@ namespace InfluxDB.Client.Test
         public void CloneUserNotFound()
         {
             var ioe = Assert.ThrowsAsync<AggregateException>(async () =>
-                await _usersApi.CloneUser(GenerateName("bucket"), "020f755c3c082000"));
+                await _usersApi.CloneUserAsync(GenerateName("bucket"), "020f755c3c082000"));
 
             Assert.AreEqual("user not found", ioe.InnerException.Message);
             Assert.AreEqual(typeof(HttpException), ioe.InnerException.GetType());

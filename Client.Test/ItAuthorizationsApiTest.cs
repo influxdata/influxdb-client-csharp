@@ -18,7 +18,7 @@ namespace InfluxDB.Client.Test
         public new async Task SetUp()
         {
             _authorizationsApi = Client.GetAuthorizationsApi();
-            _user = await Client.GetUsersApi().Me();
+            _user = await Client.GetUsersApi().MeAsync();
             _organization = await FindMyOrg();
         }
 
@@ -38,7 +38,7 @@ namespace InfluxDB.Client.Test
 
             var permissions = new List<Permission> {readUsers, writeOrganizations};
 
-            var authorization = await _authorizationsApi.CreateAuthorization(_organization, permissions);
+            var authorization = await _authorizationsApi.CreateAuthorizationAsync(_organization, permissions);
 
             Assert.IsNotNull(authorization);
             Assert.IsNotEmpty(authorization.Id);
@@ -77,7 +77,7 @@ namespace InfluxDB.Client.Test
                 Description = "My description!"
             };
 
-            var created = await _authorizationsApi.CreateAuthorization(authorization);
+            var created = await _authorizationsApi.CreateAuthorizationAsync(authorization);
 
             Assert.IsNotNull(created);
             Assert.AreEqual("My description!", created.Description);
@@ -92,17 +92,17 @@ namespace InfluxDB.Client.Test
 
             var permissions = new List<Permission> {readUsers};
 
-            var authorization = await _authorizationsApi.CreateAuthorization(_organization, permissions);
+            var authorization = await _authorizationsApi.CreateAuthorizationAsync(_organization, permissions);
 
             Assert.AreEqual(authorization.Status, AuthorizationUpdateRequest.StatusEnum.Active);
 
             authorization.Status = AuthorizationUpdateRequest.StatusEnum.Inactive;
-            authorization = await _authorizationsApi.UpdateAuthorization(authorization);
+            authorization = await _authorizationsApi.UpdateAuthorizationAsync(authorization);
 
             Assert.AreEqual(authorization.Status, AuthorizationUpdateRequest.StatusEnum.Inactive);
 
             authorization.Status = AuthorizationUpdateRequest.StatusEnum.Active;
-            authorization = await _authorizationsApi.UpdateAuthorization(authorization);
+            authorization = await _authorizationsApi.UpdateAuthorizationAsync(authorization);
 
             Assert.AreEqual(authorization.Status, AuthorizationUpdateRequest.StatusEnum.Active);
         }
@@ -110,11 +110,11 @@ namespace InfluxDB.Client.Test
         [Test]
         public async Task FindAuthorizations()
         {
-            var size = (await _authorizationsApi.FindAuthorizations()).Count;
+            var size = (await _authorizationsApi.FindAuthorizationsAsync()).Count;
 
-            await _authorizationsApi.CreateAuthorization(_organization, NewPermissions());
+            await _authorizationsApi.CreateAuthorizationAsync(_organization, NewPermissions());
 
-            var authorizations = await _authorizationsApi.FindAuthorizations();
+            var authorizations = await _authorizationsApi.FindAuthorizationsAsync();
 
             Assert.AreEqual(size + 1, authorizations.Count);
         }
@@ -122,9 +122,9 @@ namespace InfluxDB.Client.Test
         [Test]
         public async Task FindAuthorizationsById()
         {
-            var authorization = await _authorizationsApi.CreateAuthorization(_organization, NewPermissions());
+            var authorization = await _authorizationsApi.CreateAuthorizationAsync(_organization, NewPermissions());
 
-            var foundAuthorization = await _authorizationsApi.FindAuthorizationById(authorization.Id);
+            var foundAuthorization = await _authorizationsApi.FindAuthorizationByIdAsync(authorization.Id);
 
             Assert.IsNotNull(foundAuthorization);
             Assert.AreEqual(authorization.Id, foundAuthorization.Id);
@@ -138,7 +138,7 @@ namespace InfluxDB.Client.Test
         public void FindAuthorizationsByIdNull()
         {
             var ioe = Assert.ThrowsAsync<HttpException>(async () =>
-                await _authorizationsApi.FindAuthorizationById("020f755c3c082000"));
+                await _authorizationsApi.FindAuthorizationByIdAsync("020f755c3c082000"));
 
             Assert.AreEqual("authorization not found", ioe.Message);
         }
@@ -146,17 +146,17 @@ namespace InfluxDB.Client.Test
         [Test]
         public async Task DeleteAuthorization()
         {
-            var createdAuthorization = await _authorizationsApi.CreateAuthorization(_organization, NewPermissions());
+            var createdAuthorization = await _authorizationsApi.CreateAuthorizationAsync(_organization, NewPermissions());
             Assert.IsNotNull(createdAuthorization);
 
-            var foundAuthorization = await _authorizationsApi.FindAuthorizationById(createdAuthorization.Id);
+            var foundAuthorization = await _authorizationsApi.FindAuthorizationByIdAsync(createdAuthorization.Id);
             Assert.IsNotNull(foundAuthorization);
 
             // delete authorization
-            await _authorizationsApi.DeleteAuthorization(createdAuthorization);
+            await _authorizationsApi.DeleteAuthorizationAsync(createdAuthorization);
 
             var ioe = Assert.ThrowsAsync<HttpException>(async () =>
-                await _authorizationsApi.FindAuthorizationById(createdAuthorization.Id));
+                await _authorizationsApi.FindAuthorizationByIdAsync(createdAuthorization.Id));
 
             Assert.AreEqual("authorization not found", ioe.Message);
         }
@@ -164,31 +164,31 @@ namespace InfluxDB.Client.Test
         [Test]
         public async Task FindAuthorizationsByUser()
         {
-            var size = (await _authorizationsApi.FindAuthorizationsByUser(_user)).Count;
+            var size = (await _authorizationsApi.FindAuthorizationsByUserAsync(_user)).Count;
 
-            await _authorizationsApi.CreateAuthorization(_organization, NewPermissions());
+            await _authorizationsApi.CreateAuthorizationAsync(_organization, NewPermissions());
 
-            var authorizations = await _authorizationsApi.FindAuthorizationsByUser(_user);
+            var authorizations = await _authorizationsApi.FindAuthorizationsByUserAsync(_user);
             Assert.AreEqual(size + 1, authorizations.Count);
         }
 
         [Test]
         public async Task FindAuthorizationsByUserName()
         {
-            var size = (await _authorizationsApi.FindAuthorizationsByUser(_user)).Count;
+            var size = (await _authorizationsApi.FindAuthorizationsByUserAsync(_user)).Count;
 
-            await _authorizationsApi.CreateAuthorization(_organization, NewPermissions());
+            await _authorizationsApi.CreateAuthorizationAsync(_organization, NewPermissions());
 
-            var authorizations = await _authorizationsApi.FindAuthorizationsByUserName(_user.Name);
+            var authorizations = await _authorizationsApi.FindAuthorizationsByUserNameAsync(_user.Name);
             Assert.AreEqual(size + 1, authorizations.Count);
         }
 
         [Test]
         public async Task CloneAuthorization()
         {
-            var source = await _authorizationsApi.CreateAuthorization(_organization, NewPermissions());
+            var source = await _authorizationsApi.CreateAuthorizationAsync(_organization, NewPermissions());
 
-            var cloned = await _authorizationsApi.CloneAuthorization(source);
+            var cloned = await _authorizationsApi.CloneAuthorizationAsync(source);
 
             Assert.IsNotEmpty(cloned.Token);
             Assert.AreNotEqual(cloned.Token, source.Token);
@@ -208,7 +208,7 @@ namespace InfluxDB.Client.Test
         public void CloneAuthorizationNotFound()
         {
             var ioe = Assert.ThrowsAsync<AggregateException>(async () =>
-                await _authorizationsApi.CloneAuthorization("020f755c3c082000"));
+                await _authorizationsApi.CloneAuthorizationAsync("020f755c3c082000"));
 
             Assert.AreEqual("authorization not found", ioe.InnerException.Message);
             Assert.AreEqual(typeof(HttpException), ioe.InnerException.GetType());

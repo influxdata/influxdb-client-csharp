@@ -25,7 +25,7 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="source">source to create</param>
         /// <returns>created Source</returns>
-        public async Task<Source> CreateSource(Source source)
+        public async Task<Source> CreateSourceAsync(Source source)
         {
             Arguments.CheckNotNull(source, nameof(source));
 
@@ -37,7 +37,7 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="source">source update to apply</param>
         /// <returns>updated source</returns>
-        public async Task<Source> UpdateSource(Source source)
+        public async Task<Source> UpdateSourceAsync(Source source)
         {
             Arguments.CheckNotNull(source, nameof(source));
 
@@ -49,7 +49,7 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="sourceId">ID of source to delete</param>
         /// <returns>delete has been accepted</returns>
-        public async Task DeleteSource(string sourceId)
+        public async Task DeleteSourceAsync(string sourceId)
         {
             Arguments.CheckNotNull(sourceId, nameof(sourceId));
 
@@ -61,11 +61,11 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="source">source to delete</param>
         /// <returns>delete has been accepted</returns>
-        public async Task DeleteSource(Source source)
+        public async Task DeleteSourceAsync(Source source)
         {
             Arguments.CheckNotNull(source, nameof(source));
 
-            await DeleteSource(source.Id);
+            await DeleteSourceAsync(source.Id);
         }
 
         /// <summary>
@@ -74,12 +74,12 @@ namespace InfluxDB.Client
         /// <param name="clonedName">name of cloned source</param>
         /// <param name="sourceId">ID of source to clone</param>
         /// <returns>cloned source</returns>
-        public async Task<Source> CloneSource(string clonedName, string sourceId)
+        public async Task<Source> CloneSourceAsync(string clonedName, string sourceId)
         {
             Arguments.CheckNonEmptyString(clonedName, nameof(clonedName));
             Arguments.CheckNonEmptyString(sourceId, nameof(sourceId));
 
-            return await FindSourceById(sourceId).ContinueWith(t => CloneSource(clonedName, t.Result)).Unwrap();
+            return await FindSourceByIdAsync(sourceId).ContinueWith(t => CloneSourceAsync(clonedName, t.Result)).Unwrap();
         }
 
         /// <summary>
@@ -88,7 +88,7 @@ namespace InfluxDB.Client
         /// <param name="clonedName">name of cloned source</param>
         /// <param name="source">source to clone</param>
         /// <returns>cloned source</returns>
-        public async Task<Source> CloneSource(string clonedName, Source source)
+        public async Task<Source> CloneSourceAsync(string clonedName, Source source)
         {
             Arguments.CheckNonEmptyString(clonedName, nameof(clonedName));
             Arguments.CheckNotNull(source, nameof(source));
@@ -110,7 +110,7 @@ namespace InfluxDB.Client
                 DefaultRP = source.DefaultRP
             };
 
-            return await CreateSource(cloned);
+            return await CreateSourceAsync(cloned);
         }
 
         /// <summary>
@@ -118,7 +118,7 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="sourceId">ID of source to get</param>
         /// <returns>source details</returns>
-        public async Task<Source> FindSourceById(string sourceId)
+        public async Task<Source> FindSourceByIdAsync(string sourceId)
         {
             Arguments.CheckNonEmptyString(sourceId, nameof(sourceId));
 
@@ -129,7 +129,7 @@ namespace InfluxDB.Client
         /// Get all sources.
         /// </summary>
         /// <returns>A list of sources</returns>
-        public async Task<List<Source>> FindSources()
+        public async Task<List<Source>> FindSourcesAsync()
         {
             return await _service.GetSourcesAsync().ContinueWith(t => t.Result._Sources);
         }
@@ -139,11 +139,11 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="source">filter buckets to a specific source</param>
         /// <returns>The buckets for source. If source does not exist than return null.</returns>
-        public async Task<List<Bucket>> FindBucketsBySource(Source source)
+        public async Task<List<Bucket>> FindBucketsBySourceAsync(Source source)
         {
             Arguments.CheckNotNull(source, nameof(source));
 
-            return await FindBucketsBySourceId(source.Id);
+            return await FindBucketsBySourceIdAsync(source.Id);
         }
 
         /// <summary>
@@ -151,7 +151,7 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="sourceId">filter buckets to a specific source ID</param>
         /// <returns>The buckets for source. If source does not exist than return null.</returns>
-        public async Task<List<Bucket>> FindBucketsBySourceId(string sourceId)
+        public async Task<List<Bucket>> FindBucketsBySourceIdAsync(string sourceId)
         {
             Arguments.CheckNonEmptyString(sourceId, nameof(sourceId));
 
@@ -163,11 +163,11 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="source">source to check health</param>
         /// <returns>health of source</returns>
-        public async Task<HealthCheck> Health(Source source)
+        public async Task<HealthCheck> HealthAsync(Source source)
         {
             Arguments.CheckNotNull(source, nameof(source));
 
-            return await Health(source.Id);
+            return await HealthAsync(source.Id);
 
         }
 
@@ -176,11 +176,11 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="sourceId">source to check health</param>
         /// <returns>health of source</returns>
-        public async Task<HealthCheck> Health(string sourceId)
+        public async Task<HealthCheck> HealthAsync(string sourceId)
         {
             Arguments.CheckNonEmptyString(sourceId, nameof(sourceId));
 
-            return await InfluxDBClient.GetHealth(_service.GetSourcesIDHealthAsync(sourceId));
+            return await InfluxDBClient.GetHealthAsync(_service.GetSourcesIDHealthAsync(sourceId));
         }
     }
 }

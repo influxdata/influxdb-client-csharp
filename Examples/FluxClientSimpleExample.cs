@@ -18,7 +18,7 @@ namespace Examples
                                + " |> range(start: -1d)"
                                + " |> sample(n: 5, pos: 1)";
 
-            var tables = await client.Query(fluxQuery);
+            var tables = await client.QueryAsync(fluxQuery);
             
             if (tables != null)
             {

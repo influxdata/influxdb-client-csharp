@@ -13,7 +13,7 @@ namespace Client.Legacy.Test
             MockServer.Given(Request.Create().WithPath("/ping").UsingGet())
                 .RespondWith(Response.Create().WithStatusCode(204));
 
-            Assert.IsTrue(await FluxClient.Ping());
+            Assert.IsTrue(await FluxClient.PingAsync());
         }
 
         [Test]
@@ -22,7 +22,7 @@ namespace Client.Legacy.Test
             MockServer.Given(Request.Create().WithPath("/ping").UsingGet())
                 .RespondWith(CreateErrorResponse(""));
 
-            Assert.IsFalse(await FluxClient.Ping());
+            Assert.IsFalse(await FluxClient.PingAsync());
         }
 
         [Test]
@@ -30,7 +30,7 @@ namespace Client.Legacy.Test
         {
             MockServer.Stop();
 
-            Assert.IsFalse(await FluxClient.Ping());
+            Assert.IsFalse(await FluxClient.PingAsync());
         }
     }
 }

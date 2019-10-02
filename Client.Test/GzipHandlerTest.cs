@@ -27,7 +27,7 @@ namespace InfluxDB.Client.Test
                 .Given(Request.Create().UsingGet())
                 .RespondWith(CreateResponse("{\"name\":\"Tom\"}", "application/json"));
 
-            var user = await _client.GetUsersApi().Me();
+            var user = await _client.GetUsersApi().MeAsync();
             Assert.AreEqual("Tom", user.Name);
 
             var requestEntry = MockServer.LogEntries.Last();
@@ -45,7 +45,7 @@ namespace InfluxDB.Client.Test
                 .Given(Request.Create().UsingPost())
                 .RespondWith(CreateResponse(""));
 
-            var response = await _client.GetQueryApi().Query("from", "my-org");
+            var response = await _client.GetQueryApi().QueryAsync("from", "my-org");
             Assert.AreEqual(0, response.Count);
 
             var requestEntry = MockServer.LogEntries.Last();
@@ -86,7 +86,7 @@ namespace InfluxDB.Client.Test
                 .Given(Request.Create().UsingGet())
                 .RespondWith(CreateResponse("{\"name\":\"Tom\"}", "application/json"));
 
-            var user = await _client.GetUsersApi().Me();
+            var user = await _client.GetUsersApi().MeAsync();
             Assert.AreEqual("Tom", user.Name);
 
             var requestEntry = MockServer.LogEntries.Last();
@@ -106,7 +106,7 @@ namespace InfluxDB.Client.Test
                 .Given(Request.Create().UsingPost())
                 .RespondWith(CreateResponse("", "text/csv"));
 
-            var response = await _client.GetQueryApi().Query("from", "my-org");
+            var response = await _client.GetQueryApi().QueryAsync("from", "my-org");
             Assert.AreEqual(0, response.Count);
 
             var requestEntry = MockServer.LogEntries.Last();

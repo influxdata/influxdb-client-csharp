@@ -27,7 +27,7 @@ namespace InfluxDB.Client.Test
 
             _usersApi = Client.GetUsersApi();
 
-            (await _tasksApi.FindTasks()).ForEach(async task => await _tasksApi.DeleteTask(task));
+            (await _tasksApi.FindTasksAsync()).ForEach(async task => await _tasksApi.DeleteTaskAsync(task));
         }
 
         private const string TaskFlux = "from(bucket: \"my-bucket\")\n\t|> range(start: 0)\n\t|> last()";
@@ -41,14 +41,14 @@ namespace InfluxDB.Client.Test
         {
             var resourceTask = new PermissionResource(PermissionResource.TypeEnum.Tasks, null, null, organization.Id);
             var resourceBucket = new PermissionResource(PermissionResource.TypeEnum.Buckets,
-                (await Client.GetBucketsApi().FindBucketByName("my-bucket")).Id, null, organization.Id);
+                (await Client.GetBucketsApi().FindBucketByNameAsync("my-bucket")).Id, null, organization.Id);
             var resourceOrg = new PermissionResource(PermissionResource.TypeEnum.Orgs);
             var resourceUser = new PermissionResource(PermissionResource.TypeEnum.Users);
             var resourceAuthorization = new PermissionResource(PermissionResource.TypeEnum.Authorizations);
 
 
             var authorization = await Client.GetAuthorizationsApi()
-                .CreateAuthorization(organization, new List<Permission>
+                .CreateAuthorizationAsync(organization, new List<Permission>
                 {
                     new Permission(Permission.ActionEnum.Read, resourceTask),
                     new Permission(Permission.ActionEnum.Write, resourceTask),
@@ -66,14 +66,14 @@ namespace InfluxDB.Client.Test
         [Test]
         public async Task CancelRunNotExist()
         {
-            var task = await _tasksApi.CreateTaskEvery(GenerateName("it task"), TaskFlux, "1s", _organization);
+            var task = await _tasksApi.CreateTaskEveryAsync(GenerateName("it task"), TaskFlux, "1s", _organization);
 
             Thread.Sleep(5_000);
 
-            var runs = await _tasksApi.GetRuns(task, null, null, 1);
+            var runs = await _tasksApi.GetRunsAsync(task, null, null, 1);
             Assert.IsNotEmpty(runs);
 
-            var message = Assert.ThrowsAsync<HttpException>(async () => await _tasksApi.CancelRun(runs[0]))
+            var message = Assert.ThrowsAsync<HttpException>(async () => await _tasksApi.CancelRunAsync(runs[0]))
                 .Message;
 
             Assert.AreEqual("failed to cancel run: run not found", message);
@@ -83,7 +83,7 @@ namespace InfluxDB.Client.Test
         public void CancelRunTaskNotExist()
         {
             var message = Assert.ThrowsAsync<HttpException>(async () =>
-                await _tasksApi.CancelRun("020f755c3c082000", "020f755c3c082000")).Message.ToString();
+                await _tasksApi.CancelRunAsync("020f755c3c082000", "020f755c3c082000")).Message.ToString();
 
             Assert.AreEqual("failed to cancel run: task not found", message);
         }
@@ -91,15 +91,15 @@ namespace InfluxDB.Client.Test
         [Test]
         public async Task CloneTask()
         {
-            var source = await _tasksApi.CreateTaskEvery(GenerateName("it task"), TaskFlux, "1s", _organization);
+            var source = await _tasksApi.CreateTaskEveryAsync(GenerateName("it task"), TaskFlux, "1s", _organization);
 
             var properties = new Dictionary<string, string> {{"color", "green"}, {"location", "west"}};
 
             var label = await Client.GetLabelsApi()
-                .CreateLabel(GenerateName("Cool Resource"), properties, _organization.Id);
-            await _tasksApi.AddLabel(label, source);
+                .CreateLabelAsync(GenerateName("Cool Resource"), properties, _organization.Id);
+            await _tasksApi.AddLabelAsync(label, source);
 
-            var cloned = await _tasksApi.CloneTask(source);
+            var cloned = await _tasksApi.CloneTaskAsync(source);
 
             Assert.AreEqual(source.Name, cloned.Name);
             Assert.AreEqual(_organization.Id, cloned.OrgID);
@@ -108,7 +108,7 @@ namespace InfluxDB.Client.Test
             Assert.IsNull(cloned.Cron);
             Assert.IsNull(cloned.Offset);
 
-            var labels = await _tasksApi.GetLabels(cloned);
+            var labels = await _tasksApi.GetLabelsAsync(cloned);
             Assert.AreEqual(1, labels.Count);
             Assert.AreEqual(label.Id, labels[0].Id);
         }
@@ -116,7 +116,7 @@ namespace InfluxDB.Client.Test
         [Test]
         public void CloneTaskNotFound()
         {
-            var ioe = Assert.ThrowsAsync<AggregateException>(async () => await _tasksApi.CloneTask("020f755c3c082000"));
+            var ioe = Assert.ThrowsAsync<AggregateException>(async () => await _tasksApi.CloneTaskAsync("020f755c3c082000"));
 
             Assert.NotNull(ioe.InnerException, "ioe.InnerException != null");
             Assert.AreEqual("failed to find task: task not found", ioe.InnerException.Message);
@@ -132,7 +132,7 @@ namespace InfluxDB.Client.Test
             var task = new TaskType(orgID:_organization.Id, org:_organization.Name,
                 name: taskName, description: "testing task", status: TaskStatusType.Active, flux: flux);
 
-            task = await _tasksApi.CreateTask(task);
+            task = await _tasksApi.CreateTaskAsync(task);
 
             Assert.IsNotNull(task);
             Assert.IsNotEmpty(task.Id);
@@ -151,7 +151,7 @@ namespace InfluxDB.Client.Test
             var taskName = GenerateName("it task");
 
             var task =
-                await _tasksApi.CreateTaskCron(taskName, TaskFlux, "0 2 * * *", _organization);
+                await _tasksApi.CreateTaskCronAsync(taskName, TaskFlux, "0 2 * * *", _organization);
 
             Assert.IsNotNull(task);
             Assert.IsNotEmpty(task.Id);
@@ -169,7 +169,7 @@ namespace InfluxDB.Client.Test
             var taskName = GenerateName("it task");
 
             var task =
-                await _tasksApi.CreateTaskEvery(taskName, TaskFlux, "1h", _organization);
+                await _tasksApi.CreateTaskEveryAsync(taskName, TaskFlux, "1h", _organization);
 
             Assert.IsNotNull(task);
             Assert.IsNotEmpty(task.Id);
@@ -193,7 +193,7 @@ namespace InfluxDB.Client.Test
             var task = new TaskType(orgID:_organization.Id, org:_organization.Name,
                 name: taskName, status: TaskStatusType.Active, flux: flux);
 
-            task = await _tasksApi.CreateTask(task);
+            task = await _tasksApi.CreateTaskAsync(task);
 
             Assert.IsNotNull(task);
             Assert.AreEqual("30m", task.Offset);
@@ -202,14 +202,14 @@ namespace InfluxDB.Client.Test
         [Test]
         public async Task DeleteTask()
         {
-            var task = await _tasksApi.CreateTaskCron(GenerateName("it task"), TaskFlux, "0 2 * * *", _organization);
+            var task = await _tasksApi.CreateTaskCronAsync(GenerateName("it task"), TaskFlux, "0 2 * * *", _organization);
 
-            var foundTask = await _tasksApi.FindTaskById(task.Id);
+            var foundTask = await _tasksApi.FindTaskByIdAsync(task.Id);
             Assert.IsNotNull(foundTask);
 
-            await _tasksApi.DeleteTask(task);
+            await _tasksApi.DeleteTaskAsync(task);
 
-            var ioe = Assert.ThrowsAsync<HttpException>(async () => await _tasksApi.FindTaskById(task.Id));
+            var ioe = Assert.ThrowsAsync<HttpException>(async () => await _tasksApi.FindTaskByIdAsync(task.Id));
 
             Assert.AreEqual("failed to find task: task not found", ioe.Message);
         }
@@ -219,9 +219,9 @@ namespace InfluxDB.Client.Test
         {
             var taskName = GenerateName("it task");
 
-            var task = await _tasksApi.CreateTaskCron(taskName, TaskFlux, "0 2 * * *", _organization);
+            var task = await _tasksApi.CreateTaskCronAsync(taskName, TaskFlux, "0 2 * * *", _organization);
 
-            var taskById = await _tasksApi.FindTaskById(task.Id);
+            var taskById = await _tasksApi.FindTaskByIdAsync(task.Id);
 
             Assert.IsNotNull(taskById);
             Assert.IsNotEmpty(task.Id);
@@ -238,7 +238,7 @@ namespace InfluxDB.Client.Test
         [Test]
         public void FindTaskByIdNull()
         {
-            var ioe = Assert.ThrowsAsync<HttpException>(async () => await _tasksApi.FindTaskById("020f755c3d082000"));
+            var ioe = Assert.ThrowsAsync<HttpException>(async () => await _tasksApi.FindTaskByIdAsync("020f755c3d082000"));
 
             Assert.AreEqual("failed to find task: task not found", ioe.Message);
         }
@@ -246,12 +246,12 @@ namespace InfluxDB.Client.Test
         [Test]
         public async Task FindTasks()
         {
-            var count = (await _tasksApi.FindTasks()).Count;
+            var count = (await _tasksApi.FindTasksAsync()).Count;
 
-            var task = await _tasksApi.CreateTaskEvery(GenerateName("it task"), TaskFlux, "2h", _organization.Id);
+            var task = await _tasksApi.CreateTaskEveryAsync(GenerateName("it task"), TaskFlux, "2h", _organization.Id);
             Assert.IsNotNull(task);
 
-            var tasks = await _tasksApi.FindTasks();
+            var tasks = await _tasksApi.FindTasksAsync();
 
             Assert.AreEqual(count + 1, tasks.Count);
         }
@@ -260,10 +260,10 @@ namespace InfluxDB.Client.Test
         [Ignore("https://github.com/influxdata/influxdb/issues/13577")]
         public async Task FindTasksAfterSpecifiedId()
         {
-            var task1 = await _tasksApi.CreateTaskCron(GenerateName("it task"), TaskFlux, "0 2 * * *", _organization);
-            var task2 = await _tasksApi.CreateTaskCron(GenerateName("it task"), TaskFlux, "0 2 * * *", _organization);
+            var task1 = await _tasksApi.CreateTaskCronAsync(GenerateName("it task"), TaskFlux, "0 2 * * *", _organization);
+            var task2 = await _tasksApi.CreateTaskCronAsync(GenerateName("it task"), TaskFlux, "0 2 * * *", _organization);
 
-            var tasks = await _tasksApi.FindTasks(task1.Id);
+            var tasks = await _tasksApi.FindTasksAsync(task1.Id);
 
             Assert.AreEqual(1, tasks.Count);
             Assert.AreEqual(task2.Id, tasks[0].Id);
@@ -274,23 +274,23 @@ namespace InfluxDB.Client.Test
         //_token
         public async Task FindTasksByOrganization()
         {
-            var taskOrg = await Client.GetOrganizationsApi().CreateOrganization(GenerateName("Task user"));
+            var taskOrg = await Client.GetOrganizationsApi().CreateOrganizationAsync(GenerateName("Task user"));
             var authorization = await AddAuthorization(taskOrg);
 
             Client.Dispose();
             Client = InfluxDBClientFactory.Create(InfluxDbUrl, authorization.Token.ToCharArray());
             _tasksApi = Client.GetTasksApi();
 
-            var count = (await _tasksApi.FindTasksByOrganization(taskOrg)).Count;
+            var count = (await _tasksApi.FindTasksByOrganizationAsync(taskOrg)).Count;
             Assert.AreEqual(0, count);
 
-            await _tasksApi.CreateTaskCron(GenerateName("it task"), TaskFlux, "0 2 * * *", taskOrg);
+            await _tasksApi.CreateTaskCronAsync(GenerateName("it task"), TaskFlux, "0 2 * * *", taskOrg);
 
-            var tasks = await _tasksApi.FindTasksByOrganization(taskOrg);
+            var tasks = await _tasksApi.FindTasksByOrganizationAsync(taskOrg);
 
             Assert.AreEqual(1, tasks.Count);
 
-            (await _tasksApi.FindTasks()).ForEach(async task => await _tasksApi.DeleteTask(task));
+            (await _tasksApi.FindTasksAsync()).ForEach(async task => await _tasksApi.DeleteTaskAsync(task));
         }
 
         [Test]
@@ -298,14 +298,14 @@ namespace InfluxDB.Client.Test
         [Ignore("set user password -> https://github.com/influxdata/influxdb/issues/11590")]
         public async Task FindTasksByUser()
         {
-            var taskUser = await Client.GetUsersApi().CreateUser(GenerateName("Task user"));
+            var taskUser = await Client.GetUsersApi().CreateUserAsync(GenerateName("Task user"));
 
-            var count = (await _tasksApi.FindTasksByUser(taskUser)).Count;
+            var count = (await _tasksApi.FindTasksByUserAsync(taskUser)).Count;
             Assert.AreEqual(0, count);
 
-            await _tasksApi.CreateTaskCron(GenerateName("it task"), TaskFlux, "0 2 * * *", _organization);
+            await _tasksApi.CreateTaskCronAsync(GenerateName("it task"), TaskFlux, "0 2 * * *", _organization);
 
-            var tasks = await _tasksApi.FindTasksByUser(taskUser);
+            var tasks = await _tasksApi.FindTasksByUserAsync(taskUser);
 
             Assert.AreEqual(1, tasks.Count);
         }
@@ -313,11 +313,11 @@ namespace InfluxDB.Client.Test
         [Test]
         public async Task GetLogs()
         {
-            var task = await _tasksApi.CreateTaskEvery(GenerateName("it task"), TaskFlux, "1s", _organization.Id);
+            var task = await _tasksApi.CreateTaskEveryAsync(GenerateName("it task"), TaskFlux, "1s", _organization.Id);
 
             Thread.Sleep(5_000);
 
-            var logs = await _tasksApi.GetLogs(task);
+            var logs = await _tasksApi.GetLogsAsync(task);
             Assert.IsNotEmpty(logs);
             Assert.IsTrue(logs.First().Message.StartsWith("Started task from script:"));
             Assert.IsTrue(logs.Last().Message.EndsWith("Completed successfully"));
@@ -326,7 +326,7 @@ namespace InfluxDB.Client.Test
         [Test]
         public void GetLogsNotExist()
         {
-            var ioe = Assert.ThrowsAsync<AggregateException>(async () => await _tasksApi.GetLogs("020f755c3c082000"));
+            var ioe = Assert.ThrowsAsync<AggregateException>(async () => await _tasksApi.GetLogsAsync("020f755c3c082000"));
 
             Assert.NotNull(ioe.InnerException, "ioe.InnerException != null");
             Assert.AreEqual("failed to find task logs: task not found", ioe.InnerException.Message);
@@ -335,14 +335,14 @@ namespace InfluxDB.Client.Test
         [Test]
         public async Task GetRun()
         {
-            var task = await _tasksApi.CreateTaskEvery(GenerateName("it task"), TaskFlux, "1s", _organization);
+            var task = await _tasksApi.CreateTaskEveryAsync(GenerateName("it task"), TaskFlux, "1s", _organization);
             Thread.Sleep(5_000);
 
-            var runs = await _tasksApi.GetRuns(task, null, null, 1);
+            var runs = await _tasksApi.GetRunsAsync(task, null, null, 1);
             Assert.AreEqual(1, runs.Count);
 
             var firstRun = runs[0];
-            var runById = await _tasksApi.GetRun(task.Id, firstRun.Id);
+            var runById = await _tasksApi.GetRunAsync(task.Id, firstRun.Id);
 
             Assert.IsNotNull(runById);
             Assert.AreEqual(firstRun.Id, runById.Id);
@@ -351,13 +351,13 @@ namespace InfluxDB.Client.Test
         [Test]
         public async Task GetRunLogs()
         {
-            var task = await _tasksApi.CreateTaskEvery(GenerateName("it task"), TaskFlux, "1s", _organization);
+            var task = await _tasksApi.CreateTaskEveryAsync(GenerateName("it task"), TaskFlux, "1s", _organization);
 
             Thread.Sleep(4_000);
 
-            var runs = await _tasksApi.GetRuns(task);
+            var runs = await _tasksApi.GetRunsAsync(task);
 
-            var logs = await _tasksApi.GetRunLogs(runs[0]);
+            var logs = await _tasksApi.GetRunLogsAsync(runs[0]);
             Assert.IsNotNull(logs);
             Assert.IsTrue(logs.Last().Message.EndsWith("Completed successfully"));
         }
@@ -365,9 +365,9 @@ namespace InfluxDB.Client.Test
         [Test]
         public async Task GetRunLogsNotExist()
         {
-            var task = await _tasksApi.CreateTaskEvery(GenerateName("it task"), TaskFlux, "1s", _organization);
+            var task = await _tasksApi.CreateTaskEveryAsync(GenerateName("it task"), TaskFlux, "1s", _organization);
 
-            var ioe = Assert.ThrowsAsync<AggregateException>(async () => await _tasksApi.GetRunLogs(task.Id, "020f755c3c082000"));
+            var ioe = Assert.ThrowsAsync<AggregateException>(async () => await _tasksApi.GetRunLogsAsync(task.Id, "020f755c3c082000"));
 
             Assert.NotNull(ioe.InnerException, "ioe.InnerException != null");
             Assert.AreEqual("failed to find task logs: run not found", ioe.InnerException.Message);
@@ -378,35 +378,35 @@ namespace InfluxDB.Client.Test
         {
             var labelClient = Client.GetLabelsApi();
 
-            var task = await _tasksApi.CreateTaskEvery(GenerateName("it task"), TaskFlux, "1s", _organization);
+            var task = await _tasksApi.CreateTaskEveryAsync(GenerateName("it task"), TaskFlux, "1s", _organization);
 
             var properties = new Dictionary<string, string> {{"color", "green"}, {"location", "west"}};
 
-            var label = await labelClient.CreateLabel(GenerateName("Cool Resource"), properties, _organization.Id);
+            var label = await labelClient.CreateLabelAsync(GenerateName("Cool Resource"), properties, _organization.Id);
 
-            var labels = await _tasksApi.GetLabels(task);
+            var labels = await _tasksApi.GetLabelsAsync(task);
             Assert.AreEqual(0, labels.Count);
 
-            var addedLabel = await _tasksApi.AddLabel(label, task);
+            var addedLabel = await _tasksApi.AddLabelAsync(label, task);
             Assert.IsNotNull(addedLabel);
             Assert.AreEqual(label.Id, addedLabel.Id);
             Assert.AreEqual(label.Name, addedLabel.Name);
             Assert.AreEqual(label.Properties, addedLabel.Properties);
 
-            labels = await _tasksApi.GetLabels(task);
+            labels = await _tasksApi.GetLabelsAsync(task);
             Assert.AreEqual(1, labels.Count);
             Assert.AreEqual(label.Id, labels[0].Id);
             Assert.AreEqual(label.Name, labels[0].Name);
 
-            task = await _tasksApi.FindTaskById(task.Id);
+            task = await _tasksApi.FindTaskByIdAsync(task.Id);
             Assert.IsNotNull(task);
             Assert.AreEqual(1, task.Labels.Count);
             Assert.AreEqual(label.Id, task.Labels[0].Id);
             Assert.AreEqual(label.Name, task.Labels[0].Name);
 
-            await _tasksApi.DeleteLabel(label, task);
+            await _tasksApi.DeleteLabelAsync(label, task);
 
-            labels = await _tasksApi.GetLabels(task);
+            labels = await _tasksApi.GetLabelsAsync(task);
             Assert.AreEqual(0, labels.Count);
         }
 
@@ -414,27 +414,27 @@ namespace InfluxDB.Client.Test
         //_token
         public async Task Member()
         {
-            var task = await _tasksApi.CreateTaskCron(GenerateName("it task"), TaskFlux, "0 2 * * *", _organization);
+            var task = await _tasksApi.CreateTaskCronAsync(GenerateName("it task"), TaskFlux, "0 2 * * *", _organization);
 
-            var members = await _tasksApi.GetMembers(task);
+            var members = await _tasksApi.GetMembersAsync(task);
             Assert.AreEqual(0, members.Count);
 
-            var user = await _usersApi.CreateUser(GenerateName("Luke Health"));
+            var user = await _usersApi.CreateUserAsync(GenerateName("Luke Health"));
 
-            var resourceMember = await _tasksApi.AddMember(user, task);
+            var resourceMember = await _tasksApi.AddMemberAsync(user, task);
             Assert.IsNotNull(resourceMember);
             Assert.AreEqual(resourceMember.Id, user.Id);
             Assert.AreEqual(resourceMember.Name, user.Name);
             Assert.AreEqual(resourceMember.Role, ResourceMember.RoleEnum.Member);
 
-            members = await _tasksApi.GetMembers(task);
+            members = await _tasksApi.GetMembersAsync(task);
             Assert.AreEqual(1, members.Count);
             Assert.AreEqual(members[0].Id, user.Id);
             Assert.AreEqual(members[0].Name, user.Name);
             Assert.AreEqual(members[0].Role, ResourceMember.RoleEnum.Member);
-            await _tasksApi.DeleteMember(user, task);
+            await _tasksApi.DeleteMemberAsync(user, task);
 
-            members = await _tasksApi.GetMembers(task);
+            members = await _tasksApi.GetMembersAsync(task);
             Assert.AreEqual(0, members.Count);
         }
 
@@ -442,20 +442,20 @@ namespace InfluxDB.Client.Test
         //_token
         public async Task Owner()
         {
-            var task = await _tasksApi.CreateTaskCron(GenerateName("it task"), TaskFlux, "0 2 * * *", _organization.Id);
+            var task = await _tasksApi.CreateTaskCronAsync(GenerateName("it task"), TaskFlux, "0 2 * * *", _organization.Id);
 
-            var owners = await _tasksApi.GetOwners(task);
+            var owners = await _tasksApi.GetOwnersAsync(task);
             Assert.AreEqual(1, owners.Count);
 
-            var user = await _usersApi.CreateUser(GenerateName("Luke Health"));
+            var user = await _usersApi.CreateUserAsync(GenerateName("Luke Health"));
 
-            var resourceMember = await _tasksApi.AddOwner(user, task);
+            var resourceMember = await _tasksApi.AddOwnerAsync(user, task);
             Assert.IsNotNull(resourceMember);
             Assert.AreEqual(resourceMember.Id, user.Id);
             Assert.AreEqual(resourceMember.Name, user.Name);
             Assert.AreEqual(resourceMember.Role, ResourceOwner.RoleEnum.Owner);
 
-            owners = await _tasksApi.GetOwners(task);
+            owners = await _tasksApi.GetOwnersAsync(task);
             Assert.AreEqual(2, owners.Count);
 
             var newOwner = owners.First(o => o.Id.Equals(user.Id));
@@ -463,22 +463,22 @@ namespace InfluxDB.Client.Test
             Assert.AreEqual(newOwner.Name, user.Name);
             Assert.AreEqual(newOwner.Role, ResourceOwner.RoleEnum.Owner);
 
-            await _tasksApi.DeleteOwner(user, task);
+            await _tasksApi.DeleteOwnerAsync(user, task);
 
-            owners = await _tasksApi.GetOwners(task);
+            owners = await _tasksApi.GetOwnersAsync(task);
             Assert.AreEqual(1, owners.Count);
         }
 
         [Test]
         public async Task RetryRun()
         {
-            var task = await _tasksApi.CreateTaskEvery(GenerateName("it task"), TaskFlux, "1s", _organization);
+            var task = await _tasksApi.CreateTaskEveryAsync(GenerateName("it task"), TaskFlux, "1s", _organization);
             Thread.Sleep(5_000);
 
-            var runs = await _tasksApi.GetRuns(task);
+            var runs = await _tasksApi.GetRunsAsync(task);
             var run = runs[0];
 
-            var retriedRun = await _tasksApi.RetryRun(run);
+            var retriedRun = await _tasksApi.RetryRunAsync(run);
 
             Assert.IsNotNull(retriedRun);
             Assert.AreEqual(run.TaskID, retriedRun.TaskID);
@@ -489,10 +489,10 @@ namespace InfluxDB.Client.Test
         [Test]
         public async Task RetryRunNotExist()
         {
-            var task = await _tasksApi.CreateTaskEvery(GenerateName("it task"), TaskFlux, "1s", _organization);
+            var task = await _tasksApi.CreateTaskEveryAsync(GenerateName("it task"), TaskFlux, "1s", _organization);
 
             var ioe = Assert.ThrowsAsync<HttpException>(async () =>
-                await _tasksApi.RetryRun(task.Id, "020f755c3c082000"));
+                await _tasksApi.RetryRunAsync(task.Id, "020f755c3c082000"));
 
             Assert.AreEqual("failed to retry run: run not found", ioe.Message);
         }
@@ -500,10 +500,10 @@ namespace InfluxDB.Client.Test
         [Test]
         public async Task RunNotExist()
         {
-            var task = await _tasksApi.CreateTaskEvery(GenerateName("it task"), TaskFlux, "1s", _organization);
+            var task = await _tasksApi.CreateTaskEveryAsync(GenerateName("it task"), TaskFlux, "1s", _organization);
 
             var ioe = Assert.ThrowsAsync<HttpException>(async () =>
-                await _tasksApi.GetRun(task.Id, "020f755c3c082000"));
+                await _tasksApi.GetRunAsync(task.Id, "020f755c3c082000"));
 
             Assert.AreEqual("failed to find run: run not found", ioe.Message);
         }
@@ -511,11 +511,11 @@ namespace InfluxDB.Client.Test
         [Test]
         public async Task Runs()
         {
-            var task = await _tasksApi.CreateTaskEvery(GenerateName("it task"), TaskFlux, "1s", _organization.Id);
+            var task = await _tasksApi.CreateTaskEveryAsync(GenerateName("it task"), TaskFlux, "1s", _organization.Id);
 
             Thread.Sleep(5_000);
 
-            var runs = await _tasksApi.GetRuns(task);
+            var runs = await _tasksApi.GetRunsAsync(task);
             Assert.IsNotEmpty(runs);
 
             var run = runs.First(it => it.Status.Equals(Run.StatusEnum.Success));
@@ -527,7 +527,7 @@ namespace InfluxDB.Client.Test
             Assert.Greater(DateTime.Now, run.ScheduledFor);
             Assert.IsNull(run.RequestedAt);
 
-            task = await _tasksApi.FindTaskById(task.Id);
+            task = await _tasksApi.FindTaskByIdAsync(task.Id);
             Assert.IsNotNull(task.LatestCompleted);
         }
 
@@ -537,14 +537,14 @@ namespace InfluxDB.Client.Test
         {
             var now = DateTime.UtcNow;
 
-            var task = await _tasksApi.CreateTaskEvery(GenerateName("it task"), TaskFlux, "1s", _organization.Id);
+            var task = await _tasksApi.CreateTaskEveryAsync(GenerateName("it task"), TaskFlux, "1s", _organization.Id);
 
             Thread.Sleep(5_000);
 
-            var runs = await _tasksApi.GetRuns(task, null, now, null);
+            var runs = await _tasksApi.GetRunsAsync(task, null, now, null);
             Assert.IsEmpty(runs);
 
-            runs = await _tasksApi.GetRuns(task, now, null, null);
+            runs = await _tasksApi.GetRunsAsync(task, now, null, null);
             Assert.IsNotEmpty(runs);
         }
 
@@ -552,14 +552,14 @@ namespace InfluxDB.Client.Test
         [Ignore("https://github.com/influxdata/influxdb/issues/13577")]
         public async Task RunsLimit()
         {
-            var task = await _tasksApi.CreateTaskEvery(GenerateName("it task"), TaskFlux, "1s", _organization);
+            var task = await _tasksApi.CreateTaskEveryAsync(GenerateName("it task"), TaskFlux, "1s", _organization);
 
             Thread.Sleep(5_000);
 
-            var runs = await _tasksApi.GetRuns(task, null, null, 1);
+            var runs = await _tasksApi.GetRunsAsync(task, null, null, 1);
             Assert.AreEqual(1, runs.Count);
 
-            runs = await _tasksApi.GetRuns(task, null, null, null);
+            runs = await _tasksApi.GetRunsAsync(task, null, null, null);
             Assert.Greater(runs.Count, 1);
         }
 
@@ -567,7 +567,7 @@ namespace InfluxDB.Client.Test
         public void RunsNotExist()
         {
             var ioe = Assert.ThrowsAsync<AggregateException>(async () =>
-                await _tasksApi.GetRuns("020f755c3c082000", _organization.Id));
+                await _tasksApi.GetRunsAsync("020f755c3c082000", _organization.Id));
 
             Assert.NotNull(ioe.InnerException, "ioe.InnerException != null");
             Assert.AreEqual("failed to find runs: task not found", ioe.InnerException.Message);
@@ -579,7 +579,7 @@ namespace InfluxDB.Client.Test
             var taskName = GenerateName("it task");
 
             var cronTask =
-                await _tasksApi.CreateTaskCron(taskName, TaskFlux, "0 2 * * *", _organization);
+                await _tasksApi.CreateTaskCronAsync(taskName, TaskFlux, "0 2 * * *", _organization);
 
             var flux = $"option task = {{name: \"{taskName}\", every: 3m}}\n\n{TaskFlux}";
 
@@ -587,7 +587,7 @@ namespace InfluxDB.Client.Test
             cronTask.Cron = null;
             cronTask.Status = TaskStatusType.Inactive;
 
-            var updatedTask = await _tasksApi.UpdateTask(cronTask);
+            var updatedTask = await _tasksApi.UpdateTaskAsync(cronTask);
 
             Assert.IsNotNull(updatedTask);
             Assert.IsNotEmpty(updatedTask.Id);

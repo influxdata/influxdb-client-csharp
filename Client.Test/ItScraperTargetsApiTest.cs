@@ -15,7 +15,7 @@ namespace InfluxDB.Client.Test
         {
             _scraperTargetsApi = Client.GetScraperTargetsApi();
             _usersApi = Client.GetUsersApi();
-            _bucket = await Client.GetBucketsApi().FindBucketByName("my-bucket");
+            _bucket = await Client.GetBucketsApi().FindBucketByNameAsync("my-bucket");
             _organization = await FindMyOrg();
         }
 
@@ -29,18 +29,18 @@ namespace InfluxDB.Client.Test
         public async Task CloneScraper()
         {
             var source = await _scraperTargetsApi
-                .CreateScraperTarget(GenerateName("InfluxDB scraper"), "http://localhost:9999", _bucket.Id,
+                .CreateScraperTargetAsync(GenerateName("InfluxDB scraper"), "http://localhost:9999", _bucket.Id,
                     _organization.Id);
 
             var properties = new Dictionary<string, string> {{"color", "green"}, {"location", "west"}};
 
             var label = await Client.GetLabelsApi()
-                .CreateLabel(GenerateName("Cool Resource"), properties, _organization.Id);
-            await _scraperTargetsApi.AddLabel(label, source);
+                .CreateLabelAsync(GenerateName("Cool Resource"), properties, _organization.Id);
+            await _scraperTargetsApi.AddLabelAsync(label, source);
 
             var name = GenerateName("cloned");
 
-            var cloned = await _scraperTargetsApi.CloneScraperTarget(name, source);
+            var cloned = await _scraperTargetsApi.CloneScraperTargetAsync(name, source);
 
             Assert.AreEqual(name, cloned.Name);
             Assert.AreEqual(ScraperTargetRequest.TypeEnum.Prometheus, cloned.Type);
@@ -48,7 +48,7 @@ namespace InfluxDB.Client.Test
             Assert.AreEqual(source.OrgID, cloned.OrgID);
             Assert.AreEqual(source.BucketID, cloned.BucketID);
 
-            var labels = await _scraperTargetsApi.GetLabels(cloned);
+            var labels = await _scraperTargetsApi.GetLabelsAsync(cloned);
             Assert.AreEqual(1, labels.Count);
             Assert.AreEqual(label.Id, labels[0].Id);
         }
@@ -57,7 +57,7 @@ namespace InfluxDB.Client.Test
         public void CloneScraperNotFound()
         {
             var ioe = Assert.ThrowsAsync<AggregateException>(async () =>
-                await _scraperTargetsApi.CloneScraperTarget(GenerateName("bucket"), "020f755c3c082000"));
+                await _scraperTargetsApi.CloneScraperTargetAsync(GenerateName("bucket"), "020f755c3c082000"));
 
             Assert.AreEqual("scraper target is not found", ioe.InnerException.Message);
             Assert.AreEqual(typeof(HttpException), ioe.InnerException.GetType());
@@ -67,7 +67,7 @@ namespace InfluxDB.Client.Test
         public async Task CreateScraperTarget()
         {
             var scraper = await _scraperTargetsApi
-                .CreateScraperTarget(GenerateName("InfluxDB scraper"), "http://localhost:9999", _bucket.Id,
+                .CreateScraperTargetAsync(GenerateName("InfluxDB scraper"), "http://localhost:9999", _bucket.Id,
                     _organization.Id);
 
             Assert.IsNotNull(scraper);
@@ -87,18 +87,18 @@ namespace InfluxDB.Client.Test
         public async Task DeleteScraper()
         {
             var createdScraper = await _scraperTargetsApi
-                .CreateScraperTarget(GenerateName("InfluxDB scraper"), "http://localhost:9999", _bucket.Id,
+                .CreateScraperTargetAsync(GenerateName("InfluxDB scraper"), "http://localhost:9999", _bucket.Id,
                     _organization.Id);
             Assert.IsNotNull(createdScraper);
 
-            var foundScraper = await _scraperTargetsApi.FindScraperTargetById(createdScraper.Id);
+            var foundScraper = await _scraperTargetsApi.FindScraperTargetByIdAsync(createdScraper.Id);
             Assert.IsNotNull(foundScraper);
 
             // delete scraper
-            await _scraperTargetsApi.DeleteScraperTarget(createdScraper);
+            await _scraperTargetsApi.DeleteScraperTargetAsync(createdScraper);
 
             var ioe = Assert.ThrowsAsync<HttpException>(async () =>
-                await _scraperTargetsApi.FindScraperTargetById(createdScraper.Id));
+                await _scraperTargetsApi.FindScraperTargetByIdAsync(createdScraper.Id));
 
             Assert.AreEqual("scraper target is not found", ioe.Message);
         }
@@ -107,10 +107,10 @@ namespace InfluxDB.Client.Test
         public async Task FindScraperById()
         {
             var scraper = await _scraperTargetsApi
-                .CreateScraperTarget(GenerateName("InfluxDB scraper"), "http://localhost:9999", _bucket.Id,
+                .CreateScraperTargetAsync(GenerateName("InfluxDB scraper"), "http://localhost:9999", _bucket.Id,
                     _organization.Id);
 
-            var scraperById = await _scraperTargetsApi.FindScraperTargetById(scraper.Id);
+            var scraperById = await _scraperTargetsApi.FindScraperTargetByIdAsync(scraper.Id);
 
             Assert.IsNotNull(scraperById);
             Assert.AreEqual(scraper.Id, scraperById.Id);
@@ -121,7 +121,7 @@ namespace InfluxDB.Client.Test
         public void FindScraperByIdNull()
         {
             var ioe = Assert.ThrowsAsync<HttpException>(async () =>
-                await _scraperTargetsApi.FindScraperTargetById("020f755c3c082000"));
+                await _scraperTargetsApi.FindScraperTargetByIdAsync("020f755c3c082000"));
 
             Assert.AreEqual("scraper target is not found", ioe.Message);
         }
@@ -129,13 +129,13 @@ namespace InfluxDB.Client.Test
         [Test]
         public async Task FindScrapers()
         {
-            var size = (await _scraperTargetsApi.FindScraperTargets()).Count;
+            var size = (await _scraperTargetsApi.FindScraperTargetsAsync()).Count;
 
             await _scraperTargetsApi
-                .CreateScraperTarget(GenerateName("InfluxDB scraper"), "http://localhost:9999", _bucket.Id,
+                .CreateScraperTargetAsync(GenerateName("InfluxDB scraper"), "http://localhost:9999", _bucket.Id,
                     _organization.Id);
 
-            var scrapers = await _scraperTargetsApi.FindScraperTargets();
+            var scrapers = await _scraperTargetsApi.FindScraperTargetsAsync();
 
             Assert.AreEqual(scrapers.Count, size + 1);
         }
@@ -146,30 +146,30 @@ namespace InfluxDB.Client.Test
             var labelClient = Client.GetLabelsApi();
 
             var scraper = await _scraperTargetsApi
-                .CreateScraperTarget(GenerateName("InfluxDB scraper"), "http://localhost:9999", _bucket.Id,
+                .CreateScraperTargetAsync(GenerateName("InfluxDB scraper"), "http://localhost:9999", _bucket.Id,
                     _organization.Id);
 
             var properties = new Dictionary<string, string> {{"color", "green"}, {"location", "west"}};
 
-            var label = await labelClient.CreateLabel(GenerateName("Cool Resource"), properties, _organization.Id);
+            var label = await labelClient.CreateLabelAsync(GenerateName("Cool Resource"), properties, _organization.Id);
 
-            var labels = await _scraperTargetsApi.GetLabels(scraper);
+            var labels = await _scraperTargetsApi.GetLabelsAsync(scraper);
             Assert.AreEqual(0, labels.Count);
 
-            var addedLabel = await _scraperTargetsApi.AddLabel(label, scraper);
+            var addedLabel = await _scraperTargetsApi.AddLabelAsync(label, scraper);
             Assert.IsNotNull(addedLabel);
             Assert.AreEqual(label.Id, addedLabel.Id);
             Assert.AreEqual(label.Name, addedLabel.Name);
             Assert.AreEqual(label.Properties, addedLabel.Properties);
 
-            labels = await _scraperTargetsApi.GetLabels(scraper);
+            labels = await _scraperTargetsApi.GetLabelsAsync(scraper);
             Assert.AreEqual(1, labels.Count);
             Assert.AreEqual(label.Id, labels[0].Id);
             Assert.AreEqual(label.Name, labels[0].Name);
 
-            await _scraperTargetsApi.DeleteLabel(label, scraper);
+            await _scraperTargetsApi.DeleteLabelAsync(label, scraper);
 
-            labels = await _scraperTargetsApi.GetLabels(scraper);
+            labels = await _scraperTargetsApi.GetLabelsAsync(scraper);
             Assert.AreEqual(0, labels.Count);
         }
 
@@ -177,29 +177,29 @@ namespace InfluxDB.Client.Test
         public async Task Member()
         {
             var scraper = await _scraperTargetsApi
-                .CreateScraperTarget(GenerateName("InfluxDB scraper"), "http://localhost:9999", _bucket.Id,
+                .CreateScraperTargetAsync(GenerateName("InfluxDB scraper"), "http://localhost:9999", _bucket.Id,
                     _organization.Id);
 
-            var members = await _scraperTargetsApi.GetMembers(scraper);
+            var members = await _scraperTargetsApi.GetMembersAsync(scraper);
             Assert.AreEqual(0, members.Count);
 
-            var user = await _usersApi.CreateUser(GenerateName("Luke Health"));
+            var user = await _usersApi.CreateUserAsync(GenerateName("Luke Health"));
 
-            var resourceMember = await _scraperTargetsApi.AddMember(user, scraper);
+            var resourceMember = await _scraperTargetsApi.AddMemberAsync(user, scraper);
             Assert.IsNotNull(resourceMember);
             Assert.AreEqual(resourceMember.Id, user.Id);
             Assert.AreEqual(resourceMember.Name, user.Name);
             Assert.AreEqual(resourceMember.Role, ResourceMember.RoleEnum.Member);
 
-            members = await _scraperTargetsApi.GetMembers(scraper);
+            members = await _scraperTargetsApi.GetMembersAsync(scraper);
             Assert.AreEqual(1, members.Count);
             Assert.AreEqual(members[0].Id, user.Id);
             Assert.AreEqual(members[0].Name, user.Name);
             Assert.AreEqual(members[0].Role, ResourceMember.RoleEnum.Member);
 
-            await _scraperTargetsApi.DeleteMember(user, scraper);
+            await _scraperTargetsApi.DeleteMemberAsync(user, scraper);
 
-            members = await _scraperTargetsApi.GetMembers(scraper);
+            members = await _scraperTargetsApi.GetMembersAsync(scraper);
             Assert.AreEqual(0, members.Count);
         }
 
@@ -207,29 +207,29 @@ namespace InfluxDB.Client.Test
         public async Task Owner()
         {
             var scraper = await _scraperTargetsApi
-                .CreateScraperTarget(GenerateName("InfluxDB scraper"), "http://localhost:9999", _bucket.Id,
+                .CreateScraperTargetAsync(GenerateName("InfluxDB scraper"), "http://localhost:9999", _bucket.Id,
                     _organization.Id);
 
-            var owners = await _scraperTargetsApi.GetOwners(scraper);
+            var owners = await _scraperTargetsApi.GetOwnersAsync(scraper);
             Assert.AreEqual(1, owners.Count);
 
-            var user = await _usersApi.CreateUser(GenerateName("Luke Health"));
+            var user = await _usersApi.CreateUserAsync(GenerateName("Luke Health"));
 
-            var resourceMember = await _scraperTargetsApi.AddOwner(user, scraper);
+            var resourceMember = await _scraperTargetsApi.AddOwnerAsync(user, scraper);
             Assert.IsNotNull(resourceMember);
             Assert.AreEqual(resourceMember.Id, user.Id);
             Assert.AreEqual(resourceMember.Name, user.Name);
             Assert.AreEqual(resourceMember.Role, ResourceOwner.RoleEnum.Owner);
 
-            owners = await _scraperTargetsApi.GetOwners(scraper);
+            owners = await _scraperTargetsApi.GetOwnersAsync(scraper);
             Assert.AreEqual(2, owners.Count);
             Assert.AreEqual(owners[1].Id, user.Id);
             Assert.AreEqual(owners[1].Name, user.Name);
             Assert.AreEqual(owners[1].Role, ResourceOwner.RoleEnum.Owner);
 
-            await _scraperTargetsApi.DeleteOwner(user, scraper);
+            await _scraperTargetsApi.DeleteOwnerAsync(user, scraper);
 
-            owners = await _scraperTargetsApi.GetOwners(scraper);
+            owners = await _scraperTargetsApi.GetOwnersAsync(scraper);
             Assert.AreEqual(1, owners.Count);
         }
 
@@ -237,12 +237,12 @@ namespace InfluxDB.Client.Test
         public async Task UpdateScraper()
         {
             var scraper = await _scraperTargetsApi
-                .CreateScraperTarget(GenerateName("InfluxDB scraper"), "http://localhost:9999", _bucket.Id,
+                .CreateScraperTargetAsync(GenerateName("InfluxDB scraper"), "http://localhost:9999", _bucket.Id,
                     _organization.Id);
 
             scraper.Name = "Changed name";
 
-            var scraperUpdated = await _scraperTargetsApi.UpdateScraperTarget(scraper);
+            var scraperUpdated = await _scraperTargetsApi.UpdateScraperTargetAsync(scraper);
 
             Assert.AreEqual("Changed name", scraperUpdated.Name);
         }
