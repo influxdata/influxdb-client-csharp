@@ -24,9 +24,9 @@ using OpenAPIDateConverter = InfluxDB.Client.Api.Client.OpenAPIDateConverter;
 namespace InfluxDB.Client.Api.Domain
 {
     /// <summary>
-    /// the state to record if check matches a criteria
+    /// The state to record if check matches a criteria.
     /// </summary>
-    /// <value>the state to record if check matches a criteria</value>
+    /// <value>The state to record if check matches a criteria.</value>
     
     [JsonConverter(typeof(StringEnumConverter))]
     

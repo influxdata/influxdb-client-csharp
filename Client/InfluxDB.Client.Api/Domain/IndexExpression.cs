@@ -24,7 +24,7 @@ using OpenAPIDateConverter = InfluxDB.Client.Api.Client.OpenAPIDateConverter;
 namespace InfluxDB.Client.Api.Domain
 {
     /// <summary>
-    /// represents indexing into an array
+    /// Represents indexing into an array
     /// </summary>
     [DataContract]
     public partial class IndexExpression :  IEquatable<IndexExpression>
@@ -32,7 +32,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <summary>
         /// Initializes a new instance of the <see cref="IndexExpression" /> class.
         /// </summary>
-        /// <param name="type">type of AST node.</param>
+        /// <param name="type">Type of AST node.</param>
         /// <param name="array">array.</param>
         /// <param name="index">index.</param>
         public IndexExpression(string type = default(string), Expression array = default(Expression), Expression index = default(Expression))
@@ -43,9 +43,9 @@ namespace InfluxDB.Client.Api.Domain
         }
 
         /// <summary>
-        /// type of AST node
+        /// Type of AST node
         /// </summary>
-        /// <value>type of AST node</value>
+        /// <value>Type of AST node</value>
         [DataMember(Name="type", EmitDefaultValue=false)]
         public string Type { get; set; }
 
@@ -157,6 +157,7 @@ namespace InfluxDB.Client.Api.Domain
             {new []{ "MemberExpression" }, typeof(MemberExpression)},
             {new []{ "IndexExpression" }, typeof(IndexExpression)},
             {new []{ "ObjectExpression" }, typeof(ObjectExpression)},
+            {new []{ "ParenExpression" }, typeof(ParenExpression)},
             {new []{ "PipeExpression" }, typeof(PipeExpression)},
             {new []{ "UnaryExpression" }, typeof(UnaryExpression)},
             {new []{ "BooleanLiteral" }, typeof(BooleanLiteral)},
@@ -234,6 +235,7 @@ namespace InfluxDB.Client.Api.Domain
             {new []{ "MemberExpression" }, typeof(MemberExpression)},
             {new []{ "IndexExpression" }, typeof(IndexExpression)},
             {new []{ "ObjectExpression" }, typeof(ObjectExpression)},
+            {new []{ "ParenExpression" }, typeof(ParenExpression)},
             {new []{ "PipeExpression" }, typeof(PipeExpression)},
             {new []{ "UnaryExpression" }, typeof(UnaryExpression)},
             {new []{ "BooleanLiteral" }, typeof(BooleanLiteral)},

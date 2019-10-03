@@ -30,9 +30,9 @@ namespace InfluxDB.Client.Api.Domain
     public partial class Legend :  IEquatable<Legend>
     {
         /// <summary>
-        /// type is the style of the legend
+        /// The style of the legend.
         /// </summary>
-        /// <value>type is the style of the legend</value>
+        /// <value>The style of the legend.</value>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum TypeEnum
         {
@@ -45,9 +45,9 @@ namespace InfluxDB.Client.Api.Domain
         }
 
         /// <summary>
-        /// type is the style of the legend
+        /// The style of the legend.
         /// </summary>
-        /// <value>type is the style of the legend</value>
+        /// <value>The style of the legend.</value>
         [DataMember(Name="type", EmitDefaultValue=false)]
         public TypeEnum? Type { get; set; }
         /// <summary>
@@ -92,7 +92,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <summary>
         /// Initializes a new instance of the <see cref="Legend" /> class.
         /// </summary>
-        /// <param name="type">type is the style of the legend.</param>
+        /// <param name="type">The style of the legend..</param>
         /// <param name="orientation">orientation is the location of the legend with respect to the view graph.</param>
         public Legend(TypeEnum? type = default(TypeEnum?), OrientationEnum? orientation = default(OrientationEnum?))
         {

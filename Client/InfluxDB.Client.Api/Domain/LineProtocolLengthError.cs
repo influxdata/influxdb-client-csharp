@@ -30,9 +30,9 @@ namespace InfluxDB.Client.Api.Domain
     public partial class LineProtocolLengthError :  IEquatable<LineProtocolLengthError>
     {
         /// <summary>
-        /// code is the machine-readable error code.
+        /// Code is the machine-readable error code.
         /// </summary>
-        /// <value>code is the machine-readable error code.</value>
+        /// <value>Code is the machine-readable error code.</value>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum CodeEnum
         {
@@ -45,9 +45,9 @@ namespace InfluxDB.Client.Api.Domain
         }
 
         /// <summary>
-        /// code is the machine-readable error code.
+        /// Code is the machine-readable error code.
         /// </summary>
-        /// <value>code is the machine-readable error code.</value>
+        /// <value>Code is the machine-readable error code.</value>
         [DataMember(Name="code", EmitDefaultValue=false)]
         public CodeEnum Code { get; set; }
         /// <summary>
@@ -60,16 +60,16 @@ namespace InfluxDB.Client.Api.Domain
 
 
         /// <summary>
-        /// message is a human-readable message.
+        /// Message is a human-readable message.
         /// </summary>
-        /// <value>message is a human-readable message.</value>
+        /// <value>Message is a human-readable message.</value>
         [DataMember(Name="message", EmitDefaultValue=false)]
         public string Message { get; private set; }
 
         /// <summary>
-        /// max length in bytes for a body of line-protocol.
+        /// Max length in bytes for a body of line-protocol.
         /// </summary>
-        /// <value>max length in bytes for a body of line-protocol.</value>
+        /// <value>Max length in bytes for a body of line-protocol.</value>
         [DataMember(Name="maxLength", EmitDefaultValue=false)]
         public int? MaxLength { get; private set; }
 

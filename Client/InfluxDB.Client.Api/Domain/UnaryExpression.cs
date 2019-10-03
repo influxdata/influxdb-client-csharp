@@ -24,7 +24,7 @@ using OpenAPIDateConverter = InfluxDB.Client.Api.Client.OpenAPIDateConverter;
 namespace InfluxDB.Client.Api.Domain
 {
     /// <summary>
-    /// uses operators to act on a single operand in an expression
+    /// Uses operators to act on a single operand in an expression
     /// </summary>
     [DataContract]
     public partial class UnaryExpression :  IEquatable<UnaryExpression>
@@ -32,7 +32,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <summary>
         /// Initializes a new instance of the <see cref="UnaryExpression" /> class.
         /// </summary>
-        /// <param name="type">type of AST node.</param>
+        /// <param name="type">Type of AST node.</param>
         /// <param name="_operator">_operator.</param>
         /// <param name="argument">argument.</param>
         public UnaryExpression(string type = default(string), string _operator = default(string), Expression argument = default(Expression))
@@ -43,9 +43,9 @@ namespace InfluxDB.Client.Api.Domain
         }
 
         /// <summary>
-        /// type of AST node
+        /// Type of AST node
         /// </summary>
-        /// <value>type of AST node</value>
+        /// <value>Type of AST node</value>
         [DataMember(Name="type", EmitDefaultValue=false)]
         public string Type { get; set; }
 
@@ -156,6 +156,7 @@ namespace InfluxDB.Client.Api.Domain
             {new []{ "MemberExpression" }, typeof(MemberExpression)},
             {new []{ "IndexExpression" }, typeof(IndexExpression)},
             {new []{ "ObjectExpression" }, typeof(ObjectExpression)},
+            {new []{ "ParenExpression" }, typeof(ParenExpression)},
             {new []{ "PipeExpression" }, typeof(PipeExpression)},
             {new []{ "UnaryExpression" }, typeof(UnaryExpression)},
             {new []{ "BooleanLiteral" }, typeof(BooleanLiteral)},

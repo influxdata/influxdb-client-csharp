@@ -42,22 +42,32 @@ namespace InfluxDB.Client.Api.Domain
         /// <summary>
         /// Initializes a new instance of the <see cref="NotificationRuleBase" /> class.
         /// </summary>
-        /// <param name="orgID">the ID of the organization that owns this notification rule. (required).</param>
+        /// <param name="endpointID">endpointID (required).</param>
+        /// <param name="orgID">The ID of the organization that owns this notification rule. (required).</param>
         /// <param name="status">status (required).</param>
-        /// <param name="name">human-readable name describing the notification rule (required).</param>
+        /// <param name="name">Human-readable name describing the notification rule. (required).</param>
         /// <param name="sleepUntil">sleepUntil.</param>
-        /// <param name="every">notification repetition interval.</param>
+        /// <param name="every">The notification repetition interval..</param>
         /// <param name="offset">Duration to delay after the schedule, before executing check..</param>
-        /// <param name="cron">notification repetition interval in the form &#39;* * * * * *&#39;;.</param>
         /// <param name="runbookLink">runbookLink.</param>
-        /// <param name="limitEvery">don&#39;t notify me more than &lt;limit&gt; times every &lt;limitEvery&gt; seconds. If set, limit cannot be empty..</param>
-        /// <param name="limit">don&#39;t notify me more than &lt;limit&gt; times every &lt;limitEvery&gt; seconds. If set, limitEvery cannot be empty..</param>
-        /// <param name="tagRules">list of tag rules the notification rule attempts to match (required).</param>
-        /// <param name="description">An optional description of the notification rule.</param>
-        /// <param name="statusRules">list of status rules the notification rule attempts to match (required).</param>
+        /// <param name="limitEvery">Don&#39;t notify me more than &lt;limit&gt; times every &lt;limitEvery&gt; seconds. If set, limit cannot be empty..</param>
+        /// <param name="limit">Don&#39;t notify me more than &lt;limit&gt; times every &lt;limitEvery&gt; seconds. If set, limitEvery cannot be empty..</param>
+        /// <param name="tagRules">List of tag rules the notification rule attempts to match. (required).</param>
+        /// <param name="description">An optional description of the notification rule..</param>
+        /// <param name="statusRules">List of status rules the notification rule attempts to match. (required).</param>
         /// <param name="labels">labels.</param>
-        public NotificationRuleBase(string orgID = default(string), TaskStatusType status = default(TaskStatusType), string name = default(string), string sleepUntil = default(string), string every = default(string), string offset = default(string), string cron = default(string), string runbookLink = default(string), int? limitEvery = default(int?), int? limit = default(int?), List<TagRule> tagRules = default(List<TagRule>), string description = default(string), List<StatusRule> statusRules = default(List<StatusRule>), List<Label> labels = default(List<Label>))
+        /// <param name="links">links.</param>
+        public NotificationRuleBase(string endpointID = default(string), string orgID = default(string), TaskStatusType status = default(TaskStatusType), string name = default(string), string sleepUntil = default(string), string every = default(string), string offset = default(string), string runbookLink = default(string), int? limitEvery = default(int?), int? limit = default(int?), List<TagRule> tagRules = default(List<TagRule>), string description = default(string), List<StatusRule> statusRules = default(List<StatusRule>), List<Label> labels = default(List<Label>), NotificationRuleBaseLinks links = default(NotificationRuleBaseLinks))
         {
+            // to ensure "endpointID" is required (not null)
+            if (endpointID == null)
+            {
+                throw new InvalidDataException("endpointID is a required property for NotificationRuleBase and cannot be null");
+            }
+            else
+            {
+                this.EndpointID = endpointID;
+            }
             // to ensure "orgID" is required (not null)
             if (orgID == null)
             {
@@ -106,12 +116,12 @@ namespace InfluxDB.Client.Api.Domain
             this.SleepUntil = sleepUntil;
             this.Every = every;
             this.Offset = offset;
-            this.Cron = cron;
             this.RunbookLink = runbookLink;
             this.LimitEvery = limitEvery;
             this.Limit = limit;
             this.Description = description;
             this.Labels = labels;
+            this.Links = links;
         }
 
         /// <summary>
@@ -124,12 +134,12 @@ namespace InfluxDB.Client.Api.Domain
         /// Gets or Sets EndpointID
         /// </summary>
         [DataMember(Name="endpointID", EmitDefaultValue=false)]
-        public string EndpointID { get; private set; }
+        public string EndpointID { get; set; }
 
         /// <summary>
-        /// the ID of the organization that owns this notification rule.
+        /// The ID of the organization that owns this notification rule.
         /// </summary>
-        /// <value>the ID of the organization that owns this notification rule.</value>
+        /// <value>The ID of the organization that owns this notification rule.</value>
         [DataMember(Name="orgID", EmitDefaultValue=false)]
         public string OrgID { get; set; }
 
@@ -154,9 +164,9 @@ namespace InfluxDB.Client.Api.Domain
 
 
         /// <summary>
-        /// human-readable name describing the notification rule
+        /// Human-readable name describing the notification rule.
         /// </summary>
-        /// <value>human-readable name describing the notification rule</value>
+        /// <value>Human-readable name describing the notification rule.</value>
         [DataMember(Name="name", EmitDefaultValue=false)]
         public string Name { get; set; }
 
@@ -167,9 +177,9 @@ namespace InfluxDB.Client.Api.Domain
         public string SleepUntil { get; set; }
 
         /// <summary>
-        /// notification repetition interval
+        /// The notification repetition interval.
         /// </summary>
-        /// <value>notification repetition interval</value>
+        /// <value>The notification repetition interval.</value>
         [DataMember(Name="every", EmitDefaultValue=false)]
         public string Every { get; set; }
 
@@ -181,50 +191,43 @@ namespace InfluxDB.Client.Api.Domain
         public string Offset { get; set; }
 
         /// <summary>
-        /// notification repetition interval in the form &#39;* * * * * *&#39;;
-        /// </summary>
-        /// <value>notification repetition interval in the form &#39;* * * * * *&#39;;</value>
-        [DataMember(Name="cron", EmitDefaultValue=false)]
-        public string Cron { get; set; }
-
-        /// <summary>
         /// Gets or Sets RunbookLink
         /// </summary>
         [DataMember(Name="runbookLink", EmitDefaultValue=false)]
         public string RunbookLink { get; set; }
 
         /// <summary>
-        /// don&#39;t notify me more than &lt;limit&gt; times every &lt;limitEvery&gt; seconds. If set, limit cannot be empty.
+        /// Don&#39;t notify me more than &lt;limit&gt; times every &lt;limitEvery&gt; seconds. If set, limit cannot be empty.
         /// </summary>
-        /// <value>don&#39;t notify me more than &lt;limit&gt; times every &lt;limitEvery&gt; seconds. If set, limit cannot be empty.</value>
+        /// <value>Don&#39;t notify me more than &lt;limit&gt; times every &lt;limitEvery&gt; seconds. If set, limit cannot be empty.</value>
         [DataMember(Name="limitEvery", EmitDefaultValue=false)]
         public int? LimitEvery { get; set; }
 
         /// <summary>
-        /// don&#39;t notify me more than &lt;limit&gt; times every &lt;limitEvery&gt; seconds. If set, limitEvery cannot be empty.
+        /// Don&#39;t notify me more than &lt;limit&gt; times every &lt;limitEvery&gt; seconds. If set, limitEvery cannot be empty.
         /// </summary>
-        /// <value>don&#39;t notify me more than &lt;limit&gt; times every &lt;limitEvery&gt; seconds. If set, limitEvery cannot be empty.</value>
+        /// <value>Don&#39;t notify me more than &lt;limit&gt; times every &lt;limitEvery&gt; seconds. If set, limitEvery cannot be empty.</value>
         [DataMember(Name="limit", EmitDefaultValue=false)]
         public int? Limit { get; set; }
 
         /// <summary>
-        /// list of tag rules the notification rule attempts to match
+        /// List of tag rules the notification rule attempts to match.
         /// </summary>
-        /// <value>list of tag rules the notification rule attempts to match</value>
+        /// <value>List of tag rules the notification rule attempts to match.</value>
         [DataMember(Name="tagRules", EmitDefaultValue=false)]
         public List<TagRule> TagRules { get; set; }
 
         /// <summary>
-        /// An optional description of the notification rule
+        /// An optional description of the notification rule.
         /// </summary>
-        /// <value>An optional description of the notification rule</value>
+        /// <value>An optional description of the notification rule.</value>
         [DataMember(Name="description", EmitDefaultValue=false)]
         public string Description { get; set; }
 
         /// <summary>
-        /// list of status rules the notification rule attempts to match
+        /// List of status rules the notification rule attempts to match.
         /// </summary>
-        /// <value>list of status rules the notification rule attempts to match</value>
+        /// <value>List of status rules the notification rule attempts to match.</value>
         [DataMember(Name="statusRules", EmitDefaultValue=false)]
         public List<StatusRule> StatusRules { get; set; }
 
@@ -233,6 +236,12 @@ namespace InfluxDB.Client.Api.Domain
         /// </summary>
         [DataMember(Name="labels", EmitDefaultValue=false)]
         public List<Label> Labels { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Links
+        /// </summary>
+        [DataMember(Name="links", EmitDefaultValue=false)]
+        public NotificationRuleBaseLinks Links { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -253,7 +262,6 @@ namespace InfluxDB.Client.Api.Domain
             sb.Append("  SleepUntil: ").Append(SleepUntil).Append("\n");
             sb.Append("  Every: ").Append(Every).Append("\n");
             sb.Append("  Offset: ").Append(Offset).Append("\n");
-            sb.Append("  Cron: ").Append(Cron).Append("\n");
             sb.Append("  RunbookLink: ").Append(RunbookLink).Append("\n");
             sb.Append("  LimitEvery: ").Append(LimitEvery).Append("\n");
             sb.Append("  Limit: ").Append(Limit).Append("\n");
@@ -261,6 +269,7 @@ namespace InfluxDB.Client.Api.Domain
             sb.Append("  Description: ").Append(Description).Append("\n");
             sb.Append("  StatusRules: ").Append(StatusRules).Append("\n");
             sb.Append("  Labels: ").Append(Labels).Append("\n");
+            sb.Append("  Links: ").Append(Links).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -351,11 +360,6 @@ namespace InfluxDB.Client.Api.Domain
                     this.Offset.Equals(input.Offset))
                 ) && 
                 (
-                    this.Cron == input.Cron ||
-                    (this.Cron != null &&
-                    this.Cron.Equals(input.Cron))
-                ) && 
-                (
                     this.RunbookLink == input.RunbookLink ||
                     (this.RunbookLink != null &&
                     this.RunbookLink.Equals(input.RunbookLink))
@@ -389,6 +393,11 @@ namespace InfluxDB.Client.Api.Domain
                     this.Labels == input.Labels ||
                     this.Labels != null &&
                     this.Labels.SequenceEqual(input.Labels)
+                ) && 
+                (
+                    
+                    (this.Links != null &&
+                    this.Links.Equals(input.Links))
                 );
         }
 
@@ -423,8 +432,6 @@ namespace InfluxDB.Client.Api.Domain
                     hashCode = hashCode * 59 + this.Every.GetHashCode();
                 if (this.Offset != null)
                     hashCode = hashCode * 59 + this.Offset.GetHashCode();
-                if (this.Cron != null)
-                    hashCode = hashCode * 59 + this.Cron.GetHashCode();
                 if (this.RunbookLink != null)
                     hashCode = hashCode * 59 + this.RunbookLink.GetHashCode();
                 if (this.LimitEvery != null)
@@ -439,6 +446,8 @@ namespace InfluxDB.Client.Api.Domain
                     hashCode = hashCode * 59 + this.StatusRules.GetHashCode();
                 if (this.Labels != null)
                     hashCode = hashCode * 59 + this.Labels.GetHashCode();
+                if (this.Links != null)
+                    hashCode = hashCode * 59 + this.Links.GetHashCode();
                 return hashCode;
             }
         }

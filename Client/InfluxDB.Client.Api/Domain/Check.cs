@@ -19,6 +19,7 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using JsonSubTypes;
 using OpenAPIDateConverter = InfluxDB.Client.Api.Client.OpenAPIDateConverter;
 
 namespace InfluxDB.Client.Api.Domain
@@ -27,6 +28,9 @@ namespace InfluxDB.Client.Api.Domain
     /// Check
     /// </summary>
     [DataContract]
+    [JsonConverter(typeof(JsonSubtypes), "Type")]
+    [JsonSubtypes.KnownSubType(typeof(ThresholdCheck), "threshold")]
+    [JsonSubtypes.KnownSubType(typeof(DeadmanCheck), "deadman")]
     public partial class Check : CheckBase,  IEquatable<Check>
     {
         /// <summary>
@@ -37,7 +41,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <summary>
         /// Initializes a new instance of the <see cref="Check" /> class.
         /// </summary>
-        public Check(string name = default(string), string orgID = default(string), DashboardQuery query = default(DashboardQuery), TaskStatusType? status = default(TaskStatusType?), string every = default(string), string offset = default(string), string cron = default(string), List<CheckBaseTags> tags = default(List<CheckBaseTags>), string description = default(string), string statusMessageTemplate = default(string), List<Label> labels = default(List<Label>)) : base(name, orgID, query, status, every, offset, cron, tags, description, statusMessageTemplate, labels)
+        public Check(string name = default(string), string orgID = default(string), DashboardQuery query = default(DashboardQuery), TaskStatusType? status = default(TaskStatusType?), string every = default(string), string offset = default(string), List<CheckBaseTags> tags = default(List<CheckBaseTags>), string description = default(string), string statusMessageTemplate = default(string), List<Label> labels = default(List<Label>), CheckBaseLinks links = default(CheckBaseLinks)) : base(name, orgID, query, status, every, offset, tags, description, statusMessageTemplate, labels, links)
         {
         }
 

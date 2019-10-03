@@ -30,9 +30,9 @@ namespace InfluxDB.Client.Api.Domain
     public partial class ScraperTargetRequest :  IEquatable<ScraperTargetRequest>
     {
         /// <summary>
-        /// type of the metrics to be parsed
+        /// The type of the metrics to be parsed.
         /// </summary>
-        /// <value>type of the metrics to be parsed</value>
+        /// <value>The type of the metrics to be parsed.</value>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum TypeEnum
         {
@@ -45,19 +45,19 @@ namespace InfluxDB.Client.Api.Domain
         }
 
         /// <summary>
-        /// type of the metrics to be parsed
+        /// The type of the metrics to be parsed.
         /// </summary>
-        /// <value>type of the metrics to be parsed</value>
+        /// <value>The type of the metrics to be parsed.</value>
         [DataMember(Name="type", EmitDefaultValue=false)]
         public TypeEnum? Type { get; set; }
         /// <summary>
         /// Initializes a new instance of the <see cref="ScraperTargetRequest" /> class.
         /// </summary>
-        /// <param name="name">name of the scraper target.</param>
-        /// <param name="type">type of the metrics to be parsed.</param>
-        /// <param name="url">url of the metrics endpoint.</param>
-        /// <param name="orgID">id of the organization.</param>
-        /// <param name="bucketID">id of the bucket to be written.</param>
+        /// <param name="name">The name of the scraper target..</param>
+        /// <param name="type">The type of the metrics to be parsed..</param>
+        /// <param name="url">The URL of the metrics endpoint..</param>
+        /// <param name="orgID">The organization ID..</param>
+        /// <param name="bucketID">The ID of the bucket to write to..</param>
         public ScraperTargetRequest(string name = default(string), TypeEnum? type = default(TypeEnum?), string url = default(string), string orgID = default(string), string bucketID = default(string))
         {
             this.Name = name;
@@ -68,31 +68,31 @@ namespace InfluxDB.Client.Api.Domain
         }
 
         /// <summary>
-        /// name of the scraper target
+        /// The name of the scraper target.
         /// </summary>
-        /// <value>name of the scraper target</value>
+        /// <value>The name of the scraper target.</value>
         [DataMember(Name="name", EmitDefaultValue=false)]
         public string Name { get; set; }
 
 
         /// <summary>
-        /// url of the metrics endpoint
+        /// The URL of the metrics endpoint.
         /// </summary>
-        /// <value>url of the metrics endpoint</value>
+        /// <value>The URL of the metrics endpoint.</value>
         [DataMember(Name="url", EmitDefaultValue=false)]
         public string Url { get; set; }
 
         /// <summary>
-        /// id of the organization
+        /// The organization ID.
         /// </summary>
-        /// <value>id of the organization</value>
+        /// <value>The organization ID.</value>
         [DataMember(Name="orgID", EmitDefaultValue=false)]
         public string OrgID { get; set; }
 
         /// <summary>
-        /// id of the bucket to be written
+        /// The ID of the bucket to write to.
         /// </summary>
-        /// <value>id of the bucket to be written</value>
+        /// <value>The ID of the bucket to write to.</value>
         [DataMember(Name="bucketID", EmitDefaultValue=false)]
         public string BucketID { get; set; }
 

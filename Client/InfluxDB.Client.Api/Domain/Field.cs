@@ -30,9 +30,9 @@ namespace InfluxDB.Client.Api.Domain
     public partial class Field :  IEquatable<Field>
     {
         /// <summary>
-        /// type describes the field type. func is a function; field is a field reference
+        /// &#x60;type&#x60; describes the field type. &#x60;func&#x60; is a function. &#x60;field&#x60; is a field reference.
         /// </summary>
-        /// <value>type describes the field type. func is a function; field is a field reference</value>
+        /// <value>&#x60;type&#x60; describes the field type. &#x60;func&#x60; is a function. &#x60;field&#x60; is a field reference.</value>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum TypeEnum
         {
@@ -75,16 +75,16 @@ namespace InfluxDB.Client.Api.Domain
         }
 
         /// <summary>
-        /// type describes the field type. func is a function; field is a field reference
+        /// &#x60;type&#x60; describes the field type. &#x60;func&#x60; is a function. &#x60;field&#x60; is a field reference.
         /// </summary>
-        /// <value>type describes the field type. func is a function; field is a field reference</value>
+        /// <value>&#x60;type&#x60; describes the field type. &#x60;func&#x60; is a function. &#x60;field&#x60; is a field reference.</value>
         [DataMember(Name="type", EmitDefaultValue=false)]
         public TypeEnum? Type { get; set; }
         /// <summary>
         /// Initializes a new instance of the <see cref="Field" /> class.
         /// </summary>
         /// <param name="value">value is the value of the field.  Meaning of the value is implied by the &#x60;type&#x60; key.</param>
-        /// <param name="type">type describes the field type. func is a function; field is a field reference.</param>
+        /// <param name="type">&#x60;type&#x60; describes the field type. &#x60;func&#x60; is a function. &#x60;field&#x60; is a field reference..</param>
         /// <param name="alias">Alias overrides the field name in the returned response.  Applies only if type is &#x60;func&#x60;.</param>
         /// <param name="args">Args are the arguments to the function.</param>
         public Field(string value = default(string), TypeEnum? type = default(TypeEnum?), string alias = default(string), List<Field> args = default(List<Field>))

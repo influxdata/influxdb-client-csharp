@@ -30,9 +30,9 @@ namespace InfluxDB.Client.Api.Domain
     public partial class Error :  IEquatable<Error>
     {
         /// <summary>
-        /// code is the machine-readable error code.
+        /// Code is the machine-readable error code.
         /// </summary>
-        /// <value>code is the machine-readable error code.</value>
+        /// <value>Code is the machine-readable error code.</value>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum CodeEnum
         {
@@ -105,9 +105,9 @@ namespace InfluxDB.Client.Api.Domain
         }
 
         /// <summary>
-        /// code is the machine-readable error code.
+        /// Code is the machine-readable error code.
         /// </summary>
-        /// <value>code is the machine-readable error code.</value>
+        /// <value>Code is the machine-readable error code.</value>
         [DataMember(Name="code", EmitDefaultValue=false)]
         public CodeEnum Code { get; set; }
         /// <summary>
@@ -120,25 +120,11 @@ namespace InfluxDB.Client.Api.Domain
 
 
         /// <summary>
-        /// message is a human-readable message.
+        /// Message is a human-readable message.
         /// </summary>
-        /// <value>message is a human-readable message.</value>
+        /// <value>Message is a human-readable message.</value>
         [DataMember(Name="message", EmitDefaultValue=false)]
         public string Message { get; private set; }
-
-        /// <summary>
-        /// op describes the logical code operation during error. Useful for debugging.
-        /// </summary>
-        /// <value>op describes the logical code operation during error. Useful for debugging.</value>
-        [DataMember(Name="op", EmitDefaultValue=false)]
-        public string Op { get; private set; }
-
-        /// <summary>
-        /// err is a stack of errors that occurred during processing of the request. Useful for debugging.
-        /// </summary>
-        /// <value>err is a stack of errors that occurred during processing of the request. Useful for debugging.</value>
-        [DataMember(Name="err", EmitDefaultValue=false)]
-        public string Err { get; private set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -150,8 +136,6 @@ namespace InfluxDB.Client.Api.Domain
             sb.Append("class Error {\n");
             sb.Append("  Code: ").Append(Code).Append("\n");
             sb.Append("  Message: ").Append(Message).Append("\n");
-            sb.Append("  Op: ").Append(Op).Append("\n");
-            sb.Append("  Err: ").Append(Err).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -195,16 +179,6 @@ namespace InfluxDB.Client.Api.Domain
                     this.Message == input.Message ||
                     (this.Message != null &&
                     this.Message.Equals(input.Message))
-                ) && 
-                (
-                    this.Op == input.Op ||
-                    (this.Op != null &&
-                    this.Op.Equals(input.Op))
-                ) && 
-                (
-                    this.Err == input.Err ||
-                    (this.Err != null &&
-                    this.Err.Equals(input.Err))
                 );
         }
 
@@ -221,10 +195,6 @@ namespace InfluxDB.Client.Api.Domain
                     hashCode = hashCode * 59 + this.Code.GetHashCode();
                 if (this.Message != null)
                     hashCode = hashCode * 59 + this.Message.GetHashCode();
-                if (this.Op != null)
-                    hashCode = hashCode * 59 + this.Op.GetHashCode();
-                if (this.Err != null)
-                    hashCode = hashCode * 59 + this.Err.GetHashCode();
                 return hashCode;
             }
         }

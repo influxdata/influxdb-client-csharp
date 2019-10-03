@@ -153,10 +153,10 @@ namespace InfluxDB.Client.Api.Domain
         /// Initializes a new instance of the <see cref="PermissionResource" /> class.
         /// </summary>
         /// <param name="type">type (required).</param>
-        /// <param name="id">if id is set that is a permission for a specific resource. if it is not set it is a permission for all resources of that resource type..</param>
-        /// <param name="name">optional name of the resource if the resource has a name field..</param>
-        /// <param name="orgID">if orgID is set that is a permission for all resources owned my that org. if it is not set it is a permission for all resources of that resource type..</param>
-        /// <param name="org">optional name of the organization of the organization with orgID..</param>
+        /// <param name="id">If ID is set that is a permission for a specific resource. if it is not set it is a permission for all resources of that resource type..</param>
+        /// <param name="name">Optional name of the resource if the resource has a name field..</param>
+        /// <param name="orgID">If orgID is set that is a permission for all resources owned my that org. if it is not set it is a permission for all resources of that resource type..</param>
+        /// <param name="org">Optional name of the organization of the organization with orgID..</param>
         public PermissionResource(TypeEnum type = default(TypeEnum), string id = default(string), string name = default(string), string orgID = default(string), string org = default(string))
         {
             // to ensure "type" is required (not null)
@@ -176,30 +176,30 @@ namespace InfluxDB.Client.Api.Domain
 
 
         /// <summary>
-        /// if id is set that is a permission for a specific resource. if it is not set it is a permission for all resources of that resource type.
+        /// If ID is set that is a permission for a specific resource. if it is not set it is a permission for all resources of that resource type.
         /// </summary>
-        /// <value>if id is set that is a permission for a specific resource. if it is not set it is a permission for all resources of that resource type.</value>
+        /// <value>If ID is set that is a permission for a specific resource. if it is not set it is a permission for all resources of that resource type.</value>
         [DataMember(Name="id", EmitDefaultValue=false)]
         public string Id { get; set; }
 
         /// <summary>
-        /// optional name of the resource if the resource has a name field.
+        /// Optional name of the resource if the resource has a name field.
         /// </summary>
-        /// <value>optional name of the resource if the resource has a name field.</value>
+        /// <value>Optional name of the resource if the resource has a name field.</value>
         [DataMember(Name="name", EmitDefaultValue=false)]
         public string Name { get; set; }
 
         /// <summary>
-        /// if orgID is set that is a permission for all resources owned my that org. if it is not set it is a permission for all resources of that resource type.
+        /// If orgID is set that is a permission for all resources owned my that org. if it is not set it is a permission for all resources of that resource type.
         /// </summary>
-        /// <value>if orgID is set that is a permission for all resources owned my that org. if it is not set it is a permission for all resources of that resource type.</value>
+        /// <value>If orgID is set that is a permission for all resources owned my that org. if it is not set it is a permission for all resources of that resource type.</value>
         [DataMember(Name="orgID", EmitDefaultValue=false)]
         public string OrgID { get; set; }
 
         /// <summary>
-        /// optional name of the organization of the organization with orgID.
+        /// Optional name of the organization of the organization with orgID.
         /// </summary>
-        /// <value>optional name of the organization of the organization with orgID.</value>
+        /// <value>Optional name of the organization of the organization with orgID.</value>
         [DataMember(Name="org", EmitDefaultValue=false)]
         public string Org { get; set; }
 

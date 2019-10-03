@@ -31,7 +31,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="sourceID">ID of the source</param>
+        /// <param name="sourceID">The source ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
         void DeleteSourcesID (string sourceID, string zapTraceSpan = null);
@@ -43,7 +43,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="sourceID">ID of the source</param>
+        /// <param name="sourceID">The source ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> DeleteSourcesIDWithHttpInfo (string sourceID, string zapTraceSpan = null);
@@ -55,7 +55,7 @@ namespace InfluxDB.Client.Api.Service
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="org">specifies the organization of the resource (optional)</param>
+        /// <param name="org">The organization name. (optional)</param>
         /// <returns>Sources</returns>
         Sources GetSources (string zapTraceSpan = null, string org = null);
 
@@ -67,7 +67,7 @@ namespace InfluxDB.Client.Api.Service
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="org">specifies the organization of the resource (optional)</param>
+        /// <param name="org">The organization name. (optional)</param>
         /// <returns>ApiResponse of Sources</returns>
         ApiResponse<Sources> GetSourcesWithHttpInfo (string zapTraceSpan = null, string org = null);
         /// <summary>
@@ -77,7 +77,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="sourceID">ID of the source</param>
+        /// <param name="sourceID">The source ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Source</returns>
         Source GetSourcesID (string sourceID, string zapTraceSpan = null);
@@ -89,103 +89,103 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="sourceID">ID of the source</param>
+        /// <param name="sourceID">The source ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Source</returns>
         ApiResponse<Source> GetSourcesIDWithHttpInfo (string sourceID, string zapTraceSpan = null);
         /// <summary>
-        /// Get a sources buckets (will return dbrps in the form of buckets if it is a v1 source)
+        /// Get buckets in a source
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="sourceID">ID of the source</param>
+        /// <param name="sourceID">The source ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="org">specifies the organization of the resource (optional)</param>
+        /// <param name="org">The organization name. (optional)</param>
         /// <returns>Buckets</returns>
         Buckets GetSourcesIDBuckets (string sourceID, string zapTraceSpan = null, string org = null);
 
         /// <summary>
-        /// Get a sources buckets (will return dbrps in the form of buckets if it is a v1 source)
+        /// Get buckets in a source
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="sourceID">ID of the source</param>
+        /// <param name="sourceID">The source ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="org">specifies the organization of the resource (optional)</param>
+        /// <param name="org">The organization name. (optional)</param>
         /// <returns>ApiResponse of Buckets</returns>
         ApiResponse<Buckets> GetSourcesIDBucketsWithHttpInfo (string sourceID, string zapTraceSpan = null, string org = null);
         /// <summary>
-        /// Get a sources health
+        /// Get the health of a source
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="sourceID">ID of the source</param>
+        /// <param name="sourceID">The source ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>HealthCheck</returns>
         HealthCheck GetSourcesIDHealth (string sourceID, string zapTraceSpan = null);
 
         /// <summary>
-        /// Get a sources health
+        /// Get the health of a source
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="sourceID">ID of the source</param>
+        /// <param name="sourceID">The source ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of HealthCheck</returns>
         ApiResponse<HealthCheck> GetSourcesIDHealthWithHttpInfo (string sourceID, string zapTraceSpan = null);
         /// <summary>
-        /// Updates a Source
+        /// Update a Source
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="sourceID">ID of the source</param>
-        /// <param name="source">source update</param>
+        /// <param name="sourceID">The source ID.</param>
+        /// <param name="source">Source update</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Source</returns>
         Source PatchSourcesID (string sourceID, Source source, string zapTraceSpan = null);
 
         /// <summary>
-        /// Updates a Source
+        /// Update a Source
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="sourceID">ID of the source</param>
-        /// <param name="source">source update</param>
+        /// <param name="sourceID">The source ID.</param>
+        /// <param name="source">Source update</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Source</returns>
         ApiResponse<Source> PatchSourcesIDWithHttpInfo (string sourceID, Source source, string zapTraceSpan = null);
         /// <summary>
-        /// Creates a Source
+        /// Creates a source
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="source">source to create</param>
+        /// <param name="source">Source to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Source</returns>
         Source PostSources (Source source, string zapTraceSpan = null);
 
         /// <summary>
-        /// Creates a Source
+        /// Creates a source
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="source">source to create</param>
+        /// <param name="source">Source to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Source</returns>
         ApiResponse<Source> PostSourcesWithHttpInfo (Source source, string zapTraceSpan = null);
@@ -198,7 +198,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="sourceID">ID of the source</param>
+        /// <param name="sourceID">The source ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
         System.Threading.Tasks.Task DeleteSourcesIDAsync (string sourceID, string zapTraceSpan = null);
@@ -210,7 +210,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="sourceID">ID of the source</param>
+        /// <param name="sourceID">The source ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         System.Threading.Tasks.Task<ApiResponse<Object>> DeleteSourcesIDAsyncWithHttpInfo (string sourceID, string zapTraceSpan = null);
@@ -222,7 +222,7 @@ namespace InfluxDB.Client.Api.Service
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="org">specifies the organization of the resource (optional)</param>
+        /// <param name="org">The organization name. (optional)</param>
         /// <returns>Task of Sources</returns>
         System.Threading.Tasks.Task<Sources> GetSourcesAsync (string zapTraceSpan = null, string org = null);
 
@@ -234,7 +234,7 @@ namespace InfluxDB.Client.Api.Service
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="org">specifies the organization of the resource (optional)</param>
+        /// <param name="org">The organization name. (optional)</param>
         /// <returns>Task of ApiResponse (Sources)</returns>
         System.Threading.Tasks.Task<ApiResponse<Sources>> GetSourcesAsyncWithHttpInfo (string zapTraceSpan = null, string org = null);
         /// <summary>
@@ -244,7 +244,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="sourceID">ID of the source</param>
+        /// <param name="sourceID">The source ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of Source</returns>
         System.Threading.Tasks.Task<Source> GetSourcesIDAsync (string sourceID, string zapTraceSpan = null);
@@ -256,103 +256,103 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="sourceID">ID of the source</param>
+        /// <param name="sourceID">The source ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (Source)</returns>
         System.Threading.Tasks.Task<ApiResponse<Source>> GetSourcesIDAsyncWithHttpInfo (string sourceID, string zapTraceSpan = null);
         /// <summary>
-        /// Get a sources buckets (will return dbrps in the form of buckets if it is a v1 source)
+        /// Get buckets in a source
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="sourceID">ID of the source</param>
+        /// <param name="sourceID">The source ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="org">specifies the organization of the resource (optional)</param>
+        /// <param name="org">The organization name. (optional)</param>
         /// <returns>Task of Buckets</returns>
         System.Threading.Tasks.Task<Buckets> GetSourcesIDBucketsAsync (string sourceID, string zapTraceSpan = null, string org = null);
 
         /// <summary>
-        /// Get a sources buckets (will return dbrps in the form of buckets if it is a v1 source)
+        /// Get buckets in a source
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="sourceID">ID of the source</param>
+        /// <param name="sourceID">The source ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="org">specifies the organization of the resource (optional)</param>
+        /// <param name="org">The organization name. (optional)</param>
         /// <returns>Task of ApiResponse (Buckets)</returns>
         System.Threading.Tasks.Task<ApiResponse<Buckets>> GetSourcesIDBucketsAsyncWithHttpInfo (string sourceID, string zapTraceSpan = null, string org = null);
         /// <summary>
-        /// Get a sources health
+        /// Get the health of a source
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="sourceID">ID of the source</param>
+        /// <param name="sourceID">The source ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of HealthCheck</returns>
         System.Threading.Tasks.Task<HealthCheck> GetSourcesIDHealthAsync (string sourceID, string zapTraceSpan = null);
 
         /// <summary>
-        /// Get a sources health
+        /// Get the health of a source
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="sourceID">ID of the source</param>
+        /// <param name="sourceID">The source ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (HealthCheck)</returns>
         System.Threading.Tasks.Task<ApiResponse<HealthCheck>> GetSourcesIDHealthAsyncWithHttpInfo (string sourceID, string zapTraceSpan = null);
         /// <summary>
-        /// Updates a Source
+        /// Update a Source
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="sourceID">ID of the source</param>
-        /// <param name="source">source update</param>
+        /// <param name="sourceID">The source ID.</param>
+        /// <param name="source">Source update</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of Source</returns>
         System.Threading.Tasks.Task<Source> PatchSourcesIDAsync (string sourceID, Source source, string zapTraceSpan = null);
 
         /// <summary>
-        /// Updates a Source
+        /// Update a Source
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="sourceID">ID of the source</param>
-        /// <param name="source">source update</param>
+        /// <param name="sourceID">The source ID.</param>
+        /// <param name="source">Source update</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (Source)</returns>
         System.Threading.Tasks.Task<ApiResponse<Source>> PatchSourcesIDAsyncWithHttpInfo (string sourceID, Source source, string zapTraceSpan = null);
         /// <summary>
-        /// Creates a Source
+        /// Creates a source
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="source">source to create</param>
+        /// <param name="source">Source to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of Source</returns>
         System.Threading.Tasks.Task<Source> PostSourcesAsync (Source source, string zapTraceSpan = null);
 
         /// <summary>
-        /// Creates a Source
+        /// Creates a source
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="source">source to create</param>
+        /// <param name="source">Source to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (Source)</returns>
         System.Threading.Tasks.Task<ApiResponse<Source>> PostSourcesAsyncWithHttpInfo (Source source, string zapTraceSpan = null);
@@ -460,7 +460,7 @@ namespace InfluxDB.Client.Api.Service
         /// Delete a source 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="sourceID">ID of the source</param>
+        /// <param name="sourceID">The source ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
         public void DeleteSourcesID (string sourceID, string zapTraceSpan = null)
@@ -472,7 +472,7 @@ namespace InfluxDB.Client.Api.Service
         /// Delete a source 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="sourceID">ID of the source</param>
+        /// <param name="sourceID">The source ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public ApiResponse<Object> DeleteSourcesIDWithHttpInfo (string sourceID, string zapTraceSpan = null)
@@ -529,7 +529,7 @@ namespace InfluxDB.Client.Api.Service
         /// Delete a source 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="sourceID">ID of the source</param>
+        /// <param name="sourceID">The source ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> DeleteSourcesIDWithIRestResponseAsync (string sourceID, string zapTraceSpan = null)
@@ -584,7 +584,7 @@ namespace InfluxDB.Client.Api.Service
         /// Delete a source 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="sourceID">ID of the source</param>
+        /// <param name="sourceID">The source ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public IRestResponse DeleteSourcesIDWithIRestResponse (string sourceID, string zapTraceSpan = null)
@@ -639,7 +639,7 @@ namespace InfluxDB.Client.Api.Service
         /// Delete a source 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="sourceID">ID of the source</param>
+        /// <param name="sourceID">The source ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public RestRequest DeleteSourcesIDWithRestRequest (string sourceID, string zapTraceSpan = null)
@@ -683,7 +683,7 @@ namespace InfluxDB.Client.Api.Service
         /// Delete a source 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="sourceID">ID of the source</param>
+        /// <param name="sourceID">The source ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
         public async System.Threading.Tasks.Task DeleteSourcesIDAsync (string sourceID, string zapTraceSpan = null)
@@ -696,7 +696,7 @@ namespace InfluxDB.Client.Api.Service
         /// Delete a source 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="sourceID">ID of the source</param>
+        /// <param name="sourceID">The source ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteSourcesIDAsyncWithHttpInfo (string sourceID, string zapTraceSpan = null)
@@ -721,7 +721,7 @@ namespace InfluxDB.Client.Api.Service
         /// Delete a source 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="sourceID">ID of the source</param>
+        /// <param name="sourceID">The source ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse</returns>
         public async System.Threading.Tasks.Task<IRestResponse> DeleteSourcesIDAsyncWithIRestResponse (string sourceID, string zapTraceSpan = null)
@@ -775,7 +775,7 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="org">specifies the organization of the resource (optional)</param>
+        /// <param name="org">The organization name. (optional)</param>
         /// <returns>Sources</returns>
         public Sources GetSources (string zapTraceSpan = null, string org = null)
         {
@@ -788,7 +788,7 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="org">specifies the organization of the resource (optional)</param>
+        /// <param name="org">The organization name. (optional)</param>
         /// <returns>ApiResponse of Sources</returns>
         public ApiResponse< Sources > GetSourcesWithHttpInfo (string zapTraceSpan = null, string org = null)
         {
@@ -842,7 +842,7 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="org">specifies the organization of the resource (optional)</param>
+        /// <param name="org">The organization name. (optional)</param>
         /// <returns>ApiResponse of Sources</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetSourcesWithIRestResponseAsync (string zapTraceSpan = null, string org = null)
         {
@@ -894,7 +894,7 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="org">specifies the organization of the resource (optional)</param>
+        /// <param name="org">The organization name. (optional)</param>
         /// <returns>ApiResponse of Sources</returns>
         public IRestResponse GetSourcesWithIRestResponse (string zapTraceSpan = null, string org = null)
         {
@@ -946,7 +946,7 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="org">specifies the organization of the resource (optional)</param>
+        /// <param name="org">The organization name. (optional)</param>
         /// <returns>ApiResponse of Sources</returns>
         public RestRequest GetSourcesWithRestRequest (string zapTraceSpan = null, string org = null)
         {
@@ -987,7 +987,7 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="org">specifies the organization of the resource (optional)</param>
+        /// <param name="org">The organization name. (optional)</param>
         /// <returns>Task of Sources</returns>
         public async System.Threading.Tasks.Task<Sources> GetSourcesAsync (string zapTraceSpan = null, string org = null)
         {
@@ -1001,7 +1001,7 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="org">specifies the organization of the resource (optional)</param>
+        /// <param name="org">The organization name. (optional)</param>
         /// <returns>Task of ApiResponse (Sources)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Sources>> GetSourcesAsyncWithHttpInfo (string zapTraceSpan = null, string org = null)
         {
@@ -1026,7 +1026,7 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="org">specifies the organization of the resource (optional)</param>
+        /// <param name="org">The organization name. (optional)</param>
         /// <returns>Task of IRestResponse (Sources)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetSourcesAsyncWithIRestResponse (string zapTraceSpan = null, string org = null)
         {
@@ -1075,7 +1075,7 @@ namespace InfluxDB.Client.Api.Service
         /// Get a source 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="sourceID">ID of the source</param>
+        /// <param name="sourceID">The source ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Source</returns>
         public Source GetSourcesID (string sourceID, string zapTraceSpan = null)
@@ -1088,7 +1088,7 @@ namespace InfluxDB.Client.Api.Service
         /// Get a source 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="sourceID">ID of the source</param>
+        /// <param name="sourceID">The source ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Source</returns>
         public ApiResponse< Source > GetSourcesIDWithHttpInfo (string sourceID, string zapTraceSpan = null)
@@ -1145,7 +1145,7 @@ namespace InfluxDB.Client.Api.Service
         /// Get a source 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="sourceID">ID of the source</param>
+        /// <param name="sourceID">The source ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Source</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetSourcesIDWithIRestResponseAsync (string sourceID, string zapTraceSpan = null)
@@ -1200,7 +1200,7 @@ namespace InfluxDB.Client.Api.Service
         /// Get a source 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="sourceID">ID of the source</param>
+        /// <param name="sourceID">The source ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Source</returns>
         public IRestResponse GetSourcesIDWithIRestResponse (string sourceID, string zapTraceSpan = null)
@@ -1255,7 +1255,7 @@ namespace InfluxDB.Client.Api.Service
         /// Get a source 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="sourceID">ID of the source</param>
+        /// <param name="sourceID">The source ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Source</returns>
         public RestRequest GetSourcesIDWithRestRequest (string sourceID, string zapTraceSpan = null)
@@ -1299,7 +1299,7 @@ namespace InfluxDB.Client.Api.Service
         /// Get a source 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="sourceID">ID of the source</param>
+        /// <param name="sourceID">The source ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of Source</returns>
         public async System.Threading.Tasks.Task<Source> GetSourcesIDAsync (string sourceID, string zapTraceSpan = null)
@@ -1313,7 +1313,7 @@ namespace InfluxDB.Client.Api.Service
         /// Get a source 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="sourceID">ID of the source</param>
+        /// <param name="sourceID">The source ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (Source)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Source>> GetSourcesIDAsyncWithHttpInfo (string sourceID, string zapTraceSpan = null)
@@ -1338,7 +1338,7 @@ namespace InfluxDB.Client.Api.Service
         /// Get a source 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="sourceID">ID of the source</param>
+        /// <param name="sourceID">The source ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (Source)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetSourcesIDAsyncWithIRestResponse (string sourceID, string zapTraceSpan = null)
@@ -1388,12 +1388,12 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Get a sources buckets (will return dbrps in the form of buckets if it is a v1 source) 
+        /// Get buckets in a source 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="sourceID">ID of the source</param>
+        /// <param name="sourceID">The source ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="org">specifies the organization of the resource (optional)</param>
+        /// <param name="org">The organization name. (optional)</param>
         /// <returns>Buckets</returns>
         public Buckets GetSourcesIDBuckets (string sourceID, string zapTraceSpan = null, string org = null)
         {
@@ -1402,12 +1402,12 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Get a sources buckets (will return dbrps in the form of buckets if it is a v1 source) 
+        /// Get buckets in a source 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="sourceID">ID of the source</param>
+        /// <param name="sourceID">The source ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="org">specifies the organization of the resource (optional)</param>
+        /// <param name="org">The organization name. (optional)</param>
         /// <returns>ApiResponse of Buckets</returns>
         public ApiResponse< Buckets > GetSourcesIDBucketsWithHttpInfo (string sourceID, string zapTraceSpan = null, string org = null)
         {
@@ -1461,12 +1461,12 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Get a sources buckets (will return dbrps in the form of buckets if it is a v1 source) 
+        /// Get buckets in a source 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="sourceID">ID of the source</param>
+        /// <param name="sourceID">The source ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="org">specifies the organization of the resource (optional)</param>
+        /// <param name="org">The organization name. (optional)</param>
         /// <returns>ApiResponse of Buckets</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetSourcesIDBucketsWithIRestResponseAsync (string sourceID, string zapTraceSpan = null, string org = null)
         {
@@ -1518,12 +1518,12 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Get a sources buckets (will return dbrps in the form of buckets if it is a v1 source) 
+        /// Get buckets in a source 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="sourceID">ID of the source</param>
+        /// <param name="sourceID">The source ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="org">specifies the organization of the resource (optional)</param>
+        /// <param name="org">The organization name. (optional)</param>
         /// <returns>ApiResponse of Buckets</returns>
         public IRestResponse GetSourcesIDBucketsWithIRestResponse (string sourceID, string zapTraceSpan = null, string org = null)
         {
@@ -1575,12 +1575,12 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// Get a sources buckets (will return dbrps in the form of buckets if it is a v1 source) 
+        /// Get buckets in a source 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="sourceID">ID of the source</param>
+        /// <param name="sourceID">The source ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="org">specifies the organization of the resource (optional)</param>
+        /// <param name="org">The organization name. (optional)</param>
         /// <returns>ApiResponse of Buckets</returns>
         public RestRequest GetSourcesIDBucketsWithRestRequest (string sourceID, string zapTraceSpan = null, string org = null)
         {
@@ -1621,12 +1621,12 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Get a sources buckets (will return dbrps in the form of buckets if it is a v1 source) 
+        /// Get buckets in a source 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="sourceID">ID of the source</param>
+        /// <param name="sourceID">The source ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="org">specifies the organization of the resource (optional)</param>
+        /// <param name="org">The organization name. (optional)</param>
         /// <returns>Task of Buckets</returns>
         public async System.Threading.Tasks.Task<Buckets> GetSourcesIDBucketsAsync (string sourceID, string zapTraceSpan = null, string org = null)
         {
@@ -1636,12 +1636,12 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Get a sources buckets (will return dbrps in the form of buckets if it is a v1 source) 
+        /// Get buckets in a source 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="sourceID">ID of the source</param>
+        /// <param name="sourceID">The source ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="org">specifies the organization of the resource (optional)</param>
+        /// <param name="org">The organization name. (optional)</param>
         /// <returns>Task of ApiResponse (Buckets)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Buckets>> GetSourcesIDBucketsAsyncWithHttpInfo (string sourceID, string zapTraceSpan = null, string org = null)
         {
@@ -1662,12 +1662,12 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// Get a sources buckets (will return dbrps in the form of buckets if it is a v1 source) 
+        /// Get buckets in a source 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="sourceID">ID of the source</param>
+        /// <param name="sourceID">The source ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="org">specifies the organization of the resource (optional)</param>
+        /// <param name="org">The organization name. (optional)</param>
         /// <returns>Task of IRestResponse (Buckets)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetSourcesIDBucketsAsyncWithIRestResponse (string sourceID, string zapTraceSpan = null, string org = null)
         {
@@ -1717,10 +1717,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Get a sources health 
+        /// Get the health of a source 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="sourceID">ID of the source</param>
+        /// <param name="sourceID">The source ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>HealthCheck</returns>
         public HealthCheck GetSourcesIDHealth (string sourceID, string zapTraceSpan = null)
@@ -1730,10 +1730,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Get a sources health 
+        /// Get the health of a source 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="sourceID">ID of the source</param>
+        /// <param name="sourceID">The source ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of HealthCheck</returns>
         public ApiResponse< HealthCheck > GetSourcesIDHealthWithHttpInfo (string sourceID, string zapTraceSpan = null)
@@ -1787,10 +1787,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Get a sources health 
+        /// Get the health of a source 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="sourceID">ID of the source</param>
+        /// <param name="sourceID">The source ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of HealthCheck</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetSourcesIDHealthWithIRestResponseAsync (string sourceID, string zapTraceSpan = null)
@@ -1842,10 +1842,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Get a sources health 
+        /// Get the health of a source 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="sourceID">ID of the source</param>
+        /// <param name="sourceID">The source ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of HealthCheck</returns>
         public IRestResponse GetSourcesIDHealthWithIRestResponse (string sourceID, string zapTraceSpan = null)
@@ -1897,10 +1897,10 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// Get a sources health 
+        /// Get the health of a source 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="sourceID">ID of the source</param>
+        /// <param name="sourceID">The source ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of HealthCheck</returns>
         public RestRequest GetSourcesIDHealthWithRestRequest (string sourceID, string zapTraceSpan = null)
@@ -1941,10 +1941,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Get a sources health 
+        /// Get the health of a source 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="sourceID">ID of the source</param>
+        /// <param name="sourceID">The source ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of HealthCheck</returns>
         public async System.Threading.Tasks.Task<HealthCheck> GetSourcesIDHealthAsync (string sourceID, string zapTraceSpan = null)
@@ -1955,10 +1955,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Get a sources health 
+        /// Get the health of a source 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="sourceID">ID of the source</param>
+        /// <param name="sourceID">The source ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (HealthCheck)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<HealthCheck>> GetSourcesIDHealthAsyncWithHttpInfo (string sourceID, string zapTraceSpan = null)
@@ -1980,10 +1980,10 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// Get a sources health 
+        /// Get the health of a source 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="sourceID">ID of the source</param>
+        /// <param name="sourceID">The source ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (HealthCheck)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetSourcesIDHealthAsyncWithIRestResponse (string sourceID, string zapTraceSpan = null)
@@ -2033,11 +2033,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Updates a Source 
+        /// Update a Source 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="sourceID">ID of the source</param>
-        /// <param name="source">source update</param>
+        /// <param name="sourceID">The source ID.</param>
+        /// <param name="source">Source update</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Source</returns>
         public Source PatchSourcesID (string sourceID, Source source, string zapTraceSpan = null)
@@ -2047,11 +2047,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Updates a Source 
+        /// Update a Source 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="sourceID">ID of the source</param>
-        /// <param name="source">source update</param>
+        /// <param name="sourceID">The source ID.</param>
+        /// <param name="source">Source update</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Source</returns>
         public ApiResponse< Source > PatchSourcesIDWithHttpInfo (string sourceID, Source source, string zapTraceSpan = null)
@@ -2117,11 +2117,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Updates a Source 
+        /// Update a Source 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="sourceID">ID of the source</param>
-        /// <param name="source">source update</param>
+        /// <param name="sourceID">The source ID.</param>
+        /// <param name="source">Source update</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Source</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PatchSourcesIDWithIRestResponseAsync (string sourceID, Source source, string zapTraceSpan = null)
@@ -2185,11 +2185,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Updates a Source 
+        /// Update a Source 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="sourceID">ID of the source</param>
-        /// <param name="source">source update</param>
+        /// <param name="sourceID">The source ID.</param>
+        /// <param name="source">Source update</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Source</returns>
         public IRestResponse PatchSourcesIDWithIRestResponse (string sourceID, Source source, string zapTraceSpan = null)
@@ -2253,11 +2253,11 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// Updates a Source 
+        /// Update a Source 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="sourceID">ID of the source</param>
-        /// <param name="source">source update</param>
+        /// <param name="sourceID">The source ID.</param>
+        /// <param name="source">Source update</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Source</returns>
         public RestRequest PatchSourcesIDWithRestRequest (string sourceID, Source source, string zapTraceSpan = null)
@@ -2310,11 +2310,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Updates a Source 
+        /// Update a Source 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="sourceID">ID of the source</param>
-        /// <param name="source">source update</param>
+        /// <param name="sourceID">The source ID.</param>
+        /// <param name="source">Source update</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of Source</returns>
         public async System.Threading.Tasks.Task<Source> PatchSourcesIDAsync (string sourceID, Source source, string zapTraceSpan = null)
@@ -2325,11 +2325,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Updates a Source 
+        /// Update a Source 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="sourceID">ID of the source</param>
-        /// <param name="source">source update</param>
+        /// <param name="sourceID">The source ID.</param>
+        /// <param name="source">Source update</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (Source)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Source>> PatchSourcesIDAsyncWithHttpInfo (string sourceID, Source source, string zapTraceSpan = null)
@@ -2351,11 +2351,11 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// Updates a Source 
+        /// Update a Source 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="sourceID">ID of the source</param>
-        /// <param name="source">source update</param>
+        /// <param name="sourceID">The source ID.</param>
+        /// <param name="source">Source update</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (Source)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PatchSourcesIDAsyncWithIRestResponse (string sourceID, Source source, string zapTraceSpan = null)
@@ -2417,10 +2417,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Creates a Source 
+        /// Creates a source 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="source">source to create</param>
+        /// <param name="source">Source to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Source</returns>
         public Source PostSources (Source source, string zapTraceSpan = null)
@@ -2430,10 +2430,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Creates a Source 
+        /// Creates a source 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="source">source to create</param>
+        /// <param name="source">Source to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Source</returns>
         public ApiResponse< Source > PostSourcesWithHttpInfo (Source source, string zapTraceSpan = null)
@@ -2495,10 +2495,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Creates a Source 
+        /// Creates a source 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="source">source to create</param>
+        /// <param name="source">Source to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Source</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PostSourcesWithIRestResponseAsync (Source source, string zapTraceSpan = null)
@@ -2558,10 +2558,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Creates a Source 
+        /// Creates a source 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="source">source to create</param>
+        /// <param name="source">Source to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Source</returns>
         public IRestResponse PostSourcesWithIRestResponse (Source source, string zapTraceSpan = null)
@@ -2621,10 +2621,10 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// Creates a Source 
+        /// Creates a source 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="source">source to create</param>
+        /// <param name="source">Source to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Source</returns>
         public RestRequest PostSourcesWithRestRequest (Source source, string zapTraceSpan = null)
@@ -2673,10 +2673,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Creates a Source 
+        /// Creates a source 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="source">source to create</param>
+        /// <param name="source">Source to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of Source</returns>
         public async System.Threading.Tasks.Task<Source> PostSourcesAsync (Source source, string zapTraceSpan = null)
@@ -2687,10 +2687,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Creates a Source 
+        /// Creates a source 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="source">source to create</param>
+        /// <param name="source">Source to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (Source)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Source>> PostSourcesAsyncWithHttpInfo (Source source, string zapTraceSpan = null)
@@ -2712,10 +2712,10 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// Creates a Source 
+        /// Creates a source 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="source">source to create</param>
+        /// <param name="source">Source to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (Source)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PostSourcesAsyncWithIRestResponse (Source source, string zapTraceSpan = null)

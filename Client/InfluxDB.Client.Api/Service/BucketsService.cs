@@ -31,7 +31,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of bucket to delete</param>
+        /// <param name="bucketID">The ID of the bucket to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
         void DeleteBucketsID (string bucketID, string zapTraceSpan = null);
@@ -43,7 +43,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of bucket to delete</param>
+        /// <param name="bucketID">The ID of the bucket to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> DeleteBucketsIDWithHttpInfo (string bucketID, string zapTraceSpan = null);
@@ -54,8 +54,8 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
-        /// <param name="labelID">the label id to delete</param>
+        /// <param name="bucketID">The bucket ID.</param>
+        /// <param name="labelID">The ID of the label to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
         void DeleteBucketsIDLabelsID (string bucketID, string labelID, string zapTraceSpan = null);
@@ -67,58 +67,58 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
-        /// <param name="labelID">the label id to delete</param>
+        /// <param name="bucketID">The bucket ID.</param>
+        /// <param name="labelID">The ID of the label to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> DeleteBucketsIDLabelsIDWithHttpInfo (string bucketID, string labelID, string zapTraceSpan = null);
         /// <summary>
-        /// removes a member from an bucket
+        /// Remove a member from a bucket
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
         void DeleteBucketsIDMembersID (string userID, string bucketID, string zapTraceSpan = null);
 
         /// <summary>
-        /// removes a member from an bucket
+        /// Remove a member from a bucket
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> DeleteBucketsIDMembersIDWithHttpInfo (string userID, string bucketID, string zapTraceSpan = null);
         /// <summary>
-        /// removes an owner from a bucket
+        /// Remove an owner from a bucket
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
         void DeleteBucketsIDOwnersID (string userID, string bucketID, string zapTraceSpan = null);
 
         /// <summary>
-        /// removes an owner from a bucket
+        /// Remove an owner from a bucket
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> DeleteBucketsIDOwnersIDWithHttpInfo (string userID, string bucketID, string zapTraceSpan = null);
@@ -132,9 +132,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
-        /// <param name="org">specifies the organization name of the resource (optional)</param>
-        /// <param name="orgID">specifies the organization id of the resource (optional)</param>
-        /// <param name="name">only returns buckets with the specified name (optional)</param>
+        /// <param name="org">The organization name. (optional)</param>
+        /// <param name="orgID">The organization ID. (optional)</param>
+        /// <param name="name">Only returns buckets with a specific name. (optional)</param>
         /// <returns>Buckets</returns>
         Buckets GetBuckets (string zapTraceSpan = null, int? offset = null, int? limit = null, string org = null, string orgID = null, string name = null);
 
@@ -148,9 +148,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
-        /// <param name="org">specifies the organization name of the resource (optional)</param>
-        /// <param name="orgID">specifies the organization id of the resource (optional)</param>
-        /// <param name="name">only returns buckets with the specified name (optional)</param>
+        /// <param name="org">The organization name. (optional)</param>
+        /// <param name="orgID">The organization ID. (optional)</param>
+        /// <param name="name">Only returns buckets with a specific name. (optional)</param>
         /// <returns>ApiResponse of Buckets</returns>
         ApiResponse<Buckets> GetBucketsWithHttpInfo (string zapTraceSpan = null, int? offset = null, int? limit = null, string org = null, string orgID = null, string name = null);
         /// <summary>
@@ -160,7 +160,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of bucket to get</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Bucket</returns>
         Bucket GetBucketsID (string bucketID, string zapTraceSpan = null);
@@ -172,30 +172,30 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of bucket to get</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Bucket</returns>
         ApiResponse<Bucket> GetBucketsIDWithHttpInfo (string bucketID, string zapTraceSpan = null);
         /// <summary>
-        /// list all labels for a bucket
+        /// List all labels for a bucket
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>LabelsResponse</returns>
         LabelsResponse GetBucketsIDLabels (string bucketID, string zapTraceSpan = null);
 
         /// <summary>
-        /// list all labels for a bucket
+        /// List all labels for a bucket
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelsResponse</returns>
         ApiResponse<LabelsResponse> GetBucketsIDLabelsWithHttpInfo (string bucketID, string zapTraceSpan = null);
@@ -206,7 +206,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
@@ -220,7 +220,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
@@ -233,7 +233,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ResourceMembers</returns>
         ResourceMembers GetBucketsIDMembers (string bucketID, string zapTraceSpan = null);
@@ -245,7 +245,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMembers</returns>
         ApiResponse<ResourceMembers> GetBucketsIDMembersWithHttpInfo (string bucketID, string zapTraceSpan = null);
@@ -256,7 +256,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ResourceOwners</returns>
         ResourceOwners GetBucketsIDOwners (string bucketID, string zapTraceSpan = null);
@@ -268,33 +268,33 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwners</returns>
         ApiResponse<ResourceOwners> GetBucketsIDOwnersWithHttpInfo (string bucketID, string zapTraceSpan = null);
         /// <summary>
-        /// Get a sources buckets (will return dbrps in the form of buckets if it is a v1 source)
+        /// Get buckets in a source
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="sourceID">ID of the source</param>
+        /// <param name="sourceID">The source ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="org">specifies the organization of the resource (optional)</param>
+        /// <param name="org">The organization name. (optional)</param>
         /// <returns>Buckets</returns>
         Buckets GetSourcesIDBuckets (string sourceID, string zapTraceSpan = null, string org = null);
 
         /// <summary>
-        /// Get a sources buckets (will return dbrps in the form of buckets if it is a v1 source)
+        /// Get buckets in a source
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="sourceID">ID of the source</param>
+        /// <param name="sourceID">The source ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="org">specifies the organization of the resource (optional)</param>
+        /// <param name="org">The organization name. (optional)</param>
         /// <returns>ApiResponse of Buckets</returns>
         ApiResponse<Buckets> GetSourcesIDBucketsWithHttpInfo (string sourceID, string zapTraceSpan = null, string org = null);
         /// <summary>
@@ -304,8 +304,8 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of bucket to update</param>
-        /// <param name="bucket">bucket update to apply</param>
+        /// <param name="bucketID">The bucket ID.</param>
+        /// <param name="bucket">Bucket update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Bucket</returns>
         Bucket PatchBucketsID (string bucketID, Bucket bucket, string zapTraceSpan = null);
@@ -317,8 +317,8 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of bucket to update</param>
-        /// <param name="bucket">bucket update to apply</param>
+        /// <param name="bucketID">The bucket ID.</param>
+        /// <param name="bucket">Bucket update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Bucket</returns>
         ApiResponse<Bucket> PatchBucketsIDWithHttpInfo (string bucketID, Bucket bucket, string zapTraceSpan = null);
@@ -329,7 +329,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucket">bucket to create</param>
+        /// <param name="bucket">Bucket to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Bucket</returns>
         Bucket PostBuckets (Bucket bucket, string zapTraceSpan = null);
@@ -341,82 +341,82 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucket">bucket to create</param>
+        /// <param name="bucket">Bucket to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Bucket</returns>
         ApiResponse<Bucket> PostBucketsWithHttpInfo (Bucket bucket, string zapTraceSpan = null);
         /// <summary>
-        /// add a label to a bucket
+        /// Add a label to a bucket
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="bucketID">The bucket ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>LabelResponse</returns>
         LabelResponse PostBucketsIDLabels (string bucketID, LabelMapping labelMapping, string zapTraceSpan = null);
 
         /// <summary>
-        /// add a label to a bucket
+        /// Add a label to a bucket
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="bucketID">The bucket ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelResponse</returns>
         ApiResponse<LabelResponse> PostBucketsIDLabelsWithHttpInfo (string bucketID, LabelMapping labelMapping, string zapTraceSpan = null);
         /// <summary>
-        /// Add bucket member
+        /// Add a member to a bucket
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="bucketID">The bucket ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ResourceMember</returns>
         ResourceMember PostBucketsIDMembers (string bucketID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
 
         /// <summary>
-        /// Add bucket member
+        /// Add a member to a bucket
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="bucketID">The bucket ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMember</returns>
         ApiResponse<ResourceMember> PostBucketsIDMembersWithHttpInfo (string bucketID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
         /// <summary>
-        /// Add bucket owner
+        /// Add an owner to a bucket
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="bucketID">The bucket ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ResourceOwner</returns>
         ResourceOwner PostBucketsIDOwners (string bucketID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
 
         /// <summary>
-        /// Add bucket owner
+        /// Add an owner to a bucket
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="bucketID">The bucket ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwner</returns>
         ApiResponse<ResourceOwner> PostBucketsIDOwnersWithHttpInfo (string bucketID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
@@ -429,7 +429,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of bucket to delete</param>
+        /// <param name="bucketID">The ID of the bucket to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
         System.Threading.Tasks.Task DeleteBucketsIDAsync (string bucketID, string zapTraceSpan = null);
@@ -441,7 +441,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of bucket to delete</param>
+        /// <param name="bucketID">The ID of the bucket to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         System.Threading.Tasks.Task<ApiResponse<Object>> DeleteBucketsIDAsyncWithHttpInfo (string bucketID, string zapTraceSpan = null);
@@ -452,8 +452,8 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
-        /// <param name="labelID">the label id to delete</param>
+        /// <param name="bucketID">The bucket ID.</param>
+        /// <param name="labelID">The ID of the label to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
         System.Threading.Tasks.Task DeleteBucketsIDLabelsIDAsync (string bucketID, string labelID, string zapTraceSpan = null);
@@ -465,58 +465,58 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
-        /// <param name="labelID">the label id to delete</param>
+        /// <param name="bucketID">The bucket ID.</param>
+        /// <param name="labelID">The ID of the label to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         System.Threading.Tasks.Task<ApiResponse<Object>> DeleteBucketsIDLabelsIDAsyncWithHttpInfo (string bucketID, string labelID, string zapTraceSpan = null);
         /// <summary>
-        /// removes a member from an bucket
+        /// Remove a member from a bucket
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
         System.Threading.Tasks.Task DeleteBucketsIDMembersIDAsync (string userID, string bucketID, string zapTraceSpan = null);
 
         /// <summary>
-        /// removes a member from an bucket
+        /// Remove a member from a bucket
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         System.Threading.Tasks.Task<ApiResponse<Object>> DeleteBucketsIDMembersIDAsyncWithHttpInfo (string userID, string bucketID, string zapTraceSpan = null);
         /// <summary>
-        /// removes an owner from a bucket
+        /// Remove an owner from a bucket
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
         System.Threading.Tasks.Task DeleteBucketsIDOwnersIDAsync (string userID, string bucketID, string zapTraceSpan = null);
 
         /// <summary>
-        /// removes an owner from a bucket
+        /// Remove an owner from a bucket
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         System.Threading.Tasks.Task<ApiResponse<Object>> DeleteBucketsIDOwnersIDAsyncWithHttpInfo (string userID, string bucketID, string zapTraceSpan = null);
@@ -530,9 +530,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
-        /// <param name="org">specifies the organization name of the resource (optional)</param>
-        /// <param name="orgID">specifies the organization id of the resource (optional)</param>
-        /// <param name="name">only returns buckets with the specified name (optional)</param>
+        /// <param name="org">The organization name. (optional)</param>
+        /// <param name="orgID">The organization ID. (optional)</param>
+        /// <param name="name">Only returns buckets with a specific name. (optional)</param>
         /// <returns>Task of Buckets</returns>
         System.Threading.Tasks.Task<Buckets> GetBucketsAsync (string zapTraceSpan = null, int? offset = null, int? limit = null, string org = null, string orgID = null, string name = null);
 
@@ -546,9 +546,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
-        /// <param name="org">specifies the organization name of the resource (optional)</param>
-        /// <param name="orgID">specifies the organization id of the resource (optional)</param>
-        /// <param name="name">only returns buckets with the specified name (optional)</param>
+        /// <param name="org">The organization name. (optional)</param>
+        /// <param name="orgID">The organization ID. (optional)</param>
+        /// <param name="name">Only returns buckets with a specific name. (optional)</param>
         /// <returns>Task of ApiResponse (Buckets)</returns>
         System.Threading.Tasks.Task<ApiResponse<Buckets>> GetBucketsAsyncWithHttpInfo (string zapTraceSpan = null, int? offset = null, int? limit = null, string org = null, string orgID = null, string name = null);
         /// <summary>
@@ -558,7 +558,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of bucket to get</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of Bucket</returns>
         System.Threading.Tasks.Task<Bucket> GetBucketsIDAsync (string bucketID, string zapTraceSpan = null);
@@ -570,30 +570,30 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of bucket to get</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (Bucket)</returns>
         System.Threading.Tasks.Task<ApiResponse<Bucket>> GetBucketsIDAsyncWithHttpInfo (string bucketID, string zapTraceSpan = null);
         /// <summary>
-        /// list all labels for a bucket
+        /// List all labels for a bucket
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of LabelsResponse</returns>
         System.Threading.Tasks.Task<LabelsResponse> GetBucketsIDLabelsAsync (string bucketID, string zapTraceSpan = null);
 
         /// <summary>
-        /// list all labels for a bucket
+        /// List all labels for a bucket
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (LabelsResponse)</returns>
         System.Threading.Tasks.Task<ApiResponse<LabelsResponse>> GetBucketsIDLabelsAsyncWithHttpInfo (string bucketID, string zapTraceSpan = null);
@@ -604,7 +604,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
@@ -618,7 +618,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
@@ -631,7 +631,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ResourceMembers</returns>
         System.Threading.Tasks.Task<ResourceMembers> GetBucketsIDMembersAsync (string bucketID, string zapTraceSpan = null);
@@ -643,7 +643,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (ResourceMembers)</returns>
         System.Threading.Tasks.Task<ApiResponse<ResourceMembers>> GetBucketsIDMembersAsyncWithHttpInfo (string bucketID, string zapTraceSpan = null);
@@ -654,7 +654,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ResourceOwners</returns>
         System.Threading.Tasks.Task<ResourceOwners> GetBucketsIDOwnersAsync (string bucketID, string zapTraceSpan = null);
@@ -666,33 +666,33 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (ResourceOwners)</returns>
         System.Threading.Tasks.Task<ApiResponse<ResourceOwners>> GetBucketsIDOwnersAsyncWithHttpInfo (string bucketID, string zapTraceSpan = null);
         /// <summary>
-        /// Get a sources buckets (will return dbrps in the form of buckets if it is a v1 source)
+        /// Get buckets in a source
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="sourceID">ID of the source</param>
+        /// <param name="sourceID">The source ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="org">specifies the organization of the resource (optional)</param>
+        /// <param name="org">The organization name. (optional)</param>
         /// <returns>Task of Buckets</returns>
         System.Threading.Tasks.Task<Buckets> GetSourcesIDBucketsAsync (string sourceID, string zapTraceSpan = null, string org = null);
 
         /// <summary>
-        /// Get a sources buckets (will return dbrps in the form of buckets if it is a v1 source)
+        /// Get buckets in a source
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="sourceID">ID of the source</param>
+        /// <param name="sourceID">The source ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="org">specifies the organization of the resource (optional)</param>
+        /// <param name="org">The organization name. (optional)</param>
         /// <returns>Task of ApiResponse (Buckets)</returns>
         System.Threading.Tasks.Task<ApiResponse<Buckets>> GetSourcesIDBucketsAsyncWithHttpInfo (string sourceID, string zapTraceSpan = null, string org = null);
         /// <summary>
@@ -702,8 +702,8 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of bucket to update</param>
-        /// <param name="bucket">bucket update to apply</param>
+        /// <param name="bucketID">The bucket ID.</param>
+        /// <param name="bucket">Bucket update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of Bucket</returns>
         System.Threading.Tasks.Task<Bucket> PatchBucketsIDAsync (string bucketID, Bucket bucket, string zapTraceSpan = null);
@@ -715,8 +715,8 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of bucket to update</param>
-        /// <param name="bucket">bucket update to apply</param>
+        /// <param name="bucketID">The bucket ID.</param>
+        /// <param name="bucket">Bucket update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (Bucket)</returns>
         System.Threading.Tasks.Task<ApiResponse<Bucket>> PatchBucketsIDAsyncWithHttpInfo (string bucketID, Bucket bucket, string zapTraceSpan = null);
@@ -727,7 +727,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucket">bucket to create</param>
+        /// <param name="bucket">Bucket to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of Bucket</returns>
         System.Threading.Tasks.Task<Bucket> PostBucketsAsync (Bucket bucket, string zapTraceSpan = null);
@@ -739,82 +739,82 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucket">bucket to create</param>
+        /// <param name="bucket">Bucket to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (Bucket)</returns>
         System.Threading.Tasks.Task<ApiResponse<Bucket>> PostBucketsAsyncWithHttpInfo (Bucket bucket, string zapTraceSpan = null);
         /// <summary>
-        /// add a label to a bucket
+        /// Add a label to a bucket
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="bucketID">The bucket ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of LabelResponse</returns>
         System.Threading.Tasks.Task<LabelResponse> PostBucketsIDLabelsAsync (string bucketID, LabelMapping labelMapping, string zapTraceSpan = null);
 
         /// <summary>
-        /// add a label to a bucket
+        /// Add a label to a bucket
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="bucketID">The bucket ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (LabelResponse)</returns>
         System.Threading.Tasks.Task<ApiResponse<LabelResponse>> PostBucketsIDLabelsAsyncWithHttpInfo (string bucketID, LabelMapping labelMapping, string zapTraceSpan = null);
         /// <summary>
-        /// Add bucket member
+        /// Add a member to a bucket
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="bucketID">The bucket ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ResourceMember</returns>
         System.Threading.Tasks.Task<ResourceMember> PostBucketsIDMembersAsync (string bucketID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
 
         /// <summary>
-        /// Add bucket member
+        /// Add a member to a bucket
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="bucketID">The bucket ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (ResourceMember)</returns>
         System.Threading.Tasks.Task<ApiResponse<ResourceMember>> PostBucketsIDMembersAsyncWithHttpInfo (string bucketID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
         /// <summary>
-        /// Add bucket owner
+        /// Add an owner to a bucket
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="bucketID">The bucket ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ResourceOwner</returns>
         System.Threading.Tasks.Task<ResourceOwner> PostBucketsIDOwnersAsync (string bucketID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
 
         /// <summary>
-        /// Add bucket owner
+        /// Add an owner to a bucket
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="bucketID">The bucket ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (ResourceOwner)</returns>
         System.Threading.Tasks.Task<ApiResponse<ResourceOwner>> PostBucketsIDOwnersAsyncWithHttpInfo (string bucketID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
@@ -922,7 +922,7 @@ namespace InfluxDB.Client.Api.Service
         /// Delete a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of bucket to delete</param>
+        /// <param name="bucketID">The ID of the bucket to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
         public void DeleteBucketsID (string bucketID, string zapTraceSpan = null)
@@ -934,7 +934,7 @@ namespace InfluxDB.Client.Api.Service
         /// Delete a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of bucket to delete</param>
+        /// <param name="bucketID">The ID of the bucket to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public ApiResponse<Object> DeleteBucketsIDWithHttpInfo (string bucketID, string zapTraceSpan = null)
@@ -991,7 +991,7 @@ namespace InfluxDB.Client.Api.Service
         /// Delete a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of bucket to delete</param>
+        /// <param name="bucketID">The ID of the bucket to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> DeleteBucketsIDWithIRestResponseAsync (string bucketID, string zapTraceSpan = null)
@@ -1046,7 +1046,7 @@ namespace InfluxDB.Client.Api.Service
         /// Delete a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of bucket to delete</param>
+        /// <param name="bucketID">The ID of the bucket to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public IRestResponse DeleteBucketsIDWithIRestResponse (string bucketID, string zapTraceSpan = null)
@@ -1101,7 +1101,7 @@ namespace InfluxDB.Client.Api.Service
         /// Delete a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of bucket to delete</param>
+        /// <param name="bucketID">The ID of the bucket to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public RestRequest DeleteBucketsIDWithRestRequest (string bucketID, string zapTraceSpan = null)
@@ -1145,7 +1145,7 @@ namespace InfluxDB.Client.Api.Service
         /// Delete a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of bucket to delete</param>
+        /// <param name="bucketID">The ID of the bucket to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
         public async System.Threading.Tasks.Task DeleteBucketsIDAsync (string bucketID, string zapTraceSpan = null)
@@ -1158,7 +1158,7 @@ namespace InfluxDB.Client.Api.Service
         /// Delete a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of bucket to delete</param>
+        /// <param name="bucketID">The ID of the bucket to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteBucketsIDAsyncWithHttpInfo (string bucketID, string zapTraceSpan = null)
@@ -1183,7 +1183,7 @@ namespace InfluxDB.Client.Api.Service
         /// Delete a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of bucket to delete</param>
+        /// <param name="bucketID">The ID of the bucket to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse</returns>
         public async System.Threading.Tasks.Task<IRestResponse> DeleteBucketsIDAsyncWithIRestResponse (string bucketID, string zapTraceSpan = null)
@@ -1236,8 +1236,8 @@ namespace InfluxDB.Client.Api.Service
         /// delete a label from a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
-        /// <param name="labelID">the label id to delete</param>
+        /// <param name="bucketID">The bucket ID.</param>
+        /// <param name="labelID">The ID of the label to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
         public void DeleteBucketsIDLabelsID (string bucketID, string labelID, string zapTraceSpan = null)
@@ -1249,8 +1249,8 @@ namespace InfluxDB.Client.Api.Service
         /// delete a label from a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
-        /// <param name="labelID">the label id to delete</param>
+        /// <param name="bucketID">The bucket ID.</param>
+        /// <param name="labelID">The ID of the label to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public ApiResponse<Object> DeleteBucketsIDLabelsIDWithHttpInfo (string bucketID, string labelID, string zapTraceSpan = null)
@@ -1311,8 +1311,8 @@ namespace InfluxDB.Client.Api.Service
         /// delete a label from a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
-        /// <param name="labelID">the label id to delete</param>
+        /// <param name="bucketID">The bucket ID.</param>
+        /// <param name="labelID">The ID of the label to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> DeleteBucketsIDLabelsIDWithIRestResponseAsync (string bucketID, string labelID, string zapTraceSpan = null)
@@ -1371,8 +1371,8 @@ namespace InfluxDB.Client.Api.Service
         /// delete a label from a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
-        /// <param name="labelID">the label id to delete</param>
+        /// <param name="bucketID">The bucket ID.</param>
+        /// <param name="labelID">The ID of the label to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public IRestResponse DeleteBucketsIDLabelsIDWithIRestResponse (string bucketID, string labelID, string zapTraceSpan = null)
@@ -1431,8 +1431,8 @@ namespace InfluxDB.Client.Api.Service
         /// delete a label from a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
-        /// <param name="labelID">the label id to delete</param>
+        /// <param name="bucketID">The bucket ID.</param>
+        /// <param name="labelID">The ID of the label to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public RestRequest DeleteBucketsIDLabelsIDWithRestRequest (string bucketID, string labelID, string zapTraceSpan = null)
@@ -1480,8 +1480,8 @@ namespace InfluxDB.Client.Api.Service
         /// delete a label from a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
-        /// <param name="labelID">the label id to delete</param>
+        /// <param name="bucketID">The bucket ID.</param>
+        /// <param name="labelID">The ID of the label to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
         public async System.Threading.Tasks.Task DeleteBucketsIDLabelsIDAsync (string bucketID, string labelID, string zapTraceSpan = null)
@@ -1494,8 +1494,8 @@ namespace InfluxDB.Client.Api.Service
         /// delete a label from a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
-        /// <param name="labelID">the label id to delete</param>
+        /// <param name="bucketID">The bucket ID.</param>
+        /// <param name="labelID">The ID of the label to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteBucketsIDLabelsIDAsyncWithHttpInfo (string bucketID, string labelID, string zapTraceSpan = null)
@@ -1520,8 +1520,8 @@ namespace InfluxDB.Client.Api.Service
         /// delete a label from a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
-        /// <param name="labelID">the label id to delete</param>
+        /// <param name="bucketID">The bucket ID.</param>
+        /// <param name="labelID">The ID of the label to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse</returns>
         public async System.Threading.Tasks.Task<IRestResponse> DeleteBucketsIDLabelsIDAsyncWithIRestResponse (string bucketID, string labelID, string zapTraceSpan = null)
@@ -1575,11 +1575,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes a member from an bucket 
+        /// Remove a member from a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
         public void DeleteBucketsIDMembersID (string userID, string bucketID, string zapTraceSpan = null)
@@ -1588,11 +1588,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes a member from an bucket 
+        /// Remove a member from a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public ApiResponse<Object> DeleteBucketsIDMembersIDWithHttpInfo (string userID, string bucketID, string zapTraceSpan = null)
@@ -1650,11 +1650,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes a member from an bucket 
+        /// Remove a member from a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> DeleteBucketsIDMembersIDWithIRestResponseAsync (string userID, string bucketID, string zapTraceSpan = null)
@@ -1710,11 +1710,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes a member from an bucket 
+        /// Remove a member from a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public IRestResponse DeleteBucketsIDMembersIDWithIRestResponse (string userID, string bucketID, string zapTraceSpan = null)
@@ -1770,11 +1770,11 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// removes a member from an bucket 
+        /// Remove a member from a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public RestRequest DeleteBucketsIDMembersIDWithRestRequest (string userID, string bucketID, string zapTraceSpan = null)
@@ -1819,11 +1819,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes a member from an bucket 
+        /// Remove a member from a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
         public async System.Threading.Tasks.Task DeleteBucketsIDMembersIDAsync (string userID, string bucketID, string zapTraceSpan = null)
@@ -1833,11 +1833,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes a member from an bucket 
+        /// Remove a member from a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteBucketsIDMembersIDAsyncWithHttpInfo (string userID, string bucketID, string zapTraceSpan = null)
@@ -1859,11 +1859,11 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// removes a member from an bucket 
+        /// Remove a member from a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse</returns>
         public async System.Threading.Tasks.Task<IRestResponse> DeleteBucketsIDMembersIDAsyncWithIRestResponse (string userID, string bucketID, string zapTraceSpan = null)
@@ -1917,11 +1917,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes an owner from a bucket 
+        /// Remove an owner from a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
         public void DeleteBucketsIDOwnersID (string userID, string bucketID, string zapTraceSpan = null)
@@ -1930,11 +1930,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes an owner from a bucket 
+        /// Remove an owner from a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public ApiResponse<Object> DeleteBucketsIDOwnersIDWithHttpInfo (string userID, string bucketID, string zapTraceSpan = null)
@@ -1992,11 +1992,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes an owner from a bucket 
+        /// Remove an owner from a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> DeleteBucketsIDOwnersIDWithIRestResponseAsync (string userID, string bucketID, string zapTraceSpan = null)
@@ -2052,11 +2052,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes an owner from a bucket 
+        /// Remove an owner from a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public IRestResponse DeleteBucketsIDOwnersIDWithIRestResponse (string userID, string bucketID, string zapTraceSpan = null)
@@ -2112,11 +2112,11 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// removes an owner from a bucket 
+        /// Remove an owner from a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public RestRequest DeleteBucketsIDOwnersIDWithRestRequest (string userID, string bucketID, string zapTraceSpan = null)
@@ -2161,11 +2161,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes an owner from a bucket 
+        /// Remove an owner from a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
         public async System.Threading.Tasks.Task DeleteBucketsIDOwnersIDAsync (string userID, string bucketID, string zapTraceSpan = null)
@@ -2175,11 +2175,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes an owner from a bucket 
+        /// Remove an owner from a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteBucketsIDOwnersIDAsyncWithHttpInfo (string userID, string bucketID, string zapTraceSpan = null)
@@ -2201,11 +2201,11 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// removes an owner from a bucket 
+        /// Remove an owner from a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse</returns>
         public async System.Threading.Tasks.Task<IRestResponse> DeleteBucketsIDOwnersIDAsyncWithIRestResponse (string userID, string bucketID, string zapTraceSpan = null)
@@ -2265,9 +2265,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
-        /// <param name="org">specifies the organization name of the resource (optional)</param>
-        /// <param name="orgID">specifies the organization id of the resource (optional)</param>
-        /// <param name="name">only returns buckets with the specified name (optional)</param>
+        /// <param name="org">The organization name. (optional)</param>
+        /// <param name="orgID">The organization ID. (optional)</param>
+        /// <param name="name">Only returns buckets with a specific name. (optional)</param>
         /// <returns>Buckets</returns>
         public Buckets GetBuckets (string zapTraceSpan = null, int? offset = null, int? limit = null, string org = null, string orgID = null, string name = null)
         {
@@ -2282,9 +2282,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
-        /// <param name="org">specifies the organization name of the resource (optional)</param>
-        /// <param name="orgID">specifies the organization id of the resource (optional)</param>
-        /// <param name="name">only returns buckets with the specified name (optional)</param>
+        /// <param name="org">The organization name. (optional)</param>
+        /// <param name="orgID">The organization ID. (optional)</param>
+        /// <param name="name">Only returns buckets with a specific name. (optional)</param>
         /// <returns>ApiResponse of Buckets</returns>
         public ApiResponse< Buckets > GetBucketsWithHttpInfo (string zapTraceSpan = null, int? offset = null, int? limit = null, string org = null, string orgID = null, string name = null)
         {
@@ -2344,9 +2344,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
-        /// <param name="org">specifies the organization name of the resource (optional)</param>
-        /// <param name="orgID">specifies the organization id of the resource (optional)</param>
-        /// <param name="name">only returns buckets with the specified name (optional)</param>
+        /// <param name="org">The organization name. (optional)</param>
+        /// <param name="orgID">The organization ID. (optional)</param>
+        /// <param name="name">Only returns buckets with a specific name. (optional)</param>
         /// <returns>ApiResponse of Buckets</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetBucketsWithIRestResponseAsync (string zapTraceSpan = null, int? offset = null, int? limit = null, string org = null, string orgID = null, string name = null)
         {
@@ -2404,9 +2404,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
-        /// <param name="org">specifies the organization name of the resource (optional)</param>
-        /// <param name="orgID">specifies the organization id of the resource (optional)</param>
-        /// <param name="name">only returns buckets with the specified name (optional)</param>
+        /// <param name="org">The organization name. (optional)</param>
+        /// <param name="orgID">The organization ID. (optional)</param>
+        /// <param name="name">Only returns buckets with a specific name. (optional)</param>
         /// <returns>ApiResponse of Buckets</returns>
         public IRestResponse GetBucketsWithIRestResponse (string zapTraceSpan = null, int? offset = null, int? limit = null, string org = null, string orgID = null, string name = null)
         {
@@ -2464,9 +2464,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
-        /// <param name="org">specifies the organization name of the resource (optional)</param>
-        /// <param name="orgID">specifies the organization id of the resource (optional)</param>
-        /// <param name="name">only returns buckets with the specified name (optional)</param>
+        /// <param name="org">The organization name. (optional)</param>
+        /// <param name="orgID">The organization ID. (optional)</param>
+        /// <param name="name">Only returns buckets with a specific name. (optional)</param>
         /// <returns>ApiResponse of Buckets</returns>
         public RestRequest GetBucketsWithRestRequest (string zapTraceSpan = null, int? offset = null, int? limit = null, string org = null, string orgID = null, string name = null)
         {
@@ -2513,9 +2513,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
-        /// <param name="org">specifies the organization name of the resource (optional)</param>
-        /// <param name="orgID">specifies the organization id of the resource (optional)</param>
-        /// <param name="name">only returns buckets with the specified name (optional)</param>
+        /// <param name="org">The organization name. (optional)</param>
+        /// <param name="orgID">The organization ID. (optional)</param>
+        /// <param name="name">Only returns buckets with a specific name. (optional)</param>
         /// <returns>Task of Buckets</returns>
         public async System.Threading.Tasks.Task<Buckets> GetBucketsAsync (string zapTraceSpan = null, int? offset = null, int? limit = null, string org = null, string orgID = null, string name = null)
         {
@@ -2531,9 +2531,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
-        /// <param name="org">specifies the organization name of the resource (optional)</param>
-        /// <param name="orgID">specifies the organization id of the resource (optional)</param>
-        /// <param name="name">only returns buckets with the specified name (optional)</param>
+        /// <param name="org">The organization name. (optional)</param>
+        /// <param name="orgID">The organization ID. (optional)</param>
+        /// <param name="name">Only returns buckets with a specific name. (optional)</param>
         /// <returns>Task of ApiResponse (Buckets)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Buckets>> GetBucketsAsyncWithHttpInfo (string zapTraceSpan = null, int? offset = null, int? limit = null, string org = null, string orgID = null, string name = null)
         {
@@ -2560,9 +2560,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
-        /// <param name="org">specifies the organization name of the resource (optional)</param>
-        /// <param name="orgID">specifies the organization id of the resource (optional)</param>
-        /// <param name="name">only returns buckets with the specified name (optional)</param>
+        /// <param name="org">The organization name. (optional)</param>
+        /// <param name="orgID">The organization ID. (optional)</param>
+        /// <param name="name">Only returns buckets with a specific name. (optional)</param>
         /// <returns>Task of IRestResponse (Buckets)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetBucketsAsyncWithIRestResponse (string zapTraceSpan = null, int? offset = null, int? limit = null, string org = null, string orgID = null, string name = null)
         {
@@ -2615,7 +2615,7 @@ namespace InfluxDB.Client.Api.Service
         /// Retrieve a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of bucket to get</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Bucket</returns>
         public Bucket GetBucketsID (string bucketID, string zapTraceSpan = null)
@@ -2628,7 +2628,7 @@ namespace InfluxDB.Client.Api.Service
         /// Retrieve a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of bucket to get</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Bucket</returns>
         public ApiResponse< Bucket > GetBucketsIDWithHttpInfo (string bucketID, string zapTraceSpan = null)
@@ -2685,7 +2685,7 @@ namespace InfluxDB.Client.Api.Service
         /// Retrieve a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of bucket to get</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Bucket</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetBucketsIDWithIRestResponseAsync (string bucketID, string zapTraceSpan = null)
@@ -2740,7 +2740,7 @@ namespace InfluxDB.Client.Api.Service
         /// Retrieve a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of bucket to get</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Bucket</returns>
         public IRestResponse GetBucketsIDWithIRestResponse (string bucketID, string zapTraceSpan = null)
@@ -2795,7 +2795,7 @@ namespace InfluxDB.Client.Api.Service
         /// Retrieve a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of bucket to get</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Bucket</returns>
         public RestRequest GetBucketsIDWithRestRequest (string bucketID, string zapTraceSpan = null)
@@ -2839,7 +2839,7 @@ namespace InfluxDB.Client.Api.Service
         /// Retrieve a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of bucket to get</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of Bucket</returns>
         public async System.Threading.Tasks.Task<Bucket> GetBucketsIDAsync (string bucketID, string zapTraceSpan = null)
@@ -2853,7 +2853,7 @@ namespace InfluxDB.Client.Api.Service
         /// Retrieve a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of bucket to get</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (Bucket)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Bucket>> GetBucketsIDAsyncWithHttpInfo (string bucketID, string zapTraceSpan = null)
@@ -2878,7 +2878,7 @@ namespace InfluxDB.Client.Api.Service
         /// Retrieve a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of bucket to get</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (Bucket)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetBucketsIDAsyncWithIRestResponse (string bucketID, string zapTraceSpan = null)
@@ -2928,10 +2928,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// list all labels for a bucket 
+        /// List all labels for a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>LabelsResponse</returns>
         public LabelsResponse GetBucketsIDLabels (string bucketID, string zapTraceSpan = null)
@@ -2941,10 +2941,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// list all labels for a bucket 
+        /// List all labels for a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelsResponse</returns>
         public ApiResponse< LabelsResponse > GetBucketsIDLabelsWithHttpInfo (string bucketID, string zapTraceSpan = null)
@@ -2998,10 +2998,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// list all labels for a bucket 
+        /// List all labels for a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelsResponse</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetBucketsIDLabelsWithIRestResponseAsync (string bucketID, string zapTraceSpan = null)
@@ -3053,10 +3053,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// list all labels for a bucket 
+        /// List all labels for a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelsResponse</returns>
         public IRestResponse GetBucketsIDLabelsWithIRestResponse (string bucketID, string zapTraceSpan = null)
@@ -3108,10 +3108,10 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// list all labels for a bucket 
+        /// List all labels for a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelsResponse</returns>
         public RestRequest GetBucketsIDLabelsWithRestRequest (string bucketID, string zapTraceSpan = null)
@@ -3152,10 +3152,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// list all labels for a bucket 
+        /// List all labels for a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of LabelsResponse</returns>
         public async System.Threading.Tasks.Task<LabelsResponse> GetBucketsIDLabelsAsync (string bucketID, string zapTraceSpan = null)
@@ -3166,10 +3166,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// list all labels for a bucket 
+        /// List all labels for a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (LabelsResponse)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<LabelsResponse>> GetBucketsIDLabelsAsyncWithHttpInfo (string bucketID, string zapTraceSpan = null)
@@ -3191,10 +3191,10 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// list all labels for a bucket 
+        /// List all labels for a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (LabelsResponse)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetBucketsIDLabelsAsyncWithIRestResponse (string bucketID, string zapTraceSpan = null)
@@ -3247,7 +3247,7 @@ namespace InfluxDB.Client.Api.Service
         /// Retrieve operation logs for a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
@@ -3262,7 +3262,7 @@ namespace InfluxDB.Client.Api.Service
         /// Retrieve operation logs for a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
@@ -3323,7 +3323,7 @@ namespace InfluxDB.Client.Api.Service
         /// Retrieve operation logs for a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
@@ -3382,7 +3382,7 @@ namespace InfluxDB.Client.Api.Service
         /// Retrieve operation logs for a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
@@ -3441,7 +3441,7 @@ namespace InfluxDB.Client.Api.Service
         /// Retrieve operation logs for a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
@@ -3489,7 +3489,7 @@ namespace InfluxDB.Client.Api.Service
         /// Retrieve operation logs for a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
@@ -3505,7 +3505,7 @@ namespace InfluxDB.Client.Api.Service
         /// Retrieve operation logs for a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
@@ -3532,7 +3532,7 @@ namespace InfluxDB.Client.Api.Service
         /// Retrieve operation logs for a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
@@ -3589,7 +3589,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all users with member privileges for a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ResourceMembers</returns>
         public ResourceMembers GetBucketsIDMembers (string bucketID, string zapTraceSpan = null)
@@ -3602,7 +3602,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all users with member privileges for a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMembers</returns>
         public ApiResponse< ResourceMembers > GetBucketsIDMembersWithHttpInfo (string bucketID, string zapTraceSpan = null)
@@ -3659,7 +3659,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all users with member privileges for a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMembers</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetBucketsIDMembersWithIRestResponseAsync (string bucketID, string zapTraceSpan = null)
@@ -3714,7 +3714,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all users with member privileges for a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMembers</returns>
         public IRestResponse GetBucketsIDMembersWithIRestResponse (string bucketID, string zapTraceSpan = null)
@@ -3769,7 +3769,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all users with member privileges for a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMembers</returns>
         public RestRequest GetBucketsIDMembersWithRestRequest (string bucketID, string zapTraceSpan = null)
@@ -3813,7 +3813,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all users with member privileges for a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ResourceMembers</returns>
         public async System.Threading.Tasks.Task<ResourceMembers> GetBucketsIDMembersAsync (string bucketID, string zapTraceSpan = null)
@@ -3827,7 +3827,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all users with member privileges for a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (ResourceMembers)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<ResourceMembers>> GetBucketsIDMembersAsyncWithHttpInfo (string bucketID, string zapTraceSpan = null)
@@ -3852,7 +3852,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all users with member privileges for a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (ResourceMembers)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetBucketsIDMembersAsyncWithIRestResponse (string bucketID, string zapTraceSpan = null)
@@ -3905,7 +3905,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all owners of a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ResourceOwners</returns>
         public ResourceOwners GetBucketsIDOwners (string bucketID, string zapTraceSpan = null)
@@ -3918,7 +3918,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all owners of a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwners</returns>
         public ApiResponse< ResourceOwners > GetBucketsIDOwnersWithHttpInfo (string bucketID, string zapTraceSpan = null)
@@ -3975,7 +3975,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all owners of a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwners</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetBucketsIDOwnersWithIRestResponseAsync (string bucketID, string zapTraceSpan = null)
@@ -4030,7 +4030,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all owners of a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwners</returns>
         public IRestResponse GetBucketsIDOwnersWithIRestResponse (string bucketID, string zapTraceSpan = null)
@@ -4085,7 +4085,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all owners of a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwners</returns>
         public RestRequest GetBucketsIDOwnersWithRestRequest (string bucketID, string zapTraceSpan = null)
@@ -4129,7 +4129,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all owners of a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ResourceOwners</returns>
         public async System.Threading.Tasks.Task<ResourceOwners> GetBucketsIDOwnersAsync (string bucketID, string zapTraceSpan = null)
@@ -4143,7 +4143,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all owners of a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (ResourceOwners)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<ResourceOwners>> GetBucketsIDOwnersAsyncWithHttpInfo (string bucketID, string zapTraceSpan = null)
@@ -4168,7 +4168,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all owners of a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (ResourceOwners)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetBucketsIDOwnersAsyncWithIRestResponse (string bucketID, string zapTraceSpan = null)
@@ -4218,12 +4218,12 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Get a sources buckets (will return dbrps in the form of buckets if it is a v1 source) 
+        /// Get buckets in a source 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="sourceID">ID of the source</param>
+        /// <param name="sourceID">The source ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="org">specifies the organization of the resource (optional)</param>
+        /// <param name="org">The organization name. (optional)</param>
         /// <returns>Buckets</returns>
         public Buckets GetSourcesIDBuckets (string sourceID, string zapTraceSpan = null, string org = null)
         {
@@ -4232,12 +4232,12 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Get a sources buckets (will return dbrps in the form of buckets if it is a v1 source) 
+        /// Get buckets in a source 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="sourceID">ID of the source</param>
+        /// <param name="sourceID">The source ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="org">specifies the organization of the resource (optional)</param>
+        /// <param name="org">The organization name. (optional)</param>
         /// <returns>ApiResponse of Buckets</returns>
         public ApiResponse< Buckets > GetSourcesIDBucketsWithHttpInfo (string sourceID, string zapTraceSpan = null, string org = null)
         {
@@ -4291,12 +4291,12 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Get a sources buckets (will return dbrps in the form of buckets if it is a v1 source) 
+        /// Get buckets in a source 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="sourceID">ID of the source</param>
+        /// <param name="sourceID">The source ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="org">specifies the organization of the resource (optional)</param>
+        /// <param name="org">The organization name. (optional)</param>
         /// <returns>ApiResponse of Buckets</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetSourcesIDBucketsWithIRestResponseAsync (string sourceID, string zapTraceSpan = null, string org = null)
         {
@@ -4348,12 +4348,12 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Get a sources buckets (will return dbrps in the form of buckets if it is a v1 source) 
+        /// Get buckets in a source 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="sourceID">ID of the source</param>
+        /// <param name="sourceID">The source ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="org">specifies the organization of the resource (optional)</param>
+        /// <param name="org">The organization name. (optional)</param>
         /// <returns>ApiResponse of Buckets</returns>
         public IRestResponse GetSourcesIDBucketsWithIRestResponse (string sourceID, string zapTraceSpan = null, string org = null)
         {
@@ -4405,12 +4405,12 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// Get a sources buckets (will return dbrps in the form of buckets if it is a v1 source) 
+        /// Get buckets in a source 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="sourceID">ID of the source</param>
+        /// <param name="sourceID">The source ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="org">specifies the organization of the resource (optional)</param>
+        /// <param name="org">The organization name. (optional)</param>
         /// <returns>ApiResponse of Buckets</returns>
         public RestRequest GetSourcesIDBucketsWithRestRequest (string sourceID, string zapTraceSpan = null, string org = null)
         {
@@ -4451,12 +4451,12 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Get a sources buckets (will return dbrps in the form of buckets if it is a v1 source) 
+        /// Get buckets in a source 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="sourceID">ID of the source</param>
+        /// <param name="sourceID">The source ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="org">specifies the organization of the resource (optional)</param>
+        /// <param name="org">The organization name. (optional)</param>
         /// <returns>Task of Buckets</returns>
         public async System.Threading.Tasks.Task<Buckets> GetSourcesIDBucketsAsync (string sourceID, string zapTraceSpan = null, string org = null)
         {
@@ -4466,12 +4466,12 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Get a sources buckets (will return dbrps in the form of buckets if it is a v1 source) 
+        /// Get buckets in a source 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="sourceID">ID of the source</param>
+        /// <param name="sourceID">The source ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="org">specifies the organization of the resource (optional)</param>
+        /// <param name="org">The organization name. (optional)</param>
         /// <returns>Task of ApiResponse (Buckets)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Buckets>> GetSourcesIDBucketsAsyncWithHttpInfo (string sourceID, string zapTraceSpan = null, string org = null)
         {
@@ -4492,12 +4492,12 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// Get a sources buckets (will return dbrps in the form of buckets if it is a v1 source) 
+        /// Get buckets in a source 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="sourceID">ID of the source</param>
+        /// <param name="sourceID">The source ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="org">specifies the organization of the resource (optional)</param>
+        /// <param name="org">The organization name. (optional)</param>
         /// <returns>Task of IRestResponse (Buckets)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetSourcesIDBucketsAsyncWithIRestResponse (string sourceID, string zapTraceSpan = null, string org = null)
         {
@@ -4550,8 +4550,8 @@ namespace InfluxDB.Client.Api.Service
         /// Update a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of bucket to update</param>
-        /// <param name="bucket">bucket update to apply</param>
+        /// <param name="bucketID">The bucket ID.</param>
+        /// <param name="bucket">Bucket update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Bucket</returns>
         public Bucket PatchBucketsID (string bucketID, Bucket bucket, string zapTraceSpan = null)
@@ -4564,8 +4564,8 @@ namespace InfluxDB.Client.Api.Service
         /// Update a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of bucket to update</param>
-        /// <param name="bucket">bucket update to apply</param>
+        /// <param name="bucketID">The bucket ID.</param>
+        /// <param name="bucket">Bucket update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Bucket</returns>
         public ApiResponse< Bucket > PatchBucketsIDWithHttpInfo (string bucketID, Bucket bucket, string zapTraceSpan = null)
@@ -4634,8 +4634,8 @@ namespace InfluxDB.Client.Api.Service
         /// Update a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of bucket to update</param>
-        /// <param name="bucket">bucket update to apply</param>
+        /// <param name="bucketID">The bucket ID.</param>
+        /// <param name="bucket">Bucket update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Bucket</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PatchBucketsIDWithIRestResponseAsync (string bucketID, Bucket bucket, string zapTraceSpan = null)
@@ -4702,8 +4702,8 @@ namespace InfluxDB.Client.Api.Service
         /// Update a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of bucket to update</param>
-        /// <param name="bucket">bucket update to apply</param>
+        /// <param name="bucketID">The bucket ID.</param>
+        /// <param name="bucket">Bucket update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Bucket</returns>
         public IRestResponse PatchBucketsIDWithIRestResponse (string bucketID, Bucket bucket, string zapTraceSpan = null)
@@ -4770,8 +4770,8 @@ namespace InfluxDB.Client.Api.Service
         /// Update a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of bucket to update</param>
-        /// <param name="bucket">bucket update to apply</param>
+        /// <param name="bucketID">The bucket ID.</param>
+        /// <param name="bucket">Bucket update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Bucket</returns>
         public RestRequest PatchBucketsIDWithRestRequest (string bucketID, Bucket bucket, string zapTraceSpan = null)
@@ -4827,8 +4827,8 @@ namespace InfluxDB.Client.Api.Service
         /// Update a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of bucket to update</param>
-        /// <param name="bucket">bucket update to apply</param>
+        /// <param name="bucketID">The bucket ID.</param>
+        /// <param name="bucket">Bucket update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of Bucket</returns>
         public async System.Threading.Tasks.Task<Bucket> PatchBucketsIDAsync (string bucketID, Bucket bucket, string zapTraceSpan = null)
@@ -4842,8 +4842,8 @@ namespace InfluxDB.Client.Api.Service
         /// Update a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of bucket to update</param>
-        /// <param name="bucket">bucket update to apply</param>
+        /// <param name="bucketID">The bucket ID.</param>
+        /// <param name="bucket">Bucket update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (Bucket)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Bucket>> PatchBucketsIDAsyncWithHttpInfo (string bucketID, Bucket bucket, string zapTraceSpan = null)
@@ -4868,8 +4868,8 @@ namespace InfluxDB.Client.Api.Service
         /// Update a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of bucket to update</param>
-        /// <param name="bucket">bucket update to apply</param>
+        /// <param name="bucketID">The bucket ID.</param>
+        /// <param name="bucket">Bucket update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (Bucket)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PatchBucketsIDAsyncWithIRestResponse (string bucketID, Bucket bucket, string zapTraceSpan = null)
@@ -4934,7 +4934,7 @@ namespace InfluxDB.Client.Api.Service
         /// Create a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucket">bucket to create</param>
+        /// <param name="bucket">Bucket to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Bucket</returns>
         public Bucket PostBuckets (Bucket bucket, string zapTraceSpan = null)
@@ -4947,7 +4947,7 @@ namespace InfluxDB.Client.Api.Service
         /// Create a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucket">bucket to create</param>
+        /// <param name="bucket">Bucket to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Bucket</returns>
         public ApiResponse< Bucket > PostBucketsWithHttpInfo (Bucket bucket, string zapTraceSpan = null)
@@ -5012,7 +5012,7 @@ namespace InfluxDB.Client.Api.Service
         /// Create a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucket">bucket to create</param>
+        /// <param name="bucket">Bucket to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Bucket</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PostBucketsWithIRestResponseAsync (Bucket bucket, string zapTraceSpan = null)
@@ -5075,7 +5075,7 @@ namespace InfluxDB.Client.Api.Service
         /// Create a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucket">bucket to create</param>
+        /// <param name="bucket">Bucket to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Bucket</returns>
         public IRestResponse PostBucketsWithIRestResponse (Bucket bucket, string zapTraceSpan = null)
@@ -5138,7 +5138,7 @@ namespace InfluxDB.Client.Api.Service
         /// Create a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucket">bucket to create</param>
+        /// <param name="bucket">Bucket to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Bucket</returns>
         public RestRequest PostBucketsWithRestRequest (Bucket bucket, string zapTraceSpan = null)
@@ -5190,7 +5190,7 @@ namespace InfluxDB.Client.Api.Service
         /// Create a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucket">bucket to create</param>
+        /// <param name="bucket">Bucket to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of Bucket</returns>
         public async System.Threading.Tasks.Task<Bucket> PostBucketsAsync (Bucket bucket, string zapTraceSpan = null)
@@ -5204,7 +5204,7 @@ namespace InfluxDB.Client.Api.Service
         /// Create a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucket">bucket to create</param>
+        /// <param name="bucket">Bucket to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (Bucket)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Bucket>> PostBucketsAsyncWithHttpInfo (Bucket bucket, string zapTraceSpan = null)
@@ -5229,7 +5229,7 @@ namespace InfluxDB.Client.Api.Service
         /// Create a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucket">bucket to create</param>
+        /// <param name="bucket">Bucket to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (Bucket)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PostBucketsAsyncWithIRestResponse (Bucket bucket, string zapTraceSpan = null)
@@ -5287,11 +5287,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// add a label to a bucket 
+        /// Add a label to a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="bucketID">The bucket ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>LabelResponse</returns>
         public LabelResponse PostBucketsIDLabels (string bucketID, LabelMapping labelMapping, string zapTraceSpan = null)
@@ -5301,11 +5301,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// add a label to a bucket 
+        /// Add a label to a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="bucketID">The bucket ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelResponse</returns>
         public ApiResponse< LabelResponse > PostBucketsIDLabelsWithHttpInfo (string bucketID, LabelMapping labelMapping, string zapTraceSpan = null)
@@ -5371,11 +5371,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// add a label to a bucket 
+        /// Add a label to a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="bucketID">The bucket ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelResponse</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PostBucketsIDLabelsWithIRestResponseAsync (string bucketID, LabelMapping labelMapping, string zapTraceSpan = null)
@@ -5439,11 +5439,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// add a label to a bucket 
+        /// Add a label to a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="bucketID">The bucket ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelResponse</returns>
         public IRestResponse PostBucketsIDLabelsWithIRestResponse (string bucketID, LabelMapping labelMapping, string zapTraceSpan = null)
@@ -5507,11 +5507,11 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// add a label to a bucket 
+        /// Add a label to a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="bucketID">The bucket ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelResponse</returns>
         public RestRequest PostBucketsIDLabelsWithRestRequest (string bucketID, LabelMapping labelMapping, string zapTraceSpan = null)
@@ -5564,11 +5564,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// add a label to a bucket 
+        /// Add a label to a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="bucketID">The bucket ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of LabelResponse</returns>
         public async System.Threading.Tasks.Task<LabelResponse> PostBucketsIDLabelsAsync (string bucketID, LabelMapping labelMapping, string zapTraceSpan = null)
@@ -5579,11 +5579,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// add a label to a bucket 
+        /// Add a label to a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="bucketID">The bucket ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (LabelResponse)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<LabelResponse>> PostBucketsIDLabelsAsyncWithHttpInfo (string bucketID, LabelMapping labelMapping, string zapTraceSpan = null)
@@ -5605,11 +5605,11 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// add a label to a bucket 
+        /// Add a label to a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="bucketID">The bucket ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (LabelResponse)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PostBucketsIDLabelsAsyncWithIRestResponse (string bucketID, LabelMapping labelMapping, string zapTraceSpan = null)
@@ -5671,11 +5671,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add bucket member 
+        /// Add a member to a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="bucketID">The bucket ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ResourceMember</returns>
         public ResourceMember PostBucketsIDMembers (string bucketID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -5685,11 +5685,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add bucket member 
+        /// Add a member to a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="bucketID">The bucket ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMember</returns>
         public ApiResponse< ResourceMember > PostBucketsIDMembersWithHttpInfo (string bucketID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -5755,11 +5755,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add bucket member 
+        /// Add a member to a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="bucketID">The bucket ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMember</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PostBucketsIDMembersWithIRestResponseAsync (string bucketID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -5823,11 +5823,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add bucket member 
+        /// Add a member to a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="bucketID">The bucket ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMember</returns>
         public IRestResponse PostBucketsIDMembersWithIRestResponse (string bucketID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -5891,11 +5891,11 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// Add bucket member 
+        /// Add a member to a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="bucketID">The bucket ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMember</returns>
         public RestRequest PostBucketsIDMembersWithRestRequest (string bucketID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -5948,11 +5948,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add bucket member 
+        /// Add a member to a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="bucketID">The bucket ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ResourceMember</returns>
         public async System.Threading.Tasks.Task<ResourceMember> PostBucketsIDMembersAsync (string bucketID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -5963,11 +5963,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add bucket member 
+        /// Add a member to a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="bucketID">The bucket ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (ResourceMember)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<ResourceMember>> PostBucketsIDMembersAsyncWithHttpInfo (string bucketID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -5989,11 +5989,11 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// Add bucket member 
+        /// Add a member to a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="bucketID">The bucket ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (ResourceMember)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PostBucketsIDMembersAsyncWithIRestResponse (string bucketID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -6055,11 +6055,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add bucket owner 
+        /// Add an owner to a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="bucketID">The bucket ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ResourceOwner</returns>
         public ResourceOwner PostBucketsIDOwners (string bucketID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -6069,11 +6069,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add bucket owner 
+        /// Add an owner to a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="bucketID">The bucket ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwner</returns>
         public ApiResponse< ResourceOwner > PostBucketsIDOwnersWithHttpInfo (string bucketID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -6139,11 +6139,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add bucket owner 
+        /// Add an owner to a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="bucketID">The bucket ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwner</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PostBucketsIDOwnersWithIRestResponseAsync (string bucketID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -6207,11 +6207,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add bucket owner 
+        /// Add an owner to a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="bucketID">The bucket ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwner</returns>
         public IRestResponse PostBucketsIDOwnersWithIRestResponse (string bucketID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -6275,11 +6275,11 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// Add bucket owner 
+        /// Add an owner to a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="bucketID">The bucket ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwner</returns>
         public RestRequest PostBucketsIDOwnersWithRestRequest (string bucketID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -6332,11 +6332,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add bucket owner 
+        /// Add an owner to a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="bucketID">The bucket ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ResourceOwner</returns>
         public async System.Threading.Tasks.Task<ResourceOwner> PostBucketsIDOwnersAsync (string bucketID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -6347,11 +6347,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add bucket owner 
+        /// Add an owner to a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="bucketID">The bucket ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (ResourceOwner)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<ResourceOwner>> PostBucketsIDOwnersAsyncWithHttpInfo (string bucketID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -6373,11 +6373,11 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// Add bucket owner 
+        /// Add an owner to a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="bucketID">The bucket ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (ResourceOwner)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PostBucketsIDOwnersAsyncWithIRestResponse (string bucketID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)

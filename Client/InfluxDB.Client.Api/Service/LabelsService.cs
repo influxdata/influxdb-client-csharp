@@ -31,7 +31,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="labelID">ID of label to delete</param>
+        /// <param name="labelID">The ID of the label to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
         void DeleteLabelsID (string labelID, string zapTraceSpan = null);
@@ -43,7 +43,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="labelID">ID of label to delete</param>
+        /// <param name="labelID">The ID of the label to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> DeleteLabelsIDWithHttpInfo (string labelID, string zapTraceSpan = null);
@@ -55,7 +55,7 @@ namespace InfluxDB.Client.Api.Service
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="orgID">specifies the organization of the resource (optional)</param>
+        /// <param name="orgID">The organization ID. (optional)</param>
         /// <returns>LabelsResponse</returns>
         LabelsResponse GetLabels (string zapTraceSpan = null, string orgID = null);
 
@@ -67,7 +67,7 @@ namespace InfluxDB.Client.Api.Service
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="orgID">specifies the organization of the resource (optional)</param>
+        /// <param name="orgID">The organization ID. (optional)</param>
         /// <returns>ApiResponse of LabelsResponse</returns>
         ApiResponse<LabelsResponse> GetLabelsWithHttpInfo (string zapTraceSpan = null, string orgID = null);
         /// <summary>
@@ -77,7 +77,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="labelID">ID of label to update</param>
+        /// <param name="labelID">The ID of the label to update.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>LabelResponse</returns>
         LabelResponse GetLabelsID (string labelID, string zapTraceSpan = null);
@@ -89,32 +89,32 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="labelID">ID of label to update</param>
+        /// <param name="labelID">The ID of the label to update.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelResponse</returns>
         ApiResponse<LabelResponse> GetLabelsIDWithHttpInfo (string labelID, string zapTraceSpan = null);
         /// <summary>
-        /// Update a single label
+        /// Update a label
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="labelID">ID of label to update</param>
-        /// <param name="labelUpdate">label update</param>
+        /// <param name="labelID">The ID of the label to update.</param>
+        /// <param name="labelUpdate">Label update</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>LabelResponse</returns>
         LabelResponse PatchLabelsID (string labelID, LabelUpdate labelUpdate, string zapTraceSpan = null);
 
         /// <summary>
-        /// Update a single label
+        /// Update a label
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="labelID">ID of label to update</param>
-        /// <param name="labelUpdate">label update</param>
+        /// <param name="labelID">The ID of the label to update.</param>
+        /// <param name="labelUpdate">Label update</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelResponse</returns>
         ApiResponse<LabelResponse> PatchLabelsIDWithHttpInfo (string labelID, LabelUpdate labelUpdate, string zapTraceSpan = null);
@@ -125,7 +125,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="labelCreateRequest">label to create</param>
+        /// <param name="labelCreateRequest">Label to create</param>
         /// <returns>LabelResponse</returns>
         LabelResponse PostLabels (LabelCreateRequest labelCreateRequest);
 
@@ -136,7 +136,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="labelCreateRequest">label to create</param>
+        /// <param name="labelCreateRequest">Label to create</param>
         /// <returns>ApiResponse of LabelResponse</returns>
         ApiResponse<LabelResponse> PostLabelsWithHttpInfo (LabelCreateRequest labelCreateRequest);
         #endregion Synchronous Operations
@@ -148,7 +148,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="labelID">ID of label to delete</param>
+        /// <param name="labelID">The ID of the label to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
         System.Threading.Tasks.Task DeleteLabelsIDAsync (string labelID, string zapTraceSpan = null);
@@ -160,7 +160,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="labelID">ID of label to delete</param>
+        /// <param name="labelID">The ID of the label to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         System.Threading.Tasks.Task<ApiResponse<Object>> DeleteLabelsIDAsyncWithHttpInfo (string labelID, string zapTraceSpan = null);
@@ -172,7 +172,7 @@ namespace InfluxDB.Client.Api.Service
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="orgID">specifies the organization of the resource (optional)</param>
+        /// <param name="orgID">The organization ID. (optional)</param>
         /// <returns>Task of LabelsResponse</returns>
         System.Threading.Tasks.Task<LabelsResponse> GetLabelsAsync (string zapTraceSpan = null, string orgID = null);
 
@@ -184,7 +184,7 @@ namespace InfluxDB.Client.Api.Service
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="orgID">specifies the organization of the resource (optional)</param>
+        /// <param name="orgID">The organization ID. (optional)</param>
         /// <returns>Task of ApiResponse (LabelsResponse)</returns>
         System.Threading.Tasks.Task<ApiResponse<LabelsResponse>> GetLabelsAsyncWithHttpInfo (string zapTraceSpan = null, string orgID = null);
         /// <summary>
@@ -194,7 +194,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="labelID">ID of label to update</param>
+        /// <param name="labelID">The ID of the label to update.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of LabelResponse</returns>
         System.Threading.Tasks.Task<LabelResponse> GetLabelsIDAsync (string labelID, string zapTraceSpan = null);
@@ -206,32 +206,32 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="labelID">ID of label to update</param>
+        /// <param name="labelID">The ID of the label to update.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (LabelResponse)</returns>
         System.Threading.Tasks.Task<ApiResponse<LabelResponse>> GetLabelsIDAsyncWithHttpInfo (string labelID, string zapTraceSpan = null);
         /// <summary>
-        /// Update a single label
+        /// Update a label
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="labelID">ID of label to update</param>
-        /// <param name="labelUpdate">label update</param>
+        /// <param name="labelID">The ID of the label to update.</param>
+        /// <param name="labelUpdate">Label update</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of LabelResponse</returns>
         System.Threading.Tasks.Task<LabelResponse> PatchLabelsIDAsync (string labelID, LabelUpdate labelUpdate, string zapTraceSpan = null);
 
         /// <summary>
-        /// Update a single label
+        /// Update a label
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="labelID">ID of label to update</param>
-        /// <param name="labelUpdate">label update</param>
+        /// <param name="labelID">The ID of the label to update.</param>
+        /// <param name="labelUpdate">Label update</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (LabelResponse)</returns>
         System.Threading.Tasks.Task<ApiResponse<LabelResponse>> PatchLabelsIDAsyncWithHttpInfo (string labelID, LabelUpdate labelUpdate, string zapTraceSpan = null);
@@ -242,7 +242,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="labelCreateRequest">label to create</param>
+        /// <param name="labelCreateRequest">Label to create</param>
         /// <returns>Task of LabelResponse</returns>
         System.Threading.Tasks.Task<LabelResponse> PostLabelsAsync (LabelCreateRequest labelCreateRequest);
 
@@ -253,7 +253,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="labelCreateRequest">label to create</param>
+        /// <param name="labelCreateRequest">Label to create</param>
         /// <returns>Task of ApiResponse (LabelResponse)</returns>
         System.Threading.Tasks.Task<ApiResponse<LabelResponse>> PostLabelsAsyncWithHttpInfo (LabelCreateRequest labelCreateRequest);
         #endregion Asynchronous Operations
@@ -360,7 +360,7 @@ namespace InfluxDB.Client.Api.Service
         /// Delete a label 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="labelID">ID of label to delete</param>
+        /// <param name="labelID">The ID of the label to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
         public void DeleteLabelsID (string labelID, string zapTraceSpan = null)
@@ -372,7 +372,7 @@ namespace InfluxDB.Client.Api.Service
         /// Delete a label 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="labelID">ID of label to delete</param>
+        /// <param name="labelID">The ID of the label to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public ApiResponse<Object> DeleteLabelsIDWithHttpInfo (string labelID, string zapTraceSpan = null)
@@ -429,7 +429,7 @@ namespace InfluxDB.Client.Api.Service
         /// Delete a label 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="labelID">ID of label to delete</param>
+        /// <param name="labelID">The ID of the label to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> DeleteLabelsIDWithIRestResponseAsync (string labelID, string zapTraceSpan = null)
@@ -484,7 +484,7 @@ namespace InfluxDB.Client.Api.Service
         /// Delete a label 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="labelID">ID of label to delete</param>
+        /// <param name="labelID">The ID of the label to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public IRestResponse DeleteLabelsIDWithIRestResponse (string labelID, string zapTraceSpan = null)
@@ -539,7 +539,7 @@ namespace InfluxDB.Client.Api.Service
         /// Delete a label 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="labelID">ID of label to delete</param>
+        /// <param name="labelID">The ID of the label to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public RestRequest DeleteLabelsIDWithRestRequest (string labelID, string zapTraceSpan = null)
@@ -583,7 +583,7 @@ namespace InfluxDB.Client.Api.Service
         /// Delete a label 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="labelID">ID of label to delete</param>
+        /// <param name="labelID">The ID of the label to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
         public async System.Threading.Tasks.Task DeleteLabelsIDAsync (string labelID, string zapTraceSpan = null)
@@ -596,7 +596,7 @@ namespace InfluxDB.Client.Api.Service
         /// Delete a label 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="labelID">ID of label to delete</param>
+        /// <param name="labelID">The ID of the label to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteLabelsIDAsyncWithHttpInfo (string labelID, string zapTraceSpan = null)
@@ -621,7 +621,7 @@ namespace InfluxDB.Client.Api.Service
         /// Delete a label 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="labelID">ID of label to delete</param>
+        /// <param name="labelID">The ID of the label to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse</returns>
         public async System.Threading.Tasks.Task<IRestResponse> DeleteLabelsIDAsyncWithIRestResponse (string labelID, string zapTraceSpan = null)
@@ -675,7 +675,7 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="orgID">specifies the organization of the resource (optional)</param>
+        /// <param name="orgID">The organization ID. (optional)</param>
         /// <returns>LabelsResponse</returns>
         public LabelsResponse GetLabels (string zapTraceSpan = null, string orgID = null)
         {
@@ -688,7 +688,7 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="orgID">specifies the organization of the resource (optional)</param>
+        /// <param name="orgID">The organization ID. (optional)</param>
         /// <returns>ApiResponse of LabelsResponse</returns>
         public ApiResponse< LabelsResponse > GetLabelsWithHttpInfo (string zapTraceSpan = null, string orgID = null)
         {
@@ -742,7 +742,7 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="orgID">specifies the organization of the resource (optional)</param>
+        /// <param name="orgID">The organization ID. (optional)</param>
         /// <returns>ApiResponse of LabelsResponse</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetLabelsWithIRestResponseAsync (string zapTraceSpan = null, string orgID = null)
         {
@@ -794,7 +794,7 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="orgID">specifies the organization of the resource (optional)</param>
+        /// <param name="orgID">The organization ID. (optional)</param>
         /// <returns>ApiResponse of LabelsResponse</returns>
         public IRestResponse GetLabelsWithIRestResponse (string zapTraceSpan = null, string orgID = null)
         {
@@ -846,7 +846,7 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="orgID">specifies the organization of the resource (optional)</param>
+        /// <param name="orgID">The organization ID. (optional)</param>
         /// <returns>ApiResponse of LabelsResponse</returns>
         public RestRequest GetLabelsWithRestRequest (string zapTraceSpan = null, string orgID = null)
         {
@@ -887,7 +887,7 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="orgID">specifies the organization of the resource (optional)</param>
+        /// <param name="orgID">The organization ID. (optional)</param>
         /// <returns>Task of LabelsResponse</returns>
         public async System.Threading.Tasks.Task<LabelsResponse> GetLabelsAsync (string zapTraceSpan = null, string orgID = null)
         {
@@ -901,7 +901,7 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="orgID">specifies the organization of the resource (optional)</param>
+        /// <param name="orgID">The organization ID. (optional)</param>
         /// <returns>Task of ApiResponse (LabelsResponse)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<LabelsResponse>> GetLabelsAsyncWithHttpInfo (string zapTraceSpan = null, string orgID = null)
         {
@@ -926,7 +926,7 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="orgID">specifies the organization of the resource (optional)</param>
+        /// <param name="orgID">The organization ID. (optional)</param>
         /// <returns>Task of IRestResponse (LabelsResponse)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetLabelsAsyncWithIRestResponse (string zapTraceSpan = null, string orgID = null)
         {
@@ -975,7 +975,7 @@ namespace InfluxDB.Client.Api.Service
         /// Get a label 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="labelID">ID of label to update</param>
+        /// <param name="labelID">The ID of the label to update.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>LabelResponse</returns>
         public LabelResponse GetLabelsID (string labelID, string zapTraceSpan = null)
@@ -988,7 +988,7 @@ namespace InfluxDB.Client.Api.Service
         /// Get a label 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="labelID">ID of label to update</param>
+        /// <param name="labelID">The ID of the label to update.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelResponse</returns>
         public ApiResponse< LabelResponse > GetLabelsIDWithHttpInfo (string labelID, string zapTraceSpan = null)
@@ -1045,7 +1045,7 @@ namespace InfluxDB.Client.Api.Service
         /// Get a label 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="labelID">ID of label to update</param>
+        /// <param name="labelID">The ID of the label to update.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelResponse</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetLabelsIDWithIRestResponseAsync (string labelID, string zapTraceSpan = null)
@@ -1100,7 +1100,7 @@ namespace InfluxDB.Client.Api.Service
         /// Get a label 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="labelID">ID of label to update</param>
+        /// <param name="labelID">The ID of the label to update.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelResponse</returns>
         public IRestResponse GetLabelsIDWithIRestResponse (string labelID, string zapTraceSpan = null)
@@ -1155,7 +1155,7 @@ namespace InfluxDB.Client.Api.Service
         /// Get a label 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="labelID">ID of label to update</param>
+        /// <param name="labelID">The ID of the label to update.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelResponse</returns>
         public RestRequest GetLabelsIDWithRestRequest (string labelID, string zapTraceSpan = null)
@@ -1199,7 +1199,7 @@ namespace InfluxDB.Client.Api.Service
         /// Get a label 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="labelID">ID of label to update</param>
+        /// <param name="labelID">The ID of the label to update.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of LabelResponse</returns>
         public async System.Threading.Tasks.Task<LabelResponse> GetLabelsIDAsync (string labelID, string zapTraceSpan = null)
@@ -1213,7 +1213,7 @@ namespace InfluxDB.Client.Api.Service
         /// Get a label 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="labelID">ID of label to update</param>
+        /// <param name="labelID">The ID of the label to update.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (LabelResponse)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<LabelResponse>> GetLabelsIDAsyncWithHttpInfo (string labelID, string zapTraceSpan = null)
@@ -1238,7 +1238,7 @@ namespace InfluxDB.Client.Api.Service
         /// Get a label 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="labelID">ID of label to update</param>
+        /// <param name="labelID">The ID of the label to update.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (LabelResponse)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetLabelsIDAsyncWithIRestResponse (string labelID, string zapTraceSpan = null)
@@ -1288,11 +1288,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Update a single label 
+        /// Update a label 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="labelID">ID of label to update</param>
-        /// <param name="labelUpdate">label update</param>
+        /// <param name="labelID">The ID of the label to update.</param>
+        /// <param name="labelUpdate">Label update</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>LabelResponse</returns>
         public LabelResponse PatchLabelsID (string labelID, LabelUpdate labelUpdate, string zapTraceSpan = null)
@@ -1302,11 +1302,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Update a single label 
+        /// Update a label 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="labelID">ID of label to update</param>
-        /// <param name="labelUpdate">label update</param>
+        /// <param name="labelID">The ID of the label to update.</param>
+        /// <param name="labelUpdate">Label update</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelResponse</returns>
         public ApiResponse< LabelResponse > PatchLabelsIDWithHttpInfo (string labelID, LabelUpdate labelUpdate, string zapTraceSpan = null)
@@ -1372,11 +1372,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Update a single label 
+        /// Update a label 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="labelID">ID of label to update</param>
-        /// <param name="labelUpdate">label update</param>
+        /// <param name="labelID">The ID of the label to update.</param>
+        /// <param name="labelUpdate">Label update</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelResponse</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PatchLabelsIDWithIRestResponseAsync (string labelID, LabelUpdate labelUpdate, string zapTraceSpan = null)
@@ -1440,11 +1440,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Update a single label 
+        /// Update a label 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="labelID">ID of label to update</param>
-        /// <param name="labelUpdate">label update</param>
+        /// <param name="labelID">The ID of the label to update.</param>
+        /// <param name="labelUpdate">Label update</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelResponse</returns>
         public IRestResponse PatchLabelsIDWithIRestResponse (string labelID, LabelUpdate labelUpdate, string zapTraceSpan = null)
@@ -1508,11 +1508,11 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// Update a single label 
+        /// Update a label 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="labelID">ID of label to update</param>
-        /// <param name="labelUpdate">label update</param>
+        /// <param name="labelID">The ID of the label to update.</param>
+        /// <param name="labelUpdate">Label update</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelResponse</returns>
         public RestRequest PatchLabelsIDWithRestRequest (string labelID, LabelUpdate labelUpdate, string zapTraceSpan = null)
@@ -1565,11 +1565,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Update a single label 
+        /// Update a label 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="labelID">ID of label to update</param>
-        /// <param name="labelUpdate">label update</param>
+        /// <param name="labelID">The ID of the label to update.</param>
+        /// <param name="labelUpdate">Label update</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of LabelResponse</returns>
         public async System.Threading.Tasks.Task<LabelResponse> PatchLabelsIDAsync (string labelID, LabelUpdate labelUpdate, string zapTraceSpan = null)
@@ -1580,11 +1580,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Update a single label 
+        /// Update a label 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="labelID">ID of label to update</param>
-        /// <param name="labelUpdate">label update</param>
+        /// <param name="labelID">The ID of the label to update.</param>
+        /// <param name="labelUpdate">Label update</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (LabelResponse)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<LabelResponse>> PatchLabelsIDAsyncWithHttpInfo (string labelID, LabelUpdate labelUpdate, string zapTraceSpan = null)
@@ -1606,11 +1606,11 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// Update a single label 
+        /// Update a label 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="labelID">ID of label to update</param>
-        /// <param name="labelUpdate">label update</param>
+        /// <param name="labelID">The ID of the label to update.</param>
+        /// <param name="labelUpdate">Label update</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (LabelResponse)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PatchLabelsIDAsyncWithIRestResponse (string labelID, LabelUpdate labelUpdate, string zapTraceSpan = null)
@@ -1675,7 +1675,7 @@ namespace InfluxDB.Client.Api.Service
         /// Create a label 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="labelCreateRequest">label to create</param>
+        /// <param name="labelCreateRequest">Label to create</param>
         /// <returns>LabelResponse</returns>
         public LabelResponse PostLabels (LabelCreateRequest labelCreateRequest)
         {
@@ -1687,7 +1687,7 @@ namespace InfluxDB.Client.Api.Service
         /// Create a label 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="labelCreateRequest">label to create</param>
+        /// <param name="labelCreateRequest">Label to create</param>
         /// <returns>ApiResponse of LabelResponse</returns>
         public ApiResponse< LabelResponse > PostLabelsWithHttpInfo (LabelCreateRequest labelCreateRequest)
         {
@@ -1750,7 +1750,7 @@ namespace InfluxDB.Client.Api.Service
         /// Create a label 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="labelCreateRequest">label to create</param>
+        /// <param name="labelCreateRequest">Label to create</param>
         /// <returns>ApiResponse of LabelResponse</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PostLabelsWithIRestResponseAsync (LabelCreateRequest labelCreateRequest)
         {
@@ -1811,7 +1811,7 @@ namespace InfluxDB.Client.Api.Service
         /// Create a label 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="labelCreateRequest">label to create</param>
+        /// <param name="labelCreateRequest">Label to create</param>
         /// <returns>ApiResponse of LabelResponse</returns>
         public IRestResponse PostLabelsWithIRestResponse (LabelCreateRequest labelCreateRequest)
         {
@@ -1872,7 +1872,7 @@ namespace InfluxDB.Client.Api.Service
         /// Create a label 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="labelCreateRequest">label to create</param>
+        /// <param name="labelCreateRequest">Label to create</param>
         /// <returns>ApiResponse of LabelResponse</returns>
         public RestRequest PostLabelsWithRestRequest (LabelCreateRequest labelCreateRequest)
         {
@@ -1922,7 +1922,7 @@ namespace InfluxDB.Client.Api.Service
         /// Create a label 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="labelCreateRequest">label to create</param>
+        /// <param name="labelCreateRequest">Label to create</param>
         /// <returns>Task of LabelResponse</returns>
         public async System.Threading.Tasks.Task<LabelResponse> PostLabelsAsync (LabelCreateRequest labelCreateRequest)
         {
@@ -1935,7 +1935,7 @@ namespace InfluxDB.Client.Api.Service
         /// Create a label 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="labelCreateRequest">label to create</param>
+        /// <param name="labelCreateRequest">Label to create</param>
         /// <returns>Task of ApiResponse (LabelResponse)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<LabelResponse>> PostLabelsAsyncWithHttpInfo (LabelCreateRequest labelCreateRequest)
         {
@@ -1959,7 +1959,7 @@ namespace InfluxDB.Client.Api.Service
         /// Create a label 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="labelCreateRequest">label to create</param>
+        /// <param name="labelCreateRequest">Label to create</param>
         /// <returns>Task of IRestResponse (LabelResponse)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PostLabelsAsyncWithIRestResponse (LabelCreateRequest labelCreateRequest)
         {

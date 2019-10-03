@@ -24,7 +24,7 @@ using OpenAPIDateConverter = InfluxDB.Client.Api.Client.OpenAPIDateConverter;
 namespace InfluxDB.Client.Api.Domain
 {
     /// <summary>
-    /// represents a source from a single file
+    /// Represents a source from a single file
     /// </summary>
     [DataContract]
     public partial class File :  IEquatable<File>
@@ -32,11 +32,11 @@ namespace InfluxDB.Client.Api.Domain
         /// <summary>
         /// Initializes a new instance of the <see cref="File" /> class.
         /// </summary>
-        /// <param name="type">type of AST node.</param>
-        /// <param name="name">name of the file.</param>
+        /// <param name="type">Type of AST node.</param>
+        /// <param name="name">The name of the file..</param>
         /// <param name="package">package.</param>
-        /// <param name="imports">a list of package imports.</param>
-        /// <param name="body">list of Flux statements.</param>
+        /// <param name="imports">A list of package imports.</param>
+        /// <param name="body">List of Flux statements.</param>
         public File(string type = default(string), string name = default(string), PackageClause package = default(PackageClause), List<ImportDeclaration> imports = default(List<ImportDeclaration>), List<Statement> body = default(List<Statement>))
         {
             this.Type = type;
@@ -47,16 +47,16 @@ namespace InfluxDB.Client.Api.Domain
         }
 
         /// <summary>
-        /// type of AST node
+        /// Type of AST node
         /// </summary>
-        /// <value>type of AST node</value>
+        /// <value>Type of AST node</value>
         [DataMember(Name="type", EmitDefaultValue=false)]
         public string Type { get; set; }
 
         /// <summary>
-        /// name of the file
+        /// The name of the file.
         /// </summary>
-        /// <value>name of the file</value>
+        /// <value>The name of the file.</value>
         [DataMember(Name="name", EmitDefaultValue=false)]
         public string Name { get; set; }
 
@@ -67,16 +67,16 @@ namespace InfluxDB.Client.Api.Domain
         public PackageClause Package { get; set; }
 
         /// <summary>
-        /// a list of package imports
+        /// A list of package imports
         /// </summary>
-        /// <value>a list of package imports</value>
+        /// <value>A list of package imports</value>
         [DataMember(Name="imports", EmitDefaultValue=false)]
         public List<ImportDeclaration> Imports { get; set; }
 
         /// <summary>
-        /// list of Flux statements
+        /// List of Flux statements
         /// </summary>
-        /// <value>list of Flux statements</value>
+        /// <value>List of Flux statements</value>
         [DataMember(Name="body", EmitDefaultValue=false)]
         [JsonConverter(typeof(FileBodyAdapter))]
         public List<Statement> Body { get; set; }

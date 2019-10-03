@@ -24,7 +24,7 @@ using OpenAPIDateConverter = InfluxDB.Client.Api.Client.OpenAPIDateConverter;
 namespace InfluxDB.Client.Api.Domain
 {
     /// <summary>
-    /// represents a complete package source tree
+    /// Represents a complete package source tree.
     /// </summary>
     [DataContract]
     public partial class Package :  IEquatable<Package>
@@ -32,10 +32,10 @@ namespace InfluxDB.Client.Api.Domain
         /// <summary>
         /// Initializes a new instance of the <see cref="Package" /> class.
         /// </summary>
-        /// <param name="type">type of AST node.</param>
-        /// <param name="path">package import path.</param>
-        /// <param name="package">package name.</param>
-        /// <param name="files">package files.</param>
+        /// <param name="type">Type of AST node.</param>
+        /// <param name="path">Package import path.</param>
+        /// <param name="package">Package name.</param>
+        /// <param name="files">Package files.</param>
         public Package(string type = default(string), string path = default(string), string package = default(string), List<File> files = default(List<File>))
         {
             this.Type = type;
@@ -45,30 +45,30 @@ namespace InfluxDB.Client.Api.Domain
         }
 
         /// <summary>
-        /// type of AST node
+        /// Type of AST node
         /// </summary>
-        /// <value>type of AST node</value>
+        /// <value>Type of AST node</value>
         [DataMember(Name="type", EmitDefaultValue=false)]
         public string Type { get; set; }
 
         /// <summary>
-        /// package import path
+        /// Package import path
         /// </summary>
-        /// <value>package import path</value>
+        /// <value>Package import path</value>
         [DataMember(Name="path", EmitDefaultValue=false)]
         public string Path { get; set; }
 
         /// <summary>
-        /// package name
+        /// Package name
         /// </summary>
-        /// <value>package name</value>
+        /// <value>Package name</value>
         [DataMember(Name="package", EmitDefaultValue=false)]
         public string _Package { get; set; }
 
         /// <summary>
-        /// package files
+        /// Package files
         /// </summary>
-        /// <value>package files</value>
+        /// <value>Package files</value>
         [DataMember(Name="files", EmitDefaultValue=false)]
         public List<File> Files { get; set; }
 

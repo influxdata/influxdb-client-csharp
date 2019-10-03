@@ -24,7 +24,7 @@ using OpenAPIDateConverter = InfluxDB.Client.Api.Client.OpenAPIDateConverter;
 namespace InfluxDB.Client.Api.Domain
 {
     /// <summary>
-    /// dialect are options to change the default CSV output format; https://www.w3.org/TR/2015/REC-tabular-metadata-20151217/#dialect-descriptions
+    /// Dialect are options to change the default CSV output format; https://www.w3.org/TR/2015/REC-tabular-metadata-20151217/#dialect-descriptions
     /// </summary>
     [DataContract]
     public partial class Dialect :  IEquatable<Dialect>
@@ -57,15 +57,15 @@ namespace InfluxDB.Client.Api.Domain
 
 
         /// <summary>
-        /// https://www.w3.org/TR/2015/REC-tabular-data-model-20151217/#columns
+        /// Https://www.w3.org/TR/2015/REC-tabular-data-model-20151217/#columns
         /// </summary>
-        /// <value>https://www.w3.org/TR/2015/REC-tabular-data-model-20151217/#columns</value>
+        /// <value>Https://www.w3.org/TR/2015/REC-tabular-data-model-20151217/#columns</value>
         [DataMember(Name="annotations", EmitDefaultValue=false)]
         public List<AnnotationsEnum> Annotations { get; set; }
         /// <summary>
-        /// format of timestamps
+        /// Format of timestamps
         /// </summary>
-        /// <value>format of timestamps</value>
+        /// <value>Format of timestamps</value>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum DateTimeFormatEnum
         {
@@ -84,19 +84,19 @@ namespace InfluxDB.Client.Api.Domain
         }
 
         /// <summary>
-        /// format of timestamps
+        /// Format of timestamps
         /// </summary>
-        /// <value>format of timestamps</value>
+        /// <value>Format of timestamps</value>
         [DataMember(Name="dateTimeFormat", EmitDefaultValue=false)]
         public DateTimeFormatEnum? DateTimeFormat { get; set; }
         /// <summary>
         /// Initializes a new instance of the <see cref="Dialect" /> class.
         /// </summary>
-        /// <param name="header">if true, the results will contain a header row (default to true).</param>
-        /// <param name="delimiter">separator between cells; the default is , (default to &quot;,&quot;).</param>
-        /// <param name="annotations">https://www.w3.org/TR/2015/REC-tabular-data-model-20151217/#columns.</param>
-        /// <param name="commentPrefix">character prefixed to comment strings (default to &quot;#&quot;).</param>
-        /// <param name="dateTimeFormat">format of timestamps (default to DateTimeFormatEnum.RFC3339).</param>
+        /// <param name="header">If true, the results will contain a header row (default to true).</param>
+        /// <param name="delimiter">Separator between cells; the default is , (default to &quot;,&quot;).</param>
+        /// <param name="annotations">Https://www.w3.org/TR/2015/REC-tabular-data-model-20151217/#columns.</param>
+        /// <param name="commentPrefix">Character prefixed to comment strings (default to &quot;#&quot;).</param>
+        /// <param name="dateTimeFormat">Format of timestamps (default to DateTimeFormatEnum.RFC3339).</param>
         public Dialect(bool? header = true, string delimiter = ",", List<AnnotationsEnum> annotations = default(List<AnnotationsEnum>), string commentPrefix = "#", DateTimeFormatEnum? dateTimeFormat = DateTimeFormatEnum.RFC3339)
         {
             // use default value if no "header" provided
@@ -139,24 +139,24 @@ namespace InfluxDB.Client.Api.Domain
         }
 
         /// <summary>
-        /// if true, the results will contain a header row
+        /// If true, the results will contain a header row
         /// </summary>
-        /// <value>if true, the results will contain a header row</value>
+        /// <value>If true, the results will contain a header row</value>
         [DataMember(Name="header", EmitDefaultValue=false)]
         public bool? Header { get; set; }
 
         /// <summary>
-        /// separator between cells; the default is ,
+        /// Separator between cells; the default is ,
         /// </summary>
-        /// <value>separator between cells; the default is ,</value>
+        /// <value>Separator between cells; the default is ,</value>
         [DataMember(Name="delimiter", EmitDefaultValue=false)]
         public string Delimiter { get; set; }
 
 
         /// <summary>
-        /// character prefixed to comment strings
+        /// Character prefixed to comment strings
         /// </summary>
-        /// <value>character prefixed to comment strings</value>
+        /// <value>Character prefixed to comment strings</value>
         [DataMember(Name="commentPrefix", EmitDefaultValue=false)]
         public string CommentPrefix { get; set; }
 

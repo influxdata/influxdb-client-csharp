@@ -37,9 +37,9 @@ namespace InfluxDB.Client.Api.Domain
         /// <summary>
         /// Initializes a new instance of the <see cref="CreateDashboardRequest" /> class.
         /// </summary>
-        /// <param name="orgID">id of the organization that owns the dashboard (required).</param>
-        /// <param name="name">user-facing name of the dashboard (required).</param>
-        /// <param name="description">user-facing description of the dashboard.</param>
+        /// <param name="orgID">The ID of the organization that owns the dashboard. (required).</param>
+        /// <param name="name">The user-facing name of the dashboard. (required).</param>
+        /// <param name="description">The user-facing description of the dashboard..</param>
         public CreateDashboardRequest(string orgID = default(string), string name = default(string), string description = default(string))
         {
             // to ensure "orgID" is required (not null)
@@ -64,23 +64,23 @@ namespace InfluxDB.Client.Api.Domain
         }
 
         /// <summary>
-        /// id of the organization that owns the dashboard
+        /// The ID of the organization that owns the dashboard.
         /// </summary>
-        /// <value>id of the organization that owns the dashboard</value>
+        /// <value>The ID of the organization that owns the dashboard.</value>
         [DataMember(Name="orgID", EmitDefaultValue=false)]
         public string OrgID { get; set; }
 
         /// <summary>
-        /// user-facing name of the dashboard
+        /// The user-facing name of the dashboard.
         /// </summary>
-        /// <value>user-facing name of the dashboard</value>
+        /// <value>The user-facing name of the dashboard.</value>
         [DataMember(Name="name", EmitDefaultValue=false)]
         public string Name { get; set; }
 
         /// <summary>
-        /// user-facing description of the dashboard
+        /// The user-facing description of the dashboard.
         /// </summary>
-        /// <value>user-facing description of the dashboard</value>
+        /// <value>The user-facing description of the dashboard.</value>
         [DataMember(Name="description", EmitDefaultValue=false)]
         public string Description { get; set; }
 

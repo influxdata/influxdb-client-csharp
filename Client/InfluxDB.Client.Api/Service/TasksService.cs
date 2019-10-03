@@ -31,7 +31,7 @@ namespace InfluxDB.Client.Api.Service
         /// Deletes a task and all associated records
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of task to delete</param>
+        /// <param name="taskID">The ID of the task to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
         void DeleteTasksID (string taskID, string zapTraceSpan = null);
@@ -43,186 +43,186 @@ namespace InfluxDB.Client.Api.Service
         /// Deletes a task and all associated records
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of task to delete</param>
+        /// <param name="taskID">The ID of the task to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> DeleteTasksIDWithHttpInfo (string taskID, string zapTraceSpan = null);
         /// <summary>
-        /// delete a label from a task
+        /// Delete a label from a task
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="labelID">the label id</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="labelID">The label ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
         void DeleteTasksIDLabelsID (string taskID, string labelID, string zapTraceSpan = null);
 
         /// <summary>
-        /// delete a label from a task
+        /// Delete a label from a task
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="labelID">the label id</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="labelID">The label ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> DeleteTasksIDLabelsIDWithHttpInfo (string taskID, string labelID, string zapTraceSpan = null);
         /// <summary>
-        /// removes a member from an task
+        /// Remove a member from a task
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
         void DeleteTasksIDMembersID (string userID, string taskID, string zapTraceSpan = null);
 
         /// <summary>
-        /// removes a member from an task
+        /// Remove a member from a task
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> DeleteTasksIDMembersIDWithHttpInfo (string userID, string taskID, string zapTraceSpan = null);
         /// <summary>
-        /// removes an owner from an task
+        /// Remove an owner from a task
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
         void DeleteTasksIDOwnersID (string userID, string taskID, string zapTraceSpan = null);
 
         /// <summary>
-        /// removes an owner from an task
+        /// Remove an owner from a task
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> DeleteTasksIDOwnersIDWithHttpInfo (string userID, string taskID, string zapTraceSpan = null);
         /// <summary>
-        /// Cancel a single running task
+        /// Cancel a running task
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">task ID</param>
-        /// <param name="runID">run ID</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="runID">The run ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
         void DeleteTasksIDRunsID (string taskID, string runID, string zapTraceSpan = null);
 
         /// <summary>
-        /// Cancel a single running task
+        /// Cancel a running task
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">task ID</param>
-        /// <param name="runID">run ID</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="runID">The run ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> DeleteTasksIDRunsIDWithHttpInfo (string taskID, string runID, string zapTraceSpan = null);
         /// <summary>
-        /// List tasks.
+        /// List all tasks
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="name">only returns tasks with the specified name (optional)</param>
-        /// <param name="after">returns tasks after specified ID (optional)</param>
-        /// <param name="user">filter tasks to a specific user ID (optional)</param>
-        /// <param name="org">filter tasks to a specific organization name (optional)</param>
-        /// <param name="orgID">filter tasks to a specific organization ID (optional)</param>
-        /// <param name="limit">the number of tasks to return (optional, default to 100)</param>
+        /// <param name="name">Returns task with a specific name. (optional)</param>
+        /// <param name="after">Return tasks after a specified ID. (optional)</param>
+        /// <param name="user">Filter tasks to a specific user ID. (optional)</param>
+        /// <param name="org">Filter tasks to a specific organization name. (optional)</param>
+        /// <param name="orgID">Filter tasks to a specific organization ID. (optional)</param>
+        /// <param name="limit">The number of tasks to return (optional, default to 100)</param>
         /// <returns>Tasks</returns>
         Tasks GetTasks (string zapTraceSpan = null, string name = null, string after = null, string user = null, string org = null, string orgID = null, int? limit = null);
 
         /// <summary>
-        /// List tasks.
+        /// List all tasks
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="name">only returns tasks with the specified name (optional)</param>
-        /// <param name="after">returns tasks after specified ID (optional)</param>
-        /// <param name="user">filter tasks to a specific user ID (optional)</param>
-        /// <param name="org">filter tasks to a specific organization name (optional)</param>
-        /// <param name="orgID">filter tasks to a specific organization ID (optional)</param>
-        /// <param name="limit">the number of tasks to return (optional, default to 100)</param>
+        /// <param name="name">Returns task with a specific name. (optional)</param>
+        /// <param name="after">Return tasks after a specified ID. (optional)</param>
+        /// <param name="user">Filter tasks to a specific user ID. (optional)</param>
+        /// <param name="org">Filter tasks to a specific organization name. (optional)</param>
+        /// <param name="orgID">Filter tasks to a specific organization ID. (optional)</param>
+        /// <param name="limit">The number of tasks to return (optional, default to 100)</param>
         /// <returns>ApiResponse of Tasks</returns>
         ApiResponse<Tasks> GetTasksWithHttpInfo (string zapTraceSpan = null, string name = null, string after = null, string user = null, string org = null, string orgID = null, int? limit = null);
         /// <summary>
-        /// Retrieve an task
+        /// Retrieve a task
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of task to get</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>TaskType</returns>
         TaskType GetTasksID (string taskID, string zapTraceSpan = null);
 
         /// <summary>
-        /// Retrieve an task
+        /// Retrieve a task
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of task to get</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of TaskType</returns>
         ApiResponse<TaskType> GetTasksIDWithHttpInfo (string taskID, string zapTraceSpan = null);
         /// <summary>
-        /// list all labels for a task
+        /// List all labels for a task
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>LabelsResponse</returns>
         LabelsResponse GetTasksIDLabels (string taskID, string zapTraceSpan = null);
 
         /// <summary>
-        /// list all labels for a task
+        /// List all labels for a task
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelsResponse</returns>
         ApiResponse<LabelsResponse> GetTasksIDLabelsWithHttpInfo (string taskID, string zapTraceSpan = null);
@@ -233,7 +233,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of task to get logs for</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Logs</returns>
         Logs GetTasksIDLogs (string taskID, string zapTraceSpan = null);
@@ -245,7 +245,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of task to get logs for</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Logs</returns>
         ApiResponse<Logs> GetTasksIDLogsWithHttpInfo (string taskID, string zapTraceSpan = null);
@@ -256,7 +256,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ResourceMembers</returns>
         ResourceMembers GetTasksIDMembers (string taskID, string zapTraceSpan = null);
@@ -268,86 +268,86 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMembers</returns>
         ApiResponse<ResourceMembers> GetTasksIDMembersWithHttpInfo (string taskID, string zapTraceSpan = null);
         /// <summary>
-        /// List all task owners
+        /// List all owners of a task
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ResourceOwners</returns>
         ResourceOwners GetTasksIDOwners (string taskID, string zapTraceSpan = null);
 
         /// <summary>
-        /// List all task owners
+        /// List all owners of a task
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwners</returns>
         ApiResponse<ResourceOwners> GetTasksIDOwnersWithHttpInfo (string taskID, string zapTraceSpan = null);
         /// <summary>
-        /// Retrieve list of run records for a task
+        /// List runs for a task
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of task to get runs for</param>
+        /// <param name="taskID">The ID of the task to get runs for.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="after">returns runs after specified ID (optional)</param>
-        /// <param name="limit">the number of runs to return (optional, default to 100)</param>
-        /// <param name="afterTime">filter runs to those scheduled after this time, RFC3339 (optional)</param>
-        /// <param name="beforeTime">filter runs to those scheduled before this time, RFC3339 (optional)</param>
+        /// <param name="after">Returns runs after a specific ID. (optional)</param>
+        /// <param name="limit">The number of runs to return (optional, default to 100)</param>
+        /// <param name="afterTime">Filter runs to those scheduled after this time, RFC3339 (optional)</param>
+        /// <param name="beforeTime">Filter runs to those scheduled before this time, RFC3339 (optional)</param>
         /// <returns>Runs</returns>
         Runs GetTasksIDRuns (string taskID, string zapTraceSpan = null, string after = null, int? limit = null, DateTime? afterTime = null, DateTime? beforeTime = null);
 
         /// <summary>
-        /// Retrieve list of run records for a task
+        /// List runs for a task
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of task to get runs for</param>
+        /// <param name="taskID">The ID of the task to get runs for.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="after">returns runs after specified ID (optional)</param>
-        /// <param name="limit">the number of runs to return (optional, default to 100)</param>
-        /// <param name="afterTime">filter runs to those scheduled after this time, RFC3339 (optional)</param>
-        /// <param name="beforeTime">filter runs to those scheduled before this time, RFC3339 (optional)</param>
+        /// <param name="after">Returns runs after a specific ID. (optional)</param>
+        /// <param name="limit">The number of runs to return (optional, default to 100)</param>
+        /// <param name="afterTime">Filter runs to those scheduled after this time, RFC3339 (optional)</param>
+        /// <param name="beforeTime">Filter runs to those scheduled before this time, RFC3339 (optional)</param>
         /// <returns>ApiResponse of Runs</returns>
         ApiResponse<Runs> GetTasksIDRunsWithHttpInfo (string taskID, string zapTraceSpan = null, string after = null, int? limit = null, DateTime? afterTime = null, DateTime? beforeTime = null);
         /// <summary>
-        /// Retrieve a single run record for a task
+        /// Retrieve a single run for a task
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">task ID</param>
-        /// <param name="runID">run ID</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="runID">The run ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Run</returns>
         Run GetTasksIDRunsID (string taskID, string runID, string zapTraceSpan = null);
 
         /// <summary>
-        /// Retrieve a single run record for a task
+        /// Retrieve a single run for a task
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">task ID</param>
-        /// <param name="runID">run ID</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="runID">The run ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Run</returns>
         ApiResponse<Run> GetTasksIDRunsIDWithHttpInfo (string taskID, string runID, string zapTraceSpan = null);
@@ -383,8 +383,8 @@ namespace InfluxDB.Client.Api.Service
         /// Update a task. This will cancel all queued runs.
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of task to get</param>
-        /// <param name="taskUpdateRequest">task update to apply</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="taskUpdateRequest">Task update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>TaskType</returns>
         TaskType PatchTasksID (string taskID, TaskUpdateRequest taskUpdateRequest, string zapTraceSpan = null);
@@ -396,8 +396,8 @@ namespace InfluxDB.Client.Api.Service
         /// Update a task. This will cancel all queued runs.
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of task to get</param>
-        /// <param name="taskUpdateRequest">task update to apply</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="taskUpdateRequest">Task update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of TaskType</returns>
         ApiResponse<TaskType> PatchTasksIDWithHttpInfo (string taskID, TaskUpdateRequest taskUpdateRequest, string zapTraceSpan = null);
@@ -408,7 +408,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskCreateRequest">task to create</param>
+        /// <param name="taskCreateRequest">Task to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>TaskType</returns>
         TaskType PostTasks (TaskCreateRequest taskCreateRequest, string zapTraceSpan = null);
@@ -420,87 +420,87 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskCreateRequest">task to create</param>
+        /// <param name="taskCreateRequest">Task to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of TaskType</returns>
         ApiResponse<TaskType> PostTasksWithHttpInfo (TaskCreateRequest taskCreateRequest, string zapTraceSpan = null);
         /// <summary>
-        /// add a label to a task
+        /// Add a label to a task
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>LabelResponse</returns>
         LabelResponse PostTasksIDLabels (string taskID, LabelMapping labelMapping, string zapTraceSpan = null);
 
         /// <summary>
-        /// add a label to a task
+        /// Add a label to a task
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelResponse</returns>
         ApiResponse<LabelResponse> PostTasksIDLabelsWithHttpInfo (string taskID, LabelMapping labelMapping, string zapTraceSpan = null);
         /// <summary>
-        /// Add task member
+        /// Add a member to a task
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ResourceMember</returns>
         ResourceMember PostTasksIDMembers (string taskID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
 
         /// <summary>
-        /// Add task member
+        /// Add a member to a task
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMember</returns>
         ApiResponse<ResourceMember> PostTasksIDMembersWithHttpInfo (string taskID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
         /// <summary>
-        /// Add task owner
+        /// Add an owner to a task
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ResourceOwner</returns>
         ResourceOwner PostTasksIDOwners (string taskID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
 
         /// <summary>
-        /// Add task owner
+        /// Add an owner to a task
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwner</returns>
         ApiResponse<ResourceOwner> PostTasksIDOwnersWithHttpInfo (string taskID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
         /// <summary>
-        /// manually start a run of the task now overriding the current schedule.
+        /// Manually start a task run, overriding the current schedule
         /// </summary>
         /// <remarks>
         /// 
@@ -513,7 +513,7 @@ namespace InfluxDB.Client.Api.Service
         Run PostTasksIDRuns (string taskID, string zapTraceSpan = null, RunManually runManually = null);
 
         /// <summary>
-        /// manually start a run of the task now overriding the current schedule.
+        /// Manually start a task run, overriding the current schedule
         /// </summary>
         /// <remarks>
         /// 
@@ -531,8 +531,8 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">task ID</param>
-        /// <param name="runID">run ID</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="runID">The run ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Run</returns>
         Run PostTasksIDRunsIDRetry (string taskID, string runID, string zapTraceSpan = null);
@@ -544,8 +544,8 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">task ID</param>
-        /// <param name="runID">run ID</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="runID">The run ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Run</returns>
         ApiResponse<Run> PostTasksIDRunsIDRetryWithHttpInfo (string taskID, string runID, string zapTraceSpan = null);
@@ -558,7 +558,7 @@ namespace InfluxDB.Client.Api.Service
         /// Deletes a task and all associated records
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of task to delete</param>
+        /// <param name="taskID">The ID of the task to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
         System.Threading.Tasks.Task DeleteTasksIDAsync (string taskID, string zapTraceSpan = null);
@@ -570,186 +570,186 @@ namespace InfluxDB.Client.Api.Service
         /// Deletes a task and all associated records
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of task to delete</param>
+        /// <param name="taskID">The ID of the task to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         System.Threading.Tasks.Task<ApiResponse<Object>> DeleteTasksIDAsyncWithHttpInfo (string taskID, string zapTraceSpan = null);
         /// <summary>
-        /// delete a label from a task
+        /// Delete a label from a task
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="labelID">the label id</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="labelID">The label ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
         System.Threading.Tasks.Task DeleteTasksIDLabelsIDAsync (string taskID, string labelID, string zapTraceSpan = null);
 
         /// <summary>
-        /// delete a label from a task
+        /// Delete a label from a task
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="labelID">the label id</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="labelID">The label ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         System.Threading.Tasks.Task<ApiResponse<Object>> DeleteTasksIDLabelsIDAsyncWithHttpInfo (string taskID, string labelID, string zapTraceSpan = null);
         /// <summary>
-        /// removes a member from an task
+        /// Remove a member from a task
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
         System.Threading.Tasks.Task DeleteTasksIDMembersIDAsync (string userID, string taskID, string zapTraceSpan = null);
 
         /// <summary>
-        /// removes a member from an task
+        /// Remove a member from a task
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         System.Threading.Tasks.Task<ApiResponse<Object>> DeleteTasksIDMembersIDAsyncWithHttpInfo (string userID, string taskID, string zapTraceSpan = null);
         /// <summary>
-        /// removes an owner from an task
+        /// Remove an owner from a task
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
         System.Threading.Tasks.Task DeleteTasksIDOwnersIDAsync (string userID, string taskID, string zapTraceSpan = null);
 
         /// <summary>
-        /// removes an owner from an task
+        /// Remove an owner from a task
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         System.Threading.Tasks.Task<ApiResponse<Object>> DeleteTasksIDOwnersIDAsyncWithHttpInfo (string userID, string taskID, string zapTraceSpan = null);
         /// <summary>
-        /// Cancel a single running task
+        /// Cancel a running task
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">task ID</param>
-        /// <param name="runID">run ID</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="runID">The run ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
         System.Threading.Tasks.Task DeleteTasksIDRunsIDAsync (string taskID, string runID, string zapTraceSpan = null);
 
         /// <summary>
-        /// Cancel a single running task
+        /// Cancel a running task
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">task ID</param>
-        /// <param name="runID">run ID</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="runID">The run ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         System.Threading.Tasks.Task<ApiResponse<Object>> DeleteTasksIDRunsIDAsyncWithHttpInfo (string taskID, string runID, string zapTraceSpan = null);
         /// <summary>
-        /// List tasks.
+        /// List all tasks
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="name">only returns tasks with the specified name (optional)</param>
-        /// <param name="after">returns tasks after specified ID (optional)</param>
-        /// <param name="user">filter tasks to a specific user ID (optional)</param>
-        /// <param name="org">filter tasks to a specific organization name (optional)</param>
-        /// <param name="orgID">filter tasks to a specific organization ID (optional)</param>
-        /// <param name="limit">the number of tasks to return (optional, default to 100)</param>
+        /// <param name="name">Returns task with a specific name. (optional)</param>
+        /// <param name="after">Return tasks after a specified ID. (optional)</param>
+        /// <param name="user">Filter tasks to a specific user ID. (optional)</param>
+        /// <param name="org">Filter tasks to a specific organization name. (optional)</param>
+        /// <param name="orgID">Filter tasks to a specific organization ID. (optional)</param>
+        /// <param name="limit">The number of tasks to return (optional, default to 100)</param>
         /// <returns>Task of Tasks</returns>
         System.Threading.Tasks.Task<Tasks> GetTasksAsync (string zapTraceSpan = null, string name = null, string after = null, string user = null, string org = null, string orgID = null, int? limit = null);
 
         /// <summary>
-        /// List tasks.
+        /// List all tasks
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="name">only returns tasks with the specified name (optional)</param>
-        /// <param name="after">returns tasks after specified ID (optional)</param>
-        /// <param name="user">filter tasks to a specific user ID (optional)</param>
-        /// <param name="org">filter tasks to a specific organization name (optional)</param>
-        /// <param name="orgID">filter tasks to a specific organization ID (optional)</param>
-        /// <param name="limit">the number of tasks to return (optional, default to 100)</param>
+        /// <param name="name">Returns task with a specific name. (optional)</param>
+        /// <param name="after">Return tasks after a specified ID. (optional)</param>
+        /// <param name="user">Filter tasks to a specific user ID. (optional)</param>
+        /// <param name="org">Filter tasks to a specific organization name. (optional)</param>
+        /// <param name="orgID">Filter tasks to a specific organization ID. (optional)</param>
+        /// <param name="limit">The number of tasks to return (optional, default to 100)</param>
         /// <returns>Task of ApiResponse (Tasks)</returns>
         System.Threading.Tasks.Task<ApiResponse<Tasks>> GetTasksAsyncWithHttpInfo (string zapTraceSpan = null, string name = null, string after = null, string user = null, string org = null, string orgID = null, int? limit = null);
         /// <summary>
-        /// Retrieve an task
+        /// Retrieve a task
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of task to get</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of TaskType</returns>
         System.Threading.Tasks.Task<TaskType> GetTasksIDAsync (string taskID, string zapTraceSpan = null);
 
         /// <summary>
-        /// Retrieve an task
+        /// Retrieve a task
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of task to get</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (TaskType)</returns>
         System.Threading.Tasks.Task<ApiResponse<TaskType>> GetTasksIDAsyncWithHttpInfo (string taskID, string zapTraceSpan = null);
         /// <summary>
-        /// list all labels for a task
+        /// List all labels for a task
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of LabelsResponse</returns>
         System.Threading.Tasks.Task<LabelsResponse> GetTasksIDLabelsAsync (string taskID, string zapTraceSpan = null);
 
         /// <summary>
-        /// list all labels for a task
+        /// List all labels for a task
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (LabelsResponse)</returns>
         System.Threading.Tasks.Task<ApiResponse<LabelsResponse>> GetTasksIDLabelsAsyncWithHttpInfo (string taskID, string zapTraceSpan = null);
@@ -760,7 +760,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of task to get logs for</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of Logs</returns>
         System.Threading.Tasks.Task<Logs> GetTasksIDLogsAsync (string taskID, string zapTraceSpan = null);
@@ -772,7 +772,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of task to get logs for</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (Logs)</returns>
         System.Threading.Tasks.Task<ApiResponse<Logs>> GetTasksIDLogsAsyncWithHttpInfo (string taskID, string zapTraceSpan = null);
@@ -783,7 +783,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ResourceMembers</returns>
         System.Threading.Tasks.Task<ResourceMembers> GetTasksIDMembersAsync (string taskID, string zapTraceSpan = null);
@@ -795,86 +795,86 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (ResourceMembers)</returns>
         System.Threading.Tasks.Task<ApiResponse<ResourceMembers>> GetTasksIDMembersAsyncWithHttpInfo (string taskID, string zapTraceSpan = null);
         /// <summary>
-        /// List all task owners
+        /// List all owners of a task
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ResourceOwners</returns>
         System.Threading.Tasks.Task<ResourceOwners> GetTasksIDOwnersAsync (string taskID, string zapTraceSpan = null);
 
         /// <summary>
-        /// List all task owners
+        /// List all owners of a task
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (ResourceOwners)</returns>
         System.Threading.Tasks.Task<ApiResponse<ResourceOwners>> GetTasksIDOwnersAsyncWithHttpInfo (string taskID, string zapTraceSpan = null);
         /// <summary>
-        /// Retrieve list of run records for a task
+        /// List runs for a task
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of task to get runs for</param>
+        /// <param name="taskID">The ID of the task to get runs for.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="after">returns runs after specified ID (optional)</param>
-        /// <param name="limit">the number of runs to return (optional, default to 100)</param>
-        /// <param name="afterTime">filter runs to those scheduled after this time, RFC3339 (optional)</param>
-        /// <param name="beforeTime">filter runs to those scheduled before this time, RFC3339 (optional)</param>
+        /// <param name="after">Returns runs after a specific ID. (optional)</param>
+        /// <param name="limit">The number of runs to return (optional, default to 100)</param>
+        /// <param name="afterTime">Filter runs to those scheduled after this time, RFC3339 (optional)</param>
+        /// <param name="beforeTime">Filter runs to those scheduled before this time, RFC3339 (optional)</param>
         /// <returns>Task of Runs</returns>
         System.Threading.Tasks.Task<Runs> GetTasksIDRunsAsync (string taskID, string zapTraceSpan = null, string after = null, int? limit = null, DateTime? afterTime = null, DateTime? beforeTime = null);
 
         /// <summary>
-        /// Retrieve list of run records for a task
+        /// List runs for a task
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of task to get runs for</param>
+        /// <param name="taskID">The ID of the task to get runs for.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="after">returns runs after specified ID (optional)</param>
-        /// <param name="limit">the number of runs to return (optional, default to 100)</param>
-        /// <param name="afterTime">filter runs to those scheduled after this time, RFC3339 (optional)</param>
-        /// <param name="beforeTime">filter runs to those scheduled before this time, RFC3339 (optional)</param>
+        /// <param name="after">Returns runs after a specific ID. (optional)</param>
+        /// <param name="limit">The number of runs to return (optional, default to 100)</param>
+        /// <param name="afterTime">Filter runs to those scheduled after this time, RFC3339 (optional)</param>
+        /// <param name="beforeTime">Filter runs to those scheduled before this time, RFC3339 (optional)</param>
         /// <returns>Task of ApiResponse (Runs)</returns>
         System.Threading.Tasks.Task<ApiResponse<Runs>> GetTasksIDRunsAsyncWithHttpInfo (string taskID, string zapTraceSpan = null, string after = null, int? limit = null, DateTime? afterTime = null, DateTime? beforeTime = null);
         /// <summary>
-        /// Retrieve a single run record for a task
+        /// Retrieve a single run for a task
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">task ID</param>
-        /// <param name="runID">run ID</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="runID">The run ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of Run</returns>
         System.Threading.Tasks.Task<Run> GetTasksIDRunsIDAsync (string taskID, string runID, string zapTraceSpan = null);
 
         /// <summary>
-        /// Retrieve a single run record for a task
+        /// Retrieve a single run for a task
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">task ID</param>
-        /// <param name="runID">run ID</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="runID">The run ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (Run)</returns>
         System.Threading.Tasks.Task<ApiResponse<Run>> GetTasksIDRunsIDAsyncWithHttpInfo (string taskID, string runID, string zapTraceSpan = null);
@@ -910,8 +910,8 @@ namespace InfluxDB.Client.Api.Service
         /// Update a task. This will cancel all queued runs.
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of task to get</param>
-        /// <param name="taskUpdateRequest">task update to apply</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="taskUpdateRequest">Task update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of TaskType</returns>
         System.Threading.Tasks.Task<TaskType> PatchTasksIDAsync (string taskID, TaskUpdateRequest taskUpdateRequest, string zapTraceSpan = null);
@@ -923,8 +923,8 @@ namespace InfluxDB.Client.Api.Service
         /// Update a task. This will cancel all queued runs.
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of task to get</param>
-        /// <param name="taskUpdateRequest">task update to apply</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="taskUpdateRequest">Task update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (TaskType)</returns>
         System.Threading.Tasks.Task<ApiResponse<TaskType>> PatchTasksIDAsyncWithHttpInfo (string taskID, TaskUpdateRequest taskUpdateRequest, string zapTraceSpan = null);
@@ -935,7 +935,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskCreateRequest">task to create</param>
+        /// <param name="taskCreateRequest">Task to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of TaskType</returns>
         System.Threading.Tasks.Task<TaskType> PostTasksAsync (TaskCreateRequest taskCreateRequest, string zapTraceSpan = null);
@@ -947,87 +947,87 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskCreateRequest">task to create</param>
+        /// <param name="taskCreateRequest">Task to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (TaskType)</returns>
         System.Threading.Tasks.Task<ApiResponse<TaskType>> PostTasksAsyncWithHttpInfo (TaskCreateRequest taskCreateRequest, string zapTraceSpan = null);
         /// <summary>
-        /// add a label to a task
+        /// Add a label to a task
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of LabelResponse</returns>
         System.Threading.Tasks.Task<LabelResponse> PostTasksIDLabelsAsync (string taskID, LabelMapping labelMapping, string zapTraceSpan = null);
 
         /// <summary>
-        /// add a label to a task
+        /// Add a label to a task
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (LabelResponse)</returns>
         System.Threading.Tasks.Task<ApiResponse<LabelResponse>> PostTasksIDLabelsAsyncWithHttpInfo (string taskID, LabelMapping labelMapping, string zapTraceSpan = null);
         /// <summary>
-        /// Add task member
+        /// Add a member to a task
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ResourceMember</returns>
         System.Threading.Tasks.Task<ResourceMember> PostTasksIDMembersAsync (string taskID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
 
         /// <summary>
-        /// Add task member
+        /// Add a member to a task
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (ResourceMember)</returns>
         System.Threading.Tasks.Task<ApiResponse<ResourceMember>> PostTasksIDMembersAsyncWithHttpInfo (string taskID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
         /// <summary>
-        /// Add task owner
+        /// Add an owner to a task
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ResourceOwner</returns>
         System.Threading.Tasks.Task<ResourceOwner> PostTasksIDOwnersAsync (string taskID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
 
         /// <summary>
-        /// Add task owner
+        /// Add an owner to a task
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (ResourceOwner)</returns>
         System.Threading.Tasks.Task<ApiResponse<ResourceOwner>> PostTasksIDOwnersAsyncWithHttpInfo (string taskID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
         /// <summary>
-        /// manually start a run of the task now overriding the current schedule.
+        /// Manually start a task run, overriding the current schedule
         /// </summary>
         /// <remarks>
         /// 
@@ -1040,7 +1040,7 @@ namespace InfluxDB.Client.Api.Service
         System.Threading.Tasks.Task<Run> PostTasksIDRunsAsync (string taskID, string zapTraceSpan = null, RunManually runManually = null);
 
         /// <summary>
-        /// manually start a run of the task now overriding the current schedule.
+        /// Manually start a task run, overriding the current schedule
         /// </summary>
         /// <remarks>
         /// 
@@ -1058,8 +1058,8 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">task ID</param>
-        /// <param name="runID">run ID</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="runID">The run ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of Run</returns>
         System.Threading.Tasks.Task<Run> PostTasksIDRunsIDRetryAsync (string taskID, string runID, string zapTraceSpan = null);
@@ -1071,8 +1071,8 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">task ID</param>
-        /// <param name="runID">run ID</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="runID">The run ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (Run)</returns>
         System.Threading.Tasks.Task<ApiResponse<Run>> PostTasksIDRunsIDRetryAsyncWithHttpInfo (string taskID, string runID, string zapTraceSpan = null);
@@ -1180,7 +1180,7 @@ namespace InfluxDB.Client.Api.Service
         /// Delete a task Deletes a task and all associated records
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of task to delete</param>
+        /// <param name="taskID">The ID of the task to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
         public void DeleteTasksID (string taskID, string zapTraceSpan = null)
@@ -1192,7 +1192,7 @@ namespace InfluxDB.Client.Api.Service
         /// Delete a task Deletes a task and all associated records
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of task to delete</param>
+        /// <param name="taskID">The ID of the task to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public ApiResponse<Object> DeleteTasksIDWithHttpInfo (string taskID, string zapTraceSpan = null)
@@ -1249,7 +1249,7 @@ namespace InfluxDB.Client.Api.Service
         /// Delete a task Deletes a task and all associated records
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of task to delete</param>
+        /// <param name="taskID">The ID of the task to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> DeleteTasksIDWithIRestResponseAsync (string taskID, string zapTraceSpan = null)
@@ -1304,7 +1304,7 @@ namespace InfluxDB.Client.Api.Service
         /// Delete a task Deletes a task and all associated records
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of task to delete</param>
+        /// <param name="taskID">The ID of the task to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public IRestResponse DeleteTasksIDWithIRestResponse (string taskID, string zapTraceSpan = null)
@@ -1359,7 +1359,7 @@ namespace InfluxDB.Client.Api.Service
         /// Delete a task Deletes a task and all associated records
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of task to delete</param>
+        /// <param name="taskID">The ID of the task to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public RestRequest DeleteTasksIDWithRestRequest (string taskID, string zapTraceSpan = null)
@@ -1403,7 +1403,7 @@ namespace InfluxDB.Client.Api.Service
         /// Delete a task Deletes a task and all associated records
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of task to delete</param>
+        /// <param name="taskID">The ID of the task to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
         public async System.Threading.Tasks.Task DeleteTasksIDAsync (string taskID, string zapTraceSpan = null)
@@ -1416,7 +1416,7 @@ namespace InfluxDB.Client.Api.Service
         /// Delete a task Deletes a task and all associated records
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of task to delete</param>
+        /// <param name="taskID">The ID of the task to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteTasksIDAsyncWithHttpInfo (string taskID, string zapTraceSpan = null)
@@ -1441,7 +1441,7 @@ namespace InfluxDB.Client.Api.Service
         /// Delete a task Deletes a task and all associated records
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of task to delete</param>
+        /// <param name="taskID">The ID of the task to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse</returns>
         public async System.Threading.Tasks.Task<IRestResponse> DeleteTasksIDAsyncWithIRestResponse (string taskID, string zapTraceSpan = null)
@@ -1491,11 +1491,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// delete a label from a task 
+        /// Delete a label from a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="labelID">the label id</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="labelID">The label ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
         public void DeleteTasksIDLabelsID (string taskID, string labelID, string zapTraceSpan = null)
@@ -1504,11 +1504,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// delete a label from a task 
+        /// Delete a label from a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="labelID">the label id</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="labelID">The label ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public ApiResponse<Object> DeleteTasksIDLabelsIDWithHttpInfo (string taskID, string labelID, string zapTraceSpan = null)
@@ -1566,11 +1566,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// delete a label from a task 
+        /// Delete a label from a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="labelID">the label id</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="labelID">The label ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> DeleteTasksIDLabelsIDWithIRestResponseAsync (string taskID, string labelID, string zapTraceSpan = null)
@@ -1626,11 +1626,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// delete a label from a task 
+        /// Delete a label from a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="labelID">the label id</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="labelID">The label ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public IRestResponse DeleteTasksIDLabelsIDWithIRestResponse (string taskID, string labelID, string zapTraceSpan = null)
@@ -1686,11 +1686,11 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// delete a label from a task 
+        /// Delete a label from a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="labelID">the label id</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="labelID">The label ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public RestRequest DeleteTasksIDLabelsIDWithRestRequest (string taskID, string labelID, string zapTraceSpan = null)
@@ -1735,11 +1735,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// delete a label from a task 
+        /// Delete a label from a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="labelID">the label id</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="labelID">The label ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
         public async System.Threading.Tasks.Task DeleteTasksIDLabelsIDAsync (string taskID, string labelID, string zapTraceSpan = null)
@@ -1749,11 +1749,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// delete a label from a task 
+        /// Delete a label from a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="labelID">the label id</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="labelID">The label ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteTasksIDLabelsIDAsyncWithHttpInfo (string taskID, string labelID, string zapTraceSpan = null)
@@ -1775,11 +1775,11 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// delete a label from a task 
+        /// Delete a label from a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="labelID">the label id</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="labelID">The label ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse</returns>
         public async System.Threading.Tasks.Task<IRestResponse> DeleteTasksIDLabelsIDAsyncWithIRestResponse (string taskID, string labelID, string zapTraceSpan = null)
@@ -1833,11 +1833,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes a member from an task 
+        /// Remove a member from a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
         public void DeleteTasksIDMembersID (string userID, string taskID, string zapTraceSpan = null)
@@ -1846,11 +1846,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes a member from an task 
+        /// Remove a member from a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public ApiResponse<Object> DeleteTasksIDMembersIDWithHttpInfo (string userID, string taskID, string zapTraceSpan = null)
@@ -1908,11 +1908,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes a member from an task 
+        /// Remove a member from a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> DeleteTasksIDMembersIDWithIRestResponseAsync (string userID, string taskID, string zapTraceSpan = null)
@@ -1968,11 +1968,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes a member from an task 
+        /// Remove a member from a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public IRestResponse DeleteTasksIDMembersIDWithIRestResponse (string userID, string taskID, string zapTraceSpan = null)
@@ -2028,11 +2028,11 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// removes a member from an task 
+        /// Remove a member from a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public RestRequest DeleteTasksIDMembersIDWithRestRequest (string userID, string taskID, string zapTraceSpan = null)
@@ -2077,11 +2077,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes a member from an task 
+        /// Remove a member from a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
         public async System.Threading.Tasks.Task DeleteTasksIDMembersIDAsync (string userID, string taskID, string zapTraceSpan = null)
@@ -2091,11 +2091,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes a member from an task 
+        /// Remove a member from a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteTasksIDMembersIDAsyncWithHttpInfo (string userID, string taskID, string zapTraceSpan = null)
@@ -2117,11 +2117,11 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// removes a member from an task 
+        /// Remove a member from a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse</returns>
         public async System.Threading.Tasks.Task<IRestResponse> DeleteTasksIDMembersIDAsyncWithIRestResponse (string userID, string taskID, string zapTraceSpan = null)
@@ -2175,11 +2175,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes an owner from an task 
+        /// Remove an owner from a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
         public void DeleteTasksIDOwnersID (string userID, string taskID, string zapTraceSpan = null)
@@ -2188,11 +2188,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes an owner from an task 
+        /// Remove an owner from a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public ApiResponse<Object> DeleteTasksIDOwnersIDWithHttpInfo (string userID, string taskID, string zapTraceSpan = null)
@@ -2250,11 +2250,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes an owner from an task 
+        /// Remove an owner from a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> DeleteTasksIDOwnersIDWithIRestResponseAsync (string userID, string taskID, string zapTraceSpan = null)
@@ -2310,11 +2310,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes an owner from an task 
+        /// Remove an owner from a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public IRestResponse DeleteTasksIDOwnersIDWithIRestResponse (string userID, string taskID, string zapTraceSpan = null)
@@ -2370,11 +2370,11 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// removes an owner from an task 
+        /// Remove an owner from a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public RestRequest DeleteTasksIDOwnersIDWithRestRequest (string userID, string taskID, string zapTraceSpan = null)
@@ -2419,11 +2419,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes an owner from an task 
+        /// Remove an owner from a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
         public async System.Threading.Tasks.Task DeleteTasksIDOwnersIDAsync (string userID, string taskID, string zapTraceSpan = null)
@@ -2433,11 +2433,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes an owner from an task 
+        /// Remove an owner from a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteTasksIDOwnersIDAsyncWithHttpInfo (string userID, string taskID, string zapTraceSpan = null)
@@ -2459,11 +2459,11 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// removes an owner from an task 
+        /// Remove an owner from a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse</returns>
         public async System.Threading.Tasks.Task<IRestResponse> DeleteTasksIDOwnersIDAsyncWithIRestResponse (string userID, string taskID, string zapTraceSpan = null)
@@ -2517,11 +2517,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Cancel a single running task 
+        /// Cancel a running task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">task ID</param>
-        /// <param name="runID">run ID</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="runID">The run ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
         public void DeleteTasksIDRunsID (string taskID, string runID, string zapTraceSpan = null)
@@ -2530,11 +2530,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Cancel a single running task 
+        /// Cancel a running task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">task ID</param>
-        /// <param name="runID">run ID</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="runID">The run ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public ApiResponse<Object> DeleteTasksIDRunsIDWithHttpInfo (string taskID, string runID, string zapTraceSpan = null)
@@ -2592,11 +2592,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Cancel a single running task 
+        /// Cancel a running task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">task ID</param>
-        /// <param name="runID">run ID</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="runID">The run ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> DeleteTasksIDRunsIDWithIRestResponseAsync (string taskID, string runID, string zapTraceSpan = null)
@@ -2652,11 +2652,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Cancel a single running task 
+        /// Cancel a running task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">task ID</param>
-        /// <param name="runID">run ID</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="runID">The run ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public IRestResponse DeleteTasksIDRunsIDWithIRestResponse (string taskID, string runID, string zapTraceSpan = null)
@@ -2712,11 +2712,11 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// Cancel a single running task 
+        /// Cancel a running task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">task ID</param>
-        /// <param name="runID">run ID</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="runID">The run ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public RestRequest DeleteTasksIDRunsIDWithRestRequest (string taskID, string runID, string zapTraceSpan = null)
@@ -2761,11 +2761,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Cancel a single running task 
+        /// Cancel a running task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">task ID</param>
-        /// <param name="runID">run ID</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="runID">The run ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
         public async System.Threading.Tasks.Task DeleteTasksIDRunsIDAsync (string taskID, string runID, string zapTraceSpan = null)
@@ -2775,11 +2775,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Cancel a single running task 
+        /// Cancel a running task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">task ID</param>
-        /// <param name="runID">run ID</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="runID">The run ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteTasksIDRunsIDAsyncWithHttpInfo (string taskID, string runID, string zapTraceSpan = null)
@@ -2801,11 +2801,11 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// Cancel a single running task 
+        /// Cancel a running task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">task ID</param>
-        /// <param name="runID">run ID</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="runID">The run ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse</returns>
         public async System.Threading.Tasks.Task<IRestResponse> DeleteTasksIDRunsIDAsyncWithIRestResponse (string taskID, string runID, string zapTraceSpan = null)
@@ -2859,16 +2859,16 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// List tasks. 
+        /// List all tasks 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="name">only returns tasks with the specified name (optional)</param>
-        /// <param name="after">returns tasks after specified ID (optional)</param>
-        /// <param name="user">filter tasks to a specific user ID (optional)</param>
-        /// <param name="org">filter tasks to a specific organization name (optional)</param>
-        /// <param name="orgID">filter tasks to a specific organization ID (optional)</param>
-        /// <param name="limit">the number of tasks to return (optional, default to 100)</param>
+        /// <param name="name">Returns task with a specific name. (optional)</param>
+        /// <param name="after">Return tasks after a specified ID. (optional)</param>
+        /// <param name="user">Filter tasks to a specific user ID. (optional)</param>
+        /// <param name="org">Filter tasks to a specific organization name. (optional)</param>
+        /// <param name="orgID">Filter tasks to a specific organization ID. (optional)</param>
+        /// <param name="limit">The number of tasks to return (optional, default to 100)</param>
         /// <returns>Tasks</returns>
         public Tasks GetTasks (string zapTraceSpan = null, string name = null, string after = null, string user = null, string org = null, string orgID = null, int? limit = null)
         {
@@ -2877,16 +2877,16 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// List tasks. 
+        /// List all tasks 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="name">only returns tasks with the specified name (optional)</param>
-        /// <param name="after">returns tasks after specified ID (optional)</param>
-        /// <param name="user">filter tasks to a specific user ID (optional)</param>
-        /// <param name="org">filter tasks to a specific organization name (optional)</param>
-        /// <param name="orgID">filter tasks to a specific organization ID (optional)</param>
-        /// <param name="limit">the number of tasks to return (optional, default to 100)</param>
+        /// <param name="name">Returns task with a specific name. (optional)</param>
+        /// <param name="after">Return tasks after a specified ID. (optional)</param>
+        /// <param name="user">Filter tasks to a specific user ID. (optional)</param>
+        /// <param name="org">Filter tasks to a specific organization name. (optional)</param>
+        /// <param name="orgID">Filter tasks to a specific organization ID. (optional)</param>
+        /// <param name="limit">The number of tasks to return (optional, default to 100)</param>
         /// <returns>ApiResponse of Tasks</returns>
         public ApiResponse< Tasks > GetTasksWithHttpInfo (string zapTraceSpan = null, string name = null, string after = null, string user = null, string org = null, string orgID = null, int? limit = null)
         {
@@ -2941,16 +2941,16 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// List tasks. 
+        /// List all tasks 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="name">only returns tasks with the specified name (optional)</param>
-        /// <param name="after">returns tasks after specified ID (optional)</param>
-        /// <param name="user">filter tasks to a specific user ID (optional)</param>
-        /// <param name="org">filter tasks to a specific organization name (optional)</param>
-        /// <param name="orgID">filter tasks to a specific organization ID (optional)</param>
-        /// <param name="limit">the number of tasks to return (optional, default to 100)</param>
+        /// <param name="name">Returns task with a specific name. (optional)</param>
+        /// <param name="after">Return tasks after a specified ID. (optional)</param>
+        /// <param name="user">Filter tasks to a specific user ID. (optional)</param>
+        /// <param name="org">Filter tasks to a specific organization name. (optional)</param>
+        /// <param name="orgID">Filter tasks to a specific organization ID. (optional)</param>
+        /// <param name="limit">The number of tasks to return (optional, default to 100)</param>
         /// <returns>ApiResponse of Tasks</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetTasksWithIRestResponseAsync (string zapTraceSpan = null, string name = null, string after = null, string user = null, string org = null, string orgID = null, int? limit = null)
         {
@@ -3003,16 +3003,16 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// List tasks. 
+        /// List all tasks 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="name">only returns tasks with the specified name (optional)</param>
-        /// <param name="after">returns tasks after specified ID (optional)</param>
-        /// <param name="user">filter tasks to a specific user ID (optional)</param>
-        /// <param name="org">filter tasks to a specific organization name (optional)</param>
-        /// <param name="orgID">filter tasks to a specific organization ID (optional)</param>
-        /// <param name="limit">the number of tasks to return (optional, default to 100)</param>
+        /// <param name="name">Returns task with a specific name. (optional)</param>
+        /// <param name="after">Return tasks after a specified ID. (optional)</param>
+        /// <param name="user">Filter tasks to a specific user ID. (optional)</param>
+        /// <param name="org">Filter tasks to a specific organization name. (optional)</param>
+        /// <param name="orgID">Filter tasks to a specific organization ID. (optional)</param>
+        /// <param name="limit">The number of tasks to return (optional, default to 100)</param>
         /// <returns>ApiResponse of Tasks</returns>
         public IRestResponse GetTasksWithIRestResponse (string zapTraceSpan = null, string name = null, string after = null, string user = null, string org = null, string orgID = null, int? limit = null)
         {
@@ -3065,16 +3065,16 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// List tasks. 
+        /// List all tasks 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="name">only returns tasks with the specified name (optional)</param>
-        /// <param name="after">returns tasks after specified ID (optional)</param>
-        /// <param name="user">filter tasks to a specific user ID (optional)</param>
-        /// <param name="org">filter tasks to a specific organization name (optional)</param>
-        /// <param name="orgID">filter tasks to a specific organization ID (optional)</param>
-        /// <param name="limit">the number of tasks to return (optional, default to 100)</param>
+        /// <param name="name">Returns task with a specific name. (optional)</param>
+        /// <param name="after">Return tasks after a specified ID. (optional)</param>
+        /// <param name="user">Filter tasks to a specific user ID. (optional)</param>
+        /// <param name="org">Filter tasks to a specific organization name. (optional)</param>
+        /// <param name="orgID">Filter tasks to a specific organization ID. (optional)</param>
+        /// <param name="limit">The number of tasks to return (optional, default to 100)</param>
         /// <returns>ApiResponse of Tasks</returns>
         public RestRequest GetTasksWithRestRequest (string zapTraceSpan = null, string name = null, string after = null, string user = null, string org = null, string orgID = null, int? limit = null)
         {
@@ -3116,16 +3116,16 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// List tasks. 
+        /// List all tasks 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="name">only returns tasks with the specified name (optional)</param>
-        /// <param name="after">returns tasks after specified ID (optional)</param>
-        /// <param name="user">filter tasks to a specific user ID (optional)</param>
-        /// <param name="org">filter tasks to a specific organization name (optional)</param>
-        /// <param name="orgID">filter tasks to a specific organization ID (optional)</param>
-        /// <param name="limit">the number of tasks to return (optional, default to 100)</param>
+        /// <param name="name">Returns task with a specific name. (optional)</param>
+        /// <param name="after">Return tasks after a specified ID. (optional)</param>
+        /// <param name="user">Filter tasks to a specific user ID. (optional)</param>
+        /// <param name="org">Filter tasks to a specific organization name. (optional)</param>
+        /// <param name="orgID">Filter tasks to a specific organization ID. (optional)</param>
+        /// <param name="limit">The number of tasks to return (optional, default to 100)</param>
         /// <returns>Task of Tasks</returns>
         public async System.Threading.Tasks.Task<Tasks> GetTasksAsync (string zapTraceSpan = null, string name = null, string after = null, string user = null, string org = null, string orgID = null, int? limit = null)
         {
@@ -3135,16 +3135,16 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// List tasks. 
+        /// List all tasks 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="name">only returns tasks with the specified name (optional)</param>
-        /// <param name="after">returns tasks after specified ID (optional)</param>
-        /// <param name="user">filter tasks to a specific user ID (optional)</param>
-        /// <param name="org">filter tasks to a specific organization name (optional)</param>
-        /// <param name="orgID">filter tasks to a specific organization ID (optional)</param>
-        /// <param name="limit">the number of tasks to return (optional, default to 100)</param>
+        /// <param name="name">Returns task with a specific name. (optional)</param>
+        /// <param name="after">Return tasks after a specified ID. (optional)</param>
+        /// <param name="user">Filter tasks to a specific user ID. (optional)</param>
+        /// <param name="org">Filter tasks to a specific organization name. (optional)</param>
+        /// <param name="orgID">Filter tasks to a specific organization ID. (optional)</param>
+        /// <param name="limit">The number of tasks to return (optional, default to 100)</param>
         /// <returns>Task of ApiResponse (Tasks)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Tasks>> GetTasksAsyncWithHttpInfo (string zapTraceSpan = null, string name = null, string after = null, string user = null, string org = null, string orgID = null, int? limit = null)
         {
@@ -3165,16 +3165,16 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// List tasks. 
+        /// List all tasks 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="name">only returns tasks with the specified name (optional)</param>
-        /// <param name="after">returns tasks after specified ID (optional)</param>
-        /// <param name="user">filter tasks to a specific user ID (optional)</param>
-        /// <param name="org">filter tasks to a specific organization name (optional)</param>
-        /// <param name="orgID">filter tasks to a specific organization ID (optional)</param>
-        /// <param name="limit">the number of tasks to return (optional, default to 100)</param>
+        /// <param name="name">Returns task with a specific name. (optional)</param>
+        /// <param name="after">Return tasks after a specified ID. (optional)</param>
+        /// <param name="user">Filter tasks to a specific user ID. (optional)</param>
+        /// <param name="org">Filter tasks to a specific organization name. (optional)</param>
+        /// <param name="orgID">Filter tasks to a specific organization ID. (optional)</param>
+        /// <param name="limit">The number of tasks to return (optional, default to 100)</param>
         /// <returns>Task of IRestResponse (Tasks)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetTasksAsyncWithIRestResponse (string zapTraceSpan = null, string name = null, string after = null, string user = null, string org = null, string orgID = null, int? limit = null)
         {
@@ -3225,10 +3225,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Retrieve an task 
+        /// Retrieve a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of task to get</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>TaskType</returns>
         public TaskType GetTasksID (string taskID, string zapTraceSpan = null)
@@ -3238,10 +3238,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Retrieve an task 
+        /// Retrieve a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of task to get</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of TaskType</returns>
         public ApiResponse< TaskType > GetTasksIDWithHttpInfo (string taskID, string zapTraceSpan = null)
@@ -3295,10 +3295,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Retrieve an task 
+        /// Retrieve a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of task to get</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of TaskType</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetTasksIDWithIRestResponseAsync (string taskID, string zapTraceSpan = null)
@@ -3350,10 +3350,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Retrieve an task 
+        /// Retrieve a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of task to get</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of TaskType</returns>
         public IRestResponse GetTasksIDWithIRestResponse (string taskID, string zapTraceSpan = null)
@@ -3405,10 +3405,10 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// Retrieve an task 
+        /// Retrieve a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of task to get</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of TaskType</returns>
         public RestRequest GetTasksIDWithRestRequest (string taskID, string zapTraceSpan = null)
@@ -3449,10 +3449,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Retrieve an task 
+        /// Retrieve a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of task to get</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of TaskType</returns>
         public async System.Threading.Tasks.Task<TaskType> GetTasksIDAsync (string taskID, string zapTraceSpan = null)
@@ -3463,10 +3463,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Retrieve an task 
+        /// Retrieve a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of task to get</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (TaskType)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<TaskType>> GetTasksIDAsyncWithHttpInfo (string taskID, string zapTraceSpan = null)
@@ -3488,10 +3488,10 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// Retrieve an task 
+        /// Retrieve a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of task to get</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (TaskType)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetTasksIDAsyncWithIRestResponse (string taskID, string zapTraceSpan = null)
@@ -3541,10 +3541,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// list all labels for a task 
+        /// List all labels for a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>LabelsResponse</returns>
         public LabelsResponse GetTasksIDLabels (string taskID, string zapTraceSpan = null)
@@ -3554,10 +3554,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// list all labels for a task 
+        /// List all labels for a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelsResponse</returns>
         public ApiResponse< LabelsResponse > GetTasksIDLabelsWithHttpInfo (string taskID, string zapTraceSpan = null)
@@ -3611,10 +3611,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// list all labels for a task 
+        /// List all labels for a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelsResponse</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetTasksIDLabelsWithIRestResponseAsync (string taskID, string zapTraceSpan = null)
@@ -3666,10 +3666,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// list all labels for a task 
+        /// List all labels for a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelsResponse</returns>
         public IRestResponse GetTasksIDLabelsWithIRestResponse (string taskID, string zapTraceSpan = null)
@@ -3721,10 +3721,10 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// list all labels for a task 
+        /// List all labels for a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelsResponse</returns>
         public RestRequest GetTasksIDLabelsWithRestRequest (string taskID, string zapTraceSpan = null)
@@ -3765,10 +3765,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// list all labels for a task 
+        /// List all labels for a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of LabelsResponse</returns>
         public async System.Threading.Tasks.Task<LabelsResponse> GetTasksIDLabelsAsync (string taskID, string zapTraceSpan = null)
@@ -3779,10 +3779,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// list all labels for a task 
+        /// List all labels for a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (LabelsResponse)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<LabelsResponse>> GetTasksIDLabelsAsyncWithHttpInfo (string taskID, string zapTraceSpan = null)
@@ -3804,10 +3804,10 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// list all labels for a task 
+        /// List all labels for a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (LabelsResponse)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetTasksIDLabelsAsyncWithIRestResponse (string taskID, string zapTraceSpan = null)
@@ -3860,7 +3860,7 @@ namespace InfluxDB.Client.Api.Service
         /// Retrieve all logs for a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of task to get logs for</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Logs</returns>
         public Logs GetTasksIDLogs (string taskID, string zapTraceSpan = null)
@@ -3873,7 +3873,7 @@ namespace InfluxDB.Client.Api.Service
         /// Retrieve all logs for a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of task to get logs for</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Logs</returns>
         public ApiResponse< Logs > GetTasksIDLogsWithHttpInfo (string taskID, string zapTraceSpan = null)
@@ -3930,7 +3930,7 @@ namespace InfluxDB.Client.Api.Service
         /// Retrieve all logs for a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of task to get logs for</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Logs</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetTasksIDLogsWithIRestResponseAsync (string taskID, string zapTraceSpan = null)
@@ -3985,7 +3985,7 @@ namespace InfluxDB.Client.Api.Service
         /// Retrieve all logs for a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of task to get logs for</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Logs</returns>
         public IRestResponse GetTasksIDLogsWithIRestResponse (string taskID, string zapTraceSpan = null)
@@ -4040,7 +4040,7 @@ namespace InfluxDB.Client.Api.Service
         /// Retrieve all logs for a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of task to get logs for</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Logs</returns>
         public RestRequest GetTasksIDLogsWithRestRequest (string taskID, string zapTraceSpan = null)
@@ -4084,7 +4084,7 @@ namespace InfluxDB.Client.Api.Service
         /// Retrieve all logs for a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of task to get logs for</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of Logs</returns>
         public async System.Threading.Tasks.Task<Logs> GetTasksIDLogsAsync (string taskID, string zapTraceSpan = null)
@@ -4098,7 +4098,7 @@ namespace InfluxDB.Client.Api.Service
         /// Retrieve all logs for a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of task to get logs for</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (Logs)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Logs>> GetTasksIDLogsAsyncWithHttpInfo (string taskID, string zapTraceSpan = null)
@@ -4123,7 +4123,7 @@ namespace InfluxDB.Client.Api.Service
         /// Retrieve all logs for a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of task to get logs for</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (Logs)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetTasksIDLogsAsyncWithIRestResponse (string taskID, string zapTraceSpan = null)
@@ -4176,7 +4176,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all task members 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ResourceMembers</returns>
         public ResourceMembers GetTasksIDMembers (string taskID, string zapTraceSpan = null)
@@ -4189,7 +4189,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all task members 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMembers</returns>
         public ApiResponse< ResourceMembers > GetTasksIDMembersWithHttpInfo (string taskID, string zapTraceSpan = null)
@@ -4246,7 +4246,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all task members 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMembers</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetTasksIDMembersWithIRestResponseAsync (string taskID, string zapTraceSpan = null)
@@ -4301,7 +4301,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all task members 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMembers</returns>
         public IRestResponse GetTasksIDMembersWithIRestResponse (string taskID, string zapTraceSpan = null)
@@ -4356,7 +4356,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all task members 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMembers</returns>
         public RestRequest GetTasksIDMembersWithRestRequest (string taskID, string zapTraceSpan = null)
@@ -4400,7 +4400,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all task members 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ResourceMembers</returns>
         public async System.Threading.Tasks.Task<ResourceMembers> GetTasksIDMembersAsync (string taskID, string zapTraceSpan = null)
@@ -4414,7 +4414,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all task members 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (ResourceMembers)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<ResourceMembers>> GetTasksIDMembersAsyncWithHttpInfo (string taskID, string zapTraceSpan = null)
@@ -4439,7 +4439,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all task members 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (ResourceMembers)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetTasksIDMembersAsyncWithIRestResponse (string taskID, string zapTraceSpan = null)
@@ -4489,10 +4489,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// List all task owners 
+        /// List all owners of a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ResourceOwners</returns>
         public ResourceOwners GetTasksIDOwners (string taskID, string zapTraceSpan = null)
@@ -4502,10 +4502,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// List all task owners 
+        /// List all owners of a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwners</returns>
         public ApiResponse< ResourceOwners > GetTasksIDOwnersWithHttpInfo (string taskID, string zapTraceSpan = null)
@@ -4559,10 +4559,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// List all task owners 
+        /// List all owners of a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwners</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetTasksIDOwnersWithIRestResponseAsync (string taskID, string zapTraceSpan = null)
@@ -4614,10 +4614,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// List all task owners 
+        /// List all owners of a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwners</returns>
         public IRestResponse GetTasksIDOwnersWithIRestResponse (string taskID, string zapTraceSpan = null)
@@ -4669,10 +4669,10 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// List all task owners 
+        /// List all owners of a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwners</returns>
         public RestRequest GetTasksIDOwnersWithRestRequest (string taskID, string zapTraceSpan = null)
@@ -4713,10 +4713,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// List all task owners 
+        /// List all owners of a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ResourceOwners</returns>
         public async System.Threading.Tasks.Task<ResourceOwners> GetTasksIDOwnersAsync (string taskID, string zapTraceSpan = null)
@@ -4727,10 +4727,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// List all task owners 
+        /// List all owners of a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (ResourceOwners)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<ResourceOwners>> GetTasksIDOwnersAsyncWithHttpInfo (string taskID, string zapTraceSpan = null)
@@ -4752,10 +4752,10 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// List all task owners 
+        /// List all owners of a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (ResourceOwners)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetTasksIDOwnersAsyncWithIRestResponse (string taskID, string zapTraceSpan = null)
@@ -4805,15 +4805,15 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Retrieve list of run records for a task 
+        /// List runs for a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of task to get runs for</param>
+        /// <param name="taskID">The ID of the task to get runs for.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="after">returns runs after specified ID (optional)</param>
-        /// <param name="limit">the number of runs to return (optional, default to 100)</param>
-        /// <param name="afterTime">filter runs to those scheduled after this time, RFC3339 (optional)</param>
-        /// <param name="beforeTime">filter runs to those scheduled before this time, RFC3339 (optional)</param>
+        /// <param name="after">Returns runs after a specific ID. (optional)</param>
+        /// <param name="limit">The number of runs to return (optional, default to 100)</param>
+        /// <param name="afterTime">Filter runs to those scheduled after this time, RFC3339 (optional)</param>
+        /// <param name="beforeTime">Filter runs to those scheduled before this time, RFC3339 (optional)</param>
         /// <returns>Runs</returns>
         public Runs GetTasksIDRuns (string taskID, string zapTraceSpan = null, string after = null, int? limit = null, DateTime? afterTime = null, DateTime? beforeTime = null)
         {
@@ -4822,15 +4822,15 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Retrieve list of run records for a task 
+        /// List runs for a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of task to get runs for</param>
+        /// <param name="taskID">The ID of the task to get runs for.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="after">returns runs after specified ID (optional)</param>
-        /// <param name="limit">the number of runs to return (optional, default to 100)</param>
-        /// <param name="afterTime">filter runs to those scheduled after this time, RFC3339 (optional)</param>
-        /// <param name="beforeTime">filter runs to those scheduled before this time, RFC3339 (optional)</param>
+        /// <param name="after">Returns runs after a specific ID. (optional)</param>
+        /// <param name="limit">The number of runs to return (optional, default to 100)</param>
+        /// <param name="afterTime">Filter runs to those scheduled after this time, RFC3339 (optional)</param>
+        /// <param name="beforeTime">Filter runs to those scheduled before this time, RFC3339 (optional)</param>
         /// <returns>ApiResponse of Runs</returns>
         public ApiResponse< Runs > GetTasksIDRunsWithHttpInfo (string taskID, string zapTraceSpan = null, string after = null, int? limit = null, DateTime? afterTime = null, DateTime? beforeTime = null)
         {
@@ -4887,15 +4887,15 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Retrieve list of run records for a task 
+        /// List runs for a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of task to get runs for</param>
+        /// <param name="taskID">The ID of the task to get runs for.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="after">returns runs after specified ID (optional)</param>
-        /// <param name="limit">the number of runs to return (optional, default to 100)</param>
-        /// <param name="afterTime">filter runs to those scheduled after this time, RFC3339 (optional)</param>
-        /// <param name="beforeTime">filter runs to those scheduled before this time, RFC3339 (optional)</param>
+        /// <param name="after">Returns runs after a specific ID. (optional)</param>
+        /// <param name="limit">The number of runs to return (optional, default to 100)</param>
+        /// <param name="afterTime">Filter runs to those scheduled after this time, RFC3339 (optional)</param>
+        /// <param name="beforeTime">Filter runs to those scheduled before this time, RFC3339 (optional)</param>
         /// <returns>ApiResponse of Runs</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetTasksIDRunsWithIRestResponseAsync (string taskID, string zapTraceSpan = null, string after = null, int? limit = null, DateTime? afterTime = null, DateTime? beforeTime = null)
         {
@@ -4950,15 +4950,15 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Retrieve list of run records for a task 
+        /// List runs for a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of task to get runs for</param>
+        /// <param name="taskID">The ID of the task to get runs for.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="after">returns runs after specified ID (optional)</param>
-        /// <param name="limit">the number of runs to return (optional, default to 100)</param>
-        /// <param name="afterTime">filter runs to those scheduled after this time, RFC3339 (optional)</param>
-        /// <param name="beforeTime">filter runs to those scheduled before this time, RFC3339 (optional)</param>
+        /// <param name="after">Returns runs after a specific ID. (optional)</param>
+        /// <param name="limit">The number of runs to return (optional, default to 100)</param>
+        /// <param name="afterTime">Filter runs to those scheduled after this time, RFC3339 (optional)</param>
+        /// <param name="beforeTime">Filter runs to those scheduled before this time, RFC3339 (optional)</param>
         /// <returns>ApiResponse of Runs</returns>
         public IRestResponse GetTasksIDRunsWithIRestResponse (string taskID, string zapTraceSpan = null, string after = null, int? limit = null, DateTime? afterTime = null, DateTime? beforeTime = null)
         {
@@ -5013,15 +5013,15 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// Retrieve list of run records for a task 
+        /// List runs for a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of task to get runs for</param>
+        /// <param name="taskID">The ID of the task to get runs for.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="after">returns runs after specified ID (optional)</param>
-        /// <param name="limit">the number of runs to return (optional, default to 100)</param>
-        /// <param name="afterTime">filter runs to those scheduled after this time, RFC3339 (optional)</param>
-        /// <param name="beforeTime">filter runs to those scheduled before this time, RFC3339 (optional)</param>
+        /// <param name="after">Returns runs after a specific ID. (optional)</param>
+        /// <param name="limit">The number of runs to return (optional, default to 100)</param>
+        /// <param name="afterTime">Filter runs to those scheduled after this time, RFC3339 (optional)</param>
+        /// <param name="beforeTime">Filter runs to those scheduled before this time, RFC3339 (optional)</param>
         /// <returns>ApiResponse of Runs</returns>
         public RestRequest GetTasksIDRunsWithRestRequest (string taskID, string zapTraceSpan = null, string after = null, int? limit = null, DateTime? afterTime = null, DateTime? beforeTime = null)
         {
@@ -5065,15 +5065,15 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Retrieve list of run records for a task 
+        /// List runs for a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of task to get runs for</param>
+        /// <param name="taskID">The ID of the task to get runs for.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="after">returns runs after specified ID (optional)</param>
-        /// <param name="limit">the number of runs to return (optional, default to 100)</param>
-        /// <param name="afterTime">filter runs to those scheduled after this time, RFC3339 (optional)</param>
-        /// <param name="beforeTime">filter runs to those scheduled before this time, RFC3339 (optional)</param>
+        /// <param name="after">Returns runs after a specific ID. (optional)</param>
+        /// <param name="limit">The number of runs to return (optional, default to 100)</param>
+        /// <param name="afterTime">Filter runs to those scheduled after this time, RFC3339 (optional)</param>
+        /// <param name="beforeTime">Filter runs to those scheduled before this time, RFC3339 (optional)</param>
         /// <returns>Task of Runs</returns>
         public async System.Threading.Tasks.Task<Runs> GetTasksIDRunsAsync (string taskID, string zapTraceSpan = null, string after = null, int? limit = null, DateTime? afterTime = null, DateTime? beforeTime = null)
         {
@@ -5083,15 +5083,15 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Retrieve list of run records for a task 
+        /// List runs for a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of task to get runs for</param>
+        /// <param name="taskID">The ID of the task to get runs for.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="after">returns runs after specified ID (optional)</param>
-        /// <param name="limit">the number of runs to return (optional, default to 100)</param>
-        /// <param name="afterTime">filter runs to those scheduled after this time, RFC3339 (optional)</param>
-        /// <param name="beforeTime">filter runs to those scheduled before this time, RFC3339 (optional)</param>
+        /// <param name="after">Returns runs after a specific ID. (optional)</param>
+        /// <param name="limit">The number of runs to return (optional, default to 100)</param>
+        /// <param name="afterTime">Filter runs to those scheduled after this time, RFC3339 (optional)</param>
+        /// <param name="beforeTime">Filter runs to those scheduled before this time, RFC3339 (optional)</param>
         /// <returns>Task of ApiResponse (Runs)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Runs>> GetTasksIDRunsAsyncWithHttpInfo (string taskID, string zapTraceSpan = null, string after = null, int? limit = null, DateTime? afterTime = null, DateTime? beforeTime = null)
         {
@@ -5112,15 +5112,15 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// Retrieve list of run records for a task 
+        /// List runs for a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of task to get runs for</param>
+        /// <param name="taskID">The ID of the task to get runs for.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="after">returns runs after specified ID (optional)</param>
-        /// <param name="limit">the number of runs to return (optional, default to 100)</param>
-        /// <param name="afterTime">filter runs to those scheduled after this time, RFC3339 (optional)</param>
-        /// <param name="beforeTime">filter runs to those scheduled before this time, RFC3339 (optional)</param>
+        /// <param name="after">Returns runs after a specific ID. (optional)</param>
+        /// <param name="limit">The number of runs to return (optional, default to 100)</param>
+        /// <param name="afterTime">Filter runs to those scheduled after this time, RFC3339 (optional)</param>
+        /// <param name="beforeTime">Filter runs to those scheduled before this time, RFC3339 (optional)</param>
         /// <returns>Task of IRestResponse (Runs)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetTasksIDRunsAsyncWithIRestResponse (string taskID, string zapTraceSpan = null, string after = null, int? limit = null, DateTime? afterTime = null, DateTime? beforeTime = null)
         {
@@ -5173,11 +5173,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Retrieve a single run record for a task 
+        /// Retrieve a single run for a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">task ID</param>
-        /// <param name="runID">run ID</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="runID">The run ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Run</returns>
         public Run GetTasksIDRunsID (string taskID, string runID, string zapTraceSpan = null)
@@ -5187,11 +5187,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Retrieve a single run record for a task 
+        /// Retrieve a single run for a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">task ID</param>
-        /// <param name="runID">run ID</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="runID">The run ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Run</returns>
         public ApiResponse< Run > GetTasksIDRunsIDWithHttpInfo (string taskID, string runID, string zapTraceSpan = null)
@@ -5249,11 +5249,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Retrieve a single run record for a task 
+        /// Retrieve a single run for a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">task ID</param>
-        /// <param name="runID">run ID</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="runID">The run ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Run</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetTasksIDRunsIDWithIRestResponseAsync (string taskID, string runID, string zapTraceSpan = null)
@@ -5309,11 +5309,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Retrieve a single run record for a task 
+        /// Retrieve a single run for a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">task ID</param>
-        /// <param name="runID">run ID</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="runID">The run ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Run</returns>
         public IRestResponse GetTasksIDRunsIDWithIRestResponse (string taskID, string runID, string zapTraceSpan = null)
@@ -5369,11 +5369,11 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// Retrieve a single run record for a task 
+        /// Retrieve a single run for a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">task ID</param>
-        /// <param name="runID">run ID</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="runID">The run ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Run</returns>
         public RestRequest GetTasksIDRunsIDWithRestRequest (string taskID, string runID, string zapTraceSpan = null)
@@ -5418,11 +5418,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Retrieve a single run record for a task 
+        /// Retrieve a single run for a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">task ID</param>
-        /// <param name="runID">run ID</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="runID">The run ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of Run</returns>
         public async System.Threading.Tasks.Task<Run> GetTasksIDRunsIDAsync (string taskID, string runID, string zapTraceSpan = null)
@@ -5433,11 +5433,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Retrieve a single run record for a task 
+        /// Retrieve a single run for a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">task ID</param>
-        /// <param name="runID">run ID</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="runID">The run ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (Run)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Run>> GetTasksIDRunsIDAsyncWithHttpInfo (string taskID, string runID, string zapTraceSpan = null)
@@ -5459,11 +5459,11 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// Retrieve a single run record for a task 
+        /// Retrieve a single run for a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">task ID</param>
-        /// <param name="runID">run ID</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="runID">The run ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (Run)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetTasksIDRunsIDAsyncWithIRestResponse (string taskID, string runID, string zapTraceSpan = null)
@@ -5864,8 +5864,8 @@ namespace InfluxDB.Client.Api.Service
         /// Update a task Update a task. This will cancel all queued runs.
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of task to get</param>
-        /// <param name="taskUpdateRequest">task update to apply</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="taskUpdateRequest">Task update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>TaskType</returns>
         public TaskType PatchTasksID (string taskID, TaskUpdateRequest taskUpdateRequest, string zapTraceSpan = null)
@@ -5878,8 +5878,8 @@ namespace InfluxDB.Client.Api.Service
         /// Update a task Update a task. This will cancel all queued runs.
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of task to get</param>
-        /// <param name="taskUpdateRequest">task update to apply</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="taskUpdateRequest">Task update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of TaskType</returns>
         public ApiResponse< TaskType > PatchTasksIDWithHttpInfo (string taskID, TaskUpdateRequest taskUpdateRequest, string zapTraceSpan = null)
@@ -5948,8 +5948,8 @@ namespace InfluxDB.Client.Api.Service
         /// Update a task Update a task. This will cancel all queued runs.
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of task to get</param>
-        /// <param name="taskUpdateRequest">task update to apply</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="taskUpdateRequest">Task update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of TaskType</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PatchTasksIDWithIRestResponseAsync (string taskID, TaskUpdateRequest taskUpdateRequest, string zapTraceSpan = null)
@@ -6016,8 +6016,8 @@ namespace InfluxDB.Client.Api.Service
         /// Update a task Update a task. This will cancel all queued runs.
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of task to get</param>
-        /// <param name="taskUpdateRequest">task update to apply</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="taskUpdateRequest">Task update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of TaskType</returns>
         public IRestResponse PatchTasksIDWithIRestResponse (string taskID, TaskUpdateRequest taskUpdateRequest, string zapTraceSpan = null)
@@ -6084,8 +6084,8 @@ namespace InfluxDB.Client.Api.Service
         /// Update a task Update a task. This will cancel all queued runs.
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of task to get</param>
-        /// <param name="taskUpdateRequest">task update to apply</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="taskUpdateRequest">Task update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of TaskType</returns>
         public RestRequest PatchTasksIDWithRestRequest (string taskID, TaskUpdateRequest taskUpdateRequest, string zapTraceSpan = null)
@@ -6141,8 +6141,8 @@ namespace InfluxDB.Client.Api.Service
         /// Update a task Update a task. This will cancel all queued runs.
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of task to get</param>
-        /// <param name="taskUpdateRequest">task update to apply</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="taskUpdateRequest">Task update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of TaskType</returns>
         public async System.Threading.Tasks.Task<TaskType> PatchTasksIDAsync (string taskID, TaskUpdateRequest taskUpdateRequest, string zapTraceSpan = null)
@@ -6156,8 +6156,8 @@ namespace InfluxDB.Client.Api.Service
         /// Update a task Update a task. This will cancel all queued runs.
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of task to get</param>
-        /// <param name="taskUpdateRequest">task update to apply</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="taskUpdateRequest">Task update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (TaskType)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<TaskType>> PatchTasksIDAsyncWithHttpInfo (string taskID, TaskUpdateRequest taskUpdateRequest, string zapTraceSpan = null)
@@ -6182,8 +6182,8 @@ namespace InfluxDB.Client.Api.Service
         /// Update a task Update a task. This will cancel all queued runs.
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of task to get</param>
-        /// <param name="taskUpdateRequest">task update to apply</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="taskUpdateRequest">Task update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (TaskType)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PatchTasksIDAsyncWithIRestResponse (string taskID, TaskUpdateRequest taskUpdateRequest, string zapTraceSpan = null)
@@ -6248,7 +6248,7 @@ namespace InfluxDB.Client.Api.Service
         /// Create a new task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskCreateRequest">task to create</param>
+        /// <param name="taskCreateRequest">Task to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>TaskType</returns>
         public TaskType PostTasks (TaskCreateRequest taskCreateRequest, string zapTraceSpan = null)
@@ -6261,7 +6261,7 @@ namespace InfluxDB.Client.Api.Service
         /// Create a new task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskCreateRequest">task to create</param>
+        /// <param name="taskCreateRequest">Task to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of TaskType</returns>
         public ApiResponse< TaskType > PostTasksWithHttpInfo (TaskCreateRequest taskCreateRequest, string zapTraceSpan = null)
@@ -6326,7 +6326,7 @@ namespace InfluxDB.Client.Api.Service
         /// Create a new task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskCreateRequest">task to create</param>
+        /// <param name="taskCreateRequest">Task to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of TaskType</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PostTasksWithIRestResponseAsync (TaskCreateRequest taskCreateRequest, string zapTraceSpan = null)
@@ -6389,7 +6389,7 @@ namespace InfluxDB.Client.Api.Service
         /// Create a new task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskCreateRequest">task to create</param>
+        /// <param name="taskCreateRequest">Task to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of TaskType</returns>
         public IRestResponse PostTasksWithIRestResponse (TaskCreateRequest taskCreateRequest, string zapTraceSpan = null)
@@ -6452,7 +6452,7 @@ namespace InfluxDB.Client.Api.Service
         /// Create a new task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskCreateRequest">task to create</param>
+        /// <param name="taskCreateRequest">Task to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of TaskType</returns>
         public RestRequest PostTasksWithRestRequest (TaskCreateRequest taskCreateRequest, string zapTraceSpan = null)
@@ -6504,7 +6504,7 @@ namespace InfluxDB.Client.Api.Service
         /// Create a new task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskCreateRequest">task to create</param>
+        /// <param name="taskCreateRequest">Task to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of TaskType</returns>
         public async System.Threading.Tasks.Task<TaskType> PostTasksAsync (TaskCreateRequest taskCreateRequest, string zapTraceSpan = null)
@@ -6518,7 +6518,7 @@ namespace InfluxDB.Client.Api.Service
         /// Create a new task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskCreateRequest">task to create</param>
+        /// <param name="taskCreateRequest">Task to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (TaskType)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<TaskType>> PostTasksAsyncWithHttpInfo (TaskCreateRequest taskCreateRequest, string zapTraceSpan = null)
@@ -6543,7 +6543,7 @@ namespace InfluxDB.Client.Api.Service
         /// Create a new task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskCreateRequest">task to create</param>
+        /// <param name="taskCreateRequest">Task to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (TaskType)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PostTasksAsyncWithIRestResponse (TaskCreateRequest taskCreateRequest, string zapTraceSpan = null)
@@ -6601,11 +6601,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// add a label to a task 
+        /// Add a label to a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>LabelResponse</returns>
         public LabelResponse PostTasksIDLabels (string taskID, LabelMapping labelMapping, string zapTraceSpan = null)
@@ -6615,11 +6615,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// add a label to a task 
+        /// Add a label to a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelResponse</returns>
         public ApiResponse< LabelResponse > PostTasksIDLabelsWithHttpInfo (string taskID, LabelMapping labelMapping, string zapTraceSpan = null)
@@ -6685,11 +6685,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// add a label to a task 
+        /// Add a label to a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelResponse</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PostTasksIDLabelsWithIRestResponseAsync (string taskID, LabelMapping labelMapping, string zapTraceSpan = null)
@@ -6753,11 +6753,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// add a label to a task 
+        /// Add a label to a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelResponse</returns>
         public IRestResponse PostTasksIDLabelsWithIRestResponse (string taskID, LabelMapping labelMapping, string zapTraceSpan = null)
@@ -6821,11 +6821,11 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// add a label to a task 
+        /// Add a label to a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelResponse</returns>
         public RestRequest PostTasksIDLabelsWithRestRequest (string taskID, LabelMapping labelMapping, string zapTraceSpan = null)
@@ -6878,11 +6878,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// add a label to a task 
+        /// Add a label to a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of LabelResponse</returns>
         public async System.Threading.Tasks.Task<LabelResponse> PostTasksIDLabelsAsync (string taskID, LabelMapping labelMapping, string zapTraceSpan = null)
@@ -6893,11 +6893,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// add a label to a task 
+        /// Add a label to a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (LabelResponse)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<LabelResponse>> PostTasksIDLabelsAsyncWithHttpInfo (string taskID, LabelMapping labelMapping, string zapTraceSpan = null)
@@ -6919,11 +6919,11 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// add a label to a task 
+        /// Add a label to a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (LabelResponse)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PostTasksIDLabelsAsyncWithIRestResponse (string taskID, LabelMapping labelMapping, string zapTraceSpan = null)
@@ -6985,11 +6985,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add task member 
+        /// Add a member to a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ResourceMember</returns>
         public ResourceMember PostTasksIDMembers (string taskID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -6999,11 +6999,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add task member 
+        /// Add a member to a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMember</returns>
         public ApiResponse< ResourceMember > PostTasksIDMembersWithHttpInfo (string taskID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -7069,11 +7069,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add task member 
+        /// Add a member to a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMember</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PostTasksIDMembersWithIRestResponseAsync (string taskID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -7137,11 +7137,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add task member 
+        /// Add a member to a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMember</returns>
         public IRestResponse PostTasksIDMembersWithIRestResponse (string taskID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -7205,11 +7205,11 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// Add task member 
+        /// Add a member to a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMember</returns>
         public RestRequest PostTasksIDMembersWithRestRequest (string taskID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -7262,11 +7262,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add task member 
+        /// Add a member to a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ResourceMember</returns>
         public async System.Threading.Tasks.Task<ResourceMember> PostTasksIDMembersAsync (string taskID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -7277,11 +7277,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add task member 
+        /// Add a member to a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (ResourceMember)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<ResourceMember>> PostTasksIDMembersAsyncWithHttpInfo (string taskID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -7303,11 +7303,11 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// Add task member 
+        /// Add a member to a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (ResourceMember)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PostTasksIDMembersAsyncWithIRestResponse (string taskID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -7369,11 +7369,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add task owner 
+        /// Add an owner to a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ResourceOwner</returns>
         public ResourceOwner PostTasksIDOwners (string taskID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -7383,11 +7383,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add task owner 
+        /// Add an owner to a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwner</returns>
         public ApiResponse< ResourceOwner > PostTasksIDOwnersWithHttpInfo (string taskID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -7453,11 +7453,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add task owner 
+        /// Add an owner to a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwner</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PostTasksIDOwnersWithIRestResponseAsync (string taskID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -7521,11 +7521,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add task owner 
+        /// Add an owner to a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwner</returns>
         public IRestResponse PostTasksIDOwnersWithIRestResponse (string taskID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -7589,11 +7589,11 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// Add task owner 
+        /// Add an owner to a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwner</returns>
         public RestRequest PostTasksIDOwnersWithRestRequest (string taskID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -7646,11 +7646,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add task owner 
+        /// Add an owner to a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ResourceOwner</returns>
         public async System.Threading.Tasks.Task<ResourceOwner> PostTasksIDOwnersAsync (string taskID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -7661,11 +7661,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add task owner 
+        /// Add an owner to a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (ResourceOwner)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<ResourceOwner>> PostTasksIDOwnersAsyncWithHttpInfo (string taskID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -7687,11 +7687,11 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// Add task owner 
+        /// Add an owner to a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (ResourceOwner)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PostTasksIDOwnersAsyncWithIRestResponse (string taskID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -7753,7 +7753,7 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// manually start a run of the task now overriding the current schedule. 
+        /// Manually start a task run, overriding the current schedule 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="taskID"></param>
@@ -7767,7 +7767,7 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// manually start a run of the task now overriding the current schedule. 
+        /// Manually start a task run, overriding the current schedule 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="taskID"></param>
@@ -7834,7 +7834,7 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// manually start a run of the task now overriding the current schedule. 
+        /// Manually start a task run, overriding the current schedule 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="taskID"></param>
@@ -7899,7 +7899,7 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// manually start a run of the task now overriding the current schedule. 
+        /// Manually start a task run, overriding the current schedule 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="taskID"></param>
@@ -7964,7 +7964,7 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// manually start a run of the task now overriding the current schedule. 
+        /// Manually start a task run, overriding the current schedule 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="taskID"></param>
@@ -8018,7 +8018,7 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// manually start a run of the task now overriding the current schedule. 
+        /// Manually start a task run, overriding the current schedule 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="taskID"></param>
@@ -8033,7 +8033,7 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// manually start a run of the task now overriding the current schedule. 
+        /// Manually start a task run, overriding the current schedule 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="taskID"></param>
@@ -8059,7 +8059,7 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// manually start a run of the task now overriding the current schedule. 
+        /// Manually start a task run, overriding the current schedule 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="taskID"></param>
@@ -8125,8 +8125,8 @@ namespace InfluxDB.Client.Api.Service
         /// Retry a task run 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">task ID</param>
-        /// <param name="runID">run ID</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="runID">The run ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Run</returns>
         public Run PostTasksIDRunsIDRetry (string taskID, string runID, string zapTraceSpan = null)
@@ -8139,8 +8139,8 @@ namespace InfluxDB.Client.Api.Service
         /// Retry a task run 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">task ID</param>
-        /// <param name="runID">run ID</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="runID">The run ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Run</returns>
         public ApiResponse< Run > PostTasksIDRunsIDRetryWithHttpInfo (string taskID, string runID, string zapTraceSpan = null)
@@ -8201,8 +8201,8 @@ namespace InfluxDB.Client.Api.Service
         /// Retry a task run 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">task ID</param>
-        /// <param name="runID">run ID</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="runID">The run ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Run</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PostTasksIDRunsIDRetryWithIRestResponseAsync (string taskID, string runID, string zapTraceSpan = null)
@@ -8261,8 +8261,8 @@ namespace InfluxDB.Client.Api.Service
         /// Retry a task run 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">task ID</param>
-        /// <param name="runID">run ID</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="runID">The run ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Run</returns>
         public IRestResponse PostTasksIDRunsIDRetryWithIRestResponse (string taskID, string runID, string zapTraceSpan = null)
@@ -8321,8 +8321,8 @@ namespace InfluxDB.Client.Api.Service
         /// Retry a task run 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">task ID</param>
-        /// <param name="runID">run ID</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="runID">The run ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Run</returns>
         public RestRequest PostTasksIDRunsIDRetryWithRestRequest (string taskID, string runID, string zapTraceSpan = null)
@@ -8370,8 +8370,8 @@ namespace InfluxDB.Client.Api.Service
         /// Retry a task run 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">task ID</param>
-        /// <param name="runID">run ID</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="runID">The run ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of Run</returns>
         public async System.Threading.Tasks.Task<Run> PostTasksIDRunsIDRetryAsync (string taskID, string runID, string zapTraceSpan = null)
@@ -8385,8 +8385,8 @@ namespace InfluxDB.Client.Api.Service
         /// Retry a task run 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">task ID</param>
-        /// <param name="runID">run ID</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="runID">The run ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (Run)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Run>> PostTasksIDRunsIDRetryAsyncWithHttpInfo (string taskID, string runID, string zapTraceSpan = null)
@@ -8411,8 +8411,8 @@ namespace InfluxDB.Client.Api.Service
         /// Retry a task run 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">task ID</param>
-        /// <param name="runID">run ID</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="runID">The run ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (Run)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PostTasksIDRunsIDRetryAsyncWithIRestResponse (string taskID, string runID, string zapTraceSpan = null)

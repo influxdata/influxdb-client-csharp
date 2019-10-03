@@ -80,7 +80,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="colors">Colors define color encoding of data into a visualization (required).</param>
         /// <param name="shape">shape (required).</param>
         /// <param name="note">note (required).</param>
-        /// <param name="showNoteWhenEmpty">if true, will display note when empty (required).</param>
+        /// <param name="showNoteWhenEmpty">If true, will display note when empty (required).</param>
         /// <param name="tableOptions">tableOptions (required).</param>
         /// <param name="fieldOptions">fieldOptions represent the fields retrieved by the query with customization options (required).</param>
         /// <param name="timeFormat">timeFormat describes the display format for time values according to moment.js date formatting (required).</param>
@@ -201,9 +201,9 @@ namespace InfluxDB.Client.Api.Domain
         public string Note { get; set; }
 
         /// <summary>
-        /// if true, will display note when empty
+        /// If true, will display note when empty
         /// </summary>
-        /// <value>if true, will display note when empty</value>
+        /// <value>If true, will display note when empty</value>
         [DataMember(Name="showNoteWhenEmpty", EmitDefaultValue=false)]
         public bool? ShowNoteWhenEmpty { get; set; }
 

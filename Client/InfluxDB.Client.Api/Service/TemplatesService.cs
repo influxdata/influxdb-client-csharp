@@ -25,50 +25,50 @@ namespace InfluxDB.Client.Api.Service
     {
         #region Synchronous Operations
         /// <summary>
-        /// delete a template document
+        /// Delete a template
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="templateID">ID of template</param>
+        /// <param name="templateID">The template ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
         void DeleteDocumentsTemplatesID (string templateID, string zapTraceSpan = null);
 
         /// <summary>
-        /// delete a template document
+        /// Delete a template
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="templateID">ID of template</param>
+        /// <param name="templateID">The template ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> DeleteDocumentsTemplatesIDWithHttpInfo (string templateID, string zapTraceSpan = null);
         /// <summary>
-        /// delete a label from a template
+        /// Delete a label from a template
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="templateID">ID of template</param>
-        /// <param name="labelID">the label ID</param>
+        /// <param name="templateID">The template ID.</param>
+        /// <param name="labelID">The label ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
         void DeleteDocumentsTemplatesIDLabelsID (string templateID, string labelID, string zapTraceSpan = null);
 
         /// <summary>
-        /// delete a label from a template
+        /// Delete a label from a template
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="templateID">ID of template</param>
-        /// <param name="labelID">the label ID</param>
+        /// <param name="templateID">The template ID.</param>
+        /// <param name="labelID">The label ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> DeleteDocumentsTemplatesIDLabelsIDWithHttpInfo (string templateID, string labelID, string zapTraceSpan = null);
@@ -80,8 +80,8 @@ namespace InfluxDB.Client.Api.Service
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="org">specifies the name of the organization of the template (optional)</param>
-        /// <param name="orgID">specifies the organization id of the template (optional)</param>
+        /// <param name="org">Specifies the name of the organization of the template. (optional)</param>
+        /// <param name="orgID">Specifies the organization ID of the template. (optional)</param>
         /// <returns>Documents</returns>
         Documents GetDocumentsTemplates (string zapTraceSpan = null, string org = null, string orgID = null);
 
@@ -93,8 +93,8 @@ namespace InfluxDB.Client.Api.Service
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="org">specifies the name of the organization of the template (optional)</param>
-        /// <param name="orgID">specifies the organization id of the template (optional)</param>
+        /// <param name="org">Specifies the name of the organization of the template. (optional)</param>
+        /// <param name="orgID">Specifies the organization ID of the template. (optional)</param>
         /// <returns>ApiResponse of Documents</returns>
         ApiResponse<Documents> GetDocumentsTemplatesWithHttpInfo (string zapTraceSpan = null, string org = null, string orgID = null);
         /// <summary>
@@ -104,7 +104,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="templateID">ID of template</param>
+        /// <param name="templateID">The template ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Document</returns>
         Document GetDocumentsTemplatesID (string templateID, string zapTraceSpan = null);
@@ -116,30 +116,30 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="templateID">ID of template</param>
+        /// <param name="templateID">The template ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Document</returns>
         ApiResponse<Document> GetDocumentsTemplatesIDWithHttpInfo (string templateID, string zapTraceSpan = null);
         /// <summary>
-        /// list all labels for a template
+        /// List all labels for a template
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="templateID">ID of template</param>
+        /// <param name="templateID">The template ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>LabelsResponse</returns>
         LabelsResponse GetDocumentsTemplatesIDLabels (string templateID, string zapTraceSpan = null);
 
         /// <summary>
-        /// list all labels for a template
+        /// List all labels for a template
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="templateID">ID of template</param>
+        /// <param name="templateID">The template ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelsResponse</returns>
         ApiResponse<LabelsResponse> GetDocumentsTemplatesIDLabelsWithHttpInfo (string templateID, string zapTraceSpan = null);
@@ -150,7 +150,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="documentCreate">template that will be created</param>
+        /// <param name="documentCreate">Template that will be created</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Document</returns>
         Document PostDocumentsTemplates (DocumentCreate documentCreate, string zapTraceSpan = null);
@@ -162,32 +162,32 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="documentCreate">template that will be created</param>
+        /// <param name="documentCreate">Template that will be created</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Document</returns>
         ApiResponse<Document> PostDocumentsTemplatesWithHttpInfo (DocumentCreate documentCreate, string zapTraceSpan = null);
         /// <summary>
-        /// add a label to a template
+        /// Add a label to a template
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="templateID">ID of template</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="templateID">The template ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>LabelResponse</returns>
         LabelResponse PostDocumentsTemplatesIDLabels (string templateID, LabelMapping labelMapping, string zapTraceSpan = null);
 
         /// <summary>
-        /// add a label to a template
+        /// Add a label to a template
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="templateID">ID of template</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="templateID">The template ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelResponse</returns>
         ApiResponse<LabelResponse> PostDocumentsTemplatesIDLabelsWithHttpInfo (string templateID, LabelMapping labelMapping, string zapTraceSpan = null);
@@ -198,8 +198,8 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="templateID">ID of template</param>
-        /// <param name="documentUpdate">template that will be updated</param>
+        /// <param name="templateID">The template ID.</param>
+        /// <param name="documentUpdate">Template that will be updated</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Document</returns>
         Document PutDocumentsTemplatesID (string templateID, DocumentUpdate documentUpdate, string zapTraceSpan = null);
@@ -211,58 +211,58 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="templateID">ID of template</param>
-        /// <param name="documentUpdate">template that will be updated</param>
+        /// <param name="templateID">The template ID.</param>
+        /// <param name="documentUpdate">Template that will be updated</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Document</returns>
         ApiResponse<Document> PutDocumentsTemplatesIDWithHttpInfo (string templateID, DocumentUpdate documentUpdate, string zapTraceSpan = null);
         #endregion Synchronous Operations
         #region Asynchronous Operations
         /// <summary>
-        /// delete a template document
+        /// Delete a template
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="templateID">ID of template</param>
+        /// <param name="templateID">The template ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
         System.Threading.Tasks.Task DeleteDocumentsTemplatesIDAsync (string templateID, string zapTraceSpan = null);
 
         /// <summary>
-        /// delete a template document
+        /// Delete a template
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="templateID">ID of template</param>
+        /// <param name="templateID">The template ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         System.Threading.Tasks.Task<ApiResponse<Object>> DeleteDocumentsTemplatesIDAsyncWithHttpInfo (string templateID, string zapTraceSpan = null);
         /// <summary>
-        /// delete a label from a template
+        /// Delete a label from a template
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="templateID">ID of template</param>
-        /// <param name="labelID">the label ID</param>
+        /// <param name="templateID">The template ID.</param>
+        /// <param name="labelID">The label ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
         System.Threading.Tasks.Task DeleteDocumentsTemplatesIDLabelsIDAsync (string templateID, string labelID, string zapTraceSpan = null);
 
         /// <summary>
-        /// delete a label from a template
+        /// Delete a label from a template
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="templateID">ID of template</param>
-        /// <param name="labelID">the label ID</param>
+        /// <param name="templateID">The template ID.</param>
+        /// <param name="labelID">The label ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         System.Threading.Tasks.Task<ApiResponse<Object>> DeleteDocumentsTemplatesIDLabelsIDAsyncWithHttpInfo (string templateID, string labelID, string zapTraceSpan = null);
@@ -274,8 +274,8 @@ namespace InfluxDB.Client.Api.Service
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="org">specifies the name of the organization of the template (optional)</param>
-        /// <param name="orgID">specifies the organization id of the template (optional)</param>
+        /// <param name="org">Specifies the name of the organization of the template. (optional)</param>
+        /// <param name="orgID">Specifies the organization ID of the template. (optional)</param>
         /// <returns>Task of Documents</returns>
         System.Threading.Tasks.Task<Documents> GetDocumentsTemplatesAsync (string zapTraceSpan = null, string org = null, string orgID = null);
 
@@ -287,8 +287,8 @@ namespace InfluxDB.Client.Api.Service
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="org">specifies the name of the organization of the template (optional)</param>
-        /// <param name="orgID">specifies the organization id of the template (optional)</param>
+        /// <param name="org">Specifies the name of the organization of the template. (optional)</param>
+        /// <param name="orgID">Specifies the organization ID of the template. (optional)</param>
         /// <returns>Task of ApiResponse (Documents)</returns>
         System.Threading.Tasks.Task<ApiResponse<Documents>> GetDocumentsTemplatesAsyncWithHttpInfo (string zapTraceSpan = null, string org = null, string orgID = null);
         /// <summary>
@@ -298,7 +298,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="templateID">ID of template</param>
+        /// <param name="templateID">The template ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of Document</returns>
         System.Threading.Tasks.Task<Document> GetDocumentsTemplatesIDAsync (string templateID, string zapTraceSpan = null);
@@ -310,30 +310,30 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="templateID">ID of template</param>
+        /// <param name="templateID">The template ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (Document)</returns>
         System.Threading.Tasks.Task<ApiResponse<Document>> GetDocumentsTemplatesIDAsyncWithHttpInfo (string templateID, string zapTraceSpan = null);
         /// <summary>
-        /// list all labels for a template
+        /// List all labels for a template
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="templateID">ID of template</param>
+        /// <param name="templateID">The template ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of LabelsResponse</returns>
         System.Threading.Tasks.Task<LabelsResponse> GetDocumentsTemplatesIDLabelsAsync (string templateID, string zapTraceSpan = null);
 
         /// <summary>
-        /// list all labels for a template
+        /// List all labels for a template
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="templateID">ID of template</param>
+        /// <param name="templateID">The template ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (LabelsResponse)</returns>
         System.Threading.Tasks.Task<ApiResponse<LabelsResponse>> GetDocumentsTemplatesIDLabelsAsyncWithHttpInfo (string templateID, string zapTraceSpan = null);
@@ -344,7 +344,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="documentCreate">template that will be created</param>
+        /// <param name="documentCreate">Template that will be created</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of Document</returns>
         System.Threading.Tasks.Task<Document> PostDocumentsTemplatesAsync (DocumentCreate documentCreate, string zapTraceSpan = null);
@@ -356,32 +356,32 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="documentCreate">template that will be created</param>
+        /// <param name="documentCreate">Template that will be created</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (Document)</returns>
         System.Threading.Tasks.Task<ApiResponse<Document>> PostDocumentsTemplatesAsyncWithHttpInfo (DocumentCreate documentCreate, string zapTraceSpan = null);
         /// <summary>
-        /// add a label to a template
+        /// Add a label to a template
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="templateID">ID of template</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="templateID">The template ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of LabelResponse</returns>
         System.Threading.Tasks.Task<LabelResponse> PostDocumentsTemplatesIDLabelsAsync (string templateID, LabelMapping labelMapping, string zapTraceSpan = null);
 
         /// <summary>
-        /// add a label to a template
+        /// Add a label to a template
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="templateID">ID of template</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="templateID">The template ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (LabelResponse)</returns>
         System.Threading.Tasks.Task<ApiResponse<LabelResponse>> PostDocumentsTemplatesIDLabelsAsyncWithHttpInfo (string templateID, LabelMapping labelMapping, string zapTraceSpan = null);
@@ -392,8 +392,8 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="templateID">ID of template</param>
-        /// <param name="documentUpdate">template that will be updated</param>
+        /// <param name="templateID">The template ID.</param>
+        /// <param name="documentUpdate">Template that will be updated</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of Document</returns>
         System.Threading.Tasks.Task<Document> PutDocumentsTemplatesIDAsync (string templateID, DocumentUpdate documentUpdate, string zapTraceSpan = null);
@@ -405,8 +405,8 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="templateID">ID of template</param>
-        /// <param name="documentUpdate">template that will be updated</param>
+        /// <param name="templateID">The template ID.</param>
+        /// <param name="documentUpdate">Template that will be updated</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (Document)</returns>
         System.Threading.Tasks.Task<ApiResponse<Document>> PutDocumentsTemplatesIDAsyncWithHttpInfo (string templateID, DocumentUpdate documentUpdate, string zapTraceSpan = null);
@@ -511,10 +511,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// delete a template document 
+        /// Delete a template 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="templateID">ID of template</param>
+        /// <param name="templateID">The template ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
         public void DeleteDocumentsTemplatesID (string templateID, string zapTraceSpan = null)
@@ -523,10 +523,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// delete a template document 
+        /// Delete a template 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="templateID">ID of template</param>
+        /// <param name="templateID">The template ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public ApiResponse<Object> DeleteDocumentsTemplatesIDWithHttpInfo (string templateID, string zapTraceSpan = null)
@@ -580,10 +580,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// delete a template document 
+        /// Delete a template 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="templateID">ID of template</param>
+        /// <param name="templateID">The template ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> DeleteDocumentsTemplatesIDWithIRestResponseAsync (string templateID, string zapTraceSpan = null)
@@ -635,10 +635,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// delete a template document 
+        /// Delete a template 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="templateID">ID of template</param>
+        /// <param name="templateID">The template ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public IRestResponse DeleteDocumentsTemplatesIDWithIRestResponse (string templateID, string zapTraceSpan = null)
@@ -690,10 +690,10 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// delete a template document 
+        /// Delete a template 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="templateID">ID of template</param>
+        /// <param name="templateID">The template ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public RestRequest DeleteDocumentsTemplatesIDWithRestRequest (string templateID, string zapTraceSpan = null)
@@ -734,10 +734,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// delete a template document 
+        /// Delete a template 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="templateID">ID of template</param>
+        /// <param name="templateID">The template ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
         public async System.Threading.Tasks.Task DeleteDocumentsTemplatesIDAsync (string templateID, string zapTraceSpan = null)
@@ -747,10 +747,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// delete a template document 
+        /// Delete a template 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="templateID">ID of template</param>
+        /// <param name="templateID">The template ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteDocumentsTemplatesIDAsyncWithHttpInfo (string templateID, string zapTraceSpan = null)
@@ -772,10 +772,10 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// delete a template document 
+        /// Delete a template 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="templateID">ID of template</param>
+        /// <param name="templateID">The template ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse</returns>
         public async System.Threading.Tasks.Task<IRestResponse> DeleteDocumentsTemplatesIDAsyncWithIRestResponse (string templateID, string zapTraceSpan = null)
@@ -825,11 +825,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// delete a label from a template 
+        /// Delete a label from a template 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="templateID">ID of template</param>
-        /// <param name="labelID">the label ID</param>
+        /// <param name="templateID">The template ID.</param>
+        /// <param name="labelID">The label ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
         public void DeleteDocumentsTemplatesIDLabelsID (string templateID, string labelID, string zapTraceSpan = null)
@@ -838,11 +838,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// delete a label from a template 
+        /// Delete a label from a template 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="templateID">ID of template</param>
-        /// <param name="labelID">the label ID</param>
+        /// <param name="templateID">The template ID.</param>
+        /// <param name="labelID">The label ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public ApiResponse<Object> DeleteDocumentsTemplatesIDLabelsIDWithHttpInfo (string templateID, string labelID, string zapTraceSpan = null)
@@ -900,11 +900,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// delete a label from a template 
+        /// Delete a label from a template 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="templateID">ID of template</param>
-        /// <param name="labelID">the label ID</param>
+        /// <param name="templateID">The template ID.</param>
+        /// <param name="labelID">The label ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> DeleteDocumentsTemplatesIDLabelsIDWithIRestResponseAsync (string templateID, string labelID, string zapTraceSpan = null)
@@ -960,11 +960,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// delete a label from a template 
+        /// Delete a label from a template 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="templateID">ID of template</param>
-        /// <param name="labelID">the label ID</param>
+        /// <param name="templateID">The template ID.</param>
+        /// <param name="labelID">The label ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public IRestResponse DeleteDocumentsTemplatesIDLabelsIDWithIRestResponse (string templateID, string labelID, string zapTraceSpan = null)
@@ -1020,11 +1020,11 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// delete a label from a template 
+        /// Delete a label from a template 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="templateID">ID of template</param>
-        /// <param name="labelID">the label ID</param>
+        /// <param name="templateID">The template ID.</param>
+        /// <param name="labelID">The label ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public RestRequest DeleteDocumentsTemplatesIDLabelsIDWithRestRequest (string templateID, string labelID, string zapTraceSpan = null)
@@ -1069,11 +1069,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// delete a label from a template 
+        /// Delete a label from a template 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="templateID">ID of template</param>
-        /// <param name="labelID">the label ID</param>
+        /// <param name="templateID">The template ID.</param>
+        /// <param name="labelID">The label ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
         public async System.Threading.Tasks.Task DeleteDocumentsTemplatesIDLabelsIDAsync (string templateID, string labelID, string zapTraceSpan = null)
@@ -1083,11 +1083,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// delete a label from a template 
+        /// Delete a label from a template 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="templateID">ID of template</param>
-        /// <param name="labelID">the label ID</param>
+        /// <param name="templateID">The template ID.</param>
+        /// <param name="labelID">The label ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteDocumentsTemplatesIDLabelsIDAsyncWithHttpInfo (string templateID, string labelID, string zapTraceSpan = null)
@@ -1109,11 +1109,11 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// delete a label from a template 
+        /// Delete a label from a template 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="templateID">ID of template</param>
-        /// <param name="labelID">the label ID</param>
+        /// <param name="templateID">The template ID.</param>
+        /// <param name="labelID">The label ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse</returns>
         public async System.Threading.Tasks.Task<IRestResponse> DeleteDocumentsTemplatesIDLabelsIDAsyncWithIRestResponse (string templateID, string labelID, string zapTraceSpan = null)
@@ -1171,8 +1171,8 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="org">specifies the name of the organization of the template (optional)</param>
-        /// <param name="orgID">specifies the organization id of the template (optional)</param>
+        /// <param name="org">Specifies the name of the organization of the template. (optional)</param>
+        /// <param name="orgID">Specifies the organization ID of the template. (optional)</param>
         /// <returns>Documents</returns>
         public Documents GetDocumentsTemplates (string zapTraceSpan = null, string org = null, string orgID = null)
         {
@@ -1185,8 +1185,8 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="org">specifies the name of the organization of the template (optional)</param>
-        /// <param name="orgID">specifies the organization id of the template (optional)</param>
+        /// <param name="org">Specifies the name of the organization of the template. (optional)</param>
+        /// <param name="orgID">Specifies the organization ID of the template. (optional)</param>
         /// <returns>ApiResponse of Documents</returns>
         public ApiResponse< Documents > GetDocumentsTemplatesWithHttpInfo (string zapTraceSpan = null, string org = null, string orgID = null)
         {
@@ -1241,8 +1241,8 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="org">specifies the name of the organization of the template (optional)</param>
-        /// <param name="orgID">specifies the organization id of the template (optional)</param>
+        /// <param name="org">Specifies the name of the organization of the template. (optional)</param>
+        /// <param name="orgID">Specifies the organization ID of the template. (optional)</param>
         /// <returns>ApiResponse of Documents</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetDocumentsTemplatesWithIRestResponseAsync (string zapTraceSpan = null, string org = null, string orgID = null)
         {
@@ -1295,8 +1295,8 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="org">specifies the name of the organization of the template (optional)</param>
-        /// <param name="orgID">specifies the organization id of the template (optional)</param>
+        /// <param name="org">Specifies the name of the organization of the template. (optional)</param>
+        /// <param name="orgID">Specifies the organization ID of the template. (optional)</param>
         /// <returns>ApiResponse of Documents</returns>
         public IRestResponse GetDocumentsTemplatesWithIRestResponse (string zapTraceSpan = null, string org = null, string orgID = null)
         {
@@ -1349,8 +1349,8 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="org">specifies the name of the organization of the template (optional)</param>
-        /// <param name="orgID">specifies the organization id of the template (optional)</param>
+        /// <param name="org">Specifies the name of the organization of the template. (optional)</param>
+        /// <param name="orgID">Specifies the organization ID of the template. (optional)</param>
         /// <returns>ApiResponse of Documents</returns>
         public RestRequest GetDocumentsTemplatesWithRestRequest (string zapTraceSpan = null, string org = null, string orgID = null)
         {
@@ -1392,8 +1392,8 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="org">specifies the name of the organization of the template (optional)</param>
-        /// <param name="orgID">specifies the organization id of the template (optional)</param>
+        /// <param name="org">Specifies the name of the organization of the template. (optional)</param>
+        /// <param name="orgID">Specifies the organization ID of the template. (optional)</param>
         /// <returns>Task of Documents</returns>
         public async System.Threading.Tasks.Task<Documents> GetDocumentsTemplatesAsync (string zapTraceSpan = null, string org = null, string orgID = null)
         {
@@ -1407,8 +1407,8 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="org">specifies the name of the organization of the template (optional)</param>
-        /// <param name="orgID">specifies the organization id of the template (optional)</param>
+        /// <param name="org">Specifies the name of the organization of the template. (optional)</param>
+        /// <param name="orgID">Specifies the organization ID of the template. (optional)</param>
         /// <returns>Task of ApiResponse (Documents)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Documents>> GetDocumentsTemplatesAsyncWithHttpInfo (string zapTraceSpan = null, string org = null, string orgID = null)
         {
@@ -1433,8 +1433,8 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="org">specifies the name of the organization of the template (optional)</param>
-        /// <param name="orgID">specifies the organization id of the template (optional)</param>
+        /// <param name="org">Specifies the name of the organization of the template. (optional)</param>
+        /// <param name="orgID">Specifies the organization ID of the template. (optional)</param>
         /// <returns>Task of IRestResponse (Documents)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetDocumentsTemplatesAsyncWithIRestResponse (string zapTraceSpan = null, string org = null, string orgID = null)
         {
@@ -1484,7 +1484,7 @@ namespace InfluxDB.Client.Api.Service
         ///  
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="templateID">ID of template</param>
+        /// <param name="templateID">The template ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Document</returns>
         public Document GetDocumentsTemplatesID (string templateID, string zapTraceSpan = null)
@@ -1497,7 +1497,7 @@ namespace InfluxDB.Client.Api.Service
         ///  
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="templateID">ID of template</param>
+        /// <param name="templateID">The template ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Document</returns>
         public ApiResponse< Document > GetDocumentsTemplatesIDWithHttpInfo (string templateID, string zapTraceSpan = null)
@@ -1554,7 +1554,7 @@ namespace InfluxDB.Client.Api.Service
         ///  
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="templateID">ID of template</param>
+        /// <param name="templateID">The template ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Document</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetDocumentsTemplatesIDWithIRestResponseAsync (string templateID, string zapTraceSpan = null)
@@ -1609,7 +1609,7 @@ namespace InfluxDB.Client.Api.Service
         ///  
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="templateID">ID of template</param>
+        /// <param name="templateID">The template ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Document</returns>
         public IRestResponse GetDocumentsTemplatesIDWithIRestResponse (string templateID, string zapTraceSpan = null)
@@ -1664,7 +1664,7 @@ namespace InfluxDB.Client.Api.Service
         ///  
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="templateID">ID of template</param>
+        /// <param name="templateID">The template ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Document</returns>
         public RestRequest GetDocumentsTemplatesIDWithRestRequest (string templateID, string zapTraceSpan = null)
@@ -1708,7 +1708,7 @@ namespace InfluxDB.Client.Api.Service
         ///  
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="templateID">ID of template</param>
+        /// <param name="templateID">The template ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of Document</returns>
         public async System.Threading.Tasks.Task<Document> GetDocumentsTemplatesIDAsync (string templateID, string zapTraceSpan = null)
@@ -1722,7 +1722,7 @@ namespace InfluxDB.Client.Api.Service
         ///  
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="templateID">ID of template</param>
+        /// <param name="templateID">The template ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (Document)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Document>> GetDocumentsTemplatesIDAsyncWithHttpInfo (string templateID, string zapTraceSpan = null)
@@ -1747,7 +1747,7 @@ namespace InfluxDB.Client.Api.Service
         ///  
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="templateID">ID of template</param>
+        /// <param name="templateID">The template ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (Document)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetDocumentsTemplatesIDAsyncWithIRestResponse (string templateID, string zapTraceSpan = null)
@@ -1797,10 +1797,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// list all labels for a template 
+        /// List all labels for a template 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="templateID">ID of template</param>
+        /// <param name="templateID">The template ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>LabelsResponse</returns>
         public LabelsResponse GetDocumentsTemplatesIDLabels (string templateID, string zapTraceSpan = null)
@@ -1810,10 +1810,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// list all labels for a template 
+        /// List all labels for a template 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="templateID">ID of template</param>
+        /// <param name="templateID">The template ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelsResponse</returns>
         public ApiResponse< LabelsResponse > GetDocumentsTemplatesIDLabelsWithHttpInfo (string templateID, string zapTraceSpan = null)
@@ -1867,10 +1867,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// list all labels for a template 
+        /// List all labels for a template 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="templateID">ID of template</param>
+        /// <param name="templateID">The template ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelsResponse</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetDocumentsTemplatesIDLabelsWithIRestResponseAsync (string templateID, string zapTraceSpan = null)
@@ -1922,10 +1922,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// list all labels for a template 
+        /// List all labels for a template 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="templateID">ID of template</param>
+        /// <param name="templateID">The template ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelsResponse</returns>
         public IRestResponse GetDocumentsTemplatesIDLabelsWithIRestResponse (string templateID, string zapTraceSpan = null)
@@ -1977,10 +1977,10 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// list all labels for a template 
+        /// List all labels for a template 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="templateID">ID of template</param>
+        /// <param name="templateID">The template ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelsResponse</returns>
         public RestRequest GetDocumentsTemplatesIDLabelsWithRestRequest (string templateID, string zapTraceSpan = null)
@@ -2021,10 +2021,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// list all labels for a template 
+        /// List all labels for a template 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="templateID">ID of template</param>
+        /// <param name="templateID">The template ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of LabelsResponse</returns>
         public async System.Threading.Tasks.Task<LabelsResponse> GetDocumentsTemplatesIDLabelsAsync (string templateID, string zapTraceSpan = null)
@@ -2035,10 +2035,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// list all labels for a template 
+        /// List all labels for a template 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="templateID">ID of template</param>
+        /// <param name="templateID">The template ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (LabelsResponse)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<LabelsResponse>> GetDocumentsTemplatesIDLabelsAsyncWithHttpInfo (string templateID, string zapTraceSpan = null)
@@ -2060,10 +2060,10 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// list all labels for a template 
+        /// List all labels for a template 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="templateID">ID of template</param>
+        /// <param name="templateID">The template ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (LabelsResponse)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetDocumentsTemplatesIDLabelsAsyncWithIRestResponse (string templateID, string zapTraceSpan = null)
@@ -2116,7 +2116,7 @@ namespace InfluxDB.Client.Api.Service
         /// Create a template 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="documentCreate">template that will be created</param>
+        /// <param name="documentCreate">Template that will be created</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Document</returns>
         public Document PostDocumentsTemplates (DocumentCreate documentCreate, string zapTraceSpan = null)
@@ -2129,7 +2129,7 @@ namespace InfluxDB.Client.Api.Service
         /// Create a template 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="documentCreate">template that will be created</param>
+        /// <param name="documentCreate">Template that will be created</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Document</returns>
         public ApiResponse< Document > PostDocumentsTemplatesWithHttpInfo (DocumentCreate documentCreate, string zapTraceSpan = null)
@@ -2194,7 +2194,7 @@ namespace InfluxDB.Client.Api.Service
         /// Create a template 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="documentCreate">template that will be created</param>
+        /// <param name="documentCreate">Template that will be created</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Document</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PostDocumentsTemplatesWithIRestResponseAsync (DocumentCreate documentCreate, string zapTraceSpan = null)
@@ -2257,7 +2257,7 @@ namespace InfluxDB.Client.Api.Service
         /// Create a template 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="documentCreate">template that will be created</param>
+        /// <param name="documentCreate">Template that will be created</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Document</returns>
         public IRestResponse PostDocumentsTemplatesWithIRestResponse (DocumentCreate documentCreate, string zapTraceSpan = null)
@@ -2320,7 +2320,7 @@ namespace InfluxDB.Client.Api.Service
         /// Create a template 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="documentCreate">template that will be created</param>
+        /// <param name="documentCreate">Template that will be created</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Document</returns>
         public RestRequest PostDocumentsTemplatesWithRestRequest (DocumentCreate documentCreate, string zapTraceSpan = null)
@@ -2372,7 +2372,7 @@ namespace InfluxDB.Client.Api.Service
         /// Create a template 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="documentCreate">template that will be created</param>
+        /// <param name="documentCreate">Template that will be created</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of Document</returns>
         public async System.Threading.Tasks.Task<Document> PostDocumentsTemplatesAsync (DocumentCreate documentCreate, string zapTraceSpan = null)
@@ -2386,7 +2386,7 @@ namespace InfluxDB.Client.Api.Service
         /// Create a template 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="documentCreate">template that will be created</param>
+        /// <param name="documentCreate">Template that will be created</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (Document)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Document>> PostDocumentsTemplatesAsyncWithHttpInfo (DocumentCreate documentCreate, string zapTraceSpan = null)
@@ -2411,7 +2411,7 @@ namespace InfluxDB.Client.Api.Service
         /// Create a template 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="documentCreate">template that will be created</param>
+        /// <param name="documentCreate">Template that will be created</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (Document)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PostDocumentsTemplatesAsyncWithIRestResponse (DocumentCreate documentCreate, string zapTraceSpan = null)
@@ -2469,11 +2469,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// add a label to a template 
+        /// Add a label to a template 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="templateID">ID of template</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="templateID">The template ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>LabelResponse</returns>
         public LabelResponse PostDocumentsTemplatesIDLabels (string templateID, LabelMapping labelMapping, string zapTraceSpan = null)
@@ -2483,11 +2483,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// add a label to a template 
+        /// Add a label to a template 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="templateID">ID of template</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="templateID">The template ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelResponse</returns>
         public ApiResponse< LabelResponse > PostDocumentsTemplatesIDLabelsWithHttpInfo (string templateID, LabelMapping labelMapping, string zapTraceSpan = null)
@@ -2553,11 +2553,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// add a label to a template 
+        /// Add a label to a template 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="templateID">ID of template</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="templateID">The template ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelResponse</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PostDocumentsTemplatesIDLabelsWithIRestResponseAsync (string templateID, LabelMapping labelMapping, string zapTraceSpan = null)
@@ -2621,11 +2621,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// add a label to a template 
+        /// Add a label to a template 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="templateID">ID of template</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="templateID">The template ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelResponse</returns>
         public IRestResponse PostDocumentsTemplatesIDLabelsWithIRestResponse (string templateID, LabelMapping labelMapping, string zapTraceSpan = null)
@@ -2689,11 +2689,11 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// add a label to a template 
+        /// Add a label to a template 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="templateID">ID of template</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="templateID">The template ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelResponse</returns>
         public RestRequest PostDocumentsTemplatesIDLabelsWithRestRequest (string templateID, LabelMapping labelMapping, string zapTraceSpan = null)
@@ -2746,11 +2746,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// add a label to a template 
+        /// Add a label to a template 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="templateID">ID of template</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="templateID">The template ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of LabelResponse</returns>
         public async System.Threading.Tasks.Task<LabelResponse> PostDocumentsTemplatesIDLabelsAsync (string templateID, LabelMapping labelMapping, string zapTraceSpan = null)
@@ -2761,11 +2761,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// add a label to a template 
+        /// Add a label to a template 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="templateID">ID of template</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="templateID">The template ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (LabelResponse)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<LabelResponse>> PostDocumentsTemplatesIDLabelsAsyncWithHttpInfo (string templateID, LabelMapping labelMapping, string zapTraceSpan = null)
@@ -2787,11 +2787,11 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// add a label to a template 
+        /// Add a label to a template 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="templateID">ID of template</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="templateID">The template ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (LabelResponse)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PostDocumentsTemplatesIDLabelsAsyncWithIRestResponse (string templateID, LabelMapping labelMapping, string zapTraceSpan = null)
@@ -2856,8 +2856,8 @@ namespace InfluxDB.Client.Api.Service
         ///  
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="templateID">ID of template</param>
-        /// <param name="documentUpdate">template that will be updated</param>
+        /// <param name="templateID">The template ID.</param>
+        /// <param name="documentUpdate">Template that will be updated</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Document</returns>
         public Document PutDocumentsTemplatesID (string templateID, DocumentUpdate documentUpdate, string zapTraceSpan = null)
@@ -2870,8 +2870,8 @@ namespace InfluxDB.Client.Api.Service
         ///  
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="templateID">ID of template</param>
-        /// <param name="documentUpdate">template that will be updated</param>
+        /// <param name="templateID">The template ID.</param>
+        /// <param name="documentUpdate">Template that will be updated</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Document</returns>
         public ApiResponse< Document > PutDocumentsTemplatesIDWithHttpInfo (string templateID, DocumentUpdate documentUpdate, string zapTraceSpan = null)
@@ -2940,8 +2940,8 @@ namespace InfluxDB.Client.Api.Service
         ///  
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="templateID">ID of template</param>
-        /// <param name="documentUpdate">template that will be updated</param>
+        /// <param name="templateID">The template ID.</param>
+        /// <param name="documentUpdate">Template that will be updated</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Document</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PutDocumentsTemplatesIDWithIRestResponseAsync (string templateID, DocumentUpdate documentUpdate, string zapTraceSpan = null)
@@ -3008,8 +3008,8 @@ namespace InfluxDB.Client.Api.Service
         ///  
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="templateID">ID of template</param>
-        /// <param name="documentUpdate">template that will be updated</param>
+        /// <param name="templateID">The template ID.</param>
+        /// <param name="documentUpdate">Template that will be updated</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Document</returns>
         public IRestResponse PutDocumentsTemplatesIDWithIRestResponse (string templateID, DocumentUpdate documentUpdate, string zapTraceSpan = null)
@@ -3076,8 +3076,8 @@ namespace InfluxDB.Client.Api.Service
         ///  
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="templateID">ID of template</param>
-        /// <param name="documentUpdate">template that will be updated</param>
+        /// <param name="templateID">The template ID.</param>
+        /// <param name="documentUpdate">Template that will be updated</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Document</returns>
         public RestRequest PutDocumentsTemplatesIDWithRestRequest (string templateID, DocumentUpdate documentUpdate, string zapTraceSpan = null)
@@ -3133,8 +3133,8 @@ namespace InfluxDB.Client.Api.Service
         ///  
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="templateID">ID of template</param>
-        /// <param name="documentUpdate">template that will be updated</param>
+        /// <param name="templateID">The template ID.</param>
+        /// <param name="documentUpdate">Template that will be updated</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of Document</returns>
         public async System.Threading.Tasks.Task<Document> PutDocumentsTemplatesIDAsync (string templateID, DocumentUpdate documentUpdate, string zapTraceSpan = null)
@@ -3148,8 +3148,8 @@ namespace InfluxDB.Client.Api.Service
         ///  
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="templateID">ID of template</param>
-        /// <param name="documentUpdate">template that will be updated</param>
+        /// <param name="templateID">The template ID.</param>
+        /// <param name="documentUpdate">Template that will be updated</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (Document)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Document>> PutDocumentsTemplatesIDAsyncWithHttpInfo (string templateID, DocumentUpdate documentUpdate, string zapTraceSpan = null)
@@ -3174,8 +3174,8 @@ namespace InfluxDB.Client.Api.Service
         ///  
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="templateID">ID of template</param>
-        /// <param name="documentUpdate">template that will be updated</param>
+        /// <param name="templateID">The template ID.</param>
+        /// <param name="documentUpdate">Template that will be updated</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (Document)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PutDocumentsTemplatesIDAsyncWithIRestResponse (string templateID, DocumentUpdate documentUpdate, string zapTraceSpan = null)

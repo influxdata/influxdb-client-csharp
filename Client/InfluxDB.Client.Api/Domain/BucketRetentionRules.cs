@@ -57,7 +57,7 @@ namespace InfluxDB.Client.Api.Domain
         /// Initializes a new instance of the <see cref="BucketRetentionRules" /> class.
         /// </summary>
         /// <param name="type">type (required) (default to TypeEnum.Expire).</param>
-        /// <param name="everySeconds">duration in seconds for how long data will be kept in the database. (required).</param>
+        /// <param name="everySeconds">Duration in seconds for how long data will be kept in the database. (required).</param>
         public BucketRetentionRules(TypeEnum type = TypeEnum.Expire, int? everySeconds = default(int?))
         {
             // to ensure "type" is required (not null)
@@ -82,9 +82,9 @@ namespace InfluxDB.Client.Api.Domain
 
 
         /// <summary>
-        /// duration in seconds for how long data will be kept in the database.
+        /// Duration in seconds for how long data will be kept in the database.
         /// </summary>
-        /// <value>duration in seconds for how long data will be kept in the database.</value>
+        /// <value>Duration in seconds for how long data will be kept in the database.</value>
         [DataMember(Name="everySeconds", EmitDefaultValue=false)]
         public int? EverySeconds { get; set; }
 

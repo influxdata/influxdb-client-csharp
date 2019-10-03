@@ -32,8 +32,8 @@ namespace InfluxDB.Client.Api.Domain
         /// <summary>
         /// Initializes a new instance of the <see cref="ScraperTargetResponse" /> class.
         /// </summary>
-        /// <param name="org">name of the organization.</param>
-        /// <param name="bucket">name of the bucket.</param>
+        /// <param name="org">The organization name..</param>
+        /// <param name="bucket">The bucket name..</param>
         /// <param name="links">links.</param>
         public ScraperTargetResponse(string org = default(string), string bucket = default(string), ScraperTargetResponseLinks links = default(ScraperTargetResponseLinks), string name = default(string), TypeEnum? type = default(TypeEnum?), string url = default(string), string orgID = default(string), string bucketID = default(string)) : base(name, type, url, orgID, bucketID)
         {
@@ -49,16 +49,16 @@ namespace InfluxDB.Client.Api.Domain
         public string Id { get; private set; }
 
         /// <summary>
-        /// name of the organization
+        /// The organization name.
         /// </summary>
-        /// <value>name of the organization</value>
+        /// <value>The organization name.</value>
         [DataMember(Name="org", EmitDefaultValue=false)]
         public string Org { get; set; }
 
         /// <summary>
-        /// name of the bucket
+        /// The bucket name.
         /// </summary>
-        /// <value>name of the bucket</value>
+        /// <value>The bucket name.</value>
         [DataMember(Name="bucket", EmitDefaultValue=false)]
         public string Bucket { get; set; }
 

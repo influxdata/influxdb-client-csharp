@@ -24,7 +24,7 @@ using OpenAPIDateConverter = InfluxDB.Client.Api.Client.OpenAPIDateConverter;
 namespace InfluxDB.Client.Api.Domain
 {
     /// <summary>
-    /// indicates whether decimal places should be enforced, and how many digits it should show.
+    /// Indicates whether decimal places should be enforced, and how many digits it should show.
     /// </summary>
     [DataContract]
     public partial class DecimalPlaces :  IEquatable<DecimalPlaces>

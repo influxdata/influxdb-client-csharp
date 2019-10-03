@@ -57,11 +57,11 @@ namespace InfluxDB.Client.Api.Domain
         /// Initializes a new instance of the <see cref="DeadmanCheck" /> class.
         /// </summary>
         /// <param name="type">type.</param>
-        /// <param name="timeSince">string duration before deadman triggers.</param>
-        /// <param name="staleTime">string duration for time that a series is considered stale and should not trigger deadman.</param>
-        /// <param name="reportZero">if only zero values reported since time, trigger alert.</param>
+        /// <param name="timeSince">String duration before deadman triggers..</param>
+        /// <param name="staleTime">String duration for time that a series is considered stale and should not trigger deadman..</param>
+        /// <param name="reportZero">If only zero values reported since time, trigger an alert.</param>
         /// <param name="level">level.</param>
-        public DeadmanCheck(TypeEnum? type = default(TypeEnum?), string timeSince = default(string), string staleTime = default(string), bool? reportZero = default(bool?), CheckStatusLevel level = default(CheckStatusLevel), string name = default(string), string orgID = default(string), DashboardQuery query = default(DashboardQuery), TaskStatusType? status = default(TaskStatusType?), string every = default(string), string offset = default(string), string cron = default(string), List<CheckBaseTags> tags = default(List<CheckBaseTags>), string description = default(string), string statusMessageTemplate = default(string), List<Label> labels = default(List<Label>)) : base(name, orgID, query, status, every, offset, cron, tags, description, statusMessageTemplate, labels)
+        public DeadmanCheck(TypeEnum? type = default(TypeEnum?), string timeSince = default(string), string staleTime = default(string), bool? reportZero = default(bool?), CheckStatusLevel level = default(CheckStatusLevel), string name = default(string), string orgID = default(string), DashboardQuery query = default(DashboardQuery), TaskStatusType? status = default(TaskStatusType?), string every = default(string), string offset = default(string), List<CheckBaseTags> tags = default(List<CheckBaseTags>), string description = default(string), string statusMessageTemplate = default(string), List<Label> labels = default(List<Label>), CheckBaseLinks links = default(CheckBaseLinks)) : base(name, orgID, query, status, every, offset, tags, description, statusMessageTemplate, labels, links)
         {
             this.Type = type;
             this.TimeSince = timeSince;
@@ -72,23 +72,23 @@ namespace InfluxDB.Client.Api.Domain
 
 
         /// <summary>
-        /// string duration before deadman triggers
+        /// String duration before deadman triggers.
         /// </summary>
-        /// <value>string duration before deadman triggers</value>
+        /// <value>String duration before deadman triggers.</value>
         [DataMember(Name="timeSince", EmitDefaultValue=false)]
         public string TimeSince { get; set; }
 
         /// <summary>
-        /// string duration for time that a series is considered stale and should not trigger deadman
+        /// String duration for time that a series is considered stale and should not trigger deadman.
         /// </summary>
-        /// <value>string duration for time that a series is considered stale and should not trigger deadman</value>
+        /// <value>String duration for time that a series is considered stale and should not trigger deadman.</value>
         [DataMember(Name="staleTime", EmitDefaultValue=false)]
         public string StaleTime { get; set; }
 
         /// <summary>
-        /// if only zero values reported since time, trigger alert
+        /// If only zero values reported since time, trigger an alert
         /// </summary>
-        /// <value>if only zero values reported since time, trigger alert</value>
+        /// <value>If only zero values reported since time, trigger an alert</value>
         [DataMember(Name="reportZero", EmitDefaultValue=false)]
         public bool? ReportZero { get; set; }
 

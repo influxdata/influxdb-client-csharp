@@ -31,7 +31,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
@@ -45,7 +45,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
@@ -58,7 +58,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="dashboardID">The dashboard ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
@@ -72,7 +72,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="dashboardID">The dashboard ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
@@ -85,7 +85,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
@@ -99,7 +99,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
@@ -112,7 +112,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of the user</param>
+        /// <param name="userID">The user ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
@@ -126,7 +126,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of the user</param>
+        /// <param name="userID">The user ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
@@ -141,7 +141,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
@@ -155,7 +155,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
@@ -168,7 +168,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="dashboardID">The dashboard ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
@@ -182,7 +182,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="dashboardID">The dashboard ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
@@ -195,7 +195,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
@@ -209,7 +209,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
@@ -222,7 +222,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of the user</param>
+        /// <param name="userID">The user ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
@@ -236,7 +236,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of the user</param>
+        /// <param name="userID">The user ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
@@ -346,7 +346,7 @@ namespace InfluxDB.Client.Api.Service
         /// Retrieve operation logs for a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
@@ -361,7 +361,7 @@ namespace InfluxDB.Client.Api.Service
         /// Retrieve operation logs for a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
@@ -422,7 +422,7 @@ namespace InfluxDB.Client.Api.Service
         /// Retrieve operation logs for a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
@@ -481,7 +481,7 @@ namespace InfluxDB.Client.Api.Service
         /// Retrieve operation logs for a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
@@ -540,7 +540,7 @@ namespace InfluxDB.Client.Api.Service
         /// Retrieve operation logs for a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
@@ -588,7 +588,7 @@ namespace InfluxDB.Client.Api.Service
         /// Retrieve operation logs for a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
@@ -604,7 +604,7 @@ namespace InfluxDB.Client.Api.Service
         /// Retrieve operation logs for a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
@@ -631,7 +631,7 @@ namespace InfluxDB.Client.Api.Service
         /// Retrieve operation logs for a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
@@ -688,7 +688,7 @@ namespace InfluxDB.Client.Api.Service
         /// Retrieve operation logs for a dashboard 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="dashboardID">The dashboard ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
@@ -703,7 +703,7 @@ namespace InfluxDB.Client.Api.Service
         /// Retrieve operation logs for a dashboard 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="dashboardID">The dashboard ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
@@ -764,7 +764,7 @@ namespace InfluxDB.Client.Api.Service
         /// Retrieve operation logs for a dashboard 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="dashboardID">The dashboard ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
@@ -823,7 +823,7 @@ namespace InfluxDB.Client.Api.Service
         /// Retrieve operation logs for a dashboard 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="dashboardID">The dashboard ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
@@ -882,7 +882,7 @@ namespace InfluxDB.Client.Api.Service
         /// Retrieve operation logs for a dashboard 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="dashboardID">The dashboard ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
@@ -930,7 +930,7 @@ namespace InfluxDB.Client.Api.Service
         /// Retrieve operation logs for a dashboard 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="dashboardID">The dashboard ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
@@ -946,7 +946,7 @@ namespace InfluxDB.Client.Api.Service
         /// Retrieve operation logs for a dashboard 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="dashboardID">The dashboard ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
@@ -973,7 +973,7 @@ namespace InfluxDB.Client.Api.Service
         /// Retrieve operation logs for a dashboard 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="dashboardID">The dashboard ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
@@ -1030,7 +1030,7 @@ namespace InfluxDB.Client.Api.Service
         /// Retrieve operation logs for an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
@@ -1045,7 +1045,7 @@ namespace InfluxDB.Client.Api.Service
         /// Retrieve operation logs for an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
@@ -1106,7 +1106,7 @@ namespace InfluxDB.Client.Api.Service
         /// Retrieve operation logs for an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
@@ -1165,7 +1165,7 @@ namespace InfluxDB.Client.Api.Service
         /// Retrieve operation logs for an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
@@ -1224,7 +1224,7 @@ namespace InfluxDB.Client.Api.Service
         /// Retrieve operation logs for an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
@@ -1272,7 +1272,7 @@ namespace InfluxDB.Client.Api.Service
         /// Retrieve operation logs for an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
@@ -1288,7 +1288,7 @@ namespace InfluxDB.Client.Api.Service
         /// Retrieve operation logs for an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
@@ -1315,7 +1315,7 @@ namespace InfluxDB.Client.Api.Service
         /// Retrieve operation logs for an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
@@ -1372,7 +1372,7 @@ namespace InfluxDB.Client.Api.Service
         /// Retrieve operation logs for a user 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of the user</param>
+        /// <param name="userID">The user ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
@@ -1387,7 +1387,7 @@ namespace InfluxDB.Client.Api.Service
         /// Retrieve operation logs for a user 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of the user</param>
+        /// <param name="userID">The user ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
@@ -1448,7 +1448,7 @@ namespace InfluxDB.Client.Api.Service
         /// Retrieve operation logs for a user 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of the user</param>
+        /// <param name="userID">The user ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
@@ -1507,7 +1507,7 @@ namespace InfluxDB.Client.Api.Service
         /// Retrieve operation logs for a user 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of the user</param>
+        /// <param name="userID">The user ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
@@ -1566,7 +1566,7 @@ namespace InfluxDB.Client.Api.Service
         /// Retrieve operation logs for a user 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of the user</param>
+        /// <param name="userID">The user ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
@@ -1614,7 +1614,7 @@ namespace InfluxDB.Client.Api.Service
         /// Retrieve operation logs for a user 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of the user</param>
+        /// <param name="userID">The user ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
@@ -1630,7 +1630,7 @@ namespace InfluxDB.Client.Api.Service
         /// Retrieve operation logs for a user 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of the user</param>
+        /// <param name="userID">The user ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
@@ -1657,7 +1657,7 @@ namespace InfluxDB.Client.Api.Service
         /// Retrieve operation logs for a user 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of the user</param>
+        /// <param name="userID">The user ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>

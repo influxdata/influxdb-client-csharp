@@ -25,325 +25,325 @@ namespace InfluxDB.Client.Api.Service
     {
         #region Synchronous Operations
         /// <summary>
-        /// removes a member from an bucket
+        /// Remove a member from a bucket
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
         void DeleteBucketsIDMembersID (string userID, string bucketID, string zapTraceSpan = null);
 
         /// <summary>
-        /// removes a member from an bucket
+        /// Remove a member from a bucket
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> DeleteBucketsIDMembersIDWithHttpInfo (string userID, string bucketID, string zapTraceSpan = null);
         /// <summary>
-        /// removes an owner from a bucket
+        /// Remove an owner from a bucket
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
         void DeleteBucketsIDOwnersID (string userID, string bucketID, string zapTraceSpan = null);
 
         /// <summary>
-        /// removes an owner from a bucket
+        /// Remove an owner from a bucket
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> DeleteBucketsIDOwnersIDWithHttpInfo (string userID, string bucketID, string zapTraceSpan = null);
         /// <summary>
-        /// removes a member from an dashboard
+        /// Remove a member from a dashboard
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="dashboardID">The dashboard ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
         void DeleteDashboardsIDMembersID (string userID, string dashboardID, string zapTraceSpan = null);
 
         /// <summary>
-        /// removes a member from an dashboard
+        /// Remove a member from a dashboard
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="dashboardID">The dashboard ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> DeleteDashboardsIDMembersIDWithHttpInfo (string userID, string dashboardID, string zapTraceSpan = null);
         /// <summary>
-        /// removes an owner from a dashboard
+        /// Remove an owner from a dashboard
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="dashboardID">The dashboard ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
         void DeleteDashboardsIDOwnersID (string userID, string dashboardID, string zapTraceSpan = null);
 
         /// <summary>
-        /// removes an owner from a dashboard
+        /// Remove an owner from a dashboard
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="dashboardID">The dashboard ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> DeleteDashboardsIDOwnersIDWithHttpInfo (string userID, string dashboardID, string zapTraceSpan = null);
         /// <summary>
-        /// removes a member from an organization
+        /// Remove a member from an organization
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
         void DeleteOrgsIDMembersID (string userID, string orgID, string zapTraceSpan = null);
 
         /// <summary>
-        /// removes a member from an organization
+        /// Remove a member from an organization
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> DeleteOrgsIDMembersIDWithHttpInfo (string userID, string orgID, string zapTraceSpan = null);
         /// <summary>
-        /// removes an owner from an organization
+        /// Remove an owner from an organization
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
         void DeleteOrgsIDOwnersID (string userID, string orgID, string zapTraceSpan = null);
 
         /// <summary>
-        /// removes an owner from an organization
+        /// Remove an owner from an organization
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> DeleteOrgsIDOwnersIDWithHttpInfo (string userID, string orgID, string zapTraceSpan = null);
         /// <summary>
-        /// removes a member from a scraper target
+        /// Remove a member from a scraper target
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="userID">The ID of member to remove.</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
         void DeleteScrapersIDMembersID (string userID, string scraperTargetID, string zapTraceSpan = null);
 
         /// <summary>
-        /// removes a member from a scraper target
+        /// Remove a member from a scraper target
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="userID">The ID of member to remove.</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> DeleteScrapersIDMembersIDWithHttpInfo (string userID, string scraperTargetID, string zapTraceSpan = null);
         /// <summary>
-        /// removes an owner from a scraper target
+        /// Remove an owner from a scraper target
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="userID">The ID of owner to remove.</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
         void DeleteScrapersIDOwnersID (string userID, string scraperTargetID, string zapTraceSpan = null);
 
         /// <summary>
-        /// removes an owner from a scraper target
+        /// Remove an owner from a scraper target
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="userID">The ID of owner to remove.</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> DeleteScrapersIDOwnersIDWithHttpInfo (string userID, string scraperTargetID, string zapTraceSpan = null);
         /// <summary>
-        /// removes a member from an task
+        /// Remove a member from a task
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
         void DeleteTasksIDMembersID (string userID, string taskID, string zapTraceSpan = null);
 
         /// <summary>
-        /// removes a member from an task
+        /// Remove a member from a task
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> DeleteTasksIDMembersIDWithHttpInfo (string userID, string taskID, string zapTraceSpan = null);
         /// <summary>
-        /// removes an owner from an task
+        /// Remove an owner from a task
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
         void DeleteTasksIDOwnersID (string userID, string taskID, string zapTraceSpan = null);
 
         /// <summary>
-        /// removes an owner from an task
+        /// Remove an owner from a task
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> DeleteTasksIDOwnersIDWithHttpInfo (string userID, string taskID, string zapTraceSpan = null);
         /// <summary>
-        /// removes a member from a telegraf config
+        /// Remove a member from a Telegraf config
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="telegrafID">ID of the telegraf</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
         void DeleteTelegrafsIDMembersID (string userID, string telegrafID, string zapTraceSpan = null);
 
         /// <summary>
-        /// removes a member from a telegraf config
+        /// Remove a member from a Telegraf config
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="telegrafID">ID of the telegraf</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> DeleteTelegrafsIDMembersIDWithHttpInfo (string userID, string telegrafID, string zapTraceSpan = null);
         /// <summary>
-        /// removes an owner from a telegraf config
+        /// Remove an owner from a Telegraf config
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="telegrafID">ID of the telegraf config</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
         void DeleteTelegrafsIDOwnersID (string userID, string telegrafID, string zapTraceSpan = null);
 
         /// <summary>
-        /// removes an owner from a telegraf config
+        /// Remove an owner from a Telegraf config
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="telegrafID">ID of the telegraf config</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> DeleteTelegrafsIDOwnersIDWithHttpInfo (string userID, string telegrafID, string zapTraceSpan = null);
         /// <summary>
-        /// deletes a user
+        /// Delete a user
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of user to delete</param>
+        /// <param name="userID">The ID of the user to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
         void DeleteUsersID (string userID, string zapTraceSpan = null);
 
         /// <summary>
-        /// deletes a user
+        /// Delete a user
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of user to delete</param>
+        /// <param name="userID">The ID of the user to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> DeleteUsersIDWithHttpInfo (string userID, string zapTraceSpan = null);
@@ -354,7 +354,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ResourceMembers</returns>
         ResourceMembers GetBucketsIDMembers (string bucketID, string zapTraceSpan = null);
@@ -366,7 +366,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMembers</returns>
         ApiResponse<ResourceMembers> GetBucketsIDMembersWithHttpInfo (string bucketID, string zapTraceSpan = null);
@@ -377,7 +377,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ResourceOwners</returns>
         ResourceOwners GetBucketsIDOwners (string bucketID, string zapTraceSpan = null);
@@ -389,7 +389,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwners</returns>
         ApiResponse<ResourceOwners> GetBucketsIDOwnersWithHttpInfo (string bucketID, string zapTraceSpan = null);
@@ -400,7 +400,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="dashboardID">The dashboard ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ResourceMembers</returns>
         ResourceMembers GetDashboardsIDMembers (string dashboardID, string zapTraceSpan = null);
@@ -412,7 +412,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="dashboardID">The dashboard ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMembers</returns>
         ApiResponse<ResourceMembers> GetDashboardsIDMembersWithHttpInfo (string dashboardID, string zapTraceSpan = null);
@@ -423,7 +423,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="dashboardID">The dashboard ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ResourceOwners</returns>
         ResourceOwners GetDashboardsIDOwners (string dashboardID, string zapTraceSpan = null);
@@ -435,12 +435,12 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="dashboardID">The dashboard ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwners</returns>
         ApiResponse<ResourceOwners> GetDashboardsIDOwnersWithHttpInfo (string dashboardID, string zapTraceSpan = null);
         /// <summary>
-        /// Returns currently authenticated user
+        /// Return the current authenticated user
         /// </summary>
         /// <remarks>
         /// 
@@ -451,7 +451,7 @@ namespace InfluxDB.Client.Api.Service
         User GetMe (string zapTraceSpan = null);
 
         /// <summary>
-        /// Returns currently authenticated user
+        /// Return the current authenticated user
         /// </summary>
         /// <remarks>
         /// 
@@ -467,7 +467,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ResourceMembers</returns>
         ResourceMembers GetOrgsIDMembers (string orgID, string zapTraceSpan = null);
@@ -479,7 +479,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMembers</returns>
         ApiResponse<ResourceMembers> GetOrgsIDMembersWithHttpInfo (string orgID, string zapTraceSpan = null);
@@ -490,7 +490,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ResourceOwners</returns>
         ResourceOwners GetOrgsIDOwners (string orgID, string zapTraceSpan = null);
@@ -502,7 +502,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwners</returns>
         ApiResponse<ResourceOwners> GetOrgsIDOwnersWithHttpInfo (string orgID, string zapTraceSpan = null);
@@ -513,7 +513,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ResourceMembers</returns>
         ResourceMembers GetScrapersIDMembers (string scraperTargetID, string zapTraceSpan = null);
@@ -525,7 +525,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMembers</returns>
         ApiResponse<ResourceMembers> GetScrapersIDMembersWithHttpInfo (string scraperTargetID, string zapTraceSpan = null);
@@ -536,7 +536,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ResourceOwners</returns>
         ResourceOwners GetScrapersIDOwners (string scraperTargetID, string zapTraceSpan = null);
@@ -548,7 +548,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwners</returns>
         ApiResponse<ResourceOwners> GetScrapersIDOwnersWithHttpInfo (string scraperTargetID, string zapTraceSpan = null);
@@ -559,7 +559,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ResourceMembers</returns>
         ResourceMembers GetTasksIDMembers (string taskID, string zapTraceSpan = null);
@@ -571,76 +571,76 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMembers</returns>
         ApiResponse<ResourceMembers> GetTasksIDMembersWithHttpInfo (string taskID, string zapTraceSpan = null);
         /// <summary>
-        /// List all task owners
+        /// List all owners of a task
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ResourceOwners</returns>
         ResourceOwners GetTasksIDOwners (string taskID, string zapTraceSpan = null);
 
         /// <summary>
-        /// List all task owners
+        /// List all owners of a task
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwners</returns>
         ApiResponse<ResourceOwners> GetTasksIDOwnersWithHttpInfo (string taskID, string zapTraceSpan = null);
         /// <summary>
-        /// List all users with member privileges for a telegraf config
+        /// List all users with member privileges for a Telegraf config
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ResourceMembers</returns>
         ResourceMembers GetTelegrafsIDMembers (string telegrafID, string zapTraceSpan = null);
 
         /// <summary>
-        /// List all users with member privileges for a telegraf config
+        /// List all users with member privileges for a Telegraf config
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMembers</returns>
         ApiResponse<ResourceMembers> GetTelegrafsIDMembersWithHttpInfo (string telegrafID, string zapTraceSpan = null);
         /// <summary>
-        /// List all owners of a telegraf config
+        /// List all owners of a Telegraf config
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ResourceOwners</returns>
         ResourceOwners GetTelegrafsIDOwners (string telegrafID, string zapTraceSpan = null);
 
         /// <summary>
-        /// List all owners of a telegraf config
+        /// List all owners of a Telegraf config
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwners</returns>
         ApiResponse<ResourceOwners> GetTelegrafsIDOwnersWithHttpInfo (string telegrafID, string zapTraceSpan = null);
@@ -672,7 +672,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of user to get</param>
+        /// <param name="userID">The user ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>User</returns>
         User GetUsersID (string userID, string zapTraceSpan = null);
@@ -684,7 +684,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of user to get</param>
+        /// <param name="userID">The user ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of User</returns>
         ApiResponse<User> GetUsersIDWithHttpInfo (string userID, string zapTraceSpan = null);
@@ -695,7 +695,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of the user</param>
+        /// <param name="userID">The user ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
@@ -709,7 +709,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of the user</param>
+        /// <param name="userID">The user ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
@@ -722,8 +722,8 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of user to update</param>
-        /// <param name="user">user update to apply</param>
+        /// <param name="userID">The ID of the user to update.</param>
+        /// <param name="user">User update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>User</returns>
         User PatchUsersID (string userID, User user, string zapTraceSpan = null);
@@ -735,308 +735,308 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of user to update</param>
-        /// <param name="user">user update to apply</param>
+        /// <param name="userID">The ID of the user to update.</param>
+        /// <param name="user">User update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of User</returns>
         ApiResponse<User> PatchUsersIDWithHttpInfo (string userID, User user, string zapTraceSpan = null);
         /// <summary>
-        /// Add bucket member
+        /// Add a member to a bucket
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="bucketID">The bucket ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ResourceMember</returns>
         ResourceMember PostBucketsIDMembers (string bucketID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
 
         /// <summary>
-        /// Add bucket member
+        /// Add a member to a bucket
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="bucketID">The bucket ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMember</returns>
         ApiResponse<ResourceMember> PostBucketsIDMembersWithHttpInfo (string bucketID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
         /// <summary>
-        /// Add bucket owner
+        /// Add an owner to a bucket
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="bucketID">The bucket ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ResourceOwner</returns>
         ResourceOwner PostBucketsIDOwners (string bucketID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
 
         /// <summary>
-        /// Add bucket owner
+        /// Add an owner to a bucket
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="bucketID">The bucket ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwner</returns>
         ApiResponse<ResourceOwner> PostBucketsIDOwnersWithHttpInfo (string bucketID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
         /// <summary>
-        /// Add dashboard member
+        /// Add a member to a dashboard
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of the dashboard</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="dashboardID">The dashboard ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ResourceMember</returns>
         ResourceMember PostDashboardsIDMembers (string dashboardID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
 
         /// <summary>
-        /// Add dashboard member
+        /// Add a member to a dashboard
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of the dashboard</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="dashboardID">The dashboard ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMember</returns>
         ApiResponse<ResourceMember> PostDashboardsIDMembersWithHttpInfo (string dashboardID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
         /// <summary>
-        /// Add dashboard owner
+        /// Add an owner to a dashboard
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of the dashboard</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="dashboardID">The dashboard ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ResourceOwner</returns>
         ResourceOwner PostDashboardsIDOwners (string dashboardID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
 
         /// <summary>
-        /// Add dashboard owner
+        /// Add an owner to a dashboard
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of the dashboard</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="dashboardID">The dashboard ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwner</returns>
         ApiResponse<ResourceOwner> PostDashboardsIDOwnersWithHttpInfo (string dashboardID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
         /// <summary>
-        /// Add organization member
+        /// Add a member to an organization
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ResourceMember</returns>
         ResourceMember PostOrgsIDMembers (string orgID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
 
         /// <summary>
-        /// Add organization member
+        /// Add a member to an organization
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMember</returns>
         ApiResponse<ResourceMember> PostOrgsIDMembersWithHttpInfo (string orgID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
         /// <summary>
-        /// Add organization owner
+        /// Add an owner to an organization
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ResourceOwner</returns>
         ResourceOwner PostOrgsIDOwners (string orgID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
 
         /// <summary>
-        /// Add organization owner
+        /// Add an owner to an organization
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwner</returns>
         ApiResponse<ResourceOwner> PostOrgsIDOwnersWithHttpInfo (string orgID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
         /// <summary>
-        /// Add scraper target member
+        /// Add a member to a scraper target
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ResourceMember</returns>
         ResourceMember PostScrapersIDMembers (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
 
         /// <summary>
-        /// Add scraper target member
+        /// Add a member to a scraper target
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMember</returns>
         ApiResponse<ResourceMember> PostScrapersIDMembersWithHttpInfo (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
         /// <summary>
-        /// Add scraper target owner
+        /// Add an owner to a scraper target
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ResourceOwner</returns>
         ResourceOwner PostScrapersIDOwners (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
 
         /// <summary>
-        /// Add scraper target owner
+        /// Add an owner to a scraper target
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwner</returns>
         ApiResponse<ResourceOwner> PostScrapersIDOwnersWithHttpInfo (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
         /// <summary>
-        /// Add task member
+        /// Add a member to a task
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ResourceMember</returns>
         ResourceMember PostTasksIDMembers (string taskID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
 
         /// <summary>
-        /// Add task member
+        /// Add a member to a task
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMember</returns>
         ApiResponse<ResourceMember> PostTasksIDMembersWithHttpInfo (string taskID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
         /// <summary>
-        /// Add task owner
+        /// Add an owner to a task
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ResourceOwner</returns>
         ResourceOwner PostTasksIDOwners (string taskID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
 
         /// <summary>
-        /// Add task owner
+        /// Add an owner to a task
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwner</returns>
         ApiResponse<ResourceOwner> PostTasksIDOwnersWithHttpInfo (string taskID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
         /// <summary>
-        /// Add telegraf config member
+        /// Add a member to a Telegraf config
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ResourceMember</returns>
         ResourceMember PostTelegrafsIDMembers (string telegrafID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
 
         /// <summary>
-        /// Add telegraf config member
+        /// Add a member to a Telegraf config
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMember</returns>
         ApiResponse<ResourceMember> PostTelegrafsIDMembersWithHttpInfo (string telegrafID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
         /// <summary>
-        /// Add telegraf config owner
+        /// Add an owner to a Telegraf config
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ResourceOwner</returns>
         ResourceOwner PostTelegrafsIDOwners (string telegrafID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
 
         /// <summary>
-        /// Add telegraf config owner
+        /// Add an owner to a Telegraf config
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwner</returns>
         ApiResponse<ResourceOwner> PostTelegrafsIDOwnersWithHttpInfo (string telegrafID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
@@ -1047,7 +1047,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="user">user to create</param>
+        /// <param name="user">User to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>User</returns>
         User PostUsers (User user, string zapTraceSpan = null);
@@ -1059,58 +1059,58 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="user">user to create</param>
+        /// <param name="user">User to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of User</returns>
         ApiResponse<User> PostUsersWithHttpInfo (User user, string zapTraceSpan = null);
         /// <summary>
-        /// Update password
+        /// Update a password
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="passwordResetBody">new password</param>
+        /// <param name="passwordResetBody">New password</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="authorization">An auth credential for the Basic scheme (optional)</param>
         /// <returns></returns>
         void PutMePassword (PasswordResetBody passwordResetBody, string zapTraceSpan = null, String authorization = null);
 
         /// <summary>
-        /// Update password
+        /// Update a password
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="passwordResetBody">new password</param>
+        /// <param name="passwordResetBody">New password</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="authorization">An auth credential for the Basic scheme (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> PutMePasswordWithHttpInfo (PasswordResetBody passwordResetBody, string zapTraceSpan = null, String authorization = null);
         /// <summary>
-        /// Update password
+        /// Update a password
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of the user</param>
-        /// <param name="passwordResetBody">new password</param>
+        /// <param name="userID">The user ID.</param>
+        /// <param name="passwordResetBody">New password</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="authorization">An auth credential for the Basic scheme (optional)</param>
         /// <returns></returns>
         void PutUsersIDPassword (string userID, PasswordResetBody passwordResetBody, string zapTraceSpan = null, String authorization = null);
 
         /// <summary>
-        /// Update password
+        /// Update a password
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of the user</param>
-        /// <param name="passwordResetBody">new password</param>
+        /// <param name="userID">The user ID.</param>
+        /// <param name="passwordResetBody">New password</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="authorization">An auth credential for the Basic scheme (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
@@ -1118,325 +1118,325 @@ namespace InfluxDB.Client.Api.Service
         #endregion Synchronous Operations
         #region Asynchronous Operations
         /// <summary>
-        /// removes a member from an bucket
+        /// Remove a member from a bucket
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
         System.Threading.Tasks.Task DeleteBucketsIDMembersIDAsync (string userID, string bucketID, string zapTraceSpan = null);
 
         /// <summary>
-        /// removes a member from an bucket
+        /// Remove a member from a bucket
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         System.Threading.Tasks.Task<ApiResponse<Object>> DeleteBucketsIDMembersIDAsyncWithHttpInfo (string userID, string bucketID, string zapTraceSpan = null);
         /// <summary>
-        /// removes an owner from a bucket
+        /// Remove an owner from a bucket
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
         System.Threading.Tasks.Task DeleteBucketsIDOwnersIDAsync (string userID, string bucketID, string zapTraceSpan = null);
 
         /// <summary>
-        /// removes an owner from a bucket
+        /// Remove an owner from a bucket
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         System.Threading.Tasks.Task<ApiResponse<Object>> DeleteBucketsIDOwnersIDAsyncWithHttpInfo (string userID, string bucketID, string zapTraceSpan = null);
         /// <summary>
-        /// removes a member from an dashboard
+        /// Remove a member from a dashboard
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="dashboardID">The dashboard ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
         System.Threading.Tasks.Task DeleteDashboardsIDMembersIDAsync (string userID, string dashboardID, string zapTraceSpan = null);
 
         /// <summary>
-        /// removes a member from an dashboard
+        /// Remove a member from a dashboard
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="dashboardID">The dashboard ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         System.Threading.Tasks.Task<ApiResponse<Object>> DeleteDashboardsIDMembersIDAsyncWithHttpInfo (string userID, string dashboardID, string zapTraceSpan = null);
         /// <summary>
-        /// removes an owner from a dashboard
+        /// Remove an owner from a dashboard
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="dashboardID">The dashboard ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
         System.Threading.Tasks.Task DeleteDashboardsIDOwnersIDAsync (string userID, string dashboardID, string zapTraceSpan = null);
 
         /// <summary>
-        /// removes an owner from a dashboard
+        /// Remove an owner from a dashboard
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="dashboardID">The dashboard ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         System.Threading.Tasks.Task<ApiResponse<Object>> DeleteDashboardsIDOwnersIDAsyncWithHttpInfo (string userID, string dashboardID, string zapTraceSpan = null);
         /// <summary>
-        /// removes a member from an organization
+        /// Remove a member from an organization
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
         System.Threading.Tasks.Task DeleteOrgsIDMembersIDAsync (string userID, string orgID, string zapTraceSpan = null);
 
         /// <summary>
-        /// removes a member from an organization
+        /// Remove a member from an organization
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         System.Threading.Tasks.Task<ApiResponse<Object>> DeleteOrgsIDMembersIDAsyncWithHttpInfo (string userID, string orgID, string zapTraceSpan = null);
         /// <summary>
-        /// removes an owner from an organization
+        /// Remove an owner from an organization
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
         System.Threading.Tasks.Task DeleteOrgsIDOwnersIDAsync (string userID, string orgID, string zapTraceSpan = null);
 
         /// <summary>
-        /// removes an owner from an organization
+        /// Remove an owner from an organization
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         System.Threading.Tasks.Task<ApiResponse<Object>> DeleteOrgsIDOwnersIDAsyncWithHttpInfo (string userID, string orgID, string zapTraceSpan = null);
         /// <summary>
-        /// removes a member from a scraper target
+        /// Remove a member from a scraper target
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="userID">The ID of member to remove.</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
         System.Threading.Tasks.Task DeleteScrapersIDMembersIDAsync (string userID, string scraperTargetID, string zapTraceSpan = null);
 
         /// <summary>
-        /// removes a member from a scraper target
+        /// Remove a member from a scraper target
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="userID">The ID of member to remove.</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         System.Threading.Tasks.Task<ApiResponse<Object>> DeleteScrapersIDMembersIDAsyncWithHttpInfo (string userID, string scraperTargetID, string zapTraceSpan = null);
         /// <summary>
-        /// removes an owner from a scraper target
+        /// Remove an owner from a scraper target
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="userID">The ID of owner to remove.</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
         System.Threading.Tasks.Task DeleteScrapersIDOwnersIDAsync (string userID, string scraperTargetID, string zapTraceSpan = null);
 
         /// <summary>
-        /// removes an owner from a scraper target
+        /// Remove an owner from a scraper target
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="userID">The ID of owner to remove.</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         System.Threading.Tasks.Task<ApiResponse<Object>> DeleteScrapersIDOwnersIDAsyncWithHttpInfo (string userID, string scraperTargetID, string zapTraceSpan = null);
         /// <summary>
-        /// removes a member from an task
+        /// Remove a member from a task
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
         System.Threading.Tasks.Task DeleteTasksIDMembersIDAsync (string userID, string taskID, string zapTraceSpan = null);
 
         /// <summary>
-        /// removes a member from an task
+        /// Remove a member from a task
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         System.Threading.Tasks.Task<ApiResponse<Object>> DeleteTasksIDMembersIDAsyncWithHttpInfo (string userID, string taskID, string zapTraceSpan = null);
         /// <summary>
-        /// removes an owner from an task
+        /// Remove an owner from a task
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
         System.Threading.Tasks.Task DeleteTasksIDOwnersIDAsync (string userID, string taskID, string zapTraceSpan = null);
 
         /// <summary>
-        /// removes an owner from an task
+        /// Remove an owner from a task
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         System.Threading.Tasks.Task<ApiResponse<Object>> DeleteTasksIDOwnersIDAsyncWithHttpInfo (string userID, string taskID, string zapTraceSpan = null);
         /// <summary>
-        /// removes a member from a telegraf config
+        /// Remove a member from a Telegraf config
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="telegrafID">ID of the telegraf</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
         System.Threading.Tasks.Task DeleteTelegrafsIDMembersIDAsync (string userID, string telegrafID, string zapTraceSpan = null);
 
         /// <summary>
-        /// removes a member from a telegraf config
+        /// Remove a member from a Telegraf config
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="telegrafID">ID of the telegraf</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         System.Threading.Tasks.Task<ApiResponse<Object>> DeleteTelegrafsIDMembersIDAsyncWithHttpInfo (string userID, string telegrafID, string zapTraceSpan = null);
         /// <summary>
-        /// removes an owner from a telegraf config
+        /// Remove an owner from a Telegraf config
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="telegrafID">ID of the telegraf config</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
         System.Threading.Tasks.Task DeleteTelegrafsIDOwnersIDAsync (string userID, string telegrafID, string zapTraceSpan = null);
 
         /// <summary>
-        /// removes an owner from a telegraf config
+        /// Remove an owner from a Telegraf config
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="telegrafID">ID of the telegraf config</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         System.Threading.Tasks.Task<ApiResponse<Object>> DeleteTelegrafsIDOwnersIDAsyncWithHttpInfo (string userID, string telegrafID, string zapTraceSpan = null);
         /// <summary>
-        /// deletes a user
+        /// Delete a user
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of user to delete</param>
+        /// <param name="userID">The ID of the user to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
         System.Threading.Tasks.Task DeleteUsersIDAsync (string userID, string zapTraceSpan = null);
 
         /// <summary>
-        /// deletes a user
+        /// Delete a user
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of user to delete</param>
+        /// <param name="userID">The ID of the user to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         System.Threading.Tasks.Task<ApiResponse<Object>> DeleteUsersIDAsyncWithHttpInfo (string userID, string zapTraceSpan = null);
@@ -1447,7 +1447,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ResourceMembers</returns>
         System.Threading.Tasks.Task<ResourceMembers> GetBucketsIDMembersAsync (string bucketID, string zapTraceSpan = null);
@@ -1459,7 +1459,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (ResourceMembers)</returns>
         System.Threading.Tasks.Task<ApiResponse<ResourceMembers>> GetBucketsIDMembersAsyncWithHttpInfo (string bucketID, string zapTraceSpan = null);
@@ -1470,7 +1470,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ResourceOwners</returns>
         System.Threading.Tasks.Task<ResourceOwners> GetBucketsIDOwnersAsync (string bucketID, string zapTraceSpan = null);
@@ -1482,7 +1482,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (ResourceOwners)</returns>
         System.Threading.Tasks.Task<ApiResponse<ResourceOwners>> GetBucketsIDOwnersAsyncWithHttpInfo (string bucketID, string zapTraceSpan = null);
@@ -1493,7 +1493,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="dashboardID">The dashboard ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ResourceMembers</returns>
         System.Threading.Tasks.Task<ResourceMembers> GetDashboardsIDMembersAsync (string dashboardID, string zapTraceSpan = null);
@@ -1505,7 +1505,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="dashboardID">The dashboard ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (ResourceMembers)</returns>
         System.Threading.Tasks.Task<ApiResponse<ResourceMembers>> GetDashboardsIDMembersAsyncWithHttpInfo (string dashboardID, string zapTraceSpan = null);
@@ -1516,7 +1516,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="dashboardID">The dashboard ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ResourceOwners</returns>
         System.Threading.Tasks.Task<ResourceOwners> GetDashboardsIDOwnersAsync (string dashboardID, string zapTraceSpan = null);
@@ -1528,12 +1528,12 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="dashboardID">The dashboard ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (ResourceOwners)</returns>
         System.Threading.Tasks.Task<ApiResponse<ResourceOwners>> GetDashboardsIDOwnersAsyncWithHttpInfo (string dashboardID, string zapTraceSpan = null);
         /// <summary>
-        /// Returns currently authenticated user
+        /// Return the current authenticated user
         /// </summary>
         /// <remarks>
         /// 
@@ -1544,7 +1544,7 @@ namespace InfluxDB.Client.Api.Service
         System.Threading.Tasks.Task<User> GetMeAsync (string zapTraceSpan = null);
 
         /// <summary>
-        /// Returns currently authenticated user
+        /// Return the current authenticated user
         /// </summary>
         /// <remarks>
         /// 
@@ -1560,7 +1560,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ResourceMembers</returns>
         System.Threading.Tasks.Task<ResourceMembers> GetOrgsIDMembersAsync (string orgID, string zapTraceSpan = null);
@@ -1572,7 +1572,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (ResourceMembers)</returns>
         System.Threading.Tasks.Task<ApiResponse<ResourceMembers>> GetOrgsIDMembersAsyncWithHttpInfo (string orgID, string zapTraceSpan = null);
@@ -1583,7 +1583,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ResourceOwners</returns>
         System.Threading.Tasks.Task<ResourceOwners> GetOrgsIDOwnersAsync (string orgID, string zapTraceSpan = null);
@@ -1595,7 +1595,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (ResourceOwners)</returns>
         System.Threading.Tasks.Task<ApiResponse<ResourceOwners>> GetOrgsIDOwnersAsyncWithHttpInfo (string orgID, string zapTraceSpan = null);
@@ -1606,7 +1606,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ResourceMembers</returns>
         System.Threading.Tasks.Task<ResourceMembers> GetScrapersIDMembersAsync (string scraperTargetID, string zapTraceSpan = null);
@@ -1618,7 +1618,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (ResourceMembers)</returns>
         System.Threading.Tasks.Task<ApiResponse<ResourceMembers>> GetScrapersIDMembersAsyncWithHttpInfo (string scraperTargetID, string zapTraceSpan = null);
@@ -1629,7 +1629,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ResourceOwners</returns>
         System.Threading.Tasks.Task<ResourceOwners> GetScrapersIDOwnersAsync (string scraperTargetID, string zapTraceSpan = null);
@@ -1641,7 +1641,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (ResourceOwners)</returns>
         System.Threading.Tasks.Task<ApiResponse<ResourceOwners>> GetScrapersIDOwnersAsyncWithHttpInfo (string scraperTargetID, string zapTraceSpan = null);
@@ -1652,7 +1652,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ResourceMembers</returns>
         System.Threading.Tasks.Task<ResourceMembers> GetTasksIDMembersAsync (string taskID, string zapTraceSpan = null);
@@ -1664,76 +1664,76 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (ResourceMembers)</returns>
         System.Threading.Tasks.Task<ApiResponse<ResourceMembers>> GetTasksIDMembersAsyncWithHttpInfo (string taskID, string zapTraceSpan = null);
         /// <summary>
-        /// List all task owners
+        /// List all owners of a task
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ResourceOwners</returns>
         System.Threading.Tasks.Task<ResourceOwners> GetTasksIDOwnersAsync (string taskID, string zapTraceSpan = null);
 
         /// <summary>
-        /// List all task owners
+        /// List all owners of a task
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (ResourceOwners)</returns>
         System.Threading.Tasks.Task<ApiResponse<ResourceOwners>> GetTasksIDOwnersAsyncWithHttpInfo (string taskID, string zapTraceSpan = null);
         /// <summary>
-        /// List all users with member privileges for a telegraf config
+        /// List all users with member privileges for a Telegraf config
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ResourceMembers</returns>
         System.Threading.Tasks.Task<ResourceMembers> GetTelegrafsIDMembersAsync (string telegrafID, string zapTraceSpan = null);
 
         /// <summary>
-        /// List all users with member privileges for a telegraf config
+        /// List all users with member privileges for a Telegraf config
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (ResourceMembers)</returns>
         System.Threading.Tasks.Task<ApiResponse<ResourceMembers>> GetTelegrafsIDMembersAsyncWithHttpInfo (string telegrafID, string zapTraceSpan = null);
         /// <summary>
-        /// List all owners of a telegraf config
+        /// List all owners of a Telegraf config
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ResourceOwners</returns>
         System.Threading.Tasks.Task<ResourceOwners> GetTelegrafsIDOwnersAsync (string telegrafID, string zapTraceSpan = null);
 
         /// <summary>
-        /// List all owners of a telegraf config
+        /// List all owners of a Telegraf config
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (ResourceOwners)</returns>
         System.Threading.Tasks.Task<ApiResponse<ResourceOwners>> GetTelegrafsIDOwnersAsyncWithHttpInfo (string telegrafID, string zapTraceSpan = null);
@@ -1765,7 +1765,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of user to get</param>
+        /// <param name="userID">The user ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of User</returns>
         System.Threading.Tasks.Task<User> GetUsersIDAsync (string userID, string zapTraceSpan = null);
@@ -1777,7 +1777,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of user to get</param>
+        /// <param name="userID">The user ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (User)</returns>
         System.Threading.Tasks.Task<ApiResponse<User>> GetUsersIDAsyncWithHttpInfo (string userID, string zapTraceSpan = null);
@@ -1788,7 +1788,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of the user</param>
+        /// <param name="userID">The user ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
@@ -1802,7 +1802,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of the user</param>
+        /// <param name="userID">The user ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
@@ -1815,8 +1815,8 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of user to update</param>
-        /// <param name="user">user update to apply</param>
+        /// <param name="userID">The ID of the user to update.</param>
+        /// <param name="user">User update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of User</returns>
         System.Threading.Tasks.Task<User> PatchUsersIDAsync (string userID, User user, string zapTraceSpan = null);
@@ -1828,308 +1828,308 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of user to update</param>
-        /// <param name="user">user update to apply</param>
+        /// <param name="userID">The ID of the user to update.</param>
+        /// <param name="user">User update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (User)</returns>
         System.Threading.Tasks.Task<ApiResponse<User>> PatchUsersIDAsyncWithHttpInfo (string userID, User user, string zapTraceSpan = null);
         /// <summary>
-        /// Add bucket member
+        /// Add a member to a bucket
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="bucketID">The bucket ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ResourceMember</returns>
         System.Threading.Tasks.Task<ResourceMember> PostBucketsIDMembersAsync (string bucketID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
 
         /// <summary>
-        /// Add bucket member
+        /// Add a member to a bucket
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="bucketID">The bucket ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (ResourceMember)</returns>
         System.Threading.Tasks.Task<ApiResponse<ResourceMember>> PostBucketsIDMembersAsyncWithHttpInfo (string bucketID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
         /// <summary>
-        /// Add bucket owner
+        /// Add an owner to a bucket
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="bucketID">The bucket ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ResourceOwner</returns>
         System.Threading.Tasks.Task<ResourceOwner> PostBucketsIDOwnersAsync (string bucketID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
 
         /// <summary>
-        /// Add bucket owner
+        /// Add an owner to a bucket
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="bucketID">The bucket ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (ResourceOwner)</returns>
         System.Threading.Tasks.Task<ApiResponse<ResourceOwner>> PostBucketsIDOwnersAsyncWithHttpInfo (string bucketID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
         /// <summary>
-        /// Add dashboard member
+        /// Add a member to a dashboard
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of the dashboard</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="dashboardID">The dashboard ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ResourceMember</returns>
         System.Threading.Tasks.Task<ResourceMember> PostDashboardsIDMembersAsync (string dashboardID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
 
         /// <summary>
-        /// Add dashboard member
+        /// Add a member to a dashboard
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of the dashboard</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="dashboardID">The dashboard ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (ResourceMember)</returns>
         System.Threading.Tasks.Task<ApiResponse<ResourceMember>> PostDashboardsIDMembersAsyncWithHttpInfo (string dashboardID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
         /// <summary>
-        /// Add dashboard owner
+        /// Add an owner to a dashboard
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of the dashboard</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="dashboardID">The dashboard ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ResourceOwner</returns>
         System.Threading.Tasks.Task<ResourceOwner> PostDashboardsIDOwnersAsync (string dashboardID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
 
         /// <summary>
-        /// Add dashboard owner
+        /// Add an owner to a dashboard
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of the dashboard</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="dashboardID">The dashboard ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (ResourceOwner)</returns>
         System.Threading.Tasks.Task<ApiResponse<ResourceOwner>> PostDashboardsIDOwnersAsyncWithHttpInfo (string dashboardID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
         /// <summary>
-        /// Add organization member
+        /// Add a member to an organization
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ResourceMember</returns>
         System.Threading.Tasks.Task<ResourceMember> PostOrgsIDMembersAsync (string orgID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
 
         /// <summary>
-        /// Add organization member
+        /// Add a member to an organization
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (ResourceMember)</returns>
         System.Threading.Tasks.Task<ApiResponse<ResourceMember>> PostOrgsIDMembersAsyncWithHttpInfo (string orgID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
         /// <summary>
-        /// Add organization owner
+        /// Add an owner to an organization
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ResourceOwner</returns>
         System.Threading.Tasks.Task<ResourceOwner> PostOrgsIDOwnersAsync (string orgID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
 
         /// <summary>
-        /// Add organization owner
+        /// Add an owner to an organization
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (ResourceOwner)</returns>
         System.Threading.Tasks.Task<ApiResponse<ResourceOwner>> PostOrgsIDOwnersAsyncWithHttpInfo (string orgID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
         /// <summary>
-        /// Add scraper target member
+        /// Add a member to a scraper target
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ResourceMember</returns>
         System.Threading.Tasks.Task<ResourceMember> PostScrapersIDMembersAsync (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
 
         /// <summary>
-        /// Add scraper target member
+        /// Add a member to a scraper target
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (ResourceMember)</returns>
         System.Threading.Tasks.Task<ApiResponse<ResourceMember>> PostScrapersIDMembersAsyncWithHttpInfo (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
         /// <summary>
-        /// Add scraper target owner
+        /// Add an owner to a scraper target
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ResourceOwner</returns>
         System.Threading.Tasks.Task<ResourceOwner> PostScrapersIDOwnersAsync (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
 
         /// <summary>
-        /// Add scraper target owner
+        /// Add an owner to a scraper target
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (ResourceOwner)</returns>
         System.Threading.Tasks.Task<ApiResponse<ResourceOwner>> PostScrapersIDOwnersAsyncWithHttpInfo (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
         /// <summary>
-        /// Add task member
+        /// Add a member to a task
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ResourceMember</returns>
         System.Threading.Tasks.Task<ResourceMember> PostTasksIDMembersAsync (string taskID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
 
         /// <summary>
-        /// Add task member
+        /// Add a member to a task
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (ResourceMember)</returns>
         System.Threading.Tasks.Task<ApiResponse<ResourceMember>> PostTasksIDMembersAsyncWithHttpInfo (string taskID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
         /// <summary>
-        /// Add task owner
+        /// Add an owner to a task
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ResourceOwner</returns>
         System.Threading.Tasks.Task<ResourceOwner> PostTasksIDOwnersAsync (string taskID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
 
         /// <summary>
-        /// Add task owner
+        /// Add an owner to a task
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (ResourceOwner)</returns>
         System.Threading.Tasks.Task<ApiResponse<ResourceOwner>> PostTasksIDOwnersAsyncWithHttpInfo (string taskID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
         /// <summary>
-        /// Add telegraf config member
+        /// Add a member to a Telegraf config
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ResourceMember</returns>
         System.Threading.Tasks.Task<ResourceMember> PostTelegrafsIDMembersAsync (string telegrafID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
 
         /// <summary>
-        /// Add telegraf config member
+        /// Add a member to a Telegraf config
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (ResourceMember)</returns>
         System.Threading.Tasks.Task<ApiResponse<ResourceMember>> PostTelegrafsIDMembersAsyncWithHttpInfo (string telegrafID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
         /// <summary>
-        /// Add telegraf config owner
+        /// Add an owner to a Telegraf config
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ResourceOwner</returns>
         System.Threading.Tasks.Task<ResourceOwner> PostTelegrafsIDOwnersAsync (string telegrafID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
 
         /// <summary>
-        /// Add telegraf config owner
+        /// Add an owner to a Telegraf config
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (ResourceOwner)</returns>
         System.Threading.Tasks.Task<ApiResponse<ResourceOwner>> PostTelegrafsIDOwnersAsyncWithHttpInfo (string telegrafID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
@@ -2140,7 +2140,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="user">user to create</param>
+        /// <param name="user">User to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of User</returns>
         System.Threading.Tasks.Task<User> PostUsersAsync (User user, string zapTraceSpan = null);
@@ -2152,58 +2152,58 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="user">user to create</param>
+        /// <param name="user">User to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (User)</returns>
         System.Threading.Tasks.Task<ApiResponse<User>> PostUsersAsyncWithHttpInfo (User user, string zapTraceSpan = null);
         /// <summary>
-        /// Update password
+        /// Update a password
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="passwordResetBody">new password</param>
+        /// <param name="passwordResetBody">New password</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="authorization">An auth credential for the Basic scheme (optional)</param>
         /// <returns>Task of void</returns>
         System.Threading.Tasks.Task PutMePasswordAsync (PasswordResetBody passwordResetBody, string zapTraceSpan = null, String authorization = null);
 
         /// <summary>
-        /// Update password
+        /// Update a password
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="passwordResetBody">new password</param>
+        /// <param name="passwordResetBody">New password</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="authorization">An auth credential for the Basic scheme (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         System.Threading.Tasks.Task<ApiResponse<Object>> PutMePasswordAsyncWithHttpInfo (PasswordResetBody passwordResetBody, string zapTraceSpan = null, String authorization = null);
         /// <summary>
-        /// Update password
+        /// Update a password
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of the user</param>
-        /// <param name="passwordResetBody">new password</param>
+        /// <param name="userID">The user ID.</param>
+        /// <param name="passwordResetBody">New password</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="authorization">An auth credential for the Basic scheme (optional)</param>
         /// <returns>Task of void</returns>
         System.Threading.Tasks.Task PutUsersIDPasswordAsync (string userID, PasswordResetBody passwordResetBody, string zapTraceSpan = null, String authorization = null);
 
         /// <summary>
-        /// Update password
+        /// Update a password
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of the user</param>
-        /// <param name="passwordResetBody">new password</param>
+        /// <param name="userID">The user ID.</param>
+        /// <param name="passwordResetBody">New password</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="authorization">An auth credential for the Basic scheme (optional)</param>
         /// <returns>Task of ApiResponse</returns>
@@ -2309,11 +2309,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes a member from an bucket 
+        /// Remove a member from a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
         public void DeleteBucketsIDMembersID (string userID, string bucketID, string zapTraceSpan = null)
@@ -2322,11 +2322,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes a member from an bucket 
+        /// Remove a member from a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public ApiResponse<Object> DeleteBucketsIDMembersIDWithHttpInfo (string userID, string bucketID, string zapTraceSpan = null)
@@ -2384,11 +2384,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes a member from an bucket 
+        /// Remove a member from a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> DeleteBucketsIDMembersIDWithIRestResponseAsync (string userID, string bucketID, string zapTraceSpan = null)
@@ -2444,11 +2444,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes a member from an bucket 
+        /// Remove a member from a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public IRestResponse DeleteBucketsIDMembersIDWithIRestResponse (string userID, string bucketID, string zapTraceSpan = null)
@@ -2504,11 +2504,11 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// removes a member from an bucket 
+        /// Remove a member from a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public RestRequest DeleteBucketsIDMembersIDWithRestRequest (string userID, string bucketID, string zapTraceSpan = null)
@@ -2553,11 +2553,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes a member from an bucket 
+        /// Remove a member from a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
         public async System.Threading.Tasks.Task DeleteBucketsIDMembersIDAsync (string userID, string bucketID, string zapTraceSpan = null)
@@ -2567,11 +2567,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes a member from an bucket 
+        /// Remove a member from a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteBucketsIDMembersIDAsyncWithHttpInfo (string userID, string bucketID, string zapTraceSpan = null)
@@ -2593,11 +2593,11 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// removes a member from an bucket 
+        /// Remove a member from a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse</returns>
         public async System.Threading.Tasks.Task<IRestResponse> DeleteBucketsIDMembersIDAsyncWithIRestResponse (string userID, string bucketID, string zapTraceSpan = null)
@@ -2651,11 +2651,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes an owner from a bucket 
+        /// Remove an owner from a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
         public void DeleteBucketsIDOwnersID (string userID, string bucketID, string zapTraceSpan = null)
@@ -2664,11 +2664,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes an owner from a bucket 
+        /// Remove an owner from a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public ApiResponse<Object> DeleteBucketsIDOwnersIDWithHttpInfo (string userID, string bucketID, string zapTraceSpan = null)
@@ -2726,11 +2726,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes an owner from a bucket 
+        /// Remove an owner from a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> DeleteBucketsIDOwnersIDWithIRestResponseAsync (string userID, string bucketID, string zapTraceSpan = null)
@@ -2786,11 +2786,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes an owner from a bucket 
+        /// Remove an owner from a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public IRestResponse DeleteBucketsIDOwnersIDWithIRestResponse (string userID, string bucketID, string zapTraceSpan = null)
@@ -2846,11 +2846,11 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// removes an owner from a bucket 
+        /// Remove an owner from a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public RestRequest DeleteBucketsIDOwnersIDWithRestRequest (string userID, string bucketID, string zapTraceSpan = null)
@@ -2895,11 +2895,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes an owner from a bucket 
+        /// Remove an owner from a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
         public async System.Threading.Tasks.Task DeleteBucketsIDOwnersIDAsync (string userID, string bucketID, string zapTraceSpan = null)
@@ -2909,11 +2909,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes an owner from a bucket 
+        /// Remove an owner from a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteBucketsIDOwnersIDAsyncWithHttpInfo (string userID, string bucketID, string zapTraceSpan = null)
@@ -2935,11 +2935,11 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// removes an owner from a bucket 
+        /// Remove an owner from a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse</returns>
         public async System.Threading.Tasks.Task<IRestResponse> DeleteBucketsIDOwnersIDAsyncWithIRestResponse (string userID, string bucketID, string zapTraceSpan = null)
@@ -2993,11 +2993,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes a member from an dashboard 
+        /// Remove a member from a dashboard 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="dashboardID">The dashboard ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
         public void DeleteDashboardsIDMembersID (string userID, string dashboardID, string zapTraceSpan = null)
@@ -3006,11 +3006,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes a member from an dashboard 
+        /// Remove a member from a dashboard 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="dashboardID">The dashboard ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public ApiResponse<Object> DeleteDashboardsIDMembersIDWithHttpInfo (string userID, string dashboardID, string zapTraceSpan = null)
@@ -3068,11 +3068,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes a member from an dashboard 
+        /// Remove a member from a dashboard 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="dashboardID">The dashboard ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> DeleteDashboardsIDMembersIDWithIRestResponseAsync (string userID, string dashboardID, string zapTraceSpan = null)
@@ -3128,11 +3128,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes a member from an dashboard 
+        /// Remove a member from a dashboard 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="dashboardID">The dashboard ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public IRestResponse DeleteDashboardsIDMembersIDWithIRestResponse (string userID, string dashboardID, string zapTraceSpan = null)
@@ -3188,11 +3188,11 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// removes a member from an dashboard 
+        /// Remove a member from a dashboard 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="dashboardID">The dashboard ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public RestRequest DeleteDashboardsIDMembersIDWithRestRequest (string userID, string dashboardID, string zapTraceSpan = null)
@@ -3237,11 +3237,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes a member from an dashboard 
+        /// Remove a member from a dashboard 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="dashboardID">The dashboard ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
         public async System.Threading.Tasks.Task DeleteDashboardsIDMembersIDAsync (string userID, string dashboardID, string zapTraceSpan = null)
@@ -3251,11 +3251,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes a member from an dashboard 
+        /// Remove a member from a dashboard 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="dashboardID">The dashboard ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteDashboardsIDMembersIDAsyncWithHttpInfo (string userID, string dashboardID, string zapTraceSpan = null)
@@ -3277,11 +3277,11 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// removes a member from an dashboard 
+        /// Remove a member from a dashboard 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="dashboardID">The dashboard ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse</returns>
         public async System.Threading.Tasks.Task<IRestResponse> DeleteDashboardsIDMembersIDAsyncWithIRestResponse (string userID, string dashboardID, string zapTraceSpan = null)
@@ -3335,11 +3335,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes an owner from a dashboard 
+        /// Remove an owner from a dashboard 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="dashboardID">The dashboard ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
         public void DeleteDashboardsIDOwnersID (string userID, string dashboardID, string zapTraceSpan = null)
@@ -3348,11 +3348,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes an owner from a dashboard 
+        /// Remove an owner from a dashboard 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="dashboardID">The dashboard ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public ApiResponse<Object> DeleteDashboardsIDOwnersIDWithHttpInfo (string userID, string dashboardID, string zapTraceSpan = null)
@@ -3410,11 +3410,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes an owner from a dashboard 
+        /// Remove an owner from a dashboard 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="dashboardID">The dashboard ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> DeleteDashboardsIDOwnersIDWithIRestResponseAsync (string userID, string dashboardID, string zapTraceSpan = null)
@@ -3470,11 +3470,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes an owner from a dashboard 
+        /// Remove an owner from a dashboard 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="dashboardID">The dashboard ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public IRestResponse DeleteDashboardsIDOwnersIDWithIRestResponse (string userID, string dashboardID, string zapTraceSpan = null)
@@ -3530,11 +3530,11 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// removes an owner from a dashboard 
+        /// Remove an owner from a dashboard 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="dashboardID">The dashboard ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public RestRequest DeleteDashboardsIDOwnersIDWithRestRequest (string userID, string dashboardID, string zapTraceSpan = null)
@@ -3579,11 +3579,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes an owner from a dashboard 
+        /// Remove an owner from a dashboard 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="dashboardID">The dashboard ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
         public async System.Threading.Tasks.Task DeleteDashboardsIDOwnersIDAsync (string userID, string dashboardID, string zapTraceSpan = null)
@@ -3593,11 +3593,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes an owner from a dashboard 
+        /// Remove an owner from a dashboard 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="dashboardID">The dashboard ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteDashboardsIDOwnersIDAsyncWithHttpInfo (string userID, string dashboardID, string zapTraceSpan = null)
@@ -3619,11 +3619,11 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// removes an owner from a dashboard 
+        /// Remove an owner from a dashboard 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="dashboardID">The dashboard ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse</returns>
         public async System.Threading.Tasks.Task<IRestResponse> DeleteDashboardsIDOwnersIDAsyncWithIRestResponse (string userID, string dashboardID, string zapTraceSpan = null)
@@ -3677,11 +3677,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes a member from an organization 
+        /// Remove a member from an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
         public void DeleteOrgsIDMembersID (string userID, string orgID, string zapTraceSpan = null)
@@ -3690,11 +3690,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes a member from an organization 
+        /// Remove a member from an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public ApiResponse<Object> DeleteOrgsIDMembersIDWithHttpInfo (string userID, string orgID, string zapTraceSpan = null)
@@ -3752,11 +3752,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes a member from an organization 
+        /// Remove a member from an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> DeleteOrgsIDMembersIDWithIRestResponseAsync (string userID, string orgID, string zapTraceSpan = null)
@@ -3812,11 +3812,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes a member from an organization 
+        /// Remove a member from an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public IRestResponse DeleteOrgsIDMembersIDWithIRestResponse (string userID, string orgID, string zapTraceSpan = null)
@@ -3872,11 +3872,11 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// removes a member from an organization 
+        /// Remove a member from an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public RestRequest DeleteOrgsIDMembersIDWithRestRequest (string userID, string orgID, string zapTraceSpan = null)
@@ -3921,11 +3921,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes a member from an organization 
+        /// Remove a member from an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
         public async System.Threading.Tasks.Task DeleteOrgsIDMembersIDAsync (string userID, string orgID, string zapTraceSpan = null)
@@ -3935,11 +3935,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes a member from an organization 
+        /// Remove a member from an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteOrgsIDMembersIDAsyncWithHttpInfo (string userID, string orgID, string zapTraceSpan = null)
@@ -3961,11 +3961,11 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// removes a member from an organization 
+        /// Remove a member from an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse</returns>
         public async System.Threading.Tasks.Task<IRestResponse> DeleteOrgsIDMembersIDAsyncWithIRestResponse (string userID, string orgID, string zapTraceSpan = null)
@@ -4019,11 +4019,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes an owner from an organization 
+        /// Remove an owner from an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
         public void DeleteOrgsIDOwnersID (string userID, string orgID, string zapTraceSpan = null)
@@ -4032,11 +4032,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes an owner from an organization 
+        /// Remove an owner from an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public ApiResponse<Object> DeleteOrgsIDOwnersIDWithHttpInfo (string userID, string orgID, string zapTraceSpan = null)
@@ -4094,11 +4094,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes an owner from an organization 
+        /// Remove an owner from an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> DeleteOrgsIDOwnersIDWithIRestResponseAsync (string userID, string orgID, string zapTraceSpan = null)
@@ -4154,11 +4154,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes an owner from an organization 
+        /// Remove an owner from an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public IRestResponse DeleteOrgsIDOwnersIDWithIRestResponse (string userID, string orgID, string zapTraceSpan = null)
@@ -4214,11 +4214,11 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// removes an owner from an organization 
+        /// Remove an owner from an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public RestRequest DeleteOrgsIDOwnersIDWithRestRequest (string userID, string orgID, string zapTraceSpan = null)
@@ -4263,11 +4263,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes an owner from an organization 
+        /// Remove an owner from an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
         public async System.Threading.Tasks.Task DeleteOrgsIDOwnersIDAsync (string userID, string orgID, string zapTraceSpan = null)
@@ -4277,11 +4277,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes an owner from an organization 
+        /// Remove an owner from an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteOrgsIDOwnersIDAsyncWithHttpInfo (string userID, string orgID, string zapTraceSpan = null)
@@ -4303,11 +4303,11 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// removes an owner from an organization 
+        /// Remove an owner from an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse</returns>
         public async System.Threading.Tasks.Task<IRestResponse> DeleteOrgsIDOwnersIDAsyncWithIRestResponse (string userID, string orgID, string zapTraceSpan = null)
@@ -4361,11 +4361,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes a member from a scraper target 
+        /// Remove a member from a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="userID">The ID of member to remove.</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
         public void DeleteScrapersIDMembersID (string userID, string scraperTargetID, string zapTraceSpan = null)
@@ -4374,11 +4374,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes a member from a scraper target 
+        /// Remove a member from a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="userID">The ID of member to remove.</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public ApiResponse<Object> DeleteScrapersIDMembersIDWithHttpInfo (string userID, string scraperTargetID, string zapTraceSpan = null)
@@ -4436,11 +4436,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes a member from a scraper target 
+        /// Remove a member from a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="userID">The ID of member to remove.</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> DeleteScrapersIDMembersIDWithIRestResponseAsync (string userID, string scraperTargetID, string zapTraceSpan = null)
@@ -4496,11 +4496,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes a member from a scraper target 
+        /// Remove a member from a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="userID">The ID of member to remove.</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public IRestResponse DeleteScrapersIDMembersIDWithIRestResponse (string userID, string scraperTargetID, string zapTraceSpan = null)
@@ -4556,11 +4556,11 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// removes a member from a scraper target 
+        /// Remove a member from a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="userID">The ID of member to remove.</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public RestRequest DeleteScrapersIDMembersIDWithRestRequest (string userID, string scraperTargetID, string zapTraceSpan = null)
@@ -4605,11 +4605,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes a member from a scraper target 
+        /// Remove a member from a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="userID">The ID of member to remove.</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
         public async System.Threading.Tasks.Task DeleteScrapersIDMembersIDAsync (string userID, string scraperTargetID, string zapTraceSpan = null)
@@ -4619,11 +4619,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes a member from a scraper target 
+        /// Remove a member from a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="userID">The ID of member to remove.</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteScrapersIDMembersIDAsyncWithHttpInfo (string userID, string scraperTargetID, string zapTraceSpan = null)
@@ -4645,11 +4645,11 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// removes a member from a scraper target 
+        /// Remove a member from a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="userID">The ID of member to remove.</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse</returns>
         public async System.Threading.Tasks.Task<IRestResponse> DeleteScrapersIDMembersIDAsyncWithIRestResponse (string userID, string scraperTargetID, string zapTraceSpan = null)
@@ -4703,11 +4703,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes an owner from a scraper target 
+        /// Remove an owner from a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="userID">The ID of owner to remove.</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
         public void DeleteScrapersIDOwnersID (string userID, string scraperTargetID, string zapTraceSpan = null)
@@ -4716,11 +4716,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes an owner from a scraper target 
+        /// Remove an owner from a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="userID">The ID of owner to remove.</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public ApiResponse<Object> DeleteScrapersIDOwnersIDWithHttpInfo (string userID, string scraperTargetID, string zapTraceSpan = null)
@@ -4778,11 +4778,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes an owner from a scraper target 
+        /// Remove an owner from a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="userID">The ID of owner to remove.</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> DeleteScrapersIDOwnersIDWithIRestResponseAsync (string userID, string scraperTargetID, string zapTraceSpan = null)
@@ -4838,11 +4838,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes an owner from a scraper target 
+        /// Remove an owner from a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="userID">The ID of owner to remove.</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public IRestResponse DeleteScrapersIDOwnersIDWithIRestResponse (string userID, string scraperTargetID, string zapTraceSpan = null)
@@ -4898,11 +4898,11 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// removes an owner from a scraper target 
+        /// Remove an owner from a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="userID">The ID of owner to remove.</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public RestRequest DeleteScrapersIDOwnersIDWithRestRequest (string userID, string scraperTargetID, string zapTraceSpan = null)
@@ -4947,11 +4947,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes an owner from a scraper target 
+        /// Remove an owner from a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="userID">The ID of owner to remove.</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
         public async System.Threading.Tasks.Task DeleteScrapersIDOwnersIDAsync (string userID, string scraperTargetID, string zapTraceSpan = null)
@@ -4961,11 +4961,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes an owner from a scraper target 
+        /// Remove an owner from a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="userID">The ID of owner to remove.</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteScrapersIDOwnersIDAsyncWithHttpInfo (string userID, string scraperTargetID, string zapTraceSpan = null)
@@ -4987,11 +4987,11 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// removes an owner from a scraper target 
+        /// Remove an owner from a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="userID">The ID of owner to remove.</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse</returns>
         public async System.Threading.Tasks.Task<IRestResponse> DeleteScrapersIDOwnersIDAsyncWithIRestResponse (string userID, string scraperTargetID, string zapTraceSpan = null)
@@ -5045,11 +5045,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes a member from an task 
+        /// Remove a member from a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
         public void DeleteTasksIDMembersID (string userID, string taskID, string zapTraceSpan = null)
@@ -5058,11 +5058,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes a member from an task 
+        /// Remove a member from a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public ApiResponse<Object> DeleteTasksIDMembersIDWithHttpInfo (string userID, string taskID, string zapTraceSpan = null)
@@ -5120,11 +5120,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes a member from an task 
+        /// Remove a member from a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> DeleteTasksIDMembersIDWithIRestResponseAsync (string userID, string taskID, string zapTraceSpan = null)
@@ -5180,11 +5180,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes a member from an task 
+        /// Remove a member from a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public IRestResponse DeleteTasksIDMembersIDWithIRestResponse (string userID, string taskID, string zapTraceSpan = null)
@@ -5240,11 +5240,11 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// removes a member from an task 
+        /// Remove a member from a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public RestRequest DeleteTasksIDMembersIDWithRestRequest (string userID, string taskID, string zapTraceSpan = null)
@@ -5289,11 +5289,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes a member from an task 
+        /// Remove a member from a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
         public async System.Threading.Tasks.Task DeleteTasksIDMembersIDAsync (string userID, string taskID, string zapTraceSpan = null)
@@ -5303,11 +5303,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes a member from an task 
+        /// Remove a member from a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteTasksIDMembersIDAsyncWithHttpInfo (string userID, string taskID, string zapTraceSpan = null)
@@ -5329,11 +5329,11 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// removes a member from an task 
+        /// Remove a member from a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse</returns>
         public async System.Threading.Tasks.Task<IRestResponse> DeleteTasksIDMembersIDAsyncWithIRestResponse (string userID, string taskID, string zapTraceSpan = null)
@@ -5387,11 +5387,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes an owner from an task 
+        /// Remove an owner from a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
         public void DeleteTasksIDOwnersID (string userID, string taskID, string zapTraceSpan = null)
@@ -5400,11 +5400,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes an owner from an task 
+        /// Remove an owner from a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public ApiResponse<Object> DeleteTasksIDOwnersIDWithHttpInfo (string userID, string taskID, string zapTraceSpan = null)
@@ -5462,11 +5462,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes an owner from an task 
+        /// Remove an owner from a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> DeleteTasksIDOwnersIDWithIRestResponseAsync (string userID, string taskID, string zapTraceSpan = null)
@@ -5522,11 +5522,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes an owner from an task 
+        /// Remove an owner from a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public IRestResponse DeleteTasksIDOwnersIDWithIRestResponse (string userID, string taskID, string zapTraceSpan = null)
@@ -5582,11 +5582,11 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// removes an owner from an task 
+        /// Remove an owner from a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public RestRequest DeleteTasksIDOwnersIDWithRestRequest (string userID, string taskID, string zapTraceSpan = null)
@@ -5631,11 +5631,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes an owner from an task 
+        /// Remove an owner from a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
         public async System.Threading.Tasks.Task DeleteTasksIDOwnersIDAsync (string userID, string taskID, string zapTraceSpan = null)
@@ -5645,11 +5645,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes an owner from an task 
+        /// Remove an owner from a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteTasksIDOwnersIDAsyncWithHttpInfo (string userID, string taskID, string zapTraceSpan = null)
@@ -5671,11 +5671,11 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// removes an owner from an task 
+        /// Remove an owner from a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse</returns>
         public async System.Threading.Tasks.Task<IRestResponse> DeleteTasksIDOwnersIDAsyncWithIRestResponse (string userID, string taskID, string zapTraceSpan = null)
@@ -5729,11 +5729,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes a member from a telegraf config 
+        /// Remove a member from a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="telegrafID">ID of the telegraf</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
         public void DeleteTelegrafsIDMembersID (string userID, string telegrafID, string zapTraceSpan = null)
@@ -5742,11 +5742,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes a member from a telegraf config 
+        /// Remove a member from a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="telegrafID">ID of the telegraf</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public ApiResponse<Object> DeleteTelegrafsIDMembersIDWithHttpInfo (string userID, string telegrafID, string zapTraceSpan = null)
@@ -5804,11 +5804,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes a member from a telegraf config 
+        /// Remove a member from a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="telegrafID">ID of the telegraf</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> DeleteTelegrafsIDMembersIDWithIRestResponseAsync (string userID, string telegrafID, string zapTraceSpan = null)
@@ -5864,11 +5864,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes a member from a telegraf config 
+        /// Remove a member from a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="telegrafID">ID of the telegraf</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public IRestResponse DeleteTelegrafsIDMembersIDWithIRestResponse (string userID, string telegrafID, string zapTraceSpan = null)
@@ -5924,11 +5924,11 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// removes a member from a telegraf config 
+        /// Remove a member from a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="telegrafID">ID of the telegraf</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public RestRequest DeleteTelegrafsIDMembersIDWithRestRequest (string userID, string telegrafID, string zapTraceSpan = null)
@@ -5973,11 +5973,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes a member from a telegraf config 
+        /// Remove a member from a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="telegrafID">ID of the telegraf</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
         public async System.Threading.Tasks.Task DeleteTelegrafsIDMembersIDAsync (string userID, string telegrafID, string zapTraceSpan = null)
@@ -5987,11 +5987,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes a member from a telegraf config 
+        /// Remove a member from a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="telegrafID">ID of the telegraf</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteTelegrafsIDMembersIDAsyncWithHttpInfo (string userID, string telegrafID, string zapTraceSpan = null)
@@ -6013,11 +6013,11 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// removes a member from a telegraf config 
+        /// Remove a member from a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="telegrafID">ID of the telegraf</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse</returns>
         public async System.Threading.Tasks.Task<IRestResponse> DeleteTelegrafsIDMembersIDAsyncWithIRestResponse (string userID, string telegrafID, string zapTraceSpan = null)
@@ -6071,11 +6071,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes an owner from a telegraf config 
+        /// Remove an owner from a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="telegrafID">ID of the telegraf config</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
         public void DeleteTelegrafsIDOwnersID (string userID, string telegrafID, string zapTraceSpan = null)
@@ -6084,11 +6084,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes an owner from a telegraf config 
+        /// Remove an owner from a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="telegrafID">ID of the telegraf config</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public ApiResponse<Object> DeleteTelegrafsIDOwnersIDWithHttpInfo (string userID, string telegrafID, string zapTraceSpan = null)
@@ -6146,11 +6146,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes an owner from a telegraf config 
+        /// Remove an owner from a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="telegrafID">ID of the telegraf config</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> DeleteTelegrafsIDOwnersIDWithIRestResponseAsync (string userID, string telegrafID, string zapTraceSpan = null)
@@ -6206,11 +6206,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes an owner from a telegraf config 
+        /// Remove an owner from a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="telegrafID">ID of the telegraf config</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public IRestResponse DeleteTelegrafsIDOwnersIDWithIRestResponse (string userID, string telegrafID, string zapTraceSpan = null)
@@ -6266,11 +6266,11 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// removes an owner from a telegraf config 
+        /// Remove an owner from a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="telegrafID">ID of the telegraf config</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public RestRequest DeleteTelegrafsIDOwnersIDWithRestRequest (string userID, string telegrafID, string zapTraceSpan = null)
@@ -6315,11 +6315,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes an owner from a telegraf config 
+        /// Remove an owner from a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="telegrafID">ID of the telegraf config</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
         public async System.Threading.Tasks.Task DeleteTelegrafsIDOwnersIDAsync (string userID, string telegrafID, string zapTraceSpan = null)
@@ -6329,11 +6329,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes an owner from a telegraf config 
+        /// Remove an owner from a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="telegrafID">ID of the telegraf config</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteTelegrafsIDOwnersIDAsyncWithHttpInfo (string userID, string telegrafID, string zapTraceSpan = null)
@@ -6355,11 +6355,11 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// removes an owner from a telegraf config 
+        /// Remove an owner from a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="telegrafID">ID of the telegraf config</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse</returns>
         public async System.Threading.Tasks.Task<IRestResponse> DeleteTelegrafsIDOwnersIDAsyncWithIRestResponse (string userID, string telegrafID, string zapTraceSpan = null)
@@ -6413,10 +6413,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// deletes a user 
+        /// Delete a user 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of user to delete</param>
+        /// <param name="userID">The ID of the user to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
         public void DeleteUsersID (string userID, string zapTraceSpan = null)
@@ -6425,10 +6425,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// deletes a user 
+        /// Delete a user 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of user to delete</param>
+        /// <param name="userID">The ID of the user to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public ApiResponse<Object> DeleteUsersIDWithHttpInfo (string userID, string zapTraceSpan = null)
@@ -6482,10 +6482,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// deletes a user 
+        /// Delete a user 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of user to delete</param>
+        /// <param name="userID">The ID of the user to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> DeleteUsersIDWithIRestResponseAsync (string userID, string zapTraceSpan = null)
@@ -6537,10 +6537,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// deletes a user 
+        /// Delete a user 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of user to delete</param>
+        /// <param name="userID">The ID of the user to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public IRestResponse DeleteUsersIDWithIRestResponse (string userID, string zapTraceSpan = null)
@@ -6592,10 +6592,10 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// deletes a user 
+        /// Delete a user 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of user to delete</param>
+        /// <param name="userID">The ID of the user to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public RestRequest DeleteUsersIDWithRestRequest (string userID, string zapTraceSpan = null)
@@ -6636,10 +6636,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// deletes a user 
+        /// Delete a user 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of user to delete</param>
+        /// <param name="userID">The ID of the user to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
         public async System.Threading.Tasks.Task DeleteUsersIDAsync (string userID, string zapTraceSpan = null)
@@ -6649,10 +6649,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// deletes a user 
+        /// Delete a user 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of user to delete</param>
+        /// <param name="userID">The ID of the user to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteUsersIDAsyncWithHttpInfo (string userID, string zapTraceSpan = null)
@@ -6674,10 +6674,10 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// deletes a user 
+        /// Delete a user 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of user to delete</param>
+        /// <param name="userID">The ID of the user to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse</returns>
         public async System.Threading.Tasks.Task<IRestResponse> DeleteUsersIDAsyncWithIRestResponse (string userID, string zapTraceSpan = null)
@@ -6730,7 +6730,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all users with member privileges for a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ResourceMembers</returns>
         public ResourceMembers GetBucketsIDMembers (string bucketID, string zapTraceSpan = null)
@@ -6743,7 +6743,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all users with member privileges for a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMembers</returns>
         public ApiResponse< ResourceMembers > GetBucketsIDMembersWithHttpInfo (string bucketID, string zapTraceSpan = null)
@@ -6800,7 +6800,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all users with member privileges for a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMembers</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetBucketsIDMembersWithIRestResponseAsync (string bucketID, string zapTraceSpan = null)
@@ -6855,7 +6855,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all users with member privileges for a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMembers</returns>
         public IRestResponse GetBucketsIDMembersWithIRestResponse (string bucketID, string zapTraceSpan = null)
@@ -6910,7 +6910,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all users with member privileges for a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMembers</returns>
         public RestRequest GetBucketsIDMembersWithRestRequest (string bucketID, string zapTraceSpan = null)
@@ -6954,7 +6954,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all users with member privileges for a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ResourceMembers</returns>
         public async System.Threading.Tasks.Task<ResourceMembers> GetBucketsIDMembersAsync (string bucketID, string zapTraceSpan = null)
@@ -6968,7 +6968,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all users with member privileges for a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (ResourceMembers)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<ResourceMembers>> GetBucketsIDMembersAsyncWithHttpInfo (string bucketID, string zapTraceSpan = null)
@@ -6993,7 +6993,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all users with member privileges for a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (ResourceMembers)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetBucketsIDMembersAsyncWithIRestResponse (string bucketID, string zapTraceSpan = null)
@@ -7046,7 +7046,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all owners of a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ResourceOwners</returns>
         public ResourceOwners GetBucketsIDOwners (string bucketID, string zapTraceSpan = null)
@@ -7059,7 +7059,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all owners of a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwners</returns>
         public ApiResponse< ResourceOwners > GetBucketsIDOwnersWithHttpInfo (string bucketID, string zapTraceSpan = null)
@@ -7116,7 +7116,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all owners of a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwners</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetBucketsIDOwnersWithIRestResponseAsync (string bucketID, string zapTraceSpan = null)
@@ -7171,7 +7171,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all owners of a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwners</returns>
         public IRestResponse GetBucketsIDOwnersWithIRestResponse (string bucketID, string zapTraceSpan = null)
@@ -7226,7 +7226,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all owners of a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwners</returns>
         public RestRequest GetBucketsIDOwnersWithRestRequest (string bucketID, string zapTraceSpan = null)
@@ -7270,7 +7270,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all owners of a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ResourceOwners</returns>
         public async System.Threading.Tasks.Task<ResourceOwners> GetBucketsIDOwnersAsync (string bucketID, string zapTraceSpan = null)
@@ -7284,7 +7284,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all owners of a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (ResourceOwners)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<ResourceOwners>> GetBucketsIDOwnersAsyncWithHttpInfo (string bucketID, string zapTraceSpan = null)
@@ -7309,7 +7309,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all owners of a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
+        /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (ResourceOwners)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetBucketsIDOwnersAsyncWithIRestResponse (string bucketID, string zapTraceSpan = null)
@@ -7362,7 +7362,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all dashboard members 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="dashboardID">The dashboard ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ResourceMembers</returns>
         public ResourceMembers GetDashboardsIDMembers (string dashboardID, string zapTraceSpan = null)
@@ -7375,7 +7375,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all dashboard members 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="dashboardID">The dashboard ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMembers</returns>
         public ApiResponse< ResourceMembers > GetDashboardsIDMembersWithHttpInfo (string dashboardID, string zapTraceSpan = null)
@@ -7432,7 +7432,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all dashboard members 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="dashboardID">The dashboard ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMembers</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetDashboardsIDMembersWithIRestResponseAsync (string dashboardID, string zapTraceSpan = null)
@@ -7487,7 +7487,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all dashboard members 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="dashboardID">The dashboard ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMembers</returns>
         public IRestResponse GetDashboardsIDMembersWithIRestResponse (string dashboardID, string zapTraceSpan = null)
@@ -7542,7 +7542,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all dashboard members 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="dashboardID">The dashboard ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMembers</returns>
         public RestRequest GetDashboardsIDMembersWithRestRequest (string dashboardID, string zapTraceSpan = null)
@@ -7586,7 +7586,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all dashboard members 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="dashboardID">The dashboard ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ResourceMembers</returns>
         public async System.Threading.Tasks.Task<ResourceMembers> GetDashboardsIDMembersAsync (string dashboardID, string zapTraceSpan = null)
@@ -7600,7 +7600,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all dashboard members 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="dashboardID">The dashboard ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (ResourceMembers)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<ResourceMembers>> GetDashboardsIDMembersAsyncWithHttpInfo (string dashboardID, string zapTraceSpan = null)
@@ -7625,7 +7625,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all dashboard members 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="dashboardID">The dashboard ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (ResourceMembers)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetDashboardsIDMembersAsyncWithIRestResponse (string dashboardID, string zapTraceSpan = null)
@@ -7678,7 +7678,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all dashboard owners 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="dashboardID">The dashboard ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ResourceOwners</returns>
         public ResourceOwners GetDashboardsIDOwners (string dashboardID, string zapTraceSpan = null)
@@ -7691,7 +7691,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all dashboard owners 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="dashboardID">The dashboard ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwners</returns>
         public ApiResponse< ResourceOwners > GetDashboardsIDOwnersWithHttpInfo (string dashboardID, string zapTraceSpan = null)
@@ -7748,7 +7748,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all dashboard owners 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="dashboardID">The dashboard ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwners</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetDashboardsIDOwnersWithIRestResponseAsync (string dashboardID, string zapTraceSpan = null)
@@ -7803,7 +7803,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all dashboard owners 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="dashboardID">The dashboard ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwners</returns>
         public IRestResponse GetDashboardsIDOwnersWithIRestResponse (string dashboardID, string zapTraceSpan = null)
@@ -7858,7 +7858,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all dashboard owners 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="dashboardID">The dashboard ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwners</returns>
         public RestRequest GetDashboardsIDOwnersWithRestRequest (string dashboardID, string zapTraceSpan = null)
@@ -7902,7 +7902,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all dashboard owners 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="dashboardID">The dashboard ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ResourceOwners</returns>
         public async System.Threading.Tasks.Task<ResourceOwners> GetDashboardsIDOwnersAsync (string dashboardID, string zapTraceSpan = null)
@@ -7916,7 +7916,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all dashboard owners 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="dashboardID">The dashboard ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (ResourceOwners)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<ResourceOwners>> GetDashboardsIDOwnersAsyncWithHttpInfo (string dashboardID, string zapTraceSpan = null)
@@ -7941,7 +7941,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all dashboard owners 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of the dashboard</param>
+        /// <param name="dashboardID">The dashboard ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (ResourceOwners)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetDashboardsIDOwnersAsyncWithIRestResponse (string dashboardID, string zapTraceSpan = null)
@@ -7991,7 +7991,7 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Returns currently authenticated user 
+        /// Return the current authenticated user 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
@@ -8003,7 +8003,7 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Returns currently authenticated user 
+        /// Return the current authenticated user 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
@@ -8055,7 +8055,7 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Returns currently authenticated user 
+        /// Return the current authenticated user 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
@@ -8105,7 +8105,7 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Returns currently authenticated user 
+        /// Return the current authenticated user 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
@@ -8155,7 +8155,7 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// Returns currently authenticated user 
+        /// Return the current authenticated user 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
@@ -8194,7 +8194,7 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Returns currently authenticated user 
+        /// Return the current authenticated user 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
@@ -8207,7 +8207,7 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Returns currently authenticated user 
+        /// Return the current authenticated user 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
@@ -8231,7 +8231,7 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// Returns currently authenticated user 
+        /// Return the current authenticated user 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
@@ -8282,7 +8282,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all members of an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ResourceMembers</returns>
         public ResourceMembers GetOrgsIDMembers (string orgID, string zapTraceSpan = null)
@@ -8295,7 +8295,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all members of an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMembers</returns>
         public ApiResponse< ResourceMembers > GetOrgsIDMembersWithHttpInfo (string orgID, string zapTraceSpan = null)
@@ -8352,7 +8352,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all members of an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMembers</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetOrgsIDMembersWithIRestResponseAsync (string orgID, string zapTraceSpan = null)
@@ -8407,7 +8407,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all members of an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMembers</returns>
         public IRestResponse GetOrgsIDMembersWithIRestResponse (string orgID, string zapTraceSpan = null)
@@ -8462,7 +8462,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all members of an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMembers</returns>
         public RestRequest GetOrgsIDMembersWithRestRequest (string orgID, string zapTraceSpan = null)
@@ -8506,7 +8506,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all members of an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ResourceMembers</returns>
         public async System.Threading.Tasks.Task<ResourceMembers> GetOrgsIDMembersAsync (string orgID, string zapTraceSpan = null)
@@ -8520,7 +8520,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all members of an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (ResourceMembers)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<ResourceMembers>> GetOrgsIDMembersAsyncWithHttpInfo (string orgID, string zapTraceSpan = null)
@@ -8545,7 +8545,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all members of an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (ResourceMembers)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetOrgsIDMembersAsyncWithIRestResponse (string orgID, string zapTraceSpan = null)
@@ -8598,7 +8598,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all owners of an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ResourceOwners</returns>
         public ResourceOwners GetOrgsIDOwners (string orgID, string zapTraceSpan = null)
@@ -8611,7 +8611,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all owners of an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwners</returns>
         public ApiResponse< ResourceOwners > GetOrgsIDOwnersWithHttpInfo (string orgID, string zapTraceSpan = null)
@@ -8668,7 +8668,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all owners of an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwners</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetOrgsIDOwnersWithIRestResponseAsync (string orgID, string zapTraceSpan = null)
@@ -8723,7 +8723,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all owners of an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwners</returns>
         public IRestResponse GetOrgsIDOwnersWithIRestResponse (string orgID, string zapTraceSpan = null)
@@ -8778,7 +8778,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all owners of an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwners</returns>
         public RestRequest GetOrgsIDOwnersWithRestRequest (string orgID, string zapTraceSpan = null)
@@ -8822,7 +8822,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all owners of an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ResourceOwners</returns>
         public async System.Threading.Tasks.Task<ResourceOwners> GetOrgsIDOwnersAsync (string orgID, string zapTraceSpan = null)
@@ -8836,7 +8836,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all owners of an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (ResourceOwners)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<ResourceOwners>> GetOrgsIDOwnersAsyncWithHttpInfo (string orgID, string zapTraceSpan = null)
@@ -8861,7 +8861,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all owners of an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (ResourceOwners)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetOrgsIDOwnersAsyncWithIRestResponse (string orgID, string zapTraceSpan = null)
@@ -8914,7 +8914,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all users with member privileges for a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ResourceMembers</returns>
         public ResourceMembers GetScrapersIDMembers (string scraperTargetID, string zapTraceSpan = null)
@@ -8927,7 +8927,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all users with member privileges for a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMembers</returns>
         public ApiResponse< ResourceMembers > GetScrapersIDMembersWithHttpInfo (string scraperTargetID, string zapTraceSpan = null)
@@ -8984,7 +8984,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all users with member privileges for a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMembers</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetScrapersIDMembersWithIRestResponseAsync (string scraperTargetID, string zapTraceSpan = null)
@@ -9039,7 +9039,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all users with member privileges for a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMembers</returns>
         public IRestResponse GetScrapersIDMembersWithIRestResponse (string scraperTargetID, string zapTraceSpan = null)
@@ -9094,7 +9094,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all users with member privileges for a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMembers</returns>
         public RestRequest GetScrapersIDMembersWithRestRequest (string scraperTargetID, string zapTraceSpan = null)
@@ -9138,7 +9138,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all users with member privileges for a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ResourceMembers</returns>
         public async System.Threading.Tasks.Task<ResourceMembers> GetScrapersIDMembersAsync (string scraperTargetID, string zapTraceSpan = null)
@@ -9152,7 +9152,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all users with member privileges for a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (ResourceMembers)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<ResourceMembers>> GetScrapersIDMembersAsyncWithHttpInfo (string scraperTargetID, string zapTraceSpan = null)
@@ -9177,7 +9177,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all users with member privileges for a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (ResourceMembers)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetScrapersIDMembersAsyncWithIRestResponse (string scraperTargetID, string zapTraceSpan = null)
@@ -9230,7 +9230,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all owners of a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ResourceOwners</returns>
         public ResourceOwners GetScrapersIDOwners (string scraperTargetID, string zapTraceSpan = null)
@@ -9243,7 +9243,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all owners of a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwners</returns>
         public ApiResponse< ResourceOwners > GetScrapersIDOwnersWithHttpInfo (string scraperTargetID, string zapTraceSpan = null)
@@ -9300,7 +9300,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all owners of a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwners</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetScrapersIDOwnersWithIRestResponseAsync (string scraperTargetID, string zapTraceSpan = null)
@@ -9355,7 +9355,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all owners of a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwners</returns>
         public IRestResponse GetScrapersIDOwnersWithIRestResponse (string scraperTargetID, string zapTraceSpan = null)
@@ -9410,7 +9410,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all owners of a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwners</returns>
         public RestRequest GetScrapersIDOwnersWithRestRequest (string scraperTargetID, string zapTraceSpan = null)
@@ -9454,7 +9454,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all owners of a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ResourceOwners</returns>
         public async System.Threading.Tasks.Task<ResourceOwners> GetScrapersIDOwnersAsync (string scraperTargetID, string zapTraceSpan = null)
@@ -9468,7 +9468,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all owners of a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (ResourceOwners)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<ResourceOwners>> GetScrapersIDOwnersAsyncWithHttpInfo (string scraperTargetID, string zapTraceSpan = null)
@@ -9493,7 +9493,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all owners of a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (ResourceOwners)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetScrapersIDOwnersAsyncWithIRestResponse (string scraperTargetID, string zapTraceSpan = null)
@@ -9546,7 +9546,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all task members 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ResourceMembers</returns>
         public ResourceMembers GetTasksIDMembers (string taskID, string zapTraceSpan = null)
@@ -9559,7 +9559,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all task members 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMembers</returns>
         public ApiResponse< ResourceMembers > GetTasksIDMembersWithHttpInfo (string taskID, string zapTraceSpan = null)
@@ -9616,7 +9616,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all task members 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMembers</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetTasksIDMembersWithIRestResponseAsync (string taskID, string zapTraceSpan = null)
@@ -9671,7 +9671,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all task members 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMembers</returns>
         public IRestResponse GetTasksIDMembersWithIRestResponse (string taskID, string zapTraceSpan = null)
@@ -9726,7 +9726,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all task members 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMembers</returns>
         public RestRequest GetTasksIDMembersWithRestRequest (string taskID, string zapTraceSpan = null)
@@ -9770,7 +9770,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all task members 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ResourceMembers</returns>
         public async System.Threading.Tasks.Task<ResourceMembers> GetTasksIDMembersAsync (string taskID, string zapTraceSpan = null)
@@ -9784,7 +9784,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all task members 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (ResourceMembers)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<ResourceMembers>> GetTasksIDMembersAsyncWithHttpInfo (string taskID, string zapTraceSpan = null)
@@ -9809,7 +9809,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all task members 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (ResourceMembers)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetTasksIDMembersAsyncWithIRestResponse (string taskID, string zapTraceSpan = null)
@@ -9859,10 +9859,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// List all task owners 
+        /// List all owners of a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ResourceOwners</returns>
         public ResourceOwners GetTasksIDOwners (string taskID, string zapTraceSpan = null)
@@ -9872,10 +9872,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// List all task owners 
+        /// List all owners of a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwners</returns>
         public ApiResponse< ResourceOwners > GetTasksIDOwnersWithHttpInfo (string taskID, string zapTraceSpan = null)
@@ -9929,10 +9929,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// List all task owners 
+        /// List all owners of a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwners</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetTasksIDOwnersWithIRestResponseAsync (string taskID, string zapTraceSpan = null)
@@ -9984,10 +9984,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// List all task owners 
+        /// List all owners of a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwners</returns>
         public IRestResponse GetTasksIDOwnersWithIRestResponse (string taskID, string zapTraceSpan = null)
@@ -10039,10 +10039,10 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// List all task owners 
+        /// List all owners of a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwners</returns>
         public RestRequest GetTasksIDOwnersWithRestRequest (string taskID, string zapTraceSpan = null)
@@ -10083,10 +10083,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// List all task owners 
+        /// List all owners of a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ResourceOwners</returns>
         public async System.Threading.Tasks.Task<ResourceOwners> GetTasksIDOwnersAsync (string taskID, string zapTraceSpan = null)
@@ -10097,10 +10097,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// List all task owners 
+        /// List all owners of a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (ResourceOwners)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<ResourceOwners>> GetTasksIDOwnersAsyncWithHttpInfo (string taskID, string zapTraceSpan = null)
@@ -10122,10 +10122,10 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// List all task owners 
+        /// List all owners of a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
+        /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (ResourceOwners)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetTasksIDOwnersAsyncWithIRestResponse (string taskID, string zapTraceSpan = null)
@@ -10175,10 +10175,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// List all users with member privileges for a telegraf config 
+        /// List all users with member privileges for a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ResourceMembers</returns>
         public ResourceMembers GetTelegrafsIDMembers (string telegrafID, string zapTraceSpan = null)
@@ -10188,10 +10188,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// List all users with member privileges for a telegraf config 
+        /// List all users with member privileges for a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMembers</returns>
         public ApiResponse< ResourceMembers > GetTelegrafsIDMembersWithHttpInfo (string telegrafID, string zapTraceSpan = null)
@@ -10245,10 +10245,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// List all users with member privileges for a telegraf config 
+        /// List all users with member privileges for a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMembers</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetTelegrafsIDMembersWithIRestResponseAsync (string telegrafID, string zapTraceSpan = null)
@@ -10300,10 +10300,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// List all users with member privileges for a telegraf config 
+        /// List all users with member privileges for a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMembers</returns>
         public IRestResponse GetTelegrafsIDMembersWithIRestResponse (string telegrafID, string zapTraceSpan = null)
@@ -10355,10 +10355,10 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// List all users with member privileges for a telegraf config 
+        /// List all users with member privileges for a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMembers</returns>
         public RestRequest GetTelegrafsIDMembersWithRestRequest (string telegrafID, string zapTraceSpan = null)
@@ -10399,10 +10399,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// List all users with member privileges for a telegraf config 
+        /// List all users with member privileges for a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ResourceMembers</returns>
         public async System.Threading.Tasks.Task<ResourceMembers> GetTelegrafsIDMembersAsync (string telegrafID, string zapTraceSpan = null)
@@ -10413,10 +10413,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// List all users with member privileges for a telegraf config 
+        /// List all users with member privileges for a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (ResourceMembers)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<ResourceMembers>> GetTelegrafsIDMembersAsyncWithHttpInfo (string telegrafID, string zapTraceSpan = null)
@@ -10438,10 +10438,10 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// List all users with member privileges for a telegraf config 
+        /// List all users with member privileges for a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (ResourceMembers)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetTelegrafsIDMembersAsyncWithIRestResponse (string telegrafID, string zapTraceSpan = null)
@@ -10491,10 +10491,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// List all owners of a telegraf config 
+        /// List all owners of a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ResourceOwners</returns>
         public ResourceOwners GetTelegrafsIDOwners (string telegrafID, string zapTraceSpan = null)
@@ -10504,10 +10504,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// List all owners of a telegraf config 
+        /// List all owners of a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwners</returns>
         public ApiResponse< ResourceOwners > GetTelegrafsIDOwnersWithHttpInfo (string telegrafID, string zapTraceSpan = null)
@@ -10561,10 +10561,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// List all owners of a telegraf config 
+        /// List all owners of a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwners</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetTelegrafsIDOwnersWithIRestResponseAsync (string telegrafID, string zapTraceSpan = null)
@@ -10616,10 +10616,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// List all owners of a telegraf config 
+        /// List all owners of a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwners</returns>
         public IRestResponse GetTelegrafsIDOwnersWithIRestResponse (string telegrafID, string zapTraceSpan = null)
@@ -10671,10 +10671,10 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// List all owners of a telegraf config 
+        /// List all owners of a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwners</returns>
         public RestRequest GetTelegrafsIDOwnersWithRestRequest (string telegrafID, string zapTraceSpan = null)
@@ -10715,10 +10715,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// List all owners of a telegraf config 
+        /// List all owners of a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ResourceOwners</returns>
         public async System.Threading.Tasks.Task<ResourceOwners> GetTelegrafsIDOwnersAsync (string telegrafID, string zapTraceSpan = null)
@@ -10729,10 +10729,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// List all owners of a telegraf config 
+        /// List all owners of a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (ResourceOwners)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<ResourceOwners>> GetTelegrafsIDOwnersAsyncWithHttpInfo (string telegrafID, string zapTraceSpan = null)
@@ -10754,10 +10754,10 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// List all owners of a telegraf config 
+        /// List all owners of a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (ResourceOwners)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetTelegrafsIDOwnersAsyncWithIRestResponse (string telegrafID, string zapTraceSpan = null)
@@ -11098,7 +11098,7 @@ namespace InfluxDB.Client.Api.Service
         /// Retrieve a user 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of user to get</param>
+        /// <param name="userID">The user ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>User</returns>
         public User GetUsersID (string userID, string zapTraceSpan = null)
@@ -11111,7 +11111,7 @@ namespace InfluxDB.Client.Api.Service
         /// Retrieve a user 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of user to get</param>
+        /// <param name="userID">The user ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of User</returns>
         public ApiResponse< User > GetUsersIDWithHttpInfo (string userID, string zapTraceSpan = null)
@@ -11168,7 +11168,7 @@ namespace InfluxDB.Client.Api.Service
         /// Retrieve a user 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of user to get</param>
+        /// <param name="userID">The user ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of User</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetUsersIDWithIRestResponseAsync (string userID, string zapTraceSpan = null)
@@ -11223,7 +11223,7 @@ namespace InfluxDB.Client.Api.Service
         /// Retrieve a user 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of user to get</param>
+        /// <param name="userID">The user ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of User</returns>
         public IRestResponse GetUsersIDWithIRestResponse (string userID, string zapTraceSpan = null)
@@ -11278,7 +11278,7 @@ namespace InfluxDB.Client.Api.Service
         /// Retrieve a user 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of user to get</param>
+        /// <param name="userID">The user ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of User</returns>
         public RestRequest GetUsersIDWithRestRequest (string userID, string zapTraceSpan = null)
@@ -11322,7 +11322,7 @@ namespace InfluxDB.Client.Api.Service
         /// Retrieve a user 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of user to get</param>
+        /// <param name="userID">The user ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of User</returns>
         public async System.Threading.Tasks.Task<User> GetUsersIDAsync (string userID, string zapTraceSpan = null)
@@ -11336,7 +11336,7 @@ namespace InfluxDB.Client.Api.Service
         /// Retrieve a user 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of user to get</param>
+        /// <param name="userID">The user ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (User)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<User>> GetUsersIDAsyncWithHttpInfo (string userID, string zapTraceSpan = null)
@@ -11361,7 +11361,7 @@ namespace InfluxDB.Client.Api.Service
         /// Retrieve a user 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of user to get</param>
+        /// <param name="userID">The user ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (User)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetUsersIDAsyncWithIRestResponse (string userID, string zapTraceSpan = null)
@@ -11414,7 +11414,7 @@ namespace InfluxDB.Client.Api.Service
         /// Retrieve operation logs for a user 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of the user</param>
+        /// <param name="userID">The user ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
@@ -11429,7 +11429,7 @@ namespace InfluxDB.Client.Api.Service
         /// Retrieve operation logs for a user 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of the user</param>
+        /// <param name="userID">The user ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
@@ -11490,7 +11490,7 @@ namespace InfluxDB.Client.Api.Service
         /// Retrieve operation logs for a user 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of the user</param>
+        /// <param name="userID">The user ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
@@ -11549,7 +11549,7 @@ namespace InfluxDB.Client.Api.Service
         /// Retrieve operation logs for a user 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of the user</param>
+        /// <param name="userID">The user ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
@@ -11608,7 +11608,7 @@ namespace InfluxDB.Client.Api.Service
         /// Retrieve operation logs for a user 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of the user</param>
+        /// <param name="userID">The user ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
@@ -11656,7 +11656,7 @@ namespace InfluxDB.Client.Api.Service
         /// Retrieve operation logs for a user 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of the user</param>
+        /// <param name="userID">The user ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
@@ -11672,7 +11672,7 @@ namespace InfluxDB.Client.Api.Service
         /// Retrieve operation logs for a user 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of the user</param>
+        /// <param name="userID">The user ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
@@ -11699,7 +11699,7 @@ namespace InfluxDB.Client.Api.Service
         /// Retrieve operation logs for a user 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of the user</param>
+        /// <param name="userID">The user ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
@@ -11756,8 +11756,8 @@ namespace InfluxDB.Client.Api.Service
         /// Update a user 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of user to update</param>
-        /// <param name="user">user update to apply</param>
+        /// <param name="userID">The ID of the user to update.</param>
+        /// <param name="user">User update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>User</returns>
         public User PatchUsersID (string userID, User user, string zapTraceSpan = null)
@@ -11770,8 +11770,8 @@ namespace InfluxDB.Client.Api.Service
         /// Update a user 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of user to update</param>
-        /// <param name="user">user update to apply</param>
+        /// <param name="userID">The ID of the user to update.</param>
+        /// <param name="user">User update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of User</returns>
         public ApiResponse< User > PatchUsersIDWithHttpInfo (string userID, User user, string zapTraceSpan = null)
@@ -11840,8 +11840,8 @@ namespace InfluxDB.Client.Api.Service
         /// Update a user 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of user to update</param>
-        /// <param name="user">user update to apply</param>
+        /// <param name="userID">The ID of the user to update.</param>
+        /// <param name="user">User update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of User</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PatchUsersIDWithIRestResponseAsync (string userID, User user, string zapTraceSpan = null)
@@ -11908,8 +11908,8 @@ namespace InfluxDB.Client.Api.Service
         /// Update a user 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of user to update</param>
-        /// <param name="user">user update to apply</param>
+        /// <param name="userID">The ID of the user to update.</param>
+        /// <param name="user">User update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of User</returns>
         public IRestResponse PatchUsersIDWithIRestResponse (string userID, User user, string zapTraceSpan = null)
@@ -11976,8 +11976,8 @@ namespace InfluxDB.Client.Api.Service
         /// Update a user 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of user to update</param>
-        /// <param name="user">user update to apply</param>
+        /// <param name="userID">The ID of the user to update.</param>
+        /// <param name="user">User update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of User</returns>
         public RestRequest PatchUsersIDWithRestRequest (string userID, User user, string zapTraceSpan = null)
@@ -12033,8 +12033,8 @@ namespace InfluxDB.Client.Api.Service
         /// Update a user 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of user to update</param>
-        /// <param name="user">user update to apply</param>
+        /// <param name="userID">The ID of the user to update.</param>
+        /// <param name="user">User update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of User</returns>
         public async System.Threading.Tasks.Task<User> PatchUsersIDAsync (string userID, User user, string zapTraceSpan = null)
@@ -12048,8 +12048,8 @@ namespace InfluxDB.Client.Api.Service
         /// Update a user 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of user to update</param>
-        /// <param name="user">user update to apply</param>
+        /// <param name="userID">The ID of the user to update.</param>
+        /// <param name="user">User update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (User)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<User>> PatchUsersIDAsyncWithHttpInfo (string userID, User user, string zapTraceSpan = null)
@@ -12074,8 +12074,8 @@ namespace InfluxDB.Client.Api.Service
         /// Update a user 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of user to update</param>
-        /// <param name="user">user update to apply</param>
+        /// <param name="userID">The ID of the user to update.</param>
+        /// <param name="user">User update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (User)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PatchUsersIDAsyncWithIRestResponse (string userID, User user, string zapTraceSpan = null)
@@ -12137,11 +12137,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add bucket member 
+        /// Add a member to a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="bucketID">The bucket ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ResourceMember</returns>
         public ResourceMember PostBucketsIDMembers (string bucketID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -12151,11 +12151,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add bucket member 
+        /// Add a member to a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="bucketID">The bucket ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMember</returns>
         public ApiResponse< ResourceMember > PostBucketsIDMembersWithHttpInfo (string bucketID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -12221,11 +12221,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add bucket member 
+        /// Add a member to a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="bucketID">The bucket ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMember</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PostBucketsIDMembersWithIRestResponseAsync (string bucketID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -12289,11 +12289,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add bucket member 
+        /// Add a member to a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="bucketID">The bucket ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMember</returns>
         public IRestResponse PostBucketsIDMembersWithIRestResponse (string bucketID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -12357,11 +12357,11 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// Add bucket member 
+        /// Add a member to a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="bucketID">The bucket ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMember</returns>
         public RestRequest PostBucketsIDMembersWithRestRequest (string bucketID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -12414,11 +12414,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add bucket member 
+        /// Add a member to a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="bucketID">The bucket ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ResourceMember</returns>
         public async System.Threading.Tasks.Task<ResourceMember> PostBucketsIDMembersAsync (string bucketID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -12429,11 +12429,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add bucket member 
+        /// Add a member to a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="bucketID">The bucket ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (ResourceMember)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<ResourceMember>> PostBucketsIDMembersAsyncWithHttpInfo (string bucketID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -12455,11 +12455,11 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// Add bucket member 
+        /// Add a member to a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="bucketID">The bucket ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (ResourceMember)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PostBucketsIDMembersAsyncWithIRestResponse (string bucketID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -12521,11 +12521,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add bucket owner 
+        /// Add an owner to a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="bucketID">The bucket ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ResourceOwner</returns>
         public ResourceOwner PostBucketsIDOwners (string bucketID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -12535,11 +12535,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add bucket owner 
+        /// Add an owner to a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="bucketID">The bucket ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwner</returns>
         public ApiResponse< ResourceOwner > PostBucketsIDOwnersWithHttpInfo (string bucketID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -12605,11 +12605,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add bucket owner 
+        /// Add an owner to a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="bucketID">The bucket ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwner</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PostBucketsIDOwnersWithIRestResponseAsync (string bucketID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -12673,11 +12673,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add bucket owner 
+        /// Add an owner to a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="bucketID">The bucket ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwner</returns>
         public IRestResponse PostBucketsIDOwnersWithIRestResponse (string bucketID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -12741,11 +12741,11 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// Add bucket owner 
+        /// Add an owner to a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="bucketID">The bucket ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwner</returns>
         public RestRequest PostBucketsIDOwnersWithRestRequest (string bucketID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -12798,11 +12798,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add bucket owner 
+        /// Add an owner to a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="bucketID">The bucket ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ResourceOwner</returns>
         public async System.Threading.Tasks.Task<ResourceOwner> PostBucketsIDOwnersAsync (string bucketID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -12813,11 +12813,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add bucket owner 
+        /// Add an owner to a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="bucketID">The bucket ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (ResourceOwner)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<ResourceOwner>> PostBucketsIDOwnersAsyncWithHttpInfo (string bucketID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -12839,11 +12839,11 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// Add bucket owner 
+        /// Add an owner to a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketID">ID of the bucket</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="bucketID">The bucket ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (ResourceOwner)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PostBucketsIDOwnersAsyncWithIRestResponse (string bucketID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -12905,11 +12905,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add dashboard member 
+        /// Add a member to a dashboard 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of the dashboard</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="dashboardID">The dashboard ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ResourceMember</returns>
         public ResourceMember PostDashboardsIDMembers (string dashboardID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -12919,11 +12919,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add dashboard member 
+        /// Add a member to a dashboard 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of the dashboard</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="dashboardID">The dashboard ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMember</returns>
         public ApiResponse< ResourceMember > PostDashboardsIDMembersWithHttpInfo (string dashboardID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -12989,11 +12989,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add dashboard member 
+        /// Add a member to a dashboard 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of the dashboard</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="dashboardID">The dashboard ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMember</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PostDashboardsIDMembersWithIRestResponseAsync (string dashboardID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -13057,11 +13057,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add dashboard member 
+        /// Add a member to a dashboard 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of the dashboard</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="dashboardID">The dashboard ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMember</returns>
         public IRestResponse PostDashboardsIDMembersWithIRestResponse (string dashboardID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -13125,11 +13125,11 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// Add dashboard member 
+        /// Add a member to a dashboard 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of the dashboard</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="dashboardID">The dashboard ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMember</returns>
         public RestRequest PostDashboardsIDMembersWithRestRequest (string dashboardID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -13182,11 +13182,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add dashboard member 
+        /// Add a member to a dashboard 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of the dashboard</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="dashboardID">The dashboard ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ResourceMember</returns>
         public async System.Threading.Tasks.Task<ResourceMember> PostDashboardsIDMembersAsync (string dashboardID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -13197,11 +13197,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add dashboard member 
+        /// Add a member to a dashboard 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of the dashboard</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="dashboardID">The dashboard ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (ResourceMember)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<ResourceMember>> PostDashboardsIDMembersAsyncWithHttpInfo (string dashboardID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -13223,11 +13223,11 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// Add dashboard member 
+        /// Add a member to a dashboard 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of the dashboard</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="dashboardID">The dashboard ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (ResourceMember)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PostDashboardsIDMembersAsyncWithIRestResponse (string dashboardID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -13289,11 +13289,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add dashboard owner 
+        /// Add an owner to a dashboard 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of the dashboard</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="dashboardID">The dashboard ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ResourceOwner</returns>
         public ResourceOwner PostDashboardsIDOwners (string dashboardID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -13303,11 +13303,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add dashboard owner 
+        /// Add an owner to a dashboard 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of the dashboard</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="dashboardID">The dashboard ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwner</returns>
         public ApiResponse< ResourceOwner > PostDashboardsIDOwnersWithHttpInfo (string dashboardID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -13373,11 +13373,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add dashboard owner 
+        /// Add an owner to a dashboard 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of the dashboard</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="dashboardID">The dashboard ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwner</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PostDashboardsIDOwnersWithIRestResponseAsync (string dashboardID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -13441,11 +13441,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add dashboard owner 
+        /// Add an owner to a dashboard 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of the dashboard</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="dashboardID">The dashboard ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwner</returns>
         public IRestResponse PostDashboardsIDOwnersWithIRestResponse (string dashboardID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -13509,11 +13509,11 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// Add dashboard owner 
+        /// Add an owner to a dashboard 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of the dashboard</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="dashboardID">The dashboard ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwner</returns>
         public RestRequest PostDashboardsIDOwnersWithRestRequest (string dashboardID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -13566,11 +13566,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add dashboard owner 
+        /// Add an owner to a dashboard 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of the dashboard</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="dashboardID">The dashboard ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ResourceOwner</returns>
         public async System.Threading.Tasks.Task<ResourceOwner> PostDashboardsIDOwnersAsync (string dashboardID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -13581,11 +13581,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add dashboard owner 
+        /// Add an owner to a dashboard 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of the dashboard</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="dashboardID">The dashboard ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (ResourceOwner)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<ResourceOwner>> PostDashboardsIDOwnersAsyncWithHttpInfo (string dashboardID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -13607,11 +13607,11 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// Add dashboard owner 
+        /// Add an owner to a dashboard 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of the dashboard</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="dashboardID">The dashboard ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (ResourceOwner)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PostDashboardsIDOwnersAsyncWithIRestResponse (string dashboardID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -13673,11 +13673,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add organization member 
+        /// Add a member to an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ResourceMember</returns>
         public ResourceMember PostOrgsIDMembers (string orgID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -13687,11 +13687,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add organization member 
+        /// Add a member to an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMember</returns>
         public ApiResponse< ResourceMember > PostOrgsIDMembersWithHttpInfo (string orgID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -13757,11 +13757,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add organization member 
+        /// Add a member to an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMember</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PostOrgsIDMembersWithIRestResponseAsync (string orgID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -13825,11 +13825,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add organization member 
+        /// Add a member to an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMember</returns>
         public IRestResponse PostOrgsIDMembersWithIRestResponse (string orgID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -13893,11 +13893,11 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// Add organization member 
+        /// Add a member to an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMember</returns>
         public RestRequest PostOrgsIDMembersWithRestRequest (string orgID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -13950,11 +13950,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add organization member 
+        /// Add a member to an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ResourceMember</returns>
         public async System.Threading.Tasks.Task<ResourceMember> PostOrgsIDMembersAsync (string orgID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -13965,11 +13965,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add organization member 
+        /// Add a member to an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (ResourceMember)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<ResourceMember>> PostOrgsIDMembersAsyncWithHttpInfo (string orgID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -13991,11 +13991,11 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// Add organization member 
+        /// Add a member to an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (ResourceMember)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PostOrgsIDMembersAsyncWithIRestResponse (string orgID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -14057,11 +14057,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add organization owner 
+        /// Add an owner to an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ResourceOwner</returns>
         public ResourceOwner PostOrgsIDOwners (string orgID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -14071,11 +14071,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add organization owner 
+        /// Add an owner to an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwner</returns>
         public ApiResponse< ResourceOwner > PostOrgsIDOwnersWithHttpInfo (string orgID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -14141,11 +14141,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add organization owner 
+        /// Add an owner to an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwner</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PostOrgsIDOwnersWithIRestResponseAsync (string orgID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -14209,11 +14209,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add organization owner 
+        /// Add an owner to an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwner</returns>
         public IRestResponse PostOrgsIDOwnersWithIRestResponse (string orgID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -14277,11 +14277,11 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// Add organization owner 
+        /// Add an owner to an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwner</returns>
         public RestRequest PostOrgsIDOwnersWithRestRequest (string orgID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -14334,11 +14334,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add organization owner 
+        /// Add an owner to an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ResourceOwner</returns>
         public async System.Threading.Tasks.Task<ResourceOwner> PostOrgsIDOwnersAsync (string orgID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -14349,11 +14349,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add organization owner 
+        /// Add an owner to an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (ResourceOwner)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<ResourceOwner>> PostOrgsIDOwnersAsyncWithHttpInfo (string orgID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -14375,11 +14375,11 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// Add organization owner 
+        /// Add an owner to an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (ResourceOwner)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PostOrgsIDOwnersAsyncWithIRestResponse (string orgID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -14441,11 +14441,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add scraper target member 
+        /// Add a member to a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ResourceMember</returns>
         public ResourceMember PostScrapersIDMembers (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -14455,11 +14455,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add scraper target member 
+        /// Add a member to a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMember</returns>
         public ApiResponse< ResourceMember > PostScrapersIDMembersWithHttpInfo (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -14525,11 +14525,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add scraper target member 
+        /// Add a member to a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMember</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PostScrapersIDMembersWithIRestResponseAsync (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -14593,11 +14593,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add scraper target member 
+        /// Add a member to a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMember</returns>
         public IRestResponse PostScrapersIDMembersWithIRestResponse (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -14661,11 +14661,11 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// Add scraper target member 
+        /// Add a member to a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMember</returns>
         public RestRequest PostScrapersIDMembersWithRestRequest (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -14718,11 +14718,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add scraper target member 
+        /// Add a member to a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ResourceMember</returns>
         public async System.Threading.Tasks.Task<ResourceMember> PostScrapersIDMembersAsync (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -14733,11 +14733,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add scraper target member 
+        /// Add a member to a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (ResourceMember)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<ResourceMember>> PostScrapersIDMembersAsyncWithHttpInfo (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -14759,11 +14759,11 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// Add scraper target member 
+        /// Add a member to a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (ResourceMember)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PostScrapersIDMembersAsyncWithIRestResponse (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -14825,11 +14825,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add scraper target owner 
+        /// Add an owner to a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ResourceOwner</returns>
         public ResourceOwner PostScrapersIDOwners (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -14839,11 +14839,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add scraper target owner 
+        /// Add an owner to a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwner</returns>
         public ApiResponse< ResourceOwner > PostScrapersIDOwnersWithHttpInfo (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -14909,11 +14909,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add scraper target owner 
+        /// Add an owner to a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwner</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PostScrapersIDOwnersWithIRestResponseAsync (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -14977,11 +14977,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add scraper target owner 
+        /// Add an owner to a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwner</returns>
         public IRestResponse PostScrapersIDOwnersWithIRestResponse (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -15045,11 +15045,11 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// Add scraper target owner 
+        /// Add an owner to a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwner</returns>
         public RestRequest PostScrapersIDOwnersWithRestRequest (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -15102,11 +15102,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add scraper target owner 
+        /// Add an owner to a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ResourceOwner</returns>
         public async System.Threading.Tasks.Task<ResourceOwner> PostScrapersIDOwnersAsync (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -15117,11 +15117,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add scraper target owner 
+        /// Add an owner to a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (ResourceOwner)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<ResourceOwner>> PostScrapersIDOwnersAsyncWithHttpInfo (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -15143,11 +15143,11 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// Add scraper target owner 
+        /// Add an owner to a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (ResourceOwner)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PostScrapersIDOwnersAsyncWithIRestResponse (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -15209,11 +15209,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add task member 
+        /// Add a member to a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ResourceMember</returns>
         public ResourceMember PostTasksIDMembers (string taskID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -15223,11 +15223,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add task member 
+        /// Add a member to a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMember</returns>
         public ApiResponse< ResourceMember > PostTasksIDMembersWithHttpInfo (string taskID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -15293,11 +15293,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add task member 
+        /// Add a member to a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMember</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PostTasksIDMembersWithIRestResponseAsync (string taskID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -15361,11 +15361,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add task member 
+        /// Add a member to a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMember</returns>
         public IRestResponse PostTasksIDMembersWithIRestResponse (string taskID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -15429,11 +15429,11 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// Add task member 
+        /// Add a member to a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMember</returns>
         public RestRequest PostTasksIDMembersWithRestRequest (string taskID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -15486,11 +15486,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add task member 
+        /// Add a member to a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ResourceMember</returns>
         public async System.Threading.Tasks.Task<ResourceMember> PostTasksIDMembersAsync (string taskID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -15501,11 +15501,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add task member 
+        /// Add a member to a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (ResourceMember)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<ResourceMember>> PostTasksIDMembersAsyncWithHttpInfo (string taskID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -15527,11 +15527,11 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// Add task member 
+        /// Add a member to a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (ResourceMember)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PostTasksIDMembersAsyncWithIRestResponse (string taskID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -15593,11 +15593,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add task owner 
+        /// Add an owner to a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ResourceOwner</returns>
         public ResourceOwner PostTasksIDOwners (string taskID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -15607,11 +15607,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add task owner 
+        /// Add an owner to a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwner</returns>
         public ApiResponse< ResourceOwner > PostTasksIDOwnersWithHttpInfo (string taskID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -15677,11 +15677,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add task owner 
+        /// Add an owner to a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwner</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PostTasksIDOwnersWithIRestResponseAsync (string taskID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -15745,11 +15745,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add task owner 
+        /// Add an owner to a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwner</returns>
         public IRestResponse PostTasksIDOwnersWithIRestResponse (string taskID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -15813,11 +15813,11 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// Add task owner 
+        /// Add an owner to a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwner</returns>
         public RestRequest PostTasksIDOwnersWithRestRequest (string taskID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -15870,11 +15870,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add task owner 
+        /// Add an owner to a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ResourceOwner</returns>
         public async System.Threading.Tasks.Task<ResourceOwner> PostTasksIDOwnersAsync (string taskID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -15885,11 +15885,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add task owner 
+        /// Add an owner to a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (ResourceOwner)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<ResourceOwner>> PostTasksIDOwnersAsyncWithHttpInfo (string taskID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -15911,11 +15911,11 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// Add task owner 
+        /// Add an owner to a task 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="taskID">ID of the task</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="taskID">The task ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (ResourceOwner)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PostTasksIDOwnersAsyncWithIRestResponse (string taskID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -15977,11 +15977,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add telegraf config member 
+        /// Add a member to a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ResourceMember</returns>
         public ResourceMember PostTelegrafsIDMembers (string telegrafID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -15991,11 +15991,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add telegraf config member 
+        /// Add a member to a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMember</returns>
         public ApiResponse< ResourceMember > PostTelegrafsIDMembersWithHttpInfo (string telegrafID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -16061,11 +16061,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add telegraf config member 
+        /// Add a member to a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMember</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PostTelegrafsIDMembersWithIRestResponseAsync (string telegrafID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -16129,11 +16129,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add telegraf config member 
+        /// Add a member to a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMember</returns>
         public IRestResponse PostTelegrafsIDMembersWithIRestResponse (string telegrafID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -16197,11 +16197,11 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// Add telegraf config member 
+        /// Add a member to a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMember</returns>
         public RestRequest PostTelegrafsIDMembersWithRestRequest (string telegrafID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -16254,11 +16254,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add telegraf config member 
+        /// Add a member to a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ResourceMember</returns>
         public async System.Threading.Tasks.Task<ResourceMember> PostTelegrafsIDMembersAsync (string telegrafID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -16269,11 +16269,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add telegraf config member 
+        /// Add a member to a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (ResourceMember)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<ResourceMember>> PostTelegrafsIDMembersAsyncWithHttpInfo (string telegrafID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -16295,11 +16295,11 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// Add telegraf config member 
+        /// Add a member to a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (ResourceMember)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PostTelegrafsIDMembersAsyncWithIRestResponse (string telegrafID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -16361,11 +16361,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add telegraf config owner 
+        /// Add an owner to a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ResourceOwner</returns>
         public ResourceOwner PostTelegrafsIDOwners (string telegrafID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -16375,11 +16375,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add telegraf config owner 
+        /// Add an owner to a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwner</returns>
         public ApiResponse< ResourceOwner > PostTelegrafsIDOwnersWithHttpInfo (string telegrafID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -16445,11 +16445,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add telegraf config owner 
+        /// Add an owner to a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwner</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PostTelegrafsIDOwnersWithIRestResponseAsync (string telegrafID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -16513,11 +16513,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add telegraf config owner 
+        /// Add an owner to a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwner</returns>
         public IRestResponse PostTelegrafsIDOwnersWithIRestResponse (string telegrafID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -16581,11 +16581,11 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// Add telegraf config owner 
+        /// Add an owner to a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwner</returns>
         public RestRequest PostTelegrafsIDOwnersWithRestRequest (string telegrafID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -16638,11 +16638,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add telegraf config owner 
+        /// Add an owner to a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ResourceOwner</returns>
         public async System.Threading.Tasks.Task<ResourceOwner> PostTelegrafsIDOwnersAsync (string telegrafID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -16653,11 +16653,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add telegraf config owner 
+        /// Add an owner to a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (ResourceOwner)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<ResourceOwner>> PostTelegrafsIDOwnersAsyncWithHttpInfo (string telegrafID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -16679,11 +16679,11 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// Add telegraf config owner 
+        /// Add an owner to a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (ResourceOwner)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PostTelegrafsIDOwnersAsyncWithIRestResponse (string telegrafID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -16748,7 +16748,7 @@ namespace InfluxDB.Client.Api.Service
         /// Create a user 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="user">user to create</param>
+        /// <param name="user">User to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>User</returns>
         public User PostUsers (User user, string zapTraceSpan = null)
@@ -16761,7 +16761,7 @@ namespace InfluxDB.Client.Api.Service
         /// Create a user 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="user">user to create</param>
+        /// <param name="user">User to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of User</returns>
         public ApiResponse< User > PostUsersWithHttpInfo (User user, string zapTraceSpan = null)
@@ -16826,7 +16826,7 @@ namespace InfluxDB.Client.Api.Service
         /// Create a user 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="user">user to create</param>
+        /// <param name="user">User to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of User</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PostUsersWithIRestResponseAsync (User user, string zapTraceSpan = null)
@@ -16889,7 +16889,7 @@ namespace InfluxDB.Client.Api.Service
         /// Create a user 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="user">user to create</param>
+        /// <param name="user">User to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of User</returns>
         public IRestResponse PostUsersWithIRestResponse (User user, string zapTraceSpan = null)
@@ -16952,7 +16952,7 @@ namespace InfluxDB.Client.Api.Service
         /// Create a user 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="user">user to create</param>
+        /// <param name="user">User to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of User</returns>
         public RestRequest PostUsersWithRestRequest (User user, string zapTraceSpan = null)
@@ -17004,7 +17004,7 @@ namespace InfluxDB.Client.Api.Service
         /// Create a user 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="user">user to create</param>
+        /// <param name="user">User to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of User</returns>
         public async System.Threading.Tasks.Task<User> PostUsersAsync (User user, string zapTraceSpan = null)
@@ -17018,7 +17018,7 @@ namespace InfluxDB.Client.Api.Service
         /// Create a user 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="user">user to create</param>
+        /// <param name="user">User to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (User)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<User>> PostUsersAsyncWithHttpInfo (User user, string zapTraceSpan = null)
@@ -17043,7 +17043,7 @@ namespace InfluxDB.Client.Api.Service
         /// Create a user 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="user">user to create</param>
+        /// <param name="user">User to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (User)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PostUsersAsyncWithIRestResponse (User user, string zapTraceSpan = null)
@@ -17101,10 +17101,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Update password 
+        /// Update a password 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="passwordResetBody">new password</param>
+        /// <param name="passwordResetBody">New password</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="authorization">An auth credential for the Basic scheme (optional)</param>
         /// <returns></returns>
@@ -17114,10 +17114,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Update password 
+        /// Update a password 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="passwordResetBody">new password</param>
+        /// <param name="passwordResetBody">New password</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="authorization">An auth credential for the Basic scheme (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
@@ -17187,10 +17187,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Update password 
+        /// Update a password 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="passwordResetBody">new password</param>
+        /// <param name="passwordResetBody">New password</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="authorization">An auth credential for the Basic scheme (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
@@ -17258,10 +17258,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Update password 
+        /// Update a password 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="passwordResetBody">new password</param>
+        /// <param name="passwordResetBody">New password</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="authorization">An auth credential for the Basic scheme (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
@@ -17329,10 +17329,10 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// Update password 
+        /// Update a password 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="passwordResetBody">new password</param>
+        /// <param name="passwordResetBody">New password</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="authorization">An auth credential for the Basic scheme (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
@@ -17389,10 +17389,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Update password 
+        /// Update a password 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="passwordResetBody">new password</param>
+        /// <param name="passwordResetBody">New password</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="authorization">An auth credential for the Basic scheme (optional)</param>
         /// <returns>Task of void</returns>
@@ -17403,10 +17403,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Update password 
+        /// Update a password 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="passwordResetBody">new password</param>
+        /// <param name="passwordResetBody">New password</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="authorization">An auth credential for the Basic scheme (optional)</param>
         /// <returns>Task of ApiResponse</returns>
@@ -17429,10 +17429,10 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// Update password 
+        /// Update a password 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="passwordResetBody">new password</param>
+        /// <param name="passwordResetBody">New password</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="authorization">An auth credential for the Basic scheme (optional)</param>
         /// <returns>Task of IRestResponse</returns>
@@ -17498,11 +17498,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Update password 
+        /// Update a password 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of the user</param>
-        /// <param name="passwordResetBody">new password</param>
+        /// <param name="userID">The user ID.</param>
+        /// <param name="passwordResetBody">New password</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="authorization">An auth credential for the Basic scheme (optional)</param>
         /// <returns></returns>
@@ -17512,11 +17512,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Update password 
+        /// Update a password 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of the user</param>
-        /// <param name="passwordResetBody">new password</param>
+        /// <param name="userID">The user ID.</param>
+        /// <param name="passwordResetBody">New password</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="authorization">An auth credential for the Basic scheme (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
@@ -17590,11 +17590,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Update password 
+        /// Update a password 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of the user</param>
-        /// <param name="passwordResetBody">new password</param>
+        /// <param name="userID">The user ID.</param>
+        /// <param name="passwordResetBody">New password</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="authorization">An auth credential for the Basic scheme (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
@@ -17666,11 +17666,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Update password 
+        /// Update a password 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of the user</param>
-        /// <param name="passwordResetBody">new password</param>
+        /// <param name="userID">The user ID.</param>
+        /// <param name="passwordResetBody">New password</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="authorization">An auth credential for the Basic scheme (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
@@ -17742,11 +17742,11 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// Update password 
+        /// Update a password 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of the user</param>
-        /// <param name="passwordResetBody">new password</param>
+        /// <param name="userID">The user ID.</param>
+        /// <param name="passwordResetBody">New password</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="authorization">An auth credential for the Basic scheme (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
@@ -17807,11 +17807,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Update password 
+        /// Update a password 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of the user</param>
-        /// <param name="passwordResetBody">new password</param>
+        /// <param name="userID">The user ID.</param>
+        /// <param name="passwordResetBody">New password</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="authorization">An auth credential for the Basic scheme (optional)</param>
         /// <returns>Task of void</returns>
@@ -17822,11 +17822,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Update password 
+        /// Update a password 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of the user</param>
-        /// <param name="passwordResetBody">new password</param>
+        /// <param name="userID">The user ID.</param>
+        /// <param name="passwordResetBody">New password</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="authorization">An auth credential for the Basic scheme (optional)</param>
         /// <returns>Task of ApiResponse</returns>
@@ -17849,11 +17849,11 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// Update password 
+        /// Update a password 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of the user</param>
-        /// <param name="passwordResetBody">new password</param>
+        /// <param name="userID">The user ID.</param>
+        /// <param name="passwordResetBody">New password</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="authorization">An auth credential for the Basic scheme (optional)</param>
         /// <returns>Task of IRestResponse</returns>

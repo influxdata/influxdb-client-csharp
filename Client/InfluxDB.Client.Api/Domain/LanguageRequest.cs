@@ -24,7 +24,7 @@ using OpenAPIDateConverter = InfluxDB.Client.Api.Client.OpenAPIDateConverter;
 namespace InfluxDB.Client.Api.Domain
 {
     /// <summary>
-    /// flux query to be analyzed.
+    /// Flux query to be analyzed.
     /// </summary>
     [DataContract]
     public partial class LanguageRequest :  IEquatable<LanguageRequest>
@@ -37,7 +37,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <summary>
         /// Initializes a new instance of the <see cref="LanguageRequest" /> class.
         /// </summary>
-        /// <param name="query">flux query script to be analyzed (required).</param>
+        /// <param name="query">Flux query script to be analyzed (required).</param>
         public LanguageRequest(string query = default(string))
         {
             // to ensure "query" is required (not null)
@@ -52,9 +52,9 @@ namespace InfluxDB.Client.Api.Domain
         }
 
         /// <summary>
-        /// flux query script to be analyzed
+        /// Flux query script to be analyzed
         /// </summary>
-        /// <value>flux query script to be analyzed</value>
+        /// <value>Flux query script to be analyzed</value>
         [DataMember(Name="query", EmitDefaultValue=false)]
         public string Query { get; set; }
 

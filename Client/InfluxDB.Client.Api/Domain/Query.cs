@@ -24,15 +24,15 @@ using OpenAPIDateConverter = InfluxDB.Client.Api.Client.OpenAPIDateConverter;
 namespace InfluxDB.Client.Api.Domain
 {
     /// <summary>
-    /// query influx with specified return formatting.
+    /// Query influx with specific return formatting.
     /// </summary>
     [DataContract]
     public partial class Query :  IEquatable<Query>
     {
         /// <summary>
-        /// type of query
+        /// The type of query.
         /// </summary>
-        /// <value>type of query</value>
+        /// <value>The type of query.</value>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum TypeEnum
         {
@@ -51,9 +51,9 @@ namespace InfluxDB.Client.Api.Domain
         }
 
         /// <summary>
-        /// type of query
+        /// The type of query.
         /// </summary>
-        /// <value>type of query</value>
+        /// <value>The type of query.</value>
         [DataMember(Name="type", EmitDefaultValue=false)]
         public TypeEnum? Type { get; set; }
         /// <summary>
@@ -65,11 +65,11 @@ namespace InfluxDB.Client.Api.Domain
         /// Initializes a new instance of the <see cref="Query" /> class.
         /// </summary>
         /// <param name="_extern">_extern.</param>
-        /// <param name="query">query script to execute. (required).</param>
-        /// <param name="type">type of query (default to TypeEnum.Flux).</param>
-        /// <param name="db">required for influxql type queries.</param>
-        /// <param name="rp">required for influxql type queries.</param>
-        /// <param name="cluster">required for influxql type queries.</param>
+        /// <param name="query">Query script to execute. (required).</param>
+        /// <param name="type">The type of query. (default to TypeEnum.Flux).</param>
+        /// <param name="db">Required for &#x60;influxql&#x60; type queries..</param>
+        /// <param name="rp">Required for &#x60;influxql&#x60; type queries..</param>
+        /// <param name="cluster">Required for &#x60;influxql&#x60; type queries..</param>
         /// <param name="dialect">dialect.</param>
         public Query(File _extern = default(File), string query = default(string), TypeEnum? type = TypeEnum.Flux, string db = default(string), string rp = default(string), string cluster = default(string), Dialect dialect = default(Dialect))
         {
@@ -105,31 +105,31 @@ namespace InfluxDB.Client.Api.Domain
         public File Extern { get; set; }
 
         /// <summary>
-        /// query script to execute.
+        /// Query script to execute.
         /// </summary>
-        /// <value>query script to execute.</value>
+        /// <value>Query script to execute.</value>
         [DataMember(Name="query", EmitDefaultValue=false)]
         public string _Query { get; set; }
 
 
         /// <summary>
-        /// required for influxql type queries
+        /// Required for &#x60;influxql&#x60; type queries.
         /// </summary>
-        /// <value>required for influxql type queries</value>
+        /// <value>Required for &#x60;influxql&#x60; type queries.</value>
         [DataMember(Name="db", EmitDefaultValue=false)]
         public string Db { get; set; }
 
         /// <summary>
-        /// required for influxql type queries
+        /// Required for &#x60;influxql&#x60; type queries.
         /// </summary>
-        /// <value>required for influxql type queries</value>
+        /// <value>Required for &#x60;influxql&#x60; type queries.</value>
         [DataMember(Name="rp", EmitDefaultValue=false)]
         public string Rp { get; set; }
 
         /// <summary>
-        /// required for influxql type queries
+        /// Required for &#x60;influxql&#x60; type queries.
         /// </summary>
-        /// <value>required for influxql type queries</value>
+        /// <value>Required for &#x60;influxql&#x60; type queries.</value>
         [DataMember(Name="cluster", EmitDefaultValue=false)]
         public string Cluster { get; set; }
 

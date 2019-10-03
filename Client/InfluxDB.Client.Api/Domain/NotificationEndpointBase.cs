@@ -72,13 +72,23 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="id">id.</param>
         /// <param name="orgID">orgID.</param>
         /// <param name="userID">userID.</param>
-        /// <param name="description">An optional description of the notification endpoint.</param>
-        /// <param name="name">name.</param>
+        /// <param name="description">An optional description of the notification endpoint..</param>
+        /// <param name="name">name (required).</param>
         /// <param name="status">The status of the endpoint. (default to StatusEnum.Active).</param>
         /// <param name="labels">labels.</param>
+        /// <param name="links">links.</param>
         /// <param name="type">type (required).</param>
-        public NotificationEndpointBase(string id = default(string), string orgID = default(string), string userID = default(string), string description = default(string), string name = default(string), StatusEnum? status = StatusEnum.Active, List<Label> labels = default(List<Label>), NotificationEndpointType type = default(NotificationEndpointType))
+        public NotificationEndpointBase(string id = default(string), string orgID = default(string), string userID = default(string), string description = default(string), string name = default(string), StatusEnum? status = StatusEnum.Active, List<Label> labels = default(List<Label>), NotificationEndpointBaseLinks links = default(NotificationEndpointBaseLinks), NotificationEndpointType type = default(NotificationEndpointType))
         {
+            // to ensure "name" is required (not null)
+            if (name == null)
+            {
+                throw new InvalidDataException("name is a required property for NotificationEndpointBase and cannot be null");
+            }
+            else
+            {
+                this.Name = name;
+            }
             // to ensure "type" is required (not null)
             if (type == null)
             {
@@ -92,7 +102,6 @@ namespace InfluxDB.Client.Api.Domain
             this.OrgID = orgID;
             this.UserID = userID;
             this.Description = description;
-            this.Name = name;
             // use default value if no "status" provided
             if (status == null)
             {
@@ -103,6 +112,7 @@ namespace InfluxDB.Client.Api.Domain
                 this.Status = status;
             }
             this.Labels = labels;
+            this.Links = links;
         }
 
         /// <summary>
@@ -136,9 +146,9 @@ namespace InfluxDB.Client.Api.Domain
         public DateTime? UpdatedAt { get; private set; }
 
         /// <summary>
-        /// An optional description of the notification endpoint
+        /// An optional description of the notification endpoint.
         /// </summary>
-        /// <value>An optional description of the notification endpoint</value>
+        /// <value>An optional description of the notification endpoint.</value>
         [DataMember(Name="description", EmitDefaultValue=false)]
         public string Description { get; set; }
 
@@ -154,6 +164,12 @@ namespace InfluxDB.Client.Api.Domain
         /// </summary>
         [DataMember(Name="labels", EmitDefaultValue=false)]
         public List<Label> Labels { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Links
+        /// </summary>
+        [DataMember(Name="links", EmitDefaultValue=false)]
+        public NotificationEndpointBaseLinks Links { get; set; }
 
 
         /// <summary>
@@ -173,6 +189,7 @@ namespace InfluxDB.Client.Api.Domain
             sb.Append("  Name: ").Append(Name).Append("\n");
             sb.Append("  Status: ").Append(Status).Append("\n");
             sb.Append("  Labels: ").Append(Labels).Append("\n");
+            sb.Append("  Links: ").Append(Links).Append("\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -254,6 +271,11 @@ namespace InfluxDB.Client.Api.Domain
                     this.Labels.SequenceEqual(input.Labels)
                 ) && 
                 (
+                    
+                    (this.Links != null &&
+                    this.Links.Equals(input.Links))
+                ) && 
+                (
                     this.Type == input.Type ||
                     (this.Type != null &&
                     this.Type.Equals(input.Type))
@@ -287,6 +309,8 @@ namespace InfluxDB.Client.Api.Domain
                     hashCode = hashCode * 59 + this.Status.GetHashCode();
                 if (this.Labels != null)
                     hashCode = hashCode * 59 + this.Labels.GetHashCode();
+                if (this.Links != null)
+                    hashCode = hashCode * 59 + this.Links.GetHashCode();
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
                 return hashCode;

@@ -24,7 +24,7 @@ using OpenAPIDateConverter = InfluxDB.Client.Api.Client.OpenAPIDateConverter;
 namespace InfluxDB.Client.Api.Domain
 {
     /// <summary>
-    /// represents a specialized literal value, indicating the left hand value of a pipe expression
+    /// Represents a specialized literal value, indicating the left hand value of a pipe expression
     /// </summary>
     [DataContract]
     public partial class PipeLiteral :  IEquatable<PipeLiteral>
@@ -32,16 +32,16 @@ namespace InfluxDB.Client.Api.Domain
         /// <summary>
         /// Initializes a new instance of the <see cref="PipeLiteral" /> class.
         /// </summary>
-        /// <param name="type">type of AST node.</param>
+        /// <param name="type">Type of AST node.</param>
         public PipeLiteral(string type = default(string))
         {
             this.Type = type;
         }
 
         /// <summary>
-        /// type of AST node
+        /// Type of AST node
         /// </summary>
-        /// <value>type of AST node</value>
+        /// <value>Type of AST node</value>
         [DataMember(Name="type", EmitDefaultValue=false)]
         public string Type { get; set; }
 

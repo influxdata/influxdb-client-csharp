@@ -19,6 +19,7 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using JsonSubTypes;
 using OpenAPIDateConverter = InfluxDB.Client.Api.Client.OpenAPIDateConverter;
 
 namespace InfluxDB.Client.Api.Domain
@@ -27,6 +28,10 @@ namespace InfluxDB.Client.Api.Domain
     /// NotificationEndpoint
     /// </summary>
     [DataContract]
+    [JsonConverter(typeof(JsonSubtypes), "Type")]
+    [JsonSubtypes.KnownSubType(typeof(SlackNotificationEndpoint), "slack")]
+    [JsonSubtypes.KnownSubType(typeof(PagerDutyNotificationEndpoint), "pagerduty")]
+    [JsonSubtypes.KnownSubType(typeof(HTTPNotificationEndpoint), "http")]
     public partial class NotificationEndpoint : NotificationEndpointBase,  IEquatable<NotificationEndpoint>
     {
         /// <summary>
@@ -37,7 +42,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <summary>
         /// Initializes a new instance of the <see cref="NotificationEndpoint" /> class.
         /// </summary>
-        public NotificationEndpoint(string id = default(string), string orgID = default(string), string userID = default(string), string description = default(string), string name = default(string), StatusEnum? status = StatusEnum.Active, List<Label> labels = default(List<Label>), NotificationEndpointType type = default(NotificationEndpointType)) : base(id, orgID, userID, description, name, status, labels, type)
+        public NotificationEndpoint(string id = default(string), string orgID = default(string), string userID = default(string), string description = default(string), string name = default(string), StatusEnum? status = StatusEnum.Active, List<Label> labels = default(List<Label>), NotificationEndpointBaseLinks links = default(NotificationEndpointBaseLinks), NotificationEndpointType type = default(NotificationEndpointType)) : base(id, orgID, userID, description, name, status, labels, links, type)
         {
         }
 

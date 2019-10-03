@@ -25,27 +25,27 @@ namespace InfluxDB.Client.Api.Service
     {
         #region Synchronous Operations
         /// <summary>
-        /// Retrieve the view for a cell in a dashboard
+        /// Retrieve the view for a cell
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of dashboard</param>
-        /// <param name="cellID">ID of cell</param>
+        /// <param name="dashboardID">The dashboard ID.</param>
+        /// <param name="cellID">The cell ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>View</returns>
         View GetDashboardsIDCellsIDView (string dashboardID, string cellID, string zapTraceSpan = null);
 
         /// <summary>
-        /// Retrieve the view for a cell in a dashboard
+        /// Retrieve the view for a cell
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of dashboard</param>
-        /// <param name="cellID">ID of cell</param>
+        /// <param name="dashboardID">The dashboard ID.</param>
+        /// <param name="cellID">The cell ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of View</returns>
         ApiResponse<View> GetDashboardsIDCellsIDViewWithHttpInfo (string dashboardID, string cellID, string zapTraceSpan = null);
@@ -56,9 +56,9 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of dashboard to update</param>
-        /// <param name="cellID">ID of cell to update</param>
-        /// <param name="view">updates the view for a cell</param>
+        /// <param name="dashboardID">The ID of the dashboard to update.</param>
+        /// <param name="cellID">The ID of the cell to update.</param>
+        /// <param name="view"></param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>View</returns>
         View PatchDashboardsIDCellsIDView (string dashboardID, string cellID, View view, string zapTraceSpan = null);
@@ -70,36 +70,36 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of dashboard to update</param>
-        /// <param name="cellID">ID of cell to update</param>
-        /// <param name="view">updates the view for a cell</param>
+        /// <param name="dashboardID">The ID of the dashboard to update.</param>
+        /// <param name="cellID">The ID of the cell to update.</param>
+        /// <param name="view"></param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of View</returns>
         ApiResponse<View> PatchDashboardsIDCellsIDViewWithHttpInfo (string dashboardID, string cellID, View view, string zapTraceSpan = null);
         #endregion Synchronous Operations
         #region Asynchronous Operations
         /// <summary>
-        /// Retrieve the view for a cell in a dashboard
+        /// Retrieve the view for a cell
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of dashboard</param>
-        /// <param name="cellID">ID of cell</param>
+        /// <param name="dashboardID">The dashboard ID.</param>
+        /// <param name="cellID">The cell ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of View</returns>
         System.Threading.Tasks.Task<View> GetDashboardsIDCellsIDViewAsync (string dashboardID, string cellID, string zapTraceSpan = null);
 
         /// <summary>
-        /// Retrieve the view for a cell in a dashboard
+        /// Retrieve the view for a cell
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of dashboard</param>
-        /// <param name="cellID">ID of cell</param>
+        /// <param name="dashboardID">The dashboard ID.</param>
+        /// <param name="cellID">The cell ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (View)</returns>
         System.Threading.Tasks.Task<ApiResponse<View>> GetDashboardsIDCellsIDViewAsyncWithHttpInfo (string dashboardID, string cellID, string zapTraceSpan = null);
@@ -110,9 +110,9 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of dashboard to update</param>
-        /// <param name="cellID">ID of cell to update</param>
-        /// <param name="view">updates the view for a cell</param>
+        /// <param name="dashboardID">The ID of the dashboard to update.</param>
+        /// <param name="cellID">The ID of the cell to update.</param>
+        /// <param name="view"></param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of View</returns>
         System.Threading.Tasks.Task<View> PatchDashboardsIDCellsIDViewAsync (string dashboardID, string cellID, View view, string zapTraceSpan = null);
@@ -124,9 +124,9 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of dashboard to update</param>
-        /// <param name="cellID">ID of cell to update</param>
-        /// <param name="view">updates the view for a cell</param>
+        /// <param name="dashboardID">The ID of the dashboard to update.</param>
+        /// <param name="cellID">The ID of the cell to update.</param>
+        /// <param name="view"></param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (View)</returns>
         System.Threading.Tasks.Task<ApiResponse<View>> PatchDashboardsIDCellsIDViewAsyncWithHttpInfo (string dashboardID, string cellID, View view, string zapTraceSpan = null);
@@ -231,11 +231,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Retrieve the view for a cell in a dashboard 
+        /// Retrieve the view for a cell 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of dashboard</param>
-        /// <param name="cellID">ID of cell</param>
+        /// <param name="dashboardID">The dashboard ID.</param>
+        /// <param name="cellID">The cell ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>View</returns>
         public View GetDashboardsIDCellsIDView (string dashboardID, string cellID, string zapTraceSpan = null)
@@ -245,11 +245,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Retrieve the view for a cell in a dashboard 
+        /// Retrieve the view for a cell 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of dashboard</param>
-        /// <param name="cellID">ID of cell</param>
+        /// <param name="dashboardID">The dashboard ID.</param>
+        /// <param name="cellID">The cell ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of View</returns>
         public ApiResponse< View > GetDashboardsIDCellsIDViewWithHttpInfo (string dashboardID, string cellID, string zapTraceSpan = null)
@@ -307,11 +307,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Retrieve the view for a cell in a dashboard 
+        /// Retrieve the view for a cell 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of dashboard</param>
-        /// <param name="cellID">ID of cell</param>
+        /// <param name="dashboardID">The dashboard ID.</param>
+        /// <param name="cellID">The cell ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of View</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetDashboardsIDCellsIDViewWithIRestResponseAsync (string dashboardID, string cellID, string zapTraceSpan = null)
@@ -367,11 +367,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Retrieve the view for a cell in a dashboard 
+        /// Retrieve the view for a cell 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of dashboard</param>
-        /// <param name="cellID">ID of cell</param>
+        /// <param name="dashboardID">The dashboard ID.</param>
+        /// <param name="cellID">The cell ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of View</returns>
         public IRestResponse GetDashboardsIDCellsIDViewWithIRestResponse (string dashboardID, string cellID, string zapTraceSpan = null)
@@ -427,11 +427,11 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// Retrieve the view for a cell in a dashboard 
+        /// Retrieve the view for a cell 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of dashboard</param>
-        /// <param name="cellID">ID of cell</param>
+        /// <param name="dashboardID">The dashboard ID.</param>
+        /// <param name="cellID">The cell ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of View</returns>
         public RestRequest GetDashboardsIDCellsIDViewWithRestRequest (string dashboardID, string cellID, string zapTraceSpan = null)
@@ -476,11 +476,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Retrieve the view for a cell in a dashboard 
+        /// Retrieve the view for a cell 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of dashboard</param>
-        /// <param name="cellID">ID of cell</param>
+        /// <param name="dashboardID">The dashboard ID.</param>
+        /// <param name="cellID">The cell ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of View</returns>
         public async System.Threading.Tasks.Task<View> GetDashboardsIDCellsIDViewAsync (string dashboardID, string cellID, string zapTraceSpan = null)
@@ -491,11 +491,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Retrieve the view for a cell in a dashboard 
+        /// Retrieve the view for a cell 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of dashboard</param>
-        /// <param name="cellID">ID of cell</param>
+        /// <param name="dashboardID">The dashboard ID.</param>
+        /// <param name="cellID">The cell ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (View)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<View>> GetDashboardsIDCellsIDViewAsyncWithHttpInfo (string dashboardID, string cellID, string zapTraceSpan = null)
@@ -517,11 +517,11 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// Retrieve the view for a cell in a dashboard 
+        /// Retrieve the view for a cell 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of dashboard</param>
-        /// <param name="cellID">ID of cell</param>
+        /// <param name="dashboardID">The dashboard ID.</param>
+        /// <param name="cellID">The cell ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (View)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetDashboardsIDCellsIDViewAsyncWithIRestResponse (string dashboardID, string cellID, string zapTraceSpan = null)
@@ -578,9 +578,9 @@ namespace InfluxDB.Client.Api.Service
         /// Update the view for a cell 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of dashboard to update</param>
-        /// <param name="cellID">ID of cell to update</param>
-        /// <param name="view">updates the view for a cell</param>
+        /// <param name="dashboardID">The ID of the dashboard to update.</param>
+        /// <param name="cellID">The ID of the cell to update.</param>
+        /// <param name="view"></param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>View</returns>
         public View PatchDashboardsIDCellsIDView (string dashboardID, string cellID, View view, string zapTraceSpan = null)
@@ -593,9 +593,9 @@ namespace InfluxDB.Client.Api.Service
         /// Update the view for a cell 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of dashboard to update</param>
-        /// <param name="cellID">ID of cell to update</param>
-        /// <param name="view">updates the view for a cell</param>
+        /// <param name="dashboardID">The ID of the dashboard to update.</param>
+        /// <param name="cellID">The ID of the cell to update.</param>
+        /// <param name="view"></param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of View</returns>
         public ApiResponse< View > PatchDashboardsIDCellsIDViewWithHttpInfo (string dashboardID, string cellID, View view, string zapTraceSpan = null)
@@ -668,9 +668,9 @@ namespace InfluxDB.Client.Api.Service
         /// Update the view for a cell 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of dashboard to update</param>
-        /// <param name="cellID">ID of cell to update</param>
-        /// <param name="view">updates the view for a cell</param>
+        /// <param name="dashboardID">The ID of the dashboard to update.</param>
+        /// <param name="cellID">The ID of the cell to update.</param>
+        /// <param name="view"></param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of View</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PatchDashboardsIDCellsIDViewWithIRestResponseAsync (string dashboardID, string cellID, View view, string zapTraceSpan = null)
@@ -741,9 +741,9 @@ namespace InfluxDB.Client.Api.Service
         /// Update the view for a cell 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of dashboard to update</param>
-        /// <param name="cellID">ID of cell to update</param>
-        /// <param name="view">updates the view for a cell</param>
+        /// <param name="dashboardID">The ID of the dashboard to update.</param>
+        /// <param name="cellID">The ID of the cell to update.</param>
+        /// <param name="view"></param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of View</returns>
         public IRestResponse PatchDashboardsIDCellsIDViewWithIRestResponse (string dashboardID, string cellID, View view, string zapTraceSpan = null)
@@ -814,9 +814,9 @@ namespace InfluxDB.Client.Api.Service
         /// Update the view for a cell 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of dashboard to update</param>
-        /// <param name="cellID">ID of cell to update</param>
-        /// <param name="view">updates the view for a cell</param>
+        /// <param name="dashboardID">The ID of the dashboard to update.</param>
+        /// <param name="cellID">The ID of the cell to update.</param>
+        /// <param name="view"></param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of View</returns>
         public RestRequest PatchDashboardsIDCellsIDViewWithRestRequest (string dashboardID, string cellID, View view, string zapTraceSpan = null)
@@ -876,9 +876,9 @@ namespace InfluxDB.Client.Api.Service
         /// Update the view for a cell 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of dashboard to update</param>
-        /// <param name="cellID">ID of cell to update</param>
-        /// <param name="view">updates the view for a cell</param>
+        /// <param name="dashboardID">The ID of the dashboard to update.</param>
+        /// <param name="cellID">The ID of the cell to update.</param>
+        /// <param name="view"></param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of View</returns>
         public async System.Threading.Tasks.Task<View> PatchDashboardsIDCellsIDViewAsync (string dashboardID, string cellID, View view, string zapTraceSpan = null)
@@ -892,9 +892,9 @@ namespace InfluxDB.Client.Api.Service
         /// Update the view for a cell 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of dashboard to update</param>
-        /// <param name="cellID">ID of cell to update</param>
-        /// <param name="view">updates the view for a cell</param>
+        /// <param name="dashboardID">The ID of the dashboard to update.</param>
+        /// <param name="cellID">The ID of the cell to update.</param>
+        /// <param name="view"></param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (View)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<View>> PatchDashboardsIDCellsIDViewAsyncWithHttpInfo (string dashboardID, string cellID, View view, string zapTraceSpan = null)
@@ -919,9 +919,9 @@ namespace InfluxDB.Client.Api.Service
         /// Update the view for a cell 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="dashboardID">ID of dashboard to update</param>
-        /// <param name="cellID">ID of cell to update</param>
-        /// <param name="view">updates the view for a cell</param>
+        /// <param name="dashboardID">The ID of the dashboard to update.</param>
+        /// <param name="cellID">The ID of the cell to update.</param>
+        /// <param name="view"></param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (View)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PatchDashboardsIDCellsIDViewAsyncWithIRestResponse (string dashboardID, string cellID, View view, string zapTraceSpan = null)

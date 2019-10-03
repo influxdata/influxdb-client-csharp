@@ -27,7 +27,7 @@ namespace InfluxDB.Client.Api.Domain
     /// SMTPNotificationRuleBase
     /// </summary>
     [DataContract]
-    public partial class SMTPNotificationRuleBase :  IEquatable<SMTPNotificationRuleBase>
+    public partial class SMTPNotificationRuleBase : NotificationRule,  IEquatable<SMTPNotificationRuleBase>
     {
         /// <summary>
         /// Defines Type
@@ -60,7 +60,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="subjectTemplate">subjectTemplate (required).</param>
         /// <param name="bodyTemplate">bodyTemplate.</param>
         /// <param name="to">to (required).</param>
-        public SMTPNotificationRuleBase(TypeEnum type = default(TypeEnum), string subjectTemplate = default(string), string bodyTemplate = default(string), string to = default(string))
+        public SMTPNotificationRuleBase(TypeEnum type = default(TypeEnum), string subjectTemplate = default(string), string bodyTemplate = default(string), string to = default(string)) : base()
         {
             // to ensure "type" is required (not null)
             if (type == null)
@@ -119,6 +119,7 @@ namespace InfluxDB.Client.Api.Domain
         {
             var sb = new StringBuilder();
             sb.Append("class SMTPNotificationRuleBase {\n");
+            sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  SubjectTemplate: ").Append(SubjectTemplate).Append("\n");
             sb.Append("  BodyTemplate: ").Append(BodyTemplate).Append("\n");
@@ -131,7 +132,7 @@ namespace InfluxDB.Client.Api.Domain
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public virtual string ToJson()
+        public override string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }
@@ -156,22 +157,22 @@ namespace InfluxDB.Client.Api.Domain
             if (input == null)
                 return false;
 
-            return 
+            return base.Equals(input) && 
                 (
                     this.Type == input.Type ||
                     (this.Type != null &&
                     this.Type.Equals(input.Type))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.SubjectTemplate == input.SubjectTemplate ||
                     (this.SubjectTemplate != null &&
                     this.SubjectTemplate.Equals(input.SubjectTemplate))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.BodyTemplate == input.BodyTemplate ||
                     (this.BodyTemplate != null &&
                     this.BodyTemplate.Equals(input.BodyTemplate))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.To == input.To ||
                     (this.To != null &&
@@ -187,7 +188,7 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
+                int hashCode = base.GetHashCode();
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.SubjectTemplate != null)

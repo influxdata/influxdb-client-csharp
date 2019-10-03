@@ -24,7 +24,7 @@ using OpenAPIDateConverter = InfluxDB.Client.Api.Client.OpenAPIDateConverter;
 namespace InfluxDB.Client.Api.Domain
 {
     /// <summary>
-    /// contains the AST for the supplied Flux query
+    /// Contains the AST for the supplied Flux query
     /// </summary>
     [DataContract]
     public partial class ASTResponse :  IEquatable<ASTResponse>

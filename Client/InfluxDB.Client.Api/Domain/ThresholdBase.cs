@@ -38,7 +38,7 @@ namespace InfluxDB.Client.Api.Domain
         /// Initializes a new instance of the <see cref="ThresholdBase" /> class.
         /// </summary>
         /// <param name="level">level.</param>
-        /// <param name="allValues">if true, only alert if all values meet threshold.</param>
+        /// <param name="allValues">If true, only alert if all values meet threshold..</param>
         public ThresholdBase(CheckStatusLevel? level = default(CheckStatusLevel?), bool? allValues = default(bool?))
         {
             this.Level = level;
@@ -47,9 +47,9 @@ namespace InfluxDB.Client.Api.Domain
 
 
         /// <summary>
-        /// if true, only alert if all values meet threshold
+        /// If true, only alert if all values meet threshold.
         /// </summary>
-        /// <value>if true, only alert if all values meet threshold</value>
+        /// <value>If true, only alert if all values meet threshold.</value>
         [DataMember(Name="allValues", EmitDefaultValue=false)]
         public bool? AllValues { get; set; }
 

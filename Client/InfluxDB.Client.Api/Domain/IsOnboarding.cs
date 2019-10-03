@@ -32,16 +32,16 @@ namespace InfluxDB.Client.Api.Domain
         /// <summary>
         /// Initializes a new instance of the <see cref="IsOnboarding" /> class.
         /// </summary>
-        /// <param name="allowed">true means that the influxdb instance has NOT had initial setup; false means that the database has been setup..</param>
+        /// <param name="allowed">True means that the influxdb instance has NOT had initial setup; false means that the database has been setup..</param>
         public IsOnboarding(bool? allowed = default(bool?))
         {
             this.Allowed = allowed;
         }
 
         /// <summary>
-        /// true means that the influxdb instance has NOT had initial setup; false means that the database has been setup.
+        /// True means that the influxdb instance has NOT had initial setup; false means that the database has been setup.
         /// </summary>
-        /// <value>true means that the influxdb instance has NOT had initial setup; false means that the database has been setup.</value>
+        /// <value>True means that the influxdb instance has NOT had initial setup; false means that the database has been setup.</value>
         [DataMember(Name="allowed", EmitDefaultValue=false)]
         public bool? Allowed { get; set; }
 

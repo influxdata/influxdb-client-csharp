@@ -30,9 +30,9 @@ namespace InfluxDB.Client.Api.Domain
     public partial class LineProtocolError :  IEquatable<LineProtocolError>
     {
         /// <summary>
-        /// code is the machine-readable error code.
+        /// Code is the machine-readable error code.
         /// </summary>
-        /// <value>code is the machine-readable error code.</value>
+        /// <value>Code is the machine-readable error code.</value>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum CodeEnum
         {
@@ -75,9 +75,9 @@ namespace InfluxDB.Client.Api.Domain
         }
 
         /// <summary>
-        /// code is the machine-readable error code.
+        /// Code is the machine-readable error code.
         /// </summary>
-        /// <value>code is the machine-readable error code.</value>
+        /// <value>Code is the machine-readable error code.</value>
         [DataMember(Name="code", EmitDefaultValue=false)]
         public CodeEnum Code { get; set; }
         /// <summary>
@@ -90,30 +90,30 @@ namespace InfluxDB.Client.Api.Domain
 
 
         /// <summary>
-        /// message is a human-readable message.
+        /// Message is a human-readable message.
         /// </summary>
-        /// <value>message is a human-readable message.</value>
+        /// <value>Message is a human-readable message.</value>
         [DataMember(Name="message", EmitDefaultValue=false)]
         public string Message { get; private set; }
 
         /// <summary>
-        /// op describes the logical code operation during error. Useful for debugging.
+        /// Op describes the logical code operation during error. Useful for debugging.
         /// </summary>
-        /// <value>op describes the logical code operation during error. Useful for debugging.</value>
+        /// <value>Op describes the logical code operation during error. Useful for debugging.</value>
         [DataMember(Name="op", EmitDefaultValue=false)]
         public string Op { get; private set; }
 
         /// <summary>
-        /// err is a stack of errors that occurred during processing of the request. Useful for debugging.
+        /// Err is a stack of errors that occurred during processing of the request. Useful for debugging.
         /// </summary>
-        /// <value>err is a stack of errors that occurred during processing of the request. Useful for debugging.</value>
+        /// <value>Err is a stack of errors that occurred during processing of the request. Useful for debugging.</value>
         [DataMember(Name="err", EmitDefaultValue=false)]
         public string Err { get; private set; }
 
         /// <summary>
-        /// first line within sent body containing malformed data
+        /// First line within sent body containing malformed data
         /// </summary>
-        /// <value>first line within sent body containing malformed data</value>
+        /// <value>First line within sent body containing malformed data</value>
         [DataMember(Name="line", EmitDefaultValue=false)]
         public int? Line { get; private set; }
 

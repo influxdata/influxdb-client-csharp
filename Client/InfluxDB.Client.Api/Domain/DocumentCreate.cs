@@ -39,9 +39,9 @@ namespace InfluxDB.Client.Api.Domain
         /// </summary>
         /// <param name="meta">meta (required).</param>
         /// <param name="content">content (required).</param>
-        /// <param name="org">must specify one of orgID and org.</param>
-        /// <param name="orgID">must specify one of orgID and org.</param>
-        /// <param name="labels">this is an array of label IDs that will be added as labels to the document.</param>
+        /// <param name="org">The organization Name. Specify either &#x60;orgID&#x60; or &#x60;org&#x60;..</param>
+        /// <param name="orgID">The organization Name. Specify either &#x60;orgID&#x60; or &#x60;org&#x60;..</param>
+        /// <param name="labels">An array of label IDs to be added as labels to the document..</param>
         public DocumentCreate(DocumentMeta meta = default(DocumentMeta), Object content = default(Object), string org = default(string), string orgID = default(string), List<string> labels = default(List<string>))
         {
             // to ensure "meta" is required (not null)
@@ -80,23 +80,23 @@ namespace InfluxDB.Client.Api.Domain
         public Object Content { get; set; }
 
         /// <summary>
-        /// must specify one of orgID and org
+        /// The organization Name. Specify either &#x60;orgID&#x60; or &#x60;org&#x60;.
         /// </summary>
-        /// <value>must specify one of orgID and org</value>
+        /// <value>The organization Name. Specify either &#x60;orgID&#x60; or &#x60;org&#x60;.</value>
         [DataMember(Name="org", EmitDefaultValue=false)]
         public string Org { get; set; }
 
         /// <summary>
-        /// must specify one of orgID and org
+        /// The organization Name. Specify either &#x60;orgID&#x60; or &#x60;org&#x60;.
         /// </summary>
-        /// <value>must specify one of orgID and org</value>
+        /// <value>The organization Name. Specify either &#x60;orgID&#x60; or &#x60;org&#x60;.</value>
         [DataMember(Name="orgID", EmitDefaultValue=false)]
         public string OrgID { get; set; }
 
         /// <summary>
-        /// this is an array of label IDs that will be added as labels to the document
+        /// An array of label IDs to be added as labels to the document.
         /// </summary>
-        /// <value>this is an array of label IDs that will be added as labels to the document</value>
+        /// <value>An array of label IDs to be added as labels to the document.</value>
         [DataMember(Name="labels", EmitDefaultValue=false)]
         public List<string> Labels { get; set; }
 

@@ -31,7 +31,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="authID">ID of authorization to delete</param>
+        /// <param name="authID">The ID of the authorization to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
         void DeleteAuthorizationsID (string authID, string zapTraceSpan = null);
@@ -43,7 +43,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="authID">ID of authorization to delete</param>
+        /// <param name="authID">The ID of the authorization to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> DeleteAuthorizationsIDWithHttpInfo (string authID, string zapTraceSpan = null);
@@ -55,10 +55,10 @@ namespace InfluxDB.Client.Api.Service
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="userID">filter authorizations belonging to a user id (optional)</param>
-        /// <param name="user">filter authorizations belonging to a user name (optional)</param>
-        /// <param name="orgID">filter authorizations belonging to a org id (optional)</param>
-        /// <param name="org">filter authorizations belonging to a org name (optional)</param>
+        /// <param name="userID">Only show authorizations that belong to a user ID. (optional)</param>
+        /// <param name="user">Only show authorizations that belong to a user name. (optional)</param>
+        /// <param name="orgID">Only show authorizations that belong to an organization ID. (optional)</param>
+        /// <param name="org">Only show authorizations that belong to a organization name. (optional)</param>
         /// <returns>Authorizations</returns>
         Authorizations GetAuthorizations (string zapTraceSpan = null, string userID = null, string user = null, string orgID = null, string org = null);
 
@@ -70,10 +70,10 @@ namespace InfluxDB.Client.Api.Service
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="userID">filter authorizations belonging to a user id (optional)</param>
-        /// <param name="user">filter authorizations belonging to a user name (optional)</param>
-        /// <param name="orgID">filter authorizations belonging to a org id (optional)</param>
-        /// <param name="org">filter authorizations belonging to a org name (optional)</param>
+        /// <param name="userID">Only show authorizations that belong to a user ID. (optional)</param>
+        /// <param name="user">Only show authorizations that belong to a user name. (optional)</param>
+        /// <param name="orgID">Only show authorizations that belong to an organization ID. (optional)</param>
+        /// <param name="org">Only show authorizations that belong to a organization name. (optional)</param>
         /// <returns>ApiResponse of Authorizations</returns>
         ApiResponse<Authorizations> GetAuthorizationsWithHttpInfo (string zapTraceSpan = null, string userID = null, string user = null, string orgID = null, string org = null);
         /// <summary>
@@ -83,7 +83,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="authID">ID of authorization to get</param>
+        /// <param name="authID">The ID of the authorization to get.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Authorization</returns>
         Authorization GetAuthorizationsID (string authID, string zapTraceSpan = null);
@@ -95,32 +95,32 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="authID">ID of authorization to get</param>
+        /// <param name="authID">The ID of the authorization to get.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Authorization</returns>
         ApiResponse<Authorization> GetAuthorizationsIDWithHttpInfo (string authID, string zapTraceSpan = null);
         /// <summary>
-        /// update authorization to be active or inactive. requests using an inactive authorization will be rejected.
+        /// Update an authorization to be active or inactive
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="authID">ID of authorization to update</param>
-        /// <param name="authorizationUpdateRequest">authorization to update to apply</param>
+        /// <param name="authID">The ID of the authorization to update.</param>
+        /// <param name="authorizationUpdateRequest">Authorization to update</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Authorization</returns>
         Authorization PatchAuthorizationsID (string authID, AuthorizationUpdateRequest authorizationUpdateRequest, string zapTraceSpan = null);
 
         /// <summary>
-        /// update authorization to be active or inactive. requests using an inactive authorization will be rejected.
+        /// Update an authorization to be active or inactive
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="authID">ID of authorization to update</param>
-        /// <param name="authorizationUpdateRequest">authorization to update to apply</param>
+        /// <param name="authID">The ID of the authorization to update.</param>
+        /// <param name="authorizationUpdateRequest">Authorization to update</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Authorization</returns>
         ApiResponse<Authorization> PatchAuthorizationsIDWithHttpInfo (string authID, AuthorizationUpdateRequest authorizationUpdateRequest, string zapTraceSpan = null);
@@ -131,7 +131,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="authorization">authorization to create</param>
+        /// <param name="authorization">Authorization to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Authorization</returns>
         Authorization PostAuthorizations (Authorization authorization, string zapTraceSpan = null);
@@ -143,7 +143,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="authorization">authorization to create</param>
+        /// <param name="authorization">Authorization to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Authorization</returns>
         ApiResponse<Authorization> PostAuthorizationsWithHttpInfo (Authorization authorization, string zapTraceSpan = null);
@@ -156,7 +156,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="authID">ID of authorization to delete</param>
+        /// <param name="authID">The ID of the authorization to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
         System.Threading.Tasks.Task DeleteAuthorizationsIDAsync (string authID, string zapTraceSpan = null);
@@ -168,7 +168,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="authID">ID of authorization to delete</param>
+        /// <param name="authID">The ID of the authorization to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         System.Threading.Tasks.Task<ApiResponse<Object>> DeleteAuthorizationsIDAsyncWithHttpInfo (string authID, string zapTraceSpan = null);
@@ -180,10 +180,10 @@ namespace InfluxDB.Client.Api.Service
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="userID">filter authorizations belonging to a user id (optional)</param>
-        /// <param name="user">filter authorizations belonging to a user name (optional)</param>
-        /// <param name="orgID">filter authorizations belonging to a org id (optional)</param>
-        /// <param name="org">filter authorizations belonging to a org name (optional)</param>
+        /// <param name="userID">Only show authorizations that belong to a user ID. (optional)</param>
+        /// <param name="user">Only show authorizations that belong to a user name. (optional)</param>
+        /// <param name="orgID">Only show authorizations that belong to an organization ID. (optional)</param>
+        /// <param name="org">Only show authorizations that belong to a organization name. (optional)</param>
         /// <returns>Task of Authorizations</returns>
         System.Threading.Tasks.Task<Authorizations> GetAuthorizationsAsync (string zapTraceSpan = null, string userID = null, string user = null, string orgID = null, string org = null);
 
@@ -195,10 +195,10 @@ namespace InfluxDB.Client.Api.Service
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="userID">filter authorizations belonging to a user id (optional)</param>
-        /// <param name="user">filter authorizations belonging to a user name (optional)</param>
-        /// <param name="orgID">filter authorizations belonging to a org id (optional)</param>
-        /// <param name="org">filter authorizations belonging to a org name (optional)</param>
+        /// <param name="userID">Only show authorizations that belong to a user ID. (optional)</param>
+        /// <param name="user">Only show authorizations that belong to a user name. (optional)</param>
+        /// <param name="orgID">Only show authorizations that belong to an organization ID. (optional)</param>
+        /// <param name="org">Only show authorizations that belong to a organization name. (optional)</param>
         /// <returns>Task of ApiResponse (Authorizations)</returns>
         System.Threading.Tasks.Task<ApiResponse<Authorizations>> GetAuthorizationsAsyncWithHttpInfo (string zapTraceSpan = null, string userID = null, string user = null, string orgID = null, string org = null);
         /// <summary>
@@ -208,7 +208,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="authID">ID of authorization to get</param>
+        /// <param name="authID">The ID of the authorization to get.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of Authorization</returns>
         System.Threading.Tasks.Task<Authorization> GetAuthorizationsIDAsync (string authID, string zapTraceSpan = null);
@@ -220,32 +220,32 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="authID">ID of authorization to get</param>
+        /// <param name="authID">The ID of the authorization to get.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (Authorization)</returns>
         System.Threading.Tasks.Task<ApiResponse<Authorization>> GetAuthorizationsIDAsyncWithHttpInfo (string authID, string zapTraceSpan = null);
         /// <summary>
-        /// update authorization to be active or inactive. requests using an inactive authorization will be rejected.
+        /// Update an authorization to be active or inactive
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="authID">ID of authorization to update</param>
-        /// <param name="authorizationUpdateRequest">authorization to update to apply</param>
+        /// <param name="authID">The ID of the authorization to update.</param>
+        /// <param name="authorizationUpdateRequest">Authorization to update</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of Authorization</returns>
         System.Threading.Tasks.Task<Authorization> PatchAuthorizationsIDAsync (string authID, AuthorizationUpdateRequest authorizationUpdateRequest, string zapTraceSpan = null);
 
         /// <summary>
-        /// update authorization to be active or inactive. requests using an inactive authorization will be rejected.
+        /// Update an authorization to be active or inactive
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="authID">ID of authorization to update</param>
-        /// <param name="authorizationUpdateRequest">authorization to update to apply</param>
+        /// <param name="authID">The ID of the authorization to update.</param>
+        /// <param name="authorizationUpdateRequest">Authorization to update</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (Authorization)</returns>
         System.Threading.Tasks.Task<ApiResponse<Authorization>> PatchAuthorizationsIDAsyncWithHttpInfo (string authID, AuthorizationUpdateRequest authorizationUpdateRequest, string zapTraceSpan = null);
@@ -256,7 +256,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="authorization">authorization to create</param>
+        /// <param name="authorization">Authorization to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of Authorization</returns>
         System.Threading.Tasks.Task<Authorization> PostAuthorizationsAsync (Authorization authorization, string zapTraceSpan = null);
@@ -268,7 +268,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="authorization">authorization to create</param>
+        /// <param name="authorization">Authorization to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (Authorization)</returns>
         System.Threading.Tasks.Task<ApiResponse<Authorization>> PostAuthorizationsAsyncWithHttpInfo (Authorization authorization, string zapTraceSpan = null);
@@ -376,7 +376,7 @@ namespace InfluxDB.Client.Api.Service
         /// Delete a authorization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="authID">ID of authorization to delete</param>
+        /// <param name="authID">The ID of the authorization to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
         public void DeleteAuthorizationsID (string authID, string zapTraceSpan = null)
@@ -388,7 +388,7 @@ namespace InfluxDB.Client.Api.Service
         /// Delete a authorization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="authID">ID of authorization to delete</param>
+        /// <param name="authID">The ID of the authorization to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public ApiResponse<Object> DeleteAuthorizationsIDWithHttpInfo (string authID, string zapTraceSpan = null)
@@ -445,7 +445,7 @@ namespace InfluxDB.Client.Api.Service
         /// Delete a authorization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="authID">ID of authorization to delete</param>
+        /// <param name="authID">The ID of the authorization to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> DeleteAuthorizationsIDWithIRestResponseAsync (string authID, string zapTraceSpan = null)
@@ -500,7 +500,7 @@ namespace InfluxDB.Client.Api.Service
         /// Delete a authorization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="authID">ID of authorization to delete</param>
+        /// <param name="authID">The ID of the authorization to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public IRestResponse DeleteAuthorizationsIDWithIRestResponse (string authID, string zapTraceSpan = null)
@@ -555,7 +555,7 @@ namespace InfluxDB.Client.Api.Service
         /// Delete a authorization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="authID">ID of authorization to delete</param>
+        /// <param name="authID">The ID of the authorization to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public RestRequest DeleteAuthorizationsIDWithRestRequest (string authID, string zapTraceSpan = null)
@@ -599,7 +599,7 @@ namespace InfluxDB.Client.Api.Service
         /// Delete a authorization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="authID">ID of authorization to delete</param>
+        /// <param name="authID">The ID of the authorization to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
         public async System.Threading.Tasks.Task DeleteAuthorizationsIDAsync (string authID, string zapTraceSpan = null)
@@ -612,7 +612,7 @@ namespace InfluxDB.Client.Api.Service
         /// Delete a authorization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="authID">ID of authorization to delete</param>
+        /// <param name="authID">The ID of the authorization to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteAuthorizationsIDAsyncWithHttpInfo (string authID, string zapTraceSpan = null)
@@ -637,7 +637,7 @@ namespace InfluxDB.Client.Api.Service
         /// Delete a authorization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="authID">ID of authorization to delete</param>
+        /// <param name="authID">The ID of the authorization to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse</returns>
         public async System.Threading.Tasks.Task<IRestResponse> DeleteAuthorizationsIDAsyncWithIRestResponse (string authID, string zapTraceSpan = null)
@@ -691,10 +691,10 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="userID">filter authorizations belonging to a user id (optional)</param>
-        /// <param name="user">filter authorizations belonging to a user name (optional)</param>
-        /// <param name="orgID">filter authorizations belonging to a org id (optional)</param>
-        /// <param name="org">filter authorizations belonging to a org name (optional)</param>
+        /// <param name="userID">Only show authorizations that belong to a user ID. (optional)</param>
+        /// <param name="user">Only show authorizations that belong to a user name. (optional)</param>
+        /// <param name="orgID">Only show authorizations that belong to an organization ID. (optional)</param>
+        /// <param name="org">Only show authorizations that belong to a organization name. (optional)</param>
         /// <returns>Authorizations</returns>
         public Authorizations GetAuthorizations (string zapTraceSpan = null, string userID = null, string user = null, string orgID = null, string org = null)
         {
@@ -707,10 +707,10 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="userID">filter authorizations belonging to a user id (optional)</param>
-        /// <param name="user">filter authorizations belonging to a user name (optional)</param>
-        /// <param name="orgID">filter authorizations belonging to a org id (optional)</param>
-        /// <param name="org">filter authorizations belonging to a org name (optional)</param>
+        /// <param name="userID">Only show authorizations that belong to a user ID. (optional)</param>
+        /// <param name="user">Only show authorizations that belong to a user name. (optional)</param>
+        /// <param name="orgID">Only show authorizations that belong to an organization ID. (optional)</param>
+        /// <param name="org">Only show authorizations that belong to a organization name. (optional)</param>
         /// <returns>ApiResponse of Authorizations</returns>
         public ApiResponse< Authorizations > GetAuthorizationsWithHttpInfo (string zapTraceSpan = null, string userID = null, string user = null, string orgID = null, string org = null)
         {
@@ -767,10 +767,10 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="userID">filter authorizations belonging to a user id (optional)</param>
-        /// <param name="user">filter authorizations belonging to a user name (optional)</param>
-        /// <param name="orgID">filter authorizations belonging to a org id (optional)</param>
-        /// <param name="org">filter authorizations belonging to a org name (optional)</param>
+        /// <param name="userID">Only show authorizations that belong to a user ID. (optional)</param>
+        /// <param name="user">Only show authorizations that belong to a user name. (optional)</param>
+        /// <param name="orgID">Only show authorizations that belong to an organization ID. (optional)</param>
+        /// <param name="org">Only show authorizations that belong to a organization name. (optional)</param>
         /// <returns>ApiResponse of Authorizations</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetAuthorizationsWithIRestResponseAsync (string zapTraceSpan = null, string userID = null, string user = null, string orgID = null, string org = null)
         {
@@ -825,10 +825,10 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="userID">filter authorizations belonging to a user id (optional)</param>
-        /// <param name="user">filter authorizations belonging to a user name (optional)</param>
-        /// <param name="orgID">filter authorizations belonging to a org id (optional)</param>
-        /// <param name="org">filter authorizations belonging to a org name (optional)</param>
+        /// <param name="userID">Only show authorizations that belong to a user ID. (optional)</param>
+        /// <param name="user">Only show authorizations that belong to a user name. (optional)</param>
+        /// <param name="orgID">Only show authorizations that belong to an organization ID. (optional)</param>
+        /// <param name="org">Only show authorizations that belong to a organization name. (optional)</param>
         /// <returns>ApiResponse of Authorizations</returns>
         public IRestResponse GetAuthorizationsWithIRestResponse (string zapTraceSpan = null, string userID = null, string user = null, string orgID = null, string org = null)
         {
@@ -883,10 +883,10 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="userID">filter authorizations belonging to a user id (optional)</param>
-        /// <param name="user">filter authorizations belonging to a user name (optional)</param>
-        /// <param name="orgID">filter authorizations belonging to a org id (optional)</param>
-        /// <param name="org">filter authorizations belonging to a org name (optional)</param>
+        /// <param name="userID">Only show authorizations that belong to a user ID. (optional)</param>
+        /// <param name="user">Only show authorizations that belong to a user name. (optional)</param>
+        /// <param name="orgID">Only show authorizations that belong to an organization ID. (optional)</param>
+        /// <param name="org">Only show authorizations that belong to a organization name. (optional)</param>
         /// <returns>ApiResponse of Authorizations</returns>
         public RestRequest GetAuthorizationsWithRestRequest (string zapTraceSpan = null, string userID = null, string user = null, string orgID = null, string org = null)
         {
@@ -930,10 +930,10 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="userID">filter authorizations belonging to a user id (optional)</param>
-        /// <param name="user">filter authorizations belonging to a user name (optional)</param>
-        /// <param name="orgID">filter authorizations belonging to a org id (optional)</param>
-        /// <param name="org">filter authorizations belonging to a org name (optional)</param>
+        /// <param name="userID">Only show authorizations that belong to a user ID. (optional)</param>
+        /// <param name="user">Only show authorizations that belong to a user name. (optional)</param>
+        /// <param name="orgID">Only show authorizations that belong to an organization ID. (optional)</param>
+        /// <param name="org">Only show authorizations that belong to a organization name. (optional)</param>
         /// <returns>Task of Authorizations</returns>
         public async System.Threading.Tasks.Task<Authorizations> GetAuthorizationsAsync (string zapTraceSpan = null, string userID = null, string user = null, string orgID = null, string org = null)
         {
@@ -947,10 +947,10 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="userID">filter authorizations belonging to a user id (optional)</param>
-        /// <param name="user">filter authorizations belonging to a user name (optional)</param>
-        /// <param name="orgID">filter authorizations belonging to a org id (optional)</param>
-        /// <param name="org">filter authorizations belonging to a org name (optional)</param>
+        /// <param name="userID">Only show authorizations that belong to a user ID. (optional)</param>
+        /// <param name="user">Only show authorizations that belong to a user name. (optional)</param>
+        /// <param name="orgID">Only show authorizations that belong to an organization ID. (optional)</param>
+        /// <param name="org">Only show authorizations that belong to a organization name. (optional)</param>
         /// <returns>Task of ApiResponse (Authorizations)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Authorizations>> GetAuthorizationsAsyncWithHttpInfo (string zapTraceSpan = null, string userID = null, string user = null, string orgID = null, string org = null)
         {
@@ -975,10 +975,10 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="userID">filter authorizations belonging to a user id (optional)</param>
-        /// <param name="user">filter authorizations belonging to a user name (optional)</param>
-        /// <param name="orgID">filter authorizations belonging to a org id (optional)</param>
-        /// <param name="org">filter authorizations belonging to a org name (optional)</param>
+        /// <param name="userID">Only show authorizations that belong to a user ID. (optional)</param>
+        /// <param name="user">Only show authorizations that belong to a user name. (optional)</param>
+        /// <param name="orgID">Only show authorizations that belong to an organization ID. (optional)</param>
+        /// <param name="org">Only show authorizations that belong to a organization name. (optional)</param>
         /// <returns>Task of IRestResponse (Authorizations)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetAuthorizationsAsyncWithIRestResponse (string zapTraceSpan = null, string userID = null, string user = null, string orgID = null, string org = null)
         {
@@ -1030,7 +1030,7 @@ namespace InfluxDB.Client.Api.Service
         /// Retrieve an authorization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="authID">ID of authorization to get</param>
+        /// <param name="authID">The ID of the authorization to get.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Authorization</returns>
         public Authorization GetAuthorizationsID (string authID, string zapTraceSpan = null)
@@ -1043,7 +1043,7 @@ namespace InfluxDB.Client.Api.Service
         /// Retrieve an authorization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="authID">ID of authorization to get</param>
+        /// <param name="authID">The ID of the authorization to get.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Authorization</returns>
         public ApiResponse< Authorization > GetAuthorizationsIDWithHttpInfo (string authID, string zapTraceSpan = null)
@@ -1100,7 +1100,7 @@ namespace InfluxDB.Client.Api.Service
         /// Retrieve an authorization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="authID">ID of authorization to get</param>
+        /// <param name="authID">The ID of the authorization to get.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Authorization</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetAuthorizationsIDWithIRestResponseAsync (string authID, string zapTraceSpan = null)
@@ -1155,7 +1155,7 @@ namespace InfluxDB.Client.Api.Service
         /// Retrieve an authorization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="authID">ID of authorization to get</param>
+        /// <param name="authID">The ID of the authorization to get.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Authorization</returns>
         public IRestResponse GetAuthorizationsIDWithIRestResponse (string authID, string zapTraceSpan = null)
@@ -1210,7 +1210,7 @@ namespace InfluxDB.Client.Api.Service
         /// Retrieve an authorization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="authID">ID of authorization to get</param>
+        /// <param name="authID">The ID of the authorization to get.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Authorization</returns>
         public RestRequest GetAuthorizationsIDWithRestRequest (string authID, string zapTraceSpan = null)
@@ -1254,7 +1254,7 @@ namespace InfluxDB.Client.Api.Service
         /// Retrieve an authorization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="authID">ID of authorization to get</param>
+        /// <param name="authID">The ID of the authorization to get.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of Authorization</returns>
         public async System.Threading.Tasks.Task<Authorization> GetAuthorizationsIDAsync (string authID, string zapTraceSpan = null)
@@ -1268,7 +1268,7 @@ namespace InfluxDB.Client.Api.Service
         /// Retrieve an authorization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="authID">ID of authorization to get</param>
+        /// <param name="authID">The ID of the authorization to get.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (Authorization)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Authorization>> GetAuthorizationsIDAsyncWithHttpInfo (string authID, string zapTraceSpan = null)
@@ -1293,7 +1293,7 @@ namespace InfluxDB.Client.Api.Service
         /// Retrieve an authorization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="authID">ID of authorization to get</param>
+        /// <param name="authID">The ID of the authorization to get.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (Authorization)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetAuthorizationsIDAsyncWithIRestResponse (string authID, string zapTraceSpan = null)
@@ -1343,11 +1343,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// update authorization to be active or inactive. requests using an inactive authorization will be rejected. 
+        /// Update an authorization to be active or inactive 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="authID">ID of authorization to update</param>
-        /// <param name="authorizationUpdateRequest">authorization to update to apply</param>
+        /// <param name="authID">The ID of the authorization to update.</param>
+        /// <param name="authorizationUpdateRequest">Authorization to update</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Authorization</returns>
         public Authorization PatchAuthorizationsID (string authID, AuthorizationUpdateRequest authorizationUpdateRequest, string zapTraceSpan = null)
@@ -1357,11 +1357,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// update authorization to be active or inactive. requests using an inactive authorization will be rejected. 
+        /// Update an authorization to be active or inactive 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="authID">ID of authorization to update</param>
-        /// <param name="authorizationUpdateRequest">authorization to update to apply</param>
+        /// <param name="authID">The ID of the authorization to update.</param>
+        /// <param name="authorizationUpdateRequest">Authorization to update</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Authorization</returns>
         public ApiResponse< Authorization > PatchAuthorizationsIDWithHttpInfo (string authID, AuthorizationUpdateRequest authorizationUpdateRequest, string zapTraceSpan = null)
@@ -1427,11 +1427,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// update authorization to be active or inactive. requests using an inactive authorization will be rejected. 
+        /// Update an authorization to be active or inactive 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="authID">ID of authorization to update</param>
-        /// <param name="authorizationUpdateRequest">authorization to update to apply</param>
+        /// <param name="authID">The ID of the authorization to update.</param>
+        /// <param name="authorizationUpdateRequest">Authorization to update</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Authorization</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PatchAuthorizationsIDWithIRestResponseAsync (string authID, AuthorizationUpdateRequest authorizationUpdateRequest, string zapTraceSpan = null)
@@ -1495,11 +1495,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// update authorization to be active or inactive. requests using an inactive authorization will be rejected. 
+        /// Update an authorization to be active or inactive 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="authID">ID of authorization to update</param>
-        /// <param name="authorizationUpdateRequest">authorization to update to apply</param>
+        /// <param name="authID">The ID of the authorization to update.</param>
+        /// <param name="authorizationUpdateRequest">Authorization to update</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Authorization</returns>
         public IRestResponse PatchAuthorizationsIDWithIRestResponse (string authID, AuthorizationUpdateRequest authorizationUpdateRequest, string zapTraceSpan = null)
@@ -1563,11 +1563,11 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// update authorization to be active or inactive. requests using an inactive authorization will be rejected. 
+        /// Update an authorization to be active or inactive 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="authID">ID of authorization to update</param>
-        /// <param name="authorizationUpdateRequest">authorization to update to apply</param>
+        /// <param name="authID">The ID of the authorization to update.</param>
+        /// <param name="authorizationUpdateRequest">Authorization to update</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Authorization</returns>
         public RestRequest PatchAuthorizationsIDWithRestRequest (string authID, AuthorizationUpdateRequest authorizationUpdateRequest, string zapTraceSpan = null)
@@ -1620,11 +1620,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// update authorization to be active or inactive. requests using an inactive authorization will be rejected. 
+        /// Update an authorization to be active or inactive 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="authID">ID of authorization to update</param>
-        /// <param name="authorizationUpdateRequest">authorization to update to apply</param>
+        /// <param name="authID">The ID of the authorization to update.</param>
+        /// <param name="authorizationUpdateRequest">Authorization to update</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of Authorization</returns>
         public async System.Threading.Tasks.Task<Authorization> PatchAuthorizationsIDAsync (string authID, AuthorizationUpdateRequest authorizationUpdateRequest, string zapTraceSpan = null)
@@ -1635,11 +1635,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// update authorization to be active or inactive. requests using an inactive authorization will be rejected. 
+        /// Update an authorization to be active or inactive 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="authID">ID of authorization to update</param>
-        /// <param name="authorizationUpdateRequest">authorization to update to apply</param>
+        /// <param name="authID">The ID of the authorization to update.</param>
+        /// <param name="authorizationUpdateRequest">Authorization to update</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (Authorization)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Authorization>> PatchAuthorizationsIDAsyncWithHttpInfo (string authID, AuthorizationUpdateRequest authorizationUpdateRequest, string zapTraceSpan = null)
@@ -1661,11 +1661,11 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// update authorization to be active or inactive. requests using an inactive authorization will be rejected. 
+        /// Update an authorization to be active or inactive 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="authID">ID of authorization to update</param>
-        /// <param name="authorizationUpdateRequest">authorization to update to apply</param>
+        /// <param name="authID">The ID of the authorization to update.</param>
+        /// <param name="authorizationUpdateRequest">Authorization to update</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (Authorization)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PatchAuthorizationsIDAsyncWithIRestResponse (string authID, AuthorizationUpdateRequest authorizationUpdateRequest, string zapTraceSpan = null)
@@ -1730,7 +1730,7 @@ namespace InfluxDB.Client.Api.Service
         /// Create an authorization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="authorization">authorization to create</param>
+        /// <param name="authorization">Authorization to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Authorization</returns>
         public Authorization PostAuthorizations (Authorization authorization, string zapTraceSpan = null)
@@ -1743,7 +1743,7 @@ namespace InfluxDB.Client.Api.Service
         /// Create an authorization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="authorization">authorization to create</param>
+        /// <param name="authorization">Authorization to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Authorization</returns>
         public ApiResponse< Authorization > PostAuthorizationsWithHttpInfo (Authorization authorization, string zapTraceSpan = null)
@@ -1808,7 +1808,7 @@ namespace InfluxDB.Client.Api.Service
         /// Create an authorization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="authorization">authorization to create</param>
+        /// <param name="authorization">Authorization to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Authorization</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PostAuthorizationsWithIRestResponseAsync (Authorization authorization, string zapTraceSpan = null)
@@ -1871,7 +1871,7 @@ namespace InfluxDB.Client.Api.Service
         /// Create an authorization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="authorization">authorization to create</param>
+        /// <param name="authorization">Authorization to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Authorization</returns>
         public IRestResponse PostAuthorizationsWithIRestResponse (Authorization authorization, string zapTraceSpan = null)
@@ -1934,7 +1934,7 @@ namespace InfluxDB.Client.Api.Service
         /// Create an authorization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="authorization">authorization to create</param>
+        /// <param name="authorization">Authorization to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Authorization</returns>
         public RestRequest PostAuthorizationsWithRestRequest (Authorization authorization, string zapTraceSpan = null)
@@ -1986,7 +1986,7 @@ namespace InfluxDB.Client.Api.Service
         /// Create an authorization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="authorization">authorization to create</param>
+        /// <param name="authorization">Authorization to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of Authorization</returns>
         public async System.Threading.Tasks.Task<Authorization> PostAuthorizationsAsync (Authorization authorization, string zapTraceSpan = null)
@@ -2000,7 +2000,7 @@ namespace InfluxDB.Client.Api.Service
         /// Create an authorization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="authorization">authorization to create</param>
+        /// <param name="authorization">Authorization to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (Authorization)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Authorization>> PostAuthorizationsAsyncWithHttpInfo (Authorization authorization, string zapTraceSpan = null)
@@ -2025,7 +2025,7 @@ namespace InfluxDB.Client.Api.Service
         /// Create an authorization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="authorization">authorization to create</param>
+        /// <param name="authorization">Authorization to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (Authorization)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PostAuthorizationsAsyncWithIRestResponse (Authorization authorization, string zapTraceSpan = null)

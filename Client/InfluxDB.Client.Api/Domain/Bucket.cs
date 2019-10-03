@@ -30,6 +30,31 @@ namespace InfluxDB.Client.Api.Domain
     public partial class Bucket :  IEquatable<Bucket>
     {
         /// <summary>
+        /// Defines Type
+        /// </summary>
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum TypeEnum
+        {
+            /// <summary>
+            /// Enum User for value: user
+            /// </summary>
+            [EnumMember(Value = "user")]
+            User = 1,
+
+            /// <summary>
+            /// Enum System for value: system
+            /// </summary>
+            [EnumMember(Value = "system")]
+            System = 2
+
+        }
+
+        /// <summary>
+        /// Gets or Sets Type
+        /// </summary>
+        [DataMember(Name="type", EmitDefaultValue=false)]
+        public TypeEnum? Type { get; set; }
+        /// <summary>
         /// Initializes a new instance of the <see cref="Bucket" /> class.
         /// </summary>
         [JsonConstructorAttribute]
@@ -42,7 +67,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="description">description.</param>
         /// <param name="orgID">orgID.</param>
         /// <param name="rp">rp.</param>
-        /// <param name="retentionRules">rules to expire or retain data.  No rules means data never expires. (required).</param>
+        /// <param name="retentionRules">Rules to expire or retain data.  No rules means data never expires. (required).</param>
         /// <param name="labels">labels.</param>
         public Bucket(BucketLinks links = default(BucketLinks), string name = default(string), string description = default(string), string orgID = default(string), string rp = default(string), List<BucketRetentionRules> retentionRules = default(List<BucketRetentionRules>), List<Label> labels = default(List<Label>))
         {
@@ -83,6 +108,7 @@ namespace InfluxDB.Client.Api.Domain
         [DataMember(Name="id", EmitDefaultValue=false)]
         public string Id { get; private set; }
 
+
         /// <summary>
         /// Gets or Sets Name
         /// </summary>
@@ -120,9 +146,9 @@ namespace InfluxDB.Client.Api.Domain
         public DateTime? UpdatedAt { get; private set; }
 
         /// <summary>
-        /// rules to expire or retain data.  No rules means data never expires.
+        /// Rules to expire or retain data.  No rules means data never expires.
         /// </summary>
-        /// <value>rules to expire or retain data.  No rules means data never expires.</value>
+        /// <value>Rules to expire or retain data.  No rules means data never expires.</value>
         [DataMember(Name="retentionRules", EmitDefaultValue=false)]
         public List<BucketRetentionRules> RetentionRules { get; set; }
 
@@ -142,6 +168,7 @@ namespace InfluxDB.Client.Api.Domain
             sb.Append("class Bucket {\n");
             sb.Append("  Links: ").Append(Links).Append("\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
+            sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
             sb.Append("  Description: ").Append(Description).Append("\n");
             sb.Append("  OrgID: ").Append(OrgID).Append("\n");
@@ -193,6 +220,11 @@ namespace InfluxDB.Client.Api.Domain
                     this.Id == input.Id ||
                     (this.Id != null &&
                     this.Id.Equals(input.Id))
+                ) && 
+                (
+                    this.Type == input.Type ||
+                    (this.Type != null &&
+                    this.Type.Equals(input.Type))
                 ) && 
                 (
                     this.Name == input.Name ||
@@ -249,6 +281,8 @@ namespace InfluxDB.Client.Api.Domain
                     hashCode = hashCode * 59 + this.Links.GetHashCode();
                 if (this.Id != null)
                     hashCode = hashCode * 59 + this.Id.GetHashCode();
+                if (this.Type != null)
+                    hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.Name != null)
                     hashCode = hashCode * 59 + this.Name.GetHashCode();
                 if (this.Description != null)

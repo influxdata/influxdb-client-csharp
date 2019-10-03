@@ -24,7 +24,7 @@ using OpenAPIDateConverter = InfluxDB.Client.Api.Client.OpenAPIDateConverter;
 namespace InfluxDB.Client.Api.Domain
 {
     /// <summary>
-    /// a set of statements
+    /// A set of statements
     /// </summary>
     [DataContract]
     public partial class Block :  IEquatable<Block>
@@ -32,8 +32,8 @@ namespace InfluxDB.Client.Api.Domain
         /// <summary>
         /// Initializes a new instance of the <see cref="Block" /> class.
         /// </summary>
-        /// <param name="type">type of AST node.</param>
-        /// <param name="body">block body.</param>
+        /// <param name="type">Type of AST node.</param>
+        /// <param name="body">Block body.</param>
         public Block(string type = default(string), List<Statement> body = default(List<Statement>))
         {
             this.Type = type;
@@ -41,16 +41,16 @@ namespace InfluxDB.Client.Api.Domain
         }
 
         /// <summary>
-        /// type of AST node
+        /// Type of AST node
         /// </summary>
-        /// <value>type of AST node</value>
+        /// <value>Type of AST node</value>
         [DataMember(Name="type", EmitDefaultValue=false)]
         public string Type { get; set; }
 
         /// <summary>
-        /// block body
+        /// Block body
         /// </summary>
-        /// <value>block body</value>
+        /// <value>Block body</value>
         [DataMember(Name="body", EmitDefaultValue=false)]
         [JsonConverter(typeof(BlockBodyAdapter))]
         public List<Statement> Body { get; set; }

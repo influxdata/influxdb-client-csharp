@@ -31,7 +31,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of organization to delete</param>
+        /// <param name="orgID">The ID of the organization to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
         void DeleteOrgsID (string orgID, string zapTraceSpan = null);
@@ -43,82 +43,82 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of organization to delete</param>
+        /// <param name="orgID">The ID of the organization to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> DeleteOrgsIDWithHttpInfo (string orgID, string zapTraceSpan = null);
         /// <summary>
-        /// delete a label from an organization
+        /// Delete a label from an organization
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="labelID">the label id</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="labelID">The label ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
         void DeleteOrgsIDLabelsID (string orgID, string labelID, string zapTraceSpan = null);
 
         /// <summary>
-        /// delete a label from an organization
+        /// Delete a label from an organization
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="labelID">the label id</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="labelID">The label ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> DeleteOrgsIDLabelsIDWithHttpInfo (string orgID, string labelID, string zapTraceSpan = null);
         /// <summary>
-        /// removes a member from an organization
+        /// Remove a member from an organization
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
         void DeleteOrgsIDMembersID (string userID, string orgID, string zapTraceSpan = null);
 
         /// <summary>
-        /// removes a member from an organization
+        /// Remove a member from an organization
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> DeleteOrgsIDMembersIDWithHttpInfo (string userID, string orgID, string zapTraceSpan = null);
         /// <summary>
-        /// removes an owner from an organization
+        /// Remove an owner from an organization
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
         void DeleteOrgsIDOwnersID (string userID, string orgID, string zapTraceSpan = null);
 
         /// <summary>
-        /// removes an owner from an organization
+        /// Remove an owner from an organization
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> DeleteOrgsIDOwnersIDWithHttpInfo (string userID, string orgID, string zapTraceSpan = null);
@@ -130,8 +130,8 @@ namespace InfluxDB.Client.Api.Service
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="org">filter organizations to a specific organization name (optional)</param>
-        /// <param name="orgID">filter organizations to a specific organization ID (optional)</param>
+        /// <param name="org">Filter organizations to a specific organization name. (optional)</param>
+        /// <param name="orgID">Filter organizations to a specific organization ID. (optional)</param>
         /// <returns>Organizations</returns>
         Organizations GetOrgs (string zapTraceSpan = null, string org = null, string orgID = null);
 
@@ -143,8 +143,8 @@ namespace InfluxDB.Client.Api.Service
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="org">filter organizations to a specific organization name (optional)</param>
-        /// <param name="orgID">filter organizations to a specific organization ID (optional)</param>
+        /// <param name="org">Filter organizations to a specific organization name. (optional)</param>
+        /// <param name="orgID">Filter organizations to a specific organization ID. (optional)</param>
         /// <returns>ApiResponse of Organizations</returns>
         ApiResponse<Organizations> GetOrgsWithHttpInfo (string zapTraceSpan = null, string org = null, string orgID = null);
         /// <summary>
@@ -154,7 +154,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of organization to get</param>
+        /// <param name="orgID">The ID of the organization to get.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Organization</returns>
         Organization GetOrgsID (string orgID, string zapTraceSpan = null);
@@ -166,30 +166,30 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of organization to get</param>
+        /// <param name="orgID">The ID of the organization to get.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Organization</returns>
         ApiResponse<Organization> GetOrgsIDWithHttpInfo (string orgID, string zapTraceSpan = null);
         /// <summary>
-        /// list all labels for a organization
+        /// List all labels for a organization
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>LabelsResponse</returns>
         LabelsResponse GetOrgsIDLabels (string orgID, string zapTraceSpan = null);
 
         /// <summary>
-        /// list all labels for a organization
+        /// List all labels for a organization
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelsResponse</returns>
         ApiResponse<LabelsResponse> GetOrgsIDLabelsWithHttpInfo (string orgID, string zapTraceSpan = null);
@@ -200,7 +200,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
@@ -214,7 +214,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
@@ -227,7 +227,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ResourceMembers</returns>
         ResourceMembers GetOrgsIDMembers (string orgID, string zapTraceSpan = null);
@@ -239,7 +239,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMembers</returns>
         ApiResponse<ResourceMembers> GetOrgsIDMembersWithHttpInfo (string orgID, string zapTraceSpan = null);
@@ -250,7 +250,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ResourceOwners</returns>
         ResourceOwners GetOrgsIDOwners (string orgID, string zapTraceSpan = null);
@@ -262,7 +262,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwners</returns>
         ApiResponse<ResourceOwners> GetOrgsIDOwnersWithHttpInfo (string orgID, string zapTraceSpan = null);
@@ -273,7 +273,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>SecretKeysResponse</returns>
         SecretKeysResponse GetOrgsIDSecrets (string orgID, string zapTraceSpan = null);
@@ -285,7 +285,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of SecretKeysResponse</returns>
         ApiResponse<SecretKeysResponse> GetOrgsIDSecretsWithHttpInfo (string orgID, string zapTraceSpan = null);
@@ -296,8 +296,8 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of organization to get</param>
-        /// <param name="organization">organization update to apply</param>
+        /// <param name="orgID">The ID of the organization to get.</param>
+        /// <param name="organization">Organization update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Organization</returns>
         Organization PatchOrgsID (string orgID, Organization organization, string zapTraceSpan = null);
@@ -309,33 +309,33 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of organization to get</param>
-        /// <param name="organization">organization update to apply</param>
+        /// <param name="orgID">The ID of the organization to get.</param>
+        /// <param name="organization">Organization update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Organization</returns>
         ApiResponse<Organization> PatchOrgsIDWithHttpInfo (string orgID, Organization organization, string zapTraceSpan = null);
         /// <summary>
-        /// Apply patch to the provided secrets
+        /// Update secrets in an organization
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="requestBody">secret key value pairs to update/add</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="requestBody">Secret key value pairs to update/add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
         void PatchOrgsIDSecrets (string orgID, Dictionary<string, string> requestBody, string zapTraceSpan = null);
 
         /// <summary>
-        /// Apply patch to the provided secrets
+        /// Update secrets in an organization
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="requestBody">secret key value pairs to update/add</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="requestBody">Secret key value pairs to update/add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> PatchOrgsIDSecretsWithHttpInfo (string orgID, Dictionary<string, string> requestBody, string zapTraceSpan = null);
@@ -346,7 +346,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="organization">organization to create</param>
+        /// <param name="organization">Organization to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Organization</returns>
         Organization PostOrgs (Organization organization, string zapTraceSpan = null);
@@ -358,107 +358,107 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="organization">organization to create</param>
+        /// <param name="organization">Organization to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Organization</returns>
         ApiResponse<Organization> PostOrgsWithHttpInfo (Organization organization, string zapTraceSpan = null);
         /// <summary>
-        /// add a label to an organization
+        /// Add a label to an organization
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>LabelResponse</returns>
         LabelResponse PostOrgsIDLabels (string orgID, LabelMapping labelMapping, string zapTraceSpan = null);
 
         /// <summary>
-        /// add a label to an organization
+        /// Add a label to an organization
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelResponse</returns>
         ApiResponse<LabelResponse> PostOrgsIDLabelsWithHttpInfo (string orgID, LabelMapping labelMapping, string zapTraceSpan = null);
         /// <summary>
-        /// Add organization member
+        /// Add a member to an organization
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ResourceMember</returns>
         ResourceMember PostOrgsIDMembers (string orgID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
 
         /// <summary>
-        /// Add organization member
+        /// Add a member to an organization
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMember</returns>
         ApiResponse<ResourceMember> PostOrgsIDMembersWithHttpInfo (string orgID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
         /// <summary>
-        /// Add organization owner
+        /// Add an owner to an organization
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ResourceOwner</returns>
         ResourceOwner PostOrgsIDOwners (string orgID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
 
         /// <summary>
-        /// Add organization owner
+        /// Add an owner to an organization
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwner</returns>
         ApiResponse<ResourceOwner> PostOrgsIDOwnersWithHttpInfo (string orgID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
         /// <summary>
-        /// delete provided secrets
+        /// Delete secrets from an organization
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="secretKeys">secret key to deleted</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="secretKeys">Secret key to delete</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
         void PostOrgsIDSecrets (string orgID, SecretKeys secretKeys, string zapTraceSpan = null);
 
         /// <summary>
-        /// delete provided secrets
+        /// Delete secrets from an organization
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="secretKeys">secret key to deleted</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="secretKeys">Secret key to delete</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> PostOrgsIDSecretsWithHttpInfo (string orgID, SecretKeys secretKeys, string zapTraceSpan = null);
@@ -471,7 +471,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of organization to delete</param>
+        /// <param name="orgID">The ID of the organization to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
         System.Threading.Tasks.Task DeleteOrgsIDAsync (string orgID, string zapTraceSpan = null);
@@ -483,82 +483,82 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of organization to delete</param>
+        /// <param name="orgID">The ID of the organization to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         System.Threading.Tasks.Task<ApiResponse<Object>> DeleteOrgsIDAsyncWithHttpInfo (string orgID, string zapTraceSpan = null);
         /// <summary>
-        /// delete a label from an organization
+        /// Delete a label from an organization
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="labelID">the label id</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="labelID">The label ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
         System.Threading.Tasks.Task DeleteOrgsIDLabelsIDAsync (string orgID, string labelID, string zapTraceSpan = null);
 
         /// <summary>
-        /// delete a label from an organization
+        /// Delete a label from an organization
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="labelID">the label id</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="labelID">The label ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         System.Threading.Tasks.Task<ApiResponse<Object>> DeleteOrgsIDLabelsIDAsyncWithHttpInfo (string orgID, string labelID, string zapTraceSpan = null);
         /// <summary>
-        /// removes a member from an organization
+        /// Remove a member from an organization
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
         System.Threading.Tasks.Task DeleteOrgsIDMembersIDAsync (string userID, string orgID, string zapTraceSpan = null);
 
         /// <summary>
-        /// removes a member from an organization
+        /// Remove a member from an organization
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         System.Threading.Tasks.Task<ApiResponse<Object>> DeleteOrgsIDMembersIDAsyncWithHttpInfo (string userID, string orgID, string zapTraceSpan = null);
         /// <summary>
-        /// removes an owner from an organization
+        /// Remove an owner from an organization
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
         System.Threading.Tasks.Task DeleteOrgsIDOwnersIDAsync (string userID, string orgID, string zapTraceSpan = null);
 
         /// <summary>
-        /// removes an owner from an organization
+        /// Remove an owner from an organization
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         System.Threading.Tasks.Task<ApiResponse<Object>> DeleteOrgsIDOwnersIDAsyncWithHttpInfo (string userID, string orgID, string zapTraceSpan = null);
@@ -570,8 +570,8 @@ namespace InfluxDB.Client.Api.Service
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="org">filter organizations to a specific organization name (optional)</param>
-        /// <param name="orgID">filter organizations to a specific organization ID (optional)</param>
+        /// <param name="org">Filter organizations to a specific organization name. (optional)</param>
+        /// <param name="orgID">Filter organizations to a specific organization ID. (optional)</param>
         /// <returns>Task of Organizations</returns>
         System.Threading.Tasks.Task<Organizations> GetOrgsAsync (string zapTraceSpan = null, string org = null, string orgID = null);
 
@@ -583,8 +583,8 @@ namespace InfluxDB.Client.Api.Service
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="org">filter organizations to a specific organization name (optional)</param>
-        /// <param name="orgID">filter organizations to a specific organization ID (optional)</param>
+        /// <param name="org">Filter organizations to a specific organization name. (optional)</param>
+        /// <param name="orgID">Filter organizations to a specific organization ID. (optional)</param>
         /// <returns>Task of ApiResponse (Organizations)</returns>
         System.Threading.Tasks.Task<ApiResponse<Organizations>> GetOrgsAsyncWithHttpInfo (string zapTraceSpan = null, string org = null, string orgID = null);
         /// <summary>
@@ -594,7 +594,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of organization to get</param>
+        /// <param name="orgID">The ID of the organization to get.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of Organization</returns>
         System.Threading.Tasks.Task<Organization> GetOrgsIDAsync (string orgID, string zapTraceSpan = null);
@@ -606,30 +606,30 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of organization to get</param>
+        /// <param name="orgID">The ID of the organization to get.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (Organization)</returns>
         System.Threading.Tasks.Task<ApiResponse<Organization>> GetOrgsIDAsyncWithHttpInfo (string orgID, string zapTraceSpan = null);
         /// <summary>
-        /// list all labels for a organization
+        /// List all labels for a organization
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of LabelsResponse</returns>
         System.Threading.Tasks.Task<LabelsResponse> GetOrgsIDLabelsAsync (string orgID, string zapTraceSpan = null);
 
         /// <summary>
-        /// list all labels for a organization
+        /// List all labels for a organization
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (LabelsResponse)</returns>
         System.Threading.Tasks.Task<ApiResponse<LabelsResponse>> GetOrgsIDLabelsAsyncWithHttpInfo (string orgID, string zapTraceSpan = null);
@@ -640,7 +640,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
@@ -654,7 +654,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
@@ -667,7 +667,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ResourceMembers</returns>
         System.Threading.Tasks.Task<ResourceMembers> GetOrgsIDMembersAsync (string orgID, string zapTraceSpan = null);
@@ -679,7 +679,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (ResourceMembers)</returns>
         System.Threading.Tasks.Task<ApiResponse<ResourceMembers>> GetOrgsIDMembersAsyncWithHttpInfo (string orgID, string zapTraceSpan = null);
@@ -690,7 +690,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ResourceOwners</returns>
         System.Threading.Tasks.Task<ResourceOwners> GetOrgsIDOwnersAsync (string orgID, string zapTraceSpan = null);
@@ -702,7 +702,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (ResourceOwners)</returns>
         System.Threading.Tasks.Task<ApiResponse<ResourceOwners>> GetOrgsIDOwnersAsyncWithHttpInfo (string orgID, string zapTraceSpan = null);
@@ -713,7 +713,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of SecretKeysResponse</returns>
         System.Threading.Tasks.Task<SecretKeysResponse> GetOrgsIDSecretsAsync (string orgID, string zapTraceSpan = null);
@@ -725,7 +725,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (SecretKeysResponse)</returns>
         System.Threading.Tasks.Task<ApiResponse<SecretKeysResponse>> GetOrgsIDSecretsAsyncWithHttpInfo (string orgID, string zapTraceSpan = null);
@@ -736,8 +736,8 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of organization to get</param>
-        /// <param name="organization">organization update to apply</param>
+        /// <param name="orgID">The ID of the organization to get.</param>
+        /// <param name="organization">Organization update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of Organization</returns>
         System.Threading.Tasks.Task<Organization> PatchOrgsIDAsync (string orgID, Organization organization, string zapTraceSpan = null);
@@ -749,33 +749,33 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of organization to get</param>
-        /// <param name="organization">organization update to apply</param>
+        /// <param name="orgID">The ID of the organization to get.</param>
+        /// <param name="organization">Organization update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (Organization)</returns>
         System.Threading.Tasks.Task<ApiResponse<Organization>> PatchOrgsIDAsyncWithHttpInfo (string orgID, Organization organization, string zapTraceSpan = null);
         /// <summary>
-        /// Apply patch to the provided secrets
+        /// Update secrets in an organization
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="requestBody">secret key value pairs to update/add</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="requestBody">Secret key value pairs to update/add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
         System.Threading.Tasks.Task PatchOrgsIDSecretsAsync (string orgID, Dictionary<string, string> requestBody, string zapTraceSpan = null);
 
         /// <summary>
-        /// Apply patch to the provided secrets
+        /// Update secrets in an organization
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="requestBody">secret key value pairs to update/add</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="requestBody">Secret key value pairs to update/add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         System.Threading.Tasks.Task<ApiResponse<Object>> PatchOrgsIDSecretsAsyncWithHttpInfo (string orgID, Dictionary<string, string> requestBody, string zapTraceSpan = null);
@@ -786,7 +786,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="organization">organization to create</param>
+        /// <param name="organization">Organization to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of Organization</returns>
         System.Threading.Tasks.Task<Organization> PostOrgsAsync (Organization organization, string zapTraceSpan = null);
@@ -798,107 +798,107 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="organization">organization to create</param>
+        /// <param name="organization">Organization to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (Organization)</returns>
         System.Threading.Tasks.Task<ApiResponse<Organization>> PostOrgsAsyncWithHttpInfo (Organization organization, string zapTraceSpan = null);
         /// <summary>
-        /// add a label to an organization
+        /// Add a label to an organization
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of LabelResponse</returns>
         System.Threading.Tasks.Task<LabelResponse> PostOrgsIDLabelsAsync (string orgID, LabelMapping labelMapping, string zapTraceSpan = null);
 
         /// <summary>
-        /// add a label to an organization
+        /// Add a label to an organization
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (LabelResponse)</returns>
         System.Threading.Tasks.Task<ApiResponse<LabelResponse>> PostOrgsIDLabelsAsyncWithHttpInfo (string orgID, LabelMapping labelMapping, string zapTraceSpan = null);
         /// <summary>
-        /// Add organization member
+        /// Add a member to an organization
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ResourceMember</returns>
         System.Threading.Tasks.Task<ResourceMember> PostOrgsIDMembersAsync (string orgID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
 
         /// <summary>
-        /// Add organization member
+        /// Add a member to an organization
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (ResourceMember)</returns>
         System.Threading.Tasks.Task<ApiResponse<ResourceMember>> PostOrgsIDMembersAsyncWithHttpInfo (string orgID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
         /// <summary>
-        /// Add organization owner
+        /// Add an owner to an organization
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ResourceOwner</returns>
         System.Threading.Tasks.Task<ResourceOwner> PostOrgsIDOwnersAsync (string orgID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
 
         /// <summary>
-        /// Add organization owner
+        /// Add an owner to an organization
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (ResourceOwner)</returns>
         System.Threading.Tasks.Task<ApiResponse<ResourceOwner>> PostOrgsIDOwnersAsyncWithHttpInfo (string orgID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
         /// <summary>
-        /// delete provided secrets
+        /// Delete secrets from an organization
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="secretKeys">secret key to deleted</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="secretKeys">Secret key to delete</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
         System.Threading.Tasks.Task PostOrgsIDSecretsAsync (string orgID, SecretKeys secretKeys, string zapTraceSpan = null);
 
         /// <summary>
-        /// delete provided secrets
+        /// Delete secrets from an organization
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="secretKeys">secret key to deleted</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="secretKeys">Secret key to delete</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         System.Threading.Tasks.Task<ApiResponse<Object>> PostOrgsIDSecretsAsyncWithHttpInfo (string orgID, SecretKeys secretKeys, string zapTraceSpan = null);
@@ -1006,7 +1006,7 @@ namespace InfluxDB.Client.Api.Service
         /// Delete an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of organization to delete</param>
+        /// <param name="orgID">The ID of the organization to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
         public void DeleteOrgsID (string orgID, string zapTraceSpan = null)
@@ -1018,7 +1018,7 @@ namespace InfluxDB.Client.Api.Service
         /// Delete an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of organization to delete</param>
+        /// <param name="orgID">The ID of the organization to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public ApiResponse<Object> DeleteOrgsIDWithHttpInfo (string orgID, string zapTraceSpan = null)
@@ -1075,7 +1075,7 @@ namespace InfluxDB.Client.Api.Service
         /// Delete an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of organization to delete</param>
+        /// <param name="orgID">The ID of the organization to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> DeleteOrgsIDWithIRestResponseAsync (string orgID, string zapTraceSpan = null)
@@ -1130,7 +1130,7 @@ namespace InfluxDB.Client.Api.Service
         /// Delete an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of organization to delete</param>
+        /// <param name="orgID">The ID of the organization to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public IRestResponse DeleteOrgsIDWithIRestResponse (string orgID, string zapTraceSpan = null)
@@ -1185,7 +1185,7 @@ namespace InfluxDB.Client.Api.Service
         /// Delete an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of organization to delete</param>
+        /// <param name="orgID">The ID of the organization to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public RestRequest DeleteOrgsIDWithRestRequest (string orgID, string zapTraceSpan = null)
@@ -1229,7 +1229,7 @@ namespace InfluxDB.Client.Api.Service
         /// Delete an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of organization to delete</param>
+        /// <param name="orgID">The ID of the organization to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
         public async System.Threading.Tasks.Task DeleteOrgsIDAsync (string orgID, string zapTraceSpan = null)
@@ -1242,7 +1242,7 @@ namespace InfluxDB.Client.Api.Service
         /// Delete an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of organization to delete</param>
+        /// <param name="orgID">The ID of the organization to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteOrgsIDAsyncWithHttpInfo (string orgID, string zapTraceSpan = null)
@@ -1267,7 +1267,7 @@ namespace InfluxDB.Client.Api.Service
         /// Delete an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of organization to delete</param>
+        /// <param name="orgID">The ID of the organization to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse</returns>
         public async System.Threading.Tasks.Task<IRestResponse> DeleteOrgsIDAsyncWithIRestResponse (string orgID, string zapTraceSpan = null)
@@ -1317,11 +1317,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// delete a label from an organization 
+        /// Delete a label from an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="labelID">the label id</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="labelID">The label ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
         public void DeleteOrgsIDLabelsID (string orgID, string labelID, string zapTraceSpan = null)
@@ -1330,11 +1330,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// delete a label from an organization 
+        /// Delete a label from an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="labelID">the label id</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="labelID">The label ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public ApiResponse<Object> DeleteOrgsIDLabelsIDWithHttpInfo (string orgID, string labelID, string zapTraceSpan = null)
@@ -1392,11 +1392,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// delete a label from an organization 
+        /// Delete a label from an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="labelID">the label id</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="labelID">The label ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> DeleteOrgsIDLabelsIDWithIRestResponseAsync (string orgID, string labelID, string zapTraceSpan = null)
@@ -1452,11 +1452,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// delete a label from an organization 
+        /// Delete a label from an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="labelID">the label id</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="labelID">The label ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public IRestResponse DeleteOrgsIDLabelsIDWithIRestResponse (string orgID, string labelID, string zapTraceSpan = null)
@@ -1512,11 +1512,11 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// delete a label from an organization 
+        /// Delete a label from an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="labelID">the label id</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="labelID">The label ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public RestRequest DeleteOrgsIDLabelsIDWithRestRequest (string orgID, string labelID, string zapTraceSpan = null)
@@ -1561,11 +1561,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// delete a label from an organization 
+        /// Delete a label from an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="labelID">the label id</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="labelID">The label ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
         public async System.Threading.Tasks.Task DeleteOrgsIDLabelsIDAsync (string orgID, string labelID, string zapTraceSpan = null)
@@ -1575,11 +1575,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// delete a label from an organization 
+        /// Delete a label from an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="labelID">the label id</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="labelID">The label ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteOrgsIDLabelsIDAsyncWithHttpInfo (string orgID, string labelID, string zapTraceSpan = null)
@@ -1601,11 +1601,11 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// delete a label from an organization 
+        /// Delete a label from an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="labelID">the label id</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="labelID">The label ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse</returns>
         public async System.Threading.Tasks.Task<IRestResponse> DeleteOrgsIDLabelsIDAsyncWithIRestResponse (string orgID, string labelID, string zapTraceSpan = null)
@@ -1659,11 +1659,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes a member from an organization 
+        /// Remove a member from an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
         public void DeleteOrgsIDMembersID (string userID, string orgID, string zapTraceSpan = null)
@@ -1672,11 +1672,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes a member from an organization 
+        /// Remove a member from an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public ApiResponse<Object> DeleteOrgsIDMembersIDWithHttpInfo (string userID, string orgID, string zapTraceSpan = null)
@@ -1734,11 +1734,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes a member from an organization 
+        /// Remove a member from an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> DeleteOrgsIDMembersIDWithIRestResponseAsync (string userID, string orgID, string zapTraceSpan = null)
@@ -1794,11 +1794,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes a member from an organization 
+        /// Remove a member from an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public IRestResponse DeleteOrgsIDMembersIDWithIRestResponse (string userID, string orgID, string zapTraceSpan = null)
@@ -1854,11 +1854,11 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// removes a member from an organization 
+        /// Remove a member from an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public RestRequest DeleteOrgsIDMembersIDWithRestRequest (string userID, string orgID, string zapTraceSpan = null)
@@ -1903,11 +1903,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes a member from an organization 
+        /// Remove a member from an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
         public async System.Threading.Tasks.Task DeleteOrgsIDMembersIDAsync (string userID, string orgID, string zapTraceSpan = null)
@@ -1917,11 +1917,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes a member from an organization 
+        /// Remove a member from an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteOrgsIDMembersIDAsyncWithHttpInfo (string userID, string orgID, string zapTraceSpan = null)
@@ -1943,11 +1943,11 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// removes a member from an organization 
+        /// Remove a member from an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse</returns>
         public async System.Threading.Tasks.Task<IRestResponse> DeleteOrgsIDMembersIDAsyncWithIRestResponse (string userID, string orgID, string zapTraceSpan = null)
@@ -2001,11 +2001,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes an owner from an organization 
+        /// Remove an owner from an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
         public void DeleteOrgsIDOwnersID (string userID, string orgID, string zapTraceSpan = null)
@@ -2014,11 +2014,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes an owner from an organization 
+        /// Remove an owner from an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public ApiResponse<Object> DeleteOrgsIDOwnersIDWithHttpInfo (string userID, string orgID, string zapTraceSpan = null)
@@ -2076,11 +2076,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes an owner from an organization 
+        /// Remove an owner from an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> DeleteOrgsIDOwnersIDWithIRestResponseAsync (string userID, string orgID, string zapTraceSpan = null)
@@ -2136,11 +2136,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes an owner from an organization 
+        /// Remove an owner from an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public IRestResponse DeleteOrgsIDOwnersIDWithIRestResponse (string userID, string orgID, string zapTraceSpan = null)
@@ -2196,11 +2196,11 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// removes an owner from an organization 
+        /// Remove an owner from an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public RestRequest DeleteOrgsIDOwnersIDWithRestRequest (string userID, string orgID, string zapTraceSpan = null)
@@ -2245,11 +2245,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes an owner from an organization 
+        /// Remove an owner from an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
         public async System.Threading.Tasks.Task DeleteOrgsIDOwnersIDAsync (string userID, string orgID, string zapTraceSpan = null)
@@ -2259,11 +2259,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes an owner from an organization 
+        /// Remove an owner from an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteOrgsIDOwnersIDAsyncWithHttpInfo (string userID, string orgID, string zapTraceSpan = null)
@@ -2285,11 +2285,11 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// removes an owner from an organization 
+        /// Remove an owner from an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse</returns>
         public async System.Threading.Tasks.Task<IRestResponse> DeleteOrgsIDOwnersIDAsyncWithIRestResponse (string userID, string orgID, string zapTraceSpan = null)
@@ -2347,8 +2347,8 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="org">filter organizations to a specific organization name (optional)</param>
-        /// <param name="orgID">filter organizations to a specific organization ID (optional)</param>
+        /// <param name="org">Filter organizations to a specific organization name. (optional)</param>
+        /// <param name="orgID">Filter organizations to a specific organization ID. (optional)</param>
         /// <returns>Organizations</returns>
         public Organizations GetOrgs (string zapTraceSpan = null, string org = null, string orgID = null)
         {
@@ -2361,8 +2361,8 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="org">filter organizations to a specific organization name (optional)</param>
-        /// <param name="orgID">filter organizations to a specific organization ID (optional)</param>
+        /// <param name="org">Filter organizations to a specific organization name. (optional)</param>
+        /// <param name="orgID">Filter organizations to a specific organization ID. (optional)</param>
         /// <returns>ApiResponse of Organizations</returns>
         public ApiResponse< Organizations > GetOrgsWithHttpInfo (string zapTraceSpan = null, string org = null, string orgID = null)
         {
@@ -2417,8 +2417,8 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="org">filter organizations to a specific organization name (optional)</param>
-        /// <param name="orgID">filter organizations to a specific organization ID (optional)</param>
+        /// <param name="org">Filter organizations to a specific organization name. (optional)</param>
+        /// <param name="orgID">Filter organizations to a specific organization ID. (optional)</param>
         /// <returns>ApiResponse of Organizations</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetOrgsWithIRestResponseAsync (string zapTraceSpan = null, string org = null, string orgID = null)
         {
@@ -2471,8 +2471,8 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="org">filter organizations to a specific organization name (optional)</param>
-        /// <param name="orgID">filter organizations to a specific organization ID (optional)</param>
+        /// <param name="org">Filter organizations to a specific organization name. (optional)</param>
+        /// <param name="orgID">Filter organizations to a specific organization ID. (optional)</param>
         /// <returns>ApiResponse of Organizations</returns>
         public IRestResponse GetOrgsWithIRestResponse (string zapTraceSpan = null, string org = null, string orgID = null)
         {
@@ -2525,8 +2525,8 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="org">filter organizations to a specific organization name (optional)</param>
-        /// <param name="orgID">filter organizations to a specific organization ID (optional)</param>
+        /// <param name="org">Filter organizations to a specific organization name. (optional)</param>
+        /// <param name="orgID">Filter organizations to a specific organization ID. (optional)</param>
         /// <returns>ApiResponse of Organizations</returns>
         public RestRequest GetOrgsWithRestRequest (string zapTraceSpan = null, string org = null, string orgID = null)
         {
@@ -2568,8 +2568,8 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="org">filter organizations to a specific organization name (optional)</param>
-        /// <param name="orgID">filter organizations to a specific organization ID (optional)</param>
+        /// <param name="org">Filter organizations to a specific organization name. (optional)</param>
+        /// <param name="orgID">Filter organizations to a specific organization ID. (optional)</param>
         /// <returns>Task of Organizations</returns>
         public async System.Threading.Tasks.Task<Organizations> GetOrgsAsync (string zapTraceSpan = null, string org = null, string orgID = null)
         {
@@ -2583,8 +2583,8 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="org">filter organizations to a specific organization name (optional)</param>
-        /// <param name="orgID">filter organizations to a specific organization ID (optional)</param>
+        /// <param name="org">Filter organizations to a specific organization name. (optional)</param>
+        /// <param name="orgID">Filter organizations to a specific organization ID. (optional)</param>
         /// <returns>Task of ApiResponse (Organizations)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Organizations>> GetOrgsAsyncWithHttpInfo (string zapTraceSpan = null, string org = null, string orgID = null)
         {
@@ -2609,8 +2609,8 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="org">filter organizations to a specific organization name (optional)</param>
-        /// <param name="orgID">filter organizations to a specific organization ID (optional)</param>
+        /// <param name="org">Filter organizations to a specific organization name. (optional)</param>
+        /// <param name="orgID">Filter organizations to a specific organization ID. (optional)</param>
         /// <returns>Task of IRestResponse (Organizations)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetOrgsAsyncWithIRestResponse (string zapTraceSpan = null, string org = null, string orgID = null)
         {
@@ -2660,7 +2660,7 @@ namespace InfluxDB.Client.Api.Service
         /// Retrieve an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of organization to get</param>
+        /// <param name="orgID">The ID of the organization to get.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Organization</returns>
         public Organization GetOrgsID (string orgID, string zapTraceSpan = null)
@@ -2673,7 +2673,7 @@ namespace InfluxDB.Client.Api.Service
         /// Retrieve an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of organization to get</param>
+        /// <param name="orgID">The ID of the organization to get.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Organization</returns>
         public ApiResponse< Organization > GetOrgsIDWithHttpInfo (string orgID, string zapTraceSpan = null)
@@ -2730,7 +2730,7 @@ namespace InfluxDB.Client.Api.Service
         /// Retrieve an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of organization to get</param>
+        /// <param name="orgID">The ID of the organization to get.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Organization</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetOrgsIDWithIRestResponseAsync (string orgID, string zapTraceSpan = null)
@@ -2785,7 +2785,7 @@ namespace InfluxDB.Client.Api.Service
         /// Retrieve an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of organization to get</param>
+        /// <param name="orgID">The ID of the organization to get.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Organization</returns>
         public IRestResponse GetOrgsIDWithIRestResponse (string orgID, string zapTraceSpan = null)
@@ -2840,7 +2840,7 @@ namespace InfluxDB.Client.Api.Service
         /// Retrieve an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of organization to get</param>
+        /// <param name="orgID">The ID of the organization to get.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Organization</returns>
         public RestRequest GetOrgsIDWithRestRequest (string orgID, string zapTraceSpan = null)
@@ -2884,7 +2884,7 @@ namespace InfluxDB.Client.Api.Service
         /// Retrieve an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of organization to get</param>
+        /// <param name="orgID">The ID of the organization to get.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of Organization</returns>
         public async System.Threading.Tasks.Task<Organization> GetOrgsIDAsync (string orgID, string zapTraceSpan = null)
@@ -2898,7 +2898,7 @@ namespace InfluxDB.Client.Api.Service
         /// Retrieve an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of organization to get</param>
+        /// <param name="orgID">The ID of the organization to get.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (Organization)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Organization>> GetOrgsIDAsyncWithHttpInfo (string orgID, string zapTraceSpan = null)
@@ -2923,7 +2923,7 @@ namespace InfluxDB.Client.Api.Service
         /// Retrieve an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of organization to get</param>
+        /// <param name="orgID">The ID of the organization to get.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (Organization)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetOrgsIDAsyncWithIRestResponse (string orgID, string zapTraceSpan = null)
@@ -2973,10 +2973,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// list all labels for a organization 
+        /// List all labels for a organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>LabelsResponse</returns>
         public LabelsResponse GetOrgsIDLabels (string orgID, string zapTraceSpan = null)
@@ -2986,10 +2986,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// list all labels for a organization 
+        /// List all labels for a organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelsResponse</returns>
         public ApiResponse< LabelsResponse > GetOrgsIDLabelsWithHttpInfo (string orgID, string zapTraceSpan = null)
@@ -3043,10 +3043,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// list all labels for a organization 
+        /// List all labels for a organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelsResponse</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetOrgsIDLabelsWithIRestResponseAsync (string orgID, string zapTraceSpan = null)
@@ -3098,10 +3098,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// list all labels for a organization 
+        /// List all labels for a organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelsResponse</returns>
         public IRestResponse GetOrgsIDLabelsWithIRestResponse (string orgID, string zapTraceSpan = null)
@@ -3153,10 +3153,10 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// list all labels for a organization 
+        /// List all labels for a organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelsResponse</returns>
         public RestRequest GetOrgsIDLabelsWithRestRequest (string orgID, string zapTraceSpan = null)
@@ -3197,10 +3197,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// list all labels for a organization 
+        /// List all labels for a organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of LabelsResponse</returns>
         public async System.Threading.Tasks.Task<LabelsResponse> GetOrgsIDLabelsAsync (string orgID, string zapTraceSpan = null)
@@ -3211,10 +3211,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// list all labels for a organization 
+        /// List all labels for a organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (LabelsResponse)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<LabelsResponse>> GetOrgsIDLabelsAsyncWithHttpInfo (string orgID, string zapTraceSpan = null)
@@ -3236,10 +3236,10 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// list all labels for a organization 
+        /// List all labels for a organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (LabelsResponse)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetOrgsIDLabelsAsyncWithIRestResponse (string orgID, string zapTraceSpan = null)
@@ -3292,7 +3292,7 @@ namespace InfluxDB.Client.Api.Service
         /// Retrieve operation logs for an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
@@ -3307,7 +3307,7 @@ namespace InfluxDB.Client.Api.Service
         /// Retrieve operation logs for an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
@@ -3368,7 +3368,7 @@ namespace InfluxDB.Client.Api.Service
         /// Retrieve operation logs for an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
@@ -3427,7 +3427,7 @@ namespace InfluxDB.Client.Api.Service
         /// Retrieve operation logs for an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
@@ -3486,7 +3486,7 @@ namespace InfluxDB.Client.Api.Service
         /// Retrieve operation logs for an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
@@ -3534,7 +3534,7 @@ namespace InfluxDB.Client.Api.Service
         /// Retrieve operation logs for an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
@@ -3550,7 +3550,7 @@ namespace InfluxDB.Client.Api.Service
         /// Retrieve operation logs for an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
@@ -3577,7 +3577,7 @@ namespace InfluxDB.Client.Api.Service
         /// Retrieve operation logs for an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
@@ -3634,7 +3634,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all members of an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ResourceMembers</returns>
         public ResourceMembers GetOrgsIDMembers (string orgID, string zapTraceSpan = null)
@@ -3647,7 +3647,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all members of an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMembers</returns>
         public ApiResponse< ResourceMembers > GetOrgsIDMembersWithHttpInfo (string orgID, string zapTraceSpan = null)
@@ -3704,7 +3704,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all members of an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMembers</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetOrgsIDMembersWithIRestResponseAsync (string orgID, string zapTraceSpan = null)
@@ -3759,7 +3759,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all members of an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMembers</returns>
         public IRestResponse GetOrgsIDMembersWithIRestResponse (string orgID, string zapTraceSpan = null)
@@ -3814,7 +3814,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all members of an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMembers</returns>
         public RestRequest GetOrgsIDMembersWithRestRequest (string orgID, string zapTraceSpan = null)
@@ -3858,7 +3858,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all members of an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ResourceMembers</returns>
         public async System.Threading.Tasks.Task<ResourceMembers> GetOrgsIDMembersAsync (string orgID, string zapTraceSpan = null)
@@ -3872,7 +3872,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all members of an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (ResourceMembers)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<ResourceMembers>> GetOrgsIDMembersAsyncWithHttpInfo (string orgID, string zapTraceSpan = null)
@@ -3897,7 +3897,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all members of an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (ResourceMembers)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetOrgsIDMembersAsyncWithIRestResponse (string orgID, string zapTraceSpan = null)
@@ -3950,7 +3950,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all owners of an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ResourceOwners</returns>
         public ResourceOwners GetOrgsIDOwners (string orgID, string zapTraceSpan = null)
@@ -3963,7 +3963,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all owners of an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwners</returns>
         public ApiResponse< ResourceOwners > GetOrgsIDOwnersWithHttpInfo (string orgID, string zapTraceSpan = null)
@@ -4020,7 +4020,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all owners of an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwners</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetOrgsIDOwnersWithIRestResponseAsync (string orgID, string zapTraceSpan = null)
@@ -4075,7 +4075,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all owners of an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwners</returns>
         public IRestResponse GetOrgsIDOwnersWithIRestResponse (string orgID, string zapTraceSpan = null)
@@ -4130,7 +4130,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all owners of an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwners</returns>
         public RestRequest GetOrgsIDOwnersWithRestRequest (string orgID, string zapTraceSpan = null)
@@ -4174,7 +4174,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all owners of an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ResourceOwners</returns>
         public async System.Threading.Tasks.Task<ResourceOwners> GetOrgsIDOwnersAsync (string orgID, string zapTraceSpan = null)
@@ -4188,7 +4188,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all owners of an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (ResourceOwners)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<ResourceOwners>> GetOrgsIDOwnersAsyncWithHttpInfo (string orgID, string zapTraceSpan = null)
@@ -4213,7 +4213,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all owners of an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (ResourceOwners)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetOrgsIDOwnersAsyncWithIRestResponse (string orgID, string zapTraceSpan = null)
@@ -4266,7 +4266,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all secret keys for an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>SecretKeysResponse</returns>
         public SecretKeysResponse GetOrgsIDSecrets (string orgID, string zapTraceSpan = null)
@@ -4279,7 +4279,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all secret keys for an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of SecretKeysResponse</returns>
         public ApiResponse< SecretKeysResponse > GetOrgsIDSecretsWithHttpInfo (string orgID, string zapTraceSpan = null)
@@ -4336,7 +4336,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all secret keys for an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of SecretKeysResponse</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetOrgsIDSecretsWithIRestResponseAsync (string orgID, string zapTraceSpan = null)
@@ -4391,7 +4391,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all secret keys for an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of SecretKeysResponse</returns>
         public IRestResponse GetOrgsIDSecretsWithIRestResponse (string orgID, string zapTraceSpan = null)
@@ -4446,7 +4446,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all secret keys for an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of SecretKeysResponse</returns>
         public RestRequest GetOrgsIDSecretsWithRestRequest (string orgID, string zapTraceSpan = null)
@@ -4490,7 +4490,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all secret keys for an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of SecretKeysResponse</returns>
         public async System.Threading.Tasks.Task<SecretKeysResponse> GetOrgsIDSecretsAsync (string orgID, string zapTraceSpan = null)
@@ -4504,7 +4504,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all secret keys for an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (SecretKeysResponse)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<SecretKeysResponse>> GetOrgsIDSecretsAsyncWithHttpInfo (string orgID, string zapTraceSpan = null)
@@ -4529,7 +4529,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all secret keys for an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (SecretKeysResponse)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetOrgsIDSecretsAsyncWithIRestResponse (string orgID, string zapTraceSpan = null)
@@ -4582,8 +4582,8 @@ namespace InfluxDB.Client.Api.Service
         /// Update an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of organization to get</param>
-        /// <param name="organization">organization update to apply</param>
+        /// <param name="orgID">The ID of the organization to get.</param>
+        /// <param name="organization">Organization update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Organization</returns>
         public Organization PatchOrgsID (string orgID, Organization organization, string zapTraceSpan = null)
@@ -4596,8 +4596,8 @@ namespace InfluxDB.Client.Api.Service
         /// Update an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of organization to get</param>
-        /// <param name="organization">organization update to apply</param>
+        /// <param name="orgID">The ID of the organization to get.</param>
+        /// <param name="organization">Organization update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Organization</returns>
         public ApiResponse< Organization > PatchOrgsIDWithHttpInfo (string orgID, Organization organization, string zapTraceSpan = null)
@@ -4666,8 +4666,8 @@ namespace InfluxDB.Client.Api.Service
         /// Update an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of organization to get</param>
-        /// <param name="organization">organization update to apply</param>
+        /// <param name="orgID">The ID of the organization to get.</param>
+        /// <param name="organization">Organization update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Organization</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PatchOrgsIDWithIRestResponseAsync (string orgID, Organization organization, string zapTraceSpan = null)
@@ -4734,8 +4734,8 @@ namespace InfluxDB.Client.Api.Service
         /// Update an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of organization to get</param>
-        /// <param name="organization">organization update to apply</param>
+        /// <param name="orgID">The ID of the organization to get.</param>
+        /// <param name="organization">Organization update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Organization</returns>
         public IRestResponse PatchOrgsIDWithIRestResponse (string orgID, Organization organization, string zapTraceSpan = null)
@@ -4802,8 +4802,8 @@ namespace InfluxDB.Client.Api.Service
         /// Update an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of organization to get</param>
-        /// <param name="organization">organization update to apply</param>
+        /// <param name="orgID">The ID of the organization to get.</param>
+        /// <param name="organization">Organization update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Organization</returns>
         public RestRequest PatchOrgsIDWithRestRequest (string orgID, Organization organization, string zapTraceSpan = null)
@@ -4859,8 +4859,8 @@ namespace InfluxDB.Client.Api.Service
         /// Update an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of organization to get</param>
-        /// <param name="organization">organization update to apply</param>
+        /// <param name="orgID">The ID of the organization to get.</param>
+        /// <param name="organization">Organization update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of Organization</returns>
         public async System.Threading.Tasks.Task<Organization> PatchOrgsIDAsync (string orgID, Organization organization, string zapTraceSpan = null)
@@ -4874,8 +4874,8 @@ namespace InfluxDB.Client.Api.Service
         /// Update an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of organization to get</param>
-        /// <param name="organization">organization update to apply</param>
+        /// <param name="orgID">The ID of the organization to get.</param>
+        /// <param name="organization">Organization update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (Organization)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Organization>> PatchOrgsIDAsyncWithHttpInfo (string orgID, Organization organization, string zapTraceSpan = null)
@@ -4900,8 +4900,8 @@ namespace InfluxDB.Client.Api.Service
         /// Update an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of organization to get</param>
-        /// <param name="organization">organization update to apply</param>
+        /// <param name="orgID">The ID of the organization to get.</param>
+        /// <param name="organization">Organization update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (Organization)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PatchOrgsIDAsyncWithIRestResponse (string orgID, Organization organization, string zapTraceSpan = null)
@@ -4963,11 +4963,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Apply patch to the provided secrets 
+        /// Update secrets in an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="requestBody">secret key value pairs to update/add</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="requestBody">Secret key value pairs to update/add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
         public void PatchOrgsIDSecrets (string orgID, Dictionary<string, string> requestBody, string zapTraceSpan = null)
@@ -4976,11 +4976,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Apply patch to the provided secrets 
+        /// Update secrets in an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="requestBody">secret key value pairs to update/add</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="requestBody">Secret key value pairs to update/add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public ApiResponse<Object> PatchOrgsIDSecretsWithHttpInfo (string orgID, Dictionary<string, string> requestBody, string zapTraceSpan = null)
@@ -5046,11 +5046,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Apply patch to the provided secrets 
+        /// Update secrets in an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="requestBody">secret key value pairs to update/add</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="requestBody">Secret key value pairs to update/add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PatchOrgsIDSecretsWithIRestResponseAsync (string orgID, Dictionary<string, string> requestBody, string zapTraceSpan = null)
@@ -5114,11 +5114,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Apply patch to the provided secrets 
+        /// Update secrets in an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="requestBody">secret key value pairs to update/add</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="requestBody">Secret key value pairs to update/add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public IRestResponse PatchOrgsIDSecretsWithIRestResponse (string orgID, Dictionary<string, string> requestBody, string zapTraceSpan = null)
@@ -5182,11 +5182,11 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// Apply patch to the provided secrets 
+        /// Update secrets in an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="requestBody">secret key value pairs to update/add</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="requestBody">Secret key value pairs to update/add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public RestRequest PatchOrgsIDSecretsWithRestRequest (string orgID, Dictionary<string, string> requestBody, string zapTraceSpan = null)
@@ -5239,11 +5239,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Apply patch to the provided secrets 
+        /// Update secrets in an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="requestBody">secret key value pairs to update/add</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="requestBody">Secret key value pairs to update/add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
         public async System.Threading.Tasks.Task PatchOrgsIDSecretsAsync (string orgID, Dictionary<string, string> requestBody, string zapTraceSpan = null)
@@ -5253,11 +5253,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Apply patch to the provided secrets 
+        /// Update secrets in an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="requestBody">secret key value pairs to update/add</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="requestBody">Secret key value pairs to update/add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Object>> PatchOrgsIDSecretsAsyncWithHttpInfo (string orgID, Dictionary<string, string> requestBody, string zapTraceSpan = null)
@@ -5279,11 +5279,11 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// Apply patch to the provided secrets 
+        /// Update secrets in an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="requestBody">secret key value pairs to update/add</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="requestBody">Secret key value pairs to update/add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PatchOrgsIDSecretsAsyncWithIRestResponse (string orgID, Dictionary<string, string> requestBody, string zapTraceSpan = null)
@@ -5348,7 +5348,7 @@ namespace InfluxDB.Client.Api.Service
         /// Create an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="organization">organization to create</param>
+        /// <param name="organization">Organization to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Organization</returns>
         public Organization PostOrgs (Organization organization, string zapTraceSpan = null)
@@ -5361,7 +5361,7 @@ namespace InfluxDB.Client.Api.Service
         /// Create an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="organization">organization to create</param>
+        /// <param name="organization">Organization to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Organization</returns>
         public ApiResponse< Organization > PostOrgsWithHttpInfo (Organization organization, string zapTraceSpan = null)
@@ -5426,7 +5426,7 @@ namespace InfluxDB.Client.Api.Service
         /// Create an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="organization">organization to create</param>
+        /// <param name="organization">Organization to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Organization</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PostOrgsWithIRestResponseAsync (Organization organization, string zapTraceSpan = null)
@@ -5489,7 +5489,7 @@ namespace InfluxDB.Client.Api.Service
         /// Create an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="organization">organization to create</param>
+        /// <param name="organization">Organization to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Organization</returns>
         public IRestResponse PostOrgsWithIRestResponse (Organization organization, string zapTraceSpan = null)
@@ -5552,7 +5552,7 @@ namespace InfluxDB.Client.Api.Service
         /// Create an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="organization">organization to create</param>
+        /// <param name="organization">Organization to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Organization</returns>
         public RestRequest PostOrgsWithRestRequest (Organization organization, string zapTraceSpan = null)
@@ -5604,7 +5604,7 @@ namespace InfluxDB.Client.Api.Service
         /// Create an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="organization">organization to create</param>
+        /// <param name="organization">Organization to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of Organization</returns>
         public async System.Threading.Tasks.Task<Organization> PostOrgsAsync (Organization organization, string zapTraceSpan = null)
@@ -5618,7 +5618,7 @@ namespace InfluxDB.Client.Api.Service
         /// Create an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="organization">organization to create</param>
+        /// <param name="organization">Organization to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (Organization)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Organization>> PostOrgsAsyncWithHttpInfo (Organization organization, string zapTraceSpan = null)
@@ -5643,7 +5643,7 @@ namespace InfluxDB.Client.Api.Service
         /// Create an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="organization">organization to create</param>
+        /// <param name="organization">Organization to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (Organization)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PostOrgsAsyncWithIRestResponse (Organization organization, string zapTraceSpan = null)
@@ -5701,11 +5701,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// add a label to an organization 
+        /// Add a label to an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>LabelResponse</returns>
         public LabelResponse PostOrgsIDLabels (string orgID, LabelMapping labelMapping, string zapTraceSpan = null)
@@ -5715,11 +5715,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// add a label to an organization 
+        /// Add a label to an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelResponse</returns>
         public ApiResponse< LabelResponse > PostOrgsIDLabelsWithHttpInfo (string orgID, LabelMapping labelMapping, string zapTraceSpan = null)
@@ -5785,11 +5785,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// add a label to an organization 
+        /// Add a label to an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelResponse</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PostOrgsIDLabelsWithIRestResponseAsync (string orgID, LabelMapping labelMapping, string zapTraceSpan = null)
@@ -5853,11 +5853,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// add a label to an organization 
+        /// Add a label to an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelResponse</returns>
         public IRestResponse PostOrgsIDLabelsWithIRestResponse (string orgID, LabelMapping labelMapping, string zapTraceSpan = null)
@@ -5921,11 +5921,11 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// add a label to an organization 
+        /// Add a label to an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelResponse</returns>
         public RestRequest PostOrgsIDLabelsWithRestRequest (string orgID, LabelMapping labelMapping, string zapTraceSpan = null)
@@ -5978,11 +5978,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// add a label to an organization 
+        /// Add a label to an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of LabelResponse</returns>
         public async System.Threading.Tasks.Task<LabelResponse> PostOrgsIDLabelsAsync (string orgID, LabelMapping labelMapping, string zapTraceSpan = null)
@@ -5993,11 +5993,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// add a label to an organization 
+        /// Add a label to an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (LabelResponse)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<LabelResponse>> PostOrgsIDLabelsAsyncWithHttpInfo (string orgID, LabelMapping labelMapping, string zapTraceSpan = null)
@@ -6019,11 +6019,11 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// add a label to an organization 
+        /// Add a label to an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (LabelResponse)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PostOrgsIDLabelsAsyncWithIRestResponse (string orgID, LabelMapping labelMapping, string zapTraceSpan = null)
@@ -6085,11 +6085,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add organization member 
+        /// Add a member to an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ResourceMember</returns>
         public ResourceMember PostOrgsIDMembers (string orgID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -6099,11 +6099,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add organization member 
+        /// Add a member to an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMember</returns>
         public ApiResponse< ResourceMember > PostOrgsIDMembersWithHttpInfo (string orgID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -6169,11 +6169,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add organization member 
+        /// Add a member to an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMember</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PostOrgsIDMembersWithIRestResponseAsync (string orgID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -6237,11 +6237,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add organization member 
+        /// Add a member to an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMember</returns>
         public IRestResponse PostOrgsIDMembersWithIRestResponse (string orgID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -6305,11 +6305,11 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// Add organization member 
+        /// Add a member to an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMember</returns>
         public RestRequest PostOrgsIDMembersWithRestRequest (string orgID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -6362,11 +6362,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add organization member 
+        /// Add a member to an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ResourceMember</returns>
         public async System.Threading.Tasks.Task<ResourceMember> PostOrgsIDMembersAsync (string orgID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -6377,11 +6377,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add organization member 
+        /// Add a member to an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (ResourceMember)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<ResourceMember>> PostOrgsIDMembersAsyncWithHttpInfo (string orgID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -6403,11 +6403,11 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// Add organization member 
+        /// Add a member to an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (ResourceMember)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PostOrgsIDMembersAsyncWithIRestResponse (string orgID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -6469,11 +6469,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add organization owner 
+        /// Add an owner to an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ResourceOwner</returns>
         public ResourceOwner PostOrgsIDOwners (string orgID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -6483,11 +6483,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add organization owner 
+        /// Add an owner to an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwner</returns>
         public ApiResponse< ResourceOwner > PostOrgsIDOwnersWithHttpInfo (string orgID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -6553,11 +6553,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add organization owner 
+        /// Add an owner to an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwner</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PostOrgsIDOwnersWithIRestResponseAsync (string orgID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -6621,11 +6621,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add organization owner 
+        /// Add an owner to an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwner</returns>
         public IRestResponse PostOrgsIDOwnersWithIRestResponse (string orgID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -6689,11 +6689,11 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// Add organization owner 
+        /// Add an owner to an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwner</returns>
         public RestRequest PostOrgsIDOwnersWithRestRequest (string orgID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -6746,11 +6746,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add organization owner 
+        /// Add an owner to an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ResourceOwner</returns>
         public async System.Threading.Tasks.Task<ResourceOwner> PostOrgsIDOwnersAsync (string orgID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -6761,11 +6761,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add organization owner 
+        /// Add an owner to an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (ResourceOwner)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<ResourceOwner>> PostOrgsIDOwnersAsyncWithHttpInfo (string orgID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -6787,11 +6787,11 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// Add organization owner 
+        /// Add an owner to an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (ResourceOwner)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PostOrgsIDOwnersAsyncWithIRestResponse (string orgID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -6853,11 +6853,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// delete provided secrets 
+        /// Delete secrets from an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="secretKeys">secret key to deleted</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="secretKeys">Secret key to delete</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
         public void PostOrgsIDSecrets (string orgID, SecretKeys secretKeys, string zapTraceSpan = null)
@@ -6866,11 +6866,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// delete provided secrets 
+        /// Delete secrets from an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="secretKeys">secret key to deleted</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="secretKeys">Secret key to delete</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public ApiResponse<Object> PostOrgsIDSecretsWithHttpInfo (string orgID, SecretKeys secretKeys, string zapTraceSpan = null)
@@ -6936,11 +6936,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// delete provided secrets 
+        /// Delete secrets from an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="secretKeys">secret key to deleted</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="secretKeys">Secret key to delete</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PostOrgsIDSecretsWithIRestResponseAsync (string orgID, SecretKeys secretKeys, string zapTraceSpan = null)
@@ -7004,11 +7004,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// delete provided secrets 
+        /// Delete secrets from an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="secretKeys">secret key to deleted</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="secretKeys">Secret key to delete</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public IRestResponse PostOrgsIDSecretsWithIRestResponse (string orgID, SecretKeys secretKeys, string zapTraceSpan = null)
@@ -7072,11 +7072,11 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// delete provided secrets 
+        /// Delete secrets from an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="secretKeys">secret key to deleted</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="secretKeys">Secret key to delete</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public RestRequest PostOrgsIDSecretsWithRestRequest (string orgID, SecretKeys secretKeys, string zapTraceSpan = null)
@@ -7129,11 +7129,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// delete provided secrets 
+        /// Delete secrets from an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="secretKeys">secret key to deleted</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="secretKeys">Secret key to delete</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
         public async System.Threading.Tasks.Task PostOrgsIDSecretsAsync (string orgID, SecretKeys secretKeys, string zapTraceSpan = null)
@@ -7143,11 +7143,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// delete provided secrets 
+        /// Delete secrets from an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="secretKeys">secret key to deleted</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="secretKeys">Secret key to delete</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Object>> PostOrgsIDSecretsAsyncWithHttpInfo (string orgID, SecretKeys secretKeys, string zapTraceSpan = null)
@@ -7169,11 +7169,11 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// delete provided secrets 
+        /// Delete secrets from an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="secretKeys">secret key to deleted</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="secretKeys">Secret key to delete</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PostOrgsIDSecretsAsyncWithIRestResponse (string orgID, SecretKeys secretKeys, string zapTraceSpan = null)
