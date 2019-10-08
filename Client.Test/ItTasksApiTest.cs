@@ -408,7 +408,6 @@ namespace InfluxDB.Client.Test
         }
 
         [Test]
-        //_token
         public async Task Member()
         {
             var task = await _tasksApi.CreateTaskCronAsync(GenerateName("it task"), TaskFlux, "0 2 * * *", _organization);
