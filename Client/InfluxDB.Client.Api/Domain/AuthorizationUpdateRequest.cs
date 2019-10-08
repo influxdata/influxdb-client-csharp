@@ -30,9 +30,9 @@ namespace InfluxDB.Client.Api.Domain
     public partial class AuthorizationUpdateRequest :  IEquatable<AuthorizationUpdateRequest>
     {
         /// <summary>
-        /// if inactive the token is inactive and requests using the token will be rejected.
+        /// If inactive the token is inactive and requests using the token will be rejected.
         /// </summary>
-        /// <value>if inactive the token is inactive and requests using the token will be rejected.</value>
+        /// <value>If inactive the token is inactive and requests using the token will be rejected.</value>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum StatusEnum
         {
@@ -51,15 +51,15 @@ namespace InfluxDB.Client.Api.Domain
         }
 
         /// <summary>
-        /// if inactive the token is inactive and requests using the token will be rejected.
+        /// If inactive the token is inactive and requests using the token will be rejected.
         /// </summary>
-        /// <value>if inactive the token is inactive and requests using the token will be rejected.</value>
+        /// <value>If inactive the token is inactive and requests using the token will be rejected.</value>
         [DataMember(Name="status", EmitDefaultValue=false)]
         public StatusEnum? Status { get; set; }
         /// <summary>
         /// Initializes a new instance of the <see cref="AuthorizationUpdateRequest" /> class.
         /// </summary>
-        /// <param name="status">if inactive the token is inactive and requests using the token will be rejected. (default to StatusEnum.Active).</param>
+        /// <param name="status">If inactive the token is inactive and requests using the token will be rejected. (default to StatusEnum.Active).</param>
         /// <param name="description">A description of the token..</param>
         public AuthorizationUpdateRequest(StatusEnum? status = StatusEnum.Active, string description = default(string))
         {

@@ -31,7 +31,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>SecretKeysResponse</returns>
         SecretKeysResponse GetOrgsIDSecrets (string orgID, string zapTraceSpan = null);
@@ -43,57 +43,57 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of SecretKeysResponse</returns>
         ApiResponse<SecretKeysResponse> GetOrgsIDSecretsWithHttpInfo (string orgID, string zapTraceSpan = null);
         /// <summary>
-        /// Apply patch to the provided secrets
+        /// Update secrets in an organization
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="requestBody">secret key value pairs to update/add</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="requestBody">Secret key value pairs to update/add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
         void PatchOrgsIDSecrets (string orgID, Dictionary<string, string> requestBody, string zapTraceSpan = null);
 
         /// <summary>
-        /// Apply patch to the provided secrets
+        /// Update secrets in an organization
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="requestBody">secret key value pairs to update/add</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="requestBody">Secret key value pairs to update/add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> PatchOrgsIDSecretsWithHttpInfo (string orgID, Dictionary<string, string> requestBody, string zapTraceSpan = null);
         /// <summary>
-        /// delete provided secrets
+        /// Delete secrets from an organization
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="secretKeys">secret key to deleted</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="secretKeys">Secret key to delete</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
         void PostOrgsIDSecrets (string orgID, SecretKeys secretKeys, string zapTraceSpan = null);
 
         /// <summary>
-        /// delete provided secrets
+        /// Delete secrets from an organization
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="secretKeys">secret key to deleted</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="secretKeys">Secret key to delete</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> PostOrgsIDSecretsWithHttpInfo (string orgID, SecretKeys secretKeys, string zapTraceSpan = null);
@@ -106,7 +106,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of SecretKeysResponse</returns>
         System.Threading.Tasks.Task<SecretKeysResponse> GetOrgsIDSecretsAsync (string orgID, string zapTraceSpan = null);
@@ -118,57 +118,57 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (SecretKeysResponse)</returns>
         System.Threading.Tasks.Task<ApiResponse<SecretKeysResponse>> GetOrgsIDSecretsAsyncWithHttpInfo (string orgID, string zapTraceSpan = null);
         /// <summary>
-        /// Apply patch to the provided secrets
+        /// Update secrets in an organization
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="requestBody">secret key value pairs to update/add</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="requestBody">Secret key value pairs to update/add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
         System.Threading.Tasks.Task PatchOrgsIDSecretsAsync (string orgID, Dictionary<string, string> requestBody, string zapTraceSpan = null);
 
         /// <summary>
-        /// Apply patch to the provided secrets
+        /// Update secrets in an organization
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="requestBody">secret key value pairs to update/add</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="requestBody">Secret key value pairs to update/add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         System.Threading.Tasks.Task<ApiResponse<Object>> PatchOrgsIDSecretsAsyncWithHttpInfo (string orgID, Dictionary<string, string> requestBody, string zapTraceSpan = null);
         /// <summary>
-        /// delete provided secrets
+        /// Delete secrets from an organization
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="secretKeys">secret key to deleted</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="secretKeys">Secret key to delete</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
         System.Threading.Tasks.Task PostOrgsIDSecretsAsync (string orgID, SecretKeys secretKeys, string zapTraceSpan = null);
 
         /// <summary>
-        /// delete provided secrets
+        /// Delete secrets from an organization
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="secretKeys">secret key to deleted</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="secretKeys">Secret key to delete</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         System.Threading.Tasks.Task<ApiResponse<Object>> PostOrgsIDSecretsAsyncWithHttpInfo (string orgID, SecretKeys secretKeys, string zapTraceSpan = null);
@@ -276,7 +276,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all secret keys for an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>SecretKeysResponse</returns>
         public SecretKeysResponse GetOrgsIDSecrets (string orgID, string zapTraceSpan = null)
@@ -289,7 +289,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all secret keys for an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of SecretKeysResponse</returns>
         public ApiResponse< SecretKeysResponse > GetOrgsIDSecretsWithHttpInfo (string orgID, string zapTraceSpan = null)
@@ -346,7 +346,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all secret keys for an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of SecretKeysResponse</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetOrgsIDSecretsWithIRestResponseAsync (string orgID, string zapTraceSpan = null)
@@ -401,7 +401,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all secret keys for an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of SecretKeysResponse</returns>
         public IRestResponse GetOrgsIDSecretsWithIRestResponse (string orgID, string zapTraceSpan = null)
@@ -456,7 +456,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all secret keys for an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of SecretKeysResponse</returns>
         public RestRequest GetOrgsIDSecretsWithRestRequest (string orgID, string zapTraceSpan = null)
@@ -500,7 +500,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all secret keys for an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of SecretKeysResponse</returns>
         public async System.Threading.Tasks.Task<SecretKeysResponse> GetOrgsIDSecretsAsync (string orgID, string zapTraceSpan = null)
@@ -514,7 +514,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all secret keys for an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (SecretKeysResponse)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<SecretKeysResponse>> GetOrgsIDSecretsAsyncWithHttpInfo (string orgID, string zapTraceSpan = null)
@@ -539,7 +539,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all secret keys for an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
+        /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (SecretKeysResponse)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetOrgsIDSecretsAsyncWithIRestResponse (string orgID, string zapTraceSpan = null)
@@ -589,11 +589,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Apply patch to the provided secrets 
+        /// Update secrets in an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="requestBody">secret key value pairs to update/add</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="requestBody">Secret key value pairs to update/add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
         public void PatchOrgsIDSecrets (string orgID, Dictionary<string, string> requestBody, string zapTraceSpan = null)
@@ -602,11 +602,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Apply patch to the provided secrets 
+        /// Update secrets in an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="requestBody">secret key value pairs to update/add</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="requestBody">Secret key value pairs to update/add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public ApiResponse<Object> PatchOrgsIDSecretsWithHttpInfo (string orgID, Dictionary<string, string> requestBody, string zapTraceSpan = null)
@@ -672,11 +672,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Apply patch to the provided secrets 
+        /// Update secrets in an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="requestBody">secret key value pairs to update/add</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="requestBody">Secret key value pairs to update/add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PatchOrgsIDSecretsWithIRestResponseAsync (string orgID, Dictionary<string, string> requestBody, string zapTraceSpan = null)
@@ -740,11 +740,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Apply patch to the provided secrets 
+        /// Update secrets in an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="requestBody">secret key value pairs to update/add</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="requestBody">Secret key value pairs to update/add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public IRestResponse PatchOrgsIDSecretsWithIRestResponse (string orgID, Dictionary<string, string> requestBody, string zapTraceSpan = null)
@@ -808,11 +808,11 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// Apply patch to the provided secrets 
+        /// Update secrets in an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="requestBody">secret key value pairs to update/add</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="requestBody">Secret key value pairs to update/add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public RestRequest PatchOrgsIDSecretsWithRestRequest (string orgID, Dictionary<string, string> requestBody, string zapTraceSpan = null)
@@ -865,11 +865,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Apply patch to the provided secrets 
+        /// Update secrets in an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="requestBody">secret key value pairs to update/add</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="requestBody">Secret key value pairs to update/add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
         public async System.Threading.Tasks.Task PatchOrgsIDSecretsAsync (string orgID, Dictionary<string, string> requestBody, string zapTraceSpan = null)
@@ -879,11 +879,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Apply patch to the provided secrets 
+        /// Update secrets in an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="requestBody">secret key value pairs to update/add</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="requestBody">Secret key value pairs to update/add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Object>> PatchOrgsIDSecretsAsyncWithHttpInfo (string orgID, Dictionary<string, string> requestBody, string zapTraceSpan = null)
@@ -905,11 +905,11 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// Apply patch to the provided secrets 
+        /// Update secrets in an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="requestBody">secret key value pairs to update/add</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="requestBody">Secret key value pairs to update/add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PatchOrgsIDSecretsAsyncWithIRestResponse (string orgID, Dictionary<string, string> requestBody, string zapTraceSpan = null)
@@ -971,11 +971,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// delete provided secrets 
+        /// Delete secrets from an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="secretKeys">secret key to deleted</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="secretKeys">Secret key to delete</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
         public void PostOrgsIDSecrets (string orgID, SecretKeys secretKeys, string zapTraceSpan = null)
@@ -984,11 +984,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// delete provided secrets 
+        /// Delete secrets from an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="secretKeys">secret key to deleted</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="secretKeys">Secret key to delete</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public ApiResponse<Object> PostOrgsIDSecretsWithHttpInfo (string orgID, SecretKeys secretKeys, string zapTraceSpan = null)
@@ -1054,11 +1054,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// delete provided secrets 
+        /// Delete secrets from an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="secretKeys">secret key to deleted</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="secretKeys">Secret key to delete</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PostOrgsIDSecretsWithIRestResponseAsync (string orgID, SecretKeys secretKeys, string zapTraceSpan = null)
@@ -1122,11 +1122,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// delete provided secrets 
+        /// Delete secrets from an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="secretKeys">secret key to deleted</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="secretKeys">Secret key to delete</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public IRestResponse PostOrgsIDSecretsWithIRestResponse (string orgID, SecretKeys secretKeys, string zapTraceSpan = null)
@@ -1190,11 +1190,11 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// delete provided secrets 
+        /// Delete secrets from an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="secretKeys">secret key to deleted</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="secretKeys">Secret key to delete</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public RestRequest PostOrgsIDSecretsWithRestRequest (string orgID, SecretKeys secretKeys, string zapTraceSpan = null)
@@ -1247,11 +1247,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// delete provided secrets 
+        /// Delete secrets from an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="secretKeys">secret key to deleted</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="secretKeys">Secret key to delete</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
         public async System.Threading.Tasks.Task PostOrgsIDSecretsAsync (string orgID, SecretKeys secretKeys, string zapTraceSpan = null)
@@ -1261,11 +1261,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// delete provided secrets 
+        /// Delete secrets from an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="secretKeys">secret key to deleted</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="secretKeys">Secret key to delete</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Object>> PostOrgsIDSecretsAsyncWithHttpInfo (string orgID, SecretKeys secretKeys, string zapTraceSpan = null)
@@ -1287,11 +1287,11 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// delete provided secrets 
+        /// Delete secrets from an organization 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">ID of the organization</param>
-        /// <param name="secretKeys">secret key to deleted</param>
+        /// <param name="orgID">The organization ID.</param>
+        /// <param name="secretKeys">Secret key to delete</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PostOrgsIDSecretsAsyncWithIRestResponse (string orgID, SecretKeys secretKeys, string zapTraceSpan = null)

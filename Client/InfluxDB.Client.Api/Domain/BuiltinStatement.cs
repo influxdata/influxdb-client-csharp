@@ -24,7 +24,7 @@ using OpenAPIDateConverter = InfluxDB.Client.Api.Client.OpenAPIDateConverter;
 namespace InfluxDB.Client.Api.Domain
 {
     /// <summary>
-    /// declares a builtin identifier and its type
+    /// Declares a builtin identifier and its type
     /// </summary>
     [DataContract]
     public partial class BuiltinStatement :  IEquatable<BuiltinStatement>
@@ -32,7 +32,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <summary>
         /// Initializes a new instance of the <see cref="BuiltinStatement" /> class.
         /// </summary>
-        /// <param name="type">type of AST node.</param>
+        /// <param name="type">Type of AST node.</param>
         /// <param name="id">id.</param>
         public BuiltinStatement(string type = default(string), Identifier id = default(Identifier))
         {
@@ -41,9 +41,9 @@ namespace InfluxDB.Client.Api.Domain
         }
 
         /// <summary>
-        /// type of AST node
+        /// Type of AST node
         /// </summary>
-        /// <value>type of AST node</value>
+        /// <value>Type of AST node</value>
         [DataMember(Name="type", EmitDefaultValue=false)]
         public string Type { get; set; }
 

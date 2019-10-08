@@ -130,9 +130,9 @@ namespace InfluxDB.Client.Api.Domain
     {
         private static readonly Dictionary<string[], Type> Types = new Dictionary<string[], Type>(new Client.DiscriminatorComparer<string>())
         {
-            {new []{ "SlackNotificationEndpoint" }, typeof(SlackNotificationEndpoint)},
-            {new []{ "PagerDutyNotificationEndpoint" }, typeof(PagerDutyNotificationEndpoint)},
-            {new []{ "HTTPNotificationEndpoint" }, typeof(HTTPNotificationEndpoint)},
+            {new []{ "slack" }, typeof(SlackNotificationEndpoint)},
+            {new []{ "pagerduty" }, typeof(PagerDutyNotificationEndpoint)},
+            {new []{ "http" }, typeof(HTTPNotificationEndpoint)},
         };
 
         public override bool CanConvert(Type objectType)
@@ -158,7 +158,7 @@ namespace InfluxDB.Client.Api.Domain
 
                     var jObject = Newtonsoft.Json.Linq.JObject.Load(reader);
 
-                    var discriminator = new []{ "id" }.Select(key => jObject[key].ToString()).ToArray();
+                    var discriminator = new []{ "type" }.Select(key => jObject[key].ToString()).ToArray();
 
                     Types.TryGetValue(discriminator, out var type);
 

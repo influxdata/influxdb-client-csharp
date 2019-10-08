@@ -37,18 +37,18 @@ namespace InfluxDB.Client.Api.Domain
         /// <summary>
         /// Initializes a new instance of the <see cref="PagerDutyNotificationEndpoint" /> class.
         /// </summary>
-        /// <param name="url">url (required).</param>
+        /// <param name="clientURL">clientURL (required).</param>
         /// <param name="routingKey">routingKey (required).</param>
-        public PagerDutyNotificationEndpoint(string url = default(string), string routingKey = default(string), string id = default(string), string orgID = default(string), string userID = default(string), string description = default(string), string name = default(string), StatusEnum? status = StatusEnum.Active, List<Label> labels = default(List<Label>), NotificationEndpointType type = default(NotificationEndpointType)) : base(id, orgID, userID, description, name, status, labels, type)
+        public PagerDutyNotificationEndpoint(string clientURL = default(string), string routingKey = default(string), string id = default(string), string orgID = default(string), string userID = default(string), string description = default(string), string name = default(string), StatusEnum? status = StatusEnum.Active, List<Label> labels = default(List<Label>), NotificationEndpointBaseLinks links = default(NotificationEndpointBaseLinks), NotificationEndpointType type = default(NotificationEndpointType)) : base(id, orgID, userID, description, name, status, labels, links, type)
         {
-            // to ensure "url" is required (not null)
-            if (url == null)
+            // to ensure "clientURL" is required (not null)
+            if (clientURL == null)
             {
-                throw new InvalidDataException("url is a required property for PagerDutyNotificationEndpoint and cannot be null");
+                throw new InvalidDataException("clientURL is a required property for PagerDutyNotificationEndpoint and cannot be null");
             }
             else
             {
-                this.Url = url;
+                this.ClientURL = clientURL;
             }
             // to ensure "routingKey" is required (not null)
             if (routingKey == null)
@@ -62,10 +62,10 @@ namespace InfluxDB.Client.Api.Domain
         }
 
         /// <summary>
-        /// Gets or Sets Url
+        /// Gets or Sets ClientURL
         /// </summary>
-        [DataMember(Name="url", EmitDefaultValue=false)]
-        public string Url { get; set; }
+        [DataMember(Name="clientURL", EmitDefaultValue=false)]
+        public string ClientURL { get; set; }
 
         /// <summary>
         /// Gets or Sets RoutingKey
@@ -82,7 +82,7 @@ namespace InfluxDB.Client.Api.Domain
             var sb = new StringBuilder();
             sb.Append("class PagerDutyNotificationEndpoint {\n");
             sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
-            sb.Append("  Url: ").Append(Url).Append("\n");
+            sb.Append("  ClientURL: ").Append(ClientURL).Append("\n");
             sb.Append("  RoutingKey: ").Append(RoutingKey).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -119,9 +119,9 @@ namespace InfluxDB.Client.Api.Domain
 
             return base.Equals(input) && 
                 (
-                    this.Url == input.Url ||
-                    (this.Url != null &&
-                    this.Url.Equals(input.Url))
+                    this.ClientURL == input.ClientURL ||
+                    (this.ClientURL != null &&
+                    this.ClientURL.Equals(input.ClientURL))
                 ) && base.Equals(input) && 
                 (
                     this.RoutingKey == input.RoutingKey ||
@@ -139,8 +139,8 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = base.GetHashCode();
-                if (this.Url != null)
-                    hashCode = hashCode * 59 + this.Url.GetHashCode();
+                if (this.ClientURL != null)
+                    hashCode = hashCode * 59 + this.ClientURL.GetHashCode();
                 if (this.RoutingKey != null)
                     hashCode = hashCode * 59 + this.RoutingKey.GetHashCode();
                 return hashCode;

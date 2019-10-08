@@ -25,438 +25,438 @@ namespace InfluxDB.Client.Api.Service
     {
         #region Synchronous Operations
         /// <summary>
-        /// delete a variable
+        /// Delete a variable
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="variableID">id of the variable</param>
+        /// <param name="variableID">The variable ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
         void DeleteVariablesID (string variableID, string zapTraceSpan = null);
 
         /// <summary>
-        /// delete a variable
+        /// Delete a variable
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="variableID">id of the variable</param>
+        /// <param name="variableID">The variable ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> DeleteVariablesIDWithHttpInfo (string variableID, string zapTraceSpan = null);
         /// <summary>
-        /// delete a label from a variable
+        /// Delete a label from a variable
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="variableID">ID of the variable</param>
-        /// <param name="labelID">the label id to delete</param>
+        /// <param name="variableID">The variable ID.</param>
+        /// <param name="labelID">The label ID to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
         void DeleteVariablesIDLabelsID (string variableID, string labelID, string zapTraceSpan = null);
 
         /// <summary>
-        /// delete a label from a variable
+        /// Delete a label from a variable
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="variableID">ID of the variable</param>
-        /// <param name="labelID">the label id to delete</param>
+        /// <param name="variableID">The variable ID.</param>
+        /// <param name="labelID">The label ID to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> DeleteVariablesIDLabelsIDWithHttpInfo (string variableID, string labelID, string zapTraceSpan = null);
         /// <summary>
-        /// get all variables
+        /// Get all variables
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="org">specifies the organization name of the resource (optional)</param>
-        /// <param name="orgID">specifies the organization id of the resource (optional)</param>
+        /// <param name="org">The organization name. (optional)</param>
+        /// <param name="orgID">The organization ID. (optional)</param>
         /// <returns>Variables</returns>
         Variables GetVariables (string zapTraceSpan = null, string org = null, string orgID = null);
 
         /// <summary>
-        /// get all variables
+        /// Get all variables
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="org">specifies the organization name of the resource (optional)</param>
-        /// <param name="orgID">specifies the organization id of the resource (optional)</param>
+        /// <param name="org">The organization name. (optional)</param>
+        /// <param name="orgID">The organization ID. (optional)</param>
         /// <returns>ApiResponse of Variables</returns>
         ApiResponse<Variables> GetVariablesWithHttpInfo (string zapTraceSpan = null, string org = null, string orgID = null);
         /// <summary>
-        /// get a variable
+        /// Get a variable
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="variableID">ID of the variable</param>
+        /// <param name="variableID">The variable ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Variable</returns>
         Variable GetVariablesID (string variableID, string zapTraceSpan = null);
 
         /// <summary>
-        /// get a variable
+        /// Get a variable
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="variableID">ID of the variable</param>
+        /// <param name="variableID">The variable ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Variable</returns>
         ApiResponse<Variable> GetVariablesIDWithHttpInfo (string variableID, string zapTraceSpan = null);
         /// <summary>
-        /// list all labels for a variable
+        /// List all labels for a variable
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="variableID">ID of the variable</param>
+        /// <param name="variableID">The variable ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>LabelsResponse</returns>
         LabelsResponse GetVariablesIDLabels (string variableID, string zapTraceSpan = null);
 
         /// <summary>
-        /// list all labels for a variable
+        /// List all labels for a variable
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="variableID">ID of the variable</param>
+        /// <param name="variableID">The variable ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelsResponse</returns>
         ApiResponse<LabelsResponse> GetVariablesIDLabelsWithHttpInfo (string variableID, string zapTraceSpan = null);
         /// <summary>
-        /// update a variable
+        /// Update a variable
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="variableID">id of the variable</param>
-        /// <param name="variable">variable update to apply</param>
+        /// <param name="variableID">The variable ID.</param>
+        /// <param name="variable">Variable update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Variable</returns>
         Variable PatchVariablesID (string variableID, Variable variable, string zapTraceSpan = null);
 
         /// <summary>
-        /// update a variable
+        /// Update a variable
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="variableID">id of the variable</param>
-        /// <param name="variable">variable update to apply</param>
+        /// <param name="variableID">The variable ID.</param>
+        /// <param name="variable">Variable update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Variable</returns>
         ApiResponse<Variable> PatchVariablesIDWithHttpInfo (string variableID, Variable variable, string zapTraceSpan = null);
         /// <summary>
-        /// create a variable
+        /// Create a variable
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="variable">variable to create</param>
+        /// <param name="variable">Variable to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Variable</returns>
         Variable PostVariables (Variable variable, string zapTraceSpan = null);
 
         /// <summary>
-        /// create a variable
+        /// Create a variable
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="variable">variable to create</param>
+        /// <param name="variable">Variable to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Variable</returns>
         ApiResponse<Variable> PostVariablesWithHttpInfo (Variable variable, string zapTraceSpan = null);
         /// <summary>
-        /// add a label to a variable
+        /// Add a label to a variable
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="variableID">ID of the variable</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="variableID">The variable ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>LabelResponse</returns>
         LabelResponse PostVariablesIDLabels (string variableID, LabelMapping labelMapping, string zapTraceSpan = null);
 
         /// <summary>
-        /// add a label to a variable
+        /// Add a label to a variable
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="variableID">ID of the variable</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="variableID">The variable ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelResponse</returns>
         ApiResponse<LabelResponse> PostVariablesIDLabelsWithHttpInfo (string variableID, LabelMapping labelMapping, string zapTraceSpan = null);
         /// <summary>
-        /// replace a variable
+        /// Replace a variable
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="variableID">id of the variable</param>
-        /// <param name="variable">variable to replace</param>
+        /// <param name="variableID">The variable ID.</param>
+        /// <param name="variable">Variable to replace</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Variable</returns>
         Variable PutVariablesID (string variableID, Variable variable, string zapTraceSpan = null);
 
         /// <summary>
-        /// replace a variable
+        /// Replace a variable
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="variableID">id of the variable</param>
-        /// <param name="variable">variable to replace</param>
+        /// <param name="variableID">The variable ID.</param>
+        /// <param name="variable">Variable to replace</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Variable</returns>
         ApiResponse<Variable> PutVariablesIDWithHttpInfo (string variableID, Variable variable, string zapTraceSpan = null);
         #endregion Synchronous Operations
         #region Asynchronous Operations
         /// <summary>
-        /// delete a variable
+        /// Delete a variable
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="variableID">id of the variable</param>
+        /// <param name="variableID">The variable ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
         System.Threading.Tasks.Task DeleteVariablesIDAsync (string variableID, string zapTraceSpan = null);
 
         /// <summary>
-        /// delete a variable
+        /// Delete a variable
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="variableID">id of the variable</param>
+        /// <param name="variableID">The variable ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         System.Threading.Tasks.Task<ApiResponse<Object>> DeleteVariablesIDAsyncWithHttpInfo (string variableID, string zapTraceSpan = null);
         /// <summary>
-        /// delete a label from a variable
+        /// Delete a label from a variable
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="variableID">ID of the variable</param>
-        /// <param name="labelID">the label id to delete</param>
+        /// <param name="variableID">The variable ID.</param>
+        /// <param name="labelID">The label ID to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
         System.Threading.Tasks.Task DeleteVariablesIDLabelsIDAsync (string variableID, string labelID, string zapTraceSpan = null);
 
         /// <summary>
-        /// delete a label from a variable
+        /// Delete a label from a variable
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="variableID">ID of the variable</param>
-        /// <param name="labelID">the label id to delete</param>
+        /// <param name="variableID">The variable ID.</param>
+        /// <param name="labelID">The label ID to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         System.Threading.Tasks.Task<ApiResponse<Object>> DeleteVariablesIDLabelsIDAsyncWithHttpInfo (string variableID, string labelID, string zapTraceSpan = null);
         /// <summary>
-        /// get all variables
+        /// Get all variables
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="org">specifies the organization name of the resource (optional)</param>
-        /// <param name="orgID">specifies the organization id of the resource (optional)</param>
+        /// <param name="org">The organization name. (optional)</param>
+        /// <param name="orgID">The organization ID. (optional)</param>
         /// <returns>Task of Variables</returns>
         System.Threading.Tasks.Task<Variables> GetVariablesAsync (string zapTraceSpan = null, string org = null, string orgID = null);
 
         /// <summary>
-        /// get all variables
+        /// Get all variables
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="org">specifies the organization name of the resource (optional)</param>
-        /// <param name="orgID">specifies the organization id of the resource (optional)</param>
+        /// <param name="org">The organization name. (optional)</param>
+        /// <param name="orgID">The organization ID. (optional)</param>
         /// <returns>Task of ApiResponse (Variables)</returns>
         System.Threading.Tasks.Task<ApiResponse<Variables>> GetVariablesAsyncWithHttpInfo (string zapTraceSpan = null, string org = null, string orgID = null);
         /// <summary>
-        /// get a variable
+        /// Get a variable
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="variableID">ID of the variable</param>
+        /// <param name="variableID">The variable ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of Variable</returns>
         System.Threading.Tasks.Task<Variable> GetVariablesIDAsync (string variableID, string zapTraceSpan = null);
 
         /// <summary>
-        /// get a variable
+        /// Get a variable
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="variableID">ID of the variable</param>
+        /// <param name="variableID">The variable ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (Variable)</returns>
         System.Threading.Tasks.Task<ApiResponse<Variable>> GetVariablesIDAsyncWithHttpInfo (string variableID, string zapTraceSpan = null);
         /// <summary>
-        /// list all labels for a variable
+        /// List all labels for a variable
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="variableID">ID of the variable</param>
+        /// <param name="variableID">The variable ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of LabelsResponse</returns>
         System.Threading.Tasks.Task<LabelsResponse> GetVariablesIDLabelsAsync (string variableID, string zapTraceSpan = null);
 
         /// <summary>
-        /// list all labels for a variable
+        /// List all labels for a variable
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="variableID">ID of the variable</param>
+        /// <param name="variableID">The variable ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (LabelsResponse)</returns>
         System.Threading.Tasks.Task<ApiResponse<LabelsResponse>> GetVariablesIDLabelsAsyncWithHttpInfo (string variableID, string zapTraceSpan = null);
         /// <summary>
-        /// update a variable
+        /// Update a variable
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="variableID">id of the variable</param>
-        /// <param name="variable">variable update to apply</param>
+        /// <param name="variableID">The variable ID.</param>
+        /// <param name="variable">Variable update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of Variable</returns>
         System.Threading.Tasks.Task<Variable> PatchVariablesIDAsync (string variableID, Variable variable, string zapTraceSpan = null);
 
         /// <summary>
-        /// update a variable
+        /// Update a variable
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="variableID">id of the variable</param>
-        /// <param name="variable">variable update to apply</param>
+        /// <param name="variableID">The variable ID.</param>
+        /// <param name="variable">Variable update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (Variable)</returns>
         System.Threading.Tasks.Task<ApiResponse<Variable>> PatchVariablesIDAsyncWithHttpInfo (string variableID, Variable variable, string zapTraceSpan = null);
         /// <summary>
-        /// create a variable
+        /// Create a variable
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="variable">variable to create</param>
+        /// <param name="variable">Variable to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of Variable</returns>
         System.Threading.Tasks.Task<Variable> PostVariablesAsync (Variable variable, string zapTraceSpan = null);
 
         /// <summary>
-        /// create a variable
+        /// Create a variable
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="variable">variable to create</param>
+        /// <param name="variable">Variable to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (Variable)</returns>
         System.Threading.Tasks.Task<ApiResponse<Variable>> PostVariablesAsyncWithHttpInfo (Variable variable, string zapTraceSpan = null);
         /// <summary>
-        /// add a label to a variable
+        /// Add a label to a variable
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="variableID">ID of the variable</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="variableID">The variable ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of LabelResponse</returns>
         System.Threading.Tasks.Task<LabelResponse> PostVariablesIDLabelsAsync (string variableID, LabelMapping labelMapping, string zapTraceSpan = null);
 
         /// <summary>
-        /// add a label to a variable
+        /// Add a label to a variable
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="variableID">ID of the variable</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="variableID">The variable ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (LabelResponse)</returns>
         System.Threading.Tasks.Task<ApiResponse<LabelResponse>> PostVariablesIDLabelsAsyncWithHttpInfo (string variableID, LabelMapping labelMapping, string zapTraceSpan = null);
         /// <summary>
-        /// replace a variable
+        /// Replace a variable
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="variableID">id of the variable</param>
-        /// <param name="variable">variable to replace</param>
+        /// <param name="variableID">The variable ID.</param>
+        /// <param name="variable">Variable to replace</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of Variable</returns>
         System.Threading.Tasks.Task<Variable> PutVariablesIDAsync (string variableID, Variable variable, string zapTraceSpan = null);
 
         /// <summary>
-        /// replace a variable
+        /// Replace a variable
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="variableID">id of the variable</param>
-        /// <param name="variable">variable to replace</param>
+        /// <param name="variableID">The variable ID.</param>
+        /// <param name="variable">Variable to replace</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (Variable)</returns>
         System.Threading.Tasks.Task<ApiResponse<Variable>> PutVariablesIDAsyncWithHttpInfo (string variableID, Variable variable, string zapTraceSpan = null);
@@ -561,10 +561,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// delete a variable 
+        /// Delete a variable 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="variableID">id of the variable</param>
+        /// <param name="variableID">The variable ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
         public void DeleteVariablesID (string variableID, string zapTraceSpan = null)
@@ -573,10 +573,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// delete a variable 
+        /// Delete a variable 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="variableID">id of the variable</param>
+        /// <param name="variableID">The variable ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public ApiResponse<Object> DeleteVariablesIDWithHttpInfo (string variableID, string zapTraceSpan = null)
@@ -630,10 +630,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// delete a variable 
+        /// Delete a variable 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="variableID">id of the variable</param>
+        /// <param name="variableID">The variable ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> DeleteVariablesIDWithIRestResponseAsync (string variableID, string zapTraceSpan = null)
@@ -685,10 +685,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// delete a variable 
+        /// Delete a variable 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="variableID">id of the variable</param>
+        /// <param name="variableID">The variable ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public IRestResponse DeleteVariablesIDWithIRestResponse (string variableID, string zapTraceSpan = null)
@@ -740,10 +740,10 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// delete a variable 
+        /// Delete a variable 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="variableID">id of the variable</param>
+        /// <param name="variableID">The variable ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public RestRequest DeleteVariablesIDWithRestRequest (string variableID, string zapTraceSpan = null)
@@ -784,10 +784,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// delete a variable 
+        /// Delete a variable 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="variableID">id of the variable</param>
+        /// <param name="variableID">The variable ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
         public async System.Threading.Tasks.Task DeleteVariablesIDAsync (string variableID, string zapTraceSpan = null)
@@ -797,10 +797,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// delete a variable 
+        /// Delete a variable 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="variableID">id of the variable</param>
+        /// <param name="variableID">The variable ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteVariablesIDAsyncWithHttpInfo (string variableID, string zapTraceSpan = null)
@@ -822,10 +822,10 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// delete a variable 
+        /// Delete a variable 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="variableID">id of the variable</param>
+        /// <param name="variableID">The variable ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse</returns>
         public async System.Threading.Tasks.Task<IRestResponse> DeleteVariablesIDAsyncWithIRestResponse (string variableID, string zapTraceSpan = null)
@@ -875,11 +875,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// delete a label from a variable 
+        /// Delete a label from a variable 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="variableID">ID of the variable</param>
-        /// <param name="labelID">the label id to delete</param>
+        /// <param name="variableID">The variable ID.</param>
+        /// <param name="labelID">The label ID to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
         public void DeleteVariablesIDLabelsID (string variableID, string labelID, string zapTraceSpan = null)
@@ -888,11 +888,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// delete a label from a variable 
+        /// Delete a label from a variable 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="variableID">ID of the variable</param>
-        /// <param name="labelID">the label id to delete</param>
+        /// <param name="variableID">The variable ID.</param>
+        /// <param name="labelID">The label ID to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public ApiResponse<Object> DeleteVariablesIDLabelsIDWithHttpInfo (string variableID, string labelID, string zapTraceSpan = null)
@@ -950,11 +950,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// delete a label from a variable 
+        /// Delete a label from a variable 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="variableID">ID of the variable</param>
-        /// <param name="labelID">the label id to delete</param>
+        /// <param name="variableID">The variable ID.</param>
+        /// <param name="labelID">The label ID to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> DeleteVariablesIDLabelsIDWithIRestResponseAsync (string variableID, string labelID, string zapTraceSpan = null)
@@ -1010,11 +1010,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// delete a label from a variable 
+        /// Delete a label from a variable 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="variableID">ID of the variable</param>
-        /// <param name="labelID">the label id to delete</param>
+        /// <param name="variableID">The variable ID.</param>
+        /// <param name="labelID">The label ID to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public IRestResponse DeleteVariablesIDLabelsIDWithIRestResponse (string variableID, string labelID, string zapTraceSpan = null)
@@ -1070,11 +1070,11 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// delete a label from a variable 
+        /// Delete a label from a variable 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="variableID">ID of the variable</param>
-        /// <param name="labelID">the label id to delete</param>
+        /// <param name="variableID">The variable ID.</param>
+        /// <param name="labelID">The label ID to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public RestRequest DeleteVariablesIDLabelsIDWithRestRequest (string variableID, string labelID, string zapTraceSpan = null)
@@ -1119,11 +1119,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// delete a label from a variable 
+        /// Delete a label from a variable 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="variableID">ID of the variable</param>
-        /// <param name="labelID">the label id to delete</param>
+        /// <param name="variableID">The variable ID.</param>
+        /// <param name="labelID">The label ID to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
         public async System.Threading.Tasks.Task DeleteVariablesIDLabelsIDAsync (string variableID, string labelID, string zapTraceSpan = null)
@@ -1133,11 +1133,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// delete a label from a variable 
+        /// Delete a label from a variable 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="variableID">ID of the variable</param>
-        /// <param name="labelID">the label id to delete</param>
+        /// <param name="variableID">The variable ID.</param>
+        /// <param name="labelID">The label ID to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteVariablesIDLabelsIDAsyncWithHttpInfo (string variableID, string labelID, string zapTraceSpan = null)
@@ -1159,11 +1159,11 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// delete a label from a variable 
+        /// Delete a label from a variable 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="variableID">ID of the variable</param>
-        /// <param name="labelID">the label id to delete</param>
+        /// <param name="variableID">The variable ID.</param>
+        /// <param name="labelID">The label ID to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse</returns>
         public async System.Threading.Tasks.Task<IRestResponse> DeleteVariablesIDLabelsIDAsyncWithIRestResponse (string variableID, string labelID, string zapTraceSpan = null)
@@ -1217,12 +1217,12 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// get all variables 
+        /// Get all variables 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="org">specifies the organization name of the resource (optional)</param>
-        /// <param name="orgID">specifies the organization id of the resource (optional)</param>
+        /// <param name="org">The organization name. (optional)</param>
+        /// <param name="orgID">The organization ID. (optional)</param>
         /// <returns>Variables</returns>
         public Variables GetVariables (string zapTraceSpan = null, string org = null, string orgID = null)
         {
@@ -1231,12 +1231,12 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// get all variables 
+        /// Get all variables 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="org">specifies the organization name of the resource (optional)</param>
-        /// <param name="orgID">specifies the organization id of the resource (optional)</param>
+        /// <param name="org">The organization name. (optional)</param>
+        /// <param name="orgID">The organization ID. (optional)</param>
         /// <returns>ApiResponse of Variables</returns>
         public ApiResponse< Variables > GetVariablesWithHttpInfo (string zapTraceSpan = null, string org = null, string orgID = null)
         {
@@ -1287,12 +1287,12 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// get all variables 
+        /// Get all variables 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="org">specifies the organization name of the resource (optional)</param>
-        /// <param name="orgID">specifies the organization id of the resource (optional)</param>
+        /// <param name="org">The organization name. (optional)</param>
+        /// <param name="orgID">The organization ID. (optional)</param>
         /// <returns>ApiResponse of Variables</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetVariablesWithIRestResponseAsync (string zapTraceSpan = null, string org = null, string orgID = null)
         {
@@ -1341,12 +1341,12 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// get all variables 
+        /// Get all variables 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="org">specifies the organization name of the resource (optional)</param>
-        /// <param name="orgID">specifies the organization id of the resource (optional)</param>
+        /// <param name="org">The organization name. (optional)</param>
+        /// <param name="orgID">The organization ID. (optional)</param>
         /// <returns>ApiResponse of Variables</returns>
         public IRestResponse GetVariablesWithIRestResponse (string zapTraceSpan = null, string org = null, string orgID = null)
         {
@@ -1395,12 +1395,12 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// get all variables 
+        /// Get all variables 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="org">specifies the organization name of the resource (optional)</param>
-        /// <param name="orgID">specifies the organization id of the resource (optional)</param>
+        /// <param name="org">The organization name. (optional)</param>
+        /// <param name="orgID">The organization ID. (optional)</param>
         /// <returns>ApiResponse of Variables</returns>
         public RestRequest GetVariablesWithRestRequest (string zapTraceSpan = null, string org = null, string orgID = null)
         {
@@ -1438,12 +1438,12 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// get all variables 
+        /// Get all variables 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="org">specifies the organization name of the resource (optional)</param>
-        /// <param name="orgID">specifies the organization id of the resource (optional)</param>
+        /// <param name="org">The organization name. (optional)</param>
+        /// <param name="orgID">The organization ID. (optional)</param>
         /// <returns>Task of Variables</returns>
         public async System.Threading.Tasks.Task<Variables> GetVariablesAsync (string zapTraceSpan = null, string org = null, string orgID = null)
         {
@@ -1453,12 +1453,12 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// get all variables 
+        /// Get all variables 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="org">specifies the organization name of the resource (optional)</param>
-        /// <param name="orgID">specifies the organization id of the resource (optional)</param>
+        /// <param name="org">The organization name. (optional)</param>
+        /// <param name="orgID">The organization ID. (optional)</param>
         /// <returns>Task of ApiResponse (Variables)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Variables>> GetVariablesAsyncWithHttpInfo (string zapTraceSpan = null, string org = null, string orgID = null)
         {
@@ -1479,12 +1479,12 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// get all variables 
+        /// Get all variables 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="org">specifies the organization name of the resource (optional)</param>
-        /// <param name="orgID">specifies the organization id of the resource (optional)</param>
+        /// <param name="org">The organization name. (optional)</param>
+        /// <param name="orgID">The organization ID. (optional)</param>
         /// <returns>Task of IRestResponse (Variables)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetVariablesAsyncWithIRestResponse (string zapTraceSpan = null, string org = null, string orgID = null)
         {
@@ -1531,10 +1531,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// get a variable 
+        /// Get a variable 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="variableID">ID of the variable</param>
+        /// <param name="variableID">The variable ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Variable</returns>
         public Variable GetVariablesID (string variableID, string zapTraceSpan = null)
@@ -1544,10 +1544,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// get a variable 
+        /// Get a variable 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="variableID">ID of the variable</param>
+        /// <param name="variableID">The variable ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Variable</returns>
         public ApiResponse< Variable > GetVariablesIDWithHttpInfo (string variableID, string zapTraceSpan = null)
@@ -1601,10 +1601,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// get a variable 
+        /// Get a variable 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="variableID">ID of the variable</param>
+        /// <param name="variableID">The variable ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Variable</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetVariablesIDWithIRestResponseAsync (string variableID, string zapTraceSpan = null)
@@ -1656,10 +1656,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// get a variable 
+        /// Get a variable 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="variableID">ID of the variable</param>
+        /// <param name="variableID">The variable ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Variable</returns>
         public IRestResponse GetVariablesIDWithIRestResponse (string variableID, string zapTraceSpan = null)
@@ -1711,10 +1711,10 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// get a variable 
+        /// Get a variable 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="variableID">ID of the variable</param>
+        /// <param name="variableID">The variable ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Variable</returns>
         public RestRequest GetVariablesIDWithRestRequest (string variableID, string zapTraceSpan = null)
@@ -1755,10 +1755,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// get a variable 
+        /// Get a variable 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="variableID">ID of the variable</param>
+        /// <param name="variableID">The variable ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of Variable</returns>
         public async System.Threading.Tasks.Task<Variable> GetVariablesIDAsync (string variableID, string zapTraceSpan = null)
@@ -1769,10 +1769,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// get a variable 
+        /// Get a variable 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="variableID">ID of the variable</param>
+        /// <param name="variableID">The variable ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (Variable)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Variable>> GetVariablesIDAsyncWithHttpInfo (string variableID, string zapTraceSpan = null)
@@ -1794,10 +1794,10 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// get a variable 
+        /// Get a variable 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="variableID">ID of the variable</param>
+        /// <param name="variableID">The variable ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (Variable)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetVariablesIDAsyncWithIRestResponse (string variableID, string zapTraceSpan = null)
@@ -1847,10 +1847,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// list all labels for a variable 
+        /// List all labels for a variable 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="variableID">ID of the variable</param>
+        /// <param name="variableID">The variable ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>LabelsResponse</returns>
         public LabelsResponse GetVariablesIDLabels (string variableID, string zapTraceSpan = null)
@@ -1860,10 +1860,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// list all labels for a variable 
+        /// List all labels for a variable 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="variableID">ID of the variable</param>
+        /// <param name="variableID">The variable ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelsResponse</returns>
         public ApiResponse< LabelsResponse > GetVariablesIDLabelsWithHttpInfo (string variableID, string zapTraceSpan = null)
@@ -1917,10 +1917,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// list all labels for a variable 
+        /// List all labels for a variable 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="variableID">ID of the variable</param>
+        /// <param name="variableID">The variable ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelsResponse</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetVariablesIDLabelsWithIRestResponseAsync (string variableID, string zapTraceSpan = null)
@@ -1972,10 +1972,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// list all labels for a variable 
+        /// List all labels for a variable 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="variableID">ID of the variable</param>
+        /// <param name="variableID">The variable ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelsResponse</returns>
         public IRestResponse GetVariablesIDLabelsWithIRestResponse (string variableID, string zapTraceSpan = null)
@@ -2027,10 +2027,10 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// list all labels for a variable 
+        /// List all labels for a variable 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="variableID">ID of the variable</param>
+        /// <param name="variableID">The variable ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelsResponse</returns>
         public RestRequest GetVariablesIDLabelsWithRestRequest (string variableID, string zapTraceSpan = null)
@@ -2071,10 +2071,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// list all labels for a variable 
+        /// List all labels for a variable 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="variableID">ID of the variable</param>
+        /// <param name="variableID">The variable ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of LabelsResponse</returns>
         public async System.Threading.Tasks.Task<LabelsResponse> GetVariablesIDLabelsAsync (string variableID, string zapTraceSpan = null)
@@ -2085,10 +2085,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// list all labels for a variable 
+        /// List all labels for a variable 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="variableID">ID of the variable</param>
+        /// <param name="variableID">The variable ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (LabelsResponse)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<LabelsResponse>> GetVariablesIDLabelsAsyncWithHttpInfo (string variableID, string zapTraceSpan = null)
@@ -2110,10 +2110,10 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// list all labels for a variable 
+        /// List all labels for a variable 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="variableID">ID of the variable</param>
+        /// <param name="variableID">The variable ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (LabelsResponse)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetVariablesIDLabelsAsyncWithIRestResponse (string variableID, string zapTraceSpan = null)
@@ -2163,11 +2163,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// update a variable 
+        /// Update a variable 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="variableID">id of the variable</param>
-        /// <param name="variable">variable update to apply</param>
+        /// <param name="variableID">The variable ID.</param>
+        /// <param name="variable">Variable update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Variable</returns>
         public Variable PatchVariablesID (string variableID, Variable variable, string zapTraceSpan = null)
@@ -2177,11 +2177,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// update a variable 
+        /// Update a variable 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="variableID">id of the variable</param>
-        /// <param name="variable">variable update to apply</param>
+        /// <param name="variableID">The variable ID.</param>
+        /// <param name="variable">Variable update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Variable</returns>
         public ApiResponse< Variable > PatchVariablesIDWithHttpInfo (string variableID, Variable variable, string zapTraceSpan = null)
@@ -2247,11 +2247,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// update a variable 
+        /// Update a variable 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="variableID">id of the variable</param>
-        /// <param name="variable">variable update to apply</param>
+        /// <param name="variableID">The variable ID.</param>
+        /// <param name="variable">Variable update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Variable</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PatchVariablesIDWithIRestResponseAsync (string variableID, Variable variable, string zapTraceSpan = null)
@@ -2315,11 +2315,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// update a variable 
+        /// Update a variable 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="variableID">id of the variable</param>
-        /// <param name="variable">variable update to apply</param>
+        /// <param name="variableID">The variable ID.</param>
+        /// <param name="variable">Variable update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Variable</returns>
         public IRestResponse PatchVariablesIDWithIRestResponse (string variableID, Variable variable, string zapTraceSpan = null)
@@ -2383,11 +2383,11 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// update a variable 
+        /// Update a variable 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="variableID">id of the variable</param>
-        /// <param name="variable">variable update to apply</param>
+        /// <param name="variableID">The variable ID.</param>
+        /// <param name="variable">Variable update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Variable</returns>
         public RestRequest PatchVariablesIDWithRestRequest (string variableID, Variable variable, string zapTraceSpan = null)
@@ -2440,11 +2440,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// update a variable 
+        /// Update a variable 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="variableID">id of the variable</param>
-        /// <param name="variable">variable update to apply</param>
+        /// <param name="variableID">The variable ID.</param>
+        /// <param name="variable">Variable update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of Variable</returns>
         public async System.Threading.Tasks.Task<Variable> PatchVariablesIDAsync (string variableID, Variable variable, string zapTraceSpan = null)
@@ -2455,11 +2455,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// update a variable 
+        /// Update a variable 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="variableID">id of the variable</param>
-        /// <param name="variable">variable update to apply</param>
+        /// <param name="variableID">The variable ID.</param>
+        /// <param name="variable">Variable update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (Variable)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Variable>> PatchVariablesIDAsyncWithHttpInfo (string variableID, Variable variable, string zapTraceSpan = null)
@@ -2481,11 +2481,11 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// update a variable 
+        /// Update a variable 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="variableID">id of the variable</param>
-        /// <param name="variable">variable update to apply</param>
+        /// <param name="variableID">The variable ID.</param>
+        /// <param name="variable">Variable update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (Variable)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PatchVariablesIDAsyncWithIRestResponse (string variableID, Variable variable, string zapTraceSpan = null)
@@ -2547,10 +2547,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// create a variable 
+        /// Create a variable 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="variable">variable to create</param>
+        /// <param name="variable">Variable to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Variable</returns>
         public Variable PostVariables (Variable variable, string zapTraceSpan = null)
@@ -2560,10 +2560,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// create a variable 
+        /// Create a variable 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="variable">variable to create</param>
+        /// <param name="variable">Variable to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Variable</returns>
         public ApiResponse< Variable > PostVariablesWithHttpInfo (Variable variable, string zapTraceSpan = null)
@@ -2625,10 +2625,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// create a variable 
+        /// Create a variable 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="variable">variable to create</param>
+        /// <param name="variable">Variable to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Variable</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PostVariablesWithIRestResponseAsync (Variable variable, string zapTraceSpan = null)
@@ -2688,10 +2688,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// create a variable 
+        /// Create a variable 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="variable">variable to create</param>
+        /// <param name="variable">Variable to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Variable</returns>
         public IRestResponse PostVariablesWithIRestResponse (Variable variable, string zapTraceSpan = null)
@@ -2751,10 +2751,10 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// create a variable 
+        /// Create a variable 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="variable">variable to create</param>
+        /// <param name="variable">Variable to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Variable</returns>
         public RestRequest PostVariablesWithRestRequest (Variable variable, string zapTraceSpan = null)
@@ -2803,10 +2803,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// create a variable 
+        /// Create a variable 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="variable">variable to create</param>
+        /// <param name="variable">Variable to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of Variable</returns>
         public async System.Threading.Tasks.Task<Variable> PostVariablesAsync (Variable variable, string zapTraceSpan = null)
@@ -2817,10 +2817,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// create a variable 
+        /// Create a variable 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="variable">variable to create</param>
+        /// <param name="variable">Variable to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (Variable)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Variable>> PostVariablesAsyncWithHttpInfo (Variable variable, string zapTraceSpan = null)
@@ -2842,10 +2842,10 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// create a variable 
+        /// Create a variable 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="variable">variable to create</param>
+        /// <param name="variable">Variable to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (Variable)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PostVariablesAsyncWithIRestResponse (Variable variable, string zapTraceSpan = null)
@@ -2903,11 +2903,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// add a label to a variable 
+        /// Add a label to a variable 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="variableID">ID of the variable</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="variableID">The variable ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>LabelResponse</returns>
         public LabelResponse PostVariablesIDLabels (string variableID, LabelMapping labelMapping, string zapTraceSpan = null)
@@ -2917,11 +2917,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// add a label to a variable 
+        /// Add a label to a variable 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="variableID">ID of the variable</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="variableID">The variable ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelResponse</returns>
         public ApiResponse< LabelResponse > PostVariablesIDLabelsWithHttpInfo (string variableID, LabelMapping labelMapping, string zapTraceSpan = null)
@@ -2987,11 +2987,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// add a label to a variable 
+        /// Add a label to a variable 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="variableID">ID of the variable</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="variableID">The variable ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelResponse</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PostVariablesIDLabelsWithIRestResponseAsync (string variableID, LabelMapping labelMapping, string zapTraceSpan = null)
@@ -3055,11 +3055,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// add a label to a variable 
+        /// Add a label to a variable 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="variableID">ID of the variable</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="variableID">The variable ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelResponse</returns>
         public IRestResponse PostVariablesIDLabelsWithIRestResponse (string variableID, LabelMapping labelMapping, string zapTraceSpan = null)
@@ -3123,11 +3123,11 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// add a label to a variable 
+        /// Add a label to a variable 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="variableID">ID of the variable</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="variableID">The variable ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelResponse</returns>
         public RestRequest PostVariablesIDLabelsWithRestRequest (string variableID, LabelMapping labelMapping, string zapTraceSpan = null)
@@ -3180,11 +3180,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// add a label to a variable 
+        /// Add a label to a variable 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="variableID">ID of the variable</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="variableID">The variable ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of LabelResponse</returns>
         public async System.Threading.Tasks.Task<LabelResponse> PostVariablesIDLabelsAsync (string variableID, LabelMapping labelMapping, string zapTraceSpan = null)
@@ -3195,11 +3195,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// add a label to a variable 
+        /// Add a label to a variable 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="variableID">ID of the variable</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="variableID">The variable ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (LabelResponse)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<LabelResponse>> PostVariablesIDLabelsAsyncWithHttpInfo (string variableID, LabelMapping labelMapping, string zapTraceSpan = null)
@@ -3221,11 +3221,11 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// add a label to a variable 
+        /// Add a label to a variable 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="variableID">ID of the variable</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="variableID">The variable ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (LabelResponse)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PostVariablesIDLabelsAsyncWithIRestResponse (string variableID, LabelMapping labelMapping, string zapTraceSpan = null)
@@ -3287,11 +3287,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// replace a variable 
+        /// Replace a variable 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="variableID">id of the variable</param>
-        /// <param name="variable">variable to replace</param>
+        /// <param name="variableID">The variable ID.</param>
+        /// <param name="variable">Variable to replace</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Variable</returns>
         public Variable PutVariablesID (string variableID, Variable variable, string zapTraceSpan = null)
@@ -3301,11 +3301,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// replace a variable 
+        /// Replace a variable 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="variableID">id of the variable</param>
-        /// <param name="variable">variable to replace</param>
+        /// <param name="variableID">The variable ID.</param>
+        /// <param name="variable">Variable to replace</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Variable</returns>
         public ApiResponse< Variable > PutVariablesIDWithHttpInfo (string variableID, Variable variable, string zapTraceSpan = null)
@@ -3371,11 +3371,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// replace a variable 
+        /// Replace a variable 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="variableID">id of the variable</param>
-        /// <param name="variable">variable to replace</param>
+        /// <param name="variableID">The variable ID.</param>
+        /// <param name="variable">Variable to replace</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Variable</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PutVariablesIDWithIRestResponseAsync (string variableID, Variable variable, string zapTraceSpan = null)
@@ -3439,11 +3439,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// replace a variable 
+        /// Replace a variable 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="variableID">id of the variable</param>
-        /// <param name="variable">variable to replace</param>
+        /// <param name="variableID">The variable ID.</param>
+        /// <param name="variable">Variable to replace</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Variable</returns>
         public IRestResponse PutVariablesIDWithIRestResponse (string variableID, Variable variable, string zapTraceSpan = null)
@@ -3507,11 +3507,11 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// replace a variable 
+        /// Replace a variable 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="variableID">id of the variable</param>
-        /// <param name="variable">variable to replace</param>
+        /// <param name="variableID">The variable ID.</param>
+        /// <param name="variable">Variable to replace</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Variable</returns>
         public RestRequest PutVariablesIDWithRestRequest (string variableID, Variable variable, string zapTraceSpan = null)
@@ -3564,11 +3564,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// replace a variable 
+        /// Replace a variable 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="variableID">id of the variable</param>
-        /// <param name="variable">variable to replace</param>
+        /// <param name="variableID">The variable ID.</param>
+        /// <param name="variable">Variable to replace</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of Variable</returns>
         public async System.Threading.Tasks.Task<Variable> PutVariablesIDAsync (string variableID, Variable variable, string zapTraceSpan = null)
@@ -3579,11 +3579,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// replace a variable 
+        /// Replace a variable 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="variableID">id of the variable</param>
-        /// <param name="variable">variable to replace</param>
+        /// <param name="variableID">The variable ID.</param>
+        /// <param name="variable">Variable to replace</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (Variable)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Variable>> PutVariablesIDAsyncWithHttpInfo (string variableID, Variable variable, string zapTraceSpan = null)
@@ -3605,11 +3605,11 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// replace a variable 
+        /// Replace a variable 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="variableID">id of the variable</param>
-        /// <param name="variable">variable to replace</param>
+        /// <param name="variableID">The variable ID.</param>
+        /// <param name="variable">Variable to replace</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (Variable)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PutVariablesIDAsyncWithIRestResponse (string variableID, Variable variable, string zapTraceSpan = null)

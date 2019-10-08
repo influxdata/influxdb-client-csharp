@@ -8,7 +8,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.BiConsumer;
+import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.annotation.Nonnull;
@@ -19,11 +22,13 @@ import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.Operation;
 import io.swagger.v3.oas.models.media.ArraySchema;
 import io.swagger.v3.oas.models.media.ComposedSchema;
+import io.swagger.v3.oas.models.media.Discriminator;
 import io.swagger.v3.oas.models.media.ObjectSchema;
 import io.swagger.v3.oas.models.media.Schema;
 import io.swagger.v3.oas.models.media.StringSchema;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.openapitools.codegen.CodegenDiscriminator;
 import org.openapitools.codegen.CodegenModel;
 import org.openapitools.codegen.CodegenOperation;
 import org.openapitools.codegen.CodegenParameter;
@@ -96,7 +101,6 @@ public class InfluxCSharpGenerator extends CSharpClientCodegen {
     public CodegenModel fromModel(final String name, final Schema model, final Map<String, Schema> allDefinitions) {
 
         CodegenModel codegenModel = super.fromModel(name, model, allDefinitions);
-        codegenModel.setDiscriminator(null);
 
         if (model.getProperties() != null) {
 
@@ -139,81 +143,99 @@ public class InfluxCSharpGenerator extends CSharpClientCodegen {
                             }
                         }
 
-                        if (schema instanceof ComposedSchema) {
+                        final Discriminator apiDiscriminator = schema.getDiscriminator();
 
-                            CodegenProperty codegenProperty = getCodegenProperty(codegenModel, property);
+                        CodegenProperty codegenProperty = getCodegenProperty(codegenModel, property);
+                        if (codegenProperty != null) {
                             String adapterName = name + codegenProperty.nameInCamelCase + "Adapter";
+                            TypeAdapter typeAdapter = new TypeAdapter();
+                            typeAdapter.classname = adapterName;
 
                             Map<String, TypeAdapter> adapters = (HashMap<String, TypeAdapter>) codegenModel.vendorExtensions
                                     .getOrDefault("x-type-adapters", new HashMap<String, TypeAdapter>());
 
-                            TypeAdapter typeAdapter = new TypeAdapter();
-                            typeAdapter.classname = adapterName;
+                            if (apiDiscriminator != null) {
 
-                            for (Schema oneOf : getOneOf(schema, allDefinitions)) {
+                                apiDiscriminator.getMapping().forEach((mappingKey, refSchemaName) ->
+                                {
+                                    typeAdapter.isArray = propertySchema instanceof ArraySchema;
+                                    typeAdapter.discriminator = Stream.of(apiDiscriminator.getPropertyName())
+                                            .map(v -> "\"" + v + "\"")
+                                            .collect(Collectors.joining(", "));
+                                    TypeAdapterItem typeAdapterItem = new TypeAdapterItem();
+                                    typeAdapterItem.discriminatorValue = Stream.of(mappingKey).map(v -> "\"" + v + "\"").collect(Collectors.joining(", "));
+                                    typeAdapterItem.classname = ModelUtils.getSimpleRef(refSchemaName);
+                                    typeAdapter.items.add(typeAdapterItem);
+                                });
+                            }
 
-                                String refSchemaName;
-                                Schema refSchema;
+                            if (apiDiscriminator == null && schema instanceof ComposedSchema) {
 
-                                if (oneOf.get$ref() == null) {
-                                    refSchema = oneOf;
-                                    refSchemaName = oneOf.getName();
-                                } else {
-                                    refSchemaName = ModelUtils.getSimpleRef(oneOf.get$ref());
-                                    refSchema = allDefinitions.get(refSchemaName);
-                                    if (refSchema instanceof ComposedSchema) {
-                                        List<Schema> schemaList = ((ComposedSchema) refSchema).getAllOf().stream()
-                                                .map(it -> getObjectSchemas(it, allDefinitions))
-                                                .flatMap(Collection::stream)
-                                                .filter(it -> it instanceof ObjectSchema).collect(Collectors.toList());
-                                        refSchema = schemaList
-                                                .stream()
-                                                .filter(it -> {
-                                                    for (Schema ps : (Collection<Schema>) it.getProperties().values()) {
-                                                        if (ps.getEnum() != null && ps.getEnum().size() == 1) {
-                                                            return true;
-                                                        }
-                                                    }
-                                                    return false;
-                                                })
-                                                .findFirst()
-                                                .orElse(schemaList.get(0));
-                                    }
-                                }
+                                for (Schema oneOf : getOneOf(schema, allDefinitions)) {
 
-                                String[] keys = getDiscriminatorKeys(schema, refSchema);
+                                    String refSchemaName;
+                                    Schema refSchema;
 
-                                String[] discriminator = new String[]{};
-                                String[] discriminatorValue = new String[]{};
-
-                                for (String key : keys) {
-                                    Schema keyScheme = (Schema) refSchema.getProperties().get(key);
-                                    if (keyScheme.get$ref() != null) {
-                                        keyScheme = allDefinitions.get(ModelUtils.getSimpleRef(keyScheme.get$ref()));
-                                    }
-
-                                    if (!(keyScheme instanceof StringSchema)) {
-                                        continue;
+                                    if (oneOf.get$ref() == null) {
+                                        refSchema = oneOf;
+                                        refSchemaName = oneOf.getName();
                                     } else {
-
-                                        if (((StringSchema) keyScheme).getEnum() != null) {
-                                            discriminatorValue = ArrayUtils.add(discriminatorValue, ((StringSchema) keyScheme).getEnum().get(0));
-                                        } else {
-                                            discriminatorValue = ArrayUtils.add(discriminatorValue, refSchemaName);
+                                        refSchemaName = ModelUtils.getSimpleRef(oneOf.get$ref());
+                                        refSchema = allDefinitions.get(refSchemaName);
+                                        if (refSchema instanceof ComposedSchema) {
+                                            List<Schema> schemaList = ((ComposedSchema) refSchema).getAllOf().stream()
+                                                    .map(it -> getObjectSchemas(it, allDefinitions))
+                                                    .flatMap(Collection::stream)
+                                                    .filter(it -> it instanceof ObjectSchema).collect(Collectors.toList());
+                                            refSchema = schemaList
+                                                    .stream()
+                                                    .filter(it -> {
+                                                        for (Schema ps : (Collection<Schema>) it.getProperties().values()) {
+                                                            if (ps.getEnum() != null && ps.getEnum().size() == 1) {
+                                                                return true;
+                                                            }
+                                                        }
+                                                        return false;
+                                                    })
+                                                    .findFirst()
+                                                    .orElse(schemaList.get(0));
                                         }
                                     }
 
-                                    discriminator = ArrayUtils.add(discriminator, key);
+                                    String[] keys = getDiscriminatorKeys(schema, refSchema);
+
+                                    String[] discriminator = new String[]{};
+                                    String[] discriminatorValue = new String[]{};
+
+                                    for (String key : keys) {
+                                        Schema keyScheme = (Schema) refSchema.getProperties().get(key);
+                                        if (keyScheme.get$ref() != null) {
+                                            keyScheme = allDefinitions.get(ModelUtils.getSimpleRef(keyScheme.get$ref()));
+                                        }
+
+                                        if (!(keyScheme instanceof StringSchema)) {
+                                            continue;
+                                        } else {
+
+                                            if (((StringSchema) keyScheme).getEnum() != null) {
+                                                discriminatorValue = ArrayUtils.add(discriminatorValue, ((StringSchema) keyScheme).getEnum().get(0));
+                                            } else {
+                                                discriminatorValue = ArrayUtils.add(discriminatorValue, refSchemaName);
+                                            }
+                                        }
+
+                                        discriminator = ArrayUtils.add(discriminator, key);
+                                    }
+
+                                    typeAdapter.isArray = propertySchema instanceof ArraySchema;
+                                    typeAdapter.discriminator = Stream.of(discriminator).map(v -> "\"" + v + "\"").collect(Collectors.joining(", "));
+                                    TypeAdapterItem typeAdapterItem = new TypeAdapterItem();
+                                    typeAdapterItem.discriminatorValue = Stream.of(discriminatorValue).map(v -> "\"" + v + "\"").collect(Collectors.joining(", "));
+                                    typeAdapterItem.classname = refSchemaName;
+                                    typeAdapter.items.add(typeAdapterItem);
                                 }
-
-                                typeAdapter.isArray = propertySchema instanceof ArraySchema;
-                                typeAdapter.discriminator = Stream.of(discriminator).map(v -> "\"" + v + "\"").collect(Collectors.joining(", "));
-                                TypeAdapterItem typeAdapterItem = new TypeAdapterItem();
-                                typeAdapterItem.discriminatorValue = Stream.of(discriminatorValue).map(v -> "\"" + v + "\"").collect(Collectors.joining(", "));
-                                typeAdapterItem.classname = refSchemaName;
-                                typeAdapter.items.add(typeAdapterItem);
                             }
-
+                            
                             if (!typeAdapter.items.isEmpty()) {
 
                                 codegenProperty.vendorExtensions.put("x-has-type-adapter", Boolean.TRUE);
@@ -242,6 +264,7 @@ public class InfluxCSharpGenerator extends CSharpClientCodegen {
                 .filter(property -> property.isReadOnly)
                 .collect(Collectors.toSet());
         codegenModel.getParentVars().removeAll(readOnly);
+        codegenModel.readWriteVars = codegenModel.readWriteVars.stream().filter(distinctByKey(CodegenProperty::getName)).collect(Collectors.toList());
 
         //
         // Add generic name, type and config property
@@ -300,6 +323,11 @@ public class InfluxCSharpGenerator extends CSharpClientCodegen {
         if (allDefinitions.containsKey(name + "Base")) {
             codegenModel.setParent(name + "Base");
             codegenModel.setParentSchema(name + "Base");
+        }
+
+        if (codegenModel.name.endsWith("NotificationRuleBase") && !codegenModel.name.equals("NotificationRuleBase")) {
+            codegenModel.setParent("NotificationRule");
+            codegenModel.setParentSchema("NotificationRule");
         }
 
         if (name.equals("ViewProperties")) {
@@ -444,13 +472,25 @@ public class InfluxCSharpGenerator extends CSharpClientCodegen {
             if (pluginModel.getParent() != null && (pluginModel.getParent().endsWith("Base") || (modelName.endsWith("ViewPropertiexs") && !modelName.equals("ViewPropertiesx")))) {
                 CodegenModel parentModel = pluginModel.getParentModel();
                 pluginModel.setParentVars(parentModel.getReadWriteVars());
-//                pluginModel.setVars(parentModel.getVars());
-//                pluginModel.setRequiredVars(parentModel.getRequiredVars());
-//                pluginModel.setOptionalVars(parentModel.getOptionalVars());
-//                pluginModel.setReadOnlyVars(parentModel.getReadOnlyVars());
                 pluginModel.setReadWriteVars(parentModel.getReadWriteVars());
-//                pluginModel.setAllVars(parentModel.getAllVars());
-                System.out.println("parentModel = " + parentModel);
+            }
+
+            if (pluginModel.getChildren() != null) {
+                pluginModel.children = pluginModel.getChildren().stream().filter(m -> !m.name.endsWith("Base")).collect(Collectors.toList());
+            }
+
+            // Normalize discriminator
+            if (pluginModel.getDiscriminatorName() != null) {
+                CodegenDiscriminator discriminator = pluginModel.getDiscriminator();
+                discriminator.setPropertyName(initialCaps(discriminator.getPropertyName()));
+
+                for (CodegenModel child : pluginModel.getChildren()) {
+                    CodegenDiscriminator.MappedModel mappedModel = discriminator.getMappedModels().stream()
+                            .filter(mapped -> child.name.equals(mapped.getModelName()))
+                            .findFirst()
+                            .orElseThrow(IllegalStateException::new);
+                    child.getVendorExtensions().put("x-discriminator-value", mappedModel.getMappingName());
+                }
             }
         }
 
@@ -656,5 +696,10 @@ public class InfluxCSharpGenerator extends CSharpClientCodegen {
 
         public String discriminatorValue;
         public String classname;
+    }
+
+    private static <T> Predicate<T> distinctByKey(Function<? super T, ?> keyExtractor) {
+        Set<Object> seen = ConcurrentHashMap.newKeySet();
+        return t -> seen.add(keyExtractor.apply(t));
     }
 }

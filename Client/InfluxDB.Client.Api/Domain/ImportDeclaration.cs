@@ -24,7 +24,7 @@ using OpenAPIDateConverter = InfluxDB.Client.Api.Client.OpenAPIDateConverter;
 namespace InfluxDB.Client.Api.Domain
 {
     /// <summary>
-    /// declares a package import
+    /// Declares a package import
     /// </summary>
     [DataContract]
     public partial class ImportDeclaration :  IEquatable<ImportDeclaration>
@@ -32,7 +32,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <summary>
         /// Initializes a new instance of the <see cref="ImportDeclaration" /> class.
         /// </summary>
-        /// <param name="type">type of AST node.</param>
+        /// <param name="type">Type of AST node.</param>
         /// <param name="_as">_as.</param>
         /// <param name="path">path.</param>
         public ImportDeclaration(string type = default(string), Identifier _as = default(Identifier), StringLiteral path = default(StringLiteral))
@@ -43,9 +43,9 @@ namespace InfluxDB.Client.Api.Domain
         }
 
         /// <summary>
-        /// type of AST node
+        /// Type of AST node
         /// </summary>
-        /// <value>type of AST node</value>
+        /// <value>Type of AST node</value>
         [DataMember(Name="type", EmitDefaultValue=false)]
         public string Type { get; set; }
 

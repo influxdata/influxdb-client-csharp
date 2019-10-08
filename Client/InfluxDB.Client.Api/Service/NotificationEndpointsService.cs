@@ -25,24 +25,24 @@ namespace InfluxDB.Client.Api.Service
     {
         #region Synchronous Operations
         /// <summary>
-        /// Add new notification endpoint
+        /// Add a notification endpoint
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="notificationEndpoint">notificationEndpoint to create</param>
+        /// <param name="notificationEndpoint">Notification endpoint to create</param>
         /// <returns>NotificationEndpoint</returns>
         NotificationEndpoint CreateNotificationEndpoint (NotificationEndpoint notificationEndpoint);
 
         /// <summary>
-        /// Add new notification endpoint
+        /// Add a notification endpoint
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="notificationEndpoint">notificationEndpoint to create</param>
+        /// <param name="notificationEndpoint">Notification endpoint to create</param>
         /// <returns>ApiResponse of NotificationEndpoint</returns>
         ApiResponse<NotificationEndpoint> CreateNotificationEndpointWithHttpInfo (NotificationEndpoint notificationEndpoint);
         /// <summary>
@@ -52,7 +52,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="endpointID">ID of notification endpoint</param>
+        /// <param name="endpointID">The notification endpoint ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
         void DeleteNotificationEndpointsID (string endpointID, string zapTraceSpan = null);
@@ -64,32 +64,32 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="endpointID">ID of notification endpoint</param>
+        /// <param name="endpointID">The notification endpoint ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> DeleteNotificationEndpointsIDWithHttpInfo (string endpointID, string zapTraceSpan = null);
         /// <summary>
-        /// delete label from a notification endpoint
+        /// Delete a label from a notification endpoint
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="endpointID">ID of the notification endpoint</param>
-        /// <param name="labelID">the label id to delete</param>
+        /// <param name="endpointID">The notification endpoint ID.</param>
+        /// <param name="labelID">The ID of the label to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
         void DeleteNotificationEndpointsIDLabelsID (string endpointID, string labelID, string zapTraceSpan = null);
 
         /// <summary>
-        /// delete label from a notification endpoint
+        /// Delete a label from a notification endpoint
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="endpointID">ID of the notification endpoint</param>
-        /// <param name="labelID">the label id to delete</param>
+        /// <param name="endpointID">The notification endpoint ID.</param>
+        /// <param name="labelID">The ID of the label to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> DeleteNotificationEndpointsIDLabelsIDWithHttpInfo (string endpointID, string labelID, string zapTraceSpan = null);
@@ -100,11 +100,12 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">only show notification endpoints belonging to specified organization</param>
+        /// <param name="orgID">Only show notification endpoints that belong to specific organization ID.</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
         /// <returns>NotificationEndpoints</returns>
-        NotificationEndpoints GetNotificationEndpoints (string orgID, int? offset = null, int? limit = null);
+        NotificationEndpoints GetNotificationEndpoints (string orgID, string zapTraceSpan = null, int? offset = null, int? limit = null);
 
         /// <summary>
         /// Get all notification endpoints
@@ -113,11 +114,12 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">only show notification endpoints belonging to specified organization</param>
+        /// <param name="orgID">Only show notification endpoints that belong to specific organization ID.</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
         /// <returns>ApiResponse of NotificationEndpoints</returns>
-        ApiResponse<NotificationEndpoints> GetNotificationEndpointsWithHttpInfo (string orgID, int? offset = null, int? limit = null);
+        ApiResponse<NotificationEndpoints> GetNotificationEndpointsWithHttpInfo (string orgID, string zapTraceSpan = null, int? offset = null, int? limit = null);
         /// <summary>
         /// Get a notification endpoint
         /// </summary>
@@ -125,7 +127,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="endpointID">ID of notification endpoint</param>
+        /// <param name="endpointID">The notification endpoint ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>NotificationEndpoint</returns>
         NotificationEndpoint GetNotificationEndpointsID (string endpointID, string zapTraceSpan = null);
@@ -137,30 +139,30 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="endpointID">ID of notification endpoint</param>
+        /// <param name="endpointID">The notification endpoint ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of NotificationEndpoint</returns>
         ApiResponse<NotificationEndpoint> GetNotificationEndpointsIDWithHttpInfo (string endpointID, string zapTraceSpan = null);
         /// <summary>
-        /// list all labels for a notification endpoint
+        /// List all labels for a notification endpoint
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="endpointID">ID of the notification endpoint</param>
+        /// <param name="endpointID">The notification endpoint ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>LabelsResponse</returns>
         LabelsResponse GetNotificationEndpointsIDLabels (string endpointID, string zapTraceSpan = null);
 
         /// <summary>
-        /// list all labels for a notification endpoint
+        /// List all labels for a notification endpoint
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="endpointID">ID of the notification endpoint</param>
+        /// <param name="endpointID">The notification endpoint ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelsResponse</returns>
         ApiResponse<LabelsResponse> GetNotificationEndpointsIDLabelsWithHttpInfo (string endpointID, string zapTraceSpan = null);
@@ -171,8 +173,8 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="endpointID">ID of notification endpoint</param>
-        /// <param name="notificationEndpointUpdate">check update to apply</param>
+        /// <param name="endpointID">The notification endpoint ID.</param>
+        /// <param name="notificationEndpointUpdate">Check update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>NotificationEndpoint</returns>
         NotificationEndpoint PatchNotificationEndpointsID (string endpointID, NotificationEndpointUpdate notificationEndpointUpdate, string zapTraceSpan = null);
@@ -184,33 +186,33 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="endpointID">ID of notification endpoint</param>
-        /// <param name="notificationEndpointUpdate">check update to apply</param>
+        /// <param name="endpointID">The notification endpoint ID.</param>
+        /// <param name="notificationEndpointUpdate">Check update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of NotificationEndpoint</returns>
         ApiResponse<NotificationEndpoint> PatchNotificationEndpointsIDWithHttpInfo (string endpointID, NotificationEndpointUpdate notificationEndpointUpdate, string zapTraceSpan = null);
         /// <summary>
-        /// add a label to a notification endpoint
+        /// Add a label to a notification endpoint
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="endpointID">ID of the notification endpoint</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="endpointID">The notification endpoint ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>LabelResponse</returns>
         LabelResponse PostNotificationEndpointIDLabels (string endpointID, LabelMapping labelMapping, string zapTraceSpan = null);
 
         /// <summary>
-        /// add a label to a notification endpoint
+        /// Add a label to a notification endpoint
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="endpointID">ID of the notification endpoint</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="endpointID">The notification endpoint ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelResponse</returns>
         ApiResponse<LabelResponse> PostNotificationEndpointIDLabelsWithHttpInfo (string endpointID, LabelMapping labelMapping, string zapTraceSpan = null);
@@ -221,8 +223,8 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="endpointID">ID of notification endpoint</param>
-        /// <param name="notificationEndpoint">a new notification endpoint to replace the existing endpoint with</param>
+        /// <param name="endpointID">The notification endpoint ID.</param>
+        /// <param name="notificationEndpoint">A new notification endpoint to replace the existing endpoint with</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>NotificationEndpoint</returns>
         NotificationEndpoint PutNotificationEndpointsID (string endpointID, NotificationEndpoint notificationEndpoint, string zapTraceSpan = null);
@@ -234,32 +236,32 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="endpointID">ID of notification endpoint</param>
-        /// <param name="notificationEndpoint">a new notification endpoint to replace the existing endpoint with</param>
+        /// <param name="endpointID">The notification endpoint ID.</param>
+        /// <param name="notificationEndpoint">A new notification endpoint to replace the existing endpoint with</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of NotificationEndpoint</returns>
         ApiResponse<NotificationEndpoint> PutNotificationEndpointsIDWithHttpInfo (string endpointID, NotificationEndpoint notificationEndpoint, string zapTraceSpan = null);
         #endregion Synchronous Operations
         #region Asynchronous Operations
         /// <summary>
-        /// Add new notification endpoint
+        /// Add a notification endpoint
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="notificationEndpoint">notificationEndpoint to create</param>
+        /// <param name="notificationEndpoint">Notification endpoint to create</param>
         /// <returns>Task of NotificationEndpoint</returns>
         System.Threading.Tasks.Task<NotificationEndpoint> CreateNotificationEndpointAsync (NotificationEndpoint notificationEndpoint);
 
         /// <summary>
-        /// Add new notification endpoint
+        /// Add a notification endpoint
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="notificationEndpoint">notificationEndpoint to create</param>
+        /// <param name="notificationEndpoint">Notification endpoint to create</param>
         /// <returns>Task of ApiResponse (NotificationEndpoint)</returns>
         System.Threading.Tasks.Task<ApiResponse<NotificationEndpoint>> CreateNotificationEndpointAsyncWithHttpInfo (NotificationEndpoint notificationEndpoint);
         /// <summary>
@@ -269,7 +271,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="endpointID">ID of notification endpoint</param>
+        /// <param name="endpointID">The notification endpoint ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
         System.Threading.Tasks.Task DeleteNotificationEndpointsIDAsync (string endpointID, string zapTraceSpan = null);
@@ -281,32 +283,32 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="endpointID">ID of notification endpoint</param>
+        /// <param name="endpointID">The notification endpoint ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         System.Threading.Tasks.Task<ApiResponse<Object>> DeleteNotificationEndpointsIDAsyncWithHttpInfo (string endpointID, string zapTraceSpan = null);
         /// <summary>
-        /// delete label from a notification endpoint
+        /// Delete a label from a notification endpoint
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="endpointID">ID of the notification endpoint</param>
-        /// <param name="labelID">the label id to delete</param>
+        /// <param name="endpointID">The notification endpoint ID.</param>
+        /// <param name="labelID">The ID of the label to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
         System.Threading.Tasks.Task DeleteNotificationEndpointsIDLabelsIDAsync (string endpointID, string labelID, string zapTraceSpan = null);
 
         /// <summary>
-        /// delete label from a notification endpoint
+        /// Delete a label from a notification endpoint
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="endpointID">ID of the notification endpoint</param>
-        /// <param name="labelID">the label id to delete</param>
+        /// <param name="endpointID">The notification endpoint ID.</param>
+        /// <param name="labelID">The ID of the label to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         System.Threading.Tasks.Task<ApiResponse<Object>> DeleteNotificationEndpointsIDLabelsIDAsyncWithHttpInfo (string endpointID, string labelID, string zapTraceSpan = null);
@@ -317,11 +319,12 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">only show notification endpoints belonging to specified organization</param>
+        /// <param name="orgID">Only show notification endpoints that belong to specific organization ID.</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
         /// <returns>Task of NotificationEndpoints</returns>
-        System.Threading.Tasks.Task<NotificationEndpoints> GetNotificationEndpointsAsync (string orgID, int? offset = null, int? limit = null);
+        System.Threading.Tasks.Task<NotificationEndpoints> GetNotificationEndpointsAsync (string orgID, string zapTraceSpan = null, int? offset = null, int? limit = null);
 
         /// <summary>
         /// Get all notification endpoints
@@ -330,11 +333,12 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">only show notification endpoints belonging to specified organization</param>
+        /// <param name="orgID">Only show notification endpoints that belong to specific organization ID.</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
         /// <returns>Task of ApiResponse (NotificationEndpoints)</returns>
-        System.Threading.Tasks.Task<ApiResponse<NotificationEndpoints>> GetNotificationEndpointsAsyncWithHttpInfo (string orgID, int? offset = null, int? limit = null);
+        System.Threading.Tasks.Task<ApiResponse<NotificationEndpoints>> GetNotificationEndpointsAsyncWithHttpInfo (string orgID, string zapTraceSpan = null, int? offset = null, int? limit = null);
         /// <summary>
         /// Get a notification endpoint
         /// </summary>
@@ -342,7 +346,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="endpointID">ID of notification endpoint</param>
+        /// <param name="endpointID">The notification endpoint ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of NotificationEndpoint</returns>
         System.Threading.Tasks.Task<NotificationEndpoint> GetNotificationEndpointsIDAsync (string endpointID, string zapTraceSpan = null);
@@ -354,30 +358,30 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="endpointID">ID of notification endpoint</param>
+        /// <param name="endpointID">The notification endpoint ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (NotificationEndpoint)</returns>
         System.Threading.Tasks.Task<ApiResponse<NotificationEndpoint>> GetNotificationEndpointsIDAsyncWithHttpInfo (string endpointID, string zapTraceSpan = null);
         /// <summary>
-        /// list all labels for a notification endpoint
+        /// List all labels for a notification endpoint
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="endpointID">ID of the notification endpoint</param>
+        /// <param name="endpointID">The notification endpoint ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of LabelsResponse</returns>
         System.Threading.Tasks.Task<LabelsResponse> GetNotificationEndpointsIDLabelsAsync (string endpointID, string zapTraceSpan = null);
 
         /// <summary>
-        /// list all labels for a notification endpoint
+        /// List all labels for a notification endpoint
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="endpointID">ID of the notification endpoint</param>
+        /// <param name="endpointID">The notification endpoint ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (LabelsResponse)</returns>
         System.Threading.Tasks.Task<ApiResponse<LabelsResponse>> GetNotificationEndpointsIDLabelsAsyncWithHttpInfo (string endpointID, string zapTraceSpan = null);
@@ -388,8 +392,8 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="endpointID">ID of notification endpoint</param>
-        /// <param name="notificationEndpointUpdate">check update to apply</param>
+        /// <param name="endpointID">The notification endpoint ID.</param>
+        /// <param name="notificationEndpointUpdate">Check update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of NotificationEndpoint</returns>
         System.Threading.Tasks.Task<NotificationEndpoint> PatchNotificationEndpointsIDAsync (string endpointID, NotificationEndpointUpdate notificationEndpointUpdate, string zapTraceSpan = null);
@@ -401,33 +405,33 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="endpointID">ID of notification endpoint</param>
-        /// <param name="notificationEndpointUpdate">check update to apply</param>
+        /// <param name="endpointID">The notification endpoint ID.</param>
+        /// <param name="notificationEndpointUpdate">Check update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (NotificationEndpoint)</returns>
         System.Threading.Tasks.Task<ApiResponse<NotificationEndpoint>> PatchNotificationEndpointsIDAsyncWithHttpInfo (string endpointID, NotificationEndpointUpdate notificationEndpointUpdate, string zapTraceSpan = null);
         /// <summary>
-        /// add a label to a notification endpoint
+        /// Add a label to a notification endpoint
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="endpointID">ID of the notification endpoint</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="endpointID">The notification endpoint ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of LabelResponse</returns>
         System.Threading.Tasks.Task<LabelResponse> PostNotificationEndpointIDLabelsAsync (string endpointID, LabelMapping labelMapping, string zapTraceSpan = null);
 
         /// <summary>
-        /// add a label to a notification endpoint
+        /// Add a label to a notification endpoint
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="endpointID">ID of the notification endpoint</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="endpointID">The notification endpoint ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (LabelResponse)</returns>
         System.Threading.Tasks.Task<ApiResponse<LabelResponse>> PostNotificationEndpointIDLabelsAsyncWithHttpInfo (string endpointID, LabelMapping labelMapping, string zapTraceSpan = null);
@@ -438,8 +442,8 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="endpointID">ID of notification endpoint</param>
-        /// <param name="notificationEndpoint">a new notification endpoint to replace the existing endpoint with</param>
+        /// <param name="endpointID">The notification endpoint ID.</param>
+        /// <param name="notificationEndpoint">A new notification endpoint to replace the existing endpoint with</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of NotificationEndpoint</returns>
         System.Threading.Tasks.Task<NotificationEndpoint> PutNotificationEndpointsIDAsync (string endpointID, NotificationEndpoint notificationEndpoint, string zapTraceSpan = null);
@@ -451,8 +455,8 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="endpointID">ID of notification endpoint</param>
-        /// <param name="notificationEndpoint">a new notification endpoint to replace the existing endpoint with</param>
+        /// <param name="endpointID">The notification endpoint ID.</param>
+        /// <param name="notificationEndpoint">A new notification endpoint to replace the existing endpoint with</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (NotificationEndpoint)</returns>
         System.Threading.Tasks.Task<ApiResponse<NotificationEndpoint>> PutNotificationEndpointsIDAsyncWithHttpInfo (string endpointID, NotificationEndpoint notificationEndpoint, string zapTraceSpan = null);
@@ -557,10 +561,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add new notification endpoint 
+        /// Add a notification endpoint 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="notificationEndpoint">notificationEndpoint to create</param>
+        /// <param name="notificationEndpoint">Notification endpoint to create</param>
         /// <returns>NotificationEndpoint</returns>
         public NotificationEndpoint CreateNotificationEndpoint (NotificationEndpoint notificationEndpoint)
         {
@@ -569,10 +573,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add new notification endpoint 
+        /// Add a notification endpoint 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="notificationEndpoint">notificationEndpoint to create</param>
+        /// <param name="notificationEndpoint">Notification endpoint to create</param>
         /// <returns>ApiResponse of NotificationEndpoint</returns>
         public ApiResponse< NotificationEndpoint > CreateNotificationEndpointWithHttpInfo (NotificationEndpoint notificationEndpoint)
         {
@@ -632,10 +636,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add new notification endpoint 
+        /// Add a notification endpoint 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="notificationEndpoint">notificationEndpoint to create</param>
+        /// <param name="notificationEndpoint">Notification endpoint to create</param>
         /// <returns>ApiResponse of NotificationEndpoint</returns>
         public async System.Threading.Tasks.Task<IRestResponse> CreateNotificationEndpointWithIRestResponseAsync (NotificationEndpoint notificationEndpoint)
         {
@@ -693,10 +697,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add new notification endpoint 
+        /// Add a notification endpoint 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="notificationEndpoint">notificationEndpoint to create</param>
+        /// <param name="notificationEndpoint">Notification endpoint to create</param>
         /// <returns>ApiResponse of NotificationEndpoint</returns>
         public IRestResponse CreateNotificationEndpointWithIRestResponse (NotificationEndpoint notificationEndpoint)
         {
@@ -754,10 +758,10 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// Add new notification endpoint 
+        /// Add a notification endpoint 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="notificationEndpoint">notificationEndpoint to create</param>
+        /// <param name="notificationEndpoint">Notification endpoint to create</param>
         /// <returns>ApiResponse of NotificationEndpoint</returns>
         public RestRequest CreateNotificationEndpointWithRestRequest (NotificationEndpoint notificationEndpoint)
         {
@@ -804,10 +808,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add new notification endpoint 
+        /// Add a notification endpoint 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="notificationEndpoint">notificationEndpoint to create</param>
+        /// <param name="notificationEndpoint">Notification endpoint to create</param>
         /// <returns>Task of NotificationEndpoint</returns>
         public async System.Threading.Tasks.Task<NotificationEndpoint> CreateNotificationEndpointAsync (NotificationEndpoint notificationEndpoint)
         {
@@ -817,10 +821,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add new notification endpoint 
+        /// Add a notification endpoint 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="notificationEndpoint">notificationEndpoint to create</param>
+        /// <param name="notificationEndpoint">Notification endpoint to create</param>
         /// <returns>Task of ApiResponse (NotificationEndpoint)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<NotificationEndpoint>> CreateNotificationEndpointAsyncWithHttpInfo (NotificationEndpoint notificationEndpoint)
         {
@@ -841,10 +845,10 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// Add new notification endpoint 
+        /// Add a notification endpoint 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="notificationEndpoint">notificationEndpoint to create</param>
+        /// <param name="notificationEndpoint">Notification endpoint to create</param>
         /// <returns>Task of IRestResponse (NotificationEndpoint)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> CreateNotificationEndpointAsyncWithIRestResponse (NotificationEndpoint notificationEndpoint)
         {
@@ -903,7 +907,7 @@ namespace InfluxDB.Client.Api.Service
         /// Delete a notification endpoint 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="endpointID">ID of notification endpoint</param>
+        /// <param name="endpointID">The notification endpoint ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
         public void DeleteNotificationEndpointsID (string endpointID, string zapTraceSpan = null)
@@ -915,7 +919,7 @@ namespace InfluxDB.Client.Api.Service
         /// Delete a notification endpoint 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="endpointID">ID of notification endpoint</param>
+        /// <param name="endpointID">The notification endpoint ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public ApiResponse<Object> DeleteNotificationEndpointsIDWithHttpInfo (string endpointID, string zapTraceSpan = null)
@@ -972,7 +976,7 @@ namespace InfluxDB.Client.Api.Service
         /// Delete a notification endpoint 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="endpointID">ID of notification endpoint</param>
+        /// <param name="endpointID">The notification endpoint ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> DeleteNotificationEndpointsIDWithIRestResponseAsync (string endpointID, string zapTraceSpan = null)
@@ -1027,7 +1031,7 @@ namespace InfluxDB.Client.Api.Service
         /// Delete a notification endpoint 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="endpointID">ID of notification endpoint</param>
+        /// <param name="endpointID">The notification endpoint ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public IRestResponse DeleteNotificationEndpointsIDWithIRestResponse (string endpointID, string zapTraceSpan = null)
@@ -1082,7 +1086,7 @@ namespace InfluxDB.Client.Api.Service
         /// Delete a notification endpoint 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="endpointID">ID of notification endpoint</param>
+        /// <param name="endpointID">The notification endpoint ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public RestRequest DeleteNotificationEndpointsIDWithRestRequest (string endpointID, string zapTraceSpan = null)
@@ -1126,7 +1130,7 @@ namespace InfluxDB.Client.Api.Service
         /// Delete a notification endpoint 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="endpointID">ID of notification endpoint</param>
+        /// <param name="endpointID">The notification endpoint ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
         public async System.Threading.Tasks.Task DeleteNotificationEndpointsIDAsync (string endpointID, string zapTraceSpan = null)
@@ -1139,7 +1143,7 @@ namespace InfluxDB.Client.Api.Service
         /// Delete a notification endpoint 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="endpointID">ID of notification endpoint</param>
+        /// <param name="endpointID">The notification endpoint ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteNotificationEndpointsIDAsyncWithHttpInfo (string endpointID, string zapTraceSpan = null)
@@ -1164,7 +1168,7 @@ namespace InfluxDB.Client.Api.Service
         /// Delete a notification endpoint 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="endpointID">ID of notification endpoint</param>
+        /// <param name="endpointID">The notification endpoint ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse</returns>
         public async System.Threading.Tasks.Task<IRestResponse> DeleteNotificationEndpointsIDAsyncWithIRestResponse (string endpointID, string zapTraceSpan = null)
@@ -1214,11 +1218,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// delete label from a notification endpoint 
+        /// Delete a label from a notification endpoint 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="endpointID">ID of the notification endpoint</param>
-        /// <param name="labelID">the label id to delete</param>
+        /// <param name="endpointID">The notification endpoint ID.</param>
+        /// <param name="labelID">The ID of the label to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
         public void DeleteNotificationEndpointsIDLabelsID (string endpointID, string labelID, string zapTraceSpan = null)
@@ -1227,11 +1231,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// delete label from a notification endpoint 
+        /// Delete a label from a notification endpoint 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="endpointID">ID of the notification endpoint</param>
-        /// <param name="labelID">the label id to delete</param>
+        /// <param name="endpointID">The notification endpoint ID.</param>
+        /// <param name="labelID">The ID of the label to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public ApiResponse<Object> DeleteNotificationEndpointsIDLabelsIDWithHttpInfo (string endpointID, string labelID, string zapTraceSpan = null)
@@ -1289,11 +1293,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// delete label from a notification endpoint 
+        /// Delete a label from a notification endpoint 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="endpointID">ID of the notification endpoint</param>
-        /// <param name="labelID">the label id to delete</param>
+        /// <param name="endpointID">The notification endpoint ID.</param>
+        /// <param name="labelID">The ID of the label to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> DeleteNotificationEndpointsIDLabelsIDWithIRestResponseAsync (string endpointID, string labelID, string zapTraceSpan = null)
@@ -1349,11 +1353,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// delete label from a notification endpoint 
+        /// Delete a label from a notification endpoint 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="endpointID">ID of the notification endpoint</param>
-        /// <param name="labelID">the label id to delete</param>
+        /// <param name="endpointID">The notification endpoint ID.</param>
+        /// <param name="labelID">The ID of the label to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public IRestResponse DeleteNotificationEndpointsIDLabelsIDWithIRestResponse (string endpointID, string labelID, string zapTraceSpan = null)
@@ -1409,11 +1413,11 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// delete label from a notification endpoint 
+        /// Delete a label from a notification endpoint 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="endpointID">ID of the notification endpoint</param>
-        /// <param name="labelID">the label id to delete</param>
+        /// <param name="endpointID">The notification endpoint ID.</param>
+        /// <param name="labelID">The ID of the label to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public RestRequest DeleteNotificationEndpointsIDLabelsIDWithRestRequest (string endpointID, string labelID, string zapTraceSpan = null)
@@ -1458,11 +1462,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// delete label from a notification endpoint 
+        /// Delete a label from a notification endpoint 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="endpointID">ID of the notification endpoint</param>
-        /// <param name="labelID">the label id to delete</param>
+        /// <param name="endpointID">The notification endpoint ID.</param>
+        /// <param name="labelID">The ID of the label to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
         public async System.Threading.Tasks.Task DeleteNotificationEndpointsIDLabelsIDAsync (string endpointID, string labelID, string zapTraceSpan = null)
@@ -1472,11 +1476,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// delete label from a notification endpoint 
+        /// Delete a label from a notification endpoint 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="endpointID">ID of the notification endpoint</param>
-        /// <param name="labelID">the label id to delete</param>
+        /// <param name="endpointID">The notification endpoint ID.</param>
+        /// <param name="labelID">The ID of the label to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteNotificationEndpointsIDLabelsIDAsyncWithHttpInfo (string endpointID, string labelID, string zapTraceSpan = null)
@@ -1498,11 +1502,11 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// delete label from a notification endpoint 
+        /// Delete a label from a notification endpoint 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="endpointID">ID of the notification endpoint</param>
-        /// <param name="labelID">the label id to delete</param>
+        /// <param name="endpointID">The notification endpoint ID.</param>
+        /// <param name="labelID">The ID of the label to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse</returns>
         public async System.Threading.Tasks.Task<IRestResponse> DeleteNotificationEndpointsIDLabelsIDAsyncWithIRestResponse (string endpointID, string labelID, string zapTraceSpan = null)
@@ -1559,13 +1563,14 @@ namespace InfluxDB.Client.Api.Service
         /// Get all notification endpoints 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">only show notification endpoints belonging to specified organization</param>
+        /// <param name="orgID">Only show notification endpoints that belong to specific organization ID.</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
         /// <returns>NotificationEndpoints</returns>
-        public NotificationEndpoints GetNotificationEndpoints (string orgID, int? offset = null, int? limit = null)
+        public NotificationEndpoints GetNotificationEndpoints (string orgID, string zapTraceSpan = null, int? offset = null, int? limit = null)
         {
-             ApiResponse<NotificationEndpoints> localVarResponse = GetNotificationEndpointsWithHttpInfo(orgID, offset, limit);
+             ApiResponse<NotificationEndpoints> localVarResponse = GetNotificationEndpointsWithHttpInfo(orgID, zapTraceSpan, offset, limit);
              return localVarResponse.Data;
         }
 
@@ -1573,11 +1578,12 @@ namespace InfluxDB.Client.Api.Service
         /// Get all notification endpoints 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">only show notification endpoints belonging to specified organization</param>
+        /// <param name="orgID">Only show notification endpoints that belong to specific organization ID.</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
         /// <returns>ApiResponse of NotificationEndpoints</returns>
-        public ApiResponse< NotificationEndpoints > GetNotificationEndpointsWithHttpInfo (string orgID, int? offset = null, int? limit = null)
+        public ApiResponse< NotificationEndpoints > GetNotificationEndpointsWithHttpInfo (string orgID, string zapTraceSpan = null, int? offset = null, int? limit = null)
         {
             // verify the required parameter 'orgID' is set
             if (orgID == null)
@@ -1599,6 +1605,7 @@ namespace InfluxDB.Client.Api.Service
             if (offset != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "offset", offset)); // query parameter
             if (limit != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "limit", limit)); // query parameter
             if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
 
             // to determine the Accept header
             String[] localVarHttpHeaderAccepts = new String[] {
@@ -1632,11 +1639,12 @@ namespace InfluxDB.Client.Api.Service
         /// Get all notification endpoints 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">only show notification endpoints belonging to specified organization</param>
+        /// <param name="orgID">Only show notification endpoints that belong to specific organization ID.</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
         /// <returns>ApiResponse of NotificationEndpoints</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> GetNotificationEndpointsWithIRestResponseAsync (string orgID, int? offset = null, int? limit = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetNotificationEndpointsWithIRestResponseAsync (string orgID, string zapTraceSpan = null, int? offset = null, int? limit = null)
         {
             // verify the required parameter 'orgID' is set
             if (orgID == null)
@@ -1658,6 +1666,7 @@ namespace InfluxDB.Client.Api.Service
             if (offset != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "offset", offset)); // query parameter
             if (limit != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "limit", limit)); // query parameter
             if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
 
             // to determine the Accept header
             String[] localVarHttpHeaderAccepts = new String[] {
@@ -1689,11 +1698,12 @@ namespace InfluxDB.Client.Api.Service
         /// Get all notification endpoints 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">only show notification endpoints belonging to specified organization</param>
+        /// <param name="orgID">Only show notification endpoints that belong to specific organization ID.</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
         /// <returns>ApiResponse of NotificationEndpoints</returns>
-        public IRestResponse GetNotificationEndpointsWithIRestResponse (string orgID, int? offset = null, int? limit = null)
+        public IRestResponse GetNotificationEndpointsWithIRestResponse (string orgID, string zapTraceSpan = null, int? offset = null, int? limit = null)
         {
             // verify the required parameter 'orgID' is set
             if (orgID == null)
@@ -1715,6 +1725,7 @@ namespace InfluxDB.Client.Api.Service
             if (offset != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "offset", offset)); // query parameter
             if (limit != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "limit", limit)); // query parameter
             if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
 
             // to determine the Accept header
             String[] localVarHttpHeaderAccepts = new String[] {
@@ -1746,11 +1757,12 @@ namespace InfluxDB.Client.Api.Service
         /// Get all notification endpoints 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">only show notification endpoints belonging to specified organization</param>
+        /// <param name="orgID">Only show notification endpoints that belong to specific organization ID.</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
         /// <returns>ApiResponse of NotificationEndpoints</returns>
-        public RestRequest GetNotificationEndpointsWithRestRequest (string orgID, int? offset = null, int? limit = null)
+        public RestRequest GetNotificationEndpointsWithRestRequest (string orgID, string zapTraceSpan = null, int? offset = null, int? limit = null)
         {
             // verify the required parameter 'orgID' is set
             if (orgID == null)
@@ -1772,6 +1784,7 @@ namespace InfluxDB.Client.Api.Service
             if (offset != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "offset", offset)); // query parameter
             if (limit != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "limit", limit)); // query parameter
             if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
 
             // to determine the Accept header
             String[] localVarHttpHeaderAccepts = new String[] {
@@ -1792,13 +1805,14 @@ namespace InfluxDB.Client.Api.Service
         /// Get all notification endpoints 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">only show notification endpoints belonging to specified organization</param>
+        /// <param name="orgID">Only show notification endpoints that belong to specific organization ID.</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
         /// <returns>Task of NotificationEndpoints</returns>
-        public async System.Threading.Tasks.Task<NotificationEndpoints> GetNotificationEndpointsAsync (string orgID, int? offset = null, int? limit = null)
+        public async System.Threading.Tasks.Task<NotificationEndpoints> GetNotificationEndpointsAsync (string orgID, string zapTraceSpan = null, int? offset = null, int? limit = null)
         {
-             ApiResponse<NotificationEndpoints> localVarResponse = await GetNotificationEndpointsAsyncWithHttpInfo(orgID, offset, limit);
+             ApiResponse<NotificationEndpoints> localVarResponse = await GetNotificationEndpointsAsyncWithHttpInfo(orgID, zapTraceSpan, offset, limit);
              return localVarResponse.Data;
 
         }
@@ -1807,14 +1821,15 @@ namespace InfluxDB.Client.Api.Service
         /// Get all notification endpoints 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">only show notification endpoints belonging to specified organization</param>
+        /// <param name="orgID">Only show notification endpoints that belong to specific organization ID.</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
         /// <returns>Task of ApiResponse (NotificationEndpoints)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<NotificationEndpoints>> GetNotificationEndpointsAsyncWithHttpInfo (string orgID, int? offset = null, int? limit = null)
+        public async System.Threading.Tasks.Task<ApiResponse<NotificationEndpoints>> GetNotificationEndpointsAsyncWithHttpInfo (string orgID, string zapTraceSpan = null, int? offset = null, int? limit = null)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await GetNotificationEndpointsAsyncWithIRestResponse(orgID, offset, limit);
+            IRestResponse localVarResponse = await GetNotificationEndpointsAsyncWithIRestResponse(orgID, zapTraceSpan, offset, limit);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -1833,11 +1848,12 @@ namespace InfluxDB.Client.Api.Service
         /// Get all notification endpoints 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">only show notification endpoints belonging to specified organization</param>
+        /// <param name="orgID">Only show notification endpoints that belong to specific organization ID.</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
         /// <returns>Task of IRestResponse (NotificationEndpoints)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> GetNotificationEndpointsAsyncWithIRestResponse (string orgID, int? offset = null, int? limit = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetNotificationEndpointsAsyncWithIRestResponse (string orgID, string zapTraceSpan = null, int? offset = null, int? limit = null)
         {
             // verify the required parameter 'orgID' is set
             if (orgID == null)
@@ -1859,6 +1875,7 @@ namespace InfluxDB.Client.Api.Service
             if (offset != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "offset", offset)); // query parameter
             if (limit != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "limit", limit)); // query parameter
             if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
 
             // to determine the Accept header
             String[] localVarHttpHeaderAccepts = new String[] {
@@ -1888,7 +1905,7 @@ namespace InfluxDB.Client.Api.Service
         /// Get a notification endpoint 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="endpointID">ID of notification endpoint</param>
+        /// <param name="endpointID">The notification endpoint ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>NotificationEndpoint</returns>
         public NotificationEndpoint GetNotificationEndpointsID (string endpointID, string zapTraceSpan = null)
@@ -1901,7 +1918,7 @@ namespace InfluxDB.Client.Api.Service
         /// Get a notification endpoint 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="endpointID">ID of notification endpoint</param>
+        /// <param name="endpointID">The notification endpoint ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of NotificationEndpoint</returns>
         public ApiResponse< NotificationEndpoint > GetNotificationEndpointsIDWithHttpInfo (string endpointID, string zapTraceSpan = null)
@@ -1958,7 +1975,7 @@ namespace InfluxDB.Client.Api.Service
         /// Get a notification endpoint 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="endpointID">ID of notification endpoint</param>
+        /// <param name="endpointID">The notification endpoint ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of NotificationEndpoint</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetNotificationEndpointsIDWithIRestResponseAsync (string endpointID, string zapTraceSpan = null)
@@ -2013,7 +2030,7 @@ namespace InfluxDB.Client.Api.Service
         /// Get a notification endpoint 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="endpointID">ID of notification endpoint</param>
+        /// <param name="endpointID">The notification endpoint ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of NotificationEndpoint</returns>
         public IRestResponse GetNotificationEndpointsIDWithIRestResponse (string endpointID, string zapTraceSpan = null)
@@ -2068,7 +2085,7 @@ namespace InfluxDB.Client.Api.Service
         /// Get a notification endpoint 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="endpointID">ID of notification endpoint</param>
+        /// <param name="endpointID">The notification endpoint ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of NotificationEndpoint</returns>
         public RestRequest GetNotificationEndpointsIDWithRestRequest (string endpointID, string zapTraceSpan = null)
@@ -2112,7 +2129,7 @@ namespace InfluxDB.Client.Api.Service
         /// Get a notification endpoint 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="endpointID">ID of notification endpoint</param>
+        /// <param name="endpointID">The notification endpoint ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of NotificationEndpoint</returns>
         public async System.Threading.Tasks.Task<NotificationEndpoint> GetNotificationEndpointsIDAsync (string endpointID, string zapTraceSpan = null)
@@ -2126,7 +2143,7 @@ namespace InfluxDB.Client.Api.Service
         /// Get a notification endpoint 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="endpointID">ID of notification endpoint</param>
+        /// <param name="endpointID">The notification endpoint ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (NotificationEndpoint)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<NotificationEndpoint>> GetNotificationEndpointsIDAsyncWithHttpInfo (string endpointID, string zapTraceSpan = null)
@@ -2151,7 +2168,7 @@ namespace InfluxDB.Client.Api.Service
         /// Get a notification endpoint 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="endpointID">ID of notification endpoint</param>
+        /// <param name="endpointID">The notification endpoint ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (NotificationEndpoint)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetNotificationEndpointsIDAsyncWithIRestResponse (string endpointID, string zapTraceSpan = null)
@@ -2201,10 +2218,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// list all labels for a notification endpoint 
+        /// List all labels for a notification endpoint 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="endpointID">ID of the notification endpoint</param>
+        /// <param name="endpointID">The notification endpoint ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>LabelsResponse</returns>
         public LabelsResponse GetNotificationEndpointsIDLabels (string endpointID, string zapTraceSpan = null)
@@ -2214,10 +2231,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// list all labels for a notification endpoint 
+        /// List all labels for a notification endpoint 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="endpointID">ID of the notification endpoint</param>
+        /// <param name="endpointID">The notification endpoint ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelsResponse</returns>
         public ApiResponse< LabelsResponse > GetNotificationEndpointsIDLabelsWithHttpInfo (string endpointID, string zapTraceSpan = null)
@@ -2271,10 +2288,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// list all labels for a notification endpoint 
+        /// List all labels for a notification endpoint 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="endpointID">ID of the notification endpoint</param>
+        /// <param name="endpointID">The notification endpoint ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelsResponse</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetNotificationEndpointsIDLabelsWithIRestResponseAsync (string endpointID, string zapTraceSpan = null)
@@ -2326,10 +2343,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// list all labels for a notification endpoint 
+        /// List all labels for a notification endpoint 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="endpointID">ID of the notification endpoint</param>
+        /// <param name="endpointID">The notification endpoint ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelsResponse</returns>
         public IRestResponse GetNotificationEndpointsIDLabelsWithIRestResponse (string endpointID, string zapTraceSpan = null)
@@ -2381,10 +2398,10 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// list all labels for a notification endpoint 
+        /// List all labels for a notification endpoint 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="endpointID">ID of the notification endpoint</param>
+        /// <param name="endpointID">The notification endpoint ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelsResponse</returns>
         public RestRequest GetNotificationEndpointsIDLabelsWithRestRequest (string endpointID, string zapTraceSpan = null)
@@ -2425,10 +2442,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// list all labels for a notification endpoint 
+        /// List all labels for a notification endpoint 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="endpointID">ID of the notification endpoint</param>
+        /// <param name="endpointID">The notification endpoint ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of LabelsResponse</returns>
         public async System.Threading.Tasks.Task<LabelsResponse> GetNotificationEndpointsIDLabelsAsync (string endpointID, string zapTraceSpan = null)
@@ -2439,10 +2456,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// list all labels for a notification endpoint 
+        /// List all labels for a notification endpoint 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="endpointID">ID of the notification endpoint</param>
+        /// <param name="endpointID">The notification endpoint ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (LabelsResponse)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<LabelsResponse>> GetNotificationEndpointsIDLabelsAsyncWithHttpInfo (string endpointID, string zapTraceSpan = null)
@@ -2464,10 +2481,10 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// list all labels for a notification endpoint 
+        /// List all labels for a notification endpoint 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="endpointID">ID of the notification endpoint</param>
+        /// <param name="endpointID">The notification endpoint ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (LabelsResponse)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetNotificationEndpointsIDLabelsAsyncWithIRestResponse (string endpointID, string zapTraceSpan = null)
@@ -2520,8 +2537,8 @@ namespace InfluxDB.Client.Api.Service
         /// Update a notification endpoint 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="endpointID">ID of notification endpoint</param>
-        /// <param name="notificationEndpointUpdate">check update to apply</param>
+        /// <param name="endpointID">The notification endpoint ID.</param>
+        /// <param name="notificationEndpointUpdate">Check update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>NotificationEndpoint</returns>
         public NotificationEndpoint PatchNotificationEndpointsID (string endpointID, NotificationEndpointUpdate notificationEndpointUpdate, string zapTraceSpan = null)
@@ -2534,8 +2551,8 @@ namespace InfluxDB.Client.Api.Service
         /// Update a notification endpoint 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="endpointID">ID of notification endpoint</param>
-        /// <param name="notificationEndpointUpdate">check update to apply</param>
+        /// <param name="endpointID">The notification endpoint ID.</param>
+        /// <param name="notificationEndpointUpdate">Check update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of NotificationEndpoint</returns>
         public ApiResponse< NotificationEndpoint > PatchNotificationEndpointsIDWithHttpInfo (string endpointID, NotificationEndpointUpdate notificationEndpointUpdate, string zapTraceSpan = null)
@@ -2604,8 +2621,8 @@ namespace InfluxDB.Client.Api.Service
         /// Update a notification endpoint 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="endpointID">ID of notification endpoint</param>
-        /// <param name="notificationEndpointUpdate">check update to apply</param>
+        /// <param name="endpointID">The notification endpoint ID.</param>
+        /// <param name="notificationEndpointUpdate">Check update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of NotificationEndpoint</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PatchNotificationEndpointsIDWithIRestResponseAsync (string endpointID, NotificationEndpointUpdate notificationEndpointUpdate, string zapTraceSpan = null)
@@ -2672,8 +2689,8 @@ namespace InfluxDB.Client.Api.Service
         /// Update a notification endpoint 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="endpointID">ID of notification endpoint</param>
-        /// <param name="notificationEndpointUpdate">check update to apply</param>
+        /// <param name="endpointID">The notification endpoint ID.</param>
+        /// <param name="notificationEndpointUpdate">Check update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of NotificationEndpoint</returns>
         public IRestResponse PatchNotificationEndpointsIDWithIRestResponse (string endpointID, NotificationEndpointUpdate notificationEndpointUpdate, string zapTraceSpan = null)
@@ -2740,8 +2757,8 @@ namespace InfluxDB.Client.Api.Service
         /// Update a notification endpoint 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="endpointID">ID of notification endpoint</param>
-        /// <param name="notificationEndpointUpdate">check update to apply</param>
+        /// <param name="endpointID">The notification endpoint ID.</param>
+        /// <param name="notificationEndpointUpdate">Check update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of NotificationEndpoint</returns>
         public RestRequest PatchNotificationEndpointsIDWithRestRequest (string endpointID, NotificationEndpointUpdate notificationEndpointUpdate, string zapTraceSpan = null)
@@ -2797,8 +2814,8 @@ namespace InfluxDB.Client.Api.Service
         /// Update a notification endpoint 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="endpointID">ID of notification endpoint</param>
-        /// <param name="notificationEndpointUpdate">check update to apply</param>
+        /// <param name="endpointID">The notification endpoint ID.</param>
+        /// <param name="notificationEndpointUpdate">Check update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of NotificationEndpoint</returns>
         public async System.Threading.Tasks.Task<NotificationEndpoint> PatchNotificationEndpointsIDAsync (string endpointID, NotificationEndpointUpdate notificationEndpointUpdate, string zapTraceSpan = null)
@@ -2812,8 +2829,8 @@ namespace InfluxDB.Client.Api.Service
         /// Update a notification endpoint 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="endpointID">ID of notification endpoint</param>
-        /// <param name="notificationEndpointUpdate">check update to apply</param>
+        /// <param name="endpointID">The notification endpoint ID.</param>
+        /// <param name="notificationEndpointUpdate">Check update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (NotificationEndpoint)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<NotificationEndpoint>> PatchNotificationEndpointsIDAsyncWithHttpInfo (string endpointID, NotificationEndpointUpdate notificationEndpointUpdate, string zapTraceSpan = null)
@@ -2838,8 +2855,8 @@ namespace InfluxDB.Client.Api.Service
         /// Update a notification endpoint 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="endpointID">ID of notification endpoint</param>
-        /// <param name="notificationEndpointUpdate">check update to apply</param>
+        /// <param name="endpointID">The notification endpoint ID.</param>
+        /// <param name="notificationEndpointUpdate">Check update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (NotificationEndpoint)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PatchNotificationEndpointsIDAsyncWithIRestResponse (string endpointID, NotificationEndpointUpdate notificationEndpointUpdate, string zapTraceSpan = null)
@@ -2901,11 +2918,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// add a label to a notification endpoint 
+        /// Add a label to a notification endpoint 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="endpointID">ID of the notification endpoint</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="endpointID">The notification endpoint ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>LabelResponse</returns>
         public LabelResponse PostNotificationEndpointIDLabels (string endpointID, LabelMapping labelMapping, string zapTraceSpan = null)
@@ -2915,11 +2932,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// add a label to a notification endpoint 
+        /// Add a label to a notification endpoint 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="endpointID">ID of the notification endpoint</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="endpointID">The notification endpoint ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelResponse</returns>
         public ApiResponse< LabelResponse > PostNotificationEndpointIDLabelsWithHttpInfo (string endpointID, LabelMapping labelMapping, string zapTraceSpan = null)
@@ -2985,11 +3002,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// add a label to a notification endpoint 
+        /// Add a label to a notification endpoint 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="endpointID">ID of the notification endpoint</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="endpointID">The notification endpoint ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelResponse</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PostNotificationEndpointIDLabelsWithIRestResponseAsync (string endpointID, LabelMapping labelMapping, string zapTraceSpan = null)
@@ -3053,11 +3070,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// add a label to a notification endpoint 
+        /// Add a label to a notification endpoint 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="endpointID">ID of the notification endpoint</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="endpointID">The notification endpoint ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelResponse</returns>
         public IRestResponse PostNotificationEndpointIDLabelsWithIRestResponse (string endpointID, LabelMapping labelMapping, string zapTraceSpan = null)
@@ -3121,11 +3138,11 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// add a label to a notification endpoint 
+        /// Add a label to a notification endpoint 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="endpointID">ID of the notification endpoint</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="endpointID">The notification endpoint ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelResponse</returns>
         public RestRequest PostNotificationEndpointIDLabelsWithRestRequest (string endpointID, LabelMapping labelMapping, string zapTraceSpan = null)
@@ -3178,11 +3195,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// add a label to a notification endpoint 
+        /// Add a label to a notification endpoint 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="endpointID">ID of the notification endpoint</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="endpointID">The notification endpoint ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of LabelResponse</returns>
         public async System.Threading.Tasks.Task<LabelResponse> PostNotificationEndpointIDLabelsAsync (string endpointID, LabelMapping labelMapping, string zapTraceSpan = null)
@@ -3193,11 +3210,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// add a label to a notification endpoint 
+        /// Add a label to a notification endpoint 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="endpointID">ID of the notification endpoint</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="endpointID">The notification endpoint ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (LabelResponse)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<LabelResponse>> PostNotificationEndpointIDLabelsAsyncWithHttpInfo (string endpointID, LabelMapping labelMapping, string zapTraceSpan = null)
@@ -3219,11 +3236,11 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// add a label to a notification endpoint 
+        /// Add a label to a notification endpoint 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="endpointID">ID of the notification endpoint</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="endpointID">The notification endpoint ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (LabelResponse)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PostNotificationEndpointIDLabelsAsyncWithIRestResponse (string endpointID, LabelMapping labelMapping, string zapTraceSpan = null)
@@ -3288,8 +3305,8 @@ namespace InfluxDB.Client.Api.Service
         /// Update a notification endpoint 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="endpointID">ID of notification endpoint</param>
-        /// <param name="notificationEndpoint">a new notification endpoint to replace the existing endpoint with</param>
+        /// <param name="endpointID">The notification endpoint ID.</param>
+        /// <param name="notificationEndpoint">A new notification endpoint to replace the existing endpoint with</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>NotificationEndpoint</returns>
         public NotificationEndpoint PutNotificationEndpointsID (string endpointID, NotificationEndpoint notificationEndpoint, string zapTraceSpan = null)
@@ -3302,8 +3319,8 @@ namespace InfluxDB.Client.Api.Service
         /// Update a notification endpoint 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="endpointID">ID of notification endpoint</param>
-        /// <param name="notificationEndpoint">a new notification endpoint to replace the existing endpoint with</param>
+        /// <param name="endpointID">The notification endpoint ID.</param>
+        /// <param name="notificationEndpoint">A new notification endpoint to replace the existing endpoint with</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of NotificationEndpoint</returns>
         public ApiResponse< NotificationEndpoint > PutNotificationEndpointsIDWithHttpInfo (string endpointID, NotificationEndpoint notificationEndpoint, string zapTraceSpan = null)
@@ -3372,8 +3389,8 @@ namespace InfluxDB.Client.Api.Service
         /// Update a notification endpoint 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="endpointID">ID of notification endpoint</param>
-        /// <param name="notificationEndpoint">a new notification endpoint to replace the existing endpoint with</param>
+        /// <param name="endpointID">The notification endpoint ID.</param>
+        /// <param name="notificationEndpoint">A new notification endpoint to replace the existing endpoint with</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of NotificationEndpoint</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PutNotificationEndpointsIDWithIRestResponseAsync (string endpointID, NotificationEndpoint notificationEndpoint, string zapTraceSpan = null)
@@ -3440,8 +3457,8 @@ namespace InfluxDB.Client.Api.Service
         /// Update a notification endpoint 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="endpointID">ID of notification endpoint</param>
-        /// <param name="notificationEndpoint">a new notification endpoint to replace the existing endpoint with</param>
+        /// <param name="endpointID">The notification endpoint ID.</param>
+        /// <param name="notificationEndpoint">A new notification endpoint to replace the existing endpoint with</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of NotificationEndpoint</returns>
         public IRestResponse PutNotificationEndpointsIDWithIRestResponse (string endpointID, NotificationEndpoint notificationEndpoint, string zapTraceSpan = null)
@@ -3508,8 +3525,8 @@ namespace InfluxDB.Client.Api.Service
         /// Update a notification endpoint 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="endpointID">ID of notification endpoint</param>
-        /// <param name="notificationEndpoint">a new notification endpoint to replace the existing endpoint with</param>
+        /// <param name="endpointID">The notification endpoint ID.</param>
+        /// <param name="notificationEndpoint">A new notification endpoint to replace the existing endpoint with</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of NotificationEndpoint</returns>
         public RestRequest PutNotificationEndpointsIDWithRestRequest (string endpointID, NotificationEndpoint notificationEndpoint, string zapTraceSpan = null)
@@ -3565,8 +3582,8 @@ namespace InfluxDB.Client.Api.Service
         /// Update a notification endpoint 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="endpointID">ID of notification endpoint</param>
-        /// <param name="notificationEndpoint">a new notification endpoint to replace the existing endpoint with</param>
+        /// <param name="endpointID">The notification endpoint ID.</param>
+        /// <param name="notificationEndpoint">A new notification endpoint to replace the existing endpoint with</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of NotificationEndpoint</returns>
         public async System.Threading.Tasks.Task<NotificationEndpoint> PutNotificationEndpointsIDAsync (string endpointID, NotificationEndpoint notificationEndpoint, string zapTraceSpan = null)
@@ -3580,8 +3597,8 @@ namespace InfluxDB.Client.Api.Service
         /// Update a notification endpoint 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="endpointID">ID of notification endpoint</param>
-        /// <param name="notificationEndpoint">a new notification endpoint to replace the existing endpoint with</param>
+        /// <param name="endpointID">The notification endpoint ID.</param>
+        /// <param name="notificationEndpoint">A new notification endpoint to replace the existing endpoint with</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (NotificationEndpoint)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<NotificationEndpoint>> PutNotificationEndpointsIDAsyncWithHttpInfo (string endpointID, NotificationEndpoint notificationEndpoint, string zapTraceSpan = null)
@@ -3606,8 +3623,8 @@ namespace InfluxDB.Client.Api.Service
         /// Update a notification endpoint 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="endpointID">ID of notification endpoint</param>
-        /// <param name="notificationEndpoint">a new notification endpoint to replace the existing endpoint with</param>
+        /// <param name="endpointID">The notification endpoint ID.</param>
+        /// <param name="notificationEndpoint">A new notification endpoint to replace the existing endpoint with</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (NotificationEndpoint)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PutNotificationEndpointsIDAsyncWithIRestResponse (string endpointID, NotificationEndpoint notificationEndpoint, string zapTraceSpan = null)

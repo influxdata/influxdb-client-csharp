@@ -19,6 +19,7 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using JsonSubTypes;
 using OpenAPIDateConverter = InfluxDB.Client.Api.Client.OpenAPIDateConverter;
 
 namespace InfluxDB.Client.Api.Domain
@@ -27,6 +28,11 @@ namespace InfluxDB.Client.Api.Domain
     /// NotificationRule
     /// </summary>
     [DataContract]
+    [JsonConverter(typeof(JsonSubtypes), "Type")]
+    [JsonSubtypes.KnownSubType(typeof(SMTPNotificationRule), "smtp")]
+    [JsonSubtypes.KnownSubType(typeof(SlackNotificationRule), "slack")]
+    [JsonSubtypes.KnownSubType(typeof(HTTPNotificationRule), "http")]
+    [JsonSubtypes.KnownSubType(typeof(PagerDutyNotificationRule), "pagerduty")]
     public partial class NotificationRule : NotificationRuleBase,  IEquatable<NotificationRule>
     {
         /// <summary>
@@ -37,7 +43,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <summary>
         /// Initializes a new instance of the <see cref="NotificationRule" /> class.
         /// </summary>
-        public NotificationRule(string orgID = default(string), TaskStatusType status = default(TaskStatusType), string name = default(string), string sleepUntil = default(string), string every = default(string), string offset = default(string), string cron = default(string), string runbookLink = default(string), int? limitEvery = default(int?), int? limit = default(int?), List<TagRule> tagRules = default(List<TagRule>), string description = default(string), List<StatusRule> statusRules = default(List<StatusRule>), List<Label> labels = default(List<Label>)) : base(orgID, status, name, sleepUntil, every, offset, cron, runbookLink, limitEvery, limit, tagRules, description, statusRules, labels)
+        public NotificationRule(string endpointID = default(string), string orgID = default(string), TaskStatusType status = default(TaskStatusType), string name = default(string), string sleepUntil = default(string), string every = default(string), string offset = default(string), string runbookLink = default(string), int? limitEvery = default(int?), int? limit = default(int?), List<TagRule> tagRules = default(List<TagRule>), string description = default(string), List<StatusRule> statusRules = default(List<StatusRule>), List<Label> labels = default(List<Label>), NotificationRuleBaseLinks links = default(NotificationRuleBaseLinks)) : base(endpointID, orgID, status, name, sleepUntil, every, offset, runbookLink, limitEvery, limit, tagRules, description, statusRules, labels, links)
         {
         }
 

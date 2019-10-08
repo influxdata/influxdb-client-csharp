@@ -43,17 +43,17 @@ namespace InfluxDB.Client.Api.Domain
         /// Initializes a new instance of the <see cref="CheckBase" /> class.
         /// </summary>
         /// <param name="name">name (required).</param>
-        /// <param name="orgID">the ID of the organization that owns this check. (required).</param>
+        /// <param name="orgID">The ID of the organization that owns this check. (required).</param>
         /// <param name="query">query (required).</param>
         /// <param name="status">status.</param>
-        /// <param name="every">Check repetition interval.</param>
+        /// <param name="every">Check repetition interval..</param>
         /// <param name="offset">Duration to delay after the schedule, before executing check..</param>
-        /// <param name="cron">Check repetition interval in the form &#39;* * * * * *&#39;;.</param>
-        /// <param name="tags">tags to write to each status.</param>
-        /// <param name="description">An optional description of the check.</param>
-        /// <param name="statusMessageTemplate">template that is used to generate and write a status message.</param>
+        /// <param name="tags">List of tags to write to each status..</param>
+        /// <param name="description">An optional description of the check..</param>
+        /// <param name="statusMessageTemplate">The template used to generate and write a status message..</param>
         /// <param name="labels">labels.</param>
-        public CheckBase(string name = default(string), string orgID = default(string), DashboardQuery query = default(DashboardQuery), TaskStatusType? status = default(TaskStatusType?), string every = default(string), string offset = default(string), string cron = default(string), List<CheckBaseTags> tags = default(List<CheckBaseTags>), string description = default(string), string statusMessageTemplate = default(string), List<Label> labels = default(List<Label>))
+        /// <param name="links">links.</param>
+        public CheckBase(string name = default(string), string orgID = default(string), DashboardQuery query = default(DashboardQuery), TaskStatusType? status = default(TaskStatusType?), string every = default(string), string offset = default(string), List<CheckBaseTags> tags = default(List<CheckBaseTags>), string description = default(string), string statusMessageTemplate = default(string), List<Label> labels = default(List<Label>), CheckBaseLinks links = default(CheckBaseLinks))
         {
             // to ensure "name" is required (not null)
             if (name == null)
@@ -85,11 +85,11 @@ namespace InfluxDB.Client.Api.Domain
             this.Status = status;
             this.Every = every;
             this.Offset = offset;
-            this.Cron = cron;
             this.Tags = tags;
             this.Description = description;
             this.StatusMessageTemplate = statusMessageTemplate;
             this.Labels = labels;
+            this.Links = links;
         }
 
         /// <summary>
@@ -105,9 +105,9 @@ namespace InfluxDB.Client.Api.Domain
         public string Name { get; set; }
 
         /// <summary>
-        /// the ID of the organization that owns this check.
+        /// The ID of the organization that owns this check.
         /// </summary>
-        /// <value>the ID of the organization that owns this check.</value>
+        /// <value>The ID of the organization that owns this check.</value>
         [DataMember(Name="orgID", EmitDefaultValue=false)]
         public string OrgID { get; set; }
 
@@ -138,9 +138,9 @@ namespace InfluxDB.Client.Api.Domain
 
 
         /// <summary>
-        /// Check repetition interval
+        /// Check repetition interval.
         /// </summary>
-        /// <value>Check repetition interval</value>
+        /// <value>Check repetition interval.</value>
         [DataMember(Name="every", EmitDefaultValue=false)]
         public string Every { get; set; }
 
@@ -152,30 +152,23 @@ namespace InfluxDB.Client.Api.Domain
         public string Offset { get; set; }
 
         /// <summary>
-        /// Check repetition interval in the form &#39;* * * * * *&#39;;
+        /// List of tags to write to each status.
         /// </summary>
-        /// <value>Check repetition interval in the form &#39;* * * * * *&#39;;</value>
-        [DataMember(Name="cron", EmitDefaultValue=false)]
-        public string Cron { get; set; }
-
-        /// <summary>
-        /// tags to write to each status
-        /// </summary>
-        /// <value>tags to write to each status</value>
+        /// <value>List of tags to write to each status.</value>
         [DataMember(Name="tags", EmitDefaultValue=false)]
         public List<CheckBaseTags> Tags { get; set; }
 
         /// <summary>
-        /// An optional description of the check
+        /// An optional description of the check.
         /// </summary>
-        /// <value>An optional description of the check</value>
+        /// <value>An optional description of the check.</value>
         [DataMember(Name="description", EmitDefaultValue=false)]
         public string Description { get; set; }
 
         /// <summary>
-        /// template that is used to generate and write a status message
+        /// The template used to generate and write a status message.
         /// </summary>
-        /// <value>template that is used to generate and write a status message</value>
+        /// <value>The template used to generate and write a status message.</value>
         [DataMember(Name="statusMessageTemplate", EmitDefaultValue=false)]
         public string StatusMessageTemplate { get; set; }
 
@@ -184,6 +177,12 @@ namespace InfluxDB.Client.Api.Domain
         /// </summary>
         [DataMember(Name="labels", EmitDefaultValue=false)]
         public List<Label> Labels { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Links
+        /// </summary>
+        [DataMember(Name="links", EmitDefaultValue=false)]
+        public CheckBaseLinks Links { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -203,11 +202,11 @@ namespace InfluxDB.Client.Api.Domain
             sb.Append("  Status: ").Append(Status).Append("\n");
             sb.Append("  Every: ").Append(Every).Append("\n");
             sb.Append("  Offset: ").Append(Offset).Append("\n");
-            sb.Append("  Cron: ").Append(Cron).Append("\n");
             sb.Append("  Tags: ").Append(Tags).Append("\n");
             sb.Append("  Description: ").Append(Description).Append("\n");
             sb.Append("  StatusMessageTemplate: ").Append(StatusMessageTemplate).Append("\n");
             sb.Append("  Labels: ").Append(Labels).Append("\n");
+            sb.Append("  Links: ").Append(Links).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -293,11 +292,6 @@ namespace InfluxDB.Client.Api.Domain
                     this.Offset.Equals(input.Offset))
                 ) && 
                 (
-                    this.Cron == input.Cron ||
-                    (this.Cron != null &&
-                    this.Cron.Equals(input.Cron))
-                ) && 
-                (
                     this.Tags == input.Tags ||
                     this.Tags != null &&
                     this.Tags.SequenceEqual(input.Tags)
@@ -316,6 +310,11 @@ namespace InfluxDB.Client.Api.Domain
                     this.Labels == input.Labels ||
                     this.Labels != null &&
                     this.Labels.SequenceEqual(input.Labels)
+                ) && 
+                (
+                    
+                    (this.Links != null &&
+                    this.Links.Equals(input.Links))
                 );
         }
 
@@ -348,8 +347,6 @@ namespace InfluxDB.Client.Api.Domain
                     hashCode = hashCode * 59 + this.Every.GetHashCode();
                 if (this.Offset != null)
                     hashCode = hashCode * 59 + this.Offset.GetHashCode();
-                if (this.Cron != null)
-                    hashCode = hashCode * 59 + this.Cron.GetHashCode();
                 if (this.Tags != null)
                     hashCode = hashCode * 59 + this.Tags.GetHashCode();
                 if (this.Description != null)
@@ -358,6 +355,8 @@ namespace InfluxDB.Client.Api.Domain
                     hashCode = hashCode * 59 + this.StatusMessageTemplate.GetHashCode();
                 if (this.Labels != null)
                     hashCode = hashCode * 59 + this.Labels.GetHashCode();
+                if (this.Links != null)
+                    hashCode = hashCode * 59 + this.Links.GetHashCode();
                 return hashCode;
             }
         }

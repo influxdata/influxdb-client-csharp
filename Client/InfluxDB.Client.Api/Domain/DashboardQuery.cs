@@ -37,7 +37,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <summary>
         /// Initializes a new instance of the <see cref="DashboardQuery" /> class.
         /// </summary>
-        /// <param name="text">The text of the flux query.</param>
+        /// <param name="text">The text of the Flux query..</param>
         /// <param name="editMode">editMode.</param>
         /// <param name="name">name.</param>
         /// <param name="builderConfig">builderConfig.</param>
@@ -50,9 +50,9 @@ namespace InfluxDB.Client.Api.Domain
         }
 
         /// <summary>
-        /// The text of the flux query
+        /// The text of the Flux query.
         /// </summary>
-        /// <value>The text of the flux query</value>
+        /// <value>The text of the Flux query.</value>
         [DataMember(Name="text", EmitDefaultValue=false)]
         public string Text { get; set; }
 

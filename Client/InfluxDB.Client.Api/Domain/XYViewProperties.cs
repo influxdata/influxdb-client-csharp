@@ -85,7 +85,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="colors">Colors define color encoding of data into a visualization (required).</param>
         /// <param name="shape">shape (required).</param>
         /// <param name="note">note (required).</param>
-        /// <param name="showNoteWhenEmpty">if true, will display note when empty (required).</param>
+        /// <param name="showNoteWhenEmpty">If true, will display note when empty (required).</param>
         /// <param name="axes">axes (required).</param>
         /// <param name="legend">legend (required).</param>
         /// <param name="xColumn">xColumn.</param>
@@ -202,9 +202,9 @@ namespace InfluxDB.Client.Api.Domain
         public string Note { get; set; }
 
         /// <summary>
-        /// if true, will display note when empty
+        /// If true, will display note when empty
         /// </summary>
-        /// <value>if true, will display note when empty</value>
+        /// <value>If true, will display note when empty</value>
         [DataMember(Name="showNoteWhenEmpty", EmitDefaultValue=false)]
         public bool? ShowNoteWhenEmpty { get; set; }
 

@@ -24,7 +24,7 @@ using OpenAPIDateConverter = InfluxDB.Client.Api.Client.OpenAPIDateConverter;
 namespace InfluxDB.Client.Api.Domain
 {
     /// <summary>
-    /// Describes a field that can be renamed and made visible or invisible
+    /// Describes a field that can be renamed and made visible or invisible.
     /// </summary>
     [DataContract]
     public partial class RenamableField :  IEquatable<RenamableField>
@@ -32,8 +32,8 @@ namespace InfluxDB.Client.Api.Domain
         /// <summary>
         /// Initializes a new instance of the <see cref="RenamableField" /> class.
         /// </summary>
-        /// <param name="displayName">This is the name that a field is renamed to by the user.</param>
-        /// <param name="visible">Indicates whether this field should be visible on the table.</param>
+        /// <param name="displayName">The name that a field is renamed to by the user..</param>
+        /// <param name="visible">Indicates whether this field should be visible on the table..</param>
         public RenamableField(string displayName = default(string), bool? visible = default(bool?))
         {
             this.DisplayName = displayName;
@@ -41,23 +41,23 @@ namespace InfluxDB.Client.Api.Domain
         }
 
         /// <summary>
-        /// This is the calculated name of a field
+        /// The calculated name of a field.
         /// </summary>
-        /// <value>This is the calculated name of a field</value>
+        /// <value>The calculated name of a field.</value>
         [DataMember(Name="internalName", EmitDefaultValue=false)]
         public string InternalName { get; private set; }
 
         /// <summary>
-        /// This is the name that a field is renamed to by the user
+        /// The name that a field is renamed to by the user.
         /// </summary>
-        /// <value>This is the name that a field is renamed to by the user</value>
+        /// <value>The name that a field is renamed to by the user.</value>
         [DataMember(Name="displayName", EmitDefaultValue=false)]
         public string DisplayName { get; set; }
 
         /// <summary>
-        /// Indicates whether this field should be visible on the table
+        /// Indicates whether this field should be visible on the table.
         /// </summary>
-        /// <value>Indicates whether this field should be visible on the table</value>
+        /// <value>Indicates whether this field should be visible on the table.</value>
         [DataMember(Name="visible", EmitDefaultValue=false)]
         public bool? Visible { get; set; }
 

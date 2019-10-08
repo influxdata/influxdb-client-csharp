@@ -25,7 +25,7 @@ namespace InfluxDB.Client.Api.Service
     {
         #region Synchronous Operations
         /// <summary>
-        /// Get the health of an instance anytime during execution. Allow us to check if the instance is still healthy.
+        /// Get the health of an instance
         /// </summary>
         /// <remarks>
         /// 
@@ -36,7 +36,7 @@ namespace InfluxDB.Client.Api.Service
         HealthCheck GetHealth (string zapTraceSpan = null);
 
         /// <summary>
-        /// Get the health of an instance anytime during execution. Allow us to check if the instance is still healthy.
+        /// Get the health of an instance
         /// </summary>
         /// <remarks>
         /// 
@@ -48,7 +48,7 @@ namespace InfluxDB.Client.Api.Service
         #endregion Synchronous Operations
         #region Asynchronous Operations
         /// <summary>
-        /// Get the health of an instance anytime during execution. Allow us to check if the instance is still healthy.
+        /// Get the health of an instance
         /// </summary>
         /// <remarks>
         /// 
@@ -59,7 +59,7 @@ namespace InfluxDB.Client.Api.Service
         System.Threading.Tasks.Task<HealthCheck> GetHealthAsync (string zapTraceSpan = null);
 
         /// <summary>
-        /// Get the health of an instance anytime during execution. Allow us to check if the instance is still healthy.
+        /// Get the health of an instance
         /// </summary>
         /// <remarks>
         /// 
@@ -169,7 +169,7 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Get the health of an instance anytime during execution. Allow us to check if the instance is still healthy. 
+        /// Get the health of an instance 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
@@ -181,7 +181,7 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Get the health of an instance anytime during execution. Allow us to check if the instance is still healthy. 
+        /// Get the health of an instance 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
@@ -233,7 +233,7 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Get the health of an instance anytime during execution. Allow us to check if the instance is still healthy. 
+        /// Get the health of an instance 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
@@ -283,7 +283,7 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Get the health of an instance anytime during execution. Allow us to check if the instance is still healthy. 
+        /// Get the health of an instance 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
@@ -333,7 +333,7 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// Get the health of an instance anytime during execution. Allow us to check if the instance is still healthy. 
+        /// Get the health of an instance 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
@@ -372,7 +372,7 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Get the health of an instance anytime during execution. Allow us to check if the instance is still healthy. 
+        /// Get the health of an instance 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
@@ -385,7 +385,7 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Get the health of an instance anytime during execution. Allow us to check if the instance is still healthy. 
+        /// Get the health of an instance 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
@@ -409,7 +409,7 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// Get the health of an instance anytime during execution. Allow us to check if the instance is still healthy. 
+        /// Get the health of an instance 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>

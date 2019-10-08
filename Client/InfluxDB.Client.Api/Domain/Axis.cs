@@ -24,7 +24,7 @@ using OpenAPIDateConverter = InfluxDB.Client.Api.Client.OpenAPIDateConverter;
 namespace InfluxDB.Client.Api.Domain
 {
     /// <summary>
-    /// A description of a particular axis for a visualization
+    /// The description of a particular axis for a visualization.
     /// </summary>
     [DataContract]
     public partial class Axis :  IEquatable<Axis>
@@ -71,7 +71,7 @@ namespace InfluxDB.Client.Api.Domain
         /// Initializes a new instance of the <see cref="Axis" /> class.
         /// </summary>
         /// <param name="bounds">The extents of an axis in the form [lower, upper]. Clients determine whether bounds are to be inclusive or exclusive of their limits.</param>
-        /// <param name="label">label is a description of this Axis.</param>
+        /// <param name="label">Label is a description of this Axis.</param>
         /// <param name="prefix">Prefix represents a label prefix for formatting axis values..</param>
         /// <param name="suffix">Suffix represents a label suffix for formatting axis values..</param>
         /// <param name="_base">Base represents the radix for formatting axis values..</param>
@@ -94,9 +94,9 @@ namespace InfluxDB.Client.Api.Domain
         public List<string> Bounds { get; set; }
 
         /// <summary>
-        /// label is a description of this Axis
+        /// Label is a description of this Axis
         /// </summary>
-        /// <value>label is a description of this Axis</value>
+        /// <value>Label is a description of this Axis</value>
         [DataMember(Name="label", EmitDefaultValue=false)]
         public string Label { get; set; }
 

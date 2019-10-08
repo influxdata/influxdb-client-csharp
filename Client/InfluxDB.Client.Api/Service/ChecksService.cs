@@ -31,7 +31,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="check">check to create</param>
+        /// <param name="check">Check to create</param>
         /// <returns>Check</returns>
         Check CreateCheck (Check check);
 
@@ -42,7 +42,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="check">check to create</param>
+        /// <param name="check">Check to create</param>
         /// <returns>ApiResponse of Check</returns>
         ApiResponse<Check> CreateCheckWithHttpInfo (Check check);
         /// <summary>
@@ -52,7 +52,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="checkID">ID of check</param>
+        /// <param name="checkID">The check ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
         void DeleteChecksID (string checkID, string zapTraceSpan = null);
@@ -64,32 +64,32 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="checkID">ID of check</param>
+        /// <param name="checkID">The check ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> DeleteChecksIDWithHttpInfo (string checkID, string zapTraceSpan = null);
         /// <summary>
-        /// delete label from a check
+        /// Delete label from a check
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="checkID">ID of the check</param>
-        /// <param name="labelID">the label id to delete</param>
+        /// <param name="checkID">The check ID.</param>
+        /// <param name="labelID">The ID of the label to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
         void DeleteChecksIDLabelsID (string checkID, string labelID, string zapTraceSpan = null);
 
         /// <summary>
-        /// delete label from a check
+        /// Delete label from a check
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="checkID">ID of the check</param>
-        /// <param name="labelID">the label id to delete</param>
+        /// <param name="checkID">The check ID.</param>
+        /// <param name="labelID">The ID of the label to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> DeleteChecksIDLabelsIDWithHttpInfo (string checkID, string labelID, string zapTraceSpan = null);
@@ -100,11 +100,12 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">only show checks belonging to specified organization</param>
+        /// <param name="orgID">Only show checks that belong to a specific organization ID.</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
         /// <returns>Checks</returns>
-        Checks GetChecks (string orgID, int? offset = null, int? limit = null);
+        Checks GetChecks (string orgID, string zapTraceSpan = null, int? offset = null, int? limit = null);
 
         /// <summary>
         /// Get all checks
@@ -113,11 +114,12 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">only show checks belonging to specified organization</param>
+        /// <param name="orgID">Only show checks that belong to a specific organization ID.</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
         /// <returns>ApiResponse of Checks</returns>
-        ApiResponse<Checks> GetChecksWithHttpInfo (string orgID, int? offset = null, int? limit = null);
+        ApiResponse<Checks> GetChecksWithHttpInfo (string orgID, string zapTraceSpan = null, int? offset = null, int? limit = null);
         /// <summary>
         /// Get a check
         /// </summary>
@@ -125,7 +127,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="checkID">ID of check</param>
+        /// <param name="checkID">The check ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Check</returns>
         Check GetChecksID (string checkID, string zapTraceSpan = null);
@@ -137,53 +139,53 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="checkID">ID of check</param>
+        /// <param name="checkID">The check ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Check</returns>
         ApiResponse<Check> GetChecksIDWithHttpInfo (string checkID, string zapTraceSpan = null);
         /// <summary>
-        /// list all labels for a check
+        /// List all labels for a check
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="checkID">ID of the check</param>
+        /// <param name="checkID">The check ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>LabelsResponse</returns>
         LabelsResponse GetChecksIDLabels (string checkID, string zapTraceSpan = null);
 
         /// <summary>
-        /// list all labels for a check
+        /// List all labels for a check
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="checkID">ID of the check</param>
+        /// <param name="checkID">The check ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelsResponse</returns>
         ApiResponse<LabelsResponse> GetChecksIDLabelsWithHttpInfo (string checkID, string zapTraceSpan = null);
         /// <summary>
-        /// Get an check query
+        /// Get a check query
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="checkID">ID of check</param>
+        /// <param name="checkID">The check ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>FluxResponse</returns>
         FluxResponse GetChecksIDQuery (string checkID, string zapTraceSpan = null);
 
         /// <summary>
-        /// Get an check query
+        /// Get a check query
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="checkID">ID of check</param>
+        /// <param name="checkID">The check ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of FluxResponse</returns>
         ApiResponse<FluxResponse> GetChecksIDQueryWithHttpInfo (string checkID, string zapTraceSpan = null);
@@ -194,11 +196,11 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="checkID">ID of check</param>
-        /// <param name="check">check update to apply</param>
+        /// <param name="checkID">The check ID.</param>
+        /// <param name="checkPatch">Check update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Check</returns>
-        Check PatchChecksID (string checkID, Check check, string zapTraceSpan = null);
+        Check PatchChecksID (string checkID, CheckPatch checkPatch, string zapTraceSpan = null);
 
         /// <summary>
         /// Update a check
@@ -207,36 +209,61 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="checkID">ID of check</param>
-        /// <param name="check">check update to apply</param>
+        /// <param name="checkID">The check ID.</param>
+        /// <param name="checkPatch">Check update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Check</returns>
-        ApiResponse<Check> PatchChecksIDWithHttpInfo (string checkID, Check check, string zapTraceSpan = null);
+        ApiResponse<Check> PatchChecksIDWithHttpInfo (string checkID, CheckPatch checkPatch, string zapTraceSpan = null);
         /// <summary>
-        /// add a label to a check
+        /// Add a label to a check
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="checkID">ID of the check</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="checkID">The check ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>LabelResponse</returns>
         LabelResponse PostChecksIDLabels (string checkID, LabelMapping labelMapping, string zapTraceSpan = null);
 
         /// <summary>
-        /// add a label to a check
+        /// Add a label to a check
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="checkID">ID of the check</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="checkID">The check ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelResponse</returns>
         ApiResponse<LabelResponse> PostChecksIDLabelsWithHttpInfo (string checkID, LabelMapping labelMapping, string zapTraceSpan = null);
+        /// <summary>
+        /// Update a check
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="checkID">The check ID.</param>
+        /// <param name="check">Check update to apply</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Check</returns>
+        Check PutChecksID (string checkID, Check check, string zapTraceSpan = null);
+
+        /// <summary>
+        /// Update a check
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="checkID">The check ID.</param>
+        /// <param name="check">Check update to apply</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Check</returns>
+        ApiResponse<Check> PutChecksIDWithHttpInfo (string checkID, Check check, string zapTraceSpan = null);
         #endregion Synchronous Operations
         #region Asynchronous Operations
         /// <summary>
@@ -246,7 +273,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="check">check to create</param>
+        /// <param name="check">Check to create</param>
         /// <returns>Task of Check</returns>
         System.Threading.Tasks.Task<Check> CreateCheckAsync (Check check);
 
@@ -257,7 +284,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="check">check to create</param>
+        /// <param name="check">Check to create</param>
         /// <returns>Task of ApiResponse (Check)</returns>
         System.Threading.Tasks.Task<ApiResponse<Check>> CreateCheckAsyncWithHttpInfo (Check check);
         /// <summary>
@@ -267,7 +294,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="checkID">ID of check</param>
+        /// <param name="checkID">The check ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
         System.Threading.Tasks.Task DeleteChecksIDAsync (string checkID, string zapTraceSpan = null);
@@ -279,32 +306,32 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="checkID">ID of check</param>
+        /// <param name="checkID">The check ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         System.Threading.Tasks.Task<ApiResponse<Object>> DeleteChecksIDAsyncWithHttpInfo (string checkID, string zapTraceSpan = null);
         /// <summary>
-        /// delete label from a check
+        /// Delete label from a check
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="checkID">ID of the check</param>
-        /// <param name="labelID">the label id to delete</param>
+        /// <param name="checkID">The check ID.</param>
+        /// <param name="labelID">The ID of the label to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
         System.Threading.Tasks.Task DeleteChecksIDLabelsIDAsync (string checkID, string labelID, string zapTraceSpan = null);
 
         /// <summary>
-        /// delete label from a check
+        /// Delete label from a check
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="checkID">ID of the check</param>
-        /// <param name="labelID">the label id to delete</param>
+        /// <param name="checkID">The check ID.</param>
+        /// <param name="labelID">The ID of the label to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         System.Threading.Tasks.Task<ApiResponse<Object>> DeleteChecksIDLabelsIDAsyncWithHttpInfo (string checkID, string labelID, string zapTraceSpan = null);
@@ -315,11 +342,12 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">only show checks belonging to specified organization</param>
+        /// <param name="orgID">Only show checks that belong to a specific organization ID.</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
         /// <returns>Task of Checks</returns>
-        System.Threading.Tasks.Task<Checks> GetChecksAsync (string orgID, int? offset = null, int? limit = null);
+        System.Threading.Tasks.Task<Checks> GetChecksAsync (string orgID, string zapTraceSpan = null, int? offset = null, int? limit = null);
 
         /// <summary>
         /// Get all checks
@@ -328,11 +356,12 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">only show checks belonging to specified organization</param>
+        /// <param name="orgID">Only show checks that belong to a specific organization ID.</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
         /// <returns>Task of ApiResponse (Checks)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Checks>> GetChecksAsyncWithHttpInfo (string orgID, int? offset = null, int? limit = null);
+        System.Threading.Tasks.Task<ApiResponse<Checks>> GetChecksAsyncWithHttpInfo (string orgID, string zapTraceSpan = null, int? offset = null, int? limit = null);
         /// <summary>
         /// Get a check
         /// </summary>
@@ -340,7 +369,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="checkID">ID of check</param>
+        /// <param name="checkID">The check ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of Check</returns>
         System.Threading.Tasks.Task<Check> GetChecksIDAsync (string checkID, string zapTraceSpan = null);
@@ -352,53 +381,53 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="checkID">ID of check</param>
+        /// <param name="checkID">The check ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (Check)</returns>
         System.Threading.Tasks.Task<ApiResponse<Check>> GetChecksIDAsyncWithHttpInfo (string checkID, string zapTraceSpan = null);
         /// <summary>
-        /// list all labels for a check
+        /// List all labels for a check
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="checkID">ID of the check</param>
+        /// <param name="checkID">The check ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of LabelsResponse</returns>
         System.Threading.Tasks.Task<LabelsResponse> GetChecksIDLabelsAsync (string checkID, string zapTraceSpan = null);
 
         /// <summary>
-        /// list all labels for a check
+        /// List all labels for a check
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="checkID">ID of the check</param>
+        /// <param name="checkID">The check ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (LabelsResponse)</returns>
         System.Threading.Tasks.Task<ApiResponse<LabelsResponse>> GetChecksIDLabelsAsyncWithHttpInfo (string checkID, string zapTraceSpan = null);
         /// <summary>
-        /// Get an check query
+        /// Get a check query
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="checkID">ID of check</param>
+        /// <param name="checkID">The check ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of FluxResponse</returns>
         System.Threading.Tasks.Task<FluxResponse> GetChecksIDQueryAsync (string checkID, string zapTraceSpan = null);
 
         /// <summary>
-        /// Get an check query
+        /// Get a check query
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="checkID">ID of check</param>
+        /// <param name="checkID">The check ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (FluxResponse)</returns>
         System.Threading.Tasks.Task<ApiResponse<FluxResponse>> GetChecksIDQueryAsyncWithHttpInfo (string checkID, string zapTraceSpan = null);
@@ -409,11 +438,11 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="checkID">ID of check</param>
-        /// <param name="check">check update to apply</param>
+        /// <param name="checkID">The check ID.</param>
+        /// <param name="checkPatch">Check update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of Check</returns>
-        System.Threading.Tasks.Task<Check> PatchChecksIDAsync (string checkID, Check check, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<Check> PatchChecksIDAsync (string checkID, CheckPatch checkPatch, string zapTraceSpan = null);
 
         /// <summary>
         /// Update a check
@@ -422,36 +451,61 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="checkID">ID of check</param>
-        /// <param name="check">check update to apply</param>
+        /// <param name="checkID">The check ID.</param>
+        /// <param name="checkPatch">Check update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (Check)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Check>> PatchChecksIDAsyncWithHttpInfo (string checkID, Check check, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<Check>> PatchChecksIDAsyncWithHttpInfo (string checkID, CheckPatch checkPatch, string zapTraceSpan = null);
         /// <summary>
-        /// add a label to a check
+        /// Add a label to a check
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="checkID">ID of the check</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="checkID">The check ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of LabelResponse</returns>
         System.Threading.Tasks.Task<LabelResponse> PostChecksIDLabelsAsync (string checkID, LabelMapping labelMapping, string zapTraceSpan = null);
 
         /// <summary>
-        /// add a label to a check
+        /// Add a label to a check
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="checkID">ID of the check</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="checkID">The check ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (LabelResponse)</returns>
         System.Threading.Tasks.Task<ApiResponse<LabelResponse>> PostChecksIDLabelsAsyncWithHttpInfo (string checkID, LabelMapping labelMapping, string zapTraceSpan = null);
+        /// <summary>
+        /// Update a check
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="checkID">The check ID.</param>
+        /// <param name="check">Check update to apply</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of Check</returns>
+        System.Threading.Tasks.Task<Check> PutChecksIDAsync (string checkID, Check check, string zapTraceSpan = null);
+
+        /// <summary>
+        /// Update a check
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="checkID">The check ID.</param>
+        /// <param name="check">Check update to apply</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ApiResponse (Check)</returns>
+        System.Threading.Tasks.Task<ApiResponse<Check>> PutChecksIDAsyncWithHttpInfo (string checkID, Check check, string zapTraceSpan = null);
         #endregion Asynchronous Operations
     }
 
@@ -556,7 +610,7 @@ namespace InfluxDB.Client.Api.Service
         /// Add new check 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="check">check to create</param>
+        /// <param name="check">Check to create</param>
         /// <returns>Check</returns>
         public Check CreateCheck (Check check)
         {
@@ -568,7 +622,7 @@ namespace InfluxDB.Client.Api.Service
         /// Add new check 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="check">check to create</param>
+        /// <param name="check">Check to create</param>
         /// <returns>ApiResponse of Check</returns>
         public ApiResponse< Check > CreateCheckWithHttpInfo (Check check)
         {
@@ -631,7 +685,7 @@ namespace InfluxDB.Client.Api.Service
         /// Add new check 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="check">check to create</param>
+        /// <param name="check">Check to create</param>
         /// <returns>ApiResponse of Check</returns>
         public async System.Threading.Tasks.Task<IRestResponse> CreateCheckWithIRestResponseAsync (Check check)
         {
@@ -692,7 +746,7 @@ namespace InfluxDB.Client.Api.Service
         /// Add new check 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="check">check to create</param>
+        /// <param name="check">Check to create</param>
         /// <returns>ApiResponse of Check</returns>
         public IRestResponse CreateCheckWithIRestResponse (Check check)
         {
@@ -753,7 +807,7 @@ namespace InfluxDB.Client.Api.Service
         /// Add new check 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="check">check to create</param>
+        /// <param name="check">Check to create</param>
         /// <returns>ApiResponse of Check</returns>
         public RestRequest CreateCheckWithRestRequest (Check check)
         {
@@ -803,7 +857,7 @@ namespace InfluxDB.Client.Api.Service
         /// Add new check 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="check">check to create</param>
+        /// <param name="check">Check to create</param>
         /// <returns>Task of Check</returns>
         public async System.Threading.Tasks.Task<Check> CreateCheckAsync (Check check)
         {
@@ -816,7 +870,7 @@ namespace InfluxDB.Client.Api.Service
         /// Add new check 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="check">check to create</param>
+        /// <param name="check">Check to create</param>
         /// <returns>Task of ApiResponse (Check)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Check>> CreateCheckAsyncWithHttpInfo (Check check)
         {
@@ -840,7 +894,7 @@ namespace InfluxDB.Client.Api.Service
         /// Add new check 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="check">check to create</param>
+        /// <param name="check">Check to create</param>
         /// <returns>Task of IRestResponse (Check)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> CreateCheckAsyncWithIRestResponse (Check check)
         {
@@ -899,7 +953,7 @@ namespace InfluxDB.Client.Api.Service
         /// Delete a check 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="checkID">ID of check</param>
+        /// <param name="checkID">The check ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
         public void DeleteChecksID (string checkID, string zapTraceSpan = null)
@@ -911,7 +965,7 @@ namespace InfluxDB.Client.Api.Service
         /// Delete a check 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="checkID">ID of check</param>
+        /// <param name="checkID">The check ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public ApiResponse<Object> DeleteChecksIDWithHttpInfo (string checkID, string zapTraceSpan = null)
@@ -968,7 +1022,7 @@ namespace InfluxDB.Client.Api.Service
         /// Delete a check 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="checkID">ID of check</param>
+        /// <param name="checkID">The check ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> DeleteChecksIDWithIRestResponseAsync (string checkID, string zapTraceSpan = null)
@@ -1023,7 +1077,7 @@ namespace InfluxDB.Client.Api.Service
         /// Delete a check 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="checkID">ID of check</param>
+        /// <param name="checkID">The check ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public IRestResponse DeleteChecksIDWithIRestResponse (string checkID, string zapTraceSpan = null)
@@ -1078,7 +1132,7 @@ namespace InfluxDB.Client.Api.Service
         /// Delete a check 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="checkID">ID of check</param>
+        /// <param name="checkID">The check ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public RestRequest DeleteChecksIDWithRestRequest (string checkID, string zapTraceSpan = null)
@@ -1122,7 +1176,7 @@ namespace InfluxDB.Client.Api.Service
         /// Delete a check 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="checkID">ID of check</param>
+        /// <param name="checkID">The check ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
         public async System.Threading.Tasks.Task DeleteChecksIDAsync (string checkID, string zapTraceSpan = null)
@@ -1135,7 +1189,7 @@ namespace InfluxDB.Client.Api.Service
         /// Delete a check 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="checkID">ID of check</param>
+        /// <param name="checkID">The check ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteChecksIDAsyncWithHttpInfo (string checkID, string zapTraceSpan = null)
@@ -1160,7 +1214,7 @@ namespace InfluxDB.Client.Api.Service
         /// Delete a check 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="checkID">ID of check</param>
+        /// <param name="checkID">The check ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse</returns>
         public async System.Threading.Tasks.Task<IRestResponse> DeleteChecksIDAsyncWithIRestResponse (string checkID, string zapTraceSpan = null)
@@ -1210,11 +1264,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// delete label from a check 
+        /// Delete label from a check 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="checkID">ID of the check</param>
-        /// <param name="labelID">the label id to delete</param>
+        /// <param name="checkID">The check ID.</param>
+        /// <param name="labelID">The ID of the label to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
         public void DeleteChecksIDLabelsID (string checkID, string labelID, string zapTraceSpan = null)
@@ -1223,11 +1277,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// delete label from a check 
+        /// Delete label from a check 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="checkID">ID of the check</param>
-        /// <param name="labelID">the label id to delete</param>
+        /// <param name="checkID">The check ID.</param>
+        /// <param name="labelID">The ID of the label to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public ApiResponse<Object> DeleteChecksIDLabelsIDWithHttpInfo (string checkID, string labelID, string zapTraceSpan = null)
@@ -1285,11 +1339,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// delete label from a check 
+        /// Delete label from a check 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="checkID">ID of the check</param>
-        /// <param name="labelID">the label id to delete</param>
+        /// <param name="checkID">The check ID.</param>
+        /// <param name="labelID">The ID of the label to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> DeleteChecksIDLabelsIDWithIRestResponseAsync (string checkID, string labelID, string zapTraceSpan = null)
@@ -1345,11 +1399,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// delete label from a check 
+        /// Delete label from a check 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="checkID">ID of the check</param>
-        /// <param name="labelID">the label id to delete</param>
+        /// <param name="checkID">The check ID.</param>
+        /// <param name="labelID">The ID of the label to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public IRestResponse DeleteChecksIDLabelsIDWithIRestResponse (string checkID, string labelID, string zapTraceSpan = null)
@@ -1405,11 +1459,11 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// delete label from a check 
+        /// Delete label from a check 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="checkID">ID of the check</param>
-        /// <param name="labelID">the label id to delete</param>
+        /// <param name="checkID">The check ID.</param>
+        /// <param name="labelID">The ID of the label to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public RestRequest DeleteChecksIDLabelsIDWithRestRequest (string checkID, string labelID, string zapTraceSpan = null)
@@ -1454,11 +1508,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// delete label from a check 
+        /// Delete label from a check 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="checkID">ID of the check</param>
-        /// <param name="labelID">the label id to delete</param>
+        /// <param name="checkID">The check ID.</param>
+        /// <param name="labelID">The ID of the label to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
         public async System.Threading.Tasks.Task DeleteChecksIDLabelsIDAsync (string checkID, string labelID, string zapTraceSpan = null)
@@ -1468,11 +1522,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// delete label from a check 
+        /// Delete label from a check 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="checkID">ID of the check</param>
-        /// <param name="labelID">the label id to delete</param>
+        /// <param name="checkID">The check ID.</param>
+        /// <param name="labelID">The ID of the label to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteChecksIDLabelsIDAsyncWithHttpInfo (string checkID, string labelID, string zapTraceSpan = null)
@@ -1494,11 +1548,11 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// delete label from a check 
+        /// Delete label from a check 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="checkID">ID of the check</param>
-        /// <param name="labelID">the label id to delete</param>
+        /// <param name="checkID">The check ID.</param>
+        /// <param name="labelID">The ID of the label to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse</returns>
         public async System.Threading.Tasks.Task<IRestResponse> DeleteChecksIDLabelsIDAsyncWithIRestResponse (string checkID, string labelID, string zapTraceSpan = null)
@@ -1555,13 +1609,14 @@ namespace InfluxDB.Client.Api.Service
         /// Get all checks 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">only show checks belonging to specified organization</param>
+        /// <param name="orgID">Only show checks that belong to a specific organization ID.</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
         /// <returns>Checks</returns>
-        public Checks GetChecks (string orgID, int? offset = null, int? limit = null)
+        public Checks GetChecks (string orgID, string zapTraceSpan = null, int? offset = null, int? limit = null)
         {
-             ApiResponse<Checks> localVarResponse = GetChecksWithHttpInfo(orgID, offset, limit);
+             ApiResponse<Checks> localVarResponse = GetChecksWithHttpInfo(orgID, zapTraceSpan, offset, limit);
              return localVarResponse.Data;
         }
 
@@ -1569,11 +1624,12 @@ namespace InfluxDB.Client.Api.Service
         /// Get all checks 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">only show checks belonging to specified organization</param>
+        /// <param name="orgID">Only show checks that belong to a specific organization ID.</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
         /// <returns>ApiResponse of Checks</returns>
-        public ApiResponse< Checks > GetChecksWithHttpInfo (string orgID, int? offset = null, int? limit = null)
+        public ApiResponse< Checks > GetChecksWithHttpInfo (string orgID, string zapTraceSpan = null, int? offset = null, int? limit = null)
         {
             // verify the required parameter 'orgID' is set
             if (orgID == null)
@@ -1595,6 +1651,7 @@ namespace InfluxDB.Client.Api.Service
             if (offset != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "offset", offset)); // query parameter
             if (limit != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "limit", limit)); // query parameter
             if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
 
             // to determine the Accept header
             String[] localVarHttpHeaderAccepts = new String[] {
@@ -1628,11 +1685,12 @@ namespace InfluxDB.Client.Api.Service
         /// Get all checks 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">only show checks belonging to specified organization</param>
+        /// <param name="orgID">Only show checks that belong to a specific organization ID.</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
         /// <returns>ApiResponse of Checks</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> GetChecksWithIRestResponseAsync (string orgID, int? offset = null, int? limit = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetChecksWithIRestResponseAsync (string orgID, string zapTraceSpan = null, int? offset = null, int? limit = null)
         {
             // verify the required parameter 'orgID' is set
             if (orgID == null)
@@ -1654,6 +1712,7 @@ namespace InfluxDB.Client.Api.Service
             if (offset != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "offset", offset)); // query parameter
             if (limit != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "limit", limit)); // query parameter
             if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
 
             // to determine the Accept header
             String[] localVarHttpHeaderAccepts = new String[] {
@@ -1685,11 +1744,12 @@ namespace InfluxDB.Client.Api.Service
         /// Get all checks 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">only show checks belonging to specified organization</param>
+        /// <param name="orgID">Only show checks that belong to a specific organization ID.</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
         /// <returns>ApiResponse of Checks</returns>
-        public IRestResponse GetChecksWithIRestResponse (string orgID, int? offset = null, int? limit = null)
+        public IRestResponse GetChecksWithIRestResponse (string orgID, string zapTraceSpan = null, int? offset = null, int? limit = null)
         {
             // verify the required parameter 'orgID' is set
             if (orgID == null)
@@ -1711,6 +1771,7 @@ namespace InfluxDB.Client.Api.Service
             if (offset != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "offset", offset)); // query parameter
             if (limit != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "limit", limit)); // query parameter
             if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
 
             // to determine the Accept header
             String[] localVarHttpHeaderAccepts = new String[] {
@@ -1742,11 +1803,12 @@ namespace InfluxDB.Client.Api.Service
         /// Get all checks 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">only show checks belonging to specified organization</param>
+        /// <param name="orgID">Only show checks that belong to a specific organization ID.</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
         /// <returns>ApiResponse of Checks</returns>
-        public RestRequest GetChecksWithRestRequest (string orgID, int? offset = null, int? limit = null)
+        public RestRequest GetChecksWithRestRequest (string orgID, string zapTraceSpan = null, int? offset = null, int? limit = null)
         {
             // verify the required parameter 'orgID' is set
             if (orgID == null)
@@ -1768,6 +1830,7 @@ namespace InfluxDB.Client.Api.Service
             if (offset != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "offset", offset)); // query parameter
             if (limit != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "limit", limit)); // query parameter
             if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
 
             // to determine the Accept header
             String[] localVarHttpHeaderAccepts = new String[] {
@@ -1788,13 +1851,14 @@ namespace InfluxDB.Client.Api.Service
         /// Get all checks 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">only show checks belonging to specified organization</param>
+        /// <param name="orgID">Only show checks that belong to a specific organization ID.</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
         /// <returns>Task of Checks</returns>
-        public async System.Threading.Tasks.Task<Checks> GetChecksAsync (string orgID, int? offset = null, int? limit = null)
+        public async System.Threading.Tasks.Task<Checks> GetChecksAsync (string orgID, string zapTraceSpan = null, int? offset = null, int? limit = null)
         {
-             ApiResponse<Checks> localVarResponse = await GetChecksAsyncWithHttpInfo(orgID, offset, limit);
+             ApiResponse<Checks> localVarResponse = await GetChecksAsyncWithHttpInfo(orgID, zapTraceSpan, offset, limit);
              return localVarResponse.Data;
 
         }
@@ -1803,14 +1867,15 @@ namespace InfluxDB.Client.Api.Service
         /// Get all checks 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">only show checks belonging to specified organization</param>
+        /// <param name="orgID">Only show checks that belong to a specific organization ID.</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
         /// <returns>Task of ApiResponse (Checks)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Checks>> GetChecksAsyncWithHttpInfo (string orgID, int? offset = null, int? limit = null)
+        public async System.Threading.Tasks.Task<ApiResponse<Checks>> GetChecksAsyncWithHttpInfo (string orgID, string zapTraceSpan = null, int? offset = null, int? limit = null)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await GetChecksAsyncWithIRestResponse(orgID, offset, limit);
+            IRestResponse localVarResponse = await GetChecksAsyncWithIRestResponse(orgID, zapTraceSpan, offset, limit);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -1829,11 +1894,12 @@ namespace InfluxDB.Client.Api.Service
         /// Get all checks 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">only show checks belonging to specified organization</param>
+        /// <param name="orgID">Only show checks that belong to a specific organization ID.</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
         /// <returns>Task of IRestResponse (Checks)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> GetChecksAsyncWithIRestResponse (string orgID, int? offset = null, int? limit = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetChecksAsyncWithIRestResponse (string orgID, string zapTraceSpan = null, int? offset = null, int? limit = null)
         {
             // verify the required parameter 'orgID' is set
             if (orgID == null)
@@ -1855,6 +1921,7 @@ namespace InfluxDB.Client.Api.Service
             if (offset != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "offset", offset)); // query parameter
             if (limit != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "limit", limit)); // query parameter
             if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
 
             // to determine the Accept header
             String[] localVarHttpHeaderAccepts = new String[] {
@@ -1884,7 +1951,7 @@ namespace InfluxDB.Client.Api.Service
         /// Get a check 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="checkID">ID of check</param>
+        /// <param name="checkID">The check ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Check</returns>
         public Check GetChecksID (string checkID, string zapTraceSpan = null)
@@ -1897,7 +1964,7 @@ namespace InfluxDB.Client.Api.Service
         /// Get a check 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="checkID">ID of check</param>
+        /// <param name="checkID">The check ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Check</returns>
         public ApiResponse< Check > GetChecksIDWithHttpInfo (string checkID, string zapTraceSpan = null)
@@ -1954,7 +2021,7 @@ namespace InfluxDB.Client.Api.Service
         /// Get a check 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="checkID">ID of check</param>
+        /// <param name="checkID">The check ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Check</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetChecksIDWithIRestResponseAsync (string checkID, string zapTraceSpan = null)
@@ -2009,7 +2076,7 @@ namespace InfluxDB.Client.Api.Service
         /// Get a check 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="checkID">ID of check</param>
+        /// <param name="checkID">The check ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Check</returns>
         public IRestResponse GetChecksIDWithIRestResponse (string checkID, string zapTraceSpan = null)
@@ -2064,7 +2131,7 @@ namespace InfluxDB.Client.Api.Service
         /// Get a check 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="checkID">ID of check</param>
+        /// <param name="checkID">The check ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Check</returns>
         public RestRequest GetChecksIDWithRestRequest (string checkID, string zapTraceSpan = null)
@@ -2108,7 +2175,7 @@ namespace InfluxDB.Client.Api.Service
         /// Get a check 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="checkID">ID of check</param>
+        /// <param name="checkID">The check ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of Check</returns>
         public async System.Threading.Tasks.Task<Check> GetChecksIDAsync (string checkID, string zapTraceSpan = null)
@@ -2122,7 +2189,7 @@ namespace InfluxDB.Client.Api.Service
         /// Get a check 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="checkID">ID of check</param>
+        /// <param name="checkID">The check ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (Check)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Check>> GetChecksIDAsyncWithHttpInfo (string checkID, string zapTraceSpan = null)
@@ -2147,7 +2214,7 @@ namespace InfluxDB.Client.Api.Service
         /// Get a check 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="checkID">ID of check</param>
+        /// <param name="checkID">The check ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (Check)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetChecksIDAsyncWithIRestResponse (string checkID, string zapTraceSpan = null)
@@ -2197,10 +2264,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// list all labels for a check 
+        /// List all labels for a check 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="checkID">ID of the check</param>
+        /// <param name="checkID">The check ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>LabelsResponse</returns>
         public LabelsResponse GetChecksIDLabels (string checkID, string zapTraceSpan = null)
@@ -2210,10 +2277,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// list all labels for a check 
+        /// List all labels for a check 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="checkID">ID of the check</param>
+        /// <param name="checkID">The check ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelsResponse</returns>
         public ApiResponse< LabelsResponse > GetChecksIDLabelsWithHttpInfo (string checkID, string zapTraceSpan = null)
@@ -2267,10 +2334,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// list all labels for a check 
+        /// List all labels for a check 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="checkID">ID of the check</param>
+        /// <param name="checkID">The check ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelsResponse</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetChecksIDLabelsWithIRestResponseAsync (string checkID, string zapTraceSpan = null)
@@ -2322,10 +2389,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// list all labels for a check 
+        /// List all labels for a check 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="checkID">ID of the check</param>
+        /// <param name="checkID">The check ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelsResponse</returns>
         public IRestResponse GetChecksIDLabelsWithIRestResponse (string checkID, string zapTraceSpan = null)
@@ -2377,10 +2444,10 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// list all labels for a check 
+        /// List all labels for a check 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="checkID">ID of the check</param>
+        /// <param name="checkID">The check ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelsResponse</returns>
         public RestRequest GetChecksIDLabelsWithRestRequest (string checkID, string zapTraceSpan = null)
@@ -2421,10 +2488,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// list all labels for a check 
+        /// List all labels for a check 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="checkID">ID of the check</param>
+        /// <param name="checkID">The check ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of LabelsResponse</returns>
         public async System.Threading.Tasks.Task<LabelsResponse> GetChecksIDLabelsAsync (string checkID, string zapTraceSpan = null)
@@ -2435,10 +2502,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// list all labels for a check 
+        /// List all labels for a check 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="checkID">ID of the check</param>
+        /// <param name="checkID">The check ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (LabelsResponse)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<LabelsResponse>> GetChecksIDLabelsAsyncWithHttpInfo (string checkID, string zapTraceSpan = null)
@@ -2460,10 +2527,10 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// list all labels for a check 
+        /// List all labels for a check 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="checkID">ID of the check</param>
+        /// <param name="checkID">The check ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (LabelsResponse)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetChecksIDLabelsAsyncWithIRestResponse (string checkID, string zapTraceSpan = null)
@@ -2513,10 +2580,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Get an check query 
+        /// Get a check query 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="checkID">ID of check</param>
+        /// <param name="checkID">The check ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>FluxResponse</returns>
         public FluxResponse GetChecksIDQuery (string checkID, string zapTraceSpan = null)
@@ -2526,10 +2593,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Get an check query 
+        /// Get a check query 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="checkID">ID of check</param>
+        /// <param name="checkID">The check ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of FluxResponse</returns>
         public ApiResponse< FluxResponse > GetChecksIDQueryWithHttpInfo (string checkID, string zapTraceSpan = null)
@@ -2583,10 +2650,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Get an check query 
+        /// Get a check query 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="checkID">ID of check</param>
+        /// <param name="checkID">The check ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of FluxResponse</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetChecksIDQueryWithIRestResponseAsync (string checkID, string zapTraceSpan = null)
@@ -2638,10 +2705,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Get an check query 
+        /// Get a check query 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="checkID">ID of check</param>
+        /// <param name="checkID">The check ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of FluxResponse</returns>
         public IRestResponse GetChecksIDQueryWithIRestResponse (string checkID, string zapTraceSpan = null)
@@ -2693,10 +2760,10 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// Get an check query 
+        /// Get a check query 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="checkID">ID of check</param>
+        /// <param name="checkID">The check ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of FluxResponse</returns>
         public RestRequest GetChecksIDQueryWithRestRequest (string checkID, string zapTraceSpan = null)
@@ -2737,10 +2804,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Get an check query 
+        /// Get a check query 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="checkID">ID of check</param>
+        /// <param name="checkID">The check ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of FluxResponse</returns>
         public async System.Threading.Tasks.Task<FluxResponse> GetChecksIDQueryAsync (string checkID, string zapTraceSpan = null)
@@ -2751,10 +2818,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Get an check query 
+        /// Get a check query 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="checkID">ID of check</param>
+        /// <param name="checkID">The check ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (FluxResponse)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<FluxResponse>> GetChecksIDQueryAsyncWithHttpInfo (string checkID, string zapTraceSpan = null)
@@ -2776,10 +2843,10 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// Get an check query 
+        /// Get a check query 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="checkID">ID of check</param>
+        /// <param name="checkID">The check ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (FluxResponse)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetChecksIDQueryAsyncWithIRestResponse (string checkID, string zapTraceSpan = null)
@@ -2832,13 +2899,13 @@ namespace InfluxDB.Client.Api.Service
         /// Update a check 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="checkID">ID of check</param>
-        /// <param name="check">check update to apply</param>
+        /// <param name="checkID">The check ID.</param>
+        /// <param name="checkPatch">Check update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Check</returns>
-        public Check PatchChecksID (string checkID, Check check, string zapTraceSpan = null)
+        public Check PatchChecksID (string checkID, CheckPatch checkPatch, string zapTraceSpan = null)
         {
-             ApiResponse<Check> localVarResponse = PatchChecksIDWithHttpInfo(checkID, check, zapTraceSpan);
+             ApiResponse<Check> localVarResponse = PatchChecksIDWithHttpInfo(checkID, checkPatch, zapTraceSpan);
              return localVarResponse.Data;
         }
 
@@ -2846,18 +2913,18 @@ namespace InfluxDB.Client.Api.Service
         /// Update a check 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="checkID">ID of check</param>
-        /// <param name="check">check update to apply</param>
+        /// <param name="checkID">The check ID.</param>
+        /// <param name="checkPatch">Check update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Check</returns>
-        public ApiResponse< Check > PatchChecksIDWithHttpInfo (string checkID, Check check, string zapTraceSpan = null)
+        public ApiResponse< Check > PatchChecksIDWithHttpInfo (string checkID, CheckPatch checkPatch, string zapTraceSpan = null)
         {
             // verify the required parameter 'checkID' is set
             if (checkID == null)
                 throw new ApiException(400, "Missing required parameter 'checkID' when calling ChecksService->PatchChecksID");
-            // verify the required parameter 'check' is set
-            if (check == null)
-                throw new ApiException(400, "Missing required parameter 'check' when calling ChecksService->PatchChecksID");
+            // verify the required parameter 'checkPatch' is set
+            if (checkPatch == null)
+                throw new ApiException(400, "Missing required parameter 'checkPatch' when calling ChecksService->PatchChecksID");
 
             var localVarPath = "/api/v2/checks/{checkID}";
             var localVarPathParams = new Dictionary<String, String>();
@@ -2875,13 +2942,13 @@ namespace InfluxDB.Client.Api.Service
 
             if (checkID != null) localVarPathParams.Add("checkID", this.Configuration.ApiClient.ParameterToString(checkID)); // path parameter
             if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (check != null && check.GetType() != typeof(byte[]))
+            if (checkPatch != null && checkPatch.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(check); // http body (model) parameter
+                localVarPostBody = this.Configuration.ApiClient.Serialize(checkPatch); // http body (model) parameter
             }
             else
             {
-                localVarPostBody = check; // byte array
+                localVarPostBody = checkPatch; // byte array
             }
 
             // to determine the Accept header
@@ -2916,18 +2983,18 @@ namespace InfluxDB.Client.Api.Service
         /// Update a check 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="checkID">ID of check</param>
-        /// <param name="check">check update to apply</param>
+        /// <param name="checkID">The check ID.</param>
+        /// <param name="checkPatch">Check update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Check</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> PatchChecksIDWithIRestResponseAsync (string checkID, Check check, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PatchChecksIDWithIRestResponseAsync (string checkID, CheckPatch checkPatch, string zapTraceSpan = null)
         {
             // verify the required parameter 'checkID' is set
             if (checkID == null)
                 throw new ApiException(400, "Missing required parameter 'checkID' when calling ChecksService->PatchChecksID");
-            // verify the required parameter 'check' is set
-            if (check == null)
-                throw new ApiException(400, "Missing required parameter 'check' when calling ChecksService->PatchChecksID");
+            // verify the required parameter 'checkPatch' is set
+            if (checkPatch == null)
+                throw new ApiException(400, "Missing required parameter 'checkPatch' when calling ChecksService->PatchChecksID");
 
             var localVarPath = "/api/v2/checks/{checkID}";
             var localVarPathParams = new Dictionary<String, String>();
@@ -2945,13 +3012,13 @@ namespace InfluxDB.Client.Api.Service
 
             if (checkID != null) localVarPathParams.Add("checkID", this.Configuration.ApiClient.ParameterToString(checkID)); // path parameter
             if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (check != null && check.GetType() != typeof(byte[]))
+            if (checkPatch != null && checkPatch.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(check); // http body (model) parameter
+                localVarPostBody = this.Configuration.ApiClient.Serialize(checkPatch); // http body (model) parameter
             }
             else
             {
-                localVarPostBody = check; // byte array
+                localVarPostBody = checkPatch; // byte array
             }
 
             // to determine the Accept header
@@ -2984,18 +3051,18 @@ namespace InfluxDB.Client.Api.Service
         /// Update a check 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="checkID">ID of check</param>
-        /// <param name="check">check update to apply</param>
+        /// <param name="checkID">The check ID.</param>
+        /// <param name="checkPatch">Check update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Check</returns>
-        public IRestResponse PatchChecksIDWithIRestResponse (string checkID, Check check, string zapTraceSpan = null)
+        public IRestResponse PatchChecksIDWithIRestResponse (string checkID, CheckPatch checkPatch, string zapTraceSpan = null)
         {
             // verify the required parameter 'checkID' is set
             if (checkID == null)
                 throw new ApiException(400, "Missing required parameter 'checkID' when calling ChecksService->PatchChecksID");
-            // verify the required parameter 'check' is set
-            if (check == null)
-                throw new ApiException(400, "Missing required parameter 'check' when calling ChecksService->PatchChecksID");
+            // verify the required parameter 'checkPatch' is set
+            if (checkPatch == null)
+                throw new ApiException(400, "Missing required parameter 'checkPatch' when calling ChecksService->PatchChecksID");
 
             var localVarPath = "/api/v2/checks/{checkID}";
             var localVarPathParams = new Dictionary<String, String>();
@@ -3013,13 +3080,13 @@ namespace InfluxDB.Client.Api.Service
 
             if (checkID != null) localVarPathParams.Add("checkID", this.Configuration.ApiClient.ParameterToString(checkID)); // path parameter
             if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (check != null && check.GetType() != typeof(byte[]))
+            if (checkPatch != null && checkPatch.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(check); // http body (model) parameter
+                localVarPostBody = this.Configuration.ApiClient.Serialize(checkPatch); // http body (model) parameter
             }
             else
             {
-                localVarPostBody = check; // byte array
+                localVarPostBody = checkPatch; // byte array
             }
 
             // to determine the Accept header
@@ -3052,18 +3119,18 @@ namespace InfluxDB.Client.Api.Service
         /// Update a check 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="checkID">ID of check</param>
-        /// <param name="check">check update to apply</param>
+        /// <param name="checkID">The check ID.</param>
+        /// <param name="checkPatch">Check update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Check</returns>
-        public RestRequest PatchChecksIDWithRestRequest (string checkID, Check check, string zapTraceSpan = null)
+        public RestRequest PatchChecksIDWithRestRequest (string checkID, CheckPatch checkPatch, string zapTraceSpan = null)
         {
             // verify the required parameter 'checkID' is set
             if (checkID == null)
                 throw new ApiException(400, "Missing required parameter 'checkID' when calling ChecksService->PatchChecksID");
-            // verify the required parameter 'check' is set
-            if (check == null)
-                throw new ApiException(400, "Missing required parameter 'check' when calling ChecksService->PatchChecksID");
+            // verify the required parameter 'checkPatch' is set
+            if (checkPatch == null)
+                throw new ApiException(400, "Missing required parameter 'checkPatch' when calling ChecksService->PatchChecksID");
 
             var localVarPath = "/api/v2/checks/{checkID}";
             var localVarPathParams = new Dictionary<String, String>();
@@ -3081,13 +3148,13 @@ namespace InfluxDB.Client.Api.Service
 
             if (checkID != null) localVarPathParams.Add("checkID", this.Configuration.ApiClient.ParameterToString(checkID)); // path parameter
             if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (check != null && check.GetType() != typeof(byte[]))
+            if (checkPatch != null && checkPatch.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(check); // http body (model) parameter
+                localVarPostBody = this.Configuration.ApiClient.Serialize(checkPatch); // http body (model) parameter
             }
             else
             {
-                localVarPostBody = check; // byte array
+                localVarPostBody = checkPatch; // byte array
             }
 
             // to determine the Accept header
@@ -3109,13 +3176,13 @@ namespace InfluxDB.Client.Api.Service
         /// Update a check 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="checkID">ID of check</param>
-        /// <param name="check">check update to apply</param>
+        /// <param name="checkID">The check ID.</param>
+        /// <param name="checkPatch">Check update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of Check</returns>
-        public async System.Threading.Tasks.Task<Check> PatchChecksIDAsync (string checkID, Check check, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<Check> PatchChecksIDAsync (string checkID, CheckPatch checkPatch, string zapTraceSpan = null)
         {
-             ApiResponse<Check> localVarResponse = await PatchChecksIDAsyncWithHttpInfo(checkID, check, zapTraceSpan);
+             ApiResponse<Check> localVarResponse = await PatchChecksIDAsyncWithHttpInfo(checkID, checkPatch, zapTraceSpan);
              return localVarResponse.Data;
 
         }
@@ -3124,14 +3191,14 @@ namespace InfluxDB.Client.Api.Service
         /// Update a check 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="checkID">ID of check</param>
-        /// <param name="check">check update to apply</param>
+        /// <param name="checkID">The check ID.</param>
+        /// <param name="checkPatch">Check update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (Check)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Check>> PatchChecksIDAsyncWithHttpInfo (string checkID, Check check, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<Check>> PatchChecksIDAsyncWithHttpInfo (string checkID, CheckPatch checkPatch, string zapTraceSpan = null)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await PatchChecksIDAsyncWithIRestResponse(checkID, check, zapTraceSpan);
+            IRestResponse localVarResponse = await PatchChecksIDAsyncWithIRestResponse(checkID, checkPatch, zapTraceSpan);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -3150,18 +3217,18 @@ namespace InfluxDB.Client.Api.Service
         /// Update a check 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="checkID">ID of check</param>
-        /// <param name="check">check update to apply</param>
+        /// <param name="checkID">The check ID.</param>
+        /// <param name="checkPatch">Check update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (Check)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> PatchChecksIDAsyncWithIRestResponse (string checkID, Check check, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PatchChecksIDAsyncWithIRestResponse (string checkID, CheckPatch checkPatch, string zapTraceSpan = null)
         {
             // verify the required parameter 'checkID' is set
             if (checkID == null)
                 throw new ApiException(400, "Missing required parameter 'checkID' when calling ChecksService->PatchChecksID");
-            // verify the required parameter 'check' is set
-            if (check == null)
-                throw new ApiException(400, "Missing required parameter 'check' when calling ChecksService->PatchChecksID");
+            // verify the required parameter 'checkPatch' is set
+            if (checkPatch == null)
+                throw new ApiException(400, "Missing required parameter 'checkPatch' when calling ChecksService->PatchChecksID");
 
             var localVarPath = "/api/v2/checks/{checkID}";
             var localVarPathParams = new Dictionary<String, String>();
@@ -3179,13 +3246,13 @@ namespace InfluxDB.Client.Api.Service
 
             if (checkID != null) localVarPathParams.Add("checkID", this.Configuration.ApiClient.ParameterToString(checkID)); // path parameter
             if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (check != null && check.GetType() != typeof(byte[]))
+            if (checkPatch != null && checkPatch.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(check); // http body (model) parameter
+                localVarPostBody = this.Configuration.ApiClient.Serialize(checkPatch); // http body (model) parameter
             }
             else
             {
-                localVarPostBody = check; // byte array
+                localVarPostBody = checkPatch; // byte array
             }
 
             // to determine the Accept header
@@ -3213,11 +3280,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// add a label to a check 
+        /// Add a label to a check 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="checkID">ID of the check</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="checkID">The check ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>LabelResponse</returns>
         public LabelResponse PostChecksIDLabels (string checkID, LabelMapping labelMapping, string zapTraceSpan = null)
@@ -3227,11 +3294,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// add a label to a check 
+        /// Add a label to a check 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="checkID">ID of the check</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="checkID">The check ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelResponse</returns>
         public ApiResponse< LabelResponse > PostChecksIDLabelsWithHttpInfo (string checkID, LabelMapping labelMapping, string zapTraceSpan = null)
@@ -3297,11 +3364,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// add a label to a check 
+        /// Add a label to a check 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="checkID">ID of the check</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="checkID">The check ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelResponse</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PostChecksIDLabelsWithIRestResponseAsync (string checkID, LabelMapping labelMapping, string zapTraceSpan = null)
@@ -3365,11 +3432,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// add a label to a check 
+        /// Add a label to a check 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="checkID">ID of the check</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="checkID">The check ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelResponse</returns>
         public IRestResponse PostChecksIDLabelsWithIRestResponse (string checkID, LabelMapping labelMapping, string zapTraceSpan = null)
@@ -3433,11 +3500,11 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// add a label to a check 
+        /// Add a label to a check 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="checkID">ID of the check</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="checkID">The check ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelResponse</returns>
         public RestRequest PostChecksIDLabelsWithRestRequest (string checkID, LabelMapping labelMapping, string zapTraceSpan = null)
@@ -3490,11 +3557,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// add a label to a check 
+        /// Add a label to a check 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="checkID">ID of the check</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="checkID">The check ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of LabelResponse</returns>
         public async System.Threading.Tasks.Task<LabelResponse> PostChecksIDLabelsAsync (string checkID, LabelMapping labelMapping, string zapTraceSpan = null)
@@ -3505,11 +3572,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// add a label to a check 
+        /// Add a label to a check 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="checkID">ID of the check</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="checkID">The check ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (LabelResponse)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<LabelResponse>> PostChecksIDLabelsAsyncWithHttpInfo (string checkID, LabelMapping labelMapping, string zapTraceSpan = null)
@@ -3531,11 +3598,11 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// add a label to a check 
+        /// Add a label to a check 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="checkID">ID of the check</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="checkID">The check ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (LabelResponse)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PostChecksIDLabelsAsyncWithIRestResponse (string checkID, LabelMapping labelMapping, string zapTraceSpan = null)
@@ -3590,6 +3657,390 @@ namespace InfluxDB.Client.Api.Service
             if (ExceptionFactory != null)
             {
                 Exception exception = ExceptionFactory("PostChecksIDLabels", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Update a check 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="checkID">The check ID.</param>
+        /// <param name="check">Check update to apply</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Check</returns>
+        public Check PutChecksID (string checkID, Check check, string zapTraceSpan = null)
+        {
+             ApiResponse<Check> localVarResponse = PutChecksIDWithHttpInfo(checkID, check, zapTraceSpan);
+             return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Update a check 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="checkID">The check ID.</param>
+        /// <param name="check">Check update to apply</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Check</returns>
+        public ApiResponse< Check > PutChecksIDWithHttpInfo (string checkID, Check check, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'checkID' is set
+            if (checkID == null)
+                throw new ApiException(400, "Missing required parameter 'checkID' when calling ChecksService->PutChecksID");
+            // verify the required parameter 'check' is set
+            if (check == null)
+                throw new ApiException(400, "Missing required parameter 'check' when calling ChecksService->PutChecksID");
+
+            var localVarPath = "/api/v2/checks/{checkID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json"
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (checkID != null) localVarPathParams.Add("checkID", this.Configuration.ApiClient.ParameterToString(checkID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (check != null && check.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(check); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = check; // byte array
+            }
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.PUT, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("PutChecksID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Check>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (Check) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Check)));
+        }
+
+        /// <summary>
+        /// Update a check 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="checkID">The check ID.</param>
+        /// <param name="check">Check update to apply</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Check</returns>
+        public async System.Threading.Tasks.Task<IRestResponse> PutChecksIDWithIRestResponseAsync (string checkID, Check check, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'checkID' is set
+            if (checkID == null)
+                throw new ApiException(400, "Missing required parameter 'checkID' when calling ChecksService->PutChecksID");
+            // verify the required parameter 'check' is set
+            if (check == null)
+                throw new ApiException(400, "Missing required parameter 'check' when calling ChecksService->PutChecksID");
+
+            var localVarPath = "/api/v2/checks/{checkID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json"
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (checkID != null) localVarPathParams.Add("checkID", this.Configuration.ApiClient.ParameterToString(checkID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (check != null && check.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(check); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = check; // byte array
+            }
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.PUT, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("PutChecksID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Update a check 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="checkID">The check ID.</param>
+        /// <param name="check">Check update to apply</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Check</returns>
+        public IRestResponse PutChecksIDWithIRestResponse (string checkID, Check check, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'checkID' is set
+            if (checkID == null)
+                throw new ApiException(400, "Missing required parameter 'checkID' when calling ChecksService->PutChecksID");
+            // verify the required parameter 'check' is set
+            if (check == null)
+                throw new ApiException(400, "Missing required parameter 'check' when calling ChecksService->PutChecksID");
+
+            var localVarPath = "/api/v2/checks/{checkID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json"
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (checkID != null) localVarPathParams.Add("checkID", this.Configuration.ApiClient.ParameterToString(checkID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (check != null && check.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(check); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = check; // byte array
+            }
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.PUT, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("PutChecksID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return localVarResponse;
+        }
+        
+        /// <summary>
+        /// Update a check 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="checkID">The check ID.</param>
+        /// <param name="check">Check update to apply</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of Check</returns>
+        public RestRequest PutChecksIDWithRestRequest (string checkID, Check check, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'checkID' is set
+            if (checkID == null)
+                throw new ApiException(400, "Missing required parameter 'checkID' when calling ChecksService->PutChecksID");
+            // verify the required parameter 'check' is set
+            if (check == null)
+                throw new ApiException(400, "Missing required parameter 'check' when calling ChecksService->PutChecksID");
+
+            var localVarPath = "/api/v2/checks/{checkID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json"
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (checkID != null) localVarPathParams.Add("checkID", this.Configuration.ApiClient.ParameterToString(checkID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (check != null && check.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(check); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = check; // byte array
+            }
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
+                Method.PUT, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+        }
+
+        /// <summary>
+        /// Update a check 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="checkID">The check ID.</param>
+        /// <param name="check">Check update to apply</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of Check</returns>
+        public async System.Threading.Tasks.Task<Check> PutChecksIDAsync (string checkID, Check check, string zapTraceSpan = null)
+        {
+             ApiResponse<Check> localVarResponse = await PutChecksIDAsyncWithHttpInfo(checkID, check, zapTraceSpan);
+             return localVarResponse.Data;
+
+        }
+
+        /// <summary>
+        /// Update a check 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="checkID">The check ID.</param>
+        /// <param name="check">Check update to apply</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ApiResponse (Check)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<Check>> PutChecksIDAsyncWithHttpInfo (string checkID, Check check, string zapTraceSpan = null)
+        {
+            // make the HTTP request
+            IRestResponse localVarResponse = await PutChecksIDAsyncWithIRestResponse(checkID, check, zapTraceSpan);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("PutChecksID", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Check>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (Check) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Check)));
+        }
+            
+        /// <summary>
+        /// Update a check 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="checkID">The check ID.</param>
+        /// <param name="check">Check update to apply</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of IRestResponse (Check)</returns>
+        public async System.Threading.Tasks.Task<IRestResponse> PutChecksIDAsyncWithIRestResponse (string checkID, Check check, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'checkID' is set
+            if (checkID == null)
+                throw new ApiException(400, "Missing required parameter 'checkID' when calling ChecksService->PutChecksID");
+            // verify the required parameter 'check' is set
+            if (check == null)
+                throw new ApiException(400, "Missing required parameter 'check' when calling ChecksService->PutChecksID");
+
+            var localVarPath = "/api/v2/checks/{checkID}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json"
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (checkID != null) localVarPathParams.Add("checkID", this.Configuration.ApiClient.ParameterToString(checkID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (check != null && check.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(check); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = check; // byte array
+            }
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.PUT, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("PutChecksID", localVarResponse);
                 if (exception != null) throw exception;
             }
 

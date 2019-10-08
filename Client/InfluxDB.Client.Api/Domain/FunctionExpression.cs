@@ -24,7 +24,7 @@ using OpenAPIDateConverter = InfluxDB.Client.Api.Client.OpenAPIDateConverter;
 namespace InfluxDB.Client.Api.Domain
 {
     /// <summary>
-    /// function expression
+    /// Function expression
     /// </summary>
     [DataContract]
     public partial class FunctionExpression :  IEquatable<FunctionExpression>
@@ -32,8 +32,8 @@ namespace InfluxDB.Client.Api.Domain
         /// <summary>
         /// Initializes a new instance of the <see cref="FunctionExpression" /> class.
         /// </summary>
-        /// <param name="type">type of AST node.</param>
-        /// <param name="_params">function parameters.</param>
+        /// <param name="type">Type of AST node.</param>
+        /// <param name="_params">Function parameters.</param>
         /// <param name="body">body.</param>
         public FunctionExpression(string type = default(string), List<Property> _params = default(List<Property>), Node body = default(Node))
         {
@@ -43,16 +43,16 @@ namespace InfluxDB.Client.Api.Domain
         }
 
         /// <summary>
-        /// type of AST node
+        /// Type of AST node
         /// </summary>
-        /// <value>type of AST node</value>
+        /// <value>Type of AST node</value>
         [DataMember(Name="type", EmitDefaultValue=false)]
         public string Type { get; set; }
 
         /// <summary>
-        /// function parameters
+        /// Function parameters
         /// </summary>
-        /// <value>function parameters</value>
+        /// <value>Function parameters</value>
         [DataMember(Name="params", EmitDefaultValue=false)]
         public List<Property> Params { get; set; }
 
@@ -157,6 +157,7 @@ namespace InfluxDB.Client.Api.Domain
             {new []{ "MemberExpression" }, typeof(MemberExpression)},
             {new []{ "IndexExpression" }, typeof(IndexExpression)},
             {new []{ "ObjectExpression" }, typeof(ObjectExpression)},
+            {new []{ "ParenExpression" }, typeof(ParenExpression)},
             {new []{ "PipeExpression" }, typeof(PipeExpression)},
             {new []{ "UnaryExpression" }, typeof(UnaryExpression)},
             {new []{ "BooleanLiteral" }, typeof(BooleanLiteral)},

@@ -27,7 +27,7 @@ namespace InfluxDB.Client.Api.Domain
     /// HTTPNotificationRuleBase
     /// </summary>
     [DataContract]
-    public partial class HTTPNotificationRuleBase :  IEquatable<HTTPNotificationRuleBase>
+    public partial class HTTPNotificationRuleBase : NotificationRule,  IEquatable<HTTPNotificationRuleBase>
     {
         /// <summary>
         /// Defines Type
@@ -57,8 +57,8 @@ namespace InfluxDB.Client.Api.Domain
         /// Initializes a new instance of the <see cref="HTTPNotificationRuleBase" /> class.
         /// </summary>
         /// <param name="type">type (required).</param>
-        /// <param name="url">url (required).</param>
-        public HTTPNotificationRuleBase(TypeEnum type = default(TypeEnum), string url = default(string))
+        /// <param name="url">url.</param>
+        public HTTPNotificationRuleBase(TypeEnum type = default(TypeEnum), string url = default(string)) : base()
         {
             // to ensure "type" is required (not null)
             if (type == null)
@@ -69,15 +69,7 @@ namespace InfluxDB.Client.Api.Domain
             {
                 this.Type = type;
             }
-            // to ensure "url" is required (not null)
-            if (url == null)
-            {
-                throw new InvalidDataException("url is a required property for HTTPNotificationRuleBase and cannot be null");
-            }
-            else
-            {
-                this.Url = url;
-            }
+            this.Url = url;
         }
 
 
@@ -95,6 +87,7 @@ namespace InfluxDB.Client.Api.Domain
         {
             var sb = new StringBuilder();
             sb.Append("class HTTPNotificationRuleBase {\n");
+            sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  Url: ").Append(Url).Append("\n");
             sb.Append("}\n");
@@ -105,7 +98,7 @@ namespace InfluxDB.Client.Api.Domain
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public virtual string ToJson()
+        public override string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }
@@ -130,12 +123,12 @@ namespace InfluxDB.Client.Api.Domain
             if (input == null)
                 return false;
 
-            return 
+            return base.Equals(input) && 
                 (
                     this.Type == input.Type ||
                     (this.Type != null &&
                     this.Type.Equals(input.Type))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.Url == input.Url ||
                     (this.Url != null &&
@@ -151,7 +144,7 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
+                int hashCode = base.GetHashCode();
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.Url != null)

@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using InfluxDB.Client.Api.Domain;
-using InfluxDB.Client.Core;
 using InfluxDB.Client.Core.Exceptions;
 using NUnit.Framework;
 
@@ -184,8 +183,6 @@ namespace InfluxDB.Client.Test
         [Test]
         public async Task CreateTaskWithOffset()
         {
-            Client.SetLogLevel(LogLevel.Body);
-
             var taskName = GenerateName("it task");
 
             var flux = $"option task = {{\nname: \"{taskName}\",\nevery: 1h,\noffset: 30m\n}}\n\n{TaskFlux}";
@@ -411,7 +408,6 @@ namespace InfluxDB.Client.Test
         }
 
         [Test]
-        //_token
         public async Task Member()
         {
             var task = await _tasksApi.CreateTaskCronAsync(GenerateName("it task"), TaskFlux, "0 2 * * *", _organization);

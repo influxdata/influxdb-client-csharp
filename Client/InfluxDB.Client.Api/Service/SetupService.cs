@@ -25,10 +25,10 @@ namespace InfluxDB.Client.Api.Service
     {
         #region Synchronous Operations
         /// <summary>
-        /// check if database has default user, org, bucket created, returns true if not.
+        /// Check if database has default user, org, bucket
         /// </summary>
         /// <remarks>
-        /// 
+        /// Returns &#x60;true&#x60; if no default user, organization, or bucket has been created.
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
@@ -36,45 +36,45 @@ namespace InfluxDB.Client.Api.Service
         IsOnboarding GetSetup (string zapTraceSpan = null);
 
         /// <summary>
-        /// check if database has default user, org, bucket created, returns true if not.
+        /// Check if database has default user, org, bucket
         /// </summary>
         /// <remarks>
-        /// 
+        /// Returns &#x60;true&#x60; if no default user, organization, or bucket has been created.
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of IsOnboarding</returns>
         ApiResponse<IsOnboarding> GetSetupWithHttpInfo (string zapTraceSpan = null);
         /// <summary>
-        /// post onboarding request, to setup initial user, org and bucket
+        /// Set up initial user, org and bucket
         /// </summary>
         /// <remarks>
-        /// 
+        /// Post an onboarding request to set up initial user, org and bucket.
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="onboardingRequest">source to create</param>
+        /// <param name="onboardingRequest">Source to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>OnboardingResponse</returns>
         OnboardingResponse PostSetup (OnboardingRequest onboardingRequest, string zapTraceSpan = null);
 
         /// <summary>
-        /// post onboarding request, to setup initial user, org and bucket
+        /// Set up initial user, org and bucket
         /// </summary>
         /// <remarks>
-        /// 
+        /// Post an onboarding request to set up initial user, org and bucket.
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="onboardingRequest">source to create</param>
+        /// <param name="onboardingRequest">Source to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of OnboardingResponse</returns>
         ApiResponse<OnboardingResponse> PostSetupWithHttpInfo (OnboardingRequest onboardingRequest, string zapTraceSpan = null);
         #endregion Synchronous Operations
         #region Asynchronous Operations
         /// <summary>
-        /// check if database has default user, org, bucket created, returns true if not.
+        /// Check if database has default user, org, bucket
         /// </summary>
         /// <remarks>
-        /// 
+        /// Returns &#x60;true&#x60; if no default user, organization, or bucket has been created.
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
@@ -82,35 +82,35 @@ namespace InfluxDB.Client.Api.Service
         System.Threading.Tasks.Task<IsOnboarding> GetSetupAsync (string zapTraceSpan = null);
 
         /// <summary>
-        /// check if database has default user, org, bucket created, returns true if not.
+        /// Check if database has default user, org, bucket
         /// </summary>
         /// <remarks>
-        /// 
+        /// Returns &#x60;true&#x60; if no default user, organization, or bucket has been created.
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (IsOnboarding)</returns>
         System.Threading.Tasks.Task<ApiResponse<IsOnboarding>> GetSetupAsyncWithHttpInfo (string zapTraceSpan = null);
         /// <summary>
-        /// post onboarding request, to setup initial user, org and bucket
+        /// Set up initial user, org and bucket
         /// </summary>
         /// <remarks>
-        /// 
+        /// Post an onboarding request to set up initial user, org and bucket.
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="onboardingRequest">source to create</param>
+        /// <param name="onboardingRequest">Source to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of OnboardingResponse</returns>
         System.Threading.Tasks.Task<OnboardingResponse> PostSetupAsync (OnboardingRequest onboardingRequest, string zapTraceSpan = null);
 
         /// <summary>
-        /// post onboarding request, to setup initial user, org and bucket
+        /// Set up initial user, org and bucket
         /// </summary>
         /// <remarks>
-        /// 
+        /// Post an onboarding request to set up initial user, org and bucket.
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="onboardingRequest">source to create</param>
+        /// <param name="onboardingRequest">Source to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (OnboardingResponse)</returns>
         System.Threading.Tasks.Task<ApiResponse<OnboardingResponse>> PostSetupAsyncWithHttpInfo (OnboardingRequest onboardingRequest, string zapTraceSpan = null);
@@ -215,7 +215,7 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// check if database has default user, org, bucket created, returns true if not. 
+        /// Check if database has default user, org, bucket Returns &#x60;true&#x60; if no default user, organization, or bucket has been created.
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
@@ -227,7 +227,7 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// check if database has default user, org, bucket created, returns true if not. 
+        /// Check if database has default user, org, bucket Returns &#x60;true&#x60; if no default user, organization, or bucket has been created.
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
@@ -279,7 +279,7 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// check if database has default user, org, bucket created, returns true if not. 
+        /// Check if database has default user, org, bucket Returns &#x60;true&#x60; if no default user, organization, or bucket has been created.
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
@@ -329,7 +329,7 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// check if database has default user, org, bucket created, returns true if not. 
+        /// Check if database has default user, org, bucket Returns &#x60;true&#x60; if no default user, organization, or bucket has been created.
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
@@ -379,7 +379,7 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// check if database has default user, org, bucket created, returns true if not. 
+        /// Check if database has default user, org, bucket Returns &#x60;true&#x60; if no default user, organization, or bucket has been created.
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
@@ -418,7 +418,7 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// check if database has default user, org, bucket created, returns true if not. 
+        /// Check if database has default user, org, bucket Returns &#x60;true&#x60; if no default user, organization, or bucket has been created.
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
@@ -431,7 +431,7 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// check if database has default user, org, bucket created, returns true if not. 
+        /// Check if database has default user, org, bucket Returns &#x60;true&#x60; if no default user, organization, or bucket has been created.
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
@@ -455,7 +455,7 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// check if database has default user, org, bucket created, returns true if not. 
+        /// Check if database has default user, org, bucket Returns &#x60;true&#x60; if no default user, organization, or bucket has been created.
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
@@ -503,10 +503,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// post onboarding request, to setup initial user, org and bucket 
+        /// Set up initial user, org and bucket Post an onboarding request to set up initial user, org and bucket.
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="onboardingRequest">source to create</param>
+        /// <param name="onboardingRequest">Source to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>OnboardingResponse</returns>
         public OnboardingResponse PostSetup (OnboardingRequest onboardingRequest, string zapTraceSpan = null)
@@ -516,10 +516,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// post onboarding request, to setup initial user, org and bucket 
+        /// Set up initial user, org and bucket Post an onboarding request to set up initial user, org and bucket.
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="onboardingRequest">source to create</param>
+        /// <param name="onboardingRequest">Source to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of OnboardingResponse</returns>
         public ApiResponse< OnboardingResponse > PostSetupWithHttpInfo (OnboardingRequest onboardingRequest, string zapTraceSpan = null)
@@ -581,10 +581,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// post onboarding request, to setup initial user, org and bucket 
+        /// Set up initial user, org and bucket Post an onboarding request to set up initial user, org and bucket.
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="onboardingRequest">source to create</param>
+        /// <param name="onboardingRequest">Source to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of OnboardingResponse</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PostSetupWithIRestResponseAsync (OnboardingRequest onboardingRequest, string zapTraceSpan = null)
@@ -644,10 +644,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// post onboarding request, to setup initial user, org and bucket 
+        /// Set up initial user, org and bucket Post an onboarding request to set up initial user, org and bucket.
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="onboardingRequest">source to create</param>
+        /// <param name="onboardingRequest">Source to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of OnboardingResponse</returns>
         public IRestResponse PostSetupWithIRestResponse (OnboardingRequest onboardingRequest, string zapTraceSpan = null)
@@ -707,10 +707,10 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// post onboarding request, to setup initial user, org and bucket 
+        /// Set up initial user, org and bucket Post an onboarding request to set up initial user, org and bucket.
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="onboardingRequest">source to create</param>
+        /// <param name="onboardingRequest">Source to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of OnboardingResponse</returns>
         public RestRequest PostSetupWithRestRequest (OnboardingRequest onboardingRequest, string zapTraceSpan = null)
@@ -759,10 +759,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// post onboarding request, to setup initial user, org and bucket 
+        /// Set up initial user, org and bucket Post an onboarding request to set up initial user, org and bucket.
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="onboardingRequest">source to create</param>
+        /// <param name="onboardingRequest">Source to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of OnboardingResponse</returns>
         public async System.Threading.Tasks.Task<OnboardingResponse> PostSetupAsync (OnboardingRequest onboardingRequest, string zapTraceSpan = null)
@@ -773,10 +773,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// post onboarding request, to setup initial user, org and bucket 
+        /// Set up initial user, org and bucket Post an onboarding request to set up initial user, org and bucket.
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="onboardingRequest">source to create</param>
+        /// <param name="onboardingRequest">Source to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (OnboardingResponse)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<OnboardingResponse>> PostSetupAsyncWithHttpInfo (OnboardingRequest onboardingRequest, string zapTraceSpan = null)
@@ -798,10 +798,10 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// post onboarding request, to setup initial user, org and bucket 
+        /// Set up initial user, org and bucket Post an onboarding request to set up initial user, org and bucket.
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="onboardingRequest">source to create</param>
+        /// <param name="onboardingRequest">Source to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (OnboardingResponse)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PostSetupAsyncWithIRestResponse (OnboardingRequest onboardingRequest, string zapTraceSpan = null)

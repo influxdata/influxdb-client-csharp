@@ -24,7 +24,7 @@ using OpenAPIDateConverter = InfluxDB.Client.Api.Client.OpenAPIDateConverter;
 namespace InfluxDB.Client.Api.Domain
 {
     /// <summary>
-    /// used to create and directly specify the elements of an array object
+    /// Used to create and directly specify the elements of an array object
     /// </summary>
     [DataContract]
     public partial class ArrayExpression :  IEquatable<ArrayExpression>
@@ -32,8 +32,8 @@ namespace InfluxDB.Client.Api.Domain
         /// <summary>
         /// Initializes a new instance of the <see cref="ArrayExpression" /> class.
         /// </summary>
-        /// <param name="type">type of AST node.</param>
-        /// <param name="elements">elements of the array.</param>
+        /// <param name="type">Type of AST node.</param>
+        /// <param name="elements">Elements of the array.</param>
         public ArrayExpression(string type = default(string), List<Expression> elements = default(List<Expression>))
         {
             this.Type = type;
@@ -41,16 +41,16 @@ namespace InfluxDB.Client.Api.Domain
         }
 
         /// <summary>
-        /// type of AST node
+        /// Type of AST node
         /// </summary>
-        /// <value>type of AST node</value>
+        /// <value>Type of AST node</value>
         [DataMember(Name="type", EmitDefaultValue=false)]
         public string Type { get; set; }
 
         /// <summary>
-        /// elements of the array
+        /// Elements of the array
         /// </summary>
-        /// <value>elements of the array</value>
+        /// <value>Elements of the array</value>
         [DataMember(Name="elements", EmitDefaultValue=false)]
         [JsonConverter(typeof(ArrayExpressionElementsAdapter))]
         public List<Expression> Elements { get; set; }
@@ -141,6 +141,7 @@ namespace InfluxDB.Client.Api.Domain
             {new []{ "MemberExpression" }, typeof(MemberExpression)},
             {new []{ "IndexExpression" }, typeof(IndexExpression)},
             {new []{ "ObjectExpression" }, typeof(ObjectExpression)},
+            {new []{ "ParenExpression" }, typeof(ParenExpression)},
             {new []{ "PipeExpression" }, typeof(PipeExpression)},
             {new []{ "UnaryExpression" }, typeof(UnaryExpression)},
             {new []{ "BooleanLiteral" }, typeof(BooleanLiteral)},

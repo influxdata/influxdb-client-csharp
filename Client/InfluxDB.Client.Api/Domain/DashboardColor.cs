@@ -24,7 +24,7 @@ using OpenAPIDateConverter = InfluxDB.Client.Api.Client.OpenAPIDateConverter;
 namespace InfluxDB.Client.Api.Domain
 {
     /// <summary>
-    /// Color defines an encoding of data value into color space
+    /// Defines an encoding of data value into color space.
     /// </summary>
     [DataContract]
     public partial class DashboardColor :  IEquatable<DashboardColor>
@@ -88,11 +88,11 @@ namespace InfluxDB.Client.Api.Domain
         /// <summary>
         /// Initializes a new instance of the <see cref="DashboardColor" /> class.
         /// </summary>
-        /// <param name="id">ID is the unique id of the view color (required).</param>
+        /// <param name="id">The unique ID of the view color. (required).</param>
         /// <param name="type">Type is how the color is used. (required).</param>
-        /// <param name="hex">Hex is the hex number of the color (required).</param>
-        /// <param name="name">Name is the user-facing name of the hex color (required).</param>
-        /// <param name="value">Value is the data value mapped to this color (required).</param>
+        /// <param name="hex">The hex number of the color (required).</param>
+        /// <param name="name">The user-facing name of the hex color. (required).</param>
+        /// <param name="value">The data value mapped to this color. (required).</param>
         public DashboardColor(string id = default(string), TypeEnum type = default(TypeEnum), string hex = default(string), string name = default(string), float? value = default(float?))
         {
             // to ensure "id" is required (not null)
@@ -143,31 +143,31 @@ namespace InfluxDB.Client.Api.Domain
         }
 
         /// <summary>
-        /// ID is the unique id of the view color
+        /// The unique ID of the view color.
         /// </summary>
-        /// <value>ID is the unique id of the view color</value>
+        /// <value>The unique ID of the view color.</value>
         [DataMember(Name="id", EmitDefaultValue=false)]
         public string Id { get; set; }
 
 
         /// <summary>
-        /// Hex is the hex number of the color
+        /// The hex number of the color
         /// </summary>
-        /// <value>Hex is the hex number of the color</value>
+        /// <value>The hex number of the color</value>
         [DataMember(Name="hex", EmitDefaultValue=false)]
         public string Hex { get; set; }
 
         /// <summary>
-        /// Name is the user-facing name of the hex color
+        /// The user-facing name of the hex color.
         /// </summary>
-        /// <value>Name is the user-facing name of the hex color</value>
+        /// <value>The user-facing name of the hex color.</value>
         [DataMember(Name="name", EmitDefaultValue=false)]
         public string Name { get; set; }
 
         /// <summary>
-        /// Value is the data value mapped to this color
+        /// The data value mapped to this color.
         /// </summary>
-        /// <value>Value is the data value mapped to this color</value>
+        /// <value>The data value mapped to this color.</value>
         [DataMember(Name="value", EmitDefaultValue=false)]
         public float? Value { get; set; }
 

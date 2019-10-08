@@ -37,7 +37,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="y">y.</param>
         /// <param name="w">w.</param>
         /// <param name="h">h.</param>
-        /// <param name="usingView">makes a copy of the provided view.</param>
+        /// <param name="usingView">Makes a copy of the provided view..</param>
         public CreateCell(string name = default(string), int? x = default(int?), int? y = default(int?), int? w = default(int?), int? h = default(int?), string usingView = default(string))
         {
             this.Name = name;
@@ -79,9 +79,9 @@ namespace InfluxDB.Client.Api.Domain
         public int? H { get; set; }
 
         /// <summary>
-        /// makes a copy of the provided view
+        /// Makes a copy of the provided view.
         /// </summary>
-        /// <value>makes a copy of the provided view</value>
+        /// <value>Makes a copy of the provided view.</value>
         [DataMember(Name="usingView", EmitDefaultValue=false)]
         public string UsingView { get; set; }
 

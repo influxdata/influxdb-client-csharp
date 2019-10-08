@@ -25,24 +25,24 @@ namespace InfluxDB.Client.Api.Service
     {
         #region Synchronous Operations
         /// <summary>
-        /// Add new notification rule
+        /// Add a notification rule
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="notificationRule">notificationRule to create</param>
+        /// <param name="notificationRule">Notification rule to create</param>
         /// <returns>NotificationRule</returns>
         NotificationRule CreateNotificationRule (NotificationRule notificationRule);
 
         /// <summary>
-        /// Add new notification rule
+        /// Add a notification rule
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="notificationRule">notificationRule to create</param>
+        /// <param name="notificationRule">Notification rule to create</param>
         /// <returns>ApiResponse of NotificationRule</returns>
         ApiResponse<NotificationRule> CreateNotificationRuleWithHttpInfo (NotificationRule notificationRule);
         /// <summary>
@@ -52,7 +52,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="ruleID">ID of notification rule</param>
+        /// <param name="ruleID">The notification rule ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
         void DeleteNotificationRulesID (string ruleID, string zapTraceSpan = null);
@@ -64,32 +64,32 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="ruleID">ID of notification rule</param>
+        /// <param name="ruleID">The notification rule ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> DeleteNotificationRulesIDWithHttpInfo (string ruleID, string zapTraceSpan = null);
         /// <summary>
-        /// delete label from a notification rule
+        /// Delete label from a notification rule
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="ruleID">ID of the notification rule</param>
-        /// <param name="labelID">the label id to delete</param>
+        /// <param name="ruleID">The notification rule ID.</param>
+        /// <param name="labelID">The ID of the label to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
         void DeleteNotificationRulesIDLabelsID (string ruleID, string labelID, string zapTraceSpan = null);
 
         /// <summary>
-        /// delete label from a notification rule
+        /// Delete label from a notification rule
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="ruleID">ID of the notification rule</param>
-        /// <param name="labelID">the label id to delete</param>
+        /// <param name="ruleID">The notification rule ID.</param>
+        /// <param name="labelID">The ID of the label to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> DeleteNotificationRulesIDLabelsIDWithHttpInfo (string ruleID, string labelID, string zapTraceSpan = null);
@@ -100,13 +100,14 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">only show notification rules belonging to specified organization</param>
+        /// <param name="orgID">Only show notification rules that belong to a specific organization ID.</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
-        /// <param name="checkID">only show notifications that belong to the specified check (optional)</param>
-        /// <param name="tag">only show notification rules that match a tag pair. Uses AND logic if multiple tags are specified. (optional)</param>
+        /// <param name="checkID">Only show notifications that belong to the specific check ID. (optional)</param>
+        /// <param name="tag">Only show notification rules that match a tag pair. Uses &#x60;AND&#x60; to specify multiple tags. (optional)</param>
         /// <returns>NotificationRules</returns>
-        NotificationRules GetNotificationRules (string orgID, int? offset = null, int? limit = null, string checkID = null, string tag = null);
+        NotificationRules GetNotificationRules (string orgID, string zapTraceSpan = null, int? offset = null, int? limit = null, string checkID = null, string tag = null);
 
         /// <summary>
         /// Get all notification rules
@@ -115,13 +116,14 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">only show notification rules belonging to specified organization</param>
+        /// <param name="orgID">Only show notification rules that belong to a specific organization ID.</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
-        /// <param name="checkID">only show notifications that belong to the specified check (optional)</param>
-        /// <param name="tag">only show notification rules that match a tag pair. Uses AND logic if multiple tags are specified. (optional)</param>
+        /// <param name="checkID">Only show notifications that belong to the specific check ID. (optional)</param>
+        /// <param name="tag">Only show notification rules that match a tag pair. Uses &#x60;AND&#x60; to specify multiple tags. (optional)</param>
         /// <returns>ApiResponse of NotificationRules</returns>
-        ApiResponse<NotificationRules> GetNotificationRulesWithHttpInfo (string orgID, int? offset = null, int? limit = null, string checkID = null, string tag = null);
+        ApiResponse<NotificationRules> GetNotificationRulesWithHttpInfo (string orgID, string zapTraceSpan = null, int? offset = null, int? limit = null, string checkID = null, string tag = null);
         /// <summary>
         /// Get a notification rule
         /// </summary>
@@ -129,7 +131,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="ruleID">ID of notification rule</param>
+        /// <param name="ruleID">The notification rule ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>NotificationRule</returns>
         NotificationRule GetNotificationRulesID (string ruleID, string zapTraceSpan = null);
@@ -141,30 +143,30 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="ruleID">ID of notification rule</param>
+        /// <param name="ruleID">The notification rule ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of NotificationRule</returns>
         ApiResponse<NotificationRule> GetNotificationRulesIDWithHttpInfo (string ruleID, string zapTraceSpan = null);
         /// <summary>
-        /// list all labels for a notification rule
+        /// List all labels for a notification rule
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="ruleID">ID of the notification rule</param>
+        /// <param name="ruleID">The notification rule ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>LabelsResponse</returns>
         LabelsResponse GetNotificationRulesIDLabels (string ruleID, string zapTraceSpan = null);
 
         /// <summary>
-        /// list all labels for a notification rule
+        /// List all labels for a notification rule
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="ruleID">ID of the notification rule</param>
+        /// <param name="ruleID">The notification rule ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelsResponse</returns>
         ApiResponse<LabelsResponse> GetNotificationRulesIDLabelsWithHttpInfo (string ruleID, string zapTraceSpan = null);
@@ -175,8 +177,8 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="ruleID">ID of notification rule</param>
-        /// <param name="notificationRuleUpdate">notification rule update to apply</param>
+        /// <param name="ruleID">The notification rule ID.</param>
+        /// <param name="notificationRuleUpdate">Notification rule update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>NotificationRule</returns>
         NotificationRule PatchNotificationRulesID (string ruleID, NotificationRuleUpdate notificationRuleUpdate, string zapTraceSpan = null);
@@ -188,33 +190,33 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="ruleID">ID of notification rule</param>
-        /// <param name="notificationRuleUpdate">notification rule update to apply</param>
+        /// <param name="ruleID">The notification rule ID.</param>
+        /// <param name="notificationRuleUpdate">Notification rule update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of NotificationRule</returns>
         ApiResponse<NotificationRule> PatchNotificationRulesIDWithHttpInfo (string ruleID, NotificationRuleUpdate notificationRuleUpdate, string zapTraceSpan = null);
         /// <summary>
-        /// add a label to a notification rule
+        /// Add a label to a notification rule
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="ruleID">ID of the notification rule</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="ruleID">The notification rule ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>LabelResponse</returns>
         LabelResponse PostNotificationRuleIDLabels (string ruleID, LabelMapping labelMapping, string zapTraceSpan = null);
 
         /// <summary>
-        /// add a label to a notification rule
+        /// Add a label to a notification rule
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="ruleID">ID of the notification rule</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="ruleID">The notification rule ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelResponse</returns>
         ApiResponse<LabelResponse> PostNotificationRuleIDLabelsWithHttpInfo (string ruleID, LabelMapping labelMapping, string zapTraceSpan = null);
@@ -225,8 +227,8 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="ruleID">ID of notification rule</param>
-        /// <param name="notificationRule">notification rule update to apply</param>
+        /// <param name="ruleID">The notification rule ID.</param>
+        /// <param name="notificationRule">Notification rule update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>NotificationRule</returns>
         NotificationRule PutNotificationRulesID (string ruleID, NotificationRule notificationRule, string zapTraceSpan = null);
@@ -238,32 +240,32 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="ruleID">ID of notification rule</param>
-        /// <param name="notificationRule">notification rule update to apply</param>
+        /// <param name="ruleID">The notification rule ID.</param>
+        /// <param name="notificationRule">Notification rule update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of NotificationRule</returns>
         ApiResponse<NotificationRule> PutNotificationRulesIDWithHttpInfo (string ruleID, NotificationRule notificationRule, string zapTraceSpan = null);
         #endregion Synchronous Operations
         #region Asynchronous Operations
         /// <summary>
-        /// Add new notification rule
+        /// Add a notification rule
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="notificationRule">notificationRule to create</param>
+        /// <param name="notificationRule">Notification rule to create</param>
         /// <returns>Task of NotificationRule</returns>
         System.Threading.Tasks.Task<NotificationRule> CreateNotificationRuleAsync (NotificationRule notificationRule);
 
         /// <summary>
-        /// Add new notification rule
+        /// Add a notification rule
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="notificationRule">notificationRule to create</param>
+        /// <param name="notificationRule">Notification rule to create</param>
         /// <returns>Task of ApiResponse (NotificationRule)</returns>
         System.Threading.Tasks.Task<ApiResponse<NotificationRule>> CreateNotificationRuleAsyncWithHttpInfo (NotificationRule notificationRule);
         /// <summary>
@@ -273,7 +275,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="ruleID">ID of notification rule</param>
+        /// <param name="ruleID">The notification rule ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
         System.Threading.Tasks.Task DeleteNotificationRulesIDAsync (string ruleID, string zapTraceSpan = null);
@@ -285,32 +287,32 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="ruleID">ID of notification rule</param>
+        /// <param name="ruleID">The notification rule ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         System.Threading.Tasks.Task<ApiResponse<Object>> DeleteNotificationRulesIDAsyncWithHttpInfo (string ruleID, string zapTraceSpan = null);
         /// <summary>
-        /// delete label from a notification rule
+        /// Delete label from a notification rule
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="ruleID">ID of the notification rule</param>
-        /// <param name="labelID">the label id to delete</param>
+        /// <param name="ruleID">The notification rule ID.</param>
+        /// <param name="labelID">The ID of the label to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
         System.Threading.Tasks.Task DeleteNotificationRulesIDLabelsIDAsync (string ruleID, string labelID, string zapTraceSpan = null);
 
         /// <summary>
-        /// delete label from a notification rule
+        /// Delete label from a notification rule
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="ruleID">ID of the notification rule</param>
-        /// <param name="labelID">the label id to delete</param>
+        /// <param name="ruleID">The notification rule ID.</param>
+        /// <param name="labelID">The ID of the label to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         System.Threading.Tasks.Task<ApiResponse<Object>> DeleteNotificationRulesIDLabelsIDAsyncWithHttpInfo (string ruleID, string labelID, string zapTraceSpan = null);
@@ -321,13 +323,14 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">only show notification rules belonging to specified organization</param>
+        /// <param name="orgID">Only show notification rules that belong to a specific organization ID.</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
-        /// <param name="checkID">only show notifications that belong to the specified check (optional)</param>
-        /// <param name="tag">only show notification rules that match a tag pair. Uses AND logic if multiple tags are specified. (optional)</param>
+        /// <param name="checkID">Only show notifications that belong to the specific check ID. (optional)</param>
+        /// <param name="tag">Only show notification rules that match a tag pair. Uses &#x60;AND&#x60; to specify multiple tags. (optional)</param>
         /// <returns>Task of NotificationRules</returns>
-        System.Threading.Tasks.Task<NotificationRules> GetNotificationRulesAsync (string orgID, int? offset = null, int? limit = null, string checkID = null, string tag = null);
+        System.Threading.Tasks.Task<NotificationRules> GetNotificationRulesAsync (string orgID, string zapTraceSpan = null, int? offset = null, int? limit = null, string checkID = null, string tag = null);
 
         /// <summary>
         /// Get all notification rules
@@ -336,13 +339,14 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">only show notification rules belonging to specified organization</param>
+        /// <param name="orgID">Only show notification rules that belong to a specific organization ID.</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
-        /// <param name="checkID">only show notifications that belong to the specified check (optional)</param>
-        /// <param name="tag">only show notification rules that match a tag pair. Uses AND logic if multiple tags are specified. (optional)</param>
+        /// <param name="checkID">Only show notifications that belong to the specific check ID. (optional)</param>
+        /// <param name="tag">Only show notification rules that match a tag pair. Uses &#x60;AND&#x60; to specify multiple tags. (optional)</param>
         /// <returns>Task of ApiResponse (NotificationRules)</returns>
-        System.Threading.Tasks.Task<ApiResponse<NotificationRules>> GetNotificationRulesAsyncWithHttpInfo (string orgID, int? offset = null, int? limit = null, string checkID = null, string tag = null);
+        System.Threading.Tasks.Task<ApiResponse<NotificationRules>> GetNotificationRulesAsyncWithHttpInfo (string orgID, string zapTraceSpan = null, int? offset = null, int? limit = null, string checkID = null, string tag = null);
         /// <summary>
         /// Get a notification rule
         /// </summary>
@@ -350,7 +354,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="ruleID">ID of notification rule</param>
+        /// <param name="ruleID">The notification rule ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of NotificationRule</returns>
         System.Threading.Tasks.Task<NotificationRule> GetNotificationRulesIDAsync (string ruleID, string zapTraceSpan = null);
@@ -362,30 +366,30 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="ruleID">ID of notification rule</param>
+        /// <param name="ruleID">The notification rule ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (NotificationRule)</returns>
         System.Threading.Tasks.Task<ApiResponse<NotificationRule>> GetNotificationRulesIDAsyncWithHttpInfo (string ruleID, string zapTraceSpan = null);
         /// <summary>
-        /// list all labels for a notification rule
+        /// List all labels for a notification rule
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="ruleID">ID of the notification rule</param>
+        /// <param name="ruleID">The notification rule ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of LabelsResponse</returns>
         System.Threading.Tasks.Task<LabelsResponse> GetNotificationRulesIDLabelsAsync (string ruleID, string zapTraceSpan = null);
 
         /// <summary>
-        /// list all labels for a notification rule
+        /// List all labels for a notification rule
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="ruleID">ID of the notification rule</param>
+        /// <param name="ruleID">The notification rule ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (LabelsResponse)</returns>
         System.Threading.Tasks.Task<ApiResponse<LabelsResponse>> GetNotificationRulesIDLabelsAsyncWithHttpInfo (string ruleID, string zapTraceSpan = null);
@@ -396,8 +400,8 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="ruleID">ID of notification rule</param>
-        /// <param name="notificationRuleUpdate">notification rule update to apply</param>
+        /// <param name="ruleID">The notification rule ID.</param>
+        /// <param name="notificationRuleUpdate">Notification rule update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of NotificationRule</returns>
         System.Threading.Tasks.Task<NotificationRule> PatchNotificationRulesIDAsync (string ruleID, NotificationRuleUpdate notificationRuleUpdate, string zapTraceSpan = null);
@@ -409,33 +413,33 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="ruleID">ID of notification rule</param>
-        /// <param name="notificationRuleUpdate">notification rule update to apply</param>
+        /// <param name="ruleID">The notification rule ID.</param>
+        /// <param name="notificationRuleUpdate">Notification rule update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (NotificationRule)</returns>
         System.Threading.Tasks.Task<ApiResponse<NotificationRule>> PatchNotificationRulesIDAsyncWithHttpInfo (string ruleID, NotificationRuleUpdate notificationRuleUpdate, string zapTraceSpan = null);
         /// <summary>
-        /// add a label to a notification rule
+        /// Add a label to a notification rule
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="ruleID">ID of the notification rule</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="ruleID">The notification rule ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of LabelResponse</returns>
         System.Threading.Tasks.Task<LabelResponse> PostNotificationRuleIDLabelsAsync (string ruleID, LabelMapping labelMapping, string zapTraceSpan = null);
 
         /// <summary>
-        /// add a label to a notification rule
+        /// Add a label to a notification rule
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="ruleID">ID of the notification rule</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="ruleID">The notification rule ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (LabelResponse)</returns>
         System.Threading.Tasks.Task<ApiResponse<LabelResponse>> PostNotificationRuleIDLabelsAsyncWithHttpInfo (string ruleID, LabelMapping labelMapping, string zapTraceSpan = null);
@@ -446,8 +450,8 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="ruleID">ID of notification rule</param>
-        /// <param name="notificationRule">notification rule update to apply</param>
+        /// <param name="ruleID">The notification rule ID.</param>
+        /// <param name="notificationRule">Notification rule update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of NotificationRule</returns>
         System.Threading.Tasks.Task<NotificationRule> PutNotificationRulesIDAsync (string ruleID, NotificationRule notificationRule, string zapTraceSpan = null);
@@ -459,8 +463,8 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="ruleID">ID of notification rule</param>
-        /// <param name="notificationRule">notification rule update to apply</param>
+        /// <param name="ruleID">The notification rule ID.</param>
+        /// <param name="notificationRule">Notification rule update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (NotificationRule)</returns>
         System.Threading.Tasks.Task<ApiResponse<NotificationRule>> PutNotificationRulesIDAsyncWithHttpInfo (string ruleID, NotificationRule notificationRule, string zapTraceSpan = null);
@@ -565,10 +569,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add new notification rule 
+        /// Add a notification rule 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="notificationRule">notificationRule to create</param>
+        /// <param name="notificationRule">Notification rule to create</param>
         /// <returns>NotificationRule</returns>
         public NotificationRule CreateNotificationRule (NotificationRule notificationRule)
         {
@@ -577,10 +581,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add new notification rule 
+        /// Add a notification rule 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="notificationRule">notificationRule to create</param>
+        /// <param name="notificationRule">Notification rule to create</param>
         /// <returns>ApiResponse of NotificationRule</returns>
         public ApiResponse< NotificationRule > CreateNotificationRuleWithHttpInfo (NotificationRule notificationRule)
         {
@@ -640,10 +644,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add new notification rule 
+        /// Add a notification rule 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="notificationRule">notificationRule to create</param>
+        /// <param name="notificationRule">Notification rule to create</param>
         /// <returns>ApiResponse of NotificationRule</returns>
         public async System.Threading.Tasks.Task<IRestResponse> CreateNotificationRuleWithIRestResponseAsync (NotificationRule notificationRule)
         {
@@ -701,10 +705,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add new notification rule 
+        /// Add a notification rule 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="notificationRule">notificationRule to create</param>
+        /// <param name="notificationRule">Notification rule to create</param>
         /// <returns>ApiResponse of NotificationRule</returns>
         public IRestResponse CreateNotificationRuleWithIRestResponse (NotificationRule notificationRule)
         {
@@ -762,10 +766,10 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// Add new notification rule 
+        /// Add a notification rule 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="notificationRule">notificationRule to create</param>
+        /// <param name="notificationRule">Notification rule to create</param>
         /// <returns>ApiResponse of NotificationRule</returns>
         public RestRequest CreateNotificationRuleWithRestRequest (NotificationRule notificationRule)
         {
@@ -812,10 +816,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add new notification rule 
+        /// Add a notification rule 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="notificationRule">notificationRule to create</param>
+        /// <param name="notificationRule">Notification rule to create</param>
         /// <returns>Task of NotificationRule</returns>
         public async System.Threading.Tasks.Task<NotificationRule> CreateNotificationRuleAsync (NotificationRule notificationRule)
         {
@@ -825,10 +829,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add new notification rule 
+        /// Add a notification rule 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="notificationRule">notificationRule to create</param>
+        /// <param name="notificationRule">Notification rule to create</param>
         /// <returns>Task of ApiResponse (NotificationRule)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<NotificationRule>> CreateNotificationRuleAsyncWithHttpInfo (NotificationRule notificationRule)
         {
@@ -849,10 +853,10 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// Add new notification rule 
+        /// Add a notification rule 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="notificationRule">notificationRule to create</param>
+        /// <param name="notificationRule">Notification rule to create</param>
         /// <returns>Task of IRestResponse (NotificationRule)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> CreateNotificationRuleAsyncWithIRestResponse (NotificationRule notificationRule)
         {
@@ -911,7 +915,7 @@ namespace InfluxDB.Client.Api.Service
         /// Delete a notification rule 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="ruleID">ID of notification rule</param>
+        /// <param name="ruleID">The notification rule ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
         public void DeleteNotificationRulesID (string ruleID, string zapTraceSpan = null)
@@ -923,7 +927,7 @@ namespace InfluxDB.Client.Api.Service
         /// Delete a notification rule 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="ruleID">ID of notification rule</param>
+        /// <param name="ruleID">The notification rule ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public ApiResponse<Object> DeleteNotificationRulesIDWithHttpInfo (string ruleID, string zapTraceSpan = null)
@@ -980,7 +984,7 @@ namespace InfluxDB.Client.Api.Service
         /// Delete a notification rule 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="ruleID">ID of notification rule</param>
+        /// <param name="ruleID">The notification rule ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> DeleteNotificationRulesIDWithIRestResponseAsync (string ruleID, string zapTraceSpan = null)
@@ -1035,7 +1039,7 @@ namespace InfluxDB.Client.Api.Service
         /// Delete a notification rule 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="ruleID">ID of notification rule</param>
+        /// <param name="ruleID">The notification rule ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public IRestResponse DeleteNotificationRulesIDWithIRestResponse (string ruleID, string zapTraceSpan = null)
@@ -1090,7 +1094,7 @@ namespace InfluxDB.Client.Api.Service
         /// Delete a notification rule 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="ruleID">ID of notification rule</param>
+        /// <param name="ruleID">The notification rule ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public RestRequest DeleteNotificationRulesIDWithRestRequest (string ruleID, string zapTraceSpan = null)
@@ -1134,7 +1138,7 @@ namespace InfluxDB.Client.Api.Service
         /// Delete a notification rule 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="ruleID">ID of notification rule</param>
+        /// <param name="ruleID">The notification rule ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
         public async System.Threading.Tasks.Task DeleteNotificationRulesIDAsync (string ruleID, string zapTraceSpan = null)
@@ -1147,7 +1151,7 @@ namespace InfluxDB.Client.Api.Service
         /// Delete a notification rule 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="ruleID">ID of notification rule</param>
+        /// <param name="ruleID">The notification rule ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteNotificationRulesIDAsyncWithHttpInfo (string ruleID, string zapTraceSpan = null)
@@ -1172,7 +1176,7 @@ namespace InfluxDB.Client.Api.Service
         /// Delete a notification rule 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="ruleID">ID of notification rule</param>
+        /// <param name="ruleID">The notification rule ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse</returns>
         public async System.Threading.Tasks.Task<IRestResponse> DeleteNotificationRulesIDAsyncWithIRestResponse (string ruleID, string zapTraceSpan = null)
@@ -1222,11 +1226,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// delete label from a notification rule 
+        /// Delete label from a notification rule 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="ruleID">ID of the notification rule</param>
-        /// <param name="labelID">the label id to delete</param>
+        /// <param name="ruleID">The notification rule ID.</param>
+        /// <param name="labelID">The ID of the label to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
         public void DeleteNotificationRulesIDLabelsID (string ruleID, string labelID, string zapTraceSpan = null)
@@ -1235,11 +1239,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// delete label from a notification rule 
+        /// Delete label from a notification rule 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="ruleID">ID of the notification rule</param>
-        /// <param name="labelID">the label id to delete</param>
+        /// <param name="ruleID">The notification rule ID.</param>
+        /// <param name="labelID">The ID of the label to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public ApiResponse<Object> DeleteNotificationRulesIDLabelsIDWithHttpInfo (string ruleID, string labelID, string zapTraceSpan = null)
@@ -1297,11 +1301,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// delete label from a notification rule 
+        /// Delete label from a notification rule 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="ruleID">ID of the notification rule</param>
-        /// <param name="labelID">the label id to delete</param>
+        /// <param name="ruleID">The notification rule ID.</param>
+        /// <param name="labelID">The ID of the label to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> DeleteNotificationRulesIDLabelsIDWithIRestResponseAsync (string ruleID, string labelID, string zapTraceSpan = null)
@@ -1357,11 +1361,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// delete label from a notification rule 
+        /// Delete label from a notification rule 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="ruleID">ID of the notification rule</param>
-        /// <param name="labelID">the label id to delete</param>
+        /// <param name="ruleID">The notification rule ID.</param>
+        /// <param name="labelID">The ID of the label to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public IRestResponse DeleteNotificationRulesIDLabelsIDWithIRestResponse (string ruleID, string labelID, string zapTraceSpan = null)
@@ -1417,11 +1421,11 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// delete label from a notification rule 
+        /// Delete label from a notification rule 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="ruleID">ID of the notification rule</param>
-        /// <param name="labelID">the label id to delete</param>
+        /// <param name="ruleID">The notification rule ID.</param>
+        /// <param name="labelID">The ID of the label to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public RestRequest DeleteNotificationRulesIDLabelsIDWithRestRequest (string ruleID, string labelID, string zapTraceSpan = null)
@@ -1466,11 +1470,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// delete label from a notification rule 
+        /// Delete label from a notification rule 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="ruleID">ID of the notification rule</param>
-        /// <param name="labelID">the label id to delete</param>
+        /// <param name="ruleID">The notification rule ID.</param>
+        /// <param name="labelID">The ID of the label to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
         public async System.Threading.Tasks.Task DeleteNotificationRulesIDLabelsIDAsync (string ruleID, string labelID, string zapTraceSpan = null)
@@ -1480,11 +1484,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// delete label from a notification rule 
+        /// Delete label from a notification rule 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="ruleID">ID of the notification rule</param>
-        /// <param name="labelID">the label id to delete</param>
+        /// <param name="ruleID">The notification rule ID.</param>
+        /// <param name="labelID">The ID of the label to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteNotificationRulesIDLabelsIDAsyncWithHttpInfo (string ruleID, string labelID, string zapTraceSpan = null)
@@ -1506,11 +1510,11 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// delete label from a notification rule 
+        /// Delete label from a notification rule 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="ruleID">ID of the notification rule</param>
-        /// <param name="labelID">the label id to delete</param>
+        /// <param name="ruleID">The notification rule ID.</param>
+        /// <param name="labelID">The ID of the label to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse</returns>
         public async System.Threading.Tasks.Task<IRestResponse> DeleteNotificationRulesIDLabelsIDAsyncWithIRestResponse (string ruleID, string labelID, string zapTraceSpan = null)
@@ -1567,15 +1571,16 @@ namespace InfluxDB.Client.Api.Service
         /// Get all notification rules 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">only show notification rules belonging to specified organization</param>
+        /// <param name="orgID">Only show notification rules that belong to a specific organization ID.</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
-        /// <param name="checkID">only show notifications that belong to the specified check (optional)</param>
-        /// <param name="tag">only show notification rules that match a tag pair. Uses AND logic if multiple tags are specified. (optional)</param>
+        /// <param name="checkID">Only show notifications that belong to the specific check ID. (optional)</param>
+        /// <param name="tag">Only show notification rules that match a tag pair. Uses &#x60;AND&#x60; to specify multiple tags. (optional)</param>
         /// <returns>NotificationRules</returns>
-        public NotificationRules GetNotificationRules (string orgID, int? offset = null, int? limit = null, string checkID = null, string tag = null)
+        public NotificationRules GetNotificationRules (string orgID, string zapTraceSpan = null, int? offset = null, int? limit = null, string checkID = null, string tag = null)
         {
-             ApiResponse<NotificationRules> localVarResponse = GetNotificationRulesWithHttpInfo(orgID, offset, limit, checkID, tag);
+             ApiResponse<NotificationRules> localVarResponse = GetNotificationRulesWithHttpInfo(orgID, zapTraceSpan, offset, limit, checkID, tag);
              return localVarResponse.Data;
         }
 
@@ -1583,13 +1588,14 @@ namespace InfluxDB.Client.Api.Service
         /// Get all notification rules 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">only show notification rules belonging to specified organization</param>
+        /// <param name="orgID">Only show notification rules that belong to a specific organization ID.</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
-        /// <param name="checkID">only show notifications that belong to the specified check (optional)</param>
-        /// <param name="tag">only show notification rules that match a tag pair. Uses AND logic if multiple tags are specified. (optional)</param>
+        /// <param name="checkID">Only show notifications that belong to the specific check ID. (optional)</param>
+        /// <param name="tag">Only show notification rules that match a tag pair. Uses &#x60;AND&#x60; to specify multiple tags. (optional)</param>
         /// <returns>ApiResponse of NotificationRules</returns>
-        public ApiResponse< NotificationRules > GetNotificationRulesWithHttpInfo (string orgID, int? offset = null, int? limit = null, string checkID = null, string tag = null)
+        public ApiResponse< NotificationRules > GetNotificationRulesWithHttpInfo (string orgID, string zapTraceSpan = null, int? offset = null, int? limit = null, string checkID = null, string tag = null)
         {
             // verify the required parameter 'orgID' is set
             if (orgID == null)
@@ -1613,6 +1619,7 @@ namespace InfluxDB.Client.Api.Service
             if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
             if (checkID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "checkID", checkID)); // query parameter
             if (tag != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "tag", tag)); // query parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
 
             // to determine the Accept header
             String[] localVarHttpHeaderAccepts = new String[] {
@@ -1646,13 +1653,14 @@ namespace InfluxDB.Client.Api.Service
         /// Get all notification rules 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">only show notification rules belonging to specified organization</param>
+        /// <param name="orgID">Only show notification rules that belong to a specific organization ID.</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
-        /// <param name="checkID">only show notifications that belong to the specified check (optional)</param>
-        /// <param name="tag">only show notification rules that match a tag pair. Uses AND logic if multiple tags are specified. (optional)</param>
+        /// <param name="checkID">Only show notifications that belong to the specific check ID. (optional)</param>
+        /// <param name="tag">Only show notification rules that match a tag pair. Uses &#x60;AND&#x60; to specify multiple tags. (optional)</param>
         /// <returns>ApiResponse of NotificationRules</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> GetNotificationRulesWithIRestResponseAsync (string orgID, int? offset = null, int? limit = null, string checkID = null, string tag = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetNotificationRulesWithIRestResponseAsync (string orgID, string zapTraceSpan = null, int? offset = null, int? limit = null, string checkID = null, string tag = null)
         {
             // verify the required parameter 'orgID' is set
             if (orgID == null)
@@ -1676,6 +1684,7 @@ namespace InfluxDB.Client.Api.Service
             if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
             if (checkID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "checkID", checkID)); // query parameter
             if (tag != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "tag", tag)); // query parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
 
             // to determine the Accept header
             String[] localVarHttpHeaderAccepts = new String[] {
@@ -1707,13 +1716,14 @@ namespace InfluxDB.Client.Api.Service
         /// Get all notification rules 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">only show notification rules belonging to specified organization</param>
+        /// <param name="orgID">Only show notification rules that belong to a specific organization ID.</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
-        /// <param name="checkID">only show notifications that belong to the specified check (optional)</param>
-        /// <param name="tag">only show notification rules that match a tag pair. Uses AND logic if multiple tags are specified. (optional)</param>
+        /// <param name="checkID">Only show notifications that belong to the specific check ID. (optional)</param>
+        /// <param name="tag">Only show notification rules that match a tag pair. Uses &#x60;AND&#x60; to specify multiple tags. (optional)</param>
         /// <returns>ApiResponse of NotificationRules</returns>
-        public IRestResponse GetNotificationRulesWithIRestResponse (string orgID, int? offset = null, int? limit = null, string checkID = null, string tag = null)
+        public IRestResponse GetNotificationRulesWithIRestResponse (string orgID, string zapTraceSpan = null, int? offset = null, int? limit = null, string checkID = null, string tag = null)
         {
             // verify the required parameter 'orgID' is set
             if (orgID == null)
@@ -1737,6 +1747,7 @@ namespace InfluxDB.Client.Api.Service
             if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
             if (checkID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "checkID", checkID)); // query parameter
             if (tag != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "tag", tag)); // query parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
 
             // to determine the Accept header
             String[] localVarHttpHeaderAccepts = new String[] {
@@ -1768,13 +1779,14 @@ namespace InfluxDB.Client.Api.Service
         /// Get all notification rules 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">only show notification rules belonging to specified organization</param>
+        /// <param name="orgID">Only show notification rules that belong to a specific organization ID.</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
-        /// <param name="checkID">only show notifications that belong to the specified check (optional)</param>
-        /// <param name="tag">only show notification rules that match a tag pair. Uses AND logic if multiple tags are specified. (optional)</param>
+        /// <param name="checkID">Only show notifications that belong to the specific check ID. (optional)</param>
+        /// <param name="tag">Only show notification rules that match a tag pair. Uses &#x60;AND&#x60; to specify multiple tags. (optional)</param>
         /// <returns>ApiResponse of NotificationRules</returns>
-        public RestRequest GetNotificationRulesWithRestRequest (string orgID, int? offset = null, int? limit = null, string checkID = null, string tag = null)
+        public RestRequest GetNotificationRulesWithRestRequest (string orgID, string zapTraceSpan = null, int? offset = null, int? limit = null, string checkID = null, string tag = null)
         {
             // verify the required parameter 'orgID' is set
             if (orgID == null)
@@ -1798,6 +1810,7 @@ namespace InfluxDB.Client.Api.Service
             if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
             if (checkID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "checkID", checkID)); // query parameter
             if (tag != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "tag", tag)); // query parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
 
             // to determine the Accept header
             String[] localVarHttpHeaderAccepts = new String[] {
@@ -1818,15 +1831,16 @@ namespace InfluxDB.Client.Api.Service
         /// Get all notification rules 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">only show notification rules belonging to specified organization</param>
+        /// <param name="orgID">Only show notification rules that belong to a specific organization ID.</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
-        /// <param name="checkID">only show notifications that belong to the specified check (optional)</param>
-        /// <param name="tag">only show notification rules that match a tag pair. Uses AND logic if multiple tags are specified. (optional)</param>
+        /// <param name="checkID">Only show notifications that belong to the specific check ID. (optional)</param>
+        /// <param name="tag">Only show notification rules that match a tag pair. Uses &#x60;AND&#x60; to specify multiple tags. (optional)</param>
         /// <returns>Task of NotificationRules</returns>
-        public async System.Threading.Tasks.Task<NotificationRules> GetNotificationRulesAsync (string orgID, int? offset = null, int? limit = null, string checkID = null, string tag = null)
+        public async System.Threading.Tasks.Task<NotificationRules> GetNotificationRulesAsync (string orgID, string zapTraceSpan = null, int? offset = null, int? limit = null, string checkID = null, string tag = null)
         {
-             ApiResponse<NotificationRules> localVarResponse = await GetNotificationRulesAsyncWithHttpInfo(orgID, offset, limit, checkID, tag);
+             ApiResponse<NotificationRules> localVarResponse = await GetNotificationRulesAsyncWithHttpInfo(orgID, zapTraceSpan, offset, limit, checkID, tag);
              return localVarResponse.Data;
 
         }
@@ -1835,16 +1849,17 @@ namespace InfluxDB.Client.Api.Service
         /// Get all notification rules 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">only show notification rules belonging to specified organization</param>
+        /// <param name="orgID">Only show notification rules that belong to a specific organization ID.</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
-        /// <param name="checkID">only show notifications that belong to the specified check (optional)</param>
-        /// <param name="tag">only show notification rules that match a tag pair. Uses AND logic if multiple tags are specified. (optional)</param>
+        /// <param name="checkID">Only show notifications that belong to the specific check ID. (optional)</param>
+        /// <param name="tag">Only show notification rules that match a tag pair. Uses &#x60;AND&#x60; to specify multiple tags. (optional)</param>
         /// <returns>Task of ApiResponse (NotificationRules)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<NotificationRules>> GetNotificationRulesAsyncWithHttpInfo (string orgID, int? offset = null, int? limit = null, string checkID = null, string tag = null)
+        public async System.Threading.Tasks.Task<ApiResponse<NotificationRules>> GetNotificationRulesAsyncWithHttpInfo (string orgID, string zapTraceSpan = null, int? offset = null, int? limit = null, string checkID = null, string tag = null)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await GetNotificationRulesAsyncWithIRestResponse(orgID, offset, limit, checkID, tag);
+            IRestResponse localVarResponse = await GetNotificationRulesAsyncWithIRestResponse(orgID, zapTraceSpan, offset, limit, checkID, tag);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -1863,13 +1878,14 @@ namespace InfluxDB.Client.Api.Service
         /// Get all notification rules 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">only show notification rules belonging to specified organization</param>
+        /// <param name="orgID">Only show notification rules that belong to a specific organization ID.</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
-        /// <param name="checkID">only show notifications that belong to the specified check (optional)</param>
-        /// <param name="tag">only show notification rules that match a tag pair. Uses AND logic if multiple tags are specified. (optional)</param>
+        /// <param name="checkID">Only show notifications that belong to the specific check ID. (optional)</param>
+        /// <param name="tag">Only show notification rules that match a tag pair. Uses &#x60;AND&#x60; to specify multiple tags. (optional)</param>
         /// <returns>Task of IRestResponse (NotificationRules)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> GetNotificationRulesAsyncWithIRestResponse (string orgID, int? offset = null, int? limit = null, string checkID = null, string tag = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetNotificationRulesAsyncWithIRestResponse (string orgID, string zapTraceSpan = null, int? offset = null, int? limit = null, string checkID = null, string tag = null)
         {
             // verify the required parameter 'orgID' is set
             if (orgID == null)
@@ -1893,6 +1909,7 @@ namespace InfluxDB.Client.Api.Service
             if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
             if (checkID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "checkID", checkID)); // query parameter
             if (tag != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "tag", tag)); // query parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
 
             // to determine the Accept header
             String[] localVarHttpHeaderAccepts = new String[] {
@@ -1922,7 +1939,7 @@ namespace InfluxDB.Client.Api.Service
         /// Get a notification rule 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="ruleID">ID of notification rule</param>
+        /// <param name="ruleID">The notification rule ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>NotificationRule</returns>
         public NotificationRule GetNotificationRulesID (string ruleID, string zapTraceSpan = null)
@@ -1935,7 +1952,7 @@ namespace InfluxDB.Client.Api.Service
         /// Get a notification rule 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="ruleID">ID of notification rule</param>
+        /// <param name="ruleID">The notification rule ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of NotificationRule</returns>
         public ApiResponse< NotificationRule > GetNotificationRulesIDWithHttpInfo (string ruleID, string zapTraceSpan = null)
@@ -1992,7 +2009,7 @@ namespace InfluxDB.Client.Api.Service
         /// Get a notification rule 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="ruleID">ID of notification rule</param>
+        /// <param name="ruleID">The notification rule ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of NotificationRule</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetNotificationRulesIDWithIRestResponseAsync (string ruleID, string zapTraceSpan = null)
@@ -2047,7 +2064,7 @@ namespace InfluxDB.Client.Api.Service
         /// Get a notification rule 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="ruleID">ID of notification rule</param>
+        /// <param name="ruleID">The notification rule ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of NotificationRule</returns>
         public IRestResponse GetNotificationRulesIDWithIRestResponse (string ruleID, string zapTraceSpan = null)
@@ -2102,7 +2119,7 @@ namespace InfluxDB.Client.Api.Service
         /// Get a notification rule 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="ruleID">ID of notification rule</param>
+        /// <param name="ruleID">The notification rule ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of NotificationRule</returns>
         public RestRequest GetNotificationRulesIDWithRestRequest (string ruleID, string zapTraceSpan = null)
@@ -2146,7 +2163,7 @@ namespace InfluxDB.Client.Api.Service
         /// Get a notification rule 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="ruleID">ID of notification rule</param>
+        /// <param name="ruleID">The notification rule ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of NotificationRule</returns>
         public async System.Threading.Tasks.Task<NotificationRule> GetNotificationRulesIDAsync (string ruleID, string zapTraceSpan = null)
@@ -2160,7 +2177,7 @@ namespace InfluxDB.Client.Api.Service
         /// Get a notification rule 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="ruleID">ID of notification rule</param>
+        /// <param name="ruleID">The notification rule ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (NotificationRule)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<NotificationRule>> GetNotificationRulesIDAsyncWithHttpInfo (string ruleID, string zapTraceSpan = null)
@@ -2185,7 +2202,7 @@ namespace InfluxDB.Client.Api.Service
         /// Get a notification rule 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="ruleID">ID of notification rule</param>
+        /// <param name="ruleID">The notification rule ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (NotificationRule)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetNotificationRulesIDAsyncWithIRestResponse (string ruleID, string zapTraceSpan = null)
@@ -2235,10 +2252,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// list all labels for a notification rule 
+        /// List all labels for a notification rule 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="ruleID">ID of the notification rule</param>
+        /// <param name="ruleID">The notification rule ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>LabelsResponse</returns>
         public LabelsResponse GetNotificationRulesIDLabels (string ruleID, string zapTraceSpan = null)
@@ -2248,10 +2265,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// list all labels for a notification rule 
+        /// List all labels for a notification rule 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="ruleID">ID of the notification rule</param>
+        /// <param name="ruleID">The notification rule ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelsResponse</returns>
         public ApiResponse< LabelsResponse > GetNotificationRulesIDLabelsWithHttpInfo (string ruleID, string zapTraceSpan = null)
@@ -2305,10 +2322,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// list all labels for a notification rule 
+        /// List all labels for a notification rule 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="ruleID">ID of the notification rule</param>
+        /// <param name="ruleID">The notification rule ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelsResponse</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetNotificationRulesIDLabelsWithIRestResponseAsync (string ruleID, string zapTraceSpan = null)
@@ -2360,10 +2377,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// list all labels for a notification rule 
+        /// List all labels for a notification rule 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="ruleID">ID of the notification rule</param>
+        /// <param name="ruleID">The notification rule ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelsResponse</returns>
         public IRestResponse GetNotificationRulesIDLabelsWithIRestResponse (string ruleID, string zapTraceSpan = null)
@@ -2415,10 +2432,10 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// list all labels for a notification rule 
+        /// List all labels for a notification rule 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="ruleID">ID of the notification rule</param>
+        /// <param name="ruleID">The notification rule ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelsResponse</returns>
         public RestRequest GetNotificationRulesIDLabelsWithRestRequest (string ruleID, string zapTraceSpan = null)
@@ -2459,10 +2476,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// list all labels for a notification rule 
+        /// List all labels for a notification rule 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="ruleID">ID of the notification rule</param>
+        /// <param name="ruleID">The notification rule ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of LabelsResponse</returns>
         public async System.Threading.Tasks.Task<LabelsResponse> GetNotificationRulesIDLabelsAsync (string ruleID, string zapTraceSpan = null)
@@ -2473,10 +2490,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// list all labels for a notification rule 
+        /// List all labels for a notification rule 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="ruleID">ID of the notification rule</param>
+        /// <param name="ruleID">The notification rule ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (LabelsResponse)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<LabelsResponse>> GetNotificationRulesIDLabelsAsyncWithHttpInfo (string ruleID, string zapTraceSpan = null)
@@ -2498,10 +2515,10 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// list all labels for a notification rule 
+        /// List all labels for a notification rule 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="ruleID">ID of the notification rule</param>
+        /// <param name="ruleID">The notification rule ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (LabelsResponse)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetNotificationRulesIDLabelsAsyncWithIRestResponse (string ruleID, string zapTraceSpan = null)
@@ -2554,8 +2571,8 @@ namespace InfluxDB.Client.Api.Service
         /// Update a notification rule 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="ruleID">ID of notification rule</param>
-        /// <param name="notificationRuleUpdate">notification rule update to apply</param>
+        /// <param name="ruleID">The notification rule ID.</param>
+        /// <param name="notificationRuleUpdate">Notification rule update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>NotificationRule</returns>
         public NotificationRule PatchNotificationRulesID (string ruleID, NotificationRuleUpdate notificationRuleUpdate, string zapTraceSpan = null)
@@ -2568,8 +2585,8 @@ namespace InfluxDB.Client.Api.Service
         /// Update a notification rule 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="ruleID">ID of notification rule</param>
-        /// <param name="notificationRuleUpdate">notification rule update to apply</param>
+        /// <param name="ruleID">The notification rule ID.</param>
+        /// <param name="notificationRuleUpdate">Notification rule update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of NotificationRule</returns>
         public ApiResponse< NotificationRule > PatchNotificationRulesIDWithHttpInfo (string ruleID, NotificationRuleUpdate notificationRuleUpdate, string zapTraceSpan = null)
@@ -2638,8 +2655,8 @@ namespace InfluxDB.Client.Api.Service
         /// Update a notification rule 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="ruleID">ID of notification rule</param>
-        /// <param name="notificationRuleUpdate">notification rule update to apply</param>
+        /// <param name="ruleID">The notification rule ID.</param>
+        /// <param name="notificationRuleUpdate">Notification rule update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of NotificationRule</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PatchNotificationRulesIDWithIRestResponseAsync (string ruleID, NotificationRuleUpdate notificationRuleUpdate, string zapTraceSpan = null)
@@ -2706,8 +2723,8 @@ namespace InfluxDB.Client.Api.Service
         /// Update a notification rule 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="ruleID">ID of notification rule</param>
-        /// <param name="notificationRuleUpdate">notification rule update to apply</param>
+        /// <param name="ruleID">The notification rule ID.</param>
+        /// <param name="notificationRuleUpdate">Notification rule update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of NotificationRule</returns>
         public IRestResponse PatchNotificationRulesIDWithIRestResponse (string ruleID, NotificationRuleUpdate notificationRuleUpdate, string zapTraceSpan = null)
@@ -2774,8 +2791,8 @@ namespace InfluxDB.Client.Api.Service
         /// Update a notification rule 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="ruleID">ID of notification rule</param>
-        /// <param name="notificationRuleUpdate">notification rule update to apply</param>
+        /// <param name="ruleID">The notification rule ID.</param>
+        /// <param name="notificationRuleUpdate">Notification rule update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of NotificationRule</returns>
         public RestRequest PatchNotificationRulesIDWithRestRequest (string ruleID, NotificationRuleUpdate notificationRuleUpdate, string zapTraceSpan = null)
@@ -2831,8 +2848,8 @@ namespace InfluxDB.Client.Api.Service
         /// Update a notification rule 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="ruleID">ID of notification rule</param>
-        /// <param name="notificationRuleUpdate">notification rule update to apply</param>
+        /// <param name="ruleID">The notification rule ID.</param>
+        /// <param name="notificationRuleUpdate">Notification rule update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of NotificationRule</returns>
         public async System.Threading.Tasks.Task<NotificationRule> PatchNotificationRulesIDAsync (string ruleID, NotificationRuleUpdate notificationRuleUpdate, string zapTraceSpan = null)
@@ -2846,8 +2863,8 @@ namespace InfluxDB.Client.Api.Service
         /// Update a notification rule 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="ruleID">ID of notification rule</param>
-        /// <param name="notificationRuleUpdate">notification rule update to apply</param>
+        /// <param name="ruleID">The notification rule ID.</param>
+        /// <param name="notificationRuleUpdate">Notification rule update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (NotificationRule)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<NotificationRule>> PatchNotificationRulesIDAsyncWithHttpInfo (string ruleID, NotificationRuleUpdate notificationRuleUpdate, string zapTraceSpan = null)
@@ -2872,8 +2889,8 @@ namespace InfluxDB.Client.Api.Service
         /// Update a notification rule 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="ruleID">ID of notification rule</param>
-        /// <param name="notificationRuleUpdate">notification rule update to apply</param>
+        /// <param name="ruleID">The notification rule ID.</param>
+        /// <param name="notificationRuleUpdate">Notification rule update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (NotificationRule)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PatchNotificationRulesIDAsyncWithIRestResponse (string ruleID, NotificationRuleUpdate notificationRuleUpdate, string zapTraceSpan = null)
@@ -2935,11 +2952,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// add a label to a notification rule 
+        /// Add a label to a notification rule 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="ruleID">ID of the notification rule</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="ruleID">The notification rule ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>LabelResponse</returns>
         public LabelResponse PostNotificationRuleIDLabels (string ruleID, LabelMapping labelMapping, string zapTraceSpan = null)
@@ -2949,11 +2966,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// add a label to a notification rule 
+        /// Add a label to a notification rule 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="ruleID">ID of the notification rule</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="ruleID">The notification rule ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelResponse</returns>
         public ApiResponse< LabelResponse > PostNotificationRuleIDLabelsWithHttpInfo (string ruleID, LabelMapping labelMapping, string zapTraceSpan = null)
@@ -3019,11 +3036,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// add a label to a notification rule 
+        /// Add a label to a notification rule 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="ruleID">ID of the notification rule</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="ruleID">The notification rule ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelResponse</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PostNotificationRuleIDLabelsWithIRestResponseAsync (string ruleID, LabelMapping labelMapping, string zapTraceSpan = null)
@@ -3087,11 +3104,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// add a label to a notification rule 
+        /// Add a label to a notification rule 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="ruleID">ID of the notification rule</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="ruleID">The notification rule ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelResponse</returns>
         public IRestResponse PostNotificationRuleIDLabelsWithIRestResponse (string ruleID, LabelMapping labelMapping, string zapTraceSpan = null)
@@ -3155,11 +3172,11 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// add a label to a notification rule 
+        /// Add a label to a notification rule 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="ruleID">ID of the notification rule</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="ruleID">The notification rule ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelResponse</returns>
         public RestRequest PostNotificationRuleIDLabelsWithRestRequest (string ruleID, LabelMapping labelMapping, string zapTraceSpan = null)
@@ -3212,11 +3229,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// add a label to a notification rule 
+        /// Add a label to a notification rule 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="ruleID">ID of the notification rule</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="ruleID">The notification rule ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of LabelResponse</returns>
         public async System.Threading.Tasks.Task<LabelResponse> PostNotificationRuleIDLabelsAsync (string ruleID, LabelMapping labelMapping, string zapTraceSpan = null)
@@ -3227,11 +3244,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// add a label to a notification rule 
+        /// Add a label to a notification rule 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="ruleID">ID of the notification rule</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="ruleID">The notification rule ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (LabelResponse)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<LabelResponse>> PostNotificationRuleIDLabelsAsyncWithHttpInfo (string ruleID, LabelMapping labelMapping, string zapTraceSpan = null)
@@ -3253,11 +3270,11 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// add a label to a notification rule 
+        /// Add a label to a notification rule 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="ruleID">ID of the notification rule</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="ruleID">The notification rule ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (LabelResponse)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PostNotificationRuleIDLabelsAsyncWithIRestResponse (string ruleID, LabelMapping labelMapping, string zapTraceSpan = null)
@@ -3322,8 +3339,8 @@ namespace InfluxDB.Client.Api.Service
         /// Update a notification rule 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="ruleID">ID of notification rule</param>
-        /// <param name="notificationRule">notification rule update to apply</param>
+        /// <param name="ruleID">The notification rule ID.</param>
+        /// <param name="notificationRule">Notification rule update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>NotificationRule</returns>
         public NotificationRule PutNotificationRulesID (string ruleID, NotificationRule notificationRule, string zapTraceSpan = null)
@@ -3336,8 +3353,8 @@ namespace InfluxDB.Client.Api.Service
         /// Update a notification rule 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="ruleID">ID of notification rule</param>
-        /// <param name="notificationRule">notification rule update to apply</param>
+        /// <param name="ruleID">The notification rule ID.</param>
+        /// <param name="notificationRule">Notification rule update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of NotificationRule</returns>
         public ApiResponse< NotificationRule > PutNotificationRulesIDWithHttpInfo (string ruleID, NotificationRule notificationRule, string zapTraceSpan = null)
@@ -3406,8 +3423,8 @@ namespace InfluxDB.Client.Api.Service
         /// Update a notification rule 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="ruleID">ID of notification rule</param>
-        /// <param name="notificationRule">notification rule update to apply</param>
+        /// <param name="ruleID">The notification rule ID.</param>
+        /// <param name="notificationRule">Notification rule update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of NotificationRule</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PutNotificationRulesIDWithIRestResponseAsync (string ruleID, NotificationRule notificationRule, string zapTraceSpan = null)
@@ -3474,8 +3491,8 @@ namespace InfluxDB.Client.Api.Service
         /// Update a notification rule 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="ruleID">ID of notification rule</param>
-        /// <param name="notificationRule">notification rule update to apply</param>
+        /// <param name="ruleID">The notification rule ID.</param>
+        /// <param name="notificationRule">Notification rule update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of NotificationRule</returns>
         public IRestResponse PutNotificationRulesIDWithIRestResponse (string ruleID, NotificationRule notificationRule, string zapTraceSpan = null)
@@ -3542,8 +3559,8 @@ namespace InfluxDB.Client.Api.Service
         /// Update a notification rule 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="ruleID">ID of notification rule</param>
-        /// <param name="notificationRule">notification rule update to apply</param>
+        /// <param name="ruleID">The notification rule ID.</param>
+        /// <param name="notificationRule">Notification rule update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of NotificationRule</returns>
         public RestRequest PutNotificationRulesIDWithRestRequest (string ruleID, NotificationRule notificationRule, string zapTraceSpan = null)
@@ -3599,8 +3616,8 @@ namespace InfluxDB.Client.Api.Service
         /// Update a notification rule 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="ruleID">ID of notification rule</param>
-        /// <param name="notificationRule">notification rule update to apply</param>
+        /// <param name="ruleID">The notification rule ID.</param>
+        /// <param name="notificationRule">Notification rule update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of NotificationRule</returns>
         public async System.Threading.Tasks.Task<NotificationRule> PutNotificationRulesIDAsync (string ruleID, NotificationRule notificationRule, string zapTraceSpan = null)
@@ -3614,8 +3631,8 @@ namespace InfluxDB.Client.Api.Service
         /// Update a notification rule 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="ruleID">ID of notification rule</param>
-        /// <param name="notificationRule">notification rule update to apply</param>
+        /// <param name="ruleID">The notification rule ID.</param>
+        /// <param name="notificationRule">Notification rule update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (NotificationRule)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<NotificationRule>> PutNotificationRulesIDAsyncWithHttpInfo (string ruleID, NotificationRule notificationRule, string zapTraceSpan = null)
@@ -3640,8 +3657,8 @@ namespace InfluxDB.Client.Api.Service
         /// Update a notification rule 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="ruleID">ID of notification rule</param>
-        /// <param name="notificationRule">notification rule update to apply</param>
+        /// <param name="ruleID">The notification rule ID.</param>
+        /// <param name="notificationRule">Notification rule update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (NotificationRule)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PutNotificationRulesIDAsyncWithIRestResponse (string ruleID, NotificationRule notificationRule, string zapTraceSpan = null)

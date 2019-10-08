@@ -58,7 +58,7 @@ namespace InfluxDB.Client.Api.Domain
         /// </summary>
         /// <param name="type">type.</param>
         /// <param name="thresholds">thresholds.</param>
-        public ThresholdCheck(TypeEnum? type = default(TypeEnum?), List<Threshold> thresholds = default(List<Threshold>), string name = default(string), string orgID = default(string), DashboardQuery query = default(DashboardQuery), TaskStatusType? status = default(TaskStatusType?), string every = default(string), string offset = default(string), string cron = default(string), List<CheckBaseTags> tags = default(List<CheckBaseTags>), string description = default(string), string statusMessageTemplate = default(string), List<Label> labels = default(List<Label>)) : base(name, orgID, query, status, every, offset, cron, tags, description, statusMessageTemplate, labels)
+        public ThresholdCheck(TypeEnum? type = default(TypeEnum?), List<Threshold> thresholds = default(List<Threshold>), string name = default(string), string orgID = default(string), DashboardQuery query = default(DashboardQuery), TaskStatusType? status = default(TaskStatusType?), string every = default(string), string offset = default(string), List<CheckBaseTags> tags = default(List<CheckBaseTags>), string description = default(string), string statusMessageTemplate = default(string), List<Label> labels = default(List<Label>), CheckBaseLinks links = default(CheckBaseLinks)) : base(name, orgID, query, status, every, offset, tags, description, statusMessageTemplate, labels, links)
         {
             this.Type = type;
             this.Thresholds = thresholds;

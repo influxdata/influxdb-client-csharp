@@ -30,9 +30,9 @@ namespace InfluxDB.Client.Api.Domain
     public partial class User :  IEquatable<User>
     {
         /// <summary>
-        /// if inactive the user is inactive.
+        /// If inactive the user is inactive.
         /// </summary>
-        /// <value>if inactive the user is inactive.</value>
+        /// <value>If inactive the user is inactive.</value>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum StatusEnum
         {
@@ -51,9 +51,9 @@ namespace InfluxDB.Client.Api.Domain
         }
 
         /// <summary>
-        /// if inactive the user is inactive.
+        /// If inactive the user is inactive.
         /// </summary>
-        /// <value>if inactive the user is inactive.</value>
+        /// <value>If inactive the user is inactive.</value>
         [DataMember(Name="status", EmitDefaultValue=false)]
         public StatusEnum? Status { get; set; }
         /// <summary>
@@ -66,7 +66,7 @@ namespace InfluxDB.Client.Api.Domain
         /// </summary>
         /// <param name="oauthID">oauthID.</param>
         /// <param name="name">name (required).</param>
-        /// <param name="status">if inactive the user is inactive. (default to StatusEnum.Active).</param>
+        /// <param name="status">If inactive the user is inactive. (default to StatusEnum.Active).</param>
         /// <param name="links">links.</param>
         public User(string oauthID = default(string), string name = default(string), StatusEnum? status = StatusEnum.Active, UserLinks links = default(UserLinks))
         {

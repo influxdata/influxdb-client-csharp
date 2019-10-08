@@ -25,175 +25,175 @@ namespace InfluxDB.Client.Api.Service
     {
         #region Synchronous Operations
         /// <summary>
-        /// delete a scraper target
+        /// Delete a scraper target
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">id of the scraper target</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
         void DeleteScrapersID (string scraperTargetID, string zapTraceSpan = null);
 
         /// <summary>
-        /// delete a scraper target
+        /// Delete a scraper target
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">id of the scraper target</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> DeleteScrapersIDWithHttpInfo (string scraperTargetID, string zapTraceSpan = null);
         /// <summary>
-        /// delete a label from a scraper target
+        /// Delete a label from a scraper target
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="labelID">ID of the label</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
+        /// <param name="labelID">The label ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
         void DeleteScrapersIDLabelsID (string scraperTargetID, string labelID, string zapTraceSpan = null);
 
         /// <summary>
-        /// delete a label from a scraper target
+        /// Delete a label from a scraper target
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="labelID">ID of the label</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
+        /// <param name="labelID">The label ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> DeleteScrapersIDLabelsIDWithHttpInfo (string scraperTargetID, string labelID, string zapTraceSpan = null);
         /// <summary>
-        /// removes a member from a scraper target
+        /// Remove a member from a scraper target
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="userID">The ID of member to remove.</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
         void DeleteScrapersIDMembersID (string userID, string scraperTargetID, string zapTraceSpan = null);
 
         /// <summary>
-        /// removes a member from a scraper target
+        /// Remove a member from a scraper target
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="userID">The ID of member to remove.</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> DeleteScrapersIDMembersIDWithHttpInfo (string userID, string scraperTargetID, string zapTraceSpan = null);
         /// <summary>
-        /// removes an owner from a scraper target
+        /// Remove an owner from a scraper target
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="userID">The ID of owner to remove.</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
         void DeleteScrapersIDOwnersID (string userID, string scraperTargetID, string zapTraceSpan = null);
 
         /// <summary>
-        /// removes an owner from a scraper target
+        /// Remove an owner from a scraper target
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="userID">The ID of owner to remove.</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> DeleteScrapersIDOwnersIDWithHttpInfo (string userID, string scraperTargetID, string zapTraceSpan = null);
         /// <summary>
-        /// get all scraper targets
+        /// Get all scraper targets
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="name">specifies the name of the scraper target. (optional)</param>
-        /// <param name="id">ID list of scraper targets to return. If both this and owner are specified, only ids is used. (optional)</param>
-        /// <param name="orgID">specifies the organization id of the scraper target (optional)</param>
-        /// <param name="org">specifies the organization name of the scraper target (optional)</param>
+        /// <param name="name">Specifies the name of the scraper target. (optional)</param>
+        /// <param name="id">List of scraper target IDs to return. If both &#x60;id&#x60; and &#x60;owner&#x60; are specified, only &#x60;id&#x60; is used. (optional)</param>
+        /// <param name="orgID">Specifies the organization ID of the scraper target. (optional)</param>
+        /// <param name="org">Specifies the organization name of the scraper target. (optional)</param>
         /// <returns>ScraperTargetResponses</returns>
         ScraperTargetResponses GetScrapers (string zapTraceSpan = null, string name = null, List<string> id = null, string orgID = null, string org = null);
 
         /// <summary>
-        /// get all scraper targets
+        /// Get all scraper targets
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="name">specifies the name of the scraper target. (optional)</param>
-        /// <param name="id">ID list of scraper targets to return. If both this and owner are specified, only ids is used. (optional)</param>
-        /// <param name="orgID">specifies the organization id of the scraper target (optional)</param>
-        /// <param name="org">specifies the organization name of the scraper target (optional)</param>
+        /// <param name="name">Specifies the name of the scraper target. (optional)</param>
+        /// <param name="id">List of scraper target IDs to return. If both &#x60;id&#x60; and &#x60;owner&#x60; are specified, only &#x60;id&#x60; is used. (optional)</param>
+        /// <param name="orgID">Specifies the organization ID of the scraper target. (optional)</param>
+        /// <param name="org">Specifies the organization name of the scraper target. (optional)</param>
         /// <returns>ApiResponse of ScraperTargetResponses</returns>
         ApiResponse<ScraperTargetResponses> GetScrapersWithHttpInfo (string zapTraceSpan = null, string name = null, List<string> id = null, string orgID = null, string org = null);
         /// <summary>
-        /// get a scraper target by id
+        /// Get a scraper target by ID
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">id of the scraper target</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ScraperTargetResponse</returns>
         ScraperTargetResponse GetScrapersID (string scraperTargetID, string zapTraceSpan = null);
 
         /// <summary>
-        /// get a scraper target by id
+        /// Get a scraper target by ID
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">id of the scraper target</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ScraperTargetResponse</returns>
         ApiResponse<ScraperTargetResponse> GetScrapersIDWithHttpInfo (string scraperTargetID, string zapTraceSpan = null);
         /// <summary>
-        /// list all labels for a scraper targets
+        /// List all labels for a scraper target
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>LabelsResponse</returns>
         LabelsResponse GetScrapersIDLabels (string scraperTargetID, string zapTraceSpan = null);
 
         /// <summary>
-        /// list all labels for a scraper targets
+        /// List all labels for a scraper target
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelsResponse</returns>
         ApiResponse<LabelsResponse> GetScrapersIDLabelsWithHttpInfo (string scraperTargetID, string zapTraceSpan = null);
@@ -204,7 +204,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ResourceMembers</returns>
         ResourceMembers GetScrapersIDMembers (string scraperTargetID, string zapTraceSpan = null);
@@ -216,7 +216,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMembers</returns>
         ApiResponse<ResourceMembers> GetScrapersIDMembersWithHttpInfo (string scraperTargetID, string zapTraceSpan = null);
@@ -227,7 +227,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ResourceOwners</returns>
         ResourceOwners GetScrapersIDOwners (string scraperTargetID, string zapTraceSpan = null);
@@ -239,332 +239,332 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwners</returns>
         ApiResponse<ResourceOwners> GetScrapersIDOwnersWithHttpInfo (string scraperTargetID, string zapTraceSpan = null);
         /// <summary>
-        /// update a scraper target
+        /// Update a scraper target
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">id of the scraper target</param>
-        /// <param name="scraperTargetRequest">scraper target update to apply</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
+        /// <param name="scraperTargetRequest">Scraper target update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ScraperTargetResponse</returns>
         ScraperTargetResponse PatchScrapersID (string scraperTargetID, ScraperTargetRequest scraperTargetRequest, string zapTraceSpan = null);
 
         /// <summary>
-        /// update a scraper target
+        /// Update a scraper target
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">id of the scraper target</param>
-        /// <param name="scraperTargetRequest">scraper target update to apply</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
+        /// <param name="scraperTargetRequest">Scraper target update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ScraperTargetResponse</returns>
         ApiResponse<ScraperTargetResponse> PatchScrapersIDWithHttpInfo (string scraperTargetID, ScraperTargetRequest scraperTargetRequest, string zapTraceSpan = null);
         /// <summary>
-        /// update a label from a scraper target
+        /// Update a label on a scraper target
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="labelID">ID of the label</param>
-        /// <param name="label">label update to apply</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
+        /// <param name="labelID">The label ID.</param>
+        /// <param name="label">Label update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
         void PatchScrapersIDLabelsID (string scraperTargetID, string labelID, Label label, string zapTraceSpan = null);
 
         /// <summary>
-        /// update a label from a scraper target
+        /// Update a label on a scraper target
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="labelID">ID of the label</param>
-        /// <param name="label">label update to apply</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
+        /// <param name="labelID">The label ID.</param>
+        /// <param name="label">Label update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> PatchScrapersIDLabelsIDWithHttpInfo (string scraperTargetID, string labelID, Label label, string zapTraceSpan = null);
         /// <summary>
-        /// create a scraper target
+        /// Create a scraper target
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetRequest">scraper target to create</param>
+        /// <param name="scraperTargetRequest">Scraper target to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ScraperTargetResponse</returns>
         ScraperTargetResponse PostScrapers (ScraperTargetRequest scraperTargetRequest, string zapTraceSpan = null);
 
         /// <summary>
-        /// create a scraper target
+        /// Create a scraper target
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetRequest">scraper target to create</param>
+        /// <param name="scraperTargetRequest">Scraper target to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ScraperTargetResponse</returns>
         ApiResponse<ScraperTargetResponse> PostScrapersWithHttpInfo (ScraperTargetRequest scraperTargetRequest, string zapTraceSpan = null);
         /// <summary>
-        /// add a label to a scraper target
+        /// Add a label to a scraper target
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>LabelResponse</returns>
         LabelResponse PostScrapersIDLabels (string scraperTargetID, LabelMapping labelMapping, string zapTraceSpan = null);
 
         /// <summary>
-        /// add a label to a scraper target
+        /// Add a label to a scraper target
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelResponse</returns>
         ApiResponse<LabelResponse> PostScrapersIDLabelsWithHttpInfo (string scraperTargetID, LabelMapping labelMapping, string zapTraceSpan = null);
         /// <summary>
-        /// Add scraper target member
+        /// Add a member to a scraper target
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ResourceMember</returns>
         ResourceMember PostScrapersIDMembers (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
 
         /// <summary>
-        /// Add scraper target member
+        /// Add a member to a scraper target
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMember</returns>
         ApiResponse<ResourceMember> PostScrapersIDMembersWithHttpInfo (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
         /// <summary>
-        /// Add scraper target owner
+        /// Add an owner to a scraper target
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ResourceOwner</returns>
         ResourceOwner PostScrapersIDOwners (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
 
         /// <summary>
-        /// Add scraper target owner
+        /// Add an owner to a scraper target
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwner</returns>
         ApiResponse<ResourceOwner> PostScrapersIDOwnersWithHttpInfo (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
         #endregion Synchronous Operations
         #region Asynchronous Operations
         /// <summary>
-        /// delete a scraper target
+        /// Delete a scraper target
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">id of the scraper target</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
         System.Threading.Tasks.Task DeleteScrapersIDAsync (string scraperTargetID, string zapTraceSpan = null);
 
         /// <summary>
-        /// delete a scraper target
+        /// Delete a scraper target
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">id of the scraper target</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         System.Threading.Tasks.Task<ApiResponse<Object>> DeleteScrapersIDAsyncWithHttpInfo (string scraperTargetID, string zapTraceSpan = null);
         /// <summary>
-        /// delete a label from a scraper target
+        /// Delete a label from a scraper target
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="labelID">ID of the label</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
+        /// <param name="labelID">The label ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
         System.Threading.Tasks.Task DeleteScrapersIDLabelsIDAsync (string scraperTargetID, string labelID, string zapTraceSpan = null);
 
         /// <summary>
-        /// delete a label from a scraper target
+        /// Delete a label from a scraper target
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="labelID">ID of the label</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
+        /// <param name="labelID">The label ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         System.Threading.Tasks.Task<ApiResponse<Object>> DeleteScrapersIDLabelsIDAsyncWithHttpInfo (string scraperTargetID, string labelID, string zapTraceSpan = null);
         /// <summary>
-        /// removes a member from a scraper target
+        /// Remove a member from a scraper target
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="userID">The ID of member to remove.</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
         System.Threading.Tasks.Task DeleteScrapersIDMembersIDAsync (string userID, string scraperTargetID, string zapTraceSpan = null);
 
         /// <summary>
-        /// removes a member from a scraper target
+        /// Remove a member from a scraper target
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="userID">The ID of member to remove.</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         System.Threading.Tasks.Task<ApiResponse<Object>> DeleteScrapersIDMembersIDAsyncWithHttpInfo (string userID, string scraperTargetID, string zapTraceSpan = null);
         /// <summary>
-        /// removes an owner from a scraper target
+        /// Remove an owner from a scraper target
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="userID">The ID of owner to remove.</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
         System.Threading.Tasks.Task DeleteScrapersIDOwnersIDAsync (string userID, string scraperTargetID, string zapTraceSpan = null);
 
         /// <summary>
-        /// removes an owner from a scraper target
+        /// Remove an owner from a scraper target
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="userID">The ID of owner to remove.</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         System.Threading.Tasks.Task<ApiResponse<Object>> DeleteScrapersIDOwnersIDAsyncWithHttpInfo (string userID, string scraperTargetID, string zapTraceSpan = null);
         /// <summary>
-        /// get all scraper targets
+        /// Get all scraper targets
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="name">specifies the name of the scraper target. (optional)</param>
-        /// <param name="id">ID list of scraper targets to return. If both this and owner are specified, only ids is used. (optional)</param>
-        /// <param name="orgID">specifies the organization id of the scraper target (optional)</param>
-        /// <param name="org">specifies the organization name of the scraper target (optional)</param>
+        /// <param name="name">Specifies the name of the scraper target. (optional)</param>
+        /// <param name="id">List of scraper target IDs to return. If both &#x60;id&#x60; and &#x60;owner&#x60; are specified, only &#x60;id&#x60; is used. (optional)</param>
+        /// <param name="orgID">Specifies the organization ID of the scraper target. (optional)</param>
+        /// <param name="org">Specifies the organization name of the scraper target. (optional)</param>
         /// <returns>Task of ScraperTargetResponses</returns>
         System.Threading.Tasks.Task<ScraperTargetResponses> GetScrapersAsync (string zapTraceSpan = null, string name = null, List<string> id = null, string orgID = null, string org = null);
 
         /// <summary>
-        /// get all scraper targets
+        /// Get all scraper targets
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="name">specifies the name of the scraper target. (optional)</param>
-        /// <param name="id">ID list of scraper targets to return. If both this and owner are specified, only ids is used. (optional)</param>
-        /// <param name="orgID">specifies the organization id of the scraper target (optional)</param>
-        /// <param name="org">specifies the organization name of the scraper target (optional)</param>
+        /// <param name="name">Specifies the name of the scraper target. (optional)</param>
+        /// <param name="id">List of scraper target IDs to return. If both &#x60;id&#x60; and &#x60;owner&#x60; are specified, only &#x60;id&#x60; is used. (optional)</param>
+        /// <param name="orgID">Specifies the organization ID of the scraper target. (optional)</param>
+        /// <param name="org">Specifies the organization name of the scraper target. (optional)</param>
         /// <returns>Task of ApiResponse (ScraperTargetResponses)</returns>
         System.Threading.Tasks.Task<ApiResponse<ScraperTargetResponses>> GetScrapersAsyncWithHttpInfo (string zapTraceSpan = null, string name = null, List<string> id = null, string orgID = null, string org = null);
         /// <summary>
-        /// get a scraper target by id
+        /// Get a scraper target by ID
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">id of the scraper target</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ScraperTargetResponse</returns>
         System.Threading.Tasks.Task<ScraperTargetResponse> GetScrapersIDAsync (string scraperTargetID, string zapTraceSpan = null);
 
         /// <summary>
-        /// get a scraper target by id
+        /// Get a scraper target by ID
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">id of the scraper target</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (ScraperTargetResponse)</returns>
         System.Threading.Tasks.Task<ApiResponse<ScraperTargetResponse>> GetScrapersIDAsyncWithHttpInfo (string scraperTargetID, string zapTraceSpan = null);
         /// <summary>
-        /// list all labels for a scraper targets
+        /// List all labels for a scraper target
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of LabelsResponse</returns>
         System.Threading.Tasks.Task<LabelsResponse> GetScrapersIDLabelsAsync (string scraperTargetID, string zapTraceSpan = null);
 
         /// <summary>
-        /// list all labels for a scraper targets
+        /// List all labels for a scraper target
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (LabelsResponse)</returns>
         System.Threading.Tasks.Task<ApiResponse<LabelsResponse>> GetScrapersIDLabelsAsyncWithHttpInfo (string scraperTargetID, string zapTraceSpan = null);
@@ -575,7 +575,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ResourceMembers</returns>
         System.Threading.Tasks.Task<ResourceMembers> GetScrapersIDMembersAsync (string scraperTargetID, string zapTraceSpan = null);
@@ -587,7 +587,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (ResourceMembers)</returns>
         System.Threading.Tasks.Task<ApiResponse<ResourceMembers>> GetScrapersIDMembersAsyncWithHttpInfo (string scraperTargetID, string zapTraceSpan = null);
@@ -598,7 +598,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ResourceOwners</returns>
         System.Threading.Tasks.Task<ResourceOwners> GetScrapersIDOwnersAsync (string scraperTargetID, string zapTraceSpan = null);
@@ -610,157 +610,157 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (ResourceOwners)</returns>
         System.Threading.Tasks.Task<ApiResponse<ResourceOwners>> GetScrapersIDOwnersAsyncWithHttpInfo (string scraperTargetID, string zapTraceSpan = null);
         /// <summary>
-        /// update a scraper target
+        /// Update a scraper target
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">id of the scraper target</param>
-        /// <param name="scraperTargetRequest">scraper target update to apply</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
+        /// <param name="scraperTargetRequest">Scraper target update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ScraperTargetResponse</returns>
         System.Threading.Tasks.Task<ScraperTargetResponse> PatchScrapersIDAsync (string scraperTargetID, ScraperTargetRequest scraperTargetRequest, string zapTraceSpan = null);
 
         /// <summary>
-        /// update a scraper target
+        /// Update a scraper target
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">id of the scraper target</param>
-        /// <param name="scraperTargetRequest">scraper target update to apply</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
+        /// <param name="scraperTargetRequest">Scraper target update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (ScraperTargetResponse)</returns>
         System.Threading.Tasks.Task<ApiResponse<ScraperTargetResponse>> PatchScrapersIDAsyncWithHttpInfo (string scraperTargetID, ScraperTargetRequest scraperTargetRequest, string zapTraceSpan = null);
         /// <summary>
-        /// update a label from a scraper target
+        /// Update a label on a scraper target
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="labelID">ID of the label</param>
-        /// <param name="label">label update to apply</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
+        /// <param name="labelID">The label ID.</param>
+        /// <param name="label">Label update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
         System.Threading.Tasks.Task PatchScrapersIDLabelsIDAsync (string scraperTargetID, string labelID, Label label, string zapTraceSpan = null);
 
         /// <summary>
-        /// update a label from a scraper target
+        /// Update a label on a scraper target
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="labelID">ID of the label</param>
-        /// <param name="label">label update to apply</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
+        /// <param name="labelID">The label ID.</param>
+        /// <param name="label">Label update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         System.Threading.Tasks.Task<ApiResponse<Object>> PatchScrapersIDLabelsIDAsyncWithHttpInfo (string scraperTargetID, string labelID, Label label, string zapTraceSpan = null);
         /// <summary>
-        /// create a scraper target
+        /// Create a scraper target
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetRequest">scraper target to create</param>
+        /// <param name="scraperTargetRequest">Scraper target to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ScraperTargetResponse</returns>
         System.Threading.Tasks.Task<ScraperTargetResponse> PostScrapersAsync (ScraperTargetRequest scraperTargetRequest, string zapTraceSpan = null);
 
         /// <summary>
-        /// create a scraper target
+        /// Create a scraper target
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetRequest">scraper target to create</param>
+        /// <param name="scraperTargetRequest">Scraper target to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (ScraperTargetResponse)</returns>
         System.Threading.Tasks.Task<ApiResponse<ScraperTargetResponse>> PostScrapersAsyncWithHttpInfo (ScraperTargetRequest scraperTargetRequest, string zapTraceSpan = null);
         /// <summary>
-        /// add a label to a scraper target
+        /// Add a label to a scraper target
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of LabelResponse</returns>
         System.Threading.Tasks.Task<LabelResponse> PostScrapersIDLabelsAsync (string scraperTargetID, LabelMapping labelMapping, string zapTraceSpan = null);
 
         /// <summary>
-        /// add a label to a scraper target
+        /// Add a label to a scraper target
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (LabelResponse)</returns>
         System.Threading.Tasks.Task<ApiResponse<LabelResponse>> PostScrapersIDLabelsAsyncWithHttpInfo (string scraperTargetID, LabelMapping labelMapping, string zapTraceSpan = null);
         /// <summary>
-        /// Add scraper target member
+        /// Add a member to a scraper target
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ResourceMember</returns>
         System.Threading.Tasks.Task<ResourceMember> PostScrapersIDMembersAsync (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
 
         /// <summary>
-        /// Add scraper target member
+        /// Add a member to a scraper target
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (ResourceMember)</returns>
         System.Threading.Tasks.Task<ApiResponse<ResourceMember>> PostScrapersIDMembersAsyncWithHttpInfo (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
         /// <summary>
-        /// Add scraper target owner
+        /// Add an owner to a scraper target
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ResourceOwner</returns>
         System.Threading.Tasks.Task<ResourceOwner> PostScrapersIDOwnersAsync (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
 
         /// <summary>
-        /// Add scraper target owner
+        /// Add an owner to a scraper target
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (ResourceOwner)</returns>
         System.Threading.Tasks.Task<ApiResponse<ResourceOwner>> PostScrapersIDOwnersAsyncWithHttpInfo (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
@@ -865,10 +865,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// delete a scraper target 
+        /// Delete a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">id of the scraper target</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
         public void DeleteScrapersID (string scraperTargetID, string zapTraceSpan = null)
@@ -877,10 +877,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// delete a scraper target 
+        /// Delete a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">id of the scraper target</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public ApiResponse<Object> DeleteScrapersIDWithHttpInfo (string scraperTargetID, string zapTraceSpan = null)
@@ -934,10 +934,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// delete a scraper target 
+        /// Delete a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">id of the scraper target</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> DeleteScrapersIDWithIRestResponseAsync (string scraperTargetID, string zapTraceSpan = null)
@@ -989,10 +989,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// delete a scraper target 
+        /// Delete a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">id of the scraper target</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public IRestResponse DeleteScrapersIDWithIRestResponse (string scraperTargetID, string zapTraceSpan = null)
@@ -1044,10 +1044,10 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// delete a scraper target 
+        /// Delete a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">id of the scraper target</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public RestRequest DeleteScrapersIDWithRestRequest (string scraperTargetID, string zapTraceSpan = null)
@@ -1088,10 +1088,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// delete a scraper target 
+        /// Delete a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">id of the scraper target</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
         public async System.Threading.Tasks.Task DeleteScrapersIDAsync (string scraperTargetID, string zapTraceSpan = null)
@@ -1101,10 +1101,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// delete a scraper target 
+        /// Delete a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">id of the scraper target</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteScrapersIDAsyncWithHttpInfo (string scraperTargetID, string zapTraceSpan = null)
@@ -1126,10 +1126,10 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// delete a scraper target 
+        /// Delete a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">id of the scraper target</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse</returns>
         public async System.Threading.Tasks.Task<IRestResponse> DeleteScrapersIDAsyncWithIRestResponse (string scraperTargetID, string zapTraceSpan = null)
@@ -1179,11 +1179,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// delete a label from a scraper target 
+        /// Delete a label from a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="labelID">ID of the label</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
+        /// <param name="labelID">The label ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
         public void DeleteScrapersIDLabelsID (string scraperTargetID, string labelID, string zapTraceSpan = null)
@@ -1192,11 +1192,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// delete a label from a scraper target 
+        /// Delete a label from a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="labelID">ID of the label</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
+        /// <param name="labelID">The label ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public ApiResponse<Object> DeleteScrapersIDLabelsIDWithHttpInfo (string scraperTargetID, string labelID, string zapTraceSpan = null)
@@ -1254,11 +1254,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// delete a label from a scraper target 
+        /// Delete a label from a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="labelID">ID of the label</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
+        /// <param name="labelID">The label ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> DeleteScrapersIDLabelsIDWithIRestResponseAsync (string scraperTargetID, string labelID, string zapTraceSpan = null)
@@ -1314,11 +1314,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// delete a label from a scraper target 
+        /// Delete a label from a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="labelID">ID of the label</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
+        /// <param name="labelID">The label ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public IRestResponse DeleteScrapersIDLabelsIDWithIRestResponse (string scraperTargetID, string labelID, string zapTraceSpan = null)
@@ -1374,11 +1374,11 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// delete a label from a scraper target 
+        /// Delete a label from a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="labelID">ID of the label</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
+        /// <param name="labelID">The label ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public RestRequest DeleteScrapersIDLabelsIDWithRestRequest (string scraperTargetID, string labelID, string zapTraceSpan = null)
@@ -1423,11 +1423,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// delete a label from a scraper target 
+        /// Delete a label from a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="labelID">ID of the label</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
+        /// <param name="labelID">The label ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
         public async System.Threading.Tasks.Task DeleteScrapersIDLabelsIDAsync (string scraperTargetID, string labelID, string zapTraceSpan = null)
@@ -1437,11 +1437,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// delete a label from a scraper target 
+        /// Delete a label from a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="labelID">ID of the label</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
+        /// <param name="labelID">The label ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteScrapersIDLabelsIDAsyncWithHttpInfo (string scraperTargetID, string labelID, string zapTraceSpan = null)
@@ -1463,11 +1463,11 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// delete a label from a scraper target 
+        /// Delete a label from a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="labelID">ID of the label</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
+        /// <param name="labelID">The label ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse</returns>
         public async System.Threading.Tasks.Task<IRestResponse> DeleteScrapersIDLabelsIDAsyncWithIRestResponse (string scraperTargetID, string labelID, string zapTraceSpan = null)
@@ -1521,11 +1521,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes a member from a scraper target 
+        /// Remove a member from a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="userID">The ID of member to remove.</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
         public void DeleteScrapersIDMembersID (string userID, string scraperTargetID, string zapTraceSpan = null)
@@ -1534,11 +1534,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes a member from a scraper target 
+        /// Remove a member from a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="userID">The ID of member to remove.</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public ApiResponse<Object> DeleteScrapersIDMembersIDWithHttpInfo (string userID, string scraperTargetID, string zapTraceSpan = null)
@@ -1596,11 +1596,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes a member from a scraper target 
+        /// Remove a member from a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="userID">The ID of member to remove.</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> DeleteScrapersIDMembersIDWithIRestResponseAsync (string userID, string scraperTargetID, string zapTraceSpan = null)
@@ -1656,11 +1656,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes a member from a scraper target 
+        /// Remove a member from a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="userID">The ID of member to remove.</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public IRestResponse DeleteScrapersIDMembersIDWithIRestResponse (string userID, string scraperTargetID, string zapTraceSpan = null)
@@ -1716,11 +1716,11 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// removes a member from a scraper target 
+        /// Remove a member from a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="userID">The ID of member to remove.</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public RestRequest DeleteScrapersIDMembersIDWithRestRequest (string userID, string scraperTargetID, string zapTraceSpan = null)
@@ -1765,11 +1765,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes a member from a scraper target 
+        /// Remove a member from a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="userID">The ID of member to remove.</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
         public async System.Threading.Tasks.Task DeleteScrapersIDMembersIDAsync (string userID, string scraperTargetID, string zapTraceSpan = null)
@@ -1779,11 +1779,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes a member from a scraper target 
+        /// Remove a member from a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="userID">The ID of member to remove.</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteScrapersIDMembersIDAsyncWithHttpInfo (string userID, string scraperTargetID, string zapTraceSpan = null)
@@ -1805,11 +1805,11 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// removes a member from a scraper target 
+        /// Remove a member from a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="userID">The ID of member to remove.</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse</returns>
         public async System.Threading.Tasks.Task<IRestResponse> DeleteScrapersIDMembersIDAsyncWithIRestResponse (string userID, string scraperTargetID, string zapTraceSpan = null)
@@ -1863,11 +1863,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes an owner from a scraper target 
+        /// Remove an owner from a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="userID">The ID of owner to remove.</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
         public void DeleteScrapersIDOwnersID (string userID, string scraperTargetID, string zapTraceSpan = null)
@@ -1876,11 +1876,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes an owner from a scraper target 
+        /// Remove an owner from a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="userID">The ID of owner to remove.</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public ApiResponse<Object> DeleteScrapersIDOwnersIDWithHttpInfo (string userID, string scraperTargetID, string zapTraceSpan = null)
@@ -1938,11 +1938,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes an owner from a scraper target 
+        /// Remove an owner from a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="userID">The ID of owner to remove.</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> DeleteScrapersIDOwnersIDWithIRestResponseAsync (string userID, string scraperTargetID, string zapTraceSpan = null)
@@ -1998,11 +1998,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes an owner from a scraper target 
+        /// Remove an owner from a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="userID">The ID of owner to remove.</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public IRestResponse DeleteScrapersIDOwnersIDWithIRestResponse (string userID, string scraperTargetID, string zapTraceSpan = null)
@@ -2058,11 +2058,11 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// removes an owner from a scraper target 
+        /// Remove an owner from a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="userID">The ID of owner to remove.</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public RestRequest DeleteScrapersIDOwnersIDWithRestRequest (string userID, string scraperTargetID, string zapTraceSpan = null)
@@ -2107,11 +2107,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes an owner from a scraper target 
+        /// Remove an owner from a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="userID">The ID of owner to remove.</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
         public async System.Threading.Tasks.Task DeleteScrapersIDOwnersIDAsync (string userID, string scraperTargetID, string zapTraceSpan = null)
@@ -2121,11 +2121,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes an owner from a scraper target 
+        /// Remove an owner from a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="userID">The ID of owner to remove.</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteScrapersIDOwnersIDAsyncWithHttpInfo (string userID, string scraperTargetID, string zapTraceSpan = null)
@@ -2147,11 +2147,11 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// removes an owner from a scraper target 
+        /// Remove an owner from a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="userID">The ID of owner to remove.</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse</returns>
         public async System.Threading.Tasks.Task<IRestResponse> DeleteScrapersIDOwnersIDAsyncWithIRestResponse (string userID, string scraperTargetID, string zapTraceSpan = null)
@@ -2205,14 +2205,14 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// get all scraper targets 
+        /// Get all scraper targets 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="name">specifies the name of the scraper target. (optional)</param>
-        /// <param name="id">ID list of scraper targets to return. If both this and owner are specified, only ids is used. (optional)</param>
-        /// <param name="orgID">specifies the organization id of the scraper target (optional)</param>
-        /// <param name="org">specifies the organization name of the scraper target (optional)</param>
+        /// <param name="name">Specifies the name of the scraper target. (optional)</param>
+        /// <param name="id">List of scraper target IDs to return. If both &#x60;id&#x60; and &#x60;owner&#x60; are specified, only &#x60;id&#x60; is used. (optional)</param>
+        /// <param name="orgID">Specifies the organization ID of the scraper target. (optional)</param>
+        /// <param name="org">Specifies the organization name of the scraper target. (optional)</param>
         /// <returns>ScraperTargetResponses</returns>
         public ScraperTargetResponses GetScrapers (string zapTraceSpan = null, string name = null, List<string> id = null, string orgID = null, string org = null)
         {
@@ -2221,14 +2221,14 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// get all scraper targets 
+        /// Get all scraper targets 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="name">specifies the name of the scraper target. (optional)</param>
-        /// <param name="id">ID list of scraper targets to return. If both this and owner are specified, only ids is used. (optional)</param>
-        /// <param name="orgID">specifies the organization id of the scraper target (optional)</param>
-        /// <param name="org">specifies the organization name of the scraper target (optional)</param>
+        /// <param name="name">Specifies the name of the scraper target. (optional)</param>
+        /// <param name="id">List of scraper target IDs to return. If both &#x60;id&#x60; and &#x60;owner&#x60; are specified, only &#x60;id&#x60; is used. (optional)</param>
+        /// <param name="orgID">Specifies the organization ID of the scraper target. (optional)</param>
+        /// <param name="org">Specifies the organization name of the scraper target. (optional)</param>
         /// <returns>ApiResponse of ScraperTargetResponses</returns>
         public ApiResponse< ScraperTargetResponses > GetScrapersWithHttpInfo (string zapTraceSpan = null, string name = null, List<string> id = null, string orgID = null, string org = null)
         {
@@ -2281,14 +2281,14 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// get all scraper targets 
+        /// Get all scraper targets 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="name">specifies the name of the scraper target. (optional)</param>
-        /// <param name="id">ID list of scraper targets to return. If both this and owner are specified, only ids is used. (optional)</param>
-        /// <param name="orgID">specifies the organization id of the scraper target (optional)</param>
-        /// <param name="org">specifies the organization name of the scraper target (optional)</param>
+        /// <param name="name">Specifies the name of the scraper target. (optional)</param>
+        /// <param name="id">List of scraper target IDs to return. If both &#x60;id&#x60; and &#x60;owner&#x60; are specified, only &#x60;id&#x60; is used. (optional)</param>
+        /// <param name="orgID">Specifies the organization ID of the scraper target. (optional)</param>
+        /// <param name="org">Specifies the organization name of the scraper target. (optional)</param>
         /// <returns>ApiResponse of ScraperTargetResponses</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetScrapersWithIRestResponseAsync (string zapTraceSpan = null, string name = null, List<string> id = null, string orgID = null, string org = null)
         {
@@ -2339,14 +2339,14 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// get all scraper targets 
+        /// Get all scraper targets 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="name">specifies the name of the scraper target. (optional)</param>
-        /// <param name="id">ID list of scraper targets to return. If both this and owner are specified, only ids is used. (optional)</param>
-        /// <param name="orgID">specifies the organization id of the scraper target (optional)</param>
-        /// <param name="org">specifies the organization name of the scraper target (optional)</param>
+        /// <param name="name">Specifies the name of the scraper target. (optional)</param>
+        /// <param name="id">List of scraper target IDs to return. If both &#x60;id&#x60; and &#x60;owner&#x60; are specified, only &#x60;id&#x60; is used. (optional)</param>
+        /// <param name="orgID">Specifies the organization ID of the scraper target. (optional)</param>
+        /// <param name="org">Specifies the organization name of the scraper target. (optional)</param>
         /// <returns>ApiResponse of ScraperTargetResponses</returns>
         public IRestResponse GetScrapersWithIRestResponse (string zapTraceSpan = null, string name = null, List<string> id = null, string orgID = null, string org = null)
         {
@@ -2397,14 +2397,14 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// get all scraper targets 
+        /// Get all scraper targets 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="name">specifies the name of the scraper target. (optional)</param>
-        /// <param name="id">ID list of scraper targets to return. If both this and owner are specified, only ids is used. (optional)</param>
-        /// <param name="orgID">specifies the organization id of the scraper target (optional)</param>
-        /// <param name="org">specifies the organization name of the scraper target (optional)</param>
+        /// <param name="name">Specifies the name of the scraper target. (optional)</param>
+        /// <param name="id">List of scraper target IDs to return. If both &#x60;id&#x60; and &#x60;owner&#x60; are specified, only &#x60;id&#x60; is used. (optional)</param>
+        /// <param name="orgID">Specifies the organization ID of the scraper target. (optional)</param>
+        /// <param name="org">Specifies the organization name of the scraper target. (optional)</param>
         /// <returns>ApiResponse of ScraperTargetResponses</returns>
         public RestRequest GetScrapersWithRestRequest (string zapTraceSpan = null, string name = null, List<string> id = null, string orgID = null, string org = null)
         {
@@ -2444,14 +2444,14 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// get all scraper targets 
+        /// Get all scraper targets 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="name">specifies the name of the scraper target. (optional)</param>
-        /// <param name="id">ID list of scraper targets to return. If both this and owner are specified, only ids is used. (optional)</param>
-        /// <param name="orgID">specifies the organization id of the scraper target (optional)</param>
-        /// <param name="org">specifies the organization name of the scraper target (optional)</param>
+        /// <param name="name">Specifies the name of the scraper target. (optional)</param>
+        /// <param name="id">List of scraper target IDs to return. If both &#x60;id&#x60; and &#x60;owner&#x60; are specified, only &#x60;id&#x60; is used. (optional)</param>
+        /// <param name="orgID">Specifies the organization ID of the scraper target. (optional)</param>
+        /// <param name="org">Specifies the organization name of the scraper target. (optional)</param>
         /// <returns>Task of ScraperTargetResponses</returns>
         public async System.Threading.Tasks.Task<ScraperTargetResponses> GetScrapersAsync (string zapTraceSpan = null, string name = null, List<string> id = null, string orgID = null, string org = null)
         {
@@ -2461,14 +2461,14 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// get all scraper targets 
+        /// Get all scraper targets 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="name">specifies the name of the scraper target. (optional)</param>
-        /// <param name="id">ID list of scraper targets to return. If both this and owner are specified, only ids is used. (optional)</param>
-        /// <param name="orgID">specifies the organization id of the scraper target (optional)</param>
-        /// <param name="org">specifies the organization name of the scraper target (optional)</param>
+        /// <param name="name">Specifies the name of the scraper target. (optional)</param>
+        /// <param name="id">List of scraper target IDs to return. If both &#x60;id&#x60; and &#x60;owner&#x60; are specified, only &#x60;id&#x60; is used. (optional)</param>
+        /// <param name="orgID">Specifies the organization ID of the scraper target. (optional)</param>
+        /// <param name="org">Specifies the organization name of the scraper target. (optional)</param>
         /// <returns>Task of ApiResponse (ScraperTargetResponses)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<ScraperTargetResponses>> GetScrapersAsyncWithHttpInfo (string zapTraceSpan = null, string name = null, List<string> id = null, string orgID = null, string org = null)
         {
@@ -2489,14 +2489,14 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// get all scraper targets 
+        /// Get all scraper targets 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="name">specifies the name of the scraper target. (optional)</param>
-        /// <param name="id">ID list of scraper targets to return. If both this and owner are specified, only ids is used. (optional)</param>
-        /// <param name="orgID">specifies the organization id of the scraper target (optional)</param>
-        /// <param name="org">specifies the organization name of the scraper target (optional)</param>
+        /// <param name="name">Specifies the name of the scraper target. (optional)</param>
+        /// <param name="id">List of scraper target IDs to return. If both &#x60;id&#x60; and &#x60;owner&#x60; are specified, only &#x60;id&#x60; is used. (optional)</param>
+        /// <param name="orgID">Specifies the organization ID of the scraper target. (optional)</param>
+        /// <param name="org">Specifies the organization name of the scraper target. (optional)</param>
         /// <returns>Task of IRestResponse (ScraperTargetResponses)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetScrapersAsyncWithIRestResponse (string zapTraceSpan = null, string name = null, List<string> id = null, string orgID = null, string org = null)
         {
@@ -2545,10 +2545,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// get a scraper target by id 
+        /// Get a scraper target by ID 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">id of the scraper target</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ScraperTargetResponse</returns>
         public ScraperTargetResponse GetScrapersID (string scraperTargetID, string zapTraceSpan = null)
@@ -2558,10 +2558,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// get a scraper target by id 
+        /// Get a scraper target by ID 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">id of the scraper target</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ScraperTargetResponse</returns>
         public ApiResponse< ScraperTargetResponse > GetScrapersIDWithHttpInfo (string scraperTargetID, string zapTraceSpan = null)
@@ -2615,10 +2615,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// get a scraper target by id 
+        /// Get a scraper target by ID 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">id of the scraper target</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ScraperTargetResponse</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetScrapersIDWithIRestResponseAsync (string scraperTargetID, string zapTraceSpan = null)
@@ -2670,10 +2670,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// get a scraper target by id 
+        /// Get a scraper target by ID 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">id of the scraper target</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ScraperTargetResponse</returns>
         public IRestResponse GetScrapersIDWithIRestResponse (string scraperTargetID, string zapTraceSpan = null)
@@ -2725,10 +2725,10 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// get a scraper target by id 
+        /// Get a scraper target by ID 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">id of the scraper target</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ScraperTargetResponse</returns>
         public RestRequest GetScrapersIDWithRestRequest (string scraperTargetID, string zapTraceSpan = null)
@@ -2769,10 +2769,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// get a scraper target by id 
+        /// Get a scraper target by ID 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">id of the scraper target</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ScraperTargetResponse</returns>
         public async System.Threading.Tasks.Task<ScraperTargetResponse> GetScrapersIDAsync (string scraperTargetID, string zapTraceSpan = null)
@@ -2783,10 +2783,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// get a scraper target by id 
+        /// Get a scraper target by ID 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">id of the scraper target</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (ScraperTargetResponse)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<ScraperTargetResponse>> GetScrapersIDAsyncWithHttpInfo (string scraperTargetID, string zapTraceSpan = null)
@@ -2808,10 +2808,10 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// get a scraper target by id 
+        /// Get a scraper target by ID 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">id of the scraper target</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (ScraperTargetResponse)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetScrapersIDAsyncWithIRestResponse (string scraperTargetID, string zapTraceSpan = null)
@@ -2861,10 +2861,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// list all labels for a scraper targets 
+        /// List all labels for a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>LabelsResponse</returns>
         public LabelsResponse GetScrapersIDLabels (string scraperTargetID, string zapTraceSpan = null)
@@ -2874,10 +2874,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// list all labels for a scraper targets 
+        /// List all labels for a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelsResponse</returns>
         public ApiResponse< LabelsResponse > GetScrapersIDLabelsWithHttpInfo (string scraperTargetID, string zapTraceSpan = null)
@@ -2931,10 +2931,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// list all labels for a scraper targets 
+        /// List all labels for a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelsResponse</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetScrapersIDLabelsWithIRestResponseAsync (string scraperTargetID, string zapTraceSpan = null)
@@ -2986,10 +2986,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// list all labels for a scraper targets 
+        /// List all labels for a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelsResponse</returns>
         public IRestResponse GetScrapersIDLabelsWithIRestResponse (string scraperTargetID, string zapTraceSpan = null)
@@ -3041,10 +3041,10 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// list all labels for a scraper targets 
+        /// List all labels for a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelsResponse</returns>
         public RestRequest GetScrapersIDLabelsWithRestRequest (string scraperTargetID, string zapTraceSpan = null)
@@ -3085,10 +3085,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// list all labels for a scraper targets 
+        /// List all labels for a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of LabelsResponse</returns>
         public async System.Threading.Tasks.Task<LabelsResponse> GetScrapersIDLabelsAsync (string scraperTargetID, string zapTraceSpan = null)
@@ -3099,10 +3099,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// list all labels for a scraper targets 
+        /// List all labels for a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (LabelsResponse)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<LabelsResponse>> GetScrapersIDLabelsAsyncWithHttpInfo (string scraperTargetID, string zapTraceSpan = null)
@@ -3124,10 +3124,10 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// list all labels for a scraper targets 
+        /// List all labels for a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (LabelsResponse)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetScrapersIDLabelsAsyncWithIRestResponse (string scraperTargetID, string zapTraceSpan = null)
@@ -3180,7 +3180,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all users with member privileges for a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ResourceMembers</returns>
         public ResourceMembers GetScrapersIDMembers (string scraperTargetID, string zapTraceSpan = null)
@@ -3193,7 +3193,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all users with member privileges for a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMembers</returns>
         public ApiResponse< ResourceMembers > GetScrapersIDMembersWithHttpInfo (string scraperTargetID, string zapTraceSpan = null)
@@ -3250,7 +3250,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all users with member privileges for a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMembers</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetScrapersIDMembersWithIRestResponseAsync (string scraperTargetID, string zapTraceSpan = null)
@@ -3305,7 +3305,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all users with member privileges for a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMembers</returns>
         public IRestResponse GetScrapersIDMembersWithIRestResponse (string scraperTargetID, string zapTraceSpan = null)
@@ -3360,7 +3360,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all users with member privileges for a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMembers</returns>
         public RestRequest GetScrapersIDMembersWithRestRequest (string scraperTargetID, string zapTraceSpan = null)
@@ -3404,7 +3404,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all users with member privileges for a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ResourceMembers</returns>
         public async System.Threading.Tasks.Task<ResourceMembers> GetScrapersIDMembersAsync (string scraperTargetID, string zapTraceSpan = null)
@@ -3418,7 +3418,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all users with member privileges for a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (ResourceMembers)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<ResourceMembers>> GetScrapersIDMembersAsyncWithHttpInfo (string scraperTargetID, string zapTraceSpan = null)
@@ -3443,7 +3443,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all users with member privileges for a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (ResourceMembers)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetScrapersIDMembersAsyncWithIRestResponse (string scraperTargetID, string zapTraceSpan = null)
@@ -3496,7 +3496,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all owners of a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ResourceOwners</returns>
         public ResourceOwners GetScrapersIDOwners (string scraperTargetID, string zapTraceSpan = null)
@@ -3509,7 +3509,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all owners of a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwners</returns>
         public ApiResponse< ResourceOwners > GetScrapersIDOwnersWithHttpInfo (string scraperTargetID, string zapTraceSpan = null)
@@ -3566,7 +3566,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all owners of a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwners</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetScrapersIDOwnersWithIRestResponseAsync (string scraperTargetID, string zapTraceSpan = null)
@@ -3621,7 +3621,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all owners of a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwners</returns>
         public IRestResponse GetScrapersIDOwnersWithIRestResponse (string scraperTargetID, string zapTraceSpan = null)
@@ -3676,7 +3676,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all owners of a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwners</returns>
         public RestRequest GetScrapersIDOwnersWithRestRequest (string scraperTargetID, string zapTraceSpan = null)
@@ -3720,7 +3720,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all owners of a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ResourceOwners</returns>
         public async System.Threading.Tasks.Task<ResourceOwners> GetScrapersIDOwnersAsync (string scraperTargetID, string zapTraceSpan = null)
@@ -3734,7 +3734,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all owners of a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (ResourceOwners)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<ResourceOwners>> GetScrapersIDOwnersAsyncWithHttpInfo (string scraperTargetID, string zapTraceSpan = null)
@@ -3759,7 +3759,7 @@ namespace InfluxDB.Client.Api.Service
         /// List all owners of a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (ResourceOwners)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetScrapersIDOwnersAsyncWithIRestResponse (string scraperTargetID, string zapTraceSpan = null)
@@ -3809,11 +3809,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// update a scraper target 
+        /// Update a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">id of the scraper target</param>
-        /// <param name="scraperTargetRequest">scraper target update to apply</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
+        /// <param name="scraperTargetRequest">Scraper target update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ScraperTargetResponse</returns>
         public ScraperTargetResponse PatchScrapersID (string scraperTargetID, ScraperTargetRequest scraperTargetRequest, string zapTraceSpan = null)
@@ -3823,11 +3823,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// update a scraper target 
+        /// Update a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">id of the scraper target</param>
-        /// <param name="scraperTargetRequest">scraper target update to apply</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
+        /// <param name="scraperTargetRequest">Scraper target update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ScraperTargetResponse</returns>
         public ApiResponse< ScraperTargetResponse > PatchScrapersIDWithHttpInfo (string scraperTargetID, ScraperTargetRequest scraperTargetRequest, string zapTraceSpan = null)
@@ -3893,11 +3893,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// update a scraper target 
+        /// Update a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">id of the scraper target</param>
-        /// <param name="scraperTargetRequest">scraper target update to apply</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
+        /// <param name="scraperTargetRequest">Scraper target update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ScraperTargetResponse</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PatchScrapersIDWithIRestResponseAsync (string scraperTargetID, ScraperTargetRequest scraperTargetRequest, string zapTraceSpan = null)
@@ -3961,11 +3961,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// update a scraper target 
+        /// Update a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">id of the scraper target</param>
-        /// <param name="scraperTargetRequest">scraper target update to apply</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
+        /// <param name="scraperTargetRequest">Scraper target update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ScraperTargetResponse</returns>
         public IRestResponse PatchScrapersIDWithIRestResponse (string scraperTargetID, ScraperTargetRequest scraperTargetRequest, string zapTraceSpan = null)
@@ -4029,11 +4029,11 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// update a scraper target 
+        /// Update a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">id of the scraper target</param>
-        /// <param name="scraperTargetRequest">scraper target update to apply</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
+        /// <param name="scraperTargetRequest">Scraper target update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ScraperTargetResponse</returns>
         public RestRequest PatchScrapersIDWithRestRequest (string scraperTargetID, ScraperTargetRequest scraperTargetRequest, string zapTraceSpan = null)
@@ -4086,11 +4086,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// update a scraper target 
+        /// Update a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">id of the scraper target</param>
-        /// <param name="scraperTargetRequest">scraper target update to apply</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
+        /// <param name="scraperTargetRequest">Scraper target update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ScraperTargetResponse</returns>
         public async System.Threading.Tasks.Task<ScraperTargetResponse> PatchScrapersIDAsync (string scraperTargetID, ScraperTargetRequest scraperTargetRequest, string zapTraceSpan = null)
@@ -4101,11 +4101,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// update a scraper target 
+        /// Update a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">id of the scraper target</param>
-        /// <param name="scraperTargetRequest">scraper target update to apply</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
+        /// <param name="scraperTargetRequest">Scraper target update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (ScraperTargetResponse)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<ScraperTargetResponse>> PatchScrapersIDAsyncWithHttpInfo (string scraperTargetID, ScraperTargetRequest scraperTargetRequest, string zapTraceSpan = null)
@@ -4127,11 +4127,11 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// update a scraper target 
+        /// Update a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">id of the scraper target</param>
-        /// <param name="scraperTargetRequest">scraper target update to apply</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
+        /// <param name="scraperTargetRequest">Scraper target update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (ScraperTargetResponse)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PatchScrapersIDAsyncWithIRestResponse (string scraperTargetID, ScraperTargetRequest scraperTargetRequest, string zapTraceSpan = null)
@@ -4193,12 +4193,12 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// update a label from a scraper target 
+        /// Update a label on a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="labelID">ID of the label</param>
-        /// <param name="label">label update to apply</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
+        /// <param name="labelID">The label ID.</param>
+        /// <param name="label">Label update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
         public void PatchScrapersIDLabelsID (string scraperTargetID, string labelID, Label label, string zapTraceSpan = null)
@@ -4207,12 +4207,12 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// update a label from a scraper target 
+        /// Update a label on a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="labelID">ID of the label</param>
-        /// <param name="label">label update to apply</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
+        /// <param name="labelID">The label ID.</param>
+        /// <param name="label">Label update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public ApiResponse<Object> PatchScrapersIDLabelsIDWithHttpInfo (string scraperTargetID, string labelID, Label label, string zapTraceSpan = null)
@@ -4282,12 +4282,12 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// update a label from a scraper target 
+        /// Update a label on a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="labelID">ID of the label</param>
-        /// <param name="label">label update to apply</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
+        /// <param name="labelID">The label ID.</param>
+        /// <param name="label">Label update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PatchScrapersIDLabelsIDWithIRestResponseAsync (string scraperTargetID, string labelID, Label label, string zapTraceSpan = null)
@@ -4355,12 +4355,12 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// update a label from a scraper target 
+        /// Update a label on a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="labelID">ID of the label</param>
-        /// <param name="label">label update to apply</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
+        /// <param name="labelID">The label ID.</param>
+        /// <param name="label">Label update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public IRestResponse PatchScrapersIDLabelsIDWithIRestResponse (string scraperTargetID, string labelID, Label label, string zapTraceSpan = null)
@@ -4428,12 +4428,12 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// update a label from a scraper target 
+        /// Update a label on a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="labelID">ID of the label</param>
-        /// <param name="label">label update to apply</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
+        /// <param name="labelID">The label ID.</param>
+        /// <param name="label">Label update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public RestRequest PatchScrapersIDLabelsIDWithRestRequest (string scraperTargetID, string labelID, Label label, string zapTraceSpan = null)
@@ -4490,12 +4490,12 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// update a label from a scraper target 
+        /// Update a label on a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="labelID">ID of the label</param>
-        /// <param name="label">label update to apply</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
+        /// <param name="labelID">The label ID.</param>
+        /// <param name="label">Label update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
         public async System.Threading.Tasks.Task PatchScrapersIDLabelsIDAsync (string scraperTargetID, string labelID, Label label, string zapTraceSpan = null)
@@ -4505,12 +4505,12 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// update a label from a scraper target 
+        /// Update a label on a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="labelID">ID of the label</param>
-        /// <param name="label">label update to apply</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
+        /// <param name="labelID">The label ID.</param>
+        /// <param name="label">Label update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Object>> PatchScrapersIDLabelsIDAsyncWithHttpInfo (string scraperTargetID, string labelID, Label label, string zapTraceSpan = null)
@@ -4532,12 +4532,12 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// update a label from a scraper target 
+        /// Update a label on a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="labelID">ID of the label</param>
-        /// <param name="label">label update to apply</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
+        /// <param name="labelID">The label ID.</param>
+        /// <param name="label">Label update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PatchScrapersIDLabelsIDAsyncWithIRestResponse (string scraperTargetID, string labelID, Label label, string zapTraceSpan = null)
@@ -4603,10 +4603,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// create a scraper target 
+        /// Create a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetRequest">scraper target to create</param>
+        /// <param name="scraperTargetRequest">Scraper target to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ScraperTargetResponse</returns>
         public ScraperTargetResponse PostScrapers (ScraperTargetRequest scraperTargetRequest, string zapTraceSpan = null)
@@ -4616,10 +4616,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// create a scraper target 
+        /// Create a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetRequest">scraper target to create</param>
+        /// <param name="scraperTargetRequest">Scraper target to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ScraperTargetResponse</returns>
         public ApiResponse< ScraperTargetResponse > PostScrapersWithHttpInfo (ScraperTargetRequest scraperTargetRequest, string zapTraceSpan = null)
@@ -4681,10 +4681,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// create a scraper target 
+        /// Create a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetRequest">scraper target to create</param>
+        /// <param name="scraperTargetRequest">Scraper target to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ScraperTargetResponse</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PostScrapersWithIRestResponseAsync (ScraperTargetRequest scraperTargetRequest, string zapTraceSpan = null)
@@ -4744,10 +4744,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// create a scraper target 
+        /// Create a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetRequest">scraper target to create</param>
+        /// <param name="scraperTargetRequest">Scraper target to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ScraperTargetResponse</returns>
         public IRestResponse PostScrapersWithIRestResponse (ScraperTargetRequest scraperTargetRequest, string zapTraceSpan = null)
@@ -4807,10 +4807,10 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// create a scraper target 
+        /// Create a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetRequest">scraper target to create</param>
+        /// <param name="scraperTargetRequest">Scraper target to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ScraperTargetResponse</returns>
         public RestRequest PostScrapersWithRestRequest (ScraperTargetRequest scraperTargetRequest, string zapTraceSpan = null)
@@ -4859,10 +4859,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// create a scraper target 
+        /// Create a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetRequest">scraper target to create</param>
+        /// <param name="scraperTargetRequest">Scraper target to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ScraperTargetResponse</returns>
         public async System.Threading.Tasks.Task<ScraperTargetResponse> PostScrapersAsync (ScraperTargetRequest scraperTargetRequest, string zapTraceSpan = null)
@@ -4873,10 +4873,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// create a scraper target 
+        /// Create a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetRequest">scraper target to create</param>
+        /// <param name="scraperTargetRequest">Scraper target to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (ScraperTargetResponse)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<ScraperTargetResponse>> PostScrapersAsyncWithHttpInfo (ScraperTargetRequest scraperTargetRequest, string zapTraceSpan = null)
@@ -4898,10 +4898,10 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// create a scraper target 
+        /// Create a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetRequest">scraper target to create</param>
+        /// <param name="scraperTargetRequest">Scraper target to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (ScraperTargetResponse)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PostScrapersAsyncWithIRestResponse (ScraperTargetRequest scraperTargetRequest, string zapTraceSpan = null)
@@ -4959,11 +4959,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// add a label to a scraper target 
+        /// Add a label to a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>LabelResponse</returns>
         public LabelResponse PostScrapersIDLabels (string scraperTargetID, LabelMapping labelMapping, string zapTraceSpan = null)
@@ -4973,11 +4973,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// add a label to a scraper target 
+        /// Add a label to a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelResponse</returns>
         public ApiResponse< LabelResponse > PostScrapersIDLabelsWithHttpInfo (string scraperTargetID, LabelMapping labelMapping, string zapTraceSpan = null)
@@ -5043,11 +5043,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// add a label to a scraper target 
+        /// Add a label to a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelResponse</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PostScrapersIDLabelsWithIRestResponseAsync (string scraperTargetID, LabelMapping labelMapping, string zapTraceSpan = null)
@@ -5111,11 +5111,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// add a label to a scraper target 
+        /// Add a label to a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelResponse</returns>
         public IRestResponse PostScrapersIDLabelsWithIRestResponse (string scraperTargetID, LabelMapping labelMapping, string zapTraceSpan = null)
@@ -5179,11 +5179,11 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// add a label to a scraper target 
+        /// Add a label to a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelResponse</returns>
         public RestRequest PostScrapersIDLabelsWithRestRequest (string scraperTargetID, LabelMapping labelMapping, string zapTraceSpan = null)
@@ -5236,11 +5236,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// add a label to a scraper target 
+        /// Add a label to a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of LabelResponse</returns>
         public async System.Threading.Tasks.Task<LabelResponse> PostScrapersIDLabelsAsync (string scraperTargetID, LabelMapping labelMapping, string zapTraceSpan = null)
@@ -5251,11 +5251,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// add a label to a scraper target 
+        /// Add a label to a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (LabelResponse)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<LabelResponse>> PostScrapersIDLabelsAsyncWithHttpInfo (string scraperTargetID, LabelMapping labelMapping, string zapTraceSpan = null)
@@ -5277,11 +5277,11 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// add a label to a scraper target 
+        /// Add a label to a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (LabelResponse)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PostScrapersIDLabelsAsyncWithIRestResponse (string scraperTargetID, LabelMapping labelMapping, string zapTraceSpan = null)
@@ -5343,11 +5343,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add scraper target member 
+        /// Add a member to a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ResourceMember</returns>
         public ResourceMember PostScrapersIDMembers (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -5357,11 +5357,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add scraper target member 
+        /// Add a member to a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMember</returns>
         public ApiResponse< ResourceMember > PostScrapersIDMembersWithHttpInfo (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -5427,11 +5427,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add scraper target member 
+        /// Add a member to a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMember</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PostScrapersIDMembersWithIRestResponseAsync (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -5495,11 +5495,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add scraper target member 
+        /// Add a member to a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMember</returns>
         public IRestResponse PostScrapersIDMembersWithIRestResponse (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -5563,11 +5563,11 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// Add scraper target member 
+        /// Add a member to a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMember</returns>
         public RestRequest PostScrapersIDMembersWithRestRequest (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -5620,11 +5620,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add scraper target member 
+        /// Add a member to a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ResourceMember</returns>
         public async System.Threading.Tasks.Task<ResourceMember> PostScrapersIDMembersAsync (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -5635,11 +5635,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add scraper target member 
+        /// Add a member to a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (ResourceMember)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<ResourceMember>> PostScrapersIDMembersAsyncWithHttpInfo (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -5661,11 +5661,11 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// Add scraper target member 
+        /// Add a member to a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (ResourceMember)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PostScrapersIDMembersAsyncWithIRestResponse (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -5727,11 +5727,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add scraper target owner 
+        /// Add an owner to a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ResourceOwner</returns>
         public ResourceOwner PostScrapersIDOwners (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -5741,11 +5741,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add scraper target owner 
+        /// Add an owner to a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwner</returns>
         public ApiResponse< ResourceOwner > PostScrapersIDOwnersWithHttpInfo (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -5811,11 +5811,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add scraper target owner 
+        /// Add an owner to a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwner</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PostScrapersIDOwnersWithIRestResponseAsync (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -5879,11 +5879,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add scraper target owner 
+        /// Add an owner to a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwner</returns>
         public IRestResponse PostScrapersIDOwnersWithIRestResponse (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -5947,11 +5947,11 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// Add scraper target owner 
+        /// Add an owner to a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwner</returns>
         public RestRequest PostScrapersIDOwnersWithRestRequest (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -6004,11 +6004,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add scraper target owner 
+        /// Add an owner to a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ResourceOwner</returns>
         public async System.Threading.Tasks.Task<ResourceOwner> PostScrapersIDOwnersAsync (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -6019,11 +6019,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add scraper target owner 
+        /// Add an owner to a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (ResourceOwner)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<ResourceOwner>> PostScrapersIDOwnersAsyncWithHttpInfo (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -6045,11 +6045,11 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// Add scraper target owner 
+        /// Add an owner to a scraper target 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="scraperTargetID">ID of the scraper target</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="scraperTargetID">The scraper target ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (ResourceOwner)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PostScrapersIDOwnersAsyncWithIRestResponse (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)

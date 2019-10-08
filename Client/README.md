@@ -18,6 +18,7 @@ The reference client that allows query, write and management (bucket, organizati
     - authorizations
     - health check
 - [Advanced Usage](#advanced-usage)
+    - [Monitoring & Alerting](#monitoring--alerting)
     - [Client configuration file](#client-configuration-file)
     - [Client connection string](#client-connection-string)
     - [Gzip support](#gzip-support)
@@ -616,6 +617,52 @@ namespace Examples
 ```
 
 ## Advanced Usage
+
+### Monitoring & Alerting
+
+The example below show how to create a check for monitoring a stock price. A Slack notification is created if the price is lesser than `35`.
+
+##### Create Threshold Check
+
+The Check set status to `Critical` if the `current` value for a `stock` measurement is lesser than `35`.
+
+```c#   
+var org = ...;
+
+var query = "from(bucket: \"my-bucket\") "
+        + "|> range(start: v.timeRangeStart, stop: v.timeRangeStop)  "
+        + "|> filter(fn: (r) => r._measurement == \"stock\")  "
+        + "|> filter(fn: (r) => r.company == \"zyz\")  "
+        + "|> aggregateWindow(every: 5s, fn: mean)  "
+        + "|> yield(name: \"mean\")";
+
+var threshold = new LesserThreshold(value: 35F, level: CheckStatusLevel.CRIT,
+                type: LesserThreshold.TypeEnum.Lesser);
+
+var message = "The Stock price for XYZ is on: ${ r._level } level!";
+
+await Client
+    .GetChecksApi()
+    .CreateThresholdCheckAsync("XYZ Stock value", query, "current", "5s", message, threshold, org.Id);
+```  
+
+##### Create Slack Notification endpoint
+
+```c#
+var url = "https://hooks.slack.com/services/x/y/z"; 
+
+var endpoint = await Client
+    .GetNotificationEndpointsApi()
+    .CreateSlackEndpointAsync("Slack Endpoint", url, org.Id);
+```
+
+##### Create Notification Rule
+
+```c#
+await Client
+    .GetNotificationRulesApi()
+    .CreateSlackRuleAsync("Critical status to Slack", "10s", "${ r._message }", RuleStatusLevel.CRIT, endpoint, org.Id);
+```
 
 ### Client configuration file
 

@@ -1,10 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using InfluxDB.Client.Api.Domain;
-using InfluxDB.Client.Core;
 using InfluxDB.Client.Core.Exceptions;
 using NUnit.Framework;
-using Task = System.Threading.Tasks.Task;
 
 namespace InfluxDB.Client.Test
 {
@@ -21,8 +20,6 @@ namespace InfluxDB.Client.Test
 
             foreach (var telegrafConfig in await _telegrafsApi.FindTelegrafsAsync())
                 await _telegrafsApi.DeleteTelegrafAsync(telegrafConfig);
-
-            Client.SetLogLevel(LogLevel.Body);
         }
 
         private TelegrafsApi _telegrafsApi;

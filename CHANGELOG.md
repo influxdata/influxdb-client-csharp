@@ -4,6 +4,9 @@
 1. [#34](https://github.com/influxdata/influxdb-client-csharp/issues/34): Renamed Point class to PointData and Task class to TaskType (improving the usability of this library)
 1. [#40](https://github.com/influxdata/influxdb-client-csharp/pull/40): Added `Async` suffix into asynchronous methods
 
+### Features
+1. [#59](https://github.com/influxdata/influxdb-client-csharp/pull/41): Added support for Monitoring & Alerting
+
 ### API
 1. [#36](https://github.com/influxdata/influxdb-client-csharp/issues/36): Updated swagger to latest version
 

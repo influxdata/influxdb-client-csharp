@@ -35,7 +35,7 @@ namespace InfluxDB.Client.Test
             Client.Dispose();
         }
 
-        protected string GenerateName(string prefix)
+        public static string GenerateName(string prefix)
         {
             Assert.IsNotEmpty(prefix);
 

@@ -24,7 +24,7 @@ using OpenAPIDateConverter = InfluxDB.Client.Api.Client.OpenAPIDateConverter;
 namespace InfluxDB.Client.Api.Domain
 {
     /// <summary>
-    /// represents the elapsed time between two instants as an int64 nanosecond count with syntax of golang&#39;s time.Duration
+    /// Represents the elapsed time between two instants as an int64 nanosecond count with syntax of golang&#39;s time.Duration
     /// </summary>
     [DataContract]
     public partial class DurationLiteral :  IEquatable<DurationLiteral>
@@ -32,8 +32,8 @@ namespace InfluxDB.Client.Api.Domain
         /// <summary>
         /// Initializes a new instance of the <see cref="DurationLiteral" /> class.
         /// </summary>
-        /// <param name="type">type of AST node.</param>
-        /// <param name="values">duration values.</param>
+        /// <param name="type">Type of AST node.</param>
+        /// <param name="values">Duration values.</param>
         public DurationLiteral(string type = default(string), List<Duration> values = default(List<Duration>))
         {
             this.Type = type;
@@ -41,16 +41,16 @@ namespace InfluxDB.Client.Api.Domain
         }
 
         /// <summary>
-        /// type of AST node
+        /// Type of AST node
         /// </summary>
-        /// <value>type of AST node</value>
+        /// <value>Type of AST node</value>
         [DataMember(Name="type", EmitDefaultValue=false)]
         public string Type { get; set; }
 
         /// <summary>
-        /// duration values
+        /// Duration values
         /// </summary>
-        /// <value>duration values</value>
+        /// <value>Duration values</value>
         [DataMember(Name="values", EmitDefaultValue=false)]
         public List<Duration> Values { get; set; }
 

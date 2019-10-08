@@ -86,7 +86,7 @@ namespace InfluxDB.Client
             {
                 ExceptionFactory = _exceptionFactory
             };
-            
+
             return new QueryApi(_options, service);
         }
 
@@ -244,6 +244,48 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
+        /// Get the <see cref="InfluxDB.Client.Api.Domain.NotificationEndpoint" /> client.
+        /// </summary>
+        /// <returns>the new client instance for NotificationEndpoint API</returns>
+        public NotificationEndpointsApi GetNotificationEndpointsApi()
+        {
+            var service = new NotificationEndpointsService((Configuration) _apiClient.Configuration)
+            {
+                ExceptionFactory = _exceptionFactory
+            };
+
+            return new NotificationEndpointsApi(service);
+        }
+
+        /// <summary>
+        /// Get the <see cref="InfluxDB.Client.Api.Domain.NotificationRules" /> client.
+        /// </summary>
+        /// <returns>the new client instance for NotificationRules API</returns>
+        public NotificationRulesApi GetNotificationRulesApi()
+        {
+            var service = new NotificationRulesService((Configuration) _apiClient.Configuration)
+            {
+                ExceptionFactory = _exceptionFactory
+            };
+
+            return new NotificationRulesApi(service);
+        }
+
+        /// <summary>
+        /// Get the <see cref="InfluxDB.Client.Api.Domain.Check" /> client.
+        /// </summary>
+        /// <returns>the new client instance for Checks API</returns>
+        public ChecksApi GetChecksApi()
+        {
+            var service = new ChecksService((Configuration) _apiClient.Configuration)
+            {
+                ExceptionFactory = _exceptionFactory
+            };
+
+            return new ChecksApi(service);
+        }
+
+        /// <summary>
         /// Set the log level for the request and response information.
         /// </summary>
         /// <param name="logLevel">the log level to set</param>
@@ -272,10 +314,10 @@ namespace InfluxDB.Client
         public InfluxDBClient EnableGzip()
         {
             _gzipHandler.EnableGzip();
-            
+
             return this;
         }
-        
+
         /// <summary>
         /// Disable Gzip compress for http request body.
         /// </summary>
@@ -283,10 +325,10 @@ namespace InfluxDB.Client
         public InfluxDBClient DisableGzip()
         {
             _gzipHandler.DisableGzip();
-            
+
             return this;
         }
-        
+
         /// <summary>
         /// Returns whether Gzip compress for http request body is enabled.
         /// </summary>
@@ -346,12 +388,12 @@ namespace InfluxDB.Client
 
             return await isOnboardingAllowed;
         }
-        
+
         internal static string AuthorizationHeader(string username, string password)
         {
             return "Basic " + Convert.ToBase64String(Encoding.Default.GetBytes(username + ":" + password));
         }
-        
+
         internal static async Task<HealthCheck> GetHealthAsync(Task<HealthCheck> task)
         {
             Arguments.CheckNotNull(task, nameof(task));
@@ -361,7 +403,8 @@ namespace InfluxDB.Client
                 {
                     if (t.Exception != null)
                     {
-                        return new HealthCheck("influxdb", t.Exception?.Message, default(List<HealthCheck>), HealthCheck.StatusEnum.Fail);
+                        return new HealthCheck("influxdb", t.Exception?.Message, default(List<HealthCheck>),
+                            HealthCheck.StatusEnum.Fail);
                     }
 
                     return t.Result;

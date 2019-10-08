@@ -19,6 +19,7 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using JsonSubTypes;
 using OpenAPIDateConverter = InfluxDB.Client.Api.Client.OpenAPIDateConverter;
 
 namespace InfluxDB.Client.Api.Domain
@@ -27,6 +28,10 @@ namespace InfluxDB.Client.Api.Domain
     /// Threshold
     /// </summary>
     [DataContract]
+    [JsonConverter(typeof(JsonSubtypes), "Type")]
+    [JsonSubtypes.KnownSubType(typeof(RangeThreshold), "range")]
+    [JsonSubtypes.KnownSubType(typeof(LesserThreshold), "lesser")]
+    [JsonSubtypes.KnownSubType(typeof(GreaterThreshold), "greater")]
     public partial class Threshold : ThresholdBase,  IEquatable<Threshold>
     {
         /// <summary>

@@ -30,9 +30,9 @@ namespace InfluxDB.Client.Api.Domain
     public partial class Organization :  IEquatable<Organization>
     {
         /// <summary>
-        /// if inactive the organization is inactive.
+        /// If inactive the organization is inactive.
         /// </summary>
-        /// <value>if inactive the organization is inactive.</value>
+        /// <value>If inactive the organization is inactive.</value>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum StatusEnum
         {
@@ -51,9 +51,9 @@ namespace InfluxDB.Client.Api.Domain
         }
 
         /// <summary>
-        /// if inactive the organization is inactive.
+        /// If inactive the organization is inactive.
         /// </summary>
-        /// <value>if inactive the organization is inactive.</value>
+        /// <value>If inactive the organization is inactive.</value>
         [DataMember(Name="status", EmitDefaultValue=false)]
         public StatusEnum? Status { get; set; }
         /// <summary>
@@ -67,7 +67,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="links">links.</param>
         /// <param name="name">name (required).</param>
         /// <param name="description">description.</param>
-        /// <param name="status">if inactive the organization is inactive. (default to StatusEnum.Active).</param>
+        /// <param name="status">If inactive the organization is inactive. (default to StatusEnum.Active).</param>
         public Organization(OrganizationLinks links = default(OrganizationLinks), string name = default(string), string description = default(string), StatusEnum? status = StatusEnum.Active)
         {
             // to ensure "name" is required (not null)

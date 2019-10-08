@@ -24,7 +24,7 @@ using OpenAPIDateConverter = InfluxDB.Client.Api.Client.OpenAPIDateConverter;
 namespace InfluxDB.Client.Api.Domain
 {
     /// <summary>
-    /// a pair consisting of length of time and the unit of time measured. It is the atomic unit from which all duration literals are composed.
+    /// A pair consisting of length of time and the unit of time measured. It is the atomic unit from which all duration literals are composed.
     /// </summary>
     [DataContract]
     public partial class Duration :  IEquatable<Duration>
@@ -32,7 +32,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <summary>
         /// Initializes a new instance of the <see cref="Duration" /> class.
         /// </summary>
-        /// <param name="type">type of AST node.</param>
+        /// <param name="type">Type of AST node.</param>
         /// <param name="magnitude">magnitude.</param>
         /// <param name="unit">unit.</param>
         public Duration(string type = default(string), int? magnitude = default(int?), string unit = default(string))
@@ -43,9 +43,9 @@ namespace InfluxDB.Client.Api.Domain
         }
 
         /// <summary>
-        /// type of AST node
+        /// Type of AST node
         /// </summary>
-        /// <value>type of AST node</value>
+        /// <value>Type of AST node</value>
         [DataMember(Name="type", EmitDefaultValue=false)]
         public string Type { get; set; }
 

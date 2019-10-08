@@ -25,100 +25,100 @@ namespace InfluxDB.Client.Api.Service
     {
         #region Synchronous Operations
         /// <summary>
-        /// delete a telegraf config
+        /// Delete a Telegraf config
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of telegraf config</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
         void DeleteTelegrafsID (string telegrafID, string zapTraceSpan = null);
 
         /// <summary>
-        /// delete a telegraf config
+        /// Delete a Telegraf config
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of telegraf config</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> DeleteTelegrafsIDWithHttpInfo (string telegrafID, string zapTraceSpan = null);
         /// <summary>
-        /// delete a label from a telegraf config
+        /// Delete a label from a Telegraf config
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
-        /// <param name="labelID">the label ID</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
+        /// <param name="labelID">The label ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
         void DeleteTelegrafsIDLabelsID (string telegrafID, string labelID, string zapTraceSpan = null);
 
         /// <summary>
-        /// delete a label from a telegraf config
+        /// Delete a label from a Telegraf config
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
-        /// <param name="labelID">the label ID</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
+        /// <param name="labelID">The label ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> DeleteTelegrafsIDLabelsIDWithHttpInfo (string telegrafID, string labelID, string zapTraceSpan = null);
         /// <summary>
-        /// removes a member from a telegraf config
+        /// Remove a member from a Telegraf config
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="telegrafID">ID of the telegraf</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
         void DeleteTelegrafsIDMembersID (string userID, string telegrafID, string zapTraceSpan = null);
 
         /// <summary>
-        /// removes a member from a telegraf config
+        /// Remove a member from a Telegraf config
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="telegrafID">ID of the telegraf</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> DeleteTelegrafsIDMembersIDWithHttpInfo (string userID, string telegrafID, string zapTraceSpan = null);
         /// <summary>
-        /// removes an owner from a telegraf config
+        /// Remove an owner from a Telegraf config
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="telegrafID">ID of the telegraf config</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
         void DeleteTelegrafsIDOwnersID (string userID, string telegrafID, string zapTraceSpan = null);
 
         /// <summary>
-        /// removes an owner from a telegraf config
+        /// Remove an owner from a Telegraf config
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="telegrafID">ID of the telegraf config</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> DeleteTelegrafsIDOwnersIDWithHttpInfo (string userID, string telegrafID, string zapTraceSpan = null);
@@ -130,7 +130,7 @@ namespace InfluxDB.Client.Api.Service
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="orgID">specifies the organization of the resource (optional)</param>
+        /// <param name="orgID">The organization ID the Telegraf config belongs to. (optional)</param>
         /// <returns>Telegrafs</returns>
         Telegrafs GetTelegrafs (string zapTraceSpan = null, string orgID = null);
 
@@ -142,348 +142,348 @@ namespace InfluxDB.Client.Api.Service
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="orgID">specifies the organization of the resource (optional)</param>
+        /// <param name="orgID">The organization ID the Telegraf config belongs to. (optional)</param>
         /// <returns>ApiResponse of Telegrafs</returns>
         ApiResponse<Telegrafs> GetTelegrafsWithHttpInfo (string zapTraceSpan = null, string orgID = null);
         /// <summary>
-        /// Retrieve a telegraf config
+        /// Retrieve a Telegraf config
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of telegraf config</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="accept"> (optional, default to application/toml)</param>
         /// <returns>string</returns>
         string GetTelegrafsID (string telegrafID, string zapTraceSpan = null, string accept = null);
 
         /// <summary>
-        /// Retrieve a telegraf config
+        /// Retrieve a Telegraf config
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of telegraf config</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="accept"> (optional, default to application/toml)</param>
         /// <returns>ApiResponse of string</returns>
         ApiResponse<string> GetTelegrafsIDWithHttpInfo (string telegrafID, string zapTraceSpan = null, string accept = null);
         /// <summary>
-        /// Retrieve a telegraf config
+        /// Retrieve a Telegraf config
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of telegraf config</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="accept"> (optional, default to application/toml)</param>
         /// <returns>string</returns>
         string GetTelegrafsIDstring (string telegrafID, string zapTraceSpan = null, string accept = null);
 
         /// <summary>
-        /// Retrieve a telegraf config
+        /// Retrieve a Telegraf config
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of telegraf config</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="accept"> (optional, default to application/toml)</param>
         /// <returns>ApiResponse of string</returns>
         ApiResponse<string> GetTelegrafsIDstringWithHttpInfo (string telegrafID, string zapTraceSpan = null, string accept = null);
         /// <summary>
-        /// list all labels for a telegraf config
+        /// List all labels for a Telegraf config
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>LabelsResponse</returns>
         LabelsResponse GetTelegrafsIDLabels (string telegrafID, string zapTraceSpan = null);
 
         /// <summary>
-        /// list all labels for a telegraf config
+        /// List all labels for a Telegraf config
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelsResponse</returns>
         ApiResponse<LabelsResponse> GetTelegrafsIDLabelsWithHttpInfo (string telegrafID, string zapTraceSpan = null);
         /// <summary>
-        /// List all users with member privileges for a telegraf config
+        /// List all users with member privileges for a Telegraf config
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ResourceMembers</returns>
         ResourceMembers GetTelegrafsIDMembers (string telegrafID, string zapTraceSpan = null);
 
         /// <summary>
-        /// List all users with member privileges for a telegraf config
+        /// List all users with member privileges for a Telegraf config
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMembers</returns>
         ApiResponse<ResourceMembers> GetTelegrafsIDMembersWithHttpInfo (string telegrafID, string zapTraceSpan = null);
         /// <summary>
-        /// List all owners of a telegraf config
+        /// List all owners of a Telegraf config
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ResourceOwners</returns>
         ResourceOwners GetTelegrafsIDOwners (string telegrafID, string zapTraceSpan = null);
 
         /// <summary>
-        /// List all owners of a telegraf config
+        /// List all owners of a Telegraf config
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwners</returns>
         ApiResponse<ResourceOwners> GetTelegrafsIDOwnersWithHttpInfo (string telegrafID, string zapTraceSpan = null);
         /// <summary>
-        /// Create a telegraf config
+        /// Create a Telegraf config
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafRequest">telegraf config to create</param>
+        /// <param name="telegrafRequest">Telegraf config to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Telegraf</returns>
         Telegraf PostTelegrafs (TelegrafRequest telegrafRequest, string zapTraceSpan = null);
 
         /// <summary>
-        /// Create a telegraf config
+        /// Create a Telegraf config
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafRequest">telegraf config to create</param>
+        /// <param name="telegrafRequest">Telegraf config to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Telegraf</returns>
         ApiResponse<Telegraf> PostTelegrafsWithHttpInfo (TelegrafRequest telegrafRequest, string zapTraceSpan = null);
         /// <summary>
-        /// add a label to a telegraf config
+        /// Add a label to a Telegraf config
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>LabelResponse</returns>
         LabelResponse PostTelegrafsIDLabels (string telegrafID, LabelMapping labelMapping, string zapTraceSpan = null);
 
         /// <summary>
-        /// add a label to a telegraf config
+        /// Add a label to a Telegraf config
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelResponse</returns>
         ApiResponse<LabelResponse> PostTelegrafsIDLabelsWithHttpInfo (string telegrafID, LabelMapping labelMapping, string zapTraceSpan = null);
         /// <summary>
-        /// Add telegraf config member
+        /// Add a member to a Telegraf config
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ResourceMember</returns>
         ResourceMember PostTelegrafsIDMembers (string telegrafID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
 
         /// <summary>
-        /// Add telegraf config member
+        /// Add a member to a Telegraf config
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMember</returns>
         ApiResponse<ResourceMember> PostTelegrafsIDMembersWithHttpInfo (string telegrafID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
         /// <summary>
-        /// Add telegraf config owner
+        /// Add an owner to a Telegraf config
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ResourceOwner</returns>
         ResourceOwner PostTelegrafsIDOwners (string telegrafID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
 
         /// <summary>
-        /// Add telegraf config owner
+        /// Add an owner to a Telegraf config
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwner</returns>
         ApiResponse<ResourceOwner> PostTelegrafsIDOwnersWithHttpInfo (string telegrafID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
         /// <summary>
-        /// Update a telegraf config
+        /// Update a Telegraf config
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of telegraf config</param>
-        /// <param name="telegrafRequest">telegraf config update to apply</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
+        /// <param name="telegrafRequest">Telegraf config update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Telegraf</returns>
         Telegraf PutTelegrafsID (string telegrafID, TelegrafRequest telegrafRequest, string zapTraceSpan = null);
 
         /// <summary>
-        /// Update a telegraf config
+        /// Update a Telegraf config
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of telegraf config</param>
-        /// <param name="telegrafRequest">telegraf config update to apply</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
+        /// <param name="telegrafRequest">Telegraf config update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Telegraf</returns>
         ApiResponse<Telegraf> PutTelegrafsIDWithHttpInfo (string telegrafID, TelegrafRequest telegrafRequest, string zapTraceSpan = null);
         #endregion Synchronous Operations
         #region Asynchronous Operations
         /// <summary>
-        /// delete a telegraf config
+        /// Delete a Telegraf config
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of telegraf config</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
         System.Threading.Tasks.Task DeleteTelegrafsIDAsync (string telegrafID, string zapTraceSpan = null);
 
         /// <summary>
-        /// delete a telegraf config
+        /// Delete a Telegraf config
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of telegraf config</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         System.Threading.Tasks.Task<ApiResponse<Object>> DeleteTelegrafsIDAsyncWithHttpInfo (string telegrafID, string zapTraceSpan = null);
         /// <summary>
-        /// delete a label from a telegraf config
+        /// Delete a label from a Telegraf config
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
-        /// <param name="labelID">the label ID</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
+        /// <param name="labelID">The label ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
         System.Threading.Tasks.Task DeleteTelegrafsIDLabelsIDAsync (string telegrafID, string labelID, string zapTraceSpan = null);
 
         /// <summary>
-        /// delete a label from a telegraf config
+        /// Delete a label from a Telegraf config
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
-        /// <param name="labelID">the label ID</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
+        /// <param name="labelID">The label ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         System.Threading.Tasks.Task<ApiResponse<Object>> DeleteTelegrafsIDLabelsIDAsyncWithHttpInfo (string telegrafID, string labelID, string zapTraceSpan = null);
         /// <summary>
-        /// removes a member from a telegraf config
+        /// Remove a member from a Telegraf config
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="telegrafID">ID of the telegraf</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
         System.Threading.Tasks.Task DeleteTelegrafsIDMembersIDAsync (string userID, string telegrafID, string zapTraceSpan = null);
 
         /// <summary>
-        /// removes a member from a telegraf config
+        /// Remove a member from a Telegraf config
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="telegrafID">ID of the telegraf</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         System.Threading.Tasks.Task<ApiResponse<Object>> DeleteTelegrafsIDMembersIDAsyncWithHttpInfo (string userID, string telegrafID, string zapTraceSpan = null);
         /// <summary>
-        /// removes an owner from a telegraf config
+        /// Remove an owner from a Telegraf config
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="telegrafID">ID of the telegraf config</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
         System.Threading.Tasks.Task DeleteTelegrafsIDOwnersIDAsync (string userID, string telegrafID, string zapTraceSpan = null);
 
         /// <summary>
-        /// removes an owner from a telegraf config
+        /// Remove an owner from a Telegraf config
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="telegrafID">ID of the telegraf config</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         System.Threading.Tasks.Task<ApiResponse<Object>> DeleteTelegrafsIDOwnersIDAsyncWithHttpInfo (string userID, string telegrafID, string zapTraceSpan = null);
@@ -495,7 +495,7 @@ namespace InfluxDB.Client.Api.Service
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="orgID">specifies the organization of the resource (optional)</param>
+        /// <param name="orgID">The organization ID the Telegraf config belongs to. (optional)</param>
         /// <returns>Task of Telegrafs</returns>
         System.Threading.Tasks.Task<Telegrafs> GetTelegrafsAsync (string zapTraceSpan = null, string orgID = null);
 
@@ -507,248 +507,248 @@ namespace InfluxDB.Client.Api.Service
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="orgID">specifies the organization of the resource (optional)</param>
+        /// <param name="orgID">The organization ID the Telegraf config belongs to. (optional)</param>
         /// <returns>Task of ApiResponse (Telegrafs)</returns>
         System.Threading.Tasks.Task<ApiResponse<Telegrafs>> GetTelegrafsAsyncWithHttpInfo (string zapTraceSpan = null, string orgID = null);
         /// <summary>
-        /// Retrieve a telegraf config
+        /// Retrieve a Telegraf config
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of telegraf config</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="accept"> (optional, default to application/toml)</param>
         /// <returns>Task of string</returns>
         System.Threading.Tasks.Task<string> GetTelegrafsIDAsync (string telegrafID, string zapTraceSpan = null, string accept = null);
 
         /// <summary>
-        /// Retrieve a telegraf config
+        /// Retrieve a Telegraf config
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of telegraf config</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="accept"> (optional, default to application/toml)</param>
         /// <returns>Task of ApiResponse (string)</returns>
         System.Threading.Tasks.Task<ApiResponse<string>> GetTelegrafsIDAsyncWithHttpInfo (string telegrafID, string zapTraceSpan = null, string accept = null);
         /// <summary>
-        /// Retrieve a telegraf config
+        /// Retrieve a Telegraf config
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of telegraf config</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="accept"> (optional, default to application/toml)</param>
         /// <returns>Task of string</returns>
         System.Threading.Tasks.Task<string> GetTelegrafsIDstringAsync (string telegrafID, string zapTraceSpan = null, string accept = null);
 
         /// <summary>
-        /// Retrieve a telegraf config
+        /// Retrieve a Telegraf config
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of telegraf config</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="accept"> (optional, default to application/toml)</param>
         /// <returns>Task of ApiResponse (string)</returns>
         System.Threading.Tasks.Task<ApiResponse<string>> GetTelegrafsIDstringAsyncWithHttpInfo (string telegrafID, string zapTraceSpan = null, string accept = null);
         /// <summary>
-        /// list all labels for a telegraf config
+        /// List all labels for a Telegraf config
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of LabelsResponse</returns>
         System.Threading.Tasks.Task<LabelsResponse> GetTelegrafsIDLabelsAsync (string telegrafID, string zapTraceSpan = null);
 
         /// <summary>
-        /// list all labels for a telegraf config
+        /// List all labels for a Telegraf config
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (LabelsResponse)</returns>
         System.Threading.Tasks.Task<ApiResponse<LabelsResponse>> GetTelegrafsIDLabelsAsyncWithHttpInfo (string telegrafID, string zapTraceSpan = null);
         /// <summary>
-        /// List all users with member privileges for a telegraf config
+        /// List all users with member privileges for a Telegraf config
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ResourceMembers</returns>
         System.Threading.Tasks.Task<ResourceMembers> GetTelegrafsIDMembersAsync (string telegrafID, string zapTraceSpan = null);
 
         /// <summary>
-        /// List all users with member privileges for a telegraf config
+        /// List all users with member privileges for a Telegraf config
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (ResourceMembers)</returns>
         System.Threading.Tasks.Task<ApiResponse<ResourceMembers>> GetTelegrafsIDMembersAsyncWithHttpInfo (string telegrafID, string zapTraceSpan = null);
         /// <summary>
-        /// List all owners of a telegraf config
+        /// List all owners of a Telegraf config
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ResourceOwners</returns>
         System.Threading.Tasks.Task<ResourceOwners> GetTelegrafsIDOwnersAsync (string telegrafID, string zapTraceSpan = null);
 
         /// <summary>
-        /// List all owners of a telegraf config
+        /// List all owners of a Telegraf config
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (ResourceOwners)</returns>
         System.Threading.Tasks.Task<ApiResponse<ResourceOwners>> GetTelegrafsIDOwnersAsyncWithHttpInfo (string telegrafID, string zapTraceSpan = null);
         /// <summary>
-        /// Create a telegraf config
+        /// Create a Telegraf config
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafRequest">telegraf config to create</param>
+        /// <param name="telegrafRequest">Telegraf config to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of Telegraf</returns>
         System.Threading.Tasks.Task<Telegraf> PostTelegrafsAsync (TelegrafRequest telegrafRequest, string zapTraceSpan = null);
 
         /// <summary>
-        /// Create a telegraf config
+        /// Create a Telegraf config
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafRequest">telegraf config to create</param>
+        /// <param name="telegrafRequest">Telegraf config to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (Telegraf)</returns>
         System.Threading.Tasks.Task<ApiResponse<Telegraf>> PostTelegrafsAsyncWithHttpInfo (TelegrafRequest telegrafRequest, string zapTraceSpan = null);
         /// <summary>
-        /// add a label to a telegraf config
+        /// Add a label to a Telegraf config
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of LabelResponse</returns>
         System.Threading.Tasks.Task<LabelResponse> PostTelegrafsIDLabelsAsync (string telegrafID, LabelMapping labelMapping, string zapTraceSpan = null);
 
         /// <summary>
-        /// add a label to a telegraf config
+        /// Add a label to a Telegraf config
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (LabelResponse)</returns>
         System.Threading.Tasks.Task<ApiResponse<LabelResponse>> PostTelegrafsIDLabelsAsyncWithHttpInfo (string telegrafID, LabelMapping labelMapping, string zapTraceSpan = null);
         /// <summary>
-        /// Add telegraf config member
+        /// Add a member to a Telegraf config
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ResourceMember</returns>
         System.Threading.Tasks.Task<ResourceMember> PostTelegrafsIDMembersAsync (string telegrafID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
 
         /// <summary>
-        /// Add telegraf config member
+        /// Add a member to a Telegraf config
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (ResourceMember)</returns>
         System.Threading.Tasks.Task<ApiResponse<ResourceMember>> PostTelegrafsIDMembersAsyncWithHttpInfo (string telegrafID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
         /// <summary>
-        /// Add telegraf config owner
+        /// Add an owner to a Telegraf config
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ResourceOwner</returns>
         System.Threading.Tasks.Task<ResourceOwner> PostTelegrafsIDOwnersAsync (string telegrafID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
 
         /// <summary>
-        /// Add telegraf config owner
+        /// Add an owner to a Telegraf config
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (ResourceOwner)</returns>
         System.Threading.Tasks.Task<ApiResponse<ResourceOwner>> PostTelegrafsIDOwnersAsyncWithHttpInfo (string telegrafID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
         /// <summary>
-        /// Update a telegraf config
+        /// Update a Telegraf config
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of telegraf config</param>
-        /// <param name="telegrafRequest">telegraf config update to apply</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
+        /// <param name="telegrafRequest">Telegraf config update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of Telegraf</returns>
         System.Threading.Tasks.Task<Telegraf> PutTelegrafsIDAsync (string telegrafID, TelegrafRequest telegrafRequest, string zapTraceSpan = null);
 
         /// <summary>
-        /// Update a telegraf config
+        /// Update a Telegraf config
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of telegraf config</param>
-        /// <param name="telegrafRequest">telegraf config update to apply</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
+        /// <param name="telegrafRequest">Telegraf config update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (Telegraf)</returns>
         System.Threading.Tasks.Task<ApiResponse<Telegraf>> PutTelegrafsIDAsyncWithHttpInfo (string telegrafID, TelegrafRequest telegrafRequest, string zapTraceSpan = null);
@@ -853,10 +853,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// delete a telegraf config 
+        /// Delete a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of telegraf config</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
         public void DeleteTelegrafsID (string telegrafID, string zapTraceSpan = null)
@@ -865,10 +865,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// delete a telegraf config 
+        /// Delete a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of telegraf config</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public ApiResponse<Object> DeleteTelegrafsIDWithHttpInfo (string telegrafID, string zapTraceSpan = null)
@@ -922,10 +922,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// delete a telegraf config 
+        /// Delete a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of telegraf config</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> DeleteTelegrafsIDWithIRestResponseAsync (string telegrafID, string zapTraceSpan = null)
@@ -977,10 +977,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// delete a telegraf config 
+        /// Delete a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of telegraf config</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public IRestResponse DeleteTelegrafsIDWithIRestResponse (string telegrafID, string zapTraceSpan = null)
@@ -1032,10 +1032,10 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// delete a telegraf config 
+        /// Delete a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of telegraf config</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public RestRequest DeleteTelegrafsIDWithRestRequest (string telegrafID, string zapTraceSpan = null)
@@ -1076,10 +1076,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// delete a telegraf config 
+        /// Delete a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of telegraf config</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
         public async System.Threading.Tasks.Task DeleteTelegrafsIDAsync (string telegrafID, string zapTraceSpan = null)
@@ -1089,10 +1089,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// delete a telegraf config 
+        /// Delete a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of telegraf config</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteTelegrafsIDAsyncWithHttpInfo (string telegrafID, string zapTraceSpan = null)
@@ -1114,10 +1114,10 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// delete a telegraf config 
+        /// Delete a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of telegraf config</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse</returns>
         public async System.Threading.Tasks.Task<IRestResponse> DeleteTelegrafsIDAsyncWithIRestResponse (string telegrafID, string zapTraceSpan = null)
@@ -1167,11 +1167,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// delete a label from a telegraf config 
+        /// Delete a label from a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
-        /// <param name="labelID">the label ID</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
+        /// <param name="labelID">The label ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
         public void DeleteTelegrafsIDLabelsID (string telegrafID, string labelID, string zapTraceSpan = null)
@@ -1180,11 +1180,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// delete a label from a telegraf config 
+        /// Delete a label from a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
-        /// <param name="labelID">the label ID</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
+        /// <param name="labelID">The label ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public ApiResponse<Object> DeleteTelegrafsIDLabelsIDWithHttpInfo (string telegrafID, string labelID, string zapTraceSpan = null)
@@ -1242,11 +1242,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// delete a label from a telegraf config 
+        /// Delete a label from a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
-        /// <param name="labelID">the label ID</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
+        /// <param name="labelID">The label ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> DeleteTelegrafsIDLabelsIDWithIRestResponseAsync (string telegrafID, string labelID, string zapTraceSpan = null)
@@ -1302,11 +1302,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// delete a label from a telegraf config 
+        /// Delete a label from a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
-        /// <param name="labelID">the label ID</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
+        /// <param name="labelID">The label ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public IRestResponse DeleteTelegrafsIDLabelsIDWithIRestResponse (string telegrafID, string labelID, string zapTraceSpan = null)
@@ -1362,11 +1362,11 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// delete a label from a telegraf config 
+        /// Delete a label from a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
-        /// <param name="labelID">the label ID</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
+        /// <param name="labelID">The label ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public RestRequest DeleteTelegrafsIDLabelsIDWithRestRequest (string telegrafID, string labelID, string zapTraceSpan = null)
@@ -1411,11 +1411,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// delete a label from a telegraf config 
+        /// Delete a label from a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
-        /// <param name="labelID">the label ID</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
+        /// <param name="labelID">The label ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
         public async System.Threading.Tasks.Task DeleteTelegrafsIDLabelsIDAsync (string telegrafID, string labelID, string zapTraceSpan = null)
@@ -1425,11 +1425,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// delete a label from a telegraf config 
+        /// Delete a label from a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
-        /// <param name="labelID">the label ID</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
+        /// <param name="labelID">The label ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteTelegrafsIDLabelsIDAsyncWithHttpInfo (string telegrafID, string labelID, string zapTraceSpan = null)
@@ -1451,11 +1451,11 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// delete a label from a telegraf config 
+        /// Delete a label from a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
-        /// <param name="labelID">the label ID</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
+        /// <param name="labelID">The label ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse</returns>
         public async System.Threading.Tasks.Task<IRestResponse> DeleteTelegrafsIDLabelsIDAsyncWithIRestResponse (string telegrafID, string labelID, string zapTraceSpan = null)
@@ -1509,11 +1509,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes a member from a telegraf config 
+        /// Remove a member from a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="telegrafID">ID of the telegraf</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
         public void DeleteTelegrafsIDMembersID (string userID, string telegrafID, string zapTraceSpan = null)
@@ -1522,11 +1522,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes a member from a telegraf config 
+        /// Remove a member from a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="telegrafID">ID of the telegraf</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public ApiResponse<Object> DeleteTelegrafsIDMembersIDWithHttpInfo (string userID, string telegrafID, string zapTraceSpan = null)
@@ -1584,11 +1584,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes a member from a telegraf config 
+        /// Remove a member from a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="telegrafID">ID of the telegraf</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> DeleteTelegrafsIDMembersIDWithIRestResponseAsync (string userID, string telegrafID, string zapTraceSpan = null)
@@ -1644,11 +1644,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes a member from a telegraf config 
+        /// Remove a member from a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="telegrafID">ID of the telegraf</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public IRestResponse DeleteTelegrafsIDMembersIDWithIRestResponse (string userID, string telegrafID, string zapTraceSpan = null)
@@ -1704,11 +1704,11 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// removes a member from a telegraf config 
+        /// Remove a member from a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="telegrafID">ID of the telegraf</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public RestRequest DeleteTelegrafsIDMembersIDWithRestRequest (string userID, string telegrafID, string zapTraceSpan = null)
@@ -1753,11 +1753,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes a member from a telegraf config 
+        /// Remove a member from a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="telegrafID">ID of the telegraf</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
         public async System.Threading.Tasks.Task DeleteTelegrafsIDMembersIDAsync (string userID, string telegrafID, string zapTraceSpan = null)
@@ -1767,11 +1767,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes a member from a telegraf config 
+        /// Remove a member from a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="telegrafID">ID of the telegraf</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteTelegrafsIDMembersIDAsyncWithHttpInfo (string userID, string telegrafID, string zapTraceSpan = null)
@@ -1793,11 +1793,11 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// removes a member from a telegraf config 
+        /// Remove a member from a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of member to remove</param>
-        /// <param name="telegrafID">ID of the telegraf</param>
+        /// <param name="userID">The ID of the member to remove.</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse</returns>
         public async System.Threading.Tasks.Task<IRestResponse> DeleteTelegrafsIDMembersIDAsyncWithIRestResponse (string userID, string telegrafID, string zapTraceSpan = null)
@@ -1851,11 +1851,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes an owner from a telegraf config 
+        /// Remove an owner from a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="telegrafID">ID of the telegraf config</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
         public void DeleteTelegrafsIDOwnersID (string userID, string telegrafID, string zapTraceSpan = null)
@@ -1864,11 +1864,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes an owner from a telegraf config 
+        /// Remove an owner from a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="telegrafID">ID of the telegraf config</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public ApiResponse<Object> DeleteTelegrafsIDOwnersIDWithHttpInfo (string userID, string telegrafID, string zapTraceSpan = null)
@@ -1926,11 +1926,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes an owner from a telegraf config 
+        /// Remove an owner from a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="telegrafID">ID of the telegraf config</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> DeleteTelegrafsIDOwnersIDWithIRestResponseAsync (string userID, string telegrafID, string zapTraceSpan = null)
@@ -1986,11 +1986,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes an owner from a telegraf config 
+        /// Remove an owner from a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="telegrafID">ID of the telegraf config</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public IRestResponse DeleteTelegrafsIDOwnersIDWithIRestResponse (string userID, string telegrafID, string zapTraceSpan = null)
@@ -2046,11 +2046,11 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// removes an owner from a telegraf config 
+        /// Remove an owner from a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="telegrafID">ID of the telegraf config</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public RestRequest DeleteTelegrafsIDOwnersIDWithRestRequest (string userID, string telegrafID, string zapTraceSpan = null)
@@ -2095,11 +2095,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes an owner from a telegraf config 
+        /// Remove an owner from a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="telegrafID">ID of the telegraf config</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
         public async System.Threading.Tasks.Task DeleteTelegrafsIDOwnersIDAsync (string userID, string telegrafID, string zapTraceSpan = null)
@@ -2109,11 +2109,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// removes an owner from a telegraf config 
+        /// Remove an owner from a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="telegrafID">ID of the telegraf config</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteTelegrafsIDOwnersIDAsyncWithHttpInfo (string userID, string telegrafID, string zapTraceSpan = null)
@@ -2135,11 +2135,11 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// removes an owner from a telegraf config 
+        /// Remove an owner from a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">ID of owner to remove</param>
-        /// <param name="telegrafID">ID of the telegraf config</param>
+        /// <param name="userID">The ID of the owner to remove.</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse</returns>
         public async System.Threading.Tasks.Task<IRestResponse> DeleteTelegrafsIDOwnersIDAsyncWithIRestResponse (string userID, string telegrafID, string zapTraceSpan = null)
@@ -2197,7 +2197,7 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="orgID">specifies the organization of the resource (optional)</param>
+        /// <param name="orgID">The organization ID the Telegraf config belongs to. (optional)</param>
         /// <returns>Telegrafs</returns>
         public Telegrafs GetTelegrafs (string zapTraceSpan = null, string orgID = null)
         {
@@ -2210,7 +2210,7 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="orgID">specifies the organization of the resource (optional)</param>
+        /// <param name="orgID">The organization ID the Telegraf config belongs to. (optional)</param>
         /// <returns>ApiResponse of Telegrafs</returns>
         public ApiResponse< Telegrafs > GetTelegrafsWithHttpInfo (string zapTraceSpan = null, string orgID = null)
         {
@@ -2264,7 +2264,7 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="orgID">specifies the organization of the resource (optional)</param>
+        /// <param name="orgID">The organization ID the Telegraf config belongs to. (optional)</param>
         /// <returns>ApiResponse of Telegrafs</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetTelegrafsWithIRestResponseAsync (string zapTraceSpan = null, string orgID = null)
         {
@@ -2316,7 +2316,7 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="orgID">specifies the organization of the resource (optional)</param>
+        /// <param name="orgID">The organization ID the Telegraf config belongs to. (optional)</param>
         /// <returns>ApiResponse of Telegrafs</returns>
         public IRestResponse GetTelegrafsWithIRestResponse (string zapTraceSpan = null, string orgID = null)
         {
@@ -2368,7 +2368,7 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="orgID">specifies the organization of the resource (optional)</param>
+        /// <param name="orgID">The organization ID the Telegraf config belongs to. (optional)</param>
         /// <returns>ApiResponse of Telegrafs</returns>
         public RestRequest GetTelegrafsWithRestRequest (string zapTraceSpan = null, string orgID = null)
         {
@@ -2409,7 +2409,7 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="orgID">specifies the organization of the resource (optional)</param>
+        /// <param name="orgID">The organization ID the Telegraf config belongs to. (optional)</param>
         /// <returns>Task of Telegrafs</returns>
         public async System.Threading.Tasks.Task<Telegrafs> GetTelegrafsAsync (string zapTraceSpan = null, string orgID = null)
         {
@@ -2423,7 +2423,7 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="orgID">specifies the organization of the resource (optional)</param>
+        /// <param name="orgID">The organization ID the Telegraf config belongs to. (optional)</param>
         /// <returns>Task of ApiResponse (Telegrafs)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Telegrafs>> GetTelegrafsAsyncWithHttpInfo (string zapTraceSpan = null, string orgID = null)
         {
@@ -2448,7 +2448,7 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="orgID">specifies the organization of the resource (optional)</param>
+        /// <param name="orgID">The organization ID the Telegraf config belongs to. (optional)</param>
         /// <returns>Task of IRestResponse (Telegrafs)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetTelegrafsAsyncWithIRestResponse (string zapTraceSpan = null, string orgID = null)
         {
@@ -2494,10 +2494,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Retrieve a telegraf config 
+        /// Retrieve a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of telegraf config</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="accept"> (optional, default to application/toml)</param>
         /// <returns>string</returns>
@@ -2508,10 +2508,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Retrieve a telegraf config 
+        /// Retrieve a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of telegraf config</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="accept"> (optional, default to application/toml)</param>
         /// <returns>ApiResponse of string</returns>
@@ -2569,10 +2569,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Retrieve a telegraf config 
+        /// Retrieve a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of telegraf config</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="accept"> (optional, default to application/toml)</param>
         /// <returns>ApiResponse of string</returns>
@@ -2628,10 +2628,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Retrieve a telegraf config 
+        /// Retrieve a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of telegraf config</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="accept"> (optional, default to application/toml)</param>
         /// <returns>ApiResponse of string</returns>
@@ -2687,10 +2687,10 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// Retrieve a telegraf config 
+        /// Retrieve a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of telegraf config</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="accept"> (optional, default to application/toml)</param>
         /// <returns>ApiResponse of string</returns>
@@ -2735,10 +2735,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Retrieve a telegraf config 
+        /// Retrieve a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of telegraf config</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="accept"> (optional, default to application/toml)</param>
         /// <returns>Task of string</returns>
@@ -2750,10 +2750,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Retrieve a telegraf config 
+        /// Retrieve a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of telegraf config</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="accept"> (optional, default to application/toml)</param>
         /// <returns>Task of ApiResponse (string)</returns>
@@ -2776,10 +2776,10 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// Retrieve a telegraf config 
+        /// Retrieve a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of telegraf config</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="accept"> (optional, default to application/toml)</param>
         /// <returns>Task of IRestResponse (string)</returns>
@@ -2833,10 +2833,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Retrieve a telegraf config 
+        /// Retrieve a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of telegraf config</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="accept"> (optional, default to application/toml)</param>
         /// <returns>string</returns>
@@ -2847,10 +2847,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Retrieve a telegraf config 
+        /// Retrieve a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of telegraf config</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="accept"> (optional, default to application/toml)</param>
         /// <returns>ApiResponse of string</returns>
@@ -2904,10 +2904,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Retrieve a telegraf config 
+        /// Retrieve a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of telegraf config</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="accept"> (optional, default to application/toml)</param>
         /// <returns>ApiResponse of string</returns>
@@ -2959,10 +2959,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Retrieve a telegraf config 
+        /// Retrieve a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of telegraf config</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="accept"> (optional, default to application/toml)</param>
         /// <returns>ApiResponse of string</returns>
@@ -3014,10 +3014,10 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// Retrieve a telegraf config 
+        /// Retrieve a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of telegraf config</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="accept"> (optional, default to application/toml)</param>
         /// <returns>ApiResponse of string</returns>
@@ -3058,10 +3058,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Retrieve a telegraf config 
+        /// Retrieve a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of telegraf config</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="accept"> (optional, default to application/toml)</param>
         /// <returns>Task of string</returns>
@@ -3073,10 +3073,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Retrieve a telegraf config 
+        /// Retrieve a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of telegraf config</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="accept"> (optional, default to application/toml)</param>
         /// <returns>Task of ApiResponse (string)</returns>
@@ -3099,10 +3099,10 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// Retrieve a telegraf config 
+        /// Retrieve a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of telegraf config</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="accept"> (optional, default to application/toml)</param>
         /// <returns>Task of IRestResponse (string)</returns>
@@ -3152,10 +3152,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// list all labels for a telegraf config 
+        /// List all labels for a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>LabelsResponse</returns>
         public LabelsResponse GetTelegrafsIDLabels (string telegrafID, string zapTraceSpan = null)
@@ -3165,10 +3165,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// list all labels for a telegraf config 
+        /// List all labels for a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelsResponse</returns>
         public ApiResponse< LabelsResponse > GetTelegrafsIDLabelsWithHttpInfo (string telegrafID, string zapTraceSpan = null)
@@ -3222,10 +3222,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// list all labels for a telegraf config 
+        /// List all labels for a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelsResponse</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetTelegrafsIDLabelsWithIRestResponseAsync (string telegrafID, string zapTraceSpan = null)
@@ -3277,10 +3277,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// list all labels for a telegraf config 
+        /// List all labels for a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelsResponse</returns>
         public IRestResponse GetTelegrafsIDLabelsWithIRestResponse (string telegrafID, string zapTraceSpan = null)
@@ -3332,10 +3332,10 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// list all labels for a telegraf config 
+        /// List all labels for a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelsResponse</returns>
         public RestRequest GetTelegrafsIDLabelsWithRestRequest (string telegrafID, string zapTraceSpan = null)
@@ -3376,10 +3376,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// list all labels for a telegraf config 
+        /// List all labels for a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of LabelsResponse</returns>
         public async System.Threading.Tasks.Task<LabelsResponse> GetTelegrafsIDLabelsAsync (string telegrafID, string zapTraceSpan = null)
@@ -3390,10 +3390,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// list all labels for a telegraf config 
+        /// List all labels for a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (LabelsResponse)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<LabelsResponse>> GetTelegrafsIDLabelsAsyncWithHttpInfo (string telegrafID, string zapTraceSpan = null)
@@ -3415,10 +3415,10 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// list all labels for a telegraf config 
+        /// List all labels for a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (LabelsResponse)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetTelegrafsIDLabelsAsyncWithIRestResponse (string telegrafID, string zapTraceSpan = null)
@@ -3468,10 +3468,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// List all users with member privileges for a telegraf config 
+        /// List all users with member privileges for a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ResourceMembers</returns>
         public ResourceMembers GetTelegrafsIDMembers (string telegrafID, string zapTraceSpan = null)
@@ -3481,10 +3481,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// List all users with member privileges for a telegraf config 
+        /// List all users with member privileges for a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMembers</returns>
         public ApiResponse< ResourceMembers > GetTelegrafsIDMembersWithHttpInfo (string telegrafID, string zapTraceSpan = null)
@@ -3538,10 +3538,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// List all users with member privileges for a telegraf config 
+        /// List all users with member privileges for a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMembers</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetTelegrafsIDMembersWithIRestResponseAsync (string telegrafID, string zapTraceSpan = null)
@@ -3593,10 +3593,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// List all users with member privileges for a telegraf config 
+        /// List all users with member privileges for a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMembers</returns>
         public IRestResponse GetTelegrafsIDMembersWithIRestResponse (string telegrafID, string zapTraceSpan = null)
@@ -3648,10 +3648,10 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// List all users with member privileges for a telegraf config 
+        /// List all users with member privileges for a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMembers</returns>
         public RestRequest GetTelegrafsIDMembersWithRestRequest (string telegrafID, string zapTraceSpan = null)
@@ -3692,10 +3692,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// List all users with member privileges for a telegraf config 
+        /// List all users with member privileges for a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ResourceMembers</returns>
         public async System.Threading.Tasks.Task<ResourceMembers> GetTelegrafsIDMembersAsync (string telegrafID, string zapTraceSpan = null)
@@ -3706,10 +3706,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// List all users with member privileges for a telegraf config 
+        /// List all users with member privileges for a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (ResourceMembers)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<ResourceMembers>> GetTelegrafsIDMembersAsyncWithHttpInfo (string telegrafID, string zapTraceSpan = null)
@@ -3731,10 +3731,10 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// List all users with member privileges for a telegraf config 
+        /// List all users with member privileges for a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (ResourceMembers)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetTelegrafsIDMembersAsyncWithIRestResponse (string telegrafID, string zapTraceSpan = null)
@@ -3784,10 +3784,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// List all owners of a telegraf config 
+        /// List all owners of a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ResourceOwners</returns>
         public ResourceOwners GetTelegrafsIDOwners (string telegrafID, string zapTraceSpan = null)
@@ -3797,10 +3797,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// List all owners of a telegraf config 
+        /// List all owners of a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwners</returns>
         public ApiResponse< ResourceOwners > GetTelegrafsIDOwnersWithHttpInfo (string telegrafID, string zapTraceSpan = null)
@@ -3854,10 +3854,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// List all owners of a telegraf config 
+        /// List all owners of a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwners</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetTelegrafsIDOwnersWithIRestResponseAsync (string telegrafID, string zapTraceSpan = null)
@@ -3909,10 +3909,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// List all owners of a telegraf config 
+        /// List all owners of a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwners</returns>
         public IRestResponse GetTelegrafsIDOwnersWithIRestResponse (string telegrafID, string zapTraceSpan = null)
@@ -3964,10 +3964,10 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// List all owners of a telegraf config 
+        /// List all owners of a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwners</returns>
         public RestRequest GetTelegrafsIDOwnersWithRestRequest (string telegrafID, string zapTraceSpan = null)
@@ -4008,10 +4008,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// List all owners of a telegraf config 
+        /// List all owners of a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ResourceOwners</returns>
         public async System.Threading.Tasks.Task<ResourceOwners> GetTelegrafsIDOwnersAsync (string telegrafID, string zapTraceSpan = null)
@@ -4022,10 +4022,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// List all owners of a telegraf config 
+        /// List all owners of a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (ResourceOwners)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<ResourceOwners>> GetTelegrafsIDOwnersAsyncWithHttpInfo (string telegrafID, string zapTraceSpan = null)
@@ -4047,10 +4047,10 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// List all owners of a telegraf config 
+        /// List all owners of a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (ResourceOwners)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetTelegrafsIDOwnersAsyncWithIRestResponse (string telegrafID, string zapTraceSpan = null)
@@ -4100,10 +4100,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Create a telegraf config 
+        /// Create a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafRequest">telegraf config to create</param>
+        /// <param name="telegrafRequest">Telegraf config to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Telegraf</returns>
         public Telegraf PostTelegrafs (TelegrafRequest telegrafRequest, string zapTraceSpan = null)
@@ -4113,10 +4113,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Create a telegraf config 
+        /// Create a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafRequest">telegraf config to create</param>
+        /// <param name="telegrafRequest">Telegraf config to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Telegraf</returns>
         public ApiResponse< Telegraf > PostTelegrafsWithHttpInfo (TelegrafRequest telegrafRequest, string zapTraceSpan = null)
@@ -4178,10 +4178,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Create a telegraf config 
+        /// Create a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafRequest">telegraf config to create</param>
+        /// <param name="telegrafRequest">Telegraf config to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Telegraf</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PostTelegrafsWithIRestResponseAsync (TelegrafRequest telegrafRequest, string zapTraceSpan = null)
@@ -4241,10 +4241,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Create a telegraf config 
+        /// Create a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafRequest">telegraf config to create</param>
+        /// <param name="telegrafRequest">Telegraf config to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Telegraf</returns>
         public IRestResponse PostTelegrafsWithIRestResponse (TelegrafRequest telegrafRequest, string zapTraceSpan = null)
@@ -4304,10 +4304,10 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// Create a telegraf config 
+        /// Create a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafRequest">telegraf config to create</param>
+        /// <param name="telegrafRequest">Telegraf config to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Telegraf</returns>
         public RestRequest PostTelegrafsWithRestRequest (TelegrafRequest telegrafRequest, string zapTraceSpan = null)
@@ -4356,10 +4356,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Create a telegraf config 
+        /// Create a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafRequest">telegraf config to create</param>
+        /// <param name="telegrafRequest">Telegraf config to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of Telegraf</returns>
         public async System.Threading.Tasks.Task<Telegraf> PostTelegrafsAsync (TelegrafRequest telegrafRequest, string zapTraceSpan = null)
@@ -4370,10 +4370,10 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Create a telegraf config 
+        /// Create a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafRequest">telegraf config to create</param>
+        /// <param name="telegrafRequest">Telegraf config to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (Telegraf)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Telegraf>> PostTelegrafsAsyncWithHttpInfo (TelegrafRequest telegrafRequest, string zapTraceSpan = null)
@@ -4395,10 +4395,10 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// Create a telegraf config 
+        /// Create a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafRequest">telegraf config to create</param>
+        /// <param name="telegrafRequest">Telegraf config to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (Telegraf)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PostTelegrafsAsyncWithIRestResponse (TelegrafRequest telegrafRequest, string zapTraceSpan = null)
@@ -4456,11 +4456,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// add a label to a telegraf config 
+        /// Add a label to a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>LabelResponse</returns>
         public LabelResponse PostTelegrafsIDLabels (string telegrafID, LabelMapping labelMapping, string zapTraceSpan = null)
@@ -4470,11 +4470,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// add a label to a telegraf config 
+        /// Add a label to a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelResponse</returns>
         public ApiResponse< LabelResponse > PostTelegrafsIDLabelsWithHttpInfo (string telegrafID, LabelMapping labelMapping, string zapTraceSpan = null)
@@ -4540,11 +4540,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// add a label to a telegraf config 
+        /// Add a label to a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelResponse</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PostTelegrafsIDLabelsWithIRestResponseAsync (string telegrafID, LabelMapping labelMapping, string zapTraceSpan = null)
@@ -4608,11 +4608,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// add a label to a telegraf config 
+        /// Add a label to a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelResponse</returns>
         public IRestResponse PostTelegrafsIDLabelsWithIRestResponse (string telegrafID, LabelMapping labelMapping, string zapTraceSpan = null)
@@ -4676,11 +4676,11 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// add a label to a telegraf config 
+        /// Add a label to a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of LabelResponse</returns>
         public RestRequest PostTelegrafsIDLabelsWithRestRequest (string telegrafID, LabelMapping labelMapping, string zapTraceSpan = null)
@@ -4733,11 +4733,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// add a label to a telegraf config 
+        /// Add a label to a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of LabelResponse</returns>
         public async System.Threading.Tasks.Task<LabelResponse> PostTelegrafsIDLabelsAsync (string telegrafID, LabelMapping labelMapping, string zapTraceSpan = null)
@@ -4748,11 +4748,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// add a label to a telegraf config 
+        /// Add a label to a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (LabelResponse)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<LabelResponse>> PostTelegrafsIDLabelsAsyncWithHttpInfo (string telegrafID, LabelMapping labelMapping, string zapTraceSpan = null)
@@ -4774,11 +4774,11 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// add a label to a telegraf config 
+        /// Add a label to a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
-        /// <param name="labelMapping">label to add</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
+        /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (LabelResponse)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PostTelegrafsIDLabelsAsyncWithIRestResponse (string telegrafID, LabelMapping labelMapping, string zapTraceSpan = null)
@@ -4840,11 +4840,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add telegraf config member 
+        /// Add a member to a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ResourceMember</returns>
         public ResourceMember PostTelegrafsIDMembers (string telegrafID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -4854,11 +4854,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add telegraf config member 
+        /// Add a member to a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMember</returns>
         public ApiResponse< ResourceMember > PostTelegrafsIDMembersWithHttpInfo (string telegrafID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -4924,11 +4924,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add telegraf config member 
+        /// Add a member to a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMember</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PostTelegrafsIDMembersWithIRestResponseAsync (string telegrafID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -4992,11 +4992,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add telegraf config member 
+        /// Add a member to a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMember</returns>
         public IRestResponse PostTelegrafsIDMembersWithIRestResponse (string telegrafID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -5060,11 +5060,11 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// Add telegraf config member 
+        /// Add a member to a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceMember</returns>
         public RestRequest PostTelegrafsIDMembersWithRestRequest (string telegrafID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -5117,11 +5117,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add telegraf config member 
+        /// Add a member to a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ResourceMember</returns>
         public async System.Threading.Tasks.Task<ResourceMember> PostTelegrafsIDMembersAsync (string telegrafID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -5132,11 +5132,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add telegraf config member 
+        /// Add a member to a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (ResourceMember)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<ResourceMember>> PostTelegrafsIDMembersAsyncWithHttpInfo (string telegrafID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -5158,11 +5158,11 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// Add telegraf config member 
+        /// Add a member to a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
-        /// <param name="addResourceMemberRequestBody">user to add as member</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (ResourceMember)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PostTelegrafsIDMembersAsyncWithIRestResponse (string telegrafID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -5224,11 +5224,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add telegraf config owner 
+        /// Add an owner to a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ResourceOwner</returns>
         public ResourceOwner PostTelegrafsIDOwners (string telegrafID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -5238,11 +5238,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add telegraf config owner 
+        /// Add an owner to a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwner</returns>
         public ApiResponse< ResourceOwner > PostTelegrafsIDOwnersWithHttpInfo (string telegrafID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -5308,11 +5308,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add telegraf config owner 
+        /// Add an owner to a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwner</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PostTelegrafsIDOwnersWithIRestResponseAsync (string telegrafID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -5376,11 +5376,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add telegraf config owner 
+        /// Add an owner to a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwner</returns>
         public IRestResponse PostTelegrafsIDOwnersWithIRestResponse (string telegrafID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -5444,11 +5444,11 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// Add telegraf config owner 
+        /// Add an owner to a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of ResourceOwner</returns>
         public RestRequest PostTelegrafsIDOwnersWithRestRequest (string telegrafID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -5501,11 +5501,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add telegraf config owner 
+        /// Add an owner to a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ResourceOwner</returns>
         public async System.Threading.Tasks.Task<ResourceOwner> PostTelegrafsIDOwnersAsync (string telegrafID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -5516,11 +5516,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Add telegraf config owner 
+        /// Add an owner to a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (ResourceOwner)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<ResourceOwner>> PostTelegrafsIDOwnersAsyncWithHttpInfo (string telegrafID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -5542,11 +5542,11 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// Add telegraf config owner 
+        /// Add an owner to a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of the telegraf config</param>
-        /// <param name="addResourceMemberRequestBody">user to add as owner</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
+        /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (ResourceOwner)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PostTelegrafsIDOwnersAsyncWithIRestResponse (string telegrafID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
@@ -5608,11 +5608,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Update a telegraf config 
+        /// Update a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of telegraf config</param>
-        /// <param name="telegrafRequest">telegraf config update to apply</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
+        /// <param name="telegrafRequest">Telegraf config update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Telegraf</returns>
         public Telegraf PutTelegrafsID (string telegrafID, TelegrafRequest telegrafRequest, string zapTraceSpan = null)
@@ -5622,11 +5622,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Update a telegraf config 
+        /// Update a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of telegraf config</param>
-        /// <param name="telegrafRequest">telegraf config update to apply</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
+        /// <param name="telegrafRequest">Telegraf config update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Telegraf</returns>
         public ApiResponse< Telegraf > PutTelegrafsIDWithHttpInfo (string telegrafID, TelegrafRequest telegrafRequest, string zapTraceSpan = null)
@@ -5692,11 +5692,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Update a telegraf config 
+        /// Update a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of telegraf config</param>
-        /// <param name="telegrafRequest">telegraf config update to apply</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
+        /// <param name="telegrafRequest">Telegraf config update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Telegraf</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PutTelegrafsIDWithIRestResponseAsync (string telegrafID, TelegrafRequest telegrafRequest, string zapTraceSpan = null)
@@ -5760,11 +5760,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Update a telegraf config 
+        /// Update a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of telegraf config</param>
-        /// <param name="telegrafRequest">telegraf config update to apply</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
+        /// <param name="telegrafRequest">Telegraf config update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Telegraf</returns>
         public IRestResponse PutTelegrafsIDWithIRestResponse (string telegrafID, TelegrafRequest telegrafRequest, string zapTraceSpan = null)
@@ -5828,11 +5828,11 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// Update a telegraf config 
+        /// Update a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of telegraf config</param>
-        /// <param name="telegrafRequest">telegraf config update to apply</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
+        /// <param name="telegrafRequest">Telegraf config update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Telegraf</returns>
         public RestRequest PutTelegrafsIDWithRestRequest (string telegrafID, TelegrafRequest telegrafRequest, string zapTraceSpan = null)
@@ -5885,11 +5885,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Update a telegraf config 
+        /// Update a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of telegraf config</param>
-        /// <param name="telegrafRequest">telegraf config update to apply</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
+        /// <param name="telegrafRequest">Telegraf config update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of Telegraf</returns>
         public async System.Threading.Tasks.Task<Telegraf> PutTelegrafsIDAsync (string telegrafID, TelegrafRequest telegrafRequest, string zapTraceSpan = null)
@@ -5900,11 +5900,11 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Update a telegraf config 
+        /// Update a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of telegraf config</param>
-        /// <param name="telegrafRequest">telegraf config update to apply</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
+        /// <param name="telegrafRequest">Telegraf config update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (Telegraf)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Telegraf>> PutTelegrafsIDAsyncWithHttpInfo (string telegrafID, TelegrafRequest telegrafRequest, string zapTraceSpan = null)
@@ -5926,11 +5926,11 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// Update a telegraf config 
+        /// Update a Telegraf config 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="telegrafID">ID of telegraf config</param>
-        /// <param name="telegrafRequest">telegraf config update to apply</param>
+        /// <param name="telegrafID">The Telegraf config ID.</param>
+        /// <param name="telegrafRequest">Telegraf config update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (Telegraf)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> PutTelegrafsIDAsyncWithIRestResponse (string telegrafID, TelegrafRequest telegrafRequest, string zapTraceSpan = null)

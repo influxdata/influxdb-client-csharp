@@ -38,7 +38,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="y">y.</param>
         /// <param name="w">w.</param>
         /// <param name="h">h.</param>
-        /// <param name="viewID">The reference to a view from the views API.</param>
+        /// <param name="viewID">The reference to a view from the views API..</param>
         public Cell(string id = default(string), CellLinks links = default(CellLinks), int? x = default(int?), int? y = default(int?), int? w = default(int?), int? h = default(int?), string viewID = default(string))
         {
             this.Id = id;
@@ -87,9 +87,9 @@ namespace InfluxDB.Client.Api.Domain
         public int? H { get; set; }
 
         /// <summary>
-        /// The reference to a view from the views API
+        /// The reference to a view from the views API.
         /// </summary>
-        /// <value>The reference to a view from the views API</value>
+        /// <value>The reference to a view from the views API.</value>
         [DataMember(Name="viewID", EmitDefaultValue=false)]
         public string ViewID { get; set; }
 

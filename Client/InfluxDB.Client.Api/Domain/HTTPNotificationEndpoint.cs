@@ -106,7 +106,8 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="method">method (required).</param>
         /// <param name="authMethod">authMethod (required).</param>
         /// <param name="contentTemplate">contentTemplate.</param>
-        public HTTPNotificationEndpoint(string url = default(string), string username = default(string), string password = default(string), string token = default(string), MethodEnum method = default(MethodEnum), AuthMethodEnum authMethod = default(AuthMethodEnum), string contentTemplate = default(string), string id = default(string), string orgID = default(string), string userID = default(string), string description = default(string), string name = default(string), StatusEnum? status = StatusEnum.Active, List<Label> labels = default(List<Label>), NotificationEndpointType type = default(NotificationEndpointType)) : base(id, orgID, userID, description, name, status, labels, type)
+        /// <param name="headers">Customized headers..</param>
+        public HTTPNotificationEndpoint(string url = default(string), string username = default(string), string password = default(string), string token = default(string), MethodEnum method = default(MethodEnum), AuthMethodEnum authMethod = default(AuthMethodEnum), string contentTemplate = default(string), Dictionary<string, string> headers = default(Dictionary<string, string>), string id = default(string), string orgID = default(string), string userID = default(string), string description = default(string), string name = default(string), StatusEnum? status = StatusEnum.Active, List<Label> labels = default(List<Label>), NotificationEndpointBaseLinks links = default(NotificationEndpointBaseLinks), NotificationEndpointType type = default(NotificationEndpointType)) : base(id, orgID, userID, description, name, status, labels, links, type)
         {
             // to ensure "url" is required (not null)
             if (url == null)
@@ -139,6 +140,7 @@ namespace InfluxDB.Client.Api.Domain
             this.Password = password;
             this.Token = token;
             this.ContentTemplate = contentTemplate;
+            this.Headers = headers;
         }
 
         /// <summary>
@@ -174,6 +176,13 @@ namespace InfluxDB.Client.Api.Domain
         public string ContentTemplate { get; set; }
 
         /// <summary>
+        /// Customized headers.
+        /// </summary>
+        /// <value>Customized headers.</value>
+        [DataMember(Name="headers", EmitDefaultValue=false)]
+        public Dictionary<string, string> Headers { get; set; }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -189,6 +198,7 @@ namespace InfluxDB.Client.Api.Domain
             sb.Append("  Method: ").Append(Method).Append("\n");
             sb.Append("  AuthMethod: ").Append(AuthMethod).Append("\n");
             sb.Append("  ContentTemplate: ").Append(ContentTemplate).Append("\n");
+            sb.Append("  Headers: ").Append(Headers).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -257,6 +267,11 @@ namespace InfluxDB.Client.Api.Domain
                     this.ContentTemplate == input.ContentTemplate ||
                     (this.ContentTemplate != null &&
                     this.ContentTemplate.Equals(input.ContentTemplate))
+                ) && base.Equals(input) && 
+                (
+                    this.Headers == input.Headers ||
+                    this.Headers != null &&
+                    this.Headers.SequenceEqual(input.Headers)
                 );
         }
 
@@ -283,6 +298,8 @@ namespace InfluxDB.Client.Api.Domain
                     hashCode = hashCode * 59 + this.AuthMethod.GetHashCode();
                 if (this.ContentTemplate != null)
                     hashCode = hashCode * 59 + this.ContentTemplate.GetHashCode();
+                if (this.Headers != null)
+                    hashCode = hashCode * 59 + this.Headers.GetHashCode();
                 return hashCode;
             }
         }
