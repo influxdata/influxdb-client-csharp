@@ -1,4 +1,4 @@
-## 1.1.0 [unreleased]
+## 1.1.0 [2019-10-11]
 
 ### Breaking Changes
 1. [#34](https://github.com/influxdata/influxdb-client-csharp/issues/34): Renamed Point class to PointData and Task class to TaskType (improving the usability of this library)
