@@ -82,7 +82,7 @@ namespace InfluxDB.Client.Test
         public void CancelRunTaskNotExist()
         {
             var message = Assert.ThrowsAsync<HttpException>(async () =>
-                await _tasksApi.CancelRunAsync("020f755c3c082000", "020f755c3c082000")).Message.ToString();
+                await _tasksApi.CancelRunAsync("020f755c3c082000", "020f755c3c082000")).Message;
 
             Assert.AreEqual("failed to cancel run: task not found", message);
         }
@@ -521,7 +521,7 @@ namespace InfluxDB.Client.Test
             Assert.Greater(DateTime.Now, run.StartedAt);
             Assert.Greater(DateTime.Now, run.FinishedAt);
             Assert.Greater(DateTime.Now, run.ScheduledFor);
-            Assert.IsNull(run.RequestedAt);
+            Assert.AreEqual(run.RequestedAt, DateTime.Parse("0001-01-01 00:00:00"));
 
             task = await _tasksApi.FindTaskByIdAsync(task.Id);
             Assert.IsNotNull(task.LatestCompleted);
