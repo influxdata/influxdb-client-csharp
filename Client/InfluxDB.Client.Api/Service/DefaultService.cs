@@ -25,6 +25,37 @@ namespace InfluxDB.Client.Api.Service
     {
         #region Synchronous Operations
         /// <summary>
+        /// delete Time series data from InfluxDB
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="deletePredicateRequest">predicate delete request</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="org">specifies the destination organization for writes (optional)</param>
+        /// <param name="bucket">specifies the destination bucket for writes (optional)</param>
+        /// <param name="orgID">specifies the organization ID of the resource (optional)</param>
+        /// <param name="bucketID">specifies the destination bucket ID for writes (optional)</param>
+        /// <returns></returns>
+        void DeletePost (DeletePredicateRequest deletePredicateRequest, string zapTraceSpan = null, string org = null, string bucket = null, string orgID = null, string bucketID = null);
+
+        /// <summary>
+        /// delete Time series data from InfluxDB
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="deletePredicateRequest">predicate delete request</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="org">specifies the destination organization for writes (optional)</param>
+        /// <param name="bucket">specifies the destination bucket for writes (optional)</param>
+        /// <param name="orgID">specifies the organization ID of the resource (optional)</param>
+        /// <param name="bucketID">specifies the destination bucket ID for writes (optional)</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        ApiResponse<Object> DeletePostWithHttpInfo (DeletePredicateRequest deletePredicateRequest, string zapTraceSpan = null, string org = null, string bucket = null, string orgID = null, string bucketID = null);
+        /// <summary>
         /// Map of all top level routes available
         /// </summary>
         /// <remarks>
@@ -91,6 +122,37 @@ namespace InfluxDB.Client.Api.Service
         ApiResponse<Object> PostSignoutWithHttpInfo (string zapTraceSpan = null);
         #endregion Synchronous Operations
         #region Asynchronous Operations
+        /// <summary>
+        /// delete Time series data from InfluxDB
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="deletePredicateRequest">predicate delete request</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="org">specifies the destination organization for writes (optional)</param>
+        /// <param name="bucket">specifies the destination bucket for writes (optional)</param>
+        /// <param name="orgID">specifies the organization ID of the resource (optional)</param>
+        /// <param name="bucketID">specifies the destination bucket ID for writes (optional)</param>
+        /// <returns>Task of void</returns>
+        System.Threading.Tasks.Task DeletePostAsync (DeletePredicateRequest deletePredicateRequest, string zapTraceSpan = null, string org = null, string bucket = null, string orgID = null, string bucketID = null);
+
+        /// <summary>
+        /// delete Time series data from InfluxDB
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="deletePredicateRequest">predicate delete request</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="org">specifies the destination organization for writes (optional)</param>
+        /// <param name="bucket">specifies the destination bucket for writes (optional)</param>
+        /// <param name="orgID">specifies the organization ID of the resource (optional)</param>
+        /// <param name="bucketID">specifies the destination bucket ID for writes (optional)</param>
+        /// <returns>Task of ApiResponse</returns>
+        System.Threading.Tasks.Task<ApiResponse<Object>> DeletePostAsyncWithHttpInfo (DeletePredicateRequest deletePredicateRequest, string zapTraceSpan = null, string org = null, string bucket = null, string orgID = null, string bucketID = null);
         /// <summary>
         /// Map of all top level routes available
         /// </summary>
@@ -254,6 +316,412 @@ namespace InfluxDB.Client.Api.Service
         public void AddDefaultHeader(string key, string value)
         {
             this.Configuration.AddDefaultHeader(key, value);
+        }
+
+        /// <summary>
+        /// delete Time series data from InfluxDB 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="deletePredicateRequest">predicate delete request</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="org">specifies the destination organization for writes (optional)</param>
+        /// <param name="bucket">specifies the destination bucket for writes (optional)</param>
+        /// <param name="orgID">specifies the organization ID of the resource (optional)</param>
+        /// <param name="bucketID">specifies the destination bucket ID for writes (optional)</param>
+        /// <returns></returns>
+        public void DeletePost (DeletePredicateRequest deletePredicateRequest, string zapTraceSpan = null, string org = null, string bucket = null, string orgID = null, string bucketID = null)
+        {
+             DeletePostWithHttpInfo(deletePredicateRequest, zapTraceSpan, org, bucket, orgID, bucketID);
+        }
+
+        /// <summary>
+        /// delete Time series data from InfluxDB 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="deletePredicateRequest">predicate delete request</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="org">specifies the destination organization for writes (optional)</param>
+        /// <param name="bucket">specifies the destination bucket for writes (optional)</param>
+        /// <param name="orgID">specifies the organization ID of the resource (optional)</param>
+        /// <param name="bucketID">specifies the destination bucket ID for writes (optional)</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        public ApiResponse<Object> DeletePostWithHttpInfo (DeletePredicateRequest deletePredicateRequest, string zapTraceSpan = null, string org = null, string bucket = null, string orgID = null, string bucketID = null)
+        {
+            // verify the required parameter 'deletePredicateRequest' is set
+            if (deletePredicateRequest == null)
+                throw new ApiException(400, "Missing required parameter 'deletePredicateRequest' when calling DefaultService->DeletePost");
+
+            var localVarPath = "/api/v2/delete";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json"
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (org != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
+            if (bucket != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "bucket", bucket)); // query parameter
+            if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+            if (bucketID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "bucketID", bucketID)); // query parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (deletePredicateRequest != null && deletePredicateRequest.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(deletePredicateRequest); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = deletePredicateRequest; // byte array
+            }
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("DeletePost", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Object>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                null);
+        }
+
+        /// <summary>
+        /// delete Time series data from InfluxDB 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="deletePredicateRequest">predicate delete request</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="org">specifies the destination organization for writes (optional)</param>
+        /// <param name="bucket">specifies the destination bucket for writes (optional)</param>
+        /// <param name="orgID">specifies the organization ID of the resource (optional)</param>
+        /// <param name="bucketID">specifies the destination bucket ID for writes (optional)</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        public async System.Threading.Tasks.Task<IRestResponse> DeletePostWithIRestResponseAsync (DeletePredicateRequest deletePredicateRequest, string zapTraceSpan = null, string org = null, string bucket = null, string orgID = null, string bucketID = null)
+        {
+            // verify the required parameter 'deletePredicateRequest' is set
+            if (deletePredicateRequest == null)
+                throw new ApiException(400, "Missing required parameter 'deletePredicateRequest' when calling DefaultService->DeletePost");
+
+            var localVarPath = "/api/v2/delete";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json"
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (org != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
+            if (bucket != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "bucket", bucket)); // query parameter
+            if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+            if (bucketID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "bucketID", bucketID)); // query parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (deletePredicateRequest != null && deletePredicateRequest.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(deletePredicateRequest); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = deletePredicateRequest; // byte array
+            }
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("DeletePost", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// delete Time series data from InfluxDB 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="deletePredicateRequest">predicate delete request</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="org">specifies the destination organization for writes (optional)</param>
+        /// <param name="bucket">specifies the destination bucket for writes (optional)</param>
+        /// <param name="orgID">specifies the organization ID of the resource (optional)</param>
+        /// <param name="bucketID">specifies the destination bucket ID for writes (optional)</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        public IRestResponse DeletePostWithIRestResponse (DeletePredicateRequest deletePredicateRequest, string zapTraceSpan = null, string org = null, string bucket = null, string orgID = null, string bucketID = null)
+        {
+            // verify the required parameter 'deletePredicateRequest' is set
+            if (deletePredicateRequest == null)
+                throw new ApiException(400, "Missing required parameter 'deletePredicateRequest' when calling DefaultService->DeletePost");
+
+            var localVarPath = "/api/v2/delete";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json"
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (org != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
+            if (bucket != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "bucket", bucket)); // query parameter
+            if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+            if (bucketID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "bucketID", bucketID)); // query parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (deletePredicateRequest != null && deletePredicateRequest.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(deletePredicateRequest); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = deletePredicateRequest; // byte array
+            }
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("DeletePost", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return localVarResponse;
+        }
+        
+        /// <summary>
+        /// delete Time series data from InfluxDB 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="deletePredicateRequest">predicate delete request</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="org">specifies the destination organization for writes (optional)</param>
+        /// <param name="bucket">specifies the destination bucket for writes (optional)</param>
+        /// <param name="orgID">specifies the organization ID of the resource (optional)</param>
+        /// <param name="bucketID">specifies the destination bucket ID for writes (optional)</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        public RestRequest DeletePostWithRestRequest (DeletePredicateRequest deletePredicateRequest, string zapTraceSpan = null, string org = null, string bucket = null, string orgID = null, string bucketID = null)
+        {
+            // verify the required parameter 'deletePredicateRequest' is set
+            if (deletePredicateRequest == null)
+                throw new ApiException(400, "Missing required parameter 'deletePredicateRequest' when calling DefaultService->DeletePost");
+
+            var localVarPath = "/api/v2/delete";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json"
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (org != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
+            if (bucket != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "bucket", bucket)); // query parameter
+            if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+            if (bucketID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "bucketID", bucketID)); // query parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (deletePredicateRequest != null && deletePredicateRequest.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(deletePredicateRequest); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = deletePredicateRequest; // byte array
+            }
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
+                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+        }
+
+        /// <summary>
+        /// delete Time series data from InfluxDB 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="deletePredicateRequest">predicate delete request</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="org">specifies the destination organization for writes (optional)</param>
+        /// <param name="bucket">specifies the destination bucket for writes (optional)</param>
+        /// <param name="orgID">specifies the organization ID of the resource (optional)</param>
+        /// <param name="bucketID">specifies the destination bucket ID for writes (optional)</param>
+        /// <returns>Task of void</returns>
+        public async System.Threading.Tasks.Task DeletePostAsync (DeletePredicateRequest deletePredicateRequest, string zapTraceSpan = null, string org = null, string bucket = null, string orgID = null, string bucketID = null)
+        {
+             await DeletePostAsyncWithHttpInfo(deletePredicateRequest, zapTraceSpan, org, bucket, orgID, bucketID);
+
+        }
+
+        /// <summary>
+        /// delete Time series data from InfluxDB 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="deletePredicateRequest">predicate delete request</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="org">specifies the destination organization for writes (optional)</param>
+        /// <param name="bucket">specifies the destination bucket for writes (optional)</param>
+        /// <param name="orgID">specifies the organization ID of the resource (optional)</param>
+        /// <param name="bucketID">specifies the destination bucket ID for writes (optional)</param>
+        /// <returns>Task of ApiResponse</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<Object>> DeletePostAsyncWithHttpInfo (DeletePredicateRequest deletePredicateRequest, string zapTraceSpan = null, string org = null, string bucket = null, string orgID = null, string bucketID = null)
+        {
+            // make the HTTP request
+            IRestResponse localVarResponse = await DeletePostAsyncWithIRestResponse(deletePredicateRequest, zapTraceSpan, org, bucket, orgID, bucketID);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("DeletePost", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Object>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                null);
+        }
+            
+        /// <summary>
+        /// delete Time series data from InfluxDB 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="deletePredicateRequest">predicate delete request</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="org">specifies the destination organization for writes (optional)</param>
+        /// <param name="bucket">specifies the destination bucket for writes (optional)</param>
+        /// <param name="orgID">specifies the organization ID of the resource (optional)</param>
+        /// <param name="bucketID">specifies the destination bucket ID for writes (optional)</param>
+        /// <returns>Task of IRestResponse</returns>
+        public async System.Threading.Tasks.Task<IRestResponse> DeletePostAsyncWithIRestResponse (DeletePredicateRequest deletePredicateRequest, string zapTraceSpan = null, string org = null, string bucket = null, string orgID = null, string bucketID = null)
+        {
+            // verify the required parameter 'deletePredicateRequest' is set
+            if (deletePredicateRequest == null)
+                throw new ApiException(400, "Missing required parameter 'deletePredicateRequest' when calling DefaultService->DeletePost");
+
+            var localVarPath = "/api/v2/delete";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json"
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (org != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
+            if (bucket != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "bucket", bucket)); // query parameter
+            if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+            if (bucketID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "bucketID", bucketID)); // query parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (deletePredicateRequest != null && deletePredicateRequest.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(deletePredicateRequest); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = deletePredicateRequest; // byte array
+            }
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("DeletePost", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return localVarResponse;
         }
 
         /// <summary>

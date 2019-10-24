@@ -259,6 +259,7 @@ namespace InfluxDB.Client.Test
         }
 
         [Test]
+        [Ignore("TODO https://github.com/influxdata/influxdb/issues/14900")]
         public async Task FindBuckets()
         {
             var size = (await _bucketsApi.FindBucketsAsync()).Count;

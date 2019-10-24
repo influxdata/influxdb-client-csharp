@@ -26,7 +26,12 @@ namespace InfluxDB.Client.Test
 
             _usersApi = Client.GetUsersApi();
 
-            (await _tasksApi.FindTasksAsync()).ForEach(async task => await _tasksApi.DeleteTaskAsync(task));
+            foreach (var task in (await _tasksApi.FindTasksAsync()).Where(task => task.Name.EndsWith("-IT")))
+                await _tasksApi.DeleteTaskAsync(task);
+
+            var organizationsApi = Client.GetOrganizationsApi();
+            foreach (var org in (await organizationsApi.FindOrganizationsAsync()).Where(org => org.Name.EndsWith("-IT")))
+                await organizationsApi.DeleteOrganizationAsync(org);
         }
 
         private const string TaskFlux = "from(bucket: \"my-bucket\")\n\t|> range(start: 0)\n\t|> last()";
@@ -521,7 +526,7 @@ namespace InfluxDB.Client.Test
             Assert.Greater(DateTime.Now, run.StartedAt);
             Assert.Greater(DateTime.Now, run.FinishedAt);
             Assert.Greater(DateTime.Now, run.ScheduledFor);
-            Assert.AreEqual(run.RequestedAt, DateTime.Parse("0001-01-01 00:00:00"));
+            Assert.IsNull(run.RequestedAt);
 
             task = await _tasksApi.FindTaskByIdAsync(task.Id);
             Assert.IsNotNull(task.LatestCompleted);

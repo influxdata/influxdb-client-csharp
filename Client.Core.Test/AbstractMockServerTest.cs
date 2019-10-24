@@ -35,7 +35,7 @@ namespace InfluxDB.Client.Core.Test
         [OneTimeTearDown]
         public void ShutdownServer()
         {
-            MockServer.Stop();
+            MockServer?.Stop();
         }
 
         protected IResponseBuilder CreateErrorResponse(string influxDbError)
