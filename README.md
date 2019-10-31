@@ -9,6 +9,8 @@
 
 This repository contains the reference C# client for the InfluxDB 2.0.
 
+### Note: This library is for use with InfluxDB 2.x. For connecting to InfluxDB 1.x instances, please use the [influxdb-csharp](https://github.com/influxdata/influxdb-csharp) client.
+
 - [Features](#features)
 - [Documentation](#documentation)
 - [How To Use](#how-to-use)
@@ -271,4 +273,4 @@ If you would like to contribute code you can do through GitHub by forking the re
 
 ## License
 
-The InfluxDB 2.0 JVM Based Clients are released under the [MIT License](https://opensource.org/licenses/MIT).
+The InfluxDB 2.0 Clients are released under the [MIT License](https://opensource.org/licenses/MIT).
