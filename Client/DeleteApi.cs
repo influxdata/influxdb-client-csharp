@@ -67,6 +67,10 @@ namespace InfluxDB.Client
         /// <param name="org">The organization of the above bucket</param>
         public async Task Delete(DeletePredicateRequest predicate, string bucket, string org)
         {
+            Arguments.CheckNotNull(predicate, "Predicate is required");
+            Arguments.CheckNonEmptyString(bucket, "Bucket is required");
+            Arguments.CheckNonEmptyString(org, "Organization is required");
+            
             await _service.DeletePostAsync(predicate, null, org, bucket, null, null);
         }
     }
