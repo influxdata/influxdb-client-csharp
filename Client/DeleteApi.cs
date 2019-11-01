@@ -26,7 +26,7 @@ namespace InfluxDB.Client
         /// <param name="stop">Stop time</param>
         /// <param name="predicate">Sql where like delete statement</param>
         /// <param name="bucket">The bucket from which data will be deleted</param>
-        /// <param name="org">The organization name of the above bucket</param>
+        /// <param name="org">The organization of the above bucket</param>
         public async Task Delete(DateTime start, DateTime stop, string predicate, Bucket bucket, Organization org)
         {
             Arguments.CheckNotNull(start, "Start is required");
@@ -45,7 +45,7 @@ namespace InfluxDB.Client
         /// <param name="stop">Stop time</param>
         /// <param name="predicate">Sql where like delete statement</param>
         /// <param name="bucket">The bucket from which data will be deleted</param>
-        /// <param name="org">The organization name of the above bucket</param>
+        /// <param name="org">The organization of the above bucket</param>
         public async Task Delete(DateTime start, DateTime stop, string predicate, string bucket, string org)
         {
             Arguments.CheckNotNull(start, "Start is required");
@@ -64,7 +64,7 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="predicate">Predicate delete request</param>
         /// <param name="bucket">The bucket from which data will be deleted</param>
-        /// <param name="org">The organization name of the above bucket</param>
+        /// <param name="org">The organization of the above bucket</param>
         public async Task Delete(DeletePredicateRequest predicate, string bucket, string org)
         {
             await _service.DeletePostAsync(predicate, null, org, bucket, null, null);
