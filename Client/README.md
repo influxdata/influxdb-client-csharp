@@ -12,6 +12,7 @@ The reference client that allows query, write and management (bucket, organizati
     - [Data Point](#by-data-point) 
     - [POCO](#by-poco)
     - [Default Tags](#default-tags)
+- [Delete data](#delete-data)    
 - [InfluxDB 2.0 Management API](#management-api)
     - sources, buckets
     - tasks
@@ -544,6 +545,35 @@ writeApi.EventHandler += (sender, eventArgs) =>
         //
     }
 };
+```
+
+## Delete Data
+
+Delete data from specified bucket:
+
+```c#
+using InfluxDB.Client;
+using InfluxDB.Client.Api.Domain;
+
+namespace Examples
+{
+    public static class WriteLineProtocol
+    {
+        private static readonly char[] Token = "".ToCharArray();
+
+        public static void Main(string[] args)
+        {
+            var influxDBClient = InfluxDBClientFactory.Create("http://localhost:9999", Token);
+
+            //
+            // Delete data
+            //
+            await influxDB.GetDeleteApi().Delete(DateTime.UtcNow.AddMinutes(-1), DateTime.Now, "", "bucket", "org");
+            
+            influxDBClient.Dispose();
+        }
+    }
+}
 ```
 
 ## Management API

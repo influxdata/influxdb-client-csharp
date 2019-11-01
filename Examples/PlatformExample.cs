@@ -117,7 +117,11 @@ namespace Examples
                     Console.WriteLine($"{fluxRecord.GetTime()}: {fluxRecord.GetValue()}");
                 });
             });
-
+            
+            //
+            // Delete data
+            //
+            await influxDB.GetDeleteApi().Delete(DateTime.UtcNow.AddMinutes(-1), DateTime.Now, "", temperatureBucket, medicalGMBH);
 
             influxDB.Dispose();
         }
