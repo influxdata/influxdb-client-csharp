@@ -284,6 +284,20 @@ namespace InfluxDB.Client
 
             return new ChecksApi(service);
         }
+        
+        /// <summary>
+        /// Get the Delete client.
+        /// </summary>
+        /// <returns>the new client instance for Delete API</returns>
+        public DeleteApi GetDeleteApi()
+        {
+            var service = new DefaultService((Configuration) _apiClient.Configuration)
+            {
+                ExceptionFactory = _exceptionFactory
+            };
+
+            return new DeleteApi(service);
+        }
 
         /// <summary>
         /// Set the log level for the request and response information.
