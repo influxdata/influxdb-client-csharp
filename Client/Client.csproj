@@ -19,6 +19,9 @@
         <PackageReleaseNotes>https://github.com/influxdata/influxdb-client-csharp/blob/master/CHANGELOG.md</PackageReleaseNotes>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
         <RootNamespace>InfluxDB.Client</RootNamespace>
+        
+        <AssemblyOriginatorKeyFile>../Keys/Key.snk</AssemblyOriginatorKeyFile>
+        <SignAssembly>true</SignAssembly>
     </PropertyGroup>
 
     <ItemGroup>

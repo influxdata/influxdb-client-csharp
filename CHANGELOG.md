@@ -3,6 +3,9 @@
 ### API
 1. [#46](https://github.com/influxdata/influxdb-client-csharp/pull/46): Updated swagger to latest version
 
+### Bugs
+1. [#45](https://github.com/influxdata/influxdb-client-csharp/issues/45): Assemblies are strong-named
+
 ## 1.2.0 [2019-11-08]
 
 ### Features

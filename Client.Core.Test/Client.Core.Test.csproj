@@ -6,6 +6,9 @@
         <IsPackable>false</IsPackable>
         <AssemblyName>InfluxDB.Client.Core.Test</AssemblyName>
         <RootNamespace>InfluxDB.Client.Core.Test</RootNamespace>
+        
+        <AssemblyOriginatorKeyFile>../Keys/Key.snk</AssemblyOriginatorKeyFile>
+        <SignAssembly>true</SignAssembly>
     </PropertyGroup>
 
     <ItemGroup>
