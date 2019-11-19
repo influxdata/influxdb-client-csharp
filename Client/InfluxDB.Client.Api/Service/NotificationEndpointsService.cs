@@ -31,9 +31,9 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="notificationEndpoint">Notification endpoint to create</param>
+        /// <param name="postNotificationEndpoint">Notification endpoint to create</param>
         /// <returns>NotificationEndpoint</returns>
-        NotificationEndpoint CreateNotificationEndpoint (NotificationEndpoint notificationEndpoint);
+        NotificationEndpoint CreateNotificationEndpoint (PostNotificationEndpoint postNotificationEndpoint);
 
         /// <summary>
         /// Add a notification endpoint
@@ -42,9 +42,9 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="notificationEndpoint">Notification endpoint to create</param>
+        /// <param name="postNotificationEndpoint">Notification endpoint to create</param>
         /// <returns>ApiResponse of NotificationEndpoint</returns>
-        ApiResponse<NotificationEndpoint> CreateNotificationEndpointWithHttpInfo (NotificationEndpoint notificationEndpoint);
+        ApiResponse<NotificationEndpoint> CreateNotificationEndpointWithHttpInfo (PostNotificationEndpoint postNotificationEndpoint);
         /// <summary>
         /// Delete a notification endpoint
         /// </summary>
@@ -250,9 +250,9 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="notificationEndpoint">Notification endpoint to create</param>
+        /// <param name="postNotificationEndpoint">Notification endpoint to create</param>
         /// <returns>Task of NotificationEndpoint</returns>
-        System.Threading.Tasks.Task<NotificationEndpoint> CreateNotificationEndpointAsync (NotificationEndpoint notificationEndpoint);
+        System.Threading.Tasks.Task<NotificationEndpoint> CreateNotificationEndpointAsync (PostNotificationEndpoint postNotificationEndpoint);
 
         /// <summary>
         /// Add a notification endpoint
@@ -261,9 +261,9 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="notificationEndpoint">Notification endpoint to create</param>
+        /// <param name="postNotificationEndpoint">Notification endpoint to create</param>
         /// <returns>Task of ApiResponse (NotificationEndpoint)</returns>
-        System.Threading.Tasks.Task<ApiResponse<NotificationEndpoint>> CreateNotificationEndpointAsyncWithHttpInfo (NotificationEndpoint notificationEndpoint);
+        System.Threading.Tasks.Task<ApiResponse<NotificationEndpoint>> CreateNotificationEndpointAsyncWithHttpInfo (PostNotificationEndpoint postNotificationEndpoint);
         /// <summary>
         /// Delete a notification endpoint
         /// </summary>
@@ -564,11 +564,11 @@ namespace InfluxDB.Client.Api.Service
         /// Add a notification endpoint 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="notificationEndpoint">Notification endpoint to create</param>
+        /// <param name="postNotificationEndpoint">Notification endpoint to create</param>
         /// <returns>NotificationEndpoint</returns>
-        public NotificationEndpoint CreateNotificationEndpoint (NotificationEndpoint notificationEndpoint)
+        public NotificationEndpoint CreateNotificationEndpoint (PostNotificationEndpoint postNotificationEndpoint)
         {
-             ApiResponse<NotificationEndpoint> localVarResponse = CreateNotificationEndpointWithHttpInfo(notificationEndpoint);
+             ApiResponse<NotificationEndpoint> localVarResponse = CreateNotificationEndpointWithHttpInfo(postNotificationEndpoint);
              return localVarResponse.Data;
         }
 
@@ -576,13 +576,13 @@ namespace InfluxDB.Client.Api.Service
         /// Add a notification endpoint 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="notificationEndpoint">Notification endpoint to create</param>
+        /// <param name="postNotificationEndpoint">Notification endpoint to create</param>
         /// <returns>ApiResponse of NotificationEndpoint</returns>
-        public ApiResponse< NotificationEndpoint > CreateNotificationEndpointWithHttpInfo (NotificationEndpoint notificationEndpoint)
+        public ApiResponse< NotificationEndpoint > CreateNotificationEndpointWithHttpInfo (PostNotificationEndpoint postNotificationEndpoint)
         {
-            // verify the required parameter 'notificationEndpoint' is set
-            if (notificationEndpoint == null)
-                throw new ApiException(400, "Missing required parameter 'notificationEndpoint' when calling NotificationEndpointsService->CreateNotificationEndpoint");
+            // verify the required parameter 'postNotificationEndpoint' is set
+            if (postNotificationEndpoint == null)
+                throw new ApiException(400, "Missing required parameter 'postNotificationEndpoint' when calling NotificationEndpointsService->CreateNotificationEndpoint");
 
             var localVarPath = "/api/v2/notificationEndpoints";
             var localVarPathParams = new Dictionary<String, String>();
@@ -598,13 +598,13 @@ namespace InfluxDB.Client.Api.Service
             };
             String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (notificationEndpoint != null && notificationEndpoint.GetType() != typeof(byte[]))
+            if (postNotificationEndpoint != null && postNotificationEndpoint.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(notificationEndpoint); // http body (model) parameter
+                localVarPostBody = this.Configuration.ApiClient.Serialize(postNotificationEndpoint); // http body (model) parameter
             }
             else
             {
-                localVarPostBody = notificationEndpoint; // byte array
+                localVarPostBody = postNotificationEndpoint; // byte array
             }
 
             // to determine the Accept header
@@ -639,13 +639,13 @@ namespace InfluxDB.Client.Api.Service
         /// Add a notification endpoint 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="notificationEndpoint">Notification endpoint to create</param>
+        /// <param name="postNotificationEndpoint">Notification endpoint to create</param>
         /// <returns>ApiResponse of NotificationEndpoint</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> CreateNotificationEndpointWithIRestResponseAsync (NotificationEndpoint notificationEndpoint)
+        public async System.Threading.Tasks.Task<IRestResponse> CreateNotificationEndpointWithIRestResponseAsync (PostNotificationEndpoint postNotificationEndpoint)
         {
-            // verify the required parameter 'notificationEndpoint' is set
-            if (notificationEndpoint == null)
-                throw new ApiException(400, "Missing required parameter 'notificationEndpoint' when calling NotificationEndpointsService->CreateNotificationEndpoint");
+            // verify the required parameter 'postNotificationEndpoint' is set
+            if (postNotificationEndpoint == null)
+                throw new ApiException(400, "Missing required parameter 'postNotificationEndpoint' when calling NotificationEndpointsService->CreateNotificationEndpoint");
 
             var localVarPath = "/api/v2/notificationEndpoints";
             var localVarPathParams = new Dictionary<String, String>();
@@ -661,13 +661,13 @@ namespace InfluxDB.Client.Api.Service
             };
             String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (notificationEndpoint != null && notificationEndpoint.GetType() != typeof(byte[]))
+            if (postNotificationEndpoint != null && postNotificationEndpoint.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(notificationEndpoint); // http body (model) parameter
+                localVarPostBody = this.Configuration.ApiClient.Serialize(postNotificationEndpoint); // http body (model) parameter
             }
             else
             {
-                localVarPostBody = notificationEndpoint; // byte array
+                localVarPostBody = postNotificationEndpoint; // byte array
             }
 
             // to determine the Accept header
@@ -700,13 +700,13 @@ namespace InfluxDB.Client.Api.Service
         /// Add a notification endpoint 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="notificationEndpoint">Notification endpoint to create</param>
+        /// <param name="postNotificationEndpoint">Notification endpoint to create</param>
         /// <returns>ApiResponse of NotificationEndpoint</returns>
-        public IRestResponse CreateNotificationEndpointWithIRestResponse (NotificationEndpoint notificationEndpoint)
+        public IRestResponse CreateNotificationEndpointWithIRestResponse (PostNotificationEndpoint postNotificationEndpoint)
         {
-            // verify the required parameter 'notificationEndpoint' is set
-            if (notificationEndpoint == null)
-                throw new ApiException(400, "Missing required parameter 'notificationEndpoint' when calling NotificationEndpointsService->CreateNotificationEndpoint");
+            // verify the required parameter 'postNotificationEndpoint' is set
+            if (postNotificationEndpoint == null)
+                throw new ApiException(400, "Missing required parameter 'postNotificationEndpoint' when calling NotificationEndpointsService->CreateNotificationEndpoint");
 
             var localVarPath = "/api/v2/notificationEndpoints";
             var localVarPathParams = new Dictionary<String, String>();
@@ -722,13 +722,13 @@ namespace InfluxDB.Client.Api.Service
             };
             String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (notificationEndpoint != null && notificationEndpoint.GetType() != typeof(byte[]))
+            if (postNotificationEndpoint != null && postNotificationEndpoint.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(notificationEndpoint); // http body (model) parameter
+                localVarPostBody = this.Configuration.ApiClient.Serialize(postNotificationEndpoint); // http body (model) parameter
             }
             else
             {
-                localVarPostBody = notificationEndpoint; // byte array
+                localVarPostBody = postNotificationEndpoint; // byte array
             }
 
             // to determine the Accept header
@@ -761,13 +761,13 @@ namespace InfluxDB.Client.Api.Service
         /// Add a notification endpoint 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="notificationEndpoint">Notification endpoint to create</param>
+        /// <param name="postNotificationEndpoint">Notification endpoint to create</param>
         /// <returns>ApiResponse of NotificationEndpoint</returns>
-        public RestRequest CreateNotificationEndpointWithRestRequest (NotificationEndpoint notificationEndpoint)
+        public RestRequest CreateNotificationEndpointWithRestRequest (PostNotificationEndpoint postNotificationEndpoint)
         {
-            // verify the required parameter 'notificationEndpoint' is set
-            if (notificationEndpoint == null)
-                throw new ApiException(400, "Missing required parameter 'notificationEndpoint' when calling NotificationEndpointsService->CreateNotificationEndpoint");
+            // verify the required parameter 'postNotificationEndpoint' is set
+            if (postNotificationEndpoint == null)
+                throw new ApiException(400, "Missing required parameter 'postNotificationEndpoint' when calling NotificationEndpointsService->CreateNotificationEndpoint");
 
             var localVarPath = "/api/v2/notificationEndpoints";
             var localVarPathParams = new Dictionary<String, String>();
@@ -783,13 +783,13 @@ namespace InfluxDB.Client.Api.Service
             };
             String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (notificationEndpoint != null && notificationEndpoint.GetType() != typeof(byte[]))
+            if (postNotificationEndpoint != null && postNotificationEndpoint.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(notificationEndpoint); // http body (model) parameter
+                localVarPostBody = this.Configuration.ApiClient.Serialize(postNotificationEndpoint); // http body (model) parameter
             }
             else
             {
-                localVarPostBody = notificationEndpoint; // byte array
+                localVarPostBody = postNotificationEndpoint; // byte array
             }
 
             // to determine the Accept header
@@ -811,11 +811,11 @@ namespace InfluxDB.Client.Api.Service
         /// Add a notification endpoint 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="notificationEndpoint">Notification endpoint to create</param>
+        /// <param name="postNotificationEndpoint">Notification endpoint to create</param>
         /// <returns>Task of NotificationEndpoint</returns>
-        public async System.Threading.Tasks.Task<NotificationEndpoint> CreateNotificationEndpointAsync (NotificationEndpoint notificationEndpoint)
+        public async System.Threading.Tasks.Task<NotificationEndpoint> CreateNotificationEndpointAsync (PostNotificationEndpoint postNotificationEndpoint)
         {
-             ApiResponse<NotificationEndpoint> localVarResponse = await CreateNotificationEndpointAsyncWithHttpInfo(notificationEndpoint);
+             ApiResponse<NotificationEndpoint> localVarResponse = await CreateNotificationEndpointAsyncWithHttpInfo(postNotificationEndpoint);
              return localVarResponse.Data;
 
         }
@@ -824,12 +824,12 @@ namespace InfluxDB.Client.Api.Service
         /// Add a notification endpoint 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="notificationEndpoint">Notification endpoint to create</param>
+        /// <param name="postNotificationEndpoint">Notification endpoint to create</param>
         /// <returns>Task of ApiResponse (NotificationEndpoint)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<NotificationEndpoint>> CreateNotificationEndpointAsyncWithHttpInfo (NotificationEndpoint notificationEndpoint)
+        public async System.Threading.Tasks.Task<ApiResponse<NotificationEndpoint>> CreateNotificationEndpointAsyncWithHttpInfo (PostNotificationEndpoint postNotificationEndpoint)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await CreateNotificationEndpointAsyncWithIRestResponse(notificationEndpoint);
+            IRestResponse localVarResponse = await CreateNotificationEndpointAsyncWithIRestResponse(postNotificationEndpoint);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -848,13 +848,13 @@ namespace InfluxDB.Client.Api.Service
         /// Add a notification endpoint 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="notificationEndpoint">Notification endpoint to create</param>
+        /// <param name="postNotificationEndpoint">Notification endpoint to create</param>
         /// <returns>Task of IRestResponse (NotificationEndpoint)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> CreateNotificationEndpointAsyncWithIRestResponse (NotificationEndpoint notificationEndpoint)
+        public async System.Threading.Tasks.Task<IRestResponse> CreateNotificationEndpointAsyncWithIRestResponse (PostNotificationEndpoint postNotificationEndpoint)
         {
-            // verify the required parameter 'notificationEndpoint' is set
-            if (notificationEndpoint == null)
-                throw new ApiException(400, "Missing required parameter 'notificationEndpoint' when calling NotificationEndpointsService->CreateNotificationEndpoint");
+            // verify the required parameter 'postNotificationEndpoint' is set
+            if (postNotificationEndpoint == null)
+                throw new ApiException(400, "Missing required parameter 'postNotificationEndpoint' when calling NotificationEndpointsService->CreateNotificationEndpoint");
 
             var localVarPath = "/api/v2/notificationEndpoints";
             var localVarPathParams = new Dictionary<String, String>();
@@ -870,13 +870,13 @@ namespace InfluxDB.Client.Api.Service
             };
             String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (notificationEndpoint != null && notificationEndpoint.GetType() != typeof(byte[]))
+            if (postNotificationEndpoint != null && postNotificationEndpoint.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(notificationEndpoint); // http body (model) parameter
+                localVarPostBody = this.Configuration.ApiClient.Serialize(postNotificationEndpoint); // http body (model) parameter
             }
             else
             {
-                localVarPostBody = notificationEndpoint; // byte array
+                localVarPostBody = postNotificationEndpoint; // byte array
             }
 
             // to determine the Accept header

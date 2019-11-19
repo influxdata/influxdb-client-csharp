@@ -1,5 +1,8 @@
 ## 1.3.0 [unreleased]
 
+### API
+1. [#46](https://github.com/influxdata/influxdb-client-csharp/pull/46): Updated swagger to latest version
+
 ## 1.2.0 [2019-11-08]
 
 ### Features

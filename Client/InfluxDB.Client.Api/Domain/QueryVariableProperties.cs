@@ -27,7 +27,7 @@ namespace InfluxDB.Client.Api.Domain
     /// QueryVariableProperties
     /// </summary>
     [DataContract]
-    public partial class QueryVariableProperties :  IEquatable<QueryVariableProperties>
+    public partial class QueryVariableProperties : VariableProperties,  IEquatable<QueryVariableProperties>
     {
         /// <summary>
         /// Defines Type
@@ -53,7 +53,7 @@ namespace InfluxDB.Client.Api.Domain
         /// </summary>
         /// <param name="type">type.</param>
         /// <param name="values">values.</param>
-        public QueryVariableProperties(TypeEnum? type = default(TypeEnum?), QueryVariablePropertiesValues values = default(QueryVariablePropertiesValues))
+        public QueryVariableProperties(TypeEnum? type = default(TypeEnum?), QueryVariablePropertiesValues values = default(QueryVariablePropertiesValues)) : base()
         {
             this.Type = type;
             this.Values = values;
@@ -74,6 +74,7 @@ namespace InfluxDB.Client.Api.Domain
         {
             var sb = new StringBuilder();
             sb.Append("class QueryVariableProperties {\n");
+            sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  Values: ").Append(Values).Append("\n");
             sb.Append("}\n");
@@ -84,7 +85,7 @@ namespace InfluxDB.Client.Api.Domain
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public virtual string ToJson()
+        public override string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }
@@ -109,12 +110,12 @@ namespace InfluxDB.Client.Api.Domain
             if (input == null)
                 return false;
 
-            return 
+            return base.Equals(input) && 
                 (
                     this.Type == input.Type ||
                     (this.Type != null &&
                     this.Type.Equals(input.Type))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     
                     (this.Values != null &&
@@ -130,7 +131,7 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
+                int hashCode = base.GetHashCode();
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.Values != null)

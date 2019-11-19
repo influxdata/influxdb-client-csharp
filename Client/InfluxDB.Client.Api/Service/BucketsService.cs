@@ -329,10 +329,10 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucket">Bucket to create</param>
+        /// <param name="postBucketRequest">Bucket to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Bucket</returns>
-        Bucket PostBuckets (Bucket bucket, string zapTraceSpan = null);
+        Bucket PostBuckets (PostBucketRequest postBucketRequest, string zapTraceSpan = null);
 
         /// <summary>
         /// Create a bucket
@@ -341,10 +341,10 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucket">Bucket to create</param>
+        /// <param name="postBucketRequest">Bucket to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Bucket</returns>
-        ApiResponse<Bucket> PostBucketsWithHttpInfo (Bucket bucket, string zapTraceSpan = null);
+        ApiResponse<Bucket> PostBucketsWithHttpInfo (PostBucketRequest postBucketRequest, string zapTraceSpan = null);
         /// <summary>
         /// Add a label to a bucket
         /// </summary>
@@ -727,10 +727,10 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucket">Bucket to create</param>
+        /// <param name="postBucketRequest">Bucket to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of Bucket</returns>
-        System.Threading.Tasks.Task<Bucket> PostBucketsAsync (Bucket bucket, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<Bucket> PostBucketsAsync (PostBucketRequest postBucketRequest, string zapTraceSpan = null);
 
         /// <summary>
         /// Create a bucket
@@ -739,10 +739,10 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucket">Bucket to create</param>
+        /// <param name="postBucketRequest">Bucket to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (Bucket)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Bucket>> PostBucketsAsyncWithHttpInfo (Bucket bucket, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<Bucket>> PostBucketsAsyncWithHttpInfo (PostBucketRequest postBucketRequest, string zapTraceSpan = null);
         /// <summary>
         /// Add a label to a bucket
         /// </summary>
@@ -4934,12 +4934,12 @@ namespace InfluxDB.Client.Api.Service
         /// Create a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucket">Bucket to create</param>
+        /// <param name="postBucketRequest">Bucket to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Bucket</returns>
-        public Bucket PostBuckets (Bucket bucket, string zapTraceSpan = null)
+        public Bucket PostBuckets (PostBucketRequest postBucketRequest, string zapTraceSpan = null)
         {
-             ApiResponse<Bucket> localVarResponse = PostBucketsWithHttpInfo(bucket, zapTraceSpan);
+             ApiResponse<Bucket> localVarResponse = PostBucketsWithHttpInfo(postBucketRequest, zapTraceSpan);
              return localVarResponse.Data;
         }
 
@@ -4947,14 +4947,14 @@ namespace InfluxDB.Client.Api.Service
         /// Create a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucket">Bucket to create</param>
+        /// <param name="postBucketRequest">Bucket to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Bucket</returns>
-        public ApiResponse< Bucket > PostBucketsWithHttpInfo (Bucket bucket, string zapTraceSpan = null)
+        public ApiResponse< Bucket > PostBucketsWithHttpInfo (PostBucketRequest postBucketRequest, string zapTraceSpan = null)
         {
-            // verify the required parameter 'bucket' is set
-            if (bucket == null)
-                throw new ApiException(400, "Missing required parameter 'bucket' when calling BucketsService->PostBuckets");
+            // verify the required parameter 'postBucketRequest' is set
+            if (postBucketRequest == null)
+                throw new ApiException(400, "Missing required parameter 'postBucketRequest' when calling BucketsService->PostBuckets");
 
             var localVarPath = "/api/v2/buckets";
             var localVarPathParams = new Dictionary<String, String>();
@@ -4971,13 +4971,13 @@ namespace InfluxDB.Client.Api.Service
             String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (bucket != null && bucket.GetType() != typeof(byte[]))
+            if (postBucketRequest != null && postBucketRequest.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(bucket); // http body (model) parameter
+                localVarPostBody = this.Configuration.ApiClient.Serialize(postBucketRequest); // http body (model) parameter
             }
             else
             {
-                localVarPostBody = bucket; // byte array
+                localVarPostBody = postBucketRequest; // byte array
             }
 
             // to determine the Accept header
@@ -5012,14 +5012,14 @@ namespace InfluxDB.Client.Api.Service
         /// Create a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucket">Bucket to create</param>
+        /// <param name="postBucketRequest">Bucket to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Bucket</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> PostBucketsWithIRestResponseAsync (Bucket bucket, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PostBucketsWithIRestResponseAsync (PostBucketRequest postBucketRequest, string zapTraceSpan = null)
         {
-            // verify the required parameter 'bucket' is set
-            if (bucket == null)
-                throw new ApiException(400, "Missing required parameter 'bucket' when calling BucketsService->PostBuckets");
+            // verify the required parameter 'postBucketRequest' is set
+            if (postBucketRequest == null)
+                throw new ApiException(400, "Missing required parameter 'postBucketRequest' when calling BucketsService->PostBuckets");
 
             var localVarPath = "/api/v2/buckets";
             var localVarPathParams = new Dictionary<String, String>();
@@ -5036,13 +5036,13 @@ namespace InfluxDB.Client.Api.Service
             String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (bucket != null && bucket.GetType() != typeof(byte[]))
+            if (postBucketRequest != null && postBucketRequest.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(bucket); // http body (model) parameter
+                localVarPostBody = this.Configuration.ApiClient.Serialize(postBucketRequest); // http body (model) parameter
             }
             else
             {
-                localVarPostBody = bucket; // byte array
+                localVarPostBody = postBucketRequest; // byte array
             }
 
             // to determine the Accept header
@@ -5075,14 +5075,14 @@ namespace InfluxDB.Client.Api.Service
         /// Create a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucket">Bucket to create</param>
+        /// <param name="postBucketRequest">Bucket to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Bucket</returns>
-        public IRestResponse PostBucketsWithIRestResponse (Bucket bucket, string zapTraceSpan = null)
+        public IRestResponse PostBucketsWithIRestResponse (PostBucketRequest postBucketRequest, string zapTraceSpan = null)
         {
-            // verify the required parameter 'bucket' is set
-            if (bucket == null)
-                throw new ApiException(400, "Missing required parameter 'bucket' when calling BucketsService->PostBuckets");
+            // verify the required parameter 'postBucketRequest' is set
+            if (postBucketRequest == null)
+                throw new ApiException(400, "Missing required parameter 'postBucketRequest' when calling BucketsService->PostBuckets");
 
             var localVarPath = "/api/v2/buckets";
             var localVarPathParams = new Dictionary<String, String>();
@@ -5099,13 +5099,13 @@ namespace InfluxDB.Client.Api.Service
             String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (bucket != null && bucket.GetType() != typeof(byte[]))
+            if (postBucketRequest != null && postBucketRequest.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(bucket); // http body (model) parameter
+                localVarPostBody = this.Configuration.ApiClient.Serialize(postBucketRequest); // http body (model) parameter
             }
             else
             {
-                localVarPostBody = bucket; // byte array
+                localVarPostBody = postBucketRequest; // byte array
             }
 
             // to determine the Accept header
@@ -5138,14 +5138,14 @@ namespace InfluxDB.Client.Api.Service
         /// Create a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucket">Bucket to create</param>
+        /// <param name="postBucketRequest">Bucket to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Bucket</returns>
-        public RestRequest PostBucketsWithRestRequest (Bucket bucket, string zapTraceSpan = null)
+        public RestRequest PostBucketsWithRestRequest (PostBucketRequest postBucketRequest, string zapTraceSpan = null)
         {
-            // verify the required parameter 'bucket' is set
-            if (bucket == null)
-                throw new ApiException(400, "Missing required parameter 'bucket' when calling BucketsService->PostBuckets");
+            // verify the required parameter 'postBucketRequest' is set
+            if (postBucketRequest == null)
+                throw new ApiException(400, "Missing required parameter 'postBucketRequest' when calling BucketsService->PostBuckets");
 
             var localVarPath = "/api/v2/buckets";
             var localVarPathParams = new Dictionary<String, String>();
@@ -5162,13 +5162,13 @@ namespace InfluxDB.Client.Api.Service
             String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (bucket != null && bucket.GetType() != typeof(byte[]))
+            if (postBucketRequest != null && postBucketRequest.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(bucket); // http body (model) parameter
+                localVarPostBody = this.Configuration.ApiClient.Serialize(postBucketRequest); // http body (model) parameter
             }
             else
             {
-                localVarPostBody = bucket; // byte array
+                localVarPostBody = postBucketRequest; // byte array
             }
 
             // to determine the Accept header
@@ -5190,12 +5190,12 @@ namespace InfluxDB.Client.Api.Service
         /// Create a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucket">Bucket to create</param>
+        /// <param name="postBucketRequest">Bucket to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of Bucket</returns>
-        public async System.Threading.Tasks.Task<Bucket> PostBucketsAsync (Bucket bucket, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<Bucket> PostBucketsAsync (PostBucketRequest postBucketRequest, string zapTraceSpan = null)
         {
-             ApiResponse<Bucket> localVarResponse = await PostBucketsAsyncWithHttpInfo(bucket, zapTraceSpan);
+             ApiResponse<Bucket> localVarResponse = await PostBucketsAsyncWithHttpInfo(postBucketRequest, zapTraceSpan);
              return localVarResponse.Data;
 
         }
@@ -5204,13 +5204,13 @@ namespace InfluxDB.Client.Api.Service
         /// Create a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucket">Bucket to create</param>
+        /// <param name="postBucketRequest">Bucket to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (Bucket)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Bucket>> PostBucketsAsyncWithHttpInfo (Bucket bucket, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<Bucket>> PostBucketsAsyncWithHttpInfo (PostBucketRequest postBucketRequest, string zapTraceSpan = null)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await PostBucketsAsyncWithIRestResponse(bucket, zapTraceSpan);
+            IRestResponse localVarResponse = await PostBucketsAsyncWithIRestResponse(postBucketRequest, zapTraceSpan);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -5229,14 +5229,14 @@ namespace InfluxDB.Client.Api.Service
         /// Create a bucket 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucket">Bucket to create</param>
+        /// <param name="postBucketRequest">Bucket to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of IRestResponse (Bucket)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> PostBucketsAsyncWithIRestResponse (Bucket bucket, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PostBucketsAsyncWithIRestResponse (PostBucketRequest postBucketRequest, string zapTraceSpan = null)
         {
-            // verify the required parameter 'bucket' is set
-            if (bucket == null)
-                throw new ApiException(400, "Missing required parameter 'bucket' when calling BucketsService->PostBuckets");
+            // verify the required parameter 'postBucketRequest' is set
+            if (postBucketRequest == null)
+                throw new ApiException(400, "Missing required parameter 'postBucketRequest' when calling BucketsService->PostBuckets");
 
             var localVarPath = "/api/v2/buckets";
             var localVarPathParams = new Dictionary<String, String>();
@@ -5253,13 +5253,13 @@ namespace InfluxDB.Client.Api.Service
             String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (bucket != null && bucket.GetType() != typeof(byte[]))
+            if (postBucketRequest != null && postBucketRequest.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(bucket); // http body (model) parameter
+                localVarPostBody = this.Configuration.ApiClient.Serialize(postBucketRequest); // http body (model) parameter
             }
             else
             {
-                localVarPostBody = bucket; // byte array
+                localVarPostBody = postBucketRequest; // byte array
             }
 
             // to determine the Accept header

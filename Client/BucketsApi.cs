@@ -29,6 +29,21 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNotNull(bucket, nameof(bucket));
 
+            var postBucket = new PostBucketRequest(orgID: bucket.OrgID, name: bucket.Name, description: bucket.Description,
+                rp: bucket.Rp, retentionRules: bucket.RetentionRules);
+
+            return await _service.PostBucketsAsync(postBucket);
+        }
+        
+        /// <summary>
+        /// Creates a new bucket and sets <see cref="Bucket.Id" /> with the new identifier.
+        /// </summary>
+        /// <param name="bucket">bucket to create</param>
+        /// <returns>created Bucket</returns>
+        public async Task<Bucket> CreateBucketAsync(PostBucketRequest bucket)
+        {
+            Arguments.CheckNotNull(bucket, nameof(bucket));
+
             return await _service.PostBucketsAsync(bucket);
         }
 

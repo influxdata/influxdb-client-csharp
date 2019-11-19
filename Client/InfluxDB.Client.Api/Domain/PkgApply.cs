@@ -24,33 +24,33 @@ using OpenAPIDateConverter = InfluxDB.Client.Api.Client.OpenAPIDateConverter;
 namespace InfluxDB.Client.Api.Domain
 {
     /// <summary>
-    /// NotificationEndpoints
+    /// PkgApply
     /// </summary>
     [DataContract]
-    public partial class NotificationEndpoints :  IEquatable<NotificationEndpoints>
+    public partial class PkgApply :  IEquatable<PkgApply>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="NotificationEndpoints" /> class.
+        /// Initializes a new instance of the <see cref="PkgApply" /> class.
         /// </summary>
-        /// <param name="notificationEndpoints">notificationEndpoints.</param>
-        /// <param name="links">links.</param>
-        public NotificationEndpoints(List<NotificationEndpoint> notificationEndpoints = default(List<NotificationEndpoint>), Links links = default(Links))
+        /// <param name="apply">apply.</param>
+        /// <param name="package">package.</param>
+        public PkgApply(bool? apply = default(bool?), Pkg package = default(Pkg))
         {
-            this._NotificationEndpoints = notificationEndpoints;
-            this.Links = links;
+            this.Apply = apply;
+            this.Package = package;
         }
 
         /// <summary>
-        /// Gets or Sets _NotificationEndpoints
+        /// Gets or Sets Apply
         /// </summary>
-        [DataMember(Name="notificationEndpoints", EmitDefaultValue=false)]
-        public List<NotificationEndpoint> _NotificationEndpoints { get; set; }
+        [DataMember(Name="apply", EmitDefaultValue=false)]
+        public bool? Apply { get; set; }
 
         /// <summary>
-        /// Gets or Sets Links
+        /// Gets or Sets Package
         /// </summary>
-        [DataMember(Name="links", EmitDefaultValue=false)]
-        public Links Links { get; set; }
+        [DataMember(Name="package", EmitDefaultValue=false)]
+        public Pkg Package { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -59,9 +59,9 @@ namespace InfluxDB.Client.Api.Domain
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class NotificationEndpoints {\n");
-            sb.Append("  _NotificationEndpoints: ").Append(_NotificationEndpoints).Append("\n");
-            sb.Append("  Links: ").Append(Links).Append("\n");
+            sb.Append("class PkgApply {\n");
+            sb.Append("  Apply: ").Append(Apply).Append("\n");
+            sb.Append("  Package: ").Append(Package).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -82,29 +82,29 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as NotificationEndpoints);
+            return this.Equals(input as PkgApply);
         }
 
         /// <summary>
-        /// Returns true if NotificationEndpoints instances are equal
+        /// Returns true if PkgApply instances are equal
         /// </summary>
-        /// <param name="input">Instance of NotificationEndpoints to be compared</param>
+        /// <param name="input">Instance of PkgApply to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(NotificationEndpoints input)
+        public bool Equals(PkgApply input)
         {
             if (input == null)
                 return false;
 
             return 
                 (
-                    this._NotificationEndpoints == input._NotificationEndpoints ||
-                    this._NotificationEndpoints != null &&
-                    this._NotificationEndpoints.SequenceEqual(input._NotificationEndpoints)
+                    this.Apply == input.Apply ||
+                    (this.Apply != null &&
+                    this.Apply.Equals(input.Apply))
                 ) && 
                 (
                     
-                    (this.Links != null &&
-                    this.Links.Equals(input.Links))
+                    (this.Package != null &&
+                    this.Package.Equals(input.Package))
                 );
         }
 
@@ -117,10 +117,10 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
-                if (this._NotificationEndpoints != null)
-                    hashCode = hashCode * 59 + this._NotificationEndpoints.GetHashCode();
-                if (this.Links != null)
-                    hashCode = hashCode * 59 + this.Links.GetHashCode();
+                if (this.Apply != null)
+                    hashCode = hashCode * 59 + this.Apply.GetHashCode();
+                if (this.Package != null)
+                    hashCode = hashCode * 59 + this.Package.GetHashCode();
                 return hashCode;
             }
         }

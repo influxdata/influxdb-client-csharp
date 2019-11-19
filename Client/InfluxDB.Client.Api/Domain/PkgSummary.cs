@@ -24,33 +24,41 @@ using OpenAPIDateConverter = InfluxDB.Client.Api.Client.OpenAPIDateConverter;
 namespace InfluxDB.Client.Api.Domain
 {
     /// <summary>
-    /// NotificationEndpoints
+    /// PkgSummary
     /// </summary>
     [DataContract]
-    public partial class NotificationEndpoints :  IEquatable<NotificationEndpoints>
+    public partial class PkgSummary :  IEquatable<PkgSummary>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="NotificationEndpoints" /> class.
+        /// Initializes a new instance of the <see cref="PkgSummary" /> class.
         /// </summary>
-        /// <param name="notificationEndpoints">notificationEndpoints.</param>
-        /// <param name="links">links.</param>
-        public NotificationEndpoints(List<NotificationEndpoint> notificationEndpoints = default(List<NotificationEndpoint>), Links links = default(Links))
+        /// <param name="summary">summary.</param>
+        /// <param name="diff">diff.</param>
+        /// <param name="errors">errors.</param>
+        public PkgSummary(PkgSummarySummary summary = default(PkgSummarySummary), PkgSummaryDiff diff = default(PkgSummaryDiff), List<PkgSummaryErrors> errors = default(List<PkgSummaryErrors>))
         {
-            this._NotificationEndpoints = notificationEndpoints;
-            this.Links = links;
+            this.Summary = summary;
+            this.Diff = diff;
+            this.Errors = errors;
         }
 
         /// <summary>
-        /// Gets or Sets _NotificationEndpoints
+        /// Gets or Sets Summary
         /// </summary>
-        [DataMember(Name="notificationEndpoints", EmitDefaultValue=false)]
-        public List<NotificationEndpoint> _NotificationEndpoints { get; set; }
+        [DataMember(Name="summary", EmitDefaultValue=false)]
+        public PkgSummarySummary Summary { get; set; }
 
         /// <summary>
-        /// Gets or Sets Links
+        /// Gets or Sets Diff
         /// </summary>
-        [DataMember(Name="links", EmitDefaultValue=false)]
-        public Links Links { get; set; }
+        [DataMember(Name="diff", EmitDefaultValue=false)]
+        public PkgSummaryDiff Diff { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Errors
+        /// </summary>
+        [DataMember(Name="errors", EmitDefaultValue=false)]
+        public List<PkgSummaryErrors> Errors { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -59,9 +67,10 @@ namespace InfluxDB.Client.Api.Domain
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class NotificationEndpoints {\n");
-            sb.Append("  _NotificationEndpoints: ").Append(_NotificationEndpoints).Append("\n");
-            sb.Append("  Links: ").Append(Links).Append("\n");
+            sb.Append("class PkgSummary {\n");
+            sb.Append("  Summary: ").Append(Summary).Append("\n");
+            sb.Append("  Diff: ").Append(Diff).Append("\n");
+            sb.Append("  Errors: ").Append(Errors).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -82,29 +91,34 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as NotificationEndpoints);
+            return this.Equals(input as PkgSummary);
         }
 
         /// <summary>
-        /// Returns true if NotificationEndpoints instances are equal
+        /// Returns true if PkgSummary instances are equal
         /// </summary>
-        /// <param name="input">Instance of NotificationEndpoints to be compared</param>
+        /// <param name="input">Instance of PkgSummary to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(NotificationEndpoints input)
+        public bool Equals(PkgSummary input)
         {
             if (input == null)
                 return false;
 
             return 
                 (
-                    this._NotificationEndpoints == input._NotificationEndpoints ||
-                    this._NotificationEndpoints != null &&
-                    this._NotificationEndpoints.SequenceEqual(input._NotificationEndpoints)
+                    
+                    (this.Summary != null &&
+                    this.Summary.Equals(input.Summary))
                 ) && 
                 (
                     
-                    (this.Links != null &&
-                    this.Links.Equals(input.Links))
+                    (this.Diff != null &&
+                    this.Diff.Equals(input.Diff))
+                ) && 
+                (
+                    this.Errors == input.Errors ||
+                    this.Errors != null &&
+                    this.Errors.SequenceEqual(input.Errors)
                 );
         }
 
@@ -117,10 +131,12 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
-                if (this._NotificationEndpoints != null)
-                    hashCode = hashCode * 59 + this._NotificationEndpoints.GetHashCode();
-                if (this.Links != null)
-                    hashCode = hashCode * 59 + this.Links.GetHashCode();
+                if (this.Summary != null)
+                    hashCode = hashCode * 59 + this.Summary.GetHashCode();
+                if (this.Diff != null)
+                    hashCode = hashCode * 59 + this.Diff.GetHashCode();
+                if (this.Errors != null)
+                    hashCode = hashCode * 59 + this.Errors.GetHashCode();
                 return hashCode;
             }
         }

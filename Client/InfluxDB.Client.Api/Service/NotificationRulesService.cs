@@ -31,9 +31,9 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="notificationRule">Notification rule to create</param>
+        /// <param name="postNotificationRule">Notification rule to create</param>
         /// <returns>NotificationRule</returns>
-        NotificationRule CreateNotificationRule (NotificationRule notificationRule);
+        NotificationRule CreateNotificationRule (PostNotificationRule postNotificationRule);
 
         /// <summary>
         /// Add a notification rule
@@ -42,9 +42,9 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="notificationRule">Notification rule to create</param>
+        /// <param name="postNotificationRule">Notification rule to create</param>
         /// <returns>ApiResponse of NotificationRule</returns>
-        ApiResponse<NotificationRule> CreateNotificationRuleWithHttpInfo (NotificationRule notificationRule);
+        ApiResponse<NotificationRule> CreateNotificationRuleWithHttpInfo (PostNotificationRule postNotificationRule);
         /// <summary>
         /// Delete a notification rule
         /// </summary>
@@ -254,9 +254,9 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="notificationRule">Notification rule to create</param>
+        /// <param name="postNotificationRule">Notification rule to create</param>
         /// <returns>Task of NotificationRule</returns>
-        System.Threading.Tasks.Task<NotificationRule> CreateNotificationRuleAsync (NotificationRule notificationRule);
+        System.Threading.Tasks.Task<NotificationRule> CreateNotificationRuleAsync (PostNotificationRule postNotificationRule);
 
         /// <summary>
         /// Add a notification rule
@@ -265,9 +265,9 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="notificationRule">Notification rule to create</param>
+        /// <param name="postNotificationRule">Notification rule to create</param>
         /// <returns>Task of ApiResponse (NotificationRule)</returns>
-        System.Threading.Tasks.Task<ApiResponse<NotificationRule>> CreateNotificationRuleAsyncWithHttpInfo (NotificationRule notificationRule);
+        System.Threading.Tasks.Task<ApiResponse<NotificationRule>> CreateNotificationRuleAsyncWithHttpInfo (PostNotificationRule postNotificationRule);
         /// <summary>
         /// Delete a notification rule
         /// </summary>
@@ -572,11 +572,11 @@ namespace InfluxDB.Client.Api.Service
         /// Add a notification rule 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="notificationRule">Notification rule to create</param>
+        /// <param name="postNotificationRule">Notification rule to create</param>
         /// <returns>NotificationRule</returns>
-        public NotificationRule CreateNotificationRule (NotificationRule notificationRule)
+        public NotificationRule CreateNotificationRule (PostNotificationRule postNotificationRule)
         {
-             ApiResponse<NotificationRule> localVarResponse = CreateNotificationRuleWithHttpInfo(notificationRule);
+             ApiResponse<NotificationRule> localVarResponse = CreateNotificationRuleWithHttpInfo(postNotificationRule);
              return localVarResponse.Data;
         }
 
@@ -584,13 +584,13 @@ namespace InfluxDB.Client.Api.Service
         /// Add a notification rule 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="notificationRule">Notification rule to create</param>
+        /// <param name="postNotificationRule">Notification rule to create</param>
         /// <returns>ApiResponse of NotificationRule</returns>
-        public ApiResponse< NotificationRule > CreateNotificationRuleWithHttpInfo (NotificationRule notificationRule)
+        public ApiResponse< NotificationRule > CreateNotificationRuleWithHttpInfo (PostNotificationRule postNotificationRule)
         {
-            // verify the required parameter 'notificationRule' is set
-            if (notificationRule == null)
-                throw new ApiException(400, "Missing required parameter 'notificationRule' when calling NotificationRulesService->CreateNotificationRule");
+            // verify the required parameter 'postNotificationRule' is set
+            if (postNotificationRule == null)
+                throw new ApiException(400, "Missing required parameter 'postNotificationRule' when calling NotificationRulesService->CreateNotificationRule");
 
             var localVarPath = "/api/v2/notificationRules";
             var localVarPathParams = new Dictionary<String, String>();
@@ -606,13 +606,13 @@ namespace InfluxDB.Client.Api.Service
             };
             String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (notificationRule != null && notificationRule.GetType() != typeof(byte[]))
+            if (postNotificationRule != null && postNotificationRule.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(notificationRule); // http body (model) parameter
+                localVarPostBody = this.Configuration.ApiClient.Serialize(postNotificationRule); // http body (model) parameter
             }
             else
             {
-                localVarPostBody = notificationRule; // byte array
+                localVarPostBody = postNotificationRule; // byte array
             }
 
             // to determine the Accept header
@@ -647,13 +647,13 @@ namespace InfluxDB.Client.Api.Service
         /// Add a notification rule 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="notificationRule">Notification rule to create</param>
+        /// <param name="postNotificationRule">Notification rule to create</param>
         /// <returns>ApiResponse of NotificationRule</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> CreateNotificationRuleWithIRestResponseAsync (NotificationRule notificationRule)
+        public async System.Threading.Tasks.Task<IRestResponse> CreateNotificationRuleWithIRestResponseAsync (PostNotificationRule postNotificationRule)
         {
-            // verify the required parameter 'notificationRule' is set
-            if (notificationRule == null)
-                throw new ApiException(400, "Missing required parameter 'notificationRule' when calling NotificationRulesService->CreateNotificationRule");
+            // verify the required parameter 'postNotificationRule' is set
+            if (postNotificationRule == null)
+                throw new ApiException(400, "Missing required parameter 'postNotificationRule' when calling NotificationRulesService->CreateNotificationRule");
 
             var localVarPath = "/api/v2/notificationRules";
             var localVarPathParams = new Dictionary<String, String>();
@@ -669,13 +669,13 @@ namespace InfluxDB.Client.Api.Service
             };
             String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (notificationRule != null && notificationRule.GetType() != typeof(byte[]))
+            if (postNotificationRule != null && postNotificationRule.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(notificationRule); // http body (model) parameter
+                localVarPostBody = this.Configuration.ApiClient.Serialize(postNotificationRule); // http body (model) parameter
             }
             else
             {
-                localVarPostBody = notificationRule; // byte array
+                localVarPostBody = postNotificationRule; // byte array
             }
 
             // to determine the Accept header
@@ -708,13 +708,13 @@ namespace InfluxDB.Client.Api.Service
         /// Add a notification rule 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="notificationRule">Notification rule to create</param>
+        /// <param name="postNotificationRule">Notification rule to create</param>
         /// <returns>ApiResponse of NotificationRule</returns>
-        public IRestResponse CreateNotificationRuleWithIRestResponse (NotificationRule notificationRule)
+        public IRestResponse CreateNotificationRuleWithIRestResponse (PostNotificationRule postNotificationRule)
         {
-            // verify the required parameter 'notificationRule' is set
-            if (notificationRule == null)
-                throw new ApiException(400, "Missing required parameter 'notificationRule' when calling NotificationRulesService->CreateNotificationRule");
+            // verify the required parameter 'postNotificationRule' is set
+            if (postNotificationRule == null)
+                throw new ApiException(400, "Missing required parameter 'postNotificationRule' when calling NotificationRulesService->CreateNotificationRule");
 
             var localVarPath = "/api/v2/notificationRules";
             var localVarPathParams = new Dictionary<String, String>();
@@ -730,13 +730,13 @@ namespace InfluxDB.Client.Api.Service
             };
             String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (notificationRule != null && notificationRule.GetType() != typeof(byte[]))
+            if (postNotificationRule != null && postNotificationRule.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(notificationRule); // http body (model) parameter
+                localVarPostBody = this.Configuration.ApiClient.Serialize(postNotificationRule); // http body (model) parameter
             }
             else
             {
-                localVarPostBody = notificationRule; // byte array
+                localVarPostBody = postNotificationRule; // byte array
             }
 
             // to determine the Accept header
@@ -769,13 +769,13 @@ namespace InfluxDB.Client.Api.Service
         /// Add a notification rule 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="notificationRule">Notification rule to create</param>
+        /// <param name="postNotificationRule">Notification rule to create</param>
         /// <returns>ApiResponse of NotificationRule</returns>
-        public RestRequest CreateNotificationRuleWithRestRequest (NotificationRule notificationRule)
+        public RestRequest CreateNotificationRuleWithRestRequest (PostNotificationRule postNotificationRule)
         {
-            // verify the required parameter 'notificationRule' is set
-            if (notificationRule == null)
-                throw new ApiException(400, "Missing required parameter 'notificationRule' when calling NotificationRulesService->CreateNotificationRule");
+            // verify the required parameter 'postNotificationRule' is set
+            if (postNotificationRule == null)
+                throw new ApiException(400, "Missing required parameter 'postNotificationRule' when calling NotificationRulesService->CreateNotificationRule");
 
             var localVarPath = "/api/v2/notificationRules";
             var localVarPathParams = new Dictionary<String, String>();
@@ -791,13 +791,13 @@ namespace InfluxDB.Client.Api.Service
             };
             String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (notificationRule != null && notificationRule.GetType() != typeof(byte[]))
+            if (postNotificationRule != null && postNotificationRule.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(notificationRule); // http body (model) parameter
+                localVarPostBody = this.Configuration.ApiClient.Serialize(postNotificationRule); // http body (model) parameter
             }
             else
             {
-                localVarPostBody = notificationRule; // byte array
+                localVarPostBody = postNotificationRule; // byte array
             }
 
             // to determine the Accept header
@@ -819,11 +819,11 @@ namespace InfluxDB.Client.Api.Service
         /// Add a notification rule 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="notificationRule">Notification rule to create</param>
+        /// <param name="postNotificationRule">Notification rule to create</param>
         /// <returns>Task of NotificationRule</returns>
-        public async System.Threading.Tasks.Task<NotificationRule> CreateNotificationRuleAsync (NotificationRule notificationRule)
+        public async System.Threading.Tasks.Task<NotificationRule> CreateNotificationRuleAsync (PostNotificationRule postNotificationRule)
         {
-             ApiResponse<NotificationRule> localVarResponse = await CreateNotificationRuleAsyncWithHttpInfo(notificationRule);
+             ApiResponse<NotificationRule> localVarResponse = await CreateNotificationRuleAsyncWithHttpInfo(postNotificationRule);
              return localVarResponse.Data;
 
         }
@@ -832,12 +832,12 @@ namespace InfluxDB.Client.Api.Service
         /// Add a notification rule 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="notificationRule">Notification rule to create</param>
+        /// <param name="postNotificationRule">Notification rule to create</param>
         /// <returns>Task of ApiResponse (NotificationRule)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<NotificationRule>> CreateNotificationRuleAsyncWithHttpInfo (NotificationRule notificationRule)
+        public async System.Threading.Tasks.Task<ApiResponse<NotificationRule>> CreateNotificationRuleAsyncWithHttpInfo (PostNotificationRule postNotificationRule)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await CreateNotificationRuleAsyncWithIRestResponse(notificationRule);
+            IRestResponse localVarResponse = await CreateNotificationRuleAsyncWithIRestResponse(postNotificationRule);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -856,13 +856,13 @@ namespace InfluxDB.Client.Api.Service
         /// Add a notification rule 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="notificationRule">Notification rule to create</param>
+        /// <param name="postNotificationRule">Notification rule to create</param>
         /// <returns>Task of IRestResponse (NotificationRule)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> CreateNotificationRuleAsyncWithIRestResponse (NotificationRule notificationRule)
+        public async System.Threading.Tasks.Task<IRestResponse> CreateNotificationRuleAsyncWithIRestResponse (PostNotificationRule postNotificationRule)
         {
-            // verify the required parameter 'notificationRule' is set
-            if (notificationRule == null)
-                throw new ApiException(400, "Missing required parameter 'notificationRule' when calling NotificationRulesService->CreateNotificationRule");
+            // verify the required parameter 'postNotificationRule' is set
+            if (postNotificationRule == null)
+                throw new ApiException(400, "Missing required parameter 'postNotificationRule' when calling NotificationRulesService->CreateNotificationRule");
 
             var localVarPath = "/api/v2/notificationRules";
             var localVarPathParams = new Dictionary<String, String>();
@@ -878,13 +878,13 @@ namespace InfluxDB.Client.Api.Service
             };
             String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (notificationRule != null && notificationRule.GetType() != typeof(byte[]))
+            if (postNotificationRule != null && postNotificationRule.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(notificationRule); // http body (model) parameter
+                localVarPostBody = this.Configuration.ApiClient.Serialize(postNotificationRule); // http body (model) parameter
             }
             else
             {
-                localVarPostBody = notificationRule; // byte array
+                localVarPostBody = postNotificationRule; // byte array
             }
 
             // to determine the Accept header

@@ -27,7 +27,7 @@ namespace InfluxDB.Client.Api.Domain
     /// NotificationRuleBase
     /// </summary>
     [DataContract]
-    public partial class NotificationRuleBase :  IEquatable<NotificationRuleBase>
+    public partial class NotificationRuleBase : PostNotificationRule,  IEquatable<NotificationRuleBase>
     {
         /// <summary>
         /// Gets or Sets Status
@@ -57,7 +57,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="statusRules">List of status rules the notification rule attempts to match. (required).</param>
         /// <param name="labels">labels.</param>
         /// <param name="links">links.</param>
-        public NotificationRuleBase(string endpointID = default(string), string orgID = default(string), TaskStatusType status = default(TaskStatusType), string name = default(string), string sleepUntil = default(string), string every = default(string), string offset = default(string), string runbookLink = default(string), int? limitEvery = default(int?), int? limit = default(int?), List<TagRule> tagRules = default(List<TagRule>), string description = default(string), List<StatusRule> statusRules = default(List<StatusRule>), List<Label> labels = default(List<Label>), NotificationRuleBaseLinks links = default(NotificationRuleBaseLinks))
+        public NotificationRuleBase(string endpointID = default(string), string orgID = default(string), TaskStatusType status = default(TaskStatusType), string name = default(string), string sleepUntil = default(string), string every = default(string), string offset = default(string), string runbookLink = default(string), int? limitEvery = default(int?), int? limit = default(int?), List<TagRule> tagRules = default(List<TagRule>), string description = default(string), List<StatusRule> statusRules = default(List<StatusRule>), List<Label> labels = default(List<Label>), NotificationRuleBaseLinks links = default(NotificationRuleBaseLinks)) : base()
         {
             // to ensure "endpointID" is required (not null)
             if (endpointID == null)
@@ -251,6 +251,7 @@ namespace InfluxDB.Client.Api.Domain
         {
             var sb = new StringBuilder();
             sb.Append("class NotificationRuleBase {\n");
+            sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  EndpointID: ").Append(EndpointID).Append("\n");
             sb.Append("  OrgID: ").Append(OrgID).Append("\n");
@@ -278,7 +279,7 @@ namespace InfluxDB.Client.Api.Domain
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public virtual string ToJson()
+        public override string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }
@@ -303,97 +304,97 @@ namespace InfluxDB.Client.Api.Domain
             if (input == null)
                 return false;
 
-            return 
+            return base.Equals(input) && 
                 (
                     this.Id == input.Id ||
                     (this.Id != null &&
                     this.Id.Equals(input.Id))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.EndpointID == input.EndpointID ||
                     (this.EndpointID != null &&
                     this.EndpointID.Equals(input.EndpointID))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.OrgID == input.OrgID ||
                     (this.OrgID != null &&
                     this.OrgID.Equals(input.OrgID))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.OwnerID == input.OwnerID ||
                     (this.OwnerID != null &&
                     this.OwnerID.Equals(input.OwnerID))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.CreatedAt == input.CreatedAt ||
                     (this.CreatedAt != null &&
                     this.CreatedAt.Equals(input.CreatedAt))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.UpdatedAt == input.UpdatedAt ||
                     (this.UpdatedAt != null &&
                     this.UpdatedAt.Equals(input.UpdatedAt))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.Status == input.Status ||
                     (this.Status != null &&
                     this.Status.Equals(input.Status))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.Name == input.Name ||
                     (this.Name != null &&
                     this.Name.Equals(input.Name))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.SleepUntil == input.SleepUntil ||
                     (this.SleepUntil != null &&
                     this.SleepUntil.Equals(input.SleepUntil))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.Every == input.Every ||
                     (this.Every != null &&
                     this.Every.Equals(input.Every))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.Offset == input.Offset ||
                     (this.Offset != null &&
                     this.Offset.Equals(input.Offset))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.RunbookLink == input.RunbookLink ||
                     (this.RunbookLink != null &&
                     this.RunbookLink.Equals(input.RunbookLink))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.LimitEvery == input.LimitEvery ||
                     (this.LimitEvery != null &&
                     this.LimitEvery.Equals(input.LimitEvery))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.Limit == input.Limit ||
                     (this.Limit != null &&
                     this.Limit.Equals(input.Limit))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.TagRules == input.TagRules ||
                     this.TagRules != null &&
                     this.TagRules.SequenceEqual(input.TagRules)
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.Description == input.Description ||
                     (this.Description != null &&
                     this.Description.Equals(input.Description))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.StatusRules == input.StatusRules ||
                     this.StatusRules != null &&
                     this.StatusRules.SequenceEqual(input.StatusRules)
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.Labels == input.Labels ||
                     this.Labels != null &&
                     this.Labels.SequenceEqual(input.Labels)
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     
                     (this.Links != null &&
@@ -409,7 +410,7 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
+                int hashCode = base.GetHashCode();
                 if (this.Id != null)
                     hashCode = hashCode * 59 + this.Id.GetHashCode();
                 if (this.EndpointID != null)

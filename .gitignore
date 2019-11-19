@@ -35,3 +35,4 @@ DotnetVersion/
 **/.openapi-generator/**
 
 /test.sh
+/influxdb-client-csharp.sln.DotSettings.user

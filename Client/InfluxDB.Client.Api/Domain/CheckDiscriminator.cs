@@ -24,33 +24,18 @@ using OpenAPIDateConverter = InfluxDB.Client.Api.Client.OpenAPIDateConverter;
 namespace InfluxDB.Client.Api.Domain
 {
     /// <summary>
-    /// Checks
+    /// CheckDiscriminator
     /// </summary>
     [DataContract]
-    public partial class Checks :  IEquatable<Checks>
+    public partial class CheckDiscriminator : PostCheck,  IEquatable<CheckDiscriminator>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Checks" /> class.
+        /// Initializes a new instance of the <see cref="CheckDiscriminator" /> class.
         /// </summary>
-        /// <param name="checks">checks.</param>
-        /// <param name="links">links.</param>
-        public Checks(List<Check> checks = default(List<Check>), Links links = default(Links))
+        [JsonConstructorAttribute]
+        public CheckDiscriminator() : base()
         {
-            this._Checks = checks;
-            this.Links = links;
         }
-
-        /// <summary>
-        /// Gets or Sets _Checks
-        /// </summary>
-        [DataMember(Name="checks", EmitDefaultValue=false)]
-        public List<Check> _Checks { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Links
-        /// </summary>
-        [DataMember(Name="links", EmitDefaultValue=false)]
-        public Links Links { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -59,9 +44,8 @@ namespace InfluxDB.Client.Api.Domain
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class Checks {\n");
-            sb.Append("  _Checks: ").Append(_Checks).Append("\n");
-            sb.Append("  Links: ").Append(Links).Append("\n");
+            sb.Append("class CheckDiscriminator {\n");
+            sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -70,7 +54,7 @@ namespace InfluxDB.Client.Api.Domain
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public virtual string ToJson()
+        public override string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }
@@ -82,30 +66,20 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as Checks);
+            return this.Equals(input as CheckDiscriminator);
         }
 
         /// <summary>
-        /// Returns true if Checks instances are equal
+        /// Returns true if CheckDiscriminator instances are equal
         /// </summary>
-        /// <param name="input">Instance of Checks to be compared</param>
+        /// <param name="input">Instance of CheckDiscriminator to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(Checks input)
+        public bool Equals(CheckDiscriminator input)
         {
             if (input == null)
                 return false;
 
-            return 
-                (
-                    this._Checks == input._Checks ||
-                    this._Checks != null &&
-                    this._Checks.SequenceEqual(input._Checks)
-                ) && 
-                (
-                    
-                    (this.Links != null &&
-                    this.Links.Equals(input.Links))
-                );
+            return base.Equals(input);
         }
 
         /// <summary>
@@ -116,11 +90,7 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                if (this._Checks != null)
-                    hashCode = hashCode * 59 + this._Checks.GetHashCode();
-                if (this.Links != null)
-                    hashCode = hashCode * 59 + this.Links.GetHashCode();
+                int hashCode = base.GetHashCode();
                 return hashCode;
             }
         }

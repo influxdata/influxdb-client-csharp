@@ -31,9 +31,9 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="check">Check to create</param>
+        /// <param name="postCheck">Check to create</param>
         /// <returns>Check</returns>
-        Check CreateCheck (Check check);
+        Check CreateCheck (PostCheck postCheck);
 
         /// <summary>
         /// Add new check
@@ -42,9 +42,9 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="check">Check to create</param>
+        /// <param name="postCheck">Check to create</param>
         /// <returns>ApiResponse of Check</returns>
-        ApiResponse<Check> CreateCheckWithHttpInfo (Check check);
+        ApiResponse<Check> CreateCheckWithHttpInfo (PostCheck postCheck);
         /// <summary>
         /// Delete a check
         /// </summary>
@@ -273,9 +273,9 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="check">Check to create</param>
+        /// <param name="postCheck">Check to create</param>
         /// <returns>Task of Check</returns>
-        System.Threading.Tasks.Task<Check> CreateCheckAsync (Check check);
+        System.Threading.Tasks.Task<Check> CreateCheckAsync (PostCheck postCheck);
 
         /// <summary>
         /// Add new check
@@ -284,9 +284,9 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="check">Check to create</param>
+        /// <param name="postCheck">Check to create</param>
         /// <returns>Task of ApiResponse (Check)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Check>> CreateCheckAsyncWithHttpInfo (Check check);
+        System.Threading.Tasks.Task<ApiResponse<Check>> CreateCheckAsyncWithHttpInfo (PostCheck postCheck);
         /// <summary>
         /// Delete a check
         /// </summary>
@@ -610,11 +610,11 @@ namespace InfluxDB.Client.Api.Service
         /// Add new check 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="check">Check to create</param>
+        /// <param name="postCheck">Check to create</param>
         /// <returns>Check</returns>
-        public Check CreateCheck (Check check)
+        public Check CreateCheck (PostCheck postCheck)
         {
-             ApiResponse<Check> localVarResponse = CreateCheckWithHttpInfo(check);
+             ApiResponse<Check> localVarResponse = CreateCheckWithHttpInfo(postCheck);
              return localVarResponse.Data;
         }
 
@@ -622,13 +622,13 @@ namespace InfluxDB.Client.Api.Service
         /// Add new check 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="check">Check to create</param>
+        /// <param name="postCheck">Check to create</param>
         /// <returns>ApiResponse of Check</returns>
-        public ApiResponse< Check > CreateCheckWithHttpInfo (Check check)
+        public ApiResponse< Check > CreateCheckWithHttpInfo (PostCheck postCheck)
         {
-            // verify the required parameter 'check' is set
-            if (check == null)
-                throw new ApiException(400, "Missing required parameter 'check' when calling ChecksService->CreateCheck");
+            // verify the required parameter 'postCheck' is set
+            if (postCheck == null)
+                throw new ApiException(400, "Missing required parameter 'postCheck' when calling ChecksService->CreateCheck");
 
             var localVarPath = "/api/v2/checks";
             var localVarPathParams = new Dictionary<String, String>();
@@ -644,13 +644,13 @@ namespace InfluxDB.Client.Api.Service
             };
             String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (check != null && check.GetType() != typeof(byte[]))
+            if (postCheck != null && postCheck.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(check); // http body (model) parameter
+                localVarPostBody = this.Configuration.ApiClient.Serialize(postCheck); // http body (model) parameter
             }
             else
             {
-                localVarPostBody = check; // byte array
+                localVarPostBody = postCheck; // byte array
             }
 
             // to determine the Accept header
@@ -685,13 +685,13 @@ namespace InfluxDB.Client.Api.Service
         /// Add new check 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="check">Check to create</param>
+        /// <param name="postCheck">Check to create</param>
         /// <returns>ApiResponse of Check</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> CreateCheckWithIRestResponseAsync (Check check)
+        public async System.Threading.Tasks.Task<IRestResponse> CreateCheckWithIRestResponseAsync (PostCheck postCheck)
         {
-            // verify the required parameter 'check' is set
-            if (check == null)
-                throw new ApiException(400, "Missing required parameter 'check' when calling ChecksService->CreateCheck");
+            // verify the required parameter 'postCheck' is set
+            if (postCheck == null)
+                throw new ApiException(400, "Missing required parameter 'postCheck' when calling ChecksService->CreateCheck");
 
             var localVarPath = "/api/v2/checks";
             var localVarPathParams = new Dictionary<String, String>();
@@ -707,13 +707,13 @@ namespace InfluxDB.Client.Api.Service
             };
             String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (check != null && check.GetType() != typeof(byte[]))
+            if (postCheck != null && postCheck.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(check); // http body (model) parameter
+                localVarPostBody = this.Configuration.ApiClient.Serialize(postCheck); // http body (model) parameter
             }
             else
             {
-                localVarPostBody = check; // byte array
+                localVarPostBody = postCheck; // byte array
             }
 
             // to determine the Accept header
@@ -746,13 +746,13 @@ namespace InfluxDB.Client.Api.Service
         /// Add new check 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="check">Check to create</param>
+        /// <param name="postCheck">Check to create</param>
         /// <returns>ApiResponse of Check</returns>
-        public IRestResponse CreateCheckWithIRestResponse (Check check)
+        public IRestResponse CreateCheckWithIRestResponse (PostCheck postCheck)
         {
-            // verify the required parameter 'check' is set
-            if (check == null)
-                throw new ApiException(400, "Missing required parameter 'check' when calling ChecksService->CreateCheck");
+            // verify the required parameter 'postCheck' is set
+            if (postCheck == null)
+                throw new ApiException(400, "Missing required parameter 'postCheck' when calling ChecksService->CreateCheck");
 
             var localVarPath = "/api/v2/checks";
             var localVarPathParams = new Dictionary<String, String>();
@@ -768,13 +768,13 @@ namespace InfluxDB.Client.Api.Service
             };
             String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (check != null && check.GetType() != typeof(byte[]))
+            if (postCheck != null && postCheck.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(check); // http body (model) parameter
+                localVarPostBody = this.Configuration.ApiClient.Serialize(postCheck); // http body (model) parameter
             }
             else
             {
-                localVarPostBody = check; // byte array
+                localVarPostBody = postCheck; // byte array
             }
 
             // to determine the Accept header
@@ -807,13 +807,13 @@ namespace InfluxDB.Client.Api.Service
         /// Add new check 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="check">Check to create</param>
+        /// <param name="postCheck">Check to create</param>
         /// <returns>ApiResponse of Check</returns>
-        public RestRequest CreateCheckWithRestRequest (Check check)
+        public RestRequest CreateCheckWithRestRequest (PostCheck postCheck)
         {
-            // verify the required parameter 'check' is set
-            if (check == null)
-                throw new ApiException(400, "Missing required parameter 'check' when calling ChecksService->CreateCheck");
+            // verify the required parameter 'postCheck' is set
+            if (postCheck == null)
+                throw new ApiException(400, "Missing required parameter 'postCheck' when calling ChecksService->CreateCheck");
 
             var localVarPath = "/api/v2/checks";
             var localVarPathParams = new Dictionary<String, String>();
@@ -829,13 +829,13 @@ namespace InfluxDB.Client.Api.Service
             };
             String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (check != null && check.GetType() != typeof(byte[]))
+            if (postCheck != null && postCheck.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(check); // http body (model) parameter
+                localVarPostBody = this.Configuration.ApiClient.Serialize(postCheck); // http body (model) parameter
             }
             else
             {
-                localVarPostBody = check; // byte array
+                localVarPostBody = postCheck; // byte array
             }
 
             // to determine the Accept header
@@ -857,11 +857,11 @@ namespace InfluxDB.Client.Api.Service
         /// Add new check 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="check">Check to create</param>
+        /// <param name="postCheck">Check to create</param>
         /// <returns>Task of Check</returns>
-        public async System.Threading.Tasks.Task<Check> CreateCheckAsync (Check check)
+        public async System.Threading.Tasks.Task<Check> CreateCheckAsync (PostCheck postCheck)
         {
-             ApiResponse<Check> localVarResponse = await CreateCheckAsyncWithHttpInfo(check);
+             ApiResponse<Check> localVarResponse = await CreateCheckAsyncWithHttpInfo(postCheck);
              return localVarResponse.Data;
 
         }
@@ -870,12 +870,12 @@ namespace InfluxDB.Client.Api.Service
         /// Add new check 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="check">Check to create</param>
+        /// <param name="postCheck">Check to create</param>
         /// <returns>Task of ApiResponse (Check)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Check>> CreateCheckAsyncWithHttpInfo (Check check)
+        public async System.Threading.Tasks.Task<ApiResponse<Check>> CreateCheckAsyncWithHttpInfo (PostCheck postCheck)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await CreateCheckAsyncWithIRestResponse(check);
+            IRestResponse localVarResponse = await CreateCheckAsyncWithIRestResponse(postCheck);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -894,13 +894,13 @@ namespace InfluxDB.Client.Api.Service
         /// Add new check 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="check">Check to create</param>
+        /// <param name="postCheck">Check to create</param>
         /// <returns>Task of IRestResponse (Check)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> CreateCheckAsyncWithIRestResponse (Check check)
+        public async System.Threading.Tasks.Task<IRestResponse> CreateCheckAsyncWithIRestResponse (PostCheck postCheck)
         {
-            // verify the required parameter 'check' is set
-            if (check == null)
-                throw new ApiException(400, "Missing required parameter 'check' when calling ChecksService->CreateCheck");
+            // verify the required parameter 'postCheck' is set
+            if (postCheck == null)
+                throw new ApiException(400, "Missing required parameter 'postCheck' when calling ChecksService->CreateCheck");
 
             var localVarPath = "/api/v2/checks";
             var localVarPathParams = new Dictionary<String, String>();
@@ -916,13 +916,13 @@ namespace InfluxDB.Client.Api.Service
             };
             String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (check != null && check.GetType() != typeof(byte[]))
+            if (postCheck != null && postCheck.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(check); // http body (model) parameter
+                localVarPostBody = this.Configuration.ApiClient.Serialize(postCheck); // http body (model) parameter
             }
             else
             {
-                localVarPostBody = check; // byte array
+                localVarPostBody = postCheck; // byte array
             }
 
             // to determine the Accept header

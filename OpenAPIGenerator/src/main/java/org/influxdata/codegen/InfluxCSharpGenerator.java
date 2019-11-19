@@ -320,6 +320,12 @@ public class InfluxCSharpGenerator extends CSharpClientCodegen {
             codegenModel.setParentSchema("ViewProperties");
         }
 
+
+        if (name.endsWith("VariableProperties") && !name.equals("VariableProperties")) {
+            codegenModel.setParent("VariableProperties");
+            codegenModel.setParentSchema("VariableProperties");
+        }
+
         if (allDefinitions.containsKey(name + "Base")) {
             codegenModel.setParent(name + "Base");
             codegenModel.setParentSchema(name + "Base");
@@ -330,11 +336,57 @@ public class InfluxCSharpGenerator extends CSharpClientCodegen {
             codegenModel.setParentSchema("NotificationRule");
         }
 
-        if (name.equals("ViewProperties")) {
+        if (name.equals("ViewProperties") || name.equals("VariableProperties")) {
             codegenModel.setReadWriteVars(new ArrayList<>());
             codegenModel.setRequiredVars(new ArrayList<>());
             codegenModel.hasOnlyReadOnly = true;
             codegenModel.hasRequired = false;
+        }
+
+        if (codegenModel.name.equals("CheckBase")) {
+            codegenModel.setParent("CheckDiscriminator");
+            codegenModel.setParentSchema("CheckDiscriminator");
+        }
+        if (codegenModel.name.equals("CheckDiscriminator")) {
+            codegenModel.setParent("PostCheck");
+            codegenModel.setParentSchema("PostCheck");
+        }
+
+        if (codegenModel.name.equals("NotificationEndpointBase")) {
+            codegenModel.setParent("NotificationEndpointDiscriminator");
+            codegenModel.setParentSchema("NotificationEndpointDiscriminator");
+        }
+
+        if (codegenModel.name.equals("PostCheck") || codegenModel.name.equals("PostNotificationEndpoint")) {
+            codegenModel.setParent(null);
+            codegenModel.setParentSchema(null);
+        }
+
+        if (codegenModel.name.equals("DeadmanCheck") || codegenModel.name.equals("ThresholdCheck")) {
+            codegenModel.setParent("Check");
+            codegenModel.setParentSchema("Check");
+        }
+
+        if (codegenModel.name.equals("SlackNotificationEndpoint") || codegenModel.name.equals("PagerDutyNotificationEndpoint")
+                || codegenModel.name.equals("HTTPNotificationEndpoint")) {
+            codegenModel.setParent("NotificationEndpoint");
+            codegenModel.setParentSchema("NotificationEndpoint");
+        }
+
+        if (codegenModel.name.equals("NotificationEndpointDiscriminator")) {
+            codegenModel.setParent("PostNotificationEndpoint");
+            codegenModel.setParentSchema("PostNotificationEndpoint");
+        }
+
+        if (codegenModel.name.equals("NotificationRuleBase")) {
+            codegenModel.setParent("PostNotificationRule");
+            codegenModel.setParentSchema("PostNotificationRule");
+        }
+
+        if (codegenModel.name.endsWith("Discriminator")) {
+            codegenModel.hasOnlyReadOnly = true;
+            codegenModel.hasRequired = false;
+            codegenModel.readWriteVars.clear();
         }
 
         return codegenModel;
@@ -469,7 +521,7 @@ public class InfluxCSharpGenerator extends CSharpClientCodegen {
                 pluginModel.parentVars.add(typeProperty);
                 pluginModel.vars.get(pluginModel.vars.size() - 1).hasMore = false;
             }
-            if (pluginModel.getParent() != null && (pluginModel.getParent().endsWith("Base") || (modelName.endsWith("ViewPropertiexs") && !modelName.equals("ViewPropertiesx")))) {
+            if (pluginModel.getParent() != null && (pluginModel.getParent().endsWith("Base"))) {
                 CodegenModel parentModel = pluginModel.getParentModel();
                 pluginModel.setParentVars(parentModel.getReadWriteVars());
                 pluginModel.setReadWriteVars(parentModel.getReadWriteVars());
@@ -481,15 +533,27 @@ public class InfluxCSharpGenerator extends CSharpClientCodegen {
 
             // Normalize discriminator
             if (pluginModel.getDiscriminatorName() != null) {
+
                 CodegenDiscriminator discriminator = pluginModel.getDiscriminator();
+
+                if (pluginModel.name.endsWith("Discriminator")) {
+                    CodegenModel baseModel = getModel((HashMap) allModels.get(pluginModel.name.replace("Discriminator", "")));
+                    baseModel.setDiscriminator(discriminator);
+                    baseModel.hasRequired = true;
+                    baseModel.hasOnlyReadOnly = false;
+                    pluginModel.setDiscriminator(null);
+                }
+
                 discriminator.setPropertyName(initialCaps(discriminator.getPropertyName()));
 
                 for (CodegenModel child : pluginModel.getChildren()) {
                     CodegenDiscriminator.MappedModel mappedModel = discriminator.getMappedModels().stream()
                             .filter(mapped -> child.name.equals(mapped.getModelName()))
                             .findFirst()
-                            .orElseThrow(IllegalStateException::new);
-                    child.getVendorExtensions().put("x-discriminator-value", mappedModel.getMappingName());
+                            .orElse(null);
+                    if (mappedModel != null) {
+                        child.getVendorExtensions().put("x-discriminator-value", mappedModel.getMappingName());
+                    }
                 }
             }
         }
@@ -600,6 +664,10 @@ public class InfluxCSharpGenerator extends CSharpClientCodegen {
         final String modelName = super.toModelName(name);
         if (isCommonName(modelName)) {
             return modelName + "Type";
+        }
+
+        if ("PostBucketRequestRetentionRules".equals(modelName)) {
+            return "BucketRetentionRules";
         }
 
         return modelName;
