@@ -46,7 +46,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="arguments">arguments (required).</param>
         /// <param name="createdAt">createdAt.</param>
         /// <param name="updatedAt">updatedAt.</param>
-        public Variable(VariableLinks links = default(VariableLinks), string orgID = default(string), string name = default(string), string description = default(string), List<string> selected = default(List<string>), List<Label> labels = default(List<Label>), Object arguments = default(Object), DateTime? createdAt = default(DateTime?), DateTime? updatedAt = default(DateTime?))
+        public Variable(VariableLinks links = default(VariableLinks), string orgID = default(string), string name = default(string), string description = default(string), List<string> selected = default(List<string>), List<Label> labels = default(List<Label>), VariableProperties arguments = default(VariableProperties), DateTime? createdAt = default(DateTime?), DateTime? updatedAt = default(DateTime?))
         {
             // to ensure "orgID" is required (not null)
             if (orgID == null)
@@ -130,7 +130,7 @@ namespace InfluxDB.Client.Api.Domain
         /// </summary>
         [DataMember(Name="arguments", EmitDefaultValue=false)]
         [JsonConverter(typeof(VariableArgumentsAdapter))]
-        public Object Arguments { get; set; }
+        public VariableProperties Arguments { get; set; }
 
         /// <summary>
         /// Gets or Sets CreatedAt

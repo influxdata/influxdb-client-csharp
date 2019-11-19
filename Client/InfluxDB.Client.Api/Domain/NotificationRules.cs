@@ -44,7 +44,6 @@ namespace InfluxDB.Client.Api.Domain
         /// Gets or Sets _NotificationRules
         /// </summary>
         [DataMember(Name="notificationRules", EmitDefaultValue=false)]
-        [JsonConverter(typeof(NotificationRulesNotificationRulesAdapter))]
         public List<NotificationRule> _NotificationRules { get; set; }
 
         /// <summary>
@@ -126,66 +125,6 @@ namespace InfluxDB.Client.Api.Domain
             }
         }
 
-    public class NotificationRulesNotificationRulesAdapter : JsonConverter
-    {
-        private static readonly Dictionary<string[], Type> Types = new Dictionary<string[], Type>(new Client.DiscriminatorComparer<string>())
-        {
-            {new []{ "slack" }, typeof(SlackNotificationRule)},
-            {new []{ "smtp" }, typeof(SMTPNotificationRule)},
-            {new []{ "pagerduty" }, typeof(PagerDutyNotificationRule)},
-            {new []{ "http" }, typeof(HTTPNotificationRule)},
-        };
-
-        public override bool CanConvert(Type objectType)
-        {
-            return false;
-        }
-
-        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
-        {
-            serializer.Serialize(writer, value);
-        }
-
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-        {
-            return Deserialize(reader, objectType, serializer);
-        }
-
-        private object Deserialize(JsonReader reader, Type objectType, JsonSerializer serializer)
-        {
-            switch (reader.TokenType)
-            {
-                case JsonToken.StartObject:
-
-                    var jObject = Newtonsoft.Json.Linq.JObject.Load(reader);
-
-                    var discriminator = new []{ "type" }.Select(key => jObject[key].ToString()).ToArray();
-
-                    Types.TryGetValue(discriminator, out var type);
-
-                    return serializer.Deserialize(jObject.CreateReader(), type);
-
-                case JsonToken.StartArray:
-                    return DeserializeArray(reader, objectType, serializer);
-
-                default:
-                    return serializer.Deserialize(reader, objectType);
-            }
-        }
-
-        private IList DeserializeArray(JsonReader reader, Type targetType, JsonSerializer serializer)
-        {
-            var elementType = targetType.GenericTypeArguments.FirstOrDefault();
-
-            var list = (IList) Activator.CreateInstance(targetType);
-            while (reader.Read() && reader.TokenType != JsonToken.EndArray)
-            {
-                list.Add(Deserialize(reader, elementType, serializer));
-            }
-
-            return list;
-        }
-    }
     }
 
 }

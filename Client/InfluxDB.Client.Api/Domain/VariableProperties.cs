@@ -24,33 +24,18 @@ using OpenAPIDateConverter = InfluxDB.Client.Api.Client.OpenAPIDateConverter;
 namespace InfluxDB.Client.Api.Domain
 {
     /// <summary>
-    /// NotificationEndpoints
+    /// VariableProperties
     /// </summary>
     [DataContract]
-    public partial class NotificationEndpoints :  IEquatable<NotificationEndpoints>
+    public partial class VariableProperties :  IEquatable<VariableProperties>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="NotificationEndpoints" /> class.
+        /// Initializes a new instance of the <see cref="VariableProperties" /> class.
         /// </summary>
-        /// <param name="notificationEndpoints">notificationEndpoints.</param>
-        /// <param name="links">links.</param>
-        public NotificationEndpoints(List<NotificationEndpoint> notificationEndpoints = default(List<NotificationEndpoint>), Links links = default(Links))
+        [JsonConstructorAttribute]
+        public VariableProperties()
         {
-            this._NotificationEndpoints = notificationEndpoints;
-            this.Links = links;
         }
-
-        /// <summary>
-        /// Gets or Sets _NotificationEndpoints
-        /// </summary>
-        [DataMember(Name="notificationEndpoints", EmitDefaultValue=false)]
-        public List<NotificationEndpoint> _NotificationEndpoints { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Links
-        /// </summary>
-        [DataMember(Name="links", EmitDefaultValue=false)]
-        public Links Links { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -59,9 +44,7 @@ namespace InfluxDB.Client.Api.Domain
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class NotificationEndpoints {\n");
-            sb.Append("  _NotificationEndpoints: ").Append(_NotificationEndpoints).Append("\n");
-            sb.Append("  Links: ").Append(Links).Append("\n");
+            sb.Append("class VariableProperties {\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -82,30 +65,20 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as NotificationEndpoints);
+            return this.Equals(input as VariableProperties);
         }
 
         /// <summary>
-        /// Returns true if NotificationEndpoints instances are equal
+        /// Returns true if VariableProperties instances are equal
         /// </summary>
-        /// <param name="input">Instance of NotificationEndpoints to be compared</param>
+        /// <param name="input">Instance of VariableProperties to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(NotificationEndpoints input)
+        public bool Equals(VariableProperties input)
         {
             if (input == null)
                 return false;
 
-            return 
-                (
-                    this._NotificationEndpoints == input._NotificationEndpoints ||
-                    this._NotificationEndpoints != null &&
-                    this._NotificationEndpoints.SequenceEqual(input._NotificationEndpoints)
-                ) && 
-                (
-                    
-                    (this.Links != null &&
-                    this.Links.Equals(input.Links))
-                );
+            return false;
         }
 
         /// <summary>
@@ -117,10 +90,6 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
-                if (this._NotificationEndpoints != null)
-                    hashCode = hashCode * 59 + this._NotificationEndpoints.GetHashCode();
-                if (this.Links != null)
-                    hashCode = hashCode * 59 + this.Links.GetHashCode();
                 return hashCode;
             }
         }

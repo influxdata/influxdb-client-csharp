@@ -27,7 +27,7 @@ namespace InfluxDB.Client.Api.Domain
     /// NotificationEndpointBase
     /// </summary>
     [DataContract]
-    public partial class NotificationEndpointBase :  IEquatable<NotificationEndpointBase>
+    public partial class NotificationEndpointBase : NotificationEndpointDiscriminator,  IEquatable<NotificationEndpointBase>
     {
         /// <summary>
         /// The status of the endpoint.
@@ -78,7 +78,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="labels">labels.</param>
         /// <param name="links">links.</param>
         /// <param name="type">type (required).</param>
-        public NotificationEndpointBase(string id = default(string), string orgID = default(string), string userID = default(string), string description = default(string), string name = default(string), StatusEnum? status = StatusEnum.Active, List<Label> labels = default(List<Label>), NotificationEndpointBaseLinks links = default(NotificationEndpointBaseLinks), NotificationEndpointType type = default(NotificationEndpointType))
+        public NotificationEndpointBase(string id = default(string), string orgID = default(string), string userID = default(string), string description = default(string), string name = default(string), StatusEnum? status = StatusEnum.Active, List<Label> labels = default(List<Label>), NotificationEndpointBaseLinks links = default(NotificationEndpointBaseLinks), NotificationEndpointType type = default(NotificationEndpointType)) : base()
         {
             // to ensure "name" is required (not null)
             if (name == null)
@@ -180,6 +180,7 @@ namespace InfluxDB.Client.Api.Domain
         {
             var sb = new StringBuilder();
             sb.Append("class NotificationEndpointBase {\n");
+            sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  OrgID: ").Append(OrgID).Append("\n");
             sb.Append("  UserID: ").Append(UserID).Append("\n");
@@ -199,7 +200,7 @@ namespace InfluxDB.Client.Api.Domain
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public virtual string ToJson()
+        public override string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }
@@ -224,57 +225,57 @@ namespace InfluxDB.Client.Api.Domain
             if (input == null)
                 return false;
 
-            return 
+            return base.Equals(input) && 
                 (
                     this.Id == input.Id ||
                     (this.Id != null &&
                     this.Id.Equals(input.Id))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.OrgID == input.OrgID ||
                     (this.OrgID != null &&
                     this.OrgID.Equals(input.OrgID))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.UserID == input.UserID ||
                     (this.UserID != null &&
                     this.UserID.Equals(input.UserID))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.CreatedAt == input.CreatedAt ||
                     (this.CreatedAt != null &&
                     this.CreatedAt.Equals(input.CreatedAt))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.UpdatedAt == input.UpdatedAt ||
                     (this.UpdatedAt != null &&
                     this.UpdatedAt.Equals(input.UpdatedAt))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.Description == input.Description ||
                     (this.Description != null &&
                     this.Description.Equals(input.Description))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.Name == input.Name ||
                     (this.Name != null &&
                     this.Name.Equals(input.Name))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.Status == input.Status ||
                     (this.Status != null &&
                     this.Status.Equals(input.Status))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.Labels == input.Labels ||
                     this.Labels != null &&
                     this.Labels.SequenceEqual(input.Labels)
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     
                     (this.Links != null &&
                     this.Links.Equals(input.Links))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.Type == input.Type ||
                     (this.Type != null &&
@@ -290,7 +291,7 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
+                int hashCode = base.GetHashCode();
                 if (this.Id != null)
                     hashCode = hashCode * 59 + this.Id.GetHashCode();
                 if (this.OrgID != null)

@@ -27,7 +27,7 @@ namespace InfluxDB.Client.Api.Domain
     /// CheckBase
     /// </summary>
     [DataContract]
-    public partial class CheckBase :  IEquatable<CheckBase>
+    public partial class CheckBase : CheckDiscriminator,  IEquatable<CheckBase>
     {
         /// <summary>
         /// Gets or Sets Status
@@ -53,7 +53,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="statusMessageTemplate">The template used to generate and write a status message..</param>
         /// <param name="labels">labels.</param>
         /// <param name="links">links.</param>
-        public CheckBase(string name = default(string), string orgID = default(string), DashboardQuery query = default(DashboardQuery), TaskStatusType? status = default(TaskStatusType?), string every = default(string), string offset = default(string), List<CheckBaseTags> tags = default(List<CheckBaseTags>), string description = default(string), string statusMessageTemplate = default(string), List<Label> labels = default(List<Label>), CheckBaseLinks links = default(CheckBaseLinks))
+        public CheckBase(string name = default(string), string orgID = default(string), DashboardQuery query = default(DashboardQuery), TaskStatusType? status = default(TaskStatusType?), string every = default(string), string offset = default(string), List<CheckBaseTags> tags = default(List<CheckBaseTags>), string description = default(string), string statusMessageTemplate = default(string), List<Label> labels = default(List<Label>), CheckBaseLinks links = default(CheckBaseLinks)) : base()
         {
             // to ensure "name" is required (not null)
             if (name == null)
@@ -192,6 +192,7 @@ namespace InfluxDB.Client.Api.Domain
         {
             var sb = new StringBuilder();
             sb.Append("class CheckBase {\n");
+            sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
             sb.Append("  OrgID: ").Append(OrgID).Append("\n");
@@ -215,7 +216,7 @@ namespace InfluxDB.Client.Api.Domain
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public virtual string ToJson()
+        public override string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }
@@ -240,77 +241,77 @@ namespace InfluxDB.Client.Api.Domain
             if (input == null)
                 return false;
 
-            return 
+            return base.Equals(input) && 
                 (
                     this.Id == input.Id ||
                     (this.Id != null &&
                     this.Id.Equals(input.Id))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.Name == input.Name ||
                     (this.Name != null &&
                     this.Name.Equals(input.Name))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.OrgID == input.OrgID ||
                     (this.OrgID != null &&
                     this.OrgID.Equals(input.OrgID))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.OwnerID == input.OwnerID ||
                     (this.OwnerID != null &&
                     this.OwnerID.Equals(input.OwnerID))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.CreatedAt == input.CreatedAt ||
                     (this.CreatedAt != null &&
                     this.CreatedAt.Equals(input.CreatedAt))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.UpdatedAt == input.UpdatedAt ||
                     (this.UpdatedAt != null &&
                     this.UpdatedAt.Equals(input.UpdatedAt))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     
                     (this.Query != null &&
                     this.Query.Equals(input.Query))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.Status == input.Status ||
                     (this.Status != null &&
                     this.Status.Equals(input.Status))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.Every == input.Every ||
                     (this.Every != null &&
                     this.Every.Equals(input.Every))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.Offset == input.Offset ||
                     (this.Offset != null &&
                     this.Offset.Equals(input.Offset))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.Tags == input.Tags ||
                     this.Tags != null &&
                     this.Tags.SequenceEqual(input.Tags)
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.Description == input.Description ||
                     (this.Description != null &&
                     this.Description.Equals(input.Description))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.StatusMessageTemplate == input.StatusMessageTemplate ||
                     (this.StatusMessageTemplate != null &&
                     this.StatusMessageTemplate.Equals(input.StatusMessageTemplate))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.Labels == input.Labels ||
                     this.Labels != null &&
                     this.Labels.SequenceEqual(input.Labels)
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     
                     (this.Links != null &&
@@ -326,7 +327,7 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
+                int hashCode = base.GetHashCode();
                 if (this.Id != null)
                     hashCode = hashCode * 59 + this.Id.GetHashCode();
                 if (this.Name != null)

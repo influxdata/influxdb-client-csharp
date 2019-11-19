@@ -35,6 +35,37 @@ namespace InfluxDB.Client.Api.Domain
         [DataMember(Name="status", EmitDefaultValue=false)]
         public TaskStatusType? Status { get; set; }
         /// <summary>
+        /// Defines LastRunStatus
+        /// </summary>
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum LastRunStatusEnum
+        {
+            /// <summary>
+            /// Enum Failed for value: failed
+            /// </summary>
+            [EnumMember(Value = "failed")]
+            Failed = 1,
+
+            /// <summary>
+            /// Enum Success for value: success
+            /// </summary>
+            [EnumMember(Value = "success")]
+            Success = 2,
+
+            /// <summary>
+            /// Enum Canceled for value: canceled
+            /// </summary>
+            [EnumMember(Value = "canceled")]
+            Canceled = 3
+
+        }
+
+        /// <summary>
+        /// Gets or Sets LastRunStatus
+        /// </summary>
+        [DataMember(Name="lastRunStatus", EmitDefaultValue=false)]
+        public LastRunStatusEnum? LastRunStatus { get; set; }
+        /// <summary>
         /// Initializes a new instance of the <see cref="TaskType" /> class.
         /// </summary>
         [JsonConstructorAttribute]
@@ -186,6 +217,13 @@ namespace InfluxDB.Client.Api.Domain
         [DataMember(Name="latestCompleted", EmitDefaultValue=false)]
         public DateTime? LatestCompleted { get; private set; }
 
+
+        /// <summary>
+        /// Gets or Sets LastRunError
+        /// </summary>
+        [DataMember(Name="lastRunError", EmitDefaultValue=false)]
+        public string LastRunError { get; private set; }
+
         /// <summary>
         /// Gets or Sets CreatedAt
         /// </summary>
@@ -226,6 +264,8 @@ namespace InfluxDB.Client.Api.Domain
             sb.Append("  Cron: ").Append(Cron).Append("\n");
             sb.Append("  Offset: ").Append(Offset).Append("\n");
             sb.Append("  LatestCompleted: ").Append(LatestCompleted).Append("\n");
+            sb.Append("  LastRunStatus: ").Append(LastRunStatus).Append("\n");
+            sb.Append("  LastRunError: ").Append(LastRunError).Append("\n");
             sb.Append("  CreatedAt: ").Append(CreatedAt).Append("\n");
             sb.Append("  UpdatedAt: ").Append(UpdatedAt).Append("\n");
             sb.Append("  Links: ").Append(Links).Append("\n");
@@ -334,6 +374,16 @@ namespace InfluxDB.Client.Api.Domain
                     this.LatestCompleted.Equals(input.LatestCompleted))
                 ) && 
                 (
+                    this.LastRunStatus == input.LastRunStatus ||
+                    (this.LastRunStatus != null &&
+                    this.LastRunStatus.Equals(input.LastRunStatus))
+                ) && 
+                (
+                    this.LastRunError == input.LastRunError ||
+                    (this.LastRunError != null &&
+                    this.LastRunError.Equals(input.LastRunError))
+                ) && 
+                (
                     this.CreatedAt == input.CreatedAt ||
                     (this.CreatedAt != null &&
                     this.CreatedAt.Equals(input.CreatedAt))
@@ -387,6 +437,10 @@ namespace InfluxDB.Client.Api.Domain
                     hashCode = hashCode * 59 + this.Offset.GetHashCode();
                 if (this.LatestCompleted != null)
                     hashCode = hashCode * 59 + this.LatestCompleted.GetHashCode();
+                if (this.LastRunStatus != null)
+                    hashCode = hashCode * 59 + this.LastRunStatus.GetHashCode();
+                if (this.LastRunError != null)
+                    hashCode = hashCode * 59 + this.LastRunError.GetHashCode();
                 if (this.CreatedAt != null)
                     hashCode = hashCode * 59 + this.CreatedAt.GetHashCode();
                 if (this.UpdatedAt != null)

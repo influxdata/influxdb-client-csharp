@@ -24,33 +24,25 @@ using OpenAPIDateConverter = InfluxDB.Client.Api.Client.OpenAPIDateConverter;
 namespace InfluxDB.Client.Api.Domain
 {
     /// <summary>
-    /// NotificationEndpoints
+    /// PkgSpec
     /// </summary>
     [DataContract]
-    public partial class NotificationEndpoints :  IEquatable<NotificationEndpoints>
+    public partial class PkgSpec :  IEquatable<PkgSpec>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="NotificationEndpoints" /> class.
+        /// Initializes a new instance of the <see cref="PkgSpec" /> class.
         /// </summary>
-        /// <param name="notificationEndpoints">notificationEndpoints.</param>
-        /// <param name="links">links.</param>
-        public NotificationEndpoints(List<NotificationEndpoint> notificationEndpoints = default(List<NotificationEndpoint>), Links links = default(Links))
+        /// <param name="resources">resources.</param>
+        public PkgSpec(List<Object> resources = default(List<Object>))
         {
-            this._NotificationEndpoints = notificationEndpoints;
-            this.Links = links;
+            this.Resources = resources;
         }
 
         /// <summary>
-        /// Gets or Sets _NotificationEndpoints
+        /// Gets or Sets Resources
         /// </summary>
-        [DataMember(Name="notificationEndpoints", EmitDefaultValue=false)]
-        public List<NotificationEndpoint> _NotificationEndpoints { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Links
-        /// </summary>
-        [DataMember(Name="links", EmitDefaultValue=false)]
-        public Links Links { get; set; }
+        [DataMember(Name="resources", EmitDefaultValue=false)]
+        public List<Object> Resources { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -59,9 +51,8 @@ namespace InfluxDB.Client.Api.Domain
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class NotificationEndpoints {\n");
-            sb.Append("  _NotificationEndpoints: ").Append(_NotificationEndpoints).Append("\n");
-            sb.Append("  Links: ").Append(Links).Append("\n");
+            sb.Append("class PkgSpec {\n");
+            sb.Append("  Resources: ").Append(Resources).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -82,29 +73,24 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as NotificationEndpoints);
+            return this.Equals(input as PkgSpec);
         }
 
         /// <summary>
-        /// Returns true if NotificationEndpoints instances are equal
+        /// Returns true if PkgSpec instances are equal
         /// </summary>
-        /// <param name="input">Instance of NotificationEndpoints to be compared</param>
+        /// <param name="input">Instance of PkgSpec to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(NotificationEndpoints input)
+        public bool Equals(PkgSpec input)
         {
             if (input == null)
                 return false;
 
             return 
                 (
-                    this._NotificationEndpoints == input._NotificationEndpoints ||
-                    this._NotificationEndpoints != null &&
-                    this._NotificationEndpoints.SequenceEqual(input._NotificationEndpoints)
-                ) && 
-                (
-                    
-                    (this.Links != null &&
-                    this.Links.Equals(input.Links))
+                    this.Resources == input.Resources ||
+                    this.Resources != null &&
+                    this.Resources.SequenceEqual(input.Resources)
                 );
         }
 
@@ -117,10 +103,8 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
-                if (this._NotificationEndpoints != null)
-                    hashCode = hashCode * 59 + this._NotificationEndpoints.GetHashCode();
-                if (this.Links != null)
-                    hashCode = hashCode * 59 + this.Links.GetHashCode();
+                if (this.Resources != null)
+                    hashCode = hashCode * 59 + this.Resources.GetHashCode();
                 return hashCode;
             }
         }
