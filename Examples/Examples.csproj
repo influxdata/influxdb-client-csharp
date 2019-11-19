@@ -5,6 +5,9 @@
         <TargetFramework>netcoreapp2.2</TargetFramework>
         <Version>1.3.0-preview</Version>
         <IsPackable>false</IsPackable>
+        
+        <AssemblyOriginatorKeyFile>../Keys/Key.snk</AssemblyOriginatorKeyFile>
+        <SignAssembly>true</SignAssembly>
     </PropertyGroup>
 
     <ItemGroup>
