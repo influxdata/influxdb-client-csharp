@@ -10,7 +10,7 @@
 
         <PackageId>InfluxDB.Client.Core</PackageId>
         <PackageTags>influxdata;timeseries;flux;influxdb</PackageTags>
-        <PackageIconUrl>https://raw.githubusercontent.com/influxdata/influxdb-client-csharp/master/Assets/influxdata.jpg</PackageIconUrl>
+        <PackageIcon>influxdata.jpg</PackageIcon>
         <PackageProjectUrl>https://github.com/influxdata/influxdb-client-csharp/tree/master/Client.Core</PackageProjectUrl>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <RepositoryUrl>https://github.com/influxdata/influxdb-client-csharp</RepositoryUrl>
@@ -24,6 +24,10 @@
         <SignAssembly>true</SignAssembly>
     </PropertyGroup>
 
+    <ItemGroup>
+        <None Include="..\Assets\influxdata.jpg" Pack="true" PackagePath=""/>
+    </ItemGroup>
+    
     <ItemGroup>
       <PackageReference Include="CsvHelper" Version="8.1.1" />
       <PackageReference Include="Newtonsoft.Json" Version="	11.0.2" />

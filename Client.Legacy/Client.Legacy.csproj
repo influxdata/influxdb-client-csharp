@@ -2,30 +2,31 @@
 
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
-        
+
         <Description>The client that allow perform Flux Query against the InfluxDB 1.7+.</Description>
         <Authors>influxdb-client-csharp Contributors</Authors>
         <AssemblyName>InfluxDB.Client.Flux</AssemblyName>
         <Version>1.3.0-preview</Version>
-        
+
         <PackageId>InfluxDB.Client.Flux</PackageId>
         <PackageTags>influxdata;timeseries;flux;influxdb</PackageTags>
-        <PackageIconUrl>https://raw.githubusercontent.com/influxdata/influxdb-client-csharp/master/Assets/influxdata.jpg</PackageIconUrl>
+        <PackageIcon>influxdata.jpg</PackageIcon>
         <PackageProjectUrl>https://github.com/influxdata/influxdb-client-csharp/tree/master/Client.Legacy</PackageProjectUrl>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <RepositoryUrl>https://github.com/influxdata/influxdb-client-csharp</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
-        
+
         <PackageReleaseNotes>https://github.com/influxdata/influxdb-client-csharp/blob/master/CHANGELOG.md</PackageReleaseNotes>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
         <RootNamespace>InfluxDB.Client.Flux</RootNamespace>
-        
+
         <AssemblyOriginatorKeyFile>../Keys/Key.snk</AssemblyOriginatorKeyFile>
         <SignAssembly>true</SignAssembly>
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Client.Core\Client.Core.csproj" />
+        <None Include="..\Assets\influxdata.jpg" Pack="true" PackagePath=""/>
+        <ProjectReference Include="..\Client.Core\Client.Core.csproj"/>
     </ItemGroup>
 
 </Project>
