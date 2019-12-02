@@ -5,6 +5,7 @@
 
 ### Bugs
 1. [#45](https://github.com/influxdata/influxdb-client-csharp/issues/45): Assemblies are strong-named
+2. [#48](https://github.com/influxdata/influxdb-client-csharp/pull/48): Packing library icon into a package
 
 ## 1.2.0 [2019-11-08]
 
