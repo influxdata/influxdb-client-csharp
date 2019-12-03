@@ -65,27 +65,33 @@ namespace InfluxDB.Client
                 .Select(grouped =>
                 {
                     var aggregate = grouped
-                        .Aggregate("", (lineProtocol, batchWrite) =>
+                        .Aggregate(new StringBuilder(""), (builder, batchWrite) =>
                         {
                             var data = batchWrite.ToLineProtocol();
 
-                            if (string.IsNullOrEmpty(data)) return lineProtocol;
+                            if (string.IsNullOrEmpty(data)) return builder;
 
-                            if (string.IsNullOrEmpty(lineProtocol)) return data;
+                            if (builder.Length > 0)
+                            {
+                                builder.Append("\n");
+                            }
 
-                            return string.Join("\n", lineProtocol, data);
-                        });
-
+                            return builder.Append(data);
+                        }).Select(builder => builder.ToString());
+                    
                     return aggregate.Select(records => new BatchWriteRecord(grouped.Key, records));
                 })
                 //
                 // Jitter
                 //
-                .Delay(source =>
+                .Select(source =>
                 {
-                    var jitterDelay = JitterDelay(writeOptions);
+                    if (writeOptions.JitterInterval <= 0)
+                    {
+                        return source;
+                    }
 
-                    return Observable.Timer(TimeSpan.FromMilliseconds(jitterDelay), Scheduler.CurrentThread);
+                    return source.Delay(_ => Observable.Timer(TimeSpan.FromMilliseconds(JitterDelay(writeOptions)), Scheduler.CurrentThread));
                 })
                 .Concat()
                 //
