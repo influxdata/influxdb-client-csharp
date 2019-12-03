@@ -1,5 +1,9 @@
 ## 1.3.0 [unreleased]
 
+### Performance
+
+1. [#49](https://github.com/influxdata/influxdb-client-csharp/pull/49): Optimized serialization to LineProtocol
+
 ### API
 1. [#46](https://github.com/influxdata/influxdb-client-csharp/pull/46): Updated swagger to latest version
 
