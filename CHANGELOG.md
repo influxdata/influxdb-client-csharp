@@ -1,4 +1,4 @@
-## 1.3.0 [unreleased]
+## 1.3.0 [2019-12-06]
 
 ### Performance
 
