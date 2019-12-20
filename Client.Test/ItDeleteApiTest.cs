@@ -136,11 +136,17 @@ namespace InfluxDB.Client.Test
             Assert.AreEqual(6, tables[0].Records.Count);
 
             _deleteApi = Client.GetDeleteApi();
-            await _deleteApi.Delete(DateTime.Now.AddHours(-1), DateTime.Now, "", _bucket, _organization);
+            await _deleteApi.Delete(DateTime.Now.AddSeconds(-1), DateTime.Now, "", _bucket, _organization);
             
             var tablesAfterDelete = await _queryApi.QueryAsync(query, _organization.Id);
             
-            Assert.AreEqual(0, tablesAfterDelete.Count);
+            Assert.AreNotEqual(0, tablesAfterDelete.Count);
+            
+            await _deleteApi.Delete(DateTime.Now.AddHours(-1), DateTime.Now, "", _bucket, _organization);
+            
+            var tablesAfterDelete2 = await _queryApi.QueryAsync(query, _organization.Id);
+            
+            Assert.AreEqual(0, tablesAfterDelete2.Count);
         }
     }
 }
