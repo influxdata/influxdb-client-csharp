@@ -25,7 +25,7 @@ namespace InfluxDB.Client.Api.Service
     {
         #region Synchronous Operations
         /// <summary>
-        /// Apply or dry run an influx package
+        /// Apply or dry-run an Influx package
         /// </summary>
         /// <remarks>
         /// 
@@ -36,7 +36,7 @@ namespace InfluxDB.Client.Api.Service
         PkgSummary ApplyPkg (PkgApply pkgApply);
 
         /// <summary>
-        /// Apply or dry run an influx package
+        /// Apply or dry-run an Influx package
         /// </summary>
         /// <remarks>
         /// 
@@ -52,7 +52,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="pkgCreate">Influx package to create (optional)</param>
+        /// <param name="pkgCreate">Influx package to create. (optional)</param>
         /// <returns>Pkg</returns>
         Pkg CreatePkg (PkgCreate pkgCreate = null);
 
@@ -63,13 +63,13 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="pkgCreate">Influx package to create (optional)</param>
+        /// <param name="pkgCreate">Influx package to create. (optional)</param>
         /// <returns>ApiResponse of Pkg</returns>
         ApiResponse<Pkg> CreatePkgWithHttpInfo (PkgCreate pkgCreate = null);
         #endregion Synchronous Operations
         #region Asynchronous Operations
         /// <summary>
-        /// Apply or dry run an influx package
+        /// Apply or dry-run an Influx package
         /// </summary>
         /// <remarks>
         /// 
@@ -80,7 +80,7 @@ namespace InfluxDB.Client.Api.Service
         System.Threading.Tasks.Task<PkgSummary> ApplyPkgAsync (PkgApply pkgApply);
 
         /// <summary>
-        /// Apply or dry run an influx package
+        /// Apply or dry-run an Influx package
         /// </summary>
         /// <remarks>
         /// 
@@ -96,7 +96,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="pkgCreate">Influx package to create (optional)</param>
+        /// <param name="pkgCreate">Influx package to create. (optional)</param>
         /// <returns>Task of Pkg</returns>
         System.Threading.Tasks.Task<Pkg> CreatePkgAsync (PkgCreate pkgCreate = null);
 
@@ -107,7 +107,7 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="pkgCreate">Influx package to create (optional)</param>
+        /// <param name="pkgCreate">Influx package to create. (optional)</param>
         /// <returns>Task of ApiResponse (Pkg)</returns>
         System.Threading.Tasks.Task<ApiResponse<Pkg>> CreatePkgAsyncWithHttpInfo (PkgCreate pkgCreate = null);
         #endregion Asynchronous Operations
@@ -211,7 +211,7 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Apply or dry run an influx package 
+        /// Apply or dry-run an Influx package 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="pkgApply"></param>
@@ -223,7 +223,7 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Apply or dry run an influx package 
+        /// Apply or dry-run an Influx package 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="pkgApply"></param>
@@ -287,7 +287,7 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Apply or dry run an influx package 
+        /// Apply or dry-run an Influx package 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="pkgApply"></param>
@@ -349,7 +349,7 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Apply or dry run an influx package 
+        /// Apply or dry-run an Influx package 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="pkgApply"></param>
@@ -411,7 +411,7 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// Apply or dry run an influx package 
+        /// Apply or dry-run an Influx package 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="pkgApply"></param>
@@ -462,7 +462,7 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Apply or dry run an influx package 
+        /// Apply or dry-run an Influx package 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="pkgApply"></param>
@@ -475,7 +475,7 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Apply or dry run an influx package 
+        /// Apply or dry-run an Influx package 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="pkgApply"></param>
@@ -499,7 +499,7 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// Apply or dry run an influx package 
+        /// Apply or dry-run an Influx package 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="pkgApply"></param>
@@ -562,7 +562,7 @@ namespace InfluxDB.Client.Api.Service
         /// Create a new Influx package 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="pkgCreate">Influx package to create (optional)</param>
+        /// <param name="pkgCreate">Influx package to create. (optional)</param>
         /// <returns>Pkg</returns>
         public Pkg CreatePkg (PkgCreate pkgCreate = null)
         {
@@ -574,7 +574,7 @@ namespace InfluxDB.Client.Api.Service
         /// Create a new Influx package 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="pkgCreate">Influx package to create (optional)</param>
+        /// <param name="pkgCreate">Influx package to create. (optional)</param>
         /// <returns>ApiResponse of Pkg</returns>
         public ApiResponse< Pkg > CreatePkgWithHttpInfo (PkgCreate pkgCreate = null)
         {
@@ -634,7 +634,7 @@ namespace InfluxDB.Client.Api.Service
         /// Create a new Influx package 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="pkgCreate">Influx package to create (optional)</param>
+        /// <param name="pkgCreate">Influx package to create. (optional)</param>
         /// <returns>ApiResponse of Pkg</returns>
         public async System.Threading.Tasks.Task<IRestResponse> CreatePkgWithIRestResponseAsync (PkgCreate pkgCreate = null)
         {
@@ -692,7 +692,7 @@ namespace InfluxDB.Client.Api.Service
         /// Create a new Influx package 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="pkgCreate">Influx package to create (optional)</param>
+        /// <param name="pkgCreate">Influx package to create. (optional)</param>
         /// <returns>ApiResponse of Pkg</returns>
         public IRestResponse CreatePkgWithIRestResponse (PkgCreate pkgCreate = null)
         {
@@ -750,7 +750,7 @@ namespace InfluxDB.Client.Api.Service
         /// Create a new Influx package 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="pkgCreate">Influx package to create (optional)</param>
+        /// <param name="pkgCreate">Influx package to create. (optional)</param>
         /// <returns>ApiResponse of Pkg</returns>
         public RestRequest CreatePkgWithRestRequest (PkgCreate pkgCreate = null)
         {
@@ -797,7 +797,7 @@ namespace InfluxDB.Client.Api.Service
         /// Create a new Influx package 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="pkgCreate">Influx package to create (optional)</param>
+        /// <param name="pkgCreate">Influx package to create. (optional)</param>
         /// <returns>Task of Pkg</returns>
         public async System.Threading.Tasks.Task<Pkg> CreatePkgAsync (PkgCreate pkgCreate = null)
         {
@@ -810,7 +810,7 @@ namespace InfluxDB.Client.Api.Service
         /// Create a new Influx package 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="pkgCreate">Influx package to create (optional)</param>
+        /// <param name="pkgCreate">Influx package to create. (optional)</param>
         /// <returns>Task of ApiResponse (Pkg)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Pkg>> CreatePkgAsyncWithHttpInfo (PkgCreate pkgCreate = null)
         {
@@ -834,7 +834,7 @@ namespace InfluxDB.Client.Api.Service
         /// Create a new Influx package 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="pkgCreate">Influx package to create (optional)</param>
+        /// <param name="pkgCreate">Influx package to create. (optional)</param>
         /// <returns>Task of IRestResponse (Pkg)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> CreatePkgAsyncWithIRestResponse (PkgCreate pkgCreate = null)
         {

@@ -37,11 +37,19 @@ namespace InfluxDB.Client.Api.Domain
         /// <summary>
         /// Initializes a new instance of the <see cref="SlackNotificationEndpoint" /> class.
         /// </summary>
-        /// <param name="url">Specifies the URL of the Slack endpoint. Specify either &#x60;URL&#x60; or &#x60;Token&#x60;..</param>
+        /// <param name="url">Specifies the URL of the Slack endpoint. Specify either &#x60;URL&#x60; or &#x60;Token&#x60;. (required).</param>
         /// <param name="token">Specifies the API token string. Specify either &#x60;URL&#x60; or &#x60;Token&#x60;..</param>
         public SlackNotificationEndpoint(string url = default(string), string token = default(string), string id = default(string), string orgID = default(string), string userID = default(string), string description = default(string), string name = default(string), StatusEnum? status = StatusEnum.Active, List<Label> labels = default(List<Label>), NotificationEndpointBaseLinks links = default(NotificationEndpointBaseLinks), NotificationEndpointType type = default(NotificationEndpointType)) : base(id, orgID, userID, description, name, status, labels, links, type)
         {
-            this.Url = url;
+            // to ensure "url" is required (not null)
+            if (url == null)
+            {
+                throw new InvalidDataException("url is a required property for SlackNotificationEndpoint and cannot be null");
+            }
+            else
+            {
+                this.Url = url;
+            }
             this.Token = token;
         }
 

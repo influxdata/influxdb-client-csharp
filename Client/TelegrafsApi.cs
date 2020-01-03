@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using InfluxDB.Client.Api.Domain;
 using InfluxDB.Client.Api.Service;
 using InfluxDB.Client.Core;
-using Task = System.Threading.Tasks.Task;
 
 namespace InfluxDB.Client
 {
@@ -22,6 +22,80 @@ namespace InfluxDB.Client
             _service = service;
         }
 
+        public async Task<Telegraf> CreateTelegrafAsync(string name, string description, Organization org,
+            List<TelegrafPlugin> plugins)
+        {
+            return await CreateTelegrafAsync(name, description, org, CreateAgentConfiguration(), plugins);
+        }
+
+        public async Task<Telegraf> CreateTelegrafAsync(string name, string description, Organization org,
+            Dictionary<string, object> agentConfiguration, List<TelegrafPlugin> plugins)
+        {
+            return await CreateTelegrafAsync(name, description, org.Id, agentConfiguration, plugins);
+        }
+
+        public async Task<Telegraf> CreateTelegrafAsync(string name, string description, string orgId,
+            List<TelegrafPlugin> plugins)
+        {
+            return await CreateTelegrafAsync(name, description, orgId, CreateAgentConfiguration(), plugins);
+        }
+
+        public async Task<Telegraf> CreateTelegrafAsync(string name, string description, string orgId,
+            Dictionary<string, object> agentConfiguration, List<TelegrafPlugin> plugins)
+        {
+            var config = new StringBuilder();
+
+            // append agent configuration
+            config.Append("[agent]").Append("\n");
+            foreach (var pair in agentConfiguration)
+            {
+                AppendConfiguration(config, pair.Key, pair.Value);
+            }
+
+            config.Append("\n");
+
+            // append plugins configuration
+            foreach (var plugin in plugins)
+            {
+                if (!string.IsNullOrEmpty(plugin.Description))
+                {
+                    config.Append("#").Append(plugin.Description).Append("\n");
+                }
+
+                config
+                    .Append("[[")
+                    .Append(plugin.Type)
+                    .Append(".")
+                    .Append(plugin.Name)
+                    .Append("]]")
+                    .Append("\n");
+
+                foreach (var pair in plugin.Config)
+                {
+                    AppendConfiguration(config, pair.Key, pair.Value);
+                }
+            }
+
+            var request = new TelegrafRequest(name: name, description: description, orgID: orgId,
+                config: config.ToString());
+
+            return await CreateTelegrafAsync(request);
+        }
+
+        public async Task<Telegraf> CreateTelegrafAsync(string name, string description, Organization org,
+            string config, TelegrafRequestMetadata metadata)
+        {
+            return await CreateTelegrafAsync(name, description, org.Id, config, metadata);
+        }
+
+        public async Task<Telegraf> CreateTelegrafAsync(string name, string description, string orgId,
+            string config, TelegrafRequestMetadata metadata)
+        {
+            var request = new TelegrafRequest(name, description, metadata, config, orgId);
+
+            return await CreateTelegrafAsync(request);
+        }
+
         /// <summary>
         /// Create a telegraf config.
         /// </summary>
@@ -34,45 +108,63 @@ namespace InfluxDB.Client
             return await _service.PostTelegrafsAsync(telegrafRequest);
         }
 
+        // /// <summary>
+        // /// Create a telegraf config.
+        // /// </summary>
+        // /// <param name="name">Telegraf Configuration Name</param>
+        // /// <param name="description">Telegraf Configuration Description</param>
+        // /// <param name="org">The organization that owns this config</param>
+        // /// <param name="collectionInterval">Default data collection interval for all inputs in milliseconds</param>
+        // /// <param name="plugins">The telegraf plugins config</param>
+        // /// <returns>Telegraf config created</returns>
+        // public async Task<Telegraf> CreateTelegrafAsync(string name, string description, Organization org,
+        //     int collectionInterval, List<TelegrafPlugin> plugins)
+        // {
+        //     Arguments.CheckNonEmptyString(name, nameof(name));
+        //     Arguments.CheckNotNull(org, nameof(org));
+        //     Arguments.CheckPositiveNumber(collectionInterval, nameof(collectionInterval));
+        //
+        //     return await CreateTelegrafAsync(name, description, org.Id, collectionInterval, plugins);
+        // }
+        //
+        // /// <summary>
+        // /// Create a telegraf config.
+        // /// </summary>
+        // /// <param name="name">Telegraf Configuration Name</param>
+        // /// <param name="description">Telegraf Configuration Description</param>
+        // /// <param name="orgId">The ID of the organization that owns this config</param>
+        // /// <param name="collectionInterval">Default data collection interval for all inputs in milliseconds</param>
+        // /// <param name="plugins">The telegraf plugins config</param>
+        // /// <returns>Telegraf config created</returns>
+
         /// <summary>
-        /// Create a telegraf config.
+        /// Created default Telegraf Agent configuration.
+        /// <example>
+        /// [agent]
+        ///    interval = "10s"
+        ///    round_interval = true
+        ///    metric_batch_size = 1000
+        ///    metric_buffer_limit = 10000
+        ///    collection_jitter = "0s"
+        ///    flush_jitter = "0s"
+        ///    precision = ""
+        ///    omit_hostname = false
+        /// </example>
         /// </summary>
-        /// <param name="name">Telegraf Configuration Name</param>
-        /// <param name="description">Telegraf Configuration Description</param>
-        /// <param name="org">The organization that owns this config</param>
-        /// <param name="collectionInterval">Default data collection interval for all inputs in milliseconds</param>
-        /// <param name="plugins">The telegraf plugins config</param>
-        /// <returns>Telegraf config created</returns>
-        public async Task<Telegraf> CreateTelegrafAsync(string name, string description, Organization org,
-            int collectionInterval, List<TelegrafRequestPlugin> plugins)
+        /// <returns>default configuration</returns>
+        public Dictionary<string, object> CreateAgentConfiguration()
         {
-            Arguments.CheckNonEmptyString(name, nameof(name));
-            Arguments.CheckNotNull(org, nameof(org));
-            Arguments.CheckPositiveNumber(collectionInterval, nameof(collectionInterval));
-
-            return await CreateTelegrafAsync(name, description, org.Id, collectionInterval, plugins);
-        }
-
-        /// <summary>
-        /// Create a telegraf config.
-        /// </summary>
-        /// <param name="name">Telegraf Configuration Name</param>
-        /// <param name="description">Telegraf Configuration Description</param>
-        /// <param name="orgId">The ID of the organization that owns this config</param>
-        /// <param name="collectionInterval">Default data collection interval for all inputs in milliseconds</param>
-        /// <param name="plugins">The telegraf plugins config</param>
-        /// <returns>Telegraf config created</returns>
-        public async Task<Telegraf> CreateTelegrafAsync(string name, string description, string orgId,
-            int collectionInterval, List<TelegrafRequestPlugin> plugins)
-        {
-            Arguments.CheckNonEmptyString(name, nameof(name));
-            Arguments.CheckNonEmptyString(orgId, nameof(orgId));
-            Arguments.CheckPositiveNumber(collectionInterval, nameof(collectionInterval));
-
-            var request = new TelegrafRequest(name, description, new TelegrafRequestAgent(collectionInterval), plugins,
-                orgId);
-
-            return await CreateTelegrafAsync(request);
+            return new Dictionary<string, object>
+            {
+                {"interval", "10s"},
+                {"round_interval", true},
+                {"metric_batch_size", 1000},
+                {"metric_buffer_limit", 10000},
+                {"collection_jitter", "0s"},
+                {"flush_jitter", "0s"},
+                {"precision", ""},
+                {"omit_hostname", false}
+            };
         }
 
         /// <summary>
@@ -84,7 +176,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNotNull(telegraf, nameof(telegraf));
 
-            var request = new TelegrafRequest(telegraf.Name, telegraf.Description, telegraf.Agent, telegraf.Plugins,
+            var request = new TelegrafRequest(telegraf.Name, telegraf.Description, telegraf.Metadata, telegraf.Config,
                 telegraf.OrgID);
 
             return await UpdateTelegrafAsync(telegraf.Id, request);
@@ -139,7 +231,8 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(clonedName, nameof(clonedName));
             Arguments.CheckNonEmptyString(telegrafId, nameof(telegrafId));
 
-            return await FindTelegrafByIdAsync(telegrafId).ContinueWith(t => CloneTelegrafAsync(clonedName, t.Result)).Unwrap();
+            return await FindTelegrafByIdAsync(telegrafId).ContinueWith(t => CloneTelegrafAsync(clonedName, t.Result))
+                .Unwrap();
         }
 
         /// <summary>
@@ -153,7 +246,7 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(clonedName, nameof(clonedName));
             Arguments.CheckNotNull(telegraf, nameof(telegraf));
 
-            var cloned = new TelegrafRequest(clonedName, telegraf.Description, telegraf.Agent, telegraf.Plugins,
+            var cloned = new TelegrafRequest(clonedName, telegraf.Description, telegraf.Metadata, telegraf.Config,
                 telegraf.OrgID);
 
             return await CreateTelegrafAsync(cloned).ContinueWith(created =>
@@ -162,7 +255,10 @@ namespace InfluxDB.Client
                 // Add labels
                 //
                 return GetLabelsAsync(telegraf)
-                    .ContinueWith(labels => { return labels.Result.Select(label => AddLabelAsync(label, created.Result)); })
+                    .ContinueWith(labels =>
+                    {
+                        return labels.Result.Select(label => AddLabelAsync(label, created.Result));
+                    })
                     .ContinueWith(async tasks =>
                     {
                         await Task.WhenAll(tasks.Result);
@@ -449,7 +545,8 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(telegrafId, nameof(telegrafId));
             Arguments.CheckNonEmptyString(labelId, nameof(labelId));
 
-            return await _service.PostTelegrafsIDLabelsAsync(telegrafId, new LabelMapping(labelId)).ContinueWith(t => t.Result.Label);
+            return await _service.PostTelegrafsIDLabelsAsync(telegrafId, new LabelMapping(labelId))
+                .ContinueWith(t => t.Result.Label);
         }
 
         /// <summary>
@@ -478,6 +575,40 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(labelId, nameof(labelId));
 
             await _service.DeleteTelegrafsIDLabelsIDAsync(telegrafId, labelId);
+        }
+
+        private void AppendConfiguration(StringBuilder config, string key, object value)
+        {
+            if (value == null) return;
+
+            config.Append("  ").Append(key).Append(" = ");
+            if (value is IEnumerable<object> enumerable)
+            {
+                var values = enumerable.Select(it =>
+                {
+                    if (it is string str)
+                    {
+                        return $"\"{str}\"";
+                    }
+
+                    return it.ToString();
+                });
+                config.Append("[");
+                config.Append(string.Join(", ", values));
+                config.Append("]");
+            }
+            else if (value is string)
+            {
+                config.Append('"');
+                config.Append(value);
+                config.Append('"');
+            }
+            else
+            {
+                config.Append(value);
+            }
+
+            config.Append("\n");
         }
     }
 }

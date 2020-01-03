@@ -34,15 +34,15 @@ namespace InfluxDB.Client.Api.Domain
         /// </summary>
         /// <param name="name">name.</param>
         /// <param name="description">description.</param>
-        /// <param name="agent">agent.</param>
-        /// <param name="plugins">plugins.</param>
+        /// <param name="metadata">metadata.</param>
+        /// <param name="config">config.</param>
         /// <param name="orgID">orgID.</param>
-        public TelegrafRequest(string name = default(string), string description = default(string), TelegrafRequestAgent agent = default(TelegrafRequestAgent), List<TelegrafRequestPlugin> plugins = default(List<TelegrafRequestPlugin>), string orgID = default(string))
+        public TelegrafRequest(string name = default(string), string description = default(string), TelegrafRequestMetadata metadata = default(TelegrafRequestMetadata), string config = default(string), string orgID = default(string))
         {
             this.Name = name;
             this.Description = description;
-            this.Agent = agent;
-            this.Plugins = plugins;
+            this.Metadata = metadata;
+            this.Config = config;
             this.OrgID = orgID;
         }
 
@@ -59,17 +59,16 @@ namespace InfluxDB.Client.Api.Domain
         public string Description { get; set; }
 
         /// <summary>
-        /// Gets or Sets Agent
+        /// Gets or Sets Metadata
         /// </summary>
-        [DataMember(Name="agent", EmitDefaultValue=false)]
-        public TelegrafRequestAgent Agent { get; set; }
+        [DataMember(Name="metadata", EmitDefaultValue=false)]
+        public TelegrafRequestMetadata Metadata { get; set; }
 
         /// <summary>
-        /// Gets or Sets Plugins
+        /// Gets or Sets Config
         /// </summary>
-        [DataMember(Name="plugins", EmitDefaultValue=false)]
-        [JsonConverter(typeof(TelegrafRequestPluginsAdapter))]
-        public List<TelegrafRequestPlugin> Plugins { get; set; }
+        [DataMember(Name="config", EmitDefaultValue=false)]
+        public string Config { get; set; }
 
         /// <summary>
         /// Gets or Sets OrgID
@@ -87,8 +86,8 @@ namespace InfluxDB.Client.Api.Domain
             sb.Append("class TelegrafRequest {\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
             sb.Append("  Description: ").Append(Description).Append("\n");
-            sb.Append("  Agent: ").Append(Agent).Append("\n");
-            sb.Append("  Plugins: ").Append(Plugins).Append("\n");
+            sb.Append("  Metadata: ").Append(Metadata).Append("\n");
+            sb.Append("  Config: ").Append(Config).Append("\n");
             sb.Append("  OrgID: ").Append(OrgID).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -136,13 +135,13 @@ namespace InfluxDB.Client.Api.Domain
                 ) && 
                 (
                     
-                    (this.Agent != null &&
-                    this.Agent.Equals(input.Agent))
+                    (this.Metadata != null &&
+                    this.Metadata.Equals(input.Metadata))
                 ) && 
                 (
-                    this.Plugins == input.Plugins ||
-                    this.Plugins != null &&
-                    this.Plugins.SequenceEqual(input.Plugins)
+                    this.Config == input.Config ||
+                    (this.Config != null &&
+                    this.Config.Equals(input.Config))
                 ) && 
                 (
                     this.OrgID == input.OrgID ||
@@ -164,85 +163,16 @@ namespace InfluxDB.Client.Api.Domain
                     hashCode = hashCode * 59 + this.Name.GetHashCode();
                 if (this.Description != null)
                     hashCode = hashCode * 59 + this.Description.GetHashCode();
-                if (this.Agent != null)
-                    hashCode = hashCode * 59 + this.Agent.GetHashCode();
-                if (this.Plugins != null)
-                    hashCode = hashCode * 59 + this.Plugins.GetHashCode();
+                if (this.Metadata != null)
+                    hashCode = hashCode * 59 + this.Metadata.GetHashCode();
+                if (this.Config != null)
+                    hashCode = hashCode * 59 + this.Config.GetHashCode();
                 if (this.OrgID != null)
                     hashCode = hashCode * 59 + this.OrgID.GetHashCode();
                 return hashCode;
             }
         }
 
-    public class TelegrafRequestPluginsAdapter : JsonConverter
-    {
-        private static readonly Dictionary<string[], Type> Types = new Dictionary<string[], Type>(new Client.DiscriminatorComparer<string>())
-        {
-            {new []{ "cpu", "input" }, typeof(TelegrafPluginInputCpu)},
-            {new []{ "disk", "input" }, typeof(TelegrafPluginInputDisk)},
-            {new []{ "diskio", "input" }, typeof(TelegrafPluginInputDiskio)},
-            {new []{ "docker", "input" }, typeof(TelegrafPluginInputDocker)},
-            {new []{ "file", "input" }, typeof(TelegrafPluginInputFile)},
-            {new []{ "kubernetes", "input" }, typeof(TelegrafPluginInputKubernetes)},
-            {new []{ "logparser", "input" }, typeof(TelegrafPluginInputLogParser)},
-            {new []{ "procstat", "input" }, typeof(TelegrafPluginInputProcstat)},
-            {new []{ "prometheus", "input" }, typeof(TelegrafPluginInputPrometheus)},
-            {new []{ "redis", "input" }, typeof(TelegrafPluginInputRedis)},
-            {new []{ "syslog", "input" }, typeof(TelegrafPluginInputSyslog)},
-            {new []{ "file", "output" }, typeof(TelegrafPluginOutputFile)},
-            {new []{ "influxdb_v2", "output" }, typeof(TelegrafPluginOutputInfluxDBV2)},
-        };
-
-        public override bool CanConvert(Type objectType)
-        {
-            return false;
-        }
-
-        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
-        {
-            serializer.Serialize(writer, value);
-        }
-
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-        {
-            return Deserialize(reader, objectType, serializer);
-        }
-
-        private object Deserialize(JsonReader reader, Type objectType, JsonSerializer serializer)
-        {
-            switch (reader.TokenType)
-            {
-                case JsonToken.StartObject:
-
-                    var jObject = Newtonsoft.Json.Linq.JObject.Load(reader);
-
-                    var discriminator = new []{ "name", "type" }.Select(key => jObject[key].ToString()).ToArray();
-
-                    Types.TryGetValue(discriminator, out var type);
-
-                    return serializer.Deserialize(jObject.CreateReader(), type);
-
-                case JsonToken.StartArray:
-                    return DeserializeArray(reader, objectType, serializer);
-
-                default:
-                    return serializer.Deserialize(reader, objectType);
-            }
-        }
-
-        private IList DeserializeArray(JsonReader reader, Type targetType, JsonSerializer serializer)
-        {
-            var elementType = targetType.GenericTypeArguments.FirstOrDefault();
-
-            var list = (IList) Activator.CreateInstance(targetType);
-            while (reader.Read() && reader.TokenType != JsonToken.EndArray)
-            {
-                list.Add(Deserialize(reader, elementType, serializer));
-            }
-
-            return list;
-        }
-    }
     }
 
 }

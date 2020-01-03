@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using InfluxDB.Client.Api.Domain;
 using InfluxDB.Client.Core.Exceptions;
 using NUnit.Framework;
+using Tomlyn;
 
 namespace InfluxDB.Client.Test
 {
@@ -26,20 +27,31 @@ namespace InfluxDB.Client.Test
         private UsersApi _usersApi;
         private Organization _organization;
 
-        private static TelegrafRequestPlugin NewCpuPlugin()
+        private static TelegrafPlugin NewCpuPlugin()
         {
-            return new TelegrafPluginInputCpu();
+            var config = new Dictionary<string, object>
+            {
+                {"percpu", true},
+                {"totalcpu", true},
+                {"collect_cpu_time", false},
+                {"report_active", false},
+                {"avoid_null", null},
+            };
+            return new TelegrafPlugin(TelegrafPlugin.TypeEnum.Inputs, "cpu", config: config);
         }
 
-        private static TelegrafRequestPlugin NewOutputPlugin()
+        private static TelegrafPlugin NewOutputPlugin()
         {
-            var config = new TelegrafPluginOutputInfluxDBV2Config(new List<string> {"http://127.0.0.1:9999"},
-                "$INFLUX_TOKEN", "my-org", "my-bucket");
+            var config = new Dictionary<string, object>
+            {
+                {"organization", "my-org"},
+                {"bucket", "my-bucket"},
+                {"token", "$INFLUX_TOKEN"},
+                {"urls", new List<string> {"http://127.0.0.1:9999"}}
+            };
 
-            var output = new TelegrafPluginOutputInfluxDBV2(TelegrafPluginOutputInfluxDBV2.NameEnum.Influxdbv2,
-                TelegrafRequestPlugin.TypeEnum.Output, "Output to Influx 2.0", config);
-
-            return output;
+            return new TelegrafPlugin(TelegrafPlugin.TypeEnum.Outputs, "influxdb_v2", "my instance",
+                config);
         }
 
         [Test]
@@ -92,24 +104,20 @@ namespace InfluxDB.Client.Test
             var cpu = NewCpuPlugin();
 
             var telegrafConfig = await _telegrafsApi
-                .CreateTelegrafAsync(name, "test-config", _organization, 1_000,
-                    new List<TelegrafRequestPlugin> {output, cpu});
+                .CreateTelegrafAsync(name, "test-config", _organization,
+                    new List<TelegrafPlugin> {output, cpu});
 
             Assert.IsNotNull(telegrafConfig);
             Assert.AreEqual(name, telegrafConfig.Name);
             Assert.AreEqual("test-config", telegrafConfig.Description);
             Assert.AreEqual(_organization.Id, telegrafConfig.OrgID);
-            Assert.IsNotNull(telegrafConfig.Agent);
-            Assert.AreEqual(1_000, telegrafConfig.Agent.CollectionInterval);
-            Assert.AreEqual(2, telegrafConfig.Plugins.Count);
-            Assert.AreEqual(TelegrafPluginOutputInfluxDBV2.NameEnum.Influxdbv2,
-                ((TelegrafPluginOutputInfluxDBV2) telegrafConfig.Plugins[0]).Name);
-            Assert.AreEqual("Output to Influx 2.0",
-                ((TelegrafPluginOutputInfluxDBV2) telegrafConfig.Plugins[0]).Comment);
-            Assert.AreEqual(TelegrafRequestPlugin.TypeEnum.Output, telegrafConfig.Plugins[0].type);
-            Assert.AreEqual(TelegrafPluginInputCpu.NameEnum.Cpu,
-                ((TelegrafPluginInputCpu) telegrafConfig.Plugins[1]).Name);
-            Assert.AreEqual(TelegrafRequestPlugin.TypeEnum.Input, telegrafConfig.Plugins[1].type);
+            
+            Assert.IsNotNull(telegrafConfig.Metadata);
+            Assert.IsNotNull(telegrafConfig.Metadata.Buckets);
+            Assert.AreEqual(1, telegrafConfig.Metadata.Buckets.Count);
+
+            var toml = Toml.Parse(telegrafConfig.Config).ToModel();
+            Toml agent = toml.getTable("agent");
         }
 
         [Test]

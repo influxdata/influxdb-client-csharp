@@ -24,7 +24,7 @@ using OpenAPIDateConverter = InfluxDB.Client.Api.Client.OpenAPIDateConverter;
 namespace InfluxDB.Client.Api.Domain
 {
     /// <summary>
-    /// the delete predicate request
+    /// The delete predicate request.
     /// </summary>
     [DataContract]
     public partial class DeletePredicateRequest :  IEquatable<DeletePredicateRequest>
@@ -37,9 +37,9 @@ namespace InfluxDB.Client.Api.Domain
         /// <summary>
         /// Initializes a new instance of the <see cref="DeletePredicateRequest" /> class.
         /// </summary>
-        /// <param name="start">RFC3339Nano. (required).</param>
-        /// <param name="stop">RFC3339Nano. (required).</param>
-        /// <param name="predicate">sql where like delete statement.</param>
+        /// <param name="start">RFC3339Nano (required).</param>
+        /// <param name="stop">RFC3339Nano (required).</param>
+        /// <param name="predicate">InfluxQL-like delete statement.</param>
         public DeletePredicateRequest(DateTime? start = default(DateTime?), DateTime? stop = default(DateTime?), string predicate = default(string))
         {
             // to ensure "start" is required (not null)
@@ -64,23 +64,23 @@ namespace InfluxDB.Client.Api.Domain
         }
 
         /// <summary>
-        /// RFC3339Nano.
+        /// RFC3339Nano
         /// </summary>
-        /// <value>RFC3339Nano.</value>
+        /// <value>RFC3339Nano</value>
         [DataMember(Name="start", EmitDefaultValue=false)]
         public DateTime? Start { get; set; }
 
         /// <summary>
-        /// RFC3339Nano.
+        /// RFC3339Nano
         /// </summary>
-        /// <value>RFC3339Nano.</value>
+        /// <value>RFC3339Nano</value>
         [DataMember(Name="stop", EmitDefaultValue=false)]
         public DateTime? Stop { get; set; }
 
         /// <summary>
-        /// sql where like delete statement
+        /// InfluxQL-like delete statement
         /// </summary>
-        /// <value>sql where like delete statement</value>
+        /// <value>InfluxQL-like delete statement</value>
         [DataMember(Name="predicate", EmitDefaultValue=false)]
         public string Predicate { get; set; }
 

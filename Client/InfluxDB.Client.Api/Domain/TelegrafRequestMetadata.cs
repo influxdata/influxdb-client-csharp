@@ -24,25 +24,25 @@ using OpenAPIDateConverter = InfluxDB.Client.Api.Client.OpenAPIDateConverter;
 namespace InfluxDB.Client.Api.Domain
 {
     /// <summary>
-    /// TelegrafPluginInputProcstatConfig
+    /// TelegrafRequestMetadata
     /// </summary>
     [DataContract]
-    public partial class TelegrafPluginInputProcstatConfig :  IEquatable<TelegrafPluginInputProcstatConfig>
+    public partial class TelegrafRequestMetadata :  IEquatable<TelegrafRequestMetadata>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="TelegrafPluginInputProcstatConfig" /> class.
+        /// Initializes a new instance of the <see cref="TelegrafRequestMetadata" /> class.
         /// </summary>
-        /// <param name="exe">exe.</param>
-        public TelegrafPluginInputProcstatConfig(string exe = default(string))
+        /// <param name="buckets">buckets.</param>
+        public TelegrafRequestMetadata(List<string> buckets = default(List<string>))
         {
-            this.Exe = exe;
+            this.Buckets = buckets;
         }
 
         /// <summary>
-        /// Gets or Sets Exe
+        /// Gets or Sets Buckets
         /// </summary>
-        [DataMember(Name="exe", EmitDefaultValue=false)]
-        public string Exe { get; set; }
+        [DataMember(Name="buckets", EmitDefaultValue=false)]
+        public List<string> Buckets { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -51,8 +51,8 @@ namespace InfluxDB.Client.Api.Domain
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class TelegrafPluginInputProcstatConfig {\n");
-            sb.Append("  Exe: ").Append(Exe).Append("\n");
+            sb.Append("class TelegrafRequestMetadata {\n");
+            sb.Append("  Buckets: ").Append(Buckets).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -73,24 +73,24 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as TelegrafPluginInputProcstatConfig);
+            return this.Equals(input as TelegrafRequestMetadata);
         }
 
         /// <summary>
-        /// Returns true if TelegrafPluginInputProcstatConfig instances are equal
+        /// Returns true if TelegrafRequestMetadata instances are equal
         /// </summary>
-        /// <param name="input">Instance of TelegrafPluginInputProcstatConfig to be compared</param>
+        /// <param name="input">Instance of TelegrafRequestMetadata to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(TelegrafPluginInputProcstatConfig input)
+        public bool Equals(TelegrafRequestMetadata input)
         {
             if (input == null)
                 return false;
 
             return 
                 (
-                    this.Exe == input.Exe ||
-                    (this.Exe != null &&
-                    this.Exe.Equals(input.Exe))
+                    this.Buckets == input.Buckets ||
+                    this.Buckets != null &&
+                    this.Buckets.SequenceEqual(input.Buckets)
                 );
         }
 
@@ -103,8 +103,8 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
-                if (this.Exe != null)
-                    hashCode = hashCode * 59 + this.Exe.GetHashCode();
+                if (this.Buckets != null)
+                    hashCode = hashCode * 59 + this.Buckets.GetHashCode();
                 return hashCode;
             }
         }
