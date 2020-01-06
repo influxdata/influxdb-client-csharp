@@ -22,24 +22,58 @@ namespace InfluxDB.Client
             _service = service;
         }
 
+        /// <summary>
+        /// Create a telegraf config.
+        /// </summary>
+        /// <param name="name">Telegraf Configuration Name</param>
+        /// <param name="description">Telegraf Configuration Description</param>
+        /// <param name="org">The organization that owns this config</param>
+        /// <param name="plugins">The telegraf plugins config</param>
+        /// <returns>Telegraf config created</returns>
         public async Task<Telegraf> CreateTelegrafAsync(string name, string description, Organization org,
             List<TelegrafPlugin> plugins)
         {
             return await CreateTelegrafAsync(name, description, org, CreateAgentConfiguration(), plugins);
         }
 
+        /// <summary>
+        /// Create a telegraf config.
+        /// </summary>
+        /// <param name="name">Telegraf Configuration Name</param>
+        /// <param name="description">Telegraf Configuration Description</param>
+        /// <param name="org">The organization that owns this config</param>
+        /// <param name="agentConfiguration">The telegraf agent config</param>
+        /// <param name="plugins">The telegraf plugins config</param>
+        /// <returns>Telegraf config created</returns>
         public async Task<Telegraf> CreateTelegrafAsync(string name, string description, Organization org,
             Dictionary<string, object> agentConfiguration, List<TelegrafPlugin> plugins)
         {
             return await CreateTelegrafAsync(name, description, org.Id, agentConfiguration, plugins);
         }
 
+        /// <summary>
+        /// Create a telegraf config.
+        /// </summary>
+        /// <param name="name">Telegraf Configuration Name</param>
+        /// <param name="description">Telegraf Configuration Description</param>
+        /// <param name="orgId">The organization that owns this config</param>
+        /// <param name="plugins">The telegraf plugins config</param>
+        /// <returns>Telegraf config created</returns>
         public async Task<Telegraf> CreateTelegrafAsync(string name, string description, string orgId,
             List<TelegrafPlugin> plugins)
         {
             return await CreateTelegrafAsync(name, description, orgId, CreateAgentConfiguration(), plugins);
         }
 
+        /// <summary>
+        /// Create a telegraf config.
+        /// </summary>
+        /// <param name="name">Telegraf Configuration Name</param>
+        /// <param name="description">Telegraf Configuration Description</param>
+        /// <param name="orgId">The organization that owns this config</param>
+        /// <param name="agentConfiguration">The telegraf agent config</param>
+        /// <param name="plugins">The telegraf plugins config</param>
+        /// <returns>Telegraf config created</returns>
         public async Task<Telegraf> CreateTelegrafAsync(string name, string description, string orgId,
             Dictionary<string, object> agentConfiguration, List<TelegrafPlugin> plugins)
         {
@@ -64,7 +98,7 @@ namespace InfluxDB.Client
 
                 config
                     .Append("[[")
-                    .Append(plugin.Type)
+                    .Append(plugin.Type.ToString().ToLower())
                     .Append(".")
                     .Append(plugin.Name)
                     .Append("]]")
@@ -74,6 +108,8 @@ namespace InfluxDB.Client
                 {
                     AppendConfiguration(config, pair.Key, pair.Value);
                 }
+
+                config.Append("\n");
             }
 
             var request = new TelegrafRequest(name: name, description: description, orgID: orgId,
@@ -82,12 +118,30 @@ namespace InfluxDB.Client
             return await CreateTelegrafAsync(request);
         }
 
+        /// <summary>
+        /// Create a telegraf config.
+        /// </summary>
+        /// <param name="name">Telegraf Configuration Name</param>
+        /// <param name="description">Telegraf Configuration Description</param>
+        /// <param name="org">The organization that owns this config</param>
+        /// <param name="config">ConfigTOML contains the raw toml config</param>
+        /// <param name="metadata">Metadata for the config</param>
+        /// <returns>Telegraf config created</returns>
         public async Task<Telegraf> CreateTelegrafAsync(string name, string description, Organization org,
             string config, TelegrafRequestMetadata metadata)
         {
             return await CreateTelegrafAsync(name, description, org.Id, config, metadata);
         }
 
+        /// <summary>
+        /// Create a telegraf config.
+        /// </summary>
+        /// <param name="name">Telegraf Configuration Name</param>
+        /// <param name="description">Telegraf Configuration Description</param>
+        /// <param name="orgId">The organization that owns this config</param>
+        /// <param name="config">ConfigTOML contains the raw toml config</param>
+        /// <param name="metadata">Metadata for the config</param>
+        /// <returns>Telegraf config created</returns>
         public async Task<Telegraf> CreateTelegrafAsync(string name, string description, string orgId,
             string config, TelegrafRequestMetadata metadata)
         {
@@ -107,35 +161,6 @@ namespace InfluxDB.Client
 
             return await _service.PostTelegrafsAsync(telegrafRequest);
         }
-
-        // /// <summary>
-        // /// Create a telegraf config.
-        // /// </summary>
-        // /// <param name="name">Telegraf Configuration Name</param>
-        // /// <param name="description">Telegraf Configuration Description</param>
-        // /// <param name="org">The organization that owns this config</param>
-        // /// <param name="collectionInterval">Default data collection interval for all inputs in milliseconds</param>
-        // /// <param name="plugins">The telegraf plugins config</param>
-        // /// <returns>Telegraf config created</returns>
-        // public async Task<Telegraf> CreateTelegrafAsync(string name, string description, Organization org,
-        //     int collectionInterval, List<TelegrafPlugin> plugins)
-        // {
-        //     Arguments.CheckNonEmptyString(name, nameof(name));
-        //     Arguments.CheckNotNull(org, nameof(org));
-        //     Arguments.CheckPositiveNumber(collectionInterval, nameof(collectionInterval));
-        //
-        //     return await CreateTelegrafAsync(name, description, org.Id, collectionInterval, plugins);
-        // }
-        //
-        // /// <summary>
-        // /// Create a telegraf config.
-        // /// </summary>
-        // /// <param name="name">Telegraf Configuration Name</param>
-        // /// <param name="description">Telegraf Configuration Description</param>
-        // /// <param name="orgId">The ID of the organization that owns this config</param>
-        // /// <param name="collectionInterval">Default data collection interval for all inputs in milliseconds</param>
-        // /// <param name="plugins">The telegraf plugins config</param>
-        // /// <returns>Telegraf config created</returns>
 
         /// <summary>
         /// Created default Telegraf Agent configuration.
@@ -602,6 +627,10 @@ namespace InfluxDB.Client
                 config.Append('"');
                 config.Append(value);
                 config.Append('"');
+            }
+            else if (value is bool b)
+            {
+                config.Append(b.ToString().ToLower());
             }
             else
             {
