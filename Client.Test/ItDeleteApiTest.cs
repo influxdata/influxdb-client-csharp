@@ -84,8 +84,9 @@ namespace InfluxDB.Client.Test
             _queryApi = Client.GetQueryApi();
             var tables = await _queryApi.QueryAsync(query, _organization.Id);
 
-            Assert.AreEqual(1, tables.Count);
-            Assert.AreEqual(6, tables[0].Records.Count);
+            Assert.AreEqual(2, tables.Count);
+            Assert.AreEqual(1, tables[0].Records.Count);
+            Assert.AreEqual(5, tables[1].Records.Count);
 
             _deleteApi = Client.GetDeleteApi();
             await _deleteApi.Delete(DateTime.Now.AddSeconds(-1), DateTime.Now, "", _bucket, _organization);
