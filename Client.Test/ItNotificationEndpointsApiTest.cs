@@ -104,7 +104,7 @@ namespace InfluxDB.Client.Test
         }
 
         [Test]
-        public async Task CreateSlackTokenOrUrlShouldBeDefined()
+        public async Task SlackUrlShouldBeDefined()
         {
             await _notificationEndpointsApi
                 .CreateSlackEndpointAsync(GenerateName("slack"), null, "token", _orgId);
@@ -112,7 +112,7 @@ namespace InfluxDB.Client.Test
             var ioe = Assert.ThrowsAsync<HttpException>(async () => await _notificationEndpointsApi
                 .CreateSlackEndpointAsync(GenerateName("slack"), null, null, _orgId));
 
-            Assert.AreEqual("slack endpoint URL and token are empty", ioe.Message);
+            Assert.AreEqual("slack endpoint URL must be provided", ioe.Message);
         }
 
         [Test]
@@ -281,7 +281,7 @@ namespace InfluxDB.Client.Test
             var ioe = Assert.ThrowsAsync<HttpException>(async () => await _notificationEndpointsApi
                 .FindNotificationEndpointByIdAsync(found.Id));
 
-            Assert.AreEqual("notification endpoint not found", ioe.Message);
+            Assert.AreEqual($"notification endpoint not found for key \"{found.Id}\"", ioe.Message);
         }
 
         [Test]
@@ -335,9 +335,8 @@ namespace InfluxDB.Client.Test
         [Test]
         public async Task CloneSlack()
         {
-            var endpoint = new SlackNotificationEndpoint(name: GenerateName("slack"));
+            var endpoint = new SlackNotificationEndpoint(name: GenerateName("slack"), url: "https://hooks.slack.com/services/x/y/z");
             endpoint.Type = NotificationEndpointType.Slack;
-            endpoint.Url = "https://hooks.slack.com/services/x/y/z";
             endpoint.OrgID = _orgId;
             endpoint.Token = "my-slack-token";
             endpoint.Description = "my production slack channel";
