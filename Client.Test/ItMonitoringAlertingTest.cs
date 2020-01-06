@@ -71,6 +71,7 @@ namespace InfluxDB.Client.Test
                         + "|> filter(fn: (r) => r._measurement == \"stock\")  "
                         + "|> filter(fn: (r) => r.company == \"zyz\")  "
                         + "|> aggregateWindow(every: 5s, fn: mean)  "
+                        + "|> filter(fn: (r) => r._field == \"current\")  "
                         + "|> yield(name: \"mean\")";
 
             var threshold = new LesserThreshold(value: 35F, level: CheckStatusLevel.CRIT,

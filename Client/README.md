@@ -664,6 +664,7 @@ var query = "from(bucket: \"my-bucket\") "
         + "|> filter(fn: (r) => r._measurement == \"stock\")  "
         + "|> filter(fn: (r) => r.company == \"zyz\")  "
         + "|> aggregateWindow(every: 5s, fn: mean)  "
+        + "|> filter(fn: (r) => r._field == \"current\")  "
         + "|> yield(name: \"mean\")";
 
 var threshold = new LesserThreshold(value: 35F, level: CheckStatusLevel.CRIT,
@@ -673,7 +674,7 @@ var message = "The Stock price for XYZ is on: ${ r._level } level!";
 
 await Client
     .GetChecksApi()
-    .CreateThresholdCheckAsync("XYZ Stock value", query, "current", "5s", message, threshold, org.Id);
+    .CreateThresholdCheckAsync("XYZ Stock value", query, "5s", message, threshold, org.Id);
 ```  
 
 ##### Create Slack Notification endpoint
