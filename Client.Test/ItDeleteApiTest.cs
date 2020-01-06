@@ -26,7 +26,8 @@ namespace InfluxDB.Client.Test
             // Add Permissions to read and write to the Bucket
             //
             var resource =
-                            new PermissionResource(PermissionResource.TypeEnum.Buckets, _bucket.Id, null, _organization.Id);
+                            new PermissionResource(PermissionResource.TypeEnum.Buckets, _bucket.Id, null,
+                                            _organization.Id);
 
             var readBucket = new Permission(Permission.ActionEnum.Read, resource);
             var writeBucket = new Permission(Permission.ActionEnum.Write, resource);
@@ -35,7 +36,8 @@ namespace InfluxDB.Client.Test
             Assert.IsNotNull(loggedUser);
 
             var authorization = await Client.GetAuthorizationsApi()
-                            .CreateAuthorizationAsync(await FindMyOrg(), new List<Permission> {readBucket, writeBucket});
+                            .CreateAuthorizationAsync(await FindMyOrg(),
+                                            new List<Permission> {readBucket, writeBucket});
 
             _token = authorization.Token;
 
@@ -45,7 +47,7 @@ namespace InfluxDB.Client.Test
             Client = InfluxDBClientFactory.Create(options);
             _queryApi = Client.GetQueryApi();
         }
-        
+
         [TearDown]
         protected new void After()
         {
@@ -58,7 +60,7 @@ namespace InfluxDB.Client.Test
         private DeleteApi _deleteApi;
         private Organization _organization;
         private string _token;
-        
+
         [Measurement("h2o")]
         private class H20Measurement
         {
@@ -74,6 +76,65 @@ namespace InfluxDB.Client.Test
         {
             Client.Dispose();
 
+            WriteData();
+
+            string query = "from(bucket:\"" + _bucket.Name +
+                           "\") |> range(start: 1970-01-01T00:00:00.000000001Z) |> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")";
+
+            _queryApi = Client.GetQueryApi();
+            var tables = await _queryApi.QueryAsync(query, _organization.Id);
+
+            Assert.AreEqual(1, tables.Count);
+            Assert.AreEqual(6, tables[0].Records.Count);
+
+            _deleteApi = Client.GetDeleteApi();
+            await _deleteApi.Delete(DateTime.Now.AddSeconds(-1), DateTime.Now, "", _bucket, _organization);
+
+            var tablesAfterDelete = await _queryApi.QueryAsync(query, _organization.Id);
+
+            Assert.AreNotEqual(0, tablesAfterDelete.Count);
+
+            await _deleteApi.Delete(DateTime.Now.AddHours(-1), DateTime.Now, "", _bucket, _organization);
+
+            var tablesAfterDelete2 = await _queryApi.QueryAsync(query, _organization.Id);
+
+            Assert.AreEqual(0, tablesAfterDelete2.Count);
+        }
+
+        [Test]
+        public async Task DeleteWithPredicate()
+        {
+            Client.Dispose();
+
+            WriteData();
+            
+            string query = "from(bucket:\"" + _bucket.Name +
+                           "\") |> range(start: 1970-01-01T00:00:00.000000001Z) |> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")";
+
+            _queryApi = Client.GetQueryApi();
+            var tables = await _queryApi.QueryAsync(query, _organization.Id);
+
+            Assert.AreEqual(2, tables.Count);
+            Assert.AreEqual(1, tables[0].Records.Count);
+            Assert.AreEqual(5, tables[1].Records.Count);
+
+            _deleteApi = Client.GetDeleteApi();
+            await _deleteApi.Delete(DateTime.Now.AddHours(-1), DateTime.Now, "location = \"east\"", _bucket, _organization);
+            
+            var tablesAfterDelete = await _queryApi.QueryAsync(query, _organization.Id);
+            
+            Assert.AreEqual(1, tablesAfterDelete.Count);
+            Assert.AreEqual(5, tablesAfterDelete[0].Records.Count);
+            
+            await _deleteApi.Delete(DateTime.Now.AddHours(-1), DateTime.Now, "location = \"west\"", _bucket, _organization);
+            
+            var tablesAfterDelete2 = await _queryApi.QueryAsync(query, _organization.Id);
+            
+            Assert.AreEqual(0, tablesAfterDelete2.Count);
+        }
+
+        private void WriteData()
+        {
             Environment.SetEnvironmentVariable("point-datacenter", "LA");
             ConfigurationManager.AppSettings["point-sensor.version"] = "1.23a";
 
@@ -87,7 +148,7 @@ namespace InfluxDB.Client.Test
 
             Client = InfluxDBClientFactory.Create(options);
 
-            var point = PointData.Measurement("h2o_feet").Tag("location", "west").Field("water_level", 1);
+            var point = PointData.Measurement("h2o_feet").Tag("location", "east").Field("water_level", 1);
             var point2 = PointData.Measurement("h2o_feet").Tag("location", "west").Field("water_level", 2);
             var point3 = PointData.Measurement("h2o_feet").Tag("location", "west").Field("water_level", 3);
             var point4 = PointData.Measurement("h2o_feet").Tag("location", "west").Field("water_level", 4);
@@ -100,53 +161,31 @@ namespace InfluxDB.Client.Test
             _writeApi.Flush();
 
             listener.WaitToSuccess();
-            
+
             _writeApi.WritePoint(_bucket.Name, _organization.Id, point2);
             _writeApi.Flush();
 
             listener.WaitToSuccess();
-            
+
             _writeApi.WritePoint(_bucket.Name, _organization.Id, point3);
             _writeApi.Flush();
 
             listener.WaitToSuccess();
-            
+
             _writeApi.WritePoint(_bucket.Name, _organization.Id, point4);
             _writeApi.Flush();
 
             listener.WaitToSuccess();
-            
+
             _writeApi.WritePoint(_bucket.Name, _organization.Id, point5);
             _writeApi.Flush();
 
             listener.WaitToSuccess();
-            
+
             _writeApi.WritePoint(_bucket.Name, _organization.Id, point6);
             _writeApi.Flush();
 
             listener.WaitToSuccess();
-
-            string query = "from(bucket:\"" + _bucket.Name +
-                           "\") |> range(start: 1970-01-01T00:00:00.000000001Z) |> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")";
-
-            _queryApi = Client.GetQueryApi();
-            var tables = await _queryApi.QueryAsync(query, _organization.Id);
-
-            Assert.AreEqual(1, tables.Count);
-            Assert.AreEqual(6, tables[0].Records.Count);
-
-            _deleteApi = Client.GetDeleteApi();
-            await _deleteApi.Delete(DateTime.Now.AddSeconds(-1), DateTime.Now, "", _bucket, _organization);
-            
-            var tablesAfterDelete = await _queryApi.QueryAsync(query, _organization.Id);
-            
-            Assert.AreNotEqual(0, tablesAfterDelete.Count);
-            
-            await _deleteApi.Delete(DateTime.Now.AddHours(-1), DateTime.Now, "", _bucket, _organization);
-            
-            var tablesAfterDelete2 = await _queryApi.QueryAsync(query, _organization.Id);
-            
-            Assert.AreEqual(0, tablesAfterDelete2.Count);
         }
     }
 }
