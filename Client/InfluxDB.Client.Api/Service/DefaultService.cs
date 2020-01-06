@@ -25,34 +25,34 @@ namespace InfluxDB.Client.Api.Service
     {
         #region Synchronous Operations
         /// <summary>
-        /// delete Time series data from InfluxDB
+        /// Delete time series data from InfluxDB
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="deletePredicateRequest">predicate delete request</param>
+        /// <param name="deletePredicateRequest">Predicate delete request</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="org">specifies the destination organization for writes (optional)</param>
-        /// <param name="bucket">specifies the destination bucket for writes (optional)</param>
-        /// <param name="orgID">specifies the organization ID of the resource (optional)</param>
-        /// <param name="bucketID">specifies the destination bucket ID for writes (optional)</param>
+        /// <param name="org">Specifies the organization to delete data from. (optional)</param>
+        /// <param name="bucket">Specifies the bucket to delete data from. (optional)</param>
+        /// <param name="orgID">Specifies the organization ID of the resource. (optional)</param>
+        /// <param name="bucketID">Specifies the bucket ID to delete data from. (optional)</param>
         /// <returns></returns>
         void DeletePost (DeletePredicateRequest deletePredicateRequest, string zapTraceSpan = null, string org = null, string bucket = null, string orgID = null, string bucketID = null);
 
         /// <summary>
-        /// delete Time series data from InfluxDB
+        /// Delete time series data from InfluxDB
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="deletePredicateRequest">predicate delete request</param>
+        /// <param name="deletePredicateRequest">Predicate delete request</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="org">specifies the destination organization for writes (optional)</param>
-        /// <param name="bucket">specifies the destination bucket for writes (optional)</param>
-        /// <param name="orgID">specifies the organization ID of the resource (optional)</param>
-        /// <param name="bucketID">specifies the destination bucket ID for writes (optional)</param>
+        /// <param name="org">Specifies the organization to delete data from. (optional)</param>
+        /// <param name="bucket">Specifies the bucket to delete data from. (optional)</param>
+        /// <param name="orgID">Specifies the organization ID of the resource. (optional)</param>
+        /// <param name="bucketID">Specifies the bucket ID to delete data from. (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> DeletePostWithHttpInfo (DeletePredicateRequest deletePredicateRequest, string zapTraceSpan = null, string org = null, string bucket = null, string orgID = null, string bucketID = null);
         /// <summary>
@@ -123,34 +123,34 @@ namespace InfluxDB.Client.Api.Service
         #endregion Synchronous Operations
         #region Asynchronous Operations
         /// <summary>
-        /// delete Time series data from InfluxDB
+        /// Delete time series data from InfluxDB
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="deletePredicateRequest">predicate delete request</param>
+        /// <param name="deletePredicateRequest">Predicate delete request</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="org">specifies the destination organization for writes (optional)</param>
-        /// <param name="bucket">specifies the destination bucket for writes (optional)</param>
-        /// <param name="orgID">specifies the organization ID of the resource (optional)</param>
-        /// <param name="bucketID">specifies the destination bucket ID for writes (optional)</param>
+        /// <param name="org">Specifies the organization to delete data from. (optional)</param>
+        /// <param name="bucket">Specifies the bucket to delete data from. (optional)</param>
+        /// <param name="orgID">Specifies the organization ID of the resource. (optional)</param>
+        /// <param name="bucketID">Specifies the bucket ID to delete data from. (optional)</param>
         /// <returns>Task of void</returns>
         System.Threading.Tasks.Task DeletePostAsync (DeletePredicateRequest deletePredicateRequest, string zapTraceSpan = null, string org = null, string bucket = null, string orgID = null, string bucketID = null);
 
         /// <summary>
-        /// delete Time series data from InfluxDB
+        /// Delete time series data from InfluxDB
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="deletePredicateRequest">predicate delete request</param>
+        /// <param name="deletePredicateRequest">Predicate delete request</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="org">specifies the destination organization for writes (optional)</param>
-        /// <param name="bucket">specifies the destination bucket for writes (optional)</param>
-        /// <param name="orgID">specifies the organization ID of the resource (optional)</param>
-        /// <param name="bucketID">specifies the destination bucket ID for writes (optional)</param>
+        /// <param name="org">Specifies the organization to delete data from. (optional)</param>
+        /// <param name="bucket">Specifies the bucket to delete data from. (optional)</param>
+        /// <param name="orgID">Specifies the organization ID of the resource. (optional)</param>
+        /// <param name="bucketID">Specifies the bucket ID to delete data from. (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         System.Threading.Tasks.Task<ApiResponse<Object>> DeletePostAsyncWithHttpInfo (DeletePredicateRequest deletePredicateRequest, string zapTraceSpan = null, string org = null, string bucket = null, string orgID = null, string bucketID = null);
         /// <summary>
@@ -319,15 +319,15 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// delete Time series data from InfluxDB 
+        /// Delete time series data from InfluxDB 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="deletePredicateRequest">predicate delete request</param>
+        /// <param name="deletePredicateRequest">Predicate delete request</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="org">specifies the destination organization for writes (optional)</param>
-        /// <param name="bucket">specifies the destination bucket for writes (optional)</param>
-        /// <param name="orgID">specifies the organization ID of the resource (optional)</param>
-        /// <param name="bucketID">specifies the destination bucket ID for writes (optional)</param>
+        /// <param name="org">Specifies the organization to delete data from. (optional)</param>
+        /// <param name="bucket">Specifies the bucket to delete data from. (optional)</param>
+        /// <param name="orgID">Specifies the organization ID of the resource. (optional)</param>
+        /// <param name="bucketID">Specifies the bucket ID to delete data from. (optional)</param>
         /// <returns></returns>
         public void DeletePost (DeletePredicateRequest deletePredicateRequest, string zapTraceSpan = null, string org = null, string bucket = null, string orgID = null, string bucketID = null)
         {
@@ -335,15 +335,15 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// delete Time series data from InfluxDB 
+        /// Delete time series data from InfluxDB 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="deletePredicateRequest">predicate delete request</param>
+        /// <param name="deletePredicateRequest">Predicate delete request</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="org">specifies the destination organization for writes (optional)</param>
-        /// <param name="bucket">specifies the destination bucket for writes (optional)</param>
-        /// <param name="orgID">specifies the organization ID of the resource (optional)</param>
-        /// <param name="bucketID">specifies the destination bucket ID for writes (optional)</param>
+        /// <param name="org">Specifies the organization to delete data from. (optional)</param>
+        /// <param name="bucket">Specifies the bucket to delete data from. (optional)</param>
+        /// <param name="orgID">Specifies the organization ID of the resource. (optional)</param>
+        /// <param name="bucketID">Specifies the bucket ID to delete data from. (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public ApiResponse<Object> DeletePostWithHttpInfo (DeletePredicateRequest deletePredicateRequest, string zapTraceSpan = null, string org = null, string bucket = null, string orgID = null, string bucketID = null)
         {
@@ -408,15 +408,15 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// delete Time series data from InfluxDB 
+        /// Delete time series data from InfluxDB 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="deletePredicateRequest">predicate delete request</param>
+        /// <param name="deletePredicateRequest">Predicate delete request</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="org">specifies the destination organization for writes (optional)</param>
-        /// <param name="bucket">specifies the destination bucket for writes (optional)</param>
-        /// <param name="orgID">specifies the organization ID of the resource (optional)</param>
-        /// <param name="bucketID">specifies the destination bucket ID for writes (optional)</param>
+        /// <param name="org">Specifies the organization to delete data from. (optional)</param>
+        /// <param name="bucket">Specifies the bucket to delete data from. (optional)</param>
+        /// <param name="orgID">Specifies the organization ID of the resource. (optional)</param>
+        /// <param name="bucketID">Specifies the bucket ID to delete data from. (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> DeletePostWithIRestResponseAsync (DeletePredicateRequest deletePredicateRequest, string zapTraceSpan = null, string org = null, string bucket = null, string orgID = null, string bucketID = null)
         {
@@ -479,15 +479,15 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// delete Time series data from InfluxDB 
+        /// Delete time series data from InfluxDB 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="deletePredicateRequest">predicate delete request</param>
+        /// <param name="deletePredicateRequest">Predicate delete request</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="org">specifies the destination organization for writes (optional)</param>
-        /// <param name="bucket">specifies the destination bucket for writes (optional)</param>
-        /// <param name="orgID">specifies the organization ID of the resource (optional)</param>
-        /// <param name="bucketID">specifies the destination bucket ID for writes (optional)</param>
+        /// <param name="org">Specifies the organization to delete data from. (optional)</param>
+        /// <param name="bucket">Specifies the bucket to delete data from. (optional)</param>
+        /// <param name="orgID">Specifies the organization ID of the resource. (optional)</param>
+        /// <param name="bucketID">Specifies the bucket ID to delete data from. (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public IRestResponse DeletePostWithIRestResponse (DeletePredicateRequest deletePredicateRequest, string zapTraceSpan = null, string org = null, string bucket = null, string orgID = null, string bucketID = null)
         {
@@ -550,15 +550,15 @@ namespace InfluxDB.Client.Api.Service
         }
         
         /// <summary>
-        /// delete Time series data from InfluxDB 
+        /// Delete time series data from InfluxDB 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="deletePredicateRequest">predicate delete request</param>
+        /// <param name="deletePredicateRequest">Predicate delete request</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="org">specifies the destination organization for writes (optional)</param>
-        /// <param name="bucket">specifies the destination bucket for writes (optional)</param>
-        /// <param name="orgID">specifies the organization ID of the resource (optional)</param>
-        /// <param name="bucketID">specifies the destination bucket ID for writes (optional)</param>
+        /// <param name="org">Specifies the organization to delete data from. (optional)</param>
+        /// <param name="bucket">Specifies the bucket to delete data from. (optional)</param>
+        /// <param name="orgID">Specifies the organization ID of the resource. (optional)</param>
+        /// <param name="bucketID">Specifies the bucket ID to delete data from. (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public RestRequest DeletePostWithRestRequest (DeletePredicateRequest deletePredicateRequest, string zapTraceSpan = null, string org = null, string bucket = null, string orgID = null, string bucketID = null)
         {
@@ -610,15 +610,15 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// delete Time series data from InfluxDB 
+        /// Delete time series data from InfluxDB 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="deletePredicateRequest">predicate delete request</param>
+        /// <param name="deletePredicateRequest">Predicate delete request</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="org">specifies the destination organization for writes (optional)</param>
-        /// <param name="bucket">specifies the destination bucket for writes (optional)</param>
-        /// <param name="orgID">specifies the organization ID of the resource (optional)</param>
-        /// <param name="bucketID">specifies the destination bucket ID for writes (optional)</param>
+        /// <param name="org">Specifies the organization to delete data from. (optional)</param>
+        /// <param name="bucket">Specifies the bucket to delete data from. (optional)</param>
+        /// <param name="orgID">Specifies the organization ID of the resource. (optional)</param>
+        /// <param name="bucketID">Specifies the bucket ID to delete data from. (optional)</param>
         /// <returns>Task of void</returns>
         public async System.Threading.Tasks.Task DeletePostAsync (DeletePredicateRequest deletePredicateRequest, string zapTraceSpan = null, string org = null, string bucket = null, string orgID = null, string bucketID = null)
         {
@@ -627,15 +627,15 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// delete Time series data from InfluxDB 
+        /// Delete time series data from InfluxDB 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="deletePredicateRequest">predicate delete request</param>
+        /// <param name="deletePredicateRequest">Predicate delete request</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="org">specifies the destination organization for writes (optional)</param>
-        /// <param name="bucket">specifies the destination bucket for writes (optional)</param>
-        /// <param name="orgID">specifies the organization ID of the resource (optional)</param>
-        /// <param name="bucketID">specifies the destination bucket ID for writes (optional)</param>
+        /// <param name="org">Specifies the organization to delete data from. (optional)</param>
+        /// <param name="bucket">Specifies the bucket to delete data from. (optional)</param>
+        /// <param name="orgID">Specifies the organization ID of the resource. (optional)</param>
+        /// <param name="bucketID">Specifies the bucket ID to delete data from. (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         public async System.Threading.Tasks.Task<ApiResponse<Object>> DeletePostAsyncWithHttpInfo (DeletePredicateRequest deletePredicateRequest, string zapTraceSpan = null, string org = null, string bucket = null, string orgID = null, string bucketID = null)
         {
@@ -656,15 +656,15 @@ namespace InfluxDB.Client.Api.Service
         }
             
         /// <summary>
-        /// delete Time series data from InfluxDB 
+        /// Delete time series data from InfluxDB 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="deletePredicateRequest">predicate delete request</param>
+        /// <param name="deletePredicateRequest">Predicate delete request</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="org">specifies the destination organization for writes (optional)</param>
-        /// <param name="bucket">specifies the destination bucket for writes (optional)</param>
-        /// <param name="orgID">specifies the organization ID of the resource (optional)</param>
-        /// <param name="bucketID">specifies the destination bucket ID for writes (optional)</param>
+        /// <param name="org">Specifies the organization to delete data from. (optional)</param>
+        /// <param name="bucket">Specifies the bucket to delete data from. (optional)</param>
+        /// <param name="orgID">Specifies the organization ID of the resource. (optional)</param>
+        /// <param name="bucketID">Specifies the bucket ID to delete data from. (optional)</param>
         /// <returns>Task of IRestResponse</returns>
         public async System.Threading.Tasks.Task<IRestResponse> DeletePostAsyncWithIRestResponse (DeletePredicateRequest deletePredicateRequest, string zapTraceSpan = null, string org = null, string bucket = null, string orgID = null, string bucketID = null)
         {

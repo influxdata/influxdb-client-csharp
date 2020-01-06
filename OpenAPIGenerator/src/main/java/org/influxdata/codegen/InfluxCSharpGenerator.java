@@ -269,45 +269,45 @@ public class InfluxCSharpGenerator extends CSharpClientCodegen {
         //
         // Add generic name, type and config property
         //
-        if (name.equals("TelegrafRequestPlugin")) {
-
-            codegenModel.interfaces.clear();
-            codegenModel.readWriteVars.clear();
-
-            //
-            // Add type
-            //
-            CodegenProperty typeProperty = new CodegenProperty();
-            typeProperty.name = "type";
-            typeProperty.baseName = "type";
-            typeProperty.getter = "getType";
-            typeProperty.setter = "setType";
-            typeProperty.dataType = "String";
-            typeProperty.isEnum = true;
-            typeProperty.set_enum(Arrays.asList("input", "output"));
-
-            final HashMap<String, Object> allowableValues = new HashMap<>();
-
-            List<Map<String, String>> enumVars = new ArrayList<>();
-            for (String value : Arrays.asList("input", "output")) {
-                Map<String, String> enumVar = new HashMap<>();
-                enumVar.put("name", camelize(value));
-                enumVar.put("value", "" + value + "");
-                enumVars.add(enumVar);
-            }
-            allowableValues.put("enumVars", enumVars);
-
-            typeProperty.setAllowableValues(allowableValues);
-            typeProperty.datatypeWithEnum = "TypeEnum";
-            typeProperty.nameInSnakeCase = "TYPE";
-            typeProperty.isReadOnly = false;
-            typeProperty.hasMore = false;
-            typeProperty.hasMoreNonReadOnly = false;
-            postProcessModelProperty(codegenModel, typeProperty);
-            codegenModel.vars.add(typeProperty);
-            codegenModel.readWriteVars.add(typeProperty);
-
-        }
+//        if (name.equals("TelegrafRequestPlugin")) {
+//
+//            codegenModel.interfaces.clear();
+//            codegenModel.readWriteVars.clear();
+//
+//            //
+//            // Add type
+//            //
+//            CodegenProperty typeProperty = new CodegenProperty();
+//            typeProperty.name = "type";
+//            typeProperty.baseName = "type";
+//            typeProperty.getter = "getType";
+//            typeProperty.setter = "setType";
+//            typeProperty.dataType = "String";
+//            typeProperty.isEnum = true;
+//            typeProperty.set_enum(Arrays.asList("input", "output"));
+//
+//            final HashMap<String, Object> allowableValues = new HashMap<>();
+//
+//            List<Map<String, String>> enumVars = new ArrayList<>();
+//            for (String value : Arrays.asList("input", "output")) {
+//                Map<String, String> enumVar = new HashMap<>();
+//                enumVar.put("name", camelize(value));
+//                enumVar.put("value", "" + value + "");
+//                enumVars.add(enumVar);
+//            }
+//            allowableValues.put("enumVars", enumVars);
+//
+//            typeProperty.setAllowableValues(allowableValues);
+//            typeProperty.datatypeWithEnum = "TypeEnum";
+//            typeProperty.nameInSnakeCase = "TYPE";
+//            typeProperty.isReadOnly = false;
+//            typeProperty.hasMore = false;
+//            typeProperty.hasMoreNonReadOnly = false;
+//            postProcessModelProperty(codegenModel, typeProperty);
+//            codegenModel.vars.add(typeProperty);
+//            codegenModel.readWriteVars.add(typeProperty);
+//
+//        }
 
         // use generic precedents
         if (codegenModel.getParent() != null && codegenModel.getParent().endsWith("Base")) {
@@ -495,32 +495,32 @@ public class InfluxCSharpGenerator extends CSharpClientCodegen {
             //
             // Set Telegraf Plugin name and type in constructors
             //
-            if (modelName.startsWith("TelegrafPlugin") && !modelName.endsWith("Request") && !modelName.toLowerCase().contains("config")) {
-
-                CodegenProperty typeProperty = getCodegenProperty(pluginModel, "type");
-                typeProperty.hasMore = false;
-                typeProperty.defaultValue = "TypeEnum." + getEnumDefaultValue(pluginModel, "type");
-
-                CodegenProperty nameProperty = getCodegenProperty(pluginModel, "name");
-                nameProperty.defaultValue = "NameEnum." + getEnumDefaultValue(pluginModel, "name");
-
-                pluginModel.parent = "TelegrafRequestPlugin";
-
-                // Set Name and Type in Constructor
-                ArrayList<Object> constructorItems = new ArrayList<>();
-                constructorItems.add(String.format("setName(%s);", pluginModel.name + ".NameEnum." + getEnumDefaultValue(pluginModel, "name")));
-                constructorItems.add(String.format("setType(%s);", "TelegrafRequestPlugin.TypeEnum." + getEnumDefaultValue(pluginModel, "type")));
-
-                pluginModel.vendorExtensions.put("x-has-constructor-items", Boolean.TRUE);
-                pluginModel.vendorExtensions.put("x-constructor-items", constructorItems);
-
-                pluginModel.vendorExtensions.put("x-has-inner-enums", Boolean.TRUE);
-                pluginModel.vendorExtensions.put("x-inner-enums", Arrays.asList(nameProperty));
-
-                pluginModel.vars.remove(typeProperty);
-                pluginModel.parentVars.add(typeProperty);
-                pluginModel.vars.get(pluginModel.vars.size() - 1).hasMore = false;
-            }
+//            if (modelName.startsWith("TelegrafPlugin") && !modelName.endsWith("Request") && !modelName.toLowerCase().contains("config")) {
+//
+//                CodegenProperty typeProperty = getCodegenProperty(pluginModel, "type");
+//                typeProperty.hasMore = false;
+//                typeProperty.defaultValue = "TypeEnum." + getEnumDefaultValue(pluginModel, "type");
+//
+//                CodegenProperty nameProperty = getCodegenProperty(pluginModel, "name");
+//                nameProperty.defaultValue = "NameEnum." + getEnumDefaultValue(pluginModel, "name");
+//
+//                pluginModel.parent = "TelegrafRequestPlugin";
+//
+//                // Set Name and Type in Constructor
+//                ArrayList<Object> constructorItems = new ArrayList<>();
+//                constructorItems.add(String.format("setName(%s);", pluginModel.name + ".NameEnum." + getEnumDefaultValue(pluginModel, "name")));
+//                constructorItems.add(String.format("setType(%s);", "TelegrafRequestPlugin.TypeEnum." + getEnumDefaultValue(pluginModel, "type")));
+//
+//                pluginModel.vendorExtensions.put("x-has-constructor-items", Boolean.TRUE);
+//                pluginModel.vendorExtensions.put("x-constructor-items", constructorItems);
+//
+//                pluginModel.vendorExtensions.put("x-has-inner-enums", Boolean.TRUE);
+//                pluginModel.vendorExtensions.put("x-inner-enums", Arrays.asList(nameProperty));
+//
+//                pluginModel.vars.remove(typeProperty);
+//                pluginModel.parentVars.add(typeProperty);
+//                pluginModel.vars.get(pluginModel.vars.size() - 1).hasMore = false;
+//            }
             if (pluginModel.getParent() != null && (pluginModel.getParent().endsWith("Base"))) {
                 CodegenModel parentModel = pluginModel.getParentModel();
                 pluginModel.setParentVars(parentModel.getReadWriteVars());

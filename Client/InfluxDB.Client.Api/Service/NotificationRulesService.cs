@@ -105,7 +105,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
         /// <param name="checkID">Only show notifications that belong to the specific check ID. (optional)</param>
-        /// <param name="tag">Only show notification rules that match a tag pair. Uses &#x60;AND&#x60; to specify multiple tags. (optional)</param>
+        /// <param name="tag">Only return notification rules that \&quot;would match\&quot; statuses which contain the tag key value pairs provided. (optional)</param>
         /// <returns>NotificationRules</returns>
         NotificationRules GetNotificationRules (string orgID, string zapTraceSpan = null, int? offset = null, int? limit = null, string checkID = null, string tag = null);
 
@@ -121,7 +121,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
         /// <param name="checkID">Only show notifications that belong to the specific check ID. (optional)</param>
-        /// <param name="tag">Only show notification rules that match a tag pair. Uses &#x60;AND&#x60; to specify multiple tags. (optional)</param>
+        /// <param name="tag">Only return notification rules that \&quot;would match\&quot; statuses which contain the tag key value pairs provided. (optional)</param>
         /// <returns>ApiResponse of NotificationRules</returns>
         ApiResponse<NotificationRules> GetNotificationRulesWithHttpInfo (string orgID, string zapTraceSpan = null, int? offset = null, int? limit = null, string checkID = null, string tag = null);
         /// <summary>
@@ -328,7 +328,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
         /// <param name="checkID">Only show notifications that belong to the specific check ID. (optional)</param>
-        /// <param name="tag">Only show notification rules that match a tag pair. Uses &#x60;AND&#x60; to specify multiple tags. (optional)</param>
+        /// <param name="tag">Only return notification rules that \&quot;would match\&quot; statuses which contain the tag key value pairs provided. (optional)</param>
         /// <returns>Task of NotificationRules</returns>
         System.Threading.Tasks.Task<NotificationRules> GetNotificationRulesAsync (string orgID, string zapTraceSpan = null, int? offset = null, int? limit = null, string checkID = null, string tag = null);
 
@@ -344,7 +344,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
         /// <param name="checkID">Only show notifications that belong to the specific check ID. (optional)</param>
-        /// <param name="tag">Only show notification rules that match a tag pair. Uses &#x60;AND&#x60; to specify multiple tags. (optional)</param>
+        /// <param name="tag">Only return notification rules that \&quot;would match\&quot; statuses which contain the tag key value pairs provided. (optional)</param>
         /// <returns>Task of ApiResponse (NotificationRules)</returns>
         System.Threading.Tasks.Task<ApiResponse<NotificationRules>> GetNotificationRulesAsyncWithHttpInfo (string orgID, string zapTraceSpan = null, int? offset = null, int? limit = null, string checkID = null, string tag = null);
         /// <summary>
@@ -1576,7 +1576,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
         /// <param name="checkID">Only show notifications that belong to the specific check ID. (optional)</param>
-        /// <param name="tag">Only show notification rules that match a tag pair. Uses &#x60;AND&#x60; to specify multiple tags. (optional)</param>
+        /// <param name="tag">Only return notification rules that \&quot;would match\&quot; statuses which contain the tag key value pairs provided. (optional)</param>
         /// <returns>NotificationRules</returns>
         public NotificationRules GetNotificationRules (string orgID, string zapTraceSpan = null, int? offset = null, int? limit = null, string checkID = null, string tag = null)
         {
@@ -1593,7 +1593,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
         /// <param name="checkID">Only show notifications that belong to the specific check ID. (optional)</param>
-        /// <param name="tag">Only show notification rules that match a tag pair. Uses &#x60;AND&#x60; to specify multiple tags. (optional)</param>
+        /// <param name="tag">Only return notification rules that \&quot;would match\&quot; statuses which contain the tag key value pairs provided. (optional)</param>
         /// <returns>ApiResponse of NotificationRules</returns>
         public ApiResponse< NotificationRules > GetNotificationRulesWithHttpInfo (string orgID, string zapTraceSpan = null, int? offset = null, int? limit = null, string checkID = null, string tag = null)
         {
@@ -1658,7 +1658,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
         /// <param name="checkID">Only show notifications that belong to the specific check ID. (optional)</param>
-        /// <param name="tag">Only show notification rules that match a tag pair. Uses &#x60;AND&#x60; to specify multiple tags. (optional)</param>
+        /// <param name="tag">Only return notification rules that \&quot;would match\&quot; statuses which contain the tag key value pairs provided. (optional)</param>
         /// <returns>ApiResponse of NotificationRules</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetNotificationRulesWithIRestResponseAsync (string orgID, string zapTraceSpan = null, int? offset = null, int? limit = null, string checkID = null, string tag = null)
         {
@@ -1721,7 +1721,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
         /// <param name="checkID">Only show notifications that belong to the specific check ID. (optional)</param>
-        /// <param name="tag">Only show notification rules that match a tag pair. Uses &#x60;AND&#x60; to specify multiple tags. (optional)</param>
+        /// <param name="tag">Only return notification rules that \&quot;would match\&quot; statuses which contain the tag key value pairs provided. (optional)</param>
         /// <returns>ApiResponse of NotificationRules</returns>
         public IRestResponse GetNotificationRulesWithIRestResponse (string orgID, string zapTraceSpan = null, int? offset = null, int? limit = null, string checkID = null, string tag = null)
         {
@@ -1784,7 +1784,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
         /// <param name="checkID">Only show notifications that belong to the specific check ID. (optional)</param>
-        /// <param name="tag">Only show notification rules that match a tag pair. Uses &#x60;AND&#x60; to specify multiple tags. (optional)</param>
+        /// <param name="tag">Only return notification rules that \&quot;would match\&quot; statuses which contain the tag key value pairs provided. (optional)</param>
         /// <returns>ApiResponse of NotificationRules</returns>
         public RestRequest GetNotificationRulesWithRestRequest (string orgID, string zapTraceSpan = null, int? offset = null, int? limit = null, string checkID = null, string tag = null)
         {
@@ -1836,7 +1836,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
         /// <param name="checkID">Only show notifications that belong to the specific check ID. (optional)</param>
-        /// <param name="tag">Only show notification rules that match a tag pair. Uses &#x60;AND&#x60; to specify multiple tags. (optional)</param>
+        /// <param name="tag">Only return notification rules that \&quot;would match\&quot; statuses which contain the tag key value pairs provided. (optional)</param>
         /// <returns>Task of NotificationRules</returns>
         public async System.Threading.Tasks.Task<NotificationRules> GetNotificationRulesAsync (string orgID, string zapTraceSpan = null, int? offset = null, int? limit = null, string checkID = null, string tag = null)
         {
@@ -1854,7 +1854,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
         /// <param name="checkID">Only show notifications that belong to the specific check ID. (optional)</param>
-        /// <param name="tag">Only show notification rules that match a tag pair. Uses &#x60;AND&#x60; to specify multiple tags. (optional)</param>
+        /// <param name="tag">Only return notification rules that \&quot;would match\&quot; statuses which contain the tag key value pairs provided. (optional)</param>
         /// <returns>Task of ApiResponse (NotificationRules)</returns>
         public async System.Threading.Tasks.Task<ApiResponse<NotificationRules>> GetNotificationRulesAsyncWithHttpInfo (string orgID, string zapTraceSpan = null, int? offset = null, int? limit = null, string checkID = null, string tag = null)
         {
@@ -1883,7 +1883,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
         /// <param name="checkID">Only show notifications that belong to the specific check ID. (optional)</param>
-        /// <param name="tag">Only show notification rules that match a tag pair. Uses &#x60;AND&#x60; to specify multiple tags. (optional)</param>
+        /// <param name="tag">Only return notification rules that \&quot;would match\&quot; statuses which contain the tag key value pairs provided. (optional)</param>
         /// <returns>Task of IRestResponse (NotificationRules)</returns>
         public async System.Threading.Tasks.Task<IRestResponse> GetNotificationRulesAsyncWithIRestResponse (string orgID, string zapTraceSpan = null, int? offset = null, int? limit = null, string checkID = null, string tag = null)
         {

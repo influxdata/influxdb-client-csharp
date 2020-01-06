@@ -27,20 +27,19 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="name">the check name</param>
         /// <param name="query">The text of the flux query</param>
-        /// <param name="field">The field name uses for check</param>
         /// <param name="every">Check repetition interval</param>
         /// <param name="messageTemplate">template that is used to generate and write a status message</param>
         /// <param name="threshold">condition for that specific status</param>
         /// <param name="orgId">the organization that owns this check</param>
         /// <returns>ThresholdCheck created</returns>
-        public async Task<ThresholdCheck> CreateThresholdCheckAsync(string name, string query, string field,
+        public async Task<ThresholdCheck> CreateThresholdCheckAsync(string name, string query,
             string every, string messageTemplate, Threshold threshold, string orgId)
         {
             Arguments.CheckNotNull(threshold, nameof(threshold));
 
             var thresholds = new List<Threshold> {threshold};
 
-            return await CreateThresholdCheckAsync(name, query, field, every, messageTemplate, thresholds, orgId);
+            return await CreateThresholdCheckAsync(name, query, every, messageTemplate, thresholds, orgId);
         }
 
         /// <summary>
@@ -48,19 +47,17 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="name">the check name</param>
         /// <param name="query">The text of the flux query</param>
-        /// <param name="field">The field name uses for check</param>
         /// <param name="every">Check repetition interval</param>
         /// <param name="messageTemplate">template that is used to generate and write a status message</param>
         /// <param name="thresholds">conditions for that specific status</param>
         /// <param name="orgId">the organization that owns this check</param>
         /// <returns>ThresholdCheck created</returns>
-        public async Task<ThresholdCheck> CreateThresholdCheckAsync(string name, string query, string field,
+        public async Task<ThresholdCheck> CreateThresholdCheckAsync(string name, string query,
             string every,
             string messageTemplate, List<Threshold> thresholds, string orgId)
         {
             Arguments.CheckNonEmptyString(name, nameof(name));
             Arguments.CheckNonEmptyString(query, nameof(query));
-            Arguments.CheckNonEmptyString(field, nameof(field));
             Arguments.CheckNonEmptyString(every, nameof(every));
             Arguments.CheckNonEmptyString(messageTemplate, nameof(messageTemplate));
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
@@ -68,7 +65,7 @@ namespace InfluxDB.Client
 
             var check = new ThresholdCheck(name: name, type: ThresholdCheck.TypeEnum.Threshold, thresholds: thresholds,
                 orgID: orgId, every: every, statusMessageTemplate: messageTemplate, status: TaskStatusType.Active,
-                query: CreateDashboardQuery(query, field));
+                query: CreateDashboardQuery(query));
 
             return (ThresholdCheck) await CreateCheckAsync(check);
         }
@@ -78,7 +75,6 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="name">the check name</param>
         /// <param name="query">The text of the flux query</param>
-        /// <param name="field">The field name uses for check</param>
         /// <param name="every">Check repetition interval</param>
         /// <param name="timeSince">string duration before deadman triggers</param>
         /// <param name="staleTime">string duration for time that a series is considered stale and should not trigger deadman</param>
@@ -86,12 +82,11 @@ namespace InfluxDB.Client
         /// <param name="level">the state to record if check matches a criteria</param>
         /// <param name="orgId">the organization that owns this check</param>
         /// <returns>DeadmanCheck created</returns>
-        public async Task<DeadmanCheck> CreateDeadmanCheckAsync(string name, string query, string field, string every,
+        public async Task<DeadmanCheck> CreateDeadmanCheckAsync(string name, string query, string every,
             string timeSince, string staleTime, string messageTemplate, CheckStatusLevel level, string orgId)
         {
             Arguments.CheckNonEmptyString(name, nameof(name));
             Arguments.CheckNonEmptyString(query, nameof(query));
-            Arguments.CheckNonEmptyString(field, nameof(field));
             Arguments.CheckNonEmptyString(every, nameof(every));
             Arguments.CheckNonEmptyString(timeSince, nameof(timeSince));
             Arguments.CheckNonEmptyString(staleTime, nameof(staleTime));
@@ -101,7 +96,7 @@ namespace InfluxDB.Client
 
             var check = new DeadmanCheck(level: level, staleTime: staleTime, timeSince: timeSince, name: name,
                 every: every, type: DeadmanCheck.TypeEnum.Deadman,
-                orgID: orgId, query: CreateDashboardQuery(query, field), statusMessageTemplate: messageTemplate,
+                orgID: orgId, query: CreateDashboardQuery(query), statusMessageTemplate: messageTemplate,
                 status: TaskStatusType.Active);
 
             return (DeadmanCheck) await CreateCheckAsync(check);
@@ -294,12 +289,9 @@ namespace InfluxDB.Client
             await _service.DeleteChecksIDLabelsIDAsync(checkId, labelId);
         }
 
-        private DashboardQuery CreateDashboardQuery(string query, string field)
+        private DashboardQuery CreateDashboardQuery(string query)
         {
-            var tagsType = new BuilderTagsType("_field", new List<string> {field});
-            var builderConfig = new BuilderConfig(tags: new List<BuilderTagsType> {tagsType});
-
-            return new DashboardQuery(editMode: QueryEditMode.Advanced, text: query, builderConfig: builderConfig);
+            return new DashboardQuery(editMode: QueryEditMode.Advanced, text: query);
         }
     }
 }

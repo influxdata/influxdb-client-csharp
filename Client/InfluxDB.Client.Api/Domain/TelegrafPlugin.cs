@@ -24,10 +24,10 @@ using OpenAPIDateConverter = InfluxDB.Client.Api.Client.OpenAPIDateConverter;
 namespace InfluxDB.Client.Api.Domain
 {
     /// <summary>
-    /// TelegrafPluginOutputFileConfigFiles
+    /// TelegrafPlugin
     /// </summary>
     [DataContract]
-    public partial class TelegrafPluginOutputFileConfigFiles :  IEquatable<TelegrafPluginOutputFileConfigFiles>
+    public partial class TelegrafPlugin :  IEquatable<TelegrafPlugin>
     {
         /// <summary>
         /// Defines Type
@@ -36,16 +36,28 @@ namespace InfluxDB.Client.Api.Domain
         public enum TypeEnum
         {
             /// <summary>
-            /// Enum Stdout for value: stdout
+            /// Enum Inputs for value: inputs
             /// </summary>
-            [EnumMember(Value = "stdout")]
-            Stdout = 1,
+            [EnumMember(Value = "inputs")]
+            Inputs = 1,
 
             /// <summary>
-            /// Enum Path for value: path
+            /// Enum Outputs for value: outputs
             /// </summary>
-            [EnumMember(Value = "path")]
-            Path = 2
+            [EnumMember(Value = "outputs")]
+            Outputs = 2,
+
+            /// <summary>
+            /// Enum Aggregators for value: aggregators
+            /// </summary>
+            [EnumMember(Value = "aggregators")]
+            Aggregators = 3,
+
+            /// <summary>
+            /// Enum Processors for value: processors
+            /// </summary>
+            [EnumMember(Value = "processors")]
+            Processors = 4
 
         }
 
@@ -55,22 +67,38 @@ namespace InfluxDB.Client.Api.Domain
         [DataMember(Name="type", EmitDefaultValue=false)]
         public TypeEnum? Type { get; set; }
         /// <summary>
-        /// Initializes a new instance of the <see cref="TelegrafPluginOutputFileConfigFiles" /> class.
+        /// Initializes a new instance of the <see cref="TelegrafPlugin" /> class.
         /// </summary>
         /// <param name="type">type.</param>
-        /// <param name="path">path.</param>
-        public TelegrafPluginOutputFileConfigFiles(TypeEnum? type = default(TypeEnum?), string path = default(string))
+        /// <param name="name">name.</param>
+        /// <param name="description">description.</param>
+        /// <param name="config">config.</param>
+        public TelegrafPlugin(TypeEnum? type = default(TypeEnum?), string name = default(string), string description = default(string), Dictionary<string, Object> config = default(Dictionary<string, Object>))
         {
             this.Type = type;
-            this.Path = path;
+            this.Name = name;
+            this.Description = description;
+            this.Config = config;
         }
 
 
         /// <summary>
-        /// Gets or Sets Path
+        /// Gets or Sets Name
         /// </summary>
-        [DataMember(Name="path", EmitDefaultValue=false)]
-        public string Path { get; set; }
+        [DataMember(Name="name", EmitDefaultValue=false)]
+        public string Name { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Description
+        /// </summary>
+        [DataMember(Name="description", EmitDefaultValue=false)]
+        public string Description { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Config
+        /// </summary>
+        [DataMember(Name="config", EmitDefaultValue=false)]
+        public Dictionary<string, Object> Config { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -79,9 +107,11 @@ namespace InfluxDB.Client.Api.Domain
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class TelegrafPluginOutputFileConfigFiles {\n");
+            sb.Append("class TelegrafPlugin {\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  Path: ").Append(Path).Append("\n");
+            sb.Append("  Name: ").Append(Name).Append("\n");
+            sb.Append("  Description: ").Append(Description).Append("\n");
+            sb.Append("  Config: ").Append(Config).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -102,15 +132,15 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as TelegrafPluginOutputFileConfigFiles);
+            return this.Equals(input as TelegrafPlugin);
         }
 
         /// <summary>
-        /// Returns true if TelegrafPluginOutputFileConfigFiles instances are equal
+        /// Returns true if TelegrafPlugin instances are equal
         /// </summary>
-        /// <param name="input">Instance of TelegrafPluginOutputFileConfigFiles to be compared</param>
+        /// <param name="input">Instance of TelegrafPlugin to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(TelegrafPluginOutputFileConfigFiles input)
+        public bool Equals(TelegrafPlugin input)
         {
             if (input == null)
                 return false;
@@ -122,9 +152,19 @@ namespace InfluxDB.Client.Api.Domain
                     this.Type.Equals(input.Type))
                 ) && 
                 (
-                    this.Path == input.Path ||
-                    (this.Path != null &&
-                    this.Path.Equals(input.Path))
+                    this.Name == input.Name ||
+                    (this.Name != null &&
+                    this.Name.Equals(input.Name))
+                ) && 
+                (
+                    this.Description == input.Description ||
+                    (this.Description != null &&
+                    this.Description.Equals(input.Description))
+                ) && 
+                (
+                    this.Config == input.Config ||
+                    this.Config != null &&
+                    this.Config.SequenceEqual(input.Config)
                 );
         }
 
@@ -139,8 +179,12 @@ namespace InfluxDB.Client.Api.Domain
                 int hashCode = 41;
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
-                if (this.Path != null)
-                    hashCode = hashCode * 59 + this.Path.GetHashCode();
+                if (this.Name != null)
+                    hashCode = hashCode * 59 + this.Name.GetHashCode();
+                if (this.Description != null)
+                    hashCode = hashCode * 59 + this.Description.GetHashCode();
+                if (this.Config != null)
+                    hashCode = hashCode * 59 + this.Config.GetHashCode();
                 return hashCode;
             }
         }

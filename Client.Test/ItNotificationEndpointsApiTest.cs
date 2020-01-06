@@ -104,15 +104,15 @@ namespace InfluxDB.Client.Test
         }
 
         [Test]
-        public async Task CreateSlackTokenOrUrlShouldBeDefined()
+        public async Task SlackUrlShouldBeDefined()
         {
             await _notificationEndpointsApi
-                .CreateSlackEndpointAsync(GenerateName("slack"), null, "token", _orgId);
+                .CreateSlackEndpointAsync(GenerateName("slack"), "https://hooks.slack.com/services/x/y/z", "token", _orgId);
 
-            var ioe = Assert.ThrowsAsync<HttpException>(async () => await _notificationEndpointsApi
+            var ioe = Assert.ThrowsAsync<ArgumentException>(async () => await _notificationEndpointsApi
                 .CreateSlackEndpointAsync(GenerateName("slack"), null, null, _orgId));
 
-            Assert.AreEqual("slack endpoint URL and token are empty", ioe.Message);
+            Assert.AreEqual("Expecting a non-empty string for url", ioe.Message);
         }
 
         [Test]
@@ -263,7 +263,7 @@ namespace InfluxDB.Client.Test
             var ioe = Assert.ThrowsAsync<HttpException>(async () => await _notificationEndpointsApi
                 .UpdateEndpointAsync("020f755c3c082000", update));
 
-            Assert.AreEqual("notification endpoint not found", ioe.Message);
+            Assert.AreEqual("notification endpoint not found for key \"020f755c3c082000\"", ioe.Message);
         }
 
         [Test]
@@ -281,7 +281,7 @@ namespace InfluxDB.Client.Test
             var ioe = Assert.ThrowsAsync<HttpException>(async () => await _notificationEndpointsApi
                 .FindNotificationEndpointByIdAsync(found.Id));
 
-            Assert.AreEqual("notification endpoint not found", ioe.Message);
+            Assert.AreEqual($"notification endpoint not found for key \"{found.Id}\"", ioe.Message);
         }
 
         [Test]
@@ -290,7 +290,7 @@ namespace InfluxDB.Client.Test
             var ioe = Assert.ThrowsAsync<HttpException>(async () => await _notificationEndpointsApi
                 .DeleteNotificationEndpointAsync("020f755c3c082000"));
 
-            Assert.AreEqual("notification endpoint not found", ioe.Message);
+            Assert.AreEqual("notification endpoint not found for key \"020f755c3c082000\"", ioe.Message);
         }
 
         [Test]
@@ -312,7 +312,7 @@ namespace InfluxDB.Client.Test
             var ioe = Assert.ThrowsAsync<HttpException>(async () => await _notificationEndpointsApi
                 .FindNotificationEndpointByIdAsync("020f755c3c082000"));
 
-            Assert.AreEqual("notification endpoint not found", ioe.Message);
+            Assert.AreEqual("notification endpoint not found for key \"020f755c3c082000\"", ioe.Message);
         }
 
         [Test]
@@ -335,9 +335,8 @@ namespace InfluxDB.Client.Test
         [Test]
         public async Task CloneSlack()
         {
-            var endpoint = new SlackNotificationEndpoint(name: GenerateName("slack"));
+            var endpoint = new SlackNotificationEndpoint(name: GenerateName("slack"), url: "https://hooks.slack.com/services/x/y/z");
             endpoint.Type = NotificationEndpointType.Slack;
-            endpoint.Url = "https://hooks.slack.com/services/x/y/z";
             endpoint.OrgID = _orgId;
             endpoint.Token = "my-slack-token";
             endpoint.Description = "my production slack channel";
@@ -432,27 +431,27 @@ namespace InfluxDB.Client.Test
             var ioe = Assert.ThrowsAsync<AggregateException>(async () => await _notificationEndpointsApi
                 .CloneSlackEndpointAsync("not-found-cloned", "token", "020f755c3c082000"));
 
-            Assert.AreEqual("notification endpoint not found", ioe.InnerException?.InnerException?.Message);
+            Assert.AreEqual("notification endpoint not found for key \"020f755c3c082000\"", ioe.InnerException?.InnerException?.Message);
 
             ioe = Assert.ThrowsAsync<AggregateException>(async () => await _notificationEndpointsApi
                 .ClonePagerDutyEndpointAsync("not-found-cloned", "token", "020f755c3c082000"));
 
-            Assert.AreEqual("notification endpoint not found", ioe.InnerException?.InnerException?.Message);
+            Assert.AreEqual("notification endpoint not found for key \"020f755c3c082000\"", ioe.InnerException?.InnerException?.Message);
 
             ioe = Assert.ThrowsAsync<AggregateException>(async () => await _notificationEndpointsApi
                 .CloneHttpEndpointAsync("not-found-cloned", "020f755c3c082000"));
 
-            Assert.AreEqual("notification endpoint not found", ioe.InnerException?.InnerException?.Message);
+            Assert.AreEqual("notification endpoint not found for key \"020f755c3c082000\"", ioe.InnerException?.InnerException?.Message);
 
             ioe = Assert.ThrowsAsync<AggregateException>(async () => await _notificationEndpointsApi
                 .CloneHttpEndpointBearerAsync("not-found-cloned", "token", "020f755c3c082000"));
 
-            Assert.AreEqual("notification endpoint not found", ioe.InnerException?.InnerException?.Message);
+            Assert.AreEqual("notification endpoint not found for key \"020f755c3c082000\"", ioe.InnerException?.InnerException?.Message);
 
             ioe = Assert.ThrowsAsync<AggregateException>(async () => await _notificationEndpointsApi
                 .CloneHttpEndpointBasicAuthAsync("not-found-cloned", "username", "password", "020f755c3c082000"));
 
-            Assert.AreEqual("notification endpoint not found", ioe.InnerException?.InnerException?.Message);
+            Assert.AreEqual("notification endpoint not found for key \"020f755c3c082000\"", ioe.InnerException?.InnerException?.Message);
         }
 
         [Test]

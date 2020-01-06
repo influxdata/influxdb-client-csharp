@@ -37,7 +37,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// 
+        ///  Add new Slack notification endpoint. The 'url' should be defined.
         /// </summary>
         /// <param name="name">Endpoint name</param>
         /// <param name="url">Slack WebHook URL</param>
@@ -49,6 +49,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(name, nameof(name));
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
+            Arguments.CheckNonEmptyString(url, nameof(url));
 
             var endpoint = new SlackNotificationEndpoint(type: NotificationEndpointType.Slack,
                 url: url, token: token, orgID: orgId, name: name, status: NotificationEndpointBase.StatusEnum.Active);

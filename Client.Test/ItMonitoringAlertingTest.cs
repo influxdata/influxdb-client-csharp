@@ -71,6 +71,7 @@ namespace InfluxDB.Client.Test
                         + "|> filter(fn: (r) => r._measurement == \"stock\")  "
                         + "|> filter(fn: (r) => r.company == \"zyz\")  "
                         + "|> aggregateWindow(every: 5s, fn: mean)  "
+                        + "|> filter(fn: (r) => r._field == \"current\")  "
                         + "|> yield(name: \"mean\")";
 
             var threshold = new LesserThreshold(value: 35F, level: CheckStatusLevel.CRIT,
@@ -78,8 +79,7 @@ namespace InfluxDB.Client.Test
 
             var message = "The Stock price for XYZ is on: ${ r._level } level!";
 
-            await checksApi.CreateThresholdCheckAsync(AbstractItClientTest.GenerateName("XYZ Stock value"), query,
-                "current", "5s", message, threshold, org.Id);
+            await checksApi.CreateThresholdCheckAsync(AbstractItClientTest.GenerateName("XYZ Stock value"), query, "5s", message, threshold, org.Id);
 
 
             //
