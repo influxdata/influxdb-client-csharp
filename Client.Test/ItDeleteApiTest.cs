@@ -89,17 +89,12 @@ namespace InfluxDB.Client.Test
             Assert.AreEqual(5, tables[1].Records.Count);
 
             _deleteApi = Client.GetDeleteApi();
-            await _deleteApi.Delete(DateTime.Now.AddSeconds(-1), DateTime.Now, "", _bucket, _organization);
-
-            var tablesAfterDelete = await _queryApi.QueryAsync(query, _organization.Id);
-
-            Assert.AreNotEqual(0, tablesAfterDelete.Count);
 
             await _deleteApi.Delete(DateTime.Now.AddHours(-1), DateTime.Now, "", _bucket, _organization);
 
-            var tablesAfterDelete2 = await _queryApi.QueryAsync(query, _organization.Id);
+            var tablesAfterDelete1 = await _queryApi.QueryAsync(query, _organization.Id);
 
-            Assert.AreEqual(0, tablesAfterDelete2.Count);
+            Assert.AreEqual(0, tablesAfterDelete1.Count);
         }
 
         [Test]
@@ -119,8 +114,12 @@ namespace InfluxDB.Client.Test
             Assert.AreEqual(1, tables[0].Records.Count);
             Assert.AreEqual(5, tables[1].Records.Count);
 
+            var location = "east";
+            var field = "water_level";
+            var predicate = $"location=\"{location}\" AND _field=\"{field}\"";
+
             _deleteApi = Client.GetDeleteApi();
-            await _deleteApi.Delete(DateTime.Now.AddHours(-1), DateTime.Now, "location = \"east\"", _bucket, _organization);
+            await _deleteApi.Delete(DateTime.Now.AddHours(-1), DateTime.Now, predicate, _bucket, _organization);
             
             var tablesAfterDelete = await _queryApi.QueryAsync(query, _organization.Id);
             
