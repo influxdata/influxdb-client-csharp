@@ -27,7 +27,7 @@ This repository contains the reference C# client for the InfluxDB 2.0.
     - Querying data using the Flux language
     - Writing data using
         - [Line Protocol](https://docs.influxdata.com/influxdb/v1.6/write_protocols/line_protocol_tutorial/) 
-        - [Data Point](https://github.com/influxdata/influxdb-client-csharp/blob/master/Client/Writes/Point.cs#L15) 
+        - [Data Point](https://github.com/influxdata/influxdb-client-csharp/blob/master/Client/Writes/PointData.cs#L17) 
         - POCO
     - InfluxDB 2.0 Management API client for managing
         - sources, buckets
@@ -95,7 +95,7 @@ namespace Examples
                 //
                 // Write by Point
                 //
-                var point = Point.Measurement("temperature")
+                var point = PointData.Measurement("temperature")
                     .Tag("location", "west")
                     .Field("value", 55D)
                     .Timestamp(DateTime.UtcNow.AddSeconds(-10), WritePrecision.Ns);
