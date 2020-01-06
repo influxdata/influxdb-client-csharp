@@ -107,12 +107,12 @@ namespace InfluxDB.Client.Test
         public async Task SlackUrlShouldBeDefined()
         {
             await _notificationEndpointsApi
-                .CreateSlackEndpointAsync(GenerateName("slack"), null, "token", _orgId);
+                .CreateSlackEndpointAsync(GenerateName("slack"), "https://hooks.slack.com/services/x/y/z", "token", _orgId);
 
-            var ioe = Assert.ThrowsAsync<HttpException>(async () => await _notificationEndpointsApi
+            var ioe = Assert.ThrowsAsync<ArgumentException>(async () => await _notificationEndpointsApi
                 .CreateSlackEndpointAsync(GenerateName("slack"), null, null, _orgId));
 
-            Assert.AreEqual("slack endpoint URL must be provided", ioe.Message);
+            Assert.AreEqual("Expecting a non-empty string for url", ioe.Message);
         }
 
         [Test]

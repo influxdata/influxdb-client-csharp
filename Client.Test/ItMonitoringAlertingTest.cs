@@ -78,8 +78,7 @@ namespace InfluxDB.Client.Test
 
             var message = "The Stock price for XYZ is on: ${ r._level } level!";
 
-            await checksApi.CreateThresholdCheckAsync(AbstractItClientTest.GenerateName("XYZ Stock value"), query,
-                "current", "5s", message, threshold, org.Id);
+            await checksApi.CreateThresholdCheckAsync(AbstractItClientTest.GenerateName("XYZ Stock value"), query, "5s", message, threshold, org.Id);
 
 
             //
