@@ -89,7 +89,7 @@ namespace InfluxDB.Client.Test
             var message = Assert.ThrowsAsync<HttpException>(async () =>
                 await _tasksApi.CancelRunAsync("020f755c3c082000", "020f755c3c082000")).Message;
 
-            Assert.AreEqual("failed to cancel run: task not found", message);
+            Assert.AreEqual("failed to cancel run: run not found", message);
         }
 
         [Test]
@@ -322,7 +322,7 @@ namespace InfluxDB.Client.Test
             var logs = await _tasksApi.GetLogsAsync(task);
             Assert.IsNotEmpty(logs);
             Assert.IsTrue(logs.First().Message.StartsWith("Started task from script:"));
-            Assert.IsTrue(logs.Last().Message.EndsWith("Completed successfully"));
+            Assert.IsTrue(logs.Last().Message.EndsWith("Completed(success)"));
         }
 
         [Test]
@@ -361,7 +361,7 @@ namespace InfluxDB.Client.Test
 
             var logs = await _tasksApi.GetRunLogsAsync(runs[0]);
             Assert.IsNotNull(logs);
-            Assert.IsTrue(logs.Last().Message.EndsWith("Completed successfully"));
+            Assert.IsTrue(logs.Last().Message.EndsWith("Completed(success)"));
         }
 
         [Test]
