@@ -10,7 +10,8 @@ services:
 
 env:
   matrix:
-    - INFLUXDB_VERSION=1.7 INFLUXDB_2_VERSION=nightly
+    - INFLUXDB_VERSION=1.7 INFLUXDB_V2_REPOSITORY=influxdb INFLUXDB_2_VERSION=2.0.0-beta
+    - INFLUXDB_VERSION=1.7 INFLUXDB_V2_REPOSITORY=influx INFLUXDB_2_VERSION=nightly
 
 install: true
 

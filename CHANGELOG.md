@@ -3,6 +3,9 @@
 ### API
 1. [#52](https://github.com/influxdata/influxdb-client-java/pull/52): Updated swagger to latest version
 
+### CI
+1. [#54](https://github.com/influxdata/influxdb-client-java/pull/54): Added beta release to continuous integration
+
 ## 1.3.0 [2019-12-06]
 
 ### Performance
