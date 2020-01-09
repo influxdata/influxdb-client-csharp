@@ -124,15 +124,15 @@ workflows:
   build:
     jobs:
       - tests-dotnet-2-2:
-          name: dotnet-2-2-beta
+          name: test-beta
       - tests-dotnet-2-2:
-          name: dotnet-2-2-nightly
+          name: test-nightly
           influxdb-repository: "influx"
           influxdb-version: "nightly"
       - deploy-preview:
           requires:
-            - dotnet-2-2-beta
-            - dotnet-2-2-nightly
+            - test-beta
+            - test-nightly
           filters:
             branches:
               only: master
