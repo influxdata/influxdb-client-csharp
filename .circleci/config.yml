@@ -73,6 +73,16 @@ commands:
 jobs:
   tests-dotnet-2-2:
     machine: true
+    parameters:
+      influxdb-repository:
+        type: string
+        default: "influxdb"
+      influxdb-version:
+        type: string
+        default: "2.0.0-beta"
+    environment:
+      INFLUXDB_V2_REPOSITORY: << parameters.influxdb-repository >>
+      INFLUXDB_V2_VERSION: << parameters.influxdb-version >>
     steps:
       - prepare
       - client-test:
@@ -113,10 +123,16 @@ workflows:
   version: 2
   build:
     jobs:
-      - tests-dotnet-2-2
+      - tests-dotnet-2-2:
+          name: dotnet-2-2-beta
+      - tests-dotnet-2-2:
+          name: dotnet-2-2-nightly
+          influxdb-repository: "influx"
+          influxdb-version: "nightly"
       - deploy-preview:
           requires:
-            - tests-dotnet-2-2
+            - dotnet-2-2-beta
+            - dotnet-2-2-nightly
           filters:
             branches:
               only: master
