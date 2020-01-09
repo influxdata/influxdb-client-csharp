@@ -16,7 +16,7 @@ commands:
     parameters:
       dotnet-sdk-version:
         type: string
-        default: &default-dotnet-sdk-version "2.2"
+        default: "2.2"
     steps:
       - run:
           name: "Running tests"
