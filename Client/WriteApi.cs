@@ -28,7 +28,7 @@ namespace InfluxDB.Client
         private readonly InfluxDBClientOptions _options;
         private readonly Subject<BatchWriteData> _subject = new Subject<BatchWriteData>();
 
-        private bool _disposed = false;
+        private bool _disposed;
         protected internal WriteApi(InfluxDBClientOptions options, WriteService service, WriteOptions writeOptions,
             InfluxDBClient influxDbClient)
         {
@@ -200,10 +200,7 @@ namespace InfluxDB.Client
             _subject.Dispose();
             _flush.Dispose();
 
-            while (!_disposed)
-            {
-                Thread.Sleep(25);
-            }
+            WaitToCondition(() => _disposed, 30000);
         }
 
         public event EventHandler EventHandler;
@@ -473,6 +470,20 @@ namespace InfluxDB.Client
             if (!_flush.IsDisposed)
             {
                 _flush.OnNext(new List<BatchWriteData>());
+            }
+        }
+
+        internal static void WaitToCondition(Func<bool> condition, int millis)
+        {
+            var start = DateTime.Now.Millisecond;
+            while (!condition())
+            {
+                Thread.Sleep(25);
+                if (DateTime.Now.Millisecond - start > millis)
+                {
+                    Trace.TraceError($"The WriteApi can't be gracefully dispose! - {millis}ms elapsed.");
+                    break;
+                }
             }
         }
 

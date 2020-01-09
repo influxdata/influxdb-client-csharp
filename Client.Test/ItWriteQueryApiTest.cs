@@ -489,24 +489,52 @@ namespace InfluxDB.Client.Test
         }
         
         [Test]
-        public async Task SimpleWrite()
+        public async Task SimpleWriteAndDisposing()
         {
-            var client = InfluxDBClientFactory.Create(InfluxDbUrl, _token.ToCharArray());
-
-            using (var writeApi = client.GetWriteApi())
+            // Using WriteApi
             {
-                writeApi.WriteRecord(_bucket.Name, _organization.Id, WritePrecision.Ns, "temperature,location=north value=60.0");
+                var client = InfluxDBClientFactory.Create(InfluxDbUrl, _token.ToCharArray());
+
+                using (var writeApi = client.GetWriteApi())
+                {
+                    writeApi.WriteRecord(_bucket.Name, _organization.Id, WritePrecision.Ns, "temperature,location=north value=60.0 1");
+                }
+            
+                client.Dispose();
             }
             
-            client.Dispose();
+            // Using both
+            {
+                using (var client = InfluxDBClientFactory.Create(InfluxDbUrl, _token.ToCharArray()))
+                {
+                    using (var writeApi = client.GetWriteApi())
+                    {
+                        writeApi.WriteRecord(_bucket.Name, _organization.Id, WritePrecision.Ns,
+                            "temperature,location=north value=70.0 2");
+                    }
+                }
+            }
+            
+            // Using without
+            {
+                var client = InfluxDBClientFactory.Create(InfluxDbUrl, _token.ToCharArray());
+                var writeApi = client.GetWriteApi();
 
+                writeApi.WriteRecord(_bucket.Name, _organization.Id, WritePrecision.Ns,
+                    "temperature,location=north value=80.0 3");
+
+                client.Dispose();
+            }
+            
             var tables = await _queryApi.QueryAsync(
-                $"from(bucket:\"{_bucket.Name}\") |> range(start: 1970-01-01T00:00:00.000000001Z) |> last()",
+                $"from(bucket:\"{_bucket.Name}\") |> range(start: 1970-01-01T00:00:00.000000001Z)",
                 _organization.Id);
             
             Assert.AreEqual(1, tables.Count);
-            Assert.AreEqual(1, tables[0].Records.Count);
+            Assert.AreEqual(3, tables[0].Records.Count);
             Assert.AreEqual(60, tables[0].Records[0].GetValue());
+            Assert.AreEqual(70, tables[0].Records[1].GetValue());
+            Assert.AreEqual(80, tables[0].Records[2].GetValue());
         }
 
         [Test]
