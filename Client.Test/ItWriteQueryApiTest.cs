@@ -491,7 +491,7 @@ namespace InfluxDB.Client.Test
         [Test]
         public async Task SimpleWrite()
         {
-            var client = InfluxDBClientFactory.Create("http://localhost:9999", _token.ToCharArray());
+            var client = InfluxDBClientFactory.Create(InfluxDbUrl, _token.ToCharArray());
 
             using (var writeApi = client.GetWriteApi())
             {
