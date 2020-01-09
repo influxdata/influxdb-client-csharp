@@ -52,7 +52,7 @@ namespace InfluxDB.Client.Test
         [TearDown]
         protected new void After()
         {
-            _writeApi.Dispose();
+            _writeApi?.Dispose();
         }
 
         private Bucket _bucket;
@@ -473,12 +473,12 @@ namespace InfluxDB.Client.Test
         {
             var bucketName = _bucket.Name;
 
-            _writeApi = Client.GetWriteApi();
+            _writeApi = Client.GetWriteApi(WriteOptions.CreateNew().BatchSize(2).Build());
 
-            const string record1 = "h2o_feet,location=coyote_creek level\\ water_level=1.0 1";
-            const string record2 = "h2o_feet,location=coyote_hill level\\ water_level=2.0 2x";
+            const string records = "h2o_feet,location=coyote_creek level\\ water_level=1.0 1\n" +
+                                   "h2o_feet,location=coyote_hill level\\ water_level=2.0 2x";
 
-            _writeApi.WriteRecords(bucketName, _organization.Id, WritePrecision.Ns, record1, record2);
+            _writeApi.WriteRecords(bucketName, _organization.Id, WritePrecision.Ns, records);
             _writeApi.Flush();
             _writeApi.Dispose();
 
@@ -486,6 +486,27 @@ namespace InfluxDB.Client.Test
                 "from(bucket:\"" + bucketName + "\") |> range(start: 1970-01-01T00:00:00.000000001Z) |> last()",
                 _organization.Id);
             Assert.AreEqual(0, query.Count);
+        }
+        
+        [Test]
+        public async Task SimpleWrite()
+        {
+            var client = InfluxDBClientFactory.Create("http://localhost:9999", _token.ToCharArray());
+
+            using (var writeApi = client.GetWriteApi())
+            {
+                writeApi.WriteRecord(_bucket.Name, _organization.Id, WritePrecision.Ns, "temperature,location=north value=60.0");
+            }
+            
+            client.Dispose();
+
+            var tables = await _queryApi.QueryAsync(
+                $"from(bucket:\"{_bucket.Name}\") |> range(start: 1970-01-01T00:00:00.000000001Z) |> last()",
+                _organization.Id);
+            
+            Assert.AreEqual(1, tables.Count);
+            Assert.AreEqual(1, tables[0].Records.Count);
+            Assert.AreEqual(60, tables[0].Records[0].GetValue());
         }
 
         [Test]
