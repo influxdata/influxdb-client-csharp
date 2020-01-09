@@ -6,6 +6,9 @@
 ### CI
 1. [#54](https://github.com/influxdata/influxdb-client-java/pull/54): Added beta release to continuous integration
 
+### Bugs
+1. [#56](https://github.com/influxdata/influxdb-client-csharp/issues/56): WriteApi is disposed after a buffer is fully processed
+
 ## 1.3.0 [2019-12-06]
 
 ### Performance
