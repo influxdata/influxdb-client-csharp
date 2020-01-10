@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using InfluxDB.Client.Api.Domain;
@@ -298,6 +299,19 @@ namespace InfluxDB.Client.Test
 
             _influxDbClient.Dispose();
             _influxDbClient.Dispose();
+        }
+
+        [Test]
+        public void WaitToCondition()
+        {
+            var writer = new StringWriter();
+            Trace.Listeners.Add(new TextWriterTraceListener(writer));
+            
+            WriteApi.WaitToCondition(() => true, 30000);
+            WriteApi.WaitToCondition(() => false, 1);
+
+            StringAssert.Contains("The WriteApi can't be gracefully dispose! - 1ms", writer.ToString());
+            StringAssert.DoesNotContain("The WriteApi can't be gracefully dispose! - 30000ms", writer.ToString());
         }
     }
 }

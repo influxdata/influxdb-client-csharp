@@ -8,6 +8,7 @@ using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using System.Reactive.Threading.Tasks;
 using System.Text;
+using System.Threading;
 using InfluxDB.Client.Api.Domain;
 using InfluxDB.Client.Api.Service;
 using InfluxDB.Client.Core;
@@ -27,6 +28,7 @@ namespace InfluxDB.Client
         private readonly InfluxDBClientOptions _options;
         private readonly Subject<BatchWriteData> _subject = new Subject<BatchWriteData>();
 
+        private bool _disposed;
         protected internal WriteApi(InfluxDBClientOptions options, WriteService service, WriteOptions writeOptions,
             InfluxDBClient influxDbClient)
         {
@@ -173,8 +175,16 @@ namespace InfluxDB.Client
                                 break;
                         }
                     },
-                    exception => Trace.WriteLine($"The unhandled exception occurs: {exception}"),
-                    () => Trace.WriteLine("The WriteApi was disposed."));
+                    exception =>
+                    {
+                        _disposed = true;
+                        Console.WriteLine($"The unhandled exception occurs: {exception}");
+                    },
+                    () =>
+                    {
+                        _disposed = true;
+                        Console.WriteLine("The WriteApi was disposed.");
+                    });
         }
 
         public void Dispose()
@@ -189,6 +199,8 @@ namespace InfluxDB.Client
 
             _subject.Dispose();
             _flush.Dispose();
+
+            WaitToCondition(() => _disposed, 30000);
         }
 
         public event EventHandler EventHandler;
@@ -455,7 +467,24 @@ namespace InfluxDB.Client
         /// </summary>
         public void Flush()
         {
-            _flush.OnNext(new List<BatchWriteData>());
+            if (!_flush.IsDisposed)
+            {
+                _flush.OnNext(new List<BatchWriteData>());
+            }
+        }
+
+        internal static void WaitToCondition(Func<bool> condition, int millis)
+        {
+            var start = DateTime.Now.Millisecond;
+            while (!condition())
+            {
+                Thread.Sleep(25);
+                if (DateTime.Now.Millisecond - start > millis)
+                {
+                    Trace.TraceError($"The WriteApi can't be gracefully dispose! - {millis}ms elapsed.");
+                    break;
+                }
+            }
         }
 
         private int JitterDelay(WriteOptions writeOptions)
