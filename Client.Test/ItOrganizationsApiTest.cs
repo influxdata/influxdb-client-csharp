@@ -330,7 +330,7 @@ namespace InfluxDB.Client.Test
             var organization = await _organizationsApi.CreateOrganizationAsync(GenerateName("Constant Pro"));
 
             var secrets = await _organizationsApi.GetSecretsAsync(organization);
-            Assert.IsEmpty(secrets);
+            Assert.That(secrets, Is.Null.Or.Empty);
 
             var secretsKv = new Dictionary<string, string> {{"gh", "123456789"}, {"az", "987654321"}};
 
