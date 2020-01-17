@@ -1,4 +1,4 @@
-## 1.4.0 [unreleased]
+## 1.4.0 [2020-01-17]
 
 ### API
 1. [#52](https://github.com/influxdata/influxdb-client-java/pull/52): Updated swagger to latest version
