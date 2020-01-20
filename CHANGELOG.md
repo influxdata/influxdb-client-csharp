@@ -1,5 +1,8 @@
 ## 1.5.0 [unreleased]
 
+### Features
+1. [#57](https://github.com/influxdata/influxdb-client-csharp/pull/57): LogLevel Header also contains query parameters
+
 ## 1.4.0 [2020-01-17]
 
 ### API
