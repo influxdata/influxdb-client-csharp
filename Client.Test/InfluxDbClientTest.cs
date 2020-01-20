@@ -1,5 +1,8 @@
+using System.Diagnostics;
+using System.IO;
 using InfluxDB.Client.Api.Client;
 using InfluxDB.Client.Api.Domain;
+using InfluxDB.Client.Core;
 using InfluxDB.Client.Core.Test;
 using NUnit.Framework;
 using WireMock.RequestBuilders;
@@ -89,6 +92,52 @@ namespace InfluxDB.Client.Test
             // Disable GZIP
             _client.DisableGzip();
             Assert.IsFalse(_client.IsGzipEnabled());
+        }
+
+        [Test]
+        public void LogLevelWithQueryString()
+        {
+            var writer = new StringWriter();
+            Trace.Listeners.Add(new TextWriterTraceListener(writer));
+            
+            _client.SetLogLevel(LogLevel.Headers);
+            
+            MockServer
+                .Given(Request.Create().WithPath("/api/v2/write").UsingPost())
+                .RespondWith(CreateResponse("{}"));
+
+            using (var writeApi = _client.GetWriteApi())
+            {
+                writeApi.WriteRecord("b1", "org1", WritePrecision.Ns,
+                    "h2o_feet,location=coyote_creek water_level=1.0 1");
+            }
+            
+            StringAssert.Contains("org=org1", writer.ToString());
+            StringAssert.Contains("bucket=b1", writer.ToString());
+            StringAssert.Contains("precision=ns", writer.ToString());
+        }
+        
+        [Test]
+        public void LogLevelWithoutQueryString()
+        {
+            var writer = new StringWriter();
+            Trace.Listeners.Add(new TextWriterTraceListener(writer));
+            
+            _client.SetLogLevel(LogLevel.Basic);
+            
+            MockServer
+                .Given(Request.Create().WithPath("/api/v2/write").UsingPost())
+                .RespondWith(CreateResponse("{}"));
+
+            using (var writeApi = _client.GetWriteApi())
+            {
+                writeApi.WriteRecord("b1", "org1", WritePrecision.Ns,
+                    "h2o_feet,location=coyote_creek water_level=1.0 1");
+            }
+            
+            StringAssert.DoesNotContain("org=org1", writer.ToString());
+            StringAssert.DoesNotContain("bucket=b1", writer.ToString());
+            StringAssert.DoesNotContain("precision=ns", writer.ToString());
         }
     }
 }
