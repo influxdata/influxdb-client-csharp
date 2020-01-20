@@ -31,6 +31,9 @@ namespace InfluxDB.Client.Core.Internal
 
             if (isHeader)
             {
+                var query = ToHeaders(request.Parameters, ParameterType.QueryString);
+                LogHeaders(query, "-->", "Query");
+                
                 var headers = ToHeaders(request.Parameters);
                 LogHeaders(headers, "-->");
             }
@@ -107,19 +110,19 @@ namespace InfluxDB.Client.Core.Internal
             return freshBody;
         }
 
-        public static List<HttpHeader> ToHeaders(IList<Parameter> parameters)
+        public static List<HttpHeader> ToHeaders(IList<Parameter> parameters, ParameterType type = ParameterType.HttpHeader)
         {
             return parameters
-                .Where(parameter => parameter.Type.Equals(ParameterType.HttpHeader))
+                .Where(parameter => parameter.Type.Equals(type))
                 .Select(h => new HttpHeader {Name = h.Name, Value = h.Value.ToString()})
                 .ToList();
         }
 
-        private void LogHeaders(IList<HttpHeader> headers, string direction)
+        private void LogHeaders(IList<HttpHeader> headers, string direction, string type = "Header")
         {
             foreach (var emp in headers)
             {
-                Trace.WriteLine($"{direction} Header: {emp.Name} Value: {emp.Value}");
+                Trace.WriteLine($"{direction} {type}: {emp.Name}={emp.Value}");
             }
         }
     }

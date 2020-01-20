@@ -610,7 +610,6 @@ namespace InfluxDB.Client.Test
         public async Task WriteMeasurements()
         {
             _writeApi = Client.GetWriteApi();
-            var listener = new WriteApiTest.EventListener(_writeApi);
 
             var bucketName = _bucket.Name;
 
@@ -626,8 +625,7 @@ namespace InfluxDB.Client.Test
             };
 
             _writeApi.WriteMeasurements(bucketName, _organization.Id, WritePrecision.S, measurement1, measurement2);
-            _writeApi.Flush();
-            listener.WaitToSuccess();
+            _writeApi.Dispose();
 
             var measurements = await _queryApi.QueryAsync<H20Measurement>(
                 "from(bucket:\"" + bucketName +
