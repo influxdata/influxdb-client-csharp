@@ -1,48 +1,28 @@
 version: 2.1
 
 commands:
-  influxdb-restart:
+  influxdb-onboarding:
     steps:
       - run:
-          name: "Start InfluxDB service"
-          command: ./Scripts/influxdb-restart.sh
+          name: "Post onBoarding request to InfluxDB 2"
+          command: ./Scripts/influxdb-onboarding.sh
   prepare:
     description: "Prepare environment to tests"
     steps:
       - checkout
-      - influxdb-restart
+      - influxdb-onboarding
   client-test:
-    description: "Run tests"
     parameters:
-      dotnet-sdk-version:
+      dotnet-image:
         type: string
-        default: &default-dotnet-sdk-version "2.2"
     steps:
       - run:
           name: "Running tests"
-          command: |
-            docker run -it --rm \
-                   --volume ${PWD}:/usr/src/mydotnet \
-                   --workdir /usr/src/mydotnet \
-                   --network influx_network \
-                   --env INFLUXDB_IP=192.168.0.2 \
-                   --env INFLUXDB_2_IP=192.168.0.3 \
-                   --env INFLUXDB_2_ONBOARDING_IP=192.168.0.4 \
-                   --env INFLUXDB_2_ONBOARDING_PORT=9999 \
-                   mcr.microsoft.com/dotnet/core/sdk:<< parameters.dotnet-sdk-version >> /bin/bash -c "./Scripts/ci-test.sh"
+          command: ./Scripts/ci-test.sh
       - run:
           name: "Converting test results to Junit format"
           when: on_fail
-          command: |
-            docker run -it --rm \
-                   --volume ${PWD}:/usr/src/mydotnet \
-                   --workdir /usr/src/mydotnet \
-                   --network influx_network \
-                   --env INFLUXDB_IP=192.168.0.2 \
-                   --env INFLUXDB_2_IP=192.168.0.3 \
-                   --env INFLUXDB_2_ONBOARDING_IP=192.168.0.4 \
-                   --env INFLUXDB_2_ONBOARDING_PORT=9999 \
-                   mcr.microsoft.com/dotnet/core/sdk:<< parameters.dotnet-sdk-version >> /bin/bash -c "./trx2junit/trx2junit ./**/TestResults/*.trx"
+          command: ./trx2junit/trx2junit ./**/TestResults/*.trx
   
   storing-test-results:
     steps:
@@ -71,30 +51,54 @@ commands:
           path: artifacts
 
 jobs:
-  tests-dotnet-2-2:
-    machine: true
+  tests-dotnet:
     parameters:
-      influxdb-repository:
+      dotnet-image:
         type: string
-        default: "influxdb"
-      influxdb-version:
+        default: &default-dotnet-image "mcr.microsoft.com/dotnet/core/sdk:2.2"
+      influxdb-image:
         type: string
-        default: "2.0.0-beta"
+        default: &default-influxdb-image "influxdb:2.0.0-beta"
+    docker:
+      - image: << parameters.dotnet-image >>
+      - image: &influx-image quay.io/influxdb/<< parameters.influxdb-image >>
+      - image: &influx-image quay.io/influxdb/<< parameters.influxdb-image >>
+        name: influxdb_v2_onboarding
+      - image: influxdb:1.7-alpine
+        environment:
+          INFLUXDB_HTTP_FLUX_ENABLED: true
     environment:
-      INFLUXDB_V2_REPOSITORY: << parameters.influxdb-repository >>
-      INFLUXDB_V2_VERSION: << parameters.influxdb-version >>
+      INFLUXDB_2_ONBOARDING_IP: influxdb_v2_onboarding
+      INFLUXDB_2_ONBOARDING_PORT: 9999
     steps:
       - prepare
       - client-test:
-          dotnet-sdk-version: *default-dotnet-sdk-version
+          dotnet-image: << parameters.dotnet-image >>
       - storing-test-results
       - storing-artifacts
       - run:
           name: "Collecting coverage reports"
           command: bash <(curl -s https://codecov.io/bash) || echo "Codecov did not collect coverage reports"
 
+  tests-windows:
+    machine:
+      image: "windows-server-2019-vs2019:stable"
+      resource_class: windows.medium
+      shell: bash
+    steps:
+      - checkout
+      - run:
+          name: "Post onBoarding request to InfluxDB 2"
+          command: ./Scripts/influxdb-restart.sh
+      
   deploy-preview:
-    machine: true
+    parameters:
+      influxdb-image:
+        type: string
+        default: *default-influxdb-image
+    docker:
+      - image: *default-dotnet-image
+      - image: *influx-image
     steps:
       - run:
           name: Early return if this build is from a forked repository
@@ -104,35 +108,33 @@ jobs:
               circleci step halt
             fi
       - checkout
-      - influxdb-restart
       - run:
           name: Deploying To Preview repository
-          command: |
-            docker run -it --rm \
-                   --volume ${PWD}:/usr/src/mydotnet \
-                   --workdir /usr/src/mydotnet \
-                   --network influx_network \
-                   --env INFLUXDB_IP=192.168.0.2 \
-                   --env INFLUXDB_2_IP=192.168.0.3 \
-                   --env INFLUXDB_2_ONBOARDING_IP=192.168.0.4 \
-                   --env INFLUXDB_2_ONBOARDING_PORT=9999 \
-                   --env BONITOO_SNAPSHOT_APIKEY=${BONITOO_SNAPSHOT_APIKEY} \
-                   mcr.microsoft.com/dotnet/core/sdk:2.2 /bin/bash -c "./Scripts/ci-deploy-snapshot.sh"
+          command: ./Scripts/ci-deploy-snapshot.sh
 
 workflows:
   version: 2
   build:
     jobs:
-      - tests-dotnet-2-2:
-          name: test-beta
-      - tests-dotnet-2-2:
-          name: test-nightly
-          influxdb-repository: "influx"
-          influxdb-version: "nightly"
+      - tests-dotnet:
+          name: dotnet-2.2
+      - tests-dotnet:
+          name: dotnet-2.2-nightly
+          influxdb-image: "influx:nightly"
+      - tests-dotnet:
+          name: dotnet-3.0
+          dotnet-image: "mcr.microsoft.com/dotnet/core/sdk:3.0"
+      - tests-dotnet:
+          name: dotnet-3.1
+          dotnet-image: "mcr.microsoft.com/dotnet/core/sdk:3.1"
+      - tests-windows:
+          name: dotnet-windows
       - deploy-preview:
           requires:
-            - test-beta
-            - test-nightly
+            - dotnet-2.2
+            - dotnet-2.2-nightly
+            - dotnet-3.0
+            - dotnet-3.1
           filters:
             branches:
               only: master
@@ -146,4 +148,4 @@ workflows:
               only:
                 - master
     jobs:
-      - tests-dotnet-2-2
+      - tests-dotnet

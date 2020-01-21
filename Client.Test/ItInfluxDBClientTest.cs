@@ -58,7 +58,7 @@ namespace InfluxDB.Client.Test
         [Test]
         public async Task Onboarding()
         {
-            var url = $"http://{GetOrDefaultEnvironmentVariable("INFLUXDB_2_ONBOARDING_IP", "127.0.0.1")}:" +
+            var url = $"http://{GetOrDefaultEnvironmentVariable("INFLUXDB_2_ONBOARDING_IP", "localhost")}:" +
                       $"{GetOrDefaultEnvironmentVariable("INFLUXDB_2_ONBOARDING_PORT", "9990")}";
 
             using (var client = InfluxDBClientFactory.Create(url))

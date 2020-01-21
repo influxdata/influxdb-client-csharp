@@ -48,7 +48,7 @@ namespace InfluxDB.Client.Test
                 {"organization", "my-org"},
                 {"bucket", "my-bucket"},
                 {"token", "$INFLUX_TOKEN"},
-                {"urls", new List<string> {"http://127.0.0.1:9999"}}
+                {"urls", new List<string> {"http://localhost:9999"}}
             };
 
             return new TelegrafPlugin(TelegrafPlugin.TypeEnum.Outputs, "influxdb_v2", "my instance",
@@ -130,7 +130,7 @@ namespace InfluxDB.Client.Test
             Assert.AreEqual("my-org", tomlInflux[0]["organization"]);
             Assert.AreEqual("$INFLUX_TOKEN", tomlInflux[0]["token"]);
             Assert.AreEqual(1, ((TomlArray) tomlInflux[0]["urls"]).Count);
-            Assert.AreEqual("http://127.0.0.1:9999", ((TomlArray) tomlInflux[0]["urls"])[0]);
+            Assert.AreEqual("http://localhost:9999", ((TomlArray) tomlInflux[0]["urls"])[0]);
 
             var tomlCpu = (TomlTableArray) ((TomlTable) toml["inputs"])["cpu"];
             Assert.AreEqual(1, tomlCpu.Count);
