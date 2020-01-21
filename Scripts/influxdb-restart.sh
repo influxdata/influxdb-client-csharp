@@ -26,15 +26,18 @@ set -e
 DEFAULT_DOCKER_REGISTRY="quay.io/influxdb/"
 DOCKER_REGISTRY="${DOCKER_REGISTRY:-$DEFAULT_DOCKER_REGISTRY}"
 
-DEFAULT_INFLUXDB_VERSION="1.7"
+DEFAULT_INFLUXDB_VERSION="1.7-alpine"
 INFLUXDB_VERSION="${INFLUXDB_VERSION:-$DEFAULT_INFLUXDB_VERSION}"
-INFLUXDB_IMAGE=influxdb:${INFLUXDB_VERSION}-alpine
+INFLUXDB_IMAGE=influxdb:${INFLUXDB_VERSION}
 
 DEFAULT_INFLUXDB_V2_REPOSITORY="influxdb"
 DEFAULT_INFLUXDB_V2_VERSION="2.0.0-beta"
 INFLUXDB_V2_REPOSITORY="${INFLUXDB_V2_REPOSITORY:-$DEFAULT_INFLUXDB_V2_REPOSITORY}"
 INFLUXDB_V2_VERSION="${INFLUXDB_V2_VERSION:-$DEFAULT_INFLUXDB_V2_VERSION}"
 INFLUXDB_V2_IMAGE=${DOCKER_REGISTRY}${INFLUXDB_V2_REPOSITORY}:${INFLUXDB_V2_VERSION}
+
+DEFAULT_DOCKER_NET_DRIVER="bridge"
+DOCKER_NET_DRIVER="${DOCKER_NET_DRIVER:-$DEFAULT_DOCKER_NET_DRIVER}"
 
 SCRIPT_PATH="$( cd "$(dirname "$0")" ; pwd -P )"
 
@@ -45,7 +48,7 @@ docker rm influxdb_v2 || true
 docker kill influxdb_v2_onboarding || true
 docker rm influxdb_v2_onboarding || true
 docker network rm influx_network || true
-docker network create -d bridge influx_network --subnet 192.168.0.0/24 --gateway 192.168.0.1
+docker network create -d ${DOCKER_NET_DRIVER} influx_network --subnet 192.168.0.0/24 --gateway 192.168.0.1
 
 echo
 echo "Restarting InfluxDB [${INFLUXDB_IMAGE}] ..."
@@ -55,7 +58,7 @@ echo
 # InfluxDB
 #
 
-docker pull ${INFLUXDB_IMAGE} || true
+docker pull --platform linux ${INFLUXDB_IMAGE} || true
 docker run \
        --detach \
        --name influxdb \

@@ -85,11 +85,39 @@ jobs:
       image: "windows-server-2019-vs2019:stable"
       resource_class: windows.medium
       shell: bash
+    environment:
+      DOCKER_NET_DRIVER: nat
+      INFLUXDB_VERSION: 1.7
     steps:
       - checkout
+#      - run:
+#          name: "Enable Docker experimental to run Linux containers"
+#          command: |
+#            $progressPreference = 'silentlyContinue'
+#            Install-WindowsFeature Containers
+#            Set-Content -Value "`{`"experimental`":true`}" -Path C:\ProgramData\docker\config\daemon.json
+#            restart-service docker
+#            docker info
+#      - run:
+#          name: "Install Linux Kernel"
+#          command: |
+#            $progressPreference = 'silentlyContinue'
+#            cd 'C:\Program Files\'
+#            mkdir "Linux Containers"
+#            cd '.\Linux Containers\'
+#            curl -OutFile release.zip https://github.com/linuxkit/lcow/releases/download/v4.14.35-v0.3.9/release.zip
+#            Expand-Archive -DestinationPath . .\release.zip
+#            rm release.zip
+      - run: choco install influxdb1 --version=1.7.9
+      - run: export INFLUXDB_HTTP_FLUX_ENABLED=true 
       - run:
-          name: "Post onBoarding request to InfluxDB 2"
-          command: ./Scripts/influxdb-restart.sh
+          name: "Start InfluxDB"
+          command: /c/influxdata/influxdb-1.7.9-1/influxd.exe -config "Scripts/influxdb.conf"
+          background: true
+      - run: dotnet nuget locals --clear all
+      - run: dotnet restore --no-cache --force
+      - run: dotnet build
+      - run: dotnet test Client.Legacy.Test/Client.Legacy.Test.csproj --no-build
       
   deploy-preview:
     parameters:
