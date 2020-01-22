@@ -4,16 +4,16 @@
 1. [#57](https://github.com/influxdata/influxdb-client-csharp/pull/57): LogLevel Header also contains query parameters
 
 ### CI
-1. [#58](https://github.com/influxdata/influxdb-client-java/pull/58): CircleCI builds over dotnet 2.2, 3.0 and 3.1; Added build on Windows Server 2019
-1. [#60](https://github.com/influxdata/influxdb-client-java/pull/60): Deploy dev version to Nuget repository
+1. [#58](https://github.com/influxdata/influxdb-client-csharp/pull/58): CircleCI builds over dotnet 2.2, 3.0 and 3.1; Added build on Windows Server 2019
+1. [#60](https://github.com/influxdata/influxdb-client-csharp/pull/60): Deploy dev version to Nuget repository
 
 ## 1.4.0 [2020-01-17]
 
 ### API
-1. [#52](https://github.com/influxdata/influxdb-client-java/pull/52): Updated swagger to latest version
+1. [#52](https://github.com/influxdata/influxdb-client-csharp/pull/52): Updated swagger to latest version
 
 ### CI
-1. [#54](https://github.com/influxdata/influxdb-client-java/pull/54): Added beta release to continuous integration
+1. [#54](https://github.com/influxdata/influxdb-client-csharp/pull/54): Added beta release to continuous integration
 
 ### Bugs
 1. [#56](https://github.com/influxdata/influxdb-client-csharp/issues/56): WriteApi is disposed after a buffer is fully processed
