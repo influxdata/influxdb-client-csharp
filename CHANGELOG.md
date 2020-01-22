@@ -5,6 +5,7 @@
 
 ### CI
 1. [#58](https://github.com/influxdata/influxdb-client-java/pull/58): CircleCI builds over dotnet 2.2, 3.0 and 3.1; Added build on Windows Server 2019
+1. [#60](https://github.com/influxdata/influxdb-client-java/pull/60): Deploy dev version to Nuget repository
 
 ## 1.4.0 [2020-01-17]
 
