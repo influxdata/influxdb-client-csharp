@@ -45,7 +45,7 @@ namespace InfluxDB.Client.Core.Test
         
         protected string GetInfluxDbUrl()
         {
-            var influxDbIp = GetOrDefaultEnvironmentVariable("INFLUXDB_IP", "127.0.0.1");
+            var influxDbIp = GetOrDefaultEnvironmentVariable("INFLUXDB_IP", "localhost");
             var influxDbPort = GetOrDefaultEnvironmentVariable("INFLUXDB_PORT_API", "8086");
 
             return "http://" + influxDbIp + ":" + influxDbPort;
@@ -61,7 +61,7 @@ namespace InfluxDB.Client.Core.Test
 
         protected string GetInfluxDb2Ip()
         {
-            return GetOrDefaultEnvironmentVariable("INFLUXDB_2_IP", "127.0.0.1");
+            return GetOrDefaultEnvironmentVariable("INFLUXDB_2_IP", "localhost");
         }
 
         protected string GetOrDefaultEnvironmentVariable(string variable, string def)
