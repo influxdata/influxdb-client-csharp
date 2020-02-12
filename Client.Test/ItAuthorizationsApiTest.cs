@@ -144,6 +144,7 @@ namespace InfluxDB.Client.Test
         }
 
         [Test]
+        [Ignore("TODO https://github.com/influxdata/influxdb/issues/16833")]
         public async Task DeleteAuthorization()
         {
             var createdAuthorization = await _authorizationsApi.CreateAuthorizationAsync(_organization, NewPermissions());
