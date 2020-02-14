@@ -6,6 +6,7 @@
 [![License](https://img.shields.io/github/license/influxdata/influxdb-client-csharp.svg)](https://github.com/influxdata/influxdb-client-csharp/blob/master/LICENSE)
 [![GitHub issues](https://img.shields.io/github/issues-raw/influxdata/influxdb-client-csharp.svg)](https://github.com/influxdata/influxdb-client-csharp/issues)
 [![GitHub pull requests](https://img.shields.io/github/issues-pr-raw/influxdata/influxdb-client-csharp.svg)](https://github.com/influxdata/influxdb-client-csharp/pulls)
+[![Slack Status](https://img.shields.io/badge/slack-join_chat-white.svg?logo=slack&style=social)](https://www.influxdata.com/slack)
 
 This repository contains the reference C# client for the InfluxDB 2.0.
 
