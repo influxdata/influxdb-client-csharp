@@ -126,7 +126,6 @@ jobs:
         default: *default-influxdb-image
     docker:
       - image: *default-dotnet-image
-      - image: *influx-image
     steps:
       - run:
           name: Early return if this build is from a forked repository
