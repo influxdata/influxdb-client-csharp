@@ -58,7 +58,7 @@ echo
 # InfluxDB
 #
 
-docker pull --platform linux ${INFLUXDB_IMAGE} || true
+docker pull ${INFLUXDB_IMAGE} || true
 docker run \
        --detach \
        --name influxdb \
