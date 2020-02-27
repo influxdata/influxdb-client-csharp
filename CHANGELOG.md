@@ -1,5 +1,8 @@
 ## 1.6.0 [unreleased]
 
+### Features
+1. [#61](https://github.com/influxdata/influxdb-client-csharp/issues/61): Set User-Agent to influxdb-client-csharp/VERSION for all requests
+
 ## 1.5.0 [2020-02-14]
 
 ### Features

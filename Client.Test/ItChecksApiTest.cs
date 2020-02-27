@@ -10,7 +10,6 @@ using NUnit.Framework;
 namespace InfluxDB.Client.Test
 {
     [TestFixture]
-    [Ignore("https://github.com/influxdata/influxdb/issues/16462")]
     public class ItChecksApiTest : AbstractItClientTest
     {
         private string _orgId;

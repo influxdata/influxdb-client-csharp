@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using InfluxDB.Client.Core;
@@ -15,7 +16,6 @@ namespace Client.Legacy.Test
         [Test]
         public async Task Query()
         {
-
             MockServer.Given(Request.Create().WithPath("/api/v2/query").UsingPost())
                             .RespondWith(CreateResponse());
 
@@ -180,6 +180,19 @@ namespace Client.Legacy.Test
                             error => CountdownEvent.Signal());
 
             WaitToCallback();
+        }
+
+        [Test]
+        public async Task UserAgentHeader()
+        {
+            MockServer.Given(Request.Create().WithPath("/api/v2/query").UsingPost())
+                .RespondWith(CreateResponse());
+
+            await FluxClient.QueryAsync("from(bucket:\"telegraf\")");
+
+            var request= MockServer.LogEntries.Last();
+            StringAssert.StartsWith("influxdb-client-csharp/1.", request.RequestMessage.Headers["User-Agent"].First());
+            StringAssert.EndsWith(".0.0", request.RequestMessage.Headers["User-Agent"].First());
         }
 
         private void AssertSuccessResult(List<FluxTable> tables)

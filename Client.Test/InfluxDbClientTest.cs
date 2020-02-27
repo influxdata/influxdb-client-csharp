@@ -1,12 +1,13 @@
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
 using InfluxDB.Client.Api.Client;
 using InfluxDB.Client.Api.Domain;
 using InfluxDB.Client.Core;
 using InfluxDB.Client.Core.Test;
 using NUnit.Framework;
 using WireMock.RequestBuilders;
-using Task = System.Threading.Tasks.Task;
 
 namespace InfluxDB.Client.Test
 {
@@ -138,6 +139,20 @@ namespace InfluxDB.Client.Test
             StringAssert.DoesNotContain("org=org1", writer.ToString());
             StringAssert.DoesNotContain("bucket=b1", writer.ToString());
             StringAssert.DoesNotContain("precision=ns", writer.ToString());
+        }
+        
+        [Test]
+        public async Task UserAgentHeader()
+        {
+            MockServer
+                .Given(Request.Create().UsingGet())
+                .RespondWith(CreateResponse("{\"status\":\"active\"}", "application/json"));
+
+            await _client.GetAuthorizationsApi().FindAuthorizationByIdAsync("id");
+
+            var request= MockServer.LogEntries.Last();
+            StringAssert.StartsWith("influxdb-client-csharp/1.", request.RequestMessage.Headers["User-Agent"].First());
+            StringAssert.EndsWith(".0.0", request.RequestMessage.Headers["User-Agent"].First());
         }
     }
 }
