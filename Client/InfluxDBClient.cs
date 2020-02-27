@@ -36,7 +36,10 @@ namespace InfluxDB.Client
             _loggingHandler = new LoggingHandler(options.LogLevel);
             _gzipHandler = new GzipHandler();
 
+            var version = AssemblyHelper.GetVersion(typeof(InfluxDBClient));
+            
             _apiClient = new ApiClient(options, _loggingHandler, _gzipHandler);
+            _apiClient.RestClient.UserAgent = $"influxdb-client-csharp/{version}";
 
             _exceptionFactory = (methodName, response) =>
                 !response.IsSuccessful ? HttpException.Create(response) : null;

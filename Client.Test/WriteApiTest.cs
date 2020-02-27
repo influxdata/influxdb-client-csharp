@@ -313,5 +313,24 @@ namespace InfluxDB.Client.Test
             StringAssert.Contains("The WriteApi can't be gracefully dispose! - 1ms", writer.ToString());
             StringAssert.DoesNotContain("The WriteApi can't be gracefully dispose! - 30000ms", writer.ToString());
         }
+        
+        [Test]
+        public void UserAgentHeader()
+        {
+            var listener = new EventListener(_writeApi);
+
+            MockServer
+                .Given(Request.Create().WithPath("/api/v2/write").UsingPost())
+                .RespondWith(CreateResponse("{}"));
+
+            _writeApi.WriteRecord("b1", "org1", WritePrecision.Ns,
+                "h2o_feet,location=coyote_creek level\\ description=\"feet 1\",water_level=1.0 1");
+
+            listener.Get<WriteSuccessEvent>();
+            
+            var request= MockServer.LogEntries.Last();
+            StringAssert.StartsWith("influxdb-client-csharp/1.", request.RequestMessage.Headers["User-Agent"].First());
+            StringAssert.EndsWith(".0.0", request.RequestMessage.Headers["User-Agent"].First());
+        }
     }
 }

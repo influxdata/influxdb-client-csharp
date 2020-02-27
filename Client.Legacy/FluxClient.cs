@@ -20,9 +20,12 @@ namespace InfluxDB.Client.Flux
         {
             _loggingHandler = new LoggingHandler(LogLevel.None);
 
+            var version = AssemblyHelper.GetVersion(typeof(FluxClient));
+            
             RestClient.BaseUrl = new Uri(options.Url);
             RestClient.Timeout = options.Timeout.Milliseconds;
             RestClient.AddDefaultHeader("Accept", "application/json");
+            RestClient.UserAgent = $"influxdb-client-csharp/{version}";
         }
 
         /// <summary>
