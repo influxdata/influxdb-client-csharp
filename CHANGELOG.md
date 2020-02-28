@@ -3,6 +3,9 @@
 ### Features
 1. [#61](https://github.com/influxdata/influxdb-client-csharp/issues/61): Set User-Agent to influxdb-client-csharp/VERSION for all requests
 
+### Bugs
+1. [#63](https://github.com/influxdata/influxdb-client-csharp/pull/63): Correctly parse CSV where multiple results include multiple tables
+
 ## 1.5.0 [2020-02-14]
 
 ### Features

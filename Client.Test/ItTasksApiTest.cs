@@ -84,7 +84,6 @@ namespace InfluxDB.Client.Test
         }
 
         [Test]
-        [Ignore("TODO uncomment after beta")]
         public void CancelRunTaskNotExist()
         {
             var message = Assert.ThrowsAsync<HttpException>(async () =>

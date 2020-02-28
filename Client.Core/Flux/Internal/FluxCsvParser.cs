@@ -75,6 +75,7 @@ namespace InfluxDB.Client.Core.Flux.Internal
             var parsingState = ParsingState.Normal;
 
             var tableIndex = 0;
+            var tableId = -1;
             var startNewTable = false;
             FluxTable table = null;
 
@@ -124,6 +125,7 @@ namespace InfluxDB.Client.Core.Flux.Internal
                         table = new FluxTable();
                         consumer.Accept(tableIndex, cancellable, table);
                         tableIndex++;
+                        tableId = -1;
                     }
                     else if (table == null)
                     {
@@ -154,18 +156,21 @@ namespace InfluxDB.Client.Core.Flux.Internal
                             continue;
                         }
 
-                        int currentIndex;
+                        int currentId;
 
                         try
                         {
-                            currentIndex = Convert.ToInt32(csv[1 + 1]);
+                            currentId = Convert.ToInt32(csv[1 + 1]);
                         }
                         catch (Exception)
                         {
                             throw new FluxCsvParserException("Unable to parse CSV response.");
                         }
+                        if (tableId == -1) {
+                            tableId = currentId;
+                        }
 
-                        if (currentIndex > (tableIndex - 1))
+                        if (tableId != currentId)
                         {
                             //create new table with previous column headers settings
                             var fluxColumns = table.Columns;
@@ -173,6 +178,7 @@ namespace InfluxDB.Client.Core.Flux.Internal
                             table.Columns.AddRange(fluxColumns);
                             consumer.Accept(tableIndex, cancellable, table);
                             tableIndex++;
+                            tableId = currentId;
                         }
 
                         var fluxRecord = ParseRecord(tableIndex - 1, table, csv);
