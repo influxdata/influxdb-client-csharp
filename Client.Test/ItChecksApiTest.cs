@@ -301,7 +301,6 @@ namespace InfluxDB.Client.Test
         }
 
         [Test]
-        [Ignore("")]
         public async Task FindChecksPaging()
         {
             var greater = new GreaterThreshold(value: 80F, level: CheckStatusLevel.CRIT, allValues: true,
