@@ -1,5 +1,7 @@
 using System.Threading.Tasks;
+using InfluxDB.Client.Flux;
 using NUnit.Framework;
+using WireMock.Matchers;
 using WireMock.RequestBuilders;
 using WireMock.ResponseBuilders;
 
@@ -31,6 +33,21 @@ namespace Client.Legacy.Test
             MockServer.Stop();
 
             Assert.IsFalse(await FluxClient.PingAsync());
+        }
+
+        [Test]
+        public async Task WithAuthentication()
+        {
+            FluxClient = FluxClientFactory.Create(new FluxConnectionOptions(MockServerUrl, "my-user", "my-password".ToCharArray()));
+            
+            MockServer.Given(Request.Create()
+                    .WithPath("/ping")
+                    .WithParam("u", new ExactMatcher("my-user"))
+                    .WithParam("p", new ExactMatcher("my-password"))
+                    .UsingGet())
+                .RespondWith(Response.Create().WithStatusCode(204));
+                
+            Assert.IsTrue(await FluxClient.PingAsync());
         }
     }
 }

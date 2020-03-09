@@ -14,10 +14,23 @@ The `FluxClientFactory` creates an instance of a `FluxClient` client that can be
  
 - `url` -  the url to connect to InfluxDB 
 - `okHttpClient` - custom HTTP client to use for communications with InfluxDB (optional)
+- `username` - name of your InfluxDB user (optional)
+- `password` - password of your InfluxDB user (optional)
 
 ```c#
 // client creation
 var options = new FluxConnectionOptions("http://127.0.0.1:8086");
+
+var fluxClient = FluxClientFactory.Create(options);
+
+fluxClient.QueryAsync(...)
+...
+```
+#### Authenticate requests
+
+```c#
+// client creation
+var options = new FluxConnectionOptions("http://127.0.0.1:8086", "my-user", "my-password".ToCharArray());
 
 var fluxClient = FluxClientFactory.Create(options);
 

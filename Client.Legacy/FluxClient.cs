@@ -25,6 +25,11 @@ namespace InfluxDB.Client.Flux
             RestClient.BaseUrl = new Uri(options.Url);
             RestClient.Timeout = options.Timeout.Milliseconds;
             RestClient.AddDefaultHeader("Accept", "application/json");
+            if (!string.IsNullOrEmpty(options.Username))
+            {
+                RestClient.AddDefaultQueryParameter("u", options.Username);
+                RestClient.AddDefaultQueryParameter("p", new string(options.Password));   
+            }
             RestClient.UserAgent = $"influxdb-client-csharp/{version}";
         }
 
