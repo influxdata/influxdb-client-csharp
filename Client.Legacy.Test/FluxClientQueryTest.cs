@@ -6,7 +6,9 @@ using InfluxDB.Client.Core;
 using InfluxDB.Client.Core.Exceptions;
 using InfluxDB.Client.Core.Flux.Domain;
 using InfluxDB.Client.Core.Flux.Exceptions;
+using InfluxDB.Client.Flux;
 using NUnit.Framework;
+using WireMock.Matchers;
 using WireMock.RequestBuilders;
 
 namespace Client.Legacy.Test
@@ -193,6 +195,23 @@ namespace Client.Legacy.Test
             var request= MockServer.LogEntries.Last();
             StringAssert.StartsWith("influxdb-client-csharp/1.", request.RequestMessage.Headers["User-Agent"].First());
             StringAssert.EndsWith(".0.0", request.RequestMessage.Headers["User-Agent"].First());
+        }
+
+        [Test]
+        public async Task WithAuthentication()
+        {
+            FluxClient = FluxClientFactory.Create(new FluxConnectionOptions(MockServerUrl, "my-user", "my-password".ToCharArray()));
+            
+            MockServer.Given(Request.Create()
+                    .WithPath("/api/v2/query")
+                    .WithParam("u", new ExactMatcher("my-user"))
+                    .WithParam("p", new ExactMatcher("my-password"))
+                    .UsingPost())
+                .RespondWith(CreateResponse());
+                
+            var result = await FluxClient.QueryAsync("from(bucket:\"telegraf\")");
+
+            AssertSuccessResult(result);
         }
 
         private void AssertSuccessResult(List<FluxTable> tables)
