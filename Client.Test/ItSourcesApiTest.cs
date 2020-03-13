@@ -124,6 +124,7 @@ namespace InfluxDB.Client.Test
         }
 
         [Test]
+        [Ignore("TODO https://github.com/influxdata/influxdb/issues/17244")]
         public async Task FindBucketsBySource()
         {
             var source = await _sourcesApi.CreateSourceAsync(NewSource());
