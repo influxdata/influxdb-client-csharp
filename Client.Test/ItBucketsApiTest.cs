@@ -10,6 +10,7 @@ using Task = System.Threading.Tasks.Task;
 namespace InfluxDB.Client.Test
 {
     [TestFixture]
+    [Ignore("TODO https://github.com/influxdata/influxdb/issues/17244")]
     public class ItBucketsApiTest : AbstractItClientTest
     {
         [SetUp]
