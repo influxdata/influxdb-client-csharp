@@ -10,7 +10,6 @@ using Task = System.Threading.Tasks.Task;
 namespace InfluxDB.Client.Test
 {
     [TestFixture]
-    [Ignore("TODO https://github.com/influxdata/influxdb/issues/17244")]
     public class ItBucketsApiTest : AbstractItClientTest
     {
         [SetUp]
@@ -164,7 +163,6 @@ namespace InfluxDB.Client.Test
         }
 
         [Test]
-        [Ignore("TODO https://github.com/influxdata/influxdb/issues/14900")]
         public async Task FindBucketByNameNotFound()
         {
             var bucket = await _bucketsApi.FindBucketByNameAsync("my-bucket-not-found");
