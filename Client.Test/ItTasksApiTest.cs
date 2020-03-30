@@ -49,6 +49,7 @@ namespace InfluxDB.Client.Test
             var resourceOrg = new PermissionResource(PermissionResource.TypeEnum.Orgs);
             var resourceUser = new PermissionResource(PermissionResource.TypeEnum.Users);
             var resourceAuthorization = new PermissionResource(PermissionResource.TypeEnum.Authorizations);
+            var resourceLabels = new PermissionResource(PermissionResource.TypeEnum.Labels);
 
 
             var authorization = await Client.GetAuthorizationsApi()
@@ -61,7 +62,9 @@ namespace InfluxDB.Client.Test
                     new Permission(Permission.ActionEnum.Write, resourceUser),
                     new Permission(Permission.ActionEnum.Write, resourceAuthorization),
                     new Permission(Permission.ActionEnum.Read, resourceBucket),
-                    new Permission(Permission.ActionEnum.Write, resourceBucket)
+                    new Permission(Permission.ActionEnum.Write, resourceBucket),
+                    new Permission(Permission.ActionEnum.Read, resourceLabels),
+                    new Permission(Permission.ActionEnum.Write, resourceLabels)
                 });
 
             return authorization;
