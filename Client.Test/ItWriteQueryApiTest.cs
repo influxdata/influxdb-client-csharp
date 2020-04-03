@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Diagnostics;
+using System.Linq;
 using System.Threading;
 using InfluxDB.Client.Api.Domain;
 using InfluxDB.Client.Core;
@@ -428,17 +430,15 @@ namespace InfluxDB.Client.Test
         {
             var bucketName = _bucket.Name;
 
-            WriteErrorEvent error = null;
-
             _writeApi = Client.GetWriteApi();
-            _writeApi.EventHandler += (sender, args) => { error = args as WriteErrorEvent; };
+            var listener = new WriteApiTest.EventListener(_writeApi);
 
             _writeApi.WriteRecord(bucketName, _organization.Id, WritePrecision.Ns,
                 "h2o_feet,location=coyote_creek level\\ water_level=1.0 123456.789");
             _writeApi.Flush();
-
-            Thread.Sleep(100);
-
+            
+            var error = listener.Get<WriteErrorEvent>();
+            
             Assert.IsNotNull(error);
             Assert.AreEqual(
                 "unable to parse 'h2o_feet,location=coyote_creek level\\ water_level=1.0 123456.789': bad timestamp",
@@ -450,16 +450,14 @@ namespace InfluxDB.Client.Test
         {
             var bucketName = _bucket.Name;
 
-            WriteSuccessEvent success = null;
-
             _writeApi = Client.GetWriteApi();
-            _writeApi.EventHandler += (sender, args) => { success = args as WriteSuccessEvent; };
+            var listener = new WriteApiTest.EventListener(_writeApi);
 
             _writeApi.WriteRecord(bucketName, _organization.Id, WritePrecision.Ns,
                 "h2o_feet,location=coyote_creek level\\ water_level=1.0 1");
             _writeApi.Flush();
 
-            Thread.Sleep(100);
+            var success = listener.Get<WriteSuccessEvent>();
 
             Assert.IsNotNull(success);
             Assert.AreEqual(success.Organization, _organization.Id);
@@ -875,6 +873,59 @@ namespace InfluxDB.Client.Test
             Assert.AreEqual("h2o_feet", records[1].GetMeasurement());
             Assert.AreEqual(2, records[1].GetValue());
             Assert.AreEqual("level water_level", records[1].GetField());
+        }
+        
+        [Test]
+        public async Task WriteTooManyData()
+        {
+            _writeApi?.Dispose();
+
+            const int count = 500_000;
+            const int batchSize = 50_000;
+            
+            var measurements = new List<H20Measurement>();
+
+            for (var i = 0; i < count; i++)
+            {
+                measurements.Add(new H20Measurement
+                    {Level = i, Time = DateTime.UnixEpoch.Add(TimeSpan.FromSeconds(i)), Location = "Europe"});
+            }
+
+            var successEvents = new List<WriteSuccessEvent>();
+            _writeApi = Client.GetWriteApi(WriteOptions.CreateNew().BatchSize(batchSize).FlushInterval(10_000).Build());
+            _writeApi.EventHandler += (sender, args) => { successEvents.Add(args as WriteSuccessEvent); };
+
+            var start = 0;
+            for (;;)
+            {
+                var history = measurements.Skip(start).Take(batchSize).ToArray();
+                if (history.Length == 0)
+                {
+                    break;
+                }
+
+                if (start != 0)
+                {
+                    Trace.WriteLine("Delaying...");
+                    await Task.Delay(100);
+                }
+
+                start += batchSize;
+                Trace.WriteLine(
+                    $"Add measurement to buffer From: {history.First().Time}, To: {history.Last().Time}. Remaining {count - start}");
+                _writeApi.WriteMeasurements(_bucket.Name, _organization.Name, WritePrecision.S,
+                    history);
+            }
+
+            Trace.WriteLine("Flushing data...");
+            Client.Dispose();
+            Trace.WriteLine("Finished");
+            
+            Assert.AreEqual(10, successEvents.Count);
+            foreach (var successEvent in successEvents)
+            {
+                Assert.AreEqual(50_000, successEvent.LineProtocol.Split("\n").Length);
+            }
         }
     }
 }

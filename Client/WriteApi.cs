@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Reactive;
-using System.Reactive.Concurrency;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using System.Reactive.Threading.Tasks;
@@ -21,7 +20,7 @@ namespace InfluxDB.Client
 {
     public class WriteApi : IDisposable
     {
-        private readonly Subject<List<BatchWriteData>> _flush = new Subject<List<BatchWriteData>>();
+        private readonly Subject<IObservable<BatchWriteData>> _flush = new Subject<IObservable<BatchWriteData>>();
 
         private readonly InfluxDBClient _influxDbClient;
         private readonly MeasurementMapper _measurementMapper = new MeasurementMapper();
@@ -45,18 +44,27 @@ namespace InfluxDB.Client
             // 
             // https://github.com/dotnet/reactive/issues/19
 
-            var observable = _subject.ObserveOn(writeOptions.WriteScheduler);
+            var tempBoundary = new Subject<IObservable<BatchWriteData>>();
 
-            var boundary = observable
-                .Buffer(TimeSpan.FromMilliseconds(writeOptions.FlushInterval), writeOptions.BatchSize,
-                    writeOptions.WriteScheduler)
-                .Merge(_flush);
-
-            observable
+            _subject
                 //
                 // Batching
                 //
-                .Window(boundary)
+                .Publish(connectedSource =>
+                {
+                    return connectedSource
+                        .Window(tempBoundary)
+                        .Merge(Observable.Defer(() =>
+                        {
+                            connectedSource
+                                .Window(TimeSpan.FromMilliseconds(writeOptions.FlushInterval), writeOptions.BatchSize,
+                                    writeOptions.WriteScheduler)
+                                .Merge(_flush)
+                                .Subscribe(tempBoundary);
+
+                            return Observable.Empty<IObservable<BatchWriteData>>();
+                        }));
+                })
                 //
                 // Group by key - same bucket, same org
                 //
@@ -93,7 +101,7 @@ namespace InfluxDB.Client
                         return source;
                     }
 
-                    return source.Delay(_ => Observable.Timer(TimeSpan.FromMilliseconds(JitterDelay(writeOptions)), Scheduler.CurrentThread));
+                    return source.Delay(_ => Observable.Timer(TimeSpan.FromMilliseconds(JitterDelay(writeOptions)), writeOptions.WriteScheduler));
                 })
                 .Concat()
                 //
@@ -130,7 +138,7 @@ namespace InfluxDB.Client
                                     httpException, retryInterval);
                                 Publish(retryable);
 
-                                return Observable.Timer(TimeSpan.FromMilliseconds(retryInterval));
+                                return Observable.Timer(TimeSpan.FromMilliseconds(retryInterval), writeOptions.WriteScheduler);
                             }
 
                             throw e;
@@ -469,7 +477,7 @@ namespace InfluxDB.Client
         {
             if (!_flush.IsDisposed)
             {
-                _flush.OnNext(new List<BatchWriteData>());
+                _flush.OnNext(Observable.Empty<BatchWriteData>());
             }
         }
 
