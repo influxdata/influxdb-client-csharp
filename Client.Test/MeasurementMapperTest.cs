@@ -1,4 +1,7 @@
 using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 using InfluxDB.Client.Api.Domain;
 using InfluxDB.Client.Core;
 using InfluxDB.Client.Internal;
@@ -65,6 +68,28 @@ namespace InfluxDB.Client.Test
             var lineProtocol = _mapper.ToPoint(poco, WritePrecision.S).ToLineProtocol();
             
             Assert.AreEqual("poco,tag=value value=\"to-string\"", lineProtocol);
+        }
+
+        [Test]
+        public void HeavyLoad()
+        {
+            var measurements = new List<Poco>();
+
+            for (var i = 0; i < 500_000; i++)
+            {
+                measurements.Add(new Poco{Value = i, Tag = "Europe", Timestamp = DateTime.UnixEpoch.Add(TimeSpan.FromSeconds(i))});
+            }
+
+            var stopWatch = new Stopwatch();
+            stopWatch.Start();
+
+            var enumerable = measurements.Select(it => _mapper.ToPoint(it, WritePrecision.S).ToLineProtocol());
+            var _ = string.Join("\n", enumerable);
+
+            var ts = stopWatch.Elapsed;
+            var elapsedTime = $"{ts.Hours:00}:{ts.Minutes:00}:{ts.Seconds:00}.{ts.Milliseconds / 10:00}";
+            
+            Assert.LessOrEqual(ts.Seconds, 10, $"Elapsed time: {elapsedTime}");
         }
         
         private class MyClass
