@@ -77,10 +77,10 @@ namespace InfluxDB.Client.Test
 
             Thread.Sleep(5_000);
 
-            var runs = await _tasksApi.GetRunsAsync(task, null, null, 1);
+            var runs = await _tasksApi.GetRunsAsync(task, null, null, null);
             Assert.IsNotEmpty(runs);
 
-            var message = Assert.ThrowsAsync<HttpException>(async () => await _tasksApi.CancelRunAsync(runs[0]))
+            var message = Assert.ThrowsAsync<HttpException>(async () => await _tasksApi.CancelRunAsync(runs.First()))
                 .Message;
 
             Assert.AreEqual("failed to cancel run: run not found", message);
