@@ -1,5 +1,8 @@
 using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using InfluxDB.Client.Api.Domain;
@@ -12,18 +15,28 @@ using NodaTime;
                               "95804a1aeeb0de18ac3728782f9dc8dbae2e806167a8bb64c0402278edcefd78c13dbe7f8d13de36eb362" +
                               "21ec215c66ee2dfe7943de97b869c5eea4d92f92d345ced67de5ac8fc3cd2f8dd7e3c0c53bdb0cc433af8" +
                               "59033d069cad397a7")]
+
 namespace InfluxDB.Client.Internal
 {
+    internal class PropertyInfoColumn
+    {
+        internal PropertyInfo Property;
+        internal Column Column;
+    } 
+    
     internal class MeasurementMapper
     {
+        private IDictionary<string, PropertyInfoColumn[]> CACHE = new ConcurrentDictionary<string, PropertyInfoColumn[]>();
+
         internal PointData ToPoint<TM>(TM measurement, WritePrecision precision)
         {
             Arguments.CheckNotNull(measurement, nameof(measurement));
             Arguments.CheckNotNull(precision, nameof(precision));
 
-            var measurementAttribute = (Measurement) measurement.GetType()
-                .GetCustomAttribute(typeof(Measurement));
-
+            var measurementType = measurement.GetType();
+            CacheMeasurementClass(measurementType);
+            
+            var measurementAttribute = (Measurement) measurementType.GetCustomAttribute(typeof(Measurement));
             if (measurementAttribute == null)
             {
                 throw new InvalidOperationException(
@@ -32,26 +45,20 @@ namespace InfluxDB.Client.Internal
 
             var point = PointData.Measurement(measurementAttribute.Name);
 
-            foreach (var property in measurement.GetType().GetProperties())
+            foreach (var propertyInfo in CACHE[measurementType.Name])
             {
-                var column = (Column) property.GetCustomAttribute(typeof(Column));
-                if (column == null)
-                {
-                    continue;
-                }
-
-                var value = property.GetValue(measurement);
+                var value = propertyInfo.Property.GetValue(measurement);
                 if (value == null)
                 {
                     continue;
                 }
 
-                var name = !string.IsNullOrEmpty(column.Name) ? column.Name : property.Name;
-                if (column.IsTag)
+                var name = !string.IsNullOrEmpty(propertyInfo.Column.Name) ? propertyInfo.Column.Name : propertyInfo.Property.Name;
+                if (propertyInfo.Column.IsTag)
                 {
                     point.Tag(name, value.ToString());
                 }
-                else if (column.IsTimestamp)
+                else if (propertyInfo.Column.IsTimestamp)
                 {
                     if (value is long l)
                     {
@@ -60,11 +67,11 @@ namespace InfluxDB.Client.Internal
                     else if (value is TimeSpan span)
                     {
                         point.Timestamp(span, precision);
-                    } 
+                    }
                     else if (value is DateTime date)
                     {
                         point.Timestamp(date, precision);
-                    } 
+                    }
                     else if (value is DateTimeOffset offset)
                     {
                         point.Timestamp(offset, precision);
@@ -136,6 +143,19 @@ namespace InfluxDB.Client.Internal
             }
 
             return point;
+        }
+
+        private void CacheMeasurementClass(Type measurementType)
+        {
+            if (CACHE.ContainsKey(measurementType.Name))
+            {
+                return;
+            }
+
+            CACHE[measurementType.Name] = measurementType.GetProperties()
+                .Select(property => new PropertyInfoColumn {Column = (Column) property.GetCustomAttribute(typeof(Column)), Property = property})
+                .Where(propertyInfo => propertyInfo.Column != null)
+                .ToArray();
         }
     }
 }

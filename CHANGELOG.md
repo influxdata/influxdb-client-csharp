@@ -1,5 +1,9 @@
 ## 1.7.0 [unreleased]
 
+### Features
+1. [#70](https://github.com/influxdata/influxdb-client-csharp/pull/70): Optimized mapping of measurements into `PointData`
+
+### Bugs
 1. [#69](https://github.com/influxdata/influxdb-client-csharp/pull/69): Write buffer uses correct flush interval and batch size under heavy load
 
 ## 1.6.0 [2020-03-13]
