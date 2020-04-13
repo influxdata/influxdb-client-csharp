@@ -10,7 +10,7 @@
 
 This repository contains the reference C# client for the InfluxDB 2.0.
 
-### Note: Use this client library with InfluxDB 2.x and InfluxDB 1.8+. For connecting to InfluxDB 1.7 or earlier instances, please use the [influxdb-csharp](https://github.com/influxdata/influxdb-csharp) client library.
+#### Note: Use this client library with InfluxDB 2.x and InfluxDB 1.8+. For connecting to InfluxDB 1.7 or earlier instances, please use the [influxdb-csharp](https://github.com/influxdata/influxdb-csharp) client library.
 
 - [Features](#features)
 - [Documentation](#documentation)
