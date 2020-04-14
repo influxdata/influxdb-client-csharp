@@ -6,6 +6,9 @@
 ### Bugs
 1. [#69](https://github.com/influxdata/influxdb-client-csharp/pull/69): Write buffer uses correct flush interval and batch size under heavy load
 
+### Dependencies
+1. [#74](https://github.com/influxdata/influxdb-client-csharp/pull/74): update CsvHelper to [15.0.4,16.0)
+
 ## 1.6.0 [2020-03-13]
 
 ### Features

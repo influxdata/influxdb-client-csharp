@@ -27,11 +27,11 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <None Include="..\Assets\influxdata.jpg" Pack="true" PackagePath=""/>
+        <None Include="..\Assets\influxdata.jpg" Pack="true" PackagePath="" />
     </ItemGroup>
     
     <ItemGroup>
-      <PackageReference Include="CsvHelper" Version="8.1.1" />
+      <PackageReference Include="CsvHelper" Version="[15.0.4,16.0)" />
       <PackageReference Include="Newtonsoft.Json" Version="	11.0.2" />
       <PackageReference Include="NodaTime" Version="2.4.1" />
       <PackageReference Include="NodaTime.Serialization.JsonNet" Version="2.0.0" />
