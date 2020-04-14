@@ -79,7 +79,7 @@ namespace InfluxDB.Client.Core.Flux.Internal
             var startNewTable = false;
             FluxTable table = null;
 
-            using (var csv = new CsvReader(new StreamReader(source)))
+            using (var csv = new CsvReader(new StreamReader(source), CultureInfo.InvariantCulture))
             {
                 while (csv.Read())
                 {
