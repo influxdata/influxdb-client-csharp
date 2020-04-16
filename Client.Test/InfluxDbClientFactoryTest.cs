@@ -148,7 +148,7 @@ namespace InfluxDB.Client.Test
         [Test]
         public void V1Configuration()
         {
-            var client = InfluxDBClientFactory.CreateV1("http://localhost:8086", "my-username", "my-password", "database", "week");
+            var client = InfluxDBClientFactory.CreateV1("http://localhost:8086", "my-username", "my-password".ToCharArray(), "database", "week");
 
             var options = GetDeclaredField<InfluxDBClientOptions>(client.GetType(), client, "_options");
             Assert.AreEqual("http://localhost:8086", options.Url);

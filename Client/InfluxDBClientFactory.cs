@@ -82,7 +82,7 @@ namespace InfluxDB.Client
         /// <param name="database">database name</param>
         /// <param name="retentionPolicy">retention policy</param>
         /// <returns></returns>
-        public static InfluxDBClient CreateV1(string url, string username, string password, string database,
+        public static InfluxDBClient CreateV1(string url, string username, char[] password, string database,
             string retentionPolicy)
         {
             Arguments.CheckNonEmptyString(database, nameof(database));
@@ -91,7 +91,7 @@ namespace InfluxDB.Client
                 .CreateNew()
                 .Url(url)
                 .Org("-")
-                .AuthenticateToken($"{username}:{password}".ToCharArray())
+                .AuthenticateToken($"{username}:{new string(password)}".ToCharArray())
                 .Bucket($"{database}/{retentionPolicy}")
                 .Build();
 
