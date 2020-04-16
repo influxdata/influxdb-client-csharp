@@ -144,6 +144,26 @@ namespace InfluxDB.Client.Test
             Assert.AreEqual("California Miner", defaultTags["customer"]);
             Assert.AreEqual("${SensorVersion}", defaultTags["version"]);
         }
+        
+        [Test]
+        public void V1Configuration()
+        {
+            var client = InfluxDBClientFactory.CreateV1("http://localhost:8086", "my-username", "my-password", "database", "week");
+
+            var options = GetDeclaredField<InfluxDBClientOptions>(client.GetType(), client, "_options");
+            Assert.AreEqual("http://localhost:8086", options.Url);
+            Assert.AreEqual("-", options.Org);
+            Assert.AreEqual("database/week", options.Bucket);
+            Assert.AreEqual("my-username:my-password".ToCharArray(), options.Token);
+            
+            client = InfluxDBClientFactory.CreateV1("http://localhost:8086", null, null, "database", null);
+
+            options = GetDeclaredField<InfluxDBClientOptions>(client.GetType(), client, "_options");
+            Assert.AreEqual("http://localhost:8086", options.Url);
+            Assert.AreEqual("-", options.Org);
+            Assert.AreEqual("database/", options.Bucket);
+            Assert.AreEqual("my-username:my-password".ToCharArray(), options.Token);
+        }
 
         private static T GetDeclaredField<T>(IReflect type, object instance, string fieldName)
         {
