@@ -81,7 +81,7 @@ namespace InfluxDB.Client
         /// <param name="password">authorization password</param>
         /// <param name="database">database name</param>
         /// <param name="retentionPolicy">retention policy</param>
-        /// <returns></returns>
+        /// <returns>client</returns>
         public static InfluxDBClient CreateV1(string url, string username, char[] password, string database,
             string retentionPolicy)
         {
