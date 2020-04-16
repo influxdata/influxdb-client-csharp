@@ -162,7 +162,7 @@ namespace InfluxDB.Client.Test
             Assert.AreEqual("http://localhost:8086", options.Url);
             Assert.AreEqual("-", options.Org);
             Assert.AreEqual("database/", options.Bucket);
-            Assert.AreEqual("my-username:my-password".ToCharArray(), options.Token);
+            Assert.AreEqual(":".ToCharArray(), options.Token);
         }
 
         private static T GetDeclaredField<T>(IReflect type, object instance, string fieldName)
