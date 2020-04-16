@@ -3,8 +3,11 @@
 ### Features
 1. [#70](https://github.com/influxdata/influxdb-client-csharp/pull/70): Optimized mapping of measurements into `PointData`
 
-### Bugs
+### Bug Fixes
 1. [#69](https://github.com/influxdata/influxdb-client-csharp/pull/69): Write buffer uses correct flush interval and batch size under heavy load
+
+### Documentation
+1. [#77](https://github.com/influxdata/influxdb-client-csharp/pull/77): Clarify how to use a client with InfluxDB 1.8
 
 ### Dependencies
 1. [#74](https://github.com/influxdata/influxdb-client-csharp/pull/74): update CsvHelper to [15.0.4,16.0)
@@ -15,7 +18,7 @@
 1. [#61](https://github.com/influxdata/influxdb-client-csharp/issues/61): Set User-Agent to influxdb-client-csharp/VERSION for all requests
 1. [#64](https://github.com/influxdata/influxdb-client-csharp/issues/64): Add authentication with Username and Password for Client.Legacy
 
-### Bugs
+### Bug Fixes
 1. [#63](https://github.com/influxdata/influxdb-client-csharp/pull/63): Correctly parse CSV where multiple results include multiple tables
 
 ## 1.5.0 [2020-02-14]
@@ -35,7 +38,7 @@
 ### CI
 1. [#54](https://github.com/influxdata/influxdb-client-csharp/pull/54): Added beta release to continuous integration
 
-### Bugs
+### Bug Fixes
 1. [#56](https://github.com/influxdata/influxdb-client-csharp/issues/56): WriteApi is disposed after a buffer is fully processed
 
 ## 1.3.0 [2019-12-06]
@@ -47,7 +50,7 @@
 ### API
 1. [#46](https://github.com/influxdata/influxdb-client-csharp/pull/46): Updated swagger to latest version
 
-### Bugs
+### Bug Fixes
 1. [#45](https://github.com/influxdata/influxdb-client-csharp/issues/45): Assemblies are strong-named
 2. [#48](https://github.com/influxdata/influxdb-client-csharp/pull/48): Packing library icon into a package
 
@@ -71,7 +74,7 @@
 ### API
 1. [#36](https://github.com/influxdata/influxdb-client-csharp/issues/36): Updated swagger to latest version
 
-### Bugs
+### Bug Fixes
 1. [#31](https://github.com/influxdata/influxdb-client-csharp/issues/31): Drop NaN and infinity values from fields when writing to InfluxDB
 1. [#39](https://github.com/influxdata/influxdb-client-csharp/pull/39): FluxCSVParser uses a CultureInfo for parsing string to double
 
@@ -80,7 +83,7 @@
 ### Features
 1. [#29](https://github.com/influxdata/influxdb-client-csharp/issues/29): Added support for gzip compression of query response and write body 
 
-### Bugs
+### Bug Fixes
 1. [#27](https://github.com/influxdata/influxdb-client-csharp/issues/27): The org parameter takes either the ID or Name interchangeably
 
 ### API
@@ -92,7 +95,7 @@
 1. [#18](https://github.com/influxdata/influxdb-client-csharp/issues/18): Auto-configure client from configuration file
 1. [#20](https://github.com/influxdata/influxdb-client-csharp/issues/19): Possibility to specify default tags
 
-### Bugs
+### Bug Fixes
 1. [#24](https://github.com/influxdata/influxdb-client-csharp/issues/24): The data point without field should be ignored
 
 ## 1.0.0.M1

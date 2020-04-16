@@ -19,7 +19,7 @@ namespace InfluxDB.Client
 
             return Create(options);
         }
-        
+
         /// <summary>
         /// Create a instance of the InfluxDB 2.0 client. The url could be a connection string with various configurations.
         /// <para>
@@ -74,6 +74,31 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
+        /// Create a instance of the InfluxDB 2.0 client to connect into InfluxDB 1.8.
+        /// </summary>
+        /// <param name="url">the url to connect to the InfluxDB 1.8</param>
+        /// <param name="username">authorization username</param>
+        /// <param name="password">authorization password</param>
+        /// <param name="database">database name</param>
+        /// <param name="retentionPolicy">retention policy</param>
+        /// <returns>client</returns>
+        public static InfluxDBClient CreateV1(string url, string username, char[] password, string database,
+            string retentionPolicy)
+        {
+            Arguments.CheckNonEmptyString(database, nameof(database));
+
+            var options = InfluxDBClientOptions.Builder
+                .CreateNew()
+                .Url(url)
+                .Org("-")
+                .AuthenticateToken($"{username}:{new string(password)}".ToCharArray())
+                .Bucket($"{database}/{retentionPolicy}")
+                .Build();
+
+            return Create(options);
+        }
+
+        /// <summary>
         /// Create a instance of the InfluxDB 2.0 client.
         /// </summary>
         /// <param name="options">the connection configuration</param>
@@ -94,7 +119,8 @@ namespace InfluxDB.Client
         /// <param name="org">the name of an organization</param>
         /// <param name="bucket">the name of a bucket</param>
         /// <returns>Created default user, bucket, org.</returns>
-        public static async Task<OnboardingResponse> Onboarding(string url, string username, string password, string org,
+        public static async Task<OnboardingResponse> Onboarding(string url, string username, string password,
+            string org,
             string bucket)
         {
             Arguments.CheckNonEmptyString(url, nameof(url));
