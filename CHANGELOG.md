@@ -1,4 +1,4 @@
-## 1.7.0 [unreleased]
+## 1.7.0 [2020-04-17]
 
 ### Features
 1. [#70](https://github.com/influxdata/influxdb-client-csharp/pull/70): Optimized mapping of measurements into `PointData`
