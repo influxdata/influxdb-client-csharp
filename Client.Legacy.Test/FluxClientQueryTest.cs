@@ -10,6 +10,7 @@ using InfluxDB.Client.Flux;
 using NUnit.Framework;
 using WireMock.Matchers;
 using WireMock.RequestBuilders;
+using WireMock.ResponseBuilders;
 
 namespace Client.Legacy.Test
 {
@@ -72,6 +73,30 @@ namespace Client.Legacy.Test
             catch (InfluxException e)
             {
                 Assert.That(e.Message.Equals("Flux query is not valid"));
+            }
+        }
+
+        [Test]
+        public async Task ErrorAsStream()
+        {
+            var response = Response.Create()
+                .WithStatusCode(403)
+                .WithBody("Flux query service disabled. Verify flux-enabled=true in the [http] section of the InfluxDB config.");
+
+            MockServer.Given(Request.Create().WithPath("/api/v2/query").UsingPost())
+                .RespondWith(response);
+            
+            try
+            {
+                await FluxClient.QueryAsync("from(bucket:\"telegraf\")");
+
+                Assert.Fail();
+            }
+            catch (InfluxException e)
+            {
+                Assert.AreEqual(e.Status, 403);
+                Assert.AreEqual(e.Message,
+                    "Flux query service disabled. Verify flux-enabled=true in the [http] section of the InfluxDB config.");
             }
         }
 

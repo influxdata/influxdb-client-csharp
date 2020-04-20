@@ -87,11 +87,11 @@ namespace InfluxDB.Client.Core.Internal
                 {
                     responseStream = AfterIntercept((int)response.StatusCode, () => response.Headers, responseStream);
                     
-                    RaiseForInfluxError(response);
+                    RaiseForInfluxError(response, responseStream);
                     consumer(cancellable, responseStream);
                 };
 
-                await Task.Run(() => { RestClient.DownloadData(query, true); });
+                await Task.Run(() => { RestClient.DownloadData(query, true); }).ConfigureAwait(true);
                 if (!cancellable.IsCancelled())
                 {
                     onComplete();
@@ -195,7 +195,7 @@ namespace InfluxDB.Client.Core.Internal
             return exception is EndOfStreamException;
         }
 
-        protected void RaiseForInfluxError(object result)
+        protected void RaiseForInfluxError(object result, object body)
         {
             if (result is IRestResponse restResponse)
             {
@@ -206,7 +206,7 @@ namespace InfluxDB.Client.Core.Internal
                     throw restResponse.ErrorException;
                 }
 
-                throw HttpException.Create(restResponse);
+                throw HttpException.Create(restResponse, body);
             }
 
             var httpResponse = (IHttpResponse) result;
@@ -220,7 +220,7 @@ namespace InfluxDB.Client.Core.Internal
                 throw httpResponse.ErrorException;
             }
             
-            throw HttpException.Create(httpResponse);
+            throw HttpException.Create(httpResponse, body);
         }
 
         protected class FluxResponseConsumerRecord : FluxCsvParser.IFluxResponseConsumer

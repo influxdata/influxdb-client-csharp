@@ -416,7 +416,7 @@ namespace InfluxDB.Client.Flux
 
             var response = await Task.Run(() => RestClient.Execute(request)).ConfigureAwait(false);
 
-            RaiseForInfluxError(response);
+            RaiseForInfluxError(response, response.Content);
 
             response.Content = AfterIntercept(
                 (int) response.StatusCode,

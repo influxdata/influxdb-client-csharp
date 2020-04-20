@@ -42,7 +42,7 @@ namespace InfluxDB.Client
             _apiClient.RestClient.UserAgent = $"influxdb-client-csharp/{version}";
 
             _exceptionFactory = (methodName, response) =>
-                !response.IsSuccessful ? HttpException.Create(response) : null;
+                !response.IsSuccessful ? HttpException.Create(response, response.Content) : null;
 
             _setupService = new SetupService((Configuration) _apiClient.Configuration)
             {
