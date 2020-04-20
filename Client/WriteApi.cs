@@ -148,7 +148,7 @@ namespace InfluxDB.Client
                             // ReSharper disable once ConvertIfStatementToReturnStatement
                             if (result.IsSuccessful) return Notification.CreateOnNext(result);
 
-                            return Notification.CreateOnError<IRestResponse>(HttpException.Create(result));
+                            return Notification.CreateOnError<IRestResponse>(HttpException.Create(result, result.Content));
                         })
                         .Catch<Notification<IRestResponse>, Exception>(ex =>
                         {

@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using InfluxDB.Client.Core.Internal;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using RestSharp;
 
@@ -53,26 +55,27 @@ namespace InfluxDB.Client.Core.Exceptions
         /// </summary>
         public int? RetryAfter { get; set; }
 
-        public static HttpException Create(IRestResponse requestResult)
+        public static HttpException Create(IRestResponse requestResult, object body)
         {
             Arguments.CheckNotNull(requestResult, nameof(requestResult));
 
             var httpHeaders = LoggingHandler.ToHeaders(requestResult.Headers);
             
-            return Create(requestResult.Content, httpHeaders, requestResult.ErrorMessage, requestResult.StatusCode);
+            return Create(body, httpHeaders, requestResult.ErrorMessage, requestResult.StatusCode);
         }
 
-        public static HttpException Create(IHttpResponse requestResult)
+        public static HttpException Create(IHttpResponse requestResult, object body)
         {
             Arguments.CheckNotNull(requestResult, nameof(requestResult));
 
-            return Create(requestResult.Content, requestResult.Headers, requestResult.ErrorMessage, requestResult.StatusCode);
+            return Create(body, requestResult.Headers, requestResult.ErrorMessage, requestResult.StatusCode);
         }
         
-        public static HttpException Create(string content, IList<HttpHeader> headers, string ErrorMessage, HttpStatusCode statusCode)
+        public static HttpException Create(object content, IList<HttpHeader> headers, string ErrorMessage, HttpStatusCode statusCode)
         {
+            string stringBody = null;
+            var errorBody = new JObject();
             string errorMessage = null;
-            JObject errorBody;
 
             int? retryAfter = null;
             {
@@ -80,13 +83,36 @@ namespace InfluxDB.Client.Core.Exceptions
                 if (retryHeader != null) retryAfter = Convert.ToInt32(retryHeader.Value);
             }
 
-            if (string.IsNullOrEmpty(content))
-                errorBody = new JObject();
-            else
-                errorBody = JObject.Parse(content);
+            if (content != null)
+            {
+                if (content is Stream)
+                {
+                    var stream = content as Stream;
+                    var sr = new StreamReader(stream);
+                    stringBody = sr.ReadToEnd();
+                }
+                else
+                {
+                    stringBody = content.ToString();
+                }
+            }
 
-            if (errorBody.ContainsKey("message")) errorMessage = errorBody.GetValue("message").ToString();
-
+            if (!string.IsNullOrEmpty(stringBody))
+            {
+                try
+                {
+                    errorBody = JObject.Parse(stringBody);
+                    if (errorBody.ContainsKey("message"))
+                    {
+                        errorMessage = errorBody.GetValue("message").ToString();
+                    }
+                }
+                catch (JsonException)
+                {
+                    errorBody = new JObject();
+                }
+            }
+            
             var keys = new[] {"X-Platform-Error-Code", "X-Influx-Error", "X-InfluxDb-Error"};
 
             if (string.IsNullOrEmpty(errorMessage))
@@ -95,6 +121,7 @@ namespace InfluxDB.Client.Core.Exceptions
                     .Select(header => header.Value.ToString()).FirstOrDefault();
 
             if (string.IsNullOrEmpty(errorMessage)) errorMessage = ErrorMessage;
+            if (string.IsNullOrEmpty(errorMessage)) errorMessage = stringBody;
 
             return new HttpException(errorMessage, (int) statusCode)
                 {ErrorBody = errorBody, RetryAfter = retryAfter};
