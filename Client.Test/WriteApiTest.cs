@@ -309,9 +309,11 @@ namespace InfluxDB.Client.Test
             
             WriteApi.WaitToCondition(() => true, 30000);
             WriteApi.WaitToCondition(() => false, 1);
-
+            WriteApi.WaitToCondition(() => false, 1000);
+            
             StringAssert.Contains("The WriteApi can't be gracefully dispose! - 1ms", writer.ToString());
             StringAssert.DoesNotContain("The WriteApi can't be gracefully dispose! - 30000ms", writer.ToString());
+            StringAssert.Contains("The WriteApi can't be gracefully dispose! - 1000ms", writer.ToString());
         }
         
         [Test]

@@ -483,11 +483,11 @@ namespace InfluxDB.Client
 
         internal static void WaitToCondition(Func<bool> condition, int millis)
         {
-            var start = DateTime.Now.Millisecond;
+            var start = DateTimeOffset.Now.ToUnixTimeMilliseconds();
             while (!condition())
             {
                 Thread.Sleep(25);
-                if (DateTime.Now.Millisecond - start > millis)
+                if (DateTimeOffset.Now.ToUnixTimeMilliseconds() - start > millis)
                 {
                     Trace.TraceError($"The WriteApi can't be gracefully dispose! - {millis}ms elapsed.");
                     break;

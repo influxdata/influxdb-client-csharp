@@ -1,5 +1,8 @@
 ## 1.8.0 [unreleased]
 
+### Bug Fixes
+1. [#81](https://github.com/influxdata/influxdb-client-csharp/pull/81): Fixed potentially hangs on of WriteApi.Dispose()
+
 ## 1.7.0 [2020-04-17]
 
 ### Features
