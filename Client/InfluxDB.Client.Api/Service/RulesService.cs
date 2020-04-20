@@ -284,7 +284,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
+                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -477,7 +477,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
+                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
