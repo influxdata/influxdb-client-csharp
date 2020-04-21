@@ -2,7 +2,6 @@
 
 ### Bug Fixes
 1. [#81](https://github.com/influxdata/influxdb-client-csharp/pull/81): Fixed potentially hangs on of WriteApi.Dispose()
-1. [#82](https://github.com/influxdata/influxdb-client-csharp/pull/82): Avoid to deadlock when is client used in UI
 1. [#83](https://github.com/influxdata/influxdb-client-csharp/pull/83): Fixed parsing error response for 1.x
 
 ## 1.7.0 [2020-04-17]

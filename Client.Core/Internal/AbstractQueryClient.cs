@@ -91,7 +91,7 @@ namespace InfluxDB.Client.Core.Internal
                     consumer(cancellable, responseStream);
                 };
 
-                await Task.Run(() => { RestClient.DownloadData(query, true); }).ConfigureAwait(true);
+                await Task.Run(() => { RestClient.DownloadData(query, true); });
                 if (!cancellable.IsCancelled())
                 {
                     onComplete();
