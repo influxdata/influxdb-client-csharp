@@ -182,6 +182,14 @@ namespace Client.Legacy.Test
                 Assert.That(e.Message.Contains("try bounding 'from' with a call to 'range'"));
             }
         }
+        
+        [Test]
+        public async Task WithAuthentication()
+        {
+            FluxClient = FluxClientFactory.Create(new FluxConnectionOptions(GetInfluxDbUrl(), "my-user", "my-password".ToCharArray()));
+                
+            Assert.IsTrue(await FluxClient.PingAsync());
+        }
 
         [Test]
         public async Task Callback()

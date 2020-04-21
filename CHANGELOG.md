@@ -4,6 +4,9 @@
 1. [#81](https://github.com/influxdata/influxdb-client-csharp/pull/81): Fixed potentially hangs on of WriteApi.Dispose()
 1. [#83](https://github.com/influxdata/influxdb-client-csharp/pull/83): Fixed parsing error response for 1.x
 
+### Features
+1. [#84](https://github.com/influxdata/influxdb-client-csharp/issues/84): Add possibility to authenticate by Basic Authentication or the URL query parameters
+
 ## 1.7.0 [2020-04-17]
 
 ### Features
