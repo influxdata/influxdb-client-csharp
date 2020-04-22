@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Net.Mime;
 using System.Threading.Tasks;
 using InfluxDB.Client.Core;
 using InfluxDB.Client.Core.Exceptions;
@@ -27,8 +28,16 @@ namespace InfluxDB.Client.Flux
             RestClient.AddDefaultHeader("Accept", "application/json");
             if (!string.IsNullOrEmpty(options.Username))
             {
-                RestClient.AddDefaultQueryParameter("u", options.Username);
-                RestClient.AddDefaultQueryParameter("p", new string(options.Password));   
+                if (FluxConnectionOptions.AuthenticationType.BasicAuthentication.Equals(options.Authentication))
+                {
+                    var auth = System.Text.Encoding.UTF8.GetBytes(options.Username + ":" + new string(options.Password));
+                    RestClient.AddDefaultHeader("Authorization", "Basic " + Convert.ToBase64String(auth));
+                }
+                else
+                {
+                    RestClient.AddDefaultQueryParameter("u", options.Username);
+                    RestClient.AddDefaultQueryParameter("p", new string(options.Password));
+                }
             }
             RestClient.UserAgent = $"influxdb-client-csharp/{version}";
         }

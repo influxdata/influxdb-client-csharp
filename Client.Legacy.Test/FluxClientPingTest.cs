@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using InfluxDB.Client.Flux;
 using NUnit.Framework;
@@ -46,6 +47,24 @@ namespace Client.Legacy.Test
                     .WithParam("p", new ExactMatcher("my-password"))
                     .UsingGet())
                 .RespondWith(Response.Create().WithStatusCode(204));
+                
+            Assert.IsTrue(await FluxClient.PingAsync());
+        }
+        
+        [Test]
+        public async Task WithBasicAuthentication()
+        {
+            FluxClient = FluxClientFactory.Create(new FluxConnectionOptions(MockServerUrl, "my-user", 
+                            "my-password".ToCharArray(), FluxConnectionOptions.AuthenticationType.BasicAuthentication));
+            
+            var auth = System.Text.Encoding.UTF8.GetBytes("my-user:my-password");
+            
+            MockServer.Given(Request.Create()
+                                            .WithPath("/ping")
+                                            .WithHeader("Authorization",
+                                                            new ExactMatcher("Basic " + Convert.ToBase64String(auth)))
+                                            .UsingGet())
+                            .RespondWith(Response.Create().WithStatusCode(204));
                 
             Assert.IsTrue(await FluxClient.PingAsync());
         }

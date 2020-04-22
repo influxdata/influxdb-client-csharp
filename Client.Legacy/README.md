@@ -16,6 +16,7 @@ The `FluxClientFactory` creates an instance of a `FluxClient` client that can be
 - `okHttpClient` - custom HTTP client to use for communications with InfluxDB (optional)
 - `username` - name of your InfluxDB user (optional)
 - `password` - password of your InfluxDB user (optional)
+- `authentication` - type of authentication (optional). There are two options for authenticating: Basic Authentication and the URL query parameters (default).
 
 ```c#
 // client creation
@@ -28,9 +29,22 @@ fluxClient.QueryAsync(...)
 ```
 #### Authenticate requests
 
+##### URL query parameters
 ```c#
 // client creation
 var options = new FluxConnectionOptions("http://127.0.0.1:8086", "my-user", "my-password".ToCharArray());
+
+var fluxClient = FluxClientFactory.Create(options);
+
+fluxClient.QueryAsync(...)
+...
+```
+
+##### Basic authentication
+```c#
+// client creation
+var options = new FluxConnectionOptions("http://127.0.0.1:8086", "my-user", "my-password".ToCharArray(),
+    FluxConnectionOptions.AuthenticationType.BasicAuthentication);
 
 var fluxClient = FluxClientFactory.Create(options);
 
