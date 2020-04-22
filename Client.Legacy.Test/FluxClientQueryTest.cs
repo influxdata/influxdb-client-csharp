@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -233,6 +234,26 @@ namespace Client.Legacy.Test
                     .WithParam("p", new ExactMatcher("my-password"))
                     .UsingPost())
                 .RespondWith(CreateResponse());
+                
+            var result = await FluxClient.QueryAsync("from(bucket:\"telegraf\")");
+
+            AssertSuccessResult(result);
+        }
+        
+        [Test]
+        public async Task WithBasicAuthentication()
+        {
+            FluxClient = FluxClientFactory.Create(new FluxConnectionOptions(MockServerUrl, "my-user", 
+                            "my-password".ToCharArray(), FluxConnectionOptions.AuthenticationType.BasicAuthentication));
+            
+            var auth = System.Text.Encoding.UTF8.GetBytes("my-user:my-password");
+            
+            MockServer.Given(Request.Create()
+                                            .WithPath("/api/v2/query")
+                                            .WithHeader("Authorization",
+                                                            new ExactMatcher("Basic " + Convert.ToBase64String(auth)))
+                                            .UsingPost())
+                            .RespondWith(CreateResponse());
                 
             var result = await FluxClient.QueryAsync("from(bucket:\"telegraf\")");
 

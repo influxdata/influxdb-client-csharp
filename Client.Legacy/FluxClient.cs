@@ -28,7 +28,7 @@ namespace InfluxDB.Client.Flux
             RestClient.AddDefaultHeader("Accept", "application/json");
             if (!string.IsNullOrEmpty(options.Username))
             {
-                if (options.Authentication.Equals(FluxConnectionOptions.AuthenticationType.BasicAuthentication))
+                if (FluxConnectionOptions.AuthenticationType.BasicAuthentication.Equals(options.Authentication))
                 {
                     var auth = System.Text.Encoding.UTF8.GetBytes(options.Username + ":" + new string(options.Password));
                     RestClient.AddDefaultHeader("Authorization", "Basic " + Convert.ToBase64String(auth));
