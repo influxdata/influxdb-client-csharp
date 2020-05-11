@@ -14,7 +14,7 @@ namespace InfluxDB.Client.Core
     [SuppressMessage("ReSharper", "ParameterOnlyUsedForPreconditionCheck.Global")]
     public static class Arguments
     {
-        private const string DurationPattern = @"([-+]?)([0-9]+(\\.[0-9]*)?[a-z]+)+";
+        private const string DurationPattern = @"([-+]?)([0-9]+(\\.[0-9]*)?[a-z]+)+|inf|-inf";
 
         /// <summary>
         /// Enforces that the string is not empty.
