@@ -6,6 +6,7 @@
 
 ### Features
 1. [#84](https://github.com/influxdata/influxdb-client-csharp/issues/84): Add possibility to authenticate by Basic Authentication or the URL query parameters
+2. [#91](https://github.com/influxdata/influxdb-client-csharp/pull/91): Added support "inf" in Duration
 
 ## 1.7.0 [2020-04-17]
 
