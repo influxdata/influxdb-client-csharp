@@ -152,6 +152,7 @@ namespace InfluxDB.Client.Test
         }
 
         [Test]
+        [Ignore("TODO https://github.com/influxdata/influxdb/issues/18048")]
         public async Task FindOrganizationLogsPaging()
         {
             var organization = await _organizationsApi.CreateOrganizationAsync(GenerateName("Constant Pro"));
@@ -226,14 +227,15 @@ namespace InfluxDB.Client.Test
         }
 
         [Test]
+        [Ignore("TODO https://github.com/influxdata/influxdb/issues/18048")]
         public async Task FindOrganizations()
         {
-            var organizations = await _organizationsApi.FindOrganizationsAsync();
+            var organizations = (await _organizationsApi.FindOrganizationsAsync()).Count;
 
             await _organizationsApi.CreateOrganizationAsync(GenerateName("Constant Pro"));
 
             var organizationsNew = await _organizationsApi.FindOrganizationsAsync();
-            Assert.That(organizationsNew.Count == organizations.Count + 1);
+            Assert.AreEqual(organizationsNew.Count, organizations + 1);
         }
 
         [Test]

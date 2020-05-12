@@ -3,6 +3,7 @@
 ### Features
 1. [#84](https://github.com/influxdata/influxdb-client-csharp/issues/84): Add possibility to authenticate by Basic Authentication or the URL query parameters
 2. [#91](https://github.com/influxdata/influxdb-client-csharp/pull/91): Added support "inf" in Duration
+2. [#92](https://github.com/influxdata/influxdb-client-csharp/pull/92): Remove trailing slash from connection URL
 
 ### Bug Fixes
 1. [#81](https://github.com/influxdata/influxdb-client-csharp/pull/81): Fixed potentially hangs on of WriteApi.Dispose()

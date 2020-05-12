@@ -163,6 +163,7 @@ namespace InfluxDB.Client.Test
         }
 
         [Test]
+        [Ignore("TODO https://github.com/influxdata/influxdb/issues/14900")]
         public async Task FindBucketByNameNotFound()
         {
             var bucket = await _bucketsApi.FindBucketByNameAsync("my-bucket-not-found");
@@ -188,6 +189,7 @@ namespace InfluxDB.Client.Test
         }
 
         [Test]
+        [Ignore("TODO https://github.com/influxdata/influxdb/issues/18048")]
         public async Task FindBucketLogsPaging()
         {
             var bucket = await _bucketsApi.CreateBucketAsync(GenerateName("robot sensor"), RetentionRule(), _organization);
@@ -372,6 +374,7 @@ namespace InfluxDB.Client.Test
         }
 
         [Test]
+        [Ignore("TODO https://github.com/influxdata/influxdb/issues/17244")]
         public async Task Owner()
         {
             var bucket = await _bucketsApi.CreateBucketAsync(GenerateName("robot sensor"), RetentionRule(), _organization);
