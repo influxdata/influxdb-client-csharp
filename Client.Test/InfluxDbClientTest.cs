@@ -154,5 +154,70 @@ namespace InfluxDB.Client.Test
             StringAssert.StartsWith("influxdb-client-csharp/1.", request.RequestMessage.Headers["User-Agent"].First());
             StringAssert.EndsWith(".0.0", request.RequestMessage.Headers["User-Agent"].First());
         }
+        
+        [Test]
+        public async Task TrailingSlashInUrl()
+        {
+            MockServer
+                .Given(Request.Create().WithPath("/api/v2/write").UsingPost())
+                .RespondWith(CreateResponse("{}"));
+
+            using (var writeApi = _client.GetWriteApi())
+            {
+                writeApi.WriteRecord("b1", "org1", WritePrecision.Ns,
+                    "h2o_feet,location=coyote_creek water_level=1.0 1");
+            }
+
+            var request = MockServer.LogEntries.Last();
+            Assert.AreEqual(MockServerUrl + "/api/v2/write?org=org1&bucket=b1&precision=ns",
+                request.RequestMessage.AbsoluteUrl);
+
+            _client.Dispose();
+            _client = InfluxDBClientFactory.Create(MockServerUrl + "/");
+
+            using (var writeApi = _client.GetWriteApi())
+            {
+                writeApi.WriteRecord("b1", "org1", WritePrecision.Ns,
+                    "h2o_feet,location=coyote_creek water_level=1.0 1");
+            }
+
+            request = MockServer.LogEntries.Last();
+            Assert.AreEqual(MockServerUrl + "/api/v2/write?org=org1&bucket=b1&precision=ns",
+                request.RequestMessage.AbsoluteUrl);
+
+            _client.Dispose();
+            _client = InfluxDBClientFactory.Create(new InfluxDBClientOptions.Builder().Url(MockServerUrl)
+                .AuthenticateToken("my-token".ToCharArray()).Build());
+
+            using (var writeApi = _client.GetWriteApi())
+            {
+                writeApi.WriteRecord("b1", "org1", WritePrecision.Ns,
+                    "h2o_feet,location=coyote_creek water_level=1.0 1");
+            }
+
+            request = MockServer.LogEntries.Last();
+            Assert.AreEqual(MockServerUrl + "/api/v2/write?org=org1&bucket=b1&precision=ns",
+                request.RequestMessage.AbsoluteUrl);
+
+            _client.Dispose();
+            _client = InfluxDBClientFactory.Create(new InfluxDBClientOptions.Builder().Url(MockServerUrl + "/")
+                .AuthenticateToken("my-token".ToCharArray()).Build());
+
+            using (var writeApi = _client.GetWriteApi())
+            {
+                writeApi.WriteRecord("b1", "org1", WritePrecision.Ns,
+                    "h2o_feet,location=coyote_creek water_level=1.0 1");
+            }
+
+            request = MockServer.LogEntries.Last();
+            Assert.AreEqual(MockServerUrl + "/api/v2/write?org=org1&bucket=b1&precision=ns",
+                request.RequestMessage.AbsoluteUrl);
+            
+            Assert.True(MockServer.LogEntries.Any());
+            foreach (var logEntry in MockServer.LogEntries)
+            {
+                StringAssert.StartsWith(MockServerUrl + "/api/v2/", logEntry.RequestMessage.AbsoluteUrl);
+            }
+        }
     }
 }

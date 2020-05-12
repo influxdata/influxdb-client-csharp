@@ -89,7 +89,7 @@ namespace InfluxDB.Client.Api.Client
                                      Encoding.Default.GetBytes(
                                          _options.Username + ":" + new string(_options.Password)));
 
-                    var request = new RestRequest(_options.Url + "/api/v2/signin", Method.POST)
+                    var request = new RestRequest("/api/v2/signin", Method.POST)
                         .AddHeader("Authorization", header);
 
                     authResponse = RestClient.Execute(request);
@@ -126,7 +126,7 @@ namespace InfluxDB.Client.Api.Client
             _signout = true;
             _sessionToken = null;
 
-            var request = new RestRequest(_options.Url + "/api/v2/signout", Method.POST);
+            var request = new RestRequest("/api/v2/signout", Method.POST);
             RestClient.Execute(request);
         }
     }
