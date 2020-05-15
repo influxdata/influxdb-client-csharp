@@ -1,4 +1,4 @@
-## 1.8.0 [unreleased]
+## 1.8.0 [2020-05-15]
 
 ### Features
 1. [#84](https://github.com/influxdata/influxdb-client-csharp/issues/84): Add possibility to authenticate by Basic Authentication or the URL query parameters
