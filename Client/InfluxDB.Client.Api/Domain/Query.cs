@@ -24,7 +24,7 @@ using OpenAPIDateConverter = InfluxDB.Client.Api.Client.OpenAPIDateConverter;
 namespace InfluxDB.Client.Api.Domain
 {
     /// <summary>
-    /// Query influx with specific return formatting.
+    /// Query influx using the Flux language
     /// </summary>
     [DataContract]
     public partial class Query :  IEquatable<Query>

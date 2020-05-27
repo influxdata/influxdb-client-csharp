@@ -1070,6 +1070,33 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userID">The user ID.</param>
+        /// <param name="passwordResetBody">New password</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="authorization">An auth credential for the Basic scheme (optional)</param>
+        /// <returns></returns>
+        void PostUsersIDPassword (string userID, PasswordResetBody passwordResetBody, string zapTraceSpan = null, String authorization = null);
+
+        /// <summary>
+        /// Update a password
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userID">The user ID.</param>
+        /// <param name="passwordResetBody">New password</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="authorization">An auth credential for the Basic scheme (optional)</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        ApiResponse<Object> PostUsersIDPasswordWithHttpInfo (string userID, PasswordResetBody passwordResetBody, string zapTraceSpan = null, String authorization = null);
+        /// <summary>
+        /// Update a password
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="passwordResetBody">New password</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="authorization">An auth credential for the Basic scheme (optional)</param>
@@ -1088,33 +1115,6 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="authorization">An auth credential for the Basic scheme (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> PutMePasswordWithHttpInfo (PasswordResetBody passwordResetBody, string zapTraceSpan = null, String authorization = null);
-        /// <summary>
-        /// Update a password
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">The user ID.</param>
-        /// <param name="passwordResetBody">New password</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="authorization">An auth credential for the Basic scheme (optional)</param>
-        /// <returns></returns>
-        void PutUsersIDPassword (string userID, PasswordResetBody passwordResetBody, string zapTraceSpan = null, String authorization = null);
-
-        /// <summary>
-        /// Update a password
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">The user ID.</param>
-        /// <param name="passwordResetBody">New password</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="authorization">An auth credential for the Basic scheme (optional)</param>
-        /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<Object> PutUsersIDPasswordWithHttpInfo (string userID, PasswordResetBody passwordResetBody, string zapTraceSpan = null, String authorization = null);
         #endregion Synchronous Operations
         #region Asynchronous Operations
         /// <summary>
@@ -2163,6 +2163,33 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userID">The user ID.</param>
+        /// <param name="passwordResetBody">New password</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="authorization">An auth credential for the Basic scheme (optional)</param>
+        /// <returns>Task of void</returns>
+        System.Threading.Tasks.Task PostUsersIDPasswordAsync (string userID, PasswordResetBody passwordResetBody, string zapTraceSpan = null, String authorization = null);
+
+        /// <summary>
+        /// Update a password
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userID">The user ID.</param>
+        /// <param name="passwordResetBody">New password</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="authorization">An auth credential for the Basic scheme (optional)</param>
+        /// <returns>Task of ApiResponse</returns>
+        System.Threading.Tasks.Task<ApiResponse<Object>> PostUsersIDPasswordAsyncWithHttpInfo (string userID, PasswordResetBody passwordResetBody, string zapTraceSpan = null, String authorization = null);
+        /// <summary>
+        /// Update a password
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="passwordResetBody">New password</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="authorization">An auth credential for the Basic scheme (optional)</param>
@@ -2181,33 +2208,6 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="authorization">An auth credential for the Basic scheme (optional)</param>
         /// <returns>Task of ApiResponse</returns>
         System.Threading.Tasks.Task<ApiResponse<Object>> PutMePasswordAsyncWithHttpInfo (PasswordResetBody passwordResetBody, string zapTraceSpan = null, String authorization = null);
-        /// <summary>
-        /// Update a password
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">The user ID.</param>
-        /// <param name="passwordResetBody">New password</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="authorization">An auth credential for the Basic scheme (optional)</param>
-        /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task PutUsersIDPasswordAsync (string userID, PasswordResetBody passwordResetBody, string zapTraceSpan = null, String authorization = null);
-
-        /// <summary>
-        /// Update a password
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">The user ID.</param>
-        /// <param name="passwordResetBody">New password</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="authorization">An auth credential for the Basic scheme (optional)</param>
-        /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> PutUsersIDPasswordAsyncWithHttpInfo (string userID, PasswordResetBody passwordResetBody, string zapTraceSpan = null, String authorization = null);
         #endregion Asynchronous Operations
     }
 
@@ -17104,6 +17104,431 @@ namespace InfluxDB.Client.Api.Service
         /// Update a password 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userID">The user ID.</param>
+        /// <param name="passwordResetBody">New password</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="authorization">An auth credential for the Basic scheme (optional)</param>
+        /// <returns></returns>
+        public void PostUsersIDPassword (string userID, PasswordResetBody passwordResetBody, string zapTraceSpan = null, String authorization = null)
+        {
+             PostUsersIDPasswordWithHttpInfo(userID, passwordResetBody, zapTraceSpan, authorization);
+        }
+
+        /// <summary>
+        /// Update a password 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userID">The user ID.</param>
+        /// <param name="passwordResetBody">New password</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="authorization">An auth credential for the Basic scheme (optional)</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        public ApiResponse<Object> PostUsersIDPasswordWithHttpInfo (string userID, PasswordResetBody passwordResetBody, string zapTraceSpan = null, String authorization = null)
+        {
+            // verify the required parameter 'userID' is set
+            if (userID == null)
+                throw new ApiException(400, "Missing required parameter 'userID' when calling UsersService->PostUsersIDPassword");
+            // verify the required parameter 'passwordResetBody' is set
+            if (passwordResetBody == null)
+                throw new ApiException(400, "Missing required parameter 'passwordResetBody' when calling UsersService->PostUsersIDPassword");
+
+            var localVarPath = "/api/v2/users/{userID}/password";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json"
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (userID != null) localVarPathParams.Add("userID", this.Configuration.ApiClient.ParameterToString(userID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (authorization != null) localVarHeaderParams.Add("Authorization", this.Configuration.ApiClient.ParameterToString(authorization)); // header parameter
+            if (passwordResetBody != null && passwordResetBody.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(passwordResetBody); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = passwordResetBody; // byte array
+            }
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+            // authentication (BasicAuth) required
+            // http basic authentication required
+            if (!String.IsNullOrEmpty(this.Configuration.Username) || !String.IsNullOrEmpty(this.Configuration.Password))
+            {
+                localVarHeaderParams["Authorization"] = "Basic " + ApiClient.Base64Encode(this.Configuration.Username + ":" + this.Configuration.Password);
+            }
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("PostUsersIDPassword", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Object>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                null);
+        }
+
+        /// <summary>
+        /// Update a password 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userID">The user ID.</param>
+        /// <param name="passwordResetBody">New password</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="authorization">An auth credential for the Basic scheme (optional)</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        public async System.Threading.Tasks.Task<IRestResponse> PostUsersIDPasswordWithIRestResponseAsync (string userID, PasswordResetBody passwordResetBody, string zapTraceSpan = null, String authorization = null)
+        {
+            // verify the required parameter 'userID' is set
+            if (userID == null)
+                throw new ApiException(400, "Missing required parameter 'userID' when calling UsersService->PostUsersIDPassword");
+            // verify the required parameter 'passwordResetBody' is set
+            if (passwordResetBody == null)
+                throw new ApiException(400, "Missing required parameter 'passwordResetBody' when calling UsersService->PostUsersIDPassword");
+
+            var localVarPath = "/api/v2/users/{userID}/password";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json"
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (userID != null) localVarPathParams.Add("userID", this.Configuration.ApiClient.ParameterToString(userID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (authorization != null) localVarHeaderParams.Add("Authorization", this.Configuration.ApiClient.ParameterToString(authorization)); // header parameter
+            if (passwordResetBody != null && passwordResetBody.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(passwordResetBody); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = passwordResetBody; // byte array
+            }
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+            // authentication (BasicAuth) required
+            // http basic authentication required
+            if (!String.IsNullOrEmpty(this.Configuration.Username) || !String.IsNullOrEmpty(this.Configuration.Password))
+            {
+                localVarHeaderParams["Authorization"] = "Basic " + ApiClient.Base64Encode(this.Configuration.Username + ":" + this.Configuration.Password);
+            }
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("PostUsersIDPassword", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Update a password 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userID">The user ID.</param>
+        /// <param name="passwordResetBody">New password</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="authorization">An auth credential for the Basic scheme (optional)</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        public IRestResponse PostUsersIDPasswordWithIRestResponse (string userID, PasswordResetBody passwordResetBody, string zapTraceSpan = null, String authorization = null)
+        {
+            // verify the required parameter 'userID' is set
+            if (userID == null)
+                throw new ApiException(400, "Missing required parameter 'userID' when calling UsersService->PostUsersIDPassword");
+            // verify the required parameter 'passwordResetBody' is set
+            if (passwordResetBody == null)
+                throw new ApiException(400, "Missing required parameter 'passwordResetBody' when calling UsersService->PostUsersIDPassword");
+
+            var localVarPath = "/api/v2/users/{userID}/password";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json"
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (userID != null) localVarPathParams.Add("userID", this.Configuration.ApiClient.ParameterToString(userID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (authorization != null) localVarHeaderParams.Add("Authorization", this.Configuration.ApiClient.ParameterToString(authorization)); // header parameter
+            if (passwordResetBody != null && passwordResetBody.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(passwordResetBody); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = passwordResetBody; // byte array
+            }
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+            // authentication (BasicAuth) required
+            // http basic authentication required
+            if (!String.IsNullOrEmpty(this.Configuration.Username) || !String.IsNullOrEmpty(this.Configuration.Password))
+            {
+                localVarHeaderParams["Authorization"] = "Basic " + ApiClient.Base64Encode(this.Configuration.Username + ":" + this.Configuration.Password);
+            }
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("PostUsersIDPassword", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return localVarResponse;
+        }
+        
+        /// <summary>
+        /// Update a password 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userID">The user ID.</param>
+        /// <param name="passwordResetBody">New password</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="authorization">An auth credential for the Basic scheme (optional)</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        public RestRequest PostUsersIDPasswordWithRestRequest (string userID, PasswordResetBody passwordResetBody, string zapTraceSpan = null, String authorization = null)
+        {
+            // verify the required parameter 'userID' is set
+            if (userID == null)
+                throw new ApiException(400, "Missing required parameter 'userID' when calling UsersService->PostUsersIDPassword");
+            // verify the required parameter 'passwordResetBody' is set
+            if (passwordResetBody == null)
+                throw new ApiException(400, "Missing required parameter 'passwordResetBody' when calling UsersService->PostUsersIDPassword");
+
+            var localVarPath = "/api/v2/users/{userID}/password";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json"
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (userID != null) localVarPathParams.Add("userID", this.Configuration.ApiClient.ParameterToString(userID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (authorization != null) localVarHeaderParams.Add("Authorization", this.Configuration.ApiClient.ParameterToString(authorization)); // header parameter
+            if (passwordResetBody != null && passwordResetBody.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(passwordResetBody); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = passwordResetBody; // byte array
+            }
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+            // authentication (BasicAuth) required
+            // http basic authentication required
+            if (!String.IsNullOrEmpty(this.Configuration.Username) || !String.IsNullOrEmpty(this.Configuration.Password))
+            {
+                localVarHeaderParams["Authorization"] = "Basic " + ApiClient.Base64Encode(this.Configuration.Username + ":" + this.Configuration.Password);
+            }
+
+            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
+                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+        }
+
+        /// <summary>
+        /// Update a password 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userID">The user ID.</param>
+        /// <param name="passwordResetBody">New password</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="authorization">An auth credential for the Basic scheme (optional)</param>
+        /// <returns>Task of void</returns>
+        public async System.Threading.Tasks.Task PostUsersIDPasswordAsync (string userID, PasswordResetBody passwordResetBody, string zapTraceSpan = null, String authorization = null)
+        {
+             await PostUsersIDPasswordAsyncWithHttpInfo(userID, passwordResetBody, zapTraceSpan, authorization);
+
+        }
+
+        /// <summary>
+        /// Update a password 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userID">The user ID.</param>
+        /// <param name="passwordResetBody">New password</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="authorization">An auth credential for the Basic scheme (optional)</param>
+        /// <returns>Task of ApiResponse</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<Object>> PostUsersIDPasswordAsyncWithHttpInfo (string userID, PasswordResetBody passwordResetBody, string zapTraceSpan = null, String authorization = null)
+        {
+            // make the HTTP request
+            IRestResponse localVarResponse = await PostUsersIDPasswordAsyncWithIRestResponse(userID, passwordResetBody, zapTraceSpan, authorization);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("PostUsersIDPassword", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<Object>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                null);
+        }
+            
+        /// <summary>
+        /// Update a password 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userID">The user ID.</param>
+        /// <param name="passwordResetBody">New password</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="authorization">An auth credential for the Basic scheme (optional)</param>
+        /// <returns>Task of IRestResponse</returns>
+        public async System.Threading.Tasks.Task<IRestResponse> PostUsersIDPasswordAsyncWithIRestResponse (string userID, PasswordResetBody passwordResetBody, string zapTraceSpan = null, String authorization = null)
+        {
+            // verify the required parameter 'userID' is set
+            if (userID == null)
+                throw new ApiException(400, "Missing required parameter 'userID' when calling UsersService->PostUsersIDPassword");
+            // verify the required parameter 'passwordResetBody' is set
+            if (passwordResetBody == null)
+                throw new ApiException(400, "Missing required parameter 'passwordResetBody' when calling UsersService->PostUsersIDPassword");
+
+            var localVarPath = "/api/v2/users/{userID}/password";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json"
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (userID != null) localVarPathParams.Add("userID", this.Configuration.ApiClient.ParameterToString(userID)); // path parameter
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (authorization != null) localVarHeaderParams.Add("Authorization", this.Configuration.ApiClient.ParameterToString(authorization)); // header parameter
+            if (passwordResetBody != null && passwordResetBody.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(passwordResetBody); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = passwordResetBody; // byte array
+            }
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+            // authentication (BasicAuth) required
+            // http basic authentication required
+            if (!String.IsNullOrEmpty(this.Configuration.Username) || !String.IsNullOrEmpty(this.Configuration.Password))
+            {
+                localVarHeaderParams["Authorization"] = "Basic " + ApiClient.Base64Encode(this.Configuration.Username + ":" + this.Configuration.Password);
+            }
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("PostUsersIDPassword", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Update a password 
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="passwordResetBody">New password</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="authorization">An auth credential for the Basic scheme (optional)</param>
@@ -17491,431 +17916,6 @@ namespace InfluxDB.Client.Api.Service
             if (ExceptionFactory != null)
             {
                 Exception exception = ExceptionFactory("PutMePassword", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return localVarResponse;
-        }
-
-        /// <summary>
-        /// Update a password 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">The user ID.</param>
-        /// <param name="passwordResetBody">New password</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="authorization">An auth credential for the Basic scheme (optional)</param>
-        /// <returns></returns>
-        public void PutUsersIDPassword (string userID, PasswordResetBody passwordResetBody, string zapTraceSpan = null, String authorization = null)
-        {
-             PutUsersIDPasswordWithHttpInfo(userID, passwordResetBody, zapTraceSpan, authorization);
-        }
-
-        /// <summary>
-        /// Update a password 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">The user ID.</param>
-        /// <param name="passwordResetBody">New password</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="authorization">An auth credential for the Basic scheme (optional)</param>
-        /// <returns>ApiResponse of Object(void)</returns>
-        public ApiResponse<Object> PutUsersIDPasswordWithHttpInfo (string userID, PasswordResetBody passwordResetBody, string zapTraceSpan = null, String authorization = null)
-        {
-            // verify the required parameter 'userID' is set
-            if (userID == null)
-                throw new ApiException(400, "Missing required parameter 'userID' when calling UsersService->PutUsersIDPassword");
-            // verify the required parameter 'passwordResetBody' is set
-            if (passwordResetBody == null)
-                throw new ApiException(400, "Missing required parameter 'passwordResetBody' when calling UsersService->PutUsersIDPassword");
-
-            var localVarPath = "/api/v2/users/{userID}/password";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-                "application/json"
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (userID != null) localVarPathParams.Add("userID", this.Configuration.ApiClient.ParameterToString(userID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (authorization != null) localVarHeaderParams.Add("Authorization", this.Configuration.ApiClient.ParameterToString(authorization)); // header parameter
-            if (passwordResetBody != null && passwordResetBody.GetType() != typeof(byte[]))
-            {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(passwordResetBody); // http body (model) parameter
-            }
-            else
-            {
-                localVarPostBody = passwordResetBody; // byte array
-            }
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-            // authentication (BasicAuth) required
-            // http basic authentication required
-            if (!String.IsNullOrEmpty(this.Configuration.Username) || !String.IsNullOrEmpty(this.Configuration.Password))
-            {
-                localVarHeaderParams["Authorization"] = "Basic " + ApiClient.Base64Encode(this.Configuration.Username + ":" + this.Configuration.Password);
-            }
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.PUT, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("PutUsersIDPassword", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return new ApiResponse<Object>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                null);
-        }
-
-        /// <summary>
-        /// Update a password 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">The user ID.</param>
-        /// <param name="passwordResetBody">New password</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="authorization">An auth credential for the Basic scheme (optional)</param>
-        /// <returns>ApiResponse of Object(void)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> PutUsersIDPasswordWithIRestResponseAsync (string userID, PasswordResetBody passwordResetBody, string zapTraceSpan = null, String authorization = null)
-        {
-            // verify the required parameter 'userID' is set
-            if (userID == null)
-                throw new ApiException(400, "Missing required parameter 'userID' when calling UsersService->PutUsersIDPassword");
-            // verify the required parameter 'passwordResetBody' is set
-            if (passwordResetBody == null)
-                throw new ApiException(400, "Missing required parameter 'passwordResetBody' when calling UsersService->PutUsersIDPassword");
-
-            var localVarPath = "/api/v2/users/{userID}/password";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-                "application/json"
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (userID != null) localVarPathParams.Add("userID", this.Configuration.ApiClient.ParameterToString(userID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (authorization != null) localVarHeaderParams.Add("Authorization", this.Configuration.ApiClient.ParameterToString(authorization)); // header parameter
-            if (passwordResetBody != null && passwordResetBody.GetType() != typeof(byte[]))
-            {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(passwordResetBody); // http body (model) parameter
-            }
-            else
-            {
-                localVarPostBody = passwordResetBody; // byte array
-            }
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-            // authentication (BasicAuth) required
-            // http basic authentication required
-            if (!String.IsNullOrEmpty(this.Configuration.Username) || !String.IsNullOrEmpty(this.Configuration.Password))
-            {
-                localVarHeaderParams["Authorization"] = "Basic " + ApiClient.Base64Encode(this.Configuration.Username + ":" + this.Configuration.Password);
-            }
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.PUT, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("PutUsersIDPassword", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return localVarResponse;
-        }
-
-        /// <summary>
-        /// Update a password 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">The user ID.</param>
-        /// <param name="passwordResetBody">New password</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="authorization">An auth credential for the Basic scheme (optional)</param>
-        /// <returns>ApiResponse of Object(void)</returns>
-        public IRestResponse PutUsersIDPasswordWithIRestResponse (string userID, PasswordResetBody passwordResetBody, string zapTraceSpan = null, String authorization = null)
-        {
-            // verify the required parameter 'userID' is set
-            if (userID == null)
-                throw new ApiException(400, "Missing required parameter 'userID' when calling UsersService->PutUsersIDPassword");
-            // verify the required parameter 'passwordResetBody' is set
-            if (passwordResetBody == null)
-                throw new ApiException(400, "Missing required parameter 'passwordResetBody' when calling UsersService->PutUsersIDPassword");
-
-            var localVarPath = "/api/v2/users/{userID}/password";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-                "application/json"
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (userID != null) localVarPathParams.Add("userID", this.Configuration.ApiClient.ParameterToString(userID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (authorization != null) localVarHeaderParams.Add("Authorization", this.Configuration.ApiClient.ParameterToString(authorization)); // header parameter
-            if (passwordResetBody != null && passwordResetBody.GetType() != typeof(byte[]))
-            {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(passwordResetBody); // http body (model) parameter
-            }
-            else
-            {
-                localVarPostBody = passwordResetBody; // byte array
-            }
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-            // authentication (BasicAuth) required
-            // http basic authentication required
-            if (!String.IsNullOrEmpty(this.Configuration.Username) || !String.IsNullOrEmpty(this.Configuration.Password))
-            {
-                localVarHeaderParams["Authorization"] = "Basic " + ApiClient.Base64Encode(this.Configuration.Username + ":" + this.Configuration.Password);
-            }
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.PUT, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("PutUsersIDPassword", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return localVarResponse;
-        }
-        
-        /// <summary>
-        /// Update a password 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">The user ID.</param>
-        /// <param name="passwordResetBody">New password</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="authorization">An auth credential for the Basic scheme (optional)</param>
-        /// <returns>ApiResponse of Object(void)</returns>
-        public RestRequest PutUsersIDPasswordWithRestRequest (string userID, PasswordResetBody passwordResetBody, string zapTraceSpan = null, String authorization = null)
-        {
-            // verify the required parameter 'userID' is set
-            if (userID == null)
-                throw new ApiException(400, "Missing required parameter 'userID' when calling UsersService->PutUsersIDPassword");
-            // verify the required parameter 'passwordResetBody' is set
-            if (passwordResetBody == null)
-                throw new ApiException(400, "Missing required parameter 'passwordResetBody' when calling UsersService->PutUsersIDPassword");
-
-            var localVarPath = "/api/v2/users/{userID}/password";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-                "application/json"
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (userID != null) localVarPathParams.Add("userID", this.Configuration.ApiClient.ParameterToString(userID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (authorization != null) localVarHeaderParams.Add("Authorization", this.Configuration.ApiClient.ParameterToString(authorization)); // header parameter
-            if (passwordResetBody != null && passwordResetBody.GetType() != typeof(byte[]))
-            {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(passwordResetBody); // http body (model) parameter
-            }
-            else
-            {
-                localVarPostBody = passwordResetBody; // byte array
-            }
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-            // authentication (BasicAuth) required
-            // http basic authentication required
-            if (!String.IsNullOrEmpty(this.Configuration.Username) || !String.IsNullOrEmpty(this.Configuration.Password))
-            {
-                localVarHeaderParams["Authorization"] = "Basic " + ApiClient.Base64Encode(this.Configuration.Username + ":" + this.Configuration.Password);
-            }
-
-            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
-                Method.PUT, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-        }
-
-        /// <summary>
-        /// Update a password 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">The user ID.</param>
-        /// <param name="passwordResetBody">New password</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="authorization">An auth credential for the Basic scheme (optional)</param>
-        /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task PutUsersIDPasswordAsync (string userID, PasswordResetBody passwordResetBody, string zapTraceSpan = null, String authorization = null)
-        {
-             await PutUsersIDPasswordAsyncWithHttpInfo(userID, passwordResetBody, zapTraceSpan, authorization);
-
-        }
-
-        /// <summary>
-        /// Update a password 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">The user ID.</param>
-        /// <param name="passwordResetBody">New password</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="authorization">An auth credential for the Basic scheme (optional)</param>
-        /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Object>> PutUsersIDPasswordAsyncWithHttpInfo (string userID, PasswordResetBody passwordResetBody, string zapTraceSpan = null, String authorization = null)
-        {
-            // make the HTTP request
-            IRestResponse localVarResponse = await PutUsersIDPasswordAsyncWithIRestResponse(userID, passwordResetBody, zapTraceSpan, authorization);
-
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("PutUsersIDPassword", localVarResponse);
-                if (exception != null) throw exception;
-            }
-
-            return new ApiResponse<Object>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                null);
-        }
-            
-        /// <summary>
-        /// Update a password 
-        /// </summary>
-        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userID">The user ID.</param>
-        /// <param name="passwordResetBody">New password</param>
-        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="authorization">An auth credential for the Basic scheme (optional)</param>
-        /// <returns>Task of IRestResponse</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> PutUsersIDPasswordAsyncWithIRestResponse (string userID, PasswordResetBody passwordResetBody, string zapTraceSpan = null, String authorization = null)
-        {
-            // verify the required parameter 'userID' is set
-            if (userID == null)
-                throw new ApiException(400, "Missing required parameter 'userID' when calling UsersService->PutUsersIDPassword");
-            // verify the required parameter 'passwordResetBody' is set
-            if (passwordResetBody == null)
-                throw new ApiException(400, "Missing required parameter 'passwordResetBody' when calling UsersService->PutUsersIDPassword");
-
-            var localVarPath = "/api/v2/users/{userID}/password";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-                "application/json"
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-
-            if (userID != null) localVarPathParams.Add("userID", this.Configuration.ApiClient.ParameterToString(userID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (authorization != null) localVarHeaderParams.Add("Authorization", this.Configuration.ApiClient.ParameterToString(authorization)); // header parameter
-            if (passwordResetBody != null && passwordResetBody.GetType() != typeof(byte[]))
-            {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(passwordResetBody); // http body (model) parameter
-            }
-            else
-            {
-                localVarPostBody = passwordResetBody; // byte array
-            }
-
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json"
-            };
-
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-
-            // authentication (BasicAuth) required
-            // http basic authentication required
-            if (!String.IsNullOrEmpty(this.Configuration.Username) || !String.IsNullOrEmpty(this.Configuration.Password))
-            {
-                localVarHeaderParams["Authorization"] = "Basic " + ApiClient.Base64Encode(this.Configuration.Username + ":" + this.Configuration.Password);
-            }
-
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.PUT, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("PutUsersIDPassword", localVarResponse);
                 if (exception != null) throw exception;
             }
 

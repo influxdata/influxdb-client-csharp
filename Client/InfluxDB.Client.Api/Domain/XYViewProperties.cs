@@ -68,6 +68,31 @@ namespace InfluxDB.Client.Api.Domain
         [DataMember(Name="shape", EmitDefaultValue=false)]
         public ShapeEnum Shape { get; set; }
         /// <summary>
+        /// Defines Position
+        /// </summary>
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum PositionEnum
+        {
+            /// <summary>
+            /// Enum Overlaid for value: overlaid
+            /// </summary>
+            [EnumMember(Value = "overlaid")]
+            Overlaid = 1,
+
+            /// <summary>
+            /// Enum Stacked for value: stacked
+            /// </summary>
+            [EnumMember(Value = "stacked")]
+            Stacked = 2
+
+        }
+
+        /// <summary>
+        /// Gets or Sets Position
+        /// </summary>
+        [DataMember(Name="position", EmitDefaultValue=false)]
+        public PositionEnum Position { get; set; }
+        /// <summary>
         /// Gets or Sets Geom
         /// </summary>
         [DataMember(Name="geom", EmitDefaultValue=false)]
@@ -80,6 +105,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <summary>
         /// Initializes a new instance of the <see cref="XYViewProperties" /> class.
         /// </summary>
+        /// <param name="timeFormat">timeFormat.</param>
         /// <param name="type">type (required).</param>
         /// <param name="queries">queries (required).</param>
         /// <param name="colors">Colors define color encoding of data into a visualization (required).</param>
@@ -91,8 +117,9 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="xColumn">xColumn.</param>
         /// <param name="yColumn">yColumn.</param>
         /// <param name="shadeBelow">shadeBelow.</param>
+        /// <param name="position">position (required).</param>
         /// <param name="geom">geom (required).</param>
-        public XYViewProperties(TypeEnum type = default(TypeEnum), List<DashboardQuery> queries = default(List<DashboardQuery>), List<DashboardColor> colors = default(List<DashboardColor>), ShapeEnum shape = default(ShapeEnum), string note = default(string), bool? showNoteWhenEmpty = default(bool?), Axes axes = default(Axes), Legend legend = default(Legend), string xColumn = default(string), string yColumn = default(string), bool? shadeBelow = default(bool?), XYGeom geom = default(XYGeom)) : base()
+        public XYViewProperties(string timeFormat = default(string), TypeEnum type = default(TypeEnum), List<DashboardQuery> queries = default(List<DashboardQuery>), List<DashboardColor> colors = default(List<DashboardColor>), ShapeEnum shape = default(ShapeEnum), string note = default(string), bool? showNoteWhenEmpty = default(bool?), Axes axes = default(Axes), Legend legend = default(Legend), string xColumn = default(string), string yColumn = default(string), bool? shadeBelow = default(bool?), PositionEnum position = default(PositionEnum), XYGeom geom = default(XYGeom)) : base()
         {
             // to ensure "type" is required (not null)
             if (type == null)
@@ -166,6 +193,15 @@ namespace InfluxDB.Client.Api.Domain
             {
                 this.Legend = legend;
             }
+            // to ensure "position" is required (not null)
+            if (position == null)
+            {
+                throw new InvalidDataException("position is a required property for XYViewProperties and cannot be null");
+            }
+            else
+            {
+                this.Position = position;
+            }
             // to ensure "geom" is required (not null)
             if (geom == null)
             {
@@ -175,10 +211,17 @@ namespace InfluxDB.Client.Api.Domain
             {
                 this.Geom = geom;
             }
+            this.TimeFormat = timeFormat;
             this.XColumn = xColumn;
             this.YColumn = yColumn;
             this.ShadeBelow = shadeBelow;
         }
+
+        /// <summary>
+        /// Gets or Sets TimeFormat
+        /// </summary>
+        [DataMember(Name="timeFormat", EmitDefaultValue=false)]
+        public string TimeFormat { get; set; }
 
 
         /// <summary>
@@ -239,6 +282,7 @@ namespace InfluxDB.Client.Api.Domain
         public bool? ShadeBelow { get; set; }
 
 
+
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
@@ -248,6 +292,7 @@ namespace InfluxDB.Client.Api.Domain
             var sb = new StringBuilder();
             sb.Append("class XYViewProperties {\n");
             sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
+            sb.Append("  TimeFormat: ").Append(TimeFormat).Append("\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  Queries: ").Append(Queries).Append("\n");
             sb.Append("  Colors: ").Append(Colors).Append("\n");
@@ -259,6 +304,7 @@ namespace InfluxDB.Client.Api.Domain
             sb.Append("  XColumn: ").Append(XColumn).Append("\n");
             sb.Append("  YColumn: ").Append(YColumn).Append("\n");
             sb.Append("  ShadeBelow: ").Append(ShadeBelow).Append("\n");
+            sb.Append("  Position: ").Append(Position).Append("\n");
             sb.Append("  Geom: ").Append(Geom).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -294,6 +340,11 @@ namespace InfluxDB.Client.Api.Domain
                 return false;
 
             return base.Equals(input) && 
+                (
+                    this.TimeFormat == input.TimeFormat ||
+                    (this.TimeFormat != null &&
+                    this.TimeFormat.Equals(input.TimeFormat))
+                ) && base.Equals(input) && 
                 (
                     this.Type == input.Type ||
                     (this.Type != null &&
@@ -350,6 +401,11 @@ namespace InfluxDB.Client.Api.Domain
                     this.ShadeBelow.Equals(input.ShadeBelow))
                 ) && base.Equals(input) && 
                 (
+                    this.Position == input.Position ||
+                    (this.Position != null &&
+                    this.Position.Equals(input.Position))
+                ) && base.Equals(input) && 
+                (
                     this.Geom == input.Geom ||
                     (this.Geom != null &&
                     this.Geom.Equals(input.Geom))
@@ -365,6 +421,8 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = base.GetHashCode();
+                if (this.TimeFormat != null)
+                    hashCode = hashCode * 59 + this.TimeFormat.GetHashCode();
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.Queries != null)
@@ -387,6 +445,8 @@ namespace InfluxDB.Client.Api.Domain
                     hashCode = hashCode * 59 + this.YColumn.GetHashCode();
                 if (this.ShadeBelow != null)
                     hashCode = hashCode * 59 + this.ShadeBelow.GetHashCode();
+                if (this.Position != null)
+                    hashCode = hashCode * 59 + this.Position.GetHashCode();
                 if (this.Geom != null)
                     hashCode = hashCode * 59 + this.Geom.GetHashCode();
                 return hashCode;

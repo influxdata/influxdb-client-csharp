@@ -75,6 +75,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <summary>
         /// Initializes a new instance of the <see cref="ScatterViewProperties" /> class.
         /// </summary>
+        /// <param name="timeFormat">timeFormat.</param>
         /// <param name="type">type (required).</param>
         /// <param name="queries">queries (required).</param>
         /// <param name="colors">Colors define color encoding of data into a visualization (required).</param>
@@ -93,7 +94,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="xSuffix">xSuffix (required).</param>
         /// <param name="yPrefix">yPrefix (required).</param>
         /// <param name="ySuffix">ySuffix (required).</param>
-        public ScatterViewProperties(TypeEnum type = default(TypeEnum), List<DashboardQuery> queries = default(List<DashboardQuery>), List<string> colors = default(List<string>), ShapeEnum shape = default(ShapeEnum), string note = default(string), bool? showNoteWhenEmpty = default(bool?), string xColumn = default(string), string yColumn = default(string), List<string> fillColumns = default(List<string>), List<string> symbolColumns = default(List<string>), List<decimal?> xDomain = default(List<decimal?>), List<decimal?> yDomain = default(List<decimal?>), string xAxisLabel = default(string), string yAxisLabel = default(string), string xPrefix = default(string), string xSuffix = default(string), string yPrefix = default(string), string ySuffix = default(string)) : base()
+        public ScatterViewProperties(string timeFormat = default(string), TypeEnum type = default(TypeEnum), List<DashboardQuery> queries = default(List<DashboardQuery>), List<string> colors = default(List<string>), ShapeEnum shape = default(ShapeEnum), string note = default(string), bool? showNoteWhenEmpty = default(bool?), string xColumn = default(string), string yColumn = default(string), List<string> fillColumns = default(List<string>), List<string> symbolColumns = default(List<string>), List<decimal?> xDomain = default(List<decimal?>), List<decimal?> yDomain = default(List<decimal?>), string xAxisLabel = default(string), string yAxisLabel = default(string), string xPrefix = default(string), string xSuffix = default(string), string yPrefix = default(string), string ySuffix = default(string)) : base()
         {
             // to ensure "type" is required (not null)
             if (type == null)
@@ -257,7 +258,14 @@ namespace InfluxDB.Client.Api.Domain
             {
                 this.YSuffix = ySuffix;
             }
+            this.TimeFormat = timeFormat;
         }
+
+        /// <summary>
+        /// Gets or Sets TimeFormat
+        /// </summary>
+        [DataMember(Name="timeFormat", EmitDefaultValue=false)]
+        public string TimeFormat { get; set; }
 
 
         /// <summary>
@@ -368,6 +376,7 @@ namespace InfluxDB.Client.Api.Domain
             var sb = new StringBuilder();
             sb.Append("class ScatterViewProperties {\n");
             sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
+            sb.Append("  TimeFormat: ").Append(TimeFormat).Append("\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  Queries: ").Append(Queries).Append("\n");
             sb.Append("  Colors: ").Append(Colors).Append("\n");
@@ -420,6 +429,11 @@ namespace InfluxDB.Client.Api.Domain
                 return false;
 
             return base.Equals(input) && 
+                (
+                    this.TimeFormat == input.TimeFormat ||
+                    (this.TimeFormat != null &&
+                    this.TimeFormat.Equals(input.TimeFormat))
+                ) && base.Equals(input) && 
                 (
                     this.Type == input.Type ||
                     (this.Type != null &&
@@ -521,6 +535,8 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = base.GetHashCode();
+                if (this.TimeFormat != null)
+                    hashCode = hashCode * 59 + this.TimeFormat.GetHashCode();
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.Queries != null)

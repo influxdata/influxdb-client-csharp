@@ -82,10 +82,12 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="note">note (required).</param>
         /// <param name="showNoteWhenEmpty">If true, will display note when empty (required).</param>
         /// <param name="prefix">prefix (required).</param>
+        /// <param name="tickPrefix">tickPrefix (required).</param>
         /// <param name="suffix">suffix (required).</param>
+        /// <param name="tickSuffix">tickSuffix (required).</param>
         /// <param name="legend">legend (required).</param>
         /// <param name="decimalPlaces">decimalPlaces (required).</param>
-        public GaugeViewProperties(TypeEnum type = default(TypeEnum), List<DashboardQuery> queries = default(List<DashboardQuery>), List<DashboardColor> colors = default(List<DashboardColor>), ShapeEnum shape = default(ShapeEnum), string note = default(string), bool? showNoteWhenEmpty = default(bool?), string prefix = default(string), string suffix = default(string), Legend legend = default(Legend), DecimalPlaces decimalPlaces = default(DecimalPlaces)) : base()
+        public GaugeViewProperties(TypeEnum type = default(TypeEnum), List<DashboardQuery> queries = default(List<DashboardQuery>), List<DashboardColor> colors = default(List<DashboardColor>), ShapeEnum shape = default(ShapeEnum), string note = default(string), bool? showNoteWhenEmpty = default(bool?), string prefix = default(string), string tickPrefix = default(string), string suffix = default(string), string tickSuffix = default(string), Legend legend = default(Legend), DecimalPlaces decimalPlaces = default(DecimalPlaces)) : base()
         {
             // to ensure "type" is required (not null)
             if (type == null)
@@ -150,6 +152,15 @@ namespace InfluxDB.Client.Api.Domain
             {
                 this.Prefix = prefix;
             }
+            // to ensure "tickPrefix" is required (not null)
+            if (tickPrefix == null)
+            {
+                throw new InvalidDataException("tickPrefix is a required property for GaugeViewProperties and cannot be null");
+            }
+            else
+            {
+                this.TickPrefix = tickPrefix;
+            }
             // to ensure "suffix" is required (not null)
             if (suffix == null)
             {
@@ -158,6 +169,15 @@ namespace InfluxDB.Client.Api.Domain
             else
             {
                 this.Suffix = suffix;
+            }
+            // to ensure "tickSuffix" is required (not null)
+            if (tickSuffix == null)
+            {
+                throw new InvalidDataException("tickSuffix is a required property for GaugeViewProperties and cannot be null");
+            }
+            else
+            {
+                this.TickSuffix = tickSuffix;
             }
             // to ensure "legend" is required (not null)
             if (legend == null)
@@ -214,10 +234,22 @@ namespace InfluxDB.Client.Api.Domain
         public string Prefix { get; set; }
 
         /// <summary>
+        /// Gets or Sets TickPrefix
+        /// </summary>
+        [DataMember(Name="tickPrefix", EmitDefaultValue=false)]
+        public string TickPrefix { get; set; }
+
+        /// <summary>
         /// Gets or Sets Suffix
         /// </summary>
         [DataMember(Name="suffix", EmitDefaultValue=false)]
         public string Suffix { get; set; }
+
+        /// <summary>
+        /// Gets or Sets TickSuffix
+        /// </summary>
+        [DataMember(Name="tickSuffix", EmitDefaultValue=false)]
+        public string TickSuffix { get; set; }
 
         /// <summary>
         /// Gets or Sets Legend
@@ -247,7 +279,9 @@ namespace InfluxDB.Client.Api.Domain
             sb.Append("  Note: ").Append(Note).Append("\n");
             sb.Append("  ShowNoteWhenEmpty: ").Append(ShowNoteWhenEmpty).Append("\n");
             sb.Append("  Prefix: ").Append(Prefix).Append("\n");
+            sb.Append("  TickPrefix: ").Append(TickPrefix).Append("\n");
             sb.Append("  Suffix: ").Append(Suffix).Append("\n");
+            sb.Append("  TickSuffix: ").Append(TickSuffix).Append("\n");
             sb.Append("  Legend: ").Append(Legend).Append("\n");
             sb.Append("  DecimalPlaces: ").Append(DecimalPlaces).Append("\n");
             sb.Append("}\n");
@@ -320,9 +354,19 @@ namespace InfluxDB.Client.Api.Domain
                     this.Prefix.Equals(input.Prefix))
                 ) && base.Equals(input) && 
                 (
+                    this.TickPrefix == input.TickPrefix ||
+                    (this.TickPrefix != null &&
+                    this.TickPrefix.Equals(input.TickPrefix))
+                ) && base.Equals(input) && 
+                (
                     this.Suffix == input.Suffix ||
                     (this.Suffix != null &&
                     this.Suffix.Equals(input.Suffix))
+                ) && base.Equals(input) && 
+                (
+                    this.TickSuffix == input.TickSuffix ||
+                    (this.TickSuffix != null &&
+                    this.TickSuffix.Equals(input.TickSuffix))
                 ) && base.Equals(input) && 
                 (
                     
@@ -359,8 +403,12 @@ namespace InfluxDB.Client.Api.Domain
                     hashCode = hashCode * 59 + this.ShowNoteWhenEmpty.GetHashCode();
                 if (this.Prefix != null)
                     hashCode = hashCode * 59 + this.Prefix.GetHashCode();
+                if (this.TickPrefix != null)
+                    hashCode = hashCode * 59 + this.TickPrefix.GetHashCode();
                 if (this.Suffix != null)
                     hashCode = hashCode * 59 + this.Suffix.GetHashCode();
+                if (this.TickSuffix != null)
+                    hashCode = hashCode * 59 + this.TickSuffix.GetHashCode();
                 if (this.Legend != null)
                     hashCode = hashCode * 59 + this.Legend.GetHashCode();
                 if (this.DecimalPlaces != null)

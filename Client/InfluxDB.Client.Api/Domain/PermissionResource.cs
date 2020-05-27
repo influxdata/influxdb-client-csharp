@@ -135,7 +135,13 @@ namespace InfluxDB.Client.Api.Domain
             /// Enum Checks for value: checks
             /// </summary>
             [EnumMember(Value = "checks")]
-            Checks = 17
+            Checks = 17,
+
+            /// <summary>
+            /// Enum Dbrp for value: dbrp
+            /// </summary>
+            [EnumMember(Value = "dbrp")]
+            Dbrp = 18
 
         }
 
