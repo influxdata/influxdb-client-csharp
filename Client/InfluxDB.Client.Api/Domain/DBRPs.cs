@@ -24,33 +24,33 @@ using OpenAPIDateConverter = InfluxDB.Client.Api.Client.OpenAPIDateConverter;
 namespace InfluxDB.Client.Api.Domain
 {
     /// <summary>
-    /// Users
+    /// DBRPs
     /// </summary>
     [DataContract]
-    public partial class Users :  IEquatable<Users>
+    public partial class DBRPs :  IEquatable<DBRPs>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Users" /> class.
+        /// Initializes a new instance of the <see cref="DBRPs" /> class.
         /// </summary>
+        /// <param name="notificationEndpoints">notificationEndpoints.</param>
         /// <param name="links">links.</param>
-        /// <param name="users">users.</param>
-        public Users(InvitesLinks links = default(InvitesLinks), List<User> users = default(List<User>))
+        public DBRPs(List<DBRP> notificationEndpoints = default(List<DBRP>), Links links = default(Links))
         {
+            this.NotificationEndpoints = notificationEndpoints;
             this.Links = links;
-            this._Users = users;
         }
+
+        /// <summary>
+        /// Gets or Sets NotificationEndpoints
+        /// </summary>
+        [DataMember(Name="notificationEndpoints", EmitDefaultValue=false)]
+        public List<DBRP> NotificationEndpoints { get; set; }
 
         /// <summary>
         /// Gets or Sets Links
         /// </summary>
         [DataMember(Name="links", EmitDefaultValue=false)]
-        public InvitesLinks Links { get; set; }
-
-        /// <summary>
-        /// Gets or Sets _Users
-        /// </summary>
-        [DataMember(Name="users", EmitDefaultValue=false)]
-        public List<User> _Users { get; set; }
+        public Links Links { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -59,9 +59,9 @@ namespace InfluxDB.Client.Api.Domain
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class Users {\n");
+            sb.Append("class DBRPs {\n");
+            sb.Append("  NotificationEndpoints: ").Append(NotificationEndpoints).Append("\n");
             sb.Append("  Links: ").Append(Links).Append("\n");
-            sb.Append("  _Users: ").Append(_Users).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -82,29 +82,29 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as Users);
+            return this.Equals(input as DBRPs);
         }
 
         /// <summary>
-        /// Returns true if Users instances are equal
+        /// Returns true if DBRPs instances are equal
         /// </summary>
-        /// <param name="input">Instance of Users to be compared</param>
+        /// <param name="input">Instance of DBRPs to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(Users input)
+        public bool Equals(DBRPs input)
         {
             if (input == null)
                 return false;
 
             return 
                 (
+                    this.NotificationEndpoints == input.NotificationEndpoints ||
+                    this.NotificationEndpoints != null &&
+                    this.NotificationEndpoints.SequenceEqual(input.NotificationEndpoints)
+                ) && 
+                (
                     
                     (this.Links != null &&
                     this.Links.Equals(input.Links))
-                ) && 
-                (
-                    this._Users == input._Users ||
-                    this._Users != null &&
-                    this._Users.SequenceEqual(input._Users)
                 );
         }
 
@@ -117,10 +117,10 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
+                if (this.NotificationEndpoints != null)
+                    hashCode = hashCode * 59 + this.NotificationEndpoints.GetHashCode();
                 if (this.Links != null)
                     hashCode = hashCode * 59 + this.Links.GetHashCode();
-                if (this._Users != null)
-                    hashCode = hashCode * 59 + this._Users.GetHashCode();
                 return hashCode;
             }
         }

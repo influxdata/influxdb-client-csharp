@@ -24,20 +24,20 @@ using OpenAPIDateConverter = InfluxDB.Client.Api.Client.OpenAPIDateConverter;
 namespace InfluxDB.Client.Api.Domain
 {
     /// <summary>
-    /// Users
+    /// Invites
     /// </summary>
     [DataContract]
-    public partial class Users :  IEquatable<Users>
+    public partial class Invites :  IEquatable<Invites>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Users" /> class.
+        /// Initializes a new instance of the <see cref="Invites" /> class.
         /// </summary>
         /// <param name="links">links.</param>
-        /// <param name="users">users.</param>
-        public Users(InvitesLinks links = default(InvitesLinks), List<User> users = default(List<User>))
+        /// <param name="invites">invites.</param>
+        public Invites(InvitesLinks links = default(InvitesLinks), List<Invite> invites = default(List<Invite>))
         {
             this.Links = links;
-            this._Users = users;
+            this._Invites = invites;
         }
 
         /// <summary>
@@ -47,10 +47,10 @@ namespace InfluxDB.Client.Api.Domain
         public InvitesLinks Links { get; set; }
 
         /// <summary>
-        /// Gets or Sets _Users
+        /// Gets or Sets _Invites
         /// </summary>
-        [DataMember(Name="users", EmitDefaultValue=false)]
-        public List<User> _Users { get; set; }
+        [DataMember(Name="invites", EmitDefaultValue=false)]
+        public List<Invite> _Invites { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -59,9 +59,9 @@ namespace InfluxDB.Client.Api.Domain
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class Users {\n");
+            sb.Append("class Invites {\n");
             sb.Append("  Links: ").Append(Links).Append("\n");
-            sb.Append("  _Users: ").Append(_Users).Append("\n");
+            sb.Append("  _Invites: ").Append(_Invites).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -82,15 +82,15 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as Users);
+            return this.Equals(input as Invites);
         }
 
         /// <summary>
-        /// Returns true if Users instances are equal
+        /// Returns true if Invites instances are equal
         /// </summary>
-        /// <param name="input">Instance of Users to be compared</param>
+        /// <param name="input">Instance of Invites to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(Users input)
+        public bool Equals(Invites input)
         {
             if (input == null)
                 return false;
@@ -102,9 +102,9 @@ namespace InfluxDB.Client.Api.Domain
                     this.Links.Equals(input.Links))
                 ) && 
                 (
-                    this._Users == input._Users ||
-                    this._Users != null &&
-                    this._Users.SequenceEqual(input._Users)
+                    this._Invites == input._Invites ||
+                    this._Invites != null &&
+                    this._Invites.SequenceEqual(input._Invites)
                 );
         }
 
@@ -119,8 +119,8 @@ namespace InfluxDB.Client.Api.Domain
                 int hashCode = 41;
                 if (this.Links != null)
                     hashCode = hashCode * 59 + this.Links.GetHashCode();
-                if (this._Users != null)
-                    hashCode = hashCode * 59 + this._Users.GetHashCode();
+                if (this._Invites != null)
+                    hashCode = hashCode * 59 + this._Invites.GetHashCode();
                 return hashCode;
             }
         }

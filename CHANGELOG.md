@@ -1,5 +1,9 @@
 ## 1.9.0 [unreleased]
 
+### API
+
+1. [#94](https://github.com/influxdata/influxdb-client-csharppull/94): Update swagger to latest version
+
 ## 1.8.0 [2020-05-15]
 
 ### Features

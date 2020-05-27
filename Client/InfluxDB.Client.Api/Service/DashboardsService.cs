@@ -187,8 +187,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="dashboardID">The ID of the dashboard to update.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="include">Includes the cell view properties in the response if set to &#x60;properties&#x60; (optional)</param>
         /// <returns>Dashboard</returns>
-        Dashboard GetDashboardsID (string dashboardID, string zapTraceSpan = null);
+        Dashboard GetDashboardsID (string dashboardID, string zapTraceSpan = null, string include = null);
 
         /// <summary>
         /// Get a Dashboard
@@ -199,8 +200,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="dashboardID">The ID of the dashboard to update.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="include">Includes the cell view properties in the response if set to &#x60;properties&#x60; (optional)</param>
         /// <returns>ApiResponse of Dashboard</returns>
-        ApiResponse<Dashboard> GetDashboardsIDWithHttpInfo (string dashboardID, string zapTraceSpan = null);
+        ApiResponse<Dashboard> GetDashboardsIDWithHttpInfo (string dashboardID, string zapTraceSpan = null, string include = null);
         /// <summary>
         /// Retrieve the view for a cell
         /// </summary>
@@ -714,8 +716,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="dashboardID">The ID of the dashboard to update.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="include">Includes the cell view properties in the response if set to &#x60;properties&#x60; (optional)</param>
         /// <returns>Task of Dashboard</returns>
-        System.Threading.Tasks.Task<Dashboard> GetDashboardsIDAsync (string dashboardID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<Dashboard> GetDashboardsIDAsync (string dashboardID, string zapTraceSpan = null, string include = null);
 
         /// <summary>
         /// Get a Dashboard
@@ -726,8 +729,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="dashboardID">The ID of the dashboard to update.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="include">Includes the cell view properties in the response if set to &#x60;properties&#x60; (optional)</param>
         /// <returns>Task of ApiResponse (Dashboard)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Dashboard>> GetDashboardsIDAsyncWithHttpInfo (string dashboardID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<Dashboard>> GetDashboardsIDAsyncWithHttpInfo (string dashboardID, string zapTraceSpan = null, string include = null);
         /// <summary>
         /// Retrieve the view for a cell
         /// </summary>
@@ -3217,10 +3221,11 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="dashboardID">The ID of the dashboard to update.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="include">Includes the cell view properties in the response if set to &#x60;properties&#x60; (optional)</param>
         /// <returns>Dashboard</returns>
-        public Dashboard GetDashboardsID (string dashboardID, string zapTraceSpan = null)
+        public Dashboard GetDashboardsID (string dashboardID, string zapTraceSpan = null, string include = null)
         {
-             ApiResponse<Dashboard> localVarResponse = GetDashboardsIDWithHttpInfo(dashboardID, zapTraceSpan);
+             ApiResponse<Dashboard> localVarResponse = GetDashboardsIDWithHttpInfo(dashboardID, zapTraceSpan, include);
              return localVarResponse.Data;
         }
 
@@ -3230,8 +3235,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="dashboardID">The ID of the dashboard to update.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="include">Includes the cell view properties in the response if set to &#x60;properties&#x60; (optional)</param>
         /// <returns>ApiResponse of Dashboard</returns>
-        public ApiResponse< Dashboard > GetDashboardsIDWithHttpInfo (string dashboardID, string zapTraceSpan = null)
+        public ApiResponse< Dashboard > GetDashboardsIDWithHttpInfo (string dashboardID, string zapTraceSpan = null, string include = null)
         {
             // verify the required parameter 'dashboardID' is set
             if (dashboardID == null)
@@ -3251,6 +3257,7 @@ namespace InfluxDB.Client.Api.Service
             String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             if (dashboardID != null) localVarPathParams.Add("dashboardID", this.Configuration.ApiClient.ParameterToString(dashboardID)); // path parameter
+            if (include != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "include", include)); // query parameter
             if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
 
             // to determine the Accept header
@@ -3287,8 +3294,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="dashboardID">The ID of the dashboard to update.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="include">Includes the cell view properties in the response if set to &#x60;properties&#x60; (optional)</param>
         /// <returns>ApiResponse of Dashboard</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> GetDashboardsIDWithIRestResponseAsync (string dashboardID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetDashboardsIDWithIRestResponseAsync (string dashboardID, string zapTraceSpan = null, string include = null)
         {
             // verify the required parameter 'dashboardID' is set
             if (dashboardID == null)
@@ -3308,6 +3316,7 @@ namespace InfluxDB.Client.Api.Service
             String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             if (dashboardID != null) localVarPathParams.Add("dashboardID", this.Configuration.ApiClient.ParameterToString(dashboardID)); // path parameter
+            if (include != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "include", include)); // query parameter
             if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
 
             // to determine the Accept header
@@ -3342,8 +3351,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="dashboardID">The ID of the dashboard to update.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="include">Includes the cell view properties in the response if set to &#x60;properties&#x60; (optional)</param>
         /// <returns>ApiResponse of Dashboard</returns>
-        public IRestResponse GetDashboardsIDWithIRestResponse (string dashboardID, string zapTraceSpan = null)
+        public IRestResponse GetDashboardsIDWithIRestResponse (string dashboardID, string zapTraceSpan = null, string include = null)
         {
             // verify the required parameter 'dashboardID' is set
             if (dashboardID == null)
@@ -3363,6 +3373,7 @@ namespace InfluxDB.Client.Api.Service
             String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             if (dashboardID != null) localVarPathParams.Add("dashboardID", this.Configuration.ApiClient.ParameterToString(dashboardID)); // path parameter
+            if (include != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "include", include)); // query parameter
             if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
 
             // to determine the Accept header
@@ -3397,8 +3408,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="dashboardID">The ID of the dashboard to update.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="include">Includes the cell view properties in the response if set to &#x60;properties&#x60; (optional)</param>
         /// <returns>ApiResponse of Dashboard</returns>
-        public RestRequest GetDashboardsIDWithRestRequest (string dashboardID, string zapTraceSpan = null)
+        public RestRequest GetDashboardsIDWithRestRequest (string dashboardID, string zapTraceSpan = null, string include = null)
         {
             // verify the required parameter 'dashboardID' is set
             if (dashboardID == null)
@@ -3418,6 +3430,7 @@ namespace InfluxDB.Client.Api.Service
             String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             if (dashboardID != null) localVarPathParams.Add("dashboardID", this.Configuration.ApiClient.ParameterToString(dashboardID)); // path parameter
+            if (include != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "include", include)); // query parameter
             if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
 
             // to determine the Accept header
@@ -3441,10 +3454,11 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="dashboardID">The ID of the dashboard to update.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="include">Includes the cell view properties in the response if set to &#x60;properties&#x60; (optional)</param>
         /// <returns>Task of Dashboard</returns>
-        public async System.Threading.Tasks.Task<Dashboard> GetDashboardsIDAsync (string dashboardID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<Dashboard> GetDashboardsIDAsync (string dashboardID, string zapTraceSpan = null, string include = null)
         {
-             ApiResponse<Dashboard> localVarResponse = await GetDashboardsIDAsyncWithHttpInfo(dashboardID, zapTraceSpan);
+             ApiResponse<Dashboard> localVarResponse = await GetDashboardsIDAsyncWithHttpInfo(dashboardID, zapTraceSpan, include);
              return localVarResponse.Data;
 
         }
@@ -3455,11 +3469,12 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="dashboardID">The ID of the dashboard to update.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="include">Includes the cell view properties in the response if set to &#x60;properties&#x60; (optional)</param>
         /// <returns>Task of ApiResponse (Dashboard)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Dashboard>> GetDashboardsIDAsyncWithHttpInfo (string dashboardID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<Dashboard>> GetDashboardsIDAsyncWithHttpInfo (string dashboardID, string zapTraceSpan = null, string include = null)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await GetDashboardsIDAsyncWithIRestResponse(dashboardID, zapTraceSpan);
+            IRestResponse localVarResponse = await GetDashboardsIDAsyncWithIRestResponse(dashboardID, zapTraceSpan, include);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -3480,8 +3495,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="dashboardID">The ID of the dashboard to update.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="include">Includes the cell view properties in the response if set to &#x60;properties&#x60; (optional)</param>
         /// <returns>Task of IRestResponse (Dashboard)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> GetDashboardsIDAsyncWithIRestResponse (string dashboardID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetDashboardsIDAsyncWithIRestResponse (string dashboardID, string zapTraceSpan = null, string include = null)
         {
             // verify the required parameter 'dashboardID' is set
             if (dashboardID == null)
@@ -3501,6 +3517,7 @@ namespace InfluxDB.Client.Api.Service
             String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             if (dashboardID != null) localVarPathParams.Add("dashboardID", this.Configuration.ApiClient.ParameterToString(dashboardID)); // path parameter
+            if (include != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "include", include)); // query parameter
             if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
 
             // to determine the Accept header

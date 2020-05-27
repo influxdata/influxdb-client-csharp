@@ -66,7 +66,9 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="message">message.</param>
         /// <param name="checks">checks.</param>
         /// <param name="status">status (required).</param>
-        public HealthCheck(string name = default(string), string message = default(string), List<HealthCheck> checks = default(List<HealthCheck>), StatusEnum status = default(StatusEnum))
+        /// <param name="version">version.</param>
+        /// <param name="commit">commit.</param>
+        public HealthCheck(string name = default(string), string message = default(string), List<HealthCheck> checks = default(List<HealthCheck>), StatusEnum status = default(StatusEnum), string version = default(string), string commit = default(string))
         {
             // to ensure "name" is required (not null)
             if (name == null)
@@ -88,6 +90,8 @@ namespace InfluxDB.Client.Api.Domain
             }
             this.Message = message;
             this.Checks = checks;
+            this.Version = version;
+            this.Commit = commit;
         }
 
         /// <summary>
@@ -110,6 +114,18 @@ namespace InfluxDB.Client.Api.Domain
 
 
         /// <summary>
+        /// Gets or Sets Version
+        /// </summary>
+        [DataMember(Name="version", EmitDefaultValue=false)]
+        public string Version { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Commit
+        /// </summary>
+        [DataMember(Name="commit", EmitDefaultValue=false)]
+        public string Commit { get; set; }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -121,6 +137,8 @@ namespace InfluxDB.Client.Api.Domain
             sb.Append("  Message: ").Append(Message).Append("\n");
             sb.Append("  Checks: ").Append(Checks).Append("\n");
             sb.Append("  Status: ").Append(Status).Append("\n");
+            sb.Append("  Version: ").Append(Version).Append("\n");
+            sb.Append("  Commit: ").Append(Commit).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -174,6 +192,16 @@ namespace InfluxDB.Client.Api.Domain
                     this.Status == input.Status ||
                     (this.Status != null &&
                     this.Status.Equals(input.Status))
+                ) && 
+                (
+                    this.Version == input.Version ||
+                    (this.Version != null &&
+                    this.Version.Equals(input.Version))
+                ) && 
+                (
+                    this.Commit == input.Commit ||
+                    (this.Commit != null &&
+                    this.Commit.Equals(input.Commit))
                 );
         }
 
@@ -194,6 +222,10 @@ namespace InfluxDB.Client.Api.Domain
                     hashCode = hashCode * 59 + this.Checks.GetHashCode();
                 if (this.Status != null)
                     hashCode = hashCode * 59 + this.Status.GetHashCode();
+                if (this.Version != null)
+                    hashCode = hashCode * 59 + this.Version.GetHashCode();
+                if (this.Commit != null)
+                    hashCode = hashCode * 59 + this.Commit.GetHashCode();
                 return hashCode;
             }
         }

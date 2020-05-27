@@ -160,9 +160,10 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="user">Filter tasks to a specific user ID. (optional)</param>
         /// <param name="org">Filter tasks to a specific organization name. (optional)</param>
         /// <param name="orgID">Filter tasks to a specific organization ID. (optional)</param>
+        /// <param name="status">Filter tasks by a status- -\&quot;inactive\&quot; or \&quot;active\&quot;. (optional)</param>
         /// <param name="limit">The number of tasks to return (optional, default to 100)</param>
         /// <returns>Tasks</returns>
-        Tasks GetTasks (string zapTraceSpan = null, string name = null, string after = null, string user = null, string org = null, string orgID = null, int? limit = null);
+        Tasks GetTasks (string zapTraceSpan = null, string name = null, string after = null, string user = null, string org = null, string orgID = null, string status = null, int? limit = null);
 
         /// <summary>
         /// List all tasks
@@ -177,9 +178,10 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="user">Filter tasks to a specific user ID. (optional)</param>
         /// <param name="org">Filter tasks to a specific organization name. (optional)</param>
         /// <param name="orgID">Filter tasks to a specific organization ID. (optional)</param>
+        /// <param name="status">Filter tasks by a status- -\&quot;inactive\&quot; or \&quot;active\&quot;. (optional)</param>
         /// <param name="limit">The number of tasks to return (optional, default to 100)</param>
         /// <returns>ApiResponse of Tasks</returns>
-        ApiResponse<Tasks> GetTasksWithHttpInfo (string zapTraceSpan = null, string name = null, string after = null, string user = null, string org = null, string orgID = null, int? limit = null);
+        ApiResponse<Tasks> GetTasksWithHttpInfo (string zapTraceSpan = null, string name = null, string after = null, string user = null, string org = null, string orgID = null, string status = null, int? limit = null);
         /// <summary>
         /// Retrieve a task
         /// </summary>
@@ -687,9 +689,10 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="user">Filter tasks to a specific user ID. (optional)</param>
         /// <param name="org">Filter tasks to a specific organization name. (optional)</param>
         /// <param name="orgID">Filter tasks to a specific organization ID. (optional)</param>
+        /// <param name="status">Filter tasks by a status- -\&quot;inactive\&quot; or \&quot;active\&quot;. (optional)</param>
         /// <param name="limit">The number of tasks to return (optional, default to 100)</param>
         /// <returns>Task of Tasks</returns>
-        System.Threading.Tasks.Task<Tasks> GetTasksAsync (string zapTraceSpan = null, string name = null, string after = null, string user = null, string org = null, string orgID = null, int? limit = null);
+        System.Threading.Tasks.Task<Tasks> GetTasksAsync (string zapTraceSpan = null, string name = null, string after = null, string user = null, string org = null, string orgID = null, string status = null, int? limit = null);
 
         /// <summary>
         /// List all tasks
@@ -704,9 +707,10 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="user">Filter tasks to a specific user ID. (optional)</param>
         /// <param name="org">Filter tasks to a specific organization name. (optional)</param>
         /// <param name="orgID">Filter tasks to a specific organization ID. (optional)</param>
+        /// <param name="status">Filter tasks by a status- -\&quot;inactive\&quot; or \&quot;active\&quot;. (optional)</param>
         /// <param name="limit">The number of tasks to return (optional, default to 100)</param>
         /// <returns>Task of ApiResponse (Tasks)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Tasks>> GetTasksAsyncWithHttpInfo (string zapTraceSpan = null, string name = null, string after = null, string user = null, string org = null, string orgID = null, int? limit = null);
+        System.Threading.Tasks.Task<ApiResponse<Tasks>> GetTasksAsyncWithHttpInfo (string zapTraceSpan = null, string name = null, string after = null, string user = null, string org = null, string orgID = null, string status = null, int? limit = null);
         /// <summary>
         /// Retrieve a task
         /// </summary>
@@ -2868,11 +2872,12 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="user">Filter tasks to a specific user ID. (optional)</param>
         /// <param name="org">Filter tasks to a specific organization name. (optional)</param>
         /// <param name="orgID">Filter tasks to a specific organization ID. (optional)</param>
+        /// <param name="status">Filter tasks by a status- -\&quot;inactive\&quot; or \&quot;active\&quot;. (optional)</param>
         /// <param name="limit">The number of tasks to return (optional, default to 100)</param>
         /// <returns>Tasks</returns>
-        public Tasks GetTasks (string zapTraceSpan = null, string name = null, string after = null, string user = null, string org = null, string orgID = null, int? limit = null)
+        public Tasks GetTasks (string zapTraceSpan = null, string name = null, string after = null, string user = null, string org = null, string orgID = null, string status = null, int? limit = null)
         {
-             ApiResponse<Tasks> localVarResponse = GetTasksWithHttpInfo(zapTraceSpan, name, after, user, org, orgID, limit);
+             ApiResponse<Tasks> localVarResponse = GetTasksWithHttpInfo(zapTraceSpan, name, after, user, org, orgID, status, limit);
              return localVarResponse.Data;
         }
 
@@ -2886,9 +2891,10 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="user">Filter tasks to a specific user ID. (optional)</param>
         /// <param name="org">Filter tasks to a specific organization name. (optional)</param>
         /// <param name="orgID">Filter tasks to a specific organization ID. (optional)</param>
+        /// <param name="status">Filter tasks by a status- -\&quot;inactive\&quot; or \&quot;active\&quot;. (optional)</param>
         /// <param name="limit">The number of tasks to return (optional, default to 100)</param>
         /// <returns>ApiResponse of Tasks</returns>
-        public ApiResponse< Tasks > GetTasksWithHttpInfo (string zapTraceSpan = null, string name = null, string after = null, string user = null, string org = null, string orgID = null, int? limit = null)
+        public ApiResponse< Tasks > GetTasksWithHttpInfo (string zapTraceSpan = null, string name = null, string after = null, string user = null, string org = null, string orgID = null, string status = null, int? limit = null)
         {
 
             var localVarPath = "/api/v2/tasks";
@@ -2909,6 +2915,7 @@ namespace InfluxDB.Client.Api.Service
             if (user != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "user", user)); // query parameter
             if (org != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
             if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+            if (status != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "status", status)); // query parameter
             if (limit != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "limit", limit)); // query parameter
             if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
 
@@ -2950,9 +2957,10 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="user">Filter tasks to a specific user ID. (optional)</param>
         /// <param name="org">Filter tasks to a specific organization name. (optional)</param>
         /// <param name="orgID">Filter tasks to a specific organization ID. (optional)</param>
+        /// <param name="status">Filter tasks by a status- -\&quot;inactive\&quot; or \&quot;active\&quot;. (optional)</param>
         /// <param name="limit">The number of tasks to return (optional, default to 100)</param>
         /// <returns>ApiResponse of Tasks</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> GetTasksWithIRestResponseAsync (string zapTraceSpan = null, string name = null, string after = null, string user = null, string org = null, string orgID = null, int? limit = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetTasksWithIRestResponseAsync (string zapTraceSpan = null, string name = null, string after = null, string user = null, string org = null, string orgID = null, string status = null, int? limit = null)
         {
 
             var localVarPath = "/api/v2/tasks";
@@ -2973,6 +2981,7 @@ namespace InfluxDB.Client.Api.Service
             if (user != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "user", user)); // query parameter
             if (org != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
             if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+            if (status != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "status", status)); // query parameter
             if (limit != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "limit", limit)); // query parameter
             if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
 
@@ -3012,9 +3021,10 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="user">Filter tasks to a specific user ID. (optional)</param>
         /// <param name="org">Filter tasks to a specific organization name. (optional)</param>
         /// <param name="orgID">Filter tasks to a specific organization ID. (optional)</param>
+        /// <param name="status">Filter tasks by a status- -\&quot;inactive\&quot; or \&quot;active\&quot;. (optional)</param>
         /// <param name="limit">The number of tasks to return (optional, default to 100)</param>
         /// <returns>ApiResponse of Tasks</returns>
-        public IRestResponse GetTasksWithIRestResponse (string zapTraceSpan = null, string name = null, string after = null, string user = null, string org = null, string orgID = null, int? limit = null)
+        public IRestResponse GetTasksWithIRestResponse (string zapTraceSpan = null, string name = null, string after = null, string user = null, string org = null, string orgID = null, string status = null, int? limit = null)
         {
 
             var localVarPath = "/api/v2/tasks";
@@ -3035,6 +3045,7 @@ namespace InfluxDB.Client.Api.Service
             if (user != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "user", user)); // query parameter
             if (org != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
             if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+            if (status != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "status", status)); // query parameter
             if (limit != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "limit", limit)); // query parameter
             if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
 
@@ -3074,9 +3085,10 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="user">Filter tasks to a specific user ID. (optional)</param>
         /// <param name="org">Filter tasks to a specific organization name. (optional)</param>
         /// <param name="orgID">Filter tasks to a specific organization ID. (optional)</param>
+        /// <param name="status">Filter tasks by a status- -\&quot;inactive\&quot; or \&quot;active\&quot;. (optional)</param>
         /// <param name="limit">The number of tasks to return (optional, default to 100)</param>
         /// <returns>ApiResponse of Tasks</returns>
-        public RestRequest GetTasksWithRestRequest (string zapTraceSpan = null, string name = null, string after = null, string user = null, string org = null, string orgID = null, int? limit = null)
+        public RestRequest GetTasksWithRestRequest (string zapTraceSpan = null, string name = null, string after = null, string user = null, string org = null, string orgID = null, string status = null, int? limit = null)
         {
 
             var localVarPath = "/api/v2/tasks";
@@ -3097,6 +3109,7 @@ namespace InfluxDB.Client.Api.Service
             if (user != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "user", user)); // query parameter
             if (org != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
             if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+            if (status != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "status", status)); // query parameter
             if (limit != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "limit", limit)); // query parameter
             if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
 
@@ -3125,11 +3138,12 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="user">Filter tasks to a specific user ID. (optional)</param>
         /// <param name="org">Filter tasks to a specific organization name. (optional)</param>
         /// <param name="orgID">Filter tasks to a specific organization ID. (optional)</param>
+        /// <param name="status">Filter tasks by a status- -\&quot;inactive\&quot; or \&quot;active\&quot;. (optional)</param>
         /// <param name="limit">The number of tasks to return (optional, default to 100)</param>
         /// <returns>Task of Tasks</returns>
-        public async System.Threading.Tasks.Task<Tasks> GetTasksAsync (string zapTraceSpan = null, string name = null, string after = null, string user = null, string org = null, string orgID = null, int? limit = null)
+        public async System.Threading.Tasks.Task<Tasks> GetTasksAsync (string zapTraceSpan = null, string name = null, string after = null, string user = null, string org = null, string orgID = null, string status = null, int? limit = null)
         {
-             ApiResponse<Tasks> localVarResponse = await GetTasksAsyncWithHttpInfo(zapTraceSpan, name, after, user, org, orgID, limit);
+             ApiResponse<Tasks> localVarResponse = await GetTasksAsyncWithHttpInfo(zapTraceSpan, name, after, user, org, orgID, status, limit);
              return localVarResponse.Data;
 
         }
@@ -3144,12 +3158,13 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="user">Filter tasks to a specific user ID. (optional)</param>
         /// <param name="org">Filter tasks to a specific organization name. (optional)</param>
         /// <param name="orgID">Filter tasks to a specific organization ID. (optional)</param>
+        /// <param name="status">Filter tasks by a status- -\&quot;inactive\&quot; or \&quot;active\&quot;. (optional)</param>
         /// <param name="limit">The number of tasks to return (optional, default to 100)</param>
         /// <returns>Task of ApiResponse (Tasks)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Tasks>> GetTasksAsyncWithHttpInfo (string zapTraceSpan = null, string name = null, string after = null, string user = null, string org = null, string orgID = null, int? limit = null)
+        public async System.Threading.Tasks.Task<ApiResponse<Tasks>> GetTasksAsyncWithHttpInfo (string zapTraceSpan = null, string name = null, string after = null, string user = null, string org = null, string orgID = null, string status = null, int? limit = null)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await GetTasksAsyncWithIRestResponse(zapTraceSpan, name, after, user, org, orgID, limit);
+            IRestResponse localVarResponse = await GetTasksAsyncWithIRestResponse(zapTraceSpan, name, after, user, org, orgID, status, limit);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -3174,9 +3189,10 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="user">Filter tasks to a specific user ID. (optional)</param>
         /// <param name="org">Filter tasks to a specific organization name. (optional)</param>
         /// <param name="orgID">Filter tasks to a specific organization ID. (optional)</param>
+        /// <param name="status">Filter tasks by a status- -\&quot;inactive\&quot; or \&quot;active\&quot;. (optional)</param>
         /// <param name="limit">The number of tasks to return (optional, default to 100)</param>
         /// <returns>Task of IRestResponse (Tasks)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> GetTasksAsyncWithIRestResponse (string zapTraceSpan = null, string name = null, string after = null, string user = null, string org = null, string orgID = null, int? limit = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetTasksAsyncWithIRestResponse (string zapTraceSpan = null, string name = null, string after = null, string user = null, string org = null, string orgID = null, string status = null, int? limit = null)
         {
 
             var localVarPath = "/api/v2/tasks";
@@ -3197,6 +3213,7 @@ namespace InfluxDB.Client.Api.Service
             if (user != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "user", user)); // query parameter
             if (org != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
             if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+            if (status != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "status", status)); // query parameter
             if (limit != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "limit", limit)); // query parameter
             if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
 
