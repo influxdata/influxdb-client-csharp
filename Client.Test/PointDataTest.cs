@@ -10,6 +10,30 @@ namespace InfluxDB.Client.Test
     public class PointDataTest
     {
         [Test]
+        public void Immutability()
+        {
+            var point = PointData.Measurement("h2 o")
+                .Tag("location", "europe");
+
+            var point1 = point
+                .Tag("TAG", "VALX")
+                .Field("level", 2);
+
+            var point2 = point
+                .Tag("TAG", "VALX")
+                .Field("level", 2);
+
+            var point3 = point
+                .Tag("TAG", "VALY")
+                .Field("level", 2);
+
+            Assert.AreEqual(point1, point2);
+            Assert.AreNotEqual(point, point1);
+            Assert.False(ReferenceEquals(point1, point2));
+            Assert.AreNotEqual(point3, point1);
+        }
+
+        [Test]
         public void MeasurementEscape()
         {
             var point = PointData.Measurement("h2 o")
@@ -273,7 +297,8 @@ namespace InfluxDB.Client.Test
 
             var defaults = new PointSettings().AddDefaultTag("expensive", "true");
 
-            Assert.AreEqual("h2o,expensive=true,location=europe level=2i", point.ToLineProtocol(defaults));
+            string actual = point.ToLineProtocol(defaults);
+            Assert.AreEqual("h2o,expensive=true,location=europe level=2i", actual);
         }
 
         [Test]
@@ -299,7 +324,8 @@ namespace InfluxDB.Client.Test
 
             var defaults = new PointSettings().AddDefaultTag("expensive", "true");
 
-            Assert.AreEqual("h2o,expensive=false,location=europe level=2i", point.ToLineProtocol(defaults));
+            string lineProtocol = point.ToLineProtocol(defaults);
+            Assert.AreEqual("h2o,expensive=false,location=europe level=2i", lineProtocol);
         }
 
         [Test]

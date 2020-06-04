@@ -27,15 +27,16 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <None Include="..\Assets\influxdata.jpg" Pack="true" PackagePath=""/>
-        <ProjectReference Include="..\Client.Core\Client.Core.csproj"/>
+        <None Include="..\Assets\influxdata.jpg" Pack="true" PackagePath="" />
+        <ProjectReference Include="..\Client.Core\Client.Core.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="JsonSubTypes" Version="1.5.2"/>
-        <PackageReference Include="Microsoft.Net.Http.Headers" Version="2.1.1"/>
-        <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.5.0"/>
-        <PackageReference Include="System.Reactive" Version="4.1.2"/>
+        <PackageReference Include="JsonSubTypes" Version="1.5.2" />
+        <PackageReference Include="Microsoft.Net.Http.Headers" Version="2.1.1" />
+        <PackageReference Include="System.Collections.Immutable" Version="1.7.1" />
+        <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.5.0" />
+        <PackageReference Include="System.Reactive" Version="4.1.2" />
     </ItemGroup>
 
 </Project>

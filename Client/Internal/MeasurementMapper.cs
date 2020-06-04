@@ -56,29 +56,29 @@ namespace InfluxDB.Client.Internal
                 var name = !string.IsNullOrEmpty(propertyInfo.Column.Name) ? propertyInfo.Column.Name : propertyInfo.Property.Name;
                 if (propertyInfo.Column.IsTag)
                 {
-                    point.Tag(name, value.ToString());
+                    point = point.Tag(name, value.ToString());
                 }
                 else if (propertyInfo.Column.IsTimestamp)
                 {
                     if (value is long l)
                     {
-                        point.Timestamp(l, precision);
+                        point = point.Timestamp(l, precision);
                     }
                     else if (value is TimeSpan span)
                     {
-                        point.Timestamp(span, precision);
+                        point = point.Timestamp(span, precision);
                     }
                     else if (value is DateTime date)
                     {
-                        point.Timestamp(date, precision);
+                        point = point.Timestamp(date, precision);
                     }
                     else if (value is DateTimeOffset offset)
                     {
-                        point.Timestamp(offset, precision);
+                        point = point.Timestamp(offset, precision);
                     }
                     else if (value is Instant instant)
                     {
-                        point.Timestamp(instant, precision);
+                        point = point.Timestamp(instant, precision);
                     }
                     else
                     {
@@ -89,55 +89,55 @@ namespace InfluxDB.Client.Internal
                 {
                     if (value is bool b)
                     {
-                        point.Field(name, b);
+                        point = point.Field(name, b);
                     }
                     else if (value is double d)
                     {
-                        point.Field(name, d);
+                        point = point.Field(name, d);
                     }
                     else if (value is float f)
                     {
-                        point.Field(name, f);
+                        point = point.Field(name, f);
                     }
                     else if (value is decimal dec)
                     {
-                        point.Field(name, dec);
+                        point = point.Field(name, dec);
                     }
                     else if (value is long lng)
                     {
-                        point.Field(name, lng);
+                        point = point.Field(name, lng);
                     }
                     else if (value is ulong ulng)
                     {
-                        point.Field(name, ulng);
+                        point = point.Field(name, ulng);
                     }
                     else if (value is int i)
                     {
-                        point.Field(name, i);
+                        point = point.Field(name, i);
                     }
                     else if (value is byte bt)
                     {
-                        point.Field(name, bt);
+                        point = point.Field(name, bt);
                     }
                     else if (value is sbyte sb)
                     {
-                        point.Field(name, sb);
+                        point = point.Field(name, sb);
                     }
                     else if (value is short sh)
                     {
-                        point.Field(name, sh);
+                        point = point.Field(name, sh);
                     }
                     else if (value is uint ui)
                     {
-                        point.Field(name, ui);
+                        point = point.Field(name, ui);
                     }
                     else if (value is ushort us)
                     {
-                        point.Field(name, us);
+                        point = point.Field(name, us);
                     }
                     else
                     {
-                        point.Field(name, value.ToString());
+                        point = point.Field(name, value.ToString());
                     }
                 }
             }
