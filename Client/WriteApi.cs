@@ -14,6 +14,7 @@ using InfluxDB.Client.Core;
 using InfluxDB.Client.Core.Exceptions;
 using InfluxDB.Client.Internal;
 using InfluxDB.Client.Writes;
+using Microsoft.Extensions.ObjectPool;
 using RestSharp;
 
 namespace InfluxDB.Client
@@ -26,6 +27,9 @@ namespace InfluxDB.Client
         private readonly MeasurementMapper _measurementMapper = new MeasurementMapper();
         private readonly InfluxDBClientOptions _options;
         private readonly Subject<BatchWriteData> _subject = new Subject<BatchWriteData>();
+        private static readonly ObjectPoolProvider _objectPoolProvider = new DefaultObjectPoolProvider();
+        private static readonly ObjectPool<StringBuilder> _stringBuilderPool = _objectPoolProvider.CreateStringBuilderPool();
+
 
         private bool _disposed;
         protected internal WriteApi(InfluxDBClientOptions options, WriteService service, WriteOptions writeOptions,
@@ -74,8 +78,7 @@ namespace InfluxDB.Client
                 .Select(grouped =>
                 {
                     var aggregate = grouped
-                        // TODO: pool
-                        .Aggregate(new StringBuilder(""), (builder, batchWrite) =>
+                        .Aggregate(_stringBuilderPool.Get(), (builder, batchWrite) =>
                         {
                             var data = batchWrite.ToLineProtocol();
 
@@ -87,7 +90,13 @@ namespace InfluxDB.Client
                             }
 
                             return builder.Append(data);
-                        }).Select(builder => builder.ToString());
+                        }).Select(builder =>
+                        {
+                            var result = builder.ToString();
+                            builder.Clear();
+                            _stringBuilderPool.Return(builder);
+                            return result;
+                        });
 
                     return aggregate.Select(records => new BatchWriteRecord(grouped.Key, records))
                                     .Where(batchWriteItem => !string.IsNullOrEmpty(batchWriteItem.ToLineProtocol()));
