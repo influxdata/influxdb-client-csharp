@@ -44,7 +44,8 @@ namespace InfluxDB.Client
             // 
             // https://github.com/dotnet/reactive/issues/19
 
-            var tempBoundary = new Subject<IObservable<BatchWriteData>>();
+            // var tempBoundary = new Subject<IObservable<BatchWriteData>>();
+
 
             _subject
                 //
@@ -52,18 +53,17 @@ namespace InfluxDB.Client
                 //
                 .Publish(connectedSource =>
                 {
+                    var trigger = Observable.Merge(
+                            // triggered by time & count
+                            connectedSource.Window(TimeSpan.FromMilliseconds(
+                                                writeOptions.FlushInterval), 
+                                                writeOptions.BatchSize,
+                                                writeOptions.WriteScheduler),
+                            // flush trigger
+                            _flush
+                        );
                     return connectedSource
-                        .Window(tempBoundary)
-                        .Merge(Observable.Defer(() =>
-                        {
-                            connectedSource
-                                .Window(TimeSpan.FromMilliseconds(writeOptions.FlushInterval), writeOptions.BatchSize,
-                                    writeOptions.WriteScheduler)
-                                .Merge(_flush)
-                                .Subscribe(tempBoundary);
-
-                            return Observable.Empty<IObservable<BatchWriteData>>();
-                        }));
+                        .Window(trigger);
                 })
                 //
                 // Group by key - same bucket, same org
