@@ -187,7 +187,7 @@ namespace InfluxDB.Client
                     exception =>
                     {
                         _disposed = true;
-                        Console.WriteLine($"The unhandled exception occurs: {exception}");
+                        Console.WriteLine($"The unhanded exception occurs: {exception}");
                     },
                     () =>
                     {
