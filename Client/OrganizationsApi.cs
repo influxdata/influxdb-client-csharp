@@ -143,7 +143,8 @@ namespace InfluxDB.Client
         /// <returns>List all organizations</returns>
         public async Task<List<Organization>> FindOrganizationsAsync()
         {
-            return await _service.GetOrgsAsync().ContinueWith(t => t.Result.Orgs);
+            var result = await _service.GetOrgsAsync();
+            return result.Orgs;
         }
 
         /// <summary>
