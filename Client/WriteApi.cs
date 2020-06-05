@@ -44,10 +44,9 @@ namespace InfluxDB.Client
             // 
             // https://github.com/dotnet/reactive/issues/19
 
-            // var tempBoundary = new Subject<IObservable<BatchWriteData>>();
 
 
-            _subject
+            IObservable<IObservable<BatchWriteRecord>> batches = _subject
                 //
                 // Batching
                 //
@@ -56,7 +55,7 @@ namespace InfluxDB.Client
                     var trigger = Observable.Merge(
                             // triggered by time & count
                             connectedSource.Window(TimeSpan.FromMilliseconds(
-                                                writeOptions.FlushInterval), 
+                                                writeOptions.FlushInterval),
                                                 writeOptions.BatchSize,
                                                 writeOptions.WriteScheduler),
                             // flush trigger
@@ -92,20 +91,21 @@ namespace InfluxDB.Client
 
                     return aggregate.Select(records => new BatchWriteRecord(grouped.Key, records))
                                     .Where(batchWriteItem => !string.IsNullOrEmpty(batchWriteItem.ToLineProtocol()));
-                })
-                //
-                // Jitter
-                //
-                .Select(source =>
-                {
-                    if (writeOptions.JitterInterval <= 0)
-                    {
-                        return source;
-                    }
+                });
 
-                    return source.Delay(_ => Observable.Timer(TimeSpan.FromMilliseconds(JitterDelay(writeOptions)), writeOptions.WriteScheduler));
-                })
-                .Concat()
+            if (writeOptions.JitterInterval > 0)
+            {
+                batches = batches
+                    //
+                    // Jitter
+                    //
+                    .Select(source =>
+                    {
+                        return source.Delay(_ => Observable.Timer(TimeSpan.FromMilliseconds(JitterDelay(writeOptions)), writeOptions.WriteScheduler));
+                    });
+            }
+            var query = batches
+                .Concat() 
                 //
                 // Map to Async request
                 //
