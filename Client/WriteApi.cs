@@ -75,6 +75,7 @@ namespace InfluxDB.Client
                 .Select(grouped =>
                 {
                     var aggregate = grouped
+                        // TODO: pool
                         .Aggregate(new StringBuilder(""), (builder, batchWrite) =>
                         {
                             var data = batchWrite.ToLineProtocol();
@@ -88,8 +89,9 @@ namespace InfluxDB.Client
 
                             return builder.Append(data);
                         }).Select(builder => builder.ToString());
-                    
-                    return aggregate.Select(records => new BatchWriteRecord(grouped.Key, records));
+
+                    return aggregate.Select(records => new BatchWriteRecord(grouped.Key, records))
+                                    .Where(batchWriteItem => !string.IsNullOrEmpty(batchWriteItem.ToLineProtocol()));
                 })
                 //
                 // Jitter
@@ -107,7 +109,6 @@ namespace InfluxDB.Client
                 //
                 // Map to Async request
                 //
-                .Where(batchWriteItem => !string.IsNullOrEmpty(batchWriteItem.ToLineProtocol()))
                 .Select(batchWriteItem =>
                 {
                     var org = batchWriteItem.Options.OrganizationId;
