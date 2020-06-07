@@ -35,16 +35,6 @@ namespace InfluxDB.Client.Writes
             Precision = WritePrecision.Ns;
         }
 
-        /// <summary>
-        /// Create a new Point withe specified a measurement name.
-        /// </summary>
-        /// <param name="measurementName">the measurement name</param>
-        /// <returns>the new Point</returns>
-        public static PointData Measurement(string measurementName)
-        {
-            return new PointData(measurementName);
-        }
-
         private PointData(string measurementName,
                             WritePrecision precision,
                             BigInteger? time,
@@ -56,6 +46,16 @@ namespace InfluxDB.Client.Writes
             _time = time;
             _tags = tags;
             _fields = fields;
+        }
+
+        /// <summary>
+        /// Create a new Point withe specified a measurement name.
+        /// </summary>
+        /// <param name="measurementName">the measurement name</param>
+        /// <returns>the new Point</returns>
+        public static PointData Measurement(string measurementName)
+        {
+            return new PointData(measurementName);
         }
 
         /// <summary>
@@ -327,7 +327,7 @@ namespace InfluxDB.Client.Writes
         /// <param name="pointSettings">The point settings.</param>
         private void AppendTags(StringBuilder writer, PointSettings pointSettings)
         {
-            IReadOnlyDictionary<string, string> entries = ImmutableDictionary<string, string>.Empty;
+            IReadOnlyDictionary<string, string> entries;
 
             if (pointSettings == null)
             {
@@ -536,13 +536,24 @@ namespace InfluxDB.Client.Writes
             if (other == null)
                 return false;
             var otherTags = other._tags;
+
             bool result = _tags.Count == otherTags.Count &&
-                           _tags.All(pair => otherTags.ContainsKey(pair.Key) &&
-                                             otherTags[pair.Key] == pair.Value);
+                           _tags.All(pair => 
+                                {
+                                    string key = pair.Key;
+                                    string value = pair.Value;
+                                    return otherTags.ContainsKey(key) &&
+                                        otherTags[key] == value;
+                                });
             var otherFields = other._fields;
             result = result && _fields.Count == otherFields.Count &&
-                           _fields.All(pair => otherFields.ContainsKey(pair.Key) &&
-                                             object.Equals(otherFields[pair.Key], pair.Value));
+                           _fields.All(pair =>
+                                {
+                                    string key = pair.Key;
+                                    object value = pair.Value;
+                                    return otherFields.ContainsKey(key) &&
+                                                object.Equals(otherFields[key], value);
+                                });
 
             result = result &&
                    _measurementName == other._measurementName &&
