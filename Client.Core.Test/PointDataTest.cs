@@ -10,6 +10,18 @@ namespace InfluxDB.Client.Test
     public class PointDataTest
     {
         [Test]
+        public void TagEmptyTagValue()
+        {
+            var point = PointData.Measurement("h2o")
+                .Tag("location", "europe")
+                .Tag("log", "to_delete")
+                .Tag("log", "")
+                .Field("level", 2);
+
+            Assert.AreEqual("h2o,location=europe level=2i", point.ToLineProtocol());
+        }
+
+        [Test]
         public void Immutability()
         {
             var point = PointData.Measurement("h2 o")

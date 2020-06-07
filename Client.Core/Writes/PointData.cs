@@ -66,17 +66,26 @@ namespace InfluxDB.Client.Writes
         /// <returns>this</returns>
         public PointData Tag(string name, string value)
         {
-            if (string.IsNullOrEmpty(value))
-            {
-                Trace.TraceWarning($"Empty tags don't supported, tag [{name}], measurement [{_measurementName}]");
-                return this;
-            }
+            bool isEmptyValue = string.IsNullOrEmpty(value);
             var tags = _tags;
+            if (isEmptyValue)
+            {
+                if (tags.ContainsKey(name))
+                {
+                    Trace.TraceWarning($"Empty tags will cause deletion of, tag [{name}], measurement [{_measurementName}]");
+                }
+                else
+                {
+                    Trace.TraceWarning($"Empty tags has no effect, tag [{name}], measurement [{_measurementName}]");
+                    return this;
+                }
+            }
             if (tags.ContainsKey(name))
             {
                 tags = tags.Remove(name);
             }
-            tags = tags.Add(name, value);
+            if (!isEmptyValue)
+                tags = tags.Add(name, value);
 
             return new PointData(_measurementName,
                                 Precision,
