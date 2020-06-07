@@ -67,7 +67,7 @@ namespace InfluxDB.Client.Test
                                  .Tag("test", "stress")
                                  .Field("value", 1);
 
-            const int RANGE = 100;
+            const int RANGE = 1000;
             using (var gateStart = new ManualResetEventSlim(false))
             using (var gate = new CountdownEvent(RANGE))
             using (var gateEnd = new CountdownEvent(RANGE))
