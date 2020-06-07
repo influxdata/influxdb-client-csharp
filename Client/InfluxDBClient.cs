@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -26,7 +27,7 @@ namespace InfluxDB.Client
         private readonly SetupService _setupService;
         private readonly InfluxDBClientOptions _options;
 
-        internal readonly List<IDisposable> Apis = new List<IDisposable>();
+        internal readonly ConcurrentDictionary<IDisposable, object> Apis = new ConcurrentDictionary<IDisposable, object>();
 
         protected internal InfluxDBClient(InfluxDBClientOptions options)
         {
@@ -63,7 +64,7 @@ namespace InfluxDB.Client
             //
             // Dispose child APIs
             //
-            foreach (var disposable in Apis.ToList()) disposable.Dispose();
+            foreach (var disposable in Apis.Keys) disposable.Dispose();
 
             //
             // signout
@@ -115,7 +116,7 @@ namespace InfluxDB.Client
             };
 
             var writeApi = new WriteApi(_options, service, writeOptions, this);
-            Apis.Add(writeApi);
+            Apis.TryAdd(writeApi, null);
 
             return writeApi;
         }

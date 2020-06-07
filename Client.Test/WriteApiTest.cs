@@ -97,7 +97,7 @@ namespace InfluxDB.Client.Test
             mock.Setup(disposable => disposable.Dispose());
 
             Assert.AreEqual(1, _influxDbClient.Apis.Count);
-            _influxDbClient.Apis.Add(mock.Object);
+            _influxDbClient.Apis.TryAdd(mock.Object, null);
             Assert.AreEqual(2, _influxDbClient.Apis.Count);
 
             _influxDbClient.Dispose();

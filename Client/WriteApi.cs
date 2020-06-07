@@ -197,7 +197,7 @@ namespace InfluxDB.Client
 
         public void Dispose()
         {
-            _influxDbClient.Apis.Remove(this);
+            _influxDbClient.Apis.TryRemove(this, out object _);
 
             Trace.WriteLine("Flushing batches before shutdown.");
 
