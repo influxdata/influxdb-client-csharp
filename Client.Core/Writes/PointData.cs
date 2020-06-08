@@ -580,7 +580,7 @@ namespace InfluxDB.Client.Writes
         /// </returns>
         public override int GetHashCode()
         {
-            int hashCode = 318335609;
+            var hashCode = 318335609;
             hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(_measurementName);
             hashCode = hashCode * -1521134295 + Precision.GetHashCode();
             hashCode = hashCode * -1521134295 + _time.GetHashCode();
