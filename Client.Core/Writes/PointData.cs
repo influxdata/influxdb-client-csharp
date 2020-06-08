@@ -546,11 +546,11 @@ namespace InfluxDB.Client.Writes
                 return false;
             var otherTags = other._tags;
 
-            bool result = _tags.Count == otherTags.Count &&
+            var result = _tags.Count == otherTags.Count &&
                            _tags.All(pair => 
                                 {
-                                    string key = pair.Key;
-                                    string value = pair.Value;
+                                    var key = pair.Key;
+                                    var value = pair.Value;
                                     return otherTags.ContainsKey(key) &&
                                         otherTags[key] == value;
                                 });
@@ -558,8 +558,8 @@ namespace InfluxDB.Client.Writes
             result = result && _fields.Count == otherFields.Count &&
                            _fields.All(pair =>
                                 {
-                                    string key = pair.Key;
-                                    object value = pair.Value;
+                                    var key = pair.Key;
+                                    var value = pair.Value;
                                     return otherFields.ContainsKey(key) &&
                                                 object.Equals(otherFields[key], value);
                                 });
