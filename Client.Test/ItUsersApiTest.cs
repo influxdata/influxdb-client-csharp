@@ -33,7 +33,8 @@ namespace InfluxDB.Client.Test
 
             Assert.IsNotNull(links);
             Assert.AreEqual(links.Self, $"/api/v2/users/{user.Id}");
-            Assert.AreEqual(links.Logs, $"/api/v2/users/{user.Id}/logs");
+            // TODO https://github.com/influxdata/influxdb/issues/18389
+            // Assert.AreEqual(links.Logs, $"/api/v2/users/{user.Id}/logs");
         }
 
         [Test]
@@ -96,6 +97,7 @@ namespace InfluxDB.Client.Test
         }
 
         [Test]
+        [Ignore("TODO https://github.com/influxdata/influxdb/issues/18389")]
         public async Task FindUserLogsFindOptionsNotFound()
         {
             var entries = await _usersApi.FindUserLogsAsync("020f755c3c082000", new FindOptions());
@@ -105,6 +107,7 @@ namespace InfluxDB.Client.Test
         }
 
         [Test]
+        [Ignore("TODO https://github.com/influxdata/influxdb/issues/18389")]
         public async Task FindUserLogsNotFound()
         {
             var logs = await _usersApi.FindUserLogsAsync("020f755c3c082000");
@@ -276,13 +279,14 @@ namespace InfluxDB.Client.Test
         public async Task UpdateUser()
         {
             var createdUser = await _usersApi.CreateUserAsync(GenerateName("John Ryzen"));
-            createdUser.Name = "Tom Push";
+            var name = GenerateName("Tom Push");
+            createdUser.Name = name;
 
             var updatedUser = await _usersApi.UpdateUserAsync(createdUser);
 
             Assert.IsNotNull(updatedUser);
             Assert.AreEqual(updatedUser.Id, createdUser.Id);
-            Assert.AreEqual(updatedUser.Name, "Tom Push");
+            Assert.AreEqual(updatedUser.Name, name);
         }
 
         [Test]
