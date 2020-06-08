@@ -1,7 +1,10 @@
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Reactive;
+using System.Reactive.Subjects;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -26,7 +29,7 @@ namespace InfluxDB.Client
         private readonly SetupService _setupService;
         private readonly InfluxDBClientOptions _options;
 
-        internal readonly List<IDisposable> Apis = new List<IDisposable>();
+        private readonly Subject<Unit> _disposeNotification = new Subject<Unit>();
 
         protected internal InfluxDBClient(InfluxDBClientOptions options)
         {
@@ -63,7 +66,7 @@ namespace InfluxDB.Client
             //
             // Dispose child APIs
             //
-            foreach (var disposable in Apis.ToList()) disposable.Dispose();
+            _disposeNotification.OnNext(Unit.Default);
 
             //
             // signout
@@ -114,8 +117,7 @@ namespace InfluxDB.Client
                 ExceptionFactory = _exceptionFactory
             };
 
-            var writeApi = new WriteApi(_options, service, writeOptions, this);
-            Apis.Add(writeApi);
+            var writeApi = new WriteApi(_options, service, writeOptions, this, _disposeNotification);
 
             return writeApi;
         }

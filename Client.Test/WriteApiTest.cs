@@ -93,24 +93,24 @@ namespace InfluxDB.Client.Test
         [Test]
         public void DisposeCallFromInfluxDbClientToWriteApi()
         {
-            var mock = new Mock<IDisposable>();
-            mock.Setup(disposable => disposable.Dispose());
+            var writeApi = _influxDbClient.GetWriteApi();
 
-            Assert.AreEqual(1, _influxDbClient.Apis.Count);
-            _influxDbClient.Apis.Add(mock.Object);
-            Assert.AreEqual(2, _influxDbClient.Apis.Count);
-
+            Assert.False(writeApi.Disposed);
             _influxDbClient.Dispose();
-
-            mock.Verify(disposable => disposable.Dispose(), Times.Once);
+            Assert.True(writeApi.Disposed);
         }
 
         [Test]
         public void DisposedClientRemovedFromApis()
         {
-            Assert.AreEqual(1, _influxDbClient.Apis.Count);
-            _writeApi.Dispose();
-            Assert.AreEqual(0, _influxDbClient.Apis.Count);
+            var writeApi = _influxDbClient.GetWriteApi();
+
+            Assert.False(writeApi.Disposed);
+            writeApi.Dispose();
+            Assert.True(writeApi.Disposed);
+
+            _influxDbClient.Dispose();
+            // nothing bad happens
         }
 
         [Test]

@@ -26,17 +26,25 @@ namespace InfluxDB.Client
         private readonly MeasurementMapper _measurementMapper = new MeasurementMapper();
         private readonly InfluxDBClientOptions _options;
         private readonly Subject<BatchWriteData> _subject = new Subject<BatchWriteData>();
+        private readonly IDisposable _unsubscribeDisposeCommand;
 
         private bool _disposed;
-        protected internal WriteApi(InfluxDBClientOptions options, WriteService service, WriteOptions writeOptions,
-            InfluxDBClient influxDbClient)
+        protected internal WriteApi(
+            InfluxDBClientOptions options, 
+            WriteService service, 
+            WriteOptions writeOptions,
+            InfluxDBClient influxDbClient,
+            IObservable<Unit> disposeCommand)
         {
             Arguments.CheckNotNull(service, nameof(service));
             Arguments.CheckNotNull(writeOptions, nameof(writeOptions));
             Arguments.CheckNotNull(influxDbClient, nameof(_influxDbClient));
+            Arguments.CheckNotNull(disposeCommand, nameof(disposeCommand));
 
             _options = options;
             _influxDbClient = influxDbClient;
+
+            _unsubscribeDisposeCommand= disposeCommand.Subscribe(_ => Dispose());
 
             // backpreasure - is not implemented in C#
             // 
@@ -197,7 +205,7 @@ namespace InfluxDB.Client
 
         public void Dispose()
         {
-            _influxDbClient.Apis.Remove(this);
+            _unsubscribeDisposeCommand.Dispose(); // avoid duplicate call to dispose
 
             Trace.WriteLine("Flushing batches before shutdown.");
 
@@ -210,6 +218,8 @@ namespace InfluxDB.Client
 
             WaitToCondition(() => _disposed, 30000);
         }
+
+        public bool Disposed => _disposed;
 
         public event EventHandler EventHandler;
 
