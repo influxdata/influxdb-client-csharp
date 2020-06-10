@@ -66,7 +66,7 @@ namespace InfluxDB.Client.Writes
         /// <returns>this</returns>
         public PointData Tag(string name, string value)
         {
-            bool isEmptyValue = string.IsNullOrEmpty(value);
+            var isEmptyValue = string.IsNullOrEmpty(value);
             var tags = _tags;
             if (isEmptyValue)
             {
@@ -356,10 +356,10 @@ namespace InfluxDB.Client.Writes
                     // override don't consider as best practice
                     // therefore it a trade-off between being less efficient 
                     // on the default behavior or on the override scenario
-                    ImmutableSortedDictionary<string, string>.Builder builder = _tags.ToBuilder();
+                    var builder = _tags.ToBuilder();
                     foreach (var item in defaultTags)
                     {
-                        string name = item.Key;
+                        var name = item.Key;
                         if (!builder.ContainsKey(name)) // existing tags overrides
                             builder.Add(name, item.Value);
                     }
