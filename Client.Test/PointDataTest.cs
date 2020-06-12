@@ -20,7 +20,7 @@ namespace InfluxDB.Client.Test
 
             Assert.AreEqual("h2o,location=europe level=2i", point.ToLineProtocol());
         }
-
+        
         [Test]
         public void Immutability()
         {

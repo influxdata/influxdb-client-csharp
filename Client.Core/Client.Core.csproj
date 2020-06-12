@@ -36,9 +36,16 @@
       <PackageReference Include="NodaTime" Version="2.4.1" />
       <PackageReference Include="NodaTime.Serialization.JsonNet" Version="2.0.0" />
       <PackageReference Include="RestSharp" Version="106.6.10" />
-      <PackageReference Include="System.Collections.Immutable" Version="1.7.1" />
       <PackageReference Include="System.Net.Http" Version="4.3.4" />
-      <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.5.0" />
+    </ItemGroup>
+    
+    <ItemGroup>
+      <Folder Include="InfluxDB.Client.Api.Domain" />
+    </ItemGroup>
+    
+    <ItemGroup>
+      <Compile Remove="InfluxDB.Client.Api.Domain\WritePrecision.cs" />
+      <Compile Remove="Writes\Events.cs" />
     </ItemGroup>
 
 </Project>

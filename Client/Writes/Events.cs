@@ -4,22 +4,9 @@ using InfluxDB.Client.Api.Domain;
 
 namespace InfluxDB.Client.Writes
 {
-    public interface IInfluxDBEventArgs
-    { 
-        void LogEvent();
-        EventArgs Args { get;  }
-    }
-
-    public abstract class InfluxDBEventArgs : EventArgs, IInfluxDBEventArgs
+    public abstract class InfluxDBEventArgs : EventArgs
     {
-        /// <summary>
-        /// Logs the event while keeping it hidden from IntelliSense.
-        /// </summary>
-        void IInfluxDBEventArgs.LogEvent() => OnLogEvent();
-
-        protected abstract void OnLogEvent();
-
-        EventArgs IInfluxDBEventArgs.Args => this;
+        internal abstract void LogEvent();
     }
 
     public class WriteSuccessEvent : AbstractWriteEvent
@@ -29,7 +16,7 @@ namespace InfluxDB.Client.Writes
         {
         }
 
-        protected override void OnLogEvent()
+        internal override void LogEvent()
         {
             Trace.WriteLine("The data was successfully written to InfluxDB 2.0.");
         }
@@ -48,7 +35,7 @@ namespace InfluxDB.Client.Writes
             Exception = exception;
         }
 
-        protected override void OnLogEvent()
+        internal override void LogEvent()
         {
             Trace.TraceError($"The error occurred during writing of data: {Exception.Message}");
         }
@@ -75,7 +62,7 @@ namespace InfluxDB.Client.Writes
             RetryInterval = retryInterval;
         }
         
-        protected override void OnLogEvent()
+        internal override void LogEvent()
         {
             Trace.TraceError($"The retriable error occurred during writing of data. Retry in: {RetryInterval} [ms]");
         }

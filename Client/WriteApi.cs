@@ -500,11 +500,11 @@ namespace InfluxDB.Client
             return (int) (new Random().NextDouble() * writeOptions.JitterInterval);
         }
 
-        private void Publish(IInfluxDBEventArgs eventArgs)
+        private void Publish(InfluxDBEventArgs eventArgs)
         {
             eventArgs.LogEvent();
 
-            EventHandler?.Invoke(this, eventArgs.Args);
+            EventHandler?.Invoke(this, eventArgs);
         }
     }
 
