@@ -4,6 +4,7 @@
 
 ### Features
 1. [#96](https://github.com/influxdata/influxdb-client-csharp/pull/96): The PointData builder is now immutable
+1. [#23](https://github.com/influxdata/influxdb-client-csharp/issues/23): Added WriteApiAsync for asynchronous write without batching
 
 ### API
 1. [#94](https://github.com/influxdata/influxdb-client-csharp/pull/94): Update swagger to latest version

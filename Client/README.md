@@ -300,7 +300,8 @@ namespace Examples
 
 ## Writes
 
-For writing data we use [WriteApi](https://github.com/influxdata/influxdb-client-csharp/blob/master/Client/WriteApi.cs#L1) that supports:
+For writing data we use [WriteApi](https://github.com/influxdata/influxdb-client-csharp/blob/master/Client/WriteApi.cs#L1) or 
+[WriteApiAsync](https://github.com/influxdata/influxdb-client-csharp/blob/feat/write-api-async/Client/WriteApiAsync.cs) which is simplified version of WriteApi without batching support both supports:
 
 1. writing data using [InfluxDB Line Protocol](https://docs.influxdata.com/influxdb/v1.6/write_protocols/line_protocol_tutorial/), Data Point, POCO 
 2. use batching for writes
@@ -491,6 +492,57 @@ namespace Examples
                 // Write by LineProtocol
                 //
                 writeApi.WriteRecord("bucket_name", "org_id", WritePrecision.Ns, "temperature,location=north value=60.0");
+            }
+            
+            influxDBClient.Dispose();
+        }
+    }
+}
+```
+
+#### Using WriteApiAsync
+```c#
+using InfluxDB.Client;
+using InfluxDB.Client.Api.Domain;
+
+namespace Examples
+{
+    public static class WriteLineProtocol
+    {
+        private static readonly char[] Token = "".ToCharArray();
+
+        public static void Main(string[] args)
+        {
+            var influxDBClient = InfluxDBClientFactory.Create("http://localhost:9999", Token);
+
+            //
+            // Write Data
+            //
+            using (var writeApiAsync = influxDBClient.GetWriteApiAsync())
+            {
+                //
+                //
+                // Write by LineProtocol
+                //
+                writeApiAsync.WriteRecordAsync("bucket_name", "org_id", WritePrecision.Ns, "temperature,location=north value=60.0");
+            
+                //
+                //
+                // Write by Data Point
+                //               
+                var point = PointData.Measurement("temperature")
+                    .Tag("location", "west")
+                    .Field("value", 55D)
+                    .Timestamp(DateTime.UtcNow.AddSeconds(-10), WritePrecision.Ns);
+                
+                writeApiAsync.WritePointAsync("bucket_name", "org_id", point);
+                
+                //
+                // Write by POCO
+                //
+                var temperature = new Temperature {Location = "south", Value = 62D, Time = DateTime.UtcNow};
+                
+                writeApiAsync.WriteMeasurementAsync("bucket_name", "org_id", WritePrecision.Ns, temperature);
             }
             
             influxDBClient.Dispose();
