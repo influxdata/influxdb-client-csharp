@@ -1,7 +1,10 @@
 ## 1.9.0 [unreleased]
 
+### Features
+1. [#96](https://github.com/influxdata/influxdb-client-csharp/pull/96): The PointData builder is now immutable
+
 ### API
-1. [#94](https://github.com/influxdata/influxdb-client-csharppull/94): Update swagger to latest version
+1. [#94](https://github.com/influxdata/influxdb-client-csharp/pull/94): Update swagger to latest version
 
 ### Bug Fixes
 1. [#100](https://github.com/influxdata/influxdb-client-csharp/pull/100): Thread-safety disposing of clients 

@@ -39,13 +39,4 @@
       <PackageReference Include="System.Net.Http" Version="4.3.4" />
     </ItemGroup>
     
-    <ItemGroup>
-      <Folder Include="InfluxDB.Client.Api.Domain" />
-    </ItemGroup>
-    
-    <ItemGroup>
-      <Compile Remove="InfluxDB.Client.Api.Domain\WritePrecision.cs" />
-      <Compile Remove="Writes\Events.cs" />
-    </ItemGroup>
-
 </Project>
