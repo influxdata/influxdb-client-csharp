@@ -412,6 +412,57 @@ namespace Examples
 }
 ```
 
+DataPoint Builder Immutability:
+The builder is immutable therefore won't have side effect when using for building
+multiple point with single builder.
+
+```c#
+using System;
+using InfluxDB.Client;
+using InfluxDB.Client.Api.Domain;
+using InfluxDB.Client.Writes;
+
+namespace Examples
+{
+    public static class WriteDataPoint
+    {
+        private static readonly char[] Token = "".ToCharArray();
+
+        public static void Main(string[] args)
+        {
+            var influxDBClient = InfluxDBClientFactory.Create("http://localhost:9999", Token);
+
+            //
+            // Write Data
+            //
+            using (var writeApi = influxDBClient.GetWriteApi())
+            {
+                //
+                // Write by Data Point
+                
+                var builder = PointData.Measurement("temperature")
+                    .Tag("location", "west");
+                
+                var pointA = builder
+                    .Field("value", 55D)
+                    .Timestamp(DateTime.UtcNow.AddSeconds(-10), WritePrecision.Ns);
+                
+                writeApi.WritePoint("bucket_name", "org_id", pointA);
+                
+                var pointB = builder
+                    .Field("age", 32)
+                    .Timestamp(DateTime.UtcNow, WritePrecision.Ns);
+                
+                writeApi.WritePoint("bucket_name", "org_id", pointB);
+            }
+            
+            influxDBClient.Dispose();
+        }
+    }
+}
+```
+
+
 #### By LineProtocol
 
 Write Line Protocol record into specified bucket:

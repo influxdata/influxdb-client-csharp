@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Numerics;
@@ -14,25 +16,36 @@ namespace InfluxDB.Client.Writes
     /// Point defines the values that will be written to the database.
     /// <a href="http://bit.ly/influxdata-point">See Go Implementation</a>.
     /// </summary>
-    public class PointData
+    public class PointData : IEquatable<PointData>
     {
         private static readonly DateTime EpochStart = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
 
         private readonly string _measurementName;
-        private readonly SortedDictionary<string, string> _tags;
-        private readonly SortedDictionary<string, object> _fields;
+        private readonly ImmutableSortedDictionary<string, string> _tags = ImmutableSortedDictionary<string, string>.Empty;
+        private readonly ImmutableSortedDictionary<string, object> _fields = ImmutableSortedDictionary<string, object>.Empty;
 
-        public WritePrecision Precision { get; private set; }
-        private BigInteger? _time;
+        public readonly WritePrecision Precision;
+        private readonly BigInteger? _time;
 
         private PointData(string measurementName)
         {
             Arguments.CheckNonEmptyString(measurementName, "Measurement name");
 
             _measurementName = measurementName;
-            _fields = new SortedDictionary<string, object>(StringComparer.Ordinal);
-            _tags = new SortedDictionary<string, string>(StringComparer.Ordinal);
             Precision = WritePrecision.Ns;
+        }
+
+        private PointData(string measurementName,
+                            WritePrecision precision,
+                            BigInteger? time,
+                            ImmutableSortedDictionary<string, string> tags,
+                            ImmutableSortedDictionary<string, object> fields)
+        {
+            _measurementName = measurementName;
+            Precision = precision;
+            _time = time;
+            _tags = tags;
+            _fields = fields;
         }
 
         /// <summary>
@@ -53,9 +66,32 @@ namespace InfluxDB.Client.Writes
         /// <returns>this</returns>
         public PointData Tag(string name, string value)
         {
-            _tags[name] = value;
+            var isEmptyValue = string.IsNullOrEmpty(value);
+            var tags = _tags;
+            if (isEmptyValue)
+            {
+                if (tags.ContainsKey(name))
+                {
+                    Trace.TraceWarning($"Empty tags will cause deletion of, tag [{name}], measurement [{_measurementName}]");
+                }
+                else
+                {
+                    Trace.TraceWarning($"Empty tags has no effect, tag [{name}], measurement [{_measurementName}]");
+                    return this;
+                }
+            }
+            if (tags.ContainsKey(name))
+            {
+                tags = tags.Remove(name);
+            }
+            if (!isEmptyValue)
+                tags = tags.Add(name, value);
 
-            return this;
+            return new PointData(_measurementName,
+                                Precision,
+                                _time,
+                                tags,
+                                _fields);
         }
 
         /// <summary>
@@ -143,10 +179,11 @@ namespace InfluxDB.Client.Writes
         /// <returns></returns>
         public PointData Timestamp(long timestamp, WritePrecision timeUnit)
         {
-            Precision = timeUnit;
-            _time = timestamp;
-
-            return this;
+            return new PointData(_measurementName,
+                                timeUnit,
+                                timestamp,
+                                _tags,
+                                _fields);
         }
 
         /// <summary>
@@ -157,25 +194,28 @@ namespace InfluxDB.Client.Writes
         /// <returns></returns>
         public PointData Timestamp(TimeSpan timestamp, WritePrecision timeUnit)
         {
-            Precision = timeUnit;
-
+            BigInteger? time = null;
             switch (timeUnit)
             {
                 case WritePrecision.Ns:
-                    _time = timestamp.Ticks * 100;
+                    time = timestamp.Ticks * 100;
                     break;
                 case WritePrecision.Us:
-                    _time = (BigInteger) (timestamp.Ticks * 0.1);
+                    time = (BigInteger)(timestamp.Ticks * 0.1);
                     break;
                 case WritePrecision.Ms:
-                    _time = (BigInteger) timestamp.TotalMilliseconds;
+                    time = (BigInteger)timestamp.TotalMilliseconds;
                     break;
                 case WritePrecision.S:
-                    _time = (BigInteger) timestamp.TotalSeconds;
+                    time = (BigInteger)timestamp.TotalSeconds;
                     break;
             }
 
-            return this;
+            return new PointData(_measurementName,
+                                timeUnit,
+                                time,
+                                _tags,
+                                _fields);
         }
 
         /// <summary>
@@ -215,25 +255,29 @@ namespace InfluxDB.Client.Writes
         /// <returns></returns>
         public PointData Timestamp(Instant timestamp, WritePrecision timeUnit)
         {
-            Precision = timeUnit;
-
+            BigInteger? time = null;
             switch (timeUnit)
             {
                 case WritePrecision.S:
-                    _time = timestamp.ToUnixTimeSeconds();
+                    time = timestamp.ToUnixTimeSeconds();
                     break;
                 case WritePrecision.Ms:
-                    _time = timestamp.ToUnixTimeMilliseconds();
+                    time = timestamp.ToUnixTimeMilliseconds();
                     break;
                 case WritePrecision.Us:
-                    _time = (long) (timestamp.ToUnixTimeTicks() * 0.1);
+                    time = (long)(timestamp.ToUnixTimeTicks() * 0.1);
                     break;
                 default:
-                    _time = (timestamp - NodaConstants.UnixEpoch).ToBigIntegerNanoseconds();
+                    time = (timestamp - NodaConstants.UnixEpoch).ToBigIntegerNanoseconds();
                     break;
             }
 
-            return this;
+
+            return new PointData(_measurementName,
+                                timeUnit,
+                                time,
+                                _tags,
+                                _fields);
         }
 
         /// <summary>
@@ -271,30 +315,55 @@ namespace InfluxDB.Client.Writes
         {
             Arguments.CheckNonEmptyString(name, "Field name");
 
-            _fields[name] = value;
+            var fields = _fields;
+            if (fields.ContainsKey(name))
+            {
+                fields = fields.Remove(name);
+            }
+            fields = fields.Add(name, value);
 
-            return this;
+            return new PointData(_measurementName,
+                                Precision,
+                                _time,
+                                _tags,
+                                fields);
         }
 
+        /// <summary>
+        /// Appends the tags.
+        /// </summary>
+        /// <param name="writer">The writer.</param>
+        /// <param name="pointSettings">The point settings.</param>
         private void AppendTags(StringBuilder writer, PointSettings pointSettings)
         {
-            IDictionary<string, string> entries = _tags;
-            if (pointSettings != null)
-            {
-                var defaultTags = pointSettings.GetDefaultTags();
-                if (defaultTags.Count > 0)
-                {
-                    var list = new List<IDictionary<string, string>> {_tags, defaultTags};
+            IReadOnlyDictionary<string, string> entries;
 
-                    entries = list.SelectMany(dict => dict)
-                        .Where(pair => !string.IsNullOrEmpty(pair.Value))
-                        .ToLookup(pair => pair.Key, pair => pair.Value)
-                        .ToDictionary(group => group.Key, group =>
-                        {
-                            var first = group.First();
-                            return string.IsNullOrEmpty(first) ? group.Last() : first;
-                        })
-                        .ToSortedDictionary(StringComparer.Ordinal);
+            if (pointSettings == null)
+            {
+                entries = _tags;
+            }
+            else
+            {
+                IReadOnlyDictionary<string, string> defaultTags =
+                    pointSettings.GetDefaultTags();
+                try
+                {
+                    entries = _tags.AddRange(defaultTags);
+                }
+                catch (ArgumentException ex)
+                {
+                    // Most cases don't expect to override existing content
+                    // override don't consider as best practice
+                    // therefore it a trade-off between being less efficient 
+                    // on the default behavior or on the override scenario
+                    var builder = _tags.ToBuilder();
+                    foreach (var item in defaultTags)
+                    {
+                        var name = item.Key;
+                        if (!builder.ContainsKey(name)) // existing tags overrides
+                            builder.Add(name, item.Value);
+                    }
+                    entries = builder;
                 }
             }
 
@@ -317,6 +386,11 @@ namespace InfluxDB.Client.Writes
             writer.Append(' ');
         }
 
+        /// <summary>
+        /// Appends the fields.
+        /// </summary>
+        /// <param name="sb">The sb.</param>
+        /// <returns></returns>
         private bool AppendFields(StringBuilder sb)
         {
             var appended = false;
@@ -336,12 +410,12 @@ namespace InfluxDB.Client.Writes
 
                 if (value is double || value is float)
                 {
-                    sb.Append(((IConvertible) value).ToString(CultureInfo.InvariantCulture));
+                    sb.Append(((IConvertible)value).ToString(CultureInfo.InvariantCulture));
                 }
                 else if (value is byte || value is int || value is long || value is sbyte || value is short ||
                          value is uint || value is ulong || value is ushort)
                 {
-                    sb.Append(((IConvertible) value).ToString(CultureInfo.InvariantCulture));
+                    sb.Append(((IConvertible)value).ToString(CultureInfo.InvariantCulture));
                     sb.Append('i');
                 }
                 else if (value is bool b)
@@ -375,6 +449,10 @@ namespace InfluxDB.Client.Writes
             return appended;
         }
 
+        /// <summary>
+        /// Appends the time.
+        /// </summary>
+        /// <param name="sb">The sb.</param>
         private void AppendTime(StringBuilder sb)
         {
             if (_time == null)
@@ -383,9 +461,14 @@ namespace InfluxDB.Client.Writes
             }
 
             sb.Append(' ');
-            sb.Append(((BigInteger) _time).ToString(CultureInfo.InvariantCulture));
+            sb.Append(((BigInteger)_time).ToString(CultureInfo.InvariantCulture));
         }
 
+        /// <summary>
+        /// Escapes the key.
+        /// </summary>
+        /// <param name="sb">The sb.</param>
+        /// <param name="key">The key.</param>
         private void EscapeKey(StringBuilder sb, string key)
         {
             foreach (var c in key)
@@ -403,6 +486,11 @@ namespace InfluxDB.Client.Writes
             }
         }
 
+        /// <summary>
+        /// Escapes the value.
+        /// </summary>
+        /// <param name="sb">The sb.</param>
+        /// <param name="value">The value.</param>
         private void EscapeValue(StringBuilder sb, string value)
         {
             foreach (var c in value)
@@ -419,11 +507,122 @@ namespace InfluxDB.Client.Writes
             }
         }
 
+        /// <summary>
+        /// Determines whether [is not defined] [the specified value].
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>
+        ///   <c>true</c> if [is not defined] [the specified value]; otherwise, <c>false</c>.
+        /// </returns>
         private bool IsNotDefined(object value)
         {
             return value == null
                    || (value is double d && (double.IsInfinity(d) || double.IsNaN(d)))
                    || (value is float f && (float.IsInfinity(f) || float.IsNaN(f)));
+        }
+
+        /// <summary>
+        /// Determines whether the specified <see cref="System.Object" />, is equal to this instance.
+        /// </summary>
+        /// <param name="obj">The <see cref="System.Object" /> to compare with this instance.</param>
+        /// <returns>
+        ///   <c>true</c> if the specified <see cref="System.Object" /> is equal to this instance; otherwise, <c>false</c>.
+        /// </returns>
+        public override bool Equals(object obj)
+        {
+            return Equals(obj as PointData);
+        }
+
+        /// <summary>
+        /// Indicates whether the current object is equal to another object of the same type.
+        /// </summary>
+        /// <param name="other">An object to compare with this object.</param>
+        /// <returns>
+        /// true if the current object is equal to the <paramref name="other">other</paramref> parameter; otherwise, false.
+        /// </returns>
+        public bool Equals(PointData other)
+        {
+            if (other == null)
+                return false;
+            var otherTags = other._tags;
+
+            var result = _tags.Count == otherTags.Count &&
+                           _tags.All(pair => 
+                                {
+                                    var key = pair.Key;
+                                    var value = pair.Value;
+                                    return otherTags.ContainsKey(key) &&
+                                        otherTags[key] == value;
+                                });
+            var otherFields = other._fields;
+            result = result && _fields.Count == otherFields.Count &&
+                           _fields.All(pair =>
+                                {
+                                    var key = pair.Key;
+                                    var value = pair.Value;
+                                    return otherFields.ContainsKey(key) &&
+                                                object.Equals(otherFields[key], value);
+                                });
+
+            result = result &&
+                   _measurementName == other._measurementName &&
+                   Precision == other.Precision &&
+                   EqualityComparer<BigInteger?>.Default.Equals(_time, other._time);
+
+            return result;
+        }
+
+        /// <summary>
+        /// Returns a hash code for this instance.
+        /// </summary>
+        /// <returns>
+        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
+        /// </returns>
+        public override int GetHashCode()
+        {
+            var hashCode = 318335609;
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(_measurementName);
+            hashCode = hashCode * -1521134295 + Precision.GetHashCode();
+            hashCode = hashCode * -1521134295 + _time.GetHashCode();
+
+            foreach (var pair in _tags)
+            {
+                hashCode = hashCode * -1521134295 + pair.Key?.GetHashCode() ?? 0;
+                hashCode = hashCode * -1521134295 + pair.Value?.GetHashCode() ?? 0;
+            }
+            foreach (var pair in _fields)
+            {
+                hashCode = hashCode * -1521134295 + pair.Key?.GetHashCode() ?? 0;
+                hashCode = hashCode * -1521134295 + pair.Value?.GetHashCode() ?? 0;
+            }
+
+            return hashCode;
+        }
+
+        /// <summary>
+        /// Implements the operator ==.
+        /// </summary>
+        /// <param name="left">The left.</param>
+        /// <param name="right">The right.</param>
+        /// <returns>
+        /// The result of the operator.
+        /// </returns>
+        public static bool operator ==(PointData left, PointData right)
+        {
+            return EqualityComparer<PointData>.Default.Equals(left, right);
+        }
+
+        /// <summary>
+        /// Implements the operator !=.
+        /// </summary>
+        /// <param name="left">The left.</param>
+        /// <param name="right">The right.</param>
+        /// <returns>
+        /// The result of the operator.
+        /// </returns>
+        public static bool operator !=(PointData left, PointData right)
+        {
+            return !(left == right);
         }
     }
 
