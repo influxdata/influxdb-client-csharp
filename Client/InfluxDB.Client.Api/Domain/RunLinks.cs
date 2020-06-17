@@ -34,13 +34,11 @@ namespace InfluxDB.Client.Api.Domain
         /// </summary>
         /// <param name="self">self.</param>
         /// <param name="task">task.</param>
-        /// <param name="logs">logs.</param>
         /// <param name="retry">retry.</param>
-        public RunLinks(string self = default(string), string task = default(string), string logs = default(string), string retry = default(string))
+        public RunLinks(string self = default(string), string task = default(string), string retry = default(string))
         {
             this.Self = self;
             this.Task = task;
-            this.Logs = logs;
             this.Retry = retry;
         }
 
@@ -55,12 +53,6 @@ namespace InfluxDB.Client.Api.Domain
         /// </summary>
         [DataMember(Name="task", EmitDefaultValue=false)]
         public string Task { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Logs
-        /// </summary>
-        [DataMember(Name="logs", EmitDefaultValue=false)]
-        public string Logs { get; set; }
 
         /// <summary>
         /// Gets or Sets Retry
@@ -78,7 +70,6 @@ namespace InfluxDB.Client.Api.Domain
             sb.Append("class RunLinks {\n");
             sb.Append("  Self: ").Append(Self).Append("\n");
             sb.Append("  Task: ").Append(Task).Append("\n");
-            sb.Append("  Logs: ").Append(Logs).Append("\n");
             sb.Append("  Retry: ").Append(Retry).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -125,11 +116,6 @@ namespace InfluxDB.Client.Api.Domain
                     this.Task.Equals(input.Task))
                 ) && 
                 (
-                    this.Logs == input.Logs ||
-                    (this.Logs != null &&
-                    this.Logs.Equals(input.Logs))
-                ) && 
-                (
                     this.Retry == input.Retry ||
                     (this.Retry != null &&
                     this.Retry.Equals(input.Retry))
@@ -149,8 +135,6 @@ namespace InfluxDB.Client.Api.Domain
                     hashCode = hashCode * 59 + this.Self.GetHashCode();
                 if (this.Task != null)
                     hashCode = hashCode * 59 + this.Task.GetHashCode();
-                if (this.Logs != null)
-                    hashCode = hashCode * 59 + this.Logs.GetHashCode();
                 if (this.Retry != null)
                     hashCode = hashCode * 59 + this.Retry.GetHashCode();
                 return hashCode;

@@ -94,13 +94,6 @@ namespace InfluxDB.Client.Api.Domain
         public string Dashboards { get; private set; }
 
         /// <summary>
-        /// URI of resource.
-        /// </summary>
-        /// <value>URI of resource.</value>
-        [DataMember(Name="logs", EmitDefaultValue=false)]
-        public string Logs { get; private set; }
-
-        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -116,7 +109,6 @@ namespace InfluxDB.Client.Api.Domain
             sb.Append("  Buckets: ").Append(Buckets).Append("\n");
             sb.Append("  Tasks: ").Append(Tasks).Append("\n");
             sb.Append("  Dashboards: ").Append(Dashboards).Append("\n");
-            sb.Append("  Logs: ").Append(Logs).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -190,11 +182,6 @@ namespace InfluxDB.Client.Api.Domain
                     this.Dashboards == input.Dashboards ||
                     (this.Dashboards != null &&
                     this.Dashboards.Equals(input.Dashboards))
-                ) && 
-                (
-                    this.Logs == input.Logs ||
-                    (this.Logs != null &&
-                    this.Logs.Equals(input.Logs))
                 );
         }
 
@@ -223,8 +210,6 @@ namespace InfluxDB.Client.Api.Domain
                     hashCode = hashCode * 59 + this.Tasks.GetHashCode();
                 if (this.Dashboards != null)
                     hashCode = hashCode * 59 + this.Dashboards.GetHashCode();
-                if (this.Logs != null)
-                    hashCode = hashCode * 59 + this.Logs.GetHashCode();
                 return hashCode;
             }
         }

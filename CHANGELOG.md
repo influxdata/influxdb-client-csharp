@@ -5,6 +5,7 @@
 
 ### API
 1. [#94](https://github.com/influxdata/influxdb-client-csharp/pull/94): Update swagger to latest version
+1. [#103](https://github.com/influxdata/influxdb-client-csharp/pull/103): Removed log system from Bucket, Dashboard, Organization, Task and Users API - [influxdb#18459](https://github.com/influxdata/influxdb/pull/18459)
 
 ### Bug Fixes
 1. [#100](https://github.com/influxdata/influxdb-client-csharp/pull/100): Thread-safety disposing of clients 

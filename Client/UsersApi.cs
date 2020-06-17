@@ -4,8 +4,6 @@ using System.Threading.Tasks;
 using InfluxDB.Client.Api.Domain;
 using InfluxDB.Client.Api.Service;
 using InfluxDB.Client.Core;
-using InfluxDB.Client.Domain;
-using Task = System.Threading.Tasks.Task;
 
 namespace InfluxDB.Client
 {
@@ -198,58 +196,6 @@ namespace InfluxDB.Client
         public async Task<List<User>> FindUsersAsync()
         {
             return await _service.GetUsersAsync().ContinueWith(t => t.Result._Users);
-        }
-
-        /// <summary>
-        /// Retrieve an user's logs
-        /// </summary>
-        /// <param name="user">for retrieve logs</param>
-        /// <returns>logs</returns>
-        public async Task<List<OperationLog>> FindUserLogsAsync(User user)
-        {
-            Arguments.CheckNotNull(user, nameof(user));
-
-            return await FindUserLogsAsync(user.Id);
-        }
-
-        /// <summary>
-        /// Retrieve an user's logs
-        /// </summary>
-        /// <param name="user">for retrieve logs</param>
-        /// <param name="findOptions">the find options</param>
-        /// <returns>logs</returns>
-        public async Task<OperationLogs> FindUserLogsAsync(User user, FindOptions findOptions)
-        {
-            Arguments.CheckNotNull(user, nameof(user));
-            Arguments.CheckNotNull(findOptions, nameof(findOptions));
-
-            return await FindUserLogsAsync(user.Id, findOptions);
-        }
-
-        /// <summary>
-        /// Retrieve an user's logs
-        /// </summary>
-        /// <param name="userId">the ID of an user</param>
-        /// <returns>logs</returns>
-        public async Task<List<OperationLog>> FindUserLogsAsync(string userId)
-        {
-            Arguments.CheckNonEmptyString(userId, nameof(userId));
-
-            return await FindUserLogsAsync(userId, new FindOptions()).ContinueWith(t => t.Result.Logs);
-        }
-
-        /// <summary>
-        /// Retrieve an user's logs
-        /// </summary>
-        /// <param name="userId">the ID of an user</param>
-        /// <param name="findOptions">the find options</param>
-        /// <returns>logs</returns>
-        public async Task<OperationLogs> FindUserLogsAsync(string userId, FindOptions findOptions)
-        {
-            Arguments.CheckNonEmptyString(userId, nameof(userId));
-            Arguments.CheckNotNull(findOptions, nameof(findOptions));
-
-            return await _service.GetUsersIDLogsAsync(userId, null, findOptions.Offset, findOptions.Limit);
         }
 
         private async Task UpdateUserPasswordAsync(string userId, string userName, string oldPassword,

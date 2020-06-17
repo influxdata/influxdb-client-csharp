@@ -1,8 +1,6 @@
 using System;
-using System.Linq;
 using System.Threading.Tasks;
 using InfluxDB.Client.Core.Exceptions;
-using InfluxDB.Client.Domain;
 using NUnit.Framework;
 
 namespace InfluxDB.Client.Test
@@ -75,119 +73,6 @@ namespace InfluxDB.Client.Test
 
             Assert.IsNotNull(ioe);
             Assert.AreEqual("user not found", ioe.Message);
-        }
-
-        [Test]
-        [Ignore("TODO https://github.com/influxdata/influxdb/issues/18048")]
-        public async Task FindUserLogs()
-        {
-            var now = new DateTime();
-
-            var user = await _usersApi.MeAsync();
-            Assert.IsNotNull(user);
-
-            await _usersApi.UpdateUserAsync(user);
-
-            var userLogs = await _usersApi.FindUserLogsAsync(user);
-
-            Assert.IsTrue(userLogs.Any());
-            Assert.AreEqual(userLogs[userLogs.Count - 1].Description, "User Updated");
-            Assert.AreEqual(userLogs[userLogs.Count - 1].UserID, user.Id);
-            Assert.IsTrue(userLogs[userLogs.Count - 1].Time > now);
-        }
-
-        [Test]
-        [Ignore("TODO https://github.com/influxdata/influxdb/issues/18389")]
-        public async Task FindUserLogsFindOptionsNotFound()
-        {
-            var entries = await _usersApi.FindUserLogsAsync("020f755c3c082000", new FindOptions());
-
-            Assert.IsNotNull(entries);
-            Assert.AreEqual(0, entries.Logs.Count);
-        }
-
-        [Test]
-        [Ignore("TODO https://github.com/influxdata/influxdb/issues/18389")]
-        public async Task FindUserLogsNotFound()
-        {
-            var logs = await _usersApi.FindUserLogsAsync("020f755c3c082000");
-
-            Assert.AreEqual(0, logs.Count);
-        }
-
-        [Test]
-        [Ignore("TODO https://github.com/influxdata/influxdb/issues/18048")]
-        public async Task FindUserLogsPaging()
-        {
-            var user = await _usersApi.CreateUserAsync(GenerateName("John Ryzen"));
-
-            foreach (var i in Enumerable.Range(0, 19))
-            {
-                user.Name = $"{i}_{user.Name}";
-
-                await _usersApi.UpdateUserAsync(user);
-            }
-
-            var logs = await _usersApi.FindUserLogsAsync(user);
-
-            Assert.AreEqual(20, logs.Count);
-            Assert.AreEqual("User Created", logs[0].Description);
-            Assert.AreEqual("User Updated", logs[19].Description);
-
-            var findOptions = new FindOptions {Limit = 5, Offset = 0};
-
-            var entries = await _usersApi.FindUserLogsAsync(user, findOptions);
-            Assert.AreEqual(5, entries.Logs.Count);
-            Assert.AreEqual("User Created", entries.Logs[0].Description);
-            Assert.AreEqual("User Updated", entries.Logs[1].Description);
-            Assert.AreEqual("User Updated", entries.Logs[2].Description);
-            Assert.AreEqual("User Updated", entries.Logs[3].Description);
-            Assert.AreEqual("User Updated", entries.Logs[4].Description);
-
-            findOptions.Offset += 5;
-
-            entries = await _usersApi.FindUserLogsAsync(user, findOptions);
-            Assert.AreEqual(5, entries.Logs.Count);
-            Assert.AreEqual("User Updated", entries.Logs[0].Description);
-            Assert.AreEqual("User Updated", entries.Logs[1].Description);
-            Assert.AreEqual("User Updated", entries.Logs[2].Description);
-            Assert.AreEqual("User Updated", entries.Logs[3].Description);
-            Assert.AreEqual("User Updated", entries.Logs[4].Description);
-
-            findOptions.Offset += 5;
-
-            entries = await _usersApi.FindUserLogsAsync(user, findOptions);
-            Assert.AreEqual(5, entries.Logs.Count);
-            Assert.AreEqual("User Updated", entries.Logs[0].Description);
-            Assert.AreEqual("User Updated", entries.Logs[1].Description);
-            Assert.AreEqual("User Updated", entries.Logs[2].Description);
-            Assert.AreEqual("User Updated", entries.Logs[3].Description);
-            Assert.AreEqual("User Updated", entries.Logs[4].Description);
-
-            findOptions.Offset += 5;
-
-            entries = await _usersApi.FindUserLogsAsync(user, findOptions);
-            Assert.AreEqual(5, entries.Logs.Count);
-            Assert.AreEqual("User Updated", entries.Logs[0].Description);
-            Assert.AreEqual("User Updated", entries.Logs[1].Description);
-            Assert.AreEqual("User Updated", entries.Logs[2].Description);
-            Assert.AreEqual("User Updated", entries.Logs[3].Description);
-            Assert.AreEqual("User Updated", entries.Logs[4].Description);
-
-            findOptions.Offset += 5;
-
-            entries = await _usersApi.FindUserLogsAsync(user, findOptions);
-            Assert.AreEqual(0, entries.Logs.Count);
-
-            //
-            // Order
-            //
-            findOptions = new FindOptions {Descending = false};
-            entries = await _usersApi.FindUserLogsAsync(user, findOptions);
-            Assert.AreEqual(20, entries.Logs.Count);
-
-            Assert.AreEqual("User Updated", entries.Logs[19].Description);
-            Assert.AreEqual("User Created", entries.Logs[0].Description);
         }
 
         [Test]

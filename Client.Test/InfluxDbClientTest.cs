@@ -50,35 +50,38 @@ namespace InfluxDB.Client.Test
         [Test]
         public async Task ParseDate()
         {
-            const string data = "{\"links\":{\"self\":\"/api/v2/buckets/0376298868765000/log\"},\"logs\":[" +
-                                "{\"links\":{\"user\":\"/api/v2/users/037624e8d440e000\"},\"description\":\"Bucket Created\",\"userID\":\"037624e8d440e000\",\"time\":\"2019-02-26T07:33:44.390263749Z\"}," +
-                                "{\"links\":{\"user\":\"/api/v2/users/037624e8d440e000\"},\"description\":\"Bucket Updated\",\"userID\":\"037624e8d440e000\",\"time\":\"2019-02-26T08:15:41.252492+01:00\"}," +
-                                "{\"links\":{\"user\":\"/api/v2/users/037624e8d440e000\"},\"description\":\"Bucket Updated\",\"userID\":\"037624e8d440e000\",\"time\":\"2019-02-26T08:15:41.334601+01:00\"}," +
-                                "{\"links\":{\"user\":\"/api/v2/users/037624e8d440e000\"},\"description\":\"Bucket Updated\",\"userID\":\"037624e8d440e000\",\"time\":\"2019-02-26T08:15:41.437055+01:00\"}," +
-                                "{\"links\":{\"user\":\"/api/v2/users/037624e8d440e000\"},\"description\":\"Bucket Updated\",\"userID\":\"037624e8d440e000\",\"time\":\"2019-02-26T08:15:41.568936+01:00\"}," +
-                                "{\"links\":{\"user\":\"/api/v2/users/037624e8d440e000\"},\"description\":\"Bucket Updated\",\"userID\":\"037624e8d440e000\",\"time\":\"2019-02-26T08:15:41.64818+01:00\"}," +
-                                "{\"links\":{\"user\":\"/api/v2/users/037624e8d440e000\"},\"description\":\"Bucket Updated\",\"userID\":\"037624e8d440e000\",\"time\":\"2019-02-26T08:15:41.749176+01:00\"}," +
-                                "{\"links\":{\"user\":\"/api/v2/users/037624e8d440e000\"},\"description\":\"Bucket Updated\",\"userID\":\"037624e8d440e000\",\"time\":\"2019-02-26T08:15:41.82996+01:00\"}," +
-                                "{\"links\":{\"user\":\"/api/v2/users/037624e8d440e000\"},\"description\":\"Bucket Updated\",\"userID\":\"037624e8d440e000\",\"time\":\"2019-02-26T08:15:41.908611+01:00\"}," +
-                                "{\"links\":{\"user\":\"/api/v2/users/037624e8d440e000\"},\"description\":\"Bucket Updated\",\"userID\":\"037624e8d440e000\",\"time\":\"2019-02-26T08:15:41.9828+01:00\"}," +
-                                "{\"links\":{\"user\":\"/api/v2/users/037624e8d440e000\"},\"description\":\"Bucket Updated\",\"userID\":\"037624e8d440e000\",\"time\":\"2019-02-26T08:15:42.090233+01:00\"}," +
-                                "{\"links\":{\"user\":\"/api/v2/users/037624e8d440e000\"},\"description\":\"Bucket Updated\",\"userID\":\"037624e8d440e000\",\"time\":\"2019-02-26T08:15:42.193205+01:00\"}," +
-                                "{\"links\":{\"user\":\"/api/v2/users/037624e8d440e000\"},\"description\":\"Bucket Updated\",\"userID\":\"037624e8d440e000\",\"time\":\"2019-02-26T08:15:42.271324+01:00\"}," +
-                                "{\"links\":{\"user\":\"/api/v2/users/037624e8d440e000\"},\"description\":\"Bucket Updated\",\"userID\":\"037624e8d440e000\",\"time\":\"2019-02-26T08:15:42.338836+01:00\"}," +
-                                "{\"links\":{\"user\":\"/api/v2/users/037624e8d440e000\"},\"description\":\"Bucket Updated\",\"userID\":\"037624e8d440e000\",\"time\":\"2019-02-26T08:15:42.446591+01:00\"}," +
-                                "{\"links\":{\"user\":\"/api/v2/users/037624e8d440e000\"},\"description\":\"Bucket Updated\",\"userID\":\"037624e8d440e000\",\"time\":\"2019-02-26T08:15:42.549676+01:00\"}," +
-                                "{\"links\":{\"user\":\"/api/v2/users/037624e8d440e000\"},\"description\":\"Bucket Updated\",\"userID\":\"037624e8d440e000\",\"time\":\"2019-02-26T08:15:42.631707+01:00\"}," +
-                                "{\"links\":{\"user\":\"/api/v2/users/037624e8d440e000\"},\"description\":\"Bucket Updated\",\"userID\":\"037624e8d440e000\",\"time\":\"2019-02-26T08:15:42.714726+01:00\"}," +
-                                "{\"links\":{\"user\":\"/api/v2/users/037624e8d440e000\"},\"description\":\"Bucket Updated\",\"userID\":\"037624e8d440e000\",\"time\":\"2019-02-26T08:15:42.806946+01:00\"}," +
-                                "{\"links\":{\"user\":\"/api/v2/users/037624e8d440e000\"},\"description\":\"Bucket Updated\",\"userID\":\"037624e8d440e000\",\"time\":\"2019-02-26T08:15:42.889206+01:00\"}]}";
+            const string data = "{\"runs\":[" +
+                                "{\"id\":\"runId\",\"taskID\":\"taskID\",\"startedAt\":\"2019-02-26T07:33:44.390263749Z\"}," +
+                                "{\"id\":\"Bucket Updated\",\"taskID\":\"taskID\",\"startedAt\":\"2019-02-26T08:15:41.252492+01:00\"}," +
+                                "{\"id\":\"Bucket Updated\",\"taskID\":\"taskID\",\"startedAt\":\"2019-02-26T08:15:41.334601+01:00\"}," +
+                                "{\"id\":\"Bucket Updated\",\"taskID\":\"taskID\",\"startedAt\":\"2019-02-26T08:15:41.437055+01:00\"}," +
+                                "{\"id\":\"Bucket Updated\",\"taskID\":\"taskID\",\"startedAt\":\"2019-02-26T08:15:41.568936+01:00\"}," +
+                                "{\"id\":\"Bucket Updated\",\"taskID\":\"taskID\",\"startedAt\":\"2019-02-26T08:15:41.64818+01:00\"}," +
+                                "{\"id\":\"Bucket Updated\",\"taskID\":\"taskID\",\"startedAt\":\"2019-02-26T08:15:41.749176+01:00\"}," +
+                                "{\"id\":\"Bucket Updated\",\"taskID\":\"taskID\",\"startedAt\":\"2019-02-26T08:15:41.82996+01:00\"}," +
+                                "{\"id\":\"Bucket Updated\",\"taskID\":\"taskID\",\"startedAt\":\"2019-02-26T08:15:41.908611+01:00\"}," +
+                                "{\"id\":\"Bucket Updated\",\"taskID\":\"taskID\",\"startedAt\":\"2019-02-26T08:15:41.9828+01:00\"}," +
+                                "{\"id\":\"Bucket Updated\",\"taskID\":\"taskID\",\"startedAt\":\"2019-02-26T08:15:42.090233+01:00\"}," +
+                                "{\"id\":\"Bucket Updated\",\"taskID\":\"taskID\",\"startedAt\":\"2019-02-26T08:15:42.193205+01:00\"}," +
+                                "{\"id\":\"Bucket Updated\",\"taskID\":\"taskID\",\"startedAt\":\"2019-02-26T08:15:42.271324+01:00\"}," +
+                                "{\"id\":\"Bucket Updated\",\"taskID\":\"taskID\",\"startedAt\":\"2019-02-26T08:15:42.338836+01:00\"}," +
+                                "{\"id\":\"Bucket Updated\",\"taskID\":\"taskID\",\"startedAt\":\"2019-02-26T08:15:42.446591+01:00\"}," +
+                                "{\"id\":\"Bucket Updated\",\"taskID\":\"taskID\",\"startedAt\":\"2019-02-26T08:15:42.549676+01:00\"}," +
+                                "{\"id\":\"Bucket Updated\",\"taskID\":\"taskID\",\"startedAt\":\"2019-02-26T08:15:42.631707+01:00\"}," +
+                                "{\"id\":\"Bucket Updated\",\"taskID\":\"taskID\",\"startedAt\":\"2019-02-26T08:15:42.714726+01:00\"}," +
+                                "{\"id\":\"Bucket Updated\",\"taskID\":\"taskID\",\"startedAt\":\"2019-02-26T08:15:42.806946+01:00\"}," +
+                                "{\"id\":\"Bucket Updated\",\"taskID\":\"taskID\",\"startedAt\":\"2019-02-26T08:15:42.889206+01:00\"}]}";
 
             MockServer
                 .Given(Request.Create().UsingGet())
                 .RespondWith(CreateResponse(data, "application/json"));
 
-            var logs = await _client.GetBucketsApi().FindBucketLogsAsync("id");
-
-            Assert.AreEqual(20, logs.Count);
+            var runs = await _client.GetTasksApi().GetRunsAsync("taskId", "runId");
+            Assert.AreEqual(20, runs.Count);
+            foreach (var run in runs)
+            {
+                Assert.IsNotNull(run.StartedAt);
+            }
         }
 
         [Test]
