@@ -30,9 +30,9 @@ namespace InfluxDB.Client.Api.Domain
     public partial class Query :  IEquatable<Query>
     {
         /// <summary>
-        /// The type of query.
+        /// The type of query. Must be \&quot;flux\&quot;.
         /// </summary>
-        /// <value>The type of query.</value>
+        /// <value>The type of query. Must be \&quot;flux\&quot;.</value>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum TypeEnum
         {
@@ -40,20 +40,14 @@ namespace InfluxDB.Client.Api.Domain
             /// Enum Flux for value: flux
             /// </summary>
             [EnumMember(Value = "flux")]
-            Flux = 1,
-
-            /// <summary>
-            /// Enum Influxql for value: influxql
-            /// </summary>
-            [EnumMember(Value = "influxql")]
-            Influxql = 2
+            Flux = 1
 
         }
 
         /// <summary>
-        /// The type of query.
+        /// The type of query. Must be \&quot;flux\&quot;.
         /// </summary>
-        /// <value>The type of query.</value>
+        /// <value>The type of query. Must be \&quot;flux\&quot;.</value>
         [DataMember(Name="type", EmitDefaultValue=false)]
         public TypeEnum? Type { get; set; }
         /// <summary>
@@ -66,12 +60,10 @@ namespace InfluxDB.Client.Api.Domain
         /// </summary>
         /// <param name="_extern">_extern.</param>
         /// <param name="query">Query script to execute. (required).</param>
-        /// <param name="type">The type of query. (default to TypeEnum.Flux).</param>
-        /// <param name="db">Required for &#x60;influxql&#x60; type queries..</param>
-        /// <param name="rp">Required for &#x60;influxql&#x60; type queries..</param>
-        /// <param name="cluster">Required for &#x60;influxql&#x60; type queries..</param>
+        /// <param name="type">The type of query. Must be \&quot;flux\&quot;..</param>
         /// <param name="dialect">dialect.</param>
-        public Query(File _extern = default(File), string query = default(string), TypeEnum? type = TypeEnum.Flux, string db = default(string), string rp = default(string), string cluster = default(string), Dialect dialect = default(Dialect))
+        /// <param name="now">Specifies the time that should be reported as \&quot;now\&quot; in the query. Default is the server&#39;s now time..</param>
+        public Query(File _extern = default(File), string query = default(string), TypeEnum? type = default(TypeEnum?), Dialect dialect = default(Dialect), DateTime? now = default(DateTime?))
         {
             // to ensure "query" is required (not null)
             if (query == null)
@@ -83,19 +75,9 @@ namespace InfluxDB.Client.Api.Domain
                 this._Query = query;
             }
             this.Extern = _extern;
-            // use default value if no "type" provided
-            if (type == null)
-            {
-                this.Type = TypeEnum.Flux;
-            }
-            else
-            {
-                this.Type = type;
-            }
-            this.Db = db;
-            this.Rp = rp;
-            this.Cluster = cluster;
+            this.Type = type;
             this.Dialect = dialect;
+            this.Now = now;
         }
 
         /// <summary>
@@ -113,31 +95,17 @@ namespace InfluxDB.Client.Api.Domain
 
 
         /// <summary>
-        /// Required for &#x60;influxql&#x60; type queries.
-        /// </summary>
-        /// <value>Required for &#x60;influxql&#x60; type queries.</value>
-        [DataMember(Name="db", EmitDefaultValue=false)]
-        public string Db { get; set; }
-
-        /// <summary>
-        /// Required for &#x60;influxql&#x60; type queries.
-        /// </summary>
-        /// <value>Required for &#x60;influxql&#x60; type queries.</value>
-        [DataMember(Name="rp", EmitDefaultValue=false)]
-        public string Rp { get; set; }
-
-        /// <summary>
-        /// Required for &#x60;influxql&#x60; type queries.
-        /// </summary>
-        /// <value>Required for &#x60;influxql&#x60; type queries.</value>
-        [DataMember(Name="cluster", EmitDefaultValue=false)]
-        public string Cluster { get; set; }
-
-        /// <summary>
         /// Gets or Sets Dialect
         /// </summary>
         [DataMember(Name="dialect", EmitDefaultValue=false)]
         public Dialect Dialect { get; set; }
+
+        /// <summary>
+        /// Specifies the time that should be reported as \&quot;now\&quot; in the query. Default is the server&#39;s now time.
+        /// </summary>
+        /// <value>Specifies the time that should be reported as \&quot;now\&quot; in the query. Default is the server&#39;s now time.</value>
+        [DataMember(Name="now", EmitDefaultValue=false)]
+        public DateTime? Now { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -150,10 +118,8 @@ namespace InfluxDB.Client.Api.Domain
             sb.Append("  Extern: ").Append(Extern).Append("\n");
             sb.Append("  _Query: ").Append(_Query).Append("\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  Db: ").Append(Db).Append("\n");
-            sb.Append("  Rp: ").Append(Rp).Append("\n");
-            sb.Append("  Cluster: ").Append(Cluster).Append("\n");
             sb.Append("  Dialect: ").Append(Dialect).Append("\n");
+            sb.Append("  Now: ").Append(Now).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -204,24 +170,14 @@ namespace InfluxDB.Client.Api.Domain
                     this.Type.Equals(input.Type))
                 ) && 
                 (
-                    this.Db == input.Db ||
-                    (this.Db != null &&
-                    this.Db.Equals(input.Db))
-                ) && 
-                (
-                    this.Rp == input.Rp ||
-                    (this.Rp != null &&
-                    this.Rp.Equals(input.Rp))
-                ) && 
-                (
-                    this.Cluster == input.Cluster ||
-                    (this.Cluster != null &&
-                    this.Cluster.Equals(input.Cluster))
-                ) && 
-                (
                     
                     (this.Dialect != null &&
                     this.Dialect.Equals(input.Dialect))
+                ) && 
+                (
+                    this.Now == input.Now ||
+                    (this.Now != null &&
+                    this.Now.Equals(input.Now))
                 );
         }
 
@@ -240,14 +196,10 @@ namespace InfluxDB.Client.Api.Domain
                     hashCode = hashCode * 59 + this._Query.GetHashCode();
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
-                if (this.Db != null)
-                    hashCode = hashCode * 59 + this.Db.GetHashCode();
-                if (this.Rp != null)
-                    hashCode = hashCode * 59 + this.Rp.GetHashCode();
-                if (this.Cluster != null)
-                    hashCode = hashCode * 59 + this.Cluster.GetHashCode();
                 if (this.Dialect != null)
                     hashCode = hashCode * 59 + this.Dialect.GetHashCode();
+                if (this.Now != null)
+                    hashCode = hashCode * 59 + this.Now.GetHashCode();
                 return hashCode;
             }
         }

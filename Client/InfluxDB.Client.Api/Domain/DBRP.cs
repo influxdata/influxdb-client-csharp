@@ -38,12 +38,13 @@ namespace InfluxDB.Client.Api.Domain
         /// Initializes a new instance of the <see cref="DBRP" /> class.
         /// </summary>
         /// <param name="orgID">the organization ID that owns this mapping. (required).</param>
+        /// <param name="org">the organization that owns this mapping. (required).</param>
         /// <param name="bucketID">the bucket ID used as target for the translation. (required).</param>
         /// <param name="database">InfluxDB v1 database (required).</param>
         /// <param name="retentionPolicy">InfluxDB v1 retention policy (required).</param>
         /// <param name="_default">Specify if this mapping represents the default retention policy for the database specificed..</param>
         /// <param name="links">links.</param>
-        public DBRP(string orgID = default(string), string bucketID = default(string), string database = default(string), string retentionPolicy = default(string), bool? _default = default(bool?), Links links = default(Links))
+        public DBRP(string orgID = default(string), string org = default(string), string bucketID = default(string), string database = default(string), string retentionPolicy = default(string), bool? _default = default(bool?), Links links = default(Links))
         {
             // to ensure "orgID" is required (not null)
             if (orgID == null)
@@ -53,6 +54,15 @@ namespace InfluxDB.Client.Api.Domain
             else
             {
                 this.OrgID = orgID;
+            }
+            // to ensure "org" is required (not null)
+            if (org == null)
+            {
+                throw new InvalidDataException("org is a required property for DBRP and cannot be null");
+            }
+            else
+            {
+                this.Org = org;
             }
             // to ensure "bucketID" is required (not null)
             if (bucketID == null)
@@ -100,6 +110,13 @@ namespace InfluxDB.Client.Api.Domain
         public string OrgID { get; set; }
 
         /// <summary>
+        /// the organization that owns this mapping.
+        /// </summary>
+        /// <value>the organization that owns this mapping.</value>
+        [DataMember(Name="org", EmitDefaultValue=false)]
+        public string Org { get; set; }
+
+        /// <summary>
         /// the bucket ID used as target for the translation.
         /// </summary>
         /// <value>the bucket ID used as target for the translation.</value>
@@ -143,6 +160,7 @@ namespace InfluxDB.Client.Api.Domain
             sb.Append("class DBRP {\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  OrgID: ").Append(OrgID).Append("\n");
+            sb.Append("  Org: ").Append(Org).Append("\n");
             sb.Append("  BucketID: ").Append(BucketID).Append("\n");
             sb.Append("  Database: ").Append(Database).Append("\n");
             sb.Append("  RetentionPolicy: ").Append(RetentionPolicy).Append("\n");
@@ -193,6 +211,11 @@ namespace InfluxDB.Client.Api.Domain
                     this.OrgID.Equals(input.OrgID))
                 ) && 
                 (
+                    this.Org == input.Org ||
+                    (this.Org != null &&
+                    this.Org.Equals(input.Org))
+                ) && 
+                (
                     this.BucketID == input.BucketID ||
                     (this.BucketID != null &&
                     this.BucketID.Equals(input.BucketID))
@@ -232,6 +255,8 @@ namespace InfluxDB.Client.Api.Domain
                     hashCode = hashCode * 59 + this.Id.GetHashCode();
                 if (this.OrgID != null)
                     hashCode = hashCode * 59 + this.OrgID.GetHashCode();
+                if (this.Org != null)
+                    hashCode = hashCode * 59 + this.Org.GetHashCode();
                 if (this.BucketID != null)
                     hashCode = hashCode * 59 + this.BucketID.GetHashCode();
                 if (this.Database != null)

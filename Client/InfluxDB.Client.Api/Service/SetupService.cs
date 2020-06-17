@@ -68,6 +68,29 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of OnboardingResponse</returns>
         ApiResponse<OnboardingResponse> PostSetupWithHttpInfo (OnboardingRequest onboardingRequest, string zapTraceSpan = null);
+        /// <summary>
+        /// Set up a new user, org and bucket
+        /// </summary>
+        /// <remarks>
+        /// Post an onboarding request to set up a new user, org and bucket.
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="onboardingRequest">Source to create</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>OnboardingResponse</returns>
+        OnboardingResponse PostSetupUser (OnboardingRequest onboardingRequest, string zapTraceSpan = null);
+
+        /// <summary>
+        /// Set up a new user, org and bucket
+        /// </summary>
+        /// <remarks>
+        /// Post an onboarding request to set up a new user, org and bucket.
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="onboardingRequest">Source to create</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of OnboardingResponse</returns>
+        ApiResponse<OnboardingResponse> PostSetupUserWithHttpInfo (OnboardingRequest onboardingRequest, string zapTraceSpan = null);
         #endregion Synchronous Operations
         #region Asynchronous Operations
         /// <summary>
@@ -114,6 +137,29 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of ApiResponse (OnboardingResponse)</returns>
         System.Threading.Tasks.Task<ApiResponse<OnboardingResponse>> PostSetupAsyncWithHttpInfo (OnboardingRequest onboardingRequest, string zapTraceSpan = null);
+        /// <summary>
+        /// Set up a new user, org and bucket
+        /// </summary>
+        /// <remarks>
+        /// Post an onboarding request to set up a new user, org and bucket.
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="onboardingRequest">Source to create</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of OnboardingResponse</returns>
+        System.Threading.Tasks.Task<OnboardingResponse> PostSetupUserAsync (OnboardingRequest onboardingRequest, string zapTraceSpan = null);
+
+        /// <summary>
+        /// Set up a new user, org and bucket
+        /// </summary>
+        /// <remarks>
+        /// Post an onboarding request to set up a new user, org and bucket.
+        /// </remarks>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="onboardingRequest">Source to create</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ApiResponse (OnboardingResponse)</returns>
+        System.Threading.Tasks.Task<ApiResponse<OnboardingResponse>> PostSetupUserAsyncWithHttpInfo (OnboardingRequest onboardingRequest, string zapTraceSpan = null);
         #endregion Asynchronous Operations
     }
 
@@ -852,6 +898,362 @@ namespace InfluxDB.Client.Api.Service
             if (ExceptionFactory != null)
             {
                 Exception exception = ExceptionFactory("PostSetup", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Set up a new user, org and bucket Post an onboarding request to set up a new user, org and bucket.
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="onboardingRequest">Source to create</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>OnboardingResponse</returns>
+        public OnboardingResponse PostSetupUser (OnboardingRequest onboardingRequest, string zapTraceSpan = null)
+        {
+             ApiResponse<OnboardingResponse> localVarResponse = PostSetupUserWithHttpInfo(onboardingRequest, zapTraceSpan);
+             return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Set up a new user, org and bucket Post an onboarding request to set up a new user, org and bucket.
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="onboardingRequest">Source to create</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of OnboardingResponse</returns>
+        public ApiResponse< OnboardingResponse > PostSetupUserWithHttpInfo (OnboardingRequest onboardingRequest, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'onboardingRequest' is set
+            if (onboardingRequest == null)
+                throw new ApiException(400, "Missing required parameter 'onboardingRequest' when calling SetupService->PostSetupUser");
+
+            var localVarPath = "/api/v2/setup/user";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json"
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (onboardingRequest != null && onboardingRequest.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(onboardingRequest); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = onboardingRequest; // byte array
+            }
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("PostSetupUser", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<OnboardingResponse>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (OnboardingResponse) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(OnboardingResponse)));
+        }
+
+        /// <summary>
+        /// Set up a new user, org and bucket Post an onboarding request to set up a new user, org and bucket.
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="onboardingRequest">Source to create</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of OnboardingResponse</returns>
+        public async System.Threading.Tasks.Task<IRestResponse> PostSetupUserWithIRestResponseAsync (OnboardingRequest onboardingRequest, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'onboardingRequest' is set
+            if (onboardingRequest == null)
+                throw new ApiException(400, "Missing required parameter 'onboardingRequest' when calling SetupService->PostSetupUser");
+
+            var localVarPath = "/api/v2/setup/user";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json"
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (onboardingRequest != null && onboardingRequest.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(onboardingRequest); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = onboardingRequest; // byte array
+            }
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("PostSetupUser", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Set up a new user, org and bucket Post an onboarding request to set up a new user, org and bucket.
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="onboardingRequest">Source to create</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of OnboardingResponse</returns>
+        public IRestResponse PostSetupUserWithIRestResponse (OnboardingRequest onboardingRequest, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'onboardingRequest' is set
+            if (onboardingRequest == null)
+                throw new ApiException(400, "Missing required parameter 'onboardingRequest' when calling SetupService->PostSetupUser");
+
+            var localVarPath = "/api/v2/setup/user";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json"
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (onboardingRequest != null && onboardingRequest.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(onboardingRequest); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = onboardingRequest; // byte array
+            }
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("PostSetupUser", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return localVarResponse;
+        }
+        
+        /// <summary>
+        /// Set up a new user, org and bucket Post an onboarding request to set up a new user, org and bucket.
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="onboardingRequest">Source to create</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>ApiResponse of OnboardingResponse</returns>
+        public RestRequest PostSetupUserWithRestRequest (OnboardingRequest onboardingRequest, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'onboardingRequest' is set
+            if (onboardingRequest == null)
+                throw new ApiException(400, "Missing required parameter 'onboardingRequest' when calling SetupService->PostSetupUser");
+
+            var localVarPath = "/api/v2/setup/user";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json"
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (onboardingRequest != null && onboardingRequest.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(onboardingRequest); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = onboardingRequest; // byte array
+            }
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
+                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+        }
+
+        /// <summary>
+        /// Set up a new user, org and bucket Post an onboarding request to set up a new user, org and bucket.
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="onboardingRequest">Source to create</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of OnboardingResponse</returns>
+        public async System.Threading.Tasks.Task<OnboardingResponse> PostSetupUserAsync (OnboardingRequest onboardingRequest, string zapTraceSpan = null)
+        {
+             ApiResponse<OnboardingResponse> localVarResponse = await PostSetupUserAsyncWithHttpInfo(onboardingRequest, zapTraceSpan);
+             return localVarResponse.Data;
+
+        }
+
+        /// <summary>
+        /// Set up a new user, org and bucket Post an onboarding request to set up a new user, org and bucket.
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="onboardingRequest">Source to create</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of ApiResponse (OnboardingResponse)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<OnboardingResponse>> PostSetupUserAsyncWithHttpInfo (OnboardingRequest onboardingRequest, string zapTraceSpan = null)
+        {
+            // make the HTTP request
+            IRestResponse localVarResponse = await PostSetupUserAsyncWithIRestResponse(onboardingRequest, zapTraceSpan);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("PostSetupUser", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<OnboardingResponse>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (OnboardingResponse) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(OnboardingResponse)));
+        }
+            
+        /// <summary>
+        /// Set up a new user, org and bucket Post an onboarding request to set up a new user, org and bucket.
+        /// </summary>
+        /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="onboardingRequest">Source to create</param>
+        /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <returns>Task of IRestResponse (OnboardingResponse)</returns>
+        public async System.Threading.Tasks.Task<IRestResponse> PostSetupUserAsyncWithIRestResponse (OnboardingRequest onboardingRequest, string zapTraceSpan = null)
+        {
+            // verify the required parameter 'onboardingRequest' is set
+            if (onboardingRequest == null)
+                throw new ApiException(400, "Missing required parameter 'onboardingRequest' when calling SetupService->PostSetupUser");
+
+            var localVarPath = "/api/v2/setup/user";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json"
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (onboardingRequest != null && onboardingRequest.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(onboardingRequest); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = onboardingRequest; // byte array
+            }
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("PostSetupUser", localVarResponse);
                 if (exception != null) throw exception;
             }
 

@@ -1,11 +1,9 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Threading.Tasks;
 using InfluxDB.Client.Api.Domain;
 using InfluxDB.Client.Core.Exceptions;
-using InfluxDB.Client.Domain;
 using NUnit.Framework;
-using Task = System.Threading.Tasks.Task;
 
 namespace InfluxDB.Client.Test
 {
@@ -23,6 +21,7 @@ namespace InfluxDB.Client.Test
         private UsersApi _usersApi;
 
         [Test]
+        [Ignore("TODO https://github.com/influxdata/influxdb/issues/18563")]
         public async Task CloneOrganization()
         {
             var source = await _organizationsApi.CreateOrganizationAsync(GenerateName("Constant Pro"));
@@ -73,7 +72,6 @@ namespace InfluxDB.Client.Test
             Assert.IsNotNull(links);
             Assert.IsNotNull(links.Buckets);
             Assert.IsNotNull(links.Dashboards);
-            Assert.IsNotNull(links.Logs);
             Assert.IsNotNull(links.Members);
             Assert.IsNotNull(links.Self);
             Assert.IsNotNull(links.Tasks);
@@ -117,7 +115,6 @@ namespace InfluxDB.Client.Test
             Assert.IsNotNull(links);
             Assert.IsNotNull(links.Buckets);
             Assert.IsNotNull(links.Dashboards);
-            Assert.IsNotNull(links.Logs);
             Assert.IsNotNull(links.Members);
             Assert.IsNotNull(links.Self);
             Assert.IsNotNull(links.Tasks);
@@ -135,98 +132,6 @@ namespace InfluxDB.Client.Test
         }
 
         [Test]
-        public async Task FindOrganizationLogsFindOptionsNotFound()
-        {
-            var entries = await _organizationsApi.FindOrganizationLogsAsync("020f755c3c082000", new FindOptions());
-
-            Assert.IsNotNull(entries);
-            Assert.AreEqual(0, entries.Logs.Count);
-        }
-
-        [Test]
-        public async Task FindOrganizationLogsNotFound()
-        {
-            var logs = await _organizationsApi.FindOrganizationLogsAsync("020f755c3c082000");
-
-            Assert.AreEqual(0, logs.Count);
-        }
-
-        [Test]
-        [Ignore("TODO https://github.com/influxdata/influxdb/issues/18048")]
-        public async Task FindOrganizationLogsPaging()
-        {
-            var organization = await _organizationsApi.CreateOrganizationAsync(GenerateName("Constant Pro"));
-
-            foreach (var i in Enumerable.Range(0, 19))
-            {
-                organization.Name = $"{i}_{organization.Name}";
-
-                await _organizationsApi.UpdateOrganizationAsync(organization);
-            }
-
-            var logs = await _organizationsApi.FindOrganizationLogsAsync(organization);
-
-            Assert.AreEqual(20, logs.Count);
-            Assert.AreEqual("Organization Created", logs[0].Description);
-            Assert.AreEqual("Organization Updated", logs[19].Description);
-
-            var findOptions = new FindOptions {Limit = 5, Offset = 0};
-
-            var entries = await _organizationsApi.FindOrganizationLogsAsync(organization, findOptions);
-            Assert.AreEqual(5, entries.Logs.Count);
-            Assert.AreEqual("Organization Created", entries.Logs[0].Description);
-            Assert.AreEqual("Organization Updated", entries.Logs[1].Description);
-            Assert.AreEqual("Organization Updated", entries.Logs[2].Description);
-            Assert.AreEqual("Organization Updated", entries.Logs[3].Description);
-            Assert.AreEqual("Organization Updated", entries.Logs[4].Description);
-
-            findOptions.Offset += 5;
-
-            entries = await _organizationsApi.FindOrganizationLogsAsync(organization, findOptions);
-            Assert.AreEqual(5, entries.Logs.Count);
-            Assert.AreEqual("Organization Updated", entries.Logs[0].Description);
-            Assert.AreEqual("Organization Updated", entries.Logs[1].Description);
-            Assert.AreEqual("Organization Updated", entries.Logs[2].Description);
-            Assert.AreEqual("Organization Updated", entries.Logs[3].Description);
-            Assert.AreEqual("Organization Updated", entries.Logs[4].Description);
-
-            findOptions.Offset += 5;
-
-            entries = await _organizationsApi.FindOrganizationLogsAsync(organization, findOptions);
-            Assert.AreEqual(5, entries.Logs.Count);
-            Assert.AreEqual("Organization Updated", entries.Logs[0].Description);
-            Assert.AreEqual("Organization Updated", entries.Logs[1].Description);
-            Assert.AreEqual("Organization Updated", entries.Logs[2].Description);
-            Assert.AreEqual("Organization Updated", entries.Logs[3].Description);
-            Assert.AreEqual("Organization Updated", entries.Logs[4].Description);
-
-            findOptions.Offset += 5;
-
-            entries = await _organizationsApi.FindOrganizationLogsAsync(organization, findOptions);
-            Assert.AreEqual(5, entries.Logs.Count);
-            Assert.AreEqual("Organization Updated", entries.Logs[0].Description);
-            Assert.AreEqual("Organization Updated", entries.Logs[1].Description);
-            Assert.AreEqual("Organization Updated", entries.Logs[2].Description);
-            Assert.AreEqual("Organization Updated", entries.Logs[3].Description);
-            Assert.AreEqual("Organization Updated", entries.Logs[4].Description);
-
-            findOptions.Offset += 5;
-
-            entries = await _organizationsApi.FindOrganizationLogsAsync(organization, findOptions);
-            Assert.AreEqual(0, entries.Logs.Count);
-
-            //
-            // Order
-            //
-            findOptions = new FindOptions {Descending = false};
-            entries = await _organizationsApi.FindOrganizationLogsAsync(organization, findOptions);
-            Assert.AreEqual(20, entries.Logs.Count);
-
-            Assert.AreEqual("Organization Updated", entries.Logs[19].Description);
-            Assert.AreEqual("Organization Created", entries.Logs[0].Description);
-        }
-
-        [Test]
         [Ignore("TODO https://github.com/influxdata/influxdb/issues/18048")]
         public async Task FindOrganizations()
         {
@@ -239,6 +144,7 @@ namespace InfluxDB.Client.Test
         }
 
         [Test]
+        [Ignore("TODO https://github.com/influxdata/influxdb/issues/18563")]
         public async Task Labels()
         {
             var labelClient = Client.GetLabelsApi();
@@ -373,7 +279,6 @@ namespace InfluxDB.Client.Test
             Assert.AreEqual(links.Self, "/api/v2/orgs/" + updatedOrganization.Id);
             Assert.AreEqual(links.Tasks, $"/api/v2/tasks?org={newName}");
             Assert.AreEqual(links.Members, "/api/v2/orgs/" + updatedOrganization.Id + "/members");
-            Assert.AreEqual(links.Logs, "/api/v2/orgs/" + updatedOrganization.Id + "/logs");
             Assert.AreEqual(links.Labels, "/api/v2/orgs/" + updatedOrganization.Id + "/labels");
             Assert.AreEqual(links.Secrets, "/api/v2/orgs/" + updatedOrganization.Id + "/secrets");
         }

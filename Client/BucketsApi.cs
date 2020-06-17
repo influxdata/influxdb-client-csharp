@@ -5,7 +5,6 @@ using InfluxDB.Client.Api.Domain;
 using InfluxDB.Client.Api.Service;
 using InfluxDB.Client.Core;
 using InfluxDB.Client.Domain;
-using Task = System.Threading.Tasks.Task;
 
 namespace InfluxDB.Client
 {
@@ -422,58 +421,6 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(ownerId, nameof(ownerId));
 
             await _service.DeleteBucketsIDOwnersIDAsync(ownerId, bucketId);
-        }
-
-        /// <summary>
-        /// Retrieve a bucket's logs
-        /// </summary>
-        /// <param name="bucket">for retrieve logs</param>
-        /// <returns>logs</returns>
-        public async Task<List<OperationLog>> FindBucketLogsAsync(Bucket bucket)
-        {
-            Arguments.CheckNotNull(bucket, nameof(bucket));
-
-            return await FindBucketLogsAsync(bucket.Id);
-        }
-
-        /// <summary>
-        /// Retrieve a bucket's logs
-        /// </summary>
-        /// <param name="bucket">for retrieve logs</param>
-        /// <param name="findOptions">the find options</param>
-        /// <returns>logs</returns>
-        public async Task<OperationLogs> FindBucketLogsAsync(Bucket bucket, FindOptions findOptions)
-        {
-            Arguments.CheckNotNull(bucket, nameof(bucket));
-            Arguments.CheckNotNull(findOptions, nameof(findOptions));
-
-            return await FindBucketLogsAsync(bucket.Id, findOptions);
-        }
-
-        /// <summary>
-        /// Retrieve a bucket's logs
-        /// </summary>
-        /// <param name="bucketId">the ID of a bucket</param>
-        /// <returns>logs</returns>
-        public async Task<List<OperationLog>> FindBucketLogsAsync(string bucketId)
-        {
-            Arguments.CheckNonEmptyString(bucketId, nameof(bucketId));
-
-            return await FindBucketLogsAsync(bucketId, new FindOptions()).ContinueWith(t=> t.Result.Logs);
-        }
-
-        /// <summary>
-        /// Retrieve a bucket's logs
-        /// </summary>
-        /// <param name="bucketId">the ID of a bucket</param>
-        /// <param name="findOptions">the find options</param>
-        /// <returns>logs</returns>
-        public async Task<OperationLogs> FindBucketLogsAsync(string bucketId, FindOptions findOptions)
-        {
-            Arguments.CheckNonEmptyString(bucketId, nameof(bucketId));
-            Arguments.CheckNotNull(findOptions, nameof(findOptions));
-
-            return await _service.GetBucketsIDLogsAsync(bucketId, null, findOptions.Offset, findOptions.Limit);
         }
 
         /// <summary>
