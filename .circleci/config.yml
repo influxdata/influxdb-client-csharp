@@ -64,7 +64,7 @@ jobs:
       - image: &influx-image quay.io/influxdb/<< parameters.influxdb-image >>
       - image: &influx-image quay.io/influxdb/<< parameters.influxdb-image >>
         name: influxdb_v2_onboarding
-      - image: influxdb:1.7-alpine
+      - image: influxdb:1.8-alpine
         environment:
           INFLUXDB_HTTP_FLUX_ENABLED: true
     environment:
@@ -85,9 +85,6 @@ jobs:
       image: "windows-server-2019-vs2019:stable"
       resource_class: windows.medium
       shell: bash
-    environment:
-      DOCKER_NET_DRIVER: nat
-      INFLUXDB_VERSION: 1.7
     steps:
       - checkout
 #      - run:
@@ -108,11 +105,11 @@ jobs:
 #            curl -OutFile release.zip https://github.com/linuxkit/lcow/releases/download/v4.14.35-v0.3.9/release.zip
 #            Expand-Archive -DestinationPath . .\release.zip
 #            rm release.zip
-      - run: choco install influxdb1 --version=1.7.9
+      - run: choco install influxdb1 --version=1.8.0
       - run: export INFLUXDB_HTTP_FLUX_ENABLED=true 
       - run:
           name: "Start InfluxDB"
-          command: /c/influxdata/influxdb-1.7.9-1/influxd.exe -config "Scripts/influxdb.conf"
+          command: /c/influxdata/influxdb-1.8.0-1/influxd.exe -config "Scripts/influxdb.conf"
           background: true
       - run: dotnet nuget locals --clear all
       - run: dotnet restore --no-cache --force
