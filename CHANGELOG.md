@@ -1,4 +1,4 @@
-## 1.9.0 [unreleased]
+## 1.9.0 [2020-06-19]
 
 ### Features
 1. [#96](https://github.com/influxdata/influxdb-client-csharp/pull/96): The PointData builder is now immutable
