@@ -6,8 +6,8 @@
         <Description>InfluxDB Client Core - exceptions, validations, REST client.</Description>
         <Authors>influxdb-client-csharp Contributors</Authors>
         <AssemblyName>InfluxDB.Client.Core</AssemblyName>
-        <VersionPrefix>1.9.0</VersionPrefix>
-        <VersionSuffix></VersionSuffix>
+        <VersionPrefix>1.10.0</VersionPrefix>
+        <VersionSuffix>dev</VersionSuffix>
 
         <PackageId>InfluxDB.Client.Core</PackageId>
         <PackageTags>influxdata;timeseries;flux;influxdb</PackageTags>
