@@ -59,8 +59,7 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(org, nameof(org));
             Arguments.CheckNotNull(precision, nameof(precision));
 
-            BatchWriteData data = new BatchWriteRecord(new BatchWriteOptions(bucket, org, precision), record);
-            await WriteData(org, bucket, data);
+            await WriteRecordsAsync(bucket, org, precision, new List<string> {record});
         }
 
         /// <summary>
@@ -87,8 +86,16 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(bucket, nameof(bucket));
             Arguments.CheckNonEmptyString(org, nameof(org));
             Arguments.CheckNotNull(precision, nameof(precision));
+            
+            List<BatchWriteData> list = new List<BatchWriteData>();
 
-            foreach (var record in records) await WriteRecordAsync(bucket, org, precision, record);
+            foreach (var record in records)
+            {
+                BatchWriteData data = new BatchWriteRecord(new BatchWriteOptions(bucket, org, precision), record);
+                list.Add(data);
+            }
+
+            await WriteData(org, bucket, precision, list);
         }
 
         /// <summary>
@@ -117,7 +124,7 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(org, nameof(org));
             Arguments.CheckNotNull(precision, nameof(precision));
 
-            foreach (var record in records) await WriteRecordAsync(bucket, org, precision, record);
+            await WriteRecordsAsync(bucket, org, precision, records.ToList());
         }
 
         /// <summary>
@@ -145,7 +152,7 @@ namespace InfluxDB.Client
             BatchWriteData data = new BatchWritePoint(new BatchWriteOptions(bucket, org, 
                             point.Precision), _options, point);
 
-            await WriteData(org, bucket, data);
+            await WriteData(org, bucket, point.Precision, new List<BatchWriteData>{data});
         }
 
         /// <summary>
@@ -223,11 +230,7 @@ namespace InfluxDB.Client
 
             if (measurement == null) return;
 
-            var options = new BatchWriteOptions(bucket, org, precision);
-
-            BatchWriteData data = new BatchWriteMeasurement<TM>(options, _options, measurement, _measurementMapper);
-
-            await WriteData(org, bucket, data);
+            await WriteMeasurementsAsync(bucket, org, precision, new List<TM>() {measurement});
         }
 
         /// <summary>
@@ -257,8 +260,18 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(bucket, nameof(bucket));
             Arguments.CheckNonEmptyString(org, nameof(org));
             Arguments.CheckNotNull(precision, nameof(precision));
+            
+            List<BatchWriteData> list = new List<BatchWriteData>();
 
-            foreach (var measurement in measurements) await WriteMeasurementAsync(bucket, org, precision, measurement);
+            foreach (var measurement in measurements)
+            {
+                var options = new BatchWriteOptions(bucket, org, precision);
+
+                BatchWriteData data = new BatchWriteMeasurement<TM>(options, _options, measurement, _measurementMapper);
+                list.Add(data);
+            }
+
+            await WriteData(org, bucket, precision, list);
         }
 
         /// <summary>
@@ -292,12 +305,32 @@ namespace InfluxDB.Client
             await WriteMeasurementsAsync(bucket, org, precision, measurements.ToList());
         }
 
-        private async Task WriteData(string org, string bucket, BatchWriteData data)
+        private async Task WriteData(string org, string bucket, WritePrecision precision, IEnumerable<BatchWriteData> data)
         {
-            var lineProtocol = data.ToLineProtocol();
-            var precision = data.Options.Precision;
+            var sb = new StringBuilder("");
+            
+            foreach (var item in data)
+            {
+                var lineProtocol = item.ToLineProtocol();
 
-            await _service.PostWriteAsync(org, bucket, Encoding.UTF8.GetBytes(lineProtocol), null , 
+                if (string.IsNullOrEmpty(lineProtocol))
+                {
+                    continue;
+                }
+                
+                sb.Append(lineProtocol);
+                sb.Append("\n");
+            }
+            
+            if (sb.Length == 0)
+            {
+                return;
+            }
+            
+            // remove last \n
+            sb.Remove(sb.Length - 1, 1);
+
+            await _service.PostWriteAsync(org, bucket, Encoding.UTF8.GetBytes(sb.ToString()), null , 
                             "identity", "text/plain; charset=utf-8", null, "application/json", null, precision);
         }
     }
