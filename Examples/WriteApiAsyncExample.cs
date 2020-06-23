@@ -50,6 +50,21 @@ namespace Examples
             var temperature = new Temperature {Location = "south", Value = 62D, Time = DateTime.UtcNow};
 
             await writeApiAsync.WriteMeasurementAsync("my-bucket", "my-org", WritePrecision.Ns, temperature);
+            
+            //
+            // Check written data
+            //
+            var tables = await influxDbClient.GetQueryApi()
+                            .QueryAsync("from(bucket:\"my-bucket\") |> range(start: 0)", "my-org");
+            
+            tables.ForEach(table =>
+            {
+                var fluxRecords = table.Records;
+                fluxRecords.ForEach(record =>
+                {
+                    Console.WriteLine($"{record.GetTime()}: {record.GetValue()}");
+                });
+            });
 
             influxDbClient.Dispose();
         }

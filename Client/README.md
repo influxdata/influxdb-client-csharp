@@ -525,10 +525,10 @@ namespace Examples
             [Column(IsTimestamp = true)] public DateTime Time;
         }
         
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             var influxDbClient = InfluxDBClientFactory.Create("http://localhost:9999", 
-                            "my-user", "my-password".ToCharArray())
+                            "my-user", "my-password".ToCharArray());
 
             //
             // Write Data
@@ -560,73 +560,24 @@ namespace Examples
 
             await writeApiAsync.WriteMeasurementAsync("my-bucket", "my-org", WritePrecision.Ns, temperature);
 
+            //
+            // Check written data
+            //
+            var tables = await influxDbClient.GetQueryApi()
+                            .QueryAsync("from(bucket:\"my-bucket\") |> range(start: 0)", "my-org");
+            
+            tables.ForEach(table =>
+            {
+                var fluxRecords = table.Records;
+                fluxRecords.ForEach(record =>
+                {
+                    Console.WriteLine($"{record.GetTime()}: {record.GetValue()}");
+                });
+            });
+            
             influxDbClient.Dispose();
         }
-
-        public static async Task Run()
-        {
-            var client = InfluxDBClientFactory.Create("http://localhost:9999",
-                            "my-user", "my-password".ToCharArray());
-
-            await Example(client);
-        }
     }
-using InfluxDB.Client;
-using InfluxDB.Client.Api.Domain;
-
-namespace Examples
-{
-    public static class WriteApiAsyncExample
-    {
-        private static readonly char[] Token = "".ToCharArray();
-
-        public static void Main(string[] args)
-        {
-            var influxDBClient = InfluxDBClientFactory.Create("http://localhost:9999", Token);
-
-            //
-            // Write Data
-            //
-            using (var writeApiAsync = influxDBClient.GetWriteApiAsync())
-            {
-                //
-                //
-                // Write by LineProtocol
-                //
-                writeApiAsync.WriteRecordAsync("bucket_name", "org_id", WritePrecision.Ns, "temperature,location=north value=60.0");
-            
-                //
-                //
-                // Write by Data Point
-                //               
-                var point = PointData.Measurement("temperature")
-                    .Tag("location", "west")
-                    .Field("value", 55D)
-                    .Timestamp(DateTime.UtcNow.AddSeconds(-10), WritePrecision.Ns);
-                
-                writeApiAsync.WritePointAsync("bucket_name", "org_id", point);
-                
-                //
-                // Write by POCO
-                //
-                var temperature = new Temperature {Location = "south", Value = 62D, Time = DateTime.UtcNow};
-                
-                writeApiAsync.WriteMeasurementAsync("bucket_name", "org_id", WritePrecision.Ns, temperature);
-            }
-            
-            influxDBClient.Dispose();
-        }
-    }
-    
-    [Measurement("temperature")]
-            private class Temperature
-            {
-                [Column("location", IsTag = true)] public string Location { get; set; }
-    
-                [Column("value")] public double Value { get; set; }
-    
-                [Column(IsTimestamp = true)] public DateTime Time;
-            }
 }
 ```
 
