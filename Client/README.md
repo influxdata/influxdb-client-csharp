@@ -301,7 +301,7 @@ namespace Examples
 ## Writes
 
 For writing data we use [WriteApi](https://github.com/influxdata/influxdb-client-csharp/blob/master/Client/WriteApi.cs#L1) or 
-[WriteApiAsync](https://github.com/influxdata/influxdb-client-csharp/blob/feat/write-api-async/Client/WriteApiAsync.cs) which is simplified version of WriteApi without batching support.
+[WriteApiAsync](https://github.com/influxdata/influxdb-client-csharp/blob/master/Client/WriteApiAsync.cs) which is simplified version of WriteApi without batching support.
 
 [WriteApi](https://github.com/influxdata/influxdb-client-csharp/blob/master/Client/WriteApi.cs#L1) supports:
 
