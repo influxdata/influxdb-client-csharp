@@ -22,6 +22,18 @@ namespace InfluxDB.Client.Test
         }
         
         [Test]
+        public void TagEscapingKeyAndValue() {
+
+            var point = PointData.Measurement("h\n2\ro\t_data")
+                .Tag("new\nline", "new\nline")
+                .Tag("carriage\rreturn", "carriage\rreturn")
+                .Tag("t\tab", "t\tab")
+                .Field("level", 2);
+
+            Assert.AreEqual("h\\n2\\ro\\t_data,carriage\\rreturn=carriage\\rreturn,new\\nline=new\\nline,t\\tab=t\\tab level=2i", point.ToLineProtocol());
+        }
+        
+        [Test]
         public void Immutability()
         {
             var point = PointData.Measurement("h2 o")

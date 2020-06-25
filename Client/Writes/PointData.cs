@@ -475,6 +475,15 @@ namespace InfluxDB.Client.Writes
             {
                 switch (c)
                 {
+                    case '\n':
+                        sb.Append("\\n");
+                        continue;
+                    case '\r':
+                        sb.Append("\\r");
+                        continue;
+                    case '\t':
+                        sb.Append("\\t");
+                        continue;
                     case ' ':
                     case ',':
                     case '=':
