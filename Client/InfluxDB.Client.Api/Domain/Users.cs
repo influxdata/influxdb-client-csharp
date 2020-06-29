@@ -34,7 +34,7 @@ namespace InfluxDB.Client.Api.Domain
         /// </summary>
         /// <param name="links">links.</param>
         /// <param name="users">users.</param>
-        public Users(InvitesLinks links = default(InvitesLinks), List<User> users = default(List<User>))
+        public Users(UsersLinks links = default(UsersLinks), List<User> users = default(List<User>))
         {
             this.Links = links;
             this._Users = users;
@@ -44,7 +44,7 @@ namespace InfluxDB.Client.Api.Domain
         /// Gets or Sets Links
         /// </summary>
         [DataMember(Name="links", EmitDefaultValue=false)]
-        public InvitesLinks Links { get; set; }
+        public UsersLinks Links { get; set; }
 
         /// <summary>
         /// Gets or Sets _Users

@@ -35,6 +35,19 @@ namespace InfluxDB.Client.Writes
             Precision = WritePrecision.Ns;
         }
 
+        private PointData(string measurementName,
+                            WritePrecision precision,
+                            BigInteger? time,
+                            ImmutableSortedDictionary<string, string> tags,
+                            ImmutableSortedDictionary<string, object> fields)
+        {
+            _measurementName = measurementName;
+            Precision = precision;
+            _time = time;
+            _tags = tags;
+            _fields = fields;
+        }
+
         /// <summary>
         /// Create a new Point withe specified a measurement name.
         /// </summary>
@@ -66,17 +79,26 @@ namespace InfluxDB.Client.Writes
         /// <returns>this</returns>
         public PointData Tag(string name, string value)
         {
-            if (string.IsNullOrEmpty(value))
-            {
-                Trace.TraceWarning($"Empty tags don't supported, tag [{name}], measurement [{_measurementName}]");
-                return this;
-            }
+            var isEmptyValue = string.IsNullOrEmpty(value);
             var tags = _tags;
+            if (isEmptyValue)
+            {
+                if (tags.ContainsKey(name))
+                {
+                    Trace.TraceWarning($"Empty tags will cause deletion of, tag [{name}], measurement [{_measurementName}]");
+                }
+                else
+                {
+                    Trace.TraceWarning($"Empty tags has no effect, tag [{name}], measurement [{_measurementName}]");
+                    return this;
+                }
+            }
             if (tags.ContainsKey(name))
             {
                 tags = tags.Remove(name);
             }
-            tags = tags.Add(name, value);
+            if (!isEmptyValue)
+                tags = tags.Add(name, value);
 
             return new PointData(_measurementName,
                                 Precision,
@@ -327,7 +349,7 @@ namespace InfluxDB.Client.Writes
         /// <param name="pointSettings">The point settings.</param>
         private void AppendTags(StringBuilder writer, PointSettings pointSettings)
         {
-            IReadOnlyDictionary<string, string> entries = ImmutableDictionary<string, string>.Empty;
+            IReadOnlyDictionary<string, string> entries;
 
             if (pointSettings == null)
             {
@@ -347,10 +369,10 @@ namespace InfluxDB.Client.Writes
                     // override don't consider as best practice
                     // therefore it a trade-off between being less efficient 
                     // on the default behavior or on the override scenario
-                    ImmutableSortedDictionary<string, string>.Builder builder = _tags.ToBuilder();
+                    var builder = _tags.ToBuilder();
                     foreach (var item in defaultTags)
                     {
-                        string name = item.Key;
+                        var name = item.Key;
                         if (!builder.ContainsKey(name)) // existing tags overrides
                             builder.Add(name, item.Value);
                     }
@@ -536,13 +558,24 @@ namespace InfluxDB.Client.Writes
             if (other == null)
                 return false;
             var otherTags = other._tags;
-            bool result = _tags.Count == otherTags.Count &&
-                           _tags.All(pair => otherTags.ContainsKey(pair.Key) &&
-                                             otherTags[pair.Key] == pair.Value);
+
+            var result = _tags.Count == otherTags.Count &&
+                           _tags.All(pair => 
+                                {
+                                    var key = pair.Key;
+                                    var value = pair.Value;
+                                    return otherTags.ContainsKey(key) &&
+                                        otherTags[key] == value;
+                                });
             var otherFields = other._fields;
             result = result && _fields.Count == otherFields.Count &&
-                           _fields.All(pair => otherFields.ContainsKey(pair.Key) &&
-                                             object.Equals(otherFields[pair.Key], pair.Value));
+                           _fields.All(pair =>
+                                {
+                                    var key = pair.Key;
+                                    var value = pair.Value;
+                                    return otherFields.ContainsKey(key) &&
+                                                object.Equals(otherFields[key], value);
+                                });
 
             result = result &&
                    _measurementName == other._measurementName &&
@@ -560,7 +593,7 @@ namespace InfluxDB.Client.Writes
         /// </returns>
         public override int GetHashCode()
         {
-            int hashCode = 318335609;
+            var hashCode = 318335609;
             hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(_measurementName);
             hashCode = hashCode * -1521134295 + Precision.GetHashCode();
             hashCode = hashCode * -1521134295 + _time.GetHashCode();

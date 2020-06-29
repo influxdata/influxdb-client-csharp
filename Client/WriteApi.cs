@@ -204,12 +204,12 @@ namespace InfluxDB.Client
                     exception =>
                     {
                         _disposed = true;
-                        Console.WriteLine($"The unhanded exception occurs: {exception}");
+                        Trace.WriteLine($"The unhandled exception occurs: {exception}");
                     },
                     () =>
                     {
                         _disposed = true;
-                        Console.WriteLine("The WriteApi was disposed.");
+                        Trace.WriteLine("The WriteApi was disposed.");
                     });
         }
 

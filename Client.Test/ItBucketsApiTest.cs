@@ -90,7 +90,6 @@ namespace InfluxDB.Client.Test
             Assert.IsNotNull(bucket.Links);
             Assert.AreEqual(bucket.Links.Org, $"/api/v2/orgs/{_organization.Id}");
             Assert.AreEqual(bucket.Links.Self, $"/api/v2/buckets/{bucket.Id}");
-            Assert.AreEqual(bucket.Links.Logs, $"/api/v2/buckets/{bucket.Id}/logs");
             Assert.AreEqual(bucket.Links.Labels, $"/api/v2/buckets/{bucket.Id}/labels");
         }
 
@@ -169,94 +168,6 @@ namespace InfluxDB.Client.Test
             var bucket = await _bucketsApi.FindBucketByNameAsync("my-bucket-not-found");
 
             Assert.IsNull(bucket);
-        }
-
-        [Test]
-        public async Task FindBucketLogsFindOptionsNotFound()
-        {
-            var entries = await _bucketsApi.FindBucketLogsAsync("020f755c3c082000", new FindOptions());
-
-            Assert.IsNotNull(entries);
-            Assert.AreEqual(0, entries.Logs.Count);
-        }
-
-        [Test]
-        public async Task FindBucketLogsNotFound()
-        {
-            var logs = await _bucketsApi.FindBucketLogsAsync("020f755c3c082000");
-
-            Assert.AreEqual(0, logs.Count);
-        }
-
-        [Test]
-        [Ignore("TODO https://github.com/influxdata/influxdb/issues/18048")]
-        public async Task FindBucketLogsPaging()
-        {
-            var bucket = await _bucketsApi.CreateBucketAsync(GenerateName("robot sensor"), RetentionRule(), _organization);
-
-            foreach (var i in Enumerable.Range(0, 19))
-            {
-                bucket.Name = $"{i}_{bucket.Name}";
-
-                await _bucketsApi.UpdateBucketAsync(bucket);
-            }
-
-            var logs = await _bucketsApi.FindBucketLogsAsync(bucket);
-
-            Assert.AreEqual(20, logs.Count);
-            Assert.AreEqual("Bucket Created", logs[0].Description);
-            Assert.AreEqual("Bucket Updated", logs[19].Description);
-
-            var findOptions = new FindOptions {Limit = 5, Offset = 0};
-
-            var entries = await _bucketsApi.FindBucketLogsAsync(bucket, findOptions);
-            Assert.AreEqual(5, entries.Logs.Count);
-            Assert.AreEqual("Bucket Created", entries.Logs[0].Description);
-            Assert.AreEqual("Bucket Updated", entries.Logs[1].Description);
-            Assert.AreEqual("Bucket Updated", entries.Logs[2].Description);
-            Assert.AreEqual("Bucket Updated", entries.Logs[3].Description);
-            Assert.AreEqual("Bucket Updated", entries.Logs[4].Description);
-
-            findOptions.Offset += 5;
-            entries = await _bucketsApi.FindBucketLogsAsync(bucket, findOptions);
-            Assert.AreEqual(5, entries.Logs.Count);
-            Assert.AreEqual("Bucket Updated", entries.Logs[0].Description);
-            Assert.AreEqual("Bucket Updated", entries.Logs[1].Description);
-            Assert.AreEqual("Bucket Updated", entries.Logs[2].Description);
-            Assert.AreEqual("Bucket Updated", entries.Logs[3].Description);
-            Assert.AreEqual("Bucket Updated", entries.Logs[4].Description);
-
-            findOptions.Offset += 5;
-            entries = await _bucketsApi.FindBucketLogsAsync(bucket, findOptions);
-            Assert.AreEqual(5, entries.Logs.Count);
-            Assert.AreEqual("Bucket Updated", entries.Logs[0].Description);
-            Assert.AreEqual("Bucket Updated", entries.Logs[1].Description);
-            Assert.AreEqual("Bucket Updated", entries.Logs[2].Description);
-            Assert.AreEqual("Bucket Updated", entries.Logs[3].Description);
-            Assert.AreEqual("Bucket Updated", entries.Logs[4].Description);
-
-            findOptions.Offset += 5;
-            entries = await _bucketsApi.FindBucketLogsAsync(bucket, findOptions);
-            Assert.AreEqual(5, entries.Logs.Count);
-            Assert.AreEqual("Bucket Updated", entries.Logs[0].Description);
-            Assert.AreEqual("Bucket Updated", entries.Logs[1].Description);
-            Assert.AreEqual("Bucket Updated", entries.Logs[2].Description);
-            Assert.AreEqual("Bucket Updated", entries.Logs[3].Description);
-            Assert.AreEqual("Bucket Updated", entries.Logs[4].Description);
-
-            findOptions.Offset += 5;
-            entries = await _bucketsApi.FindBucketLogsAsync(bucket, findOptions);
-            Assert.AreEqual(0, entries.Logs.Count);
-
-            //
-            // Order
-            //
-            findOptions = new FindOptions {Descending = false};
-            entries = await _bucketsApi.FindBucketLogsAsync(bucket, findOptions);
-            Assert.AreEqual(20, entries.Logs.Count);
-
-            Assert.AreEqual("Bucket Updated", entries.Logs[19].Description);
-            Assert.AreEqual("Bucket Created", entries.Logs[0].Description);
         }
 
         [Test]

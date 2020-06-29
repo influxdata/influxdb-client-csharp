@@ -69,13 +69,6 @@ namespace InfluxDB.Client.Api.Domain
         /// URI of resource.
         /// </summary>
         /// <value>URI of resource.</value>
-        [DataMember(Name="logs", EmitDefaultValue=false)]
-        public string Logs { get; private set; }
-
-        /// <summary>
-        /// URI of resource.
-        /// </summary>
-        /// <value>URI of resource.</value>
         [DataMember(Name="labels", EmitDefaultValue=false)]
         public string Labels { get; private set; }
 
@@ -98,7 +91,6 @@ namespace InfluxDB.Client.Api.Domain
             sb.Append("  Cells: ").Append(Cells).Append("\n");
             sb.Append("  Members: ").Append(Members).Append("\n");
             sb.Append("  Owners: ").Append(Owners).Append("\n");
-            sb.Append("  Logs: ").Append(Logs).Append("\n");
             sb.Append("  Labels: ").Append(Labels).Append("\n");
             sb.Append("  Org: ").Append(Org).Append("\n");
             sb.Append("}\n");
@@ -156,11 +148,6 @@ namespace InfluxDB.Client.Api.Domain
                     this.Owners.Equals(input.Owners))
                 ) && 
                 (
-                    this.Logs == input.Logs ||
-                    (this.Logs != null &&
-                    this.Logs.Equals(input.Logs))
-                ) && 
-                (
                     this.Labels == input.Labels ||
                     (this.Labels != null &&
                     this.Labels.Equals(input.Labels))
@@ -189,8 +176,6 @@ namespace InfluxDB.Client.Api.Domain
                     hashCode = hashCode * 59 + this.Members.GetHashCode();
                 if (this.Owners != null)
                     hashCode = hashCode * 59 + this.Owners.GetHashCode();
-                if (this.Logs != null)
-                    hashCode = hashCode * 59 + this.Logs.GetHashCode();
                 if (this.Labels != null)
                     hashCode = hashCode * 59 + this.Labels.GetHashCode();
                 if (this.Org != null)

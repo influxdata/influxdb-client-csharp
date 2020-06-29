@@ -104,6 +104,20 @@ namespace InfluxDB.Client
         {
             return GetWriteApi(WriteOptions.CreateNew().Build());
         }
+        
+        /// <summary>
+        /// Get the Write async client.
+        /// </summary>
+        /// <returns>the new client instance for the Write API Async without batching</returns>
+        public WriteApiAsync GetWriteApiAsync()
+        {
+            var service = new WriteService((Configuration) _apiClient.Configuration)
+            {
+                ExceptionFactory = _exceptionFactory
+            };
+            
+            return new WriteApiAsync(_options, service, this);
+        }
 
         /// <summary>
         /// Get the Write client.

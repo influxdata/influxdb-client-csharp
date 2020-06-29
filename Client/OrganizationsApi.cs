@@ -4,8 +4,6 @@ using System.Threading.Tasks;
 using InfluxDB.Client.Api.Domain;
 using InfluxDB.Client.Api.Service;
 using InfluxDB.Client.Core;
-using InfluxDB.Client.Domain;
-using Task = System.Threading.Tasks.Task;
 
 namespace InfluxDB.Client
 {
@@ -409,58 +407,6 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(ownerId, nameof(ownerId));
 
             await _service.DeleteOrgsIDOwnersIDAsync(ownerId, orgId);
-        }
-
-        /// <summary>
-        /// Retrieve an organization's logs
-        /// </summary>
-        /// <param name="organization">for retrieve logs</param>
-        /// <returns>logs</returns>
-        public async Task<List<OperationLog>> FindOrganizationLogsAsync(Organization organization)
-        {
-            Arguments.CheckNotNull(organization, nameof(organization));
-
-            return await FindOrganizationLogsAsync(organization.Id);
-        }
-
-        /// <summary>
-        /// Retrieve an organization's logs
-        /// </summary>
-        /// <param name="organization">for retrieve logs</param>
-        /// <param name="findOptions">the find options</param>
-        /// <returns>logs</returns>
-        public async Task<OperationLogs> FindOrganizationLogsAsync(Organization organization, FindOptions findOptions)
-        {
-            Arguments.CheckNotNull(organization, nameof(organization));
-            Arguments.CheckNotNull(findOptions, nameof(findOptions));
-
-            return await FindOrganizationLogsAsync(organization.Id, findOptions);
-        }
-
-        /// <summary>
-        /// Retrieve an organization's logs
-        /// </summary>
-        /// <param name="orgId">the ID of an organization</param>
-        /// <returns>logs</returns>
-        public async Task<List<OperationLog>> FindOrganizationLogsAsync(string orgId)
-        {
-            Arguments.CheckNonEmptyString(orgId, nameof(orgId));
-
-            return await FindOrganizationLogsAsync(orgId, new FindOptions()).ContinueWith(t => t.Result.Logs);
-        }
-
-        /// <summary>
-        /// Retrieve an organization's logs
-        /// </summary>
-        /// <param name="orgId">the ID of an organization</param>
-        /// <param name="findOptions">the find options</param>
-        /// <returns>logs</returns>
-        public async Task<OperationLogs> FindOrganizationLogsAsync(string orgId, FindOptions findOptions)
-        {
-            Arguments.CheckNonEmptyString(orgId, nameof(orgId));
-            Arguments.CheckNotNull(findOptions, nameof(findOptions));
-
-            return await _service.GetOrgsIDLogsAsync(orgId, null, findOptions.Offset, findOptions.Limit);
         }
 
         /// <summary>

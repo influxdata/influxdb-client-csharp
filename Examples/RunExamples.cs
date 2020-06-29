@@ -35,6 +35,9 @@ namespace Examples
                     case "PlatformExample":
                         PlatformExample.Run().Wait();
                         break;
+                    case "WriteApiAsyncExample":
+                        WriteApiAsyncExample.Run().Wait();
+                        break;
                 }
             }
         }

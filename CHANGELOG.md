@@ -1,11 +1,23 @@
-## 1.9.0 [unreleased]
+## 1.10.0 [unreleased]
+
+### Features
+1. [#23](https://github.com/influxdata/influxdb-client-csharp/pull/102): Added WriteApiAsync for asynchronous write without batching
+
+## 1.9.0 [2020-06-19]
+
+### Features
+1. [#96](https://github.com/influxdata/influxdb-client-csharp/pull/96): The PointData builder is now immutable
 
 ### API
+1. [#94](https://github.com/influxdata/influxdb-client-csharp/pull/94): Update swagger to latest version
+1. [#103](https://github.com/influxdata/influxdb-client-csharp/pull/103): Removed log system from Bucket, Dashboard, Organization, Task and Users API - [influxdb#18459](https://github.com/influxdata/influxdb/pull/18459)
 
-1. [#94](https://github.com/influxdata/influxdb-client-csharppull/94): Update swagger to latest version
+### CI
+1. [#104](https://github.com/influxdata/influxdb-client-csharp/pull/104): Upgraded InfluxDB 1.7 to 1.8
 
 ### Bug Fixes
 1. [#100](https://github.com/influxdata/influxdb-client-csharp/pull/100): Thread-safety disposing of clients 
+1. [#101](https://github.com/influxdata/influxdb-client-csharp/pull/101/): Use Trace output when disposing WriteApi 
 
 ## 1.8.0 [2020-05-15]
 
