@@ -298,7 +298,7 @@ namespace InfluxDB.Client.Writes
         {
             var sb = new StringBuilder();
 
-            EscapeKey(sb, _measurementName);
+            EscapeKey(sb, _measurementName, false);
             AppendTags(sb, pointSettings);
             var appendedFields = AppendFields(sb);
             if (!appendedFields)
@@ -469,16 +469,31 @@ namespace InfluxDB.Client.Writes
         /// </summary>
         /// <param name="sb">The sb.</param>
         /// <param name="key">The key.</param>
-        private void EscapeKey(StringBuilder sb, string key)
+        /// <param name="escapeEqual">Configure to escaping equal.</param>
+        private void EscapeKey(StringBuilder sb, string key, bool escapeEqual = true)
         {
             foreach (var c in key)
             {
                 switch (c)
                 {
+                    case '\n':
+                        sb.Append("\\n");
+                        continue;
+                    case '\r':
+                        sb.Append("\\r");
+                        continue;
+                    case '\t':
+                        sb.Append("\\t");
+                        continue;
                     case ' ':
                     case ',':
-                    case '=':
                         sb.Append("\\");
+                        break;
+                    case '=':
+                        if (escapeEqual)
+                        {
+                            sb.Append("\\");
+                        }
                         break;
                 }
 

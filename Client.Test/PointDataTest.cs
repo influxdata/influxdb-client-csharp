@@ -22,6 +22,28 @@ namespace InfluxDB.Client.Test
         }
         
         [Test]
+        public void TagEscapingKeyAndValue() {
+
+            var point = PointData.Measurement("h\n2\ro\t_data")
+                .Tag("new\nline", "new\nline")
+                .Tag("carriage\rreturn", "carriage\rreturn")
+                .Tag("t\tab", "t\tab")
+                .Field("level", 2);
+
+            Assert.AreEqual("h\\n2\\ro\\t_data,carriage\\rreturn=carriage\\rreturn,new\\nline=new\\nline,t\\tab=t\\tab level=2i", point.ToLineProtocol());
+        }
+        
+        [Test]
+        public void EqualSignEscaping() {
+
+            var point = PointData.Measurement("h=2o")
+                .Tag("l=ocation", "e=urope")
+                .Field("l=evel", 2);
+
+            Assert.AreEqual("h=2o,l\\=ocation=e\\=urope l\\=evel=2i", point.ToLineProtocol());
+        }
+        
+        [Test]
         public void Immutability()
         {
             var point = PointData.Measurement("h2 o")
@@ -60,7 +82,7 @@ namespace InfluxDB.Client.Test
                 .Tag("", "warn")
                 .Field("level", 2);
 
-            Assert.AreEqual("h2\\=o,location=europe level=2i", point.ToLineProtocol());
+            Assert.AreEqual("h2=o,location=europe level=2i", point.ToLineProtocol());
 
             point = PointData.Measurement("h2,o")
                 .Tag("location", "europe")

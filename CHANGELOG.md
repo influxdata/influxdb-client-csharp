@@ -1,7 +1,10 @@
 ## 1.10.0 [unreleased]
 
 ### Features
-1. [#23](https://github.com/influxdata/influxdb-client-csharp/pull/102): Added WriteApiAsync for asynchronous write without batching
+1. [#102](https://github.com/influxdata/influxdb-client-csharp/pull/102): Added WriteApiAsync for asynchronous write without batching
+
+### Bug Fixes
+1. [#106](https://github.com/influxdata/influxdb-client-csharp/pull/106): Fixed serialization of `\n`, `\r` and `\t` to Line Protocol, `=` is valid sign for measurement name  
 
 ## 1.9.0 [2020-06-19]
 
