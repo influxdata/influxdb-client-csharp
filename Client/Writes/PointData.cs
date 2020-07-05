@@ -35,19 +35,6 @@ namespace InfluxDB.Client.Writes
             Precision = WritePrecision.Ns;
         }
 
-        private PointData(string measurementName,
-                            WritePrecision precision,
-                            BigInteger? time,
-                            ImmutableSortedDictionary<string, string> tags,
-                            ImmutableSortedDictionary<string, object> fields)
-        {
-            _measurementName = measurementName;
-            Precision = precision;
-            _time = time;
-            _tags = tags;
-            _fields = fields;
-        }
-
         /// <summary>
         /// Create a new Point withe specified a measurement name.
         /// </summary>
