@@ -101,8 +101,7 @@ namespace InfluxDB.Client.Test
 
             _queryApi = Client.GetQueryApi();
             var tables = await _queryApi.QueryAsync(
-                "from(bucket:\"" + _bucket.Name +
-                "\") |> range(start: 1970-01-01T00:00:00.000000001Z) |> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")",
+                $"from(bucket:\"{_bucket.Name}\") |> range(start: 1970-01-01T00:00:00.000000001Z) |> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")",
                 _organization.Id);
 
             Assert.AreEqual(1, tables.Count);
@@ -147,8 +146,7 @@ namespace InfluxDB.Client.Test
 
             _queryApi = Client.GetQueryApi();
             var tables = await _queryApi.QueryAsync(
-                "from(bucket:\"" + _bucket.Name +
-                "\") |> range(start: 1970-01-01T00:00:00.000000001Z) |> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")",
+                $"from(bucket:\"{_bucket.Name}\") |> range(start: 1970-01-01T00:00:00.000000001Z) |> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")",
                 _organization.Id);
 
             Assert.AreEqual(1, tables.Count);
@@ -191,8 +189,7 @@ namespace InfluxDB.Client.Test
 
             _queryApi = Client.GetQueryApi();
             var tables = await _queryApi.QueryAsync(
-                "from(bucket:\"" + _bucket.Name +
-                "\") |> range(start: 1970-01-01T00:00:00.000000001Z) |> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")",
+                $"from(bucket:\"{_bucket.Name}\") |> range(start: 1970-01-01T00:00:00.000000001Z) |> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")",
                 _organization.Id);
 
             Assert.AreEqual(1, tables.Count);
@@ -225,7 +222,7 @@ namespace InfluxDB.Client.Test
             listener.WaitToSuccess();
 
             var query = await _queryApi.QueryAsync(
-                "from(bucket:\"" + bucketName + "\") |> range(start: 1970-01-01T00:00:00.000000001Z)",
+                $"from(bucket:\"{bucketName}\") |> range(start: 1970-01-01T00:00:00.000000001Z)",
                 _organization.Id);
 
             Assert.AreEqual(1, query.Count);
@@ -259,7 +256,7 @@ namespace InfluxDB.Client.Test
             listener.WaitToSuccess();
 
             var query = await _queryApi.QueryAsync(
-                "from(bucket:\"" + bucketName + "\") |> range(start: 1970-01-01T00:00:00.000000001Z) |> last()",
+                $"from(bucket:\"{bucketName}\") |> range(start: 1970-01-01T00:00:00.000000001Z)",
                 _organization.Id);
 
             Assert.AreEqual(1, query.Count);
@@ -299,7 +296,7 @@ namespace InfluxDB.Client.Test
             _writeApi.WriteRecord(bucketName, _organization.Id, WritePrecision.Ns, record5);
 
             var query = await _queryApi.QueryAsync(
-                "from(bucket:\"" + bucketName + "\") |> range(start: 1970-01-01T00:00:00.000000001Z)",
+                $"from(bucket:\"{bucketName}\") |> range(start: 1970-01-01T00:00:00.000000001Z)",
                 _organization.Id);
             Assert.AreEqual(0, query.Count);
 
@@ -308,7 +305,7 @@ namespace InfluxDB.Client.Test
             listener.Get<WriteSuccessEvent>();
 
             query = await _queryApi.QueryAsync(
-                "from(bucket:\"" + bucketName + "\") |> range(start: 1970-01-01T00:00:00.000000001Z)",
+                $"from(bucket:\"{bucketName}\") |> range(start: 1970-01-01T00:00:00.000000001Z)",
                 _organization.Id);
             Assert.AreEqual(1, query.Count);
 
@@ -351,7 +348,7 @@ namespace InfluxDB.Client.Test
             Assert.AreEqual(record5, eventListener.Get<WriteSuccessEvent>().LineProtocol);
 
             var query = await _queryApi.QueryAsync(
-                "from(bucket:\"" + bucketName + "\") |> range(start: 1970-01-01T00:00:00.000000000Z)",
+                $"from(bucket:\"{bucketName}\") |> range(start: 1970-01-01T00:00:00.000000000Z)",
                 _organization.Id);
             Assert.AreEqual(1, query.Count);
 
@@ -383,14 +380,14 @@ namespace InfluxDB.Client.Test
             _writeApi.WriteRecord(bucketName, _organization.Id, WritePrecision.Ns, record5);
 
             var query = await _queryApi.QueryAsync(
-                "from(bucket:\"" + bucketName + "\") |> range(start: 1970-01-01T00:00:00.000000001Z)",
+                $"from(bucket:\"{bucketName}\") |> range(start: 1970-01-01T00:00:00.000000001Z)",
                 _organization.Id);
             Assert.AreEqual(0, query.Count);
 
             listener.Get<WriteSuccessEvent>();
 
             query = await _queryApi.QueryAsync(
-                "from(bucket:\"" + bucketName + "\") |> range(start: 1970-01-01T00:00:00.000000001Z)",
+                $"from(bucket:\"{bucketName}\") |> range(start: 1970-01-01T00:00:00.000000001Z)",
                 _organization.Id);
             Assert.AreEqual(1, query.Count);
 
@@ -412,14 +409,14 @@ namespace InfluxDB.Client.Test
             _writeApi.WriteRecord(bucketName, _organization.Id, WritePrecision.Ns, record);
 
             var query = await _queryApi.QueryAsync(
-                "from(bucket:\"" + bucketName + "\") |> range(start: 1970-01-01T00:00:00.000000001Z) |> last()",
+                $"from(bucket:\"{bucketName}\") |> range(start: 1970-01-01T00:00:00.000000001Z)",
                 _organization.Id);
             Assert.AreEqual(0, query.Count);
 
             Thread.Sleep(5_000);
 
             query = await _queryApi.QueryAsync(
-                "from(bucket:\"" + bucketName + "\") |> range(start: 1970-01-01T00:00:00.000000001Z) |> last()",
+                $"from(bucket:\"{bucketName}\") |> range(start: 1970-01-01T00:00:00.000000001Z)",
                 _organization.Id);
 
             Assert.AreEqual(1, query.Count);
@@ -481,7 +478,7 @@ namespace InfluxDB.Client.Test
             _writeApi.Dispose();
 
             var query = await _queryApi.QueryAsync(
-                "from(bucket:\"" + bucketName + "\") |> range(start: 1970-01-01T00:00:00.000000001Z) |> last()",
+                $"from(bucket:\"{bucketName}\") |> range(start: 1970-01-01T00:00:00.000000001Z) |> last()",
                 _organization.Id);
             Assert.AreEqual(0, query.Count);
         }
@@ -561,7 +558,7 @@ namespace InfluxDB.Client.Test
             listener.Get<WriteSuccessEvent>();
 
             var query = await _queryApi.QueryAsync(
-                "from(bucket:\"" + bucketName + "\") |> range(start: 1970-01-01T00:00:00.000000001Z) |> last()",
+                $"from(bucket:\"{bucketName}\") |> range(start: 1970-01-01T00:00:00.000000001Z)",
                 _organization.Id);
 
             Assert.AreEqual(1, query.Count);
@@ -587,7 +584,7 @@ namespace InfluxDB.Client.Test
             listener.WaitToSuccess();
 
             var query = await _queryApi.QueryAsync(
-                "from(bucket:\"" + bucketName + "\") |> range(start: 1970-01-01T00:00:00.000000001Z)",
+                $"from(bucket:\"{bucketName}\") |> range(start: 1970-01-01T00:00:00.000000001Z)",
                 _organization.Name);
 
             Assert.AreEqual(1, query.Count);
@@ -626,8 +623,7 @@ namespace InfluxDB.Client.Test
             _writeApi.Dispose();
 
             var measurements = await _queryApi.QueryAsync<H20Measurement>(
-                "from(bucket:\"" + bucketName +
-                "\") |> range(start: 1970-01-01T00:00:00.000000001Z) |> rename(columns:{_value: \"level\"})",
+                $"from(bucket:\"{bucketName}\") |> range(start: 1970-01-01T00:00:00.000000001Z) |> rename(columns:{{_value: \"level\"}})",
                 _organization.Id);
 
             Assert.AreEqual(2, measurements.Count);
@@ -666,8 +662,7 @@ namespace InfluxDB.Client.Test
             listener.WaitToSuccess();
 
             var measurements = await _queryApi.QueryAsync<H20Measurement>(
-                "from(bucket:\"" + bucketName +
-                "\") |> range(start: 0) |> rename(columns:{_value: \"level\"})",
+                $"from(bucket:\"{bucketName}\") |> range(start: 0) |> rename(columns:{{_value: \"level\"}})",
                 _organization.Id);
 
             Assert.AreEqual(1, measurements.Count);
@@ -704,7 +699,7 @@ namespace InfluxDB.Client.Test
             listener.WaitToSuccess();
 
             var query = await _queryApi.QueryAsync(
-                "from(bucket:\"" + bucketName + "\") |> range(start: 1970-01-01T00:00:00.000000001Z)",
+                $"from(bucket:\"{bucketName}\") |> range(start: 1970-01-01T00:00:00.000000001Z)",
                 _organization.Id);
 
             Assert.AreEqual(1, query.Count);
@@ -750,7 +745,7 @@ namespace InfluxDB.Client.Test
             listener.WaitToSuccess();
 
             var query = await _queryApi.QueryAsync(
-                "from(bucket:\"" + bucketName + "\") |> range(start: 0)",
+                $"from(bucket:\"{bucketName}\") |> range(start: 0)",
                 _organization.Id);
 
             Assert.AreEqual(1, query.Count);
@@ -790,7 +785,7 @@ namespace InfluxDB.Client.Test
             listener.WaitToSuccess();
 
             var query = await _queryApi.QueryAsync(
-                "from(bucket:\"" + _bucket.Name + "\") |> range(start: 1970-01-01T00:00:00.000000001Z)");
+                $"from(bucket:\"{_bucket.Name}\") |> range(start: 1970-01-01T00:00:00.000000001Z)");
 
             Assert.AreEqual(1, query.Count);
 
@@ -826,7 +821,7 @@ namespace InfluxDB.Client.Test
             listener.WaitToSuccess();
 
             var query = await _queryApi.QueryAsync(
-                "from(bucket:\"" + bucketName + "\") |> range(start: 1970-01-01T00:00:00.000000001Z)",
+                $"from(bucket:\"{bucketName}\") |> range(start: 1970-01-01T00:00:00.000000001Z)",
                 _organization.Id);
 
             Assert.AreEqual(1, query.Count);
@@ -858,7 +853,7 @@ namespace InfluxDB.Client.Test
             listener.WaitToSuccess();
 
             var query = await _queryApi.QueryAsync(
-                "from(bucket:\"" + bucketName + "\") |> range(start: 1970-01-01T00:00:00.000000001Z)",
+                $"from(bucket:\"{bucketName}\") |> range(start: 1970-01-01T00:00:00.000000001Z)",
                 _organization.Id);
 
             Assert.AreEqual(1, query.Count);
