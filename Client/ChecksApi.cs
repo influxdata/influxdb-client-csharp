@@ -187,8 +187,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
 
-            return await FindChecksAsync(orgId, new FindOptions())
-                .ContinueWith(t => t.Result._Checks);
+            return (await FindChecksAsync(orgId, new FindOptions()))._Checks;
         }
 
         /// <summary>
@@ -227,7 +226,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(checkId, nameof(checkId));
 
-            return await _service.GetChecksIDLabelsAsync(checkId).ContinueWith(t => t.Result.Labels);
+            return (await _service.GetChecksIDLabelsAsync(checkId)).Labels;
         }
 
         /// <summary>
@@ -257,8 +256,7 @@ namespace InfluxDB.Client
 
             var mapping = new LabelMapping(labelId);
 
-            return await _service.PostChecksIDLabelsAsync(checkId, mapping)
-                .ContinueWith(t => t.Result.Label);
+            return (await _service.PostChecksIDLabelsAsync(checkId, mapping)).Label;
         }
 
         /// <summary>

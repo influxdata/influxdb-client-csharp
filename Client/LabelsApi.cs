@@ -27,7 +27,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNotNull(request, nameof(request));
 
-            return await _service.PostLabelsAsync(request).ContinueWith(t=> t.Result.Label);
+            return (await _service.PostLabelsAsync(request)).Label;
         }
 
         /// <summary>
@@ -69,7 +69,7 @@ namespace InfluxDB.Client
         /// <returns>Updated label</returns>
         public async Task<Label> UpdateLabelAsync(string labelId, LabelUpdate labelUpdate)
         {
-            return await _service.PatchLabelsIDAsync(labelId, labelUpdate).ContinueWith(t => t.Result.Label);
+            return (await _service.PatchLabelsIDAsync(labelId, labelUpdate)).Label;
         }
 
         /// <summary>
@@ -107,7 +107,8 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(clonedName, nameof(clonedName));
             Arguments.CheckNonEmptyString(labelId, nameof(labelId));
 
-            return await FindLabelByIdAsync(labelId).ContinueWith(t => CloneLabelAsync(clonedName, t.Result)).Unwrap();
+            return await FindLabelByIdAsync(labelId)
+                            .ContinueWith(t => CloneLabelAsync(clonedName, t.Result)).Unwrap();
         }
 
         /// <summary>
@@ -136,7 +137,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(labelId, nameof(labelId));
 
-            return await _service.GetLabelsIDAsync(labelId).ContinueWith(t => t.Result.Label);
+            return (await _service.GetLabelsIDAsync(labelId)).Label;
         }
 
         /// <summary>
@@ -145,7 +146,7 @@ namespace InfluxDB.Client
         /// <returns>List all labels.</returns>
         public async Task<List<Label>> FindLabelsAsync()
         {
-            return await _service.GetLabelsAsync().ContinueWith(t => t.Result.Labels);
+            return (await _service.GetLabelsAsync()).Labels;
         }
 
         /// <summary>
@@ -167,7 +168,7 @@ namespace InfluxDB.Client
         /// <returns>all labels</returns>
         public async Task<List<Label>> FindLabelsByOrgIdAsync(string orgId)
         {
-            return await _service.GetLabelsAsync(null, orgId).ContinueWith(t => t.Result.Labels);
+            return (await _service.GetLabelsAsync(null, orgId)).Labels;
         }
     }
 }

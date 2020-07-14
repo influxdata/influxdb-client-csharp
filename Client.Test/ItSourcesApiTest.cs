@@ -137,12 +137,12 @@ namespace InfluxDB.Client.Test
         [Test]
         public void FindBucketsBySourceByUnknownSource()
         {
-            var nfe = Assert.ThrowsAsync<AggregateException>(async () =>
+            var nfe = Assert.ThrowsAsync<HttpException>(async () =>
                 await _sourcesApi.FindBucketsBySourceIdAsync("020f755c3d082000"));
 
             Assert.IsNotNull(nfe);
-            Assert.AreEqual("source not found", nfe.InnerException.Message);
-            Assert.AreEqual(typeof(HttpException), nfe.InnerException.GetType());
+            Assert.AreEqual("source not found", nfe.Message);
+            Assert.AreEqual(typeof(HttpException), nfe.GetType());
         }
 
         [Test]

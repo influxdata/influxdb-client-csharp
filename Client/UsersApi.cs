@@ -195,7 +195,7 @@ namespace InfluxDB.Client
         /// <returns>List all users</returns>
         public async Task<List<User>> FindUsersAsync()
         {
-            return await _service.GetUsersAsync().ContinueWith(t => t.Result._Users);
+            return (await _service.GetUsersAsync())._Users;
         }
 
         private async Task UpdateUserPasswordAsync(string userId, string userName, string oldPassword,

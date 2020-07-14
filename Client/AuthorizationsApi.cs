@@ -186,8 +186,7 @@ namespace InfluxDB.Client
 
         private async Task<List<Authorization>> FindAuthorizationsByAsync(string userId, string userName)
         {
-            return await _service.GetAuthorizationsAsync(null, userId, userName)
-                .ContinueWith(t => t.Result._Authorizations);
+            return (await _service.GetAuthorizationsAsync(null, userId, userName))._Authorizations;
         }
     }
 }

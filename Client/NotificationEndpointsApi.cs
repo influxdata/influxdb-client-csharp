@@ -236,8 +236,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
 
-            return await FindNotificationEndpointsAsync(orgId, new FindOptions())
-                .ContinueWith(t => t.Result._NotificationEndpoints);
+            return (await FindNotificationEndpointsAsync(orgId, new FindOptions()))._NotificationEndpoints;
         }
 
         /// <summary>
@@ -484,7 +483,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(endpointId, nameof(endpointId));
 
-            return await _service.GetNotificationEndpointsIDLabelsAsync(endpointId).ContinueWith(t => t.Result.Labels);
+            return (await _service.GetNotificationEndpointsIDLabelsAsync(endpointId)).Labels;
         }
 
         /// <summary>
@@ -514,8 +513,7 @@ namespace InfluxDB.Client
 
             var mapping = new LabelMapping(labelId);
 
-            return await _service.PostNotificationEndpointIDLabelsAsync(endpointId, mapping)
-                .ContinueWith(t => t.Result.Label);
+            return (await _service.PostNotificationEndpointIDLabelsAsync(endpointId, mapping)).Label;
         }
 
         /// <summary>
