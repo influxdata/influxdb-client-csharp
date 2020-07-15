@@ -334,7 +334,7 @@ namespace InfluxDB.Client
         /// <returns>A list of telegraf configs</returns>
         public async Task<List<Telegraf>> FindTelegrafsByOrgIdAsync(string orgId)
         {
-            return await _service.GetTelegrafsAsync(orgId).ContinueWith(t => t.Result.Configurations);
+            return (await _service.GetTelegrafsAsync(orgId)).Configurations;
         }
 
         /// <summary>
@@ -382,7 +382,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(telegrafId, nameof(telegrafId));
 
-            return await _service.GetTelegrafsIDMembersAsync(telegrafId).ContinueWith(t => t.Result.Users);
+            return (await _service.GetTelegrafsIDMembersAsync(telegrafId)).Users;
         }
 
         /// <summary>
@@ -462,7 +462,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(telegrafId, nameof(telegrafId));
 
-            return await _service.GetTelegrafsIDOwnersAsync(telegrafId).ContinueWith(t => t.Result.Users);
+            return (await _service.GetTelegrafsIDOwnersAsync(telegrafId)).Users;
         }
 
         /// <summary>
@@ -542,7 +542,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(telegrafId, nameof(telegrafId));
 
-            return await _service.GetTelegrafsIDLabelsAsync(telegrafId).ContinueWith(t => t.Result.Labels);
+            return (await _service.GetTelegrafsIDLabelsAsync(telegrafId)).Labels;
         }
 
         /// <summary>
@@ -570,8 +570,7 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(telegrafId, nameof(telegrafId));
             Arguments.CheckNonEmptyString(labelId, nameof(labelId));
 
-            return await _service.PostTelegrafsIDLabelsAsync(telegrafId, new LabelMapping(labelId))
-                .ContinueWith(t => t.Result.Label);
+            return (await _service.PostTelegrafsIDLabelsAsync(telegrafId, new LabelMapping(labelId))).Label;
         }
 
         /// <summary>

@@ -318,7 +318,7 @@ namespace InfluxDB.Client
         /// <returns>A list of tasks</returns>
         public async Task<List<TaskType>> FindTasksAsync(string afterId = null, string userId = null, string orgId = null)
         {
-            return await _service.GetTasksAsync(null, null, afterId, userId, orgId).ContinueWith(t => t.Result._Tasks);
+            return (await _service.GetTasksAsync(null, null, afterId, userId, orgId))._Tasks;
         }
 
         /// <summary>
@@ -342,7 +342,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(taskId, nameof(taskId));
 
-            return await _service.GetTasksIDMembersAsync(taskId).ContinueWith(t => t.Result.Users);
+            return (await _service.GetTasksIDMembersAsync(taskId)).Users;
         }
 
         /// <summary>
@@ -422,7 +422,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(taskId, nameof(taskId));
 
-            return await _service.GetTasksIDOwnersAsync(taskId).ContinueWith(t => t.Result.Users);
+            return (await _service.GetTasksIDOwnersAsync(taskId)).Users;
         }
 
         /// <summary>
@@ -502,7 +502,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(taskId, nameof(taskId));
 
-            return await _service.GetTasksIDLogsAsync(taskId).ContinueWith(t => t.Result.Events);
+            return (await _service.GetTasksIDLogsAsync(taskId)).Events;
         }
 
         /// <summary>
@@ -563,8 +563,7 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(taskId, nameof(taskId));
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
 
-            return await _service.GetTasksIDRunsAsync(taskId, null, null, limit, afterTime, beforeTime)
-                .ContinueWith(t => t.Result._Runs);
+            return (await _service.GetTasksIDRunsAsync(taskId, null, null, limit, afterTime, beforeTime))._Runs;
         }
 
         /// <summary>
@@ -649,12 +648,12 @@ namespace InfluxDB.Client
         /// <param name="taskId">ID of task to get run logs for it</param>
         /// <param name="runId">ID of run to get logs for it</param>
         /// <returns>the list of all logs for a run</returns>
-        public Task<List<LogEvent>> GetRunLogsAsync(string taskId, string runId)
+        public async Task<List<LogEvent>> GetRunLogsAsync(string taskId, string runId)
         {
             Arguments.CheckNonEmptyString(taskId, nameof(taskId));
             Arguments.CheckNonEmptyString(runId, nameof(runId));
 
-            return _service.GetTasksIDRunsIDLogsAsync(taskId, runId).ContinueWith(t => t.Result.Events);
+            return (await _service.GetTasksIDRunsIDLogsAsync(taskId, runId)).Events;
         }
 
         /// <summary>
@@ -678,7 +677,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(taskId, nameof(taskId));
 
-            return await _service.GetTasksIDLabelsAsync(taskId).ContinueWith(t => t.Result.Labels);
+            return (await _service.GetTasksIDLabelsAsync(taskId)).Labels;
         }
 
         /// <summary>
@@ -701,14 +700,14 @@ namespace InfluxDB.Client
         /// <param name="labelId">the ID of a label</param>
         /// <param name="taskId">the ID of a Task</param>
         /// <returns>added label</returns>
-        public Task<Label> AddLabelAsync(string labelId, string taskId)
+        public async Task<Label> AddLabelAsync(string labelId, string taskId)
         {
             Arguments.CheckNonEmptyString(taskId, nameof(taskId));
             Arguments.CheckNonEmptyString(labelId, nameof(labelId));
 
             var mapping = new LabelMapping(labelId);
 
-            return _service.PostTasksIDLabelsAsync(taskId, mapping).ContinueWith(t => t.Result.Label);
+            return (await _service.PostTasksIDLabelsAsync(taskId, mapping)).Label;
         }
 
         /// <summary>

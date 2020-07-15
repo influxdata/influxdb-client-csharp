@@ -50,8 +50,8 @@ namespace InfluxDB.Client.Test
                 Assert.ThrowsAsync<AggregateException>(async () => await _labelsApi.CloneLabelAsync(GenerateName("bucket"), "020f755c3c082000"));
 
             Assert.IsNotNull(exception);
-            Assert.AreEqual(typeof(HttpException), exception.InnerException.InnerException.GetType());
-            Assert.AreEqual("label not found", exception.InnerException.InnerException.Message);
+            Assert.AreEqual(typeof(HttpException), exception.InnerException.GetType());
+            Assert.AreEqual("label not found", exception.InnerException.Message);
         }
 
         [Test]
@@ -99,11 +99,11 @@ namespace InfluxDB.Client.Test
             // delete user
             await _labelsApi.DeleteLabelAsync(createdLabel);
 
-            var exception = Assert.ThrowsAsync<AggregateException>(async () => await _labelsApi.FindLabelByIdAsync(createdLabel.Id));
+            var exception = Assert.ThrowsAsync<HttpException>(async () => await _labelsApi.FindLabelByIdAsync(createdLabel.Id));
 
             Assert.IsNotNull(exception);
-            Assert.AreEqual("label not found", exception.InnerException.Message);
-            Assert.AreEqual(typeof(HttpException), exception.InnerException.GetType());
+            Assert.AreEqual("label not found", exception.Message);
+            Assert.AreEqual(typeof(HttpException), exception.GetType());
         }
 
         [Test]
@@ -122,11 +122,11 @@ namespace InfluxDB.Client.Test
         [Test]
         public void FindLabelByIdNull()
         {
-            var exception = Assert.ThrowsAsync<AggregateException>(async () => await _labelsApi.FindLabelByIdAsync("020f755c3c082000"));
+            var exception = Assert.ThrowsAsync<HttpException>(async () => await _labelsApi.FindLabelByIdAsync("020f755c3c082000"));
 
             Assert.IsNotNull(exception);
-            Assert.AreEqual("label not found", exception.InnerException.Message);
-            Assert.AreEqual(typeof(HttpException), exception.InnerException.GetType());
+            Assert.AreEqual("label not found", exception.Message);
+            Assert.AreEqual(typeof(HttpException), exception.GetType());
         }
 
         [Test]

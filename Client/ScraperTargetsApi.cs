@@ -169,7 +169,7 @@ namespace InfluxDB.Client
         /// <returns>A list of ScraperTargets</returns>
         public async Task<List<ScraperTargetResponse>> FindScraperTargetsAsync()
         {
-            return await _service.GetScrapersAsync().ContinueWith(t => t.Result.Configurations);
+            return (await _service.GetScrapersAsync()).Configurations;
         }
 
         /// <summary>
@@ -193,8 +193,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
 
-            return await _service.GetScrapersAsync(null, orgId)
-                .ContinueWith(t => t.Result.Configurations);
+            return (await _service.GetScrapersAsync(null, orgId)).Configurations;
         }
 
         /// <summary>
@@ -218,7 +217,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(scraperTargetId, nameof(scraperTargetId));
 
-            return await _service.GetScrapersIDMembersAsync(scraperTargetId).ContinueWith(t => t.Result.Users);
+            return (await _service.GetScrapersIDMembersAsync(scraperTargetId)).Users;
         }
 
         /// <summary>
@@ -299,7 +298,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(scraperTargetId, nameof(scraperTargetId));
 
-            return await _service.GetScrapersIDOwnersAsync(scraperTargetId).ContinueWith(t => t.Result.Users);
+            return (await _service.GetScrapersIDOwnersAsync(scraperTargetId)).Users;
         }
 
         /// <summary>
@@ -381,7 +380,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(scraperTargetId, nameof(scraperTargetId));
 
-            return await _service.GetScrapersIDLabelsAsync(scraperTargetId).ContinueWith(t => t.Result.Labels);
+            return (await _service.GetScrapersIDLabelsAsync(scraperTargetId)).Labels;
         }
 
         /// <summary>
@@ -411,7 +410,7 @@ namespace InfluxDB.Client
 
             var mapping = new LabelMapping(labelId);
 
-            return await _service.PostScrapersIDLabelsAsync(scraperTargetId, mapping).ContinueWith(t => t.Result.Label);
+            return (await _service.PostScrapersIDLabelsAsync(scraperTargetId, mapping)).Label;
         }
 
         /// <summary>
