@@ -417,9 +417,9 @@ namespace InfluxDB.Client
         /// <returns>True if onboarding has already been completed otherwise false</returns>
         public async Task<bool> IsOnboardingAllowedAsync()
         {
-            var isOnboardingAllowed = _setupService.GetSetupAsync().ContinueWith(t => t.Result.Allowed == true);
+            var isOnboarding = await _setupService.GetSetupAsync();
 
-            return await isOnboardingAllowed;
+            return isOnboarding.Allowed == true;
         }
 
         internal static string AuthorizationHeader(string username, string password)

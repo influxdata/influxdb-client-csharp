@@ -431,27 +431,27 @@ namespace InfluxDB.Client.Test
             var ioe = Assert.ThrowsAsync<AggregateException>(async () => await _notificationEndpointsApi
                 .CloneSlackEndpointAsync("not-found-cloned", "token", "020f755c3c082000"));
 
-            Assert.AreEqual("notification endpoint not found for key \"020f755c3c082000\"", ioe.InnerException?.InnerException?.Message);
+            Assert.AreEqual("notification endpoint not found for key \"020f755c3c082000\"", ioe.InnerException?.Message);
 
             ioe = Assert.ThrowsAsync<AggregateException>(async () => await _notificationEndpointsApi
                 .ClonePagerDutyEndpointAsync("not-found-cloned", "token", "020f755c3c082000"));
 
-            Assert.AreEqual("notification endpoint not found for key \"020f755c3c082000\"", ioe.InnerException?.InnerException?.Message);
+            Assert.AreEqual("notification endpoint not found for key \"020f755c3c082000\"", ioe.InnerException?.Message);
 
             ioe = Assert.ThrowsAsync<AggregateException>(async () => await _notificationEndpointsApi
                 .CloneHttpEndpointAsync("not-found-cloned", "020f755c3c082000"));
 
-            Assert.AreEqual("notification endpoint not found for key \"020f755c3c082000\"", ioe.InnerException?.InnerException?.Message);
+            Assert.AreEqual("notification endpoint not found for key \"020f755c3c082000\"", ioe.InnerException?.Message);
 
             ioe = Assert.ThrowsAsync<AggregateException>(async () => await _notificationEndpointsApi
                 .CloneHttpEndpointBearerAsync("not-found-cloned", "token", "020f755c3c082000"));
 
-            Assert.AreEqual("notification endpoint not found for key \"020f755c3c082000\"", ioe.InnerException?.InnerException?.Message);
+            Assert.AreEqual("notification endpoint not found for key \"020f755c3c082000\"", ioe.InnerException?.Message);
 
             ioe = Assert.ThrowsAsync<AggregateException>(async () => await _notificationEndpointsApi
                 .CloneHttpEndpointBasicAuthAsync("not-found-cloned", "username", "password", "020f755c3c082000"));
 
-            Assert.AreEqual("notification endpoint not found for key \"020f755c3c082000\"", ioe.InnerException?.InnerException?.Message);
+            Assert.AreEqual("notification endpoint not found for key \"020f755c3c082000\"", ioe.InnerException?.Message);
         }
 
         [Test]

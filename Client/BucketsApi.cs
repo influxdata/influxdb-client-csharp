@@ -155,7 +155,7 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(clonedName, nameof(clonedName));
             Arguments.CheckNonEmptyString(bucketId, nameof(bucketId));
 
-            return await FindBucketByIdAsync(bucketId).ContinueWith(t => t.Result)
+            return await FindBucketByIdAsync(bucketId)
                 .ContinueWith(t => CloneBucketAsync(clonedName, t.Result)).Unwrap();
         }
 
