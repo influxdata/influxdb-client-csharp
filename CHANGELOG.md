@@ -1,4 +1,4 @@
-## 1.10.0 [unreleased]
+## 1.10.0 [2020-07-17]
 
 ### Features
 1. [#102](https://github.com/influxdata/influxdb-client-csharp/pull/102): Added WriteApiAsync for asynchronous write without batching
