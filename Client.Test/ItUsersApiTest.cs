@@ -84,7 +84,7 @@ namespace InfluxDB.Client.Test
 
             var users = await _usersApi.FindUsersAsync();
 
-            Assert.AreEqual(users.Count, size + 1);
+            Assert.AreEqual(size + 1, users.Count);
         }
 
         [Test]

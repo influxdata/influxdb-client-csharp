@@ -69,8 +69,8 @@ namespace InfluxDB.Client.Test
             var ioe = Assert.ThrowsAsync<AggregateException>(async () =>
                 await _bucketsApi.CloneBucketAsync(GenerateName("bucket"), "020f755c3c082000"));
 
-            Assert.AreEqual(typeof(HttpException), ioe.InnerException.InnerException.GetType());
-            Assert.AreEqual("bucket not found", ioe.InnerException.InnerException.Message);
+            Assert.AreEqual(typeof(HttpException), ioe.InnerException?.GetType());
+            Assert.AreEqual("bucket not found", ioe.InnerException?.Message);
         }
 
         [Test]

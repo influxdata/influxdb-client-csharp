@@ -234,8 +234,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
 
-            return await FindNotificationRulesAsync(orgId, new FindOptions())
-                .ContinueWith(t => t.Result._NotificationRules);
+            return (await FindNotificationRulesAsync(orgId, new FindOptions()))._NotificationRules;
         }
 
         /// <summary>
@@ -281,7 +280,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(ruleId, nameof(ruleId));
 
-            return await _service.GetNotificationRulesIDLabelsAsync(ruleId).ContinueWith(t => t.Result.Labels);
+            return (await _service.GetNotificationRulesIDLabelsAsync(ruleId)).Labels;
         }
 
         /// <summary>
@@ -311,8 +310,7 @@ namespace InfluxDB.Client
 
             var mapping = new LabelMapping(labelId);
 
-            return await _service.PostNotificationRuleIDLabelsAsync(ruleId, mapping)
-                .ContinueWith(t => t.Result.Label);
+            return (await _service.PostNotificationRuleIDLabelsAsync(ruleId, mapping)).Label;
         }
 
         /// <summary>

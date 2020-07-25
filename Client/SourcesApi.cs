@@ -131,7 +131,7 @@ namespace InfluxDB.Client
         /// <returns>A list of sources</returns>
         public async Task<List<Source>> FindSourcesAsync()
         {
-            return await _service.GetSourcesAsync().ContinueWith(t => t.Result._Sources);
+            return (await _service.GetSourcesAsync())._Sources;
         }
 
         /// <summary>
@@ -155,7 +155,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(sourceId, nameof(sourceId));
 
-            return await _service.GetSourcesIDBucketsAsync(sourceId).ContinueWith(t => t.Result._Buckets);
+            return (await _service.GetSourcesIDBucketsAsync(sourceId))._Buckets;
         }
 
         /// <summary>

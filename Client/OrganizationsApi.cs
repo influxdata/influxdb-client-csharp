@@ -91,7 +91,8 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(clonedName, nameof(clonedName));
             Arguments.CheckNonEmptyString(bucketId, nameof(bucketId));
 
-            return await FindOrganizationByIdAsync(bucketId).ContinueWith(t => CloneOrganizationAsync(clonedName, t.Result)).Unwrap();
+            return await FindOrganizationByIdAsync(bucketId).ContinueWith(t => 
+                            CloneOrganizationAsync(clonedName, t.Result)).Unwrap();
         }
 
         /// <summary>
@@ -141,8 +142,7 @@ namespace InfluxDB.Client
         /// <returns>List all organizations</returns>
         public async Task<List<Organization>> FindOrganizationsAsync()
         {
-            var result = await _service.GetOrgsAsync();
-            return result.Orgs;
+            return (await _service.GetOrgsAsync()).Orgs;
         }
 
         /// <summary>
@@ -176,7 +176,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
 
-            return await _service.GetOrgsIDSecretsAsync(orgId).ContinueWith(t => t.Result.Secrets);
+            return (await _service.GetOrgsIDSecretsAsync(orgId)).Secrets;
         }
 
         /// <summary>
@@ -270,7 +270,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
 
-            return await _service.GetOrgsIDMembersAsync(orgId).ContinueWith(t => t.Result.Users);
+            return (await _service.GetOrgsIDMembersAsync(orgId)).Users;
         }
 
         /// <summary>
@@ -350,7 +350,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
 
-            return await _service.GetOrgsIDOwnersAsync(orgId).ContinueWith(t => t.Result.Users);
+            return (await _service.GetOrgsIDOwnersAsync(orgId)).Users;
         }
 
         /// <summary>
@@ -430,7 +430,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
 
-            return await _service.GetOrgsIDLabelsAsync(orgId).ContinueWith(t => t.Result.Labels);
+            return (await _service.GetOrgsIDLabelsAsync(orgId)).Labels;
         }
 
         /// <summary>
@@ -460,7 +460,7 @@ namespace InfluxDB.Client
 
             var mapping = new LabelMapping(labelId);
             
-            return await _service.PostOrgsIDLabelsAsync(orgId, mapping).ContinueWith(t => t.Result.Label);
+            return (await _service.PostOrgsIDLabelsAsync(orgId, mapping)).Label;
         }
 
         /// <summary>

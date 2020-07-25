@@ -331,10 +331,10 @@ namespace InfluxDB.Client.Test
         [Test]
         public void GetLogsNotExist()
         {
-            var ioe = Assert.ThrowsAsync<AggregateException>(async () => await _tasksApi.GetLogsAsync("020f755c3c082000"));
+            var ioe = Assert.ThrowsAsync<HttpException>(async () => await _tasksApi.GetLogsAsync("020f755c3c082000"));
 
-            Assert.NotNull(ioe.InnerException, "ioe.InnerException != null");
-            Assert.AreEqual("failed to find task logs: task not found", ioe.InnerException.Message);
+            Assert.NotNull(ioe, "ioe.InnerException != null");
+            Assert.AreEqual("failed to find task logs: task not found", ioe.Message);
         }
 
         [Test]
@@ -372,10 +372,10 @@ namespace InfluxDB.Client.Test
         {
             var task = await _tasksApi.CreateTaskEveryAsync(GenerateName("it task"), TaskFlux, "1s", _organization);
 
-            var ioe = Assert.ThrowsAsync<AggregateException>(async () => await _tasksApi.GetRunLogsAsync(task.Id, "020f755c3c082000"));
+            var ioe = Assert.ThrowsAsync<HttpException>(async () => await _tasksApi.GetRunLogsAsync(task.Id, "020f755c3c082000"));
 
-            Assert.NotNull(ioe.InnerException, "ioe.InnerException != null");
-            Assert.AreEqual("failed to find task logs: run not found", ioe.InnerException.Message);
+            Assert.NotNull(ioe, "ioe.InnerException != null");
+            Assert.AreEqual("failed to find task logs: run not found", ioe.Message);
         }
 
         [Test]
@@ -570,11 +570,11 @@ namespace InfluxDB.Client.Test
         [Test]
         public void RunsNotExist()
         {
-            var ioe = Assert.ThrowsAsync<AggregateException>(async () =>
+            var ioe = Assert.ThrowsAsync<HttpException>(async () =>
                 await _tasksApi.GetRunsAsync("020f755c3c082000", _organization.Id));
 
-            Assert.NotNull(ioe.InnerException, "ioe.InnerException != null");
-            Assert.AreEqual("failed to find runs: task not found", ioe.InnerException.Message);
+            Assert.NotNull(ioe, "ioe.InnerException != null");
+            Assert.AreEqual("failed to find runs: task not found", ioe.Message);
         }
 
         [Test]

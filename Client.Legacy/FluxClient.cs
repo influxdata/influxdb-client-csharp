@@ -389,9 +389,9 @@ namespace InfluxDB.Client.Flux
         {
             try
             {
-                var response = ExecuteAsync(PingRequest());
+                var response = await ExecuteAsync(PingRequest());
 
-                return await response.ContinueWith(t => GetVersion(t.Result));
+                return GetVersion(response);
             }
             catch (Exception e)
             {
