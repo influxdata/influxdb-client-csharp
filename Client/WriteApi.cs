@@ -14,6 +14,7 @@ using InfluxDB.Client.Core;
 using InfluxDB.Client.Core.Exceptions;
 using InfluxDB.Client.Internal;
 using InfluxDB.Client.Writes;
+using Microsoft.Extensions.ObjectPool;
 using RestSharp;
 
 namespace InfluxDB.Client
@@ -26,7 +27,10 @@ namespace InfluxDB.Client
         private readonly MeasurementMapper _measurementMapper = new MeasurementMapper();
         private readonly InfluxDBClientOptions _options;
         private readonly Subject<BatchWriteData> _subject = new Subject<BatchWriteData>();
+        private static readonly ObjectPoolProvider _objectPoolProvider = new DefaultObjectPoolProvider();
+        private static readonly ObjectPool<StringBuilder> _stringBuilderPool = _objectPoolProvider.CreateStringBuilderPool();
         private readonly IDisposable _unsubscribeDisposeCommand;
+
 
         private bool _disposed;
         protected internal WriteApi(
@@ -52,26 +56,25 @@ namespace InfluxDB.Client
             // 
             // https://github.com/dotnet/reactive/issues/19
 
-            var tempBoundary = new Subject<IObservable<BatchWriteData>>();
 
-            _subject
+
+            IObservable<IObservable<BatchWriteRecord>> batches = _subject
                 //
                 // Batching
                 //
                 .Publish(connectedSource =>
                 {
+                    var trigger = Observable.Merge(
+                            // triggered by time & count
+                            connectedSource.Window(TimeSpan.FromMilliseconds(
+                                                writeOptions.FlushInterval),
+                                                writeOptions.BatchSize,
+                                                writeOptions.WriteScheduler),
+                            // flush trigger
+                            _flush
+                        );
                     return connectedSource
-                        .Window(tempBoundary)
-                        .Merge(Observable.Defer(() =>
-                        {
-                            connectedSource
-                                .Window(TimeSpan.FromMilliseconds(writeOptions.FlushInterval), writeOptions.BatchSize,
-                                    writeOptions.WriteScheduler)
-                                .Merge(_flush)
-                                .Subscribe(tempBoundary);
-
-                            return Observable.Empty<IObservable<BatchWriteData>>();
-                        }));
+                        .Window(trigger);
                 })
                 //
                 // Group by key - same bucket, same org
@@ -83,7 +86,7 @@ namespace InfluxDB.Client
                 .Select(grouped =>
                 {
                     var aggregate = grouped
-                        .Aggregate(new StringBuilder(""), (builder, batchWrite) =>
+                        .Aggregate(_stringBuilderPool.Get(), (builder, batchWrite) =>
                         {
                             var data = batchWrite.ToLineProtocol();
 
@@ -95,27 +98,34 @@ namespace InfluxDB.Client
                             }
 
                             return builder.Append(data);
-                        }).Select(builder => builder.ToString());
-                    
-                    return aggregate.Select(records => new BatchWriteRecord(grouped.Key, records));
-                })
-                //
-                // Jitter
-                //
-                .Select(source =>
-                {
-                    if (writeOptions.JitterInterval <= 0)
-                    {
-                        return source;
-                    }
+                        }).Select(builder =>
+                        {
+                            var result = builder.ToString();
+                            builder.Clear();
+                            _stringBuilderPool.Return(builder);
+                            return result;
+                        });
 
-                    return source.Delay(_ => Observable.Timer(TimeSpan.FromMilliseconds(JitterDelay(writeOptions)), writeOptions.WriteScheduler));
-                })
-                .Concat()
+                    return aggregate.Select(records => new BatchWriteRecord(grouped.Key, records))
+                                    .Where(batchWriteItem => !string.IsNullOrEmpty(batchWriteItem.ToLineProtocol()));
+                });
+
+            if (writeOptions.JitterInterval > 0)
+            {
+                batches = batches
+                    //
+                    // Jitter
+                    //
+                    .Select(source =>
+                    {
+                        return source.Delay(_ => Observable.Timer(TimeSpan.FromMilliseconds(JitterDelay(writeOptions)), writeOptions.WriteScheduler));
+                    });
+            }
+            var query = batches
+                .Concat() 
                 //
                 // Map to Async request
                 //
-                .Where(batchWriteItem => !string.IsNullOrEmpty(batchWriteItem.ToLineProtocol()))
                 .Select(batchWriteItem =>
                 {
                     var org = batchWriteItem.Options.OrganizationId;

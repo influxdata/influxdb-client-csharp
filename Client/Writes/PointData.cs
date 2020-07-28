@@ -35,6 +35,16 @@ namespace InfluxDB.Client.Writes
             Precision = WritePrecision.Ns;
         }
 
+        /// <summary>
+        /// Create a new Point withe specified a measurement name.
+        /// </summary>
+        /// <param name="measurementName">the measurement name</param>
+        /// <returns>the new Point</returns>
+        public static PointData Measurement(string measurementName)
+        {
+            return new PointData(measurementName);
+        }
+
         private PointData(string measurementName,
                             WritePrecision precision,
                             BigInteger? time,
@@ -46,16 +56,6 @@ namespace InfluxDB.Client.Writes
             _time = time;
             _tags = tags;
             _fields = fields;
-        }
-
-        /// <summary>
-        /// Create a new Point withe specified a measurement name.
-        /// </summary>
-        /// <param name="measurementName">the measurement name</param>
-        /// <returns>the new Point</returns>
-        public static PointData Measurement(string measurementName)
-        {
-            return new PointData(measurementName);
         }
 
         /// <summary>
