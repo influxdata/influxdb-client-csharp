@@ -88,7 +88,7 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(org, nameof(org));
             Arguments.CheckNotNull(precision, nameof(precision));
             
-            List<BatchWriteData> list = new List<BatchWriteData>();
+            var list = new List<BatchWriteData>();
 
             foreach (var record in records)
             {
@@ -150,10 +150,7 @@ namespace InfluxDB.Client
 
             if (point == null) return;
 
-            BatchWriteData data = new BatchWritePoint(new BatchWriteOptions(bucket, org, 
-                            point.Precision), _options, point);
-
-            await WriteData(org, bucket, point.Precision, new List<BatchWriteData>{data});
+            await WritePointsAsync(bucket, org, new List<PointData> {point});
         }
 
         /// <summary>
@@ -175,8 +172,16 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(bucket, nameof(bucket));
             Arguments.CheckNonEmptyString(org, nameof(org));
+            
+            foreach (var grouped in points.GroupBy(it => it.Precision))
+            {
+                var options = new BatchWriteOptions(bucket, org, grouped.Key);
+                var groupedPoints = grouped
+                    .Select(it => new BatchWritePoint(options, _options, it))
+                    .ToList();
 
-            foreach (var point in points) await WritePointAsync(bucket, org, point);
+                await WriteData(org, bucket, grouped.Key, groupedPoints);
+            }
         }
 
         /// <summary>
@@ -262,7 +267,7 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(org, nameof(org));
             Arguments.CheckNotNull(precision, nameof(precision));
             
-            List<BatchWriteData> list = new List<BatchWriteData>();
+            var list = new List<BatchWriteData>();
 
             foreach (var measurement in measurements)
             {

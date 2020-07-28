@@ -3,6 +3,9 @@
 ### Features
 1. [#97](https://github.com/influxdata/influxdb-client-csharp/pull/97): Improved WriteApi performance
 
+### Bug Fixes
+1. [#113](https://github.com/influxdata/influxdb-client-csharp/pull/113): Fixed unnecessary API call when writing collection of DataPoints
+
 ## 1.10.0 [2020-07-17]
 
 ### Features
