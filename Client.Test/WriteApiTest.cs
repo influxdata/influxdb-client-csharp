@@ -8,7 +8,6 @@ using InfluxDB.Client.Api.Domain;
 using InfluxDB.Client.Core.Exceptions;
 using InfluxDB.Client.Core.Test;
 using InfluxDB.Client.Writes;
-using Moq;
 using NUnit.Framework;
 using WireMock.RequestBuilders;
 using WireMock.ResponseBuilders;
