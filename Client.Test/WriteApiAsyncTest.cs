@@ -34,7 +34,7 @@ namespace InfluxDB.Client.Test
                 .RespondWith(CreateResponse("{}"));
 
             var writeApi = _influxDbClient.GetWriteApiAsync();
-            await writeApi.WritePointsAsync("my-org", "my-bucket", new List<PointData>
+            await writeApi.WritePointsAsync("my-bucket", "my-org", new List<PointData>
             {
                 PointData.Measurement("h2o").Tag("location", "coyote_creek").Field("water_level", 9.0D)
                     .Timestamp(9L, WritePrecision.S),
@@ -45,7 +45,7 @@ namespace InfluxDB.Client.Test
             Assert.AreEqual(1, MockServer.LogEntries.Count());
 
             var request = MockServer.LogEntries.Last();
-            Assert.AreEqual(MockServerUrl + "/api/v2/write?org=my-bucket&bucket=my-org&precision=s",
+            Assert.AreEqual(MockServerUrl + "/api/v2/write?org=my-org&bucket=my-bucket&precision=s",
                 request.RequestMessage.AbsoluteUrl);
             Assert.AreEqual("h2o,location=coyote_creek water_level=9 9\nh2o,location=coyote_creek water_level=10 10",
                 request.RequestMessage.Body);
@@ -59,7 +59,7 @@ namespace InfluxDB.Client.Test
                 .RespondWith(CreateResponse("{}"));
 
             var writeApi = _influxDbClient.GetWriteApiAsync();
-            await writeApi.WritePointsAsync("my-org", "my-bucket", new List<PointData>
+            await writeApi.WritePointsAsync("my-bucket", "my-org", new List<PointData>
             {
                 PointData.Measurement("h2o").Tag("location", "coyote_creek").Field("water_level", 9.0D)
                     .Timestamp(9L, WritePrecision.S),
@@ -70,13 +70,13 @@ namespace InfluxDB.Client.Test
             Assert.AreEqual(2, MockServer.LogEntries.Count());
 
             var request = MockServer.LogEntries.ToList()[0];
-            Assert.AreEqual(MockServerUrl + "/api/v2/write?org=my-bucket&bucket=my-org&precision=s",
+            Assert.AreEqual(MockServerUrl + "/api/v2/write?org=my-org&bucket=my-bucket&precision=s",
                 request.RequestMessage.AbsoluteUrl);
             Assert.AreEqual("h2o,location=coyote_creek water_level=9 9",
                 request.RequestMessage.Body);
 
             request = MockServer.LogEntries.ToList()[1];
-            Assert.AreEqual(MockServerUrl + "/api/v2/write?org=my-bucket&bucket=my-org&precision=ms",
+            Assert.AreEqual(MockServerUrl + "/api/v2/write?org=my-org&bucket=my-bucket&precision=ms",
                 request.RequestMessage.AbsoluteUrl);
             Assert.AreEqual("h2o,location=coyote_creek water_level=10 10",
                 request.RequestMessage.Body);
