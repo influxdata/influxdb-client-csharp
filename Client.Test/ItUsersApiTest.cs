@@ -31,8 +31,6 @@ namespace InfluxDB.Client.Test
 
             Assert.IsNotNull(links);
             Assert.AreEqual(links.Self, $"/api/v2/users/{user.Id}");
-            // TODO https://github.com/influxdata/influxdb/issues/18389
-            // Assert.AreEqual(links.Logs, $"/api/v2/users/{user.Id}/logs");
         }
 
         [Test]

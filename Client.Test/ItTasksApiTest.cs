@@ -443,7 +443,7 @@ namespace InfluxDB.Client.Test
         }
 
         [Test]
-        //_token
+        [Ignore("TODO https://github.com/influxdata/influxdb/issues/19234")]
         public async Task Owner()
         {
             var task = await _tasksApi.CreateTaskCronAsync(GenerateName("it task"), TaskFlux, "0 2 * * *", _organization.Id);

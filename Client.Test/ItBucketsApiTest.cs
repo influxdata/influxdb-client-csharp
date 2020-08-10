@@ -162,7 +162,6 @@ namespace InfluxDB.Client.Test
         }
 
         [Test]
-        [Ignore("TODO https://github.com/influxdata/influxdb/issues/14900")]
         public async Task FindBucketByNameNotFound()
         {
             var bucket = await _bucketsApi.FindBucketByNameAsync("my-bucket-not-found");
