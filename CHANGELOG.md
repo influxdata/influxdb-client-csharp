@@ -2,6 +2,7 @@
 
 ### Features
 1. [#97](https://github.com/influxdata/influxdb-client-csharp/pull/97): Improved WriteApi performance
+1. [#116](https://github.com/influxdata/influxdb-client-csharp/pull/116): Moved api generator to separate module influxdb-clients-apigen
 
 ### Bug Fixes
 1. [#113](https://github.com/influxdata/influxdb-client-csharp/pull/113): Fixed unnecessary API call when writing collection of DataPoints
