@@ -1,4 +1,4 @@
-## 1.11.0 [unreleased]
+## 1.11.0 [2020-08-14]
 
 ### Features
 1. [#97](https://github.com/influxdata/influxdb-client-csharp/pull/97): Improved WriteApi performance
