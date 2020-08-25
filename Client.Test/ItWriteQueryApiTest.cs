@@ -45,7 +45,7 @@ namespace InfluxDB.Client.Test
             _token = authorization.Token;
 
             Client.Dispose();
-            var options = new InfluxDBClientOptions.Builder().Url(InfluxDbUrl).AuthenticateToken(_token.ToCharArray())
+            var options = new InfluxDBClientOptions.Builder().Url(InfluxDbUrl).AuthenticateToken(_token)
                 .Org(_organization.Id).Bucket(_bucket.Id).Build();
             Client = InfluxDBClientFactory.Create(options);
             _queryApi = Client.GetQueryApi();
@@ -82,7 +82,7 @@ namespace InfluxDB.Client.Test
             var options = new InfluxDBClientOptions.Builder().Url(InfluxDbUrl)
                 .LoadConfig()
                 .Url(InfluxDbUrl)
-                .AuthenticateToken(_token.ToCharArray())
+                .AuthenticateToken(_token)
                 .Build();
 
             Client = InfluxDBClientFactory.Create(options);
@@ -123,7 +123,7 @@ namespace InfluxDB.Client.Test
             ConfigurationManager.AppSettings["measurement-sensor.version"] = "1.23a";
 
             var options = new InfluxDBClientOptions.Builder().Url(InfluxDbUrl)
-                .AuthenticateToken(_token.ToCharArray())
+                .AuthenticateToken(_token)
                 .AddDefaultTag("id", "132-987-655")
                 .AddDefaultTag("customer", "California Miner")
                 .AddDefaultTag("env-var", "${env.measurement-datacenter}")
@@ -169,7 +169,7 @@ namespace InfluxDB.Client.Test
             ConfigurationManager.AppSettings["point-sensor.version"] = "1.23a";
 
             var options = new InfluxDBClientOptions.Builder().Url(InfluxDbUrl)
-                .AuthenticateToken(_token.ToCharArray())
+                .AuthenticateToken(_token)
                 .AddDefaultTag("id", "132-987-655")
                 .AddDefaultTag("customer", "California Miner")
                 .AddDefaultTag("env-var", "${env.point-datacenter}")
@@ -488,7 +488,7 @@ namespace InfluxDB.Client.Test
         {
             // Using WriteApi
             {
-                var client = InfluxDBClientFactory.Create(InfluxDbUrl, _token.ToCharArray());
+                var client = InfluxDBClientFactory.Create(InfluxDbUrl, _token);
 
                 using (var writeApi = client.GetWriteApi())
                 {
@@ -500,7 +500,7 @@ namespace InfluxDB.Client.Test
             
             // Using both
             {
-                using (var client = InfluxDBClientFactory.Create(InfluxDbUrl, _token.ToCharArray()))
+                using (var client = InfluxDBClientFactory.Create(InfluxDbUrl, _token))
                 {
                     using (var writeApi = client.GetWriteApi())
                     {
@@ -512,7 +512,7 @@ namespace InfluxDB.Client.Test
             
             // Using without
             {
-                var client = InfluxDBClientFactory.Create(InfluxDbUrl, _token.ToCharArray());
+                var client = InfluxDBClientFactory.Create(InfluxDbUrl, _token);
                 var writeApi = client.GetWriteApi();
 
                 writeApi.WriteRecord(_bucket.Name, _organization.Id, WritePrecision.Ns,

@@ -43,7 +43,7 @@ namespace InfluxDB.Client.Test
         [Test]
         public async Task Write()
         {
-        var m_client = InfluxDBClientFactory.Create("http://localhost:9999", "my-token".ToCharArray());
+        var m_client = InfluxDBClientFactory.Create("http://localhost:9999", "my-token");
         var api = m_client.GetWriteApi(WriteOptions.CreateNew().BatchSize(MaxBarsPerRequest).FlushInterval(10_000).Build());
         
         var start = 0;

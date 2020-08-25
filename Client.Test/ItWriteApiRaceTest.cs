@@ -45,7 +45,7 @@ namespace InfluxDB.Client.Test
             _token = authorization.Token;
 
             Client.Dispose();
-            var options = new InfluxDBClientOptions.Builder().Url(InfluxDbUrl).AuthenticateToken(_token.ToCharArray())
+            var options = new InfluxDBClientOptions.Builder().Url(InfluxDbUrl).AuthenticateToken(_token)
                 .Org(_organization.Id).Bucket(_bucket.Id).Build();
             Client = InfluxDBClientFactory.Create(options);
         }
@@ -61,7 +61,7 @@ namespace InfluxDB.Client.Test
             var options = new InfluxDBClientOptions.Builder().Url(InfluxDbUrl)
                 .LoadConfig()
                 .Url(InfluxDbUrl)
-                .AuthenticateToken(_token.ToCharArray())
+                .AuthenticateToken(_token)
                 .Build();
             var point = PointData.Measurement("race-test")
                                  .Tag("test", "stress")

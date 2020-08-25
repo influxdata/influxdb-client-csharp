@@ -20,7 +20,7 @@ namespace InfluxDB.Client.Test
             var authorization = await AddAuthorization(_organization);
 
             Client.Dispose();
-            Client = InfluxDBClientFactory.Create(InfluxDbUrl, authorization.Token.ToCharArray());
+            Client = InfluxDBClientFactory.Create(InfluxDbUrl, authorization.Token);
 
             _tasksApi = Client.GetTasksApi();
 
@@ -283,7 +283,7 @@ namespace InfluxDB.Client.Test
             var authorization = await AddAuthorization(taskOrg);
 
             Client.Dispose();
-            Client = InfluxDBClientFactory.Create(InfluxDbUrl, authorization.Token.ToCharArray());
+            Client = InfluxDBClientFactory.Create(InfluxDbUrl, authorization.Token);
             _tasksApi = Client.GetTasksApi();
 
             var count = (await _tasksApi.FindTasksByOrganizationAsync(taskOrg)).Count;

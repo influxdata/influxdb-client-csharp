@@ -190,7 +190,7 @@ namespace InfluxDB.Client.Test
 
             _client.Dispose();
             _client = InfluxDBClientFactory.Create(new InfluxDBClientOptions.Builder().Url(MockServerUrl)
-                .AuthenticateToken("my-token".ToCharArray()).Build());
+                .AuthenticateToken("my-token").Build());
 
             using (var writeApi = _client.GetWriteApi())
             {
@@ -204,7 +204,7 @@ namespace InfluxDB.Client.Test
 
             _client.Dispose();
             _client = InfluxDBClientFactory.Create(new InfluxDBClientOptions.Builder().Url(MockServerUrl + "/")
-                .AuthenticateToken("my-token".ToCharArray()).Build());
+                .AuthenticateToken("my-token").Build());
 
             using (var writeApi = _client.GetWriteApi())
             {

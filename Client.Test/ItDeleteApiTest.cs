@@ -42,7 +42,7 @@ namespace InfluxDB.Client.Test
             _token = authorization.Token;
 
             Client.Dispose();
-            var options = new InfluxDBClientOptions.Builder().Url(InfluxDbUrl).AuthenticateToken(_token.ToCharArray())
+            var options = new InfluxDBClientOptions.Builder().Url(InfluxDbUrl).AuthenticateToken(_token)
                             .Org(_organization.Id).Bucket(_bucket.Id).Build();
             Client = InfluxDBClientFactory.Create(options);
             _queryApi = Client.GetQueryApi();
@@ -139,7 +139,7 @@ namespace InfluxDB.Client.Test
             ConfigurationManager.AppSettings["point-sensor.version"] = "1.23a";
 
             var options = new InfluxDBClientOptions.Builder().Url(InfluxDbUrl)
-                            .AuthenticateToken(_token.ToCharArray())
+                            .AuthenticateToken(_token)
                             .AddDefaultTag("id", "132-987-655")
                             .AddDefaultTag("customer", "California Miner")
                             .AddDefaultTag("env-var", "${env.point-datacenter}")

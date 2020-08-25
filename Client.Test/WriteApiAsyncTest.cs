@@ -17,7 +17,7 @@ namespace InfluxDB.Client.Test
         [SetUp]
         public new void SetUp()
         {
-            _influxDbClient = InfluxDBClientFactory.Create(MockServerUrl, "token".ToCharArray());
+            _influxDbClient = InfluxDBClientFactory.Create(MockServerUrl, "token");
         }
 
         [TearDown]
