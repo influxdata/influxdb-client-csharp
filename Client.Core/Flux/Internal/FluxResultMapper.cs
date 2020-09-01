@@ -1,6 +1,6 @@
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using InfluxDB.Client.Core.Exceptions;
@@ -16,6 +16,11 @@ namespace InfluxDB.Client.Core.Flux.Internal
 {
     internal class FluxResultMapper
     {
+        // Reflection results are cached for poco type property and attribute lookups as an optimization since
+        // calls are invoked continuously for a given type and will not change over library lifetime
+        private static readonly ConcurrentDictionary<Type, PropertyInfo[]> PropertyCache = new ConcurrentDictionary<Type, PropertyInfo[]>();
+        private static readonly ConcurrentDictionary<PropertyInfo, Column> AttributeCache = new ConcurrentDictionary<PropertyInfo, Column>();
+
         /// <summary>
         /// Maps FluxRecord into custom POCO class.
         /// </summary>
@@ -30,53 +35,52 @@ namespace InfluxDB.Client.Core.Flux.Internal
             try
             {
                 var type = typeof(T);
-                var poco = (T) Activator.CreateInstance(type);
+                var poco = (T)Activator.CreateInstance(type);
 
-                var properties = type.GetProperties();
+                // copy record to case insensitive dictionary (do this once)
+                var recordValues =
+                    new Dictionary<string, object>(record.Values, StringComparer.InvariantCultureIgnoreCase);
+
+                var properties = PropertyCache.GetOrAdd(type, _ => type.GetProperties());
 
                 foreach (var property in properties)
                 {
-                    var attributes = property.GetCustomAttributes(typeof(Column), false);
-
-                    Column attribute = null;
-
-                    if (attributes.Length > 0)
+                    Column attribute = AttributeCache.GetOrAdd(property, _ =>
                     {
-                        attribute = (Column) attributes.First();
+                        var attributes = property.GetCustomAttributes(typeof(Column), false);
+                        return attributes.Length > 0 ? attributes[0] as Column : null;
+                    });
+
+                    if (attribute != null && attribute.IsTimestamp)
+                    {
+                        SetFieldValue(poco, property, record.GetTimeInDateTime());
                     }
-
-                    var columnName = property.Name;
-
-                    if (attribute != null && !string.IsNullOrEmpty(attribute.Name))
+                    else
                     {
-                        columnName = attribute.Name;
-                    }
+                        var columnName = property.Name;
 
-                    // copy record to case insensitive dictionary
-                    var recordValues =
-                        new Dictionary<string, object>(StringComparer.InvariantCultureIgnoreCase);
+                        if (attribute != null && !string.IsNullOrEmpty(attribute.Name))
+                        {
+                            columnName = attribute.Name;
+                        }
 
-                    foreach (var entry in record.Values)
-                    {
-                        recordValues.Add(entry.Key, entry.Value);
-                    }
+                        string col = null;
 
-                    string col = null;
+                        if (recordValues.ContainsKey(columnName))
+                        {
+                            col = columnName;
+                        }
+                        else if (recordValues.ContainsKey("_" + columnName))
+                        {
+                            col = "_" + columnName;
+                        }
 
-                    if (recordValues.ContainsKey(columnName))
-                    {
-                        col = columnName;
-                    }
-                    else if (recordValues.ContainsKey("_" + columnName))
-                    {
-                        col = "_" + columnName;
-                    }
-
-                    if (!string.IsNullOrEmpty(col))
-                    {
-                        recordValues.TryGetValue(col, out var value);
-
-                        SetFieldValue(poco, property, value);
+                        if (!string.IsNullOrEmpty(col))
+                        {
+                            // No need to set field value when column does not exist (default poco field value will be the same)
+                            if (recordValues.TryGetValue(col, out var value))
+                                SetFieldValue(poco, property, value);
+                        }
                     }
                 }
 
@@ -107,7 +111,7 @@ namespace InfluxDB.Client.Core.Flux.Internal
                 }
 
                 //convert primitives
-                if (typeof(double).IsAssignableFrom(propertyType) || typeof(Double).IsAssignableFrom(propertyType))
+                if (typeof(double).IsAssignableFrom(propertyType))
                 {
                     property.SetValue(poco, ToDoubleValue(value));
                     return;

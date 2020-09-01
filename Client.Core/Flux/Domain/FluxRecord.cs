@@ -50,7 +50,7 @@ namespace InfluxDB.Client.Core.Flux.Domain
         }
         
         ///<summary>
-        /// The timestamp as a <see cref="Instant"/>
+        /// The timestamp as a <see cref="DateTime"/>
         /// </summary>
         /// <returns>the time of the record</returns>
         public DateTime? GetTimeInDateTime()
@@ -61,7 +61,7 @@ namespace InfluxDB.Client.Core.Flux.Domain
         }
 
         /// <returns>the value of the record</returns>
-        public Object GetValue()
+        public object GetValue()
         {
             return GetValueByKey("_value");
         }
