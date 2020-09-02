@@ -41,7 +41,7 @@ namespace Examples
 {
     public static class SynchronousQuery
     {
-        private static readonly char[] Token = "".ToCharArray();
+        private static readonly string Token = "";
 
         public static async Task Main(string[] args)
         {
@@ -81,7 +81,7 @@ namespace Examples
 {
     public static class SynchronousQuery
     {
-        private static readonly char[] Token = "".ToCharArray();
+        private static readonly string Token = "";
 
         public static async Task Main(string[] args)
         {
@@ -130,7 +130,7 @@ namespace Examples
 {
     public static class AsynchronousQuery
     {
-        private static readonly char[] Token = "".ToCharArray();
+        private static readonly string Token = "";
 
         public static async Task Main(string[] args)
         {
@@ -183,7 +183,7 @@ namespace Examples
 {
     public static class AsynchronousQuery
     {
-        private static readonly char[] Token = "".ToCharArray();
+        private static readonly string Token = "";
 
         public static async Task Main(string[] args)
         {
@@ -235,7 +235,7 @@ namespace Examples
 {
     public static class RawQuery
     {
-        private static readonly char[] Token = "".ToCharArray();
+        private static readonly string Token = "";
 
         public static async Task Main(string[] args)
         {
@@ -269,7 +269,7 @@ namespace Examples
 {
     public static class RawQueryAsynchronous
     {
-        private static readonly char[] Token = "".ToCharArray();
+        private static readonly string Token = "";
 
         public static async Task Main(string[] args)
         {
@@ -338,7 +338,7 @@ namespace Examples
 {
     public static class WritePoco
     {
-        private static readonly char[] Token = "".ToCharArray();
+        private static readonly string Token = "";
 
         public static void Main(string[] args)
         {
@@ -387,7 +387,7 @@ namespace Examples
 {
     public static class WriteDataPoint
     {
-        private static readonly char[] Token = "".ToCharArray();
+        private static readonly string Token = "";
 
         public static void Main(string[] args)
         {
@@ -429,7 +429,7 @@ namespace Examples
 {
     public static class WriteDataPoint
     {
-        private static readonly char[] Token = "".ToCharArray();
+        private static readonly string Token = "";
 
         public static void Main(string[] args)
         {
@@ -478,7 +478,7 @@ namespace Examples
 {
     public static class WriteLineProtocol
     {
-        private static readonly char[] Token = "".ToCharArray();
+        private static readonly string Token = "";
 
         public static void Main(string[] args)
         {
@@ -692,7 +692,7 @@ namespace Examples
 {
     public static class WriteLineProtocol
     {
-        private static readonly char[] Token = "".ToCharArray();
+        private static readonly string Token = "";
 
         public static void Main(string[] args)
         {
@@ -740,7 +740,7 @@ namespace Examples
 {
     public static class ManagementExample
     {
-        private static readonly char[] Token = "".ToCharArray();
+        private static readonly string Token = "";
 
         public static async Task Main(string[] args)
         {

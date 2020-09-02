@@ -44,7 +44,7 @@ namespace InfluxDB.Client.Test
             _token = authorization.Token;
 
             Client.Dispose();
-            var options = new InfluxDBClientOptions.Builder().Url(InfluxDbUrl).AuthenticateToken(_token.ToCharArray())
+            var options = new InfluxDBClientOptions.Builder().Url(InfluxDbUrl).AuthenticateToken(_token)
                             .Org(_organization.Id).Bucket(_bucket.Id).Build();
             Client = InfluxDBClientFactory.Create(options);
 

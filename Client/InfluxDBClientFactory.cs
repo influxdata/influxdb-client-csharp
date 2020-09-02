@@ -72,6 +72,23 @@ namespace InfluxDB.Client
 
             return Create(options);
         }
+        
+        /// <summary>
+        /// Create a instance of the InfluxDB 2.0 client.
+        /// </summary>
+        /// <param name="url">the url to connect to the InfluxDB 2.0</param>
+        /// <param name="token">the token to use for the authorization</param>
+        /// <returns>client</returns>
+        public static InfluxDBClient Create(string url, string token)
+        {
+            var options = InfluxDBClientOptions.Builder
+                .CreateNew()
+                .Url(url)
+                .AuthenticateToken(token)
+                .Build();
+
+            return Create(options);
+        }
 
         /// <summary>
         /// Create a instance of the InfluxDB 2.0 client to connect into InfluxDB 1.8.
@@ -91,7 +108,7 @@ namespace InfluxDB.Client
                 .CreateNew()
                 .Url(url)
                 .Org("-")
-                .AuthenticateToken($"{username}:{new string(password)}".ToCharArray())
+                .AuthenticateToken($"{username}:{new string(password)}")
                 .Bucket($"{database}/{retentionPolicy}")
                 .Build();
 

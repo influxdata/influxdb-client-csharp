@@ -36,7 +36,7 @@ namespace InfluxDB.Client.Test
         [Test]
         public void CreateInstanceToken() {
 
-            var client = InfluxDBClientFactory.Create("http://localhost:9999", "xyz".ToCharArray());
+            var client = InfluxDBClientFactory.Create("http://localhost:9999", "xyz");
 
             Assert.IsNotNull(client);
         }

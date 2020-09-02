@@ -186,6 +186,16 @@ namespace InfluxDB.Client
 
                 return this;
             }
+            
+            /// <summary>
+            /// Setup authorization by <see cref="AuthenticationScheme.Token"/>.
+            /// </summary>
+            /// <param name="token">the token to use for the authorization</param>
+            /// <returns><see cref="Builder"/></returns>
+            public Builder AuthenticateToken(string token)
+            {
+                return AuthenticateToken(token.ToCharArray());
+            }
 
             /// <summary>
             /// Specify the default destination organization for writes and queries.
@@ -296,7 +306,7 @@ namespace InfluxDB.Client
 
                 if (!string.IsNullOrWhiteSpace(token))
                 {
-                    AuthenticateToken(token.ToCharArray());
+                    AuthenticateToken(token);
                 }
 
                 if (!string.IsNullOrWhiteSpace(logLevel))

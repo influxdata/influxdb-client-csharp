@@ -84,7 +84,7 @@ namespace InfluxDB.Client.Test
             Assert.IsNotEmpty(onboarding.Auth.Id);
             Assert.IsNotEmpty(onboarding.Auth.Token);
 
-            using (var client = InfluxDBClientFactory.Create(url, onboarding.Auth.Token.ToCharArray()))
+            using (var client = InfluxDBClientFactory.Create(url, onboarding.Auth.Token))
             {
                 var user = await client.GetUsersApi().MeAsync();
 
