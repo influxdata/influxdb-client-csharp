@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Runtime.CompilerServices;
+using System.Threading;
 using System.Threading.Tasks;
 using InfluxDB.Client.Core.Exceptions;
 using InfluxDB.Client.Core.Flux.Domain;
@@ -102,6 +104,27 @@ namespace InfluxDB.Client.Core.Internal
                 onError(e);
             }
         }
+
+#if NETSTANDARD2_1
+        protected async IAsyncEnumerable<T> QueryRecords<T>(RestRequest query, [EnumeratorCancellation] CancellationToken cancellationToken)
+        {
+            Arguments.CheckNotNull(query, nameof(query));
+
+            BeforeIntercept(query);
+
+            var response = await RestClient.ExecuteTaskAsync(query, cancellationToken);
+
+            response.Content = AfterIntercept((int)response.StatusCode, () => LoggingHandler.ToHeaders(response.Headers), response.Content);
+
+            RaiseForInfluxError(response, response.Content);
+
+            await foreach((FluxTable _, FluxRecord record) in _csvParser.ParseFluxResponseAsync(new StringReader(response.Content), cancellationToken))
+            {
+                if (!(record is null))
+                    yield return Mapper.ToPoco<T>(record);
+            }
+        }
+#endif
 
         protected abstract void BeforeIntercept(RestRequest query);
 
