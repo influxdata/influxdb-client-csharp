@@ -204,6 +204,7 @@ namespace InfluxDB.Client.Test
         }
 
         [Test]
+        [Ignore("//TODO https://github.com/influxdata/influxdb/issues/19540")]
         public async Task Owner()
         {
             var scraper = await _scraperTargetsApi
