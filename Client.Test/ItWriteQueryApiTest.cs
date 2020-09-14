@@ -21,11 +21,11 @@ namespace InfluxDB.Client.Test
         public new async Task SetUp()
         {
             _organization = await FindMyOrg();
-
-            var retention = new BucketRetentionRules(BucketRetentionRules.TypeEnum.Expire, 3600);
-
+            
+            //bug: https://github.com/influxdata/influxdb/issues/19518
+            //var retention = new BucketRetentionRules(BucketRetentionRules.TypeEnum.Expire, 3600);
             _bucket = await Client.GetBucketsApi()
-                .CreateBucketAsync(GenerateName("h2o"), retention, _organization);
+                .CreateBucketAsync(GenerateName("h2o"), null, _organization);
 
             //
             // Add Permissions to read and write to the Bucket
