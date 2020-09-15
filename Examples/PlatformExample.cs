@@ -65,7 +65,7 @@ namespace Examples
             // Create new client with specified authorization token
             //
 
-            influxDB = InfluxDBClientFactory.Create("http://localhost:9999", authorization.Token);
+            influxDB = InfluxDBClientFactory.Create("http://localhost:8086", authorization.Token);
 
             var writeOptions = WriteOptions
                 .CreateNew()
@@ -128,7 +128,7 @@ namespace Examples
         
         public static async Task Run()
         {
-            var client = InfluxDBClientFactory.Create("http://localhost:9999",
+            var client = InfluxDBClientFactory.Create("http://localhost:8086",
                             "my-user", "my-password".ToCharArray());
 
             await Example(client);

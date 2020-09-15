@@ -45,7 +45,7 @@ namespace Examples
 
         public static async Task Main(string[] args)
         {
-            var influxDBClient = InfluxDBClientFactory.Create("http://localhost:9999", Token);
+            var influxDBClient = InfluxDBClientFactory.Create("http://localhost:8086", Token);
 
             var flux = "from(bucket:\"temperature-sensors\") |> range(start: 0)";
             
@@ -85,7 +85,7 @@ namespace Examples
 
         public static async Task Main(string[] args)
         {
-            var influxDBClient = InfluxDBClientFactory.Create("http://localhost:9999", Token);
+            var influxDBClient = InfluxDBClientFactory.Create("http://localhost:8086", Token);
 
             var flux = "from(bucket:\"temperature-sensors\") |> range(start: 0)";
             
@@ -134,7 +134,7 @@ namespace Examples
 
         public static async Task Main(string[] args)
         {
-            var influxDBClient = InfluxDBClientFactory.Create("http://localhost:9999", Token);
+            var influxDBClient = InfluxDBClientFactory.Create("http://localhost:8086", Token);
 
             var flux = "from(bucket:\"temperature-sensors\") |> range(start: 0)";
 
@@ -187,7 +187,7 @@ namespace Examples
 
         public static async Task Main(string[] args)
         {
-            var influxDBClient = InfluxDBClientFactory.Create("http://localhost:9999", Token);
+            var influxDBClient = InfluxDBClientFactory.Create("http://localhost:8086", Token);
 
             var flux = "from(bucket:\"temperature-sensors\") |> range(start: 0)";
             
@@ -239,7 +239,7 @@ namespace Examples
 
         public static async Task Main(string[] args)
         {
-            var influxDBClient = InfluxDBClientFactory.Create("http://localhost:9999", Token);
+            var influxDBClient = InfluxDBClientFactory.Create("http://localhost:8086", Token);
 
             var flux = "from(bucket:\"temperature-sensors\") |> range(start: 0)";
 
@@ -273,7 +273,7 @@ namespace Examples
 
         public static async Task Main(string[] args)
         {
-            var influxDBClient = InfluxDBClientFactory.Create("http://localhost:9999", Token);
+            var influxDBClient = InfluxDBClientFactory.Create("http://localhost:8086", Token);
 
             var flux = "from(bucket:\"temperature-sensors\") |> range(start: 0)";
 
@@ -342,7 +342,7 @@ namespace Examples
 
         public static void Main(string[] args)
         {
-            var influxDBClient = InfluxDBClientFactory.Create("http://localhost:9999", Token);
+            var influxDBClient = InfluxDBClientFactory.Create("http://localhost:8086", Token);
 
             //
             // Write Data
@@ -391,7 +391,7 @@ namespace Examples
 
         public static void Main(string[] args)
         {
-            var influxDBClient = InfluxDBClientFactory.Create("http://localhost:9999", Token);
+            var influxDBClient = InfluxDBClientFactory.Create("http://localhost:8086", Token);
 
             //
             // Write Data
@@ -433,7 +433,7 @@ namespace Examples
 
         public static void Main(string[] args)
         {
-            var influxDBClient = InfluxDBClientFactory.Create("http://localhost:9999", Token);
+            var influxDBClient = InfluxDBClientFactory.Create("http://localhost:8086", Token);
 
             //
             // Write Data
@@ -482,7 +482,7 @@ namespace Examples
 
         public static void Main(string[] args)
         {
-            var influxDBClient = InfluxDBClientFactory.Create("http://localhost:9999", Token);
+            var influxDBClient = InfluxDBClientFactory.Create("http://localhost:8086", Token);
 
             //
             // Write Data
@@ -527,7 +527,7 @@ namespace Examples
         
         public static async Task Main(string[] args)
         {
-            var influxDbClient = InfluxDBClientFactory.Create("http://localhost:9999", 
+            var influxDbClient = InfluxDBClientFactory.Create("http://localhost:8086", 
                             "my-user", "my-password".ToCharArray());
 
             //
@@ -604,7 +604,7 @@ In a [configuration file](#client-configuration-file) you are able to specify de
     <appSettings>
         <add key="SensorVersion" value="v1.00"/>
     </appSettings>
-    <influx2 url="http://localhost:9999"
+    <influx2 url="http://localhost:8086"
              org="my-org"
              bucket="my-bucket"
              token="my-token"
@@ -696,7 +696,7 @@ namespace Examples
 
         public static void Main(string[] args)
         {
-            var influxDBClient = InfluxDBClientFactory.Create("http://localhost:9999", Token);
+            var influxDBClient = InfluxDBClientFactory.Create("http://localhost:8086", Token);
 
             //
             // Delete data
@@ -744,7 +744,7 @@ namespace Examples
 
         public static async Task Main(string[] args)
         {
-            var influxDBClient = InfluxDBClientFactory.Create("http://localhost:9999", Token);
+            var influxDBClient = InfluxDBClientFactory.Create("http://localhost:8086", Token);
 
             //
             // Create bucket "iot_bucket" with data retention set to 3,600 seconds
@@ -856,7 +856,7 @@ The `ReadWriteTimeout` and `Timeout` supports `ms`, `s` and `m` as unit. Default
         <section name="influx2" type="InfluxDB.Client.Configurations.Influx2, InfluxDB.Client" />
     </configSections>
 
-    <influx2 url="http://localhost:9999"
+    <influx2 url="http://localhost:8086"
              org="my-org"
              bucket="my-bucket"
              token="my-token"

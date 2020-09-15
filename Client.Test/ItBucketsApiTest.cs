@@ -314,6 +314,7 @@ namespace InfluxDB.Client.Test
         }
 
         [Test]
+        [Ignore("https://github.com/influxdata/influxdb/issues/19518")]
         public async Task UpdateBucket()
         {
             var createBucket =

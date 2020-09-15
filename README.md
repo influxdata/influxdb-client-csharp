@@ -86,7 +86,7 @@ namespace Examples
 
         public static async Task Main(string[] args)
         {
-            var influxDBClient = InfluxDBClientFactory.Create("http://localhost:9999", Token);
+            var influxDBClient = InfluxDBClientFactory.Create("http://localhost:8086", Token);
 
             //
             // Write Data
@@ -178,7 +178,7 @@ namespace Examples
 
         public static async Task Main(string[] args)
         {
-            var influxDBClient = InfluxDBClientFactory.Create("http://localhost:9999", Token);
+            var influxDBClient = InfluxDBClientFactory.Create("http://localhost:8086", Token);
 
             //
             // Create bucket "iot_bucket" with data retention set to 3,600 seconds
