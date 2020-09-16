@@ -108,20 +108,7 @@ namespace InfluxDB.Client
 
             var cloned = new Organization(null, clonedName);
 
-            return await CreateOrganizationAsync(cloned).ContinueWith(created =>
-            {
-                //
-                // Add labels
-                //
-                return GetLabelsAsync(organization)
-                    .ContinueWith(labels => { return labels.Result.Select(label => AddLabelAsync(label, created.Result)); })
-                    .ContinueWith(async tasks =>
-                    {
-                        await Task.WhenAll(tasks.Result);
-                        return created.Result;
-                    })
-                    .Unwrap();
-            }).Unwrap();
+            return await CreateOrganizationAsync(cloned);
         }
 
         /// <summary>
@@ -407,88 +394,6 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(ownerId, nameof(ownerId));
 
             await _service.DeleteOrgsIDOwnersIDAsync(ownerId, orgId);
-        }
-
-        /// <summary>
-        /// List all labels of an organization.
-        /// </summary>
-        /// <param name="organization">organization of the labels</param>
-        /// <returns>the List all labels of an organization</returns>
-        public async Task<List<Label>> GetLabelsAsync(Organization organization)
-        {
-            Arguments.CheckNotNull(organization, nameof(organization));
-
-            return await GetLabelsAsync(organization.Id);
-        }
-
-        /// <summary>
-        /// List all labels of an organization.
-        /// </summary>
-        /// <param name="orgId">ID of an organization to get labels</param>
-        /// <returns>the List all labels of an organization</returns>
-        public async Task<List<Label>> GetLabelsAsync(string orgId)
-        {
-            Arguments.CheckNonEmptyString(orgId, nameof(orgId));
-
-            return (await _service.GetOrgsIDLabelsAsync(orgId)).Labels;
-        }
-
-        /// <summary>
-        /// Add an organization label.
-        /// </summary>
-        /// <param name="label">the label of an organization</param>
-        /// <param name="organization">an organization of a label</param>
-        /// <returns>added label</returns>
-        public async Task<Label> AddLabelAsync(Label label, Organization organization)
-        {
-            Arguments.CheckNotNull(organization, nameof(organization));
-            Arguments.CheckNotNull(label, nameof(label));
-
-            return await AddLabelAsync(label.Id, organization.Id);
-        }
-
-        /// <summary>
-        /// Add an organization label.
-        /// </summary>
-        /// <param name="labelId">the ID of a label</param>
-        /// <param name="orgId">the ID of an organization</param>
-        /// <returns>added label</returns>
-        public async Task<Label> AddLabelAsync(string labelId, string orgId)
-        {
-            Arguments.CheckNonEmptyString(orgId, nameof(orgId));
-            Arguments.CheckNonEmptyString(labelId, nameof(labelId));
-
-            var mapping = new LabelMapping(labelId);
-            
-            return (await _service.PostOrgsIDLabelsAsync(orgId, mapping)).Label;
-        }
-
-        /// <summary>
-        /// Removes a label from an organization.
-        /// </summary>
-        /// <param name="label">the label of an organization</param>
-        /// <param name="organization">an organization of a owner</param>
-        /// <returns>delete has been accepted</returns>
-        public async Task DeleteLabelAsync(Label label, Organization organization)
-        {
-            Arguments.CheckNotNull(organization, nameof(organization));
-            Arguments.CheckNotNull(label, nameof(label));
-
-            await DeleteLabelAsync(label.Id, organization.Id);
-        }
-
-        /// <summary>
-        /// Removes a label from an organization.
-        /// </summary>
-        /// <param name="labelId">the ID of a label</param>
-        /// <param name="orgId">the ID of an organization</param>
-        /// <returns>delete has been accepted</returns>
-        public async Task DeleteLabelAsync(string labelId, string orgId)
-        {
-            Arguments.CheckNonEmptyString(orgId, nameof(orgId));
-            Arguments.CheckNonEmptyString(labelId, nameof(labelId));
-
-            await _service.DeleteOrgsIDLabelsIDAsync(orgId, labelId);
         }
     }
 }

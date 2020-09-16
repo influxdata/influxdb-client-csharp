@@ -21,25 +21,17 @@ namespace InfluxDB.Client.Test
         private UsersApi _usersApi;
 
         [Test]
-        [Ignore("TODO https://github.com/influxdata/influxdb/issues/18563")]
         public async Task CloneOrganization()
         {
             var source = await _organizationsApi.CreateOrganizationAsync(GenerateName("Constant Pro"));
 
             var properties = new Dictionary<string, string> {{"color", "green"}, {"location", "west"}};
-
-            var label = await Client.GetLabelsApi().CreateLabelAsync(GenerateName("Cool Resource"), properties, source.Id);
-            await _organizationsApi.AddLabelAsync(label, source);
-
             var name = GenerateName("cloned");
 
             var cloned = await _organizationsApi.CloneOrganizationAsync(name, source);
 
             Assert.AreEqual(name, cloned.Name);
 
-            var labels = await _organizationsApi.GetLabelsAsync(cloned);
-            Assert.AreEqual(1, labels.Count);
-            Assert.AreEqual(label.Id, labels[0].Id);
         }
 
         [Test]
@@ -142,39 +134,7 @@ namespace InfluxDB.Client.Test
             var organizationsNew = await _organizationsApi.FindOrganizationsAsync();
             Assert.AreEqual(organizationsNew.Count, organizations + 1);
         }
-
-        [Test]
-        [Ignore("TODO https://github.com/influxdata/influxdb/issues/18563")]
-        public async Task Labels()
-        {
-            var labelClient = Client.GetLabelsApi();
-
-            var organization = await _organizationsApi.CreateOrganizationAsync(GenerateName("Constant Pro"));
-
-            var properties = new Dictionary<string, string> {{"color", "green"}, {"location", "west"}};
-
-            var label = await labelClient.CreateLabelAsync(GenerateName("Cool Resource"), properties, organization.Id);
-
-            var labels = await _organizationsApi.GetLabelsAsync(organization);
-            Assert.AreEqual(0, labels.Count);
-
-            var addedLabel = await _organizationsApi.AddLabelAsync(label, organization);
-            Assert.IsNotNull(addedLabel);
-            Assert.AreEqual(label.Id, addedLabel.Id);
-            Assert.AreEqual(label.Name, addedLabel.Name);
-            Assert.AreEqual(label.Properties, addedLabel.Properties);
-
-            labels = await _organizationsApi.GetLabelsAsync(organization);
-            Assert.AreEqual(1, labels.Count);
-            Assert.AreEqual(label.Id, labels[0].Id);
-            Assert.AreEqual(label.Name, labels[0].Name);
-
-            await _organizationsApi.DeleteLabelAsync(label, organization);
-
-            labels = await _organizationsApi.GetLabelsAsync(organization);
-            Assert.AreEqual(0, labels.Count);
-        }
-
+        
         [Test]
         public async Task Member()
         {
