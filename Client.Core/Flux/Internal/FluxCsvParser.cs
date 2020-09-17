@@ -1,9 +1,11 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Runtime.CompilerServices;
 using System.Threading;
+using System.Threading.Tasks;
 using CsvHelper;
 using InfluxDB.Client.Core.Flux.Domain;
 using InfluxDB.Client.Core.Flux.Exceptions;
@@ -74,125 +76,29 @@ namespace InfluxDB.Client.Core.Flux.Internal
         {
             Arguments.CheckNotNull(source, "source");
 
-            var parsingState = ParsingState.Normal;
+            using var csv = new CsvReader(new StreamReader(source), CultureInfo.InvariantCulture);
+            ParseFluxResponseState state = new ParseFluxResponseState { csv = csv };
 
-            var tableIndex = 0;
-            var tableId = -1;
-            var startNewTable = false;
-            FluxTable table = null;
-
-            using (var csv = new CsvReader(new StreamReader(source), CultureInfo.InvariantCulture))
+            while (csv.Read())
             {
-                while (csv.Read())
+                if (cancellable != null && cancellable.IsCancelled())
                 {
-                    if (cancellable != null && cancellable.IsCancelled())
-                    {
-                        return;
-                    }
+                    return;
+                }
 
-                    //
-                    // Response has HTTP status ok, but response is error.
-                    //
-                    if ("error".Equals(csv[1]) && "reference".Equals(csv[2]))
-                    {
-                        parsingState = ParsingState.InError;
-                        continue;
-                    }
-
-                    //
-                    // Throw InfluxException with error response
-                    //
-                    if (ParsingState.InError.Equals(parsingState))
-                    {
-                        var error = csv[1];
-                        var referenceValue = csv[2];
-
-                        var reference = 0;
-
-                        if (referenceValue != null && !String.IsNullOrEmpty(referenceValue))
-                        {
-                            reference = Convert.ToInt32(referenceValue);
-                        }
-
-                        throw new FluxQueryException(error, reference);
-                    }
-
-                    var token = csv[0];
-
-                    //// start new table
-                    if ("#datatype".Equals(token))
-                    {
-                        startNewTable = true;
-
-                        table = new FluxTable();
-                        consumer.Accept(tableIndex, cancellable, table);
-                        tableIndex++;
-                        tableId = -1;
-                    }
-                    else if (table == null)
-                    {
-                        throw new FluxCsvParserException(
-                            "Unable to parse CSV response. FluxTable definition was not found.");
-                    }
-
-                    //#datatype,string,long,dateTime:RFC3339,dateTime:RFC3339,dateTime:RFC3339,double,string,string,string
-                    if ("#datatype".Equals(token))
-                    {
-                        AddDataTypes(table, csv);
-                    }
-                    else if ("#group".Equals(token))
-                    {
-                        AddGroups(table, csv);
-                    }
-                    else if ("#default".Equals(token))
-                    {
-                        AddDefaultEmptyValues(table, csv);
-                    }
+                foreach (var (table, record) in ParseNextFluxResponse(state))
+                {
+                    if (record == null)
+                        consumer.Accept(state.tableIndex, cancellable, table);
                     else
-                    {
-                        // parse column names
-                        if (startNewTable)
-                        {
-                            AddColumnNamesAndTags(table, csv);
-                            startNewTable = false;
-                            continue;
-                        }
-
-                        int currentId;
-
-                        try
-                        {
-                            currentId = Convert.ToInt32(csv[1 + 1]);
-                        }
-                        catch (Exception)
-                        {
-                            throw new FluxCsvParserException("Unable to parse CSV response.");
-                        }
-                        if (tableId == -1) {
-                            tableId = currentId;
-                        }
-
-                        if (tableId != currentId)
-                        {
-                            //create new table with previous column headers settings
-                            var fluxColumns = table.Columns;
-                            table = new FluxTable();
-                            table.Columns.AddRange(fluxColumns);
-                            consumer.Accept(tableIndex, cancellable, table);
-                            tableIndex++;
-                            tableId = currentId;
-                        }
-
-                        var fluxRecord = ParseRecord(tableIndex - 1, table, csv);
-                        consumer.Accept(tableIndex - 1, cancellable, fluxRecord);
-                    }
+                        consumer.Accept(state.tableIndex - 1, cancellable, record);
                 }
             }
         }
 
 #if NETSTANDARD2_1
         /// <summary>
-        /// Parse Flux CSV response to <see cref="IFluxResponseConsumer"/>.
+        /// Parse Flux CSV response to <see cref="IAsyncEnumerable{T}"/>.
         /// </summary>
         /// <param name="reader">CSV Data source reader</param>
         /// <param name="cancellationToken">cancellation token</param>
@@ -200,118 +106,128 @@ namespace InfluxDB.Client.Core.Flux.Internal
         {
             Arguments.CheckNotNull(reader, nameof(reader));
 
-            var parsingState = ParsingState.Normal;
-
-            var tableIndex = 0;
-            var tableId = -1;
-            var startNewTable = false;
-            FluxTable table = null;
-
             using var csv = new CsvReader(reader, CultureInfo.InvariantCulture);
+            ParseFluxResponseState state = new ParseFluxResponseState { csv = csv };
 
             while (await csv.ReadAsync() && !cancellationToken.IsCancellationRequested)
             {
-                //
-                // Response has HTTP status ok, but response is error.
-                //
-                if ("error".Equals(csv[1]) && "reference".Equals(csv[2]))
-                {
-                    parsingState = ParsingState.InError;
-                    continue;
-                }
-
-                //
-                // Throw InfluxException with error response
-                //
-                if (ParsingState.InError.Equals(parsingState))
-                {
-                    var error = csv[1];
-                    var referenceValue = csv[2];
-
-                    var reference = 0;
-
-                    if (referenceValue != null && !String.IsNullOrEmpty(referenceValue))
-                    {
-                        reference = Convert.ToInt32(referenceValue);
-                    }
-
-                    throw new FluxQueryException(error, reference);
-                }
-
-                var token = csv[0];
-
-                //// start new table
-                if ("#datatype".Equals(token))
-                {
-                    startNewTable = true;
-
-                    table = new FluxTable();
-                    yield return (table, null);
-
-                    tableIndex++;
-                    tableId = -1;
-                }
-                else if (table == null)
-                {
-                    throw new FluxCsvParserException(
-                        "Unable to parse CSV response. FluxTable definition was not found.");
-                }
-
-                //#datatype,string,long,dateTime:RFC3339,dateTime:RFC3339,dateTime:RFC3339,double,string,string,string
-                if ("#datatype".Equals(token))
-                {
-                    AddDataTypes(table, csv);
-                }
-                else if ("#group".Equals(token))
-                {
-                    AddGroups(table, csv);
-                }
-                else if ("#default".Equals(token))
-                {
-                    AddDefaultEmptyValues(table, csv);
-                }
-                else
-                {
-                    // parse column names
-                    if (startNewTable)
-                    {
-                        AddColumnNamesAndTags(table, csv);
-                        startNewTable = false;
-                        continue;
-                    }
-
-                    int currentId;
-
-                    try
-                    {
-                        currentId = Convert.ToInt32(csv[1 + 1]);
-                    }
-                    catch (Exception)
-                    {
-                        throw new FluxCsvParserException("Unable to parse CSV response.");
-                    }
-                    if (tableId == -1)
-                    {
-                        tableId = currentId;
-                    }
-
-                    if (tableId != currentId)
-                    {
-                        //create new table with previous column headers settings
-                        var fluxColumns = table.Columns;
-                        table = new FluxTable();
-                        table.Columns.AddRange(fluxColumns);
-                        yield return (table, null);
-
-                        tableIndex++;
-                        tableId = currentId;
-                    }
-
-                    yield return (table, ParseRecord(tableIndex - 1, table, csv));
-                }
+                foreach (var response in ParseNextFluxResponse(state))
+                    yield return response;   
             }
         }
 #endif
+
+        private class ParseFluxResponseState
+        {
+            public ParsingState parsingState = ParsingState.Normal;
+            public int tableIndex;
+            public int tableId = -1;
+            public bool startNewTable;
+            public FluxTable table;
+            public CsvReader csv;
+        }
+
+        private IEnumerable<(FluxTable, FluxRecord)> ParseNextFluxResponse(ParseFluxResponseState state)
+        {
+            //
+            // Response has HTTP status ok, but response is error.
+            //
+            if ("error".Equals(state.csv[1]) && "reference".Equals(state.csv[2]))
+            {
+                state.parsingState = ParsingState.InError;
+                yield break;
+            }
+
+            //
+            // Throw InfluxException with error response
+            //
+            if (ParsingState.InError.Equals(state.parsingState))
+            {
+                var error = state.csv[1];
+                var referenceValue = state.csv[2];
+
+                var reference = 0;
+
+                if (referenceValue != null && !String.IsNullOrEmpty(referenceValue))
+                {
+                    reference = Convert.ToInt32(referenceValue);
+                }
+
+                throw new FluxQueryException(error, reference);
+            }
+
+            var token = state.csv[0];
+
+            //// start new table
+            if ("#datatype".Equals(token))
+            {
+                state.startNewTable = true;
+
+                state.table = new FluxTable();
+                yield return (state.table, null);
+
+                state.tableIndex++;
+                state.tableId = -1;
+            }
+            else if (state.table == null)
+            {
+                throw new FluxCsvParserException(
+                    "Unable to parse CSV response. FluxTable definition was not found.");
+            }
+
+            //#datatype,string,long,dateTime:RFC3339,dateTime:RFC3339,dateTime:RFC3339,double,string,string,string
+            if ("#datatype".Equals(token))
+            {
+                AddDataTypes(state.table, state.csv);
+            }
+            else if ("#group".Equals(token))
+            {
+                AddGroups(state.table, state.csv);
+            }
+            else if ("#default".Equals(token))
+            {
+                AddDefaultEmptyValues(state.table, state.csv);
+            }
+            else
+            {
+                // parse column names
+                if (state.startNewTable)
+                {
+                    AddColumnNamesAndTags(state.table, state.csv);
+                    state.startNewTable = false;
+                    yield break;
+                }
+
+                int currentId;
+
+                try
+                {
+                    currentId = Convert.ToInt32(state.csv[1 + 1]);
+                }
+                catch (Exception)
+                {
+                    throw new FluxCsvParserException("Unable to parse CSV response.");
+                }
+                if (state.tableId == -1)
+                {
+                    state.tableId = currentId;
+                }
+
+                if (state.tableId != currentId)
+                {
+                    //create new table with previous column headers settings
+                    var fluxColumns = state.table.Columns;
+                    state.table = new FluxTable();
+                    state.table.Columns.AddRange(fluxColumns);
+                    yield return (state.table, null);
+
+                    state.tableIndex++;
+                    state.tableId = currentId;
+                }
+
+                yield return (state.table, ParseRecord(state.tableIndex - 1, state.table, state.csv));
+            }
+        }
 
         private FluxRecord ParseRecord(int tableIndex, FluxTable table, CsvReader csv)
         {
