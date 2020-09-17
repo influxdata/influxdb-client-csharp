@@ -12,7 +12,7 @@ namespace InfluxDB.Client.Core.Exceptions
 {
     public class InfluxException : Exception
     {
-        public InfluxException(string message) : this(message, 0)
+        public InfluxException(string message, Exception exception = null) : this(message, 0, exception)
         {
         }
 
@@ -21,7 +21,7 @@ namespace InfluxDB.Client.Core.Exceptions
             Code = 0;
         }
 
-        public InfluxException(string message, int code) : base(message)
+        public InfluxException(string message, int code, Exception exception = null) : base(message, exception)
         {
             Code = code;
             Status = 0;
@@ -40,7 +40,7 @@ namespace InfluxDB.Client.Core.Exceptions
 
     public class HttpException : InfluxException
     {
-        public HttpException(string message, int status) : base(message, 0)
+        public HttpException(string message, int status, Exception exception = null) : base(message, 0, exception)
         {
             Status = status;
         }
