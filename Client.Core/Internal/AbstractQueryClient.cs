@@ -105,7 +105,6 @@ namespace InfluxDB.Client.Core.Internal
             }
         }
 
-#if NETSTANDARD2_1
         protected async IAsyncEnumerable<T> QueryRecords<T>(RestRequest query, [EnumeratorCancellation] CancellationToken cancellationToken)
         {
             Arguments.CheckNotNull(query, nameof(query));
@@ -124,7 +123,6 @@ namespace InfluxDB.Client.Core.Internal
                     yield return Mapper.ToPoco<T>(record);
             }
         }
-#endif
 
         protected abstract void BeforeIntercept(RestRequest query);
 

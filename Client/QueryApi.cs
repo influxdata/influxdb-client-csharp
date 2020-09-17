@@ -169,7 +169,6 @@ namespace InfluxDB.Client
             return await QueryAsync<T>(CreateQuery(query), org);
         }
 
-#if NETSTANDARD2_1
         /// <summary>
         /// Executes the Flux query against the InfluxDB 2.0 and asynchronously maps
         /// response to enumerable of objects of type <typeparamref name="T"/>.
@@ -207,7 +206,6 @@ namespace InfluxDB.Client
             await foreach (T record in QueryRecords<T>(requestMessage, cancellationToken))
                 yield return record;
         }
-#endif
 
         /// <summary>
         /// Executes the Flux query against the InfluxDB 2.0 and synchronously map whole response

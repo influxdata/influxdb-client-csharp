@@ -431,7 +431,6 @@ namespace Client.Legacy.Test
             Assert.That(records.Count == 2);
         }
 
-#if NETCOREAPP3_1
         [Test]
         public async Task ParsingToAsyncEnumerable()
         {
@@ -453,7 +452,6 @@ namespace Client.Legacy.Test
 
             Assert.That(records.Count == 2);
         }
-#endif
 
         [Test]
         public void CancelParsing()
@@ -483,7 +481,6 @@ namespace Client.Legacy.Test
             Assert.That(records.Count == 1);
         }
 
-#if NETCOREAPP3_1
         [Test]
         public async Task CancelParsingAsync()
         {
@@ -510,7 +507,6 @@ namespace Client.Legacy.Test
 
             Assert.That(records.Count == 1);
         }
-#endif
 
         [Test]
         public void ParseDifferentSchemas()

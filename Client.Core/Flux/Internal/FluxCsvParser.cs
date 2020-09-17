@@ -96,7 +96,6 @@ namespace InfluxDB.Client.Core.Flux.Internal
             }
         }
 
-#if NETSTANDARD2_1
         /// <summary>
         /// Parse Flux CSV response to <see cref="IAsyncEnumerable{T}"/>.
         /// </summary>
@@ -115,7 +114,6 @@ namespace InfluxDB.Client.Core.Flux.Internal
                     yield return response;   
             }
         }
-#endif
 
         private class ParseFluxResponseState
         {
