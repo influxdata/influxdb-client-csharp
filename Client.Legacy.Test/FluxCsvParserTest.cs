@@ -1,6 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 using InfluxDB.Client.Core;
 using InfluxDB.Client.Core.Flux.Domain;
 using InfluxDB.Client.Core.Flux.Exceptions;
@@ -428,6 +431,30 @@ namespace Client.Legacy.Test
             Assert.That(records.Count == 2);
         }
 
+#if NETCOREAPP3_1
+        [Test]
+        public async Task ParsingToAsyncEnumerable()
+        {
+            var data = "#datatype,string,long,dateTime:RFC3339,dateTime:RFC3339,dateTime:RFC3339,long,string,string,string,unknown\n"
+                            + "#group,false,false,false,false,false,false,false,false,false,true\n"
+                            + "#default,_result,,,,,,,,,\n"
+                            + ",result,table,_start,_stop,_time,_value,_field,_measurement,host,value\n"
+                            + ",,0,1970-01-01T00:00:10Z,1970-01-01T00:00:20Z,1970-01-01T00:00:10Z,10,free,mem,A,12.25\n"
+                            + ",,0,1970-01-01T00:00:10Z,1970-01-01T00:00:20Z,1970-01-01T00:00:10Z,10,free,mem,A,\n";
+
+            var records = new List<FluxRecord>();
+
+            await foreach (var (table, record) in _parser.ParseFluxResponseAsync(new StringReader(data), CancellationToken.None))
+            {
+                // table with null record is "new table" indicator
+                if (!(record is null))
+                    records.Add(record);
+            }
+
+            Assert.That(records.Count == 2);
+        }
+#endif
+
         [Test]
         public void CancelParsing()
         {
@@ -455,6 +482,35 @@ namespace Client.Legacy.Test
             _parser.ParseFluxResponse(FluxCsvParser.ToStream(data), defaultCancellable, consumer);
             Assert.That(records.Count == 1);
         }
+
+#if NETCOREAPP3_1
+        [Test]
+        public async Task CancelParsingAsync()
+        {
+            var data = "#datatype,string,long,dateTime:RFC3339,dateTime:RFC3339,dateTime:RFC3339,long,string,string,string,unknown\n"
+                            + "#group,false,false,false,false,false,false,false,false,false,true\n"
+                            + "#default,_result,,,,,,,,,\n"
+                            + ",result,table,_start,_stop,_time,_value,_field,_measurement,host,value\n"
+                            + ",,0,1970-01-01T00:00:10Z,1970-01-01T00:00:20Z,1970-01-01T00:00:10Z,10,free,mem,A,12.25\n"
+                            + ",,0,1970-01-01T00:00:10Z,1970-01-01T00:00:20Z,1970-01-01T00:00:10Z,10,free,mem,A,\n";
+
+            var records = new List<FluxRecord>();
+
+            var cancellationSource = new CancellationTokenSource();
+
+            await foreach (var (table, record) in _parser.ParseFluxResponseAsync(new StringReader(data), cancellationSource.Token))
+            {
+                // table with null record is "new table" indicator
+                if (!(record is null))
+                {
+                    cancellationSource.Cancel();
+                    records.Add(record);
+                }
+            }
+
+            Assert.That(records.Count == 1);
+        }
+#endif
 
         [Test]
         public void ParseDifferentSchemas()
