@@ -5,6 +5,7 @@
 
 ### API
 1. [#122](https://github.com/influxdata/influxdb-client-csharp/issues/122): Default port changed from 9999 to 8086
+1. [#124](https://github.com/influxdata/influxdb-client-csharp/pull/124): Removed labels in organization API, removed Pkg* structure and package service
 
 ## 1.11.0 [2020-08-14]
 
