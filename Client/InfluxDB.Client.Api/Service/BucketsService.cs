@@ -132,11 +132,12 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
+        /// <param name="after">The last resource ID from which to seek from (but not including). This is to be used instead of &#x60;offset&#x60;.  (optional)</param>
         /// <param name="org">The organization name. (optional)</param>
         /// <param name="orgID">The organization ID. (optional)</param>
         /// <param name="name">Only returns buckets with a specific name. (optional)</param>
         /// <returns>Buckets</returns>
-        Buckets GetBuckets (string zapTraceSpan = null, int? offset = null, int? limit = null, string org = null, string orgID = null, string name = null);
+        Buckets GetBuckets (string zapTraceSpan = null, int? offset = null, int? limit = null, string after = null, string org = null, string orgID = null, string name = null);
 
         /// <summary>
         /// List all buckets
@@ -148,11 +149,12 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
+        /// <param name="after">The last resource ID from which to seek from (but not including). This is to be used instead of &#x60;offset&#x60;.  (optional)</param>
         /// <param name="org">The organization name. (optional)</param>
         /// <param name="orgID">The organization ID. (optional)</param>
         /// <param name="name">Only returns buckets with a specific name. (optional)</param>
         /// <returns>ApiResponse of Buckets</returns>
-        ApiResponse<Buckets> GetBucketsWithHttpInfo (string zapTraceSpan = null, int? offset = null, int? limit = null, string org = null, string orgID = null, string name = null);
+        ApiResponse<Buckets> GetBucketsWithHttpInfo (string zapTraceSpan = null, int? offset = null, int? limit = null, string after = null, string org = null, string orgID = null, string name = null);
         /// <summary>
         /// Retrieve a bucket
         /// </summary>
@@ -503,11 +505,12 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
+        /// <param name="after">The last resource ID from which to seek from (but not including). This is to be used instead of &#x60;offset&#x60;.  (optional)</param>
         /// <param name="org">The organization name. (optional)</param>
         /// <param name="orgID">The organization ID. (optional)</param>
         /// <param name="name">Only returns buckets with a specific name. (optional)</param>
         /// <returns>Task of Buckets</returns>
-        System.Threading.Tasks.Task<Buckets> GetBucketsAsync (string zapTraceSpan = null, int? offset = null, int? limit = null, string org = null, string orgID = null, string name = null);
+        System.Threading.Tasks.Task<Buckets> GetBucketsAsync (string zapTraceSpan = null, int? offset = null, int? limit = null, string after = null, string org = null, string orgID = null, string name = null);
 
         /// <summary>
         /// List all buckets
@@ -519,11 +522,12 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
+        /// <param name="after">The last resource ID from which to seek from (but not including). This is to be used instead of &#x60;offset&#x60;.  (optional)</param>
         /// <param name="org">The organization name. (optional)</param>
         /// <param name="orgID">The organization ID. (optional)</param>
         /// <param name="name">Only returns buckets with a specific name. (optional)</param>
         /// <returns>Task of ApiResponse (Buckets)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Buckets>> GetBucketsAsyncWithHttpInfo (string zapTraceSpan = null, int? offset = null, int? limit = null, string org = null, string orgID = null, string name = null);
+        System.Threading.Tasks.Task<ApiResponse<Buckets>> GetBucketsAsyncWithHttpInfo (string zapTraceSpan = null, int? offset = null, int? limit = null, string after = null, string org = null, string orgID = null, string name = null);
         /// <summary>
         /// Retrieve a bucket
         /// </summary>
@@ -2211,13 +2215,14 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
+        /// <param name="after">The last resource ID from which to seek from (but not including). This is to be used instead of &#x60;offset&#x60;.  (optional)</param>
         /// <param name="org">The organization name. (optional)</param>
         /// <param name="orgID">The organization ID. (optional)</param>
         /// <param name="name">Only returns buckets with a specific name. (optional)</param>
         /// <returns>Buckets</returns>
-        public Buckets GetBuckets (string zapTraceSpan = null, int? offset = null, int? limit = null, string org = null, string orgID = null, string name = null)
+        public Buckets GetBuckets (string zapTraceSpan = null, int? offset = null, int? limit = null, string after = null, string org = null, string orgID = null, string name = null)
         {
-             ApiResponse<Buckets> localVarResponse = GetBucketsWithHttpInfo(zapTraceSpan, offset, limit, org, orgID, name);
+             ApiResponse<Buckets> localVarResponse = GetBucketsWithHttpInfo(zapTraceSpan, offset, limit, after, org, orgID, name);
              return localVarResponse.Data;
         }
 
@@ -2228,11 +2233,12 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
+        /// <param name="after">The last resource ID from which to seek from (but not including). This is to be used instead of &#x60;offset&#x60;.  (optional)</param>
         /// <param name="org">The organization name. (optional)</param>
         /// <param name="orgID">The organization ID. (optional)</param>
         /// <param name="name">Only returns buckets with a specific name. (optional)</param>
         /// <returns>ApiResponse of Buckets</returns>
-        public ApiResponse< Buckets > GetBucketsWithHttpInfo (string zapTraceSpan = null, int? offset = null, int? limit = null, string org = null, string orgID = null, string name = null)
+        public ApiResponse< Buckets > GetBucketsWithHttpInfo (string zapTraceSpan = null, int? offset = null, int? limit = null, string after = null, string org = null, string orgID = null, string name = null)
         {
 
             var localVarPath = "/api/v2/buckets";
@@ -2250,6 +2256,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (offset != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "offset", offset)); // query parameter
             if (limit != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "limit", limit)); // query parameter
+            if (after != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "after", after)); // query parameter
             if (org != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
             if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
             if (name != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "name", name)); // query parameter
@@ -2290,11 +2297,12 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
+        /// <param name="after">The last resource ID from which to seek from (but not including). This is to be used instead of &#x60;offset&#x60;.  (optional)</param>
         /// <param name="org">The organization name. (optional)</param>
         /// <param name="orgID">The organization ID. (optional)</param>
         /// <param name="name">Only returns buckets with a specific name. (optional)</param>
         /// <returns>ApiResponse of Buckets</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> GetBucketsWithIRestResponseAsync (string zapTraceSpan = null, int? offset = null, int? limit = null, string org = null, string orgID = null, string name = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetBucketsWithIRestResponseAsync (string zapTraceSpan = null, int? offset = null, int? limit = null, string after = null, string org = null, string orgID = null, string name = null)
         {
 
             var localVarPath = "/api/v2/buckets";
@@ -2312,6 +2320,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (offset != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "offset", offset)); // query parameter
             if (limit != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "limit", limit)); // query parameter
+            if (after != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "after", after)); // query parameter
             if (org != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
             if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
             if (name != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "name", name)); // query parameter
@@ -2350,11 +2359,12 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
+        /// <param name="after">The last resource ID from which to seek from (but not including). This is to be used instead of &#x60;offset&#x60;.  (optional)</param>
         /// <param name="org">The organization name. (optional)</param>
         /// <param name="orgID">The organization ID. (optional)</param>
         /// <param name="name">Only returns buckets with a specific name. (optional)</param>
         /// <returns>ApiResponse of Buckets</returns>
-        public IRestResponse GetBucketsWithIRestResponse (string zapTraceSpan = null, int? offset = null, int? limit = null, string org = null, string orgID = null, string name = null)
+        public IRestResponse GetBucketsWithIRestResponse (string zapTraceSpan = null, int? offset = null, int? limit = null, string after = null, string org = null, string orgID = null, string name = null)
         {
 
             var localVarPath = "/api/v2/buckets";
@@ -2372,6 +2382,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (offset != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "offset", offset)); // query parameter
             if (limit != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "limit", limit)); // query parameter
+            if (after != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "after", after)); // query parameter
             if (org != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
             if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
             if (name != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "name", name)); // query parameter
@@ -2410,11 +2421,12 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
+        /// <param name="after">The last resource ID from which to seek from (but not including). This is to be used instead of &#x60;offset&#x60;.  (optional)</param>
         /// <param name="org">The organization name. (optional)</param>
         /// <param name="orgID">The organization ID. (optional)</param>
         /// <param name="name">Only returns buckets with a specific name. (optional)</param>
         /// <returns>ApiResponse of Buckets</returns>
-        public RestRequest GetBucketsWithRestRequest (string zapTraceSpan = null, int? offset = null, int? limit = null, string org = null, string orgID = null, string name = null)
+        public RestRequest GetBucketsWithRestRequest (string zapTraceSpan = null, int? offset = null, int? limit = null, string after = null, string org = null, string orgID = null, string name = null)
         {
 
             var localVarPath = "/api/v2/buckets";
@@ -2432,6 +2444,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (offset != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "offset", offset)); // query parameter
             if (limit != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "limit", limit)); // query parameter
+            if (after != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "after", after)); // query parameter
             if (org != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
             if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
             if (name != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "name", name)); // query parameter
@@ -2459,13 +2472,14 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
+        /// <param name="after">The last resource ID from which to seek from (but not including). This is to be used instead of &#x60;offset&#x60;.  (optional)</param>
         /// <param name="org">The organization name. (optional)</param>
         /// <param name="orgID">The organization ID. (optional)</param>
         /// <param name="name">Only returns buckets with a specific name. (optional)</param>
         /// <returns>Task of Buckets</returns>
-        public async System.Threading.Tasks.Task<Buckets> GetBucketsAsync (string zapTraceSpan = null, int? offset = null, int? limit = null, string org = null, string orgID = null, string name = null)
+        public async System.Threading.Tasks.Task<Buckets> GetBucketsAsync (string zapTraceSpan = null, int? offset = null, int? limit = null, string after = null, string org = null, string orgID = null, string name = null)
         {
-             ApiResponse<Buckets> localVarResponse = await GetBucketsAsyncWithHttpInfo(zapTraceSpan, offset, limit, org, orgID, name);
+             ApiResponse<Buckets> localVarResponse = await GetBucketsAsyncWithHttpInfo(zapTraceSpan, offset, limit, after, org, orgID, name);
              return localVarResponse.Data;
 
         }
@@ -2477,14 +2491,15 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
+        /// <param name="after">The last resource ID from which to seek from (but not including). This is to be used instead of &#x60;offset&#x60;.  (optional)</param>
         /// <param name="org">The organization name. (optional)</param>
         /// <param name="orgID">The organization ID. (optional)</param>
         /// <param name="name">Only returns buckets with a specific name. (optional)</param>
         /// <returns>Task of ApiResponse (Buckets)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Buckets>> GetBucketsAsyncWithHttpInfo (string zapTraceSpan = null, int? offset = null, int? limit = null, string org = null, string orgID = null, string name = null)
+        public async System.Threading.Tasks.Task<ApiResponse<Buckets>> GetBucketsAsyncWithHttpInfo (string zapTraceSpan = null, int? offset = null, int? limit = null, string after = null, string org = null, string orgID = null, string name = null)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await GetBucketsAsyncWithIRestResponse(zapTraceSpan, offset, limit, org, orgID, name);
+            IRestResponse localVarResponse = await GetBucketsAsyncWithIRestResponse(zapTraceSpan, offset, limit, after, org, orgID, name);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -2506,11 +2521,12 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
+        /// <param name="after">The last resource ID from which to seek from (but not including). This is to be used instead of &#x60;offset&#x60;.  (optional)</param>
         /// <param name="org">The organization name. (optional)</param>
         /// <param name="orgID">The organization ID. (optional)</param>
         /// <param name="name">Only returns buckets with a specific name. (optional)</param>
         /// <returns>Task of IRestResponse (Buckets)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> GetBucketsAsyncWithIRestResponse (string zapTraceSpan = null, int? offset = null, int? limit = null, string org = null, string orgID = null, string name = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetBucketsAsyncWithIRestResponse (string zapTraceSpan = null, int? offset = null, int? limit = null, string after = null, string org = null, string orgID = null, string name = null)
         {
 
             var localVarPath = "/api/v2/buckets";
@@ -2528,6 +2544,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (offset != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "offset", offset)); // query parameter
             if (limit != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "limit", limit)); // query parameter
+            if (after != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "after", after)); // query parameter
             if (org != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
             if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
             if (name != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "name", name)); // query parameter

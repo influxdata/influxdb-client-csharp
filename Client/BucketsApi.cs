@@ -209,7 +209,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(bucketName, nameof(bucketName));
 
-            return (await _service.GetBucketsAsync(null, null, null, null, null, bucketName))
+            return (await _service.GetBucketsAsync(null, null, null, null, null, null, bucketName))
                 ._Buckets.FirstOrDefault();
         }
 
@@ -506,7 +506,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNotNull(findOptions, nameof(findOptions));
 
-            return await _service.GetBucketsAsync(null, findOptions.Offset, findOptions.Limit, orgName);
+            return await _service.GetBucketsAsync(null, findOptions.Offset, findOptions.Limit, after: findOptions.After,org: orgName);
         }
     }
 }
