@@ -9,9 +9,9 @@ NET_VERSION=`dotnet --version | awk -F. '{printf "netcoreapp"$1"."$2;}'`
 
 echo "$NET_VERSION"
 
-sed -i '/<TargetFramework>netcoreapp2.2<\/TargetFramework>/c\<TargetFramework>'"${NET_VERSION}"'<\/TargetFramework>' Client.Core.Test/Client.Core.Test.csproj
-sed -i '/<TargetFramework>netcoreapp2.2<\/TargetFramework>/c\<TargetFramework>'"${NET_VERSION}"'<\/TargetFramework>' Client.Test/Client.Test.csproj
-sed -i '/<TargetFramework>netcoreapp2.2<\/TargetFramework>/c\<TargetFramework>'"${NET_VERSION}"'<\/TargetFramework>' Client.Legacy.Test/Client.Legacy.Test.csproj
+sed -i '/<TargetFrameworks>netcoreapp2.2;netcoreapp3.1<\/TargetFrameworks>/c\<TargetFramework>'"${NET_VERSION}"'<\/TargetFramework>' Client.Core.Test/Client.Core.Test.csproj
+sed -i '/<TargetFrameworks>netcoreapp2.2;netcoreapp3.1<\/TargetFrameworks>/c\<TargetFramework>'"${NET_VERSION}"'<\/TargetFramework>' Client.Test/Client.Test.csproj
+sed -i '/<TargetFrameworks>netcoreapp2.2;netcoreapp3.1<\/TargetFrameworks>/c\<TargetFramework>'"${NET_VERSION}"'<\/TargetFramework>' Client.Legacy.Test/Client.Legacy.Test.csproj
 
 #
 # Install testing tools
