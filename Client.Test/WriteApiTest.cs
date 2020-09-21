@@ -58,7 +58,7 @@ namespace InfluxDB.Client.Test
                 };
             }
 
-            internal T Get<T>()
+            internal T Get<T>() where T : EventArgs
             {
                 if (_events.Count == 0)
                 {
