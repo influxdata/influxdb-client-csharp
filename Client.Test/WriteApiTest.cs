@@ -9,6 +9,7 @@ using InfluxDB.Client.Core.Exceptions;
 using InfluxDB.Client.Core.Test;
 using InfluxDB.Client.Writes;
 using NUnit.Framework;
+using RestSharp.Extensions;
 using WireMock.RequestBuilders;
 using WireMock.ResponseBuilders;
 
@@ -73,7 +74,12 @@ namespace InfluxDB.Client.Test
                 _events.RemoveAt(0);
                 Trace.WriteLine(args);
 
-                return (T) Convert.ChangeType(args, typeof(T));
+                if (args is T result)
+                {
+                    return result;
+                }
+
+                throw new InvalidCastException($"{args.GetType().FullName} cannot be cast to {typeof(T).FullName}");
             }
 
             internal int EventCount()
