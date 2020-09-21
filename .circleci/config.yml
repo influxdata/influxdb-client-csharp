@@ -56,11 +56,16 @@ jobs:
       dotnet-image:
         type: string
         default: &default-dotnet-image "mcr.microsoft.com/dotnet/core/sdk:3.1"
+      dotnet-target-version:
+        type: string
+        default: "netstandard2.1"
       influxdb-image:
         type: string
         default: &default-influxdb-image "influxdb:2.0.0-rc"
     docker:
       - image: << parameters.dotnet-image >>
+        environment:
+          NET_TARGET_VERSION: << parameters.dotnet-target-version >>
       - image: &influx-image quay.io/influxdb/<< parameters.influxdb-image >>
         environment:
           INFLUXD_HTTP_BIND_ADDRESS: :9999
@@ -147,6 +152,7 @@ workflows:
       - tests-dotnet:
           name: dotnet-2.2
           dotnet-image: "mcr.microsoft.com/dotnet/core/sdk:2.2"
+          dotnet-target-version: "netstandard2.0"
       - tests-dotnet:
           name: dotnet-3.1-nightly
           influxdb-image: "influx:nightly"
