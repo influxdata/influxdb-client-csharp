@@ -55,7 +55,7 @@ jobs:
     parameters:
       dotnet-image:
         type: string
-        default: &default-dotnet-image "mcr.microsoft.com/dotnet/core/sdk:2.2"
+        default: &default-dotnet-image "mcr.microsoft.com/dotnet/core/sdk:3.1"
       influxdb-image:
         type: string
         default: &default-influxdb-image "influxdb:2.0.0-rc"
@@ -146,15 +146,15 @@ workflows:
     jobs:
       - tests-dotnet:
           name: dotnet-2.2
+          dotnet-image: "mcr.microsoft.com/dotnet/core/sdk:2.2"
       - tests-dotnet:
-          name: dotnet-2.2-nightly
+          name: dotnet-3.1-nightly
           influxdb-image: "influx:nightly"
       - tests-dotnet:
           name: dotnet-3.0
           dotnet-image: "mcr.microsoft.com/dotnet/core/sdk:3.0"
       - tests-dotnet:
           name: dotnet-3.1
-          dotnet-image: "mcr.microsoft.com/dotnet/core/sdk:3.1"
       - tests-windows:
           name: dotnet-windows
       - deploy-preview:
