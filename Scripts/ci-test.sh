@@ -13,6 +13,10 @@ sed -i '/<TargetFrameworks>netcoreapp2.2;netcoreapp3.1<\/TargetFrameworks>/c\<Ta
 sed -i '/<TargetFrameworks>netcoreapp2.2;netcoreapp3.1<\/TargetFrameworks>/c\<TargetFramework>'"${NET_VERSION}"'<\/TargetFramework>' Client.Test/Client.Test.csproj
 sed -i '/<TargetFrameworks>netcoreapp2.2;netcoreapp3.1<\/TargetFrameworks>/c\<TargetFramework>'"${NET_VERSION}"'<\/TargetFramework>' Client.Legacy.Test/Client.Legacy.Test.csproj
 
+sed -i '/<TargetFrameworks>netstandard2.0;netstandard2.1<\/TargetFrameworks>/c\<TargetFramework>'"${NET_VERSION}"'<\/TargetFramework>' Client.Core/Client.Core.csproj
+sed -i '/<TargetFrameworks>netstandard2.0;netstandard2.1<\/TargetFrameworks>/c\<TargetFramework>'"${NET_VERSION}"'<\/TargetFramework>' Client/Client.csproj
+sed -i '/<TargetFrameworks>netstandard2.0;netstandard2.1<\/TargetFrameworks>/c\<TargetFramework>'"${NET_VERSION}"'<\/TargetFramework>' Client.Legacy/Client.Legacy.csproj
+
 #
 # Install testing tools
 #
