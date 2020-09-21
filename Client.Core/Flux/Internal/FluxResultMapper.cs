@@ -123,7 +123,17 @@ namespace InfluxDB.Client.Core.Flux.Internal
                     return;
                 }
 
-                property.SetValue(poco, Convert.ChangeType(value, propertyType));
+                if (value is IConvertible)
+                {
+                    // Nullable types cannot be used in type conversion, but we can use Nullable.GetUnderlyingType()
+                    // to determine whether the type is nullable and convert to the underlying type instead
+                    Type targetType = Nullable.GetUnderlyingType(propertyType) ?? propertyType;
+                    property.SetValue(poco, Convert.ChangeType(value, targetType));
+                }
+                else
+                {
+                    property.SetValue(poco, value);
+                }
             }
             catch (InvalidCastException ex)
             {
