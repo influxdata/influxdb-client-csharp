@@ -183,7 +183,7 @@ namespace InfluxDB.Client
 
             var requestMessage = CreateRequest(CreateQuery(query), _options.Org);
 
-            await foreach (T record in QueryEnumerable<T>(requestMessage, cancellationToken))
+            await foreach (var record in QueryEnumerable<T>(requestMessage, cancellationToken))
                 yield return record;
         }
 
@@ -203,7 +203,7 @@ namespace InfluxDB.Client
 
             var requestMessage = CreateRequest(CreateQuery(query), org);
 
-            await foreach (T record in QueryEnumerable<T>(requestMessage, cancellationToken))
+            await foreach (var record in QueryEnumerable<T>(requestMessage, cancellationToken))
                 yield return record;
         }
 

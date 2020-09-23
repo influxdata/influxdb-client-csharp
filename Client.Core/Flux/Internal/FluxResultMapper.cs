@@ -45,7 +45,7 @@ namespace InfluxDB.Client.Core.Flux.Internal
 
                 foreach (var property in properties)
                 {
-                    Column attribute = AttributeCache.GetOrAdd(property, _ =>
+                    var attribute = AttributeCache.GetOrAdd(property, _ =>
                     {
                         var attributes = property.GetCustomAttributes(typeof(Column), false);
                         return attributes.Length > 0 ? attributes[0] as Column : null;
