@@ -117,7 +117,7 @@ namespace InfluxDB.Client.Core.Internal
 
             RaiseForInfluxError(response, response.Content);
 
-            await foreach((FluxTable _, FluxRecord record) in _csvParser.ParseFluxResponseAsync(new StringReader(response.Content), cancellationToken))
+            await foreach(var (_, record) in _csvParser.ParseFluxResponseAsync(new StringReader(response.Content), cancellationToken))
             {
                 if (!(record is null))
                     yield return Mapper.ToPoco<T>(record);
