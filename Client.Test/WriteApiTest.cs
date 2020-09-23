@@ -9,7 +9,6 @@ using InfluxDB.Client.Core.Exceptions;
 using InfluxDB.Client.Core.Test;
 using InfluxDB.Client.Writes;
 using NUnit.Framework;
-using RestSharp.Extensions;
 using WireMock.RequestBuilders;
 using WireMock.ResponseBuilders;
 
