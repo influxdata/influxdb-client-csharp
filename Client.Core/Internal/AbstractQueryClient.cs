@@ -105,7 +105,7 @@ namespace InfluxDB.Client.Core.Internal
             }
         }
 
-        protected async IAsyncEnumerable<T> QueryRecords<T>(RestRequest query, [EnumeratorCancellation] CancellationToken cancellationToken)
+        protected async IAsyncEnumerable<T> QueryEnumerable<T>(RestRequest query, [EnumeratorCancellation] CancellationToken cancellationToken)
         {
             Arguments.CheckNotNull(query, nameof(query));
 
