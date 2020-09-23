@@ -46,8 +46,12 @@ namespace InfluxDB.Client.Test
 
         protected async Task<Organization> FindMyOrg()
         {
-            return (await Client.GetOrganizationsApi().FindOrganizationsAsync())
+            var org = (await Client.GetOrganizationsApi().FindOrganizationsAsync())
                 .FirstOrDefault(organization => organization.Name.Equals("my-org"));
+
+            Assert.IsNotNull(org, "my-org is required for integration tests");
+
+            return org;
         }
     }
 }
