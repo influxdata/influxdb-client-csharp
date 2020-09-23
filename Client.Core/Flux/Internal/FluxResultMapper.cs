@@ -155,7 +155,12 @@ namespace InfluxDB.Client.Core.Flux.Internal
                 return instant.InUtc().ToDateTimeUtc();
             }
 
-            return (DateTime) value;
+            if (value is IConvertible)
+            {
+                return (DateTime)Convert.ChangeType(value, typeof(DateTime));
+            }
+
+            throw new InvalidCastException($"Object value of type {value.GetType().Name} cannot be converted to {nameof(DateTime)}");
         }
 
         private Instant ToInstantValue(object value)
@@ -170,7 +175,7 @@ namespace InfluxDB.Client.Core.Flux.Internal
                 return Instant.FromDateTimeUtc(dateTime);
             }
 
-            return (Instant) value;
+            throw new InvalidCastException($"Object value of type {value.GetType().Name} cannot be converted to {nameof(Instant)}");
         }
     }
 }
