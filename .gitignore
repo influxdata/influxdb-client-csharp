@@ -36,3 +36,4 @@ DotnetVersion/
 
 /test.sh
 /influxdb-client-csharp.sln.DotSettings.user
+global.json
