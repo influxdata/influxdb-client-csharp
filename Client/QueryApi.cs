@@ -177,7 +177,7 @@ namespace InfluxDB.Client
         /// <param name="cancellationToken">cancellation token</param>
         /// <typeparam name="T">the type of measurement</typeparam>
         /// <returns>Measurements which are matched the query</returns>
-        public async IAsyncEnumerable<T> QueryRecordsAsync<T>(string query, [EnumeratorCancellation] CancellationToken cancellationToken)
+        public async IAsyncEnumerable<T> QueryAsyncEnumerable<T>(string query, [EnumeratorCancellation] CancellationToken cancellationToken)
         {
             Arguments.CheckNonEmptyString(query, nameof(query));
 
@@ -196,7 +196,7 @@ namespace InfluxDB.Client
         /// <param name="cancellationToken">cancellation token</param>
         /// <typeparam name="T">the type of measurement</typeparam>
         /// <returns>Measurements which are matched the query</returns>
-        public async IAsyncEnumerable<T> QueryRecordsAsync<T>(string query, string org, [EnumeratorCancellation] CancellationToken cancellationToken)
+        public async IAsyncEnumerable<T> QueryAsyncEnumerable<T>(string query, string org, [EnumeratorCancellation] CancellationToken cancellationToken)
         {
             Arguments.CheckNonEmptyString(query, nameof(query));
             Arguments.CheckNonEmptyString(org, nameof(org));
