@@ -53,7 +53,7 @@ namespace InfluxDB.Client.Core.Flux.Internal
 
                     if (attribute != null && attribute.IsTimestamp)
                     {
-                        SetFieldValue(poco, property, record.GetTimeInDateTime());
+                        SetFieldValue(poco, property, record.GetTime());
                     }
                     else
                     {
