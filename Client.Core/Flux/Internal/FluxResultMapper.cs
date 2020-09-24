@@ -127,7 +127,7 @@ namespace InfluxDB.Client.Core.Flux.Internal
                 {
                     // Nullable types cannot be used in type conversion, but we can use Nullable.GetUnderlyingType()
                     // to determine whether the type is nullable and convert to the underlying type instead
-                    Type targetType = Nullable.GetUnderlyingType(propertyType) ?? propertyType;
+                    var targetType = Nullable.GetUnderlyingType(propertyType) ?? propertyType;
                     property.SetValue(poco, Convert.ChangeType(value, targetType));
                 }
                 else

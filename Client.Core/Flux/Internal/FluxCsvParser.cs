@@ -1,11 +1,9 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Runtime.CompilerServices;
 using System.Threading;
-using System.Threading.Tasks;
 using CsvHelper;
 using InfluxDB.Client.Core.Flux.Domain;
 using InfluxDB.Client.Core.Flux.Exceptions;
@@ -77,7 +75,7 @@ namespace InfluxDB.Client.Core.Flux.Internal
             Arguments.CheckNotNull(source, "source");
 
             using var csv = new CsvReader(new StreamReader(source), CultureInfo.InvariantCulture);
-            ParseFluxResponseState state = new ParseFluxResponseState { csv = csv };
+            var state = new ParseFluxResponseState { csv = csv };
 
             while (csv.Read())
             {
@@ -106,7 +104,7 @@ namespace InfluxDB.Client.Core.Flux.Internal
             Arguments.CheckNotNull(reader, nameof(reader));
 
             using var csv = new CsvReader(reader, CultureInfo.InvariantCulture);
-            ParseFluxResponseState state = new ParseFluxResponseState { csv = csv };
+            var state = new ParseFluxResponseState { csv = csv };
 
             while (await csv.ReadAsync() && !cancellationToken.IsCancellationRequested)
             {
