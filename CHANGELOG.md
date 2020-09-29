@@ -1,13 +1,20 @@
 ## 1.13.0 [unreleased]
 
+### Features
+1. [#121](https://github.com/influxdata/influxdb-client-csharp/pull/121): Added IAsyncEnumerable&lt;T&gt; query overloads to QueryAPI
+
 ## 1.12.0 [2020-10-02]
 
 ### Features
 1. [#117](https://github.com/influxdata/influxdb-client-csharp/issues/117): Added support for string token
+1. [#121](https://github.com/influxdata/influxdb-client-csharp/pull/121): Added IAsyncEnumerable&lt;T&gt; query overloads to QueryAPI
 
 ### API
 1. [#122](https://github.com/influxdata/influxdb-client-csharp/issues/122): Default port changed from 9999 to 8086
 1. [#124](https://github.com/influxdata/influxdb-client-csharp/pull/124): Removed labels in organization API, removed Pkg* structure and package service
+
+### Bug Fixes
+1. [#119](https://github.com/influxdata/influxdb-client-csharp/issues/119): No timestamp returned via POCO based QueryAsync&lt;T&gt;
 
 ## 1.11.0 [2020-08-14]
 
