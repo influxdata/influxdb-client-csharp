@@ -72,6 +72,7 @@ namespace InfluxDB.Client.Test
         }
 
         [Test]
+        [Ignore("https://github.com/influxdata/influxdb/issues/19545")]
         public async Task Delete()
         {
             Client.Dispose();
