@@ -58,7 +58,7 @@ jobs:
         default: &default-dotnet-image "mcr.microsoft.com/dotnet/core/sdk:2.2"
       influxdb-image:
         type: string
-        default: &default-influxdb-image "influxdb:2.0.0-beta"
+        default: &default-influxdb-image "influxdb:2.0.0-rc"
     docker:
       - image: << parameters.dotnet-image >>
       - image: &influx-image quay.io/influxdb/<< parameters.influxdb-image >>
