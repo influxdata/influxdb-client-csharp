@@ -1,4 +1,4 @@
-## 1.12.0 [unreleased]
+## 1.12.0 [2020-10-02]
 
 ### Features
 1. [#117](https://github.com/influxdata/influxdb-client-csharp/issues/117): Added support for string token
