@@ -1,6 +1,6 @@
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using InfluxDB.Client.Core.Exceptions;
@@ -16,6 +16,11 @@ namespace InfluxDB.Client.Core.Flux.Internal
 {
     internal class FluxResultMapper
     {
+        // Reflection results are cached for poco type property and attribute lookups as an optimization since
+        // calls are invoked continuously for a given type and will not change over library lifetime
+        private static readonly ConcurrentDictionary<Type, PropertyInfo[]> PropertyCache = new ConcurrentDictionary<Type, PropertyInfo[]>();
+        private static readonly ConcurrentDictionary<PropertyInfo, Column> AttributeCache = new ConcurrentDictionary<PropertyInfo, Column>();
+
         /// <summary>
         /// Maps FluxRecord into custom POCO class.
         /// </summary>
@@ -30,53 +35,52 @@ namespace InfluxDB.Client.Core.Flux.Internal
             try
             {
                 var type = typeof(T);
-                var poco = (T) Activator.CreateInstance(type);
+                var poco = (T)Activator.CreateInstance(type);
 
-                var properties = type.GetProperties();
+                // copy record to case insensitive dictionary (do this once)
+                var recordValues =
+                    new Dictionary<string, object>(record.Values, StringComparer.InvariantCultureIgnoreCase);
+
+                var properties = PropertyCache.GetOrAdd(type, _ => type.GetProperties());
 
                 foreach (var property in properties)
                 {
-                    var attributes = property.GetCustomAttributes(typeof(Column), false);
-
-                    Column attribute = null;
-
-                    if (attributes.Length > 0)
+                    var attribute = AttributeCache.GetOrAdd(property, _ =>
                     {
-                        attribute = (Column) attributes.First();
+                        var attributes = property.GetCustomAttributes(typeof(Column), false);
+                        return attributes.Length > 0 ? attributes[0] as Column : null;
+                    });
+
+                    if (attribute != null && attribute.IsTimestamp)
+                    {
+                        SetFieldValue(poco, property, record.GetTime());
                     }
-
-                    var columnName = property.Name;
-
-                    if (attribute != null && !string.IsNullOrEmpty(attribute.Name))
+                    else
                     {
-                        columnName = attribute.Name;
-                    }
+                        var columnName = property.Name;
 
-                    // copy record to case insensitive dictionary
-                    var recordValues =
-                        new Dictionary<string, object>(StringComparer.InvariantCultureIgnoreCase);
+                        if (attribute != null && !string.IsNullOrEmpty(attribute.Name))
+                        {
+                            columnName = attribute.Name;
+                        }
 
-                    foreach (var entry in record.Values)
-                    {
-                        recordValues.Add(entry.Key, entry.Value);
-                    }
+                        string col = null;
 
-                    string col = null;
+                        if (recordValues.ContainsKey(columnName))
+                        {
+                            col = columnName;
+                        }
+                        else if (recordValues.ContainsKey("_" + columnName))
+                        {
+                            col = "_" + columnName;
+                        }
 
-                    if (recordValues.ContainsKey(columnName))
-                    {
-                        col = columnName;
-                    }
-                    else if (recordValues.ContainsKey("_" + columnName))
-                    {
-                        col = "_" + columnName;
-                    }
-
-                    if (!string.IsNullOrEmpty(col))
-                    {
-                        recordValues.TryGetValue(col, out var value);
-
-                        SetFieldValue(poco, property, value);
+                        if (!string.IsNullOrEmpty(col))
+                        {
+                            // No need to set field value when column does not exist (default poco field value will be the same)
+                            if (recordValues.TryGetValue(col, out var value))
+                                SetFieldValue(poco, property, value);
+                        }
                     }
                 }
 
@@ -106,85 +110,72 @@ namespace InfluxDB.Client.Core.Flux.Internal
                     return;
                 }
 
-                //convert primitives
-                if (typeof(double).IsAssignableFrom(propertyType) || typeof(Double).IsAssignableFrom(propertyType))
-                {
-                    property.SetValue(poco, ToDoubleValue(value));
-                    return;
-                }
-
-                if (typeof(long).IsAssignableFrom(propertyType))
-                {
-                    property.SetValue(poco, ToLongValue(value));
-                    return;
-                }
-
-                if (typeof(int).IsAssignableFrom(propertyType))
-                {
-                    property.SetValue(poco, ToIntValue(value));
-                    return;
-                }
-
-                if (typeof(bool).IsAssignableFrom(propertyType))
-                {
-                    property.SetValue(poco, bool.TryParse(value.ToString(), out var v) && v);
-                    return;
-                }
-
-                if (typeof(DateTime).IsAssignableFrom(propertyType))
+                //handle time primitives
+                if (propertyType == typeof(DateTime))
                 {
                     property.SetValue(poco, ToDateTimeValue(value));
                     return;
                 }
 
-                property.SetValue(poco, value);
+                if (propertyType == typeof(Instant))
+                {
+                    property.SetValue(poco, ToInstantValue(value));
+                    return;
+                }
+
+                if (value is IConvertible)
+                {
+                    // Nullable types cannot be used in type conversion, but we can use Nullable.GetUnderlyingType()
+                    // to determine whether the type is nullable and convert to the underlying type instead
+                    var targetType = Nullable.GetUnderlyingType(propertyType) ?? propertyType;
+                    property.SetValue(poco, Convert.ChangeType(value, targetType));
+                }
+                else
+                {
+                    property.SetValue(poco, value);
+                }
             }
-            catch (InvalidCastException)
+            catch (InvalidCastException ex)
             {
                 throw new InfluxException(
-                    $"Class '{poco.GetType().Name}' field '{property.Name}' was defined with a different field type and caused a InvalidCastException. " +
-                    $"The correct type is '{value.GetType().Name}' (current field value: '{value}').");
+                    $"Class '{poco.GetType().Name}' field '{property.Name}' was defined with a different field type and caused an exception. " +
+                    $"The correct type is '{value.GetType().Name}' (current field value: '{value}'). Exception: {ex.Message}", ex);
             }
         }
 
-        private double ToDoubleValue(object value)
-        {
-            if (value.GetType().IsAssignableFrom(typeof(double)))
-            {
-                return (double) value;
-            }
-
-            return (double) value;
-        }
-
-        private long ToLongValue(object value)
-        {
-            if (value.GetType().IsAssignableFrom(typeof(long)))
-            {
-                return (long) value;
-            }
-
-            return (long) value;
-        }
-
-        private int ToIntValue(object value)
-        {
-            if (value.GetType().IsAssignableFrom(typeof(int)))
-            {
-                return (int) value;
-            }
-
-            return (int) value;
-        }
-        
         private DateTime ToDateTimeValue(object value)
         {
+            if (value is DateTime dateTime)
+            {
+                return dateTime;
+            }
+
             if (value is Instant instant)
             {
                 return instant.InUtc().ToDateTimeUtc();
             }
-            
-            return (DateTime) value;
+
+            if (value is IConvertible)
+            {
+                return (DateTime)Convert.ChangeType(value, typeof(DateTime));
+            }
+
+            throw new InvalidCastException($"Object value of type {value.GetType().Name} cannot be converted to {nameof(DateTime)}");
+        }
+
+        private Instant ToInstantValue(object value)
+        {
+            if (value is Instant instant)
+            {
+                return instant;
+            }
+
+            if (value is DateTime dateTime)
+            {
+                return Instant.FromDateTimeUtc(dateTime);
+            }
+
+            throw new InvalidCastException($"Object value of type {value.GetType().Name} cannot be converted to {nameof(Instant)}");
         }
     }
 }

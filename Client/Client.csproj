@@ -1,9 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>netstandard2.0</TargetFramework>
+      <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
+      <LangVersion>8</LangVersion>
 
-        <Description>The reference client that allows query, write and management (bucket, organization, users) for the InfluxDB 2.0.</Description>
+      <Description>The reference client that allows query, write and management (bucket, organization, users) for the InfluxDB 2.0.</Description>
         <Authors>influxdb-client-csharp Contributors</Authors>
         <AssemblyName>InfluxDB.Client</AssemblyName>
         <VersionPrefix>1.13.0</VersionPrefix>

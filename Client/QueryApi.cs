@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+using System.Threading;
 using System.Threading.Tasks;
 using InfluxDB.Client.Api.Domain;
 using InfluxDB.Client.Api.Service;
@@ -131,7 +133,7 @@ namespace InfluxDB.Client
         ///
         /// <para>
         /// NOTE: This method is not intended for large query results.
-        /// Use <see cref="QueryAsyncAsync{T}(string,string,System.Action{InfluxDB.Client.Core.ICancellable,T},System.Action{System.Exception},System.Action)"/>
+        /// Use <see cref="QueryAsync{T}(string,string,System.Action{InfluxDB.Client.Core.ICancellable,T},System.Action{System.Exception},System.Action)"/>
         /// for large data streaming.
         /// </para>
         /// </summary>
@@ -151,7 +153,7 @@ namespace InfluxDB.Client
         ///
         /// <para>
         /// NOTE: This method is not intended for large query results.
-        /// Use <see cref="QueryAsyncAsync{T}(string,string,System.Action{InfluxDB.Client.Core.ICancellable,T},System.Action{System.Exception},System.Action)"/>
+        /// Use <see cref="QueryAsync{T}(string,string,System.Action{InfluxDB.Client.Core.ICancellable,T},System.Action{System.Exception},System.Action)"/>
         /// for large data streaming.
         /// </para>
         /// </summary>
@@ -168,12 +170,50 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
+        /// Executes the Flux query against the InfluxDB 2.0 and asynchronously maps
+        /// response to enumerable of objects of type <typeparamref name="T"/>.
+        /// </summary>
+        /// <param name="query">the flux query to execute</param>
+        /// <param name="cancellationToken">cancellation token</param>
+        /// <typeparam name="T">the type of measurement</typeparam>
+        /// <returns>Measurements which are matched the query</returns>
+        public async IAsyncEnumerable<T> QueryAsyncEnumerable<T>(string query, [EnumeratorCancellation] CancellationToken cancellationToken)
+        {
+            Arguments.CheckNonEmptyString(query, nameof(query));
+
+            var requestMessage = CreateRequest(CreateQuery(query), _options.Org);
+
+            await foreach (var record in QueryEnumerable<T>(requestMessage, cancellationToken))
+                yield return record;
+        }
+
+        /// <summary>
+        /// Executes the Flux query against the InfluxDB 2.0 and asynchronously maps
+        /// response to enumerable of objects of type <typeparamref name="T"/>.
+        /// </summary>
+        /// <param name="query">the flux query to execute</param>
+        /// <param name="org">specifies the source organization</param>
+        /// <param name="cancellationToken">cancellation token</param>
+        /// <typeparam name="T">the type of measurement</typeparam>
+        /// <returns>Measurements which are matched the query</returns>
+        public async IAsyncEnumerable<T> QueryAsyncEnumerable<T>(string query, string org, [EnumeratorCancellation] CancellationToken cancellationToken)
+        {
+            Arguments.CheckNonEmptyString(query, nameof(query));
+            Arguments.CheckNonEmptyString(org, nameof(org));
+
+            var requestMessage = CreateRequest(CreateQuery(query), org);
+
+            await foreach (var record in QueryEnumerable<T>(requestMessage, cancellationToken))
+                yield return record;
+        }
+
+        /// <summary>
         /// Executes the Flux query against the InfluxDB 2.0 and synchronously map whole response
         /// to list of object with given type.
         ///
         /// <para>
         /// NOTE: This method is not intended for large query results.
-        /// Use <see cref="QueryAsyncAsync{T}(string,string,System.Action{InfluxDB.Client.Core.ICancellable,T},System.Action{System.Exception},System.Action)"/>
+        /// Use <see cref="QueryAsync{T}(string,string,System.Action{InfluxDB.Client.Core.ICancellable,T},System.Action{System.Exception},System.Action)"/>
         /// for large data streaming.
         /// </para>
         /// </summary>
@@ -193,7 +233,7 @@ namespace InfluxDB.Client
         ///
         /// <para>
         /// NOTE: This method is not intended for large query results.
-        /// Use <see cref="QueryAsyncAsync{T}(string,string,System.Action{InfluxDB.Client.Core.ICancellable,T},System.Action{System.Exception},System.Action)"/>
+        /// Use <see cref="QueryAsync{T}(string,string,System.Action{InfluxDB.Client.Core.ICancellable,T},System.Action{System.Exception},System.Action)"/>
         /// for large data streaming.
         /// </para>
         /// </summary>

@@ -57,7 +57,7 @@ namespace InfluxDB.Client.Test
                 };
             }
 
-            internal T Get<T>()
+            internal T Get<T>() where T : EventArgs
             {
                 if (_events.Count == 0)
                 {
@@ -73,7 +73,12 @@ namespace InfluxDB.Client.Test
                 _events.RemoveAt(0);
                 Trace.WriteLine(args);
 
-                return (T) Convert.ChangeType(args, typeof(T));
+                if (args is T result)
+                {
+                    return result;
+                }
+
+                throw new InvalidCastException($"{args.GetType().FullName} cannot be cast to {typeof(T).FullName}");
             }
 
             internal int EventCount()
