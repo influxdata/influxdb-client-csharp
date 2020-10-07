@@ -11,9 +11,8 @@ namespace InfluxDB.Client
     /// <list>
     /// <item><term>batchSize</term><description>1000</description></item>
     /// <item><term>flushInterval</term><description>1000 ms</description></item>
-    /// <item><term>retryInterval</term><description>1000 ms</description></item>
+    /// <item><term>retryInterval</term><description>5000 ms</description></item>
     /// <item><term>jitterInterval</term><description>0</description></item>
-    /// <item><term>bufferLimit</term><description>10 000</description></item>
     /// </list>
     /// </para>
     ///
@@ -23,7 +22,10 @@ namespace InfluxDB.Client
         private const int DefaultBatchSize = 1000;
         private const int DefaultFlushInterval = 1000;
         private const int DefaultJitterInterval = 0;
-        private const int DefaultRetryInterval = 1000;
+        private const int DefaultRetryInterval = 5000;
+        private const int DefaultMaxRetries = 3;
+        private const int DefaultMaxRetryDelay = 180_000;
+        private const int DefaultExponentialBase = 5;
 
         /// <summary>
         /// The number of data point to collect in batch.
@@ -54,6 +56,24 @@ namespace InfluxDB.Client
         /// </summary>
         /// <seealso cref="Builder.RetryInterval(int)"/>
         public int RetryInterval { get; }
+        
+        /// <summary>
+        /// The number of max retries when write fails.
+        /// </summary>
+        /// <seealso cref="Builder.MaxRetries(int)"/>
+        public int MaxRetries { get; }
+        
+        /// <summary>
+        /// The maximum delay between each retry attempt in milliseconds.
+        /// </summary>
+        /// <seealso cref="Builder.MaxRetryDelay(int)"/>
+        public int MaxRetryDelay { get; }
+        
+        /// <summary>
+        /// The base for the exponential retry delay.
+        /// </summary>
+        /// <seealso cref="Builder.ExponentialBase(int)"/>
+        public int ExponentialBase { get; }
 
         /// <summary>
         /// Set the scheduler which is used for write data points.
@@ -69,6 +89,9 @@ namespace InfluxDB.Client
             FlushInterval = builder.FlushIntervalBuilder;
             JitterInterval = builder.JitterIntervalBuilder;
             RetryInterval = builder.RetryIntervalBuilder;
+            MaxRetries = builder.MaxRetriesBuilder;
+            MaxRetryDelay = builder.MaxRetryDelayBuilder;
+            ExponentialBase = builder.ExponentialBaseBuilder;
             WriteScheduler = builder.WriteSchedulerBuilder;
         }
         
@@ -86,6 +109,9 @@ namespace InfluxDB.Client
             internal int FlushIntervalBuilder = DefaultFlushInterval;
             internal int JitterIntervalBuilder = DefaultJitterInterval;
             internal int RetryIntervalBuilder = DefaultRetryInterval;
+            internal int MaxRetriesBuilder = DefaultMaxRetries;
+            internal int MaxRetryDelayBuilder = DefaultMaxRetryDelay;
+            internal int ExponentialBaseBuilder = DefaultExponentialBase;
             internal IScheduler WriteSchedulerBuilder = NewThreadScheduler.Default;
 
             /// <summary>
@@ -141,6 +167,42 @@ namespace InfluxDB.Client
             {
                 Arguments.CheckPositiveNumber(milliseconds, "retryInterval");
                 RetryIntervalBuilder = milliseconds;
+                return this;
+            }
+            
+            /// <summary>
+            /// The number of max retries when write fails.
+            /// </summary>
+            /// <param name="count">number of max retries</param>
+            /// <returns>this</returns>
+            public Builder MaxRetries(int count)
+            {
+                Arguments.CheckPositiveNumber(count, "MaxRetries");
+                MaxRetriesBuilder = count;
+                return this;
+            }
+            
+            /// <summary>
+            /// The maximum delay between each retry attempt in milliseconds.
+            /// </summary>
+            /// <param name="milliseconds">maximum delay</param>
+            /// <returns>this</returns>
+            public Builder MaxRetryDelay(int milliseconds)
+            {
+                Arguments.CheckPositiveNumber(milliseconds, "MaxRetryDelay");
+                MaxRetryDelayBuilder = milliseconds;
+                return this;
+            }
+            
+            /// <summary>
+            /// The base for the exponential retry delay.
+            /// </summary>
+            /// <param name="exponentialBase">exponential base</param>
+            /// <returns>this</returns>
+            public Builder ExponentialBase(int exponentialBase)
+            {
+                Arguments.CheckPositiveNumber(exponentialBase, "ExponentialBase");
+                ExponentialBaseBuilder = exponentialBase;
                 return this;
             }
 
