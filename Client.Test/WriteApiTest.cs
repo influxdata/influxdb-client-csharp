@@ -296,6 +296,30 @@ namespace InfluxDB.Client.Test
         }
 
         [Test]
+        public void RetryOnNetworkError()
+        {
+            MockServer.Stop();
+            _writeApi.Dispose();
+            
+            var options = WriteOptions.CreateNew()
+                .BatchSize(1)
+                .MaxRetryDelay(2_000)
+                .MaxRetries(3)
+                .Build();
+            _writeApi = _influxDbClient.GetWriteApi(options);
+            
+            var listener = new EventListener(_writeApi);
+            
+            _writeApi.WriteRecord("b1", "org1", WritePrecision.Ns,
+                "h2o_feet,location=coyote_creek level\\ description=\"feet 1\",water_level=1.0 1");
+            
+            // Three attempts
+            listener.Get<WriteRetriableErrorEvent>();
+            listener.Get<WriteRetriableErrorEvent>();
+            listener.Get<WriteRetriableErrorEvent>();
+        }
+
+        [Test]
         public void TwiceDispose()
         {
             _writeApi.Dispose();

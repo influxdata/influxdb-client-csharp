@@ -118,7 +118,7 @@ namespace InfluxDB.Client
                     //
                     .Select(source =>
                     {
-                        return source.Delay(_ => Observable.Timer(TimeSpan.FromMilliseconds(JitterDelay(writeOptions)), writeOptions.WriteScheduler));
+                        return source.Delay(_ => Observable.Timer(TimeSpan.FromMilliseconds(RetryAttempt.JitterDelay(writeOptions)), writeOptions.WriteScheduler));
                     });
             }
             var query = batches
@@ -139,28 +139,26 @@ namespace InfluxDB.Client
                                     Encoding.UTF8.GetBytes(lineProtocol), null,
                                     "identity", "text/plain; charset=utf-8", null, "application/json", null, precision)
                                 .ToObservable())
-                        .RetryWhen(f => f.SelectMany(e =>
-                        {
-                            if (e is HttpException httpException)
+                        .RetryWhen(f => f
+                            .Zip(Observable.Range(1, writeOptions.MaxRetries + 1), (exception, count) 
+                                => new RetryAttempt(exception, count, writeOptions))
+                            .SelectMany(attempt =>
                             {
-                                //
-                                // This types is not able to retry
-                                //
-                                if (httpException.Status != 429 && httpException.Status != 503)
-                                    throw httpException;
+                                if (attempt.IsRetry())
+                                {
+                                    var retryInterval = attempt.GetRetryInterval();
 
-                                var retryInterval = (httpException.RetryAfter * 1000 ?? writeOptions.RetryInterval) +
-                                                    JitterDelay(writeOptions);
+                                    var retryable = new WriteRetriableErrorEvent(org, bucket, precision, lineProtocol,
+                                        attempt.Error, retryInterval);
+                                    
+                                    Publish(retryable);
 
-                                var retryable = new WriteRetriableErrorEvent(org, bucket, precision, lineProtocol,
-                                    httpException, retryInterval);
-                                Publish(retryable);
+                                    return Observable.Timer(TimeSpan.FromMilliseconds(retryInterval),
+                                        writeOptions.WriteScheduler);
+                                }
 
-                                return Observable.Timer(TimeSpan.FromMilliseconds(retryInterval), writeOptions.WriteScheduler);
-                            }
-
-                            throw e;
-                        }))
+                                throw attempt.Error;
+                            }))
                         .Select(result =>
                         {
                             // ReSharper disable once ConvertIfStatementToReturnStatement
@@ -513,11 +511,6 @@ namespace InfluxDB.Client
                     break;
                 }
             }
-        }
-
-        private int JitterDelay(WriteOptions writeOptions)
-        {
-            return (int) (new Random().NextDouble() * writeOptions.JitterInterval);
         }
 
         private void Publish(InfluxDBEventArgs eventArgs)

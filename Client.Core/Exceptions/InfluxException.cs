@@ -61,17 +61,20 @@ namespace InfluxDB.Client.Core.Exceptions
 
             var httpHeaders = LoggingHandler.ToHeaders(requestResult.Headers);
             
-            return Create(body, httpHeaders, requestResult.ErrorMessage, requestResult.StatusCode);
+            return Create(body, httpHeaders, requestResult.ErrorMessage, requestResult.StatusCode, 
+                requestResult.ErrorException);
         }
 
         public static HttpException Create(IHttpResponse requestResult, object body)
         {
             Arguments.CheckNotNull(requestResult, nameof(requestResult));
 
-            return Create(body, requestResult.Headers, requestResult.ErrorMessage, requestResult.StatusCode);
+            return Create(body, requestResult.Headers, requestResult.ErrorMessage, requestResult.StatusCode, 
+                requestResult.ErrorException);
         }
         
-        public static HttpException Create(object content, IList<HttpHeader> headers, string ErrorMessage, HttpStatusCode statusCode)
+        public static HttpException Create(object content, IList<HttpHeader> headers, string ErrorMessage, 
+            HttpStatusCode statusCode, Exception exception = null)
         {
             string stringBody = null;
             var errorBody = new JObject();
@@ -123,7 +126,7 @@ namespace InfluxDB.Client.Core.Exceptions
             if (string.IsNullOrEmpty(errorMessage)) errorMessage = ErrorMessage;
             if (string.IsNullOrEmpty(errorMessage)) errorMessage = stringBody;
 
-            return new HttpException(errorMessage, (int) statusCode)
+            return new HttpException(errorMessage, (int) statusCode, exception)
                 {ErrorBody = errorBody, RetryAfter = retryAfter};
         }
     }
