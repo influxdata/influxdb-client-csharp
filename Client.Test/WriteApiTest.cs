@@ -21,7 +21,7 @@ namespace InfluxDB.Client.Test
         public new void SetUp()
         {
             _influxDbClient = InfluxDBClientFactory.Create(MockServerUrl, "token");
-            _writeApi = _influxDbClient.GetWriteApi();
+            _writeApi = _influxDbClient.GetWriteApi(WriteOptions.CreateNew().RetryInterval(1_000).Build());
         }
 
         [TearDown]
@@ -296,6 +296,30 @@ namespace InfluxDB.Client.Test
         }
 
         [Test]
+        public void RetryOnNetworkError()
+        {
+            MockServer.Stop();
+            _writeApi.Dispose();
+            
+            var options = WriteOptions.CreateNew()
+                .BatchSize(1)
+                .MaxRetryDelay(2_000)
+                .MaxRetries(3)
+                .Build();
+            _writeApi = _influxDbClient.GetWriteApi(options);
+            
+            var listener = new EventListener(_writeApi);
+            
+            _writeApi.WriteRecord("b1", "org1", WritePrecision.Ns,
+                "h2o_feet,location=coyote_creek level\\ description=\"feet 1\",water_level=1.0 1");
+            
+            // Three attempts
+            listener.Get<WriteRetriableErrorEvent>();
+            listener.Get<WriteRetriableErrorEvent>();
+            listener.Get<WriteRetriableErrorEvent>();
+        }
+
+        [Test]
         public void TwiceDispose()
         {
             _writeApi.Dispose();
@@ -337,6 +361,33 @@ namespace InfluxDB.Client.Test
             var request= MockServer.LogEntries.Last();
             StringAssert.StartsWith("influxdb-client-csharp/1.", request.RequestMessage.Headers["User-Agent"].First());
             StringAssert.EndsWith(".0.0", request.RequestMessage.Headers["User-Agent"].First());
+        }
+
+        [Test]
+        public void WriteOptionsDefaults()
+        {
+            var options = WriteOptions.CreateNew().Build();
+            
+            Assert.AreEqual(5_000, options.RetryInterval);
+            Assert.AreEqual(3, options.MaxRetries);
+            Assert.AreEqual(180_000, options.MaxRetryDelay);
+            Assert.AreEqual(5, options.ExponentialBase);
+        }
+
+        [Test]
+        public void WriteOptionsCustom()
+        {
+            var options = WriteOptions.CreateNew()
+                .RetryInterval(1_250)
+                .MaxRetries(25)
+                .MaxRetryDelay(1_800_000)
+                .ExponentialBase(2)
+                .Build();
+            
+            Assert.AreEqual(1_250, options.RetryInterval);
+            Assert.AreEqual(25, options.MaxRetries);
+            Assert.AreEqual(1_800_000, options.MaxRetryDelay);
+            Assert.AreEqual(2, options.ExponentialBase);
         }
     }
 }
