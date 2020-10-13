@@ -64,7 +64,11 @@ namespace InfluxDB.Client.Writes
         
         internal override void LogEvent()
         {
-            Trace.TraceError($"The retriable error occurred during writing of data. Retry in: {RetryInterval} [ms]");
+            var message = "The retriable error occurred during writing of data. " +
+                          $"Reason: '{Exception.Message}'. " +
+                          $"Retry in: {RetryInterval}ms.";
+            
+            Trace.TraceError(message);
         }
     }
 
