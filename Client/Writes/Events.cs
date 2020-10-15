@@ -66,9 +66,9 @@ namespace InfluxDB.Client.Writes
         {
             var message = "The retriable error occurred during writing of data. " +
                           $"Reason: '{Exception.Message}'. " +
-                          $"Retry in: {RetryInterval}ms.";
+                          $"Retry in: {(double) RetryInterval / 1000}s.";
             
-            Trace.TraceError(message);
+            Trace.TraceWarning(message);
         }
     }
 

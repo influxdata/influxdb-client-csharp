@@ -367,7 +367,7 @@ namespace InfluxDB.Client.Test
 
             const string message = "The retriable error occurred during writing of data. " +
                                    "Reason: 'org 04014de4ed590000 has exceeded limited_write plan limit'. " +
-                                   "Retry in: 5000ms.";
+                                   "Retry in: 5s.";
             StringAssert.Contains(message, writer.ToString());
         }
 
