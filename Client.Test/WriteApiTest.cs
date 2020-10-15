@@ -319,6 +319,58 @@ namespace InfluxDB.Client.Test
             listener.Get<WriteRetriableErrorEvent>();
         }
 
+
+        [Test]
+        public void RetryContainsMessage()
+        {
+            MockServer.Reset();
+            _writeApi.Dispose();
+
+            const string json = "{\"code\":\"too many requests\"," +
+                                "\"message\":\"org 04014de4ed590000 has exceeded limited_write plan limit\"}";
+            var response = CreateResponse(
+                    json,
+                    "application/json")
+                .WithHeader("Retry-After", "5")
+                .WithStatusCode(429);
+
+            MockServer
+                .Given(Request.Create().WithPath("/api/v2/write").UsingPost())
+                .InScenario("RetryWithRetryAfter")
+                .WillSetStateTo("RetryWithRetryAfter Started")
+                .RespondWith(response);
+
+            MockServer
+                .Given(Request.Create().WithPath("/api/v2/write").UsingPost())
+                .InScenario("RetryWithRetryAfter")
+                .WhenStateIs("RetryWithRetryAfter Started")
+                .WillSetStateTo("RetryWithRetryAfter Finished")
+                .RespondWith(CreateResponse("{}"));
+            
+            var options = WriteOptions.CreateNew()
+                .BatchSize(1)
+                .RetryInterval(100)
+                .MaxRetries(1)
+                .Build();
+            _writeApi = _influxDbClient.GetWriteApi(options);
+            
+            var listener = new EventListener(_writeApi);
+            
+            var writer = new StringWriter();
+            Trace.Listeners.Add(new TextWriterTraceListener(writer));
+            
+            _writeApi.WriteRecord("b1", "org1", WritePrecision.Ns,
+                "h2o_feet,location=coyote_creek level\\ description=\"feet 1\",water_level=1.0 1");
+            
+            // One attempt
+            listener.Get<WriteRetriableErrorEvent>();
+
+            const string message = "The retriable error occurred during writing of data. " +
+                                   "Reason: 'org 04014de4ed590000 has exceeded limited_write plan limit'. " +
+                                   "Retry in: 5s.";
+            StringAssert.Contains(message, writer.ToString());
+        }
+
         [Test]
         public void TwiceDispose()
         {

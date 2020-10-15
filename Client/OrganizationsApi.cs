@@ -126,10 +126,11 @@ namespace InfluxDB.Client
         /// <summary>
         /// List all organizations.
         /// </summary>
+        /// <param name="limit"> (optional, default to 20)</param>
         /// <returns>List all organizations</returns>
-        public async Task<List<Organization>> FindOrganizationsAsync()
+        public async Task<List<Organization>> FindOrganizationsAsync(int? limit = null)
         {
-            return (await _service.GetOrgsAsync()).Orgs;
+            return (await _service.GetOrgsAsync(limit: limit)).Orgs;
         }
 
         /// <summary>

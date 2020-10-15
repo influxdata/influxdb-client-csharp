@@ -3,6 +3,7 @@
 ### Features
 1. [#121](https://github.com/influxdata/influxdb-client-csharp/pull/121): Added IAsyncEnumerable&lt;T&gt; query overloads to QueryAPI
 1. [#127](https://github.com/influxdata/influxdb-client-csharp/pull/127): Added exponential backoff strategy for batching writes. Default value for `RetryInterval` is 5_000 milliseconds.
+1. [#128](https://github.com/influxdata/influxdb-client-csharp/pull/128): Improved logging message for retries
 
 ## 1.12.0 [2020-10-02]
 
