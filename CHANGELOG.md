@@ -1,4 +1,4 @@
-## 1.13.0 [unreleased]
+## 1.13.0 [2020-10-30]
 
 ### Features
 1. [#121](https://github.com/influxdata/influxdb-client-csharp/pull/121): Added IAsyncEnumerable&lt;T&gt; query overloads to QueryAPI
