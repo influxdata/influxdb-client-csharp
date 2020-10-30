@@ -1,15 +1,16 @@
 using System;
+using System.Diagnostics;
 using System.Net.Http;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using InfluxDB.Client.Core.Internal;
 using NUnit.Framework;
 
 namespace InfluxDB.Client.Core.Test
 {
     public class AbstractTest
     {
+        private static readonly TraceListener ConsoleOutListener = new TextWriterTraceListener(Console.Out);
         private static readonly int DefaultWait = 10;
         private static readonly int DefaultInfluxDBSleep = 100;
 
@@ -19,6 +20,11 @@ namespace InfluxDB.Client.Core.Test
         public void SetUp()
         {
             CountdownEvent = new CountdownEvent(1);
+            
+            if (!Trace.Listeners.Contains(ConsoleOutListener))
+            {
+                Trace.Listeners.Add(ConsoleOutListener);
+            }
         }
 
         protected void WaitToCallback()

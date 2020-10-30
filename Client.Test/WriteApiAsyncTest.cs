@@ -81,5 +81,56 @@ namespace InfluxDB.Client.Test
             Assert.AreEqual("h2o,location=coyote_creek water_level=10 10",
                 request.RequestMessage.Body);
         }
+
+        [Test]
+        public async Task SplitPointList()
+        {
+            MockServer
+                .Given(Request.Create().WithPath("/api/v2/write").UsingPost())
+                .RespondWith(CreateResponse("{}"));
+            
+            var writeApi = _influxDbClient.GetWriteApiAsync();
+            
+            var points = new List<PointData>
+            {
+                PointData.Measurement("h2o").Tag("location", "coyote_creek").Field("water_level", 10.0D)
+                    .Timestamp(1L, WritePrecision.S),
+                PointData.Measurement("h2o").Tag("location", "coyote_creek").Field("water_level", 10.0D)
+                    .Timestamp(2L, WritePrecision.S),
+                PointData.Measurement("h2o").Tag("location", "coyote_creek").Field("water_level", 10.0D)
+                    .Timestamp(3L, WritePrecision.S),
+                PointData.Measurement("h2o").Tag("location", "coyote_creek").Field("water_level", 10.0D)
+                    .Timestamp(4L, WritePrecision.S),
+                PointData.Measurement("h2o").Tag("location", "coyote_creek").Field("water_level", 10.0D)
+                    .Timestamp(5L, WritePrecision.S),
+                PointData.Measurement("h2o").Tag("location", "coyote_creek").Field("water_level", 10.0D)
+                    .Timestamp(6L, WritePrecision.S),
+                PointData.Measurement("h2o").Tag("location", "coyote_creek").Field("water_level", 10.0D)
+                    .Timestamp(7L, WritePrecision.S),
+                PointData.Measurement("h2o").Tag("location", "coyote_creek").Field("water_level", 10.0D)
+                    .Timestamp(8L, WritePrecision.S),
+                PointData.Measurement("h2o").Tag("location", "coyote_creek").Field("water_level", 10.0D)
+                    .Timestamp(9L, WritePrecision.S),
+                PointData.Measurement("h2o").Tag("location", "coyote_creek").Field("water_level", 10.0D)
+                    .Timestamp(10L, WritePrecision.S),
+                PointData.Measurement("h2o").Tag("location", "coyote_creek").Field("water_level", 10.0D)
+                    .Timestamp(11L, WritePrecision.S),
+                PointData.Measurement("h2o").Tag("location", "coyote_creek").Field("water_level", 10.0D)
+                    .Timestamp(12L, WritePrecision.S)
+            };
+
+            var batches = points
+                .Select((x, i) => new { Index = i, Value = x })
+                .GroupBy(x => x.Index / 5)
+                .Select(x => x.Select(v => v.Value).ToList())
+                .ToList();
+
+            foreach (var batch in batches)
+            {
+                await writeApi.WritePointsAsync("my-bucket", "my-org", batch);
+            }
+           
+            Assert.AreEqual(3, MockServer.LogEntries.Count());
+        }
     }
 }

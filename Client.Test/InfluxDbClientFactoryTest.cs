@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
@@ -165,6 +166,23 @@ namespace InfluxDB.Client.Test
             Assert.AreEqual(":".ToCharArray(), options.Token);
         }
 
+        [Test]
+        public void Timeout()
+        {
+            var options = new InfluxDBClientOptions.Builder()
+                .Url("http://localhost:8086")
+                .AuthenticateToken("my-token".ToCharArray())
+                .TimeOut(TimeSpan.FromSeconds(20))
+                .ReadWriteTimeOut(TimeSpan.FromSeconds(30))
+                .Build();
+
+            var client = InfluxDBClientFactory.Create(options);
+            
+            var apiClient = GetDeclaredField<ApiClient>(client.GetType(), client, "_apiClient");
+            Assert.AreEqual(20_000, apiClient.Configuration.Timeout);
+            Assert.AreEqual(30_000, apiClient.Configuration.ReadWriteTimeout);
+        }
+        
         private static T GetDeclaredField<T>(IReflect type, object instance, string fieldName)
         {
             const BindingFlags bindFlags = BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic
