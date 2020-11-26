@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using CsvHelper;
@@ -17,6 +18,11 @@ namespace InfluxDB.Client.Core.Flux.Internal
     /// </summary>
     public class FluxCsvParser
     {
+        private const string AnnotationDatatype = "#datatype";
+        private const string AnnotationGroup = "#group";
+        private const string AnnotationDefault = "#default";
+        private static readonly string[] Annotations = {AnnotationDatatype, AnnotationGroup, AnnotationDefault}; 
+        
         private enum ParsingState
         {
             Normal,
@@ -155,7 +161,7 @@ namespace InfluxDB.Client.Core.Flux.Internal
             var token = state.csv[0];
 
             //// start new table
-            if ("#datatype".Equals(token))
+            if (Annotations.Contains(token) && !state.startNewTable)
             {
                 state.startNewTable = true;
 
@@ -172,15 +178,15 @@ namespace InfluxDB.Client.Core.Flux.Internal
             }
 
             //#datatype,string,long,dateTime:RFC3339,dateTime:RFC3339,dateTime:RFC3339,double,string,string,string
-            if ("#datatype".Equals(token))
+            if (AnnotationDatatype.Equals(token))
             {
                 AddDataTypes(state.table, state.csv);
             }
-            else if ("#group".Equals(token))
+            else if (AnnotationGroup.Equals(token))
             {
                 AddGroups(state.table, state.csv);
             }
-            else if ("#default".Equals(token))
+            else if (AnnotationDefault.Equals(token))
             {
                 AddDefaultEmptyValues(state.table, state.csv);
             }
