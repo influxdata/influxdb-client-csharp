@@ -126,6 +126,7 @@ namespace InfluxDB.Client.Core.Flux.Internal
             public int tableId = -1;
             public bool startNewTable;
             public FluxTable table;
+            public string[] groups = new string[0];
             public CsvReader csv;
         }
 
@@ -166,6 +167,7 @@ namespace InfluxDB.Client.Core.Flux.Internal
                 state.startNewTable = true;
 
                 state.table = new FluxTable();
+                state.groups = new string[0];
                 yield return (state.table, null);
 
                 state.tableIndex++;
@@ -184,7 +186,7 @@ namespace InfluxDB.Client.Core.Flux.Internal
             }
             else if (AnnotationGroup.Equals(token))
             {
-                AddGroups(state.table, state.csv);
+                state.groups = state.csv.Context.Record;
             }
             else if (AnnotationDefault.Equals(token))
             {
@@ -195,6 +197,7 @@ namespace InfluxDB.Client.Core.Flux.Internal
                 // parse column names
                 if (state.startNewTable)
                 {
+                    AddGroups(state.table, state.groups);
                     AddColumnNamesAndTags(state.table, state.csv);
                     state.startNewTable = false;
                     yield break;
@@ -322,7 +325,7 @@ namespace InfluxDB.Client.Core.Flux.Internal
             }
         }
 
-        private void AddGroups(FluxTable table, CsvReader groups)
+        private void AddGroups(FluxTable table, string[] groups)
         {
             Arguments.CheckNotNull(table, "table");
             Arguments.CheckNotNull(groups, "groups");

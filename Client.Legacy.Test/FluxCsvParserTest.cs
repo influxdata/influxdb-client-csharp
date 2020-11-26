@@ -668,6 +668,9 @@ namespace Client.Legacy.Test
             var tables = ParseFluxResponse(data);
             Assert.AreEqual(2, tables.Count);
             Assert.AreEqual(1, tables[0].Records.Count);
+            Assert.IsFalse(tables[0].Columns[0].Group);
+            Assert.IsFalse(tables[0].Columns[1].Group);
+            Assert.IsTrue(tables[0].Columns[2].Group);
             Assert.AreEqual(1, tables[1].Records.Count);
         }
 
