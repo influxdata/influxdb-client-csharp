@@ -323,6 +323,7 @@ namespace InfluxDB.Client.Test
         }
 
         [Test]
+        [Ignore("https://github.com/influxdata/influxdb/issues/20005")]
         public async Task Owner()
         {
             var telegrafConfig = await _telegrafsApi.CreateTelegrafAsync(GenerateName("Telegraf"), "test-config",
