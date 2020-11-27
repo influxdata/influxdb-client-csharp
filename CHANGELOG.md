@@ -1,5 +1,8 @@
 ## 1.14.0 [unreleased]
 
+### Features
+1. [#136](https://github.com/influxdata/influxdb-client-csharp/pull/136): CSV parser is able to parse export from UI
+
 ## 1.13.0 [2020-10-30]
 
 ### Features

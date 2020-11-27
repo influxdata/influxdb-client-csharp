@@ -640,13 +640,4 @@ namespace InfluxDB.Client.Writes
             return !(left == right);
         }
     }
-
-    internal static class DictionaryExtensions
-    {
-        public static SortedDictionary<TK, TV> ToSortedDictionary<TK, TV>(this Dictionary<TK, TV> existing,
-            IComparer<TK> comparer)
-        {
-            return new SortedDictionary<TK, TV>(existing, comparer);
-        }
-    }
 }

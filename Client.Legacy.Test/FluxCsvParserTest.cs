@@ -443,7 +443,7 @@ namespace Client.Legacy.Test
 
             var records = new List<FluxRecord>();
 
-            await foreach (var (table, record) in _parser.ParseFluxResponseAsync(new StringReader(data), CancellationToken.None))
+            await foreach (var (_, record) in _parser.ParseFluxResponseAsync(new StringReader(data), CancellationToken.None))
             {
                 // table with null record is "new table" indicator
                 if (!(record is null))
@@ -495,7 +495,7 @@ namespace Client.Legacy.Test
 
             var cancellationSource = new CancellationTokenSource();
 
-            await foreach (var (table, record) in _parser.ParseFluxResponseAsync(new StringReader(data), cancellationSource.Token))
+            await foreach (var (_, record) in _parser.ParseFluxResponseAsync(new StringReader(data), cancellationSource.Token))
             {
                 // table with null record is "new table" indicator
                 if (!(record is null))
@@ -653,6 +653,56 @@ namespace Client.Legacy.Test
             Assert.AreEqual(2, tables.Count);
             Assert.AreEqual(7, tables[0].Records.Count);
             Assert.AreEqual(7, tables[1].Records.Count);
+        }
+
+        [Test]
+        public void ParseExportFromUserInterface()
+        {
+            const string data = "#group,false,false,true,true,true,true,true,true,false,false\n"
+                                + "#datatype,string,long,dateTime:RFC3339,dateTime:RFC3339,string,string,string,string,double,dateTime:RFC3339\n"
+                                + "#default,mean,,,,,,,,,\n"
+                                + ",result,table,_start,_stop,_field,_measurement,city,location,_value,_time\n"
+                                + ",,0,1754-06-26T11:30:27.613654848Z,2040-10-27T12:13:46.485Z,temperatureC,weather,London,us-midwest,30,1975-09-01T16:59:54.5Z\n"
+                                + ",,1,1754-06-26T11:30:27.613654848Z,2040-10-27T12:13:46.485Z,temperatureF,weather,London,us-midwest,86,1975-09-01T16:59:54.5Z\n";
+            
+            var tables = ParseFluxResponse(data);
+            Assert.AreEqual(2, tables.Count);
+            Assert.AreEqual(1, tables[0].Records.Count);
+            Assert.IsFalse(tables[0].Columns[0].Group);
+            Assert.IsFalse(tables[0].Columns[1].Group);
+            Assert.IsTrue(tables[0].Columns[2].Group);
+            Assert.AreEqual(1, tables[1].Records.Count);
+        }
+
+        [Test]
+        public void ResponseWithError()
+        {
+            const string data = "#datatype,string,long,string,string,dateTime:RFC3339,dateTime:RFC3339,dateTime:RFC3339,double,string\n"
+                                + "#group,false,false,true,true,true,true,false,false,true\n"
+                                + "#default,t1,,,,,,,,\n"
+                                + ",result,table,_field,_measurement,_start,_stop,_time,_value,tag\n"
+                                + ",,0,value,python_client_test,2010-02-27T04:48:32.752600083Z,2020-02-27T16:48:32.752600083Z,2020-02-27T16:20:00Z,2,test1\n"
+                                + ",,0,value,python_client_test,2010-02-27T04:48:32.752600083Z,2020-02-27T16:48:32.752600083Z,2020-02-27T16:21:40Z,2,test1\n"
+                                + ",,0,value,python_client_test,2010-02-27T04:48:32.752600083Z,2020-02-27T16:48:32.752600083Z,2020-02-27T16:23:20Z,2,test1\n"
+                                + ",,0,value,python_client_test,2010-02-27T04:48:32.752600083Z,2020-02-27T16:48:32.752600083Z,2020-02-27T16:25:00Z,2,test1\n"
+                                + "\n"
+                                + "#datatype,string,string\n"
+                                + "#group,true,true\n"
+                                + "#default,,\n"
+                                + ",error,reference\n"
+                                + ",\"engine: unknown field type for value: xyz\",";
+
+            try
+            {
+                ParseFluxResponse(data);
+                
+                Assert.Fail();
+            }
+            catch (FluxQueryException e)
+            {
+                Assert.That(e.Message.Equals("engine: unknown field type for value: xyz"));
+                Assert.That(e.Reference.Equals(0));
+            }
         }
 
         private List<FluxTable> ParseFluxResponse(string data)
