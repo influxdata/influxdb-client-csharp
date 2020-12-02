@@ -6,7 +6,7 @@ namespace Examples
 {
     public static class FluxClientSimpleExample
     {
-        public static async Task Run()
+        public static async Task Main(string[] args)
         {
             Console.WriteLine("Start");
 

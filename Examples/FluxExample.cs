@@ -6,7 +6,7 @@ namespace Examples
 {
     public static class FluxExample
     {
-        public static async Task Run()
+        public static async Task Main(string[] args)
         {
             var fluxClient = FluxClientFactory.Create("http://localhost:8086/");
 

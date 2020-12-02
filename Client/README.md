@@ -110,7 +110,7 @@ namespace Examples
 
             [Column("value")] public double Value { get; set; }
 
-            [Column(IsTimestamp = true)] public DateTime Time;
+            [Column(IsTimestamp = true)] public DateTime Time { get; set; }
         }
     }
 }
@@ -216,7 +216,7 @@ namespace Examples
 
             [Column("value")] public double Value { get; set; }
 
-            [Column(IsTimestamp = true)] public DateTime Time;
+            [Column(IsTimestamp = true)] public DateTime Time { get; set; }
         }
     }
 }
@@ -370,7 +370,7 @@ namespace Examples
 
             [Column("value")] public double Value { get; set; }
 
-            [Column(IsTimestamp = true)] public DateTime Time;
+            [Column(IsTimestamp = true)] public DateTime Time { get; set; }
         }
     }
 }
@@ -525,7 +525,7 @@ namespace Examples
 
             [Column("value")] public double Value { get; set; }
 
-            [Column(IsTimestamp = true)] public DateTime Time;
+            [Column(IsTimestamp = true)] public DateTime Time; { get; set; }
         }
         
         public static async Task Main(string[] args)

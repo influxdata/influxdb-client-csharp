@@ -10,6 +10,7 @@
         
         <AssemblyOriginatorKeyFile>../Keys/Key.snk</AssemblyOriginatorKeyFile>
         <SignAssembly>true</SignAssembly>
+        <StartupObject>Examples.RunExamples</StartupObject>
     </PropertyGroup>
 
     <ItemGroup>

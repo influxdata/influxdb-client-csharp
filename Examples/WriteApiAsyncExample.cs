@@ -16,11 +16,14 @@ namespace Examples
 
             [Column("value")] public double Value { get; set; }
 
-            [Column(IsTimestamp = true)] public DateTime Time;
+            [Column(IsTimestamp = true)] public DateTime Time { get; set; }
         }
         
-        public static async Task Example(InfluxDBClient influxDbClient)
+        public static async Task Main(string[] args)
         {
+            var influxDbClient = InfluxDBClientFactory.Create("http://localhost:9999",
+                "my-user", "my-password".ToCharArray());
+            
             //
             // Write Data
             //
@@ -67,14 +70,6 @@ namespace Examples
             });
 
             influxDbClient.Dispose();
-        }
-
-        public static async Task Run()
-        {
-            var client = InfluxDBClientFactory.Create("http://localhost:9999",
-                            "my-user", "my-password".ToCharArray());
-
-            await Example(client);
         }
     }
 }
