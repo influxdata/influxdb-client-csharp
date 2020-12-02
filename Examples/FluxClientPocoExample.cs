@@ -6,7 +6,7 @@ namespace Examples
 {
     public static class FluxClientPocoExample
     {
-        public static async Task Run()
+        public static async Task Main(string[] args)
         {
             var options = new FluxConnectionOptions("http://127.0.0.1:8086");
 

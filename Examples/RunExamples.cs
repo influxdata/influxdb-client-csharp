@@ -3,42 +3,52 @@ using System.Threading.Tasks;
 
 namespace Examples
 {
-    public class RunExamples
+    public static class RunExamples
     {
         /// <summary>
         /// specify name of example in configuration Program arguments e.g. FluxExample
         /// </summary>
         /// <param name="args"></param>
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             if (args.Length >= 1 && !string.IsNullOrEmpty(args[0]))
             {
-                Console.WriteLine("Run solution: " + args[0]);
+                Console.WriteLine($"Run solution: {args[0]}");
+                Console.WriteLine("====================================");
 
                 switch (args[0])
                 {
                     case "FluxExample":
-                        FluxExample.Run().Wait();
+                        await FluxExample.Main(args);
                         break;
                     case "FluxClientSimpleExample":
-                        FluxClientSimpleExample.Run().Wait();
+                        await FluxClientSimpleExample.Main(args);
                         break;
                     case "FluxRawExample":
-                        FluxRawExample.Run().Wait();
+                        await FluxRawExample.Main(args);
                         break;
                     case "FluxClientFactoryExample":
-                        FluxClientFactoryExample.Run().Wait();
+                        await FluxClientFactoryExample.Main(args);
                         break;
                     case "FluxClientPocoExample":
-                        FluxClientPocoExample.Run().Wait();
+                        await FluxClientPocoExample.Main(args);
                         break;
                     case "PlatformExample":
-                        PlatformExample.Run().Wait();
+                        await PlatformExample.Main(args);
                         break;
                     case "WriteApiAsyncExample":
-                        WriteApiAsyncExample.Run().Wait();
+                        await WriteApiAsyncExample.Main(args);
+                        break;
+                    case "PocoQueryWriteExample":
+                        await PocoQueryWriteExample.Main(args);
                         break;
                 }
+            }
+            else
+            {
+                Console.WriteLine("Please specify the name of example. One of: " +
+                                  "FluxExample, FluxClientSimpleExample, FluxRawExample, FluxClientFactoryExample, " +
+                                  "FluxClientPocoExample, PlatformExample, WriteApiAsyncExample, PocoQueryWriteExample");
             }
         }
     }

@@ -19,11 +19,14 @@ namespace Examples
 
             [Column("value")] public double Value { get; set; }
 
-            [Column(IsTimestamp = true)] public DateTime Time;
+            [Column(IsTimestamp = true)] public DateTime Time { get; set; }
         }
 
-        public static async Task Example(InfluxDBClient influxDB)
+        public static async Task Main(string[] args)
         {
+            var influxDB = InfluxDBClientFactory.Create("http://localhost:9999",
+                "my-user", "my-password".ToCharArray());
+            
             var organizationClient = influxDB.GetOrganizationsApi();
             
             var medicalGMBH = await organizationClient
@@ -124,14 +127,6 @@ namespace Examples
             await influxDB.GetDeleteApi().Delete(DateTime.UtcNow.AddMinutes(-1), DateTime.Now, "", temperatureBucket, medicalGMBH);
 
             influxDB.Dispose();
-        }
-        
-        public static async Task Run()
-        {
-            var client = InfluxDBClientFactory.Create("http://localhost:8086",
-                            "my-user", "my-password".ToCharArray());
-
-            await Example(client);
         }
     }
 }
