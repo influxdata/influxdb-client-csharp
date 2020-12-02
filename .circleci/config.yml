@@ -61,7 +61,7 @@ jobs:
         default: "netstandard2.1"
       influxdb-image:
         type: string
-        default: &default-influxdb-image "influxdb:2.0.0-rc"
+        default: &default-influxdb-image "influxdb:v2.0.2"
     docker:
       - image: << parameters.dotnet-image >>
         environment:
