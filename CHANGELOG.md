@@ -3,6 +3,9 @@
 ### Features
 1. [#136](https://github.com/influxdata/influxdb-client-csharp/pull/136): CSV parser is able to parse export from UI
 
+### CI
+1. [#138](https://github.com/influxdata/influxdb-client-csharp/pull/138): Updated default docker image to v2.0.2
+
 ## 1.13.0 [2020-10-30]
 
 ### Features
