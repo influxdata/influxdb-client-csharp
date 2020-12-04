@@ -4,8 +4,8 @@
         <OutputType>Exe</OutputType>
         <TargetFrameworks>netcoreapp2.2;netcoreapp3.1</TargetFrameworks>
         <LangVersion>8</LangVersion>
-        <VersionPrefix>1.14.0</VersionPrefix>
-        <VersionSuffix></VersionSuffix>
+        <VersionPrefix>1.15.0</VersionPrefix>
+        <VersionSuffix>dev</VersionSuffix>
         <IsPackable>false</IsPackable>
         
         <AssemblyOriginatorKeyFile>../Keys/Key.snk</AssemblyOriginatorKeyFile>
