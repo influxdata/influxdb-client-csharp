@@ -72,7 +72,6 @@ namespace InfluxDB.Client.Test
         }
 
         [Test]
-        [Ignore("https://github.com/influxdata/influxdb/issues/19545")]
         public async Task Delete()
         {
             Client.Dispose();
@@ -99,7 +98,6 @@ namespace InfluxDB.Client.Test
         }
 
         [Test]
-        [Ignore("https://github.com/influxdata/influxdb/issues/19545")]
         public async Task DeleteWithPredicate()
         {
             Client.Dispose();
@@ -117,8 +115,7 @@ namespace InfluxDB.Client.Test
             Assert.AreEqual(5, tables[1].Records.Count);
 
             var location = "east";
-            var field = "water_level";
-            var predicate = $"location=\"{location}\" AND _field=\"{field}\"";
+            var predicate = $"location=\"{location}\"";
 
             _deleteApi = Client.GetDeleteApi();
             await _deleteApi.Delete(DateTime.Now.AddHours(-1), DateTime.Now, predicate, _bucket, _organization);
