@@ -61,7 +61,7 @@ jobs:
         default: "netstandard2.1"
       influxdb-image:
         type: string
-        default: &default-influxdb-image "influxdb:v2.0.2"
+        default: &default-influxdb-image "influxdb:v2.0.3"
     docker:
       - image: << parameters.dotnet-image >>
         environment:
@@ -155,7 +155,7 @@ workflows:
           dotnet-target-version: "netstandard2.0"
       - tests-dotnet:
           name: dotnet-3.1-nightly
-          influxdb-image: "influx:nightly"
+          influxdb-image: "influxdb2:nightly"
       - tests-dotnet:
           name: dotnet-3.0
           dotnet-image: "mcr.microsoft.com/dotnet/core/sdk:3.0"
