@@ -80,7 +80,6 @@ namespace InfluxDB.Client.Test
             Client.Dispose();
 
             var options = new InfluxDBClientOptions.Builder().Url(InfluxDbUrl)
-                .LoadConfig()
                 .Url(InfluxDbUrl)
                 .AuthenticateToken(_token)
                 .Build();

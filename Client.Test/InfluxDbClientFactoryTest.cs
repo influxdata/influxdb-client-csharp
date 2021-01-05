@@ -120,9 +120,7 @@ namespace InfluxDB.Client.Test
         [Test]
         public void LoadFromConfiguration()
         {
-            // copy App.config to assemble format
-            var config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-            File.Copy(Directory.GetCurrentDirectory() + "/../../../App.config", config.FilePath, true);
+            CopyAppConfig();
 
             var client = InfluxDBClientFactory.Create();
             
@@ -145,7 +143,29 @@ namespace InfluxDB.Client.Test
             Assert.AreEqual("California Miner", defaultTags["customer"]);
             Assert.AreEqual("${SensorVersion}", defaultTags["version"]);
         }
-        
+
+        [Test]
+        public void LoadFromConfigurationWithoutUrl()
+        {
+            CopyAppConfig();
+            
+            var ce = Assert.Throws<ConfigurationErrorsException>(() => InfluxDBClientOptions.Builder
+                .CreateNew()
+                .LoadConfig("influx2-without-url"));
+
+            StringAssert.StartsWith("Required attribute 'url' not found.", ce.Message);
+        }
+
+        [Test]
+        public void LoadFromConfigurationNotExist()
+        {
+            var ce = Assert.Throws<ConfigurationErrorsException>(() => InfluxDBClientOptions.Builder
+                .CreateNew()
+                .LoadConfig("influx2-not-exits"));
+
+            StringAssert.StartsWith("The configuration doesn't contains a 'influx2'", ce.Message);
+        }
+
         [Test]
         public void V1Configuration()
         {
@@ -188,7 +208,14 @@ namespace InfluxDB.Client.Test
             const BindingFlags bindFlags = BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic
                                            | BindingFlags.Static | BindingFlags.DeclaredOnly;
             var field = type.GetField(fieldName, bindFlags);
-            return (T) field.GetValue(instance);
+            return (T) field?.GetValue(instance);
+        }
+        
+        private static void CopyAppConfig()
+        {
+            // copy App.config to assemble format
+            var config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            File.Copy(Directory.GetCurrentDirectory() + "/../../../App.config", config.FilePath, true);
         }
     }
 }

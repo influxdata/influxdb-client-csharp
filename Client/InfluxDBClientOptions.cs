@@ -248,20 +248,30 @@ namespace InfluxDB.Client
             /// <summary>
             /// Configure Builder via App.config.
             /// </summary>
+            /// <param name="sectionName">Name of configuration section. Useful for tests.</param>
             /// <returns><see cref="Builder"/></returns>
-            internal Builder LoadConfig()
+            internal Builder LoadConfig(string sectionName = "influx2")
             {
-                var config = (Influx2) ConfigurationManager.GetSection("influx2");
+                var config = (Influx2) ConfigurationManager.GetSection(sectionName);
+                if (config == null)
+                {
+                    const string message = "The configuration doesn't contains a 'influx2' section. " +
+                                           "The minimal configuration should contains an url of InfluxDB. " +
+                                           "For more details see: " +
+                                           "https://github.com/influxdata/influxdb-client-csharp/blob/master/Client/README.md#client-configuration-file";
+                    
+                    throw new ConfigurationErrorsException(message);
+                }
 
-                var url = config?.Url;
-                var org = config?.Org;
-                var bucket = config?.Bucket;
-                var token = config?.Token;
-                var logLevel = config?.LogLevel;
-                var timeout = config?.Timeout;
-                var readWriteTimeout = config?.ReadWriteTimeout;
+                var url = config.Url;
+                var org = config.Org;
+                var bucket = config.Bucket;
+                var token = config.Token;
+                var logLevel = config.LogLevel;
+                var timeout = config.Timeout;
+                var readWriteTimeout = config.ReadWriteTimeout;
 
-                var tags = config?.Tags;
+                var tags = config.Tags;
                 if (tags != null)
                 {
                     foreach (Influx2.TagElement o in tags)
