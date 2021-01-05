@@ -1,5 +1,8 @@
 ## 1.15.0 [unreleased]
 
+### Bug Fixes
+1. [#143](https://github.com/influxdata/influxdb-client-csharp/pull/143): Added validation that a configuration is present when is client configured via file
+
 ### CI
  1. [#140](https://github.com/influxdata/influxdb-client-csharp/pull/140): Updated default docker image to v2.0.3
 
