@@ -1,16 +1,9 @@
-using System;
 using System.Collections.Generic;
-using System.Configuration;
-using System.Diagnostics;
-using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using InfluxDB.Client.Api.Domain;
-using InfluxDB.Client.Core;
 using InfluxDB.Client.Writes;
-using NodaTime;
 using NUnit.Framework;
-using Duration = NodaTime.Duration;
-using Task = System.Threading.Tasks.Task;
 
 namespace InfluxDB.Client.Test
 {
@@ -58,11 +51,6 @@ namespace InfluxDB.Client.Test
         [Test]
         public void Race()
         {
-            var options = new InfluxDBClientOptions.Builder().Url(InfluxDbUrl)
-                .LoadConfig()
-                .Url(InfluxDbUrl)
-                .AuthenticateToken(_token)
-                .Build();
             var point = PointData.Measurement("race-test")
                                  .Tag("test", "stress")
                                  .Field("value", 1);
