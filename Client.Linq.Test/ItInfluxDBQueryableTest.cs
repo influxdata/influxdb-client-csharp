@@ -22,20 +22,14 @@ namespace Client.Linq.Test
             _client = InfluxDBClientFactory.Create(GetInfluxDb2Url(), "my-token");
             _client.SetLogLevel(LogLevel.Body);
 
-            var sensor1 = new Sensor
-            {
-                SensorId = "id-1", Deployment = "testing", Value = 15,
-                Timestamp = new DateTime(2020, 10, 15, 8, 20, 15, DateTimeKind.Utc)
-            };
-            var sensor2 = new Sensor
-            {
-                SensorId = "id-2", Deployment = "production", Value = 28,
-                Timestamp = new DateTime(2020, 11, 15, 8, 20, 15, DateTimeKind.Utc)
-            };
+            // DateTime(2020, 10, 15, 8, 20, 15, DateTimeKind.Utc)
+            const string sensor1 = "sensor,deployment=testing,sensor_id=id-1 data=15 1602750015";
+            // new DateTime(2020, 11, 15, 8, 20, 15, DateTimeKind.Utc)
+            const string sensor2 = "sensor,deployment=production,sensor_id=id-2 data=28 1605428415";
 
             await _client
                 .GetWriteApiAsync()
-                .WriteMeasurementsAsync("my-bucket", "my-org", WritePrecision.S, sensor1, sensor2);
+                .WriteRecordsAsync("my-bucket", "my-org", WritePrecision.S, sensor1, sensor2);
         }
 
         [Test]
@@ -56,7 +50,6 @@ namespace Client.Linq.Test
         }
     }
 
-    [Measurement("sensor")]
     class Sensor
     {
         [Column("sensor_id", IsTag = true)] public string SensorId { get; set; }

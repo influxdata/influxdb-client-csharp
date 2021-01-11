@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using InfluxDB.Client.Api.Domain;
 using Remotion.Linq;
 
@@ -6,11 +7,11 @@ namespace InfluxDB.Client.Linq
 {
     public class InfluxDBQueryVisitor : QueryModelVisitorBase
     {
-        private readonly string _bucket;
+        private readonly Dictionary<string, object> _properties = new Dictionary<string, object>();
 
         public InfluxDBQueryVisitor(string bucket)
         {
-            _bucket = bucket;
+            AddProperty(bucket);
         }
 
         public Query GenerateQuery()
@@ -36,14 +37,28 @@ namespace InfluxDB.Client.Linq
 
         public File BuildFluxAST()
         {
-            return new File {Imports = null, Package = null, Body = new List<Statement>()};
+            var results = _properties.Select(pair =>
+            {
+                var assignment = new VariableAssignment("VariableAssignment",
+                    new Identifier("Identifier", "p1"),
+                    new StringLiteral("StringLiteral", "my-bucket"));
+
+                return new OptionStatement("OptionStatement", assignment) as Statement;
+            }).ToList();
+
+            return new File {Imports = null, Package = null, Body = results};
         }
 
         public string BuildFluxQuery()
         {
-            return $"from(bucket: \"{_bucket}\")" +
+            return "from(bucket: p1)" +
                    " |> range(start: 0)" +
                    " |> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")";
+        }
+
+        private void AddProperty(object bucket)
+        {
+            _properties.Add($"p{_properties.Count + 1}", bucket);
         }
     }
 }
