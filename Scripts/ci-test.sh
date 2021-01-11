@@ -23,7 +23,7 @@ sed -i '/<TargetFrameworks>netstandard2.0;netstandard2.1<\/TargetFrameworks>/c\<
 #
 # Install testing tools
 #
-dotnet tool install --tool-path="./Coverlet/" coverlet.console
+dotnet tool install --tool-path="./Coverlet/" coverlet.console --version 1.7.2
 dotnet tool install --tool-path="./trx2junit/" trx2junit --version 1.3.2
 
 #

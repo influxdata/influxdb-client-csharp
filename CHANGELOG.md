@@ -3,8 +3,11 @@
 ### Bug Fixes
 1. [#143](https://github.com/influxdata/influxdb-client-csharp/pull/143): Added validation that a configuration is present when is client configured via file
 
+### Dependencies
+1. [#145](https://github.com/influxdata/influxdb-client-csharp/pull/145): Updated RestSharp to 106.11.7
+
 ### CI
- 1. [#140](https://github.com/influxdata/influxdb-client-csharp/pull/140): Updated default docker image to v2.0.3
+1. [#140](https://github.com/influxdata/influxdb-client-csharp/pull/140): Updated default docker image to v2.0.3
 
 ## 1.14.0 [2020-12-04]
 
