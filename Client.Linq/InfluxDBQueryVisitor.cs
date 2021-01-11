@@ -36,7 +36,7 @@ namespace InfluxDB.Client.Linq
 
         public File BuildFluxAST()
         {
-            return new File();
+            return new File {Imports = null, Package = null, Body = new List<Statement>()};
         }
 
         public string BuildFluxQuery()

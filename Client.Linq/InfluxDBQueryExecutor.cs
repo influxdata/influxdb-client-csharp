@@ -55,9 +55,7 @@ namespace InfluxDB.Client.Linq
             visitor.VisitQueryModel(queryModel);
 
             var task = _queryApi.QueryAsync<T>(visitor.GenerateQuery(), _org);
-            task.RunSynchronously();
-
-            return task.Result;
+            return task.GetAwaiter().GetResult();
         }
     }
 }

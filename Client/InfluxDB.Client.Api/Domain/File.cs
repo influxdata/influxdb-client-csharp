@@ -63,14 +63,14 @@ namespace InfluxDB.Client.Api.Domain
         /// <summary>
         /// Gets or Sets Package
         /// </summary>
-        [DataMember(Name="package", EmitDefaultValue=false)]
+        [DataMember(Name="package", EmitDefaultValue=true)]
         public PackageClause Package { get; set; }
 
         /// <summary>
         /// A list of package imports
         /// </summary>
         /// <value>A list of package imports</value>
-        [DataMember(Name="imports", EmitDefaultValue=false)]
+        [DataMember(Name="imports", EmitDefaultValue=true)]
         public List<ImportDeclaration> Imports { get; set; }
 
         /// <summary>

@@ -25,7 +25,8 @@ namespace Client.Linq.Test
             var ast = visitor.BuildFluxAST();
             
             Assert.NotNull(ast);
-            Assert.Null(ast.Body);
+            Assert.NotNull(ast.Body);
+            Assert.AreEqual(0, ast.Body.Count);
         }
     }
 }
