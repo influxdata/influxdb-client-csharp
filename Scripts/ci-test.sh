@@ -39,6 +39,7 @@ dotnet build
 #
 ./Coverlet/coverlet Client.Legacy.Test/bin/Debug/"$NET_VERSION"/Client.Legacy.Test.dll --target "dotnet" --targetargs "test Client.Legacy.Test/Client.Legacy.Test.csproj --no-build  --logger trx" --format opencover --output "./Client.Legacy.Test/"
 ./Coverlet/coverlet Client.Test/bin/Debug/"$NET_VERSION"/Client.Test.dll --target "dotnet"  --targetargs "test Client.Test/Client.Test.csproj --no-build --logger trx" --format opencover --output "./Client.Test/"
+./Coverlet/coverlet Client.Linq.Test/bin/Debug/"$NET_VERSION"/Client.Linq.Test.dll --target "dotnet" --targetargs "test Client.Linq.Test/Client.Linq.Test.csproj --no-build  --logger trx" --format opencover --output "./Client.Linq.Test/"
 
 #
 # Convert test results to Junit format
