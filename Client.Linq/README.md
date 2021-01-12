@@ -52,7 +52,7 @@ class Sensor
 
 #### Perform Query
 
-The LINQ query requires defined `bucket` and `organization` as a source of data. Both of them could be name or ID.
+The LINQ query requires `bucket` and `organization` as a source of data. Both of them could be name or ID.
 
 ```c#
 var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", queryApi)
