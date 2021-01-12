@@ -7,11 +7,16 @@ namespace InfluxDB.Client.Linq.Internal
 {
     internal class InfluxDBQueryVisitor : QueryModelVisitorBase
     {
-        private readonly Dictionary<string, object> _properties = new Dictionary<string, object>();
+        private readonly QueryAggregator _query;
+        private readonly VariableAggregator _variables;
 
         public InfluxDBQueryVisitor(string bucket)
         {
-            AddProperty(bucket);
+            _variables = new VariableAggregator();
+            var bucketVariable = _variables.AddNamedVariable(bucket);
+            var rangeVariable = _variables.AddNamedVariable(0);
+
+            _query = new QueryAggregator(bucketVariable, rangeVariable);
         }
 
         public Query GenerateQuery()
@@ -37,11 +42,20 @@ namespace InfluxDB.Client.Linq.Internal
 
         public File BuildFluxAST()
         {
-            var results = _properties.Select(pair =>
+            var results = _variables.GetAll().Select(variable =>
             {
+                Expression literal;
+                if (variable.Value is int i)
+                {
+                    literal = new IntegerLiteral("IntegerLiteral", i.ToString());
+                }
+                else
+                {
+                    literal = new StringLiteral("StringLiteral", variable.Value.ToString());
+                }
+
                 var assignment = new VariableAssignment("VariableAssignment",
-                    new Identifier("Identifier", "p1"),
-                    new StringLiteral("StringLiteral", "my-bucket"));
+                    new Identifier("Identifier", variable.Name), literal);
 
                 return new OptionStatement("OptionStatement", assignment) as Statement;
             }).ToList();
@@ -51,14 +65,7 @@ namespace InfluxDB.Client.Linq.Internal
 
         public string BuildFluxQuery()
         {
-            return "from(bucket: p1)" +
-                   " |> range(start: 0)" +
-                   " |> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")";
-        }
-
-        private void AddProperty(object bucket)
-        {
-            _properties.Add($"p{_properties.Count + 1}", bucket);
+            return _query.BuildFluxQuery();
         }
     }
 }
