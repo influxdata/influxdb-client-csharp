@@ -42,25 +42,7 @@ namespace InfluxDB.Client.Linq.Internal
 
         public File BuildFluxAST()
         {
-            var results = _variables.GetAll().Select(variable =>
-            {
-                Expression literal;
-                if (variable.Value is int i)
-                {
-                    literal = new IntegerLiteral("IntegerLiteral", i.ToString());
-                }
-                else
-                {
-                    literal = new StringLiteral("StringLiteral", variable.Value.ToString());
-                }
-
-                var assignment = new VariableAssignment("VariableAssignment",
-                    new Identifier("Identifier", variable.Name), literal);
-
-                return new OptionStatement("OptionStatement", assignment) as Statement;
-            }).ToList();
-
-            return new File {Imports = null, Package = null, Body = results};
+            return new File {Imports = null, Package = null, Body = _variables.GetStatements()};
         }
 
         public string BuildFluxQuery()

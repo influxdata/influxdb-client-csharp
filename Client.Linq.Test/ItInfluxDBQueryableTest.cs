@@ -25,10 +25,15 @@ namespace Client.Linq.Test
             const string sensor1 = "sensor,deployment=testing,sensor_id=id-1 data=15 1602750015";
             // new DateTime(2020, 11, 15, 8, 20, 15, DateTimeKind.Utc)
             const string sensor2 = "sensor,deployment=production,sensor_id=id-2 data=28 1605428415";
+            // new DateTime(2020, 11, 16, 8, 20, 15, DateTimeKind.Utc)
+            const string sensor3 = "sensor,deployment=production,sensor_id=id-2 data=12 1605514815";
+            // new DateTime(2020, 11, 17, 8, 20, 15, DateTimeKind.Utc)
+            const string sensor4 = "sensor,deployment=production,sensor_id=id-1 data=89 1605601215";
 
             await _client
                 .GetWriteApiAsync()
-                .WriteRecordsAsync("my-bucket", "my-org", WritePrecision.S, sensor1, sensor2);
+                .WriteRecordsAsync("my-bucket", "my-org", WritePrecision.S, 
+                    sensor1, sensor2, sensor3, sensor4);
         }
 
         [Test]
@@ -39,7 +44,7 @@ namespace Client.Linq.Test
 
             var sensors = query.ToList();
 
-            Assert.AreEqual(2, sensors.Count);
+            Assert.AreEqual(4, sensors.Count);
         }
 
         [TearDown]

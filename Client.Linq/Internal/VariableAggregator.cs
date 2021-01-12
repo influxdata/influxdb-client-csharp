@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.Linq;
+using InfluxDB.Client.Api.Domain;
 
 namespace InfluxDB.Client.Linq.Internal
 {
@@ -6,7 +8,7 @@ namespace InfluxDB.Client.Linq.Internal
     {
         private readonly List<NamedVariable> _variables = new List<NamedVariable>();
 
-        public string AddNamedVariable(object value)
+        internal string AddNamedVariable(object value)
         {
             var variable = new NamedVariable
             {
@@ -17,12 +19,28 @@ namespace InfluxDB.Client.Linq.Internal
             return variable.Name;
         }
 
-        public NamedVariable[] GetAll()
+        internal List<Statement> GetStatements()
         {
-            return _variables.ToArray();
+            return _variables.Select(variable =>
+            {
+                Expression literal;
+                if (variable.Value is int i)
+                {
+                    literal = new IntegerLiteral("IntegerLiteral", i.ToString());
+                }
+                else
+                {
+                    literal = new StringLiteral("StringLiteral", variable.Value.ToString());
+                }
+
+                var assignment = new VariableAssignment("VariableAssignment",
+                    new Identifier("Identifier", variable.Name), literal);
+
+                return new OptionStatement("OptionStatement", assignment) as Statement;
+            }).ToList();
         }
     }
-    
+
     internal sealed class NamedVariable
     {
         public string Name { get; set; }
