@@ -1,5 +1,7 @@
 using System.Linq;
 using System.Linq.Expressions;
+using InfluxDB.Client.Core;
+using InfluxDB.Client.Linq.Internal;
 using Remotion.Linq;
 using Remotion.Linq.Parsing.Structure;
 
@@ -13,11 +15,23 @@ namespace InfluxDB.Client.Linq
         /// <summary>
         /// Create a new instance of IQueryable.
         /// </summary>
-        /// <param name="queryApi">The underlying API to execute Flux Query.</param>
-        /// <param name="org">Specifies the source organization.</param>
         /// <param name="bucket">Specifies the source bucket.</param>
-        public InfluxDBQueryable(QueryApi queryApi, string org, string bucket) : base(CreateQueryParser(),
-            CreateExecutor(queryApi, org, bucket))
+        /// <param name="org">Specifies the source organization.</param>
+        /// <param name="queryApi">The underlying API to execute Flux Query.</param>
+        /// <returns>new instance for of Queryable</returns>
+        public static InfluxDBQueryable<T> Queryable(string bucket, string org, QueryApi queryApi)
+        {
+            return new InfluxDBQueryable<T>(bucket, org, queryApi);
+        }
+        
+        /// <summary>
+        /// Create a new instance of IQueryable.
+        /// </summary>
+        /// <param name="bucket">Specifies the source bucket.</param>
+        /// <param name="org">Specifies the source organization.</param>
+        /// <param name="queryApi">The underlying API to execute Flux Query.</param>
+        public InfluxDBQueryable(string bucket, string org, QueryApi queryApi) : base(CreateQueryParser(),
+            CreateExecutor(bucket, org, queryApi))
         {
         }
 
@@ -30,9 +44,13 @@ namespace InfluxDB.Client.Linq
         {
         }
 
-        private static IQueryExecutor CreateExecutor(QueryApi queryApi, string org, string bucket)
+        private static IQueryExecutor CreateExecutor(string bucket, string org, QueryApi queryApi)
         {
-            return new InfluxDBQueryExecutor(queryApi, org, bucket);
+            Arguments.CheckNonEmptyString(bucket, nameof(bucket));
+            Arguments.CheckNonEmptyString(org, nameof(org));
+            Arguments.CheckNotNull(queryApi, nameof(queryApi));
+                
+            return new InfluxDBQueryExecutor(bucket, org, queryApi);
         }
 
         private static QueryParser CreateQueryParser()

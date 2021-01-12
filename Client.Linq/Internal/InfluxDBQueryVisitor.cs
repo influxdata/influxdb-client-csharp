@@ -3,9 +3,9 @@ using System.Linq;
 using InfluxDB.Client.Api.Domain;
 using Remotion.Linq;
 
-namespace InfluxDB.Client.Linq
+namespace InfluxDB.Client.Linq.Internal
 {
-    public class InfluxDBQueryVisitor : QueryModelVisitorBase
+    internal class InfluxDBQueryVisitor : QueryModelVisitorBase
     {
         private readonly Dictionary<string, object> _properties = new Dictionary<string, object>();
 

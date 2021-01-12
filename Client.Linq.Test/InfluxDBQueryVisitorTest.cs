@@ -1,5 +1,5 @@
 using InfluxDB.Client.Api.Domain;
-using InfluxDB.Client.Linq;
+using InfluxDB.Client.Linq.Internal;
 using NUnit.Framework;
 
 namespace Client.Linq.Test

@@ -1,6 +1,5 @@
 using System;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Threading.Tasks;
 using InfluxDB.Client;
 using InfluxDB.Client.Api.Domain;
@@ -35,14 +34,14 @@ namespace Client.Linq.Test
         [Test]
         public void QueryAll()
         {
-            var query = from s in new InfluxDBQueryable<Sensor>(_client.GetQueryApi(), "my-org", "my-bucket") 
+            var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApi())
                 select s;
 
             var sensors = query.ToList();
-            
+
             Assert.AreEqual(2, sensors.Count);
         }
-        
+
         [TearDown]
         protected void After()
         {
