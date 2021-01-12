@@ -1,7 +1,9 @@
+using System;
 using System.Collections.Generic;
-using System.Linq;
 using InfluxDB.Client.Api.Domain;
 using Remotion.Linq;
+using Remotion.Linq.Clauses;
+using Remotion.Linq.Clauses.ResultOperators;
 
 namespace InfluxDB.Client.Linq.Internal
 {
@@ -48,6 +50,26 @@ namespace InfluxDB.Client.Linq.Internal
         public string BuildFluxQuery()
         {
             return _query.BuildFluxQuery();
+        }
+
+        public override void VisitResultOperator(ResultOperatorBase resultOperator, QueryModel queryModel, int index)
+        {
+            base.VisitResultOperator(resultOperator, queryModel, index);
+
+            switch (resultOperator)
+            {
+                case TakeResultOperator takeResultOperator:
+                    var takeVariable = _variables.AddNamedVariable(takeResultOperator.GetConstantCount());
+                    _query.AddLimitN(takeVariable);
+                    break;
+
+                case SkipResultOperator skipResultOperator:
+                    var skipVariable = _variables.AddNamedVariable(skipResultOperator.GetConstantCount());
+                    _query.AddLimitOffset(skipVariable);
+                    break;
+                default:
+                    throw new NotSupportedException($"{resultOperator.GetType().Name} is not supported.");
+            }
         }
     }
 }

@@ -21,11 +21,11 @@ namespace Client.Linq.Test
             _client.SetLogLevel(LogLevel.Body);
 
             // DateTime(2020, 10, 15, 8, 20, 15, DateTimeKind.Utc)
-            const string sensor1 = "sensor,deployment=testing,sensor_id=id-1 data=15 1602750015";
+            const string sensor1 = "sensor,deployment=production,sensor_id=id-1 data=15 1602750015";
             // new DateTime(2020, 11, 15, 8, 20, 15, DateTimeKind.Utc)
-            const string sensor2 = "sensor,deployment=production,sensor_id=id-2 data=28 1605428415";
+            const string sensor2 = "sensor,deployment=production,sensor_id=id-1 data=28 1605428415";
             // new DateTime(2020, 11, 16, 8, 20, 15, DateTimeKind.Utc)
-            const string sensor3 = "sensor,deployment=production,sensor_id=id-2 data=12 1605514815";
+            const string sensor3 = "sensor,deployment=production,sensor_id=id-1 data=12 1605514815";
             // new DateTime(2020, 11, 17, 8, 20, 15, DateTimeKind.Utc)
             const string sensor4 = "sensor,deployment=production,sensor_id=id-1 data=89 1605601215";
 
@@ -44,6 +44,28 @@ namespace Client.Linq.Test
             var sensors = query.ToList();
 
             Assert.AreEqual(4, sensors.Count);
+        }
+
+        [Test]
+        public void QueryTake()
+        {
+            var query = (from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApi())
+                select s).Take(2);
+
+            var sensors = query.ToList();
+
+            Assert.AreEqual(2, sensors.Count);
+        }
+
+        [Test]
+        public void QueryTakeSkip()
+        {
+            var query = (from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApi())
+                select s).Take(2).Skip(3);
+
+            var sensors = query.ToList();
+
+            Assert.AreEqual(1, sensors.Count);
         }
 
         [TearDown]
