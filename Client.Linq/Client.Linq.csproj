@@ -3,7 +3,7 @@
     <PropertyGroup>
       <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
 
-      <Description>The supports for use a LINQ queries with InfluxDB client.</Description>
+      <Description>The library supports to use a LINQ expression to query the InfluxDB.</Description>
         <Authors>influxdb-client-csharp Contributors</Authors>
         <AssemblyName>InfluxDB.Client.Linq</AssemblyName>
         <VersionPrefix>1.15.0</VersionPrefix>

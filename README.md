@@ -44,6 +44,7 @@ The C# clients are implemented for the InfluxDB 2.0 and InfluxDB 1.7+:
 | Client | Description | Documentation | Compatibility |
 | --- | --- | --- |                                      --- |
 | **[Client](./Client#influxdbclient)** | The reference C# client that allows query, write and InfluxDB 2.0 management. | [readme](./Client#influxdbclient)| 2.0 |
+| **[Client.Linq](./Client.Linq#influxdbclientlinq)**  | The library supports to use a LINQ expression to query the InfluxDB. | [readme](./Client.Linq#influxdbclientlinq) | 2.0 |
 | **[Client.Legacy](./Client.Legacy#influxdbclientflux)**  | The reference C# client that allows you to perform Flux queries against InfluxDB 1.7+. | [readme](./Client.Legacy#influxdbclientflux) | 1.7+ |
 
 
