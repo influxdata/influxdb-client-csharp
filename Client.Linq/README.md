@@ -4,7 +4,7 @@ The library supports to use a LINQ expression to query the InfluxDB.
 
 #### Disclaimer: This library is a work in progress and should not be considered production ready yet.
 
-#### How to start
+## How to start
 
 First, add the library as a dependency for your project:
 
@@ -50,7 +50,7 @@ class Sensor
 }
 ```
 
-#### Perform Query
+## Perform Query
 
 The LINQ query requires `bucket` and `organization` as a source of data. Both of them could be name or ID.
 
@@ -61,9 +61,9 @@ var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org",
 var sensors = query.ToList();
 ```
 
-#### Supported LINQ operators
+## Supported LINQ operators
 
-##### Take
+### Take
 
 ```c#
 var query = (from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", queryApi)
@@ -71,11 +71,29 @@ var query = (from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org"
     .Take(10);
 ```
 
-##### Skip
+Flux Query:
+
+```flux
+from(bucket: "my-bucket") 
+    |> range(start: 0) 
+    |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value") 
+    |> limit(n: 10)
+```
+
+### Skip
 
 ```c#
 var query = (from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", queryApi)
     select s)
     .Take(10)
     .Skip(50);
+```
+
+Flux Query:
+
+```flux
+from(bucket: "my-bucket") 
+    |> range(start: 0) 
+    |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value") 
+    |> limit(n: 10, offset: 50)
 ```
