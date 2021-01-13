@@ -55,8 +55,8 @@ namespace Client.Linq.Test
         public void QueryExample()
         {
             var query = (from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApi())
-                orderby s.Timestamp
                 where s.SensorId == "id-1"
+                orderby s.Timestamp
                 select s)
                 .Take(2)
                 .Skip(2);

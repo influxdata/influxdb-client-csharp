@@ -96,8 +96,8 @@ The LINQ query requires `bucket` and `organization` as a source of data. Both of
 
 ```c#
 var query = (from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApi())
-    orderby s.Timestamp
     where s.SensorId == "id-1"
+    orderby s.Timestamp
     select s)
     .Take(2)
     .Skip(2);
