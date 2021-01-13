@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using InfluxDB.Client;
@@ -98,6 +99,34 @@ namespace Client.Linq.Test
             var sensors = query.ToList();
 
             Assert.AreEqual(0, sensors.Count);
+        }
+        
+        [Test]
+        public void QueryOrderBy()
+        {
+            var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApi())
+                orderby s.Value
+                select s;
+
+            var sensors = query.ToList();
+
+            Assert.AreEqual(12, sensors.First().Value);
+            Assert.AreEqual(89, sensors.Last().Value);
+        }
+        
+        [Test]
+        public void QueryOrderByTime()
+        {
+            var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApi())
+                orderby s.Timestamp descending 
+                select s;
+
+            var sensors = query.ToList();
+
+            Assert.AreEqual(new DateTime(2020, 11, 17, 8, 20, 15, DateTimeKind.Utc), 
+                sensors.First().Timestamp);
+            Assert.AreEqual(new DateTime(2020, 10, 15, 8, 20, 15, DateTimeKind.Utc), 
+                sensors.Last().Timestamp);
         }
 
         [TearDown]

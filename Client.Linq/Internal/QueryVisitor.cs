@@ -64,7 +64,7 @@ namespace InfluxDB.Client.Linq.Internal
         {
             base.VisitWhereClause (whereClause, queryModel, index);
 
-            var filterPart = GetFluxExpression(whereClause.Predicate);
+            var filterPart = GetFluxExpression(whereClause.Predicate, whereClause);
             _query.AddFilter(filterPart);
         }
 
@@ -75,12 +75,12 @@ namespace InfluxDB.Client.Linq.Internal
             switch (resultOperator)
             {
                 case TakeResultOperator takeResultOperator:
-                    var takeVariable = GetFluxExpression(takeResultOperator.Count);
+                    var takeVariable = GetFluxExpression(takeResultOperator.Count, resultOperator);
                     _query.AddLimitN(takeVariable);
                     break;
 
                 case SkipResultOperator skipResultOperator:
-                    var skipVariable = GetFluxExpression(skipResultOperator.Count);
+                    var skipVariable = GetFluxExpression(skipResultOperator.Count, resultOperator);
                     _query.AddLimitOffset(skipVariable);
                     break;
                 default:
@@ -88,9 +88,23 @@ namespace InfluxDB.Client.Linq.Internal
             }
         }
 
-        private string GetFluxExpression(Expression expression)
+        public override void VisitOrderByClause(OrderByClause orderByClause, QueryModel queryModel, int index)
         {
-            return QueryExpressionTreeVisitor.GetFluxExpression(expression, _generationContext);
+            base.VisitOrderByClause(orderByClause, queryModel, index);
+
+            foreach (var ordering in orderByClause.Orderings)
+            {
+                var orderPart = _generationContext.Variables
+                    .AddNamedVariable(GetFluxExpression(ordering.Expression, orderByClause));
+                var desc = _generationContext.Variables
+                    .AddNamedVariable(ordering.OrderingDirection == OrderingDirection.Desc);
+                _query.AddOrder(orderPart, desc);
+            }
+        }
+
+        private string GetFluxExpression(Expression expression, object clause)
+        {
+            return QueryExpressionTreeVisitor.GetFluxExpression(expression, clause, _generationContext);
         }
     }
 }

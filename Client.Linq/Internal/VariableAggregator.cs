@@ -28,6 +28,10 @@ namespace InfluxDB.Client.Linq.Internal
                 {
                     literal = new IntegerLiteral("IntegerLiteral", i.ToString());
                 }
+                else if (variable.Value is bool b)
+                {
+                    literal = new BooleanLiteral("BooleanLiteral", b);
+                }
                 else
                 {
                     literal = new StringLiteral("StringLiteral", variable.Value.ToString());

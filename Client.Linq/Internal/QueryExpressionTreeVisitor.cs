@@ -3,28 +3,33 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
 using InfluxDB.Client.Core;
+using Remotion.Linq.Clauses;
 using Remotion.Linq.Parsing;
 
 namespace InfluxDB.Client.Linq.Internal
 {
     internal class QueryExpressionTreeVisitor : ThrowingExpressionVisitor
     {
+        private readonly object _clause;
         private readonly QueryGenerationContext _context;
         private readonly StringBuilder _fluxExpression = new StringBuilder();
 
-        private QueryExpressionTreeVisitor(QueryGenerationContext context)
+        private QueryExpressionTreeVisitor(object clause, QueryGenerationContext context)
         {
+            Arguments.CheckNotNull(clause, nameof(clause));
             Arguments.CheckNotNull(context, nameof(context));
 
+            _clause = clause;
             _context = context;
         }
 
-        internal static string GetFluxExpression(Expression expression, QueryGenerationContext context)
+        internal static string GetFluxExpression(Expression expression, object clause, QueryGenerationContext context)
         {
             Arguments.CheckNotNull(expression, nameof(expression));
+            Arguments.CheckNotNull(clause, nameof(clause));
             Arguments.CheckNotNull(context, nameof(context));
             
-            var visitor = new QueryExpressionTreeVisitor(context);
+            var visitor = new QueryExpressionTreeVisitor(clause, context);
             visitor.Visit(expression);
             return visitor.GetFluxExpression();
         }
@@ -62,12 +67,22 @@ namespace InfluxDB.Client.Linq.Internal
         protected override Expression VisitMember(MemberExpression expression)
         {
             var propertyInfo = expression.Member as PropertyInfo;
-            var columnName = _context.Attributes.GetColumnName(propertyInfo);
+            var attribute = _context.Attributes.GetAttribute(propertyInfo);
+            
+            var columnName = attribute != null && attribute.IsTimestamp ? 
+                "_time" : _context.Attributes.GetColumnName(attribute, propertyInfo);
 
-            _fluxExpression
-                .Append("r[\"")
-                .Append(columnName)
-                .Append("\"]");
+            if (_clause is WhereClause)
+            {
+                _fluxExpression
+                    .Append("r[\"")
+                    .Append(columnName)
+                    .Append("\"]");
+            }
+            else
+            {
+                _fluxExpression.Append(columnName);
+            }
             
             return expression;
         }

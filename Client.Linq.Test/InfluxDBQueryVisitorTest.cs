@@ -135,6 +135,63 @@ namespace Client.Linq.Test
             
             Assert.AreEqual(expected, visitor.BuildFluxQuery());
         }
+        
+        [Test]
+        public void OrderBy()
+        {
+            var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _queryApi)
+                orderby s.Deployment
+                select s;
+            var visitor = BuildQueryVisitor(query.Expression);
+
+            const string expected = "from(bucket: p1) " +
+                                    "|> range(start: p2) " +
+                                    "|> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\") " +
+                                    "|> sort(columns: [p3], desc: p4)";
+            
+            Assert.AreEqual(expected, visitor.BuildFluxQuery());
+            var ast = visitor.BuildFluxAST();
+            Assert.AreEqual("deployment", GetLiteral<StringLiteral>(ast, 2).Value);
+            Assert.AreEqual(false, GetLiteral<BooleanLiteral>(ast, 3).Value);
+        }
+
+        [Test]
+        public void OrderByDescending()
+        {
+            var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _queryApi)
+                orderby s.Deployment descending 
+                select s;
+            var visitor = BuildQueryVisitor(query.Expression);
+
+            const string expected = "from(bucket: p1) " +
+                                    "|> range(start: p2) " +
+                                    "|> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\") " +
+                                    "|> sort(columns: [p3], desc: p4)";
+            
+            Assert.AreEqual(expected, visitor.BuildFluxQuery());
+            
+            var ast = visitor.BuildFluxAST();
+            Assert.AreEqual(true, GetLiteral<BooleanLiteral>(ast, 3).Value);
+        }
+        
+        [Test]
+        public void OrderByTime()
+        {
+            var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _queryApi)
+                orderby s.Timestamp 
+                select s;
+            var visitor = BuildQueryVisitor(query.Expression);
+
+            const string expected = "from(bucket: p1) " +
+                                    "|> range(start: p2) " +
+                                    "|> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\") " +
+                                    "|> sort(columns: [p3], desc: p4)";
+            
+            Assert.AreEqual(expected, visitor.BuildFluxQuery());
+            
+            var ast = visitor.BuildFluxAST();
+            Assert.AreEqual("_time", GetLiteral<StringLiteral>(ast, 2).Value);
+        }
 
         private static InfluxDBQueryVisitor BuildQueryVisitor(Expression expression)
         {
@@ -153,6 +210,11 @@ namespace Client.Linq.Test
                 .Replace(func.Parameters[0], queryable.Expression, func.Body);
             
             return makeExpression;
+        }
+        
+        private TLiteralType GetLiteral<TLiteralType>(File ast, int index) where TLiteralType : class
+        {
+            return (((OptionStatement) ast.Body[index]).Assignment as VariableAssignment)?.Init as TLiteralType;
         }
     }
 }

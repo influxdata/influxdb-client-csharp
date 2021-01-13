@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,12 +13,14 @@ namespace InfluxDB.Client.Linq.Internal
         private string _limitNAssignment;
         private string _limitOffsetAssignment;
         private readonly List<string> _filters;
+        private readonly List<(string, string)> _orders;
 
         internal QueryAggregator(string bucketAssignment, string rangeStartAssignment)
         {
             _bucketAssignment = bucketAssignment;
             _rangeStartAssignment = rangeStartAssignment;
-            _filters = new List<string> ();
+            _filters = new List<string>();
+            _orders = new List<(string, string)>();
         }
 
         internal void AddLimitN(string limitNAssignment)
@@ -33,7 +37,12 @@ namespace InfluxDB.Client.Linq.Internal
         {
             _filters.Add(filter);
         }
-        
+
+        public void AddOrder(string orderPart, string desc)
+        {
+            _orders.Add((orderPart, desc));
+        }
+
         internal string BuildFluxQuery()
         {
             var parts = new List<string>
@@ -42,9 +51,15 @@ namespace InfluxDB.Client.Linq.Internal
                 BuildOperator("range", "start", _rangeStartAssignment),
                 BuildFilter(),
                 //"drop(columns: [\"_start\", \"_stop\", \"_measurement\"])",
-                "pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")"
+                "pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")",
             };
-            
+
+            // https://docs.influxdata.com/influxdb/cloud/reference/flux/stdlib/built-in/transformations/sort/
+            foreach (var (column, desc) in _orders)
+            {
+                parts.Add(BuildOperator("sort", "columns", new List<string>{column}, "desc", desc));
+            }
+
             // https://docs.influxdata.com/influxdb/cloud/reference/flux/stdlib/built-in/transformations/limit/
             if (_limitNAssignment != null)
             {
@@ -70,7 +85,7 @@ namespace InfluxDB.Client.Linq.Internal
             return filter.ToString();
         }
 
-        private string BuildOperator(string operatorName, params string[] variables)
+        private string BuildOperator(string operatorName, params object[] variables)
         {
             var builderVariables = new StringBuilder();
 
@@ -91,7 +106,17 @@ namespace InfluxDB.Client.Linq.Internal
 
                 builderVariables.Append(variableName);
                 builderVariables.Append(": ");
-                builderVariables.Append(variableAssignment);
+
+                if (variableAssignment is IEnumerable<string> enumerable)
+                {
+                    builderVariables.Append("[");
+                    builderVariables.Append(JoinList(enumerable, ","));
+                    builderVariables.Append("]");
+                }
+                else
+                {
+                    builderVariables.Append(variableAssignment);
+                }
             }
 
             if (builderVariables.Length == 0)
@@ -107,7 +132,7 @@ namespace InfluxDB.Client.Linq.Internal
             return builder.ToString();
         }
 
-        private string JoinList(IEnumerable<string> strings, string delimiter)
+        private string JoinList(IEnumerable<object> strings, string delimiter)
         {
             return strings.Aggregate(new StringBuilder(), (builder, filter) =>
             {
