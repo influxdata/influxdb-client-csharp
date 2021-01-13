@@ -21,18 +21,22 @@ namespace Client.Linq.Test
             _client.SetLogLevel(LogLevel.Body);
 
             // DateTime(2020, 10, 15, 8, 20, 15, DateTimeKind.Utc)
-            const string sensor1 = "sensor,deployment=production,sensor_id=id-1 data=15 1602750015";
+            const string sensor11 = "sensor,deployment=production,sensor_id=id-1 data=15 1602750015";
+            const string sensor21 = "sensor,deployment=production,sensor_id=id-2 data=15 1602750015";
             // new DateTime(2020, 11, 15, 8, 20, 15, DateTimeKind.Utc)
-            const string sensor2 = "sensor,deployment=production,sensor_id=id-1 data=28 1605428415";
+            const string sensor12 = "sensor,deployment=production,sensor_id=id-1 data=28 1605428415";
+            const string sensor22 = "sensor,deployment=production,sensor_id=id-2 data=28 1605428415";
             // new DateTime(2020, 11, 16, 8, 20, 15, DateTimeKind.Utc)
-            const string sensor3 = "sensor,deployment=production,sensor_id=id-1 data=12 1605514815";
+            const string sensor13 = "sensor,deployment=production,sensor_id=id-1 data=12 1605514815";
+            const string sensor23 = "sensor,deployment=production,sensor_id=id-2 data=12 1605514815";
             // new DateTime(2020, 11, 17, 8, 20, 15, DateTimeKind.Utc)
-            const string sensor4 = "sensor,deployment=production,sensor_id=id-1 data=89 1605601215";
+            const string sensor14 = "sensor,deployment=production,sensor_id=id-1 data=89 1605601215";
+            const string sensor24 = "sensor,deployment=production,sensor_id=id-2 data=89 1605601215";
 
             await _client
                 .GetWriteApiAsync()
                 .WriteRecordsAsync("my-bucket", "my-org", WritePrecision.S, 
-                    sensor1, sensor2, sensor3, sensor4);
+                    sensor11, sensor21, sensor12, sensor22, sensor13, sensor23, sensor14, sensor24);
         }
 
         [Test]
@@ -43,7 +47,7 @@ namespace Client.Linq.Test
 
             var sensors = query.ToList();
 
-            Assert.AreEqual(4, sensors.Count);
+            Assert.AreEqual(8, sensors.Count);
         }
 
         [Test]
@@ -54,7 +58,7 @@ namespace Client.Linq.Test
 
             var sensors = query.ToList();
 
-            Assert.AreEqual(2, sensors.Count);
+            Assert.AreEqual(2*2, sensors.Count);
         }
 
         [Test]
@@ -65,7 +69,35 @@ namespace Client.Linq.Test
 
             var sensors = query.ToList();
 
-            Assert.AreEqual(1, sensors.Count);
+            Assert.AreEqual(1+1, sensors.Count);
+        }
+        
+        [Test]
+        public void QueryWhere()
+        {
+            var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApi())
+                where s.SensorId == "id-1"
+                select s;
+
+            var sensors = query.ToList();
+
+            Assert.AreEqual(4, sensors.Count);
+            foreach (var sensor in sensors)
+            {
+                Assert.AreEqual("id-1", sensor.SensorId);
+            }
+        }
+        
+        [Test]
+        public void QueryWhereNothing()
+        {
+            var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApi())
+                where s.SensorId == "id-nothing"
+                select s;
+
+            var sensors = query.ToList();
+
+            Assert.AreEqual(0, sensors.Count);
         }
 
         [TearDown]

@@ -4,6 +4,7 @@ using InfluxDB.Client.Api.Domain;
 using Remotion.Linq;
 using Remotion.Linq.Clauses;
 using Remotion.Linq.Clauses.ResultOperators;
+using Expression = System.Linq.Expressions.Expression;
 
 namespace InfluxDB.Client.Linq.Internal
 {
@@ -52,6 +53,21 @@ namespace InfluxDB.Client.Linq.Internal
             return _query.BuildFluxQuery();
         }
 
+        public override void VisitMainFromClause(MainFromClause fromClause, QueryModel queryModel)
+        {
+            base.VisitMainFromClause(fromClause, queryModel);
+
+            _generationContext.ItemType = fromClause.ItemType;
+        }
+
+        public override void VisitWhereClause(WhereClause whereClause, QueryModel queryModel, int index)
+        {
+            base.VisitWhereClause (whereClause, queryModel, index);
+
+            var filterPart = GetFluxExpression(whereClause.Predicate);
+            _query.AddFilter(filterPart);
+        }
+
         public override void VisitResultOperator(ResultOperatorBase resultOperator, QueryModel queryModel, int index)
         {
             base.VisitResultOperator(resultOperator, queryModel, index);
@@ -59,17 +75,22 @@ namespace InfluxDB.Client.Linq.Internal
             switch (resultOperator)
             {
                 case TakeResultOperator takeResultOperator:
-                    var takeVariable = QueryExpressionTreeVisitor.GetQueryExpression(takeResultOperator.Count, _generationContext);
+                    var takeVariable = GetFluxExpression(takeResultOperator.Count);
                     _query.AddLimitN(takeVariable);
                     break;
 
                 case SkipResultOperator skipResultOperator:
-                    var skipVariable = QueryExpressionTreeVisitor.GetQueryExpression(skipResultOperator.Count, _generationContext);
+                    var skipVariable = GetFluxExpression(skipResultOperator.Count);
                     _query.AddLimitOffset(skipVariable);
                     break;
                 default:
                     throw new NotSupportedException($"{resultOperator.GetType().Name} is not supported.");
             }
+        }
+
+        private string GetFluxExpression(Expression expression)
+        {
+            return QueryExpressionTreeVisitor.GetFluxExpression(expression, _generationContext);
         }
     }
 }

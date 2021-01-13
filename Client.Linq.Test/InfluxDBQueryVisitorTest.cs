@@ -119,6 +119,22 @@ namespace Client.Linq.Test
             
             Assert.AreEqual(expected, visitor.BuildFluxQuery());
         }
+        
+        [Test]
+        public void ResultOperatorWhereByFieldValue()
+        {
+            var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _queryApi)
+                where s.SensorId == "id-1"
+                select s;
+            var visitor = BuildQueryVisitor(query.Expression);
+
+            const string expected = "from(bucket: p1) " +
+                                    "|> range(start: p2) " +
+                                    "|> filter(fn: (r) => (r[\"sensor_id\"] == p3)) " +
+                                    "|> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")";
+            
+            Assert.AreEqual(expected, visitor.BuildFluxQuery());
+        }
 
         private static InfluxDBQueryVisitor BuildQueryVisitor(Expression expression)
         {

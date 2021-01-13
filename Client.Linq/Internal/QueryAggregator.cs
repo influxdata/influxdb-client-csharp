@@ -10,11 +10,13 @@ namespace InfluxDB.Client.Linq.Internal
         private readonly string _rangeStartAssignment;
         private string _limitNAssignment;
         private string _limitOffsetAssignment;
+        private readonly List<string> _filters;
 
         internal QueryAggregator(string bucketAssignment, string rangeStartAssignment)
         {
             _bucketAssignment = bucketAssignment;
             _rangeStartAssignment = rangeStartAssignment;
+            _filters = new List<string> ();
         }
 
         internal void AddLimitN(string limitNAssignment)
@@ -27,12 +29,18 @@ namespace InfluxDB.Client.Linq.Internal
             _limitOffsetAssignment = limitOffsetAssignment;
         }
 
+        internal void AddFilter(string filter)
+        {
+            _filters.Add(filter);
+        }
+        
         internal string BuildFluxQuery()
         {
             var parts = new List<string>
             {
                 BuildOperator("from", "bucket", _bucketAssignment),
                 BuildOperator("range", "start", _rangeStartAssignment),
+                BuildFilter(),
                 //"drop(columns: [\"_start\", \"_stop\", \"_measurement\"])",
                 "pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")"
             };
@@ -43,22 +51,23 @@ namespace InfluxDB.Client.Linq.Internal
                 parts.Add(BuildOperator("limit", "n", _limitNAssignment, "offset", _limitOffsetAssignment));
             }
 
-            return parts.Aggregate(new StringBuilder(), (builder, part) =>
+            return JoinList(parts, "|>");
+        }
+
+        private string BuildFilter()
+        {
+            var filters = JoinList(_filters, "and");
+            if (filters.Length == 0)
             {
-                if (part == null)
-                {
-                    return builder;
-                }
+                return null;
+            }
 
-                if (builder.Length != 0)
-                {
-                    builder.Append(" |> ");
-                }
+            var filter = new StringBuilder();
+            filter.Append("filter(fn: (r) => ");
+            filter.Append(filters);
+            filter.Append(")");
 
-                builder.Append(part);
-
-                return builder;
-            }).ToString();
+            return filter.ToString();
         }
 
         private string BuildOperator(string operatorName, params string[] variables)
@@ -96,6 +105,28 @@ namespace InfluxDB.Client.Linq.Internal
             builder.Append(builderVariables);
             builder.Append(")");
             return builder.ToString();
+        }
+
+        private string JoinList(IEnumerable<string> strings, string delimiter)
+        {
+            return strings.Aggregate(new StringBuilder(), (builder, filter) =>
+            {
+                if (filter == null)
+                {
+                    return builder;
+                }
+
+                if (builder.Length != 0)
+                {
+                    builder.Append(" ");
+                    builder.Append(delimiter);
+                    builder.Append(" ");
+                }
+
+                builder.Append(filter);
+
+                return builder;
+            }).ToString();
         }
     }
 }
