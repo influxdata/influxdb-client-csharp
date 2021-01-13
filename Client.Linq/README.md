@@ -103,6 +103,22 @@ var sensors = query.ToList();
 
 ## Supported LINQ operators
 
+### Equality
+
+```c#
+var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", queryApi)
+    where s.SensorId == "id-1"
+    select s;
+```
+
+Flux Query:
+```flux
+from(bucket: "my-bucket") 
+    |> range(start: 0) 
+    |> filter(fn: (r) => (r["sensor_id"] == "id-1")) 
+    |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value")
+```
+
 ### Take
 
 ```c#
@@ -138,11 +154,13 @@ from(bucket: "my-bucket")
     |> limit(n: 10, offset: 50)
 ```
 
-### Equality
+### OrderBy
+
+#### Example 1:
 
 ```c#
 var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", queryApi)
-    where s.SensorId == "id-1"
+    orderby s.Deployment
     select s;
 ```
 
@@ -150,6 +168,22 @@ Flux Query:
 ```flux
 from(bucket: "my-bucket") 
     |> range(start: 0) 
-    |> filter(fn: (r) => (r["sensor_id"] == "id-1")) 
-    |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value")
+    |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value") 
+    |> sort(columns: ["deployment"], desc: false)
+```
+
+#### Example 2:
+
+```c#
+var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", queryApi)
+    orderby s.Timestamp descending 
+    select s;
+```
+
+Flux Query:
+```flux
+from(bucket: "my-bucket") 
+    |> range(start: 0) 
+    |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value") 
+    |> sort(columns: ["_time"], desc: true)
 ```
