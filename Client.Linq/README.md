@@ -11,7 +11,7 @@ First, add the library as a dependency for your project:
 ```bash
 # For actual version please check: https://www.nuget.org/packages/InfluxDB.Client.Linq/
 
-dotnet add package InfluxDB.Client.Linq --version 1.15.0-dev.linq.1
+dotnet add package InfluxDB.Client.Linq --version 1.15.0-dev.linq.2
 ```
 
 Next, you should add additional using statement to your program:
