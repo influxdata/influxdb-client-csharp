@@ -95,7 +95,7 @@ and this is also way how following LINQ operators works.
 The LINQ query requires `bucket` and `organization` as a source of data. Both of them could be name or ID.
 
 ```c#
-var query = (from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApi())
+var query = (from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", queryApi)
     where s.SensorId == "id-1"
     orderby s.Timestamp
     select s)
