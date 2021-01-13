@@ -50,6 +50,21 @@ namespace Client.Linq.Test
 
             Assert.AreEqual(8, sensors.Count);
         }
+        
+        [Test]
+        public void QueryExample()
+        {
+            var query = (from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApi())
+                orderby s.Timestamp
+                where s.SensorId == "id-1"
+                select s)
+                .Take(2)
+                .Skip(2);
+
+            var sensors = query.ToList();
+
+            Assert.AreEqual(2, sensors.Count);
+        }
 
         [Test]
         public void QueryTake()

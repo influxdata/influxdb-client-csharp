@@ -95,10 +95,24 @@ and this is also way how following LINQ operators works.
 The LINQ query requires `bucket` and `organization` as a source of data. Both of them could be name or ID.
 
 ```c#
-var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", queryApi)
-    select s;
+var query = (from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApi())
+    orderby s.Timestamp
+    where s.SensorId == "id-1"
+    select s)
+    .Take(2)
+    .Skip(2);
 
 var sensors = query.ToList();
+```
+
+Flux Query:
+```flux
+from(bucket: "my-bucket") 
+    |> range(start: 0) 
+    |> filter(fn: (r) => (r["sensor_id"] == "id-1")) 
+    |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value") 
+    |> sort(columns: ["_time"], desc: false) 
+    |> limit(n: 2, offset: 2)
 ```
 
 ## Supported LINQ operators
