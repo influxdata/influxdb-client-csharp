@@ -50,6 +50,46 @@ class Sensor
 }
 ```
 
+## Time Series
+
+The InfluxDB uses concept of TimeSeries - a collection of data that shares a measurement, tag set, and bucket. 
+If you querying data with Flux you always operate on each time-series.
+
+Imagine that you have following data:
+
+```
+sensor,deployment=production,sensor_id=id-1 data=15
+sensor,deployment=testing,sensor_id=id-1 data=28
+sensor,deployment=testing,sensor_id=id-1 data=12
+sensor,deployment=production,sensor_id=id-1 data=89
+```
+
+The corresponding time series are:
+- sensor,deployment=production,sensor_id=id-1
+- sensor,deployment=testing,sensor_id=id-1
+
+If you query your data with following Flux:
+
+```flux
+from(bucket: "my-bucket")
+  |> range(start: 0)
+  |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value")
+  |> limit(n:1)
+```
+
+The result will be one item for time-series:
+
+```
+sensor,deployment=production,sensor_id=id-1 data=15
+sensor,deployment=testing,sensor_id=id-1 data=28
+```
+
+and this is also way how following LINQ operators works.
+
+- [series](https://docs.influxdata.com/influxdb/v2.0/reference/glossary/#series)
+- [Flux](https://docs.influxdata.com/influxdb/v2.0/reference/glossary/#flux)
+- [Query data with Flux](https://docs.influxdata.com/influxdb/v2.0/query-data/flux/)
+
 ## Perform Query
 
 The LINQ query requires `bucket` and `organization` as a source of data. Both of them could be name or ID.
@@ -96,4 +136,20 @@ from(bucket: "my-bucket")
     |> range(start: 0) 
     |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value") 
     |> limit(n: 10, offset: 50)
+```
+
+### Equality
+
+```c#
+var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", queryApi)
+    where s.SensorId == "id-1"
+    select s;
+```
+
+Flux Query:
+```flux
+from(bucket: "my-bucket") 
+    |> range(start: 0) 
+    |> filter(fn: (r) => (r["sensor_id"] == "id-1")) 
+    |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value")
 ```
