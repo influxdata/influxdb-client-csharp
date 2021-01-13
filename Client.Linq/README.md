@@ -53,7 +53,7 @@ class Sensor
 ## Time Series
 
 The InfluxDB uses concept of TimeSeries - a collection of data that shares a measurement, tag set, and bucket. 
-If you querying data with Flux you always operate on each time-series.
+You always operate on each time-series, if you querying data with Flux. 
 
 Imagine that you have following data:
 
@@ -65,8 +65,8 @@ sensor,deployment=production,sensor_id=id-1 data=89
 ```
 
 The corresponding time series are:
-- sensor,deployment=production,sensor_id=id-1
-- sensor,deployment=testing,sensor_id=id-1
+- `sensor,deployment=production,sensor_id=id-1`
+- `sensor,deployment=testing,sensor_id=id-1`
 
 If you query your data with following Flux:
 
@@ -77,7 +77,7 @@ from(bucket: "my-bucket")
   |> limit(n:1)
 ```
 
-The result will be one item for time-series:
+The result will be one item for each time-series:
 
 ```
 sensor,deployment=production,sensor_id=id-1 data=15
