@@ -10,13 +10,13 @@ namespace InfluxDB.Client.Linq.Internal
     internal class InfluxDBQueryVisitor : QueryModelVisitorBase
     {
         private readonly QueryAggregator _query;
-        private readonly VariableAggregator _variables;
+        private readonly QueryGenerationContext _generationContext;
 
         public InfluxDBQueryVisitor(string bucket)
         {
-            _variables = new VariableAggregator();
-            var bucketVariable = _variables.AddNamedVariable(bucket);
-            var rangeVariable = _variables.AddNamedVariable(0);
+            _generationContext = new QueryGenerationContext();
+            var bucketVariable = _generationContext.Variables.AddNamedVariable(bucket);
+            var rangeVariable = _generationContext.Variables.AddNamedVariable(0);
 
             _query = new QueryAggregator(bucketVariable, rangeVariable);
         }
@@ -44,7 +44,7 @@ namespace InfluxDB.Client.Linq.Internal
 
         public File BuildFluxAST()
         {
-            return new File {Imports = null, Package = null, Body = _variables.GetStatements()};
+            return new File {Imports = null, Package = null, Body = _generationContext.Variables.GetStatements()};
         }
 
         public string BuildFluxQuery()
@@ -59,12 +59,12 @@ namespace InfluxDB.Client.Linq.Internal
             switch (resultOperator)
             {
                 case TakeResultOperator takeResultOperator:
-                    var takeVariable = _variables.AddNamedVariable(takeResultOperator.GetConstantCount());
+                    var takeVariable = QueryExpressionTreeVisitor.GetQueryExpression(takeResultOperator.Count, _generationContext);
                     _query.AddLimitN(takeVariable);
                     break;
 
                 case SkipResultOperator skipResultOperator:
-                    var skipVariable = _variables.AddNamedVariable(skipResultOperator.GetConstantCount());
+                    var skipVariable = QueryExpressionTreeVisitor.GetQueryExpression(skipResultOperator.Count, _generationContext);
                     _query.AddLimitOffset(skipVariable);
                     break;
                 default:
