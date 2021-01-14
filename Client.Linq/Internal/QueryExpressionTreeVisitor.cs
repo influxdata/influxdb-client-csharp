@@ -66,11 +66,14 @@ namespace InfluxDB.Client.Linq.Internal
 
         protected override Expression VisitMember(MemberExpression expression)
         {
+            var mapper = _context.QueryApi.GetFluxResultMapper();
             var propertyInfo = expression.Member as PropertyInfo;
-            var attribute = _context.Attributes.GetAttribute(propertyInfo);
             
-            var columnName = attribute != null && attribute.IsTimestamp ? 
-                "_time" : _context.Attributes.GetColumnName(attribute, propertyInfo);
+            var columnName = mapper.GetColumnName(propertyInfo);
+            if (mapper.IsTimestamp(propertyInfo))
+            {
+                columnName = "_time";
+            }
 
             if (_clause is WhereClause)
             {

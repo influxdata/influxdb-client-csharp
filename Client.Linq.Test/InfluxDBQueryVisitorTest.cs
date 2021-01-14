@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using System.Linq.Expressions;
 using InfluxDB.Client;
+using InfluxDB.Client.Core.Flux.Internal;
 using InfluxDB.Client.Api.Domain;
 using InfluxDB.Client.Api.Service;
 using InfluxDB.Client.Linq;
@@ -27,7 +28,7 @@ namespace Client.Linq.Test
                 .AuthenticateToken("my-token")
                 .Build();
             var queryService = new Mock<QueryService>("http://localhost:8086/api/v2");
-            _queryApi = new Mock<QueryApi>(options, queryService.Object).Object;
+            _queryApi = new Mock<QueryApi>(options, queryService.Object, new FluxResultMapper()).Object;
         }
 
         [Test]
@@ -193,11 +194,11 @@ namespace Client.Linq.Test
             Assert.AreEqual("_time", GetLiteral<StringLiteral>(ast, 2).Value);
         }
 
-        private static InfluxDBQueryVisitor BuildQueryVisitor(Expression expression)
+        private InfluxDBQueryVisitor BuildQueryVisitor(Expression expression)
         {
             var queryModel = QueryParser.CreateDefault().GetParsedQuery(expression);
 
-            var visitor = new InfluxDBQueryVisitor("my-bucket");
+            var visitor = new InfluxDBQueryVisitor("my-bucket", _queryApi);
             visitor.VisitQueryModel(queryModel);
 
             return visitor;

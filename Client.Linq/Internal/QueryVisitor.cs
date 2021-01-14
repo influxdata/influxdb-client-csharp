@@ -13,16 +13,16 @@ namespace InfluxDB.Client.Linq.Internal
         private readonly QueryAggregator _query;
         private readonly QueryGenerationContext _generationContext;
 
-        public InfluxDBQueryVisitor(string bucket)
+        internal InfluxDBQueryVisitor(string bucket, QueryApi queryApi)
         {
-            _generationContext = new QueryGenerationContext();
+            _generationContext = new QueryGenerationContext {QueryApi = queryApi};
             var bucketVariable = _generationContext.Variables.AddNamedVariable(bucket);
             var rangeVariable = _generationContext.Variables.AddNamedVariable(0);
 
             _query = new QueryAggregator(bucketVariable, rangeVariable);
         }
 
-        public Query GenerateQuery()
+        internal Query GenerateQuery()
         {
             var query = new Query(BuildFluxAST(), BuildFluxQuery())
             {
@@ -43,22 +43,22 @@ namespace InfluxDB.Client.Linq.Internal
             return query;
         }
 
-        public File BuildFluxAST()
+        internal File BuildFluxAST()
         {
             return new File {Imports = null, Package = null, Body = _generationContext.Variables.GetStatements()};
         }
 
-        public string BuildFluxQuery()
+        internal string BuildFluxQuery()
         {
             return _query.BuildFluxQuery();
         }
 
-        public override void VisitMainFromClause(MainFromClause fromClause, QueryModel queryModel)
-        {
-            base.VisitMainFromClause(fromClause, queryModel);
-
-            _generationContext.ItemType = fromClause.ItemType;
-        }
+        // public override void VisitMainFromClause(MainFromClause fromClause, QueryModel queryModel)
+        // {
+        //     base.VisitMainFromClause(fromClause, queryModel);
+        //
+        //     _generationContext.ItemType = fromClause.ItemType;
+        // }
 
         public override void VisitWhereClause(WhereClause whereClause, QueryModel queryModel, int index)
         {

@@ -57,7 +57,7 @@ namespace InfluxDB.Client.Linq.Internal
         /// </summary>
         public IEnumerable<T> ExecuteCollection<T>(QueryModel queryModel)
         {
-            var visitor = new InfluxDBQueryVisitor(_bucket);
+            var visitor = new InfluxDBQueryVisitor(_bucket, _queryApi);
             visitor.VisitQueryModel(queryModel);
 
             var task = _queryApi.QueryAsync<T>(visitor.GenerateQuery(), _org);
