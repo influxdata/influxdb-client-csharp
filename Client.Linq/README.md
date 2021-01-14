@@ -12,6 +12,7 @@ The library supports to use a LINQ expression to query the InfluxDB.
     - [Take](#take)
     - [Skip](#skip)
     - [OrderBy](#orderby)
+- [Domain Converter](#domain-converter)
 
 ## How to start
 
@@ -236,4 +237,4 @@ var converter = new DomainEntityConverter();
 var queryApi = client.GetQueryApi(converter)
 ```
 
-for more details see this example: [CustomDomainConverter](Examples/CustomDomainConverter.cs#L38)
+for more details see this example: [CustomDomainConverter](/Examples/CustomDomainConverter.cs#L38).
