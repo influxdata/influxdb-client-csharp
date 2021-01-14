@@ -4,6 +4,15 @@ The library supports to use a LINQ expression to query the InfluxDB.
 
 #### Disclaimer: This library is a work in progress and should not be considered production ready yet.
 
+- [How to start](#how-to-start)
+- [Time Series](#time-series)
+- [Perform Query](#perform-query)
+- [Supported LINQ operators](#supported-linq-operators)
+    - [Equality](#equality)
+    - [Take](#take)
+    - [Skip](#skip)
+    - [OrderBy](#orderby)
+
 ## How to start
 
 First, add the library as a dependency for your project:
