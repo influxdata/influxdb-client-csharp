@@ -8,27 +8,27 @@ namespace InfluxDB.Client.Internal
 {
     internal class InfluxDBEntityConverter : IInfluxDBEntityConverter
     {
-        private static readonly FluxResultMapper ResultMapper = new FluxResultMapper();
-        private static readonly MeasurementMapper MeasurementMapper = new MeasurementMapper();
+        private readonly FluxResultMapper _resultMapper = new FluxResultMapper();
+        private readonly MeasurementMapper _measurementMapper = new MeasurementMapper();
 
         public T ConvertToEntity<T>(FluxRecord fluxRecord)
         {
-            return ResultMapper.ToPoco<T>(fluxRecord);
+            return _resultMapper.ToPoco<T>(fluxRecord);
         }
 
         public bool IsTimestamp(PropertyInfo propertyInfo)
         {
-            return ResultMapper.IsTimestamp(propertyInfo);
+            return _resultMapper.IsTimestamp(propertyInfo);
         }
 
         public string GetColumnName(PropertyInfo propertyInfo)
         {
-            return ResultMapper.GetColumnName(propertyInfo);
+            return _resultMapper.GetColumnName(propertyInfo);
         }
 
         public PointData ConvertToPointData<T>(T entity, WritePrecision precision)
         {
-            return MeasurementMapper.ToPoint(entity, precision);
+            return _measurementMapper.ToPoint(entity, precision);
         }
     }
 }
