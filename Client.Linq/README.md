@@ -210,3 +210,30 @@ from(bucket: "my-bucket")
     |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value") 
     |> sort(columns: ["_time"], desc: true)
 ```
+
+## Domain Converter
+
+There is also possibility to use custom domain converter to transform data from/to your `DomainObject`.
+
+Instead of following Influx attributes:
+
+```c#
+[Measurement("temperature")]
+private class Temperature
+{
+    [Column("location", IsTag = true)] public string Location { get; set; }
+
+    [Column("value")] public double Value { get; set; }
+
+    [Column(IsTimestamp = true)] public DateTime Time { get; set; }
+}
+```
+
+you could create own instance of `IInfluxDBEntityConverter` and use it with `QueryApi` and `WriteApi`.
+
+```c#
+var converter = new DomainEntityConverter();
+var queryApi = client.GetQueryApi(converter)
+```
+
+for more details see this example: [CustomDomainConverter](Examples/CustomDomainConverter.cs#L38)
