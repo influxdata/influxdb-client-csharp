@@ -56,6 +56,7 @@ namespace Client.Linq.Test
         {
             var query = (from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApi())
                 where s.SensorId == "id-1"
+                where s.Value > 12
                 orderby s.Timestamp
                 select s)
                 .Take(2)
@@ -63,7 +64,7 @@ namespace Client.Linq.Test
 
             var sensors = query.ToList();
 
-            Assert.AreEqual(2, sensors.Count);
+            Assert.AreEqual(1, sensors.Count);
         }
 
         [Test]
@@ -89,7 +90,7 @@ namespace Client.Linq.Test
         }
         
         [Test]
-        public void QueryWhere()
+        public void QueryWhereEqual()
         {
             var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApi())
                 where s.SensorId == "id-1"
@@ -101,6 +102,86 @@ namespace Client.Linq.Test
             foreach (var sensor in sensors)
             {
                 Assert.AreEqual("id-1", sensor.SensorId);
+            }
+        }
+        
+        [Test]
+        public void QueryWhereNotEqual()
+        {
+            var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApi())
+                where s.SensorId != "id-1"
+                select s;
+
+            var sensors = query.ToList();
+
+            Assert.AreEqual(4, sensors.Count);
+            foreach (var sensor in sensors)
+            {
+                Assert.AreEqual("id-2", sensor.SensorId);
+            }
+        }
+
+        [Test]
+        public void QueryLess()
+        {
+            var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApi())
+                where s.Value < 28
+                select s;
+
+            var sensors = query.ToList();
+
+            Assert.AreEqual(4, sensors.Count);
+            foreach (var sensor in sensors)
+            {
+                Assert.Less(sensor.Value, 28);
+            }
+        }
+
+        [Test]
+        public void QueryLessThanOrEqual()
+        {
+            var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApi())
+                where s.Value <= 28
+                select s;
+
+            var sensors = query.ToList();
+
+            Assert.AreEqual(6, sensors.Count);
+            foreach (var sensor in sensors)
+            {
+                Assert.LessOrEqual(sensor.Value, 28);
+            }
+        }
+
+        [Test]
+        public void QueryGreaterThan()
+        {
+            var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApi())
+                where s.Value > 28
+                select s;
+
+            var sensors = query.ToList();
+
+            Assert.AreEqual(2, sensors.Count);
+            foreach (var sensor in sensors)
+            {
+                Assert.Greater(sensor.Value, 28);
+            }
+        }
+
+        [Test]
+        public void QueryGreaterThanOrEqual()
+        {
+            var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApi())
+                where s.Value >= 28
+                select s;
+
+            var sensors = query.ToList();
+
+            Assert.AreEqual(4, sensors.Count);
+            foreach (var sensor in sensors)
+            {
+                Assert.GreaterOrEqual(sensor.Value, 28);
             }
         }
         

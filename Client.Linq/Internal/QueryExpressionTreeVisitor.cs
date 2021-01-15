@@ -53,6 +53,26 @@ namespace InfluxDB.Client.Linq.Internal
                     _fluxExpression.Append (" == ");
                     break;
                 
+                case ExpressionType.NotEqual:
+                    _fluxExpression.Append (" != ");
+                    break;
+                
+                case ExpressionType.LessThan:
+                    _fluxExpression.Append (" < ");
+                    break;
+                
+                case ExpressionType.LessThanOrEqual:
+                    _fluxExpression.Append (" <= ");
+                    break;
+                
+                case ExpressionType.GreaterThan:
+                    _fluxExpression.Append (" > ");
+                    break;
+                
+                case ExpressionType.GreaterThanOrEqual:
+                    _fluxExpression.Append (" >= ");
+                    break;
+                
                 default:
                     base.VisitBinary(expression);
                     break;

@@ -122,7 +122,7 @@ namespace Client.Linq.Test
         }
         
         [Test]
-        public void ResultOperatorWhereByFieldValue()
+        public void ResultOperatorWhereByEqual()
         {
             var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _queryApi)
                 where s.SensorId == "id-1"
@@ -133,6 +133,86 @@ namespace Client.Linq.Test
                                     "|> range(start: p2) " +
                                     "|> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\") " +
                                     "|> filter(fn: (r) => (r[\"sensor_id\"] == p3))";
+            
+            Assert.AreEqual(expected, visitor.BuildFluxQuery());
+        }
+        
+        [Test]
+        public void ResultOperatorWhereNotEqual()
+        {
+            var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _queryApi)
+                where s.SensorId != "id-1"
+                select s;
+            var visitor = BuildQueryVisitor(query.Expression);
+
+            const string expected = "from(bucket: p1) " +
+                                    "|> range(start: p2) " +
+                                    "|> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\") " +
+                                    "|> filter(fn: (r) => (r[\"sensor_id\"] != p3))";
+            
+            Assert.AreEqual(expected, visitor.BuildFluxQuery());
+        }
+        
+        [Test]
+        public void ResultOperatorWhereLessThen()
+        {
+            var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _queryApi)
+                where s.Value < 10
+                select s;
+            var visitor = BuildQueryVisitor(query.Expression);
+
+            const string expected = "from(bucket: p1) " +
+                                    "|> range(start: p2) " +
+                                    "|> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\") " +
+                                    "|> filter(fn: (r) => (r[\"data\"] < p3))";
+            
+            Assert.AreEqual(expected, visitor.BuildFluxQuery());
+        }
+        
+        [Test]
+        public void ResultOperatorWhereLessThanOrEqual()
+        {
+            var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _queryApi)
+                where s.Value <= 10
+                select s;
+            var visitor = BuildQueryVisitor(query.Expression);
+
+            const string expected = "from(bucket: p1) " +
+                                    "|> range(start: p2) " +
+                                    "|> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\") " +
+                                    "|> filter(fn: (r) => (r[\"data\"] <= p3))";
+            
+            Assert.AreEqual(expected, visitor.BuildFluxQuery());
+        }
+        
+        [Test]
+        public void ResultOperatorGreaterThan()
+        {
+            var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _queryApi)
+                where s.Value > 10
+                select s;
+            var visitor = BuildQueryVisitor(query.Expression);
+
+            const string expected = "from(bucket: p1) " +
+                                    "|> range(start: p2) " +
+                                    "|> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\") " +
+                                    "|> filter(fn: (r) => (r[\"data\"] > p3))";
+            
+            Assert.AreEqual(expected, visitor.BuildFluxQuery());
+        }
+        
+        [Test]
+        public void ResultOperatorGreaterThanOrEqual()
+        {
+            var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _queryApi)
+                where s.Value >= 10
+                select s;
+            var visitor = BuildQueryVisitor(query.Expression);
+
+            const string expected = "from(bucket: p1) " +
+                                    "|> range(start: p2) " +
+                                    "|> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\") " +
+                                    "|> filter(fn: (r) => (r[\"data\"] >= p3))";
             
             Assert.AreEqual(expected, visitor.BuildFluxQuery());
         }

@@ -8,7 +8,12 @@ The library supports to use a LINQ expression to query the InfluxDB.
 - [Time Series](#time-series)
 - [Perform Query](#perform-query)
 - [Supported LINQ operators](#supported-linq-operators)
-    - [Equality](#equality)
+    - [Equal](#equal)
+    - [Not Equal](#not-equal)
+    - [Less Than](#less-than)
+    - [Less Than Or Equal](#less-than-or-equal)
+    - [Greater Than](#greater-than)
+    - [Greater Than Or Equal](#greater-than-or-equal)
     - [Take](#take)
     - [Skip](#skip)
     - [OrderBy](#orderby)
@@ -105,8 +110,9 @@ and this is also way how following LINQ operators works.
 The LINQ query requires `bucket` and `organization` as a source of data. Both of them could be name or ID.
 
 ```c#
-var query = (from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", queryApi)
+var query = (from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApi())
     where s.SensorId == "id-1"
+    where s.Value > 12
     orderby s.Timestamp
     select s)
     .Take(2)
@@ -120,14 +126,14 @@ Flux Query:
 from(bucket: "my-bucket") 
     |> range(start: 0) 
     |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value")
-    |> filter(fn: (r) => (r["sensor_id"] == "id-1")) 
+    |> filter(fn: (r) => (r["sensor_id"] == "id-1") and (r["data"] > 12)) 
     |> sort(columns: ["_time"], desc: false) 
     |> limit(n: 2, offset: 2)
 ```
 
 ## Supported LINQ operators
 
-### Equality
+### Equal
 
 ```c#
 var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", queryApi)
@@ -141,6 +147,86 @@ from(bucket: "my-bucket")
     |> range(start: 0) 
     |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value")
     |> filter(fn: (r) => (r["sensor_id"] == "id-1")) 
+```
+
+### Not Equal
+
+```c#
+var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", queryApi)
+    where s.SensorId != "id-1"
+    select s;
+```
+
+Flux Query:
+```flux
+from(bucket: "my-bucket") 
+    |> range(start: 0) 
+    |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value")
+    |> filter(fn: (r) => (r["sensor_id"] != "id-1")) 
+```
+
+### Less Than
+
+```c#
+var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApi())
+    where s.Value < 28
+    select s;
+```
+
+Flux Query:
+```flux
+from(bucket: "my-bucket") 
+    |> range(start: 0) 
+    |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value") 
+    |> filter(fn: (r) => (r["data"] < 28))
+```
+
+### Less Than Or Equal
+
+```c#
+var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApi())
+    where s.Value <= 28
+    select s;
+```
+
+Flux Query:
+```flux
+from(bucket: "my-bucket") 
+    |> range(start: 0) 
+    |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value") 
+    |> filter(fn: (r) => (r["data"] <= 28))
+```
+
+### Greater Than
+
+```c#
+var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApi())
+    where s.Value > 28
+    select s;
+```
+
+Flux Query:
+```flux
+from(bucket: "my-bucket") 
+    |> range(start: 0) 
+    |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value") 
+    |> filter(fn: (r) => (r["data"] > 28))
+```
+
+### Greater Than Or Equal
+
+```c#
+var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApi())
+    where s.Value >= 28
+    select s;
+```
+
+Flux Query:
+```flux
+from(bucket: "my-bucket") 
+    |> range(start: 0) 
+    |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value") 
+    |> filter(fn: (r) => (r["data"] >= 28))
 ```
 
 ### Take

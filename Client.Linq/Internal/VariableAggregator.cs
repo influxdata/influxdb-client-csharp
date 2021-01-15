@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using InfluxDB.Client.Api.Domain;
@@ -26,15 +27,19 @@ namespace InfluxDB.Client.Linq.Internal
                 Expression literal;
                 if (variable.Value is int i)
                 {
-                    literal = new IntegerLiteral("IntegerLiteral", i.ToString());
+                    literal = new IntegerLiteral("IntegerLiteral", Convert.ToString(i));
                 }
                 else if (variable.Value is bool b)
                 {
                     literal = new BooleanLiteral("BooleanLiteral", b);
                 }
+                else if (variable.Value is float f)
+                {
+                    literal = new FloatLiteral("FloatLiteral", Convert.ToDecimal(f));
+                }
                 else
                 {
-                    literal = new StringLiteral("StringLiteral", variable.Value.ToString());
+                    literal = new StringLiteral("StringLiteral", Convert.ToString(variable.Value));
                 }
 
                 var assignment = new VariableAssignment("VariableAssignment",
