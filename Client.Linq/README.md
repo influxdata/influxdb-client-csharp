@@ -119,8 +119,8 @@ Flux Query:
 ```flux
 from(bucket: "my-bucket") 
     |> range(start: 0) 
+    |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value")
     |> filter(fn: (r) => (r["sensor_id"] == "id-1")) 
-    |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value") 
     |> sort(columns: ["_time"], desc: false) 
     |> limit(n: 2, offset: 2)
 ```
@@ -139,8 +139,8 @@ Flux Query:
 ```flux
 from(bucket: "my-bucket") 
     |> range(start: 0) 
-    |> filter(fn: (r) => (r["sensor_id"] == "id-1")) 
     |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value")
+    |> filter(fn: (r) => (r["sensor_id"] == "id-1")) 
 ```
 
 ### Take

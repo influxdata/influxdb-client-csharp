@@ -49,9 +49,9 @@ namespace InfluxDB.Client.Linq.Internal
             {
                 BuildOperator("from", "bucket", _bucketAssignment),
                 BuildOperator("range", "start", _rangeStartAssignment),
-                BuildFilter(),
                 //"drop(columns: [\"_start\", \"_stop\", \"_measurement\"])",
                 "pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")",
+                BuildFilter()
             };
 
             // https://docs.influxdata.com/influxdb/cloud/reference/flux/stdlib/built-in/transformations/sort/

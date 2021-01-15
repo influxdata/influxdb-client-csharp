@@ -131,8 +131,8 @@ namespace Client.Linq.Test
 
             const string expected = "from(bucket: p1) " +
                                     "|> range(start: p2) " +
-                                    "|> filter(fn: (r) => (r[\"sensor_id\"] == p3)) " +
-                                    "|> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")";
+                                    "|> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\") " +
+                                    "|> filter(fn: (r) => (r[\"sensor_id\"] == p3))";
             
             Assert.AreEqual(expected, visitor.BuildFluxQuery());
         }

@@ -3,12 +3,11 @@ namespace InfluxDB.Client.Linq.Internal
     internal class QueryGenerationContext
     {
         internal readonly VariableAggregator Variables;
-        
-        internal QueryApi QueryApi;
-        // internal Type ItemType;
+        internal readonly QueryApi QueryApi;
 
-        internal QueryGenerationContext()
+        internal QueryGenerationContext(QueryApi queryApi)
         {
+            QueryApi = queryApi;
             Variables = new VariableAggregator();
         }
     }

@@ -15,7 +15,7 @@ namespace InfluxDB.Client.Linq.Internal
 
         internal InfluxDBQueryVisitor(string bucket, QueryApi queryApi)
         {
-            _generationContext = new QueryGenerationContext {QueryApi = queryApi};
+            _generationContext = new QueryGenerationContext(queryApi);
             var bucketVariable = _generationContext.Variables.AddNamedVariable(bucket);
             var rangeVariable = _generationContext.Variables.AddNamedVariable(0);
 
@@ -52,13 +52,6 @@ namespace InfluxDB.Client.Linq.Internal
         {
             return _query.BuildFluxQuery();
         }
-
-        // public override void VisitMainFromClause(MainFromClause fromClause, QueryModel queryModel)
-        // {
-        //     base.VisitMainFromClause(fromClause, queryModel);
-        //
-        //     _generationContext.ItemType = fromClause.ItemType;
-        // }
 
         public override void VisitWhereClause(WhereClause whereClause, QueryModel queryModel, int index)
         {
