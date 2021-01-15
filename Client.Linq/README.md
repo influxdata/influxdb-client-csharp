@@ -213,6 +213,22 @@ from(bucket: "my-bucket")
     |> range(start: 0, stop: 2021-01-10T05:10:00Z) 
 ```
 
+#### Example 5:
+
+```c#
+var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApi())
+    where s.Timestamp == new DateTime(2019, 11, 16, 8, 20, 15, DateTimeKind.Utc)
+    select s;
+
+var sensors = query.ToList();
+```
+
+Flux Query:
+```flux
+from(bucket: "my-bucket") 
+    |> range(start: 2019-11-16T08:20:15Z, stop: 2019-11-16T08:20:15Z) 
+```
+
 ## Supported LINQ operators
 
 ### Equal
