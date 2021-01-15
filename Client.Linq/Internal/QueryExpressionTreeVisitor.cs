@@ -28,7 +28,7 @@ namespace InfluxDB.Client.Linq.Internal
             Arguments.CheckNotNull(expression, nameof(expression));
             Arguments.CheckNotNull(clause, nameof(clause));
             Arguments.CheckNotNull(context, nameof(context));
-            
+
             var visitor = new QueryExpressionTreeVisitor(clause, context);
             visitor.Visit(expression);
             return visitor.GetFluxExpression();
@@ -44,43 +44,48 @@ namespace InfluxDB.Client.Linq.Internal
 
         protected override Expression VisitBinary(BinaryExpression expression)
         {
-            _fluxExpression.Append ("(");
+            if (VisitRangeBinaryExpression(expression))
+            {
+                return expression;
+            }
+
+            _fluxExpression.Append("(");
             Visit(expression.Left);
-            
+
             switch (expression.NodeType)
             {
                 case ExpressionType.Equal:
-                    _fluxExpression.Append (" == ");
+                    _fluxExpression.Append(" == ");
                     break;
-                
+
                 case ExpressionType.NotEqual:
-                    _fluxExpression.Append (" != ");
+                    _fluxExpression.Append(" != ");
                     break;
-                
+
                 case ExpressionType.LessThan:
-                    _fluxExpression.Append (" < ");
+                    _fluxExpression.Append(" < ");
                     break;
-                
+
                 case ExpressionType.LessThanOrEqual:
-                    _fluxExpression.Append (" <= ");
+                    _fluxExpression.Append(" <= ");
                     break;
-                
+
                 case ExpressionType.GreaterThan:
-                    _fluxExpression.Append (" > ");
+                    _fluxExpression.Append(" > ");
                     break;
-                
+
                 case ExpressionType.GreaterThanOrEqual:
-                    _fluxExpression.Append (" >= ");
+                    _fluxExpression.Append(" >= ");
                     break;
-                
+
                 default:
                     base.VisitBinary(expression);
                     break;
             }
 
             Visit(expression.Right);
-            _fluxExpression.Append (")");
-            
+            _fluxExpression.Append(")");
+
             return expression;
         }
 
@@ -88,7 +93,7 @@ namespace InfluxDB.Client.Linq.Internal
         {
             var mapper = _context.QueryApi.GetFluxResultMapper();
             var propertyInfo = expression.Member as PropertyInfo;
-            
+
             var columnName = mapper.GetColumnName(propertyInfo);
             if (mapper.IsTimestamp(propertyInfo))
             {
@@ -106,7 +111,7 @@ namespace InfluxDB.Client.Linq.Internal
             {
                 _fluxExpression.Append(columnName);
             }
-            
+
             return expression;
         }
 
@@ -120,6 +125,78 @@ namespace InfluxDB.Client.Linq.Internal
             var message = $"The expression '{unhandledItem}', type: '{typeof(T)}' is not supported.";
 
             return new NotSupportedException(message);
+        }
+
+        private bool VisitRangeBinaryExpression(BinaryExpression expression)
+        {
+            Expression assignmentExpression = null;
+            var memberAtLeft = true;
+
+            // Left is Timestamp property
+            if (expression.Left is MemberExpression lm)
+            {
+                var propertyInfo = lm.Member as PropertyInfo;
+                if (_context.QueryApi.GetFluxResultMapper().IsTimestamp(propertyInfo))
+                {
+                    assignmentExpression = expression.Right;
+                }
+            }
+            // Right is Timestamp property
+            else if (expression.Right is MemberExpression rm)
+            {
+                var propertyInfo = rm.Member as PropertyInfo;
+                if (_context.QueryApi.GetFluxResultMapper().IsTimestamp(propertyInfo))
+                {
+                    assignmentExpression = expression.Left;
+                    memberAtLeft = false;
+                }
+            }
+
+            if (assignmentExpression == null)
+            {
+                return false;
+            }
+
+            var assignment = GetFluxExpression(assignmentExpression, _clause, _context);
+            switch (expression.NodeType)
+            {
+                case ExpressionType.Equal:
+                    _context.QueryAggregator.AddRangeStart(assignment);
+                    _context.QueryAggregator.AddRangeStop(assignment);
+                    break;
+
+                case ExpressionType.LessThan:
+                case ExpressionType.LessThanOrEqual:
+                    if (memberAtLeft)
+                    {
+                        _context.QueryAggregator.AddRangeStop(assignment);
+                    }
+                    else
+                    {
+                        _context.QueryAggregator.AddRangeStart(assignment);
+                    }
+
+                    break;
+
+                case ExpressionType.GreaterThan:
+                case ExpressionType.GreaterThanOrEqual:
+                    if (memberAtLeft)
+                    {
+                        _context.QueryAggregator.AddRangeStart(assignment);
+                    }
+                    else
+                    {
+                        _context.QueryAggregator.AddRangeStop(assignment);
+                    }
+
+                    break;
+
+                default:
+                    base.VisitBinary(expression);
+                    break;
+            }
+
+            return true;
         }
     }
 }

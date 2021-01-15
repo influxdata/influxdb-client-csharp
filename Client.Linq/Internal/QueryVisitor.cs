@@ -15,11 +15,13 @@ namespace InfluxDB.Client.Linq.Internal
 
         internal InfluxDBQueryVisitor(string bucket, QueryApi queryApi)
         {
-            _generationContext = new QueryGenerationContext(queryApi);
-            var bucketVariable = _generationContext.Variables.AddNamedVariable(bucket);
-            var rangeVariable = _generationContext.Variables.AddNamedVariable(0);
+            _query = new QueryAggregator();
+            _generationContext = new QueryGenerationContext(_query, queryApi);
 
-            _query = new QueryAggregator(bucketVariable, rangeVariable);
+            var bucketVariable = _generationContext.Variables.AddNamedVariable(bucket);
+            _query.AddBucket(bucketVariable);
+            var rangeVariable = _generationContext.Variables.AddNamedVariable(0);
+            _query.AddRangeStart(rangeVariable);
         }
 
         internal Query GenerateQuery()

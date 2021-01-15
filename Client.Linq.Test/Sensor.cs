@@ -3,6 +3,7 @@ using InfluxDB.Client.Core;
 
 namespace Client.Linq.Test
 {
+    [Measurement("sensor")]
     class Sensor
     {
         [Column("sensor_id", IsTag = true)] public string SensorId { get; set; }

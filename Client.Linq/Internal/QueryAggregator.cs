@@ -8,21 +8,35 @@ namespace InfluxDB.Client.Linq.Internal
 {
     internal class QueryAggregator
     {
-        private readonly string _bucketAssignment;
-        private readonly string _rangeStartAssignment;
+        private string _bucketAssignment;
+        private string _rangeStartAssignment;
+        private string _rangeStopAssignment;
         private string _limitNAssignment;
         private string _limitOffsetAssignment;
         private readonly List<string> _filters;
         private readonly List<(string, string)> _orders;
 
-        internal QueryAggregator(string bucketAssignment, string rangeStartAssignment)
+        internal QueryAggregator()
         {
-            _bucketAssignment = bucketAssignment;
-            _rangeStartAssignment = rangeStartAssignment;
             _filters = new List<string>();
             _orders = new List<(string, string)>();
         }
 
+        internal void AddBucket(string bucket)
+        {
+            _bucketAssignment = bucket;
+        }
+
+        internal void AddRangeStart(string rangeStart)
+        {
+            _rangeStartAssignment = rangeStart;
+        }
+        
+        internal void AddRangeStop(string rangeStop)
+        {
+            _rangeStopAssignment = rangeStop;
+        }
+        
         internal void AddLimitN(string limitNAssignment)
         {
             _limitNAssignment = limitNAssignment;
@@ -48,7 +62,7 @@ namespace InfluxDB.Client.Linq.Internal
             var parts = new List<string>
             {
                 BuildOperator("from", "bucket", _bucketAssignment),
-                BuildOperator("range", "start", _rangeStartAssignment),
+                BuildOperator("range", "start", _rangeStartAssignment, "stop", _rangeStopAssignment),
                 //"drop(columns: [\"_start\", \"_stop\", \"_measurement\"])",
                 "pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")",
                 BuildFilter()
@@ -141,6 +155,12 @@ namespace InfluxDB.Client.Linq.Internal
                     return builder;
                 }
 
+                var stringValue = Convert.ToString(filter);
+                if (stringValue.Length == 0)
+                {
+                    return builder;
+                }
+
                 if (builder.Length != 0)
                 {
                     builder.Append(" ");
@@ -148,7 +168,7 @@ namespace InfluxDB.Client.Linq.Internal
                     builder.Append(" ");
                 }
 
-                builder.Append(filter);
+                builder.Append(stringValue);
 
                 return builder;
             }).ToString();

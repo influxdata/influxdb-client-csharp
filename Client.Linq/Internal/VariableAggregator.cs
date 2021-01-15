@@ -37,6 +37,10 @@ namespace InfluxDB.Client.Linq.Internal
                 {
                     literal = new FloatLiteral("FloatLiteral", Convert.ToDecimal(f));
                 }
+                else if (variable.Value is DateTime d)
+                {
+                    literal = new DateTimeLiteral("DateTimeLiteral", d);
+                }
                 else
                 {
                     literal = new StringLiteral("StringLiteral", Convert.ToString(variable.Value));

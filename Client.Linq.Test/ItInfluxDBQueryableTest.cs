@@ -57,6 +57,8 @@ namespace Client.Linq.Test
             var query = (from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApi())
                 where s.SensorId == "id-1"
                 where s.Value > 12
+                where s.Timestamp > new DateTime(2019, 11, 16, 8, 20, 15, DateTimeKind.Utc)
+                where s.Timestamp < new DateTime(2021, 01, 10, 5, 10, 0, DateTimeKind.Utc)
                 orderby s.Timestamp
                 select s)
                 .Take(2)
@@ -182,6 +184,22 @@ namespace Client.Linq.Test
             foreach (var sensor in sensors)
             {
                 Assert.GreaterOrEqual(sensor.Value, 28);
+            }
+        }
+        
+        [Test]
+        public void QueryTimeRange()
+        {
+            var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApi())
+                where s.Timestamp > new DateTime(2020, 11, 16, 8, 20, 16, DateTimeKind.Utc)
+                select s;
+
+            var sensors = query.ToList();
+
+            Assert.AreEqual(2, sensors.Count);
+            foreach (var sensor in sensors)
+            {
+                Assert.GreaterOrEqual(sensor.Value, 89);
             }
         }
         

@@ -113,6 +113,8 @@ The LINQ query requires `bucket` and `organization` as a source of data. Both of
 var query = (from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApi())
     where s.SensorId == "id-1"
     where s.Value > 12
+    where s.Timestamp > new DateTime(2019, 11, 16, 8, 20, 15, DateTimeKind.Utc)
+    where s.Timestamp < new DateTime(2021, 01, 10, 5, 10, 0, DateTimeKind.Utc)
     orderby s.Timestamp
     select s)
     .Take(2)
@@ -124,7 +126,7 @@ var sensors = query.ToList();
 Flux Query:
 ```flux
 from(bucket: "my-bucket") 
-    |> range(start: 0) 
+    |> range(start: 2019-11-16T08:20:15Z, stop: 2021-01-10T05:10:00Z) 
     |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value")
     |> filter(fn: (r) => (r["sensor_id"] == "id-1") and (r["data"] > 12)) 
     |> sort(columns: ["_time"], desc: false) 
