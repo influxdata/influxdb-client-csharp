@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using InfluxDB.Client;
-using InfluxDB.Client.Core.Flux.Internal;
 using InfluxDB.Client.Api.Domain;
 using InfluxDB.Client.Api.Service;
+using InfluxDB.Client.Core.Flux.Internal;
 using InfluxDB.Client.Linq;
 using InfluxDB.Client.Linq.Internal;
 using Moq;
@@ -218,6 +218,44 @@ namespace Client.Linq.Test
 
             Assert.AreEqual(expected, visitor.BuildFluxQuery());
         }
+        
+        [Test]
+        public void ResultOperatorAnd()
+        {
+            var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _queryApi)
+                where s.SensorId == "my-id" && s.Value > 10
+                select s;
+            var visitor = BuildQueryVisitor(query.Expression);
+            
+            const string expected = "from(bucket: p1) " +
+                                    "|> range(start: p2) " +
+                                    "|> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\") " +
+                                    "|> filter(fn: (r) => ((r[\"sensor_id\"] == p3) and (r[\"data\"] > p4)))";
+            
+            Assert.AreEqual(expected, visitor.BuildFluxQuery());
+            var ast = visitor.BuildFluxAST();
+            Assert.AreEqual("my-id", GetLiteral<StringLiteral>(ast, 2).Value);
+            Assert.AreEqual(10, GetLiteral<FloatLiteral>(ast, 3).Value);
+        }
+        
+        [Test]
+        public void ResultOperatorOr()
+        {
+            var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _queryApi)
+                where s.SensorId == "my-id" || s.Value > 10
+                select s;
+            var visitor = BuildQueryVisitor(query.Expression);
+            
+            const string expected = "from(bucket: p1) " +
+                                    "|> range(start: p2) " +
+                                    "|> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\") " +
+                                    "|> filter(fn: (r) => ((r[\"sensor_id\"] == p3) or (r[\"data\"] > p4)))";
+            
+            Assert.AreEqual(expected, visitor.BuildFluxQuery());
+            var ast = visitor.BuildFluxAST();
+            Assert.AreEqual("my-id", GetLiteral<StringLiteral>(ast, 2).Value);
+            Assert.AreEqual(10, GetLiteral<FloatLiteral>(ast, 3).Value);
+        }
 
         [Test]
         public void ResultOperatorByTimestamp()
@@ -259,6 +297,13 @@ namespace Client.Linq.Test
                     from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _queryApi)
                     where s.Timestamp > month10
                     where s.Timestamp < month11
+                    select s,
+                    "range(start: p3, stop: p4)",
+                    new Dictionary<int, DateTime> {{2, month10}, {3, month11}}
+                ),
+                (
+                    from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _queryApi)
+                    where s.Timestamp > month10 && s.Timestamp < month11
                     select s,
                     "range(start: p3, stop: p4)",
                     new Dictionary<int, DateTime> {{2, month10}, {3, month11}}

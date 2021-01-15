@@ -13,6 +13,7 @@ namespace InfluxDB.Client.Linq.Internal
         private readonly object _clause;
         private readonly QueryGenerationContext _context;
         private readonly StringBuilder _fluxExpression = new StringBuilder();
+        private bool _rangeExpression;
 
         private QueryExpressionTreeVisitor(object clause, QueryGenerationContext context)
         {
@@ -77,6 +78,16 @@ namespace InfluxDB.Client.Linq.Internal
                 case ExpressionType.GreaterThanOrEqual:
                     _fluxExpression.Append(" >= ");
                     break;
+                
+                case ExpressionType.AndAlso:
+                case ExpressionType.And:
+                    _fluxExpression.Append (" and ");
+                    break;
+                
+                case ExpressionType.OrElse:
+                case ExpressionType.Or:
+                    _fluxExpression.Append (" or ");
+                    break;
 
                 default:
                     base.VisitBinary(expression);
@@ -117,6 +128,11 @@ namespace InfluxDB.Client.Linq.Internal
 
         private string GetFluxExpression()
         {
+            if (_rangeExpression)
+            {
+                return "";
+            }
+            
             return _fluxExpression.ToString();
         }
 
@@ -195,6 +211,8 @@ namespace InfluxDB.Client.Linq.Internal
                     base.VisitBinary(expression);
                     break;
             }
+
+            _rangeExpression = true;
 
             return true;
         }

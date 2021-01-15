@@ -186,6 +186,34 @@ namespace Client.Linq.Test
                 Assert.GreaterOrEqual(sensor.Value, 28);
             }
         }
+
+        [Test]
+        public void QueryAnd()
+        {
+            var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApi())
+                where s.Value >= 28 && s.SensorId != "id-1"
+                select s;
+
+            var sensors = query.ToList();
+
+            Assert.AreEqual(2, sensors.Count);
+            foreach (var sensor in sensors)
+            {
+                Assert.GreaterOrEqual(sensor.Value, 28);
+            }
+        }
+        
+        [Test]
+        public void QueryOr()
+        {
+            var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApi())
+                where s.Value >= 28 || s.SensorId != "id-1"
+                select s;
+
+            var sensors = query.ToList();
+
+            Assert.AreEqual(6, sensors.Count);
+        }
         
         [Test]
         public void QueryTimeRange()
