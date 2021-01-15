@@ -7,6 +7,7 @@ The library supports to use a LINQ expression to query the InfluxDB.
 - [How to start](#how-to-start)
 - [Time Series](#time-series)
 - [Perform Query](#perform-query)
+- [Time Range Filtering](#time-range-filtering)
 - [Supported LINQ operators](#supported-linq-operators)
     - [Equal](#equal)
     - [Not Equal](#not-equal)

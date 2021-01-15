@@ -41,6 +41,10 @@ namespace InfluxDB.Client.Linq.Internal
                 {
                     literal = new DateTimeLiteral("DateTimeLiteral", d);
                 }
+                else if (variable.Value is DateTimeOffset o)
+                {
+                    literal = new DateTimeLiteral("DateTimeLiteral", o.UtcDateTime);
+                }
                 else
                 {
                     literal = new StringLiteral("StringLiteral", Convert.ToString(variable.Value));

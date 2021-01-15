@@ -22,4 +22,17 @@ namespace Client.Linq.Test
 
         [Column(IsTimestamp = true)] public DateTime Timestamp { get; set; }
     }
+    
+    class SensorDateTimeOffset
+    {
+        [Column("sensor_id", IsTag = true)] public string SensorId { get; set; }
+
+        /// <summary>
+        /// Value measured by sensor
+        /// </summary>
+        [Column("data")]
+        public float Value { get; set; }
+
+        [Column(IsTimestamp = true)] public DateTimeOffset Timestamp { get; set; }
+    }
 }

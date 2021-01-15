@@ -309,11 +309,34 @@ namespace Client.Linq.Test
 
                 foreach (var (index, dateTime) in assignments)
                 {
-                    var rangeAssignment = ((OptionStatement) ast.Body[index]).Assignment as VariableAssignment;
-                    Assert.AreEqual(dateTime, (rangeAssignment?.Init as DateTimeLiteral)?.Value,
+                    Assert.AreEqual(dateTime, GetLiteral<DateTimeLiteral>(ast, index).Value,
                         $"Expected DateTime: {dateTime} with index: {index} for Queryable expression: {queryable.Expression}");
                 }
             }
+        }
+
+        [Test]
+        public void TimestampAsDateTimeOffset()
+        {
+            var start = new DateTimeOffset(2020, 10, 15, 8, 20, 15,
+                new TimeSpan(0, 0, 0));
+            var stop = new DateTimeOffset(2020, 11, 15, 8, 20, 15,
+                new TimeSpan(0, 0, 0));
+            
+            var query = from s in InfluxDBQueryable<SensorDateTimeOffset>.Queryable("my-bucket", "my-org", _queryApi)
+                where s.Timestamp >= start
+                where s.Timestamp <= stop
+                select s;
+            var visitor = BuildQueryVisitor(query.Expression);
+
+            const string expected = "from(bucket: p1) " +
+                                    "|> range(start: p3, stop: p4) " +
+                                    "|> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")";
+
+            Assert.AreEqual(expected, visitor.BuildFluxQuery());
+            var ast = visitor.BuildFluxAST();
+            Assert.AreEqual(start.UtcDateTime, GetLiteral<DateTimeLiteral>(ast, 2).Value);
+            Assert.AreEqual(stop.UtcDateTime, GetLiteral<DateTimeLiteral>(ast, 3).Value);
         }
 
         [Test]
