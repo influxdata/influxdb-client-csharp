@@ -1,10 +1,12 @@
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Threading.Tasks;
 using InfluxDB.Client;
 using InfluxDB.Client.Api.Domain;
 using InfluxDB.Client.Core.Flux.Domain;
+using InfluxDB.Client.Linq;
 using InfluxDB.Client.Writes;
 
 namespace Examples
@@ -157,11 +159,10 @@ namespace Examples
             //
             // Query Data to Domain object
             //
-            var query = $"from(bucket:\"{bucket}\") " +
-                        "|> range(start: 0) " +
-                        "|> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")";
-
-            var list = await client.GetQueryApi(converter).QueryAsync<DomainEntity>(query);
+            var queryApi = client.GetQueryApi(converter);
+            var query = from s in InfluxDBQueryable<DomainEntity>.Queryable("my-bucket", "my-org", queryApi)
+                select s;
+            var list = query.ToList();
 
             //
             // Print result
