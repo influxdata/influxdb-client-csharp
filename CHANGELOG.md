@@ -5,6 +5,7 @@
 
 ### Dependencies
 1. [#145](https://github.com/influxdata/influxdb-client-csharp/pull/145): Updated RestSharp to 106.11.7
+1. [#148](https://github.com/influxdata/influxdb-client-csharp/pull/148): Updated CsvHelper to 18.0.0
 
 ### CI
 1. [#140](https://github.com/influxdata/influxdb-client-csharp/pull/140): Updated default docker image to v2.0.3
