@@ -17,6 +17,7 @@ The library supports to use a LINQ expression to query the InfluxDB.
     - [Greater Than Or Equal](#greater-than-or-equal)
     - [And](#and)
     - [Or](#or)
+    - [Any](#any)
     - [Take](#take)
     - [Skip](#skip)
     - [OrderBy](#orderby)
@@ -357,6 +358,80 @@ from(bucket: "my-bucket")
     |> range(start: 0) 
     |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value") 
     |> filter(fn: (r) => ((r["data"] >= 28) or (r["sensor_id"] != "id-1")))
+```
+
+### Any
+
+Entity:
+
+```c#
+class SensorCustom
+{
+    public Guid Id { get; set; }
+    
+    public DateTimeOffset Time { get; set; }
+    
+    public virtual ICollection<SensorAttribute> Attributes { get; set; }
+}
+
+class SensorAttribute
+{
+    public string Name { get; set; }
+    public string Value { get; set; }
+}
+```
+
+Name Resolver:
+
+```c#
+private class MemberNameResolver: IMemberNameResolver
+{
+    public MemberType ResolveMemberType(MemberInfo memberInfo)
+    {
+        if (memberInfo.DeclaringType == typeof(SensorAttribute))
+        {
+            return memberInfo.Name switch
+            {
+                "Name" => MemberType.NamedField,
+                "Value" => MemberType.NamedFieldValue,
+                _ => MemberType.Field
+            };
+        }
+
+        return memberInfo.Name switch
+        {
+            "Time" => MemberType.Timestamp,
+            "Id" => MemberType.Tag,
+            _ => MemberType.Field
+        };
+    }
+
+    public string GetColumnName(MemberInfo memberInfo)
+    {
+        return memberInfo.Name;
+    }
+
+    public string GetNamedFieldName(MemberInfo memberInfo, object value)
+    {
+        return "attribute_" + Convert.ToString(value);
+    }
+}
+```
+
+LINQ:
+```c#
+var query = from s in InfluxDBQueryable<SensorCustom>.Queryable("my-bucket", "my-org", queryApi, memberResolver)
+    where s.Attributes.Any(a => a.Name == "quality" && a.Value == "good")
+    select s;
+```
+
+Flux Query:
+
+```flux
+from(bucket: "my-bucket")
+    |> range(start: 0)
+    |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value") 
+    |> filter(fn: (r) => (r["attribute_quality"] == "good"))
 ```
 
 ### Take
