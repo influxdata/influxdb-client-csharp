@@ -30,7 +30,7 @@ First, add the library as a dependency for your project:
 ```bash
 # For actual version please check: https://www.nuget.org/packages/InfluxDB.Client.Linq/
 
-dotnet add package InfluxDB.Client.Linq --version 1.15.0-dev.linq.4
+dotnet add package InfluxDB.Client.Linq --version 1.15.0-dev.linq.5
 ```
 
 Next, you should add additional using statement to your program:
@@ -538,4 +538,4 @@ var query = from s in InfluxDBQueryable<SensorCustom>.Queryable("my-bucket", "my
     select s;
 ```
 
-for more details see this example: [CustomDomainConverter](/Examples/CustomDomainConverter.cs#L38).
+for more details see this example: [CustomDomainConverter](/Examples/CustomDomainConverter.cs#L54).
