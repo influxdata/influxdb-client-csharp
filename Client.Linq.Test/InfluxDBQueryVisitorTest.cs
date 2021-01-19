@@ -2,10 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Reflection;
 using InfluxDB.Client;
 using InfluxDB.Client.Api.Domain;
 using InfluxDB.Client.Api.Service;
 using InfluxDB.Client.Core.Flux.Internal;
+using InfluxDB.Client.Core.Test;
 using InfluxDB.Client.Linq;
 using InfluxDB.Client.Linq.Internal;
 using Moq;
@@ -17,12 +19,12 @@ using Expression = System.Linq.Expressions.Expression;
 namespace Client.Linq.Test
 {
     [TestFixture]
-    public class InfluxDBQueryVisitorTest
+    public class InfluxDBQueryVisitorTest: AbstractTest
     {
         private QueryApi _queryApi;
 
         [OneTimeSetUp]
-        public void SetUp()
+        public void InitQueryApi()
         {
             var options = new InfluxDBClientOptions.Builder()
                 .Url("http://localhost:8086")
@@ -385,6 +387,91 @@ namespace Client.Linq.Test
         }
 
         [Test]
+        public void ResultOperatorAny()
+        {
+            var memberResolver = new MemberNameResolver();
+            
+            var queries = new[]
+            {
+                (
+                    from s in InfluxDBQueryable<SensorCustom>.Queryable("my-bucket", "my-org", _queryApi, memberResolver)
+                    where s.Attributes.Any(a => a.Name == "quality" && a.Value == "good")
+                    select s,
+                    "(r[\"attribute_quality\"] == p4)",
+                    new Dictionary<int, string> {{3, "good"}}
+                ),
+                (
+                    from s in InfluxDBQueryable<SensorCustom>.Queryable("my-bucket", "my-org", _queryApi,
+                        memberResolver)
+                    where s.Attributes.Any(a => "quality" == a.Name && "good" == a.Value)
+                    select s,
+                    "(r[\"attribute_quality\"] == p4)",
+                    new Dictionary<int, string> {{3, "good"}}
+                ),
+                (
+                    from s in InfluxDBQueryable<SensorCustom>.Queryable("my-bucket", "my-org", _queryApi, memberResolver)
+                    where s.Attributes.Any(a => a.Value == "good" && a.Name == "quality")
+                    select s,
+                    "(p3 == r[\"attribute_quality\"])",
+                    new Dictionary<int, string> {{2, "good"}}
+                ),
+            };
+            
+            foreach (var (queryable, filter, assignments) in queries)
+            {
+                var visitor = BuildQueryVisitor(queryable.Expression, memberResolver);
+                var ast = visitor.BuildFluxAST();
+
+                var expected = "from(bucket: p1) " +
+                               "|> range(start: p2) " +
+                               "|> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\") " +
+                               $"|> filter(fn: (r) => {filter})";
+
+                Assert.AreEqual(expected, visitor.BuildFluxQuery(),
+                    $"Expected Filter: {filter}, Queryable expression: {queryable.Expression}");
+
+                foreach (var (index, value) in assignments)
+                {
+                    Assert.AreEqual(value, GetLiteral<StringLiteral>(ast, index).Value,
+                        $"Expected Literal: {value} with index: {index} for Queryable expression: {queryable.Expression}");
+                }
+            }
+        }
+        
+        private class MemberNameResolver: IMemberNameResolver
+        {
+            public MemberType ResolveMemberType(MemberInfo memberInfo)
+            {
+                if (memberInfo.DeclaringType == typeof(SensorAttribute))
+                {
+                    return memberInfo.Name switch
+                    {
+                        "Name" => MemberType.NamedField,
+                        "Value" => MemberType.NamedFieldValue,
+                        _ => MemberType.Field
+                    };
+                }
+
+                return memberInfo.Name switch
+                {
+                    "Time" => MemberType.Timestamp,
+                    "Id" => MemberType.Tag,
+                    _ => MemberType.Field
+                };
+            }
+
+            public string GetColumnName(MemberInfo memberInfo)
+            {
+                return memberInfo.Name;
+            }
+
+            public string GetNamedFieldName(MemberInfo memberInfo, object value)
+            {
+                return "attribute_" + Convert.ToString(value);
+            }
+        }
+
+        [Test]
         public void OrderBy()
         {
             var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _queryApi)
@@ -443,9 +530,14 @@ namespace Client.Linq.Test
 
         private InfluxDBQueryVisitor BuildQueryVisitor(Expression expression)
         {
+            return BuildQueryVisitor(expression, new DefaultMemberNameResolver());
+        }
+
+        private InfluxDBQueryVisitor BuildQueryVisitor(Expression expression, IMemberNameResolver memberResolver)
+        {
             var queryModel = QueryParser.CreateDefault().GetParsedQuery(expression);
 
-            var visitor = new InfluxDBQueryVisitor("my-bucket", _queryApi);
+            var visitor = new InfluxDBQueryVisitor("my-bucket", memberResolver);
             visitor.VisitQueryModel(queryModel);
 
             return visitor;

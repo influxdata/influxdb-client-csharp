@@ -3,14 +3,20 @@ namespace InfluxDB.Client.Linq.Internal
     internal class QueryGenerationContext
     {
         internal readonly QueryAggregator QueryAggregator;
-        internal readonly QueryApi QueryApi;
+        internal readonly IMemberNameResolver MemberResolver;
         internal readonly VariableAggregator Variables;
 
-        internal QueryGenerationContext(QueryAggregator queryAggregator, QueryApi queryApi)
+        internal QueryGenerationContext(QueryAggregator queryAggregator, VariableAggregator variableAggregator,
+            IMemberNameResolver memberResolver)
         {
             QueryAggregator = queryAggregator;
-            QueryApi = queryApi;
-            Variables = new VariableAggregator();
+            Variables = variableAggregator;
+            MemberResolver = memberResolver;
+        }
+
+        internal QueryGenerationContext Clone(QueryAggregator queryAggregator)
+        {
+            return new QueryGenerationContext(queryAggregator, Variables, MemberResolver);
         }
     }
 }

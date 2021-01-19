@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,11 +12,13 @@ namespace InfluxDB.Client.Linq.Internal
         private string _rangeStopAssignment;
         private string _limitNAssignment;
         private string _limitOffsetAssignment;
+        private readonly bool _subQuery;
         private readonly List<string> _filters;
         private readonly List<(string, string)> _orders;
 
-        internal QueryAggregator()
+        internal QueryAggregator(bool subQuery = false)
         {
+            _subQuery = subQuery;
             _filters = new List<string>();
             _orders = new List<(string, string)>();
         }
@@ -52,6 +53,12 @@ namespace InfluxDB.Client.Linq.Internal
             _filters.Add(filter);
         }
 
+        internal void AddSubQueries(QueryAggregator aggregator)
+        {
+            _filters.AddRange(aggregator._filters);
+            _orders.AddRange(aggregator._orders);
+        }
+
         public void AddOrder(string orderPart, string desc)
         {
             _orders.Add((orderPart, desc));
@@ -63,7 +70,6 @@ namespace InfluxDB.Client.Linq.Internal
             {
                 BuildOperator("from", "bucket", _bucketAssignment),
                 BuildOperator("range", "start", _rangeStartAssignment, "stop", _rangeStopAssignment),
-                //"drop(columns: [\"_start\", \"_stop\", \"_measurement\"])",
                 "pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")",
                 BuildFilter()
             };
@@ -71,7 +77,7 @@ namespace InfluxDB.Client.Linq.Internal
             // https://docs.influxdata.com/influxdb/cloud/reference/flux/stdlib/built-in/transformations/sort/
             foreach (var (column, desc) in _orders)
             {
-                parts.Add(BuildOperator("sort", "columns", new List<string>{column}, "desc", desc));
+                parts.Add(BuildOperator("sort", "columns", new List<string> {column}, "desc", desc));
             }
 
             // https://docs.influxdata.com/influxdb/cloud/reference/flux/stdlib/built-in/transformations/limit/
@@ -83,12 +89,17 @@ namespace InfluxDB.Client.Linq.Internal
             return JoinList(parts, "|>");
         }
 
-        private string BuildFilter()
+        internal string BuildFilter()
         {
             var filters = JoinList(_filters, "and");
             if (filters.Length == 0)
             {
                 return null;
+            }
+
+            if (_subQuery)
+            {
+                return filters;
             }
 
             var filter = new StringBuilder();

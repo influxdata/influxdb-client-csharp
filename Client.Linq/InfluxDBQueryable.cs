@@ -21,7 +21,7 @@ namespace InfluxDB.Client.Linq
         /// <returns>new instance for of Queryable</returns>
         public static InfluxDBQueryable<T> Queryable(string bucket, string org, QueryApi queryApi)
         {
-            return new InfluxDBQueryable<T>(bucket, org, queryApi);
+            return Queryable(bucket, org, queryApi, new DefaultMemberNameResolver());
         }
         
         /// <summary>
@@ -30,8 +30,22 @@ namespace InfluxDB.Client.Linq
         /// <param name="bucket">Specifies the source bucket.</param>
         /// <param name="org">Specifies the source organization.</param>
         /// <param name="queryApi">The underlying API to execute Flux Query.</param>
-        public InfluxDBQueryable(string bucket, string org, QueryApi queryApi) : base(CreateQueryParser(),
-            CreateExecutor(bucket, org, queryApi))
+        /// <param name="memberResolver">Resolver for customized names.</param>
+        /// <returns>new instance for of Queryable</returns>
+        public static InfluxDBQueryable<T> Queryable(string bucket, string org, QueryApi queryApi, IMemberNameResolver memberResolver)
+        {
+            return new InfluxDBQueryable<T>(bucket, org, queryApi, memberResolver);
+        }
+        
+        /// <summary>
+        /// Create a new instance of IQueryable.
+        /// </summary>
+        /// <param name="bucket">Specifies the source bucket.</param>
+        /// <param name="org">Specifies the source organization.</param>
+        /// <param name="queryApi">The underlying API to execute Flux Query.</param>
+        /// <param name="memberResolver">Resolver for customized names.</param>
+        public InfluxDBQueryable(string bucket, string org, QueryApi queryApi, IMemberNameResolver memberResolver) : base(CreateQueryParser(),
+            CreateExecutor(bucket, org, queryApi, memberResolver))
         {
         }
 
@@ -44,13 +58,13 @@ namespace InfluxDB.Client.Linq
         {
         }
 
-        private static IQueryExecutor CreateExecutor(string bucket, string org, QueryApi queryApi)
+        private static IQueryExecutor CreateExecutor(string bucket, string org, QueryApi queryApi, IMemberNameResolver memberResolver)
         {
             Arguments.CheckNonEmptyString(bucket, nameof(bucket));
             Arguments.CheckNonEmptyString(org, nameof(org));
             Arguments.CheckNotNull(queryApi, nameof(queryApi));
                 
-            return new InfluxDBQueryExecutor(bucket, org, queryApi);
+            return new InfluxDBQueryExecutor(bucket, org, queryApi, memberResolver);
         }
 
         private static QueryParser CreateQueryParser()

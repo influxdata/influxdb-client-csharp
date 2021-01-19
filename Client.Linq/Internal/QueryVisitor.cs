@@ -1,6 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using InfluxDB.Client.Api.Domain;
+using InfluxDB.Client.Linq.Internal.Expressions;
 using Remotion.Linq;
 using Remotion.Linq.Clauses;
 using Remotion.Linq.Clauses.ResultOperators;
@@ -10,18 +13,20 @@ namespace InfluxDB.Client.Linq.Internal
 {
     internal class InfluxDBQueryVisitor : QueryModelVisitorBase
     {
-        private readonly QueryAggregator _query;
-        private readonly QueryGenerationContext _generationContext;
+        private readonly QueryGenerationContext _context;
 
-        internal InfluxDBQueryVisitor(string bucket, QueryApi queryApi)
+        internal InfluxDBQueryVisitor(string bucket, IMemberNameResolver memberResolver) : 
+            this(new QueryGenerationContext(new QueryAggregator(), new VariableAggregator(), memberResolver))
         {
-            _query = new QueryAggregator();
-            _generationContext = new QueryGenerationContext(_query, queryApi);
+            var bucketVariable = _context.Variables.AddNamedVariable(bucket);
+            _context.QueryAggregator.AddBucket(bucketVariable);
+            var rangeVariable = _context.Variables.AddNamedVariable(0);
+            _context.QueryAggregator.AddRangeStart(rangeVariable);
+        }
 
-            var bucketVariable = _generationContext.Variables.AddNamedVariable(bucket);
-            _query.AddBucket(bucketVariable);
-            var rangeVariable = _generationContext.Variables.AddNamedVariable(0);
-            _query.AddRangeStart(rangeVariable);
+        internal InfluxDBQueryVisitor(QueryGenerationContext context)
+        {
+            _context = context;
         }
 
         internal Query GenerateQuery()
@@ -47,20 +52,33 @@ namespace InfluxDB.Client.Linq.Internal
 
         internal File BuildFluxAST()
         {
-            return new File {Imports = null, Package = null, Body = _generationContext.Variables.GetStatements()};
+            return new File {Imports = null, Package = null, Body = _context.Variables.GetStatements()};
         }
 
         internal string BuildFluxQuery()
         {
-            return _query.BuildFluxQuery();
+            return _context.QueryAggregator.BuildFluxQuery();
         }
 
         public override void VisitWhereClause(WhereClause whereClause, QueryModel queryModel, int index)
         {
             base.VisitWhereClause (whereClause, queryModel, index);
 
-            var filterPart = GetFluxExpression(whereClause.Predicate, whereClause);
-            _query.AddFilter(filterPart);
+            var expressions = GetExpressions(whereClause.Predicate, whereClause).ToList();
+            
+            // from
+            foreach (var expressionPart in expressions.Where(it => it is TimeRange))
+            {
+                var timeRange = (TimeRange) expressionPart;
+                timeRange.AddRange(_context.QueryAggregator);
+            }
+            
+            // filter
+            var expressionParts = expressions.Where(it => !(it is TimeRange)).ToList();
+            QueryExpressionTreeVisitor.NormalizeEmptyBinary(expressionParts);
+            
+            var filterPart = ConcatExpression(expressionParts);
+            _context.QueryAggregator.AddFilter(filterPart);
         }
 
         public override void VisitResultOperator(ResultOperatorBase resultOperator, QueryModel queryModel, int index)
@@ -71,12 +89,14 @@ namespace InfluxDB.Client.Linq.Internal
             {
                 case TakeResultOperator takeResultOperator:
                     var takeVariable = GetFluxExpression(takeResultOperator.Count, resultOperator);
-                    _query.AddLimitN(takeVariable);
+                    _context.QueryAggregator.AddLimitN(takeVariable);
                     break;
 
                 case SkipResultOperator skipResultOperator:
                     var skipVariable = GetFluxExpression(skipResultOperator.Count, resultOperator);
-                    _query.AddLimitOffset(skipVariable);
+                    _context.QueryAggregator.AddLimitOffset(skipVariable);
+                    break;
+                case AnyResultOperator _:
                     break;
                 default:
                     throw new NotSupportedException($"{resultOperator.GetType().Name} is not supported.");
@@ -89,17 +109,32 @@ namespace InfluxDB.Client.Linq.Internal
 
             foreach (var ordering in orderByClause.Orderings)
             {
-                var orderPart = _generationContext.Variables
+                var orderPart = _context.Variables
                     .AddNamedVariable(GetFluxExpression(ordering.Expression, orderByClause));
-                var desc = _generationContext.Variables
+                var desc = _context.Variables
                     .AddNamedVariable(ordering.OrderingDirection == OrderingDirection.Desc);
-                _query.AddOrder(orderPart, desc);
+                _context.QueryAggregator.AddOrder(orderPart, desc);
             }
         }
 
         private string GetFluxExpression(Expression expression, object clause)
         {
-            return QueryExpressionTreeVisitor.GetFluxExpression(expression, clause, _generationContext);
+            return ConcatExpression(GetExpressions(expression, clause));
+        }
+
+        private IEnumerable<IExpressionPart> GetExpressions(Expression expression, object clause)
+        {
+            return QueryExpressionTreeVisitor.GetFluxExpressions(expression, clause, _context);
+        }
+
+        private string ConcatExpression(IEnumerable<IExpressionPart> expressions)
+        {
+            return expressions.Aggregate(new StringBuilder(), (builder, part) =>
+            {
+                part.AppendFlux(builder);
+
+                return builder;
+            }).ToString();
         }
     }
 }

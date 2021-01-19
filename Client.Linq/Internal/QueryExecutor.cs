@@ -18,6 +18,7 @@ namespace InfluxDB.Client.Linq.Internal
         private readonly string _bucket;
         private readonly string _org;
         private readonly QueryApi _queryApi;
+        private readonly IMemberNameResolver _memberResolver;
 
         /// <summary>
         /// 
@@ -25,11 +26,12 @@ namespace InfluxDB.Client.Linq.Internal
         /// <param name="bucket">Specifies the source bucket.</param>
         /// <param name="org">Specifies the source organization.</param>
         /// <param name="queryApi">The underlying API to execute Flux Query.</param>
-        public InfluxDBQueryExecutor(string bucket, string org, QueryApi queryApi)
+        public InfluxDBQueryExecutor(string bucket, string org, QueryApi queryApi, IMemberNameResolver memberResolver)
         {
             _bucket = bucket;
             _org = org;
             _queryApi = queryApi;
+            _memberResolver = memberResolver;
         }
 
         /// <summary>
@@ -57,7 +59,7 @@ namespace InfluxDB.Client.Linq.Internal
         /// </summary>
         public IEnumerable<T> ExecuteCollection<T>(QueryModel queryModel)
         {
-            var visitor = new InfluxDBQueryVisitor(_bucket, _queryApi);
+            var visitor = new InfluxDBQueryVisitor(_bucket, _memberResolver);
             visitor.VisitQueryModel(queryModel);
 
             var task = _queryApi.QueryAsync<T>(visitor.GenerateQuery(), _org);

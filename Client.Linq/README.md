@@ -453,4 +453,14 @@ var converter = new DomainEntityConverter();
 var queryApi = client.GetQueryApi(converter)
 ```
 
+To satisfy LINQ Query Provider you have to implement `IMemberNameResolver`:
+
+```c#
+var resolver = new MemberNameResolver();
+
+var query = from s in InfluxDBQueryable<SensorCustom>.Queryable("my-bucket", "my-org", queryApi, nameResolver)
+    where s.Attributes.Any(a => a.Name == "quality" && a.Value == "good")
+    select s;
+```
+
 for more details see this example: [CustomDomainConverter](/Examples/CustomDomainConverter.cs#L38).

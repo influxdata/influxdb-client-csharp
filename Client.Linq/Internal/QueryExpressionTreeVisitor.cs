@@ -1,9 +1,12 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
-using System.Reflection;
-using System.Text;
 using InfluxDB.Client.Core;
+using InfluxDB.Client.Linq.Internal.Expressions;
 using Remotion.Linq.Clauses;
+using Remotion.Linq.Clauses.Expressions;
+using Remotion.Linq.Clauses.ResultOperators;
 using Remotion.Linq.Parsing;
 
 namespace InfluxDB.Client.Linq.Internal
@@ -11,9 +14,9 @@ namespace InfluxDB.Client.Linq.Internal
     internal class QueryExpressionTreeVisitor : ThrowingExpressionVisitor
     {
         private readonly object _clause;
+
         private readonly QueryGenerationContext _context;
-        private readonly StringBuilder _fluxExpression = new StringBuilder();
-        private bool _rangeExpression;
+        private readonly List<IExpressionPart> _expressionParts = new List<IExpressionPart>();
 
         private QueryExpressionTreeVisitor(object clause, QueryGenerationContext context)
         {
@@ -22,9 +25,11 @@ namespace InfluxDB.Client.Linq.Internal
 
             _clause = clause;
             _context = context;
+            _expressionParts.Add(new NoOp());
         }
 
-        internal static string GetFluxExpression(Expression expression, object clause, QueryGenerationContext context)
+        internal static IEnumerable<IExpressionPart> GetFluxExpressions(Expression expression, object clause,
+            QueryGenerationContext context)
         {
             Arguments.CheckNotNull(expression, nameof(expression));
             Arguments.CheckNotNull(clause, nameof(clause));
@@ -32,61 +37,53 @@ namespace InfluxDB.Client.Linq.Internal
 
             var visitor = new QueryExpressionTreeVisitor(clause, context);
             visitor.Visit(expression);
-            return visitor.GetFluxExpression();
+            return visitor.GetFluxExpressions();
         }
 
         protected override Expression VisitConstant(ConstantExpression expression)
         {
-            var namedVariable = _context.Variables.AddNamedVariable(expression.Value);
-            _fluxExpression.Append(namedVariable);
+            var value = expression.Value;
+            var assignmentValue = new AssignmentValue(value, _context.Variables.AddNamedVariable(value));
+            _expressionParts.Add(assignmentValue);
 
             return expression;
         }
 
-        protected override Expression VisitBinary(BinaryExpression expression)
+        protected override Expression VisitSubQuery(SubQueryExpression subQuery)
         {
-            if (VisitRangeBinaryExpression(expression))
+            if (subQuery.QueryModel.ResultOperators.All(p => p is AnyResultOperator))
             {
-                return expression;
+                var query = new QueryAggregator(true);
+
+                var modelVisitor = new InfluxDBQueryVisitor(_context.Clone(query));
+                modelVisitor.VisitQueryModel(subQuery.QueryModel);
+
+                _context.QueryAggregator.AddSubQueries(query);
+
+                return subQuery;
             }
 
-            _fluxExpression.Append("(");
+            return base.VisitSubQuery(subQuery);
+        }
+
+        protected override Expression VisitBinary(BinaryExpression expression)
+        {
+            _expressionParts.Add(new LeftParenthesis());
             Visit(expression.Left);
 
             switch (expression.NodeType)
             {
                 case ExpressionType.Equal:
-                    _fluxExpression.Append(" == ");
-                    break;
-
                 case ExpressionType.NotEqual:
-                    _fluxExpression.Append(" != ");
-                    break;
-
                 case ExpressionType.LessThan:
-                    _fluxExpression.Append(" < ");
-                    break;
-
                 case ExpressionType.LessThanOrEqual:
-                    _fluxExpression.Append(" <= ");
-                    break;
-
                 case ExpressionType.GreaterThan:
-                    _fluxExpression.Append(" > ");
-                    break;
-
                 case ExpressionType.GreaterThanOrEqual:
-                    _fluxExpression.Append(" >= ");
-                    break;
-                
                 case ExpressionType.AndAlso:
                 case ExpressionType.And:
-                    _fluxExpression.Append (" and ");
-                    break;
-                
                 case ExpressionType.OrElse:
                 case ExpressionType.Or:
-                    _fluxExpression.Append (" or ");
+                    _expressionParts.Add(new BinaryOperator(expression, exp => base.VisitBinary(exp)));
                     break;
 
                 default:
@@ -95,47 +92,39 @@ namespace InfluxDB.Client.Linq.Internal
             }
 
             Visit(expression.Right);
-            _fluxExpression.Append(")");
+            _expressionParts.Add(new RightParenthesis());
 
             return expression;
         }
 
         protected override Expression VisitMember(MemberExpression expression)
         {
-            var mapper = _context.QueryApi.GetFluxResultMapper();
-            var propertyInfo = expression.Member as PropertyInfo;
-
-            var columnName = mapper.GetColumnName(propertyInfo);
-            if (mapper.IsTimestamp(propertyInfo))
-            {
-                columnName = "_time";
-            }
-
             if (_clause is WhereClause)
             {
-                _fluxExpression
-                    .Append("r[\"")
-                    .Append(columnName)
-                    .Append("\"]");
+                switch (_context.MemberResolver.ResolveMemberType(expression.Member))
+                {
+                    case MemberType.Timestamp:
+                        _expressionParts.Add(new TimeRange());
+                        break;
+                    case MemberType.NamedField:
+                        _expressionParts.Add(new NamedField(expression.Member, _context.MemberResolver));
+                        break;
+                    case MemberType.NamedFieldValue:
+                        _expressionParts.Add(new NamedFieldValue());
+                        break;
+                    default:
+                        _expressionParts.Add(new RecordColumnName(expression.Member, _context.MemberResolver));
+                        break;
+                }
             }
             else
             {
-                _fluxExpression.Append(columnName);
+                _expressionParts.Add(new ColumnName(expression.Member, _context.MemberResolver));
             }
 
             return expression;
         }
-
-        private string GetFluxExpression()
-        {
-            if (_rangeExpression)
-            {
-                return "";
-            }
-            
-            return _fluxExpression.ToString();
-        }
-
+        
         protected override Exception CreateUnhandledItemException<T>(T unhandledItem, string visitMethod)
         {
             var message = $"The expression '{unhandledItem}', type: '{typeof(T)}' is not supported.";
@@ -143,78 +132,158 @@ namespace InfluxDB.Client.Linq.Internal
             return new NotSupportedException(message);
         }
 
-        private bool VisitRangeBinaryExpression(BinaryExpression expression)
+        private IEnumerable<IExpressionPart> GetFluxExpressions()
         {
-            Expression assignmentExpression = null;
-            var memberAtLeft = true;
+            _expressionParts.RemoveAll(it => it is NoOp);
+            NormalizeTimeRange();
+            NormalizeNamedField();
+            NormalizeNamedFieldValue();
+            return _expressionParts;
+        }
 
-            // Left is Timestamp property
-            if (expression.Left is MemberExpression lm)
+        private void NormalizeTimeRange()
+        {
+            var index = _expressionParts
+                .FindIndex(it => it is TimeRange tr && tr.Left == null && tr.Right == null);
+
+            if (index == -1)
             {
-                var propertyInfo = lm.Member as PropertyInfo;
-                if (_context.QueryApi.GetFluxResultMapper().IsTimestamp(propertyInfo))
-                {
-                    assignmentExpression = expression.Right;
-                }
-            }
-            // Right is Timestamp property
-            else if (expression.Right is MemberExpression rm)
-            {
-                var propertyInfo = rm.Member as PropertyInfo;
-                if (_context.QueryApi.GetFluxResultMapper().IsTimestamp(propertyInfo))
-                {
-                    assignmentExpression = expression.Left;
-                    memberAtLeft = false;
-                }
+                return;
             }
 
-            if (assignmentExpression == null)
+            var timeRange = (TimeRange) _expressionParts[index];
+            // TimeRange on left: 'where s.Timestamp > month11'
+            if (_expressionParts[index + 1] is BinaryOperator)
             {
-                return false;
+                timeRange.Operator = _expressionParts[index + 1] as BinaryOperator;
+                timeRange.Right = _expressionParts[index + 2];
+
+                _expressionParts.RemoveAt(index + 3);
+                _expressionParts.RemoveAt(index + 2);
+                _expressionParts.RemoveAt(index + 1);
+                _expressionParts.RemoveAt(index - 1);
+            }
+            // TimeRange on right: 'where month11 > s.Timestamp'
+            else
+            {
+                timeRange.Operator = _expressionParts[index - 1] as BinaryOperator;
+                timeRange.Left = _expressionParts[index - 2];
+
+                _expressionParts.RemoveAt(index + 1);
+                _expressionParts.RemoveAt(index - 1);
+                _expressionParts.RemoveAt(index - 2);
+                _expressionParts.RemoveAt(index - 3);
             }
 
-            var assignment = GetFluxExpression(assignmentExpression, _clause, _context);
-            switch (expression.NodeType)
+            NormalizeTimeRange();
+        }
+        
+        private void NormalizeNamedField()
+        {
+            var index = _expressionParts
+                .FindIndex(it => it is NamedField nf && nf.Assignment == null);
+
+            if (index == -1)
             {
-                case ExpressionType.Equal:
-                    _context.QueryAggregator.AddRangeStart(assignment);
-                    _context.QueryAggregator.AddRangeStop(assignment);
-                    break;
-
-                case ExpressionType.LessThan:
-                case ExpressionType.LessThanOrEqual:
-                    if (memberAtLeft)
-                    {
-                        _context.QueryAggregator.AddRangeStop(assignment);
-                    }
-                    else
-                    {
-                        _context.QueryAggregator.AddRangeStart(assignment);
-                    }
-
-                    break;
-
-                case ExpressionType.GreaterThan:
-                case ExpressionType.GreaterThanOrEqual:
-                    if (memberAtLeft)
-                    {
-                        _context.QueryAggregator.AddRangeStart(assignment);
-                    }
-                    else
-                    {
-                        _context.QueryAggregator.AddRangeStop(assignment);
-                    }
-
-                    break;
-
-                default:
-                    base.VisitBinary(expression);
-                    break;
+                return;
             }
 
-            _rangeExpression = true;
+            var namedField = (NamedField) _expressionParts[index];
+            // Constant on right: a.Name == "quality"
+            if (_expressionParts[index + 1] is BinaryOperator)
+            {
+                namedField.Assignment = _expressionParts[index + 2] as AssignmentValue;
 
-            return true;
+                _expressionParts.RemoveAt(index + 3);
+                _expressionParts.RemoveAt(index + 2);
+                _expressionParts.RemoveAt(index + 1);
+                _expressionParts.RemoveAt(index - 1);
+            }
+            // Constant on left: "quality" == a.Name
+            else
+            {
+                namedField.Assignment = _expressionParts[index - 2] as AssignmentValue;
+
+                _expressionParts.RemoveAt(index + 1);
+                _expressionParts.RemoveAt(index - 1);
+                _expressionParts.RemoveAt(index - 2);
+                _expressionParts.RemoveAt(index - 3);
+            }
+
+            NormalizeNamedField();
+        }
+        
+        private void NormalizeNamedFieldValue()
+        {
+            var index = _expressionParts
+                .FindIndex(it => it is NamedFieldValue nf && nf.Assignment == null);
+
+            if (index == -1)
+            {
+                return;
+            }
+
+            var namedField = (NamedFieldValue) _expressionParts[index];
+            // Constant on right: a.Value == "good"
+            if (_expressionParts[index + 1] is BinaryOperator)
+            {
+                namedField.Operator = _expressionParts[index + 1] as BinaryOperator;
+                namedField.Assignment = _expressionParts[index + 2] as AssignmentValue;
+                // == "good" ) and NamedField
+                var i = index + 5;
+                namedField.Left = _expressionParts.Count > i && _expressionParts[i] is NamedField;
+
+                _expressionParts.RemoveAt(index + 3);
+                _expressionParts.RemoveAt(index + 2);
+                _expressionParts.RemoveAt(index + 1);
+                _expressionParts.RemoveAt(index - 1);
+            }
+            // Constant on left: "good" == a.Value
+            else
+            {
+                namedField.Operator = _expressionParts[index - 1] as BinaryOperator;
+                namedField.Assignment = _expressionParts[index - 2] as AssignmentValue;
+
+                // ) and NamedField
+                var i = index + 3;
+                namedField.Left = _expressionParts.Count > i && _expressionParts[i] is NamedField;
+                
+                _expressionParts.RemoveAt(index + 1);
+                _expressionParts.RemoveAt(index - 1);
+                _expressionParts.RemoveAt(index - 2);
+                _expressionParts.RemoveAt(index - 3);
+            }
+            
+            // remove trailing operator: r["attribute_quality"] and  == p4
+            index = _expressionParts.IndexOf(namedField);
+            if (namedField.Left)
+            {
+                _expressionParts.RemoveAt(index + 1);
+            }
+            else
+            {
+                _expressionParts.RemoveAt(index - 1);
+            }
+
+            NormalizeNamedFieldValue();
+        }
+
+        /// <summary>
+        /// Remove "( and )"
+        /// </summary>
+        internal static void NormalizeEmptyBinary(List<IExpressionPart> parts)
+        {
+            var index = parts.FindIndex(it => it is BinaryOperator);
+
+            if (index != -1 && parts[index - 1] is LeftParenthesis && parts[index + 1] is RightParenthesis)
+            {
+
+                parts.RemoveAt(index + 1);
+                parts.RemoveAt(index);
+                parts.RemoveAt(index - 1);
+                
+                NormalizeEmptyBinary(parts);
+            }
         }
     }
 }

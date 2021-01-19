@@ -1,7 +1,6 @@
 using System;
-using System.Linq;
 using System.Collections.Generic;
-using System.Reflection;
+using System.Linq;
 using System.Threading.Tasks;
 using InfluxDB.Client;
 using InfluxDB.Client.Api.Domain;
@@ -67,32 +66,6 @@ namespace Examples
                 }
 
                 return (T) Convert.ChangeType(customEntity, typeof(T));
-            }
-
-            /// <summary>
-            /// Check if property is TimeStamp
-            /// </summary>
-            public bool IsTimestamp(PropertyInfo propertyInfo)
-            {
-                return propertyInfo.Name == "Timestamp";
-            }
-
-            /// <summary>
-            /// Get Name of Column for generate Linq Flux query.
-            /// </summary>
-            public string GetColumnName(PropertyInfo propertyInfo)
-            {
-                switch (propertyInfo.Name)
-                {
-                    case "SeriesId":
-                        return "series_id";
-
-                    case "Value":
-                        return "data";
-
-                    default:
-                        return propertyInfo.Name;
-                }
             }
 
             /// <summary>

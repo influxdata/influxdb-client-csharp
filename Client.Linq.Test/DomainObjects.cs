@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using InfluxDB.Client.Core;
 
 namespace Client.Linq.Test
@@ -34,5 +35,20 @@ namespace Client.Linq.Test
         public float Value { get; set; }
 
         [Column(IsTimestamp = true)] public DateTimeOffset Timestamp { get; set; }
+    }
+
+    class SensorCustom
+    {
+        public Guid Id { get; set; }
+        
+        public DateTimeOffset Time { get; set; }
+        
+        public virtual ICollection<SensorAttribute> Attributes { get; set; }
+    }
+
+    class SensorAttribute
+    {
+        public string Name { get; set; }
+        public string Value { get; set; }
     }
 }
