@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using InfluxDB.Client;
 using InfluxDB.Client.Api.Domain;
@@ -23,7 +24,7 @@ namespace Examples
 
             public DateTimeOffset Timestamp { get; set; }
 
-            public Dictionary<string, string> Properties { get; set; }
+            public ICollection<DomainEntityAttribute> Properties { get; set; }
 
             public override string ToString()
             {
@@ -32,11 +33,25 @@ namespace Examples
             }
         }
 
+        /// <summary>
+        /// Attributes of DomainObject
+        /// </summary>
+        private class DomainEntityAttribute
+        {
+            public string Name { get; set; }
+            public string Value { get; set; }
+            
+            public override string ToString()
+            {
+                return $"{Name}={Value}";
+            }
+        }
+
 
         /// <summary>
         /// Define Custom Domain Object Converter
         /// </summary>
-        private class DomainEntityConverter : IInfluxDBEntityConverter
+        private class DomainEntityConverter : IInfluxDBEntityConverter, IMemberNameResolver
         {
             /// <summary>
             /// Convert to DomainObject.
@@ -53,15 +68,19 @@ namespace Examples
                     SeriesId = Guid.Parse(Convert.ToString(fluxRecord.GetValueByKey("series_id"))!),
                     Value = Convert.ToDouble(fluxRecord.GetValueByKey("data")),
                     Timestamp = fluxRecord.GetTime().GetValueOrDefault().ToDateTimeUtc(),
-                    Properties = new Dictionary<string, string>()
+                    Properties = new List<DomainEntityAttribute>()
                 };
                 
                 foreach (var (key, value) in fluxRecord.Values)
                 {
                     if (key.StartsWith("property_"))
                     {
-                        customEntity.Properties.Add(key.Replace("property_", string.Empty),  
-                            Convert.ToString(value));
+                        var attribute = new DomainEntityAttribute
+                        {
+                            Name = key.Replace("property_", string.Empty), Value = Convert.ToString(value)
+                        };
+                        
+                        customEntity.Properties.Add(attribute);
                     }
                 }
 
@@ -84,12 +103,56 @@ namespace Examples
                     .Field("data", ce.Value)
                     .Timestamp(ce.Timestamp, precision);
 
-                foreach (var (key, value) in ce.Properties ?? new Dictionary<string, string>())
+                foreach (var attribute in ce.Properties ?? new List<DomainEntityAttribute>())
                 {
-                    point = point.Field($"property_{key}", value);
+                    point = point.Field($"property_{attribute.Name}", attribute.Value);
                 }
 
                 return point;
+            }
+
+            /// <summary>
+            /// Resolve type of Member.
+            /// </summary>
+            public MemberType ResolveMemberType(MemberInfo memberInfo)
+            {
+                switch (memberInfo.Name)
+                {
+                    case "Timestamp":
+                        return MemberType.Timestamp;
+                    case "Name":
+                        return MemberType.NamedField;
+                    case "Value":
+                        return MemberType.NamedFieldValue;
+                    case "SeriesId":
+                        return MemberType.Tag;
+                    default:
+                        return MemberType.Field;
+                }
+            }
+
+            /// <summary>
+            ///  Get Name of Column for generate Linq Flux query.
+            /// </summary>
+            public string GetColumnName(MemberInfo memberInfo)
+            {
+                switch (memberInfo.Name)
+                {
+                    case "SeriesId":
+                        return "series_id";
+                    case "Value":
+                        return "data";
+                    default:
+                        return memberInfo.Name;
+                }
+            }
+
+            /// <summary>
+            /// Return name for named Field.
+            /// </summary>
+            public string GetNamedFieldName(MemberInfo memberInfo, object value)
+            {
+                return $"property_{Convert.ToString(value)}";
             }
         }
 
@@ -115,32 +178,114 @@ namespace Examples
             var time = new DateTimeOffset(2020, 11, 15, 8, 20, 15,
                 new TimeSpan(3, 0, 0));
 
-            var domainEntity = new DomainEntity
+            var entity1 = new DomainEntity
             {
                 Timestamp = time,
                 SeriesId = Guid.Parse("0f8fad5b-d9cb-469f-a165-70867728950e"),
                 Value = 15,
-                Properties = new Dictionary<string, string> {{"height", "4"}, {"width", "10"}}
+                Properties = new List<DomainEntityAttribute>
+                {
+                    new DomainEntityAttribute
+                        {Name = "height", Value = "4"},
+                    new DomainEntityAttribute
+                        {Name = "width", Value = "110"}
+                }
+            };
+            var entity2 = new DomainEntity
+            {
+                Timestamp = time.AddHours(1),
+                SeriesId = Guid.Parse("0f8fad5b-d9cb-469f-a165-70867728950e"),
+                Value = 15,
+                Properties = new List<DomainEntityAttribute>
+                {
+                    new DomainEntityAttribute
+                        {Name = "height", Value = "5"},
+                    new DomainEntityAttribute
+                        {Name = "width", Value = "160"}
+                }
+            };
+            var entity3 = new DomainEntity
+            {
+                Timestamp = time.AddHours(2),
+                SeriesId = Guid.Parse("7c9e6679-7425-40de-944b-e07fc1f90ae7"),
+                Value = 15,
+                Properties = new List<DomainEntityAttribute>
+                {
+                    new DomainEntityAttribute
+                        {Name = "height", Value = "5"},
+                    new DomainEntityAttribute
+                        {Name = "width", Value = "110"}
+                }
+            };
+            var entity4 = new DomainEntity
+            {
+                Timestamp = time.AddHours(3),
+                SeriesId = Guid.Parse("7c9e6679-7425-40de-944b-e07fc1f90ae7"),
+                Value = 15,
+                Properties = new List<DomainEntityAttribute>
+                {
+                    new DomainEntityAttribute
+                        {Name = "height", Value = "6"},
+                    new DomainEntityAttribute
+                        {Name = "width", Value = "160"}
+                }
             };
 
             //
             // Write data
             //
             await client.GetWriteApiAsync(converter)
-                .WriteMeasurementsAsync(WritePrecision.S, domainEntity);
+                .WriteMeasurementsAsync(WritePrecision.S, entity1, entity2, entity3, entity4);
 
             //
             // Query Data to Domain object
             //
             var queryApi = client.GetQueryApi(converter);
-            var query = from s in InfluxDBQueryable<DomainEntity>.Queryable("my-bucket", "my-org", queryApi)
-                select s;
-            var list = query.ToList();
 
             //
-            // Print result
+            // Select ALL
             //
-            list.ForEach(it => Console.WriteLine(it.ToString()));
+            var query = from s in InfluxDBQueryable<DomainEntity>.Queryable("my-bucket", "my-org", queryApi, converter)
+                select s;
+            Console.WriteLine("==== Select ALL ====");
+            query.ToList().ForEach(it => Console.WriteLine(it.ToString()));
+
+            //
+            // Filter By Tag
+            //
+            query = from s in InfluxDBQueryable<DomainEntity>.Queryable("my-bucket", "my-org", queryApi, converter)
+                where s.SeriesId == Guid.Parse("7c9e6679-7425-40de-944b-e07fc1f90ae7")
+                select s;
+            Console.WriteLine("==== Filter by Tag ====");
+            query.ToList().ForEach(it => Console.WriteLine(it.ToString()));
+
+            //
+            // Use Take + Skip
+            //
+            query = (from s in InfluxDBQueryable<DomainEntity>.Queryable("my-bucket", "my-org", queryApi, converter)
+                select s)
+                .Take(1)
+                .Skip(1);
+            Console.WriteLine("==== Use Take + Skip ====");
+            query.ToList().ForEach(it => Console.WriteLine(it.ToString()));
+
+            //
+            // Use Time Range
+            //
+            query = from s in InfluxDBQueryable<DomainEntity>.Queryable("my-bucket", "my-org", queryApi, converter)
+                where s.Timestamp > time.AddMinutes(30) && s.Timestamp < time.AddHours(3)
+                select s;
+            Console.WriteLine("==== Use Time Range ====");
+            query.ToList().ForEach(it => Console.WriteLine(it.ToString()));
+            
+            //
+            // Use Any
+            //
+            query = from s in InfluxDBQueryable<DomainEntity>.Queryable("my-bucket", "my-org", queryApi, converter)
+                where s.Properties.Any(a => a.Name == "width" && a.Value == "160")
+                select s;
+            Console.WriteLine("====  Use Any ====");
+            query.ToList().ForEach(it => Console.WriteLine(it.ToString()));
 
             client.Dispose();
         }

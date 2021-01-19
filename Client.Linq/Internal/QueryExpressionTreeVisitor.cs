@@ -53,7 +53,7 @@ namespace InfluxDB.Client.Linq.Internal
         {
             if (subQuery.QueryModel.ResultOperators.All(p => p is AnyResultOperator))
             {
-                var query = new QueryAggregator(true);
+                var query = new QueryAggregator();
 
                 var modelVisitor = new InfluxDBQueryVisitor(_context.Clone(query));
                 modelVisitor.VisitQueryModel(subQuery.QueryModel);

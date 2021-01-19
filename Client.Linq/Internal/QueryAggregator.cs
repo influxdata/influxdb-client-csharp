@@ -12,13 +12,11 @@ namespace InfluxDB.Client.Linq.Internal
         private string _rangeStopAssignment;
         private string _limitNAssignment;
         private string _limitOffsetAssignment;
-        private readonly bool _subQuery;
         private readonly List<string> _filters;
         private readonly List<(string, string)> _orders;
 
-        internal QueryAggregator(bool subQuery = false)
+        internal QueryAggregator()
         {
-            _subQuery = subQuery;
             _filters = new List<string>();
             _orders = new List<(string, string)>();
         }
@@ -95,11 +93,6 @@ namespace InfluxDB.Client.Linq.Internal
             if (filters.Length == 0)
             {
                 return null;
-            }
-
-            if (_subQuery)
-            {
-                return filters;
             }
 
             var filter = new StringBuilder();
