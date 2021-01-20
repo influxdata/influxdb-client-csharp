@@ -112,7 +112,7 @@ namespace Examples
             }
 
             /// <summary>
-            /// Resolve type of Member.
+            /// How the Domain Object property is mapped into InfluxDB schema. Is it Timestamp, Tag, ...?
             /// </summary>
             public MemberType ResolveMemberType(MemberInfo memberInfo)
             {
@@ -132,7 +132,7 @@ namespace Examples
             }
 
             /// <summary>
-            ///  Get Name of Column for generate Linq Flux query.
+            /// How your property is named in InfluxDB.
             /// </summary>
             public string GetColumnName(MemberInfo memberInfo)
             {
@@ -148,7 +148,7 @@ namespace Examples
             }
 
             /// <summary>
-            /// Return name for named Field.
+            /// Return name for flattened properties.
             /// </summary>
             public string GetNamedFieldName(MemberInfo memberInfo, object value)
             {

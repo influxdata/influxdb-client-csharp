@@ -51,7 +51,8 @@ In the following examples we assume that the `Sensor` entity is defined as:
 ```c#
 class Sensor
 {
-    [Column("sensor_id", IsTag = true)] public string SensorId { get; set; }
+    [Column("sensor_id", IsTag = true)] 
+    public string SensorId { get; set; }
 
     /// <summary>
     /// "production" or "testing"
@@ -65,7 +66,8 @@ class Sensor
     [Column("data")]
     public float Value { get; set; }
 
-    [Column(IsTimestamp = true)] public DateTime Timestamp { get; set; }
+    [Column(IsTimestamp = true)] 
+    public DateTime Timestamp { get; set; }
 }
 ```
 
@@ -114,7 +116,7 @@ and this is also way how following LINQ operators works.
 The LINQ query requires `bucket` and `organization` as a source of data. Both of them could be name or ID.
 
 ```c#
-var query = (from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApi())
+var query = (from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", queryApi)
     where s.SensorId == "id-1"
     where s.Value > 12
     where s.Timestamp > new DateTime(2019, 11, 16, 8, 20, 15, DateTimeKind.Utc)
@@ -151,7 +153,7 @@ As a solution you could shift your time with one nanoseconds.
 #### Example 1:
 
 ```c#
-var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApi())
+var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", queryApi)
     where s.Timestamp > new DateTime(2019, 11, 16, 8, 20, 15, DateTimeKind.Utc)
     where s.Timestamp < new DateTime(2021, 01, 10, 5, 10, 0, DateTimeKind.Utc)
     select s;
@@ -168,7 +170,7 @@ from(bucket: "my-bucket")
 #### Example 2:
 
 ```c#
-var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApi())
+var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", queryApi)
     where s.Timestamp >= new DateTime(2019, 11, 16, 8, 20, 15, DateTimeKind.Utc)
     where s.Timestamp <= new DateTime(2021, 01, 10, 5, 10, 0, DateTimeKind.Utc)
     select s;
@@ -185,7 +187,7 @@ from(bucket: "my-bucket")
 #### Example 3:
 
 ```c#
-var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApi())
+var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", queryApi)
     where s.Timestamp >= new DateTime(2019, 11, 16, 8, 20, 15, DateTimeKind.Utc)
     select s;
 
@@ -201,7 +203,7 @@ from(bucket: "my-bucket")
 #### Example 4:
 
 ```c#
-var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApi())
+var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", queryApi)
     where s.Timestamp <= new DateTime(2021, 01, 10, 5, 10, 0, DateTimeKind.Utc)
     select s;
 
@@ -217,7 +219,7 @@ from(bucket: "my-bucket")
 #### Example 5:
 
 ```c#
-var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApi())
+var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", queryApi)
     where s.Timestamp == new DateTime(2019, 11, 16, 8, 20, 15, DateTimeKind.Utc)
     select s;
 
@@ -267,7 +269,7 @@ from(bucket: "my-bucket")
 ### Less Than
 
 ```c#
-var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApi())
+var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", queryApi)
     where s.Value < 28
     select s;
 ```
@@ -283,7 +285,7 @@ from(bucket: "my-bucket")
 ### Less Than Or Equal
 
 ```c#
-var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApi())
+var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", queryApi)
     where s.Value <= 28
     select s;
 ```
@@ -299,7 +301,7 @@ from(bucket: "my-bucket")
 ### Greater Than
 
 ```c#
-var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApi())
+var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", queryApi)
     where s.Value > 28
     select s;
 ```
@@ -315,7 +317,7 @@ from(bucket: "my-bucket")
 ### Greater Than Or Equal
 
 ```c#
-var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApi())
+var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", queryApi)
     where s.Value >= 28
     select s;
 ```
@@ -331,7 +333,7 @@ from(bucket: "my-bucket")
 ### And
 
 ```c#
-var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApi())
+var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", queryApi)
     where s.Value >= 28 && s.SensorId != "id-1"
     select s;
 ```
@@ -347,7 +349,7 @@ from(bucket: "my-bucket")
 ### Or
 
 ```c#
-var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApi())
+var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", queryApi)
     where s.Value >= 28 || s.SensorId != "id-1"
     select s;
 ```
