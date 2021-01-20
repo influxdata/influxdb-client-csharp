@@ -364,12 +364,17 @@ from(bucket: "my-bucket")
 
 ### Any
 
-Entity:
+The following code demonstrates how to use `Any` to determine whether a collection contains any elements.
+By default the `InfluxDB.Client` doesn't supports to store a subcollection in your DomainObject.
+
+Imagine that you have following entities:
 
 ```c#
 class SensorCustom
 {
     public Guid Id { get; set; }
+    
+    public float Value { get; set; }
     
     public DateTimeOffset Time { get; set; }
     
@@ -381,6 +386,79 @@ class SensorAttribute
     public string Name { get; set; }
     public string Value { get; set; }
 }
+```
+
+To be able to store `SensorCustom` entity in InfluxDB and retrieve it from database you should implement [IInfluxDBEntityConverter](/Client/IInfluxDBEntityConverter.cs). 
+The converter tells to the Client how to map DomainObject into [PointData](/Client/Writes/PointData.cs) and how to map [FluxRecord](/Client.Core/Flux/Domain/FluxRecord.cs) to DomainObject.
+
+Entity Converter:
+
+```c#
+private class SensorEntityConverter : IInfluxDBEntityConverter
+{
+    public T ConvertToEntity<T>(FluxRecord fluxRecord)
+    {
+        if (typeof(T) != typeof(SensorCustom))
+        {
+            throw new NotSupportedException($"This converter doesn't supports: {typeof(SensorCustom)}");
+        }
+
+        var customEntity = new SensorCustom
+        {
+            SeriesId = Guid.Parse(Convert.ToString(fluxRecord.GetValueByKey("series_id"))!),
+            Value = Convert.ToDouble(fluxRecord.GetValueByKey("data")),
+            Timestamp = fluxRecord.GetTime().GetValueOrDefault().ToDateTimeUtc(),
+            Attributes = new List<SensorAttribute>()
+        };
+        
+        foreach (var (key, value) in fluxRecord.Values)
+        {
+            if (key.StartsWith("property_"))
+            {
+                var attribute = new SensorAttribute
+                {
+                    Name = key.Replace("property_", string.Empty), Value = Convert.ToString(value)
+                };
+                
+                customEntity.Attributes.Add(attribute);
+            }
+        }
+
+        return (T) Convert.ChangeType(customEntity, typeof(T));
+    }
+
+    public PointData ConvertToPointData<T>(T entity, WritePrecision precision)
+    {
+        if (!(entity is SensorCustom ce))
+        {
+            throw new NotSupportedException($"This converter doesn't supports: {typeof(SensorCustom)}");
+        }
+
+        var point = PointData
+            .Measurement("custom_measurement")
+            .Tag("series_id", ce.SeriesId.ToString())
+            .Field("data", ce.Value)
+            .Timestamp(ce.Timestamp, precision);
+
+        foreach (var attribute in ce.Attributes ?? new List<SensorAttribute>())
+        {
+            point = point.Field($"property_{attribute.Name}", attribute.Value);
+        }
+
+        return point;
+    }
+}
+```
+
+The `Converter` should be pass to [QueryApi](/Client/QueryApi.cs) or [WriteApi](/Client/WriteApi.cs) by:
+
+```c#
+// Create Converter
+var converter = new SensorEntityConverter();
+
+// Get Query and Write API
+var queryApi = client.GetQueryApi(converter);
+var writeApi = client.GetWriteApi(converter);
 ```
 
 Name Resolver:

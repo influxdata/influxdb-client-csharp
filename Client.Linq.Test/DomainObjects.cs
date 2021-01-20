@@ -41,6 +41,8 @@ namespace Client.Linq.Test
     {
         public Guid Id { get; set; }
         
+        public float Value { get; set; }
+        
         public DateTimeOffset Time { get; set; }
         
         public virtual ICollection<SensorAttribute> Attributes { get; set; }
