@@ -679,6 +679,6 @@ var query = (from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org"
     .Take(2)
     .Skip(2);
     
-Console.WriteLine("==== Debug LINQ Queryable results ====");
+Console.WriteLine("==== Debug LINQ Queryable Flux output ====");
 Console.WriteLine(((InfluxDBQueryable<Sensor>) query).ToDebugQuery()._Query);
 ```

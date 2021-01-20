@@ -290,7 +290,7 @@ namespace Examples
             //
             // Debug Query
             //
-            Console.WriteLine("==== Debug LINQ Queryable results ====");
+            Console.WriteLine("==== Debug LINQ Queryable Flux output ====");
             Console.WriteLine(((InfluxDBQueryable<DomainEntity>) query).ToDebugQuery()._Query);
             
             client.Dispose();
