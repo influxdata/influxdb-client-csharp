@@ -374,7 +374,7 @@ class SensorCustom
 {
     public Guid Id { get; set; }
     
-    public float Value { get; set; }
+    public float Data { get; set; }
     
     public DateTimeOffset Time { get; set; }
     
@@ -412,7 +412,7 @@ private class SensorEntityConverter : IInfluxDBEntityConverter
         var customEntity = new SensorCustom
         {
             Id = Guid.Parse(Convert.ToString(fluxRecord.GetValueByKey("series_id"))!),
-            Value = Convert.ToDouble(fluxRecord.GetValueByKey("data")),
+            Data = Convert.ToDouble(fluxRecord.GetValueByKey("data")),
             Time = fluxRecord.GetTime().GetValueOrDefault().ToDateTimeUtc(),
             Attributes = new List<SensorAttribute>()
         };
@@ -452,7 +452,7 @@ private class SensorEntityConverter : IInfluxDBEntityConverter
         var point = PointData
             .Measurement("custom_measurement")
             .Tag("series_id", ce.Id.ToString())
-            .Field("data", ce.Value)
+            .Field("data", ce.Data)
             .Timestamp(ce.Time, precision);
 
         //
@@ -479,13 +479,22 @@ var queryApi = client.GetQueryApi(converter);
 var writeApi = client.GetWriteApi(converter);
 ```
 
-Name Resolver:
+The LINQ provider needs to know how properties of `DomainObject` are stored in InfluxDB - their name and type (tag, field, timestamp). 
+If you use a [IInfluxDBEntityConverter](/Client/IInfluxDBEntityConverter.cs) instead of [InfluxDB Attributes](/Client.Core/Attributes.cs) you should implement [IMemberNameResolver](/Client.Linq/IMemberNameResolver.cs):
+
+Member Resolver:
 
 ```c#
-private class MemberNameResolver: IMemberNameResolver
+private class SensorMemberResolver: IMemberNameResolver
 {
+    //
+    // Tell to LINQ providers how is property of DomainObject mapped
+    //
     public MemberType ResolveMemberType(MemberInfo memberInfo)
     {
+        //
+        // Mapping of subcollection
+        //
         if (memberInfo.DeclaringType == typeof(SensorAttribute))
         {
             return memberInfo.Name switch
@@ -496,6 +505,9 @@ private class MemberNameResolver: IMemberNameResolver
             };
         }
 
+        //
+        // Mapping of "root" domain
+        //
         return memberInfo.Name switch
         {
             "Time" => MemberType.Timestamp,
@@ -504,11 +516,22 @@ private class MemberNameResolver: IMemberNameResolver
         };
     }
 
+    //
+    // Tell to LINQ provider how is property of DomainObject named 
+    //
     public string GetColumnName(MemberInfo memberInfo)
     {
-        return memberInfo.Name;
+        return memberInfo.Name switch
+        {
+            "Id" => "series_id",
+            "Data" => "data",
+            _ => memberInfo.Name
+        };
     }
 
+    //
+    // Tell to LINQ provider how is named property that is flattened
+    //
     public string GetNamedFieldName(MemberInfo memberInfo, object value)
     {
         return "attribute_" + Convert.ToString(value);
@@ -516,8 +539,11 @@ private class MemberNameResolver: IMemberNameResolver
 }
 ```
 
-LINQ:
+Now We are able to provide a required information to the LINQ provider by `memberResolver` parameter:
+
 ```c#
+var memberResolver = new SensorMemberResolver();
+
 var query = from s in InfluxDBQueryable<SensorCustom>.Queryable("my-bucket", "my-org", queryApi, memberResolver)
     where s.Attributes.Any(a => a.Name == "quality" && a.Value == "good")
     select s;
@@ -531,6 +557,8 @@ from(bucket: "my-bucket")
     |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value") 
     |> filter(fn: (r) => (r["attribute_quality"] == "good"))
 ```
+
+For more info see [CustomDomainConverter](/Examples/CustomDomainConverter.cs#L54) example.
 
 ### Take
 
