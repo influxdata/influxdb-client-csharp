@@ -480,15 +480,14 @@ var writeApi = client.GetWriteApi(converter);
 ```
 
 The LINQ provider needs to know how properties of `DomainObject` are stored in InfluxDB - their name and type (tag, field, timestamp). 
-If you use a [IInfluxDBEntityConverter](/Client/IInfluxDBEntityConverter.cs) instead of [InfluxDB Attributes](/Client.Core/Attributes.cs) you should implement [IMemberNameResolver](/Client.Linq/IMemberNameResolver.cs):
 
-Member Resolver:
+If you use a [IInfluxDBEntityConverter](/Client/IInfluxDBEntityConverter.cs) instead of [InfluxDB Attributes](/Client.Core/Attributes.cs) you should implement [IMemberNameResolver](/Client.Linq/IMemberNameResolver.cs):
 
 ```c#
 private class SensorMemberResolver: IMemberNameResolver
 {
     //
-    // Tell to LINQ providers how is property of DomainObject mapped
+    // Tell to LINQ providers how is property of DomainObject mapped - Tag, Field, Timestamp, ... ?
     //
     public MemberType ResolveMemberType(MemberInfo memberInfo)
     {
