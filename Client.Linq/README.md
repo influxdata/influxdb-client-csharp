@@ -636,4 +636,4 @@ var query = from s in InfluxDBQueryable<SensorCustom>.Queryable("my-bucket", "my
     select s;
 ```
 
-for more details see this example: [CustomDomainConverter](/Examples/CustomDomainConverter.cs#L54).
+for more details see [Any](#any) operator and for full example see: [CustomDomainConverter](/Examples/CustomDomainConverter.cs#L54).
