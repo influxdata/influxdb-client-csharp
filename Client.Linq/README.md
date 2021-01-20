@@ -411,7 +411,7 @@ private class SensorEntityConverter : IInfluxDBEntityConverter
         //
         var customEntity = new SensorCustom
         {
-            SeriesId = Guid.Parse(Convert.ToString(fluxRecord.GetValueByKey("series_id"))!),
+            Id = Guid.Parse(Convert.ToString(fluxRecord.GetValueByKey("series_id"))!),
             Value = Convert.ToDouble(fluxRecord.GetValueByKey("data")),
             Time = fluxRecord.GetTime().GetValueOrDefault().ToDateTimeUtc(),
             Attributes = new List<SensorAttribute>()
@@ -451,7 +451,7 @@ private class SensorEntityConverter : IInfluxDBEntityConverter
         //
         var point = PointData
             .Measurement("custom_measurement")
-            .Tag("series_id", ce.SeriesId.ToString())
+            .Tag("series_id", ce.Id.ToString())
             .Field("data", ce.Value)
             .Timestamp(ce.Time, precision);
 
@@ -468,7 +468,7 @@ private class SensorEntityConverter : IInfluxDBEntityConverter
 }
 ```
 
-The `Converter` should be pass to [QueryApi](/Client/QueryApi.cs) or [WriteApi](/Client/WriteApi.cs) by:
+The `Converter` could be passed to [QueryApi](/Client/QueryApi.cs) or [WriteApi](/Client/WriteApi.cs) by:
 
 ```c#
 // Create Converter
