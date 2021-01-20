@@ -364,8 +364,8 @@ from(bucket: "my-bucket")
 
 ### Any
 
-The following code demonstrates how to use `Any` to determine whether a collection contains any elements.
-By default the `InfluxDB.Client` doesn't supports to store a subcollection in your DomainObject.
+The following code demonstrates how to use the `Any` operator to determine whether a collection contains any elements.
+By default the `InfluxDB.Client` doesn't supports to store a subcollection in your `DomainObject`.
 
 Imagine that you have following entities:
 
@@ -389,13 +389,16 @@ class SensorAttribute
 ```
 
 To be able to store `SensorCustom` entity in InfluxDB and retrieve it from database you should implement [IInfluxDBEntityConverter](/Client/IInfluxDBEntityConverter.cs). 
-The converter tells to the Client how to map DomainObject into [PointData](/Client/Writes/PointData.cs) and how to map [FluxRecord](/Client.Core/Flux/Domain/FluxRecord.cs) to DomainObject.
+The converter tells to the Client how to map `DomainObject` into [PointData](/Client/Writes/PointData.cs) and how to map [FluxRecord](/Client.Core/Flux/Domain/FluxRecord.cs) to `DomainObject`.
 
 Entity Converter:
 
 ```c#
 private class SensorEntityConverter : IInfluxDBEntityConverter
 {
+    //
+    // Parse incoming FluxRecord to DomainObject
+    //
     public T ConvertToEntity<T>(FluxRecord fluxRecord)
     {
         if (typeof(T) != typeof(SensorCustom))
@@ -403,16 +406,22 @@ private class SensorEntityConverter : IInfluxDBEntityConverter
             throw new NotSupportedException($"This converter doesn't supports: {typeof(SensorCustom)}");
         }
 
+        //
+        // Create SensorCustom entity and parse `SeriesId`, `Value` and `Time`
+        //
         var customEntity = new SensorCustom
         {
             SeriesId = Guid.Parse(Convert.ToString(fluxRecord.GetValueByKey("series_id"))!),
             Value = Convert.ToDouble(fluxRecord.GetValueByKey("data")),
-            Timestamp = fluxRecord.GetTime().GetValueOrDefault().ToDateTimeUtc(),
+            Time = fluxRecord.GetTime().GetValueOrDefault().ToDateTimeUtc(),
             Attributes = new List<SensorAttribute>()
         };
         
         foreach (var (key, value) in fluxRecord.Values)
         {
+            //
+            // Parse SubCollection values
+            //
             if (key.StartsWith("property_"))
             {
                 var attribute = new SensorAttribute
@@ -427,6 +436,9 @@ private class SensorEntityConverter : IInfluxDBEntityConverter
         return (T) Convert.ChangeType(customEntity, typeof(T));
     }
 
+    //
+    // Convert DomainObject into PointData
+    //
     public PointData ConvertToPointData<T>(T entity, WritePrecision precision)
     {
         if (!(entity is SensorCustom ce))
@@ -434,12 +446,18 @@ private class SensorEntityConverter : IInfluxDBEntityConverter
             throw new NotSupportedException($"This converter doesn't supports: {typeof(SensorCustom)}");
         }
 
+        //
+        // Map `SeriesId`, `Value` and `Time` to Tag, Field and Timestamp
+        //
         var point = PointData
             .Measurement("custom_measurement")
             .Tag("series_id", ce.SeriesId.ToString())
             .Field("data", ce.Value)
-            .Timestamp(ce.Timestamp, precision);
+            .Timestamp(ce.Time, precision);
 
+        //
+        // Map subattributes to Fields
+        //
         foreach (var attribute in ce.Attributes ?? new List<SensorAttribute>())
         {
             point = point.Field($"property_{attribute.Name}", attribute.Value);
