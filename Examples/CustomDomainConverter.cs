@@ -284,9 +284,15 @@ namespace Examples
             query = from s in InfluxDBQueryable<DomainEntity>.Queryable("my-bucket", "my-org", queryApi, converter)
                 where s.Properties.Any(a => a.Name == "width" && a.Value == "160")
                 select s;
-            Console.WriteLine("====  Use Any ====");
+            Console.WriteLine("==== Use Any ====");
             query.ToList().ForEach(it => Console.WriteLine(it.ToString()));
 
+            //
+            // Debug Query
+            //
+            Console.WriteLine("==== Debug LINQ Queryable results ====");
+            Console.WriteLine(((InfluxDBQueryable<DomainEntity>) query).ToDebugQuery()._Query);
+            
             client.Dispose();
         }
     }

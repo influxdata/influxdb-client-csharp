@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using System.Linq.Expressions;
 using InfluxDB.Client.Core;
@@ -56,6 +57,24 @@ namespace InfluxDB.Client.Linq
         /// <param name="expression"></param>
         public InfluxDBQueryable(IQueryProvider provider, Expression expression) : base(provider, expression)
         {
+        }
+
+        /// <summary>
+        /// Create a <see cref="Api.Domain.Query"/> object that will be used for Querying.
+        /// </summary>
+        /// <returns>Query that will be used to Querying</returns>
+        public Api.Domain.Query ToDebugQuery()
+        {
+            var provider = Provider as DefaultQueryProvider;
+            var executor = provider?.Executor as InfluxDBQueryExecutor;
+            
+            if (executor == null)
+                throw new NotSupportedException("InfluxDBQueryable should use InfluxDBQueryExecutor");
+
+            var parsedQuery = provider.QueryParser.GetParsedQuery(Expression);
+            var generateQuery = executor.GenerateQuery(parsedQuery);
+
+            return generateQuery;
         }
 
         private static IQueryExecutor CreateExecutor(string bucket, string org, QueryApi queryApi, IMemberNameResolver memberResolver)

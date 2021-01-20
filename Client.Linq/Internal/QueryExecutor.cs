@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using InfluxDB.Client.Api.Domain;
 using Remotion.Linq;
 
 [assembly: InternalsVisibleTo("Client.Linq.Test, PublicKey=002400000480000094000000060200000024000052534131" +
@@ -59,11 +60,23 @@ namespace InfluxDB.Client.Linq.Internal
         /// </summary>
         public IEnumerable<T> ExecuteCollection<T>(QueryModel queryModel)
         {
+            var query = GenerateQuery(queryModel);
+
+            var task = _queryApi.QueryAsync<T>(query, _org);
+            return task.GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Create a <see cref="Api.Domain.Query"/> object that will be used for Querying.
+        /// </summary>
+        /// <param name="queryModel">Expression Tree of LINQ Query</param>
+        /// <returns>Query to Invoke</returns>
+        internal Query GenerateQuery(QueryModel queryModel)
+        {
             var visitor = new InfluxDBQueryVisitor(_bucket, _memberResolver);
             visitor.VisitQueryModel(queryModel);
-
-            var task = _queryApi.QueryAsync<T>(visitor.GenerateQuery(), _org);
-            return task.GetAwaiter().GetResult();
+            
+            return visitor.GenerateQuery();
         }
     }
 }

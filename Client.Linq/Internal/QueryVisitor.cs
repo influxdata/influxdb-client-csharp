@@ -66,7 +66,7 @@ namespace InfluxDB.Client.Linq.Internal
 
             var expressions = GetExpressions(whereClause.Predicate, whereClause).ToList();
             
-            // from
+            // range
             foreach (var expressionPart in expressions.Where(it => it is TimeRange))
             {
                 var timeRange = (TimeRange) expressionPart;

@@ -22,6 +22,7 @@ The library supports to use a LINQ expression to query the InfluxDB.
     - [Skip](#skip)
     - [OrderBy](#orderby)
 - [Domain Converter](#domain-converter)
+- [How to debug output Flux Query](#how-to-debug-output-flux-query)
 
 ## How to start
 
@@ -30,7 +31,7 @@ First, add the library as a dependency for your project:
 ```bash
 # For actual version please check: https://www.nuget.org/packages/InfluxDB.Client.Linq/
 
-dotnet add package InfluxDB.Client.Linq --version 1.15.0-dev.linq.5
+dotnet add package InfluxDB.Client.Linq --version 1.15.0-dev.linq.6
 ```
 
 Next, you should add additional using statement to your program:
@@ -664,3 +665,20 @@ var query = from s in InfluxDBQueryable<SensorCustom>.Queryable("my-bucket", "my
 ```
 
 for more details see [Any](#any) operator and for full example see: [CustomDomainConverter](/Examples/CustomDomainConverter.cs#L54).
+
+## How to debug output Flux Query
+
+```c#
+var query = (from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _queryApi)
+        where s.SensorId == "id-1"
+        where s.Value > 12
+        where s.Timestamp > new DateTime(2019, 11, 16, 8, 20, 15, DateTimeKind.Utc)
+        where s.Timestamp < new DateTime(2021, 01, 10, 5, 10, 0, DateTimeKind.Utc)
+        orderby s.Timestamp
+        select s)
+    .Take(2)
+    .Skip(2);
+    
+Console.WriteLine("==== Debug LINQ Queryable results ====");
+Console.WriteLine(((InfluxDBQueryable<Sensor>) query).ToDebugQuery()._Query);
+```
