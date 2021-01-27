@@ -33,6 +33,7 @@
 
     <ItemGroup>
       <PackageReference Include="Remotion.Linq" Version="2.2.0" />
+      <PackageReference Include="System.Linq.Async" Version="4.0.0" />
     </ItemGroup>
 
 </Project>

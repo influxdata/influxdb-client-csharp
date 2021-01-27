@@ -62,8 +62,7 @@ namespace InfluxDB.Client.Linq.Internal
         {
             var query = GenerateQuery(queryModel);
 
-            var task = _queryApi.QueryAsync<T>(query, _org);
-            return task.GetAwaiter().GetResult();
+            return _queryApi.QueryAsyncEnumerable<T>(query, _org, default).ToEnumerable();
         }
 
         /// <summary>
