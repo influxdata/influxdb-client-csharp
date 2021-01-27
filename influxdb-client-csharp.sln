@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# 
+#
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client.Core", "Client.Core\Client.Core.csproj", "{DEE331F3-8BD4-42CA-AD7C-E5F8A9F14C29}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client.Core.Test", "Client.Core.Test\Client.Core.Test.csproj", "{576AB803-A7F9-447C-B4EC-802D6D500F02}"
@@ -18,6 +18,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client.Linq", "Client.Linq\Client.Linq.csproj", "{70745207-00A5-4C80-A792-CFDF5FDA48DD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client.Linq.Test", "Client.Linq.Test\Client.Linq.Test.csproj", "{38A179EB-6843-49D0-A751-7EC668C94FE6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Examples.WebApi", "Examples.WebApi\Examples.WebApi.csproj", "{AC40AAB1-D2C5-43EE-8F33-56A417711E96}"
 EndProject
 Global
 	GlobalSection(NestedProjects) = preSolution
@@ -139,5 +141,17 @@ Global
 		{38A179EB-6843-49D0-A751-7EC668C94FE6}.Release|x64.Build.0 = Release|Any CPU
 		{38A179EB-6843-49D0-A751-7EC668C94FE6}.Release|x86.ActiveCfg = Release|Any CPU
 		{38A179EB-6843-49D0-A751-7EC668C94FE6}.Release|x86.Build.0 = Release|Any CPU
+		{AC40AAB1-D2C5-43EE-8F33-56A417711E96}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC40AAB1-D2C5-43EE-8F33-56A417711E96}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC40AAB1-D2C5-43EE-8F33-56A417711E96}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{AC40AAB1-D2C5-43EE-8F33-56A417711E96}.Debug|x64.Build.0 = Debug|Any CPU
+		{AC40AAB1-D2C5-43EE-8F33-56A417711E96}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{AC40AAB1-D2C5-43EE-8F33-56A417711E96}.Debug|x86.Build.0 = Debug|Any CPU
+		{AC40AAB1-D2C5-43EE-8F33-56A417711E96}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC40AAB1-D2C5-43EE-8F33-56A417711E96}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC40AAB1-D2C5-43EE-8F33-56A417711E96}.Release|x64.ActiveCfg = Release|Any CPU
+		{AC40AAB1-D2C5-43EE-8F33-56A417711E96}.Release|x64.Build.0 = Release|Any CPU
+		{AC40AAB1-D2C5-43EE-8F33-56A417711E96}.Release|x86.ActiveCfg = Release|Any CPU
+		{AC40AAB1-D2C5-43EE-8F33-56A417711E96}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
