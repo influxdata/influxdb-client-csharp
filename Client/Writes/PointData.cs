@@ -95,6 +95,17 @@ namespace InfluxDB.Client.Writes
         }
 
         /// <summary>
+        /// Add a field with a <see cref="byte"/> value.
+        /// </summary>
+        /// <param name="name">the field name</param>
+        /// <param name="value">the field value</param>
+        /// <returns>this</returns>
+        public PointData Field(string name, byte value)
+        {
+            return PutField(name, value);
+        }
+
+        /// <summary>
         /// Add a field with a <see cref="float"/> value.
         /// </summary>
         /// <param name="name">the field name</param>
@@ -145,6 +156,17 @@ namespace InfluxDB.Client.Writes
         /// <param name="value">the field value</param>
         /// <returns>this</returns>
         public PointData Field(string name, ulong value)
+        {
+            return PutField(name, value);
+        }
+
+        /// <summary>
+        /// Add a field with a <see cref="uint"/> value.
+        /// </summary>
+        /// <param name="name">the field name</param>
+        /// <param name="value">the field value</param>
+        /// <returns>this</returns>
+        public PointData Field(string name, uint value)
         {
             return PutField(name, value);
         }
@@ -410,12 +432,16 @@ namespace InfluxDB.Client.Writes
 
                 if (value is double || value is float)
                 {
-                    sb.Append(((IConvertible)value).ToString(CultureInfo.InvariantCulture));
+                    sb.Append(((IConvertible) value).ToString(CultureInfo.InvariantCulture));
                 }
-                else if (value is byte || value is int || value is long || value is sbyte || value is short ||
-                         value is uint || value is ulong || value is ushort)
+                else if (value is uint || value is ulong || value is ushort)
                 {
-                    sb.Append(((IConvertible)value).ToString(CultureInfo.InvariantCulture));
+                    sb.Append(((IConvertible) value).ToString(CultureInfo.InvariantCulture));
+                    sb.Append('u');
+                }
+                else if (value is byte || value is int || value is long || value is sbyte || value is short)
+                {
+                    sb.Append(((IConvertible) value).ToString(CultureInfo.InvariantCulture));
                     sb.Append('i');
                 }
                 else if (value is bool b)

@@ -147,7 +147,7 @@ namespace InfluxDB.Client.Test
 
             var expected =
                 "h2o,location=europe boolean=false,byte=9i,decimal=25.6,double=250.69,float=35,integer=7i,long=1i," +
-                "point=13.3,sbyte=12i,short=8i,string=\"string value\",uint=11i,ulong=10i,ushort=13i";
+                "point=13.3,sbyte=12i,short=8i,string=\"string value\",uint=11u,ulong=10u,ushort=13u";
 
             Assert.AreEqual(expected, point.ToLineProtocol());
         }
@@ -416,5 +416,7 @@ namespace InfluxDB.Client.Test
 
             Assert.AreEqual("", point.ToLineProtocol());
         }
+        
+        
     }
 }

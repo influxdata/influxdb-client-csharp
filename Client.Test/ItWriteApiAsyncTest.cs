@@ -156,5 +156,27 @@ namespace InfluxDB.Client.Test
                 Assert.AreEqual(Instant.FromDateTimeUtc(dtDateTime.AddSeconds(ii)), record.GetTime());
             }
         }
+
+        [Test]
+        public async Task WriteULongValues()
+        {
+            Client.SetLogLevel(LogLevel.Body);
+            var pointData = PointData.Measurement("h2o")
+                .Tag("location", "coyote_creek")
+                .Field("max_ulong", ulong.MaxValue)
+                .Timestamp(9L, WritePrecision.S);
+            
+            await _writeApi.WritePointAsync(pointData);
+            
+            List<FluxTable> query = await Client.GetQueryApi().QueryAsync(
+                "from(bucket:\"" + _bucket.Name +
+                "\") |> range(start: 1970-01-01T00:00:00.000000001Z)",
+                _organization.Id);
+
+            Assert.AreEqual(1, query.Count);
+            Assert.AreEqual(1, query[0].Records.Count);
+            
+            Assert.AreEqual(ulong.MaxValue, query[0].Records[0].GetValue());
+        }
     }
 }
