@@ -280,8 +280,6 @@ namespace InfluxDB.Client
         ///
         /// <para>
         /// NOTE: This method is not intended for large query results.
-        /// Use <see cref="QueryAsync{T}(string,string,System.Action{InfluxDB.Client.Core.ICancellable,T},System.Action{System.Exception},System.Action)"/>
-        /// for large data streaming.
         /// </para>
         /// </summary>
         /// <param name="query">the flux query to execute</param>
