@@ -275,6 +275,36 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
+        /// Executes the Flux query against the InfluxDB 2.0 and synchronously map whole response
+        /// to list of object with given type.
+        ///
+        /// <para>
+        /// NOTE: This method is not intended for large query results.
+        /// Use <see cref="QueryAsync{T}(string,string,System.Action{InfluxDB.Client.Core.ICancellable,T},System.Action{System.Exception},System.Action)"/>
+        /// for large data streaming.
+        /// </para>
+        /// </summary>
+        /// <param name="query">the flux query to execute</param>
+        /// <param name="org">specifies the source organization</param>
+        /// <typeparam name="T">the type of measurement</typeparam>
+        /// <returns>Measurements which are matched the query</returns>
+        public List<T> QuerySync<T>(Query query, string org)
+        {
+            Arguments.CheckNotNull(query, nameof(query));
+            Arguments.CheckNonEmptyString(org, nameof(org));
+
+            var measurements = new List<T>();
+
+            var consumer = new FluxResponseConsumerPoco<T>((cancellable, poco) => { measurements.Add(poco); }, _converter);
+            
+            var requestMessage = CreateRequest(query, org);
+
+            QuerySync(requestMessage, consumer, ErrorConsumer, EmptyAction);
+
+            return measurements;
+        }
+
+        /// <summary>
         /// Executes the Flux query against the InfluxDB 2.0 and asynchronously stream <see cref="FluxRecord"/>
         /// to <see cref="onNext"/> consumer.
         /// </summary>
