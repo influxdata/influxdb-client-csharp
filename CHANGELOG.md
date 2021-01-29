@@ -1,4 +1,4 @@
-## 1.15.0 [unreleased]
+## 1.15.0 [2021-01-29]
 
 ### Bug Fixes
 1. [#143](https://github.com/influxdata/influxdb-client-csharp/pull/143): Added validation that a configuration is present when is client configured via file
