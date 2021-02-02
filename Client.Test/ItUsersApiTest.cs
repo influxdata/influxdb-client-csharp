@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using InfluxDB.Client.Core.Exceptions;
 using NUnit.Framework;
@@ -9,9 +10,12 @@ namespace InfluxDB.Client.Test
     public class ItUsersApiTest : AbstractItClientTest
     {
         [SetUp]
-        public new void SetUp()
+        public new async Task SetUp()
         {
             _usersApi = Client.GetUsersApi();
+            
+            foreach (var user in (await _usersApi.FindUsersAsync()).Where(user => user.Name.EndsWith("-IT")))
+                await _usersApi.DeleteUserAsync(user);
         }
 
         private UsersApi _usersApi;
