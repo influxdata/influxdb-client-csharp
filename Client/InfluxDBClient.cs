@@ -375,9 +375,9 @@ namespace InfluxDB.Client
         /// Get the health of an instance.
         /// </summary>
         /// <returns>health of an instance</returns>
-        public async Task<HealthCheck> HealthAsync()
+        public Task<HealthCheck> HealthAsync()
         {
-            return await GetHealthAsync(_healthService.GetHealthAsync());
+            return GetHealthAsync(_healthService.GetHealthAsync());
         }
 
         /// <summary>
@@ -404,11 +404,11 @@ namespace InfluxDB.Client
         /// <param name="onboarding">to setup defaults</param>
         /// <exception cref="HttpException">With status code 422 when an onboarding has already been completed</exception>
         /// <returns>defaults for first run</returns>
-        public async Task<OnboardingResponse> OnboardingAsync(OnboardingRequest onboarding)
+        public Task<OnboardingResponse> OnboardingAsync(OnboardingRequest onboarding)
         {
             Arguments.CheckNotNull(onboarding, nameof(onboarding));
 
-            return await _setupService.PostSetupAsync(onboarding);
+            return _setupService.PostSetupAsync(onboarding);
         }
 
         /// <summary>
@@ -431,17 +431,14 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNotNull(task, nameof(task));
 
-            return await task
-                .ContinueWith(t =>
-                {
-                    if (t.Exception != null)
-                    {
-                        return new HealthCheck("influxdb", t.Exception?.Message, default(List<HealthCheck>),
-                            HealthCheck.StatusEnum.Fail);
-                    }
-
-                    return t.Result;
-                }, CancellationToken.None);
+            try
+            {
+                return await task;
+            }
+            catch (Exception e)
+            {
+                return new HealthCheck("influxdb", e.Message, default, HealthCheck.StatusEnum.Fail);
+            }
         }
     }
 }
