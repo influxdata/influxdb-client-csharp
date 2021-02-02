@@ -32,7 +32,7 @@ namespace InfluxDB.Client.Core.Internal
             RestClient = restClient;
         }
 
-        protected async Task Query(RestRequest query, FluxCsvParser.IFluxResponseConsumer responseConsumer,
+        protected Task Query(RestRequest query, FluxCsvParser.IFluxResponseConsumer responseConsumer,
             Action<Exception> onError,
             Action onComplete)
         {
@@ -48,10 +48,10 @@ namespace InfluxDB.Client.Core.Internal
                 }
             }
 
-            await Query(query, Consumer, onError, onComplete);
+            return Query(query, Consumer, onError, onComplete);
         }
 
-        protected async Task QueryRaw(RestRequest query,
+        protected Task QueryRaw(RestRequest query,
             Action<ICancellable, string> onResponse,
             Action<Exception> onError,
             Action onComplete)
@@ -68,7 +68,7 @@ namespace InfluxDB.Client.Core.Internal
                 }
             }
 
-            await Query(query, Consumer, onError, onComplete);
+            return Query(query, Consumer, onError, onComplete);
         }
 
         protected async Task Query(RestRequest query, Action<ICancellable, Stream> consumer,
