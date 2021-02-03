@@ -58,11 +58,11 @@ namespace InfluxDB.Client.Test
         [Test]
         public void CloneSourceNotFound()
         {
-            var ioe = Assert.ThrowsAsync<AggregateException>(async () =>
+            var ioe = Assert.ThrowsAsync<HttpException>(async () =>
                 await _sourcesApi.CloneSourceAsync(GenerateName("bucket"), "020f755c3d082000"));
 
-            Assert.AreEqual("source not found", ioe.InnerException.Message);
-            Assert.AreEqual(typeof(HttpException), ioe.InnerException.GetType());
+            Assert.AreEqual("source not found", ioe.Message);
+            Assert.AreEqual(typeof(HttpException), ioe.GetType());
         }
 
         [Test]

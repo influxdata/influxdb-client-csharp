@@ -1,11 +1,10 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using InfluxDB.Client.Api.Domain;
 using InfluxDB.Client.Core.Exceptions;
 using InfluxDB.Client.Domain;
 using NUnit.Framework;
-using Task = System.Threading.Tasks.Task;
 
 namespace InfluxDB.Client.Test
 {
@@ -66,11 +65,10 @@ namespace InfluxDB.Client.Test
         [Test]
         public void CloneBucketNotFound()
         {
-            var ioe = Assert.ThrowsAsync<AggregateException>(async () =>
+            var ioe = Assert.ThrowsAsync<HttpException>(async () =>
                 await _bucketsApi.CloneBucketAsync(GenerateName("bucket"), "020f755c3c082000"));
 
-            Assert.AreEqual(typeof(HttpException), ioe.InnerException?.GetType());
-            Assert.AreEqual("bucket not found", ioe.InnerException?.Message);
+            Assert.AreEqual("bucket not found", ioe.Message);
         }
 
         [Test]

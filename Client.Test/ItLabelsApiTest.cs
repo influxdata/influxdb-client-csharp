@@ -1,10 +1,9 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using InfluxDB.Client.Api.Domain;
 using InfluxDB.Client.Core.Exceptions;
 using NUnit.Framework;
-using Task = System.Threading.Tasks.Task;
 
 namespace InfluxDB.Client.Test
 {
@@ -47,11 +46,11 @@ namespace InfluxDB.Client.Test
         public void CloneLabelNotFound()
         {
             var exception =
-                Assert.ThrowsAsync<AggregateException>(async () => await _labelsApi.CloneLabelAsync(GenerateName("bucket"), "020f755c3c082000"));
+                Assert.ThrowsAsync<HttpException>(async () => await _labelsApi.CloneLabelAsync(GenerateName("bucket"), "020f755c3c082000"));
 
             Assert.IsNotNull(exception);
-            Assert.AreEqual(typeof(HttpException), exception.InnerException.GetType());
-            Assert.AreEqual("label not found", exception.InnerException.Message);
+            Assert.AreEqual(typeof(HttpException), exception.GetType());
+            Assert.AreEqual("label not found", exception.Message);
         }
 
         [Test]

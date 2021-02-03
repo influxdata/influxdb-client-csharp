@@ -29,7 +29,7 @@ namespace InfluxDB.Client
         /// <param name="endpoint">The endpoint to use for notification.</param>
         /// <param name="orgId">The ID of the organization that owns this notification rule.</param>
         /// <returns>Notification rule created</returns>
-        public async Task<SlackNotificationRule> CreateSlackRuleAsync(string name, string every, string messageTemplate,
+        public Task<SlackNotificationRule> CreateSlackRuleAsync(string name, string every, string messageTemplate,
             RuleStatusLevel status, SlackNotificationEndpoint endpoint, string orgId)
         {
             Arguments.CheckNonEmptyString(name, nameof(name));
@@ -39,7 +39,7 @@ namespace InfluxDB.Client
             Arguments.CheckNotNull(endpoint, nameof(endpoint));
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
 
-            return await CreateSlackRuleAsync(name, every, messageTemplate, status, new List<TagRule>(), endpoint,
+            return CreateSlackRuleAsync(name, every, messageTemplate, status, new List<TagRule>(), endpoint,
                 orgId);
         }
 
@@ -152,11 +152,11 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="rule">Notification rule to create</param>
         /// <returns>Notification rule created</returns>
-        public async Task<NotificationRule> CreateRuleAsync(NotificationRule rule)
+        public Task<NotificationRule> CreateRuleAsync(NotificationRule rule)
         {
             Arguments.CheckNotNull(rule, nameof(rule));
 
-            return await _service.CreateNotificationRuleAsync(rule);
+            return _service.CreateNotificationRuleAsync(rule);
         }
 
         /// <summary>
@@ -164,14 +164,14 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="rule">Notification rule update to apply</param>
         /// <returns>An updated notification rule</returns>
-        public async Task<NotificationRule> UpdateNotificationRuleAsync(NotificationRule rule)
+        public Task<NotificationRule> UpdateNotificationRuleAsync(NotificationRule rule)
         {
             Arguments.CheckNotNull(rule, nameof(rule));
 
             Enum.TryParse(rule.Status.ToString(), true,
                 out NotificationRuleUpdate.StatusEnum status);
 
-            return await UpdateNotificationRuleAsync(rule.Id,
+            return UpdateNotificationRuleAsync(rule.Id,
                 new NotificationRuleUpdate(rule.Name, rule.Description, status));
         }
 
@@ -181,12 +181,12 @@ namespace InfluxDB.Client
         /// <param name="ruleId">The notification rule ID.</param>
         /// <param name="update">Notification rule update to apply</param>
         /// <returns>An updated notification rule</returns>
-        public async Task<NotificationRule> UpdateNotificationRuleAsync(string ruleId, NotificationRuleUpdate update)
+        public Task<NotificationRule> UpdateNotificationRuleAsync(string ruleId, NotificationRuleUpdate update)
         {
             Arguments.CheckNonEmptyString(ruleId, nameof(ruleId));
             Arguments.CheckNotNull(update, nameof(update));
 
-            return await _service.PatchNotificationRulesIDAsync(ruleId, update);
+            return _service.PatchNotificationRulesIDAsync(ruleId, update);
         }
 
         /// <summary>
@@ -194,11 +194,11 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="rule">The notification rule</param>
         /// <returns></returns>
-        public async Task DeleteNotificationRuleAsync(NotificationRule rule)
+        public Task DeleteNotificationRuleAsync(NotificationRule rule)
         {
             Arguments.CheckNotNull(rule, nameof(rule));
 
-            await DeleteNotificationRuleAsync(rule.Id);
+            return DeleteNotificationRuleAsync(rule.Id);
         }
 
         /// <summary>
@@ -206,11 +206,11 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="ruleId">The notification rule ID</param>
         /// <returns></returns>
-        public async Task DeleteNotificationRuleAsync(string ruleId)
+        public Task DeleteNotificationRuleAsync(string ruleId)
         {
             Arguments.CheckNonEmptyString(ruleId, nameof(ruleId));
 
-            await _service.DeleteNotificationRulesIDAsync(ruleId);
+            return _service.DeleteNotificationRulesIDAsync(ruleId);
         }
 
         /// <summary>
@@ -218,11 +218,11 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="ruleId">The notification rule ID</param>
         /// <returns>The notification rule requested</returns>
-        public async Task<NotificationRule> FindNotificationRuleByIdAsync(string ruleId)
+        public Task<NotificationRule> FindNotificationRuleByIdAsync(string ruleId)
         {
             Arguments.CheckNonEmptyString(ruleId, nameof(ruleId));
 
-            return await _service.GetNotificationRulesIDAsync(ruleId);
+            return _service.GetNotificationRulesIDAsync(ruleId);
         }
 
         /// <summary>
@@ -234,7 +234,8 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
 
-            return (await FindNotificationRulesAsync(orgId, new FindOptions()))._NotificationRules;
+            var response = await FindNotificationRulesAsync(orgId, new FindOptions());
+            return response._NotificationRules;
         }
 
         /// <summary>
@@ -243,12 +244,12 @@ namespace InfluxDB.Client
         /// <param name="orgId">Only show notification rules that belong to a specific organization ID.</param>
         /// <param name="findOptions">find options</param>
         /// <returns></returns>
-        public async Task<NotificationRules> FindNotificationRulesAsync(string orgId, FindOptions findOptions)
+        public Task<NotificationRules> FindNotificationRulesAsync(string orgId, FindOptions findOptions)
         {
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
             Arguments.CheckNotNull(findOptions, nameof(findOptions));
 
-            return await _service.GetNotificationRulesAsync(orgId, offset: findOptions.Offset,
+            return _service.GetNotificationRulesAsync(orgId, offset: findOptions.Offset,
                 limit: findOptions.Limit);
         }
 
@@ -257,11 +258,11 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="rule">The notification rule.</param>
         /// <returns>A list of all labels for a notification rule</returns>
-        public async Task<List<Label>> GetLabelsAsync(NotificationRule rule)
+        public Task<List<Label>> GetLabelsAsync(NotificationRule rule)
         {
             Arguments.CheckNotNull(rule, nameof(rule));
 
-            return await GetLabelsAsync(rule.Id);
+            return GetLabelsAsync(rule.Id);
         }
 
         /**
@@ -280,7 +281,8 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(ruleId, nameof(ruleId));
 
-            return (await _service.GetNotificationRulesIDLabelsAsync(ruleId)).Labels;
+            var response = await _service.GetNotificationRulesIDLabelsAsync(ruleId);
+            return response.Labels;
         }
 
         /// <summary>
@@ -289,12 +291,12 @@ namespace InfluxDB.Client
         /// <param name="label">Label to add</param>
         /// <param name="rule">The notification rule.</param>
         /// <returns>The label was added to the notification rule</returns>
-        public async Task<Label> AddLabelAsync(Label label, NotificationRule rule)
+        public Task<Label> AddLabelAsync(Label label, NotificationRule rule)
         {
             Arguments.CheckNotNull(rule, nameof(rule));
             Arguments.CheckNotNull(label, nameof(label));
 
-            return await AddLabelAsync(label.Id, rule.Id);
+            return AddLabelAsync(label.Id, rule.Id);
         }
 
         /// <summary>
@@ -310,7 +312,8 @@ namespace InfluxDB.Client
 
             var mapping = new LabelMapping(labelId);
 
-            return (await _service.PostNotificationRuleIDLabelsAsync(ruleId, mapping)).Label;
+            var response = await _service.PostNotificationRuleIDLabelsAsync(ruleId, mapping);
+            return response.Label;
         }
 
         /// <summary>
@@ -318,12 +321,12 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="label">The label to delete.</param>
         /// <param name="rule">The notification rule.</param>
-        public async Task DeleteLabelAsync(Label label, NotificationRule rule)
+        public Task DeleteLabelAsync(Label label, NotificationRule rule)
         {
             Arguments.CheckNotNull(rule, nameof(rule));
             Arguments.CheckNotNull(label, nameof(label));
 
-            await DeleteLabelAsync(label.Id, rule.Id);
+            return DeleteLabelAsync(label.Id, rule.Id);
         }
 
         /// <summary>
@@ -331,15 +334,15 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="labelId">The ID of the label to delete.</param>
         /// <param name="ruleId">The notification rule ID.</param>
-        public async Task DeleteLabelAsync(string labelId, string ruleId)
+        public Task DeleteLabelAsync(string labelId, string ruleId)
         {
             Arguments.CheckNonEmptyString(ruleId, nameof(ruleId));
             Arguments.CheckNonEmptyString(labelId, nameof(labelId));
 
-            await _service.DeleteNotificationRulesIDLabelsIDAsync(ruleId, labelId);
+            return _service.DeleteNotificationRulesIDLabelsIDAsync(ruleId, labelId);
         }
 
-        private async Task<NotificationRule> CreateRuleAsync(string name, string every, RuleStatusLevel status,
+        private Task<NotificationRule> CreateRuleAsync(string name, string every, RuleStatusLevel status,
             List<TagRule> tagRules, NotificationEndpoint notificationEndpoint, string orgId, NotificationRule rule)
         {
             Arguments.CheckNotNull(rule, "rule");
@@ -352,7 +355,7 @@ namespace InfluxDB.Client
             rule.EndpointID = notificationEndpoint.Id;
             rule.Status = TaskStatusType.Active;
 
-            return await CreateRuleAsync(rule);
+            return CreateRuleAsync(rule);
         }
     }
 }

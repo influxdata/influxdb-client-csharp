@@ -122,12 +122,12 @@ namespace InfluxDB.Client.Test
         {
             Client.Dispose();
 
-            var ioe = Assert.ThrowsAsync<AggregateException>(async () =>
+            var ioe = Assert.ThrowsAsync<HttpException>(async () =>
                 await _usersApi.MeUpdatePasswordAsync("my-password-wrong", "my-password"));
 
             Assert.IsNotNull(ioe);
-            Assert.AreEqual("unauthorized access", ioe.InnerException.Message);
-            Assert.AreEqual(typeof(HttpException), ioe.InnerException.GetType());
+            Assert.AreEqual("unauthorized access", ioe.Message);
+            Assert.AreEqual(typeof(HttpException), ioe.GetType());
         }
 
         [Test]
@@ -191,11 +191,11 @@ namespace InfluxDB.Client.Test
         [Test]
         public void CloneUserNotFound()
         {
-            var ioe = Assert.ThrowsAsync<AggregateException>(async () =>
+            var ioe = Assert.ThrowsAsync<HttpException>(async () =>
                 await _usersApi.CloneUserAsync(GenerateName("bucket"), "020f755c3c082000"));
 
-            Assert.AreEqual("user not found", ioe.InnerException.Message);
-            Assert.AreEqual(typeof(HttpException), ioe.InnerException.GetType());
+            Assert.AreEqual("user not found", ioe.Message);
+            Assert.AreEqual(typeof(HttpException), ioe.GetType());
         }
     }
 }

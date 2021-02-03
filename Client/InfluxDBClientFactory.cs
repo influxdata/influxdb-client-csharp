@@ -136,7 +136,7 @@ namespace InfluxDB.Client
         /// <param name="org">the name of an organization</param>
         /// <param name="bucket">the name of a bucket</param>
         /// <returns>Created default user, bucket, org.</returns>
-        public static async Task<OnboardingResponse> Onboarding(string url, string username, string password,
+        public static Task<OnboardingResponse> Onboarding(string url, string username, string password,
             string org,
             string bucket)
         {
@@ -148,7 +148,7 @@ namespace InfluxDB.Client
 
             var onboarding = new OnboardingRequest(username, password, org, bucket);
 
-            return await Onboarding(url, onboarding);
+            return Onboarding(url, onboarding);
         }
 
         /// <summary>
