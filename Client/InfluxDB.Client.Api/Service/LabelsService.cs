@@ -467,7 +467,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
+                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -602,7 +602,7 @@ namespace InfluxDB.Client.Api.Service
         public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteLabelsIDAsyncWithHttpInfo (string labelID, string zapTraceSpan = null)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await DeleteLabelsIDAsyncWithIRestResponse(labelID, zapTraceSpan);
+            IRestResponse localVarResponse = await DeleteLabelsIDAsyncWithIRestResponse(labelID, zapTraceSpan).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -659,7 +659,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
+                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -776,7 +776,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
+                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -891,7 +891,7 @@ namespace InfluxDB.Client.Api.Service
         /// <returns>Task of LabelsResponse</returns>
         public async System.Threading.Tasks.Task<LabelsResponse> GetLabelsAsync (string zapTraceSpan = null, string orgID = null)
         {
-             ApiResponse<LabelsResponse> localVarResponse = await GetLabelsAsyncWithHttpInfo(zapTraceSpan, orgID);
+             ApiResponse<LabelsResponse> localVarResponse = await GetLabelsAsyncWithHttpInfo(zapTraceSpan, orgID).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -906,7 +906,7 @@ namespace InfluxDB.Client.Api.Service
         public async System.Threading.Tasks.Task<ApiResponse<LabelsResponse>> GetLabelsAsyncWithHttpInfo (string zapTraceSpan = null, string orgID = null)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await GetLabelsAsyncWithIRestResponse(zapTraceSpan, orgID);
+            IRestResponse localVarResponse = await GetLabelsAsyncWithIRestResponse(zapTraceSpan, orgID).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -960,7 +960,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
+                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -1083,7 +1083,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
+                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -1204,7 +1204,7 @@ namespace InfluxDB.Client.Api.Service
         /// <returns>Task of LabelResponse</returns>
         public async System.Threading.Tasks.Task<LabelResponse> GetLabelsIDAsync (string labelID, string zapTraceSpan = null)
         {
-             ApiResponse<LabelResponse> localVarResponse = await GetLabelsIDAsyncWithHttpInfo(labelID, zapTraceSpan);
+             ApiResponse<LabelResponse> localVarResponse = await GetLabelsIDAsyncWithHttpInfo(labelID, zapTraceSpan).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -1219,7 +1219,7 @@ namespace InfluxDB.Client.Api.Service
         public async System.Threading.Tasks.Task<ApiResponse<LabelResponse>> GetLabelsIDAsyncWithHttpInfo (string labelID, string zapTraceSpan = null)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await GetLabelsIDAsyncWithIRestResponse(labelID, zapTraceSpan);
+            IRestResponse localVarResponse = await GetLabelsIDAsyncWithIRestResponse(labelID, zapTraceSpan).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -1276,7 +1276,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
+                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -1426,7 +1426,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
+                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -1574,7 +1574,7 @@ namespace InfluxDB.Client.Api.Service
         /// <returns>Task of LabelResponse</returns>
         public async System.Threading.Tasks.Task<LabelResponse> PatchLabelsIDAsync (string labelID, LabelUpdate labelUpdate, string zapTraceSpan = null)
         {
-             ApiResponse<LabelResponse> localVarResponse = await PatchLabelsIDAsyncWithHttpInfo(labelID, labelUpdate, zapTraceSpan);
+             ApiResponse<LabelResponse> localVarResponse = await PatchLabelsIDAsyncWithHttpInfo(labelID, labelUpdate, zapTraceSpan).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -1590,7 +1590,7 @@ namespace InfluxDB.Client.Api.Service
         public async System.Threading.Tasks.Task<ApiResponse<LabelResponse>> PatchLabelsIDAsyncWithHttpInfo (string labelID, LabelUpdate labelUpdate, string zapTraceSpan = null)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await PatchLabelsIDAsyncWithIRestResponse(labelID, labelUpdate, zapTraceSpan);
+            IRestResponse localVarResponse = await PatchLabelsIDAsyncWithIRestResponse(labelID, labelUpdate, zapTraceSpan).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -1660,7 +1660,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
+                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -1794,7 +1794,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
+                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -1926,7 +1926,7 @@ namespace InfluxDB.Client.Api.Service
         /// <returns>Task of LabelResponse</returns>
         public async System.Threading.Tasks.Task<LabelResponse> PostLabelsAsync (LabelCreateRequest labelCreateRequest)
         {
-             ApiResponse<LabelResponse> localVarResponse = await PostLabelsAsyncWithHttpInfo(labelCreateRequest);
+             ApiResponse<LabelResponse> localVarResponse = await PostLabelsAsyncWithHttpInfo(labelCreateRequest).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -1940,7 +1940,7 @@ namespace InfluxDB.Client.Api.Service
         public async System.Threading.Tasks.Task<ApiResponse<LabelResponse>> PostLabelsAsyncWithHttpInfo (LabelCreateRequest labelCreateRequest)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await PostLabelsAsyncWithIRestResponse(labelCreateRequest);
+            IRestResponse localVarResponse = await PostLabelsAsyncWithIRestResponse(labelCreateRequest).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -2003,7 +2003,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
+                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {

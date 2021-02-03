@@ -269,7 +269,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
+                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -379,7 +379,7 @@ namespace InfluxDB.Client.Api.Service
         /// <returns>Task of Ready</returns>
         public async System.Threading.Tasks.Task<Ready> GetReadyAsync (string zapTraceSpan = null)
         {
-             ApiResponse<Ready> localVarResponse = await GetReadyAsyncWithHttpInfo(zapTraceSpan);
+             ApiResponse<Ready> localVarResponse = await GetReadyAsyncWithHttpInfo(zapTraceSpan).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -393,7 +393,7 @@ namespace InfluxDB.Client.Api.Service
         public async System.Threading.Tasks.Task<ApiResponse<Ready>> GetReadyAsyncWithHttpInfo (string zapTraceSpan = null)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await GetReadyAsyncWithIRestResponse(zapTraceSpan);
+            IRestResponse localVarResponse = await GetReadyAsyncWithIRestResponse(zapTraceSpan).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -445,7 +445,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
+                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {

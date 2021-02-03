@@ -284,7 +284,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
+                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -405,7 +405,7 @@ namespace InfluxDB.Client.Api.Service
         /// <returns>Task of FluxResponse</returns>
         public async System.Threading.Tasks.Task<FluxResponse> GetNotificationRulesIDQueryAsync (string ruleID, string zapTraceSpan = null)
         {
-             ApiResponse<FluxResponse> localVarResponse = await GetNotificationRulesIDQueryAsyncWithHttpInfo(ruleID, zapTraceSpan);
+             ApiResponse<FluxResponse> localVarResponse = await GetNotificationRulesIDQueryAsyncWithHttpInfo(ruleID, zapTraceSpan).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -420,7 +420,7 @@ namespace InfluxDB.Client.Api.Service
         public async System.Threading.Tasks.Task<ApiResponse<FluxResponse>> GetNotificationRulesIDQueryAsyncWithHttpInfo (string ruleID, string zapTraceSpan = null)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await GetNotificationRulesIDQueryAsyncWithIRestResponse(ruleID, zapTraceSpan);
+            IRestResponse localVarResponse = await GetNotificationRulesIDQueryAsyncWithIRestResponse(ruleID, zapTraceSpan).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -477,7 +477,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
+                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {

@@ -383,7 +383,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
+                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -594,7 +594,7 @@ namespace InfluxDB.Client.Api.Service
         public async System.Threading.Tasks.Task<ApiResponse<Object>> PostWriteAsyncWithHttpInfo (string org, string bucket, byte[] body, string zapTraceSpan = null, string contentEncoding = null, string contentType = null, int? contentLength = null, string accept = null, string orgID = null, WritePrecision? precision = null)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await PostWriteAsyncWithIRestResponse(org, bucket, body, zapTraceSpan, contentEncoding, contentType, contentLength, accept, orgID, precision);
+            IRestResponse localVarResponse = await PostWriteAsyncWithIRestResponse(org, bucket, body, zapTraceSpan, contentEncoding, contentType, contentLength, accept, orgID, precision).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -681,7 +681,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
+                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {

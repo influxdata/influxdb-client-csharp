@@ -963,7 +963,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
+                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -1098,7 +1098,7 @@ namespace InfluxDB.Client.Api.Service
         public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteTelegrafsIDAsyncWithHttpInfo (string telegrafID, string zapTraceSpan = null)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await DeleteTelegrafsIDAsyncWithIRestResponse(telegrafID, zapTraceSpan);
+            IRestResponse localVarResponse = await DeleteTelegrafsIDAsyncWithIRestResponse(telegrafID, zapTraceSpan).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -1155,7 +1155,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
+                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -1288,7 +1288,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
+                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -1435,7 +1435,7 @@ namespace InfluxDB.Client.Api.Service
         public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteTelegrafsIDLabelsIDAsyncWithHttpInfo (string telegrafID, string labelID, string zapTraceSpan = null)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await DeleteTelegrafsIDLabelsIDAsyncWithIRestResponse(telegrafID, labelID, zapTraceSpan);
+            IRestResponse localVarResponse = await DeleteTelegrafsIDLabelsIDAsyncWithIRestResponse(telegrafID, labelID, zapTraceSpan).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -1497,7 +1497,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
+                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -1630,7 +1630,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
+                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -1777,7 +1777,7 @@ namespace InfluxDB.Client.Api.Service
         public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteTelegrafsIDMembersIDAsyncWithHttpInfo (string userID, string telegrafID, string zapTraceSpan = null)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await DeleteTelegrafsIDMembersIDAsyncWithIRestResponse(userID, telegrafID, zapTraceSpan);
+            IRestResponse localVarResponse = await DeleteTelegrafsIDMembersIDAsyncWithIRestResponse(userID, telegrafID, zapTraceSpan).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -1839,7 +1839,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
+                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -1972,7 +1972,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
+                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -2119,7 +2119,7 @@ namespace InfluxDB.Client.Api.Service
         public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteTelegrafsIDOwnersIDAsyncWithHttpInfo (string userID, string telegrafID, string zapTraceSpan = null)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await DeleteTelegrafsIDOwnersIDAsyncWithIRestResponse(userID, telegrafID, zapTraceSpan);
+            IRestResponse localVarResponse = await DeleteTelegrafsIDOwnersIDAsyncWithIRestResponse(userID, telegrafID, zapTraceSpan).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -2181,7 +2181,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
+                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -2298,7 +2298,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
+                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -2413,7 +2413,7 @@ namespace InfluxDB.Client.Api.Service
         /// <returns>Task of Telegrafs</returns>
         public async System.Threading.Tasks.Task<Telegrafs> GetTelegrafsAsync (string zapTraceSpan = null, string orgID = null)
         {
-             ApiResponse<Telegrafs> localVarResponse = await GetTelegrafsAsyncWithHttpInfo(zapTraceSpan, orgID);
+             ApiResponse<Telegrafs> localVarResponse = await GetTelegrafsAsyncWithHttpInfo(zapTraceSpan, orgID).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -2428,7 +2428,7 @@ namespace InfluxDB.Client.Api.Service
         public async System.Threading.Tasks.Task<ApiResponse<Telegrafs>> GetTelegrafsAsyncWithHttpInfo (string zapTraceSpan = null, string orgID = null)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await GetTelegrafsAsyncWithIRestResponse(zapTraceSpan, orgID);
+            IRestResponse localVarResponse = await GetTelegrafsAsyncWithIRestResponse(zapTraceSpan, orgID).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -2482,7 +2482,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
+                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -2614,7 +2614,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
+                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -2744,7 +2744,7 @@ namespace InfluxDB.Client.Api.Service
         /// <returns>Task of string</returns>
         public async System.Threading.Tasks.Task<string> GetTelegrafsIDAsync (string telegrafID, string zapTraceSpan = null, string accept = null)
         {
-             ApiResponse<string> localVarResponse = await GetTelegrafsIDAsyncWithHttpInfo(telegrafID, zapTraceSpan, accept);
+             ApiResponse<string> localVarResponse = await GetTelegrafsIDAsyncWithHttpInfo(telegrafID, zapTraceSpan, accept).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -2760,7 +2760,7 @@ namespace InfluxDB.Client.Api.Service
         public async System.Threading.Tasks.Task<ApiResponse<string>> GetTelegrafsIDAsyncWithHttpInfo (string telegrafID, string zapTraceSpan = null, string accept = null)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await GetTelegrafsIDAsyncWithIRestResponse(telegrafID, zapTraceSpan, accept);
+            IRestResponse localVarResponse = await GetTelegrafsIDAsyncWithIRestResponse(telegrafID, zapTraceSpan, accept).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -2821,7 +2821,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
+                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -2945,7 +2945,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
+                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -3067,7 +3067,7 @@ namespace InfluxDB.Client.Api.Service
         /// <returns>Task of string</returns>
         public async System.Threading.Tasks.Task<string> GetTelegrafsIDstringAsync (string telegrafID, string zapTraceSpan = null, string accept = null)
         {
-             ApiResponse<string> localVarResponse = await GetTelegrafsIDstringAsyncWithHttpInfo(telegrafID, zapTraceSpan, accept);
+             ApiResponse<string> localVarResponse = await GetTelegrafsIDstringAsyncWithHttpInfo(telegrafID, zapTraceSpan, accept).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -3083,7 +3083,7 @@ namespace InfluxDB.Client.Api.Service
         public async System.Threading.Tasks.Task<ApiResponse<string>> GetTelegrafsIDstringAsyncWithHttpInfo (string telegrafID, string zapTraceSpan = null, string accept = null)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await GetTelegrafsIDstringAsyncWithIRestResponse(telegrafID, zapTraceSpan, accept);
+            IRestResponse localVarResponse = await GetTelegrafsIDstringAsyncWithIRestResponse(telegrafID, zapTraceSpan, accept).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -3140,7 +3140,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
+                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -3263,7 +3263,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
+                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -3384,7 +3384,7 @@ namespace InfluxDB.Client.Api.Service
         /// <returns>Task of LabelsResponse</returns>
         public async System.Threading.Tasks.Task<LabelsResponse> GetTelegrafsIDLabelsAsync (string telegrafID, string zapTraceSpan = null)
         {
-             ApiResponse<LabelsResponse> localVarResponse = await GetTelegrafsIDLabelsAsyncWithHttpInfo(telegrafID, zapTraceSpan);
+             ApiResponse<LabelsResponse> localVarResponse = await GetTelegrafsIDLabelsAsyncWithHttpInfo(telegrafID, zapTraceSpan).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -3399,7 +3399,7 @@ namespace InfluxDB.Client.Api.Service
         public async System.Threading.Tasks.Task<ApiResponse<LabelsResponse>> GetTelegrafsIDLabelsAsyncWithHttpInfo (string telegrafID, string zapTraceSpan = null)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await GetTelegrafsIDLabelsAsyncWithIRestResponse(telegrafID, zapTraceSpan);
+            IRestResponse localVarResponse = await GetTelegrafsIDLabelsAsyncWithIRestResponse(telegrafID, zapTraceSpan).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -3456,7 +3456,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
+                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -3579,7 +3579,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
+                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -3700,7 +3700,7 @@ namespace InfluxDB.Client.Api.Service
         /// <returns>Task of ResourceMembers</returns>
         public async System.Threading.Tasks.Task<ResourceMembers> GetTelegrafsIDMembersAsync (string telegrafID, string zapTraceSpan = null)
         {
-             ApiResponse<ResourceMembers> localVarResponse = await GetTelegrafsIDMembersAsyncWithHttpInfo(telegrafID, zapTraceSpan);
+             ApiResponse<ResourceMembers> localVarResponse = await GetTelegrafsIDMembersAsyncWithHttpInfo(telegrafID, zapTraceSpan).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -3715,7 +3715,7 @@ namespace InfluxDB.Client.Api.Service
         public async System.Threading.Tasks.Task<ApiResponse<ResourceMembers>> GetTelegrafsIDMembersAsyncWithHttpInfo (string telegrafID, string zapTraceSpan = null)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await GetTelegrafsIDMembersAsyncWithIRestResponse(telegrafID, zapTraceSpan);
+            IRestResponse localVarResponse = await GetTelegrafsIDMembersAsyncWithIRestResponse(telegrafID, zapTraceSpan).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -3772,7 +3772,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
+                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -3895,7 +3895,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
+                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -4016,7 +4016,7 @@ namespace InfluxDB.Client.Api.Service
         /// <returns>Task of ResourceOwners</returns>
         public async System.Threading.Tasks.Task<ResourceOwners> GetTelegrafsIDOwnersAsync (string telegrafID, string zapTraceSpan = null)
         {
-             ApiResponse<ResourceOwners> localVarResponse = await GetTelegrafsIDOwnersAsyncWithHttpInfo(telegrafID, zapTraceSpan);
+             ApiResponse<ResourceOwners> localVarResponse = await GetTelegrafsIDOwnersAsyncWithHttpInfo(telegrafID, zapTraceSpan).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -4031,7 +4031,7 @@ namespace InfluxDB.Client.Api.Service
         public async System.Threading.Tasks.Task<ApiResponse<ResourceOwners>> GetTelegrafsIDOwnersAsyncWithHttpInfo (string telegrafID, string zapTraceSpan = null)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await GetTelegrafsIDOwnersAsyncWithIRestResponse(telegrafID, zapTraceSpan);
+            IRestResponse localVarResponse = await GetTelegrafsIDOwnersAsyncWithIRestResponse(telegrafID, zapTraceSpan).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -4088,7 +4088,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
+                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -4227,7 +4227,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
+                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -4364,7 +4364,7 @@ namespace InfluxDB.Client.Api.Service
         /// <returns>Task of Telegraf</returns>
         public async System.Threading.Tasks.Task<Telegraf> PostTelegrafsAsync (TelegrafRequest telegrafRequest, string zapTraceSpan = null)
         {
-             ApiResponse<Telegraf> localVarResponse = await PostTelegrafsAsyncWithHttpInfo(telegrafRequest, zapTraceSpan);
+             ApiResponse<Telegraf> localVarResponse = await PostTelegrafsAsyncWithHttpInfo(telegrafRequest, zapTraceSpan).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -4379,7 +4379,7 @@ namespace InfluxDB.Client.Api.Service
         public async System.Threading.Tasks.Task<ApiResponse<Telegraf>> PostTelegrafsAsyncWithHttpInfo (TelegrafRequest telegrafRequest, string zapTraceSpan = null)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await PostTelegrafsAsyncWithIRestResponse(telegrafRequest, zapTraceSpan);
+            IRestResponse localVarResponse = await PostTelegrafsAsyncWithIRestResponse(telegrafRequest, zapTraceSpan).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -4444,7 +4444,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
+                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -4594,7 +4594,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
+                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -4742,7 +4742,7 @@ namespace InfluxDB.Client.Api.Service
         /// <returns>Task of LabelResponse</returns>
         public async System.Threading.Tasks.Task<LabelResponse> PostTelegrafsIDLabelsAsync (string telegrafID, LabelMapping labelMapping, string zapTraceSpan = null)
         {
-             ApiResponse<LabelResponse> localVarResponse = await PostTelegrafsIDLabelsAsyncWithHttpInfo(telegrafID, labelMapping, zapTraceSpan);
+             ApiResponse<LabelResponse> localVarResponse = await PostTelegrafsIDLabelsAsyncWithHttpInfo(telegrafID, labelMapping, zapTraceSpan).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -4758,7 +4758,7 @@ namespace InfluxDB.Client.Api.Service
         public async System.Threading.Tasks.Task<ApiResponse<LabelResponse>> PostTelegrafsIDLabelsAsyncWithHttpInfo (string telegrafID, LabelMapping labelMapping, string zapTraceSpan = null)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await PostTelegrafsIDLabelsAsyncWithIRestResponse(telegrafID, labelMapping, zapTraceSpan);
+            IRestResponse localVarResponse = await PostTelegrafsIDLabelsAsyncWithIRestResponse(telegrafID, labelMapping, zapTraceSpan).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -4828,7 +4828,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
+                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -4978,7 +4978,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
+                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -5126,7 +5126,7 @@ namespace InfluxDB.Client.Api.Service
         /// <returns>Task of ResourceMember</returns>
         public async System.Threading.Tasks.Task<ResourceMember> PostTelegrafsIDMembersAsync (string telegrafID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
         {
-             ApiResponse<ResourceMember> localVarResponse = await PostTelegrafsIDMembersAsyncWithHttpInfo(telegrafID, addResourceMemberRequestBody, zapTraceSpan);
+             ApiResponse<ResourceMember> localVarResponse = await PostTelegrafsIDMembersAsyncWithHttpInfo(telegrafID, addResourceMemberRequestBody, zapTraceSpan).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -5142,7 +5142,7 @@ namespace InfluxDB.Client.Api.Service
         public async System.Threading.Tasks.Task<ApiResponse<ResourceMember>> PostTelegrafsIDMembersAsyncWithHttpInfo (string telegrafID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await PostTelegrafsIDMembersAsyncWithIRestResponse(telegrafID, addResourceMemberRequestBody, zapTraceSpan);
+            IRestResponse localVarResponse = await PostTelegrafsIDMembersAsyncWithIRestResponse(telegrafID, addResourceMemberRequestBody, zapTraceSpan).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -5212,7 +5212,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
+                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -5362,7 +5362,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
+                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -5510,7 +5510,7 @@ namespace InfluxDB.Client.Api.Service
         /// <returns>Task of ResourceOwner</returns>
         public async System.Threading.Tasks.Task<ResourceOwner> PostTelegrafsIDOwnersAsync (string telegrafID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
         {
-             ApiResponse<ResourceOwner> localVarResponse = await PostTelegrafsIDOwnersAsyncWithHttpInfo(telegrafID, addResourceMemberRequestBody, zapTraceSpan);
+             ApiResponse<ResourceOwner> localVarResponse = await PostTelegrafsIDOwnersAsyncWithHttpInfo(telegrafID, addResourceMemberRequestBody, zapTraceSpan).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -5526,7 +5526,7 @@ namespace InfluxDB.Client.Api.Service
         public async System.Threading.Tasks.Task<ApiResponse<ResourceOwner>> PostTelegrafsIDOwnersAsyncWithHttpInfo (string telegrafID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await PostTelegrafsIDOwnersAsyncWithIRestResponse(telegrafID, addResourceMemberRequestBody, zapTraceSpan);
+            IRestResponse localVarResponse = await PostTelegrafsIDOwnersAsyncWithIRestResponse(telegrafID, addResourceMemberRequestBody, zapTraceSpan).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -5596,7 +5596,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
+                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -5746,7 +5746,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.PUT, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
+                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -5894,7 +5894,7 @@ namespace InfluxDB.Client.Api.Service
         /// <returns>Task of Telegraf</returns>
         public async System.Threading.Tasks.Task<Telegraf> PutTelegrafsIDAsync (string telegrafID, TelegrafRequest telegrafRequest, string zapTraceSpan = null)
         {
-             ApiResponse<Telegraf> localVarResponse = await PutTelegrafsIDAsyncWithHttpInfo(telegrafID, telegrafRequest, zapTraceSpan);
+             ApiResponse<Telegraf> localVarResponse = await PutTelegrafsIDAsyncWithHttpInfo(telegrafID, telegrafRequest, zapTraceSpan).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -5910,7 +5910,7 @@ namespace InfluxDB.Client.Api.Service
         public async System.Threading.Tasks.Task<ApiResponse<Telegraf>> PutTelegrafsIDAsyncWithHttpInfo (string telegrafID, TelegrafRequest telegrafRequest, string zapTraceSpan = null)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await PutTelegrafsIDAsyncWithIRestResponse(telegrafID, telegrafRequest, zapTraceSpan);
+            IRestResponse localVarResponse = await PutTelegrafsIDAsyncWithIRestResponse(telegrafID, telegrafRequest, zapTraceSpan).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -5980,7 +5980,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.PUT, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
+                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
