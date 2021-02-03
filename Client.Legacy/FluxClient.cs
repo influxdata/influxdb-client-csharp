@@ -56,7 +56,7 @@ namespace InfluxDB.Client.Flux
 
             var consumer = new FluxCsvParser.FluxResponseConsumerTable();
 
-            await QueryAsync(query, GetDefaultDialect(), consumer, ErrorConsumer, EmptyAction);
+            await QueryAsync(query, GetDefaultDialect(), consumer, ErrorConsumer, EmptyAction).ConfigureAwait(false);
 
             return consumer.Tables;
         }
@@ -78,7 +78,7 @@ namespace InfluxDB.Client.Flux
 
             var consumer = new FluxResponseConsumerPoco<T>((cancellable, poco) => { measurements.Add(poco); });
 
-            await QueryAsync(query, GetDefaultDialect(), consumer, ErrorConsumer, EmptyAction);
+            await QueryAsync(query, GetDefaultDialect(), consumer, ErrorConsumer, EmptyAction).ConfigureAwait(false);
 
             return measurements;
         }
@@ -236,7 +236,7 @@ namespace InfluxDB.Client.Flux
 
             void Consumer(ICancellable cancellable, string row) => rows.Add(row);
 
-            await QueryRawAsync(query, dialect, Consumer, ErrorConsumer, EmptyAction);
+            await QueryRawAsync(query, dialect, Consumer, ErrorConsumer, EmptyAction).ConfigureAwait(false);
 
             return string.Join("\n", rows);
         }
@@ -368,7 +368,7 @@ namespace InfluxDB.Client.Flux
         {
             try
             {
-                await ExecuteAsync(PingRequest());
+                await ExecuteAsync(PingRequest()).ConfigureAwait(false);
 
                 return true;
             }
@@ -388,7 +388,7 @@ namespace InfluxDB.Client.Flux
         {
             try
             {
-                var response = await ExecuteAsync(PingRequest());
+                var response = await ExecuteAsync(PingRequest()).ConfigureAwait(false);
 
                 return GetVersion(response);
             }
@@ -422,7 +422,7 @@ namespace InfluxDB.Client.Flux
         {
             BeforeIntercept(request);
 
-            var response = await Task.Run(() => RestClient.Execute(request));
+            var response = await Task.Run(() => RestClient.Execute(request)).ConfigureAwait(false);
 
             RaiseForInfluxError(response, response.Content);
 

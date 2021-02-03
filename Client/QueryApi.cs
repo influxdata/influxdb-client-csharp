@@ -122,7 +122,7 @@ namespace InfluxDB.Client
 
             var consumer = new FluxCsvParser.FluxResponseConsumerTable();
 
-            await QueryAsync(query, org, consumer, ErrorConsumer, EmptyAction);
+            await QueryAsync(query, org, consumer, ErrorConsumer, EmptyAction).ConfigureAwait(false);
 
             return consumer.Tables;
         }
@@ -183,7 +183,7 @@ namespace InfluxDB.Client
 
             var requestMessage = CreateRequest(CreateQuery(query), _options.Org);
 
-            await foreach (var record in QueryEnumerable<T>(requestMessage, cancellationToken))
+            await foreach (var record in QueryEnumerable<T>(requestMessage, cancellationToken).ConfigureAwait(false))
                 yield return record;
         }
 
@@ -203,7 +203,7 @@ namespace InfluxDB.Client
 
             var requestMessage = CreateRequest(CreateQuery(query), org);
 
-            await foreach (var record in QueryEnumerable<T>(requestMessage, cancellationToken))
+            await foreach (var record in QueryEnumerable<T>(requestMessage, cancellationToken).ConfigureAwait(false))
                 yield return record;
         }
 
@@ -250,7 +250,7 @@ namespace InfluxDB.Client
 
             var consumer = new FluxResponseConsumerPoco<T>((cancellable, poco) => { measurements.Add(poco); });
 
-            await QueryAsync(query, org, consumer, ErrorConsumer, EmptyAction);
+            await QueryAsync(query, org, consumer, ErrorConsumer, EmptyAction).ConfigureAwait(false);
 
             return measurements;
         }
@@ -817,7 +817,7 @@ namespace InfluxDB.Client
 
             void Consumer(ICancellable cancellable, string row) => rows.Add(row);
 
-            await QueryRawAsync(query, org, Consumer, ErrorConsumer, EmptyAction);
+            await QueryRawAsync(query, org, Consumer, ErrorConsumer, EmptyAction).ConfigureAwait(false);
 
             return string.Join("\n", rows);
         }

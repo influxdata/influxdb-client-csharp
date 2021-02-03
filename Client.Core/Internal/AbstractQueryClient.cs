@@ -93,7 +93,7 @@ namespace InfluxDB.Client.Core.Internal
                     consumer(cancellable, responseStream);
                 };
 
-                await Task.Run(() => { RestClient.DownloadData(query, true); });
+                await Task.Run(() => { RestClient.DownloadData(query, true); }).ConfigureAwait(false);
                 if (!cancellable.IsCancelled())
                 {
                     onComplete();
@@ -111,13 +111,13 @@ namespace InfluxDB.Client.Core.Internal
 
             BeforeIntercept(query);
 
-            var response = await RestClient.ExecuteTaskAsync(query, cancellationToken);
+            var response = await RestClient.ExecuteTaskAsync(query, cancellationToken).ConfigureAwait(false);
 
             response.Content = AfterIntercept((int)response.StatusCode, () => LoggingHandler.ToHeaders(response.Headers), response.Content);
 
             RaiseForInfluxError(response, response.Content);
 
-            await foreach(var (_, record) in _csvParser.ParseFluxResponseAsync(new StringReader(response.Content), cancellationToken))
+            await foreach(var (_, record) in _csvParser.ParseFluxResponseAsync(new StringReader(response.Content), cancellationToken).ConfigureAwait(false))
             {
                 if (!(record is null))
                     yield return Mapper.ToPoco<T>(record);

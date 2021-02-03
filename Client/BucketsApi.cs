@@ -155,8 +155,8 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(clonedName, nameof(clonedName));
             Arguments.CheckNonEmptyString(bucketId, nameof(bucketId));
 
-            var bucket = await FindBucketByIdAsync(bucketId);
-            return await CloneBucketAsync(clonedName, bucket);
+            var bucket = await FindBucketByIdAsync(bucketId).ConfigureAwait(false);
+            return await CloneBucketAsync(clonedName, bucket).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -172,12 +172,12 @@ namespace InfluxDB.Client
 
             var cloned = new Bucket(null, clonedName, null, bucket.OrgID, bucket.Rp, bucket.RetentionRules);
 
-            var created = await CreateBucketAsync(cloned);
+            var created = await CreateBucketAsync(cloned).ConfigureAwait(false);
 
-            var labels = await GetLabelsAsync(bucket);
+            var labels = await GetLabelsAsync(bucket).ConfigureAwait(false);
             foreach (var label in labels)
             {
-                await AddLabelAsync(label, created);
+                await AddLabelAsync(label, created).ConfigureAwait(false);
             }
             
             return created;
@@ -205,7 +205,7 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(bucketName, nameof(bucketName));
 
             var buckets = await _service
-                .GetBucketsAsync(null, null, null, null, null, null, bucketName);
+                .GetBucketsAsync(null, null, null, null, null, null, bucketName).ConfigureAwait(false);
             
             return buckets._Buckets.FirstOrDefault();
         }
@@ -229,7 +229,7 @@ namespace InfluxDB.Client
         /// <returns>A list of buckets</returns>
         public async Task<List<Bucket>> FindBucketsByOrgNameAsync(string orgName)
         {
-            var buckets = await FindBucketsAsync(orgName, new FindOptions());
+            var buckets = await FindBucketsAsync(orgName, new FindOptions()).ConfigureAwait(false);
             return buckets._Buckets;
         }
 
@@ -275,7 +275,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(bucketId, nameof(bucketId));
 
-            var members = await _service.GetBucketsIDMembersAsync(bucketId);
+            var members = await _service.GetBucketsIDMembersAsync(bucketId).ConfigureAwait(false);
             return members.Users;
         }
 
@@ -358,7 +358,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(bucketId, nameof(bucketId));
 
-            var members = await _service.GetBucketsIDOwnersAsync(bucketId);
+            var members = await _service.GetBucketsIDOwnersAsync(bucketId).ConfigureAwait(false);
             return members.Users;
         }
 
@@ -441,7 +441,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(bucketId, nameof(bucketId));
 
-            var response = await _service.GetBucketsIDLabelsAsync(bucketId);
+            var response = await _service.GetBucketsIDLabelsAsync(bucketId).ConfigureAwait(false);
             return response.Labels;
         }
 
@@ -472,7 +472,7 @@ namespace InfluxDB.Client
 
             var mapping = new LabelMapping(labelId);
 
-            var response = await _service.PostBucketsIDLabelsAsync(bucketId, mapping);
+            var response = await _service.PostBucketsIDLabelsAsync(bucketId, mapping).ConfigureAwait(false);
             return response.Label;
         }
 

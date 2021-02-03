@@ -79,8 +79,8 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(clonedName, nameof(clonedName));
             Arguments.CheckNonEmptyString(sourceId, nameof(sourceId));
 
-            var source = await FindSourceByIdAsync(sourceId);
-            return await CloneSourceAsync(clonedName, source);
+            var source = await FindSourceByIdAsync(sourceId).ConfigureAwait(false);
+            return await CloneSourceAsync(clonedName, source).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -132,7 +132,7 @@ namespace InfluxDB.Client
         /// <returns>A list of sources</returns>
         public async Task<List<Source>> FindSourcesAsync()
         {
-            var response = await _service.GetSourcesAsync();
+            var response = await _service.GetSourcesAsync().ConfigureAwait(false);
             return response._Sources;
         }
 
@@ -157,7 +157,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(sourceId, nameof(sourceId));
 
-            var response = await _service.GetSourcesIDBucketsAsync(sourceId);
+            var response = await _service.GetSourcesIDBucketsAsync(sourceId).ConfigureAwait(false);
             return response._Buckets;
         }
 

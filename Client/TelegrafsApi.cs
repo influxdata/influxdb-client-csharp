@@ -256,9 +256,9 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(clonedName, nameof(clonedName));
             Arguments.CheckNonEmptyString(telegrafId, nameof(telegrafId));
 
-            var telegraf = await FindTelegrafByIdAsync(telegrafId);
+            var telegraf = await FindTelegrafByIdAsync(telegrafId).ConfigureAwait(false);
             
-            return await CloneTelegrafAsync(clonedName, telegraf);
+            return await CloneTelegrafAsync(clonedName, telegraf).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -275,11 +275,11 @@ namespace InfluxDB.Client
             var cloned = new TelegrafRequest(clonedName, telegraf.Description, telegraf.Metadata, telegraf.Config,
                 telegraf.OrgID);
 
-            var created = await CreateTelegrafAsync(cloned);
-            var labels = await GetLabelsAsync(telegraf);
+            var created = await CreateTelegrafAsync(cloned).ConfigureAwait(false);
+            var labels = await GetLabelsAsync(telegraf).ConfigureAwait(false);
             foreach (var label in labels)
             {
-                await AddLabelAsync(label, created);
+                await AddLabelAsync(label, created).ConfigureAwait(false);
             }
 
             return created;
@@ -294,7 +294,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(telegrafId, nameof(telegrafId));
 
-            var response = await _service.GetTelegrafsIDWithIRestResponseAsync(telegrafId, null, "application/json");
+            var response = await _service.GetTelegrafsIDWithIRestResponseAsync(telegrafId, null, "application/json").ConfigureAwait(false);
             
             return (Telegraf) _service.Configuration.ApiClient.Deserialize(response, typeof(Telegraf));
         }
@@ -327,7 +327,7 @@ namespace InfluxDB.Client
         /// <returns>A list of telegraf configs</returns>
         public async Task<List<Telegraf>> FindTelegrafsByOrgIdAsync(string orgId)
         {
-            var response = await _service.GetTelegrafsAsync(orgId);
+            var response = await _service.GetTelegrafsAsync(orgId).ConfigureAwait(false);
             return response.Configurations;
         }
 
@@ -376,7 +376,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(telegrafId, nameof(telegrafId));
 
-            var response = await _service.GetTelegrafsIDMembersAsync(telegrafId);
+            var response = await _service.GetTelegrafsIDMembersAsync(telegrafId).ConfigureAwait(false);
             return response.Users;
         }
 
@@ -457,7 +457,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(telegrafId, nameof(telegrafId));
 
-            var response = await _service.GetTelegrafsIDOwnersAsync(telegrafId);
+            var response = await _service.GetTelegrafsIDOwnersAsync(telegrafId).ConfigureAwait(false);
             return response.Users;
         }
 
@@ -538,7 +538,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(telegrafId, nameof(telegrafId));
 
-            var response = await _service.GetTelegrafsIDLabelsAsync(telegrafId);
+            var response = await _service.GetTelegrafsIDLabelsAsync(telegrafId).ConfigureAwait(false);
             return response.Labels;
         }
 
@@ -567,7 +567,7 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(telegrafId, nameof(telegrafId));
             Arguments.CheckNonEmptyString(labelId, nameof(labelId));
 
-            var response = await _service.PostTelegrafsIDLabelsAsync(telegrafId, new LabelMapping(labelId));
+            var response = await _service.PostTelegrafsIDLabelsAsync(telegrafId, new LabelMapping(labelId)).ConfigureAwait(false);
             return response.Label;
         }
 

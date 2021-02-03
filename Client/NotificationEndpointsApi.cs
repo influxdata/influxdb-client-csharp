@@ -54,7 +54,7 @@ namespace InfluxDB.Client
             var endpoint = new SlackNotificationEndpoint(type: NotificationEndpointType.Slack,
                 url: url, token: token, orgID: orgId, name: name, status: NotificationEndpointBase.StatusEnum.Active);
 
-            return (SlackNotificationEndpoint) await CreateEndpointAsync(endpoint);
+            return (SlackNotificationEndpoint) await CreateEndpointAsync(endpoint).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -77,7 +77,7 @@ namespace InfluxDB.Client
                 clientURL: clientUrl, routingKey: routingKey, orgID: orgId, name: name,
                 status: NotificationEndpointBase.StatusEnum.Active);
 
-            return (PagerDutyNotificationEndpoint) await CreateEndpointAsync(endpoint);
+            return (PagerDutyNotificationEndpoint) await CreateEndpointAsync(endpoint).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -101,7 +101,7 @@ namespace InfluxDB.Client
                 name: name, authMethod: HTTPNotificationEndpoint.AuthMethodEnum.None,
                 status: NotificationEndpointBase.StatusEnum.Active);
 
-            return (HTTPNotificationEndpoint) await CreateEndpointAsync(endpoint);
+            return (HTTPNotificationEndpoint) await CreateEndpointAsync(endpoint).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -130,7 +130,7 @@ namespace InfluxDB.Client
                 password: password,
                 status: NotificationEndpointBase.StatusEnum.Active);
 
-            return (HTTPNotificationEndpoint) await CreateEndpointAsync(endpoint);
+            return (HTTPNotificationEndpoint) await CreateEndpointAsync(endpoint).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -156,7 +156,7 @@ namespace InfluxDB.Client
                 name: name, authMethod: HTTPNotificationEndpoint.AuthMethodEnum.Bearer, token: token,
                 status: NotificationEndpointBase.StatusEnum.Active);
 
-            return (HTTPNotificationEndpoint) await CreateEndpointAsync(endpoint);
+            return (HTTPNotificationEndpoint) await CreateEndpointAsync(endpoint).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -236,7 +236,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
 
-            var response = await FindNotificationEndpointsAsync(orgId, new FindOptions());
+            var response = await FindNotificationEndpointsAsync(orgId, new FindOptions()).ConfigureAwait(false);
             return response._NotificationEndpoints;
         }
 
@@ -280,8 +280,8 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(name, nameof(name));
             Arguments.CheckNonEmptyString(endpointId, nameof(endpointId));
 
-            var endpoint = (SlackNotificationEndpoint) await FindNotificationEndpointByIdAsync(endpointId);
-            return await CloneSlackEndpointAsync(name, token, endpoint);
+            var endpoint = (SlackNotificationEndpoint) await FindNotificationEndpointByIdAsync(endpointId).ConfigureAwait(false);
+            return await CloneSlackEndpointAsync(name, token, endpoint).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -299,7 +299,7 @@ namespace InfluxDB.Client
 
             var cloned = new SlackNotificationEndpoint(endpoint.Url, token, name: name);
 
-            return (SlackNotificationEndpoint) await CloneEndpointAsync(name, endpoint, cloned);
+            return (SlackNotificationEndpoint) await CloneEndpointAsync(name, endpoint, cloned).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -316,8 +316,8 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(routingKey, nameof(routingKey));
             Arguments.CheckNonEmptyString(endpointId, nameof(endpointId));
 
-            var endpoint = (PagerDutyNotificationEndpoint) await FindNotificationEndpointByIdAsync(endpointId);
-            return await ClonePagerDutyEndpointAsync(name, routingKey, endpoint);
+            var endpoint = (PagerDutyNotificationEndpoint) await FindNotificationEndpointByIdAsync(endpointId).ConfigureAwait(false);
+            return await ClonePagerDutyEndpointAsync(name, routingKey, endpoint).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -336,7 +336,7 @@ namespace InfluxDB.Client
 
             var cloned = new PagerDutyNotificationEndpoint(endpoint.ClientURL, routingKey, name: name);
 
-            return (PagerDutyNotificationEndpoint) await CloneEndpointAsync(name, endpoint, cloned);
+            return (PagerDutyNotificationEndpoint) await CloneEndpointAsync(name, endpoint, cloned).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -350,8 +350,8 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(name, nameof(name));
             Arguments.CheckNonEmptyString(endpointId, nameof(endpointId));
             
-            var endpoint = (HTTPNotificationEndpoint) await FindNotificationEndpointByIdAsync(endpointId);
-            return await CloneHttpEndpoint(name, endpoint);
+            var endpoint = (HTTPNotificationEndpoint) await FindNotificationEndpointByIdAsync(endpointId).ConfigureAwait(false);
+            return await CloneHttpEndpoint(name, endpoint).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -369,7 +369,7 @@ namespace InfluxDB.Client
                 authMethod: HTTPNotificationEndpoint.AuthMethodEnum.None, contentTemplate: endpoint.ContentTemplate,
                 headers: endpoint.Headers);
 
-            return (HTTPNotificationEndpoint) await CloneEndpointAsync(name, endpoint, cloned);
+            return (HTTPNotificationEndpoint) await CloneEndpointAsync(name, endpoint, cloned).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -388,8 +388,8 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(password, nameof(password));
             Arguments.CheckNonEmptyString(endpointId, nameof(endpointId));
             
-            var endpoint = (HTTPNotificationEndpoint) await FindNotificationEndpointByIdAsync(endpointId);
-            return await CloneHttpEndpointBasicAuthAsync(name, username, password, endpoint);
+            var endpoint = (HTTPNotificationEndpoint) await FindNotificationEndpointByIdAsync(endpointId).ConfigureAwait(false);
+            return await CloneHttpEndpointBasicAuthAsync(name, username, password, endpoint).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -414,7 +414,7 @@ namespace InfluxDB.Client
                 authMethod: HTTPNotificationEndpoint.AuthMethodEnum.Basic, contentTemplate: endpoint.ContentTemplate,
                 headers: endpoint.Headers);
 
-            return (HTTPNotificationEndpoint) await CloneEndpointAsync(name, endpoint, cloned);
+            return (HTTPNotificationEndpoint) await CloneEndpointAsync(name, endpoint, cloned).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -431,8 +431,8 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(token, nameof(token));
             Arguments.CheckNonEmptyString(endpointId, nameof(endpointId));
 
-            var endpoint = (HTTPNotificationEndpoint) await FindNotificationEndpointByIdAsync(endpointId);
-            return await CloneHttpEndpointBearerAsync(name, token, endpoint);
+            var endpoint = (HTTPNotificationEndpoint) await FindNotificationEndpointByIdAsync(endpointId).ConfigureAwait(false);
+            return await CloneHttpEndpointBearerAsync(name, token, endpoint).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -454,7 +454,7 @@ namespace InfluxDB.Client
                 authMethod: HTTPNotificationEndpoint.AuthMethodEnum.Bearer, contentTemplate: endpoint.ContentTemplate,
                 headers: endpoint.Headers);
 
-            return (HTTPNotificationEndpoint) await CloneEndpointAsync(name, endpoint, cloned);
+            return (HTTPNotificationEndpoint) await CloneEndpointAsync(name, endpoint, cloned).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -478,7 +478,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(endpointId, nameof(endpointId));
 
-            var response = await _service.GetNotificationEndpointsIDLabelsAsync(endpointId);
+            var response = await _service.GetNotificationEndpointsIDLabelsAsync(endpointId).ConfigureAwait(false);
             return response.Labels;
         }
 
@@ -509,7 +509,7 @@ namespace InfluxDB.Client
 
             var mapping = new LabelMapping(labelId);
 
-            var response = await _service.PostNotificationEndpointIDLabelsAsync(endpointId, mapping);
+            var response = await _service.PostNotificationEndpointIDLabelsAsync(endpointId, mapping).ConfigureAwait(false);
             return response.Label;
         }
 
@@ -549,12 +549,12 @@ namespace InfluxDB.Client
             clonedEndpoint.Status = toCloneEndpoint.Status;
             clonedEndpoint.Type = toCloneEndpoint.Type;
 
-            var created = await CreateEndpointAsync(clonedEndpoint);
-            var labels = await GetLabelsAsync(toCloneEndpoint);
+            var created = await CreateEndpointAsync(clonedEndpoint).ConfigureAwait(false);
+            var labels = await GetLabelsAsync(toCloneEndpoint).ConfigureAwait(false);
             
             foreach (var label in labels)
             {
-                await AddLabelAsync(label, created);
+                await AddLabelAsync(label, created).ConfigureAwait(false);
             }
 
             return created;

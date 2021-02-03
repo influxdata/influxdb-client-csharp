@@ -67,7 +67,7 @@ namespace InfluxDB.Client
                 orgID: orgId, every: every, statusMessageTemplate: messageTemplate, status: TaskStatusType.Active,
                 query: CreateDashboardQuery(query));
 
-            return (ThresholdCheck) await CreateCheckAsync(check);
+            return (ThresholdCheck) await CreateCheckAsync(check).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -99,7 +99,7 @@ namespace InfluxDB.Client
                 orgID: orgId, query: CreateDashboardQuery(query), statusMessageTemplate: messageTemplate,
                 status: TaskStatusType.Active);
 
-            return (DeadmanCheck) await CreateCheckAsync(check);
+            return (DeadmanCheck) await CreateCheckAsync(check).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -187,7 +187,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
 
-            var checks = await FindChecksAsync(orgId, new FindOptions());
+            var checks = await FindChecksAsync(orgId, new FindOptions()).ConfigureAwait(false);
             return checks._Checks;
         }
 
@@ -227,7 +227,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(checkId, nameof(checkId));
 
-            var labels = await _service.GetChecksIDLabelsAsync(checkId);
+            var labels = await _service.GetChecksIDLabelsAsync(checkId).ConfigureAwait(false);
             return labels.Labels;
         }
 
@@ -258,7 +258,7 @@ namespace InfluxDB.Client
 
             var mapping = new LabelMapping(labelId);
 
-            var labels = await _service.PostChecksIDLabelsAsync(checkId, mapping);
+            var labels = await _service.PostChecksIDLabelsAsync(checkId, mapping).ConfigureAwait(false);
             return labels.Label;
         }
 

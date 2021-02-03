@@ -91,8 +91,8 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(clonedName, nameof(clonedName));
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
 
-            var org = await FindOrganizationByIdAsync(orgId);
-            return await CloneOrganizationAsync(clonedName, org);
+            var org = await FindOrganizationByIdAsync(orgId).ConfigureAwait(false);
+            return await CloneOrganizationAsync(clonedName, org).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -130,7 +130,7 @@ namespace InfluxDB.Client
         /// <returns>List all organizations</returns>
         public async Task<List<Organization>> FindOrganizationsAsync(int? limit = null)
         {
-            var response = await _service.GetOrgsAsync(limit: limit);
+            var response = await _service.GetOrgsAsync(limit: limit).ConfigureAwait(false);
             return response.Orgs;
         }
 
@@ -165,7 +165,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
 
-            var response = await _service.GetOrgsIDSecretsAsync(orgId);
+            var response = await _service.GetOrgsIDSecretsAsync(orgId).ConfigureAwait(false);
             return response.Secrets;
         }
 
@@ -260,7 +260,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
 
-            var response = await _service.GetOrgsIDMembersAsync(orgId);
+            var response = await _service.GetOrgsIDMembersAsync(orgId).ConfigureAwait(false);
             return response.Users;
         }
 
@@ -341,7 +341,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
 
-            var response = await _service.GetOrgsIDOwnersAsync(orgId);
+            var response = await _service.GetOrgsIDOwnersAsync(orgId).ConfigureAwait(false);
             return response.Users;
         }
 

@@ -220,9 +220,9 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(taskId, nameof(taskId));
 
-            var task = await FindTaskByIdAsync(taskId);
+            var task = await FindTaskByIdAsync(taskId).ConfigureAwait(false);
             
-            return await CloneTaskAsync(task);
+            return await CloneTaskAsync(task).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -238,11 +238,11 @@ namespace InfluxDB.Client
             var cloned = new TaskCreateRequest(orgID: task.OrgID, org: task.Org, status: status,
                 flux: task.Flux, description: task.Description);
 
-            var created = await CreateTaskAsync(cloned);
-            var labels = await GetLabelsAsync(task);
+            var created = await CreateTaskAsync(cloned).ConfigureAwait(false);
+            var labels = await GetLabelsAsync(task).ConfigureAwait(false);
             foreach (var label in labels)
             {
-                await AddLabelAsync(label, created);
+                await AddLabelAsync(label, created).ConfigureAwait(false);
             }
 
             return created;
@@ -314,7 +314,7 @@ namespace InfluxDB.Client
         /// <returns>A list of tasks</returns>
         public async Task<List<TaskType>> FindTasksAsync(string afterId = null, string userId = null, string orgId = null)
         {
-            var response = await _service.GetTasksAsync(null, null, afterId, userId, orgId);
+            var response = await _service.GetTasksAsync(null, null, afterId, userId, orgId).ConfigureAwait(false);
             return response._Tasks;
         }
 
@@ -339,7 +339,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(taskId, nameof(taskId));
 
-            var response = await _service.GetTasksIDMembersAsync(taskId);
+            var response = await _service.GetTasksIDMembersAsync(taskId).ConfigureAwait(false);
             return response.Users;
         }
 
@@ -420,7 +420,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(taskId, nameof(taskId));
 
-            var response = await _service.GetTasksIDOwnersAsync(taskId);
+            var response = await _service.GetTasksIDOwnersAsync(taskId).ConfigureAwait(false);
             return response.Users;
         }
 
@@ -501,7 +501,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(taskId, nameof(taskId));
 
-            var response = await _service.GetTasksIDLogsAsync(taskId);
+            var response = await _service.GetTasksIDLogsAsync(taskId).ConfigureAwait(false);
             return response.Events;
         }
 
@@ -563,7 +563,7 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(taskId, nameof(taskId));
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
 
-            var response = await _service.GetTasksIDRunsAsync(taskId, null, null, limit, afterTime, beforeTime);
+            var response = await _service.GetTasksIDRunsAsync(taskId, null, null, limit, afterTime, beforeTime).ConfigureAwait(false);
             return response._Runs;
         }
 
@@ -654,7 +654,7 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(taskId, nameof(taskId));
             Arguments.CheckNonEmptyString(runId, nameof(runId));
 
-            var response = await _service.GetTasksIDRunsIDLogsAsync(taskId, runId);
+            var response = await _service.GetTasksIDRunsIDLogsAsync(taskId, runId).ConfigureAwait(false);
             return response.Events;
         }
 
@@ -679,7 +679,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(taskId, nameof(taskId));
 
-            var response = await _service.GetTasksIDLabelsAsync(taskId);
+            var response = await _service.GetTasksIDLabelsAsync(taskId).ConfigureAwait(false);
             return response.Labels;
         }
 
@@ -710,7 +710,7 @@ namespace InfluxDB.Client
 
             var mapping = new LabelMapping(labelId);
 
-            var response = await _service.PostTasksIDLabelsAsync(taskId, mapping);
+            var response = await _service.PostTasksIDLabelsAsync(taskId, mapping).ConfigureAwait(false);
             return response.Label;
         }
 

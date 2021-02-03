@@ -180,7 +180,7 @@ namespace InfluxDB.Client
                     .Select(it => new BatchWritePoint(options, _options, it))
                     .ToList();
 
-                await WriteData(org, bucket, grouped.Key, groupedPoints);
+                await WriteData(org, bucket, grouped.Key, groupedPoints).ConfigureAwait(false);
             }
         }
 

@@ -165,7 +165,7 @@ namespace InfluxDB.Client
 
             using (var client = new InfluxDBClient(InfluxDBClientOptions.Builder.CreateNew().Url(url).Build()))
             {
-                return await client.OnboardingAsync(onboarding);
+                return await client.OnboardingAsync(onboarding).ConfigureAwait(false);
             }
         }
     }

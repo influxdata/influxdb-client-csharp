@@ -108,8 +108,8 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(authorizationId, nameof(authorizationId));
 
-            var authorization = await FindAuthorizationByIdAsync(authorizationId);
-            return await CloneAuthorizationAsync(authorization);
+            var authorization = await FindAuthorizationByIdAsync(authorizationId).ConfigureAwait(false);
+            return await CloneAuthorizationAsync(authorization).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -186,7 +186,7 @@ namespace InfluxDB.Client
 
         private async Task<List<Authorization>> FindAuthorizationsByAsync(string userId, string userName)
         {
-            var response = await _service.GetAuthorizationsAsync(null, userId, userName);
+            var response = await _service.GetAuthorizationsAsync(null, userId, userName).ConfigureAwait(false);
             return response._Authorizations;
         }
     }

@@ -388,7 +388,7 @@ namespace InfluxDB.Client
         {
             try
             {
-                return await _readyService.GetReadyAsync();
+                return await _readyService.GetReadyAsync().ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -417,7 +417,7 @@ namespace InfluxDB.Client
         /// <returns>True if onboarding has already been completed otherwise false</returns>
         public async Task<bool> IsOnboardingAllowedAsync()
         {
-            var isOnboarding = await _setupService.GetSetupAsync();
+            var isOnboarding = await _setupService.GetSetupAsync().ConfigureAwait(false);
 
             return isOnboarding.Allowed == true;
         }
@@ -433,7 +433,7 @@ namespace InfluxDB.Client
 
             try
             {
-                return await task;
+                return await task.ConfigureAwait(false);
             }
             catch (Exception e)
             {

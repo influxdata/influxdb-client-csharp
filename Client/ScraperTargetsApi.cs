@@ -115,8 +115,8 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(clonedName, nameof(clonedName));
             Arguments.CheckNonEmptyString(scraperTargetId, nameof(scraperTargetId));
 
-            var scraperTarget = await FindScraperTargetByIdAsync(scraperTargetId);
-            return await CloneScraperTargetAsync(clonedName, scraperTarget);
+            var scraperTarget = await FindScraperTargetByIdAsync(scraperTargetId).ConfigureAwait(false);
+            return await CloneScraperTargetAsync(clonedName, scraperTarget).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -134,11 +134,11 @@ namespace InfluxDB.Client
             var cloned = new ScraperTargetRequest(clonedName, scraperTargetResponse.Type, scraperTargetResponse.Url,
                 scraperTargetResponse.OrgID, scraperTargetResponse.BucketID);
 
-            var created = await CreateScraperTargetAsync(cloned);
-            var labels = await GetLabelsAsync(scraperTargetResponse);
+            var created = await CreateScraperTargetAsync(cloned).ConfigureAwait(false);
+            var labels = await GetLabelsAsync(scraperTargetResponse).ConfigureAwait(false);
             foreach (var label in labels)
             {
-                await AddLabelAsync(label, created);
+                await AddLabelAsync(label, created).ConfigureAwait(false);
             }
 
             return created;
@@ -162,7 +162,7 @@ namespace InfluxDB.Client
         /// <returns>A list of ScraperTargets</returns>
         public async Task<List<ScraperTargetResponse>> FindScraperTargetsAsync()
         {
-            var response = await _service.GetScrapersAsync();
+            var response = await _service.GetScrapersAsync().ConfigureAwait(false);
             return response.Configurations;
         }
 
@@ -187,7 +187,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
 
-            var response = await _service.GetScrapersAsync(null, orgId);
+            var response = await _service.GetScrapersAsync(null, orgId).ConfigureAwait(false);
             return response.Configurations;
         }
 
@@ -212,7 +212,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(scraperTargetId, nameof(scraperTargetId));
 
-            var response = await _service.GetScrapersIDMembersAsync(scraperTargetId);
+            var response = await _service.GetScrapersIDMembersAsync(scraperTargetId).ConfigureAwait(false);
             return response.Users;
         }
 
@@ -294,7 +294,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(scraperTargetId, nameof(scraperTargetId));
 
-            var response = await _service.GetScrapersIDOwnersAsync(scraperTargetId);
+            var response = await _service.GetScrapersIDOwnersAsync(scraperTargetId).ConfigureAwait(false);
             return response.Users;
         }
 
@@ -377,7 +377,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(scraperTargetId, nameof(scraperTargetId));
 
-            var response = await _service.GetScrapersIDLabelsAsync(scraperTargetId);
+            var response = await _service.GetScrapersIDLabelsAsync(scraperTargetId).ConfigureAwait(false);
             return response.Labels;
         }
 
@@ -408,7 +408,7 @@ namespace InfluxDB.Client
 
             var mapping = new LabelMapping(labelId);
 
-            var response = await _service.PostScrapersIDLabelsAsync(scraperTargetId, mapping);
+            var response = await _service.PostScrapersIDLabelsAsync(scraperTargetId, mapping).ConfigureAwait(false);
             return response.Label;
         }
 

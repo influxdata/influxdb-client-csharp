@@ -123,9 +123,9 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(clonedName, nameof(clonedName));
             Arguments.CheckNonEmptyString(userId, nameof(userId));
 
-            var user = await FindUserByIdAsync(userId);
+            var user = await FindUserByIdAsync(userId).ConfigureAwait(false);
             
-            return await CloneUserAsync(clonedName, user);
+            return await CloneUserAsync(clonedName, user).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -164,7 +164,7 @@ namespace InfluxDB.Client
             Arguments.CheckNotNull(oldPassword, nameof(oldPassword));
             Arguments.CheckNotNull(newPassword, nameof(newPassword));
 
-            var me = await MeAsync();
+            var me = await MeAsync().ConfigureAwait(false);
             if (me == null)
             {
                 Trace.WriteLine("User is not authenticated.");
@@ -173,7 +173,7 @@ namespace InfluxDB.Client
             
             var header = InfluxDBClient.AuthorizationHeader(me.Name, oldPassword);
 
-            await _service.PutMePasswordAsync(new PasswordResetBody(newPassword), null, header);
+            await _service.PutMePasswordAsync(new PasswordResetBody(newPassword), null, header).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -194,7 +194,7 @@ namespace InfluxDB.Client
         /// <returns>List all users</returns>
         public async Task<List<User>> FindUsersAsync()
         {
-            var response = await _service.GetUsersAsync();
+            var response = await _service.GetUsersAsync().ConfigureAwait(false);
             return response._Users;
         }
 

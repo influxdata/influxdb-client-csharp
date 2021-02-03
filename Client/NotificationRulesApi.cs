@@ -81,7 +81,7 @@ namespace InfluxDB.Client
             var rule = new SlackNotificationRule(SlackNotificationRuleBase.TypeEnum.Slack,
                 messageTemplate: messageTemplate);
 
-            return (SlackNotificationRule) await CreateRuleAsync(name, every, status, tagRules, endpoint, orgId, rule);
+            return (SlackNotificationRule) await CreateRuleAsync(name, every, status, tagRules, endpoint, orgId, rule).ConfigureAwait(false);
         }
 
         /**
@@ -124,7 +124,7 @@ namespace InfluxDB.Client
                 messageTemplate);
 
             return (PagerDutyNotificationRule) await CreateRuleAsync(name, every, status, tagRules, endpoint, orgId,
-                rule);
+                rule).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -144,7 +144,7 @@ namespace InfluxDB.Client
             var rule = new HTTPNotificationRule(HTTPNotificationRuleBase.TypeEnum.Http);
 
             return (HTTPNotificationRule) await CreateRuleAsync(name, every, status, tagRules, endpoint, orgId,
-                rule);
+                rule).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -234,7 +234,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
 
-            var response = await FindNotificationRulesAsync(orgId, new FindOptions());
+            var response = await FindNotificationRulesAsync(orgId, new FindOptions()).ConfigureAwait(false);
             return response._NotificationRules;
         }
 
@@ -281,7 +281,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(ruleId, nameof(ruleId));
 
-            var response = await _service.GetNotificationRulesIDLabelsAsync(ruleId);
+            var response = await _service.GetNotificationRulesIDLabelsAsync(ruleId).ConfigureAwait(false);
             return response.Labels;
         }
 
@@ -312,7 +312,7 @@ namespace InfluxDB.Client
 
             var mapping = new LabelMapping(labelId);
 
-            var response = await _service.PostNotificationRuleIDLabelsAsync(ruleId, mapping);
+            var response = await _service.PostNotificationRuleIDLabelsAsync(ruleId, mapping).ConfigureAwait(false);
             return response.Label;
         }
 
