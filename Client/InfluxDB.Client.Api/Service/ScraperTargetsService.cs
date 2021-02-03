@@ -1040,9 +1040,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task DeleteScrapersIDAsync (string scraperTargetID, string zapTraceSpan = null)
+        public System.Threading.Tasks.Task DeleteScrapersIDAsync (string scraperTargetID, string zapTraceSpan = null)
         {
-             await DeleteScrapersIDAsyncWithHttpInfo(scraperTargetID, zapTraceSpan);
+             return DeleteScrapersIDAsyncWithHttpInfo(scraperTargetID, zapTraceSpan);
 
         }
 
@@ -1376,9 +1376,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="labelID">The label ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task DeleteScrapersIDLabelsIDAsync (string scraperTargetID, string labelID, string zapTraceSpan = null)
+        public System.Threading.Tasks.Task DeleteScrapersIDLabelsIDAsync (string scraperTargetID, string labelID, string zapTraceSpan = null)
         {
-             await DeleteScrapersIDLabelsIDAsyncWithHttpInfo(scraperTargetID, labelID, zapTraceSpan);
+             return DeleteScrapersIDLabelsIDAsyncWithHttpInfo(scraperTargetID, labelID, zapTraceSpan);
 
         }
 
@@ -1718,9 +1718,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task DeleteScrapersIDMembersIDAsync (string userID, string scraperTargetID, string zapTraceSpan = null)
+        public System.Threading.Tasks.Task DeleteScrapersIDMembersIDAsync (string userID, string scraperTargetID, string zapTraceSpan = null)
         {
-             await DeleteScrapersIDMembersIDAsyncWithHttpInfo(userID, scraperTargetID, zapTraceSpan);
+             return DeleteScrapersIDMembersIDAsyncWithHttpInfo(userID, scraperTargetID, zapTraceSpan);
 
         }
 
@@ -2060,9 +2060,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task DeleteScrapersIDOwnersIDAsync (string userID, string scraperTargetID, string zapTraceSpan = null)
+        public System.Threading.Tasks.Task DeleteScrapersIDOwnersIDAsync (string userID, string scraperTargetID, string zapTraceSpan = null)
         {
-             await DeleteScrapersIDOwnersIDAsyncWithHttpInfo(userID, scraperTargetID, zapTraceSpan);
+             return DeleteScrapersIDOwnersIDAsyncWithHttpInfo(userID, scraperTargetID, zapTraceSpan);
 
         }
 

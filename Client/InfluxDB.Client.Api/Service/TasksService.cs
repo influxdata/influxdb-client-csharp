@@ -1410,9 +1410,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="taskID">The ID of the task to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task DeleteTasksIDAsync (string taskID, string zapTraceSpan = null)
+        public System.Threading.Tasks.Task DeleteTasksIDAsync (string taskID, string zapTraceSpan = null)
         {
-             await DeleteTasksIDAsyncWithHttpInfo(taskID, zapTraceSpan);
+             return DeleteTasksIDAsyncWithHttpInfo(taskID, zapTraceSpan);
 
         }
 
@@ -1746,9 +1746,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="labelID">The label ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task DeleteTasksIDLabelsIDAsync (string taskID, string labelID, string zapTraceSpan = null)
+        public System.Threading.Tasks.Task DeleteTasksIDLabelsIDAsync (string taskID, string labelID, string zapTraceSpan = null)
         {
-             await DeleteTasksIDLabelsIDAsyncWithHttpInfo(taskID, labelID, zapTraceSpan);
+             return DeleteTasksIDLabelsIDAsyncWithHttpInfo(taskID, labelID, zapTraceSpan);
 
         }
 
@@ -2088,9 +2088,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task DeleteTasksIDMembersIDAsync (string userID, string taskID, string zapTraceSpan = null)
+        public System.Threading.Tasks.Task DeleteTasksIDMembersIDAsync (string userID, string taskID, string zapTraceSpan = null)
         {
-             await DeleteTasksIDMembersIDAsyncWithHttpInfo(userID, taskID, zapTraceSpan);
+             return DeleteTasksIDMembersIDAsyncWithHttpInfo(userID, taskID, zapTraceSpan);
 
         }
 
@@ -2430,9 +2430,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="taskID">The task ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task DeleteTasksIDOwnersIDAsync (string userID, string taskID, string zapTraceSpan = null)
+        public System.Threading.Tasks.Task DeleteTasksIDOwnersIDAsync (string userID, string taskID, string zapTraceSpan = null)
         {
-             await DeleteTasksIDOwnersIDAsyncWithHttpInfo(userID, taskID, zapTraceSpan);
+             return DeleteTasksIDOwnersIDAsyncWithHttpInfo(userID, taskID, zapTraceSpan);
 
         }
 
@@ -2772,9 +2772,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="runID">The run ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task DeleteTasksIDRunsIDAsync (string taskID, string runID, string zapTraceSpan = null)
+        public System.Threading.Tasks.Task DeleteTasksIDRunsIDAsync (string taskID, string runID, string zapTraceSpan = null)
         {
-             await DeleteTasksIDRunsIDAsyncWithHttpInfo(taskID, runID, zapTraceSpan);
+             return DeleteTasksIDRunsIDAsyncWithHttpInfo(taskID, runID, zapTraceSpan);
 
         }
 

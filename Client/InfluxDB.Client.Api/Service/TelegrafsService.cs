@@ -1082,9 +1082,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task DeleteTelegrafsIDAsync (string telegrafID, string zapTraceSpan = null)
+        public System.Threading.Tasks.Task DeleteTelegrafsIDAsync (string telegrafID, string zapTraceSpan = null)
         {
-             await DeleteTelegrafsIDAsyncWithHttpInfo(telegrafID, zapTraceSpan);
+             return DeleteTelegrafsIDAsyncWithHttpInfo(telegrafID, zapTraceSpan);
 
         }
 
@@ -1418,9 +1418,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="labelID">The label ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task DeleteTelegrafsIDLabelsIDAsync (string telegrafID, string labelID, string zapTraceSpan = null)
+        public System.Threading.Tasks.Task DeleteTelegrafsIDLabelsIDAsync (string telegrafID, string labelID, string zapTraceSpan = null)
         {
-             await DeleteTelegrafsIDLabelsIDAsyncWithHttpInfo(telegrafID, labelID, zapTraceSpan);
+             return DeleteTelegrafsIDLabelsIDAsyncWithHttpInfo(telegrafID, labelID, zapTraceSpan);
 
         }
 
@@ -1760,9 +1760,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task DeleteTelegrafsIDMembersIDAsync (string userID, string telegrafID, string zapTraceSpan = null)
+        public System.Threading.Tasks.Task DeleteTelegrafsIDMembersIDAsync (string userID, string telegrafID, string zapTraceSpan = null)
         {
-             await DeleteTelegrafsIDMembersIDAsyncWithHttpInfo(userID, telegrafID, zapTraceSpan);
+             return DeleteTelegrafsIDMembersIDAsyncWithHttpInfo(userID, telegrafID, zapTraceSpan);
 
         }
 
@@ -2102,9 +2102,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task DeleteTelegrafsIDOwnersIDAsync (string userID, string telegrafID, string zapTraceSpan = null)
+        public System.Threading.Tasks.Task DeleteTelegrafsIDOwnersIDAsync (string userID, string telegrafID, string zapTraceSpan = null)
         {
-             await DeleteTelegrafsIDOwnersIDAsyncWithHttpInfo(userID, telegrafID, zapTraceSpan);
+             return DeleteTelegrafsIDOwnersIDAsyncWithHttpInfo(userID, telegrafID, zapTraceSpan);
 
         }
 

@@ -686,9 +686,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="cellID">The ID of the cell to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task DeleteDashboardsIDCellsIDAsync (string dashboardID, string cellID, string zapTraceSpan = null)
+        public System.Threading.Tasks.Task DeleteDashboardsIDCellsIDAsync (string dashboardID, string cellID, string zapTraceSpan = null)
         {
-             await DeleteDashboardsIDCellsIDAsyncWithHttpInfo(dashboardID, cellID, zapTraceSpan);
+             return DeleteDashboardsIDCellsIDAsyncWithHttpInfo(dashboardID, cellID, zapTraceSpan);
 
         }
 

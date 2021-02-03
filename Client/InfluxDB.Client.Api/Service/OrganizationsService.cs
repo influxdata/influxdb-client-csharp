@@ -1048,9 +1048,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">The ID of the organization to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task DeleteOrgsIDAsync (string orgID, string zapTraceSpan = null)
+        public System.Threading.Tasks.Task DeleteOrgsIDAsync (string orgID, string zapTraceSpan = null)
         {
-             await DeleteOrgsIDAsyncWithHttpInfo(orgID, zapTraceSpan);
+             return DeleteOrgsIDAsyncWithHttpInfo(orgID, zapTraceSpan);
 
         }
 
@@ -1384,9 +1384,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task DeleteOrgsIDMembersIDAsync (string userID, string orgID, string zapTraceSpan = null)
+        public System.Threading.Tasks.Task DeleteOrgsIDMembersIDAsync (string userID, string orgID, string zapTraceSpan = null)
         {
-             await DeleteOrgsIDMembersIDAsyncWithHttpInfo(userID, orgID, zapTraceSpan);
+             return DeleteOrgsIDMembersIDAsyncWithHttpInfo(userID, orgID, zapTraceSpan);
 
         }
 
@@ -1726,9 +1726,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task DeleteOrgsIDOwnersIDAsync (string userID, string orgID, string zapTraceSpan = null)
+        public System.Threading.Tasks.Task DeleteOrgsIDOwnersIDAsync (string userID, string orgID, string zapTraceSpan = null)
         {
-             await DeleteOrgsIDOwnersIDAsyncWithHttpInfo(userID, orgID, zapTraceSpan);
+             return DeleteOrgsIDOwnersIDAsyncWithHttpInfo(userID, orgID, zapTraceSpan);
 
         }
 
@@ -4114,9 +4114,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="requestBody">Secret key value pairs to update/add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task PatchOrgsIDSecretsAsync (string orgID, Dictionary<string, string> requestBody, string zapTraceSpan = null)
+        public System.Threading.Tasks.Task PatchOrgsIDSecretsAsync (string orgID, Dictionary<string, string> requestBody, string zapTraceSpan = null)
         {
-             await PatchOrgsIDSecretsAsyncWithHttpInfo(orgID, requestBody, zapTraceSpan);
+             return PatchOrgsIDSecretsAsyncWithHttpInfo(orgID, requestBody, zapTraceSpan);
 
         }
 
@@ -5620,9 +5620,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="secretKeys">Secret key to delete</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task PostOrgsIDSecretsAsync (string orgID, SecretKeys secretKeys, string zapTraceSpan = null)
+        public System.Threading.Tasks.Task PostOrgsIDSecretsAsync (string orgID, SecretKeys secretKeys, string zapTraceSpan = null)
         {
-             await PostOrgsIDSecretsAsyncWithHttpInfo(orgID, secretKeys, zapTraceSpan);
+             return PostOrgsIDSecretsAsyncWithHttpInfo(orgID, secretKeys, zapTraceSpan);
 
         }
 

@@ -1179,9 +1179,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="checkID">The check ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task DeleteChecksIDAsync (string checkID, string zapTraceSpan = null)
+        public System.Threading.Tasks.Task DeleteChecksIDAsync (string checkID, string zapTraceSpan = null)
         {
-             await DeleteChecksIDAsyncWithHttpInfo(checkID, zapTraceSpan);
+             return DeleteChecksIDAsyncWithHttpInfo(checkID, zapTraceSpan);
 
         }
 
@@ -1515,9 +1515,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="labelID">The ID of the label to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task DeleteChecksIDLabelsIDAsync (string checkID, string labelID, string zapTraceSpan = null)
+        public System.Threading.Tasks.Task DeleteChecksIDLabelsIDAsync (string checkID, string labelID, string zapTraceSpan = null)
         {
-             await DeleteChecksIDLabelsIDAsyncWithHttpInfo(checkID, labelID, zapTraceSpan);
+             return DeleteChecksIDLabelsIDAsyncWithHttpInfo(checkID, labelID, zapTraceSpan);
 
         }
 

@@ -790,9 +790,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="variableID">The variable ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task DeleteVariablesIDAsync (string variableID, string zapTraceSpan = null)
+        public System.Threading.Tasks.Task DeleteVariablesIDAsync (string variableID, string zapTraceSpan = null)
         {
-             await DeleteVariablesIDAsyncWithHttpInfo(variableID, zapTraceSpan);
+             return DeleteVariablesIDAsyncWithHttpInfo(variableID, zapTraceSpan);
 
         }
 
@@ -1126,9 +1126,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="labelID">The label ID to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task DeleteVariablesIDLabelsIDAsync (string variableID, string labelID, string zapTraceSpan = null)
+        public System.Threading.Tasks.Task DeleteVariablesIDLabelsIDAsync (string variableID, string labelID, string zapTraceSpan = null)
         {
-             await DeleteVariablesIDLabelsIDAsyncWithHttpInfo(variableID, labelID, zapTraceSpan);
+             return DeleteVariablesIDLabelsIDAsyncWithHttpInfo(variableID, labelID, zapTraceSpan);
 
         }
 

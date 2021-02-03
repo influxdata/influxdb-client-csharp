@@ -644,9 +644,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="dbrpID">The database retention policy mapping</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task DeleteDBRPIDAsync (string orgID, string dbrpID, string zapTraceSpan = null)
+        public System.Threading.Tasks.Task DeleteDBRPIDAsync (string orgID, string dbrpID, string zapTraceSpan = null)
         {
-             await DeleteDBRPIDAsyncWithHttpInfo(orgID, dbrpID, zapTraceSpan);
+             return DeleteDBRPIDAsyncWithHttpInfo(orgID, dbrpID, zapTraceSpan);
 
         }
 

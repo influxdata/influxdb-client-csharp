@@ -602,9 +602,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="authID">The ID of the authorization to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task DeleteAuthorizationsIDAsync (string authID, string zapTraceSpan = null)
+        public System.Threading.Tasks.Task DeleteAuthorizationsIDAsync (string authID, string zapTraceSpan = null)
         {
-             await DeleteAuthorizationsIDAsyncWithHttpInfo(authID, zapTraceSpan);
+             return DeleteAuthorizationsIDAsyncWithHttpInfo(authID, zapTraceSpan);
 
         }
 

@@ -686,9 +686,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="sourceID">The source ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task DeleteSourcesIDAsync (string sourceID, string zapTraceSpan = null)
+        public System.Threading.Tasks.Task DeleteSourcesIDAsync (string sourceID, string zapTraceSpan = null)
         {
-             await DeleteSourcesIDAsyncWithHttpInfo(sourceID, zapTraceSpan);
+             return DeleteSourcesIDAsyncWithHttpInfo(sourceID, zapTraceSpan);
 
         }
 

@@ -132,7 +132,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
-        /// <param name="after">The last resource ID from which to seek from (but not including). This is to be used instead of &#x60;offset&#x60;.  (optional)</param>
+        /// <param name="after">The last resource ID from which to seek from (but not including). This is to be used instead of &#x60;offset&#x60;. (optional)</param>
         /// <param name="org">The organization name. (optional)</param>
         /// <param name="orgID">The organization ID. (optional)</param>
         /// <param name="name">Only returns buckets with a specific name. (optional)</param>
@@ -149,7 +149,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
-        /// <param name="after">The last resource ID from which to seek from (but not including). This is to be used instead of &#x60;offset&#x60;.  (optional)</param>
+        /// <param name="after">The last resource ID from which to seek from (but not including). This is to be used instead of &#x60;offset&#x60;. (optional)</param>
         /// <param name="org">The organization name. (optional)</param>
         /// <param name="orgID">The organization ID. (optional)</param>
         /// <param name="name">Only returns buckets with a specific name. (optional)</param>
@@ -505,7 +505,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
-        /// <param name="after">The last resource ID from which to seek from (but not including). This is to be used instead of &#x60;offset&#x60;.  (optional)</param>
+        /// <param name="after">The last resource ID from which to seek from (but not including). This is to be used instead of &#x60;offset&#x60;. (optional)</param>
         /// <param name="org">The organization name. (optional)</param>
         /// <param name="orgID">The organization ID. (optional)</param>
         /// <param name="name">Only returns buckets with a specific name. (optional)</param>
@@ -522,7 +522,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
-        /// <param name="after">The last resource ID from which to seek from (but not including). This is to be used instead of &#x60;offset&#x60;.  (optional)</param>
+        /// <param name="after">The last resource ID from which to seek from (but not including). This is to be used instead of &#x60;offset&#x60;. (optional)</param>
         /// <param name="org">The organization name. (optional)</param>
         /// <param name="orgID">The organization ID. (optional)</param>
         /// <param name="name">Only returns buckets with a specific name. (optional)</param>
@@ -1098,9 +1098,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="bucketID">The ID of the bucket to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task DeleteBucketsIDAsync (string bucketID, string zapTraceSpan = null)
+        public System.Threading.Tasks.Task DeleteBucketsIDAsync (string bucketID, string zapTraceSpan = null)
         {
-             await DeleteBucketsIDAsyncWithHttpInfo(bucketID, zapTraceSpan);
+             return DeleteBucketsIDAsyncWithHttpInfo(bucketID, zapTraceSpan);
 
         }
 
@@ -1434,9 +1434,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="labelID">The ID of the label to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task DeleteBucketsIDLabelsIDAsync (string bucketID, string labelID, string zapTraceSpan = null)
+        public System.Threading.Tasks.Task DeleteBucketsIDLabelsIDAsync (string bucketID, string labelID, string zapTraceSpan = null)
         {
-             await DeleteBucketsIDLabelsIDAsyncWithHttpInfo(bucketID, labelID, zapTraceSpan);
+             return DeleteBucketsIDLabelsIDAsyncWithHttpInfo(bucketID, labelID, zapTraceSpan);
 
         }
 
@@ -1776,9 +1776,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task DeleteBucketsIDMembersIDAsync (string userID, string bucketID, string zapTraceSpan = null)
+        public System.Threading.Tasks.Task DeleteBucketsIDMembersIDAsync (string userID, string bucketID, string zapTraceSpan = null)
         {
-             await DeleteBucketsIDMembersIDAsyncWithHttpInfo(userID, bucketID, zapTraceSpan);
+             return DeleteBucketsIDMembersIDAsyncWithHttpInfo(userID, bucketID, zapTraceSpan);
 
         }
 
@@ -2118,9 +2118,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task DeleteBucketsIDOwnersIDAsync (string userID, string bucketID, string zapTraceSpan = null)
+        public System.Threading.Tasks.Task DeleteBucketsIDOwnersIDAsync (string userID, string bucketID, string zapTraceSpan = null)
         {
-             await DeleteBucketsIDOwnersIDAsyncWithHttpInfo(userID, bucketID, zapTraceSpan);
+             return DeleteBucketsIDOwnersIDAsyncWithHttpInfo(userID, bucketID, zapTraceSpan);
 
         }
 
@@ -2215,7 +2215,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
-        /// <param name="after">The last resource ID from which to seek from (but not including). This is to be used instead of &#x60;offset&#x60;.  (optional)</param>
+        /// <param name="after">The last resource ID from which to seek from (but not including). This is to be used instead of &#x60;offset&#x60;. (optional)</param>
         /// <param name="org">The organization name. (optional)</param>
         /// <param name="orgID">The organization ID. (optional)</param>
         /// <param name="name">Only returns buckets with a specific name. (optional)</param>
@@ -2233,7 +2233,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
-        /// <param name="after">The last resource ID from which to seek from (but not including). This is to be used instead of &#x60;offset&#x60;.  (optional)</param>
+        /// <param name="after">The last resource ID from which to seek from (but not including). This is to be used instead of &#x60;offset&#x60;. (optional)</param>
         /// <param name="org">The organization name. (optional)</param>
         /// <param name="orgID">The organization ID. (optional)</param>
         /// <param name="name">Only returns buckets with a specific name. (optional)</param>
@@ -2297,7 +2297,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
-        /// <param name="after">The last resource ID from which to seek from (but not including). This is to be used instead of &#x60;offset&#x60;.  (optional)</param>
+        /// <param name="after">The last resource ID from which to seek from (but not including). This is to be used instead of &#x60;offset&#x60;. (optional)</param>
         /// <param name="org">The organization name. (optional)</param>
         /// <param name="orgID">The organization ID. (optional)</param>
         /// <param name="name">Only returns buckets with a specific name. (optional)</param>
@@ -2359,7 +2359,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
-        /// <param name="after">The last resource ID from which to seek from (but not including). This is to be used instead of &#x60;offset&#x60;.  (optional)</param>
+        /// <param name="after">The last resource ID from which to seek from (but not including). This is to be used instead of &#x60;offset&#x60;. (optional)</param>
         /// <param name="org">The organization name. (optional)</param>
         /// <param name="orgID">The organization ID. (optional)</param>
         /// <param name="name">Only returns buckets with a specific name. (optional)</param>
@@ -2421,7 +2421,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
-        /// <param name="after">The last resource ID from which to seek from (but not including). This is to be used instead of &#x60;offset&#x60;.  (optional)</param>
+        /// <param name="after">The last resource ID from which to seek from (but not including). This is to be used instead of &#x60;offset&#x60;. (optional)</param>
         /// <param name="org">The organization name. (optional)</param>
         /// <param name="orgID">The organization ID. (optional)</param>
         /// <param name="name">Only returns buckets with a specific name. (optional)</param>
@@ -2472,7 +2472,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
-        /// <param name="after">The last resource ID from which to seek from (but not including). This is to be used instead of &#x60;offset&#x60;.  (optional)</param>
+        /// <param name="after">The last resource ID from which to seek from (but not including). This is to be used instead of &#x60;offset&#x60;. (optional)</param>
         /// <param name="org">The organization name. (optional)</param>
         /// <param name="orgID">The organization ID. (optional)</param>
         /// <param name="name">Only returns buckets with a specific name. (optional)</param>
@@ -2491,7 +2491,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
-        /// <param name="after">The last resource ID from which to seek from (but not including). This is to be used instead of &#x60;offset&#x60;.  (optional)</param>
+        /// <param name="after">The last resource ID from which to seek from (but not including). This is to be used instead of &#x60;offset&#x60;. (optional)</param>
         /// <param name="org">The organization name. (optional)</param>
         /// <param name="orgID">The organization ID. (optional)</param>
         /// <param name="name">Only returns buckets with a specific name. (optional)</param>
@@ -2521,7 +2521,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
-        /// <param name="after">The last resource ID from which to seek from (but not including). This is to be used instead of &#x60;offset&#x60;.  (optional)</param>
+        /// <param name="after">The last resource ID from which to seek from (but not including). This is to be used instead of &#x60;offset&#x60;. (optional)</param>
         /// <param name="org">The organization name. (optional)</param>
         /// <param name="orgID">The organization ID. (optional)</param>
         /// <param name="name">Only returns buckets with a specific name. (optional)</param>

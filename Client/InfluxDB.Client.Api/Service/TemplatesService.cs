@@ -740,9 +740,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="templateID">The template ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task DeleteDocumentsTemplatesIDAsync (string templateID, string zapTraceSpan = null)
+        public System.Threading.Tasks.Task DeleteDocumentsTemplatesIDAsync (string templateID, string zapTraceSpan = null)
         {
-             await DeleteDocumentsTemplatesIDAsyncWithHttpInfo(templateID, zapTraceSpan);
+             return DeleteDocumentsTemplatesIDAsyncWithHttpInfo(templateID, zapTraceSpan);
 
         }
 
@@ -1076,9 +1076,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="labelID">The label ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task DeleteDocumentsTemplatesIDLabelsIDAsync (string templateID, string labelID, string zapTraceSpan = null)
+        public System.Threading.Tasks.Task DeleteDocumentsTemplatesIDLabelsIDAsync (string templateID, string labelID, string zapTraceSpan = null)
         {
-             await DeleteDocumentsTemplatesIDLabelsIDAsyncWithHttpInfo(templateID, labelID, zapTraceSpan);
+             return DeleteDocumentsTemplatesIDLabelsIDAsyncWithHttpInfo(templateID, labelID, zapTraceSpan);
 
         }
 

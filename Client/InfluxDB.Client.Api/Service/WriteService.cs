@@ -570,9 +570,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">Specifies the ID of the destination organization for writes. If both &#x60;orgID&#x60; and &#x60;org&#x60; are specified, &#x60;org&#x60; takes precedence. (optional)</param>
         /// <param name="precision">The precision for the unix timestamps within the body line-protocol. (optional)</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task PostWriteAsync (string org, string bucket, byte[] body, string zapTraceSpan = null, string contentEncoding = null, string contentType = null, int? contentLength = null, string accept = null, string orgID = null, WritePrecision? precision = null)
+        public System.Threading.Tasks.Task PostWriteAsync (string org, string bucket, byte[] body, string zapTraceSpan = null, string contentEncoding = null, string contentType = null, int? contentLength = null, string accept = null, string orgID = null, WritePrecision? precision = null)
         {
-             await PostWriteAsyncWithHttpInfo(org, bucket, body, zapTraceSpan, contentEncoding, contentType, contentLength, accept, orgID, precision);
+             return PostWriteAsyncWithHttpInfo(org, bucket, body, zapTraceSpan, contentEncoding, contentType, contentLength, accept, orgID, precision);
 
         }
 

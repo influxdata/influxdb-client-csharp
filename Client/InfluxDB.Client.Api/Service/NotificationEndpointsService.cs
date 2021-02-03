@@ -1133,9 +1133,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="endpointID">The notification endpoint ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task DeleteNotificationEndpointsIDAsync (string endpointID, string zapTraceSpan = null)
+        public System.Threading.Tasks.Task DeleteNotificationEndpointsIDAsync (string endpointID, string zapTraceSpan = null)
         {
-             await DeleteNotificationEndpointsIDAsyncWithHttpInfo(endpointID, zapTraceSpan);
+             return DeleteNotificationEndpointsIDAsyncWithHttpInfo(endpointID, zapTraceSpan);
 
         }
 
@@ -1469,9 +1469,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="labelID">The ID of the label to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task DeleteNotificationEndpointsIDLabelsIDAsync (string endpointID, string labelID, string zapTraceSpan = null)
+        public System.Threading.Tasks.Task DeleteNotificationEndpointsIDLabelsIDAsync (string endpointID, string labelID, string zapTraceSpan = null)
         {
-             await DeleteNotificationEndpointsIDLabelsIDAsyncWithHttpInfo(endpointID, labelID, zapTraceSpan);
+             return DeleteNotificationEndpointsIDLabelsIDAsyncWithHttpInfo(endpointID, labelID, zapTraceSpan);
 
         }
 

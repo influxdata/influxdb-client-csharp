@@ -872,9 +872,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="requestBody">Secret key value pairs to update/add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task PatchOrgsIDSecretsAsync (string orgID, Dictionary<string, string> requestBody, string zapTraceSpan = null)
+        public System.Threading.Tasks.Task PatchOrgsIDSecretsAsync (string orgID, Dictionary<string, string> requestBody, string zapTraceSpan = null)
         {
-             await PatchOrgsIDSecretsAsyncWithHttpInfo(orgID, requestBody, zapTraceSpan);
+             return PatchOrgsIDSecretsAsyncWithHttpInfo(orgID, requestBody, zapTraceSpan);
 
         }
 
@@ -1254,9 +1254,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="secretKeys">Secret key to delete</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task PostOrgsIDSecretsAsync (string orgID, SecretKeys secretKeys, string zapTraceSpan = null)
+        public System.Threading.Tasks.Task PostOrgsIDSecretsAsync (string orgID, SecretKeys secretKeys, string zapTraceSpan = null)
         {
-             await PostOrgsIDSecretsAsyncWithHttpInfo(orgID, secretKeys, zapTraceSpan);
+             return PostOrgsIDSecretsAsyncWithHttpInfo(orgID, secretKeys, zapTraceSpan);
 
         }
 

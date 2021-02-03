@@ -620,9 +620,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">Specifies the organization ID of the resource. (optional)</param>
         /// <param name="bucketID">Specifies the bucket ID to delete data from. (optional)</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task DeletePostAsync (DeletePredicateRequest deletePredicateRequest, string zapTraceSpan = null, string org = null, string bucket = null, string orgID = null, string bucketID = null)
+        public System.Threading.Tasks.Task DeletePostAsync (DeletePredicateRequest deletePredicateRequest, string zapTraceSpan = null, string org = null, string bucket = null, string orgID = null, string bucketID = null)
         {
-             await DeletePostAsyncWithHttpInfo(deletePredicateRequest, zapTraceSpan, org, bucket, orgID, bucketID);
+             return DeletePostAsyncWithHttpInfo(deletePredicateRequest, zapTraceSpan, org, bucket, orgID, bucketID);
 
         }
 
@@ -1254,9 +1254,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="authorization">An auth credential for the Basic scheme (optional)</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task PostSigninAsync (string zapTraceSpan = null, String authorization = null)
+        public System.Threading.Tasks.Task PostSigninAsync (string zapTraceSpan = null, String authorization = null)
         {
-             await PostSigninAsyncWithHttpInfo(zapTraceSpan, authorization);
+             return PostSigninAsyncWithHttpInfo(zapTraceSpan, authorization);
 
         }
 
@@ -1549,9 +1549,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task PostSignoutAsync (string zapTraceSpan = null)
+        public System.Threading.Tasks.Task PostSignoutAsync (string zapTraceSpan = null)
         {
-             await PostSignoutAsyncWithHttpInfo(zapTraceSpan);
+             return PostSignoutAsyncWithHttpInfo(zapTraceSpan);
 
         }
 
