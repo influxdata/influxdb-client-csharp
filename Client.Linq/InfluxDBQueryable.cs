@@ -72,7 +72,7 @@ namespace InfluxDB.Client.Linq
                 throw new NotSupportedException("InfluxDBQueryable should use InfluxDBQueryExecutor");
 
             var parsedQuery = provider.QueryParser.GetParsedQuery(Expression);
-            var generateQuery = executor.GenerateQuery(parsedQuery);
+            var generateQuery = executor.GenerateQuery(parsedQuery, out _);
 
             return generateQuery;
         }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -41,7 +42,7 @@ namespace InfluxDB.Client.Linq.Internal
         /// </summary>
         public T ExecuteScalar<T>(QueryModel queryModel)
         {
-            return ExecuteCollection<T>(queryModel).Single();
+            return ExecuteSingle<T>(queryModel, false);
         }
 
         /// <summary>
@@ -60,8 +61,19 @@ namespace InfluxDB.Client.Linq.Internal
         /// </summary>
         public IEnumerable<T> ExecuteCollection<T>(QueryModel queryModel)
         {
-            var query = GenerateQuery(queryModel);
+            var query = GenerateQuery(queryModel, out var queryResultsSettings);
 
+            if (queryResultsSettings.ScalarAggregated)
+            {
+                var enumerable = _queryApi.QuerySync(query, _org)
+                    .SelectMany(it => it.Records)
+                    .Select(it => it.GetValueByKey("linq_result_column"));
+                
+                var result = queryResultsSettings.AggregateFunction(enumerable);
+
+                return new List<T> {(T) Convert.ChangeType(result, typeof(T))};
+            }
+            
             return _queryApi.QuerySync<T>(query, _org);
         }
 
@@ -69,12 +81,14 @@ namespace InfluxDB.Client.Linq.Internal
         /// Create a <see cref="Api.Domain.Query"/> object that will be used for Querying.
         /// </summary>
         /// <param name="queryModel">Expression Tree of LINQ Query</param>
+        /// <param name="settings">Defines how to handle query results</param>
         /// <returns>Query to Invoke</returns>
-        internal Query GenerateQuery(QueryModel queryModel)
+        internal Query GenerateQuery(QueryModel queryModel, out QueryResultsSettings settings)
         {
             var visitor = new InfluxDBQueryVisitor(_bucket, _memberResolver);
             visitor.VisitQueryModel(queryModel);
-            
+
+            settings = new QueryResultsSettings(queryModel);
             return visitor.GenerateQuery();
         }
     }

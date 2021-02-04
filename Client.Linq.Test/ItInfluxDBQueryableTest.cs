@@ -68,6 +68,21 @@ namespace Client.Linq.Test
 
             Assert.AreEqual(1, sensors.Count);
         }
+        
+        [Test]
+        public void QueryExampleCount()
+        {
+            var query = (from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApi())
+                where s.SensorId == "id-1"
+                where s.Value > 12
+                where s.Timestamp > new DateTime(2019, 11, 16, 8, 20, 15, DateTimeKind.Utc)
+                where s.Timestamp < new DateTime(2021, 01, 10, 5, 10, 0, DateTimeKind.Utc)
+                orderby s.Timestamp
+                select s)
+                .Count();
+
+            Assert.AreEqual(3, query);
+        }
 
         [Test]
         public void QueryTake()
@@ -269,6 +284,29 @@ namespace Client.Linq.Test
                 sensors.First().Timestamp);
             Assert.AreEqual(new DateTime(2020, 10, 15, 8, 20, 15, DateTimeKind.Utc), 
                 sensors.Last().Timestamp);
+        }
+
+        [Test]
+        public void QueryCount()
+        {
+            var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApi())
+                where s.SensorId == "id-1"
+                select s;
+
+            var sensors = query.Count();
+
+            Assert.AreEqual(4, sensors);
+        }
+
+        [Test]
+        public void QueryCountDifferentTimeSeries()
+        {
+            var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApi())
+                select s;
+
+            var sensors = query.LongCount();
+
+            Assert.AreEqual(8, sensors);
         }
 
         [TearDown]

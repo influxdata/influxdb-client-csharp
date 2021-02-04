@@ -2,9 +2,23 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using InfluxDB.Client.Core;
 
 namespace InfluxDB.Client.Linq.Internal
 {
+    internal enum ResultFunction
+    {
+        /// <summary>
+        /// Without result function.
+        /// </summary>
+        None,
+        
+        /// <summary>
+        /// Count result function.
+        /// </summary>
+        Count
+    }
+
     internal class QueryAggregator
     {
         private string _bucketAssignment;
@@ -12,11 +26,13 @@ namespace InfluxDB.Client.Linq.Internal
         private string _rangeStopAssignment;
         private string _limitNAssignment;
         private string _limitOffsetAssignment;
+        private ResultFunction _resultFunction;
         private readonly List<string> _filters;
         private readonly List<(string, string)> _orders;
 
         internal QueryAggregator()
         {
+            _resultFunction = ResultFunction.None;
             _filters = new List<string>();
             _orders = new List<(string, string)>();
         }
@@ -57,9 +73,16 @@ namespace InfluxDB.Client.Linq.Internal
             _orders.AddRange(aggregator._orders);
         }
 
-        public void AddOrder(string orderPart, string desc)
+        internal void AddOrder(string orderPart, string desc)
         {
             _orders.Add((orderPart, desc));
+        }
+
+        internal void AddResultFunction(ResultFunction resultFunction)
+        {
+            Arguments.CheckNotNull(resultFunction, nameof(resultFunction));
+            
+            _resultFunction = resultFunction;
         }
 
         internal string BuildFluxQuery()
@@ -82,6 +105,16 @@ namespace InfluxDB.Client.Linq.Internal
             if (_limitNAssignment != null)
             {
                 parts.Add(BuildOperator("limit", "n", _limitNAssignment, "offset", _limitOffsetAssignment));
+            }
+
+            if (_resultFunction != ResultFunction.None)
+            {
+                if (_resultFunction == ResultFunction.Count)
+                {
+                    parts.Add("stateCount(fn: (r) => true, column: \"linq_result_column\")");
+                    parts.Add("last(column: \"linq_result_column\")");
+                    parts.Add("keep(columns: [\"linq_result_column\"])");
+                }
             }
 
             return JoinList(parts, "|>");

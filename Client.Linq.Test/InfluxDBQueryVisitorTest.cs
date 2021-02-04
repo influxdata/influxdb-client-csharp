@@ -76,9 +76,9 @@ namespace Client.Linq.Test
                 select s;
 
             var nse = Assert.Throws<NotSupportedException>(() =>
-                BuildQueryVisitor(MakeExpression(query, q => q.Count())));
+                BuildQueryVisitor(MakeExpression(query, q => q.Max())));
 
-            Assert.AreEqual("CountResultOperator is not supported.", nse.Message);
+            Assert.AreEqual("MaxResultOperator is not supported.", nse.Message);
         }
 
         [Test]
@@ -439,6 +439,65 @@ namespace Client.Linq.Test
                 }
             }
         }
+
+        [Test]
+        public void ResultOperatorCount()
+        {
+            var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _queryApi)
+                select s;
+            var visitor = BuildQueryVisitor(MakeExpression(query, q => q.Count()));
+
+            const string expected = "from(bucket: p1) " +
+                                    "|> range(start: p2) " +
+                                    "|> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\") " +
+                                    "|> stateCount(fn: (r) => true, column: \"linq_result_column\") " +
+                                    "|> last(column: \"linq_result_column\") " +
+                                    "|> keep(columns: [\"linq_result_column\"])";
+
+            Assert.AreEqual(expected, visitor.BuildFluxQuery());
+        }
+
+        [Test]
+        public void ResultOperatorLongCount()
+        {
+            var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _queryApi)
+                select s;
+            var visitor = BuildQueryVisitor(MakeExpression(query, q => q.LongCount()));
+
+            const string expected = "from(bucket: p1) " +
+                                    "|> range(start: p2) " +
+                                    "|> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\") " +
+                                    "|> stateCount(fn: (r) => true, column: \"linq_result_column\") " +
+                                    "|> last(column: \"linq_result_column\") " +
+                                    "|> keep(columns: [\"linq_result_column\"])";
+
+            Assert.AreEqual(expected, visitor.BuildFluxQuery());
+        }
+
+        // [Test]
+        // public void UnaryExpressionConvert()
+        // {
+        //     var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _queryApi)
+        //         where s.Deployment == Convert.ToString("d")
+        //         select s;
+        //     var visitor = BuildQueryVisitor(query.Expression);
+        //
+        //     const string expected = "from(bucket: p1) " +
+        //                             "|> range(start: p2) " +
+        //                             "|> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\") " +
+        //                             "|> filter(fn: (r) => (r[\"deployment\"] == p3))";
+        //
+        //     Assert.AreEqual(expected, visitor.BuildFluxQuery());
+        //
+        //     var unaryExpression = Expression.Convert(
+        //         Expression.Constant(5.5),
+        //         typeof(Int16)
+        //     );
+        //
+        //     var queryGenerationContext = new QueryGenerationContext(new QueryAggregator(), new VariableAggregator(), new DefaultMemberNameResolver());
+        //     var fluxExpressions = QueryExpressionTreeVisitor.GetFluxExpressions(unaryExpression, unaryExpression, queryGenerationContext);
+        //     Assert.AreEqual(1, fluxExpressions.Count());
+        // }
 
         private class MemberNameResolver : IMemberNameResolver
         {

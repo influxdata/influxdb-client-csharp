@@ -98,6 +98,10 @@ namespace InfluxDB.Client.Linq.Internal
                     break;
                 case AnyResultOperator _:
                     break;
+                case LongCountResultOperator _:
+                case CountResultOperator _:
+                    _context.QueryAggregator.AddResultFunction(ResultFunction.Count);
+                    break;
                 default:
                     throw new NotSupportedException($"{resultOperator.GetType().Name} is not supported.");
             }

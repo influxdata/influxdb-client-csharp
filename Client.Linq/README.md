@@ -21,6 +21,8 @@ The library supports to use a LINQ expression to query the InfluxDB.
     - [Take](#take)
     - [Skip](#skip)
     - [OrderBy](#orderby)
+    - [Count](#count)
+    - [LongCount](#longcount)
 - [Domain Converter](#domain-converter)
 - [How to debug output Flux Query](#how-to-debug-output-flux-query)
 
@@ -627,6 +629,44 @@ from(bucket: "my-bucket")
     |> range(start: 0) 
     |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value") 
     |> sort(columns: ["_time"], desc: true)
+```
+
+### Count
+
+```c#
+var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", queryApi)
+    select s;
+
+var sensors = query.Count();
+```
+
+Flux Query:
+```flux
+from(bucket: "my-bucket") 
+    |> range(start: 0) 
+    |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value") 
+    |> stateCount(fn: (r) => true, column: "linq_result_column") 
+    |> last(column: "linq_result_column") 
+    |> keep(columns: ["linq_result_column"])
+```
+
+### LongCount
+
+```c#
+var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", queryApi)
+    select s;
+
+var sensors = query.LongCount();
+```
+
+Flux Query:
+```flux
+from(bucket: "my-bucket") 
+    |> range(start: 0) 
+    |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value") 
+    |> stateCount(fn: (r) => true, column: "linq_result_column") 
+    |> last(column: "linq_result_column") 
+    |> keep(columns: ["linq_result_column"])
 ```
 
 ## Domain Converter
