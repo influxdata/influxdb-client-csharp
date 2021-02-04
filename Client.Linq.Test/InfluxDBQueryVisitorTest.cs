@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using System.Text;
 using InfluxDB.Client;
 using InfluxDB.Client.Api.Domain;
 using InfluxDB.Client.Api.Service;
@@ -474,30 +475,44 @@ namespace Client.Linq.Test
             Assert.AreEqual(expected, visitor.BuildFluxQuery());
         }
 
-        // [Test]
-        // public void UnaryExpressionConvert()
-        // {
-        //     var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _queryApi)
-        //         where s.Deployment == Convert.ToString("d")
-        //         select s;
-        //     var visitor = BuildQueryVisitor(query.Expression);
-        //
-        //     const string expected = "from(bucket: p1) " +
-        //                             "|> range(start: p2) " +
-        //                             "|> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\") " +
-        //                             "|> filter(fn: (r) => (r[\"deployment\"] == p3))";
-        //
-        //     Assert.AreEqual(expected, visitor.BuildFluxQuery());
-        //
-        //     var unaryExpression = Expression.Convert(
-        //         Expression.Constant(5.5),
-        //         typeof(Int16)
-        //     );
-        //
-        //     var queryGenerationContext = new QueryGenerationContext(new QueryAggregator(), new VariableAggregator(), new DefaultMemberNameResolver());
-        //     var fluxExpressions = QueryExpressionTreeVisitor.GetFluxExpressions(unaryExpression, unaryExpression, queryGenerationContext);
-        //     Assert.AreEqual(1, fluxExpressions.Count());
-        // }
+        [Test]
+        public void UnaryExpressionConvert()
+        {
+            var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _queryApi)
+                where s.Deployment == Convert.ToString("d")
+                select s;
+            var visitor = BuildQueryVisitor(query.Expression);
+
+            const string expected = "from(bucket: p1) " +
+                                    "|> range(start: p2) " +
+                                    "|> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\") " +
+                                    "|> filter(fn: (r) => (r[\"deployment\"] == p3))";
+
+            Assert.AreEqual(expected, visitor.BuildFluxQuery());
+
+            Expression equalExpr = Expression.Equal(
+                Expression.PropertyOrField(
+                    Expression.Constant(new Sensor()),
+                    "deployment"
+                ),
+                Expression.Convert(Expression.Constant("production"), typeof(object))
+            );
+
+            var aggregator = new VariableAggregator();
+            var context =
+                new QueryGenerationContext(new QueryAggregator(), aggregator, new DefaultMemberNameResolver());
+            var flux = QueryExpressionTreeVisitor.GetFluxExpressions(equalExpr, equalExpr, context).Aggregate(
+                new StringBuilder(), (builder, part) =>
+                {
+                    part.AppendFlux(builder);
+
+                    return builder;
+                }).ToString();
+
+            Assert.AreEqual(1, aggregator.GetStatements().Count);
+            Assert.AreEqual("production", GetLiteral<StringLiteral>(aggregator.GetStatements()[0]).Value);
+            Assert.AreEqual("(deployment == p1)", flux);
+        }
 
         private class MemberNameResolver : IMemberNameResolver
         {
@@ -638,7 +653,12 @@ namespace Client.Linq.Test
 
         private TLiteralType GetLiteral<TLiteralType>(File ast, int index) where TLiteralType : class
         {
-            return (((OptionStatement) ast.Body[index]).Assignment as VariableAssignment)?.Init as TLiteralType;
+            return GetLiteral<TLiteralType>(ast.Body[index]);
+        }
+
+        private TLiteralType GetLiteral<TLiteralType>(Statement statement) where TLiteralType : class
+        {
+            return (((OptionStatement) statement).Assignment as VariableAssignment)?.Init as TLiteralType;
         }
     }
 }

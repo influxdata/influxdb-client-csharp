@@ -124,16 +124,16 @@ namespace InfluxDB.Client.Linq.Internal
 
             return expression;
         }
-        
-        // protected override Expression VisitUnary(UnaryExpression expression)
-        // {
-        //     if (expression.NodeType == ExpressionType.Convert)
-        //     {
-        //         return Visit(expression.Operand);
-        //     }
-        //
-        //     return base.VisitUnary(expression);
-        // }
+
+        protected override Expression VisitUnary(UnaryExpression expression)
+        {
+            if (expression.NodeType == ExpressionType.Convert)
+            {
+                return Visit(expression.Operand);
+            }
+
+            return base.VisitUnary(expression);
+        }
         
         protected override Exception CreateUnhandledItemException<T>(T unhandledItem, string visitMethod)
         {
