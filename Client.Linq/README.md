@@ -110,6 +110,43 @@ sensor,deployment=testing,sensor_id=id-1 data=28
 
 and this is also way how following LINQ operators works.
 
+### Client Side Evaluation
+
+The library attempts to evaluate a query on the server as much as possible. 
+The client side evaluations is required for aggregation function if there is more then one time series.
+
+If you want to count your data with following Flux:
+
+```flux
+from(bucket: "my-bucket")
+  |> range(start: 0)
+  |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value")
+  |> stateCount(fn: (r) => true, column: "linq_result_column") 
+  |> last(column: "linq_result_column") 
+  |> keep(columns: ["linq_result_column"])
+```
+
+The result will be one count for each time-series:
+
+```csv
+#group,false,false,false
+#datatype,string,long,long
+#default,_result,,
+,result,table,linq_result_column
+,,0,1
+,,0,1
+
+```
+
+and client has to aggregate this multiple results into one scalar value.
+
+Operators that could cause client side evaluation:
+
+- `Count`
+- `CountLong`
+
+### TD;LR
+
 - [series](https://docs.influxdata.com/influxdb/v2.0/reference/glossary/#series)
 - [Flux](https://docs.influxdata.com/influxdb/v2.0/reference/glossary/#flux)
 - [Query data with Flux](https://docs.influxdata.com/influxdb/v2.0/query-data/flux/)
@@ -633,6 +670,8 @@ from(bucket: "my-bucket")
 
 ### Count
 
+> Possibility of partial [client side evaluation](#client-side-evaluation)
+
 ```c#
 var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", queryApi)
     select s;
@@ -651,6 +690,8 @@ from(bucket: "my-bucket")
 ```
 
 ### LongCount
+
+> Possibility of partial [client side evaluation](#client-side-evaluation)
 
 ```c#
 var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", queryApi)
