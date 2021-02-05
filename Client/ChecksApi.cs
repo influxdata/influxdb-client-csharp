@@ -32,14 +32,14 @@ namespace InfluxDB.Client
         /// <param name="threshold">condition for that specific status</param>
         /// <param name="orgId">the organization that owns this check</param>
         /// <returns>ThresholdCheck created</returns>
-        public async Task<ThresholdCheck> CreateThresholdCheckAsync(string name, string query,
+        public Task<ThresholdCheck> CreateThresholdCheckAsync(string name, string query,
             string every, string messageTemplate, Threshold threshold, string orgId)
         {
             Arguments.CheckNotNull(threshold, nameof(threshold));
 
             var thresholds = new List<Threshold> {threshold};
 
-            return await CreateThresholdCheckAsync(name, query, every, messageTemplate, thresholds, orgId);
+            return CreateThresholdCheckAsync(name, query, every, messageTemplate, thresholds, orgId);
         }
 
         /// <summary>
@@ -67,7 +67,7 @@ namespace InfluxDB.Client
                 orgID: orgId, every: every, statusMessageTemplate: messageTemplate, status: TaskStatusType.Active,
                 query: CreateDashboardQuery(query));
 
-            return (ThresholdCheck) await CreateCheckAsync(check);
+            return (ThresholdCheck) await CreateCheckAsync(check).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -99,7 +99,7 @@ namespace InfluxDB.Client
                 orgID: orgId, query: CreateDashboardQuery(query), statusMessageTemplate: messageTemplate,
                 status: TaskStatusType.Active);
 
-            return (DeadmanCheck) await CreateCheckAsync(check);
+            return (DeadmanCheck) await CreateCheckAsync(check).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -107,9 +107,9 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="check">check to create</param>
         /// <returns>Check created</returns>
-        public async Task<Check> CreateCheckAsync(Check check)
+        public Task<Check> CreateCheckAsync(Check check)
         {
-            return await _service.CreateCheckAsync(check);
+            return _service.CreateCheckAsync(check);
         }
 
         /// <summary>
@@ -117,14 +117,14 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="check">check update to apply</param>
         /// <returns>An updated check</returns>
-        public async Task<Check> UpdateCheckAsync(Check check)
+        public Task<Check> UpdateCheckAsync(Check check)
         {
             Arguments.CheckNotNull(check, nameof(check));
 
             Enum.TryParse(check.Status.ToString(), true,
                 out CheckPatch.StatusEnum status);
 
-            return await UpdateCheckAsync(check.Id,
+            return UpdateCheckAsync(check.Id,
                 new CheckPatch(check.Name, check.Description, status));
         }
 
@@ -134,12 +134,12 @@ namespace InfluxDB.Client
         /// <param name="checkId">ID of check</param>
         /// <param name="patch">update to apply</param>
         /// <returns>An updated check</returns>
-        public async Task<Check> UpdateCheckAsync(string checkId, CheckPatch patch)
+        public Task<Check> UpdateCheckAsync(string checkId, CheckPatch patch)
         {
             Arguments.CheckNonEmptyString(checkId, nameof(checkId));
             Arguments.CheckNotNull(patch, nameof(patch));
 
-            return await _service.PatchChecksIDAsync(checkId, patch);
+            return _service.PatchChecksIDAsync(checkId, patch);
         }
 
         /// <summary>
@@ -147,11 +147,11 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="check">the check to delete</param>
         /// <returns></returns>
-        public async Task DeleteCheckAsync(Check check)
+        public Task DeleteCheckAsync(Check check)
         {
             Arguments.CheckNotNull(check, nameof(check));
 
-            await DeleteCheckAsync(check.Id);
+            return DeleteCheckAsync(check.Id);
         }
 
         /// <summary>
@@ -159,11 +159,11 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="checkId">checkID the ID of check to delete</param>
         /// <returns></returns>
-        public async Task DeleteCheckAsync(string checkId)
+        public Task DeleteCheckAsync(string checkId)
         {
             Arguments.CheckNonEmptyString(checkId, nameof(checkId));
 
-            await _service.DeleteChecksIDAsync(checkId);
+            return _service.DeleteChecksIDAsync(checkId);
         }
 
         /// <summary>
@@ -171,11 +171,11 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="checkId">ID of check</param>
         /// <returns>the check requested</returns>
-        public async Task<Check> FindCheckByIdAsync(string checkId)
+        public Task<Check> FindCheckByIdAsync(string checkId)
         {
             Arguments.CheckNonEmptyString(checkId, nameof(checkId));
 
-            return await _service.GetChecksIDAsync(checkId);
+            return _service.GetChecksIDAsync(checkId);
         }
 
         /// <summary>
@@ -187,7 +187,8 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
 
-            return (await FindChecksAsync(orgId, new FindOptions()))._Checks;
+            var checks = await FindChecksAsync(orgId, new FindOptions()).ConfigureAwait(false);
+            return checks._Checks;
         }
 
         /// <summary>
@@ -196,12 +197,12 @@ namespace InfluxDB.Client
         /// <param name="orgId">only show checks belonging to specified organization</param>
         /// <param name="findOptions">find options</param>
         /// <returns>A list of checks</returns>
-        public async Task<Checks> FindChecksAsync(string orgId, FindOptions findOptions)
+        public Task<Checks> FindChecksAsync(string orgId, FindOptions findOptions)
         {
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
             Arguments.CheckNotNull(findOptions, nameof(findOptions));
 
-            return await _service.GetChecksAsync(orgId, offset: findOptions.Offset,
+            return _service.GetChecksAsync(orgId, offset: findOptions.Offset,
                 limit: findOptions.Limit);
         }
 
@@ -210,11 +211,11 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="check"> the check</param>
         /// <returns>a list of all labels for a check</returns>
-        public async Task<List<Label>> GetLabelsAsync(Check check)
+        public Task<List<Label>> GetLabelsAsync(Check check)
         {
             Arguments.CheckNotNull(check, nameof(check));
 
-            return await GetLabelsAsync(check.Id);
+            return GetLabelsAsync(check.Id);
         }
 
         /// <summary>
@@ -226,7 +227,8 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(checkId, nameof(checkId));
 
-            return (await _service.GetChecksIDLabelsAsync(checkId)).Labels;
+            var labels = await _service.GetChecksIDLabelsAsync(checkId).ConfigureAwait(false);
+            return labels.Labels;
         }
 
         /// <summary>
@@ -235,12 +237,12 @@ namespace InfluxDB.Client
         /// <param name="label">label to add</param>
         /// <param name="check">the check</param>
         /// <returns>the label was added to the check</returns>
-        public async Task<Label> AddLabelAsync(Label label, Check check)
+        public Task<Label> AddLabelAsync(Label label, Check check)
         {
             Arguments.CheckNotNull(check, nameof(check));
             Arguments.CheckNotNull(label, nameof(label));
 
-            return await AddLabelAsync(label.Id, check.Id);
+            return AddLabelAsync(label.Id, check.Id);
         }
 
         /// <summary>
@@ -256,7 +258,8 @@ namespace InfluxDB.Client
 
             var mapping = new LabelMapping(labelId);
 
-            return (await _service.PostChecksIDLabelsAsync(checkId, mapping)).Label;
+            var labels = await _service.PostChecksIDLabelsAsync(checkId, mapping).ConfigureAwait(false);
+            return labels.Label;
         }
 
         /// <summary>
@@ -265,12 +268,12 @@ namespace InfluxDB.Client
         /// <param name="label">the label to delete</param>
         /// <param name="check">the check</param>
         /// <returns></returns>
-        public async Task DeleteLabelAsync(Label label, Check check)
+        public Task DeleteLabelAsync(Label label, Check check)
         {
             Arguments.CheckNotNull(check, nameof(check));
             Arguments.CheckNotNull(label, nameof(label));
 
-            await DeleteLabelAsync(label.Id, check.Id);
+            return DeleteLabelAsync(label.Id, check.Id);
         }
 
         /// <summary>
@@ -279,12 +282,12 @@ namespace InfluxDB.Client
         /// <param name="labelId">labelID the label id to delete</param>
         /// <param name="checkId">checkID ID of the check</param>
         /// <returns></returns>
-        public async Task DeleteLabelAsync(string labelId, string checkId)
+        public Task DeleteLabelAsync(string labelId, string checkId)
         {
             Arguments.CheckNonEmptyString(checkId, nameof(checkId));
             Arguments.CheckNonEmptyString(labelId, nameof(labelId));
 
-            await _service.DeleteChecksIDLabelsIDAsync(checkId, labelId);
+            return _service.DeleteChecksIDLabelsIDAsync(checkId, labelId);
         }
 
         private DashboardQuery CreateDashboardQuery(string query)

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using InfluxDB.Client.Api.Domain;
@@ -82,13 +81,11 @@ namespace InfluxDB.Client.Test
         [Test]
         public void CloneTelegrafNotFound()
         {
-            var ioe = Assert.ThrowsAsync<AggregateException>(async () =>
+            var ioe = Assert.ThrowsAsync<HttpException>(async () =>
                 await _telegrafsApi.CloneTelegrafAsync(GenerateName("tc"), "020f755c3c082000"));
 
-            Assert.IsNotNull(ioe.InnerException);
-            Assert.IsNotNull(ioe.InnerException.InnerException);
-            Assert.AreEqual(typeof(HttpException), ioe.InnerException.InnerException.GetType());
-            Assert.AreEqual("telegraf configuration not found", ioe.InnerException.InnerException.Message);
+            Assert.AreEqual(typeof(HttpException), ioe.GetType());
+            Assert.AreEqual("telegraf configuration not found", ioe.Message);
         }
 
         [Test]
@@ -154,12 +151,11 @@ namespace InfluxDB.Client.Test
             // delete source
             await _telegrafsApi.DeleteTelegrafAsync(createdConfig);
 
-            var ioe = Assert.ThrowsAsync<AggregateException>(async () =>
+            var ioe = Assert.ThrowsAsync<HttpException>(async () =>
                 await _telegrafsApi.FindTelegrafByIdAsync(createdConfig.Id));
 
-            Assert.IsNotNull(ioe.InnerException);
-            Assert.AreEqual("telegraf configuration not found", ioe.InnerException.Message);
-            Assert.AreEqual(typeof(HttpException), ioe.InnerException.GetType());
+            Assert.AreEqual("telegraf configuration not found", ioe.Message);
+            Assert.AreEqual(typeof(HttpException), ioe.GetType());
         }
 
         [Test]
@@ -196,12 +192,11 @@ namespace InfluxDB.Client.Test
         [Test]
         public void FindTelegrafByIdNull()
         {
-            var ioe = Assert.ThrowsAsync<AggregateException>(async () =>
+            var ioe = Assert.ThrowsAsync<HttpException>(async () =>
                 await _telegrafsApi.FindTelegrafByIdAsync("020f755c3d082000"));
 
-            Assert.IsNotNull(ioe.InnerException);
-            Assert.AreEqual("telegraf configuration not found", ioe.InnerException.Message);
-            Assert.AreEqual(typeof(HttpException), ioe.InnerException.GetType());
+            Assert.AreEqual("telegraf configuration not found", ioe.Message);
+            Assert.AreEqual(typeof(HttpException), ioe.GetType());
         }
 
         [Test]

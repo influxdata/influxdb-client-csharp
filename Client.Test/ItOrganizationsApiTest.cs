@@ -25,7 +25,6 @@ namespace InfluxDB.Client.Test
         {
             var source = await _organizationsApi.CreateOrganizationAsync(GenerateName("Constant Pro"));
 
-            var properties = new Dictionary<string, string> {{"color", "green"}, {"location", "west"}};
             var name = GenerateName("cloned");
 
             var cloned = await _organizationsApi.CloneOrganizationAsync(name, source);
@@ -37,11 +36,11 @@ namespace InfluxDB.Client.Test
         [Test]
         public void CloneOrganizationNotFound()
         {
-            var ioe = Assert.ThrowsAsync<AggregateException>(async () =>
+            var ioe = Assert.ThrowsAsync<HttpException>(async () =>
                 await _organizationsApi.CloneOrganizationAsync(GenerateName("bucket"), "020f755c3c082000"));
 
-            Assert.AreEqual("organization not found", ioe.InnerException.Message);
-            Assert.AreEqual(typeof(HttpException), ioe.InnerException.GetType());
+            Assert.AreEqual("organization not found", ioe.Message);
+            Assert.AreEqual(typeof(HttpException), ioe.GetType());
         }
 
         [Test]

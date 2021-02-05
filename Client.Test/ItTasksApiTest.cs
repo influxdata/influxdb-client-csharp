@@ -123,10 +123,9 @@ namespace InfluxDB.Client.Test
         [Test]
         public void CloneTaskNotFound()
         {
-            var ioe = Assert.ThrowsAsync<AggregateException>(async () => await _tasksApi.CloneTaskAsync("020f755c3c082000"));
+            var ioe = Assert.ThrowsAsync<HttpException>(async () => await _tasksApi.CloneTaskAsync("020f755c3c082000"));
 
-            Assert.NotNull(ioe.InnerException, "ioe.InnerException != null");
-            Assert.AreEqual("failed to find task: task not found", ioe.InnerException.Message);
+            Assert.AreEqual("failed to find task: task not found", ioe.Message);
         }
 
         [Test]

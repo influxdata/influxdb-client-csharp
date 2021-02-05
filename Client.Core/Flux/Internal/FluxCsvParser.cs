@@ -112,7 +112,7 @@ namespace InfluxDB.Client.Core.Flux.Internal
             using var csv = new CsvReader(reader, CultureInfo.InvariantCulture);
             var state = new ParseFluxResponseState { csv = csv };
 
-            while (await csv.ReadAsync() && !cancellationToken.IsCancellationRequested)
+            while (await csv.ReadAsync().ConfigureAwait(false) && !cancellationToken.IsCancellationRequested)
             {
                 foreach (var response in ParseNextFluxResponse(state))
                     yield return response;   

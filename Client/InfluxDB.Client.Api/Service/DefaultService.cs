@@ -465,7 +465,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
+                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -620,9 +620,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">Specifies the organization ID of the resource. (optional)</param>
         /// <param name="bucketID">Specifies the bucket ID to delete data from. (optional)</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task DeletePostAsync (DeletePredicateRequest deletePredicateRequest, string zapTraceSpan = null, string org = null, string bucket = null, string orgID = null, string bucketID = null)
+        public System.Threading.Tasks.Task DeletePostAsync (DeletePredicateRequest deletePredicateRequest, string zapTraceSpan = null, string org = null, string bucket = null, string orgID = null, string bucketID = null)
         {
-             await DeletePostAsyncWithHttpInfo(deletePredicateRequest, zapTraceSpan, org, bucket, orgID, bucketID);
+             return DeletePostAsyncWithHttpInfo(deletePredicateRequest, zapTraceSpan, org, bucket, orgID, bucketID);
 
         }
 
@@ -640,7 +640,7 @@ namespace InfluxDB.Client.Api.Service
         public async System.Threading.Tasks.Task<ApiResponse<Object>> DeletePostAsyncWithHttpInfo (DeletePredicateRequest deletePredicateRequest, string zapTraceSpan = null, string org = null, string bucket = null, string orgID = null, string bucketID = null)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await DeletePostAsyncWithIRestResponse(deletePredicateRequest, zapTraceSpan, org, bucket, orgID, bucketID);
+            IRestResponse localVarResponse = await DeletePostAsyncWithIRestResponse(deletePredicateRequest, zapTraceSpan, org, bucket, orgID, bucketID).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -713,7 +713,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
+                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -825,7 +825,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
+                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -935,7 +935,7 @@ namespace InfluxDB.Client.Api.Service
         /// <returns>Task of Routes</returns>
         public async System.Threading.Tasks.Task<Routes> GetRoutesAsync (string zapTraceSpan = null)
         {
-             ApiResponse<Routes> localVarResponse = await GetRoutesAsyncWithHttpInfo(zapTraceSpan);
+             ApiResponse<Routes> localVarResponse = await GetRoutesAsyncWithHttpInfo(zapTraceSpan).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -949,7 +949,7 @@ namespace InfluxDB.Client.Api.Service
         public async System.Threading.Tasks.Task<ApiResponse<Routes>> GetRoutesAsyncWithHttpInfo (string zapTraceSpan = null)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await GetRoutesAsyncWithIRestResponse(zapTraceSpan);
+            IRestResponse localVarResponse = await GetRoutesAsyncWithIRestResponse(zapTraceSpan).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -1001,7 +1001,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
+                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -1129,7 +1129,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
+                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -1254,9 +1254,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="authorization">An auth credential for the Basic scheme (optional)</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task PostSigninAsync (string zapTraceSpan = null, String authorization = null)
+        public System.Threading.Tasks.Task PostSigninAsync (string zapTraceSpan = null, String authorization = null)
         {
-             await PostSigninAsyncWithHttpInfo(zapTraceSpan, authorization);
+             return PostSigninAsyncWithHttpInfo(zapTraceSpan, authorization);
 
         }
 
@@ -1270,7 +1270,7 @@ namespace InfluxDB.Client.Api.Service
         public async System.Threading.Tasks.Task<ApiResponse<Object>> PostSigninAsyncWithHttpInfo (string zapTraceSpan = null, String authorization = null)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await PostSigninAsyncWithIRestResponse(zapTraceSpan, authorization);
+            IRestResponse localVarResponse = await PostSigninAsyncWithIRestResponse(zapTraceSpan, authorization).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -1330,7 +1330,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
+                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -1441,7 +1441,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
+                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -1549,9 +1549,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task PostSignoutAsync (string zapTraceSpan = null)
+        public System.Threading.Tasks.Task PostSignoutAsync (string zapTraceSpan = null)
         {
-             await PostSignoutAsyncWithHttpInfo(zapTraceSpan);
+             return PostSignoutAsyncWithHttpInfo(zapTraceSpan);
 
         }
 
@@ -1564,7 +1564,7 @@ namespace InfluxDB.Client.Api.Service
         public async System.Threading.Tasks.Task<ApiResponse<Object>> PostSignoutAsyncWithHttpInfo (string zapTraceSpan = null)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await PostSignoutAsyncWithIRestResponse(zapTraceSpan);
+            IRestResponse localVarResponse = await PostSignoutAsyncWithIRestResponse(zapTraceSpan).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -1616,7 +1616,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
+                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {

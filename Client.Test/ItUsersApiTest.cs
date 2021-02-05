@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using InfluxDB.Client.Core.Exceptions;
 using NUnit.Framework;
@@ -9,9 +10,12 @@ namespace InfluxDB.Client.Test
     public class ItUsersApiTest : AbstractItClientTest
     {
         [SetUp]
-        public new void SetUp()
+        public new async Task SetUp()
         {
             _usersApi = Client.GetUsersApi();
+            
+            foreach (var user in (await _usersApi.FindUsersAsync()).Where(user => user.Name.EndsWith("-IT")))
+                await _usersApi.DeleteUserAsync(user);
         }
 
         private UsersApi _usersApi;
@@ -118,12 +122,12 @@ namespace InfluxDB.Client.Test
         {
             Client.Dispose();
 
-            var ioe = Assert.ThrowsAsync<AggregateException>(async () =>
+            var ioe = Assert.ThrowsAsync<HttpException>(async () =>
                 await _usersApi.MeUpdatePasswordAsync("my-password-wrong", "my-password"));
 
             Assert.IsNotNull(ioe);
-            Assert.AreEqual("unauthorized access", ioe.InnerException.Message);
-            Assert.AreEqual(typeof(HttpException), ioe.InnerException.GetType());
+            Assert.AreEqual("unauthorized access", ioe.Message);
+            Assert.AreEqual(typeof(HttpException), ioe.GetType());
         }
 
         [Test]
@@ -187,11 +191,11 @@ namespace InfluxDB.Client.Test
         [Test]
         public void CloneUserNotFound()
         {
-            var ioe = Assert.ThrowsAsync<AggregateException>(async () =>
+            var ioe = Assert.ThrowsAsync<HttpException>(async () =>
                 await _usersApi.CloneUserAsync(GenerateName("bucket"), "020f755c3c082000"));
 
-            Assert.AreEqual("user not found", ioe.InnerException.Message);
-            Assert.AreEqual(typeof(HttpException), ioe.InnerException.GetType());
+            Assert.AreEqual("user not found", ioe.Message);
+            Assert.AreEqual(typeof(HttpException), ioe.GetType());
         }
     }
 }

@@ -269,7 +269,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
+                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -379,7 +379,7 @@ namespace InfluxDB.Client.Api.Service
         /// <returns>Task of HealthCheck</returns>
         public async System.Threading.Tasks.Task<HealthCheck> GetHealthAsync (string zapTraceSpan = null)
         {
-             ApiResponse<HealthCheck> localVarResponse = await GetHealthAsyncWithHttpInfo(zapTraceSpan);
+             ApiResponse<HealthCheck> localVarResponse = await GetHealthAsyncWithHttpInfo(zapTraceSpan).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -393,7 +393,7 @@ namespace InfluxDB.Client.Api.Service
         public async System.Threading.Tasks.Task<ApiResponse<HealthCheck>> GetHealthAsyncWithHttpInfo (string zapTraceSpan = null)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await GetHealthAsyncWithIRestResponse(zapTraceSpan);
+            IRestResponse localVarResponse = await GetHealthAsyncWithIRestResponse(zapTraceSpan).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -445,7 +445,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
+                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {

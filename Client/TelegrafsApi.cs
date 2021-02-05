@@ -30,10 +30,10 @@ namespace InfluxDB.Client
         /// <param name="org">The organization that owns this config</param>
         /// <param name="plugins">The telegraf plugins config</param>
         /// <returns>Telegraf config created</returns>
-        public async Task<Telegraf> CreateTelegrafAsync(string name, string description, Organization org,
+        public Task<Telegraf> CreateTelegrafAsync(string name, string description, Organization org,
             List<TelegrafPlugin> plugins)
         {
-            return await CreateTelegrafAsync(name, description, org, CreateAgentConfiguration(), plugins);
+            return CreateTelegrafAsync(name, description, org, CreateAgentConfiguration(), plugins);
         }
 
         /// <summary>
@@ -45,10 +45,10 @@ namespace InfluxDB.Client
         /// <param name="agentConfiguration">The telegraf agent config</param>
         /// <param name="plugins">The telegraf plugins config</param>
         /// <returns>Telegraf config created</returns>
-        public async Task<Telegraf> CreateTelegrafAsync(string name, string description, Organization org,
+        public Task<Telegraf> CreateTelegrafAsync(string name, string description, Organization org,
             Dictionary<string, object> agentConfiguration, List<TelegrafPlugin> plugins)
         {
-            return await CreateTelegrafAsync(name, description, org.Id, agentConfiguration, plugins);
+            return CreateTelegrafAsync(name, description, org.Id, agentConfiguration, plugins);
         }
 
         /// <summary>
@@ -59,10 +59,10 @@ namespace InfluxDB.Client
         /// <param name="orgId">The organization that owns this config</param>
         /// <param name="plugins">The telegraf plugins config</param>
         /// <returns>Telegraf config created</returns>
-        public async Task<Telegraf> CreateTelegrafAsync(string name, string description, string orgId,
+        public Task<Telegraf> CreateTelegrafAsync(string name, string description, string orgId,
             List<TelegrafPlugin> plugins)
         {
-            return await CreateTelegrafAsync(name, description, orgId, CreateAgentConfiguration(), plugins);
+            return CreateTelegrafAsync(name, description, orgId, CreateAgentConfiguration(), plugins);
         }
 
         /// <summary>
@@ -74,7 +74,7 @@ namespace InfluxDB.Client
         /// <param name="agentConfiguration">The telegraf agent config</param>
         /// <param name="plugins">The telegraf plugins config</param>
         /// <returns>Telegraf config created</returns>
-        public async Task<Telegraf> CreateTelegrafAsync(string name, string description, string orgId,
+        public Task<Telegraf> CreateTelegrafAsync(string name, string description, string orgId,
             Dictionary<string, object> agentConfiguration, List<TelegrafPlugin> plugins)
         {
             var config = new StringBuilder();
@@ -115,7 +115,7 @@ namespace InfluxDB.Client
             var request = new TelegrafRequest(name: name, description: description, orgID: orgId,
                 config: config.ToString());
 
-            return await CreateTelegrafAsync(request);
+            return CreateTelegrafAsync(request);
         }
 
         /// <summary>
@@ -127,10 +127,10 @@ namespace InfluxDB.Client
         /// <param name="config">ConfigTOML contains the raw toml config</param>
         /// <param name="metadata">Metadata for the config</param>
         /// <returns>Telegraf config created</returns>
-        public async Task<Telegraf> CreateTelegrafAsync(string name, string description, Organization org,
+        public Task<Telegraf> CreateTelegrafAsync(string name, string description, Organization org,
             string config, TelegrafRequestMetadata metadata)
         {
-            return await CreateTelegrafAsync(name, description, org.Id, config, metadata);
+            return CreateTelegrafAsync(name, description, org.Id, config, metadata);
         }
 
         /// <summary>
@@ -142,12 +142,12 @@ namespace InfluxDB.Client
         /// <param name="config">ConfigTOML contains the raw toml config</param>
         /// <param name="metadata">Metadata for the config</param>
         /// <returns>Telegraf config created</returns>
-        public async Task<Telegraf> CreateTelegrafAsync(string name, string description, string orgId,
+        public Task<Telegraf> CreateTelegrafAsync(string name, string description, string orgId,
             string config, TelegrafRequestMetadata metadata)
         {
             var request = new TelegrafRequest(name, description, metadata, config, orgId);
 
-            return await CreateTelegrafAsync(request);
+            return CreateTelegrafAsync(request);
         }
 
         /// <summary>
@@ -155,11 +155,11 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="telegrafRequest">Telegraf Configuration to create</param>
         /// <returns>Telegraf config created</returns>
-        public async Task<Telegraf> CreateTelegrafAsync(TelegrafRequest telegrafRequest)
+        public Task<Telegraf> CreateTelegrafAsync(TelegrafRequest telegrafRequest)
         {
             Arguments.CheckNotNull(telegrafRequest, nameof(telegrafRequest));
 
-            return await _service.PostTelegrafsAsync(telegrafRequest);
+            return _service.PostTelegrafsAsync(telegrafRequest);
         }
 
         /// <summary>
@@ -197,14 +197,14 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="telegraf">telegraf config update to apply</param>
         /// <returns>An updated telegraf</returns>
-        public async Task<Telegraf> UpdateTelegrafAsync(Telegraf telegraf)
+        public Task<Telegraf> UpdateTelegrafAsync(Telegraf telegraf)
         {
             Arguments.CheckNotNull(telegraf, nameof(telegraf));
 
             var request = new TelegrafRequest(telegraf.Name, telegraf.Description, telegraf.Metadata, telegraf.Config,
                 telegraf.OrgID);
 
-            return await UpdateTelegrafAsync(telegraf.Id, request);
+            return UpdateTelegrafAsync(telegraf.Id, request);
         }
 
         /// <summary>
@@ -213,12 +213,12 @@ namespace InfluxDB.Client
         /// <param name="telegrafId">ID of telegraf config</param>
         /// <param name="telegrafRequest">telegraf config update to apply</param>
         /// <returns>An updated telegraf</returns>
-        public async Task<Telegraf> UpdateTelegrafAsync(string telegrafId, TelegrafRequest telegrafRequest)
+        public Task<Telegraf> UpdateTelegrafAsync(string telegrafId, TelegrafRequest telegrafRequest)
         {
             Arguments.CheckNonEmptyString(telegrafId, nameof(telegrafId));
             Arguments.CheckNotNull(telegrafRequest, nameof(telegrafRequest));
 
-            return await _service.PutTelegrafsIDAsync(telegrafId, telegrafRequest);
+            return _service.PutTelegrafsIDAsync(telegrafId, telegrafRequest);
         }
 
         /// <summary>
@@ -226,11 +226,11 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="telegraf">telegraf config to delete</param>
         /// <returns>delete has been accepted</returns>
-        public async Task DeleteTelegrafAsync(Telegraf telegraf)
+        public Task DeleteTelegrafAsync(Telegraf telegraf)
         {
             Arguments.CheckNotNull(telegraf, nameof(telegraf));
 
-            await DeleteTelegrafAsync(telegraf.Id);
+            return DeleteTelegrafAsync(telegraf.Id);
         }
 
         /// <summary>
@@ -238,11 +238,11 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="telegrafId">ID of telegraf config to delete</param>
         /// <returns>delete has been accepted</returns>
-        public async Task DeleteTelegrafAsync(string telegrafId)
+        public Task DeleteTelegrafAsync(string telegrafId)
         {
             Arguments.CheckNonEmptyString(telegrafId, nameof(telegrafId));
 
-            await _service.DeleteTelegrafsIDAsync(telegrafId);
+            return _service.DeleteTelegrafsIDAsync(telegrafId);
         }
 
         /// <summary>
@@ -256,8 +256,9 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(clonedName, nameof(clonedName));
             Arguments.CheckNonEmptyString(telegrafId, nameof(telegrafId));
 
-            return await FindTelegrafByIdAsync(telegrafId).ContinueWith(t => CloneTelegrafAsync(clonedName, t.Result))
-                .Unwrap();
+            var telegraf = await FindTelegrafByIdAsync(telegrafId).ConfigureAwait(false);
+            
+            return await CloneTelegrafAsync(clonedName, telegraf).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -274,23 +275,14 @@ namespace InfluxDB.Client
             var cloned = new TelegrafRequest(clonedName, telegraf.Description, telegraf.Metadata, telegraf.Config,
                 telegraf.OrgID);
 
-            return await CreateTelegrafAsync(cloned).ContinueWith(created =>
+            var created = await CreateTelegrafAsync(cloned).ConfigureAwait(false);
+            var labels = await GetLabelsAsync(telegraf).ConfigureAwait(false);
+            foreach (var label in labels)
             {
-                //
-                // Add labels
-                //
-                return GetLabelsAsync(telegraf)
-                    .ContinueWith(labels =>
-                    {
-                        return labels.Result.Select(label => AddLabelAsync(label, created.Result));
-                    })
-                    .ContinueWith(async tasks =>
-                    {
-                        await Task.WhenAll(tasks.Result);
-                        return created.Result;
-                    })
-                    .Unwrap();
-            }).Unwrap();
+                await AddLabelAsync(label, created).ConfigureAwait(false);
+            }
+
+            return created;
         }
 
         /// <summary>
@@ -302,17 +294,18 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(telegrafId, nameof(telegrafId));
 
-            return await _service.GetTelegrafsIDWithIRestResponseAsync(telegrafId, null, "application/json")
-                .ContinueWith(t => (Telegraf) _service.Configuration.ApiClient.Deserialize(t.Result, typeof(Telegraf)));
+            var response = await _service.GetTelegrafsIDWithIRestResponseAsync(telegrafId, null, "application/json").ConfigureAwait(false);
+            
+            return (Telegraf) _service.Configuration.ApiClient.Deserialize(response, typeof(Telegraf));
         }
 
         /// <summary>
         /// Returns a list of telegraf configs.
         /// </summary>
         /// <returns>A list of telegraf configs</returns>
-        public async Task<List<Telegraf>> FindTelegrafsAsync()
+        public Task<List<Telegraf>> FindTelegrafsAsync()
         {
-            return await FindTelegrafsByOrgIdAsync(null);
+            return FindTelegrafsByOrgIdAsync(null);
         }
 
         /// <summary>
@@ -320,11 +313,11 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="organization">specifies the organization of the telegraf configs</param>
         /// <returns>A list of telegraf configs</returns>
-        public async Task<List<Telegraf>> FindTelegrafsByOrgAsync(Organization organization)
+        public Task<List<Telegraf>> FindTelegrafsByOrgAsync(Organization organization)
         {
             Arguments.CheckNotNull(organization, nameof(organization));
 
-            return await FindTelegrafsByOrgIdAsync(organization.Id);
+            return FindTelegrafsByOrgIdAsync(organization.Id);
         }
 
         /// <summary>
@@ -334,7 +327,8 @@ namespace InfluxDB.Client
         /// <returns>A list of telegraf configs</returns>
         public async Task<List<Telegraf>> FindTelegrafsByOrgIdAsync(string orgId)
         {
-            return (await _service.GetTelegrafsAsync(orgId)).Configurations;
+            var response = await _service.GetTelegrafsAsync(orgId).ConfigureAwait(false);
+            return response.Configurations;
         }
 
         /// <summary>
@@ -342,11 +336,11 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="telegraf">telegraf config to get</param>
         /// <returns>telegraf config details in TOML format</returns>
-        public async Task<string> GetTOMLAsync(Telegraf telegraf)
+        public Task<string> GetTOMLAsync(Telegraf telegraf)
         {
             Arguments.CheckNotNull(telegraf, nameof(telegraf));
 
-            return await GetTOMLAsync(telegraf.Id);
+            return GetTOMLAsync(telegraf.Id);
         }
 
         /// <summary>
@@ -354,11 +348,11 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="telegrafId">ID of telegraf config to get</param>
         /// <returns>telegraf config details in TOML format</returns>
-        public async Task<string> GetTOMLAsync(string telegrafId)
+        public Task<string> GetTOMLAsync(string telegrafId)
         {
             Arguments.CheckNonEmptyString(telegrafId, nameof(telegrafId));
 
-            return await _service.GetTelegrafsIDstringAsync(telegrafId, null, "application/toml");
+            return _service.GetTelegrafsIDstringAsync(telegrafId, null, "application/toml");
         }
 
         /// <summary>
@@ -366,11 +360,11 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="telegraf">the telegraf config</param>
         /// <returns>a list of telegraf config members</returns>
-        public async Task<List<ResourceMember>> GetMembersAsync(Telegraf telegraf)
+        public Task<List<ResourceMember>> GetMembersAsync(Telegraf telegraf)
         {
             Arguments.CheckNotNull(telegraf, nameof(telegraf));
 
-            return await GetMembersAsync(telegraf.Id);
+            return GetMembersAsync(telegraf.Id);
         }
 
         /// <summary>
@@ -382,7 +376,8 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(telegrafId, nameof(telegrafId));
 
-            return (await _service.GetTelegrafsIDMembersAsync(telegrafId)).Users;
+            var response = await _service.GetTelegrafsIDMembersAsync(telegrafId).ConfigureAwait(false);
+            return response.Users;
         }
 
         /// <summary>
@@ -391,12 +386,12 @@ namespace InfluxDB.Client
         /// <param name="member">user to add as member</param>
         /// <param name="telegraf">the telegraf config</param>
         /// <returns>member added to telegraf</returns>
-        public async Task<ResourceMember> AddMemberAsync(User member, Telegraf telegraf)
+        public Task<ResourceMember> AddMemberAsync(User member, Telegraf telegraf)
         {
             Arguments.CheckNotNull(telegraf, nameof(telegraf));
             Arguments.CheckNotNull(member, nameof(member));
 
-            return await AddMemberAsync(member.Id, telegraf.Id);
+            return AddMemberAsync(member.Id, telegraf.Id);
         }
 
         /// <summary>
@@ -405,12 +400,12 @@ namespace InfluxDB.Client
         /// <param name="memberId">user ID to add as member</param>
         /// <param name="telegrafId">ID of the telegraf config</param>
         /// <returns>member added to telegraf</returns>
-        public async Task<ResourceMember> AddMemberAsync(string memberId, string telegrafId)
+        public Task<ResourceMember> AddMemberAsync(string memberId, string telegrafId)
         {
             Arguments.CheckNonEmptyString(telegrafId, nameof(telegrafId));
             Arguments.CheckNonEmptyString(memberId, nameof(memberId));
 
-            return await _service.PostTelegrafsIDMembersAsync(telegrafId, new AddResourceMemberRequestBody(memberId));
+            return _service.PostTelegrafsIDMembersAsync(telegrafId, new AddResourceMemberRequestBody(memberId));
         }
 
         /// <summary>
@@ -419,12 +414,12 @@ namespace InfluxDB.Client
         /// <param name="member">member to remove</param>
         /// <param name="telegraf">the telegraf</param>
         /// <returns>member removed</returns>
-        public async Task DeleteMemberAsync(User member, Telegraf telegraf)
+        public Task DeleteMemberAsync(User member, Telegraf telegraf)
         {
             Arguments.CheckNotNull(telegraf, nameof(telegraf));
             Arguments.CheckNotNull(member, nameof(member));
 
-            await DeleteMemberAsync(member.Id, telegraf.Id);
+            return DeleteMemberAsync(member.Id, telegraf.Id);
         }
 
         /// <summary>
@@ -433,12 +428,12 @@ namespace InfluxDB.Client
         /// <param name="memberId">ID of member to remove</param>
         /// <param name="telegrafId">ID of the telegraf</param>
         /// <returns>member removed</returns>
-        public async Task DeleteMemberAsync(string memberId, string telegrafId)
+        public Task DeleteMemberAsync(string memberId, string telegrafId)
         {
             Arguments.CheckNonEmptyString(telegrafId, nameof(telegrafId));
             Arguments.CheckNonEmptyString(memberId, nameof(memberId));
 
-            await _service.DeleteTelegrafsIDMembersIDAsync(memberId, telegrafId);
+            return _service.DeleteTelegrafsIDMembersIDAsync(memberId, telegrafId);
         }
 
         /// <summary>
@@ -446,11 +441,11 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="telegraf">the telegraf config</param>
         /// <returns>a list of telegraf config owners</returns>
-        public async Task<List<ResourceOwner>> GetOwnersAsync(Telegraf telegraf)
+        public Task<List<ResourceOwner>> GetOwnersAsync(Telegraf telegraf)
         {
             Arguments.CheckNotNull(telegraf, nameof(telegraf));
 
-            return await GetOwnersAsync(telegraf.Id);
+            return GetOwnersAsync(telegraf.Id);
         }
 
         /// <summary>
@@ -462,7 +457,8 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(telegrafId, nameof(telegrafId));
 
-            return (await _service.GetTelegrafsIDOwnersAsync(telegrafId)).Users;
+            var response = await _service.GetTelegrafsIDOwnersAsync(telegrafId).ConfigureAwait(false);
+            return response.Users;
         }
 
         /// <summary>
@@ -471,12 +467,12 @@ namespace InfluxDB.Client
         /// <param name="owner">user to add as owner</param>
         /// <param name="telegraf">the telegraf config</param>
         /// <returns>telegraf config owner added</returns>
-        public async Task<ResourceOwner> AddOwnerAsync(User owner, Telegraf telegraf)
+        public Task<ResourceOwner> AddOwnerAsync(User owner, Telegraf telegraf)
         {
             Arguments.CheckNotNull(telegraf, nameof(telegraf));
             Arguments.CheckNotNull(owner, nameof(owner));
 
-            return await AddOwnerAsync(owner.Id, telegraf.Id);
+            return AddOwnerAsync(owner.Id, telegraf.Id);
         }
 
         /// <summary>
@@ -485,12 +481,12 @@ namespace InfluxDB.Client
         /// <param name="ownerId">ID of user to add as owner</param>
         /// <param name="telegrafId"> ID of the telegraf config</param>
         /// <returns>telegraf config owner added</returns>
-        public async Task<ResourceOwner> AddOwnerAsync(string ownerId, string telegrafId)
+        public Task<ResourceOwner> AddOwnerAsync(string ownerId, string telegrafId)
         {
             Arguments.CheckNonEmptyString(telegrafId, nameof(telegrafId));
             Arguments.CheckNonEmptyString(ownerId, nameof(ownerId));
 
-            return await _service.PostTelegrafsIDOwnersAsync(telegrafId, new AddResourceMemberRequestBody(ownerId));
+            return _service.PostTelegrafsIDOwnersAsync(telegrafId, new AddResourceMemberRequestBody(ownerId));
         }
 
         /// <summary>
@@ -499,12 +495,12 @@ namespace InfluxDB.Client
         /// <param name="owner">owner to remove</param>
         /// <param name="telegraf">the telegraf config</param>
         /// <returns>owner removed</returns>
-        public async Task DeleteOwnerAsync(User owner, Telegraf telegraf)
+        public Task DeleteOwnerAsync(User owner, Telegraf telegraf)
         {
             Arguments.CheckNotNull(telegraf, nameof(telegraf));
             Arguments.CheckNotNull(owner, nameof(owner));
 
-            await DeleteOwnerAsync(owner.Id, telegraf.Id);
+            return DeleteOwnerAsync(owner.Id, telegraf.Id);
         }
 
         /// <summary>
@@ -513,12 +509,12 @@ namespace InfluxDB.Client
         /// <param name="ownerId">ID of owner to remove</param>
         /// <param name="telegrafId">ID of the telegraf config</param>
         /// <returns>owner removed</returns>
-        public async Task DeleteOwnerAsync(string ownerId, string telegrafId)
+        public Task DeleteOwnerAsync(string ownerId, string telegrafId)
         {
             Arguments.CheckNonEmptyString(telegrafId, nameof(telegrafId));
             Arguments.CheckNonEmptyString(ownerId, nameof(ownerId));
 
-            await _service.DeleteTelegrafsIDOwnersIDAsync(ownerId, telegrafId);
+            return _service.DeleteTelegrafsIDOwnersIDAsync(ownerId, telegrafId);
         }
 
         /// <summary>
@@ -526,11 +522,11 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="telegraf">the telegraf config</param>
         /// <returns>a list of all labels for a telegraf config</returns>
-        public async Task<List<Label>> GetLabelsAsync(Telegraf telegraf)
+        public Task<List<Label>> GetLabelsAsync(Telegraf telegraf)
         {
             Arguments.CheckNotNull(telegraf, nameof(telegraf));
 
-            return await GetLabelsAsync(telegraf.Id);
+            return GetLabelsAsync(telegraf.Id);
         }
 
         /// <summary>
@@ -542,7 +538,8 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(telegrafId, nameof(telegrafId));
 
-            return (await _service.GetTelegrafsIDLabelsAsync(telegrafId)).Labels;
+            var response = await _service.GetTelegrafsIDLabelsAsync(telegrafId).ConfigureAwait(false);
+            return response.Labels;
         }
 
         /// <summary>
@@ -551,12 +548,12 @@ namespace InfluxDB.Client
         /// <param name="label">label to add</param>
         /// <param name="telegraf">the telegraf config</param>
         /// <returns>added label</returns>
-        public async Task<Label> AddLabelAsync(Label label, Telegraf telegraf)
+        public Task<Label> AddLabelAsync(Label label, Telegraf telegraf)
         {
             Arguments.CheckNotNull(telegraf, nameof(telegraf));
             Arguments.CheckNotNull(label, nameof(label));
 
-            return await AddLabelAsync(label.Id, telegraf.Id);
+            return AddLabelAsync(label.Id, telegraf.Id);
         }
 
         /// <summary>
@@ -570,7 +567,8 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(telegrafId, nameof(telegrafId));
             Arguments.CheckNonEmptyString(labelId, nameof(labelId));
 
-            return (await _service.PostTelegrafsIDLabelsAsync(telegrafId, new LabelMapping(labelId))).Label;
+            var response = await _service.PostTelegrafsIDLabelsAsync(telegrafId, new LabelMapping(labelId)).ConfigureAwait(false);
+            return response.Label;
         }
 
         /// <summary>
@@ -579,12 +577,12 @@ namespace InfluxDB.Client
         /// <param name="label">label to delete</param>
         /// <param name="telegraf">the telegraf config</param>
         /// <returns>delete has been accepted</returns>
-        public async Task DeleteLabelAsync(Label label, Telegraf telegraf)
+        public Task DeleteLabelAsync(Label label, Telegraf telegraf)
         {
             Arguments.CheckNotNull(telegraf, nameof(telegraf));
             Arguments.CheckNotNull(label, nameof(label));
 
-            await DeleteLabelAsync(label.Id, telegraf.Id);
+            return DeleteLabelAsync(label.Id, telegraf.Id);
         }
 
         /// <summary>
@@ -593,12 +591,12 @@ namespace InfluxDB.Client
         /// <param name="labelId">ID of label to delete</param>
         /// <param name="telegrafId">ID of the telegraf config</param>
         /// <returns>delete has been accepted</returns>
-        public async Task DeleteLabelAsync(string labelId, string telegrafId)
+        public Task DeleteLabelAsync(string labelId, string telegrafId)
         {
             Arguments.CheckNonEmptyString(telegrafId, nameof(telegrafId));
             Arguments.CheckNonEmptyString(labelId, nameof(labelId));
 
-            await _service.DeleteTelegrafsIDLabelsIDAsync(telegrafId, labelId);
+            return _service.DeleteTelegrafsIDLabelsIDAsync(telegrafId, labelId);
         }
 
         private void AppendConfiguration(StringBuilder config, string key, object value)

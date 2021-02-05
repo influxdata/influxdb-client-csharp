@@ -23,13 +23,13 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="name">name of the user</param>
         /// <returns>Created user</returns>
-        public async Task<User> CreateUserAsync(string name)
+        public Task<User> CreateUserAsync(string name)
         {
             Arguments.CheckNonEmptyString(name, nameof(name));
 
             var user = new User(name: name);
 
-            return await CreateUserAsync(user);
+            return CreateUserAsync(user);
         }
 
         /// <summary>
@@ -37,11 +37,11 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="user">name of the user</param>
         /// <returns>Created user</returns>
-        public async Task<User> CreateUserAsync(User user)
+        public Task<User> CreateUserAsync(User user)
         {
             Arguments.CheckNotNull(user, nameof(user));
 
-            return await _service.PostUsersAsync(user);
+            return _service.PostUsersAsync(user);
         }
 
         /// <summary>
@@ -49,11 +49,11 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="user">user update to apply</param>
         /// <returns>user updated</returns>
-        public async Task<User> UpdateUserAsync(User user)
+        public Task<User> UpdateUserAsync(User user)
         {
             Arguments.CheckNotNull(user, nameof(user));
 
-            return await _service.PatchUsersIDAsync(user.Id, user);
+            return _service.PatchUsersIDAsync(user.Id, user);
         }
 
         /// <summary>
@@ -63,13 +63,13 @@ namespace InfluxDB.Client
         /// <param name="oldPassword">old password</param>
         /// <param name="newPassword">new password</param>
         /// <returns>user updated</returns>
-        public async Task UpdateUserPasswordAsync(User user, string oldPassword, string newPassword)
+        public Task UpdateUserPasswordAsync(User user, string oldPassword, string newPassword)
         {
             Arguments.CheckNotNull(user, nameof(user));
             Arguments.CheckNotNull(oldPassword, nameof(oldPassword));
             Arguments.CheckNotNull(newPassword, nameof(newPassword));
 
-            await UpdateUserPasswordAsync(user.Id, user.Name, oldPassword, newPassword);
+            return UpdateUserPasswordAsync(user.Id, user.Name, oldPassword, newPassword);
         }
 
         /// <summary>
@@ -79,13 +79,13 @@ namespace InfluxDB.Client
         /// <param name="oldPassword">old password</param>
         /// <param name="newPassword">new password</param>
         /// <returns>user updated</returns>
-        public async Task UpdateUserPasswordAsync(string userId, string oldPassword, string newPassword)
+        public Task UpdateUserPasswordAsync(string userId, string oldPassword, string newPassword)
         {
             Arguments.CheckNotNull(userId, nameof(userId));
             Arguments.CheckNotNull(oldPassword, nameof(oldPassword));
             Arguments.CheckNotNull(newPassword, nameof(newPassword));
 
-            await FindUserByIdAsync(userId).ContinueWith(t => UpdateUserPasswordAsync(t.Result, oldPassword, newPassword));
+            return FindUserByIdAsync(userId).ContinueWith(t => UpdateUserPasswordAsync(t.Result, oldPassword, newPassword));
         }
 
         /// <summary>
@@ -93,11 +93,11 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="userId">ID of user to delete</param>
         /// <returns>async task</returns>
-        public async Task DeleteUserAsync(string userId)
+        public Task DeleteUserAsync(string userId)
         {
             Arguments.CheckNotNull(userId, nameof(userId));
 
-            await _service.DeleteUsersIDAsync(userId);
+            return _service.DeleteUsersIDAsync(userId);
         }
 
         /// <summary>
@@ -105,11 +105,11 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="user">user to delete</param>
         /// <returns>async task</returns>
-        public async Task DeleteUserAsync(User user)
+        public Task DeleteUserAsync(User user)
         {
             Arguments.CheckNotNull(user, nameof(user));
 
-            await DeleteUserAsync(user.Id);
+            return DeleteUserAsync(user.Id);
         }
 
         /// <summary>
@@ -123,7 +123,9 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(clonedName, nameof(clonedName));
             Arguments.CheckNonEmptyString(userId, nameof(userId));
 
-            return await FindUserByIdAsync(userId).ContinueWith(t => CloneUserAsync(clonedName, t.Result)).Unwrap();
+            var user = await FindUserByIdAsync(userId).ConfigureAwait(false);
+            
+            return await CloneUserAsync(clonedName, user).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -132,23 +134,23 @@ namespace InfluxDB.Client
         /// <param name="clonedName">name of cloned user</param>
         /// <param name="user">user to clone</param>
         /// <returns>cloned user</returns>
-        public async Task<User> CloneUserAsync(string clonedName, User user)
+        public Task<User> CloneUserAsync(string clonedName, User user)
         {
             Arguments.CheckNonEmptyString(clonedName, nameof(clonedName));
             Arguments.CheckNotNull(user, nameof(user));
 
             var cloned = new User(name: clonedName);
 
-            return await CreateUserAsync(cloned);
+            return CreateUserAsync(cloned);
         }
 
         /// <summary>
         /// Returns currently authenticated user.
         /// </summary>
         /// <returns>currently authenticated user</returns>
-        public async Task<User> MeAsync()
+        public Task<User> MeAsync()
         {
-            return await _service.GetMeAsync();
+            return _service.GetMeAsync();
         }
 
         /// <summary>
@@ -162,19 +164,16 @@ namespace InfluxDB.Client
             Arguments.CheckNotNull(oldPassword, nameof(oldPassword));
             Arguments.CheckNotNull(newPassword, nameof(newPassword));
 
-            await MeAsync().ContinueWith(async t =>
+            var me = await MeAsync().ConfigureAwait(false);
+            if (me == null)
             {
-                if (t.Result == null)
-                {
-                    Trace.WriteLine("User is not authenticated.");
+                Trace.WriteLine("User is not authenticated.");
+                return;
+            }
+            
+            var header = InfluxDBClient.AuthorizationHeader(me.Name, oldPassword);
 
-                    return;
-                }
-
-                var header = InfluxDBClient.AuthorizationHeader(t.Result.Name, oldPassword);
-
-                await _service.PutMePasswordAsync(new PasswordResetBody(newPassword), null, header);
-            }).Unwrap();
+            await _service.PutMePasswordAsync(new PasswordResetBody(newPassword), null, header).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -182,11 +181,11 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="userId">ID of user to get</param>
         /// <returns>User Details</returns>
-        public async Task<User> FindUserByIdAsync(string userId)
+        public Task<User> FindUserByIdAsync(string userId)
         {
             Arguments.CheckNonEmptyString(userId, nameof(userId));
 
-            return await _service.GetUsersIDAsync(userId);
+            return _service.GetUsersIDAsync(userId);
         }
 
         /// <summary>
@@ -195,10 +194,11 @@ namespace InfluxDB.Client
         /// <returns>List all users</returns>
         public async Task<List<User>> FindUsersAsync()
         {
-            return (await _service.GetUsersAsync())._Users;
+            var response = await _service.GetUsersAsync().ConfigureAwait(false);
+            return response._Users;
         }
 
-        private async Task UpdateUserPasswordAsync(string userId, string userName, string oldPassword,
+        private Task UpdateUserPasswordAsync(string userId, string userName, string oldPassword,
             string newPassword)
         {
             Arguments.CheckNotNull(userId, nameof(userId));
@@ -208,7 +208,7 @@ namespace InfluxDB.Client
 
             var header = InfluxDBClient.AuthorizationHeader(userName, oldPassword);
 
-            await _service.PostUsersIDPasswordAsync(userId, new PasswordResetBody(newPassword), null, header);
+            return _service.PostUsersIDPasswordAsync(userId, new PasswordResetBody(newPassword), null, header);
         }
     }
 }

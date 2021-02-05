@@ -1,9 +1,8 @@
-using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using InfluxDB.Client.Api.Domain;
 using InfluxDB.Client.Core.Exceptions;
 using NUnit.Framework;
-using Task = System.Threading.Tasks.Task;
 
 namespace InfluxDB.Client.Test
 {
@@ -56,11 +55,11 @@ namespace InfluxDB.Client.Test
         [Test]
         public void CloneScraperNotFound()
         {
-            var ioe = Assert.ThrowsAsync<AggregateException>(async () =>
+            var ioe = Assert.ThrowsAsync<HttpException>(async () =>
                 await _scraperTargetsApi.CloneScraperTargetAsync(GenerateName("bucket"), "020f755c3c082000"));
 
-            Assert.AreEqual("scraper target is not found", ioe.InnerException.Message);
-            Assert.AreEqual(typeof(HttpException), ioe.InnerException.GetType());
+            Assert.AreEqual("scraper target is not found", ioe.Message);
+            Assert.AreEqual(typeof(HttpException), ioe.GetType());
         }
 
         [Test]

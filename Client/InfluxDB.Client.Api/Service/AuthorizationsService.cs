@@ -483,7 +483,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
+                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -602,9 +602,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="authID">The ID of the authorization to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task DeleteAuthorizationsIDAsync (string authID, string zapTraceSpan = null)
+        public System.Threading.Tasks.Task DeleteAuthorizationsIDAsync (string authID, string zapTraceSpan = null)
         {
-             await DeleteAuthorizationsIDAsyncWithHttpInfo(authID, zapTraceSpan);
+             return DeleteAuthorizationsIDAsyncWithHttpInfo(authID, zapTraceSpan);
 
         }
 
@@ -618,7 +618,7 @@ namespace InfluxDB.Client.Api.Service
         public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteAuthorizationsIDAsyncWithHttpInfo (string authID, string zapTraceSpan = null)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await DeleteAuthorizationsIDAsyncWithIRestResponse(authID, zapTraceSpan);
+            IRestResponse localVarResponse = await DeleteAuthorizationsIDAsyncWithIRestResponse(authID, zapTraceSpan).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -675,7 +675,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
+                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -807,7 +807,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
+                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -937,7 +937,7 @@ namespace InfluxDB.Client.Api.Service
         /// <returns>Task of Authorizations</returns>
         public async System.Threading.Tasks.Task<Authorizations> GetAuthorizationsAsync (string zapTraceSpan = null, string userID = null, string user = null, string orgID = null, string org = null)
         {
-             ApiResponse<Authorizations> localVarResponse = await GetAuthorizationsAsyncWithHttpInfo(zapTraceSpan, userID, user, orgID, org);
+             ApiResponse<Authorizations> localVarResponse = await GetAuthorizationsAsyncWithHttpInfo(zapTraceSpan, userID, user, orgID, org).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -955,7 +955,7 @@ namespace InfluxDB.Client.Api.Service
         public async System.Threading.Tasks.Task<ApiResponse<Authorizations>> GetAuthorizationsAsyncWithHttpInfo (string zapTraceSpan = null, string userID = null, string user = null, string orgID = null, string org = null)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await GetAuthorizationsAsyncWithIRestResponse(zapTraceSpan, userID, user, orgID, org);
+            IRestResponse localVarResponse = await GetAuthorizationsAsyncWithIRestResponse(zapTraceSpan, userID, user, orgID, org).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -1015,7 +1015,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
+                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -1138,7 +1138,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
+                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -1259,7 +1259,7 @@ namespace InfluxDB.Client.Api.Service
         /// <returns>Task of Authorization</returns>
         public async System.Threading.Tasks.Task<Authorization> GetAuthorizationsIDAsync (string authID, string zapTraceSpan = null)
         {
-             ApiResponse<Authorization> localVarResponse = await GetAuthorizationsIDAsyncWithHttpInfo(authID, zapTraceSpan);
+             ApiResponse<Authorization> localVarResponse = await GetAuthorizationsIDAsyncWithHttpInfo(authID, zapTraceSpan).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -1274,7 +1274,7 @@ namespace InfluxDB.Client.Api.Service
         public async System.Threading.Tasks.Task<ApiResponse<Authorization>> GetAuthorizationsIDAsyncWithHttpInfo (string authID, string zapTraceSpan = null)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await GetAuthorizationsIDAsyncWithIRestResponse(authID, zapTraceSpan);
+            IRestResponse localVarResponse = await GetAuthorizationsIDAsyncWithIRestResponse(authID, zapTraceSpan).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -1331,7 +1331,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
+                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -1481,7 +1481,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
+                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -1629,7 +1629,7 @@ namespace InfluxDB.Client.Api.Service
         /// <returns>Task of Authorization</returns>
         public async System.Threading.Tasks.Task<Authorization> PatchAuthorizationsIDAsync (string authID, AuthorizationUpdateRequest authorizationUpdateRequest, string zapTraceSpan = null)
         {
-             ApiResponse<Authorization> localVarResponse = await PatchAuthorizationsIDAsyncWithHttpInfo(authID, authorizationUpdateRequest, zapTraceSpan);
+             ApiResponse<Authorization> localVarResponse = await PatchAuthorizationsIDAsyncWithHttpInfo(authID, authorizationUpdateRequest, zapTraceSpan).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -1645,7 +1645,7 @@ namespace InfluxDB.Client.Api.Service
         public async System.Threading.Tasks.Task<ApiResponse<Authorization>> PatchAuthorizationsIDAsyncWithHttpInfo (string authID, AuthorizationUpdateRequest authorizationUpdateRequest, string zapTraceSpan = null)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await PatchAuthorizationsIDAsyncWithIRestResponse(authID, authorizationUpdateRequest, zapTraceSpan);
+            IRestResponse localVarResponse = await PatchAuthorizationsIDAsyncWithIRestResponse(authID, authorizationUpdateRequest, zapTraceSpan).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -1715,7 +1715,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
+                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -1854,7 +1854,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
+                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -1991,7 +1991,7 @@ namespace InfluxDB.Client.Api.Service
         /// <returns>Task of Authorization</returns>
         public async System.Threading.Tasks.Task<Authorization> PostAuthorizationsAsync (Authorization authorization, string zapTraceSpan = null)
         {
-             ApiResponse<Authorization> localVarResponse = await PostAuthorizationsAsyncWithHttpInfo(authorization, zapTraceSpan);
+             ApiResponse<Authorization> localVarResponse = await PostAuthorizationsAsyncWithHttpInfo(authorization, zapTraceSpan).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -2006,7 +2006,7 @@ namespace InfluxDB.Client.Api.Service
         public async System.Threading.Tasks.Task<ApiResponse<Authorization>> PostAuthorizationsAsyncWithHttpInfo (Authorization authorization, string zapTraceSpan = null)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await PostAuthorizationsAsyncWithIRestResponse(authorization, zapTraceSpan);
+            IRestResponse localVarResponse = await PostAuthorizationsAsyncWithIRestResponse(authorization, zapTraceSpan).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -2071,7 +2071,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
+                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
