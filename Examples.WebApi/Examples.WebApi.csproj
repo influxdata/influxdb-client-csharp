@@ -8,4 +8,8 @@
         <ProjectReference Include="..\Client.Linq\Client.Linq.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="Microsoft.AspNetCore.OData" Version="7.5.5" />
+    </ItemGroup>
+
 </Project>

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Reflection;
 using InfluxDB.Client;
 using InfluxDB.Client.Api.Domain;
@@ -15,6 +16,25 @@ namespace Examples.WebApi
         public double Value { get; set; }
 
         public DateTimeOffset Timestamp { get; set; }
+
+        public ICollection<DomainEntityAttribute> Attributes { get; set; }
+
+        public override string ToString()
+        {
+            return $"{Timestamp:MM/dd/yyyy hh:mm:ss.fff tt} {SeriesId} value: {Value}, " +
+                   $"properties: {string.Join(", ", Attributes)}.";
+        }
+    }
+    
+    public class DomainEntityAttribute
+    {
+        public string Name { get; set; }
+        public string Value { get; set; }
+            
+        public override string ToString()
+        {
+            return $"{Name}={Value}";
+        }
     }
 
     public class DomainEntityConverter : IInfluxDBEntityConverter, IMemberNameResolver
@@ -31,7 +51,21 @@ namespace Examples.WebApi
                 SeriesId = Guid.Parse(Convert.ToString(fluxRecord.GetValueByKey("series_id"))!),
                 Value = Convert.ToDouble(fluxRecord.GetValueByKey("data")),
                 Timestamp = fluxRecord.GetTime().GetValueOrDefault().ToDateTimeUtc(),
+                Attributes = new List<DomainEntityAttribute>()
             };
+            
+            foreach (var (key, value) in fluxRecord.Values)
+            {
+                if (key.StartsWith("property_"))
+                {
+                    var attribute = new DomainEntityAttribute
+                    {
+                        Name = key.Replace("property_", string.Empty), Value = Convert.ToString(value)
+                    };
+                        
+                    customEntity.Attributes.Add(attribute);
+                }
+            }
 
             return (T) Convert.ChangeType(customEntity, typeof(T));
         }
@@ -48,33 +82,48 @@ namespace Examples.WebApi
                 .Tag("series_id", ce.SeriesId.ToString())
                 .Field("data", ce.Value)
                 .Timestamp(ce.Timestamp, precision);
+            
+            foreach (var attribute in ce.Attributes ?? new List<DomainEntityAttribute>())
+            {
+                point = point.Field($"property_{attribute.Name}", attribute.Value);
+            }
 
             return point;
         }
 
         public MemberType ResolveMemberType(MemberInfo memberInfo)
         {
-            return memberInfo.Name switch
+            switch (memberInfo.Name)
             {
-                "Timestamp" => MemberType.Timestamp,
-                "SeriesId" => MemberType.Tag,
-                _ => MemberType.Field
-            };
+                case "Timestamp":
+                    return MemberType.Timestamp;
+                case "Name":
+                    return MemberType.NamedField;
+                case "Value":
+                    return MemberType.NamedFieldValue;
+                case "SeriesId":
+                    return MemberType.Tag;
+                default:
+                    return MemberType.Field;
+            }
         }
 
         public string GetColumnName(MemberInfo memberInfo)
         {
-            return memberInfo.Name switch
+            switch (memberInfo.Name)
             {
-                "SeriesId" => "series_id",
-                "Value" => "data",
-                _ => memberInfo.Name
-            };
+                case "SeriesId":
+                    return "series_id";
+                case "Value":
+                    return "data";
+                default:
+                    return memberInfo.Name;
+            }
         }
 
         public string GetNamedFieldName(MemberInfo memberInfo, object value)
         {
-            throw new NotImplementedException();
+            return $"property_{Convert.ToString(value)}";
         }
     }
 }
