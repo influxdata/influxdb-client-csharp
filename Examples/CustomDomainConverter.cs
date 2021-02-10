@@ -291,7 +291,17 @@ namespace Examples
             // Debug Query
             //
             Console.WriteLine("==== Debug LINQ Queryable Flux output ====");
-            Console.WriteLine(((InfluxDBQueryable<DomainEntity>) query).ToDebugQuery()._Query);
+            var influxQuery = ((InfluxDBQueryable<DomainEntity>) query).ToDebugQuery();
+            foreach (var statement in influxQuery.Extern.Body)
+            {
+                var os = statement as OptionStatement;
+                var va = os?.Assignment as VariableAssignment;
+                var name = va?.Id.Name;
+                var value = va?.Init.GetType().GetProperty("Value")?.GetValue(va.Init, null);
+
+                Console.WriteLine($"{name}={value}");
+            }
+            Console.WriteLine(influxQuery._Query);
             
             client.Dispose();
         }

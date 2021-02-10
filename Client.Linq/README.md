@@ -761,5 +761,15 @@ var query = (from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org"
     .Skip(2);
     
 Console.WriteLine("==== Debug LINQ Queryable Flux output ====");
-Console.WriteLine(((InfluxDBQueryable<Sensor>) query).ToDebugQuery()._Query);
+var influxQuery = ((InfluxDBQueryable<Sensor>) query).ToDebugQuery();
+foreach (var statement in influxQuery.Extern.Body)
+{
+    var os = statement as OptionStatement;
+    var va = os?.Assignment as VariableAssignment;
+    var name = va?.Id.Name;
+    var value = va?.Init.GetType().GetProperty("Value")?.GetValue(va.Init, null);
+
+    Console.WriteLine($"{name}={value}");
+}
+Console.WriteLine(influxQuery._Query);
 ```
