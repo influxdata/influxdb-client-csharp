@@ -2,6 +2,7 @@
 
 ### Bug Fixes
 1. [#154](https://github.com/influxdata/influxdb-client-csharp/pull/154): Always use `ConfigureAwait(false)` to avoid unnecessary context switching and potential dead-locks. Avoid unnecessary await overhead.
+1. [#158](https://github.com/influxdata/influxdb-client-csharp/pull/158): Remove Unnecesary dependencies: `System.Net.Http` and `Microsoft.Bcl.AsyncInterfaces`
 
 ## 1.15.0 [2021-01-29]
 
