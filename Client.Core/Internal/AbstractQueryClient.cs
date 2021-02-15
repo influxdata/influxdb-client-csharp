@@ -84,11 +84,11 @@ namespace InfluxDB.Client.Core.Internal
                 var cancellable = new DefaultCancellable();
 
                 BeforeIntercept(query);
-                    
+
                 query.AdvancedResponseWriter = (responseStream, response) =>
                 {
                     responseStream = AfterIntercept((int)response.StatusCode, () => response.Headers, responseStream);
-                    
+
                     RaiseForInfluxError(response, responseStream);
                     consumer(cancellable, responseStream);
                 };
@@ -117,10 +117,29 @@ namespace InfluxDB.Client.Core.Internal
 
             RaiseForInfluxError(response, response.Content);
 
-            await foreach(var (_, record) in _csvParser.ParseFluxResponseAsync(new StringReader(response.Content), cancellationToken).ConfigureAwait(false))
+            await foreach (var (_, record) in _csvParser.ParseFluxResponseAsync(new StringReader(response.Content), cancellationToken).ConfigureAwait(false))
             {
                 if (!(record is null))
                     yield return Mapper.ToPoco<T>(record);
+            }
+        }
+
+        protected async IAsyncEnumerable<object> QueryEnumerable(RestRequest query, Type type, [EnumeratorCancellation] CancellationToken cancellationToken)
+        {
+            Arguments.CheckNotNull(query, nameof(query));
+
+            BeforeIntercept(query);
+
+            var response = await RestClient.ExecuteTaskAsync(query, cancellationToken).ConfigureAwait(false);
+
+            response.Content = AfterIntercept((int)response.StatusCode, () => LoggingHandler.ToHeaders(response.Headers), response.Content);
+
+            RaiseForInfluxError(response, response.Content);
+
+            await foreach (var (_, record) in _csvParser.ParseFluxResponseAsync(new StringReader(response.Content), cancellationToken).ConfigureAwait(false))
+            {
+                if (!(record is null))
+                    yield return Mapper.ToPoco(record, type);
             }
         }
 
@@ -159,6 +178,27 @@ namespace InfluxDB.Client.Core.Internal
             public void Accept(int index, ICancellable cancellable, FluxRecord record)
             {
                 _onNext(cancellable, Mapper.ToPoco<T>(record));
+            }
+        }
+
+        public class FluxResponseConsumerPoco : FluxCsvParser.IFluxResponseConsumer
+        {
+            private readonly Action<ICancellable, object> _onNext;
+            private readonly Type _type;
+
+            public FluxResponseConsumerPoco(Action<ICancellable, object> onNext, Type type)
+            {
+                _onNext = onNext;
+                _type = type;
+            }
+
+            public void Accept(int index, ICancellable cancellable, FluxTable table)
+            {
+            }
+
+            public void Accept(int index, ICancellable cancellable, FluxRecord record)
+            {
+                _onNext(cancellable, Mapper.ToPoco(record, _type));
             }
         }
 
@@ -230,8 +270,8 @@ namespace InfluxDB.Client.Core.Internal
                 throw HttpException.Create(restResponse, body);
             }
 
-            var httpResponse = (IHttpResponse) result;
-            if ((int) httpResponse.StatusCode >= 200 && (int) httpResponse.StatusCode < 300)
+            var httpResponse = (IHttpResponse)result;
+            if ((int)httpResponse.StatusCode >= 200 && (int)httpResponse.StatusCode < 300)
             {
                 return;
             }
@@ -240,7 +280,7 @@ namespace InfluxDB.Client.Core.Internal
             {
                 throw httpResponse.ErrorException;
             }
-            
+
             throw HttpException.Create(httpResponse, body);
         }
 

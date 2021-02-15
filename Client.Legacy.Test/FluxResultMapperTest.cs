@@ -30,7 +30,20 @@ namespace Client.Legacy.Test
             Assert.AreEqual("aws.north.1", poco.Host);
             Assert.AreEqual("carolina", poco.DifferentName);
         }
-        
+
+        [Test]
+        public void MapByColumnNameType()
+        {
+            var fluxRecord = new FluxRecord(0);
+            fluxRecord.Values["host"] = "aws.north.1";
+            fluxRecord.Values["region"] = "carolina";
+
+            var poco = _parser.ToPoco(fluxRecord, typeof(PocoDifferentNameProperty)) as PocoDifferentNameProperty;
+
+            Assert.AreEqual("aws.north.1", poco.Host);
+            Assert.AreEqual("carolina", poco.DifferentName);
+        }
+
         private class PocoDifferentNameProperty
         {
             [Column("host")] 
@@ -61,6 +74,27 @@ namespace Client.Legacy.Test
             Assert.AreEqual(Instant.FromDateTimeUtc(now), poco.Timestamp);
         }
 
+        [Test]
+        public void MapTimestampWithInstantTimeType()
+        {
+            var now = DateTime.UtcNow;
+
+            var fluxRecord = new FluxRecord(0);
+            fluxRecord.Values["tag"] = "production";
+            fluxRecord.Values["min"] = 10.5;
+            fluxRecord.Values["max"] = 20.0;
+            fluxRecord.Values["avg"] = 18.0D;
+            fluxRecord.Values["_time"] = Instant.FromDateTimeUtc(now);
+
+            var poco = _parser.ToPoco(fluxRecord, typeof(PointWithoutTimestampNameInstant)) as PointWithoutTimestampNameInstant;
+
+            Assert.AreEqual("production", poco.Tag);
+            Assert.AreEqual(10.5, poco.Minimum);
+            Assert.AreEqual(20, poco.Maximum);
+            Assert.AreEqual(18, poco.Average);
+            Assert.AreEqual(Instant.FromDateTimeUtc(now), poco.Timestamp);
+        }
+
         private class PointWithoutTimestampNameInstant
         {
             [Column("tag", IsTag = true)] public string Tag { get; set; }
@@ -83,6 +117,27 @@ namespace Client.Legacy.Test
             fluxRecord.Values["_time"] = Instant.FromDateTimeUtc(now);
 
             var poco = _parser.ToPoco<PointWithoutTimestampName>(fluxRecord);
+
+            Assert.AreEqual("production", poco.Tag);
+            Assert.AreEqual(10.5, poco.Minimum);
+            Assert.AreEqual(20, poco.Maximum);
+            Assert.AreEqual(18, poco.Average);
+            Assert.AreEqual(now, poco.Timestamp);
+        }
+
+        [Test]
+        public void MapTimestampDifferentNameType()
+        {
+            var now = DateTime.UtcNow;
+
+            var fluxRecord = new FluxRecord(0);
+            fluxRecord.Values["tag"] = "production";
+            fluxRecord.Values["min"] = 10.5;
+            fluxRecord.Values["max"] = 20.0;
+            fluxRecord.Values["avg"] = (Double)18;
+            fluxRecord.Values["_time"] = Instant.FromDateTimeUtc(now);
+
+            var poco = _parser.ToPoco(fluxRecord, typeof(PointWithoutTimestampName)) as PointWithoutTimestampName;
 
             Assert.AreEqual("production", poco.Tag);
             Assert.AreEqual(10.5, poco.Minimum);

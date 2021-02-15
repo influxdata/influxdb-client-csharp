@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Threading;
@@ -170,6 +171,48 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
+        /// Executes the Flux query against the InfluxDB 2.0 and synchronously map whole response
+        /// to list of object with given type.
+        ///
+        /// <para>
+        /// NOTE: This method is not intended for large query results.
+        /// Use <see cref="QueryAsync(string,string,Type,System.Action{InfluxDB.Client.Core.ICancellable,object},System.Action{System.Exception},System.Action)"/>
+        /// for large data streaming.
+        /// </para>
+        /// </summary>
+        /// <param name="query">the flux query to execute</param>
+        /// <param name="type">the type of measurement</param>
+        /// <returns>Measurements which are matched the query</returns>
+        public Task<IList> QueryAsync(string query, Type type)
+        {
+            Arguments.CheckNonEmptyString(query, nameof(query));
+
+            return QueryAsync(query, _options.Org, type);
+        }
+
+        /// <summary>
+        /// Executes the Flux query against the InfluxDB 2.0 and synchronously map whole response
+        /// to list of object with given type.
+        ///
+        /// <para>
+        /// NOTE: This method is not intended for large query results.
+        /// Use <see cref="QueryAsync(string,string,Type,System.Action{InfluxDB.Client.Core.ICancellable,object},System.Action{System.Exception},System.Action)"/>
+        /// for large data streaming.
+        /// </para>
+        /// </summary>
+        /// <param name="query">the flux query to execute</param>
+        /// <param name="org">specifies the source organization</param>
+        /// <param name="type">the type of measurement</param>
+        /// <returns>Measurements which are matched the query</returns>
+        public Task<IList> QueryAsync(string query, string org, Type type)
+        {
+            Arguments.CheckNonEmptyString(query, nameof(query));
+            Arguments.CheckNonEmptyString(org, nameof(org));
+
+            return QueryAsync(CreateQuery(query), org, type);
+        }
+
+        /// <summary>
         /// Executes the Flux query against the InfluxDB 2.0 and asynchronously maps
         /// response to enumerable of objects of type <typeparamref name="T"/>.
         /// </summary>
@@ -204,6 +247,45 @@ namespace InfluxDB.Client
             var requestMessage = CreateRequest(CreateQuery(query), org);
 
             await foreach (var record in QueryEnumerable<T>(requestMessage, cancellationToken).ConfigureAwait(false))
+                yield return record;
+        }
+
+
+        /// <summary>
+        /// Executes the Flux query against the InfluxDB 2.0 and asynchronously maps
+        /// response to enumerable of objects of type <param name="type"/>.
+        /// </summary>
+        /// <param name="query">the flux query to execute</param>
+        /// <param name="cancellationToken">cancellation token</param>
+        /// <param name="type">the type of measurement</param>
+        /// <returns>Measurements which are matched the query</returns>
+        public async IAsyncEnumerable<object> QueryAsyncEnumerable(string query, Type type, [EnumeratorCancellation] CancellationToken cancellationToken)
+        {
+            Arguments.CheckNonEmptyString(query, nameof(query));
+
+            var requestMessage = CreateRequest(CreateQuery(query), _options.Org);
+
+            await foreach (var record in QueryEnumerable(requestMessage, type, cancellationToken).ConfigureAwait(false))
+                yield return record;
+        }
+
+        /// <summary>
+        /// Executes the Flux query against the InfluxDB 2.0 and asynchronously maps
+        /// response to enumerable of objects of type <param name="type"/>.
+        /// </summary>
+        /// <param name="query">the flux query to execute</param>
+        /// <param name="org">specifies the source organization</param>
+        /// <param name="cancellationToken">cancellation token</param>
+        /// <param name="type">the type of measurement</param>
+        /// <returns>Measurements which are matched the query</returns>
+        public async IAsyncEnumerable<object> QueryAsyncEnumerable(string query, string org, Type type, [EnumeratorCancellation] CancellationToken cancellationToken)
+        {
+            Arguments.CheckNonEmptyString(query, nameof(query));
+            Arguments.CheckNonEmptyString(org, nameof(org));
+
+            var requestMessage = CreateRequest(CreateQuery(query), org);
+
+            await foreach (var record in QueryEnumerable(requestMessage, type, cancellationToken).ConfigureAwait(false))
                 yield return record;
         }
 
@@ -249,6 +331,54 @@ namespace InfluxDB.Client
             var measurements = new List<T>();
 
             var consumer = new FluxResponseConsumerPoco<T>((cancellable, poco) => { measurements.Add(poco); });
+
+            await QueryAsync(query, org, consumer, ErrorConsumer, EmptyAction).ConfigureAwait(false);
+
+            return measurements;
+        }
+
+        /// <summary>
+        /// Executes the Flux query against the InfluxDB 2.0 and synchronously map whole response
+        /// to list of object with given type.
+        ///
+        /// <para>
+        /// NOTE: This method is not intended for large query results.
+        /// Use <see cref="QueryAsync(string,string,Type,System.Action{InfluxDB.Client.Core.ICancellable,object},System.Action{System.Exception},System.Action)"/>
+        /// for large data streaming.
+        /// </para>
+        /// </summary>
+        /// <param name="query">the flux query to execute</param>
+        /// <param name="type">the type of measurement</param>
+        /// <returns>Measurements which are matched the query</returns>
+        public Task<IList> QueryAsync(Query query, Type type)
+        {
+            Arguments.CheckNotNull(query, nameof(query));
+
+            return QueryAsync(query, _options.Org, type);
+        }
+
+        /// <summary>
+        /// Executes the Flux query against the InfluxDB 2.0 and synchronously map whole response
+        /// to list of object with given type.
+        ///
+        /// <para>
+        /// NOTE: This method is not intended for large query results.
+        /// Use <see cref="QueryAsync(string,string,Type,System.Action{InfluxDB.Client.Core.ICancellable,object},System.Action{System.Exception},System.Action)"/>
+        /// for large data streaming.
+        /// </para>
+        /// </summary>
+        /// <param name="query">the flux query to execute</param>
+        /// <param name="org">specifies the source organization</param>
+        /// <param name="type">the type of measurement</param>
+        /// <returns>Measurements which are matched the query</returns>
+        public async Task<IList> QueryAsync(Query query, string org, Type type)
+        {
+            Arguments.CheckNotNull(query, nameof(query));
+            Arguments.CheckNonEmptyString(org, nameof(org));
+
+            var measurements = new List<object>();
+
+            var consumer = new FluxResponseConsumerPoco((cancellable, poco) => { measurements.Add(poco); }, type);
 
             await QueryAsync(query, org, consumer, ErrorConsumer, EmptyAction).ConfigureAwait(false);
 
@@ -389,6 +519,76 @@ namespace InfluxDB.Client
             Arguments.CheckNotNull(onNext, nameof(onNext));
 
             return QueryAsync(query, org, onNext, ErrorConsumer);
+        }
+
+        /// <summary>
+        /// Executes the Flux query against the InfluxDB 2.0 and asynchronously stream Measurements
+        /// to a <see cref="onNext"/> consumer.
+        /// </summary>
+        /// <param name="query">the flux query to execute</param>
+        /// <param name="onNext">the callback to consume the mapped Measurements with capability
+        /// to discontinue a streaming query</param>
+        /// <param name="type">the type of measurement</param>
+        /// <returns>async task</returns>
+        public Task QueryAsync(string query, Type type, Action<ICancellable, object> onNext)
+        {
+            Arguments.CheckNonEmptyString(query, nameof(query));
+            Arguments.CheckNotNull(onNext, nameof(onNext));
+
+            return QueryAsync(query, _options.Org, type, onNext);
+        }
+
+        /// <summary>
+        /// Executes the Flux query against the InfluxDB 2.0 and asynchronously stream Measurements
+        /// to a <see cref="onNext"/> consumer.
+        /// </summary>
+        /// <param name="query">the flux query to execute</param>
+        /// <param name="org">specifies the source organization</param>
+        /// <param name="onNext">the callback to consume the mapped Measurements with capability
+        /// to discontinue a streaming query</param>
+        /// <param name="type">the type of measurement</param>
+        /// <returns>async task</returns>
+        public Task QueryAsync(string query, string org, Type type, Action<ICancellable, object> onNext)
+        {
+            Arguments.CheckNonEmptyString(query, nameof(query));
+            Arguments.CheckNotNull(onNext, nameof(onNext));
+
+            return QueryAsync(query, org, type, onNext, ErrorConsumer);
+        }
+
+        /// <summary>
+        /// Executes the Flux query against the InfluxDB 2.0 and asynchronously stream Measurements
+        /// to a <see cref="onNext"/> consumer.
+        /// </summary>
+        /// <param name="query">the flux query to execute</param>
+        /// <param name="onNext">the callback to consume the mapped Measurements with capability
+        /// to discontinue a streaming query</param>
+        /// <param name="type">the type of measurement</param>
+        /// <returns>async task</returns>
+        public Task QueryAsync(Query query, Type type, Action<ICancellable, object> onNext)
+        {
+            Arguments.CheckNotNull(query, nameof(query));
+            Arguments.CheckNotNull(onNext, nameof(onNext));
+
+            return QueryAsync(query, _options.Org, type, onNext);
+        }
+
+        /// <summary>
+        /// Executes the Flux query against the InfluxDB 2.0 and asynchronously stream Measurements
+        /// to a <see cref="onNext"/> consumer.
+        /// </summary>
+        /// <param name="query">the flux query to execute</param>
+        /// <param name="org">specifies the source organization</param>
+        /// <param name="onNext">the callback to consume the mapped Measurements with capability
+        /// to discontinue a streaming query</param>
+        /// <param name="type">the type of measurement</param>
+        /// <returns>async task</returns>
+        public Task QueryAsync(Query query, string org, Type type, Action<ICancellable, object> onNext)
+        {
+            Arguments.CheckNotNull(query, nameof(query));
+            Arguments.CheckNotNull(onNext, nameof(onNext));
+
+            return QueryAsync(query, org, type, onNext, ErrorConsumer);
         }
 
         /// <summary>
@@ -545,6 +745,88 @@ namespace InfluxDB.Client
             Arguments.CheckNotNull(onError, nameof(onError));
 
             return QueryAsync(query, org, onNext, onError, EmptyAction);
+        }
+
+        /// <summary>
+        /// Executes the Flux query against the InfluxDB 2.0 and asynchronously stream Measurements
+        /// to a <see cref="onNext"/> consumer.
+        /// </summary>
+        /// <param name="query">the flux query to execute</param>
+        /// <param name="onNext">the callback to consume the mapped Measurements with capability
+        /// to discontinue a streaming query</param>
+        /// <param name="onError">the callback to consume any error notification</param>
+        /// <param name="type">the type of measurement</param>
+        /// <returns>async task</returns>
+        public Task QueryAsync(string query, Type type, Action<ICancellable, object> onNext,
+            Action<Exception> onError)
+        {
+            Arguments.CheckNonEmptyString(query, nameof(query));
+            Arguments.CheckNotNull(onNext, nameof(onNext));
+            Arguments.CheckNotNull(onError, nameof(onError));
+
+            return QueryAsync(query, _options.Org, type, onNext, onError);
+        }
+
+        /// <summary>
+        /// Executes the Flux query against the InfluxDB 2.0 and asynchronously stream Measurements
+        /// to a <see cref="onNext"/> consumer.
+        /// </summary>
+        /// <param name="query">the flux query to execute</param>
+        /// <param name="org">specifies the source organization</param>
+        /// <param name="onNext">the callback to consume the mapped Measurements with capability
+        /// to discontinue a streaming query</param>
+        /// <param name="onError">the callback to consume any error notification</param>
+        /// <param name="type">the type of measurement</param>
+        /// <returns>async task</returns>
+        public Task QueryAsync(string query, string org, Type type, Action<ICancellable, object> onNext,
+            Action<Exception> onError)
+        {
+            Arguments.CheckNonEmptyString(query, nameof(query));
+            Arguments.CheckNotNull(onNext, nameof(onNext));
+            Arguments.CheckNotNull(onError, nameof(onError));
+
+            return QueryAsync(query, org, type, onNext, onError, EmptyAction);
+        }
+
+        /// <summary>
+        /// Executes the Flux query against the InfluxDB 2.0 and asynchronously stream Measurements
+        /// to a <see cref="onNext"/> consumer.
+        /// </summary>
+        /// <param name="query">the flux query to execute</param>
+        /// <param name="onNext">the callback to consume the mapped Measurements with capability
+        /// to discontinue a streaming query</param>
+        /// <param name="onError">the callback to consume any error notification</param>
+        /// <param name="type">the type of measurement</param>
+        /// <returns>async task</returns>
+        public Task QueryAsync(Query query, Type type, Action<ICancellable, object> onNext,
+            Action<Exception> onError)
+        {
+            Arguments.CheckNotNull(query, nameof(query));
+            Arguments.CheckNotNull(onNext, nameof(onNext));
+            Arguments.CheckNotNull(onError, nameof(onError));
+
+            return QueryAsync(query, _options.Org, type, onNext, onError);
+        }
+
+        /// <summary>
+        /// Executes the Flux query against the InfluxDB 2.0 and asynchronously stream Measurements
+        /// to a <see cref="onNext"/> consumer.
+        /// </summary>
+        /// <param name="query">the flux query to execute</param>
+        /// <param name="org">specifies the source organization</param>
+        /// <param name="onNext">the callback to consume the mapped Measurements with capability
+        /// to discontinue a streaming query</param>
+        /// <param name="onError">the callback to consume any error notification</param>
+        /// <param name="type">the type of measurement</param>
+        /// <returns>async task</returns>
+        public Task QueryAsync(Query query, string org, Type type, Action<ICancellable, object> onNext,
+            Action<Exception> onError)
+        {
+            Arguments.CheckNotNull(query, nameof(query));
+            Arguments.CheckNotNull(onNext, nameof(onNext));
+            Arguments.CheckNotNull(onError, nameof(onError));
+
+            return QueryAsync(query, org, type, onNext, onError, EmptyAction);
         }
 
         /// <summary>
@@ -732,6 +1014,105 @@ namespace InfluxDB.Client
             Arguments.CheckNotNull(onComplete, nameof(onComplete));
 
             var consumer = new FluxResponseConsumerPoco<T>(onNext);
+
+            return QueryAsync(query, org, consumer, onError, onComplete);
+        }
+
+        /// <summary>
+        /// Executes the Flux query against the InfluxDB 2.0 and asynchronously stream Measurements
+        /// to a <see cref="onNext"/> consumer.
+        /// </summary>
+        /// <param name="query">the flux query to execute</param>
+        /// <param name="onNext">the callback to consume the mapped Measurements with capability
+        /// to discontinue a streaming query</param>
+        /// <param name="onError">the callback to consume any error notification</param>
+        /// <param name="onComplete">the callback to consume a notification about successfully end of stream</param>
+        /// <param name="type">the type of measurement</param>
+        /// <returns>async task</returns>
+        public Task QueryAsync(string query, Type type, Action<ICancellable, object> onNext,
+            Action<Exception> onError,
+            Action onComplete)
+        {
+            Arguments.CheckNonEmptyString(query, nameof(query));
+            Arguments.CheckNotNull(onNext, nameof(onNext));
+            Arguments.CheckNotNull(onError, nameof(onError));
+            Arguments.CheckNotNull(onComplete, nameof(onComplete));
+
+            return QueryAsync(query, _options.Org, type, onNext, onError, onComplete);
+        }
+
+        /// <summary>
+        /// Executes the Flux query against the InfluxDB 2.0 and asynchronously stream Measurements
+        /// to a <see cref="onNext"/> consumer.
+        /// </summary>
+        /// <param name="query">the flux query to execute</param>
+        /// <param name="org">specifies the source organization</param>
+        /// <param name="onNext">the callback to consume the mapped Measurements with capability
+        /// to discontinue a streaming query</param>
+        /// <param name="onError">the callback to consume any error notification</param>
+        /// <param name="onComplete">the callback to consume a notification about successfully end of stream</param>
+        /// <param name="type">the type of measurement</param>
+        /// <returns>async task</returns>
+        public Task QueryAsync(string query, string org, Type type, Action<ICancellable, object> onNext,
+            Action<Exception> onError,
+            Action onComplete)
+        {
+            Arguments.CheckNonEmptyString(query, nameof(query));
+            Arguments.CheckNonEmptyString(org, nameof(org));
+            Arguments.CheckNotNull(onNext, nameof(onNext));
+            Arguments.CheckNotNull(onError, nameof(onError));
+            Arguments.CheckNotNull(onComplete, nameof(onComplete));
+
+            var consumer = new FluxResponseConsumerPoco(onNext, type);
+
+            return QueryAsync(CreateQuery(query, _defaultDialect), org, consumer, onError, onComplete);
+        }
+
+        /// <summary>
+        /// Executes the Flux query against the InfluxDB 2.0 and asynchronously stream Measurements
+        /// to a <see cref="onNext"/> consumer.
+        /// </summary>
+        /// <param name="query">the flux query to execute</param>
+        /// <param name="onNext">the callback to consume the mapped Measurements with capability
+        /// to discontinue a streaming query</param>
+        /// <param name="onError">the callback to consume any error notification</param>
+        /// <param name="onComplete">the callback to consume a notification about successfully end of stream</param>
+        /// <param name="type">the type of measurement</param>
+        /// <returns>async task</returns>
+        public Task QueryAsync(Query query, Type type, Action<ICancellable, object> onNext,
+            Action<Exception> onError,
+            Action onComplete)
+        {
+            Arguments.CheckNotNull(query, nameof(query));
+            Arguments.CheckNotNull(onNext, nameof(onNext));
+            Arguments.CheckNotNull(onError, nameof(onError));
+            Arguments.CheckNotNull(onComplete, nameof(onComplete));
+
+            return QueryAsync(query, _options.Org, type, onNext, onError, onComplete);
+        }
+
+        /// <summary>
+        /// Executes the Flux query against the InfluxDB 2.0 and asynchronously stream Measurements
+        /// to a <see cref="onNext"/> consumer.
+        /// </summary>
+        /// <param name="query">the flux query to execute</param>
+        /// <param name="org">specifies the source organization</param>
+        /// <param name="onNext">the callback to consume the mapped Measurements with capability
+        /// to discontinue a streaming query</param>
+        /// <param name="onError">the callback to consume any error notification</param>
+        /// <param name="onComplete">the callback to consume a notification about successfully end of stream</param>
+        /// <param name="type">the type of measurement</param>
+        /// <returns>async task</returns>
+        public Task QueryAsync(Query query, string org, Type type, Action<ICancellable, object> onNext,
+            Action<Exception> onError,
+            Action onComplete)
+        {
+            Arguments.CheckNotNull(query, nameof(query));
+            Arguments.CheckNotNull(onNext, nameof(onNext));
+            Arguments.CheckNotNull(onError, nameof(onError));
+            Arguments.CheckNotNull(onComplete, nameof(onComplete));
+
+            var consumer = new FluxResponseConsumerPoco(onNext, type);
 
             return QueryAsync(query, org, consumer, onError, onComplete);
         }
@@ -1023,7 +1404,7 @@ namespace InfluxDB.Client
 
             return QueryRawAsync(query, _options.Org, onResponse, onError);
         }
-        
+
         /// <summary>
         /// Executes the Flux query against the InfluxDB 2.0 and asynchronously stream response
         /// (line by line) to <see cref="onResponse"/>.
@@ -1062,7 +1443,7 @@ namespace InfluxDB.Client
 
             return QueryRawAsync(query, _options.Org, dialect, onResponse, onError);
         }
-        
+
         /// <summary>
         /// Executes the Flux query against the InfluxDB 2.0 and asynchronously stream response
         /// (line by line) to <see cref="onResponse"/>.
@@ -1103,7 +1484,7 @@ namespace InfluxDB.Client
 
             return QueryRawAsync(query, _options.Org, onResponse, onError, onComplete);
         }
-        
+
         /// <summary>
         /// Executes the Flux query against the InfluxDB 2.0 and asynchronously stream response
         /// (line by line) to <see cref="onResponse"/>.

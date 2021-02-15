@@ -92,6 +92,76 @@ namespace InfluxDB.Client.Core.Flux.Internal
             }
         }
 
+        /// <summary>
+        /// Maps FluxRecord into custom POCO class.
+        /// </summary>
+        /// <param name="record">the Flux record</param>
+        /// <param name="type">the POCO type</param>
+        /// <returns></returns>
+        /// <exception cref="InfluxException"></exception>
+        internal object ToPoco(FluxRecord record, Type type)
+        {
+            Arguments.CheckNotNull(record, "Record is required");
+
+            try
+            {
+                var poco = Activator.CreateInstance(type);
+
+                // copy record to case insensitive dictionary (do this once)
+                var recordValues =
+                    new Dictionary<string, object>(record.Values, StringComparer.InvariantCultureIgnoreCase);
+
+                var properties = PropertyCache.GetOrAdd(type, _ => type.GetProperties());
+
+                foreach (var property in properties)
+                {
+                    var attribute = AttributeCache.GetOrAdd(property, _ =>
+                    {
+                        var attributes = property.GetCustomAttributes(typeof(Column), false);
+                        return attributes.Length > 0 ? attributes[0] as Column : null;
+                    });
+
+                    if (attribute != null && attribute.IsTimestamp)
+                    {
+                        SetFieldValue(poco, property, record.GetTime());
+                    }
+                    else
+                    {
+                        var columnName = property.Name;
+
+                        if (attribute != null && !string.IsNullOrEmpty(attribute.Name))
+                        {
+                            columnName = attribute.Name;
+                        }
+
+                        string col = null;
+
+                        if (recordValues.ContainsKey(columnName))
+                        {
+                            col = columnName;
+                        }
+                        else if (recordValues.ContainsKey("_" + columnName))
+                        {
+                            col = "_" + columnName;
+                        }
+
+                        if (!string.IsNullOrEmpty(col))
+                        {
+                            // No need to set field value when column does not exist (default poco field value will be the same)
+                            if (recordValues.TryGetValue(col, out var value))
+                                SetFieldValue(poco, property, value);
+                        }
+                    }
+                }
+
+                return poco;
+            }
+            catch (Exception e)
+            {
+                throw new InfluxException(e);
+            }
+        }
+
         private void SetFieldValue<T>(T poco, PropertyInfo property, object value)
         {
             if (property == null || value == null || !property.CanWrite)
@@ -120,6 +190,12 @@ namespace InfluxDB.Client.Core.Flux.Internal
                 if (propertyType == typeof(Instant))
                 {
                     property.SetValue(poco, ToInstantValue(value));
+                    return;
+                }
+
+                if (propertyType == typeof(DateTimeOffset))
+                {
+                    property.SetValue(poco, ToDateTimeOffsetValue(value));
                     return;
                 }
 
@@ -155,6 +231,11 @@ namespace InfluxDB.Client.Core.Flux.Internal
                 return instant.InUtc().ToDateTimeUtc();
             }
 
+            if (value is DateTimeOffset dateTimeOffset)
+            {
+                return dateTimeOffset.DateTime;
+            }
+
             if (value is IConvertible)
             {
                 return (DateTime)Convert.ChangeType(value, typeof(DateTime));
@@ -175,7 +256,37 @@ namespace InfluxDB.Client.Core.Flux.Internal
                 return Instant.FromDateTimeUtc(dateTime);
             }
 
+            if (value is DateTimeOffset dateTimeoffset)
+            {
+                return Instant.FromDateTimeOffset(dateTimeoffset);
+            }
+
             throw new InvalidCastException($"Object value of type {value.GetType().Name} cannot be converted to {nameof(Instant)}");
+        }
+
+        private DateTimeOffset ToDateTimeOffsetValue(object value)
+        {
+            if (value is DateTimeOffset dateTimeOffset)
+            {
+                return dateTimeOffset;
+            }
+
+            if (value is DateTime dateTime)
+            {
+                return dateTime;
+            }
+
+            if (value is Instant instant)
+            {
+                return instant.InUtc().ToDateTimeOffset();
+            }
+
+            if (value is IConvertible)
+            {
+                return (DateTimeOffset)Convert.ChangeType(value, typeof(DateTimeOffset));
+            }
+
+            throw new InvalidCastException($"Object value of type {value.GetType().Name} cannot be converted to {nameof(DateTimeOffset)}");
         }
     }
 }

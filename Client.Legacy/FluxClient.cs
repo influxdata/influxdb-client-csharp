@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -21,7 +22,7 @@ namespace InfluxDB.Client.Flux
             _loggingHandler = new LoggingHandler(LogLevel.None);
 
             var version = AssemblyHelper.GetVersion(typeof(FluxClient));
-            
+
             RestClient.BaseUrl = new Uri(options.Url);
             RestClient.Timeout = options.Timeout.Milliseconds;
             RestClient.AddDefaultHeader("Accept", "application/json");
@@ -84,6 +85,28 @@ namespace InfluxDB.Client.Flux
         }
 
         /// <summary>
+        /// Executes the Flux query against the InfluxDB and asynchronously map whole response to list of object with
+        /// given type.
+        /// <para>
+        /// NOTE: This method is not intended for large query results.
+        /// Use <see cref="QueryAsync{T}(string,System.Action{InfluxDB.Client.Core.ICancellable,T},System.Action{System.Exception},System.Action)"/> for large data streaming.
+        /// </para>
+        /// </summary>
+        /// <param name="query">the flux query to execute</param>
+        /// <param name="type">the type of measurement</param>
+        /// <returns><see cref="IList"/> which are matched the query</returns>
+        public async Task<IList> QueryAsync(string query, Type type)
+        {
+            var measurements = new List<object>();
+
+            var consumer = new FluxResponseConsumerPoco((cancellable, poco) => { measurements.Add(poco); }, type);
+
+            await QueryAsync(query, GetDefaultDialect(), consumer, ErrorConsumer, EmptyAction).ConfigureAwait(false);
+
+            return measurements;
+        }
+
+        /// <summary>
         /// Executes the Flux query against the InfluxDB and asynchronously stream <see cref="FluxRecord"/> to <see cref="onNext"/> consumer.
         /// </summary>
         /// <param name="query">the flux query to execute</param>
@@ -110,6 +133,21 @@ namespace InfluxDB.Client.Flux
             Arguments.CheckNotNull(onNext, "onNext");
 
             return QueryAsync(query, onNext, ErrorConsumer);
+        }
+
+        /// <summary>
+        /// Executes the Flux query against the InfluxDB and asynchronously stream result as POCO.
+        /// </summary>
+        /// <param name="query">the flux query to execute</param>
+        /// <param name="onNext">the callback to consume the FluxRecord result with capability to discontinue a streaming query</param>
+        /// <param name="type">the type of measurement</param>
+        /// <returns>async task</returns>
+        public Task QueryAsync(string query, Type type, Action<ICancellable, object> onNext)
+        {
+            Arguments.CheckNonEmptyString(query, "query");
+            Arguments.CheckNotNull(onNext, "onNext");
+
+            return QueryAsync(query, type, onNext, ErrorConsumer);
         }
 
         /// <summary>
@@ -143,6 +181,23 @@ namespace InfluxDB.Client.Flux
             Arguments.CheckNotNull(onError, "onError");
 
             return QueryAsync(query, onNext, onError, EmptyAction);
+        }
+
+        /// <summary>
+        /// Executes the Flux query against the InfluxDB and asynchronously stream result as POCO.
+        /// </summary>
+        /// <param name="query">the flux query to execute</param>
+        /// <param name="onNext">the callback to consume the FluxRecord result with capability to discontinue a streaming query</param>
+        /// <param name="onError">the callback to consume any error notification</param>
+        /// <param name="type">the type of measurement</param>
+        /// <returns>async task</returns>
+        public Task QueryAsync(string query, Type type, Action<ICancellable, object> onNext, Action<Exception> onError)
+        {
+            Arguments.CheckNonEmptyString(query, "query");
+            Arguments.CheckNotNull(onNext, "onNext");
+            Arguments.CheckNotNull(onError, "onError");
+
+            return QueryAsync(query, type, onNext, onError, EmptyAction);
         }
 
         /// <summary>
@@ -186,6 +241,28 @@ namespace InfluxDB.Client.Flux
             Arguments.CheckNotNull(onComplete, "onComplete");
 
             var consumer = new FluxResponseConsumerPoco<T>(onNext);
+
+            return QueryAsync(query, GetDefaultDialect(), consumer, onError, onComplete);
+        }
+
+        /// <summary>
+        /// Executes the Flux query against the InfluxDB and asynchronously stream result as POCO.
+        /// </summary>
+        /// <param name="query">the flux query to execute</param>
+        /// <param name="onNext">the callback to consume the FluxRecord result with capability to discontinue a streaming query</param>
+        /// <param name="onError">the callback to consume any error notification</param>
+        /// <param name="onComplete">the callback to consume a notification about successfully end of stream</param>
+        /// <param name="type">the type of measurement</param>
+        /// <returns>async task</returns>
+        public Task QueryAsync(string query, Type type, Action<ICancellable, object> onNext, Action<Exception> onError,
+            Action onComplete)
+        {
+            Arguments.CheckNonEmptyString(query, "query");
+            Arguments.CheckNotNull(onNext, "onNext");
+            Arguments.CheckNotNull(onError, "onError");
+            Arguments.CheckNotNull(onComplete, "onComplete");
+
+            var consumer = new FluxResponseConsumerPoco(onNext, type);
 
             return QueryAsync(query, GetDefaultDialect(), consumer, onError, onComplete);
         }
@@ -427,7 +504,7 @@ namespace InfluxDB.Client.Flux
             RaiseForInfluxError(response, response.Content);
 
             response.Content = AfterIntercept(
-                (int) response.StatusCode,
+                (int)response.StatusCode,
                 () => LoggingHandler.ToHeaders(response.Headers),
                 response.Content);
 
@@ -441,7 +518,7 @@ namespace InfluxDB.Client.Flux
 
         protected override T AfterIntercept<T>(int statusCode, Func<IList<HttpHeader>> headers, T body)
         {
-            return (T) _loggingHandler.AfterIntercept(statusCode, headers, body);
+            return (T)_loggingHandler.AfterIntercept(statusCode, headers, body);
         }
 
         private string GetVersion(IRestResponse responseHttp)
