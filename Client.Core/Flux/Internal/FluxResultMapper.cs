@@ -233,7 +233,7 @@ namespace InfluxDB.Client.Core.Flux.Internal
 
             if (value is DateTimeOffset dateTimeOffset)
             {
-                return dateTimeOffset.DateTime;
+                return dateTimeOffset.UtcDateTime;
             }
 
             if (value is IConvertible)
