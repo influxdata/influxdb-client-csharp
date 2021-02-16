@@ -5,6 +5,30 @@
     <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <Description>This package lets you integrate with AspNetCore with InfluxDB</Description>
+    <Authors>influxdb-client-csharp Contributors</Authors>
+    <AssemblyName>InfluxDB.Client.AspNetCore</AssemblyName>
+    <VersionPrefix>1.16.0</VersionPrefix>
+    <VersionSuffix>dev</VersionSuffix>
+
+    <PackageId>InfluxDB.Client.AspNetCore</PackageId>
+    <PackageTags>influxdata;timeseries;flux;influxdb</PackageTags>
+    <PackageIcon>influxdata.jpg</PackageIcon>
+    <PackageIconUrl>https://raw.githubusercontent.com/influxdata/influxdb-client-csharp/master/Assets/influxdata.jpg</PackageIconUrl>
+    <PackageProjectUrl>https://github.com/influxdata/influxdb-client-csharp/tree/master/InfluxDB.Client.AspNetCore</PackageProjectUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <RepositoryUrl>https://github.com/influxdata/influxdb-client-csharp</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+
+    <PackageReleaseNotes>https://github.com/influxdata/influxdb-client-csharp/blob/master/CHANGELOG.md</PackageReleaseNotes>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <RootNamespace>InfluxDB.Client.AspNetCore</RootNamespace>
+
+    <AssemblyOriginatorKeyFile>../Keys/Key.snk</AssemblyOriginatorKeyFile>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks" Version="5.0.3" />
