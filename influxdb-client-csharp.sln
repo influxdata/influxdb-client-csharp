@@ -19,6 +19,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Examples", "Examples\Exampl
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InfluxDB.Client.AspNetCore", "InfluxDB.Client.AspNetCore\InfluxDB.Client.AspNetCore.csproj", "{D53782A2-77B1-40F6-AD89-F391E4E28587}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InfluxDB.Client.AspNetCore.Test", "InfluxDB.Client.AspNetCore.Test\InfluxDB.Client.AspNetCore.Test.csproj", "{D7436808-E387-4EA0-BD63-C61278B3153F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -125,6 +127,18 @@ Global
 		{D53782A2-77B1-40F6-AD89-F391E4E28587}.Release|x64.Build.0 = Release|Any CPU
 		{D53782A2-77B1-40F6-AD89-F391E4E28587}.Release|x86.ActiveCfg = Release|Any CPU
 		{D53782A2-77B1-40F6-AD89-F391E4E28587}.Release|x86.Build.0 = Release|Any CPU
+		{D7436808-E387-4EA0-BD63-C61278B3153F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7436808-E387-4EA0-BD63-C61278B3153F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7436808-E387-4EA0-BD63-C61278B3153F}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{D7436808-E387-4EA0-BD63-C61278B3153F}.Debug|x64.Build.0 = Debug|Any CPU
+		{D7436808-E387-4EA0-BD63-C61278B3153F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D7436808-E387-4EA0-BD63-C61278B3153F}.Debug|x86.Build.0 = Debug|Any CPU
+		{D7436808-E387-4EA0-BD63-C61278B3153F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7436808-E387-4EA0-BD63-C61278B3153F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D7436808-E387-4EA0-BD63-C61278B3153F}.Release|x64.ActiveCfg = Release|Any CPU
+		{D7436808-E387-4EA0-BD63-C61278B3153F}.Release|x64.Build.0 = Release|Any CPU
+		{D7436808-E387-4EA0-BD63-C61278B3153F}.Release|x86.ActiveCfg = Release|Any CPU
+		{D7436808-E387-4EA0-BD63-C61278B3153F}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
