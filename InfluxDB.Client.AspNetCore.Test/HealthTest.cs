@@ -1,6 +1,5 @@
 using System.Net;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc.Testing;
 using NUnit.Framework;
 
 namespace InfluxDB.Client.AspNetCore.Test
@@ -10,7 +9,7 @@ namespace InfluxDB.Client.AspNetCore.Test
     {
 
         [Test]
-        public async Task HealthTest()
+        public async Task HealthStatusCodeOkTest()
         {
             using var httpClient = this.webApplicationFactory.CreateDefaultClient();
             using var httpResponseMessage = await httpClient.GetAsync("/health");

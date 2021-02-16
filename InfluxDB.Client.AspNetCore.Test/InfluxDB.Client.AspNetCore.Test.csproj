@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <IsPackable>false</IsPackable>
+    <LangVersion>8</LangVersion>
     <TargetFrameworks>netcoreapp2.2;netcoreapp3.1</TargetFrameworks>
   </PropertyGroup>
 
