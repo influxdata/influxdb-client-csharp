@@ -22,7 +22,7 @@ namespace InfluxDB.Client.AspNetCore.Test
         }
 
         public void ConfigureServices(IServiceCollection serviceCollection) {
-            serviceCollection.AddInfluxDBClient(this.configuration.GetConnectionString(""));
+            serviceCollection.AddInfluxDBClient($"http://{this.configuration["INFLUXDB_2_IP"]}:{this.configuration["INFLUXDB_2_PORT"]}");
             serviceCollection.AddHealthChecks().AddInfluxDBCheck();
         }
 

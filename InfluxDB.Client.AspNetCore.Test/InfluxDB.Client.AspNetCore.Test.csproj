@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Client.Test\Client.Test.csproj" />
     <ProjectReference Include="..\InfluxDB.Client.AspNetCore\InfluxDB.Client.AspNetCore.csproj" />
   </ItemGroup>
 

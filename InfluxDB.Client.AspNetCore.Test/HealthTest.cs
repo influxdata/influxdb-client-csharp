@@ -5,10 +5,9 @@ using NUnit.Framework;
 
 namespace InfluxDB.Client.AspNetCore.Test
 {
-    public class Tests
-    {
 
-        private readonly WebApplicationFactory<Startup> webApplicationFactory = new WebApplicationFactory<Startup>();
+    public class HealthTest : AbstractTest
+    {
 
         [Test]
         public async Task HealthTest()
@@ -17,5 +16,7 @@ namespace InfluxDB.Client.AspNetCore.Test
             using var httpResponseMessage = await httpClient.GetAsync("/health");
             Assert.Equals(httpResponseMessage.StatusCode, HttpStatusCode.OK);
         }
+
     }
+
 }
