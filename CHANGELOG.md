@@ -4,6 +4,9 @@
 1. [#154](https://github.com/influxdata/influxdb-client-csharp/pull/154): Always use `ConfigureAwait(false)` to avoid unnecessary context switching and potential dead-locks. Avoid unnecessary await overhead.
 1. [#158](https://github.com/influxdata/influxdb-client-csharp/pull/158): Remove Unnecesary dependencies: `System.Net.Http` and `Microsoft.Bcl.AsyncInterfaces`
 
+### CI
+1. [#165](https://github.com/influxdata/influxdb-client-csharp/pull/165): Updated stable image to `influxdb:latest` and nightly to `quay.io/influxdb/influxdb:nightly`
+
 ## 1.15.0 [2021-01-29]
 
 ### Bug Fixes
