@@ -1,4 +1,4 @@
-## 1.16.0 [unreleased]
+## 1.16.0 [2021-03-05]
 
 ### Bug Fixes
 1. [#154](https://github.com/influxdata/influxdb-client-csharp/pull/154): Always use `ConfigureAwait(false)` to avoid unnecessary context switching and potential dead-locks. Avoid unnecessary await overhead.
