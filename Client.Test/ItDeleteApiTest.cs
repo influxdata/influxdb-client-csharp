@@ -79,7 +79,7 @@ namespace InfluxDB.Client.Test
 
             _deleteApi = Client.GetDeleteApi();
 
-            await _deleteApi.Delete(new DateTime(2018, 1, 1), new DateTime(2022, 1, 1), "", _bucket, _organization);
+            await _deleteApi.Delete(DateTime.Now.AddHours(-1), DateTime.Now, "", _bucket, _organization);
 
             var tablesAfterDelete1 = await _queryApi.QueryAsync(query, _organization.Id);
 
