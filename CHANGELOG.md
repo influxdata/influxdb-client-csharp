@@ -1,5 +1,8 @@
 ## 1.17.0 [unreleased]
 
+### Bug Fixes
+1. [#168](https://github.com/influxdata/influxdb-client-csharp/pull/168): DateTime is always serialized into UTC
+
 ## 1.16.0 [2021-03-05]
 
 ### Bug Fixes
