@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Threading.Tasks;
 using InfluxDB.Client.Api.Domain;
-using InfluxDB.Client.Core;
 using InfluxDB.Client.Writes;
 using NUnit.Framework;
 
@@ -61,16 +60,6 @@ namespace InfluxDB.Client.Test
         private Organization _organization;
         private string _token;
 
-        [Measurement("h2o")]
-        private class H20Measurement
-        {
-            [Column("location", IsTag = true)] public string Location { get; set; }
-
-            [Column("level")] public double? Level { get; set; }
-
-            [Column(IsTimestamp = true)] public DateTime Time { get; set; }
-        }
-
         [Test]
         public async Task Delete()
         {
@@ -90,7 +79,7 @@ namespace InfluxDB.Client.Test
 
             _deleteApi = Client.GetDeleteApi();
 
-            await _deleteApi.Delete(DateTime.Now.AddHours(-1), DateTime.Now, "", _bucket, _organization);
+            await _deleteApi.Delete(new DateTime(2018, 1, 1), new DateTime(2022, 1, 1), "", _bucket, _organization);
 
             var tablesAfterDelete1 = await _queryApi.QueryAsync(query, _organization.Id);
 
