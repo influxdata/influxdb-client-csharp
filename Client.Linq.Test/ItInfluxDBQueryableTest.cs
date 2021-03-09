@@ -43,7 +43,7 @@ namespace Client.Linq.Test
         [Test]
         public void QueryAll()
         {
-            var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApi())
+            var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApiSync())
                 select s;
 
             var sensors = query.ToList();
@@ -54,7 +54,7 @@ namespace Client.Linq.Test
         [Test]
         public void QueryExample()
         {
-            var query = (from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApi())
+            var query = (from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApiSync())
                 where s.SensorId == "id-1"
                 where s.Value > 12
                 where s.Timestamp > new DateTime(2019, 11, 16, 8, 20, 15, DateTimeKind.Utc)
@@ -72,7 +72,7 @@ namespace Client.Linq.Test
         [Test]
         public void QueryExampleCount()
         {
-            var query = (from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApi())
+            var query = (from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApiSync())
                 where s.SensorId == "id-1"
                 where s.Value > 12
                 where s.Timestamp > new DateTime(2019, 11, 16, 8, 20, 15, DateTimeKind.Utc)
@@ -87,7 +87,7 @@ namespace Client.Linq.Test
         [Test]
         public void QueryTake()
         {
-            var query = (from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApi())
+            var query = (from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApiSync())
                 select s).Take(2);
 
             var sensors = query.ToList();
@@ -98,7 +98,7 @@ namespace Client.Linq.Test
         [Test]
         public void QueryTakeSkip()
         {
-            var query = (from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApi())
+            var query = (from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApiSync())
                 select s).Take(2).Skip(3);
 
             var sensors = query.ToList();
@@ -109,7 +109,7 @@ namespace Client.Linq.Test
         [Test]
         public void QueryWhereEqual()
         {
-            var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApi())
+            var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApiSync())
                 where s.SensorId == "id-1"
                 select s;
 
@@ -125,7 +125,7 @@ namespace Client.Linq.Test
         [Test]
         public void QueryWhereNotEqual()
         {
-            var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApi())
+            var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApiSync())
                 where s.SensorId != "id-1"
                 select s;
 
@@ -141,7 +141,7 @@ namespace Client.Linq.Test
         [Test]
         public void QueryLess()
         {
-            var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApi())
+            var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApiSync())
                 where s.Value < 28
                 select s;
 
@@ -157,7 +157,7 @@ namespace Client.Linq.Test
         [Test]
         public void QueryLessThanOrEqual()
         {
-            var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApi())
+            var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApiSync())
                 where s.Value <= 28
                 select s;
 
@@ -173,7 +173,7 @@ namespace Client.Linq.Test
         [Test]
         public void QueryGreaterThan()
         {
-            var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApi())
+            var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApiSync())
                 where s.Value > 28
                 select s;
 
@@ -189,7 +189,7 @@ namespace Client.Linq.Test
         [Test]
         public void QueryGreaterThanOrEqual()
         {
-            var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApi())
+            var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApiSync())
                 where s.Value >= 28
                 select s;
 
@@ -205,7 +205,7 @@ namespace Client.Linq.Test
         [Test]
         public void QueryAnd()
         {
-            var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApi())
+            var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApiSync())
                 where s.Value >= 28 && s.SensorId != "id-1"
                 select s;
 
@@ -221,7 +221,7 @@ namespace Client.Linq.Test
         [Test]
         public void QueryOr()
         {
-            var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApi())
+            var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApiSync())
                 where s.Value >= 28 || s.SensorId != "id-1"
                 select s;
 
@@ -233,7 +233,7 @@ namespace Client.Linq.Test
         [Test]
         public void QueryTimeRange()
         {
-            var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApi())
+            var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApiSync())
                 where s.Timestamp > new DateTime(2020, 11, 16, 8, 20, 16, DateTimeKind.Utc)
                 select s;
 
@@ -249,7 +249,7 @@ namespace Client.Linq.Test
         [Test]
         public void QueryWhereNothing()
         {
-            var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApi())
+            var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApiSync())
                 where s.SensorId == "id-nothing"
                 select s;
 
@@ -261,7 +261,7 @@ namespace Client.Linq.Test
         [Test]
         public void QueryOrderBy()
         {
-            var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApi())
+            var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApiSync())
                 orderby s.Value
                 select s;
 
@@ -274,7 +274,7 @@ namespace Client.Linq.Test
         [Test]
         public void QueryOrderByTime()
         {
-            var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApi())
+            var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApiSync())
                 orderby s.Timestamp descending 
                 select s;
 
@@ -289,7 +289,7 @@ namespace Client.Linq.Test
         [Test]
         public void QueryCount()
         {
-            var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApi())
+            var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApiSync())
                 where s.SensorId == "id-1"
                 select s;
 
@@ -301,7 +301,7 @@ namespace Client.Linq.Test
         [Test]
         public void QueryCountDifferentTimeSeries()
         {
-            var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApi())
+            var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApiSync())
                 select s;
 
             var sensors = query.LongCount();

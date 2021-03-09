@@ -20,7 +20,7 @@ namespace InfluxDB.Client.Linq
         /// <param name="org">Specifies the source organization.</param>
         /// <param name="queryApi">The underlying API to execute Flux Query.</param>
         /// <returns>new instance for of Queryable</returns>
-        public static InfluxDBQueryable<T> Queryable(string bucket, string org, QueryApi queryApi)
+        public static InfluxDBQueryable<T> Queryable(string bucket, string org, QueryApiSync queryApi)
         {
             return Queryable(bucket, org, queryApi, new DefaultMemberNameResolver());
         }
@@ -33,7 +33,7 @@ namespace InfluxDB.Client.Linq
         /// <param name="queryApi">The underlying API to execute Flux Query.</param>
         /// <param name="memberResolver">Resolver for customized names.</param>
         /// <returns>new instance for of Queryable</returns>
-        public static InfluxDBQueryable<T> Queryable(string bucket, string org, QueryApi queryApi, IMemberNameResolver memberResolver)
+        public static InfluxDBQueryable<T> Queryable(string bucket, string org, QueryApiSync queryApi, IMemberNameResolver memberResolver)
         {
             return new InfluxDBQueryable<T>(bucket, org, queryApi, memberResolver);
         }
@@ -45,7 +45,7 @@ namespace InfluxDB.Client.Linq
         /// <param name="org">Specifies the source organization.</param>
         /// <param name="queryApi">The underlying API to execute Flux Query.</param>
         /// <param name="memberResolver">Resolver for customized names.</param>
-        public InfluxDBQueryable(string bucket, string org, QueryApi queryApi, IMemberNameResolver memberResolver) : base(CreateQueryParser(),
+        public InfluxDBQueryable(string bucket, string org, QueryApiSync queryApi, IMemberNameResolver memberResolver) : base(CreateQueryParser(),
             CreateExecutor(bucket, org, queryApi, memberResolver))
         {
         }
@@ -77,7 +77,7 @@ namespace InfluxDB.Client.Linq
             return generateQuery;
         }
 
-        private static IQueryExecutor CreateExecutor(string bucket, string org, QueryApi queryApi, IMemberNameResolver memberResolver)
+        private static IQueryExecutor CreateExecutor(string bucket, string org, QueryApiSync queryApi, IMemberNameResolver memberResolver)
         {
             Arguments.CheckNonEmptyString(bucket, nameof(bucket));
             Arguments.CheckNonEmptyString(org, nameof(org));

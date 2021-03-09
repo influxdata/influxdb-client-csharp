@@ -14,7 +14,7 @@ namespace Examples.WebApi.Controllers
     public class DomainEntityController : ControllerBase
     {
         private readonly ILogger<DomainEntityController> _logger;
-        private readonly QueryApi _queryApi;
+        private readonly QueryApiSync _queryApi;
         private readonly DomainEntityConverter _converter;
 
         public DomainEntityController(ILogger<DomainEntityController> logger, InfluxDBClient client,
@@ -22,7 +22,7 @@ namespace Examples.WebApi.Controllers
         {
             _logger = logger;
             _converter = converter;
-            _queryApi = client.GetQueryApi(converter);
+            _queryApi = client.GetQueryApiSync(converter);
         }
 
         [HttpGet]

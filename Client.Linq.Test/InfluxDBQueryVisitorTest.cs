@@ -22,7 +22,7 @@ namespace Client.Linq.Test
     [TestFixture]
     public class InfluxDBQueryVisitorTest : AbstractTest
     {
-        private QueryApi _queryApi;
+        private QueryApiSync _queryApi;
 
         [OneTimeSetUp]
         public void InitQueryApi()
@@ -32,7 +32,7 @@ namespace Client.Linq.Test
                 .AuthenticateToken("my-token")
                 .Build();
             var queryService = new Mock<QueryService>("http://localhost:8086/api/v2");
-            _queryApi = new Mock<QueryApi>(options, queryService.Object, new FluxResultMapper()).Object;
+            _queryApi = new Mock<QueryApiSync>(options, queryService.Object, new FluxResultMapper()).Object;
         }
 
         [Test]

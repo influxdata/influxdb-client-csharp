@@ -240,7 +240,7 @@ namespace Examples
             //
             // Query Data to Domain object
             //
-            var queryApi = client.GetQueryApi(converter);
+            var queryApi = client.GetQueryApiSync(converter);
 
             //
             // Select ALL

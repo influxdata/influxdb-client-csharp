@@ -33,7 +33,7 @@ First, add the library as a dependency for your project:
 ```bash
 # For actual version please check: https://www.nuget.org/packages/InfluxDB.Client.Linq/
 
-dotnet add package InfluxDB.Client.Linq --version 1.16.0-dev.linq.10
+dotnet add package InfluxDB.Client.Linq --version 1.17.0-dev.linq.11
 ```
 
 Next, you should add additional using statement to your program:
@@ -42,11 +42,11 @@ Next, you should add additional using statement to your program:
 using InfluxDB.Client.Linq;
 ```
 
-The LINQ query depends on `QueryApi`, you could create an instance of `QueryApi` by:
+The LINQ query depends on `QueryApiSync`, you could create an instance of `QueryApiSync` by:
 
 ```c#
 var client = InfluxDBClientFactory.Create("http://localhost:8086", "my-token");
-var queryApi = client.GetQueryApi();
+var queryApi = client.GetQueryApiSync();
 ```
 
 In the following examples we assume that the `Sensor` entity is defined as:
@@ -508,14 +508,14 @@ private class SensorEntityConverter : IInfluxDBEntityConverter
 }
 ```
 
-The `Converter` could be passed to [QueryApi](/Client/QueryApi.cs) or [WriteApi](/Client/WriteApi.cs) by:
+The `Converter` could be passed to [QueryApiSync](/Client/QueryApiSync.cs), [QueryApi](/Client/QueryApi.cs) or [WriteApi](/Client/WriteApi.cs) by:
 
 ```c#
 // Create Converter
 var converter = new SensorEntityConverter();
 
 // Get Query and Write API
-var queryApi = client.GetQueryApi(converter);
+var queryApi = client.GetQueryApiSync(converter);
 var writeApi = client.GetWriteApi(converter);
 ```
 
@@ -728,11 +728,11 @@ private class Temperature
 }
 ```
 
-you could create own instance of `IInfluxDBEntityConverter` and use it with `QueryApi` and `WriteApi`.
+you could create own instance of `IInfluxDBEntityConverter` and use it with `QueryApiSync`, `QueryApi` and `WriteApi`.
 
 ```c#
 var converter = new DomainEntityConverter();
-var queryApi = client.GetQueryApi(converter)
+var queryApi = client.GetQueryApiSync(converter)
 ```
 
 To satisfy LINQ Query Provider you have to implement `IMemberNameResolver`:

@@ -3,10 +3,10 @@
     <PropertyGroup>
       <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
 
-      <Description>The library supports to use a LINQ expression to query the InfluxDB.</Description>
+      <Description>The library supports querying InfluxDB 2.0 by LINQ expressions.</Description>
         <Authors>influxdb-client-csharp Contributors</Authors>
         <AssemblyName>InfluxDB.Client.Linq</AssemblyName>
-        <VersionPrefix>1.16.0</VersionPrefix>
+        <VersionPrefix>1.17.0</VersionPrefix>
         <VersionSuffix>dev</VersionSuffix>
 
         <PackageId>InfluxDB.Client.Linq</PackageId>
