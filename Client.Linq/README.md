@@ -97,6 +97,7 @@ If you query your data with following Flux:
 ```flux
 from(bucket: "my-bucket")
   |> range(start: 0)
+  |> drop(columns: ["_start", "_stop", "_measurement"])
   |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value")
   |> limit(n:1)
 ```
@@ -120,6 +121,7 @@ If you want to count your data with following Flux:
 ```flux
 from(bucket: "my-bucket")
   |> range(start: 0)
+  |> drop(columns: ["_start", "_stop", "_measurement"])
   |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value")
   |> stateCount(fn: (r) => true, column: "linq_result_column") 
   |> last(column: "linq_result_column") 
@@ -173,6 +175,7 @@ Flux Query:
 ```flux
 from(bucket: "my-bucket") 
     |> range(start: 2019-11-16T08:20:15Z, stop: 2021-01-10T05:10:00Z) 
+    |> drop(columns: ["_start", "_stop", "_measurement"])
     |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value")
     |> filter(fn: (r) => (r["sensor_id"] == "id-1") and (r["data"] > 12)) 
     |> sort(columns: ["_time"], desc: false) 
@@ -205,6 +208,7 @@ Flux Query:
 ```flux
 from(bucket: "my-bucket") 
     |> range(start: 2019-11-16T08:20:15Z, stop: 2021-01-10T05:10:00Z) 
+    |> drop(columns: ["_start", "_stop", "_measurement"])
 ```
 
 #### Example 2:
@@ -222,6 +226,7 @@ Flux Query:
 ```flux
 from(bucket: "my-bucket") 
     |> range(start: 2019-11-16T08:20:15Z, stop: 2021-01-10T05:10:00Z) 
+    |> drop(columns: ["_start", "_stop", "_measurement"])
 ```
 
 #### Example 3:
@@ -238,6 +243,7 @@ Flux Query:
 ```flux
 from(bucket: "my-bucket") 
     |> range(start: 2019-11-16T08:20:15ZZ) 
+    |> drop(columns: ["_start", "_stop", "_measurement"])
 ```
 
 #### Example 4:
@@ -254,6 +260,7 @@ Flux Query:
 ```flux
 from(bucket: "my-bucket") 
     |> range(start: 0, stop: 2021-01-10T05:10:00Z) 
+    |> drop(columns: ["_start", "_stop", "_measurement"])
 ```
 
 #### Example 5:
@@ -270,6 +277,7 @@ Flux Query:
 ```flux
 from(bucket: "my-bucket") 
     |> range(start: 2019-11-16T08:20:15Z, stop: 2019-11-16T08:20:15Z) 
+    |> drop(columns: ["_start", "_stop", "_measurement"])
 ```
 
 ## Supported LINQ operators
@@ -286,6 +294,7 @@ Flux Query:
 ```flux
 from(bucket: "my-bucket") 
     |> range(start: 0) 
+    |> drop(columns: ["_start", "_stop", "_measurement"])
     |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value")
     |> filter(fn: (r) => (r["sensor_id"] == "id-1")) 
 ```
@@ -302,6 +311,7 @@ Flux Query:
 ```flux
 from(bucket: "my-bucket") 
     |> range(start: 0) 
+    |> drop(columns: ["_start", "_stop", "_measurement"])
     |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value")
     |> filter(fn: (r) => (r["sensor_id"] != "id-1")) 
 ```
@@ -318,6 +328,7 @@ Flux Query:
 ```flux
 from(bucket: "my-bucket") 
     |> range(start: 0) 
+    |> drop(columns: ["_start", "_stop", "_measurement"])
     |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value") 
     |> filter(fn: (r) => (r["data"] < 28))
 ```
@@ -334,6 +345,7 @@ Flux Query:
 ```flux
 from(bucket: "my-bucket") 
     |> range(start: 0) 
+    |> drop(columns: ["_start", "_stop", "_measurement"])
     |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value") 
     |> filter(fn: (r) => (r["data"] <= 28))
 ```
@@ -350,6 +362,7 @@ Flux Query:
 ```flux
 from(bucket: "my-bucket") 
     |> range(start: 0) 
+    |> drop(columns: ["_start", "_stop", "_measurement"])
     |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value") 
     |> filter(fn: (r) => (r["data"] > 28))
 ```
@@ -366,6 +379,7 @@ Flux Query:
 ```flux
 from(bucket: "my-bucket") 
     |> range(start: 0) 
+    |> drop(columns: ["_start", "_stop", "_measurement"])
     |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value") 
     |> filter(fn: (r) => (r["data"] >= 28))
 ```
@@ -382,6 +396,7 @@ Flux Query:
 ```flux
 from(bucket: "my-bucket") 
     |> range(start: 0) 
+    |> drop(columns: ["_start", "_stop", "_measurement"])
     |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value") 
     |> filter(fn: (r) => ((r["data"] >= 28) and (r["sensor_id"] != "id-1")))
 ```
@@ -398,6 +413,7 @@ Flux Query:
 ```flux
 from(bucket: "my-bucket") 
     |> range(start: 0) 
+    |> drop(columns: ["_start", "_stop", "_measurement"])
     |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value") 
     |> filter(fn: (r) => ((r["data"] >= 28) or (r["sensor_id"] != "id-1")))
 ```
@@ -593,6 +609,7 @@ Flux Query:
 ```flux
 from(bucket: "my-bucket")
     |> range(start: 0)
+    |> drop(columns: ["_start", "_stop", "_measurement"])
     |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value") 
     |> filter(fn: (r) => (r["attribute_quality"] == "good"))
 ```
@@ -612,6 +629,7 @@ Flux Query:
 ```flux
 from(bucket: "my-bucket") 
     |> range(start: 0) 
+    |> drop(columns: ["_start", "_stop", "_measurement"])
     |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value") 
     |> limit(n: 10)
 ```
@@ -630,6 +648,7 @@ Flux Query:
 ```flux
 from(bucket: "my-bucket") 
     |> range(start: 0) 
+    |> drop(columns: ["_start", "_stop", "_measurement"])
     |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value") 
     |> limit(n: 10, offset: 50)
 ```
@@ -648,6 +667,7 @@ Flux Query:
 ```flux
 from(bucket: "my-bucket") 
     |> range(start: 0) 
+    |> drop(columns: ["_start", "_stop", "_measurement"])
     |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value") 
     |> sort(columns: ["deployment"], desc: false)
 ```
@@ -664,6 +684,7 @@ Flux Query:
 ```flux
 from(bucket: "my-bucket") 
     |> range(start: 0) 
+    |> drop(columns: ["_start", "_stop", "_measurement"])
     |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value") 
     |> sort(columns: ["_time"], desc: true)
 ```
@@ -683,6 +704,7 @@ Flux Query:
 ```flux
 from(bucket: "my-bucket") 
     |> range(start: 0) 
+    |> drop(columns: ["_start", "_stop", "_measurement"])
     |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value") 
     |> stateCount(fn: (r) => true, column: "linq_result_column") 
     |> last(column: "linq_result_column") 
@@ -704,6 +726,7 @@ Flux Query:
 ```flux
 from(bucket: "my-bucket") 
     |> range(start: 0) 
+    |> drop(columns: ["_start", "_stop", "_measurement"])
     |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value") 
     |> stateCount(fn: (r) => true, column: "linq_result_column") 
     |> last(column: "linq_result_column") 

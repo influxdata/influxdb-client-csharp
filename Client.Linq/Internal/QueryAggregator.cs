@@ -91,6 +91,7 @@ namespace InfluxDB.Client.Linq.Internal
             {
                 BuildOperator("from", "bucket", _bucketAssignment),
                 BuildOperator("range", "start", _rangeStartAssignment, "stop", _rangeStopAssignment),
+                "drop(columns: [\"_start\", \"_stop\", \"_measurement\"])",
                 "pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")",
                 BuildFilter()
             };

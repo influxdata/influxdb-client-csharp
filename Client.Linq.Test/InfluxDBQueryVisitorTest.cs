@@ -44,6 +44,7 @@ namespace Client.Linq.Test
 
             const string expected = "from(bucket: p1) " +
                                     "|> range(start: p2) " +
+                                    "|> drop(columns: [\"_start\", \"_stop\", \"_measurement\"]) " +
                                     "|> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")";
             Assert.AreEqual(expected, visitor.BuildFluxQuery());
         }
@@ -91,6 +92,7 @@ namespace Client.Linq.Test
 
             const string expected = "from(bucket: p1) " +
                                     "|> range(start: p2) " +
+                                    "|> drop(columns: [\"_start\", \"_stop\", \"_measurement\"]) " +
                                     "|> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\") " +
                                     "|> limit(n: p3)";
 
@@ -106,6 +108,7 @@ namespace Client.Linq.Test
 
             const string expected = "from(bucket: p1) " +
                                     "|> range(start: p2) " +
+                                    "|> drop(columns: [\"_start\", \"_stop\", \"_measurement\"]) " +
                                     "|> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")";
 
             Assert.AreEqual(expected, visitor.BuildFluxQuery());
@@ -120,6 +123,7 @@ namespace Client.Linq.Test
 
             const string expected = "from(bucket: p1) " +
                                     "|> range(start: p2) " +
+                                    "|> drop(columns: [\"_start\", \"_stop\", \"_measurement\"]) " +
                                     "|> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\") " +
                                     "|> limit(n: p3, offset: p4)";
 
@@ -136,6 +140,7 @@ namespace Client.Linq.Test
 
             const string expected = "from(bucket: p1) " +
                                     "|> range(start: p2) " +
+                                    "|> drop(columns: [\"_start\", \"_stop\", \"_measurement\"]) " +
                                     "|> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\") " +
                                     "|> filter(fn: (r) => (r[\"sensor_id\"] == p3))";
 
@@ -152,6 +157,7 @@ namespace Client.Linq.Test
 
             const string expected = "from(bucket: p1) " +
                                     "|> range(start: p2) " +
+                                    "|> drop(columns: [\"_start\", \"_stop\", \"_measurement\"]) " +
                                     "|> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\") " +
                                     "|> filter(fn: (r) => (r[\"sensor_id\"] != p3))";
 
@@ -168,6 +174,7 @@ namespace Client.Linq.Test
 
             const string expected = "from(bucket: p1) " +
                                     "|> range(start: p2) " +
+                                    "|> drop(columns: [\"_start\", \"_stop\", \"_measurement\"]) " +
                                     "|> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\") " +
                                     "|> filter(fn: (r) => (r[\"data\"] < p3))";
 
@@ -184,6 +191,7 @@ namespace Client.Linq.Test
 
             const string expected = "from(bucket: p1) " +
                                     "|> range(start: p2) " +
+                                    "|> drop(columns: [\"_start\", \"_stop\", \"_measurement\"]) " +
                                     "|> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\") " +
                                     "|> filter(fn: (r) => (r[\"data\"] <= p3))";
 
@@ -200,6 +208,7 @@ namespace Client.Linq.Test
 
             const string expected = "from(bucket: p1) " +
                                     "|> range(start: p2) " +
+                                    "|> drop(columns: [\"_start\", \"_stop\", \"_measurement\"]) " +
                                     "|> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\") " +
                                     "|> filter(fn: (r) => (r[\"data\"] > p3))";
 
@@ -216,6 +225,7 @@ namespace Client.Linq.Test
 
             const string expected = "from(bucket: p1) " +
                                     "|> range(start: p2) " +
+                                    "|> drop(columns: [\"_start\", \"_stop\", \"_measurement\"]) " +
                                     "|> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\") " +
                                     "|> filter(fn: (r) => (r[\"data\"] >= p3))";
 
@@ -232,6 +242,7 @@ namespace Client.Linq.Test
 
             const string expected = "from(bucket: p1) " +
                                     "|> range(start: p2) " +
+                                    "|> drop(columns: [\"_start\", \"_stop\", \"_measurement\"]) " +
                                     "|> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\") " +
                                     "|> filter(fn: (r) => ((r[\"sensor_id\"] == p3) and (r[\"data\"] > p4)))";
 
@@ -251,6 +262,7 @@ namespace Client.Linq.Test
 
             const string expected = "from(bucket: p1) " +
                                     "|> range(start: p2) " +
+                                    "|> drop(columns: [\"_start\", \"_stop\", \"_measurement\"]) " +
                                     "|> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\") " +
                                     "|> filter(fn: (r) => ((r[\"sensor_id\"] == p3) or (r[\"data\"] > p4)))";
 
@@ -350,6 +362,7 @@ namespace Client.Linq.Test
 
                 var expected = "from(bucket: p1) " +
                                $"|> {range} " +
+                               "|> drop(columns: [\"_start\", \"_stop\", \"_measurement\"]) " +
                                "|> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")";
 
                 Assert.AreEqual(expected, visitor.BuildFluxQuery(),
@@ -379,6 +392,7 @@ namespace Client.Linq.Test
 
             const string expected = "from(bucket: p1) " +
                                     "|> range(start: p3, stop: p4) " +
+                                    "|> drop(columns: [\"_start\", \"_stop\", \"_measurement\"]) " +
                                     "|> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")";
 
             Assert.AreEqual(expected, visitor.BuildFluxQuery());
@@ -427,6 +441,7 @@ namespace Client.Linq.Test
 
                 var expected = "from(bucket: p1) " +
                                "|> range(start: p2) " +
+                               "|> drop(columns: [\"_start\", \"_stop\", \"_measurement\"]) " +
                                "|> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\") " +
                                $"|> filter(fn: (r) => {filter})";
 
@@ -450,6 +465,7 @@ namespace Client.Linq.Test
 
             const string expected = "from(bucket: p1) " +
                                     "|> range(start: p2) " +
+                                    "|> drop(columns: [\"_start\", \"_stop\", \"_measurement\"]) " +
                                     "|> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\") " +
                                     "|> stateCount(fn: (r) => true, column: \"linq_result_column\") " +
                                     "|> last(column: \"linq_result_column\") " +
@@ -467,6 +483,7 @@ namespace Client.Linq.Test
 
             const string expected = "from(bucket: p1) " +
                                     "|> range(start: p2) " +
+                                    "|> drop(columns: [\"_start\", \"_stop\", \"_measurement\"]) " +
                                     "|> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\") " +
                                     "|> stateCount(fn: (r) => true, column: \"linq_result_column\") " +
                                     "|> last(column: \"linq_result_column\") " +
@@ -485,6 +502,7 @@ namespace Client.Linq.Test
 
             const string expected = "from(bucket: p1) " +
                                     "|> range(start: p2) " +
+                                    "|> drop(columns: [\"_start\", \"_stop\", \"_measurement\"]) " +
                                     "|> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\") " +
                                     "|> filter(fn: (r) => (r[\"deployment\"] == p3))";
 
@@ -557,6 +575,7 @@ namespace Client.Linq.Test
 
             const string expected = "from(bucket: p1) " +
                                     "|> range(start: p2) " +
+                                    "|> drop(columns: [\"_start\", \"_stop\", \"_measurement\"]) " +
                                     "|> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\") " +
                                     "|> sort(columns: [p3], desc: p4)";
 
@@ -576,6 +595,7 @@ namespace Client.Linq.Test
 
             const string expected = "from(bucket: p1) " +
                                     "|> range(start: p2) " +
+                                    "|> drop(columns: [\"_start\", \"_stop\", \"_measurement\"]) " +
                                     "|> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\") " +
                                     "|> sort(columns: [p3], desc: p4)";
 
@@ -595,6 +615,7 @@ namespace Client.Linq.Test
 
             const string expected = "from(bucket: p1) " +
                                     "|> range(start: p2) " +
+                                    "|> drop(columns: [\"_start\", \"_stop\", \"_measurement\"]) " +
                                     "|> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\") " +
                                     "|> sort(columns: [p3], desc: p4)";
 
@@ -619,6 +640,7 @@ namespace Client.Linq.Test
 
             const string expected = "from(bucket: p1) " +
                                     "|> range(start: p5, stop: p6) " +
+                                    "|> drop(columns: [\"_start\", \"_stop\", \"_measurement\"]) " +
                                     "|> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\") " +
                                     "|> filter(fn: (r) => (r[\"sensor_id\"] == p3) and (r[\"data\"] > p4)) " +
                                     "|> sort(columns: [p7], desc: p8) " +
