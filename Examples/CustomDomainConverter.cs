@@ -301,6 +301,7 @@ namespace Examples
 
                 Console.WriteLine($"{name}={value}");
             }
+            Console.WriteLine();
             Console.WriteLine(influxQuery._Query);
             
             client.Dispose();

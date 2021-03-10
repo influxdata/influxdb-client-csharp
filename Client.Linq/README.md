@@ -188,8 +188,7 @@ The time filtering expressions are mapped to Flux `range()` function.
 This function has `start` and `stop` parameters with following behaviour: `start <= _time < stop`:
 > Results include records with `_time` values greater than or equal to the specified `start` time and less than the specified `stop` time.
  
-This means that doesn't matter if filtering expression has `less than` or `less than or equal` operator (same for `greater`), because `range()` function has different behaviour.
-As a solution you could shift your time with one nanoseconds. 
+This means that we have to add one nanosecond to `start` if we want timestamp `greater than` and also add one nanosecond to `stop` if we want to timestamp `lesser or equal than`.
 
 - [range() function](https://docs.influxdata.com/influxdb/cloud/reference/flux/stdlib/built-in/transformations/range/)
 
@@ -206,8 +205,10 @@ var sensors = query.ToList();
 
 Flux Query:
 ```flux
+start_shifted = int(v: time(v: "2019-11-16T08:20:15Z")) + 1
+
 from(bucket: "my-bucket") 
-    |> range(start: 2019-11-16T08:20:15Z, stop: 2021-01-10T05:10:00Z) 
+    |> range(start: time(v: start_shifted), stop: 2021-01-10T05:10:00Z) 
     |> drop(columns: ["_start", "_stop", "_measurement"])
 ```
 
@@ -224,8 +225,10 @@ var sensors = query.ToList();
 
 Flux Query:
 ```flux
+stop_shifted = int(v: time(v: "2021-01-10T05:10:00Z")) + 1
+
 from(bucket: "my-bucket") 
-    |> range(start: 2019-11-16T08:20:15Z, stop: 2021-01-10T05:10:00Z) 
+    |> range(start: 2019-11-16T08:20:15Z, stop: time(v: stop_shifted)) 
     |> drop(columns: ["_start", "_stop", "_measurement"])
 ```
 
@@ -258,8 +261,10 @@ var sensors = query.ToList();
 
 Flux Query:
 ```flux
+stop_shifted = int(v: time(v: "2021-01-10T05:10:00Z")) + 1
+
 from(bucket: "my-bucket") 
-    |> range(start: 0, stop: 2021-01-10T05:10:00Z) 
+    |> range(start: 0, stop: time(v: stop_shifted)) 
     |> drop(columns: ["_start", "_stop", "_measurement"])
 ```
 
@@ -275,8 +280,10 @@ var sensors = query.ToList();
 
 Flux Query:
 ```flux
+stop_shifted = int(v: time(v: "2019-11-16T08:20:15Z")) + 1
+
 from(bucket: "my-bucket") 
-    |> range(start: 2019-11-16T08:20:15Z, stop: 2019-11-16T08:20:15Z) 
+    |> range(start: 2019-11-16T08:20:15Z, stop: time(v: stop_shifted)) 
     |> drop(columns: ["_start", "_stop", "_measurement"])
 ```
 
@@ -794,5 +801,6 @@ foreach (var statement in influxQuery.Extern.Body)
 
     Console.WriteLine($"{name}={value}");
 }
+Console.WriteLine();
 Console.WriteLine(influxQuery._Query);
 ```
