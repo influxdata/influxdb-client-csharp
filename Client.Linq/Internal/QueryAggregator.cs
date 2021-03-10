@@ -47,7 +47,9 @@ namespace InfluxDB.Client.Linq.Internal
     {
         private string _bucketAssignment;
         private string _rangeStartAssignment;
+        private RangeExpressionType _rangeStartExpression;
         private string _rangeStopAssignment;
+        private RangeExpressionType _rangeStopExpression;
         private string _limitNAssignment;
         private string _limitOffsetAssignment;
         private ResultFunction _resultFunction;
@@ -69,11 +71,13 @@ namespace InfluxDB.Client.Linq.Internal
         internal void AddRangeStart(string rangeStart, RangeExpressionType expressionType)
         {
             _rangeStartAssignment = rangeStart;
+            _rangeStartExpression = expressionType;
         }
         
         internal void AddRangeStop(string rangeStop, RangeExpressionType expressionType)
         {
             _rangeStopAssignment = rangeStop;
+            _rangeStopExpression = expressionType;
         }
         
         internal void AddLimitN(string limitNAssignment)
@@ -159,13 +163,24 @@ namespace InfluxDB.Client.Linq.Internal
             
             if (_rangeStartAssignment != null)
             {
-                transforms.Add($"start_shifted = int(v: time(v: {_rangeStartAssignment}))");
+                var startShifted = $"start_shifted = int(v: time(v: {_rangeStartAssignment}))";
+                if (_rangeStartExpression == RangeExpressionType.GreaterThan)
+                {
+                    startShifted += " + 1";
+                }
+                transforms.Add(startShifted);
                 rangeStartShift = "time(v: start_shifted)";
             }
 
             if (_rangeStopAssignment != null)
             {
-                transforms.Add($"stop_shifted = int(v: time(v: {_rangeStopAssignment}))");
+                var stopShifted = $"stop_shifted = int(v: time(v: {_rangeStopAssignment}))";
+                if (_rangeStopExpression == RangeExpressionType.LessThanOrEqual || _rangeStopExpression == RangeExpressionType.Equal)
+                {
+                    stopShifted += " + 1";
+                }
+                
+                transforms.Add(stopShifted);
                 rangeStopShift = "time(v: stop_shifted)";
             }
             

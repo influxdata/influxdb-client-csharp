@@ -246,7 +246,7 @@ namespace Client.Linq.Test
                     from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _queryApi)
                     where s.Timestamp > month10
                     select s,
-                    "start_shifted = int(v: time(v: p3))\n\n",
+                    "start_shifted = int(v: time(v: p3)) + 1\n\n",
                     "range(start: time(v: start_shifted))",
                     new Dictionary<int, DateTime> {{2, month10}}
                 ),
@@ -272,7 +272,7 @@ namespace Client.Linq.Test
                     where s.Timestamp <= month10
                     select s,
                     "start_shifted = int(v: time(v: p2))\n" +
-                    "stop_shifted = int(v: time(v: p3))\n\n",
+                    "stop_shifted = int(v: time(v: p3)) + 1\n\n",
                     "range(start: time(v: start_shifted), stop: time(v: stop_shifted))",
                     new Dictionary<int, DateTime> {{2, month10}}
                 ),
@@ -281,7 +281,7 @@ namespace Client.Linq.Test
                     where s.Timestamp > month10
                     where s.Timestamp < month11
                     select s,
-                    "start_shifted = int(v: time(v: p3))\n" +
+                    "start_shifted = int(v: time(v: p3)) + 1\n" +
                     "stop_shifted = int(v: time(v: p4))\n\n",
                     "range(start: time(v: start_shifted), stop: time(v: stop_shifted))",
                     new Dictionary<int, DateTime> {{2, month10}, {3, month11}}
@@ -290,7 +290,7 @@ namespace Client.Linq.Test
                     from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _queryApi)
                     where s.Timestamp > month10 && s.Timestamp < month11
                     select s,
-                    "start_shifted = int(v: time(v: p3))\n" +
+                    "start_shifted = int(v: time(v: p3)) + 1\n" +
                     "stop_shifted = int(v: time(v: p4))\n\n",
                     "range(start: time(v: start_shifted), stop: time(v: stop_shifted))",
                     new Dictionary<int, DateTime> {{2, month10}, {3, month11}}
@@ -301,7 +301,7 @@ namespace Client.Linq.Test
                     where s.Timestamp <= month11
                     select s,
                     "start_shifted = int(v: time(v: p3))\n" +
-                    "stop_shifted = int(v: time(v: p4))\n\n",
+                    "stop_shifted = int(v: time(v: p4)) + 1\n\n",
                     "range(start: time(v: start_shifted), stop: time(v: stop_shifted))",
                     new Dictionary<int, DateTime> {{2, month10}, {3, month11}}
                 ),
@@ -320,7 +320,7 @@ namespace Client.Linq.Test
                     where s.Timestamp == month10
                     select s,
                     "start_shifted = int(v: time(v: p3))\n" +
-                    "stop_shifted = int(v: time(v: p3))\n\n",
+                    "stop_shifted = int(v: time(v: p3)) + 1\n\n",
                     "range(start: time(v: start_shifted), stop: time(v: stop_shifted))",
                     new Dictionary<int, DateTime> {{2, month10}}
                 ),
@@ -329,7 +329,7 @@ namespace Client.Linq.Test
                     where month10 < s.Timestamp
                     where month11 > s.Timestamp
                     select s,
-                    "start_shifted = int(v: time(v: p3))\n" +
+                    "start_shifted = int(v: time(v: p3)) + 1\n" +
                     "stop_shifted = int(v: time(v: p4))\n\n",
                     "range(start: time(v: start_shifted), stop: time(v: stop_shifted))",
                     new Dictionary<int, DateTime> {{2, month10}, {3, month11}}
@@ -373,7 +373,7 @@ namespace Client.Linq.Test
             var visitor = BuildQueryVisitor(query.Expression);
 
             const string expected = "start_shifted = int(v: time(v: p3))\n" +
-                                    "stop_shifted = int(v: time(v: p4))\n\n" +
+                                    "stop_shifted = int(v: time(v: p4)) + 1\n\n" +
                                     "from(bucket: p1) " +
                                     "|> range(start: time(v: start_shifted), stop: time(v: stop_shifted)) " +
                                     "|> drop(columns: [\"_start\", \"_stop\", \"_measurement\"]) " +
@@ -597,7 +597,7 @@ namespace Client.Linq.Test
                 .Take(2)
                 .Skip(2);
 
-            const string expected = "start_shifted = int(v: time(v: p5))\n" +
+            const string expected = "start_shifted = int(v: time(v: p5)) + 1\n" +
                                     "stop_shifted = int(v: time(v: p6))\n\n" +
                                     "from(bucket: p1) " +
                                     "|> range(start: time(v: start_shifted), stop: time(v: stop_shifted)) " +

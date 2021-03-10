@@ -16,21 +16,18 @@ namespace InfluxDB.Client.Linq.Internal.Expressions
             builder.Append(Right);
         }
 
-        internal void AddRange(QueryAggregator queryAggregator, VariableAggregator variableAggregator)
+        internal void AddRange(QueryAggregator queryAggregator)
         {
-            bool memberAtLeft;
             var builder = new StringBuilder();
 
-            // requirement value is on left
+            // assignment value is on left
             if (Left != null)
             {
-                memberAtLeft = false;
                 Left.AppendFlux(builder);
             }
-            // requirement value is on right
+            // assignment value is on right
             else
             {
-                memberAtLeft = true;
                 Right.AppendFlux(builder);
             }
 
@@ -46,30 +43,52 @@ namespace InfluxDB.Client.Linq.Internal.Expressions
 
                 case ExpressionType.LessThan:
                 case ExpressionType.LessThanOrEqual:
-                    var lessExpression = Operator.Expression.NodeType == ExpressionType.LessThan ? 
-                        RangeExpressionType.LessThan : RangeExpressionType.LessThanOrEqual;
-                    if (memberAtLeft)
+                    
+                    // assignment value is on left
+                    // 'where month11 < s.Timestamp'
+                    if (Left != null)
                     {
-                        queryAggregator.AddRangeStop(assignment, lessExpression);
+                        // => 'where s.Timestamp > month11'
+                        var lessExpression = Operator.Expression.NodeType == ExpressionType.LessThan
+                            ? RangeExpressionType.GreaterThan
+                            : RangeExpressionType.GreaterThanOrEqual;
+
+                        queryAggregator.AddRangeStart(assignment, lessExpression);
                     }
                     else
                     {
-                        queryAggregator.AddRangeStart(assignment, lessExpression);
+                        // => 'where s.Timestamp < month11'
+                        var lessExpression = Operator.Expression.NodeType == ExpressionType.LessThan
+                            ? RangeExpressionType.LessThan
+                            : RangeExpressionType.LessThanOrEqual;
+
+                        queryAggregator.AddRangeStop(assignment, lessExpression);
                     }
 
                     break;
 
                 case ExpressionType.GreaterThan:
                 case ExpressionType.GreaterThanOrEqual:
-                    var greaterExpression = Operator.Expression.NodeType == ExpressionType.GreaterThan ? 
-                        RangeExpressionType.GreaterThan : RangeExpressionType.GreaterThanOrEqual;
-                    if (memberAtLeft)
+                    
+                    // assignment value is on left
+                    // 'where month11 > s.Timestamp'
+                    if (Left != null)
                     {
-                        queryAggregator.AddRangeStart(assignment, greaterExpression);
+                        // => 'where s.Timestamp < month11'
+                        var greaterExpression = Operator.Expression.NodeType == ExpressionType.GreaterThan
+                            ? RangeExpressionType.LessThan
+                            : RangeExpressionType.LessThanOrEqual;
+                        
+                        queryAggregator.AddRangeStop(assignment, greaterExpression);
                     }
                     else
                     {
-                        queryAggregator.AddRangeStop(assignment, greaterExpression);
+                        // => 'where s.Timestamp > month11'
+                        var greaterExpression = Operator.Expression.NodeType == ExpressionType.GreaterThan
+                            ? RangeExpressionType.GreaterThan
+                            : RangeExpressionType.GreaterThanOrEqual;
+                        
+                        queryAggregator.AddRangeStart(assignment, greaterExpression);
                     }
 
                     break;

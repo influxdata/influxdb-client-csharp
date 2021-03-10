@@ -21,7 +21,7 @@ namespace InfluxDB.Client.Linq.Internal
             var bucketVariable = _context.Variables.AddNamedVariable(bucket);
             _context.QueryAggregator.AddBucket(bucketVariable);
             var rangeVariable = _context.Variables.AddNamedVariable(0);
-            _context.QueryAggregator.AddRangeStart(rangeVariable, RangeExpressionType.Equal);
+            _context.QueryAggregator.AddRangeStart(rangeVariable, RangeExpressionType.GreaterThanOrEqual);
         }
 
         internal InfluxDBQueryVisitor(QueryGenerationContext context)
@@ -70,7 +70,7 @@ namespace InfluxDB.Client.Linq.Internal
             foreach (var expressionPart in expressions.Where(it => it is TimeRange))
             {
                 var timeRange = (TimeRange) expressionPart;
-                timeRange.AddRange(_context.QueryAggregator, _context.Variables);
+                timeRange.AddRange(_context.QueryAggregator);
             }
             
             // filter

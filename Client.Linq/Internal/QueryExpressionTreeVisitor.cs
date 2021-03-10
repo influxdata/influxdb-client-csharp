@@ -162,7 +162,7 @@ namespace InfluxDB.Client.Linq.Internal
             }
 
             var timeRange = (TimeRange) _expressionParts[index];
-            // TimeRange on left: 'where s.Timestamp > month11'
+            // Timestamp on left: 'where s.Timestamp > month11'
             if (_expressionParts[index + 1] is BinaryOperator)
             {
                 timeRange.Operator = _expressionParts[index + 1] as BinaryOperator;
@@ -173,7 +173,7 @@ namespace InfluxDB.Client.Linq.Internal
                 _expressionParts.RemoveAt(index + 1);
                 _expressionParts.RemoveAt(index - 1);
             }
-            // TimeRange on right: 'where month11 > s.Timestamp'
+            // Timestamp on right: 'where month11 > s.Timestamp'
             else
             {
                 timeRange.Operator = _expressionParts[index - 1] as BinaryOperator;

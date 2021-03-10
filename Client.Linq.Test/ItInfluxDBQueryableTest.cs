@@ -234,7 +234,7 @@ namespace Client.Linq.Test
         public void QueryTimeRange()
         {
             var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApiSync())
-                where s.Timestamp > new DateTime(2020, 11, 16, 8, 20, 16, DateTimeKind.Utc)
+                where s.Timestamp > new DateTime(2020, 11, 16, 8, 20, 15, DateTimeKind.Utc)
                 select s;
 
             var sensors = query.ToList();
@@ -243,6 +243,34 @@ namespace Client.Linq.Test
             foreach (var sensor in sensors)
             {
                 Assert.GreaterOrEqual(sensor.Value, 89);
+            }
+        }
+        
+        [Test]
+        public void QueryTimeGreaterEqual()
+        {
+            var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApiSync())
+                where s.Timestamp >= new DateTime(2020, 11, 16, 8, 20, 15, DateTimeKind.Utc)
+                select s;
+
+            var sensors = query.ToList();
+
+            Assert.AreEqual(4, sensors.Count);
+        }
+        
+        [Test]
+        public void QueryTimeEqual()
+        {
+            var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApiSync())
+                where s.Timestamp == new DateTime(2020, 10, 15, 8, 20, 15, DateTimeKind.Utc)
+                select s;
+
+            var sensors = query.ToList();
+
+            Assert.AreEqual(2, sensors.Count);
+            foreach (var sensor in sensors)
+            {
+                Assert.GreaterOrEqual(sensor.Value, 15);
             }
         }
         
