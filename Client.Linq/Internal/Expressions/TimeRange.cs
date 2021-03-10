@@ -16,7 +16,7 @@ namespace InfluxDB.Client.Linq.Internal.Expressions
             builder.Append(Right);
         }
 
-        internal void AddRange(QueryAggregator queryAggregator)
+        internal void AddRange(QueryAggregator queryAggregator, VariableAggregator variableAggregator)
         {
             bool memberAtLeft;
             var builder = new StringBuilder();
@@ -40,32 +40,36 @@ namespace InfluxDB.Client.Linq.Internal.Expressions
             switch (Operator.Expression.NodeType)
             {
                 case ExpressionType.Equal:
-                    queryAggregator.AddRangeStart(assignment);
-                    queryAggregator.AddRangeStop(assignment);
+                    queryAggregator.AddRangeStart(assignment, RangeExpressionType.Equal);
+                    queryAggregator.AddRangeStop(assignment, RangeExpressionType.Equal);
                     break;
 
                 case ExpressionType.LessThan:
                 case ExpressionType.LessThanOrEqual:
+                    var lessExpression = Operator.Expression.NodeType == ExpressionType.LessThan ? 
+                        RangeExpressionType.LessThan : RangeExpressionType.LessThanOrEqual;
                     if (memberAtLeft)
                     {
-                        queryAggregator.AddRangeStop(assignment);
+                        queryAggregator.AddRangeStop(assignment, lessExpression);
                     }
                     else
                     {
-                        queryAggregator.AddRangeStart(assignment);
+                        queryAggregator.AddRangeStart(assignment, lessExpression);
                     }
 
                     break;
 
                 case ExpressionType.GreaterThan:
                 case ExpressionType.GreaterThanOrEqual:
+                    var greaterExpression = Operator.Expression.NodeType == ExpressionType.GreaterThan ? 
+                        RangeExpressionType.GreaterThan : RangeExpressionType.GreaterThanOrEqual;
                     if (memberAtLeft)
                     {
-                        queryAggregator.AddRangeStart(assignment);
+                        queryAggregator.AddRangeStart(assignment, greaterExpression);
                     }
                     else
                     {
-                        queryAggregator.AddRangeStop(assignment);
+                        queryAggregator.AddRangeStop(assignment, greaterExpression);
                     }
 
                     break;

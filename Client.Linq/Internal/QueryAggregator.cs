@@ -19,6 +19,30 @@ namespace InfluxDB.Client.Linq.Internal
         Count
     }
 
+    internal enum RangeExpressionType
+    {
+        /// <summary>
+        /// Equality comparison
+        /// </summary>
+        Equal,
+        /// <summary>
+        /// "Less than" comparison
+        /// </summary>
+        LessThan,
+        /// <summary>
+        /// "Less than or equal" comparison
+        /// </summary>
+        LessThanOrEqual,
+        /// <summary>
+        /// "Greater than" comparison
+        /// </summary>
+        GreaterThan,
+        /// <summary>
+        /// "Greater than or equal" comparison
+        /// </summary>
+        GreaterThanOrEqual
+    }
+
     internal class QueryAggregator
     {
         private string _bucketAssignment;
@@ -42,12 +66,12 @@ namespace InfluxDB.Client.Linq.Internal
             _bucketAssignment = bucket;
         }
 
-        internal void AddRangeStart(string rangeStart)
+        internal void AddRangeStart(string rangeStart, RangeExpressionType expressionType)
         {
             _rangeStartAssignment = rangeStart;
         }
         
-        internal void AddRangeStop(string rangeStop)
+        internal void AddRangeStop(string rangeStop, RangeExpressionType expressionType)
         {
             _rangeStopAssignment = rangeStop;
         }
@@ -87,10 +111,11 @@ namespace InfluxDB.Client.Linq.Internal
 
         internal string BuildFluxQuery()
         {
+            var transforms = new List<string>();
             var parts = new List<string>
             {
                 BuildOperator("from", "bucket", _bucketAssignment),
-                BuildOperator("range", "start", _rangeStartAssignment, "stop", _rangeStopAssignment),
+                BuildRange(transforms),
                 "drop(columns: [\"_start\", \"_stop\", \"_measurement\"])",
                 "pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")",
                 BuildFilter()
@@ -118,12 +143,38 @@ namespace InfluxDB.Client.Linq.Internal
                 }
             }
 
-            return JoinList(parts, "|>");
+            var query = new StringBuilder();
+
+            query.Append(JoinList(transforms, "\n"));
+            query.Append("\n\n");
+            query.Append(JoinList(parts, " |> "));
+
+            return query.ToString();
         }
 
-        internal string BuildFilter()
+        private string BuildRange(List<string> transforms)
         {
-            var filters = JoinList(_filters, "and");
+            string rangeStartShift = null;
+            string rangeStopShift = null;
+            
+            if (_rangeStartAssignment != null)
+            {
+                transforms.Add($"start_shifted = int(v: time(v: {_rangeStartAssignment}))");
+                rangeStartShift = "time(v: start_shifted)";
+            }
+
+            if (_rangeStopAssignment != null)
+            {
+                transforms.Add($"stop_shifted = int(v: time(v: {_rangeStopAssignment}))");
+                rangeStopShift = "time(v: stop_shifted)";
+            }
+            
+            return BuildOperator("range", "start", rangeStartShift, "stop", rangeStopShift);
+        }
+
+        private string BuildFilter()
+        {
+            var filters = JoinList(_filters, " and ");
             if (filters.Length == 0)
             {
                 return null;
@@ -162,7 +213,7 @@ namespace InfluxDB.Client.Linq.Internal
                 if (variableAssignment is IEnumerable<string> enumerable)
                 {
                     builderVariables.Append("[");
-                    builderVariables.Append(JoinList(enumerable, ","));
+                    builderVariables.Append(JoinList(enumerable, ", "));
                     builderVariables.Append("]");
                 }
                 else
@@ -184,7 +235,7 @@ namespace InfluxDB.Client.Linq.Internal
             return builder.ToString();
         }
 
-        private string JoinList(IEnumerable<object> strings, string delimiter)
+        private StringBuilder JoinList(IEnumerable<object> strings, string delimiter)
         {
             return strings.Aggregate(new StringBuilder(), (builder, filter) =>
             {
@@ -201,15 +252,13 @@ namespace InfluxDB.Client.Linq.Internal
 
                 if (builder.Length != 0)
                 {
-                    builder.Append(" ");
                     builder.Append(delimiter);
-                    builder.Append(" ");
                 }
 
                 builder.Append(stringValue);
 
                 return builder;
-            }).ToString();
+            });
         }
     }
 }

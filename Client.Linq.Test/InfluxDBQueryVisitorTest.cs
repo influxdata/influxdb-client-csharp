@@ -22,6 +22,12 @@ namespace Client.Linq.Test
     [TestFixture]
     public class InfluxDBQueryVisitorTest : AbstractTest
     {
+        private const string FluxStart = "start_shifted = int(v: time(v: p2))\n\n" +
+                                         "from(bucket: p1) " +
+                                         "|> range(start: time(v: start_shifted)) " +
+                                         "|> drop(columns: [\"_start\", \"_stop\", \"_measurement\"]) " +
+                                         "|> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")";
+
         private QueryApiSync _queryApi;
 
         [OneTimeSetUp]
@@ -42,10 +48,7 @@ namespace Client.Linq.Test
                 select s;
             var visitor = BuildQueryVisitor(query.Expression);
 
-            const string expected = "from(bucket: p1) " +
-                                    "|> range(start: p2) " +
-                                    "|> drop(columns: [\"_start\", \"_stop\", \"_measurement\"]) " +
-                                    "|> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")";
+            const string expected = FluxStart;
             Assert.AreEqual(expected, visitor.BuildFluxQuery());
         }
 
@@ -90,11 +93,7 @@ namespace Client.Linq.Test
                 select s;
             var visitor = BuildQueryVisitor(MakeExpression(query, q => q.Take(10)));
 
-            const string expected = "from(bucket: p1) " +
-                                    "|> range(start: p2) " +
-                                    "|> drop(columns: [\"_start\", \"_stop\", \"_measurement\"]) " +
-                                    "|> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\") " +
-                                    "|> limit(n: p3)";
+            const string expected = FluxStart + " " + "|> limit(n: p3)";
 
             Assert.AreEqual(expected, visitor.BuildFluxQuery());
         }
@@ -106,10 +105,7 @@ namespace Client.Linq.Test
                 select s;
             var visitor = BuildQueryVisitor(MakeExpression(query, q => q.Skip(5)));
 
-            const string expected = "from(bucket: p1) " +
-                                    "|> range(start: p2) " +
-                                    "|> drop(columns: [\"_start\", \"_stop\", \"_measurement\"]) " +
-                                    "|> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")";
+            const string expected = FluxStart;
 
             Assert.AreEqual(expected, visitor.BuildFluxQuery());
         }
@@ -121,11 +117,7 @@ namespace Client.Linq.Test
                 select s;
             var visitor = BuildQueryVisitor(MakeExpression(query, q => q.Take(10).Skip(5)));
 
-            const string expected = "from(bucket: p1) " +
-                                    "|> range(start: p2) " +
-                                    "|> drop(columns: [\"_start\", \"_stop\", \"_measurement\"]) " +
-                                    "|> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\") " +
-                                    "|> limit(n: p3, offset: p4)";
+            const string expected = FluxStart + " " + "|> limit(n: p3, offset: p4)";
 
             Assert.AreEqual(expected, visitor.BuildFluxQuery());
         }
@@ -138,11 +130,7 @@ namespace Client.Linq.Test
                 select s;
             var visitor = BuildQueryVisitor(query.Expression);
 
-            const string expected = "from(bucket: p1) " +
-                                    "|> range(start: p2) " +
-                                    "|> drop(columns: [\"_start\", \"_stop\", \"_measurement\"]) " +
-                                    "|> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\") " +
-                                    "|> filter(fn: (r) => (r[\"sensor_id\"] == p3))";
+            const string expected = FluxStart + " " + "|> filter(fn: (r) => (r[\"sensor_id\"] == p3))";
 
             Assert.AreEqual(expected, visitor.BuildFluxQuery());
         }
@@ -155,11 +143,7 @@ namespace Client.Linq.Test
                 select s;
             var visitor = BuildQueryVisitor(query.Expression);
 
-            const string expected = "from(bucket: p1) " +
-                                    "|> range(start: p2) " +
-                                    "|> drop(columns: [\"_start\", \"_stop\", \"_measurement\"]) " +
-                                    "|> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\") " +
-                                    "|> filter(fn: (r) => (r[\"sensor_id\"] != p3))";
+            const string expected = FluxStart + " " + "|> filter(fn: (r) => (r[\"sensor_id\"] != p3))";
 
             Assert.AreEqual(expected, visitor.BuildFluxQuery());
         }
@@ -172,11 +156,7 @@ namespace Client.Linq.Test
                 select s;
             var visitor = BuildQueryVisitor(query.Expression);
 
-            const string expected = "from(bucket: p1) " +
-                                    "|> range(start: p2) " +
-                                    "|> drop(columns: [\"_start\", \"_stop\", \"_measurement\"]) " +
-                                    "|> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\") " +
-                                    "|> filter(fn: (r) => (r[\"data\"] < p3))";
+            const string expected = FluxStart + " " + "|> filter(fn: (r) => (r[\"data\"] < p3))";
 
             Assert.AreEqual(expected, visitor.BuildFluxQuery());
         }
@@ -189,11 +169,7 @@ namespace Client.Linq.Test
                 select s;
             var visitor = BuildQueryVisitor(query.Expression);
 
-            const string expected = "from(bucket: p1) " +
-                                    "|> range(start: p2) " +
-                                    "|> drop(columns: [\"_start\", \"_stop\", \"_measurement\"]) " +
-                                    "|> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\") " +
-                                    "|> filter(fn: (r) => (r[\"data\"] <= p3))";
+            const string expected = FluxStart + " " + "|> filter(fn: (r) => (r[\"data\"] <= p3))";
 
             Assert.AreEqual(expected, visitor.BuildFluxQuery());
         }
@@ -206,11 +182,7 @@ namespace Client.Linq.Test
                 select s;
             var visitor = BuildQueryVisitor(query.Expression);
 
-            const string expected = "from(bucket: p1) " +
-                                    "|> range(start: p2) " +
-                                    "|> drop(columns: [\"_start\", \"_stop\", \"_measurement\"]) " +
-                                    "|> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\") " +
-                                    "|> filter(fn: (r) => (r[\"data\"] > p3))";
+            const string expected = FluxStart + " " + "|> filter(fn: (r) => (r[\"data\"] > p3))";
 
             Assert.AreEqual(expected, visitor.BuildFluxQuery());
         }
@@ -223,11 +195,7 @@ namespace Client.Linq.Test
                 select s;
             var visitor = BuildQueryVisitor(query.Expression);
 
-            const string expected = "from(bucket: p1) " +
-                                    "|> range(start: p2) " +
-                                    "|> drop(columns: [\"_start\", \"_stop\", \"_measurement\"]) " +
-                                    "|> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\") " +
-                                    "|> filter(fn: (r) => (r[\"data\"] >= p3))";
+            const string expected = FluxStart + " " + "|> filter(fn: (r) => (r[\"data\"] >= p3))";
 
             Assert.AreEqual(expected, visitor.BuildFluxQuery());
         }
@@ -240,10 +208,7 @@ namespace Client.Linq.Test
                 select s;
             var visitor = BuildQueryVisitor(query.Expression);
 
-            const string expected = "from(bucket: p1) " +
-                                    "|> range(start: p2) " +
-                                    "|> drop(columns: [\"_start\", \"_stop\", \"_measurement\"]) " +
-                                    "|> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\") " +
+            const string expected = FluxStart + " " +
                                     "|> filter(fn: (r) => ((r[\"sensor_id\"] == p3) and (r[\"data\"] > p4)))";
 
             Assert.AreEqual(expected, visitor.BuildFluxQuery());
@@ -260,10 +225,7 @@ namespace Client.Linq.Test
                 select s;
             var visitor = BuildQueryVisitor(query.Expression);
 
-            const string expected = "from(bucket: p1) " +
-                                    "|> range(start: p2) " +
-                                    "|> drop(columns: [\"_start\", \"_stop\", \"_measurement\"]) " +
-                                    "|> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\") " +
+            const string expected = FluxStart + " " +
                                     "|> filter(fn: (r) => ((r[\"sensor_id\"] == p3) or (r[\"data\"] > p4)))";
 
             Assert.AreEqual(expected, visitor.BuildFluxQuery());
@@ -284,28 +246,34 @@ namespace Client.Linq.Test
                     from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _queryApi)
                     where s.Timestamp > month10
                     select s,
-                    "range(start: p3)",
+                    "start_shifted = int(v: time(v: p3))\n\n",
+                    "range(start: time(v: start_shifted))",
                     new Dictionary<int, DateTime> {{2, month10}}
                 ),
                 (
                     from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _queryApi)
                     where s.Timestamp < month10
                     select s,
-                    "range(start: p2, stop: p3)",
+                    "start_shifted = int(v: time(v: p2))\n" +
+                    "stop_shifted = int(v: time(v: p3))\n\n",
+                    "range(start: time(v: start_shifted), stop: time(v: stop_shifted))",
                     new Dictionary<int, DateTime> {{2, month10}}
                 ),
                 (
                     from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _queryApi)
                     where s.Timestamp >= month10
                     select s,
-                    "range(start: p3)",
+                    "start_shifted = int(v: time(v: p3))\n\n",
+                    "range(start: time(v: start_shifted))",
                     new Dictionary<int, DateTime> {{2, month10}}
                 ),
                 (
                     from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _queryApi)
                     where s.Timestamp <= month10
                     select s,
-                    "range(start: p2, stop: p3)",
+                    "start_shifted = int(v: time(v: p2))\n" +
+                    "stop_shifted = int(v: time(v: p3))\n\n",
+                    "range(start: time(v: start_shifted), stop: time(v: stop_shifted))",
                     new Dictionary<int, DateTime> {{2, month10}}
                 ),
                 (
@@ -313,14 +281,18 @@ namespace Client.Linq.Test
                     where s.Timestamp > month10
                     where s.Timestamp < month11
                     select s,
-                    "range(start: p3, stop: p4)",
+                    "start_shifted = int(v: time(v: p3))\n" +
+                    "stop_shifted = int(v: time(v: p4))\n\n",
+                    "range(start: time(v: start_shifted), stop: time(v: stop_shifted))",
                     new Dictionary<int, DateTime> {{2, month10}, {3, month11}}
                 ),
                 (
                     from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _queryApi)
                     where s.Timestamp > month10 && s.Timestamp < month11
                     select s,
-                    "range(start: p3, stop: p4)",
+                    "start_shifted = int(v: time(v: p3))\n" +
+                    "stop_shifted = int(v: time(v: p4))\n\n",
+                    "range(start: time(v: start_shifted), stop: time(v: stop_shifted))",
                     new Dictionary<int, DateTime> {{2, month10}, {3, month11}}
                 ),
                 (
@@ -328,7 +300,9 @@ namespace Client.Linq.Test
                     where s.Timestamp >= month10
                     where s.Timestamp <= month11
                     select s,
-                    "range(start: p3, stop: p4)",
+                    "start_shifted = int(v: time(v: p3))\n" +
+                    "stop_shifted = int(v: time(v: p4))\n\n",
+                    "range(start: time(v: start_shifted), stop: time(v: stop_shifted))",
                     new Dictionary<int, DateTime> {{2, month10}, {3, month11}}
                 ),
                 (
@@ -336,37 +310,45 @@ namespace Client.Linq.Test
                     where s.Timestamp >= month10
                     where s.Timestamp < month11
                     select s,
-                    "range(start: p3, stop: p4)",
+                    "start_shifted = int(v: time(v: p3))\n" +
+                    "stop_shifted = int(v: time(v: p4))\n\n",
+                    "range(start: time(v: start_shifted), stop: time(v: stop_shifted))",
                     new Dictionary<int, DateTime> {{2, month10}, {3, month11}}
                 ),
                 (
                     from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _queryApi)
                     where s.Timestamp == month10
                     select s,
-                    "range(start: p3, stop: p3)",
+                    "start_shifted = int(v: time(v: p3))\n" +
+                    "stop_shifted = int(v: time(v: p3))\n\n",
+                    "range(start: time(v: start_shifted), stop: time(v: stop_shifted))",
                     new Dictionary<int, DateTime> {{2, month10}}
                 ),
                 (
                     from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _queryApi)
                     where month10 < s.Timestamp
                     where month11 > s.Timestamp
-                    select s, "range(start: p3, stop: p4)",
+                    select s,
+                    "start_shifted = int(v: time(v: p3))\n" +
+                    "stop_shifted = int(v: time(v: p4))\n\n",
+                    "range(start: time(v: start_shifted), stop: time(v: stop_shifted))",
                     new Dictionary<int, DateTime> {{2, month10}, {3, month11}}
                 )
             };
 
-            foreach (var (queryable, range, assignments) in queries)
+            foreach (var (queryable, shift, range, assignments) in queries)
             {
                 var visitor = BuildQueryVisitor(queryable.Expression);
                 var ast = visitor.BuildFluxAST();
 
-                var expected = "from(bucket: p1) " +
+                var expected = shift + 
+                               "from(bucket: p1) " +
                                $"|> {range} " +
                                "|> drop(columns: [\"_start\", \"_stop\", \"_measurement\"]) " +
                                "|> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")";
 
                 Assert.AreEqual(expected, visitor.BuildFluxQuery(),
-                    $"Expected Range: {range}, Queryable expression: {queryable.Expression}");
+                    $"Expected Range: {range}, Shift: {shift}, Queryable expression: {queryable.Expression}");
 
                 foreach (var (index, dateTime) in assignments)
                 {
@@ -390,8 +372,10 @@ namespace Client.Linq.Test
                 select s;
             var visitor = BuildQueryVisitor(query.Expression);
 
-            const string expected = "from(bucket: p1) " +
-                                    "|> range(start: p3, stop: p4) " +
+            const string expected = "start_shifted = int(v: time(v: p3))\n" +
+                                    "stop_shifted = int(v: time(v: p4))\n\n" +
+                                    "from(bucket: p1) " +
+                                    "|> range(start: time(v: start_shifted), stop: time(v: stop_shifted)) " +
                                     "|> drop(columns: [\"_start\", \"_stop\", \"_measurement\"]) " +
                                     "|> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")";
 
@@ -439,10 +423,7 @@ namespace Client.Linq.Test
                 var visitor = BuildQueryVisitor(queryable.Expression, memberResolver);
                 var ast = visitor.BuildFluxAST();
 
-                var expected = "from(bucket: p1) " +
-                               "|> range(start: p2) " +
-                               "|> drop(columns: [\"_start\", \"_stop\", \"_measurement\"]) " +
-                               "|> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\") " +
+                var expected = FluxStart + " " +
                                $"|> filter(fn: (r) => {filter})";
 
                 Assert.AreEqual(expected, visitor.BuildFluxQuery(),
@@ -463,10 +444,7 @@ namespace Client.Linq.Test
                 select s;
             var visitor = BuildQueryVisitor(MakeExpression(query, q => q.Count()));
 
-            const string expected = "from(bucket: p1) " +
-                                    "|> range(start: p2) " +
-                                    "|> drop(columns: [\"_start\", \"_stop\", \"_measurement\"]) " +
-                                    "|> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\") " +
+            const string expected = FluxStart + " " +
                                     "|> stateCount(fn: (r) => true, column: \"linq_result_column\") " +
                                     "|> last(column: \"linq_result_column\") " +
                                     "|> keep(columns: [\"linq_result_column\"])";
@@ -481,10 +459,7 @@ namespace Client.Linq.Test
                 select s;
             var visitor = BuildQueryVisitor(MakeExpression(query, q => q.LongCount()));
 
-            const string expected = "from(bucket: p1) " +
-                                    "|> range(start: p2) " +
-                                    "|> drop(columns: [\"_start\", \"_stop\", \"_measurement\"]) " +
-                                    "|> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\") " +
+            const string expected = FluxStart + " " +
                                     "|> stateCount(fn: (r) => true, column: \"linq_result_column\") " +
                                     "|> last(column: \"linq_result_column\") " +
                                     "|> keep(columns: [\"linq_result_column\"])";
@@ -500,11 +475,7 @@ namespace Client.Linq.Test
                 select s;
             var visitor = BuildQueryVisitor(query.Expression);
 
-            const string expected = "from(bucket: p1) " +
-                                    "|> range(start: p2) " +
-                                    "|> drop(columns: [\"_start\", \"_stop\", \"_measurement\"]) " +
-                                    "|> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\") " +
-                                    "|> filter(fn: (r) => (r[\"deployment\"] == p3))";
+            const string expected = FluxStart + " " + "|> filter(fn: (r) => (r[\"deployment\"] == p3))";
 
             Assert.AreEqual(expected, visitor.BuildFluxQuery());
 
@@ -573,11 +544,7 @@ namespace Client.Linq.Test
                 select s;
             var visitor = BuildQueryVisitor(query.Expression);
 
-            const string expected = "from(bucket: p1) " +
-                                    "|> range(start: p2) " +
-                                    "|> drop(columns: [\"_start\", \"_stop\", \"_measurement\"]) " +
-                                    "|> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\") " +
-                                    "|> sort(columns: [p3], desc: p4)";
+            const string expected = FluxStart + " " + "|> sort(columns: [p3], desc: p4)";
 
             Assert.AreEqual(expected, visitor.BuildFluxQuery());
             var ast = visitor.BuildFluxAST();
@@ -593,11 +560,7 @@ namespace Client.Linq.Test
                 select s;
             var visitor = BuildQueryVisitor(query.Expression);
 
-            const string expected = "from(bucket: p1) " +
-                                    "|> range(start: p2) " +
-                                    "|> drop(columns: [\"_start\", \"_stop\", \"_measurement\"]) " +
-                                    "|> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\") " +
-                                    "|> sort(columns: [p3], desc: p4)";
+            const string expected = FluxStart + " " + "|> sort(columns: [p3], desc: p4)";
 
             Assert.AreEqual(expected, visitor.BuildFluxQuery());
 
@@ -613,11 +576,7 @@ namespace Client.Linq.Test
                 select s;
             var visitor = BuildQueryVisitor(query.Expression);
 
-            const string expected = "from(bucket: p1) " +
-                                    "|> range(start: p2) " +
-                                    "|> drop(columns: [\"_start\", \"_stop\", \"_measurement\"]) " +
-                                    "|> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\") " +
-                                    "|> sort(columns: [p3], desc: p4)";
+            const string expected = FluxStart + " " + "|> sort(columns: [p3], desc: p4)";
 
             Assert.AreEqual(expected, visitor.BuildFluxQuery());
 
@@ -638,8 +597,10 @@ namespace Client.Linq.Test
                 .Take(2)
                 .Skip(2);
 
-            const string expected = "from(bucket: p1) " +
-                                    "|> range(start: p5, stop: p6) " +
+            const string expected = "start_shifted = int(v: time(v: p5))\n" +
+                                    "stop_shifted = int(v: time(v: p6))\n\n" +
+                                    "from(bucket: p1) " +
+                                    "|> range(start: time(v: start_shifted), stop: time(v: stop_shifted)) " +
                                     "|> drop(columns: [\"_start\", \"_stop\", \"_measurement\"]) " +
                                     "|> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\") " +
                                     "|> filter(fn: (r) => (r[\"sensor_id\"] == p3) and (r[\"data\"] > p4)) " +
