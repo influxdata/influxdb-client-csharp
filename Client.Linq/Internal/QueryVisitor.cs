@@ -52,7 +52,7 @@ namespace InfluxDB.Client.Linq.Internal
 
         internal File BuildFluxAST()
         {
-            return new File {Imports = null, Package = null, Body = _context.Variables.GetStatements()};
+            return new File {Imports = new List<ImportDeclaration>(), Package = null, Body = _context.Variables.GetStatements()};
         }
 
         internal string BuildFluxQuery()
