@@ -27,14 +27,14 @@ namespace InfluxDB.Client.Api.Domain
     /// Expressions begin and end with &#x60;/&#x60; and are regular expressions with syntax accepted by RE2
     /// </summary>
     [DataContract]
-    public partial class RegexpLiteral :  IEquatable<RegexpLiteral>
+    public partial class RegexpLiteral : Expression,  IEquatable<RegexpLiteral>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="RegexpLiteral" /> class.
         /// </summary>
         /// <param name="type">Type of AST node.</param>
         /// <param name="value">value.</param>
-        public RegexpLiteral(string type = default(string), string value = default(string))
+        public RegexpLiteral(string type = default(string), string value = default(string)) : base()
         {
             this.Type = type;
             this.Value = value;
@@ -61,6 +61,7 @@ namespace InfluxDB.Client.Api.Domain
         {
             var sb = new StringBuilder();
             sb.Append("class RegexpLiteral {\n");
+            sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  Value: ").Append(Value).Append("\n");
             sb.Append("}\n");
@@ -71,7 +72,7 @@ namespace InfluxDB.Client.Api.Domain
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public virtual string ToJson()
+        public override string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }
@@ -96,12 +97,12 @@ namespace InfluxDB.Client.Api.Domain
             if (input == null)
                 return false;
 
-            return 
+            return base.Equals(input) && 
                 (
                     this.Type == input.Type ||
                     (this.Type != null &&
                     this.Type.Equals(input.Type))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.Value == input.Value ||
                     (this.Value != null &&
@@ -117,7 +118,7 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
+                int hashCode = base.GetHashCode();
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.Value != null)

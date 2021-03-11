@@ -27,14 +27,14 @@ namespace InfluxDB.Client.Api.Domain
     /// A single variable declaration
     /// </summary>
     [DataContract]
-    public partial class OptionStatement :  IEquatable<OptionStatement>
+    public partial class OptionStatement : Statement,  IEquatable<OptionStatement>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="OptionStatement" /> class.
         /// </summary>
         /// <param name="type">Type of AST node.</param>
         /// <param name="assignment">assignment.</param>
-        public OptionStatement(string type = default(string), Object assignment = default(Object))
+        public OptionStatement(string type = default(string), Object assignment = default(Object)) : base()
         {
             this.Type = type;
             this.Assignment = assignment;
@@ -62,6 +62,7 @@ namespace InfluxDB.Client.Api.Domain
         {
             var sb = new StringBuilder();
             sb.Append("class OptionStatement {\n");
+            sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  Assignment: ").Append(Assignment).Append("\n");
             sb.Append("}\n");
@@ -72,7 +73,7 @@ namespace InfluxDB.Client.Api.Domain
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public virtual string ToJson()
+        public override string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }
@@ -97,12 +98,12 @@ namespace InfluxDB.Client.Api.Domain
             if (input == null)
                 return false;
 
-            return 
+            return base.Equals(input) && 
                 (
                     this.Type == input.Type ||
                     (this.Type != null &&
                     this.Type.Equals(input.Type))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.Assignment == input.Assignment ||
                     (this.Assignment != null &&
@@ -118,7 +119,7 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
+                int hashCode = base.GetHashCode();
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.Assignment != null)
