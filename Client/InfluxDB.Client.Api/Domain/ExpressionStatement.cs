@@ -27,14 +27,14 @@ namespace InfluxDB.Client.Api.Domain
     /// May consist of an expression that does not return a value and is executed solely for its side-effects
     /// </summary>
     [DataContract]
-    public partial class ExpressionStatement :  IEquatable<ExpressionStatement>
+    public partial class ExpressionStatement : Statement,  IEquatable<ExpressionStatement>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ExpressionStatement" /> class.
         /// </summary>
         /// <param name="type">Type of AST node.</param>
         /// <param name="expression">expression.</param>
-        public ExpressionStatement(string type = default(string), Expression expression = default(Expression))
+        public ExpressionStatement(string type = default(string), Expression expression = default(Expression)) : base()
         {
             this.Type = type;
             this.Expression = expression;
@@ -62,6 +62,7 @@ namespace InfluxDB.Client.Api.Domain
         {
             var sb = new StringBuilder();
             sb.Append("class ExpressionStatement {\n");
+            sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  Expression: ").Append(Expression).Append("\n");
             sb.Append("}\n");
@@ -72,7 +73,7 @@ namespace InfluxDB.Client.Api.Domain
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public virtual string ToJson()
+        public override string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }
@@ -97,12 +98,12 @@ namespace InfluxDB.Client.Api.Domain
             if (input == null)
                 return false;
 
-            return 
+            return base.Equals(input) && 
                 (
                     this.Type == input.Type ||
                     (this.Type != null &&
                     this.Type.Equals(input.Type))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     
                     (this.Expression != null &&
@@ -118,7 +119,7 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
+                int hashCode = base.GetHashCode();
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.Expression != null)

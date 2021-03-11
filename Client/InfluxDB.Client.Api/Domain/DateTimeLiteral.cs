@@ -27,14 +27,14 @@ namespace InfluxDB.Client.Api.Domain
     /// Represents an instant in time with nanosecond precision using the syntax of golang&#39;s RFC3339 Nanosecond variant
     /// </summary>
     [DataContract]
-    public partial class DateTimeLiteral :  IEquatable<DateTimeLiteral>
+    public partial class DateTimeLiteral : Expression,  IEquatable<DateTimeLiteral>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="DateTimeLiteral" /> class.
         /// </summary>
         /// <param name="type">Type of AST node.</param>
         /// <param name="value">value.</param>
-        public DateTimeLiteral(string type = default(string), string value = default(string))
+        public DateTimeLiteral(string type = default(string), DateTime? value = default(DateTime?)) : base()
         {
             this.Type = type;
             this.Value = value;
@@ -51,7 +51,7 @@ namespace InfluxDB.Client.Api.Domain
         /// Gets or Sets Value
         /// </summary>
         [DataMember(Name="value", EmitDefaultValue=false)]
-        public string Value { get; set; }
+        public DateTime? Value { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -61,6 +61,7 @@ namespace InfluxDB.Client.Api.Domain
         {
             var sb = new StringBuilder();
             sb.Append("class DateTimeLiteral {\n");
+            sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  Value: ").Append(Value).Append("\n");
             sb.Append("}\n");
@@ -71,7 +72,7 @@ namespace InfluxDB.Client.Api.Domain
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public virtual string ToJson()
+        public override string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }
@@ -96,12 +97,12 @@ namespace InfluxDB.Client.Api.Domain
             if (input == null)
                 return false;
 
-            return 
+            return base.Equals(input) && 
                 (
                     this.Type == input.Type ||
                     (this.Type != null &&
                     this.Type.Equals(input.Type))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.Value == input.Value ||
                     (this.Value != null &&
@@ -117,7 +118,7 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
+                int hashCode = base.GetHashCode();
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.Value != null)
