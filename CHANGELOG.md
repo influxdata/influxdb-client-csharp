@@ -2,6 +2,7 @@
 
 ### Bug Fixes
 1. [#168](https://github.com/influxdata/influxdb-client-csharp/pull/168): DateTime is always serialized into UTC
+1. [#169](https://github.com/influxdata/influxdb-client-csharp/pull/169): Fixed domain structure for Flux AST
 
 ## 1.16.0 [2021-03-05]
 
