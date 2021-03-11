@@ -7,11 +7,10 @@ namespace InfluxDB.Client.Linq.Internal.Expressions
     {
         private readonly ColumnName _delegate;
 
-        public RecordColumnName(MemberInfo member, IMemberNameResolver memberNameResolver)
+        internal RecordColumnName(MemberInfo member, IMemberNameResolver memberNameResolver)
         {
             _delegate = new ColumnName(member, memberNameResolver);
         }
-
 
         public void AppendFlux(StringBuilder builder)
         {

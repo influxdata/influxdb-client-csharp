@@ -9,7 +9,7 @@ namespace InfluxDB.Client.Linq.Internal.Expressions
         private readonly IMemberNameResolver _memberResolver;
         internal AssignmentValue Assignment;
 
-        public NamedField(MemberInfo member, IMemberNameResolver memberResolver)
+        internal NamedField(MemberInfo member, IMemberNameResolver memberResolver)
         {
             _member = member;
             _memberResolver = memberResolver;
