@@ -19,8 +19,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client.Linq", "Client.Linq\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client.Linq.Test", "Client.Linq.Test\Client.Linq.Test.csproj", "{38A179EB-6843-49D0-A751-7EC668C94FE6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Examples.WebApi", "Examples.WebApi\Examples.WebApi.csproj", "{AC40AAB1-D2C5-43EE-8F33-56A417711E96}"
-EndProject
 Global
 	GlobalSection(NestedProjects) = preSolution
 	EndGlobalSection
@@ -141,17 +139,5 @@ Global
 		{38A179EB-6843-49D0-A751-7EC668C94FE6}.Release|x64.Build.0 = Release|Any CPU
 		{38A179EB-6843-49D0-A751-7EC668C94FE6}.Release|x86.ActiveCfg = Release|Any CPU
 		{38A179EB-6843-49D0-A751-7EC668C94FE6}.Release|x86.Build.0 = Release|Any CPU
-		{AC40AAB1-D2C5-43EE-8F33-56A417711E96}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AC40AAB1-D2C5-43EE-8F33-56A417711E96}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AC40AAB1-D2C5-43EE-8F33-56A417711E96}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{AC40AAB1-D2C5-43EE-8F33-56A417711E96}.Debug|x64.Build.0 = Debug|Any CPU
-		{AC40AAB1-D2C5-43EE-8F33-56A417711E96}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{AC40AAB1-D2C5-43EE-8F33-56A417711E96}.Debug|x86.Build.0 = Debug|Any CPU
-		{AC40AAB1-D2C5-43EE-8F33-56A417711E96}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AC40AAB1-D2C5-43EE-8F33-56A417711E96}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AC40AAB1-D2C5-43EE-8F33-56A417711E96}.Release|x64.ActiveCfg = Release|Any CPU
-		{AC40AAB1-D2C5-43EE-8F33-56A417711E96}.Release|x64.Build.0 = Release|Any CPU
-		{AC40AAB1-D2C5-43EE-8F33-56A417711E96}.Release|x86.ActiveCfg = Release|Any CPU
-		{AC40AAB1-D2C5-43EE-8F33-56A417711E96}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

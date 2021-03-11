@@ -31,25 +31,8 @@ dotnet tool install --tool-path="./trx2junit/" trx2junit --version 1.3.2
 #
 # Build
 #
-dotnet restore Client.Core
-dotnet restore Client
-dotnet restore Client.Legacy
-dotnet restore Client.Linq
-dotnet restore Client.Core.Test
-dotnet restore Client.Test
-dotnet restore Client.Legacy.Test
-dotnet restore Client.Linq.Test
-dotnet restore Examples
-
-dotnet build Client.Core
-dotnet build Client
-dotnet build Client.Legacy
-dotnet build Client.Linq
-dotnet build Client.Core.Test
-dotnet build Client.Test
-dotnet build Client.Legacy.Test
-dotnet build Client.Linq.Test
-dotnet build Examples
+dotnet restore
+dotnet build
 
 #
 # Test
