@@ -102,7 +102,6 @@ namespace InfluxDB.Client.Test
             Assert.IsNotEmpty(bucket.Id);
             Assert.AreEqual(bucket.Name, bucketName);
             Assert.AreEqual(bucket.OrgID, _organization.Id);
-            Assert.AreEqual(bucket.RetentionRules.Count, 0);
         }
 
         [Test]
