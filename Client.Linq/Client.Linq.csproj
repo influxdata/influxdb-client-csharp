@@ -13,7 +13,7 @@
         <PackageTags>influxdata;timeseries;flux;influxdb;linq</PackageTags>
         <PackageIcon>influxdata.jpg</PackageIcon>
         <PackageIconUrl>https://raw.githubusercontent.com/influxdata/influxdb-client-csharp/master/Assets/influxdata.jpg</PackageIconUrl>
-        <PackageProjectUrl>https://github.com/influxdata/influxdb-client-csharp/tree/master/Client.Legacy</PackageProjectUrl>
+        <PackageProjectUrl>https://github.com/influxdata/influxdb-client-csharp/tree/master/Client.Linq</PackageProjectUrl>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <RepositoryUrl>https://github.com/influxdata/influxdb-client-csharp</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
