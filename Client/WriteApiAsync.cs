@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using InfluxDB.Client.Api.Domain;
 using InfluxDB.Client.Api.Service;
 using InfluxDB.Client.Core;
-using InfluxDB.Client.Internal;
 using InfluxDB.Client.Writes;
 
 namespace InfluxDB.Client
@@ -16,15 +15,18 @@ namespace InfluxDB.Client
         private readonly InfluxDBClient _influxDbClient;
         private readonly InfluxDBClientOptions _options;
         private readonly WriteService _service;
-        private readonly MeasurementMapper _measurementMapper = new MeasurementMapper();
+        private readonly IDomainObjectMapper _mapper;
 
         protected internal WriteApiAsync(InfluxDBClientOptions options, WriteService service,
-                        InfluxDBClient influxDbClient)
+            IDomainObjectMapper mapper,
+            InfluxDBClient influxDbClient)
         {
             Arguments.CheckNotNull(service, nameof(service));
+            Arguments.CheckNotNull(mapper, nameof(mapper));
             Arguments.CheckNotNull(influxDbClient, nameof(_influxDbClient));
 
             _options = options;
+            _mapper = mapper;
             _influxDbClient = influxDbClient;
             _service = service;
         }
@@ -273,7 +275,7 @@ namespace InfluxDB.Client
             {
                 var options = new BatchWriteOptions(bucket, org, precision);
 
-                BatchWriteData data = new BatchWriteMeasurement<TM>(options, _options, measurement, _measurementMapper);
+                BatchWriteData data = new BatchWriteMeasurement<TM>(options, _options, measurement, _mapper);
                 list.Add(data);
             }
 

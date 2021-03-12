@@ -15,8 +15,6 @@ namespace InfluxDB.Client.Core.Internal
 {
     public abstract class AbstractQueryClient
     {
-        private static readonly FluxResultMapper Mapper = new FluxResultMapper();
-
         protected static readonly Action EmptyAction = () => { };
 
         protected static readonly Action<Exception> ErrorConsumer = e => throw e;
@@ -24,12 +22,15 @@ namespace InfluxDB.Client.Core.Internal
         private readonly FluxCsvParser _csvParser = new FluxCsvParser();
 
         protected readonly RestClient RestClient;
+        protected readonly IFluxResultMapper Mapper;
 
-        protected AbstractQueryClient(RestClient restClient)
+        protected AbstractQueryClient(RestClient restClient, IFluxResultMapper mapper)
         {
             Arguments.CheckNotNull(restClient, nameof(restClient));
+            Arguments.CheckNotNull(mapper, nameof(mapper));
 
             RestClient = restClient;
+            Mapper = mapper;
         }
 
         protected Task Query(RestRequest query, FluxCsvParser.IFluxResponseConsumer responseConsumer,
@@ -70,8 +71,27 @@ namespace InfluxDB.Client.Core.Internal
 
             return Query(query, Consumer, onError, onComplete);
         }
+        
+        protected void QuerySync(RestRequest query, FluxCsvParser.IFluxResponseConsumer responseConsumer,
+            Action<Exception> onError,
+            Action onComplete)
+        {
+            void Consumer(ICancellable cancellable, Stream bufferedStream)
+            {
+                try
+                {
+                    _csvParser.ParseFluxResponse(bufferedStream, cancellable, responseConsumer);
+                }
+                catch (IOException e)
+                {
+                    onError(e);
+                }
+            }
 
-        protected async Task Query(RestRequest query, Action<ICancellable, Stream> consumer,
+            QuerySync(query, Consumer, onError, onComplete);
+        }
+
+        private async Task Query(RestRequest query, Action<ICancellable, Stream> consumer,
             Action<Exception> onError, Action onComplete)
         {
             Arguments.CheckNotNull(query, "query");
@@ -105,13 +125,47 @@ namespace InfluxDB.Client.Core.Internal
             }
         }
 
+        private void QuerySync(RestRequest query, Action<ICancellable, Stream> consumer,
+            Action<Exception> onError, Action onComplete)
+        {
+            Arguments.CheckNotNull(query, "query");
+            Arguments.CheckNotNull(consumer, "consumer");
+            Arguments.CheckNotNull(onError, "onError");
+            Arguments.CheckNotNull(onComplete, "onComplete");
+
+            try
+            {
+                var cancellable = new DefaultCancellable();
+
+                BeforeIntercept(query);
+                    
+                query.AdvancedResponseWriter = (responseStream, response) =>
+                {
+                    responseStream = AfterIntercept((int)response.StatusCode, () => response.Headers, responseStream);
+                    
+                    RaiseForInfluxError(response, responseStream);
+                    consumer(cancellable, responseStream);
+                };
+
+                RestClient.DownloadData(query, true);
+                if (!cancellable.IsCancelled())
+                {
+                    onComplete();
+                }
+            }
+            catch (Exception e)
+            {
+                onError(e);
+            }
+        }
+
         protected async IAsyncEnumerable<T> QueryEnumerable<T>(RestRequest query, [EnumeratorCancellation] CancellationToken cancellationToken)
         {
             Arguments.CheckNotNull(query, nameof(query));
 
             BeforeIntercept(query);
 
-            var response = await RestClient.ExecuteTaskAsync(query, cancellationToken).ConfigureAwait(false);
+            var response = await RestClient.ExecuteAsync(query, cancellationToken).ConfigureAwait(false);
 
             response.Content = AfterIntercept((int)response.StatusCode, () => LoggingHandler.ToHeaders(response.Headers), response.Content);
 
@@ -120,7 +174,7 @@ namespace InfluxDB.Client.Core.Internal
             await foreach(var (_, record) in _csvParser.ParseFluxResponseAsync(new StringReader(response.Content), cancellationToken).ConfigureAwait(false))
             {
                 if (!(record is null))
-                    yield return Mapper.ToPoco<T>(record);
+                    yield return Mapper.ConvertToEntity<T>(record);
             }
         }
 
@@ -146,10 +200,12 @@ namespace InfluxDB.Client.Core.Internal
         public class FluxResponseConsumerPoco<T> : FluxCsvParser.IFluxResponseConsumer
         {
             private readonly Action<ICancellable, T> _onNext;
+            private readonly IFluxResultMapper _converter;
 
-            public FluxResponseConsumerPoco(Action<ICancellable, T> onNext)
+            public FluxResponseConsumerPoco(Action<ICancellable, T> onNext, IFluxResultMapper converter)
             {
                 _onNext = onNext;
+                _converter = converter;
             }
 
             public void Accept(int index, ICancellable cancellable, FluxTable table)
@@ -158,7 +214,7 @@ namespace InfluxDB.Client.Core.Internal
 
             public void Accept(int index, ICancellable cancellable, FluxRecord record)
             {
-                _onNext(cancellable, Mapper.ToPoco<T>(record));
+                _onNext(cancellable, _converter.ConvertToEntity<T>(record));
             }
         }
 

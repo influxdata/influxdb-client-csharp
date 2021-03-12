@@ -114,7 +114,7 @@ namespace InfluxDB.Client.Core.Internal
         {
             return parameters
                 .Where(parameter => parameter.Type.Equals(type))
-                .Select(h => new HttpHeader {Name = h.Name, Value = h.Value.ToString()})
+                .Select(h => new HttpHeader(h.Name, h.Value.ToString()))
                 .ToList();
         }
 

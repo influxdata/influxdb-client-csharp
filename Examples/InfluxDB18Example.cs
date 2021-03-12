@@ -7,8 +7,7 @@ namespace Examples
 {
     public class InfluxDB18Example
     {
-        // change name of method to Main
-        public static async Task MainDisabled(string[] args)
+        public static async Task Main(string[] args)
         {
             const string database = "telegraf";
             const string retentionPolicy = "autogen";

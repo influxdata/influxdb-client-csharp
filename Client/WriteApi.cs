@@ -24,7 +24,7 @@ namespace InfluxDB.Client
         private readonly Subject<IObservable<BatchWriteData>> _flush = new Subject<IObservable<BatchWriteData>>();
 
         private readonly InfluxDBClient _influxDbClient;
-        private readonly MeasurementMapper _measurementMapper = new MeasurementMapper();
+        private readonly IDomainObjectMapper _mapper;
         private readonly InfluxDBClientOptions _options;
         private readonly Subject<BatchWriteData> _subject = new Subject<BatchWriteData>();
         private static readonly ObjectPoolProvider _objectPoolProvider = new DefaultObjectPoolProvider();
@@ -34,18 +34,21 @@ namespace InfluxDB.Client
 
         private bool _disposed;
         protected internal WriteApi(
-            InfluxDBClientOptions options, 
-            WriteService service, 
+            InfluxDBClientOptions options,
+            WriteService service,
             WriteOptions writeOptions,
+            IDomainObjectMapper mapper,
             InfluxDBClient influxDbClient,
             IObservable<Unit> disposeCommand)
         {
             Arguments.CheckNotNull(service, nameof(service));
             Arguments.CheckNotNull(writeOptions, nameof(writeOptions));
+            Arguments.CheckNotNull(mapper, nameof(mapper));
             Arguments.CheckNotNull(influxDbClient, nameof(_influxDbClient));
             Arguments.CheckNotNull(disposeCommand, nameof(disposeCommand));
 
             _options = options;
+            _mapper = mapper;
             _influxDbClient = influxDbClient;
 
             _unsubscribeDisposeCommand= disposeCommand.Subscribe(_ => Dispose());
@@ -424,7 +427,7 @@ namespace InfluxDB.Client
 
             var options = new BatchWriteOptions(bucket, org, precision);
 
-            _subject.OnNext(new BatchWriteMeasurement<TM>(options, _options, measurement, _measurementMapper));
+            _subject.OnNext(new BatchWriteMeasurement<TM>(options, _options, measurement, _mapper));
         }
 
         /// <summary>
@@ -582,23 +585,23 @@ namespace InfluxDB.Client
     internal class BatchWriteMeasurement<TM> : BatchWriteData
     {
         private readonly TM _measurement;
-        private readonly MeasurementMapper _measurementMapper;
+        private readonly IDomainObjectMapper _converter;
         private readonly InfluxDBClientOptions _clientOptions;
 
         internal BatchWriteMeasurement(BatchWriteOptions options, InfluxDBClientOptions clientOptions, TM measurement,
-            MeasurementMapper measurementMapper) :
+            IDomainObjectMapper converter) :
             base(options)
         {
             Arguments.CheckNotNull(measurement, nameof(measurement));
 
             _clientOptions = clientOptions;
             _measurement = measurement;
-            _measurementMapper = measurementMapper;
+            _converter = converter;
         }
 
         internal override string ToLineProtocol()
         {
-            var point = _measurementMapper.ToPoint(_measurement, Options.Precision);
+            var point = _converter.ConvertToPointData(_measurement, Options.Precision);
             if (!point.HasFields())
             {
                 Trace.WriteLine($"The point: ${point} doesn't contains any fields, skipping");

@@ -1,12 +1,8 @@
 using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Reactive;
 using System.Reactive.Subjects;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using InfluxDB.Client.Api.Client;
 using InfluxDB.Client.Api.Domain;
@@ -14,6 +10,7 @@ using InfluxDB.Client.Api.Service;
 using InfluxDB.Client.Core;
 using InfluxDB.Client.Core.Exceptions;
 using InfluxDB.Client.Core.Internal;
+using InfluxDB.Client.Internal;
 
 namespace InfluxDB.Client
 {
@@ -85,53 +82,73 @@ namespace InfluxDB.Client
         /// <summary>
         /// Get the Query client.
         /// </summary>
+        /// <param name="mapper">the mapper used for mapping FluxResults to POCO</param>
         /// <returns>the new client instance for the Query API</returns>
-        public QueryApi GetQueryApi()
+        public QueryApi GetQueryApi(IDomainObjectMapper mapper = null)
         {
             var service = new QueryService((Configuration) _apiClient.Configuration)
             {
                 ExceptionFactory = _exceptionFactory
             };
 
-            return new QueryApi(_options, service);
+            return new QueryApi(_options, service, mapper ?? new DefaultDomainObjectMapper());
+        }
+
+        /// <summary>
+        /// Get the synchronous version of Query client.
+        /// </summary>
+        /// <param name="mapper">the mapper used for mapping FluxResults to POCO</param>
+        /// <returns>the new synchronous client instance for the Query API</returns>
+        public QueryApiSync GetQueryApiSync(IDomainObjectMapper mapper = null)
+        {
+            var service = new QueryService((Configuration) _apiClient.Configuration)
+            {
+                ExceptionFactory = _exceptionFactory
+            };
+
+            return new QueryApiSync(_options, service, mapper ?? new DefaultDomainObjectMapper());
         }
 
         /// <summary>
         /// Get the Write client.
         /// </summary>
+        /// <param name="mapper">the mapper used for mapping to PointData</param>
         /// <returns>the new client instance for the Write API</returns>
-        public WriteApi GetWriteApi()
+        public WriteApi GetWriteApi(IDomainObjectMapper mapper = null)
         {
-            return GetWriteApi(WriteOptions.CreateNew().Build());
+            return GetWriteApi(WriteOptions.CreateNew().Build(), mapper);
         }
         
         /// <summary>
         /// Get the Write async client.
         /// </summary>
+        /// <param name="mapper">the converter used for mapping to PointData</param>
         /// <returns>the new client instance for the Write API Async without batching</returns>
-        public WriteApiAsync GetWriteApiAsync()
+        public WriteApiAsync GetWriteApiAsync(IDomainObjectMapper mapper = null)
         {
             var service = new WriteService((Configuration) _apiClient.Configuration)
             {
                 ExceptionFactory = _exceptionFactory
             };
             
-            return new WriteApiAsync(_options, service, this);
+            return new WriteApiAsync(_options, service, mapper ?? new DefaultDomainObjectMapper(), this);
         }
 
         /// <summary>
         /// Get the Write client.
         /// </summary>
         /// <param name="writeOptions">the configuration for a write client</param>
+        /// <param name="mapper">the converter used for mapping to PointData</param>
         /// <returns>the new client instance for the Write API</returns>
-        public WriteApi GetWriteApi(WriteOptions writeOptions)
+        public WriteApi GetWriteApi(WriteOptions writeOptions, IDomainObjectMapper mapper = null)
         {
             var service = new WriteService((Configuration) _apiClient.Configuration)
             {
                 ExceptionFactory = _exceptionFactory
             };
 
-            var writeApi = new WriteApi(_options, service, writeOptions, this, _disposeNotification);
+            var writeApi = new WriteApi(_options, service, writeOptions, mapper ?? new DefaultDomainObjectMapper(),
+                this, _disposeNotification);
 
             return writeApi;
         }

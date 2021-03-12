@@ -138,8 +138,7 @@ namespace InfluxDB.Client.Test
             Assert.AreEqual("gzip", requestEntry.RequestMessage.Headers["Content-Encoding"].First());
             Assert.AreEqual("identity",
                 requestEntry.RequestMessage.Headers["Accept-Encoding"].First());
-            Assert.AreNotEqual("h2o_feet,location=coyote_creek level\\ water_level=1.0 1",
-                requestEntry.RequestMessage.Body);
+            Assert.AreEqual("gzip", requestEntry.RequestMessage.DetectedCompression);
         }
     }
 }
