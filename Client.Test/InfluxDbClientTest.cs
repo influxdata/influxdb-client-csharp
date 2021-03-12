@@ -159,7 +159,7 @@ namespace InfluxDB.Client.Test
         }
         
         [Test]
-        public async Task TrailingSlashInUrl()
+        public void TrailingSlashInUrl()
         {
             MockServer
                 .Given(Request.Create().WithPath("/api/v2/write").UsingPost())
