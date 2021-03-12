@@ -7,6 +7,10 @@ The reference client that allows query, write and management (bucket, organizati
 ## Features
  
 - [Querying data using Flux language](#queries)
+    - [Asynchronous](#asynchronous-query)
+    - [Streaming](#streaming-query)
+    - [Synchronous](#synchronous-query)
+    - [Raw Query](#raw-query)
 - [Writing data using](#writes)
     - [Line Protocol](#by-lineprotocol) 
     - [Data Point](#by-data-point) 
@@ -26,11 +30,11 @@ The reference client that allows query, write and management (bucket, organizati
 
 ## Queries
 
-For querying data we use [QueryApi](https://github.com/influxdata/influxdb-client-csharp/blob/master/Client/QueryApi.cs#L1) that allow perform synchronous, asynchronous and also use raw query response.
+For querying data we use [QueryApi](https://github.com/influxdata/influxdb-client-csharp/blob/master/Client/QueryApi.cs#L1) that allow perform asynchronous, streaming, synchronous and also use raw query response.
 
-### Synchronous query
+### Asynchronous Query
 
-The synchronous query is not intended for large query results because the Flux response can be potentially unbound.
+The asynchronous query is not intended for large query results because the Flux response can be potentially unbound.
 
 ```c#
 using System;
@@ -39,7 +43,7 @@ using InfluxDB.Client;
 
 namespace Examples
 {
-    public static class SynchronousQuery
+    public static class AsynchronousQuery
     {
         private static readonly string Token = "";
 
@@ -69,7 +73,7 @@ namespace Examples
 }
 ```
 
-The synchronous query offers a possibility map [FluxRecords](http://bit.ly/flux-spec#record) to POCO:
+The asynchronous query offers a possibility map [FluxRecords](http://bit.ly/flux-spec#record) to POCO:
 
 ```c#
 using System;
@@ -79,7 +83,7 @@ using InfluxDB.Client.Core;
 
 namespace Examples
 {
-    public static class SynchronousQuery
+    public static class AsynchronousQuery
     {
         private static readonly string Token = "";
 
@@ -116,9 +120,9 @@ namespace Examples
 }
 ```
 
-### Asynchronous query
+### Streaming Query
 
-The Asynchronous query offers possibility to process unbound query and allow user to handle exceptions, 
+The Streaming query offers possibility to process unbound query and allow user to handle exceptions, 
 stop receiving more results and notify that all data arrived. 
 
 ```c#
@@ -128,7 +132,7 @@ using InfluxDB.Client;
 
 namespace Examples
 {
-    public static class AsynchronousQuery
+    public static class StreamingQuery
     {
         private static readonly string Token = "";
 
@@ -181,7 +185,7 @@ using InfluxDB.Client.Core;
 
 namespace Examples
 {
-    public static class AsynchronousQuery
+    public static class StreamingQuery
     {
         private static readonly string Token = "";
 
@@ -222,7 +226,7 @@ namespace Examples
 }
 ```
 
-### Raw query
+### Raw Query
 
 The Raw query allows direct processing original [CSV response](http://bit.ly/flux-spec#csv): 
 
@@ -258,7 +262,7 @@ namespace Examples
 }
 ```
 
-The Asynchronous version allows processing line by line:
+The Streaming version allows processing line by line:
 
 ```c#
 using System;
@@ -293,6 +297,45 @@ namespace Examples
             });
 
             influxDBClient.Dispose();
+        }
+    }
+}
+```
+
+### Synchronous query
+
+The synchronous query is not intended for large query results because the response can be potentially unbound.
+
+```c#
+using System;
+using InfluxDB.Client;
+
+namespace Examples
+{
+    public class SynchronousQuery
+    {
+        public static void Main(string[] args)
+        {
+            using var client = InfluxDBClientFactory.Create("http://localhost:9999", "my-token");
+
+            const string query = "from(bucket:\"my-bucket\") |> range(start: 0)";
+           
+            //
+            // QueryData
+            //
+            var queryApi = client.GetQueryApiSync();
+            var tables = queryApi.QuerySync(query, "my-org");
+            
+            //
+            // Process results
+            //
+            tables.ForEach(table =>
+            {
+                table.Records.ForEach(record =>
+                {
+                    Console.WriteLine($"{record.GetTime()}: {record.GetValueByKey("_value")}");
+                });
+            });
         }
     }
 }

@@ -42,13 +42,20 @@ namespace Examples
                     case "PocoQueryWriteExample":
                         await PocoQueryWriteExample.Main(args);
                         break;
+                    case "InfluxDB18Example":
+                        await InfluxDB18Example.Main(args);
+                        break;
+                    case "SynchronousQuery":
+                        SynchronousQuery.Main(args);
+                        break;
                 }
             }
             else
             {
                 Console.WriteLine("Please specify the name of example. One of: " +
                                   "FluxExample, FluxClientSimpleExample, FluxRawExample, FluxClientFactoryExample, " +
-                                  "FluxClientPocoExample, PlatformExample, WriteApiAsyncExample, PocoQueryWriteExample");
+                                  "FluxClientPocoExample, PlatformExample, WriteApiAsyncExample, " +
+                                  "PocoQueryWriteExample, SynchronousQuery, InfluxDB18Example");
             }
         }
     }
