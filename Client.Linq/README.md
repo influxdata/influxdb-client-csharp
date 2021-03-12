@@ -621,7 +621,7 @@ from(bucket: "my-bucket")
     |> filter(fn: (r) => (r["attribute_quality"] == "good"))
 ```
 
-For more info see [CustomDomainConverter](/Examples/CustomDomainConverter.cs#L54) example.
+For more info see [CustomDomainMappingAndLinq](/Examples/CustomDomainMappingAndLinq.cs) example.
 
 ### Take
 
@@ -775,7 +775,7 @@ var query = from s in InfluxDBQueryable<SensorCustom>.Queryable("my-bucket", "my
     select s;
 ```
 
-for more details see [Any](#any) operator and for full example see: [CustomDomainConverter](/Examples/CustomDomainConverter.cs#L54).
+for more details see [Any](#any) operator and for full example see: [CustomDomainMappingAndLinq](/Examples/CustomDomainMappingAndLinq.cs#L54).
 
 ## How to debug output Flux Query
 

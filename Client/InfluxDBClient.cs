@@ -110,21 +110,6 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Get the synchronous version of Query client.
-        /// </summary>
-        /// <param name="converter">the converter used for mapping to POCO</param>
-        /// <returns>the new synchronous client instance for the Query API</returns>
-        public QueryApiSync GetQueryApiSync(IInfluxDBEntityConverter converter = null)
-        {
-            var service = new QueryService((Configuration) _apiClient.Configuration)
-            {
-                ExceptionFactory = _exceptionFactory
-            };
-
-            return new QueryApiSync(_options, service, converter ?? new InfluxDBEntityConverter());
-        }
-
-        /// <summary>
         /// Get the Write client.
         /// </summary>
         /// <param name="mapper">the mapper used for mapping to PointData</param>

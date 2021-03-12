@@ -42,8 +42,8 @@ namespace Examples
                     case "PocoQueryWriteExample":
                         await PocoQueryWriteExample.Main(args);
                         break;
-                    case "CustomDomainConverter":
-                        await CustomDomainConverter.Main(args);
+                    case "CustomDomainMappingAndLinq":
+                        await CustomDomainMappingAndLinq.Main(args);
                         break;
                     case "InfluxDB18Example":
                         await InfluxDB18Example.Main(args);
@@ -61,7 +61,7 @@ namespace Examples
                 Console.WriteLine("Please specify the name of example. One of: " +
                                   "FluxExample, FluxClientSimpleExample, FluxRawExample, FluxClientFactoryExample, " +
                                   "FluxClientPocoExample, PlatformExample, WriteApiAsyncExample, CustomDomainMapping" +
-                                  "PocoQueryWriteExample, CustomDomainConverter, SynchronousQuery, InfluxDB18Example");
+                                  "PocoQueryWriteExample, CustomDomainMappingAndLinq, SynchronousQuery, InfluxDB18Example");
             }
         }
     }

@@ -11,7 +11,7 @@ using InfluxDB.Client.Writes;
 
 namespace Examples
 {
-    public static class CustomDomainConverter
+    public static class CustomDomainMappingAndLinq
     {
         /// <summary>
         /// Define Domain Object
@@ -51,7 +51,7 @@ namespace Examples
         /// <summary>
         /// Define Custom Domain Object Converter
         /// </summary>
-        private class DomainEntityConverter : IInfluxDBEntityConverter, IMemberNameResolver
+        private class DomainEntityConverter : IDomainObjectMapper, IMemberNameResolver
         {
             /// <summary>
             /// Convert to DomainObject.
