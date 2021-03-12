@@ -36,6 +36,7 @@ This repository contains the reference C# client for the InfluxDB 2.0.
         - authorizations
         - health check
         - ...
+    
 ## Documentation
 
 The C# clients are implemented for the InfluxDB 2.0 and InfluxDB 1.7+:

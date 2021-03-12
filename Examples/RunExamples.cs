@@ -48,13 +48,16 @@ namespace Examples
                     case "SynchronousQuery":
                         SynchronousQuery.Main(args);
                         break;
+                    case "CustomDomainMapping":
+                        await CustomDomainMapping.Main(args);
+                        break;
                 }
             }
             else
             {
                 Console.WriteLine("Please specify the name of example. One of: " +
                                   "FluxExample, FluxClientSimpleExample, FluxRawExample, FluxClientFactoryExample, " +
-                                  "FluxClientPocoExample, PlatformExample, WriteApiAsyncExample, " +
+                                  "FluxClientPocoExample, PlatformExample, WriteApiAsyncExample, CustomDomainMapping, " +
                                   "PocoQueryWriteExample, SynchronousQuery, InfluxDB18Example");
             }
         }
