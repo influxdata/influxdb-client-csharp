@@ -123,6 +123,75 @@ namespace Client.Linq.Test
         }
 
         [Test]
+        public void ResultOperatorTakeSkipMultipleTimes()
+        {
+            var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _queryApi)
+                select s;
+
+            var queries = new[]
+            {
+                ((Expression<Func<IQueryable<Sensor>, IQueryable<Sensor>>> expression, string, Dictionary<int, string>)) (
+                    q => q.Take(10).Skip(5),
+                    "|> limit(n: p3, offset: p4)",
+                    new Dictionary<int, string> {{2, "10"}, {3, "5"}}
+                ),
+                (
+                    q => q.Take(2).Take(65252),
+                    "|> limit(n: p3) |> limit(n: p4)",
+                    new Dictionary<int, string> {{2, "2"}, {3, "65252"}}
+                ),
+                (
+                    q => q.Take(10).Skip(5).Take(3),
+                    "|> limit(n: p3, offset: p4) |> limit(n: p5)",
+                    new Dictionary<int, string> {{2, "10"}, {3, "5"}, {4, "3"}}
+                ),
+                (
+                    q => q.Take(10).Skip(5).Take(3).Skip(2),
+                    "|> limit(n: p3, offset: p4) |> limit(n: p5, offset: p6)",
+                    new Dictionary<int, string> {{2, "10"}, {3, "5"}, {4, "3"}, {5, "2"}}
+                ),
+                (
+                    q => q.Take(10).Skip(5).Take(3).Skip(2).Take(663),
+                    "|> limit(n: p3, offset: p4) |> limit(n: p5, offset: p6) |> limit(n: p7)",
+                    new Dictionary<int, string> {{2, "10"}, {3, "5"}, {4, "3"}, {5, "2"}, {6, "663"}}
+                ),
+                (
+                    q => q.Take(10).Skip(5).Skip(2),
+                    "|> limit(n: p3, offset: p5)",
+                    new Dictionary<int, string> {{2, "10"}, {3, "5"}, {4, "2"}}
+                ),
+                (
+                    q => q.Take(10).Skip(5).Take(3).Skip(2).Skip(15).Take(663),
+                    "|> limit(n: p3, offset: p4) |> limit(n: p5, offset: p7) |> limit(n: p8)",
+                    new Dictionary<int, string> {{2, "10"}, {3, "5"}, {4, "3"}, {5, "2"}, {6, "15"}, {7, "663"}}
+                ),
+                (
+                    q => q.Skip(5).Take(10),
+                    "|> limit(n: p4, offset: p3)",
+                    new Dictionary<int, string> {{2, "5"}, {3, "10"}}
+                )
+            };
+            
+            foreach (var (expression, flux, assignments) in queries)
+            {
+                var queryable = MakeExpression(query, expression);
+                var visitor = BuildQueryVisitor(queryable);
+                var ast = visitor.BuildFluxAST();
+            
+                var expected = FluxStart + " " + flux;
+
+                Assert.AreEqual(expected, visitor.BuildFluxQuery(),
+                    $"Expected Flux: {flux} for expression {expression}.");
+            
+                foreach (var (index, value) in assignments)
+                {
+                    Assert.AreEqual(value, GetLiteral<IntegerLiteral>(ast, index).Value,
+                        $"Expected: {value} with index: {index} for Queryable expression: {queryable}");
+                }
+            }
+        }
+
+        [Test]
         public void ResultOperatorWhereByEqual()
         {
             var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _queryApi)

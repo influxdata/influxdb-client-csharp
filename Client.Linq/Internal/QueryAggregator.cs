@@ -12,7 +12,7 @@ namespace InfluxDB.Client.Linq.Internal
         /// Without result function.
         /// </summary>
         None,
-        
+
         /// <summary>
         /// Count result function.
         /// </summary>
@@ -25,22 +25,32 @@ namespace InfluxDB.Client.Linq.Internal
         /// Equality comparison
         /// </summary>
         Equal,
+
         /// <summary>
         /// "Less than" comparison
         /// </summary>
         LessThan,
+
         /// <summary>
         /// "Less than or equal" comparison
         /// </summary>
         LessThanOrEqual,
+
         /// <summary>
         /// "Greater than" comparison
         /// </summary>
         GreaterThan,
+
         /// <summary>
         /// "Greater than or equal" comparison
         /// </summary>
         GreaterThanOrEqual
+    }
+
+    internal class LimitOffsetAssignment
+    {
+        internal string N;
+        internal string Offset;
     }
 
     internal class QueryAggregator
@@ -50,8 +60,7 @@ namespace InfluxDB.Client.Linq.Internal
         private RangeExpressionType _rangeStartExpression;
         private string _rangeStopAssignment;
         private RangeExpressionType _rangeStopExpression;
-        private string _limitNAssignment;
-        private string _limitOffsetAssignment;
+        private readonly List<LimitOffsetAssignment> _limitNOffsetAssignments;
         private ResultFunction _resultFunction;
         private readonly List<string> _filters;
         private readonly List<(string, string)> _orders;
@@ -59,6 +68,7 @@ namespace InfluxDB.Client.Linq.Internal
         internal QueryAggregator()
         {
             _resultFunction = ResultFunction.None;
+            _limitNOffsetAssignments = new List<LimitOffsetAssignment>();
             _filters = new List<string>();
             _orders = new List<(string, string)>();
         }
@@ -73,21 +83,35 @@ namespace InfluxDB.Client.Linq.Internal
             _rangeStartAssignment = rangeStart;
             _rangeStartExpression = expressionType;
         }
-        
+
         internal void AddRangeStop(string rangeStop, RangeExpressionType expressionType)
         {
             _rangeStopAssignment = rangeStop;
             _rangeStopExpression = expressionType;
         }
-        
+
         internal void AddLimitN(string limitNAssignment)
         {
-            _limitNAssignment = limitNAssignment;
+            if (_limitNOffsetAssignments.Count > 0 && _limitNOffsetAssignments.Last().N == null)
+            {
+                _limitNOffsetAssignments.Last().N = limitNAssignment;
+            }
+            else
+            {
+                _limitNOffsetAssignments.Add(new LimitOffsetAssignment {N = limitNAssignment});
+            }
         }
 
         internal void AddLimitOffset(string limitOffsetAssignment)
         {
-            _limitOffsetAssignment = limitOffsetAssignment;
+            if (_limitNOffsetAssignments.Count > 0)
+            {
+                _limitNOffsetAssignments.Last().Offset = limitOffsetAssignment;
+            }
+            else
+            {
+                _limitNOffsetAssignments.Add(new LimitOffsetAssignment {Offset = limitOffsetAssignment});
+            }
         }
 
         internal void AddFilter(string filter)
@@ -109,7 +133,7 @@ namespace InfluxDB.Client.Linq.Internal
         internal void AddResultFunction(ResultFunction resultFunction)
         {
             Arguments.CheckNotNull(resultFunction, nameof(resultFunction));
-            
+
             _resultFunction = resultFunction;
         }
 
@@ -132,9 +156,14 @@ namespace InfluxDB.Client.Linq.Internal
             }
 
             // https://docs.influxdata.com/influxdb/cloud/reference/flux/stdlib/built-in/transformations/limit/
-            if (_limitNAssignment != null)
+            foreach (var limitNOffsetAssignment in _limitNOffsetAssignments)
             {
-                parts.Add(BuildOperator("limit", "n", _limitNAssignment, "offset", _limitOffsetAssignment));
+                if (limitNOffsetAssignment.N != null)
+                {
+                    parts.Add(BuildOperator("limit",
+                        "n", limitNOffsetAssignment.N,
+                        "offset", limitNOffsetAssignment.Offset));
+                }
             }
 
             if (_resultFunction != ResultFunction.None)
@@ -160,7 +189,7 @@ namespace InfluxDB.Client.Linq.Internal
         {
             string rangeStartShift = null;
             string rangeStopShift = null;
-            
+
             if (_rangeStartAssignment != null)
             {
                 var startShifted = $"start_shifted = int(v: time(v: {_rangeStartAssignment}))";
@@ -168,6 +197,7 @@ namespace InfluxDB.Client.Linq.Internal
                 {
                     startShifted += " + 1";
                 }
+
                 transforms.Add(startShifted);
                 rangeStartShift = "time(v: start_shifted)";
             }
@@ -175,15 +205,16 @@ namespace InfluxDB.Client.Linq.Internal
             if (_rangeStopAssignment != null)
             {
                 var stopShifted = $"stop_shifted = int(v: time(v: {_rangeStopAssignment}))";
-                if (_rangeStopExpression == RangeExpressionType.LessThanOrEqual || _rangeStopExpression == RangeExpressionType.Equal)
+                if (_rangeStopExpression == RangeExpressionType.LessThanOrEqual ||
+                    _rangeStopExpression == RangeExpressionType.Equal)
                 {
                     stopShifted += " + 1";
                 }
-                
+
                 transforms.Add(stopShifted);
                 rangeStopShift = "time(v: stop_shifted)";
             }
-            
+
             return BuildOperator("range", "start", rangeStartShift, "stop", rangeStopShift);
         }
 
