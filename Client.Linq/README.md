@@ -33,7 +33,7 @@ First, add the library as a dependency for your project:
 ```bash
 # For actual version please check: https://www.nuget.org/packages/InfluxDB.Client.Linq/
 
-dotnet add package InfluxDB.Client.Linq --version 1.17.0-dev.linq.13
+dotnet add package InfluxDB.Client.Linq --version 1.17.0-dev.linq.15
 ```
 
 Next, you should add additional using statement to your program:
@@ -111,6 +111,12 @@ sensor,deployment=testing,sensor_id=id-1 data=28
 
 and this is also way how following LINQ operators works.
 
+### TD;LR
+
+- [series](https://docs.influxdata.com/influxdb/v2.0/reference/glossary/#series)
+- [Flux](https://docs.influxdata.com/influxdb/v2.0/reference/glossary/#flux)
+- [Query data with Flux](https://docs.influxdata.com/influxdb/v2.0/query-data/flux/)
+
 ### Client Side Evaluation
 
 The library attempts to evaluate a query on the server as much as possible. 
@@ -146,12 +152,6 @@ Operators that could cause client side evaluation:
 
 - `Count`
 - `CountLong`
-
-### TD;LR
-
-- [series](https://docs.influxdata.com/influxdb/v2.0/reference/glossary/#series)
-- [Flux](https://docs.influxdata.com/influxdb/v2.0/reference/glossary/#flux)
-- [Query data with Flux](https://docs.influxdata.com/influxdb/v2.0/query-data/flux/)
 
 ## Perform Query
 
@@ -451,13 +451,13 @@ class SensorAttribute
 }
 ```
 
-To be able to store `SensorCustom` entity in InfluxDB and retrieve it from database you should implement [IInfluxDBEntityConverter](/Client/IInfluxDBEntityConverter.cs). 
+To be able to store `SensorCustom` entity in InfluxDB and retrieve it from database you should implement [IDomainObjectMapper](/Client/IDomainObjectMapper.cs). 
 The converter tells to the Client how to map `DomainObject` into [PointData](/Client/Writes/PointData.cs) and how to map [FluxRecord](/Client.Core/Flux/Domain/FluxRecord.cs) to `DomainObject`.
 
 Entity Converter:
 
 ```c#
-private class SensorEntityConverter : IInfluxDBEntityConverter
+private class SensorEntityConverter : IDomainObjectMapper
 {
     //
     // Parse incoming FluxRecord to DomainObject
@@ -544,7 +544,7 @@ var writeApi = client.GetWriteApi(converter);
 
 The LINQ provider needs to know how properties of `DomainObject` are stored in InfluxDB - their name and type (tag, field, timestamp). 
 
-If you use a [IInfluxDBEntityConverter](/Client/IInfluxDBEntityConverter.cs) instead of [InfluxDB Attributes](/Client.Core/Attributes.cs) you should implement [IMemberNameResolver](/Client.Linq/IMemberNameResolver.cs):
+If you use a [IDomainObjectMapper](/Client/IDomainObjectMapper.cs) instead of [InfluxDB Attributes](/Client.Core/Attributes.cs) you should implement [IMemberNameResolver](/Client.Linq/IMemberNameResolver.cs):
 
 ```c#
 private class SensorMemberResolver: IMemberNameResolver
@@ -758,7 +758,7 @@ private class Temperature
 }
 ```
 
-you could create own instance of `IInfluxDBEntityConverter` and use it with `QueryApiSync`, `QueryApi` and `WriteApi`.
+you could create own instance of `IDomainObjectMapper` and use it with `QueryApiSync`, `QueryApi` and `WriteApi`.
 
 ```c#
 var converter = new DomainEntityConverter();
