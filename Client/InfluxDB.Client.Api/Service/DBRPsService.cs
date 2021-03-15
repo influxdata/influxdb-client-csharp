@@ -12,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading;
 using RestSharp;
 using InfluxDB.Client.Api.Client;
 using InfluxDB.Client.Api.Domain;
@@ -169,8 +170,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">Specifies the organization ID of the mapping</param>
         /// <param name="dbrpID">The database retention policy mapping</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task DeleteDBRPIDAsync (string orgID, string dbrpID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task DeleteDBRPIDAsync (string orgID, string dbrpID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Delete a database retention policy
@@ -182,8 +184,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">Specifies the organization ID of the mapping</param>
         /// <param name="dbrpID">The database retention policy mapping</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> DeleteDBRPIDAsyncWithHttpInfo (string orgID, string dbrpID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<Object>> DeleteDBRPIDAsyncWithHttpInfo (string orgID, string dbrpID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
         /// <summary>
         /// List all database retention policy mappings
         /// </summary>
@@ -198,8 +201,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="_default">Specifies filtering on default (optional)</param>
         /// <param name="db">Specifies the database to filter on (optional)</param>
         /// <param name="rp">Specifies the retention policy to filter on (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of DBRPs</returns>
-        System.Threading.Tasks.Task<DBRPs> GetDBRPsAsync (string orgID, string zapTraceSpan = null, string id = null, string bucketID = null, bool? _default = null, string db = null, string rp = null);
+        System.Threading.Tasks.Task<DBRPs> GetDBRPsAsync (string orgID, string zapTraceSpan = null, string id = null, string bucketID = null, bool? _default = null, string db = null, string rp = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// List all database retention policy mappings
@@ -215,8 +219,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="_default">Specifies filtering on default (optional)</param>
         /// <param name="db">Specifies the database to filter on (optional)</param>
         /// <param name="rp">Specifies the retention policy to filter on (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (DBRPs)</returns>
-        System.Threading.Tasks.Task<ApiResponse<DBRPs>> GetDBRPsAsyncWithHttpInfo (string orgID, string zapTraceSpan = null, string id = null, string bucketID = null, bool? _default = null, string db = null, string rp = null);
+        System.Threading.Tasks.Task<ApiResponse<DBRPs>> GetDBRPsAsyncWithHttpInfo (string orgID, string zapTraceSpan = null, string id = null, string bucketID = null, bool? _default = null, string db = null, string rp = null, CancellationToken cancellationToken = default);
         /// <summary>
         /// Retrieve a database retention policy mapping
         /// </summary>
@@ -227,8 +232,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">Specifies the organization ID of the mapping</param>
         /// <param name="dbrpID">The database retention policy mapping ID</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of DBRP</returns>
-        System.Threading.Tasks.Task<DBRP> GetDBRPsIDAsync (string orgID, string dbrpID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<DBRP> GetDBRPsIDAsync (string orgID, string dbrpID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Retrieve a database retention policy mapping
@@ -240,8 +246,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">Specifies the organization ID of the mapping</param>
         /// <param name="dbrpID">The database retention policy mapping ID</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (DBRP)</returns>
-        System.Threading.Tasks.Task<ApiResponse<DBRP>> GetDBRPsIDAsyncWithHttpInfo (string orgID, string dbrpID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<DBRP>> GetDBRPsIDAsyncWithHttpInfo (string orgID, string dbrpID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
         /// <summary>
         /// Update a database retention policy mapping
         /// </summary>
@@ -253,8 +260,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="dbrpID">The database retention policy mapping.</param>
         /// <param name="dBRPUpdate">Database retention policy update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of DBRP</returns>
-        System.Threading.Tasks.Task<DBRP> PatchDBRPIDAsync (string orgID, string dbrpID, DBRPUpdate dBRPUpdate, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<DBRP> PatchDBRPIDAsync (string orgID, string dbrpID, DBRPUpdate dBRPUpdate, string zapTraceSpan = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Update a database retention policy mapping
@@ -267,8 +275,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="dbrpID">The database retention policy mapping.</param>
         /// <param name="dBRPUpdate">Database retention policy update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (DBRP)</returns>
-        System.Threading.Tasks.Task<ApiResponse<DBRP>> PatchDBRPIDAsyncWithHttpInfo (string orgID, string dbrpID, DBRPUpdate dBRPUpdate, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<DBRP>> PatchDBRPIDAsyncWithHttpInfo (string orgID, string dbrpID, DBRPUpdate dBRPUpdate, string zapTraceSpan = null, CancellationToken cancellationToken = default);
         /// <summary>
         /// Add a database retention policy mapping
         /// </summary>
@@ -278,8 +287,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="DBRP">The database retention policy mapping to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of DBRP</returns>
-        System.Threading.Tasks.Task<DBRP> PostDBRPAsync (DBRP DBRP, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<DBRP> PostDBRPAsync (DBRP DBRP, string zapTraceSpan = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Add a database retention policy mapping
@@ -290,8 +300,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="DBRP">The database retention policy mapping to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (DBRP)</returns>
-        System.Threading.Tasks.Task<ApiResponse<DBRP>> PostDBRPAsyncWithHttpInfo (DBRP DBRP, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<DBRP>> PostDBRPAsyncWithHttpInfo (DBRP DBRP, string zapTraceSpan = null, CancellationToken cancellationToken = default);
         #endregion Asynchronous Operations
     }
 
@@ -474,8 +485,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">Specifies the organization ID of the mapping</param>
         /// <param name="dbrpID">The database retention policy mapping</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> DeleteDBRPIDWithIRestResponseAsync (string orgID, string dbrpID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> DeleteDBRPIDWithIRestResponseAsync (string orgID, string dbrpID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'orgID' is set
             if (orgID == null)
@@ -514,7 +526,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -643,10 +655,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">Specifies the organization ID of the mapping</param>
         /// <param name="dbrpID">The database retention policy mapping</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of void</returns>
-        public System.Threading.Tasks.Task DeleteDBRPIDAsync (string orgID, string dbrpID, string zapTraceSpan = null)
+        public System.Threading.Tasks.Task DeleteDBRPIDAsync (string orgID, string dbrpID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
-             return DeleteDBRPIDAsyncWithHttpInfo(orgID, dbrpID, zapTraceSpan);
+             return DeleteDBRPIDAsyncWithHttpInfo(orgID, dbrpID, zapTraceSpan, cancellationToken);
 
         }
 
@@ -657,11 +670,12 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">Specifies the organization ID of the mapping</param>
         /// <param name="dbrpID">The database retention policy mapping</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteDBRPIDAsyncWithHttpInfo (string orgID, string dbrpID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteDBRPIDAsyncWithHttpInfo (string orgID, string dbrpID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await DeleteDBRPIDAsyncWithIRestResponse(orgID, dbrpID, zapTraceSpan).ConfigureAwait(false);
+            IRestResponse localVarResponse = await DeleteDBRPIDAsyncWithIRestResponse(orgID, dbrpID, zapTraceSpan, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -683,8 +697,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">Specifies the organization ID of the mapping</param>
         /// <param name="dbrpID">The database retention policy mapping</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> DeleteDBRPIDAsyncWithIRestResponse (string orgID, string dbrpID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> DeleteDBRPIDAsyncWithIRestResponse (string orgID, string dbrpID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'orgID' is set
             if (orgID == null)
@@ -723,7 +738,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -830,8 +845,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="_default">Specifies filtering on default (optional)</param>
         /// <param name="db">Specifies the database to filter on (optional)</param>
         /// <param name="rp">Specifies the retention policy to filter on (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of DBRPs</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> GetDBRPsWithIRestResponseAsync (string orgID, string zapTraceSpan = null, string id = null, string bucketID = null, bool? _default = null, string db = null, string rp = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetDBRPsWithIRestResponseAsync (string orgID, string zapTraceSpan = null, string id = null, string bucketID = null, bool? _default = null, string db = null, string rp = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'orgID' is set
             if (orgID == null)
@@ -871,7 +887,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -1014,10 +1030,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="_default">Specifies filtering on default (optional)</param>
         /// <param name="db">Specifies the database to filter on (optional)</param>
         /// <param name="rp">Specifies the retention policy to filter on (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of DBRPs</returns>
-        public async System.Threading.Tasks.Task<DBRPs> GetDBRPsAsync (string orgID, string zapTraceSpan = null, string id = null, string bucketID = null, bool? _default = null, string db = null, string rp = null)
+        public async System.Threading.Tasks.Task<DBRPs> GetDBRPsAsync (string orgID, string zapTraceSpan = null, string id = null, string bucketID = null, bool? _default = null, string db = null, string rp = null, CancellationToken cancellationToken = default)
         {
-             ApiResponse<DBRPs> localVarResponse = await GetDBRPsAsyncWithHttpInfo(orgID, zapTraceSpan, id, bucketID, _default, db, rp).ConfigureAwait(false);
+             ApiResponse<DBRPs> localVarResponse = await GetDBRPsAsyncWithHttpInfo(orgID, zapTraceSpan, id, bucketID, _default, db, rp, cancellationToken).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -1033,11 +1050,12 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="_default">Specifies filtering on default (optional)</param>
         /// <param name="db">Specifies the database to filter on (optional)</param>
         /// <param name="rp">Specifies the retention policy to filter on (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (DBRPs)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<DBRPs>> GetDBRPsAsyncWithHttpInfo (string orgID, string zapTraceSpan = null, string id = null, string bucketID = null, bool? _default = null, string db = null, string rp = null)
+        public async System.Threading.Tasks.Task<ApiResponse<DBRPs>> GetDBRPsAsyncWithHttpInfo (string orgID, string zapTraceSpan = null, string id = null, string bucketID = null, bool? _default = null, string db = null, string rp = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await GetDBRPsAsyncWithIRestResponse(orgID, zapTraceSpan, id, bucketID, _default, db, rp).ConfigureAwait(false);
+            IRestResponse localVarResponse = await GetDBRPsAsyncWithIRestResponse(orgID, zapTraceSpan, id, bucketID, _default, db, rp, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -1063,8 +1081,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="_default">Specifies filtering on default (optional)</param>
         /// <param name="db">Specifies the database to filter on (optional)</param>
         /// <param name="rp">Specifies the retention policy to filter on (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse (DBRPs)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> GetDBRPsAsyncWithIRestResponse (string orgID, string zapTraceSpan = null, string id = null, string bucketID = null, bool? _default = null, string db = null, string rp = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetDBRPsAsyncWithIRestResponse (string orgID, string zapTraceSpan = null, string id = null, string bucketID = null, bool? _default = null, string db = null, string rp = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'orgID' is set
             if (orgID == null)
@@ -1104,7 +1123,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -1198,8 +1217,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">Specifies the organization ID of the mapping</param>
         /// <param name="dbrpID">The database retention policy mapping ID</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of DBRP</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> GetDBRPsIDWithIRestResponseAsync (string orgID, string dbrpID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetDBRPsIDWithIRestResponseAsync (string orgID, string dbrpID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'orgID' is set
             if (orgID == null)
@@ -1238,7 +1258,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -1367,10 +1387,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">Specifies the organization ID of the mapping</param>
         /// <param name="dbrpID">The database retention policy mapping ID</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of DBRP</returns>
-        public async System.Threading.Tasks.Task<DBRP> GetDBRPsIDAsync (string orgID, string dbrpID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<DBRP> GetDBRPsIDAsync (string orgID, string dbrpID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
-             ApiResponse<DBRP> localVarResponse = await GetDBRPsIDAsyncWithHttpInfo(orgID, dbrpID, zapTraceSpan).ConfigureAwait(false);
+             ApiResponse<DBRP> localVarResponse = await GetDBRPsIDAsyncWithHttpInfo(orgID, dbrpID, zapTraceSpan, cancellationToken).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -1382,11 +1403,12 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">Specifies the organization ID of the mapping</param>
         /// <param name="dbrpID">The database retention policy mapping ID</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (DBRP)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<DBRP>> GetDBRPsIDAsyncWithHttpInfo (string orgID, string dbrpID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<DBRP>> GetDBRPsIDAsyncWithHttpInfo (string orgID, string dbrpID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await GetDBRPsIDAsyncWithIRestResponse(orgID, dbrpID, zapTraceSpan).ConfigureAwait(false);
+            IRestResponse localVarResponse = await GetDBRPsIDAsyncWithIRestResponse(orgID, dbrpID, zapTraceSpan, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -1408,8 +1430,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">Specifies the organization ID of the mapping</param>
         /// <param name="dbrpID">The database retention policy mapping ID</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse (DBRP)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> GetDBRPsIDAsyncWithIRestResponse (string orgID, string dbrpID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetDBRPsIDAsyncWithIRestResponse (string orgID, string dbrpID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'orgID' is set
             if (orgID == null)
@@ -1448,7 +1471,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -1557,8 +1580,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="dbrpID">The database retention policy mapping.</param>
         /// <param name="dBRPUpdate">Database retention policy update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of DBRP</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> PatchDBRPIDWithIRestResponseAsync (string orgID, string dbrpID, DBRPUpdate dBRPUpdate, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PatchDBRPIDWithIRestResponseAsync (string orgID, string dbrpID, DBRPUpdate dBRPUpdate, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'orgID' is set
             if (orgID == null)
@@ -1609,7 +1633,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -1765,10 +1789,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="dbrpID">The database retention policy mapping.</param>
         /// <param name="dBRPUpdate">Database retention policy update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of DBRP</returns>
-        public async System.Threading.Tasks.Task<DBRP> PatchDBRPIDAsync (string orgID, string dbrpID, DBRPUpdate dBRPUpdate, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<DBRP> PatchDBRPIDAsync (string orgID, string dbrpID, DBRPUpdate dBRPUpdate, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
-             ApiResponse<DBRP> localVarResponse = await PatchDBRPIDAsyncWithHttpInfo(orgID, dbrpID, dBRPUpdate, zapTraceSpan).ConfigureAwait(false);
+             ApiResponse<DBRP> localVarResponse = await PatchDBRPIDAsyncWithHttpInfo(orgID, dbrpID, dBRPUpdate, zapTraceSpan, cancellationToken).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -1781,11 +1806,12 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="dbrpID">The database retention policy mapping.</param>
         /// <param name="dBRPUpdate">Database retention policy update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (DBRP)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<DBRP>> PatchDBRPIDAsyncWithHttpInfo (string orgID, string dbrpID, DBRPUpdate dBRPUpdate, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<DBRP>> PatchDBRPIDAsyncWithHttpInfo (string orgID, string dbrpID, DBRPUpdate dBRPUpdate, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await PatchDBRPIDAsyncWithIRestResponse(orgID, dbrpID, dBRPUpdate, zapTraceSpan).ConfigureAwait(false);
+            IRestResponse localVarResponse = await PatchDBRPIDAsyncWithIRestResponse(orgID, dbrpID, dBRPUpdate, zapTraceSpan, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -1808,8 +1834,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="dbrpID">The database retention policy mapping.</param>
         /// <param name="dBRPUpdate">Database retention policy update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse (DBRP)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> PatchDBRPIDAsyncWithIRestResponse (string orgID, string dbrpID, DBRPUpdate dBRPUpdate, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PatchDBRPIDAsyncWithIRestResponse (string orgID, string dbrpID, DBRPUpdate dBRPUpdate, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'orgID' is set
             if (orgID == null)
@@ -1860,7 +1887,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -1955,8 +1982,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="DBRP">The database retention policy mapping to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of DBRP</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> PostDBRPWithIRestResponseAsync (DBRP DBRP, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PostDBRPWithIRestResponseAsync (DBRP DBRP, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'DBRP' is set
             if (DBRP == null)
@@ -1999,7 +2027,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -2133,10 +2161,11 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="DBRP">The database retention policy mapping to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of DBRP</returns>
-        public async System.Threading.Tasks.Task<DBRP> PostDBRPAsync (DBRP DBRP, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<DBRP> PostDBRPAsync (DBRP DBRP, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
-             ApiResponse<DBRP> localVarResponse = await PostDBRPAsyncWithHttpInfo(DBRP, zapTraceSpan).ConfigureAwait(false);
+             ApiResponse<DBRP> localVarResponse = await PostDBRPAsyncWithHttpInfo(DBRP, zapTraceSpan, cancellationToken).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -2147,11 +2176,12 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="DBRP">The database retention policy mapping to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (DBRP)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<DBRP>> PostDBRPAsyncWithHttpInfo (DBRP DBRP, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<DBRP>> PostDBRPAsyncWithHttpInfo (DBRP DBRP, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await PostDBRPAsyncWithIRestResponse(DBRP, zapTraceSpan).ConfigureAwait(false);
+            IRestResponse localVarResponse = await PostDBRPAsyncWithIRestResponse(DBRP, zapTraceSpan, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -2172,8 +2202,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="DBRP">The database retention policy mapping to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse (DBRP)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> PostDBRPAsyncWithIRestResponse (DBRP DBRP, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PostDBRPAsyncWithIRestResponse (DBRP DBRP, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'DBRP' is set
             if (DBRP == null)
@@ -2216,7 +2247,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {

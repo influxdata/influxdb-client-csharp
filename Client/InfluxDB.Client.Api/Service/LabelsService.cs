@@ -12,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading;
 using RestSharp;
 using InfluxDB.Client.Api.Client;
 using InfluxDB.Client.Api.Domain;
@@ -150,8 +151,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="labelID">The ID of the label to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task DeleteLabelsIDAsync (string labelID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task DeleteLabelsIDAsync (string labelID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Delete a label
@@ -162,8 +164,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="labelID">The ID of the label to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> DeleteLabelsIDAsyncWithHttpInfo (string labelID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<Object>> DeleteLabelsIDAsyncWithHttpInfo (string labelID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
         /// <summary>
         /// Get all labels
         /// </summary>
@@ -173,8 +176,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="orgID">The organization ID. (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of LabelsResponse</returns>
-        System.Threading.Tasks.Task<LabelsResponse> GetLabelsAsync (string zapTraceSpan = null, string orgID = null);
+        System.Threading.Tasks.Task<LabelsResponse> GetLabelsAsync (string zapTraceSpan = null, string orgID = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get all labels
@@ -185,8 +189,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="orgID">The organization ID. (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (LabelsResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<LabelsResponse>> GetLabelsAsyncWithHttpInfo (string zapTraceSpan = null, string orgID = null);
+        System.Threading.Tasks.Task<ApiResponse<LabelsResponse>> GetLabelsAsyncWithHttpInfo (string zapTraceSpan = null, string orgID = null, CancellationToken cancellationToken = default);
         /// <summary>
         /// Get a label
         /// </summary>
@@ -196,8 +201,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="labelID">The ID of the label to update.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of LabelResponse</returns>
-        System.Threading.Tasks.Task<LabelResponse> GetLabelsIDAsync (string labelID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<LabelResponse> GetLabelsIDAsync (string labelID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get a label
@@ -208,8 +214,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="labelID">The ID of the label to update.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (LabelResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<LabelResponse>> GetLabelsIDAsyncWithHttpInfo (string labelID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<LabelResponse>> GetLabelsIDAsyncWithHttpInfo (string labelID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
         /// <summary>
         /// Update a label
         /// </summary>
@@ -220,8 +227,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="labelID">The ID of the label to update.</param>
         /// <param name="labelUpdate">Label update</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of LabelResponse</returns>
-        System.Threading.Tasks.Task<LabelResponse> PatchLabelsIDAsync (string labelID, LabelUpdate labelUpdate, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<LabelResponse> PatchLabelsIDAsync (string labelID, LabelUpdate labelUpdate, string zapTraceSpan = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Update a label
@@ -233,8 +241,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="labelID">The ID of the label to update.</param>
         /// <param name="labelUpdate">Label update</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (LabelResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<LabelResponse>> PatchLabelsIDAsyncWithHttpInfo (string labelID, LabelUpdate labelUpdate, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<LabelResponse>> PatchLabelsIDAsyncWithHttpInfo (string labelID, LabelUpdate labelUpdate, string zapTraceSpan = null, CancellationToken cancellationToken = default);
         /// <summary>
         /// Create a label
         /// </summary>
@@ -243,8 +252,9 @@ namespace InfluxDB.Client.Api.Service
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="labelCreateRequest">Label to create</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of LabelResponse</returns>
-        System.Threading.Tasks.Task<LabelResponse> PostLabelsAsync (LabelCreateRequest labelCreateRequest);
+        System.Threading.Tasks.Task<LabelResponse> PostLabelsAsync (LabelCreateRequest labelCreateRequest, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Create a label
@@ -254,8 +264,9 @@ namespace InfluxDB.Client.Api.Service
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="labelCreateRequest">Label to create</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (LabelResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<LabelResponse>> PostLabelsAsyncWithHttpInfo (LabelCreateRequest labelCreateRequest);
+        System.Threading.Tasks.Task<ApiResponse<LabelResponse>> PostLabelsAsyncWithHttpInfo (LabelCreateRequest labelCreateRequest, CancellationToken cancellationToken = default);
         #endregion Asynchronous Operations
     }
 
@@ -431,8 +442,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="labelID">The ID of the label to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> DeleteLabelsIDWithIRestResponseAsync (string labelID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> DeleteLabelsIDWithIRestResponseAsync (string labelID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'labelID' is set
             if (labelID == null)
@@ -467,7 +479,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -585,10 +597,11 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="labelID">The ID of the label to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of void</returns>
-        public System.Threading.Tasks.Task DeleteLabelsIDAsync (string labelID, string zapTraceSpan = null)
+        public System.Threading.Tasks.Task DeleteLabelsIDAsync (string labelID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
-             return DeleteLabelsIDAsyncWithHttpInfo(labelID, zapTraceSpan);
+             return DeleteLabelsIDAsyncWithHttpInfo(labelID, zapTraceSpan, cancellationToken);
 
         }
 
@@ -598,11 +611,12 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="labelID">The ID of the label to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteLabelsIDAsyncWithHttpInfo (string labelID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteLabelsIDAsyncWithHttpInfo (string labelID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await DeleteLabelsIDAsyncWithIRestResponse(labelID, zapTraceSpan).ConfigureAwait(false);
+            IRestResponse localVarResponse = await DeleteLabelsIDAsyncWithIRestResponse(labelID, zapTraceSpan, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -623,8 +637,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="labelID">The ID of the label to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> DeleteLabelsIDAsyncWithIRestResponse (string labelID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> DeleteLabelsIDAsyncWithIRestResponse (string labelID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'labelID' is set
             if (labelID == null)
@@ -659,7 +674,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -743,8 +758,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="orgID">The organization ID. (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of LabelsResponse</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> GetLabelsWithIRestResponseAsync (string zapTraceSpan = null, string orgID = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetLabelsWithIRestResponseAsync (string zapTraceSpan = null, string orgID = null, CancellationToken cancellationToken = default)
         {
 
             var localVarPath = "/api/v2/labels";
@@ -776,7 +792,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -888,10 +904,11 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="orgID">The organization ID. (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of LabelsResponse</returns>
-        public async System.Threading.Tasks.Task<LabelsResponse> GetLabelsAsync (string zapTraceSpan = null, string orgID = null)
+        public async System.Threading.Tasks.Task<LabelsResponse> GetLabelsAsync (string zapTraceSpan = null, string orgID = null, CancellationToken cancellationToken = default)
         {
-             ApiResponse<LabelsResponse> localVarResponse = await GetLabelsAsyncWithHttpInfo(zapTraceSpan, orgID).ConfigureAwait(false);
+             ApiResponse<LabelsResponse> localVarResponse = await GetLabelsAsyncWithHttpInfo(zapTraceSpan, orgID, cancellationToken).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -902,11 +919,12 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="orgID">The organization ID. (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (LabelsResponse)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<LabelsResponse>> GetLabelsAsyncWithHttpInfo (string zapTraceSpan = null, string orgID = null)
+        public async System.Threading.Tasks.Task<ApiResponse<LabelsResponse>> GetLabelsAsyncWithHttpInfo (string zapTraceSpan = null, string orgID = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await GetLabelsAsyncWithIRestResponse(zapTraceSpan, orgID).ConfigureAwait(false);
+            IRestResponse localVarResponse = await GetLabelsAsyncWithIRestResponse(zapTraceSpan, orgID, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -927,8 +945,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="orgID">The organization ID. (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse (LabelsResponse)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> GetLabelsAsyncWithIRestResponse (string zapTraceSpan = null, string orgID = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetLabelsAsyncWithIRestResponse (string zapTraceSpan = null, string orgID = null, CancellationToken cancellationToken = default)
         {
 
             var localVarPath = "/api/v2/labels";
@@ -960,7 +979,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -1047,8 +1066,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="labelID">The ID of the label to update.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of LabelResponse</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> GetLabelsIDWithIRestResponseAsync (string labelID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetLabelsIDWithIRestResponseAsync (string labelID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'labelID' is set
             if (labelID == null)
@@ -1083,7 +1103,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -1201,10 +1221,11 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="labelID">The ID of the label to update.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of LabelResponse</returns>
-        public async System.Threading.Tasks.Task<LabelResponse> GetLabelsIDAsync (string labelID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<LabelResponse> GetLabelsIDAsync (string labelID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
-             ApiResponse<LabelResponse> localVarResponse = await GetLabelsIDAsyncWithHttpInfo(labelID, zapTraceSpan).ConfigureAwait(false);
+             ApiResponse<LabelResponse> localVarResponse = await GetLabelsIDAsyncWithHttpInfo(labelID, zapTraceSpan, cancellationToken).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -1215,11 +1236,12 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="labelID">The ID of the label to update.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (LabelResponse)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<LabelResponse>> GetLabelsIDAsyncWithHttpInfo (string labelID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<LabelResponse>> GetLabelsIDAsyncWithHttpInfo (string labelID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await GetLabelsIDAsyncWithIRestResponse(labelID, zapTraceSpan).ConfigureAwait(false);
+            IRestResponse localVarResponse = await GetLabelsIDAsyncWithIRestResponse(labelID, zapTraceSpan, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -1240,8 +1262,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="labelID">The ID of the label to update.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse (LabelResponse)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> GetLabelsIDAsyncWithIRestResponse (string labelID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetLabelsIDAsyncWithIRestResponse (string labelID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'labelID' is set
             if (labelID == null)
@@ -1276,7 +1299,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -1378,8 +1401,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="labelID">The ID of the label to update.</param>
         /// <param name="labelUpdate">Label update</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of LabelResponse</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> PatchLabelsIDWithIRestResponseAsync (string labelID, LabelUpdate labelUpdate, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PatchLabelsIDWithIRestResponseAsync (string labelID, LabelUpdate labelUpdate, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'labelID' is set
             if (labelID == null)
@@ -1426,7 +1450,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -1571,10 +1595,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="labelID">The ID of the label to update.</param>
         /// <param name="labelUpdate">Label update</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of LabelResponse</returns>
-        public async System.Threading.Tasks.Task<LabelResponse> PatchLabelsIDAsync (string labelID, LabelUpdate labelUpdate, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<LabelResponse> PatchLabelsIDAsync (string labelID, LabelUpdate labelUpdate, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
-             ApiResponse<LabelResponse> localVarResponse = await PatchLabelsIDAsyncWithHttpInfo(labelID, labelUpdate, zapTraceSpan).ConfigureAwait(false);
+             ApiResponse<LabelResponse> localVarResponse = await PatchLabelsIDAsyncWithHttpInfo(labelID, labelUpdate, zapTraceSpan, cancellationToken).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -1586,11 +1611,12 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="labelID">The ID of the label to update.</param>
         /// <param name="labelUpdate">Label update</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (LabelResponse)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<LabelResponse>> PatchLabelsIDAsyncWithHttpInfo (string labelID, LabelUpdate labelUpdate, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<LabelResponse>> PatchLabelsIDAsyncWithHttpInfo (string labelID, LabelUpdate labelUpdate, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await PatchLabelsIDAsyncWithIRestResponse(labelID, labelUpdate, zapTraceSpan).ConfigureAwait(false);
+            IRestResponse localVarResponse = await PatchLabelsIDAsyncWithIRestResponse(labelID, labelUpdate, zapTraceSpan, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -1612,8 +1638,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="labelID">The ID of the label to update.</param>
         /// <param name="labelUpdate">Label update</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse (LabelResponse)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> PatchLabelsIDAsyncWithIRestResponse (string labelID, LabelUpdate labelUpdate, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PatchLabelsIDAsyncWithIRestResponse (string labelID, LabelUpdate labelUpdate, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'labelID' is set
             if (labelID == null)
@@ -1660,7 +1687,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -1751,8 +1778,9 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="labelCreateRequest">Label to create</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of LabelResponse</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> PostLabelsWithIRestResponseAsync (LabelCreateRequest labelCreateRequest)
+        public async System.Threading.Tasks.Task<IRestResponse> PostLabelsWithIRestResponseAsync (LabelCreateRequest labelCreateRequest, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'labelCreateRequest' is set
             if (labelCreateRequest == null)
@@ -1794,7 +1822,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -1923,10 +1951,11 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="labelCreateRequest">Label to create</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of LabelResponse</returns>
-        public async System.Threading.Tasks.Task<LabelResponse> PostLabelsAsync (LabelCreateRequest labelCreateRequest)
+        public async System.Threading.Tasks.Task<LabelResponse> PostLabelsAsync (LabelCreateRequest labelCreateRequest, CancellationToken cancellationToken = default)
         {
-             ApiResponse<LabelResponse> localVarResponse = await PostLabelsAsyncWithHttpInfo(labelCreateRequest).ConfigureAwait(false);
+             ApiResponse<LabelResponse> localVarResponse = await PostLabelsAsyncWithHttpInfo(labelCreateRequest, cancellationToken).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -1936,11 +1965,12 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="labelCreateRequest">Label to create</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (LabelResponse)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<LabelResponse>> PostLabelsAsyncWithHttpInfo (LabelCreateRequest labelCreateRequest)
+        public async System.Threading.Tasks.Task<ApiResponse<LabelResponse>> PostLabelsAsyncWithHttpInfo (LabelCreateRequest labelCreateRequest, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await PostLabelsAsyncWithIRestResponse(labelCreateRequest).ConfigureAwait(false);
+            IRestResponse localVarResponse = await PostLabelsAsyncWithIRestResponse(labelCreateRequest, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -1960,8 +1990,9 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="labelCreateRequest">Label to create</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse (LabelResponse)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> PostLabelsAsyncWithIRestResponse (LabelCreateRequest labelCreateRequest)
+        public async System.Threading.Tasks.Task<IRestResponse> PostLabelsAsyncWithIRestResponse (LabelCreateRequest labelCreateRequest, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'labelCreateRequest' is set
             if (labelCreateRequest == null)
@@ -2003,7 +2034,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {

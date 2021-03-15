@@ -12,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading;
 using RestSharp;
 using InfluxDB.Client.Api.Client;
 using InfluxDB.Client.Api.Domain;
@@ -190,8 +191,9 @@ namespace InfluxDB.Client.Api.Service
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of FluxSuggestions</returns>
-        System.Threading.Tasks.Task<FluxSuggestions> GetQuerySuggestionsAsync (string zapTraceSpan = null);
+        System.Threading.Tasks.Task<FluxSuggestions> GetQuerySuggestionsAsync (string zapTraceSpan = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// 
@@ -201,8 +203,9 @@ namespace InfluxDB.Client.Api.Service
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (FluxSuggestions)</returns>
-        System.Threading.Tasks.Task<ApiResponse<FluxSuggestions>> GetQuerySuggestionsAsyncWithHttpInfo (string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<FluxSuggestions>> GetQuerySuggestionsAsyncWithHttpInfo (string zapTraceSpan = null, CancellationToken cancellationToken = default);
         /// <summary>
         /// 
         /// </summary>
@@ -212,8 +215,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="name">The name of the branching suggestion.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of FluxSuggestion</returns>
-        System.Threading.Tasks.Task<FluxSuggestion> GetQuerySuggestionsNameAsync (string name, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<FluxSuggestion> GetQuerySuggestionsNameAsync (string name, string zapTraceSpan = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// 
@@ -224,8 +228,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="name">The name of the branching suggestion.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (FluxSuggestion)</returns>
-        System.Threading.Tasks.Task<ApiResponse<FluxSuggestion>> GetQuerySuggestionsNameAsyncWithHttpInfo (string name, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<FluxSuggestion>> GetQuerySuggestionsNameAsyncWithHttpInfo (string name, string zapTraceSpan = null, CancellationToken cancellationToken = default);
         /// <summary>
         /// Query InfluxDB
         /// </summary>
@@ -239,8 +244,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="org">Specifies the name of the organization executing the query. Takes either the ID or Name interchangeably. If both &#x60;orgID&#x60; and &#x60;org&#x60; are specified, &#x60;org&#x60; takes precedence. (optional)</param>
         /// <param name="orgID">Specifies the ID of the organization executing the query. If both &#x60;orgID&#x60; and &#x60;org&#x60; are specified, &#x60;org&#x60; takes precedence. (optional)</param>
         /// <param name="query">Flux query or specification to execute (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of string</returns>
-        System.Threading.Tasks.Task<string> PostQueryAsync (string zapTraceSpan = null, string acceptEncoding = null, string contentType = null, string org = null, string orgID = null, Query query = null);
+        System.Threading.Tasks.Task<string> PostQueryAsync (string zapTraceSpan = null, string acceptEncoding = null, string contentType = null, string org = null, string orgID = null, Query query = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Query InfluxDB
@@ -255,8 +261,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="org">Specifies the name of the organization executing the query. Takes either the ID or Name interchangeably. If both &#x60;orgID&#x60; and &#x60;org&#x60; are specified, &#x60;org&#x60; takes precedence. (optional)</param>
         /// <param name="orgID">Specifies the ID of the organization executing the query. If both &#x60;orgID&#x60; and &#x60;org&#x60; are specified, &#x60;org&#x60; takes precedence. (optional)</param>
         /// <param name="query">Flux query or specification to execute (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (string)</returns>
-        System.Threading.Tasks.Task<ApiResponse<string>> PostQueryAsyncWithHttpInfo (string zapTraceSpan = null, string acceptEncoding = null, string contentType = null, string org = null, string orgID = null, Query query = null);
+        System.Threading.Tasks.Task<ApiResponse<string>> PostQueryAsyncWithHttpInfo (string zapTraceSpan = null, string acceptEncoding = null, string contentType = null, string org = null, string orgID = null, Query query = null, CancellationToken cancellationToken = default);
         /// <summary>
         /// Query InfluxDB
         /// </summary>
@@ -270,8 +277,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="org">Specifies the name of the organization executing the query. Takes either the ID or Name interchangeably. If both &#x60;orgID&#x60; and &#x60;org&#x60; are specified, &#x60;org&#x60; takes precedence. (optional)</param>
         /// <param name="orgID">Specifies the ID of the organization executing the query. If both &#x60;orgID&#x60; and &#x60;org&#x60; are specified, &#x60;org&#x60; takes precedence. (optional)</param>
         /// <param name="query">Flux query or specification to execute (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of string</returns>
-        System.Threading.Tasks.Task<string> PostQuerystringAsync (string zapTraceSpan = null, string acceptEncoding = null, string contentType = null, string org = null, string orgID = null, Query query = null);
+        System.Threading.Tasks.Task<string> PostQuerystringAsync (string zapTraceSpan = null, string acceptEncoding = null, string contentType = null, string org = null, string orgID = null, Query query = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Query InfluxDB
@@ -286,8 +294,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="org">Specifies the name of the organization executing the query. Takes either the ID or Name interchangeably. If both &#x60;orgID&#x60; and &#x60;org&#x60; are specified, &#x60;org&#x60; takes precedence. (optional)</param>
         /// <param name="orgID">Specifies the ID of the organization executing the query. If both &#x60;orgID&#x60; and &#x60;org&#x60; are specified, &#x60;org&#x60; takes precedence. (optional)</param>
         /// <param name="query">Flux query or specification to execute (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (string)</returns>
-        System.Threading.Tasks.Task<ApiResponse<string>> PostQuerystringAsyncWithHttpInfo (string zapTraceSpan = null, string acceptEncoding = null, string contentType = null, string org = null, string orgID = null, Query query = null);
+        System.Threading.Tasks.Task<ApiResponse<string>> PostQuerystringAsyncWithHttpInfo (string zapTraceSpan = null, string acceptEncoding = null, string contentType = null, string org = null, string orgID = null, Query query = null, CancellationToken cancellationToken = default);
         /// <summary>
         /// Analyze an InfluxQL or Flux query
         /// </summary>
@@ -298,8 +307,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="contentType"> (optional)</param>
         /// <param name="query">Flux or InfluxQL query to analyze (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of AnalyzeQueryResponse</returns>
-        System.Threading.Tasks.Task<AnalyzeQueryResponse> PostQueryAnalyzeAsync (string zapTraceSpan = null, string contentType = null, Query query = null);
+        System.Threading.Tasks.Task<AnalyzeQueryResponse> PostQueryAnalyzeAsync (string zapTraceSpan = null, string contentType = null, Query query = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Analyze an InfluxQL or Flux query
@@ -311,8 +321,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="contentType"> (optional)</param>
         /// <param name="query">Flux or InfluxQL query to analyze (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (AnalyzeQueryResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<AnalyzeQueryResponse>> PostQueryAnalyzeAsyncWithHttpInfo (string zapTraceSpan = null, string contentType = null, Query query = null);
+        System.Threading.Tasks.Task<ApiResponse<AnalyzeQueryResponse>> PostQueryAnalyzeAsyncWithHttpInfo (string zapTraceSpan = null, string contentType = null, Query query = null, CancellationToken cancellationToken = default);
         /// <summary>
         /// 
         /// </summary>
@@ -323,8 +334,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="contentType"> (optional)</param>
         /// <param name="languageRequest">Analyzed Flux query to generate abstract syntax tree. (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ASTResponse</returns>
-        System.Threading.Tasks.Task<ASTResponse> PostQueryAstAsync (string zapTraceSpan = null, string contentType = null, LanguageRequest languageRequest = null);
+        System.Threading.Tasks.Task<ASTResponse> PostQueryAstAsync (string zapTraceSpan = null, string contentType = null, LanguageRequest languageRequest = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// 
@@ -336,8 +348,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="contentType"> (optional)</param>
         /// <param name="languageRequest">Analyzed Flux query to generate abstract syntax tree. (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (ASTResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<ASTResponse>> PostQueryAstAsyncWithHttpInfo (string zapTraceSpan = null, string contentType = null, LanguageRequest languageRequest = null);
+        System.Threading.Tasks.Task<ApiResponse<ASTResponse>> PostQueryAstAsyncWithHttpInfo (string zapTraceSpan = null, string contentType = null, LanguageRequest languageRequest = null, CancellationToken cancellationToken = default);
         #endregion Asynchronous Operations
     }
 
@@ -507,8 +520,9 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of FluxSuggestions</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> GetQuerySuggestionsWithIRestResponseAsync (string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetQuerySuggestionsWithIRestResponseAsync (string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
 
             var localVarPath = "/api/v2/query/suggestions";
@@ -539,7 +553,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -646,10 +660,11 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of FluxSuggestions</returns>
-        public async System.Threading.Tasks.Task<FluxSuggestions> GetQuerySuggestionsAsync (string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<FluxSuggestions> GetQuerySuggestionsAsync (string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
-             ApiResponse<FluxSuggestions> localVarResponse = await GetQuerySuggestionsAsyncWithHttpInfo(zapTraceSpan).ConfigureAwait(false);
+             ApiResponse<FluxSuggestions> localVarResponse = await GetQuerySuggestionsAsyncWithHttpInfo(zapTraceSpan, cancellationToken).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -659,11 +674,12 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (FluxSuggestions)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<FluxSuggestions>> GetQuerySuggestionsAsyncWithHttpInfo (string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<FluxSuggestions>> GetQuerySuggestionsAsyncWithHttpInfo (string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await GetQuerySuggestionsAsyncWithIRestResponse(zapTraceSpan).ConfigureAwait(false);
+            IRestResponse localVarResponse = await GetQuerySuggestionsAsyncWithIRestResponse(zapTraceSpan, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -683,8 +699,9 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse (FluxSuggestions)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> GetQuerySuggestionsAsyncWithIRestResponse (string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetQuerySuggestionsAsyncWithIRestResponse (string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
 
             var localVarPath = "/api/v2/query/suggestions";
@@ -715,7 +732,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -802,8 +819,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="name">The name of the branching suggestion.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of FluxSuggestion</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> GetQuerySuggestionsNameWithIRestResponseAsync (string name, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetQuerySuggestionsNameWithIRestResponseAsync (string name, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'name' is set
             if (name == null)
@@ -838,7 +856,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -956,10 +974,11 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="name">The name of the branching suggestion.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of FluxSuggestion</returns>
-        public async System.Threading.Tasks.Task<FluxSuggestion> GetQuerySuggestionsNameAsync (string name, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<FluxSuggestion> GetQuerySuggestionsNameAsync (string name, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
-             ApiResponse<FluxSuggestion> localVarResponse = await GetQuerySuggestionsNameAsyncWithHttpInfo(name, zapTraceSpan).ConfigureAwait(false);
+             ApiResponse<FluxSuggestion> localVarResponse = await GetQuerySuggestionsNameAsyncWithHttpInfo(name, zapTraceSpan, cancellationToken).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -970,11 +989,12 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="name">The name of the branching suggestion.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (FluxSuggestion)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<FluxSuggestion>> GetQuerySuggestionsNameAsyncWithHttpInfo (string name, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<FluxSuggestion>> GetQuerySuggestionsNameAsyncWithHttpInfo (string name, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await GetQuerySuggestionsNameAsyncWithIRestResponse(name, zapTraceSpan).ConfigureAwait(false);
+            IRestResponse localVarResponse = await GetQuerySuggestionsNameAsyncWithIRestResponse(name, zapTraceSpan, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -995,8 +1015,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="name">The name of the branching suggestion.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse (FluxSuggestion)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> GetQuerySuggestionsNameAsyncWithIRestResponse (string name, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetQuerySuggestionsNameAsyncWithIRestResponse (string name, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'name' is set
             if (name == null)
@@ -1031,7 +1052,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -1142,8 +1163,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="org">Specifies the name of the organization executing the query. Takes either the ID or Name interchangeably. If both &#x60;orgID&#x60; and &#x60;org&#x60; are specified, &#x60;org&#x60; takes precedence. (optional)</param>
         /// <param name="orgID">Specifies the ID of the organization executing the query. If both &#x60;orgID&#x60; and &#x60;org&#x60; are specified, &#x60;org&#x60; takes precedence. (optional)</param>
         /// <param name="query">Flux query or specification to execute (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of string</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> PostQueryWithIRestResponseAsync (string zapTraceSpan = null, string acceptEncoding = null, string contentType = null, string org = null, string orgID = null, Query query = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PostQueryWithIRestResponseAsync (string zapTraceSpan = null, string acceptEncoding = null, string contentType = null, string org = null, string orgID = null, Query query = null, CancellationToken cancellationToken = default)
         {
 
             var localVarPath = "/api/v2/query";
@@ -1190,7 +1212,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -1344,10 +1366,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="org">Specifies the name of the organization executing the query. Takes either the ID or Name interchangeably. If both &#x60;orgID&#x60; and &#x60;org&#x60; are specified, &#x60;org&#x60; takes precedence. (optional)</param>
         /// <param name="orgID">Specifies the ID of the organization executing the query. If both &#x60;orgID&#x60; and &#x60;org&#x60; are specified, &#x60;org&#x60; takes precedence. (optional)</param>
         /// <param name="query">Flux query or specification to execute (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of string</returns>
-        public async System.Threading.Tasks.Task<string> PostQueryAsync (string zapTraceSpan = null, string acceptEncoding = null, string contentType = null, string org = null, string orgID = null, Query query = null)
+        public async System.Threading.Tasks.Task<string> PostQueryAsync (string zapTraceSpan = null, string acceptEncoding = null, string contentType = null, string org = null, string orgID = null, Query query = null, CancellationToken cancellationToken = default)
         {
-             ApiResponse<string> localVarResponse = await PostQueryAsyncWithHttpInfo(zapTraceSpan, acceptEncoding, contentType, org, orgID, query).ConfigureAwait(false);
+             ApiResponse<string> localVarResponse = await PostQueryAsyncWithHttpInfo(zapTraceSpan, acceptEncoding, contentType, org, orgID, query, cancellationToken).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -1362,11 +1385,12 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="org">Specifies the name of the organization executing the query. Takes either the ID or Name interchangeably. If both &#x60;orgID&#x60; and &#x60;org&#x60; are specified, &#x60;org&#x60; takes precedence. (optional)</param>
         /// <param name="orgID">Specifies the ID of the organization executing the query. If both &#x60;orgID&#x60; and &#x60;org&#x60; are specified, &#x60;org&#x60; takes precedence. (optional)</param>
         /// <param name="query">Flux query or specification to execute (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (string)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<string>> PostQueryAsyncWithHttpInfo (string zapTraceSpan = null, string acceptEncoding = null, string contentType = null, string org = null, string orgID = null, Query query = null)
+        public async System.Threading.Tasks.Task<ApiResponse<string>> PostQueryAsyncWithHttpInfo (string zapTraceSpan = null, string acceptEncoding = null, string contentType = null, string org = null, string orgID = null, Query query = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await PostQueryAsyncWithIRestResponse(zapTraceSpan, acceptEncoding, contentType, org, orgID, query).ConfigureAwait(false);
+            IRestResponse localVarResponse = await PostQueryAsyncWithIRestResponse(zapTraceSpan, acceptEncoding, contentType, org, orgID, query, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -1391,8 +1415,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="org">Specifies the name of the organization executing the query. Takes either the ID or Name interchangeably. If both &#x60;orgID&#x60; and &#x60;org&#x60; are specified, &#x60;org&#x60; takes precedence. (optional)</param>
         /// <param name="orgID">Specifies the ID of the organization executing the query. If both &#x60;orgID&#x60; and &#x60;org&#x60; are specified, &#x60;org&#x60; takes precedence. (optional)</param>
         /// <param name="query">Flux query or specification to execute (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse (string)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> PostQueryAsyncWithIRestResponse (string zapTraceSpan = null, string acceptEncoding = null, string contentType = null, string org = null, string orgID = null, Query query = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PostQueryAsyncWithIRestResponse (string zapTraceSpan = null, string acceptEncoding = null, string contentType = null, string org = null, string orgID = null, Query query = null, CancellationToken cancellationToken = default)
         {
 
             var localVarPath = "/api/v2/query";
@@ -1439,7 +1464,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -1535,8 +1560,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="org">Specifies the name of the organization executing the query. Takes either the ID or Name interchangeably. If both &#x60;orgID&#x60; and &#x60;org&#x60; are specified, &#x60;org&#x60; takes precedence. (optional)</param>
         /// <param name="orgID">Specifies the ID of the organization executing the query. If both &#x60;orgID&#x60; and &#x60;org&#x60; are specified, &#x60;org&#x60; takes precedence. (optional)</param>
         /// <param name="query">Flux query or specification to execute (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of string</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> PostQuerystringWithIRestResponseAsync (string zapTraceSpan = null, string acceptEncoding = null, string contentType = null, string org = null, string orgID = null, Query query = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PostQuerystringWithIRestResponseAsync (string zapTraceSpan = null, string acceptEncoding = null, string contentType = null, string org = null, string orgID = null, Query query = null, CancellationToken cancellationToken = default)
         {
 
             var localVarPath = "/api/v2/query";
@@ -1568,7 +1594,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -1692,10 +1718,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="org">Specifies the name of the organization executing the query. Takes either the ID or Name interchangeably. If both &#x60;orgID&#x60; and &#x60;org&#x60; are specified, &#x60;org&#x60; takes precedence. (optional)</param>
         /// <param name="orgID">Specifies the ID of the organization executing the query. If both &#x60;orgID&#x60; and &#x60;org&#x60; are specified, &#x60;org&#x60; takes precedence. (optional)</param>
         /// <param name="query">Flux query or specification to execute (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of string</returns>
-        public async System.Threading.Tasks.Task<string> PostQuerystringAsync (string zapTraceSpan = null, string acceptEncoding = null, string contentType = null, string org = null, string orgID = null, Query query = null)
+        public async System.Threading.Tasks.Task<string> PostQuerystringAsync (string zapTraceSpan = null, string acceptEncoding = null, string contentType = null, string org = null, string orgID = null, Query query = null, CancellationToken cancellationToken = default)
         {
-             ApiResponse<string> localVarResponse = await PostQuerystringAsyncWithHttpInfo(zapTraceSpan, acceptEncoding, contentType, org, orgID, query).ConfigureAwait(false);
+             ApiResponse<string> localVarResponse = await PostQuerystringAsyncWithHttpInfo(zapTraceSpan, acceptEncoding, contentType, org, orgID, query, cancellationToken).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -1710,11 +1737,12 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="org">Specifies the name of the organization executing the query. Takes either the ID or Name interchangeably. If both &#x60;orgID&#x60; and &#x60;org&#x60; are specified, &#x60;org&#x60; takes precedence. (optional)</param>
         /// <param name="orgID">Specifies the ID of the organization executing the query. If both &#x60;orgID&#x60; and &#x60;org&#x60; are specified, &#x60;org&#x60; takes precedence. (optional)</param>
         /// <param name="query">Flux query or specification to execute (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (string)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<string>> PostQuerystringAsyncWithHttpInfo (string zapTraceSpan = null, string acceptEncoding = null, string contentType = null, string org = null, string orgID = null, Query query = null)
+        public async System.Threading.Tasks.Task<ApiResponse<string>> PostQuerystringAsyncWithHttpInfo (string zapTraceSpan = null, string acceptEncoding = null, string contentType = null, string org = null, string orgID = null, Query query = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await PostQuerystringAsyncWithIRestResponse(zapTraceSpan, acceptEncoding, contentType, org, orgID, query).ConfigureAwait(false);
+            IRestResponse localVarResponse = await PostQuerystringAsyncWithIRestResponse(zapTraceSpan, acceptEncoding, contentType, org, orgID, query, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -1739,8 +1767,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="org">Specifies the name of the organization executing the query. Takes either the ID or Name interchangeably. If both &#x60;orgID&#x60; and &#x60;org&#x60; are specified, &#x60;org&#x60; takes precedence. (optional)</param>
         /// <param name="orgID">Specifies the ID of the organization executing the query. If both &#x60;orgID&#x60; and &#x60;org&#x60; are specified, &#x60;org&#x60; takes precedence. (optional)</param>
         /// <param name="query">Flux query or specification to execute (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse (string)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> PostQuerystringAsyncWithIRestResponse (string zapTraceSpan = null, string acceptEncoding = null, string contentType = null, string org = null, string orgID = null, Query query = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PostQuerystringAsyncWithIRestResponse (string zapTraceSpan = null, string acceptEncoding = null, string contentType = null, string org = null, string orgID = null, Query query = null, CancellationToken cancellationToken = default)
         {
 
             var localVarPath = "/api/v2/query";
@@ -1772,7 +1801,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -1868,8 +1897,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="contentType"> (optional)</param>
         /// <param name="query">Flux or InfluxQL query to analyze (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of AnalyzeQueryResponse</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> PostQueryAnalyzeWithIRestResponseAsync (string zapTraceSpan = null, string contentType = null, Query query = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PostQueryAnalyzeWithIRestResponseAsync (string zapTraceSpan = null, string contentType = null, Query query = null, CancellationToken cancellationToken = default)
         {
 
             var localVarPath = "/api/v2/query/analyze";
@@ -1910,7 +1940,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -2043,10 +2073,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="contentType"> (optional)</param>
         /// <param name="query">Flux or InfluxQL query to analyze (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of AnalyzeQueryResponse</returns>
-        public async System.Threading.Tasks.Task<AnalyzeQueryResponse> PostQueryAnalyzeAsync (string zapTraceSpan = null, string contentType = null, Query query = null)
+        public async System.Threading.Tasks.Task<AnalyzeQueryResponse> PostQueryAnalyzeAsync (string zapTraceSpan = null, string contentType = null, Query query = null, CancellationToken cancellationToken = default)
         {
-             ApiResponse<AnalyzeQueryResponse> localVarResponse = await PostQueryAnalyzeAsyncWithHttpInfo(zapTraceSpan, contentType, query).ConfigureAwait(false);
+             ApiResponse<AnalyzeQueryResponse> localVarResponse = await PostQueryAnalyzeAsyncWithHttpInfo(zapTraceSpan, contentType, query, cancellationToken).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -2058,11 +2089,12 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="contentType"> (optional)</param>
         /// <param name="query">Flux or InfluxQL query to analyze (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (AnalyzeQueryResponse)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<AnalyzeQueryResponse>> PostQueryAnalyzeAsyncWithHttpInfo (string zapTraceSpan = null, string contentType = null, Query query = null)
+        public async System.Threading.Tasks.Task<ApiResponse<AnalyzeQueryResponse>> PostQueryAnalyzeAsyncWithHttpInfo (string zapTraceSpan = null, string contentType = null, Query query = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await PostQueryAnalyzeAsyncWithIRestResponse(zapTraceSpan, contentType, query).ConfigureAwait(false);
+            IRestResponse localVarResponse = await PostQueryAnalyzeAsyncWithIRestResponse(zapTraceSpan, contentType, query, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -2084,8 +2116,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="contentType"> (optional)</param>
         /// <param name="query">Flux or InfluxQL query to analyze (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse (AnalyzeQueryResponse)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> PostQueryAnalyzeAsyncWithIRestResponse (string zapTraceSpan = null, string contentType = null, Query query = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PostQueryAnalyzeAsyncWithIRestResponse (string zapTraceSpan = null, string contentType = null, Query query = null, CancellationToken cancellationToken = default)
         {
 
             var localVarPath = "/api/v2/query/analyze";
@@ -2126,7 +2159,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -2222,8 +2255,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="contentType"> (optional)</param>
         /// <param name="languageRequest">Analyzed Flux query to generate abstract syntax tree. (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of ASTResponse</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> PostQueryAstWithIRestResponseAsync (string zapTraceSpan = null, string contentType = null, LanguageRequest languageRequest = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PostQueryAstWithIRestResponseAsync (string zapTraceSpan = null, string contentType = null, LanguageRequest languageRequest = null, CancellationToken cancellationToken = default)
         {
 
             var localVarPath = "/api/v2/query/ast";
@@ -2264,7 +2298,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -2397,10 +2431,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="contentType"> (optional)</param>
         /// <param name="languageRequest">Analyzed Flux query to generate abstract syntax tree. (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ASTResponse</returns>
-        public async System.Threading.Tasks.Task<ASTResponse> PostQueryAstAsync (string zapTraceSpan = null, string contentType = null, LanguageRequest languageRequest = null)
+        public async System.Threading.Tasks.Task<ASTResponse> PostQueryAstAsync (string zapTraceSpan = null, string contentType = null, LanguageRequest languageRequest = null, CancellationToken cancellationToken = default)
         {
-             ApiResponse<ASTResponse> localVarResponse = await PostQueryAstAsyncWithHttpInfo(zapTraceSpan, contentType, languageRequest).ConfigureAwait(false);
+             ApiResponse<ASTResponse> localVarResponse = await PostQueryAstAsyncWithHttpInfo(zapTraceSpan, contentType, languageRequest, cancellationToken).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -2412,11 +2447,12 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="contentType"> (optional)</param>
         /// <param name="languageRequest">Analyzed Flux query to generate abstract syntax tree. (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (ASTResponse)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<ASTResponse>> PostQueryAstAsyncWithHttpInfo (string zapTraceSpan = null, string contentType = null, LanguageRequest languageRequest = null)
+        public async System.Threading.Tasks.Task<ApiResponse<ASTResponse>> PostQueryAstAsyncWithHttpInfo (string zapTraceSpan = null, string contentType = null, LanguageRequest languageRequest = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await PostQueryAstAsyncWithIRestResponse(zapTraceSpan, contentType, languageRequest).ConfigureAwait(false);
+            IRestResponse localVarResponse = await PostQueryAstAsyncWithIRestResponse(zapTraceSpan, contentType, languageRequest, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -2438,8 +2474,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="contentType"> (optional)</param>
         /// <param name="languageRequest">Analyzed Flux query to generate abstract syntax tree. (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse (ASTResponse)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> PostQueryAstAsyncWithIRestResponse (string zapTraceSpan = null, string contentType = null, LanguageRequest languageRequest = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PostQueryAstAsyncWithIRestResponse (string zapTraceSpan = null, string contentType = null, LanguageRequest languageRequest = null, CancellationToken cancellationToken = default)
         {
 
             var localVarPath = "/api/v2/query/ast";
@@ -2480,7 +2517,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {

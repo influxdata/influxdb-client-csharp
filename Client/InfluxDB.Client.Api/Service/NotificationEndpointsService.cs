@@ -12,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading;
 using RestSharp;
 using InfluxDB.Client.Api.Client;
 using InfluxDB.Client.Api.Domain;
@@ -251,8 +252,9 @@ namespace InfluxDB.Client.Api.Service
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="postNotificationEndpoint">Notification endpoint to create</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of NotificationEndpoint</returns>
-        System.Threading.Tasks.Task<NotificationEndpoint> CreateNotificationEndpointAsync (PostNotificationEndpoint postNotificationEndpoint);
+        System.Threading.Tasks.Task<NotificationEndpoint> CreateNotificationEndpointAsync (PostNotificationEndpoint postNotificationEndpoint, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Add a notification endpoint
@@ -262,8 +264,9 @@ namespace InfluxDB.Client.Api.Service
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="postNotificationEndpoint">Notification endpoint to create</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (NotificationEndpoint)</returns>
-        System.Threading.Tasks.Task<ApiResponse<NotificationEndpoint>> CreateNotificationEndpointAsyncWithHttpInfo (PostNotificationEndpoint postNotificationEndpoint);
+        System.Threading.Tasks.Task<ApiResponse<NotificationEndpoint>> CreateNotificationEndpointAsyncWithHttpInfo (PostNotificationEndpoint postNotificationEndpoint, CancellationToken cancellationToken = default);
         /// <summary>
         /// Delete a notification endpoint
         /// </summary>
@@ -273,8 +276,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="endpointID">The notification endpoint ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task DeleteNotificationEndpointsIDAsync (string endpointID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task DeleteNotificationEndpointsIDAsync (string endpointID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Delete a notification endpoint
@@ -285,8 +289,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="endpointID">The notification endpoint ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> DeleteNotificationEndpointsIDAsyncWithHttpInfo (string endpointID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<Object>> DeleteNotificationEndpointsIDAsyncWithHttpInfo (string endpointID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
         /// <summary>
         /// Delete a label from a notification endpoint
         /// </summary>
@@ -297,8 +302,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="endpointID">The notification endpoint ID.</param>
         /// <param name="labelID">The ID of the label to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task DeleteNotificationEndpointsIDLabelsIDAsync (string endpointID, string labelID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task DeleteNotificationEndpointsIDLabelsIDAsync (string endpointID, string labelID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Delete a label from a notification endpoint
@@ -310,8 +316,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="endpointID">The notification endpoint ID.</param>
         /// <param name="labelID">The ID of the label to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> DeleteNotificationEndpointsIDLabelsIDAsyncWithHttpInfo (string endpointID, string labelID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<Object>> DeleteNotificationEndpointsIDLabelsIDAsyncWithHttpInfo (string endpointID, string labelID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
         /// <summary>
         /// Get all notification endpoints
         /// </summary>
@@ -323,8 +330,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of NotificationEndpoints</returns>
-        System.Threading.Tasks.Task<NotificationEndpoints> GetNotificationEndpointsAsync (string orgID, string zapTraceSpan = null, int? offset = null, int? limit = null);
+        System.Threading.Tasks.Task<NotificationEndpoints> GetNotificationEndpointsAsync (string orgID, string zapTraceSpan = null, int? offset = null, int? limit = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get all notification endpoints
@@ -337,8 +345,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (NotificationEndpoints)</returns>
-        System.Threading.Tasks.Task<ApiResponse<NotificationEndpoints>> GetNotificationEndpointsAsyncWithHttpInfo (string orgID, string zapTraceSpan = null, int? offset = null, int? limit = null);
+        System.Threading.Tasks.Task<ApiResponse<NotificationEndpoints>> GetNotificationEndpointsAsyncWithHttpInfo (string orgID, string zapTraceSpan = null, int? offset = null, int? limit = null, CancellationToken cancellationToken = default);
         /// <summary>
         /// Get a notification endpoint
         /// </summary>
@@ -348,8 +357,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="endpointID">The notification endpoint ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of NotificationEndpoint</returns>
-        System.Threading.Tasks.Task<NotificationEndpoint> GetNotificationEndpointsIDAsync (string endpointID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<NotificationEndpoint> GetNotificationEndpointsIDAsync (string endpointID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get a notification endpoint
@@ -360,8 +370,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="endpointID">The notification endpoint ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (NotificationEndpoint)</returns>
-        System.Threading.Tasks.Task<ApiResponse<NotificationEndpoint>> GetNotificationEndpointsIDAsyncWithHttpInfo (string endpointID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<NotificationEndpoint>> GetNotificationEndpointsIDAsyncWithHttpInfo (string endpointID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
         /// <summary>
         /// List all labels for a notification endpoint
         /// </summary>
@@ -371,8 +382,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="endpointID">The notification endpoint ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of LabelsResponse</returns>
-        System.Threading.Tasks.Task<LabelsResponse> GetNotificationEndpointsIDLabelsAsync (string endpointID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<LabelsResponse> GetNotificationEndpointsIDLabelsAsync (string endpointID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// List all labels for a notification endpoint
@@ -383,8 +395,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="endpointID">The notification endpoint ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (LabelsResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<LabelsResponse>> GetNotificationEndpointsIDLabelsAsyncWithHttpInfo (string endpointID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<LabelsResponse>> GetNotificationEndpointsIDLabelsAsyncWithHttpInfo (string endpointID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
         /// <summary>
         /// Update a notification endpoint
         /// </summary>
@@ -395,8 +408,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="endpointID">The notification endpoint ID.</param>
         /// <param name="notificationEndpointUpdate">Check update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of NotificationEndpoint</returns>
-        System.Threading.Tasks.Task<NotificationEndpoint> PatchNotificationEndpointsIDAsync (string endpointID, NotificationEndpointUpdate notificationEndpointUpdate, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<NotificationEndpoint> PatchNotificationEndpointsIDAsync (string endpointID, NotificationEndpointUpdate notificationEndpointUpdate, string zapTraceSpan = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Update a notification endpoint
@@ -408,8 +422,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="endpointID">The notification endpoint ID.</param>
         /// <param name="notificationEndpointUpdate">Check update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (NotificationEndpoint)</returns>
-        System.Threading.Tasks.Task<ApiResponse<NotificationEndpoint>> PatchNotificationEndpointsIDAsyncWithHttpInfo (string endpointID, NotificationEndpointUpdate notificationEndpointUpdate, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<NotificationEndpoint>> PatchNotificationEndpointsIDAsyncWithHttpInfo (string endpointID, NotificationEndpointUpdate notificationEndpointUpdate, string zapTraceSpan = null, CancellationToken cancellationToken = default);
         /// <summary>
         /// Add a label to a notification endpoint
         /// </summary>
@@ -420,8 +435,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="endpointID">The notification endpoint ID.</param>
         /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of LabelResponse</returns>
-        System.Threading.Tasks.Task<LabelResponse> PostNotificationEndpointIDLabelsAsync (string endpointID, LabelMapping labelMapping, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<LabelResponse> PostNotificationEndpointIDLabelsAsync (string endpointID, LabelMapping labelMapping, string zapTraceSpan = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Add a label to a notification endpoint
@@ -433,8 +449,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="endpointID">The notification endpoint ID.</param>
         /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (LabelResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<LabelResponse>> PostNotificationEndpointIDLabelsAsyncWithHttpInfo (string endpointID, LabelMapping labelMapping, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<LabelResponse>> PostNotificationEndpointIDLabelsAsyncWithHttpInfo (string endpointID, LabelMapping labelMapping, string zapTraceSpan = null, CancellationToken cancellationToken = default);
         /// <summary>
         /// Update a notification endpoint
         /// </summary>
@@ -445,8 +462,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="endpointID">The notification endpoint ID.</param>
         /// <param name="notificationEndpoint">A new notification endpoint to replace the existing endpoint with</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of NotificationEndpoint</returns>
-        System.Threading.Tasks.Task<NotificationEndpoint> PutNotificationEndpointsIDAsync (string endpointID, NotificationEndpoint notificationEndpoint, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<NotificationEndpoint> PutNotificationEndpointsIDAsync (string endpointID, NotificationEndpoint notificationEndpoint, string zapTraceSpan = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Update a notification endpoint
@@ -458,8 +476,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="endpointID">The notification endpoint ID.</param>
         /// <param name="notificationEndpoint">A new notification endpoint to replace the existing endpoint with</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (NotificationEndpoint)</returns>
-        System.Threading.Tasks.Task<ApiResponse<NotificationEndpoint>> PutNotificationEndpointsIDAsyncWithHttpInfo (string endpointID, NotificationEndpoint notificationEndpoint, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<NotificationEndpoint>> PutNotificationEndpointsIDAsyncWithHttpInfo (string endpointID, NotificationEndpoint notificationEndpoint, string zapTraceSpan = null, CancellationToken cancellationToken = default);
         #endregion Asynchronous Operations
     }
 
@@ -640,8 +659,9 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="postNotificationEndpoint">Notification endpoint to create</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of NotificationEndpoint</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> CreateNotificationEndpointWithIRestResponseAsync (PostNotificationEndpoint postNotificationEndpoint)
+        public async System.Threading.Tasks.Task<IRestResponse> CreateNotificationEndpointWithIRestResponseAsync (PostNotificationEndpoint postNotificationEndpoint, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'postNotificationEndpoint' is set
             if (postNotificationEndpoint == null)
@@ -683,7 +703,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -812,10 +832,11 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="postNotificationEndpoint">Notification endpoint to create</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of NotificationEndpoint</returns>
-        public async System.Threading.Tasks.Task<NotificationEndpoint> CreateNotificationEndpointAsync (PostNotificationEndpoint postNotificationEndpoint)
+        public async System.Threading.Tasks.Task<NotificationEndpoint> CreateNotificationEndpointAsync (PostNotificationEndpoint postNotificationEndpoint, CancellationToken cancellationToken = default)
         {
-             ApiResponse<NotificationEndpoint> localVarResponse = await CreateNotificationEndpointAsyncWithHttpInfo(postNotificationEndpoint).ConfigureAwait(false);
+             ApiResponse<NotificationEndpoint> localVarResponse = await CreateNotificationEndpointAsyncWithHttpInfo(postNotificationEndpoint, cancellationToken).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -825,11 +846,12 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="postNotificationEndpoint">Notification endpoint to create</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (NotificationEndpoint)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<NotificationEndpoint>> CreateNotificationEndpointAsyncWithHttpInfo (PostNotificationEndpoint postNotificationEndpoint)
+        public async System.Threading.Tasks.Task<ApiResponse<NotificationEndpoint>> CreateNotificationEndpointAsyncWithHttpInfo (PostNotificationEndpoint postNotificationEndpoint, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await CreateNotificationEndpointAsyncWithIRestResponse(postNotificationEndpoint).ConfigureAwait(false);
+            IRestResponse localVarResponse = await CreateNotificationEndpointAsyncWithIRestResponse(postNotificationEndpoint, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -849,8 +871,9 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="postNotificationEndpoint">Notification endpoint to create</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse (NotificationEndpoint)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> CreateNotificationEndpointAsyncWithIRestResponse (PostNotificationEndpoint postNotificationEndpoint)
+        public async System.Threading.Tasks.Task<IRestResponse> CreateNotificationEndpointAsyncWithIRestResponse (PostNotificationEndpoint postNotificationEndpoint, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'postNotificationEndpoint' is set
             if (postNotificationEndpoint == null)
@@ -892,7 +915,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -978,8 +1001,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="endpointID">The notification endpoint ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> DeleteNotificationEndpointsIDWithIRestResponseAsync (string endpointID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> DeleteNotificationEndpointsIDWithIRestResponseAsync (string endpointID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'endpointID' is set
             if (endpointID == null)
@@ -1014,7 +1038,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -1132,10 +1156,11 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="endpointID">The notification endpoint ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of void</returns>
-        public System.Threading.Tasks.Task DeleteNotificationEndpointsIDAsync (string endpointID, string zapTraceSpan = null)
+        public System.Threading.Tasks.Task DeleteNotificationEndpointsIDAsync (string endpointID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
-             return DeleteNotificationEndpointsIDAsyncWithHttpInfo(endpointID, zapTraceSpan);
+             return DeleteNotificationEndpointsIDAsyncWithHttpInfo(endpointID, zapTraceSpan, cancellationToken);
 
         }
 
@@ -1145,11 +1170,12 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="endpointID">The notification endpoint ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteNotificationEndpointsIDAsyncWithHttpInfo (string endpointID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteNotificationEndpointsIDAsyncWithHttpInfo (string endpointID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await DeleteNotificationEndpointsIDAsyncWithIRestResponse(endpointID, zapTraceSpan).ConfigureAwait(false);
+            IRestResponse localVarResponse = await DeleteNotificationEndpointsIDAsyncWithIRestResponse(endpointID, zapTraceSpan, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -1170,8 +1196,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="endpointID">The notification endpoint ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> DeleteNotificationEndpointsIDAsyncWithIRestResponse (string endpointID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> DeleteNotificationEndpointsIDAsyncWithIRestResponse (string endpointID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'endpointID' is set
             if (endpointID == null)
@@ -1206,7 +1233,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -1299,8 +1326,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="endpointID">The notification endpoint ID.</param>
         /// <param name="labelID">The ID of the label to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> DeleteNotificationEndpointsIDLabelsIDWithIRestResponseAsync (string endpointID, string labelID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> DeleteNotificationEndpointsIDLabelsIDWithIRestResponseAsync (string endpointID, string labelID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'endpointID' is set
             if (endpointID == null)
@@ -1339,7 +1367,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -1468,10 +1496,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="endpointID">The notification endpoint ID.</param>
         /// <param name="labelID">The ID of the label to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of void</returns>
-        public System.Threading.Tasks.Task DeleteNotificationEndpointsIDLabelsIDAsync (string endpointID, string labelID, string zapTraceSpan = null)
+        public System.Threading.Tasks.Task DeleteNotificationEndpointsIDLabelsIDAsync (string endpointID, string labelID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
-             return DeleteNotificationEndpointsIDLabelsIDAsyncWithHttpInfo(endpointID, labelID, zapTraceSpan);
+             return DeleteNotificationEndpointsIDLabelsIDAsyncWithHttpInfo(endpointID, labelID, zapTraceSpan, cancellationToken);
 
         }
 
@@ -1482,11 +1511,12 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="endpointID">The notification endpoint ID.</param>
         /// <param name="labelID">The ID of the label to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteNotificationEndpointsIDLabelsIDAsyncWithHttpInfo (string endpointID, string labelID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteNotificationEndpointsIDLabelsIDAsyncWithHttpInfo (string endpointID, string labelID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await DeleteNotificationEndpointsIDLabelsIDAsyncWithIRestResponse(endpointID, labelID, zapTraceSpan).ConfigureAwait(false);
+            IRestResponse localVarResponse = await DeleteNotificationEndpointsIDLabelsIDAsyncWithIRestResponse(endpointID, labelID, zapTraceSpan, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -1508,8 +1538,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="endpointID">The notification endpoint ID.</param>
         /// <param name="labelID">The ID of the label to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> DeleteNotificationEndpointsIDLabelsIDAsyncWithIRestResponse (string endpointID, string labelID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> DeleteNotificationEndpointsIDLabelsIDAsyncWithIRestResponse (string endpointID, string labelID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'endpointID' is set
             if (endpointID == null)
@@ -1548,7 +1579,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -1643,8 +1674,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of NotificationEndpoints</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> GetNotificationEndpointsWithIRestResponseAsync (string orgID, string zapTraceSpan = null, int? offset = null, int? limit = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetNotificationEndpointsWithIRestResponseAsync (string orgID, string zapTraceSpan = null, int? offset = null, int? limit = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'orgID' is set
             if (orgID == null)
@@ -1681,7 +1713,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -1809,10 +1841,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of NotificationEndpoints</returns>
-        public async System.Threading.Tasks.Task<NotificationEndpoints> GetNotificationEndpointsAsync (string orgID, string zapTraceSpan = null, int? offset = null, int? limit = null)
+        public async System.Threading.Tasks.Task<NotificationEndpoints> GetNotificationEndpointsAsync (string orgID, string zapTraceSpan = null, int? offset = null, int? limit = null, CancellationToken cancellationToken = default)
         {
-             ApiResponse<NotificationEndpoints> localVarResponse = await GetNotificationEndpointsAsyncWithHttpInfo(orgID, zapTraceSpan, offset, limit).ConfigureAwait(false);
+             ApiResponse<NotificationEndpoints> localVarResponse = await GetNotificationEndpointsAsyncWithHttpInfo(orgID, zapTraceSpan, offset, limit, cancellationToken).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -1825,11 +1858,12 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (NotificationEndpoints)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<NotificationEndpoints>> GetNotificationEndpointsAsyncWithHttpInfo (string orgID, string zapTraceSpan = null, int? offset = null, int? limit = null)
+        public async System.Threading.Tasks.Task<ApiResponse<NotificationEndpoints>> GetNotificationEndpointsAsyncWithHttpInfo (string orgID, string zapTraceSpan = null, int? offset = null, int? limit = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await GetNotificationEndpointsAsyncWithIRestResponse(orgID, zapTraceSpan, offset, limit).ConfigureAwait(false);
+            IRestResponse localVarResponse = await GetNotificationEndpointsAsyncWithIRestResponse(orgID, zapTraceSpan, offset, limit, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -1852,8 +1886,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="offset"> (optional)</param>
         /// <param name="limit"> (optional, default to 20)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse (NotificationEndpoints)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> GetNotificationEndpointsAsyncWithIRestResponse (string orgID, string zapTraceSpan = null, int? offset = null, int? limit = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetNotificationEndpointsAsyncWithIRestResponse (string orgID, string zapTraceSpan = null, int? offset = null, int? limit = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'orgID' is set
             if (orgID == null)
@@ -1890,7 +1925,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -1977,8 +2012,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="endpointID">The notification endpoint ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of NotificationEndpoint</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> GetNotificationEndpointsIDWithIRestResponseAsync (string endpointID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetNotificationEndpointsIDWithIRestResponseAsync (string endpointID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'endpointID' is set
             if (endpointID == null)
@@ -2013,7 +2049,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -2131,10 +2167,11 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="endpointID">The notification endpoint ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of NotificationEndpoint</returns>
-        public async System.Threading.Tasks.Task<NotificationEndpoint> GetNotificationEndpointsIDAsync (string endpointID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<NotificationEndpoint> GetNotificationEndpointsIDAsync (string endpointID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
-             ApiResponse<NotificationEndpoint> localVarResponse = await GetNotificationEndpointsIDAsyncWithHttpInfo(endpointID, zapTraceSpan).ConfigureAwait(false);
+             ApiResponse<NotificationEndpoint> localVarResponse = await GetNotificationEndpointsIDAsyncWithHttpInfo(endpointID, zapTraceSpan, cancellationToken).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -2145,11 +2182,12 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="endpointID">The notification endpoint ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (NotificationEndpoint)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<NotificationEndpoint>> GetNotificationEndpointsIDAsyncWithHttpInfo (string endpointID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<NotificationEndpoint>> GetNotificationEndpointsIDAsyncWithHttpInfo (string endpointID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await GetNotificationEndpointsIDAsyncWithIRestResponse(endpointID, zapTraceSpan).ConfigureAwait(false);
+            IRestResponse localVarResponse = await GetNotificationEndpointsIDAsyncWithIRestResponse(endpointID, zapTraceSpan, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -2170,8 +2208,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="endpointID">The notification endpoint ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse (NotificationEndpoint)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> GetNotificationEndpointsIDAsyncWithIRestResponse (string endpointID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetNotificationEndpointsIDAsyncWithIRestResponse (string endpointID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'endpointID' is set
             if (endpointID == null)
@@ -2206,7 +2245,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -2293,8 +2332,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="endpointID">The notification endpoint ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of LabelsResponse</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> GetNotificationEndpointsIDLabelsWithIRestResponseAsync (string endpointID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetNotificationEndpointsIDLabelsWithIRestResponseAsync (string endpointID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'endpointID' is set
             if (endpointID == null)
@@ -2329,7 +2369,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -2447,10 +2487,11 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="endpointID">The notification endpoint ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of LabelsResponse</returns>
-        public async System.Threading.Tasks.Task<LabelsResponse> GetNotificationEndpointsIDLabelsAsync (string endpointID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<LabelsResponse> GetNotificationEndpointsIDLabelsAsync (string endpointID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
-             ApiResponse<LabelsResponse> localVarResponse = await GetNotificationEndpointsIDLabelsAsyncWithHttpInfo(endpointID, zapTraceSpan).ConfigureAwait(false);
+             ApiResponse<LabelsResponse> localVarResponse = await GetNotificationEndpointsIDLabelsAsyncWithHttpInfo(endpointID, zapTraceSpan, cancellationToken).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -2461,11 +2502,12 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="endpointID">The notification endpoint ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (LabelsResponse)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<LabelsResponse>> GetNotificationEndpointsIDLabelsAsyncWithHttpInfo (string endpointID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<LabelsResponse>> GetNotificationEndpointsIDLabelsAsyncWithHttpInfo (string endpointID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await GetNotificationEndpointsIDLabelsAsyncWithIRestResponse(endpointID, zapTraceSpan).ConfigureAwait(false);
+            IRestResponse localVarResponse = await GetNotificationEndpointsIDLabelsAsyncWithIRestResponse(endpointID, zapTraceSpan, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -2486,8 +2528,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="endpointID">The notification endpoint ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse (LabelsResponse)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> GetNotificationEndpointsIDLabelsAsyncWithIRestResponse (string endpointID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetNotificationEndpointsIDLabelsAsyncWithIRestResponse (string endpointID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'endpointID' is set
             if (endpointID == null)
@@ -2522,7 +2565,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -2624,8 +2667,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="endpointID">The notification endpoint ID.</param>
         /// <param name="notificationEndpointUpdate">Check update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of NotificationEndpoint</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> PatchNotificationEndpointsIDWithIRestResponseAsync (string endpointID, NotificationEndpointUpdate notificationEndpointUpdate, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PatchNotificationEndpointsIDWithIRestResponseAsync (string endpointID, NotificationEndpointUpdate notificationEndpointUpdate, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'endpointID' is set
             if (endpointID == null)
@@ -2672,7 +2716,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -2817,10 +2861,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="endpointID">The notification endpoint ID.</param>
         /// <param name="notificationEndpointUpdate">Check update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of NotificationEndpoint</returns>
-        public async System.Threading.Tasks.Task<NotificationEndpoint> PatchNotificationEndpointsIDAsync (string endpointID, NotificationEndpointUpdate notificationEndpointUpdate, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<NotificationEndpoint> PatchNotificationEndpointsIDAsync (string endpointID, NotificationEndpointUpdate notificationEndpointUpdate, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
-             ApiResponse<NotificationEndpoint> localVarResponse = await PatchNotificationEndpointsIDAsyncWithHttpInfo(endpointID, notificationEndpointUpdate, zapTraceSpan).ConfigureAwait(false);
+             ApiResponse<NotificationEndpoint> localVarResponse = await PatchNotificationEndpointsIDAsyncWithHttpInfo(endpointID, notificationEndpointUpdate, zapTraceSpan, cancellationToken).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -2832,11 +2877,12 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="endpointID">The notification endpoint ID.</param>
         /// <param name="notificationEndpointUpdate">Check update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (NotificationEndpoint)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<NotificationEndpoint>> PatchNotificationEndpointsIDAsyncWithHttpInfo (string endpointID, NotificationEndpointUpdate notificationEndpointUpdate, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<NotificationEndpoint>> PatchNotificationEndpointsIDAsyncWithHttpInfo (string endpointID, NotificationEndpointUpdate notificationEndpointUpdate, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await PatchNotificationEndpointsIDAsyncWithIRestResponse(endpointID, notificationEndpointUpdate, zapTraceSpan).ConfigureAwait(false);
+            IRestResponse localVarResponse = await PatchNotificationEndpointsIDAsyncWithIRestResponse(endpointID, notificationEndpointUpdate, zapTraceSpan, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -2858,8 +2904,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="endpointID">The notification endpoint ID.</param>
         /// <param name="notificationEndpointUpdate">Check update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse (NotificationEndpoint)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> PatchNotificationEndpointsIDAsyncWithIRestResponse (string endpointID, NotificationEndpointUpdate notificationEndpointUpdate, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PatchNotificationEndpointsIDAsyncWithIRestResponse (string endpointID, NotificationEndpointUpdate notificationEndpointUpdate, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'endpointID' is set
             if (endpointID == null)
@@ -2906,7 +2953,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -3008,8 +3055,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="endpointID">The notification endpoint ID.</param>
         /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of LabelResponse</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> PostNotificationEndpointIDLabelsWithIRestResponseAsync (string endpointID, LabelMapping labelMapping, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PostNotificationEndpointIDLabelsWithIRestResponseAsync (string endpointID, LabelMapping labelMapping, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'endpointID' is set
             if (endpointID == null)
@@ -3056,7 +3104,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -3201,10 +3249,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="endpointID">The notification endpoint ID.</param>
         /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of LabelResponse</returns>
-        public async System.Threading.Tasks.Task<LabelResponse> PostNotificationEndpointIDLabelsAsync (string endpointID, LabelMapping labelMapping, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<LabelResponse> PostNotificationEndpointIDLabelsAsync (string endpointID, LabelMapping labelMapping, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
-             ApiResponse<LabelResponse> localVarResponse = await PostNotificationEndpointIDLabelsAsyncWithHttpInfo(endpointID, labelMapping, zapTraceSpan).ConfigureAwait(false);
+             ApiResponse<LabelResponse> localVarResponse = await PostNotificationEndpointIDLabelsAsyncWithHttpInfo(endpointID, labelMapping, zapTraceSpan, cancellationToken).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -3216,11 +3265,12 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="endpointID">The notification endpoint ID.</param>
         /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (LabelResponse)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<LabelResponse>> PostNotificationEndpointIDLabelsAsyncWithHttpInfo (string endpointID, LabelMapping labelMapping, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<LabelResponse>> PostNotificationEndpointIDLabelsAsyncWithHttpInfo (string endpointID, LabelMapping labelMapping, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await PostNotificationEndpointIDLabelsAsyncWithIRestResponse(endpointID, labelMapping, zapTraceSpan).ConfigureAwait(false);
+            IRestResponse localVarResponse = await PostNotificationEndpointIDLabelsAsyncWithIRestResponse(endpointID, labelMapping, zapTraceSpan, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -3242,8 +3292,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="endpointID">The notification endpoint ID.</param>
         /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse (LabelResponse)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> PostNotificationEndpointIDLabelsAsyncWithIRestResponse (string endpointID, LabelMapping labelMapping, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PostNotificationEndpointIDLabelsAsyncWithIRestResponse (string endpointID, LabelMapping labelMapping, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'endpointID' is set
             if (endpointID == null)
@@ -3290,7 +3341,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -3392,8 +3443,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="endpointID">The notification endpoint ID.</param>
         /// <param name="notificationEndpoint">A new notification endpoint to replace the existing endpoint with</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of NotificationEndpoint</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> PutNotificationEndpointsIDWithIRestResponseAsync (string endpointID, NotificationEndpoint notificationEndpoint, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PutNotificationEndpointsIDWithIRestResponseAsync (string endpointID, NotificationEndpoint notificationEndpoint, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'endpointID' is set
             if (endpointID == null)
@@ -3440,7 +3492,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.PUT, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -3585,10 +3637,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="endpointID">The notification endpoint ID.</param>
         /// <param name="notificationEndpoint">A new notification endpoint to replace the existing endpoint with</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of NotificationEndpoint</returns>
-        public async System.Threading.Tasks.Task<NotificationEndpoint> PutNotificationEndpointsIDAsync (string endpointID, NotificationEndpoint notificationEndpoint, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<NotificationEndpoint> PutNotificationEndpointsIDAsync (string endpointID, NotificationEndpoint notificationEndpoint, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
-             ApiResponse<NotificationEndpoint> localVarResponse = await PutNotificationEndpointsIDAsyncWithHttpInfo(endpointID, notificationEndpoint, zapTraceSpan).ConfigureAwait(false);
+             ApiResponse<NotificationEndpoint> localVarResponse = await PutNotificationEndpointsIDAsyncWithHttpInfo(endpointID, notificationEndpoint, zapTraceSpan, cancellationToken).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -3600,11 +3653,12 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="endpointID">The notification endpoint ID.</param>
         /// <param name="notificationEndpoint">A new notification endpoint to replace the existing endpoint with</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (NotificationEndpoint)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<NotificationEndpoint>> PutNotificationEndpointsIDAsyncWithHttpInfo (string endpointID, NotificationEndpoint notificationEndpoint, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<NotificationEndpoint>> PutNotificationEndpointsIDAsyncWithHttpInfo (string endpointID, NotificationEndpoint notificationEndpoint, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await PutNotificationEndpointsIDAsyncWithIRestResponse(endpointID, notificationEndpoint, zapTraceSpan).ConfigureAwait(false);
+            IRestResponse localVarResponse = await PutNotificationEndpointsIDAsyncWithIRestResponse(endpointID, notificationEndpoint, zapTraceSpan, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -3626,8 +3680,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="endpointID">The notification endpoint ID.</param>
         /// <param name="notificationEndpoint">A new notification endpoint to replace the existing endpoint with</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse (NotificationEndpoint)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> PutNotificationEndpointsIDAsyncWithIRestResponse (string endpointID, NotificationEndpoint notificationEndpoint, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PutNotificationEndpointsIDAsyncWithIRestResponse (string endpointID, NotificationEndpoint notificationEndpoint, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'endpointID' is set
             if (endpointID == null)
@@ -3674,7 +3729,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.PUT, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {

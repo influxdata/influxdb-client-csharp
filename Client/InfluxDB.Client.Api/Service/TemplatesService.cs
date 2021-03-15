@@ -12,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading;
 using RestSharp;
 using InfluxDB.Client.Api.Client;
 using InfluxDB.Client.Api.Domain;
@@ -227,8 +228,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="templateID">The template ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task DeleteDocumentsTemplatesIDAsync (string templateID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task DeleteDocumentsTemplatesIDAsync (string templateID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Delete a template
@@ -239,8 +241,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="templateID">The template ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> DeleteDocumentsTemplatesIDAsyncWithHttpInfo (string templateID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<Object>> DeleteDocumentsTemplatesIDAsyncWithHttpInfo (string templateID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
         /// <summary>
         /// Delete a label from a template
         /// </summary>
@@ -251,8 +254,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="templateID">The template ID.</param>
         /// <param name="labelID">The label ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task DeleteDocumentsTemplatesIDLabelsIDAsync (string templateID, string labelID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task DeleteDocumentsTemplatesIDLabelsIDAsync (string templateID, string labelID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Delete a label from a template
@@ -264,8 +268,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="templateID">The template ID.</param>
         /// <param name="labelID">The label ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> DeleteDocumentsTemplatesIDLabelsIDAsyncWithHttpInfo (string templateID, string labelID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<Object>> DeleteDocumentsTemplatesIDLabelsIDAsyncWithHttpInfo (string templateID, string labelID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
         /// <summary>
         /// 
         /// </summary>
@@ -276,8 +281,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="org">Specifies the name of the organization of the template. (optional)</param>
         /// <param name="orgID">Specifies the organization ID of the template. (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of Documents</returns>
-        System.Threading.Tasks.Task<Documents> GetDocumentsTemplatesAsync (string zapTraceSpan = null, string org = null, string orgID = null);
+        System.Threading.Tasks.Task<Documents> GetDocumentsTemplatesAsync (string zapTraceSpan = null, string org = null, string orgID = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// 
@@ -289,8 +295,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="org">Specifies the name of the organization of the template. (optional)</param>
         /// <param name="orgID">Specifies the organization ID of the template. (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (Documents)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Documents>> GetDocumentsTemplatesAsyncWithHttpInfo (string zapTraceSpan = null, string org = null, string orgID = null);
+        System.Threading.Tasks.Task<ApiResponse<Documents>> GetDocumentsTemplatesAsyncWithHttpInfo (string zapTraceSpan = null, string org = null, string orgID = null, CancellationToken cancellationToken = default);
         /// <summary>
         /// 
         /// </summary>
@@ -300,8 +307,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="templateID">The template ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of Document</returns>
-        System.Threading.Tasks.Task<Document> GetDocumentsTemplatesIDAsync (string templateID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<Document> GetDocumentsTemplatesIDAsync (string templateID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// 
@@ -312,8 +320,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="templateID">The template ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (Document)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Document>> GetDocumentsTemplatesIDAsyncWithHttpInfo (string templateID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<Document>> GetDocumentsTemplatesIDAsyncWithHttpInfo (string templateID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
         /// <summary>
         /// List all labels for a template
         /// </summary>
@@ -323,8 +332,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="templateID">The template ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of LabelsResponse</returns>
-        System.Threading.Tasks.Task<LabelsResponse> GetDocumentsTemplatesIDLabelsAsync (string templateID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<LabelsResponse> GetDocumentsTemplatesIDLabelsAsync (string templateID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// List all labels for a template
@@ -335,8 +345,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="templateID">The template ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (LabelsResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<LabelsResponse>> GetDocumentsTemplatesIDLabelsAsyncWithHttpInfo (string templateID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<LabelsResponse>> GetDocumentsTemplatesIDLabelsAsyncWithHttpInfo (string templateID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
         /// <summary>
         /// Create a template
         /// </summary>
@@ -346,8 +357,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="documentCreate">Template that will be created</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of Document</returns>
-        System.Threading.Tasks.Task<Document> PostDocumentsTemplatesAsync (DocumentCreate documentCreate, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<Document> PostDocumentsTemplatesAsync (DocumentCreate documentCreate, string zapTraceSpan = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Create a template
@@ -358,8 +370,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="documentCreate">Template that will be created</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (Document)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Document>> PostDocumentsTemplatesAsyncWithHttpInfo (DocumentCreate documentCreate, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<Document>> PostDocumentsTemplatesAsyncWithHttpInfo (DocumentCreate documentCreate, string zapTraceSpan = null, CancellationToken cancellationToken = default);
         /// <summary>
         /// Add a label to a template
         /// </summary>
@@ -370,8 +383,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="templateID">The template ID.</param>
         /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of LabelResponse</returns>
-        System.Threading.Tasks.Task<LabelResponse> PostDocumentsTemplatesIDLabelsAsync (string templateID, LabelMapping labelMapping, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<LabelResponse> PostDocumentsTemplatesIDLabelsAsync (string templateID, LabelMapping labelMapping, string zapTraceSpan = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Add a label to a template
@@ -383,8 +397,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="templateID">The template ID.</param>
         /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (LabelResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<LabelResponse>> PostDocumentsTemplatesIDLabelsAsyncWithHttpInfo (string templateID, LabelMapping labelMapping, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<LabelResponse>> PostDocumentsTemplatesIDLabelsAsyncWithHttpInfo (string templateID, LabelMapping labelMapping, string zapTraceSpan = null, CancellationToken cancellationToken = default);
         /// <summary>
         /// 
         /// </summary>
@@ -395,8 +410,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="templateID">The template ID.</param>
         /// <param name="documentUpdate">Template that will be updated</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of Document</returns>
-        System.Threading.Tasks.Task<Document> PutDocumentsTemplatesIDAsync (string templateID, DocumentUpdate documentUpdate, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<Document> PutDocumentsTemplatesIDAsync (string templateID, DocumentUpdate documentUpdate, string zapTraceSpan = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// 
@@ -408,8 +424,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="templateID">The template ID.</param>
         /// <param name="documentUpdate">Template that will be updated</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (Document)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Document>> PutDocumentsTemplatesIDAsyncWithHttpInfo (string templateID, DocumentUpdate documentUpdate, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<Document>> PutDocumentsTemplatesIDAsyncWithHttpInfo (string templateID, DocumentUpdate documentUpdate, string zapTraceSpan = null, CancellationToken cancellationToken = default);
         #endregion Asynchronous Operations
     }
 
@@ -585,8 +602,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="templateID">The template ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> DeleteDocumentsTemplatesIDWithIRestResponseAsync (string templateID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> DeleteDocumentsTemplatesIDWithIRestResponseAsync (string templateID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'templateID' is set
             if (templateID == null)
@@ -621,7 +639,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -739,10 +757,11 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="templateID">The template ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of void</returns>
-        public System.Threading.Tasks.Task DeleteDocumentsTemplatesIDAsync (string templateID, string zapTraceSpan = null)
+        public System.Threading.Tasks.Task DeleteDocumentsTemplatesIDAsync (string templateID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
-             return DeleteDocumentsTemplatesIDAsyncWithHttpInfo(templateID, zapTraceSpan);
+             return DeleteDocumentsTemplatesIDAsyncWithHttpInfo(templateID, zapTraceSpan, cancellationToken);
 
         }
 
@@ -752,11 +771,12 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="templateID">The template ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteDocumentsTemplatesIDAsyncWithHttpInfo (string templateID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteDocumentsTemplatesIDAsyncWithHttpInfo (string templateID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await DeleteDocumentsTemplatesIDAsyncWithIRestResponse(templateID, zapTraceSpan).ConfigureAwait(false);
+            IRestResponse localVarResponse = await DeleteDocumentsTemplatesIDAsyncWithIRestResponse(templateID, zapTraceSpan, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -777,8 +797,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="templateID">The template ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> DeleteDocumentsTemplatesIDAsyncWithIRestResponse (string templateID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> DeleteDocumentsTemplatesIDAsyncWithIRestResponse (string templateID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'templateID' is set
             if (templateID == null)
@@ -813,7 +834,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -906,8 +927,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="templateID">The template ID.</param>
         /// <param name="labelID">The label ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> DeleteDocumentsTemplatesIDLabelsIDWithIRestResponseAsync (string templateID, string labelID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> DeleteDocumentsTemplatesIDLabelsIDWithIRestResponseAsync (string templateID, string labelID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'templateID' is set
             if (templateID == null)
@@ -946,7 +968,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -1075,10 +1097,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="templateID">The template ID.</param>
         /// <param name="labelID">The label ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of void</returns>
-        public System.Threading.Tasks.Task DeleteDocumentsTemplatesIDLabelsIDAsync (string templateID, string labelID, string zapTraceSpan = null)
+        public System.Threading.Tasks.Task DeleteDocumentsTemplatesIDLabelsIDAsync (string templateID, string labelID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
-             return DeleteDocumentsTemplatesIDLabelsIDAsyncWithHttpInfo(templateID, labelID, zapTraceSpan);
+             return DeleteDocumentsTemplatesIDLabelsIDAsyncWithHttpInfo(templateID, labelID, zapTraceSpan, cancellationToken);
 
         }
 
@@ -1089,11 +1112,12 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="templateID">The template ID.</param>
         /// <param name="labelID">The label ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteDocumentsTemplatesIDLabelsIDAsyncWithHttpInfo (string templateID, string labelID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteDocumentsTemplatesIDLabelsIDAsyncWithHttpInfo (string templateID, string labelID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await DeleteDocumentsTemplatesIDLabelsIDAsyncWithIRestResponse(templateID, labelID, zapTraceSpan).ConfigureAwait(false);
+            IRestResponse localVarResponse = await DeleteDocumentsTemplatesIDLabelsIDAsyncWithIRestResponse(templateID, labelID, zapTraceSpan, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -1115,8 +1139,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="templateID">The template ID.</param>
         /// <param name="labelID">The label ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> DeleteDocumentsTemplatesIDLabelsIDAsyncWithIRestResponse (string templateID, string labelID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> DeleteDocumentsTemplatesIDLabelsIDAsyncWithIRestResponse (string templateID, string labelID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'templateID' is set
             if (templateID == null)
@@ -1155,7 +1180,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -1243,8 +1268,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="org">Specifies the name of the organization of the template. (optional)</param>
         /// <param name="orgID">Specifies the organization ID of the template. (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of Documents</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> GetDocumentsTemplatesWithIRestResponseAsync (string zapTraceSpan = null, string org = null, string orgID = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetDocumentsTemplatesWithIRestResponseAsync (string zapTraceSpan = null, string org = null, string orgID = null, CancellationToken cancellationToken = default)
         {
 
             var localVarPath = "/api/v2/documents/templates";
@@ -1277,7 +1303,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -1394,10 +1420,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="org">Specifies the name of the organization of the template. (optional)</param>
         /// <param name="orgID">Specifies the organization ID of the template. (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of Documents</returns>
-        public async System.Threading.Tasks.Task<Documents> GetDocumentsTemplatesAsync (string zapTraceSpan = null, string org = null, string orgID = null)
+        public async System.Threading.Tasks.Task<Documents> GetDocumentsTemplatesAsync (string zapTraceSpan = null, string org = null, string orgID = null, CancellationToken cancellationToken = default)
         {
-             ApiResponse<Documents> localVarResponse = await GetDocumentsTemplatesAsyncWithHttpInfo(zapTraceSpan, org, orgID).ConfigureAwait(false);
+             ApiResponse<Documents> localVarResponse = await GetDocumentsTemplatesAsyncWithHttpInfo(zapTraceSpan, org, orgID, cancellationToken).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -1409,11 +1436,12 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="org">Specifies the name of the organization of the template. (optional)</param>
         /// <param name="orgID">Specifies the organization ID of the template. (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (Documents)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Documents>> GetDocumentsTemplatesAsyncWithHttpInfo (string zapTraceSpan = null, string org = null, string orgID = null)
+        public async System.Threading.Tasks.Task<ApiResponse<Documents>> GetDocumentsTemplatesAsyncWithHttpInfo (string zapTraceSpan = null, string org = null, string orgID = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await GetDocumentsTemplatesAsyncWithIRestResponse(zapTraceSpan, org, orgID).ConfigureAwait(false);
+            IRestResponse localVarResponse = await GetDocumentsTemplatesAsyncWithIRestResponse(zapTraceSpan, org, orgID, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -1435,8 +1463,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="org">Specifies the name of the organization of the template. (optional)</param>
         /// <param name="orgID">Specifies the organization ID of the template. (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse (Documents)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> GetDocumentsTemplatesAsyncWithIRestResponse (string zapTraceSpan = null, string org = null, string orgID = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetDocumentsTemplatesAsyncWithIRestResponse (string zapTraceSpan = null, string org = null, string orgID = null, CancellationToken cancellationToken = default)
         {
 
             var localVarPath = "/api/v2/documents/templates";
@@ -1469,7 +1498,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -1556,8 +1585,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="templateID">The template ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of Document</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> GetDocumentsTemplatesIDWithIRestResponseAsync (string templateID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetDocumentsTemplatesIDWithIRestResponseAsync (string templateID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'templateID' is set
             if (templateID == null)
@@ -1592,7 +1622,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -1710,10 +1740,11 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="templateID">The template ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of Document</returns>
-        public async System.Threading.Tasks.Task<Document> GetDocumentsTemplatesIDAsync (string templateID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<Document> GetDocumentsTemplatesIDAsync (string templateID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
-             ApiResponse<Document> localVarResponse = await GetDocumentsTemplatesIDAsyncWithHttpInfo(templateID, zapTraceSpan).ConfigureAwait(false);
+             ApiResponse<Document> localVarResponse = await GetDocumentsTemplatesIDAsyncWithHttpInfo(templateID, zapTraceSpan, cancellationToken).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -1724,11 +1755,12 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="templateID">The template ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (Document)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Document>> GetDocumentsTemplatesIDAsyncWithHttpInfo (string templateID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<Document>> GetDocumentsTemplatesIDAsyncWithHttpInfo (string templateID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await GetDocumentsTemplatesIDAsyncWithIRestResponse(templateID, zapTraceSpan).ConfigureAwait(false);
+            IRestResponse localVarResponse = await GetDocumentsTemplatesIDAsyncWithIRestResponse(templateID, zapTraceSpan, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -1749,8 +1781,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="templateID">The template ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse (Document)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> GetDocumentsTemplatesIDAsyncWithIRestResponse (string templateID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetDocumentsTemplatesIDAsyncWithIRestResponse (string templateID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'templateID' is set
             if (templateID == null)
@@ -1785,7 +1818,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -1872,8 +1905,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="templateID">The template ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of LabelsResponse</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> GetDocumentsTemplatesIDLabelsWithIRestResponseAsync (string templateID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetDocumentsTemplatesIDLabelsWithIRestResponseAsync (string templateID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'templateID' is set
             if (templateID == null)
@@ -1908,7 +1942,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -2026,10 +2060,11 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="templateID">The template ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of LabelsResponse</returns>
-        public async System.Threading.Tasks.Task<LabelsResponse> GetDocumentsTemplatesIDLabelsAsync (string templateID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<LabelsResponse> GetDocumentsTemplatesIDLabelsAsync (string templateID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
-             ApiResponse<LabelsResponse> localVarResponse = await GetDocumentsTemplatesIDLabelsAsyncWithHttpInfo(templateID, zapTraceSpan).ConfigureAwait(false);
+             ApiResponse<LabelsResponse> localVarResponse = await GetDocumentsTemplatesIDLabelsAsyncWithHttpInfo(templateID, zapTraceSpan, cancellationToken).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -2040,11 +2075,12 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="templateID">The template ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (LabelsResponse)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<LabelsResponse>> GetDocumentsTemplatesIDLabelsAsyncWithHttpInfo (string templateID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<LabelsResponse>> GetDocumentsTemplatesIDLabelsAsyncWithHttpInfo (string templateID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await GetDocumentsTemplatesIDLabelsAsyncWithIRestResponse(templateID, zapTraceSpan).ConfigureAwait(false);
+            IRestResponse localVarResponse = await GetDocumentsTemplatesIDLabelsAsyncWithIRestResponse(templateID, zapTraceSpan, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -2065,8 +2101,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="templateID">The template ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse (LabelsResponse)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> GetDocumentsTemplatesIDLabelsAsyncWithIRestResponse (string templateID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetDocumentsTemplatesIDLabelsAsyncWithIRestResponse (string templateID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'templateID' is set
             if (templateID == null)
@@ -2101,7 +2138,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -2196,8 +2233,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="documentCreate">Template that will be created</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of Document</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> PostDocumentsTemplatesWithIRestResponseAsync (DocumentCreate documentCreate, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PostDocumentsTemplatesWithIRestResponseAsync (DocumentCreate documentCreate, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'documentCreate' is set
             if (documentCreate == null)
@@ -2240,7 +2278,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -2374,10 +2412,11 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="documentCreate">Template that will be created</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of Document</returns>
-        public async System.Threading.Tasks.Task<Document> PostDocumentsTemplatesAsync (DocumentCreate documentCreate, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<Document> PostDocumentsTemplatesAsync (DocumentCreate documentCreate, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
-             ApiResponse<Document> localVarResponse = await PostDocumentsTemplatesAsyncWithHttpInfo(documentCreate, zapTraceSpan).ConfigureAwait(false);
+             ApiResponse<Document> localVarResponse = await PostDocumentsTemplatesAsyncWithHttpInfo(documentCreate, zapTraceSpan, cancellationToken).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -2388,11 +2427,12 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="documentCreate">Template that will be created</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (Document)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Document>> PostDocumentsTemplatesAsyncWithHttpInfo (DocumentCreate documentCreate, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<Document>> PostDocumentsTemplatesAsyncWithHttpInfo (DocumentCreate documentCreate, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await PostDocumentsTemplatesAsyncWithIRestResponse(documentCreate, zapTraceSpan).ConfigureAwait(false);
+            IRestResponse localVarResponse = await PostDocumentsTemplatesAsyncWithIRestResponse(documentCreate, zapTraceSpan, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -2413,8 +2453,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="documentCreate">Template that will be created</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse (Document)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> PostDocumentsTemplatesAsyncWithIRestResponse (DocumentCreate documentCreate, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PostDocumentsTemplatesAsyncWithIRestResponse (DocumentCreate documentCreate, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'documentCreate' is set
             if (documentCreate == null)
@@ -2457,7 +2498,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -2559,8 +2600,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="templateID">The template ID.</param>
         /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of LabelResponse</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> PostDocumentsTemplatesIDLabelsWithIRestResponseAsync (string templateID, LabelMapping labelMapping, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PostDocumentsTemplatesIDLabelsWithIRestResponseAsync (string templateID, LabelMapping labelMapping, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'templateID' is set
             if (templateID == null)
@@ -2607,7 +2649,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -2752,10 +2794,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="templateID">The template ID.</param>
         /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of LabelResponse</returns>
-        public async System.Threading.Tasks.Task<LabelResponse> PostDocumentsTemplatesIDLabelsAsync (string templateID, LabelMapping labelMapping, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<LabelResponse> PostDocumentsTemplatesIDLabelsAsync (string templateID, LabelMapping labelMapping, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
-             ApiResponse<LabelResponse> localVarResponse = await PostDocumentsTemplatesIDLabelsAsyncWithHttpInfo(templateID, labelMapping, zapTraceSpan).ConfigureAwait(false);
+             ApiResponse<LabelResponse> localVarResponse = await PostDocumentsTemplatesIDLabelsAsyncWithHttpInfo(templateID, labelMapping, zapTraceSpan, cancellationToken).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -2767,11 +2810,12 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="templateID">The template ID.</param>
         /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (LabelResponse)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<LabelResponse>> PostDocumentsTemplatesIDLabelsAsyncWithHttpInfo (string templateID, LabelMapping labelMapping, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<LabelResponse>> PostDocumentsTemplatesIDLabelsAsyncWithHttpInfo (string templateID, LabelMapping labelMapping, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await PostDocumentsTemplatesIDLabelsAsyncWithIRestResponse(templateID, labelMapping, zapTraceSpan).ConfigureAwait(false);
+            IRestResponse localVarResponse = await PostDocumentsTemplatesIDLabelsAsyncWithIRestResponse(templateID, labelMapping, zapTraceSpan, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -2793,8 +2837,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="templateID">The template ID.</param>
         /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse (LabelResponse)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> PostDocumentsTemplatesIDLabelsAsyncWithIRestResponse (string templateID, LabelMapping labelMapping, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PostDocumentsTemplatesIDLabelsAsyncWithIRestResponse (string templateID, LabelMapping labelMapping, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'templateID' is set
             if (templateID == null)
@@ -2841,7 +2886,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -2943,8 +2988,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="templateID">The template ID.</param>
         /// <param name="documentUpdate">Template that will be updated</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of Document</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> PutDocumentsTemplatesIDWithIRestResponseAsync (string templateID, DocumentUpdate documentUpdate, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PutDocumentsTemplatesIDWithIRestResponseAsync (string templateID, DocumentUpdate documentUpdate, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'templateID' is set
             if (templateID == null)
@@ -2991,7 +3037,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.PUT, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -3136,10 +3182,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="templateID">The template ID.</param>
         /// <param name="documentUpdate">Template that will be updated</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of Document</returns>
-        public async System.Threading.Tasks.Task<Document> PutDocumentsTemplatesIDAsync (string templateID, DocumentUpdate documentUpdate, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<Document> PutDocumentsTemplatesIDAsync (string templateID, DocumentUpdate documentUpdate, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
-             ApiResponse<Document> localVarResponse = await PutDocumentsTemplatesIDAsyncWithHttpInfo(templateID, documentUpdate, zapTraceSpan).ConfigureAwait(false);
+             ApiResponse<Document> localVarResponse = await PutDocumentsTemplatesIDAsyncWithHttpInfo(templateID, documentUpdate, zapTraceSpan, cancellationToken).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -3151,11 +3198,12 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="templateID">The template ID.</param>
         /// <param name="documentUpdate">Template that will be updated</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (Document)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Document>> PutDocumentsTemplatesIDAsyncWithHttpInfo (string templateID, DocumentUpdate documentUpdate, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<Document>> PutDocumentsTemplatesIDAsyncWithHttpInfo (string templateID, DocumentUpdate documentUpdate, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await PutDocumentsTemplatesIDAsyncWithIRestResponse(templateID, documentUpdate, zapTraceSpan).ConfigureAwait(false);
+            IRestResponse localVarResponse = await PutDocumentsTemplatesIDAsyncWithIRestResponse(templateID, documentUpdate, zapTraceSpan, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -3177,8 +3225,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="templateID">The template ID.</param>
         /// <param name="documentUpdate">Template that will be updated</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse (Document)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> PutDocumentsTemplatesIDAsyncWithIRestResponse (string templateID, DocumentUpdate documentUpdate, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PutDocumentsTemplatesIDAsyncWithIRestResponse (string templateID, DocumentUpdate documentUpdate, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'templateID' is set
             if (templateID == null)
@@ -3225,7 +3274,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.PUT, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {

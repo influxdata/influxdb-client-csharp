@@ -12,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading;
 using RestSharp;
 using InfluxDB.Client.Api.Client;
 using InfluxDB.Client.Api.Domain;
@@ -55,8 +56,9 @@ namespace InfluxDB.Client.Api.Service
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of Ready</returns>
-        System.Threading.Tasks.Task<Ready> GetReadyAsync (string zapTraceSpan = null);
+        System.Threading.Tasks.Task<Ready> GetReadyAsync (string zapTraceSpan = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get the readiness of an instance at startup
@@ -66,8 +68,9 @@ namespace InfluxDB.Client.Api.Service
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (Ready)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Ready>> GetReadyAsyncWithHttpInfo (string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<Ready>> GetReadyAsyncWithHttpInfo (string zapTraceSpan = null, CancellationToken cancellationToken = default);
         #endregion Asynchronous Operations
     }
 
@@ -237,8 +240,9 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of Ready</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> GetReadyWithIRestResponseAsync (string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetReadyWithIRestResponseAsync (string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
 
             var localVarPath = "/ready";
@@ -269,7 +273,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -376,10 +380,11 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of Ready</returns>
-        public async System.Threading.Tasks.Task<Ready> GetReadyAsync (string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<Ready> GetReadyAsync (string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
-             ApiResponse<Ready> localVarResponse = await GetReadyAsyncWithHttpInfo(zapTraceSpan).ConfigureAwait(false);
+             ApiResponse<Ready> localVarResponse = await GetReadyAsyncWithHttpInfo(zapTraceSpan, cancellationToken).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -389,11 +394,12 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (Ready)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Ready>> GetReadyAsyncWithHttpInfo (string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<Ready>> GetReadyAsyncWithHttpInfo (string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await GetReadyAsyncWithIRestResponse(zapTraceSpan).ConfigureAwait(false);
+            IRestResponse localVarResponse = await GetReadyAsyncWithIRestResponse(zapTraceSpan, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -413,8 +419,9 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse (Ready)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> GetReadyAsyncWithIRestResponse (string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetReadyAsyncWithIRestResponse (string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
 
             var localVarPath = "/ready";
@@ -445,7 +452,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {

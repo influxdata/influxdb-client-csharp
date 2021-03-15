@@ -12,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading;
 using RestSharp;
 using InfluxDB.Client.Api.Client;
 using InfluxDB.Client.Api.Domain;
@@ -108,8 +109,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of SecretKeysResponse</returns>
-        System.Threading.Tasks.Task<SecretKeysResponse> GetOrgsIDSecretsAsync (string orgID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<SecretKeysResponse> GetOrgsIDSecretsAsync (string orgID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// List all secret keys for an organization
@@ -120,8 +122,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (SecretKeysResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<SecretKeysResponse>> GetOrgsIDSecretsAsyncWithHttpInfo (string orgID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<SecretKeysResponse>> GetOrgsIDSecretsAsyncWithHttpInfo (string orgID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
         /// <summary>
         /// Update secrets in an organization
         /// </summary>
@@ -132,8 +135,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">The organization ID.</param>
         /// <param name="requestBody">Secret key value pairs to update/add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task PatchOrgsIDSecretsAsync (string orgID, Dictionary<string, string> requestBody, string zapTraceSpan = null);
+        System.Threading.Tasks.Task PatchOrgsIDSecretsAsync (string orgID, Dictionary<string, string> requestBody, string zapTraceSpan = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Update secrets in an organization
@@ -145,8 +149,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">The organization ID.</param>
         /// <param name="requestBody">Secret key value pairs to update/add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> PatchOrgsIDSecretsAsyncWithHttpInfo (string orgID, Dictionary<string, string> requestBody, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<Object>> PatchOrgsIDSecretsAsyncWithHttpInfo (string orgID, Dictionary<string, string> requestBody, string zapTraceSpan = null, CancellationToken cancellationToken = default);
         /// <summary>
         /// Delete secrets from an organization
         /// </summary>
@@ -157,8 +162,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">The organization ID.</param>
         /// <param name="secretKeys">Secret key to delete</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task PostOrgsIDSecretsAsync (string orgID, SecretKeys secretKeys, string zapTraceSpan = null);
+        System.Threading.Tasks.Task PostOrgsIDSecretsAsync (string orgID, SecretKeys secretKeys, string zapTraceSpan = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Delete secrets from an organization
@@ -170,8 +176,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">The organization ID.</param>
         /// <param name="secretKeys">Secret key to delete</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> PostOrgsIDSecretsAsyncWithHttpInfo (string orgID, SecretKeys secretKeys, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<Object>> PostOrgsIDSecretsAsyncWithHttpInfo (string orgID, SecretKeys secretKeys, string zapTraceSpan = null, CancellationToken cancellationToken = default);
         #endregion Asynchronous Operations
     }
 
@@ -348,8 +355,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of SecretKeysResponse</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> GetOrgsIDSecretsWithIRestResponseAsync (string orgID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetOrgsIDSecretsWithIRestResponseAsync (string orgID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'orgID' is set
             if (orgID == null)
@@ -384,7 +392,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -502,10 +510,11 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of SecretKeysResponse</returns>
-        public async System.Threading.Tasks.Task<SecretKeysResponse> GetOrgsIDSecretsAsync (string orgID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<SecretKeysResponse> GetOrgsIDSecretsAsync (string orgID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
-             ApiResponse<SecretKeysResponse> localVarResponse = await GetOrgsIDSecretsAsyncWithHttpInfo(orgID, zapTraceSpan).ConfigureAwait(false);
+             ApiResponse<SecretKeysResponse> localVarResponse = await GetOrgsIDSecretsAsyncWithHttpInfo(orgID, zapTraceSpan, cancellationToken).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -516,11 +525,12 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (SecretKeysResponse)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<SecretKeysResponse>> GetOrgsIDSecretsAsyncWithHttpInfo (string orgID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<SecretKeysResponse>> GetOrgsIDSecretsAsyncWithHttpInfo (string orgID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await GetOrgsIDSecretsAsyncWithIRestResponse(orgID, zapTraceSpan).ConfigureAwait(false);
+            IRestResponse localVarResponse = await GetOrgsIDSecretsAsyncWithIRestResponse(orgID, zapTraceSpan, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -541,8 +551,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="orgID">The organization ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse (SecretKeysResponse)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> GetOrgsIDSecretsAsyncWithIRestResponse (string orgID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetOrgsIDSecretsAsyncWithIRestResponse (string orgID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'orgID' is set
             if (orgID == null)
@@ -577,7 +588,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -678,8 +689,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">The organization ID.</param>
         /// <param name="requestBody">Secret key value pairs to update/add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> PatchOrgsIDSecretsWithIRestResponseAsync (string orgID, Dictionary<string, string> requestBody, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PatchOrgsIDSecretsWithIRestResponseAsync (string orgID, Dictionary<string, string> requestBody, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'orgID' is set
             if (orgID == null)
@@ -726,7 +738,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -871,10 +883,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">The organization ID.</param>
         /// <param name="requestBody">Secret key value pairs to update/add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of void</returns>
-        public System.Threading.Tasks.Task PatchOrgsIDSecretsAsync (string orgID, Dictionary<string, string> requestBody, string zapTraceSpan = null)
+        public System.Threading.Tasks.Task PatchOrgsIDSecretsAsync (string orgID, Dictionary<string, string> requestBody, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
-             return PatchOrgsIDSecretsAsyncWithHttpInfo(orgID, requestBody, zapTraceSpan);
+             return PatchOrgsIDSecretsAsyncWithHttpInfo(orgID, requestBody, zapTraceSpan, cancellationToken);
 
         }
 
@@ -885,11 +898,12 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">The organization ID.</param>
         /// <param name="requestBody">Secret key value pairs to update/add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Object>> PatchOrgsIDSecretsAsyncWithHttpInfo (string orgID, Dictionary<string, string> requestBody, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<Object>> PatchOrgsIDSecretsAsyncWithHttpInfo (string orgID, Dictionary<string, string> requestBody, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await PatchOrgsIDSecretsAsyncWithIRestResponse(orgID, requestBody, zapTraceSpan).ConfigureAwait(false);
+            IRestResponse localVarResponse = await PatchOrgsIDSecretsAsyncWithIRestResponse(orgID, requestBody, zapTraceSpan, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -911,8 +925,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">The organization ID.</param>
         /// <param name="requestBody">Secret key value pairs to update/add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> PatchOrgsIDSecretsAsyncWithIRestResponse (string orgID, Dictionary<string, string> requestBody, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PatchOrgsIDSecretsAsyncWithIRestResponse (string orgID, Dictionary<string, string> requestBody, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'orgID' is set
             if (orgID == null)
@@ -959,7 +974,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -1060,8 +1075,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">The organization ID.</param>
         /// <param name="secretKeys">Secret key to delete</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> PostOrgsIDSecretsWithIRestResponseAsync (string orgID, SecretKeys secretKeys, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PostOrgsIDSecretsWithIRestResponseAsync (string orgID, SecretKeys secretKeys, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'orgID' is set
             if (orgID == null)
@@ -1108,7 +1124,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -1253,10 +1269,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">The organization ID.</param>
         /// <param name="secretKeys">Secret key to delete</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of void</returns>
-        public System.Threading.Tasks.Task PostOrgsIDSecretsAsync (string orgID, SecretKeys secretKeys, string zapTraceSpan = null)
+        public System.Threading.Tasks.Task PostOrgsIDSecretsAsync (string orgID, SecretKeys secretKeys, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
-             return PostOrgsIDSecretsAsyncWithHttpInfo(orgID, secretKeys, zapTraceSpan);
+             return PostOrgsIDSecretsAsyncWithHttpInfo(orgID, secretKeys, zapTraceSpan, cancellationToken);
 
         }
 
@@ -1267,11 +1284,12 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">The organization ID.</param>
         /// <param name="secretKeys">Secret key to delete</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Object>> PostOrgsIDSecretsAsyncWithHttpInfo (string orgID, SecretKeys secretKeys, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<Object>> PostOrgsIDSecretsAsyncWithHttpInfo (string orgID, SecretKeys secretKeys, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await PostOrgsIDSecretsAsyncWithIRestResponse(orgID, secretKeys, zapTraceSpan).ConfigureAwait(false);
+            IRestResponse localVarResponse = await PostOrgsIDSecretsAsyncWithIRestResponse(orgID, secretKeys, zapTraceSpan, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -1293,8 +1311,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">The organization ID.</param>
         /// <param name="secretKeys">Secret key to delete</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> PostOrgsIDSecretsAsyncWithIRestResponse (string orgID, SecretKeys secretKeys, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PostOrgsIDSecretsAsyncWithIRestResponse (string orgID, SecretKeys secretKeys, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'orgID' is set
             if (orgID == null)
@@ -1341,7 +1360,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {

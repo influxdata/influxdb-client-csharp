@@ -12,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading;
 using RestSharp;
 using InfluxDB.Client.Api.Client;
 using InfluxDB.Client.Api.Domain;
@@ -82,8 +83,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="accept">Specifies the return content format. (optional, default to application/json)</param>
         /// <param name="orgID">Specifies the ID of the destination organization for writes. If both &#x60;orgID&#x60; and &#x60;org&#x60; are specified, &#x60;org&#x60; takes precedence. (optional)</param>
         /// <param name="precision">The precision for the unix timestamps within the body line-protocol. (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task PostWriteAsync (string org, string bucket, byte[] body, string zapTraceSpan = null, string contentEncoding = null, string contentType = null, int? contentLength = null, string accept = null, string orgID = null, WritePrecision? precision = null);
+        System.Threading.Tasks.Task PostWriteAsync (string org, string bucket, byte[] body, string zapTraceSpan = null, string contentEncoding = null, string contentType = null, int? contentLength = null, string accept = null, string orgID = null, WritePrecision? precision = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Write time series data into InfluxDB
@@ -102,8 +104,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="accept">Specifies the return content format. (optional, default to application/json)</param>
         /// <param name="orgID">Specifies the ID of the destination organization for writes. If both &#x60;orgID&#x60; and &#x60;org&#x60; are specified, &#x60;org&#x60; takes precedence. (optional)</param>
         /// <param name="precision">The precision for the unix timestamps within the body line-protocol. (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> PostWriteAsyncWithHttpInfo (string org, string bucket, byte[] body, string zapTraceSpan = null, string contentEncoding = null, string contentType = null, int? contentLength = null, string accept = null, string orgID = null, WritePrecision? precision = null);
+        System.Threading.Tasks.Task<ApiResponse<Object>> PostWriteAsyncWithHttpInfo (string org, string bucket, byte[] body, string zapTraceSpan = null, string contentEncoding = null, string contentType = null, int? contentLength = null, string accept = null, string orgID = null, WritePrecision? precision = null, CancellationToken cancellationToken = default);
         #endregion Asynchronous Operations
     }
 
@@ -325,8 +328,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="accept">Specifies the return content format. (optional, default to application/json)</param>
         /// <param name="orgID">Specifies the ID of the destination organization for writes. If both &#x60;orgID&#x60; and &#x60;org&#x60; are specified, &#x60;org&#x60; takes precedence. (optional)</param>
         /// <param name="precision">The precision for the unix timestamps within the body line-protocol. (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> PostWriteWithIRestResponseAsync (string org, string bucket, byte[] body, string zapTraceSpan = null, string contentEncoding = null, string contentType = null, int? contentLength = null, string accept = null, string orgID = null, WritePrecision? precision = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PostWriteWithIRestResponseAsync (string org, string bucket, byte[] body, string zapTraceSpan = null, string contentEncoding = null, string contentType = null, int? contentLength = null, string accept = null, string orgID = null, WritePrecision? precision = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'org' is set
             if (org == null)
@@ -383,7 +387,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -569,10 +573,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="accept">Specifies the return content format. (optional, default to application/json)</param>
         /// <param name="orgID">Specifies the ID of the destination organization for writes. If both &#x60;orgID&#x60; and &#x60;org&#x60; are specified, &#x60;org&#x60; takes precedence. (optional)</param>
         /// <param name="precision">The precision for the unix timestamps within the body line-protocol. (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of void</returns>
-        public System.Threading.Tasks.Task PostWriteAsync (string org, string bucket, byte[] body, string zapTraceSpan = null, string contentEncoding = null, string contentType = null, int? contentLength = null, string accept = null, string orgID = null, WritePrecision? precision = null)
+        public System.Threading.Tasks.Task PostWriteAsync (string org, string bucket, byte[] body, string zapTraceSpan = null, string contentEncoding = null, string contentType = null, int? contentLength = null, string accept = null, string orgID = null, WritePrecision? precision = null, CancellationToken cancellationToken = default)
         {
-             return PostWriteAsyncWithHttpInfo(org, bucket, body, zapTraceSpan, contentEncoding, contentType, contentLength, accept, orgID, precision);
+             return PostWriteAsyncWithHttpInfo(org, bucket, body, zapTraceSpan, contentEncoding, contentType, contentLength, accept, orgID, precision, cancellationToken);
 
         }
 
@@ -590,11 +595,12 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="accept">Specifies the return content format. (optional, default to application/json)</param>
         /// <param name="orgID">Specifies the ID of the destination organization for writes. If both &#x60;orgID&#x60; and &#x60;org&#x60; are specified, &#x60;org&#x60; takes precedence. (optional)</param>
         /// <param name="precision">The precision for the unix timestamps within the body line-protocol. (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Object>> PostWriteAsyncWithHttpInfo (string org, string bucket, byte[] body, string zapTraceSpan = null, string contentEncoding = null, string contentType = null, int? contentLength = null, string accept = null, string orgID = null, WritePrecision? precision = null)
+        public async System.Threading.Tasks.Task<ApiResponse<Object>> PostWriteAsyncWithHttpInfo (string org, string bucket, byte[] body, string zapTraceSpan = null, string contentEncoding = null, string contentType = null, int? contentLength = null, string accept = null, string orgID = null, WritePrecision? precision = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await PostWriteAsyncWithIRestResponse(org, bucket, body, zapTraceSpan, contentEncoding, contentType, contentLength, accept, orgID, precision).ConfigureAwait(false);
+            IRestResponse localVarResponse = await PostWriteAsyncWithIRestResponse(org, bucket, body, zapTraceSpan, contentEncoding, contentType, contentLength, accept, orgID, precision, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -623,8 +629,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="accept">Specifies the return content format. (optional, default to application/json)</param>
         /// <param name="orgID">Specifies the ID of the destination organization for writes. If both &#x60;orgID&#x60; and &#x60;org&#x60; are specified, &#x60;org&#x60; takes precedence. (optional)</param>
         /// <param name="precision">The precision for the unix timestamps within the body line-protocol. (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> PostWriteAsyncWithIRestResponse (string org, string bucket, byte[] body, string zapTraceSpan = null, string contentEncoding = null, string contentType = null, int? contentLength = null, string accept = null, string orgID = null, WritePrecision? precision = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PostWriteAsyncWithIRestResponse (string org, string bucket, byte[] body, string zapTraceSpan = null, string contentEncoding = null, string contentType = null, int? contentLength = null, string accept = null, string orgID = null, WritePrecision? precision = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'org' is set
             if (org == null)
@@ -681,7 +688,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {

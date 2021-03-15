@@ -12,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading;
 using RestSharp;
 using InfluxDB.Client.Api.Client;
 using InfluxDB.Client.Api.Domain;
@@ -398,8 +399,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task DeleteTelegrafsIDAsync (string telegrafID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task DeleteTelegrafsIDAsync (string telegrafID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Delete a Telegraf config
@@ -410,8 +412,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> DeleteTelegrafsIDAsyncWithHttpInfo (string telegrafID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<Object>> DeleteTelegrafsIDAsyncWithHttpInfo (string telegrafID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
         /// <summary>
         /// Delete a label from a Telegraf config
         /// </summary>
@@ -422,8 +425,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="labelID">The label ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task DeleteTelegrafsIDLabelsIDAsync (string telegrafID, string labelID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task DeleteTelegrafsIDLabelsIDAsync (string telegrafID, string labelID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Delete a label from a Telegraf config
@@ -435,8 +439,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="labelID">The label ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> DeleteTelegrafsIDLabelsIDAsyncWithHttpInfo (string telegrafID, string labelID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<Object>> DeleteTelegrafsIDLabelsIDAsyncWithHttpInfo (string telegrafID, string labelID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
         /// <summary>
         /// Remove a member from a Telegraf config
         /// </summary>
@@ -447,8 +452,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="userID">The ID of the member to remove.</param>
         /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task DeleteTelegrafsIDMembersIDAsync (string userID, string telegrafID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task DeleteTelegrafsIDMembersIDAsync (string userID, string telegrafID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Remove a member from a Telegraf config
@@ -460,8 +466,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="userID">The ID of the member to remove.</param>
         /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> DeleteTelegrafsIDMembersIDAsyncWithHttpInfo (string userID, string telegrafID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<Object>> DeleteTelegrafsIDMembersIDAsyncWithHttpInfo (string userID, string telegrafID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
         /// <summary>
         /// Remove an owner from a Telegraf config
         /// </summary>
@@ -472,8 +479,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="userID">The ID of the owner to remove.</param>
         /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task DeleteTelegrafsIDOwnersIDAsync (string userID, string telegrafID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task DeleteTelegrafsIDOwnersIDAsync (string userID, string telegrafID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Remove an owner from a Telegraf config
@@ -485,8 +493,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="userID">The ID of the owner to remove.</param>
         /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> DeleteTelegrafsIDOwnersIDAsyncWithHttpInfo (string userID, string telegrafID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<Object>> DeleteTelegrafsIDOwnersIDAsyncWithHttpInfo (string userID, string telegrafID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
         /// <summary>
         /// 
         /// </summary>
@@ -496,8 +505,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="orgID">The organization ID the Telegraf config belongs to. (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of Telegrafs</returns>
-        System.Threading.Tasks.Task<Telegrafs> GetTelegrafsAsync (string zapTraceSpan = null, string orgID = null);
+        System.Threading.Tasks.Task<Telegrafs> GetTelegrafsAsync (string zapTraceSpan = null, string orgID = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// 
@@ -508,8 +518,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="orgID">The organization ID the Telegraf config belongs to. (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (Telegrafs)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Telegrafs>> GetTelegrafsAsyncWithHttpInfo (string zapTraceSpan = null, string orgID = null);
+        System.Threading.Tasks.Task<ApiResponse<Telegrafs>> GetTelegrafsAsyncWithHttpInfo (string zapTraceSpan = null, string orgID = null, CancellationToken cancellationToken = default);
         /// <summary>
         /// Retrieve a Telegraf config
         /// </summary>
@@ -520,8 +531,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="accept"> (optional, default to application/toml)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of string</returns>
-        System.Threading.Tasks.Task<string> GetTelegrafsIDAsync (string telegrafID, string zapTraceSpan = null, string accept = null);
+        System.Threading.Tasks.Task<string> GetTelegrafsIDAsync (string telegrafID, string zapTraceSpan = null, string accept = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Retrieve a Telegraf config
@@ -533,8 +545,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="accept"> (optional, default to application/toml)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (string)</returns>
-        System.Threading.Tasks.Task<ApiResponse<string>> GetTelegrafsIDAsyncWithHttpInfo (string telegrafID, string zapTraceSpan = null, string accept = null);
+        System.Threading.Tasks.Task<ApiResponse<string>> GetTelegrafsIDAsyncWithHttpInfo (string telegrafID, string zapTraceSpan = null, string accept = null, CancellationToken cancellationToken = default);
         /// <summary>
         /// Retrieve a Telegraf config
         /// </summary>
@@ -545,8 +558,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="accept"> (optional, default to application/toml)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of string</returns>
-        System.Threading.Tasks.Task<string> GetTelegrafsIDstringAsync (string telegrafID, string zapTraceSpan = null, string accept = null);
+        System.Threading.Tasks.Task<string> GetTelegrafsIDstringAsync (string telegrafID, string zapTraceSpan = null, string accept = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Retrieve a Telegraf config
@@ -558,8 +572,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="accept"> (optional, default to application/toml)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (string)</returns>
-        System.Threading.Tasks.Task<ApiResponse<string>> GetTelegrafsIDstringAsyncWithHttpInfo (string telegrafID, string zapTraceSpan = null, string accept = null);
+        System.Threading.Tasks.Task<ApiResponse<string>> GetTelegrafsIDstringAsyncWithHttpInfo (string telegrafID, string zapTraceSpan = null, string accept = null, CancellationToken cancellationToken = default);
         /// <summary>
         /// List all labels for a Telegraf config
         /// </summary>
@@ -569,8 +584,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of LabelsResponse</returns>
-        System.Threading.Tasks.Task<LabelsResponse> GetTelegrafsIDLabelsAsync (string telegrafID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<LabelsResponse> GetTelegrafsIDLabelsAsync (string telegrafID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// List all labels for a Telegraf config
@@ -581,8 +597,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (LabelsResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<LabelsResponse>> GetTelegrafsIDLabelsAsyncWithHttpInfo (string telegrafID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<LabelsResponse>> GetTelegrafsIDLabelsAsyncWithHttpInfo (string telegrafID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
         /// <summary>
         /// List all users with member privileges for a Telegraf config
         /// </summary>
@@ -592,8 +609,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ResourceMembers</returns>
-        System.Threading.Tasks.Task<ResourceMembers> GetTelegrafsIDMembersAsync (string telegrafID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ResourceMembers> GetTelegrafsIDMembersAsync (string telegrafID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// List all users with member privileges for a Telegraf config
@@ -604,8 +622,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (ResourceMembers)</returns>
-        System.Threading.Tasks.Task<ApiResponse<ResourceMembers>> GetTelegrafsIDMembersAsyncWithHttpInfo (string telegrafID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<ResourceMembers>> GetTelegrafsIDMembersAsyncWithHttpInfo (string telegrafID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
         /// <summary>
         /// List all owners of a Telegraf config
         /// </summary>
@@ -615,8 +634,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ResourceOwners</returns>
-        System.Threading.Tasks.Task<ResourceOwners> GetTelegrafsIDOwnersAsync (string telegrafID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ResourceOwners> GetTelegrafsIDOwnersAsync (string telegrafID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// List all owners of a Telegraf config
@@ -627,8 +647,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (ResourceOwners)</returns>
-        System.Threading.Tasks.Task<ApiResponse<ResourceOwners>> GetTelegrafsIDOwnersAsyncWithHttpInfo (string telegrafID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<ResourceOwners>> GetTelegrafsIDOwnersAsyncWithHttpInfo (string telegrafID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
         /// <summary>
         /// Create a Telegraf config
         /// </summary>
@@ -638,8 +659,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="telegrafRequest">Telegraf config to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of Telegraf</returns>
-        System.Threading.Tasks.Task<Telegraf> PostTelegrafsAsync (TelegrafRequest telegrafRequest, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<Telegraf> PostTelegrafsAsync (TelegrafRequest telegrafRequest, string zapTraceSpan = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Create a Telegraf config
@@ -650,8 +672,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="telegrafRequest">Telegraf config to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (Telegraf)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Telegraf>> PostTelegrafsAsyncWithHttpInfo (TelegrafRequest telegrafRequest, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<Telegraf>> PostTelegrafsAsyncWithHttpInfo (TelegrafRequest telegrafRequest, string zapTraceSpan = null, CancellationToken cancellationToken = default);
         /// <summary>
         /// Add a label to a Telegraf config
         /// </summary>
@@ -662,8 +685,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of LabelResponse</returns>
-        System.Threading.Tasks.Task<LabelResponse> PostTelegrafsIDLabelsAsync (string telegrafID, LabelMapping labelMapping, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<LabelResponse> PostTelegrafsIDLabelsAsync (string telegrafID, LabelMapping labelMapping, string zapTraceSpan = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Add a label to a Telegraf config
@@ -675,8 +699,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (LabelResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<LabelResponse>> PostTelegrafsIDLabelsAsyncWithHttpInfo (string telegrafID, LabelMapping labelMapping, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<LabelResponse>> PostTelegrafsIDLabelsAsyncWithHttpInfo (string telegrafID, LabelMapping labelMapping, string zapTraceSpan = null, CancellationToken cancellationToken = default);
         /// <summary>
         /// Add a member to a Telegraf config
         /// </summary>
@@ -687,8 +712,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ResourceMember</returns>
-        System.Threading.Tasks.Task<ResourceMember> PostTelegrafsIDMembersAsync (string telegrafID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ResourceMember> PostTelegrafsIDMembersAsync (string telegrafID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Add a member to a Telegraf config
@@ -700,8 +726,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (ResourceMember)</returns>
-        System.Threading.Tasks.Task<ApiResponse<ResourceMember>> PostTelegrafsIDMembersAsyncWithHttpInfo (string telegrafID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<ResourceMember>> PostTelegrafsIDMembersAsyncWithHttpInfo (string telegrafID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null, CancellationToken cancellationToken = default);
         /// <summary>
         /// Add an owner to a Telegraf config
         /// </summary>
@@ -712,8 +739,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ResourceOwner</returns>
-        System.Threading.Tasks.Task<ResourceOwner> PostTelegrafsIDOwnersAsync (string telegrafID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ResourceOwner> PostTelegrafsIDOwnersAsync (string telegrafID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Add an owner to a Telegraf config
@@ -725,8 +753,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (ResourceOwner)</returns>
-        System.Threading.Tasks.Task<ApiResponse<ResourceOwner>> PostTelegrafsIDOwnersAsyncWithHttpInfo (string telegrafID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<ResourceOwner>> PostTelegrafsIDOwnersAsyncWithHttpInfo (string telegrafID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null, CancellationToken cancellationToken = default);
         /// <summary>
         /// Update a Telegraf config
         /// </summary>
@@ -737,8 +766,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="telegrafRequest">Telegraf config update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of Telegraf</returns>
-        System.Threading.Tasks.Task<Telegraf> PutTelegrafsIDAsync (string telegrafID, TelegrafRequest telegrafRequest, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<Telegraf> PutTelegrafsIDAsync (string telegrafID, TelegrafRequest telegrafRequest, string zapTraceSpan = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Update a Telegraf config
@@ -750,8 +780,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="telegrafRequest">Telegraf config update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (Telegraf)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Telegraf>> PutTelegrafsIDAsyncWithHttpInfo (string telegrafID, TelegrafRequest telegrafRequest, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<Telegraf>> PutTelegrafsIDAsyncWithHttpInfo (string telegrafID, TelegrafRequest telegrafRequest, string zapTraceSpan = null, CancellationToken cancellationToken = default);
         #endregion Asynchronous Operations
     }
 
@@ -927,8 +958,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> DeleteTelegrafsIDWithIRestResponseAsync (string telegrafID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> DeleteTelegrafsIDWithIRestResponseAsync (string telegrafID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'telegrafID' is set
             if (telegrafID == null)
@@ -963,7 +995,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -1081,10 +1113,11 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of void</returns>
-        public System.Threading.Tasks.Task DeleteTelegrafsIDAsync (string telegrafID, string zapTraceSpan = null)
+        public System.Threading.Tasks.Task DeleteTelegrafsIDAsync (string telegrafID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
-             return DeleteTelegrafsIDAsyncWithHttpInfo(telegrafID, zapTraceSpan);
+             return DeleteTelegrafsIDAsyncWithHttpInfo(telegrafID, zapTraceSpan, cancellationToken);
 
         }
 
@@ -1094,11 +1127,12 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteTelegrafsIDAsyncWithHttpInfo (string telegrafID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteTelegrafsIDAsyncWithHttpInfo (string telegrafID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await DeleteTelegrafsIDAsyncWithIRestResponse(telegrafID, zapTraceSpan).ConfigureAwait(false);
+            IRestResponse localVarResponse = await DeleteTelegrafsIDAsyncWithIRestResponse(telegrafID, zapTraceSpan, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -1119,8 +1153,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> DeleteTelegrafsIDAsyncWithIRestResponse (string telegrafID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> DeleteTelegrafsIDAsyncWithIRestResponse (string telegrafID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'telegrafID' is set
             if (telegrafID == null)
@@ -1155,7 +1190,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -1248,8 +1283,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="labelID">The label ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> DeleteTelegrafsIDLabelsIDWithIRestResponseAsync (string telegrafID, string labelID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> DeleteTelegrafsIDLabelsIDWithIRestResponseAsync (string telegrafID, string labelID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'telegrafID' is set
             if (telegrafID == null)
@@ -1288,7 +1324,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -1417,10 +1453,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="labelID">The label ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of void</returns>
-        public System.Threading.Tasks.Task DeleteTelegrafsIDLabelsIDAsync (string telegrafID, string labelID, string zapTraceSpan = null)
+        public System.Threading.Tasks.Task DeleteTelegrafsIDLabelsIDAsync (string telegrafID, string labelID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
-             return DeleteTelegrafsIDLabelsIDAsyncWithHttpInfo(telegrafID, labelID, zapTraceSpan);
+             return DeleteTelegrafsIDLabelsIDAsyncWithHttpInfo(telegrafID, labelID, zapTraceSpan, cancellationToken);
 
         }
 
@@ -1431,11 +1468,12 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="labelID">The label ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteTelegrafsIDLabelsIDAsyncWithHttpInfo (string telegrafID, string labelID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteTelegrafsIDLabelsIDAsyncWithHttpInfo (string telegrafID, string labelID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await DeleteTelegrafsIDLabelsIDAsyncWithIRestResponse(telegrafID, labelID, zapTraceSpan).ConfigureAwait(false);
+            IRestResponse localVarResponse = await DeleteTelegrafsIDLabelsIDAsyncWithIRestResponse(telegrafID, labelID, zapTraceSpan, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -1457,8 +1495,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="labelID">The label ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> DeleteTelegrafsIDLabelsIDAsyncWithIRestResponse (string telegrafID, string labelID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> DeleteTelegrafsIDLabelsIDAsyncWithIRestResponse (string telegrafID, string labelID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'telegrafID' is set
             if (telegrafID == null)
@@ -1497,7 +1536,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -1590,8 +1629,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="userID">The ID of the member to remove.</param>
         /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> DeleteTelegrafsIDMembersIDWithIRestResponseAsync (string userID, string telegrafID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> DeleteTelegrafsIDMembersIDWithIRestResponseAsync (string userID, string telegrafID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'userID' is set
             if (userID == null)
@@ -1630,7 +1670,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -1759,10 +1799,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="userID">The ID of the member to remove.</param>
         /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of void</returns>
-        public System.Threading.Tasks.Task DeleteTelegrafsIDMembersIDAsync (string userID, string telegrafID, string zapTraceSpan = null)
+        public System.Threading.Tasks.Task DeleteTelegrafsIDMembersIDAsync (string userID, string telegrafID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
-             return DeleteTelegrafsIDMembersIDAsyncWithHttpInfo(userID, telegrafID, zapTraceSpan);
+             return DeleteTelegrafsIDMembersIDAsyncWithHttpInfo(userID, telegrafID, zapTraceSpan, cancellationToken);
 
         }
 
@@ -1773,11 +1814,12 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="userID">The ID of the member to remove.</param>
         /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteTelegrafsIDMembersIDAsyncWithHttpInfo (string userID, string telegrafID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteTelegrafsIDMembersIDAsyncWithHttpInfo (string userID, string telegrafID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await DeleteTelegrafsIDMembersIDAsyncWithIRestResponse(userID, telegrafID, zapTraceSpan).ConfigureAwait(false);
+            IRestResponse localVarResponse = await DeleteTelegrafsIDMembersIDAsyncWithIRestResponse(userID, telegrafID, zapTraceSpan, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -1799,8 +1841,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="userID">The ID of the member to remove.</param>
         /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> DeleteTelegrafsIDMembersIDAsyncWithIRestResponse (string userID, string telegrafID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> DeleteTelegrafsIDMembersIDAsyncWithIRestResponse (string userID, string telegrafID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'userID' is set
             if (userID == null)
@@ -1839,7 +1882,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -1932,8 +1975,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="userID">The ID of the owner to remove.</param>
         /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> DeleteTelegrafsIDOwnersIDWithIRestResponseAsync (string userID, string telegrafID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> DeleteTelegrafsIDOwnersIDWithIRestResponseAsync (string userID, string telegrafID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'userID' is set
             if (userID == null)
@@ -1972,7 +2016,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -2101,10 +2145,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="userID">The ID of the owner to remove.</param>
         /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of void</returns>
-        public System.Threading.Tasks.Task DeleteTelegrafsIDOwnersIDAsync (string userID, string telegrafID, string zapTraceSpan = null)
+        public System.Threading.Tasks.Task DeleteTelegrafsIDOwnersIDAsync (string userID, string telegrafID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
-             return DeleteTelegrafsIDOwnersIDAsyncWithHttpInfo(userID, telegrafID, zapTraceSpan);
+             return DeleteTelegrafsIDOwnersIDAsyncWithHttpInfo(userID, telegrafID, zapTraceSpan, cancellationToken);
 
         }
 
@@ -2115,11 +2160,12 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="userID">The ID of the owner to remove.</param>
         /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteTelegrafsIDOwnersIDAsyncWithHttpInfo (string userID, string telegrafID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteTelegrafsIDOwnersIDAsyncWithHttpInfo (string userID, string telegrafID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await DeleteTelegrafsIDOwnersIDAsyncWithIRestResponse(userID, telegrafID, zapTraceSpan).ConfigureAwait(false);
+            IRestResponse localVarResponse = await DeleteTelegrafsIDOwnersIDAsyncWithIRestResponse(userID, telegrafID, zapTraceSpan, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -2141,8 +2187,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="userID">The ID of the owner to remove.</param>
         /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> DeleteTelegrafsIDOwnersIDAsyncWithIRestResponse (string userID, string telegrafID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> DeleteTelegrafsIDOwnersIDAsyncWithIRestResponse (string userID, string telegrafID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'userID' is set
             if (userID == null)
@@ -2181,7 +2228,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -2265,8 +2312,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="orgID">The organization ID the Telegraf config belongs to. (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of Telegrafs</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> GetTelegrafsWithIRestResponseAsync (string zapTraceSpan = null, string orgID = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetTelegrafsWithIRestResponseAsync (string zapTraceSpan = null, string orgID = null, CancellationToken cancellationToken = default)
         {
 
             var localVarPath = "/api/v2/telegrafs";
@@ -2298,7 +2346,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -2410,10 +2458,11 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="orgID">The organization ID the Telegraf config belongs to. (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of Telegrafs</returns>
-        public async System.Threading.Tasks.Task<Telegrafs> GetTelegrafsAsync (string zapTraceSpan = null, string orgID = null)
+        public async System.Threading.Tasks.Task<Telegrafs> GetTelegrafsAsync (string zapTraceSpan = null, string orgID = null, CancellationToken cancellationToken = default)
         {
-             ApiResponse<Telegrafs> localVarResponse = await GetTelegrafsAsyncWithHttpInfo(zapTraceSpan, orgID).ConfigureAwait(false);
+             ApiResponse<Telegrafs> localVarResponse = await GetTelegrafsAsyncWithHttpInfo(zapTraceSpan, orgID, cancellationToken).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -2424,11 +2473,12 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="orgID">The organization ID the Telegraf config belongs to. (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (Telegrafs)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Telegrafs>> GetTelegrafsAsyncWithHttpInfo (string zapTraceSpan = null, string orgID = null)
+        public async System.Threading.Tasks.Task<ApiResponse<Telegrafs>> GetTelegrafsAsyncWithHttpInfo (string zapTraceSpan = null, string orgID = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await GetTelegrafsAsyncWithIRestResponse(zapTraceSpan, orgID).ConfigureAwait(false);
+            IRestResponse localVarResponse = await GetTelegrafsAsyncWithIRestResponse(zapTraceSpan, orgID, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -2449,8 +2499,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="orgID">The organization ID the Telegraf config belongs to. (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse (Telegrafs)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> GetTelegrafsAsyncWithIRestResponse (string zapTraceSpan = null, string orgID = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetTelegrafsAsyncWithIRestResponse (string zapTraceSpan = null, string orgID = null, CancellationToken cancellationToken = default)
         {
 
             var localVarPath = "/api/v2/telegrafs";
@@ -2482,7 +2533,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -2575,8 +2626,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="accept"> (optional, default to application/toml)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of string</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> GetTelegrafsIDWithIRestResponseAsync (string telegrafID, string zapTraceSpan = null, string accept = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetTelegrafsIDWithIRestResponseAsync (string telegrafID, string zapTraceSpan = null, string accept = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'telegrafID' is set
             if (telegrafID == null)
@@ -2614,7 +2666,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -2741,10 +2793,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="accept"> (optional, default to application/toml)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of string</returns>
-        public async System.Threading.Tasks.Task<string> GetTelegrafsIDAsync (string telegrafID, string zapTraceSpan = null, string accept = null)
+        public async System.Threading.Tasks.Task<string> GetTelegrafsIDAsync (string telegrafID, string zapTraceSpan = null, string accept = null, CancellationToken cancellationToken = default)
         {
-             ApiResponse<string> localVarResponse = await GetTelegrafsIDAsyncWithHttpInfo(telegrafID, zapTraceSpan, accept).ConfigureAwait(false);
+             ApiResponse<string> localVarResponse = await GetTelegrafsIDAsyncWithHttpInfo(telegrafID, zapTraceSpan, accept, cancellationToken).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -2756,11 +2809,12 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="accept"> (optional, default to application/toml)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (string)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<string>> GetTelegrafsIDAsyncWithHttpInfo (string telegrafID, string zapTraceSpan = null, string accept = null)
+        public async System.Threading.Tasks.Task<ApiResponse<string>> GetTelegrafsIDAsyncWithHttpInfo (string telegrafID, string zapTraceSpan = null, string accept = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await GetTelegrafsIDAsyncWithIRestResponse(telegrafID, zapTraceSpan, accept).ConfigureAwait(false);
+            IRestResponse localVarResponse = await GetTelegrafsIDAsyncWithIRestResponse(telegrafID, zapTraceSpan, accept, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -2782,8 +2836,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="accept"> (optional, default to application/toml)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse (string)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> GetTelegrafsIDAsyncWithIRestResponse (string telegrafID, string zapTraceSpan = null, string accept = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetTelegrafsIDAsyncWithIRestResponse (string telegrafID, string zapTraceSpan = null, string accept = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'telegrafID' is set
             if (telegrafID == null)
@@ -2821,7 +2876,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -2910,8 +2965,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="accept"> (optional, default to application/toml)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of string</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> GetTelegrafsIDstringWithIRestResponseAsync (string telegrafID, string zapTraceSpan = null, string accept = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetTelegrafsIDstringWithIRestResponseAsync (string telegrafID, string zapTraceSpan = null, string accept = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'telegrafID' is set
             if (telegrafID == null)
@@ -2945,7 +3001,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -3064,10 +3120,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="accept"> (optional, default to application/toml)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of string</returns>
-        public async System.Threading.Tasks.Task<string> GetTelegrafsIDstringAsync (string telegrafID, string zapTraceSpan = null, string accept = null)
+        public async System.Threading.Tasks.Task<string> GetTelegrafsIDstringAsync (string telegrafID, string zapTraceSpan = null, string accept = null, CancellationToken cancellationToken = default)
         {
-             ApiResponse<string> localVarResponse = await GetTelegrafsIDstringAsyncWithHttpInfo(telegrafID, zapTraceSpan, accept).ConfigureAwait(false);
+             ApiResponse<string> localVarResponse = await GetTelegrafsIDstringAsyncWithHttpInfo(telegrafID, zapTraceSpan, accept, cancellationToken).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -3079,11 +3136,12 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="accept"> (optional, default to application/toml)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (string)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<string>> GetTelegrafsIDstringAsyncWithHttpInfo (string telegrafID, string zapTraceSpan = null, string accept = null)
+        public async System.Threading.Tasks.Task<ApiResponse<string>> GetTelegrafsIDstringAsyncWithHttpInfo (string telegrafID, string zapTraceSpan = null, string accept = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await GetTelegrafsIDstringAsyncWithIRestResponse(telegrafID, zapTraceSpan, accept).ConfigureAwait(false);
+            IRestResponse localVarResponse = await GetTelegrafsIDstringAsyncWithIRestResponse(telegrafID, zapTraceSpan, accept, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -3105,8 +3163,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="accept"> (optional, default to application/toml)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse (string)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> GetTelegrafsIDstringAsyncWithIRestResponse (string telegrafID, string zapTraceSpan = null, string accept = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetTelegrafsIDstringAsyncWithIRestResponse (string telegrafID, string zapTraceSpan = null, string accept = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'telegrafID' is set
             if (telegrafID == null)
@@ -3140,7 +3199,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -3227,8 +3286,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of LabelsResponse</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> GetTelegrafsIDLabelsWithIRestResponseAsync (string telegrafID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetTelegrafsIDLabelsWithIRestResponseAsync (string telegrafID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'telegrafID' is set
             if (telegrafID == null)
@@ -3263,7 +3323,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -3381,10 +3441,11 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of LabelsResponse</returns>
-        public async System.Threading.Tasks.Task<LabelsResponse> GetTelegrafsIDLabelsAsync (string telegrafID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<LabelsResponse> GetTelegrafsIDLabelsAsync (string telegrafID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
-             ApiResponse<LabelsResponse> localVarResponse = await GetTelegrafsIDLabelsAsyncWithHttpInfo(telegrafID, zapTraceSpan).ConfigureAwait(false);
+             ApiResponse<LabelsResponse> localVarResponse = await GetTelegrafsIDLabelsAsyncWithHttpInfo(telegrafID, zapTraceSpan, cancellationToken).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -3395,11 +3456,12 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (LabelsResponse)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<LabelsResponse>> GetTelegrafsIDLabelsAsyncWithHttpInfo (string telegrafID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<LabelsResponse>> GetTelegrafsIDLabelsAsyncWithHttpInfo (string telegrafID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await GetTelegrafsIDLabelsAsyncWithIRestResponse(telegrafID, zapTraceSpan).ConfigureAwait(false);
+            IRestResponse localVarResponse = await GetTelegrafsIDLabelsAsyncWithIRestResponse(telegrafID, zapTraceSpan, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -3420,8 +3482,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse (LabelsResponse)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> GetTelegrafsIDLabelsAsyncWithIRestResponse (string telegrafID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetTelegrafsIDLabelsAsyncWithIRestResponse (string telegrafID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'telegrafID' is set
             if (telegrafID == null)
@@ -3456,7 +3519,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -3543,8 +3606,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of ResourceMembers</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> GetTelegrafsIDMembersWithIRestResponseAsync (string telegrafID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetTelegrafsIDMembersWithIRestResponseAsync (string telegrafID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'telegrafID' is set
             if (telegrafID == null)
@@ -3579,7 +3643,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -3697,10 +3761,11 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ResourceMembers</returns>
-        public async System.Threading.Tasks.Task<ResourceMembers> GetTelegrafsIDMembersAsync (string telegrafID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ResourceMembers> GetTelegrafsIDMembersAsync (string telegrafID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
-             ApiResponse<ResourceMembers> localVarResponse = await GetTelegrafsIDMembersAsyncWithHttpInfo(telegrafID, zapTraceSpan).ConfigureAwait(false);
+             ApiResponse<ResourceMembers> localVarResponse = await GetTelegrafsIDMembersAsyncWithHttpInfo(telegrafID, zapTraceSpan, cancellationToken).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -3711,11 +3776,12 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (ResourceMembers)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<ResourceMembers>> GetTelegrafsIDMembersAsyncWithHttpInfo (string telegrafID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<ResourceMembers>> GetTelegrafsIDMembersAsyncWithHttpInfo (string telegrafID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await GetTelegrafsIDMembersAsyncWithIRestResponse(telegrafID, zapTraceSpan).ConfigureAwait(false);
+            IRestResponse localVarResponse = await GetTelegrafsIDMembersAsyncWithIRestResponse(telegrafID, zapTraceSpan, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -3736,8 +3802,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse (ResourceMembers)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> GetTelegrafsIDMembersAsyncWithIRestResponse (string telegrafID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetTelegrafsIDMembersAsyncWithIRestResponse (string telegrafID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'telegrafID' is set
             if (telegrafID == null)
@@ -3772,7 +3839,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -3859,8 +3926,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of ResourceOwners</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> GetTelegrafsIDOwnersWithIRestResponseAsync (string telegrafID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetTelegrafsIDOwnersWithIRestResponseAsync (string telegrafID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'telegrafID' is set
             if (telegrafID == null)
@@ -3895,7 +3963,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -4013,10 +4081,11 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ResourceOwners</returns>
-        public async System.Threading.Tasks.Task<ResourceOwners> GetTelegrafsIDOwnersAsync (string telegrafID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ResourceOwners> GetTelegrafsIDOwnersAsync (string telegrafID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
-             ApiResponse<ResourceOwners> localVarResponse = await GetTelegrafsIDOwnersAsyncWithHttpInfo(telegrafID, zapTraceSpan).ConfigureAwait(false);
+             ApiResponse<ResourceOwners> localVarResponse = await GetTelegrafsIDOwnersAsyncWithHttpInfo(telegrafID, zapTraceSpan, cancellationToken).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -4027,11 +4096,12 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (ResourceOwners)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<ResourceOwners>> GetTelegrafsIDOwnersAsyncWithHttpInfo (string telegrafID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<ResourceOwners>> GetTelegrafsIDOwnersAsyncWithHttpInfo (string telegrafID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await GetTelegrafsIDOwnersAsyncWithIRestResponse(telegrafID, zapTraceSpan).ConfigureAwait(false);
+            IRestResponse localVarResponse = await GetTelegrafsIDOwnersAsyncWithIRestResponse(telegrafID, zapTraceSpan, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -4052,8 +4122,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse (ResourceOwners)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> GetTelegrafsIDOwnersAsyncWithIRestResponse (string telegrafID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetTelegrafsIDOwnersAsyncWithIRestResponse (string telegrafID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'telegrafID' is set
             if (telegrafID == null)
@@ -4088,7 +4159,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -4183,8 +4254,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="telegrafRequest">Telegraf config to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of Telegraf</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> PostTelegrafsWithIRestResponseAsync (TelegrafRequest telegrafRequest, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PostTelegrafsWithIRestResponseAsync (TelegrafRequest telegrafRequest, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'telegrafRequest' is set
             if (telegrafRequest == null)
@@ -4227,7 +4299,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -4361,10 +4433,11 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="telegrafRequest">Telegraf config to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of Telegraf</returns>
-        public async System.Threading.Tasks.Task<Telegraf> PostTelegrafsAsync (TelegrafRequest telegrafRequest, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<Telegraf> PostTelegrafsAsync (TelegrafRequest telegrafRequest, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
-             ApiResponse<Telegraf> localVarResponse = await PostTelegrafsAsyncWithHttpInfo(telegrafRequest, zapTraceSpan).ConfigureAwait(false);
+             ApiResponse<Telegraf> localVarResponse = await PostTelegrafsAsyncWithHttpInfo(telegrafRequest, zapTraceSpan, cancellationToken).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -4375,11 +4448,12 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="telegrafRequest">Telegraf config to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (Telegraf)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Telegraf>> PostTelegrafsAsyncWithHttpInfo (TelegrafRequest telegrafRequest, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<Telegraf>> PostTelegrafsAsyncWithHttpInfo (TelegrafRequest telegrafRequest, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await PostTelegrafsAsyncWithIRestResponse(telegrafRequest, zapTraceSpan).ConfigureAwait(false);
+            IRestResponse localVarResponse = await PostTelegrafsAsyncWithIRestResponse(telegrafRequest, zapTraceSpan, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -4400,8 +4474,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="telegrafRequest">Telegraf config to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse (Telegraf)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> PostTelegrafsAsyncWithIRestResponse (TelegrafRequest telegrafRequest, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PostTelegrafsAsyncWithIRestResponse (TelegrafRequest telegrafRequest, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'telegrafRequest' is set
             if (telegrafRequest == null)
@@ -4444,7 +4519,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -4546,8 +4621,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of LabelResponse</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> PostTelegrafsIDLabelsWithIRestResponseAsync (string telegrafID, LabelMapping labelMapping, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PostTelegrafsIDLabelsWithIRestResponseAsync (string telegrafID, LabelMapping labelMapping, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'telegrafID' is set
             if (telegrafID == null)
@@ -4594,7 +4670,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -4739,10 +4815,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of LabelResponse</returns>
-        public async System.Threading.Tasks.Task<LabelResponse> PostTelegrafsIDLabelsAsync (string telegrafID, LabelMapping labelMapping, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<LabelResponse> PostTelegrafsIDLabelsAsync (string telegrafID, LabelMapping labelMapping, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
-             ApiResponse<LabelResponse> localVarResponse = await PostTelegrafsIDLabelsAsyncWithHttpInfo(telegrafID, labelMapping, zapTraceSpan).ConfigureAwait(false);
+             ApiResponse<LabelResponse> localVarResponse = await PostTelegrafsIDLabelsAsyncWithHttpInfo(telegrafID, labelMapping, zapTraceSpan, cancellationToken).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -4754,11 +4831,12 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (LabelResponse)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<LabelResponse>> PostTelegrafsIDLabelsAsyncWithHttpInfo (string telegrafID, LabelMapping labelMapping, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<LabelResponse>> PostTelegrafsIDLabelsAsyncWithHttpInfo (string telegrafID, LabelMapping labelMapping, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await PostTelegrafsIDLabelsAsyncWithIRestResponse(telegrafID, labelMapping, zapTraceSpan).ConfigureAwait(false);
+            IRestResponse localVarResponse = await PostTelegrafsIDLabelsAsyncWithIRestResponse(telegrafID, labelMapping, zapTraceSpan, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -4780,8 +4858,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse (LabelResponse)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> PostTelegrafsIDLabelsAsyncWithIRestResponse (string telegrafID, LabelMapping labelMapping, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PostTelegrafsIDLabelsAsyncWithIRestResponse (string telegrafID, LabelMapping labelMapping, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'telegrafID' is set
             if (telegrafID == null)
@@ -4828,7 +4907,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -4930,8 +5009,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of ResourceMember</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> PostTelegrafsIDMembersWithIRestResponseAsync (string telegrafID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PostTelegrafsIDMembersWithIRestResponseAsync (string telegrafID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'telegrafID' is set
             if (telegrafID == null)
@@ -4978,7 +5058,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -5123,10 +5203,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ResourceMember</returns>
-        public async System.Threading.Tasks.Task<ResourceMember> PostTelegrafsIDMembersAsync (string telegrafID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ResourceMember> PostTelegrafsIDMembersAsync (string telegrafID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
-             ApiResponse<ResourceMember> localVarResponse = await PostTelegrafsIDMembersAsyncWithHttpInfo(telegrafID, addResourceMemberRequestBody, zapTraceSpan).ConfigureAwait(false);
+             ApiResponse<ResourceMember> localVarResponse = await PostTelegrafsIDMembersAsyncWithHttpInfo(telegrafID, addResourceMemberRequestBody, zapTraceSpan, cancellationToken).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -5138,11 +5219,12 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (ResourceMember)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<ResourceMember>> PostTelegrafsIDMembersAsyncWithHttpInfo (string telegrafID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<ResourceMember>> PostTelegrafsIDMembersAsyncWithHttpInfo (string telegrafID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await PostTelegrafsIDMembersAsyncWithIRestResponse(telegrafID, addResourceMemberRequestBody, zapTraceSpan).ConfigureAwait(false);
+            IRestResponse localVarResponse = await PostTelegrafsIDMembersAsyncWithIRestResponse(telegrafID, addResourceMemberRequestBody, zapTraceSpan, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -5164,8 +5246,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse (ResourceMember)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> PostTelegrafsIDMembersAsyncWithIRestResponse (string telegrafID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PostTelegrafsIDMembersAsyncWithIRestResponse (string telegrafID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'telegrafID' is set
             if (telegrafID == null)
@@ -5212,7 +5295,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -5314,8 +5397,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of ResourceOwner</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> PostTelegrafsIDOwnersWithIRestResponseAsync (string telegrafID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PostTelegrafsIDOwnersWithIRestResponseAsync (string telegrafID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'telegrafID' is set
             if (telegrafID == null)
@@ -5362,7 +5446,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -5507,10 +5591,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ResourceOwner</returns>
-        public async System.Threading.Tasks.Task<ResourceOwner> PostTelegrafsIDOwnersAsync (string telegrafID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ResourceOwner> PostTelegrafsIDOwnersAsync (string telegrafID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
-             ApiResponse<ResourceOwner> localVarResponse = await PostTelegrafsIDOwnersAsyncWithHttpInfo(telegrafID, addResourceMemberRequestBody, zapTraceSpan).ConfigureAwait(false);
+             ApiResponse<ResourceOwner> localVarResponse = await PostTelegrafsIDOwnersAsyncWithHttpInfo(telegrafID, addResourceMemberRequestBody, zapTraceSpan, cancellationToken).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -5522,11 +5607,12 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (ResourceOwner)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<ResourceOwner>> PostTelegrafsIDOwnersAsyncWithHttpInfo (string telegrafID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<ResourceOwner>> PostTelegrafsIDOwnersAsyncWithHttpInfo (string telegrafID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await PostTelegrafsIDOwnersAsyncWithIRestResponse(telegrafID, addResourceMemberRequestBody, zapTraceSpan).ConfigureAwait(false);
+            IRestResponse localVarResponse = await PostTelegrafsIDOwnersAsyncWithIRestResponse(telegrafID, addResourceMemberRequestBody, zapTraceSpan, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -5548,8 +5634,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse (ResourceOwner)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> PostTelegrafsIDOwnersAsyncWithIRestResponse (string telegrafID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PostTelegrafsIDOwnersAsyncWithIRestResponse (string telegrafID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'telegrafID' is set
             if (telegrafID == null)
@@ -5596,7 +5683,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -5698,8 +5785,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="telegrafRequest">Telegraf config update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of Telegraf</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> PutTelegrafsIDWithIRestResponseAsync (string telegrafID, TelegrafRequest telegrafRequest, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PutTelegrafsIDWithIRestResponseAsync (string telegrafID, TelegrafRequest telegrafRequest, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'telegrafID' is set
             if (telegrafID == null)
@@ -5746,7 +5834,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.PUT, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -5891,10 +5979,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="telegrafRequest">Telegraf config update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of Telegraf</returns>
-        public async System.Threading.Tasks.Task<Telegraf> PutTelegrafsIDAsync (string telegrafID, TelegrafRequest telegrafRequest, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<Telegraf> PutTelegrafsIDAsync (string telegrafID, TelegrafRequest telegrafRequest, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
-             ApiResponse<Telegraf> localVarResponse = await PutTelegrafsIDAsyncWithHttpInfo(telegrafID, telegrafRequest, zapTraceSpan).ConfigureAwait(false);
+             ApiResponse<Telegraf> localVarResponse = await PutTelegrafsIDAsyncWithHttpInfo(telegrafID, telegrafRequest, zapTraceSpan, cancellationToken).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -5906,11 +5995,12 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="telegrafRequest">Telegraf config update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (Telegraf)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Telegraf>> PutTelegrafsIDAsyncWithHttpInfo (string telegrafID, TelegrafRequest telegrafRequest, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<Telegraf>> PutTelegrafsIDAsyncWithHttpInfo (string telegrafID, TelegrafRequest telegrafRequest, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await PutTelegrafsIDAsyncWithIRestResponse(telegrafID, telegrafRequest, zapTraceSpan).ConfigureAwait(false);
+            IRestResponse localVarResponse = await PutTelegrafsIDAsyncWithIRestResponse(telegrafID, telegrafRequest, zapTraceSpan, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -5932,8 +6022,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="telegrafID">The Telegraf config ID.</param>
         /// <param name="telegrafRequest">Telegraf config update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse (Telegraf)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> PutTelegrafsIDAsyncWithIRestResponse (string telegrafID, TelegrafRequest telegrafRequest, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PutTelegrafsIDAsyncWithIRestResponse (string telegrafID, TelegrafRequest telegrafRequest, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'telegrafID' is set
             if (telegrafID == null)
@@ -5980,7 +6071,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.PUT, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {

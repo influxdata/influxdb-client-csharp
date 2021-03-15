@@ -4,6 +4,9 @@
 1. [#171](https://github.com/influxdata/influxdb-client-csharp/pull/171): Added `QueryApiSync` for synchronous querying
 1. [#171](https://github.com/influxdata/influxdb-client-csharp/pull/171): Added `IDomainObjectMapper` for custom mapping DomainObject from/to InfluxDB
 
+### API
+1. [#174](https://github.com/influxdata/influxdb-client-csharp/pull/174): Added possibility to use `CancellationToken` in REST API
+
 ### Bug Fixes
 1. [#168](https://github.com/influxdata/influxdb-client-csharp/pull/168): DateTime is always serialized into UTC
 1. [#169](https://github.com/influxdata/influxdb-client-csharp/pull/169): Fixed domain structure for Flux AST

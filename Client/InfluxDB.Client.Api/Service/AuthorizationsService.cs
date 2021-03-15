@@ -12,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading;
 using RestSharp;
 using InfluxDB.Client.Api.Client;
 using InfluxDB.Client.Api.Domain;
@@ -158,8 +159,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="authID">The ID of the authorization to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task DeleteAuthorizationsIDAsync (string authID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task DeleteAuthorizationsIDAsync (string authID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Delete a authorization
@@ -170,8 +172,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="authID">The ID of the authorization to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> DeleteAuthorizationsIDAsyncWithHttpInfo (string authID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<Object>> DeleteAuthorizationsIDAsyncWithHttpInfo (string authID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
         /// <summary>
         /// List all authorizations
         /// </summary>
@@ -184,8 +187,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="user">Only show authorizations that belong to a user name. (optional)</param>
         /// <param name="orgID">Only show authorizations that belong to an organization ID. (optional)</param>
         /// <param name="org">Only show authorizations that belong to a organization name. (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of Authorizations</returns>
-        System.Threading.Tasks.Task<Authorizations> GetAuthorizationsAsync (string zapTraceSpan = null, string userID = null, string user = null, string orgID = null, string org = null);
+        System.Threading.Tasks.Task<Authorizations> GetAuthorizationsAsync (string zapTraceSpan = null, string userID = null, string user = null, string orgID = null, string org = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// List all authorizations
@@ -199,8 +203,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="user">Only show authorizations that belong to a user name. (optional)</param>
         /// <param name="orgID">Only show authorizations that belong to an organization ID. (optional)</param>
         /// <param name="org">Only show authorizations that belong to a organization name. (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (Authorizations)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Authorizations>> GetAuthorizationsAsyncWithHttpInfo (string zapTraceSpan = null, string userID = null, string user = null, string orgID = null, string org = null);
+        System.Threading.Tasks.Task<ApiResponse<Authorizations>> GetAuthorizationsAsyncWithHttpInfo (string zapTraceSpan = null, string userID = null, string user = null, string orgID = null, string org = null, CancellationToken cancellationToken = default);
         /// <summary>
         /// Retrieve an authorization
         /// </summary>
@@ -210,8 +215,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="authID">The ID of the authorization to get.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of Authorization</returns>
-        System.Threading.Tasks.Task<Authorization> GetAuthorizationsIDAsync (string authID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<Authorization> GetAuthorizationsIDAsync (string authID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Retrieve an authorization
@@ -222,8 +228,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="authID">The ID of the authorization to get.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (Authorization)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Authorization>> GetAuthorizationsIDAsyncWithHttpInfo (string authID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<Authorization>> GetAuthorizationsIDAsyncWithHttpInfo (string authID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
         /// <summary>
         /// Update an authorization to be active or inactive
         /// </summary>
@@ -234,8 +241,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="authID">The ID of the authorization to update.</param>
         /// <param name="authorizationUpdateRequest">Authorization to update</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of Authorization</returns>
-        System.Threading.Tasks.Task<Authorization> PatchAuthorizationsIDAsync (string authID, AuthorizationUpdateRequest authorizationUpdateRequest, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<Authorization> PatchAuthorizationsIDAsync (string authID, AuthorizationUpdateRequest authorizationUpdateRequest, string zapTraceSpan = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Update an authorization to be active or inactive
@@ -247,8 +255,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="authID">The ID of the authorization to update.</param>
         /// <param name="authorizationUpdateRequest">Authorization to update</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (Authorization)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Authorization>> PatchAuthorizationsIDAsyncWithHttpInfo (string authID, AuthorizationUpdateRequest authorizationUpdateRequest, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<Authorization>> PatchAuthorizationsIDAsyncWithHttpInfo (string authID, AuthorizationUpdateRequest authorizationUpdateRequest, string zapTraceSpan = null, CancellationToken cancellationToken = default);
         /// <summary>
         /// Create an authorization
         /// </summary>
@@ -258,8 +267,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="authorization">Authorization to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of Authorization</returns>
-        System.Threading.Tasks.Task<Authorization> PostAuthorizationsAsync (Authorization authorization, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<Authorization> PostAuthorizationsAsync (Authorization authorization, string zapTraceSpan = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Create an authorization
@@ -270,8 +280,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="authorization">Authorization to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (Authorization)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Authorization>> PostAuthorizationsAsyncWithHttpInfo (Authorization authorization, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<Authorization>> PostAuthorizationsAsyncWithHttpInfo (Authorization authorization, string zapTraceSpan = null, CancellationToken cancellationToken = default);
         #endregion Asynchronous Operations
     }
 
@@ -447,8 +458,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="authID">The ID of the authorization to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> DeleteAuthorizationsIDWithIRestResponseAsync (string authID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> DeleteAuthorizationsIDWithIRestResponseAsync (string authID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'authID' is set
             if (authID == null)
@@ -483,7 +495,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -601,10 +613,11 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="authID">The ID of the authorization to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of void</returns>
-        public System.Threading.Tasks.Task DeleteAuthorizationsIDAsync (string authID, string zapTraceSpan = null)
+        public System.Threading.Tasks.Task DeleteAuthorizationsIDAsync (string authID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
-             return DeleteAuthorizationsIDAsyncWithHttpInfo(authID, zapTraceSpan);
+             return DeleteAuthorizationsIDAsyncWithHttpInfo(authID, zapTraceSpan, cancellationToken);
 
         }
 
@@ -614,11 +627,12 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="authID">The ID of the authorization to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteAuthorizationsIDAsyncWithHttpInfo (string authID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteAuthorizationsIDAsyncWithHttpInfo (string authID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await DeleteAuthorizationsIDAsyncWithIRestResponse(authID, zapTraceSpan).ConfigureAwait(false);
+            IRestResponse localVarResponse = await DeleteAuthorizationsIDAsyncWithIRestResponse(authID, zapTraceSpan, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -639,8 +653,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="authID">The ID of the authorization to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> DeleteAuthorizationsIDAsyncWithIRestResponse (string authID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> DeleteAuthorizationsIDAsyncWithIRestResponse (string authID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'authID' is set
             if (authID == null)
@@ -675,7 +690,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -771,8 +786,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="user">Only show authorizations that belong to a user name. (optional)</param>
         /// <param name="orgID">Only show authorizations that belong to an organization ID. (optional)</param>
         /// <param name="org">Only show authorizations that belong to a organization name. (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of Authorizations</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> GetAuthorizationsWithIRestResponseAsync (string zapTraceSpan = null, string userID = null, string user = null, string orgID = null, string org = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetAuthorizationsWithIRestResponseAsync (string zapTraceSpan = null, string userID = null, string user = null, string orgID = null, string org = null, CancellationToken cancellationToken = default)
         {
 
             var localVarPath = "/api/v2/authorizations";
@@ -807,7 +823,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -934,10 +950,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="user">Only show authorizations that belong to a user name. (optional)</param>
         /// <param name="orgID">Only show authorizations that belong to an organization ID. (optional)</param>
         /// <param name="org">Only show authorizations that belong to a organization name. (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of Authorizations</returns>
-        public async System.Threading.Tasks.Task<Authorizations> GetAuthorizationsAsync (string zapTraceSpan = null, string userID = null, string user = null, string orgID = null, string org = null)
+        public async System.Threading.Tasks.Task<Authorizations> GetAuthorizationsAsync (string zapTraceSpan = null, string userID = null, string user = null, string orgID = null, string org = null, CancellationToken cancellationToken = default)
         {
-             ApiResponse<Authorizations> localVarResponse = await GetAuthorizationsAsyncWithHttpInfo(zapTraceSpan, userID, user, orgID, org).ConfigureAwait(false);
+             ApiResponse<Authorizations> localVarResponse = await GetAuthorizationsAsyncWithHttpInfo(zapTraceSpan, userID, user, orgID, org, cancellationToken).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -951,11 +968,12 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="user">Only show authorizations that belong to a user name. (optional)</param>
         /// <param name="orgID">Only show authorizations that belong to an organization ID. (optional)</param>
         /// <param name="org">Only show authorizations that belong to a organization name. (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (Authorizations)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Authorizations>> GetAuthorizationsAsyncWithHttpInfo (string zapTraceSpan = null, string userID = null, string user = null, string orgID = null, string org = null)
+        public async System.Threading.Tasks.Task<ApiResponse<Authorizations>> GetAuthorizationsAsyncWithHttpInfo (string zapTraceSpan = null, string userID = null, string user = null, string orgID = null, string org = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await GetAuthorizationsAsyncWithIRestResponse(zapTraceSpan, userID, user, orgID, org).ConfigureAwait(false);
+            IRestResponse localVarResponse = await GetAuthorizationsAsyncWithIRestResponse(zapTraceSpan, userID, user, orgID, org, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -979,8 +997,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="user">Only show authorizations that belong to a user name. (optional)</param>
         /// <param name="orgID">Only show authorizations that belong to an organization ID. (optional)</param>
         /// <param name="org">Only show authorizations that belong to a organization name. (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse (Authorizations)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> GetAuthorizationsAsyncWithIRestResponse (string zapTraceSpan = null, string userID = null, string user = null, string orgID = null, string org = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetAuthorizationsAsyncWithIRestResponse (string zapTraceSpan = null, string userID = null, string user = null, string orgID = null, string org = null, CancellationToken cancellationToken = default)
         {
 
             var localVarPath = "/api/v2/authorizations";
@@ -1015,7 +1034,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -1102,8 +1121,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="authID">The ID of the authorization to get.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of Authorization</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> GetAuthorizationsIDWithIRestResponseAsync (string authID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetAuthorizationsIDWithIRestResponseAsync (string authID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'authID' is set
             if (authID == null)
@@ -1138,7 +1158,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -1256,10 +1276,11 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="authID">The ID of the authorization to get.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of Authorization</returns>
-        public async System.Threading.Tasks.Task<Authorization> GetAuthorizationsIDAsync (string authID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<Authorization> GetAuthorizationsIDAsync (string authID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
-             ApiResponse<Authorization> localVarResponse = await GetAuthorizationsIDAsyncWithHttpInfo(authID, zapTraceSpan).ConfigureAwait(false);
+             ApiResponse<Authorization> localVarResponse = await GetAuthorizationsIDAsyncWithHttpInfo(authID, zapTraceSpan, cancellationToken).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -1270,11 +1291,12 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="authID">The ID of the authorization to get.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (Authorization)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Authorization>> GetAuthorizationsIDAsyncWithHttpInfo (string authID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<Authorization>> GetAuthorizationsIDAsyncWithHttpInfo (string authID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await GetAuthorizationsIDAsyncWithIRestResponse(authID, zapTraceSpan).ConfigureAwait(false);
+            IRestResponse localVarResponse = await GetAuthorizationsIDAsyncWithIRestResponse(authID, zapTraceSpan, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -1295,8 +1317,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="authID">The ID of the authorization to get.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse (Authorization)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> GetAuthorizationsIDAsyncWithIRestResponse (string authID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetAuthorizationsIDAsyncWithIRestResponse (string authID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'authID' is set
             if (authID == null)
@@ -1331,7 +1354,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -1433,8 +1456,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="authID">The ID of the authorization to update.</param>
         /// <param name="authorizationUpdateRequest">Authorization to update</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of Authorization</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> PatchAuthorizationsIDWithIRestResponseAsync (string authID, AuthorizationUpdateRequest authorizationUpdateRequest, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PatchAuthorizationsIDWithIRestResponseAsync (string authID, AuthorizationUpdateRequest authorizationUpdateRequest, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'authID' is set
             if (authID == null)
@@ -1481,7 +1505,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -1626,10 +1650,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="authID">The ID of the authorization to update.</param>
         /// <param name="authorizationUpdateRequest">Authorization to update</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of Authorization</returns>
-        public async System.Threading.Tasks.Task<Authorization> PatchAuthorizationsIDAsync (string authID, AuthorizationUpdateRequest authorizationUpdateRequest, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<Authorization> PatchAuthorizationsIDAsync (string authID, AuthorizationUpdateRequest authorizationUpdateRequest, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
-             ApiResponse<Authorization> localVarResponse = await PatchAuthorizationsIDAsyncWithHttpInfo(authID, authorizationUpdateRequest, zapTraceSpan).ConfigureAwait(false);
+             ApiResponse<Authorization> localVarResponse = await PatchAuthorizationsIDAsyncWithHttpInfo(authID, authorizationUpdateRequest, zapTraceSpan, cancellationToken).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -1641,11 +1666,12 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="authID">The ID of the authorization to update.</param>
         /// <param name="authorizationUpdateRequest">Authorization to update</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (Authorization)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Authorization>> PatchAuthorizationsIDAsyncWithHttpInfo (string authID, AuthorizationUpdateRequest authorizationUpdateRequest, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<Authorization>> PatchAuthorizationsIDAsyncWithHttpInfo (string authID, AuthorizationUpdateRequest authorizationUpdateRequest, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await PatchAuthorizationsIDAsyncWithIRestResponse(authID, authorizationUpdateRequest, zapTraceSpan).ConfigureAwait(false);
+            IRestResponse localVarResponse = await PatchAuthorizationsIDAsyncWithIRestResponse(authID, authorizationUpdateRequest, zapTraceSpan, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -1667,8 +1693,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="authID">The ID of the authorization to update.</param>
         /// <param name="authorizationUpdateRequest">Authorization to update</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse (Authorization)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> PatchAuthorizationsIDAsyncWithIRestResponse (string authID, AuthorizationUpdateRequest authorizationUpdateRequest, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PatchAuthorizationsIDAsyncWithIRestResponse (string authID, AuthorizationUpdateRequest authorizationUpdateRequest, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'authID' is set
             if (authID == null)
@@ -1715,7 +1742,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -1810,8 +1837,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="authorization">Authorization to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of Authorization</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> PostAuthorizationsWithIRestResponseAsync (Authorization authorization, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PostAuthorizationsWithIRestResponseAsync (Authorization authorization, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'authorization' is set
             if (authorization == null)
@@ -1854,7 +1882,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -1988,10 +2016,11 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="authorization">Authorization to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of Authorization</returns>
-        public async System.Threading.Tasks.Task<Authorization> PostAuthorizationsAsync (Authorization authorization, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<Authorization> PostAuthorizationsAsync (Authorization authorization, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
-             ApiResponse<Authorization> localVarResponse = await PostAuthorizationsAsyncWithHttpInfo(authorization, zapTraceSpan).ConfigureAwait(false);
+             ApiResponse<Authorization> localVarResponse = await PostAuthorizationsAsyncWithHttpInfo(authorization, zapTraceSpan, cancellationToken).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -2002,11 +2031,12 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="authorization">Authorization to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (Authorization)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Authorization>> PostAuthorizationsAsyncWithHttpInfo (Authorization authorization, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<Authorization>> PostAuthorizationsAsyncWithHttpInfo (Authorization authorization, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await PostAuthorizationsAsyncWithIRestResponse(authorization, zapTraceSpan).ConfigureAwait(false);
+            IRestResponse localVarResponse = await PostAuthorizationsAsyncWithIRestResponse(authorization, zapTraceSpan, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -2027,8 +2057,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="authorization">Authorization to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse (Authorization)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> PostAuthorizationsAsyncWithIRestResponse (Authorization authorization, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PostAuthorizationsAsyncWithIRestResponse (Authorization authorization, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'authorization' is set
             if (authorization == null)
@@ -2071,7 +2102,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
